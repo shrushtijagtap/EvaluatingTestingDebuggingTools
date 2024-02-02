@@ -10,21 +10,21 @@
 
 Bug ID: Bears-109
 
-Tests : --- Total, --- Passing, --- Error
+Tests : 233 Total, 232 Passing, 1 Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bears-109.png)
 
 
 Bug ID: Bears-121
 
-Tests : --- Total, --- Passing, --- Error
+Tests : 264 Total, 119 Passing, 145 Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bears-121.png)
 
 
 Bug ID: Bears-145
 
-Tests : --- Total, --- Passing, --- Error
+Tests : 646 Total, 645 Passing, 1 Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bears-145.png)
 
@@ -32,7 +32,7 @@ Tests : --- Total, --- Passing, --- Error
 
 Bug ID: Bears-169
 
-Tests : --- Total, --- Passing, --- Error
+Tests : 621 Total, 620 Passing, 1 Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bears-169.png)
 
@@ -41,7 +41,7 @@ Tests : --- Total, --- Passing, --- Error
 
 Bug ID: Bears-245
 
-Tests : --- Total, --- Passing, --- Error
+Tests : 334 Total, 333 Passing, 1 Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bears-245.png)
 
