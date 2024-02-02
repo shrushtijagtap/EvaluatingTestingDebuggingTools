@@ -4,10 +4,10 @@ Team number:
 Team 9
 
 Name and email of the team:
-sjagtap3 (Shrushti Santosh Jagtap)	
-spekam2 (Sejal Sanjay Pekam)	
-suc2 (Shreya Ujwal Chaudhary)	
-suazo2 (Andres Suazo)
+sjagtap3 (Shrushti Santosh Jagtap), 
+spekam2 (Sejal Sanjay Pekam), 	
+suc2 (Shreya Ujwal Chaudhary), 
+suazo2 (Andres Suazo).
 
 
 Time and information about the weekly meetings:
