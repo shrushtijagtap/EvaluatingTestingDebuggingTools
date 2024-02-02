@@ -12,4 +12,4 @@ Bug ID: Bears-109
 
 Tests : --- Total, --- Passing, --- Error
 
-![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/edit/main/images/Bears-109.jpg?raw=true)
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/edit/main/images/Bears-109.png?raw=true)
