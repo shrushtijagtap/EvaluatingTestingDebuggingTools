@@ -14,21 +14,21 @@ The table below provides information about the number of mined single statement 
 
 ## Tests per Bug
 
-Bug ID: 
+Bug 1 from 100 Java Maven: 
 
 Tests :  Total,  Passing,  Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/ManySStuBs4J_Bug1.png)
 
 
-Bug ID: 
+Bug 2 from 100 Java Maven: 
 
 Tests :  Total,  Passing,  Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/ManySStuBs4J_Bug2.png)
 
 
-Bug ID: 
+Bug 3 from 100 Java Maven: 
 
 Tests :  Total, Passing,  Error
 
@@ -36,7 +36,7 @@ Tests :  Total, Passing,  Error
 
 
 
-Bug ID: 
+Bug 4 from 1000 Java Maven: 
 
 Tests :  Total, Passing,  Error
 
@@ -45,7 +45,7 @@ Tests :  Total, Passing,  Error
 
 
 
-Bug ID: 
+Bug 5 from 1000 Java Maven: 
 
 Tests :  Total, Passing,  Error
 
