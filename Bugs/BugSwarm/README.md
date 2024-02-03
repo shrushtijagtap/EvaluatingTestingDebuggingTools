@@ -12,6 +12,7 @@ Bug ID: 49364896
 Tests : 6 Total, 2 failed
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bugswarm bug1 -1.png)
+
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bugswarm bug1 -2.png)
 https://github.com/gwtbootstrap3/gwtbootstrap3/compare/f659445d789c63a25b68e79d373b6affc18d1877..8c620e18b05c2da3c1b8d2bfa8e0611ab74db726
 
