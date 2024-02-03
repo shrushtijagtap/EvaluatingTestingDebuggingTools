@@ -16,21 +16,15 @@ The table below provides information about the number of mined single statement 
 
 Bug 1 from 100 Java Maven: 
 
-Tests :  Total,  Passing,  Error
-
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/ManySStuBs4J_Bug1.png)
 
 
 Bug 2 from 100 Java Maven: 
 
-Tests :  Total,  Passing,  Error
-
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/ManySStuBs4J_Bug2.png)
 
 
 Bug 3 from 100 Java Maven: 
-
-Tests :  Total, Passing,  Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/ManySStuBs4J_Bug3.png)
 
@@ -38,16 +32,12 @@ Tests :  Total, Passing,  Error
 
 Bug 4 from 1000 Java Maven: 
 
-Tests :  Total, Passing,  Error
-
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/ManySStuBs4J_Bug4.png)
 
 
 
 
 Bug 5 from 1000 Java Maven: 
-
-Tests :  Total, Passing,  Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/ManySStuBs4J_Bug5.png)
 
