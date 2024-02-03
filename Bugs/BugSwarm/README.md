@@ -4,6 +4,8 @@
 
 ## Number of Bugs Collected
 2919 bugs collected
+Number of buggy commits in Python projects: 934
+Number of buggy commits in Java PROJECTS: 1983
 
 ## Tests per Bug
 1.
