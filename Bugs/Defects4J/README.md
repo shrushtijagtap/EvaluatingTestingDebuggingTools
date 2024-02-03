@@ -11,25 +11,25 @@
 Project: jfreechart
 Bug ID: 1
 
-Tests : --- Total, --- Passing, --- Error
+Tests : 64 Total, 63 Passing, 1 Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Defects4J-1.png)
 
 
 Project: jfreechart
-Bug ID: 
+Bug ID: 5
 
-Tests : --- Total, --- Passing, --- Error
+Tests : 36 Total, 35 Passing, 1 Error
 
-![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Defects4J-X.png)
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Defects4J-5.png)
 
 
-Project: jackson-databind
-Bug ID: 
+Project: jfreechart
+Bug ID: 9
 
-Tests : --- Total, --- Passing, --- Error
+Tests : 5 Total, 4 Passing, 1 Error
 
-![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Defects4J-X.png)
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Defects4J-9.png)
 
 
 
