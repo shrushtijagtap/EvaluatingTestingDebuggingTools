@@ -13,6 +13,11 @@ Tests : 6 Total, 2 failed
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bugswarmbug1-1.png)
 
+[alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bugswarmbug1-2.png)
+
+
+
+
 
 
 2.
