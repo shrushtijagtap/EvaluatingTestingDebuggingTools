@@ -30,6 +30,11 @@ Tests: 11 Total, 1 Passed, 10 Failed
 
 <img width="766" alt="Screenshot 2024-02-02 at 6 04 45 PM" src="https://github.com/ShreyaChaudhary1211/CS527-Project/assets/148718923/22320cf9-3abf-48c3-aa83-ab330d87cf19">
 
+Program: Hanoi
+
+Tests: 8 Total, 1 Passed, 7 Failed
+
+<img width="766" alt="Screenshot 2024-02-02 at 6 10 18 PM" src="https://github.com/ShreyaChaudhary1211/CS527-Project/assets/148718923/b8ad4e2a-60dd-49f3-9cc6-b795fa3f050d">
 
 
 
