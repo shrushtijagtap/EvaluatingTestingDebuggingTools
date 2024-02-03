@@ -11,7 +11,7 @@ Bug ID: 49364896
 
 Tests : 6 Total, 2 failed
 
-![alt text]([https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bugswarm bug1 -1.png](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bugswarm%20bug1%20-1.png))
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bugswarmbug1-1.png)
 
 
 
