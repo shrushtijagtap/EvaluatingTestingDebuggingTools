@@ -1,0 +1,21 @@
+diff --git a/Bears-15/buggy/src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java b/Bears-15/fixed/src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
+index d74a2e9..f2bc1ca 100644
+--- a/Bears-15/buggy/src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
++++ b/Bears-15/fixed/src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
+@@ -576,10 +576,13 @@ public class JacksonAnnotationIntrospector
+     @Override
+     public ObjectIdInfo findObjectReferenceInfo(Annotated ann, ObjectIdInfo objectIdInfo) {
+         JsonIdentityReference ref = _findAnnotation(ann, JsonIdentityReference.class);
+-        if (ref != null) {
+-            objectIdInfo = objectIdInfo.withAlwaysAsId(ref.alwaysAsId());
++        if (ref == null) {
++            return objectIdInfo;
+         }
+-        return objectIdInfo;
++        if (objectIdInfo == null) {
++            objectIdInfo = ObjectIdInfo.empty();
++        }
++        return objectIdInfo.withAlwaysAsId(ref.alwaysAsId());
+     }
+ 
+     /*

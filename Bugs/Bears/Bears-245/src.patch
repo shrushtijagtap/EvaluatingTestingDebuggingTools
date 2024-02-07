@@ -1,0 +1,14 @@
+diff --git a/Bears-245/buggy/src/main/java/com/squareup/javapoet/ParameterSpec.java b/Bears-245/fixed/src/main/java/com/squareup/javapoet/ParameterSpec.java
+index 63da3f2..e30cb0f 100644
+--- a/Bears-245/buggy/src/main/java/com/squareup/javapoet/ParameterSpec.java
++++ b/Bears-245/fixed/src/main/java/com/squareup/javapoet/ParameterSpec.java
+@@ -160,6 +160,9 @@ public final class ParameterSpec {
+     public Builder addModifiers(Iterable<Modifier> modifiers) {
+       checkNotNull(modifiers, "modifiers == null");
+       for (Modifier modifier : modifiers) {
++        if (!modifier.equals(Modifier.FINAL)) {
++          throw new IllegalStateException("unexpected parameter modifier: " + modifier);
++        }
+         this.modifiers.add(modifier);
+       }
+       return this;

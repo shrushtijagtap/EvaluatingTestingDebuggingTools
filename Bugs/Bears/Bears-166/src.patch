@@ -1,0 +1,12 @@
+diff --git a/Bears-166/buggy/address-model-lib/src/main/java/io/enmasse/address/model/Status.java b/Bears-166/fixed/address-model-lib/src/main/java/io/enmasse/address/model/Status.java
+index 7745f9e..66e89f0 100644
+--- a/Bears-166/buggy/address-model-lib/src/main/java/io/enmasse/address/model/Status.java
++++ b/Bears-166/fixed/address-model-lib/src/main/java/io/enmasse/address/model/Status.java
+@@ -21,6 +21,7 @@ public class Status {
+ 
+     public Status(io.enmasse.address.model.Status other) {
+         this.isReady = other.isReady();
++        this.phase = other.getPhase();
+         this.messages.addAll(other.getMessages());
+     }
+ 

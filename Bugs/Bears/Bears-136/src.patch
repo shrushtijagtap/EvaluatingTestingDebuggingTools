@@ -1,0 +1,13 @@
+diff --git a/Bears-136/buggy/src/org/traccar/protocol/EelinkProtocolEncoder.java b/Bears-136/fixed/src/org/traccar/protocol/EelinkProtocolEncoder.java
+index 41d76b2..76865a0 100644
+--- a/Bears-136/buggy/src/org/traccar/protocol/EelinkProtocolEncoder.java
++++ b/Bears-136/fixed/src/org/traccar/protocol/EelinkProtocolEncoder.java
+@@ -65,7 +65,7 @@ public class EelinkProtocolEncoder extends BaseProtocolEncoder {
+         if (connectionless) {
+             result.writeByte('E');
+             result.writeByte('L');
+-            result.writeShort(2 + 2 + 2 + buf.readableBytes()); // length
++            result.writeShort(2 + buf.readableBytes()); // length
+             result.writeShort(checksum(buf.toByteBuffer()));
+         }
+ 

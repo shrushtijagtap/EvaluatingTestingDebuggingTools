@@ -1,0 +1,13 @@
+diff --git a/Bears-103/buggy/src/org/traccar/protocol/AquilaProtocolDecoder.java b/Bears-103/fixed/src/org/traccar/protocol/AquilaProtocolDecoder.java
+index e1cebd2..11ab15c 100644
+--- a/Bears-103/buggy/src/org/traccar/protocol/AquilaProtocolDecoder.java
++++ b/Bears-103/fixed/src/org/traccar/protocol/AquilaProtocolDecoder.java
+@@ -132,7 +132,7 @@ public class AquilaProtocolDecoder extends BaseProtocolDecoder {
+ 
+         position.setSpeed(UnitsConverter.knotsFromKph(parser.nextDouble()));
+ 
+-        position.set(Position.KEY_ODOMETER, parser.next());
++        position.set(Position.KEY_ODOMETER, parser.nextInt());
+ 
+         if (parser.hasNext(9)) {
+ 

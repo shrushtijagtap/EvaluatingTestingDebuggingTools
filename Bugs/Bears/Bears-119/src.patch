@@ -1,0 +1,32 @@
+diff --git a/Bears-119/buggy/src/org/traccar/protocol/H02ProtocolDecoder.java b/Bears-119/fixed/src/org/traccar/protocol/H02ProtocolDecoder.java
+index b9b979c..aa3d476 100644
+--- a/Bears-119/buggy/src/org/traccar/protocol/H02ProtocolDecoder.java
++++ b/Bears-119/fixed/src/org/traccar/protocol/H02ProtocolDecoder.java
+@@ -377,14 +377,19 @@ public class H02ProtocolDecoder extends BaseProtocolDecoder {
+             case "*":
+                 String sentence = buf.toString(StandardCharsets.US_ASCII);
+                 int typeStart = sentence.indexOf(',', sentence.indexOf(',') + 1) + 1;
+-                String type = sentence.substring(typeStart, sentence.indexOf(',', typeStart));
+-                switch (type) {
+-                    case "NBR":
+-                        return decodeLbs(sentence, channel, remoteAddress);
+-                    case "LINK":
+-                        return decodeLink(sentence, channel, remoteAddress);
+-                    default:
+-                        return decodeText(sentence, channel, remoteAddress);
++                int typeEnd = sentence.indexOf(',', typeStart);
++                if (typeEnd > 0) {
++                    String type = sentence.substring(typeStart, typeEnd);
++                    switch (type) {
++                        case "NBR":
++                            return decodeLbs(sentence, channel, remoteAddress);
++                        case "LINK":
++                            return decodeLink(sentence, channel, remoteAddress);
++                        default:
++                            return decodeText(sentence, channel, remoteAddress);
++                    }
++                } else {
++                    return null;
+                 }
+             case "$":
+                 return decodeBinary(buf, channel, remoteAddress);

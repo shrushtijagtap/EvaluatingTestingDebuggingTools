@@ -1,0 +1,16 @@
+diff --git a/Bears-120/buggy/src/org/traccar/protocol/AplicomFrameDecoder.java b/Bears-120/fixed/src/org/traccar/protocol/AplicomFrameDecoder.java
+index 785d907..24d55f1 100644
+--- a/Bears-120/buggy/src/org/traccar/protocol/AplicomFrameDecoder.java
++++ b/Bears-120/fixed/src/org/traccar/protocol/AplicomFrameDecoder.java
+@@ -26,6 +26,11 @@ public class AplicomFrameDecoder extends FrameDecoder {
+     protected Object decode(
+             ChannelHandlerContext ctx, Channel channel, ChannelBuffer buf) throws Exception {
+ 
++        // Skip Alive message
++        while (buf.readable() && Character.isDigit(buf.getByte(buf.readerIndex()))) {
++            buf.readByte();
++        }
++
+         // Check minimum length
+         if (buf.readableBytes() < 11) {
+             return null;

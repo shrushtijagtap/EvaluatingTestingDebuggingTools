@@ -1,0 +1,24 @@
+diff --git a/Bears-106/buggy/src/org/traccar/protocol/TelicProtocolDecoder.java b/Bears-106/fixed/src/org/traccar/protocol/TelicProtocolDecoder.java
+index dd20932..579a646 100644
+--- a/Bears-106/buggy/src/org/traccar/protocol/TelicProtocolDecoder.java
++++ b/Bears-106/fixed/src/org/traccar/protocol/TelicProtocolDecoder.java
+@@ -53,8 +53,6 @@ public class TelicProtocolDecoder extends BaseProtocolDecoder {
+             .number("(d+)?,")                    // satellites
+             .expression("(?:[^,]*,){7}")
+             .number("(d+),")                     // battery
+-            .expression("[^,]*,")
+-            .number("(d+)?")                     // external
+             .any()
+             .compile();
+ 
+@@ -131,10 +129,6 @@ public class TelicProtocolDecoder extends BaseProtocolDecoder {
+ 
+         position.set(Position.KEY_BATTERY, parser.nextInt());
+ 
+-        if (parser.hasNext()) {
+-            position.set(Position.KEY_POWER, parser.nextInt());
+-        }
+-
+         return position;
+     }
+ 

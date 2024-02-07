@@ -1,0 +1,13 @@
+diff --git a/Bears-19/buggy/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java b/Bears-19/fixed/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
+index 4b0434e..1423f28 100644
+--- a/Bears-19/buggy/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
++++ b/Bears-19/fixed/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
+@@ -492,7 +492,7 @@ public class BeanDeserializerFactory
+             boolean ignoreAny = ignorals.getIgnoreUnknown();
+             builder.setIgnoreUnknownProperties(ignoreAny);
+             // Or explicit/implicit definitions?
+-            ignored = ignorals.getIgnored();
++            ignored = ignorals.findIgnoredForDeserialization();
+             for (String propName : ignored) {
+                 builder.addIgnorable(propName);
+             }

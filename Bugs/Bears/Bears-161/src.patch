@@ -1,0 +1,15 @@
+diff --git a/Bears-161/buggy/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java b/Bears-161/fixed/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java
+index c5dd959..b2a8e13 100644
+--- a/Bears-161/buggy/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java
++++ b/Bears-161/fixed/debezium-connector-mysql/src/main/java/io/debezium/connector/mysql/MySqlDdlParser.java
+@@ -1297,7 +1297,9 @@ public class MySqlDdlParser extends DdlParser {
+         } else if (tokens.canConsume("REORGANIZE", "PARTITION")) {
+             parsePartitionNames(start);
+             tokens.consume("INTO", "(");
+-            parsePartitionDefinition(start, table);
++            do {
++                parsePartitionDefinition(start, table);
++            } while (tokens.canConsume(','));
+             tokens.consume(')');
+         } else if (tokens.canConsume("EXCHANGE", "PARTITION")) {
+             tokens.consume(); // partition name
