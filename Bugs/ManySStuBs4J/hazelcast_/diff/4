@@ -1,0 +1,13 @@
+diff --git a/hazelcast/src/main/java/com/hazelcast/cp/internal/MetadataRaftGroupManager.java b/hazelcast/src/main/java/com/hazelcast/cp/internal/MetadataRaftGroupManager.java
+index 0ee2ee6..1613920 100644
+--- a/hazelcast/src/main/java/com/hazelcast/cp/internal/MetadataRaftGroupManager.java
++++ b/hazelcast/src/main/java/com/hazelcast/cp/internal/MetadataRaftGroupManager.java
+@@ -400,7 +400,7 @@
+                 return group.id();
+             }
+ 
+-            String msg = group.getId() + " already exists with a different size: " + group.memberCount();
++            String msg = group.id() + " already exists with a different size: " + group.memberCount();
+             logger.severe(msg);
+             throw new IllegalStateException(msg);
+         }

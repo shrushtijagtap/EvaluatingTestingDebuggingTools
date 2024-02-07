@@ -1,0 +1,13 @@
+diff --git a/api/src/main/java/org/openmrs/api/context/ServiceContext.java b/api/src/main/java/org/openmrs/api/context/ServiceContext.java
+index 3e845c8..0abb5e4 100644
+--- a/api/src/main/java/org/openmrs/api/context/ServiceContext.java
++++ b/api/src/main/java/org/openmrs/api/context/ServiceContext.java
+@@ -75,7 +75,7 @@
+ 	
+ 	private static final Log log = LogFactory.getLog(ServiceContext.class);
+ 	
+-	private static ServiceContext instance;
++	private static volatile ServiceContext instance;
+ 	
+ 	private ApplicationContext applicationContext;
+ 	

@@ -1,0 +1,20 @@
+diff --git a/testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ee/datasourcedefinition/DataSourceBean.java b/testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ee/datasourcedefinition/DataSourceBean.java
+index 1a8042b..7fa06bf 100644
+--- a/testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ee/datasourcedefinition/DataSourceBean.java
++++ b/testsuite/integration/basic/src/test/java/org/jboss/as/test/integration/ee/datasourcedefinition/DataSourceBean.java
+@@ -47,13 +47,13 @@
+     /**
+      * This should be injected with the same datasource as above, as they both have the same name
+      */
+-    @Resource(name="java:comp/ds")
++    @Resource(lookup="java:comp/ds")
+     private DataSource dataSource2;
+ 
+     @Resource(lookup = "java:app/DataSource")
+     private DataSource dataSource3;
+ 
+-    @Resource(name="org.jboss.as.test.integration.ee.datasourcedefinition.DataSourceBean/dataSource3")
++    @Resource(lookup="org.jboss.as.test.integration.ee.datasourcedefinition.DataSourceBean/dataSource3")
+     private DataSource dataSource4;
+ 
+ 
