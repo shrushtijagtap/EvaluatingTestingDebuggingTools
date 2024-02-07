@@ -1,0 +1,17 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/GCD//Java/buggy/GCD.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/GCD//Java/fixed/GCD.java	2024-02-06 19:40:28
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -16,7 +16,7 @@
+         if (b == 0) {
+             return a;
+         } else {
+-            return gcd(a % b, b);
++            return gcd(b, a%b);
+         }
+     }
+ }

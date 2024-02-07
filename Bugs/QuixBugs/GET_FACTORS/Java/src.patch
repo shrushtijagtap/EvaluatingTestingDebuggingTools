@@ -1,0 +1,17 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/GET_FACTORS//Java/buggy/GET_FACTORS.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/GET_FACTORS//Java/fixed/GET_FACTORS.java	2024-02-06 19:40:28
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -24,6 +24,7 @@
+                 return prepend;
+             }
+         }
+-        return new ArrayList<Integer>();
++
++        return new ArrayList<Integer>(Arrays.asList(n));
+     }
+ }

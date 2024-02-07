@@ -1,0 +1,38 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/POWERSET//Java/buggy/POWERSET.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/POWERSET//Java/fixed/POWERSET.java	2024-02-06 19:40:28
+@@ -1,4 +1,5 @@
+-package java_programs;
++package correct_java_programs;
++
+ import java.util.*;
+ 
+ /*
+@@ -20,13 +21,18 @@
+ 
+             ArrayList<ArrayList> output = new ArrayList<ArrayList>(100);
+             ArrayList to_add = new ArrayList(100);
+-            to_add.add(first);
++
+             for (ArrayList subset : rest_subsets) {
+-                to_add.addAll(subset);
++                ArrayList r = new ArrayList();
++                r.add(first);
++                r.addAll(subset);
++                to_add.add(r);
+             }
+-            output.add(to_add);
+ 
+-            return output;
++            output.addAll(to_add);
++            rest_subsets.addAll(output);
++
++            return rest_subsets;
+         } else {
+             ArrayList empty_set = new ArrayList<ArrayList>();
+             empty_set.add(new ArrayList());
+@@ -34,3 +40,5 @@
+         }
+     }
+ }
++
++

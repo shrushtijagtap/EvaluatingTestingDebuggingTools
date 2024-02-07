@@ -1,0 +1,34 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/BREADTH_FIRST_SEARCH//Java/buggy/BREADTH_FIRST_SEARCH.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/BREADTH_FIRST_SEARCH//Java/fixed/BREADTH_FIRST_SEARCH.java	2024-02-06 19:40:28
+@@ -1,7 +1,9 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ import java.util.ArrayDeque;
+ 
++import java_programs.Node;
++
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+\ No newline at end of file
+@@ -21,7 +23,7 @@
+ 
+         nodesvisited.add(startnode);
+ 
+-        while (true) {
++        while (!queue.isEmpty()) {
+             Node node = queue.removeFirst();
+ 
+             if (node == goalnode) {
+\ No newline at end of file
+@@ -39,7 +41,7 @@
+          * The buggy program always drops into while(true) loop and will not return false
+          * Removed below line to fix compilation error
+          */
+-        // return false;
++         return false;
+     }
+ 
+ }
+\ No newline at end of file

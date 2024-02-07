@@ -1,0 +1,20 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/REVERSE_LINKED_LIST//Java/buggy/REVERSE_LINKED_LIST.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/REVERSE_LINKED_LIST//Java/fixed/REVERSE_LINKED_LIST.java	2024-02-06 19:40:28
+@@ -1,6 +1,8 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
++import java_programs.Node;
++
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+@@ -17,6 +19,7 @@
+         while (node != null) {
+             nextnode = node.getSuccessor();
+             node.setSuccessor(prevnode);
++            prevnode = node;
+             node = nextnode;
+         }
+         return prevnode;

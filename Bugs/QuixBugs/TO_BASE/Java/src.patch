@@ -1,0 +1,17 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/TO_BASE//Java/buggy/TO_BASE.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/TO_BASE//Java/fixed/TO_BASE.java	2024-02-06 19:40:28
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -18,7 +18,7 @@
+         while (num > 0) {
+             i = num % b;
+             num = num / b; // floor division?
+-            result = result + String.valueOf(alphabet.charAt(i));
++            result = String.valueOf(alphabet.charAt(i))+result;
+         }
+ 
+         return result;

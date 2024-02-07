@@ -1,0 +1,17 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/PASCAL//Java/buggy/PASCAL.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/PASCAL//Java/fixed/PASCAL.java	2024-02-06 19:40:28
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -19,7 +19,7 @@
+ 
+         for (int r=1; r<n; r++) {
+             ArrayList<Integer> row = new ArrayList<Integer>();
+-            for (int c=0; c<r; c++) {
++            for (int c=0; c<r+1; c++) {
+                 int upleft, upright;
+                 if (c > 0) {
+                     upleft = rows.get(r-1).get(c-1);

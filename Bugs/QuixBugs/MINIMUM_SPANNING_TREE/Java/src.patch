@@ -1,0 +1,21 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/MINIMUM_SPANNING_TREE//Java/buggy/MINIMUM_SPANNING_TREE.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/MINIMUM_SPANNING_TREE//Java/fixed/MINIMUM_SPANNING_TREE.java	2024-02-06 19:40:28
+@@ -1,5 +1,8 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
++
++import java_programs.Node;
++import java_programs.WeightedEdge;
+ /**
+  * Minimum spanning tree
+  */
+@@ -25,7 +28,7 @@
+                 minSpanningTree.add(edge);
+                 groupByNode = update(groupByNode, vertex_u, vertex_v);
+                 for (Node node : groupByNode.get(vertex_v)) {
+-                    groupByNode = update(groupByNode, node, vertex_u);
++                    groupByNode.put(node,  groupByNode.get(vertex_u));
+                 }
+             }
+         }

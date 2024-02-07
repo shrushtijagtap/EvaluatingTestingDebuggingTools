@@ -1,0 +1,27 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/KTH//Java/buggy/KTH.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/KTH//Java/fixed/KTH.java	2024-02-06 19:40:28
+@@ -1,7 +1,14 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
++
+ /*
++ * To change this template, choose Tools | Templates
++ * and open the template in the editor.
++ */
+ 
++/**
++ *
++ * @author derricklin
+  */
+ public class KTH {
+     public static Integer kth(ArrayList<Integer> arr, int k) {
+@@ -22,7 +29,7 @@
+         if (k < num_less) {
+             return kth(below, k);
+         } else if (k >= num_lessoreq) {
+-            return kth(above, k);
++            return kth(above, k-num_lessoreq);
+         } else {
+             return pivot;
+         }

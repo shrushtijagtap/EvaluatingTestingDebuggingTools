@@ -1,0 +1,17 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/LONGEST_COMMON_SUBSEQUENCE//Java/buggy/LONGEST_COMMON_SUBSEQUENCE.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/LONGEST_COMMON_SUBSEQUENCE//Java/fixed/LONGEST_COMMON_SUBSEQUENCE.java	2024-02-06 19:40:28
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -15,7 +15,7 @@
+         if (a.isEmpty() || b.isEmpty()) {
+             return "";
+         } else if (a.charAt(0) == b.charAt(0)) {
+-            return a.charAt(0) + longest_common_subsequence(a.substring(1), b);
++            return a.charAt(0) + longest_common_subsequence(a.substring(1), b.substring(1));
+         } else {
+             String fst = longest_common_subsequence(a, b.substring(1));
+             String snd = longest_common_subsequence(a.substring(1), b);

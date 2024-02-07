@@ -1,0 +1,17 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/MERGESORT//Java/buggy/MERGESORT.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/MERGESORT//Java/fixed/MERGESORT.java	2024-02-06 19:40:28
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -35,7 +35,7 @@
+     }
+ 
+     public static ArrayList<Integer> mergesort(ArrayList<Integer> arr) {
+-        if (arr.size() == 0) { // <= 1 in correct version
++        if (arr.size() <= 1) { // <= 1 in correct version
+             return arr;
+         } else {
+             int middle = arr.size() / 2;

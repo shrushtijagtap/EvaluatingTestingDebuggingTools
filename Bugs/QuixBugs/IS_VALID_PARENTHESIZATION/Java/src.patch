@@ -1,0 +1,18 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/IS_VALID_PARENTHESIZATION//Java/buggy/IS_VALID_PARENTHESIZATION.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/IS_VALID_PARENTHESIZATION//Java/fixed/IS_VALID_PARENTHESIZATION.java	2024-02-06 19:40:28
+@@ -1,5 +1,6 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
++
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+@@ -21,6 +22,6 @@
+                 if (depth < 0) { return false; }
+             }
+         }
+-        return true;
++        return depth==0;
+     }
+ }

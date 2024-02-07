@@ -1,0 +1,17 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/BUCKETSORT//Java/buggy/BUCKETSORT.java	2024-02-06 19:40:28
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Final/CS527-Project/Bugs/QuixBugs/BUCKETSORT//Java/fixed/BUCKETSORT.java	2024-02-06 19:40:28
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -19,7 +19,7 @@
+ 
+         ArrayList<Integer> sorted_arr = new ArrayList<Integer>(100);
+         int i = 0;
+-        for (Integer count : arr) { // arr is counts in fixed version
++        for (Integer count : counts) {
+             sorted_arr.addAll(Collections.nCopies(count, i));
+             i++;
+         }
