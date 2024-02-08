@@ -5,8 +5,25 @@ It consisits of bugs, code lines changed, commits made and more github related i
 that crawls the repositories of the project and extract bugs and information like the time, what the bug is about, how the code was changed and <br>
 fixed, details about what ither files were affected etc. Automated scripts are used to extract data about bugs from the repositories.
 **There are a total of 223 projects, 70 are in python whereas, 150 are in Java**.<br>
-The whole dataset is available on bugswarm.org
+The whole dataset is available on bugswarm.org<br> We explored the website and the dataset given on the website.The website describes the bug data like which repo it belongs to , job id, build id, no. of tests passed, no. of tests failed and a link to the difference between the buggy and correct code etc.<br>
+The website provides us with a .json file that has all the bugs listed with all the details.<br>
+We wrote a script that refers to the SHA's in the jason file<br>
+```json
+{
+  "failed_job": {
+    "trigger_sha": "eb7b4f991d67017538569e02b25f962af42aecac"
+  },
+  "passed_job": {
+    "trigger_sha": "41d93b14bf4c8ba2ae75d561ad3a640319e5a4ce"
+  }
+}
+<br>
+and the diff urls to extract the files that <br>
 
+[Diff URL](https://github.com/gwtbootstrap3/gwtbootstrap3/compare/eb7b4f991d67017538569e02b25f962af42aecac..41d93b14bf4c8ba2ae75d561ad3a640319e5a4ce)
+<br>
+We then extrated the fixed and buggy files and generated a diff file. <br>
+Due to time constraint we were able to extract the files for 64 repositories and  extract all the buggy and fixed file as well as the difference between them.<br>
 
 ## Number of Bugs Collected
 2919 bugs collected<br>
