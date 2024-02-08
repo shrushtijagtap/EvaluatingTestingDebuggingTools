@@ -51,25 +51,25 @@ cd /tmp/csv_1_buggy && defects4j compile && defects4j test
 
 ## Tests per Bug
 
-| Project         | Relevant Tests |
-|-----------------|---------------:|
-| Chart           |            928 |
-| Cli             |            554 |
-| Closure         |          15085 |
-| Codec           |            104 |
-| Collections     |             19 |
-| Compress        |            953 |
-| Csv             |             84 |
-| Gson            |           1096 |
-| JacksonCore     |           1356 |
-| JacksonDatabind |          29104 |
-| JacksonXml      |            306 |
-| Jsoup           |           1478 |
-| JxPath          |            345 |
-| Lang            |            417 |
-| Math            |           1940 |
-| Mockito         |           4758 |
-| Time            |           1873 |
+| Project         | Test Passed | Tests Failed |
+|-----------------|------------:|--------------|
+| Chart           |         836 | 92           |
+| Cli             |         488 | 66           |
+| Closure         |       14540 | 545          |
+| Codec           |          61 | 43           |
+| Collections     |          15 | 4            |
+| Compress        |         881 | 72           |
+| Csv             |          60 | 24           |
+| Gson            |        1062 | 34           |
+| JacksonCore     |        1303 | 53           |
+| JacksonDatabind |       28972 | 132          |
+| JacksonXml      |         294 | 12           |
+| Jsoup           |        1333 | 145          |
+| JxPath          |         308 | 37           |
+| Lang            |         294 | 123          |
+| Math            |        1764 | 176          |
+| Mockito         |        4640 | 118          |
+| Time            |        1799 | 74           |
 
 ## Samples
 
