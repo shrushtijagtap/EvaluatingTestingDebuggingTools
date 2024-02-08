@@ -17,7 +17,7 @@ We wrote a script that refers to the SHA's in the jason file<br>
     "trigger_sha": "41d93b14bf4c8ba2ae75d561ad3a640319e5a4ce"
   }
 }
-<br>
+```
 and the diff urls to extract the files that <br>
 
 [Diff URL](https://github.com/gwtbootstrap3/gwtbootstrap3/compare/eb7b4f991d67017538569e02b25f962af42aecac..41d93b14bf4c8ba2ae75d561ad3a640319e5a4ce)
