@@ -38,7 +38,6 @@ Tests : 233 Total, 232 Passing, 1 Error
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bears-109.png)
 
 
-
 Bug ID: Bears-121
 
 Tests : 264 Total, 119 Passing, 145 Error
