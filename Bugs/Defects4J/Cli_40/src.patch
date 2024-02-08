@@ -1,0 +1,13 @@
+diff --git a/Cli_40/buggy/org/apache/commons/cli/TypeHandler.java b/Cli_40/fixed/org/apache/commons/cli/TypeHandler.java
+index 6bd84b0..9ed8beb 100644
+--- a/Cli_40/buggy/org/apache/commons/cli/TypeHandler.java
++++ b/Cli_40/fixed/org/apache/commons/cli/TypeHandler.java
+@@ -100,7 +100,7 @@ public class TypeHandler
+         }
+         else
+         {
+-            return null;
++            throw new ParseException("Unable to handle the class: " + clazz);
+         }
+     }
+ 

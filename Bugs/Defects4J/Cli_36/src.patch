@@ -1,0 +1,13 @@
+diff --git a/Cli_36/buggy/org/apache/commons/cli/Options.java b/Cli_36/fixed/org/apache/commons/cli/Options.java
+index 721baaf..796fe5c 100644
+--- a/Cli_36/buggy/org/apache/commons/cli/Options.java
++++ b/Cli_36/fixed/org/apache/commons/cli/Options.java
+@@ -57,7 +57,7 @@ public class Options implements Serializable
+     private final List<Object> requiredOpts = new ArrayList<Object>();
+ 
+     /** a map of the option groups */
+-    private final Map<String, OptionGroup> optionGroups = new java.util.HashMap<String, OptionGroup>();
++    private final Map<String, OptionGroup> optionGroups = new LinkedHashMap<String, OptionGroup>();
+ 
+     /**
+      * Add the specified option group.

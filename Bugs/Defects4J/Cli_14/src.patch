@@ -1,0 +1,25 @@
+diff --git a/Cli_14/buggy/org/apache/commons/cli2/option/GroupImpl.java b/Cli_14/fixed/org/apache/commons/cli2/option/GroupImpl.java
+index 781d0b6..e3b69f8 100644
+--- a/Cli_14/buggy/org/apache/commons/cli2/option/GroupImpl.java
++++ b/Cli_14/fixed/org/apache/commons/cli2/option/GroupImpl.java
+@@ -247,9 +247,6 @@ public class GroupImpl
+ 
+             // needs validation?
+             boolean validate = option.isRequired() || option instanceof Group;
+-            if (validate) {
+-                option.validate(commandLine);
+-            }
+ 
+             // if the child option is present then validate it
+             if (commandLine.hasOption(option)) {
+@@ -258,7 +255,10 @@ public class GroupImpl
+ 
+                     break;
+                 }
++                validate = true;
++            }
+ 
++            if (validate) {
+                 option.validate(commandLine);
+             }
+         }

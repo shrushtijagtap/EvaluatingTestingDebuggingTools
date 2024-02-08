@@ -1,0 +1,14 @@
+diff --git a/Cli_35/buggy/org/apache/commons/cli/Options.java b/Cli_35/fixed/org/apache/commons/cli/Options.java
+index e9a0aa9..798b176 100644
+--- a/Cli_35/buggy/org/apache/commons/cli/Options.java
++++ b/Cli_35/fixed/org/apache/commons/cli/Options.java
+@@ -237,6 +237,9 @@ public class Options implements Serializable
+         List<String> matchingOpts = new ArrayList<String>();
+ 
+         // for a perfect match return the single option only
++        if(longOpts.keySet().contains(opt)) {
++            return Collections.singletonList(opt);
++        }
+ 
+         for (String longOpt : longOpts.keySet())
+         {
