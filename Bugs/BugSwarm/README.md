@@ -1,13 +1,71 @@
 # BugSwarm Dataset
-
 ## Explanation
+This dataset conists of a collection of **software bugs and information about them from different open source software projects**. <br>
+It consisits of bugs, code lines changed, commits made and more github related information like commit id etc. It is usually collected using a tool <br>
+that crawls the repositories of the project and extract bugs and information like the time, what the bug is about, how the code was changed and <br>
+fixed, details about what ither files were affected etc. Automated scripts are used to extract data about bugs from the repositories.
+**There are a total of 223 projects, 70 are in python whereas, 150 are in Java**.<br>
+The whole dataset is available on bugswarm.org
+
 
 ## Number of Bugs Collected
-2919 bugs collected
-Number of buggy commits in Python projects: 934
-Number of buggy commits in Java PROJECTS: 1983
+2919 bugs collected<br>
+Number of buggy commits in Python projects: 934<br>
+Number of buggy commits in Java PROJECTS: 1983<br>
 
 ## Tests per Bug
+| Repository                                    | Number of Bugs | Tests Passed | Tests Failed |
+|-----------------------------------------------|----------------|--------------|--------------|
+| gwtbootstrap3/gwtbootstrap3                   | 6              | 0            | 4            |
+| ontop/ontop                                   | 6              | 0            | 38           |
+| ocpsoft/rewrite                               | 7              | 0            | 11           |
+| bwhmather/verktyg                             | 18             | 0            | 37           |
+| wavesoft/CCLib                                | 8              | 0            | 15           |
+| marshallward/f90nml                           | 65             | 0            | 89           |
+| brettwooldridge/HikariCP                      | 3              | 0            | 6            |
+| swagger-api/swagger-core                      | 10             | 0            | 125          |
+| jprante/elasticsearch-jdbc                    | 1              | 0            | 0            |
+| NanoHttpd/nanohttpd                           | 1              | 0            | 0            |
+| chewiebug/GCViewer                            | 5              | 0            | 4            |
+| mybatis/mybatis-3                             | 9              | 0            | 162          |
+| byteweaver/django-coupons                     | 4              | 0            | 4            |
+| zxing/zxing                                   | 6              | 0            | 0            |
+| sannies/mp4parser                             | 9              | 0            | 17           |
+| square/okhttp                                 | 74             | 0            | 337          |
+| galenframework/galen                          | 3              | 0            | 6            |
+| traccar/traccar                               | 56             | 0            | 439          |
+| apache/commons-lang                           | 9              | 0            | 2            |
+| puniverse/capsule                             | 4              | 0            | 40           |
+| kairosdb/kairosdb                             | 17             | 0            | 0            |
+| HotswapProjects/HotswapAgent                  | 2              | 0            | 0            |
+| huanghongxun/HMCL                             | 3              | 0            | 0            |
+| apilayer/restcountries                        | 7              | 0            | 33           |
+| spring-projects/spring-hateoas                | 17             | 0            | 45           |
+| haraldk/TwelveMonkeys                         | 6              | 0            | 24           |
+| cbeust/testng                                 | 13             | 0            | 131          |
+| apache/struts                                 | 6              | 0            | 2            |
+| winder/Universal-G-Code-Sender                | 8              | 0            | 23           |
+| konsoletyper/teavm                            | 1              | 0            | 0            |
+| davidmoten/rxjava-jdbc                        | 16             | 0            | 165          |
+| FluentLenium/FluentLenium                     | 5              | 0            | 178          |
+| Nukkit/Nukkit                                 | 16             | 0            | 0            |
+| ansible/ansible                               | 4              | 0            | 0            |
+| stagemonitor/stagemonitor                     | 11             | 0            | 46           |
+| puniverse/quasar                              | 8              | 0            | 13           |
+| SonarSource/sonarlint-intellij                | 3              | 0            | 5            |
+| scikit-learn/scikit-learn                     | 26             | 0            | 120          |
+| owlcs/owlapi                                  | 33             | 0            | 225          |
+| SpigotMC/BungeeCord                           | 6              | 0            | 7            |
+| apache/commons-lang                           | 9              | 0            | 2            |
+| puniverse/capsule                             | 4              | 0            | 40           |
+| kairosdb/kairosdb                             | 17             | 0            | 0            |
+| HotswapProjects/HotswapAgent                  | 2              | 0            | 0            |
+| huanghongxun/HMCL                             | 3              | 0            | 0            |
+| apilayer/restcountries                        | 7              | 0            | 33           |
+| spring-projects/spring
+
+
+##5 Test Samples
 1.
 Bug ID: 49364896
 
