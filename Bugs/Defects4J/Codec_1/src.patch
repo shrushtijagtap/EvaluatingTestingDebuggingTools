@@ -1,0 +1,13 @@
+diff --git a/Codec_1/buggy/org/apache/commons/codec/language/SoundexUtils.java b/Codec_1/fixed/org/apache/commons/codec/language/SoundexUtils.java
+index 1c6b983..2b04c08 100644
+--- a/Codec_1/buggy/org/apache/commons/codec/language/SoundexUtils.java
++++ b/Codec_1/fixed/org/apache/commons/codec/language/SoundexUtils.java
+@@ -50,7 +50,7 @@ final class SoundexUtils {
+             }
+         }
+         if (count == len) {
+-            return str.toUpperCase();
++            return str.toUpperCase(java.util.Locale.ENGLISH);
+         }
+         return new String(chars, 0, count).toUpperCase(java.util.Locale.ENGLISH);
+     }
