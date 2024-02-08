@@ -15,12 +15,12 @@ states of the bug (pre-fix, failed-tests, post-fix, post-fix-eith-metadad).
 
 Users can checkout the branch for a bug, navigate hrough the commits and run the tests.
 
-## Commands to test the programs:
+### Sample Commands:
 
 ```sh
 
 python3 scripts/checkout_bug.py --bugId <bug ID>
-python scripts/run_tests_bug.py --bugId <bug ID>
+python3 scripts/run_tests_bug.py --bugId <bug ID>
 
 ```
 
