@@ -1,0 +1,13 @@
+diff --git a/Closure_14/buggy/com/google/javascript/jscomp/ControlFlowAnalysis.java b/Closure_14/fixed/com/google/javascript/jscomp/ControlFlowAnalysis.java
+index 5c6927f..980deff 100644
+--- a/Closure_14/buggy/com/google/javascript/jscomp/ControlFlowAnalysis.java
++++ b/Closure_14/fixed/com/google/javascript/jscomp/ControlFlowAnalysis.java
+@@ -764,7 +764,7 @@ final class ControlFlowAnalysis implements Callback, CompilerPass {
+         } else if (parent.getLastChild() == node){
+           if (cfa != null) {
+             for (Node finallyNode : cfa.finallyMap.get(parent)) {
+-              cfa.createEdge(fromNode, Branch.UNCOND, finallyNode);
++              cfa.createEdge(fromNode, Branch.ON_EX, finallyNode);
+             }
+           }
+           return computeFollowNode(fromNode, parent, cfa);

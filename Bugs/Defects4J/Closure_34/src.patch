@@ -1,0 +1,37 @@
+diff --git a/Closure_34/buggy/com/google/javascript/jscomp/CodeGenerator.java b/Closure_34/fixed/com/google/javascript/jscomp/CodeGenerator.java
+index f28378c..d50320a 100644
+--- a/Closure_34/buggy/com/google/javascript/jscomp/CodeGenerator.java
++++ b/Closure_34/fixed/com/google/javascript/jscomp/CodeGenerator.java
+@@ -119,9 +119,7 @@ class CodeGenerator {
+         cc.addOp(opstr, true);
+         addExpr(last, p, rhsContext);
+       } else {
+-        addExpr(first, p, context);
+-        cc.addOp(opstr, true);
+-        addExpr(last, p + 1, rhsContext);
++        unrollBinaryOperator(n, type, opstr, context, rhsContext, p, p + 1);
+       }
+       return;
+     }
+@@ -751,7 +749,7 @@ class CodeGenerator {
+     Node current = firstNonOperator;
+     do {
+       current = current.getParent();
+-      cc.listSeparator();
++      cc.addOp(opStr, true);
+       addExpr(current.getFirstChild().getNext(), rightPrecedence, rhsContext);
+     } while (current != n);
+   }
+diff --git a/Closure_34/buggy/com/google/javascript/jscomp/CodePrinter.java b/Closure_34/fixed/com/google/javascript/jscomp/CodePrinter.java
+index 52dfa9b..31c62d9 100644
+--- a/Closure_34/buggy/com/google/javascript/jscomp/CodePrinter.java
++++ b/Closure_34/fixed/com/google/javascript/jscomp/CodePrinter.java
+@@ -331,7 +331,7 @@ class CodePrinter {
+     @Override
+     void appendOp(String op, boolean binOp) {
+       if (binOp) {
+-        if (getLastChar() != ' ') {
++        if (getLastChar() != ' ' && op.charAt(0) != ',') {
+           append(" ");
+         }
+         append(op);

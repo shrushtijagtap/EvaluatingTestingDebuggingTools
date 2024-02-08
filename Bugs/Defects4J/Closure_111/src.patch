@@ -1,0 +1,14 @@
+diff --git a/Closure_111/buggy/com/google/javascript/jscomp/type/ClosureReverseAbstractInterpreter.java b/Closure_111/fixed/com/google/javascript/jscomp/type/ClosureReverseAbstractInterpreter.java
+index 1706e34..e3c599d 100644
+--- a/Closure_111/buggy/com/google/javascript/jscomp/type/ClosureReverseAbstractInterpreter.java
++++ b/Closure_111/fixed/com/google/javascript/jscomp/type/ClosureReverseAbstractInterpreter.java
+@@ -51,7 +51,8 @@ public class ClosureReverseAbstractInterpreter
+       new RestrictByTrueTypeOfResultVisitor() {
+         @Override
+         protected JSType caseTopType(JSType topType) {
+-          return topType;
++          return topType.isAllType() ?
++              getNativeType(ARRAY_TYPE) : topType;
+         }
+ 
+         @Override

@@ -1,0 +1,14 @@
+diff --git a/Closure_161/buggy/com/google/javascript/jscomp/PeepholeFoldConstants.java b/Closure_161/fixed/com/google/javascript/jscomp/PeepholeFoldConstants.java
+index 0b2636f..c51297f 100644
+--- a/Closure_161/buggy/com/google/javascript/jscomp/PeepholeFoldConstants.java
++++ b/Closure_161/fixed/com/google/javascript/jscomp/PeepholeFoldConstants.java
+@@ -1280,6 +1280,9 @@ class PeepholeFoldConstants extends AbstractPeepholeOptimization {
+     // If GETPROP/GETELEM is used as assignment target the array literal is
+     // acting as a temporary we can't fold it here:
+     //    "[][0] += 1"
++    if (isAssignmentTarget(n)) {
++      return n;
++    }
+ 
+     if (right.getType() != Token.NUMBER) {
+       // Sometimes people like to use complex expressions to index into

@@ -1,0 +1,90 @@
+diff --git a/Closure_149/buggy/com/google/javascript/jscomp/AbstractCommandLineRunner.java b/Closure_149/fixed/com/google/javascript/jscomp/AbstractCommandLineRunner.java
+index 8cb4472..8e2b263 100644
+--- a/Closure_149/buggy/com/google/javascript/jscomp/AbstractCommandLineRunner.java
++++ b/Closure_149/fixed/com/google/javascript/jscomp/AbstractCommandLineRunner.java
+@@ -156,6 +156,7 @@ abstract class AbstractCommandLineRunner<A extends Compiler,
+     options.setCodingConvention(config.codingConvention);
+     options.setSummaryDetailLevel(config.summaryDetailLevel);
+ 
++    options.outputCharset = getOutputCharset();
+     inputCharset = getInputCharset();
+ 
+     if (config.jsOutputFile.length() > 0) {
+@@ -515,11 +516,6 @@ abstract class AbstractCommandLineRunner<A extends Compiler,
+     Result result;
+ 
+     setRunOptions(options);
+-    if (inputCharset == Charsets.UTF_8) {
+-      options.outputCharset = Charsets.US_ASCII;
+-    } else {
+-      options.outputCharset = inputCharset;
+-    }
+ 
+     boolean writeOutputToFile = !options.jsOutputFile.isEmpty();
+     if (writeOutputToFile) {
+@@ -690,6 +686,16 @@ abstract class AbstractCommandLineRunner<A extends Compiler,
+    *    be a supported charset.
+    * @throws FlagUsageException if flag is not a valid Charset name.
+    */
++  private String getOutputCharset() throws FlagUsageException {
++    if (!config.charset.isEmpty()) {
++      if (!Charset.isSupported(config.charset)) {
++        throw new FlagUsageException(config.charset +
++            " is not a valid charset name.");
++      }
++      return config.charset;
++    }
++    return "US-ASCII";
++  }
+ 
+   protected List<JSSourceFile> createExterns() throws FlagUsageException,
+       IOException {
+diff --git a/Closure_149/buggy/com/google/javascript/jscomp/CommandLineRunner.java b/Closure_149/fixed/com/google/javascript/jscomp/CommandLineRunner.java
+index e3334a3..bd2de60 100644
+--- a/Closure_149/buggy/com/google/javascript/jscomp/CommandLineRunner.java
++++ b/Closure_149/fixed/com/google/javascript/jscomp/CommandLineRunner.java
+@@ -468,7 +468,6 @@ public class CommandLineRunner extends
+     }
+ 
+     options.closurePass = flags.process_closure_primitives;
+-    initOptionsFromFlags(options);
+     return options;
+   }
+ 
+diff --git a/Closure_149/buggy/com/google/javascript/jscomp/Compiler.java b/Closure_149/fixed/com/google/javascript/jscomp/Compiler.java
+index 7a12c4f..56bc4eb 100644
+--- a/Closure_149/buggy/com/google/javascript/jscomp/Compiler.java
++++ b/Closure_149/fixed/com/google/javascript/jscomp/Compiler.java
+@@ -1359,7 +1359,8 @@ public class Compiler extends AbstractCompiler {
+     builder.setSourceMap(sourceMap);
+     builder.setSourceMapDetailLevel(options.sourceMapDetailLevel);
+ 
+-    Charset charset = options.outputCharset;
++    Charset charset = options.outputCharset != null ?
++        Charset.forName(options.outputCharset) : null;
+     builder.setOutputCharset(charset);
+ 
+     return builder.build();
+diff --git a/Closure_149/buggy/com/google/javascript/jscomp/CompilerOptions.java b/Closure_149/fixed/com/google/javascript/jscomp/CompilerOptions.java
+index f4c7836..f1c9535 100644
+--- a/Closure_149/buggy/com/google/javascript/jscomp/CompilerOptions.java
++++ b/Closure_149/fixed/com/google/javascript/jscomp/CompilerOptions.java
+@@ -585,7 +585,7 @@ public class CompilerOptions implements Serializable, Cloneable {
+    * Charset to use when generating code.  If null, then output ASCII.
+    * This needs to be a string because CompilerOptions is serializable.
+    */
+-  public Charset outputCharset;
++  String outputCharset;
+ 
+   /**
+    * Whether the named objects types included 'undefined' by default.
+@@ -957,6 +957,9 @@ public class CompilerOptions implements Serializable, Cloneable {
+   /**
+    * Sets the output charset by name.
+    */
++  public void setOutputCharset(String charsetName) {
++    this.outputCharset = charsetName;
++  }
+ 
+   /**
+    * Whether to include "undefined" in the default types.

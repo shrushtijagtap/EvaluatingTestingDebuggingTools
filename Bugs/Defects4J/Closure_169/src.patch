@@ -1,0 +1,366 @@
+diff --git a/Closure_169/buggy/com/google/javascript/rhino/jstype/ArrowType.java b/Closure_169/fixed/com/google/javascript/rhino/jstype/ArrowType.java
+index c4109b0..8919efa 100644
+--- a/Closure_169/buggy/com/google/javascript/rhino/jstype/ArrowType.java
++++ b/Closure_169/fixed/com/google/javascript/rhino/jstype/ArrowType.java
+@@ -174,7 +174,7 @@ final class ArrowType extends JSType {
+    * @return True if our parameter spec is equal to {@code that}'s parameter
+    *     spec.
+    */
+-  boolean hasEqualParameters(ArrowType that, boolean tolerateUnknowns) {
++  boolean hasEqualParameters(ArrowType that, EquivalenceMethod eqMethod) {
+     Node thisParam = parameters.getFirstChild();
+     Node otherParam = that.parameters.getFirstChild();
+     while (thisParam != null && otherParam != null) {
+@@ -184,7 +184,7 @@ final class ArrowType extends JSType {
+         // Both parameter lists give a type for this param, it should be equal
+         if (otherParamType != null &&
+             !thisParamType.checkEquivalenceHelper(
+-                otherParamType, tolerateUnknowns)) {
++                otherParamType, eqMethod)) {
+           return false;
+         }
+       } else {
+@@ -201,12 +201,12 @@ final class ArrowType extends JSType {
+   }
+ 
+   boolean checkArrowEquivalenceHelper(
+-      ArrowType that, boolean tolerateUnknowns) {
++      ArrowType that, EquivalenceMethod eqMethod) {
+     // Please keep this method in sync with the hashCode() method below.
+-    if (!returnType.checkEquivalenceHelper(that.returnType, tolerateUnknowns)) {
++    if (!returnType.checkEquivalenceHelper(that.returnType, eqMethod)) {
+       return false;
+     }
+-    return hasEqualParameters(that, tolerateUnknowns);
++    return hasEqualParameters(that, eqMethod);
+   }
+ 
+   @Override
+diff --git a/Closure_169/fixed/com/google/javascript/rhino/jstype/EquivalenceMethod.java b/Closure_169/fixed/com/google/javascript/rhino/jstype/EquivalenceMethod.java
+new file mode 100644
+index 0000000..b6c3744
+--- /dev/null
++++ b/Closure_169/fixed/com/google/javascript/rhino/jstype/EquivalenceMethod.java
+@@ -0,0 +1,83 @@
++/*
++ *
++ * ***** BEGIN LICENSE BLOCK *****
++ * Version: MPL 1.1/GPL 2.0
++ *
++ * The contents of this file are subject to the Mozilla Public License Version
++ * 1.1 (the "License"); you may not use this file except in compliance with
++ * the License. You may obtain a copy of the License at
++ * http://www.mozilla.org/MPL/
++ *
++ * Software distributed under the License is distributed on an "AS IS" basis,
++ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
++ * for the specific language governing rights and limitations under the
++ * License.
++ *
++ * The Original Code is Rhino code, released
++ * May 6, 1999.
++ *
++ * The Initial Developer of the Original Code is
++ * Netscape Communications Corporation.
++ * Portions created by the Initial Developer are Copyright (C) 1997-1999
++ * the Initial Developer. All Rights Reserved.
++ *
++ * Contributor(s):
++ *   Nick Santos
++ *   Google Inc.
++ *
++ * Alternatively, the contents of this file may be used under the terms of
++ * the GNU General Public License Version 2 or later (the "GPL"), in which
++ * case the provisions of the GPL are applicable instead of those above. If
++ * you wish to allow use of your version of this file only under the terms of
++ * the GPL and not to allow others to use your version of this file under the
++ * MPL, indicate your decision by deleting the provisions above and replacing
++ * them with the notice and other provisions required by the GPL. If you do
++ * not delete the provisions above, a recipient may use your version of this
++ * file under either the MPL or the GPL.
++ *
++ * ***** END LICENSE BLOCK ***** */
++
++package com.google.javascript.rhino.jstype;
++
++/**
++ * Represents different ways for comparing equality among types.
++ * @author nicksantos@google.com (Nick Santos)
++ */
++enum EquivalenceMethod {
++  /**
++   * Indicates that the two types should behave exactly the same under
++   * all type operations.
++   *
++   * Thus, {string} != {?} and {Unresolved} != {?}
++   */
++  IDENTITY,
++
++  /**
++   * Indicates that the two types are almost exactly the same, and that a
++   * data flow analysis algorithm comparing them should consider them equal.
++   *
++   * In traditional type inference, the types form a finite lattice, and this
++   * ensures that type inference will terminate.
++   *
++   * In our type system, the unknown types do not obey the lattice rules. So
++   * if we continue to perform inference over the unknown types, we may
++   * never terminate.
++   *
++   * By treating all unknown types as equivalent for the purposes of data
++   * flow analysis, we ensure that the algorithm will terminate.
++   *
++   * Thus, {string} != {?} and {Unresolved} ~= {?}
++   */
++  DATA_FLOW,
++
++  /**
++   * Indicates that two types are invariant.
++   *
++   * In a type system without unknown types, this would be the same
++   * as IDENTITY. But we always want to consider type A invariant with type B
++   * if B is unknown.
++   *
++   * Thus, {string} ~= {?} and {Unresolved} ~= {?}
++   */
++  INVARIANT
++}
+diff --git a/Closure_169/buggy/com/google/javascript/rhino/jstype/FunctionType.java b/Closure_169/fixed/com/google/javascript/rhino/jstype/FunctionType.java
+index e354e56..4c62e15 100644
+--- a/Closure_169/buggy/com/google/javascript/rhino/jstype/FunctionType.java
++++ b/Closure_169/fixed/com/google/javascript/rhino/jstype/FunctionType.java
+@@ -789,7 +789,7 @@ public class FunctionType extends PrototypeObjectType {
+   private FunctionType tryMergeFunctionPiecewise(
+       FunctionType other, boolean leastSuper) {
+     Node newParamsNode = null;
+-    if (call.hasEqualParameters(other.call, false)) {
++    if (call.hasEqualParameters(other.call, EquivalenceMethod.IDENTITY)) {
+       newParamsNode = call.parameters;
+     } else {
+       // If the parameters are not equal, don't try to merge them.
+@@ -887,7 +887,7 @@ public class FunctionType extends PrototypeObjectType {
+    * have signatures, two interfaces are equal if their names match.
+    */
+   boolean checkFunctionEquivalenceHelper(
+-      FunctionType that, boolean tolerateUnknowns) {
++      FunctionType that, EquivalenceMethod eqMethod) {
+     if (isConstructor()) {
+       if (that.isConstructor()) {
+         return this == that;
+@@ -905,8 +905,8 @@ public class FunctionType extends PrototypeObjectType {
+     }
+ 
+     return typeOfThis.checkEquivalenceHelper(
+-        that.typeOfThis, tolerateUnknowns) &&
+-        call.checkArrowEquivalenceHelper(that.call, tolerateUnknowns);
++        that.typeOfThis, eqMethod) &&
++        call.checkArrowEquivalenceHelper(that.call, eqMethod);
+   }
+ 
+   @Override
+@@ -915,7 +915,8 @@ public class FunctionType extends PrototypeObjectType {
+   }
+ 
+   public boolean hasEqualCallType(FunctionType otherType) {
+-    return this.call.checkArrowEquivalenceHelper(otherType.call, false);
++    return this.call.checkArrowEquivalenceHelper(
++        otherType.call, EquivalenceMethod.IDENTITY);
+   }
+ 
+   /**
+diff --git a/Closure_169/buggy/com/google/javascript/rhino/jstype/JSType.java b/Closure_169/fixed/com/google/javascript/rhino/jstype/JSType.java
+index 081a3d7..9c8e989 100644
+--- a/Closure_169/buggy/com/google/javascript/rhino/jstype/JSType.java
++++ b/Closure_169/fixed/com/google/javascript/rhino/jstype/JSType.java
+@@ -489,7 +489,7 @@ public abstract class JSType implements Serializable {
+    * Checks if two types are equivalent.
+    */
+   public final boolean isEquivalentTo(JSType that) {
+-    return checkEquivalenceHelper(that, false);
++    return checkEquivalenceHelper(that, EquivalenceMethod.IDENTITY);
+   }
+ 
+   /**
+@@ -497,7 +497,7 @@ public abstract class JSType implements Serializable {
+    * @see EquivalenceMethod
+    */
+   public final boolean isInvariant(JSType that) {
+-    return checkEquivalenceHelper(that, false);
++    return checkEquivalenceHelper(that, EquivalenceMethod.INVARIANT);
+   }
+ 
+   /**
+@@ -511,13 +511,13 @@ public abstract class JSType implements Serializable {
+    *     unknowns</a>
+    */
+   public final boolean differsFrom(JSType that) {
+-    return !checkEquivalenceHelper(that, true);
++    return !checkEquivalenceHelper(that, EquivalenceMethod.DATA_FLOW);
+   }
+ 
+   /**
+    * An equivalence visitor.
+    */
+-  boolean checkEquivalenceHelper(JSType that, boolean tolerateUnknowns) {
++  boolean checkEquivalenceHelper(JSType that, EquivalenceMethod eqMethod) {
+     if (this == that) {
+       return true;
+     }
+@@ -525,9 +525,11 @@ public abstract class JSType implements Serializable {
+     boolean thisUnknown = isUnknownType();
+     boolean thatUnknown = that.isUnknownType();
+     if (thisUnknown || thatUnknown) {
+-      if (tolerateUnknowns) {
++      if (eqMethod == EquivalenceMethod.INVARIANT) {
+         // If we're checking for invariance, the unknown type is invariant
+         // with everyone.
++        return true;
++      } else if (eqMethod == EquivalenceMethod.DATA_FLOW) {
+         // If we're checking data flow, then two types are the same if they're
+         // both unknown.
+         return thisUnknown && thatUnknown;
+@@ -542,17 +544,17 @@ public abstract class JSType implements Serializable {
+ 
+     if (isUnionType() && that.isUnionType()) {
+       return this.toMaybeUnionType().checkUnionEquivalenceHelper(
+-          that.toMaybeUnionType(), tolerateUnknowns);
++          that.toMaybeUnionType(), eqMethod);
+     }
+ 
+     if (isFunctionType() && that.isFunctionType()) {
+       return this.toMaybeFunctionType().checkFunctionEquivalenceHelper(
+-          that.toMaybeFunctionType(), tolerateUnknowns);
++          that.toMaybeFunctionType(), eqMethod);
+     }
+ 
+     if (isRecordType() && that.isRecordType()) {
+       return this.toMaybeRecordType().checkRecordEquivalenceHelper(
+-          that.toMaybeRecordType(), tolerateUnknowns);
++          that.toMaybeRecordType(), eqMethod);
+     }
+ 
+     ParameterizedType thisParamType = toMaybeParameterizedType();
+@@ -562,14 +564,14 @@ public abstract class JSType implements Serializable {
+       boolean paramsMatch = false;
+       if (thisParamType != null && thatParamType != null) {
+         paramsMatch = thisParamType.getParameterType().checkEquivalenceHelper(
+-            thatParamType.getParameterType(), tolerateUnknowns);
+-      } else if (tolerateUnknowns) {
++            thatParamType.getParameterType(), eqMethod);
++      } else if (eqMethod == EquivalenceMethod.IDENTITY) {
++        paramsMatch = false;
++      } else {
+         // If one of the type parameters is unknown, but the other is not,
+         // then we consider these the same for the purposes of data flow
+         // and invariance.
+         paramsMatch = true;
+-      } else {
+-        paramsMatch = false;
+       }
+ 
+       JSType thisRootType = thisParamType == null ?
+@@ -577,7 +579,7 @@ public abstract class JSType implements Serializable {
+       JSType thatRootType = thatParamType == null ?
+           that : thatParamType.getReferencedTypeInternal();
+       return paramsMatch &&
+-          thisRootType.checkEquivalenceHelper(thatRootType, tolerateUnknowns);
++          thisRootType.checkEquivalenceHelper(thatRootType, eqMethod);
+     }
+ 
+     if (isNominalType() && that.isNominalType()) {
+@@ -589,13 +591,13 @@ public abstract class JSType implements Serializable {
+     if (this instanceof ProxyObjectType) {
+       return ((ProxyObjectType) this)
+           .getReferencedTypeInternal().checkEquivalenceHelper(
+-              that, tolerateUnknowns);
++              that, eqMethod);
+     }
+ 
+     if (that instanceof ProxyObjectType) {
+       return checkEquivalenceHelper(
+           ((ProxyObjectType) that).getReferencedTypeInternal(),
+-          tolerateUnknowns);
++          eqMethod);
+     }
+ 
+     // Relies on the fact that for the base {@link JSType}, only one
+diff --git a/Closure_169/buggy/com/google/javascript/rhino/jstype/RecordType.java b/Closure_169/fixed/com/google/javascript/rhino/jstype/RecordType.java
+index 50423d5..d70db70 100755
+--- a/Closure_169/buggy/com/google/javascript/rhino/jstype/RecordType.java
++++ b/Closure_169/fixed/com/google/javascript/rhino/jstype/RecordType.java
+@@ -115,7 +115,7 @@ class RecordType extends PrototypeObjectType {
+   }
+ 
+   boolean checkRecordEquivalenceHelper(
+-      RecordType otherRecord, boolean tolerateUnknowns) {
++      RecordType otherRecord, EquivalenceMethod eqMethod) {
+     Set<String> keySet = properties.keySet();
+     Map<String, JSType> otherProps = otherRecord.properties;
+     if (!otherProps.keySet().equals(keySet)) {
+@@ -123,7 +123,7 @@ class RecordType extends PrototypeObjectType {
+     }
+     for (String key : keySet) {
+       if (!otherProps.get(key).checkEquivalenceHelper(
+-              properties.get(key), tolerateUnknowns)) {
++              properties.get(key), eqMethod)) {
+         return false;
+       }
+     }
+@@ -201,8 +201,7 @@ class RecordType extends PrototypeObjectType {
+           JSType altPropType = alt.getPropertyType(propName);
+           if (altPropType != null && !alt.isEquivalentTo(this) &&
+               alt.isSubtype(that) &&
+-              (propType.isUnknownType() || altPropType.isUnknownType() ||
+-                  altPropType.isEquivalentTo(propType))) {
++              propType.isInvariant(altPropType)) {
+             builder.addAlternate(alt);
+           }
+         }
+@@ -265,7 +264,6 @@ class RecordType extends PrototypeObjectType {
+ 
+       JSType propA = typeA.getPropertyType(property);
+       JSType propB = typeB.getPropertyType(property);
+-      if (!propA.isUnknownType() && !propB.isUnknownType()) {
+       if (typeA.isPropertyTypeDeclared(property)) {
+         // If one declared property isn't invariant,
+         // then the whole record isn't covariant.
+@@ -277,7 +275,6 @@ class RecordType extends PrototypeObjectType {
+         // then the whole record isn't covariant.
+         if (!propA.isSubtype(propB)) {
+           return false;
+-          }
+         }
+       }
+     }
+diff --git a/Closure_169/buggy/com/google/javascript/rhino/jstype/UnionType.java b/Closure_169/fixed/com/google/javascript/rhino/jstype/UnionType.java
+index 5a81698..0fd8b24 100644
+--- a/Closure_169/buggy/com/google/javascript/rhino/jstype/UnionType.java
++++ b/Closure_169/fixed/com/google/javascript/rhino/jstype/UnionType.java
+@@ -331,22 +331,22 @@ public class UnionType extends JSType {
+    * and all alternates are equal.
+    */
+   boolean checkUnionEquivalenceHelper(
+-      UnionType that, boolean tolerateUnknowns) {
+-    if (!tolerateUnknowns
++      UnionType that, EquivalenceMethod eqMethod) {
++    if (eqMethod == EquivalenceMethod.IDENTITY
+         && alternates.size() != that.alternates.size()) {
+       return false;
+     }
+     for (JSType alternate : that.alternates) {
+-      if (!hasAlternate(alternate, tolerateUnknowns)) {
++      if (!hasAlternate(alternate, eqMethod)) {
+         return false;
+       }
+     }
+     return true;
+   }
+ 
+-  private boolean hasAlternate(JSType type, boolean tolerateUnknowns) {
++  private boolean hasAlternate(JSType type, EquivalenceMethod eqMethod) {
+     for (JSType alternate : alternates) {
+-      if (alternate.checkEquivalenceHelper(type, tolerateUnknowns)) {
++      if (alternate.checkEquivalenceHelper(type, eqMethod)) {
+         return true;
+       }
+     }

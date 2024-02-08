@@ -1,0 +1,25 @@
+diff --git a/Closure_79/buggy/com/google/javascript/jscomp/Normalize.java b/Closure_79/fixed/com/google/javascript/jscomp/Normalize.java
+index 6738b10..8bee886 100644
+--- a/Closure_79/buggy/com/google/javascript/jscomp/Normalize.java
++++ b/Closure_79/fixed/com/google/javascript/jscomp/Normalize.java
+@@ -119,7 +119,7 @@ class Normalize implements CompilerPass {
+   public void process(Node externs, Node root) {
+     new NodeTraversal(
+         compiler, new NormalizeStatements(compiler, assertOnChange))
+-        .traverse(root);
++        .traverseRoots(externs, root);
+     if (MAKE_LOCAL_NAMES_UNIQUE) {
+       MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();
+       NodeTraversal t = new NodeTraversal(compiler, renamer);
+diff --git a/Closure_79/buggy/com/google/javascript/jscomp/VarCheck.java b/Closure_79/fixed/com/google/javascript/jscomp/VarCheck.java
+index c8196b1..f8ebfa3 100644
+--- a/Closure_79/buggy/com/google/javascript/jscomp/VarCheck.java
++++ b/Closure_79/fixed/com/google/javascript/jscomp/VarCheck.java
+@@ -218,6 +218,7 @@ class VarCheck extends AbstractPostOrderCallback implements CompilerPass {
+     getSynthesizedExternsRoot().addChildToBack(
+         new Node(Token.VAR, nameNode));
+     varsToDeclareInExterns.remove(varName);
++    compiler.reportCodeChange();
+   }
+ 
+   /**

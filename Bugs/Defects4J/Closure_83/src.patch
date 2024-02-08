@@ -1,0 +1,16 @@
+diff --git a/Closure_83/buggy/com/google/javascript/jscomp/CommandLineRunner.java b/Closure_83/fixed/com/google/javascript/jscomp/CommandLineRunner.java
+index f146b0e..4c3b258 100644
+--- a/Closure_83/buggy/com/google/javascript/jscomp/CommandLineRunner.java
++++ b/Closure_83/fixed/com/google/javascript/jscomp/CommandLineRunner.java
+@@ -331,7 +331,10 @@ public class CommandLineRunner extends
+ 
+       @Override
+       public int parseArguments(Parameters params) throws CmdLineException {
+-        String param = params.getParameter(0);
++        String param = null;
++        try {
++          param = params.getParameter(0);
++        } catch (CmdLineException e) {}
+ 
+         if (param == null) {
+           setter.addValue(true);

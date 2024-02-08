@@ -1,0 +1,13 @@
+diff --git a/Closure_113/buggy/com/google/javascript/jscomp/ProcessClosurePrimitives.java b/Closure_113/fixed/com/google/javascript/jscomp/ProcessClosurePrimitives.java
+index 70bf1b0..85cee7c 100644
+--- a/Closure_113/buggy/com/google/javascript/jscomp/ProcessClosurePrimitives.java
++++ b/Closure_113/fixed/com/google/javascript/jscomp/ProcessClosurePrimitives.java
+@@ -326,7 +326,7 @@ class ProcessClosurePrimitives extends AbstractPostOrderCallback
+       // the checks for broken requires turned off. In these cases, we
+       // allow broken requires to be preserved by the first run to
+       // let them be caught in the subsequent run.
+-      if (provided != null) {
++      if (provided != null || requiresLevel.isOn()) {
+         parent.detachFromParent();
+         compiler.reportCodeChange();
+       }

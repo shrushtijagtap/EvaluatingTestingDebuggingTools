@@ -1,0 +1,12 @@
+diff --git a/Closure_119/buggy/com/google/javascript/jscomp/GlobalNamespace.java b/Closure_119/fixed/com/google/javascript/jscomp/GlobalNamespace.java
+index 639318d..0e9c4d3 100644
+--- a/Closure_119/buggy/com/google/javascript/jscomp/GlobalNamespace.java
++++ b/Closure_119/fixed/com/google/javascript/jscomp/GlobalNamespace.java
+@@ -363,6 +363,7 @@ class GlobalNamespace
+                 isSet = true;
+                 type = Name.Type.FUNCTION;
+                 break;
++              case Token.CATCH:
+               case Token.INC:
+               case Token.DEC:
+                 isSet = true;

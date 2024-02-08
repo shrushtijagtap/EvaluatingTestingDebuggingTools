@@ -1,0 +1,24 @@
+diff --git a/Closure_51/buggy/com/google/javascript/jscomp/CodeConsumer.java b/Closure_51/fixed/com/google/javascript/jscomp/CodeConsumer.java
+index 146d2f8..3a66750 100644
+--- a/Closure_51/buggy/com/google/javascript/jscomp/CodeConsumer.java
++++ b/Closure_51/fixed/com/google/javascript/jscomp/CodeConsumer.java
+@@ -238,7 +238,7 @@ abstract class CodeConsumer {
+       add(" ");
+     }
+ 
+-    if ((long) x == x) {
++    if ((long) x == x && !isNegativeZero(x)) {
+       long value = (long) x;
+       long mantissa = value;
+       int exp = 0;
+@@ -256,7 +256,10 @@ abstract class CodeConsumer {
+     } else {
+       add(String.valueOf(x));
+     }
++  }
+ 
++  static boolean isNegativeZero(double x) {
++    return x == 0.0 && Math.copySign(1, x) == -1.0;
+   }
+ 
+   static boolean isWordChar(char ch) {
