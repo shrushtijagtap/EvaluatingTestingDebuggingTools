@@ -25,6 +25,12 @@ and the diff urls to extract the files that <br>
 <br>
 We then extrated the fixed and buggy files and generated a diff file. <br>
 Due to time constraint we were able to extract the files for 64 repositories and  extract all the buggy and fixed file as well as the difference between them.<br>
+We have extracted bugs per repositories and these bugs are stored with all buggy, fixed and diff code files in each folder with name of the repository.<br>
+eg: Folder: ontop_ <br>
+conisists of all the bugs,<br>
+bug files: contains buggy code for all bugs <br>
+fixed files: contains fixed code for all bugs <br>
+diff files: contains diff for all bugs <br>
 
 ## Number of Bugs Collected
 2919 bugs collected<br>
