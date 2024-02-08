@@ -1,0 +1,12 @@
+diff --git a/Jsoup_33/buggy/org/jsoup/parser/HtmlTreeBuilder.java b/Jsoup_33/fixed/org/jsoup/parser/HtmlTreeBuilder.java
+index 975411b..e134a58 100644
+--- a/Jsoup_33/buggy/org/jsoup/parser/HtmlTreeBuilder.java
++++ b/Jsoup_33/fixed/org/jsoup/parser/HtmlTreeBuilder.java
+@@ -159,6 +159,7 @@ class HtmlTreeBuilder extends TreeBuilder {
+         if (startTag.isSelfClosing()) {
+             Element el = insertEmpty(startTag);
+             stack.add(el);
++            tokeniser.transition(TokeniserState.Data); // handles <script />, otherwise needs breakout steps from script data
+             tokeniser.emit(new Token.EndTag(el.tagName()));  // ensure we get out of whatever state we are in. emitted for yielded processing
+             return el;
+         }

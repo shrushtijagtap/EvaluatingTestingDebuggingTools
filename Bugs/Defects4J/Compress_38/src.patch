@@ -1,0 +1,13 @@
+diff --git a/Compress_38/buggy/org/apache/commons/compress/archivers/tar/TarArchiveEntry.java b/Compress_38/fixed/org/apache/commons/compress/archivers/tar/TarArchiveEntry.java
+index 941bbbd..a5050bf 100644
+--- a/Compress_38/buggy/org/apache/commons/compress/archivers/tar/TarArchiveEntry.java
++++ b/Compress_38/fixed/org/apache/commons/compress/archivers/tar/TarArchiveEntry.java
+@@ -856,7 +856,7 @@ public class TarArchiveEntry implements TarConstants, ArchiveEntry {
+             return true;
+         }
+ 
+-        if (getName().endsWith("/")) {
++        if (!isPaxHeader() && !isGlobalPaxHeader() && getName().endsWith("/")) {
+             return true;
+         }
+ 

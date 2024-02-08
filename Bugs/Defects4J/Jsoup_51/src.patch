@@ -1,0 +1,13 @@
+diff --git a/Jsoup_51/buggy/org/jsoup/parser/CharacterReader.java b/Jsoup_51/fixed/org/jsoup/parser/CharacterReader.java
+index 6b0b9fb..a34311a 100644
+--- a/Jsoup_51/buggy/org/jsoup/parser/CharacterReader.java
++++ b/Jsoup_51/fixed/org/jsoup/parser/CharacterReader.java
+@@ -297,7 +297,7 @@ final class CharacterReader {
+         if (isEmpty())
+             return false;
+         char c = input[pos];
+-        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
++        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || Character.isLetter(c);
+     }
+ 
+     boolean matchesDigit() {

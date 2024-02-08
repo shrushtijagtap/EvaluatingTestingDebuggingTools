@@ -1,0 +1,16 @@
+diff --git a/Jsoup_68/buggy/org/jsoup/parser/HtmlTreeBuilder.java b/Jsoup_68/fixed/org/jsoup/parser/HtmlTreeBuilder.java
+index 08444ef..b8cc1f0 100644
+--- a/Jsoup_68/buggy/org/jsoup/parser/HtmlTreeBuilder.java
++++ b/Jsoup_68/fixed/org/jsoup/parser/HtmlTreeBuilder.java
+@@ -465,10 +465,7 @@ public class HtmlTreeBuilder extends TreeBuilder {
+ 
+     private boolean inSpecificScope(String[] targetNames, String[] baseTypes, String[] extraTypes) {
+         // https://html.spec.whatwg.org/multipage/parsing.html#has-an-element-in-the-specific-scope
+-        int bottom = stack.size() -1;
+-        if (bottom > MaxScopeSearchDepth) {
+-            bottom = MaxScopeSearchDepth;
+-        }
++        final int bottom = stack.size() -1;
+         final int top = bottom > MaxScopeSearchDepth ? bottom - MaxScopeSearchDepth : 0;
+         // don't walk too far up the tree
+ 

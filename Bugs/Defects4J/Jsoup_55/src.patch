@@ -1,0 +1,12 @@
+diff --git a/Jsoup_55/buggy/org/jsoup/parser/TokeniserState.java b/Jsoup_55/fixed/org/jsoup/parser/TokeniserState.java
+index 3a2ac1f..2e998d5 100644
+--- a/Jsoup_55/buggy/org/jsoup/parser/TokeniserState.java
++++ b/Jsoup_55/fixed/org/jsoup/parser/TokeniserState.java
+@@ -880,6 +880,7 @@ enum TokeniserState {
+                     break;
+                 default:
+                     t.error(this);
++                    r.unconsume();
+                     t.transition(BeforeAttributeName);
+             }
+         }

@@ -1,0 +1,38 @@
+diff --git a/JacksonDatabind_61/buggy/com/fasterxml/jackson/databind/ObjectMapper.java b/JacksonDatabind_61/fixed/com/fasterxml/jackson/databind/ObjectMapper.java
+index 1f419e8..3d939ec 100644
+--- a/JacksonDatabind_61/buggy/com/fasterxml/jackson/databind/ObjectMapper.java
++++ b/JacksonDatabind_61/fixed/com/fasterxml/jackson/databind/ObjectMapper.java
+@@ -229,6 +229,9 @@ public class ObjectMapper
+         {
+             // 03-Oct-2016, tatu: As per [databind#1395], need to skip
+             //  primitive types too, regardless
++            if (t.isPrimitive()) {
++                return false;
++            }
+ 
+             switch (_appliesFor) {
+             case NON_CONCRETE_AND_ARRAYS:
+diff --git a/JacksonDatabind_61/buggy/com/fasterxml/jackson/databind/jsontype/impl/StdTypeResolverBuilder.java b/JacksonDatabind_61/fixed/com/fasterxml/jackson/databind/jsontype/impl/StdTypeResolverBuilder.java
+index ad9888f..e5a3e4d 100644
+--- a/JacksonDatabind_61/buggy/com/fasterxml/jackson/databind/jsontype/impl/StdTypeResolverBuilder.java
++++ b/JacksonDatabind_61/fixed/com/fasterxml/jackson/databind/jsontype/impl/StdTypeResolverBuilder.java
+@@ -71,6 +71,9 @@ public class StdTypeResolverBuilder
+         if (_idType == JsonTypeInfo.Id.NONE) { return null; }
+         // 03-Oct-2016, tatu: As per [databind#1395] better prevent use for primitives,
+         //    regardless of setting
++        if (baseType.isPrimitive()) {
++            return null;
++        }
+         TypeIdResolver idRes = idResolver(config, baseType, subtypes, true, false);
+         switch (_includeAs) {
+         case WRAPPER_ARRAY:
+@@ -101,6 +104,9 @@ public class StdTypeResolverBuilder
+         if (_idType == JsonTypeInfo.Id.NONE) { return null; }
+         // 03-Oct-2016, tatu: As per [databind#1395] better prevent use for primitives,
+         //    regardless of setting
++        if (baseType.isPrimitive()) {
++            return null;
++        }
+ 
+         TypeIdResolver idRes = idResolver(config, baseType, subtypes, false, true);
+ 

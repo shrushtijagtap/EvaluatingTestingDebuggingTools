@@ -1,0 +1,18 @@
+diff --git a/JacksonDatabind_86/buggy/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java b/JacksonDatabind_86/fixed/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java
+index 3080783..12162c5 100644
+--- a/JacksonDatabind_86/buggy/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java
++++ b/JacksonDatabind_86/fixed/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java
+@@ -26,6 +26,13 @@ public class ResolvedRecursiveType extends TypeBase
+         _referencedType = ref;
+     }
+    
++    @Override
++    public JavaType getSuperClass() {
++    	if (_referencedType != null) {
++    		return _referencedType.getSuperClass();
++    	}
++    	return super.getSuperClass();
++    }
+ 
+     public JavaType getSelfReferencedType() { return _referencedType; }
+ 

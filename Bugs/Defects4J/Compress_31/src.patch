@@ -1,0 +1,14 @@
+diff --git a/Compress_31/buggy/org/apache/commons/compress/archivers/tar/TarUtils.java b/Compress_31/fixed/org/apache/commons/compress/archivers/tar/TarUtils.java
+index 40e7871..94e175c 100644
+--- a/Compress_31/buggy/org/apache/commons/compress/archivers/tar/TarUtils.java
++++ b/Compress_31/fixed/org/apache/commons/compress/archivers/tar/TarUtils.java
+@@ -132,9 +132,6 @@ public class TarUtils {
+ 
+         for ( ;start < end; start++) {
+             final byte currentByte = buffer[start];
+-            if (currentByte == 0) {
+-                break;
+-            }
+             // CheckStyle:MagicNumber OFF
+             if (currentByte < '0' || currentByte > '7'){
+                 throw new IllegalArgumentException(

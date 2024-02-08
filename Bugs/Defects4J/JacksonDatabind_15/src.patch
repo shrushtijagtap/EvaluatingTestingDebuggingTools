@@ -1,0 +1,144 @@
+diff --git a/JacksonDatabind_15/buggy/com/fasterxml/jackson/databind/JavaType.java b/JacksonDatabind_15/fixed/com/fasterxml/jackson/databind/JavaType.java
+index c3d85c9..07b6ba9 100644
+--- a/JacksonDatabind_15/buggy/com/fasterxml/jackson/databind/JavaType.java
++++ b/JacksonDatabind_15/fixed/com/fasterxml/jackson/databind/JavaType.java
+@@ -299,6 +299,7 @@ public abstract class JavaType
+      *
+      * @since 2.5
+      */
++    public final boolean isJavaLangObject() { return _class == Object.class; }
+ 
+     /**
+      * Accessor for checking whether handlers for dealing with values of
+diff --git a/JacksonDatabind_15/buggy/com/fasterxml/jackson/databind/ser/BeanSerializerFactory.java b/JacksonDatabind_15/fixed/com/fasterxml/jackson/databind/ser/BeanSerializerFactory.java
+index a65f9d2..14e6d93 100644
+--- a/JacksonDatabind_15/buggy/com/fasterxml/jackson/databind/ser/BeanSerializerFactory.java
++++ b/JacksonDatabind_15/fixed/com/fasterxml/jackson/databind/ser/BeanSerializerFactory.java
+@@ -160,7 +160,7 @@ public class BeanSerializerFactory
+             ser = findSerializerFromAnnotation(prov, beanDesc.getClassInfo());
+         }
+         // [databind#731]: Should skip if nominally java.lang.Object
+-        if (ser == null) {
++        if (ser == null && !delegateType.isJavaLangObject()) {
+             ser = _createSerializer2(prov, delegateType, beanDesc, true);
+         }
+         return new StdDelegatingSerializer(conv, delegateType, ser);
+diff --git a/JacksonDatabind_15/buggy/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java b/JacksonDatabind_15/fixed/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java
+index e69205e..3e11648 100644
+--- a/JacksonDatabind_15/buggy/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java
++++ b/JacksonDatabind_15/fixed/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java
+@@ -367,7 +367,8 @@ public abstract class BeanSerializerBase
+                     Converter<Object,Object> conv = provider.converterInstance(prop.getMember(), convDef);
+                     JavaType delegateType = conv.getOutputType(provider.getTypeFactory());
+                     // [databind#731]: Should skip if nominally java.lang.Object
+-                    JsonSerializer<?> ser = provider.findValueSerializer(delegateType, prop);
++                    JsonSerializer<?> ser = delegateType.isJavaLangObject() ? null
++                            : provider.findValueSerializer(delegateType, prop);
+                     return new StdDelegatingSerializer(conv, delegateType, ser);
+                 }
+             }
+diff --git a/JacksonDatabind_15/buggy/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java b/JacksonDatabind_15/fixed/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java
+index 3aeb4f3..6c52b73 100644
+--- a/JacksonDatabind_15/buggy/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java
++++ b/JacksonDatabind_15/fixed/com/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer.java
+@@ -118,13 +118,17 @@ public class StdDelegatingSerializer
+             /* 02-Apr-2015, tatu: For "dynamic case", where type is only specified as
+              *    java.lang.Object (or missing generic), [databind#731]
+              */
++            if (!delegateType.isJavaLangObject()) {
+                 delSer = provider.findValueSerializer(delegateType);
++            }
+         }
+         if (delSer instanceof ContextualSerializer) {
+             delSer = provider.handleSecondaryContextualization(delSer, property);
+         }
+-        return (delSer == _delegateSerializer) ? this
+-                : withDelegate(_converter, delegateType, delSer);
++        if (delSer == _delegateSerializer && delegateType == _delegateType) {
++            return this;
++        }
++        return withDelegate(_converter, delegateType, delSer);
+     }
+ 
+     /*
+@@ -158,7 +162,11 @@ public class StdDelegatingSerializer
+             return;
+         }
+         // 02-Apr-2015, tatu: As per [databind#731] may need to do dynamic lookup
+-        _delegateSerializer.serialize(delegateValue, gen, provider);
++        JsonSerializer<Object> ser = _delegateSerializer;
++        if (ser == null) {
++            ser = _findSerializer(delegateValue, provider);
++        }
++        ser.serialize(delegateValue, gen, provider);
+     }
+ 
+     @Override
+@@ -169,7 +177,11 @@ public class StdDelegatingSerializer
+          *    let's give it a chance?
+          */
+         Object delegateValue = convertValue(value);
+-        _delegateSerializer.serializeWithType(delegateValue, gen, provider, typeSer);
++        JsonSerializer<Object> ser = _delegateSerializer;
++        if (ser == null) {
++            ser = _findSerializer(value, provider);
++        }
++        ser.serializeWithType(delegateValue, gen, provider, typeSer);
+     }
+ 
+     @Override
+@@ -177,6 +189,9 @@ public class StdDelegatingSerializer
+     public boolean isEmpty(Object value)
+     {
+         Object delegateValue = convertValue(value);
++        if (_delegateSerializer == null) { // best we can do for now, too costly to look up
++            return (value == null);
++        }
+         return _delegateSerializer.isEmpty(delegateValue);
+     }
+ 
+@@ -184,6 +199,9 @@ public class StdDelegatingSerializer
+     public boolean isEmpty(SerializerProvider prov, Object value)
+     {
+         Object delegateValue = convertValue(value);
++        if (_delegateSerializer == null) { // best we can do for now, too costly to look up
++            return (value == null);
++        }
+         return _delegateSerializer.isEmpty(prov, delegateValue);
+     }
+ 
+@@ -221,7 +239,9 @@ public class StdDelegatingSerializer
+          *    properly... but for now, try this:
+          */
+         // 02-Apr-2015, tatu: For dynamic case, very little we can do
+-        _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
++        if (_delegateSerializer != null) {
++            _delegateSerializer.acceptJsonFormatVisitor(visitor, typeHint);
++        }
+     }
+ 
+     /*
+@@ -253,5 +273,10 @@ public class StdDelegatingSerializer
+      *
+      * @since 2.6
+      */
++    protected JsonSerializer<Object> _findSerializer(Object value, SerializerProvider serializers)
++        throws JsonMappingException
++    {
+         // NOTE: will NOT call contextualization
++        return serializers.findValueSerializer(value.getClass());
++    }
+ }
+diff --git a/JacksonDatabind_15/buggy/com/fasterxml/jackson/databind/ser/std/StdSerializer.java b/JacksonDatabind_15/fixed/com/fasterxml/jackson/databind/ser/std/StdSerializer.java
+index 53e0984..6089e6b 100644
+--- a/JacksonDatabind_15/buggy/com/fasterxml/jackson/databind/ser/std/StdSerializer.java
++++ b/JacksonDatabind_15/fixed/com/fasterxml/jackson/databind/ser/std/StdSerializer.java
+@@ -259,7 +259,7 @@ public abstract class StdSerializer<T>
+                     Converter<Object,Object> conv = provider.converterInstance(prop.getMember(), convDef);
+                     JavaType delegateType = conv.getOutputType(provider.getTypeFactory());
+                     // [databind#731]: Should skip if nominally java.lang.Object
+-                    if (existingSerializer == null) {
++                    if (existingSerializer == null && !delegateType.hasRawClass(Object.class)) {
+                         existingSerializer = provider.findValueSerializer(delegateType);
+                     }
+                     return new StdDelegatingSerializer(conv, delegateType, existingSerializer);

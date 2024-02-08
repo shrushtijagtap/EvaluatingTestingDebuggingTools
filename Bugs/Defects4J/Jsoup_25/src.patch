@@ -1,0 +1,13 @@
+diff --git a/Jsoup_25/buggy/org/jsoup/parser/Tag.java b/Jsoup_25/fixed/org/jsoup/parser/Tag.java
+index 40b7557..caebf4e 100644
+--- a/Jsoup_25/buggy/org/jsoup/parser/Tag.java
++++ b/Jsoup_25/fixed/org/jsoup/parser/Tag.java
+@@ -215,7 +215,7 @@ public class Tag {
+     private static final String[] formatAsInlineTags = {
+             "title", "a", "p", "h1", "h2", "h3", "h4", "h5", "h6", "pre", "address", "li", "th", "td", "script", "style"
+     };
+-    private static final String[] preserveWhitespaceTags = {"pre", "plaintext", "title"};
++    private static final String[] preserveWhitespaceTags = {"pre", "plaintext", "title", "textarea"};
+ 
+     static {
+         // creates

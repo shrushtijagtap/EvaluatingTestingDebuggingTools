@@ -1,0 +1,90 @@
+diff --git a/JacksonDatabind_38/buggy/com/fasterxml/jackson/databind/type/CollectionType.java b/JacksonDatabind_38/fixed/com/fasterxml/jackson/databind/type/CollectionType.java
+index 39c1038..e0a7856 100644
+--- a/JacksonDatabind_38/buggy/com/fasterxml/jackson/databind/type/CollectionType.java
++++ b/JacksonDatabind_38/fixed/com/fasterxml/jackson/databind/type/CollectionType.java
+@@ -1,5 +1,6 @@
+ package com.fasterxml.jackson.databind.type;
+ 
++import java.lang.reflect.TypeVariable;
+ 
+ import com.fasterxml.jackson.databind.JavaType;
+ 
+@@ -47,7 +48,14 @@ public final class CollectionType
+     public static CollectionType construct(Class<?> rawType, JavaType elemT) {
+         // First: may need to fabricate TypeBindings (needed for refining into
+         // concrete collection types, as per [databind#1102])
+-        return new CollectionType(rawType, null,
++        TypeVariable<?>[] vars = rawType.getTypeParameters();
++        TypeBindings bindings;
++        if ((vars == null) || (vars.length != 1)) {
++            bindings = TypeBindings.emptyBindings();
++        } else {
++            bindings = TypeBindings.create(rawType, elemT);
++        }
++        return new CollectionType(rawType, bindings,
+                 // !!! TODO: Wrong, does have supertypes, but:
+                 _bogusSuperClass(rawType), null, elemT,
+                 null, null, false);
+diff --git a/JacksonDatabind_38/buggy/com/fasterxml/jackson/databind/type/MapType.java b/JacksonDatabind_38/fixed/com/fasterxml/jackson/databind/type/MapType.java
+index a11767f..e71abb6 100644
+--- a/JacksonDatabind_38/buggy/com/fasterxml/jackson/databind/type/MapType.java
++++ b/JacksonDatabind_38/fixed/com/fasterxml/jackson/databind/type/MapType.java
+@@ -1,5 +1,6 @@
+ package com.fasterxml.jackson.databind.type;
+ 
++import java.lang.reflect.TypeVariable;
+ 
+ import com.fasterxml.jackson.databind.JavaType;
+ 
+@@ -44,8 +45,15 @@ public final class MapType extends MapLikeType
+     {
+         // First: may need to fabricate TypeBindings (needed for refining into
+         // concrete collection types, as per [databind#1102])
++        TypeVariable<?>[] vars = rawType.getTypeParameters();
++        TypeBindings bindings;
++        if ((vars == null) || (vars.length != 2)) {
++            bindings = TypeBindings.emptyBindings();
++        } else {
++            bindings = TypeBindings.create(rawType, keyT, valueT);
++        }
+         // !!! TODO: Wrong, does have supertypes
+-        return new MapType(rawType, null, _bogusSuperClass(rawType), null,
++        return new MapType(rawType, bindings, _bogusSuperClass(rawType), null,
+                 keyT, valueT, null, null, false);
+     }
+ 
+diff --git a/JacksonDatabind_38/buggy/com/fasterxml/jackson/databind/type/SimpleType.java b/JacksonDatabind_38/fixed/com/fasterxml/jackson/databind/type/SimpleType.java
+index ceb0117..1174710 100644
+--- a/JacksonDatabind_38/buggy/com/fasterxml/jackson/databind/type/SimpleType.java
++++ b/JacksonDatabind_38/fixed/com/fasterxml/jackson/databind/type/SimpleType.java
+@@ -113,8 +113,9 @@ public class SimpleType // note: until 2.6 was final
+         if (cls.isArray()) {
+             throw new IllegalArgumentException("Can not construct SimpleType for an array (class: "+cls.getName()+")");
+         }
+-        return new SimpleType(cls, TypeBindings.emptyBindings(),
+-                _bogusSuperClass(cls), null, null, null, false);
++        TypeBindings b = TypeBindings.emptyBindings();
++        return new SimpleType(cls, b,
++                _buildSuperClass(cls.getSuperclass(), b), null, null, null, false);
+     }
+ 
+     @Override
+@@ -248,6 +249,18 @@ public class SimpleType // note: until 2.6 was final
+      * 
+      * @since 2.7 -- remove when not needed (2.8?)
+      */
++    private static JavaType _buildSuperClass(Class<?> superClass, TypeBindings b)
++    {
++        if (superClass == null) {
++            return null;
++        }
++        if (superClass == Object.class) {
++            return TypeFactory.unknownType();
++        }
++        JavaType superSuper = _buildSuperClass(superClass.getSuperclass(), b);
++        return new SimpleType(superClass, b,
++                superSuper, null, null, null, false);
++    }
+ 
+     /*
+     /**********************************************************

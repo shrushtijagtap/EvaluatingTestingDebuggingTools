@@ -1,0 +1,24 @@
+diff --git a/JacksonCore_10/buggy/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java b/JacksonCore_10/fixed/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java
+index 976ef6e..7c37ffa 100644
+--- a/JacksonCore_10/buggy/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java
++++ b/JacksonCore_10/fixed/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java
+@@ -922,7 +922,8 @@ public final class ByteQuadsCanonicalizer
+         /* 31-Jul-2015, tatu: Note that spillover area does NOT end at end of array,
+          *   since "long names" area follows. Instead, need to calculate from hash size.
+          */
+-        if (_spilloverEnd >= hashArea.length) {
++        final int end = (_hashSize << 3);
++        if (_spilloverEnd >= end) {
+             if (_failOnDoS) {
+                 _reportTooManyCollisions();
+             }
+@@ -981,7 +982,8 @@ public final class ByteQuadsCanonicalizer
+          *    to work it out, but this is the simplest, fast and seems to do ok.
+          */
+         hash += (hash >>> 16); // to xor hi- and low- 16-bits
+-        hash ^= (hash >>> 12);
++        hash ^= (hash << 3); // shuffle back a bit
++        hash += (hash >>> 12); // and bit more
+         return hash;
+     }
+ 

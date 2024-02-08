@@ -1,0 +1,24 @@
+diff --git a/JacksonCore_14/buggy/com/fasterxml/jackson/core/io/IOContext.java b/JacksonCore_14/fixed/com/fasterxml/jackson/core/io/IOContext.java
+index 94797ee..18f50c8 100644
+--- a/JacksonCore_14/buggy/com/fasterxml/jackson/core/io/IOContext.java
++++ b/JacksonCore_14/fixed/com/fasterxml/jackson/core/io/IOContext.java
+@@ -271,16 +271,16 @@ public class IOContext
+ 
+     protected final void _verifyRelease(byte[] toRelease, byte[] src) {
+         // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer
+-        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }
++        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+     }
+ 
+     protected final void _verifyRelease(char[] toRelease, char[] src) {
+         // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer
+-        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }
++        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+     }
+ 
+     private IllegalArgumentException wrongBuf() {
+         // sanity check failed; trying to return different, smaller buffer.
+-return new IllegalArgumentException("Trying to release buffer not owned by the context"); 
++        return new IllegalArgumentException("Trying to release buffer smaller than original");
+     }
+ }

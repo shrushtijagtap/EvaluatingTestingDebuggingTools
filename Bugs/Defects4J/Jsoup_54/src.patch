@@ -1,0 +1,12 @@
+diff --git a/Jsoup_54/buggy/org/jsoup/helper/W3CDom.java b/Jsoup_54/fixed/org/jsoup/helper/W3CDom.java
+index 20aeeda..497e3ea 100644
+--- a/Jsoup_54/buggy/org/jsoup/helper/W3CDom.java
++++ b/Jsoup_54/fixed/org/jsoup/helper/W3CDom.java
+@@ -123,6 +123,7 @@ public class W3CDom {
+             for (Attribute attribute : source.attributes()) {
+                 // valid xml attribute names are: ^[a-zA-Z_:][-a-zA-Z0-9_:.]
+                 String key = attribute.getKey().replaceAll("[^-a-zA-Z0-9_:.]", "");
++                if (key.matches("[a-zA-Z_:]{1}[-a-zA-Z0-9_:.]*"))
+                     el.setAttribute(key, attribute.getValue());
+             }
+         }

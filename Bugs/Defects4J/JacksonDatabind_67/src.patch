@@ -1,0 +1,17 @@
+diff --git a/JacksonDatabind_67/buggy/com/fasterxml/jackson/databind/deser/BasicDeserializerFactory.java b/JacksonDatabind_67/fixed/com/fasterxml/jackson/databind/deser/BasicDeserializerFactory.java
+index 7d6a7bf..ade4b73 100644
+--- a/JacksonDatabind_67/buggy/com/fasterxml/jackson/databind/deser/BasicDeserializerFactory.java
++++ b/JacksonDatabind_67/fixed/com/fasterxml/jackson/databind/deser/BasicDeserializerFactory.java
+@@ -1400,9 +1400,10 @@ public abstract class BasicDeserializerFactory
+         // the only non-standard thing is this:
+         if (deser == null) {
+             if (type.isEnumType()) {
+-                return _createEnumKeyDeserializer(ctxt, type);
++                deser = _createEnumKeyDeserializer(ctxt, type);
++            } else {
++                deser = StdKeyDeserializers.findStringBasedKeyDeserializer(config, type);
+             }
+-            deser = StdKeyDeserializers.findStringBasedKeyDeserializer(config, type);
+         }
+         // and then post-processing
+         if (deser != null) {

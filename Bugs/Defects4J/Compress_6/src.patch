@@ -1,0 +1,29 @@
+diff --git a/Compress_6/buggy/org/apache/commons/compress/archivers/zip/ZipArchiveEntry.java b/Compress_6/fixed/org/apache/commons/compress/archivers/zip/ZipArchiveEntry.java
+index 6a7c1e9..fe5270f 100644
+--- a/Compress_6/buggy/org/apache/commons/compress/archivers/zip/ZipArchiveEntry.java
++++ b/Compress_6/fixed/org/apache/commons/compress/archivers/zip/ZipArchiveEntry.java
+@@ -61,6 +61,7 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
+      */
+     public ZipArchiveEntry(String name) {
+         super(name);
++        setName(name);
+     }
+ 
+     /**
+@@ -459,11 +460,13 @@ public class ZipArchiveEntry extends java.util.zip.ZipEntry
+             return false;
+         }
+         ZipArchiveEntry other = (ZipArchiveEntry) obj;
+-        if (name == null) {
+-            if (other.name != null) {
++        String myName = getName();
++        String otherName = other.getName();
++        if (myName == null) {
++            if (otherName != null) {
+                 return false;
+             }
+-        } else if (!name.equals(other.name)) {
++        } else if (!myName.equals(otherName)) {
+             return false;
+         }
+         return true;

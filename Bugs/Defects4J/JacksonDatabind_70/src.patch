@@ -1,0 +1,13 @@
+diff --git a/JacksonDatabind_70/buggy/com/fasterxml/jackson/databind/deser/impl/BeanPropertyMap.java b/JacksonDatabind_70/fixed/com/fasterxml/jackson/databind/deser/impl/BeanPropertyMap.java
+index dc79189..8031ee0 100644
+--- a/JacksonDatabind_70/buggy/com/fasterxml/jackson/databind/deser/impl/BeanPropertyMap.java
++++ b/JacksonDatabind_70/fixed/com/fasterxml/jackson/databind/deser/impl/BeanPropertyMap.java
+@@ -437,7 +437,7 @@ System.err.println("And new propr #"+slot+" '"+key+"'");
+             if (!found) {
+                 // 09-Jan-2017, tatu: Important: must check name slot and NOT property name,
+                 //   as only former is lower-case in case-insensitive case
+-                found = key.equals(prop.getName());
++                found = key.equals(_hashArea[i-1]);
+                 if (found) {
+                     // need to leave a hole here
+                     _propsInOrder[_findFromOrdered(prop)] = null;

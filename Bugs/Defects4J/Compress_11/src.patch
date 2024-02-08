@@ -1,0 +1,20 @@
+diff --git a/Compress_11/buggy/org/apache/commons/compress/archivers/ArchiveStreamFactory.java b/Compress_11/fixed/org/apache/commons/compress/archivers/ArchiveStreamFactory.java
+index a30cd5a..c831b60 100644
+--- a/Compress_11/buggy/org/apache/commons/compress/archivers/ArchiveStreamFactory.java
++++ b/Compress_11/fixed/org/apache/commons/compress/archivers/ArchiveStreamFactory.java
+@@ -237,6 +237,7 @@ public class ArchiveStreamFactory {
+                 return new TarArchiveInputStream(in);
+             }
+             // COMPRESS-117 - improve auto-recognition
++            if (signatureLength >= 512) {
+             try {
+                 TarArchiveInputStream tais = new TarArchiveInputStream(new ByteArrayInputStream(tarheader));
+                 tais.getNextEntry();
+@@ -246,6 +247,7 @@ public class ArchiveStreamFactory {
+                 // autodetection, simply not a TAR
+                 // ignored
+             }
++            }
+         } catch (IOException e) {
+             throw new ArchiveException("Could not use reset and mark operations.", e);
+         }

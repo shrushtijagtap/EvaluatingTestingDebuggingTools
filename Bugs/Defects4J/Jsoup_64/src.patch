@@ -1,0 +1,16 @@
+diff --git a/Jsoup_64/buggy/org/jsoup/parser/HtmlTreeBuilderState.java b/Jsoup_64/fixed/org/jsoup/parser/HtmlTreeBuilderState.java
+index f4b56f7..a9a9583 100644
+--- a/Jsoup_64/buggy/org/jsoup/parser/HtmlTreeBuilderState.java
++++ b/Jsoup_64/fixed/org/jsoup/parser/HtmlTreeBuilderState.java
+@@ -1486,10 +1486,10 @@ enum HtmlTreeBuilderState {
+     }
+ 
+     private static void handleRawtext(Token.StartTag startTag, HtmlTreeBuilder tb) {
+-        tb.insert(startTag);
+         tb.tokeniser.transition(TokeniserState.Rawtext);
+         tb.markInsertionMode();
+         tb.transition(Text);
++        tb.insert(startTag);
+     }
+ 
+     // lists of tags to search through. A little harder to read here, but causes less GC than dynamic varargs.

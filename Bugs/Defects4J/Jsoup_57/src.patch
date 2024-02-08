@@ -1,0 +1,13 @@
+diff --git a/Jsoup_57/buggy/org/jsoup/nodes/Attributes.java b/Jsoup_57/fixed/org/jsoup/nodes/Attributes.java
+index 49ff25d..8fdb654 100644
+--- a/Jsoup_57/buggy/org/jsoup/nodes/Attributes.java
++++ b/Jsoup_57/fixed/org/jsoup/nodes/Attributes.java
+@@ -122,7 +122,7 @@ public class Attributes implements Iterable<Attribute>, Cloneable {
+         for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {
+             String attrKey = it.next();
+             if (attrKey.equalsIgnoreCase(key))
+-                attributes.remove(attrKey);
++                it.remove();
+         }
+     }
+ 
