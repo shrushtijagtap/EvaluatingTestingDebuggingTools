@@ -1,0 +1,7 @@
+[<Line: +import com.microsoft.azure.management.network.NetworkInterface;
+>, <Line: +import com.microsoft.azure.management.network.NetworkInterfaces;
+>, <Line: +        for (String dnsServerIp : resource.dnsServers()) {
+>]
+[<Line: -import com.microsoft.azure.management.network.*;
+>, <Line: -        for(String dnsServerIp : resource.dnsServers()) {
+>]

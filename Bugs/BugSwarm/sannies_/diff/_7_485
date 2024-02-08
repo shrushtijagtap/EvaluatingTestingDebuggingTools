@@ -1,0 +1,45 @@
+[<Line: +package org.mp4parser.muxer.samples;
+>, <Line: +import org.junit.Assert;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.muxer.FileRandomAccessSourceImpl;
+>, <Line: +import org.mp4parser.tools.Hex;
+>, <Line: +import java.io.FileInputStream;
+>, <Line: +import java.io.RandomAccessFile;
+>, <Line: +    @Test
+>, <Line: +    public void checkSampleList() throws IOException, NoSuchAlgorithmException {
+>, <Line: +        String filename = this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile() +
+>, <Line: +                "/com/mp4parser/muxer/samples/1365070268951.mp4";
+>, <Line: +        IsoFile isoFile = new IsoFile(new FileInputStream(filename).getChannel());
+>, <Line: +        SampleList sl = new SampleList(1, isoFile, new FileRandomAccessSourceImpl(new RandomAccessFile(filename, "r")));
+>, <Line: +        MessageDigest md5 = MessageDigest.getInstance("MD5");
+>, <Line: +        for (int i = 0; i < sl.size(); i++) {
+>, <Line: +            //System.err.println("\"" + Hex.encodeHex(md5.digest(sl.get(i).asByteBuffer().array())) + "\",");
+>, <Line: +            byte[] sampleBytes = new byte[(int) sl.get(i).getSize()];
+>, <Line: +            sl.get(i).asByteBuffer().get(sampleBytes);
+>, <Line: +            Assert.assertEquals(sampleChecksum.get(i), Hex.encodeHex(md5.digest(sampleBytes)));
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.samples;
+>, <Line: -import com.coremedia.iso.Hex;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.TrackBox;
+>, <Line: -import com.coremedia.iso.boxes.mdat.SampleList;
+>, <Line: -import junit.framework.Assert;
+>, <Line: -/**
+>, <Line: - * Created by sannies on 1/9/14.
+>, <Line: - */
+>, <Line: -    @Test
+>, <Line: -    public void checkSampleList() throws IOException, NoSuchAlgorithmException {
+>, <Line: -        IsoFile isoFile = new IsoFile(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile() +
+>, <Line: -                "/com/googlecode/mp4parser/authoring/samples/1365070268951.mp4");
+>, <Line: -        SampleList sl = new SampleList(isoFile.getMovieBox().getBoxes(TrackBox.class).get(0));
+>, <Line: -        MessageDigest md5 = MessageDigest.getInstance("MD5");
+>, <Line: -        for (int i = 0; i < sl.size(); i++) {
+>, <Line: -            //System.err.println("\"" + Hex.encodeHex(md5.digest(sl.get(i).asByteBuffer().array())) + "\",");
+>, <Line: -            byte[] sampleBytes = new byte[(int) sl.get(i).getSize()];
+>, <Line: -            sl.get(i).asByteBuffer().get(sampleBytes);
+>, <Line: -            Assert.assertEquals(sampleChecksum.get(i), Hex.encodeHex(md5.digest(sampleBytes)));
+>, <Line: -        }
+>, <Line: -    }
+>]

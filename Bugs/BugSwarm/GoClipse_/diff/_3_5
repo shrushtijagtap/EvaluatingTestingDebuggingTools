@@ -1,0 +1,25 @@
+[<Line: +					buildTarget = createBuildTarget(project, buildTargetData);
+>, <Line: +				BuildTargetData newBuildTargetData = new BuildTargetData(targetName, isFirstConfig, false); 
+>, <Line: +	public BuildTarget createBuildTarget(IProject project, BuildTargetDataView buildTargetData) throws CommonException {
+>, <Line: +				buildTarget = createBuildTarget(buildInfo.getProject(), 
+>, <Line: +					new BuildTargetData(buildTargetName, false, false));
+>, <Line: +			boolean clearMarkers, boolean isAuto) throws CommonException {
+>, <Line: +		ArrayList2<BuildTarget> enabledTargets = getValidBuildInfo(project).getEnabledTargets(!isAuto);
+>, <Line: +		return newBuildOperation(opHandler, project, clearMarkers, enabledTargets);
+>, <Line: +				targetsToBuild.mapx((buildTarget) -> buildTarget.getBuildOperation(opHandler));
+>]
+[<Line: -import melnorme.lang.ide.core.project_model.ProjectBuildInfo;
+>, <Line: -					buildTarget = createBuildTarget3(project, buildTargetData);
+>, <Line: -				BuildTargetData newBuildTargetData = new BuildTargetData(targetName, isFirstConfig); 
+>, <Line: -		public abstract String getDefaultCheckArguments(BuildTarget bt) throws CommonException;
+>, <Line: -	public BuildTarget createBuildTarget3(IProject project, BuildTargetDataView buildTargetData) throws CommonException {
+>, <Line: -				buildTarget = createBuildTarget3(buildInfo.getProject(), new BuildTargetData(buildTargetName, false));
+>, <Line: -			boolean clearMarkers, boolean isCheck) throws CommonException {
+>, <Line: -		ArrayList2<BuildTarget> enabledTargets = getValidBuildInfo(project).getEnabledTargets();
+>, <Line: -		return newBuildOperation(opHandler, project, clearMarkers, enabledTargets, isCheck);
+>, <Line: -		return newBuildOperation(opHandler, project, clearMarkers, targetsToBuild, false);
+>, <Line: -	}
+>, <Line: -	public CompositeBuildOperation newBuildOperation(IOperationConsoleHandler opHandler, IProject project,
+>, <Line: -			boolean clearMarkers, Collection2<BuildTarget> targetsToBuild, boolean isCheck) throws CommonException {
+>, <Line: -				targetsToBuild.mapx((buildTarget) -> buildTarget.getBuildOperation(opHandler, isCheck));
+>]

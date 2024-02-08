@@ -1,0 +1,95 @@
+[<Line: +import com.github.rinde.rinsim.core.model.time.Clock.ClockEventType;
+>, <Line: +import com.github.rinde.rinsim.core.model.time.RealtimeClockController.RtClockEventType;
+>, <Line: +import com.github.rinde.rinsim.event.ListenerEventHistory;
+>, <Line: +import com.github.rinde.rinsim.testutil.TestUtil;
+>, <Line: +import com.google.common.collect.ImmutableSet;
+>, <Line: +  /**
+>, <Line: +   * Test unreachable code of enums.
+>, <Line: +   */
+>, <Line: +  @Test
+>, <Line: +  public void testEnums() {
+>, <Line: +    TestUtil.testEnum(ClockMode.class);
+>, <Line: +    TestUtil.testEnum(RtClockEventType.class);
+>, <Line: +  }
+>, <Line: +    final ListenerEventHistory history = new ListenerEventHistory();
+>, <Line: +    getModel().getEventAPI().addListener(history,
+>, <Line: +        ImmutableSet.<Enum<?>>builder()
+>, <Line: +            .add(ClockEventType.values())
+>, <Line: +            .add(RtClockEventType.values())
+>, <Line: +            .build());
+>, <Line: +        // start in sim time
+>, <Line: +        if (timeLapse.getTime() == 0) {
+>, <Line: +          assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +              ClockEventType.STARTED, RtClockEventType.SWITCH_TO_SIM_TIME);
+>, <Line: +        }
+>, <Line: +          if (timeLapse.getTime() == 100000) {
+>, <Line: +            assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +                ClockEventType.STARTED, RtClockEventType.SWITCH_TO_SIM_TIME);
+>, <Line: +          } else {
+>, <Line: +            assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +                ClockEventType.STARTED,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME);
+>, <Line: +          }
+>, <Line: +          if (timeLapse.getTime() == 100000) {
+>, <Line: +            assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +                ClockEventType.STARTED, RtClockEventType.SWITCH_TO_SIM_TIME);
+>, <Line: +          } else {
+>, <Line: +            assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +                ClockEventType.STARTED,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME);
+>, <Line: +          }
+>, <Line: +          if (timeLapse.getTime() == 100100) {
+>, <Line: +            assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +                ClockEventType.STARTED,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME);
+>, <Line: +          } else {
+>, <Line: +            assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +                ClockEventType.STARTED,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME);
+>, <Line: +          }
+>, <Line: +          if (timeLapse.getTime() == 100500) {
+>, <Line: +            assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +                ClockEventType.STARTED,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME);
+>, <Line: +          } else {
+>, <Line: +            assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +                ClockEventType.STARTED,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME);
+>, <Line: +          }
+>, <Line: +          if (timeLapse.getTime() == 100600) {
+>, <Line: +            assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +                ClockEventType.STARTED,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME);
+>, <Line: +          } else {
+>, <Line: +            assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +                ClockEventType.STARTED,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_REAL_TIME,
+>, <Line: +                RtClockEventType.SWITCH_TO_SIM_TIME);
+>, <Line: +          }
+>, <Line: +    assertThat(history.getEventTypeHistory()).containsExactly(
+>, <Line: +        ClockEventType.STARTED,
+>, <Line: +        RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +        RtClockEventType.SWITCH_TO_REAL_TIME,
+>, <Line: +        RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +        RtClockEventType.SWITCH_TO_REAL_TIME,
+>, <Line: +        RtClockEventType.SWITCH_TO_SIM_TIME,
+>, <Line: +        ClockEventType.STOPPED);
+>]
+[]

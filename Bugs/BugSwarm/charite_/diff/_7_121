@@ -1,0 +1,106 @@
+[<Line: +package de.charite.compbio.jannovar.progress;
+>, <Line: +import java.text.NumberFormat;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Locale;
+>, <Line: +import java.util.Timer;
+>, <Line: +import java.util.TimerTask;
+>, <Line: +import com.google.common.base.Joiner;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: +/**
+>, <Line: + * Helper for displaying progress
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class ProgressReporter extends TimerTask {
+>, <Line: +	private static ImmutableList<String> HEADERS = ImmutableList.of("Location", "processed.sites",
+>, <Line: +			"runtime.per.1M.sites", "completed", "total.runtime", "remaining");
+>, <Line: +	/** All contigs of the genome to expect */
+>, <Line: +	private final GenomeRegionList contigs;
+>, <Line: +	/** Current variant context */
+>, <Line: +	private VariantContext currentVC;
+>, <Line: +	/** Number of variant contexts */
+>, <Line: +	private int numProcessed;
+>, <Line: +	/** Number of seconds between intervals */
+>, <Line: +	private int seconds;
+>, <Line: +	/** Start time in miliseconds */
+>, <Line: +	private long startTime;
+>, <Line: +	public ProgressReporter(GenomeRegionList contigs, int seconds) {
+>, <Line: +		this.contigs = contigs;
+>, <Line: +		this.currentVC = null;
+>, <Line: +		this.numProcessed = 0;
+>, <Line: +		this.seconds = seconds;
+>, <Line: +		this.startTime = System.currentTimeMillis();
+>, <Line: +	}
+>, <Line: +	public void printHeader() {
+>, <Line: +		System.err.println(Joiner.on("\t").join(HEADERS));
+>, <Line: +	}
+>, <Line: +	public void print() {
+>, <Line: +		final VariantContext vc = currentVC;
+>, <Line: +		if (vc == null)
+>, <Line: +			return; // ignore
+>, <Line: +		final long elapsed = (System.currentTimeMillis() - this.startTime) / 1000;
+>, <Line: +		final double timeFor1MSites = elapsed / (this.numProcessed / 1000.0 / 1000.0);
+>, <Line: +		final long basesDone = contigs.lengthUpTo(vc.getContig(), vc.getStart() - 1);
+>, <Line: +		final long basesTotal = contigs.totalLength();
+>, <Line: +		final double percentDone = (100.0 * basesDone) / basesTotal;
+>, <Line: +		final long estimateTotal = (long) (elapsed / (percentDone / 100.0));
+>, <Line: +		final long estimateRemaining = estimateTotal - elapsed;
+>, <Line: +		ArrayList<String> arr = new ArrayList<>();
+>, <Line: +		arr.add(vc.getContig() + ":" + NumberFormat.getNumberInstance(Locale.US).format(vc.getStart()));
+>, <Line: +		arr.add(Integer.toString(this.numProcessed));
+>, <Line: +		arr.add(String.format("%.1f", timeFor1MSites));
+>, <Line: +		arr.add(String.format("%.1f%%", percentDone));
+>, <Line: +		arr.add(formatDuration(estimateTotal));
+>, <Line: +		arr.add(formatDuration(estimateRemaining));
+>, <Line: +		System.err.println(Joiner.on("\t").join(arr));
+>, <Line: +	}
+>, <Line: +	public String formatDuration(long seconds) {
+>, <Line: +		if (seconds > 60 * 60 * 24 * 1.5)
+>, <Line: +			return String.format("%.1f d", seconds / 60.0 / 60.0 / 24.0);
+>, <Line: +		else if (seconds > 60 * 60 * 1.5)
+>, <Line: +			return String.format("%.1f h", seconds / 60.0 / 60.0);
+>, <Line: +		else if (seconds > 60 * 1.5)
+>, <Line: +			return String.format("%.1f min", seconds / 60.0);
+>, <Line: +		else
+>, <Line: +			return String.format("%d s", seconds);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void run() {
+>, <Line: +		print();
+>, <Line: +	}
+>, <Line: +	public void start() {
+>, <Line: +		Timer timer = new Timer(true);
+>, <Line: +		timer.schedule(this, 0, this.seconds * 1000);
+>, <Line: +	}
+>, <Line: +	public VariantContext getCurrentVC() {
+>, <Line: +		return currentVC;
+>, <Line: +	}
+>, <Line: +	public synchronized void setCurrentVC(VariantContext currentVC) {
+>, <Line: +		this.numProcessed += 1;
+>, <Line: +		this.currentVC = currentVC;
+>, <Line: +	}
+>, <Line: +	public int getNumProcessed() {
+>, <Line: +		return numProcessed;
+>, <Line: +	}
+>, <Line: +	public void done() {
+>, <Line: +		final long elapsed = System.currentTimeMillis() - this.startTime;
+>, <Line: +		final double timeFor1MSites = (elapsed / 1000.0) / (this.numProcessed / 1000.0 / 1000.0);
+>, <Line: +		final long basesTotal = contigs.totalLength();
+>, <Line: +		final long basesDone = basesTotal;
+>, <Line: +		final double percentDone = (100.0 * basesDone) / basesTotal;
+>, <Line: +		final long estimateTotal = (long) (elapsed / (percentDone / 100.0));
+>, <Line: +		final long estimateRemaining = estimateTotal - elapsed;
+>, <Line: +		GenomeRegion last = contigs.getGenomeRegions().get(contigs.getGenomeRegions().size() - 1);
+>, <Line: +		ArrayList<String> arr = new ArrayList<>();
+>, <Line: +		arr.add(last.getContig() + ":" + (last.getBeginPos() + 1));
+>, <Line: +		arr.add(Integer.toString(this.numProcessed));
+>, <Line: +		arr.add(String.format("%.1f", timeFor1MSites));
+>, <Line: +		arr.add(String.format("%.1f%%", percentDone));
+>, <Line: +		arr.add(formatDuration(estimateTotal));
+>, <Line: +		arr.add(formatDuration(estimateRemaining));
+>, <Line: +		System.err.println(Joiner.on("\t").join(arr));
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

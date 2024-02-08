@@ -1,0 +1,15 @@
+[<Line: +    public void storeOntology(OWLOntology ontology, PrintWriter writer, OWLDocumentFormat format)
+>, <Line: +        throws OWLOntologyStorageException {
+>, <Line: +        OWLTutorialSyntaxRenderer renderer = new OWLTutorialSyntaxRenderer();
+>, <Line: +        renderer.render(ontology, writer);
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLRuntimeException;
+>, <Line: -    protected void storeOntology(OWLOntology ontology, PrintWriter writer, OWLDocumentFormat format)
+>, <Line: -            throws OWLOntologyStorageException {
+>, <Line: -        try {
+>, <Line: -            OWLTutorialSyntaxRenderer renderer = new OWLTutorialSyntaxRenderer();
+>, <Line: -            renderer.render(ontology, writer);
+>, <Line: -        } catch (OWLRuntimeException e) {
+>, <Line: -            throw new OWLRuntimeException(e);
+>, <Line: -        }
+>]

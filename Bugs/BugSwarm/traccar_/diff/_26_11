@@ -1,0 +1,8 @@
+[<Line: +public abstract class JsonGeocoder implements Geocoder {
+>, <Line: +    public JsonGeocoder(String url, final int cacheSize) {
+>, <Line: +                        callback.onFailure(new GeocoderException("Empty address"));
+>]
+[<Line: -public abstract class JsonReverseGeocoder implements ReverseGeocoder {
+>, <Line: -    public JsonReverseGeocoder(String url, final int cacheSize) {
+>, <Line: -                        callback.onFailure(new IllegalArgumentException("Empty address"));
+>]

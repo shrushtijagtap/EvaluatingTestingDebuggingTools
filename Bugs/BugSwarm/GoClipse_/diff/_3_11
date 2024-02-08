@@ -1,0 +1,33 @@
+[<Line: +package melnorme.lang.ide.core.operations.build;
+>, <Line: +	public ArrayList2<BuildTarget> getEnabledTargets(boolean normalBuild) {
+>, <Line: +			if(
+>, <Line: +				normalBuild && buildTarget.isNormalBuildEnabled() ||
+>, <Line: +				!normalBuild && buildTarget.isAutoBuildEnabled()
+>, <Line: +			) {
+>, <Line: +	public BuildTarget getDefaultBuildTarget(String targetName) {
+>, <Line: +		assertNotNull(targetName);
+>, <Line: +		ArrayList2<BuildTarget> defaultBuildTargets = buildMgr.getDefaultBuildTargets(project, bundleInfo);
+>, <Line: +		return defaultBuildTargets.findElement(
+>, <Line: +			(elem) -> targetName.equals(elem.getTargetName()));
+>, <Line: +	}
+>, <Line: +	public final void changeEnable(BuildTarget oldBuildTarget, 
+>, <Line: +			boolean newNormalBuildEnabled, boolean newAutoBuildEnabled) throws CommonException {
+>, <Line: +		buildTargetData.normalBuildEnabled = newNormalBuildEnabled;
+>, <Line: +		buildTargetData.autoBuildEnabled = newAutoBuildEnabled;
+>, <Line: +		changeBuildTarget(oldBuildTarget, buildMgr.createBuildTarget(project, buildTargetData));
+>, <Line: +		changeBuildTarget(oldBuildTarget, buildMgr.createBuildTarget(project, buildTargetData));
+>, <Line: +			newBuildTargets.add(buildMgr.createBuildTarget(project, buildTargetCursor.getData()));
+>]
+[<Line: -package melnorme.lang.ide.core.project_model;
+>, <Line: -import melnorme.lang.ide.core.operations.build.BuildManager;
+>, <Line: -import melnorme.lang.ide.core.operations.build.BuildManagerMessages;
+>, <Line: -import melnorme.lang.ide.core.operations.build.BuildTarget;
+>, <Line: -import melnorme.lang.ide.core.operations.build.BuildTargetData;
+>, <Line: -	public ArrayList2<BuildTarget> getEnabledTargets() {
+>, <Line: -			if(buildTarget.isEnabled()) {
+>, <Line: -	public void changeEnable(BuildTarget oldBuildTarget, boolean newEnabledValue) throws CommonException {
+>, <Line: -		buildTargetData.enabled = newEnabledValue;
+>, <Line: -		changeBuildTarget(oldBuildTarget, buildMgr.createBuildTarget3(project, buildTargetData));
+>, <Line: -		changeBuildTarget(oldBuildTarget, buildMgr.createBuildTarget3(project, buildTargetData));
+>, <Line: -			newBuildTargets.add(buildMgr.createBuildTarget3(project, buildTargetCursor.getData()));
+>]

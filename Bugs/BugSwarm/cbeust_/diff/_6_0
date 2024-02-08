@@ -1,0 +1,3 @@
+[<Line: +Fixed: GITHUB-1045 TestNG swallows exceptions silently if @ClassRule is used (Gili Tzabari & Julien Herr)
+>]
+[]

@@ -1,0 +1,10 @@
+[<Line: +        server_name = self.environ.get("SERVER_NAME", "localhost")
+>, <Line: +        server_port = int(self.environ.get("SERVER_PORT", "80"))
+>, <Line: +        server_host = "%s:%d" % (server_name, server_port)
+>, <Line: +        host = self.get_header("Host", server_host)
+>, <Line: +        if resolve: host = self.get_header("X-Forwarded-Host", host)
+>]
+[<Line: -        address = self.get_address(resolve = resolve)
+>, <Line: -        host = self.get_header("Host", address)
+>, <Line: -        if resolve: host = self.get_header("X-Forwarded-Host", self.address)
+>]

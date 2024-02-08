@@ -1,0 +1,17 @@
+[<Line: +package com.artemis.injection;
+>, <Line: +import com.artemis.World;
+>, <Line: +import com.artemis.utils.reflect.Field;
+>, <Line: +/**
+>, <Line: + * API used by {@link FieldHandler} to resolve field values in classes eligible for injection.
+>, <Line: + * @author Snorre E. Brekke
+>, <Line: + */
+>, <Line: +public interface FieldResolver {
+>, <Line: +    /**
+>, <Line: +     * Called after Wo
+>, <Line: +     * @param world
+>, <Line: +     */
+>, <Line: +    void initialize(World world);
+>, <Line: +    Object resolve(Class<?> fieldType, Field field);
+>, <Line: +}
+>]
+[]

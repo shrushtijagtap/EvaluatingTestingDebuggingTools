@@ -1,0 +1,59 @@
+[<Line: +/*  
+>, <Line: + * Copyright 2008 CoreMedia AG, Hamburg
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the License); 
+>, <Line: + * you may not use this file except in compliance with the License. 
+>, <Line: + * You may obtain a copy of the License at 
+>, <Line: + * 
+>, <Line: + *     http://www.apache.org/licenses/LICENSE-2.0 
+>, <Line: + * 
+>, <Line: + * Unless required by applicable law or agreed to in writing, software 
+>, <Line: + * distributed under the License is distributed on an AS IS BASIS, 
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+>, <Line: + * See the License for the specific language governing permissions and 
+>, <Line: + * limitations under the License. 
+>, <Line: + */
+>, <Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: +import java.nio.ByteBuffer;
+>, <Line: +/**
+>, <Line: + * <h1>4cc = "{@value #TYPE}"</h1>
+>, <Line: + * This box contains the media data. In video tracks, this box would contain video frames. A presentation may
+>, <Line: + * contain zero or more Media Data Boxes. The actual media data follows the type field; its structure is described
+>, <Line: + * by the metadata (see {@link SampleTableBox}).<br>
+>, <Line: + * In large presentations, it may be desirable to have more data in this box than a 32-bit size would permit. In this
+>, <Line: + * case, the large variant of the size field is used.<br>
+>, <Line: + * There may be any number of these boxes in the file (including zero, if all the media data is in other files). The
+>, <Line: + * metadata refers to media data by its absolute offset within the file (see {@link StaticChunkOffsetBox});
+>, <Line: + * so Media Data Box headers and free space may easily be skipped, and files without any box structure may
+>, <Line: + * also be referenced and used.
+>, <Line: + */
+>, <Line: +public final class MediaDataBox extends AbstractBox {
+>, <Line: +    public static final String TYPE = "mdat";
+>, <Line: +    ByteBuffer data;
+>, <Line: +    public MediaDataBox() {
+>, <Line: +        super(TYPE);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected long getContentSize() {
+>, <Line: +        return data.limit();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void _parseDetails(ByteBuffer content) {
+>, <Line: +        data = content;
+>, <Line: +        content.position(content.position() + content.remaining());
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected void getContent(ByteBuffer byteBuffer) {
+>, <Line: +        data.rewind();
+>, <Line: +        byteBuffer.put(data);
+>, <Line: +    }
+>, <Line: +    public ByteBuffer getData() {
+>, <Line: +        return data;
+>, <Line: +    }
+>, <Line: +    public void setData(ByteBuffer data) {
+>, <Line: +        this.data = data;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

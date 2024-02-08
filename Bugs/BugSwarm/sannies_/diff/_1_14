@@ -1,0 +1,12 @@
+[<Line: +        minorBrands.add("mp42");
+>, <Line: +        minorBrands.add("iso6");
+>, <Line: +        minorBrands.add("isom");
+>, <Line: +        return new FileTypeBox("iso6", 1, minorBrands);
+>, <Line: +            sgpd.setGroupingType(type);
+>, <Line: +                        index = j + 0x10001;
+>]
+[<Line: -        minorBrands.add("isom");
+>, <Line: -        minorBrands.add("iso2");
+>, <Line: -        return new FileTypeBox("isom", 0, minorBrands);
+>, <Line: -                        index = j + 1;
+>]

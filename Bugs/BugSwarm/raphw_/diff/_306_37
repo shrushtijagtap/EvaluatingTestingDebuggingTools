@@ -1,0 +1,22 @@
+[<Line: +        assertThat(InvocationHandlerAdapter.of(new Foo(FOO)).hashCode(), not(InvocationHandlerAdapter.of(new Foo(BAR)).hashCode()));
+>, <Line: +        assertThat(InvocationHandlerAdapter.of(new Foo(FOO)), not(InvocationHandlerAdapter.of(new Foo(BAR))));
+>, <Line: +        assertThat(InvocationHandlerAdapter.of(new Foo(FOO)).hashCode(), not(InvocationHandlerAdapter.of(new Foo(FOO), QUX).hashCode()));
+>, <Line: +        assertThat(InvocationHandlerAdapter.of(new Foo(FOO)), not(InvocationHandlerAdapter.of(new Foo(FOO), QUX)));
+>, <Line: +        assertThat(InvocationHandlerAdapter.of(new Foo(FOO), QUX).hashCode(), not(InvocationHandlerAdapter.toInstanceField(QUX).hashCode()));
+>, <Line: +        assertThat(InvocationHandlerAdapter.of(new Foo(FOO), QUX), not(InvocationHandlerAdapter.toInstanceField(QUX)));
+>, <Line: +        assertThat(InvocationHandlerAdapter.toInstanceField(QUX).hashCode(), not(InvocationHandlerAdapter.toInstanceField(FOO).hashCode()));
+>, <Line: +        assertThat(InvocationHandlerAdapter.toInstanceField(QUX), not(InvocationHandlerAdapter.toInstanceField(FOO)));
+>, <Line: +        assertThat(InvocationHandlerAdapter.toInstanceField(QUX).hashCode(), not(InvocationHandlerAdapter.of(new Foo(BAR), QUX).hashCode()));
+>, <Line: +        assertThat(InvocationHandlerAdapter.toInstanceField(QUX), not(InvocationHandlerAdapter.of(new Foo(BAR), QUX)));
+>]
+[<Line: -        assertThat(InvocationHandlerAdapter.of(new Foo(FOO)).hashCode(), not(is(InvocationHandlerAdapter.of(new Foo(BAR)).hashCode())));
+>, <Line: -        assertThat(InvocationHandlerAdapter.of(new Foo(FOO)), not(is(InvocationHandlerAdapter.of(new Foo(BAR)))));
+>, <Line: -        assertThat(InvocationHandlerAdapter.of(new Foo(FOO)).hashCode(), not(is(InvocationHandlerAdapter.of(new Foo(FOO), QUX).hashCode())));
+>, <Line: -        assertThat(InvocationHandlerAdapter.of(new Foo(FOO)), not(is(InvocationHandlerAdapter.of(new Foo(FOO), QUX))));
+>, <Line: -        assertThat(InvocationHandlerAdapter.of(new Foo(FOO), QUX).hashCode(), not(is(InvocationHandlerAdapter.toInstanceField(QUX).hashCode())));
+>, <Line: -        assertThat(InvocationHandlerAdapter.of(new Foo(FOO), QUX), not(is(InvocationHandlerAdapter.toInstanceField(QUX))));
+>, <Line: -        assertThat(InvocationHandlerAdapter.toInstanceField(QUX).hashCode(), not(is(InvocationHandlerAdapter.toInstanceField(FOO).hashCode())));
+>, <Line: -        assertThat(InvocationHandlerAdapter.toInstanceField(QUX), not(is(InvocationHandlerAdapter.toInstanceField(FOO))));
+>, <Line: -        assertThat(InvocationHandlerAdapter.toInstanceField(QUX).hashCode(), not(is(InvocationHandlerAdapter.of(new Foo(BAR), QUX).hashCode())));
+>, <Line: -        assertThat(InvocationHandlerAdapter.toInstanceField(QUX), not(is(InvocationHandlerAdapter.of(new Foo(BAR), QUX))));
+>]

@@ -1,0 +1,8 @@
+[<Line: + * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#pathItemObject"
+>, <Line: +   * @return List&lt;Server&gt; servers
+>, <Line: +   * @return List&lt;Parameter&gt; parameters
+>]
+[<Line: - * @link https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#pathItemObject
+>, <Line: -   * @return List<Server> servers
+>, <Line: -   * @return List<Parameter> parameters
+>]

@@ -1,0 +1,101 @@
+[<Line: +package backend;
+>, <Line: +import backend.resource.Model;
+>, <Line: +import backend.resource.MultiModel;
+>, <Line: +import org.apache.logging.log4j.Logger;
+>, <Line: +import prefs.Preferences;
+>, <Line: +import ui.UI;
+>, <Line: +import util.HTLog;
+>, <Line: +import util.Utility;
+>, <Line: +import util.events.RepoOpenedEvent;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.Set;
+>, <Line: +import java.util.concurrent.CompletableFuture;
+>, <Line: +import java.util.stream.Collectors;
+>, <Line: +public class Logic {
+>, <Line: +	private static final Logger logger = HTLog.get(Logic.class);
+>, <Line: +	private final MultiModel models = new MultiModel();
+>, <Line: +	private final UIManager uiManager;
+>, <Line: +	private final Preferences prefs;
+>, <Line: +	private RepoIO repoIO = new RepoIO();
+>, <Line: +	// Assumed to be always present when app starts
+>, <Line: +	public UserCredentials credentials = null;
+>, <Line: +	public Logic(UIManager uiManager, Preferences prefs) {
+>, <Line: +		this.uiManager = uiManager;
+>, <Line: +		this.prefs = prefs;
+>, <Line: +		// Pass the currently-empty model to the UI
+>, <Line: +		updateUI(models);
+>, <Line: +	}
+>, <Line: +	private CompletableFuture<Boolean> isRepositoryValid(String repoId) {
+>, <Line: +		return repoIO.isRepositoryValid(repoId);
+>, <Line: +	}
+>, <Line: +	public CompletableFuture<Boolean> login(String username, String password) {
+>, <Line: +		String message = "Logging in as " + username;
+>, <Line: +		logger.info(message);
+>, <Line: +		UI.status.displayMessage(message);
+>, <Line: +		credentials = new UserCredentials(username, password);
+>, <Line: +		return repoIO.login(credentials);
+>, <Line: +	}
+>, <Line: +	public void refresh() {
+>, <Line: +		String message = "Refreshing " + models.toModels().stream()
+>, <Line: +			.map(Model::getRepoId)
+>, <Line: +			.collect(Collectors.joining(", "));
+>, <Line: +		logger.info(message);
+>, <Line: +		UI.status.displayMessage(message);
+>, <Line: +		Utility.sequence(models.toModels().stream()
+>, <Line: +				.map(repoIO::updateModel)
+>, <Line: +				.collect(Collectors.toList()))
+>, <Line: +			.thenApply(models::replace)
+>, <Line: +			.thenAccept(this::updateUI)
+>, <Line: +			.exceptionally(HTLog::log);
+>, <Line: +	}
+>, <Line: +	private void updateUI(MultiModel models) {
+>, <Line: +		uiManager.update(models);
+>, <Line: +	}
+>, <Line: +	public CompletableFuture<Boolean> openRepository(String repoId) {
+>, <Line: +		assert Utility.isWellFormedRepoId(repoId);
+>, <Line: +		if (isAlreadyOpen(repoId) || models.isRepositoryPending(repoId)) {
+>, <Line: +			return Utility.unitFutureOf(false);
+>, <Line: +		}
+>, <Line: +		models.addPendingRepository(repoId);
+>, <Line: +		return isRepositoryValid(repoId).thenCompose(valid -> {
+>, <Line: +			if (!valid) {
+>, <Line: +				return Utility.unitFutureOf(false);
+>, <Line: +			} else {
+>, <Line: +				prefs.addToLastViewedRepositories(repoId);
+>, <Line: +				logger.info("Opening " + repoId);
+>, <Line: +				UI.status.displayMessage("Opening " + repoId);
+>, <Line: +				return repoIO.openRepository(repoId)
+>, <Line: +					.thenApply(models::addPending)
+>, <Line: +					.thenAccept(this::updateUI)
+>, <Line: +					.thenRun(() -> UI.events.triggerEvent(new RepoOpenedEvent(repoId)))
+>, <Line: +					.thenApply(n -> true)
+>, <Line: +					.exceptionally(HTLog.withResult(false));
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +	}
+>, <Line: +	public CompletableFuture<Map<Integer, IssueMetadata>> getIssueMetadata(String repoId, List<Integer> issues) {
+>, <Line: +		logger.info("Getting metadata for issues " + issues);
+>, <Line: +		return repoIO.getIssueMetadata(repoId, issues).thenApply(metadata -> {
+>, <Line: +			models.insertMetadata(repoId, metadata);
+>, <Line: +			return metadata;
+>, <Line: +		}).exceptionally(HTLog.withResult(new HashMap<>()));
+>, <Line: +	}
+>, <Line: +	public Set<String> getOpenRepositories() {
+>, <Line: +		return models.toModels().stream()
+>, <Line: +			.map(Model::getRepoId)
+>, <Line: +			.collect(Collectors.toSet());
+>, <Line: +	}
+>, <Line: +	public boolean isAlreadyOpen(String repoId) {
+>, <Line: +		return getOpenRepositories().contains(repoId);
+>, <Line: +	}
+>, <Line: +	public void setDefaultRepo(String repoId) {
+>, <Line: +		models.setDefaultRepo(repoId);
+>, <Line: +	}
+>, <Line: +	public String getDefaultRepo() {
+>, <Line: +		return models.getDefaultRepo();
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

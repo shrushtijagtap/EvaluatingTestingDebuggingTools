@@ -1,0 +1,68 @@
+[<Line: +package org.kairosdb.events;
+>, <Line: +import com.google.common.collect.ImmutableSortedMap;
+>, <Line: +import org.kairosdb.core.DataPoint;
+>, <Line: +import java.util.SortedMap;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 9/17/16.
+>, <Line: + Any listener that take a long time should use a separate thread
+>, <Line: + to do any work.  The calling thread is the protocol thread.
+>, <Line: + */
+>, <Line: +public class DataPointEvent
+>, <Line: +{
+>, <Line: +	private final String m_metricName;
+>, <Line: +	private final ImmutableSortedMap<String, String> m_tags;
+>, <Line: +	private final DataPoint m_dataPoint;
+>, <Line: +	private final int m_ttl;
+>, <Line: +	public DataPointEvent(String metricName, ImmutableSortedMap<String, String> tags, DataPoint dataPoint, int ttl)
+>, <Line: +	{
+>, <Line: +		m_metricName = metricName;
+>, <Line: +		m_tags = tags;
+>, <Line: +		m_dataPoint = dataPoint;
+>, <Line: +		m_ttl = ttl;
+>, <Line: +	}
+>, <Line: +	public DataPointEvent(String metricName, ImmutableSortedMap<String, String> tags, DataPoint dataPoint)
+>, <Line: +	{
+>, <Line: +		m_metricName = metricName;
+>, <Line: +		m_tags = tags;
+>, <Line: +		m_dataPoint = dataPoint;
+>, <Line: +		m_ttl = 0;
+>, <Line: +	}
+>, <Line: +	public String getMetricName()
+>, <Line: +	{
+>, <Line: +		return m_metricName;
+>, <Line: +	}
+>, <Line: +	public ImmutableSortedMap<String, String> getTags()
+>, <Line: +	{
+>, <Line: +		return m_tags;
+>, <Line: +	}
+>, <Line: +	public DataPoint getDataPoint()
+>, <Line: +	{
+>, <Line: +		return m_dataPoint;
+>, <Line: +	}
+>, <Line: +	public int getTtl()
+>, <Line: +	{
+>, <Line: +		return m_ttl;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object o)
+>, <Line: +	{
+>, <Line: +		if (this == o) return true;
+>, <Line: +		if (o == null || getClass() != o.getClass()) return false;
+>, <Line: +		DataPointEvent that = (DataPointEvent) o;
+>, <Line: +		if (m_ttl != that.m_ttl) return false;
+>, <Line: +		if (!m_metricName.equals(that.m_metricName)) return false;
+>, <Line: +		if (!m_tags.equals(that.m_tags)) return false;
+>, <Line: +		return m_dataPoint.equals(that.m_dataPoint);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode()
+>, <Line: +	{
+>, <Line: +		int result = m_metricName.hashCode();
+>, <Line: +		result = 31 * result + m_tags.hashCode();
+>, <Line: +		result = 31 * result + m_dataPoint.hashCode();
+>, <Line: +		result = 31 * result + m_ttl;
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

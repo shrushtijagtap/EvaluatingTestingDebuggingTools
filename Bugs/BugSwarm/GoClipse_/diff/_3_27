@@ -1,0 +1,6 @@
+[<Line: +	/** {@link CollectionUtil#findElement(java.util.Iterator, Predicate)} */
+>, <Line: +	default E findElement(Predicate<? super E> predicate) {
+>, <Line: +		return CollectionUtil.findElement(iterator(), predicate);
+>, <Line: +	}
+>]
+[]

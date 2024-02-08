@@ -1,0 +1,4 @@
+[<Line: +		<dependency org="org.mockito" name="mockito-core" rev="1.10.19" conf="test->default"/>
+>]
+[<Line: -		<dependency org="org.mockito" name="mockito-core" rev="1.9.5" conf="test->default"/>
+>]

@@ -1,0 +1,41 @@
+[<Line: +		<dependency>
+>, <Line: +			<groupId>com.github.jsonld-java</groupId>
+>, <Line: +			<artifactId>jsonld-java</artifactId>
+>, <Line: +			<version>0.5.0</version>
+>, <Line: +		</dependency>
+>, <Line: +		<dependency>
+>, <Line: +			<groupId>org.apache.httpcomponents</groupId>
+>, <Line: +			<artifactId>httpclient</artifactId>
+>, <Line: +			<version>4.5.1</version>
+>, <Line: +		</dependency>
+>, <Line: +		<dependency>
+>, <Line: +			<groupId>org.apache.httpcomponents</groupId>
+>, <Line: +			<artifactId>httpclient-cache</artifactId>
+>, <Line: +			<version>4.5.1</version>
+>, <Line: +		</dependency>
+>, <Line: +		<dependency>
+>, <Line: +			<groupId>org.apache.httpcomponents</groupId>
+>, <Line: +			<artifactId>httpcore</artifactId>
+>, <Line: +			<version>4.4.3</version>
+>, <Line: +		</dependency>
+>, <Line: +		<dependency>
+>, <Line: +			<groupId>commons-codec</groupId>
+>, <Line: +			<artifactId>commons-codec</artifactId>
+>, <Line: +			<version>1.9</version>
+>, <Line: +		</dependency>
+>, <Line: +		<dependency>
+>, <Line: +			<groupId>commons-logging</groupId>
+>, <Line: +			<artifactId>commons-logging</artifactId>
+>, <Line: +			<version>1.2</version>
+>, <Line: +		</dependency>
+>, <Line: +							jsonld-java*;scope=compile|runtime|provided;inline=false,
+>, <Line: +							groupId=org.apache.httpcomponents;scope=compile|runtime|provided;inline=false,
+>, <Line: +							!javax.servlet,
+>, <Line: +							!org.apache.avalon.framework.logger,
+>, <Line: +							!org.apache.log*,
+>, <Line: +							net.sf.ehcache.*;resolution:=optional,
+>, <Line: +							net.spy.memcached.*;resolution:=optional,
+>]
+[<Line: -							jsonld-java;scope=compile|runtime|provided;inline=false,
+>, <Line: -							groupId=org.apache.httpcomponent;scope=compile|runtime|provided;inline=false,
+>]

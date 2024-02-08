@@ -1,0 +1,22 @@
+[<Line: +import it.unibz.krdb.obda.model.ObjectConstant;
+>, <Line: +import it.unibz.krdb.obda.model.ValueConstant;
+>, <Line: +import it.unibz.krdb.obda.ontology.DataPropertyAssertion;
+>, <Line: +import it.unibz.krdb.obda.ontology.DataPropertyExpression;
+>, <Line: +/**
+>, <Line: + * Represents DataPropertyAssertion from the OWL 2 QL Specification
+>, <Line: + * 
+>, <Line: + * DataPropertyAssertion := 'DataPropertyAssertion' '(' axiomAnnotations
+>, <Line: + * 					DataPropertyExpression sourceIndividual targetValue ')'
+>, <Line: + * DataPropertyExpression := DataProperty
+>, <Line: + * 
+>, <Line: + * Support for owl:topDataProperty and owl:bottomDataProperty
+>, <Line: + * 
+>, <Line: + * @author Roman Kontchakov
+>, <Line: + *
+>, <Line: + */
+>]
+[<Line: -import it.unibz.krdb.obda.model.ObjectConstant;
+>, <Line: -import it.unibz.krdb.obda.model.ValueConstant;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataPropertyAssertion;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataPropertyExpression;
+>]

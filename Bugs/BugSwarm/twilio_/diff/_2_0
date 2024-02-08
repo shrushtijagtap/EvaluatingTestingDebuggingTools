@@ -1,0 +1,15 @@
+[<Line: +[2017-06-16] Version 7.12.0
+>, <Line: +--------------------------
+>, <Line: +- Remove client-side max page size validation.
+>, <Line: +- Add `locality` field to `AvailablePhoneNumbers`.
+>, <Line: +- Add `origin` field to `IncomingPhoneNumbers`.
+>, <Line: +- Add `inLocality` parameter to `AvailablePhoneNumbers`.
+>, <Line: +- Add `origin` parameter to `IncomingPhoneNumbers`.
+>, <Line: +- Add new sync categories to `UsageRecords`.
+>, <Line: +- Add `getPage()` method for reentrant paging.
+>, <Line: +- Add `input` to `<Gather>`.
+>, <Line: +- Remove mandatory url parameter in `<Play>`.
+>, <Line: +- Parallelize tests.
+>, <Line: +- Update `Language` enum.
+>]
+[]

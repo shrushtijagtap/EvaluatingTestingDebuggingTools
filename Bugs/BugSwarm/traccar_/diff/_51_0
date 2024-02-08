@@ -1,0 +1,14 @@
+[<Line: +                return formatCommand(command, "**,imei:{%s},A", Command.KEY_UNIQUE_ID);
+>, <Line: +                return formatCommand(command, "**,imei:{%s},B", Command.KEY_UNIQUE_ID);
+>, <Line: +                return formatCommand(command, "**,imei:{%s},C,{%s}", this, Command.KEY_UNIQUE_ID, Command.KEY_FREQUENCY);
+>, <Line: +                return formatCommand(command, "**,imei:{%s},K", Command.KEY_UNIQUE_ID);
+>, <Line: +                return formatCommand(command, "**,imei:{%s},L", Command.KEY_UNIQUE_ID);
+>, <Line: +                return formatCommand(command, "**,imei:{%s},M", Command.KEY_UNIQUE_ID);
+>]
+[<Line: -                return formatCommand(command, "**,imei:{%s},A;", Command.KEY_UNIQUE_ID);
+>, <Line: -                return formatCommand(command, "**,imei:{%s},B;", Command.KEY_UNIQUE_ID);
+>, <Line: -                return formatCommand(command, "**,imei:{%s},C,{%s};", this, Command.KEY_UNIQUE_ID, Command.KEY_FREQUENCY);
+>, <Line: -                return formatCommand(command, "**,imei:{%s},K;", Command.KEY_UNIQUE_ID);
+>, <Line: -                return formatCommand(command, "**,imei:{%s},L;", Command.KEY_UNIQUE_ID);
+>, <Line: -                return formatCommand(command, "**,imei:{%s},M;", Command.KEY_UNIQUE_ID);
+>]

@@ -1,0 +1,385 @@
+[<Line: +	private void translate(CodeBlock.Index index, Codes.Convert c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		bytecodes.add(new Bytecode.Load(c.operand(0), convertUnderlyingType(c.type(0))));
+>, <Line: +		addCoercion(c.type(0), c.result, freeSlot, constants, bytecodes);
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), convertUnderlyingType(c.result)));
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.Update code, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		bytecodes.add(new Bytecode.Load(code.target(0), convertUnderlyingType(code.type(0))));
+>, <Line: +		bytecodes.add(new Bytecode.Store(code.target(0), convertUnderlyingType(code.afterType)));
+>, <Line: +			jt = convertUnderlyingType(c.type(0));
+>, <Line: +		JvmType jt = convertUnderlyingType(c.type(0));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), jt));
+>, <Line: +		JvmType jt = convertUnderlyingType(c.type(0));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), jt));
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.ArrayGenerator c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		JvmType elementType = convertUnderlyingType(c.type(0).element());
+>, <Line: +		addWriteConversion(c.type(0).element(), bytecodes);
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "generate", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), WHILEYARRAY));
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.LengthOf c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		bytecodes.add(new Bytecode.Load(c.operand(0), convertUnderlyingType((Type) c.type(0))));
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "length", ftype, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), WHILEYINT));
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.IndexOf c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		JvmType.Function ftype = new JvmType.Function(JAVA_LANG_OBJECT, WHILEYARRAY, WHILEYINT);
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "get", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +		addReadConversion(c.type(0).element(), bytecodes);
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), convertUnderlyingType(c.type(0).element())));
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.Fail c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(JAVA_LANG_RUNTIMEEXCEPTION, "<init>", ftype, Bytecode.InvokeMode.SPECIAL));
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.FieldLoad c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		JvmType.Function ftype = new JvmType.Function(JAVA_LANG_OBJECT, WHILEYRECORD, JAVA_LANG_STRING);
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYRECORD, "get", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), convertUnderlyingType(c.fieldType())));
+>, <Line: +		JvmType type = convertUnderlyingType(c.type(0));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), type));
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.Invert c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		JvmType type = convertUnderlyingType(c.type(0));
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYBYTE, "compliment", ftype, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), type));
+>, <Line: +		JvmType srcType = convertUnderlyingType(c.type(0));
+>, <Line: +		bytecodes.add(new Bytecode.Invoke((JvmType.Clazz) srcType, name, ftype, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), targetType));
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.NewObject c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		JvmType type = convertUnderlyingType(c.type(0));
+>, <Line: +		bytecodes.add(new Bytecode.Load(c.operand(0), convertUnderlyingType(c.type(0).element())));
+>, <Line: +		addWriteConversion(c.type(0).element(), bytecodes);
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYOBJECT, "<init>", ftype, Bytecode.InvokeMode.SPECIAL));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), type));
+>, <Line: +		JvmType type = convertUnderlyingType(c.type(0));
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYOBJECT, "state", ftype, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +		Type.Reference pt = (Type.Reference) c.type(0);
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), convertUnderlyingType(c.type(0).element())));
+>, <Line: +	protected void translate(CodeBlock.Index index, Codes.NewArray c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "<init>", ftype, Bytecode.InvokeMode.SPECIAL));
+>, <Line: +			bytecodes.add(new Bytecode.Load(c.operands()[i], convertUnderlyingType(c.type(0).element())));
+>, <Line: +			addWriteConversion(c.type(0).element(), bytecodes);
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "internal_add", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), WHILEYARRAY));
+>, <Line: +		JvmType.Function ftype = new JvmType.Function(JAVA_LANG_OBJECT, JAVA_LANG_OBJECT, JAVA_LANG_OBJECT);
+>, <Line: +		HashMap<String, Type> fields = code.type(0).fields();
+>, <Line: +			bytecodes.add(new Bytecode.Load(register, convertUnderlyingType(fieldType)));
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(WHILEYRECORD, "put", ftype, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +		bytecodes.add(new Bytecode.Store(code.target(0), WHILEYRECORD));
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.Lambda c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		lambdas.add(buildLambda(c.name, c.type(0), lambda_id));
+>, <Line: +					Type pt = c.type(0).params().get(i);
+>, <Line: +					bytecodes.add(new Bytecode.Load(operand, convertUnderlyingType(pt)));
+>, <Line: +		JvmType.Function ftype = new JvmType.Function(T_VOID, JAVA_LANG_OBJECT_ARRAY);
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(lambdaClassType, "<init>", ftype, Bytecode.InvokeMode.SPECIAL));
+>, <Line: +		JvmType.Clazz clazz = (JvmType.Clazz) convertUnderlyingType(c.type(0));
+>, <Line: +		bytecodes.add(new Bytecode.Store(c.target(0), clazz));
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.Invoke c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +			JvmType parameterType = convertUnderlyingType(c.type(0).params().get(i));
+>, <Line: +		String mangled = nameMangle(c.name.name(), c.type(0));
+>, <Line: +		JvmType.Clazz owner = new JvmType.Clazz(mid.parent().toString().replace('/', '.'), mid.last());
+>, <Line: +		JvmType.Function type = convertFunType(c.type(0));
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(owner, mangled, type, Bytecode.InvokeMode.STATIC));
+>, <Line: +		List<Type> returns = c.type(0).returns();
+>, <Line: +		if (targets.length == 0 && !returns.isEmpty()) {
+>, <Line: +			bytecodes.add(new Bytecode.Pop(convertUnderlyingType(c.type(0).returns().get(0))));
+>, <Line: +		} else if (targets.length == 1) {
+>, <Line: +		} else if (targets.length > 1) {
+>, <Line: +			// Multiple return values are provided, and these will have been
+>, <Line: +			// encoded into an object array.
+>, <Line: +			decodeOperandArray(c.type(0).returns(), targets, bytecodes);
+>, <Line: +	private void translate(CodeBlock.Index index, Codes.IndirectInvoke c, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		Type.FunctionOrMethod ft = c.type(0);
+>, <Line: +		bytecodes.add(new Bytecode.Load(c.reference(), convertUnderlyingType(ft)));
+>, <Line: +		encodeOperandArray(ft.params(), c.parameters(), bytecodes);
+>, <Line: +		JvmType.Function type = new JvmType.Function(JAVA_LANG_OBJECT, JAVA_LANG_OBJECT_ARRAY);
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(owner, "call", type, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +		} else if (targets.length == 1) {
+>, <Line: +			internalFailure("multiple returns not supported", filename,
+>, <Line: +					rootBlock.attribute(index, SourceLocation.class));
+>, <Line: +	private void translate(Constant v, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +	protected void translate(Constant.Null e, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +	protected void translate(Constant.Bool e, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		JvmType.Function ftype = new JvmType.Function(WHILEYTYPE, JAVA_LANG_STRING);
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYTYPE, "valueOf", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +	protected void translate(Constant.Byte e, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYBYTE, "valueOf", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +	protected void translate(Constant.Integer e, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(WHILEYINT, "valueOf", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(WHILEYINT, "valueOf", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(WHILEYINT, "<init>", ftype, Bytecode.InvokeMode.SPECIAL));
+>, <Line: +	protected void translate(Constant.Decimal e, int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: +				bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "valueOf", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +				bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "valueOf", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +				bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "<init>", ftype, Bytecode.InvokeMode.SPECIAL));
+>, <Line: +			JvmType.Function ftype = new JvmType.Function(WHILEYRAT, T_INT, T_INT);
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "valueOf", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +			JvmType.Function ftype = new JvmType.Function(WHILEYRAT, T_LONG, T_LONG);
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "valueOf", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "<init>", ftype, Bytecode.InvokeMode.SPECIAL));
+>, <Line: +	protected void translate(Constant.Array lv, int freeSlot, ArrayList<ClassFile> lambdas,
+>, <Line: +			ArrayList<Bytecode> bytecodes) {
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "<init>", ftype, Bytecode.InvokeMode.SPECIAL));
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "add", ftype, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +	protected void translate(Constant.Record expr, int freeSlot, ArrayList<ClassFile> lambdas,
+>, <Line: +			ArrayList<Bytecode> bytecodes) {
+>, <Line: +		JvmType.Function ftype = new JvmType.Function(JAVA_LANG_OBJECT, JAVA_LANG_OBJECT, JAVA_LANG_OBJECT);
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(WHILEYRECORD, "put", ftype, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +	protected void translate(Constant.Lambda c, int freeSlot, ArrayList<ClassFile> lambdas,
+>, <Line: +			ArrayList<Bytecode> bytecodes) {
+>, <Line: +		JvmType.Clazz lambdaClassType = new JvmType.Clazz(owner.pkg(), owner.lastComponent().first(),
+>, <Line: +				Integer.toString(lambda_id));
+>, <Line: +		JvmType.Function ftype = new JvmType.Function(T_VOID, JAVA_LANG_OBJECT_ARRAY);
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(lambdaClassType, "<init>", ftype, Bytecode.InvokeMode.SPECIAL));
+>, <Line: +	protected ClassFile buildLambda(NameID name, Type.FunctionOrMethod type, int id) {
+>, <Line: +		JvmType.Clazz lambdaClassType = new JvmType.Clazz(owner.pkg(), owner.lastComponent().first(),
+>, <Line: +				Integer.toString(id));
+>, <Line: +		ClassFile cf = new ClassFile(CLASS_VERSION, lambdaClassType, WHILEYLAMBDA, new ArrayList<JvmType.Clazz>(),
+>, <Line: +				modifiers);
+>, <Line: +		JvmType.Function constructorType = new JvmType.Function(JvmTypes.T_VOID, JAVA_LANG_OBJECT_ARRAY);
+>, <Line: +		ClassFile.Method constructor = new ClassFile.Method("<init>", constructorType, modifiers);
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYLAMBDA, "<init>", constructorType, Bytecode.InvokeMode.SPECIAL));
+>, <Line: +		jasm.attributes.Code code = new jasm.attributes.Code(bytecodes, new ArrayList<Handler>(), constructor);
+>, <Line: +		JvmType.Function callFnType = new JvmType.Function(JvmTypes.JAVA_LANG_OBJECT, JAVA_LANG_OBJECT_ARRAY);
+>, <Line: +		ClassFile.Method callFn = new ClassFile.Method("call", callFnType, modifiers);
+>, <Line: +				new JvmType.Function(JAVA_LANG_OBJECT_ARRAY, JAVA_LANG_OBJECT_ARRAY), Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +		JvmType.Clazz owner = new JvmType.Clazz(mid.parent().toString().replace('/', '.'), mid.last());
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(owner, mangled, fnType, Bytecode.InvokeMode.STATIC));
+>, <Line: +		code = new jasm.attributes.Code(bytecodes, new ArrayList<Handler>(), callFn);
+>, <Line: +	protected void addCoercion(Type from, Type to, int freeSlot, HashMap<JvmConstant, Integer> constants,
+>, <Line: +			JvmType.Function ft = new JvmType.Function(convertUnderlyingType(to), convertUnderlyingType(from));
+>, <Line: +			bytecodes.add(new Bytecode.Invoke(owner, name, ft, Bytecode.InvokeMode.STATIC));
+>, <Line: +	private void encodeOperandArray(List<Type> types, int[] operands, ArrayList<Bytecode> bytecodes) {
+>, <Line: +		encodeOperandArray(types.toArray(new Type[types.size()]),operands,bytecodes);
+>, <Line: +	}
+>, <Line: +	private void encodeOperandArray(Type[] types, int[] operands, ArrayList<Bytecode> bytecodes) {
+>, <Line: +			Type type = types[i];
+>]
+[<Line: -	private void translate(CodeBlock.Index index, Codes.Convert c,
+>, <Line: -			int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		bytecodes.add(new Bytecode.Load(c.operand(0), convertUnderlyingType(c
+>, <Line: -				.type())));
+>, <Line: -		addCoercion(c.type(), c.result, freeSlot, constants, bytecodes);
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(),
+>, <Line: -				convertUnderlyingType(c.result)));
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.Update code,
+>, <Line: -			int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		bytecodes.add(new Bytecode.Load(code.target(),
+>, <Line: -				convertUnderlyingType(code.type())));
+>, <Line: -		bytecodes.add(new Bytecode.Store(code.target(),
+>, <Line: -				convertUnderlyingType(code.afterType)));
+>, <Line: -			jt = convertUnderlyingType(c.type());
+>, <Line: -		JvmType jt = convertUnderlyingType(c.type());
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), jt));
+>, <Line: -		JvmType jt = convertUnderlyingType(c.type());
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), jt));
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.ArrayGenerator c,
+>, <Line: -			int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		JvmType elementType = convertUnderlyingType(c.type().element());
+>, <Line: -		addWriteConversion(c.type().element(), bytecodes);
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "generate", ftype,
+>, <Line: -				Bytecode.InvokeMode.STATIC));
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), WHILEYARRAY));
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.LengthOf c,
+>, <Line: -			int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		bytecodes.add(new Bytecode.Load(c.operand(0),
+>, <Line: -				convertUnderlyingType((Type) c.type())));
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "length", ftype,
+>, <Line: -				Bytecode.InvokeMode.VIRTUAL));
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), WHILEYINT));
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.IndexOf c,
+>, <Line: -			int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		JvmType.Function ftype = new JvmType.Function(JAVA_LANG_OBJECT,
+>, <Line: -				WHILEYARRAY, WHILEYINT);
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "get", ftype,
+>, <Line: -				Bytecode.InvokeMode.STATIC));
+>, <Line: -		addReadConversion(c.type().element(), bytecodes);
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), convertUnderlyingType(c
+>, <Line: -				.type().element())));
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.Fail c, int freeSlot,
+>, <Line: -			ArrayList<Bytecode> bytecodes) {
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(JAVA_LANG_RUNTIMEEXCEPTION, "<init>",
+>, <Line: -				ftype, Bytecode.InvokeMode.SPECIAL));
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.FieldLoad c,
+>, <Line: -			int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		JvmType.Function ftype = new JvmType.Function(JAVA_LANG_OBJECT,
+>, <Line: -				WHILEYRECORD, JAVA_LANG_STRING);
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYRECORD, "get", ftype,
+>, <Line: -				Bytecode.InvokeMode.STATIC));
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), convertUnderlyingType(c
+>, <Line: -				.fieldType())));
+>, <Line: -		JvmType type = convertUnderlyingType(c.type());
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), type));
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.Invert c, int freeSlot,
+>, <Line: -			ArrayList<Bytecode> bytecodes) {
+>, <Line: -		JvmType type = convertUnderlyingType(c.type());
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYBYTE, "compliment", ftype,
+>, <Line: -				Bytecode.InvokeMode.VIRTUAL));
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), type));
+>, <Line: -		JvmType srcType = convertUnderlyingType(c.type());
+>, <Line: -		bytecodes.add(new Bytecode.Invoke((JvmType.Clazz) srcType, name, ftype,
+>, <Line: -				Bytecode.InvokeMode.VIRTUAL));
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), targetType));
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.NewObject c,
+>, <Line: -			int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		JvmType type = convertUnderlyingType(c.type());
+>, <Line: -		bytecodes.add(new Bytecode.Load(c.operand(0), convertUnderlyingType(c
+>, <Line: -				.type().element())));
+>, <Line: -		addWriteConversion(c.type().element(), bytecodes);
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYOBJECT, "<init>", ftype,
+>, <Line: -				Bytecode.InvokeMode.SPECIAL));
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), type));
+>, <Line: -		JvmType type = convertUnderlyingType(c.type());
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYOBJECT, "state", ftype,
+>, <Line: -				Bytecode.InvokeMode.VIRTUAL));
+>, <Line: -		Type.Reference pt = (Type.Reference) c.type();
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), convertUnderlyingType(c
+>, <Line: -				.type().element())));
+>, <Line: -	protected void translate(CodeBlock.Index index, Codes.NewArray c,
+>, <Line: -			int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "<init>", ftype,
+>, <Line: -				Bytecode.InvokeMode.SPECIAL));
+>, <Line: -			bytecodes.add(new Bytecode.Load(c.operands()[i],
+>, <Line: -					convertUnderlyingType(c.type().element())));
+>, <Line: -			addWriteConversion(c.type().element(), bytecodes);
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "internal_add",
+>, <Line: -					ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), WHILEYARRAY));
+>, <Line: -		JvmType.Function ftype = new JvmType.Function(JAVA_LANG_OBJECT,
+>, <Line: -				JAVA_LANG_OBJECT, JAVA_LANG_OBJECT);
+>, <Line: -		HashMap<String, Type> fields = code.type().fields();
+>, <Line: -			bytecodes.add(new Bytecode.Load(register,
+>, <Line: -					convertUnderlyingType(fieldType)));
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYRECORD, "put", ftype,
+>, <Line: -					Bytecode.InvokeMode.VIRTUAL));
+>, <Line: -		bytecodes.add(new Bytecode.Store(code.target(), WHILEYRECORD));
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.Lambda c, int freeSlot,
+>, <Line: -			ArrayList<Bytecode> bytecodes) {
+>, <Line: -		lambdas.add(buildLambda(c.name, c.type(), lambda_id));
+>, <Line: -					Type pt = c.type().params().get(i);
+>, <Line: -					bytecodes.add(new Bytecode.Load(operand,
+>, <Line: -							convertUnderlyingType(pt)));
+>, <Line: -		JvmType.Function ftype = new JvmType.Function(T_VOID,
+>, <Line: -				JAVA_LANG_OBJECT_ARRAY);
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(lambdaClassType, "<init>", ftype,
+>, <Line: -				Bytecode.InvokeMode.SPECIAL));
+>, <Line: -		JvmType.Clazz clazz = (JvmType.Clazz) convertUnderlyingType(c.type());
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), clazz));
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.Invoke c, int freeSlot,
+>, <Line: -			ArrayList<Bytecode> bytecodes) {
+>, <Line: -			JvmType parameterType = convertUnderlyingType(c.type().params()
+>, <Line: -					.get(i));
+>, <Line: -		String mangled = nameMangle(c.name.name(), c.type());
+>, <Line: -		JvmType.Clazz owner = new JvmType.Clazz(mid.parent().toString()
+>, <Line: -				.replace('/', '.'), mid.last());
+>, <Line: -		JvmType.Function type = convertFunType(c.type());
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(owner, mangled, type,
+>, <Line: -				Bytecode.InvokeMode.STATIC));
+>, <Line: -		List<Type> returns = c.type().returns();
+>, <Line: -		if(targets.length == 0 && !returns.isEmpty()) {
+>, <Line: -			bytecodes.add(new Bytecode.Pop(convertUnderlyingType(c.type().returns().get(0))));
+>, <Line: -		} else if(targets.length == 1){
+>, <Line: -		} else if(targets.length > 1){
+>, <Line: -			// Multiple return values are provided, and these will have been encoded into an object array.
+>, <Line: -			decodeOperandArray(c.type().returns(),targets,bytecodes);
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.IndirectInvoke c,
+>, <Line: -			int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		Type.FunctionOrMethod ft = c.type();
+>, <Line: -		bytecodes.add(new Bytecode.Load(c.reference(),
+>, <Line: -				convertUnderlyingType(ft)));
+>, <Line: -		encodeOperandArray(ft.params(),c.parameters(),bytecodes);
+>, <Line: -		JvmType.Function type = new JvmType.Function(JAVA_LANG_OBJECT,
+>, <Line: -				JAVA_LANG_OBJECT_ARRAY);
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(owner, "call", type,
+>, <Line: -				Bytecode.InvokeMode.VIRTUAL));
+>, <Line: -		} else if(targets.length == 1) {
+>, <Line: -			internalFailure("multiple returns not supported", filename, rootBlock.attribute(index, SourceLocation.class));
+>, <Line: -	private void translate(Constant v, int freeSlot,
+>, <Line: -			ArrayList<Bytecode> bytecodes) {
+>, <Line: -	protected void translate(Constant.Null e, int freeSlot,
+>, <Line: -			ArrayList<Bytecode> bytecodes) {
+>, <Line: -	protected void translate(Constant.Bool e, int freeSlot,
+>, <Line: -			ArrayList<Bytecode> bytecodes) {
+>, <Line: -		JvmType.Function ftype = new JvmType.Function(WHILEYTYPE,
+>, <Line: -				JAVA_LANG_STRING);
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYTYPE, "valueOf", ftype,
+>, <Line: -				Bytecode.InvokeMode.STATIC));
+>, <Line: -	protected void translate(Constant.Byte e, int freeSlot,
+>, <Line: -			ArrayList<Bytecode> bytecodes) {
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYBYTE, "valueOf", ftype,
+>, <Line: -				Bytecode.InvokeMode.STATIC));
+>, <Line: -	protected void translate(Constant.Integer e, int freeSlot,
+>, <Line: -			ArrayList<Bytecode> bytecodes) {
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYINT, "valueOf", ftype,
+>, <Line: -					Bytecode.InvokeMode.STATIC));
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYINT, "valueOf", ftype,
+>, <Line: -					Bytecode.InvokeMode.STATIC));
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYINT, "<init>", ftype,
+>, <Line: -					Bytecode.InvokeMode.SPECIAL));
+>, <Line: -	protected void translate(Constant.Decimal e, int freeSlot,
+>, <Line: -			ArrayList<Bytecode> bytecodes) {
+>, <Line: -				bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "valueOf", ftype,
+>, <Line: -						Bytecode.InvokeMode.STATIC));
+>, <Line: -				bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "valueOf", ftype,
+>, <Line: -						Bytecode.InvokeMode.STATIC));
+>, <Line: -				bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "<init>", ftype,
+>, <Line: -						Bytecode.InvokeMode.SPECIAL));
+>, <Line: -			JvmType.Function ftype = new JvmType.Function(WHILEYRAT, T_INT,
+>, <Line: -					T_INT);
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "valueOf", ftype,
+>, <Line: -					Bytecode.InvokeMode.STATIC));
+>, <Line: -			JvmType.Function ftype = new JvmType.Function(WHILEYRAT, T_LONG,
+>, <Line: -					T_LONG);
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "valueOf", ftype,
+>, <Line: -					Bytecode.InvokeMode.STATIC));
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYRAT, "<init>", ftype,
+>, <Line: -					Bytecode.InvokeMode.SPECIAL));
+>, <Line: -	protected void translate(Constant.Array lv, int freeSlot,
+>, <Line: -			ArrayList<ClassFile> lambdas, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "<init>", ftype,
+>, <Line: -				Bytecode.InvokeMode.SPECIAL));
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYARRAY, "add", ftype,
+>, <Line: -					Bytecode.InvokeMode.VIRTUAL));
+>, <Line: -	protected void translate(Constant.Record expr, int freeSlot,
+>, <Line: -			ArrayList<ClassFile> lambdas, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		JvmType.Function ftype = new JvmType.Function(JAVA_LANG_OBJECT,
+>, <Line: -				JAVA_LANG_OBJECT, JAVA_LANG_OBJECT);
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYRECORD, "put", ftype,
+>, <Line: -					Bytecode.InvokeMode.VIRTUAL));
+>, <Line: -	protected void translate(Constant.Lambda c, int freeSlot,
+>, <Line: -			ArrayList<ClassFile> lambdas, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		JvmType.Clazz lambdaClassType = new JvmType.Clazz(owner.pkg(), owner
+>, <Line: -				.lastComponent().first(), Integer.toString(lambda_id));
+>, <Line: -		JvmType.Function ftype = new JvmType.Function(T_VOID,
+>, <Line: -				JAVA_LANG_OBJECT_ARRAY);
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(lambdaClassType, "<init>", ftype,
+>, <Line: -				Bytecode.InvokeMode.SPECIAL));
+>, <Line: -	protected ClassFile buildLambda(NameID name, Type.FunctionOrMethod type,
+>, <Line: -			int id) {
+>, <Line: -		JvmType.Clazz lambdaClassType = new JvmType.Clazz(owner.pkg(), owner
+>, <Line: -				.lastComponent().first(), Integer.toString(id));
+>, <Line: -		ClassFile cf = new ClassFile(CLASS_VERSION, lambdaClassType,
+>, <Line: -				WHILEYLAMBDA, new ArrayList<JvmType.Clazz>(), modifiers);
+>, <Line: -		JvmType.Function constructorType = new JvmType.Function(
+>, <Line: -				JvmTypes.T_VOID, JAVA_LANG_OBJECT_ARRAY);
+>, <Line: -		ClassFile.Method constructor = new ClassFile.Method("<init>",
+>, <Line: -				constructorType, modifiers);
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYLAMBDA, "<init>",
+>, <Line: -				constructorType, Bytecode.InvokeMode.SPECIAL));
+>, <Line: -		jasm.attributes.Code code = new jasm.attributes.Code(bytecodes,
+>, <Line: -				new ArrayList<Handler>(), constructor);
+>, <Line: -		JvmType.Function callFnType = new JvmType.Function(
+>, <Line: -				JvmTypes.JAVA_LANG_OBJECT, JAVA_LANG_OBJECT_ARRAY);
+>, <Line: -		ClassFile.Method callFn = new ClassFile.Method("call", callFnType,
+>, <Line: -				modifiers);
+>, <Line: -				new JvmType.Function(JAVA_LANG_OBJECT_ARRAY,
+>, <Line: -						JAVA_LANG_OBJECT_ARRAY), Bytecode.InvokeMode.VIRTUAL));
+>, <Line: -		JvmType.Clazz owner = new JvmType.Clazz(mid.parent().toString()
+>, <Line: -				.replace('/', '.'), mid.last());
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(owner, mangled, fnType,
+>, <Line: -				Bytecode.InvokeMode.STATIC));
+>, <Line: -		code = new jasm.attributes.Code(bytecodes, new ArrayList<Handler>(),
+>, <Line: -				callFn);
+>, <Line: -	protected void addCoercion(Type from, Type to, int freeSlot,
+>, <Line: -			HashMap<JvmConstant, Integer> constants,
+>, <Line: -			JvmType.Function ft = new JvmType.Function(
+>, <Line: -					convertUnderlyingType(to), convertUnderlyingType(from));
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(owner, name, ft,
+>, <Line: -					Bytecode.InvokeMode.STATIC));
+>, <Line: -	private void encodeOperandArray(List<Type> types, int[] operands, ArrayList<Bytecode> bytecodes) {
+>, <Line: -			Type type = types.get(i);
+>]

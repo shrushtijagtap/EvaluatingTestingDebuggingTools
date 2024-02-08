@@ -1,0 +1,16 @@
+[<Line: +	/**
+>, <Line: +	 * Whether or not to consider overlapping variants as identical (behaviour of other tools,
+>, <Line: +	 * default: false
+>, <Line: +	 */
+>, <Line: +	public DBAnnotationOptions(boolean reportOverlapping, boolean reportOverlappingAsIdentical,
+>, <Line: +			String identifierPrefix, MultipleMatchBehaviour multiMatchBehaviour) {
+>, <Line: +		return "DBAnnotationOptions [reportOverlapping=" + reportOverlapping
+>, <Line: +				+ ", reportOverlappingAsMatching=" + reportOverlappingAsMatching
+>, <Line: +				+ ", identifierPrefix=" + identifierPrefix + ", multiMatchBehaviour="
+>]
+[<Line: -	/** Whether or not to consider overlapping variants as identical (behaviour of other tools, default: false */
+>, <Line: -	public DBAnnotationOptions(boolean reportOverlapping, boolean reportOverlappingAsIdentical, String identifierPrefix,
+>, <Line: -			MultipleMatchBehaviour multiMatchBehaviour) {
+>, <Line: -		return "DBAnnotationOptions [reportOverlapping=" + reportOverlapping + ", reportOverlappingAsMatching="
+>, <Line: -				+ reportOverlappingAsMatching + ", identifierPrefix=" + identifierPrefix + ", multiMatchBehaviour="
+>]

@@ -1,0 +1,32 @@
+[<Line: +        assertThat(new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getName(), is(FOO));
+>, <Line: +        assertThat(new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getModifiers(), is(MODIFIERS));
+>, <Line: +        assertThat(new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getSuperClass(), is(superClass));
+>, <Line: +        assertThat(new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getInterfaces().size(), is(1));
+>, <Line: +        assertThat(new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getInterfaces().getOnly(), is(interfaceType));
+>, <Line: +        new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getDeclaredFields();
+>, <Line: +        new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getDeclaredMethods();
+>, <Line: +        new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getDeclaredAnnotations();
+>, <Line: +        new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getTypeVariables();
+>, <Line: +        new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).isMemberClass();
+>, <Line: +        new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).isAnonymousClass();
+>, <Line: +        new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).isLocalClass();
+>, <Line: +        new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getEnclosingMethod();
+>, <Line: +        new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getEnclosingType();
+>, <Line: +        new TypeDescription.Latent(FOO, MODIFIERS, superClass, interfaceType).getDeclaredTypes();
+>]
+[<Line: -        assertThat(new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getName(), is(FOO));
+>, <Line: -        assertThat(new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getModifiers(), is(MODIFIERS));
+>, <Line: -        assertThat(new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getSuperClass(), is(superClass));
+>, <Line: -        assertThat(new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getInterfaces().size(), is(1));
+>, <Line: -        assertThat(new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getInterfaces().getOnly(), is(interfaceType));
+>, <Line: -        new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getDeclaredFields();
+>, <Line: -        new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getDeclaredMethods();
+>, <Line: -        new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getDeclaredAnnotations();
+>, <Line: -        new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getTypeVariables();
+>, <Line: -        new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).isMemberClass();
+>, <Line: -        new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).isAnonymousClass();
+>, <Line: -        new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).isLocalClass();
+>, <Line: -        new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getEnclosingMethod();
+>, <Line: -        new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getEnclosingType();
+>, <Line: -        new TypeDescription.Latent(FOO, MODIFIERS, superClass, Collections.singletonList(interfaceType)).getDeclaredTypes();
+>]

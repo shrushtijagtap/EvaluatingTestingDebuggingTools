@@ -1,0 +1,8 @@
+[<Line: +public class GisgraphyGeocoder extends JsonGeocoder {
+>, <Line: +    public GisgraphyGeocoder() {
+>, <Line: +    public GisgraphyGeocoder(String url, int cacheSize) {
+>]
+[<Line: -public class GisgraphyReverseGeocoder extends JsonReverseGeocoder {
+>, <Line: -    public GisgraphyReverseGeocoder() {
+>, <Line: -    public GisgraphyReverseGeocoder(String url, int cacheSize) {
+>]

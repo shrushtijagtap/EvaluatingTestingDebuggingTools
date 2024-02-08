@@ -1,0 +1,15 @@
+[<Line: +import com.microsoft.azure.management.network.implementation.api.NetworkInterfaceInner;
+>, <Line: +    @Override
+>, <Line: +    public List<String> networkInterfaceIds() {
+>, <Line: +        List<String> ids = new ArrayList<>();
+>, <Line: +        if (this.inner().networkInterfaces() != null) {
+>, <Line: +            for (NetworkInterfaceInner inner : this.inner().networkInterfaces()) {
+>, <Line: +                ids.add(inner.id());
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return Collections.unmodifiableList(ids);
+>, <Line: +    }
+>, <Line: + }
+>]
+[<Line: -}
+>]

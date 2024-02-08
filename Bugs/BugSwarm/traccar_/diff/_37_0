@@ -1,0 +1,226 @@
+[<Line: +    protected Object decodeBasic(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) throws Exception {
+>, <Line: +        int length = buf.readUnsignedByte();
+>, <Line: +        int dataLength = length - 5;
+>, <Line: +        int type = buf.readUnsignedByte();
+>, <Line: +        if (type == MSG_LOGIN) {
+>, <Line: +            String imei = ChannelBuffers.hexDump(buf.readBytes(8)).substring(1);
+>, <Line: +            buf.readUnsignedShort(); // type
+>, <Line: +            // Timezone offset
+>, <Line: +            if (dataLength > 10) {
+>, <Line: +                int extensionBits = buf.readUnsignedShort();
+>, <Line: +                int hours = (extensionBits >> 4) / 100;
+>, <Line: +                int minutes = (extensionBits >> 4) % 100;
+>, <Line: +                int offset = (hours * 60 + minutes) * 60;
+>, <Line: +                if ((extensionBits & 0x8) != 0) {
+>, <Line: +                    offset = -offset;
+>, <Line: +                }
+>, <Line: +                if (!forceTimeZone) {
+>, <Line: +                    timeZone.setRawOffset(offset * 1000);
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            if (getDeviceSession(channel, remoteAddress, imei) != null) {
+>, <Line: +                buf.skipBytes(buf.readableBytes() - 6);
+>, <Line: +                sendResponse(channel, type, buf.readUnsignedShort());
+>, <Line: +            }
+>, <Line: +        } else {
+>, <Line: +            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);
+>, <Line: +            if (deviceSession == null) {
+>, <Line: +                return null;
+>, <Line: +            }
+>, <Line: +            Position position = new Position();
+>, <Line: +            position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: +            position.setProtocol(getProtocolName());
+>, <Line: +            if (type == MSG_LBS_EXTEND) {
+>, <Line: +                DateBuilder dateBuilder = new DateBuilder(timeZone)
+>, <Line: +                        .setDate(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())
+>, <Line: +                        .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte());
+>, <Line: +                getLastLocation(position, dateBuilder.getDate());
+>, <Line: +                int mcc = buf.readUnsignedShort();
+>, <Line: +                int mnc = buf.readUnsignedByte();
+>, <Line: +                Network network = new Network();
+>, <Line: +                for (int i = 0; i < 7; i++) {
+>, <Line: +                    network.addCellTower(CellTower.from(
+>, <Line: +                            mcc, mnc, buf.readUnsignedShort(), buf.readUnsignedMedium(), -buf.readUnsignedByte()));
+>, <Line: +                position.setNetwork(network);
+>, <Line: +            } else if (type == MSG_STRING) {
+>, <Line: +                getLastLocation(position, null);
+>, <Line: +                int commandLength = buf.readUnsignedByte();
+>, <Line: +                if (commandLength > 0) {
+>, <Line: +                    buf.readUnsignedByte(); // server flag (reserved)
+>, <Line: +                    position.set(Position.KEY_COMMAND,
+>, <Line: +                            buf.readBytes(commandLength - 1).toString(StandardCharsets.US_ASCII));
+>, <Line: +            } else if (isSupported(type)) {
+>, <Line: +                if (hasGps(type)) {
+>, <Line: +                    decodeGps(position, buf);
+>, <Line: +                } else {
+>, <Line: +                    getLastLocation(position, null);
+>, <Line: +                if (hasLbs(type)) {
+>, <Line: +                    decodeLbs(position, buf, hasStatus(type));
+>, <Line: +                }
+>, <Line: +                if (hasStatus(type)) {
+>, <Line: +                    decodeStatus(position, buf);
+>, <Line: +                }
+>, <Line: +                if (type == MSG_GPS_LBS_1 && buf.readableBytes() == 4 + 6) {
+>, <Line: +                    position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());
+>, <Line: +                }
+>, <Line: +            } else {
+>, <Line: +                buf.skipBytes(dataLength);
+>, <Line: +                if (type != MSG_COMMAND_0 && type != MSG_COMMAND_1 && type != MSG_COMMAND_2) {
+>, <Line: +                    sendResponse(channel, type, buf.readUnsignedShort());
+>, <Line: +                }
+>, <Line: +                return null;
+>, <Line: +            }
+>, <Line: +            if (buf.readableBytes() > 6) {
+>, <Line: +                buf.skipBytes(buf.readableBytes() - 6);
+>, <Line: +            }
+>, <Line: +            sendResponse(channel, type, buf.readUnsignedShort());
+>, <Line: +            return position;
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +    protected Object decodeExtended(Channel channel, SocketAddress remoteAddress, ChannelBuffer buf) throws Exception {
+>, <Line: +        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);
+>, <Line: +        if (deviceSession == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        buf.readUnsignedShort(); // length
+>, <Line: +        int type = buf.readUnsignedByte();
+>, <Line: +        if (type == MSG_INFO) {
+>, <Line: +            int subType = buf.readUnsignedByte();
+>, <Line: +            Position position = new Position();
+>, <Line: +            position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: +            position.setProtocol(getProtocolName());
+>, <Line: +            getLastLocation(position, null);
+>, <Line: +            if (subType == 0x00) {
+>, <Line: +                position.set(Position.KEY_POWER, buf.readUnsignedShort() * 0.01);
+>, <Line: +                return position;
+>, <Line: +            } else if (subType == 0x05) {
+>, <Line: +                int flags = buf.readUnsignedByte();
+>, <Line: +                position.set("door", BitUtil.check(flags, 0));
+>, <Line: +                position.set(Position.PREFIX_IO + 1, BitUtil.check(flags, 2));
+>, <Line: +            } else if (subType == 0x0d) {
+>, <Line: +                buf.skipBytes(6);
+>, <Line: +                return decodeFuelData(position, buf.toString(
+>, <Line: +                        buf.readerIndex(), buf.readableBytes() - 4 - 2, StandardCharsets.US_ASCII));
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected Object decode(
+>, <Line: +            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+>, <Line: +        ChannelBuffer buf = (ChannelBuffer) msg;
+>, <Line: +        int header = buf.readShort();
+>, <Line: +        if (header == 0x7878) {
+>, <Line: +            return decodeBasic(channel, remoteAddress, buf);
+>, <Line: +        } else if (header == 0x7979) {
+>, <Line: +            return decodeExtended(channel, remoteAddress, buf);
+>]
+[<Line: -    @Override
+>, <Line: -    protected Object decode(
+>, <Line: -            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+>, <Line: -        ChannelBuffer buf = (ChannelBuffer) msg;
+>, <Line: -        int header = buf.readShort();
+>, <Line: -        if (header == 0x7878) {
+>, <Line: -            int length = buf.readUnsignedByte();
+>, <Line: -            int dataLength = length - 5;
+>, <Line: -            int type = buf.readUnsignedByte();
+>, <Line: -            if (type == MSG_LOGIN) {
+>, <Line: -                String imei = ChannelBuffers.hexDump(buf.readBytes(8)).substring(1);
+>, <Line: -                buf.readUnsignedShort(); // type
+>, <Line: -                // Timezone offset
+>, <Line: -                if (dataLength > 10) {
+>, <Line: -                    int extensionBits = buf.readUnsignedShort();
+>, <Line: -                    int hours = (extensionBits >> 4) / 100;
+>, <Line: -                    int minutes = (extensionBits >> 4) % 100;
+>, <Line: -                    int offset = (hours * 60 + minutes) * 60;
+>, <Line: -                    if ((extensionBits & 0x8) != 0) {
+>, <Line: -                        offset = -offset;
+>, <Line: -                    }
+>, <Line: -                    if (!forceTimeZone) {
+>, <Line: -                        timeZone.setRawOffset(offset * 1000);
+>, <Line: -                    }
+>, <Line: -                if (getDeviceSession(channel, remoteAddress, imei) != null) {
+>, <Line: -                    buf.skipBytes(buf.readableBytes() - 6);
+>, <Line: -                    sendResponse(channel, type, buf.readUnsignedShort());
+>, <Line: -            } else {
+>, <Line: -                DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);
+>, <Line: -                if (deviceSession == null) {
+>, <Line: -                    return null;
+>, <Line: -                Position position = new Position();
+>, <Line: -                position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: -                position.setProtocol(getProtocolName());
+>, <Line: -                if (type == MSG_LBS_EXTEND) {
+>, <Line: -                    DateBuilder dateBuilder = new DateBuilder(timeZone)
+>, <Line: -                            .setDate(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())
+>, <Line: -                            .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte());
+>, <Line: -                    getLastLocation(position, dateBuilder.getDate());
+>, <Line: -                    int mcc = buf.readUnsignedShort();
+>, <Line: -                    int mnc = buf.readUnsignedByte();
+>, <Line: -                    Network network = new Network();
+>, <Line: -                    for (int i = 0; i < 7; i++) {
+>, <Line: -                        network.addCellTower(CellTower.from(
+>, <Line: -                                mcc, mnc, buf.readUnsignedShort(), buf.readUnsignedMedium(), -buf.readUnsignedByte()));
+>, <Line: -                    }
+>, <Line: -                    position.setNetwork(network);
+>, <Line: -                } else if (type == MSG_STRING) {
+>, <Line: -                    getLastLocation(position, null);
+>, <Line: -                    int commandLength = buf.readUnsignedByte();
+>, <Line: -                    if (commandLength > 0) {
+>, <Line: -                        buf.readUnsignedByte(); // server flag (reserved)
+>, <Line: -                        position.set(Position.KEY_COMMAND,
+>, <Line: -                                buf.readBytes(commandLength - 1).toString(StandardCharsets.US_ASCII));
+>, <Line: -                    }
+>, <Line: -                } else if (isSupported(type)) {
+>, <Line: -                    if (hasGps(type)) {
+>, <Line: -                        decodeGps(position, buf);
+>, <Line: -                    } else {
+>, <Line: -                        getLastLocation(position, null);
+>, <Line: -                    }
+>, <Line: -                    if (hasLbs(type)) {
+>, <Line: -                        decodeLbs(position, buf, hasStatus(type));
+>, <Line: -                    }
+>, <Line: -                    if (hasStatus(type)) {
+>, <Line: -                        decodeStatus(position, buf);
+>, <Line: -                    }
+>, <Line: -                    if (type == MSG_GPS_LBS_1 && buf.readableBytes() == 4 + 6) {
+>, <Line: -                        position.set(Position.KEY_ODOMETER, buf.readUnsignedInt());
+>, <Line: -                    }
+>, <Line: -                } else {
+>, <Line: -                    buf.skipBytes(dataLength);
+>, <Line: -                    if (type != MSG_COMMAND_0 && type != MSG_COMMAND_1 && type != MSG_COMMAND_2) {
+>, <Line: -                        sendResponse(channel, type, buf.readUnsignedShort());
+>, <Line: -                    }
+>, <Line: -                    return null;
+>, <Line: -                }
+>, <Line: -                if (buf.readableBytes() > 6) {
+>, <Line: -                    buf.skipBytes(buf.readableBytes() - 6);
+>, <Line: -                }
+>, <Line: -                sendResponse(channel, type, buf.readUnsignedShort());
+>, <Line: -            }
+>, <Line: -        } else if (header == 0x7979) {
+>, <Line: -            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);
+>, <Line: -            if (deviceSession == null) {
+>, <Line: -                return null;
+>, <Line: -            buf.readUnsignedShort(); // length
+>, <Line: -            int type = buf.readUnsignedByte();
+>, <Line: -            if (type == MSG_INFO) {
+>, <Line: -                int subType = buf.readUnsignedByte();
+>, <Line: -                Position position = new Position();
+>, <Line: -                position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: -                position.setProtocol(getProtocolName());
+>, <Line: -                getLastLocation(position, null);
+>, <Line: -                if (subType == 0x00) {
+>, <Line: -                    position.set(Position.KEY_POWER, buf.readUnsignedShort() * 0.01);
+>, <Line: -                    return position;
+>, <Line: -                } else if (subType == 0x05) {
+>, <Line: -                    int flags = buf.readUnsignedByte();
+>, <Line: -                    position.set("door", BitUtil.check(flags, 0));
+>, <Line: -                    position.set(Position.PREFIX_IO + 1, BitUtil.check(flags, 2));
+>, <Line: -                    return position;
+>, <Line: -                } else if (subType == 0x0d) {
+>, <Line: -                    buf.skipBytes(6);
+>, <Line: -                    return decodeFuelData(position, buf.toString(
+>, <Line: -                            buf.readerIndex(), buf.readableBytes() - 4 - 2, StandardCharsets.US_ASCII));
+>, <Line: -                }
+>, <Line: -            }
+>]

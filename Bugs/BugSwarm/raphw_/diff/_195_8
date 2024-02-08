@@ -1,0 +1,60 @@
+[<Line: +package net.bytebuddy.description.type;
+>, <Line: +import net.bytebuddy.ClassFileVersion;
+>, <Line: +import net.bytebuddy.test.utility.MockitoRule;
+>, <Line: +import net.bytebuddy.test.utility.ObjectPropertyAssertion;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Rule;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.junit.rules.TestRule;
+>, <Line: +import org.mockito.Mock;
+>, <Line: +import static org.hamcrest.CoreMatchers.is;
+>, <Line: +import static org.junit.Assert.assertThat;
+>, <Line: +import static org.mockito.Mockito.when;
+>, <Line: +public class TypeDescriptionGenericOfParameterizedTypeRenderingDelegateTest {
+>, <Line: +    private static final String FOO = "foo", BAR = "bar";
+>, <Line: +    @Rule
+>, <Line: +    public TestRule mockitoRule = new MockitoRule(this);
+>, <Line: +    @Mock
+>, <Line: +    private TypeDescription typeDescription, erasure;
+>, <Line: +    @Mock
+>, <Line: +    private TypeDescription.Generic ownerType;
+>, <Line: +    @Before
+>, <Line: +    public void setUp() throws Exception {
+>, <Line: +        when(typeDescription.getName()).thenReturn(FOO + "." + BAR);
+>, <Line: +        when(typeDescription.getSimpleName()).thenReturn(BAR);
+>, <Line: +        when(ownerType.asErasure()).thenReturn(erasure);
+>, <Line: +        when(erasure.getName()).thenReturn(FOO);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testJava9Capable() throws Exception {
+>, <Line: +        StringBuilder stringBuilder = new StringBuilder();
+>, <Line: +        TypeDescription.Generic.OfParameterizedType.RenderingDelegate.JAVA_9_CAPABLE_VM.apply(stringBuilder, typeDescription, ownerType);
+>, <Line: +        assertThat(stringBuilder.toString(), is("$" + BAR));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testLegacyParameterized() throws Exception {
+>, <Line: +        when(ownerType.getSort()).thenReturn(TypeDefinition.Sort.PARAMETERIZED);
+>, <Line: +        StringBuilder stringBuilder = new StringBuilder();
+>, <Line: +        TypeDescription.Generic.OfParameterizedType.RenderingDelegate.LEGACY_VM.apply(stringBuilder, typeDescription, ownerType);
+>, <Line: +        assertThat(stringBuilder.toString(), is("." + BAR));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testLegacyNonParameterized() throws Exception {
+>, <Line: +        when(ownerType.getSort()).thenReturn(TypeDefinition.Sort.NON_GENERIC);
+>, <Line: +        StringBuilder stringBuilder = new StringBuilder();
+>, <Line: +        TypeDescription.Generic.OfParameterizedType.RenderingDelegate.LEGACY_VM.apply(stringBuilder, typeDescription, ownerType);
+>, <Line: +        assertThat(stringBuilder.toString(), is("." + FOO + "." + BAR));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testCurrent() throws Exception {
+>, <Line: +        assertThat(TypeDescription.Generic.OfParameterizedType.RenderingDelegate.CURRENT, is(ClassFileVersion.ofThisVm().isAtLeast(ClassFileVersion.JAVA_V9)
+>, <Line: +                ? TypeDescription.Generic.OfParameterizedType.RenderingDelegate.JAVA_9_CAPABLE_VM
+>, <Line: +                : TypeDescription.Generic.OfParameterizedType.RenderingDelegate.LEGACY_VM));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testObjectProperties() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(TypeDescription.Generic.OfParameterizedType.RenderingDelegate.class).apply();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

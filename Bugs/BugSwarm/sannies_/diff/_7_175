@@ -1,0 +1,58 @@
+[<Line: +package org.mp4parser.boxes.dece;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import org.mp4parser.tools.Utf8;
+>, <Line: +    public static class BrandEntry {
+>, <Line: +        String iso_brand;
+>, <Line: +        String version;
+>, <Line: +        public BrandEntry(String iso_brand, String version) {
+>, <Line: +            this.iso_brand = iso_brand;
+>, <Line: +            this.version = version;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public boolean equals(Object o) {
+>, <Line: +            if (this == o) return true;
+>, <Line: +            if (o == null || getClass() != o.getClass()) return false;
+>, <Line: +            BrandEntry that = (BrandEntry) o;
+>, <Line: +            if (iso_brand != null ? !iso_brand.equals(that.iso_brand) : that.iso_brand != null) return false;
+>, <Line: +            if (version != null ? !version.equals(that.version) : that.version != null) return false;
+>, <Line: +            return true;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public int hashCode() {
+>, <Line: +            int result = iso_brand != null ? iso_brand.hashCode() : 0;
+>, <Line: +            result = 31 * result + (version != null ? version.hashCode() : 0);
+>, <Line: +            return result;
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.dece;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.Utf8;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -    public static class BrandEntry {
+>, <Line: -        public BrandEntry(String iso_brand, String version) {
+>, <Line: -            this.iso_brand = iso_brand;
+>, <Line: -            this.version = version;
+>, <Line: -        }
+>, <Line: -        String iso_brand;
+>, <Line: -        String version;
+>, <Line: -        @Override
+>, <Line: -        public boolean equals(Object o) {
+>, <Line: -            if (this == o) return true;
+>, <Line: -            if (o == null || getClass() != o.getClass()) return false;
+>, <Line: -            BrandEntry that = (BrandEntry) o;
+>, <Line: -            if (iso_brand != null ? !iso_brand.equals(that.iso_brand) : that.iso_brand != null) return false;
+>, <Line: -            if (version != null ? !version.equals(that.version) : that.version != null) return false;
+>, <Line: -            return true;
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public int hashCode() {
+>, <Line: -            int result = iso_brand != null ? iso_brand.hashCode() : 0;
+>, <Line: -            result = 31 * result + (version != null ? version.hashCode() : 0);
+>, <Line: -            return result;
+>, <Line: -        }
+>, <Line: -    }
+>]

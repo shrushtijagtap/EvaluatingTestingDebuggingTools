@@ -1,0 +1,105 @@
+[<Line: +  @Override public BufferedSink emit() {
+>, <Line: +  @Override public boolean request(long byteCount) {
+>, <Line: +    // Skip segments that we aren't copying from.
+>, <Line: +    Segment s = head;
+>, <Line: +    for (; offset >= (s.limit - s.pos); s = s.next) {
+>, <Line: +      offset -= (s.limit - s.pos);
+>, <Line: +    }
+>, <Line: +    // Copy one segment at a time.
+>, <Line: +    for (; byteCount > 0; s = s.next) {
+>, <Line: +      Segment copy = new Segment(s);
+>, <Line: +      copy.pos += offset;
+>, <Line: +      copy.limit = Math.min(copy.pos + (int) byteCount, copy.limit);
+>, <Line: +      if (out.head == null) {
+>, <Line: +        out.head = copy.next = copy.prev = copy;
+>, <Line: +      } else {
+>, <Line: +        out.head.prev.push(copy);
+>, <Line: +      byteCount -= copy.limit - copy.pos;
+>, <Line: +      offset = 0;
+>, <Line: +        SegmentPool.recycle(toRecycle);
+>, <Line: +    if (tail.limit < Segment.SIZE && tail.owner) {
+>, <Line: +      SegmentPool.recycle(segment);
+>, <Line: +      SegmentPool.recycle(segment);
+>, <Line: +      SegmentPool.recycle(segment);
+>, <Line: +      SegmentPool.recycle(segment);
+>, <Line: +        SegmentPool.recycle(segment);
+>, <Line: +        SegmentPool.recycle(segment);
+>, <Line: +      SegmentPool.recycle(s);
+>, <Line: +      SegmentPool.recycle(s);
+>, <Line: +        SegmentPool.recycle(toRecycle);
+>, <Line: +    byteString.write(this);
+>, <Line: +    return this;
+>, <Line: +      head = SegmentPool.take(); // Acquire a first segment.
+>, <Line: +    if (tail.limit + minimumCapacity > Segment.SIZE || !tail.owner) {
+>, <Line: +      tail = tail.push(SegmentPool.take()); // Append a new empty segment to fill up.
+>, <Line: +        if (tail != null && tail.owner
+>, <Line: +            && (byteCount + tail.limit - (tail.shared ? 0 : tail.pos) <= Segment.SIZE)) {
+>, <Line: +        } else {
+>, <Line: +          // We're going to need another segment. Split the source's head
+>, <Line: +          // segment in two, then move the first of those two to this buffer.
+>, <Line: +          source.head = source.head.split((int) byteCount);
+>, <Line: +    byte[] toFind = targetBytes.toByteArray();
+>, <Line: +    result.head = new Segment(head);
+>, <Line: +    result.head.next = result.head.prev = result.head;
+>, <Line: +      result.head.prev.push(new Segment(s));
+>, <Line: +    result.size = size;
+>, <Line: +  /** Returns an immutable copy of this buffer as a byte string. */
+>, <Line: +  public ByteString snapshot() {
+>, <Line: +    if (size > Integer.MAX_VALUE) {
+>, <Line: +      throw new IllegalArgumentException("size > Integer.MAX_VALUE: " + size);
+>, <Line: +    }
+>, <Line: +    return snapshot((int) size);
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * Returns an immutable copy of the first {@code byteCount} bytes of this buffer as a byte string.
+>, <Line: +   */
+>, <Line: +  public ByteString snapshot(int byteCount) {
+>, <Line: +    if (byteCount == 0) return ByteString.EMPTY;
+>, <Line: +    return new SegmentedByteString(this, byteCount);
+>, <Line: +  }
+>]
+[<Line: -  @Override public BufferedSink emit() throws IOException {
+>, <Line: -  @Override public boolean request(long byteCount) throws IOException {
+>, <Line: -    Segment source = head;
+>, <Line: -    Segment target = out.writableSegment(1);
+>, <Line: -    while (byteCount > 0) {
+>, <Line: -      // If necessary, advance to a readable source segment. This won't repeat after the first copy.
+>, <Line: -      while (offset >= source.limit - source.pos) {
+>, <Line: -        offset -= (source.limit - source.pos);
+>, <Line: -        source = source.next;
+>, <Line: -      }
+>, <Line: -      // If necessary, append another target segment.
+>, <Line: -      if (target.limit == Segment.SIZE) {
+>, <Line: -        target = target.push(SegmentPool.INSTANCE.take());
+>, <Line: -      // Copy bytes from the source segment to the target segment.
+>, <Line: -      long sourceReadable = Math.min(source.limit - (source.pos + offset), byteCount);
+>, <Line: -      long targetWritable = Segment.SIZE - target.limit;
+>, <Line: -      int toCopy = (int) Math.min(sourceReadable, targetWritable);
+>, <Line: -      System.arraycopy(source.data, source.pos + (int) offset, target.data, target.limit, toCopy);
+>, <Line: -      offset += toCopy;
+>, <Line: -      target.limit += toCopy;
+>, <Line: -      byteCount -= toCopy;
+>, <Line: -        SegmentPool.INSTANCE.recycle(toRecycle);
+>, <Line: -    if (tail.limit < Segment.SIZE) {
+>, <Line: -      SegmentPool.INSTANCE.recycle(segment);
+>, <Line: -      SegmentPool.INSTANCE.recycle(segment);
+>, <Line: -      SegmentPool.INSTANCE.recycle(segment);
+>, <Line: -      SegmentPool.INSTANCE.recycle(segment);
+>, <Line: -        SegmentPool.INSTANCE.recycle(segment);
+>, <Line: -        SegmentPool.INSTANCE.recycle(segment);
+>, <Line: -      SegmentPool.INSTANCE.recycle(s);
+>, <Line: -      SegmentPool.INSTANCE.recycle(s);
+>, <Line: -        SegmentPool.INSTANCE.recycle(toRecycle);
+>, <Line: -    return write(byteString.data, 0, byteString.data.length);
+>, <Line: -      head = SegmentPool.INSTANCE.take(); // Acquire a first segment.
+>, <Line: -    if (tail.limit + minimumCapacity > Segment.SIZE) {
+>, <Line: -      tail = tail.push(SegmentPool.INSTANCE.take()); // Append a new empty segment to fill up.
+>, <Line: -        if (tail == null || byteCount + (tail.limit - tail.pos) > Segment.SIZE) {
+>, <Line: -          // We're going to need another segment. Split the source's head
+>, <Line: -          // segment in two, then move the first of those two to this buffer.
+>, <Line: -          source.head = source.head.split((int) byteCount);
+>, <Line: -        } else {
+>, <Line: -    byte[] toFind = targetBytes.data;
+>, <Line: -    result.write(head.data, head.pos, head.limit - head.pos);
+>, <Line: -      result.write(s.data, s.pos, s.limit - s.pos);
+>]

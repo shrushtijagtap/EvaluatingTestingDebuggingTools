@@ -1,0 +1,48 @@
+[<Line: +		'angular',
+>, <Line: +	],
+>, <Line: +	function (angular) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		module.service('utilSrv', function ($rootScope, $modal, $q) {
+>, <Line: +			this.init = function () {
+>, <Line: +				$rootScope.onAppEvent('show-modal', this.showModal);
+>, <Line: +			};
+>, <Line: +			this.showModal = function (e, options) {
+>, <Line: +				var modal = $modal({
+>, <Line: +					template: options.src,
+>, <Line: +					persist: false,
+>, <Line: +					show: false,
+>, <Line: +					scope: options.scope,
+>, <Line: +					keyboard: false
+>, <Line: +				});
+>, <Line: +				$q.when(modal).then(function (modalEl) {
+>, <Line: +					modalEl.modal('show');
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -],
+>, <Line: -function (angular) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.service('utilSrv', function($rootScope, $modal, $q) {
+>, <Line: -    this.init = function() {
+>, <Line: -      $rootScope.onAppEvent('show-modal', this.showModal);
+>, <Line: -    };
+>, <Line: -    this.showModal = function(e, options) {
+>, <Line: -      var modal = $modal({
+>, <Line: -        template: options.src,
+>, <Line: -        persist: false,
+>, <Line: -        show: false,
+>, <Line: -        scope: options.scope,
+>, <Line: -        keyboard: false
+>, <Line: -      });
+>, <Line: -      $q.when(modal).then(function(modalEl) {
+>, <Line: -        modalEl.modal('show');
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

@@ -1,0 +1,31 @@
+[<Line: +import com.google.gson.annotations.SerializedName;
+>, <Line: +    @SerializedName("minecraftArguments")
+>, <Line: +    public String minecraftArguments;
+>, <Line: +    @SerializedName("mainClass")
+>, <Line: +    public String mainClass;
+>, <Line: +    @SerializedName("time")
+>, <Line: +    public String time;
+>, <Line: +    @SerializedName("id")
+>, <Line: +    public String id;
+>, <Line: +    @SerializedName("type")
+>, <Line: +    public String type;
+>, <Line: +    @SerializedName("processArguments")
+>, <Line: +    public String processArguments;
+>, <Line: +    @SerializedName("releaseTime")
+>, <Line: +    public String releaseTime;
+>, <Line: +    @SerializedName("jar")
+>, <Line: +    public String jar;
+>, <Line: +    @SerializedName("inheritsFrom")
+>, <Line: +    public String inheritsFrom;
+>, <Line: +    @SerializedName("runDir")
+>, <Line: +    public String runDir;
+>, <Line: +    @SerializedName("assets")
+>, <Line: +    @SerializedName("minimumLauncherVersion")
+>, <Line: +    @SerializedName("hidden")
+>, <Line: +    @SerializedName("assetIndex")
+>, <Line: +    @SerializedName("downloads")
+>, <Line: +    @SerializedName("libraries")
+>]
+[<Line: -    public String minecraftArguments, mainClass, time, id, type, processArguments,
+>, <Line: -        releaseTime, jar, inheritsFrom, runDir;
+>]

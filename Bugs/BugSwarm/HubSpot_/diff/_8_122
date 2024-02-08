@@ -1,0 +1,24 @@
+[]
+[<Line: -<div id="api-root-prompt-message">
+>, <Line: -    <p>
+>, <Line: -        Hi there! I see you're running BaragonUI through Brunch.
+>, <Line: -        You must be trying to use a <strong>remote API</strong>.
+>, <Line: -    </p>
+>, <Line: -    <p>
+>, <Line: -        You need to specify an <strong>API root</strong> so BaragonUI knows where to get its data,
+>, <Line: -        e.g. <code>http://example/baragon/</code>.
+>, <Line: -    </p>
+>, <Line: -    <p>
+>, <Line: -        This can be changed at any time in the JS console with
+>, <Line: -        <code>localStorage.setItem(&quot;apiRootOverride&quot;, &quot;http://example/baragon/v2&quot;)</code>
+>, <Line: -    </p>
+>, <Line: -    <p>
+>, <Line: -        This Baragon API also has auth enabled. You need to specify an <strong>Auth Key</strong> so BaragonUI can access data.
+>, <Line: -        e.g. <code>test-key</code>.
+>, <Line: -    </p>
+>, <Line: -    <p>
+>, <Line: -        This can be changed at any time in the JS console with
+>, <Line: -        <code>localStorage.setItem(&quot;authKeyOverride&quot;, &quot;test-key&quot;)</code>
+>, <Line: -    </p>
+>, <Line: -</div>
+>]

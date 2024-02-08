@@ -1,0 +1,61 @@
+[]
+[<Line: -/*
+>, <Line: - * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: - *
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: - * you may not use this file except in compliance with the License.
+>, <Line: - * You may obtain a copy of the License at
+>, <Line: - *
+>, <Line: - *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - *
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - * See the License for the specific language governing permissions and
+>, <Line: - * limitations under the License.
+>, <Line: - */
+>, <Line: -package com.github.rinde.rinsim.ui.renderers;
+>, <Line: -import javax.measure.Measure;
+>, <Line: -import javax.measure.unit.SI;
+>, <Line: -import org.apache.commons.math3.random.MersenneTwister;
+>, <Line: -import org.junit.Test;
+>, <Line: -import com.github.rinde.rinsim.core.Simulator;
+>, <Line: -import com.github.rinde.rinsim.core.TickListener;
+>, <Line: -import com.github.rinde.rinsim.core.TimeLapse;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.GridRoadModel;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.MovingRoadUser;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.RoadModel;
+>, <Line: -import com.github.rinde.rinsim.geom.Point;
+>, <Line: -public class GridRoadModelRendererTest {
+>, <Line: -  @Test
+>, <Line: -  public void test() {
+>, <Line: -    final Simulator sim = new Simulator(new MersenneTwister(123L),
+>, <Line: -        Measure.valueOf(1000L, SI.MILLI(SI.SECOND)));
+>, <Line: -    sim.register(GridRoadModel.builder()
+>, <Line: -        .setNumXCells(5)
+>, <Line: -        .build());
+>, <Line: -    sim.configure();
+>, <Line: -    sim.register(new Agent());
+>, <Line: -    // View.create(sim)
+>, <Line: -    // .with(new GridRoadModelRenderer())
+>, <Line: -    // .show();
+>, <Line: -  }
+>, <Line: -  static class Agent implements MovingRoadUser, TickListener {
+>, <Line: -    @Override
+>, <Line: -    public void tick(TimeLapse timeLapse) {
+>, <Line: -      // TODO Auto-generated method stub
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void afterTick(TimeLapse timeLapse) {
+>, <Line: -      // TODO Auto-generated method stub
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void initRoadUser(RoadModel model) {
+>, <Line: -      model.addObjectAt(this, new Point(0, 0));
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public double getSpeed() {
+>, <Line: -      return 1;
+>, <Line: -    }
+>, <Line: -  }
+>, <Line: -}>]

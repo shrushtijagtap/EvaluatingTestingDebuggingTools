@@ -1,0 +1,4 @@
+[<Line: +stagemonitor.instrument.include=org.stagemonitor.jdbc.ConnectionMonitoringTransformerTest$
+>]
+[<Line: -stagemonitor.instrument.include=org.stagemonitor.jdbc.ConnectionMonitoringTransformerTest
+>]

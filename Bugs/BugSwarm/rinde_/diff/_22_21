@@ -1,0 +1,4 @@
+[<Line: +org.eclipse.jdt.core.compiler.processAnnotations=enabled
+>]
+[<Line: -org.eclipse.jdt.core.compiler.processAnnotations=disabled
+>]

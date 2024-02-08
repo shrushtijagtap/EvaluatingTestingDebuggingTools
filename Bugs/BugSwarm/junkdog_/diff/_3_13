@@ -1,0 +1,9 @@
+[<Line: +		MethodVisitor mv = cw.visitMethod(ACC_PROTECTED, "forEntity", "(I)V", null, null);
+>, <Line: +			mv.visitVarInsn(ILOAD, 1);
+>, <Line: +		mv.visitLocalVariable("entityId", "I", null, l0, l2, 1);
+>]
+[<Line: -		MethodVisitor mv = cw.visitMethod(ACC_PROTECTED, "forEntity", "(Lcom/artemis/Entity;)V", null, null);
+>, <Line: -			mv.visitVarInsn(ALOAD, 1);
+>, <Line: -			mv.visitMethodInsn(INVOKEVIRTUAL, "com/artemis/Entity", "getId", "()I", false);
+>, <Line: -		mv.visitLocalVariable("e", "Lcom/artemis/Entity;", null, l0, l2, 1);
+>]

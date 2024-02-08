@@ -1,0 +1,6 @@
+[<Line: +	public void testDontActivateProfilerWhenNoRequestTraceReporterIsActive() throws Exception {
+>, <Line: +		// don't profile if no one is interested in the result
+>, <Line: +		doReturn(0d).when(requestMonitorPlugin).getOnlyReportNExternalRequestsPerMinute();
+>]
+[<Line: -	public void testProfileThisExecutionNotActiveWhenNoRequestTraceReporterIsActive() throws Exception {
+>]

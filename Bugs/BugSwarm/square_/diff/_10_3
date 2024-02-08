@@ -1,0 +1,6 @@
+[<Line: +    // necessary because writeFooter needs to query the processed byte count which
+>, <Line: +    // only works when the deflater is still open.
+>]
+[<Line: -    // necessary because writeFooter needs to query the proccessed byte count which
+>, <Line: -    // only works when the defalter is still open.
+>]

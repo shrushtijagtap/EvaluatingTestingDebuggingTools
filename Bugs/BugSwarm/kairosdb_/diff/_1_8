@@ -1,0 +1,5 @@
+[]
+[<Line: -		bind(new TypeLiteral<List<RowKeyListener>>()
+>, <Line: -		{
+>, <Line: -		}).toProvider(RowKeyListenerProvider.class);
+>]

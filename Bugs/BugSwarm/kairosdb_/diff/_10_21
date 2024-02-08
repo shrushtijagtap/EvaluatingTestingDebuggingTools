@@ -1,0 +1,5 @@
+[<Line: +import com.google.inject.Scope;
+>, <Line: +import org.kairosdb.core.datastore.ServiceKeyStore;
+>, <Line: +		bind(ServiceKeyStore.class).to(CassandraDatastore.class).in(Scopes.SINGLETON);
+>]
+[]

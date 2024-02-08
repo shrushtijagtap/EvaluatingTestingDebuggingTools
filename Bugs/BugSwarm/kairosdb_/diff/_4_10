@@ -1,0 +1,12 @@
+[<Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import static com.google.common.base.Preconditions.checkArgument;
+>, <Line: +	private final EventBus m_eventBus;
+>, <Line: +			KairosDataPointFactory dataPointFactory, EventBus eventBus)
+>, <Line: +		m_eventBus = checkNotNull(eventBus);
+>, <Line: +			DataPointsParser parser = new DataPointsParser(m_eventBus, new InputStreamReader(json, "UTF-8"),
+>, <Line: +					m_stringDataPointFactory, m_eventBus);
+>]
+[<Line: -			KairosDataPointFactory dataPointFactory)
+>, <Line: -			DataPointsParser parser = new DataPointsParser(datastore, new InputStreamReader(json, "UTF-8"),
+>, <Line: -					m_stringDataPointFactory, datastore);
+>]

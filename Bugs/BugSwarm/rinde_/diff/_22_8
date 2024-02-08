@@ -1,0 +1,49 @@
+[<Line: +/*
+>, <Line: + * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package com.github.rinde.rinsim.core.model.road;
+>, <Line: +import static org.junit.Assert.assertEquals;
+>, <Line: +import org.junit.Test;
+>, <Line: +import com.github.rinde.rinsim.geom.Connection;
+>, <Line: +import com.github.rinde.rinsim.geom.MultiAttributeData;
+>, <Line: +import com.github.rinde.rinsim.geom.Point;
+>, <Line: +/**
+>, <Line: + * @author Rinde van Lon
+>, <Line: + *
+>, <Line: + */
+>, <Line: +public class ConnectionTest {
+>, <Line: +  /**
+>, <Line: +   * Tests correct implementation of get length.
+>, <Line: +   */
+>, <Line: +  @Test
+>, <Line: +  public void testGetLength() {
+>, <Line: +    final Point a = new Point(0, 0);
+>, <Line: +    final Point b = new Point(10, 0);
+>, <Line: +    assertEquals(10, Connection.create(a, b).getLength(), GraphRoadModel.DELTA);
+>, <Line: +    final Connection<MultiAttributeData> conn =
+>, <Line: +        Connection.create(a, b, MultiAttributeData.builder()
+>, <Line: +            .setLength(12)
+>, <Line: +            .setMaxSpeed(1d)
+>, <Line: +            .build());
+>, <Line: +    assertEquals(12, conn.getLength(), GraphRoadModel.DELTA);
+>, <Line: +    final Connection<MultiAttributeData> conn2 =
+>, <Line: +        Connection.create(a, b, MultiAttributeData.builder()
+>, <Line: +            .setMaxSpeed(1d)
+>, <Line: +            .build());
+>, <Line: +    assertEquals(10, conn2.getLength(), GraphRoadModel.DELTA);
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

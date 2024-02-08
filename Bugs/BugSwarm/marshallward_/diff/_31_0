@@ -1,0 +1,69 @@
+[<Line: +    parser.add_argument('--format', '-f', action='store')
+>, <Line: +    # Format validation
+>, <Line: +    valid_formats = ('json', 'yaml', 'nml')
+>, <Line: +    if args.format and args.format not in valid_formats:
+>, <Line: +        print('f90nml: error: format must be one of the following: {0}'
+>, <Line: +              ''.format(valid_formats))
+>, <Line: +        sys.exit(-1)
+>, <Line: +    if args.format == 'yaml' and not has_yaml:
+>, <Line: +        print('f90nml: error: YAML module could not be found.')
+>, <Line: +        sys.exit(-1)
+>, <Line: +    # Input config
+>, <Line: +                input_data = json.load(input_file)
+>, <Line: +    output_file = open(output_fname, 'w') if output_fname else sys.stdout
+>, <Line: +    # Get output format
+>, <Line: +    if not args.format:
+>, <Line: +        if output_fname:
+>, <Line: +            _, output_ext = os.path.splitext(output_fname)
+>, <Line: +            if output_ext == '.json':
+>, <Line: +                output_fmt = 'json'
+>, <Line: +            elif output_ext in ('.yaml', '.yml'):
+>, <Line: +                output_fmt = 'yaml'
+>, <Line: +            else:
+>, <Line: +                output_fmt = 'nml'
+>, <Line: +        else:
+>, <Line: +            output_fmt = 'nml'
+>, <Line: +    else:
+>, <Line: +        output_fmt = args.format
+>, <Line: +    # Write to output
+>, <Line: +    if output_fmt in ('json', 'yaml'):
+>, <Line: +        if output_fmt == 'json':
+>, <Line: +            json.dump(input_data, output_file,
+>, <Line: +                      indent=4, separators=(',', ': '))
+>, <Line: +            output_file.write('\n')
+>, <Line: +        elif output_fmt == 'yaml':
+>, <Line: +            input_data = input_data.todict(decomplex=True)
+>, <Line: +            yaml.dump(input_data, output_file,
+>, <Line: +                      default_flow_style=False)
+>, <Line: +        # Default to namelist output
+>, <Line: +        f90nml.write(input_data, output_file)
+>, <Line: +    # Cleanup
+>, <Line: +    if output_file != sys.stdout:
+>, <Line: +        output_file.close()
+>]
+[<Line: -    # Input config
+>, <Line: -                input_data = json.load(input_file,
+>, <Line: -                                       object_pairs_hook=OrderedDict)
+>, <Line: -    if output_fname:
+>, <Line: -        _, output_ext = os.path.splitext(output_fname)
+>, <Line: -        # TODO: Better control of output format
+>, <Line: -        if output_ext == '.json':
+>, <Line: -            with open(output_fname, 'w') as output_file:
+>, <Line: -                json.dump(input_data, output_file,
+>, <Line: -                          indent=4, separators=(',', ': '))
+>, <Line: -                output_file.write('\n')
+>, <Line: -        elif output_ext == '.yaml':
+>, <Line: -            if has_yaml:
+>, <Line: -                input_data = input_data.todict(decomplex=True)
+>, <Line: -                with open(output_fname, 'w') as output_file:
+>, <Line: -                    yaml.dump(input_data, output_file,
+>, <Line: -                              default_flow_style=False)
+>, <Line: -            else:
+>, <Line: -                print('f90nml: error: YAML module could not be found.')
+>, <Line: -                sys.exit(-1)
+>, <Line: -        else:
+>, <Line: -            # Default to namelist output
+>, <Line: -            f90nml.write(input_data, output_fname)
+>, <Line: -        # TODO: Combine with extension output
+>, <Line: -        f90nml.write(input_data, sys.stdout)
+>]

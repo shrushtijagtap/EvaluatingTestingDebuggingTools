@@ -1,0 +1,36 @@
+[<Line: +/**
+>, <Line: + * Copyright (c) 2015, Joyent, Inc. All rights reserved.
+>, <Line: + */
+>, <Line: +import com.fasterxml.jackson.annotation.JsonInclude;
+>, <Line: +import com.fasterxml.jackson.databind.DeserializationFeature;
+>, <Line: +import com.fasterxml.jackson.databind.ObjectMapper;
+>, <Line: +import com.fasterxml.jackson.databind.SerializationFeature;
+>, <Line: + * {@link ObjectParser} implementation that uses Jackson data binding. This
+>, <Line: + * is very useful because Jackson core doesn't provide much flexibility
+>, <Line: + * when de/serializing many different data types.
+>, <Line: + *
+>, <Line: +    /**
+>, <Line: +     * Jackson data binding mapper instance.
+>, <Line: +     */
+>, <Line: +    public static final ObjectMapper MAPPER;
+>, <Line: +        MAPPER.getSerializationConfig()
+>, <Line: +              .with(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS)
+>, <Line: +              .without(SerializationFeature.WRITE_NULL_MAP_VALUES);
+>, <Line: +        MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+>, <Line: +    public <T> T parseAndClose(final InputStream in, final Charset charset,
+>, <Line: +                               final Class<T> dataClass) throws IOException {
+>, <Line: +    public Object parseAndClose(final InputStream in, final Charset charset,
+>, <Line: +                                final Type dataType) throws IOException {
+>, <Line: +    public <T> T parseAndClose(final Reader reader, final Class<T> dataClass)
+>, <Line: +    public Object parseAndClose(final Reader reader, final Type dataType)
+>]
+[<Line: -import com.fasterxml.jackson.core.type.TypeReference;
+>, <Line: -import com.fasterxml.jackson.databind.*;
+>, <Line: -    private static final ObjectMapper MAPPER;
+>, <Line: -    public <T> T parseAndClose(InputStream in, Charset charset,
+>, <Line: -                               Class<T> dataClass) throws IOException {
+>, <Line: -    public Object parseAndClose(InputStream in, Charset charset,
+>, <Line: -                                Type dataType) throws IOException {
+>, <Line: -    public <T> T parseAndClose(Reader reader, Class<T> dataClass)
+>, <Line: -    public Object parseAndClose(Reader reader, Type dataType)
+>]

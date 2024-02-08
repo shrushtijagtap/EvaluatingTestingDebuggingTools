@@ -1,0 +1,39 @@
+[<Line: +import static java.util.Objects.requireNonNull;
+>, <Line: +import java.util.Comparator;
+>, <Line: +  public final ImmutableSet<SimResult> results;
+>, <Line: +  ExperimentResults(ExperimentBuilder exp,
+>, <Line: +      ImmutableSet<SimResult> res) {
+>, <Line: +  public List<SimResult> sortedResults() {
+>, <Line: +    List<SimResult> list = newArrayList(results);
+>, <Line: +    Collections.sort(list, SimulationResultComparator.INSTANCE);
+>, <Line: +  enum SimulationResultComparator implements Comparator<SimResult> {
+>, <Line: +    INSTANCE {
+>, <Line: +      @Override
+>, <Line: +      public int compare(@Nullable SimResult o1,
+>, <Line: +          @Nullable SimResult o2) {
+>, <Line: +        return requireNonNull(o1).getSimArgs().compareTo(
+>, <Line: +            requireNonNull(o2).getSimArgs());
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +    return Objects.hash(configurations, scenarios, showGui, repetitions,
+>, <Line: +        masterSeed, results);
+>, <Line: +    return Objects.equals(configurations, er.configurations)
+>]
+[<Line: -  /**
+>, <Line: -   * The .. that was used for this experiment.
+>, <Line: -   */
+>, <Line: -  public final Object objectiveFunction;
+>, <Line: -  public final ImmutableSet<SimulationResult> results;
+>, <Line: -  ExperimentResults(AbstractExperimentBuilder exp,
+>, <Line: -      ImmutableSet<SimulationResult> res) {
+>, <Line: -    objectiveFunction = exp.objectiveFunction;
+>, <Line: -  public List<SimulationResult> sortedResults() {
+>, <Line: -    List<SimulationResult> list = newArrayList(results);
+>, <Line: -    Collections.sort(list);
+>, <Line: -    return Objects.hash(objectiveFunction, configurations, scenarios,
+>, <Line: -        showGui, repetitions, masterSeed, results);
+>, <Line: -    return Objects.equals(objectiveFunction, er.objectiveFunction)
+>, <Line: -        && Objects.equals(configurations, er.configurations)
+>, <Line: -        .add("objectiveFunction", objectiveFunction)
+>]

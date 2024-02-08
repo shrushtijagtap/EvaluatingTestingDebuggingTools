@@ -1,0 +1,31 @@
+[<Line: +import org.stagemonitor.core.util.CompletedFuture;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import static org.junit.Assert.assertFalse;
+>, <Line: +import static org.junit.Assert.assertSame;
+>, <Line: +import static org.junit.Assert.assertTrue;
+>, <Line: +import static org.mockito.Mockito.mock;
+>, <Line: +import static org.mockito.Mockito.times;
+>, <Line: +import static org.mockito.Mockito.verify;
+>, <Line: +import static org.mockito.Mockito.when;
+>, <Line: +		assertFalse(Stagemonitor.isStarted());
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void testNoAsyncInitByDefault() throws Exception {
+>, <Line: +		assertTrue(Stagemonitor.startMonitoring(new MeasurementSession("StagemonitorTest", "testHost", "testInstance")) instanceof CompletedFuture);
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void testAsyncInit() throws Exception {
+>, <Line: +		when(corePlugin.isInitAsync()).thenReturn(true);
+>, <Line: +		assertFalse(Stagemonitor.startMonitoring(new MeasurementSession("StagemonitorTest", "testHost", "testInstance")) instanceof CompletedFuture);
+>]
+[<Line: -import static org.junit.Assert.assertFalse;
+>, <Line: -import static org.junit.Assert.assertSame;
+>, <Line: -import static org.junit.Assert.assertTrue;
+>, <Line: -import static org.mockito.Mockito.atLeastOnce;
+>, <Line: -import static org.mockito.Mockito.mock;
+>, <Line: -import static org.mockito.Mockito.times;
+>, <Line: -import static org.mockito.Mockito.verify;
+>, <Line: -import static org.mockito.Mockito.when;
+>, <Line: -import java.util.Arrays;
+>, <Line: -		verify(logger, atLeastOnce()).warn("Measurement Session is not initialized: {}", measurementSession);
+>]

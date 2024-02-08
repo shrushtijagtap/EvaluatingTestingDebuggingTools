@@ -1,0 +1,76 @@
+[<Line: +import org.apache.commons.math3.random.RandomGenerator;
+>, <Line: +import org.junit.experimental.categories.Category;
+>, <Line: +import com.github.rinde.rinsim.core.TickListener;
+>, <Line: +import com.github.rinde.rinsim.core.TimeLapse;
+>, <Line: +import com.github.rinde.rinsim.core.model.road.MovingRoadUser;
+>, <Line: +import com.github.rinde.rinsim.core.model.road.RoadModel;
+>, <Line: +import com.github.rinde.rinsim.testutil.GuiTests;
+>, <Line: +import com.github.rinde.rinsim.ui.View;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +@Category(GuiTests.class)
+>, <Line: +public class WarehouseRendererTest {
+>, <Line: +        PointUtil.intersectionPoint(a, b, c, d).get());
+>, <Line: +        PointUtil.intersectionPoint(z, e, f, z).get());
+>, <Line: +    Graphs.addPath(graph, new Point(30, 5), new Point(30, 3), new Point(28, 3),
+>, <Line: +        new Point(30, 1), new Point(20, 0));
+>, <Line: +    sim.register(new Agent(sim.getRandomGenerator()));
+>, <Line: +    sim.register(new Agent(sim.getRandomGenerator()));
+>, <Line: +    sim.register(new Agent(sim.getRandomGenerator()));
+>, <Line: +    View.create(sim)
+>, <Line: +        .with(WarehouseRenderer.builder()
+>, <Line: +            .setMargin(0)
+>, <Line: +            .setDrawOneWayStreetArrows(true))
+>, <Line: +        .with(AGVRenderer.builder())
+>, <Line: +        .stopSimulatorAtTime(150 * 1000L)
+>, <Line: +        .enableAutoClose()
+>, <Line: +        .enableAutoPlay()
+>, <Line: +        .setSpeedUp(2)
+>, <Line: +        .show();
+>, <Line: +  }
+>, <Line: +  static class Agent implements TickListener, MovingRoadUser {
+>, <Line: +    Optional<RoadModel> model;
+>, <Line: +    Point destination;
+>, <Line: +    RandomGenerator rng;
+>, <Line: +    boolean haveABreak;
+>, <Line: +    long timeOut = 0;
+>, <Line: +    Agent(RandomGenerator r) {
+>, <Line: +      rng = r;
+>, <Line: +      model = Optional.absent();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void initRoadUser(RoadModel m) {
+>, <Line: +      model = Optional.of(m);
+>, <Line: +      model.get().addObjectAt(this, model.get().getRandomPosition(rng));
+>, <Line: +      destination = model.get().getRandomPosition(rng);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public double getSpeed() {
+>, <Line: +      return 1;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void tick(TimeLapse timeLapse) {
+>, <Line: +      if (rng.nextInt(100) < 1 || timeOut > 0) {
+>, <Line: +        if (timeOut == 0L) {
+>, <Line: +          timeOut = 100L;
+>, <Line: +        } else {
+>, <Line: +          timeOut--;
+>, <Line: +        }
+>, <Line: +      } else {
+>, <Line: +        if (model.get().getPosition(this).equals(destination)) {
+>, <Line: +          destination = model.get().getRandomPosition(rng);
+>, <Line: +        }
+>, <Line: +        model.get().moveTo(this, destination, timeLapse);
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void afterTick(TimeLapse timeLapse) {}
+>]
+[<Line: -public class CollisionGraphRoadModelRendererTest {
+>, <Line: -    System.out.println(0d / 10d);
+>, <Line: -    System.out.println(1d / 0d);
+>, <Line: -        CollisionGraphRoadModelRenderer.intersectionPoint(a, b, c, d).get());
+>, <Line: -        CollisionGraphRoadModelRenderer.intersectionPoint(z, e, f, z).get());
+>, <Line: -    // View.create(sim)
+>, <Line: -    // .with(new CollisionGraphRoadModelRenderer())
+>, <Line: -    // .show();
+>]

@@ -1,0 +1,57 @@
+[<Line: +				<img class="logo-icon" src="img/fav32.png"
+>, <Line: +					 bs-tooltip="'Grafana'" data-placement="bottom"></img>
+>, <Line: +			<ul class="nav pull-right" ng-controller='DashboardNavCtrl'
+>, <Line: +				ng-init="init()">
+>, <Line: +				<li ng-repeat="pulldown in dashboard.nav"
+>, <Line: +					ng-controller="PulldownCtrl" ng-show="pulldown.enable">
+>, <Line: +					<a bs-tooltip="'Save'" data-placement="bottom"
+>, <Line: +					   class="dropdown-toggle" data-toggle="dropdown"
+>, <Line: +					   ng-click="openSaveDropdown()">
+>, <Line: +					<ul class="save-dashboard-dropdown dropdown-menu"
+>, <Line: +						ng-if="saveDropdownOpened">
+>, <Line: +								<input class='input-medium'
+>, <Line: +									   ng-model="dashboard.title" type="text"/>
+>, <Line: +								<button class="btn" ng-click="saveDashboard()">
+>, <Line: +									<i class="icon-save"></i></button>
+>, <Line: +							<a class="link" ng-click="set_default()">Save as
+>, <Line: +								Home</a>
+>, <Line: +							<a class="link" ng-click="purge_default()">Reset
+>, <Line: +								Home</a>
+>, <Line: +							<a class="link" ng-click="markAsFavorite()">Mark as
+>, <Line: +								favorite</a>
+>, <Line: +							<a class="link" ng-click="removeAsFavorite()">Remove
+>, <Line: +								as favorite</a>
+>, <Line: +							<a class="link" ng-click="editJson()">Dashboard
+>, <Line: +								JSON</a>
+>, <Line: +							<a class="link" ng-click="exportDashboard()">Export
+>, <Line: +								dashboard</a>
+>, <Line: +							<a bs-tooltip="'Share'" data-placement="bottom"
+>, <Line: +							   ng-click="saveForSharing()"
+>, <Line: +							   config-modal="app/partials/dashLoaderShare.html">
+>, <Line: +				<li class="grafana-menu-home"><a
+>, <Line: +						bs-tooltip="'Goto saved default'"
+>, <Line: +						data-placement="bottom" href='#/'><i
+>, <Line: +						class='icon-home'></i></a></li>
+>, <Line: +				<li class="grafana-menu-edit" ng-show="dashboard.editable"
+>, <Line: +					bs-tooltip="'Configure dashboard'" data-placement="bottom">
+>, <Line: +					<a class="link"
+>, <Line: +					   dash-editor-link="app/partials/dasheditor.html"><i
+>, <Line: +							class='icon-cog pointer'></i></a></li>
+>]
+[<Line: -				<img class="logo-icon" src="img/fav32.png" bs-tooltip="'Grafana'" data-placement="bottom"></img>
+>, <Line: -			<ul class="nav pull-right" ng-controller='DashboardNavCtrl' ng-init="init()">
+>, <Line: -				<li ng-repeat="pulldown in dashboard.nav" ng-controller="PulldownCtrl" ng-show="pulldown.enable">
+>, <Line: -					<a bs-tooltip="'Save'" data-placement="bottom" class="dropdown-toggle" data-toggle="dropdown" ng-click="openSaveDropdown()">
+>, <Line: -					<ul class="save-dashboard-dropdown dropdown-menu" ng-if="saveDropdownOpened">
+>, <Line: -								<input class='input-medium' ng-model="dashboard.title" type="text" />
+>, <Line: -								<button class="btn" ng-click="saveDashboard()"><i class="icon-save"></i></button>
+>, <Line: -							<a class="link" ng-click="set_default()">Save as Home</a>
+>, <Line: -							<a class="link" ng-click="purge_default()">Reset Home</a>
+>, <Line: -							<a class="link" ng-click="markAsFavorite()">Mark as favorite</a>
+>, <Line: -							<a class="link" ng-click="removeAsFavorite()">Remove as favorite</a>
+>, <Line: -							<a class="link" ng-click="editJson()">Dashboard JSON</a>
+>, <Line: -							<a class="link" ng-click="exportDashboard()">Export dashboard</a>
+>, <Line: -							<a bs-tooltip="'Share'" data-placement="bottom" ng-click="saveForSharing()" config-modal="app/partials/dashLoaderShare.html">
+>, <Line: -				<li class="grafana-menu-home"><a bs-tooltip="'Goto saved default'" data-placement="bottom" href='#/'><i class='icon-home'></i></a></li>
+>, <Line: -				<li class="grafana-menu-edit" ng-show="dashboard.editable" bs-tooltip="'Configure dashboard'" data-placement="bottom"><a class="link" dash-editor-link="app/partials/dasheditor.html"><i class='icon-cog pointer'></i></a></li>
+>]

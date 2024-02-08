@@ -1,0 +1,21 @@
+[<Line: +package de.charite.compbio.jannovar;
+>, <Line: +/**
+>, <Line: + * Base class for unchecked exceptions in Jannovar
+>, <Line: + *
+>, <Line: + * @author <a href="mailto:peter.robinson@charite.de">Peter N Robinson</a>
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class UncheckedJannovarException extends RuntimeException {
+>, <Line: +	public static final long serialVersionUID = 2L;
+>, <Line: +	public UncheckedJannovarException() {
+>, <Line: +		super();
+>, <Line: +	}
+>, <Line: +	public UncheckedJannovarException(String msg) {
+>, <Line: +		super(msg);
+>, <Line: +	}
+>, <Line: +	public UncheckedJannovarException(String msg, Throwable cause) {
+>, <Line: +		super(msg, cause);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,14 @@
+[<Line: +            enable_tokens=False,
+>, <Line: +    def define_tables(self, username=None, signature=None, enable_tokens=False,
+>, <Line: +        settings.enable_tokens = enable_tokens
+>, <Line: +        if settings.enable_tokens:
+>, <Line: +        if self.settings.enable_tokens == True:
+>, <Line: +            token = request.env.http_web2py_user_token or request.vars._token
+>]
+[<Line: -            api_tokens=False,
+>, <Line: -    def define_tables(self, username=None, signature=None, api_tokens=False,
+>, <Line: -        settings.api_tokens = api_tokens
+>, <Line: -        if settings.api_tokens:
+>, <Line: -        if self.settings.api_tokens == True:
+>, <Line: -            token = request.env.http_web2py_api_token or request.vars._token
+>]

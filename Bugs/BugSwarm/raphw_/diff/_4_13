@@ -1,0 +1,6 @@
+[<Line: +import static org.hamcrest.MatcherAssert.assertThat;
+>]
+[<Line: -import java.security.AccessController;
+>, <Line: -import static org.hamcrest.MatcherAssert.assertThat;
+>, <Line: -                AccessController.getContext(),
+>]

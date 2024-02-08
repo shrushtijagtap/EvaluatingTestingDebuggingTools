@@ -1,0 +1,6 @@
+[<Line: +  @Parameter(names = "--pure_barcode",
+>, <Line: +      description = "Input image is a pure monochrome barcode image, not a photo")
+>]
+[<Line: -  @Parameter(names="--pure_barcode",
+>, <Line: -      description="Input image is a pure monochrome barcode image, not a photo")
+>]

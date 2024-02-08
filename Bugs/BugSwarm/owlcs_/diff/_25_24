@@ -1,0 +1,23 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +        IRI documentIRI, OWLOntologyCreationHandler handler) {
+>, <Line: +        OWLOntologyDocumentSource documentSource, OWLOntologyCreationHandler handler,
+>, <Line: +        OntologyConfigurator configuration) throws OWLOntologyCreationException {
+>, <Line: +        OWLOntology ont =
+>, <Line: +            createOWLOntology(manager, ontologyID, documentSource.getDocumentIRI(), handler);
+>, <Line: +                            documentSource.getDocumentIRI(), handler);
+>, <Line: +                        documentSource.acceptParser(parser, ont, configuration));
+>, <Line: +                        || e.getCause() instanceof OWLOntologyInputSourceException) {
+>, <Line: +            configuration);
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -                    IRI documentIRI, OWLOntologyCreationHandler handler) {
+>, <Line: -                    OWLOntologyDocumentSource documentSource, OWLOntologyCreationHandler handler,
+>, <Line: -                    OWLOntologyLoaderConfiguration configuration)
+>, <Line: -                    throws OWLOntologyCreationException {
+>, <Line: -        OWLOntology ont = createOWLOntology(manager, ontologyID, documentSource.getDocumentIRI(),
+>, <Line: -                        handler);
+>, <Line: -                                        documentSource.getDocumentIRI(), handler);
+>, <Line: -                                    documentSource.acceptParser(parser, ont, configuration));
+>, <Line: -                                    || e.getCause() instanceof OWLOntologyInputSourceException) {
+>, <Line: -                        configuration);
+>]

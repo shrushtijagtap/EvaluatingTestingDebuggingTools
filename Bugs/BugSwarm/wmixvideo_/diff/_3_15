@@ -1,0 +1,14 @@
+[<Line: +    NORMAL("N", "Normal"),
+>, <Line: +    REMARCADO("R", "Remarcado");
+>, <Line: +    private final String descricao;
+>, <Line: +    NFNotaInfoItemProdutoVeiculoCondicaoChassi(final String codigo, final String descricao) {
+>, <Line: +        this.descricao = descricao;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    NORMAL("N"),
+>, <Line: -    REMARCADO("R");
+>, <Line: -    NFNotaInfoItemProdutoVeiculoCondicaoChassi(final String codigo) {
+>]

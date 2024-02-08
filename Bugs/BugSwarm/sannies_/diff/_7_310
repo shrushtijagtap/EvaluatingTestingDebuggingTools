@@ -1,0 +1,14 @@
+[<Line: +package org.mp4parser.boxes.samplegrouping;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import org.mp4parser.tools.UUIDConverter;
+>, <Line: +        IsoTypeWriter.writeUInt24(byteBuffer, isEncrypted ? 1 : 0);
+>, <Line: +        int result = isEncrypted ? 7 : 19;
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.mp4.samplegrouping;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.util.UUIDConverter;
+>, <Line: -        IsoTypeWriter.writeUInt24(byteBuffer, isEncrypted?1:0);
+>, <Line: -        int result = isEncrypted?7:19;
+>]

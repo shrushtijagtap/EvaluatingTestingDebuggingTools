@@ -1,0 +1,2141 @@
+[<Line: +import wyil.lang.Bytecode.AliasDeclaration;
+>, <Line: +import wyil.lang.SyntaxTree.Location;
+>, <Line: +	 * @param whileyFile
+>, <Line: +	public WyilFile generate(WhileyFile whileyFile) {
+>, <Line: +		WyilFile wyilFile = new WyilFile(whileyFile.module, whileyFile.filename);
+>, <Line: +		for (WhileyFile.Declaration d : whileyFile.declarations) {
+>, <Line: +					generate(wyilFile, (WhileyFile.Type) d);
+>, <Line: +					generate(wyilFile, (WhileyFile.Constant) d);
+>, <Line: +					generate(wyilFile, (WhileyFile.FunctionOrMethod) d);
+>, <Line: +		return wyilFile;
+>, <Line: +	private void generate(WyilFile enclosing, WhileyFile.Constant declaration) {
+>, <Line: +		WyilFile.Constant block = new WyilFile.Constant(enclosing, declaration.modifiers(), declaration.name(),
+>, <Line: +				declaration.resolvedValue);
+>, <Line: +		enclosing.blocks().add(block);
+>, <Line: +	private void generate(WyilFile enclosing, WhileyFile.Type td) throws Exception {
+>, <Line: +		// Construct new WyIL type declaration
+>, <Line: +		WyilFile.Type declaration = new WyilFile.Type(enclosing, td.modifiers(), td.name(), td.resolvedType.nominal());
+>, <Line: +		SyntaxTree tree = declaration.getTree();
+>, <Line: +		//
+>, <Line: +		EnclosingScope scope = new EnclosingScope(tree, td);
+>, <Line: +		if (td.parameter.name() != null) {
+>, <Line: +			// If no parameter declared, then there will no invariant either
+>, <Line: +			scope.declare(td.resolvedType, td.parameter.name(), td.attributes());
+>, <Line: +			// Generate code for each invariant condition
+>, <Line: +			for (Expr invariant : td.invariant) {
+>, <Line: +				int index = generateCondition(invariant, scope).operand;
+>, <Line: +				Location<Bytecode.Expr> loc = (Location<Bytecode.Expr>) tree.getLocation(index); 
+>, <Line: +				declaration.getInvariant().add(loc);
+>, <Line: +			}
+>, <Line: +		enclosing.blocks().add(declaration);
+>, <Line: +	private void generate(WyilFile enclosing, WhileyFile.FunctionOrMethod fmd) throws Exception {
+>, <Line: +		// Construct new WyIL function or method
+>, <Line: +		WyilFile.FunctionOrMethod declaration = new WyilFile.FunctionOrMethod(enclosing, fmd.modifiers(), fmd.name(),
+>, <Line: +				fmd.resolvedType().nominal());
+>, <Line: +		SyntaxTree tree = declaration.getTree();
+>, <Line: +		EnclosingScope scope = new EnclosingScope(tree,fmd);
+>, <Line: +		addDeclaredParameters(fmd.parameters, fmd.resolvedType().params(), scope);
+>, <Line: +		addDeclaredParameters(fmd.returns, fmd.resolvedType().returns(), scope);
+>, <Line: +		// Generate precondition(s)		
+>, <Line: +		for (Expr precondition : fmd.requires) {
+>, <Line: +			int index = generateCondition(precondition, scope).operand;
+>, <Line: +			Location<Bytecode.Expr> loc = (Location<Bytecode.Expr>) tree.getLocation(index);
+>, <Line: +			declaration.getPrecondition().add(loc);
+>, <Line: +		}
+>, <Line: +		// Generate postcondition(s)		
+>, <Line: +		for (Expr postcondition : fmd.ensures) {
+>, <Line: +			int index = generateCondition(postcondition, scope).operand;
+>, <Line: +			Location<Bytecode.Expr> loc = (Location<Bytecode.Expr>) tree.getLocation(index);
+>, <Line: +			declaration.getPostcondition().add(loc);
+>, <Line: +		}
+>, <Line: +		// Generate function or method body
+>, <Line: +		scope = scope.clone();
+>, <Line: +		int bodyIndex = generateBlock(fmd.statements,scope);
+>, <Line: +		SyntaxTree.Location<Bytecode.Block> body = (SyntaxTree.Location<Bytecode.Block>) tree.getLocation(bodyIndex);  
+>, <Line: +		declaration.setBody(body);
+>, <Line: +		// Add declaration itself to enclosing file
+>, <Line: +		enclosing.blocks().add(declaration);
+>, <Line: +			String name = parameter.name;
+>, <Line: +			if (name == null) {
+>, <Line: +				// This can happen for an unnamed return value. If named return
+>, <Line: +				// values become mandatory, this check will be redundant.
+>, <Line: +				name = "$";
+>, <Line: +			}
+>, <Line: +			scope.declare(types.get(i), name, parameter.attributes());
+>, <Line: +	// =========================================================================
+>, <Line: +	// Blocks
+>, <Line: +	// =========================================================================
+>, <Line: +	/**
+>, <Line: +	 * Translate a sequence of zero or more statements into a bytecode block.
+>, <Line: +	 * 
+>, <Line: +	 * @param stmts
+>, <Line: +	 * @param scope
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	private int generateBlock(List<Stmt> stmts, EnclosingScope scope) {
+>, <Line: +		int[] block = new int[stmts.size()];
+>, <Line: +		for (int i = 0; i != stmts.size(); ++i) {
+>, <Line: +			Stmt st = stmts.get(i);
+>, <Line: +			block[i] = generate(st, scope);
+>, <Line: +		}
+>, <Line: +		return scope.add(new Bytecode.Block(block));
+>, <Line: +	}
+>, <Line: +	private int generate(Stmt stmt, EnclosingScope scope) {
+>, <Line: +				return generateVariableDeclaration((VariableDeclaration) stmt, scope);
+>, <Line: +				return generateAssign((Assign) stmt, scope);
+>, <Line: +				return generateAssert((Assert) stmt, scope);
+>, <Line: +				return generateAssume((Assume) stmt, scope);
+>, <Line: +				return generateReturn((Return) stmt, scope);
+>, <Line: +				return generateDebug((Debug) stmt, scope);
+>, <Line: +				return generateFail((Fail) stmt, scope);
+>, <Line: +				return generateIfElse((IfElse) stmt, scope);
+>, <Line: +				return generateSwitch((Switch) stmt, scope);
+>, <Line: +				return generateBreak((Break) stmt, scope);
+>, <Line: +				return generateContinue((Continue) stmt, scope);
+>, <Line: +				return generateNamedBlock((NamedBlock) stmt, scope);
+>, <Line: +				return generateWhile((While) stmt, scope);
+>, <Line: +				return generateDoWhile((DoWhile) stmt, scope);
+>, <Line: +				return generateAsStmt((Expr.FunctionOrMethodCall) stmt, scope);
+>, <Line: +				return generateAsStmt((Expr.IndirectFunctionOrMethodCall) stmt, scope);
+>, <Line: +				return generateNew((Expr.New) stmt, scope);
+>, <Line: +				return generateSkip((Skip) stmt, scope);
+>, <Line: +				WhileyFile.internalFailure("unknown statement: " + stmt.getClass().getName(), scope.getSourceContext(),						
+>, <Line: +						stmt);				
+>, <Line: +		} catch (ResolveError ex) {
+>, <Line: +			internalFailure(ex.getMessage(), scope.getSourceContext(), stmt, ex);
+>, <Line: +		} catch (SyntaxError ex) {
+>, <Line: +			throw ex;
+>, <Line: +		return -1; // deadcode
+>, <Line: +	 * Translate a variable declaration statement into WyIL bytecodes.
+>, <Line: +	private int generateVariableDeclaration(VariableDeclaration s, EnclosingScope scope) {
+>, <Line: +		// Translate initialiser expression (if applicable).
+>, <Line: +			int operand = generateExpression(s.expr, scope);
+>, <Line: +			return scope.add(s.type,new Bytecode.VariableDeclaration(s.parameter.name, operand), s.attributes());
+>, <Line: +		} else {
+>, <Line: +			return scope.add(s.type,new Bytecode.VariableDeclaration(s.parameter.name), s.attributes());
+>, <Line: +	 * Translate an assignment statement into WyIL bytecodes.
+>, <Line: +	 *            function or method declaration). The scope is used to aid with
+>, <Line: +	 *            error reporting as it determines the enclosing file.
+>, <Line: +	private int generateAssign(Stmt.Assign s, EnclosingScope scope) throws ResolveError {
+>, <Line: +		int[] lhs = generate((List) s.lvals, scope);
+>, <Line: +		int[] rhs = generateMultipleReturns(s.rvals, scope);
+>, <Line: +		return scope.add(new Bytecode.Assign(lhs, rhs), s.attributes());
+>, <Line: +	private int generateAssert(Stmt.Assert s, EnclosingScope scope) {
+>, <Line: +		// First, translate assertion
+>, <Line: +		int operand = generateExpression(s.expr, scope);
+>, <Line: +		return scope.add(new Bytecode.Assert(operand), s.attributes());
+>, <Line: +	private int generateAssume(Stmt.Assume s, EnclosingScope scope) {
+>, <Line: +		// First, translate assumption
+>, <Line: +		int operand = generateExpression(s.expr, scope);
+>, <Line: +		return scope.add(new Bytecode.Assume(operand), s.attributes());
+>, <Line: +	 * Translate a return statement into WyIL bytecodes.
+>, <Line: +	private int generateReturn(Stmt.Return s, EnclosingScope scope) throws ResolveError {
+>, <Line: +		int[] operands = generateMultipleReturns(returns,scope);
+>, <Line: +		return scope.add(new Bytecode.Return(operands), s.attributes());
+>, <Line: +	 * Translate a skip statement into a WyIL bytecode.
+>, <Line: +	private int generateSkip(Stmt.Skip s, EnclosingScope scope) {
+>, <Line: +		return scope.add(new Bytecode.Skip(),s.attributes());
+>, <Line: +	private int generateDebug(Stmt.Debug s, EnclosingScope scope) {
+>, <Line: +		int operand = generateExpression(s.expr, scope);
+>, <Line: +		return scope.add(new Bytecode.Debug(operand), s.attributes());
+>, <Line: +	private int generateFail(Stmt.Fail s, EnclosingScope scope) {
+>, <Line: +		return scope.add(new Bytecode.Fail(), s.attributes());
+>, <Line: +	private int generateIfElse(Stmt.IfElse s, EnclosingScope scope) throws ResolveError {
+>, <Line: +		// translate condition itself
+>, <Line: +		FlowResult fr = generateCondition(s.condition, scope);
+>, <Line: +		int trueBlockIndex = generateBlock(s.trueBranch, fr.trueScope);
+>, <Line: +		//
+>, <Line: +			// There is a false branch, so translate that as well
+>, <Line: +			int falseBlockIndex = generateBlock(s.falseBranch, fr.falseScope);
+>, <Line: +			//
+>, <Line: +			return scope.add(new Bytecode.If(fr.operand, trueBlockIndex, falseBlockIndex), s.attributes());
+>, <Line: +		} else {
+>, <Line: +			// No false branch to translate
+>, <Line: +			return scope.add(new Bytecode.If(fr.operand, trueBlockIndex), s.attributes());
+>, <Line: +	private int generateBreak(Stmt.Break s, EnclosingScope scope) {
+>, <Line: +		return scope.add(new Bytecode.Break(), s.attributes());
+>, <Line: +	private int generateContinue(Stmt.Continue s, EnclosingScope scope) {
+>, <Line: +		return scope.add(new Bytecode.Continue(), s.attributes());
+>, <Line: +	private int generateSwitch(Stmt.Switch s, EnclosingScope scope) throws Exception {
+>, <Line: +		int operand = generateExpression(s.expr, scope);
+>, <Line: +		Bytecode.Case[] cases = new Bytecode.Case[s.cases.size()];
+>, <Line: +		checkNoDuplicateLabels(s.cases, scope);
+>, <Line: +		for (int i = 0; i != cases.length; ++i) {
+>, <Line: +			Stmt.Case c = s.cases.get(i);
+>, <Line: +			EnclosingScope bodyScope = scope.clone();
+>, <Line: +			int body = generateBlock(c.stmts, bodyScope);
+>, <Line: +			cases[i] = new Bytecode.Case(body, c.constants);
+>, <Line: +		return scope.add(new Bytecode.Switch(operand, cases), s.attributes());
+>, <Line: +		for (int i = 0; i != cases.size(); ++i) {
+>, <Line: +			if (caseLabels != null) {
+>, <Line: +	private int generateNamedBlock(Stmt.NamedBlock s, EnclosingScope scope) {
+>, <Line: +		EnclosingScope bodyScope = scope.clone();
+>, <Line: +		int block = generateBlock(s.body, bodyScope);
+>, <Line: +		return scope.add(new Bytecode.NamedBlock(block,s.name),s.attributes());
+>, <Line: +	private int generateWhile(Stmt.While s, EnclosingScope scope) {
+>, <Line: +		// Translate loop invariant(s)
+>, <Line: +		int[] invariants = generate(s.invariants, scope);
+>, <Line: +		// Determine set of modified variables. This is done by
+>, <Line: +		// traversing the loop body to see which variables are assigned.
+>, <Line: +		int[] modified = determineModifiedVariables(s.body, scope);
+>, <Line: +		// Translate loop condition
+>, <Line: +		int condition = generateExpression(s.condition, scope);
+>, <Line: +		// Translate loop body
+>, <Line: +		EnclosingScope bodyScope = scope.clone();
+>, <Line: +		int body = generateBlock(s.body, bodyScope);
+>, <Line: +		//
+>, <Line: +		return scope.add(new Bytecode.While(body, condition, invariants, modified), s.attributes());
+>, <Line: +	private int generateDoWhile(Stmt.DoWhile s, EnclosingScope scope) {
+>, <Line: +		// Determine set of modified variables. This is done by
+>, <Line: +		// traversing the loop body to see which variables are assigned.
+>, <Line: +		int[] modified = determineModifiedVariables(s.body, scope);
+>, <Line: +		// Translate loop body
+>, <Line: +		EnclosingScope bodyScope = scope.clone();
+>, <Line: +		int body = generateBlock(s.body, bodyScope);
+>, <Line: +		// Translate loop invariant(s)
+>, <Line: +		int[] invariants = generate(s.invariants, scope);
+>, <Line: +		// Translate loop condition
+>, <Line: +		int condition = generateExpression(s.condition, scope);
+>, <Line: +		//
+>, <Line: +		return scope.add(Nominal.T_VOID,new Bytecode.DoWhile(body, condition, invariants, modified), s.attributes());
+>, <Line: +	}
+>, <Line: +	// =========================================================================
+>, <Line: +	// Multi-Expressions
+>, <Line: +	// =========================================================================
+>, <Line: +	/**
+>, <Line: +	 * Generate an invoke expression as a statement. There are only limited
+>, <Line: +	 * cases where this can arise. In particular, when a method is invoked and
+>, <Line: +	 * the return value is ignored. In such case, we generate an assignment with
+>, <Line: +	 * and empty left-hand side.
+>, <Line: +	 * 
+>, <Line: +	 * @param expr
+>, <Line: +	 *            The expression to be translated as a statement
+>, <Line: +	 * @param scope
+>, <Line: +	 *            The enclosing scope of the expression
+>, <Line: +	 */
+>, <Line: +	public int generateAsStmt(Expr.FunctionOrMethodCall expr, EnclosingScope scope) throws ResolveError {
+>, <Line: +		//
+>, <Line: +		int[] operands = generate(expr.arguments, scope);
+>, <Line: +		Nominal.FunctionOrMethod type = expr.type();
+>, <Line: +		return scope.add(Nominal.T_VOID,new Bytecode.Invoke(type.nominal(), operands, expr.nid()), expr.attributes());
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Generate an indirect invoke expression as a statement. There are only limited
+>, <Line: +	 * cases where this can arise. In particular, when a method is invoked and
+>, <Line: +	 * the return value is ignored. In such case, we generate an assignment with
+>, <Line: +	 * and empty left-hand side.
+>, <Line: +	 * 
+>, <Line: +	 * @param expr
+>, <Line: +	 *            The expression to be translated as a statement
+>, <Line: +	 * @param scope
+>, <Line: +	 *            The enclosing scope of the expression
+>, <Line: +	 */
+>, <Line: +	public int generateAsStmt(Expr.IndirectFunctionOrMethodCall expr, EnclosingScope scope) throws ResolveError {
+>, <Line: +		//
+>, <Line: +		int operand = generateExpression(expr.src, scope);
+>, <Line: +		int[] operands = generate(expr.arguments, scope);
+>, <Line: +		Nominal.FunctionOrMethod type = expr.type();
+>, <Line: +		return scope.add(Nominal.T_VOID,new Bytecode.IndirectInvoke(type.nominal(), operand, operands), expr.attributes());
+>, <Line: +	 * Translate a source-level conditional expression into WyIL bytecodes,
+>, <Line: +	 * using a given scope mapping named variables to locations. This produces a
+>, <Line: +	 * location index, and updates two environments which represent two sides of
+>, <Line: +	 * the same coin.
+>, <Line: +	 * @return A flow result where both true and false scopes are unaliased.
+>, <Line: +	 * @throws ResolveError
+>, <Line: +	public FlowResult generateCondition(Expr condition, EnclosingScope scope) throws ResolveError {
+>, <Line: +		if (condition instanceof Expr.BinOp) {
+>, <Line: +			Expr.BinOp bop = (Expr.BinOp) condition;
+>, <Line: +			switch (bop.op) {
+>, <Line: +			case AND:
+>, <Line: +				return generateAndCondition(bop, scope);
+>, <Line: +			case OR:
+>, <Line: +				return generateOrCondition(bop, scope);
+>, <Line: +			case IS:
+>, <Line: +				return generateIsCondition(bop, scope);
+>, <Line: +		} else if (condition instanceof Expr.UnOp) {
+>, <Line: +			Expr.UnOp uop = (Expr.UnOp) condition;
+>, <Line: +			if (uop.op == Expr.UOp.NOT) {
+>, <Line: +				return generateNotCondition(uop, scope);
+>, <Line: +			}
+>, <Line: +		// default: fall back to standard generation
+>, <Line: +		int index = generateExpression(condition, scope);
+>, <Line: +		// We have to clone the two scopes here to prevent them from being
+>, <Line: +		// aliases.
+>, <Line: +		return new FlowResult(index, scope.clone(), scope.clone());
+>, <Line: +	 * Translate a source-level conjunction into a sequence of WyIL bytecodes.
+>, <Line: +	 * The key challenge here is to correctly propagate the scope information
+>, <Line: +	 * into the lhs and rhs. Since the rhs is only executed when the lhs holds,
+>, <Line: +	 * we use the "true scope" from the lhs when translating the rhs. For
+>, <Line: +	 * example:
+>, <Line: +	 * <pre>
+>, <Line: +	 * x is int && x >= 0
+>, <Line: +	 * </pre>
+>, <Line: +	 * 
+>, <Line: +	 * Here, the true scope coming out of the lhs will identify
+>, <Line: +	 * <code>x<code> with type <code>int</code>. This is necessary for the rhs
+>, <Line: +	 * to make sense. Observe that this is exploiting the fact that operators
+>, <Line: +	 * have short circuiting behaviour in Whiley.
+>, <Line: +	 *            Condition being translated
+>, <Line: +	 *            Enclosing scope going into this condition.
+>, <Line: +	 * @throws ResolveError
+>, <Line: +	public FlowResult generateAndCondition(Expr.BinOp condition, EnclosingScope scope) throws ResolveError {
+>, <Line: +		FlowResult lhs = generateCondition(condition.lhs, scope);
+>, <Line: +		FlowResult rhs = generateCondition(condition.rhs, lhs.trueScope);
+>, <Line: +		int[] operands = new int[] { lhs.operand, rhs.operand };
+>, <Line: +		int result = scope.add(condition.result(), new Bytecode.Operator(operands, Bytecode.OperatorKind.AND),
+>, <Line: +				condition.attributes());
+>, <Line: +		// Must join lhs.falseScope and rhs.falseScope; this can result in the
+>, <Line: +		// creation of new alias declarations.
+>, <Line: +		EnclosingScope falseScope = join(scope, lhs.falseScope, rhs.falseScope);
+>, <Line: +		return new FlowResult(result, rhs.trueScope, falseScope);
+>, <Line: +	 * Translate a source-level disjunction into a sequence of WyIL bytecodes.
+>, <Line: +	 * The key challenge here is to correctly propagate the scope information
+>, <Line: +	 * into the lhs and rhs. Since the rhs is only executed when the lhs doesn't
+>, <Line: +	 * hold, we use the "false scope" from the lhs when translating the rhs. For
+>, <Line: +	 * example:
+>, <Line: +	 * 
+>, <Line: +	 * <pre>
+>, <Line: +	 * x is null || x >= 0
+>, <Line: +	 * </pre>
+>, <Line: +	 * 
+>, <Line: +	 * Here, assume x is declared with type <code>int|null</code>. Then, the
+>, <Line: +	 * false scope coming out of the lhs will identify
+>, <Line: +	 * <code>x<code> with type <code>int</code>. This is necessary for the rhs
+>, <Line: +	 * to make sense. Observe that this is exploiting the fact that operators
+>, <Line: +	 * have short circuiting behaviour in Whiley.
+>, <Line: +	 *            Condition being translated
+>, <Line: +	 *            Enclosing scope going into this condition.
+>, <Line: +	 * @throws ResolveError
+>, <Line: +	public FlowResult generateOrCondition(Expr.BinOp condition, EnclosingScope scope) throws ResolveError {
+>, <Line: +		FlowResult lhs = generateCondition(condition.lhs, scope);
+>, <Line: +		FlowResult rhs = generateCondition(condition.rhs, lhs.falseScope);
+>, <Line: +		int[] operands = new int[] { lhs.operand, rhs.operand };
+>, <Line: +		int result = scope.add(condition.result(),new Bytecode.Operator(operands, Bytecode.OperatorKind.OR), condition.attributes());
+>, <Line: +		// Must join lhs.trueScope and rhs.trueScope; this can result in the
+>, <Line: +		// creation of new alias declarations.
+>, <Line: +		EnclosingScope trueScope = join(scope,lhs.trueScope,rhs.trueScope);
+>, <Line: +		return new FlowResult(result, trueScope, rhs.falseScope);
+>, <Line: +	 * Translate a source-level type test. This produces two potentially updated
+>, <Line: +	 * scopes, one for the true branch and one for the false branch. In the case
+>, <Line: +	 * of a variable being retyped, then the true branch contains the updated
+>, <Line: +	 * type whilst the false branch contains the negated type. For example:
+>, <Line: +	 * 
+>, <Line: +	 * <pre>
+>, <Line: +	 * x is int
+>, <Line: +	 * </pre>
+>, <Line: +	 * 
+>, <Line: +	 * Assum <code>x</code> is declared with type <code>int|null</code>. Then on
+>, <Line: +	 * the true branch <code>x</code> has type <code>int&(int|null)</code> which
+>, <Line: +	 * reduces to <code>int</code>. And, on the false branch, <code>x</code> has
+>, <Line: +	 * type <code>!int&(int|null)</code> which reduces to <code>null</code>.
+>, <Line: +	 * @throws ResolveError
+>, <Line: +	public FlowResult generateIsCondition(Expr.BinOp condition, EnclosingScope scope) throws ResolveError {
+>, <Line: +		int lhs = generateExpression(condition.lhs,scope);
+>, <Line: +		int rhs = generateExpression(condition.rhs,scope);
+>, <Line: +		EnclosingScope trueScope = scope.clone();
+>, <Line: +		EnclosingScope falseScope = scope.clone();
+>, <Line: +		// Check to see whether the lhs is a variable being retyped. If so, we
+>, <Line: +		// need to construct the true/false scopes accordingly.
+>, <Line: +			Expr.LocalVariable var = (Expr.LocalVariable) condition.lhs;
+>, <Line: +			Nominal varType = var.result();
+>, <Line: +			Expr.TypeVal typeTest = (Expr.TypeVal) condition.rhs;
+>, <Line: +			Nominal trueBranchType = Nominal.intersect(varType, typeTest.type);
+>, <Line: +			Nominal falseBranchType = Nominal.intersect(varType, Nominal.Negation(typeTest.type));
+>, <Line: +			trueScope.createAlias(trueBranchType, var.var, condition.attributes());
+>, <Line: +			falseScope.createAlias(falseBranchType, var.var, condition.attributes());
+>, <Line: +		// do something
+>, <Line: +		int[] operands = new int[] { lhs, rhs };
+>, <Line: +		int result = scope.add(condition.result(),new Bytecode.Operator(operands, Bytecode.OperatorKind.IS), condition.attributes());
+>, <Line: +		return new FlowResult(result, trueScope, falseScope);
+>, <Line: +	}
+>, <Line: +	public FlowResult generateNotCondition(Expr.UnOp condition, EnclosingScope scope) throws ResolveError {
+>, <Line: +		FlowResult mhs = generateCondition(condition.mhs, scope);
+>, <Line: +		int[] operands = new int[] { mhs.operand };
+>, <Line: +		int result = scope.add(condition.result(), new Bytecode.Operator(operands, Bytecode.OperatorKind.NOT),
+>, <Line: +				condition.attributes());
+>, <Line: +		return new FlowResult(result, mhs.falseScope, mhs.trueScope);
+>, <Line: +	 * Join two scopes together, creating new alias declarations as necessary.
+>, <Line: +	 * Each scope maps variables to their location index. An ancestor scope is
+>, <Line: +	 * included, which must be an ancestor of both. When the index of a given
+>, <Line: +	 * variable differs between the two scopes, this indicates at least one of
+>, <Line: +	 * them has diverged from the ancestor by introducing an alias. Note that
+>, <Line: +	 * the only situation in which they have identify the same location for a
+>, <Line: +	 * given variable is when that matches the ancestor as well.
+>, <Line: +	 * 
+>, <Line: +	 * @param leftChild
+>, <Line: +	 * @param rightChild
+>, <Line: +	private EnclosingScope join(EnclosingScope ancestor, EnclosingScope leftChild, EnclosingScope rightChild) {
+>, <Line: +		EnclosingScope result = ancestor.clone();
+>, <Line: +		for (String var : ancestor.environment.keySet()) {
+>, <Line: +			int leftLocation = leftChild.get(var);
+>, <Line: +			int rightLocation = rightChild.get(var);
+>, <Line: +			if (leftLocation != rightLocation) {
+>, <Line: +				// Here, we need to do something.
+>, <Line: +				Location<?> origDecl = ancestor.getLocation(var);
+>, <Line: +				Location<?> lhsDecl = leftChild.getLocation(var);
+>, <Line: +				Location<?> rhsDecl = rightChild.getLocation(var);
+>, <Line: +				Type type = Type.Union(lhsDecl.getType(), rhsDecl.getType());
+>, <Line: +				if (type.equals(origDecl.getType())) {
+>, <Line: +					// Easy case, as no new alias required. Therefore, we can
+>, <Line: +					// simply reuse the original declaration.
+>, <Line: +					result.environment.put(var, origDecl.getIndex());
+>, <Line: +				} else {
+>, <Line: +					// Harder case. Since the combine type differs from the
+>, <Line: +					// original declaration, a new alias declaration is
+>, <Line: +					// required.
+>, <Line: +					Nominal nominal = Nominal.construct(type, type);
+>, <Line: +					int newDecl = result.createAlias(nominal, var, Collections.EMPTY_LIST);
+>, <Line: +					result.environment.put(var, newDecl);
+>, <Line: +				}
+>, <Line: +			} 
+>, <Line: +		return result;
+>, <Line: +	 * The flow result is essentially a triple being returned from the
+>, <Line: +	 * generateCondition() family of functions. It's purpose is just to make
+>, <Line: +	 * their signatures a little neater.
+>, <Line: +	 * 
+>, <Line: +	 * @author David J. Pearce
+>, <Line: +	private static class FlowResult {
+>, <Line: +		/**
+>, <Line: +		 * Location index for generated expression
+>, <Line: +		 */
+>, <Line: +		public final int operand;
+>, <Line: +		/**
+>, <Line: +		 * Scope which holds on the true branch
+>, <Line: +		 */
+>, <Line: +		public final EnclosingScope trueScope;
+>, <Line: +		/**
+>, <Line: +		 * Scope which holds on the false branch
+>, <Line: +		 */
+>, <Line: +		public final EnclosingScope falseScope;
+>, <Line: +		public FlowResult(int operand, EnclosingScope trueScope,  EnclosingScope falseScope) {
+>, <Line: +			if(trueScope == falseScope) {
+>, <Line: +				throw new IllegalArgumentException("true/false scopes cannot be aliases");
+>, <Line: +			this.operand = operand;
+>, <Line: +			this.trueScope = trueScope;
+>, <Line: +			this.falseScope = falseScope;
+>, <Line: +	// Expressions
+>, <Line: +	/**
+>, <Line: +	 * Translate a source-level expression into a WyIL bytecode block, using a
+>, <Line: +	 * given environment mapping named variables to registers. This expression
+>, <Line: +	 * may generate zero or more results.
+>, <Line: +	 * 
+>, <Line: +	 * @param expression
+>, <Line: +	 * @param scope
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public int[] generateMultipleReturns(List<Expr> expressions, EnclosingScope scope) throws ResolveError {
+>, <Line: +		int[] returns = new int[0];
+>, <Line: +		for(int i=0;i!=expressions.size();++i) {
+>, <Line: +			Expr expression = expressions.get(i);
+>, <Line: +			if(expression instanceof Expr.FunctionOrMethodCall) {
+>, <Line: +				returns = append(returns,generateFunctionOrMethodCall((Expr.FunctionOrMethodCall) expression,scope));
+>, <Line: +			} else if(expression instanceof Expr.IndirectFunctionOrMethodCall) {
+>, <Line: +				returns = append(returns,generateIndirectFunctionOrMethodCall((Expr.IndirectFunctionOrMethodCall) expression,scope));
+>, <Line: +				returns = append(returns,generateExpression(expression,scope));
+>, <Line: +		return returns;
+>, <Line: +	public int generateExpression(Expr expression, EnclosingScope scope) {
+>, <Line: +				return generateConstant((Expr.Constant) expression, scope);
+>, <Line: +				return generateLocalVariable((Expr.LocalVariable) expression, scope);
+>, <Line: +				return generateConstantAccess((Expr.ConstantAccess) expression, scope);
+>, <Line: +				return generateArrayInitialiser((Expr.ArrayInitialiser) expression, scope);
+>, <Line: +				return generateArrayGenerator((Expr.ArrayGenerator) expression, scope);
+>, <Line: +				return generateBinaryOperator((Expr.BinOp) expression, scope);
+>, <Line: +				return generateDereference((Expr.Dereference) expression, scope);
+>, <Line: +				return generateCast((Expr.Cast) expression, scope);
+>, <Line: +				return generateIndexOf((Expr.IndexOf) expression, scope);
+>, <Line: +				return generateUnaryOperator((Expr.UnOp) expression, scope);
+>, <Line: +				return generateFunctionOrMethodCall((Expr.FunctionOrMethodCall) expression, scope);
+>, <Line: +			} else if (expression instanceof Expr.IndirectFunctionOrMethodCall) {
+>, <Line: +				return generateIndirectFunctionOrMethodCall((Expr.IndirectFunctionOrMethodCall) expression, scope);
+>, <Line: +				return generateQuantifier((Expr.Quantifier) expression, scope);
+>, <Line: +				return generateFieldAccess((Expr.FieldAccess) expression, scope);
+>, <Line: +				return generateRecord((Expr.Record) expression, scope);
+>, <Line: +				return generateFunctionOrMethod((Expr.FunctionOrMethod) expression, scope);
+>, <Line: +				return generateLambda((Expr.Lambda) expression, scope);
+>, <Line: +				return generateNew((Expr.New) expression, scope);
+>, <Line: +			} else if (expression instanceof Expr.TypeVal) {
+>, <Line: +				return generateTypeVal((Expr.TypeVal) expression, scope);
+>, <Line: +				internalFailure("unknown expression: " + expression.getClass().getName(), scope.getSourceContext(),
+>, <Line: +						expression);
+>, <Line: +	public int generateFunctionOrMethodCall(Expr.FunctionOrMethodCall expr, EnclosingScope scope) throws ResolveError {
+>, <Line: +		int[] operands = generate(expr.arguments, scope);
+>, <Line: +		Nominal.FunctionOrMethod type = expr.type();
+>, <Line: +		return scope.add(type.returns(), new Bytecode.Invoke(type.nominal(), operands, expr.nid()),
+>, <Line: +				expr.attributes());
+>, <Line: +	public int generateIndirectFunctionOrMethodCall(Expr.IndirectFunctionOrMethodCall expr, EnclosingScope scope) throws ResolveError {
+>, <Line: +		int operand = generateExpression(expr.src, scope);
+>, <Line: +		int[] operands = generate(expr.arguments, scope);
+>, <Line: +		Nominal.FunctionOrMethod type = expr.type();
+>, <Line: +		return scope.add(type.returns(), new Bytecode.IndirectInvoke(type.nominal(), operand, operands),
+>, <Line: +				expr.attributes());
+>, <Line: +	private int generateConstant(Expr.Constant expr, EnclosingScope scope) {
+>, <Line: +		Bytecode.Expr operand = new Bytecode.Const(val);
+>, <Line: +		return scope.add(expr.result(), operand, expr.attributes());
+>, <Line: +	private int generateTypeVal(Expr.TypeVal expr, EnclosingScope scope) {
+>, <Line: +		Constant val = new Constant.Type(expr.type.nominal());
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Const(val), expr.attributes());
+>, <Line: +	private int generateFunctionOrMethod(Expr.FunctionOrMethod expr, EnclosingScope scope) {
+>, <Line: +		// FIXME: should really remove Expr.FunctionOrMethod from the AST. This
+>, <Line: +		// should be just an Expr.Constant
+>, <Line: +		Type.FunctionOrMethod type = expr.type.nominal();
+>, <Line: +		Constant.FunctionOrMethod val = new Constant.FunctionOrMethod(expr.nid, type);
+>, <Line: +		Bytecode.Expr operand = new Bytecode.Const(val);
+>, <Line: +		return scope.add(expr.result(), operand, expr.attributes());
+>, <Line: +	private int generateLambda(Expr.Lambda expr, EnclosingScope scope) {
+>, <Line: +		// Create a new scope for the lambda body. This will contain any
+>, <Line: +		// parameters which are declared as part of the lambda expression.
+>, <Line: +		EnclosingScope lambdaScope = scope.clone();
+>, <Line: +		// Now, declare lambda parameters parameters
+>, <Line: +		int[] parameters = new int[expr.parameters.size()];
+>, <Line: +		for (int i = 0; i != parameters.length; ++i) {
+>, <Line: +			WhileyFile.Parameter parameter = expr.parameters.get(i);
+>, <Line: +			// allocate parameter to register in the lambda scope
+>, <Line: +			parameters[i] = lambdaScope.declare(lambdaType.param(i), parameter.name, parameter.attributes());
+>, <Line: +		// Now, determine the set of used variables from the enclosing scope
+>, <Line: +		// which forms the environment of the lambda
+>, <Line: +		ArrayList<Integer> environment = new ArrayList<Integer>();
+>, <Line: +				int variable = scope.get(v.second());
+>, <Line: +				environment.add(variable);
+>, <Line: +		// Translate the lambda body
+>, <Line: +		int body = generateExpression(expr.body, lambdaScope);
+>, <Line: +		//
+>, <Line: +		return scope.add(lambdaType,
+>, <Line: +				new Bytecode.Lambda(lambdaType.nominal(), body, parameters, toIntArray(environment)),
+>, <Line: +				expr.attributes());
+>, <Line: +	private int generateConstantAccess(Expr.ConstantAccess expr, EnclosingScope scope) throws ResolveError {
+>, <Line: +		// FIXME: the concept of a constant access should propagate through to
+>, <Line: +		// the bytecode, rather than having the constants inlined here.
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Const(val), expr.attributes());
+>, <Line: +	private int generateLocalVariable(Expr.LocalVariable expr, EnclosingScope scope) throws ResolveError {
+>, <Line: +		int decl = scope.get(expr.var);
+>, <Line: +		Location<?> vd = scope.enclosing.getLocation(decl);		
+>, <Line: +		return scope.add(expr.result(),new Bytecode.VariableAccess(decl), expr.attributes());
+>, <Line: +	private int generateUnaryOperator(Expr.UnOp expr, EnclosingScope scope) {
+>, <Line: +		int[] operands = new int[] { generateExpression(expr.mhs, scope) };
+>, <Line: +		Bytecode.OperatorKind op;
+>, <Line: +			op = Bytecode.OperatorKind.NEG;
+>, <Line: +			op = Bytecode.OperatorKind.BITWISEINVERT;
+>, <Line: +			op = Bytecode.OperatorKind.NOT;
+>, <Line: +			op = Bytecode.OperatorKind.ARRAYLENGTH;
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Operator(operands, op), expr.attributes());
+>, <Line: +	}
+>, <Line: +	private int generateDereference(Expr.Dereference expr, EnclosingScope scope) {
+>, <Line: +		int[] operands = new int[] { generateExpression(expr.src, scope) };
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Operator(operands, Bytecode.OperatorKind.DEREFERENCE),
+>, <Line: +				expr.attributes());
+>, <Line: +	}
+>, <Line: +	private int generateIndexOf(Expr.IndexOf expr, EnclosingScope scope) {
+>, <Line: +		int[] operands = { generateExpression(expr.src, scope), generateExpression(expr.index, scope) };
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Operator(operands, Bytecode.OperatorKind.ARRAYINDEX),
+>, <Line: +				expr.attributes());
+>, <Line: +	private int generateCast(Expr.Cast expr, EnclosingScope scope) {
+>, <Line: +		int operand = generateExpression(expr.expr, scope);
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Convert(operand), expr.attributes());
+>, <Line: +	}
+>, <Line: +	private int generateBinaryOperator(Expr.BinOp v, EnclosingScope scope) throws Exception {
+>, <Line: +		Nominal result = v.result();
+>, <Line: +		int[] operands = { generateExpression(v.lhs, scope), generateExpression(v.rhs, scope) };
+>, <Line: +		return scope.add(result, new Bytecode.Operator(operands, OP2BOP(v.op, v, scope.getSourceContext())),
+>, <Line: +				v.attributes());
+>, <Line: +	}
+>, <Line: +	private int generateArrayInitialiser(Expr.ArrayInitialiser expr, EnclosingScope scope) {
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Operator(operands, Bytecode.OperatorKind.ARRAYCONSTRUCTOR),
+>, <Line: +				expr.attributes());
+>, <Line: +	}
+>, <Line: +	private int generateArrayGenerator(Expr.ArrayGenerator expr, EnclosingScope scope) {
+>, <Line: +		int[] operands = new int[] { generateExpression(expr.element, scope), generateExpression(expr.count, scope) };
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Operator(operands, Bytecode.OperatorKind.ARRAYGENERATOR),
+>, <Line: +				expr.attributes());
+>, <Line: +	}
+>, <Line: +	private int generateQuantifier(Expr.Quantifier expr, EnclosingScope scope) {
+>, <Line: +		EnclosingScope quantifierScope = scope.clone();
+>, <Line: +		// First, translate sources and declare variables in the quantifier
+>, <Line: +		// scope.
+>, <Line: +		Bytecode.Range[] ranges = new Bytecode.Range[expr.sources.size()];
+>, <Line: +		for (int i = 0; i != ranges.length; ++i) {
+>, <Line: +			Triple<String, Expr, Expr> t = expr.sources.get(i);
+>, <Line: +			int start = generateExpression(t.second(), quantifierScope);
+>, <Line: +			int end = generateExpression(t.third(), quantifierScope);
+>, <Line: +			// FIXME: the attributes provided here are not very "precise".
+>, <Line: +			int var = quantifierScope.declare(Nominal.T_INT, t.first(), expr.attributes());
+>, <Line: +			ranges[i] = new Bytecode.Range(var, start, end);
+>, <Line: +		}
+>, <Line: +		// Second, translate the quantifier body in the context of the new
+>, <Line: +		// scope.
+>, <Line: +		int body = generateExpression(expr.condition, quantifierScope);
+>, <Line: +		//
+>, <Line: +		Bytecode.QuantifierKind kind = Bytecode.QuantifierKind.valueOf(expr.cop.name());
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Quantifier(kind, body, ranges), expr.attributes());
+>, <Line: +	}
+>, <Line: +	private int generateRecord(Expr.Record expr, EnclosingScope scope) {
+>, <Line: +			operands[i] = generateExpression(arg, scope);
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Operator(operands, Bytecode.OperatorKind.RECORDCONSTRUCTOR),
+>, <Line: +				expr.attributes());
+>, <Line: +	private int generateFieldAccess(Expr.FieldAccess expr, EnclosingScope scope) {
+>, <Line: +		int operand = generateExpression(expr.src, scope);
+>, <Line: +		return scope.add(expr.result(), new Bytecode.FieldLoad(operand, expr.name), expr.attributes());
+>, <Line: +	private int generateNew(Expr.New expr, EnclosingScope scope) throws ResolveError {
+>, <Line: +		int[] operands = new int[] { generateExpression(expr.expr, scope) };
+>, <Line: +		return scope.add(expr.result(), new Bytecode.Operator(operands, Bytecode.OperatorKind.NEW), expr.attributes());
+>, <Line: +			operands[i] = generateExpression(arg, scope);
+>, <Line: +	/**
+>, <Line: +	 * Determine the list of variables which are assigned in a statement block,
+>, <Line: +	 * or any child block.
+>, <Line: +	 * 
+>, <Line: +	 * @param block
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	private int[] determineModifiedVariables(List<Stmt> block, EnclosingScope scope) {
+>, <Line: +		SyntaxTree tree = scope.getSyntaxTree();
+>, <Line: +		HashSet<Integer> modified = new HashSet<Integer>();
+>, <Line: +		determineModifiedVariables(block,scope,modified);
+>, <Line: +		int[] result = new int[modified.size()];
+>, <Line: +		int index = 0;
+>, <Line: +		for(Integer i : modified) {
+>, <Line: +			Bytecode.VariableAccess va = new Bytecode.VariableAccess(i);
+>, <Line: +			Location<?> location = tree.getLocation(i);
+>, <Line: +			Nominal type = Nominal.construct(location.getType(),location.getType());
+>, <Line: +			result[index++] = scope.add(type,va);
+>, <Line: +		}
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +	private void determineModifiedVariables(List<Stmt> block, EnclosingScope scope, Set<Integer> modified) {
+>, <Line: +		for(Stmt stmt : block) {
+>, <Line: +			if(stmt instanceof Stmt.Assign) {
+>, <Line: +				Stmt.Assign s = (Stmt.Assign) stmt;
+>, <Line: +				for(Expr.LVal lval : s.lvals) {
+>, <Line: +					Expr.LocalVariable lv = extractAssignedVariable(lval,scope);
+>, <Line: +					if(lv == null) {
+>, <Line: +						// FIXME: this is not an ideal solution long term. In
+>, <Line: +						// particular, we really need this method to detect not
+>, <Line: +						// just modified variables, but also modified locations
+>, <Line: +						// in general (e.g. assignments through references, etc)  
+>, <Line: +						continue;
+>, <Line: +					}
+>, <Line: +					Integer variableIndex = scope.get(lv.var); 
+>, <Line: +					if(lv != null && variableIndex != null) {
+>, <Line: +						modified.add(variableIndex);
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			} else if(stmt instanceof Stmt.DoWhile) {
+>, <Line: +				Stmt.DoWhile s = (Stmt.DoWhile) stmt; 
+>, <Line: +				determineModifiedVariables(s.body,scope,modified);
+>, <Line: +			} else if(stmt instanceof Stmt.IfElse) {
+>, <Line: +				Stmt.IfElse s = (Stmt.IfElse) stmt; 
+>, <Line: +				determineModifiedVariables(s.trueBranch,scope,modified);
+>, <Line: +				determineModifiedVariables(s.falseBranch,scope,modified);
+>, <Line: +			} else if(stmt instanceof Stmt.NamedBlock) {
+>, <Line: +				Stmt.NamedBlock s = (Stmt.NamedBlock) stmt;
+>, <Line: +				determineModifiedVariables(s.body,scope,modified);
+>, <Line: +			} else if(stmt instanceof Stmt.Switch) {
+>, <Line: +				Stmt.Switch s = (Stmt.Switch) stmt;
+>, <Line: +				for(Stmt.Case c : s.cases) {
+>, <Line: +					determineModifiedVariables(c.stmts,scope,modified);
+>, <Line: +				}
+>, <Line: +			} else if(stmt instanceof Stmt.While) {
+>, <Line: +				Stmt.While s = (Stmt.While) stmt; 
+>, <Line: +				determineModifiedVariables(s.body,scope,modified);
+>, <Line: +			} 
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private Expr.LocalVariable extractAssignedVariable(Expr.LVal lval, EnclosingScope scope) {
+>, <Line: +		if (lval instanceof Expr.LocalVariable) {
+>, <Line: +			return (Expr.LocalVariable) lval;
+>, <Line: +		} else if (lval instanceof Expr.FieldAccess) {
+>, <Line: +			Expr.FieldAccess e = (Expr.FieldAccess) lval;
+>, <Line: +			return extractAssignedVariable((Expr.LVal) e.src, scope);
+>, <Line: +		} else if (lval instanceof Expr.IndexOf) {
+>, <Line: +			Expr.IndexOf e = (Expr.IndexOf) lval;
+>, <Line: +			return extractAssignedVariable((Expr.LVal) e.src, scope);
+>, <Line: +		} else if (lval instanceof Expr.Dereference) {
+>, <Line: +			return null;
+>, <Line: +		} else {
+>, <Line: +			internalFailure(errorMessage(INVALID_LVAL_EXPRESSION), scope.getSourceContext(), (Expr) lval);
+>, <Line: +			return null; // dead code
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private int[] append(int[] lhs, int... rhs) {
+>, <Line: +		int[] rs = new int[lhs.length + rhs.length];
+>, <Line: +		System.arraycopy(lhs, 0, rs, 0, lhs.length);
+>, <Line: +		System.arraycopy(rhs, 0, rs, lhs.length, rhs.length);
+>, <Line: +		return rs;
+>, <Line: +	}
+>, <Line: +		case AND:
+>, <Line: +			return Bytecode.OperatorKind.AND;
+>, <Line: +		case OR:
+>, <Line: +			return Bytecode.OperatorKind.OR;
+>, <Line: +		case IS:
+>, <Line: +			return Bytecode.OperatorKind.IS;
+>, <Line: +		for (int i = 0; i != arr.length; ++i) {
+>, <Line: +	private static int _idx = 0;
+>, <Line: +		 * Maps variables to their WyIL location.
+>, <Line: +		private final HashMap<String, Integer> environment;		
+>, <Line: +		 * The enclosing syntax tree
+>, <Line: +		private final SyntaxTree enclosing;
+>, <Line: +		public EnclosingScope(SyntaxTree enclosing, WhileyFile.Context context) {
+>, <Line: +			this(new HashMap<String, Integer>(), enclosing, context);
+>, <Line: +		private EnclosingScope(Map<String, Integer> environment, SyntaxTree enclosing, WhileyFile.Context context) {
+>, <Line: +			this.enclosing = enclosing;
+>, <Line: +		public SyntaxTree getSyntaxTree() {
+>, <Line: +			return enclosing;
+>, <Line: +		public Location<?> getLocation(String name) {
+>, <Line: +			return enclosing.getLocation(environment.get(name));
+>, <Line: +		}
+>, <Line: +		/**
+>, <Line: +		 * Declare a new variable in the enclosing bytecode forest.
+>, <Line: +		 * 
+>, <Line: +		 * @param type
+>, <Line: +		 *            The declared type of the variable
+>, <Line: +		 * @param name
+>, <Line: +		 *            The declare name of the variable
+>, <Line: +		 * @return
+>, <Line: +		 */
+>, <Line: +		public int declare(Nominal type, String name, List<Attribute> attributes) {
+>, <Line: +			List<SyntaxTree.Location<?>> locations = enclosing.getLocations();
+>, <Line: +			int index = locations.size();
+>, <Line: +			environment.put(name, index);
+>, <Line: +			Bytecode.VariableDeclaration decl = new Bytecode.VariableDeclaration(name);
+>, <Line: +			Type locationType = normalise(type);
+>, <Line: +			locations.add(new SyntaxTree.Location<Bytecode>(enclosing, locationType, decl, attributes));
+>, <Line: +		/**
+>, <Line: +		 * Declare a variable alias in the enclosing bytecode forest.
+>, <Line: +		 * 
+>, <Line: +		 * @param type
+>, <Line: +		 *            The declared type of the variable
+>, <Line: +		 * @param name
+>, <Line: +		 *            The declare name of the variable
+>, <Line: +		 * @return
+>, <Line: +		 */
+>, <Line: +		public int createAlias(Nominal type, String name, List<Attribute> attributes) {
+>, <Line: +			List<SyntaxTree.Location<?>> locations = enclosing.getLocations();
+>, <Line: +			int original = environment.get(name);
+>, <Line: +			int index = locations.size();
+>, <Line: +			Bytecode.AliasDeclaration alias = new Bytecode.AliasDeclaration(original);
+>, <Line: +			Type locationType = normalise(type);			
+>, <Line: +			locations.add(new SyntaxTree.Location<Bytecode>(enclosing, locationType, alias, attributes));
+>, <Line: +		public int add(Bytecode stmt, Attribute... attributes) {
+>, <Line: +			return add(stmt,Arrays.asList(attributes));
+>, <Line: +		}
+>, <Line: +		public int add(Nominal type, Bytecode stmt, Attribute... attributes) {
+>, <Line: +			return add(type,stmt,Arrays.asList(attributes));
+>, <Line: +		public int add(Bytecode operand, List<Attribute> attributes) {
+>, <Line: +			return add(new Nominal[0],operand,attributes);
+>, <Line: +		public int add(Nominal type, Bytecode operand, List<Attribute> attributes) {
+>, <Line: +			return add(new Nominal[]{type},operand,attributes);
+>, <Line: +		/**
+>, <Line: +		 * Allocate an operand on the stack.
+>, <Line: +		 * 
+>, <Line: +		 * @param Type
+>, <Line: +		 * @param operand
+>, <Line: +		 * @return
+>, <Line: +		 */
+>, <Line: +		public int add(Nominal[] nominals, Bytecode operand, List<Attribute> attributes) {
+>, <Line: +			List<SyntaxTree.Location<?>> locations =  enclosing.getLocations();
+>, <Line: +			Type[] types = new Type[nominals.length];
+>, <Line: +			for (int i = 0; i != types.length; ++i) {
+>, <Line: +				types[i] = normalise(nominals[i]);
+>, <Line: +			}
+>, <Line: +			return add(types,operand,attributes);
+>, <Line: +		/**
+>, <Line: +		 * Allocate a multi-operand on the stack.
+>, <Line: +		 * 
+>, <Line: +		 * @param Type
+>, <Line: +		 * @param operand
+>, <Line: +		 * @return
+>, <Line: +		 */
+>, <Line: +		public int add(List<Nominal> types, Bytecode operand, List<Attribute> attributes) {
+>, <Line: +			Type[] nominals = new Type[types.size()];
+>, <Line: +			for (int i = 0; i != nominals.length; ++i) {
+>, <Line: +				nominals[i] = normalise(types.get(i));
+>, <Line: +			}
+>, <Line: +			return add(nominals,operand,attributes);
+>, <Line: +		private int add(Type[] types, Bytecode operand, List<Attribute> attributes) {
+>, <Line: +			List<SyntaxTree.Location<?>> locations = enclosing.getLocations();
+>, <Line: +			int index = locations.size();
+>, <Line: +			locations.add(new SyntaxTree.Location<Bytecode>(enclosing, types, operand, attributes));
+>, <Line: +			// Check whether this is declaring a new variable or not.
+>, <Line: +			if (operand instanceof Bytecode.VariableDeclaration) {
+>, <Line: +				Bytecode.VariableDeclaration vd = (Bytecode.VariableDeclaration) operand;
+>, <Line: +				environment.put(vd.getName(), index);
+>, <Line: +			}
+>, <Line: +			return index;
+>, <Line: +		/**
+>, <Line: +		 * Create a new clone scope. This is a subscope where new variables
+>, <Line: +		 * can be declared and, furthermore, it corresponds to a new block in
+>, <Line: +		 * the underlying forest.
+>, <Line: +		 * 
+>, <Line: +		 * @return
+>, <Line: +		 */
+>, <Line: +			return new EnclosingScope(environment, enclosing, context);
+>, <Line: +		}
+>, <Line: +		private Type normalise(Nominal type) {
+>, <Line: +			Type result = type.nominal();
+>, <Line: +			// FIXME: the following check is a hack to handle limitations
+>, <Line: +			// in the way Nominal types are currently handled.  #629
+>, <Line: +			if(result instanceof Type.Void) {
+>, <Line: +				result = type.raw();
+>, <Line: +			}
+>, <Line: +			return result;
+>]
+[<Line: -	/**
+>, <Line: -	 * The lambdas are anonymous functions used within statements and
+>, <Line: -	 * expressions in the source file. These are compiled into anonymised WyIL
+>, <Line: -	 * functions, since WyIL does not have an internal notion of a lambda.
+>, <Line: -	 */
+>, <Line: -	private final ArrayList<WyilFile.FunctionOrMethod> lambdas = new ArrayList<WyilFile.FunctionOrMethod>();
+>, <Line: -	 * @param wf
+>, <Line: -	public WyilFile generate(WhileyFile wf) {
+>, <Line: -		ArrayList<WyilFile.Block> declarations = new ArrayList<WyilFile.Block>();
+>, <Line: -		for (WhileyFile.Declaration d : wf.declarations) {
+>, <Line: -					declarations.add(generate((WhileyFile.Type) d));
+>, <Line: -					declarations.add(generate((WhileyFile.Constant) d));
+>, <Line: -					declarations.add(generate((WhileyFile.FunctionOrMethod) d));
+>, <Line: -		// Add any lambda functions which were used within some expression. Each
+>, <Line: -		// of these is guaranteed to have been given a unique and valid WyIL
+>, <Line: -		// name.
+>, <Line: -		declarations.addAll(lambdas);
+>, <Line: -		return new WyilFile(wf.module, wf.filename, declarations);
+>, <Line: -	private WyilFile.Constant generate(WhileyFile.Constant cd) {
+>, <Line: -		return new WyilFile.Constant(cd.modifiers(), cd.name(), cd.resolvedValue);
+>, <Line: -	private WyilFile.Type generate(WhileyFile.Type td) throws Exception {
+>, <Line: -		EnclosingScope scope = new EnclosingScope(td);
+>, <Line: -		scope.allocate(td.resolvedType, td.parameter.name());
+>, <Line: -		// Generate code for each invariant condition
+>, <Line: -		for (Expr invariant : td.invariant) {
+>, <Line: -			generateInvariantBlock(invariant, scope.createRootBlock());
+>, <Line: -		return new WyilFile.Type(td.modifiers(), td.name(), td.resolvedType.nominal(), scope.getForest());
+>, <Line: -	private WyilFile.FunctionOrMethod generate(WhileyFile.FunctionOrMethod fd) throws Exception {
+>, <Line: -		// ==================================================================
+>, <Line: -		// ==================================================================
+>, <Line: -		EnclosingScope scope = new EnclosingScope(fd);
+>, <Line: -		addDeclaredParameters(fd.parameters, fd.resolvedType().params(), scope);
+>, <Line: -		addDeclaredParameters(fd.returns, fd.resolvedType().returns(), scope);
+>, <Line: -		// ==================================================================
+>, <Line: -		// Generate pre-condition
+>, <Line: -		// ==================================================================
+>, <Line: -		for (Expr precondition : fd.requires) {
+>, <Line: -			generateInvariantBlock(precondition, scope.createRootBlock());			
+>, <Line: -		}
+>, <Line: -		// ==================================================================
+>, <Line: -		// Generate post-condition
+>, <Line: -		// ==================================================================
+>, <Line: -		for (Expr postcondition : fd.ensures) {
+>, <Line: -			generateInvariantBlock(postcondition, scope.createRootBlock());
+>, <Line: -		}
+>, <Line: -		// ==================================================================
+>, <Line: -		// Generate body
+>, <Line: -		// ==================================================================
+>, <Line: -		scope = scope.createRootBlock();
+>, <Line: -		for (Stmt s : fd.statements) {
+>, <Line: -			generate(s, scope);
+>, <Line: -		}
+>, <Line: -		// The following is sneaky. It guarantees that every method ends in a
+>, <Line: -		// return. For methods that actually need a value, this is either
+>, <Line: -		// removed as dead-code or remains and will cause an error.
+>, <Line: -		scope.add(new Bytecode.Return(), attributes(fd));
+>, <Line: -		WyilFile.FunctionOrMethod declaration;
+>, <Line: -		if (fd instanceof WhileyFile.Function) {
+>, <Line: -			WhileyFile.Function f = (WhileyFile.Function) fd;
+>, <Line: -			declaration = new WyilFile.FunctionOrMethod(fd.modifiers(), fd.name(), f.resolvedType.nominal(),
+>, <Line: -					scope.getForest(), fd.requires.size(), fd.ensures.size());
+>, <Line: -		} else {
+>, <Line: -			WhileyFile.Method md = (WhileyFile.Method) fd;
+>, <Line: -			declaration = new WyilFile.FunctionOrMethod(fd.modifiers(), fd.name(), md.resolvedType.nominal(),
+>, <Line: -					scope.getForest(), fd.requires.size(), fd.ensures.size());
+>, <Line: -		}
+>, <Line: -		// Done.
+>, <Line: -		return declaration;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Construct a new code block in a given forest corresponding to a
+>, <Line: -	 * precondition, postcondition or type invariant.
+>, <Line: -	 * 
+>, <Line: -	 * @param invariant
+>, <Line: -	 * @param scope
+>, <Line: -	 */
+>, <Line: -	private int generateInvariantBlock(Expr invariant, EnclosingScope scope) {
+>, <Line: -		String endLab = freshLabel();
+>, <Line: -		generateCondition(endLab, invariant, scope);
+>, <Line: -		scope.add(new Bytecode.Fail(), attributes(invariant));
+>, <Line: -		scope.add(new Bytecode.Label(endLab));
+>, <Line: -		scope.add(new Bytecode.Return());
+>, <Line: -		return scope.blockIndex();
+>, <Line: -			scope.allocate(types.get(i), parameter.name);
+>, <Line: -	private void generate(Stmt stmt, EnclosingScope scope) {
+>, <Line: -				generate((VariableDeclaration) stmt, scope);
+>, <Line: -				generate((Assign) stmt, scope);
+>, <Line: -				generate((Assert) stmt, scope);
+>, <Line: -				generate((Assume) stmt, scope);
+>, <Line: -				generate((Return) stmt, scope);
+>, <Line: -				generate((Debug) stmt, scope);
+>, <Line: -				generate((Fail) stmt, scope);
+>, <Line: -				generate((IfElse) stmt, scope);
+>, <Line: -				generate((Switch) stmt, scope);
+>, <Line: -				generate((Break) stmt, scope);
+>, <Line: -				generate((Continue) stmt, scope);
+>, <Line: -				generate((NamedBlock) stmt, scope);
+>, <Line: -				generate((While) stmt, scope);
+>, <Line: -				generate((DoWhile) stmt, scope);
+>, <Line: -				generate((Expr.Multi) stmt, scope);
+>, <Line: -				generate((Expr.Multi) stmt, scope);
+>, <Line: -				generate((Expr.New) stmt, scope);
+>, <Line: -				generate((Skip) stmt, scope);
+>, <Line: -				WhileyFile.internalFailure("unknown statement: " + stmt.getClass().getName(), scope.getSourceContext(), stmt);
+>, <Line: -		} catch (ResolveError rex) {
+>, <Line: -			internalFailure(rex.getMessage(), scope.getSourceContext(), stmt, rex);
+>, <Line: -		} catch (SyntaxError sex) {
+>, <Line: -			throw sex;
+>, <Line: -	 * Translate a variable declaration statement into a WyIL block. This only
+>, <Line: -	 * has an effect if an initialiser expression is given; otherwise, it's
+>, <Line: -	 * effectively a no-op. Consider the following variable declaration:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * int v = x + 1
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * const %3 = 1
+>, <Line: -	 * add %4 = %0, %3
+>, <Line: -	 * return %4
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * Here, we see that variable <code>v</code> is allocated to register 4,
+>, <Line: -	 * whilst variable <code>x</code> is allocated to register 0.
+>, <Line: -	private void generate(VariableDeclaration s, EnclosingScope scope) {
+>, <Line: -		// First, we allocate this variable to a given slot in the environment.		
+>, <Line: -		int[] targets = { scope.allocate(s.type,s.parameter.name) };
+>, <Line: -		// Second, translate initialiser expression if it exists.
+>, <Line: -			int[] operands = { generate(s.expr, scope) };
+>, <Line: -			scope.add(new Bytecode.Operator(s.expr.result().raw(), targets, operands, Bytecode.OperatorKind.ASSIGN),
+>, <Line: -					attributes(s));
+>, <Line: -	 * Translate an assignment statement into a WyIL block. This must consider
+>, <Line: -	 * the different forms of assignment which are permitted in Whiley,
+>, <Line: -	 * including:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * x = e     // variable assignment
+>, <Line: -	 * x,y = e   // tuple assignment
+>, <Line: -	 * x.f = e   // field assignment
+>, <Line: -	 * x[i] = e  // index-of assignment
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * As an example, consider the following index assignment:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * xs[i + 1] = 1
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * const %2 = 1
+>, <Line: -	 * const %4 = 1
+>, <Line: -	 * add %5 = %0, %4
+>, <Line: -	 * update %1[%5] %2
+>, <Line: -	 * const %6 = 0
+>, <Line: -	 * return %6
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * Here, variable <code>i</code> is allocated to register 0, whilst variable
+>, <Line: -	 * <code>xs</code> is allocated to register 1. The result of the index
+>, <Line: -	 * expression <code>i+1</code> is stored in the temporary register 5.
+>, <Line: -	 *            function or method declaration). The scope is used to aid
+>, <Line: -	 *            with error reporting as it determines the enclosing file.
+>, <Line: -	private void generate(Assign s, EnclosingScope scope) {
+>, <Line: -		// First, we translate all right-hand side expressions and assign them
+>, <Line: -		// to temporary registers.
+>, <Line: -		ArrayList<Integer> operands = new ArrayList<Integer>();
+>, <Line: -		ArrayList<Type> types = new ArrayList<Type>();
+>, <Line: -		for (int i = 0; i != s.rvals.size(); ++i) {
+>, <Line: -			Expr e = s.rvals.get(i);
+>, <Line: -			// FIXME: this is a rather ugly
+>, <Line: -			if (e instanceof Expr.Multi) {
+>, <Line: -				// The assigned expression actually has multiple returns,
+>, <Line: -				// therefore extract them all.
+>, <Line: -				Expr.Multi me = (Expr.Multi) e;
+>, <Line: -				for (Nominal t : me.returns()) {
+>, <Line: -					types.add(t.raw());
+>, <Line: -				}
+>, <Line: -				operands.addAll(toIntegerList(generate(me, scope)));
+>, <Line: -			} else {
+>, <Line: -				// The assigned rval is a simple expression which returns a
+>, <Line: -				// single value
+>, <Line: -				operands.add(generate(e, scope));
+>, <Line: -				types.add(e.result().raw());
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		// Second, update each expression on left-hand side of this assignment
+>, <Line: -		// appropriately. Note that we can safely assume here the number of
+>, <Line: -		// rvals and lvals matches as this has already been checked by
+>, <Line: -		// FlowTypeChecker.
+>, <Line: -		for (int i = 0; i != s.lvals.size(); ++i) {
+>, <Line: -			Expr.LVal lval = s.lvals.get(i);
+>, <Line: -			generateAssignment(lval, operands.get(i), types.get(i), scope);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public void generateAssignment(Expr.LVal lval, int operand, Type type, EnclosingScope scope) {
+>, <Line: -		if (lval instanceof Expr.AssignedVariable) {
+>, <Line: -			Expr.AssignedVariable v = (Expr.AssignedVariable) lval;
+>, <Line: -			// This is the easiest case. Having translated the right-hand side
+>, <Line: -			// expression, we now assign it directly to the register allocated
+>, <Line: -			// for variable on the left-hand side.
+>, <Line: -			int[] targets = new int[] { scope.get(v.var) };
+>, <Line: -			int[] operands = new int[] { operand };
+>, <Line: -			scope.add(new Bytecode.Operator(type, targets, operands, Bytecode.OperatorKind.ASSIGN), attributes(lval));
+>, <Line: -		} else if (lval instanceof Expr.IndexOf || lval instanceof Expr.FieldAccess
+>, <Line: -				|| lval instanceof Expr.Dereference) {
+>, <Line: -			// This is the more complicated case, since the left-hand side
+>, <Line: -			// expression is recursive. However, the WyIL update bytecode comes
+>, <Line: -			// to the rescue here. All we need to do is extract the variable
+>, <Line: -			// being updated and give this to the update bytecode. For example,
+>, <Line: -			// in the expression "x.y.f = e" we have that variable "x" is being
+>, <Line: -			// updated.
+>, <Line: -			ArrayList<String> fields = new ArrayList<String>();
+>, <Line: -			ArrayList<Integer> operands = new ArrayList<Integer>();
+>, <Line: -			Expr.AssignedVariable lhs = extractLVal(lval, fields, operands, scope);
+>, <Line: -			int target = scope.get(lhs.var);
+>, <Line: -			scope.add(new Bytecode.Update(lhs.type.raw(), target, toIntArray(operands), operand, lhs.afterType.raw(),
+>, <Line: -					fields), attributes(lval));
+>, <Line: -		} else {
+>, <Line: -			internalFailure("invalid assignment", scope.getSourceContext(), lval);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * This function recurses down the left-hand side of an assignment (e.g.
+>, <Line: -	 * x[i] = e, x.f = e, etc) with a complex lval. The primary goal is to
+>, <Line: -	 * identify the left-most variable which is actually being updated. A
+>, <Line: -	 * secondary goal is to collect the sequence of field names being updated,
+>, <Line: -	 * and translate any index expressions and store them in temporary
+>, <Line: -	 * registers.
+>, <Line: -	 *
+>, <Line: -	 * @param e
+>, <Line: -	 *            The LVal being extract from.
+>, <Line: -	 * @param fields
+>, <Line: -	 *            The list of fields being used in the assignment. Initially,
+>, <Line: -	 *            this is empty and is filled by this method as it traverses the
+>, <Line: -	 *            lval.
+>, <Line: -	 * @param operands
+>, <Line: -	 *            The list of temporary registers in which evaluated index
+>, <Line: -	 *            expression are stored. Initially, this is empty and is filled
+>, <Line: -	 *            by this method as it traverses the lval.
+>, <Line: -	 * @param scope
+>, <Line: -	 *            Enclosing scope of this statement.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private Expr.AssignedVariable extractLVal(Expr e, ArrayList<String> fields, ArrayList<Integer> operands,
+>, <Line: -			EnclosingScope scope) {
+>, <Line: -		if (e instanceof Expr.AssignedVariable) {
+>, <Line: -			Expr.AssignedVariable v = (Expr.AssignedVariable) e;
+>, <Line: -			return v;
+>, <Line: -		} else if (e instanceof Expr.Dereference) {
+>, <Line: -			Expr.Dereference pa = (Expr.Dereference) e;
+>, <Line: -			return extractLVal(pa.src, fields, operands, scope);
+>, <Line: -		} else if (e instanceof Expr.IndexOf) {
+>, <Line: -			Expr.IndexOf la = (Expr.IndexOf) e;
+>, <Line: -			int operand = generate(la.index, scope);
+>, <Line: -			Expr.AssignedVariable l = extractLVal(la.src, fields, operands, scope);
+>, <Line: -			operands.add(operand);
+>, <Line: -			return l;
+>, <Line: -		} else {
+>, <Line: -			Expr.FieldAccess ra = (Expr.FieldAccess) e;
+>, <Line: -			Expr.AssignedVariable r = extractLVal(ra.src, fields, operands, scope);
+>, <Line: -			fields.add(ra.name);
+>, <Line: -			return r;
+>, <Line: -		} 
+>, <Line: -	private void generate(Stmt.Assert s, EnclosingScope scope) {
+>, <Line: -		// First, create assert block body
+>, <Line: -		EnclosingScope subscope = scope.createBlock();
+>, <Line: -		String endLab = freshLabel();
+>, <Line: -		generateCondition(endLab, s.expr, subscope);
+>, <Line: -		subscope.add(new Bytecode.Fail(), attributes(s.expr));
+>, <Line: -		subscope.add(new Bytecode.Label(endLab));
+>, <Line: -		scope.add(new Bytecode.Assert(subscope.blockIndex()), attributes(s));
+>, <Line: -	private void generate(Stmt.Assume s, EnclosingScope scope) {
+>, <Line: -		// First, create assume block body
+>, <Line: -		EnclosingScope subscope = scope.createBlock();
+>, <Line: -		String endLab = freshLabel();
+>, <Line: -		generateCondition(endLab, s.expr, subscope);
+>, <Line: -		subscope.add(new Bytecode.Fail(), attributes(s.expr));
+>, <Line: -		subscope.add(new Bytecode.Label(endLab));
+>, <Line: -		scope.add(new Bytecode.Assume(subscope.blockIndex()), attributes(s));
+>, <Line: -	 * Translate a return statement into WyIL bytecodes. In the case that a
+>, <Line: -	 * return expression is provided, then this is first translated and stored
+>, <Line: -	 * in a temporary register. Consider the following return statement:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * return i * 2
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * const %3 = 2
+>, <Line: -	 * mul %4 = %0, %3
+>, <Line: -	 * return %4
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * Here, we see that variable <code>I</code> is allocated to register 0,
+>, <Line: -	 * whilst the result of the expression <code>i * 2</code> is stored in
+>, <Line: -	 * register 4.
+>, <Line: -	private void generate(Stmt.Return s, EnclosingScope scope) {
+>, <Line: -		List<Type> returnTypes = scope.getEnclosingFunctionType().raw().returns();
+>, <Line: -		Type[] types = returnTypes.toArray(new Type[returnTypes.size()]);
+>, <Line: -		int[] operands = new int[types.length];
+>, <Line: -		int index = 0;
+>, <Line: -		for (int i = 0; i != returns.size(); ++i) {
+>, <Line: -			Expr e = returns.get(i);
+>, <Line: -			// FIXME: this is a rather ugly
+>, <Line: -			if (e instanceof Expr.Multi) {
+>, <Line: -				int[] results = generate((Expr.Multi) e, scope);
+>, <Line: -				for (int r : results) {
+>, <Line: -					operands[index++] = r;
+>, <Line: -				}
+>, <Line: -			} else {
+>, <Line: -				operands[index++] = generate(e, scope);
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		scope.add(new Bytecode.Return(types, operands), attributes(s));
+>, <Line: -	 * Translate a skip statement into a WyIL nop bytecode.
+>, <Line: -	private void generate(Stmt.Skip s, EnclosingScope scope) {
+>, <Line: -		// TODO: should actually generate a NOP bytecode. This is an assignment
+>, <Line: -		// from zero operands to zero targets. At the moment, I cannot encode
+>, <Line: -		// this however because it will fail in the interpreter.
+>, <Line: -	 * Translate a debug statement into WyIL bytecodes. The debug expression is
+>, <Line: -	 * first translated and stored in a temporary register. Consider the
+>, <Line: -	 * following debug statement:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * debug "Hello World"
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * const %2 = "Hello World"
+>, <Line: -	 * debug %2
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * Here, we see that debug expression is first stored into the temporary
+>, <Line: -	 * register 2.
+>, <Line: -	 *
+>, <Line: -	private void generate(Stmt.Debug s, EnclosingScope scope) {
+>, <Line: -		int operand = generate(s.expr, scope);
+>, <Line: -		scope.add(new Bytecode.Debug(operand), attributes(s));
+>, <Line: -	 * <pre>
+>, <Line: -	 * fail
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * A fail statement is always translated into a WyIL fail bytecode:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * fail
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	private void generate(Stmt.Fail s, EnclosingScope scope) {
+>, <Line: -		scope.add(new Bytecode.Fail(), attributes(s));
+>, <Line: -	 * Translate an if statement into WyIL bytecodes. This is done by first
+>, <Line: -	 * translating the condition into one or more conditional branches. The true
+>, <Line: -	 * and false blocks are then translated and marked with labels. Finally, an
+>, <Line: -	 * exit label is provided to catch the fall-through case. Consider the
+>, <Line: -	 * following if statement:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * if x+1 < 2:
+>, <Line: -	 *     x = x + 1
+>, <Line: -	 * ...
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * const %3 = 1
+>, <Line: -	 * add %4 = %0, %3
+>, <Line: -	 * const %5 = 2
+>, <Line: -	 * ifge %4, %5 goto label0
+>, <Line: -	 * const %7 = 1
+>, <Line: -	 * add %8 = %0, %7
+>, <Line: -	 * assign %0 = %8
+>, <Line: -	 * .label0
+>, <Line: -	 *    ...
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * Here, we see that result of the condition is stored into temporary
+>, <Line: -	 * register 4, which is then used in the comparison. In the case the
+>, <Line: -	 * condition is false, control jumps over the true block; otherwise, it
+>, <Line: -	 * enters the true block and then (because there is no false block) falls
+>, <Line: -	 * through.
+>, <Line: -	 *
+>, <Line: -	private void generate(Stmt.IfElse s, EnclosingScope scope) {
+>, <Line: -		// We need to clone the scope's here to isolate variables declared in
+>, <Line: -		EnclosingScope trueScope = scope.clone();
+>, <Line: -		EnclosingScope falseScope = scope.clone();
+>, <Line: -		String falseLab = freshLabel();
+>, <Line: -		String exitLab = s.falseBranch.isEmpty() ? falseLab : freshLabel();
+>, <Line: -		generateCondition(falseLab, invert(s.condition), scope);
+>, <Line: -		for (Stmt st : s.trueBranch) {
+>, <Line: -			generate(st, trueScope);
+>, <Line: -		}
+>, <Line: -			scope.add(new Bytecode.Goto(exitLab));
+>, <Line: -			scope.add(new Bytecode.Label(falseLab));
+>, <Line: -			for (Stmt st : s.falseBranch) {
+>, <Line: -				generate(st, falseScope);
+>, <Line: -			}
+>, <Line: -		scope.add(new Bytecode.Label(exitLab));
+>, <Line: -	/**
+>, <Line: -	 * Translate a break statement into a WyIL unconditional branch bytecode.
+>, <Line: -	 * This requires examining the scope stack to determine the correct target
+>, <Line: -	 * for the branch. Consider the following use of a break statement:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * while x < 10:
+>, <Line: -	 *    if x == 0:
+>, <Line: -	 *       break
+>, <Line: -	 *    x = x + 1
+>, <Line: -	 * ...
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * loop (%0)
+>, <Line: -	 *     const %3 = 10
+>, <Line: -	 *     ifge %0, %3 goto label0
+>, <Line: -	 *     const %5 = 0
+>, <Line: -	 *     ifne %0, %5 goto label1
+>, <Line: -	 *     goto label0
+>, <Line: -	 *     .label1
+>, <Line: -	 *     const %7 = 1
+>, <Line: -	 *     add %8 = %0, %7
+>, <Line: -	 *     assign %0 = %8
+>, <Line: -	 * .label0
+>, <Line: -	 * ...
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * Here, we see that the break statement is translated into the bytecode
+>, <Line: -	 * "goto label0", which exits the loop.
+>, <Line: -	 *
+>, <Line: -	 * @param stmt
+>, <Line: -	 *            --- Statement to be translated.
+>, <Line: -	 * @param scope
+>, <Line: -	 *            --- Enclosing scope of this statement.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private void generate(Stmt.Break s, EnclosingScope scope) {
+>, <Line: -		String breakLabel = scope.getBreakLabel();		
+>, <Line: -		scope.add(new Bytecode.Goto(breakLabel));
+>, <Line: -	/**
+>, <Line: -	 * Translate a continue statement into a WyIL unconditional branch bytecode.
+>, <Line: -	 * This requires examining the scope stack to determine the correct target
+>, <Line: -	 * for the branch. Consider the following use of a continue statement:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * while x < 10:
+>, <Line: -	 *    x = x + 1
+>, <Line: -	 *    if x == 0:
+>, <Line: -	 *       continue
+>, <Line: -	 *    ...
+>, <Line: -	 * ...
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * loop (%0)
+>, <Line: -	 *     const %3 = 10
+>, <Line: -	 *     ifge %0, %3 goto label0
+>, <Line: -	 *     const %7 = 1
+>, <Line: -	 *     add %8 = %0, %7
+>, <Line: -	 *     assign %0 = %8
+>, <Line: -	 *     const %5 = 0
+>, <Line: -	 *     ifne %0, %5 goto label1
+>, <Line: -	 *     goto label2
+>, <Line: -	 *     .label1
+>, <Line: -	 *     ...
+>, <Line: -	 *     .label2
+>, <Line: -	 * .label0
+>, <Line: -	 * ...
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * Here, we see that the continue statement is translated into the bytecode
+>, <Line: -	 * "goto label2", which skips the loop body for one iteration.
+>, <Line: -	 *
+>, <Line: -	 * @param stmt
+>, <Line: -	 *            --- Statement to be translated.
+>, <Line: -	 * @param scope
+>, <Line: -	 *            --- Enclosing scope of this statement.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private void generate(Stmt.Continue s, EnclosingScope scope) {
+>, <Line: -		String continueLabel = scope.getContinueLabel();		
+>, <Line: -		scope.add(new Bytecode.Goto(continueLabel));
+>, <Line: -	/**
+>, <Line: -	 * Translate a switch statement into WyIL bytecodes. This is done by first
+>, <Line: -	 * translating the switch expression and storing its result in a temporary
+>, <Line: -	 * register. Then, each case is translated in order of appearance. Consider
+>, <Line: -	 * the following switch statement:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * switch x+1:
+>, <Line: -	 *     case 0,1:
+>, <Line: -	 *         return x+1
+>, <Line: -	 *     case 2:
+>, <Line: -	 *         x = x - 1
+>, <Line: -	 *     default:
+>, <Line: -	 *         x = 0
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 *     const %2 = 1
+>, <Line: -	 *     add %3 = %0, %2
+>, <Line: -	 *     switch %3 0->label1, 1->label1, 2->label2, *->label0
+>, <Line: -	 * .label1
+>, <Line: -	 *     const %3 = 1
+>, <Line: -	 *     add %4 = %0, %3
+>, <Line: -	 *     return %4
+>, <Line: -	 * .label2
+>, <Line: -	 *     const %6 = 1
+>, <Line: -	 *     sub %7 = %0, %6
+>, <Line: -	 *     assign %0 = %7
+>, <Line: -	 *     goto label3
+>, <Line: -	 * .label0
+>, <Line: -	 *     const %8 = 0
+>, <Line: -	 *     assign %0 = %8
+>, <Line: -	 *     goto label3
+>, <Line: -	 * .label3
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * Here, we see that switch expression is first stored into the temporary
+>, <Line: -	 * register 3. Then, each of the values 0 -- 2 is routed to the start of its
+>, <Line: -	 * block, with * representing the default case.
+>, <Line: -	 *
+>, <Line: -	 * @param stmt
+>, <Line: -	 *            --- Statement to be translated.
+>, <Line: -	 * @param scope
+>, <Line: -	 *            --- Enclosing scope of this statement.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private void generate(Stmt.Switch s, EnclosingScope scope) throws Exception {
+>, <Line: -		String exitLab = freshLabel();
+>, <Line: -		int operand = generate(s.expr, scope);
+>, <Line: -		String defaultTarget = exitLab;
+>, <Line: -		ArrayList<Pair<Constant, String>> cases = new ArrayList<>();
+>, <Line: -		int start = scope.getBlock().size();
+>, <Line: -		checkNoDuplicateLabels(s.cases,scope);
+>, <Line: -		for (Stmt.Case c : s.cases) {
+>, <Line: -			if (c.expr.isEmpty()) {
+>, <Line: -				// A case with an empty match represents the default label. We
+>, <Line: -				// must check that we have not already seen a case with an empty
+>, <Line: -				// match (otherwise, we'd have two default labels ;)
+>, <Line: -				defaultTarget = freshLabel();
+>, <Line: -				scope.add(new Bytecode.Label(defaultTarget), attributes(c));
+>, <Line: -				// We need to clone the scope here to isolate variables
+>, <Line: -				// declared in the default block from the enclosing scope
+>, <Line: -				EnclosingScope defaultScope = scope.clone();
+>, <Line: -				for (Stmt st : c.stmts) {
+>, <Line: -					generate(st, defaultScope);
+>, <Line: -				}
+>, <Line: -				scope.add(new Bytecode.Goto(exitLab), attributes(c));
+>, <Line: -			} else if (defaultTarget == exitLab) {
+>, <Line: -				String target = freshLabel();
+>, <Line: -				scope.add(new Bytecode.Label(target), attributes(c));
+>, <Line: -				// Case statements in Whiley may have multiple matching constant
+>, <Line: -				// values. Therefore, we iterate each matching value and
+>, <Line: -				// construct a mapping from that to a label indicating the start
+>, <Line: -				// of the case body.
+>, <Line: -				for (Constant constant : c.constants) {					
+>, <Line: -					cases.add(new Pair<>(constant, target));
+>, <Line: -				}
+>, <Line: -				// We need to clone the scope here to isolate variables
+>, <Line: -				// declared in the case block from the enclosing scope
+>, <Line: -				EnclosingScope caseScope = scope.clone();
+>, <Line: -				for (Stmt st : c.stmts) {
+>, <Line: -					generate(st, caseScope);
+>, <Line: -				}
+>, <Line: -				scope.add(new Bytecode.Goto(exitLab), attributes(c));
+>, <Line: -			} else {
+>, <Line: -				// This represents the case where we have another non-default
+>, <Line: -				// case after the default case. Such code cannot be executed,
+>, <Line: -				// and is therefore reported as an error.
+>, <Line: -				internalFailure(errorMessage(UNREACHABLE_CODE), scope.getSourceContext(), c);
+>, <Line: -			}
+>, <Line: -		scope.add(start, new Bytecode.Switch(s.expr.result().raw(), operand, defaultTarget, cases), attributes(s));
+>, <Line: -		scope.add(new Bytecode.Label(exitLab), attributes(s));
+>, <Line: -		for(int i=0;i!=cases.size();++i) {
+>, <Line: -			if(caseLabels != null) {
+>, <Line: -	private void generate(Stmt.NamedBlock s, EnclosingScope scope) {
+>, <Line: -		for (Stmt st : s.body) {
+>, <Line: -			generate(st, scope);
+>, <Line: -		}
+>, <Line: -	 * Translate a while loop into WyIL bytecodes. Consider the following use of
+>, <Line: -	 * a while statement:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * while x < 10:
+>, <Line: -	 *    x = x + 1
+>, <Line: -	 * ...
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * loop (%0)
+>, <Line: -	 *     const %3 = 10
+>, <Line: -	 *     ifge %0, %3 goto label0
+>, <Line: -	 *     const %7 = 1
+>, <Line: -	 *     add %8 = %0, %7
+>, <Line: -	 *     assign %0 = %8
+>, <Line: -	 * .label0
+>, <Line: -	 * ...
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * Here, we see that the evaluated loop condition is stored into temporary
+>, <Line: -	 * register 3 and that the condition is implemented using a conditional
+>, <Line: -	 * branch. Note that there is no explicit goto statement at the end of the
+>, <Line: -	 * loop body which loops back to the head (this is implicit in the loop
+>, <Line: -	 * bytecode).
+>, <Line: -	 *
+>, <Line: -	private void generate(Stmt.While s, EnclosingScope scope) {
+>, <Line: -		// A label marking where execution continues after the while
+>, <Line: -		// loop finishes. Used when the loop condition evaluates to false
+>, <Line: -		// or when a break statement is encountered.
+>, <Line: -		String exitLab = freshLabel();
+>, <Line: -		// A label marking the end of the current loop iteration. Used
+>, <Line: -		// by the continue statement.
+>, <Line: -		String continueLab = freshLabel();
+>, <Line: -		EnclosingScope subscope = scope.createBlock(exitLab,continueLab);
+>, <Line: -		for (Expr condition : s.invariants) {
+>, <Line: -			int invariant = generateInvariantBlock(condition,subscope.createBlock());
+>, <Line: -			subscope.add(new Bytecode.Invariant(invariant), attributes(condition));
+>, <Line: -		}
+>, <Line: -		generateCondition(exitLab, invert(s.condition), subscope);
+>, <Line: -		for (Stmt st : s.body) {
+>, <Line: -			generate(st, subscope);
+>, <Line: -		}
+>, <Line: -		subscope.add(new Bytecode.Label(continueLab), attributes(s));
+>, <Line: -		scope.add(new Bytecode.Loop(new int[] {}, subscope.blockIndex()), attributes(s));
+>, <Line: -		scope.add(new Bytecode.Label(exitLab), attributes(s));
+>, <Line: -	 * Translate a do-while loop into WyIL bytecodes. Consider the following use
+>, <Line: -	 * of a do-while statement:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * do:
+>, <Line: -	 *    x = x + 1
+>, <Line: -	 * while x < 10
+>, <Line: -	 * ...
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * loop (%0)
+>, <Line: -	 *     const %2 = 1
+>, <Line: -	 *     add %3 = %0, %2
+>, <Line: -	 *     assign %0 = %3
+>, <Line: -	 *     const %5 = 10
+>, <Line: -	 *     ifge %3, %5 goto label0
+>, <Line: -	 * .label0
+>, <Line: -	 * ...
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * Here, we see that the evaluated loop condition is stored into temporary
+>, <Line: -	 * register 3 and that the condition is implemented using a conditional
+>, <Line: -	 * branch. Note that there is no explicit goto statement at the end of the
+>, <Line: -	 * loop body which loops back to the head (this is implicit in the loop
+>, <Line: -	 * bytecode).
+>, <Line: -	private void generate(Stmt.DoWhile s, EnclosingScope scope) {
+>, <Line: -		// A label marking where execution continues after the do-while
+>, <Line: -		// loop finishes. Used when the loop condition evaluates to false
+>, <Line: -		// or when a break statement is encountered.
+>, <Line: -		String exitLab = freshLabel();
+>, <Line: -		// A label marking the end of the current loop iteration. Used
+>, <Line: -		// by the continue statement.
+>, <Line: -		String continueLab = freshLabel();
+>, <Line: -		EnclosingScope subscope = scope.createBlock(exitLab,continueLab);
+>, <Line: -		for (Stmt st : s.body) {
+>, <Line: -			generate(st, subscope);
+>, <Line: -		}
+>, <Line: -		for (Expr condition : s.invariants) {
+>, <Line: -			int invariant = generateInvariantBlock(condition, subscope.createBlock());
+>, <Line: -			subscope.add(new Bytecode.Invariant(invariant), attributes(condition));
+>, <Line: -		}
+>, <Line: -		subscope.add(new Bytecode.Label(continueLab), attributes(s));
+>, <Line: -		generateCondition(exitLab, invert(s.condition), subscope);
+>, <Line: -		scope.add(new Bytecode.Loop(new int[] {}, subscope.blockIndex()), attributes(s));
+>, <Line: -		scope.add(new Bytecode.Label(exitLab), attributes(s));
+>, <Line: -	 * Translate a source-level condition into a WyIL block, using a given
+>, <Line: -	 * environment mapping named variables to slots. If the condition evaluates
+>, <Line: -	 * to true, then control is transferred to the given target. Otherwise,
+>, <Line: -	 * control will fall through to the following bytecode. This method is
+>, <Line: -	 * necessary because the WyIL bytecode implementing comparisons are only
+>, <Line: -	 * available as conditional branches. For example, consider this if
+>, <Line: -	 * statement:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * if x < y || x == y:
+>, <Line: -	 *     x = y
+>, <Line: -	 * else:
+>, <Line: -	 *     x = -y
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This might be translated into the following WyIL bytecodes:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 *     iflt %0, %1 goto label0
+>, <Line: -	 *     ifne %0, %1 goto label1
+>, <Line: -	 * .label0
+>, <Line: -	 *     assign %0 = %1
+>, <Line: -	 *     goto label2
+>, <Line: -	 * .label1
+>, <Line: -	 *     neg %8 = %1
+>, <Line: -	 *     assign %0 = %8
+>, <Line: -	 * .label2
+>, <Line: -	 * </pre>
+>, <Line: -	 * Here, we see that the condition "x < y || x == y" is broken down into two
+>, <Line: -	 * conditional branches (which additionally implement short-circuiting). The
+>, <Line: -	 * branches are carefully selected implement the semantics of the logical OR
+>, <Line: -	 * operator '||'. This function is responsible for translating conditional
+>, <Line: -	 * expressions like this into sequences of conditional branches using
+>, <Line: -	 * short-circuiting.
+>, <Line: -	 *
+>, <Line: -	 * @param target
+>, <Line: -	 *            --- Target label to goto if condition is true. When the
+>, <Line: -	 *            condition is false, control falls simply through to the next
+>, <Line: -	 *            bytecode in sqeuence.
+>, <Line: -	 *            --- Source-level condition to be translated into a sequence of
+>, <Line: -	 *            one or more conditional branches.
+>, <Line: -	 *            --- Enclosing scope of the condition
+>, <Line: -	 * @return
+>, <Line: -	public void generateCondition(String target, Expr condition, EnclosingScope scope) {
+>, <Line: -		try {
+>, <Line: -			// First, we see whether or not we can employ a special handler for
+>, <Line: -			// translating this condition.
+>, <Line: -			if (condition instanceof Expr.Constant) {
+>, <Line: -				generateCondition(target, (Expr.Constant) condition, scope);
+>, <Line: -			} else if (condition instanceof Expr.UnOp) {
+>, <Line: -				generateCondition(target, (Expr.UnOp) condition, scope);
+>, <Line: -			} else if (condition instanceof Expr.BinOp) {
+>, <Line: -				generateCondition(target, (Expr.BinOp) condition, scope);
+>, <Line: -			} else if (condition instanceof Expr.Quantifier) {
+>, <Line: -				generateCondition(target, (Expr.Quantifier) condition, scope);
+>, <Line: -			} else if (condition instanceof Expr.ConstantAccess || condition instanceof Expr.LocalVariable
+>, <Line: -					|| condition instanceof Expr.AbstractInvoke || condition instanceof Expr.AbstractIndirectInvoke
+>, <Line: -					|| condition instanceof Expr.FieldAccess || condition instanceof Expr.IndexOf) {
+>, <Line: -				// This is the default case where no special handler applies. In
+>, <Line: -				// this case, we simply compares the computed value against
+>, <Line: -				// true. In some cases, we could actually do better. For
+>, <Line: -				// example, !(x < 5) could be rewritten into x >= 5.
+>, <Line: -				int result = generate(condition, scope);
+>, <Line: -				scope.add(new Bytecode.If(Type.T_BOOL, result, target), attributes(condition));
+>, <Line: -			} else {
+>, <Line: -				internalFailure(errorMessage(INVALID_BOOLEAN_EXPRESSION), scope.getSourceContext(), condition);
+>, <Line: -		} catch (SyntaxError se) {
+>, <Line: -			throw se;
+>, <Line: -		} catch (Exception ex) {
+>, <Line: -			internalFailure(ex.getMessage(), scope.getSourceContext(), condition, ex);
+>, <Line: -	 * <p>
+>, <Line: -	 * Translate a source-level condition which is a constant (i.e.
+>, <Line: -	 * <code>true</code> or <code>false</code>) into a WyIL block, using a given
+>, <Line: -	 * environment mapping named variables to slots. This may seem like a
+>, <Line: -	 * perverse case, but it is permitted to allow selective commenting of code.
+>, <Line: -	 * </p>
+>, <Line: -	 * <p>
+>, <Line: -	 * When the constant is true, an unconditional branch to the target is
+>, <Line: -	 * generated. Otherwise, nothing is generated and control falls through to
+>, <Line: -	 * the next bytecode in sequence.
+>, <Line: -	 * </p>
+>, <Line: -	 * @param target
+>, <Line: -	 *            --- Target label to goto if condition is true. When the
+>, <Line: -	 *            condition is false, control falls simply through to the next
+>, <Line: -	 *            bytecode in sqeuence.
+>, <Line: -	 *            --- Source-level condition to be translated into a sequence of
+>, <Line: -	 *            one or more conditional branches.
+>, <Line: -	 *            --- Enclosing scope of the condition
+>, <Line: -	private void generateCondition(String target, Expr.Constant c, EnclosingScope scope) {
+>, <Line: -		Constant.Bool b = (Constant.Bool) c.value;
+>, <Line: -		if (b.value()) {
+>, <Line: -			scope.add(new Bytecode.Goto(target));
+>, <Line: -		} else {
+>, <Line: -			// do nout
+>, <Line: -		}
+>, <Line: -	 * <p>
+>, <Line: -	 * Translate a source-level condition which is a binary expression into WyIL
+>, <Line: -	 * bytecodes, using a given environment mapping named variables to slots.
+>, <Line: -	 * </p>
+>, <Line: -	 * @param target
+>, <Line: -	 *            --- Target label to goto if condition is true. When the
+>, <Line: -	 *            condition is false, control falls simply through to the next
+>, <Line: -	 *            bytecode in sqeuence.
+>, <Line: -	 *            --- Source-level condition to be translated into a sequence of
+>, <Line: -	 *            one or more conditional branches.
+>, <Line: -	 *            --- Enclosing scope of the condition
+>, <Line: -	private void generateCondition(String target, Expr.BinOp v, EnclosingScope scope) throws Exception {
+>, <Line: -		Expr.BOp bop = v.op;
+>, <Line: -		if (bop == Expr.BOp.OR) {
+>, <Line: -			generateCondition(target, v.lhs, scope);
+>, <Line: -			generateCondition(target, v.rhs, scope);
+>, <Line: -		} else if (bop == Expr.BOp.AND) {
+>, <Line: -			String exitLabel = freshLabel();
+>, <Line: -			generateCondition(exitLabel, invert(v.lhs), scope);
+>, <Line: -			generateCondition(target, v.rhs, scope);
+>, <Line: -			scope.add(new Bytecode.Label(exitLabel));
+>, <Line: -		} else if (bop == Expr.BOp.IS) {
+>, <Line: -			generateTypeCondition(target, v, scope);
+>, <Line: -		} else {
+>, <Line: -			if (bop == Expr.BOp.EQ && v.lhs instanceof Expr.LocalVariable && v.rhs instanceof Expr.Constant
+>, <Line: -					&& ((Expr.Constant) v.rhs).value == Constant.Null) {
+>, <Line: -				// this is a simple rewrite to enable type inference.
+>, <Line: -				Expr.LocalVariable lhs = (Expr.LocalVariable) v.lhs;
+>, <Line: -				int slot = scope.get(lhs.var);
+>, <Line: -				scope.add(new Bytecode.IfIs(v.srcType.raw(), slot, Type.T_NULL, target), attributes(v));
+>, <Line: -			} else if (bop == Expr.BOp.NEQ && v.lhs instanceof Expr.LocalVariable
+>, <Line: -					&& v.rhs instanceof Expr.Constant && ((Expr.Constant) v.rhs).value == Constant.Null) {
+>, <Line: -				// this is a simple rewrite to enable type inference.
+>, <Line: -				String exitLabel = freshLabel();
+>, <Line: -				Expr.LocalVariable lhs = (Expr.LocalVariable) v.lhs;				
+>, <Line: -				int slot = scope.get(lhs.var);
+>, <Line: -				scope.add(new Bytecode.IfIs(v.srcType.raw(), slot, Type.T_NULL, exitLabel), attributes(v));
+>, <Line: -				scope.add(new Bytecode.Goto(target));
+>, <Line: -				scope.add(new Bytecode.Label(exitLabel));
+>, <Line: -			} else {
+>, <Line: -				int result = generate(v, scope);
+>, <Line: -				scope.add(new Bytecode.If(v.srcType.raw(), result, target), attributes(v));
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	 * <p>
+>, <Line: -	 * Translate a source-level condition which represents a runtime type test
+>, <Line: -	 * (e.g. <code>x is int</code>) into WyIL bytecodes, using a given
+>, <Line: -	 * environment mapping named variables to slots. One subtlety of this arises
+>, <Line: -	 * when the lhs is a single variable. In this case, the variable will be
+>, <Line: -	 * retyped and, in order for this to work, we *must* perform the type test
+>, <Line: -	 * on the actual varaible, rather than a temporary.
+>, <Line: -	 * </p>
+>, <Line: -	 * @param target
+>, <Line: -	 *            --- Target label to goto if condition is true. When the
+>, <Line: -	 *            condition is false, control falls simply through to the next
+>, <Line: -	 *            bytecode in sqeuence.
+>, <Line: -	 *            --- Source-level binary condition to be translated into a
+>, <Line: -	 *            sequence of one or more conditional branches.
+>, <Line: -	 *            --- Enclosing scope of the condition
+>, <Line: -	private void generateTypeCondition(String target, Expr.BinOp condition, EnclosingScope scope) throws Exception {
+>, <Line: -		int leftOperand;
+>, <Line: -			// This is the case where the lhs is a single variable and, hence,
+>, <Line: -			// will be retyped by this operation. In this case, we must operate
+>, <Line: -			// on the original variable directly, rather than a temporary
+>, <Line: -			// variable (since, otherwise, we'll retype the temporary but not
+>, <Line: -			// the intended variable).
+>, <Line: -			Expr.LocalVariable lhs = (Expr.LocalVariable) condition.lhs;			
+>, <Line: -			leftOperand = scope.get(lhs.var);
+>, <Line: -		} else {
+>, <Line: -			// This is the general case whether the lhs is an arbitrary variable
+>, <Line: -			// and, hence, retyping does not apply. Therefore, we can simply
+>, <Line: -			// evaluate the lhs into a temporary register as per usual.
+>, <Line: -			leftOperand = generate(condition.lhs, scope);
+>, <Line: -		// Note, the type checker guarantees that the rhs is a type val, so the
+>, <Line: -		// following cast is always safe.
+>, <Line: -		Expr.TypeVal rhs = (Expr.TypeVal) condition.rhs;
+>, <Line: -		scope.add(new Bytecode.IfIs(condition.srcType.raw(), leftOperand, rhs.type.nominal(), target), attributes(condition));
+>, <Line: -	 * <p>
+>, <Line: -	 * Translate a source-level condition which represents a unary condition
+>, <Line: -	 * into WyIL bytecodes, using a given environment mapping named variables to
+>, <Line: -	 * slots. Note, the only valid unary condition is logical not. To implement
+>, <Line: -	 * this, we simply generate the underlying condition and reroute its branch
+>, <Line: -	 * targets.
+>, <Line: -	 * </p>
+>, <Line: -	 *
+>, <Line: -	 * @param target
+>, <Line: -	 *            --- Target label to goto if condition is true. When the
+>, <Line: -	 *            condition is false, control falls simply through to the next
+>, <Line: -	 *            bytecode in sqeuence.
+>, <Line: -	 * @param condition
+>, <Line: -	 *            --- Source-level condition to be translated into a sequence of
+>, <Line: -	 *            one or more conditional branches.
+>, <Line: -	 * @param scope
+>, <Line: -	 *            --- Enclosing scope of the condition
+>, <Line: -	private void generateCondition(String target, Expr.UnOp v, EnclosingScope scope) {
+>, <Line: -		Expr.UOp uop = v.op;
+>, <Line: -		switch (uop) {
+>, <Line: -		case NOT:
+>, <Line: -			// What we do is generate the underlying expression whilst setting
+>, <Line: -			// its true destination to a temporary label. Then, for the fall
+>, <Line: -			// through case we branch to our true destination.
+>, <Line: -			String label = freshLabel();
+>, <Line: -			generateCondition(label, v.mhs, scope);
+>, <Line: -			scope.add(new Bytecode.Goto(target));
+>, <Line: -			scope.add(new Bytecode.Label(label));
+>, <Line: -			return;
+>, <Line: -		default:
+>, <Line: -			// Nothing else is a valud boolean condition here.
+>, <Line: -			internalFailure(errorMessage(INVALID_BOOLEAN_EXPRESSION), scope.getSourceContext(), v);
+>, <Line: -	 * <p>
+>, <Line: -	 * Translate a source-level condition which represents a quantifier
+>, <Line: -	 * expression into WyIL bytecodes, using a given environment mapping named
+>, <Line: -	 * variables to slots.
+>, <Line: -	 * </p>
+>, <Line: -	 * @param target
+>, <Line: -	 *            --- Target label to goto if condition is true. When the
+>, <Line: -	 *            condition is false, control falls simply through to the next
+>, <Line: -	 *            bytecode in sqeuence.
+>, <Line: -	 * @param condition
+>, <Line: -	 *            --- Source-level condition to be translated into a sequence of
+>, <Line: -	 *            one or more conditional branches.
+>, <Line: -	 * @param scope
+>, <Line: -	 *            --- Enclosing scope of the condition
+>, <Line: -	 * @return
+>, <Line: -	private void generateCondition(String target, Expr.Quantifier e, EnclosingScope scope) {
+>, <Line: -		String exit = freshLabel();
+>, <Line: -		// Note, we must clone the scope below at this point. This is to avoid
+>, <Line: -		// the variable name percolating into the enclosing scope.  
+>, <Line: -		generate(e.sources.iterator(), target, exit, e, scope.clone());
+>, <Line: -		switch (e.cop) {
+>, <Line: -		case NONE:
+>, <Line: -			scope.add(new Bytecode.Goto(target));
+>, <Line: -			scope.add(new Bytecode.Label(exit));
+>, <Line: -			break;
+>, <Line: -		case SOME:
+>, <Line: -			break;
+>, <Line: -		case ALL:
+>, <Line: -			scope.add(new Bytecode.Goto(target));
+>, <Line: -			scope.add(new Bytecode.Label(exit));
+>, <Line: -			break;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private void generate(Iterator<Triple<String, Expr, Expr>> srcIterator, String trueLabel, String falseLabel,
+>, <Line: -			Expr.Quantifier e, EnclosingScope scope) {
+>, <Line: -		if (srcIterator.hasNext()) {
+>, <Line: -			// This is the inductive case (i.e. an outer loop)
+>, <Line: -			Triple<String, Expr, Expr> src = srcIterator.next();
+>, <Line: -			// First, determine the src slot.
+>, <Line: -			int varSlot = scope.allocate(Nominal.T_INT);
+>, <Line: -			// FIXME: the following line is a hack to deal with the relatively
+>, <Line: -			// primitive way that VcGenerator determines the type of a variable.
+>, <Line: -			// This should be removed when VcGenerator is reworked. 
+>, <Line: -			scope.environment.put(src.first(), varSlot);
+>, <Line: -			//
+>, <Line: -			int startSlot = generate(src.second(), scope);
+>, <Line: -			int endSlot = generate(src.third(), scope);
+>, <Line: -			// Second, recursively generate remaining parts
+>, <Line: -			EnclosingScope subscope = scope.createBlock();
+>, <Line: -			generate(srcIterator, trueLabel, falseLabel, e, subscope);
+>, <Line: -			// Finally, create the forall loop bytecode
+>, <Line: -			scope.add(new Bytecode.Quantify(startSlot, endSlot, varSlot, new int[0], subscope.blockIndex()), attributes(e));
+>, <Line: -		} else {
+>, <Line: -			// This is the base case (i.e. the innermost loop)
+>, <Line: -			switch (e.cop) {
+>, <Line: -			case NONE:
+>, <Line: -				generateCondition(falseLabel, e.condition, scope);
+>, <Line: -				break;
+>, <Line: -			case SOME:
+>, <Line: -				generateCondition(trueLabel, e.condition, scope);
+>, <Line: -				break;
+>, <Line: -			case ALL:
+>, <Line: -				generateCondition(falseLabel, invert(e.condition), scope);
+>, <Line: -				break;
+>, <Line: -	// Multi-Expressions
+>, <Line: -	public int[] generate(Expr.Multi expression, EnclosingScope scope) {
+>, <Line: -		List<Nominal> returns = expression.returns();
+>, <Line: -		int[] targets = new int[returns.size()];
+>, <Line: -		for (int i = 0; i != targets.length; ++i) {
+>, <Line: -			targets[i] = scope.allocate(returns.get(i));
+>, <Line: -		}
+>, <Line: -		try {
+>, <Line: -			if (expression instanceof Expr.FunctionOrMethodCall) {
+>, <Line: -				Expr.FunctionOrMethodCall fmc = (Expr.FunctionOrMethodCall) expression;
+>, <Line: -				generateStmt(fmc, scope, targets);
+>, <Line: -			} else if (expression instanceof Expr.IndirectFunctionOrMethodCall) {
+>, <Line: -				Expr.IndirectFunctionOrMethodCall fmc = (Expr.IndirectFunctionOrMethodCall) expression;
+>, <Line: -				generateStmt(fmc, scope, targets);
+>, <Line: -				// should be dead-code
+>, <Line: -				internalFailure("unknown expression: " + expression.getClass().getName(), scope.getSourceContext(), expression);
+>, <Line: -		} catch (ResolveError rex) {
+>, <Line: -			internalFailure(rex.getMessage(), scope.getSourceContext(), expression, rex);
+>, <Line: -		} catch (SyntaxError se) {
+>, <Line: -			throw se;
+>, <Line: -		} catch (Exception ex) {
+>, <Line: -			internalFailure(ex.getMessage(), scope.getSourceContext(), expression, ex);
+>, <Line: -		// done
+>, <Line: -		return targets;
+>, <Line: -	}
+>, <Line: -	public void generateStmt(Expr.FunctionOrMethodCall expr, EnclosingScope scope, int... targets) throws ResolveError {
+>, <Line: -		//
+>, <Line: -		int[] operands = generate(expr.arguments, scope);
+>, <Line: -		scope.add(new Bytecode.Invoke(expr.type().nominal(), targets, operands, expr.nid()), attributes(expr));
+>, <Line: -	}
+>, <Line: -	public void generateStmt(Expr.IndirectFunctionOrMethodCall expr, EnclosingScope scope, int... targets) throws ResolveError {
+>, <Line: -		//
+>, <Line: -		int operand = generate(expr.src, scope);
+>, <Line: -		int[] operands = generate(expr.arguments, scope);
+>, <Line: -		scope.add(new Bytecode.IndirectInvoke(expr.type().raw(), targets, operand, operands), attributes(expr));
+>, <Line: -	// =========================================================================
+>, <Line: -	// Expressions
+>, <Line: -	// =========================================================================
+>, <Line: -	public int generate(Expr expression, EnclosingScope scope) {
+>, <Line: -				return generate((Expr.Constant) expression, scope);
+>, <Line: -				return generate((Expr.LocalVariable) expression, scope);
+>, <Line: -				return generate((Expr.ConstantAccess) expression, scope);
+>, <Line: -				return generate((Expr.ArrayInitialiser) expression, scope);
+>, <Line: -				return generate((Expr.ArrayGenerator) expression, scope);
+>, <Line: -				return generate((Expr.BinOp) expression, scope);
+>, <Line: -				return generate((Expr.Dereference) expression, scope);
+>, <Line: -				return generate((Expr.Cast) expression, scope);
+>, <Line: -				return generate((Expr.IndexOf) expression, scope);
+>, <Line: -				return generate((Expr.UnOp) expression, scope);
+>, <Line: -				return generate((Expr.FunctionOrMethodCall) expression, scope);
+>, <Line: -			} else if (expression instanceof Expr.IndirectFunctionCall) {
+>, <Line: -				return generate((Expr.IndirectFunctionCall) expression, scope);
+>, <Line: -			} else if (expression instanceof Expr.IndirectMethodCall) {
+>, <Line: -				return generate((Expr.IndirectMethodCall) expression, scope);
+>, <Line: -				return generate((Expr.Quantifier) expression, scope);
+>, <Line: -				return generate((Expr.FieldAccess) expression, scope);
+>, <Line: -				return generate((Expr.Record) expression, scope);
+>, <Line: -				return generate((Expr.FunctionOrMethod) expression, scope);
+>, <Line: -				return generate((Expr.Lambda) expression, scope);
+>, <Line: -				return generate((Expr.New) expression, scope);
+>, <Line: -				internalFailure("unknown expression: " + expression.getClass().getName(), scope.getSourceContext(), expression);
+>, <Line: -	public int generate(Expr.FunctionOrMethodCall expr, EnclosingScope scope) throws ResolveError {
+>, <Line: -		int target = scope.allocate(expr.result());
+>, <Line: -		generateStmt(expr, scope, target);
+>, <Line: -		return target;
+>, <Line: -	public int generate(Expr.IndirectFunctionOrMethodCall expr, EnclosingScope scope) throws ResolveError {
+>, <Line: -		int target = scope.allocate(expr.result());
+>, <Line: -		generateStmt(expr, scope, target);
+>, <Line: -		return target;
+>, <Line: -	private int generate(Expr.Constant expr, EnclosingScope scope) {
+>, <Line: -		int target = scope.allocate(Nominal.construct(val.type(),val.type()));
+>, <Line: -		scope.add(new Bytecode.Const(target, expr.value), attributes(expr));
+>, <Line: -		return target;
+>, <Line: -	private int generate(Expr.FunctionOrMethod expr, EnclosingScope scope) {
+>, <Line: -		Type.FunctionOrMethod nominalType = expr.type.nominal();
+>, <Line: -		int target = scope.allocate(expr.type);
+>, <Line: -		scope.add(new Bytecode.Lambda(nominalType, target, new int[0], expr.nid), attributes(expr));
+>, <Line: -		return target;
+>, <Line: -	private int generate(Expr.Lambda expr, EnclosingScope scope) {
+>, <Line: -		Nominal.FunctionOrMethod lambdaType = expr.type;
+>, <Line: -		Type.FunctionOrMethod rawLambdaType = lambdaType.raw();
+>, <Line: -		// Variables contains the list of variables from the enclosing scope
+>, <Line: -		// which are used in the lambda body
+>, <Line: -		ArrayList<String> variables = new ArrayList<String>();
+>, <Line: -		// Create a new root scope for the lambda body
+>, <Line: -		EnclosingScope lambdaScope = new EnclosingScope(scope.getSourceContext()).createRootBlock();
+>, <Line: -		Type.FunctionOrMethod concreteLambdaType = determineLambdaParametersAndOperands(expr,variables,lambdaScope);		
+>, <Line: -		// Generate body based on current environment
+>, <Line: -		if (lambdaType.returns().isEmpty()) {
+>, <Line: -			lambdaScope.add(new Bytecode.Return(), attributes(expr));
+>, <Line: -		} else {
+>, <Line: -			int target = generate(expr.body, lambdaScope);
+>, <Line: -			lambdaScope
+>, <Line: -					.add(new Bytecode.Return(rawLambdaType.returns().toArray(new Type[rawLambdaType.returns().size()]),
+>, <Line: -							target), attributes(expr));
+>, <Line: -		}
+>, <Line: -		// Construct private lambda function using generated body
+>, <Line: -		int id = expr.attribute(Attribute.Source.class).start;
+>, <Line: -		String name = "$lambda" + id;
+>, <Line: -		ArrayList<Modifier> modifiers = new ArrayList<Modifier>();
+>, <Line: -		modifiers.add(Modifier.PRIVATE);
+>, <Line: -		WyilFile.FunctionOrMethod lambda = new WyilFile.FunctionOrMethod(modifiers, name, concreteLambdaType,
+>, <Line: -				lambdaScope.getForest(), 0, 0, attributes(expr));
+>, <Line: -		lambdas.add(lambda);
+>, <Line: -		Path.ID mid = scope.getSourceContext().file().module;
+>, <Line: -		NameID nid = new NameID(mid, name);
+>, <Line: -		// Initialise the operands array
+>, <Line: -		int[] operands = new int[variables.size()];
+>, <Line: -		for(int i=0;i!=operands.length;++i) {
+>, <Line: -			operands[i] = scope.get(variables.get(i));
+>, <Line: -		}
+>, <Line: -		// Finally, create the lambda
+>, <Line: -		int target = scope.allocate(lambdaType);
+>, <Line: -		scope.add(new Bytecode.Lambda(concreteLambdaType, target, operands, nid), attributes(expr));
+>, <Line: -		return target;
+>, <Line: -	/**
+>, <Line: -	 * Determine the set of parameters for the lambda function itself. This
+>, <Line: -	 * includes the declared parameters in the lambda expression, but also any
+>, <Line: -	 * variables from the enclosing scope which are used within the lambda. For
+>, <Line: -	 * example:
+>, <Line: -	 * 
+>, <Line: -	 * <pre>
+>, <Line: -	 * type FunT is function(int)->int
+>, <Line: -	 * 
+>, <Line: -	 * method f(int x) -> FunT:
+>, <Line: -	 *   return &(int y -> x + y)
+>, <Line: -	 * </pre>
+>, <Line: -	 * 
+>, <Line: -	 * Here, the concrete lambda type is function(int,int)->int, where the first
+>, <Line: -	 * parameter is <code>y</code> and the second is <code>x</code>.
+>, <Line: -	 * 
+>, <Line: -	 * @param expr
+>, <Line: -	 * @param operands
+>, <Line: -	 * @param scope
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private Type.FunctionOrMethod determineLambdaParametersAndOperands(Expr.Lambda expr, List<String> operands, EnclosingScope scope) {
+>, <Line: -		Type.FunctionOrMethod rawLambdaType = lambdaType.raw();
+>, <Line: -		List<WhileyFile.Parameter> lambdaParameters = expr.parameters;
+>, <Line: -		ArrayList<Nominal> paramTypes = new ArrayList<Nominal>(lambdaType.params());
+>, <Line: -		// First, add declared parameters
+>, <Line: -		for (int i = 0; i != lambdaParameters.size(); ++i) {
+>, <Line: -			WhileyFile.Parameter parameter = lambdaParameters.get(i);
+>, <Line: -			// allocate parameter to register in the current block
+>, <Line: -			scope.allocate(paramTypes.get(i), parameter.name);
+>, <Line: -		// Second add used variables (which are then parameters)
+>, <Line: -				scope.allocate(v.first(), v.second());
+>, <Line: -				paramTypes.add(v.first());
+>, <Line: -				operands.add(v.second());
+>, <Line: -				declaredVariables.add(v.second());
+>, <Line: -		// Convert all nominal parameters to raw parameters (ugly)
+>, <Line: -		ArrayList<Type> rawParamTypes = new ArrayList<Type>();
+>, <Line: -		for(Nominal t : paramTypes) { rawParamTypes.add(t.raw()); }
+>, <Line: -		// Finally, create the concrete lambda type		 
+>, <Line: -		if(lambdaType instanceof Nominal.Function) {
+>, <Line: -			return Type.Function(rawLambdaType.returns(),rawParamTypes);
+>, <Line: -		} else {
+>, <Line: -			return Type.Method(rawLambdaType.returns(),rawLambdaType.contextLifetimes(),
+>, <Line: -					rawLambdaType.lifetimeParams(),rawParamTypes);
+>, <Line: -		}
+>, <Line: -	private int generate(Expr.ConstantAccess expr, EnclosingScope scope) throws ResolveError {
+>, <Line: -		int target = scope.allocate(Nominal.construct(val.type(),val.type()));
+>, <Line: -		scope.add(new Bytecode.Const(target, val), attributes(expr));
+>, <Line: -		return target;
+>, <Line: -	private int generate(Expr.LocalVariable expr, EnclosingScope scope) throws ResolveError {
+>, <Line: -		return scope.get(expr.var);
+>, <Line: -	private int generate(Expr.UnOp expr, EnclosingScope scope) {
+>, <Line: -		int[] operands = new int[] { generate(expr.mhs, scope) };
+>, <Line: -		int[] targets = new int[] { scope.allocate(expr.result()) };
+>, <Line: -			scope.add(new Bytecode.Operator(expr.result().raw(), targets, operands, Bytecode.OperatorKind.NEG),
+>, <Line: -					attributes(expr));
+>, <Line: -			scope.add(new Bytecode.Operator(expr.result().raw(), targets, operands, Bytecode.OperatorKind.BITWISEINVERT),
+>, <Line: -					attributes(expr));
+>, <Line: -			scope.add(new Bytecode.Operator(expr.result().raw(), targets, operands, Bytecode.OperatorKind.NOT),
+>, <Line: -					attributes(expr));
+>, <Line: -			scope.add(new Bytecode.Operator(expr.type.raw(), targets, operands, Bytecode.OperatorKind.ARRAYLENGTH), attributes(expr));
+>, <Line: -		return targets[0];
+>, <Line: -	}
+>, <Line: -	private int generate(Expr.Dereference expr, EnclosingScope scope) {
+>, <Line: -		int[] operands = new int[] { generate(expr.src, scope) };
+>, <Line: -		int[] targets = new int[] { scope.allocate(expr.result()) };
+>, <Line: -		scope.add(new Bytecode.Operator(expr.srcType.raw(), targets, operands, Bytecode.OperatorKind.DEREFERENCE),
+>, <Line: -				attributes(expr));
+>, <Line: -		return targets[0];
+>, <Line: -	}
+>, <Line: -	private int generate(Expr.IndexOf expr, EnclosingScope scope) {
+>, <Line: -		int[] operands = { generate(expr.src, scope),
+>, <Line: -				generate(expr.index, scope) };
+>, <Line: -		int[] targets = new int[] { scope.allocate(expr.result()) };
+>, <Line: -		scope.add(new Bytecode.Operator(expr.srcType.raw(), targets, operands, Bytecode.OperatorKind.ARRAYINDEX), attributes(expr));
+>, <Line: -		return targets[0];
+>, <Line: -	}
+>, <Line: -	private int generate(Expr.Cast expr, EnclosingScope scope) {
+>, <Line: -		int operand = generate(expr.expr, scope);
+>, <Line: -		Nominal from = expr.expr.result();
+>, <Line: -		Nominal to = expr.result();
+>, <Line: -		int target = scope.allocate(to);
+>, <Line: -		scope.add(new Bytecode.Convert(from.raw(), target, operand, to.raw()), attributes(expr));
+>, <Line: -		return target;
+>, <Line: -	}
+>, <Line: -	private int generate(Expr.BinOp v, EnclosingScope scope) throws Exception {
+>, <Line: -		// could probably use a range test for this somehow
+>, <Line: -		if(v.op == Expr.BOp.AND || v.op == Expr.BOp.OR) {
+>, <Line: -			String trueLabel = freshLabel();
+>, <Line: -			String exitLabel = freshLabel();
+>, <Line: -			generateCondition(trueLabel, v, scope);
+>, <Line: -			int target = scope.allocate(Nominal.T_BOOL);
+>, <Line: -			scope.add(new Bytecode.Const(target, Constant.Bool(false)), attributes(v));
+>, <Line: -			scope.add(new Bytecode.Goto(exitLabel));
+>, <Line: -			scope.add(new Bytecode.Label(trueLabel));
+>, <Line: -			scope.add(new Bytecode.Const(target, Constant.Bool(true)), attributes(v));
+>, <Line: -			scope.add(new Bytecode.Label(exitLabel));
+>, <Line: -			return target;
+>, <Line: -		} else {
+>, <Line: -			Nominal result = v.result();
+>, <Line: -			int[] targets = new int[] { scope.allocate(result) };
+>, <Line: -			int[] operands = { 
+>, <Line: -					generate(v.lhs, scope),
+>, <Line: -					generate(v.rhs, scope) 
+>, <Line: -			};
+>, <Line: -			scope.add(new Bytecode.Operator(result.raw(), targets, operands, OP2BOP(v.op, v, scope.getSourceContext())), attributes(v));
+>, <Line: -			return targets[0];
+>, <Line: -		}
+>, <Line: -	private int generate(Expr.ArrayInitialiser expr, EnclosingScope scope) {
+>, <Line: -		int[] targets = new int[] { scope.allocate(expr.result()) };
+>, <Line: -		scope.add(new Bytecode.Operator(expr.type.raw(), targets, operands, Bytecode.OperatorKind.ARRAYCONSTRUCTOR),
+>, <Line: -				attributes(expr));
+>, <Line: -		return targets[0];
+>, <Line: -	}
+>, <Line: -	private int generate(Expr.ArrayGenerator expr, EnclosingScope scope) {
+>, <Line: -		int[] operands = new int[] { generate(expr.element, scope),
+>, <Line: -				generate(expr.count, scope) };
+>, <Line: -		int[] targets = new int[] { scope.allocate(expr.result()) };
+>, <Line: -		scope.add(new Bytecode.Operator(expr.type.raw(), targets, operands, Bytecode.OperatorKind.ARRAYGENERATOR), attributes(expr));
+>, <Line: -		return targets[0];
+>, <Line: -	}
+>, <Line: -	private int generate(Expr.Quantifier e, EnclosingScope scope) {
+>, <Line: -		String trueLabel = freshLabel();
+>, <Line: -		String exitLabel = freshLabel();
+>, <Line: -		generateCondition(trueLabel, e, scope);
+>, <Line: -		int target = scope.allocate(Nominal.T_BOOL);
+>, <Line: -		scope.add(new Bytecode.Const(target, Constant.Bool(false)), attributes(e));
+>, <Line: -		scope.add(new Bytecode.Goto(exitLabel));
+>, <Line: -		scope.add(new Bytecode.Label(trueLabel));
+>, <Line: -		scope.add(new Bytecode.Const(target, Constant.Bool(true)), attributes(e));
+>, <Line: -		scope.add(new Bytecode.Label(exitLabel));
+>, <Line: -		return target;
+>, <Line: -	}
+>, <Line: -	private int generate(Expr.Record expr, EnclosingScope scope) {
+>, <Line: -			operands[i] = generate(arg, scope);
+>, <Line: -		int[] targets = new int[] { scope.allocate(expr.result()) };
+>, <Line: -		scope.add(new Bytecode.Operator(expr.result().raw(), targets, operands, Bytecode.OperatorKind.RECORDCONSTRUCTOR),
+>, <Line: -				attributes(expr));
+>, <Line: -		return targets[0];
+>, <Line: -	private int generate(Expr.FieldAccess expr, EnclosingScope scope) {
+>, <Line: -		int operand = generate(expr.src, scope);
+>, <Line: -		int target = scope.allocate(expr.result());
+>, <Line: -		scope.add(new Bytecode.FieldLoad((Type.EffectiveRecord) expr.srcType.raw(), target, operand, expr.name),
+>, <Line: -				attributes(expr));
+>, <Line: -		return target;
+>, <Line: -	private int generate(Expr.New expr, EnclosingScope scope) throws ResolveError {
+>, <Line: -		int[] operands = new int[] { generate(expr.expr, scope) };
+>, <Line: -		int[] targets = new int[] { scope.allocate(expr.result()) };
+>, <Line: -		scope.add(new Bytecode.Operator(expr.type.raw(), targets, operands, Bytecode.OperatorKind.NEW));
+>, <Line: -		return targets[0];
+>, <Line: -			operands[i] = generate(arg, scope);
+>, <Line: -	@SuppressWarnings("incomplete-switch")
+>, <Line: -	private static Expr invert(Expr e) {
+>, <Line: -		if (e instanceof Expr.BinOp) {
+>, <Line: -			Expr.BinOp bop = (Expr.BinOp) e;
+>, <Line: -			Expr.BinOp nbop = null;
+>, <Line: -			switch (bop.op) {
+>, <Line: -			case AND:
+>, <Line: -				nbop = new Expr.BinOp(Expr.BOp.OR, invert(bop.lhs), invert(bop.rhs), e.attributes());
+>, <Line: -				break;
+>, <Line: -			case OR:
+>, <Line: -				nbop = new Expr.BinOp(Expr.BOp.AND, invert(bop.lhs), invert(bop.rhs), e.attributes());
+>, <Line: -				break;
+>, <Line: -			case EQ:
+>, <Line: -				nbop = new Expr.BinOp(Expr.BOp.NEQ, bop.lhs, bop.rhs, e.attributes());
+>, <Line: -				break;
+>, <Line: -			case NEQ:
+>, <Line: -				nbop = new Expr.BinOp(Expr.BOp.EQ, bop.lhs, bop.rhs, e.attributes());
+>, <Line: -				break;
+>, <Line: -			case LT:
+>, <Line: -				nbop = new Expr.BinOp(Expr.BOp.GTEQ, bop.lhs, bop.rhs, e.attributes());
+>, <Line: -				break;
+>, <Line: -			case LTEQ:
+>, <Line: -				nbop = new Expr.BinOp(Expr.BOp.GT, bop.lhs, bop.rhs, e.attributes());
+>, <Line: -				break;
+>, <Line: -			case GT:
+>, <Line: -				nbop = new Expr.BinOp(Expr.BOp.LTEQ, bop.lhs, bop.rhs, e.attributes());
+>, <Line: -				break;
+>, <Line: -			case GTEQ:
+>, <Line: -				nbop = new Expr.BinOp(Expr.BOp.LT, bop.lhs, bop.rhs, e.attributes());
+>, <Line: -				break;
+>, <Line: -			}
+>, <Line: -			if (nbop != null) {
+>, <Line: -				nbop.srcType = bop.srcType;
+>, <Line: -				return nbop;
+>, <Line: -			}
+>, <Line: -		} else if (e instanceof Expr.UnOp) {
+>, <Line: -			Expr.UnOp uop = (Expr.UnOp) e;
+>, <Line: -			switch (uop.op) {
+>, <Line: -			case NOT:
+>, <Line: -				return uop.mhs;
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		Expr.UnOp r = new Expr.UnOp(Expr.UOp.NOT, e);
+>, <Line: -		r.type = Nominal.T_BOOL;
+>, <Line: -		return r;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * The attributes method extracts those attributes of relevance to WyIL, and
+>, <Line: -	 * discards those which are only used for the wyc front end.
+>, <Line: -	 *
+>, <Line: -	 * @param elem
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private static List<wyil.lang.Attribute> attributes(SyntacticElement elem) {
+>, <Line: -		ArrayList<wyil.lang.Attribute> attrs = new ArrayList<wyil.lang.Attribute>();
+>, <Line: -		Attribute.Source s = elem.attribute(Attribute.Source.class);
+>, <Line: -		if (s != null) {
+>, <Line: -			// TODO: need to identify the file here
+>, <Line: -			attrs.add(new wyil.attributes.SourceLocation(0, s.start, s.end));
+>, <Line: -		}
+>, <Line: -		return attrs;
+>, <Line: -	}
+>, <Line: -		for(int i=0;i!=arr.length;++i) {
+>, <Line: -	private static int _idx=0;
+>, <Line: -		 * Maps variables to their WyIL register number and type.
+>, <Line: -		private final HashMap<String,Integer> environment;
+>, <Line: -		/**
+>, <Line: -		 * The outermost forest (needed for creating new subblocks).
+>, <Line: -		 */
+>, <Line: -		private final BytecodeForest forest;
+>, <Line: -		 * The enclosing bytecode block into which bytecodes are being written.
+>, <Line: -		 */
+>, <Line: -		private final BytecodeForest.Block block;		
+>, <Line: -		/**
+>, <Line: -		 * Get the index of the bytecode block into which bytecodes are being written
+>, <Line: -		 */
+>, <Line: -		private final int blockIndex;		
+>, <Line: -		/**
+>, <Line: -		 * Get the target for any continue statement encountered
+>, <Line: -		 */
+>, <Line: -		private final String continueLabel;		
+>, <Line: -		/**
+>, <Line: -		 * Get the target for any break statement encountered
+>, <Line: -		private final String breakLabel;
+>, <Line: -		public EnclosingScope(WhileyFile.Context context) {
+>, <Line: -			this(new HashMap<String,Integer>(), new BytecodeForest(), context, -1);
+>, <Line: -		private EnclosingScope(Map<String, Integer> environment, BytecodeForest forest, WhileyFile.Context context,
+>, <Line: -				int blockIndex) {
+>, <Line: -			this(environment, forest, context, blockIndex, null, null);
+>, <Line: -		}
+>, <Line: -		private EnclosingScope(Map<String, Integer> environment, BytecodeForest forest, WhileyFile.Context context,
+>, <Line: -				int blockIndex, String breakLabel, String continueLabel) {
+>, <Line: -			this.forest = forest;
+>, <Line: -			this.blockIndex = blockIndex;
+>, <Line: -			this.block = blockIndex == -1 ? null : forest.get(blockIndex);
+>, <Line: -			this.breakLabel = breakLabel;
+>, <Line: -			this.continueLabel = continueLabel;
+>, <Line: -		}
+>, <Line: -		public int blockIndex() {
+>, <Line: -			return blockIndex;
+>, <Line: -		public BytecodeForest getForest() {
+>, <Line: -			return forest;
+>, <Line: -		}
+>, <Line: -		public BytecodeForest.Block getBlock() {
+>, <Line: -			return block;
+>, <Line: -		public String getBreakLabel() {
+>, <Line: -			return breakLabel;
+>, <Line: -		}
+>, <Line: -		public String getContinueLabel() {
+>, <Line: -			return breakLabel;
+>, <Line: -		}
+>, <Line: -		public int allocate(Nominal type) {
+>, <Line: -			List<BytecodeForest.Register> registers = forest.registers(); 
+>, <Line: -			int index = registers.size();
+>, <Line: -			registers.add(new BytecodeForest.Register(type.nominal(), null));			
+>, <Line: -		public int allocate(Nominal type, String name) {
+>, <Line: -			List<BytecodeForest.Register> registers = forest.registers(); 
+>, <Line: -			int index = registers.size();
+>, <Line: -			registers.add(new BytecodeForest.Register(type.nominal(), name));
+>, <Line: -		public void add(Bytecode b) {
+>, <Line: -			block.add(b);
+>, <Line: -		public void add(Bytecode b, List<wyil.lang.Attribute> attributes) {
+>, <Line: -			block.add(b,attributes);
+>, <Line: -		public void add(int index, Bytecode b, List<wyil.lang.Attribute> attributes) {
+>, <Line: -			block.add(index, b,attributes);
+>, <Line: -		public EnclosingScope createRootBlock() {
+>, <Line: -			BytecodeForest.Block block = new BytecodeForest.Block();
+>, <Line: -			int index = forest.addAsRoot(block);
+>, <Line: -			return new EnclosingScope(environment,forest,context,index);
+>, <Line: -		public EnclosingScope createBlock() {
+>, <Line: -			BytecodeForest.Block block = new BytecodeForest.Block();
+>, <Line: -			int index = forest.add(block);
+>, <Line: -			return new EnclosingScope(environment,forest,context,index);
+>, <Line: -		public EnclosingScope createBlock(String breakLabel, String continueLabel) {
+>, <Line: -			BytecodeForest.Block block = new BytecodeForest.Block();
+>, <Line: -			int index = forest.add(block);
+>, <Line: -			return new EnclosingScope(environment,forest,context,index,breakLabel,continueLabel);
+>, <Line: -			return new EnclosingScope(environment,forest,context,blockIndex,breakLabel,continueLabel);
+>]

@@ -1,0 +1,195 @@
+[<Line: +import java.lang.instrument.ClassDefinition;
+>, <Line: +    private static final Class<?> REDEFINED = Foo.class;
+>, <Line: +        when(unloaded.getTypeDescription()).thenReturn(new TypeDescription.ForLoadedType(REDEFINED));
+>, <Line: +        loadedTypeInitializers.put(new TypeDescription.ForLoadedType(REDEFINED), loadedTypeInitializer);
+>, <Line: +        when(unloaded.getBytes()).thenReturn(BAZ);
+>, <Line: +        when(transformer.transform(builder, new TypeDescription.ForLoadedType(REDEFINED))).thenReturn((DynamicType.Builder) builder);
+>, <Line: +        when(binaryLocator.initialize(REDEFINED.getClassLoader(), REDEFINED.getName(), QUX)).thenReturn(initialized);
+>, <Line: +        when(typePool.describe(REDEFINED.getName())).thenReturn(resolution);
+>, <Line: +        when(resolution.resolve()).thenReturn(new TypeDescription.ForLoadedType(REDEFINED));
+>, <Line: +        when(rawMatcher.matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain()))
+>, <Line: +                .thenReturn(true);
+>, <Line: +        assertThat(classFileTransformer.transform(REDEFINED.getClassLoader(), REDEFINED.getName(), REDEFINED, REDEFINED.getProtectionDomain(), QUX), is(BAZ));
+>, <Line: +        verify(listener).onTransformation(new TypeDescription.ForLoadedType(REDEFINED), unloaded);
+>, <Line: +        verify(listener).onComplete(REDEFINED.getName());
+>, <Line: +        when(resolution.resolve()).thenReturn(new TypeDescription.ForLoadedType(REDEFINED));
+>, <Line: +        when(rawMatcher.matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain())).thenReturn(true);
+>, <Line: +        when(instrumentation.isRetransformClassesSupported()).thenReturn(true);
+>, <Line: +                .withRedefinitionStrategy(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
+>, <Line: +        verify(instrumentation).isRetransformClassesSupported();
+>, <Line: +        when(resolution.resolve()).thenReturn(new TypeDescription.ForLoadedType(REDEFINED));
+>, <Line: +        when(rawMatcher.matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain()))
+>, <Line: +                .thenReturn(false);
+>, <Line: +        when(instrumentation.isRetransformClassesSupported()).thenReturn(true);
+>, <Line: +                .withRedefinitionStrategy(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
+>, <Line: +        verify(instrumentation).isRetransformClassesSupported();
+>, <Line: +        verify(rawMatcher).matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain());
+>, <Line: +        when(rawMatcher.matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain())).thenReturn(true);
+>, <Line: +        when(instrumentation.isRetransformClassesSupported()).thenReturn(true);
+>, <Line: +                .withRedefinitionStrategy(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
+>, <Line: +        verify(instrumentation).isRetransformClassesSupported();
+>, <Line: +        verifyNoMoreInteractions(instrumentation);
+>, <Line: +        verify(rawMatcher).matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain());
+>, <Line: +        verifyNoMoreInteractions(rawMatcher);
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testRetransformationNotSupported() throws Exception {
+>, <Line: +        new AgentBuilder.Default(byteBuddy)
+>, <Line: +                .withInitialization(AgentBuilder.InitializationStrategy.NoOp.INSTANCE)
+>, <Line: +                .withRedefinitionStrategy(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
+>, <Line: +                .withBinaryLocator(binaryLocator)
+>, <Line: +                .withTypeStrategy(typeStrategy)
+>, <Line: +                .withListener(listener)
+>, <Line: +                .withoutNativeMethodPrefix()
+>, <Line: +                .type(rawMatcher).transform(transformer)
+>, <Line: +                .installOn(instrumentation);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testSkipRedefinitionWithNonRedefinable() throws Exception {
+>, <Line: +        when(unloaded.getBytes()).thenReturn(BAZ);
+>, <Line: +        when(resolution.resolve()).thenReturn(new TypeDescription.ForLoadedType(REDEFINED));
+>, <Line: +        when(rawMatcher.matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain()))
+>, <Line: +                .thenReturn(true);
+>, <Line: +        when(instrumentation.isModifiableClass(REDEFINED)).thenReturn(false);
+>, <Line: +        when(instrumentation.isRedefineClassesSupported()).thenReturn(true);
+>, <Line: +        ClassFileTransformer classFileTransformer = new AgentBuilder.Default(byteBuddy)
+>, <Line: +                .withInitialization(AgentBuilder.InitializationStrategy.NoOp.INSTANCE)
+>, <Line: +                .withRedefinitionStrategy(AgentBuilder.RedefinitionStrategy.REDEFINITION)
+>, <Line: +                .withBinaryLocator(binaryLocator)
+>, <Line: +                .withTypeStrategy(typeStrategy)
+>, <Line: +                .withListener(listener)
+>, <Line: +                .withoutNativeMethodPrefix()
+>, <Line: +                .type(rawMatcher).transform(transformer)
+>, <Line: +                .installOn(instrumentation);
+>, <Line: +        verifyZeroInteractions(listener);
+>, <Line: +        verify(instrumentation).addTransformer(classFileTransformer, false);
+>, <Line: +        verify(instrumentation).isModifiableClass(REDEFINED);
+>, <Line: +        verify(instrumentation).getAllLoadedClasses();
+>, <Line: +        verify(instrumentation).isRedefineClassesSupported();
+>, <Line: +        verifyNoMoreInteractions(instrumentation);
+>, <Line: +        verifyZeroInteractions(rawMatcher);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testSkipRedefinitionWithNonMatched() throws Exception {
+>, <Line: +        when(unloaded.getBytes()).thenReturn(BAZ);
+>, <Line: +        when(resolution.resolve()).thenReturn(new TypeDescription.ForLoadedType(REDEFINED));
+>, <Line: +        when(rawMatcher.matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain()))
+>, <Line: +                .thenReturn(false);
+>, <Line: +        when(instrumentation.isModifiableClass(REDEFINED)).thenReturn(true);
+>, <Line: +        when(instrumentation.isRedefineClassesSupported()).thenReturn(true);
+>, <Line: +        ClassFileTransformer classFileTransformer = new AgentBuilder.Default(byteBuddy)
+>, <Line: +                .withInitialization(AgentBuilder.InitializationStrategy.NoOp.INSTANCE)
+>, <Line: +                .withRedefinitionStrategy(AgentBuilder.RedefinitionStrategy.REDEFINITION)
+>, <Line: +                .withBinaryLocator(binaryLocator)
+>, <Line: +                .withTypeStrategy(typeStrategy)
+>, <Line: +                .withListener(listener)
+>, <Line: +                .withoutNativeMethodPrefix()
+>, <Line: +                .type(rawMatcher).transform(transformer)
+>, <Line: +                .installOn(instrumentation);
+>, <Line: +        verifyZeroInteractions(listener);
+>, <Line: +        verify(instrumentation).addTransformer(classFileTransformer, false);
+>, <Line: +        verify(instrumentation).isModifiableClass(REDEFINED);
+>, <Line: +        verify(instrumentation).getAllLoadedClasses();
+>, <Line: +        verify(instrumentation).isRedefineClassesSupported();
+>, <Line: +        verify(rawMatcher).matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain());
+>, <Line: +    @Test
+>, <Line: +    public void testSuccessfulWithRedefinitionMatched() throws Exception {
+>, <Line: +        when(rawMatcher.matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain()))
+>, <Line: +                .thenReturn(true);
+>, <Line: +        when(instrumentation.isModifiableClass(REDEFINED)).thenReturn(true);
+>, <Line: +        when(instrumentation.isRedefineClassesSupported()).thenReturn(true);
+>, <Line: +        when(binaryLocator.initialize(REDEFINED.getClassLoader())).thenReturn(initialized);
+>, <Line: +        ClassFileTransformer classFileTransformer = new AgentBuilder.Default(byteBuddy)
+>, <Line: +                .withInitialization(AgentBuilder.InitializationStrategy.NoOp.INSTANCE)
+>, <Line: +                .withRedefinitionStrategy(AgentBuilder.RedefinitionStrategy.REDEFINITION)
+>, <Line: +                .withBinaryLocator(binaryLocator)
+>, <Line: +                .withTypeStrategy(typeStrategy)
+>, <Line: +                .withListener(listener)
+>, <Line: +                .withoutNativeMethodPrefix()
+>, <Line: +                .type(rawMatcher).transform(transformer)
+>, <Line: +                .installOn(instrumentation);
+>, <Line: +        verify(listener).onTransformation(new TypeDescription.ForLoadedType(REDEFINED), unloaded);
+>, <Line: +        verify(listener).onComplete(REDEFINED.getName());
+>, <Line: +        verifyNoMoreInteractions(listener);
+>, <Line: +        verify(instrumentation).addTransformer(classFileTransformer, false);
+>, <Line: +        verify(instrumentation).getAllLoadedClasses();
+>, <Line: +        verify(instrumentation).isModifiableClass(REDEFINED);
+>, <Line: +        verify(instrumentation).redefineClasses(any(ClassDefinition[].class));
+>, <Line: +        verify(instrumentation).isRedefineClassesSupported();
+>, <Line: +        verifyNoMoreInteractions(instrumentation);
+>, <Line: +        verify(rawMatcher).matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain());
+>, <Line: +        verifyNoMoreInteractions(rawMatcher);
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testRedefinitionNotSupported() throws Exception {
+>, <Line: +        new AgentBuilder.Default(byteBuddy)
+>, <Line: +                .withInitialization(AgentBuilder.InitializationStrategy.NoOp.INSTANCE)
+>, <Line: +                .withRedefinitionStrategy(AgentBuilder.RedefinitionStrategy.REDEFINITION)
+>, <Line: +                .withBinaryLocator(binaryLocator)
+>, <Line: +                .withTypeStrategy(typeStrategy)
+>, <Line: +                .withListener(listener)
+>, <Line: +                .withoutNativeMethodPrefix()
+>, <Line: +                .type(rawMatcher).transform(transformer)
+>, <Line: +                .installOn(instrumentation);
+>, <Line: +    }
+>, <Line: +        when(rawMatcher.matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain()))
+>, <Line: +                .thenReturn(true);
+>, <Line: +        assertThat(classFileTransformer.transform(REDEFINED.getClassLoader(), REDEFINED.getName(), REDEFINED, REDEFINED.getProtectionDomain(), QUX),
+>, <Line: +                nullValue(byte[].class));
+>, <Line: +        verify(listener).onError(REDEFINED.getName(), exception);
+>, <Line: +        verify(listener).onComplete(REDEFINED.getName());
+>, <Line: +        when(resolution.resolve()).thenReturn(new TypeDescription.ForLoadedType(REDEFINED));
+>, <Line: +        when(rawMatcher.matches(new TypeDescription.ForLoadedType(REDEFINED), REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain()))
+>, <Line: +                .thenReturn(false);
+>, <Line: +        assertThat(classFileTransformer.transform(REDEFINED.getClassLoader(), REDEFINED.getName(), REDEFINED, REDEFINED.getProtectionDomain(), QUX),
+>, <Line: +                nullValue(byte[].class));
+>, <Line: +        verify(listener).onIgnored(new TypeDescription.ForLoadedType(REDEFINED));
+>, <Line: +        verify(listener).onComplete(REDEFINED.getName());
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.class).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: +            @Override
+>, <Line: +            public AccessControlContext create() {
+>, <Line: +                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: +            }
+>, <Line: +        }).apply();
+>, <Line: +    public static class Foo {
+>, <Line: +    }
+>]
+[<Line: -    private static final String FOO = "foo";
+>, <Line: -    private static final Class<?> REDEFINED = Object.class;
+>, <Line: -    @Mock
+>, <Line: -    private ClassLoader classLoader;
+>, <Line: -    @Mock
+>, <Line: -    private TypeDescription typeDescription;
+>, <Line: -    @Mock
+>, <Line: -    private ProtectionDomain protectionDomain;
+>, <Line: -        when(unloaded.getTypeDescription()).thenReturn(typeDescription);
+>, <Line: -        loadedTypeInitializers.put(typeDescription, loadedTypeInitializer);
+>, <Line: -        when(transformer.transform(builder, typeDescription)).thenReturn((DynamicType.Builder) builder);
+>, <Line: -        when(binaryLocator.initialize(FOO, QUX, classLoader)).thenReturn(initialized);
+>, <Line: -        when(typePool.describe(FOO)).thenReturn(resolution);
+>, <Line: -        when(resolution.resolve()).thenReturn(typeDescription);
+>, <Line: -        when(rawMatcher.matches(typeDescription, classLoader, REDEFINED, protectionDomain)).thenReturn(true);
+>, <Line: -        assertThat(classFileTransformer.transform(classLoader, FOO, REDEFINED, protectionDomain, QUX), is(BAZ));
+>, <Line: -        verify(listener).onTransformation(typeDescription, unloaded);
+>, <Line: -        verify(listener).onComplete(FOO);
+>, <Line: -        when(resolution.resolve()).thenReturn(typeDescription);
+>, <Line: -        when(rawMatcher.matches(typeDescription, classLoader, REDEFINED, protectionDomain)).thenReturn(true);
+>, <Line: -                .allowRetransformation()
+>, <Line: -        when(resolution.resolve()).thenReturn(typeDescription);
+>, <Line: -        when(rawMatcher.matches(typeDescription, classLoader, REDEFINED, protectionDomain)).thenReturn(false);
+>, <Line: -                .allowRetransformation()
+>, <Line: -        verify(rawMatcher).matches(TypeDescription.OBJECT, REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain());
+>, <Line: -        when(rawMatcher.matches(TypeDescription.OBJECT, REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain())).thenReturn(true);
+>, <Line: -                .allowRetransformation()
+>, <Line: -        verify(rawMatcher).matches(TypeDescription.OBJECT, REDEFINED.getClassLoader(), REDEFINED, REDEFINED.getProtectionDomain());
+>, <Line: -        when(rawMatcher.matches(typeDescription, classLoader, REDEFINED, protectionDomain)).thenReturn(true);
+>, <Line: -        assertThat(classFileTransformer.transform(classLoader, FOO, REDEFINED, protectionDomain, QUX), nullValue(byte[].class));
+>, <Line: -        verify(listener).onError(FOO, exception);
+>, <Line: -        verify(listener).onComplete(FOO);
+>, <Line: -        when(resolution.resolve()).thenReturn(typeDescription);
+>, <Line: -        when(rawMatcher.matches(typeDescription, classLoader, REDEFINED, protectionDomain)).thenReturn(false);
+>, <Line: -        assertThat(classFileTransformer.transform(classLoader, FOO, REDEFINED, protectionDomain, QUX), nullValue(byte[].class));
+>, <Line: -        verify(listener).onIgnored(typeDescription);
+>, <Line: -        verify(listener).onComplete(FOO);
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.class).applyBasic();
+>]

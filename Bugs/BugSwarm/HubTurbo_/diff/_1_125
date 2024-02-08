@@ -1,0 +1,75 @@
+[<Line: +import javafx.application.Platform;
+>, <Line: +import util.TickingTimer;
+>, <Line: +import util.events.*;
+>, <Line: +import java.util.Optional;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +	private final int BROWSER_REQUEST_DELAY = 400; //milliseconds
+>, <Line: +	private TickingTimer timer;
+>, <Line: +	private Optional<String> nextRepoId = Optional.empty();
+>, <Line: +	private Optional<Integer> nextIssueId = Optional.empty();
+>, <Line: +		timer = createTickingTimer(ui);
+>, <Line: +		timer.start();
+>, <Line: +		ui.registerEvent((IssueSelectedEventHandler) e -> {
+>, <Line: +			nextRepoId = Optional.of(e.repoId);
+>, <Line: +			nextIssueId = Optional.of(e.id);
+>, <Line: +			timer.restart();
+>, <Line: +			if (timer.isPaused()) { timer.resume(); }
+>, <Line: +		ui.registerEvent((IssueCreatedEventHandler) e ->
+>, <Line: +			ui.getBrowserComponent().newIssue());
+>, <Line: +		ui.registerEvent((LoginEventHandler) e -> {
+>, <Line: +			ui.getBrowserComponent().login();
+>, <Line: +			if (ui.getCommandLineArgs().containsKey(UI.ARG_UPDATED_TO)) {
+>, <Line: +				ui.getBrowserComponent().showChangelog(ui.getCommandLineArgs().get(UI.ARG_UPDATED_TO));
+>, <Line: +		ui.registerEvent((LabelCreatedEventHandler) e ->
+>, <Line: +			ui.getBrowserComponent().newLabel());
+>, <Line: +		ui.registerEvent((MilestoneCreatedEventHandler) e ->
+>, <Line: +			ui.getBrowserComponent().newMilestone());
+>, <Line: +	}
+>, <Line: +	private TickingTimer createTickingTimer(UI ui) {
+>, <Line: +		return new TickingTimer("Browser Request Delay Timer", BROWSER_REQUEST_DELAY, integer -> {
+>, <Line: +			// do nothing for each tick
+>, <Line: +		}, () -> {
+>, <Line: +			Platform.runLater(() -> {
+>, <Line: +				if (nextRepoId.isPresent() && nextIssueId.isPresent()) {
+>, <Line: +					ui.getBrowserComponent().showIssue(nextRepoId.get(), nextIssueId.get());
+>, <Line: +			});
+>, <Line: +			timer.pause();
+>, <Line: +		}, TimeUnit.MILLISECONDS);
+>]
+[<Line: -import util.events.IssueCreatedEvent;
+>, <Line: -import util.events.IssueCreatedEventHandler;
+>, <Line: -import util.events.IssueSelectedEvent;
+>, <Line: -import util.events.IssueSelectedEventHandler;
+>, <Line: -import util.events.LabelCreatedEvent;
+>, <Line: -import util.events.LabelCreatedEventHandler;
+>, <Line: -import util.events.LoginEvent;
+>, <Line: -import util.events.LoginEventHandler;
+>, <Line: -import util.events.MilestoneCreatedEvent;
+>, <Line: -import util.events.MilestoneCreatedEventHandler;
+>, <Line: -	private UI ui;
+>, <Line: -		this.ui = ui;
+>, <Line: -		ui.registerEvent(new IssueSelectedEventHandler() {
+>, <Line: -			@Override public void handle(IssueSelectedEvent e) {
+>, <Line: -				ui.getBrowserComponent().showIssue(e.id);
+>, <Line: -			}
+>, <Line: -		ui.registerEvent(new IssueCreatedEventHandler() {
+>, <Line: -			@Override public void handle(IssueCreatedEvent e) {
+>, <Line: -				ui.getBrowserComponent().newIssue();
+>, <Line: -		ui.registerEvent(new LoginEventHandler() {
+>, <Line: -			@Override public void handle(LoginEvent e) {
+>, <Line: -				ui.getBrowserComponent().login();
+>, <Line: -				if (ui.getCommandLineArgs().containsKey(UI.ARG_UPDATED_TO)) {
+>, <Line: -					ui.getBrowserComponent().showChangelog(ui.getCommandLineArgs().get(UI.ARG_UPDATED_TO));
+>, <Line: -			}
+>, <Line: -		});
+>, <Line: -		ui.registerEvent(new LabelCreatedEventHandler() {
+>, <Line: -			@Override public void handle(LabelCreatedEvent e) {
+>, <Line: -				ui.getBrowserComponent().newLabel();
+>, <Line: -			}
+>, <Line: -		});
+>, <Line: -		ui.registerEvent(new MilestoneCreatedEventHandler() {
+>, <Line: -			@Override public void handle(MilestoneCreatedEvent e) {
+>, <Line: -				ui.getBrowserComponent().newMilestone();
+>, <Line: -			}
+>, <Line: -		});
+>]

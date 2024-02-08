@@ -1,0 +1,15 @@
+[<Line: +			}
+>, <Line: +			else
+>, <Line: +				logger.info("Discarded " + m_cfName + " row with empty column name. This should never happen.");
+>, <Line: +				logger.error("Error sending data to Cassandra (" + m_cfName + ")", e);
+>, <Line: +				logger.error("Reducing write buffer size to " + m_maxBufferSize +
+>, <Line: +				catch (InterruptedException ignored)
+>, <Line: +				{
+>, <Line: +				}
+>]
+[<Line: -			} else
+>, <Line: -				logger.info("Discarded "+m_cfName+" row with empty column name. This should never happen.");
+>, <Line: -				logger.error("Error sending data to Cassandra ("+m_cfName+")", e);
+>, <Line: -				logger.error("Reducing write buffer size to "+m_maxBufferSize+
+>, <Line: -				catch (InterruptedException ignored){ }
+>]

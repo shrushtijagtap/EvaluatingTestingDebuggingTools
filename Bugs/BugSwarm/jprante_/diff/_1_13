@@ -1,0 +1,6 @@
+[<Line: +            ingest.waitForCluster("YELLOW", TimeValue.timeValueSeconds(30));
+>, <Line: +                ingest.waitForCluster("YELLOW", TimeValue.timeValueSeconds(30));
+>]
+[<Line: -import org.elasticsearch.action.admin.cluster.health.ClusterHealthStatus;
+>, <Line: -                ingest.waitForCluster(ClusterHealthStatus.YELLOW, TimeValue.timeValueSeconds(30));
+>]

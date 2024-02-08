@@ -1,0 +1,21 @@
+[<Line: +     * Retrieves the declaring classes (including itself) in bottom-up order.
+>, <Line: +        if (getLogger().isDebugEnabled()) {
+>, <Line: +            getLogger().debug("Failed to load {}!", className,
+>, <Line: +                    notFoundException != null ? notFoundException : new RuntimeException("Providing stack trace!"));
+>, <Line: +        getLogger().warn("The class path is not correctly set up; could not load {}!", className);
+>]
+[<Line: -    private static boolean issuedWarningForJavaLangAnnotationRepeatable = false;
+>, <Line: -     * Retrieves the declaring classes in bottom-up order.
+>, <Line: -        if ("java.lang.annotation.Repeatable".equals(className)) {
+>, <Line: -            if (issuedWarningForJavaLangAnnotationRepeatable) {
+>, <Line: -                return;
+>, <Line: -            }
+>, <Line: -            getLogger().warn("Running with JDK < 8, but classes or libraries refer to JDK8 annotation {}.", className);
+>, <Line: -            issuedWarningForJavaLangAnnotationRepeatable = true;
+>, <Line: -        } else {
+>, <Line: -            if (getLogger().isDebugEnabled()) {
+>, <Line: -                getLogger().debug("Failed to load {}!", className,
+>, <Line: -                        notFoundException != null ? notFoundException : new RuntimeException("Providing stack trace!"));
+>, <Line: -            }
+>, <Line: -            getLogger().warn("The class path is not correctly set up; could not load {}!", className);
+>]

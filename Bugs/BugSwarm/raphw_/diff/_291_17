@@ -1,0 +1,49 @@
+[]
+[<Line: -package net.bytebuddy.build.maven;
+>, <Line: -import net.bytebuddy.test.utility.MockitoRule;
+>, <Line: -import org.apache.maven.plugin.logging.Log;
+>, <Line: -import org.junit.Rule;
+>, <Line: -import org.junit.Test;
+>, <Line: -import org.junit.rules.TestRule;
+>, <Line: -import org.mockito.Mock;
+>, <Line: -import java.util.logging.Level;
+>, <Line: -import java.util.logging.LogRecord;
+>, <Line: -import java.util.logging.Logger;
+>, <Line: -import static org.mockito.Mockito.*;
+>, <Line: -public class ByteBuddyLogHandlerTest {
+>, <Line: -    private static final String FOO = "foo";
+>, <Line: -    @Rule
+>, <Line: -    public TestRule mockitoRule = new MockitoRule(this);
+>, <Line: -    @Mock
+>, <Line: -    private Log log;
+>, <Line: -    @Test
+>, <Line: -    public void testLogPublishNoDebug() throws Exception {
+>, <Line: -        ByteBuddyLogHandler byteBuddyLogHandler = new ByteBuddyLogHandler(log, mock(Logger.class), false);
+>, <Line: -        LogRecord logRecord = new LogRecord(Level.INFO, FOO);
+>, <Line: -        byteBuddyLogHandler.publish(logRecord);
+>, <Line: -        verify(log).isDebugEnabled();
+>, <Line: -        verifyNoMoreInteractions(log);
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void testLogPublishDebug() throws Exception {
+>, <Line: -        ByteBuddyLogHandler byteBuddyLogHandler = new ByteBuddyLogHandler(log, mock(Logger.class), false);
+>, <Line: -        LogRecord logRecord = new LogRecord(Level.INFO, FOO);
+>, <Line: -        when(log.isDebugEnabled()).thenReturn(true);
+>, <Line: -        byteBuddyLogHandler.publish(logRecord);
+>, <Line: -        verify(log).isDebugEnabled();
+>, <Line: -        verify(log).debug(byteBuddyLogHandler.getFormatter().format(logRecord));
+>, <Line: -        verifyNoMoreInteractions(log);
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void testFlush() throws Exception {
+>, <Line: -        new ByteBuddyLogHandler(log, mock(Logger.class), false).flush();
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void testClose() throws Exception {
+>, <Line: -        new ByteBuddyLogHandler(log, mock(Logger.class), false).close();
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void testInitialization() throws Exception {
+>, <Line: -        ByteBuddyLogHandler.initialize(log).reset();
+>, <Line: -    }
+>, <Line: -}>]

@@ -1,0 +1,4 @@
+[]
+[<Line: -            <regex><pattern>.*.api.FileContents</pattern><branchRate>96</branchRate><lineRate>93</lineRate></regex>
+>, <Line: -            <regex><pattern>.*.api.TokenTypes</pattern><branchRate>62</branchRate><lineRate>80</lineRate></regex>
+>]

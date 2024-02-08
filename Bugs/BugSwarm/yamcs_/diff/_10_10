@@ -1,0 +1,361 @@
+[]
+[<Line: -package org.yamcs.web.rest.archive;
+>, <Line: -import java.io.BufferedWriter;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.io.OutputStreamWriter;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.function.Consumer;
+>, <Line: -import org.rocksdb.RocksDBException;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -import org.yamcs.YProcessor;
+>, <Line: -import org.yamcs.YamcsServer;
+>, <Line: -import org.yamcs.api.MediaType;
+>, <Line: -import org.yamcs.parameter.ParameterCache;
+>, <Line: -import org.yamcs.parameter.ParameterValue;
+>, <Line: -import org.yamcs.parameter.ParameterValueWithId;
+>, <Line: -import org.yamcs.parameterarchive.ConsumerAbortException;
+>, <Line: -import org.yamcs.parameterarchive.MultiParameterDataRetrieval;
+>, <Line: -import org.yamcs.parameterarchive.MultipleParameterValueRequest;
+>, <Line: -import org.yamcs.parameterarchive.ParameterArchive;
+>, <Line: -import org.yamcs.parameterarchive.ParameterGroupIdDb;
+>, <Line: -import org.yamcs.parameterarchive.ParameterIdDb;
+>, <Line: -import org.yamcs.parameterarchive.ParameterIdDb.ParameterId;
+>, <Line: -import org.yamcs.parameterarchive.ParameterIdValueList;
+>, <Line: -import org.yamcs.parameterarchive.ParameterValueArray;
+>, <Line: -import org.yamcs.parameterarchive.SingleParameterDataRetrieval;
+>, <Line: -import org.yamcs.parameterarchive.SingleParameterValueRequest;
+>, <Line: -import org.yamcs.protobuf.Pvalue.ParameterData;
+>, <Line: -import org.yamcs.protobuf.Pvalue.TimeSeries;
+>, <Line: -import org.yamcs.protobuf.SchemaPvalue;
+>, <Line: -import org.yamcs.protobuf.Yamcs.NamedObjectId;
+>, <Line: -import org.yamcs.protobuf.Yamcs.Value;
+>, <Line: -import org.yamcs.protobuf.Yamcs.Value.Type;
+>, <Line: -import org.yamcs.utils.DecodingException;
+>, <Line: -import org.yamcs.utils.IntArray;
+>, <Line: -import org.yamcs.utils.ParameterFormatter;
+>, <Line: -import org.yamcs.utils.TimeEncoding;
+>, <Line: -import org.yamcs.web.BadRequestException;
+>, <Line: -import org.yamcs.web.HttpException;
+>, <Line: -import org.yamcs.web.InternalServerErrorException;
+>, <Line: -import org.yamcs.web.NotFoundException;
+>, <Line: -import org.yamcs.web.rest.RestHandler;
+>, <Line: -import org.yamcs.web.rest.RestParameterReplayListener;
+>, <Line: -import org.yamcs.web.rest.RestRequest;
+>, <Line: -import org.yamcs.web.rest.Route;
+>, <Line: -import org.yamcs.web.rest.archive.RestDownsampler.Sample;
+>, <Line: -import org.yamcs.xtce.Parameter;
+>, <Line: -import org.yamcs.xtce.XtceDb;
+>, <Line: -import org.yamcs.xtceproc.XtceDbFactory;
+>, <Line: -import io.netty.buffer.ByteBuf;
+>, <Line: -import io.netty.buffer.ByteBufOutputStream;
+>, <Line: -public class ArchiveParameter2RestHandler extends RestHandler {
+>, <Line: -    private static final String DEFAULT_PROCESSOR = "realtime";
+>, <Line: -    private static final Logger log = LoggerFactory.getLogger(ArchiveParameter2RestHandler.class);
+>, <Line: -    /**
+>, <Line: -     * A series is a list of samples that are determined in one-pass while processing a stream result.
+>, <Line: -     * Final API unstable.
+>, <Line: -     * <p>
+>, <Line: -     * If no query parameters are defined, the series covers *all* data.
+>, <Line: -     */
+>, <Line: -    @Route(path = "/api/archive/:instance/parameters2/:name*/samples")
+>, <Line: -    public void getParameterSamples(RestRequest req) throws HttpException {
+>, <Line: -        String instance = verifyInstance(req, req.getRouteParam("instance"));
+>, <Line: -        XtceDb mdb = XtceDbFactory.getInstance(instance);
+>, <Line: -        Parameter p = verifyParameter(req, mdb, req.getRouteParam("name"));
+>, <Line: -        YProcessor realtimeProcessor = getRealtimeProc(instance, req);
+>, <Line: -        /*
+>, <Line: -        TODO check commented out, in order to support sampling system parameters
+>, <Line: -        which don't have a type
+>, <Line: -        ParameterType ptype = p.getParameterType();
+>, <Line: -        if (ptype == null) {
+>, <Line: -            throw new BadRequestException("Requested parameter has no type");
+>, <Line: -        } else if (!(ptype instanceof FloatParameterType) && !(ptype instanceof IntegerParameterType)) {
+>, <Line: -            throw new BadRequestException("Only integer or float parameters can be sampled. Got " + ptype.getTypeAsString());
+>, <Line: -        }*/
+>, <Line: -        long start = req.getQueryParameterAsDate("start", 0);
+>, <Line: -        long stop = req.getQueryParameterAsDate("stop", TimeEncoding.getWallclockTime());
+>, <Line: -        RestDownsampler sampler = new RestDownsampler(stop);
+>, <Line: -        ParameterArchive parchive = getParameterArchive(instance);
+>, <Line: -        ParameterIdDb piddb = parchive.getParameterIdDb();
+>, <Line: -        ParameterCache pcache = null;
+>, <Line: -        if(realtimeProcessor!=null) {
+>, <Line: -            pcache = realtimeProcessor.getParameterCache();
+>, <Line: -        }
+>, <Line: -        ParameterId[] pids = piddb.get(p.getQualifiedName());
+>, <Line: -        if(pids == null) {
+>, <Line: -            log.warn("No parameter id found in the parameter archive for {}", p.getQualifiedName());
+>, <Line: -            if(pcache!=null) {
+>, <Line: -                sampleDataFromCache(pcache, p, start, stop, sampler);
+>, <Line: -            }
+>, <Line: -        } else {
+>, <Line: -            ParameterGroupIdDb pgidDb = parchive.getParameterGroupIdDb();
+>, <Line: -            for(ParameterId pid: pids) {
+>, <Line: -                int parameterId = pid.pid;
+>, <Line: -                Value.Type engType = pids[0].engType;
+>, <Line: -                int[] pgids = pgidDb.getAllGroups(parameterId);
+>, <Line: -                if(pgids.length ==0 ){
+>, <Line: -                    log.error("Found no parameter group for parameter Id {}", parameterId);
+>, <Line: -                    continue;
+>, <Line: -                }
+>, <Line: -                log.info("Executing a single parameter value request for time interval [{} - {}] parameterId: {} and parameter groups: {}", TimeEncoding.toString(start), TimeEncoding.toString(stop), parameterId, Arrays.toString(pgids));
+>, <Line: -                SingleParameterValueRequest spvr = new SingleParameterValueRequest(start, stop, parameterId, pgids, true);
+>, <Line: -                sampleDataForParameterId(parchive, engType, spvr, sampler);
+>, <Line: -                if(pcache!=null) {
+>, <Line: -                    sampleDataFromCache(pcache, p, start, stop, sampler);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        TimeSeries.Builder series = TimeSeries.newBuilder();
+>, <Line: -        for (Sample s : sampler.collect()) {
+>, <Line: -            series.addSample(ArchiveHelper.toGPBSample(s));
+>, <Line: -        }
+>, <Line: -        completeOK(req, series.build(), SchemaPvalue.TimeSeries.WRITE);
+>, <Line: -    }
+>, <Line: -    private void sampleDataFromCache(ParameterCache pcache, Parameter p, long start, long stop, RestDownsampler sampler) {
+>, <Line: -        //grab some data from the realtime processor cache
+>, <Line: -        List<org.yamcs.parameter.ParameterValue> pvlist = pcache.getAllValues(p);
+>, <Line: -        if(pvlist!=null) {
+>, <Line: -            int n = pvlist.size();
+>, <Line: -            for(int i = n-1; i>=0; i--) {
+>, <Line: -                org.yamcs.parameter.ParameterValue pv = pvlist.get(i);
+>, <Line: -                if(pv.getGenerationTime() < start) continue;
+>, <Line: -                if(pv.getGenerationTime() > stop) break;
+>, <Line: -                if(pv.getGenerationTime() > sampler.lastSampleTime()) {
+>, <Line: -                    sampler.process(pv);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    private void sampleDataForParameterId(ParameterArchive parchive, Value.Type engType, SingleParameterValueRequest spvr, RestDownsampler sampler) throws HttpException {
+>, <Line: -        spvr.setRetrieveEngineeringValues(true);
+>, <Line: -        spvr.setRetrieveParameterStatus(false);
+>, <Line: -        spvr.setRetrieveRawValues(false);
+>, <Line: -        SingleParameterDataRetrieval spdr = new SingleParameterDataRetrieval(parchive, spvr);
+>, <Line: -        try {
+>, <Line: -            spdr.retrieve(new Consumer<ParameterValueArray>() {
+>, <Line: -                @Override
+>, <Line: -                public void accept(ParameterValueArray t) {
+>, <Line: -                    Object o = t.getEngValues();
+>, <Line: -                    long[] timestamps = t.getTimestamps();
+>, <Line: -                    int n = timestamps.length;
+>, <Line: -                    if(o instanceof float[]) {
+>, <Line: -                        float[] values = (float[])o;
+>, <Line: -                        for(int i=0;i<n;i++) {
+>, <Line: -                            sampler.process(timestamps[i], values[i]);
+>, <Line: -                        }
+>, <Line: -                    } else if(o instanceof double[]) {
+>, <Line: -                        double[] values = (double[])o;
+>, <Line: -                        for(int i=0;i<n;i++) {
+>, <Line: -                            sampler.process(timestamps[i], values[i]);
+>, <Line: -                        }
+>, <Line: -                    } else if(o instanceof long[]) {
+>, <Line: -                        long[] values = (long[])o;
+>, <Line: -                        for(int i=0;i<n;i++) {
+>, <Line: -                            if(engType==Type.UINT64) {
+>, <Line: -                                sampler.process(timestamps[i], unsignedLongToDouble(values[i]));
+>, <Line: -                            } else {
+>, <Line: -                                sampler.process(timestamps[i], values[i]);
+>, <Line: -                            }
+>, <Line: -                        }
+>, <Line: -                    } else if(o instanceof int[]) {
+>, <Line: -                        int[] values = (int[])o;
+>, <Line: -                        for(int i=0;i<n;i++) {
+>, <Line: -                            if(engType==Type.UINT32) {
+>, <Line: -                                sampler.process(timestamps[i], values[i]&0xFFFFFFFFL);
+>, <Line: -                            } else {
+>, <Line: -                                sampler.process(timestamps[i], values[i]);
+>, <Line: -                            }
+>, <Line: -                        }
+>, <Line: -                    } else {
+>, <Line: -                        log.warn("Unexpected value type " + o.getClass());
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            });
+>, <Line: -        } catch (RocksDBException | DecodingException e) {
+>, <Line: -            log.warn("Received exception during parmaeter retrieval ", e);
+>, <Line: -            throw new InternalServerErrorException(e.getMessage());
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    private static ParameterArchive getParameterArchive(String instance) throws BadRequestException {
+>, <Line: -        ParameterArchive parameterArchive = YamcsServer.getService(instance, ParameterArchive.class);
+>, <Line: -        if (parameterArchive == null) {
+>, <Line: -            throw new BadRequestException("ParameterArchive not configured for this instance");
+>, <Line: -        }
+>, <Line: -        return parameterArchive;
+>, <Line: -    }
+>, <Line: -    /**copied from guava*/
+>, <Line: -    double unsignedLongToDouble(long x) {
+>, <Line: -        double d = (double) (x & 0x7fffffffffffffffL);
+>, <Line: -        if (x < 0) {
+>, <Line: -            d += 0x1.0p63;
+>, <Line: -        }
+>, <Line: -        return d;
+>, <Line: -    }
+>, <Line: -    @Route(path = "/api/archive/:instance/parameters2/:name*")
+>, <Line: -    public void listParameterHistory(RestRequest req) throws HttpException {
+>, <Line: -        String instance = verifyInstance(req, req.getRouteParam("instance"));
+>, <Line: -        XtceDb mdb = XtceDbFactory.getInstance(instance);
+>, <Line: -        NameDescriptionWithId<Parameter> requestedParamWithId = verifyParameterWithId(req, mdb, req.getRouteParam("name"));
+>, <Line: -        Parameter p = requestedParamWithId.getItem();
+>, <Line: -        NamedObjectId requestedId = requestedParamWithId.getRequestedId();
+>, <Line: -        if(req.hasQueryParameter("pos")) throw new BadRequestException("pos not supported");
+>, <Line: -        int limit = req.getQueryParameterAsInt("limit", 100);
+>, <Line: -        boolean noRepeat = req.getQueryParameterAsBoolean("norepeat", false);
+>, <Line: -        long start = req.getQueryParameterAsDate("start", 0);
+>, <Line: -        long stop = req.getQueryParameterAsDate("stop", TimeEncoding.getWallclockTime());
+>, <Line: -        boolean ascending = !req.asksDescending(true);
+>, <Line: -        ParameterArchive parchive = getParameterArchive(instance);
+>, <Line: -        ParameterIdDb piddb = parchive.getParameterIdDb();
+>, <Line: -        IntArray pidArray = new IntArray();
+>, <Line: -        IntArray pgidArray = new IntArray();
+>, <Line: -        ParameterId[] pids = piddb.get(p.getQualifiedName());
+>, <Line: -        if(pids != null) {
+>, <Line: -            ParameterGroupIdDb pgidDb = parchive.getParameterGroupIdDb();
+>, <Line: -            for(ParameterId pid:pids) {
+>, <Line: -                int[] pgids = pgidDb.getAllGroups(pid.pid);
+>, <Line: -                for(int pgid: pgids) {
+>, <Line: -                    pidArray.add(pid.pid);
+>, <Line: -                    pgidArray.add(pgid);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            if(pidArray.isEmpty()) {
+>, <Line: -                log.error("No parameter group id found in the parameter archive for {}", p.getQualifiedName());
+>, <Line: -                throw new NotFoundException(req);
+>, <Line: -            }
+>, <Line: -        } else {
+>, <Line: -            log.warn("No parameter id found in the parameter archive for {}", p.getQualifiedName());
+>, <Line: -        }
+>, <Line: -        String[] pnames = new String[pidArray.size()];
+>, <Line: -        Arrays.fill(pnames, p.getQualifiedName());
+>, <Line: -        MultipleParameterValueRequest mpvr = new MultipleParameterValueRequest(start, stop, pnames, pidArray.toArray(), pgidArray.toArray(), ascending);
+>, <Line: -        mpvr.setRetrieveRawValues(true);
+>, <Line: -        // do not use set limit because the data can be filtered down (e.g. noRepeat) and the limit applies the final filtered data not to the input
+>, <Line: -        // one day the parameter archive will be smarter and do the filtering inside
+>, <Line: -        //mpvr.setLimit(limit);
+>, <Line: -        YProcessor realtimeProcessor = getRealtimeProc(instance, req);
+>, <Line: -        ParameterCache pcache = null;
+>, <Line: -        if(realtimeProcessor!=null) {
+>, <Line: -            pcache = realtimeProcessor.getParameterCache();
+>, <Line: -        }
+>, <Line: -        if (req.asksFor(MediaType.CSV)) {
+>, <Line: -            ByteBuf buf = req.getChannelHandlerContext().alloc().buffer();
+>, <Line: -            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new ByteBufOutputStream(buf)))) {
+>, <Line: -                List<NamedObjectId> idList = Arrays.asList(requestedId);
+>, <Line: -                ParameterFormatter csvFormatter = new ParameterFormatter(bw, idList);
+>, <Line: -                limit++; // Allow one extra line for the CSV header
+>, <Line: -                RestParameterReplayListener replayListener = new RestParameterReplayListener(0, limit, req) {
+>, <Line: -                    @Override
+>, <Line: -                    public void onParameterData(ParameterValueWithId pvwid) {
+>, <Line: -                        try {
+>, <Line: -                            List<org.yamcs.protobuf.Pvalue.ParameterValue> pvlist = new ArrayList<>(1);
+>, <Line: -                            pvlist.add(pvwid.toGbpParameterValue());
+>, <Line: -                            csvFormatter.writeParameters(pvlist);
+>, <Line: -                        } catch (IOException e) {
+>, <Line: -                            log.error("Error while writing parameter line", e);
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                };
+>, <Line: -                replayListener.setNoRepeat(noRepeat);
+>, <Line: -                //FIXME - make async
+>, <Line: -                retrieveParameterData(parchive, pcache, p, requestedId, mpvr, replayListener);
+>, <Line: -            } catch (IOException|DecodingException|RocksDBException e) {
+>, <Line: -                throw new InternalServerErrorException(e);
+>, <Line: -            }
+>, <Line: -            completeOK(req, MediaType.CSV, buf);
+>, <Line: -        } else {
+>, <Line: -            ParameterData.Builder resultb = ParameterData.newBuilder();
+>, <Line: -            try {
+>, <Line: -                RestParameterReplayListener replayListener = new RestParameterReplayListener(0, limit, req) {
+>, <Line: -                    @Override
+>, <Line: -                    public void onParameterData(ParameterValueWithId  pvwid) {
+>, <Line: -                        resultb.addParameter(pvwid.toGbpParameterValue());
+>, <Line: -                    }
+>, <Line: -                    @Override
+>, <Line: -                    public void update(ParameterValueWithId pvwid) {
+>, <Line: -                        super.update(pvwid);
+>, <Line: -                    }
+>, <Line: -                };
+>, <Line: -                replayListener.setNoRepeat(noRepeat);
+>, <Line: -              //FIXME - make async
+>, <Line: -                retrieveParameterData(parchive, pcache, p, requestedId, mpvr, replayListener);
+>, <Line: -            } catch (DecodingException|RocksDBException e) {
+>, <Line: -                throw new InternalServerErrorException(e);
+>, <Line: -            }
+>, <Line: -            completeOK(req, resultb.build(), SchemaPvalue.ParameterData.WRITE);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    private void retrieveParameterData(ParameterArchive parchive,  ParameterCache pcache, Parameter p, NamedObjectId id,
+>, <Line: -            MultipleParameterValueRequest mpvr, RestParameterReplayListener replayListener) throws RocksDBException, DecodingException {
+>, <Line: -        MutableLong lastParameterTime = new MutableLong(TimeEncoding.INVALID_INSTANT);
+>, <Line: -        Consumer<ParameterIdValueList> consumer = new Consumer<ParameterIdValueList>() {
+>, <Line: -            boolean first = true;
+>, <Line: -            @Override
+>, <Line: -            public void accept(ParameterIdValueList pidvList) {
+>, <Line: -                lastParameterTime.l = pidvList.getValues().get(0).getGenerationTime();
+>, <Line: -                if(first && !mpvr.isAscending() && (pcache!=null)) { //retrieve data from cache first
+>, <Line: -                    first = false;
+>, <Line: -                    sendFromCache(p, id, pcache, false, lastParameterTime.l, mpvr.getStop(), replayListener);
+>, <Line: -                }
+>, <Line: -                ParameterValue pv = pidvList.getValues().get(0);
+>, <Line: -                replayListener.update(new ParameterValueWithId(pv, id));
+>, <Line: -                if(replayListener.isReplayAbortRequested()) throw new ConsumerAbortException();
+>, <Line: -            }
+>, <Line: -        };
+>, <Line: -        MultiParameterDataRetrieval mpdr = new MultiParameterDataRetrieval(parchive, mpvr);
+>, <Line: -        mpdr.retrieve(consumer);
+>, <Line: -        //now add some data from cache
+>, <Line: -        if (pcache!=null) {
+>, <Line: -            if(mpvr.isAscending())  {
+>, <Line: -                sendFromCache(p, id, pcache, true, lastParameterTime.l, mpvr.getStop(), replayListener);      
+>, <Line: -            } else if (lastParameterTime.l==TimeEncoding.INVALID_INSTANT) {  //no data retrieved from archive, but maybe there is still something in the cache to send
+>, <Line: -                sendFromCache(p, id, pcache, false, mpvr.getStart(), mpvr.getStop(), replayListener);
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    //send data from cache with timestamps in (start, stop) if ascending or (start, stop] if descending interval 
+>, <Line: -    private void sendFromCache(Parameter p, NamedObjectId id, ParameterCache pcache, boolean ascending, long start, long stop, RestParameterReplayListener replayListener) {
+>, <Line: -        List<ParameterValue> pvlist = pcache.getAllValues(p);
+>, <Line: -        if(pvlist==null) return;
+>, <Line: -        if(ascending) {
+>, <Line: -            int n = pvlist.size();
+>, <Line: -            for(int i = n-1; i>=0 ; i-- ) {
+>, <Line: -                org.yamcs.parameter.ParameterValue pv = pvlist.get(i);
+>, <Line: -                if(pv.getGenerationTime() >= stop) break;
+>, <Line: -                if(pv.getGenerationTime()> start) {
+>, <Line: -                    replayListener.update(new ParameterValueWithId(pv, id));
+>, <Line: -                    if(replayListener.isReplayAbortRequested()) break;
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        } else {
+>, <Line: -            for(ParameterValue pv:pvlist) {
+>, <Line: -                if(pv.getGenerationTime()>stop) continue;
+>, <Line: -                if(pv.getGenerationTime() <= start) break;
+>, <Line: -                replayListener.update(new ParameterValueWithId(pv, id));
+>, <Line: -                if(replayListener.isReplayAbortRequested()) break;
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    private YProcessor getRealtimeProc(String instance, RestRequest req) throws NotFoundException {
+>, <Line: -        String processorName;
+>, <Line: -        if(req.hasQueryParameter("norealtime")) {
+>, <Line: -            return null;
+>, <Line: -        } else {
+>, <Line: -            if(req.hasQueryParameter("processor")) {
+>, <Line: -                processorName = req.getQueryParameter("processor");
+>, <Line: -            } else {
+>, <Line: -                processorName = DEFAULT_PROCESSOR;
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        return YProcessor.getInstance(instance, processorName);
+>, <Line: -    }
+>, <Line: -    private class MutableLong {
+>, <Line: -        long l;
+>, <Line: -        public MutableLong(long l) {
+>, <Line: -            this.l = l;
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -}
+>]

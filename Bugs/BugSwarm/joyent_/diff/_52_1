@@ -1,0 +1,26 @@
+[<Line: +    /**
+>, <Line: +     * Returns a reference to a running/completed job as a builder object.
+>, <Line: +     *
+>, <Line: +     * @param job job object of completed job
+>, <Line: +     * @return a fluent interface providing job management options
+>, <Line: +     */
+>, <Line: +    public Run lookupJob(final MantaJob job) {
+>, <Line: +        if (job == null) {
+>, <Line: +            throw new IllegalArgumentException("job must be present");
+>, <Line: +        }
+>, <Line: +        return lookupJob(job.getId());
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Returns a reference to a running/completed job as a builder object.
+>, <Line: +     *
+>, <Line: +     * @param jobId job id of completed job
+>, <Line: +     * @return a fluent interface providing job management options
+>, <Line: +     */
+>, <Line: +    public Run lookupJob(final UUID jobId) {
+>, <Line: +        if (jobId == null) {
+>, <Line: +            throw new IllegalArgumentException("jobId must be present");
+>, <Line: +        }
+>, <Line: +        return new MantaJobBuilder.Run(this, jobId);
+>, <Line: +    }
+>]
+[]

@@ -1,0 +1,53 @@
+[]
+[<Line: -package it.unibz.krdb.obda.reformulation.tests;
+>, <Line: -/*
+>, <Line: - * #%L
+>, <Line: - * ontop-reformulation-core
+>, <Line: - * %%
+>, <Line: - * Copyright (C) 2009 - 2014 Free University of Bozen-Bolzano
+>, <Line: - * %%
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: - * you may not use this file except in compliance with the License.
+>, <Line: - * You may obtain a copy of the License at
+>, <Line: - * 
+>, <Line: - *      http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - * 
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - * See the License for the specific language governing permissions and
+>, <Line: - * limitations under the License.
+>, <Line: - * #L%
+>, <Line: - */
+>, <Line: -import it.unibz.krdb.obda.ontology.ClassExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.OClass;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectPropertyExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectSomeValuesFrom;
+>, <Line: -import it.unibz.krdb.obda.ontology.Ontology;
+>, <Line: -import it.unibz.krdb.obda.ontology.OntologyFactory;
+>, <Line: -import it.unibz.krdb.obda.ontology.impl.OntologyFactoryImpl;
+>, <Line: -import it.unibz.krdb.obda.owlrefplatform.core.dagjgrapht.EquivalencesDAG;
+>, <Line: -import it.unibz.krdb.obda.owlrefplatform.core.dagjgrapht.TBoxReasoner;
+>, <Line: -import it.unibz.krdb.obda.owlrefplatform.core.dagjgrapht.TBoxReasonerImpl;
+>, <Line: -import it.unibz.krdb.obda.owlrefplatform.core.tboxprocessing.TBoxReasonerToOntology;
+>, <Line: -import junit.framework.TestCase;
+>, <Line: -public class SigmaTest extends TestCase {
+>, <Line: -    private static final OntologyFactory descFactory = OntologyFactoryImpl.getInstance();
+>, <Line: -    public void test_exists_simple() {
+>, <Line: -        Ontology ontology = descFactory.createOntology();
+>, <Line: -        OClass ac = ontology.getVocabulary().createClass("a");
+>, <Line: -        OClass cc = ontology.getVocabulary().createClass("c");
+>, <Line: -        ObjectPropertyExpression rprop = ontology.getVocabulary().createObjectProperty("r");
+>, <Line: -        ObjectSomeValuesFrom er = rprop.getDomain();
+>, <Line: -        ontology.addSubClassOfAxiom(er, ac);
+>, <Line: -        ontology.addSubClassOfAxiom(cc, er);
+>, <Line: -		TBoxReasoner reasoner = new TBoxReasonerImpl(ontology);
+>, <Line: -		TBoxReasoner sigmaReasoner = new TBoxReasonerImpl(TBoxReasonerToOntology.getOntology(reasoner, true));						
+>, <Line: -		EquivalencesDAG<ClassExpression> classes = sigmaReasoner.getClassDAG();
+>, <Line: -        assertTrue(classes.getSub(classes.getVertex(ac)).contains(classes.getVertex(er)));
+>, <Line: -     // Roman: was 1, which, I think, is wrong: A has two subclasses, ER and C (now 3 because it's reflexive)
+>, <Line: -        assertEquals(3, classes.getSub(classes.getVertex(ac)).size());   // getDescendants is reflexive
+>, <Line: -        assertEquals(1, classes.getSub(classes.getVertex(er)).size());  // getDescendants is reflexive
+>, <Line: -        assertEquals(1, classes.getSub(classes.getVertex(cc)).size());  // getDescendants is reflexive
+>, <Line: -    }
+>, <Line: -}>]

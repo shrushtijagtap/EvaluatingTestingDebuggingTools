@@ -1,0 +1,36 @@
+[<Line: +import com.fasterxml.jackson.annotation.JsonProperty;
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>]
+[<Line: -    /**
+>, <Line: -     * Set the nameAvailable value.
+>, <Line: -     *
+>, <Line: -     * @param nameAvailable the nameAvailable value to set
+>, <Line: -     * @return the CheckNameAvailabilityResultInner object itself.
+>, <Line: -     */
+>, <Line: -    public CheckNameAvailabilityResultInner withNameAvailable(Boolean nameAvailable) {
+>, <Line: -        this.nameAvailable = nameAvailable;
+>, <Line: -        return this;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Set the reason value.
+>, <Line: -     *
+>, <Line: -     * @param reason the reason value to set
+>, <Line: -     * @return the CheckNameAvailabilityResultInner object itself.
+>, <Line: -     */
+>, <Line: -    public CheckNameAvailabilityResultInner withReason(Reason reason) {
+>, <Line: -        this.reason = reason;
+>, <Line: -        return this;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Set the message value.
+>, <Line: -     *
+>, <Line: -     * @param message the message value to set
+>, <Line: -     * @return the CheckNameAvailabilityResultInner object itself.
+>, <Line: -     */
+>, <Line: -    public CheckNameAvailabilityResultInner withMessage(String message) {
+>, <Line: -        this.message = message;
+>, <Line: -        return this;
+>, <Line: -    }
+>]

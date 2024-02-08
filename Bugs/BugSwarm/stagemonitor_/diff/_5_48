@@ -1,0 +1,91 @@
+[<Line: +package org.stagemonitor.requestmonitor.reporter;
+>, <Line: +import static org.junit.Assert.assertTrue;
+>, <Line: +import static org.mockito.Matchers.any;
+>, <Line: +import static org.mockito.Matchers.anyObject;
+>, <Line: +import static org.mockito.Matchers.anyString;
+>, <Line: +import static org.mockito.Matchers.startsWith;
+>, <Line: +import static org.mockito.Mockito.times;
+>, <Line: +import static org.mockito.Mockito.verify;
+>, <Line: +import static org.mockito.Mockito.verifyNoMoreInteractions;
+>, <Line: +import static org.mockito.Mockito.when;
+>, <Line: +import static org.stagemonitor.requestmonitor.reporter.ElasticsearchExternalRequestReporter.getExternalRequestTimerName;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.stagemonitor.core.MeasurementSession;
+>, <Line: +import org.stagemonitor.requestmonitor.ExternalRequest;
+>, <Line: +import org.stagemonitor.requestmonitor.RequestTrace;
+>, <Line: +public class ElasticsearchExternalRequestReporterTest extends AbstractElasticsearchRequestTraceReporterTest {
+>, <Line: +	private ElasticsearchExternalRequestReporter reporter;
+>, <Line: +	@Override
+>, <Line: +	@Before
+>, <Line: +	public void setUp() throws Exception {
+>, <Line: +		super.setUp();
+>, <Line: +		when(requestMonitorPlugin.isOnlyLogElasticsearchRequestTraceReports()).thenReturn(true);
+>, <Line: +		when(requestMonitorPlugin.getOnlyReportNExternalRequestsPerMinute()).thenReturn(1000000d);
+>, <Line: +		reporter = new ElasticsearchExternalRequestReporter(requestTraceLogger);
+>, <Line: +		reporter.init(new RequestTraceReporter.InitArguments(configuration));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void reportRequestTrace() throws Exception {
+>, <Line: +		when(requestMonitorPlugin.isOnlyLogElasticsearchRequestTraceReports()).thenReturn(false);
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(getRequestTrace()));
+>, <Line: +		verify(elasticsearchClient).sendBulkAsync(anyString(), any());
+>, <Line: +		assertTrue(reporter.isActive(new RequestTraceReporter.IsActiveArguments(getRequestTrace())));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void testLogReportRequestTrace() throws Exception {
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(getRequestTrace()));
+>, <Line: +		verify(elasticsearchClient, times(0)).index(anyString(), anyString(), anyObject());
+>, <Line: +		verify(requestTraceLogger).info(startsWith("{\"index\":{}}\n{"));
+>, <Line: +		assertTrue(reporter.isActive(new RequestTraceReporter.IsActiveArguments(getRequestTrace())));
+>, <Line: +	}
+>, <Line: +	private RequestTrace getRequestTrace() {
+>, <Line: +		return getRequestTrace(1);
+>, <Line: +	}
+>, <Line: +	private RequestTrace getRequestTrace(long executionTimeMillis) {
+>, <Line: +		final RequestTrace requestTrace = new RequestTrace("abc", new MeasurementSession(getClass().getName(), "test", "test"), requestMonitorPlugin);
+>, <Line: +		requestTrace.setName("Report Me");
+>, <Line: +		final ExternalRequest externalRequest = new ExternalRequest("jdbc", "SELECT", TimeUnit.MILLISECONDS.toNanos(executionTimeMillis), "SELECT * from STAGEMONITOR");
+>, <Line: +		externalRequest.setExecutedBy("ElasticsearchExternalRequestReporterTest#test");
+>, <Line: +		requestTrace.addExternalRequest(externalRequest);
+>, <Line: +		registry
+>, <Line: +				.timer(getExternalRequestTimerName(externalRequest))
+>, <Line: +				.update(executionTimeMillis, TimeUnit.MILLISECONDS);
+>, <Line: +		return requestTrace;
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void reportRequestTraceRateLimited() throws Exception {
+>, <Line: +		when(requestMonitorPlugin.getOnlyReportNExternalRequestsPerMinute()).thenReturn(1d);
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(getRequestTrace()));
+>, <Line: +		verify(requestTraceLogger).info(anyString());
+>, <Line: +		Thread.sleep(5010); // the meter only updates every 5 seconds
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(getRequestTrace()));
+>, <Line: +		verifyNoMoreInteractions(requestTraceLogger);
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void excludeExternalRequestsFasterThan() throws Exception {
+>, <Line: +		when(requestMonitorPlugin.getExcludeExternalRequestsFasterThan()).thenReturn(100d);
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(getRequestTrace(100)));
+>, <Line: +		verify(requestTraceLogger).info(anyString());
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(getRequestTrace(99)));
+>, <Line: +		verifyNoMoreInteractions(requestTraceLogger);
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void testElasticsearchExcludeFastCallTree() throws Exception {
+>, <Line: +		when(requestMonitorPlugin.getExcludeExternalRequestsWhenFasterThanXPercent()).thenReturn(0.85d);
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(getRequestTrace(1000)));
+>, <Line: +		verify(requestTraceLogger).info(anyString());
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(getRequestTrace(250)));
+>, <Line: +		verifyNoMoreInteractions(requestTraceLogger);
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void testElasticsearchDontExcludeSlowCallTree() throws Exception {
+>, <Line: +		when(requestMonitorPlugin.getExcludeExternalRequestsWhenFasterThanXPercent()).thenReturn(0.85d);
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(getRequestTrace(250)));
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(getRequestTrace(1000)));
+>, <Line: +		verify(requestTraceLogger, times(2)).info(anyString());
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,10 @@
+[<Line: +    public static final Class<?> EXCEPTION_TYPE = ExceptionType.class;
+>, <Line: +    public static final Class<?> INTERFACE_TYPE = InterfaceType.class;
+>, <Line: +    static interface InterfaceType {
+>, <Line: +        /* empty */
+>, <Line: +    }
+>, <Line: +    static class ExceptionType extends Exception{
+>, <Line: +        /* empty */
+>, <Line: +    }
+>]
+[]

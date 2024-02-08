@@ -1,0 +1,30 @@
+[<Line: +	@Test
+>, <Line: +	public void test_toByteBuffer_tagsWithColonEquals()
+>, <Line: +	{
+>, <Line: +		SortedMap<String, String> map = new TreeMap<String, String>();
+>, <Line: +		map.put("a:a", "b:b");
+>, <Line: +		map.put("c=c", "d=d");
+>, <Line: +		map.put(":e", "f\\");
+>, <Line: +		map.put("=a=", "===");
+>, <Line: +		map.put(":a:", ":::");
+>, <Line: +		map.put("=b=", ":::");
+>, <Line: +		map.put(":b:", "===");
+>, <Line: +		map.put("=c=", "normal");
+>, <Line: +		DataPointsRowKeySerializer serializer = new DataPointsRowKeySerializer();
+>, <Line: +		ByteBuffer buffer = serializer.toByteBuffer(new DataPointsRowKey("myMetric", 12345L, "myDataType", map));
+>, <Line: +		DataPointsRowKey rowKey = serializer.fromByteBuffer(buffer);
+>, <Line: +		assertThat(rowKey.getMetricName(), equalTo("myMetric"));
+>, <Line: +		assertThat(rowKey.getDataType(), equalTo("myDataType"));
+>, <Line: +		assertThat(rowKey.getTimestamp(), equalTo(12345L));
+>, <Line: +		assertThat(rowKey.getTags().size(), equalTo(8));
+>, <Line: +		assertThat(rowKey.getTags().get("a:a"), equalTo("b:b"));
+>, <Line: +		assertThat(rowKey.getTags().get("c=c"), equalTo("d=d"));
+>, <Line: +		assertThat(rowKey.getTags().get(":e"), equalTo("f\\"));
+>, <Line: +		assertThat(rowKey.getTags().get("=a="), equalTo("==="));
+>, <Line: +		assertThat(rowKey.getTags().get(":a:"), equalTo(":::"));
+>, <Line: +		assertThat(rowKey.getTags().get("=b="), equalTo(":::"));
+>, <Line: +		assertThat(rowKey.getTags().get(":b:"), equalTo("==="));
+>, <Line: +		assertThat(rowKey.getTags().get("=c="), equalTo("normal"));
+>, <Line: +	}
+>]
+[]

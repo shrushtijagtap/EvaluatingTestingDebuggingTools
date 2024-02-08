@@ -1,0 +1,7 @@
+[<Line: +package org.mp4parser.tools.boxes;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.MovieHeaderBox;
+>, <Line: +import org.mp4parser.support.Matrix;
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.googlecode.mp4parser.util.Matrix;
+>]

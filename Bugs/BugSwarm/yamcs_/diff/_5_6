@@ -1,0 +1,12 @@
+[<Line: +import java.util.Arrays;
+>, <Line: +import java.util.List;
+>, <Line: +    static final public String REALTIME_EVENT_STREAM_NAME = "events_realtime";
+>, <Line: +    static final public String DUMP_EVENT_STREAM_NAME = "events_dump";
+>, <Line: +    final String yamcsInstance;
+>, <Line: +        this.yamcsInstance = instance;
+>, <Line: +        YarchDatabase ydb=YarchDatabase.getInstance(yamcsInstance);
+>, <Line: +        Utils.closeTableWriters(ydb,  Arrays.asList(REALTIME_EVENT_STREAM_NAME, DUMP_EVENT_STREAM_NAME));
+>]
+[<Line: -    static final public String REALTIME_EVENT_STREAM_NAME="events_realtime";
+>, <Line: -    static final public String DUMP_EVENT_STREAM_NAME="events_dump";
+>]

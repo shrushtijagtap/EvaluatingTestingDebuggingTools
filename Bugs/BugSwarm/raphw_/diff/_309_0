@@ -1,0 +1,6 @@
+[<Line: +import org.hamcrest.CoreMatchers;
+>, <Line: +        assertThat(accessor.getVirtualMachineType(), CoreMatchers.<Class<?>>is(Void.class));
+>]
+[<Line: -import static junit.framework.TestCase.assertEquals;
+>, <Line: -        assertEquals(Void.class, accessor.getVirtualMachineType());
+>]

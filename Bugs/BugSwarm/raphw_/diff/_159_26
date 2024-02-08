@@ -1,0 +1,20 @@
+[<Line: +        assertThat(type.getDeclaredConstructor().newInstance(), notNullValue(Object.class));
+>, <Line: +        assertThat(type.getDeclaredConstructor().newInstance(), notNullValue(DefaultConstructor.class));
+>, <Line: +        assertThat(interfaceMethod.invoke(dynamicType.getDeclaredConstructor().newInstance()), is(interfaceMarker));
+>, <Line: +        assertThat(interfaceMethod.invoke(dynamicType.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +        assertThat(dynamicClassType.getMethod(FOO).invoke(dynamicClassType.getDeclaredConstructor().newInstance()), is((Object) (FOO + BAR)));
+>, <Line: +        BridgeRetention<String> bridgeRetention = (BridgeRetention<String>) dynamicType.getDeclaredConstructor().newInstance();
+>, <Line: +        CallSuperMethod<String> callSuperMethod = (CallSuperMethod<String>) dynamicType.getDeclaredConstructor().newInstance();
+>, <Line: +        assertThat(foo.invoke(type.getDeclaredConstructor().newInstance(), BAR), is((Object) (FOO + BAR)));
+>, <Line: +        assertThat(bar.invoke(type.getDeclaredConstructor().newInstance(), list), sameInstance((Object) list));
+>]
+[<Line: -        assertThat(type.newInstance(), notNullValue(Object.class));
+>, <Line: -        assertThat(type.newInstance(), notNullValue(DefaultConstructor.class));
+>, <Line: -        assertThat(interfaceMethod.invoke(dynamicType.newInstance()), is(interfaceMarker));
+>, <Line: -        assertThat(interfaceMethod.invoke(dynamicType.newInstance()), is((Object) BAR));
+>, <Line: -        assertThat(dynamicClassType.getMethod(FOO).invoke(dynamicClassType.newInstance()), is((Object) (FOO + BAR)));
+>, <Line: -        BridgeRetention<String> bridgeRetention = (BridgeRetention<String>) dynamicType.newInstance();
+>, <Line: -        CallSuperMethod<String> callSuperMethod = (CallSuperMethod<String>) dynamicType.newInstance();
+>, <Line: -        assertThat(foo.invoke(type.newInstance(), BAR), is((Object) (FOO + BAR)));
+>, <Line: -        assertThat(bar.invoke(type.newInstance(), list), sameInstance((Object) list));
+>]

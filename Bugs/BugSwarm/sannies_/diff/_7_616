@@ -1,0 +1,31 @@
+[<Line: +package org.mp4parser.streaming.extensions;
+>, <Line: +import org.mp4parser.streaming.TrackExtension;
+>, <Line: +/**
+>, <Line: + * Created by sannies on 17.08.2015.
+>, <Line: + */
+>, <Line: +public class DimensionTrackExtension implements TrackExtension {
+>, <Line: +    int width;
+>, <Line: +    int height;
+>, <Line: +    public DimensionTrackExtension(int width, int height) {
+>, <Line: +        this.width = width;
+>, <Line: +        this.height = height;
+>, <Line: +    }
+>, <Line: +    public int getWidth() {
+>, <Line: +        return width;
+>, <Line: +    }
+>, <Line: +    public void setWidth(int width) {
+>, <Line: +        this.width = width;
+>, <Line: +    }
+>, <Line: +    public int getHeight() {
+>, <Line: +        return height;
+>, <Line: +    }
+>, <Line: +    public void setHeight(int height) {
+>, <Line: +        this.height = height;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "width=" + width + ", height=" + height;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

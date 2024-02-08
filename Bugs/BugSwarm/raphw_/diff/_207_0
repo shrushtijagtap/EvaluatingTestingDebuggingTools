@@ -1,0 +1,98 @@
+[<Line: + * <p>
+>, <Line: + * <b>Important</b>: Types that implement lambda expressions (functional interfaces) are not instrumented by default but
+>, <Line: + * only when enabling the builder's {@link LambdaInstrumentationStrategy}.
+>, <Line: + * </p>
+>, <Line: +            @Override
+>, <Line: +            protected boolean isInstrumented(Class<?> type) {
+>, <Line: +                return true;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            protected boolean isInstrumented(Class<?> type) {
+>, <Line: +                return type == null || !type.getName().contains("/");
+>, <Line: +            }
+>, <Line: +        /**
+>, <Line: +         * Validates if the supplied class is instrumented. For lambda types (which are loaded by anonymous class loader), this method
+>, <Line: +         * should return false if lambda instrumentation is disabled.
+>, <Line: +         *
+>, <Line: +         * @param type The redefined type or {@code null} if no such type exists.
+>, <Line: +         * @return {@code true} if the supplied type should be instrumented according to this strategy.
+>, <Line: +         */
+>, <Line: +        protected abstract boolean isInstrumented(Class<?> type);
+>, <Line: +                    lambdaInstrumentationStrategy,
+>, <Line: +                            if (!lambdaInstrumentationStrategy.isInstrumented(type)) {
+>, <Line: +                                continue;
+>, <Line: +                            }
+>, <Line: +            /**
+>, <Line: +             * The lambda instrumentation strategy to use.
+>, <Line: +             */
+>, <Line: +            private final LambdaInstrumentationStrategy lambdaInstrumentationStrategy;
+>, <Line: +             * @param byteBuddy                     The Byte Buddy instance to be used.
+>, <Line: +             * @param listener                      The listener to notify on transformations.
+>, <Line: +             * @param poolStrategy                  The type locator to use.
+>, <Line: +             * @param typeStrategy                  The definition handler to use.
+>, <Line: +             * @param locationStrategy              The location strategy to use.
+>, <Line: +             * @param nativeMethodStrategy          The native method strategy to apply.
+>, <Line: +             * @param initializationStrategy        The initialization strategy to use for transformed types.
+>, <Line: +             * @param bootstrapInjectionStrategy    The injection strategy for injecting classes into the bootstrap class loader.
+>, <Line: +             * @param lambdaInstrumentationStrategy The lambda instrumentation strategy to use.
+>, <Line: +             * @param descriptionStrategy           The description strategy for resolving type descriptions for types.
+>, <Line: +             * @param fallbackStrategy              The fallback strategy to use.
+>, <Line: +             * @param ignoredTypeMatcher            Identifies types that should not be instrumented.
+>, <Line: +             * @param transformation                The transformation object for handling type transformations.
+>, <Line: +             * @param circularityLock               The circularity lock to use.
+>, <Line: +                                        LambdaInstrumentationStrategy lambdaInstrumentationStrategy,
+>, <Line: +                this.lambdaInstrumentationStrategy = lambdaInstrumentationStrategy;
+>, <Line: +                if (internalTypeName == null || !lambdaInstrumentationStrategy.isInstrumented(classBeingRedefined)) {
+>, <Line: +                        if (!lambdaInstrumentationStrategy.isInstrumented(type)) {
+>, <Line: +                            continue;
+>, <Line: +                        }
+>, <Line: +                        ", lambdaInstrumentationStrategy=" + lambdaInstrumentationStrategy +
+>, <Line: +                 * @param byteBuddy                     The Byte Buddy instance to be used.
+>, <Line: +                 * @param listener                      The listener to notify on transformations.
+>, <Line: +                 * @param poolStrategy                  The type locator to use.
+>, <Line: +                 * @param typeStrategy                  The definition handler to use.
+>, <Line: +                 * @param locationStrategy              The location strategy to use.
+>, <Line: +                 * @param nativeMethodStrategy          The native method strategy to apply.
+>, <Line: +                 * @param initializationStrategy        The initialization strategy to use for transformed types.
+>, <Line: +                 * @param bootstrapInjectionStrategy    The injection strategy for injecting classes into the bootstrap class loader.
+>, <Line: +                 * @param lambdaInstrumentationStrategy The lambda instrumentation strategy to use.
+>, <Line: +                 * @param descriptionStrategy           The description strategy for resolving type descriptions for types.
+>, <Line: +                 * @param fallbackStrategy              The fallback strategy to use.
+>, <Line: +                 * @param ignoredTypeMatcher            Identifies types that should not be instrumented.
+>, <Line: +                 * @param transformation                The transformation object for handling type transformations.
+>, <Line: +                 * @param circularityLock               The circularity lock to use.
+>, <Line: +                                                    LambdaInstrumentationStrategy lambdaInstrumentationStrategy,
+>, <Line: +                                                               LambdaInstrumentationStrategy lambdaInstrumentationStrategy,
+>, <Line: +                                    lambdaInstrumentationStrategy,
+>, <Line: +                                                               LambdaInstrumentationStrategy lambdaInstrumentationStrategy,
+>, <Line: +                                lambdaInstrumentationStrategy,
+>, <Line: +                                        LambdaInstrumentationStrategy.class,
+>]
+[<Line: -             * @param byteBuddy                  The Byte Buddy instance to be used.
+>, <Line: -             * @param listener                   The listener to notify on transformations.
+>, <Line: -             * @param poolStrategy               The type locator to use.
+>, <Line: -             * @param typeStrategy               The definition handler to use.
+>, <Line: -             * @param locationStrategy           The location strategy to use.
+>, <Line: -             * @param nativeMethodStrategy       The native method strategy to apply.
+>, <Line: -             * @param initializationStrategy     The initialization strategy to use for transformed types.
+>, <Line: -             * @param bootstrapInjectionStrategy The injection strategy for injecting classes into the bootstrap class loader.
+>, <Line: -             * @param descriptionStrategy        The description strategy for resolving type descriptions for types.
+>, <Line: -             * @param fallbackStrategy           The fallback strategy to use.
+>, <Line: -             * @param ignoredTypeMatcher         Identifies types that should not be instrumented.
+>, <Line: -             * @param transformation             The transformation object for handling type transformations.
+>, <Line: -             * @param circularityLock            The circularity lock to use.
+>, <Line: -                if (internalTypeName == null) {
+>, <Line: -                 * @param byteBuddy                  The Byte Buddy instance to be used.
+>, <Line: -                 * @param listener                   The listener to notify on transformations.
+>, <Line: -                 * @param poolStrategy               The type locator to use.
+>, <Line: -                 * @param typeStrategy               The definition handler to use.
+>, <Line: -                 * @param locationStrategy           The location strategy to use.
+>, <Line: -                 * @param nativeMethodStrategy       The native method strategy to apply.
+>, <Line: -                 * @param initializationStrategy     The initialization strategy to use for transformed types.
+>, <Line: -                 * @param bootstrapInjectionStrategy The injection strategy for injecting classes into the bootstrap class loader.
+>, <Line: -                 * @param descriptionStrategy        The description strategy for resolving type descriptions for types.
+>, <Line: -                 * @param fallbackStrategy           The fallback strategy to use.
+>, <Line: -                 * @param ignoredTypeMatcher         Identifies types that should not be instrumented.
+>, <Line: -                 * @param transformation             The transformation object for handling type transformations.
+>, <Line: -                 * @param circularityLock            The circularity lock to use.
+>]

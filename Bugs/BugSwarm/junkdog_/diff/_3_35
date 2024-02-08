@@ -1,0 +1,41 @@
+[<Line: +package com.artemis.injection;
+>, <Line: +import com.artemis.World;
+>, <Line: +import com.artemis.utils.reflect.Field;
+>, <Line: +import java.util.Map;
+>, <Line: +/**
+>, <Line: + * Can inject arbitrary fields annotated with {@link com.artemis.annotations.Wire},
+>, <Line: + * typically registered via registered via {@link com.artemis.WorldConfiguration#register}
+>, <Line: + *
+>, <Line: + * @author Snorre E. Brekke
+>, <Line: + */
+>, <Line: +public class WiredFieldResolver implements FieldResolver, UseInjectionCache {
+>, <Line: +    private InjectionCache cache;
+>, <Line: +    private Map<String, Object> pojos;
+>, <Line: +    public WiredFieldResolver(Map<String, Object> pojos) {
+>, <Line: +        this.pojos = pojos;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void initialize(World world) {
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public Object resolve(Class<?> fieldType, Field field) {
+>, <Line: +        ClassType injectionType = cache.getFieldClassType(fieldType);
+>, <Line: +        CachedField cachedField = cache.getCachedField(field);
+>, <Line: +        if (injectionType == ClassType.CUSTOM) {
+>, <Line: +            if (cachedField.wireType == WireType.WIRE) {
+>, <Line: +                String key = cachedField.name;
+>, <Line: +                if ("".equals(key)) {
+>, <Line: +                    key = field.getType().getName();
+>, <Line: +                }
+>, <Line: +                return pojos.get(key);
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void setCache(InjectionCache cache) {
+>, <Line: +        this.cache = cache;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

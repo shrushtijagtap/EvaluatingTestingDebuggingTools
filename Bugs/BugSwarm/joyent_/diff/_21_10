@@ -1,0 +1,6 @@
+[<Line: +    @Override
+>, <Line: +    public String getHttpTransport() {
+>, <Line: +        return "ApacheHttpTransport";
+>, <Line: +    }
+>]
+[]

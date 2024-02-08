@@ -1,0 +1,18 @@
+[<Line: +        test_nml.column_width = 10
+>, <Line: +    def test_column_width(self):
+>, <Line: +        test_nml.column_width = 40
+>, <Line: +        self.assertRaises(ValueError, setattr, test_nml, 'column_width', -1)
+>, <Line: +        self.assertRaises(TypeError, setattr, test_nml, 'column_width', 'xyz')
+>, <Line: +    def test_float_format(self):
+>, <Line: +        test_nml.float_format = '.3f'
+>, <Line: +        self.assertRaises(TypeError, setattr, test_nml, 'float_format', 123)
+>]
+[<Line: -        test_nml.colwidth = 10
+>, <Line: -    def test_colwidth(self):
+>, <Line: -        test_nml.colwidth = 40
+>, <Line: -        self.assertRaises(ValueError, setattr, test_nml, 'colwidth', -1)
+>, <Line: -        self.assertRaises(TypeError, setattr, test_nml, 'colwidth', 'xyz')
+>, <Line: -    def test_floatformat(self):
+>, <Line: -        test_nml.floatformat = '.3f'
+>, <Line: -        self.assertRaises(TypeError, setattr, test_nml, 'floatformat', 123)
+>]

@@ -1,0 +1,10 @@
+[<Line: +  protected void addClasses(Class<?>... classes) {
+>, <Line: +    for (Class<?> clazz : classes) {
+>, <Line: +      addClass(clazz);
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  protected void verifySkippedTests(String... expectedSkipped) {
+>, <Line: +    verifyTests("Skipped", expectedSkipped, getSkippedTests());
+>, <Line: +  }
+>]
+[]

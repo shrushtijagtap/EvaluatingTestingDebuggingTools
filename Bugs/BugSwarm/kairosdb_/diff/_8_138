@@ -1,0 +1,166 @@
+[<Line: +		'lodash',
+>, <Line: +		'crypto',
+>, <Line: +	],
+>, <Line: +	function (_, crypto) {
+>, <Line: +		"use strict";
+>, <Line: +		return function Settings(options) {
+>, <Line: +			/**
+>, <Line: +			 * To add a setting, you MUST define a default. Also,
+>, <Line: +			 * THESE ARE ONLY DEFAULTS.
+>, <Line: +			 * They are overridden by config.js in the root directory
+>, <Line: +			 * @type {Object}
+>, <Line: +			 */
+>, <Line: +			var defaults = {
+>, <Line: +				datasources: {},
+>, <Line: +				window_title_prefix: 'Grafana - ',
+>, <Line: +				panels: {
+>, <Line: +					'graph': {path: 'panels/graph'},
+>, <Line: +					'singlestat': {path: 'panels/singlestat'},
+>, <Line: +					'text': {path: 'panels/text'}
+>, <Line: +				},
+>, <Line: +				plugins: {},
+>, <Line: +				default_route: '/dashboard/file/default.json',
+>, <Line: +				playlist_timespan: "1m",
+>, <Line: +				unsaved_changes_warning: true,
+>, <Line: +				search: {max_results: 100},
+>, <Line: +				admin: {}
+>, <Line: +			};
+>, <Line: +			// This initializes a new hash on purpose, to avoid adding parameters to
+>, <Line: +			// config.js without providing sane defaults
+>, <Line: +			var settings = {};
+>, <Line: +			_.each(defaults, function (value, key) {
+>, <Line: +				settings[key] = typeof options[key] !== 'undefined' ? options[key] : defaults[key];
+>, <Line: +			});
+>, <Line: +			var parseBasicAuth = function (datasource) {
+>, <Line: +				var passwordEnd = datasource.url.indexOf('@');
+>, <Line: +				if (passwordEnd > 0) {
+>, <Line: +					var userStart = datasource.url.indexOf('//') + 2;
+>, <Line: +					var userAndPassword = datasource.url.substring(userStart, passwordEnd);
+>, <Line: +					var bytes = crypto.charenc.Binary.stringToBytes(userAndPassword);
+>, <Line: +					datasource.basicAuth = crypto.util.bytesToBase64(bytes);
+>, <Line: +					var urlHead = datasource.url.substring(0, userStart);
+>, <Line: +					datasource.url = urlHead + datasource.url.substring(passwordEnd + 1);
+>, <Line: +				}
+>, <Line: +				return datasource;
+>, <Line: +			};
+>, <Line: +			var parseMultipleHosts = function (datasource) {
+>, <Line: +				datasource.urls = _.map(datasource.url.split(","), function (url) {
+>, <Line: +					return url.trim();
+>, <Line: +				});
+>, <Line: +				return datasource;
+>, <Line: +			};
+>, <Line: +			// backward compatible with old config
+>, <Line: +			if (options.graphiteUrl) {
+>, <Line: +				settings.datasources.graphite = {
+>, <Line: +					type: 'graphite',
+>, <Line: +					url: options.graphiteUrl,
+>, <Line: +					default: true
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +			if (options.elasticsearch) {
+>, <Line: +				settings.datasources.elasticsearch = {
+>, <Line: +					type: 'elasticsearch',
+>, <Line: +					url: options.elasticsearch,
+>, <Line: +					index: options.grafana_index,
+>, <Line: +					grafanaDB: true
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +			_.each(settings.datasources, function (datasource, key) {
+>, <Line: +				datasource.name = key;
+>, <Line: +				if (datasource.url) {
+>, <Line: +					parseBasicAuth(datasource);
+>, <Line: +				}
+>, <Line: +				if (datasource.type === 'influxdb') {
+>, <Line: +					parseMultipleHosts(datasource);
+>, <Line: +				}
+>, <Line: +			});
+>, <Line: +			if (settings.plugins.panels) {
+>, <Line: +				_.extend(settings.panels, settings.plugins.panels);
+>, <Line: +			}
+>, <Line: +			if (!settings.plugins.dependencies) {
+>, <Line: +				settings.plugins.dependencies = [];
+>, <Line: +			}
+>, <Line: +			return settings;
+>, <Line: +		};
+>, <Line: +	});
+>]
+[<Line: -  'lodash',
+>, <Line: -  'crypto',
+>, <Line: -],
+>, <Line: -function (_, crypto) {
+>, <Line: -  "use strict";
+>, <Line: -  return function Settings (options) {
+>, <Line: -    /**
+>, <Line: -     * To add a setting, you MUST define a default. Also,
+>, <Line: -     * THESE ARE ONLY DEFAULTS.
+>, <Line: -     * They are overridden by config.js in the root directory
+>, <Line: -     * @type {Object}
+>, <Line: -     */
+>, <Line: -    var defaults = {
+>, <Line: -      datasources                   : {},
+>, <Line: -      window_title_prefix           : 'Grafana - ',
+>, <Line: -      panels                        : {
+>, <Line: -        'graph': { path: 'panels/graph' },
+>, <Line: -        'singlestat': { path: 'panels/singlestat' },
+>, <Line: -        'text': { path: 'panels/text' }
+>, <Line: -      },
+>, <Line: -      plugins                       : {},
+>, <Line: -      default_route                 : '/dashboard/file/default.json',
+>, <Line: -      playlist_timespan             : "1m",
+>, <Line: -      unsaved_changes_warning       : true,
+>, <Line: -      search                        : { max_results: 100 },
+>, <Line: -      admin                         : {}
+>, <Line: -    };
+>, <Line: -    // This initializes a new hash on purpose, to avoid adding parameters to
+>, <Line: -    // config.js without providing sane defaults
+>, <Line: -    var settings = {};
+>, <Line: -    _.each(defaults, function(value, key) {
+>, <Line: -      settings[key] = typeof options[key] !== 'undefined' ? options[key]  : defaults[key];
+>, <Line: -    });
+>, <Line: -    var parseBasicAuth = function(datasource) {
+>, <Line: -      var passwordEnd = datasource.url.indexOf('@');
+>, <Line: -      if (passwordEnd > 0) {
+>, <Line: -        var userStart = datasource.url.indexOf('//') + 2;
+>, <Line: -        var userAndPassword = datasource.url.substring(userStart, passwordEnd);
+>, <Line: -        var bytes = crypto.charenc.Binary.stringToBytes(userAndPassword);
+>, <Line: -        datasource.basicAuth = crypto.util.bytesToBase64(bytes);
+>, <Line: -        var urlHead = datasource.url.substring(0, userStart);
+>, <Line: -        datasource.url = urlHead + datasource.url.substring(passwordEnd + 1);
+>, <Line: -      }
+>, <Line: -      return datasource;
+>, <Line: -    };
+>, <Line: -    var parseMultipleHosts = function(datasource) {
+>, <Line: -      datasource.urls = _.map(datasource.url.split(","), function (url) { return url.trim(); });
+>, <Line: -      return datasource;
+>, <Line: -    };
+>, <Line: -    // backward compatible with old config
+>, <Line: -    if (options.graphiteUrl) {
+>, <Line: -      settings.datasources.graphite = {
+>, <Line: -        type: 'graphite',
+>, <Line: -        url: options.graphiteUrl,
+>, <Line: -        default: true
+>, <Line: -      };
+>, <Line: -    }
+>, <Line: -    if (options.elasticsearch) {
+>, <Line: -      settings.datasources.elasticsearch = {
+>, <Line: -        type: 'elasticsearch',
+>, <Line: -        url: options.elasticsearch,
+>, <Line: -        index: options.grafana_index,
+>, <Line: -        grafanaDB: true
+>, <Line: -      };
+>, <Line: -    }
+>, <Line: -    _.each(settings.datasources, function(datasource, key) {
+>, <Line: -      datasource.name = key;
+>, <Line: -      if (datasource.url) { parseBasicAuth(datasource); }
+>, <Line: -      if (datasource.type === 'influxdb') { parseMultipleHosts(datasource); }
+>, <Line: -    });
+>, <Line: -    if (settings.plugins.panels) {
+>, <Line: -      _.extend(settings.panels, settings.plugins.panels);
+>, <Line: -    }
+>, <Line: -    if (!settings.plugins.dependencies) {
+>, <Line: -      settings.plugins.dependencies = [];
+>, <Line: -    }
+>, <Line: -    return settings;
+>, <Line: -  };
+>, <Line: -});
+>]

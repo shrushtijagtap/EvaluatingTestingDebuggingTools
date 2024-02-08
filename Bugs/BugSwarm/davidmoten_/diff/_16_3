@@ -1,0 +1,239 @@
+[<Line: +import com.github.davidmoten.rx.jdbc.exceptions.SQLRuntimeException;
+>, <Line: +import com.github.davidmoten.rx.testing.TestingHelper;
+>, <Line: +    @Test
+>, <Line: +    public void testUnmocked() {
+>, <Line: +        Database db = DatabaseCreator.db();
+>, <Line: +        int numPeopleBefore = db.select("select count(*) from person") //
+>, <Line: +                .getAs(Integer.class) //
+>, <Line: +                .toBlocking().single();
+>, <Line: +        Observable<String> names = Observable.just("NANCY", "WARREN", "ALFRED", "BARRY", "ROBERTO");
+>, <Line: +        Observable<Integer> count = db.update("insert into person(name,score) values(?,0)")
+>, <Line: +                .dependsOn(db.beginTransaction())
+>, <Line: +                // set batch size
+>, <Line: +                .batchSize(3)
+>, <Line: +                // get parameters from last query
+>, <Line: +                .parameters(names)
+>, <Line: +                // go
+>, <Line: +                .count()
+>, <Line: +                // end transaction
+>, <Line: +                .count();
+>, <Line: +        assertTrue(db.commit(count).toBlocking().single());
+>, <Line: +        int numPeople = db.select("select count(*) from person") //
+>, <Line: +                .getAs(Integer.class) //
+>, <Line: +                .toBlocking().single();
+>, <Line: +        assertEquals(numPeopleBefore + 5, numPeople);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testBatchingCanOnlyBeUsedWithinATransaction() {
+>, <Line: +        Database db = DatabaseCreator.db();
+>, <Line: +        Observable<String> names = Observable.just("NANCY", "WARREN", "ALFRED", "BARRY", "ROBERTO");
+>, <Line: +        Observable<Integer> count = db.update("insert into person(name,score) values(?,0)")
+>, <Line: +                // set batch size
+>, <Line: +                .batchSize(3)
+>, <Line: +                // get parameters from last query
+>, <Line: +                .parameters(names)
+>, <Line: +                // go
+>, <Line: +                .count().count();
+>, <Line: +        count //
+>, <Line: +                .to(TestingHelper.<Integer> test()) //
+>, <Line: +                .assertError(SQLRuntimeException.class);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testMocked() throws SQLException {
+>, <Line: +        String sql = "insert into person(name,score) values(?, 0)";
+>, <Line: +        final Connection con = Mockito.mock(Connection.class);
+>, <Line: +        PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+>, <Line: +        Mockito.when(con.prepareStatement(sql, Statement.NO_GENERATED_KEYS)).thenReturn(ps);
+>, <Line: +        Mockito.when(ps.executeBatch()) //
+>, <Line: +                .thenReturn(new int[] { 1, 2, 3 }) //
+>, <Line: +                .thenReturn(new int[] { 4, 5 });
+>, <Line: +        Mockito.when(con.getAutoCommit()).thenReturn(false);
+>, <Line: +        Mockito.when(con.isClosed()).thenReturn(false);
+>, <Line: +        ConnectionProvider cp = createConnectionProvider(con);
+>, <Line: +        Database db = Database.from(cp);
+>, <Line: +        Observable<String> names = Observable.just("NANCY", "WARREN", "ALFRED", "BARRY", "ROBERTO");
+>, <Line: +        AtomicInteger records = new AtomicInteger();
+>, <Line: +        Observable<Integer> count = db.update(sql) //
+>, <Line: +                .dependsOn(db.beginTransaction())
+>, <Line: +                // set batch size
+>, <Line: +                .batchSize(3)
+>, <Line: +                // get parameters from last query
+>, <Line: +                .parameters(names)
+>, <Line: +                // go
+>, <Line: +                .count()
+>, <Line: +                // end transaction
+>, <Line: +                .toList()
+>, <Line: +                // sum record counts
+>, <Line: +                .map(new Func1<List<Integer>, Integer>() {
+>, <Line: +                    @Override
+>, <Line: +                    public Integer call(List<Integer> list) {
+>, <Line: +                        return sum(list);
+>, <Line: +                    }
+>, <Line: +                })
+>, <Line: +                // set result to variable
+>, <Line: +                .doOnNext(Actions.setAtomic(records)) //
+>, <Line: +                .count();
+>, <Line: +        db.commit(count).toBlocking().single();
+>, <Line: +        InOrder in = Mockito.inOrder(con, ps);
+>, <Line: +        in.verify(con, Mockito.times(1)).prepareStatement(sql, Statement.NO_GENERATED_KEYS);
+>, <Line: +        in.verify(ps, Mockito.times(1)).setObject(1, "NANCY");
+>, <Line: +        in.verify(ps, Mockito.times(1)).addBatch();
+>, <Line: +        in.verify(ps, Mockito.times(1)).setObject(1, "WARREN");
+>, <Line: +        in.verify(ps, Mockito.times(1)).addBatch();
+>, <Line: +        in.verify(ps, Mockito.times(1)).setObject(1, "ALFRED");
+>, <Line: +        in.verify(ps, Mockito.times(1)).addBatch();
+>, <Line: +        in.verify(ps, Mockito.times(1)).executeBatch();
+>, <Line: +        in.verify(ps, Mockito.times(1)).setObject(1, "BARRY");
+>, <Line: +        in.verify(ps, Mockito.times(1)).addBatch();
+>, <Line: +        in.verify(ps, Mockito.times(1)).setObject(1, "ROBERTO");
+>, <Line: +        in.verify(ps, Mockito.times(1)).addBatch();
+>, <Line: +        in.verify(ps, Mockito.times(1)).executeBatch();
+>, <Line: +        // in.verify(con, Mockito.times(1)).commit();
+>, <Line: +        in.verify(con, Mockito.times(1)).isClosed();
+>, <Line: +        in.verify(con, Mockito.times(1)).close();
+>, <Line: +        in.verifyNoMoreInteractions();
+>, <Line: +        assertFalse(db.connectionProvider() instanceof ConnectionProviderBatch);
+>, <Line: +        assertEquals(1 + 2 + 3 + 4 + 5, records.get());
+>, <Line: +    }
+>, <Line: +    private static int sum(List<Integer> list) {
+>, <Line: +        int sum = 0;
+>, <Line: +        for (Integer n : list) {
+>, <Line: +            sum += n;
+>, <Line: +        }
+>, <Line: +        return sum;
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalArgumentException.class)
+>, <Line: +    public void cannotReturnGeneratedKeysWhenBatching() {
+>, <Line: +        Database db = DatabaseCreator.db();
+>, <Line: +        Observable<String> names = Observable.just("NANCY");
+>, <Line: +        db.update("insert into person(name,score) values(?,0)").dependsOn(db.beginTransaction())
+>, <Line: +                // set batch size
+>, <Line: +                .batchSize(3)
+>, <Line: +                // get parameters from last query
+>, <Line: +                .parameters(names)
+>, <Line: +                //
+>, <Line: +                .returnGeneratedKeys();
+>, <Line: +    }
+>, <Line: +    private static ConnectionProvider createConnectionProvider(final Connection con) {
+>, <Line: +        return new ConnectionProvider() {
+>, <Line: +            @Override
+>, <Line: +            public Connection get() {
+>, <Line: +                return con;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public void close() {
+>, <Line: +            }
+>, <Line: +        };
+>, <Line: +    }
+>]
+[<Line: -	@Test
+>, <Line: -	public void testUnmocked() {
+>, <Line: -		Database db = DatabaseCreator.db();
+>, <Line: -		int numPeopleBefore = db.select("select count(*) from person") //
+>, <Line: -				.getAs(Integer.class) //
+>, <Line: -				.toBlocking().single();
+>, <Line: -		Observable<String> names = Observable.just("NANCY", "WARREN", "ALFRED", "BARRY", "ROBERTO");
+>, <Line: -		Observable<Integer> count = db.update("insert into person(name,score) values(?,0)")
+>, <Line: -				.dependsOn(db.beginTransaction())
+>, <Line: -				// set batch size
+>, <Line: -				.batchSize(3)
+>, <Line: -				// get parameters from last query
+>, <Line: -				.parameters(names)
+>, <Line: -				// go
+>, <Line: -				.count()
+>, <Line: -				// end transaction
+>, <Line: -				.count();
+>, <Line: -		assertTrue(db.commit(count).toBlocking().single());
+>, <Line: -		int numPeople = db.select("select count(*) from person") //
+>, <Line: -				.getAs(Integer.class) //
+>, <Line: -				.toBlocking().single();
+>, <Line: -		assertEquals(numPeopleBefore + 5, numPeople);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testMocked() throws SQLException {
+>, <Line: -		String sql = "insert into person(name,score) values(?, 0)";
+>, <Line: -		final Connection con = Mockito.mock(Connection.class);
+>, <Line: -		PreparedStatement ps = Mockito.mock(PreparedStatement.class);
+>, <Line: -		Mockito.when(con.prepareStatement(sql, Statement.NO_GENERATED_KEYS)).thenReturn(ps);
+>, <Line: -		Mockito.when(ps.executeBatch()) //
+>, <Line: -				.thenReturn(new int[] { 1, 2, 3 }) //
+>, <Line: -				.thenReturn(new int[] { 4, 5 });
+>, <Line: -		Mockito.when(con.getAutoCommit()).thenReturn(false);
+>, <Line: -		Mockito.when(con.isClosed()).thenReturn(false);
+>, <Line: -		ConnectionProvider cp = createConnectionProvider(con);
+>, <Line: -		Database db = Database.from(cp);
+>, <Line: -		Observable<String> names = Observable.just("NANCY", "WARREN", "ALFRED", "BARRY", "ROBERTO");
+>, <Line: -		AtomicInteger records = new AtomicInteger();
+>, <Line: -		Observable<Integer> count = db.update(sql) //
+>, <Line: -				.dependsOn(db.beginTransaction())
+>, <Line: -				// set batch size
+>, <Line: -				.batchSize(3)
+>, <Line: -				// get parameters from last query
+>, <Line: -				.parameters(names)
+>, <Line: -				// go
+>, <Line: -				.count()
+>, <Line: -				// end transaction
+>, <Line: -				.toList()
+>, <Line: -				// sum record counts
+>, <Line: -				.map(new Func1<List<Integer>, Integer>() {
+>, <Line: -					@Override
+>, <Line: -					public Integer call(List<Integer> list) {
+>, <Line: -						return sum(list);
+>, <Line: -					}
+>, <Line: -				})
+>, <Line: -				// set result to variable
+>, <Line: -				.doOnNext(Actions.setAtomic(records)) //
+>, <Line: -		        .count();
+>, <Line: -		db.commit(count).toBlocking().single();
+>, <Line: -		InOrder in = Mockito.inOrder(con, ps);
+>, <Line: -		in.verify(con, Mockito.times(1)).prepareStatement(sql, Statement.NO_GENERATED_KEYS);
+>, <Line: -		in.verify(ps, Mockito.times(1)).setObject(1, "NANCY");
+>, <Line: -		in.verify(ps, Mockito.times(1)).addBatch();
+>, <Line: -		in.verify(ps, Mockito.times(1)).setObject(1, "WARREN");
+>, <Line: -		in.verify(ps, Mockito.times(1)).addBatch();
+>, <Line: -		in.verify(ps, Mockito.times(1)).setObject(1, "ALFRED");
+>, <Line: -		in.verify(ps, Mockito.times(1)).addBatch();
+>, <Line: -		in.verify(ps, Mockito.times(1)).executeBatch();
+>, <Line: -		in.verify(ps, Mockito.times(1)).setObject(1, "BARRY");
+>, <Line: -		in.verify(ps, Mockito.times(1)).addBatch();
+>, <Line: -		in.verify(ps, Mockito.times(1)).setObject(1, "ROBERTO");
+>, <Line: -		in.verify(ps, Mockito.times(1)).addBatch();
+>, <Line: -		in.verify(ps, Mockito.times(1)).executeBatch();
+>, <Line: -//		in.verify(con, Mockito.times(1)).commit();
+>, <Line: -		in.verify(con, Mockito.times(1)).isClosed();
+>, <Line: -		in.verify(con, Mockito.times(1)).close();
+>, <Line: -		in.verifyNoMoreInteractions();
+>, <Line: -		assertFalse(db.connectionProvider() instanceof ConnectionProviderBatch);
+>, <Line: -		assertEquals(1 + 2 + 3 + 4 + 5, records.get());
+>, <Line: -	}
+>, <Line: -	private static int sum(List<Integer> list) {
+>, <Line: -		int sum = 0;
+>, <Line: -		for (Integer n:list) {
+>, <Line: -			sum += n;
+>, <Line: -		}
+>, <Line: -		return sum;
+>, <Line: -	}
+>, <Line: -	@Test(expected = IllegalArgumentException.class)
+>, <Line: -	public void cannotReturnGeneratedKeysWhenBatching() {
+>, <Line: -		Database db = DatabaseCreator.db();
+>, <Line: -		Observable<String> names = Observable.just("NANCY");
+>, <Line: -		db.update("insert into person(name,score) values(?,0)").dependsOn(db.beginTransaction())
+>, <Line: -				// set batch size
+>, <Line: -				.batchSize(3)
+>, <Line: -				// get parameters from last query
+>, <Line: -				.parameters(names)
+>, <Line: -				//
+>, <Line: -				.returnGeneratedKeys();
+>, <Line: -	}
+>, <Line: -	private static ConnectionProvider createConnectionProvider(final Connection con) {
+>, <Line: -		return new ConnectionProvider() {
+>, <Line: -			@Override
+>, <Line: -			public Connection get() {
+>, <Line: -				return con;
+>, <Line: -			}
+>, <Line: -			@Override
+>, <Line: -			public void close() {
+>, <Line: -			}
+>, <Line: -		};
+>, <Line: -	}
+>]

@@ -1,0 +1,36 @@
+[<Line: +    HttpGet request = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    HttpGet request = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    HttpGet request = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    HttpGet request1 = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    HttpGet request2 = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    final HttpPost post = new HttpPost(server.url("/").url().toURI());
+>, <Line: +    final HttpPost post = new HttpPost(server.url("/").url().toURI());
+>, <Line: +    final HttpPost post = new HttpPost(server.url("/").url().toURI());
+>, <Line: +    final HttpPut put = new HttpPut(server.url("/").url().toURI());
+>, <Line: +    httpPost.setURI(server.url("/").url().toURI());
+>, <Line: +    HttpGet request1 = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    HttpGet request2 = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    HttpGet request3 = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    HttpGet request = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    HttpGet request = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    HttpGet request1 = new HttpGet(server.url("/").url().toURI());
+>, <Line: +    HttpGet request = new HttpGet(server.url("/").url().toURI());
+>]
+[<Line: -    HttpGet request = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request1 = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request2 = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    final HttpPost post = new HttpPost(server.getUrl("/").toURI());
+>, <Line: -    final HttpPost post = new HttpPost(server.getUrl("/").toURI());
+>, <Line: -    final HttpPost post = new HttpPost(server.getUrl("/").toURI());
+>, <Line: -    final HttpPut put = new HttpPut(server.getUrl("/").toURI());
+>, <Line: -    httpPost.setURI(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request1 = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request2 = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request3 = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request1 = new HttpGet(server.getUrl("/").toURI());
+>, <Line: -    HttpGet request = new HttpGet(server.getUrl("/").toURI());
+>]

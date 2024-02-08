@@ -1,0 +1,43 @@
+[<Line: +import org.kairosdb.core.aggregator.Aggregator;
+>, <Line: +import org.kairosdb.core.aggregator.DiffAggregator;
+>, <Line: +import org.kairosdb.core.aggregator.DivideAggregator;
+>, <Line: +import org.kairosdb.core.aggregator.MaxAggregator;
+>, <Line: +import org.kairosdb.core.aggregator.MinAggregator;
+>, <Line: +import org.kairosdb.core.datastore.DataPointGroup;
+>, <Line: +import org.kairosdb.core.datastore.Datastore;
+>, <Line: +import org.kairosdb.core.datastore.DatastoreMetricQuery;
+>, <Line: +import org.kairosdb.core.datastore.Duration;
+>, <Line: +import org.kairosdb.core.datastore.KairosDatastore;
+>, <Line: +import org.kairosdb.core.datastore.QueryCallback;
+>, <Line: +import org.kairosdb.core.datastore.QueryQueuingManager;
+>, <Line: +import org.kairosdb.core.datastore.Sampling;
+>, <Line: +import org.kairosdb.core.datastore.TagSet;
+>, <Line: +import org.kairosdb.core.datastore.TimeUnit;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>]
+[<Line: -import org.kairosdb.core.aggregator.*;
+>, <Line: -import org.kairosdb.core.datastore.*;
+>, <Line: -import java.util.*;
+>, <Line: -		@Override
+>, <Line: -		public void setValue(String service, String serviceKey, String key, String value) throws DatastoreException
+>, <Line: -		{
+>, <Line: -		}
+>, <Line: -		@Override
+>, <Line: -		public String getValue(String service, String serviceKey, String key) throws DatastoreException
+>, <Line: -		{
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -		@Override
+>, <Line: -		public Iterable<String> listKeys(String service, String serviceKey) throws DatastoreException
+>, <Line: -		{
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -		@Override
+>, <Line: -		public Iterable<String> listKeys(String service, String serviceKey, String keyStartsWith) throws DatastoreException
+>, <Line: -		{
+>, <Line: -			return null;
+>, <Line: -		}
+>]

@@ -1,0 +1,30 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.CastUtils;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +                    IsoTypeWriter.writeUInt16(byteBuffer, CastUtils.l2i(subsampleEntry.getSubsampleSize()));
+>, <Line: +        @Override
+>, <Line: +        public String toString() {
+>, <Line: +            return "SampleEntry{" +
+>, <Line: +                    "sampleDelta=" + sampleDelta +
+>, <Line: +                    ", subsampleCount=" + subsampleEntries.size() +
+>, <Line: +                    ", subsampleEntries=" + subsampleEntries +
+>, <Line: +                    '}';
+>, <Line: +        }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: -                    IsoTypeWriter.writeUInt16(byteBuffer, l2i(subsampleEntry.getSubsampleSize()));
+>, <Line: -        @Override
+>, <Line: -        public String toString() {
+>, <Line: -            return "SampleEntry{" +
+>, <Line: -                    "sampleDelta=" + sampleDelta +
+>, <Line: -                    ", subsampleCount=" + subsampleEntries.size() +
+>, <Line: -                    ", subsampleEntries=" + subsampleEntries +
+>, <Line: -                    '}';
+>, <Line: -        }
+>]

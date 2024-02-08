@@ -1,0 +1,5 @@
+[<Line: +../../tests/invalid/TypeEquals_Invalid_8.whiley:6: expected type bool, found bool|int
+>, <Line: +        return x
+>, <Line: +               ^
+>]
+[]

@@ -1,0 +1,4 @@
+[<Line: +    public Boolean isStreaming();
+>]
+[<Line: -    public Boolean isStreamingFile();
+>]

@@ -1,0 +1,15 @@
+[<Line: +      "refresh_interval" : "5s",
+>, <Line: +      "query.default_field": "name"
+>, <Line: +        "username":            {"type": "string",  "index": "not_analyzed", "doc_values": true},
+>, <Line: +          "externalRequestStats":{"type": "nested", "properties": {
+>, <Line: +            "requestType":       {"type": "string",  "index": "not_analyzed", "doc_values": true},
+>, <Line: +            "executionCount":    {"type": "integer", "doc_values": true},
+>, <Line: +            "executionTime":     {"type": "double", "doc_values": true}
+>, <Line: +          }
+>, <Line: +        }
+>]
+[<Line: -      "refresh_interval" : "5s"
+>, <Line: -        "executionCountDb":    {"type": "integer", "doc_values": true},
+>, <Line: -        "executionTimeDb":     {"type": "integer", "doc_values": true},
+>, <Line: -        "username":            {"type": "string",  "index": "not_analyzed", "doc_values": true}
+>]

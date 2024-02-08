@@ -1,0 +1,39 @@
+[]
+[<Line: -package com.hubspot.baragon.service.resources;
+>, <Line: -import com.google.common.base.Optional;
+>, <Line: -import com.google.inject.Inject;
+>, <Line: -import com.google.inject.name.Named;
+>, <Line: -import com.hubspot.baragon.auth.NoAuth;
+>, <Line: -import com.hubspot.baragon.service.BaragonServiceModule;
+>, <Line: -import com.hubspot.baragon.service.config.BaragonConfiguration;
+>, <Line: -import com.hubspot.baragon.service.views.IndexView;
+>, <Line: -import javax.inject.Singleton;
+>, <Line: -import javax.ws.rs.GET;
+>, <Line: -import javax.ws.rs.Path;
+>, <Line: -import javax.ws.rs.Produces;
+>, <Line: -import javax.ws.rs.QueryParam;
+>, <Line: -import javax.ws.rs.core.MediaType;
+>, <Line: -/**
+>, <Line: - * Serves as the base for the UI, returns the mustache view for the actual GUI.
+>, <Line: - */
+>, <Line: -@Singleton
+>, <Line: -@Path("/allowuiwrite")
+>, <Line: -public class UIAuthResource {
+>, <Line: -  private final BaragonConfiguration configuration;
+>, <Line: -  @Inject
+>, <Line: -  public UIAuthResource(@Named(BaragonServiceModule.BARAGON_URI_BASE) String baragonUriBase, BaragonConfiguration configuration) {
+>, <Line: -    this.configuration = configuration;
+>, <Line: -  }
+>, <Line: -  @GET
+>, <Line: -  @Path("/")
+>, <Line: -  @Produces(MediaType.TEXT_PLAIN)
+>, <Line: -  public String allowsWrite (@QueryParam("uiAuthKey") String uiAuthKey){
+>, <Line: -    Optional<String> maybeAllowEditKey = configuration.getUiConfiguration().getAllowEditKey();
+>, <Line: -    if (maybeAllowEditKey.isPresent() && maybeAllowEditKey.get().equals(uiAuthKey)) {
+>, <Line: -      return "allowed";
+>, <Line: -    } else {
+>, <Line: -      return "No matching keys";
+>, <Line: -    }
+>, <Line: -  }
+>, <Line: -}
+>]

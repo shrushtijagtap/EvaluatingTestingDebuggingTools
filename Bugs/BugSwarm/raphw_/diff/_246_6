@@ -1,0 +1,20 @@
+[<Line: +                    return implementationTarget.invokeDefault(source.asSignatureToken());
+>, <Line: +                public Implementation.SpecialMethodInvocation resolve(Implementation.Target implementationTarget, MethodDescription source) {
+>, <Line: +                    return implementationTarget.invokeDefault(source.asSignatureToken(), typeDescription);
+>]
+[<Line: -                    Implementation.SpecialMethodInvocation specialMethodInvocation = null;
+>, <Line: -                    for (TypeDescription candidate : implementationTarget.getInstrumentedType().getInterfaces().asErasures()) {
+>, <Line: -                        if (source.isSpecializableFor(candidate)) {
+>, <Line: -                            if (specialMethodInvocation != null) {
+>, <Line: -                                return Implementation.SpecialMethodInvocation.Illegal.INSTANCE;
+>, <Line: -                            }
+>, <Line: -                            specialMethodInvocation = implementationTarget.invokeDefault(candidate, source.asSignatureToken());
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                    return specialMethodInvocation != null
+>, <Line: -                            ? specialMethodInvocation
+>, <Line: -                            : Implementation.SpecialMethodInvocation.Illegal.INSTANCE;
+>, <Line: -                public Implementation.SpecialMethodInvocation resolve(Implementation.Target implementationTarget,
+>, <Line: -                                                                      MethodDescription source) {
+>, <Line: -                    return implementationTarget.invokeDefault(typeDescription, source.asSignatureToken());
+>]

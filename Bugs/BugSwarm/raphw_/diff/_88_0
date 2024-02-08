@@ -1,0 +1,29 @@
+[<Line: +        /**
+>, <Line: +         * Returns a class file locator that is capable of locating a class file for the given type using the given instrumentation instance.
+>, <Line: +         *
+>, <Line: +         * @param instrumentation The instrumentation instance to query for a retransformation.
+>, <Line: +         * @param type            The locatable type which class loader is used as a fallback.
+>, <Line: +         * @return A class file locator for locating the class file of the given type.
+>, <Line: +         */
+>, <Line: +        public static ClassFileLocator of(Instrumentation instrumentation, Class<?> type) {
+>, <Line: +            return new AgentBased(instrumentation, ClassLoadingDelegate.Explicit.of(type));
+>, <Line: +        }
+>, <Line: +                            : new Default(classLoader == null ? ClassLoader.getSystemClassLoader() : classLoader);
+>, <Line: +                public Explicit(ClassLoader classLoader, Collection<? extends Class<?>> types) {
+>, <Line: +                    this(Default.of(classLoader), types);
+>, <Line: +                public Explicit(ClassLoadingDelegate fallbackDelegate, Collection<? extends Class<?>> types) {
+>, <Line: +                /**
+>, <Line: +                 * Creates an explicit class loading delegate for the given type.
+>, <Line: +                 *
+>, <Line: +                 * @param type The type that is explicitly locatable.
+>, <Line: +                 * @return A suitable class loading delegate.
+>, <Line: +                 */
+>, <Line: +                public static ClassLoadingDelegate of(Class<?> type) {
+>, <Line: +                    return new Explicit(type.getClassLoader(), Collections.singleton(type));
+>, <Line: +                }
+>]
+[<Line: -                            : new Default(classLoader);
+>, <Line: -                public Explicit(ClassLoader classLoader, Collection<Class<?>> types) {
+>, <Line: -                    this(new Default(classLoader), types);
+>, <Line: -                public Explicit(ClassLoadingDelegate fallbackDelegate, Collection<Class<?>> types) {
+>]

@@ -1,0 +1,8 @@
+[]
+[<Line: -    def test_cli_json_read(self):
+>, <Line: -        cmd = ['f90nml', 'types.json']
+>, <Line: -        json_str = self.get_cli_output(cmd)
+>, <Line: -        with open('types.nml') as types_nml:
+>, <Line: -            target_str = types_nml.read()
+>, <Line: -            self.assertEqual(json_str, target_str)
+>]

@@ -1,0 +1,67 @@
+[]
+[<Line: -package command;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.net.SocketTimeoutException;
+>, <Line: -import java.net.UnknownHostException;
+>, <Line: -import javafx.application.Platform;
+>, <Line: -import model.Model;
+>, <Line: -import model.TurboIssue;
+>, <Line: -import org.eclipse.egit.github.core.Issue;
+>, <Line: -import service.ServiceManager;
+>, <Line: -import util.DialogMessage;
+>, <Line: -/**
+>, <Line: - * Creates a new github issue on github and updates model with the created issue data
+>, <Line: - * */
+>, <Line: -public class TurboIssueAdd extends TurboIssueCommand{
+>, <Line: -	private static String ADD_ISSUE_LOG = "Added issue: #%1d %2s \n";
+>, <Line: -	TurboIssue addResult;
+>, <Line: -	public TurboIssueAdd(Model model, TurboIssue issue){
+>, <Line: -		super(model, issue);
+>, <Line: -		this.isUndoableCommand = false;
+>, <Line: -	}
+>, <Line: -	private TurboIssue createIssueInGithub(TurboIssue newIssue) {
+>, <Line: -		Issue ghIssue = newIssue.toGhResource();
+>, <Line: -		Issue createdIssue = null;
+>, <Line: -		try {
+>, <Line: -			createdIssue = ServiceManager.getInstance().createIssue(ghIssue);
+>, <Line: -		} catch (SocketTimeoutException | UnknownHostException e){
+>, <Line: -			Platform.runLater(()->{
+>, <Line: -				DialogMessage.showWarningDialog("Internet Connection Timeout", 
+>, <Line: -						"Timeout adding issue in GitHub, please check your internet connection.");
+>, <Line: -			});
+>, <Line: -			logger.info("Failed to create issue on GitHub: " + e.getLocalizedMessage());
+>, <Line: -		} catch (IOException e) {
+>, <Line: -			logger.error(e.getLocalizedMessage(), e);
+>, <Line: -		} 
+>, <Line: -		TurboIssue returnedIssue = new TurboIssue(createdIssue, model.get());
+>, <Line: -		return returnedIssue;
+>, <Line: -	}
+>, <Line: -	private void logIssueAdd(){
+>, <Line: -		lastOperationExecuted = String.format(ADD_ISSUE_LOG, issue.getId(), issue.getTitle());
+>, <Line: -	}
+>, <Line: -	private void addIssueToLocalCache(TurboIssue issue){
+>, <Line: -		Platform.runLater(() -> {
+>, <Line: -			model.get().appendToCachedIssues(issue);
+>, <Line: -		});
+>, <Line: -	}
+>, <Line: -	public TurboIssue getAddedIssue(){
+>, <Line: -		return addResult;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	protected boolean performExecuteAction() {
+>, <Line: -		addResult = createIssueInGithub(issue);
+>, <Line: -		if(addResult != null){
+>, <Line: -			addIssueToLocalCache(addResult);
+>, <Line: -			logIssueAdd();
+>, <Line: -			isSuccessful = true;
+>, <Line: -		}else{
+>, <Line: -			isSuccessful = false;
+>, <Line: -		}
+>, <Line: -		return isSuccessful;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	protected boolean performUndoAction() {
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -}
+>]

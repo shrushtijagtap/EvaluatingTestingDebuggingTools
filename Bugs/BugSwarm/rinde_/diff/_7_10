@@ -1,0 +1,7 @@
+[<Line: +        return checkNotNull(input).size() == num;
+>, <Line: +      AbstractSequentialIterator<Double> {
+>]
+[<Line: -        checkArgument(input != null);
+>, <Line: -        return input.size() == num;
+>, <Line: -  AbstractSequentialIterator<Double> {
+>]

@@ -1,0 +1,74 @@
+[<Line: +        ObjectPropertyAssertion.of(AgentBuilder.Default.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.ExecutionDispatcher.class).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.Java9CapableVmDispatcher.class).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.LegacyDispatcher.class).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.Default.Transformation.Simple.Resolution.BootstrapClassLoaderCapableInjectorFactory.class).apply();
+>]
+[<Line: -import java.security.AccessController;
+>, <Line: -    private AccessControlContext accessControlContext;
+>, <Line: -        accessControlContext = AccessController.getContext();
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                .with(accessControlContext)
+>, <Line: -                accessControlContext,
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.Default.class).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: -            @Override
+>, <Line: -            public AccessControlContext create() {
+>, <Line: -                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: -            }
+>, <Line: -        }).apply();
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.ExecutionDispatcher.class).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: -            @Override
+>, <Line: -            public AccessControlContext create() {
+>, <Line: -                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: -            }
+>, <Line: -        }).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.Java9CapableVmDispatcher.class).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: -            @Override
+>, <Line: -            public AccessControlContext create() {
+>, <Line: -                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: -            }
+>, <Line: -        }).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.LegacyDispatcher.class).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: -            @Override
+>, <Line: -            public AccessControlContext create() {
+>, <Line: -                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: -            }
+>, <Line: -        }).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.Default.Transformation.Simple.Resolution.BootstrapClassLoaderCapableInjectorFactory.class)
+>, <Line: -                .create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: -                    @Override
+>, <Line: -                    public AccessControlContext create() {
+>, <Line: -                        return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: -                    }
+>, <Line: -                }).apply();
+>]

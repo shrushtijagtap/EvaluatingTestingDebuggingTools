@@ -1,0 +1,10 @@
+[<Line: +package org.mp4parser.muxer;
+>, <Line: +import org.mp4parser.muxer.container.mp4.MovieCreator;
+>, <Line: +            Movie m1 = MovieCreator.build((InTestMovieCreator.class.getProtectionDomain().getCodeSource().getLocation().getFile() + name));
+>]
+[<Line: -package com.googlecode.mp4parser.authoring;
+>, <Line: -import com.googlecode.mp4parser.FileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+>, <Line: -import java.io.FileInputStream;
+>, <Line: -            Movie m1 = MovieCreator.build(new FileDataSourceImpl(InTestMovieCreator.class.getProtectionDomain().getCodeSource().getLocation().getFile() + name));
+>]

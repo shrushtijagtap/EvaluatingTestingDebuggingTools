@@ -1,0 +1,24 @@
+[<Line: +  private SummaryResults testPDF417BlackBoxCountingResults(boolean assertOnFailure) throws IOException {
+>]
+[<Line: -  SummaryResults testPDF417BlackBoxCountingResults(boolean assertOnFailure) throws IOException {
+>, <Line: -    int[] misreadCounts = new int[testCount];
+>, <Line: -    int[] tryHaderMisreadCounts = new int[testCount];
+>, <Line: -    int totalMisread = 0;
+>, <Line: -    int totalMaxMisread = 0;
+>, <Line: -      int failed = numberOfTests - passedCounts[x];
+>, <Line: -      log.info(String
+>, <Line: -          .format(" %d failed due to misreads, %d not detected", misreadCounts[x], failed - misreadCounts[x]));
+>, <Line: -      failed = numberOfTests - tryHarderCounts[x];
+>, <Line: -      log.info(String.format(" %d failed due to misreads, %d not detected", tryHaderMisreadCounts[x], failed -
+>, <Line: -          tryHaderMisreadCounts[x]));
+>, <Line: -      totalMisread += misreadCounts[x] + tryHaderMisreadCounts[x];
+>, <Line: -      totalMaxMisread += testResult.getMaxMisreads() + testResult.getMaxTryHarderMisreads();
+>, <Line: -    if (totalMisread < totalMaxMisread) {
+>, <Line: -      log.warning(String.format("+++ Test expects too many misreads by %d images", totalMaxMisread - totalMisread));
+>, <Line: -    } else if (totalMisread > totalMaxMisread) {
+>, <Line: -      log.warning(String.format("--- Test had too many misreads by %d images", totalMisread - totalMaxMisread));
+>, <Line: -    }
+>, <Line: -        label = "Rotation " + testResult.getRotation() + " degrees: Too many images misread";
+>, <Line: -        assertTrue(label, misreadCounts[x] <= testResult.getMaxMisreads());
+>, <Line: -        assertTrue("Try harder, " + label, tryHaderMisreadCounts[x] <= testResult.getMaxTryHarderMisreads());
+>]

@@ -1,0 +1,18 @@
+[<Line: +    <dependency>
+>, <Line: +      <groupId>com.codahale.metrics</groupId>
+>, <Line: +      <artifactId>metrics-core</artifactId>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>com.codahale.metrics</groupId>
+>, <Line: +      <artifactId>metrics-annotation</artifactId>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>com.codahale.metrics</groupId>
+>, <Line: +      <artifactId>metrics-graphite</artifactId>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>com.palominolabs.metrics</groupId>
+>, <Line: +      <artifactId>metrics-guice</artifactId>
+>, <Line: +    </dependency>
+>]
+[]

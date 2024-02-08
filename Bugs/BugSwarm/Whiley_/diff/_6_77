@@ -1,0 +1,5 @@
+[<Line: +../../tests/invalid/ArrayAssign_Invalid_3.whiley:6: assertion failed
+>, <Line: +    assert arr2[2] != |arr1|
+>, <Line: +           ^^^^^^^^^^^^^^^^^
+>]
+[]

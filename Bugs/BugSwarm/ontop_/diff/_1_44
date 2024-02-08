@@ -1,0 +1,124 @@
+[<Line: +import it.unibz.krdb.obda.ontology.ImmutableOntologyVocabulary;
+>, <Line: +import it.unibz.krdb.obda.ontology.InconsistentOntologyException;
+>, <Line: +import it.unibz.krdb.obda.ontology.OntologyVocabulary;
+>, <Line: +/**
+>, <Line: + * 
+>, <Line: + * @author Roman Kontchakov
+>, <Line: + *
+>, <Line: + */
+>, <Line: +	public OntologyVocabulary createVocabulary() {
+>, <Line: +		return new OntologyVocabularyImpl();
+>, <Line: +	public Ontology createOntology(ImmutableOntologyVocabulary vb) {
+>, <Line: +		return new OntologyImpl((OntologyVocabularyImpl)vb);
+>, <Line: +	/**
+>, <Line: +	 * Creates a class assertion
+>, <Line: +	 * <p>
+>, <Line: +	 * ClassAssertion := 'ClassAssertion' '(' axiomAnnotations Class Individual ')'
+>, <Line: +	 * <p>
+>, <Line: +	 * Implements rule [C4]:
+>, <Line: +	 *     - ignore (return null) if the class is top
+>, <Line: +	 *     - inconsistency if the class is bot
+>, <Line: +	 */
+>, <Line: +	public ClassAssertion createClassAssertion(OClass ce, ObjectConstant object) throws InconsistentOntologyException {
+>, <Line: +		if (ce.isTop())
+>, <Line: +			return null;
+>, <Line: +		if (ce.isBottom())
+>, <Line: +			throw new InconsistentOntologyException();	
+>, <Line: +		return new ClassAssertionImpl(ce, object);
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Creates an object property assertion
+>, <Line: +	 * <p>
+>, <Line: +	 * ObjectPropertyAssertion := 'ObjectPropertyAssertion' '(' axiomAnnotations 
+>, <Line: +	 *				ObjectPropertyExpression sourceIndividual targetIndividual ')'
+>, <Line: +	 * <p>
+>, <Line: +	 * Implements rule [O4]:
+>, <Line: +	 *     - ignore (return null) if the property is top
+>, <Line: +	 *     - inconsistency if the property is bot
+>, <Line: +	 *     - swap the arguments to eliminate inverses
+>, <Line: +	 */
+>, <Line: +	public ObjectPropertyAssertion createObjectPropertyAssertion(ObjectPropertyExpression ope, ObjectConstant o1, ObjectConstant o2) throws InconsistentOntologyException {
+>, <Line: +		if (ope.isTop())
+>, <Line: +			return null;
+>, <Line: +		if (ope.isBottom())
+>, <Line: +			throw new InconsistentOntologyException();
+>, <Line: +		if (ope.isInverse())
+>, <Line: +			return new ObjectPropertyAssertionImpl(ope.getInverse(), o2, o1);
+>, <Line: +		else
+>, <Line: +			return new ObjectPropertyAssertionImpl(ope, o1, o2);			
+>, <Line: +	/**
+>, <Line: +	 * Creates a data property assertion
+>, <Line: +	 * <p>
+>, <Line: +	 * DataPropertyAssertion := 'DataPropertyAssertion' '(' axiomAnnotations 
+>, <Line: +	 * 					DataPropertyExpression sourceIndividual targetValue ')'
+>, <Line: +	 * <p>
+>, <Line: +	 * Implements rule [D4]:
+>, <Line: +	 *     - ignore (return null) if the property is top
+>, <Line: +	 *     - inconsistency if the property is bot
+>, <Line: +	 */
+>, <Line: +	public DataPropertyAssertion createDataPropertyAssertion(DataPropertyExpression dpe, ObjectConstant o1, ValueConstant o2) throws InconsistentOntologyException {
+>, <Line: +		if (dpe.isTop())
+>, <Line: +			return null;
+>, <Line: +		if (dpe.isBottom())
+>, <Line: +			throw new InconsistentOntologyException();
+>, <Line: +		return new DataPropertyAssertionImpl(dpe, o1, o2);
+>]
+[<Line: -import it.unibz.krdb.obda.model.OBDADataFactory;
+>, <Line: -import it.unibz.krdb.obda.model.Predicate;
+>, <Line: -import it.unibz.krdb.obda.model.impl.OBDADataFactoryImpl;
+>, <Line: -import it.unibz.krdb.obda.ontology.Datatype;
+>, <Line: -	private final OBDADataFactory ofac = OBDADataFactoryImpl.getInstance();
+>, <Line: -	public ClassAssertion createClassAssertion(OClass concept, ObjectConstant object) {
+>, <Line: -		return new ClassAssertionImpl(concept, object);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public Ontology createOntology() {
+>, <Line: -		return new OntologyImpl();
+>, <Line: -	}
+>, <Line: -	public ObjectPropertyAssertion createObjectPropertyAssertion(ObjectPropertyExpression role, ObjectConstant o1, ObjectConstant o2) {
+>, <Line: -		if (role.isInverse())
+>, <Line: -			return new ObjectPropertyAssertionImpl(role.getInverse(), o2, o1);
+>, <Line: -		else
+>, <Line: -			return new ObjectPropertyAssertionImpl(role, o1, o2);			
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public OClass createClass(String c) {
+>, <Line: -		Predicate classp = ofac.getClassPredicate(c);
+>, <Line: -		return new ClassImpl(classp);
+>, <Line: -	public ObjectPropertyExpression createObjectProperty(String uri) {
+>, <Line: -		Predicate prop = ofac.getObjectPropertyPredicate(uri);
+>, <Line: -		return new ObjectPropertyExpressionImpl(prop);
+>, <Line: -	public DataPropertyExpression createDataProperty(String p) {
+>, <Line: -		Predicate prop = ofac.getDataPropertyPredicate(p);
+>, <Line: -		return new DataPropertyExpressionImpl(prop);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public Datatype createDataType(Predicate.COL_TYPE type) {
+>, <Line: -		return new DatatypeImpl(ofac.getDatatypeFactory().getTypePredicate(type));
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public DataPropertyAssertion createDataPropertyAssertion(DataPropertyExpression attribute, ObjectConstant o1, ValueConstant o2) {
+>, <Line: -		return new DataPropertyAssertionImpl(attribute, o1, o2);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public OClass getThing() {
+>, <Line: -		return ClassImpl.owlThing;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public OClass getNothing() {
+>, <Line: -		return ClassImpl.owlNothing;
+>, <Line: -	@Override
+>, <Line: -	public ObjectPropertyExpression getTopObjectProperty() {
+>, <Line: -		return ObjectPropertyExpressionImpl.owlTopObjectProperty;
+>, <Line: -	}
+>, <Line: -	public ObjectPropertyExpression getBottomObjectProperty() {
+>, <Line: -		return ObjectPropertyExpressionImpl.owlBottomObjectProperty;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public DataPropertyExpression getTopDataProperty() {
+>, <Line: -		return DataPropertyExpressionImpl.owlTopDataProperty;
+>, <Line: -	@Override
+>, <Line: -	public DataPropertyExpression getBottomDataProperty() {
+>, <Line: -		return DataPropertyExpressionImpl.owlBottomDataProperty;
+>, <Line: -	}
+>]

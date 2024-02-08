@@ -1,0 +1,134 @@
+[<Line: +@import colors
+>, <Line: +.container
+>, <Line: +    height 100%
+>, <Line: +.detail-header
+>, <Line: +    h1, h2, h3, h4, h5
+>, <Line: +        margin-top 0
+>, <Line: +        white-space nowrap
+>, <Line: +        overflow hidden
+>, <Line: +        text-overflow ellipsis
+>, <Line: +        position relative
+>, <Line: +        .btn.copy-link
+>, <Line: +            background $white
+>, <Line: +            &:hover, &:focus
+>, <Line: +                text-decoration none
+>, <Line: +            &:focus
+>, <Line: +                outline none
+>, <Line: +    .button-container
+>, <Line: +        text-align right
+>, <Line: +        .btn
+>, <Line: +            margin-bottom 5px
+>, <Line: +code
+>, <Line: +    border 1px solid rgba(0, 0, 0, .075)
+>, <Line: +    background rgba(0, 0, 0, .05)
+>, <Line: +    color rgba(0, 0, 0, .75)
+>, <Line: +.btn-group, .btn-group .btn
+>, <Line: +    -webkit-user-select none
+>, <Line: +    -moz-user-select none
+>, <Line: +    -ms-user-select none
+>, <Line: +// Page
+>, <Line: +// Vex
+>, <Line: +.vex-loading-spinner
+>, <Line: +    top 45% !important
+>, <Line: +// Messenger
+>, <Line: +.messenger-message
+>, <Line: +    background $white !important
+>, <Line: +// DataTables
+>, <Line: +div.dataTables_paginate li.next a:after
+>, <Line: +    display: none !important
+>, <Line: +div.dataTables_paginate li.previous a:before
+>, <Line: +    display: none !important
+>, <Line: +div.dataTables_paginate li.next a
+>, <Line: +    padding-right: 12px !important
+>, <Line: +div.dataTables_paginate li.previous a
+>, <Line: +    padding-left: 12px !important
+>, <Line: +div.dataTables_filter
+>, <Line: +    text-align: left
+>, <Line: +div.dataTables_filter label, div.dataTables_filter label input.form-control
+>, <Line: +    width: 90%
+>, <Line: +div.dataTables_filter label input.form-control
+>, <Line: +    font-family inherit
+>, <Line: +    border 0
+>, <Line: +    padding 5px 10px !important
+>, <Line: +    margin 0
+>, <Line: +    color inherit
+>, <Line: +    opacity .5
+>, <Line: +    background rgba(0, 0, 0, .1)
+>, <Line: +    width 100%
+>, <Line: +    display inline-block
+>, <Line: +    font-weight bold
+>, <Line: +    &:focus
+>, <Line: +        background rgba(0, 0, 0, .05)
+>, <Line: +        opacity 1
+>, <Line: +        outline none
+>, <Line: +// 404 Page
+>, <Line: +#page-not-found-wrapper
+>, <Line: +    position fixed
+>, <Line: +    top 0
+>, <Line: +    left 0
+>, <Line: +    right 0
+>, <Line: +    bottom 0
+>, <Line: +// Search Input
+>, <Line: +input.big-search-box
+>, <Line: +    height 50px
+>, <Line: +    line-height 50px
+>, <Line: +    border 0
+>, <Line: +    font-size 20px
+>, <Line: +    font-family inherit
+>, <Line: +    padding 0 10px !important
+>, <Line: +    margin 0
+>, <Line: +    color inherit
+>, <Line: +    opacity .5
+>, <Line: +    background rgba(0, 0, 0, .1)
+>, <Line: +    margin-bottom 4px
+>, <Line: +    width 100%
+>, <Line: +    display block
+>, <Line: +    font-weight bold
+>, <Line: +    &:focus
+>, <Line: +        background rgba(0, 0, 0, .05)
+>, <Line: +        opacity 1
+>, <Line: +        outline none
+>, <Line: +// Navbar
+>, <Line: +.navbar
+>, <Line: +    .navbar-brand, #navigation-links .global-search-button
+>, <Line: +        color $lightestGrey
+>]
+[<Line: -a.disabled
+>, <Line: -    cursor none
+>, <Line: -    pointer-events none
+>, <Line: -    color #999
+>, <Line: -a.disabled:hover
+>, <Line: -    background-color transparent
+>, <Line: -.link-spacer
+>, <Line: -    opacity 0.2
+>, <Line: -    padding 0px 5px
+>, <Line: -.subtle
+>, <Line: -    opacity 0.5
+>, <Line: -// Overrides
+>, <Line: -.vex-loading-spinner
+>, <Line: -    top 45% !important
+>, <Line: -.messenger-message
+>, <Line: -    background #fff !important
+>, <Line: -.btn[disabled]
+>, <Line: -    opacity: .25
+>, <Line: -.row
+>, <Line: -    margin-bottom 1em
+>, <Line: -#nav-user-name
+>, <Line: -    cursor default
+>, <Line: -table th
+>, <Line: -    text-align left
+>, <Line: -code
+>, <Line: -    border 1px solid rgba(0, 0, 0, .075)
+>, <Line: -    background rgba(0, 0, 0, .05)
+>, <Line: -    color rgba(0, 0, 0, .75)
+>, <Line: -.flash-background
+>, <Line: -    background: #fbfbfb
+>, <Line: -    .page-header
+>, <Line: -        background: rgba(0, 123, 255, .1)
+>, <Line: -.btn-group, .btn-group .btn
+>, <Line: -    -webkit-user-select none
+>, <Line: -    -moz-user-select none
+>, <Line: -    -ms-user-select none
+>, <Line: -.container
+>, <Line: -    height 100%
+>]

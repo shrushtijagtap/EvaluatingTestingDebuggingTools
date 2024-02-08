@@ -1,0 +1,22 @@
+[<Line: +package github;
+>, <Line: +import org.eclipse.egit.github.core.*;
+>, <Line: +import org.eclipse.egit.github.core.client.GitHubRequest;
+>, <Line: +import org.eclipse.egit.github.core.client.GitHubResponse;
+>, <Line: +import org.eclipse.egit.github.core.service.IssueService;
+>, <Line: +import static org.eclipse.egit.github.core.client.IGitHubConstants.*;
+>, <Line: +		if(!returnedIssue.getState().equals(issue.getState())){
+>]
+[<Line: -package service;
+>, <Line: -import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_EVENTS;
+>, <Line: -import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_ISSUES;
+>, <Line: -import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
+>, <Line: -import org.eclipse.egit.github.core.IRepositoryIdProvider;
+>, <Line: -import org.eclipse.egit.github.core.Issue;
+>, <Line: -import org.eclipse.egit.github.core.IssueEvent;
+>, <Line: -import org.eclipse.egit.github.core.Milestone;
+>, <Line: -import org.eclipse.egit.github.core.User;
+>, <Line: -import org.eclipse.egit.github.core.client.GitHubRequest;
+>, <Line: -import org.eclipse.egit.github.core.client.GitHubResponse;
+>, <Line: -import org.eclipse.egit.github.core.service.IssueService;
+>, <Line: -		if(returnedIssue.getState() != issue.getState()){
+>]

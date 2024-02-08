@@ -1,0 +1,4 @@
+[<Line: +../../tests/invalid/UnionType_Invalid_4.whiley:8: expected type UnionType_Invalid_4:IntRealList, found int|real[]
+>]
+[<Line: -../../tests/invalid/UnionType_Invalid_4.whiley:8: expected type UnionType_Invalid_4:IntRealList, found [int|real]
+>]

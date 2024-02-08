@@ -1,0 +1,10 @@
+[<Line: +            if(!"JavaScript".equals(algorithmLanguage) && !"python".equals(algorithmLanguage)&& !"java".equalsIgnoreCase(algorithmLanguage)) {
+>, <Line: +                throw new SpreadsheetLoadException(ctx, "Invalid algorithm language '"+algorithmLanguage+"' specified. Supported are 'JavaScript', 'python' and java (case sensitive)");
+>, <Line: +            //Check that there is not specified by mistake a in/out param already on the same line with the algorithm name
+>, <Line: +            if(hasColumn(cells, IDX_ALGO_PARA_INOUT) || hasColumn(cells, IDX_ALGO_PARA_REF)) {
+>, <Line: +                throw new SpreadsheetLoadException(ctx, "Algorithm paramters have to start on the next line from the algorithm name and text definition");
+>, <Line: +            }
+>]
+[<Line: -            if(!"JavaScript".equals(algorithmLanguage) && !"python".equals(algorithmLanguage)) {
+>, <Line: -                throw new SpreadsheetLoadException(ctx, "Invalid algorithm language '"+algorithmLanguage+"' specified. Supported are 'JavaScript' and 'python' (case sensitive)");
+>]

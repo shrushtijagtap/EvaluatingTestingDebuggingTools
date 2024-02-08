@@ -1,0 +1,16 @@
+[<Line: +import com.p6spy.engine.logging.P6LogOptions;
+>, <Line: +			logger.warn("It seems like you already have p6spy configured. Using p6spy standalone in combination with " +
+>, <Line: +					"stagemonitor is currently not supported. Feel free to create an issue if this is important to you. " +
+>, <Line: +				System.setProperty(SystemProperties.P6SPY_PREFIX + P6SpyOptions.APPENDER, StagemonitorP6Logger.class.getName());
+>, <Line: +				System.setProperty(SystemProperties.P6SPY_PREFIX + P6SpyOptions.USE_NANO_TIME, Boolean.TRUE.toString());
+>, <Line: +				System.setProperty(SystemProperties.P6SPY_PREFIX + P6LogOptions.EXCLUDECATEGORIES, "info,debug,batch");
+>, <Line: +				P6SpyOptions.getActiveInstance().reload();
+>]
+[<Line: -import com.p6spy.engine.spy.P6SpyLoadableOptions;
+>, <Line: -import org.stagemonitor.jdbc.p6spy.P6SpyMultiLogger;
+>, <Line: -			logger.warn("It seems like you already have p6spy configured. Using p6spy and stagemonitor is not supported. " +
+>, <Line: -				System.setProperty(SystemProperties.P6SPY_PREFIX + P6SpyOptions.APPENDER, P6SpyMultiLogger.class.getName());
+>, <Line: -				P6SpyMultiLogger.addLogger(new StagemonitorP6Logger(configuration, this.metricRegistry));
+>, <Line: -				P6SpyLoadableOptions options = P6SpyOptions.getActiveInstance();
+>, <Line: -				options.setAppender(P6SpyMultiLogger.class.getName());
+>]

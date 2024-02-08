@@ -1,0 +1,220 @@
+[<Line: +.panel-heading .accordion-toggle:after {
+>, <Line: +    /* symbol for "opening" panels */
+>, <Line: +    font-family: 'Glyphicons Halflings'; /* essential for enabling glyphicon */
+>, <Line: +    content: "\e114"; /* adjust as needed, taken from bootstrap.css */
+>, <Line: +    float: left;
+>, <Line: +    color: grey;
+>, <Line: +    padding-right: 15px;
+>, <Line: +}
+>, <Line: +.panel-heading .accordion-toggle.collapsed:after {
+>, <Line: +    /* symbol for "collapsed" panels */
+>, <Line: +    content: "\e080"; /* adjust as needed, taken from bootstrap.css */
+>, <Line: +}
+>, <Line: +.schedule {
+>, <Line: +    padding-left: 10px;
+>, <Line: +}
+>, <Line: +.taskOperations {
+>, <Line: +    padding-right: 10px;
+>, <Line: +}
+>, <Line: +.queryOperations {
+>, <Line: +    padding-left: 5px;
+>, <Line: +}
+>, <Line: +.rollupOperations {
+>, <Line: +    vertical-align: top;
+>, <Line: +}
+>, <Line: +textarea {
+>, <Line: +    width: 90%;
+>, <Line: +}
+>, <Line: +.placeholder {
+>, <Line: +    color: #c8c8c8;
+>, <Line: +}
+>, <Line: +.tight-form-container-no-item-borders {
+>, <Line: +    border: 1px solid #000;
+>, <Line: +}
+>, <Line: +.tight-form-container-no-item-borders .tight-form, .tight-form-container-no-item-borders .tight-form-item, .tight-form-container-no-item-borders [type=text].tight-form-input, .tight-form-container-no-item-borders [type=text].tight-form-clear-input {
+>, <Line: +    border: 0;
+>, <Line: +}
+>, <Line: +.tight-form-container .tight-form:last-child {
+>, <Line: +    border-bottom: 0
+>, <Line: +}
+>, <Line: +.tight-form-container:last-child {
+>, <Line: +    border-bottom: 1px solid #000;
+>, <Line: +}
+>, <Line: +.tight-form {
+>, <Line: +    border-top: 1px solid #000;
+>, <Line: +    border-left: 1px solid #000;
+>, <Line: +    border-right: 1px solid #000;
+>, <Line: +    /*background: #262626;*/
+>, <Line: +}
+>, <Line: +.tight-form-list {
+>, <Line: +    list-style: none;
+>, <Line: +    margin: 0;
+>, <Line: +    padding: 0;
+>, <Line: +}
+>, <Line: +.tight-form-list > li {
+>, <Line: +    float: left;
+>, <Line: +}
+>, <Line: +.grafana-metric-options {
+>, <Line: +    margin-top: 35px;
+>, <Line: +}
+>, <Line: +.tight-form-warning {
+>, <Line: +    display: inline-block;
+>, <Line: +    padding-left: 5px;
+>, <Line: +    padding-right: 5px;
+>, <Line: +    margin: 0;
+>, <Line: +    width: 30px;
+>, <Line: +    height: 100%;
+>, <Line: +    border-top: 1px
+>, <Line: +}
+>, <Line: +.tight-form-item {
+>, <Line: +    padding: 8px 7px;
+>, <Line: +    font-weight: 400;
+>, <Line: +    border-right: 1px solid #050505;
+>, <Line: +    color: #c8c8c8;
+>, <Line: +    display: inline-block;
+>, <Line: +    line-height: 1.43;
+>, <Line: +}
+>, <Line: +.tight-form-container-no-item-borders .tight-form, .tight-form-container-no-item-borders .tight-form-item, .tight-form-container-no-item-borders [type=text].tight-form-input, .tight-form-container-no-item-borders [type=text].tight-form-clear-input {
+>, <Line: +    border: 0;
+>, <Line: +}
+>, <Line: +input[type=checkbox].tight-form-checkbox {
+>, <Line: +    margin: 0;
+>, <Line: +}
+>, <Line: +input[type=checkbox], input[type=radio] {
+>, <Line: +    box-sizing: border-box;
+>, <Line: +    padding: 0;
+>, <Line: +    *height: 13px;
+>, <Line: +    *width: 13px;
+>, <Line: +}
+>, <Line: +.spaced-form .tight-form {
+>, <Line: +    margin: 7px 0;
+>, <Line: +}
+>, <Line: +.borderless .tight-form-item, .borderless .tight-form-input {
+>, <Line: +    border: 0;
+>, <Line: +}
+>, <Line: +[type=text].tight-form-input, [type=email].tight-form-input, [type=number].tight-form-input, [type=password].tight-form-input {
+>, <Line: +    border: 0;
+>, <Line: +    margin: 0;
+>, <Line: +    border-radius: 0;
+>, <Line: +    padding: 8px 6px;
+>, <Line: +    box-sizing: border-box;
+>, <Line: +    border-left: 1px solid #050505;
+>, <Line: +}
+>, <Line: +[type=text].tight-form-input.last, [type=email].tight-form-input.last, [type=number].tight-form-input.last, [type=password].tight-form-input.last {
+>, <Line: +    border-right: 0;
+>, <Line: +}
+>, <Line: +input[type=checkbox].tight-form-checkbox {
+>, <Line: +    margin: 0;
+>, <Line: +}
+>, <Line: +select.tight-form-input {
+>, <Line: +    border: 0;
+>, <Line: +    border-right: 1px solid #050505;
+>, <Line: +    margin: 0;
+>, <Line: +    border-radius: 0;
+>, <Line: +    height: 36px;
+>, <Line: +}
+>, <Line: +select.tight-form-input.last {
+>, <Line: +    border-right: 0;
+>, <Line: +}
+>, <Line: +.pull-right {
+>, <Line: +    float: right;
+>, <Line: +}
+>, <Line: +.input-large {
+>, <Line: +    width: 90%;
+>, <Line: +}
+>, <Line: +.input-mini {
+>, <Line: +    width: 60px;
+>, <Line: +}
+>, <Line: +.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
+>, <Line: +    -webkit-border-radius: 0 3px 3px 0;
+>, <Line: +    -moz-border-radius: 0 3px 3px 0;
+>, <Line: +    border-radius: 0 3px 3px 0;
+>, <Line: +}
+>, <Line: +.dropdown-toggle {
+>, <Line: +    *margin-bottom: -3px;
+>, <Line: +    padding: 1px 3px 1px 3px;
+>, <Line: +}
+>, <Line: +.dropdown-toggle:active, .open .dropdown-toggle {
+>, <Line: +    outline: 0;
+>, <Line: +}
+>, <Line: +.nav .dropdown-toggle .caret {
+>, <Line: +    border-top-color: #e3e3e3;
+>, <Line: +    border-bottom-color: #e3e3e3;
+>, <Line: +    margin-top: 6px;
+>, <Line: +}
+>, <Line: +.nav .dropdown-toggle:hover .caret, .nav .dropdown-toggle:focus .caret {
+>, <Line: +    border-top-color: #fff;
+>, <Line: +    border-bottom-color: #fff;
+>, <Line: +}
+>, <Line: +.nav-tabs .dropdown-toggle .caret {
+>, <Line: +    margin-top: 8px;
+>, <Line: +}
+>, <Line: +.nav .active .dropdown-toggle .caret {
+>, <Line: +    border-top-color: #fff;
+>, <Line: +    border-bottom-color: #fff;
+>, <Line: +}
+>, <Line: +.nav-tabs .active .dropdown-toggle .caret {
+>, <Line: +    border-top-color: #bbb;
+>, <Line: +    border-bottom-color: #bbb;
+>, <Line: +}
+>, <Line: +.nav > .dropdown.active > a:hover, .nav > .dropdown.active > a:focus {
+>, <Line: +    cursor: pointer;
+>, <Line: +}
+>, <Line: +.nav-tabs .open .dropdown-toggle, .nav-pills .open .dropdown-toggle, .nav > li.dropdown.open.active > a:hover, .nav > li.dropdown.open.active > a:focus {
+>, <Line: +    color: #fff;
+>, <Line: +    background-color: #adafae;
+>, <Line: +    border-color: #adafae;
+>, <Line: +}
+>, <Line: +.navbar .nav .dropdown-toggle .caret {
+>, <Line: +    margin-top: 8px;
+>, <Line: +}
+>, <Line: +/*.clearfix {*/
+>, <Line: +/**zoom: 1;*/
+>, <Line: +/*}*/
+>, <Line: +/*.clearfix:before, .clearfix:after {*/
+>, <Line: +/*display: table;*/
+>, <Line: +/*content: "";*/
+>, <Line: +/*line-height: 0;*/
+>, <Line: +/*}*/
+>, <Line: +/*.clearfix:after {*/
+>, <Line: +/*clear: both;*/
+>, <Line: +/*}*/
+>, <Line: +.glyphicon {
+>, <Line: +    line-height: 1.43;
+>, <Line: +}
+>, <Line: +.fa {
+>, <Line: +    /*display: inline-block;*/
+>, <Line: +    /*font-family: FontAwesome;*/
+>, <Line: +    /*font-style: normal;*/
+>, <Line: +    /*font-weight: normal;*/
+>, <Line: +    /*line-height: 1.43;*/
+>, <Line: +    /*font-size-adjust: none;*/
+>, <Line: +    /*font-stretch: normal;*/
+>, <Line: +    /*font-feature-settings: normal;*/
+>, <Line: +    /*font-language-override: normal;*/
+>, <Line: +    /*font-kerning: auto;*/
+>, <Line: +    /*font-synthesis: weight style;*/
+>, <Line: +    /*font-variant: normal;*/
+>, <Line: +    /*font-size: inherit;*/
+>, <Line: +    /*text-rendering: auto;*/
+>, <Line: +}
+>, <Line: +.invisible {
+>, <Line: +    visibility: hidden;
+>, <Line: +}
+>, <Line: +.panel-body {
+>, <Line: +    padding: 0 0 0 20px;
+>, <Line: +}
+>, <Line: +.save_as {
+>, <Line: +    width: 90%;
+>, <Line: +}
+>, <Line: +.text-field {
+>, <Line: +    border-color: #dddddd;
+>, <Line: +    border-width: 1px;
+>, <Line: +    background: #f4f4f4;
+>, <Line: +    border-style: solid
+>, <Line: +}
+>, <Line: +.last-saved {
+>, <Line: +    margin: -5px 0 0 0;
+>, <Line: +}
+>]
+[]

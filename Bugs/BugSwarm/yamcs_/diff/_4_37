@@ -1,0 +1,26 @@
+[<Line: +    public void listClientsForProcessor(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, responseb.build(), SchemaRest.ListClientsResponse.WRITE);
+>, <Line: +    public void listProcessors(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, response.build(), SchemaRest.ListProcessorsResponse.WRITE);
+>, <Line: +    public void listProcessorsForInstance(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, response.build(), SchemaRest.ListProcessorsResponse.WRITE);
+>, <Line: +    public void getProcessor(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, pinfo, SchemaYamcsManagement.ProcessorInfo.WRITE);
+>, <Line: +    public void editProcessor(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req);
+>, <Line: +    public void createProcessorForInstance(RestRequest req) throws HttpException {
+>, <Line: +            sendOK(req);
+>]
+[<Line: -    public ChannelFuture listClientsForProcessor(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, responseb.build(), SchemaRest.ListClientsResponse.WRITE);
+>, <Line: -    public ChannelFuture listProcessors(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, response.build(), SchemaRest.ListProcessorsResponse.WRITE);
+>, <Line: -    public ChannelFuture listProcessorsForInstance(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, response.build(), SchemaRest.ListProcessorsResponse.WRITE);
+>, <Line: -    public ChannelFuture getProcessor(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, pinfo, SchemaYamcsManagement.ProcessorInfo.WRITE);
+>, <Line: -    public ChannelFuture editProcessor(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req);
+>, <Line: -    public ChannelFuture createProcessorForInstance(RestRequest req) throws HttpException {
+>, <Line: -            return sendOK(req);
+>]

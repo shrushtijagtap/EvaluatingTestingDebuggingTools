@@ -1,0 +1,8 @@
+[<Line: +        <dependency>
+>, <Line: +            <groupId>org.apache.commons</groupId>
+>, <Line: +            <artifactId>commons-collections4</artifactId>
+>, <Line: +            <version>${dependency.commons-collections.version}</version>
+>, <Line: +            <scope>test</scope>
+>, <Line: +        </dependency>
+>]
+[]

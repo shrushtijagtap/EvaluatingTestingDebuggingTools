@@ -1,0 +1,308 @@
+[<Line: +package org.mp4parser.streaming.input.mp4;
+>, <Line: +import org.mp4parser.BasicContainer;
+>, <Line: +import org.mp4parser.Box;
+>, <Line: +import org.mp4parser.BoxParser;
+>, <Line: +import org.mp4parser.PropertyBoxParserImpl;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.*;
+>, <Line: +import org.mp4parser.streaming.StreamingSample;
+>, <Line: +import org.mp4parser.streaming.StreamingTrack;
+>, <Line: +import org.mp4parser.streaming.TrackExtension;
+>, <Line: +import org.mp4parser.streaming.extensions.CompositionTimeSampleExtension;
+>, <Line: +import org.mp4parser.streaming.extensions.CompositionTimeTrackExtension;
+>, <Line: +import org.mp4parser.streaming.extensions.SampleFlagsSampleExtension;
+>, <Line: +import org.mp4parser.streaming.extensions.TrackIdTrackExtension;
+>, <Line: +import org.mp4parser.streaming.input.StreamingSampleImpl;
+>, <Line: +import org.mp4parser.streaming.output.SampleSink;
+>, <Line: +import org.mp4parser.streaming.output.mp4.FragmentedMp4Writer;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +import java.io.*;
+>, <Line: +import java.net.URI;
+>, <Line: +import java.net.URISyntaxException;
+>, <Line: +import java.nio.ByteBuffer;
+>, <Line: +import java.nio.channels.Channels;
+>, <Line: +import java.nio.channels.ReadableByteChannel;
+>, <Line: +import java.util.*;
+>, <Line: +import java.util.concurrent.Callable;
+>, <Line: +import static org.mp4parser.tools.CastUtils.l2i;
+>, <Line: +/**
+>, <Line: + * Creates a List of StreamingTrack from a classic MP4. Fragmented MP4s don't
+>, <Line: + * work and the implementation will consume a lot of heap when the MP4
+>, <Line: + * is not a 'fast-start' MP4 (order: ftyp, moov, mdat good;
+>, <Line: + * order ftyp, mdat, moov bad).
+>, <Line: + */
+>, <Line: +// @todo implement FragmentedMp4ContainerSource
+>, <Line: +// @todo store mdat of non-fast-start MP4 on disk
+>, <Line: +public class ClassicMp4ContainerSource implements Callable<Void> {
+>, <Line: +    final HashMap<TrackBox, Mp4StreamingTrack> tracks = new LinkedHashMap<TrackBox, Mp4StreamingTrack>();
+>, <Line: +    final HashMap<TrackBox, Long> currentChunks = new HashMap<TrackBox, Long>();
+>, <Line: +    final HashMap<TrackBox, Long> currentSamples = new HashMap<TrackBox, Long>();
+>, <Line: +    final DiscardingByteArrayOutputStream baos = new DiscardingByteArrayOutputStream();
+>, <Line: +    final ReadableByteChannel readableByteChannel;
+>, <Line: +    private final ByteBuffer BUFFER = ByteBuffer.allocateDirect(65535);
+>, <Line: +    public ClassicMp4ContainerSource(InputStream is) throws IOException {
+>, <Line: +        readableByteChannel = Channels.newChannel(new TeeInputStream(is, baos));
+>, <Line: +        BasicContainer container = new BasicContainer();
+>, <Line: +        BoxParser boxParser = new PropertyBoxParserImpl();
+>, <Line: +        Box current = null;
+>, <Line: +        while (current == null || !"moov".equals(current.getType())) {
+>, <Line: +            current = boxParser.parseBox(readableByteChannel, null);
+>, <Line: +            container.addBox(current);
+>, <Line: +        }
+>, <Line: +        // Either mdat was already read (yeahh sucks but what can you do if it's in the beginning)
+>, <Line: +        // or it's still coming
+>, <Line: +        for (TrackBox trackBox : Path.<TrackBox>getPaths(container, "moov[0]/trak")) {
+>, <Line: +            Mp4StreamingTrack mp4StreamingTrack = new Mp4StreamingTrack(trackBox);
+>, <Line: +            tracks.put(trackBox, mp4StreamingTrack);
+>, <Line: +            if (trackBox.getSampleTableBox().getCompositionTimeToSample() != null) {
+>, <Line: +                mp4StreamingTrack.addTrackExtension(new CompositionTimeTrackExtension());
+>, <Line: +            }
+>, <Line: +            mp4StreamingTrack.addTrackExtension(new TrackIdTrackExtension(trackBox.getTrackHeaderBox().getTrackId()));
+>, <Line: +            currentChunks.put(trackBox, 1L);
+>, <Line: +            currentSamples.put(trackBox, 1L);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public static void main(String[] args) throws IOException {
+>, <Line: +        ClassicMp4ContainerSource classicMp4ContainerSource = null;
+>, <Line: +        try {
+>, <Line: +            classicMp4ContainerSource = new ClassicMp4ContainerSource(new URI("http://org.mp4parser.s3.amazonaws.com/examples/Cosmos%20Laundromat%20small%20faststart.mp4").toURL().openStream());
+>, <Line: +        } catch (URISyntaxException e) {
+>, <Line: +            throw new IOException(e);
+>, <Line: +        }
+>, <Line: +        List<StreamingTrack> streamingTracks = classicMp4ContainerSource.getTracks();
+>, <Line: +        File f = new File("output.mp4");
+>, <Line: +        FragmentedMp4Writer writer = new FragmentedMp4Writer(streamingTracks, new FileOutputStream(f).getChannel());
+>, <Line: +        System.out.println("Reading and writing started.");
+>, <Line: +        classicMp4ContainerSource.call();
+>, <Line: +        writer.close();
+>, <Line: +        System.err.println(f.getAbsolutePath());
+>, <Line: +    }
+>, <Line: +    List<StreamingTrack> getTracks() {
+>, <Line: +        return new ArrayList<StreamingTrack>(tracks.values());
+>, <Line: +    }
+>, <Line: +    public Void call() throws IOException {
+>, <Line: +        while (true) {
+>, <Line: +            TrackBox firstInLine = null;
+>, <Line: +            long currentChunk = 0;
+>, <Line: +            long currentChunkStartSample = 0;
+>, <Line: +            long offset = Long.MAX_VALUE;
+>, <Line: +            SampleToChunkBox.Entry entry = null;
+>, <Line: +            for (TrackBox trackBox : tracks.keySet()) {
+>, <Line: +                long _currentChunk = currentChunks.get(trackBox);
+>, <Line: +                long _currentSample = currentSamples.get(trackBox);
+>, <Line: +                long[] chunkOffsets = trackBox.getSampleTableBox().getChunkOffsetBox().getChunkOffsets();
+>, <Line: +                if ((l2i(_currentChunk) - 1 < chunkOffsets.length) && chunkOffsets[l2i(_currentChunk) - 1] < offset) {
+>, <Line: +                    firstInLine = trackBox;
+>, <Line: +                    currentChunk = _currentChunk;
+>, <Line: +                    currentChunkStartSample = _currentSample;
+>, <Line: +                    offset = chunkOffsets[l2i(_currentChunk) - 1];
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            if (firstInLine == null) {
+>, <Line: +                break;
+>, <Line: +            }
+>, <Line: +            SampleToChunkBox stsc = firstInLine.getSampleTableBox().getSampleToChunkBox();
+>, <Line: +            for (SampleToChunkBox.Entry _entry : stsc.getEntries()) {
+>, <Line: +                if (currentChunk >= _entry.getFirstChunk()) {
+>, <Line: +                    entry = _entry;
+>, <Line: +                } else {
+>, <Line: +                    break;
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            assert entry != null;
+>, <Line: +            SampleTableBox stbl = firstInLine.getSampleTableBox();
+>, <Line: +            List<TimeToSampleBox.Entry> times = stbl.getTimeToSampleBox().getEntries();
+>, <Line: +            List<CompositionTimeToSample.Entry> compositionOffsets = stbl.getCompositionTimeToSample() != null ? stbl.getCompositionTimeToSample().getEntries() : null;
+>, <Line: +            //System.out.println(trackId + ": Pushing chunk with sample " + currentChunkStartSample + "(offset: " + offset + ") to " + (currentChunkStartSample + entry.getSamplesPerChunk()) + " in the chunk");
+>, <Line: +            SampleSizeBox stsz = stbl.getSampleSizeBox();
+>, <Line: +            for (long index = currentChunkStartSample; index < currentChunkStartSample + entry.getSamplesPerChunk(); index++) {
+>, <Line: +                final long duration = times.get(0).getDelta();
+>, <Line: +                if (times.get(0).getCount() == 1) {
+>, <Line: +                    times.remove(0);
+>, <Line: +                } else {
+>, <Line: +                    times.get(0).setCount(times.get(0).getCount() - 1);
+>, <Line: +                }
+>, <Line: +                // Sample Flags Start
+>, <Line: +                SampleDependencyTypeBox sdtp = Path.getPath(stbl, "sdtp");
+>, <Line: +                SampleFlagsSampleExtension sfse = new SampleFlagsSampleExtension();
+>, <Line: +                if (sdtp != null) {
+>, <Line: +                    SampleDependencyTypeBox.Entry e = sdtp.getEntries().get(l2i(index));
+>, <Line: +                    sfse.setIsLeading(e.getIsLeading());
+>, <Line: +                    sfse.setSampleDependsOn(e.getSampleDependsOn());
+>, <Line: +                    sfse.setSampleIsDependedOn(e.getSampleIsDependedOn());
+>, <Line: +                    sfse.setSampleHasRedundancy(e.getSampleHasRedundancy());
+>, <Line: +                }
+>, <Line: +                if (stbl.getSyncSampleBox() != null) {
+>, <Line: +                    if (Arrays.binarySearch(stbl.getSyncSampleBox().getSampleNumber(), index) >= 0) {
+>, <Line: +                        sfse.setSampleIsNonSyncSample(false);
+>, <Line: +                    } else {
+>, <Line: +                        sfse.setSampleIsNonSyncSample(true);
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +                DegradationPriorityBox stdp = Path.getPath(stbl, "stdp");
+>, <Line: +                if (stdp != null) {
+>, <Line: +                    sfse.setSampleDegradationPriority(stdp.getPriorities()[l2i(index)]);
+>, <Line: +                }
+>, <Line: +                // Sample Flags Done
+>, <Line: +                int sampleSize = l2i(stsz.getSampleSizeAtIndex(l2i(index - 1)));
+>, <Line: +                long avail = baos.available();
+>, <Line: +                // as long as the sample has not yet been fully read
+>, <Line: +                // read more bytes from the input channel to fill
+>, <Line: +                //
+>, <Line: +                while (avail <= offset + sampleSize) {
+>, <Line: +                    try {
+>, <Line: +                        int br = readableByteChannel.read(BUFFER);
+>, <Line: +                        if (br == -1) {
+>, <Line: +                            break;
+>, <Line: +                        }
+>, <Line: +                        avail = baos.available();
+>, <Line: +                        BUFFER.rewind();
+>, <Line: +                    } catch (IOException e) {
+>, <Line: +                        throw new RuntimeException(e);
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +                //System.err.println("Get sample content @" + offset + " len=" + sampleSize);
+>, <Line: +                final byte[] sampleContent = baos.get(offset, sampleSize);
+>, <Line: +                StreamingSample streamingSample = new StreamingSampleImpl(sampleContent, duration);
+>, <Line: +                streamingSample.addSampleExtension(sfse);
+>, <Line: +                if (compositionOffsets != null && !compositionOffsets.isEmpty()) {
+>, <Line: +                    final long compositionOffset = compositionOffsets.get(0).getOffset();
+>, <Line: +                    if (compositionOffsets.get(0).getCount() == 1) {
+>, <Line: +                        compositionOffsets.remove(0);
+>, <Line: +                    } else {
+>, <Line: +                        compositionOffsets.get(0).setCount(compositionOffsets.get(0).getCount() - 1);
+>, <Line: +                    }
+>, <Line: +                    streamingSample.addSampleExtension(CompositionTimeSampleExtension.create(compositionOffset));
+>, <Line: +                }
+>, <Line: +                if (firstInLine.getTrackHeaderBox().getTrackId() == 1) {
+>, <Line: +                    System.out.println("Pushing sample @" + offset + " of " + sampleSize + " bytes (i=" + index + ")");
+>, <Line: +                }
+>, <Line: +                tracks.get(firstInLine).getSampleSink().acceptSample(streamingSample, tracks.get(firstInLine));
+>, <Line: +                offset += sampleSize;
+>, <Line: +            }
+>, <Line: +            baos.discardTo(offset);
+>, <Line: +            currentChunks.put(firstInLine, currentChunk + 1);
+>, <Line: +            currentSamples.put(firstInLine, currentChunkStartSample + entry.getSamplesPerChunk());
+>, <Line: +        }
+>, <Line: +        for (Mp4StreamingTrack mp4StreamingTrack : tracks.values()) {
+>, <Line: +            mp4StreamingTrack.close();
+>, <Line: +        }
+>, <Line: +        System.out.println("All Samples read.");
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +    public static class Mp4StreamingTrack implements StreamingTrack {
+>, <Line: +        private final TrackBox trackBox;
+>, <Line: +        protected HashMap<Class<? extends TrackExtension>, TrackExtension> trackExtensions = new HashMap<Class<? extends TrackExtension>, TrackExtension>();
+>, <Line: +        boolean allSamplesRead = false;
+>, <Line: +        SampleSink sampleSink;
+>, <Line: +        public Mp4StreamingTrack(TrackBox trackBox) {
+>, <Line: +            this.trackBox = trackBox;
+>, <Line: +        }
+>, <Line: +        public void close() {
+>, <Line: +            allSamplesRead = true;
+>, <Line: +        }
+>, <Line: +        public boolean isClosed() {
+>, <Line: +            return allSamplesRead;
+>, <Line: +        }
+>, <Line: +        public long getTimescale() {
+>, <Line: +            return trackBox.getMediaBox().getMediaHeaderBox().getTimescale();
+>, <Line: +        }
+>, <Line: +        public SampleSink getSampleSink() {
+>, <Line: +            return sampleSink;
+>, <Line: +        }
+>, <Line: +        public void setSampleSink(SampleSink sampleSink) {
+>, <Line: +            this.sampleSink = sampleSink;
+>, <Line: +        }
+>, <Line: +        public String getHandler() {
+>, <Line: +            return trackBox.getMediaBox().getHandlerBox().getHandlerType();
+>, <Line: +        }
+>, <Line: +        public String getLanguage() {
+>, <Line: +            return trackBox.getMediaBox().getMediaHeaderBox().getLanguage();
+>, <Line: +        }
+>, <Line: +        public SampleDescriptionBox getSampleDescriptionBox() {
+>, <Line: +            return trackBox.getSampleTableBox().getSampleDescriptionBox();
+>, <Line: +        }
+>, <Line: +        public <T extends TrackExtension> T getTrackExtension(Class<T> clazz) {
+>, <Line: +            return (T) trackExtensions.get(clazz);
+>, <Line: +        }
+>, <Line: +        public void addTrackExtension(TrackExtension trackExtension) {
+>, <Line: +            trackExtensions.put(trackExtension.getClass(), trackExtension);
+>, <Line: +        }
+>, <Line: +        public void removeTrackExtension(Class<? extends TrackExtension> clazz) {
+>, <Line: +            trackExtensions.remove(clazz);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public static class TeeInputStream extends FilterInputStream {
+>, <Line: +        /**
+>, <Line: +         * The output stream that will receive a copy of all bytes read from the
+>, <Line: +         * proxied input stream.
+>, <Line: +         */
+>, <Line: +        private final OutputStream branch;
+>, <Line: +        long counter = 0;
+>, <Line: +        /**
+>, <Line: +         * Creates a TeeInputStream that proxies the given {@link InputStream}
+>, <Line: +         * and copies all read bytes to the given {@link OutputStream}. The given
+>, <Line: +         * output stream will not be closed when this stream gets closed.
+>, <Line: +         *
+>, <Line: +         * @param input  input stream to be proxied
+>, <Line: +         * @param branch output stream that will receive a copy of all bytes read
+>, <Line: +         */
+>, <Line: +        public TeeInputStream(InputStream input, OutputStream branch) {
+>, <Line: +            super(input);
+>, <Line: +            this.branch = branch;
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Reads a single byte from the proxied input stream and writes it to
+>, <Line: +         * the associated output stream.
+>, <Line: +         *
+>, <Line: +         * @return next byte from the stream, or -1 if the stream has ended
+>, <Line: +         * @throws IOException if the stream could not be read (or written)
+>, <Line: +         */
+>, <Line: +        @Override
+>, <Line: +        public int read() throws IOException {
+>, <Line: +            int ch = super.read();
+>, <Line: +            if (ch != -1) {
+>, <Line: +                branch.write(ch);
+>, <Line: +                counter++;
+>, <Line: +            }
+>, <Line: +            return ch;
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Reads bytes from the proxied input stream and writes the read bytes
+>, <Line: +         * to the associated output stream.
+>, <Line: +         *
+>, <Line: +         * @param bts byte buffer
+>, <Line: +         * @param st  start offset within the buffer
+>, <Line: +         * @param end maximum number of bytes to read
+>, <Line: +         * @return number of bytes read, or -1 if the stream has ended
+>, <Line: +         * @throws IOException if the stream could not be read (or written)
+>, <Line: +         */
+>, <Line: +        @Override
+>, <Line: +        public int read(byte[] bts, int st, int end) throws IOException {
+>, <Line: +            int n = super.read(bts, st, end);
+>, <Line: +            if (n != -1) {
+>, <Line: +                branch.write(bts, st, n);
+>, <Line: +                counter += n;
+>, <Line: +            }
+>, <Line: +            return n;
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Reads bytes from the proxied input stream and writes the read bytes
+>, <Line: +         * to the associated output stream.
+>, <Line: +         *
+>, <Line: +         * @param bts byte buffer
+>, <Line: +         * @return number of bytes read, or -1 if the stream has ended
+>, <Line: +         * @throws IOException if the stream could not be read (or written)
+>, <Line: +         */
+>, <Line: +        @Override
+>, <Line: +        public int read(byte[] bts) throws IOException {
+>, <Line: +            int n = super.read(bts);
+>, <Line: +            if (n != -1) {
+>, <Line: +                branch.write(bts, 0, n);
+>, <Line: +                counter += n;
+>, <Line: +            }
+>, <Line: +            return n;
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,8 @@
+[<Line: +        assertEquals(-1, tcuplink.getMiniminimumTcPacketLength());
+>, <Line: +        tcuplink = new TcpTcUplinker("testinst", "test1", "test48");
+>, <Line: +        assertEquals(48, tcuplink.getMiniminimumTcPacketLength());
+>]
+[<Line: -        assertEquals(48, tcuplink.getMiniminimumTcPacketLength());
+>, <Line: -        tcuplink = new TcpTcUplinker("testinst", "test1", "test0");
+>, <Line: -        assertEquals(0, tcuplink.getMiniminimumTcPacketLength());
+>]

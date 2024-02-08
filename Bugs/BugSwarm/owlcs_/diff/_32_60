@@ -1,0 +1,4 @@
+[<Line: +        return Double.valueOf((double) total / count);
+>]
+[<Line: -        return (double) total / count;
+>]

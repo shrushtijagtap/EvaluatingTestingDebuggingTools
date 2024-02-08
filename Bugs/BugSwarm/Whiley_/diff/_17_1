@@ -1,0 +1,4 @@
+[<Line: +    <javac debug="true" debuglevel="vars,lines,source" source="1.7" target="1.7" includeantruntime="true" classpath="../wyil/src:../wybs/src/:../wycs/src:../../${WYRL_JAR}">
+>]
+[<Line: -    <javac debug="true" debuglevel="vars,lines,source" source="1.7" target="1.7" includeantruntime="true" classpath="../wyil/src:../wybs/src/:../wycs/src:../wyrl/src/">
+>]

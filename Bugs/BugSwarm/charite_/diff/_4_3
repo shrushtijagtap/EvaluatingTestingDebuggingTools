@@ -1,0 +1,122 @@
+[]
+[<Line: -package de.charite.compbio.jannovar;
+>, <Line: -import java.io.PrintStream;
+>, <Line: -import java.net.URL;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -/**
+>, <Line: - * Configuration for the Jannovar program.
+>, <Line: - *
+>, <Line: - * This class contains the configuration for all Jannovar commands, even though most are not used by some commands. For
+>, <Line: - * example, the proxy setting is only used when downloading data.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - * @author <a href="mailto:peter.robinson@charite.de">Peter N Robinson</a>
+>, <Line: - * @author <a href="mailto:max.schubach@charite.de">Max Schubach</a>
+>, <Line: - */
+>, <Line: -public final class JannovarOptions {
+>, <Line: -	/** the version of the program */
+>, <Line: -	public static final String JANNOVAR_VERSION = "0.17";
+>, <Line: -	/** the selected command */
+>, <Line: -	public Command command = null;
+>, <Line: -	/** whether to print progress bars to stderr or not. */
+>, <Line: -	public boolean printProgressBars = false;
+>, <Line: -	// TODO(holtgrew): Verbosity level should go to jannovar-cli/
+>, <Line: -	/** verbosity level */
+>, <Line: -	public int verbosity = 1;
+>, <Line: -	/** paths to INI files ot use for parsing */
+>, <Line: -	public ImmutableList<String> dataSourceFiles = null;
+>, <Line: -	/** data source name to use for downloading and parsing */
+>, <Line: -	public ImmutableList<String> dataSourceNames = null;
+>, <Line: -	/** directory to use for the downloads and the serialized file */
+>, <Line: -	public String downloadPath = "data";
+>, <Line: -	/** proxy for HTTP */
+>, <Line: -	public URL httpProxy = null;
+>, <Line: -	/** proxy for HTTPS */
+>, <Line: -	public URL httpsProxy = null;
+>, <Line: -	/** proxy for FTP */
+>, <Line: -	public URL ftpProxy = null;
+>, <Line: -	// Configuration for the annotate command
+>, <Line: -	/** path to a VCF file to be annotated */
+>, <Line: -	public ArrayList<String> vcfFilePaths = new ArrayList<String>();
+>, <Line: -	/** path to the file with the serialized data */
+>, <Line: -	public String dataFile = null;
+>, <Line: -	/** whether to report the annotations for all affected transcripts for each alternative allele */
+>, <Line: -	public boolean showAll = false;
+>, <Line: -	/** path to output folder for the annotated VCF files (default is parallel to input file) */
+>, <Line: -	public String outVCFFolder = null;
+>, <Line: -	/** whether or not to write out the VCF annotation standard fields */
+>, <Line: -	public boolean writeVCFAnnotationStandardInfoFields = true;
+>, <Line: -	/** whether to use 3 letter amino acid code instead of 1 letter */
+>, <Line: -	public boolean useThreeLetterAminoAcidCode = false;
+>, <Line: -	/** whether or not to escape characters like <code>'='</code> in the <code>ANN</code> VCF field. */
+>, <Line: -	public boolean escapeAnnField = true;
+>, <Line: -	/** whether or not to shift variants towards the 3' end of the transcript */
+>, <Line: -	public boolean nt3PrimeShifting = true;
+>, <Line: -	/** infix added to output file name before .vcf/.vcf.gz/.bcf output */
+>, <Line: -	public String outputInfix = ".jv";
+>, <Line: -	// TODO(holtgrem): enable and use this!
+>, <Line: -	/** path to output VCF file path (overrides generation of file name from input file name) */
+>, <Line: -	public String outVCFFile = null;
+>, <Line: -	/** Path to dbSNP VCF file to use for the annotation */
+>, <Line: -	public String pathVCFDBSNP = null;
+>, <Line: -	/** Prefix to use for dbSNP VCF INFO Fields */
+>, <Line: -	public String prefixDBSNP = null;
+>, <Line: -	/** Path to the reference FAI-indexed FASTA file (required for dbSNP/ExAC/UK10K-based annotation */
+>, <Line: -	public String pathFASTARef = null;
+>, <Line: -	/** Path to ExAC VCF file to use for the annotation */
+>, <Line: -	public String pathVCFExac;
+>, <Line: -	/** Prefix to use for ExAC VCF INFO Fields */
+>, <Line: -	public String prefixExac;
+>, <Line: -	/** Path to UK10K VCF file to use for the annotation */
+>, <Line: -	public String pathVCFUK10K;
+>, <Line: -	/** Prefix to use for UK10K VCF INFO Fields */
+>, <Line: -	public String prefixUK10K;
+>, <Line: -	/** Path to pedigree file */
+>, <Line: -	public String pathPedFile;
+>, <Line: -	// Configuration for the annotate-position command
+>, <Line: -	/** chromosomal position and a change, e.g. {@code chr1:12345C>A}. */
+>, <Line: -	public ArrayList<String> chromosomalChanges = new ArrayList<String>();
+>, <Line: -	/**
+>, <Line: -	 * The command that is to be executed.
+>, <Line: -	 */
+>, <Line: -	public enum Command {
+>, <Line: -		DOWNLOAD, ANNOTATE_VCF, ANNOTATE_POSITION, DB_LIST
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Print option values to stderr.
+>, <Line: -	 *
+>, <Line: -	 * @param out
+>, <Line: -	 *            Stream to print to.
+>, <Line: -	 */
+>, <Line: -	public void print(PrintStream out) {
+>, <Line: -		out.println("verbosity: " + verbosity);
+>, <Line: -		if (command == Command.DOWNLOAD) {
+>, <Line: -			out.println("dataSourceFiles: " + dataSourceFiles);
+>, <Line: -			out.println("dataSourceNames: " + dataSourceNames);
+>, <Line: -			out.println("downloadPath" + downloadPath);
+>, <Line: -			out.println("HTTP proxy: " + httpProxy);
+>, <Line: -			out.println("HTTPS proxy: " + httpsProxy);
+>, <Line: -			out.println("FTP proxy: " + ftpProxy);
+>, <Line: -		} else if (command == Command.ANNOTATE_VCF || command == Command.ANNOTATE_POSITION) {
+>, <Line: -			out.println("dataFile: " + dataFile);
+>, <Line: -			out.println("vcfFilePaths: " + vcfFilePaths);
+>, <Line: -			out.println("chromosomalChanges: " + chromosomalChanges);
+>, <Line: -			out.println("showAll: " + showAll);
+>, <Line: -			out.println("writeVCFAnnotationStandardInfoFields: " + writeVCFAnnotationStandardInfoFields);
+>, <Line: -			out.println("output infix: " + outputInfix);
+>, <Line: -			out.println("reference FASTA: " + pathFASTARef);
+>, <Line: -			out.println("dbSNP VCF: " + pathVCFDBSNP);
+>, <Line: -			out.println("dbSNP prefix: " + prefixDBSNP);
+>, <Line: -			out.println("ExAC VCF: " + pathVCFExac);
+>, <Line: -			out.println("ExAC prefix: " + prefixExac);
+>, <Line: -			out.println("UK10K VCF: " + pathVCFUK10K);
+>, <Line: -			out.println("UK10K prefix: " + prefixUK10K);
+>, <Line: -			out.println("PED file: " + pathPedFile);
+>, <Line: -			out.println("Use 3-letter amino acid code: " + useThreeLetterAminoAcidCode);
+>, <Line: -		} else if (command == Command.DB_LIST) {
+>, <Line: -			out.println("dataSourceFiles: " + dataSourceFiles);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -}
+>]

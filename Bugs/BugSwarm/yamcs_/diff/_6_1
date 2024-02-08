@@ -1,0 +1,11 @@
+[<Line: +        eventTpdef = ydb.getTable("events").getTupleDefinition();
+>]
+[<Line: -    StreamAdapter rtStreamAdapter, dumpStreamAdapter;
+>, <Line: -        eventTpdef=ydb.getTable("events").getTupleDefinition();
+>, <Line: -        Stream realtimeEventStream=ydb.getStream(REALTIME_EVENT_STREAM_NAME);
+>, <Line: -        rtStreamAdapter = new StreamAdapter(realtimeEventStream, new SimpleString(instance+".events_realtime"), new EventTupleTranslator());
+>, <Line: -        Stream dumpEventStream=ydb.getStream(DUMP_EVENT_STREAM_NAME);
+>, <Line: -        dumpStreamAdapter = new StreamAdapter(dumpEventStream, new SimpleString(instance+".events_dump"), new EventTupleTranslator());
+>, <Line: -        rtStreamAdapter.quit();
+>, <Line: -        dumpStreamAdapter.quit();
+>]

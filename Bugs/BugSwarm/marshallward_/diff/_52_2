@@ -1,0 +1,13 @@
+[<Line: +-g GROUP, --group GROUP       specify namelist group to modify.  When absent,
+>, <Line: +                              the first group is used
+>, <Line: +-v EXPR, --variable EXPR      specify the namelist variable to add or modify,
+>, <Line: +                              followed by the new value.  Expressions are of
+>, <Line: +                              the form "VARIABLE=VALUE"
+>, <Line: +-p, --patch                   modify the existing namelist as a patch
+>, <Line: +-f FORMAT, --format FORMAT    specify the output format (json, yaml, or nml)
+>, <Line: +-o OUTPUT, --output OUTPUT    set the output filename.  When absent, output is send to
+>, <Line: +                              standard output
+>, <Line: +-h, --help                    display this help and exit
+>, <Line: +--version                     output version information and exit
+>]
+[]

@@ -1,0 +1,8 @@
+[]
+[<Line: -		if (ClassUtils.isNotPresent("org.stagemonitor.requestmonitor.RequestMonitorPlugin")) {
+>, <Line: -			// if the RequestMonitorPlugin is available,
+>, <Line: -			// TypeDefinition caching should only be deactivated after the first request
+>, <Line: -			// if not, deactivate as soon as stagemonitor has started
+>, <Line: -			AgentAttacher.onMostClassesLoaded();
+>, <Line: -		}
+>]

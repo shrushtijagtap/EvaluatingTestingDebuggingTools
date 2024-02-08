@@ -1,0 +1,85 @@
+[<Line: +import java.sql.Connection;
+>, <Line: +import java.sql.PreparedStatement;
+>, <Line: +import java.sql.ResultSet;
+>, <Line: +import org.stagemonitor.core.MeasurementSession;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.Metric2Registry;
+>, <Line: +	private Configuration configuration;
+>, <Line: +	private Metric2Registry metric2Registry;
+>, <Line: +	private TestDao testDao;
+>, <Line: +	public static void attachProfiler() throws Exception {
+>, <Line: +		Stagemonitor.startMonitoring(new MeasurementSession("ConnectionMonitoringTransformerTest", "test", "test")).get();
+>, <Line: +		metric2Registry = Stagemonitor.getMetric2Registry();
+>, <Line: +		metric2Registry.removeMatching(MetricFilter.ALL);
+>, <Line: +		dataSource.getConnection().prepareStatement("INSERT INTO STAGEMONITOR (FOO) VALUES (1)").execute();
+>, <Line: +		configuration = Stagemonitor.getConfiguration();
+>, <Line: +		testDao = new TestDao(dataSource);
+>, <Line: +		Stagemonitor.getMetric2Registry().removeMatching(MetricFilter.ALL);
+>, <Line: +				})).getRequestTraceReporterFuture().get();
+>, <Line: +		final Map<MetricName, Timer> timers = metric2Registry.getTimers();
+>, <Line: +				})).getRequestTraceReporterFuture().get();
+>, <Line: +		final Map<MetricName, Timer> timers = metric2Registry.getTimers();
+>, <Line: +						testDao.executePreparedStatement();
+>, <Line: +		requestInformation.getRequestTraceReporterFuture().get();
+>, <Line: +		final Map<MetricName, Timer> timers = metric2Registry.getTimers();
+>, <Line: +		assertNotNull(timers.keySet().toString(), timers.get(name("external_request_response_time").type("jdbc").tag("signature", "All").tag("method", "SELECT").build()));
+>, <Line: +		assertNotNull(timers.keySet().toString(), timers.get(name("external_request_response_time").type("jdbc").tag("signature", "ConnectionMonitoringTransformerTest$TestDao#executePreparedStatement").tag("method", "SELECT").build()));
+>, <Line: +		assertEquals("void org.stagemonitor.jdbc.ConnectionMonitoringTransformerTest$TestDao.executePreparedStatement()",
+>, <Line: +						testDao.executeStatement();
+>, <Line: +		requestInformation.getRequestTraceReporterFuture().get();
+>, <Line: +		final Map<MetricName, Timer> timers = metric2Registry.getTimers();
+>, <Line: +		final String message = timers.keySet().toString();
+>, <Line: +		assertTrue(message, timers.size() > 1);
+>, <Line: +		assertEquals(message, 1, timers.get(name("external_request_response_time").type("jdbc").tag("signature", "ConnectionMonitoringTransformerTest$TestDao#executeStatement").tag("method", "SELECT").build()).getCount());
+>, <Line: +		assertEquals(message, 1, timers.get(name("external_request_response_time").type("jdbc").tag("signature", "All").tag("method", "SELECT").build()).getCount());
+>, <Line: +		assertEquals("void org.stagemonitor.jdbc.ConnectionMonitoringTransformerTest$TestDao.executeStatement()",
+>, <Line: +	public static class TestDao {
+>, <Line: +		private final DataSource dataSource;
+>, <Line: +		public TestDao(DataSource dataSource) {
+>, <Line: +			this.dataSource = dataSource;
+>, <Line: +		}
+>, <Line: +		private void executePreparedStatement() throws SQLException {
+>, <Line: +			final Connection connection = dataSource.getConnection();
+>, <Line: +			final PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from STAGEMONITOR");
+>, <Line: +			preparedStatement.execute();
+>, <Line: +			final ResultSet resultSet = preparedStatement.getResultSet();
+>, <Line: +			resultSet.next();
+>, <Line: +		}
+>, <Line: +		private void executeStatement() throws SQLException {
+>, <Line: +			dataSource.getConnection().createStatement().execute("SELECT * from STAGEMONITOR");
+>, <Line: +		}
+>]
+[<Line: -import com.codahale.metrics.SharedMetricRegistries;
+>, <Line: -	private final Configuration configuration = Stagemonitor.getConfiguration();
+>, <Line: -	public static void attachProfiler() {
+>, <Line: -		Stagemonitor.init();
+>, <Line: -		Stagemonitor.getMetric2Registry().removeMatching(MetricFilter.ALL);
+>, <Line: -		SharedMetricRegistries.clear();
+>, <Line: -				}));
+>, <Line: -		final Map<MetricName, Timer> timers = Stagemonitor.getMetric2Registry().getTimers();
+>, <Line: -				}));
+>, <Line: -		final Map<MetricName, Timer> timers = Stagemonitor.getMetric2Registry().getTimers();
+>, <Line: -						executePreparedStatement();
+>, <Line: -		final Map<MetricName, Timer> timers = Stagemonitor.getMetric2Registry().getTimers();
+>, <Line: -		assertNotNull(timers.keySet().toString(), timers.get(name("jdbc_statement").tag("signature", "All").build()));
+>, <Line: -		assertNotNull(timers.keySet().toString(), timers.get(name("jdbc_statement").tag("signature", "ConnectionMonitoringTransformerTest#executePreparedStatement").build()));
+>, <Line: -		assertEquals("void org.stagemonitor.jdbc.ConnectionMonitoringTransformerTest.executePreparedStatement()",
+>, <Line: -	private void executePreparedStatement() throws SQLException {
+>, <Line: -		dataSource.getConnection().prepareStatement("SELECT * from STAGEMONITOR").execute();
+>, <Line: -	}
+>, <Line: -						executeStatement();
+>, <Line: -		final Map<MetricName, Timer> timers = Stagemonitor.getMetric2Registry().getTimers();
+>, <Line: -		assertTrue(timers.keySet().toString(), timers.size() > 1);
+>, <Line: -		assertNotNull(timers.keySet().toString(), timers.get(name("jdbc_statement").tag("signature", "All").build()));
+>, <Line: -		assertNotNull(timers.keySet().toString(), timers.get(name("jdbc_statement").tag("signature", "ConnectionMonitoringTransformerTest#executeStatement").build()));
+>, <Line: -		assertEquals("void org.stagemonitor.jdbc.ConnectionMonitoringTransformerTest.executeStatement()",
+>, <Line: -	@Test
+>, <Line: -	public void testTrackDBMetricsIndependentOfProfiler() throws Exception {
+>, <Line: -		executeStatement();
+>, <Line: -		final Map<MetricName, Timer> timers = Stagemonitor.getMetric2Registry().getTimers();
+>, <Line: -		assertTrue(timers.keySet().toString(), timers.size() > 1);
+>, <Line: -		assertNotNull(timers.keySet().toString(), timers.get(name("jdbc_statement").tag("signature", "All").build()));
+>, <Line: -		assertNotNull(timers.keySet().toString(), timers.get(name("jdbc_statement").tag("signature", "ConnectionMonitoringTransformerTest#executeStatement").build()));
+>, <Line: -	}
+>, <Line: -	private void executeStatement() throws SQLException {
+>, <Line: -		dataSource.getConnection().createStatement().execute("SELECT * from STAGEMONITOR");
+>]

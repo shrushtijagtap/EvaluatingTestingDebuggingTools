@@ -1,0 +1,132 @@
+[<Line: +package net.bytebuddy.asm;
+>, <Line: +import net.bytebuddy.ByteBuddy;
+>, <Line: +import net.bytebuddy.description.method.MethodDescription;
+>, <Line: +import net.bytebuddy.description.modifier.Ownership;
+>, <Line: +import net.bytebuddy.description.modifier.Visibility;
+>, <Line: +import net.bytebuddy.description.type.TypeDescription;
+>, <Line: +import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
+>, <Line: +import net.bytebuddy.dynamic.scaffold.InstrumentedType;
+>, <Line: +import net.bytebuddy.implementation.Implementation;
+>, <Line: +import net.bytebuddy.implementation.bytecode.ByteCodeAppender;
+>, <Line: +import net.bytebuddy.test.utility.JavaVersionRule;
+>, <Line: +import org.junit.Rule;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.junit.rules.MethodRule;
+>, <Line: +import org.objectweb.asm.MethodVisitor;
+>, <Line: +import org.objectweb.asm.Opcodes;
+>, <Line: +import static net.bytebuddy.matcher.ElementMatchers.named;
+>, <Line: +import static org.hamcrest.CoreMatchers.is;
+>, <Line: +import static org.hamcrest.MatcherAssert.assertThat;
+>, <Line: +public class AdviceInconsistentFrameTest {
+>, <Line: +    private static final String FOO = "foo", BAR  = "bar";
+>, <Line: +    @Rule
+>, <Line: +    public MethodRule javaVersionRule = new JavaVersionRule();
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    @JavaVersionRule.Enforce(7)
+>, <Line: +    public void testFrameTooShort() throws Exception {
+>, <Line: +        Class<?> type = new ByteBuddy()
+>, <Line: +                .subclass(Object.class)
+>, <Line: +                .defineMethod(FOO, String.class, Visibility.PUBLIC)
+>, <Line: +                .intercept(new TooShortMethod())
+>, <Line: +                .make()
+>, <Line: +                .load(ClassLoadingStrategy.BOOTSTRAP_LOADER, ClassLoadingStrategy.Default.WRAPPER_PERSISTENT)
+>, <Line: +                .getLoaded();
+>, <Line: +        assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +        new ByteBuddy()
+>, <Line: +                .redefine(type)
+>, <Line: +                .visit(Advice.to(TrivialAdvice.class).on(named(FOO)))
+>, <Line: +                .make();
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    @JavaVersionRule.Enforce(7)
+>, <Line: +    public void testFrameInconsistentThisParameter() throws Exception {
+>, <Line: +        Class<?> type = new ByteBuddy()
+>, <Line: +                .subclass(Object.class)
+>, <Line: +                .defineMethod(FOO, String.class, Visibility.PUBLIC)
+>, <Line: +                .intercept(new InconsistentThisReferenceMethod())
+>, <Line: +                .make()
+>, <Line: +                .load(ClassLoadingStrategy.BOOTSTRAP_LOADER, ClassLoadingStrategy.Default.WRAPPER_PERSISTENT)
+>, <Line: +                .getLoaded();
+>, <Line: +        assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +        new ByteBuddy()
+>, <Line: +                .redefine(type)
+>, <Line: +                .visit(Advice.to(TrivialAdvice.class).on(named(FOO)))
+>, <Line: +                .make();
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    @JavaVersionRule.Enforce(7)
+>, <Line: +    public void testFrameInconsistentParameter() throws Exception {
+>, <Line: +        Class<?> type = new ByteBuddy()
+>, <Line: +                .subclass(Object.class)
+>, <Line: +                .defineMethod(FOO, String.class, Visibility.PUBLIC, Ownership.STATIC)
+>, <Line: +                .withParameters(Void.class)
+>, <Line: +                .intercept(new InconsistentParameterReferenceMethod())
+>, <Line: +                .make()
+>, <Line: +                .load(ClassLoadingStrategy.BOOTSTRAP_LOADER, ClassLoadingStrategy.Default.WRAPPER_PERSISTENT)
+>, <Line: +                .getLoaded();
+>, <Line: +        assertThat(type.getDeclaredMethod(FOO, Void.class).invoke(null, (Object) null), is((Object) BAR));
+>, <Line: +        new ByteBuddy()
+>, <Line: +                .redefine(type)
+>, <Line: +                .visit(Advice.to(TrivialAdvice.class).on(named(FOO)))
+>, <Line: +                .make();
+>, <Line: +    }
+>, <Line: +    @SuppressWarnings("all")
+>, <Line: +    private static class TrivialAdvice {
+>, <Line: +        @Advice.OnMethodEnter
+>, <Line: +        private static void exit() {
+>, <Line: +            /* empty */
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private static class TooShortMethod implements Implementation, ByteCodeAppender {
+>, <Line: +        @Override
+>, <Line: +        public ByteCodeAppender appender(Target implementationTarget) {
+>, <Line: +            return this;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public InstrumentedType prepare(InstrumentedType instrumentedType) {
+>, <Line: +            return instrumentedType;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public Size apply(MethodVisitor methodVisitor, Context implementationContext, MethodDescription instrumentedMethod) {
+>, <Line: +            methodVisitor.visitFrame(Opcodes.F_FULL, 0, new Object[0], 0, new Object[0]);
+>, <Line: +            methodVisitor.visitLdcInsn(BAR);
+>, <Line: +            methodVisitor.visitInsn(Opcodes.ARETURN);
+>, <Line: +            return new Size(1, 2);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private static class InconsistentThisReferenceMethod implements Implementation, ByteCodeAppender {
+>, <Line: +        @Override
+>, <Line: +        public ByteCodeAppender appender(Target implementationTarget) {
+>, <Line: +            return this;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public InstrumentedType prepare(InstrumentedType instrumentedType) {
+>, <Line: +            return instrumentedType;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public Size apply(MethodVisitor methodVisitor, Context implementationContext, MethodDescription instrumentedMethod) {
+>, <Line: +            methodVisitor.visitFrame(Opcodes.F_FULL, 1, new Object[] {TypeDescription.OBJECT.getInternalName()}, 0, new Object[0]);
+>, <Line: +            methodVisitor.visitLdcInsn(BAR);
+>, <Line: +            methodVisitor.visitInsn(Opcodes.ARETURN);
+>, <Line: +            return new Size(1, 2);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private static class InconsistentParameterReferenceMethod implements Implementation, ByteCodeAppender {
+>, <Line: +        @Override
+>, <Line: +        public ByteCodeAppender appender(Target implementationTarget) {
+>, <Line: +            return this;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public InstrumentedType prepare(InstrumentedType instrumentedType) {
+>, <Line: +            return instrumentedType;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public Size apply(MethodVisitor methodVisitor, Context implementationContext, MethodDescription instrumentedMethod) {
+>, <Line: +            methodVisitor.visitFrame(Opcodes.F_FULL, 1, new Object[] {TypeDescription.OBJECT.getInternalName()}, 0, new Object[0]);
+>, <Line: +            methodVisitor.visitLdcInsn(BAR);
+>, <Line: +            methodVisitor.visitInsn(Opcodes.ARETURN);
+>, <Line: +            return new Size(1, 2);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}>]
+[]

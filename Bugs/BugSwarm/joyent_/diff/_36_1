@@ -1,0 +1,71 @@
+[<Line: +public class MantaMultipartUploadPart extends MantaMultipartUploadTuple
+>, <Line: +        implements Serializable {
+>, <Line: +                                    final String etag, final Long length) {
+>, <Line: +        super(partNumber, etag);
+>, <Line: +        super(Integer.parseInt(MantaUtils.lastItemInPath(object.getPath())),
+>, <Line: +                object.getEtag());
+>, <Line: +        this.objectPath = object.getPath();
+>, <Line: +                .append("partNumber", getPartNumber())
+>, <Line: +                .append("objectPath", getObjectPath())
+>, <Line: +                .append("etag", getEtag())
+>]
+[<Line: -import java.util.Objects;
+>, <Line: -public class MantaMultipartUploadPart
+>, <Line: -        implements Comparable<MantaMultipartUploadPart>, Serializable {
+>, <Line: -    /**
+>, <Line: -     * Non-zero positive integer representing the relative position of the
+>, <Line: -     * part in relation to the other parts for the multipart upload.
+>, <Line: -     */
+>, <Line: -    private final int partNumber;
+>, <Line: -    /**
+>, <Line: -     * Etag value of the part.
+>, <Line: -     */
+>, <Line: -    private final String etag;
+>, <Line: -                final String etag, final Long length) {
+>, <Line: -        if (partNumber < 1) {
+>, <Line: -            String msg = String.format("Part number must be greater than or "
+>, <Line: -                    + "equal to 1. Actual value: %d", partNumber);
+>, <Line: -            throw new IllegalArgumentException(msg);
+>, <Line: -        }
+>, <Line: -        this.partNumber = partNumber;
+>, <Line: -        this.etag = etag;
+>, <Line: -        final String filename = MantaUtils.lastItemInPath(object.getPath());
+>, <Line: -        this.objectPath = object.getPath();
+>, <Line: -        this.partNumber = Integer.parseInt(filename);
+>, <Line: -        if (this.partNumber < 1) {
+>, <Line: -            String msg = String.format("Part number must be greater than or "
+>, <Line: -                    + "equal to 1. Actual value: %d", partNumber);
+>, <Line: -            throw new IllegalArgumentException(msg);
+>, <Line: -        }
+>, <Line: -        this.etag = object.getEtag();
+>, <Line: -    public int getPartNumber() {
+>, <Line: -        return partNumber;
+>, <Line: -    }
+>, <Line: -    public String getEtag() {
+>, <Line: -        return etag;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public int compareTo(final MantaMultipartUploadPart that) {
+>, <Line: -        return Integer.compare(this.getPartNumber(), that.getPartNumber());
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public boolean equals(final Object that) {
+>, <Line: -        if (this == that) {
+>, <Line: -            return true;
+>, <Line: -        }
+>, <Line: -        if (that == null || getClass() != that.getClass()) {
+>, <Line: -            return false;
+>, <Line: -        }
+>, <Line: -        final MantaMultipartUploadPart part = (MantaMultipartUploadPart) that;
+>, <Line: -        return partNumber == part.partNumber
+>, <Line: -                && Objects.equals(objectPath, part.objectPath)
+>, <Line: -                && Objects.equals(etag, part.etag);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public int hashCode() {
+>, <Line: -        return Objects.hash(partNumber, objectPath, etag);
+>, <Line: -    }
+>, <Line: -                .append("partNumber", partNumber)
+>, <Line: -                .append("objectPath", objectPath)
+>, <Line: -                .append("etag", etag)
+>]

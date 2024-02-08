@@ -1,0 +1,223 @@
+[<Line: +import net.bytebuddy.asm.Advice;
+>, <Line: +import net.bytebuddy.implementation.bytecode.*;
+>, <Line: +import net.bytebuddy.utility.CompoundList;
+>, <Line: +        /**
+>, <Line: +         * A transformer for applying an {@link Advice} where this advice class might reference types of both the agent's and the user's
+>, <Line: +         * class loader. Using this transformer, it is possible to apply advice without including any library dependencies of this advice
+>, <Line: +         * class which are then rather looked up from the transformed class's class loader. For this to work, it is required to register
+>, <Line: +         * the advice class's class loader manually via the {@code include} methods and to reference the advice class by its fully-qualified
+>, <Line: +         * name. The advice class is then never loaded by rather described by a {@link TypePool}.
+>, <Line: +         */
+>, <Line: +        @EqualsAndHashCode
+>, <Line: +        class ForAdvice implements Transformer {
+>, <Line: +            /**
+>, <Line: +             * The advice to use.
+>, <Line: +             */
+>, <Line: +            private final Advice.WithCustomMapping advice;
+>, <Line: +            /**
+>, <Line: +             * The exception handler to register for the advice.
+>, <Line: +             */
+>, <Line: +            private final StackManipulation exceptionHandler;
+>, <Line: +            /**
+>, <Line: +             * The assigner to use for the advice.
+>, <Line: +             */
+>, <Line: +            private final Assigner assigner;
+>, <Line: +            /**
+>, <Line: +             * The class file locator to query for the advice class.
+>, <Line: +             */
+>, <Line: +            private final ClassFileLocator classFileLocator;
+>, <Line: +            /**
+>, <Line: +             * The pool strategy to use for looking up an advice.
+>, <Line: +             */
+>, <Line: +            private final PoolStrategy poolStrategy;
+>, <Line: +            /**
+>, <Line: +             * The advice entries to apply.
+>, <Line: +             */
+>, <Line: +            private final List<Entry> entries;
+>, <Line: +            /**
+>, <Line: +             * Creates a new advice transformer with a default setup.
+>, <Line: +             */
+>, <Line: +            public ForAdvice() {
+>, <Line: +                this(Advice.withCustomMapping());
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Creates a new advice transformer which applies the given advice.
+>, <Line: +             *
+>, <Line: +             * @param advice The configured advice to use.
+>, <Line: +             */
+>, <Line: +            public ForAdvice(Advice.WithCustomMapping advice) {
+>, <Line: +                this(advice,
+>, <Line: +                        Removal.of(TypeDescription.THROWABLE),
+>, <Line: +                        Assigner.DEFAULT,
+>, <Line: +                        ClassFileLocator.NoOp.INSTANCE,
+>, <Line: +                        PoolStrategy.Default.FAST,
+>, <Line: +                        Collections.<Entry>emptyList());
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Creates a new advice transformer.
+>, <Line: +             *
+>, <Line: +             * @param advice           The configured advice to use.
+>, <Line: +             * @param exceptionHandler The exception handler to use.
+>, <Line: +             * @param assigner         The assigner to use.
+>, <Line: +             * @param classFileLocator The class file locator to use.
+>, <Line: +             * @param poolStrategy     The pool strategy to use for looking up an advice.
+>, <Line: +             * @param entries          The advice entries to apply.
+>, <Line: +             */
+>, <Line: +            protected ForAdvice(Advice.WithCustomMapping advice,
+>, <Line: +                                StackManipulation exceptionHandler,
+>, <Line: +                                Assigner assigner,
+>, <Line: +                                ClassFileLocator classFileLocator,
+>, <Line: +                                PoolStrategy poolStrategy,
+>, <Line: +                                List<Entry> entries) {
+>, <Line: +                this.advice = advice;
+>, <Line: +                this.exceptionHandler = exceptionHandler;
+>, <Line: +                this.assigner = assigner;
+>, <Line: +                this.classFileLocator = classFileLocator;
+>, <Line: +                this.poolStrategy = poolStrategy;
+>, <Line: +                this.entries = entries;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader) {
+>, <Line: +                ClassFileLocator classFileLocator = new ClassFileLocator.Compound(ClassFileLocator.ForClassLoader.of(classLoader), this.classFileLocator);
+>, <Line: +                TypePool typePool = poolStrategy.typePool(classFileLocator, classLoader);
+>, <Line: +                AsmVisitorWrapper.ForDeclaredMethods asmVisitorWrapper = new AsmVisitorWrapper.ForDeclaredMethods();
+>, <Line: +                for (Entry entry : entries) {
+>, <Line: +                    asmVisitorWrapper = asmVisitorWrapper.method(entry.getMatcher().resolve(typeDescription), advice
+>, <Line: +                            .to(typePool.describe(entry.getAdvice()).resolve(), classFileLocator)
+>, <Line: +                            .withAssigner(assigner)
+>, <Line: +                            .withExceptionHandler(exceptionHandler));
+>, <Line: +                }
+>, <Line: +                return builder.visit(asmVisitorWrapper);
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Registers a pool strategy for creating a {@link TypePool} that should be used for creating the advice class.
+>, <Line: +             *
+>, <Line: +             * @param poolStrategy The pool strategy to use.
+>, <Line: +             * @return A new instance of this advice transformer that applies the supplied pool strategy.
+>, <Line: +             */
+>, <Line: +            public ForAdvice with(PoolStrategy poolStrategy) {
+>, <Line: +                return new ForAdvice(advice, exceptionHandler, assigner, classFileLocator, poolStrategy, entries);
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Registers an exception handler for suppressed exceptions to use by the registered advice.
+>, <Line: +             *
+>, <Line: +             * @param exceptionHandler The exception handler to use.
+>, <Line: +             * @return A new instance of this advice transformer that applies the supplied exception handler.
+>, <Line: +             * @see Advice#withExceptionHandler(StackManipulation)
+>, <Line: +             */
+>, <Line: +            public ForAdvice withExceptionHandler(StackManipulation exceptionHandler) {
+>, <Line: +                return new ForAdvice(advice, exceptionHandler, assigner, classFileLocator, poolStrategy, entries);
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Registers an assigner to be used by the advice class.
+>, <Line: +             *
+>, <Line: +             * @param assigner The assigner to use.
+>, <Line: +             * @return A new instance of this advice transformer that applies the supplied assigner.
+>, <Line: +             * @see Advice#withAssigner(Assigner)
+>, <Line: +             */
+>, <Line: +            public ForAdvice with(Assigner assigner) {
+>, <Line: +                return new ForAdvice(advice, exceptionHandler, assigner, classFileLocator, poolStrategy, entries);
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Includes the supplied class loaders as a source for looking up an advice class or its dependencies.
+>, <Line: +             *
+>, <Line: +             * @param classLoader The class loaders to include when looking up classes in their order. Duplicates are filtered.
+>, <Line: +             * @return A new instance of this advice transformer that considers the supplied class loaders as a lookup source.
+>, <Line: +             */
+>, <Line: +            public ForAdvice include(ClassLoader... classLoader) {
+>, <Line: +                Set<ClassFileLocator> classFileLocators = new LinkedHashSet<ClassFileLocator>();
+>, <Line: +                for (ClassLoader aClassLoader : classLoader) {
+>, <Line: +                    classFileLocators.add(ClassFileLocator.ForClassLoader.of(aClassLoader));
+>, <Line: +                }
+>, <Line: +                return include(new ArrayList<ClassFileLocator>(classFileLocators));
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Includes the supplied class file locators as a source for looking up an advice class or its dependencies.
+>, <Line: +             *
+>, <Line: +             * @param classFileLocator The class file locators to include when looking up classes in their order. Duplicates are filtered.
+>, <Line: +             * @return A new instance of this advice transformer that considers the supplied class file locators as a lookup source.
+>, <Line: +             */
+>, <Line: +            public ForAdvice include(ClassFileLocator... classFileLocator) {
+>, <Line: +                return include(Arrays.asList(classFileLocator));
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Includes the supplied class file locators as a source for looking up an advice class or its dependencies.
+>, <Line: +             *
+>, <Line: +             * @param classFileLocators The class file locators to include when looking up classes in their order. Duplicates are filtered.
+>, <Line: +             * @return A new instance of this advice transformer that considers the supplied class file locators as a lookup source.
+>, <Line: +             */
+>, <Line: +            public ForAdvice include(List<? extends ClassFileLocator> classFileLocators) {
+>, <Line: +                return new ForAdvice(advice,
+>, <Line: +                        exceptionHandler,
+>, <Line: +                        assigner,
+>, <Line: +                        new ClassFileLocator.Compound(CompoundList.of(classFileLocator, classFileLocators)),
+>, <Line: +                        poolStrategy,
+>, <Line: +                        entries);
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Applies the given advice class onto all methods that satisfy the supplied matcher.
+>, <Line: +             *
+>, <Line: +             * @param matcher The matcher to determine what methods the advice should be applied to.
+>, <Line: +             * @param name    The fully-qualified, binary name of the advice class.
+>, <Line: +             * @return A new instance of this advice transformer that applies the given advice to all matched methods of an instrumented type.
+>, <Line: +             */
+>, <Line: +            public ForAdvice advice(ElementMatcher<? super MethodDescription> matcher, String name) {
+>, <Line: +                return advice(new LatentMatcher.Resolved<MethodDescription>(matcher), name);
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Applies the given advice class onto all methods that satisfy the supplied matcher.
+>, <Line: +             *
+>, <Line: +             * @param matcher The matcher to determine what methods the advice should be applied to.
+>, <Line: +             * @param name    The fully-qualified, binary name of the advice class.
+>, <Line: +             * @return A new instance of this advice transformer that applies the given advice to all matched methods of an instrumented type.
+>, <Line: +             */
+>, <Line: +            public ForAdvice advice(LatentMatcher<? super MethodDescription> matcher, String name) {
+>, <Line: +                return new ForAdvice(advice, exceptionHandler, assigner, classFileLocator, poolStrategy, CompoundList.of(entries, new Entry(matcher, name)));
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * An entry for an advice to apply.
+>, <Line: +             */
+>, <Line: +            @EqualsAndHashCode
+>, <Line: +            protected static class Entry {
+>, <Line: +                /**
+>, <Line: +                 * The matcher for advised methods.
+>, <Line: +                 */
+>, <Line: +                private final LatentMatcher<? super MethodDescription> matcher;
+>, <Line: +                /**
+>, <Line: +                 * The name of the advice class.
+>, <Line: +                 */
+>, <Line: +                private final String advice;
+>, <Line: +                /**
+>, <Line: +                 * Creates a new entry.
+>, <Line: +                 *
+>, <Line: +                 * @param matcher The matcher for advised methods.
+>, <Line: +                 * @param advice  The name of the advice class.
+>, <Line: +                 */
+>, <Line: +                protected Entry(LatentMatcher<? super MethodDescription> matcher, String advice) {
+>, <Line: +                    this.matcher = matcher;
+>, <Line: +                    this.advice = advice;
+>, <Line: +                }
+>, <Line: +                /**
+>, <Line: +                 * Returns the matcher for advised methods.
+>, <Line: +                 *
+>, <Line: +                 * @return The matcher for advised methods.
+>, <Line: +                 */
+>, <Line: +                protected LatentMatcher<? super MethodDescription> getMatcher() {
+>, <Line: +                    return matcher;
+>, <Line: +                }
+>, <Line: +                /**
+>, <Line: +                 * Returns the name of the advice class.
+>, <Line: +                 *
+>, <Line: +                 * @return The name of the advice class.
+>, <Line: +                 */
+>, <Line: +                protected String getAdvice() {
+>, <Line: +                    return advice;
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>]
+[<Line: -import net.bytebuddy.implementation.bytecode.ByteCodeAppender;
+>, <Line: -import net.bytebuddy.implementation.bytecode.Duplication;
+>, <Line: -import net.bytebuddy.implementation.bytecode.StackManipulation;
+>, <Line: -import net.bytebuddy.implementation.bytecode.TypeCreation;
+>]

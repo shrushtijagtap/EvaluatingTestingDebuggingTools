@@ -1,0 +1,15 @@
+[<Line: +import com.google.common.base.Optional;
+>, <Line: +  public Optional<E> connectionData(Point from, Point to) {
+>, <Line: +  public void addConnection(Point from, Point to, E edgeData) {
+>, <Line: +  public Optional<E> setConnectionData(Point from, Point to, E edgeData) {
+>, <Line: +  @Override
+>, <Line: +  public Optional<E> removeConnectionData(Point from, Point to) {
+>, <Line: +    return delegate.removeConnectionData(from, to);
+>, <Line: +  }
+>]
+[<Line: -  @Nullable
+>, <Line: -  public E connectionData(Point from, Point to) {
+>, <Line: -  public void addConnection(Point from, Point to, @Nullable E edgeData) {
+>, <Line: -  @Nullable
+>, <Line: -  public E setConnectionData(Point from, Point to, @Nullable E edgeData) {
+>]

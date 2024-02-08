@@ -1,0 +1,38 @@
+[<Line: +import static org.stagemonitor.core.metrics.metrics2.MetricName.name;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +import org.stagemonitor.core.metrics.MetricNameFilter;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.Metric2Filter;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.Metric2RegistryModule;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.MetricName;
+>, <Line: +	private final transient Metric2Registry registry;
+>, <Line: +	private final transient WebPlugin webPlugin;
+>, <Line: +	private final transient ObjectMapper mapper;
+>, <Line: +				getWriter(req).writeValue(output, new JSONPObject(req.getParameter(jsonpParamName), registry));
+>, <Line: +				getWriter(req).writeValue(output, registry);
+>, <Line: +		ObjectMapper objectMapperCopy = mapper.copy();
+>, <Line: +		registerMetricsRegistryModule(request, objectMapperCopy);
+>, <Line: +			return objectMapperCopy.writerWithDefaultPrettyPrinter();
+>, <Line: +		}
+>, <Line: +		return objectMapperCopy.writer();
+>, <Line: +	}
+>, <Line: +	private void registerMetricsRegistryModule(HttpServletRequest request, ObjectMapper objectMapperCopy) {
+>, <Line: +		Metric2Filter metricFilter = Metric2Filter.ALL;
+>, <Line: +		final String[] metricNames = request.getParameterValues("metricNames[]");
+>, <Line: +		if (metricNames != null && metricNames.length > 0) {
+>, <Line: +			List<MetricName> metricNameList = new ArrayList<MetricName>(metricNames.length);
+>, <Line: +			for (String metricName : metricNames) {
+>, <Line: +				metricNameList.add(name(metricName).build());
+>, <Line: +			}
+>, <Line: +			metricFilter = new MetricNameFilter(metricNameList);
+>, <Line: +		objectMapperCopy.registerModule(new Metric2RegistryModule(TimeUnit.SECONDS, TimeUnit.MILLISECONDS, metricFilter));
+>]
+[<Line: -	private final Metric2Registry registry;
+>, <Line: -	private final WebPlugin webPlugin;
+>, <Line: -	private final ObjectMapper mapper;
+>, <Line: -				getWriter(req).writeValue(output, new JSONPObject(req.getParameter(jsonpParamName), registry.getMetricRegistry()));
+>, <Line: -				getWriter(req).writeValue(output, registry.getMetricRegistry());
+>, <Line: -			return mapper.writerWithDefaultPrettyPrinter();
+>, <Line: -		return mapper.writer();
+>]

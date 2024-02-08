@@ -1,0 +1,4 @@
+[<Line: +      String text = query.substring(equ + 1, amp);
+>]
+[<Line: -      String text = query.substring(equ+1, amp);
+>]

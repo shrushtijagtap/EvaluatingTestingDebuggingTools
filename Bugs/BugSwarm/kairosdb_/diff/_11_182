@@ -1,0 +1,48 @@
+[<Line: +	function (angular) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('ngModelOnblur', function () {
+>, <Line: +				return {
+>, <Line: +					restrict: 'A',
+>, <Line: +					priority: 1,
+>, <Line: +					require: 'ngModel',
+>, <Line: +					link: function (scope, elm, attr, ngModelCtrl) {
+>, <Line: +						if (attr.type === 'radio' || attr.type === 'checkbox') {
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						elm.off('input keydown change');
+>, <Line: +						elm.bind('blur', function () {
+>, <Line: +							scope.$apply(function () {
+>, <Line: +								ngModelCtrl.$setViewValue(elm.val());
+>, <Line: +							});
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -function (angular) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('ngModelOnblur', function() {
+>, <Line: -      return {
+>, <Line: -        restrict: 'A',
+>, <Line: -        priority: 1,
+>, <Line: -        require: 'ngModel',
+>, <Line: -        link: function(scope, elm, attr, ngModelCtrl) {
+>, <Line: -          if (attr.type === 'radio' || attr.type === 'checkbox') {
+>, <Line: -            return;
+>, <Line: -          }
+>, <Line: -          elm.off('input keydown change');
+>, <Line: -          elm.bind('blur', function() {
+>, <Line: -            scope.$apply(function() {
+>, <Line: -              ngModelCtrl.$setViewValue(elm.val());
+>, <Line: -            });
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

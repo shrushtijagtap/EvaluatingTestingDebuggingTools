@@ -1,0 +1,14 @@
+[<Line: +    method readAll() -> byte[],
+>, <Line: +    method read(uint) -> byte[],
+>, <Line: +        write: &(byte[] data -> write(this,data)),
+>, <Line: +private native method read(NativeFile f, int max) -> byte[]
+>, <Line: +private native method read(NativeFile f) -> byte[]
+>, <Line: +private native method write(NativeFile f, byte[] data)
+>]
+[<Line: -    method readAll() -> [byte],
+>, <Line: -    method read(uint) -> [byte],
+>, <Line: -        write: &([byte] data -> write(this,data)),
+>, <Line: -private native method read(NativeFile f, int max) -> [byte]
+>, <Line: -private native method read(NativeFile f) -> [byte]
+>, <Line: -private native method write(NativeFile f, [byte] data)
+>]

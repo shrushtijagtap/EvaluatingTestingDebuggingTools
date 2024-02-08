@@ -1,0 +1,27 @@
+[<Line: +package org.mp4parser.muxer.tracks.h264;
+>, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.model.PictureParameterSet;
+>, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.model.SeqParameterSet;
+>, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.read.CAVLCReader;
+>, <Line: +    public PictureParameterSet pps;
+>, <Line: +    public SeqParameterSet sps;
+>, <Line: +            if (pps == null) {
+>, <Line: +                String ids = "";
+>, <Line: +                for (Integer integer : spss.keySet()) {
+>, <Line: +                    ids += integer + ", ";
+>, <Line: +                }
+>, <Line: +                throw new RuntimeException("PPS with ids " + ids + " available but not " + pic_parameter_set_id);
+>, <Line: +            }
+>, <Line: +    public enum SliceType {
+>, <Line: +        P, B, I, SP, SI
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks.h264;
+>, <Line: -import com.googlecode.mp4parser.h264.model.PictureParameterSet;
+>, <Line: -import com.googlecode.mp4parser.h264.model.SeqParameterSet;
+>, <Line: -import com.googlecode.mp4parser.h264.read.CAVLCReader;
+>, <Line: -    public enum SliceType {
+>, <Line: -        P, B, I, SP, SI
+>, <Line: -    }
+>, <Line: -    PictureParameterSet pps;
+>, <Line: -    SeqParameterSet sps;
+>]

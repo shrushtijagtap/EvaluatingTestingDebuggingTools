@@ -1,0 +1,13 @@
+[<Line: +import com.github.rinde.rinsim.geom.MultimapGraph;
+>, <Line: +  /**
+>, <Line: +   * @return The configs to test.
+>, <Line: +   */
+>, <Line: +    final Graph<?> g = new MultimapGraph<>();
+>]
+[<Line: -import com.github.rinde.rinsim.core.model.road.ForwardingRoadModel;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.GenericRoadModel;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.GraphRoadModel;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.PlaneRoadModel;
+>, <Line: -import com.github.rinde.rinsim.geom.TestMultimapGraph;
+>, <Line: -    final Graph<?> g = new TestMultimapGraph();
+>]

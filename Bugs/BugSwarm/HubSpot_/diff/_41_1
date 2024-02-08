@@ -1,0 +1,22 @@
+[<Line: +      if (maybeStateVersion.isPresent()) {
+>, <Line: +          throw new LockTimeoutException("Could not acquire lock to reapply configs", agentLock);
+>, <Line: +        }
+>, <Line: +        try {
+>, <Line: +          if (getBootstrapStateNodeVersion() < maybeStateVersion.get()) {
+>, <Line: +            applyCurrentConfigs();
+>, <Line: +          }
+>, <Line: +        } catch (Exception e) {
+>, <Line: +          abort("Could not ensure configs are up to date, aborting", e);
+>, <Line: +        } finally {
+>, <Line: +          agentLock.unlock();
+>, <Line: +      abort("Interrupted while trying to reapply configs, shutting down", e);
+>]
+[<Line: -      if (maybeStateVersion.isPresent() && getBootstrapStateNodeVersion() < maybeStateVersion.get()) {
+>, <Line: -          throw new LockTimeoutException("Could not acquire lock to reapply configs");
+>, <Line: -        applyCurrentConfigs();
+>, <Line: -      abort("Could not ensure configs are up to date, aborting", e);
+>, <Line: -    } finally {
+>, <Line: -      if (agentLock.isHeldByCurrentThread()) {
+>, <Line: -        agentLock.unlock();
+>, <Line: -      }
+>]

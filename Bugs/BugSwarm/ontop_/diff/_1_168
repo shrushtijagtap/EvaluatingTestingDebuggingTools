@@ -1,0 +1,4 @@
+[<Line: +connectionUrl	jdbc:h2:mem:questjunitdb2;DATABASE_TO_UPPER=FALSE
+>]
+[<Line: -connectionUrl	jdbc:h2:mem:questjunitdb;DATABASE_TO_UPPER=FALSE
+>]

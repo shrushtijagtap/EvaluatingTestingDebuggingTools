@@ -1,0 +1,7 @@
+[<Line: +function abs(int x) -> (nat r)
+>, <Line: +ensures r == x || r == -x
+>, <Line: +ensures r >= 0:
+>, <Line: +    //
+>]
+[<Line: -function abs(int x) -> nat:
+>]

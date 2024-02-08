@@ -1,0 +1,4 @@
+[<Line: +                    return new Resolved.Simple(javaConstant.asStackManipulation(), javaConstant.getType());
+>]
+[<Line: -                    return new Resolved.Simple(javaConstant.asStackManipulation(), javaConstant.getInstanceType());
+>]

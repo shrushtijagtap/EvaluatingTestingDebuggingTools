@@ -1,0 +1,16 @@
+[<Line: +import java.util.stream.Stream;
+>, <Line: +import uk.ac.manchester.cs.owlapi.modularity.ModuleType;
+>, <Line: +        Atom getAtomForAxiom(OWLAxiom axiom);
+>, <Line: +    /**
+>, <Line: +     * @param signature
+>, <Line: +     *        signature for the module to extract
+>, <Line: +     * @param useSemantics
+>, <Line: +     *        true if semantic extraction should be used
+>, <Line: +     * @param moduletype
+>, <Line: +     *        type of module
+>, <Line: +     * @return module stream
+>, <Line: +     */
+>, <Line: +    Stream<OWLAxiom> getModule(Stream<OWLEntity> signature, boolean useSemantics, ModuleType moduletype);
+>]
+[<Line: -    Atom getAtomForAxiom(OWLAxiom axiom);
+>]

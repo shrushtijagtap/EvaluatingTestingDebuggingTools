@@ -1,0 +1,80 @@
+[]
+[<Line: -package net.bytebuddy.build.maven;
+>, <Line: -import org.apache.maven.plugin.logging.Log;
+>, <Line: -import java.util.logging.Handler;
+>, <Line: -import java.util.logging.LogRecord;
+>, <Line: -import java.util.logging.Logger;
+>, <Line: -import java.util.logging.SimpleFormatter;
+>, <Line: -/**
+>, <Line: - * A log handler for only printing Byte Buddy specific log-messages if debug logging is enabled for a plugin.
+>, <Line: - */
+>, <Line: -public class ByteBuddyLogHandler extends Handler {
+>, <Line: -    /**
+>, <Line: -     * The Maven logging target.
+>, <Line: -     */
+>, <Line: -    private final Log log;
+>, <Line: -    /**
+>, <Line: -     * The Byte Buddy logger target.
+>, <Line: -     */
+>, <Line: -    private final Logger logger;
+>, <Line: -    /**
+>, <Line: -     * {@code true} if parent handler delegation was originally enabled.
+>, <Line: -     */
+>, <Line: -    private final boolean useParentHandlers;
+>, <Line: -    /**
+>, <Line: -     * Creates a new log handler.
+>, <Line: -     *
+>, <Line: -     * @param log               The Maven logging target.
+>, <Line: -     * @param logger            The Byte Buddy logger target.
+>, <Line: -     * @param useParentHandlers {@code true} if parent handler delegation was originally enabled.
+>, <Line: -     */
+>, <Line: -    protected ByteBuddyLogHandler(Log log, Logger logger, boolean useParentHandlers) {
+>, <Line: -        this.log = log;
+>, <Line: -        this.logger = logger;
+>, <Line: -        this.useParentHandlers = useParentHandlers;
+>, <Line: -        setFormatter(new SimpleFormatter());
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Initializes the Byte Buddy log handler.
+>, <Line: -     *
+>, <Line: -     * @param log The Maven logging target.
+>, <Line: -     * @return The registered log handler.
+>, <Line: -     */
+>, <Line: -    public static ByteBuddyLogHandler initialize(Log log) {
+>, <Line: -        Logger logger = Logger.getLogger("net.bytebuddy");
+>, <Line: -        ByteBuddyLogHandler handler = new ByteBuddyLogHandler(log, logger, logger.getUseParentHandlers());
+>, <Line: -        try {
+>, <Line: -            logger.setUseParentHandlers(false);
+>, <Line: -            logger.addHandler(handler);
+>, <Line: -        } catch (SecurityException exception) {
+>, <Line: -            log.warn("Cannot configure Byte Buddy logging", exception);
+>, <Line: -        }
+>, <Line: -        return handler;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Resets the configuration to its original state.
+>, <Line: -     */
+>, <Line: -    public void reset() {
+>, <Line: -        try {
+>, <Line: -            logger.setUseParentHandlers(useParentHandlers);
+>, <Line: -            logger.removeHandler(this);
+>, <Line: -        } catch (SecurityException exception) {
+>, <Line: -            log.warn("Cannot configure Byte Buddy logging", exception);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void publish(LogRecord record) {
+>, <Line: -        if (log.isDebugEnabled()) {
+>, <Line: -            log.debug(getFormatter().format(record));
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void flush() {
+>, <Line: -        /* do nothing */
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void close() {
+>, <Line: -        /* do nothing */
+>, <Line: -    }
+>, <Line: -}
+>]

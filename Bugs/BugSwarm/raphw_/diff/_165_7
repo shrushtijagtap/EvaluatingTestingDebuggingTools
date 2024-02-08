@@ -1,0 +1,58 @@
+[<Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) (FOO + BAR)));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) (FOO + BAR)));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) (FOO + BAR + BAR)));
+>, <Line: +            assertThat(type.getDeclaredConstructor().newInstance(), notNullValue(Object.class));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) (FOO + BAR + QUX)));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) (FOO + BAR + QUX)));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) (FOO + QUX)));
+>, <Line: +            Callable<String> instance = (Callable<String>) sampleFactory.getDeclaredMethod("nonCapturing").invoke(sampleFactory.getDeclaredConstructor().newInstance());
+>, <Line: +            assertThat(sampleFactory.getDeclaredMethod("nonCapturing").invoke(sampleFactory.getDeclaredConstructor().newInstance()),
+>, <Line: +                    sameInstance(sampleFactory.getDeclaredMethod("nonCapturing").invoke(sampleFactory.getDeclaredConstructor().newInstance())));
+>, <Line: +        Callable<String> instance = (Callable<String>) sampleFactory.getDeclaredMethod("nonCapturing").invoke(sampleFactory.getDeclaredConstructor().newInstance());
+>, <Line: +            Callable<String> instance = (Callable<String>) sampleFactory.getDeclaredMethod("argumentCapturing", String.class).invoke(sampleFactory.getDeclaredConstructor().newInstance(), FOO);
+>, <Line: +            assertThat(sampleFactory.getDeclaredMethod("argumentCapturing", String.class).invoke(sampleFactory.getDeclaredConstructor().newInstance(), FOO),
+>, <Line: +                    not(sameInstance(sampleFactory.getDeclaredMethod("argumentCapturing", String.class).invoke(sampleFactory.getDeclaredConstructor().newInstance(), FOO))));
+>, <Line: +            Callable<String> instance = (Callable<String>) sampleFactory.getDeclaredMethod("instanceCapturing").invoke(sampleFactory.getDeclaredConstructor().newInstance());
+>, <Line: +            Object instance = sampleFactory.getDeclaredMethod("nonCapturingWithArguments").invoke(sampleFactory.getDeclaredConstructor().newInstance());
+>, <Line: +            Object instance = sampleFactory.getDeclaredMethod("capturingWithArguments", String.class).invoke(sampleFactory.getDeclaredConstructor().newInstance(), FOO);
+>, <Line: +            Callable<String> instance = (Callable<String>) sampleFactory.getDeclaredMethod("serializable", String.class).invoke(sampleFactory.getDeclaredConstructor().newInstance(), FOO);
+>]
+[<Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) (FOO + BAR)));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) (FOO + BAR)));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) (FOO + BAR + BAR)));
+>, <Line: -            assertThat(type.newInstance(), notNullValue(Object.class));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) (FOO + BAR + QUX)));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) (FOO + BAR + QUX)));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) (FOO + QUX)));
+>, <Line: -            Callable<String> instance = (Callable<String>) sampleFactory.getDeclaredMethod("nonCapturing").invoke(sampleFactory.newInstance());
+>, <Line: -            assertThat(sampleFactory.getDeclaredMethod("nonCapturing").invoke(sampleFactory.newInstance()),
+>, <Line: -                    sameInstance(sampleFactory.getDeclaredMethod("nonCapturing").invoke(sampleFactory.newInstance())));
+>, <Line: -        Callable<String> instance = (Callable<String>) sampleFactory.getDeclaredMethod("nonCapturing").invoke(sampleFactory.newInstance());
+>, <Line: -            Callable<String> instance = (Callable<String>) sampleFactory.getDeclaredMethod("argumentCapturing", String.class).invoke(sampleFactory.newInstance(), FOO);
+>, <Line: -            assertThat(sampleFactory.getDeclaredMethod("argumentCapturing", String.class).invoke(sampleFactory.newInstance(), FOO),
+>, <Line: -                    not(sameInstance(sampleFactory.getDeclaredMethod("argumentCapturing", String.class).invoke(sampleFactory.newInstance(), FOO))));
+>, <Line: -            Callable<String> instance = (Callable<String>) sampleFactory.getDeclaredMethod("instanceCapturing").invoke(sampleFactory.newInstance());
+>, <Line: -            Object instance = sampleFactory.getDeclaredMethod("nonCapturingWithArguments").invoke(sampleFactory.newInstance());
+>, <Line: -            Object instance = sampleFactory.getDeclaredMethod("capturingWithArguments", String.class).invoke(sampleFactory.newInstance(), FOO);
+>, <Line: -            Callable<String> instance = (Callable<String>) sampleFactory.getDeclaredMethod("serializable", String.class).invoke(sampleFactory.newInstance(), FOO);
+>]

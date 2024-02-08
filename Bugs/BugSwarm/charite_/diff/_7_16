@@ -1,0 +1,116 @@
+[<Line: +package de.charite.compbio.jannovar.mendel;
+>, <Line: +import java.util.Iterator;
+>, <Line: +import java.util.Map.Entry;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import com.google.common.collect.ImmutableSortedMap;
+>, <Line: +import de.charite.compbio.jannovar.Immutable;
+>, <Line: +/**
+>, <Line: + * A list of genotypes (at an implicitely assumed site) in multiple individuals
+>, <Line: + * 
+>, <Line: + * This list contains the core information for the filtration of variants by mendelian inheritance.
+>, <Line: + * 
+>, <Line: + * This list is not called <code>GenotypeList</code> as "list" indicates more of a "vertical" arrangement (multiple
+>, <Line: + * sites) of genotypes instead of a "horizontal" one (one site, multiple samples).
+>, <Line: + * 
+>, <Line: + * Note: of course, the class is only immutable as long as <code>payload</code> is immutable!
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +@Immutable
+>, <Line: +public final class GenotypeCalls implements Iterable<Entry<String, Genotype>> {
+>, <Line: +	/** Type of the chromosome that the variant lies on */
+>, <Line: +	private final ChromosomeType chromType;
+>, <Line: +	/** Mapping from sample name to {@link Genotype} */
+>, <Line: +	private final ImmutableSortedMap<String, Genotype> sampleToGenotype;
+>, <Line: +	/** List of sample names */
+>, <Line: +	private final ImmutableList<String> sampleNames;
+>, <Line: +	/** A payload object for later easier reidentification */
+>, <Line: +	private final Object payload;
+>, <Line: +	/**
+>, <Line: +	 * Initialize {@link GenotypeCalls} with mapping from sample to genotype
+>, <Line: +	 * 
+>, <Line: +	 * @param chromType
+>, <Line: +	 *            type of the chromosome of this genotype call site
+>, <Line: +	 * @param sampleToGenotype
+>, <Line: +	 *            {@link Iterable} with mapping from sample name to {@link Genotype}
+>, <Line: +	 */
+>, <Line: +	public GenotypeCalls(ChromosomeType chromType, Iterable<? extends Entry<String, Genotype>> sampleToGenotype) {
+>, <Line: +		this(chromType, sampleToGenotype, null);
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Initialize {@link GenotypeCalls} with mapping from sample to genotype and an additional "payload" object
+>, <Line: +	 * 
+>, <Line: +	 * @param chromType
+>, <Line: +	 *            type of the chromosome of this genotype call site
+>, <Line: +	 * @param sampleToGenotype
+>, <Line: +	 *            {@link Iterable} with mapping from sample name to {@link Genotype}
+>, <Line: +	 * @param payload
+>, <Line: +	 *            An arbitrary payload object. This could be something to later match the constructed
+>, <Line: +	 *            <code>GenotypeCalls</code> back to an object in your application (e.g., the HTSJDK
+>, <Line: +	 *            <code>VariantContext</code> that was used for constructing the {@link GenotypeCalls}).
+>, <Line: +	 */
+>, <Line: +	public GenotypeCalls(ChromosomeType chromType, Iterable<? extends Entry<String, Genotype>> sampleToGenotype,
+>, <Line: +			Object payload) {
+>, <Line: +		this.chromType = chromType;
+>, <Line: +		this.sampleToGenotype = ImmutableSortedMap.copyOf(sampleToGenotype);
+>, <Line: +		this.sampleNames = ImmutableList.copyOf(this.sampleToGenotype.keySet());
+>, <Line: +		this.payload = payload;
+>, <Line: +	}
+>, <Line: +	/** @return number of samples in genotype list */
+>, <Line: +	public int getNSamples() {
+>, <Line: +		return sampleNames.size();
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * @param sample
+>, <Line: +	 *            name of the sample to return {@link Genotype} for
+>, <Line: +	 * @return {@link Genotype} for the given sample
+>, <Line: +	 */
+>, <Line: +	public Genotype getGenotypeForSample(String sample) {
+>, <Line: +		return sampleToGenotype.get(sample);
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * @param sampleNo
+>, <Line: +	 *            0-based sample number to return {@link Genotype} for
+>, <Line: +	 * @return {@link Genotype} by sample number
+>, <Line: +	 */
+>, <Line: +	public Genotype getGenotypeBySampleNo(int sampleNo) {
+>, <Line: +		return sampleToGenotype.get(sampleNames.get(sampleNo));
+>, <Line: +	}
+>, <Line: +	/** @return type of the chromosome */
+>, <Line: +	public ChromosomeType getChromType() {
+>, <Line: +		return chromType;
+>, <Line: +	}
+>, <Line: +	/** @return Sample to genotype map */
+>, <Line: +	public ImmutableSortedMap<String, Genotype> getSampleToGenotype() {
+>, <Line: +		return sampleToGenotype;
+>, <Line: +	}
+>, <Line: +	/** @return Sample names */
+>, <Line: +	public ImmutableList<String> getSampleNames() {
+>, <Line: +		return sampleNames;
+>, <Line: +	}
+>, <Line: +	/** @return Payload object */
+>, <Line: +	public Object getPayload() {
+>, <Line: +		return payload;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return "GenotypeCalls [chromType=" + chromType + ", sampleToGenotype=" + sampleToGenotype + ", sampleNames="
+>, <Line: +				+ sampleNames + ", payload=" + payload + "]";
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public Iterator<Entry<String, Genotype>> iterator() {
+>, <Line: +		return sampleToGenotype.entrySet().iterator();
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode() {
+>, <Line: +		// Yes, we really need object identity here
+>, <Line: +		return System.identityHashCode(this);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object obj) {
+>, <Line: +		// Yes, we really need object identity here
+>, <Line: +		return (this.hashCode() == obj.hashCode());
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

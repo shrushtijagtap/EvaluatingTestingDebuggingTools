@@ -1,0 +1,29 @@
+[<Line: +import java.nio.charset.StandardCharsets;
+>, <Line: +        super(documentIRI, readIntoBuffer(checkNotNull(stream, "stream cannot be null")), format,
+>, <Line: +            mime);
+>, <Line: +        super(documentIRI, readIntoBuffer(checkNotNull(stream, "stream cannot be null")), format,
+>, <Line: +            mime);
+>, <Line: +     * @return streamer
+>, <Line: +    private static Streamer<InputStream> readIntoBuffer(InputStream in) {
+>, <Line: +            return () -> new GZIPInputStream(new ByteArrayInputStream(bos.byteArray()));
+>, <Line: +    private static Streamer<InputStream> readIntoBuffer(Reader in) {
+>, <Line: +        // if the input stream carries encoding information, use it; else leave
+>, <Line: +        // the default as UTF-8
+>, <Line: +        Charset enc = StandardCharsets.UTF_8;
+>, <Line: +        if (in instanceof InputStreamReader) {
+>, <Line: +            enc = Charset.forName(((InputStreamReader) in).getEncoding());
+>, <Line: +        }
+>, <Line: +            OutputStreamWriter writer = new OutputStreamWriter(out, enc);
+>, <Line: +            return () -> new GZIPInputStream(new ByteArrayInputStream(bos.byteArray()));
+>]
+[<Line: -        super(documentIRI, format, mime);
+>, <Line: -        readIntoBuffer(checkNotNull(stream, "stream cannot be null"));
+>, <Line: -        super(documentIRI, format, mime);
+>, <Line: -        checkNotNull(stream, "stream cannot be null");
+>, <Line: -        readIntoBuffer(stream);
+>, <Line: -    private void readIntoBuffer(InputStream in) {
+>, <Line: -            inputStream = () -> new GZIPInputStream(new ByteArrayInputStream(bos.byteArray()));
+>, <Line: -    private void readIntoBuffer(Reader in) {
+>, <Line: -            OutputStreamWriter writer = new OutputStreamWriter(out, encoding);
+>, <Line: -            inputStream = () -> new GZIPInputStream(new ByteArrayInputStream(bos.byteArray()));
+>]

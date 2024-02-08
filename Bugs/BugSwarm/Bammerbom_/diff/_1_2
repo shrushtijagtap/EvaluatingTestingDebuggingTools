@@ -1,0 +1,12 @@
+[<Line: +import bammerbom.ultimatecore.sponge.utils.Selector;
+>, <Line: +        if (args.length >= 1 && Selector.one(sender, args[0]).isPresent()) {
+>, <Line: +            user = UltimateCore.get().getUserService().getUser(Selector.one(sender, args[0]).get());
+>, <Line: +                if (args.length >= 2 || (args.length >= 1 && !Selector.one(sender, args[0]).isPresent())) {
+>, <Line: +                    String message = StringUtil.getFinalArg(args, Selector.one(sender, args[0]).isPresent() ? 1 : 0);
+>]
+[<Line: -import bammerbom.ultimatecore.sponge.utils.PlayerSelector;
+>, <Line: -        if (args.length >= 1 && PlayerSelector.one(sender, args[0]).isPresent()) {
+>, <Line: -            user = UltimateCore.get().getUserService().getUser(PlayerSelector.one(sender, args[0]).get());
+>, <Line: -                if (args.length >= 2 || (args.length >= 1 && !PlayerSelector.one(sender, args[0]).isPresent())) {
+>, <Line: -                    String message = StringUtil.getFinalArg(args, PlayerSelector.one(sender, args[0]).isPresent() ? 1 : 0);
+>]

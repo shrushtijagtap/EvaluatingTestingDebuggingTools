@@ -1,0 +1,4 @@
+[<Line: +        @AjaxElement(timeOutInSeconds = 12)
+>]
+[<Line: -        @AjaxElement(timeOutInSeconds = 3)
+>]

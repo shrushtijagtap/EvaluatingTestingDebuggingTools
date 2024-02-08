@@ -1,0 +1,50 @@
+[<Line: +# All possible values in messages are:
+>, <Line: +# %name% - The real name of the player
+>, <Line: +# %displayname$ - The displayname of the player
+>, <Line: +# %prefix% - Prefic assigned by permissions plugin
+>, <Line: +# %suffix% - Suffix assigned by permissions plugin
+>, <Line: +# %world% - The world the player is in
+>, <Line: +# %worldalias% - The first character of the name of the world the player is in
+>, <Line: +# %ip% - The ip adress of the player
+>, <Line: +# %version% - The minecraft version of the server
+>, <Line: +# %maxplayers% - The maximum amount of players of the server
+>, <Line: +# %onlineplayers% - The amount of players on the server
+>, <Line: +# %message% - The message the player sent
+>, <Line: +headerfooter {
+>, <Line: +  enable: true
+>, <Line: +  # Each list entry is a new line in the header
+>, <Line: +  header: [
+>, <Line: +    "&bWelcome to this server, %displayname%!",
+>, <Line: +    "&bPlayers online: %onlineplayers%/%maxplayers%",
+>, <Line: +  ]
+>, <Line: +  footer: [
+>, <Line: +    "&3Change this message in the UltimateCore config.yml",
+>, <Line: +  ]
+>, <Line: +}
+>, <Line: +# How many ticks should be between each tablist refresh?
+>, <Line: +# 20 ticks = 1 second
+>, <Line: +refresh: 60
+>, <Line: +# FORMATTING FOR USERNAMES
+>, <Line: +names {
+>, <Line: +  enable: true
+>, <Line: +  # Default formatting for people who don't fit in any group
+>, <Line: +  default {
+>, <Line: +    # This is the default format, if no group or personal format is present.
+>, <Line: +    format: "&e%displayname%"
+>, <Line: +  }
+>, <Line: +  groups {
+>, <Line: +    # Group names are case sensitive!
+>, <Line: +    # Priorities are from bottom to op, so if someone is in multiple groups, the group most to the bottom he is in is used.
+>, <Line: +    admin {
+>, <Line: +      # Uses the same variables as above
+>, <Line: +      format: "&6%displayname%"
+>, <Line: +    }
+>, <Line: +    owner {
+>, <Line: +      # Uses the same variables as above
+>, <Line: +      format: "&4%displayname%"
+>, <Line: +    }
+>, <Line: +    # Add new groups by copying one of the groups above
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,8 @@
+[<Line: +        final MantaDirectoryListingIterator itr = new MantaDirectoryListingIterator(this.url,
+>, <Line: +        final MantaDirectoryListingIterator itr = new MantaDirectoryListingIterator(this.url,
+>, <Line: +        final String path = String.format("%s/jobs", home);
+>]
+[<Line: -        final MantaDirectoryIterator itr = new MantaDirectoryIterator(this.url,
+>, <Line: -        final MantaDirectoryIterator itr = new MantaDirectoryIterator(this.url,
+>, <Line: -        final String path = String.format("%s/jobs%s", home, query);
+>]

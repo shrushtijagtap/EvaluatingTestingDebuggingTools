@@ -1,0 +1,4 @@
+[<Line: +			if(charAtIx == EOF || lookaheadMatches(string, length)) {
+>]
+[<Line: -			if(charAtIx == -1 || lookaheadMatches(string, length)) {
+>]

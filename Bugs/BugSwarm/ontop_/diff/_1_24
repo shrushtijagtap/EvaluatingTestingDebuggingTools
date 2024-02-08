@@ -1,0 +1,76 @@
+[<Line: +package it.unibz.krdb.obda.ontology;
+>, <Line: +import java.util.Collection;
+>, <Line: +public interface ImmutableOntologyVocabulary {
+>, <Line: +	/**
+>, <Line: +	 * check whether the class has been declared and return the class object
+>, <Line: +	 * 
+>, <Line: +	 * @param uri
+>, <Line: +	 * @return
+>, <Line: +	 * @throws RuntimeException if the class has not been declared
+>, <Line: +	 */
+>, <Line: +	public OClass getClass(String uri);
+>, <Line: +	/**
+>, <Line: +	 * check whether the object property has been declared and return the class object
+>, <Line: +	 * 
+>, <Line: +	 * @param uri
+>, <Line: +	 * @return
+>, <Line: +	 * @throws RuntimeException if the object property has not been declared
+>, <Line: +	 */
+>, <Line: +	public ObjectPropertyExpression getObjectProperty(String uri);
+>, <Line: +	/**
+>, <Line: +	 * check whether the data property has been declared and return the class object
+>, <Line: +	 * 
+>, <Line: +	 * @param uri
+>, <Line: +	 * @return
+>, <Line: +	 * @throws RuntimeException if the data property has not been declared
+>, <Line: +	 */
+>, <Line: +	public DataPropertyExpression getDataProperty(String uri);
+>, <Line: +	public Datatype getDatatype(String uri);
+>, <Line: +	/**
+>, <Line: +	 * check whether the class has been declared 
+>, <Line: +	 * 
+>, <Line: +	 * @param uri
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public boolean containsClass(String uri);
+>, <Line: +	/**
+>, <Line: +	 * check whether the object property has been declared 
+>, <Line: +	 * 
+>, <Line: +	 * @param uri
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public boolean containsObjectProperty(String uri);
+>, <Line: +	/**
+>, <Line: +	 * check whether the data property has been declared 
+>, <Line: +	 * 
+>, <Line: +	 * @param uri
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public boolean containsDataProperty(String uri);
+>, <Line: +	/**
+>, <Line: +	 * return all declared classes
+>, <Line: +	 * 
+>, <Line: +	 * @return
+>, <Line: +	 */	
+>, <Line: +	public Collection<OClass> getClasses();
+>, <Line: +	/**
+>, <Line: +	 * return all declared object properties
+>, <Line: +	 * 
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public Collection<ObjectPropertyExpression> getObjectProperties();
+>, <Line: +	/**
+>, <Line: +	 * return all declared data properties
+>, <Line: +	 * 
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public Collection<DataPropertyExpression> getDataProperties();
+>, <Line: +	/**
+>, <Line: +	 * check whether the vocabulary is empty (no declared classes, object or data properties)
+>, <Line: +	 * 
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public boolean isEmpty();
+>, <Line: +}
+>]
+[]

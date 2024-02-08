@@ -1,0 +1,12 @@
+[<Line: +            is_spam, reason = check_if_spam(title, body, owner_name, owner_link, site, q_id, False)
+>, <Line: +            if owner_rep <= 50 and is_spam:
+>, <Line: +                    handle_spam(title, owner_name, site, link, owner_link, q_id, reason)
+>, <Line: +                    is_spam, reason = check_if_spam(answer_title, body, owner_name, owner_link, site, a_id, True)
+>, <Line: +                    if owner_rep <= 50 and is_spam:
+>, <Line: +                            handle_spam(title, owner_name, site, link, owner_link, a_id, reason)
+>]
+[<Line: -            if owner_rep <= 50 and check_if_spam(title, body, owner_name, owner_link, site, q_id, False):
+>, <Line: -                    handle_spam(title, body, owner_name, site, link, owner_link, q_id, False)
+>, <Line: -                    if owner_rep <= 50 and check_if_spam(answer_title, body, owner_name, owner_link, site, a_id, True):
+>, <Line: -                            handle_spam(title, body, owner_name, site, link, owner_link, a_id, True)
+>]

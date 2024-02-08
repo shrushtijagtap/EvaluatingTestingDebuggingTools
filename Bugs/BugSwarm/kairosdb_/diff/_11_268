@@ -1,0 +1,154 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +	],
+>, <Line: +	function (angular, _) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		module.service('templateSrv', function () {
+>, <Line: +			var self = this;
+>, <Line: +			this._regex = /\$(\w+)|\[\[([\s\S]+?)\]\]/g;
+>, <Line: +			this._values = {};
+>, <Line: +			this._texts = {};
+>, <Line: +			this._grafanaVariables = {};
+>, <Line: +			this.init = function (variables) {
+>, <Line: +				this.variables = variables;
+>, <Line: +				this.updateTemplateData();
+>, <Line: +			};
+>, <Line: +			this.updateTemplateData = function () {
+>, <Line: +				this._values = {};
+>, <Line: +				this._texts = {};
+>, <Line: +				_.each(this.variables, function (variable) {
+>, <Line: +					if (!variable.current || !variable.current.value) {
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					this._values[variable.name] = variable.current.value;
+>, <Line: +					this._texts[variable.name] = variable.current.text;
+>, <Line: +				}, this);
+>, <Line: +			};
+>, <Line: +			this.setGrafanaVariable = function (name, value) {
+>, <Line: +				this._grafanaVariables[name] = value;
+>, <Line: +			};
+>, <Line: +			this.variableExists = function (expression) {
+>, <Line: +				this._regex.lastIndex = 0;
+>, <Line: +				var match = this._regex.exec(expression);
+>, <Line: +				return match && (self._values[match[1] || match[2]] !== void 0);
+>, <Line: +			};
+>, <Line: +			this.containsVariable = function (str, variableName) {
+>, <Line: +				return str.indexOf('$' + variableName) !== -1 || str.indexOf('[[' + variableName + ']]') !== -1;
+>, <Line: +			};
+>, <Line: +			this.highlightVariablesAsHtml = function (str) {
+>, <Line: +				if (!str || !_.isString(str)) {
+>, <Line: +					return str;
+>, <Line: +				}
+>, <Line: +				this._regex.lastIndex = 0;
+>, <Line: +				return str.replace(this._regex, function (match, g1, g2) {
+>, <Line: +					if (self._values[g1 || g2]) {
+>, <Line: +						return '<span class="template-variable">' + match + '</span>';
+>, <Line: +					}
+>, <Line: +					return match;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			this.replace = function (target) {
+>, <Line: +				if (!target) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				var value;
+>, <Line: +				this._regex.lastIndex = 0;
+>, <Line: +				return target.replace(this._regex, function (match, g1, g2) {
+>, <Line: +					value = self._values[g1 || g2];
+>, <Line: +					if (!value) {
+>, <Line: +						return match;
+>, <Line: +					}
+>, <Line: +					return self._grafanaVariables[value] || value;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			this.replaceWithText = function (target) {
+>, <Line: +				if (!target) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				var value;
+>, <Line: +				var text;
+>, <Line: +				this._regex.lastIndex = 0;
+>, <Line: +				return target.replace(this._regex, function (match, g1, g2) {
+>, <Line: +					value = self._values[g1 || g2];
+>, <Line: +					text = self._texts[g1 || g2];
+>, <Line: +					if (!value) {
+>, <Line: +						return match;
+>, <Line: +					}
+>, <Line: +					return self._grafanaVariables[value] || text;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -],
+>, <Line: -function (angular, _) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.service('templateSrv', function() {
+>, <Line: -    var self = this;
+>, <Line: -    this._regex = /\$(\w+)|\[\[([\s\S]+?)\]\]/g;
+>, <Line: -    this._values = {};
+>, <Line: -    this._texts = {};
+>, <Line: -    this._grafanaVariables = {};
+>, <Line: -    this.init = function(variables) {
+>, <Line: -      this.variables = variables;
+>, <Line: -      this.updateTemplateData();
+>, <Line: -    };
+>, <Line: -    this.updateTemplateData = function() {
+>, <Line: -      this._values = {};
+>, <Line: -      this._texts = {};
+>, <Line: -      _.each(this.variables, function(variable) {
+>, <Line: -        if (!variable.current || !variable.current.value) { return; }
+>, <Line: -        this._values[variable.name] = variable.current.value;
+>, <Line: -        this._texts[variable.name] = variable.current.text;
+>, <Line: -      }, this);
+>, <Line: -    };
+>, <Line: -    this.setGrafanaVariable = function (name, value) {
+>, <Line: -      this._grafanaVariables[name] = value;
+>, <Line: -    };
+>, <Line: -    this.variableExists = function(expression) {
+>, <Line: -      this._regex.lastIndex = 0;
+>, <Line: -      var match = this._regex.exec(expression);
+>, <Line: -      return match && (self._values[match[1] || match[2]] !== void 0);
+>, <Line: -    };
+>, <Line: -    this.containsVariable = function(str, variableName) {
+>, <Line: -      return str.indexOf('$' + variableName) !== -1 || str.indexOf('[[' + variableName + ']]') !== -1;
+>, <Line: -    };
+>, <Line: -    this.highlightVariablesAsHtml = function(str) {
+>, <Line: -      if (!str || !_.isString(str)) { return str; }
+>, <Line: -      this._regex.lastIndex = 0;
+>, <Line: -      return str.replace(this._regex, function(match, g1, g2) {
+>, <Line: -        if (self._values[g1 || g2]) {
+>, <Line: -          return '<span class="template-variable">' + match + '</span>';
+>, <Line: -        }
+>, <Line: -        return match;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    this.replace = function(target) {
+>, <Line: -      if (!target) { return; }
+>, <Line: -      var value;
+>, <Line: -      this._regex.lastIndex = 0;
+>, <Line: -      return target.replace(this._regex, function(match, g1, g2) {
+>, <Line: -        value = self._values[g1 || g2];
+>, <Line: -        if (!value) { return match; }
+>, <Line: -        return self._grafanaVariables[value] || value;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    this.replaceWithText = function(target) {
+>, <Line: -      if (!target) { return; }
+>, <Line: -      var value;
+>, <Line: -      var text;
+>, <Line: -      this._regex.lastIndex = 0;
+>, <Line: -      return target.replace(this._regex, function(match, g1, g2) {
+>, <Line: -        value = self._values[g1 || g2];
+>, <Line: -        text = self._texts[g1 || g2];
+>, <Line: -        if (!value) { return match; }
+>, <Line: -        return self._grafanaVariables[value] || text;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

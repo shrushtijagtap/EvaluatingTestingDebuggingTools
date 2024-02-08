@@ -1,0 +1,208 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.filter;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Map;
+>, <Line: -import java.util.Set;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import com.google.common.collect.ImmutableSet;
+>, <Line: -import com.google.common.collect.Sets;
+>, <Line: -import de.charite.compbio.jannovar.data.Chromosome;
+>, <Line: -import de.charite.compbio.jannovar.data.JannovarData;
+>, <Line: -import de.charite.compbio.jannovar.data.ReferenceDictionary;
+>, <Line: -import de.charite.compbio.jannovar.impl.intervals.Interval;
+>, <Line: -import de.charite.compbio.jannovar.impl.intervals.IntervalArray;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.ModeOfInheritance;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Pedigree;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.InheritanceCompatibilityChecker;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.InheritanceCompatibilityCheckerException;
+>, <Line: -import de.charite.compbio.jannovar.reference.GenomeInterval;
+>, <Line: -import de.charite.compbio.jannovar.reference.GenomePosition;
+>, <Line: -import de.charite.compbio.jannovar.reference.GenomeVariant;
+>, <Line: -import de.charite.compbio.jannovar.reference.PositionType;
+>, <Line: -import de.charite.compbio.jannovar.reference.Strand;
+>, <Line: -import de.charite.compbio.jannovar.reference.TranscriptModel;
+>, <Line: -import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: -import htsjdk.variant.variantcontext.VariantContextComparator;
+>, <Line: -/**
+>, <Line: - * A {@link VariantContext} filter that collects variants for each genes and then checks for compatibility.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - * @author <a href="mailto:max.schubach@charite.de">Max Schubach</a>
+>, <Line: - */
+>, <Line: -/**
+>, <Line: - * @author <a href="mailto:max.schubach@charite.de">Max Schubach</a>
+>, <Line: - *
+>, <Line: - */
+>, <Line: -public class GeneWiseInheritanceFilter implements VariantContextFilter {
+>, <Line: -	/** the logger object to use */
+>, <Line: -	private static final Logger LOGGER = LoggerFactory.getLogger(GeneWiseInheritanceFilter.class);
+>, <Line: -	/** Deserialized Jannovar data */
+>, <Line: -	private final JannovarData jannovarDB;
+>, <Line: -	/** List of genes, indexed by interval tree */
+>, <Line: -	private final GeneList geneList;
+>, <Line: -	/** Next filter. */
+>, <Line: -	private final VariantContextFilter next;
+>, <Line: -	/** Compatibility checker for genotype call lists and {@link #pedigree}. */
+>, <Line: -	private final InheritanceCompatibilityChecker checker;
+>, <Line: -	/** Stores the gene/variants relation. */
+>, <Line: -	HashMap<Gene, List<VariantContext>> variantToGeneMap = new HashMap<Gene, List<VariantContext>>();
+>, <Line: -	/** All variants that matches the inheritance will be stored here */
+>, <Line: -	Set<VariantContext> passedVariants;
+>, <Line: -	/** Initialize */
+>, <Line: -	public GeneWiseInheritanceFilter(Pedigree pedigree, JannovarData jannovarDB,
+>, <Line: -			ImmutableSet<ModeOfInheritance> modeOfInheritances, VariantContextFilter next) {
+>, <Line: -		this.jannovarDB = jannovarDB;
+>, <Line: -		this.geneList = buildGeneList(jannovarDB);
+>, <Line: -		this.next = next;
+>, <Line: -		this.checker = new InheritanceCompatibilityChecker.Builder().pedigree(pedigree).addModes(modeOfInheritances)
+>, <Line: -				.build();
+>, <Line: -		// TODO(mschubach) what about chr1 and 1?
+>, <Line: -		List<String> contigs = new ArrayList<String>();
+>, <Line: -		for (Chromosome chr : jannovarDB.getChromosomes().values()) {
+>, <Line: -			contigs.add(chr.getChromosomeName());
+>, <Line: -			contigs.add("chr"+chr.getChromosomeName());
+>, <Line: -		}
+>, <Line: -		this.passedVariants = Sets.newTreeSet(new VariantContextComparator(contigs));
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Build {@link GeneList} to be used in the filter.
+>, <Line: -	 *
+>, <Line: -	 * @param jannovarDB
+>, <Line: -	 *            data base to use for building gene list
+>, <Line: -	 * @return list of genes, built from <code>jannovarDB</code>.
+>, <Line: -	 */
+>, <Line: -	private static GeneList buildGeneList(JannovarData jannovarDB) {
+>, <Line: -		// create one GeneBuilder for each gene, collect all transcripts for the gene
+>, <Line: -		HashMap<String, GeneBuilder> geneMap = new HashMap<String, GeneBuilder>();
+>, <Line: -		for (Chromosome chrom : jannovarDB.getChromosomes().values())
+>, <Line: -			for (Interval<TranscriptModel> itv : chrom.getTMIntervalTree().getIntervals()) {
+>, <Line: -				TranscriptModel tm = itv.getValue();
+>, <Line: -				if (!geneMap.containsKey(tm.getGeneSymbol()))
+>, <Line: -					geneMap.put(tm.getGeneSymbol(), new GeneBuilder(jannovarDB.getRefDict(), tm.getGeneSymbol()));
+>, <Line: -				geneMap.get(tm.getGeneSymbol()).addTranscriptModel(tm);
+>, <Line: -			}
+>, <Line: -		// construct GeneList from geneMap
+>, <Line: -		ImmutableList.Builder<Gene> builder = new ImmutableList.Builder<Gene>();
+>, <Line: -		for (GeneBuilder gene : geneMap.values())
+>, <Line: -			builder.add(gene.build());
+>, <Line: -		return new GeneList(builder.build());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Main entry function for filter, see {@link VariantContextFilter#put} for more information.
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void put(FlaggedVariant fv) throws FilterException {
+>, <Line: -		VariantContext vc = fv.getVC();
+>, <Line: -		LOGGER.trace("Putting variant {} into inheritance filter", new Object[] { vc });
+>, <Line: -		final ReferenceDictionary refDict = jannovarDB.getRefDict();
+>, <Line: -		// TODO(holtgrew): for now, we simply ignore variants on contigs unknown to us, this has to be fixed
+>, <Line: -		if (!refDict.getContigNameToID().containsKey(vc.getContig()))
+>, <Line: -			return;
+>, <Line: -		final int contigID = refDict.getContigNameToID().get(vc.getContig());
+>, <Line: -		IntervalArray<Gene> iTree = geneList.getGeneIntervalTree().get(contigID);
+>, <Line: -		final String ref = vc.getReference().getBaseString();
+>, <Line: -		final String alt = vc.getAlternateAllele(0).getBaseString();
+>, <Line: -		final int pos = vc.getStart();
+>, <Line: -		final GenomeVariant change = new GenomeVariant(
+>, <Line: -				new GenomePosition(jannovarDB.getRefDict(), Strand.FWD, contigID, pos, PositionType.ONE_BASED), ref,
+>, <Line: -				alt);
+>, <Line: -		// query the gene interval tree for overlapping genes
+>, <Line: -		final GenomeInterval changeInterval = change.getGenomeInterval();
+>, <Line: -		IntervalArray<Gene>.QueryResult qr;
+>, <Line: -		if (changeInterval.length() == 0)
+>, <Line: -			qr = iTree.findOverlappingWithPoint(changeInterval.getBeginPos());
+>, <Line: -		else
+>, <Line: -			qr = iTree.findOverlappingWithInterval(changeInterval.getBeginPos(), changeInterval.getEndPos());
+>, <Line: -		for (Gene gene : qr.getEntries())
+>, <Line: -			if (isGeneAffectedByChange(gene, change))
+>, <Line: -				putVariantForGene(vc, gene);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Adds a variant to a gene
+>, <Line: -	 * 
+>, <Line: -	 * @param vc
+>, <Line: -	 *            The variant
+>, <Line: -	 * @param gene
+>, <Line: -	 *            The gene where the variant should be associated.
+>, <Line: -	 */
+>, <Line: -	private void putVariantForGene(VariantContext vc, Gene gene) {
+>, <Line: -		if (!variantToGeneMap.containsKey(gene)) {
+>, <Line: -			variantToGeneMap.put(gene, new ArrayList<VariantContext>());
+>, <Line: -		}
+>, <Line: -		variantToGeneMap.get(gene).add(vc);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Called when done with processing.
+>, <Line: -	 *
+>, <Line: -	 * See {@link VariantContextFilter#finish} for more details.
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void finish() throws FilterException {
+>, <Line: -		for (Map.Entry<Gene, List<VariantContext>> entry : variantToGeneMap.entrySet()) {
+>, <Line: -			checkVariantsForGene(entry.getKey());
+>, <Line: -		}
+>, <Line: -		for (VariantContext vc : passedVariants) {
+>, <Line: -			LOGGER.trace("Variant remains {} ", new Object[] { vc });
+>, <Line: -			if (next != null) {
+>, <Line: -				FlaggedVariant fvc = new FlaggedVariant(vc);
+>, <Line: -				next.put(fvc);
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		// there should be no more active variants or genes
+>, <Line: -		if (passedVariants.isEmpty())
+>, <Line: -			throw new RuntimeException("all variants should be inactive now");
+>, <Line: -		if (next != null)
+>, <Line: -			next.finish();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Adds the gioven varaints to the {@link #passedVariants}.
+>, <Line: -	 * 
+>, <Line: -	 * @param variants
+>, <Line: -	 *            List of {@link VariantContext} that are arred to the {@link #passedVariants} tree
+>, <Line: -	 */
+>, <Line: -	private void addCompatibleVariants(List<VariantContext> variants) {
+>, <Line: -		for (VariantContext vc : variants) {
+>, <Line: -			passedVariants.add(vc);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Utility function to test whether a {@link Gene} is affected by a {@link GenomeChage}.
+>, <Line: -	 *
+>, <Line: -	 * @param gene
+>, <Line: -	 *            to use for the check
+>, <Line: -	 * @param change
+>, <Line: -	 *            to use for the check
+>, <Line: -	 * @return <code>true</code> if <code>gene</code> is affected by <code>change</code>
+>, <Line: -	 */
+>, <Line: -	private static boolean isGeneAffectedByChange(Gene gene, GenomeVariant change) {
+>, <Line: -		final GenomeInterval changeInterval = change.getGenomeInterval();
+>, <Line: -		if (changeInterval.length() == 0 && gene.getRegion().contains(changeInterval.getGenomeBeginPos())
+>, <Line: -				&& gene.getRegion().contains(changeInterval.getGenomeBeginPos().shifted(-1)))
+>, <Line: -			return false;
+>, <Line: -		else if (changeInterval.length() != 0 && gene.getRegion().overlapsWith(changeInterval))
+>, <Line: -			return true;
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Builds genotype call lists for variants in currently active genes, checks for compatibility, and in case of
+>, <Line: -	 * compatibility, marks variants in <code>gene</code> as compatible.
+>, <Line: -	 * 
+>, <Line: -	 * @param gene
+>, <Line: -	 * @throws FilterException
+>, <Line: -	 */
+>, <Line: -	private void checkVariantsForGene(Gene gene) throws FilterException  {
+>, <Line: -		LOGGER.trace("Check inheritance and marking variants in gene {} ", new Object[] { gene });
+>, <Line: -		List<VariantContext> filteredOutput;
+>, <Line: -		try {
+>, <Line: -			filteredOutput = this.checker.getCompatibleWith(variantToGeneMap.get(gene));
+>, <Line: -			addCompatibleVariants(filteredOutput);
+>, <Line: -		} catch (InheritanceCompatibilityCheckerException e) {
+>, <Line: -			throw new FilterException("Problem in mode of inheritance filter.", e);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -}
+>]

@@ -1,0 +1,14 @@
+[<Line: +    ENTRADA("0", "Entrada"),
+>, <Line: +    SAIDA("1", "Sa\u00edda");
+>, <Line: +    private final String descricao;
+>, <Line: +    NFTipo(final String codigo, final String descricao) {
+>, <Line: +        this.descricao = descricao;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    ENTRADA("0"),
+>, <Line: -    SAIDA("1");
+>, <Line: -    NFTipo(final String codigo) {
+>]

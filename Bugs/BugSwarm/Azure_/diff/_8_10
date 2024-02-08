@@ -1,0 +1,114 @@
+[<Line: +import com.microsoft.azure.management.storage.implementation.api.AccessTier;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.Encryption;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.Kind;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.Sku;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.SkuName;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.StorageAccountKey;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.StorageAccountListKeysResultInner;
+>, <Line: +import java.util.List;
+>, <Line: +    private StorageAccountCreateParametersInner createParameters;
+>, <Line: +    private StorageAccountUpdateParametersInner updateParameters;
+>, <Line: +        this.createParameters = new StorageAccountCreateParametersInner();
+>, <Line: +    public Sku sku() {
+>, <Line: +        return this.inner().sku();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public Kind kind() {
+>, <Line: +        return inner().kind();
+>, <Line: +    public Encryption encryption() {
+>, <Line: +        return inner().encryption();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public AccessTier accessTier() {
+>, <Line: +        return inner().accessTier();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public List<StorageAccountKey> keys() throws CloudException, IOException {
+>, <Line: +        ServiceResponse<StorageAccountListKeysResultInner> response =
+>, <Line: +        StorageAccountListKeysResultInner resultInner = response.getBody();
+>, <Line: +        return resultInner.keys();
+>, <Line: +    public List<StorageAccountKey> regenerateKey(KeyType keyType) throws CloudException, IOException {
+>, <Line: +        ServiceResponse<StorageAccountListKeysResultInner> response =
+>, <Line: +        StorageAccountListKeysResultInner resultInner = response.getBody();
+>, <Line: +        return resultInner.keys();
+>, <Line: +    public StorageAccountImpl refresh() throws Exception {
+>, <Line: +    public StorageAccountImpl withSku(SkuName skuName) {
+>, <Line: +        if (isInCreateMode()) {
+>, <Line: +            createParameters.withSku(new Sku().withName(skuName));
+>, <Line: +        } else {
+>, <Line: +            updateParameters.withSku(new Sku().withName(skuName));
+>, <Line: +        }
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public StorageAccountImpl withBlobStorageAccountKind() {
+>, <Line: +        createParameters.withKind(Kind.BLOB_STORAGE);
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public StorageAccountImpl withGeneralPurposeAccountKind() {
+>, <Line: +        createParameters.withKind(Kind.STORAGE);
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public StorageAccountImpl withEncryption(Encryption encryption) {
+>, <Line: +        if (isInCreateMode()) {
+>, <Line: +            createParameters.withEncryption(encryption);
+>, <Line: +        } else {
+>, <Line: +            updateParameters.withEncryption(encryption);
+>, <Line: +        }
+>, <Line: +    public StorageAccountImpl update() throws Exception {
+>, <Line: +        updateParameters = new StorageAccountUpdateParametersInner();
+>, <Line: +    public StorageAccountImpl apply() throws Exception {
+>, <Line: +    public StorageAccountImpl withCustomDomain(CustomDomain customDomain) {
+>, <Line: +        if (isInCreateMode()) {
+>, <Line: +            createParameters.withCustomDomain(customDomain);
+>, <Line: +        } else {
+>, <Line: +            updateParameters.withCustomDomain(customDomain);
+>, <Line: +        }
+>, <Line: +    public StorageAccountImpl withCustomDomain(String name) {
+>, <Line: +    public StorageAccountImpl withCustomDomain(String name, boolean useSubDomain) {
+>, <Line: +    @Override
+>, <Line: +    public StorageAccountImpl withoutCustomDomain() {
+>, <Line: +        return withCustomDomain(new CustomDomain().withName(""));
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public StorageAccountImpl withAccessTier(AccessTier accessTier) {
+>, <Line: +        if (isInCreateMode()) {
+>, <Line: +            createParameters.withAccessTier(accessTier);
+>, <Line: +        } else {
+>, <Line: +            if (this.inner().kind() != Kind.BLOB_STORAGE) {
+>, <Line: +                throw new UnsupportedOperationException("Access tier can not be changed for general purpose storage accounts.");
+>, <Line: +            }
+>, <Line: +            updateParameters.withAccessTier(accessTier);
+>, <Line: +        }
+>, <Line: +        return this;
+>, <Line: +    }
+>]
+[<Line: -import com.microsoft.azure.management.storage.implementation.api.AccountType;
+>, <Line: -import com.microsoft.azure.management.storage.implementation.api.StorageAccountKeysInner;
+>, <Line: -    public AccountType accountType() {
+>, <Line: -        return this.inner().accountType();
+>, <Line: -    public StorageAccountKeys getKeys() throws CloudException, IOException {
+>, <Line: -        ServiceResponse<StorageAccountKeysInner> response =
+>, <Line: -        StorageAccountKeysInner stroageAccountKeysInner = response.getBody();
+>, <Line: -        return new StorageAccountKeys(stroageAccountKeysInner.key1(), stroageAccountKeysInner.key2());
+>, <Line: -    public StorageAccountKeys regenerateKey(KeyType keyType) throws CloudException, IOException {
+>, <Line: -        ServiceResponse<StorageAccountKeysInner> response =
+>, <Line: -        StorageAccountKeysInner stroageAccountKeysInner = response.getBody();
+>, <Line: -        return new StorageAccountKeys(stroageAccountKeysInner.key1(), stroageAccountKeysInner.key2());
+>, <Line: -    public StorageAccount refresh() throws Exception {
+>, <Line: -    public StorageAccountImpl withAccountType(AccountType accountType) {
+>, <Line: -        this.inner().withAccountType(accountType);
+>, <Line: -        StorageAccountCreateParametersInner createParameters = new StorageAccountCreateParametersInner();
+>, <Line: -        createParameters.withAccountType(this.inner().accountType());
+>, <Line: -    public Update update() throws Exception {
+>, <Line: -    public StorageAccount apply() throws Exception {
+>, <Line: -        StorageAccountUpdateParametersInner updateParameters = new StorageAccountUpdateParametersInner();
+>, <Line: -        updateParameters.withAccountType(accountType());
+>, <Line: -        updateParameters.withCustomDomain(customDomain());
+>, <Line: -    public Update withCustomDomain(CustomDomain customDomain) {
+>, <Line: -        inner().withCustomDomain(customDomain);
+>, <Line: -    public Update withCustomDomain(String name) {
+>, <Line: -    public Update withCustomDomain(String name, boolean useSubDomain) {
+>]

@@ -1,0 +1,4 @@
+[<Line: +type IntList is {int | int[] op}
+>]
+[<Line: -type IntList is {int | [int] op}
+>]

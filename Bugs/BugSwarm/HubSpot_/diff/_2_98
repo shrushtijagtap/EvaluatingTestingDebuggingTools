@@ -1,0 +1,4 @@
+[<Line: +    url: -> "#{ config.apiRoot }/load-balancer"
+>]
+[<Line: -    url: -> "#{ config.apiRoot }/load-balancer?authkey=#{ config.authKey }"
+>]

@@ -1,0 +1,6 @@
+[<Line: +            if (!enforce.sort().check(currentVersion, ClassFileVersion.ofJavaVersion(enforce.value()))) {
+>, <Line: +        Sort sort() default Sort.AT_LEAST;
+>]
+[<Line: -            if (!enforce.direction().check(currentVersion, ClassFileVersion.ofJavaVersion(enforce.value()))) {
+>, <Line: -        Sort direction() default Sort.AT_LEAST;
+>]

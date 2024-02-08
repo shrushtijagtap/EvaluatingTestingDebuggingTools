@@ -1,0 +1,4 @@
+[<Line: +        Assert.assertEquals("75", NFNotaInfoSituacaoTributariaCOFINS.OPERACAO_AQUISICAO_POR_SUBSTITUICAO_TRIBUTARIA.getCodigo());
+>]
+[<Line: -        Assert.assertEquals("75", NFNotaInfoSituacaoTributariaCOFINS.OPERACAO_AQUISICAO_SUBSTITUICAO_TRIBUTARIA.getCodigo());
+>]

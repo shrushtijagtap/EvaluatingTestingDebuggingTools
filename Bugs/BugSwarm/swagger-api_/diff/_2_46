@@ -1,0 +1,14 @@
+[<Line: + * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#responseObject"
+>, <Line: +    ApiResponse apiResponse = (ApiResponse) o;
+>, <Line: +    return Objects.equals(this.description, apiResponse.description) &&
+>, <Line: +        Objects.equals(this.headers, apiResponse.headers) &&
+>, <Line: +        Objects.equals(this.content, apiResponse.content) &&
+>, <Line: +        Objects.equals(this.links, apiResponse.links);
+>]
+[<Line: - * @link https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#responseObject
+>, <Line: -    ApiResponse response = (ApiResponse) o;
+>, <Line: -    return Objects.equals(this.description, response.description) &&
+>, <Line: -        Objects.equals(this.headers, response.headers) &&
+>, <Line: -        Objects.equals(this.content, response.content) &&
+>, <Line: -        Objects.equals(this.links, response.links);
+>]

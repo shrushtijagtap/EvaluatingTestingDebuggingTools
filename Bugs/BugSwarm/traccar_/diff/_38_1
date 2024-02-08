@@ -1,0 +1,3 @@
+[<Line: +            result.setSpentFuel(ReportUtils.calculateFuel(firstPosition, previousPosition));
+>]
+[]

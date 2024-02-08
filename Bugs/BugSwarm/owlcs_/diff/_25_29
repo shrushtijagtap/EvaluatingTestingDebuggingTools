@@ -1,0 +1,19 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +            new OntologyConfigurator());
+>, <Line: +                    "Could not add frame " + f + " to document, duplicate frame definition?", e,
+>, <Line: +                    stream.lineNo, stream.line);
+>, <Line: +                    "Could not add frame " + f + " to document, duplicate frame definition?", e,
+>, <Line: +                    stream.lineNo, stream.line);
+>, <Line: +                + "; expected an xref list, or at least an empty list '[]' at pos: " + stream.pos);
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -            new OWLOntologyLoaderConfiguration());
+>, <Line: -                    "Could not add frame " + f
+>, <Line: -                        + " to document, duplicate frame definition?",
+>, <Line: -                    e, stream.lineNo, stream.line);
+>, <Line: -                    "Could not add frame " + f
+>, <Line: -                        + " to document, duplicate frame definition?",
+>, <Line: -                    e, stream.lineNo, stream.line);
+>, <Line: -                + "; expected an xref list, or at least an empty list '[]' at pos: "
+>, <Line: -                + stream.pos);
+>]

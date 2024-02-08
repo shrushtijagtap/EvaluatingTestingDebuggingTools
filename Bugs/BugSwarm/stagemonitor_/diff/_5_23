@@ -1,0 +1,4 @@
+[<Line: +		final RequestTrace request = RequestMonitor.get().getRequestTrace();
+>]
+[<Line: -		final RequestTrace request = RequestMonitor.getRequest();
+>]

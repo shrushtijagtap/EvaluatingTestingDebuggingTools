@@ -1,0 +1,41 @@
+[<Line: +package de.charite.compbio.jannovar.mendel.impl;
+>, <Line: +import java.util.Collection;
+>, <Line: +import java.util.HashSet;
+>, <Line: +import java.util.stream.Collectors;
+>, <Line: +import java.util.stream.Stream;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import de.charite.compbio.jannovar.mendel.GenotypeCalls;
+>, <Line: +import de.charite.compbio.jannovar.mendel.IncompatiblePedigreeException;
+>, <Line: +import de.charite.compbio.jannovar.mendel.MendelianInheritanceChecker;
+>, <Line: +/**
+>, <Line: + * Implementation of Mendelian compatibility check for autosomal recessive case
+>, <Line: + * 
+>, <Line: + * <h2>Compatibility Check</h2>
+>, <Line: + *
+>, <Line: + * This class merely delegates to the {@link MendelianCheckerARHom} and {@link MendelianCheckerARCompoundHet}. The
+>, <Line: + * {@link GenotypeCalls} objects passing either filter will be returned.
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:max.schubach@charite.de">Max Schubach</a>
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class MendelianCheckerAR extends AbstractMendelianChecker {
+>, <Line: +	final private MendelianCheckerARCompoundHet checkerCompound;
+>, <Line: +	final private MendelianCheckerARHom checkerHom;
+>, <Line: +	public MendelianCheckerAR(MendelianInheritanceChecker parent) {
+>, <Line: +		super(parent);
+>, <Line: +		this.checkerCompound = new MendelianCheckerARCompoundHet(parent);
+>, <Line: +		this.checkerHom = new MendelianCheckerARHom(parent);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public ImmutableList<GenotypeCalls> filterCompatibleRecords(Collection<GenotypeCalls> calls)
+>, <Line: +			throws IncompatiblePedigreeException {
+>, <Line: +		// Apply homozygous and compound heterozygous checker, then select distinct records
+>, <Line: +		Stream<GenotypeCalls> joint = Stream.concat(checkerCompound.filterCompatibleRecords(calls).stream(),
+>, <Line: +				checkerHom.filterCompatibleRecords(calls).stream());
+>, <Line: +		HashSet<GenotypeCalls> set = new HashSet<>();
+>, <Line: +		set.addAll(joint.collect(Collectors.toList()));
+>, <Line: +		return ImmutableList.copyOf(set);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

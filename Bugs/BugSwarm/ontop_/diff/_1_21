@@ -1,0 +1,21 @@
+[<Line: +import java.util.Collection;
+>, <Line: +/**
+>, <Line: + * Represents DataPropertyExpression from the OWL 2 QL Specification
+>, <Line: + * 
+>, <Line: + * DataPropertyExpression := DataProperty
+>, <Line: + * 
+>, <Line: + * Support for owl:topDataProperty and owl:bottomDataProperty
+>, <Line: + * 
+>, <Line: + * @author Roman Kontchakov
+>, <Line: + *
+>, <Line: + */
+>, <Line: +public interface DataPropertyExpression extends DescriptionBT {
+>, <Line: +	public String getName();
+>, <Line: +	public DataSomeValuesFrom getDomainRestriction(Datatype datatype);
+>, <Line: +	public Collection<DataSomeValuesFrom> getAllDomainRestrictions();
+>]
+[<Line: -public interface DataPropertyExpression extends Description {
+>, <Line: -	public DataSomeValuesFrom getDomain();
+>, <Line: -	public boolean isBottom();
+>, <Line: -	public boolean isTop();
+>]

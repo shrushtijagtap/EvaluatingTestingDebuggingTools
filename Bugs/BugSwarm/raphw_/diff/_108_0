@@ -1,0 +1,556 @@
+[<Line: +import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
+>, <Line: +import net.bytebuddy.implementation.MethodCall;
+>, <Line: +import net.bytebuddy.utility.JavaModule;
+>, <Line: +import net.bytebuddy.utility.JavaType;
+>, <Line: +import java.lang.reflect.Constructor;
+>, <Line: +    /**
+>, <Line: +     * <p>
+>, <Line: +     * Matches a type being loaded in order to apply the supplied {@link net.bytebuddy.agent.builder.AgentBuilder.Transformer}s before loading this type.
+>, <Line: +     * If several matchers positively match a type only the latest registered matcher is considered for transformation.
+>, <Line: +     * </p>
+>, <Line: +     * <p>
+>, <Line: +     * If this matcher is chained with additional subsequent matchers, this matcher is always executed first whereas the following matchers are
+>, <Line: +     * executed in the order of their execution. If any matcher indicates that a type is to be matched, none of the following matchers is still queried.
+>, <Line: +     * </p>
+>, <Line: +     * <p>
+>, <Line: +     * <b>Note</b>: When applying a matcher, regard the performance implications by {@link AgentBuilder#ignore(ElementMatcher)}. The former
+>, <Line: +     * matcher is applied first such that it makes sense to ignore name spaces that are irrelevant to instrumentation. If possible, it
+>, <Line: +     * is also recommended, to exclude class loaders such as for example the bootstrap class loader.
+>, <Line: +     * </p>
+>, <Line: +     *
+>, <Line: +     * @param typeMatcher        An {@link net.bytebuddy.matcher.ElementMatcher} that is applied on the type being
+>, <Line: +     *                           loaded that decides if the entailed
+>, <Line: +     *                           {@link net.bytebuddy.agent.builder.AgentBuilder.Transformer}s should be applied for
+>, <Line: +     *                           that type.
+>, <Line: +     * @param classLoaderMatcher An {@link net.bytebuddy.matcher.ElementMatcher} that is applied to the
+>, <Line: +     *                           {@link java.lang.ClassLoader} that is loading the type being loaded. This matcher
+>, <Line: +     *                           is always applied second where the type matcher is not applied in case that this
+>, <Line: +     *                           matcher does not indicate a match.
+>, <Line: +     * @param moduleMatcher      An {@link net.bytebuddy.matcher.ElementMatcher} that is applied to the {@link JavaModule}
+>, <Line: +     *                           of the type being loaded. This matcher is always applied first where the class loader and
+>, <Line: +     *                           type matchers are not applied in case that this matcher does not indicate a match. On a JVM
+>, <Line: +     *                           that does not support the Java modules system, this matcher is not applied.
+>, <Line: +     * @return A definable that represents this agent builder which allows for the definition of one or several
+>, <Line: +     * {@link net.bytebuddy.agent.builder.AgentBuilder.Transformer}s to be applied when both the given
+>, <Line: +     * {@code typeMatcher} and {@code classLoaderMatcher} indicate a match.
+>, <Line: +     */
+>, <Line: +    Identified.Narrowable type(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +                               ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +                               ElementMatcher<? super JavaModule> moduleMatcher);
+>, <Line: +    /**
+>, <Line: +     * <p>
+>, <Line: +     * Excludes any type that is matched by the provided matcher and is loaded by a class loader matching the second matcher.
+>, <Line: +     * By default, Byte Buddy does not instrument synthetic types or types that are loaded by the bootstrap class loader.
+>, <Line: +     * </p>
+>, <Line: +     * <p>
+>, <Line: +     * When ignoring a type, any subsequently chained matcher is applied after this matcher in the order of their registration. Also, if
+>, <Line: +     * any matcher indicates that a type is to be ignored, none of the following chained matchers is executed.
+>, <Line: +     * </p>
+>, <Line: +     * <p>
+>, <Line: +     * <b>Note</b>: For performance reasons, it is recommended to always include a matcher that excludes as many namespaces
+>, <Line: +     * as possible. Byte Buddy can determine a type's name without parsing its class file and can therefore discard such
+>, <Line: +     * types with minimal overhead. When a different property of a type - such as for example its modifiers or its annotations
+>, <Line: +     * is accessed - Byte Buddy parses the class file lazily in order to allow for such a matching. Therefore, any exclusion
+>, <Line: +     * of a name should always be done as a first step and even if it does not influence the selection of what types are
+>, <Line: +     * matched. Without changing this property, the class file of every type is being parsed!
+>, <Line: +     * </p>
+>, <Line: +     *
+>, <Line: +     * @param typeMatcher        A matcher that identifies types that should not be instrumented.
+>, <Line: +     * @param classLoaderMatcher A matcher that identifies a class loader that identifies classes that should not be instrumented.
+>, <Line: +     * @param moduleMatcher      A matcher that identifies a module that identifies classes that should not be instrumented. On a JVM
+>, <Line: +     *                           that does not support the Java modules system, this matcher is not applied.
+>, <Line: +     * @return A new instance of this agent builder that ignores all types that are matched by the provided matcher.
+>, <Line: +     * All previous matchers for ignored types are discarded.
+>, <Line: +     */
+>, <Line: +    Ignored ignore(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +                   ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +                   ElementMatcher<? super JavaModule> moduleMatcher);
+>, <Line: +        /**
+>, <Line: +         * Defines a matching that is positive if both the previous matcher and the supplied matcher are matched.
+>, <Line: +         *
+>, <Line: +         * @param typeMatcher        A matcher for the type being matched.
+>, <Line: +         * @param classLoaderMatcher A matcher for the type's class loader.
+>, <Line: +         * @param moduleMatcher      A matcher for the type's module. On a JVM that does not support modules, the Java module is represented by {@code null}.
+>, <Line: +         * @return A chained matcher.
+>, <Line: +         */
+>, <Line: +        T and(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +              ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +              ElementMatcher<? super JavaModule> moduleMatcher);
+>, <Line: +        /**
+>, <Line: +         * Defines a matching that is positive if the previous matcher or the supplied matcher are matched.
+>, <Line: +         *
+>, <Line: +         * @param typeMatcher        A matcher for the type being matched.
+>, <Line: +         * @param classLoaderMatcher A matcher for the type's class loader.
+>, <Line: +         * @param moduleMatcher      A matcher for the type's module. On a JVM that does not support modules, the Java module is represented by {@code null}.
+>, <Line: +         * @return A chained matcher.
+>, <Line: +         */
+>, <Line: +        T or(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +             ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +             ElementMatcher<? super JavaModule> moduleMatcher);
+>, <Line: +                return and(typeMatcher, classLoaderMatcher, any());
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public S and(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +                         ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +                         ElementMatcher<? super JavaModule> moduleMatcher) {
+>, <Line: +                return and(new RawMatcher.ForElementMatchers(typeMatcher, classLoaderMatcher, moduleMatcher));
+>, <Line: +                return or(typeMatcher, classLoaderMatcher, any());
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public S or(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +                        ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +                        ElementMatcher<? super JavaModule> moduleMatcher) {
+>, <Line: +                return or(new RawMatcher.ForElementMatchers(typeMatcher, classLoaderMatcher, moduleMatcher));
+>, <Line: +         * @param module              The transformed type's module or {@code null} if the current VM does not support modules.
+>, <Line: +                        JavaModule module,
+>, <Line: +            public boolean matches(TypeDescription typeDescription,
+>, <Line: +                                   ClassLoader classLoader,
+>, <Line: +                                   JavaModule module,
+>, <Line: +                                   Class<?> classBeingRedefined,
+>, <Line: +                                   ProtectionDomain protectionDomain) {
+>, <Line: +                return left.matches(typeDescription, classLoader, module, classBeingRedefined, protectionDomain)
+>, <Line: +                        && right.matches(typeDescription, classLoader, module, classBeingRedefined, protectionDomain);
+>, <Line: +            public boolean matches(TypeDescription typeDescription,
+>, <Line: +                                   ClassLoader classLoader,
+>, <Line: +                                   JavaModule module,
+>, <Line: +                                   Class<?> classBeingRedefined,
+>, <Line: +                                   ProtectionDomain protectionDomain) {
+>, <Line: +                return left.matches(typeDescription, classLoader, module, classBeingRedefined, protectionDomain)
+>, <Line: +                        || right.matches(typeDescription, classLoader, module, classBeingRedefined, protectionDomain);
+>, <Line: +        class ForElementMatchers implements RawMatcher {
+>, <Line: +             * The class loader matcher to apply to a {@link java.lang.ClassLoader}.
+>, <Line: +            /**
+>, <Line: +             * A module matcher to apply to a {@code java.lang.reflect.Module}.
+>, <Line: +             */
+>, <Line: +            private final ElementMatcher<? super JavaModule> moduleMatcher;
+>, <Line: +             * @param typeMatcher        The type matcher to apply to a {@link TypeDescription}.
+>, <Line: +             * @param classLoaderMatcher The class loader matcher to apply to a {@link java.lang.ClassLoader}.
+>, <Line: +             * @param moduleMatcher      A module matcher to apply to a {@code java.lang.reflect.Module}.
+>, <Line: +            public ForElementMatchers(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +                                      ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +                                      ElementMatcher<? super JavaModule> moduleMatcher) {
+>, <Line: +                this.moduleMatcher = moduleMatcher;
+>, <Line: +                                   JavaModule module,
+>, <Line: +                return moduleMatcher.matches(module) && classLoaderMatcher.matches(classLoader) && typeMatcher.matches(typeDescription);
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Represents this matcher in a disjunction together with the supplied matcher.
+>, <Line: +             *
+>, <Line: +             * @param other The other matcher to combine with this matcher in a disjunction.
+>, <Line: +             * @return A disjunction matching this matcher or the other matcher.
+>, <Line: +             */
+>, <Line: +            protected RawMatcher or(RawMatcher other) {
+>, <Line: +                return new Conjunction(this, other);
+>, <Line: +                        && classLoaderMatcher.equals(((ForElementMatchers) other).classLoaderMatcher)
+>, <Line: +                        && moduleMatcher.equals(((ForElementMatchers) other).moduleMatcher)
+>, <Line: +                        && typeMatcher.equals(((ForElementMatchers) other).typeMatcher);
+>, <Line: +                result = 31 * result + moduleMatcher.hashCode();
+>, <Line: +                return "AgentBuilder.RawMatcher.ForElementMatchers{" +
+>, <Line: +                        ", moduleMatcher=" + moduleMatcher +
+>, <Line: +         * @param module          The transformed type's module or {@code null} if the current VM does not support modules.
+>, <Line: +        void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module, DynamicType dynamicType);
+>, <Line: +         * @param module          The ignored type's module or {@code null} if the current VM does not support modules.
+>, <Line: +        void onIgnored(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module);
+>, <Line: +         * @param module      The instrumented type's module or {@code null} if the current VM does not support modules.
+>, <Line: +        void onError(String typeName, ClassLoader classLoader, JavaModule module, Throwable throwable);
+>, <Line: +         * @param module      The instrumented type's module or {@code null} if the current VM does not support modules.
+>, <Line: +        void onComplete(String typeName, ClassLoader classLoader, JavaModule module);
+>, <Line: +            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module, DynamicType dynamicType) {
+>, <Line: +            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
+>, <Line: +            public void onError(String typeName, ClassLoader classLoader, JavaModule module, Throwable throwable) {
+>, <Line: +            public void onComplete(String typeName, ClassLoader classLoader, JavaModule module) {
+>, <Line: +            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module, DynamicType dynamicType) {
+>, <Line: +            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
+>, <Line: +            public void onError(String typeName, ClassLoader classLoader, JavaModule module, Throwable throwable) {
+>, <Line: +            public void onComplete(String typeName, ClassLoader classLoader, JavaModule module) {
+>, <Line: +            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module, DynamicType dynamicType) {
+>, <Line: +                printStream.println(PREFIX + " TRANSFORM " + typeDescription.getName() + "[" + classLoader + ", " + module + "]");
+>, <Line: +            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
+>, <Line: +                printStream.println(PREFIX + " IGNORE " + typeDescription.getName() + "[" + classLoader + ", " + module + "]");
+>, <Line: +            public void onError(String typeName, ClassLoader classLoader, JavaModule module, Throwable throwable) {
+>, <Line: +                printStream.println(PREFIX + " ERROR " + typeName + "[" + classLoader + ", " + module + "]");
+>, <Line: +            public void onComplete(String typeName, ClassLoader classLoader, JavaModule module) {
+>, <Line: +                printStream.println(PREFIX + " COMPLETE " + typeName + "[" + classLoader + ", " + module + "]");
+>, <Line: +            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module, DynamicType dynamicType) {
+>, <Line: +                    listener.onTransformation(typeDescription, classLoader, module, dynamicType);
+>, <Line: +            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
+>, <Line: +                    listener.onIgnored(typeDescription, classLoader, module);
+>, <Line: +            public void onError(String typeName, ClassLoader classLoader, JavaModule module, Throwable throwable) {
+>, <Line: +                    listener.onError(typeName, classLoader, module, throwable);
+>, <Line: +            public void onComplete(String typeName, ClassLoader classLoader, JavaModule module) {
+>, <Line: +                    listener.onComplete(typeName, classLoader, module);
+>, <Line: +                            JavaModule.ofType(type),
+>, <Line: +                        JavaModule module = JavaModule.ofType(entry.getType());
+>, <Line: +                                listener.onError(typeDescription.getName(), entry.getType().getClassLoader(), module, throwable);
+>, <Line: +                                listener.onComplete(typeDescription.getName(), entry.getType().getClassLoader(), module);
+>, <Line: +                            JavaModule.ofType(type),
+>, <Line: +         * <li>Byte Buddy's classes are public with a public executing transformer. Doing so, it is not necessary to instantiate a
+>, <Line: +             * Implements a lambda class's executing transformer.
+>, <Line: +                 * A reference to the {@link Object} class's default executing transformer.
+>, <Line: +                 * Creates a new executing transformer implementation.
+>, <Line: +                 * An appender to implement the executing transformer.
+>, <Line: +                    new RawMatcher.ForElementMatchers(any(), isBootstrapClassLoader(), any()).or(new RawMatcher.ForElementMatchers(isSynthetic(), any(), any())),
+>, <Line: +            return type(typeMatcher, classLoaderMatcher, any());
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public Identified.Narrowable type(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +                                          ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +                                          ElementMatcher<? super JavaModule> moduleMatcher) {
+>, <Line: +            return type(new RawMatcher.ForElementMatchers(typeMatcher, classLoaderMatcher, not(supportsModules()).or(moduleMatcher)));
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public Ignored ignore(ElementMatcher<? super TypeDescription> typeMatcher) {
+>, <Line: +            return ignore(typeMatcher, any());
+>, <Line: +        public Ignored ignore(ElementMatcher<? super TypeDescription> typeMatcher, ElementMatcher<? super ClassLoader> classLoaderMatcher) {
+>, <Line: +            return ignore(typeMatcher, classLoaderMatcher, any());
+>, <Line: +        public Ignored ignore(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +                              ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +                              ElementMatcher<? super JavaModule> moduleMatcher) {
+>, <Line: +            return ignore(new RawMatcher.ForElementMatchers(typeMatcher, classLoaderMatcher, not(supportsModules()).or(moduleMatcher)));
+>, <Line: +            return ExecutingTransformer.FACTORY.make(byteBuddy,
+>, <Line: +                    JavaModule module = JavaModule.ofType(type);
+>, <Line: +                                    listener.onIgnored(typeDescription, type.getClassLoader(), module);
+>, <Line: +                                    listener.onComplete(typeDescription.getName(), type.getClassLoader(), module);
+>, <Line: +                                listener.onError(typeDescription.getName(), type.getClassLoader(), module, throwable);
+>, <Line: +                                listener.onComplete(typeDescription.getName(), type.getClassLoader(), module);
+>, <Line: +             * @param module              The transformed type's module or {@code null} if the current VM does not support modules.
+>, <Line: +                               JavaModule module,
+>, <Line: +                    /**
+>, <Line: +                     * The non-transformed type's module or {@code null} if the current VM does not support modules.
+>, <Line: +                     */
+>, <Line: +                    private final JavaModule module;
+>, <Line: +                     * @param module          The non-transformed type's module or {@code null} if the current VM does not support modules.
+>, <Line: +                    protected Unresolved(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
+>, <Line: +                        this.module = module;
+>, <Line: +                        listener.onIgnored(typeDescription, classLoader, module);
+>, <Line: +                                && (classLoader != null ? classLoader.equals(that.classLoader) : that.classLoader == null)
+>, <Line: +                                && (module != null ? module.equals(that.module) : that.module == null);
+>, <Line: +                        result = 31 * result + (module != null ? module.hashCode() : 0);
+>, <Line: +                                ", module=" + module +
+>, <Line: +                                          JavaModule module,
+>, <Line: +                    return new Resolution.Unresolved(typeDescription, classLoader, module);
+>, <Line: +                                                         JavaModule module,
+>, <Line: +                    return !ignoredTypeMatcher.matches(typeDescription, classLoader, module, classBeingRedefined, protectionDomain)
+>, <Line: +                            && rawMatcher.matches(typeDescription, classLoader, module, classBeingRedefined, protectionDomain)
+>, <Line: +                            ? new Resolution(typeDescription, classLoader, module, protectionDomain, transformer, decorator)
+>, <Line: +                            : new Transformation.Resolution.Unresolved(typeDescription, classLoader, module);
+>, <Line: +                    /**
+>, <Line: +                     * The transformed type's module or {@code null} if the current VM does not support modules.
+>, <Line: +                     */
+>, <Line: +                    private final JavaModule module;
+>, <Line: +                     * @param module           The transformed type's module or {@code null} if the current VM does not support modules.
+>, <Line: +                                         JavaModule module,
+>, <Line: +                        this.module = module;
+>, <Line: +                                module,
+>, <Line: +                        listener.onTransformation(typeDescription, classLoader, module, dynamicType);
+>, <Line: +                                && !(module != null ? !module.equals(that.module) : that.module != null)
+>, <Line: +                        result = 31 * result + (module != null ? module.hashCode() : 0);
+>, <Line: +                                ", module=" + module +
+>, <Line: +                                          JavaModule module,
+>, <Line: +                    Resolution current = new Resolution.Unresolved(typeDescription, classLoader, module);
+>, <Line: +                                module,
+>, <Line: +            /**
+>, <Line: +             * A factory for creating a {@link ClassFileTransformer} that supports the features of the current VM.
+>, <Line: +             */
+>, <Line: +            protected static final Factory FACTORY;
+>, <Line: +            /*
+>, <Line: +             * Creates a factory for a class file transformer that supports the features of the current VM.
+>, <Line: +             */
+>, <Line: +            static {
+>, <Line: +                Factory factory;
+>, <Line: +                try {
+>, <Line: +                    factory = new Factory.ForJava9CapableVm(new ByteBuddy()
+>, <Line: +                            .subclass(ExecutingTransformer.class)
+>, <Line: +                            .method(named("transform").and(takesArgument(0, JavaType.MODULE.getTypeStub())))
+>, <Line: +                            .intercept(MethodCall.invoke(ExecutingTransformer.class.getDeclaredMethod("transform",
+>, <Line: +                                    Object.class,
+>, <Line: +                                    String.class,
+>, <Line: +                                    Class.class,
+>, <Line: +                                    ProtectionDomain.class,
+>, <Line: +                                    byte[].class)).onSuper().withAllArguments())
+>, <Line: +                            .make()
+>, <Line: +                            .load(ExecutingTransformer.class.getClassLoader(), ClassLoadingStrategy.Default.WRAPPER)
+>, <Line: +                            .getLoaded()
+>, <Line: +                            .getDeclaredConstructor(ByteBuddy.class,
+>, <Line: +                                    TypeLocator.class,
+>, <Line: +                                    TypeStrategy.class,
+>, <Line: +                                    Listener.class,
+>, <Line: +                                    NativeMethodStrategy.class,
+>, <Line: +                                    AccessControlContext.class,
+>, <Line: +                                    InitializationStrategy.class,
+>, <Line: +                                    BootstrapInjectionStrategy.class,
+>, <Line: +                                    RawMatcher.class,
+>, <Line: +                                    Transformation.class));
+>, <Line: +                } catch (RuntimeException exception) {
+>, <Line: +                    throw exception;
+>, <Line: +                } catch (Exception ignored) {
+>, <Line: +                    factory = Factory.ForLegacyVm.INSTANCE;
+>, <Line: +                }
+>, <Line: +                FACTORY = factory;
+>, <Line: +            }
+>, <Line: +                return transform(JavaModule.UNSUPPORTED, classLoader, internalTypeName, classBeingRedefined, protectionDomain, binaryRepresentation);
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Applies a transformation for a class that was captured by this {@link ClassFileTransformer}.
+>, <Line: +             *
+>, <Line: +             * @param rawModule            The instrumented class's Java {@code java.lang.reflect.Module}.
+>, <Line: +             * @param internalTypeName     The internal name of the instrumented class.
+>, <Line: +             * @param classBeingRedefined  The loaded {@link Class} being redefined or {@code null} if no such class exists.
+>, <Line: +             * @param protectionDomain     The instrumented type's protection domain.
+>, <Line: +             * @param binaryRepresentation The class file of the instrumented class in its current state.
+>, <Line: +             * @return The transformed class file or an empty byte array if this transformer does not apply an instrumentation.
+>, <Line: +             */
+>, <Line: +            protected byte[] transform(Object rawModule,
+>, <Line: +                                       String internalTypeName,
+>, <Line: +                                       Class<?> classBeingRedefined,
+>, <Line: +                                       ProtectionDomain protectionDomain,
+>, <Line: +                                       byte[] binaryRepresentation) {
+>, <Line: +                JavaModule module = JavaModule.of(rawModule);
+>, <Line: +                return transform(module,
+>, <Line: +                        module.getClassLoader(accessControlContext),
+>, <Line: +                        internalTypeName,
+>, <Line: +                        classBeingRedefined,
+>, <Line: +                        protectionDomain,
+>, <Line: +                        binaryRepresentation);
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Applies a transformation for a class that was captured by this {@link ClassFileTransformer}.
+>, <Line: +             *
+>, <Line: +             * @param module               The instrumented class's Java module in its wrapped form or {@code null} if the current VM does not support modules.
+>, <Line: +             * @param classLoader          The instrumented class's class loader.
+>, <Line: +             * @param internalTypeName     The internal name of the instrumented class.
+>, <Line: +             * @param classBeingRedefined  The loaded {@link Class} being redefined or {@code null} if no such class exists.
+>, <Line: +             * @param protectionDomain     The instrumented type's protection domain.
+>, <Line: +             * @param binaryRepresentation The class file of the instrumented class in its current state.
+>, <Line: +             * @return The transformed class file or an empty byte array if this transformer does not apply an instrumentation.
+>, <Line: +             */
+>, <Line: +            private byte[] transform(JavaModule module,
+>, <Line: +                                     ClassLoader classLoader,
+>, <Line: +                                     String internalTypeName,
+>, <Line: +                                     Class<?> classBeingRedefined,
+>, <Line: +                                     ProtectionDomain protectionDomain,
+>, <Line: +                                     byte[] binaryRepresentation) {
+>, <Line: +                            module,
+>, <Line: +                    listener.onError(binaryTypeName, classLoader, module, throwable);
+>, <Line: +                    listener.onComplete(binaryTypeName, classLoader, module);
+>, <Line: +            /**
+>, <Line: +             * A factory for creating a {@link ClassFileTransformer} for the current VM.
+>, <Line: +             */
+>, <Line: +            protected interface Factory {
+>, <Line: +                /**
+>, <Line: +                 * Creates a new class file transformer for the current VM.
+>, <Line: +                 *
+>, <Line: +                 * @param byteBuddy                  The Byte Buddy instance to be used.
+>, <Line: +                 * @param typeLocator                The type locator to use.
+>, <Line: +                 * @param typeStrategy               The definition handler to use.
+>, <Line: +                 * @param listener                   The listener to notify on transformations.
+>, <Line: +                 * @param nativeMethodStrategy       The native method strategy to apply.
+>, <Line: +                 * @param accessControlContext       The access control context to use for loading classes.
+>, <Line: +                 * @param initializationStrategy     The initialization strategy to use for transformed types.
+>, <Line: +                 * @param bootstrapInjectionStrategy The injection strategy for injecting classes into the bootstrap class loader.
+>, <Line: +                 * @param ignoredTypeMatcher         Identifies types that should not be instrumented.
+>, <Line: +                 * @param transformation             The transformation object for handling type transformations.
+>, <Line: +                 * @return A class file transformer for the current VM that supports the API of the current VM.
+>, <Line: +                 */
+>, <Line: +                ClassFileTransformer make(ByteBuddy byteBuddy,
+>, <Line: +                                          TypeLocator typeLocator,
+>, <Line: +                                          TypeStrategy typeStrategy,
+>, <Line: +                                          Listener listener,
+>, <Line: +                                          NativeMethodStrategy nativeMethodStrategy,
+>, <Line: +                                          AccessControlContext accessControlContext,
+>, <Line: +                                          InitializationStrategy initializationStrategy,
+>, <Line: +                                          BootstrapInjectionStrategy bootstrapInjectionStrategy,
+>, <Line: +                                          RawMatcher ignoredTypeMatcher,
+>, <Line: +                                          Transformation transformation);
+>, <Line: +                /**
+>, <Line: +                 * A factory for a class file transformer on a JVM that supports the {@code java.lang.reflect.Module} API to override
+>, <Line: +                 * the newly added method of the {@link ClassFileTransformer} to capture an instrumented class's module.
+>, <Line: +                 */
+>, <Line: +                class ForJava9CapableVm implements Factory {
+>, <Line: +                    /**
+>, <Line: +                     * A constructor for creating a {@link ClassFileTransformer} that overrides the newly added method for extracting
+>, <Line: +                     * the {@code java.lang.reflect.Module} of an instrumented class.
+>, <Line: +                     */
+>, <Line: +                    private final Constructor<? extends ClassFileTransformer> executingTransformer;
+>, <Line: +                    /**
+>, <Line: +                     * Creates a class file transformer factory for a Java 9 capable VM.
+>, <Line: +                     *
+>, <Line: +                     * @param executingTransformer A constructor for creating a {@link ClassFileTransformer} that overrides the newly added
+>, <Line: +                     *                             method for extracting the {@code java.lang.reflect.Module} of an instrumented class.
+>, <Line: +                     */
+>, <Line: +                    protected ForJava9CapableVm(Constructor<? extends ClassFileTransformer> executingTransformer) {
+>, <Line: +                        this.executingTransformer = executingTransformer;
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public ClassFileTransformer make(ByteBuddy byteBuddy,
+>, <Line: +                                                     TypeLocator typeLocator,
+>, <Line: +                                                     TypeStrategy typeStrategy,
+>, <Line: +                                                     Listener listener,
+>, <Line: +                                                     NativeMethodStrategy nativeMethodStrategy,
+>, <Line: +                                                     AccessControlContext accessControlContext,
+>, <Line: +                                                     InitializationStrategy initializationStrategy,
+>, <Line: +                                                     BootstrapInjectionStrategy bootstrapInjectionStrategy,
+>, <Line: +                                                     RawMatcher ignoredTypeMatcher,
+>, <Line: +                                                     Transformation transformation) {
+>, <Line: +                        try {
+>, <Line: +                            return executingTransformer.newInstance(byteBuddy,
+>, <Line: +                                    typeLocator,
+>, <Line: +                                    typeStrategy,
+>, <Line: +                                    listener,
+>, <Line: +                                    nativeMethodStrategy,
+>, <Line: +                                    accessControlContext,
+>, <Line: +                                    initializationStrategy,
+>, <Line: +                                    bootstrapInjectionStrategy,
+>, <Line: +                                    ignoredTypeMatcher,
+>, <Line: +                                    transformation);
+>, <Line: +                        } catch (IllegalAccessException exception) {
+>, <Line: +                            throw new IllegalStateException("Cannot access " + executingTransformer, exception);
+>, <Line: +                        } catch (InstantiationException exception) {
+>, <Line: +                            throw new IllegalStateException("Cannot instantiate " + executingTransformer.getDeclaringClass(), exception);
+>, <Line: +                        } catch (InvocationTargetException exception) {
+>, <Line: +                            throw new IllegalStateException("Cannot invoke " + executingTransformer, exception.getCause());
+>, <Line: +                        }
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public boolean equals(Object object) {
+>, <Line: +                        if (this == object) return true;
+>, <Line: +                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +                        ForJava9CapableVm that = (ForJava9CapableVm) object;
+>, <Line: +                        return executingTransformer.equals(that.executingTransformer);
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public int hashCode() {
+>, <Line: +                        return executingTransformer.hashCode();
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public String toString() {
+>, <Line: +                        return "AgentBuilder.Default.ExecutingTransformer.Factory.ForJava9CapableVm{" +
+>, <Line: +                                "executingTransformer=" + executingTransformer +
+>, <Line: +                                '}';
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +                /**
+>, <Line: +                 * A factory for a {@link ClassFileTransformer} on a VM that does not support the {@code java.lang.reflect.Module} API.
+>, <Line: +                 */
+>, <Line: +                enum ForLegacyVm implements Factory {
+>, <Line: +                    /**
+>, <Line: +                     * The singleton instance.
+>, <Line: +                     */
+>, <Line: +                    INSTANCE;
+>, <Line: +                    @Override
+>, <Line: +                    public ClassFileTransformer make(ByteBuddy byteBuddy,
+>, <Line: +                                                     TypeLocator typeLocator,
+>, <Line: +                                                     TypeStrategy typeStrategy,
+>, <Line: +                                                     Listener listener,
+>, <Line: +                                                     NativeMethodStrategy nativeMethodStrategy,
+>, <Line: +                                                     AccessControlContext accessControlContext,
+>, <Line: +                                                     InitializationStrategy initializationStrategy,
+>, <Line: +                                                     BootstrapInjectionStrategy bootstrapInjectionStrategy,
+>, <Line: +                                                     RawMatcher ignoredTypeMatcher,
+>, <Line: +                                                     Transformation transformation) {
+>, <Line: +                        return new ExecutingTransformer(byteBuddy,
+>, <Line: +                                typeLocator,
+>, <Line: +                                typeStrategy,
+>, <Line: +                                listener,
+>, <Line: +                                nativeMethodStrategy,
+>, <Line: +                                accessControlContext,
+>, <Line: +                                initializationStrategy,
+>, <Line: +                                bootstrapInjectionStrategy,
+>, <Line: +                                ignoredTypeMatcher,
+>, <Line: +                                transformation);
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public String toString() {
+>, <Line: +                        return "AgentBuilder.Default.ExecutingTransformer.Factory.ForLegacyVm." + name();
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public Identified.Narrowable type(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +                                              ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +                                              ElementMatcher<? super JavaModule> moduleMatcher) {
+>, <Line: +                return materialize().type(typeMatcher, classLoaderMatcher, moduleMatcher);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public Ignored ignore(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: +                                  ElementMatcher<? super ClassLoader> classLoaderMatcher,
+>, <Line: +                                  ElementMatcher<? super JavaModule> moduleMatcher) {
+>, <Line: +                return materialize().ignore(typeMatcher, classLoaderMatcher, moduleMatcher);
+>, <Line: +            }
+>]
+[<Line: -                return and(new RawMatcher.ForElementMatcherPair(typeMatcher, classLoaderMatcher));
+>, <Line: -                return or(new RawMatcher.ForElementMatcherPair(typeMatcher, classLoaderMatcher));
+>, <Line: -            public boolean matches(TypeDescription typeDescription, ClassLoader classLoader, Class<?> classBeingRedefined, ProtectionDomain protectionDomain) {
+>, <Line: -                return left.matches(typeDescription, classLoader, classBeingRedefined, protectionDomain) && right.matches(typeDescription, classLoader, classBeingRedefined, protectionDomain);
+>, <Line: -            public boolean matches(TypeDescription typeDescription, ClassLoader classLoader, Class<?> classBeingRedefined, ProtectionDomain protectionDomain) {
+>, <Line: -                return left.matches(typeDescription, classLoader, classBeingRedefined, protectionDomain) || right.matches(typeDescription, classLoader, classBeingRedefined, protectionDomain);
+>, <Line: -        class ForElementMatcherPair implements RawMatcher {
+>, <Line: -             * The class loader to apply to a {@link java.lang.ClassLoader}.
+>, <Line: -             * @param typeMatcher        The type matcher to apply to a
+>, <Line: -             *                           {@link TypeDescription}.
+>, <Line: -             * @param classLoaderMatcher The class loader to apply to a {@link java.lang.ClassLoader}.
+>, <Line: -            public ForElementMatcherPair(ElementMatcher<? super TypeDescription> typeMatcher,
+>, <Line: -                                         ElementMatcher<? super ClassLoader> classLoaderMatcher) {
+>, <Line: -                return classLoaderMatcher.matches(classLoader) && typeMatcher.matches(typeDescription);
+>, <Line: -                        && classLoaderMatcher.equals(((ForElementMatcherPair) other).classLoaderMatcher)
+>, <Line: -                        && typeMatcher.equals(((ForElementMatcherPair) other).typeMatcher);
+>, <Line: -                return "AgentBuilder.RawMatcher.ForElementMatcherPair{" +
+>, <Line: -        void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, DynamicType dynamicType);
+>, <Line: -        void onIgnored(TypeDescription typeDescription, ClassLoader classLoader);
+>, <Line: -        void onError(String typeName, ClassLoader classLoader, Throwable throwable);
+>, <Line: -        void onComplete(String typeName, ClassLoader classLoader);
+>, <Line: -            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, DynamicType dynamicType) {
+>, <Line: -            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader) {
+>, <Line: -            public void onError(String typeName, ClassLoader classLoader, Throwable throwable) {
+>, <Line: -            public void onComplete(String typeName, ClassLoader classLoader) {
+>, <Line: -            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, DynamicType dynamicType) {
+>, <Line: -            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader) {
+>, <Line: -            public void onError(String typeName, ClassLoader classLoader, Throwable throwable) {
+>, <Line: -            public void onComplete(String typeName, ClassLoader classLoader) {
+>, <Line: -            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, DynamicType dynamicType) {
+>, <Line: -                printStream.println(PREFIX + " TRANSFORM " + typeDescription.getName());
+>, <Line: -            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader) {
+>, <Line: -                printStream.println(PREFIX + " IGNORE " + typeDescription.getName());
+>, <Line: -            public void onError(String typeName, ClassLoader classLoader, Throwable throwable) {
+>, <Line: -                printStream.println(PREFIX + " ERROR " + typeName);
+>, <Line: -            public void onComplete(String typeName, ClassLoader classLoader) {
+>, <Line: -                printStream.println(PREFIX + " COMPLETE " + typeName);
+>, <Line: -            public void onTransformation(TypeDescription typeDescription, ClassLoader classLoader, DynamicType dynamicType) {
+>, <Line: -                    listener.onTransformation(typeDescription, classLoader, dynamicType);
+>, <Line: -            public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader) {
+>, <Line: -                    listener.onIgnored(typeDescription, classLoader);
+>, <Line: -            public void onError(String typeName, ClassLoader classLoader, Throwable throwable) {
+>, <Line: -                    listener.onError(typeName, classLoader, throwable);
+>, <Line: -            public void onComplete(String typeName, ClassLoader classLoader) {
+>, <Line: -                    listener.onComplete(typeName, classLoader);
+>, <Line: -                                listener.onError(typeDescription.getName(), entry.getType().getClassLoader(), throwable);
+>, <Line: -                                listener.onComplete(typeDescription.getName(), entry.getType().getClassLoader());
+>, <Line: -         * <li>Byte Buddy's classes are public with a public constructor. Doing so, it is not necessary to instantiate a
+>, <Line: -             * Implements a lambda class's constructor.
+>, <Line: -                 * A reference to the {@link Object} class's default constructor.
+>, <Line: -                 * Creates a new constructor implementation.
+>, <Line: -                 * An appender to implement the constructor.
+>, <Line: -                    new RawMatcher.Disjunction(new RawMatcher.ForElementMatcherPair(any(), isBootstrapClassLoader()), new RawMatcher.ForElementMatcherPair(isSynthetic(), any())),
+>, <Line: -            return type(new RawMatcher.ForElementMatcherPair(typeMatcher, classLoaderMatcher));
+>, <Line: -        public Ignored ignore(ElementMatcher<? super TypeDescription> ignoredTypes) {
+>, <Line: -            return ignore(ignoredTypes, any());
+>, <Line: -        public Ignored ignore(ElementMatcher<? super TypeDescription> ignoredTypes, ElementMatcher<? super ClassLoader> ignoredClassLoaders) {
+>, <Line: -            return ignore(new RawMatcher.ForElementMatcherPair(ignoredTypes, ignoredClassLoaders));
+>, <Line: -            return new ExecutingTransformer(byteBuddy,
+>, <Line: -                                    listener.onIgnored(typeDescription, type.getClassLoader());
+>, <Line: -                                    listener.onComplete(typeDescription.getName(), type.getClassLoader());
+>, <Line: -                                listener.onError(typeDescription.getName(), type.getClassLoader(), throwable);
+>, <Line: -                                listener.onComplete(typeDescription.getName(), type.getClassLoader());
+>, <Line: -                    protected Unresolved(TypeDescription typeDescription, ClassLoader classLoader) {
+>, <Line: -                        listener.onIgnored(typeDescription, classLoader);
+>, <Line: -                                && (classLoader != null ? classLoader.equals(that.classLoader) : that.classLoader == null);
+>, <Line: -                    return new Resolution.Unresolved(typeDescription, classLoader);
+>, <Line: -                    return !ignoredTypeMatcher.matches(typeDescription, classLoader, classBeingRedefined, protectionDomain)
+>, <Line: -                            && rawMatcher.matches(typeDescription, classLoader, classBeingRedefined, protectionDomain)
+>, <Line: -                            ? new Resolution(typeDescription, classLoader, protectionDomain, transformer, decorator)
+>, <Line: -                            : new Transformation.Resolution.Unresolved(typeDescription, classLoader);
+>, <Line: -                        listener.onTransformation(typeDescription, classLoader, dynamicType);
+>, <Line: -                    Resolution current = new Resolution.Unresolved(typeDescription, classLoader);
+>, <Line: -                    listener.onError(binaryTypeName, classLoader, throwable);
+>, <Line: -                    listener.onComplete(binaryTypeName, classLoader);
+>]

@@ -1,0 +1,7 @@
+[<Line: +package org.mp4parser.boxes.iso23001.part7;
+>, <Line: +import org.mp4parser.tools.Hex;
+>]
+[<Line: -package com.mp4parser.iso23001.part7;
+>, <Line: -import com.coremedia.iso.Hex;
+>, <Line: - *
+>]

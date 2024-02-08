@@ -1,0 +1,32 @@
+[<Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +  private final List<String> methodNames = new ArrayList<>();
+>, <Line: +      Constructor testConstructor, Method testMethod) {
+>, <Line: +      switch (testMethod.getName()) {
+>, <Line: +        case "three":
+>, <Line: +          annotation.setInvocationCount(3);
+>, <Line: +          break;
+>, <Line: +        case "four":
+>, <Line: +          annotation.setInvocationCount(4);
+>, <Line: +          break;
+>, <Line: +        case "five":
+>, <Line: +          annotation.setInvocationCount(5);
+>, <Line: +          break;
+>, <Line: +      methodNames.add(testMethod.getName());
+>, <Line: +  public List<String> getMethodNames() {
+>, <Line: +    return methodNames;
+>]
+[<Line: -      Constructor testConstructor, Method testMethod)
+>, <Line: -  {
+>, <Line: -      String name = testMethod.getName();
+>, <Line: -      if ("three".equals(name)) {
+>, <Line: -        annotation.setInvocationCount(3);
+>, <Line: -      }
+>, <Line: -      else if ("four".equals(name)) {
+>, <Line: -        annotation.setInvocationCount(4);
+>, <Line: -      }
+>, <Line: -      else if ("five".equals(name)) {
+>, <Line: -        annotation.setInvocationCount(5);
+>, <Line: -  private void ppp(String string) {
+>, <Line: -    System.out.println("[MyTransformer] " + string);
+>]

@@ -1,0 +1,8 @@
+[<Line: +    private OntologyConfigurator configuration;
+>, <Line: +    public void setUp(OWLOntology ontology, OntologyConfigurator configuration) {
+>, <Line: +        if (!(ax instanceof OWLAnnotationAxiom) || configuration.shouldLoadAnnotations()) {
+>]
+[<Line: -    private OWLOntologyLoaderConfiguration configuration;
+>, <Line: -    public void setUp(OWLOntology ontology, OWLOntologyLoaderConfiguration configuration) {
+>, <Line: -        if (!(ax instanceof OWLAnnotationAxiom) || configuration.isLoadAnnotationAxioms()) {
+>]

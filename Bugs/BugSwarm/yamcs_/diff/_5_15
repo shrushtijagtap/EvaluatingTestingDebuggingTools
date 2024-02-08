@@ -1,0 +1,4 @@
+[<Line: +import org.yamcs.archive.CommandHistoryRecorder;
+>]
+[<Line: -import org.yamcs.cmdhistory.CommandHistoryRecorder;
+>]

@@ -1,0 +1,5 @@
+[<Line: +            @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "The array is not to be modified by contract")
+>]
+[<Line: -                @SuppressFBWarnings(value = "URF_UNREAD_FIELD", justification = "To be removed once type annotations are in place")
+>, <Line: -            @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "The received value is never modified")
+>]

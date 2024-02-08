@@ -1,0 +1,6 @@
+[<Line: +    for (int i = 0; i < 4; ++i) {
+>, <Line: +  private static void appendCheckDigit(StringBuilder buf, int currentPos) {
+>]
+[<Line: -    for(int i = 0; i < 4; ++i){
+>, <Line: -  private static void appendCheckDigit(StringBuilder buf, int currentPos){
+>]

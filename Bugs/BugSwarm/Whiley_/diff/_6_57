@@ -1,0 +1,108 @@
+[<Line: +import wyfs.lang.Path;
+>, <Line: + * The type system is responsible for managing the relationship between
+>, <Line: +public class TypeSystem {
+>, <Line: +	public TypeSystem(Build.Project project) {
+>, <Line: +	public Type getUnderlyingType(Type type) throws ResolveError {
+>, <Line: +	public Type.EffectiveRecord expandAsEffectiveRecord(Type type) throws ResolveError {
+>, <Line: +		if (type instanceof Type.EffectiveRecord) {
+>, <Line: +			return (Type.EffectiveRecord) type;
+>, <Line: +		} else {
+>, <Line: +			return (Type.EffectiveRecord) expandOneLevel(type);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public Type.EffectiveArray expandAsEffectiveArray(Type type) throws ResolveError {
+>, <Line: +		if (type instanceof Type.EffectiveArray) {
+>, <Line: +			return (Type.EffectiveArray) type;
+>, <Line: +		} else {
+>, <Line: +			return (Type.EffectiveArray) expandOneLevel(type);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public Type.Reference expandAsReference(Type type) throws ResolveError {
+>, <Line: +		if (type instanceof Type.Reference) {
+>, <Line: +			return (Type.Reference) type;
+>, <Line: +		} else {
+>, <Line: +			return (Type.Reference) expandOneLevel(type);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Expand a given syntactic type by exactly one level.
+>, <Line: +	 * 
+>, <Line: +	 * @param type
+>, <Line: +	 * @return
+>, <Line: +	 * @throws IOException
+>, <Line: +	 * @throws ResolveError
+>, <Line: +	 */
+>, <Line: +	private Type expandOneLevel(Type type) throws ResolveError {
+>, <Line: +		try {
+>, <Line: +			if (type instanceof Type.Nominal) {
+>, <Line: +				Type.Nominal nt = (Type.Nominal) type;
+>, <Line: +				NameID nid = nt.name();
+>, <Line: +				Path.ID mid = nid.module();
+>, <Line: +				WyilFile m = project.get(nid.module(), WyilFile.ContentType).read();
+>, <Line: +				WyilFile.Type td = m.type(nid.name());
+>, <Line: +				return expandOneLevel(td.type());
+>, <Line: +			} else if (type instanceof Type.Leaf || type instanceof Type.Reference || type instanceof Type.Array
+>, <Line: +					|| type instanceof Type.Record || type instanceof Type.FunctionOrMethod
+>, <Line: +					|| type instanceof Type.Negation) {
+>, <Line: +				return type;
+>, <Line: +			} else {
+>, <Line: +				Type.Union ut = (Type.Union) type;
+>, <Line: +				ArrayList<Type> bounds = new ArrayList<Type>();
+>, <Line: +				for (Type b : ut.bounds()) {
+>, <Line: +					bounds.add(expandOneLevel(b));
+>, <Line: +				}
+>, <Line: +				return Type.Union(bounds);
+>, <Line: +			}
+>, <Line: +		} catch (IOException e) {
+>, <Line: +			throw new ResolveError(e.getMessage(), e);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public int getTypeHelper(Type type, boolean maximallyConsumed, ArrayList<Automaton.State> states,
+>, <Line: +			HashMap<NameID, Integer> roots) throws ResolveError {
+>, <Line: +				// At this point, need to find the corresponding declaration.
+>, <Line: +				try {
+>, <Line: +					WyilFile mi = project.get(nid.module(),WyilFile.ContentType).read();
+>, <Line: +					WyilFile.Type td = mi.type(nid.name());
+>, <Line: +					if (maximallyConsumed && td.getInvariant().size() > 0) {
+>, <Line: +						// In this specially case, we have a constrained type
+>, <Line: +						// and we are attempting to compute the maximally
+>, <Line: +						// consumed type. This type is not fully consumed as it
+>, <Line: +						// is constrained and, hence, void is its maximally
+>, <Line: +						// constrained type.
+>, <Line: +						states.add(new State(Type.K_VOID, null, true, Automaton.NOCHILDREN));
+>, <Line: +						return states.size() - 1;
+>, <Line: +					} else {
+>, <Line: +						// Now, store the root of this expansion so that it can
+>, <Line: +						// be used
+>, <Line: +						// subsequently to form a recursive cycle.
+>, <Line: +						roots.put(nid, states.size());
+>, <Line: +						return getTypeHelper(td.type(), maximallyConsumed, states, roots);
+>, <Line: +					}			
+>, <Line: +				} catch (IOException e) {
+>, <Line: +					throw new ResolveError(e.getMessage(), e);
+>]
+[<Line: - * The type expander is responsible for managing the relationship between
+>, <Line: -public class TypeExpander {
+>, <Line: -	public TypeExpander(Build.Project project) {
+>, <Line: -	public Type getUnderlyingType(Type type) throws IOException, ResolveError {
+>, <Line: -	public int getTypeHelper(Type type, boolean maximallyConsumed,
+>, <Line: -			ArrayList<Automaton.State> states, HashMap<NameID, Integer> roots)
+>, <Line: -			throws IOException, ResolveError {
+>, <Line: -				// At this point, need to find the corresponding declatation.
+>, <Line: -				WyilFile mi = project.get(nid.module(),WyilFile.ContentType).read();
+>, <Line: -				WyilFile.Type td = mi.type(nid.name());
+>, <Line: -				if(maximallyConsumed && td.invariant().numBlocks() > 0) {
+>, <Line: -					// In this specially case, we have a constrained type
+>, <Line: -					// and we are attempting to compute the maximally
+>, <Line: -					// consumed type. This type is not fully consumed as it
+>, <Line: -					// is constrained and, hence, void is its maximally
+>, <Line: -					// constrained type. 						
+>, <Line: -					states.add(new State(Type.K_VOID, null, true,
+>, <Line: -							Automaton.NOCHILDREN));
+>, <Line: -					return states.size()-1;
+>, <Line: -				} else {
+>, <Line: -					// Now, store the root of this expansion so that it can be used
+>, <Line: -					// subsequently to form a recursive cycle.											
+>, <Line: -					roots.put(nid, states.size());
+>, <Line: -					return getTypeHelper(td.type(),maximallyConsumed,states,roots);
+>]

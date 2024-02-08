@@ -1,0 +1,4 @@
+[<Line: +		addHeaders(header, options.getVCFIdentifierPrefix());
+>]
+[<Line: -		addHeaders(header, getDefaultPrefix());
+>]

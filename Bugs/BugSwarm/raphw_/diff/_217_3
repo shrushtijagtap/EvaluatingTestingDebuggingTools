@@ -1,0 +1,4 @@
+[<Line: +        assertThat(new FieldAccessor.FieldNameExtractor.ForFixedValue(FOO).resolve(methodDescription), is(FOO));
+>]
+[<Line: -        assertThat(new FieldAccessor.FieldNameExtractor.ForFixedValue(FOO).fieldNameFor(methodDescription), is(FOO));
+>]

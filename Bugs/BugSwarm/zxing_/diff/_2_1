@@ -1,0 +1,8 @@
+[<Line: +            <artifactSet>
+>, <Line: +              <excludes>
+>, <Line: +                <!-- Make sure Android SDK jar isn't included -->
+>, <Line: +                <exclude>com.google.android:android</exclude>
+>, <Line: +              </excludes>
+>, <Line: +            </artifactSet>
+>]
+[]

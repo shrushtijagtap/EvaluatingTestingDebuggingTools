@@ -1,0 +1,26 @@
+[<Line: +package backend;
+>, <Line: +public class UserCredentials {
+>, <Line: +	public final String username;
+>, <Line: +	public final String password;
+>, <Line: +	public UserCredentials(String username, String password) {
+>, <Line: +		this.username = username;
+>, <Line: +		this.password = password;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object o) {
+>, <Line: +		if (this == o) return true;
+>, <Line: +		if (o == null || getClass() != o.getClass()) return false;
+>, <Line: +		UserCredentials that = (UserCredentials) o;
+>, <Line: +		if (password != null ? !password.equals(that.password) : that.password != null) return false;
+>, <Line: +		if (username != null ? !username.equals(that.username) : that.username != null) return false;
+>, <Line: +		return true;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode() {
+>, <Line: +		int result = username != null ? username.hashCode() : 0;
+>, <Line: +		result = 31 * result + (password != null ? password.hashCode() : 0);
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

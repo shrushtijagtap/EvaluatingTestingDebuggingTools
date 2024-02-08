@@ -1,0 +1,12 @@
+[<Line: +    [int] r = [0; |ls|]
+>, <Line: +    while i < |r| where i >= 0:
+>, <Line: +        r[i] = 1
+>, <Line: +    assume rs == [1, 1, 1, 1, 1, 1, 1]
+>, <Line: +    assume rs == []
+>]
+[<Line: -    [int] r = [1]
+>, <Line: -    while i < |ls|:
+>, <Line: -        r = r ++ [1]
+>, <Line: -    assume rs == [1, 1, 1, 1, 1, 1, 1, 1]
+>, <Line: -    assume rs == [1]
+>]

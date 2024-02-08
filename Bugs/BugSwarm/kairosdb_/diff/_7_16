@@ -1,0 +1,59 @@
+[<Line: +import com.datastax.driver.core.exceptions.UnavailableException;
+>, <Line: +import com.datastax.driver.core.policies.LoadBalancingPolicy;
+>, <Line: +import org.json.JSONWriter;
+>, <Line: +import java.io.StringWriter;
+>, <Line: +import java.util.Map;
+>, <Line: +public class BatchHandler implements Callable<Boolean>
+>, <Line: +	public static final Logger failedLogger = LoggerFactory.getLogger("failed_logger");
+>, <Line: +	private final Schema m_schema;
+>, <Line: +	private final LoadBalancingPolicy m_loadBalancingPolicy;
+>, <Line: +			Session session, Schema schema,
+>, <Line: +			boolean fullBatch, BatchStats batchStats, LoadBalancingPolicy loadBalancingPolicy)
+>, <Line: +		m_schema = schema;
+>, <Line: +		m_loadBalancingPolicy = loadBalancingPolicy;
+>, <Line: +	public Boolean call() throws Exception
+>, <Line: +					CQLBatch batch = new CQLBatch(m_consistencyLevel, m_session, m_schema,
+>, <Line: +							m_batchStats, m_loadBalancingPolicy);
+>, <Line: +			//If More exceptions are added to retry they need to be added to AdaptiveExecutorService
+>, <Line: +				logger.error(nae.getMessage());
+>, <Line: +			catch (UnavailableException ue)
+>, <Line: +			{
+>, <Line: +				//Throw this out so the back off retry can happen
+>, <Line: +				logger.error(ue.getMessage());
+>, <Line: +				throw ue;
+>, <Line: +			}
+>, <Line: +					for (DataPointEvent event : m_events)
+>, <Line: +					{
+>, <Line: +						StringWriter sw = new StringWriter();
+>, <Line: +						JSONWriter jsonWriter = new JSONWriter(sw);
+>, <Line: +						jsonWriter.object();
+>, <Line: +						jsonWriter.key("name").value(event.getMetricName());
+>, <Line: +						jsonWriter.key("timestamp").value(event.getDataPoint().getTimestamp());
+>, <Line: +						jsonWriter.key("value");
+>, <Line: +						event.getDataPoint().writeValueToJson(jsonWriter);
+>, <Line: +						jsonWriter.key("tags").object();
+>, <Line: +						ImmutableSortedMap<String, String> tags = event.getTags();
+>, <Line: +						for (Map.Entry<String, String> entry : tags.entrySet())
+>, <Line: +						{
+>, <Line: +							jsonWriter.key(entry.getKey()).value(entry.getValue());
+>, <Line: +						}
+>, <Line: +						jsonWriter.endObject();
+>, <Line: +						jsonWriter.key("ttl").value(event.getTtl());
+>, <Line: +						jsonWriter.endObject();
+>, <Line: +						failedLogger.trace(sw.toString());
+>, <Line: +					}
+>, <Line: +		return m_fullBatch;
+>]
+[<Line: -import com.datastax.driver.core.exceptions.InvalidQueryException;
+>, <Line: -import java.io.IOException;
+>, <Line: -public class BatchHandler implements Callable<Long>
+>, <Line: -	private final CassandraDatastore.PreparedStatements m_preparedStatements;
+>, <Line: -			Session session, CassandraDatastore.PreparedStatements preparedStatements,
+>, <Line: -			boolean fullBatch, BatchStats batchStats)
+>, <Line: -		m_preparedStatements = preparedStatements;
+>, <Line: -	public Long call() throws Exception
+>, <Line: -					CQLBatch batch = new CQLBatch(m_consistencyLevel, m_session, m_preparedStatements,
+>, <Line: -							m_batchStats);
+>, <Line: -					//Todo add logging for data points
+>, <Line: -		return 1L;
+>]

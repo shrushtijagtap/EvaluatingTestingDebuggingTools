@@ -1,0 +1,25 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import com.googlecode.mp4parser.boxes.BoxRoundtripTest;
+>, <Line: +import org.junit.runners.Parameterized;
+>, <Line: +import org.mp4parser.ParsableBox;
+>, <Line: +import java.util.Collection;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.Map;
+>, <Line: +/**
+>, <Line: + * Created by sannies on 06.08.2015.
+>, <Line: + */
+>, <Line: +public class DegradationPriorityBoxTest extends BoxRoundtripTest {
+>, <Line: +    public DegradationPriorityBoxTest(ParsableBox parsableBoxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: +        super(parsableBoxUnderTest, properties);
+>, <Line: +    }
+>, <Line: +    @Parameterized.Parameters
+>, <Line: +    public static Collection<Object[]> data() {
+>, <Line: +        return Collections.singletonList(
+>, <Line: +                new Object[]{new DegradationPriorityBox(),
+>, <Line: +                        new Map.Entry[]{
+>, <Line: +                                new E("priorities", new int[]{1, 2, 4, 6, 8, 2, 22, 4343, 6545, 44})}
+>, <Line: +                });
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

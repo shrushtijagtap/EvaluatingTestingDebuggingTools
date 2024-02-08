@@ -1,0 +1,4 @@
+[<Line: +                        return new Dispatcher.ForJava8CapableVm(Class.forName("java.lang.reflect.Executable").getMethod("getParameterCount"));
+>]
+[<Line: -                        return new Dispatcher.ForJava8CapableVm(Class.forName("java.lang.reflect.Executable").getDeclaredMethod("getParameterCount"));
+>]

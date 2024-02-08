@@ -1,0 +1,9 @@
+[<Line: +      "refresh_interval" : "5s",
+>, <Line: +      "query.default_field": "request"
+>, <Line: +        "request_id":          {"type": "string",  "index": "not_analyzed", "doc_values": true},
+>, <Line: +        "request_name":        {"type": "string",  "analyzer": "standard",
+>]
+[<Line: -      "refresh_interval" : "5s"
+>, <Line: -        "id":                  {"type": "string",  "index": "not_analyzed", "doc_values": true},
+>, <Line: -        "name":                {"type": "string",  "analyzer": "standard",
+>]

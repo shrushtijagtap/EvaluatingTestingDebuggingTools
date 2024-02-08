@@ -1,0 +1,10 @@
+[<Line: +package org.kairosdb.core.queue;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 10/13/16.
+>, <Line: + */
+>, <Line: +public interface EventCompletionCallBack
+>, <Line: +{
+>, <Line: +	void complete();
+>, <Line: +}
+>]
+[]

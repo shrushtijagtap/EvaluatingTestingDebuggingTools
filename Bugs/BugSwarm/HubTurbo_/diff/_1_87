@@ -1,0 +1,183 @@
+[]
+[<Line: -package model;
+>, <Line: -import java.time.Instant;
+>, <Line: -import java.time.LocalDate;
+>, <Line: -import java.time.ZoneId;
+>, <Line: -import java.time.ZonedDateTime;
+>, <Line: -import java.time.format.DateTimeFormatter;
+>, <Line: -import java.time.temporal.ChronoUnit;
+>, <Line: -import java.util.Date;
+>, <Line: -import org.eclipse.egit.github.core.Milestone;
+>, <Line: -public class TurboMilestone implements TurboResource {
+>, <Line: -	private static final String CUSTOM_DATETIME_PATTERN = "d MMMM yyyy";
+>, <Line: -	/*
+>, <Line: -	 * Attributes, Getters & Setters
+>, <Line: -	 */
+>, <Line: -	private int number = -1;
+>, <Line: -	public int getNumber() {return number;}
+>, <Line: -	public void setNumber(int number) {
+>, <Line: -		this.number = number;
+>, <Line: -	}
+>, <Line: -	private String title = "";
+>, <Line: -    public final String getTitle() {return title;}
+>, <Line: -    public final void setTitle(String value) {title = value;}
+>, <Line: -	private String state;
+>, <Line: -	public String getState() {return state;}
+>, <Line: -	public void setState(String state) {
+>, <Line: -		this.state = state;
+>, <Line: -	}
+>, <Line: -	private String description;
+>, <Line: -	public String getDescription() {return description;}
+>, <Line: -	public void setDescription(String description) {this.description = description;}
+>, <Line: -	private LocalDate dueOn;
+>, <Line: -	public LocalDate getDueOn() {return dueOn;}
+>, <Line: -	public void setDueOn(LocalDate dueOn) {
+>, <Line: -		this.dueOn = dueOn;
+>, <Line: -		if (this.dueOn != null) {
+>, <Line: -			setDueOnString(getDueOn().format(DateTimeFormatter.ofPattern(CUSTOM_DATETIME_PATTERN)));
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public void setDueOn(String dueOnString) {
+>, <Line: -		if (dueOnString == null) {
+>, <Line: -			this.dueOn = null;
+>, <Line: -		} else {
+>, <Line: -			this.dueOn = LocalDate.parse(dueOnString, DateTimeFormatter.ofPattern(CUSTOM_DATETIME_PATTERN));
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private String dueOnString;
+>, <Line: -    public final String getDueOnString() {return dueOnString;}
+>, <Line: -    public final void setDueOnString(String value) {dueOnString = value;}
+>, <Line: -	private int closed = 0;
+>, <Line: -    public final int getClosed() {return closed;}
+>, <Line: -    public final void setClosed(Integer value) {closed = value;}
+>, <Line: -    private int open = 0;
+>, <Line: -    public final int getOpen() {return open;}
+>, <Line: -    public final void setOpen(Integer value) {open = value;}
+>, <Line: -	/*
+>, <Line: -	 * Constructors and Public Methods
+>, <Line: -	 */
+>, <Line: -	public TurboMilestone(TurboMilestone other) {
+>, <Line: -		this(other.toGhResource());
+>, <Line: -	}
+>, <Line: -	public TurboMilestone() {
+>, <Line: -		setTitle("");
+>, <Line: -	}
+>, <Line: -	public TurboMilestone(String title) {
+>, <Line: -		setTitle(title);
+>, <Line: -	}
+>, <Line: -	public TurboMilestone(Milestone milestone) {
+>, <Line: -		assert milestone != null;
+>, <Line: -		setTitle(milestone.getTitle());
+>, <Line: -		this.number = milestone.getNumber();
+>, <Line: -		this.state = milestone.getState();
+>, <Line: -		this.description = milestone.getDescription();
+>, <Line: -		setDueOn(toLocalDate(milestone.getDueOn()));
+>, <Line: -		setClosed(milestone.getClosedIssues());
+>, <Line: -		setOpen(milestone.getOpenIssues());
+>, <Line: -	}
+>, <Line: -	public Milestone toGhResource() {
+>, <Line: -		Milestone ghMilestone = new Milestone();
+>, <Line: -		ghMilestone.setTitle(getTitle());
+>, <Line: -		ghMilestone.setNumber(number);
+>, <Line: -		ghMilestone.setState(state);
+>, <Line: -		ghMilestone.setDescription(description);
+>, <Line: -		ghMilestone.setDueOn(toDate(dueOn));
+>, <Line: -		return ghMilestone;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void copyValuesFrom(TurboResource other) {
+>, <Line: -		assert other != null;
+>, <Line: -		assert other instanceof TurboMilestone;
+>, <Line: -		TurboMilestone obj = (TurboMilestone) other;
+>, <Line: -		setTitle(obj.getTitle());
+>, <Line: -		setState(obj.getState());
+>, <Line: -		setDescription(obj.getDescription());
+>, <Line: -		setDueOn(obj.getDueOn());
+>, <Line: -		setClosed(obj.getClosed());
+>, <Line: -		setOpen(obj.getOpen());
+>, <Line: -	}
+>, <Line: -	public double getProgress(){
+>, <Line: -		if (getClosed() == 0 && getOpen() == 0) {
+>, <Line: -			return 0;
+>, <Line: -		}
+>, <Line: -		double total = getClosed() + getOpen();
+>, <Line: -		double progress = getClosed() / total;
+>, <Line: -		return progress;
+>, <Line: -	}
+>, <Line: -	public Long relativeDueDateInDays() {
+>, <Line: -		if (getDueOn() == null) {
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -		long daysUntilDueDate = LocalDate.now().until(getDueOn(), ChronoUnit.DAYS);
+>, <Line: -		return daysUntilDueDate;
+>, <Line: -	}
+>, <Line: -	public String relativeDueDateInString() {
+>, <Line: -		Long days = relativeDueDateInDays();
+>, <Line: -		if (days == null) {return null;}
+>, <Line: -		if (days < 0) {return "over";}
+>, <Line: -		if (days == 0) {return "today";}
+>, <Line: -		if (days > 0) {return days.toString() + " days";}
+>, <Line: -		return ""; //stub value, should never be returned
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public String toString() {
+>, <Line: -		return "TurboMilestone [title=" + title + "]";
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * A convenient string representation of this object, for purposes of readable logs.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public String logString() {
+>, <Line: -		return title;
+>, <Line: -	}
+>, <Line: -	/*
+>, <Line: -	 * Private Methods
+>, <Line: -	 */
+>, <Line: -	private LocalDate toLocalDate(Date date) {
+>, <Line: -		if (date == null) {
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -		Instant instant = date.toInstant();
+>, <Line: -		ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
+>, <Line: -		LocalDate localDate = zdt.toLocalDate();
+>, <Line: -		// Minus one day as GitHub API milestone due date is one day
+>, <Line: -		// ahead of GitHub UI milestone due date
+>, <Line: -		return localDate.minusDays(1);
+>, <Line: -	}
+>, <Line: -	private Date toDate(LocalDate localDate) {
+>, <Line: -		if (localDate == null) {
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -		// Plus one day as GitHub UI milestone due date is one day
+>, <Line: -		// behind of GitHub API milestone due date
+>, <Line: -		long epochInMilliseconds = (localDate.toEpochDay() + 1) * 24 * 60 * 60 * 1000;
+>, <Line: -		Date date = new Date(epochInMilliseconds);
+>, <Line: -		return date;
+>, <Line: -	}
+>, <Line: -	/*
+>, <Line: -	 * Overridden Methods
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public int hashCode() {
+>, <Line: -		final int prime = 31;
+>, <Line: -		int result = 1;
+>, <Line: -		result = prime * result + number;
+>, <Line: -		return result;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean equals(Object obj) {
+>, <Line: -		if (this == obj)
+>, <Line: -			return true;
+>, <Line: -		if (obj == null)
+>, <Line: -			return false;
+>, <Line: -		if (getClass() != obj.getClass())
+>, <Line: -			return false;
+>, <Line: -		TurboMilestone other = (TurboMilestone) obj;
+>, <Line: -		if (number != other.number)
+>, <Line: -			return false;
+>, <Line: -		if (!title.equals(other.title))
+>, <Line: -			return false;
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -}
+>]

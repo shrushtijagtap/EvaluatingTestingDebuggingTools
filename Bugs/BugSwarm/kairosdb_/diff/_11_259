@@ -1,0 +1,396 @@
+[<Line: +	'./lexer'
+>, <Line: +	'use strict';
+>, <Line: +	function Parser(expression) {
+>, <Line: +		this.expression = expression;
+>, <Line: +		this.lexer = new Lexer(expression);
+>, <Line: +		this.tokens = this.lexer.tokenize();
+>, <Line: +		this.index = 0;
+>, <Line: +	}
+>, <Line: +	Parser.prototype = {
+>, <Line: +		getAst: function () {
+>, <Line: +			return this.start();
+>, <Line: +		},
+>, <Line: +		start: function () {
+>, <Line: +			try {
+>, <Line: +				return this.functionCall() || this.metricExpression();
+>, <Line: +			}
+>, <Line: +			catch (e) {
+>, <Line: +				return {
+>, <Line: +					type: 'error',
+>, <Line: +					message: e.message,
+>, <Line: +					pos: e.pos
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +		},
+>, <Line: +		curlyBraceSegment: function () {
+>, <Line: +			if (this.match('identifier', '{') || this.match('{')) {
+>, <Line: +				var curlySegment = "";
+>, <Line: +				while (!this.match('') && !this.match('}')) {
+>, <Line: +					curlySegment += this.consumeToken().value;
+>, <Line: +				}
+>, <Line: +				if (!this.match('}')) {
+>, <Line: +					this.errorMark("Expected closing '}'");
+>, <Line: +				}
+>, <Line: +				curlySegment += this.consumeToken().value;
+>, <Line: +				// if curly segment is directly followed by identifier
+>, <Line: +				// include it in the segment
+>, <Line: +				if (this.match('identifier')) {
+>, <Line: +					curlySegment += this.consumeToken().value;
+>, <Line: +				}
+>, <Line: +				return {
+>, <Line: +					type: 'segment',
+>, <Line: +					value: curlySegment
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				return null;
+>, <Line: +			}
+>, <Line: +		},
+>, <Line: +		metricSegment: function () {
+>, <Line: +			var curly = this.curlyBraceSegment();
+>, <Line: +			if (curly) {
+>, <Line: +				return curly;
+>, <Line: +			}
+>, <Line: +			if (this.match('identifier') || this.match('number')) {
+>, <Line: +				// hack to handle float numbers in metric segments
+>, <Line: +				var parts = this.consumeToken().value.split('.');
+>, <Line: +				if (parts.length === 2) {
+>, <Line: +					this.tokens.splice(this.index, 0, {type: '.'});
+>, <Line: +					this.tokens.splice(this.index + 1, 0, {
+>, <Line: +						type: 'number',
+>, <Line: +						value: parts[1]
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				return {
+>, <Line: +					type: 'segment',
+>, <Line: +					value: parts[0]
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +			if (!this.match('templateStart')) {
+>, <Line: +				this.errorMark('Expected metric identifier');
+>, <Line: +			}
+>, <Line: +			this.consumeToken();
+>, <Line: +			if (!this.match('identifier')) {
+>, <Line: +				this.errorMark('Expected identifier after templateStart');
+>, <Line: +			}
+>, <Line: +			var node = {
+>, <Line: +				type: 'template',
+>, <Line: +				value: this.consumeToken().value
+>, <Line: +			};
+>, <Line: +			if (!this.match('templateEnd')) {
+>, <Line: +				this.errorMark('Expected templateEnd');
+>, <Line: +			}
+>, <Line: +			this.consumeToken();
+>, <Line: +			return node;
+>, <Line: +		},
+>, <Line: +		metricExpression: function () {
+>, <Line: +			if (!this.match('templateStart') && !this.match('identifier') && !this.match('number') && !this.match('{')) {
+>, <Line: +				return null;
+>, <Line: +			}
+>, <Line: +			var node = {
+>, <Line: +				type: 'metric',
+>, <Line: +				segments: []
+>, <Line: +			};
+>, <Line: +			node.segments.push(this.metricSegment());
+>, <Line: +			while (this.match('.')) {
+>, <Line: +				this.consumeToken();
+>, <Line: +				var segment = this.metricSegment();
+>, <Line: +				if (!segment) {
+>, <Line: +					this.errorMark('Expected metric identifier');
+>, <Line: +				}
+>, <Line: +				node.segments.push(segment);
+>, <Line: +			}
+>, <Line: +			return node;
+>, <Line: +		},
+>, <Line: +		functionCall: function () {
+>, <Line: +			if (!this.match('identifier', '(')) {
+>, <Line: +				return null;
+>, <Line: +			}
+>, <Line: +			var node = {
+>, <Line: +				type: 'function',
+>, <Line: +				name: this.consumeToken().value,
+>, <Line: +			};
+>, <Line: +			// consume left paranthesis
+>, <Line: +			this.consumeToken();
+>, <Line: +			node.params = this.functionParameters();
+>, <Line: +			if (!this.match(')')) {
+>, <Line: +				this.errorMark('Expected closing paranthesis');
+>, <Line: +			}
+>, <Line: +			this.consumeToken();
+>, <Line: +			return node;
+>, <Line: +		},
+>, <Line: +		functionParameters: function () {
+>, <Line: +			if (this.match(')') || this.match('')) {
+>, <Line: +				return [];
+>, <Line: +			}
+>, <Line: +			var param =
+>, <Line: +				this.functionCall() ||
+>, <Line: +				this.numericLiteral() ||
+>, <Line: +				this.seriesRefExpression() ||
+>, <Line: +				this.metricExpression() ||
+>, <Line: +				this.stringLiteral();
+>, <Line: +			if (!this.match(',')) {
+>, <Line: +				return [param];
+>, <Line: +			}
+>, <Line: +			this.consumeToken();
+>, <Line: +			return [param].concat(this.functionParameters());
+>, <Line: +		},
+>, <Line: +		seriesRefExpression: function () {
+>, <Line: +			if (!this.match('identifier')) {
+>, <Line: +				return null;
+>, <Line: +			}
+>, <Line: +			var value = this.tokens[this.index].value;
+>, <Line: +			if (!value.match(/\#[A-Z]/)) {
+>, <Line: +				return null;
+>, <Line: +			}
+>, <Line: +			var token = this.consumeToken();
+>, <Line: +			return {
+>, <Line: +				type: 'series-ref',
+>, <Line: +				value: token.value
+>, <Line: +			};
+>, <Line: +		},
+>, <Line: +		numericLiteral: function () {
+>, <Line: +			if (!this.match('number')) {
+>, <Line: +				return null;
+>, <Line: +			}
+>, <Line: +			return {
+>, <Line: +				type: 'number',
+>, <Line: +				value: parseFloat(this.consumeToken().value)
+>, <Line: +			};
+>, <Line: +		},
+>, <Line: +		stringLiteral: function () {
+>, <Line: +			if (!this.match('string')) {
+>, <Line: +				return null;
+>, <Line: +			}
+>, <Line: +			var token = this.consumeToken();
+>, <Line: +			if (token.isUnclosed) {
+>, <Line: +				throw {message: 'Unclosed string parameter', pos: token.pos};
+>, <Line: +			}
+>, <Line: +			return {
+>, <Line: +				type: 'string',
+>, <Line: +				value: token.value
+>, <Line: +			};
+>, <Line: +		},
+>, <Line: +		errorMark: function (text) {
+>, <Line: +			var currentToken = this.tokens[this.index];
+>, <Line: +			var type = currentToken ? currentToken.type : 'end of string';
+>, <Line: +			throw {
+>, <Line: +				message: text + " instead found " + type,
+>, <Line: +				pos: currentToken ? currentToken.pos : this.lexer.char
+>, <Line: +			};
+>, <Line: +		},
+>, <Line: +		// returns token value and incre
+>, <Line: +		consumeToken: function () {
+>, <Line: +			this.index++;
+>, <Line: +			return this.tokens[this.index - 1];
+>, <Line: +		},
+>, <Line: +		matchToken: function (type, index) {
+>, <Line: +			var token = this.tokens[this.index + index];
+>, <Line: +			return (token === undefined && type === '') ||
+>, <Line: +				token && token.type === type;
+>, <Line: +		},
+>, <Line: +		match: function (token1, token2) {
+>, <Line: +			return this.matchToken(token1, 0) &&
+>, <Line: +				(!token2 || this.matchToken(token2, 1));
+>, <Line: +		},
+>, <Line: +	};
+>, <Line: +	return Parser;
+>]
+[<Line: -  './lexer'
+>, <Line: -  'use strict';
+>, <Line: -  function Parser(expression) {
+>, <Line: -    this.expression = expression;
+>, <Line: -    this.lexer = new Lexer(expression);
+>, <Line: -    this.tokens = this.lexer.tokenize();
+>, <Line: -    this.index = 0;
+>, <Line: -  }
+>, <Line: -  Parser.prototype = {
+>, <Line: -    getAst: function () {
+>, <Line: -      return this.start();
+>, <Line: -    },
+>, <Line: -    start: function () {
+>, <Line: -      try {
+>, <Line: -        return this.functionCall() || this.metricExpression();
+>, <Line: -      }
+>, <Line: -      catch (e) {
+>, <Line: -        return {
+>, <Line: -          type: 'error',
+>, <Line: -          message: e.message,
+>, <Line: -          pos: e.pos
+>, <Line: -        };
+>, <Line: -      }
+>, <Line: -    },
+>, <Line: -    curlyBraceSegment: function() {
+>, <Line: -      if (this.match('identifier', '{') || this.match('{')) {
+>, <Line: -        var curlySegment = "";
+>, <Line: -        while (!this.match('') && !this.match('}')) {
+>, <Line: -          curlySegment += this.consumeToken().value;
+>, <Line: -        }
+>, <Line: -        if (!this.match('}')) {
+>, <Line: -          this.errorMark("Expected closing '}'");
+>, <Line: -        }
+>, <Line: -        curlySegment += this.consumeToken().value;
+>, <Line: -        // if curly segment is directly followed by identifier
+>, <Line: -        // include it in the segment
+>, <Line: -        if (this.match('identifier')) {
+>, <Line: -          curlySegment += this.consumeToken().value;
+>, <Line: -        }
+>, <Line: -        return {
+>, <Line: -          type: 'segment',
+>, <Line: -          value: curlySegment
+>, <Line: -        };
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        return null;
+>, <Line: -      }
+>, <Line: -    },
+>, <Line: -    metricSegment: function() {
+>, <Line: -      var curly = this.curlyBraceSegment();
+>, <Line: -      if (curly) {
+>, <Line: -        return curly;
+>, <Line: -      }
+>, <Line: -      if (this.match('identifier') || this.match('number')) {
+>, <Line: -        // hack to handle float numbers in metric segments
+>, <Line: -        var parts = this.consumeToken().value.split('.');
+>, <Line: -        if (parts.length === 2) {
+>, <Line: -          this.tokens.splice(this.index, 0, { type: '.' });
+>, <Line: -          this.tokens.splice(this.index + 1, 0, { type: 'number', value: parts[1] });
+>, <Line: -        }
+>, <Line: -        return {
+>, <Line: -          type: 'segment',
+>, <Line: -          value: parts[0]
+>, <Line: -        };
+>, <Line: -      }
+>, <Line: -      if (!this.match('templateStart')) {
+>, <Line: -        this.errorMark('Expected metric identifier');
+>, <Line: -      }
+>, <Line: -      this.consumeToken();
+>, <Line: -      if (!this.match('identifier')) {
+>, <Line: -        this.errorMark('Expected identifier after templateStart');
+>, <Line: -      }
+>, <Line: -      var node = {
+>, <Line: -        type: 'template',
+>, <Line: -        value: this.consumeToken().value
+>, <Line: -      };
+>, <Line: -      if (!this.match('templateEnd')) {
+>, <Line: -        this.errorMark('Expected templateEnd');
+>, <Line: -      }
+>, <Line: -      this.consumeToken();
+>, <Line: -      return node;
+>, <Line: -    },
+>, <Line: -    metricExpression: function() {
+>, <Line: -      if (!this.match('templateStart') &&
+>, <Line: -          !this.match('identifier') &&
+>, <Line: -          !this.match('number') &&
+>, <Line: -          !this.match('{')) {
+>, <Line: -        return null;
+>, <Line: -      }
+>, <Line: -      var node = {
+>, <Line: -        type: 'metric',
+>, <Line: -        segments: []
+>, <Line: -      };
+>, <Line: -      node.segments.push(this.metricSegment());
+>, <Line: -      while (this.match('.')) {
+>, <Line: -        this.consumeToken();
+>, <Line: -        var segment = this.metricSegment();
+>, <Line: -        if (!segment) {
+>, <Line: -          this.errorMark('Expected metric identifier');
+>, <Line: -        }
+>, <Line: -        node.segments.push(segment);
+>, <Line: -      }
+>, <Line: -      return node;
+>, <Line: -    },
+>, <Line: -    functionCall: function() {
+>, <Line: -      if (!this.match('identifier', '(')) {
+>, <Line: -        return null;
+>, <Line: -      }
+>, <Line: -      var node = {
+>, <Line: -        type: 'function',
+>, <Line: -        name: this.consumeToken().value,
+>, <Line: -      };
+>, <Line: -      // consume left paranthesis
+>, <Line: -      this.consumeToken();
+>, <Line: -      node.params = this.functionParameters();
+>, <Line: -      if (!this.match(')')) {
+>, <Line: -        this.errorMark('Expected closing paranthesis');
+>, <Line: -      }
+>, <Line: -      this.consumeToken();
+>, <Line: -      return node;
+>, <Line: -    },
+>, <Line: -    functionParameters: function () {
+>, <Line: -      if (this.match(')') || this.match('')) {
+>, <Line: -        return [];
+>, <Line: -      }
+>, <Line: -      var param =
+>, <Line: -        this.functionCall() ||
+>, <Line: -        this.numericLiteral() ||
+>, <Line: -        this.seriesRefExpression() ||
+>, <Line: -        this.metricExpression() ||
+>, <Line: -        this.stringLiteral();
+>, <Line: -      if (!this.match(',')) {
+>, <Line: -        return [param];
+>, <Line: -      }
+>, <Line: -      this.consumeToken();
+>, <Line: -      return [param].concat(this.functionParameters());
+>, <Line: -    },
+>, <Line: -    seriesRefExpression: function() {
+>, <Line: -      if (!this.match('identifier')) {
+>, <Line: -        return null;
+>, <Line: -      }
+>, <Line: -      var value = this.tokens[this.index].value;
+>, <Line: -      if (!value.match(/\#[A-Z]/)) {
+>, <Line: -        return null;
+>, <Line: -      }
+>, <Line: -      var token = this.consumeToken();
+>, <Line: -      return {
+>, <Line: -        type: 'series-ref',
+>, <Line: -        value: token.value
+>, <Line: -      };
+>, <Line: -    },
+>, <Line: -    numericLiteral: function () {
+>, <Line: -      if (!this.match('number')) {
+>, <Line: -        return null;
+>, <Line: -      }
+>, <Line: -      return {
+>, <Line: -        type: 'number',
+>, <Line: -        value: parseFloat(this.consumeToken().value)
+>, <Line: -      };
+>, <Line: -    },
+>, <Line: -    stringLiteral: function () {
+>, <Line: -      if (!this.match('string')) {
+>, <Line: -        return null;
+>, <Line: -      }
+>, <Line: -      var token = this.consumeToken();
+>, <Line: -      if (token.isUnclosed) {
+>, <Line: -        throw { message: 'Unclosed string parameter', pos: token.pos };
+>, <Line: -      }
+>, <Line: -      return {
+>, <Line: -        type: 'string',
+>, <Line: -        value: token.value
+>, <Line: -      };
+>, <Line: -    },
+>, <Line: -    errorMark: function(text) {
+>, <Line: -      var currentToken = this.tokens[this.index];
+>, <Line: -      var type = currentToken ? currentToken.type : 'end of string';
+>, <Line: -      throw {
+>, <Line: -        message: text + " instead found " + type,
+>, <Line: -        pos: currentToken ? currentToken.pos : this.lexer.char
+>, <Line: -      };
+>, <Line: -    },
+>, <Line: -    // returns token value and incre
+>, <Line: -    consumeToken: function() {
+>, <Line: -      this.index++;
+>, <Line: -      return this.tokens[this.index - 1];
+>, <Line: -    },
+>, <Line: -    matchToken: function(type, index) {
+>, <Line: -      var token = this.tokens[this.index + index];
+>, <Line: -      return (token === undefined && type === '') ||
+>, <Line: -             token && token.type === type;
+>, <Line: -    },
+>, <Line: -    match: function(token1, token2) {
+>, <Line: -      return this.matchToken(token1, 0) &&
+>, <Line: -        (!token2 || this.matchToken(token2, 1));
+>, <Line: -    },
+>, <Line: -  };
+>, <Line: -  return Parser;
+>]

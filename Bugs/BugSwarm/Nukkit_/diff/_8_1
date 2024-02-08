@@ -1,0 +1,24 @@
+[<Line: +### Issue Description
+>, <Line: +### Steps to Reproduce the Issue
+>, <Line: +### OS and Versions
+>, <Line: +| Storage Size | ?? GB | <!-- Max size -->
+>, <Line: +| Storage Type | ?? | <!-- SSD or HDD -->
+>, <Line: +| CPU Type | ?? | <!-- Such as: "Intel Xeon X5650" ,"Hisilicon HI3536C" or "AMD Ryzen 7" -->
+>, <Line: +| CPU Core Count | ?? cores ?? threads | 
+>, <Line: +| Upstream Bandwidth | ?? | <!-- How many Mbps/Gbps? Such as: 100 Mbps or 1 Gbps. If you are testing in LAN (wired or wifi) , it depends on speed of your router, it is normally 100 Mbps. -->
+>, <Line: +| Client Edition | ?? | <!--- Windows 10? Android? iOS? Simulators with x86 platform? -->
+>, <Line: +| Client Version | ?? | <!--- Client Version, such as 1.1.2, 0.15.90 or 0.15 build 1 and so on -->
+>, <Line: +### Crashdump, Backtrace or Other Files
+>]
+[<Line: -### Issue description
+>, <Line: -### Steps to reproduce the issue
+>, <Line: -### OS and versions
+>, <Line: -| Storage size | ?? GB | <!-- Max size -->
+>, <Line: -| Storage type | ?? | <!-- SSD or HDD -->
+>, <Line: -| CPU type | ?? | <!-- Such as: "Intel Xeon X5650" ,"Hisilicon HI3536C" or "AMD Ryzen 7" -->
+>, <Line: -| CPU core count | ?? cores ?? threads | 
+>, <Line: -| Internet upload | ?? | <!-- How many Mbps/Gbps? Such as: 100 Mbps or 1 Gbps. If you are testing in LAN (wired or wifi) , it depends on speed of your router, it is normally 100 Mbps. -->
+>, <Line: -| Client edition | ?? | <!--- Windows 10? Android? iOS? Simulators with x86 platform? -->
+>, <Line: -| Client version | ?? | <!--- Client Version, such as 1.1.2, 0.15.90 or 0.15 build 1 and so on -->
+>, <Line: -### Crashdump, backtrace or other files
+>]

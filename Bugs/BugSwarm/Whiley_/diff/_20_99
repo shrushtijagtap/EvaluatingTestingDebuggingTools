@@ -1,0 +1,4 @@
+[<Line: +function extract(int[] ls) -> int[]:
+>]
+[<Line: -function extract([int] ls) -> [int]:
+>]

@@ -1,0 +1,42 @@
+[<Line: +import net.bytebuddy.description.annotation.AnnotationDescription;
+>, <Line: +import net.bytebuddy.description.annotation.AnnotationList;
+>, <Line: +import java.util.Collections;
+>, <Line: +     * The annotations of the type variable.
+>, <Line: +     */
+>, <Line: +    private final List<? extends AnnotationDescription> annotations;
+>, <Line: +    /**
+>, <Line: +     * Creates a new type variable token without annotations.
+>, <Line: +        this(symbol, bounds, Collections.<AnnotationDescription>emptyList());
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Creates a new type variable token.
+>, <Line: +     *
+>, <Line: +     * @param symbol      The type variable's symbol.
+>, <Line: +     * @param bounds      The type variable's upper bounds.
+>, <Line: +     * @param annotations The annotations of the type variable.
+>, <Line: +     */
+>, <Line: +    public TypeVariableToken(String symbol, List<? extends TypeDescription.Generic> bounds, List<? extends AnnotationDescription> annotations) {
+>, <Line: +        this.annotations = annotations;
+>, <Line: +        return new TypeVariableToken(typeVariable.getSymbol(),
+>, <Line: +                typeVariable.getUpperBounds().accept(new TypeDescription.Generic.Visitor.Substitutor.ForDetachment(matcher)),
+>, <Line: +                typeVariable.getDeclaredAnnotations());
+>, <Line: +    /**
+>, <Line: +     * Returns the annotations on this type variable.
+>, <Line: +     *
+>, <Line: +     * @return The annotations on this variable.
+>, <Line: +     */
+>, <Line: +    public AnnotationList getAnnotations() {
+>, <Line: +        return new AnnotationList.Explicit(annotations);
+>, <Line: +    }
+>, <Line: +        return new TypeVariableToken(getSymbol(), getBounds().accept(visitor), getAnnotations());
+>, <Line: +        return symbol.equals(that.symbol)
+>, <Line: +                && bounds.equals(that.bounds)
+>, <Line: +                && annotations.equals(that.annotations);
+>, <Line: +        result = 31 * result + annotations.hashCode();
+>, <Line: +                ", annotations=" + annotations +
+>]
+[<Line: -     * Creates a new type variable token.
+>, <Line: -        return new TypeVariableToken(typeVariable.getSymbol(), typeVariable.getUpperBounds().accept(new TypeDescription.Generic.Visitor.Substitutor.ForDetachment(matcher)));
+>, <Line: -        return new TypeVariableToken(getSymbol(), getBounds().accept(visitor));
+>, <Line: -        return symbol.equals(that.symbol) && bounds.equals(that.bounds);
+>]

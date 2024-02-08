@@ -1,0 +1,15 @@
+[<Line: +import org.mp4parser.ParsableBox;
+>, <Line: +import org.mp4parser.boxes.dece.AssetInformationBox;
+>, <Line: +    public AssetInformationBoxTest(ParsableBox parsableBoxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: +        super(parsableBoxUnderTest, properties);
+>]
+[<Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import com.googlecode.mp4parser.boxes.BoxWriteReadBase;
+>, <Line: -import com.googlecode.mp4parser.boxes.dece.AssetInformationBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.CencSampleEncryptionInformationGroupEntry;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.SampleGroupDescriptionBox;
+>, <Line: -import com.googlecode.mp4parser.util.UUIDConverter;
+>, <Line: -import java.util.UUID;
+>, <Line: -    public AssetInformationBoxTest(Box boxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: -        super(boxUnderTest, properties);
+>]

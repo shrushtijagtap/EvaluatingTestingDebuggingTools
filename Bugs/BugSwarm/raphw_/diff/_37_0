@@ -1,0 +1,7 @@
+[<Line: +     * supplying an explicit {@link ConstructorStrategy} by {@link ByteBuddy#subclass(TypeDefinition, ConstructorStrategy)}.
+>, <Line: +     * </p>
+>]
+[<Line: -     * supplying a
+>, <Line: -     * n explicit {@link ConstructorStrategy} by {@link ByteBuddy#subclass(TypeDefinition, ConstructorStrategy)}.
+>, <Line: -     * </p>
+>]

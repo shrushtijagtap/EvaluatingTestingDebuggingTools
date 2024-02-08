@@ -1,0 +1,12 @@
+[<Line: +          rawSocket, address.url().host(), address.url().port(), true /* autoClose */);
+>, <Line: +            sslSocket, address.url().host(), address.getProtocols());
+>, <Line: +      if (!address.getHostnameVerifier().verify(address.url().host(), sslSocket.getSession())) {
+>, <Line: +        throw new SSLPeerUnverifiedException("Hostname " + address.url().host() + " not verified:"
+>, <Line: +      address.getCertificatePinner().check(address.url().host(),
+>]
+[<Line: -          rawSocket, address.getUriHost(), address.getUriPort(), true /* autoClose */);
+>, <Line: -            sslSocket, address.getUriHost(), address.getProtocols());
+>, <Line: -      if (!address.getHostnameVerifier().verify(address.getUriHost(), sslSocket.getSession())) {
+>, <Line: -        throw new SSLPeerUnverifiedException("Hostname " + address.getUriHost() + " not verified:"
+>, <Line: -      address.getCertificatePinner().check(address.getUriHost(),
+>]

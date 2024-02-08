@@ -1,0 +1,17 @@
+[<Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.HandlerBox;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +        FileChannel rChannel = new RandomAccessFile("/media/scratch/CSI.S12E21.HDTV.x264-LOL.mp4", "r").getChannel();
+>, <Line: +        HandlerBox hdlr = Path.getPath(isoFile, "/moov[0]/trak[0]/mdia[0]/hdlr[0]");
+>, <Line: +        assert hdlr != null;
+>]
+[<Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.HandlerBox;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.googlecode.mp4parser.FileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import java.util.Collections;
+>, <Line: -        DataSource rChannel = new FileDataSourceImpl("/media/scratch/CSI.S12E21.HDTV.x264-LOL.mp4");
+>, <Line: -        HandlerBox hdlr = (HandlerBox) Path.getPath(isoFile, "/moov[0]/trak[0]/mdia[0]/hdlr[0]");
+>]

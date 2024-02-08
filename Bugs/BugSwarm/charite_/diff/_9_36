@@ -1,0 +1,38 @@
+[<Line: +import de.charite.compbio.jannovar.vardbs.generic_tsv.GenericTSVAnnotationOptions;
+>, <Line: +	/**
+>, <Line: +	 * Construct TSV {@link VariantContext} annotator factory.
+>, <Line: +	 *
+>, <Line: +	 * @param tsvPath
+>, <Line: +	 *            Path to the bgzip-ed TSV annotation file, e.g., dbNSFP or CADD
+>, <Line: +	 * @param fastaRefPath
+>, <Line: +	 *            Path to reference FASTA file
+>, <Line: +	 * @param options
+>, <Line: +	 *            Configuration for the variant context annotation
+>, <Line: +	 * @return Preconfigured {@link DBVariantContextAnnotator} object
+>, <Line: +	 * @throws JannovarVarDBException
+>, <Line: +	 *             on problems loading the resources
+>, <Line: +	 */
+>, <Line: +	public DBVariantContextAnnotator constructGenericTSV(
+>, <Line: +			String tsvPath, String fastaRefPath, GenericTSVAnnotationOptions options)
+>, <Line: +			throws JannovarVarDBException {
+>, <Line: +		return new DBVariantContextAnnotator(new CosmicAnnotationDriver(tsvPath, fastaRefPath, options), options);
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Construct Generic VCF {@link VariantContext} annotator factory.
+>, <Line: +	 *
+>, <Line: +	 * @param vcfDBPath
+>, <Line: +	 *            Path to gzip-compressed, normalized and tbi-indexed VCF file to use for the annotation
+>, <Line: +	 * @param fastaRefPath
+>, <Line: +	 *            Path to reference FASTA file
+>, <Line: +	 * @param options
+>, <Line: +	 *            Configuration for the variant context annotation
+>, <Line: +	 * @return Preconfigured {@link DBVariantContextAnnotator} object
+>, <Line: +	 * @throws JannovarVarDBException
+>, <Line: +	 *             on problems loading the resources
+>, <Line: +	 */
+>, <Line: +	public DBVariantContextAnnotator constructGenericVCF(String vcfDBPath, String fastaRefPath, DBAnnotationOptions options)
+>, <Line: +			throws JannovarVarDBException {
+>, <Line: +		return new DBVariantContextAnnotator(new CosmicAnnotationDriver(vcfDBPath, fastaRefPath, options), options);
+>, <Line: +	}
+>]
+[]

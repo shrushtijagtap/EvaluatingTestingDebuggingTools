@@ -1,0 +1,14 @@
+[<Line: +            // {5, OverflowPolicy.THROW, true},
+>, <Line: +            // {5, OverflowPolicy.BLOCK, true},
+>, <Line: +            // {-1, OverflowPolicy.THROW, true},
+>, <Line: +            // {1, OverflowPolicy.BLOCK, true}
+>, <Line: +        final ReceivePort<Integer> subscriberChannel = ReactiveStreams.subscribe(buffer, overflowPolicy, publisher);
+>, <Line: +        final ReceivePort<Integer> subscriberChannel = ReactiveStreams.subscribe(buffer, overflowPolicy, processor);
+>]
+[<Line: -            {5, OverflowPolicy.THROW, true},
+>, <Line: -            {5, OverflowPolicy.BLOCK, true},
+>, <Line: -            {-1, OverflowPolicy.THROW, true},
+>, <Line: -            {1, OverflowPolicy.BLOCK, true}
+>, <Line: -        final ReceivePort<Integer> subscriberChannel = ReactiveStreams.subscribe(buffer, overflowPolicy, batch, publisher);
+>, <Line: -        final ReceivePort<Integer> subscriberChannel = ReactiveStreams.subscribe(buffer, overflowPolicy, batch, processor);
+>]

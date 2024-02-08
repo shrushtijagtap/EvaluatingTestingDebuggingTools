@@ -1,0 +1,15 @@
+[<Line: +import static org.junit.Assert.*;
+>, <Line: +        EnumSet<Namespaces> reserved = EnumSet.of(Namespaces.OWL, Namespaces.RDF, Namespaces.RDFS, Namespaces.XSD);
+>, <Line: +            assertTrue(iri + " reserved? Should be " + reserved.contains(n) + " but is " + reservedVocabulary,
+>, <Line: +                reservedVocabulary == reserved.contains(n));
+>, <Line: +        assertEquals(OWL2Datatype.XSD_STRING.getDatatype(df), df.getOWLDatatype(v));
+>]
+[<Line: -import static org.junit.Assert.assertEquals;
+>, <Line: -        EnumSet<Namespaces> reserved = EnumSet.of(Namespaces.OWL,
+>, <Line: -                Namespaces.RDF, Namespaces.RDFS, Namespaces.XSD);
+>, <Line: -            assertEquals(iri + " reserved? Should be " + reserved.contains(n)
+>, <Line: -                    + " but is " + reservedVocabulary, reservedVocabulary,
+>, <Line: -                    reserved.contains(n));
+>, <Line: -        assertEquals(OWL2Datatype.XSD_STRING.getDatatype(df),
+>, <Line: -                df.getOWLDatatype(v));
+>]

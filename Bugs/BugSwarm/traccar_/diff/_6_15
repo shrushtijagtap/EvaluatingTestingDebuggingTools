@@ -1,0 +1,8 @@
+[<Line: +import org.traccar.helper.Checksum;
+>, <Line: +            if (identify(id + Checksum.luhnChecksum(Long.valueOf(id)), channel, null, false)) {
+>, <Line: +            buf.writeShort(Checksum.crc16X25Ccitt(buf.toByteBuffer()));
+>]
+[<Line: -import org.traccar.helper.Crc;
+>, <Line: -            if (identify(id + Crc.luhnChecksum(Long.valueOf(id)), channel, null, false)) {
+>, <Line: -            buf.writeShort(Crc.crc16X25Ccitt(buf.toByteBuffer()));
+>]

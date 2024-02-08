@@ -1,0 +1,19 @@
+[<Line: +        Even tiny issue need all details
+>, <Line: +        (Check name, config with options, source file, Checkstyle version) and context to be shared with us.
+>, <Line: +        Code has to be compilable, in other case behaviour could be strange.
+>, <Line: +/var/tmp $ javac Test.java
+>, <Line: +/var/tmp $ cat Test.java
+>, <Line: +public class Test{ // Doesn't warn - incorrect
+>, <Line: +/var/tmp $ java -jar checkstyle-6.XX-all.jar -c config.xml Test.java
+>, <Line: +Starting audit...
+>, <Line: +Audit done.
+>, <Line: +          /var/tmp/Test.java:1:28: error: '{' is not preceded with whitespace.
+>]
+[<Line: -        Even tiny issue need all details and context to be shared with us.
+>, <Line: -/var/tmp $ java -jar checkstyle-6.XX-all.jar -c config.xml test.java
+>, <Line: -Starting audit...
+>, <Line: -Audit done.
+>, <Line: -/var/tmp $ cat test.java
+>, <Line: -public class CheckstyleTest{ // Doesn't warn - incorrect
+>, <Line: -          /var/tmp/test.java:1:28: error: '{' is not preceded with whitespace.
+>]

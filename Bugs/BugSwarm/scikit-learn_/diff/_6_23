@@ -1,0 +1,5 @@
+[<Line: +                             'LogisticRegressionCV']):
+>]
+[<Line: -                             'LogisticRegressionCV', 'SAGClassifier',
+>, <Line: -                             'SAGRegressor']):
+>]

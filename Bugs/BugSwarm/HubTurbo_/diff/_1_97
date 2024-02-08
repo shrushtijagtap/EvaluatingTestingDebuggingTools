@@ -1,0 +1,94 @@
+[]
+[<Line: -package service;
+>, <Line: -import model.TurboIssue;
+>, <Line: -import model.TurboLabel;
+>, <Line: -import model.TurboMilestone;
+>, <Line: -import model.TurboUser;
+>, <Line: -import org.eclipse.egit.github.core.Issue;
+>, <Line: -import org.eclipse.egit.github.core.Label;
+>, <Line: -import org.eclipse.egit.github.core.Milestone;
+>, <Line: -import org.eclipse.egit.github.core.User;
+>, <Line: -import java.util.List;
+>, <Line: -/**
+>, <Line: - * An aggregation of resources obtained from a repository. May be loaded from a cache or not,
+>, <Line: - * in which case the types of the resources would be different. Use {@link #isCached()} to
+>, <Line: - * check which case this falls into before using the getters.
+>, <Line: - */
+>, <Line: -public class RepositoryResources {
+>, <Line: -	private List<Issue> issues;
+>, <Line: -	private List<Label> labels;
+>, <Line: -	private List<Milestone> milestones;
+>, <Line: -	private List<User> users;
+>, <Line: -	private List<TurboIssue> turboIssues;
+>, <Line: -	private List<TurboLabel> turboLabels;
+>, <Line: -	private List<TurboMilestone> turboMilestones;
+>, <Line: -	private List<TurboUser> turboUsers;
+>, <Line: -	private RepositoryResources() {}
+>, <Line: -	public static RepositoryResources fromGitHub(List<Issue> issues, List<Label> labels, List<Milestone> milestones, List<User> users) {
+>, <Line: -		RepositoryResources result = new RepositoryResources();
+>, <Line: -		result.issues = issues;
+>, <Line: -		result.labels = labels;
+>, <Line: -		result.milestones = milestones;
+>, <Line: -		result.users = users;
+>, <Line: -		result.turboIssues = null;
+>, <Line: -		result.turboLabels = null;
+>, <Line: -		result.turboMilestones = null;
+>, <Line: -		result.turboUsers = null;
+>, <Line: -		return result;
+>, <Line: -	}
+>, <Line: -	public static RepositoryResources fromCache(List<TurboIssue> turboIssues, List<TurboLabel> turboLabels,
+>, <Line: -	                                            List<TurboMilestone> turboMilestones, List<TurboUser> turboUsers) {
+>, <Line: -		RepositoryResources result = new RepositoryResources();
+>, <Line: -		result.issues = null;
+>, <Line: -		result.labels = null;
+>, <Line: -		result.milestones = null;
+>, <Line: -		result.users = null;
+>, <Line: -		result.turboIssues = turboIssues;
+>, <Line: -		result.turboLabels = turboLabels;
+>, <Line: -		result.turboMilestones = turboMilestones;
+>, <Line: -		result.turboUsers = turboUsers;
+>, <Line: -		return result;
+>, <Line: -	}
+>, <Line: -	public boolean isCached() {
+>, <Line: -		return issues == null && turboIssues != null;
+>, <Line: -	}
+>, <Line: -	private void assertCached() {
+>, <Line: -		assert isCached() : "This object contains only cached data. Check isCached()!";
+>, <Line: -	}
+>, <Line: -	private void assertNotCached() {
+>, <Line: -		assert !isCached() : "This object does not contain any cached data. Check isCached()!";
+>, <Line: -	}
+>, <Line: -	public List<Issue> getIssues() {
+>, <Line: -		assertNotCached();
+>, <Line: -		return issues;
+>, <Line: -	}
+>, <Line: -	public List<Label> getLabels() {
+>, <Line: -		assertNotCached();
+>, <Line: -		return labels;
+>, <Line: -	}
+>, <Line: -	public List<Milestone> getMilestones() {
+>, <Line: -		assertNotCached();
+>, <Line: -		return milestones;
+>, <Line: -	}
+>, <Line: -	public List<User> getUsers() {
+>, <Line: -		assertNotCached();
+>, <Line: -		return users;
+>, <Line: -	}
+>, <Line: -	public List<TurboIssue> getTurboIssues() {
+>, <Line: -		assertCached();
+>, <Line: -		return turboIssues;
+>, <Line: -	}
+>, <Line: -	public List<TurboLabel> getTurboLabels() {
+>, <Line: -		assertCached();
+>, <Line: -		return turboLabels;
+>, <Line: -	}
+>, <Line: -	public List<TurboMilestone> getTurboMilestones() {
+>, <Line: -		assertCached();
+>, <Line: -		return turboMilestones;
+>, <Line: -	}
+>, <Line: -	public List<TurboUser> getTurboUsers() {
+>, <Line: -		assertCached();
+>, <Line: -		return turboUsers;
+>, <Line: -	}
+>, <Line: -}
+>]

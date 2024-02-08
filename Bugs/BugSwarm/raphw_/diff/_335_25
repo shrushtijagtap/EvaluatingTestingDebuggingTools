@@ -1,0 +1,18 @@
+[<Line: +    private final ElementMatcher<? super AnnotationList> matcher;
+>, <Line: +     * @param matcher The matcher to be applied to the provided annotation list.
+>, <Line: +    public InheritedAnnotationMatcher(ElementMatcher<? super AnnotationList> matcher) {
+>, <Line: +        this.matcher = matcher;
+>, <Line: +        return matcher.matches(target.getInheritedAnnotations());
+>, <Line: +                && matcher.equals(((InheritedAnnotationMatcher<?>) other).matcher);
+>, <Line: +        return matcher.hashCode();
+>, <Line: +        return "inheritsAnnotations(" + matcher + ")";
+>]
+[<Line: -    private final ElementMatcher<? super AnnotationList> annotationMatcher;
+>, <Line: -     * @param annotationMatcher The matcher to be applied to the provided annotation list.
+>, <Line: -    public InheritedAnnotationMatcher(ElementMatcher<? super AnnotationList> annotationMatcher) {
+>, <Line: -        this.annotationMatcher = annotationMatcher;
+>, <Line: -        return annotationMatcher.matches(target.getInheritedAnnotations());
+>, <Line: -                && annotationMatcher.equals(((InheritedAnnotationMatcher<?>) other).annotationMatcher);
+>, <Line: -        return annotationMatcher.hashCode();
+>, <Line: -        return "inheritsAnnotations(" + annotationMatcher + ")";
+>]

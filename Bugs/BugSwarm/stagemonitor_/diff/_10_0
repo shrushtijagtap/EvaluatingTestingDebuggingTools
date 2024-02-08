@@ -1,0 +1,7 @@
+[<Line: +							  title="Enter the name of the metric. For example 'response_time_server'."></span>
+>, <Line: +					<label class="col-sm-1 control-label" for="target-matches-input">Matches</label>
+>]
+[<Line: -							  title="Enter the name of the metric. For example 'response_time_server'.
+>, <Line: -							  Press the arrow down key in the field to see all currently available metric names"></span>
+>, <Line: -					<label class="col-sm-1 control-label" for="target-input">Matches</label>
+>]

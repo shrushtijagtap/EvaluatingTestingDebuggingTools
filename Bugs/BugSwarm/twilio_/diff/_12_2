@@ -1,0 +1,4 @@
+[<Line: +import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+>, <Line: +    @XmlJavaTypeAdapter(TwiML.ToStringAdapter.class)
+>]
+[]

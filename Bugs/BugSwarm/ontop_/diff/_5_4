@@ -1,0 +1,6 @@
+[<Line: +        <dependency>
+>, <Line: +            <groupId>monetdb</groupId>
+>, <Line: +            <artifactId>monetdb-jdbc</artifactId>
+>, <Line: +        </dependency>
+>]
+[]

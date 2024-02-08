@@ -1,0 +1,126 @@
+[<Line: +package backend.resource;
+>, <Line: +import backend.IssueMetadata;
+>, <Line: +import backend.interfaces.IModel;
+>, <Line: +import java.util.*;
+>, <Line: +/**
+>, <Line: + * Thread-safe. The only top-level state in the application.
+>, <Line: + */
+>, <Line: +@SuppressWarnings("unused")
+>, <Line: +public class MultiModel implements IModel {
+>, <Line: +	private final HashMap<String, Model> models;
+>, <Line: +	// A pending repository is one that has been requested to load but has
+>, <Line: +	// not finished loading. We keep track of it because we don't want repeated
+>, <Line: +	// requests for the same repository to load it multiple times.
+>, <Line: +	private final HashSet<String> pendingRepositories;
+>, <Line: +	// Guaranteed to have a value throughout
+>, <Line: +	private String defaultRepo = null;
+>, <Line: +	public MultiModel() {
+>, <Line: +		this.models = new HashMap<>();
+>, <Line: +		this.pendingRepositories = new HashSet<>();
+>, <Line: +	}
+>, <Line: +	public synchronized MultiModel addPending(Model model) {
+>, <Line: +		String repoId = model.getRepoId();
+>, <Line: +		assert pendingRepositories.contains(repoId) : "No pending repository " + repoId + "!";
+>, <Line: +		pendingRepositories.remove(repoId);
+>, <Line: +		add(model);
+>, <Line: +		return this;
+>, <Line: +	}
+>, <Line: +	public synchronized MultiModel add(Model model) {
+>, <Line: +		this.models.put(model.getRepoId(), model);
+>, <Line: +		return this;
+>, <Line: +	}
+>, <Line: +	public synchronized Model get(String repoId) {
+>, <Line: +		return models.get(repoId);
+>, <Line: +	}
+>, <Line: +	public synchronized List<Model> toModels() {
+>, <Line: +		return new ArrayList<>(models.values());
+>, <Line: +	}
+>, <Line: +	public synchronized MultiModel replace(List<Model> newModels) {
+>, <Line: +		this.models.clear();
+>, <Line: +		newModels.forEach(this::add);
+>, <Line: +		return this;
+>, <Line: +	}
+>, <Line: +	public synchronized void insertMetadata(String repoId, Map<Integer, IssueMetadata> metadata) {
+>, <Line: +		models.get(repoId).getIssues().forEach(issue -> {
+>, <Line: +			if (metadata.containsKey(issue.getId())) {
+>, <Line: +				issue.setMetadata(new IssueMetadata(metadata.get(issue.getId())));
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public synchronized String getDefaultRepo() {
+>, <Line: +		return defaultRepo;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public synchronized void setDefaultRepo(String repoId) {
+>, <Line: +		this.defaultRepo = repoId;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public synchronized List<TurboIssue> getIssues() {
+>, <Line: +		List<TurboIssue> result = new ArrayList<>();
+>, <Line: +		models.values().forEach(m -> result.addAll(m.getIssues()));
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public synchronized List<TurboLabel> getLabels() {
+>, <Line: +		List<TurboLabel> result = new ArrayList<>();
+>, <Line: +		models.values().forEach(m -> result.addAll(m.getLabels()));
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public synchronized List<TurboMilestone> getMilestones() {
+>, <Line: +		List<TurboMilestone> result = new ArrayList<>();
+>, <Line: +		models.values().forEach(m -> result.addAll(m.getMilestones()));
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public synchronized List<TurboUser> getUsers() {
+>, <Line: +		List<TurboUser> result = new ArrayList<>();
+>, <Line: +		models.values().forEach(m -> result.addAll(m.getUsers()));
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public Optional<Model> getModelById(String repoId) {
+>, <Line: +		return models.containsKey(repoId)
+>, <Line: +			? Optional.of(models.get(repoId))
+>, <Line: +			: Optional.empty();
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public Optional<TurboUser> getAssigneeOfIssue(TurboIssue issue) {
+>, <Line: +		return getModelById(issue.getRepoId())
+>, <Line: +			.flatMap(m -> m.getAssigneeOfIssue(issue));
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<TurboLabel> getLabelsOfIssue(TurboIssue issue) {
+>, <Line: +		return getModelById(issue.getRepoId())
+>, <Line: +			.flatMap(m -> Optional.of(m.getLabelsOfIssue(issue)))
+>, <Line: +			.get();
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public Optional<TurboMilestone> getMilestoneOfIssue(TurboIssue issue) {
+>, <Line: +		return getModelById(issue.getRepoId())
+>, <Line: +			.flatMap(m -> m.getMilestoneOfIssue(issue));
+>, <Line: +	}
+>, <Line: +	public synchronized boolean isRepositoryPending(String repoId) {
+>, <Line: +		return pendingRepositories.contains(repoId);
+>, <Line: +	}
+>, <Line: +	public void addPendingRepository(String repoId) {
+>, <Line: +		pendingRepositories.add(repoId);
+>, <Line: +	}
+>, <Line: +	private void ______BOILERPLATE______() {
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object o) {
+>, <Line: +		if (this == o) return true;
+>, <Line: +		if (o == null || getClass() != o.getClass()) return false;
+>, <Line: +		MultiModel that = (MultiModel) o;
+>, <Line: +		if (!models.equals(that.models)) return false;
+>, <Line: +		return true;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode() {
+>, <Line: +		return models.hashCode();
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

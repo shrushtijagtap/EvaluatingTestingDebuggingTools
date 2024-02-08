@@ -1,0 +1,27 @@
+[<Line: +package org.mp4parser.muxer.tracks;
+>, <Line: +import org.mp4parser.boxes.adobe.ActionMessageFormat0SampleEntryBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.CompositionTimeToSample;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDependencyTypeBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDescriptionBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SubSampleInformationBox;
+>, <Line: +import org.mp4parser.muxer.AbstractTrack;
+>, <Line: +import org.mp4parser.muxer.Sample;
+>, <Line: +import org.mp4parser.muxer.SampleImpl;
+>, <Line: +import org.mp4parser.muxer.TrackMetaData;
+>, <Line: +import java.util.*;
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks;
+>, <Line: -import com.coremedia.iso.boxes.*;
+>, <Line: -import com.googlecode.mp4parser.authoring.AbstractTrack;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.SampleImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.TrackMetaData;
+>, <Line: -import com.googlecode.mp4parser.boxes.adobe.ActionMessageFormat0SampleEntryBox;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.Date;
+>, <Line: -import java.util.LinkedList;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Map;
+>, <Line: -import java.util.SortedMap;
+>, <Line: -import java.util.TreeMap;
+>]

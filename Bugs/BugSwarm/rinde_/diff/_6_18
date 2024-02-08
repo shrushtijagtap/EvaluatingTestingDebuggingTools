@@ -1,0 +1,61 @@
+[<Line: +import java.util.Objects;
+>, <Line: +import com.google.common.collect.ComparisonChain;
+>, <Line: +public final class SimArgs implements Comparable<SimArgs> {
+>, <Line: +  final Configuration configuration;
+>, <Line: +      boolean gui, @Nullable PostProcessor<?, ?> pp
+>, <Line: +  /* , @Nullable UICreator uic */) {
+>, <Line: +    configuration = m;
+>, <Line: +        scenario.getProblemClass(),
+>, <Line: +        scenario.getProblemInstanceId(), configuration, randomSeed,
+>, <Line: +        showGui, postProcessor);
+>, <Line: +  }
+>, <Line: +  public Scenario getScenario() {
+>, <Line: +    return scenario;
+>, <Line: +  }
+>, <Line: +  public Configuration getConfiguration() {
+>, <Line: +    return configuration;
+>, <Line: +  }
+>, <Line: +  public long getRandomSeed() {
+>, <Line: +    return randomSeed;
+>, <Line: +  }
+>, <Line: +  public boolean isShowGui() {
+>, <Line: +    return showGui;
+>, <Line: +  }
+>, <Line: +  public Optional<? extends PostProcessor<?, ?>> getPostProcessor() {
+>, <Line: +    return postProcessor;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public int compareTo(@Nullable SimArgs o) {
+>, <Line: +    Objects.requireNonNull(o);
+>, <Line: +    return ComparisonChain.start()
+>, <Line: +        .compare(scenario, o.scenario)
+>, <Line: +        .compare(configuration, o.configuration)
+>, <Line: +        .compare(randomSeed, o.randomSeed)
+>, <Line: +        .result();
+>]
+[<Line: -/*
+>, <Line: - * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: - *
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: - * you may not use this file except in compliance with the License.
+>, <Line: - * You may obtain a copy of the License at
+>, <Line: - *
+>, <Line: - *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - *
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - * See the License for the specific language governing permissions and
+>, <Line: - * limitations under the License.
+>, <Line: - */
+>, <Line: -class SimArgs {
+>, <Line: -  final Configuration masConfig;
+>, <Line: -  final Object objectiveFunction;
+>, <Line: -      Object obj, boolean gui, @Nullable PostProcessor<?, ?> pp
+>, <Line: -      /* , @Nullable UICreator uic */) {
+>, <Line: -    masConfig = m;
+>, <Line: -    objectiveFunction = obj;
+>, <Line: -        scenario /* .getProblemClass() */,
+>, <Line: -        scenario/* .getProblemInstanceId() */, masConfig, randomSeed,
+>, <Line: -        objectiveFunction, showGui, postProcessor);
+>]

@@ -1,0 +1,6 @@
+[<Line: +                .getDeclaredConstructor()
+>, <Line: +        @SuppressWarnings("unchecked")
+>, <Line: +        Object instance = proxyFactory.createClass().getDeclaredConstructor().newInstance();
+>]
+[<Line: -        Object instance = proxyFactory.createClass().newInstance();
+>]

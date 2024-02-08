@@ -1,0 +1,8 @@
+[<Line: +        List<ParameterValue> params=new ArrayList<>();
+>, <Line: +            ParameterValue pv = (ParameterValue)tuple.getColumn(i);
+>, <Line: +            pv.setParameter(sv);
+>]
+[<Line: -        List<ParameterValue> params=new ArrayList<ParameterValue>();
+>, <Line: -            org.yamcs.protobuf.Pvalue.ParameterValue gpv=(org.yamcs.protobuf.Pvalue.ParameterValue)tuple.getColumn(i);
+>, <Line: -            ParameterValue pv=ParameterValue.fromGpb(sv, gpv);
+>]

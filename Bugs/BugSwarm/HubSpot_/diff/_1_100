@@ -1,0 +1,53 @@
+[<Line: +    url: -> "#{ config.apiRoot }/state/#{ @serviceId }"
+>, <Line: +    noReloadNoValidateInput: """
+>, <Line: +            <input name="validate" type="checkbox" checked> Validate new configuration after applying changes</input>
+>, <Line: +            <br>
+>, <Line: +            <input name="reload" type="checkbox" checked> Reload configuration after applying changes</input>
+>, <Line: +        """
+>, <Line: +    noValidateInput: """
+>, <Line: +            <input name="validate" type="checkbox" checked> Validate configuration before reloading</input>
+>, <Line: +        """
+>, <Line: +    delete: (noValidate, noReload) =>
+>, <Line: +            url: "#{ @url() }?authkey=#{ localStorage.getItem 'baragonAuthKey' }&noValidate=#{ noValidate }&noReload=#{ noReload }"
+>, <Line: +    reload: (noValidate) =>
+>, <Line: +            url: "#{ @url() }/reload?authkey=#{ localStorage.getItem 'baragonAuthKey' }&noValidate=#{ noValidate }"
+>, <Line: +    undo: (noValidate, noReload) =>
+>, <Line: +                    removeUpstreams: @attributes.upstreams,
+>, <Line: +                    noValidate: noValidate,
+>, <Line: +                    noReload: noReload
+>, <Line: +                    url: "#{ config.apiRoot }/request?authkey=#{ localStorage.getItem 'baragonAuthKey' }"
+>, <Line: +    remove: (upstream, noValidate, noReload) =>
+>, <Line: +                    noValidate: noValidate,
+>, <Line: +                    noReload: noReload
+>, <Line: +                    url: "#{ config.apiRoot }/request?authkey=#{ localStorage.getItem 'baragonAuthKey' }"
+>, <Line: +            input: @noReloadNoValidateInput
+>, <Line: +                noValidate = (!data.validate or data.validate != 'on')
+>, <Line: +                noReload = (!data.reload or data.reload != 'on')
+>, <Line: +                @delete(noValidate, noReload).done callback
+>, <Line: +            input: @noValidateInput
+>, <Line: +                noValidate = (!data.validate or data.validate != 'on')
+>, <Line: +                @reload(noValidate).done callback
+>, <Line: +            input: @noReloadNoValidateInput
+>, <Line: +                noValidate = (!data.validate or data.validate != 'on')
+>, <Line: +                noReload = (!data.reload or data.reload != 'on')
+>, <Line: +                @undo(noValidate, noReload).done callback
+>, <Line: +            input: @noReloadNoValidateInput
+>, <Line: +                noValidate = (!data.validate or data.validate != 'on')
+>, <Line: +                noReload = (!data.reload or data.reload != 'on')
+>, <Line: +                @remove(upstream, noValidate, noReload).done callback
+>]
+[<Line: -    url: -> "#{ config.apiRoot }/state/#{ @serviceId }?authkey=#{ config.authKey }"
+>, <Line: -    delete: =>
+>, <Line: -            url: @url()
+>, <Line: -    reload: =>
+>, <Line: -            url: "#{ config.apiRoot }/state/#{ @serviceId }/reload?authkey=#{ config.authKey }"
+>, <Line: -    undo: =>
+>, <Line: -                    removeUpstreams: @attributes.upstreams
+>, <Line: -                    url: "#{ config.apiRoot }/request?authkey=#{ config.authKey }"
+>, <Line: -    remove: (upstream) =>
+>, <Line: -                    url: "#{ config.apiRoot }/request?authkey=#{ config.authKey }"
+>, <Line: -                @delete().done callback
+>, <Line: -                @reload().done callback
+>, <Line: -                @undo().done callback
+>, <Line: -                @remove(upstream).done callback
+>]

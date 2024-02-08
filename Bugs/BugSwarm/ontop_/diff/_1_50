@@ -1,0 +1,7 @@
+[<Line: +				CQIE targetQuery = mappingAxiom.getTargetQuery();
+>, <Line: +				OBDASQLQuery sourceQuery = mappingAxiom.getSourceQuery();
+>]
+[<Line: -				CQIE targetQuery = (CQIE) mappingAxiom.getTargetQuery();
+>, <Line: -				OBDASQLQuery sourceQuery = (OBDASQLQuery) mappingAxiom
+>, <Line: -						.getSourceQuery();
+>]

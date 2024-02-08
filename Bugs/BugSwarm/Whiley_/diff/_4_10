@@ -1,0 +1,18 @@
+[<Line: +				if(!(cu.type(0) instanceof Type.Reference)) {
+>, <Line: +					isLive = environment.contains(cu.target(0));
+>, <Line: +		} else if ((isLive && code instanceof Code.AbstractMultiNaryAssignable)
+>, <Line: +				|| (code instanceof Codes.Invoke && ((Codes.Invoke) code).type(0) instanceof Type.Method)
+>, <Line: +				|| (code instanceof Codes.IndirectInvoke
+>, <Line: +						&& ((Codes.IndirectInvoke) code).type(0) instanceof Type.Method)) {
+>, <Line: +			// FIXME: this seems to be a problem if there are no assigned variables!
+>, <Line: +			Code.AbstractMultiNaryAssignable c = (Code.AbstractMultiNaryAssignable) code;
+>, <Line: +			for (int operand : c.operands()) {
+>]
+[<Line: -				if(!(cu.type() instanceof Type.Reference)) {
+>, <Line: -					isLive = environment.contains(cu.target());
+>, <Line: -		} else if ((isLive && code instanceof Code.AbstractNaryAssignable)
+>, <Line: -				|| (code instanceof Codes.Invoke && ((Codes.Invoke) code).type() instanceof Type.Method)
+>, <Line: -				|| (code instanceof Codes.IndirectInvoke && ((Codes.IndirectInvoke) code).type() instanceof Type.Method)) {
+>, <Line: -			Code.AbstractNaryAssignable c = (Code.AbstractNaryAssignable) code;
+>, <Line: -			for(int operand : c.operands()) {
+>]

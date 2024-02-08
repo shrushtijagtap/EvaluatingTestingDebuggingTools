@@ -1,0 +1,58 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'config'
+>, <Line: +	],
+>, <Line: +	function (angular, _, config) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		module.controller('PlaylistCtrl', function ($scope, playlistSrv) {
+>, <Line: +			$scope.init = function () {
+>, <Line: +				$scope.timespan = config.playlist_timespan;
+>, <Line: +				$scope.loadFavorites();
+>, <Line: +			};
+>, <Line: +			$scope.loadFavorites = function () {
+>, <Line: +				$scope.favDashboards = playlistSrv.getFavorites().dashboards;
+>, <Line: +				_.each($scope.favDashboards, function (dashboard) {
+>, <Line: +					dashboard.include = true;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			$scope.removeAsFavorite = function (dashboard) {
+>, <Line: +				playlistSrv.removeAsFavorite(dashboard);
+>, <Line: +				$scope.loadFavorites();
+>, <Line: +			};
+>, <Line: +			$scope.start = function () {
+>, <Line: +				var included = _.where($scope.favDashboards, {include: true});
+>, <Line: +				playlistSrv.start(included, $scope.timespan);
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'config'
+>, <Line: -],
+>, <Line: -function (angular, _, config) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  module.controller('PlaylistCtrl', function($scope, playlistSrv) {
+>, <Line: -    $scope.init = function() {
+>, <Line: -      $scope.timespan = config.playlist_timespan;
+>, <Line: -      $scope.loadFavorites();
+>, <Line: -    };
+>, <Line: -    $scope.loadFavorites = function() {
+>, <Line: -      $scope.favDashboards = playlistSrv.getFavorites().dashboards;
+>, <Line: -      _.each($scope.favDashboards, function(dashboard) {
+>, <Line: -        dashboard.include = true;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    $scope.removeAsFavorite = function(dashboard) {
+>, <Line: -      playlistSrv.removeAsFavorite(dashboard);
+>, <Line: -      $scope.loadFavorites();
+>, <Line: -    };
+>, <Line: -    $scope.start = function() {
+>, <Line: -      var included = _.where($scope.favDashboards, { include: true });
+>, <Line: -      playlistSrv.start(included, $scope.timespan);
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

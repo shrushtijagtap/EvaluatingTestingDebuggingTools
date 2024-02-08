@@ -1,0 +1,10 @@
+[<Line: +import java.util.Collection;
+>, <Line: +import com.google.inject.Inject;
+>, <Line: +import com.hubspot.baragon.auth.NoAuth;
+>, <Line: +import com.hubspot.baragon.data.BaragonWorkerDatastore;
+>, <Line: +@NoAuth
+>]
+[<Line: -import com.google.inject.Inject;
+>, <Line: -import com.hubspot.baragon.data.BaragonWorkerDatastore;
+>, <Line: -import java.util.Collection;
+>]

@@ -1,0 +1,11 @@
+[<Line: +    @Test
+>, <Line: +    public void testNotPublicClassConstructorHasNotPublicModifier() throws Exception {
+>, <Line: +        final DefaultConfiguration checkConfig =
+>, <Line: +                createCheckConfig(RedundantModifierCheck.class);
+>, <Line: +        final String[] expected = {
+>, <Line: +            "15:5: " + getCheckMessage(MSG_KEY, "public"),
+>, <Line: +        };
+>, <Line: +        verify(checkConfig, getPath("InputRedundantPublicModifierInNotPublicClass.java"), expected);
+>, <Line: +    }
+>]
+[]

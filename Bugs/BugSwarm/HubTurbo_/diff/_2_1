@@ -1,0 +1,10 @@
+[<Line: +//		assert parameters.size() % 2 == 0 : "Parameters should come in pairs";
+>, <Line: +//		for (int i=0; i<parameters.size(); i+=2) {
+>, <Line: +//			commandLineArgs.put(parameters.get(i), parameters.get(i+1));
+>, <Line: +//		}
+>]
+[<Line: -		assert parameters.size() % 2 == 0 : "Parameters should come in pairs";
+>, <Line: -		for (int i=0; i<parameters.size(); i+=2) {
+>, <Line: -			commandLineArgs.put(parameters.get(i), parameters.get(i+1));
+>, <Line: -		}
+>]

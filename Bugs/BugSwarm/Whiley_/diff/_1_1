@@ -1,0 +1,6 @@
+[<Line: +		environment = addDeclaredParameter(d.returnType, environment.clone(), d);
+>, <Line: +		propagateConditions(d.ensures, environment, d);
+>]
+[<Line: -		Environment ensuresEnvironment = addDeclaredParameter(d.returnType, environment.clone(), d);
+>, <Line: -		propagateConditions(d.ensures, ensuresEnvironment, d);
+>]

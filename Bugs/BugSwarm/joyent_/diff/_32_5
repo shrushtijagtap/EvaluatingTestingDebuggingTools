@@ -1,0 +1,18 @@
+[<Line: +    @Test
+>, <Line: +    public final void testCanGetWithRangeHeader() throws IOException {
+>, <Line: +        final String name = UUID.randomUUID().toString();
+>, <Line: +        final String path = testPathPrefix + name;
+>, <Line: +        final String expected = TEST_DATA.substring(7, 18); // substring is inclusive, exclusive
+>, <Line: +        // Test data: "EPISODEII_IS_BEST_EPISODE"
+>, <Line: +        // Our Range:         [---------]
+>, <Line: +        mantaClient.put(path, TEST_DATA);
+>, <Line: +        final MantaHttpHeaders headers = new MantaHttpHeaders();
+>, <Line: +        // Range is inclusive, inclusive
+>, <Line: +        headers.setRange("bytes=7-17");
+>, <Line: +        try (final InputStream min = mantaClient.getAsInputStream(path, headers)) {
+>, <Line: +            String actual = MantaUtils.inputStreamToString(min);
+>, <Line: +            Assert.assertEquals(actual, expected, "Didn't receive correct range value");
+>, <Line: +        }
+>, <Line: +    }
+>]
+[]

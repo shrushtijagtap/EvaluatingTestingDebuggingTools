@@ -1,0 +1,7 @@
+[<Line: +package org.xbib.metrics;
+>, <Line: +/**
+>, <Line: + */
+>, <Line: +public interface Metric {
+>, <Line: +}
+>]
+[]

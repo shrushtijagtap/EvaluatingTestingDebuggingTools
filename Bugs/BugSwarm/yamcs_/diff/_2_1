@@ -1,0 +1,4 @@
+[<Line: +    protected int minimumTcPacketLength = -1; //the minimum size of the CCSDS packets uplinked
+>]
+[<Line: -    protected int minimumTcPacketLength = 48; //the minimum size of the CCSDS packets uplinked
+>]

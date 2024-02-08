@@ -1,0 +1,10 @@
+[<Line: +    @Element(name = "ICMSUFDest", required = false)
+>, <Line: +    private NFNotaaInfoItemImpostoICMSUFDestino icmsUfDestino;
+>, <Line: +    public NFNotaaInfoItemImpostoICMSUFDestino getIcmsUfDestino() {
+>, <Line: +        return icmsUfDestino;
+>, <Line: +    }
+>, <Line: +    public void setIcmsUfDestino(NFNotaaInfoItemImpostoICMSUFDestino icmsUfDestino) {
+>, <Line: +        this.icmsUfDestino = icmsUfDestino;
+>, <Line: +    }
+>]
+[]

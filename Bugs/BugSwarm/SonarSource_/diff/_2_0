@@ -1,0 +1,38 @@
+[<Line: +/*
+>, <Line: + * SonarLint for IntelliJ IDEA
+>, <Line: + * Copyright (C) 2015 SonarSource
+>, <Line: + * sonarlint@sonarsource.com
+>, <Line: + *
+>, <Line: + * This program is free software; you can redistribute it and/or
+>, <Line: + * modify it under the terms of the GNU Lesser General Public
+>, <Line: + * License as published by the Free Software Foundation; either
+>, <Line: + * version 3 of the License, or (at your option) any later version.
+>, <Line: + *
+>, <Line: + * This program is distributed in the hope that it will be useful,
+>, <Line: + * but WITHOUT ANY WARRANTY; without even the implied warranty of
+>, <Line: + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+>, <Line: + * Lesser General Public License for more details.
+>, <Line: + *
+>, <Line: + * You should have received a copy of the GNU Lesser General Public
+>, <Line: + * License along with this program; if not, write to the Free Software
+>, <Line: + * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+>, <Line: + */
+>, <Line: +package org.sonarlint.intellij.analysis;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import static org.assertj.core.api.Assertions.assertThat;
+>, <Line: +public class AnalysisThreadFactoryTest {
+>, <Line: +  private AnalysisThreadFactory factory;
+>, <Line: +  @Before
+>, <Line: +  public void setUp() {
+>, <Line: +    factory = new AnalysisThreadFactory();
+>, <Line: +  }
+>, <Line: +  @Test
+>, <Line: +  public void check_props() {
+>, <Line: +    Thread thread = factory.newThread(() -> {});
+>, <Line: +    assertThat(thread.isDaemon()).isTrue();
+>, <Line: +    assertThat(thread.getName()).startsWith("SonarLintAnalysis");
+>, <Line: +    assertThat(thread.getPriority()).isEqualTo(Thread.MIN_PRIORITY);
+>, <Line: +  }
+>, <Line: +}>]
+[]

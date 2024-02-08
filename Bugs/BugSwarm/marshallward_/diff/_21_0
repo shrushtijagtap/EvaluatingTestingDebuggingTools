@@ -1,0 +1,13 @@
+[]
+[<Line: -import shlex
+>, <Line: -        #f90lex = shlex.shlex(nml_file)
+>, <Line: -        #f90lex.whitespace = ''
+>, <Line: -        #f90lex.wordchars += '.-+'       # Include floating point tokens
+>, <Line: -        #if nml_patch:
+>, <Line: -        #    f90lex.commenters = ''
+>, <Line: -        #else:
+>, <Line: -        #    f90lex.commenters = self.comment_tokens
+>, <Line: -        ##print(list(f90lex))
+>, <Line: -        #self.tokens = iter(f90lex)
+>, <Line: -        print(f90lex)
+>]

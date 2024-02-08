@@ -1,0 +1,51 @@
+[<Line: +			bt("TargetA", true, false, null, null);
+>, <Line: +			bt("TargetB", false, true, "B: build_args", "B: exe_path");
+>, <Line: +			bt("ConfigA#strict", true, true, "S: build_args", "S: exe_path");
+>, <Line: +				return buildMgr.createBuildTarget(project, buildTargetData);
+>, <Line: +				bt("ImplicitTarget"+SEP+"default", false, false, null, null));
+>, <Line: +		BuildTarget btA = new BuildTarget(project, bundleInfo, bt("TargetA", false, true, "new1", "new3"), 
+>, <Line: +			new BuildTargetData("TargetA" + SEP + "default", true, false), 
+>, <Line: +			new BuildTargetData("TargetA" + SEP + "NonExistentType", false, true), 
+>, <Line: +			bt("TargetA", false, true, "new1", "new3"), // Ensure TargetA uses previous settings
+>, <Line: +				bt("TargetA", true, false, null, null));
+>, <Line: +				bt("TargetB", false, true, "B: build_args", "B: exe_path"));
+>, <Line: +				bt("TargetB", false, true, "ARGS", "EXEPATH"));
+>, <Line: +				bt("ImplicitTarget", false, false, "ARGS", "EXEPATH"));
+>, <Line: +			BuildTargetData targetA = bt("SampleTarget", true, true, null, null);
+>, <Line: +			BuildTargetData target2 = bt("SampleTarget2", true, true, "sample args", "sample path");
+>, <Line: +			btA.getBuildOperation(consoleHandler, path("blah")).getEffectiveEvaluatedArguments(), 
+>, <Line: +			btB.getBuildOperation(consoleHandler, path("blah")).getEffectiveEvaluatedArguments(), 
+>]
+[<Line: -import melnorme.lang.ide.core.project_model.ProjectBuildInfo;
+>, <Line: -			bt("TargetA", true, null, null, null);
+>, <Line: -			bt("TargetB", true, "B: build_args", "B: check_args", "B: exe_path");
+>, <Line: -			bt("ConfigA#strict", true, "S: build_args", "S: check_args", "S: exe_path");
+>, <Line: -				return buildMgr.createBuildTarget3(project, buildTargetData);
+>, <Line: -		@Override
+>, <Line: -		public String getDefaultCheckArguments(BuildTarget bt) throws CommonException {
+>, <Line: -			return "default: check_args";
+>, <Line: -		}
+>, <Line: -				bt("ImplicitTarget"+SEP+"default", false, null, null, null));
+>, <Line: -		BuildTarget btA = new BuildTarget(project, bundleInfo, bt("TargetA", false, "new1", "new2", "new3"), 
+>, <Line: -			new BuildTargetData("TargetA" + SEP + "default", true), 
+>, <Line: -			new BuildTargetData("TargetA" + SEP + "NonExistentType", true), 
+>, <Line: -			bt("TargetA", false, "new1", "new2", "new3"), // Ensure TargetA uses previous settings
+>, <Line: -				bt("TargetA", true, null, null, null));
+>, <Line: -				bt("TargetB", true, "B: build_args", "B: check_args", "B: exe_path"));
+>, <Line: -				bt("TargetB", true, "ARGS", "B: check_args", "EXEPATH"));
+>, <Line: -				bt("ImplicitTarget", false, "ARGS", null, "EXEPATH"));
+>, <Line: -			BuildTargetData targetA = bt("SampleTarget", true, null, null, null);
+>, <Line: -			BuildTargetData target2 = bt("SampleTarget2", true, "sample args", "-check", "sample path");
+>, <Line: -		assertTrue(btA.getData().getCheckArguments() == null);
+>, <Line: -		assertTrue(btB.getData().getCheckArguments() != null);
+>, <Line: -			btA.getBuildOperation(consoleHandler, false, path("blah")).getEffectiveEvaluatedArguments(), 
+>, <Line: -		assertAreEqual(
+>, <Line: -			btA.getBuildOperation(consoleHandler, true, path("blah")).getEffectiveEvaluatedArguments(), 
+>, <Line: -			list("default:", "check_args")
+>, <Line: -		);
+>, <Line: -			btB.getBuildOperation(consoleHandler, false, path("blah")).getEffectiveEvaluatedArguments(), 
+>, <Line: -		assertAreEqual(
+>, <Line: -			btB.getBuildOperation(consoleHandler, true, path("blah")).getEffectiveEvaluatedArguments(), 
+>, <Line: -			list("B:", "check_args")
+>, <Line: -		);
+>]

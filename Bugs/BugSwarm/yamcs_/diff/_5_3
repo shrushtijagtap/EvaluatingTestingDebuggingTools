@@ -1,0 +1,8 @@
+[<Line: +        YarchDatabase ydb = YarchDatabase.getInstance(instance);
+>, <Line: +            it.close();
+>, <Line: +            cur.close();
+>]
+[<Line: -        YarchDatabase ydb=YarchDatabase.getInstance(instance);
+>, <Line: -            it.dispose();
+>, <Line: -            cur.dispose();
+>]

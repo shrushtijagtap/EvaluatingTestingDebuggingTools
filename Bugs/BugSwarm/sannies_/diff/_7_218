@@ -1,0 +1,28 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeReaderVariable;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriterVariable;
+>, <Line: +    public static final String TYPE = "iloc";
+>, <Line: +    public Extent createExtent(long extentOffset, long extentLength, long extentIndex) {
+>, <Line: +        return new Extent(extentOffset, extentLength, extentIndex);
+>, <Line: +    }
+>, <Line: +    Extent createExtent(ByteBuffer bb) {
+>, <Line: +        return new Extent(bb);
+>, <Line: +    }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeReaderVariable;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.IsoTypeWriterVariable;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -    public static final String TYPE = "iloc";
+>, <Line: -    public Extent createExtent(long extentOffset, long extentLength, long extentIndex) {
+>, <Line: -        return new Extent(extentOffset, extentLength, extentIndex);
+>, <Line: -    }
+>, <Line: -    Extent createExtent(ByteBuffer bb) {
+>, <Line: -        return new Extent(bb);
+>, <Line: -    }
+>]

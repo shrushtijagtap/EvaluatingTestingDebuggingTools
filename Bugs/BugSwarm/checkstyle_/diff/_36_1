@@ -1,0 +1,15 @@
+[<Line: +    <!--Method getClassFrameWhereViolationIsFound already have too much abstract methods that fully
+>, <Line: +    explain a logic, additional abstraction will not make logic/algorithm more readable.-->
+>, <Line: +    <suppress checks="CyclomaticComplexity" files="RequireThisCheck\.java" lines="416"/>
+>, <Line: +    <!--The only optimization which can be there is to move CASE-block expressions to separate method,
+>, <Line: +    but that will not increase readability.-->
+>, <Line: +    <suppress checks="CyclomaticComplexity" files="FinalLocalVariableCheck\.java" lines="176, 326"/>
+>]
+[<Line: -    <suppress checks="CyclomaticComplexity" files="RightCurlyCheck\.java" lines="313"/>
+>, <Line: -    <!-- Just big switches. Cannot be split to several methods. Till https://github.com/checkstyle/checkstyle/issues/2029 -->
+>, <Line: -    <suppress checks="CyclomaticComplexity" files="(AbstractDeclarationCollector|RequireThisCheck|SuppressWarningsHolder|LeftCurlyCheck|FallThroughCheck|FinalLocalVariableCheck|ModifiedControlVariableCheck)\.java"/>
+>, <Line: -    <suppress checks="CyclomaticComplexity" files="(ParameterAssignmentCheck|VariableDeclarationUsageDistanceCheck|BooleanExpressionComplexityCheck|NPathComplexityCheck|CheckUtils)\.java"/>
+>, <Line: -    <!-- Just big SWITCH block which contains IF blocks in 'visitToken'.
+>, <Line: -     If we split the block to several methods it will demage readibility. -->
+>, <Line: -    <suppress checks="CyclomaticComplexity" files="DeclarationOrderCheck\.java" lines="189"/>
+>]

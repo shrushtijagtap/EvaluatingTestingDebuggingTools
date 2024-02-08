@@ -1,0 +1,14 @@
+[<Line: +			String pred = ba.getProperty().getName();
+>, <Line: +			predicate = helper.createURI(pred); // URI	
+>, <Line: +			String pred = ba.getProperty().getName();
+>, <Line: +			predicate = helper.createURI(pred); // URI
+>, <Line: +			String obj = ua.getConcept().getName();
+>, <Line: +			object = helper.createURI(obj);	
+>]
+[<Line: -			Predicate pred = ba.getProperty().getPredicate();
+>, <Line: -			predicate = helper.createURI(pred.getName().toString()); // URI	
+>, <Line: -			Predicate pred = ba.getProperty().getPredicate();
+>, <Line: -			predicate = helper.createURI(pred.getName().toString()); // URI
+>, <Line: -			Predicate obj = ua.getConcept().getPredicate();
+>, <Line: -			object = helper.createURI(obj.getName().toString());	
+>]

@@ -1,0 +1,6 @@
+[<Line: +	/** @return number of members in pedigree */
+>, <Line: +	public int getNMembers() {
+>, <Line: +		return members.size();
+>, <Line: +	}
+>]
+[]

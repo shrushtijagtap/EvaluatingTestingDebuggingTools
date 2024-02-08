@@ -1,0 +1,6 @@
+[<Line: +function f(int x) -> int[]:
+>, <Line: +function g(real x) -> int[]:
+>]
+[<Line: -function f(int x) -> [int]:
+>, <Line: -function g(real x) -> [int]:
+>]

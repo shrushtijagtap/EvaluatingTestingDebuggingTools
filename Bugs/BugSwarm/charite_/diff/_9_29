@@ -1,0 +1,26 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.base;
+>, <Line: +import htsjdk.samtools.util.CloseableIterator;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: +/**
+>, <Line: + * Allow to query database with contig, (1-based) begin, and end position to produce a
+>, <Line: + * {@link VariantContext} with annotating information.
+>, <Line: + *
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public interface DatabaseVariantContextProvider {
+>, <Line: +	/**
+>, <Line: +	 * Query for {@link VariantContext}s describing the DB variant annotation between begin and end
+>, <Line: +	 * position on the given contig.
+>, <Line: +	 * 
+>, <Line: +	 * @param contig
+>, <Line: +	 *            Name of the contig to perform query on.
+>, <Line: +	 * @param beginPos
+>, <Line: +	 *            1-based start position
+>, <Line: +	 * @param endPos
+>, <Line: +	 *            end position
+>, <Line: +	 * @return {@link CloseableIterator} of {@link VariantContext} objects for annotation.
+>, <Line: +	 */
+>, <Line: +	CloseableIterator<VariantContext> query(String contig, int beginPos, int endPos);
+>, <Line: +}
+>]
+[]

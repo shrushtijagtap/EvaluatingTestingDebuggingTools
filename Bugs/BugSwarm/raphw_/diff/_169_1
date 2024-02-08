@@ -1,0 +1,66 @@
+[<Line: +import net.bytebuddy.ByteBuddy;
+>, <Line: +import net.bytebuddy.asm.AsmVisitorWrapper;
+>, <Line: +import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
+>, <Line: +import org.junit.Ignore;
+>, <Line: +import org.objectweb.asm.AnnotationVisitor;
+>, <Line: +import org.objectweb.asm.ClassVisitor;
+>, <Line: +import org.objectweb.asm.Type;
+>, <Line: +    private Annotation first, second, defaultFirst, defaultSecond, explicitTarget, broken;
+>, <Line: +    private Class<?> brokenCarrier;
+>, <Line: +        } else if (annotation == broken) {
+>, <Line: +            carrier = brokenCarrier;
+>, <Line: +        brokenCarrier = new ByteBuddy()
+>, <Line: +                .subclass(Object.class)
+>, <Line: +                .visit(new AnnotationValueBreaker())
+>, <Line: +                .make()
+>, <Line: +                .load(getClass().getClassLoader(), ClassLoadingStrategy.Default.WRAPPER_PERSISTENT)
+>, <Line: +                .getLoaded();
+>, <Line: +        broken = brokenCarrier.getAnnotations()[0];
+>, <Line: +            assertThat(actual, containsString(method.getName() + "=" + PropertyDispatcher.of(method.getReturnType()).toString(method.invoke(loaded))));
+>, <Line: +    @Test
+>, <Line: +    public void testToString() throws Exception {
+>, <Line: +        assertToString(describe(first).prepare(Sample.class).toString(), first);
+>, <Line: +        assertToString(describe(second).prepare(Sample.class).toString(), second);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    @Ignore("Add better handling for annotations with illegal values")
+>, <Line: +    public void testBrokenAnnotation() throws Exception {
+>, <Line: +        describe(broken);
+>, <Line: +    }
+>, <Line: +        /* empty */
+>, <Line: +        /* empty */
+>, <Line: +        /* empty */
+>, <Line: +        /* empty */
+>, <Line: +        /* empty */
+>, <Line: +        /* empty */
+>, <Line: +    @Retention(RetentionPolicy.RUNTIME)
+>, <Line: +    public @interface BrokenAnnotation {
+>, <Line: +        String stringValue();
+>, <Line: +        SampleEnumeration enumValue();
+>, <Line: +        Class<?> classValue();
+>, <Line: +    }
+>, <Line: +    private static class AnnotationValueBreaker extends AsmVisitorWrapper.AbstractBase {
+>, <Line: +        @Override
+>, <Line: +        public ClassVisitor wrap(TypeDescription instrumentedType, ClassVisitor classVisitor, int writerFlags, int readerFlags) {
+>, <Line: +            return new BreakingClassVisitor(classVisitor);
+>, <Line: +        }
+>, <Line: +        private static class BreakingClassVisitor extends ClassVisitor {
+>, <Line: +            public BreakingClassVisitor(ClassVisitor classVisitor) {
+>, <Line: +                super(Opcodes.ASM5, classVisitor);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+>, <Line: +                super.visit(version, access, name, signature, superName, interfaces);
+>, <Line: +                AnnotationVisitor annotationVisitor = visitAnnotation(Type.getDescriptor(BrokenAnnotation.class), true);
+>, <Line: +                annotationVisitor.visit("stringValue", INTEGER);
+>, <Line: +                annotationVisitor.visitEnum("enumValue", Type.getDescriptor(SampleEnumeration.class), FOO);
+>, <Line: +                annotationVisitor.visit("classValue", Type.getType("Lnet/bytebuddy/inexistant/Foo;"));
+>, <Line: +                annotationVisitor.visitEnd();
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -    private Annotation first, second, defaultFirst, defaultSecond, explicitTarget;
+>, <Line: -            assertThat(actual, containsString(method.getName() + "="
+>, <Line: -                    + PropertyDispatcher.of(method.getReturnType()).toString(method.invoke(loaded))));
+>]

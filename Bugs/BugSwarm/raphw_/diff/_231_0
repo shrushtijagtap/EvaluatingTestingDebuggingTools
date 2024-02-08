@@ -1,0 +1,129 @@
+[<Line: +        @Override
+>, <Line: +        public StackManipulation onHandle(HandleType type) {
+>, <Line: +            return Illegal.INSTANCE;
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Invokes the method via a {@code MethodHandle}.
+>, <Line: +         *
+>, <Line: +         * @param type The type of invocation.
+>, <Line: +         * @return A stack manipulation that represents a method call of the specified method via a method handle.
+>, <Line: +         */
+>, <Line: +        StackManipulation onHandle(HandleType type);
+>, <Line: +        @Override
+>, <Line: +        public StackManipulation onHandle(HandleType type) {
+>, <Line: +            return new Compound(invocation.onHandle(type), TypeCasting.to(targetType));
+>, <Line: +        }
+>, <Line: +        private final MethodDescription.InDefinedShape methodDescription;
+>, <Line: +        protected Invocation(MethodDescription.InDefinedShape methodDescription) {
+>, <Line: +            this(methodDescription, methodDescription.getDeclaringType());
+>, <Line: +        protected Invocation(MethodDescription.InDefinedShape methodDescription, TypeDescription typeDescription) {
+>, <Line: +        @Override
+>, <Line: +        public StackManipulation onHandle(HandleType type) {
+>, <Line: +            return new HandleInvocation(methodDescription, type);
+>, <Line: +        }
+>, <Line: +    /**
+>, <Line: +     * Performs a method invocation on a method handle with a polymorphic type signature.
+>, <Line: +     */
+>, <Line: +    protected static class HandleInvocation implements StackManipulation {
+>, <Line: +        /**
+>, <Line: +         * The internal name of the method handle type.
+>, <Line: +         */
+>, <Line: +        private static final String METHOD_HANDLE = "java/lang/invoke/MethodHandle";
+>, <Line: +        /**
+>, <Line: +         * The invoked method.
+>, <Line: +         */
+>, <Line: +        private final MethodDescription.InDefinedShape methodDescription;
+>, <Line: +        /**
+>, <Line: +         * The type of method handle invocation.
+>, <Line: +         */
+>, <Line: +        private final HandleType type;
+>, <Line: +        /**
+>, <Line: +         * Creates a new method handle invocation.
+>, <Line: +         *
+>, <Line: +         * @param methodDescription The invoked method.
+>, <Line: +         * @param type              The type of method handle invocation.
+>, <Line: +         */
+>, <Line: +        protected HandleInvocation(MethodDescription.InDefinedShape methodDescription, HandleType type) {
+>, <Line: +            this.methodDescription = methodDescription;
+>, <Line: +            this.type = type;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public boolean isValid() {
+>, <Line: +            return true;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+>, <Line: +            methodVisitor.visitMethodInsn(Opcodes.INVOKEVIRTUAL,
+>, <Line: +                    METHOD_HANDLE,
+>, <Line: +                    type.getMethodName(),
+>, <Line: +                    methodDescription.isStatic() || methodDescription.isConstructor()
+>, <Line: +                            ? methodDescription.getDescriptor()
+>, <Line: +                            : "(" + methodDescription.getDeclaringType().getDescriptor() + methodDescription.getDescriptor().substring(1),
+>, <Line: +                    false);
+>, <Line: +            int parameterSize = 1 + methodDescription.getStackSize(), returnValueSize = methodDescription.getReturnType().getStackSize().getSize();
+>, <Line: +            return new Size(returnValueSize - parameterSize, Math.max(0, returnValueSize - parameterSize));
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public boolean equals(Object object) {
+>, <Line: +            if (this == object) return true;
+>, <Line: +            if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +            HandleInvocation that = (HandleInvocation) object;
+>, <Line: +            return methodDescription.equals(that.methodDescription) && type == that.type;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public int hashCode() {
+>, <Line: +            int result = methodDescription.hashCode();
+>, <Line: +            result = 31 * result + type.hashCode();
+>, <Line: +            return result;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public String toString() {
+>, <Line: +            return "MethodInvocation.HandleInvocation{" +
+>, <Line: +                    "methodDescription=" + methodDescription +
+>, <Line: +                    ", type=" + type +
+>, <Line: +                    '}';
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * The type of method handle invocation.
+>, <Line: +     */
+>, <Line: +    public enum HandleType {
+>, <Line: +        /**
+>, <Line: +         * An exact invocation without type adjustments.
+>, <Line: +         */
+>, <Line: +        EXACT("invokeExact"),
+>, <Line: +        /**
+>, <Line: +         * A regular invocation with standard type adjustments.
+>, <Line: +         */
+>, <Line: +        REGULAR("invoke");
+>, <Line: +        /**
+>, <Line: +         * The name of the invoked method.
+>, <Line: +         */
+>, <Line: +        private final String methodName;
+>, <Line: +        /**
+>, <Line: +         * Creates a new handle type.
+>, <Line: +         *
+>, <Line: +         * @param methodName The name of the invoked method.
+>, <Line: +         */
+>, <Line: +        HandleType(String methodName) {
+>, <Line: +            this.methodName = methodName;
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Returns the name of the represented method.
+>, <Line: +         *
+>, <Line: +         * @return The name of the invoked method.
+>, <Line: +         */
+>, <Line: +        protected String getMethodName() {
+>, <Line: +            return methodName;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public String toString() {
+>, <Line: +            return "MethodInvocation.HandleType." + name();
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -        private final MethodDescription methodDescription;
+>, <Line: -        protected Invocation(MethodDescription methodDescription) {
+>, <Line: -            this(methodDescription, methodDescription.getDeclaringType().asErasure());
+>, <Line: -        protected Invocation(MethodDescription methodDescription, TypeDescription typeDescription) {
+>]

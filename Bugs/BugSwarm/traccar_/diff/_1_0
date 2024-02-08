@@ -1,0 +1,4 @@
+[<Line: +public class CorsResponseFilter implements ContainerResponseFilter {
+>]
+[<Line: -public class CORSResponseFilter implements ContainerResponseFilter {
+>]

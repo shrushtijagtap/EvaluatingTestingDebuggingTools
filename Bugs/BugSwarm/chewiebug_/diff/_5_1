@@ -1,0 +1,8 @@
+[<Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "RecentGCResourcesModel{" +
+>, <Line: +                "resourceNameGroupList=" + resourceNameGroupList +
+>, <Line: +                '}';
+>, <Line: +    }
+>]
+[]

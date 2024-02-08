@@ -1,0 +1,38 @@
+[<Line: +import static com.puppycrawl.tools.checkstyle.checks.coding.DefaultComesLastCheck.MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE;
+>, <Line: +    private DefaultConfiguration checkConfig;
+>, <Line: +    @Test
+>, <Line: +    public void testSkipIfLastAndSharedWithCase() throws Exception {
+>, <Line: +        checkConfig = createCheckConfig(DefaultComesLastCheck.class);
+>, <Line: +        checkConfig.addAttribute("skipIfLastAndSharedWithCase", "true");
+>, <Line: +        final String[] expected = {
+>, <Line: +            "17:13: " + getCheckMessage(MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE),
+>, <Line: +            "25:13: " + getCheckMessage(MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE),
+>, <Line: +            "33:21: " + getCheckMessage(MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE),
+>, <Line: +            "37:13: " + getCheckMessage(MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE),
+>, <Line: +            "57:13: " + getCheckMessage(MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE),
+>, <Line: +            "77:13: " + getCheckMessage(MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE),
+>, <Line: +            "89:13: " + getCheckMessage(MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE),
+>, <Line: +            "98:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +        };
+>, <Line: +        verify(checkConfig, getPath("InputSkipIfLastAndSharedWithCase.java"), expected);
+>, <Line: +    }
+>, <Line: +        checkConfig = createCheckConfig(DefaultComesLastCheck.class);
+>, <Line: +            "37:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "45:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "53:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "61:21: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "65:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "69:21: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "74:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "85:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "96:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "106:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "114:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +            "125:13: " + getCheckMessage(MSG_KEY),
+>, <Line: +        checkConfig = createCheckConfig(DefaultComesLastCheck.class);
+>]
+[<Line: -        final DefaultConfiguration checkConfig =
+>, <Line: -            createCheckConfig(DefaultComesLastCheck.class);
+>, <Line: -        final DefaultConfiguration checkConfig =
+>, <Line: -                createCheckConfig(DefaultComesLastCheck.class);
+>]

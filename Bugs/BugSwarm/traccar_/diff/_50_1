@@ -1,0 +1,14 @@
+[<Line: +import org.traccar.helper.Log;
+>, <Line: +        result.add("error", Log.exceptionStack(error));
+>]
+[<Line: -    public void securityCheck(boolean check) throws SecurityException {
+>, <Line: -        if (!check) {
+>, <Line: -            throw new SecurityException("Access denied");
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -        if (error.getMessage() != null) {
+>, <Line: -            result.add("error", error.getMessage());
+>, <Line: -        } else {
+>, <Line: -            result.add("error", error.getClass().getSimpleName());
+>, <Line: -        }
+>]

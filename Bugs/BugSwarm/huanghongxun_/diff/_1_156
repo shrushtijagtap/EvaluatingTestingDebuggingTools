@@ -1,0 +1,8 @@
+[<Line: +import com.google.gson.annotations.SerializedName;
+>, <Line: +    @SerializedName("snapshot")
+>, <Line: +    public String snapshot;
+>, <Line: +    @SerializedName("release")
+>, <Line: +    public String release;
+>]
+[<Line: -    public String snapshot, release;
+>]

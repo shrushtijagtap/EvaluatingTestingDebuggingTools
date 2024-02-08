@@ -1,0 +1,118 @@
+[<Line: +import java.util.ArrayList;
+>, <Line: + * <b>Important</b>: For invoking a method on another instance, use the {@link MethodCall} implementation. A method delegation
+>, <Line: +    public Implementation.Composable withAssigner(Assigner assigner) {
+>, <Line: +        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(parameterBinders);
+>, <Line: +        List<MethodDelegationBinder.Record> records = new ArrayList<MethodDelegationBinder.Record>(resolution.getCandidates().size());
+>, <Line: +        for (MethodDescription candidate : resolution.getCandidates()) {
+>, <Line: +            records.add(methodDelegationBinder.compile(candidate));
+>, <Line: +        }
+>, <Line: +        return new Appender(implementationTarget,
+>, <Line: +                new MethodDelegationBinder.Processor(records, ambiguityResolver),
+>, <Line: +                terminationHandler,
+>, <Line: +                resolution.getMethodInvoker(),
+>, <Line: +                assigner,
+>, <Line: +                resolution.getPreparation(),
+>, <Line: +                resolution.isAllowStaticMethod());
+>, <Line: +         * The implementation target of this implementation.
+>, <Line: +        private final Target implementationTarget;
+>, <Line: +         * The method delegation binder processor which is responsible for implementing the method delegation.
+>, <Line: +        private final MethodDelegationBinder.Processor processor;
+>, <Line: +         * A termination handler for a method delegation binder.
+>, <Line: +        private final MethodDelegationBinder.TerminationHandler terminationHandler;
+>, <Line: +         * An invoker for a method delegation binder.
+>, <Line: +        private final MethodDelegationBinder.MethodInvoker methodInvoker;
+>, <Line: +        /**
+>, <Line: +         * The assigner to use.
+>, <Line: +         */
+>, <Line: +        private final Assigner assigner;
+>, <Line: +        /**
+>, <Line: +         * The stack manipulation that is responsible for loading a potential target instance onto the stack
+>, <Line: +         * on which the target method is invoked.
+>, <Line: +         */
+>, <Line: +        private final StackManipulation preparingStackAssignment;
+>, <Line: +         * Creates an appender for a  method delegation.
+>, <Line: +         * @param processor                The method delegation binder processor which is responsible for implementing the method delegation.
+>, <Line: +         * @param terminationHandler       A termination handler for a method delegation binder.
+>, <Line: +         * @param methodInvoker            An invoker for a method delegation binder.
+>, <Line: +         * @param assigner                 The assigner to use.
+>, <Line: +         * @param preparingStackAssignment The stack manipulation that is responsible for loading a potential target instance onto the stack
+>, <Line: +         *                                 on which the target method is invoked.
+>, <Line: +        protected Appender(Target implementationTarget,
+>, <Line: +                           MethodDelegationBinder.TerminationHandler terminationHandler,
+>, <Line: +                           MethodDelegationBinder.MethodInvoker methodInvoker,
+>, <Line: +                           Assigner assigner,
+>, <Line: +                           StackManipulation preparingStackAssignment,
+>, <Line: +            this.terminationHandler = terminationHandler;
+>, <Line: +            this.methodInvoker = methodInvoker;
+>, <Line: +            this.assigner = assigner;
+>, <Line: +            this.preparingStackAssignment = preparingStackAssignment;
+>, <Line: +                    processor.bind(implementationTarget, instrumentedMethod, terminationHandler, methodInvoker, assigner)
+>, <Line: +        public boolean equals(Object object) {
+>, <Line: +            if (this == object) return true;
+>, <Line: +            if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +            Appender appender = (Appender) object;
+>, <Line: +            return allowStaticMethods == appender.allowStaticMethods
+>, <Line: +                    && implementationTarget.equals(appender.implementationTarget)
+>, <Line: +                    && processor.equals(appender.processor)
+>, <Line: +                    && terminationHandler.equals(appender.terminationHandler)
+>, <Line: +                    && methodInvoker.equals(appender.methodInvoker)
+>, <Line: +                    && assigner.equals(appender.assigner)
+>, <Line: +                    && preparingStackAssignment.equals(appender.preparingStackAssignment);
+>, <Line: +            int result = implementationTarget.hashCode();
+>, <Line: +            result = 31 * result + terminationHandler.hashCode();
+>, <Line: +            result = 31 * result + methodInvoker.hashCode();
+>, <Line: +            result = 31 * result + assigner.hashCode();
+>, <Line: +            result = 31 * result + preparingStackAssignment.hashCode();
+>, <Line: +                    "implementationTarget=" + implementationTarget +
+>, <Line: +                    ", terminationHandler=" + terminationHandler +
+>, <Line: +                    ", methodInvoker=" + methodInvoker +
+>, <Line: +                    ", assigner=" + assigner +
+>, <Line: +                    ", preparingStackAssignment=" + preparingStackAssignment +
+>]
+[<Line: -import net.bytebuddy.implementation.bind.annotation.Argument;
+>, <Line: - * <b>Important</b>: For invoking a method on another instance, use the {@link Forwarding} implementation. A method delegation
+>, <Line: -    public MethodDelegation withAssigner(Assigner assigner) {
+>, <Line: -        return new Appender(resolution.getPreparation(),
+>, <Line: -                implementationTarget,
+>, <Line: -                resolution.getCandidates(),
+>, <Line: -                new MethodDelegationBinder.Processor(TargetMethodAnnotationDrivenBinder.of(
+>, <Line: -                        parameterBinders,
+>, <Line: -                        terminationHandler,
+>, <Line: -                        assigner,
+>, <Line: -                        resolution.getMethodInvoker()), ambiguityResolver), resolution.isAllowStaticMethod());
+>, <Line: -         * The stack manipulation that is responsible for loading a potential target instance onto the stack
+>, <Line: -         * on which the target method is invoked.
+>, <Line: -        private final StackManipulation preparingStackAssignment;
+>, <Line: -         * The implementation target of this implementation.
+>, <Line: -        private final Target implementationTarget;
+>, <Line: -         * The method candidates to consider for delegating the invocation to.
+>, <Line: -        private final MethodList targetCandidates;
+>, <Line: -         * The method delegation binder processor which is responsible for implementing the method delegation.
+>, <Line: -        private final MethodDelegationBinder.Processor processor;
+>, <Line: -         * Creates a new appender.
+>, <Line: -         * @param preparingStackAssignment The stack manipulation that is responsible for loading a potential target
+>, <Line: -         *                                 instance onto the stack on which the target method is invoked.
+>, <Line: -         * @param targetCandidates         The method candidates to consider for delegating the invocation to.
+>, <Line: -         * @param processor                The method delegation binder processor which is responsible for implementing
+>, <Line: -        protected Appender(StackManipulation preparingStackAssignment,
+>, <Line: -                           Target implementationTarget,
+>, <Line: -                           MethodList targetCandidates,
+>, <Line: -            this.preparingStackAssignment = preparingStackAssignment;
+>, <Line: -            this.targetCandidates = targetCandidates;
+>, <Line: -                    processor.process(implementationTarget, instrumentedMethod, targetCandidates)
+>, <Line: -        public boolean equals(Object other) {
+>, <Line: -            if (this == other) return true;
+>, <Line: -            if (other == null || getClass() != other.getClass()) return false;
+>, <Line: -            Appender that = (Appender) other;
+>, <Line: -            return implementationTarget.equals(that.implementationTarget)
+>, <Line: -                    && preparingStackAssignment.equals(that.preparingStackAssignment)
+>, <Line: -                    && processor.equals(that.processor)
+>, <Line: -                    && allowStaticMethods == that.allowStaticMethods
+>, <Line: -                    && targetCandidates.equals(that.targetCandidates);
+>, <Line: -            int result = preparingStackAssignment.hashCode();
+>, <Line: -            result = 31 * result + implementationTarget.hashCode();
+>, <Line: -            result = 31 * result + targetCandidates.hashCode();
+>, <Line: -                    "preparingStackAssignment=" + preparingStackAssignment +
+>, <Line: -                    ", implementationTarget=" + implementationTarget +
+>, <Line: -                    ", targetCandidates=" + targetCandidates +
+>]

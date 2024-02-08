@@ -1,0 +1,4 @@
+[<Line: +import com.palominolabs.metrics.guice.MetricsInstrumentationModule;
+>, <Line: +        .addModule(new MetricsInstrumentationModule(bootstrap.getMetricRegistry()))
+>]
+[]

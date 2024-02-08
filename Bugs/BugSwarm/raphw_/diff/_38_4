@@ -1,0 +1,4 @@
+[<Line: +        assertThat(JavaType.PARAMETER.load(), notNullValue(Class.class));
+>]
+[<Line: -        assertThat(JavaType.PARAMETER.load(), notNullValue(Class.class));
+>]

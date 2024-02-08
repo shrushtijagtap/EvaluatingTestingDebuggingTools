@@ -1,0 +1,37 @@
+[<Line: +package test.name;
+>, <Line: +import org.testng.Assert;
+>, <Line: +import org.testng.ITest;
+>, <Line: +import org.testng.annotations.AfterMethod;
+>, <Line: +import org.testng.annotations.BeforeMethod;
+>, <Line: +import org.testng.annotations.DataProvider;
+>, <Line: +import org.testng.annotations.Test;
+>, <Line: +// From http://stackoverflow.com/q/33404335/4234729
+>, <Line: +public class ITestSample implements ITest {
+>, <Line: +  public ThreadLocal<String> testName = new ThreadLocal<>();
+>, <Line: +  @DataProvider(name = "dp", parallel = true)
+>, <Line: +  public Object[][] getTests() {
+>, <Line: +    return new Object[][]{new Object[]{"test1"},
+>, <Line: +                          new Object[]{"test2"},
+>, <Line: +                          new Object[]{"test3"},
+>, <Line: +                          new Object[]{"test4"},
+>, <Line: +                          new Object[]{"test5"}};
+>, <Line: +  }
+>, <Line: +  @Test(dataProvider = "dp")
+>, <Line: +  public void run(String testName) {
+>, <Line: +    Assert.assertEquals(testName, this.testName.get());
+>, <Line: +  }
+>, <Line: +  @BeforeMethod
+>, <Line: +  public void init(Object[] testArgs) {
+>, <Line: +    testName.set((String) testArgs[0]);
+>, <Line: +  }
+>, <Line: +  @AfterMethod
+>, <Line: +  public void tearDown(Object[] testArgs) {
+>, <Line: +    Assert.assertEquals((String) testArgs[0], this.testName.get());
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public String getTestName() {
+>, <Line: +    return testName.get();
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

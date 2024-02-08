@@ -1,0 +1,26 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.pedigree.compatibilitychecker;
+>, <Line: -import de.charite.compbio.jannovar.JannovarException;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.GenotypeList;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Pedigree;
+>, <Line: -/**
+>, <Line: - * Exception that occurs when using invalid {@link GenotypeList} or {@link Pedigree} objects in the compatibility
+>, <Line: - * checking.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - * @deprecated Use {@link InheritanceCompatibilityCheckerException}
+>, <Line: - */
+>, <Line: -@Deprecated
+>, <Line: -public class CompatibilityCheckerException extends JannovarException {
+>, <Line: -	public static final long serialVersionUID = 1L;
+>, <Line: -	public CompatibilityCheckerException() {
+>, <Line: -		super();
+>, <Line: -	}
+>, <Line: -	public CompatibilityCheckerException(String msg) {
+>, <Line: -		super(msg);
+>, <Line: -	}
+>, <Line: -	public CompatibilityCheckerException(String msg, Throwable cause) {
+>, <Line: -		super(msg, cause);
+>, <Line: -	}
+>, <Line: -}
+>]

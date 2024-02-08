@@ -1,0 +1,19 @@
+[]
+[<Line: -package com.googlecode.mp4parser.boxes.apple;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.Utf8;
+>, <Line: -import java.nio.ByteBuffer;
+>, <Line: -import java.text.DateFormat;
+>, <Line: -import java.text.ParseException;
+>, <Line: -import java.text.SimpleDateFormat;
+>, <Line: -import java.util.Date;
+>, <Line: -import java.util.TimeZone;
+>, <Line: -/**
+>, <Line: - * Created by Tobias Bley, / UltraMixer
+>, <Line: - */
+>, <Line: -public class AppleRecordingYear2Box extends Utf8AppleDataBox {
+>, <Line: -    public AppleRecordingYear2Box() {
+>, <Line: -        super("©day");
+>, <Line: -    }
+>, <Line: -}
+>]

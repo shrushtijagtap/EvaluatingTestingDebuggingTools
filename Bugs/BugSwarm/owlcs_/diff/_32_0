@@ -1,0 +1,29 @@
+[<Line: +import gnu.trove.map.hash.TObjectIntHashMap;
+>, <Line: +    static final TObjectIntHashMap<IRI> specialPredicateRanks = initMap();
+>, <Line: +            return getSubject().equals(triple.getSubject()) && getPredicate().equals(triple.getPredicate())
+>, <Line: +                && getObject().equals(triple.getObject());
+>, <Line: +    static TObjectIntHashMap<IRI> initMap() {
+>, <Line: +        TObjectIntHashMap<IRI> predicates = new TObjectIntHashMap<>();
+>, <Line: +            .forEach(iri -> predicates.putIfAbsent(iri.getIRI(), nextId.getAndIncrement()));
+>, <Line: +        int specialPredicateRank = specialPredicateRanks.get(predicateIRI);
+>, <Line: +        int otherSpecialPredicateRank = specialPredicateRanks.get(otherPredicateIRI);
+>, <Line: +        if (specialPredicateRank != specialPredicateRanks.getNoEntryValue()) {
+>, <Line: +            if (otherSpecialPredicateRank != specialPredicateRanks.getNoEntryValue()) {
+>, <Line: +                return Integer.compare(specialPredicateRank, otherSpecialPredicateRank);
+>, <Line: +            if (otherSpecialPredicateRank != specialPredicateRanks.getNoEntryValue()) {
+>]
+[<Line: -import gnu.trove.map.hash.THashMap;
+>, <Line: -    static final THashMap<IRI, Integer> specialPredicateRanks = initMap();
+>, <Line: -            return getSubject().equals(triple.getSubject()) &&
+>, <Line: -                getPredicate().equals(triple.getPredicate()) &&
+>, <Line: -                getObject().equals(triple.getObject());
+>, <Line: -    static THashMap<IRI, Integer> initMap() {
+>, <Line: -        THashMap<IRI, Integer> predicates = new THashMap<>();
+>, <Line: -            .forEach(iri -> predicates.computeIfAbsent(iri.getIRI(), i -> nextId.getAndIncrement()));
+>, <Line: -        Integer specialPredicateRank = specialPredicateRanks.get(predicateIRI);
+>, <Line: -        Integer otherSpecialPredicateRank = specialPredicateRanks.get(otherPredicateIRI);
+>, <Line: -        if (specialPredicateRank != null) {
+>, <Line: -            if (otherSpecialPredicateRank != null) {
+>, <Line: -                return specialPredicateRank.compareTo(otherSpecialPredicateRank);
+>, <Line: -            if (otherSpecialPredicateRank != null) {
+>]

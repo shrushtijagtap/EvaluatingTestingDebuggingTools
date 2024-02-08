@@ -1,0 +1,7 @@
+[<Line: +package backend.interfaces;
+>, <Line: +public interface TaskRunner {
+>, <Line: +	public <R> RepoTask<R> addTask(RepoTask<R> task);
+>, <Line: +	public void execute(Runnable r);
+>, <Line: +}
+>]
+[]

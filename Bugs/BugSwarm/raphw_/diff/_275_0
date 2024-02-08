@@ -1,0 +1,20 @@
+[<Line: +                            if (!types.isEmpty()) {
+>, <Line: +                                RedefinitionStrategy.Collector collector = redefinitionStrategy.make();
+>, <Line: +                                collector.include(types);
+>, <Line: +                                collector.apply(instrumentation,
+>, <Line: +                                        circularityLock,
+>, <Line: +                                        locationStrategy,
+>, <Line: +                                        listener,
+>, <Line: +                                        redefinitionBatchAllocator,
+>, <Line: +                                        redefinitionBatchListener);
+>, <Line: +                            }
+>]
+[<Line: -                            RedefinitionStrategy.Collector collector = redefinitionStrategy.make();
+>, <Line: -                            collector.include(types);
+>, <Line: -                            collector.apply(instrumentation,
+>, <Line: -                                    circularityLock,
+>, <Line: -                                    locationStrategy,
+>, <Line: -                                    listener,
+>, <Line: -                                    redefinitionBatchAllocator,
+>, <Line: -                                    redefinitionBatchListener);
+>]

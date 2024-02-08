@@ -1,0 +1,5 @@
+[<Line: +import org.jackhuang.hellominecraft.launcher.util.DefaultPlugin;
+>, <Line: +            PluginManager.getPlugin(DefaultPlugin.class);
+>]
+[<Line: -            //PluginManager.getServerPlugin();
+>]

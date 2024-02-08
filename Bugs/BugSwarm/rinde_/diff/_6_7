@@ -1,0 +1,7 @@
+[<Line: +		<dependency>
+>, <Line: +			<groupId>org.mockito</groupId>
+>, <Line: +			<artifactId>mockito-core</artifactId>
+>, <Line: +			<scope>test</scope>
+>, <Line: +		</dependency>
+>]
+[]

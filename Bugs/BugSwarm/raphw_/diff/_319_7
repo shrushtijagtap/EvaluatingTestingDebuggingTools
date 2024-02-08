@@ -1,0 +1,14 @@
+[<Line: +import net.bytebuddy.test.utility.MockitoRule;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Rule;
+>, <Line: +import static org.mockito.Matchers.any;
+>, <Line: +import static org.mockito.Mockito.when;
+>, <Line: +    @Rule
+>, <Line: +    public MockitoRule mockitoRule = new MockitoRule(this);
+>, <Line: +    @Before
+>, <Line: +    public void setUp() throws Exception {
+>, <Line: +        when(superType.accept(any(GenericTypeDescription.Visitor.class))).thenReturn(superType);
+>, <Line: +        when(interfaceType.accept(any(GenericTypeDescription.Visitor.class))).thenReturn(interfaceType);
+>, <Line: +    }
+>]
+[]

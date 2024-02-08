@@ -1,0 +1,12 @@
+[<Line: +		public Macro(String name, List<String> generics, TypePattern parameter, Expr body, List<Attribute> attributes) {
+>, <Line: +			super(attributes);
+>, <Line: +			if (!Expr.isValidIdentifier(name)) {
+>, <Line: +				throw new IllegalArgumentException("illegal identifier: " + name);
+>, <Line: +			}
+>, <Line: +			this.name = name;
+>, <Line: +			this.generics = new ArrayList<String>(generics);
+>, <Line: +			this.from = parameter;
+>, <Line: +			this.body = body;
+>, <Line: +		}
+>]
+[]

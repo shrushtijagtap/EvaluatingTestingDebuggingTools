@@ -1,0 +1,16 @@
+[<Line: +package org.mp4parser.muxer.tracks.webvtt.sampleboxes;
+>, <Line: +import org.mp4parser.Box;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +public class VTTEmptyCueBox implements Box {
+>, <Line: +    public String getType() {
+>, <Line: +        return "vtte";
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks.webvtt.sampleboxes;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.mp4parser.streaming.WriteOnlyBox;
+>, <Line: -public class VTTEmptyCueBox extends WriteOnlyBox {
+>, <Line: -        super("vtte");
+>]

@@ -1,0 +1,66 @@
+[<Line: +import java.io.IOException;
+>, <Line: +import java.io.Serializable;
+>, <Line: +            return withExceptionHandler(MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(Throwable.class.getMethod("printStackTrace"))));
+>, <Line: +             * An instruction to deserialize the supplied string value.
+>, <Line: +            private final StackManipulation deserialization;
+>, <Line: +             * @param deserialization An instruction to deserialize the supplied string value.
+>, <Line: +            protected ForSerializedValue(TypeDescription typeDescription, StackManipulation deserialization) {
+>, <Line: +                this.deserialization = deserialization;
+>, <Line: +             * Creates a dynamic value for binding the serializable value.
+>, <Line: +             * @param target The instance to load onto the stack.
+>, <Line: +             * @return A dynamic value binding for the supplied value.
+>, <Line: +            protected static DynamicValue<Annotation> of(Serializable target) {
+>, <Line: +                return new ForSerializedValue(new TypeDescription.ForLoadedType(target.getClass()), SerializedConstant.of(target));
+>, <Line: +                return new StackManipulation.Compound(deserialization, assignment);
+>, <Line: +                return typeDescription.equals(that.typeDescription) && deserialization.equals(that.deserialization);
+>, <Line: +                result = 31 * result + deserialization.hashCode();
+>, <Line: +                        ", deserialization=" + deserialization +
+>]
+[<Line: -import java.io.*;
+>, <Line: -            return withExceptionHandler(MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(Throwable.class.getDeclaredMethod("printStackTrace"))));
+>, <Line: -            /**
+>, <Line: -             * A charset that does not change the supplied byte array upon encoding or decoding.
+>, <Line: -             */
+>, <Line: -            private static final String CHARSET = "ISO-8859-1";
+>, <Line: -             * The string-representation of the serializable value.
+>, <Line: -            private final String value;
+>, <Line: -             * @param value           The string-representation of the serializable value.
+>, <Line: -            protected ForSerializedValue(TypeDescription typeDescription, String value) {
+>, <Line: -                this.value = value;
+>, <Line: -             * Creates a dynamic value for binding to an annotation for representing a serializable value.
+>, <Line: -             * @param value The value to represent.
+>, <Line: -             * @return A dynamic value binding for the supplied serializable value.
+>, <Line: -            protected static DynamicValue<Annotation> of(Serializable value) {
+>, <Line: -                try {
+>, <Line: -                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+>, <Line: -                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+>, <Line: -                    try {
+>, <Line: -                        objectOutputStream.writeObject(value);
+>, <Line: -                    } finally {
+>, <Line: -                        objectOutputStream.close();
+>, <Line: -                    }
+>, <Line: -                    return new ForSerializedValue(new TypeDescription.ForLoadedType(value.getClass()), byteArrayOutputStream.toString(CHARSET));
+>, <Line: -                } catch (IOException exception) {
+>, <Line: -                    throw new IllegalStateException("Cannot serialize " + value, exception);
+>, <Line: -                }
+>, <Line: -                try {
+>, <Line: -                    return new StackManipulation.Compound(
+>, <Line: -                            TypeCreation.of(new TypeDescription.ForLoadedType(ObjectInputStream.class)),
+>, <Line: -                            Duplication.SINGLE,
+>, <Line: -                            TypeCreation.of(new TypeDescription.ForLoadedType(ByteArrayInputStream.class)),
+>, <Line: -                            Duplication.SINGLE,
+>, <Line: -                            new TextConstant(value),
+>, <Line: -                            new TextConstant(CHARSET),
+>, <Line: -                            MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(String.class.getDeclaredMethod("getBytes", String.class))),
+>, <Line: -                            MethodInvocation.invoke(new MethodDescription.ForLoadedConstructor(ByteArrayInputStream.class.getDeclaredConstructor(byte[].class))),
+>, <Line: -                            MethodInvocation.invoke(new MethodDescription.ForLoadedConstructor(ObjectInputStream.class.getDeclaredConstructor(InputStream.class))),
+>, <Line: -                            MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(ObjectInputStream.class.getDeclaredMethod("readObject"))),
+>, <Line: -                            assignment
+>, <Line: -                    );
+>, <Line: -                } catch (NoSuchMethodException exception) {
+>, <Line: -                    throw new IllegalStateException("Cannot locate method", exception);
+>, <Line: -                }
+>, <Line: -                return typeDescription.equals(that.typeDescription) && value.equals(that.value);
+>, <Line: -                result = 31 * result + value.hashCode();
+>, <Line: -                        ", value='" + value + '\'' +
+>]

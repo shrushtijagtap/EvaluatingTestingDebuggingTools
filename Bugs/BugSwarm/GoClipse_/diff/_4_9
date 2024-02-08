@@ -1,0 +1,588 @@
+[]
+[<Line: -/*******************************************************************************
+>, <Line: - * Copyright (c) 2005, 2007 IBM Corporation and others.
+>, <Line: - * All rights reserved. This program and the accompanying materials
+>, <Line: - * are made available under the terms of the Eclipse Public License v1.0
+>, <Line: - * which accompanies this distribution, and is available at
+>, <Line: - * http://www.eclipse.org/legal/epl-v10.html
+>, <Line: - *
+>, <Line: - * Contributors:
+>, <Line: - * 		Andrey Tarantsov ?
+>, <Line: - *******************************************************************************/
+>, <Line: -package melnorme.lang.ide.core.text.format;
+>, <Line: -import org.eclipse.jface.text.BadLocationException;
+>, <Line: -import org.eclipse.jface.text.DocumentCommand;
+>, <Line: -import org.eclipse.jface.text.IDocument;
+>, <Line: -import org.eclipse.jface.text.ITypedRegion;
+>, <Line: -import org.eclipse.jface.text.TextUtilities;
+>, <Line: -/**
+>, <Line: - * An utility class that provides helper methods for language-dependant
+>, <Line: - * implementations of AutoEditStrategies.
+>, <Line: - * 
+>, <Line: - * @author Andrey Tarantsov
+>, <Line: - */
+>, <Line: -public class AutoEditUtils {
+>, <Line: -	private AutoEditUtils() {
+>, <Line: -		throw new AssertionError("Cannot instantiate utility class"); //$NON-NLS-1$
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Return a pair for the given brace. Ex. '(' for ')', e.t.c.
+>, <Line: -	 * 
+>, <Line: -	 * @param b
+>, <Line: -	 *            input brace
+>, <Line: -	 * @return peer brace
+>, <Line: -	 * @author Kalugin Mikhail
+>, <Line: -	 */
+>, <Line: -	public static char getBracePair(char b) {
+>, <Line: -		switch (b) {
+>, <Line: -		case '(':
+>, <Line: -			return ')';
+>, <Line: -		case ')':
+>, <Line: -			return '(';
+>, <Line: -		case '[':
+>, <Line: -			return ']';
+>, <Line: -		case ']':
+>, <Line: -			return '[';
+>, <Line: -		case '{':
+>, <Line: -			return '}';
+>, <Line: -		case '}':
+>, <Line: -			return '{';
+>, <Line: -		case '\"':
+>, <Line: -			return '\"';
+>, <Line: -		case '\'':
+>, <Line: -			return '\'';
+>, <Line: -		}
+>, <Line: -		return b;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Checks if the given command is an insertion command that inserts a
+>, <Line: -	 * snippet of text ending with one of the valid end-of-line sequences.
+>, <Line: -	 * 
+>, <Line: -	 * @param d
+>, <Line: -	 * @param c
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public static boolean isNewLineInsertionCommand(IDocument d, DocumentCommand c) {
+>, <Line: -		if (c.length > 0 || c.text == null)
+>, <Line: -			return false;
+>, <Line: -		String[] legalLineDelimiters = d.getLegalLineDelimiters();
+>, <Line: -		for (int i = 0; i < legalLineDelimiters.length; i++) {
+>, <Line: -			if (legalLineDelimiters[i].equals(c.text))
+>, <Line: -				return true;
+>, <Line: -		}
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Checks if the given command inserts or replaces a single character.
+>, <Line: -	 * 
+>, <Line: -	 * @param c
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public static boolean isSingleCharactedInsertionOrReplaceCommand(DocumentCommand c) {
+>, <Line: -		return c.length <= 1 && c.text.length() == 1;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the given number of spaces.
+>, <Line: -	 * 
+>, <Line: -	 * @param spaces
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public static String getNSpaces(int spaces) {
+>, <Line: -		return getNChars(spaces, ' ');
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns <code>count</code> copies of the given character.
+>, <Line: -	 * 
+>, <Line: -	 * @param count
+>, <Line: -	 * @param ch
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public static String getNChars(int count, char ch) {
+>, <Line: -		StringBuffer buf = new StringBuffer(count);
+>, <Line: -		for (int i = 0; i < count; i++)
+>, <Line: -			buf.append(ch);
+>, <Line: -		return buf.toString();
+>, <Line: -	}
+>, <Line: -//	/**
+>, <Line: -//	 * Determines if the given document range contains at least one character
+>, <Line: -//	 * that belongs to one of the given partitions.
+>, <Line: -//	 * 
+>, <Line: -//	 * @param document
+>, <Line: -//	 * @param startOffset
+>, <Line: -//	 * @param length
+>, <Line: -//	 * @param partitions
+>, <Line: -//	 * @param partitioning
+>, <Line: -//	 * @return
+>, <Line: -//	 * @throws BadLocationException
+>, <Line: -//	 */
+>, <Line: -//	public static boolean rangeContainsPartitions(IDocument document, int startOffset, int length,
+>, <Line: -//			String[] partitions, String partitioning) throws BadLocationException {
+>, <Line: -//		for (int offset = startOffset; offset < startOffset + length; offset++) {
+>, <Line: -//			ITypedRegion region = TextUtilities.getPartition(document, partitioning, offset, true);
+>, <Line: -//			String rt = region.getType();
+>, <Line: -//			if (AutoEditUtils.isPartitionOneOf(rt, partitions))
+>, <Line: -//				return true;
+>, <Line: -//			offset = region.getOffset() + region.getLength(); // will be
+>, <Line: -//			// incremented
+>, <Line: -//			// by loop
+>, <Line: -//		}
+>, <Line: -//		return false;
+>, <Line: -//	}
+>, <Line: -	/**
+>, <Line: -	 * Determines whether all characters of the given range belong to the
+>, <Line: -	 * default partition.
+>, <Line: -	 * 
+>, <Line: -	 * @param document
+>, <Line: -	 * @param startOffset
+>, <Line: -	 * @param length
+>, <Line: -	 * @param partitions
+>, <Line: -	 * @param partitioning
+>, <Line: -	 * @return
+>, <Line: -	 * @throws BadLocationException
+>, <Line: -	 */
+>, <Line: -	public static boolean rangeIsInsideDefaultPartition(IDocument document, int startOffset,
+>, <Line: -			int length, String partitioning) throws BadLocationException {
+>, <Line: -		for (int offset = startOffset; offset < startOffset + length; offset++) {
+>, <Line: -			ITypedRegion region = TextUtilities.getPartition(document, partitioning, offset, true);
+>, <Line: -			String rt = region.getType();
+>, <Line: -			if (rt != IDocument.DEFAULT_CONTENT_TYPE)
+>, <Line: -				return false;
+>, <Line: -			offset = region.getOffset() + region.getLength(); // will be
+>, <Line: -			// incremented
+>, <Line: -			// by loop
+>, <Line: -		}
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Determines if the given offset is at the very start of line (that is, at
+>, <Line: -	 * the beginning of the document or immediately after a valid end-of-line
+>, <Line: -	 * sequence).
+>, <Line: -	 * 
+>, <Line: -	 * Assumes that no end-of-line sequence is longer than 2 characters.
+>, <Line: -	 * 
+>, <Line: -	 * @param document
+>, <Line: -	 * @param offset
+>, <Line: -	 * @return
+>, <Line: -	 * @throws BadLocationException
+>, <Line: -	 */
+>, <Line: -	public static boolean isStartOfLine(IDocument document, int offset) throws BadLocationException {
+>, <Line: -		String string;
+>, <Line: -		if (offset >= 2)
+>, <Line: -			string = document.get(offset - 2, 2);
+>, <Line: -		else if (offset >= 1)
+>, <Line: -			string = document.get(offset - 1, 1);
+>, <Line: -		else
+>, <Line: -			return true;
+>, <Line: -		return TextUtilities.endsWith(document.getLegalLineDelimiters(), string) != -1;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the leading whitespaces and tabs.
+>, <Line: -	 * 
+>, <Line: -	 * @param document -
+>, <Line: -	 *            the document being parsed
+>, <Line: -	 * @param line -
+>, <Line: -	 *            the line being searched
+>, <Line: -	 * @return the leading whitespace
+>, <Line: -	 * @throws BadLocationException
+>, <Line: -	 *             in case <code>line</code> is invalid in the document
+>, <Line: -	 */
+>, <Line: -	public static String getLineIndent(IDocument document, int line) throws BadLocationException {
+>, <Line: -		if (line > -1) {
+>, <Line: -			int start = document.getLineOffset(line);
+>, <Line: -			int end = start + document.getLineLength(line); // was - 1
+>, <Line: -			int whiteend = AutoEditUtils.findEndOfWhiteSpace(document, start, end);
+>, <Line: -			return document.get(start, whiteend - start);
+>, <Line: -		}
+>, <Line: -		return ""; //$NON-NLS-1$
+>, <Line: -	}
+>, <Line: -	public static String getLineIndentOfOffset(IDocument document, int offset) throws BadLocationException {
+>, <Line: -		return getLineIndent(document, document.getLineOfOffset(offset));
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the first offset greater than or equal to <code>offset</code>
+>, <Line: -	 * and less than <code>end</code> whose character is not a space or tab
+>, <Line: -	 * character. If no such offset is found, <code>end</code> is returned.
+>, <Line: -	 * 
+>, <Line: -	 * @param document
+>, <Line: -	 *            the document to search in
+>, <Line: -	 * @param offset
+>, <Line: -	 *            the offset at which searching start
+>, <Line: -	 * @param end
+>, <Line: -	 *            the offset at which searching stops
+>, <Line: -	 * @return the offset in the specified range whose character is not a space
+>, <Line: -	 *         or tab
+>, <Line: -	 * @exception BadLocationException
+>, <Line: -	 *                if position is an invalid range in the given document
+>, <Line: -	 */
+>, <Line: -	public static int findEndOfWhiteSpace(IDocument document, int offset, int end)
+>, <Line: -			throws BadLocationException {		
+>, <Line: -//		int docLength = document.getLength();
+>, <Line: -		while (offset < end) {
+>, <Line: -//			if (offset >= docLength) {
+>, <Line: -//				return docLength;
+>, <Line: -//			}
+>, <Line: -			char c = document.getChar(offset);
+>, <Line: -			if (c != ' ' && c != '\t') {
+>, <Line: -				return offset;
+>, <Line: -			}
+>, <Line: -			offset++;
+>, <Line: -		}
+>, <Line: -		return end;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the leading whitespaces and tabs.
+>, <Line: -	 * 
+>, <Line: -	 * @param line -
+>, <Line: -	 *            the line being searched
+>, <Line: -	 * @return the leading whitespace
+>, <Line: -	 */
+>, <Line: -	public static String getLineIndent(String line) {
+>, <Line: -		int end = line.length();
+>, <Line: -		int whiteend = end;
+>, <Line: -		int offset = 0;
+>, <Line: -		while (offset < end) {
+>, <Line: -			char c = line.charAt(offset);
+>, <Line: -			if (c != ' ' && c != '\t') {
+>, <Line: -				whiteend = offset;
+>, <Line: -				break;
+>, <Line: -			}
+>, <Line: -			offset++;
+>, <Line: -		}
+>, <Line: -		return line.substring(0, whiteend);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the document's text for the given line.
+>, <Line: -	 * 
+>, <Line: -	 * @param document
+>, <Line: -	 *            the document
+>, <Line: -	 * @param line
+>, <Line: -	 *            the index of the line to get
+>, <Line: -	 * @return The line with the specified index from the document.
+>, <Line: -	 * @throws BadLocationException
+>, <Line: -	 *             if <b>line</b> is not correct line number
+>, <Line: -	 */
+>, <Line: -	public static String getDocumentLine(IDocument document, int line) throws BadLocationException {
+>, <Line: -		int lineStart = document.getLineOffset(line);
+>, <Line: -		int lineLength = document.getLineLength(line);
+>, <Line: -		return document.get(lineStart, lineLength);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Find line with number less or equal to <code>line</code>, that is not
+>, <Line: -	 * empty and is not a comment line starting with <code>commentString</code>.
+>, <Line: -	 * 
+>, <Line: -	 * @param d
+>, <Line: -	 *            the document to search in
+>, <Line: -	 * @param line
+>, <Line: -	 *            the index of the line to start searching on (must be less than
+>, <Line: -	 *            the number of lines in the document)
+>, <Line: -	 * @return The index of the line, or -1 if no such line is found.
+>, <Line: -	 * @throws BadLocationException
+>, <Line: -	 */
+>, <Line: -	public static int getLastNonEmptyLine(IDocument d, int line, String commentString)
+>, <Line: -			throws BadLocationException {
+>, <Line: -		if (commentString == null)
+>, <Line: -			for (int res = line; res >= 0; res--) {
+>, <Line: -				String str = getDocumentLine(d, res).trim();
+>, <Line: -				if (str.trim().length() > 0)
+>, <Line: -					return res;
+>, <Line: -			}
+>, <Line: -		else
+>, <Line: -			for (int res = line; res >= 0; res--) {
+>, <Line: -				String str = getDocumentLine(d, res).trim();
+>, <Line: -				if (!str.startsWith(commentString) && str.trim().length() > 0)
+>, <Line: -					return res;
+>, <Line: -			}
+>, <Line: -		return -1;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the partition type covering the given offset.
+>, <Line: -	 * 
+>, <Line: -	 * @param d
+>, <Line: -	 * @param partitioning
+>, <Line: -	 *            the partitioning to be used
+>, <Line: -	 * @param offset
+>, <Line: -	 * @return
+>, <Line: -	 * @throws BadLocationException
+>, <Line: -	 *             if the offset is invalid in the given document
+>, <Line: -	 */
+>, <Line: -	public static String getRegionType(IDocument d, String partitioning, int offset)
+>, <Line: -			throws BadLocationException {
+>, <Line: -		int p = ((offset == d.getLength()) ? offset - 1 : offset);
+>, <Line: -		ITypedRegion region = TextUtilities.getPartition(d, partitioning, p, true);
+>, <Line: -		return region.getType();
+>, <Line: -	}
+>, <Line: -//	/**
+>, <Line: -//	 * Searchs a pair from the given offset, forward of backwards. Doesn't go
+>, <Line: -//	 * more than maxCharsAway chars away from the given offset.
+>, <Line: -//	 * 
+>, <Line: -//	 * @param document
+>, <Line: -//	 * @param startingOffset
+>, <Line: -//	 * @param forward
+>, <Line: -//	 * @param opening
+>, <Line: -//	 * @param closing
+>, <Line: -//	 * @param skipCommentLines
+>, <Line: -//	 * @param skipStrings
+>, <Line: -//	 * @return offset of the matched pair character, or <code>-1</code> if
+>, <Line: -//	 *         none is found
+>, <Line: -//	 * @throws BadLocationException
+>, <Line: -//	 */
+>, <Line: -//	public static int findMatchingCharacter(IDocument document, int startingOffset,
+>, <Line: -//			boolean forward, String partitioning, char opening, char closing,
+>, <Line: -//			IPartitionFilter partitionFilter, int maxCharsAway) throws BadLocationException {
+>, <Line: -//		int deep = 0;
+>, <Line: -//		int offset = startingOffset;
+>, <Line: -//		if (forward) {
+>, <Line: -//			while (offset < document.getLength()) {
+>, <Line: -//				if (partitionFilter != null) {
+>, <Line: -//					ITypedRegion region = TextUtilities.getPartition(document, partitioning,
+>, <Line: -//							offset, true);
+>, <Line: -//					// TODO: don't refetch the partition while where're inside
+>, <Line: -//					// it
+>, <Line: -//					if (!partitionFilter.allowPartition(region.getType())) {
+>, <Line: -//						offset = region.getOffset() + region.getLength();
+>, <Line: -//						continue;
+>, <Line: -//					}
+>, <Line: -//				}
+>, <Line: -//
+>, <Line: -//				char c = document.getChar(offset);
+>, <Line: -//				if (c == opening)
+>, <Line: -//					deep++;
+>, <Line: -//				if (c == closing) {
+>, <Line: -//					if (deep == 0)
+>, <Line: -//						return offset;
+>, <Line: -//					deep--;
+>, <Line: -//				}
+>, <Line: -//				offset++;
+>, <Line: -//				if (offset - startingOffset > maxCharsAway)
+>, <Line: -//					return -1;
+>, <Line: -//			}
+>, <Line: -//		} else {
+>, <Line: -//			while (offset >= 0) {
+>, <Line: -//				if (partitionFilter != null) {
+>, <Line: -//					ITypedRegion region = TextUtilities.getPartition(document, partitioning,
+>, <Line: -//							offset, true);
+>, <Line: -//					// TODO: don't refetch the partition while where're inside
+>, <Line: -//					// it
+>, <Line: -//					if (!partitionFilter.allowPartition(region.getType())) {
+>, <Line: -//						offset = region.getOffset() - 1;
+>, <Line: -//						continue;
+>, <Line: -//					}
+>, <Line: -//				}
+>, <Line: -//				char c = document.getChar(offset);
+>, <Line: -//				if (c == closing)
+>, <Line: -//					deep++;
+>, <Line: -//				if (c == opening) {
+>, <Line: -//					if (deep == 0)
+>, <Line: -//						return offset;
+>, <Line: -//					deep--;
+>, <Line: -//				}
+>, <Line: -//				offset--;
+>, <Line: -//				if (startingOffset - offset > maxCharsAway)
+>, <Line: -//					return -1;
+>, <Line: -//			}
+>, <Line: -//		}
+>, <Line: -//		return -1;
+>, <Line: -//	}
+>, <Line: -//
+>, <Line: -//	public static boolean isPartitionOneOf(String partition, String[] list) {
+>, <Line: -//		for (int i = 0; i < list.length; i++) {
+>, <Line: -//			String item = list[i];
+>, <Line: -//			if (partition == item)
+>, <Line: -//				return true;
+>, <Line: -//		}
+>, <Line: -//		return false;
+>, <Line: -//	}
+>, <Line: -//	/**
+>, <Line: -//	 * Calculates the number of columns the given part of the document would
+>, <Line: -//	 * occupy in the text editor. This takes into account the size of the tab
+>, <Line: -//	 * character. Note that the given range must fit entirely into a single
+>, <Line: -//	 * line.
+>, <Line: -//	 * 
+>, <Line: -//	 * @param prefs
+>, <Line: -//	 *            the preferences provider to get the tab size from.
+>, <Line: -//	 * @param document
+>, <Line: -//	 *            the document to calculate the length in
+>, <Line: -//	 * @param lineStart
+>, <Line: -//	 *            the start of the line where the given part of the document
+>, <Line: -//	 *            resides
+>, <Line: -//	 * @param lineLength
+>, <Line: -//	 *            the length of the line where the given part of the document
+>, <Line: -//	 *            resides
+>, <Line: -//	 * @param start
+>, <Line: -//	 *            the starting offset of the given part of the document
+>, <Line: -//	 * @param end
+>, <Line: -//	 *            the ending offset of the given part of the document
+>, <Line: -//	 * @return the number of columns the given part of the document would occupy
+>, <Line: -//	 *         in the text viewer
+>, <Line: -//	 * @throws BadLocationException
+>, <Line: -//	 */
+>, <Line: -//	public static int calculateVisualLength(ITabPreferencesProvider prefs, IDocument document,
+>, <Line: -//			int lineStart, int lineLength, int start, int end) throws BadLocationException {
+>, <Line: -//		if (end == document.getLength())
+>, <Line: -//			end -= 1;
+>, <Line: -//		int res = 0;
+>, <Line: -//		int tabSize = prefs.getTabSize();
+>, <Line: -//		Assert.isLegal(end <= (lineStart + lineLength),
+>, <Line: -//				Messages.AutoEditUtils_cannotCalculateVisualLengthForSeveralLines);
+>, <Line: -//		int col = 0;
+>, <Line: -//		for (int offset = lineStart; offset < start; offset++) {
+>, <Line: -//			if (document.getChar(offset) != '\t')
+>, <Line: -//				col++;
+>, <Line: -//			else {
+>, <Line: -//				col += (tabSize - col % tabSize);
+>, <Line: -//			}
+>, <Line: -//		}
+>, <Line: -//		for (int offset = start; offset < end; offset++) {
+>, <Line: -//			if (document.getChar(offset) != '\t') {
+>, <Line: -//				res++;
+>, <Line: -//				col++;
+>, <Line: -//			} else {
+>, <Line: -//				res += (tabSize - col % tabSize);
+>, <Line: -//				col += (tabSize - col % tabSize);
+>, <Line: -//			}
+>, <Line: -//		}
+>, <Line: -//		return res;
+>, <Line: -//	}
+>, <Line: -//	/**
+>, <Line: -//	 * Calculates the number of columns the given part of the document would
+>, <Line: -//	 * occupy in the text editor. This takes into account the size of the tab
+>, <Line: -//	 * character. Note that the given range must fit entirely into a single
+>, <Line: -//	 * line.
+>, <Line: -//	 * 
+>, <Line: -//	 * This function calculates the starting and ending offsets of the line and
+>, <Line: -//	 * calls another overload.
+>, <Line: -//	 * 
+>, <Line: -//	 * @param prefs
+>, <Line: -//	 *            the preferences provider to get the tab size from.
+>, <Line: -//	 * @param document
+>, <Line: -//	 *            the document to calculate the length in
+>, <Line: -//	 * @param lineIndex
+>, <Line: -//	 *            the index of the line where the given part of the document
+>, <Line: -//	 *            resides
+>, <Line: -//	 * @param start
+>, <Line: -//	 *            the starting offset of the given part of the document
+>, <Line: -//	 * @param end
+>, <Line: -//	 *            the ending offset of the given part of the document
+>, <Line: -//	 * @return the number of columns the given part of the document would occupy
+>, <Line: -//	 *         in the text viewer
+>, <Line: -//	 * @throws BadLocationException
+>, <Line: -//	 */
+>, <Line: -//	public static int calculateVisualLength(ITabPreferencesProvider prefs, IDocument document,
+>, <Line: -//			int lineIndex, int start, int end) throws BadLocationException {
+>, <Line: -//		return calculateVisualLength(prefs, document, document.getLineOffset(lineIndex), document
+>, <Line: -//				.getLineLength(lineIndex), start, end);
+>, <Line: -//	}
+>, <Line: -//	/**
+>, <Line: -//	 * Calculates the number of columns the given part of the document would
+>, <Line: -//	 * occupy in the text editor. This takes into account the size of the tab
+>, <Line: -//	 * character. Note that the given range must fit entirely into a single
+>, <Line: -//	 * line.
+>, <Line: -//	 * 
+>, <Line: -//	 * This function calculates the starting and ending offsets of the line and
+>, <Line: -//	 * calls another overload.
+>, <Line: -//	 * 
+>, <Line: -//	 * @param prefs
+>, <Line: -//	 *            the preferences provider to get the tab size from.
+>, <Line: -//	 * @param document
+>, <Line: -//	 *            the document to calculate the length in
+>, <Line: -//	 * @param start
+>, <Line: -//	 *            the starting offset of the given part of the document
+>, <Line: -//	 * @param end
+>, <Line: -//	 *            the ending offset of the given part of the document
+>, <Line: -//	 * @return the number of columns the given part of the document would occupy
+>, <Line: -//	 *         in the text editor
+>, <Line: -//	 * @throws BadLocationException
+>, <Line: -//	 */
+>, <Line: -//	public static int calculateVisualLength(ITabPreferencesProvider prefs, IDocument document,
+>, <Line: -//			int start, int end) throws BadLocationException {
+>, <Line: -//		return calculateVisualLength(prefs, document, document.getLineOfOffset(start), start, end);
+>, <Line: -//	}
+>, <Line: -//
+>, <Line: -//	/**
+>, <Line: -//	 * Calculates the number of columns the given indentation string would
+>, <Line: -//	 * occupy in the text editor. This takes into account the size of the tab
+>, <Line: -//	 * character. Assumes that the given string starts in the first column, so
+>, <Line: -//	 * can only be used for indentation strings.
+>, <Line: -//	 * 
+>, <Line: -//	 * @param prefs
+>, <Line: -//	 *            the preferences provider to get the tab size from.
+>, <Line: -//	 * @param str
+>, <Line: -//	 *            the indentation strings (probably containing whitespace
+>, <Line: -//	 *            characters only) to calculate the length of
+>, <Line: -//	 * @return
+>, <Line: -//	 */
+>, <Line: -//	public static int getIndentVisualLength(ITabPreferencesProvider prefs, String str) {
+>, <Line: -//		int res = 0;
+>, <Line: -//		for (int i = 0; i < str.length(); i++) {
+>, <Line: -//			if (str.charAt(i) == '\t')
+>, <Line: -//				res += prefs.getTabSize();
+>, <Line: -//			else
+>, <Line: -//				res++;
+>, <Line: -//		}
+>, <Line: -//		return res;
+>, <Line: -//	}
+>, <Line: -//
+>, <Line: -//	/**
+>, <Line: -//	 * Calculates the number of columns the indentation of the given line would
+>, <Line: -//	 * occupy in the text editor. This takes into account the size of the tab
+>, <Line: -//	 * character.
+>, <Line: -//	 * 
+>, <Line: -//	 * @param prefs
+>, <Line: -//	 *            the preferences provider to get the tab size from.
+>, <Line: -//	 * @param document
+>, <Line: -//	 *            the document to calculate the length in
+>, <Line: -//	 * @param lineIndex
+>, <Line: -//	 *            the line whose indent length needs to be calculated
+>, <Line: -//	 * @return
+>, <Line: -//	 * @throws BadLocationException
+>, <Line: -//	 */
+>, <Line: -//	public static int getIndentVisualLength(ITabPreferencesProvider prefs, IDocument document,
+>, <Line: -//			int lineIndex) throws BadLocationException {
+>, <Line: -//		int lineOffset = document.getLineOffset(lineIndex);
+>, <Line: -//		int lineLength = document.getLineLength(lineIndex);
+>, <Line: -//		int lineHome = findEndOfWhiteSpace(document, lineOffset, lineOffset + lineLength);
+>, <Line: -//		return calculateVisualLength(prefs, document, lineOffset, lineLength, lineOffset, lineHome);
+>, <Line: -//	}
+>, <Line: -//	
+>, <Line: -//	public static int getMaximumLineDelimiterLength(IDocument document) {
+>, <Line: -//		String[] lineDelimiters = document.getLegalLineDelimiters();
+>, <Line: -//		int length = 0;
+>, <Line: -//		for (int i = 0; i < lineDelimiters.length; i++)
+>, <Line: -//			length = Math.max(length, lineDelimiters[i].length());
+>, <Line: -//		return length;
+>, <Line: -//	}
+>, <Line: -//
+>, <Line: -//	/**
+>, <Line: -//     * Determine if the given offset is right before the end-of-line
+>, <Line: -//     * character(s) on the given line. Also returns true if the given offset
+>, <Line: -//     * is equal to the <code>endOffset</code>. 
+>, <Line: -//     * 
+>, <Line: -//     * @param document
+>, <Line: -//     *            the document that determines the set of legal line delimiter
+>, <Line: -//     *            strings
+>, <Line: -//     * @param offset
+>, <Line: -//     *            the offset to check
+>, <Line: -//     * @param endOffset
+>, <Line: -//     *            the offset right after the end of the line containing
+>, <Line: -//     *            <code>offset</code>, should equal the value that would be
+>, <Line: -//     *            returned from
+>, <Line: -//     *            <code>document.getLineOffset(document.getLineOfOffset(offset)) +
+>, <Line: -//     * document.getLineLength(document.getLineOfOffset(offset))</code>.
+>, <Line: -//     * @return
+>, <Line: -//     * @throws BadLocationException
+>, <Line: -//     */
+>, <Line: -//	public static boolean atEndOfLine(IDocument document, int offset, int endOffset) throws BadLocationException {
+>, <Line: -//	    if (offset == endOffset)
+>, <Line: -//	        return true;
+>, <Line: -//		int maxDelta = getMaximumLineDelimiterLength(document);
+>, <Line: -//		if (offset + maxDelta < endOffset)
+>, <Line: -//			return false;
+>, <Line: -//		String s = document.get(offset, Math.min(maxDelta, document.getLength() - offset));
+>, <Line: -//		String[] searchStrings = document.getLegalLineDelimiters();
+>, <Line: -//		for (int i= 0; i < searchStrings.length; i++)
+>, <Line: -//			if (s.startsWith(searchStrings[i]))
+>, <Line: -//				return true;
+>, <Line: -//		return false;
+>, <Line: -//	}
+>, <Line: -}
+>]

@@ -1,0 +1,5 @@
+[<Line: +import com.github.davidmoten.junit.Asserts;
+>, <Line: +        Asserts.assertIsUtilityClass(Util.class);
+>]
+[<Line: -        TestingUtil.instantiateUsingPrivateConstructor(Util.class);
+>]

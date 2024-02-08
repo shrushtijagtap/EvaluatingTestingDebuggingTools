@@ -1,0 +1,6 @@
+[<Line: +        for (DataPropertyExpression dp : obdaModel.getOntologyVocabulary().getDataProperties()) {
+>, <Line: +        for (ObjectPropertyExpression op : obdaModel.getOntologyVocabulary().getObjectProperties()) {
+>]
+[<Line: -        for (DataPropertyExpression dp : obdaModel.getDeclaredDataProperties()) {
+>, <Line: -        for (ObjectPropertyExpression op : obdaModel.getDeclaredObjectProperties()) {
+>]

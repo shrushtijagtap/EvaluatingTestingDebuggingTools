@@ -1,0 +1,14 @@
+[<Line: +package org.mp4parser.boxes.sampleentry;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: + * @see AudioSampleEntry
+>]
+[<Line: -package com.coremedia.iso.boxes.sampleentry;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractBox;
+>, <Line: - * @see com.coremedia.iso.boxes.sampleentry.AudioSampleEntry
+>]

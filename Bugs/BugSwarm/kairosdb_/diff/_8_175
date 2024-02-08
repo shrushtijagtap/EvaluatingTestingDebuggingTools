@@ -1,0 +1,146 @@
+[<Line: +		'angular',
+>, <Line: +		'jquery',
+>, <Line: +		'config',
+>, <Line: +		'./panelMenu',
+>, <Line: +	],
+>, <Line: +	function (angular, $, config) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('grafanaPanel', function ($compile, $parse) {
+>, <Line: +				var container = '<div class="panel-container"></div>';
+>, <Line: +				var content = '<div class="panel-content"></div>';
+>, <Line: +				var panelHeader =
+>, <Line: +					'<div class="panel-header">' +
+>, <Line: +					'<span class="alert-error panel-error small pointer"' +
+>, <Line: +					'config-modal="app/partials/inspector.html" ng-if="panelMeta.error">' +
+>, <Line: +					'<span data-placement="top" bs-tooltip="panelMeta.error">' +
+>, <Line: +					'<i class="icon-exclamation-sign"></i><span class="panel-error-arrow"></span>' +
+>, <Line: +					'</span>' +
+>, <Line: +					'</span>' +
+>, <Line: +					'<span class="panel-loading" ng-show="panelMeta.loading">' +
+>, <Line: +					'<i class="icon-spinner icon-spin icon-large"></i>' +
+>, <Line: +					'</span>' +
+>, <Line: +					'<div class="panel-title-container drag-handle" panel-menu></div>' +
+>, <Line: +					'</div>' +
+>, <Line: +					'</div>';
+>, <Line: +				return {
+>, <Line: +					restrict: 'E',
+>, <Line: +					link: function ($scope, elem, attr) {
+>, <Line: +						var getter = $parse(attr.type), panelType = getter($scope);
+>, <Line: +						var newScope = $scope.$new();
+>, <Line: +						$scope.kbnJqUiDraggableOptions = {
+>, <Line: +							revert: 'invalid',
+>, <Line: +							helper: function () {
+>, <Line: +								return $('<div style="width:200px;height:100px;background: rgba(100,100,100,0.50);"/>');
+>, <Line: +							},
+>, <Line: +							placeholder: 'keep'
+>, <Line: +						};
+>, <Line: +						// compile the module and uncloack. We're done
+>, <Line: +						function loadModule($module) {
+>, <Line: +							$module.appendTo(elem);
+>, <Line: +							elem.wrap(container);
+>, <Line: +							/* jshint indent:false */
+>, <Line: +							$compile(elem.contents())(newScope);
+>, <Line: +							elem.removeClass("ng-cloak");
+>, <Line: +							var panelCtrlElem = $(elem.children()[0]);
+>, <Line: +							var panelCtrlScope = panelCtrlElem.data().$scope;
+>, <Line: +							panelCtrlScope.$watchGroup(['fullscreen', 'panel.height', 'row.height'], function () {
+>, <Line: +								panelCtrlElem.css({minHeight: panelCtrlScope.panel.height || panelCtrlScope.row.height});
+>, <Line: +								panelCtrlElem.toggleClass('panel-fullscreen', panelCtrlScope.fullscreen ? true : false);
+>, <Line: +							});
+>, <Line: +						}
+>, <Line: +						newScope.$on('$destroy', function () {
+>, <Line: +							elem.unbind();
+>, <Line: +							elem.remove();
+>, <Line: +						});
+>, <Line: +						elem.addClass('ng-cloak');
+>, <Line: +						var panelPath = config.panels[panelType].path;
+>, <Line: +						$scope.require([
+>, <Line: +							'jquery',
+>, <Line: +							'text!' + panelPath + '/module.html',
+>, <Line: +							panelPath + "/module",
+>, <Line: +						], function ($, moduleTemplate) {
+>, <Line: +							var $module = $(moduleTemplate);
+>, <Line: +							$module.prepend(panelHeader);
+>, <Line: +							$module.first().find('.panel-header').nextAll().wrapAll(content);
+>, <Line: +							loadModule($module);
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'jquery',
+>, <Line: -  'config',
+>, <Line: -  './panelMenu',
+>, <Line: -],
+>, <Line: -function (angular, $, config) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('grafanaPanel', function($compile, $parse) {
+>, <Line: -      var container = '<div class="panel-container"></div>';
+>, <Line: -      var content = '<div class="panel-content"></div>';
+>, <Line: -      var panelHeader =
+>, <Line: -      '<div class="panel-header">'+
+>, <Line: -          '<span class="alert-error panel-error small pointer"' +
+>, <Line: -                'config-modal="app/partials/inspector.html" ng-if="panelMeta.error">' +
+>, <Line: -            '<span data-placement="top" bs-tooltip="panelMeta.error">' +
+>, <Line: -            '<i class="icon-exclamation-sign"></i><span class="panel-error-arrow"></span>' +
+>, <Line: -            '</span>' +
+>, <Line: -          '</span>' +
+>, <Line: -          '<span class="panel-loading" ng-show="panelMeta.loading">' +
+>, <Line: -            '<i class="icon-spinner icon-spin icon-large"></i>' +
+>, <Line: -          '</span>' +
+>, <Line: -          '<div class="panel-title-container drag-handle" panel-menu></div>' +
+>, <Line: -        '</div>'+
+>, <Line: -      '</div>';
+>, <Line: -      return {
+>, <Line: -        restrict: 'E',
+>, <Line: -        link: function($scope, elem, attr) {
+>, <Line: -          var getter = $parse(attr.type), panelType = getter($scope);
+>, <Line: -          var newScope = $scope.$new();
+>, <Line: -          $scope.kbnJqUiDraggableOptions = {
+>, <Line: -            revert: 'invalid',
+>, <Line: -            helper: function() {
+>, <Line: -              return $('<div style="width:200px;height:100px;background: rgba(100,100,100,0.50);"/>');
+>, <Line: -            },
+>, <Line: -            placeholder: 'keep'
+>, <Line: -          };
+>, <Line: -          // compile the module and uncloack. We're done
+>, <Line: -          function loadModule($module) {
+>, <Line: -            $module.appendTo(elem);
+>, <Line: -            elem.wrap(container);
+>, <Line: -            /* jshint indent:false */
+>, <Line: -            $compile(elem.contents())(newScope);
+>, <Line: -            elem.removeClass("ng-cloak");
+>, <Line: -            var panelCtrlElem = $(elem.children()[0]);
+>, <Line: -            var panelCtrlScope = panelCtrlElem.data().$scope;
+>, <Line: -            panelCtrlScope.$watchGroup(['fullscreen', 'panel.height', 'row.height'], function() {
+>, <Line: -              panelCtrlElem.css({ minHeight: panelCtrlScope.panel.height || panelCtrlScope.row.height });
+>, <Line: -              panelCtrlElem.toggleClass('panel-fullscreen', panelCtrlScope.fullscreen ? true : false);
+>, <Line: -            });
+>, <Line: -          }
+>, <Line: -          newScope.$on('$destroy',function() {
+>, <Line: -            elem.unbind();
+>, <Line: -            elem.remove();
+>, <Line: -          });
+>, <Line: -          elem.addClass('ng-cloak');
+>, <Line: -          var panelPath = config.panels[panelType].path;
+>, <Line: -          $scope.require([
+>, <Line: -            'jquery',
+>, <Line: -            'text!'+panelPath+'/module.html',
+>, <Line: -            panelPath + "/module",
+>, <Line: -          ], function ($, moduleTemplate) {
+>, <Line: -            var $module = $(moduleTemplate);
+>, <Line: -            $module.prepend(panelHeader);
+>, <Line: -            $module.first().find('.panel-header').nextAll().wrapAll(content);
+>, <Line: -            loadModule($module);
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

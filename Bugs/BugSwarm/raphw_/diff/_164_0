@@ -1,0 +1,67 @@
+[<Line: +                /**
+>, <Line: +                 * Asserts if the type can legally represent a package description.
+>, <Line: +                 *
+>, <Line: +                 * @param modifier          The modifier that is to be written to the type.
+>, <Line: +                 * @param definesInterfaces {@code true} if this type implements at least one interface.
+>, <Line: +                 * @param isGeneric         {@code true} if this type defines a generic type signature.
+>, <Line: +                 */
+>, <Line: +                void assertType(int modifier, boolean definesInterfaces, boolean isGeneric);
+>, <Line: +                 * Asserts if it is legal to invoke a default method from a type.
+>, <Line: +                void assertDefaultMethodCall();
+>, <Line: +                    @Override
+>, <Line: +                    public void assertType(int modifier, boolean definesInterfaces, boolean isGeneric) {
+>, <Line: +                        /* do nothing */
+>, <Line: +                    }
+>, <Line: +                    public void assertDefaultMethodCall() {
+>, <Line: +                    @Override
+>, <Line: +                    public void assertDefaultMethodCall() {
+>, <Line: +                        /* do nothing */
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public void assertDefaultMethodCall() {
+>, <Line: +                        /* do nothing */
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public void assertDefaultMethodCall() {
+>, <Line: +                        /* do nothing */
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public void assertDefaultMethodCall() {
+>, <Line: +                        if (classFileVersion.isLessThan(ClassFileVersion.JAVA_V8)) {
+>, <Line: +                            throw new IllegalStateException("Cannot invoke default method for class file version " + classFileVersion);
+>, <Line: +                        }
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public void assertType(int modifier, boolean definesInterfaces, boolean isGeneric) {
+>, <Line: +                        for (Constraint constraint : constraints) {
+>, <Line: +                            constraint.assertType(modifier, definesInterfaces, isGeneric);
+>, <Line: +                        }
+>, <Line: +                    }
+>, <Line: +                    public void assertDefaultMethodCall() {
+>, <Line: +                            constraint.assertDefaultMethodCall();
+>, <Line: +                    public void assertAnnotation() {
+>, <Line: +                            constraint.assertAnnotation();
+>, <Line: +                    public void assertTypeAnnotation() {
+>, <Line: +                            constraint.assertTypeAnnotation();
+>, <Line: +                @Override
+>, <Line: +                public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
+>, <Line: +                    if (isInterface && opcode == Opcodes.INVOKESPECIAL) {
+>, <Line: +                        constraint.assertDefaultMethodCall();
+>, <Line: +                    }
+>, <Line: +                    super.visitMethodInsn(opcode, owner, name, descriptor, isInterface);
+>, <Line: +                }
+>]
+[<Line: -                 * Asserts if the type can legally represent a package description.
+>, <Line: -                 *
+>, <Line: -                 * @param modifier          The modifier that is to be written to the type.
+>, <Line: -                 * @param definesInterfaces {@code true} if this type implements at least one interface.
+>, <Line: -                 * @param isGeneric         {@code true} if this type defines a generic type signature.
+>, <Line: -                void assertType(int modifier, boolean definesInterfaces, boolean isGeneric);
+>, <Line: -                    public void assertType(int modifier, boolean definesInterfaces, boolean isGeneric) {
+>, <Line: -                    public void assertAnnotation() {
+>, <Line: -                            constraint.assertAnnotation();
+>, <Line: -                    public void assertTypeAnnotation() {
+>, <Line: -                            constraint.assertTypeAnnotation();
+>, <Line: -                    public void assertType(int modifier, boolean definesInterfaces, boolean isGeneric) {
+>, <Line: -                            constraint.assertType(modifier, definesInterfaces, isGeneric);
+>]

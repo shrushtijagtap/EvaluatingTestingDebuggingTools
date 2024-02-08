@@ -1,0 +1,5 @@
+[<Line: +package org.mp4parser;
+>, <Line: +        PropertyBoxParserImpl.BOX_MAP_CACHE = null;
+>]
+[<Line: -package com.coremedia.iso;
+>]

@@ -1,0 +1,18 @@
+[<Line: +<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>, <Line: +    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+>, <Line: +        <log4j.version>2.8.2</log4j.version>
+>, <Line: +        <junit.version>4.12</junit.version>
+>, <Line: +        <slf4j.version>1.7.24</slf4j.version>
+>, <Line: +        <guava.version>22.0</guava.version>
+>, <Line: +        <antlr.version>4.7</antlr.version>
+>, <Line: +            <version>${slf4j.version}</version>
+>, <Line: +            <version>${junit.version}</version>
+>, <Line: +                    <argLine>${argLine} -Xms512m -Xmx1024m
+>, <Line: +                        -Duser.language=en -Duser.region=US</argLine>
+>]
+[<Line: -<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+>, <Line: -        <log4j.version>2.5</log4j.version>
+>, <Line: -            <version>1.7.12</version>
+>, <Line: -            <version>4.12</version>
+>, <Line: -                    <argLine>${argLine} -Xms512m -Xmx1024m -Duser.language=en -Duser.region=US</argLine>
+>]

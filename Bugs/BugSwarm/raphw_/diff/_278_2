@@ -1,0 +1,19 @@
+[<Line: +            /**
+>, <Line: +             * The actual modifiers of this type.
+>, <Line: +             */
+>, <Line: +            private final int actualModifiers;
+>, <Line: +             * @param actualModifiers                    The actual modifiers of this type.
+>, <Line: +                                          int actualModifiers,
+>, <Line: +                this.actualModifiers = actualModifiers & ~Opcodes.ACC_SUPER;
+>, <Line: +            @Override
+>, <Line: +            public int getActualModifiers(boolean superFlag) {
+>, <Line: +                return superFlag ? (actualModifiers | Opcodes.ACC_SUPER) : actualModifiers;
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * The actual modifiers found for this type.
+>, <Line: +             */
+>, <Line: +            private int actualModifiers;
+>, <Line: +                actualModifiers = modifiers;
+>, <Line: +                        actualModifiers,
+>]
+[]

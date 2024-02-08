@@ -1,0 +1,8 @@
+[<Line: +	@Override
+>, <Line: +	public void interrupt()
+>, <Line: +	{
+>, <Line: +	}
+>]
+[<Line: -import org.kairosdb.core.datastore.Datastore;
+>, <Line: -import org.kairosdb.core.datastore.KairosDatastore;
+>]

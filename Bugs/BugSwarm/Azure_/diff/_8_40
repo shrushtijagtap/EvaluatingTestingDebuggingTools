@@ -1,0 +1,3 @@
+[<Line: +        info.append("\n\tNICs: ").append(resource.networkInterfaceIds());
+>]
+[]

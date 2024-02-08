@@ -1,0 +1,36 @@
+[<Line: +package com.joyent.manta.exception;
+>, <Line: +/**
+>, <Line: + * General exception type for errors relating to multipart uploads.
+>, <Line: + *
+>, <Line: + * @since 2.5.0
+>, <Line: + * @author <a href="https://github.com/dekobon">Elijah Zupancic</a>
+>, <Line: + */
+>, <Line: +public class MantaMultipartException extends MantaClientException {
+>, <Line: +    private static final long serialVersionUID = -1931282527258322479L;
+>, <Line: +    /**
+>, <Line: +     * Create an empty exception.
+>, <Line: +     */
+>, <Line: +    public MantaMultipartException() {
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * @param message The error message.
+>, <Line: +     */
+>, <Line: +    public MantaMultipartException(final String message) {
+>, <Line: +        super(message);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * @param cause The cause of the exception.
+>, <Line: +     */
+>, <Line: +    public MantaMultipartException(final Throwable cause) {
+>, <Line: +        super(cause);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * @param message The error message.
+>, <Line: +     * @param cause The cause.
+>, <Line: +     */
+>, <Line: +    public MantaMultipartException(final String message, final Throwable cause) {
+>, <Line: +        super(message, cause);
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

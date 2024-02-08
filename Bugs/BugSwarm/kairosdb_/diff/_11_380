@@ -1,0 +1,89 @@
+[<Line: +module.controller('PasteQueryCtrl', ['$scope', '$modalInstance', PasteQueryCtrl]);
+>, <Line: +function PasteQueryCtrl($scope, $modalInstance) {
+>, <Line: +	$scope.DEFAULT_SAVE_AS = "Save As";
+>, <Line: +	$scope.DEFAULT_QUERY = "Paste Query";
+>, <Line: +	$scope.init = function () {
+>, <Line: +		$scope.target = {};
+>, <Line: +		$scope.targetBlur();
+>, <Line: +		$scope.errors = validateTarget($scope.target);
+>, <Line: +	};
+>, <Line: +	$scope.clearSaveAs = function () {
+>, <Line: +		if ($scope.isSaveAsEmptyOrDefault()) {
+>, <Line: +			$scope.target.save_as = "";
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	$scope.clearQuery = function () {
+>, <Line: +		if ($scope.isQueryEmptyOrDefault()) {
+>, <Line: +			$scope.target.query = "";
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	$scope.ok = function () {
+>, <Line: +		var result = {};
+>, <Line: +		result.save_as = $scope.target.save_as;
+>, <Line: +		result.query = JSON.parse($scope.target.query);
+>, <Line: +		$modalInstance.close(result);
+>, <Line: +	};
+>, <Line: +	$scope.cancel = function () {
+>, <Line: +		$modalInstance.dismiss('cancel');
+>, <Line: +	};
+>, <Line: +	$scope.isQueryEmptyOrDefault = function () {
+>, <Line: +		return !$scope.target.query || $scope.target.query == $scope.DEFAULT_QUERY;
+>, <Line: +	};
+>, <Line: +	$scope.isSaveAsEmptyOrDefault = function () {
+>, <Line: +		return !$scope.target.save_as || $scope.target.save_as == $scope.DEFAULT_SAVE_AS;
+>, <Line: +	};
+>, <Line: +	$scope.suggestSaveAs = function () {
+>, <Line: +		if (!$scope.isQueryEmptyOrDefault() && $scope.isSaveAsEmptyOrDefault()) {
+>, <Line: +			try {
+>, <Line: +				query = JSON.parse($scope.target.query);
+>, <Line: +				if (query.metrics[0] && query.metrics[0].name) {
+>, <Line: +					$scope.target.save_as = query.metrics[0].name + "_rollup";
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			catch (err) {
+>, <Line: +				$scope.errors.query = "Invalid JSON."
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		$scope.targetChanged();
+>, <Line: +	};
+>, <Line: +	$scope.targetChanged = function () {
+>, <Line: +		$scope.errors = validateTarget($scope.target);
+>, <Line: +		if (!_.isEqual($scope.oldTarget, $scope.target) && _.isEmpty($scope.errors)) {
+>, <Line: +			$scope.oldTarget = angular.copy($scope.target);
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	$scope.targetBlur = function () {
+>, <Line: +		if (!$scope.target.query) {
+>, <Line: +			$scope.target.query = $scope.DEFAULT_QUERY;
+>, <Line: +		}
+>, <Line: +		if (!$scope.target.save_as) {
+>, <Line: +			$scope.target.save_as = $scope.DEFAULT_SAVE_AS;
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	$scope.hasErrors = function () {
+>, <Line: +		return !_.isEmpty($scope.errors);
+>, <Line: +	};
+>, <Line: +	//////////////////////////////
+>, <Line: +	// VALIDATION
+>, <Line: +	//////////////////////////////
+>, <Line: +	function validateTarget(target) {
+>, <Line: +		var errs = {};
+>, <Line: +		if ($scope.isSaveAsEmptyOrDefault()) {
+>, <Line: +			errs.save_as = "You must supply a new metric name.";
+>, <Line: +		}
+>, <Line: +		if ($scope.isQueryEmptyOrDefault()) {
+>, <Line: +			errs.query = "You must paste in a query.";
+>, <Line: +		}
+>, <Line: +		else {
+>, <Line: +			try {
+>, <Line: +				JSON.parse($scope.target.query);
+>, <Line: +			}
+>, <Line: +			catch (err) {
+>, <Line: +				errs.query = "Invalid JSON";
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return errs;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

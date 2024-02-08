@@ -1,0 +1,11 @@
+[<Line: +                long maxTrackId = 0;
+>, <Line: +        List<StreamingTrack> source = new LinkedList<StreamingTrack>(this.source);
+>, <Line: +        for (StreamingTrack streamingTrack : source) {
+>, <Line: +            streamingTrack.close();
+>, <Line: +        }
+>]
+[<Line: -                long maxTrackId = 1;
+>, <Line: -        for (StreamingTrack streamingTrack : source) {
+>, <Line: -            streamingTrack.close();
+>, <Line: -        }
+>]

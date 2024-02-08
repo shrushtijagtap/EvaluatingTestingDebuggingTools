@@ -1,0 +1,12 @@
+[<Line: +import net.bytebuddy.implementation.bytecode.assign.Assigner;
+>, <Line: +    @Test
+>, <Line: +    public void testIgnored() throws Exception {
+>, <Line: +        assertThat(MethodDelegationBinder.Record.Illegal.INSTANCE.bind(mock(Implementation.Target.class),
+>, <Line: +                mock(MethodDescription.class),
+>, <Line: +                mock(MethodDelegationBinder.TerminationHandler.class),
+>, <Line: +                mock(MethodDelegationBinder.MethodInvoker.class),
+>, <Line: +                mock(Assigner.class)).isValid(), is(false));
+>, <Line: +    }
+>, <Line: +        ObjectPropertyAssertion.of(MethodDelegationBinder.Record.Illegal.class).apply();
+>]
+[]

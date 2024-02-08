@@ -1,0 +1,22 @@
+[<Line: +package org.mp4parser.muxer;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.io.RandomAccessFile;
+>, <Line: +import java.nio.ByteBuffer;
+>, <Line: +import static org.mp4parser.tools.CastUtils.l2i;
+>, <Line: +public class FileRandomAccessSourceImpl implements RandomAccessSource {
+>, <Line: +    private RandomAccessFile raf;
+>, <Line: +    public FileRandomAccessSourceImpl(RandomAccessFile raf) {
+>, <Line: +        this.raf = raf;
+>, <Line: +    }
+>, <Line: +    public ByteBuffer get(long offset, long size) throws IOException {
+>, <Line: +        byte[] b = new byte[l2i(size)];
+>, <Line: +        raf.seek(offset);
+>, <Line: +        raf.read(b);
+>, <Line: +        return ByteBuffer.wrap(b);
+>, <Line: +    }
+>, <Line: +    public void close() throws IOException {
+>, <Line: +        raf.close();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

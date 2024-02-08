@@ -1,0 +1,6 @@
+[<Line: +public class BeansDeployerTransformer {
+>, <Line: +    private static AgentLogger LOGGER = AgentLogger.getLogger(BeansDeployerTransformer.class);
+>]
+[<Line: -public class BeanDeployerTransformer {
+>, <Line: -    private static AgentLogger LOGGER = AgentLogger.getLogger(BeanDeployerTransformer.class);
+>]

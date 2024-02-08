@@ -1,0 +1,6 @@
+[<Line: +import java.io.Serializable;
+>, <Line: +public interface OBDASQLQuery extends Serializable {
+>]
+[<Line: -public interface OBDASQLQuery extends OBDAQuery {
+>, <Line: -	public OBDAQueryModifiers getQueryModifiers();
+>]

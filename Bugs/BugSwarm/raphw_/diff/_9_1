@@ -1,0 +1,3 @@
+[<Line: +        @SuppressFBWarnings(value = "DMI_RANDOM_USED_ONLY_ONCE", justification = "Avoid thread-contention")
+>]
+[]

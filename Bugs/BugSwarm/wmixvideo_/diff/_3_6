@@ -1,0 +1,14 @@
+[<Line: +    NFE("55", "NF-e"),
+>, <Line: +    NFCE("65", "NFC-e");
+>, <Line: +    private final String descricao;
+>, <Line: +    NFModelo(final String codigo, final String descricao) {
+>, <Line: +        this.descricao = descricao;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    NFE("55"),
+>, <Line: -    NFCE("65");
+>, <Line: -    NFModelo(final String codigo) {
+>]

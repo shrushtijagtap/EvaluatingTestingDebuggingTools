@@ -1,0 +1,30 @@
+[<Line: +					result = unify(result, i, j);
+>, <Line: +    /**
+>, <Line: +     * Unifies two atoms in a conjunctive query returning a new conjunctive
+>, <Line: +     * query. To to this we calculate the MGU for atoms, duplicate the query q
+>, <Line: +     * into q', remove i and j from q', apply the mgu to q', and
+>, <Line: +     *
+>, <Line: +     * @param q
+>, <Line: +     * @param i
+>, <Line: +     * @param j (j > i)
+>, <Line: +     * @return null if the two atoms are not unifiable, else a new conjunctive
+>, <Line: +     * query produced by the unification of j and i
+>, <Line: +     * @throws Exception
+>, <Line: +     */
+>, <Line: +    private static CQIE unify(CQIE q, int i, int j) {
+>, <Line: +        Function atom1 = q.getBody().get(i);
+>, <Line: +        Function atom2 = q.getBody().get(j);
+>, <Line: +        Substitution mgu = UnifierUtilities.getMGU(atom1, atom2);
+>, <Line: +        if (mgu == null)
+>, <Line: +            return null;
+>, <Line: +        CQIE unifiedQ = SubstitutionUtilities.applySubstitution(q, mgu);
+>, <Line: +        unifiedQ.getBody().remove(i);
+>, <Line: +        unifiedQ.getBody().remove(j - 1);
+>, <Line: +        Function newatom = (Function) atom1.clone();
+>, <Line: +        SubstitutionUtilities.applySubstitution(newatom, mgu);
+>, <Line: +        unifiedQ.getBody().add(i, newatom);
+>, <Line: +        return unifiedQ;
+>, <Line: +    }
+>]
+[<Line: -					result = UnifierUtilities.unify(result, i, j);
+>]

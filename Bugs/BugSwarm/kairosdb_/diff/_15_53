@@ -1,0 +1,14 @@
+[<Line: +		List<QueryMetric> results = parser.parseQueryMetric(json).getQueryMetrics();
+>, <Line: +		List<QueryMetric> results = parser.parseQueryMetric(json).getQueryMetrics();
+>, <Line: +		List<QueryMetric> results = parser.parseQueryMetric(json).getQueryMetrics();
+>, <Line: +		List<QueryMetric> results = parser.parseQueryMetric(json).getQueryMetrics();
+>, <Line: +		List<QueryMetric> results = parser.parseQueryMetric(json).getQueryMetrics();
+>, <Line: +		List<QueryMetric> results = parser.parseQueryMetric(json).getQueryMetrics();
+>]
+[<Line: -		List<QueryMetric> results = parser.parseQueryMetric(json);
+>, <Line: -		List<QueryMetric> results = parser.parseQueryMetric(json);
+>, <Line: -		List<QueryMetric> results = parser.parseQueryMetric(json);
+>, <Line: -		List<QueryMetric> results = parser.parseQueryMetric(json);
+>, <Line: -		List<QueryMetric> results = parser.parseQueryMetric(json);
+>, <Line: -		List<QueryMetric> results = parser.parseQueryMetric(json);
+>]

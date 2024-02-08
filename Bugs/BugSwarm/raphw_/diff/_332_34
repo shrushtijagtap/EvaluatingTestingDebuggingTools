@@ -1,0 +1,113 @@
+[<Line: +import org.junit.Ignore;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +    protected TypeDescription.Generic describeType(Field field) {
+>, <Line: +        return describe(field.getGenericType(), TypeDescription.Generic.AnnotationReader.DISPATCHER.resolve(field))
+>, <Line: +                .accept(TypeDescription.Generic.Visitor.Substitutor.ForAttachment.of(new FieldDescription.ForLoadedField(field)));
+>, <Line: +    protected TypeDescription.Generic describeReturnType(Method method) {
+>, <Line: +        return describe(method.getGenericReturnType(), TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveReturnType(method))
+>, <Line: +                .accept(TypeDescription.Generic.Visitor.Substitutor.ForAttachment.of(new MethodDescription.ForLoadedMethod(method)));
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected TypeDescription.Generic describeParameterType(Method method, int index) {
+>, <Line: +        return describe(method.getGenericParameterTypes()[index], TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveParameterType(method, index))
+>, <Line: +                .accept(TypeDescription.Generic.Visitor.Substitutor.ForAttachment.of(new MethodDescription.ForLoadedMethod(method)));
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected TypeDescription.Generic describeExceptionType(Method method, int index) {
+>, <Line: +        return describe(method.getGenericExceptionTypes()[index], TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveExceptionType(method, index))
+>, <Line: +                .accept(TypeDescription.Generic.Visitor.Substitutor.ForAttachment.of(new MethodDescription.ForLoadedMethod(method)));
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected TypeDescription.Generic describeSuperType(Class<?> type) {
+>, <Line: +        return describe(type.getGenericSuperclass(), TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveSuperType(type))
+>, <Line: +                .accept(TypeDescription.Generic.Visitor.Substitutor.ForAttachment.of(new TypeDescription.ForLoadedType(type)));
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected TypeDescription.Generic describeInterfaceType(Class<?> type, int index) {
+>, <Line: +        return describe(type.getGenericInterfaces()[index], TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveInterface(type, index))
+>, <Line: +                .accept(TypeDescription.Generic.Visitor.Substitutor.ForAttachment.of(new TypeDescription.ForLoadedType(type)));
+>, <Line: +        assertThat(TypeDescription.Generic.Builder.parameterizedType(Foo.class, Object.class).build().getOwnerType(),
+>, <Line: +                TypeDescription.Generic.Builder.parameterizedType(Foo.class, Object.class).build(),
+>, <Line: +    @Test(expected = IllegalArgumentException.class)
+>, <Line: +    public void testForbiddenZeroArity() throws Exception {
+>, <Line: +        TypeDescription.Generic.Builder.rawType(Foo.class).asArray(0);
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalArgumentException.class)
+>, <Line: +    public void testForbiddenNegativeType() throws Exception {
+>, <Line: +        TypeDescription.Generic.Builder.rawType(Foo.class).asArray(-1);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testMultipleArityArray() throws Exception {
+>, <Line: +        assertThat(TypeDescription.Generic.Builder.rawType(Foo.class).asArray(2).build().getComponentType().getComponentType().represents(Foo.class), is(true));
+>, <Line: +    }
+>, <Line: +        ObjectPropertyAssertion.of(TypeDescription.Generic.Builder.OfGenericArrayType.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypeDescription.Generic.Builder.OfNonGenericType.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypeDescription.Generic.Builder.OfParameterizedType.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypeDescription.Generic.Builder.OfTypeVariable.class).apply();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    @Test
+>, <Line: +    @Ignore("The Java reflection API does not currently support owner types")
+>, <Line: +    public void testTypeAnnotationOwnerType() throws Exception {
+>, <Line: +        super.testTypeAnnotationOwnerType();
+>, <Line: +    private TypeDescription.Generic describe(Type type, TypeDescription.Generic.AnnotationReader annotationReader) {
+>, <Line: +        if (type instanceof WildcardType) {
+>, <Line: +            return wildcardType.getLowerBounds().length == 0
+>, <Line: +                    ? builder(wildcardType.getUpperBounds()[0], annotationReader.ofWildcardUpperBoundType(0)).asWildcardUpperBound(annotationReader.asList())
+>, <Line: +                    : builder(wildcardType.getLowerBounds()[0], annotationReader.ofWildcardLowerBoundType(0)).asWildcardLowerBound(annotationReader.asList());
+>, <Line: +            return builder(type, annotationReader).build();
+>, <Line: +    private TypeDescription.Generic.Builder builder(Type type, TypeDescription.Generic.AnnotationReader annotationReader) {
+>, <Line: +        if (type instanceof TypeVariable) {
+>, <Line: +            return TypeDescription.Generic.Builder.typeVariable(((TypeVariable<?>) type).getName()).annotate(annotationReader.asList());
+>, <Line: +        } else if (type instanceof Class) {
+>, <Line: +            Class<?> rawType = (Class<?>) type;
+>, <Line: +            return (rawType.isArray()
+>, <Line: +                    ? builder(rawType.getComponentType(), annotationReader.ofComponentType()).asArray()
+>, <Line: +                    : TypeDescription.Generic.Builder.rawType((Class<?>) type)).annotate(annotationReader.asList());
+>, <Line: +            return builder(((GenericArrayType) type).getGenericComponentType(), annotationReader.ofComponentType()).asArray().annotate(annotationReader.asList());
+>, <Line: +            List<TypeDescription.Generic> parameters = new ArrayList<TypeDescription.Generic>(parameterizedType.getActualTypeArguments().length);
+>, <Line: +            int index = 0;
+>, <Line: +            for (Type parameter : parameterizedType.getActualTypeArguments()) {
+>, <Line: +                parameters.add(describe(parameter, annotationReader.ofTypeArgument(index++)));
+>, <Line: +            }
+>, <Line: +            return TypeDescription.Generic.Builder.parameterizedType(new TypeDescription.ForLoadedType((Class<?>) parameterizedType.getRawType()),
+>, <Line: +                    parameterizedType.getOwnerType() == null
+>, <Line: +                            ? null
+>, <Line: +                            : describe(parameterizedType.getOwnerType(), annotationReader.ofOwnerType()),
+>, <Line: +                    parameters).annotate(annotationReader.asList());
+>]
+[<Line: -import java.util.Arrays;
+>, <Line: -    protected TypeDescription.Generic describe(Field field) {
+>, <Line: -        return describe(field.getGenericType()).accept(TypeDescription.Generic.Visitor.Substitutor.ForAttachment.of(new FieldDescription.ForLoadedField(field)));
+>, <Line: -    protected TypeDescription.Generic describe(Method method) {
+>, <Line: -        return describe(method.getGenericReturnType()).accept(TypeDescription.Generic.Visitor.Substitutor.ForAttachment.of(new MethodDescription.ForLoadedMethod(method)));
+>, <Line: -        assertThat(TypeDescription.Generic.Builder.parameterizedType(Foo.class, Object.class).asType().getOwnerType(),
+>, <Line: -                TypeDescription.Generic.Builder.parameterizedType(Foo.class, Object.class).asType(),
+>, <Line: -        ObjectPropertyAssertion.of(TypeDescription.Generic.Builder.class).apply();
+>, <Line: -    private TypeDescription.Generic describe(Type type) {
+>, <Line: -        if (type instanceof Class) {
+>, <Line: -            return builder(type).asType();
+>, <Line: -        } else if (type instanceof TypeVariable) {
+>, <Line: -            return TypeDescription.Generic.Builder.typeVariable(((TypeVariable) type).getName());
+>, <Line: -        } else if (type instanceof WildcardType) {
+>, <Line: -            if (wildcardType.getLowerBounds().length > 0) {
+>, <Line: -                return builder(wildcardType.getLowerBounds()[0]).asWildcardLowerBound();
+>, <Line: -            } else if (wildcardType.getUpperBounds().length > 0) {
+>, <Line: -                return builder(wildcardType.getUpperBounds()[0]).asWildcardUpperBound();
+>, <Line: -            } else {
+>, <Line: -                return TypeDescription.Generic.Builder.unboundWildcard();
+>, <Line: -            }
+>, <Line: -        } else if (type instanceof GenericArrayType) {
+>, <Line: -            return builder(type).asType();
+>, <Line: -        } else if (type instanceof ParameterizedType) {
+>, <Line: -            return builder(type).asType();
+>, <Line: -            throw new AssertionError("Unknown type: " + type);
+>, <Line: -    private TypeDescription.Generic.Builder builder(Type type) {
+>, <Line: -        if (type instanceof Class) {
+>, <Line: -            return TypeDescription.Generic.Builder.rawType(((Class<?>) type));
+>, <Line: -            return builder(((GenericArrayType) type).getGenericComponentType()).asArray();
+>, <Line: -            return TypeDescription.Generic.Builder.parameterizedType((Class<?>) parameterizedType.getRawType(),
+>, <Line: -                    parameterizedType.getOwnerType(),
+>, <Line: -                    Arrays.asList(parameterizedType.getActualTypeArguments()));
+>]

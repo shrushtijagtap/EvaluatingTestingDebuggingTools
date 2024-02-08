@@ -1,0 +1,26 @@
+[<Line: +    private GeocoderHandler geocoderHandler;
+>, <Line: +    private GeolocationHandler geolocationHandler;
+>, <Line: +        if (Context.getGeocoder() != null) {
+>, <Line: +            geocoderHandler = new GeocoderHandler(
+>, <Line: +                    Context.getGeocoder(),
+>, <Line: +                    Context.getConfig().getBoolean("geocoder.processInvalidPositions"));
+>, <Line: +            geolocationHandler = new GeolocationHandler(
+>, <Line: +                    Context.getGeolocationProvider(),
+>, <Line: +                    Context.getConfig().getBoolean("location.processInvalidPositions"));
+>, <Line: +        if (geocoderHandler != null) {
+>, <Line: +            pipeline.addLast("geocoder", geocoderHandler);
+>, <Line: +        if (geolocationHandler != null) {
+>, <Line: +            pipeline.addLast("location", geolocationHandler);
+>]
+[<Line: -    private ReverseGeocoderHandler reverseGeocoderHandler;
+>, <Line: -    private LocationProviderHandler locationProviderHandler;
+>, <Line: -        if (Context.getReverseGeocoder() != null) {
+>, <Line: -            reverseGeocoderHandler = new ReverseGeocoderHandler(
+>, <Line: -                    Context.getReverseGeocoder(), Context.getConfig().getBoolean("geocoder.processInvalidPositions"));
+>, <Line: -            locationProviderHandler = new LocationProviderHandler(
+>, <Line: -                    Context.getGeolocationProvider(), Context.getConfig().getBoolean("location.processInvalidPositions"));
+>, <Line: -        if (reverseGeocoderHandler != null) {
+>, <Line: -            pipeline.addLast("geocoder", reverseGeocoderHandler);
+>, <Line: -        if (locationProviderHandler != null) {
+>, <Line: -            pipeline.addLast("location", locationProviderHandler);
+>]

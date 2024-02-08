@@ -1,0 +1,29 @@
+[<Line: +    @Nonnull protected OWLOntologyManager manager;
+>, <Line: +    @Nonnull protected OWLOntologyID ontologyID;
+>, <Line: +                if (ax.getObject().equals(owlEntity)) {
+>, <Line: +                    axioms.add(ax);
+>, <Line: +            for (AxiomType<?> t : AxiomType.AXIOM_TYPES) {
+>, <Line: +                for (OWLAxiom ax : getAxioms(t)) {
+>, <Line: +                    if (hasLiteralInAnnotations(owlEntity, ax)) {
+>, <Line: +                        axioms.add(ax);
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +    protected boolean hasLiteralInAnnotations(OWLPrimitive owlEntity, OWLAxiom ax) {
+>, <Line: +        for (OWLAnnotation ann : ax.getAnnotations()) {
+>, <Line: +            if (ann.getValue().equals(owlEntity)) {
+>, <Line: +                return true;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return false;
+>, <Line: +    }
+>]
+[<Line: -    @Nonnull
+>, <Line: -    protected OWLOntologyManager manager;
+>, <Line: -    @Nonnull
+>, <Line: -    protected OWLOntologyID ontologyID;
+>, <Line: -                if (ax.getObject().getDatatype().getIRI().equals(OWL2Datatype.XSD_ANY_URI.getIRI())) {
+>, <Line: -                    if (ax.getObject().equals(owlEntity)) {
+>, <Line: -                        axioms.add(ax);
+>, <Line: -                    }
+>]

@@ -1,0 +1,223 @@
+[<Line: +		case Code.FMT_UNARYASSIGN:
+>, <Line: +		case Code.FMT_BINARYASSIGN:
+>, <Line: +		int nTypes = readBase(wideBase);
+>, <Line: +		Type[] types = new Type[nTypes];
+>, <Line: +		for (int i = 0; i != nTypes; ++i) {
+>, <Line: +			int typeIndex = readBase(wideBase); 
+>, <Line: +			types[i] = typePool[typeIndex];
+>, <Line: +		}
+>, <Line: +			return Codes.Return(types, operands);
+>, <Line: +			if (!(types[0] instanceof Type.FunctionOrMethod)) {
+>, <Line: +			return Codes.IndirectInvoke((Type.FunctionOrMethod) types[0], targets,
+>, <Line: +			if (!(types[0] instanceof Type.FunctionOrMethod)) {
+>, <Line: +			return Codes.Invoke((Type.FunctionOrMethod) types[0], targets, operands,
+>, <Line: +			if (!(types[0] instanceof Type.FunctionOrMethod)) {
+>, <Line: +			for(int i=0;i!=operands.length;++i) {
+>, <Line: +				operands[i] -= 1;
+>, <Line: +			}
+>, <Line: +			return Codes.Lambda((Type.FunctionOrMethod) types[0], targets[0], operands,
+>, <Line: +			if (!(types[0] instanceof Type.Record)) {
+>, <Line: +			return Codes.NewRecord((Type.Record) types[0], targets[0], operands);
+>, <Line: +			if (!(types[0] instanceof Type.Array)) {
+>, <Line: +				throw new RuntimeException("expected array type");
+>, <Line: +			return Codes.NewArray((Type.Array) types[0], targets[0], operands);
+>, <Line: +		}
+>, <Line: +		// Unary assignables
+>, <Line: +		case Code.OPCODE_convert: {
+>, <Line: +			int i = readRest(wideRest);
+>, <Line: +			Type t = typePool[i];
+>, <Line: +			return Codes.Convert(types[0], targets[0], operands[0], t);
+>, <Line: +		}
+>, <Line: +		case Code.OPCODE_assign:
+>, <Line: +			return Codes.Assign(types[0], targets[0], operands[0]);
+>, <Line: +		case Code.OPCODE_dereference: {
+>, <Line: +			if (!(types[0] instanceof Type.Reference)) {
+>, <Line: +				throw new RuntimeException("expected reference type");
+>, <Line: +			}
+>, <Line: +			return Codes.Dereference((Type.Reference) types[0], targets[0], operands[0]);
+>, <Line: +		}
+>, <Line: +		case Code.OPCODE_fieldload: {
+>, <Line: +			if (!(types[0] instanceof Type.EffectiveRecord)) {
+>, <Line: +				throw new RuntimeException("expected record type");
+>, <Line: +			}
+>, <Line: +			int i = readRest(wideRest);
+>, <Line: +			String field = stringPool[i];
+>, <Line: +			return Codes.FieldLoad((Type.EffectiveRecord) types[0], targets[0],
+>, <Line: +					operands[0], field);
+>, <Line: +		}
+>, <Line: +		case Code.OPCODE_invert:
+>, <Line: +			return Codes.Invert(types[0], targets[0], operands[0]);
+>, <Line: +		case Code.OPCODE_newobject: {
+>, <Line: +			if (!(types[0] instanceof Type.Reference)) {
+>, <Line: +				throw new RuntimeException("expected reference type");
+>, <Line: +			}
+>, <Line: +			return Codes.NewObject((Type.Reference) types[0], targets[0], operands[0]);
+>, <Line: +		}
+>, <Line: +		case Code.OPCODE_lengthof: {
+>, <Line: +			if (!(types[0] instanceof Type.EffectiveArray)) {
+>, <Line: +				throw new RuntimeException("expected collection type");
+>, <Line: +			}
+>, <Line: +			return Codes.LengthOf((Type.EffectiveArray) types[0], targets[0], operands[0]);
+>, <Line: +		}
+>, <Line: +		case Code.OPCODE_move:
+>, <Line: +			return Codes.Move(types[0], targets[0], operands[0]);
+>, <Line: +		case Code.OPCODE_neg:
+>, <Line: +			return Codes.UnaryOperator(types[0], targets[0], operands[0], Codes.UnaryOperatorKind.NEG);
+>, <Line: +		case Code.OPCODE_numerator:
+>, <Line: +			return Codes.UnaryOperator(types[0], targets[0], operands[0], Codes.UnaryOperatorKind.NUMERATOR);
+>, <Line: +		case Code.OPCODE_denominator:
+>, <Line: +			return Codes.UnaryOperator(types[0], targets[0], operands[0], Codes.UnaryOperatorKind.DENOMINATOR);
+>, <Line: +		case Code.OPCODE_not: {
+>, <Line: +			if (!(types[0] instanceof Type.Bool)) {
+>, <Line: +				throw new RuntimeException("expected bool type");
+>, <Line: +			}
+>, <Line: +			return Codes.Not(targets[0], operands[0]);
+>, <Line: +		}
+>, <Line: +		// Binary Assignables
+>, <Line: +		case Code.OPCODE_indexof: {
+>, <Line: +			if (!(types[0] instanceof Type.EffectiveArray)) {
+>, <Line: +				throw new RuntimeException("expecting indexible type");
+>, <Line: +			}
+>, <Line: +			return Codes.IndexOf((Type.EffectiveArray) types[0], targets[0], operands[0], operands[1]);
+>, <Line: +		}
+>, <Line: +		case Code.OPCODE_listgen: {
+>, <Line: +			if (!(types[0] instanceof Type.Array)) {
+>, <Line: +				throw new RuntimeException("expecting list type");
+>, <Line: +			}
+>, <Line: +			return Codes.ArrayGenerator((Type.Array) types[0], targets[0], operands[0], operands[1]);
+>, <Line: +		}
+>, <Line: +		case Code.OPCODE_add:
+>, <Line: +		case Code.OPCODE_sub:
+>, <Line: +		case Code.OPCODE_mul:
+>, <Line: +		case Code.OPCODE_div:
+>, <Line: +		case Code.OPCODE_rem:
+>, <Line: +		case Code.OPCODE_bitwiseor:
+>, <Line: +		case Code.OPCODE_bitwisexor:
+>, <Line: +		case Code.OPCODE_bitwiseand:
+>, <Line: +		case Code.OPCODE_lshr:
+>, <Line: +		case Code.OPCODE_rshr: {
+>, <Line: +			Codes.BinaryOperatorKind kind = Codes.BinaryOperatorKind.values()[opcode - Code.OPCODE_add];
+>, <Line: +			return Codes.BinaryOperator(types[0], targets[0], operands[0], operands[1], kind);
+>, <Line: +			int nTypes = readBase(wideBase);
+>, <Line: +			Type[] types = new Type[nTypes];
+>, <Line: +			for (int i = 0; i != types.length; ++i) {
+>, <Line: +				types[i] = typePool[readBase(wideBase)];
+>, <Line: +			}
+>, <Line: +			return Codes.Update(types[0], targets[0], operands, operand,
+>]
+[<Line: -		case Code.FMT_UNARYASSIGN:
+>, <Line: -			return readUnaryAssign(opcode, wideBase, wideRest);
+>, <Line: -		case Code.FMT_BINARYASSIGN:
+>, <Line: -			return readBinaryAssign(opcode, wideBase, wideRest);
+>, <Line: -		case Code.OPCODE_convert: {
+>, <Line: -			int i = readRest(wideRest);
+>, <Line: -			Type t = typePool[i];
+>, <Line: -			return Codes.Convert(type, target, operand, t);
+>, <Line: -		}
+>, <Line: -		case Code.OPCODE_assign:
+>, <Line: -			return Codes.Assign(type, target, operand);
+>, <Line: -		case Code.OPCODE_dereference: {
+>, <Line: -			if (!(type instanceof Type.Reference)) {
+>, <Line: -				throw new RuntimeException("expected reference type");
+>, <Line: -			}
+>, <Line: -			return Codes.Dereference((Type.Reference) type, target, operand);
+>, <Line: -		}
+>, <Line: -		case Code.OPCODE_fieldload: {
+>, <Line: -			if (!(type instanceof Type.EffectiveRecord)) {
+>, <Line: -				throw new RuntimeException("expected record type");
+>, <Line: -			}
+>, <Line: -			int i = readRest(wideRest);
+>, <Line: -			String field = stringPool[i];
+>, <Line: -			return Codes.FieldLoad((Type.EffectiveRecord) type, target,
+>, <Line: -					operand, field);
+>, <Line: -		}
+>, <Line: -		case Code.OPCODE_invert:
+>, <Line: -			return Codes.Invert(type, target, operand);
+>, <Line: -		case Code.OPCODE_newobject: {
+>, <Line: -			if (!(type instanceof Type.Reference)) {
+>, <Line: -				throw new RuntimeException("expected reference type");
+>, <Line: -			}
+>, <Line: -			return Codes.NewObject((Type.Reference) type, target, operand);
+>, <Line: -		}
+>, <Line: -		case Code.OPCODE_lengthof: {
+>, <Line: -			if (!(type instanceof Type.EffectiveArray)) {
+>, <Line: -				throw new RuntimeException("expected collection type");
+>, <Line: -			}
+>, <Line: -			return Codes.LengthOf((Type.EffectiveArray) type, target,
+>, <Line: -					operand);
+>, <Line: -		}
+>, <Line: -		case Code.OPCODE_move:
+>, <Line: -			return Codes.Move(type, target, operand);
+>, <Line: -		case Code.OPCODE_neg:
+>, <Line: -			return Codes.UnaryOperator(type, target, operand,
+>, <Line: -					Codes.UnaryOperatorKind.NEG);
+>, <Line: -		case Code.OPCODE_numerator:
+>, <Line: -			return Codes.UnaryOperator(type, target, operand,
+>, <Line: -					Codes.UnaryOperatorKind.NUMERATOR);
+>, <Line: -		case Code.OPCODE_denominator:
+>, <Line: -			return Codes.UnaryOperator(type, target, operand,
+>, <Line: -					Codes.UnaryOperatorKind.DENOMINATOR);
+>, <Line: -		case Code.OPCODE_not: {
+>, <Line: -			if (!(type instanceof Type.Bool)) {
+>, <Line: -				throw new RuntimeException("expected bool type");
+>, <Line: -			}
+>, <Line: -			return Codes.Not(target, operand);
+>, <Line: -		}
+>, <Line: -	private Code readBinaryAssign(int opcode, boolean wideBase, boolean wideRest)
+>, <Line: -			throws IOException {
+>, <Line: -		int target = readBase(wideBase);
+>, <Line: -		int leftOperand = readBase(wideBase);
+>, <Line: -		int rightOperand = readBase(wideBase);
+>, <Line: -		int typeIdx = readRest(wideRest);
+>, <Line: -		Type type = typePool[typeIdx];
+>, <Line: -		switch (opcode) {		
+>, <Line: -		case Code.OPCODE_indexof: {
+>, <Line: -			if (!(type instanceof Type.EffectiveArray)) {
+>, <Line: -				throw new RuntimeException("expecting indexible type");
+>, <Line: -			}
+>, <Line: -			return Codes.IndexOf((Type.EffectiveArray) type, target,
+>, <Line: -					leftOperand, rightOperand);
+>, <Line: -		}
+>, <Line: -		case Code.OPCODE_listgen: {
+>, <Line: -			if (!(type instanceof Type.Array)) {
+>, <Line: -				throw new RuntimeException("expecting list type");
+>, <Line: -			}
+>, <Line: -			return Codes.ArrayGenerator((Type.Array) type, target,
+>, <Line: -					leftOperand, rightOperand);
+>, <Line: -		}
+>, <Line: -		case Code.OPCODE_add:
+>, <Line: -		case Code.OPCODE_sub:
+>, <Line: -		case Code.OPCODE_mul:
+>, <Line: -		case Code.OPCODE_div:
+>, <Line: -		case Code.OPCODE_rem:
+>, <Line: -		case Code.OPCODE_bitwiseor:
+>, <Line: -		case Code.OPCODE_bitwisexor:
+>, <Line: -		case Code.OPCODE_bitwiseand:
+>, <Line: -		case Code.OPCODE_lshr:
+>, <Line: -		case Code.OPCODE_rshr: {
+>, <Line: -			Codes.BinaryOperatorKind kind = Codes.BinaryOperatorKind.values()[opcode
+>, <Line: -					- Code.OPCODE_add];
+>, <Line: -			return Codes.BinaryOperator(type, target, leftOperand,
+>, <Line: -					rightOperand, kind);
+>, <Line: -		}
+>, <Line: -		}
+>, <Line: -		throw new RuntimeException("unknown opcode encountered (" + opcode
+>, <Line: -				+ ")");
+>, <Line: -	}
+>, <Line: -		int typeIdx = readRest(wideRest);
+>, <Line: -		Type type = typePool[typeIdx];
+>, <Line: -			return Codes.Return(new Type[]{type}, operands);
+>, <Line: -			if (!(type instanceof Type.FunctionOrMethod)) {
+>, <Line: -			return Codes.IndirectInvoke((Type.FunctionOrMethod) type, targets,
+>, <Line: -			if (!(type instanceof Type.FunctionOrMethod)) {
+>, <Line: -			return Codes.Invoke((Type.FunctionOrMethod) type, targets, operands,
+>, <Line: -			if (!(type instanceof Type.FunctionOrMethod)) {
+>, <Line: -			return Codes.Lambda((Type.FunctionOrMethod) type, targets[0], operands,
+>, <Line: -			if (!(type instanceof Type.Record)) {
+>, <Line: -			return Codes.NewRecord((Type.Record) type, targets[0], operands);
+>, <Line: -			if (!(type instanceof Type.Array)) {
+>, <Line: -				throw new RuntimeException("expected list type");
+>, <Line: -			return Codes.NewArray((Type.Array) type, targets[0], operands);
+>, <Line: -			Type beforeType = typePool[readRest(wideRest)];
+>, <Line: -			return Codes.Update(beforeType, targets[0], operands, operand,
+>]

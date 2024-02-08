@@ -1,0 +1,10 @@
+[<Line: +        when(classVisitorWrapper.mergeWriter(0)).thenReturn(ClassWriter.COMPUTE_MAXS);
+>, <Line: +        when(classVisitorWrapper.mergeReader(0)).thenReturn(ClassReader.EXPAND_FRAMES);
+>, <Line: +        verify(classVisitorWrapper).mergeWriter(0);
+>, <Line: +        verify(classVisitorWrapper).mergeReader(0);
+>]
+[<Line: -        when(classVisitorWrapper.wrapWriter(0)).thenReturn(ClassWriter.COMPUTE_MAXS);
+>, <Line: -        when(classVisitorWrapper.wrapReader(0)).thenReturn(ClassReader.EXPAND_FRAMES);
+>, <Line: -        verify(classVisitorWrapper).wrapWriter(0);
+>, <Line: -        verify(classVisitorWrapper).wrapReader(0);
+>]

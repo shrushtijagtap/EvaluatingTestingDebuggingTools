@@ -1,0 +1,152 @@
+[<Line: +package org.yamcs.web.rest.archive;
+>, <Line: +import java.io.BufferedWriter;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.io.OutputStreamWriter;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import java.util.List;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +import org.yamcs.api.MediaType;
+>, <Line: +import org.yamcs.parameter.ParameterValueWithId;
+>, <Line: +import org.yamcs.protobuf.Pvalue.ParameterData;
+>, <Line: +import org.yamcs.protobuf.Pvalue.ParameterValue;
+>, <Line: +import org.yamcs.protobuf.Pvalue.TimeSeries;
+>, <Line: +import org.yamcs.protobuf.SchemaPvalue;
+>, <Line: +import org.yamcs.protobuf.Yamcs.EndAction;
+>, <Line: +import org.yamcs.protobuf.Yamcs.NamedObjectId;
+>, <Line: +import org.yamcs.protobuf.Yamcs.ParameterReplayRequest;
+>, <Line: +import org.yamcs.protobuf.Yamcs.ReplayRequest;
+>, <Line: +import org.yamcs.protobuf.Yamcs.ReplaySpeed;
+>, <Line: +import org.yamcs.protobuf.Yamcs.ReplaySpeed.ReplaySpeedType;
+>, <Line: +import org.yamcs.utils.ParameterFormatter;
+>, <Line: +import org.yamcs.utils.TimeEncoding;
+>, <Line: +import org.yamcs.web.BadRequestException;
+>, <Line: +import org.yamcs.web.HttpException;
+>, <Line: +import org.yamcs.web.InternalServerErrorException;
+>, <Line: +import org.yamcs.web.rest.RestHandler;
+>, <Line: +import org.yamcs.web.rest.RestParameterReplayListener;
+>, <Line: +import org.yamcs.web.rest.RestReplayListener;
+>, <Line: +import org.yamcs.web.rest.RestRequest;
+>, <Line: +import org.yamcs.web.rest.archive.RestDownsampler.Sample;
+>, <Line: +import org.yamcs.xtce.FloatParameterType;
+>, <Line: +import org.yamcs.xtce.IntegerParameterType;
+>, <Line: +import org.yamcs.xtce.Parameter;
+>, <Line: +import org.yamcs.xtce.ParameterType;
+>, <Line: +import org.yamcs.xtce.XtceDb;
+>, <Line: +import org.yamcs.xtceproc.XtceDbFactory;
+>, <Line: +import io.netty.buffer.ByteBuf;
+>, <Line: +import io.netty.buffer.ByteBufOutputStream;
+>, <Line: +/**
+>, <Line: + * provides parameters by doing replays. In general, if possible, avoid replays and use the parameter archive (much faster)
+>, <Line: + * @author nm
+>, <Line: + *
+>, <Line: + */
+>, <Line: +public class ArchiveParameterReplayRestHandler extends RestHandler {
+>, <Line: +    private static final Logger log = LoggerFactory.getLogger(ArchiveParameterReplayRestHandler.class);
+>, <Line: +    /**
+>, <Line: +     * A series is a list of samples that are determined in one-pass while processing a stream result.
+>, <Line: +     * Final API unstable.
+>, <Line: +     * <p>
+>, <Line: +     * If no query parameters are defined, the series covers *all* data.
+>, <Line: +     * @param req
+>, <Line: +     *        rest request
+>, <Line: +     * @throws HttpException 
+>, <Line: +     */
+>, <Line: +    public void getParameterSamples(RestRequest req) throws HttpException {
+>, <Line: +        String instance = verifyInstance(req, req.getRouteParam("instance"));
+>, <Line: +        XtceDb mdb = XtceDbFactory.getInstance(instance);
+>, <Line: +        Parameter p = verifyParameter(req, mdb, req.getRouteParam("name"));
+>, <Line: +        ParameterType ptype = p.getParameterType();
+>, <Line: +        if ((ptype != null) && (!(ptype instanceof FloatParameterType) && !(ptype instanceof IntegerParameterType))) {
+>, <Line: +            throw new BadRequestException("Only integer or float parameters can be sampled. Got " + ptype.getTypeAsString());
+>, <Line: +        }
+>, <Line: +        ReplayRequest.Builder rr = ReplayRequest.newBuilder().setEndAction(EndAction.QUIT);
+>, <Line: +        rr.setSpeed(ReplaySpeed.newBuilder().setType(ReplaySpeedType.AFAP));
+>, <Line: +        NamedObjectId id = NamedObjectId.newBuilder().setName(p.getQualifiedName()).build();
+>, <Line: +        rr.setParameterRequest(ParameterReplayRequest.newBuilder().addNameFilter(id));
+>, <Line: +        if (req.hasQueryParameter("start")) {
+>, <Line: +            rr.setStart(req.getQueryParameterAsDate("start"));
+>, <Line: +        }
+>, <Line: +        rr.setStop(req.getQueryParameterAsDate("stop", TimeEncoding.getWallclockTime()));
+>, <Line: +        RestDownsampler sampler = new RestDownsampler(rr.getStop());
+>, <Line: +        RestReplays.replay(instance, req.getAuthToken(), rr.build(), new RestReplayListener() {
+>, <Line: +            @Override
+>, <Line: +            public void onParameterData(List<ParameterValueWithId> params) {
+>, <Line: +                for (ParameterValueWithId pvalid : params) {
+>, <Line: +                    sampler.process(pvalid.getParameterValue());
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public void replayFinished() {
+>, <Line: +                TimeSeries.Builder series = TimeSeries.newBuilder();
+>, <Line: +                for (Sample s : sampler.collect()) {
+>, <Line: +                    series.addSample(ArchiveHelper.toGPBSample(s));
+>, <Line: +                }
+>, <Line: +                completeOK(req, series.build(), SchemaPvalue.TimeSeries.WRITE);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public void replayFailed(Throwable t) {
+>, <Line: +                completeWithError(req, new InternalServerErrorException(t));
+>, <Line: +            }
+>, <Line: +        });
+>, <Line: +    }
+>, <Line: +    public void listParameterHistory(RestRequest req) throws HttpException {
+>, <Line: +        String instance = verifyInstance(req, req.getRouteParam("instance"));
+>, <Line: +        XtceDb mdb = XtceDbFactory.getInstance(instance);
+>, <Line: +        String pathName = req.getRouteParam("name");
+>, <Line: +        NameDescriptionWithId<Parameter> p = verifyParameterWithId(req, mdb, pathName);
+>, <Line: +        long pos = req.getQueryParameterAsLong("pos", 0);
+>, <Line: +        int limit = req.getQueryParameterAsInt("limit", 100);
+>, <Line: +        boolean noRepeat = req.getQueryParameterAsBoolean("norepeat", false);
+>, <Line: +        ReplayRequest rr = ArchiveHelper.toParameterReplayRequest(req, p.getItem(), true);
+>, <Line: +        if (req.asksFor(MediaType.CSV)) {
+>, <Line: +            ByteBuf buf = req.getChannelHandlerContext().alloc().buffer();
+>, <Line: +            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new ByteBufOutputStream(buf)))) {
+>, <Line: +                List<NamedObjectId> idList = Arrays.asList(p.getRequestedId());
+>, <Line: +                ParameterFormatter csvFormatter = new ParameterFormatter(bw, idList);
+>, <Line: +                limit++; // Allow one extra line for the CSV header
+>, <Line: +                RestParameterReplayListener replayListener = new RestParameterReplayListener(pos, limit, req) {
+>, <Line: +                    @Override
+>, <Line: +                    public void onParameterData(List<ParameterValueWithId> params) {
+>, <Line: +                        try {
+>, <Line: +                            List<ParameterValue> pvlist = new ArrayList<>();
+>, <Line: +                            for(ParameterValueWithId pvalid: params) {
+>, <Line: +                                pvlist.add(pvalid.toGbpParameterValue());
+>, <Line: +                            }
+>, <Line: +                            csvFormatter.writeParameters(pvlist);
+>, <Line: +                        } catch (IOException e) {
+>, <Line: +                            log.error("Error while writing parameter line", e);
+>, <Line: +                            completeWithError(req, new InternalServerErrorException(e));
+>, <Line: +                        }
+>, <Line: +                    }
+>, <Line: +                    public void replayFinished() {
+>, <Line: +                        completeOK(req, MediaType.CSV, buf);
+>, <Line: +                    }
+>, <Line: +                };
+>, <Line: +                replayListener.setNoRepeat(noRepeat);                
+>, <Line: +                RestReplays.replay(instance, req.getAuthToken(), rr, replayListener);
+>, <Line: +            } catch (IOException e) {
+>, <Line: +                throw new InternalServerErrorException(e);
+>, <Line: +            }
+>, <Line: +        } else {
+>, <Line: +            ParameterData.Builder resultb = ParameterData.newBuilder();
+>, <Line: +            RestParameterReplayListener replayListener = new RestParameterReplayListener(pos, limit, req) {
+>, <Line: +                @Override
+>, <Line: +                public void onParameterData(List<ParameterValueWithId> params) {
+>, <Line: +                    for(ParameterValueWithId pvalid: params) {
+>, <Line: +                        resultb.addParameter(pvalid.toGbpParameterValue());
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public void replayFinished() {
+>, <Line: +                    completeOK(req, resultb.build(), SchemaPvalue.ParameterData.WRITE);
+>, <Line: +                }
+>, <Line: +            };
+>, <Line: +            replayListener.setNoRepeat(noRepeat);
+>, <Line: +            RestReplays.replay(instance, req.getAuthToken(), rr, replayListener);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

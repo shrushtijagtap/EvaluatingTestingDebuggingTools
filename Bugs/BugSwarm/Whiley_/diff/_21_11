@@ -1,0 +1,15 @@
+[<Line: +	public static final int OPCODE_bitwiseor   = 5  + FMT_BINARYASSIGN;
+>, <Line: +	public static final int OPCODE_bitwisexor  = 6  + FMT_BINARYASSIGN;
+>, <Line: +	public static final int OPCODE_bitwiseand  = 7  + FMT_BINARYASSIGN;
+>, <Line: +	public static final int OPCODE_lshr        = 8  + FMT_BINARYASSIGN;
+>, <Line: +	public static final int OPCODE_rshr        = 9  + FMT_BINARYASSIGN;
+>, <Line: +//	public static final int OPCODE_forall            = 1 + FMT_NARYOP;
+>]
+[<Line: -	public static final int OPCODE_range       = 5  + FMT_BINARYASSIGN;
+>, <Line: -	public static final int OPCODE_bitwiseor   = 6  + FMT_BINARYASSIGN;
+>, <Line: -	public static final int OPCODE_bitwisexor  = 7  + FMT_BINARYASSIGN;
+>, <Line: -	public static final int OPCODE_bitwiseand  = 8  + FMT_BINARYASSIGN;
+>, <Line: -	public static final int OPCODE_lshr        = 9  + FMT_BINARYASSIGN;
+>, <Line: -	public static final int OPCODE_rshr        = 10 + FMT_BINARYASSIGN;
+>, <Line: -	public static final int OPCODE_forall            = 1 + FMT_NARYOP;
+>]

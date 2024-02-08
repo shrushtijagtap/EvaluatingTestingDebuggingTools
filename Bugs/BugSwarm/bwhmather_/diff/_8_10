@@ -1,0 +1,925 @@
+[<Line: +"""
+>, <Line: +    verktyg.http.basic
+>, <Line: +    ~~~~~~~~~~~~~~~~~~
+>, <Line: +    :copyright:
+>, <Line: +        (c) 2015 Ben Mather, based on Werkzeug, see AUTHORS for more details.
+>, <Line: +    :license:
+>, <Line: +        BSD, see LICENSE for more details.
+>, <Line: +"""
+>, <Line: +import re
+>, <Line: +import sys
+>, <Line: +from time import gmtime
+>, <Line: +from email.utils import parsedate_tz
+>, <Line: +from urllib.request import parse_http_list as _parse_list_header
+>, <Line: +from datetime import datetime, timedelta
+>, <Line: +from werkzeug._internal import _missing, _empty_stream
+>, <Line: +from werkzeug._compat import make_literal_wrapper
+>, <Line: +from verktyg.datastructures import is_immutable
+>, <Line: +from verktyg import exceptions
+>, <Line: +_cookie_charset = 'latin1'
+>, <Line: +# for explanation of "media-range", etc. see Sections 5.3.{1,2} of RFC 7231
+>, <Line: +_token_chars = frozenset("!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+>, <Line: +                         '^_`abcdefghijklmnopqrstuvwxyz|~')
+>, <Line: +_unsafe_header_chars = set('()<>@,;:\"/[]?={} \t')
+>, <Line: +_quoted_string_re = r'"[^"\\]*(?:\\.[^"\\]*)*"'
+>, <Line: +_option_header_piece_re = re.compile(
+>, <Line: +    r';\s*(%s|[^\s;=]+)\s*(?:=\s*(%s|[^;]+))?\s*' %
+>, <Line: +    (_quoted_string_re, _quoted_string_re)
+>, <Line: +)
+>, <Line: +_entity_headers = frozenset([
+>, <Line: +    'allow', 'content-encoding', 'content-language', 'content-length',
+>, <Line: +    'content-location', 'content-md5', 'content-range', 'content-type',
+>, <Line: +    'expires', 'last-modified'
+>, <Line: +])
+>, <Line: +_hop_by_hop_headers = frozenset([
+>, <Line: +    'connection', 'keep-alive', 'proxy-authenticate',
+>, <Line: +    'proxy-authorization', 'te', 'trailer', 'transfer-encoding',
+>, <Line: +    'upgrade'
+>, <Line: +])
+>, <Line: +def wsgi_to_bytes(data):
+>, <Line: +    """coerce wsgi unicode represented bytes to real ones
+>, <Line: +    """
+>, <Line: +    if isinstance(data, bytes):
+>, <Line: +        return data
+>, <Line: +    return data.encode('latin1')  # XXX: utf8 fallback?
+>, <Line: +def bytes_to_wsgi(data):
+>, <Line: +    assert isinstance(data, bytes), 'data must be bytes'
+>, <Line: +    if isinstance(data, str):
+>, <Line: +        return data
+>, <Line: +    else:
+>, <Line: +        return data.decode('latin1')
+>, <Line: +def quote_header_value(value, extra_chars='', allow_token=True):
+>, <Line: +    """Quote a header value if necessary.
+>, <Line: +    :param value:
+>, <Line: +        The value to quote.
+>, <Line: +    :param extra_chars:
+>, <Line: +        A list of extra characters to skip quoting.
+>, <Line: +    :param allow_token:
+>, <Line: +        If this is enabled token values are returned unchanged.
+>, <Line: +    """
+>, <Line: +    if isinstance(value, bytes):
+>, <Line: +        value = bytes_to_wsgi(value)
+>, <Line: +    value = str(value)
+>, <Line: +    if allow_token:
+>, <Line: +        token_chars = _token_chars | set(extra_chars)
+>, <Line: +        if set(value).issubset(token_chars):
+>, <Line: +            return value
+>, <Line: +    return '"%s"' % value.replace('\\', '\\\\').replace('"', '\\"')
+>, <Line: +def unquote_header_value(value, is_filename=False):
+>, <Line: +    r"""Unquotes a header value.  (Reversal of :func:`quote_header_value`).
+>, <Line: +    This does not use the real unquoting but what browsers are actually
+>, <Line: +    using for quoting.
+>, <Line: +    :param value:
+>, <Line: +        The header value to unquote.
+>, <Line: +    """
+>, <Line: +    if value and value[0] == value[-1] == '"':
+>, <Line: +        # this is not the real unquoting, but fixing this so that the
+>, <Line: +        # RFC is met will result in bugs with internet explorer and
+>, <Line: +        # probably some other browsers as well.  IE for example is
+>, <Line: +        # uploading files with "C:\foo\bar.txt" as filename
+>, <Line: +        value = value[1:-1]
+>, <Line: +        # if this is a filename and the starting characters look like
+>, <Line: +        # a UNC path, then just return the value without quotes.  Using the
+>, <Line: +        # replace sequence below on a UNC path has the effect of turning
+>, <Line: +        # the leading double slash into a single slash and then
+>, <Line: +        # _fix_ie_filename() doesn't work correctly.  See #458.
+>, <Line: +        if not is_filename or value[:2] != '\\\\':
+>, <Line: +            return value.replace('\\\\', '\\').replace('\\"', '"')
+>, <Line: +    return value
+>, <Line: +def _options_header_vkw(value, kw):
+>, <Line: +    return dump_options_header(
+>, <Line: +        value, dict((k.replace('_', '-'), v) for k, v in kw.items())
+>, <Line: +    )
+>, <Line: +def unicodify_header_value(value):
+>, <Line: +    if isinstance(value, bytes):
+>, <Line: +        value = value.decode('latin-1')
+>, <Line: +    if not isinstance(value, str):
+>, <Line: +        value = str(value)
+>, <Line: +    return value
+>, <Line: +class Headers(object):
+>, <Line: +    """An object that stores some headers.  It has a dict-like interface
+>, <Line: +    but is ordered and can store the same keys multiple times.
+>, <Line: +    This data structure is useful if you want a nicer way to handle WSGI
+>, <Line: +    headers which are stored as tuples in a list.
+>, <Line: +    From Werkzeug 0.3 onwards, the :exc:`KeyError` raised by this class is
+>, <Line: +    also a subclass of the :class:`~exceptions.BadRequest` HTTP exception
+>, <Line: +    and will render a page for a ``400 BAD REQUEST`` if caught in a
+>, <Line: +    catch-all for HTTP exceptions.
+>, <Line: +    Headers is mostly compatible with the Python
+>, <Line: +    :class:`wsgiref.headers.Headers` class, with the exception of
+>, <Line: +    `__getitem__`.  :mod:`wsgiref` will return `None` for
+>, <Line: +    ``headers['missing']``, whereas :class:`Headers` will raise a
+>, <Line: +    :class:`KeyError`.
+>, <Line: +    To create a new :class:`Headers` object pass it a list or dict of headers
+>, <Line: +    which are used as default values.  This does not reuse the list passed
+>, <Line: +    to the constructor for internal usage.
+>, <Line: +    :param defaults:
+>, <Line: +        The list of default values for the :class:`Headers`.
+>, <Line: +    """
+>, <Line: +    def __init__(self, defaults=None):
+>, <Line: +        self._list = []
+>, <Line: +        if defaults is not None:
+>, <Line: +            if isinstance(defaults, (list, Headers)):
+>, <Line: +                self._list.extend(defaults)
+>, <Line: +            else:
+>, <Line: +                self.extend(defaults)
+>, <Line: +    def __getitem__(self, key, _get_mode=False):
+>, <Line: +        if not _get_mode:
+>, <Line: +            if isinstance(key, int):
+>, <Line: +                return self._list[key]
+>, <Line: +            elif isinstance(key, slice):
+>, <Line: +                return self.__class__(self._list[key])
+>, <Line: +        if not isinstance(key, str):
+>, <Line: +            raise exceptions.BadRequestKeyError(key)
+>, <Line: +        ikey = key.lower()
+>, <Line: +        for k, v in self._list:
+>, <Line: +            if k.lower() == ikey:
+>, <Line: +                return v
+>, <Line: +        # micro optimization: if we are in get mode we will catch that
+>, <Line: +        # exception one stack level down so we can raise a standard
+>, <Line: +        # key error instead of our special one.
+>, <Line: +        if _get_mode:
+>, <Line: +            raise KeyError()
+>, <Line: +        raise exceptions.BadRequestKeyError(key)
+>, <Line: +    def __eq__(self, other):
+>, <Line: +        return other.__class__ is self.__class__ and \
+>, <Line: +            set(other._list) == set(self._list)
+>, <Line: +    def __ne__(self, other):
+>, <Line: +        return not self.__eq__(other)
+>, <Line: +    def get(self, key, default=None, type=None, as_bytes=False):
+>, <Line: +        """Return the default value if the requested data doesn't exist.
+>, <Line: +        If `type` is provided and is a callable it should convert the value,
+>, <Line: +        return it or raise a :exc:`ValueError` if that is not possible.  In
+>, <Line: +        this case the function will return the default as if the value was not
+>, <Line: +        found:
+>, <Line: +        >>> d = Headers([('Content-Length', '42')])
+>, <Line: +        >>> d.get('Content-Length', type=int)
+>, <Line: +        42
+>, <Line: +        If a headers object is bound you must not add unicode strings
+>, <Line: +        because no encoding takes place.
+>, <Line: +        :param key:
+>, <Line: +            The key to be looked up.
+>, <Line: +        :param default:
+>, <Line: +            The default value to be returned if the key can't be looked up.  If
+>, <Line: +            not further specified `None` is returned.
+>, <Line: +        :param type:
+>, <Line: +            A callable that is used to cast the value in the :class:`Headers`.
+>, <Line: +            If a :exc:`ValueError` is raised by this callable the default value
+>, <Line: +            is returned.
+>, <Line: +        :param as_bytes:
+>, <Line: +            Return bytes instead of unicode strings.
+>, <Line: +        """
+>, <Line: +        try:
+>, <Line: +            rv = self.__getitem__(key, _get_mode=True)
+>, <Line: +        except KeyError:
+>, <Line: +            return default
+>, <Line: +        if as_bytes:
+>, <Line: +            rv = rv.encode('latin1')
+>, <Line: +        if type is None:
+>, <Line: +            return rv
+>, <Line: +        try:
+>, <Line: +            return type(rv)
+>, <Line: +        except ValueError:
+>, <Line: +            return default
+>, <Line: +    def getlist(self, key, type=None, as_bytes=False):
+>, <Line: +        """Return the list of items for a given key. If that key is not in the
+>, <Line: +        :class:`Headers`, the return value will be an empty list.  Just as
+>, <Line: +        :meth:`get` :meth:`getlist` accepts a `type` parameter.  All items will
+>, <Line: +        be converted with the callable defined there.
+>, <Line: +        :param key:
+>, <Line: +            The key to be looked up.
+>, <Line: +        :param type:
+>, <Line: +            A callable that is used to cast the value in the :class:`Headers`.
+>, <Line: +            If a :exc:`ValueError` is raised by this callable the value will be
+>, <Line: +            removed from the list.
+>, <Line: +        :param as_bytes:
+>, <Line: +            Return bytes instead of unicode strings.
+>, <Line: +        :return:
+>, <Line: +            A :class:`list` of all the values for the key.
+>, <Line: +        """
+>, <Line: +        ikey = key.lower()
+>, <Line: +        result = []
+>, <Line: +        for k, v in self:
+>, <Line: +            if k.lower() == ikey:
+>, <Line: +                if as_bytes:
+>, <Line: +                    v = v.encode('latin1')
+>, <Line: +                if type is not None:
+>, <Line: +                    try:
+>, <Line: +                        v = type(v)
+>, <Line: +                    except ValueError:
+>, <Line: +                        continue
+>, <Line: +                result.append(v)
+>, <Line: +        return result
+>, <Line: +    def get_all(self, name):
+>, <Line: +        """Return a list of all the values for the named field.
+>, <Line: +        This method is compatible with the :mod:`wsgiref`
+>, <Line: +        :meth:`~wsgiref.headers.Headers.get_all` method.
+>, <Line: +        """
+>, <Line: +        return self.getlist(name)
+>, <Line: +    def items(self, lower=False):
+>, <Line: +        for key, value in self:
+>, <Line: +            if lower:
+>, <Line: +                key = key.lower()
+>, <Line: +            yield key, value
+>, <Line: +    def keys(self, lower=False):
+>, <Line: +        for key, _ in self.items(lower):
+>, <Line: +            yield key
+>, <Line: +    def values(self):
+>, <Line: +        for _, value in self.items():
+>, <Line: +            yield value
+>, <Line: +    def extend(self, iterable):
+>, <Line: +        """Extend the headers with a dict or an iterable yielding keys and
+>, <Line: +        values.
+>, <Line: +        """
+>, <Line: +        if isinstance(iterable, dict):
+>, <Line: +            for key, value in iterable.items():
+>, <Line: +                if isinstance(value, (tuple, list)):
+>, <Line: +                    for v in value:
+>, <Line: +                        self.add(key, v)
+>, <Line: +                else:
+>, <Line: +                    self.add(key, value)
+>, <Line: +        else:
+>, <Line: +            for key, value in iterable:
+>, <Line: +                self.add(key, value)
+>, <Line: +    def __delitem__(self, key, _index_operation=True):
+>, <Line: +        if _index_operation and isinstance(key, (int, slice)):
+>, <Line: +            del self._list[key]
+>, <Line: +            return
+>, <Line: +        key = key.lower()
+>, <Line: +        new = []
+>, <Line: +        for k, v in self._list:
+>, <Line: +            if k.lower() != key:
+>, <Line: +                new.append((k, v))
+>, <Line: +        self._list[:] = new
+>, <Line: +    def remove(self, key):
+>, <Line: +        """Remove a key.
+>, <Line: +        :param key:
+>, <Line: +            The key to be removed.
+>, <Line: +        """
+>, <Line: +        return self.__delitem__(key, _index_operation=False)
+>, <Line: +    def pop(self, key=None, default=_missing):
+>, <Line: +        """Removes and returns a key or index.
+>, <Line: +        :param key:
+>, <Line: +            The key to be popped.  If this is an integer the item at that
+>, <Line: +            position is removed, if it's a string the value for that key is.
+>, <Line: +            If the key is omitted or `None` the last item is removed.
+>, <Line: +        :return:
+>, <Line: +            An item.
+>, <Line: +        """
+>, <Line: +        if key is None:
+>, <Line: +            return self._list.pop()
+>, <Line: +        if isinstance(key, int):
+>, <Line: +            return self._list.pop(key)
+>, <Line: +        try:
+>, <Line: +            rv = self[key]
+>, <Line: +            self.remove(key)
+>, <Line: +        except KeyError:
+>, <Line: +            if default is not _missing:
+>, <Line: +                return default
+>, <Line: +            raise
+>, <Line: +        return rv
+>, <Line: +    def popitem(self):
+>, <Line: +        """Removes a key or index and returns a (key, value) item."""
+>, <Line: +        return self.pop()
+>, <Line: +    def __contains__(self, key):
+>, <Line: +        """Check if a key is present."""
+>, <Line: +        try:
+>, <Line: +            self.__getitem__(key, _get_mode=True)
+>, <Line: +        except KeyError:
+>, <Line: +            return False
+>, <Line: +        return True
+>, <Line: +    has_key = __contains__
+>, <Line: +    def __iter__(self):
+>, <Line: +        """Yield ``(key, value)`` tuples."""
+>, <Line: +        return iter(self._list)
+>, <Line: +    def __len__(self):
+>, <Line: +        return len(self._list)
+>, <Line: +    def add(self, _key, _value, **kw):
+>, <Line: +        """Add a new header tuple to the list.
+>, <Line: +        Keyword arguments can specify additional parameters for the header
+>, <Line: +        value, with underscores converted to dashes::
+>, <Line: +        >>> d = Headers()
+>, <Line: +        >>> d.add('Content-Type', 'text/plain')
+>, <Line: +        >>> d.add('Content-Disposition', 'attachment', filename='foo.png')
+>, <Line: +        The keyword argument dumping uses :func:`dump_options_header`
+>, <Line: +        behind the scenes.
+>, <Line: +        """
+>, <Line: +        if kw:
+>, <Line: +            _value = _options_header_vkw(_value, kw)
+>, <Line: +        _value = unicodify_header_value(_value)
+>, <Line: +        self._validate_value(_value)
+>, <Line: +        self._list.append((_key, _value))
+>, <Line: +    def _validate_value(self, value):
+>, <Line: +        if not isinstance(value, str):
+>, <Line: +            raise TypeError('Value should be unicode.')
+>, <Line: +        if u'\n' in value or u'\r' in value:
+>, <Line: +            raise ValueError('Detected newline in header value.  This is '
+>, <Line: +                             'a potential security problem')
+>, <Line: +    def add_header(self, _key, _value, **_kw):
+>, <Line: +        """Add a new header tuple to the list.
+>, <Line: +        An alias for :meth:`add` for compatibility with the :mod:`wsgiref`
+>, <Line: +        :meth:`~wsgiref.headers.Headers.add_header` method.
+>, <Line: +        """
+>, <Line: +        self.add(_key, _value, **_kw)
+>, <Line: +    def clear(self):
+>, <Line: +        """Clears all headers."""
+>, <Line: +        del self._list[:]
+>, <Line: +    def set(self, _key, _value, **kw):
+>, <Line: +        """Remove all header tuples for `key` and add a new one.  The newly
+>, <Line: +        added key either appears at the end of the list if there was no
+>, <Line: +        entry or replaces the first one.
+>, <Line: +        Keyword arguments can specify additional parameters for the header
+>, <Line: +        value, with underscores converted to dashes.  See :meth:`add` for
+>, <Line: +        more information.
+>, <Line: +        :param key:
+>, <Line: +            The key to be inserted.
+>, <Line: +        :param value:
+>, <Line: +            The value to be inserted.
+>, <Line: +        """
+>, <Line: +        if kw:
+>, <Line: +            _value = _options_header_vkw(_value, kw)
+>, <Line: +        _value = unicodify_header_value(_value)
+>, <Line: +        self._validate_value(_value)
+>, <Line: +        if not self._list:
+>, <Line: +            self._list.append((_key, _value))
+>, <Line: +            return
+>, <Line: +        listiter = iter(self._list)
+>, <Line: +        ikey = _key.lower()
+>, <Line: +        for idx, (old_key, old_value) in enumerate(listiter):
+>, <Line: +            if old_key.lower() == ikey:
+>, <Line: +                # replace first ocurrence
+>, <Line: +                self._list[idx] = (_key, _value)
+>, <Line: +                break
+>, <Line: +        else:
+>, <Line: +            self._list.append((_key, _value))
+>, <Line: +            return
+>, <Line: +        self._list[idx + 1:] = [t for t in listiter if t[0].lower() != ikey]
+>, <Line: +    def setdefault(self, key, value):
+>, <Line: +        """Returns the value for the key if it is in the dict, otherwise it
+>, <Line: +        returns `default` and sets that value for `key`.
+>, <Line: +        :param key:
+>, <Line: +            The key to be looked up.
+>, <Line: +        :param default:
+>, <Line: +            The default value to be returned if the key is not in the dict.  If
+>, <Line: +            not further specified it's `None`.
+>, <Line: +        """
+>, <Line: +        if key in self:
+>, <Line: +            return self[key]
+>, <Line: +        self.set(key, value)
+>, <Line: +        return value
+>, <Line: +    def __setitem__(self, key, value):
+>, <Line: +        """Like :meth:`set` but also supports index/slice based setting."""
+>, <Line: +        if isinstance(key, (slice, int)):
+>, <Line: +            if isinstance(key, int):
+>, <Line: +                value = [value]
+>, <Line: +            value = [(k, unicodify_header_value(v)) for (k, v) in value]
+>, <Line: +            [self._validate_value(v) for (k, v) in value]
+>, <Line: +            if isinstance(key, int):
+>, <Line: +                self._list[key] = value[0]
+>, <Line: +            else:
+>, <Line: +                self._list[key] = value
+>, <Line: +        else:
+>, <Line: +            self.set(key, value)
+>, <Line: +    def to_list(self, charset='iso-8859-1'):
+>, <Line: +        """Convert the headers into a list suitable for WSGI."""
+>, <Line: +        from warnings import warn
+>, <Line: +        warn(DeprecationWarning('Method removed, use to_wsgi_list instead'),
+>, <Line: +             stacklevel=2)
+>, <Line: +        return self.to_wsgi_list()
+>, <Line: +    def to_wsgi_list(self):
+>, <Line: +        """Convert the headers into a list suitable for WSGI.
+>, <Line: +        The values are byte strings in Python 2 converted to latin1 and unicode
+>, <Line: +        strings in Python 3 for the WSGI server to encode.
+>, <Line: +        :return: list
+>, <Line: +        """
+>, <Line: +        return list(self)
+>, <Line: +    def copy(self):
+>, <Line: +        return self.__class__(self._list)
+>, <Line: +    def __copy__(self):
+>, <Line: +        return self.copy()
+>, <Line: +    def __str__(self):
+>, <Line: +        """Returns formatted headers suitable for HTTP transmission."""
+>, <Line: +        strs = []
+>, <Line: +        for key, value in self.to_wsgi_list():
+>, <Line: +            strs.append('%s: %s' % (key, value))
+>, <Line: +        strs.append('\r\n')
+>, <Line: +        return '\r\n'.join(strs)
+>, <Line: +    def __repr__(self):
+>, <Line: +        return '%s(%r)' % (
+>, <Line: +            self.__class__.__name__,
+>, <Line: +            list(self)
+>, <Line: +        )
+>, <Line: +class ImmutableHeadersMixin(object):
+>, <Line: +    """Makes a :class:`Headers` immutable.  We do not mark them as
+>, <Line: +    hashable though since the only usecase for this datastructure
+>, <Line: +    in Werkzeug is a view on a mutable structure.
+>, <Line: +    :private:
+>, <Line: +    """
+>, <Line: +    def __delitem__(self, key):
+>, <Line: +        is_immutable(self)
+>, <Line: +    def __setitem__(self, key, value):
+>, <Line: +        is_immutable(self)
+>, <Line: +    set = __setitem__
+>, <Line: +    def add(self, item):
+>, <Line: +        is_immutable(self)
+>, <Line: +    remove = add_header = add
+>, <Line: +    def extend(self, iterable):
+>, <Line: +        is_immutable(self)
+>, <Line: +    def insert(self, pos, value):
+>, <Line: +        is_immutable(self)
+>, <Line: +    def pop(self, index=-1):
+>, <Line: +        is_immutable(self)
+>, <Line: +    def popitem(self):
+>, <Line: +        is_immutable(self)
+>, <Line: +    def setdefault(self, key, default):
+>, <Line: +        is_immutable(self)
+>, <Line: +def dump_options_header(header, options):
+>, <Line: +    """The reverse function to :func:`parse_options_header`.
+>, <Line: +    :param header:
+>, <Line: +        The header to dump.
+>, <Line: +    :param options:
+>, <Line: +        A dict of options to append.
+>, <Line: +    """
+>, <Line: +    segments = []
+>, <Line: +    if header is not None:
+>, <Line: +        segments.append(header)
+>, <Line: +    for key, value in options.items():
+>, <Line: +        if value is None:
+>, <Line: +            segments.append(key)
+>, <Line: +        else:
+>, <Line: +            segments.append('%s=%s' % (key, quote_header_value(value)))
+>, <Line: +    return '; '.join(segments)
+>, <Line: +def dump_header(iterable, allow_token=True):
+>, <Line: +    """Dump an HTTP header again.  This is the reversal of
+>, <Line: +    :func:`parse_list_header`, :func:`parse_set_header` and
+>, <Line: +    :func:`parse_dict_header`.  This also quotes strings that include an
+>, <Line: +    equals sign unless you pass it as dict of key, value pairs.
+>, <Line: +    >>> dump_header({'foo': 'bar baz'})
+>, <Line: +    'foo="bar baz"'
+>, <Line: +    >>> dump_header(('foo', 'bar baz'))
+>, <Line: +    'foo, "bar baz"'
+>, <Line: +    :param iterable:
+>, <Line: +        The iterable or dict of values to quote.
+>, <Line: +    :param allow_token:
+>, <Line: +        If set to `False` tokens as values are disallowed.
+>, <Line: +        See :func:`quote_header_value` for more details.
+>, <Line: +    """
+>, <Line: +    if isinstance(iterable, dict):
+>, <Line: +        items = []
+>, <Line: +        for key, value in iterable.items():
+>, <Line: +            if value is None:
+>, <Line: +                items.append(key)
+>, <Line: +            else:
+>, <Line: +                items.append('%s=%s' % (
+>, <Line: +                    key,
+>, <Line: +                    quote_header_value(value, allow_token=allow_token)
+>, <Line: +                ))
+>, <Line: +    else:
+>, <Line: +        items = [quote_header_value(x, allow_token=allow_token)
+>, <Line: +                 for x in iterable]
+>, <Line: +    return ', '.join(items)
+>, <Line: +def parse_list_header(value):
+>, <Line: +    """Parse lists as described by RFC 2068 Section 2.
+>, <Line: +    In particular, parse comma-separated lists where the elements of
+>, <Line: +    the list may include quoted-strings.  A quoted-string could
+>, <Line: +    contain a comma.  A non-quoted string could have quotes in the
+>, <Line: +    middle.  Quotes are removed automatically after parsing.
+>, <Line: +    It basically works like :func:`parse_set_header` just that items
+>, <Line: +    may appear multiple times and case sensitivity is preserved.
+>, <Line: +    The return value is a standard :class:`list`:
+>, <Line: +    >>> parse_list_header('token, "quoted value"')
+>, <Line: +    ['token', 'quoted value']
+>, <Line: +    To create a header from the :class:`list` again, use the
+>, <Line: +    :func:`dump_header` function.
+>, <Line: +    :param value:
+>, <Line: +        A string with a list header.
+>, <Line: +    :return:
+>, <Line: +        :class:`list`
+>, <Line: +    """
+>, <Line: +    result = []
+>, <Line: +    for item in _parse_list_header(value):
+>, <Line: +        if item[:1] == item[-1:] == '"':
+>, <Line: +            item = unquote_header_value(item[1:-1])
+>, <Line: +        result.append(item)
+>, <Line: +    return result
+>, <Line: +def parse_dict_header(value, cls=dict):
+>, <Line: +    """Parse lists of key, value pairs as described by RFC 2068 Section 2 and
+>, <Line: +    convert them into a python dict (or any other mapping object created from
+>, <Line: +    the type with a dict like interface provided by the `cls` arugment):
+>, <Line: +    >>> d = parse_dict_header('foo="is a fish", bar="as well"')
+>, <Line: +    >>> type(d) is dict
+>, <Line: +    True
+>, <Line: +    >>> sorted(d.items())
+>, <Line: +    [('bar', 'as well'), ('foo', 'is a fish')]
+>, <Line: +    If there is no value for a key it will be `None`:
+>, <Line: +    >>> parse_dict_header('key_without_value')
+>, <Line: +    {'key_without_value': None}
+>, <Line: +    To create a header from the :class:`dict` again, use the
+>, <Line: +    :func:`dump_header` function.
+>, <Line: +    :param value:
+>, <Line: +        A string with a dict header.
+>, <Line: +    :param cls:
+>, <Line: +        Callable to use for storage of parsed results.
+>, <Line: +    :return:
+>, <Line: +        An instance of `cls`
+>, <Line: +    """
+>, <Line: +    result = cls()
+>, <Line: +    if not isinstance(value, str):
+>, <Line: +        # XXX: validate
+>, <Line: +        value = bytes_to_wsgi(value)
+>, <Line: +    for item in _parse_list_header(value):
+>, <Line: +        if '=' not in item:
+>, <Line: +            result[item] = None
+>, <Line: +            continue
+>, <Line: +        name, value = item.split('=', 1)
+>, <Line: +        if value[:1] == value[-1:] == '"':
+>, <Line: +            value = unquote_header_value(value[1:-1])
+>, <Line: +        result[name] = value
+>, <Line: +    return result
+>, <Line: +def parse_options_header(value):
+>, <Line: +    """Parse a ``Content-Type`` like header into a tuple with the content
+>, <Line: +    type and the options:
+>, <Line: +    >>> parse_options_header('text/html; charset=utf8')
+>, <Line: +    ('text/html', {'charset': 'utf8'})
+>, <Line: +    This should not be used to parse ``Cache-Control`` like headers that use
+>, <Line: +    a slightly different format.  For these headers use the
+>, <Line: +    :func:`parse_dict_header` function.
+>, <Line: +    :param value:
+>, <Line: +        The header to parse.
+>, <Line: +    :return:
+>, <Line: +        (str, options)
+>, <Line: +    """
+>, <Line: +    def _tokenize(string):
+>, <Line: +        for match in _option_header_piece_re.finditer(string):
+>, <Line: +            key, value = match.groups()
+>, <Line: +            key = unquote_header_value(key)
+>, <Line: +            if value is not None:
+>, <Line: +                value = unquote_header_value(value, key == 'filename')
+>, <Line: +            yield key, value
+>, <Line: +    if not value:
+>, <Line: +        return '', {}
+>, <Line: +    parts = _tokenize(';' + value)
+>, <Line: +    name = next(parts)[0]
+>, <Line: +    extra = dict(parts)
+>, <Line: +    return name, extra
+>, <Line: +def parse_date(value):
+>, <Line: +    """Parse one of the following date formats into a datetime object:
+>, <Line: +    .. sourcecode:: text
+>, <Line: +        Sun, 06 Nov 1994 08:49:37 GMT  ; RFC 822, updated by RFC 1123
+>, <Line: +        Sunday, 06-Nov-94 08:49:37 GMT ; RFC 850, obsoleted by RFC 1036
+>, <Line: +        Sun Nov  6 08:49:37 1994       ; ANSI C's asctime() format
+>, <Line: +    If parsing fails the return value is `None`.
+>, <Line: +    :param value:
+>, <Line: +        A string with a supported date format.
+>, <Line: +    :return:
+>, <Line: +        A :class:`datetime.datetime` object.
+>, <Line: +    """
+>, <Line: +    if value:
+>, <Line: +        t = parsedate_tz(value.strip())
+>, <Line: +        if t is not None:
+>, <Line: +            try:
+>, <Line: +                year = t[0]
+>, <Line: +                # unfortunately that function does not tell us if two digit
+>, <Line: +                # years were part of the string, or if they were prefixed
+>, <Line: +                # with two zeroes.  So what we do is to assume that 69-99
+>, <Line: +                # refer to 1900, and everything below to 2000
+>, <Line: +                if year >= 0 and year <= 68:
+>, <Line: +                    year += 2000
+>, <Line: +                elif year >= 69 and year <= 99:
+>, <Line: +                    year += 1900
+>, <Line: +                return datetime(*((year,) + t[1:7])) - \
+>, <Line: +                    timedelta(seconds=t[-1] or 0)
+>, <Line: +            except (ValueError, OverflowError):
+>, <Line: +                return None
+>, <Line: +def _dump_date(d, delim):
+>, <Line: +    """Used for `http_date` and `cookie_date`."""
+>, <Line: +    if d is None:
+>, <Line: +        d = gmtime()
+>, <Line: +    elif isinstance(d, datetime):
+>, <Line: +        d = d.utctimetuple()
+>, <Line: +    elif isinstance(d, (int, float)):
+>, <Line: +        d = gmtime(d)
+>, <Line: +    return '%s, %02d%s%s%s%s %02d:%02d:%02d GMT' % (
+>, <Line: +        ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')[d.tm_wday],
+>, <Line: +        d.tm_mday, delim,
+>, <Line: +        ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+>, <Line: +         'Oct', 'Nov', 'Dec')[d.tm_mon - 1],
+>, <Line: +        delim, str(d.tm_year), d.tm_hour, d.tm_min, d.tm_sec
+>, <Line: +    )
+>, <Line: +def http_date(timestamp=None):
+>, <Line: +    """Formats the time to match the RFC1123 date format.
+>, <Line: +    Accepts a floating point number expressed in seconds since the epoch in, a
+>, <Line: +    datetime object or a timetuple.  All times in UTC.  The :func:`parse_date`
+>, <Line: +    function can be used to parse such a date.
+>, <Line: +    Outputs a string in the format ``Wdy, DD Mon YYYY HH:MM:SS GMT``.
+>, <Line: +    :param timestamp:
+>, <Line: +        If provided that date is used, otherwise the current.
+>, <Line: +    """
+>, <Line: +    return _dump_date(timestamp, ' ')
+>, <Line: +def remove_entity_headers(headers, allowed=('expires', 'content-location')):
+>, <Line: +    """Remove all entity headers from a list or :class:`Headers` object.  This
+>, <Line: +    operation works in-place.  `Expires` and `Content-Location` headers are
+>, <Line: +    by default not removed.  The reason for this is :rfc:`2616` section
+>, <Line: +    10.3.5 which specifies some entity headers that should be sent.
+>, <Line: +    :param headers:
+>, <Line: +        A list or :class:`Headers` object.
+>, <Line: +    :param allowed:
+>, <Line: +        A list of headers that should still be allowed even though they are
+>, <Line: +        entity headers.
+>, <Line: +    """
+>, <Line: +    allowed = set(x.lower() for x in allowed)
+>, <Line: +    headers[:] = [(key, value) for key, value in headers if
+>, <Line: +                  not is_entity_header(key) or key.lower() in allowed]
+>, <Line: +def remove_hop_by_hop_headers(headers):
+>, <Line: +    """Remove all HTTP/1.1 "Hop-by-Hop" headers from a list or
+>, <Line: +    :class:`Headers` object.  This operation works in-place.
+>, <Line: +    :param headers:
+>, <Line: +        A list or :class:`Headers` object.
+>, <Line: +    """
+>, <Line: +    headers[:] = [(key, value) for key, value in headers if
+>, <Line: +                  not is_hop_by_hop_header(key)]
+>, <Line: +def is_entity_header(header):
+>, <Line: +    """Check if a header is an entity header.
+>, <Line: +    :param header:
+>, <Line: +        The header to test.
+>, <Line: +    :return:
+>, <Line: +        `True` if it's an entity header, `False` otherwise.
+>, <Line: +    """
+>, <Line: +    return header.lower() in _entity_headers
+>, <Line: +def is_hop_by_hop_header(header):
+>, <Line: +    """Check if a header is an HTTP/1.1 "Hop-by-Hop" header.
+>, <Line: +    :param header:
+>, <Line: +        The header to test.
+>, <Line: +    :return:
+>, <Line: +        `True` if it's an entity header, `False` otherwise.
+>, <Line: +    """
+>, <Line: +    return header.lower() in _hop_by_hop_headers
+>, <Line: +def is_byte_range_valid(start, stop, length):
+>, <Line: +    """Checks if a given byte content range is valid for the given length.
+>, <Line: +    """
+>, <Line: +    if (start is None) != (stop is None):
+>, <Line: +        return False
+>, <Line: +    elif start is None:
+>, <Line: +        return length is None or length >= 0
+>, <Line: +    elif length is None:
+>, <Line: +        return 0 <= start < stop
+>, <Line: +    elif start >= stop:
+>, <Line: +        return False
+>, <Line: +    return 0 <= start < length
+>, <Line: +class FileStorage(object):
+>, <Line: +    """The :class:`FileStorage` class is a thin wrapper over incoming files.
+>, <Line: +    It is used by the request object to represent uploaded files.  All the
+>, <Line: +    attributes of the wrapper stream are proxied by the file storage so
+>, <Line: +    it's possible to do ``storage.read()`` instead of the long form
+>, <Line: +    ``storage.stream.read()``.
+>, <Line: +    """
+>, <Line: +    def __init__(self, stream=None, filename=None, name=None,
+>, <Line: +                 content_type=None, content_length=None,
+>, <Line: +                 headers=None):
+>, <Line: +        self.name = name
+>, <Line: +        self.stream = stream or _empty_stream
+>, <Line: +        # if no filename is provided we can attempt to get the filename
+>, <Line: +        # from the stream object passed.  There we have to be careful to
+>, <Line: +        # skip things like <fdopen>, <stderr> etc.  Python marks these
+>, <Line: +        # special filenames with angular brackets.
+>, <Line: +        if filename is None:
+>, <Line: +            filename = getattr(stream, 'name', None)
+>, <Line: +            s = make_literal_wrapper(filename)
+>, <Line: +            if filename and filename[0] == s('<') and filename[-1] == s('>'):
+>, <Line: +                filename = None
+>, <Line: +            # On Python 3 we want to make sure the filename is always unicode.
+>, <Line: +            # This might not be if the name attribute is bytes due to the
+>, <Line: +            # file being opened from the bytes API.
+>, <Line: +            if isinstance(filename, bytes):
+>, <Line: +                filename = filename.decode(sys.getfilesystemencoding(),
+>, <Line: +                                           'replace')
+>, <Line: +        self.filename = filename
+>, <Line: +        if headers is None:
+>, <Line: +            headers = Headers()
+>, <Line: +        self.headers = headers
+>, <Line: +        if content_type is not None:
+>, <Line: +            headers['Content-Type'] = content_type
+>, <Line: +        if content_length is not None:
+>, <Line: +            headers['Content-Length'] = str(content_length)
+>, <Line: +    def _parse_content_type(self):
+>, <Line: +        if not hasattr(self, '_parsed_content_type'):
+>, <Line: +            self._parsed_content_type = \
+>, <Line: +                parse_options_header(self.content_type)
+>, <Line: +    @property
+>, <Line: +    def content_type(self):
+>, <Line: +        """The content-type sent in the header.  Usually not available"""
+>, <Line: +        return self.headers.get('content-type')
+>, <Line: +    @property
+>, <Line: +    def content_length(self):
+>, <Line: +        """The content-length sent in the header.  Usually not available"""
+>, <Line: +        return int(self.headers.get('content-length') or 0)
+>, <Line: +    @property
+>, <Line: +    def mimetype(self):
+>, <Line: +        """Like :attr:`content_type`, but without parameters (eg, without
+>, <Line: +        charset, type etc.) and always lowercase.  For example if the content
+>, <Line: +        type is ``text/HTML; charset=utf-8`` the mimetype would be
+>, <Line: +        ``'text/html'``.
+>, <Line: +        """
+>, <Line: +        self._parse_content_type()
+>, <Line: +        return self._parsed_content_type[0].lower()
+>, <Line: +    @property
+>, <Line: +    def mimetype_params(self):
+>, <Line: +        """The mimetype parameters as dict.  For example if the content
+>, <Line: +        type is ``text/html; charset=utf-8`` the params would be
+>, <Line: +        ``{'charset': 'utf-8'}``.
+>, <Line: +        """
+>, <Line: +        self._parse_content_type()
+>, <Line: +        return self._parsed_content_type[1]
+>, <Line: +    def save(self, dst, buffer_size=16384):
+>, <Line: +        """Save the file to a destination path or file object.  If the
+>, <Line: +        destination is a file object you have to close it yourself after the
+>, <Line: +        call.  The buffer size is the number of bytes held in memory during
+>, <Line: +        the copy process.  It defaults to 16KB.
+>, <Line: +        For secure file saving also have a look at :func:`secure_filename`.
+>, <Line: +        :param dst:
+>, <Line: +            A filename or open file object the uploaded file is saved to.
+>, <Line: +        :param buffer_size:
+>, <Line: +            The size of the buffer.  This works the same as the `length`
+>, <Line: +            parameter of :func:`shutil.copyfileobj`.
+>, <Line: +        """
+>, <Line: +        from shutil import copyfileobj
+>, <Line: +        close_dst = False
+>, <Line: +        if isinstance(dst, str):
+>, <Line: +            dst = open(dst, 'wb')
+>, <Line: +            close_dst = True
+>, <Line: +        try:
+>, <Line: +            copyfileobj(self.stream, dst, buffer_size)
+>, <Line: +        finally:
+>, <Line: +            if close_dst:
+>, <Line: +                dst.close()
+>, <Line: +    def close(self):
+>, <Line: +        """Close the underlying file if possible."""
+>, <Line: +        try:
+>, <Line: +            self.stream.close()
+>, <Line: +        except Exception:
+>, <Line: +            pass
+>, <Line: +    def __nonzero__(self):
+>, <Line: +        return bool(self.filename)
+>, <Line: +    __bool__ = __nonzero__
+>, <Line: +    def __getattr__(self, name):
+>, <Line: +        return getattr(self.stream, name)
+>, <Line: +    def __iter__(self):
+>, <Line: +        return iter(self.readline, '')
+>, <Line: +    def __repr__(self):
+>, <Line: +        return '<%s: %r (%r)>' % (
+>, <Line: +            self.__class__.__name__,
+>, <Line: +            self.filename,
+>, <Line: +            self.content_type
+>, <Line: +        )
+>, <Line: +class HeaderSet(object):
+>, <Line: +    """Similar to the :class:`ETags` class this implements a set-like
+>, <Line: +    structure. Unlike :class:`ETags` this is case insensitive and used for
+>, <Line: +    vary, allow, and content-language headers.
+>, <Line: +    If not constructed using the :func:`parse_set_header` function the
+>, <Line: +    instantiation works like this:
+>, <Line: +    >>> hs = HeaderSet(['foo', 'bar', 'baz'])
+>, <Line: +    >>> hs
+>, <Line: +    HeaderSet(['foo', 'bar', 'baz'])
+>, <Line: +    """
+>, <Line: +    def __init__(self, headers=None, on_update=None):
+>, <Line: +        self._headers = list(headers or ())
+>, <Line: +        self._set = set([x.lower() for x in self._headers])
+>, <Line: +        self.on_update = on_update
+>, <Line: +    def add(self, header):
+>, <Line: +        """Add a new header to the set."""
+>, <Line: +        self.update((header,))
+>, <Line: +    def remove(self, header):
+>, <Line: +        """Remove a header from the set.  This raises an :exc:`KeyError` if the
+>, <Line: +        header is not in the set.
+>, <Line: +        :param header:
+>, <Line: +            The header to be removed.
+>, <Line: +        """
+>, <Line: +        key = header.lower()
+>, <Line: +        if key not in self._set:
+>, <Line: +            raise KeyError(header)
+>, <Line: +        self._set.remove(key)
+>, <Line: +        for idx, key in enumerate(self._headers):
+>, <Line: +            if key.lower() == header:
+>, <Line: +                del self._headers[idx]
+>, <Line: +                break
+>, <Line: +        if self.on_update is not None:
+>, <Line: +            self.on_update(self)
+>, <Line: +    def update(self, iterable):
+>, <Line: +        """Add all the headers from the iterable to the set.
+>, <Line: +        :param iterable:
+>, <Line: +            Updates the set with the items from the iterable.
+>, <Line: +        """
+>, <Line: +        inserted_any = False
+>, <Line: +        for header in iterable:
+>, <Line: +            key = header.lower()
+>, <Line: +            if key not in self._set:
+>, <Line: +                self._headers.append(header)
+>, <Line: +                self._set.add(key)
+>, <Line: +                inserted_any = True
+>, <Line: +        if inserted_any and self.on_update is not None:
+>, <Line: +            self.on_update(self)
+>, <Line: +    def discard(self, header):
+>, <Line: +        """Like :meth:`remove` but ignores errors.
+>, <Line: +        :param header:
+>, <Line: +            The header to be discarded.
+>, <Line: +        """
+>, <Line: +        try:
+>, <Line: +            return self.remove(header)
+>, <Line: +        except KeyError:
+>, <Line: +            pass
+>, <Line: +    def find(self, header):
+>, <Line: +        """Return the index of the header in the set or return -1 if not found.
+>, <Line: +        :param header:
+>, <Line: +            The header to be looked up.
+>, <Line: +        """
+>, <Line: +        header = header.lower()
+>, <Line: +        for idx, item in enumerate(self._headers):
+>, <Line: +            if item.lower() == header:
+>, <Line: +                return idx
+>, <Line: +        return -1
+>, <Line: +    def index(self, header):
+>, <Line: +        """Return the index of the header in the set or raise an
+>, <Line: +        :exc:`IndexError`.
+>, <Line: +        :param header:
+>, <Line: +            The header to be looked up.
+>, <Line: +        """
+>, <Line: +        rv = self.find(header)
+>, <Line: +        if rv < 0:
+>, <Line: +            raise IndexError(header)
+>, <Line: +        return rv
+>, <Line: +    def clear(self):
+>, <Line: +        """Clear the set."""
+>, <Line: +        self._set.clear()
+>, <Line: +        del self._headers[:]
+>, <Line: +        if self.on_update is not None:
+>, <Line: +            self.on_update(self)
+>, <Line: +    def as_set(self, preserve_casing=False):
+>, <Line: +        """Return the set as real python set type.  When calling this, all
+>, <Line: +        the items are converted to lowercase and the ordering is lost.
+>, <Line: +        :param preserve_casing:
+>, <Line: +            If set to `True` the items in the set returned will have the
+>, <Line: +            original case like in the :class:`HeaderSet`, otherwise they will
+>, <Line: +            be lowercase.
+>, <Line: +        """
+>, <Line: +        if preserve_casing:
+>, <Line: +            return set(self._headers)
+>, <Line: +        return set(self._set)
+>, <Line: +    def to_header(self):
+>, <Line: +        """Convert the header set into an HTTP header string."""
+>, <Line: +        return ', '.join(map(quote_header_value, self._headers))
+>, <Line: +    def __getitem__(self, idx):
+>, <Line: +        return self._headers[idx]
+>, <Line: +    def __delitem__(self, idx):
+>, <Line: +        rv = self._headers.pop(idx)
+>, <Line: +        self._set.remove(rv.lower())
+>, <Line: +        if self.on_update is not None:
+>, <Line: +            self.on_update(self)
+>, <Line: +    def __setitem__(self, idx, value):
+>, <Line: +        old = self._headers[idx]
+>, <Line: +        self._set.remove(old.lower())
+>, <Line: +        self._headers[idx] = value
+>, <Line: +        self._set.add(value.lower())
+>, <Line: +        if self.on_update is not None:
+>, <Line: +            self.on_update(self)
+>, <Line: +    def __contains__(self, header):
+>, <Line: +        return header.lower() in self._set
+>, <Line: +    def __len__(self):
+>, <Line: +        return len(self._set)
+>, <Line: +    def __iter__(self):
+>, <Line: +        return iter(self._headers)
+>, <Line: +    def __nonzero__(self):
+>, <Line: +        return bool(self._set)
+>, <Line: +    def __str__(self):
+>, <Line: +        return self.to_header()
+>, <Line: +    def __repr__(self):
+>, <Line: +        return '%s(%r)' % (
+>, <Line: +            self.__class__.__name__,
+>, <Line: +            self._headers
+>, <Line: +        )
+>, <Line: +def parse_set_header(value, on_update=None):
+>, <Line: +    """Parse a set-like header and return a
+>, <Line: +    :class:`~HeaderSet` object:
+>, <Line: +    >>> hs = parse_set_header('token, "quoted value"')
+>, <Line: +    The return value is an object that treats the items case-insensitively
+>, <Line: +    and keeps the order of the items:
+>, <Line: +    >>> 'TOKEN' in hs
+>, <Line: +    True
+>, <Line: +    >>> hs.index('quoted value')
+>, <Line: +    1
+>, <Line: +    >>> hs
+>, <Line: +    HeaderSet(['token', 'quoted value'])
+>, <Line: +    To create a header from the :class:`HeaderSet` again, use the
+>, <Line: +    :func:`dump_header` function.
+>, <Line: +    :param value:
+>, <Line: +        A set header to be parsed.
+>, <Line: +    :param on_update:
+>, <Line: +        An optional callable that is called every time a value on the
+>, <Line: +        :class:`~HeaderSet` object is changed.
+>, <Line: +    :return:
+>, <Line: +        A:class:`~HeaderSet`
+>, <Line: +    """
+>, <Line: +    if not value:
+>, <Line: +        return HeaderSet(None, on_update)
+>, <Line: +    return HeaderSet(parse_list_header(value), on_update)
+>]
+[]

@@ -1,0 +1,177 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_tsv;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import com.google.common.collect.ImmutableMap;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
+>, <Line: +import htsjdk.variant.vcf.VCFHeaderLineType;
+>, <Line: +import java.io.File;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +/**
+>, <Line: + * Configuration for generic TSV annotation.
+>, <Line: + *
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenericTSVAnnotationOptions extends DBAnnotationOptions {
+>, <Line: +	/**
+>, <Line: +	 * Construct new TSV annotation configuration from command line option value.
+>, <Line: +	 * 
+>, <Line: +	 * <p>
+>, <Line: +	 * The value must have the format:
+>, <Line: +	 * <code>pathToTsvFile:oneBasedOffset:colContig:colStart:colEnd:colRef(or=0):
+>, <Line: +	 * colAlt(or=0):colValue:fieldType:fieldName:fieldDescription:accumulationStrategy</code>
+>, <Line: +	 * </p>
+>, <Line: +	 * 
+>, <Line: +	 * @param strValue
+>, <Line: +	 *            String to parse from
+>, <Line: +	 * @return Constructed {@link BedAnnotationOptions} from the given string value.
+>, <Line: +	 */
+>, <Line: +	public static GenericTSVAnnotationOptions parseFrom(String strValue) {
+>, <Line: +		String tokens[] = strValue.split(":");
+>, <Line: +		if (tokens.length != 13) {
+>, <Line: +			throw new RuntimeException("Wrong number of tokens tokens in TSV annotation configuration " + strValue
+>, <Line: +					+ " expected 13 but was " + tokens.length);
+>, <Line: +		}
+>, <Line: +		final String pathTsvFile = tokens[0];
+>, <Line: +		final int oneBasedOffset = Integer.parseInt(tokens[1]);
+>, <Line: +		final int colContig = Integer.parseInt(tokens[2]);
+>, <Line: +		final int colStart = Integer.parseInt(tokens[3]);
+>, <Line: +		final int colEnd = Integer.parseInt(tokens[4]);
+>, <Line: +		final int colRef = Integer.parseInt(tokens[5]);
+>, <Line: +		final int colAlt = Integer.parseInt(tokens[6]);
+>, <Line: +		final boolean refAnnotated = "R".equals(tokens[7]);
+>, <Line: +		final int colValue = Integer.parseInt(tokens[8]);
+>, <Line: +		final String fieldType = tokens[9];
+>, <Line: +		final String fieldName = tokens[10];
+>, <Line: +		final String fieldDescription = tokens[11];
+>, <Line: +		final String accStrategy = tokens[12];
+>, <Line: +		final boolean ovlAsIdentical = (colRef == 0) || (colAlt == 0);
+>, <Line: +		final GenericTSVAnnotationTarget target = ((colRef == 0) || (colAlt == 0)) ? GenericTSVAnnotationTarget.POSITION
+>, <Line: +				: GenericTSVAnnotationTarget.VARIANT;
+>, <Line: +		return new GenericTSVAnnotationOptions(true, ovlAsIdentical, "", MultipleMatchBehaviour.BEST_ONLY,
+>, <Line: +				new File(pathTsvFile), target, (oneBasedOffset != 0), colContig, colStart, colEnd, colRef, colAlt,
+>, <Line: +				refAnnotated, ImmutableList.of(fieldName),
+>, <Line: +				ImmutableMap.of(fieldName,
+>, <Line: +						new GenericTSVValueColumnDescription(colValue, VCFHeaderLineType.valueOf(fieldType), fieldName,
+>, <Line: +								fieldDescription, GenericTSVAccumulationStrategy.valueOf(accStrategy))));
+>, <Line: +	}
+>, <Line: +	/** File with TSV annotations. */
+>, <Line: +	private File tsvFile;
+>, <Line: +	/** Configuration of annotation target. */
+>, <Line: +	private GenericTSVAnnotationTarget annotationTarget = GenericTSVAnnotationTarget.VARIANT;
+>, <Line: +	/** Whether or not coordinates are 1-based. */
+>, <Line: +	private boolean oneBasedPositions = true;
+>, <Line: +	/** 1-based index of column with contig name */
+>, <Line: +	private int contigColumnIndex = 1;
+>, <Line: +	/** 1-based index of column with begin position. */
+>, <Line: +	private int beginColumnIndex = 2;
+>, <Line: +	/** 1-based index of column with end position. */
+>, <Line: +	private int endColumnIndex = 3;
+>, <Line: +	/** 1-based index of column with reference allele, 0 for none. */
+>, <Line: +	private int refAlleleColumnIndex = 4;
+>, <Line: +	/** 1-based index of column with variant allele, 0 for none. */
+>, <Line: +	private int altAlleleColumnIndex = 5;
+>, <Line: +	/** Whether or not the ref allele can be annotated. */
+>, <Line: +	private boolean refAlleleAnnotated = false;
+>, <Line: +	/** Column description names as ordered as in file. */
+>, <Line: +	private List<String> columnNames = new ArrayList<>();
+>, <Line: +	/** Description of value columns. */
+>, <Line: +	private Map<String, GenericTSVValueColumnDescription> valueColumnDescriptions = new HashMap<>();
+>, <Line: +	public GenericTSVAnnotationOptions(boolean reportOverlapping, boolean reportOverlappingAsIdentical,
+>, <Line: +			String identifierPrefix, MultipleMatchBehaviour multiMatchBehaviour, File tsvFile,
+>, <Line: +			GenericTSVAnnotationTarget annotationTarget, boolean oneBasedPositions, int contigColumnIndex,
+>, <Line: +			int beginColumnIndex, int endColumnIndex, int refAlleleColumnIndex, int altAlleleColumnIndex,
+>, <Line: +			boolean refAlleleAnnotated, List<String> columnNames,
+>, <Line: +			Map<String, GenericTSVValueColumnDescription> valueColumnDescriptions) {
+>, <Line: +		super(reportOverlapping, reportOverlappingAsIdentical, identifierPrefix, multiMatchBehaviour);
+>, <Line: +		this.tsvFile = tsvFile;
+>, <Line: +		this.annotationTarget = annotationTarget;
+>, <Line: +		this.oneBasedPositions = oneBasedPositions;
+>, <Line: +		this.contigColumnIndex = contigColumnIndex;
+>, <Line: +		this.beginColumnIndex = beginColumnIndex;
+>, <Line: +		this.endColumnIndex = endColumnIndex;
+>, <Line: +		this.refAlleleColumnIndex = refAlleleColumnIndex;
+>, <Line: +		this.altAlleleColumnIndex = altAlleleColumnIndex;
+>, <Line: +		this.refAlleleAnnotated = refAlleleAnnotated;
+>, <Line: +		this.columnNames = columnNames;
+>, <Line: +		this.valueColumnDescriptions = valueColumnDescriptions;
+>, <Line: +	}
+>, <Line: +	public File getTsvFile() {
+>, <Line: +		return tsvFile;
+>, <Line: +	}
+>, <Line: +	public void setTsvFile(File tsvFile) {
+>, <Line: +		this.tsvFile = tsvFile;
+>, <Line: +	}
+>, <Line: +	public GenericTSVAnnotationTarget getAnnotationTarget() {
+>, <Line: +		return annotationTarget;
+>, <Line: +	}
+>, <Line: +	public void setAnnotationTarget(GenericTSVAnnotationTarget annotationTarget) {
+>, <Line: +		this.annotationTarget = annotationTarget;
+>, <Line: +	}
+>, <Line: +	public boolean isOneBasedPositions() {
+>, <Line: +		return oneBasedPositions;
+>, <Line: +	}
+>, <Line: +	public void setOneBasedPositions(boolean oneBasedPositions) {
+>, <Line: +		this.oneBasedPositions = oneBasedPositions;
+>, <Line: +	}
+>, <Line: +	public int getContigColumnIndex() {
+>, <Line: +		return contigColumnIndex;
+>, <Line: +	}
+>, <Line: +	public void setContigColumnIndex(int contigColumnIndex) {
+>, <Line: +		this.contigColumnIndex = contigColumnIndex;
+>, <Line: +	}
+>, <Line: +	public int getBeginColumnIndex() {
+>, <Line: +		return beginColumnIndex;
+>, <Line: +	}
+>, <Line: +	public void setBeginColumnIndex(int beginColumnIndex) {
+>, <Line: +		this.beginColumnIndex = beginColumnIndex;
+>, <Line: +	}
+>, <Line: +	public int getEndColumnIndex() {
+>, <Line: +		return endColumnIndex;
+>, <Line: +	}
+>, <Line: +	public void setEndColumnIndex(int endColumnIndex) {
+>, <Line: +		this.endColumnIndex = endColumnIndex;
+>, <Line: +	}
+>, <Line: +	public int getRefAlleleColumnIndex() {
+>, <Line: +		return refAlleleColumnIndex;
+>, <Line: +	}
+>, <Line: +	public void setRefAlleleColumnIndex(int refAlleleColumnIndex) {
+>, <Line: +		this.refAlleleColumnIndex = refAlleleColumnIndex;
+>, <Line: +	}
+>, <Line: +	public int getAltAlleleColumnIndex() {
+>, <Line: +		return altAlleleColumnIndex;
+>, <Line: +	}
+>, <Line: +	public void setAltAlleleColumnIndex(int altAlleleColumnIndex) {
+>, <Line: +		this.altAlleleColumnIndex = altAlleleColumnIndex;
+>, <Line: +	}
+>, <Line: +	public boolean isRefAlleleAnnotated() {
+>, <Line: +		return refAlleleAnnotated;
+>, <Line: +	}
+>, <Line: +	public void setRefAlleleAnnotated(boolean refAlleleAnnotated) {
+>, <Line: +		this.refAlleleAnnotated = refAlleleAnnotated;
+>, <Line: +	}
+>, <Line: +	public List<String> getColumnNames() {
+>, <Line: +		return columnNames;
+>, <Line: +	}
+>, <Line: +	public void setColumnNames(List<String> columnNames) {
+>, <Line: +		this.columnNames = columnNames;
+>, <Line: +	}
+>, <Line: +	public Map<String, GenericTSVValueColumnDescription> getValueColumnDescriptions() {
+>, <Line: +		return valueColumnDescriptions;
+>, <Line: +	}
+>, <Line: +	public void setValueColumnDescriptions(Map<String, GenericTSVValueColumnDescription> valueColumnDescriptions) {
+>, <Line: +		this.valueColumnDescriptions = valueColumnDescriptions;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return "GenericTSVAnnotationOptions [tsvFile=" + tsvFile + ", annotationTarget=" + annotationTarget
+>, <Line: +				+ ", oneBasedPositions=" + oneBasedPositions + ", contigColumnIndex=" + contigColumnIndex
+>, <Line: +				+ ", beginColumnIndex=" + beginColumnIndex + ", endColumnIndex=" + endColumnIndex
+>, <Line: +				+ ", refAlleleColumnIndex=" + refAlleleColumnIndex + ", altAlleleColumnIndex=" + altAlleleColumnIndex
+>, <Line: +				+ ", refAlleleAnnotated=" + refAlleleAnnotated + ", columnNames=" + columnNames
+>, <Line: +				+ ", valueColumnDescriptions=" + valueColumnDescriptions + "]";
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

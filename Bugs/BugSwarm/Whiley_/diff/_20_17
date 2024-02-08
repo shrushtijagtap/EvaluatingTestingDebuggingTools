@@ -1,0 +1,10 @@
+[<Line: +public type string is char[]
+>, <Line: +public function toBytes(string s) -> byte[]:
+>, <Line: +    byte[] r = [0b; |s|]
+>, <Line: +public function fromBytes(byte[] data) -> string:
+>]
+[<Line: -public type string is [char]
+>, <Line: -public function toBytes(string s) -> [byte]:
+>, <Line: -    [byte] r = [0b; |s|]
+>, <Line: -public function fromBytes([byte] data) -> string:
+>]

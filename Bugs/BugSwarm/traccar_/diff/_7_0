@@ -1,0 +1,19 @@
+[<Line: +            "(?:\\d+,){7}" +                    // Reserved
+>, <Line: +            "[01]," +                           // Corner packet
+>, <Line: +            "(?:\\d+,){8}" +                    // Reserved
+>, <Line: +            "([01])," +                         // Course bit 0
+>, <Line: +            "([01])," +                         // Course bit 1
+>, <Line: +            "([01])," +                         // Course bit 2
+>, <Line: +            "([01])," +                         // Course bit 3
+>, <Line: +            "\\*(\\p{XDigit}{2})");             // Checksum
+>, <Line: +        int course =
+>, <Line: +                (Integer.parseInt(parser.group(index++)) << 3) +
+>, <Line: +                (Integer.parseInt(parser.group(index++)) << 2) +
+>, <Line: +                (Integer.parseInt(parser.group(index++)) << 1) +
+>, <Line: +                (Integer.parseInt(parser.group(index++)));
+>, <Line: +        if (course > 0 && course <= 8) {
+>, <Line: +            position.setCourse((course - 1) * 45);
+>, <Line: +        }
+>]
+[<Line: -            ".*");
+>]

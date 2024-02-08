@@ -1,0 +1,36 @@
+[<Line: +<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+>, <Line: +         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+>, <Line: +    <groupId>org.mp4parser</groupId>
+>, <Line: +    <url>https://github.com/sannies/mp4parser</url>
+>, <Line: +    <version>1.9.28-SNAPSHOT</version>
+>, <Line: +                <version>1.7</version>
+>, <Line: +                        <version>1.8.6</version>
+>, <Line: +            <plugin>
+>, <Line: +                <groupId>org.apache.maven.plugins</groupId>
+>, <Line: +                <artifactId>maven-javadoc-plugin</artifactId>
+>, <Line: +                <version>2.10.1</version>
+>, <Line: +            </plugin>
+>, <Line: +            <version>1.8.6</version>
+>, <Line: +            <scope>provided</scope>
+>, <Line: +                        <version>1.5</version>
+>, <Line: +                    <plugin>
+>, <Line: +                        <artifactId>maven-deploy-plugin</artifactId>
+>, <Line: +                        <version>2.8.2</version>
+>, <Line: +                    </plugin>
+>, <Line: +        <tag>mp4parser-project-1.9.5</tag>
+>]
+[<Line: -<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+>, <Line: -    <groupId>com.googlecode.mp4parser</groupId>
+>, <Line: -    <url>http://code.google.com/p/mp4parser/</url>
+>, <Line: -    <version>1.1.18-SNAPSHOT</version>
+>, <Line: -                <version>1.5</version>
+>, <Line: -                        <version>1.8.2</version>
+>, <Line: -            <version>1.8.2</version>
+>, <Line: -            <scope>test</scope>
+>, <Line: -        <site>
+>, <Line: -            <id>mp4parser-svn</id>
+>, <Line: -            <name>MP4Parser SVN repository</name>
+>, <Line: -            <url>svn:https://mp4parser.googlecode.com/svn/site/${project.version}</url>
+>, <Line: -        </site>
+>, <Line: -      <tag> mp4parser-project-1.0.7-SNAPSHOT-4</tag>
+>]

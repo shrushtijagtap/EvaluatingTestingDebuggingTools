@@ -1,0 +1,4 @@
+[<Line: +    url: -> "#{ config.apiRoot }/elbs/#{ @elbName }"
+>]
+[<Line: -    url: -> "#{ config.apiRoot }/elbs/#{ @elbName }?authkey=#{ config.authKey }"
+>]

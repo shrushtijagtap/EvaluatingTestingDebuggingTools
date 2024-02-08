@@ -1,0 +1,10 @@
+[]
+[<Line: -  public String toBitFieldString() {
+>, <Line: -    byte[] bits = getBits();
+>, <Line: -    StringBuilder sb = new StringBuilder(bits.length);
+>, <Line: -    for (byte bit : bits) {
+>, <Line: -      sb.append(bit == 1 ? '1' : '0');
+>, <Line: -    }
+>, <Line: -    return sb.toString();
+>, <Line: -  }
+>]

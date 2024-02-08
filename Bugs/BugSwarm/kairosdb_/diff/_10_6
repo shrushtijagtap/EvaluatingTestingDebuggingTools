@@ -1,0 +1,4 @@
+[<Line: +		checkState(cacheDirectory.exists(), "Cache directory '"+m_cacheDir+"' not created");
+>]
+[<Line: -		checkState(cacheDirectory.exists(), "Cache directory not created");
+>]

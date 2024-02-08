@@ -1,0 +1,44 @@
+[<Line: +	/** Whether is a match (if false: overlap only). */
+>, <Line: +	final boolean isMatch;
+>, <Line: +	public GenotypeMatch(int observedAllele, int dbAllele, VariantContext obsVC,
+>, <Line: +			VariantContext dbVC, boolean isMatch) {
+>, <Line: +		this.isMatch = isMatch;
+>, <Line: +	public boolean isMatch() {
+>, <Line: +		return isMatch;
+>, <Line: +	}
+>, <Line: +		return "GenotypeMatch [observedAllele=" + observedAllele + ", dbAllele=" + dbAllele
+>, <Line: +				+ ", obsVC=" + obsVC + ", dbVC=" + dbVC + ", isMatch=" + isMatch + "]";
+>, <Line: +		result = prime * result + (isMatch ? 1231 : 1237);
+>, <Line: +		if (this == obj) return true;
+>, <Line: +		if (obj == null) return false;
+>, <Line: +		if (getClass() != obj.getClass()) return false;
+>, <Line: +		if (dbAllele != other.dbAllele) return false;
+>, <Line: +			if (other.dbVC != null) return false;
+>, <Line: +		} else if (!dbVC.equals(other.dbVC)) return false;
+>, <Line: +		if (isMatch != other.isMatch) return false;
+>, <Line: +			if (other.obsVC != null) return false;
+>, <Line: +		} else if (!obsVC.equals(other.obsVC)) return false;
+>, <Line: +		if (observedAllele != other.observedAllele) return false;
+>]
+[<Line: -	public GenotypeMatch(int observedAllele, int dbAllele, VariantContext obsVC, VariantContext dbVC) {
+>, <Line: -		return "GenotypeMatch [observedAllele=" + observedAllele + ", dbAllele=" + dbAllele + ", obsVC=" + obsVC
+>, <Line: -				+ ", dbVC=" + dbVC + "]";
+>, <Line: -		if (this == obj)
+>, <Line: -			return true;
+>, <Line: -		if (obj == null)
+>, <Line: -			return false;
+>, <Line: -		if (getClass() != obj.getClass())
+>, <Line: -			return false;
+>, <Line: -		if (dbAllele != other.dbAllele)
+>, <Line: -			return false;
+>, <Line: -			if (other.dbVC != null)
+>, <Line: -				return false;
+>, <Line: -		} else if (!dbVC.equals(other.dbVC))
+>, <Line: -			return false;
+>, <Line: -			if (other.obsVC != null)
+>, <Line: -				return false;
+>, <Line: -		} else if (!obsVC.equals(other.obsVC))
+>, <Line: -			return false;
+>, <Line: -		if (observedAllele != other.observedAllele)
+>, <Line: -			return false;
+>]

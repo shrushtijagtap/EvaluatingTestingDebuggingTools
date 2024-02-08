@@ -1,0 +1,4 @@
+[<Line: +					code = Codes.Quantify(qc.startOperand, qc.endOperand,
+>]
+[<Line: -					code = Codes.Quantify(qc.type, qc.sourceOperand,
+>]

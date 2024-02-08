@@ -1,0 +1,8 @@
+[<Line: +../../tests/invalid/Contractive_Invalid_2.whiley:1: empty type encountered
+>, <Line: +type Point is {
+>, <Line: +^^^^^^^^^^^^^^^^^
+>]
+[<Line: -../../tests/invalid/Contractive_Invalid_2.whiley:6: expected type Contractive_Invalid_2:Point, found null
+>, <Line: -    return null
+>, <Line: -           ^^^^
+>]

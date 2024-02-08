@@ -1,0 +1,9 @@
+[<Line: +import java.io.Serializable;
+>, <Line: +public interface DatalogProgram extends Serializable {
+>, <Line: +	public OBDAQueryModifiers getQueryModifiers();
+>, <Line: +	public boolean hasModifiers();
+>]
+[<Line: -public interface DatalogProgram extends OBDAQuery {
+>, <Line: -	public void removeRule(CQIE rule);
+>, <Line: -	public boolean isUCQ();
+>]

@@ -1,0 +1,61 @@
+[<Line: +     * @return number of retries to attempt when retrieving an ontology from a
+>, <Line: +     * @return max number of XML entity expansions to perform while parsing
+>, <Line: +     *         RDF/XML.
+>, <Line: +     *        milliseconds.
+>]
+[<Line: -     * @return number of retries to attempt when retrieving an ontology form a
+>, <Line: -    /** @return true if http compression should be accepted. */
+>, <Line: -    public boolean isAcceptingHTTPCompression() {
+>, <Line: -        return ACCEPT_HTTP_COMPRESSION.getValue(Boolean.class, overrides).booleanValue();
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * When loading an ontology, a parser might connect to a remote URL. If the
+>, <Line: -     * remote URL is a 302 redirect and the protocol is different, e.g., http to
+>, <Line: -     * https, the parser needs to decide whether to follow the redirect and
+>, <Line: -     * download the ontology from an alternate source, or stop with an
+>, <Line: -     * UnloadableOntologyError. By default this is true, meaning redirects will
+>, <Line: -     * be followed across protocols. If set to false, redirects will be followed
+>, <Line: -     * only within the same protocol (URLConnection limits this to five
+>, <Line: -     * redirects).
+>, <Line: -     * 
+>, <Line: -     * @return true if redirects should be followed when importing ontologies
+>, <Line: -     *         from remote URLs
+>, <Line: -     */
+>, <Line: -    public boolean isFollowRedirects() {
+>, <Line: -        return FOLLOW_REDIRECTS.getValue(Boolean.class, overrides).booleanValue();
+>, <Line: -    }
+>, <Line: -     * @return max number of XML entity expansions to perform while parsing RDF/XML.
+>, <Line: -    /**
+>, <Line: -     * @param b
+>, <Line: -     *        true if HTTP compression should be accepted
+>, <Line: -     * @return a copy of this configuration with accepting HTTP compression set
+>, <Line: -     *         to the new value
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setAcceptingHTTPCompression(boolean b) {
+>, <Line: -        // do not make copies if setting the same value
+>, <Line: -        if (isAcceptingHTTPCompression() == b) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration copy = copyConfiguration();
+>, <Line: -        copy.overrides.put(ACCEPT_HTTP_COMPRESSION, Boolean.valueOf(b));
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -     *        milliseconds. This is necessary for use in {@code URLConnection}
+>, <Line: -    /**
+>, <Line: -     * @param value
+>, <Line: -     *        true if redirects should be followed across protocols, false
+>, <Line: -     *        otherwise.
+>, <Line: -     * @return a copy of the current object with followRedirects set to the new
+>, <Line: -     *         value.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setFollowRedirects(boolean value) {
+>, <Line: -        // as the objects are immutable, setting to the same value returns the
+>, <Line: -        // same object
+>, <Line: -        if (value == isFollowRedirects()) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration copy = copyConfiguration();
+>, <Line: -        copy.overrides.put(FOLLOW_REDIRECTS, Boolean.valueOf(value));
+>, <Line: -        return copy;
+>, <Line: -    }
+>]

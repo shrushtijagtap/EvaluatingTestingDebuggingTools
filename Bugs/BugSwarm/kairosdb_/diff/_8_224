@@ -1,0 +1,283 @@
+[<Line: +	<div ng-repeat="target in panel.targets"
+>, <Line: +		 class="grafana-target"
+>, <Line: +		 ng-class="{'grafana-target-hidden': target.hide}"
+>, <Line: +		 ng-controller="GraphiteTargetCtrl"
+>, <Line: +		 ng-init="init()">
+>, <Line: +		<div class="grafana-target-inner">
+>, <Line: +			<ul class="grafana-target-controls">
+>, <Line: +				<li ng-show="parserError">
+>, <Line: +					<a bs-tooltip="parserError" style="color: rgb(229, 189, 28)"
+>, <Line: +					   role="menuitem">
+>, <Line: +						<i class="icon icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li>
+>, <Line: +					<a class="pointer" tabindex="1"
+>, <Line: +					   ng-click="showTextEditor = !showTextEditor">
+>, <Line: +						<i class="icon icon-pencil"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li class="dropdown">
+>, <Line: +					<a class="pointer dropdown-toggle"
+>, <Line: +					   data-toggle="dropdown"
+>, <Line: +					   tabindex="1">
+>, <Line: +						<i class="icon icon-cog"></i>
+>, <Line: +					</a>
+>, <Line: +					<ul class="dropdown-menu pull-right" role="menu">
+>, <Line: +						<li role="menuitem">
+>, <Line: +							<a tabindex="1"
+>, <Line: +							   ng-click="duplicate()">
+>, <Line: +								Duplicate
+>, <Line: +							</a>
+>, <Line: +						</li>
+>, <Line: +							<a tabindex="1"
+>, <Line: +							   ng-click="moveMetricQuery($index, $index-1)">
+>, <Line: +								Move up
+>, <Line: +							</a>
+>, <Line: +						</li>
+>, <Line: +							<a tabindex="1"
+>, <Line: +							   ng-click="moveMetricQuery($index, $index+1)">
+>, <Line: +								Move down
+>, <Line: +							</a>
+>, <Line: +						</li>
+>, <Line: +					</ul>
+>, <Line: +				</li>
+>, <Line: +				<li>
+>, <Line: +					<a class="pointer" tabindex="1"
+>, <Line: +					   ng-click="removeDataQuery(target)">
+>, <Line: +						<i class="icon icon-remove"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +			</ul>
+>, <Line: +			<ul class="grafana-segment-list">
+>, <Line: +				<li class="grafana-target-segment"
+>, <Line: +					style="min-width: 15px; text-align: center">
+>, <Line: +				</li>
+>, <Line: +				<li>
+>, <Line: +					<a class="grafana-target-segment"
+>, <Line: +					   ng-click="target.hide = !target.hide; get_data();"
+>, <Line: +					   role="menuitem">
+>, <Line: +						<i class="icon-eye-open"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +			</ul>
+>, <Line: +			<input type="text"
+>, <Line: +				   class="grafana-target-text-input span10"
+>, <Line: +				   ng-model="target.target"
+>, <Line: +				   focus-me="showTextEditor"
+>, <Line: +				   spellcheck='false'
+>, <Line: +				   ng-model-onblur ng-change="targetTextChanged()"
+>, <Line: +				   ng-show="showTextEditor"/>
+>, <Line: +			<ul class="grafana-segment-list" role="menu"
+>, <Line: +				ng-hide="showTextEditor">
+>, <Line: +				<li ng-repeat="segment in segments" role="menuitem"
+>, <Line: +					graphite-segment></li>
+>, <Line: +          <span graphite-func-editor
+>, <Line: +				class="grafana-target-segment grafana-target-function">
+>, <Line: +				</li>
+>, <Line: +				<li class="dropdown" graphite-add-func>
+>, <Line: +				</li>
+>, <Line: +			</ul>
+>, <Line: +			<div class="clearfix"></div>
+>, <Line: +		</div>
+>, <Line: +	</div>
+>, <Line: +						   class="input-mini grafana-target-segment-input"
+>, <Line: +						   ng-model="panel.cacheTimeout"
+>, <Line: +						   bs-tooltip="'Graphite parameter to override memcache default timeout (unit is seconds)'"
+>, <Line: +						   data-placement="right"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   placeholder="60">
+>, <Line: +						   class="input-mini grafana-target-segment-input"
+>, <Line: +						   ng-model="panel.maxDataPoints"
+>, <Line: +						   bs-tooltip="'Override max data points, automatically set to graph width in pixels.'"
+>, <Line: +						   data-placement="right"
+>, <Line: +						   ng-model-onblur ng-change="get_data()"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   placeholder="auto">
+>, <Line: +					<a ng-click="toggleEditorHelp(1);"
+>, <Line: +					   bs-tooltip="'click to show helpful info'"
+>, <Line: +					   data-placement="bottom">
+>, <Line: +					<a ng-click="toggleEditorHelp(2);"
+>, <Line: +					   bs-tooltip="'click to show helpful info'"
+>, <Line: +					   data-placement="bottom">
+>, <Line: +					<a ng-click="toggleEditorHelp(3)"
+>, <Line: +					   bs-tooltip="'click to show helpful info'"
+>, <Line: +					   data-placement="bottom">
+>, <Line: +					<a ng-click="toggleEditorHelp(4)"
+>, <Line: +					   bs-tooltip="'click to show helpful info'"
+>, <Line: +					   data-placement="bottom">
+>, <Line: +					<a ng-click="toggleEditorHelp(5)"
+>, <Line: +					   bs-tooltip="'click to show helpful info'"
+>, <Line: +					   data-placement="bottom">
+>, <Line: +	</div>
+>, <Line: +				<li>aliasByNode(2) to alias by a specific part of your metric
+>, <Line: +					path
+>, <Line: +				</li>
+>, <Line: +				<li>aliasByNode(2, -1) you can add multiple segment paths, and
+>, <Line: +					use negative index
+>, <Line: +				</li>
+>, <Line: +				<li>groupByNode(2, 'sum') is useful if you have 2 wildcards in
+>, <Line: +					your metric path and want to sumSeries and group by
+>, <Line: +				</li>
+>, <Line: +				<li>Some graphite functions allow you to have many series
+>, <Line: +					arguments
+>, <Line: +				</li>
+>, <Line: +				<li>Use #[A-Z] to use a graphite query as parameter to a
+>, <Line: +					function
+>, <Line: +				</li>
+>, <Line: +						<li>prod.srv-01.counters.count - asPercent(#A) :
+>, <Line: +							percentage of count in comparison with A query
+>, <Line: +						</li>
+>, <Line: +						<li>prod.srv-01.counters.count - sumSeries(#A) : sum
+>, <Line: +							count and series A
+>, <Line: +						</li>
+>, <Line: +				<li>If a query is added only to be used as a parameter, hide it
+>, <Line: +					from the graph with the eye icon
+>, <Line: +				</li>
+>, <Line: +				<li>When stacking is enabled make sure null point mode is set to
+>, <Line: +					'null as zero'
+>, <Line: +				</li>
+>, <Line: +				<li>You can use a template variable in place of metric names
+>, <Line: +				</li>
+>, <Line: +				<li>You can use a template variable in place of function
+>, <Line: +					parameters
+>, <Line: +				</li>
+>, <Line: +				<li>You enable the templating feature in Dashboard settings /
+>, <Line: +					Feature toggles
+>, <Line: +				</li>
+>, <Line: +				<li>Every graphite request is issued with a maxDataPoints
+>, <Line: +					parameter
+>, <Line: +				</li>
+>, <Line: +				<li>Graphite uses this parameter to consolidate the real number
+>, <Line: +					of values down to this number
+>, <Line: +				</li>
+>, <Line: +				<li>If there are more real values, then by default they will be
+>, <Line: +					consolidated using averages
+>, <Line: +				</li>
+>, <Line: +				<li>This could hide real peaks and max values in your series
+>, <Line: +				</li>
+>, <Line: +				<li>You can change how point consolidation is made using the
+>, <Line: +					consolidateBy graphite function
+>, <Line: +				</li>
+>, <Line: +				<li>Point consolidation will effect series legend values
+>, <Line: +					(min,max,total,current)
+>, <Line: +				</li>
+>, <Line: +				<li>If you override maxDataPoint and set a high value
+>, <Line: +					performance can be severely effected
+>, <Line: +				</li>
+>]
+[<Line: -	<div  ng-repeat="target in panel.targets"
+>, <Line: -        class="grafana-target"
+>, <Line: -        ng-class="{'grafana-target-hidden': target.hide}"
+>, <Line: -        ng-controller="GraphiteTargetCtrl"
+>, <Line: -        ng-init="init()">
+>, <Line: -    <div class="grafana-target-inner">
+>, <Line: -      <ul class="grafana-target-controls">
+>, <Line: -        <li ng-show="parserError">
+>, <Line: -          <a bs-tooltip="parserError" style="color: rgb(229, 189, 28)" role="menuitem">
+>, <Line: -            <i class="icon icon-warning-sign"></i>
+>, <Line: -          </a>
+>, <Line: -        </li>
+>, <Line: -        <li>
+>, <Line: -          <a class="pointer" tabindex="1" ng-click="showTextEditor = !showTextEditor">
+>, <Line: -            <i class="icon icon-pencil"></i>
+>, <Line: -          </a>
+>, <Line: -        </li>
+>, <Line: -        <li class="dropdown">
+>, <Line: -          <a  class="pointer dropdown-toggle"
+>, <Line: -              data-toggle="dropdown"
+>, <Line: -              tabindex="1">
+>, <Line: -            <i class="icon icon-cog"></i>
+>, <Line: -          </a>
+>, <Line: -          <ul class="dropdown-menu pull-right" role="menu">
+>, <Line: -            <li role="menuitem">
+>, <Line: -              <a  tabindex="1"
+>, <Line: -                  ng-click="duplicate()">
+>, <Line: -                Duplicate
+>, <Line: -              </a>
+>, <Line: -            </li>
+>, <Line: -              <a  tabindex="1"
+>, <Line: -                  ng-click="moveMetricQuery($index, $index-1)">
+>, <Line: -                Move up
+>, <Line: -              </a>
+>, <Line: -            </li>
+>, <Line: -							<a  tabindex="1"
+>, <Line: -                  ng-click="moveMetricQuery($index, $index+1)">
+>, <Line: -                Move down
+>, <Line: -              </a>
+>, <Line: -            </li>
+>, <Line: -          </ul>
+>, <Line: -        </li>
+>, <Line: -        <li>
+>, <Line: -          <a class="pointer" tabindex="1" ng-click="removeDataQuery(target)">
+>, <Line: -            <i class="icon icon-remove"></i>
+>, <Line: -          </a>
+>, <Line: -        </li>
+>, <Line: -      </ul>
+>, <Line: -      <ul class="grafana-segment-list">
+>, <Line: -				<li class="grafana-target-segment" style="min-width: 15px; text-align: center">
+>, <Line: -        </li>
+>, <Line: -        <li>
+>, <Line: -          <a  class="grafana-target-segment"
+>, <Line: -              ng-click="target.hide = !target.hide; get_data();"
+>, <Line: -              role="menuitem">
+>, <Line: -            <i class="icon-eye-open"></i>
+>, <Line: -          </a>
+>, <Line: -        </li>
+>, <Line: -      </ul>
+>, <Line: -      <input  type="text"
+>, <Line: -              class="grafana-target-text-input span10"
+>, <Line: -              ng-model="target.target"
+>, <Line: -              focus-me="showTextEditor"
+>, <Line: -              spellcheck='false'
+>, <Line: -              ng-model-onblur ng-change="targetTextChanged()"
+>, <Line: -              ng-show="showTextEditor" />
+>, <Line: -      <ul class="grafana-segment-list" role="menu" ng-hide="showTextEditor">
+>, <Line: -        <li ng-repeat="segment in segments" role="menuitem" graphite-segment></li>
+>, <Line: -          <span graphite-func-editor class="grafana-target-segment grafana-target-function">
+>, <Line: -        </li>
+>, <Line: -        <li class="dropdown" graphite-add-func>
+>, <Line: -        </li>
+>, <Line: -      </ul>
+>, <Line: -      <div class="clearfix"></div>
+>, <Line: -    </div>
+>, <Line: -  </div>
+>, <Line: -								class="input-mini grafana-target-segment-input"
+>, <Line: -								ng-model="panel.cacheTimeout"
+>, <Line: -								bs-tooltip="'Graphite parameter to override memcache default timeout (unit is seconds)'"
+>, <Line: -								data-placement="right"
+>, <Line: -								spellcheck='false'
+>, <Line: -								placeholder="60">
+>, <Line: -								class="input-mini grafana-target-segment-input"
+>, <Line: -								ng-model="panel.maxDataPoints"
+>, <Line: -								bs-tooltip="'Override max data points, automatically set to graph width in pixels.'"
+>, <Line: -								data-placement="right"
+>, <Line: -								ng-model-onblur ng-change="get_data()"
+>, <Line: -								spellcheck='false'
+>, <Line: -								placeholder="auto">
+>, <Line: -					<a ng-click="toggleEditorHelp(1);" bs-tooltip="'click to show helpful info'" data-placement="bottom">
+>, <Line: -					<a ng-click="toggleEditorHelp(2);" bs-tooltip="'click to show helpful info'" data-placement="bottom">
+>, <Line: -					<a ng-click="toggleEditorHelp(3)" bs-tooltip="'click to show helpful info'" data-placement="bottom">
+>, <Line: -					<a ng-click="toggleEditorHelp(4)" bs-tooltip="'click to show helpful info'" data-placement="bottom">
+>, <Line: -					<a ng-click="toggleEditorHelp(5)" bs-tooltip="'click to show helpful info'" data-placement="bottom">
+>, <Line: - </div>
+>, <Line: -				<li>aliasByNode(2) to alias by a specific part of your metric path</li>
+>, <Line: -				<li>aliasByNode(2, -1) you can add multiple segment paths, and use negative index</li>
+>, <Line: -				<li>groupByNode(2, 'sum') is useful if you have 2 wildcards in your metric path and want to sumSeries and group by</li>
+>, <Line: -				<li>Some graphite functions allow you to have many series arguments</li>
+>, <Line: -				<li>Use #[A-Z] to use a graphite query as parameter to a function</li>
+>, <Line: -						<li>prod.srv-01.counters.count - asPercent(#A) : percentage of count in comparison with A query</li>
+>, <Line: -						<li>prod.srv-01.counters.count - sumSeries(#A) : sum count and series A </li>
+>, <Line: -				<li>If a query is added only to be used as a parameter, hide it from the graph with the eye icon</li>
+>, <Line: -				<li>When stacking is enabled make sure null point mode is set to 'null as zero'</li>
+>, <Line: -				<li>You can use a template variable in place of metric names</li>
+>, <Line: -				<li>You can use a template variable in place of function parameters</li>
+>, <Line: -				<li>You enable the templating feature in Dashboard settings / Feature toggles </li>
+>, <Line: -				<li>Every graphite request is issued with a maxDataPoints parameter</li>
+>, <Line: -				<li>Graphite uses this parameter to consolidate the real number of values down to this number</li>
+>, <Line: -				<li>If there are more real values, then by default they will be consolidated using averages</li>
+>, <Line: -				<li>This could hide real peaks and max values in your series</li>
+>, <Line: -				<li>You can change how point consolidation is made using the consolidateBy graphite function</li>
+>, <Line: -				<li>Point consolidation will effect series legend values (min,max,total,current)</li>
+>, <Line: -				<li>If you override maxDataPoint and set a high value performance can be severely effected</li>
+>]

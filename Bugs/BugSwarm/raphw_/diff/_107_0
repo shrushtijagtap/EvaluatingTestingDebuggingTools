@@ -1,0 +1,10 @@
+[<Line: +                    TypeDescription enclosingType = getEnclosingType();
+>, <Line: +                    if (receiverType == null || !receiverType.asErasure().equals(enclosingType == null ? this : enclosingType)) {
+>, <Line: +//                        throw new IllegalStateException("Constructor " + methodDescription + " defines an illegal receiver " + receiverType);
+>, <Line: +                } else if (/* methodDescription.isMethod() */ receiverType == null || !equals(receiverType.asErasure())) {
+>]
+[<Line: -                    TypeDescription declaringType = getDeclaringType();
+>, <Line: -                    if (!methodDescription.getDeclaringType().equals(declaringType == null ? this : declaringType)) {
+>, <Line: -                        throw new IllegalStateException("Constructor " + methodDescription + " defines an illegal receiver " + receiverType);
+>, <Line: -                } else if (!equals(receiverType)) {
+>]

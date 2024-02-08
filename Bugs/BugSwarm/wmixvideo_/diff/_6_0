@@ -1,0 +1,8 @@
+[<Line: +    private NFNotaInfoItemImpostoICMSUFDestino icmsUfDestino;
+>, <Line: +    public NFNotaInfoItemImpostoICMSUFDestino getIcmsUfDestino() {
+>, <Line: +    public void setIcmsUfDestino(NFNotaInfoItemImpostoICMSUFDestino icmsUfDestino) {
+>]
+[<Line: -    private NFNotaaInfoItemImpostoICMSUFDestino icmsUfDestino;
+>, <Line: -    public NFNotaaInfoItemImpostoICMSUFDestino getIcmsUfDestino() {
+>, <Line: -    public void setIcmsUfDestino(NFNotaaInfoItemImpostoICMSUFDestino icmsUfDestino) {
+>]

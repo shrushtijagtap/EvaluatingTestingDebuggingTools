@@ -1,0 +1,6 @@
+[<Line: +    private static final Pattern patternPing = Pattern.compile(
+>, <Line: +    private static final Pattern patternData = Pattern.compile(
+>]
+[<Line: -    static private Pattern patternPing = Pattern.compile(
+>, <Line: -    static private Pattern patternData = Pattern.compile(
+>]

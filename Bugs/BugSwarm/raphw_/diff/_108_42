@@ -1,0 +1,18 @@
+[<Line: +        assertThat(typeDescription.getActualName(), is(SimpleParameterizedType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: +        assertThat(typeDescription.getActualName(), is(UpperBoundWildcardParameterizedType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: +        assertThat(typeDescription.getActualName(), is(LowerBoundWildcardParameterizedType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: +        assertThat(typeDescription.getActualName(), is(UnboundWildcardParameterizedType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: +        assertThat(typeDescription.getActualName(),
+>, <Line: +        assertThat(typeDescription.getActualName(), is(SimpleGenericArrayType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: +        assertThat(typeDescription.getActualName(), is(GenericArrayOfGenericComponentType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: +        assertThat(typeDescription.getActualName(), is(SimpleTypeVariableType.class.getDeclaredField(FOO).getGenericType().toString()));
+>]
+[<Line: -        assertThat(typeDescription.getSourceCodeName(), is(SimpleParameterizedType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: -        assertThat(typeDescription.getSourceCodeName(), is(UpperBoundWildcardParameterizedType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: -        assertThat(typeDescription.getSourceCodeName(), is(LowerBoundWildcardParameterizedType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: -        assertThat(typeDescription.getSourceCodeName(), is(UnboundWildcardParameterizedType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: -        assertThat(typeDescription.getSourceCodeName(),
+>, <Line: -        assertThat(typeDescription.getSourceCodeName(), is(SimpleGenericArrayType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: -        assertThat(typeDescription.getSourceCodeName(), is(GenericArrayOfGenericComponentType.class.getDeclaredField(FOO).getGenericType().toString()));
+>, <Line: -        assertThat(typeDescription.getSourceCodeName(), is(SimpleTypeVariableType.class.getDeclaredField(FOO).getGenericType().toString()));
+>]

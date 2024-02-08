@@ -1,0 +1,13 @@
+[<Line: +package org.mp4parser.muxer;
+>, <Line: +import java.io.Closeable;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.nio.ByteBuffer;
+>, <Line: +/**
+>, <Line: + * Allows random access to some data source as some data structure such as chunks in an mdat
+>, <Line: + * require random access with absolute offsets.
+>, <Line: + */
+>, <Line: +public interface RandomAccessSource extends Closeable {
+>, <Line: +    ByteBuffer get(long offset, long size) throws IOException;
+>, <Line: +}
+>]
+[]

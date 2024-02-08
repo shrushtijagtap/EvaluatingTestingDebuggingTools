@@ -1,0 +1,20 @@
+[<Line: +function f(int[] xs) -> (bool r)
+>, <Line: +ensures r ==> all { j in 0..|xs| | xs[j] != 0}:
+>, <Line: +    //
+>, <Line: +    int i = 0
+>, <Line: +    //
+>, <Line: +    while i < |xs|
+>, <Line: +    where i >= 0
+>, <Line: +    where all { j in 0..i | xs[j] != 0}:
+>, <Line: +        //
+>, <Line: +        if xs[i] == 0:
+>, <Line: +            return false
+>, <Line: +        i = i + 1
+>, <Line: +    //
+>, <Line: +    return true
+>, <Line: +public export method test():
+>, <Line: +    assume f([1,2,3,4])
+>, <Line: +    assume !f([0,2,4,3])
+>, <Line: +    assume f([1])
+>]
+[]

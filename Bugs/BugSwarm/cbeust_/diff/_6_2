@@ -1,0 +1,24 @@
+[<Line: +package org.testng.junit;
+>, <Line: +import org.testng.internal.ConstructorOrMethod;
+>, <Line: +import java.lang.reflect.Method;
+>, <Line: +public class JUnit4ConfigurationMethod extends ConstructorOrMethod {
+>, <Line: +    private final Class<?> declaringClass;
+>, <Line: +    public JUnit4ConfigurationMethod(Class<?> declaringClass) {
+>, <Line: +        super((Method)null);
+>, <Line: +        this.declaringClass = declaringClass;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public Class<?> getDeclaringClass() {
+>, <Line: +        return declaringClass;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String getName() {
+>, <Line: +        return "Configuration method from '" + declaringClass.getName() + "'";
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return getName();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

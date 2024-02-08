@@ -1,0 +1,158 @@
+[<Line: +/**
+>, <Line: + * Copyright (c) 2015, Joyent, Inc. All rights reserved.
+>, <Line: + */
+>, <Line: +package com.joyent.manta.client;
+>, <Line: +import com.google.api.client.http.HttpContent;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.io.OutputStream;
+>, <Line: +import java.util.Iterator;
+>, <Line: +import java.util.Objects;
+>, <Line: +import java.util.stream.Stream;
+>, <Line: +/**
+>, <Line: + * Implementation of {@link HttpContent} that allows for the real-time streaming
+>, <Line: + * of data from an iterator or a Java 8 stream to an {@link OutputStream} that
+>, <Line: + * is connected to HTTP content.
+>, <Line: + *
+>, <Line: + * @author <a href="https://github.com/dekobon">Elijah Zupancic</a>
+>, <Line: + */
+>, <Line: +public class StringIteratorHttpContent implements HttpContent {
+>, <Line: +    /**
+>, <Line: +     * Iterator containing lines to stream into content.
+>, <Line: +     */
+>, <Line: +    private final Iterator<String> iterator;
+>, <Line: +    /**
+>, <Line: +     * Java 8 stream containing lines to stream into content.
+>, <Line: +     */
+>, <Line: +    private final Stream<String> stream;
+>, <Line: +    /**
+>, <Line: +     * Content (mime) type associated with content.
+>, <Line: +     */
+>, <Line: +    private final String contentType;
+>, <Line: +    /**
+>, <Line: +     * Total bytes of content. Defaults to -1 before content is written.
+>, <Line: +     */
+>, <Line: +    private volatile long length = -1L;
+>, <Line: +    /**
+>, <Line: +     * Create a new instance based on a {@link Iterator} of strings.
+>, <Line: +     *
+>, <Line: +     * @param iterator iterator of strings for each line
+>, <Line: +     * @param contentType content (mime) type associated with content
+>, <Line: +     */
+>, <Line: +    public StringIteratorHttpContent(final Iterator<String> iterator,
+>, <Line: +                                     final String contentType) {
+>, <Line: +        this.iterator = iterator;
+>, <Line: +        this.stream = null;
+>, <Line: +        this.contentType = contentType;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Create a new instance based on a {@link Stream} of strings.
+>, <Line: +     *
+>, <Line: +     * @param stream stream of strings for each line
+>, <Line: +     * @param contentType content (mime) type associated with content
+>, <Line: +     */
+>, <Line: +    public StringIteratorHttpContent(final Stream<String> stream,
+>, <Line: +                                     final String contentType) {
+>, <Line: +        this.stream = stream;
+>, <Line: +        this.iterator = null;
+>, <Line: +        this.contentType = contentType;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public long getLength() throws IOException {
+>, <Line: +        return length;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String getType() {
+>, <Line: +        return contentType;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public boolean retrySupported() {
+>, <Line: +        return false;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void writeTo(final OutputStream out) throws IOException {
+>, <Line: +        try {
+>, <Line: +            if (iterator != null) {
+>, <Line: +                writeIterator(out);
+>, <Line: +            } else if (stream != null) {
+>, <Line: +                writeStream(out);
+>, <Line: +            }
+>, <Line: +        } finally {
+>, <Line: +            out.close();
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Write all of the strings in the stored iterator to the passed
+>, <Line: +     * {@link OutputStream}.
+>, <Line: +     *
+>, <Line: +     * @param out output to write to
+>, <Line: +     * @throws IOException thrown when we can't write
+>, <Line: +     */
+>, <Line: +    protected void writeIterator(final OutputStream out) throws IOException {
+>, <Line: +        Objects.requireNonNull(iterator, "Iterator must be present");
+>, <Line: +        // Start length at zero because it is set to -1 by default
+>, <Line: +        length = 0L;
+>, <Line: +        while (iterator.hasNext()) {
+>, <Line: +            String next = iterator.next();
+>, <Line: +            if (next == null) {
+>, <Line: +                continue;
+>, <Line: +            }
+>, <Line: +            String formatted = String.format("%s\n", next);
+>, <Line: +            byte[] bytes = formatted.getBytes("UTF-8");
+>, <Line: +            length += bytes.length;
+>, <Line: +            out.write(bytes);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Write all of the strings in the stored stream to the passed
+>, <Line: +     * {@link OutputStream}.
+>, <Line: +     *
+>, <Line: +     * @param out output to write to
+>, <Line: +     * @throws IOException thrown when we can't write
+>, <Line: +     */
+>, <Line: +    protected void writeStream(final OutputStream out) throws IOException {
+>, <Line: +        Objects.requireNonNull(stream, "Stream must be present");
+>, <Line: +        // Start length at zero because it is set to -1 by default
+>, <Line: +        length = 0L;
+>, <Line: +        /* This horribly contorted exception handling is because Java 8
+>, <Line: +         * streams do not support checked exception handling. */
+>, <Line: +        try {
+>, <Line: +            stream.forEach(item -> {
+>, <Line: +                if (item != null) {
+>, <Line: +                    try {
+>, <Line: +                        String formatted = String.format("%s\n", item);
+>, <Line: +                        byte[] bytes = formatted.getBytes("UTF-8");
+>, <Line: +                        length += bytes.length;
+>, <Line: +                        out.write(bytes);
+>, <Line: +                    } catch (IOException e) {
+>, <Line: +                        throw new StreamIOException(e);
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +            });
+>, <Line: +        } catch (StreamIOException e) {
+>, <Line: +            throw e.getIOCause();
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Inner exception class for handling the wrapping of {@link IOException}
+>, <Line: +     * when processing Java 8 streams.
+>, <Line: +     */
+>, <Line: +    protected static class StreamIOException extends RuntimeException {
+>, <Line: +        /**
+>, <Line: +         * Create an instance that wraps the passed cause.
+>, <Line: +         *
+>, <Line: +         * @param cause {@link IOException} to wrap
+>, <Line: +         */
+>, <Line: +        public StreamIOException(final Throwable cause) {
+>, <Line: +            super(cause);
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * @return the wrapped exception as a {@link IOException}
+>, <Line: +         */
+>, <Line: +        @SuppressWarnings("unchecked")
+>, <Line: +        IOException getIOCause() {
+>, <Line: +            return (IOException)getCause();
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

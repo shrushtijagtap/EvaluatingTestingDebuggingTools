@@ -1,0 +1,8 @@
+[<Line: +	<version>1.1.2</version>
+>, <Line: +		<commons-collections.version>3.2.2</commons-collections.version>
+>, <Line: +		<muikku.version>1.1.2</muikku.version>
+>]
+[<Line: -	<version>1.1.2-SNAPSHOT</version>
+>, <Line: -		<commons-collections.version>3.2.1</commons-collections.version>
+>, <Line: -		<muikku.version>1.1.2-SNAPSHOT</muikku.version>
+>]

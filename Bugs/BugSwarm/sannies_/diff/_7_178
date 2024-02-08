@@ -1,0 +1,16 @@
+[<Line: +package org.mp4parser.boxes.dolby;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.BitReaderBuffer;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.BitWriterBuffer;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: +import org.mp4parser.support.DoNotParseDetail;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>]
+[<Line: -package com.googlecode.mp4parser.boxes;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractBox;
+>, <Line: -import com.googlecode.mp4parser.annotations.DoNotParseDetail;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.BitReaderBuffer;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.BitWriterBuffer;
+>]

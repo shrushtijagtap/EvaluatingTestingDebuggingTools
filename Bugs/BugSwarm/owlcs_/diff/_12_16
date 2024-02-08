@@ -1,0 +1,7 @@
+[<Line: +        target.store(s.createStorer(), ont, ontologyFormat);
+>, <Line: +        target.store(storer.createStorer(), ont(), ontologyFormat);
+>]
+[<Line: -        s.createStorer().storeOntology(ont, target, ontologyFormat);
+>, <Line: -        storer.createStorer().storeOntology(ont(), target, ontologyFormat);
+>, <Line: -        // assertEquals(expected, object.toString());
+>]

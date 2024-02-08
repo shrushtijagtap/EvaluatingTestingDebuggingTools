@@ -1,0 +1,8 @@
+[<Line: +package org.mp4parser.boxes.apple;
+>, <Line: +    public AppleNameBox() {
+>, <Line: +        super(TYPE);
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.apple;
+>, <Line: -	public AppleNameBox() {
+>, <Line: -        super( TYPE );
+>]

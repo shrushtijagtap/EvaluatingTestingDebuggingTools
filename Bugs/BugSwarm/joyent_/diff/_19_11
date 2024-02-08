@@ -1,0 +1,12 @@
+[<Line: +    /**
+>, <Line: +     * Environment variable for setting HttpTransport implementation.
+>, <Line: +     */
+>, <Line: +    public static final String MANTA_HTTP_TRANSPORT_ENV_KEY = "MANTA_HTTP_TRANSPORT";
+>, <Line: +            MANTA_PASSWORD_ENV_KEY, MANTA_HTTP_TRANSPORT_ENV_KEY
+>, <Line: +    @Override
+>, <Line: +    public String getHttpTransport() {
+>, <Line: +        return getEnv(MANTA_HTTP_TRANSPORT_ENV_KEY);
+>, <Line: +    }
+>]
+[<Line: -            MANTA_PASSWORD_ENV_KEY
+>]

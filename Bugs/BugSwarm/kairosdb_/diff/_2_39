@@ -1,0 +1,65 @@
+[<Line: +import com.google.gson.FieldNamingPolicy;
+>, <Line: +import com.google.gson.Gson;
+>, <Line: +import com.google.gson.GsonBuilder;
+>, <Line: +import com.google.gson.JsonArray;
+>, <Line: +import com.google.gson.JsonDeserializationContext;
+>, <Line: +import com.google.gson.JsonDeserializer;
+>, <Line: +import com.google.gson.JsonElement;
+>, <Line: +import com.google.gson.JsonObject;
+>, <Line: +import com.google.gson.JsonParseException;
+>, <Line: +import com.google.gson.JsonParser;
+>, <Line: +import com.google.gson.TypeAdapter;
+>, <Line: +import com.google.gson.TypeAdapterFactory;
+>, <Line: +import org.kairosdb.core.aggregator.Aggregator;
+>, <Line: +import org.kairosdb.core.aggregator.FilterAggregator;
+>, <Line: +import org.kairosdb.core.aggregator.GroupByAware;
+>, <Line: +import org.kairosdb.core.aggregator.RangeAggregator;
+>, <Line: +import org.kairosdb.core.aggregator.SaveAsAggregator;
+>, <Line: +import org.kairosdb.core.aggregator.TimezoneAware;
+>, <Line: +import org.kairosdb.core.aggregator.TrimAggregator;
+>, <Line: +import org.kairosdb.core.annotation.Feature;
+>, <Line: +import org.kairosdb.core.datastore.Order;
+>, <Line: +import org.kairosdb.core.datastore.QueryMetric;
+>, <Line: +import org.kairosdb.core.datastore.QueryPlugin;
+>, <Line: +import org.kairosdb.core.datastore.QueryPluginFactory;
+>, <Line: +import org.kairosdb.core.datastore.TimeUnit;
+>, <Line: +import org.kairosdb.core.processingstage.FeatureProcessingFactory;
+>, <Line: +import org.kairosdb.core.processingstage.FeatureProcessor;
+>, <Line: +import javax.validation.ConstraintViolation;
+>, <Line: +import javax.validation.Path;
+>, <Line: +import javax.validation.Valid;
+>, <Line: +import javax.validation.Validation;
+>, <Line: +import javax.validation.Validator;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.Iterator;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Locale;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.Set;
+>, <Line: +    protected FeatureProcessor m_processingChain;
+>, <Line: +    public QueryParser(FeatureProcessor processingChain, QueryPluginFactory pluginFactory)
+>, <Line: +                for (FeatureProcessingFactory<?> factory : m_processingChain.getFeatureProcessingFactories())
+>, <Line: +                    String factoryName = factory.getClass().getAnnotation(Feature.class).name();
+>, <Line: +                                queryProcessorArray, factory.getFeature(),
+>, <Line: +            Object queryProcessor = m_processingChain.getFeatureProcessingFactory(queryProcessorFamilyType).createFeatureProcessor(qpName);
+>, <Line: +                    SaveAsAggregator saveAsAggregator = (SaveAsAggregator) m_processingChain.getFeatureProcessingFactory(Aggregator.class).createFeatureProcessor("save_as");
+>, <Line: +                    TrimAggregator trimAggregator = (TrimAggregator) m_processingChain.getFeatureProcessingFactory(Aggregator.class).createFeatureProcessor("trim");
+>]
+[<Line: -import com.google.gson.*;
+>, <Line: -import org.kairosdb.core.aggregator.*;
+>, <Line: -import org.kairosdb.core.annotation.QueryProcessingStage;
+>, <Line: -import org.kairosdb.core.datastore.*;
+>, <Line: -import org.kairosdb.core.processingstage.QueryProcessingChain;
+>, <Line: -import org.kairosdb.core.processingstage.QueryProcessingStageFactory;
+>, <Line: -import javax.validation.*;
+>, <Line: -import java.util.*;
+>, <Line: -    protected QueryProcessingChain m_processingChain;
+>, <Line: -    public QueryParser(QueryProcessingChain processingChain, QueryPluginFactory pluginFactory)
+>, <Line: -                for (QueryProcessingStageFactory<?> factory : m_processingChain.getQueryProcessingStageFactories())
+>, <Line: -                    String factoryName = factory.getClass().getAnnotation(QueryProcessingStage.class).name();
+>, <Line: -                                queryProcessorArray, factory.getQueryProcessorFamily(),
+>, <Line: -            Object queryProcessor = m_processingChain.getQueryProcessingStageFactory(queryProcessorFamilyType).createQueryProcessor(qpName);
+>, <Line: -                    SaveAsAggregator saveAsAggregator = (SaveAsAggregator) m_processingChain.getQueryProcessingStageFactory(Aggregator.class).createQueryProcessor("save_as");
+>, <Line: -                    TrimAggregator trimAggregator = (TrimAggregator) m_processingChain.getQueryProcessingStageFactory(Aggregator.class).createQueryProcessor("trim");
+>]

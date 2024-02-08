@@ -1,0 +1,21 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +    private final OntologyConfigurator configuration;
+>, <Line: +        this(ontology, null, ontology.getOWLOntologyManager().getOntologyConfigurator());
+>, <Line: +    public OWLXMLPH(OWLOntology ontology, OntologyConfigurator configuration) {
+>, <Line: +        this(ontology, topHandler, ontology.getOWLOntologyManager().getOntologyConfigurator());
+>, <Line: +        OntologyConfigurator configuration) {
+>, <Line: +    public OntologyConfigurator getConfiguration() {
+>, <Line: +     *         known.
+>, <Line: +     *         not provide a URI)
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -    private final OWLOntologyLoaderConfiguration configuration;
+>, <Line: -        this(ontology, null, ontology.getOWLOntologyManager().getOntologyLoaderConfiguration());
+>, <Line: -    public OWLXMLPH(OWLOntology ontology, OWLOntologyLoaderConfiguration configuration) {
+>, <Line: -        this(ontology, topHandler,
+>, <Line: -            ontology.getOWLOntologyManager().getOntologyLoaderConfiguration());
+>, <Line: -        OWLOntologyLoaderConfiguration configuration) {
+>, <Line: -    public OWLOntologyLoaderConfiguration getConfiguration() {
+>, <Line: -     * known.
+>, <Line: -     * not provide a URI)
+>]

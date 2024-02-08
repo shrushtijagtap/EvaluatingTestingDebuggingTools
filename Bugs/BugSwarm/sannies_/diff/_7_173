@@ -1,0 +1,16 @@
+[<Line: +package org.mp4parser.boxes.dece;
+>, <Line: +import org.mp4parser.boxes.iso14496.part15.AvcConfigurationBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part15.AvcDecoderConfigurationRecord;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.basemediaformat;
+>, <Line: -import com.mp4parser.iso14496.part15.AvcConfigurationBox;
+>, <Line: -import com.googlecode.mp4parser.AbstractBox;
+>, <Line: -import com.mp4parser.iso14496.part15.AvcDecoderConfigurationRecord;
+>, <Line: -    public String[] getSPS() {
+>, <Line: -        return avcDecoderConfigurationRecord.getSPS();
+>, <Line: -    }
+>, <Line: -    public String[] getPPS() {
+>, <Line: -        return avcDecoderConfigurationRecord.getPPS();
+>, <Line: -    }
+>]

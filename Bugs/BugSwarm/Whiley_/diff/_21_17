@@ -1,0 +1,26 @@
+[<Line: +		bytecodes.add(new Bytecode.Load(c.startOperand,WHILEYINT));
+>, <Line: +		bytecodes.add(new Bytecode.Load(c.endOperand,WHILEYINT));
+>, <Line: +		JvmType.Function ftype = new JvmType.Function(WHILEYLIST, WHILEYINT, WHILEYINT);
+>, <Line: +		bytecodes.add(new Bytecode.Invoke(WHILEYLIST, "range", ftype,
+>, <Line: +				Bytecode.InvokeMode.STATIC));
+>, <Line: +		ftype = new JvmType.Function(JAVA_UTIL_ITERATOR);
+>, <Line: +		addReadConversion(Type.T_INT, bytecodes);
+>, <Line: +				convertUnderlyingType(Type.T_INT)));
+>]
+[<Line: -		Type elementType = c.type.element();
+>, <Line: -		bytecodes.add(new Bytecode.Load(c.sourceOperand,
+>, <Line: -				convertUnderlyingType((Type) c.type)));
+>, <Line: -		JvmType.Function ftype = new JvmType.Function(JAVA_UTIL_ITERATOR);
+>, <Line: -		ftype = new JvmType.Function(JAVA_UTIL_ITERATOR);
+>, <Line: -		addReadConversion(elementType, bytecodes);
+>, <Line: -				convertUnderlyingType(elementType)));
+>, <Line: -		case RANGE:
+>, <Line: -			bytecodes.add(new Bytecode.Load(c.operand(0), WHILEYINT));
+>, <Line: -			bytecodes.add(new Bytecode.Load(c.operand(1), WHILEYINT));
+>, <Line: -			break;
+>, <Line: -		case RANGE:
+>, <Line: -			ftype = new JvmType.Function(WHILEYLIST, WHILEYINT, WHILEYINT);
+>, <Line: -			bytecodes.add(new Bytecode.Invoke(WHILEYLIST, "range", ftype,
+>, <Line: -					Bytecode.InvokeMode.STATIC));
+>, <Line: -			break;
+>]

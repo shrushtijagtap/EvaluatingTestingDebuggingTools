@@ -1,0 +1,5 @@
+[<Line: +        String command = MacroHelper.substituteValues(str, backend);
+>]
+[<Line: -        String command = str;
+>, <Line: -        //String command = MacroHelper.substituteValues(str, backend);
+>]

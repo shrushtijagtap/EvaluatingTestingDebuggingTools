@@ -1,0 +1,4 @@
+[<Line: +			elasticsearchClient.sendClassPathRessourceBulkAsync("kibana/ApplicationServer.bulk");
+>]
+[<Line: -			elasticsearchClient.sendBulkAsync("kibana/ApplicationServer.bulk");
+>]

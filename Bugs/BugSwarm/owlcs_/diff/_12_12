@@ -1,0 +1,37 @@
+[<Line: +import static org.semanticweb.owlapi.util.OWLAPIPreconditions.checkNotNull;
+>, <Line: +public class ZipDocumentTarget extends OWLOntologyDocumentTargetBase {
+>, <Line: +        super(() -> {
+>, <Line: +            ZipOutputStream os = new ZipOutputStream(new FileOutputStream(checkNotNull(file, "file cannot be null")));
+>, <Line: +            os.putNextEntry(new ZipEntry("ontology.txt"));
+>, <Line: +            return os;
+>, <Line: +        }, null);
+>]
+[<Line: -import static org.semanticweb.owlapi.util.OWLAPIPreconditions.*;
+>, <Line: -import java.io.BufferedOutputStream;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.io.OutputStream;
+>, <Line: -import java.util.Optional;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -public class ZipDocumentTarget implements OWLOntologyDocumentTarget {
+>, <Line: -    private static final Logger LOGGER = LoggerFactory.getLogger(ZipDocumentTarget.class);
+>, <Line: -    private final File file;
+>, <Line: -        this.file = checkNotNull(file, "file cannot be null");
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Optional<OutputStream> getOutputStream() {
+>, <Line: -        File parentFile = file.getAbsoluteFile().getParentFile();
+>, <Line: -        if (parentFile.exists() || parentFile.mkdirs()) {
+>, <Line: -            ZipOutputStream os;
+>, <Line: -            try {
+>, <Line: -                os = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+>, <Line: -                os.putNextEntry(new ZipEntry("ontology.txt"));
+>, <Line: -                return optional(os);
+>, <Line: -            } catch (IOException e) {
+>, <Line: -                LOGGER.error("Cannot create or find file", e);
+>, <Line: -                return emptyOptional();
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        LOGGER.error("Could not create directories: {}", parentFile);
+>, <Line: -        return emptyOptional();
+>]

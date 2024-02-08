@@ -1,0 +1,7 @@
+[<Line: +    # Confirm that YAML module is available
+>, <Line: +    # Do not patch non-namelist output
+>, <Line: +    if output_fmt != 'nml' and args.patch:
+>, <Line: +        print('f90nml: error: Only namelist output can be patched.')
+>, <Line: +        sys.exit(-1)
+>]
+[]

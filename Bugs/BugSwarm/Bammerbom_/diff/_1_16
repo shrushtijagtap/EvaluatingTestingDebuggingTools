@@ -1,0 +1,6 @@
+[<Line: +import bammerbom.ultimatecore.sponge.utils.Selector;
+>, <Line: +        Player target = Selector.one(sender, args[0]).orElse(null);
+>]
+[<Line: -import bammerbom.ultimatecore.sponge.utils.PlayerSelector;
+>, <Line: -        Player target = PlayerSelector.one(sender, args[0]).orElse(null);
+>]

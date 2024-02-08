@@ -1,0 +1,7 @@
+[<Line: +    model = CollisionGraphRoadModel.builder(graph)
+>, <Line: +        .setVehicleLength(1d)
+>, <Line: +        .build();
+>, <Line: +          .setVehicleLength(1d)
+>]
+[<Line: -    model = CollisionGraphRoadModel.builder(graph).build();
+>]

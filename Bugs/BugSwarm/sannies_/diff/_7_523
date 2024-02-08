@@ -1,0 +1,38 @@
+[<Line: +package org.mp4parser.muxer.tracks.h264.parsing.model;
+>, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.read.CAVLCReader;
+>, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.write.CAVLCWriter;
+>, <Line: +    public void write(CAVLCWriter out) throws IOException {
+>, <Line: +        if (useDefaultScalingMatrixFlag) {
+>, <Line: +            out.writeSE(0, "SPS: ");
+>, <Line: +            return;
+>, <Line: +        }
+>, <Line: +        int lastScale = 8;
+>, <Line: +        int nextScale = 8;
+>, <Line: +        for (int j = 0; j < scalingList.length; j++) {
+>, <Line: +            if (nextScale != 0) {
+>, <Line: +                int deltaScale = scalingList[j] - lastScale - 256;
+>, <Line: +                out.writeSE(deltaScale, "SPS: ");
+>, <Line: +            }
+>, <Line: +            lastScale = scalingList[j];
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.h264.model;
+>, <Line: -import com.googlecode.mp4parser.h264.read.CAVLCReader;
+>, <Line: -import com.googlecode.mp4parser.h264.write.CAVLCWriter;
+>, <Line: -    public void write(CAVLCWriter out) throws IOException {
+>, <Line: -        if (useDefaultScalingMatrixFlag) {
+>, <Line: -            out.writeSE(0, "SPS: ");
+>, <Line: -            return;
+>, <Line: -        }
+>, <Line: -        int lastScale = 8;
+>, <Line: -        int nextScale = 8;
+>, <Line: -        for (int j = 0; j < scalingList.length; j++) {
+>, <Line: -            if (nextScale != 0) {
+>, <Line: -                int deltaScale = scalingList[j] - lastScale - 256;
+>, <Line: -                out.writeSE(deltaScale, "SPS: ");
+>, <Line: -            }
+>, <Line: -            lastScale = scalingList[j];
+>, <Line: -        }
+>, <Line: -    }
+>]

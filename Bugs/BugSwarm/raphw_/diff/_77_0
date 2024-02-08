@@ -1,0 +1,34 @@
+[<Line: +    /**
+>, <Line: +     * Defines a hint that is provided to any {@code ClassWriter} when writing a class. Typically, this gives opportunity to instruct ASM
+>, <Line: +     * to compute stack map frames or the size of the local variables array and the operand stack. If no specific hints are required for
+>, <Line: +     * applying this wrapper, the given value is to be returned.
+>, <Line: +     *
+>, <Line: +     * @param hint The current hint. This value should be merged (e.g. {@code hint | foo}) into the value that is returned by this wrapper.
+>, <Line: +     * @return The hint to be provided to the ASM {@code ClassWriter}.
+>, <Line: +     */
+>, <Line: +    int wrapWriter(int hint);
+>, <Line: +    /**
+>, <Line: +     * Defines a hint that is provided to any {@code ClassReader} when reading a class if applicable. Typically, this gives opportunity to
+>, <Line: +     * instruct ASM to expand or skip frames and to skip code and debug information. If no specific hints are required for applying this
+>, <Line: +     * wrapper, the given value is to be returned.
+>, <Line: +     *
+>, <Line: +     * @param hint The current hint. This value should be merged (e.g. {@code hint | foo}) into the value that is returned by this wrapper.
+>, <Line: +     * @return The hint to be provided to the ASM {@code ClassReader}.
+>, <Line: +     */
+>, <Line: +    int wrapReader(int hint);
+>, <Line: +        @Override
+>, <Line: +        public int wrapWriter(int hint) {
+>, <Line: +            for (ClassVisitorWrapper classVisitorWrapper : classVisitorWrappers) {
+>, <Line: +                hint = classVisitorWrapper.wrapWriter(hint);
+>, <Line: +            }
+>, <Line: +            return hint;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public int wrapReader(int hint) {
+>, <Line: +            for (ClassVisitorWrapper classVisitorWrapper : classVisitorWrappers) {
+>, <Line: +                hint = classVisitorWrapper.wrapReader(hint);
+>, <Line: +            }
+>, <Line: +            return hint;
+>, <Line: +        }
+>]
+[]

@@ -1,0 +1,55 @@
+[<Line: +import it.unibz.krdb.obda.ontology.AssertionFactory;
+>, <Line: +import it.unibz.krdb.obda.ontology.InconsistentOntologyException;
+>, <Line: +import it.unibz.krdb.obda.ontology.impl.AssertionFactoryImpl;
+>, <Line: +	private final AssertionFactory ofac = AssertionFactoryImpl.getInstance();
+>, <Line: +		try {
+>, <Line: +			if (currentPredicate.getArity() == 1) {
+>, <Line: +				URIConstant c = obdafac.getConstantURI(currSubject);
+>, <Line: +				assertion = ofac.createClassAssertion(currentPredicate.getName(), c);
+>, <Line: +			} 
+>, <Line: +			else if (currentPredicate.getType(1) == Predicate.COL_TYPE.OBJECT) {
+>, <Line: +				URIConstant c1 = obdafac.getConstantURI(currSubject);
+>, <Line: +				URIConstant c2 = obdafac.getConstantURI(currObject);
+>, <Line: +				assertion = ofac.createObjectPropertyAssertion(currentPredicate.getName(), c1, c2);
+>, <Line: +			} 
+>, <Line: +			else if (currentPredicate.getType(1) == Predicate.COL_TYPE.LITERAL) {
+>, <Line: +				URIConstant c1 = obdafac.getConstantURI(currSubject);
+>, <Line: +				ValueConstant c2 = obdafac.getConstantLiteral(currObject);
+>, <Line: +					assertion = ofac.createDataPropertyAssertion(currentPredicate.getName(), c1, c2);
+>, <Line: +			} 
+>, <Line: +			else {
+>, <Line: +				throw new RuntimeException("ERROR, Wrongly type predicate: " + currentPredicate.toString());
+>, <Line: +			}
+>, <Line: +		catch (InconsistentOntologyException e) {
+>, <Line: +			throw new RuntimeException("InconsistentOntologyException: " + 
+>, <Line: +							currentPredicate + " " + currSubject + " " + currObject);
+>, <Line: +		return c == '\t' || c == ' ';
+>]
+[<Line: -import it.unibz.krdb.obda.ontology.DataPropertyExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.OClass;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectPropertyExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.OntologyFactory;
+>, <Line: -import it.unibz.krdb.obda.ontology.impl.OntologyFactoryImpl;
+>, <Line: -	private final OntologyFactory ofac = OntologyFactoryImpl.getInstance();
+>, <Line: -		if (currentPredicate.getArity() == 1) {
+>, <Line: -			URIConstant c = obdafac.getConstantURI(currSubject);
+>, <Line: -			OClass concept = ofac.createClass(currentPredicate.getName());
+>, <Line: -			assertion = ofac.createClassAssertion(concept, c);
+>, <Line: -		} 
+>, <Line: -		else if (currentPredicate.getType(1) == Predicate.COL_TYPE.OBJECT) {
+>, <Line: -			URIConstant c1 = obdafac.getConstantURI(currSubject);
+>, <Line: -			URIConstant c2 = obdafac.getConstantURI(currObject);
+>, <Line: -			ObjectPropertyExpression prop = ofac.createObjectProperty(currentPredicate.getName());
+>, <Line: -			assertion = ofac.createObjectPropertyAssertion(prop, c1, c2);
+>, <Line: -		} 
+>, <Line: -		else if (currentPredicate.getType(1) == Predicate.COL_TYPE.LITERAL) {
+>, <Line: -			URIConstant c1 = obdafac.getConstantURI(currSubject);
+>, <Line: -			ValueConstant c2 = obdafac.getConstantLiteral(currObject);
+>, <Line: -			DataPropertyExpression prop = ofac.createDataProperty(currentPredicate.getName());
+>, <Line: -			assertion = ofac.createDataPropertyAssertion(prop, c1, c2);
+>, <Line: -		else {
+>, <Line: -			throw new RuntimeException("ERROR, Wrongly type predicate: " + currentPredicate.toString());
+>, <Line: -		if (c == '\t' || c == ' ')
+>, <Line: -			return true;
+>, <Line: -		return false;
+>]

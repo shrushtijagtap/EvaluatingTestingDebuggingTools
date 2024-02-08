@@ -1,0 +1,11 @@
+[<Line: +    beforeTest { descriptor ->
+>, <Line: +        logger.lifecycle("Running test: ${descriptor}")
+>, <Line: +    }
+>, <Line: +def branchName = System.getenv('TRAVIS_BRANCH')
+>, <Line: +    (!pullRequest || pullRequest == 'false') &&
+>, <Line: +            project.version.endsWith('-SNAPSHOT') &&
+>, <Line: +            branchName.startsWith('master')
+>, <Line: +    println "publishing if master current branch: " + branchName
+>]
+[<Line: -    (!pullRequest || pullRequest == 'false') && project.version.endsWith('-SNAPSHOT')
+>]

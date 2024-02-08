@@ -1,0 +1,92 @@
+[<Line: +<?xml version="1.0" encoding="UTF-8"?>
+>, <Line: +<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://purl.org/dc/elements/1.1/" targetNamespace="http://purl.org/dc/elements/1.1/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+>, <Line: +  <xs:annotation>
+>, <Line: +    <xs:documentation xml:lang="en">
+>, <Line: +      DCMES 1.1 XML Schema
+>, <Line: +      XML Schema for http://purl.org/dc/elements/1.1/ namespace
+>, <Line: +      Created 2008-02-11
+>, <Line: +      Created by 
+>, <Line: +      Tim Cole (t-cole3@uiuc.edu)
+>, <Line: +      Tom Habing (thabing@uiuc.edu)
+>, <Line: +      Jane Hunter (jane@dstc.edu.au)
+>, <Line: +      Pete Johnston (p.johnston@ukoln.ac.uk),
+>, <Line: +      Carl Lagoze (lagoze@cs.cornell.edu)
+>, <Line: +      This schema declares XML elements for the 15 DC elements from the
+>, <Line: +      http://purl.org/dc/elements/1.1/ namespace.
+>, <Line: +      It defines a complexType SimpleLiteral which permits mixed content 
+>, <Line: +      and makes the xml:lang attribute available. It disallows child elements by
+>, <Line: +      use of minOcccurs/maxOccurs.
+>, <Line: +      However, this complexType does permit the derivation of other complexTypes
+>, <Line: +      which would permit child elements.
+>, <Line: +      All elements are declared as substitutable for the abstract element any, 
+>, <Line: +      which means that the default type for all elements is dc:SimpleLiteral.
+>, <Line: +    </xs:documentation>
+>, <Line: +  </xs:annotation>
+>, <Line: +  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/03/xml.xsd">
+>, <Line: +  </xs:import>
+>, <Line: +  <xs:complexType name="SimpleLiteral">
+>, <Line: +        <xs:annotation>
+>, <Line: +        <xs:documentation xml:lang="en">
+>, <Line: +            This is the default type for all of the DC elements.
+>, <Line: +            It permits text content only with optional
+>, <Line: +            xml:lang attribute.
+>, <Line: +            Text is allowed because mixed="true", but sub-elements
+>, <Line: +            are disallowed because minOccurs="0" and maxOccurs="0" 
+>, <Line: +            are on the xs:any tag.
+>, <Line: +    	    This complexType allows for restriction or extension permitting
+>, <Line: +            child elements.
+>, <Line: +    	</xs:documentation>
+>, <Line: +  	</xs:annotation>
+>, <Line: +   <xs:complexContent mixed="true">
+>, <Line: +    <xs:restriction base="xs:anyType">
+>, <Line: +     <xs:sequence>
+>, <Line: +      <xs:any processContents="lax" minOccurs="0" maxOccurs="0"/>
+>, <Line: +     </xs:sequence>
+>, <Line: +     <xs:attribute ref="xml:lang" use="optional"/>
+>, <Line: +    </xs:restriction>
+>, <Line: +   </xs:complexContent>
+>, <Line: +  </xs:complexType>
+>, <Line: +  <xs:element name="any" type="SimpleLiteral" abstract="true"/>
+>, <Line: +  <xs:element name="title" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="creator" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="subject" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="description" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="publisher" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="contributor" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="date" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="type" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="format" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="identifier" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="source" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="language" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="relation" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="coverage" substitutionGroup="any"/>
+>, <Line: +  <xs:element name="rights" substitutionGroup="any"/>
+>, <Line: +  <xs:group name="elementsGroup">
+>, <Line: +  	<xs:annotation>
+>, <Line: +    	<xs:documentation xml:lang="en">
+>, <Line: +    	    This group is included as a convenience for schema authors
+>, <Line: +            who need to refer to all the elements in the 
+>, <Line: +            http://purl.org/dc/elements/1.1/ namespace.
+>, <Line: +    	</xs:documentation>
+>, <Line: +  	</xs:annotation>
+>, <Line: +  <xs:sequence>
+>, <Line: +    <xs:choice minOccurs="0" maxOccurs="unbounded">
+>, <Line: +      <xs:element ref="any"/>
+>, <Line: +    </xs:choice>
+>, <Line: +    </xs:sequence>
+>, <Line: +  </xs:group>
+>, <Line: +  <xs:complexType name="elementContainer">
+>, <Line: +  	<xs:annotation>
+>, <Line: +    	<xs:documentation xml:lang="en">
+>, <Line: +    		This complexType is included as a convenience for schema authors who need to define a root
+>, <Line: +    		or container element for all of the DC elements.
+>, <Line: +    	</xs:documentation>
+>, <Line: +  	</xs:annotation>
+>, <Line: +    <xs:choice>
+>, <Line: +      <xs:group ref="elementsGroup"/>
+>, <Line: +    </xs:choice>
+>, <Line: +  </xs:complexType>
+>, <Line: +</xs:schema>
+>]
+[]

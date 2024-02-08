@@ -1,0 +1,20 @@
+[<Line: +            getInverseObjectProperties(pe).entities().flatMap(ontology::objectPropertyDomainAxioms).forEach(axiom -> {
+>, <Line: +        Set<OWLDataProperty> superProperties = asUnorderedSet(
+>, <Line: +            Stream.concat(getSuperDataProperties(pe, false).entities(), getEquivalentDataProperties(pe).entities()));
+>, <Line: +            indexMap.put(entity, Integer.valueOf(index));
+>, <Line: +            lowlinkMap.put(entity, Integer.valueOf(index));
+>, <Line: +                    lowlinkMap.put(entity, Integer
+>, <Line: +                        .valueOf(Math.min(lowlinkMap.get(entity).intValue(), lowlinkMap.get(superEntity).intValue())));
+>, <Line: +                    lowlinkMap.put(entity, Integer
+>, <Line: +                        .valueOf(Math.min(lowlinkMap.get(entity).intValue(), indexMap.get(superEntity).intValue())));
+>]
+[<Line: -            getInverseObjectProperties(pe).entities().flatMap(ontology::objectPropertyDomainAxioms)
+>, <Line: -                .forEach(axiom -> {
+>, <Line: -        Set<OWLDataProperty> superProperties = asUnorderedSet(Stream.concat(getSuperDataProperties(pe, false)
+>, <Line: -            .entities(),
+>, <Line: -            getEquivalentDataProperties(pe).entities()));
+>, <Line: -            indexMap.put(entity, index);
+>, <Line: -            lowlinkMap.put(entity, index);
+>, <Line: -                    lowlinkMap.put(entity, Math.min(lowlinkMap.get(entity), lowlinkMap.get(superEntity)));
+>, <Line: -                    lowlinkMap.put(entity, Math.min(lowlinkMap.get(entity), indexMap.get(superEntity)));
+>]

@@ -1,0 +1,241 @@
+body {
+	padding: 1em;
+}
+
+pre {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+}
+
+.progress {
+	background-image: linear-gradient(to bottom, #999 0px, #bbb 100%);
+	margin-bottom: 0;
+}
+
+.alert {
+	min-width: 500px;
+}
+
+.head {
+	margin-bottom: 0.6em;
+	margin-top: 0;
+}
+
+.stagemonitor-banner {
+	height: 1em;
+}
+
+.tab-pane {
+	padding-top: 1em;
+}
+
+.position-relative {
+	position: relative;
+}
+
+.tab-content {
+	height: calc(100% - 150px);
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: absolute;
+	width: calc(100% - 60px);
+}
+
+.input-group-addon {
+	width: 4em;
+}
+
+.stagemonitor-calltree-signature {
+	font-family: monospace;
+}
+
+.stagemonitor-calltree-executiontime {
+	width: 10%;
+}
+
+/* spinner */
+.spinner input {
+	text-align: right;
+}
+
+.input-group-btn-vertical {
+	position: relative;
+	white-space: nowrap;
+	width: 1%;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+.input-group-btn-vertical > .btn {
+	display: block;
+	float: none;
+	width: 100%;
+	max-width: 100%;
+	padding: 8px;
+	margin-left: -1px;
+	position: relative;
+	border-radius: 0;
+}
+
+.input-group-btn-vertical.rounded > .btn:first-child {
+	border-top-right-radius: 4px;
+}
+
+.input-group-btn-vertical > .btn:last-child {
+	margin-top: -2px;
+}
+
+.input-group-btn-vertical.rounded > .btn:last-child {
+	border-bottom-right-radius: 4px;
+}
+
+.input-group-btn-vertical i {
+	position: absolute;
+	top: 0;
+	left: 4px;
+}
+
+.stagemonitor-spinner .glyphicon {
+	font-size: 0.7em;
+}
+
+.stagemonitor-spinner .btn:first-of-type i {
+	top: 3px;
+	left: 4px;
+}
+
+.stagemonitor-spinner .btn:last-of-type i {
+	top: 3px;
+	left: 3px;
+}
+
+.wide-tooltip div.tooltip-inner {
+	max-width: 500px;
+}
+
+.tooltip-inner {
+	word-wrap: break-word;
+}
+
+.toolbar .active {
+	color: #428bca;
+}
+
+/*
+ * Call Tree Tab
+ */
+.indenter {
+	display: inline !important
+}
+
+.expander {
+	margin-left: -19px;
+}
+
+.treetable span {
+	padding: 0;
+}
+
+.treetable pre {
+	margin-top: 10px;
+}
+
+/*
+ * Metrics tab
+ */
+.sidebar {
+	z-index: 1;
+	width: 250px;
+	position: absolute;
+}
+
+.page-wrapper {
+	position: inherit;
+	margin: 0 0 0 250px;
+	padding: 0 30px;
+}
+
+#flotTip {
+	color: white;
+	background: black !important;
+	font-size: 0.9em !important;
+}
+
+.col-lg-6 {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.invisible {
+	top: -1000px;
+}
+
+/*
+ * Alerts Tab
+ */
+#check-form .tt-menu {
+	max-height: 20em;
+	overflow-y: auto;
+}
+
+.well-row-entry {
+	display: inline-block;
+	margin: 0 0.5em 0.5em 0;
+}
+
+.branch td:hover {
+	cursor: pointer;
+}
+
+.branch:hover {
+	font-weight: bold;
+}
+
+#wait {
+	margin-left: 50%;
+	margin-top: 7.5em;
+	font-size: 2.5em;
+}
+
+.fade-in {
+	margin-top: 25px;
+	font-size: 21px;
+	text-align: center;
+
+	-webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+	-moz-animation: fadein 2s; /* Firefox < 16 */
+	-ms-animation: fadein 2s; /* Internet Explorer */
+	-o-animation: fadein 2s; /* Opera < 12.1 */
+	animation: fadein 2s;
+}
+
+@keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}

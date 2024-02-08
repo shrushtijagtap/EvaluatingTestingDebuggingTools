@@ -1,0 +1,28 @@
+[<Line: +import javax.ws.rs.HeaderParam;
+>, <Line: +import javax.ws.rs.core.Response;
+>, <Line: +import javax.ws.rs.core.Response.ResponseBuilder;
+>, <Line: +import com.google.common.net.HttpHeaders;
+>, <Line: +import com.hubspot.baragon.cache.BaragonStateCache;
+>, <Line: +import com.hubspot.baragon.cache.CachedBaragonState;
+>, <Line: +  private final BaragonStateCache stateCache;
+>, <Line: +  @HeaderParam(HttpHeaders.ACCEPT_ENCODING)
+>, <Line: +  private String acceptEncoding;
+>, <Line: +  public StateResource(ServiceManager serviceManager, BaragonStateCache stateCache) {
+>, <Line: +    this.stateCache = stateCache;
+>, <Line: +  public Response getAllServices() {
+>, <Line: +    CachedBaragonState state = stateCache.getState();
+>, <Line: +    ResponseBuilder builder = Response.ok();
+>, <Line: +    final byte[] entity;
+>, <Line: +    if (acceptEncoding != null && acceptEncoding.contains("gzip")) {
+>, <Line: +      builder.header(HttpHeaders.CONTENT_ENCODING, "gzip");
+>, <Line: +      entity = state.getGzip();
+>, <Line: +    } else {
+>, <Line: +      entity = state.getUncompressed();
+>, <Line: +    }
+>, <Line: +    return builder.entity(entity).build();
+>]
+[<Line: -import java.util.Collection;
+>, <Line: -  public StateResource(ServiceManager serviceManager) {
+>, <Line: -  public Collection<BaragonServiceState> getAllServices() {
+>, <Line: -    return serviceManager.getAllServices();
+>]

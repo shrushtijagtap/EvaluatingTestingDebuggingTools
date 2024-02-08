@@ -1,0 +1,7 @@
+[<Line: +    /**
+>, <Line: +     * Checks if the current VM supports the {@code java.lang.reflect.Module} API.
+>, <Line: +     *
+>, <Line: +     * @return {@code true} if the current VM supports modules.
+>, <Line: +     */
+>]
+[]

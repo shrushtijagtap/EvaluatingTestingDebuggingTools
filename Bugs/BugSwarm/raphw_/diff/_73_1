@@ -1,0 +1,32 @@
+[<Line: +        verifyZeroInteractions(redefinitionBatchAllocator);
+>, <Line: +        verifyZeroInteractions(redefinitionBatchAllocator);
+>, <Line: +        verifyZeroInteractions(redefinitionBatchAllocator);
+>, <Line: +        verifyZeroInteractions(redefinitionBatchAllocator);
+>, <Line: +        verifyZeroInteractions(redefinitionBatchAllocator);
+>, <Line: +        verifyZeroInteractions(redefinitionBatchAllocator);
+>, <Line: +        verifyZeroInteractions(redefinitionBatchAllocator);
+>, <Line: +        verifyZeroInteractions(redefinitionBatchAllocator);
+>, <Line: +        verifyZeroInteractions(redefinitionBatchAllocator);
+>, <Line: +        verifyZeroInteractions(redefinitionBatchAllocator);
+>]
+[<Line: -        verify(redefinitionBatchAllocator).batch(Collections.<Class<?>>emptyList());
+>, <Line: -        verifyNoMoreInteractions(redefinitionBatchAllocator);
+>, <Line: -        verify(redefinitionBatchAllocator).batch(Collections.<Class<?>>emptyList());
+>, <Line: -        verifyNoMoreInteractions(redefinitionBatchAllocator);
+>, <Line: -        verify(redefinitionBatchAllocator).batch(Collections.<Class<?>>emptyList());
+>, <Line: -        verifyNoMoreInteractions(redefinitionBatchAllocator);
+>, <Line: -        verify(redefinitionBatchAllocator).batch(Collections.<Class<?>>emptyList());
+>, <Line: -        verifyNoMoreInteractions(redefinitionBatchAllocator);
+>, <Line: -        verify(redefinitionBatchAllocator).batch(Collections.<Class<?>>emptyList());
+>, <Line: -        verifyNoMoreInteractions(redefinitionBatchAllocator);
+>, <Line: -        verify(redefinitionBatchAllocator).batch(Collections.<Class<?>>emptyList());
+>, <Line: -        verifyNoMoreInteractions(redefinitionBatchAllocator);
+>, <Line: -        verify(redefinitionBatchAllocator).batch(Collections.<Class<?>>emptyList());
+>, <Line: -        verifyNoMoreInteractions(redefinitionBatchAllocator);
+>, <Line: -        verify(redefinitionBatchAllocator).batch(Collections.<Class<?>>emptyList());
+>, <Line: -        verifyNoMoreInteractions(redefinitionBatchAllocator);
+>, <Line: -        verify(redefinitionBatchAllocator).batch(Collections.<Class<?>>emptyList());
+>, <Line: -        verifyNoMoreInteractions(redefinitionBatchAllocator);
+>, <Line: -        verify(redefinitionBatchAllocator).batch(Collections.<Class<?>>emptyList());
+>, <Line: -        verifyNoMoreInteractions(redefinitionBatchAllocator);
+>]

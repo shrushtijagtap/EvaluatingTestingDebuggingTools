@@ -1,0 +1,4 @@
+[<Line: +import com.datastax.driver.core.policies.LoadBalancingPolicy;
+>, <Line: +	LoadBalancingPolicy getLoadBalancingPolicy();
+>]
+[]

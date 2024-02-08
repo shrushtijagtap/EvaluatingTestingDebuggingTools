@@ -1,0 +1,21 @@
+[<Line: +    public static final int BREWING_STAND_BLOCK = 117;
+>, <Line: +    public static final int BREWING_BLOCK = 117;
+>, <Line: +    public static final int BLAZE_ROD = 369;
+>, <Line: +    public static final int GHAST_TEAR = 370;
+>, <Line: +    public static final int NETHER_WART = 372;
+>, <Line: +    public static final int POTION = 373;
+>, <Line: +    public static final int GLASS_BOTTLE = 374;
+>, <Line: +    public static final int BOTTLE = 374;
+>, <Line: +    public static final int SPIDER_EYE = 375;
+>, <Line: +    public static final int FERMENTED_SPIDER_EYE = 376;
+>, <Line: +    public static final int BLAZE_POWDER = 377;
+>, <Line: +    public static final int MAGMA_CREAM = 378;
+>, <Line: +    public static final int BREWING_STAND = 379;
+>, <Line: +    public static final int BREWING = 379;
+>, <Line: +    public static final int GLISTERING_MELON = 382;
+>, <Line: +    public static final int GOLDEN_CARROT = 396;
+>, <Line: +            list[BREWING_STAND] = BrewingStand.class;
+>, <Line: +            list[GLASS_BOTTLE] = GlassBottle.class;
+>, <Line: +            list[POTION] = Potion.class;
+>]
+[]

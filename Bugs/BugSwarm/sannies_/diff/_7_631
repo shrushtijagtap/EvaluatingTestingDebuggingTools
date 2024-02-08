@@ -1,0 +1,37 @@
+[<Line: +package org.mp4parser.streaming.input.h264;
+>, <Line: +import org.mp4parser.streaming.SampleExtension;
+>, <Line: +import org.mp4parser.streaming.input.h264.spspps.SliceHeader;
+>, <Line: +class PictureOrderCountType0SampleExtension implements SampleExtension {
+>, <Line: +    int picOrderCntMsb;
+>, <Line: +    int picOrderCountLsb;
+>, <Line: +    public PictureOrderCountType0SampleExtension(SliceHeader currentSlice, PictureOrderCountType0SampleExtension previous) {
+>, <Line: +        int prevPicOrderCntLsb = 0;
+>, <Line: +        int prevPicOrderCntMsb = 0;
+>, <Line: +        if (previous != null) {
+>, <Line: +            prevPicOrderCntLsb = previous.picOrderCountLsb;
+>, <Line: +            prevPicOrderCntMsb = previous.picOrderCntMsb;
+>, <Line: +        }
+>, <Line: +        int max_pic_order_count_lsb = (1 << (currentSlice.sps.log2_max_pic_order_cnt_lsb_minus4 + 4));
+>, <Line: +        // System.out.print(" pic_order_cnt_lsb " + pic_order_cnt_lsb + " " + max_pic_order_count);
+>, <Line: +        picOrderCountLsb = currentSlice.pic_order_cnt_lsb;
+>, <Line: +        picOrderCntMsb = 0;
+>, <Line: +        if ((picOrderCountLsb < prevPicOrderCntLsb) &&
+>, <Line: +                ((prevPicOrderCntLsb - picOrderCountLsb) >= (max_pic_order_count_lsb / 2))) {
+>, <Line: +            picOrderCntMsb = prevPicOrderCntMsb + max_pic_order_count_lsb;
+>, <Line: +        } else if ((picOrderCountLsb > prevPicOrderCntLsb) &&
+>, <Line: +                ((picOrderCountLsb - prevPicOrderCntLsb) > (max_pic_order_count_lsb / 2))) {
+>, <Line: +            picOrderCntMsb = prevPicOrderCntMsb - max_pic_order_count_lsb;
+>, <Line: +        } else {
+>, <Line: +            picOrderCntMsb = prevPicOrderCntMsb;
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public int getPoc() {
+>, <Line: +        return picOrderCntMsb + picOrderCountLsb;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "picOrderCntMsb=" + picOrderCntMsb + ", picOrderCountLsb=" + picOrderCountLsb;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

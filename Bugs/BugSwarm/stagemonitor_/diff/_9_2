@@ -1,0 +1,131 @@
+[<Line: +import java.util.Collections;
+>, <Line: +import com.codahale.metrics.Metric;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.MetricName;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.ScheduledMetrics2Reporter;
+>, <Line: +public class ThresholdMonitoringReporter extends ScheduledMetrics2Reporter {
+>, <Line: +	public static ThresholdMonitoringReporterBuilder forRegistry(Metric2Registry registry) {
+>, <Line: +		return new ThresholdMonitoringReporterBuilder(registry);
+>, <Line: +	}
+>, <Line: +	public ThresholdMonitoringReporter(ThresholdMonitoringReporterBuilder builder) {
+>, <Line: +		super(builder);
+>, <Line: +		this.alertingPlugin = builder.getAlertingPlugin();
+>, <Line: +		this.alertSender = builder.getAlertSender();
+>, <Line: +		this.incidentRepository = builder.getIncidentRepository();
+>, <Line: +		this.measurementSession = builder.getMeasurementSession();
+>, <Line: +	public void reportMetrics(Map<MetricName, Gauge> gauges, Map<MetricName, Counter> counters, Map<MetricName, Histogram> histograms, Map<MetricName, Meter> meters, Map<MetricName, Timer> timers) {
+>, <Line: +		Map<String, Map<MetricName, Metric>> metricsGroupedByName = new HashMap<String, Map<MetricName, Metric>>();
+>, <Line: +		addMetrics(metricsGroupedByName, gauges);
+>, <Line: +		addMetrics(metricsGroupedByName, counters);
+>, <Line: +		addMetrics(metricsGroupedByName, histograms);
+>, <Line: +		addMetrics(metricsGroupedByName, meters);
+>, <Line: +		addMetrics(metricsGroupedByName, timers);
+>, <Line: +				checkMetrics(metricsGroupedByName, check);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private <T extends Metric> void addMetrics(Map<String, Map<MetricName, Metric>> metricsGroupedByName, Map<MetricName, T > gauges) {
+>, <Line: +		for (Map.Entry<MetricName, T> entry : gauges.entrySet()) {
+>, <Line: +			Map<MetricName, Metric> metricsForName = metricsGroupedByName.get(entry.getKey().getName());
+>, <Line: +			if (metricsForName == null) {
+>, <Line: +				metricsForName = new HashMap<MetricName, Metric>();
+>, <Line: +				metricsGroupedByName.put(entry.getKey().getName(), metricsForName);
+>, <Line: +			metricsForName.put(entry.getKey(), entry.getValue());
+>, <Line: +	private void checkMetrics(Map<String, Map<MetricName, Metric>> metricsGroupedByName, Check check) {
+>, <Line: +		Map<MetricName, Metric> metricsOfName = metricsGroupedByName.get(check.getTarget().getName());
+>, <Line: +		if (metricsOfName == null) {
+>, <Line: +			metricsOfName = Collections.emptyMap();
+>, <Line: +		}
+>, <Line: +		for (Map.Entry<MetricName, Metric> entry : metricsOfName.entrySet()) {
+>, <Line: +			if (entry.getKey().matches(check.getTarget())) {
+>, <Line: +				try {
+>, <Line: +					checkResults.addAll(check.check(entry.getKey(), asMap(entry.getValue())));
+>, <Line: +				} catch (RuntimeException e) {
+>, <Line: +					logger.warn(e.getMessage(), e);
+>, <Line: +				}
+>, <Line: +	private Map<String, Number> asMap(Metric metric) {
+>, <Line: +		return JsonUtils.getMapper().convertValue(metric, Map.class);
+>, <Line: +	public static class ThresholdMonitoringReporterBuilder extends ScheduledMetrics2Reporter.Builder<ThresholdMonitoringReporter, ThresholdMonitoringReporterBuilder> {
+>, <Line: +		private AlertSender alertSender;
+>, <Line: +		private IncidentRepository incidentRepository;
+>, <Line: +		private MeasurementSession measurementSession;
+>, <Line: +		private AlertingPlugin alertingPlugin;
+>, <Line: +		private ThresholdMonitoringReporterBuilder(Metric2Registry registry) {
+>, <Line: +			super(registry, "threshold-monitoring-reporter");
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public ThresholdMonitoringReporter build() {
+>, <Line: +			return new ThresholdMonitoringReporter(this);
+>, <Line: +		}
+>, <Line: +		public AlertSender getAlertSender() {
+>, <Line: +			return alertSender;
+>, <Line: +		}
+>, <Line: +		public ThresholdMonitoringReporterBuilder alertSender(AlertSender alertSender) {
+>, <Line: +			this.alertSender = alertSender;
+>, <Line: +			return this;
+>, <Line: +		}
+>, <Line: +		public IncidentRepository getIncidentRepository() {
+>, <Line: +			return incidentRepository;
+>, <Line: +		}
+>, <Line: +		public ThresholdMonitoringReporterBuilder incidentRepository(IncidentRepository incidentRepository) {
+>, <Line: +			this.incidentRepository = incidentRepository;
+>, <Line: +			return this;
+>, <Line: +		}
+>, <Line: +		public MeasurementSession getMeasurementSession() {
+>, <Line: +			return measurementSession;
+>, <Line: +		}
+>, <Line: +		public ThresholdMonitoringReporterBuilder measurementSession(MeasurementSession measurementSession) {
+>, <Line: +			this.measurementSession = measurementSession;
+>, <Line: +			return this;
+>, <Line: +		}
+>, <Line: +		public AlertingPlugin getAlertingPlugin() {
+>, <Line: +			return alertingPlugin;
+>, <Line: +		}
+>, <Line: +		public ThresholdMonitoringReporterBuilder alertingPlugin(AlertingPlugin alertingPlugin) {
+>, <Line: +			this.alertingPlugin = alertingPlugin;
+>, <Line: +			return this;
+>, <Line: +		}
+>, <Line: +	}
+>]
+[<Line: -import java.util.Iterator;
+>, <Line: -import java.util.SortedMap;
+>, <Line: -import java.util.concurrent.TimeUnit;
+>, <Line: -import com.codahale.metrics.MetricFilter;
+>, <Line: -import com.codahale.metrics.ScheduledReporter;
+>, <Line: -import com.fasterxml.jackson.databind.JsonNode;
+>, <Line: -import com.fasterxml.jackson.databind.node.ObjectNode;
+>, <Line: -import org.stagemonitor.alerting.check.MetricCategory;
+>, <Line: -public class ThresholdMonitoringReporter extends ScheduledReporter {
+>, <Line: -	protected ThresholdMonitoringReporter(Metric2Registry registry, AlertingPlugin alertingPlugin,
+>, <Line: -										  AlertSender alertSender, IncidentRepository incidentRepository,
+>, <Line: -										  MeasurementSession measurementSession) {
+>, <Line: -		super(registry.getMetricRegistry(), "threshold-monitoring-reporter", MetricFilter.ALL, TimeUnit.SECONDS, TimeUnit.MILLISECONDS);
+>, <Line: -		this.alertingPlugin = alertingPlugin;
+>, <Line: -		this.alertSender = alertSender;
+>, <Line: -		this.incidentRepository = incidentRepository;
+>, <Line: -		this.measurementSession = measurementSession;
+>, <Line: -	public void report(SortedMap<String, Gauge> gauges, SortedMap<String, Counter> counters,
+>, <Line: -					   SortedMap<String, Histogram> histograms, SortedMap<String, Meter> meters,
+>, <Line: -					   SortedMap<String, Timer> timers) {
+>, <Line: -		ObjectNode metrics = JsonUtils.getMapper().createObjectNode();
+>, <Line: -		metrics.set(MetricCategory.GAUGE.getPath(), JsonUtils.toObjectNode(gauges));
+>, <Line: -		metrics.set(MetricCategory.COUNTER.getPath(), JsonUtils.toObjectNode(counters));
+>, <Line: -		metrics.set(MetricCategory.HISTOGRAM.getPath(), JsonUtils.toObjectNode(histograms));
+>, <Line: -		metrics.set(MetricCategory.METER.getPath(), JsonUtils.toObjectNode(meters));
+>, <Line: -		metrics.set(MetricCategory.TIMER.getPath(), JsonUtils.toObjectNode(timers));
+>, <Line: -				checkMetrics(metrics, check);
+>, <Line: -	private void checkMetrics(JsonNode metrics, Check check) {
+>, <Line: -		Iterator<Map.Entry<String, JsonNode>> metricsOfCategory = metrics.get(check.getMetricCategory().getPath()).fields();
+>, <Line: -		while (metricsOfCategory.hasNext()) {
+>, <Line: -			Map.Entry<String, JsonNode> metricTypes = metricsOfCategory.next();
+>, <Line: -			if (check.getTarget().matcher(metricTypes.getKey()).matches()) {
+>, <Line: -				Map<String, Double> valuesByMetricType = getValuesByMetricType(metricTypes.getValue());
+>, <Line: -				checkResults.addAll(check.check(metricTypes.getKey(), valuesByMetricType));
+>, <Line: -	private Map<String, Double> getValuesByMetricType(JsonNode metricTypes) {
+>, <Line: -		Map<String, Double> metricTypesMap = new HashMap<String, Double>();
+>, <Line: -		final Iterator<Map.Entry<String, JsonNode>> fields = metricTypes.fields();
+>, <Line: -		while (fields.hasNext()) {
+>, <Line: -			Map.Entry<String, JsonNode> stringJsonNodeEntry = fields.next();
+>, <Line: -			metricTypesMap.put(stringJsonNodeEntry.getKey(), stringJsonNodeEntry.getValue().asDouble());
+>, <Line: -		}
+>, <Line: -		return metricTypesMap;
+>]

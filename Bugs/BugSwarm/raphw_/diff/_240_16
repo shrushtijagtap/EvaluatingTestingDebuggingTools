@@ -1,0 +1,16 @@
+[<Line: +                    return new Dispatcher.Enabled(Class.class.getMethod("getModule"),
+>, <Line: +                            module.getMethod("getClassLoader"),
+>, <Line: +                            module.getMethod("isNamed"),
+>, <Line: +                            module.getMethod("getName"),
+>, <Line: +                            module.getMethod("getResourceAsStream", String.class),
+>, <Line: +                            module.getMethod("canRead", module),
+>, <Line: +                            Instrumentation.class.getMethod("addModuleReads", module, module));
+>]
+[<Line: -                    return new Dispatcher.Enabled(Class.class.getDeclaredMethod("getModule"),
+>, <Line: -                            module.getDeclaredMethod("getClassLoader"),
+>, <Line: -                            module.getDeclaredMethod("isNamed"),
+>, <Line: -                            module.getDeclaredMethod("getName"),
+>, <Line: -                            module.getDeclaredMethod("getResourceAsStream", String.class),
+>, <Line: -                            module.getDeclaredMethod("canRead", module),
+>, <Line: -                            Instrumentation.class.getDeclaredMethod("addModuleReads", module, module));
+>]

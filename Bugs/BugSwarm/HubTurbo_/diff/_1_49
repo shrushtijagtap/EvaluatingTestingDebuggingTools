@@ -1,0 +1,156 @@
+[]
+[<Line: -package command;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import java.util.HashSet;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Set;
+>, <Line: -import service.ServiceManager;
+>, <Line: -import util.CollectionUtilities;
+>, <Line: -import model.Model;
+>, <Line: -import model.TurboIssue;
+>, <Line: -import model.TurboLabel;
+>, <Line: -import model.TurboMilestone;
+>, <Line: -import model.TurboUser;
+>, <Line: -public class IssueChangeLogger {
+>, <Line: -	public static final String LABEL_CHANGELOG_HEADER = "[Edited labels]\n";
+>, <Line: -	public static final String LABEL_EXCLUSIVE_CHANGELOG_FORMAT = "*%1s*: %2s ~> **%3s**\n";
+>, <Line: -	protected static final String LABEL_NONEXCLUSIVE_CHANGELOG_FORMAT = "*%1s*: %2s %3s\n";
+>, <Line: -	protected static final String LABEL_ADDED_FORMAT = "[added: %1s]";
+>, <Line: -	protected static final String LABEL_REMOVED_FORMAT = "[removed: %1s]";
+>, <Line: -	protected static final String DESCRIPTION_CHANGE_LOG = "Edited description. \n"; 
+>, <Line: -	protected static final String MILESTONE_CHANGE_LOG = "*Milestone changed:* %1s ~> **%2s**\n";
+>, <Line: -	protected static final String ASSIGNEE_CHANGE_LOG = "*Assignee changed:* %1s ~> **%2s**\n";
+>, <Line: -	protected static final String UNGROUPED_LABELS_TAG = "Ungrouped";
+>, <Line: -	protected static final String ADDITIONAL_COMMENTS_FORMAT = "\n [Remarks] %1s \n";
+>, <Line: -	public static String logLabelsChange(Model model, TurboIssue issue, List<TurboLabel> original, List<TurboLabel> edited){
+>, <Line: -		String changeLog = getLabelsChangeLog(model, original, edited);
+>, <Line: -//		logChangesInGithub(issue, changeLog);
+>, <Line: -		return changeLog;
+>, <Line: -	}
+>, <Line: -	public static String getLabelsChangeLog(Model model, List<TurboLabel> original, List<TurboLabel> edited){
+>, <Line: -		HashMap<String, HashSet<TurboLabel>> changes = CollectionUtilities.getChangesToList(original, edited);
+>, <Line: -		HashSet<TurboLabel> removed = changes.get(CollectionUtilities.REMOVED_TAG);
+>, <Line: -		HashSet<TurboLabel> added = changes.get(CollectionUtilities.ADDED_TAG);
+>, <Line: -		HashMap<String,  ArrayList<TurboLabel>> groupedRemoved = TurboLabel.groupLabels(removed, UNGROUPED_LABELS_TAG);
+>, <Line: -		HashMap<String,  ArrayList<TurboLabel>> groupedAdded = TurboLabel.groupLabels(added, UNGROUPED_LABELS_TAG);
+>, <Line: -		Set<String> removedLabelGrps = groupedRemoved.keySet();
+>, <Line: -		Set<String> addedLabelGrps = groupedAdded.keySet();
+>, <Line: -		Set<String> allGroups = new HashSet<>();
+>, <Line: -		allGroups.addAll(removedLabelGrps);
+>, <Line: -		allGroups.addAll(addedLabelGrps);
+>, <Line: -		StringBuilder log = new StringBuilder();
+>, <Line: -		for(String grpName : allGroups) {
+>, <Line: -			 ArrayList<TurboLabel> addedLabs = groupedAdded.get(grpName);
+>, <Line: -			 ArrayList<TurboLabel> remLabs = groupedRemoved.get(grpName);
+>, <Line: -			if (!grpName.equals(UNGROUPED_LABELS_TAG) && model.isExclusiveLabelGroup(grpName)) {
+>, <Line: -				log.append(getExclusiveLabelLog(grpName, addedLabs, remLabs));
+>, <Line: -			} else {
+>, <Line: -				log.append(getNonexclusiveLabelLog(grpName, addedLabs, remLabs));
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return log.toString();
+>, <Line: -	}
+>, <Line: -	public static String getExclusiveLabelLog(String group, ArrayList<TurboLabel> added, ArrayList<TurboLabel> removed){
+>, <Line: -		TurboLabel removedLabel =  null;
+>, <Line: -		TurboLabel addedLabel = null;
+>, <Line: -		if (added != null && added.size() > 0) {
+>, <Line: -			addedLabel = added.get(0);
+>, <Line: -		}
+>, <Line: -		if (removed != null && removed.size() > 0) {
+>, <Line: -			removedLabel = removed.get(0);
+>, <Line: -		}
+>, <Line: -		return String.format(LABEL_EXCLUSIVE_CHANGELOG_FORMAT, group, getDisplayedLabelName(removedLabel), getDisplayedLabelName(addedLabel));
+>, <Line: -	}
+>, <Line: -	public static String getNonexclusiveLabelLog(String grp, ArrayList<TurboLabel> added, ArrayList<TurboLabel> removed){
+>, <Line: -		String addedlist = "";
+>, <Line: -		String removedlist = "";
+>, <Line: -		if (added != null) {
+>, <Line: -			addedlist = getLabelPrintoutList(added);
+>, <Line: -		}
+>, <Line: -		if (removed != null) {
+>, <Line: -			removedlist = getLabelPrintoutList(removed);
+>, <Line: -		}
+>, <Line: -		String addLog = "";
+>, <Line: -		String remLog = "";
+>, <Line: -		if(!addedlist.isEmpty()){
+>, <Line: -			addLog = String.format(LABEL_ADDED_FORMAT, addedlist);
+>, <Line: -		}
+>, <Line: -		if(!removedlist.isEmpty()){
+>, <Line: -			remLog = String.format(LABEL_REMOVED_FORMAT, removedlist);
+>, <Line: -		}
+>, <Line: -		return String.format(LABEL_NONEXCLUSIVE_CHANGELOG_FORMAT, grp, addLog, remLog);
+>, <Line: -	}
+>, <Line: -	private static String getLabelPrintoutList(ArrayList<TurboLabel> labels){
+>, <Line: -		StringBuilder printout = new StringBuilder();
+>, <Line: -		String printoutDelim = ", ";
+>, <Line: -		for (TurboLabel label : labels) {
+>, <Line: -			printout.append(printoutDelim + getDisplayedLabelName(label));
+>, <Line: -		}
+>, <Line: -		return printout.toString().substring(printoutDelim.length());
+>, <Line: -	}
+>, <Line: -	public static String getDisplayedLabelName(TurboLabel label){
+>, <Line: -		if (label == null) {
+>, <Line: -			return "<none>";
+>, <Line: -		} else {
+>, <Line: -			return label.logString();
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public static String logTitleChange(TurboIssue issue, String original, String edited){
+>, <Line: -		String changeLog = IssueChangeLogger.getTitleChangeLog(original, edited);
+>, <Line: -//		logChangesInGithub(issue, changeLog);
+>, <Line: -		return changeLog;
+>, <Line: -	}
+>, <Line: -	public static String getTitleChangeLog(String original, String edited){
+>, <Line: -		return "Title edited: [previous: " + original + "] [new: " + edited + "]\n";
+>, <Line: -	}
+>, <Line: -	public static String logDescriptionChange(TurboIssue issue, String original, String edited){
+>, <Line: -		return IssueChangeLogger.getDescriptionChangeLog(original, edited);
+>, <Line: -	}
+>, <Line: -	public static String getDescriptionChangeLog(String original, String edited){
+>, <Line: -		return DESCRIPTION_CHANGE_LOG;
+>, <Line: -	}
+>, <Line: -	public static String logMilestoneChange(TurboIssue issue, TurboMilestone original, TurboMilestone edited){
+>, <Line: -		return IssueChangeLogger.getMilestoneChangeLog(original, edited);
+>, <Line: -	}
+>, <Line: -	public static String getMilestoneChangeLog(TurboMilestone original, TurboMilestone edited){
+>, <Line: -		return String.format(MILESTONE_CHANGE_LOG, getDisplayedMilestoneName(original), getDisplayedMilestoneName(edited));
+>, <Line: -	}
+>, <Line: -	public static String getDisplayedMilestoneName(TurboMilestone milestone){
+>, <Line: -		if (milestone == null) {
+>, <Line: -			return "<none>";
+>, <Line: -		} else {
+>, <Line: -			return milestone.getTitle();
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public static String logAssigneeChange(TurboIssue issue, TurboUser original, TurboUser edited){
+>, <Line: -		String changeLog = IssueChangeLogger.getAssigneeChangeLog(original, edited);
+>, <Line: -//		logChangesInGithub(issue, changeLog);
+>, <Line: -		return changeLog;
+>, <Line: -	}
+>, <Line: -	public static String getAssigneeChangeLog(TurboUser original, TurboUser edited){
+>, <Line: -		return String.format(ASSIGNEE_CHANGE_LOG, getDisplayedAssigneeName(original), getDisplayedAssigneeName(edited));
+>, <Line: -	}
+>, <Line: -	public static String getDisplayedAssigneeName(TurboUser user){
+>, <Line: -		if (user == null) {
+>, <Line: -			return "<none>";
+>, <Line: -		} else {
+>, <Line: -			return user.getGithubName();
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public static String logParentChange(TurboIssue issue, Integer original, Integer edited){
+>, <Line: -		return getParentChangeLog(original, edited);
+>, <Line: -	}
+>, <Line: -	public static String getParentChangeLog(Integer original, Integer edited){
+>, <Line: -		String changeLog;
+>, <Line: -		if (edited < 0){
+>, <Line: -			changeLog = String.format("Removed issue parent: %1d\n", original);
+>, <Line: -		} else if (original > 0){
+>, <Line: -			changeLog = String.format("Changed issue parent from %1d to **%2d**\n", original, edited);
+>, <Line: -		} else {
+>, <Line: -			changeLog = String.format("Set issue parent to **%1d**\n", edited);
+>, <Line: -		}
+>, <Line: -		return changeLog;
+>, <Line: -	}
+>, <Line: -}
+>]

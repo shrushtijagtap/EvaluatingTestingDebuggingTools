@@ -1,0 +1,84 @@
+[<Line: +import com.github.rinde.rinsim.geom.TableGraph;
+>, <Line: +            return new GraphRoadModel(new MultimapGraph<>());
+>, <Line: +            return new CachedGraphRoadModel(new MultimapGraph<>(),
+>, <Line: +            return new GraphRoadModel(new TableGraph<>());
+>, <Line: +            return new CachedGraphRoadModel(new TableGraph<>(),
+>, <Line: +                new TableGraph<>()));
+>, <Line: +      IllegalArgumentException, SecurityException, InvocationTargetException,
+>, <Line: +      NoSuchMethodException {
+>, <Line: +    assertEquals(A, model.getConnection(ab).get().from());
+>, <Line: +    assertEquals(B, model.getConnection(ab).get().to());
+>, <Line: +    assertEquals(B, model.getConnection(bc).get().from());
+>, <Line: +    assertEquals(C, model.getConnection(bc).get().to());
+>, <Line: +    assertTrue(connectionEquals(model.getConnection(middle).get(), SW, SE));
+>, <Line: +    assertTrue(connectionEquals(model.getConnection(agent2).get(), SE, NE));
+>, <Line: +    assertFalse(model.getConnection(driver).isPresent());
+>, <Line: +    assertTrue(connectionEquals(model.getConnection(driver).get(), SE, NE));
+>, <Line: +    assertTrue(connectionEquals(model.getConnection(driver).get(), SW, SE));
+>, <Line: +        MultiAttributeData.builder().setLength(300).build());
+>, <Line: +        MultiAttributeData.builder().build());
+>, <Line: +    final Loc loc1 = GraphRoadModel.newLoc(Connection.create(SW, SE), 3);
+>, <Line: +    final Loc loc2 = GraphRoadModel.newLoc(Connection.create(SW, SE), 1);
+>, <Line: +    final Loc loc3 = GraphRoadModel.newLoc(Connection.create(SE, NE), 9.999999);
+>, <Line: +    final Loc loc5 = GraphRoadModel.newLoc(Connection.create(SE, SW), 1);
+>, <Line: +    final Loc loc6 = GraphRoadModel.newLoc(Connection.create(NE, SW), 1);
+>, <Line: +    final Loc l = GraphRoadModel.newLoc(Connection.create(
+>, <Line: +        new Point(-10, -10), new Point(100, 0)), 1);
+>, <Line: +    g.addConnection(A, B, LengthData.create(3));
+>, <Line: +        MultiAttributeData.builder().setLength(3).setMaxSpeed(5d).build());
+>, <Line: +        MultiAttributeData.builder().setLength(3).build());
+>, <Line: +        MultiAttributeData.builder().setLength(5).setMaxSpeed(5d).build());
+>, <Line: +  static boolean connectionEquals(Connection<?> conn,
+>, <Line: +    return conn.from().equals(from) && conn.to().equals(to);
+>]
+[<Line: -import static org.junit.Assert.assertNull;
+>, <Line: -import com.github.rinde.rinsim.geom.TestMultimapGraph;
+>, <Line: -import com.github.rinde.rinsim.geom.TestTableGraph;
+>, <Line: -            return new GraphRoadModel(new TestMultimapGraph());
+>, <Line: -            return new CachedGraphRoadModel(new TestMultimapGraph(),
+>, <Line: -            return new GraphRoadModel(new TestTableGraph());
+>, <Line: -            return new CachedGraphRoadModel(new TestTableGraph(),
+>, <Line: -                new TestTableGraph()));
+>, <Line: -  IllegalArgumentException, SecurityException, InvocationTargetException,
+>, <Line: -  NoSuchMethodException {
+>, <Line: -    assertEquals(A, model.getConnection(ab).from);
+>, <Line: -    assertEquals(B, model.getConnection(ab).to);
+>, <Line: -    assertEquals(B, model.getConnection(bc).from);
+>, <Line: -    assertEquals(C, model.getConnection(bc).to);
+>, <Line: -    assertTrue(connectionEquals(model.getConnection(middle), SW, SE));
+>, <Line: -    assertTrue(connectionEquals(model.getConnection(agent2), SE, NE));
+>, <Line: -    assertNull(model.getConnection(driver));
+>, <Line: -    assertTrue(connectionEquals(model.getConnection(driver), SE, NE));
+>, <Line: -    assertTrue(connectionEquals(model.getConnection(driver), SW, SE));
+>, <Line: -        new MultiAttributeData(300));
+>, <Line: -        new MultiAttributeData(Double.NaN));
+>, <Line: -    final Loc loc1 = GraphRoadModel.newLoc(new Connection<ConnectionData>(SW,
+>, <Line: -        SE, null), 3);
+>, <Line: -    final Loc loc2 = GraphRoadModel.newLoc(new Connection<ConnectionData>(SW,
+>, <Line: -        SE, null), 1);
+>, <Line: -    final Loc loc3 = GraphRoadModel.newLoc(new Connection<ConnectionData>(SE,
+>, <Line: -        NE, null), 9.999999);
+>, <Line: -    final Loc loc5 = GraphRoadModel.newLoc(new Connection<ConnectionData>(SE,
+>, <Line: -        SW, null), 1);
+>, <Line: -    final Loc loc6 = GraphRoadModel.newLoc(new Connection<ConnectionData>(NE,
+>, <Line: -        SW, null), 1);
+>, <Line: -    final Loc l = GraphRoadModel.newLoc(new Connection<ConnectionData>(
+>, <Line: -        new Point(-10, -10), new Point(100, 0), null), 1);
+>, <Line: -  @Test
+>, <Line: -  public void getConnectionLength() {
+>, <Line: -    assertEquals(10,
+>, <Line: -        GraphRoadModel.getConnectionLength(new Connection<ConnectionData>(NE,
+>, <Line: -            NW, null)), EPSILON);
+>, <Line: -    final Connection<MultiAttributeData> conn = new Connection<MultiAttributeData>(
+>, <Line: -        NE, NW, new MultiAttributeData(12, 0d));
+>, <Line: -    assertEquals(12, GraphRoadModel.getConnectionLength(conn), EPSILON);
+>, <Line: -    conn.getData().put(MultiAttributeData.KEY_LENGTH, "this is not a number");
+>, <Line: -    assertEquals(10, GraphRoadModel.getConnectionLength(conn), EPSILON);
+>, <Line: -  }
+>, <Line: -    g.addConnection(A, B, new LengthData(3));
+>, <Line: -        new MultiAttributeData(3, 5d));
+>, <Line: -        new MultiAttributeData(3, Double.NaN));
+>, <Line: -        new MultiAttributeData(5, 5d));
+>, <Line: -  static boolean connectionEquals(Connection<? extends ConnectionData> conn,
+>, <Line: -    return conn.from.equals(from) && conn.to.equals(to);
+>]

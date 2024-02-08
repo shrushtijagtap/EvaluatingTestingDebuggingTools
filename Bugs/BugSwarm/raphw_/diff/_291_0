@@ -1,0 +1,11 @@
+[<Line: +            if (attachmentJar != null) {
+>, <Line: +                if (!attachmentJar.delete()) {
+>, <Line: +                    attachmentJar.deleteOnExit();
+>, <Line: +                }
+>, <Line: +                 * @param pid     The {@code java.lang.ProcessHandle#pid()} method.
+>]
+[<Line: -import java.util.logging.Logger;
+>, <Line: -            if (attachmentJar != null && !attachmentJar.delete()) {
+>, <Line: -                Logger.getAnonymousLogger().warning("Could not delete attachment jar: " + attachmentJar);
+>, <Line: -                 * @param pid  The {@code java.lang.ProcessHandle#pid()} method.
+>]

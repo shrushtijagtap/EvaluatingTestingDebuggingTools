@@ -1,0 +1,36 @@
+[<Line: +package org.mp4parser.streaming.extensions;
+>, <Line: +import org.mp4parser.streaming.SampleExtension;
+>, <Line: +        key += (samplePaddingValue << 8);
+>, <Line: +        key += (sampleDegradationPriority << 11);
+>, <Line: +        key += (sampleIsNonSyncSample ? 1 : 0) << 27;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "isLeading=" + isLeading +
+>, <Line: +                ", dependsOn=" + sampleDependsOn +
+>, <Line: +                ", isDependedOn=" + sampleIsDependedOn +
+>, <Line: +                ", hasRedundancy=" + sampleHasRedundancy +
+>, <Line: +                ", paddingValue=" + samplePaddingValue +
+>, <Line: +                ", isSyncSample=" + !sampleIsNonSyncSample +
+>, <Line: +                ", sampleDegradationPriority=" + sampleDegradationPriority;
+>, <Line: +    }
+>, <Line: +    public void setSampleDependsOn(int sampleDependsOn) {
+>, <Line: +        this.sampleDependsOn = (byte) sampleDependsOn;
+>, <Line: +    public void setSampleIsDependedOn(int sampleIsDependedOn) {
+>, <Line: +        this.sampleIsDependedOn = (byte) sampleIsDependedOn;
+>, <Line: +    public boolean isSyncSample() {
+>, <Line: +        return !sampleIsNonSyncSample;
+>, <Line: +    }
+>]
+[<Line: -package com.mp4parser.streaming.extensions;
+>, <Line: -import com.mp4parser.streaming.SampleExtension;
+>, <Line: -        key += (samplePaddingValue<<8);
+>, <Line: -        key += (sampleDegradationPriority<<11);
+>, <Line: -        key += (sampleIsNonSyncSample?1:0)<<27;
+>, <Line: -    public void setSampleDependsOn(byte sampleDependsOn) {
+>, <Line: -        this.sampleDependsOn = sampleDependsOn;
+>, <Line: -    public void setSampleIsDependedOn(byte sampleIsDependedOn) {
+>, <Line: -        this.sampleIsDependedOn = sampleIsDependedOn;
+>, <Line: -    public boolean isSyncSample() {
+>, <Line: -        return !sampleIsNonSyncSample;
+>, <Line: -    }
+>]

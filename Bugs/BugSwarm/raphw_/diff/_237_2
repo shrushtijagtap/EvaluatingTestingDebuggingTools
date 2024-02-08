@@ -1,0 +1,10 @@
+[<Line: +         * @param source               The source type to be bound.
+>, <Line: +         * @param target               The target type the {@code sourceType} is to be bound to.
+>]
+[<Line: -import java.util.HashSet;
+>, <Line: -import java.util.Iterator;
+>, <Line: -import java.util.LinkedHashSet;
+>, <Line: -import java.util.Set;
+>, <Line: -         * @param source           The source type to be bound.
+>, <Line: -         * @param target           The target type the {@code sourceType} is to be bound to.
+>]

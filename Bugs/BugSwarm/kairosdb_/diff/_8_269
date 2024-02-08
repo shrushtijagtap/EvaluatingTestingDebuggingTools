@@ -1,0 +1,291 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'kbn',
+>, <Line: +	],
+>, <Line: +	function (angular, _, kbn) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		module.service('templateValuesSrv', function ($q, $rootScope, datasourceSrv, $routeParams, templateSrv, timeSrv) {
+>, <Line: +			var self = this;
+>, <Line: +			$rootScope.onAppEvent('time-range-changed', function () {
+>, <Line: +				var variable = _.findWhere(self.variables, {type: 'interval'});
+>, <Line: +				if (variable) {
+>, <Line: +					self.updateAutoInterval(variable);
+>, <Line: +				}
+>, <Line: +			});
+>, <Line: +			this.init = function (dashboard, viewstate) {
+>, <Line: +				this.variables = dashboard.templating.list;
+>, <Line: +				this.viewstate = viewstate;
+>, <Line: +				templateSrv.init(this.variables);
+>, <Line: +				for (var i = 0; i < this.variables.length; i++) {
+>, <Line: +					var variable = this.variables[i];
+>, <Line: +					var urlValue = viewstate.state['var-' + variable.name];
+>, <Line: +					if (urlValue !== void 0) {
+>, <Line: +						var option = _.findWhere(variable.options, {text: urlValue});
+>, <Line: +						option = option || {text: urlValue, value: urlValue};
+>, <Line: +						this.setVariableValue(variable, option, true);
+>, <Line: +						this.updateAutoInterval(variable);
+>, <Line: +					}
+>, <Line: +					else if (variable.refresh) {
+>, <Line: +						this.updateOptions(variable);
+>, <Line: +					}
+>, <Line: +					else if (variable.type === 'interval') {
+>, <Line: +						this.updateAutoInterval(variable);
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			this.updateAutoInterval = function (variable) {
+>, <Line: +				if (!variable.auto) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				// add auto option if missing
+>, <Line: +				if (variable.options[0].text !== 'auto') {
+>, <Line: +					variable.options.unshift({
+>, <Line: +						text: 'auto',
+>, <Line: +						value: '$__auto_interval'
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				var interval = kbn.calculateInterval(timeSrv.timeRange(), variable.auto_count);
+>, <Line: +				templateSrv.setGrafanaVariable('$__auto_interval', interval);
+>, <Line: +			};
+>, <Line: +			this.setVariableValue = function (variable, option, recursive) {
+>, <Line: +				variable.current = option;
+>, <Line: +				templateSrv.updateTemplateData();
+>, <Line: +				return this.updateOptionsInChildVariables(variable)
+>, <Line: +					.then(function () {
+>, <Line: +						if (!recursive) {
+>, <Line: +							$rootScope.$broadcast('refresh');
+>, <Line: +						}
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			this.updateOptionsInChildVariables = function (updatedVariable) {
+>, <Line: +				var promises = _.map(self.variables, function (otherVariable) {
+>, <Line: +					if (otherVariable === updatedVariable) {
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					if (templateSrv.containsVariable(otherVariable.query, updatedVariable.name)) {
+>, <Line: +						return self.updateOptions(otherVariable);
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +				return $q.all(promises);
+>, <Line: +			};
+>, <Line: +			this._updateNonQueryVariable = function (variable) {
+>, <Line: +				// extract options in comma seperated string
+>, <Line: +				variable.options = _.map(variable.query.split(/[\s,]+/), function (text) {
+>, <Line: +					return {text: text, value: text};
+>, <Line: +				});
+>, <Line: +				if (variable.type === 'interval') {
+>, <Line: +					self.updateAutoInterval(variable);
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			this.updateOptions = function (variable) {
+>, <Line: +				if (variable.type !== 'query') {
+>, <Line: +					self._updateNonQueryVariable(variable);
+>, <Line: +					self.setVariableValue(variable, variable.options[0]);
+>, <Line: +					return $q.when([]);
+>, <Line: +				}
+>, <Line: +				var datasource = datasourceSrv.get(variable.datasource);
+>, <Line: +				return datasource.metricFindQuery(variable.query)
+>, <Line: +					.then(function (results) {
+>, <Line: +						variable.options = self.metricNamesToVariableValues(variable, results);
+>, <Line: +						if (variable.includeAll) {
+>, <Line: +							self.addAllOption(variable);
+>, <Line: +						}
+>, <Line: +						// if parameter has current value
+>, <Line: +						// if it exists in options array keep value
+>, <Line: +						if (variable.current) {
+>, <Line: +							var currentOption = _.findWhere(variable.options, {text: variable.current.text});
+>, <Line: +							if (currentOption) {
+>, <Line: +								return self.setVariableValue(variable, currentOption, true);
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +						return self.setVariableValue(variable, variable.options[0], true);
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			this.metricNamesToVariableValues = function (variable, metricNames) {
+>, <Line: +				var regex, options, i, matches;
+>, <Line: +				options = {}; // use object hash to remove duplicates
+>, <Line: +				if (variable.regex) {
+>, <Line: +					regex = kbn.stringToJsRegex(templateSrv.replace(variable.regex));
+>, <Line: +				}
+>, <Line: +				for (i = 0; i < metricNames.length; i++) {
+>, <Line: +					var value = metricNames[i].text;
+>, <Line: +					if (regex) {
+>, <Line: +						matches = regex.exec(value);
+>, <Line: +						if (!matches) {
+>, <Line: +							continue;
+>, <Line: +						}
+>, <Line: +						if (matches.length > 1) {
+>, <Line: +							value = matches[1];
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					options[value] = value;
+>, <Line: +				}
+>, <Line: +				return _.map(_.keys(options), function (key) {
+>, <Line: +					return {text: key, value: key};
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			this.addAllOption = function (variable) {
+>, <Line: +				var allValue = '';
+>, <Line: +				switch (variable.allFormat) {
+>, <Line: +					case 'wildcard':
+>, <Line: +						allValue = '*';
+>, <Line: +						break;
+>, <Line: +					case 'regex wildcard':
+>, <Line: +						allValue = '.*';
+>, <Line: +						break;
+>, <Line: +					case 'regex values':
+>, <Line: +						allValue = '(' + _.pluck(variable.options, 'text').join('|') + ')';
+>, <Line: +						break;
+>, <Line: +					default:
+>, <Line: +						allValue = '{';
+>, <Line: +						allValue += _.pluck(variable.options, 'text').join(',');
+>, <Line: +						allValue += '}';
+>, <Line: +				}
+>, <Line: +				variable.options.unshift({text: 'All', value: allValue});
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'kbn',
+>, <Line: -],
+>, <Line: -function (angular, _, kbn) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.service('templateValuesSrv', function($q, $rootScope, datasourceSrv, $routeParams, templateSrv, timeSrv) {
+>, <Line: -    var self = this;
+>, <Line: -    $rootScope.onAppEvent('time-range-changed', function()  {
+>, <Line: -      var variable = _.findWhere(self.variables, { type: 'interval' });
+>, <Line: -      if (variable) {
+>, <Line: -        self.updateAutoInterval(variable);
+>, <Line: -      }
+>, <Line: -    });
+>, <Line: -    this.init = function(dashboard, viewstate) {
+>, <Line: -      this.variables = dashboard.templating.list;
+>, <Line: -      this.viewstate = viewstate;
+>, <Line: -      templateSrv.init(this.variables);
+>, <Line: -      for (var i = 0; i < this.variables.length; i++) {
+>, <Line: -        var variable = this.variables[i];
+>, <Line: -        var urlValue = viewstate.state['var-' + variable.name];
+>, <Line: -        if (urlValue !== void 0) {
+>, <Line: -          var option = _.findWhere(variable.options, { text: urlValue });
+>, <Line: -          option = option || { text: urlValue, value: urlValue };
+>, <Line: -          this.setVariableValue(variable, option, true);
+>, <Line: -          this.updateAutoInterval(variable);
+>, <Line: -        }
+>, <Line: -        else if (variable.refresh) {
+>, <Line: -          this.updateOptions(variable);
+>, <Line: -        }
+>, <Line: -        else if (variable.type === 'interval') {
+>, <Line: -          this.updateAutoInterval(variable);
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    this.updateAutoInterval = function(variable) {
+>, <Line: -      if (!variable.auto) { return; }
+>, <Line: -      // add auto option if missing
+>, <Line: -      if (variable.options[0].text !== 'auto') {
+>, <Line: -        variable.options.unshift({ text: 'auto', value: '$__auto_interval' });
+>, <Line: -      }
+>, <Line: -      var interval = kbn.calculateInterval(timeSrv.timeRange(), variable.auto_count);
+>, <Line: -      templateSrv.setGrafanaVariable('$__auto_interval', interval);
+>, <Line: -    };
+>, <Line: -    this.setVariableValue = function(variable, option, recursive) {
+>, <Line: -      variable.current = option;
+>, <Line: -      templateSrv.updateTemplateData();
+>, <Line: -      return this.updateOptionsInChildVariables(variable)
+>, <Line: -        .then(function() {
+>, <Line: -          if (!recursive) {
+>, <Line: -            $rootScope.$broadcast('refresh');
+>, <Line: -          }
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    this.updateOptionsInChildVariables = function(updatedVariable) {
+>, <Line: -      var promises = _.map(self.variables, function(otherVariable) {
+>, <Line: -        if (otherVariable === updatedVariable) {
+>, <Line: -          return;
+>, <Line: -        }
+>, <Line: -        if (templateSrv.containsVariable(otherVariable.query, updatedVariable.name)) {
+>, <Line: -          return self.updateOptions(otherVariable);
+>, <Line: -        }
+>, <Line: -      });
+>, <Line: -      return $q.all(promises);
+>, <Line: -    };
+>, <Line: -    this._updateNonQueryVariable = function(variable) {
+>, <Line: -      // extract options in comma seperated string
+>, <Line: -      variable.options = _.map(variable.query.split(/[\s,]+/), function(text) {
+>, <Line: -        return { text: text, value: text };
+>, <Line: -      });
+>, <Line: -      if (variable.type === 'interval') {
+>, <Line: -        self.updateAutoInterval(variable);
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    this.updateOptions = function(variable) {
+>, <Line: -      if (variable.type !== 'query') {
+>, <Line: -        self._updateNonQueryVariable(variable);
+>, <Line: -        self.setVariableValue(variable, variable.options[0]);
+>, <Line: -        return $q.when([]);
+>, <Line: -      }
+>, <Line: -      var datasource = datasourceSrv.get(variable.datasource);
+>, <Line: -      return datasource.metricFindQuery(variable.query)
+>, <Line: -        .then(function (results) {
+>, <Line: -          variable.options = self.metricNamesToVariableValues(variable, results);
+>, <Line: -          if (variable.includeAll) {
+>, <Line: -            self.addAllOption(variable);
+>, <Line: -          }
+>, <Line: -          // if parameter has current value
+>, <Line: -          // if it exists in options array keep value
+>, <Line: -          if (variable.current) {
+>, <Line: -            var currentOption = _.findWhere(variable.options, { text: variable.current.text });
+>, <Line: -            if (currentOption) {
+>, <Line: -              return self.setVariableValue(variable, currentOption, true);
+>, <Line: -            }
+>, <Line: -          }
+>, <Line: -          return self.setVariableValue(variable, variable.options[0], true);
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    this.metricNamesToVariableValues = function(variable, metricNames) {
+>, <Line: -      var regex, options, i, matches;
+>, <Line: -      options = {}; // use object hash to remove duplicates
+>, <Line: -      if (variable.regex) {
+>, <Line: -        regex = kbn.stringToJsRegex(templateSrv.replace(variable.regex));
+>, <Line: -      }
+>, <Line: -      for (i = 0; i < metricNames.length; i++) {
+>, <Line: -        var value = metricNames[i].text;
+>, <Line: -        if (regex) {
+>, <Line: -          matches = regex.exec(value);
+>, <Line: -          if (!matches) { continue; }
+>, <Line: -          if (matches.length > 1) {
+>, <Line: -            value = matches[1];
+>, <Line: -          }
+>, <Line: -        }
+>, <Line: -        options[value] = value;
+>, <Line: -      }
+>, <Line: -      return _.map(_.keys(options), function(key) {
+>, <Line: -        return { text: key, value: key };
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    this.addAllOption = function(variable) {
+>, <Line: -      var allValue = '';
+>, <Line: -      switch(variable.allFormat) {
+>, <Line: -      case 'wildcard':
+>, <Line: -        allValue = '*';
+>, <Line: -        break;
+>, <Line: -      case 'regex wildcard':
+>, <Line: -        allValue = '.*';
+>, <Line: -        break;
+>, <Line: -      case 'regex values':
+>, <Line: -        allValue = '(' + _.pluck(variable.options, 'text').join('|') + ')';
+>, <Line: -        break;
+>, <Line: -      default:
+>, <Line: -        allValue = '{';
+>, <Line: -        allValue += _.pluck(variable.options, 'text').join(',');
+>, <Line: -        allValue += '}';
+>, <Line: -      }
+>, <Line: -      variable.options.unshift({text: 'All', value: allValue});
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

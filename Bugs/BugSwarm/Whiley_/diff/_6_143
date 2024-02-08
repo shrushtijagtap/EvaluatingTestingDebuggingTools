@@ -1,0 +1,8 @@
+[<Line: +    while i < |transitions| where i >= 0 && |r| > |transitions|:
+>, <Line: +requires state >= 0
+>, <Line: +requires index >= 0 && index <= |str|:
+>, <Line: +requires index >= 0 && index <= |str|
+>]
+[<Line: -    while i < |transitions| where i >= 0:
+>, <Line: -requires state >= 0:
+>]

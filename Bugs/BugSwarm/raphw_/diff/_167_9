@@ -1,0 +1,4 @@
+[<Line: +        super((Class<? extends MethodOverrideMatcher<?>>) (Object) MethodOverrideMatcher.class, "isOverriddenFrom");
+>]
+[<Line: -        super((Class<? extends MethodOverrideMatcher<?>>) (Object) MethodOverrideMatcher.class, "returns");
+>]

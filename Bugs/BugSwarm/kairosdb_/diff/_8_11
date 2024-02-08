@@ -1,0 +1,4 @@
+[<Line: +					String pluginFolder = props.getProperty(SERVICE_FOLDER_PREFIX + serviceName);
+>]
+[<Line: -					String pluginFolder = props.getProperty(SERVICE_FOLDER_PREFIX+serviceName);
+>]

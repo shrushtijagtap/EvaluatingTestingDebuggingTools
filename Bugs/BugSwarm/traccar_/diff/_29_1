@@ -1,0 +1,110 @@
+[<Line: + * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+>, <Line: +            case 0x14:
+>, <Line: +                return Position.ALARM_BREAKING;
+>, <Line: +            case 0x15:
+>, <Line: +                return Position.ALARM_ACCELETATION;
+>, <Line: +            case 0x30:
+>, <Line: +                return Position.ALARM_PARKING;
+>, <Line: +    private void decodeCards(Position position, ChannelBuffer buf) {
+>, <Line: +        int index = 1;
+>, <Line: +        for (int i = 0; i < 4; i++) {
+>, <Line: +            int blockLength = buf.readUnsignedShort();
+>, <Line: +            int blockEnd = buf.readerIndex() + blockLength;
+>, <Line: +            if (blockLength > 0) {
+>, <Line: +                int count = buf.readUnsignedByte();
+>, <Line: +                for (int j = 0; j < count; j++) {
+>, <Line: +                    int length = buf.readUnsignedByte();
+>, <Line: +                    boolean odd = length % 2 != 0;
+>, <Line: +                    if (odd) {
+>, <Line: +                        length += 1;
+>, <Line: +                    }
+>, <Line: +                    String num = ChannelBuffers.hexDump(buf.readBytes(length / 2));
+>, <Line: +                    if (odd) {
+>, <Line: +                        num = num.substring(1);
+>, <Line: +                    }
+>, <Line: +                    position.set("card" + index, num);
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            buf.readerIndex(blockEnd);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private void decodePassengers(Position position, ChannelBuffer buf) {
+>, <Line: +        int blockLength = buf.readUnsignedShort();
+>, <Line: +        int blockEnd = buf.readerIndex() + blockLength;
+>, <Line: +        if (blockLength > 0) {
+>, <Line: +            position.set("passengersOn", buf.readUnsignedMedium());
+>, <Line: +            position.set("passengersOff", buf.readUnsignedMedium());
+>, <Line: +        }
+>, <Line: +        buf.readerIndex(blockEnd);
+>, <Line: +    }
+>, <Line: +        int hardware = buf.readUnsignedShort(); // model
+>, <Line: +        position.setDeviceTime(new DateBuilder()
+>, <Line: +                .setDate(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())
+>, <Line: +                .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte()).getDate());
+>, <Line: +        if (blockLength < 22) {
+>, <Line: +        double lat;
+>, <Line: +        double lon;
+>, <Line: +        if (hardware == 0x10A || hardware == 0x10B) {
+>, <Line: +            lat = buf.readUnsignedInt() / 600000.0;
+>, <Line: +            lon = buf.readUnsignedInt() / 600000.0;
+>, <Line: +        } else {
+>, <Line: +            lat = buf.readUnsignedInt() / 100000.0 / 60.0;
+>, <Line: +            lon = buf.readUnsignedInt() / 100000.0 / 60.0;
+>, <Line: +        }
+>, <Line: +        position.setFixTime(new DateBuilder()
+>, <Line: +                .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte()).getDate());
+>, <Line: +        if (blockLength > 0 && (hardware == 0x10A || hardware == 0x10B)) {
+>, <Line: +        if (blockLength >= 13) {
+>, <Line: +        if (blockLength >= 15) {
+>, <Line: +            position.set(Position.PREFIX_TEMP + 1, buf.readUnsignedShort());
+>, <Line: +        buf.readerIndex(blockEnd);
+>, <Line: +        if (hardware == 0x10A || hardware == 0x10B) {
+>, <Line: +            decodeCards(position, buf);
+>, <Line: +            buf.skipBytes(buf.readUnsignedShort()); // temperature
+>, <Line: +            buf.skipBytes(buf.readUnsignedShort()); // lock
+>, <Line: +            decodePassengers(position, buf);
+>]
+[<Line: - * Copyright 2015 Anton Tananaev (anton@traccar.org)
+>, <Line: -        buf.readUnsignedShort(); // model
+>, <Line: -        buf.skipBytes(6); // device time
+>, <Line: -        if (blockLength == 0) {
+>, <Line: -        double lat = buf.readUnsignedInt() / 600000.0;
+>, <Line: -        double lon = buf.readUnsignedInt() / 600000.0;
+>, <Line: -        DateBuilder dateBuilder = new DateBuilder()
+>, <Line: -                .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte());
+>, <Line: -        position.setTime(dateBuilder.getDate());
+>, <Line: -        if (blockLength > 0) {
+>, <Line: -        if (blockLength > 0) {
+>, <Line: -            position.set(Position.PREFIX_TEMP + 1, buf.readUnsignedShort());
+>, <Line: -        buf.readerIndex(blockEnd);
+>, <Line: -        // Cards
+>, <Line: -        int index = 1;
+>, <Line: -        for (int i = 0; i < 4; i++) {
+>, <Line: -            blockLength = buf.readUnsignedShort();
+>, <Line: -            blockEnd = buf.readerIndex() + blockLength;
+>, <Line: -            if (blockLength > 0) {
+>, <Line: -                int count = buf.readUnsignedByte();
+>, <Line: -                for (int j = 0; j < count; j++) {
+>, <Line: -                    int length = buf.readUnsignedByte();
+>, <Line: -                    boolean odd = length % 2 != 0;
+>, <Line: -                    if (odd) {
+>, <Line: -                        length += 1;
+>, <Line: -                    }
+>, <Line: -                    String num = ChannelBuffers.hexDump(buf.readBytes(length / 2));
+>, <Line: -                    if (odd) {
+>, <Line: -                        num = num.substring(1);
+>, <Line: -                    }
+>, <Line: -                    position.set("card" + index, num);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            buf.readerIndex(blockEnd);
+>, <Line: -        buf.skipBytes(buf.readUnsignedShort()); // temperature
+>, <Line: -        buf.skipBytes(buf.readUnsignedShort()); // lock
+>, <Line: -        // Passengers
+>, <Line: -        blockLength = buf.readUnsignedShort();
+>, <Line: -        blockEnd = buf.readerIndex() + blockLength;
+>, <Line: -        if (blockLength > 0) {
+>, <Line: -            position.set("passengersOn", buf.readUnsignedMedium());
+>, <Line: -            position.set("passengersOff", buf.readUnsignedMedium());
+>, <Line: -        buf.readerIndex(blockEnd);
+>]

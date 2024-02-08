@@ -1,0 +1,60 @@
+[]
+[<Line: -/*  
+>, <Line: - * Copyright 2008 CoreMedia AG, Hamburg
+>, <Line: - *
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the License); 
+>, <Line: - * you may not use this file except in compliance with the License. 
+>, <Line: - * You may obtain a copy of the License at 
+>, <Line: - * 
+>, <Line: - *     http://www.apache.org/licenses/LICENSE-2.0 
+>, <Line: - * 
+>, <Line: - * Unless required by applicable law or agreed to in writing, software 
+>, <Line: - * distributed under the License is distributed on an AS IS BASIS, 
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+>, <Line: - * See the License for the specific language governing permissions and 
+>, <Line: - * limitations under the License. 
+>, <Line: - */
+>, <Line: -package com.coremedia.iso.boxes.vodafone;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.Utf8;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -import java.nio.ByteBuffer;
+>, <Line: -/**
+>, <Line: - * <h1>4cc = "{@value #TYPE}"</h1>
+>, <Line: - * Vodafone specific box. Usage unclear.
+>, <Line: - */
+>, <Line: -public class ContentDistributorIdBox extends AbstractFullBox {
+>, <Line: -    public static final String TYPE = "cdis";
+>, <Line: -    private String language;
+>, <Line: -    private String contentDistributorId;
+>, <Line: -    public ContentDistributorIdBox() {
+>, <Line: -        super(TYPE);
+>, <Line: -    }
+>, <Line: -    public String getLanguage() {
+>, <Line: -        return language;
+>, <Line: -    }
+>, <Line: -    public String getContentDistributorId() {
+>, <Line: -        return contentDistributorId;
+>, <Line: -    }
+>, <Line: -    protected long getContentSize() {
+>, <Line: -        return 2 + Utf8.utf8StringLengthInBytes(contentDistributorId) + 5;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void _parseDetails(ByteBuffer content) {
+>, <Line: -        parseVersionAndFlags(content);
+>, <Line: -        language = IsoTypeReader.readIso639(content);
+>, <Line: -        contentDistributorId = IsoTypeReader.readString(content);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    protected void getContent(ByteBuffer byteBuffer) {
+>, <Line: -        writeVersionAndFlags(byteBuffer);
+>, <Line: -        IsoTypeWriter.writeIso639(byteBuffer, language);
+>, <Line: -        byteBuffer.put(Utf8.convert(contentDistributorId));
+>, <Line: -        byteBuffer.put((byte) 0);
+>, <Line: -    }
+>, <Line: -    public String toString() {
+>, <Line: -        return "ContentDistributorIdBox[language=" + getLanguage() + ";contentDistributorId=" + getContentDistributorId() + "]";
+>, <Line: -    }
+>, <Line: -}
+>]

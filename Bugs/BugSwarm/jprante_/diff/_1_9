@@ -1,0 +1,9 @@
+[<Line: +import org.elasticsearch.common.xcontent.ToXContent;
+>, <Line: +import java.util.HashMap;
+>, <Line: +        Map<String,String> map = new HashMap<>();
+>, <Line: +        map.put("ignore_null", Boolean.toString(shouldIgnoreNull));
+>, <Line: +        map.put("force_array", "false");
+>, <Line: +        return new PlainIndexableObject(new ToXContent.MapParams(map));
+>]
+[<Line: -        return new PlainIndexableObject().ignoreNull(shouldIgnoreNull);
+>]

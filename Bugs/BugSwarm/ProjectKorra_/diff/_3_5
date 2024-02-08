@@ -1,0 +1,24 @@
+[<Line: +import com.projectkorra.projectkorra.BendingPlayer;
+>, <Line: +import com.projectkorra.projectkorra.GeneralMethods;
+>, <Line: +import com.projectkorra.projectkorra.ProjectKorra;
+>, <Line: +import com.projectkorra.projectkorra.ability.AvatarState;
+>, <Line: +import com.projectkorra.projectkorra.configuration.ConfigLoadable;
+>, <Line: +import com.projectkorra.projectkorra.earthbending.EarthMethods;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import java.util.concurrent.ConcurrentHashMap;
+>]
+[<Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import java.util.concurrent.ConcurrentHashMap;
+>, <Line: -import com.projectkorra.projectkorra.BendingManager;
+>, <Line: -import com.projectkorra.projectkorra.BendingPlayer;
+>, <Line: -import com.projectkorra.projectkorra.GeneralMethods;
+>, <Line: -import com.projectkorra.projectkorra.ProjectKorra;
+>, <Line: -import com.projectkorra.projectkorra.ability.AvatarState;
+>, <Line: -import com.projectkorra.projectkorra.configuration.ConfigLoadable;
+>, <Line: -import com.projectkorra.projectkorra.earthbending.EarthMethods;
+>, <Line: -		} else if (BendingManager.events.get(player.getWorld()).equalsIgnoreCase("SozinsComet")) {
+>, <Line: -			chargeTime = 0;
+>, <Line: -			cooldown = 0;
+>]

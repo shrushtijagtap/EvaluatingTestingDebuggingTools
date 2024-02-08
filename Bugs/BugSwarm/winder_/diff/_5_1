@@ -1,0 +1,58 @@
+[<Line: +    private GrblUtils.Capabilities capabilities = new GrblUtils.Capabilities();
+>, <Line: +            if (this.isStreaming()) {
+>, <Line: +                    "{0} = {1}", new Object[]{Localization.getString("controller.log.realtime"), this.capabilities.REAL_TIME});
+>, <Line: +        if (this.capabilities.REAL_TIME) {
+>, <Line: +        if (this.capabilities.REAL_TIME) {
+>, <Line: +        if (paused && !this.capabilities.REAL_TIME) {
+>, <Line: +        if (!paused && this.capabilities.REAL_TIME) {
+>, <Line: +        if (this.capabilities.REAL_TIME && this.getStatusUpdatesEnabled()) {
+>, <Line: +        if (this.isCommOpen() && this.capabilities.REAL_TIME) {
+>, <Line: +        String beforeState =  (controllerStatus != null) ?
+>, <Line: +                controllerStatus.getState() : "";
+>, <Line: +        // Make UGS more responsive to the state being reported by GRBL.
+>, <Line: +        if (!beforeState.equals(controllerStatus.getState())) {
+>, <Line: +            switch (controllerStatus.getState().toLowerCase()) {
+>, <Line: +                case "jog":
+>, <Line: +                case "run":
+>, <Line: +                    this.dispatchStateChange(ControlState.COMM_SENDING);
+>, <Line: +                    break;
+>, <Line: +                case "hold":
+>, <Line: +                case "door":
+>, <Line: +                    this.dispatchStateChange(ControlState.COMM_SENDING_PAUSED);
+>, <Line: +                    break;
+>, <Line: +                case "check":
+>, <Line: +                case "alarm":
+>, <Line: +                case "idle":
+>, <Line: +                    if (isStreaming()){
+>, <Line: +                        this.dispatchStateChange(ControlState.COMM_SENDING_PAUSED);
+>, <Line: +                    } else {
+>, <Line: +                        // GRBL 1.1: cancel the send when from jog -> idle.
+>, <Line: +                        if (beforeState.toLowerCase().equals("jog")) {
+>, <Line: +                            this.comm.cancelSend();
+>, <Line: +                        }
+>, <Line: +                        this.dispatchStateChange(ControlState.COMM_IDLE);
+>, <Line: +                    }
+>, <Line: +                    break;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +                // If the machine goes into idle, we no longer need to cancel.
+>, <Line: +                if (grblState.equals("Idle")) {
+>, <Line: +                    isCanceling = false;
+>, <Line: +                }
+>, <Line: +                // Otherwise check if the machine is Hold and stopped.
+>, <Line: +                else if (grblState.equals("Hold")
+>, <Line: +                        && lastLocation.equals(machineLocation)) {
+>]
+[<Line: -    private GrblUtils.Capabilities capabilities = null;
+>, <Line: -    private Boolean realTimeCapable = false;
+>, <Line: -            if (this.isStreamingFile()) {
+>, <Line: -            this.realTimeCapable = GrblUtils.isRealTimeCapable(this.grblVersion);
+>, <Line: -                    "{0} = {1}", new Object[]{Localization.getString("controller.log.realtime"), this.realTimeCapable});
+>, <Line: -        if (this.realTimeCapable) {
+>, <Line: -        if (this.realTimeCapable) {
+>, <Line: -        if (paused && !this.realTimeCapable) {
+>, <Line: -        if (!paused && this.realTimeCapable == true) {
+>, <Line: -        if (this.realTimeCapable && this.getStatusUpdatesEnabled()) {
+>, <Line: -        if (this.isCommOpen() && this.realTimeCapable) {
+>, <Line: -                if (grblState.equals("Hold") && lastLocation.equals(machineLocation)) {
+>]

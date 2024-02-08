@@ -1,0 +1,7 @@
+[]
+[<Line: -public export method test() -> void:
+>, <Line: -    [int] l = [1, 2, 3]
+>, <Line: -    [real] r = [4.23, 5.5]
+>, <Line: -    r = r ++ (([real]) l)
+>, <Line: -    assert r == [4.23,5.5,1.0,2.0,3.0]
+>]

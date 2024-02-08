@@ -1,0 +1,19 @@
+[<Line: +package org.traccar.protocol;
+>, <Line: +import org.jboss.netty.buffer.ChannelBuffers;
+>, <Line: +import org.junit.Assert;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.traccar.helper.ChannelBufferTools;
+>, <Line: +import org.traccar.model.Command;
+>, <Line: +public class CityeasyProtocolEncoderTest {
+>, <Line: +    @Test
+>, <Line: +    public void testEncode() throws Exception {
+>, <Line: +        CityeasyProtocolEncoder encoder = new CityeasyProtocolEncoder();
+>, <Line: +        Command command = new Command();
+>, <Line: +        command.setDeviceId(1);
+>, <Line: +        command.setType(Command.TYPE_SET_TIMEZONE);
+>, <Line: +        command.set(Command.KEY_TIMEZONE, 6 * 3600);
+>, <Line: +        Assert.assertEquals(encoder.encodeCommand(command), ChannelBuffers.wrappedBuffer(ChannelBufferTools.convertHexString(
+>, <Line: +                "5353001100080001680000000B60820D0A")));
+>, <Line: +    }
+>, <Line: +}>]
+[]

@@ -1,0 +1,14 @@
+[<Line: +  private ImmutableSet<String> getFieldOfClasses(
+>, <Line: +    TypeElement annotationElement = elementUtils.getTypeElement(annotation.getCanonicalName());
+>, <Line: +    if (annotationElement == null) {
+>, <Line: +      // This can happen if the annotation is on the -processorpath but not on the -classpath.
+>, <Line: +      return ImmutableSet.of();
+>, <Line: +    }
+>, <Line: +    TypeMirror annotationMirror = annotationElement.asType();
+>, <Line: +      if (!typeUtils.isSameType(annot.getAnnotationType(), annotationMirror)) {
+>]
+[<Line: -  private static ImmutableSet<String> getFieldOfClasses(
+>, <Line: -    TypeMirror annotationMirror =
+>, <Line: -        elementUtils.getTypeElement(annotation.getCanonicalName()).asType();
+>, <Line: -      if (!annot.getAnnotationType().equals(annotationMirror)) {
+>]

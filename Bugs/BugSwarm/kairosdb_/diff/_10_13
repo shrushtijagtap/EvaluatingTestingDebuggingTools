@@ -1,0 +1,35 @@
+[<Line: +import com.google.inject.spi.InjectionListener;
+>, <Line: +import com.google.inject.spi.TypeEncounter;
+>, <Line: +import com.google.inject.spi.TypeListener;
+>, <Line: +public class KairosMetricReporterListProvider implements TypeListener
+>, <Line: +	public Set<KairosMetricReporter> get()
+>, <Line: +		return (Collections.unmodifiableSet(m_reporters));
+>, <Line: +	public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter)
+>, <Line: +		encounter.register(new InjectionListener<I>()
+>, <Line: +		{
+>, <Line: +			@Override
+>, <Line: +			public void afterInjection(I injectee)
+>, <Line: +			{
+>, <Line: +				if (KairosMetricReporter.class.isAssignableFrom(injectee.getClass()))
+>, <Line: +				{
+>, <Line: +					m_reporters.add((KairosMetricReporter)injectee);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		});
+>]
+[<Line: -public class KairosMetricReporterListProvider implements Provider<Set<KairosMetricReporter>>
+>, <Line: -	@Inject
+>, <Line: -	public KairosMetricReporterListProvider(Injector injector)
+>, <Line: -		Map<Key<?>, Binding<?>> bindings = injector.getAllBindings();
+>, <Line: -		for (Key<?> key : bindings.keySet())
+>, <Line: -		{
+>, <Line: -			Class<?> bindingClass = key.getTypeLiteral().getRawType();
+>, <Line: -			if (KairosMetricReporter.class.isAssignableFrom(bindingClass))
+>, <Line: -			{
+>, <Line: -				KairosMetricReporter reporter = (KairosMetricReporter)injector.getInstance(bindingClass);
+>, <Line: -				m_reporters.add(reporter);
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	public Set<KairosMetricReporter> get()
+>, <Line: -		return (Collections.unmodifiableSet(m_reporters));
+>]

@@ -1,0 +1,59 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_tsv;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import com.google.common.io.Files;
+>, <Line: +import de.charite.compbio.jannovar.utils.ResourceUtils;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions.MultipleMatchBehaviour;
+>, <Line: +import htsjdk.variant.vcf.VCFFileReader;
+>, <Line: +import htsjdk.variant.vcf.VCFHeaderLineType;
+>, <Line: +import java.io.File;
+>, <Line: +import java.io.PrintWriter;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.Map;
+>, <Line: +import org.junit.Before;
+>, <Line: +/**
+>, <Line: + * Test base for generic TSV annotation, using the head of ReMM v0.3.1
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenericTSVAnnotationDriverWithRemmBaseTest {
+>, <Line: +	protected String genericTsvPath;
+>, <Line: +	protected String fastaPath;
+>, <Line: +	protected GenericTSVAnnotationOptions options;
+>, <Line: +	// File to annotate
+>, <Line: +	protected VCFFileReader vcfReader;
+>, <Line: +	@Before
+>, <Line: +	public void setUp() throws Exception {
+>, <Line: +		// Setup dbSNP VCF file
+>, <Line: +		File tmpDir = Files.createTempDir();
+>, <Line: +		genericTsvPath = tmpDir + "/ReMM.v0.3.1.head.tsv.gz";
+>, <Line: +		ResourceUtils.copyResourceToFile("/ReMM.v0.3.1.head.tsv.gz", new File(genericTsvPath));
+>, <Line: +		String tbiPath = tmpDir + "/ReMM.v0.3.1.head.tsv.gz.tbi";
+>, <Line: +		ResourceUtils.copyResourceToFile("/ReMM.v0.3.1.head.tsv.gz.tbi", new File(tbiPath));
+>, <Line: +		// Setup reference FASTA file
+>, <Line: +		fastaPath = tmpDir + "/chr1.fasta";
+>, <Line: +		ResourceUtils.copyResourceToFile("/chr1.fasta", new File(fastaPath));
+>, <Line: +		String faiPath = tmpDir + "/chr1.fasta.fai";
+>, <Line: +		ResourceUtils.copyResourceToFile("/chr1.fasta.fai", new File(faiPath));
+>, <Line: +		// Construct options
+>, <Line: +		Map<String, GenericTSVValueColumnDescription> descriptions = new HashMap<>();
+>, <Line: +		descriptions.put("REMM_SCORE", new GenericTSVValueColumnDescription(3, VCFHeaderLineType.Float, "REMM_SCORE",
+>, <Line: +				"ReMM Score", GenericTSVAccumulationStrategy.CHOOSE_MAX));
+>, <Line: +		this.options = new GenericTSVAnnotationOptions(true, false, "", MultipleMatchBehaviour.BEST_ONLY,
+>, <Line: +				new File(genericTsvPath), GenericTSVAnnotationTarget.VARIANT, true, 1, 2, 2, 0, 0, true,
+>, <Line: +				ImmutableList.of("REMM_SCORE"), descriptions);
+>, <Line: +		options.setReportOverlapping(true);
+>, <Line: +		options.setReportOverlappingAsMatching(true);
+>, <Line: +		// Write out file to use in the test
+>, <Line: +		String vcfHeader = "##fileformat=VCFv4.0\n"
+>, <Line: +				+ "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tindividual\n";
+>, <Line: +		String testVCFPath = tmpDir + "/test_var_in_dbnsfp_tsv.vcf";
+>, <Line: +		PrintWriter writer = new PrintWriter(testVCFPath);
+>, <Line: +		writer.write(vcfHeader);
+>, <Line: +		writer.write("1\t10026\t.\tT\tA,C,G\t.\t.\t.\tGT\t0/1\n");
+>, <Line: +		writer.write("1\t10032\t.\tTA\tT\t.\t.\t.\tGT\t0/1\n"); // 1033 has higher score
+>, <Line: +		writer.close();
+>, <Line: +		vcfReader = new VCFFileReader(new File(testVCFPath), false);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,38 @@
+[<Line: +      while (true) {
+>, <Line: +    for (int i = 1; i < this.pairs.size(); ++i) {
+>, <Line: +  private static int getNextSecondBar(BitArray row, int initialPos) {
+>, <Line: +    do {
+>, <Line: +      if (pattern == null) {
+>, <Line: +    } while (keepFinding);
+>, <Line: +    if (!previousPairs.isEmpty() && previousPairs.get(previousPairs.size() - 1).mustBeLast()) {
+>, <Line: +    } catch (NotFoundException ignored) {
+>, <Line: +    } else {
+>, <Line: +          if (isFinderPattern(counters)) {
+>, <Line: +  private static void reverseCounters(int [] counters) {
+>, <Line: +    for (int i = 0; i < length / 2; ++i) {
+>, <Line: +    if (oddPattern) {
+>, <Line: +    } else {
+>, <Line: +    } //counters[] has the pixels of the module
+>, <Line: +    int weightRowNumber = 4 * pattern.getValue() + (isOddPattern ? 0 : 2) + (leftChar ? 0 : 1) - 1;
+>, <Line: +      if (isNotA1left(pattern, isOddPattern, leftChar)) {
+>, <Line: +      if (isNotA1left(pattern, isOddPattern, leftChar)) {
+>]
+[<Line: -      while (true){
+>, <Line: -    for(int i = 1; i < this.pairs.size(); ++i){
+>, <Line: -  private static int getNextSecondBar(BitArray row, int initialPos){
+>, <Line: -    do{
+>, <Line: -      if (pattern == null){
+>, <Line: -    }while(keepFinding);
+>, <Line: -    if (!previousPairs.isEmpty() && previousPairs.get(previousPairs.size()-1).mustBeLast()) {
+>, <Line: -    } catch(NotFoundException ignored) {
+>, <Line: -    } else{
+>, <Line: -          if (isFinderPattern(counters)){
+>, <Line: -  private static void reverseCounters(int [] counters){
+>, <Line: -    for(int i = 0; i < length / 2; ++i){
+>, <Line: -    if(oddPattern){
+>, <Line: -    }else{
+>, <Line: -    }//counters[] has the pixels of the module
+>, <Line: -    int weightRowNumber = 4 * pattern.getValue() + (isOddPattern?0:2) + (leftChar?0:1) - 1;
+>, <Line: -      if(isNotA1left(pattern, isOddPattern, leftChar)){
+>, <Line: -      if(isNotA1left(pattern, isOddPattern, leftChar)){
+>]

@@ -1,0 +1,32 @@
+[<Line: +    private final StreamerWrapper<Reader, InputStream> defaultReader =
+>, <Line: +    private Streamer<InputStream> inputStream;
+>, <Line: +    private Streamer<Reader> reader = () -> defaultReader.get(inputStream.get());
+>, <Line: +    @Nullable
+>, <Line: +    protected OWLParserParameters parametersAtLoading;
+>, <Line: +     * @param in input stream
+>, <Line: +    protected OWLOntologyDocumentSourceBase(IRI iri, Streamer<InputStream> in,
+>, <Line: +        @Nullable OWLDocumentFormat format, @Nullable String mime) {
+>, <Line: +        inputStream = in;
+>, <Line: +     * @param in input stream
+>, <Line: +    protected OWLOntologyDocumentSourceBase(String iriPrefix, Streamer<InputStream> in,
+>, <Line: +        @Nullable OWLDocumentFormat format, @Nullable String mime) {
+>, <Line: +        this(IRI.getNextDocumentIRI(iriPrefix), in, format, mime);
+>, <Line: +    @SuppressWarnings("null")
+>, <Line: +        return Optional.ofNullable(
+>, <Line: +            parametersAtLoading == null ? null : parametersAtLoading.getLoaderMetaData());
+>, <Line: +        OWLParserParameters parameters =
+>, <Line: +            new OWLParserParameters(o, config, documentIRI).withEncoding(encoding);
+>, <Line: +        parametersAtLoading = parameters;
+>]
+[<Line: -    protected final StreamerWrapper<Reader, InputStream> defaultReader =
+>, <Line: -    protected Streamer<InputStream> inputStream;
+>, <Line: -    protected Streamer<Reader> reader = () -> defaultReader.get(inputStream.get());
+>, <Line: -    protected @Nullable OWLParserParameters parameters;
+>, <Line: -    public OWLOntologyDocumentSourceBase(IRI iri, @Nullable OWLDocumentFormat format,
+>, <Line: -        @Nullable String mime) {
+>, <Line: -    public OWLOntologyDocumentSourceBase(String iriPrefix, @Nullable OWLDocumentFormat format,
+>, <Line: -        @Nullable String mime) {
+>, <Line: -        this(IRI.getNextDocumentIRI(iriPrefix), format, mime);
+>, <Line: -        return Optional.ofNullable(parameters == null ? null : parameters.getLoaderMetaData());
+>, <Line: -        parameters = new OWLParserParameters(o, config, documentIRI).withEncoding(encoding);
+>]

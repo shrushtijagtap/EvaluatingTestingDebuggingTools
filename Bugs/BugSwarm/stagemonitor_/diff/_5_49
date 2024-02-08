@@ -1,0 +1,63 @@
+[<Line: +package org.stagemonitor.requestmonitor.reporter;
+>, <Line: +import static org.junit.Assert.assertEquals;
+>, <Line: +import static org.mockito.Mockito.mock;
+>, <Line: +import static org.mockito.Mockito.when;
+>, <Line: +import com.fasterxml.jackson.databind.JsonNode;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.stagemonitor.core.CorePlugin;
+>, <Line: +import org.stagemonitor.core.MeasurementSession;
+>, <Line: +import org.stagemonitor.core.configuration.AbstractElasticsearchTest;
+>, <Line: +import org.stagemonitor.core.configuration.Configuration;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.Metric2Registry;
+>, <Line: +import org.stagemonitor.core.util.IOUtils;
+>, <Line: +import org.stagemonitor.requestmonitor.ExternalRequest;
+>, <Line: +import org.stagemonitor.requestmonitor.RequestMonitorPlugin;
+>, <Line: +import org.stagemonitor.requestmonitor.RequestTrace;
+>, <Line: +public class ElasticsearchExternalRequestTraceReporterIntegrationTest extends AbstractElasticsearchTest {
+>, <Line: +	protected ElasticsearchExternalRequestReporter reporter;
+>, <Line: +	protected RequestMonitorPlugin requestMonitorPlugin;
+>, <Line: +	protected Configuration configuration;
+>, <Line: +	@Before
+>, <Line: +	public void setUp() throws Exception {
+>, <Line: +		this.configuration = mock(Configuration.class);
+>, <Line: +		this.requestMonitorPlugin = mock(RequestMonitorPlugin.class);
+>, <Line: +		when(configuration.getConfig(CorePlugin.class)).thenReturn(corePlugin);
+>, <Line: +		when(configuration.getConfig(RequestMonitorPlugin.class)).thenReturn(requestMonitorPlugin);
+>, <Line: +		when(corePlugin.getElasticsearchClient()).thenReturn(elasticsearchClient);
+>, <Line: +		when(corePlugin.getMetricRegistry()).thenReturn(new Metric2Registry());
+>, <Line: +		when(requestMonitorPlugin.getOnlyReportNExternalRequestsPerMinute()).thenReturn(1000000d);
+>, <Line: +		reporter = new ElasticsearchExternalRequestReporter();
+>, <Line: +		reporter.init(new RequestTraceReporter.InitArguments(configuration));
+>, <Line: +		final String mappingTemplate = IOUtils.getResourceAsString("stagemonitor-elasticsearch-external-requests-index-template.json");
+>, <Line: +		elasticsearchClient.sendMappingTemplateAsync(mappingTemplate, "stagemonitor-external-requests");
+>, <Line: +		elasticsearchClient.waitForCompletion();
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void reportTemplateCreated() throws Exception {
+>, <Line: +		final JsonNode template = elasticsearchClient.getJson("/_template/stagemonitor-external-requests").get("stagemonitor-external-requests");
+>, <Line: +		assertEquals("stagemonitor-external-requests-*", template.get("template").asText());
+>, <Line: +		assertEquals(false, template.get("mappings").get("_default_").get("_all").get("enabled").asBoolean());
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void reportRequestTrace() throws Exception {
+>, <Line: +		final RequestTrace requestTrace = new RequestTrace("abc", new MeasurementSession(getClass().getName(), "test", "test"), requestMonitorPlugin);
+>, <Line: +		requestTrace.setName("Report Me");
+>, <Line: +		final ExternalRequest externalRequest = new ExternalRequest("jdbc", "SELECT", 1000000, "SELECT * from STAGEMONITOR");
+>, <Line: +		externalRequest.setExecutedBy("ElasticsearchExternalRequestTraceReporterIntegrationTest#test");
+>, <Line: +		requestTrace.addExternalRequest(externalRequest);
+>, <Line: +		reporter.reportRequestTrace(new RequestTraceReporter.ReportArguments(requestTrace));
+>, <Line: +		elasticsearchClient.waitForCompletion();
+>, <Line: +		refresh();
+>, <Line: +		final JsonNode hits = elasticsearchClient.getJson("/stagemonitor-external-requests*/_search").get("hits");
+>, <Line: +		assertEquals(1, hits.get("total").intValue());
+>, <Line: +		final JsonNode requestTraceJson = hits.get("hits").elements().next().get("_source");
+>, <Line: +		assertEquals("jdbc", requestTraceJson.get("request_type").asText());
+>, <Line: +		assertEquals("SELECT", requestTraceJson.get("request_method").asText());
+>, <Line: +		assertEquals(1.0d, requestTraceJson.get("execution_time").asDouble(), 0.0000001);
+>, <Line: +		assertEquals("SELECT * from STAGEMONITOR", requestTraceJson.get("request").asText());
+>, <Line: +		assertEquals("ElasticsearchExternalRequestTraceReporterIntegrationTest#test", requestTraceJson.get("executed_by").asText());
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

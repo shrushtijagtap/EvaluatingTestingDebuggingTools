@@ -1,0 +1,39 @@
+[<Line: +package ui.components;
+>, <Line: +import javafx.application.Platform;
+>, <Line: +import javafx.scene.control.ProgressBar;
+>, <Line: +import javafx.scene.layout.StackPane;
+>, <Line: +import javafx.scene.text.Text;
+>, <Line: +public class TextProgressBar extends StackPane {
+>, <Line: +	private final static int LABEL_WIDTH_PADDING = 10;
+>, <Line: +	private final static int LABEL_HEIGHT_PADDING = 4;
+>, <Line: +	private final ProgressBar bar = new ProgressBar();
+>, <Line: +	private final Text text = new Text();
+>, <Line: +	private float progress = 0;
+>, <Line: +	public TextProgressBar(String label) {
+>, <Line: +		bar.setMaxWidth(Double.MAX_VALUE);
+>, <Line: +		bar.getStyleClass().add("progress-bar");
+>, <Line: +		text.setText(label);
+>, <Line: +		// We defer this initial update because the text bounds won't be recomputed immediately
+>, <Line: +		Platform.runLater(this::syncProgress);
+>, <Line: +		getChildren().setAll(bar, text);
+>, <Line: +	}
+>, <Line: +	public void setProgress(float newProgress) {
+>, <Line: +		progress = Math.min(Math.max(0, newProgress), 1);
+>, <Line: +		syncProgress();
+>, <Line: +	}
+>, <Line: +	public void addProgress(int increment) {
+>, <Line: +		progress = Math.min(Math.max(0, progress + increment), 1);
+>, <Line: +		syncProgress();
+>, <Line: +	}
+>, <Line: +	private void syncProgress() {
+>, <Line: +		if (progress < 0.001) {
+>, <Line: +			bar.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+>, <Line: +		} else {
+>, <Line: +			bar.setProgress(progress);
+>, <Line: +		}
+>, <Line: +		bar.setMinHeight(text.getBoundsInLocal().getHeight() + LABEL_HEIGHT_PADDING * 2);
+>, <Line: +		bar.setMinWidth(text.getBoundsInLocal().getWidth() + LABEL_WIDTH_PADDING * 2);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

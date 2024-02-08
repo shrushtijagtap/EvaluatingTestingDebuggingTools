@@ -1,0 +1,41 @@
+[<Line: +import static org.stagemonitor.core.instrument.StagemonitorClassNameMatcher.isInsideMonitoredProject;
+>, <Line: +import net.bytebuddy.asm.AsmVisitorWrapper;
+>, <Line: +				final boolean matches = timed("type", transformerName, getTypeMatcher()).matches(typeDescription) &&
+>, <Line: +						getRawMatcher().matches(typeDescription, classLoader, classBeingRedefined, protectionDomain) &&
+>, <Line: +						timed("classloader", "application", getClassLoaderMatcher()).matches(classLoader);
+>, <Line: +		return NoOpRawMatcher.INSTANCE;
+>, <Line: +				.and(not(getExtraExcludeTypeMatcher()));
+>, <Line: +		return isInsideMonitoredProject().or(getExtraIncludeTypeMatcher());
+>, <Line: +			private AsmVisitorWrapper.ForDeclaredMethods advice = registerDynamicValues()
+>, <Line: +					.to(getAdviceClass())
+>, <Line: +					.on(timed("method", transformerName, getMethodElementMatcher()));
+>, <Line: +				return builder.visit(advice);
+>, <Line: +	private static class NoOpRawMatcher implements AgentBuilder.RawMatcher {
+>, <Line: +		public static final NoOpRawMatcher INSTANCE = new NoOpRawMatcher();
+>, <Line: +		@Override
+>, <Line: +		public boolean matches(TypeDescription typeDescription, ClassLoader classLoader, Class<?> classBeingRedefined, ProtectionDomain protectionDomain) {
+>, <Line: +			return true;
+>, <Line: +		}
+>, <Line: +	}
+>]
+[<Line: -import static net.bytebuddy.matcher.ElementMatchers.isSubTypeOf;
+>, <Line: -import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
+>, <Line: -				final boolean matches = timed("classloader", "any", getClassLoaderMatcher()).matches(classLoader) &&
+>, <Line: -						timed("type", "any", getTypeMatcher()).matches(typeDescription) &&
+>, <Line: -						getRawMatcher().matches(typeDescription, classLoader, classBeingRedefined, protectionDomain);
+>, <Line: -		return new AgentBuilder.RawMatcher() {
+>, <Line: -			@Override
+>, <Line: -			public boolean matches(TypeDescription typeDescription, ClassLoader classLoader, Class<?> classBeingRedefined, ProtectionDomain protectionDomain) {
+>, <Line: -				return true;
+>, <Line: -			}
+>, <Line: -		};
+>, <Line: -				.and(not(getExtraExcludeTypeMatcher()))
+>, <Line: -				.and(not(isSubTypeOf(StagemonitorByteBuddyTransformer.class)))
+>, <Line: -				.and(not(isSubTypeOf(StagemonitorDynamicValue.class)));
+>, <Line: -		return StagemonitorClassNameMatcher.INSTANCE
+>, <Line: -				.or(not(nameStartsWith("org.stagemonitor"))
+>, <Line: -						.and(getExtraIncludeTypeMatcher()));
+>, <Line: -				return builder.visit(registerDynamicValues()
+>, <Line: -						.to(getAdviceClass())
+>, <Line: -						.on(timed("method", transformerName, getMethodElementMatcher())));
+>]

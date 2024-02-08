@@ -1,0 +1,70 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_tsv;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Collections;
+>, <Line: +import org.junit.Assert;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import com.google.common.collect.Lists;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.JannovarVarDBException;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: +import htsjdk.variant.vcf.VCFHeader;
+>, <Line: +/**
+>, <Line: + * Test for annotation with dbNSFP with default options
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenericTSVAnnotationDriverWithDbnsfpReportOnlyOverlappingTest
+>, <Line: +		extends GenericTSVAnnotationDriverWithDbnsfpBaseTest {
+>, <Line: +	@Before
+>, <Line: +	public void setUp() throws Exception {
+>, <Line: +		super.setUp();
+>, <Line: +		options.setReportOverlapping(true);
+>, <Line: +		options.setReportOverlappingAsMatching(true);
+>, <Line: +		options.setIdentifierPrefix("DBNSFP_");
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void testAnnotateExtendHeader() throws JannovarVarDBException {
+>, <Line: +		GenericTSVAnnotationDriver driver = new GenericTSVAnnotationDriver(fastaPath, options);
+>, <Line: +		VCFHeader header = vcfReader.getFileHeader();
+>, <Line: +		// Check header before extension
+>, <Line: +		Assert.assertEquals(0, header.getFilterLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getInfoHeaderLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getFormatHeaderLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getIDHeaderLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getOtherHeaderLines().size());
+>, <Line: +		driver.constructVCFHeaderExtender().addHeaders(header);
+>, <Line: +		// Check header after extension
+>, <Line: +		Assert.assertEquals(0, header.getFilterLines().size());
+>, <Line: +		Assert.assertEquals(4, header.getInfoHeaderLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getFormatHeaderLines().size());
+>, <Line: +		Assert.assertEquals(4, header.getIDHeaderLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getOtherHeaderLines().size());
+>, <Line: +		Assert.assertNotNull(header.getInfoHeaderLine("DBNSFP_AAREF"));
+>, <Line: +		Assert.assertNotNull(header.getInfoHeaderLine("DBNSFP_RS_DBSNP147"));
+>, <Line: +		Assert.assertNotNull(header.getInfoHeaderLine("DBNSFP_HG19POS"));
+>, <Line: +		Assert.assertNotNull(header.getInfoHeaderLine("DBNSFP_SIFT_SCORE"));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void testAnnotateVariantContext() throws JannovarVarDBException {
+>, <Line: +		GenericTSVAnnotationDriver driver = new GenericTSVAnnotationDriver(fastaPath, options);
+>, <Line: +		VariantContext vc = vcfReader.iterator().next();
+>, <Line: +		Assert.assertEquals(0, vc.getAttributes().size());
+>, <Line: +		Assert.assertEquals(".", vc.getID());
+>, <Line: +		VariantContext annotated = driver.annotateVariantContext(vc);
+>, <Line: +		Assert.assertEquals(".", annotated.getID());
+>, <Line: +		Assert.assertEquals(4, annotated.getAttributes().size());
+>, <Line: +		ArrayList<String> keys = Lists.newArrayList(annotated.getAttributes().keySet());
+>, <Line: +		Collections.sort(keys);
+>, <Line: +		Assert.assertEquals("[DBNSFP_AAREF, DBNSFP_HG19POS, DBNSFP_RS_DBSNP147, DBNSFP_SIFT_SCORE]",
+>, <Line: +				keys.toString());
+>, <Line: +		Assert.assertEquals("[., L, L, L]", annotated.getAttributeAsString("DBNSFP_AAREF", null));
+>, <Line: +		Assert.assertEquals("[., 69119, 69119, 69119]",
+>, <Line: +				annotated.getAttributeAsString("DBNSFP_HG19POS", null));
+>, <Line: +		Assert.assertEquals("[., ., ., .]",
+>, <Line: +				annotated.getAttributeAsString("DBNSFP_RS_DBSNP147", null));
+>, <Line: +		Assert.assertEquals("[., 0.0, 0.0, 0.0]",
+>, <Line: +				annotated.getAttributeAsString("DBNSFP_SIFT_SCORE", null));
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

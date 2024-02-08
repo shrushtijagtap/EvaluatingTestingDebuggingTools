@@ -1,0 +1,9 @@
+[<Line: +        if(stats!=null) {
+>, <Line: +            log.info("{} {} --- Finished chunked transfer ({} B)", stats.originalMethod, stats.originalUri, stats.totalBytes);
+>, <Line: +        } else {
+>, <Line: +            log.info("--- Finished chunked transfer; no bytes trarnsferred");
+>, <Line: +        }
+>]
+[<Line: -        int totalBytes = (stats!=null) ?stats.totalBytes:0;
+>, <Line: -        log.info("{} {} --- Finished chunked transfer ({} B)", stats.originalMethod, stats.originalUri, totalBytes);
+>]

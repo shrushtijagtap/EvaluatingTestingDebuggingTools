@@ -1,0 +1,10 @@
+[<Line: +      final int x1 = vp.toCoordX(e.from().x);
+>, <Line: +      final int y1 = vp.toCoordY(e.from().y);
+>, <Line: +      final int x2 = vp.toCoordX(e.to().x);
+>, <Line: +      final int y2 = vp.toCoordY(e.to().y);
+>]
+[<Line: -      final int x1 = vp.toCoordX(e.from.x);
+>, <Line: -      final int y1 = vp.toCoordY(e.from.y);
+>, <Line: -      final int x2 = vp.toCoordX(e.to.x);
+>, <Line: -      final int y2 = vp.toCoordY(e.to.y);
+>]

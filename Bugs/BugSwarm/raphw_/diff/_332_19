@@ -1,0 +1,6 @@
+[<Line: +public class AnnotationListForLoadedAnnotationsTest extends AbstractAnnotationListTest<Annotation> {
+>, <Line: +        return new AnnotationList.ForLoadedAnnotations(elements);
+>]
+[<Line: -public class AnnotationListForLoadedAnnotationTest extends AbstractAnnotationListTest<Annotation> {
+>, <Line: -        return new AnnotationList.ForLoadedAnnotation(elements);
+>]

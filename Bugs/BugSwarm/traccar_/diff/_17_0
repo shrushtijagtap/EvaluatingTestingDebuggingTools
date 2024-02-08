@@ -1,0 +1,10 @@
+[<Line: +    private static final String[] DIRECTIONS = new String[] {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
+>, <Line: +                for (int i = 0; i < DIRECTIONS.length; i++) {
+>, <Line: +                    if (matcher.group(1).equals(DIRECTIONS[i])) {
+>, <Line: +                        position.setCourse(i * 45.0);
+>, <Line: +                        break;
+>, <Line: +                    }
+>, <Line: +                }
+>]
+[<Line: -                position.setCourse(0); // matcher.group(1) for course
+>]

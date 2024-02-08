@@ -1,0 +1,67 @@
+[<Line: +     * Returns the canonical name of this type if it exists.
+>, <Line: +     * @return The canonical name of this type. Might be {@code null}.
+>, <Line: +                return isAnonymousClass() || isLocalClass()
+>, <Line: +                        ? NO_NAME
+>, <Line: +                        : getName().replace('$', '.');
+>, <Line: +                String internalName = getInternalName();
+>, <Line: +                int simpleNameIndex = internalName.lastIndexOf('$');
+>, <Line: +                        ? internalName.lastIndexOf('/')
+>, <Line: +                if (simpleNameIndex == -1) {
+>, <Line: +                    return internalName;
+>, <Line: +                } else {
+>, <Line: +                    while (simpleNameIndex < internalName.length() && !Character.isLetter(internalName.charAt(simpleNameIndex))) {
+>, <Line: +                        simpleNameIndex += 1;
+>, <Line: +                    }
+>, <Line: +                    return internalName.substring(simpleNameIndex);
+>, <Line: +                }
+>, <Line: +            String simpleName = type.getSimpleName();
+>, <Line: +            int anonymousLoaderIndex = simpleName.indexOf('/');
+>, <Line: +            if (anonymousLoaderIndex == -1) {
+>, <Line: +                return simpleName;
+>, <Line: +            } else {
+>, <Line: +                StringBuilder normalized = new StringBuilder(simpleName.substring(0, anonymousLoaderIndex));
+>, <Line: +                Class<?> type = this.type;
+>, <Line: +                while (type.isArray()) {
+>, <Line: +                    normalized.append("[]");
+>, <Line: +                    type = type.getComponentType();
+>, <Line: +                }
+>, <Line: +                return normalized.toString();
+>, <Line: +            }
+>, <Line: +            String canonicalName = type.getCanonicalName();
+>, <Line: +            if (canonicalName == null) {
+>, <Line: +                return NO_NAME;
+>, <Line: +            }
+>, <Line: +            int anonymousLoaderIndex = canonicalName.indexOf('/');
+>, <Line: +            if (anonymousLoaderIndex == -1) {
+>, <Line: +                return canonicalName;
+>, <Line: +            } else {
+>, <Line: +                StringBuilder normalized = new StringBuilder(canonicalName.substring(0, anonymousLoaderIndex));
+>, <Line: +                Class<?> type = this.type;
+>, <Line: +                while (type.isArray()) {
+>, <Line: +                    normalized.append("[]");
+>, <Line: +                    type = type.getComponentType();
+>, <Line: +                }
+>, <Line: +                return normalized.toString();
+>, <Line: +            }
+>, <Line: +            String name = type.getName();
+>, <Line: +            int anonymousLoaderIndex = name.indexOf('/');
+>, <Line: +            return anonymousLoaderIndex == -1
+>, <Line: +                    ? Type.getDescriptor(type)
+>, <Line: +                    : "L" + name.substring(0, anonymousLoaderIndex).replace('.', '/') + ";";
+>, <Line: +            String canonicalName = componentType.getCanonicalName();
+>, <Line: +            if (canonicalName == null) {
+>, <Line: +                return NO_NAME;
+>, <Line: +            }
+>, <Line: +            StringBuilder stringBuilder = new StringBuilder(canonicalName);
+>]
+[<Line: -     * Returns the canonical internalName of this type.
+>, <Line: -     * @return The canonical internalName of this type.
+>, <Line: -                return getName().replace('$', '.');
+>, <Line: -                int simpleNameIndex = getInternalName().lastIndexOf('$');
+>, <Line: -                        ? getInternalName().lastIndexOf('/')
+>, <Line: -                return simpleNameIndex == -1 ? getInternalName() : getInternalName().substring(simpleNameIndex + 1);
+>, <Line: -            return type.getSimpleName();
+>, <Line: -            return type.getCanonicalName();
+>, <Line: -            return Type.getDescriptor(type);
+>, <Line: -            StringBuilder stringBuilder = new StringBuilder(componentType.getCanonicalName());
+>]

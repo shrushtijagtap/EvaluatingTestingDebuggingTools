@@ -1,0 +1,6 @@
+[<Line: +        public int mergeWriter(int hint) {
+>, <Line: +        public int mergeReader(int hint) {
+>]
+[<Line: -        public int wrapWriter(int hint) {
+>, <Line: -        public int wrapReader(int hint) {
+>]

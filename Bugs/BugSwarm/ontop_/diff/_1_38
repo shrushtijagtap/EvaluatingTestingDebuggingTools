@@ -1,0 +1,56 @@
+[<Line: +/* 
+>, <Line: +* #%L
+>, <Line: +* ontop-obdalib-core
+>, <Line: +* %%
+>, <Line: +* Copyright (C) 2009 - 2014 Free University of Bozen-Bolzano
+>, <Line: +* %%
+>, <Line: +* Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: +* you may not use this file except in compliance with the License.
+>, <Line: +* You may obtain a copy of the License at
+>, <Line: +* 
+>, <Line: +*      http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: +* 
+>, <Line: +* Unless required by applicable law or agreed to in writing, software
+>, <Line: +* distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: +* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: +* See the License for the specific language governing permissions and
+>, <Line: +* limitations under the License.
+>, <Line: +* #L%
+>, <Line: +*/
+>, <Line: +import it.unibz.krdb.obda.ontology.Datatype;
+>, <Line: +/**
+>, <Line: + * DataSomeValuesFrom in OWL 2 QL Specification
+>, <Line: + * <p>
+>, <Line: + * DataSomeValuesFrom := 'DataSomeValuesFrom' '(' DataPropertyExpression DataRange ')'
+>, <Line: + * <p>
+>, <Line: + * Implements (partially) rule [D5] in methods isTop and isBottom<br>
+>, <Line: + *    - the class expression is equivalent to top if the property is top (the data range cannot be empty)<br>
+>, <Line: + *    - the class expression is equivalent to bot if the property is bot
+>, <Line: + * 
+>, <Line: + * @author Roman Kontchakov
+>, <Line: + *
+>, <Line: + */
+>, <Line: +	private final Datatype filler;
+>, <Line: +	DataSomeValuesFromImpl(DataPropertyExpression property, Datatype filler) {
+>, <Line: +		this.filler = filler;
+>, <Line: +		this.string =  new StringBuilder().append("E ").append(property.toString()).append(".") 
+>, <Line: +						.append(filler.toString()).toString();
+>, <Line: +	@Override
+>, <Line: +	public Datatype getDatatype() {
+>, <Line: +		return filler;
+>, <Line: +	}
+>, <Line: +		if (obj == this)
+>, <Line: +			return true;
+>, <Line: +			return property.equals(other.property) && filler.equals(other.filler);
+>, <Line: +	public boolean isBottom() {
+>, <Line: +	public boolean isTop() {
+>]
+[<Line: -	DataSomeValuesFromImpl(DataPropertyExpression property) {
+>, <Line: -		StringBuilder bf = new StringBuilder();
+>, <Line: -		bf.append("E");
+>, <Line: -		bf.append(property.toString());
+>, <Line: -		this.string =  bf.toString();
+>, <Line: -			return property.equals(other.property);
+>, <Line: -	public boolean isNothing() {
+>, <Line: -	public boolean isThing() {
+>]

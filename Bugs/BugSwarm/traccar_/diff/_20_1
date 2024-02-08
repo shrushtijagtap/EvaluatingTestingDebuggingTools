@@ -1,0 +1,14 @@
+[<Line: +        passingHandler = new FilterHandler();
+>, <Line: +        filtingHandler = new FilterHandler();
+>, <Line: +        filtingHandler.setFilterInvalid(true);
+>, <Line: +        filtingHandler.setFilterZero(true);
+>, <Line: +        filtingHandler.setFilterDuplicate(true);
+>, <Line: +        filtingHandler.setFilterFuture(true);
+>, <Line: +        filtingHandler.setFilterApproximate(true);
+>, <Line: +        filtingHandler.setFilterStatic(true);
+>, <Line: +        filtingHandler.setFilterDistance(10);
+>, <Line: +        filtingHandler.setFilterLimit(10);
+>]
+[<Line: -        filtingHandler = new FilterHandler(true, true, true, true, true, 10, 10);
+>, <Line: -        passingHandler = new FilterHandler(false, false, false, false, false, 0, 0);
+>]

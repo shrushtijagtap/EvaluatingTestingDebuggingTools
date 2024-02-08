@@ -1,0 +1,10 @@
+[]
+[<Line: -type fr6nat is int x where x >= 0
+>, <Line: -function g([fr6nat] xs) -> (int x)
+>, <Line: -ensures x > 1:
+>, <Line: -    //
+>, <Line: -    int r = 1
+>, <Line: -    for y in xs where r > 0:
+>, <Line: -        r = r + 1
+>, <Line: -    return r
+>]

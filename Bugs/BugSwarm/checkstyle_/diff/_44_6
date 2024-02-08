@@ -1,0 +1,18 @@
+[<Line: +    int[] f1 = new int[] {0, 1
+>, <Line: +    };
+>, <Line: +    int[][] f2 = new int[][]
+>, <Line: +    {
+>, <Line: +        {1,
+>, <Line: +         2,},
+>, <Line: +    };
+>, <Line: +    int[] f3 = new int[]{
+>, <Line: +            1,
+>, <Line: +            2
+>, <Line: +            ,
+>, <Line: +    };
+>, <Line: +    int[] f4 = new int[]{
+>, <Line: +            1,
+>, <Line: +            2
+>, <Line: +            ,};
+>]
+[]

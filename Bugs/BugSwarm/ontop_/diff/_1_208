@@ -1,0 +1,8 @@
+[<Line: +	/**
+>, <Line: +	 * 
+>, <Line: +	 * @param v
+>, <Line: +	 * @return null if either v is the representative itself or the DAG does not contain the vertex
+>, <Line: +	 */
+>, <Line: +	T getCanonicalForm(T v);
+>]
+[]

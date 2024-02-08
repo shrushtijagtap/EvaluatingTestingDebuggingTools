@@ -1,0 +1,16 @@
+[<Line: +        assertThat(FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.resolve(methodDescription), is(FOO));
+>, <Line: +        assertThat(FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.resolve(methodDescription), is(FOO));
+>, <Line: +        assertThat(FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.resolve(methodDescription), is(FOO));
+>, <Line: +        FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.resolve(methodDescription);
+>, <Line: +        FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.resolve(methodDescription);
+>, <Line: +        FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.resolve(methodDescription);
+>, <Line: +        FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.resolve(methodDescription);
+>]
+[<Line: -        assertThat(FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.fieldNameFor(methodDescription), is(FOO));
+>, <Line: -        assertThat(FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.fieldNameFor(methodDescription), is(FOO));
+>, <Line: -        assertThat(FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.fieldNameFor(methodDescription), is(FOO));
+>, <Line: -        FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.fieldNameFor(methodDescription);
+>, <Line: -        FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.fieldNameFor(methodDescription);
+>, <Line: -        FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.fieldNameFor(methodDescription);
+>, <Line: -        FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE.fieldNameFor(methodDescription);
+>]

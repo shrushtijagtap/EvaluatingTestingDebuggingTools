@@ -1,0 +1,6 @@
+[<Line: +        supportClass = { BeansDeployerTransformer.class, CdiContextsTransformer.class, WebBeansContextTransformer.class, WebBeansContextsServiceTransformer.class})
+>, <Line: +     * ClassPath_ BeanRefreshCommand tries to merge these events into single command.
+>]
+[<Line: -        supportClass = { BeanDeployerTransformer.class, CdiContextsTransformer.class, WebBeansContextTransformer.class, WebBeansContextsServiceTransformer.class})
+>, <Line: -     * ClassPathBeanRefreshCommand tries to merge these events into single command.
+>]

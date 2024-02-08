@@ -1,0 +1,68 @@
+[<Line: +		'angular',
+>, <Line: +		'app',
+>, <Line: +		'lodash'
+>, <Line: +	],
+>, <Line: +	function (angular, app, _) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		module.controller('PulldownCtrl', function ($scope, $rootScope, $timeout) {
+>, <Line: +			var _d = {
+>, <Line: +				collapse: false,
+>, <Line: +				notice: false,
+>, <Line: +				enable: true
+>, <Line: +			};
+>, <Line: +			_.defaults($scope.pulldown, _d);
+>, <Line: +			$scope.init = function () {
+>, <Line: +				// Provide a combined skeleton for panels that must interact with panel and row.
+>, <Line: +				// This might create name spacing issues.
+>, <Line: +				$scope.panel = $scope.pulldown;
+>, <Line: +				$scope.row = $scope.pulldown;
+>, <Line: +			};
+>, <Line: +			$scope.toggle_pulldown = function (pulldown) {
+>, <Line: +				pulldown.collapse = pulldown.collapse ? false : true;
+>, <Line: +				if (!pulldown.collapse) {
+>, <Line: +					$timeout(function () {
+>, <Line: +						$scope.$broadcast('render');
+>, <Line: +					});
+>, <Line: +				} else {
+>, <Line: +					$scope.row.notice = false;
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.init();
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'app',
+>, <Line: -  'lodash'
+>, <Line: -],
+>, <Line: -function (angular, app, _) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  module.controller('PulldownCtrl', function($scope, $rootScope, $timeout) {
+>, <Line: -    var _d = {
+>, <Line: -      collapse: false,
+>, <Line: -      notice: false,
+>, <Line: -      enable: true
+>, <Line: -    };
+>, <Line: -    _.defaults($scope.pulldown,_d);
+>, <Line: -    $scope.init = function() {
+>, <Line: -      // Provide a combined skeleton for panels that must interact with panel and row.
+>, <Line: -      // This might create name spacing issues.
+>, <Line: -      $scope.panel = $scope.pulldown;
+>, <Line: -      $scope.row = $scope.pulldown;
+>, <Line: -    };
+>, <Line: -    $scope.toggle_pulldown = function(pulldown) {
+>, <Line: -      pulldown.collapse = pulldown.collapse ? false : true;
+>, <Line: -      if (!pulldown.collapse) {
+>, <Line: -        $timeout(function() {
+>, <Line: -          $scope.$broadcast('render');
+>, <Line: -        });
+>, <Line: -      } else {
+>, <Line: -        $scope.row.notice = false;
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.init();
+>, <Line: -  });
+>, <Line: -});
+>]

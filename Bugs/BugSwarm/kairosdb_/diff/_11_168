@@ -1,0 +1,74 @@
+[<Line: +		'angular',
+>, <Line: +		'app',
+>, <Line: +		'lodash'
+>, <Line: +	],
+>, <Line: +	function (angular) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('bodyClass', function () {
+>, <Line: +				return {
+>, <Line: +					link: function ($scope, elem) {
+>, <Line: +						var lastHideControlsVal;
+>, <Line: +						$scope.$watch('submenuEnabled', function () {
+>, <Line: +							if (!$scope.dashboard) {
+>, <Line: +								return;
+>, <Line: +							}
+>, <Line: +							elem.toggleClass('submenu-controls-visible', $scope.submenuEnabled);
+>, <Line: +						});
+>, <Line: +						$scope.$watch('dashboard.hideControls', function () {
+>, <Line: +							if (!$scope.dashboard) {
+>, <Line: +								return;
+>, <Line: +							}
+>, <Line: +							var hideControls = $scope.dashboard.hideControls || $scope.playlist_active;
+>, <Line: +							if (lastHideControlsVal !== hideControls) {
+>, <Line: +								elem.toggleClass('hide-controls', hideControls);
+>, <Line: +								lastHideControlsVal = hideControls;
+>, <Line: +							}
+>, <Line: +						});
+>, <Line: +						$scope.$watch('playlist_active', function () {
+>, <Line: +							elem.toggleClass('hide-controls', $scope.playlist_active === true);
+>, <Line: +							elem.toggleClass('playlist-active', $scope.playlist_active === true);
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'app',
+>, <Line: -  'lodash'
+>, <Line: -],
+>, <Line: -function (angular) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('bodyClass', function() {
+>, <Line: -      return {
+>, <Line: -        link: function($scope, elem) {
+>, <Line: -          var lastHideControlsVal;
+>, <Line: -          $scope.$watch('submenuEnabled', function() {
+>, <Line: -            if (!$scope.dashboard) {
+>, <Line: -              return;
+>, <Line: -            }
+>, <Line: -            elem.toggleClass('submenu-controls-visible', $scope.submenuEnabled);
+>, <Line: -          });
+>, <Line: -          $scope.$watch('dashboard.hideControls', function() {
+>, <Line: -            if (!$scope.dashboard) {
+>, <Line: -              return;
+>, <Line: -            }
+>, <Line: -            var hideControls = $scope.dashboard.hideControls || $scope.playlist_active;
+>, <Line: -            if (lastHideControlsVal !== hideControls) {
+>, <Line: -              elem.toggleClass('hide-controls', hideControls);
+>, <Line: -              lastHideControlsVal = hideControls;
+>, <Line: -            }
+>, <Line: -          });
+>, <Line: -          $scope.$watch('playlist_active', function() {
+>, <Line: -            elem.toggleClass('hide-controls', $scope.playlist_active === true);
+>, <Line: -            elem.toggleClass('playlist-active', $scope.playlist_active === true);
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

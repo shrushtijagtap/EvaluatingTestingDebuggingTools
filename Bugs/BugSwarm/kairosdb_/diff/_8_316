@@ -1,0 +1,20 @@
+[<Line: +  display: none;
+>, <Line: +  -ms-text-size-adjust: 100%;
+>, <Line: +  width: auto \9; /* IE7-8 need help adjusting responsive images */
+>, <Line: +input::-moz-focus-inner {
+>, <Line: +  // Inner padding and border oddities in FF3/4
+>, <Line: +  -webkit-appearance: button; // Corrects inability to style clickable `input` types in iOS.
+>, <Line: +  cursor: pointer; // Improves usability and consistency of cursor style between image-type `input` and others.
+>, <Line: +  cursor: pointer; // Improves usability and consistency of cursor style between image-type `input` and others.
+>, <Line: +input[type="search"] {
+>, <Line: +  // Appearance in Safari/Chrome
+>]
+[<Line: -    display: none;
+>, <Line: -      -ms-text-size-adjust: 100%;
+>, <Line: -  width: auto\9; /* IE7-8 need help adjusting responsive images */
+>, <Line: -input::-moz-focus-inner { // Inner padding and border oddities in FF3/4
+>, <Line: -    -webkit-appearance: button; // Corrects inability to style clickable `input` types in iOS.
+>, <Line: -    cursor: pointer; // Improves usability and consistency of cursor style between image-type `input` and others.
+>, <Line: -    cursor: pointer; // Improves usability and consistency of cursor style between image-type `input` and others.
+>, <Line: -input[type="search"] { // Appearance in Safari/Chrome
+>]

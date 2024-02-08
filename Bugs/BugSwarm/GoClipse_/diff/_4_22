@@ -1,0 +1,4 @@
+[<Line: +			assertTrue(reader.getReadPosition() == expectedMatchLength);
+>]
+[<Line: -			assertTrue(reader.getReadOffset() == expectedMatchLength);
+>]

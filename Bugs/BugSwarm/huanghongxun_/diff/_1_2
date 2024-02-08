@@ -1,0 +1,7 @@
+[<Line: +     * @param obj minecraft service wanted
+>, <Line: +    IMinecraftService provideMinecraftService(Object obj);
+>]
+[<Line: -import org.jackhuang.hellominecraft.launcher.setting.Profile;
+>, <Line: -     * @param profile info to the Minecraft Loader
+>, <Line: -    IMinecraftService provideMinecraftService(Profile profile);
+>]

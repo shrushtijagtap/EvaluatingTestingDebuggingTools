@@ -1,0 +1,18 @@
+[<Line: +    private final ElementMatcher<? super TypeDescription.Generic> matcher;
+>, <Line: +     * @param matcher The type matcher to apply to the matched element's return type.
+>, <Line: +    public MethodReturnTypeMatcher(ElementMatcher<? super TypeDescription.Generic> matcher) {
+>, <Line: +        this.matcher = matcher;
+>, <Line: +        return matcher.matches(target.getReturnType());
+>, <Line: +                && matcher.equals(((MethodReturnTypeMatcher<?>) other).matcher);
+>, <Line: +        return matcher.hashCode();
+>, <Line: +        return "returns(" + matcher + ")";
+>]
+[<Line: -    private final ElementMatcher<? super TypeDescription.Generic> typeMatcher;
+>, <Line: -     * @param typeMatcher The type matcher to apply to the matched element's return type.
+>, <Line: -    public MethodReturnTypeMatcher(ElementMatcher<? super TypeDescription.Generic> typeMatcher) {
+>, <Line: -        this.typeMatcher = typeMatcher;
+>, <Line: -        return typeMatcher.matches(target.getReturnType());
+>, <Line: -                && typeMatcher.equals(((MethodReturnTypeMatcher<?>) other).typeMatcher);
+>, <Line: -        return typeMatcher.hashCode();
+>, <Line: -        return "returns(" + typeMatcher + ")";
+>]

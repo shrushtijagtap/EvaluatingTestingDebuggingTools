@@ -1,0 +1,17 @@
+[<Line: +import it.unibz.krdb.obda.ontology.OntologyVocabulary;
+>, <Line: +			OntologyVocabulary vb = ofac.createVocabulary();
+>, <Line: +			vb.createClass("A");
+>, <Line: +			vb.createObjectProperty("P");
+>, <Line: +			vb.createDataProperty("P");
+>, <Line: +			vb.createObjectProperty("Q");
+>, <Line: +			vb.createDataProperty("D");
+>, <Line: +			Ontology ont = ofac.createOntology(vb);
+>]
+[<Line: -			p.setCurrentValueOf(QuestPreferences.OPTIMIZE_TBOX_SIGMA, "true");
+>, <Line: -			Ontology ont = ofac.createOntology();
+>, <Line: -			ont.getVocabulary().createClass("A");
+>, <Line: -			ont.getVocabulary().createObjectProperty("P");
+>, <Line: -			ont.getVocabulary().createDataProperty("P");
+>, <Line: -			ont.getVocabulary().createObjectProperty("Q");
+>, <Line: -			ont.getVocabulary().createDataProperty("D");
+>]

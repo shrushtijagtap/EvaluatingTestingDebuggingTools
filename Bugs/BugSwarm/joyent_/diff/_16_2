@@ -1,0 +1,6 @@
+[<Line: +        <module name="AvoidStarImport">
+>, <Line: +            <property name="allowStaticMemberImports" value="true"/>
+>, <Line: +        </module>
+>]
+[<Line: -        <module name="AvoidStarImport"/>
+>]

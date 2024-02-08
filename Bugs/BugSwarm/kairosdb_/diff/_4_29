@@ -1,0 +1,210 @@
+[<Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import com.google.common.eventbus.Subscribe;
+>, <Line: +import org.kairosdb.core.datastore.Datastore;
+>, <Line: +import org.kairosdb.core.datastore.DatastoreMetricQuery;
+>, <Line: +import org.kairosdb.core.datastore.QueryCallback;
+>, <Line: +import org.kairosdb.core.datastore.TagSet;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json), new Gson(),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		eventBus.register(fakeds);
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		eventBus.register(fakeds);
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		eventBus.register(fakeds);
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		eventBus.register(fakeds);
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		eventBus.register(fakeds);
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		eventBus.register(fakeds);
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		eventBus.register(fakeds);
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		eventBus.register(fakeds);
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		eventBus.register(fakeds);
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		eventBus.register(fakeds);
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, new StringReader(json),
+>, <Line: +		EventBus eventBus = new EventBus();
+>, <Line: +		DataPointsParser parser = new DataPointsParser(eventBus, skipReader,
+>, <Line: +		parser = new DataPointsParser(eventBus, reader, new Gson(), dataPointFactory);
+>, <Line: +		@Subscribe
+>, <Line: +		public void putDataPoint(DataPointEvent event) throws DatastoreException
+>, <Line: +			if ((lastDataPointSet == null) || (!lastDataPointSet.getName().equals(event.getMetricName())) ||
+>, <Line: +					(!lastDataPointSet.getTags().equals(event.getTags())))
+>, <Line: +				lastDataPointSet = new DataPointSet(event.getMetricName(), event.getTags(), Collections.EMPTY_LIST);
+>, <Line: +			lastDataPointSet.addDataPoint(event.getDataPoint());
+>]
+[<Line: -import org.kairosdb.core.datastore.*;
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), new TestDataPointFactory(), false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json), new Gson(),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, new StringReader(json),
+>, <Line: -		FakeDataStore fakeds = new FakeDataStore();
+>, <Line: -		KairosDatastore datastore = new KairosDatastore(fakeds, new QueryQueuingManager(1, "hostname"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>, <Line: -		DataPointsParser parser = new DataPointsParser(datastore, skipReader,
+>, <Line: -		parser = new DataPointsParser(datastore, reader, new Gson(), dataPointFactory);
+>, <Line: -		@Override
+>, <Line: -		public void putDataPoint(String metricName, ImmutableSortedMap<String, String> tags, DataPoint dataPoint, int tll) throws DatastoreException
+>, <Line: -			if ((lastDataPointSet == null) || (!lastDataPointSet.getName().equals(metricName)) ||
+>, <Line: -					(!lastDataPointSet.getTags().equals(tags)))
+>, <Line: -				lastDataPointSet = new DataPointSet(metricName, tags, Collections.EMPTY_LIST);
+>, <Line: -			lastDataPointSet.addDataPoint(dataPoint);
+>]

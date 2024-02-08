@@ -1,0 +1,75 @@
+[<Line: +	public A get(Entity e, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException
+>, <Line: +	{
+>, <Line: +		return get(e.getId(), forceNewInstance);
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Fast but unsafe retrieval of a component for this entity, by id.
+>, <Line: +	 * <p>
+>, <Line: +	 * No bounding checks, so this could throw an
+>, <Line: +	 * {@link ArrayIndexOutOfBoundsExeption}, however in most scenarios you
+>, <Line: +	 * already know the entity possesses this component.
+>, <Line: +	 * </p>
+>, <Line: +	 *
+>, <Line: +	 * @param entityId
+>, <Line: +	 *			the entity that should possess the component
+>, <Line: +	 * @param forceNewInstance
+>, <Line: +	 * 			Returns a new instance of the component (only applies to {@link PackedComponent}s)
+>, <Line: +	 *
+>, <Line: +	 * @return the instance of the component
+>, <Line: +	 *
+>, <Line: +	 * @throws ArrayIndexOutOfBoundsException
+>, <Line: +	 */
+>, <Line: +	public abstract A get(int entityId, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException;
+>, <Line: +	public A getSafe(Entity e)
+>, <Line: +	{
+>, <Line: +		return getSafe(e.getId());
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Fast and safe retrieval of a component for this entity by id.
+>, <Line: +	 * <p>
+>, <Line: +	 * If the entity does not have this component then null is returned.
+>, <Line: +	 * </p>
+>, <Line: +	 *
+>, <Line: +	 * @param entityId
+>, <Line: +	 *			the id of entity that should possess the component
+>, <Line: +	 *
+>, <Line: +	 * @return the instance of the component
+>, <Line: +	 */
+>, <Line: +	public abstract A getSafe(int entityId);
+>, <Line: +	public A getSafe(Entity e, boolean forceNewInstance)
+>, <Line: +	{
+>, <Line: +		return getSafe(e.getId(), forceNewInstance);
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Fast and safe retrieval of a component for this entity, by id.
+>, <Line: +	 * <p>
+>, <Line: +	 * If the entity does not have this component then null is returned.
+>, <Line: +	 * </p>
+>, <Line: +	 *
+>, <Line: +	 * @param entityId
+>, <Line: +	 *			the entity id that should possess the component
+>, <Line: +	 * @param forceNewInstance
+>, <Line: +	 * 			If true, returns a new instance of the component (only applies to {@link PackedComponent}s)
+>, <Line: +	 *
+>, <Line: +	 * @return the instance of the component
+>, <Line: +	 */
+>, <Line: +	public abstract A getSafe(int entityId, boolean forceNewInstance);
+>, <Line: +	public boolean has(Entity e) throws ArrayIndexOutOfBoundsException
+>, <Line: +	{
+>, <Line: +		return has(e.getId());
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Checks if the entity has this type of component.
+>, <Line: +	 *
+>, <Line: +	 * @param entityId
+>, <Line: +	 *			the id of entity to check
+>, <Line: +	 *
+>, <Line: +	 * @return true if the entity has this component type, false if it doesn't
+>, <Line: +	 */
+>, <Line: +	public abstract boolean has(int entityId);
+>]
+[<Line: -	public abstract A get(Entity e, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException;
+>, <Line: -	public abstract A getSafe(Entity e);
+>, <Line: -	public abstract A getSafe(Entity e, boolean forceNewInstance);
+>, <Line: -	public abstract boolean has(Entity e);
+>]

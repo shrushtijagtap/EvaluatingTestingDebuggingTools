@@ -1,0 +1,36 @@
+[<Line: +	private String databaseVersion ;
+>, <Line: +	public OracleSQLDialectAdapter() {
+>, <Line: +		this.databaseVersion = "";
+>, <Line: +	}
+>, <Line: +	public OracleSQLDialectAdapter(String databaseVersion) {
+>, <Line: +		this.databaseVersion = databaseVersion;
+>, <Line: +	}
+>, <Line: +		String version =databaseVersion.split("\\.")[0];
+>, <Line: +		try {
+>, <Line: +			int versionInt = Integer.parseInt(version);
+>, <Line: +			if (versionInt<12) {
+>, <Line: +				if (limit == 0) {
+>, <Line: +					return "WHERE 1 = 0";
+>, <Line: +				}
+>, <Line: +				if (limit < 0) {
+>, <Line: +					if (offset < 0) {
+>, <Line: +						return "";
+>, <Line: +					} else {
+>, <Line: +						return String.format("OFFSET %d ROWS", offset);
+>, <Line: +					}
+>, <Line: +				} else {
+>, <Line: +					if (offset < 0) {
+>, <Line: +						// If the offset is not specified
+>, <Line: +						return String.format("OFFSET 0 ROWS\nFETCH NEXT %d ROWS ONLY", limit);
+>, <Line: +					} else {
+>, <Line: +						return String.format("OFFSET %d ROWS\nFETCH NEXT %d ROWS ONLY", offset, limit);
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			}catch (NumberFormatException nfe){
+>, <Line: +			//not a number  use new concat
+>, <Line: +		}
+>, <Line: +			return String.format("WHERE ROWNUM <= %s", limit);
+>]
+[<Line: -		return String.format("WHERE ROWNUM <= %s", limit);
+>]

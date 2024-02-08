@@ -1,0 +1,5 @@
+[<Line: +    if (m_testName == null) {
+>, <Line: +      m_testName = m_iClass.getTestName();
+>, <Line: +    }
+>]
+[]

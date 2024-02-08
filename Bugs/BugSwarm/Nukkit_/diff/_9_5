@@ -1,0 +1,4 @@
+[<Line: +public abstract class WateryBiome extends NormalBiome implements CaveBiome {
+>]
+[<Line: -public abstract class WateryBiome extends NormalBiome {
+>]

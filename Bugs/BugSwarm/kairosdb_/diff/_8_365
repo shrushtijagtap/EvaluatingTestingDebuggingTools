@@ -1,0 +1,341 @@
+[<Line: +var module = angular.module('rollupApp',
+>, <Line: +	['mgcrea.ngStrap',
+>, <Line: +		'mgcrea.ngStrap.tooltip',
+>, <Line: +		'ui.bootstrap.modal',
+>, <Line: +		'template/modal/backdrop.html',
+>, <Line: +		'template/modal/window.html']);
+>, <Line: +module.directive('editable', function ($compile) {
+>, <Line: +	var template = '' +
+>, <Line: +		'<span>' +
+>, <Line: +			'<input type="text" ' +
+>, <Line: +			'	style="padding:0; line-height:16px;" ' +
+>, <Line: +			'	ng-model="model"  ' +
+>, <Line: +			'	ng-blur="$parent.onBlur($parent.task)" ' +
+>, <Line: +			'	ng-show="edit" ' +
+>, <Line: +			'	my-blur="edit">' +
+>, <Line: +			'</input>' +
+>, <Line: +			'<a href="" ' +
+>, <Line: +			'	ng-show="!edit && !$parent.task.complex" ' +
+>, <Line: +			'	ng-click="onClick()" ' +
+>, <Line: +			'	ng-class="model.indexOf(\'<\') == 0 ? \'gray\' : \'black\'">{{model}}</a>' +
+>, <Line: +		'	<span ng-show="$parent.task.complex">{{model}}</span> ' +
+>, <Line: +		'</span>';
+>, <Line: +	var linker = function(scope, element, attributes) {
+>, <Line: +		scope.onClick = function()
+>, <Line: +		{
+>, <Line: +			if (scope.$parent.task.complex)
+>, <Line: +			{
+>, <Line: +				// Ignore complex tasks
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			scope.edit = false;
+>, <Line: +			element.bind('click', function () {
+>, <Line: +				inputField = element.find('input').get(0);
+>, <Line: +				inputField.style.width = element[0].parentElement.offsetWidth - 15 + "px";
+>, <Line: +				if (inputField.value.indexOf("<") === 0) {
+>, <Line: +					// Remove text from text field since its just placeholder text
+>, <Line: +					inputField.value = '';
+>, <Line: +				}
+>, <Line: +				scope.$apply(scope.edit = true);
+>, <Line: +				inputField.focus();
+>, <Line: +			});
+>, <Line: +		};
+>, <Line: +		element.html(template).show();
+>, <Line: +		$compile(element.contents())(scope);
+>, <Line: +	};
+>, <Line: +	return {
+>, <Line: +		restrict: "E",
+>, <Line: +		link: linker,
+>, <Line: +		scope: {
+>, <Line: +			model:'='
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +});
+>, <Line: +module.directive('autocompleteeditable', function () {
+>, <Line: +	return {
+>, <Line: +		restrict: 'E',
+>, <Line: +		replace: false,
+>, <Line: +		template: '<span>' +
+>, <Line: +		'<input ' +
+>, <Line: +		'type="text"' +
+>, <Line: +		'ng-show="edit"' +
+>, <Line: +		'my-blur="edit"' +
+>, <Line: +		'ng-blur="suggestSaveAs(task)"' +
+>, <Line: +		'ng-model="task.metric_name"' +
+>, <Line: +		'myblur="edit" spellcheck="false"' +
+>, <Line: +		'bs-typeahead bs-options="metric for metric in suggestMetrics(task.metric_name)"' +
+>, <Line: +		'placeholder="<metric name>"' +
+>, <Line: +		'min-length="0"' +
+>, <Line: +		'limit="METRIC_NAME_LIST_MAX_LENGTH"' +
+>, <Line: +		'ng-change="targetBlur()"' +
+>, <Line: +		'ng-blur="suggestSaveAs()"' +
+>, <Line: +		'data-provide="typeahead"' +
+>, <Line: +		'style="width:100%; padding:0; line-height:16px;"' +
+>, <Line: +		'ng-focus autofocus>' +
+>, <Line: +		'</input>' +
+>, <Line: +		'<a href="" ' +
+>, <Line: +		'	ng-show="!edit && !task.complex" ' +
+>, <Line: +		'	ng-class="task.metric_name.indexOf(\'<\') == 0 ? \'gray\' : \'black\'"' +
+>, <Line: +		'>{{task.metric_name}}</a>' +
+>, <Line: +		'<span ng-show="task.complex">{{task.metric_name}}</span> ' +
+>, <Line: +		'</span>',
+>, <Line: +		link: function (scope, element, attrs) {
+>, <Line: +			if (scope.task.complex)
+>, <Line: +			{
+>, <Line: +				// Ignore complex tasks
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			scope.edit = false;
+>, <Line: +			element.bind('click', function () {
+>, <Line: +				inputField = element.find('input').get(0);
+>, <Line: +				inputField = element.find('input').get(0);
+>, <Line: +				inputField.style.width = element[0].parentElement.offsetWidth - 15 + "px";
+>, <Line: +				if (inputField.value.indexOf("<") === 0) {
+>, <Line: +					// Remove text from text field since its just placeholder text
+>, <Line: +					inputField.value = '';
+>, <Line: +				}
+>, <Line: +				scope.$apply(scope.edit = true);
+>, <Line: +				inputField.focus();
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +});
+>, <Line: +//blur directive
+>, <Line: +module.directive('myBlur', function () {
+>, <Line: +	return {
+>, <Line: +		restrict: 'A',
+>, <Line: +		link: function (scope, element, attr) {
+>, <Line: +			element.bind('blur', function () {
+>, <Line: +				scope.edit = false;
+>, <Line: +				scope.$apply();
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +});
+>, <Line: +module.directive('customPopover', function () {
+>, <Line: +	return {
+>, <Line: +		restrict: 'A',
+>, <Line: +		template: '<a href="#"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></a>',
+>, <Line: +		link: function (scope, el, attrs) {
+>, <Line: +			$(el).popover({
+>, <Line: +				trigger: 'focus',
+>, <Line: +				html: true,
+>, <Line: +				content: attrs.popoverHtml,
+>, <Line: +				placement: attrs.popoverPlacement
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +});
+>, <Line: +module.directive('focusOnShow', function ($timeout) {
+>, <Line: +	return {
+>, <Line: +		restrict: 'A',
+>, <Line: +		link: function ($scope, $element, $attr) {
+>, <Line: +			if ($attr.ngShow) {
+>, <Line: +				$scope.$watch($attr.ngShow, function (newValue) {
+>, <Line: +					if (newValue) {
+>, <Line: +						$timeout(function () {
+>, <Line: +							$element.focus();
+>, <Line: +						}, 0);
+>, <Line: +					}
+>, <Line: +				})
+>, <Line: +			}
+>, <Line: +			if ($attr.ngHide) {
+>, <Line: +				$scope.$watch($attr.ngHide, function (newValue) {
+>, <Line: +					if (!newValue) {
+>, <Line: +						$timeout(function () {
+>, <Line: +							$element.focus();
+>, <Line: +						}, 0);
+>, <Line: +					}
+>, <Line: +				})
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +});
+>, <Line: +// This is needed by dynamically created elements. The regular tooltip mechanism
+>, <Line: +// does not work for dynamic elements
+>, <Line: +module.directive('bsTooltip', function () {
+>, <Line: +	return {
+>, <Line: +		restrict: 'A',
+>, <Line: +		link: function (scope, element, attrs) {
+>, <Line: +			$(element).hover(function () {
+>, <Line: +				// on mouseenter
+>, <Line: +				$(element).tooltip('show');
+>, <Line: +			}, function () {
+>, <Line: +				// on mouseleave
+>, <Line: +				$(element).tooltip('hide');
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +});
+>, <Line: +module.directive('autocompleteWithButtons', function ($compile) {
+>, <Line: +	var template = '' +
+>, <Line: +		'<table width="100%">' +
+>, <Line: +		'		<tr>' +
+>, <Line: +		'			<td>' +
+>, <Line: +		'			<span ng-show="!model.edit" style="margin: 0 10px 0 0">{{model.group_by_values}}</span>' +
+>, <Line: +		'			<input type="text" style="width:85px; padding:0; line-height:16px"' +
+>, <Line: +		'				focus-on-show ' +
+>, <Line: +		'				spellcheck="false"' +
+>, <Line: +		'				bs-typeahead ' +
+>, <Line: +		'				bs-options="key for key in list(model)"' +
+>, <Line: +		'				data-min-length=0 ' +
+>, <Line: +		'				data-items=100' +
+>, <Line: +		'				ng-model="model.group_by_value_suggest"' +
+>, <Line: +		'				placeholder="key"' +
+>, <Line: +		'				ng-show="model.edit"' +
+>, <Line: +		'			/>' +
+>, <Line: +		'			</td>' +
+>, <Line: +		'			<td width="10%">' +
+>, <Line: +		'				<a href="#" class="btn-sm btn-circle text-right" style="margin-left:1px; margin-right:5px;"' +
+>, <Line: +		'					ng-click="model.edit = true"' +
+>, <Line: +		'					ng-show="!model.edit && !model.complex">' +
+>, <Line: +		'					<span class="glyphicon glyphicon-plus shift-1-up"></span>' +
+>, <Line: +		'				</a>' +
+>, <Line: +		'				<a href="#" class="btn-sm btn-circle" style="margin-right:10px;"' +
+>, <Line: +		'					ng-click="setGroupValues(model);onBlur(model)"' +
+>, <Line: +		'					ng-show="model.edit">' +
+>, <Line: +		'				<span class="glyphicon glyphicon-ok text-success"></span></a>' +
+>, <Line: +		'			</td>' +
+>, <Line: +		'			<td width="10%">' +
+>, <Line: +		'				<a href="#" class="btn-sm btn-circle" style="margin-left:1px; margin-right:1px;"' +
+>, <Line: +		'					ng-click="removeGroupValues(model);onBlur(model)"' +
+>, <Line: +		'					ng-show="model.group_by_values.length > 0 && !model.edit">' +
+>, <Line: +		'				<span class="glyphicon glyphicon-remove text-danger"></span></a>' +
+>, <Line: +		'					<a href="#" class="btn-sm btn-circle" style="margin-left:1px; margin-right:1px;"' +
+>, <Line: +		'						ng-click="cancelGroupValues(model)"' +
+>, <Line: +		'						ng-show="model.edit && !model.complex">' +
+>, <Line: +		'				<span class="glyphicon glyphicon-remove-sign text-danger"></span></a>' +
+>, <Line: +		'			</td>' +
+>, <Line: +		'		</tr>' +
+>, <Line: +		'</table>';
+>, <Line: +	var linker = function(scope, element, attributes) {
+>, <Line: +		element.html(template).show();
+>, <Line: +		$compile(element.contents())(scope);
+>, <Line: +		scope.cancelGroupValues = function(model){
+>, <Line: +			model.edit=false;
+>, <Line: +			model.group_by_value_suggest = "";
+>, <Line: +		};
+>, <Line: +		scope.removeGroupValues = function(model){
+>, <Line: +			if (model.group_by_values){
+>, <Line: +				model.group_by_values = "";
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		scope.setGroupValues = function(model){
+>, <Line: +			model.edit=false;
+>, <Line: +			if (!model.group_by_values){
+>, <Line: +				model.group_by_values = model.group_by_value_suggest;
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				model.group_by_values += ", " + model.group_by_value_suggest;
+>, <Line: +			}
+>, <Line: +			model.group_by_value_suggest = "";
+>, <Line: +		};
+>, <Line: +	};
+>, <Line: +	return {
+>, <Line: +		restrict: "E",
+>, <Line: +		link: linker,
+>, <Line: +		scope: {
+>, <Line: +			model:'=',
+>, <Line: +			list: '&',
+>, <Line: +			onBlur: '&'
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +});
+>, <Line: +module.directive('autocompleteTags', function ($compile) {
+>, <Line: +	var template = '' +
+>, <Line: +		'<table width="100%">' +
+>, <Line: +		'		<tr>' +
+>, <Line: +		'			<td>' +
+>, <Line: +		'			<table ng-show="!model.tagEdit"> ' +
+>, <Line: +		'				<tr ng-repeat="(tag, value) in model.tags"> ' +
+>, <Line: +		'				<td> ' +
+>, <Line: +		'					{{tag}}=<span ng-repeat="val in value">{{val}}{{$last ? "" : ", "}}</span>' +
+>, <Line: +		'				</td> ' +
+>, <Line: +		'				</tr> ' +
+>, <Line: +		'			</table> '+
+>, <Line: +		'			<input type="text" style="width:85px; padding:0; line-height:16px"' +
+>, <Line: +		'				focus-on-show ' +
+>, <Line: +		'				spellcheck="false"' +
+>, <Line: +		'				bs-typeahead ' +
+>, <Line: +		'				bs-options="key for key in keyList()"' +
+>, <Line: +		'				data-min-length=0 ' +
+>, <Line: +		'				data-items=100' +
+>, <Line: +		'				ng-model="model.currentTagKey"' +
+>, <Line: +		'				placeholder="key"' +
+>, <Line: +		'				ng-show="model.tagEdit"' +
+>, <Line: +		'			/>' +
+>, <Line: +		'			<input type="text" style="width:85px; padding:0; line-height:16px" ' +
+>, <Line: +		'				focus-on-show ' +
+>, <Line: +		'				class="input-small tight-form-input" ' +
+>, <Line: +		'				spellcheck="false" ' +
+>, <Line: +		'				bs-typeahead ' +
+>, <Line: +		'				bs-options="key for key in valueList()" ' +
+>, <Line: +		'				data-min-length=0 ' +
+>, <Line: +		'				data-items=100 ' +
+>, <Line: +		'				ng-model="model.currentTagValue" ' +
+>, <Line: +		'				placeholder="value" ' +
+>, <Line: +		'				ng-show="model.tagEdit"' +
+>, <Line: +		'			/>' +
+>, <Line: +		'			</td>' +
+>, <Line: +		'			<td width="10%" valign="top">' +
+>, <Line: +		'				<a href="#" class="btn-sm btn-circle text-right" style="margin-left:1px; margin-right:5px;"' +
+>, <Line: +		'					ng-click="model.tagEdit = true"' +
+>, <Line: +		'					ng-show="!model.tagEdit && !model.complex">' +
+>, <Line: +		'					<span class="glyphicon glyphicon-plus shift-1-up"></span>' +
+>, <Line: +		'				</a>' +
+>, <Line: +		'				<a href="#" class="btn-sm btn-circle" style="margin-right:10px;"' +
+>, <Line: +		'					ng-click="setTag(model);onBlur(model)"' +
+>, <Line: +		'					ng-show="model.tagEdit">' +
+>, <Line: +		'				<span class="glyphicon glyphicon-ok text-success"></span></a>' +
+>, <Line: +		'			</td>' +
+>, <Line: +		'			<td width="10%" valign="top">' +
+>, <Line: +		'				<a href="#" class="btn-sm btn-circle" style="margin-left:1px; margin-right:1px;"' +
+>, <Line: +		'					ng-click="removeTag(model);onBlur(model)"' +
+>, <Line: +		'					ng-show="model.tags && !model.tagEdit && !model.complex">' +
+>, <Line: +		'				<span class="glyphicon glyphicon-remove text-danger"></span></a>' +
+>, <Line: +		'					<a href="#" class="btn-sm btn-circle" style="margin-left:1px; margin-right:1px;"' +
+>, <Line: +		'						ng-click="cancelTagValues(model)"' +
+>, <Line: +		'						ng-show="model.tagEdit">' +
+>, <Line: +		'				<span class="glyphicon glyphicon-remove-sign text-danger"></span></a>' +
+>, <Line: +		'			</td>' +
+>, <Line: +		'		</tr>' +
+>, <Line: +		'</table>';
+>, <Line: +	var linker = function(scope, element, attributes) {
+>, <Line: +		element.html(template).show();
+>, <Line: +		$compile(element.contents())(scope);
+>, <Line: +		scope.cancelTagValues = function(model){
+>, <Line: +			model.tagEdit=false;
+>, <Line: +			delete model.currentTagKey;
+>, <Line: +			delete model.currentTagValue
+>, <Line: +		};
+>, <Line: +		scope.removeTag = function(model){
+>, <Line: +			delete model.tags;
+>, <Line: +		};
+>, <Line: +		scope.setTag = function(model){
+>, <Line: +			model.tagEdit=false;
+>, <Line: +			if (!model.tags) {
+>, <Line: +				model.tags = {};
+>, <Line: +			}
+>, <Line: +			var existingTag = [];
+>, <Line: +			if (model.tags[model.currentTagKey]){
+>, <Line: +				existingTag = model.tags[model.currentTagKey]
+>, <Line: +			}
+>, <Line: +			existingTag.push(model.currentTagValue);
+>, <Line: +			model.tags[model.currentTagKey] = existingTag;
+>, <Line: +			delete model.currentTagKey;
+>, <Line: +			delete model.currentTagValue;
+>, <Line: +		};
+>, <Line: +	};
+>, <Line: +	return {
+>, <Line: +		restrict: "E",
+>, <Line: +		link: linker,
+>, <Line: +		scope: {
+>, <Line: +			model:'=',
+>, <Line: +			keyList: '&',
+>, <Line: +			valueList: '&',
+>, <Line: +			onBlur: '&'
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +});
+>]
+[]

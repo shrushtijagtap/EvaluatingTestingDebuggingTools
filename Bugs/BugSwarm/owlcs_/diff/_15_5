@@ -1,0 +1,25 @@
+[<Line: +            if (pos == null) {
+>, <Line: +                // setup polarity of an equivalence
+>, <Line: +                    pos = Boolean.TRUE;
+>, <Line: +                    pos = Boolean.FALSE;
+>, <Line: +                if (pos.booleanValue() && !isTopEquivalent(arg)) {
+>, <Line: +                } else if (!pos.booleanValue() && !isBotEquivalent(arg)) {
+>, <Line: +                    // non-local
+>, <Line: +                    return false;
+>, <Line: +            // need to check (2)
+>, <Line: +            lhsIsTopEq = true;
+>, <Line: +            // need to check (1)
+>, <Line: +            lhsIsTopEq = false;
+>, <Line: +            // neither (1) nor (2)
+>, <Line: +            return;
+>]
+[<Line: -            if (pos == null) {	// setup polarity of an equivalence
+>, <Line: -                    pos = true;
+>, <Line: -                    pos = false;
+>, <Line: -                if (pos && !isTopEquivalent(arg)) {
+>, <Line: -                } else if (!pos && !isBotEquivalent(arg)) {
+>, <Line: -                    return false;		// non-local
+>, <Line: -            lhsIsTopEq = true;	// need to check (2)
+>, <Line: -            lhsIsTopEq = false;	// need to check (1)
+>, <Line: -            return;				// neither (1) nor (2)
+>]

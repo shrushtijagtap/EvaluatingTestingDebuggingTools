@@ -1,0 +1,41 @@
+[<Line: +	protected void setLogLevel(int verbosity) {
+>]
+[<Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import de.charite.compbio.jannovar.JannovarOptions;
+>, <Line: -	/** Configuration to use for the command execution. */
+>, <Line: -	protected JannovarOptions options;
+>, <Line: -	/** Verbosity level: (0) quiet, (1) normal, (2) verbose, (3) very verbose */
+>, <Line: -	protected int verbosity = 1;
+>, <Line: -	/** command line arguments */
+>, <Line: -	protected final ImmutableList<String> args;
+>, <Line: -	/**
+>, <Line: -	 * Initialize the JannovarCommand.
+>, <Line: -	 *
+>, <Line: -	 * @param argv
+>, <Line: -	 *            command line arguments to use
+>, <Line: -	 * @throws CommandLineParsingException
+>, <Line: -	 *             on problems with the command line
+>, <Line: -	 * @throws HelpRequestedException
+>, <Line: -	 *             if the user requested help through the command line parameters
+>, <Line: -	 */
+>, <Line: -	public JannovarCommand(String[] argv) throws CommandLineParsingException, HelpRequestedException {
+>, <Line: -		this.options = parseCommandLine(argv);
+>, <Line: -		this.verbosity = options.verbosity;
+>, <Line: -		this.args = ImmutableList.copyOf(argv);
+>, <Line: -		setLogLevel();
+>, <Line: -	}
+>, <Line: -	private void setLogLevel() {
+>, <Line: -	/**
+>, <Line: -	 * Function for parsing the command line.
+>, <Line: -	 *
+>, <Line: -	 * @param argv
+>, <Line: -	 *            command line to parse, as in the program's main function
+>, <Line: -	 * @return {@link JannovarOptions} with the programs' configuration
+>, <Line: -	 * @throws CommandLineParsingException
+>, <Line: -	 *             on problems with the command line
+>, <Line: -	 * @throws HelpRequestedException
+>, <Line: -	 *             when the user requested the help page
+>, <Line: -	 */
+>, <Line: -	protected abstract JannovarOptions parseCommandLine(String[] argv) throws CommandLineParsingException,
+>, <Line: -			HelpRequestedException;
+>]

@@ -1,0 +1,135 @@
+[<Line: +package backend.resource;
+>, <Line: +import backend.resource.serialization.SerializableLabel;
+>, <Line: +import javafx.scene.Node;
+>, <Line: +import javafx.scene.control.Tooltip;
+>, <Line: +import org.eclipse.egit.github.core.Label;
+>, <Line: +import java.util.Optional;
+>, <Line: +import java.util.regex.Matcher;
+>, <Line: +import java.util.regex.Pattern;
+>, <Line: +@SuppressWarnings("unused")
+>, <Line: +public class TurboLabel {
+>, <Line: +	private static final String EXCLUSIVE_DELIMITER = ".";
+>, <Line: +	private static final String NONEXCLUSIVE_DELIMITER = "-";
+>, <Line: +	private void ______SERIALIZED_FIELDS______() {
+>, <Line: +	}
+>, <Line: +	private final String actualName;
+>, <Line: +	private final String colour;
+>, <Line: +	private void ______TRANSIENT_FIELDS______() {
+>, <Line: +	}
+>, <Line: +	private final String repoId;
+>, <Line: +	private void ______CONSTRUCTORS______() {
+>, <Line: +	}
+>, <Line: +	public TurboLabel(String repoId, String name) {
+>, <Line: +		this.actualName = name;
+>, <Line: +		this.colour = "#ffffff";
+>, <Line: +		this.repoId = repoId;
+>, <Line: +	}
+>, <Line: +	public TurboLabel(String repoId, String group, String name) {
+>, <Line: +		this.actualName = join(group, name);
+>, <Line: +		this.colour = "#ffffff";
+>, <Line: +		this.repoId = repoId;
+>, <Line: +	}
+>, <Line: +	public TurboLabel(String repoId, Label label) {
+>, <Line: +		this.actualName = label.getName();
+>, <Line: +		this.colour = label.getColor();
+>, <Line: +		this.repoId = repoId;
+>, <Line: +	}
+>, <Line: +	public TurboLabel(String repoId, SerializableLabel label) {
+>, <Line: +		this.actualName = label.getActualName();
+>, <Line: +		this.colour = label.getColour();
+>, <Line: +		this.repoId = repoId;
+>, <Line: +	}
+>, <Line: +	private void ______METHODS______() {
+>, <Line: +	}
+>, <Line: +	private Optional<String> getDelimiter() {
+>, <Line: +		// Escaping due to constants not being valid regexes
+>, <Line: +		Pattern p = Pattern.compile(String.format("^[^\\%s\\%s]+(\\%s|\\%s)",
+>, <Line: +			EXCLUSIVE_DELIMITER,
+>, <Line: +			NONEXCLUSIVE_DELIMITER,
+>, <Line: +			EXCLUSIVE_DELIMITER,
+>, <Line: +			NONEXCLUSIVE_DELIMITER));
+>, <Line: +		Matcher m = p.matcher(actualName);
+>, <Line: +		if (m.find()) {
+>, <Line: +			return Optional.of(m.group(1));
+>, <Line: +		} else {
+>, <Line: +			return Optional.empty();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private String join(String group, String name) {
+>, <Line: +		return group + getDelimiter() + name;
+>, <Line: +	}
+>, <Line: +	public boolean isExclusive() {
+>, <Line: +		if (getDelimiter().isPresent()) {
+>, <Line: +			return getDelimiter().get().equals(EXCLUSIVE_DELIMITER);
+>, <Line: +		} else {
+>, <Line: +			return false;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public Optional<String> getGroup() {
+>, <Line: +		if (getDelimiter().isPresent()) {
+>, <Line: +			// Escaping due to constants not being valid regexes
+>, <Line: +			return Optional.of(actualName.split("\\" + getDelimiter().get())[0]);
+>, <Line: +		} else {
+>, <Line: +			return Optional.empty();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public String getName() {
+>, <Line: +		if (getDelimiter().isPresent()) {
+>, <Line: +			// Escaping due to constants not being valid regexes
+>, <Line: +			return actualName.split("\\" + getDelimiter().get())[1];
+>, <Line: +		} else {
+>, <Line: +			return actualName;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private String getStyle() {
+>, <Line: +		String colour = getColour();
+>, <Line: +		int R = Integer.parseInt(colour.substring(0, 2), 16);
+>, <Line: +		int G = Integer.parseInt(colour.substring(2, 4), 16);
+>, <Line: +		int B = Integer.parseInt(colour.substring(4, 6), 16);
+>, <Line: +		double L = 0.2126 * R + 0.7152 * G + 0.0722 * B;
+>, <Line: +		boolean bright = L > 128;
+>, <Line: +		return "-fx-background-color: #" + getColour() + "; -fx-text-fill: " + (bright ? "black" : "white");
+>, <Line: +	}
+>, <Line: +	public Node getNode() {
+>, <Line: +		javafx.scene.control.Label node = new javafx.scene.control.Label(getName());
+>, <Line: +		node.getStyleClass().add("labels");
+>, <Line: +		node.setStyle(getStyle());
+>, <Line: +		if (getGroup().isPresent()) {
+>, <Line: +			Tooltip groupTooltip = new Tooltip(getGroup().get());
+>, <Line: +			node.setTooltip(groupTooltip);
+>, <Line: +		}
+>, <Line: +		return node;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return actualName;
+>, <Line: +	}
+>, <Line: +	private void ______BOILERPLATE______() {
+>, <Line: +	}
+>, <Line: +	public String getRepoId() {
+>, <Line: +		return repoId;
+>, <Line: +	}
+>, <Line: +	public String getColour() {
+>, <Line: +		return colour;
+>, <Line: +	}
+>, <Line: +	public String getActualName() {
+>, <Line: +		return actualName;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object o) {
+>, <Line: +		if (this == o) return true;
+>, <Line: +		if (o == null || getClass() != o.getClass()) return false;
+>, <Line: +		TurboLabel that = (TurboLabel) o;
+>, <Line: +		if (!actualName.equals(that.actualName)) return false;
+>, <Line: +		if (!colour.equals(that.colour)) return false;
+>, <Line: +		return true;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode() {
+>, <Line: +		int result = actualName.hashCode();
+>, <Line: +		result = 31 * result + colour.hashCode();
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

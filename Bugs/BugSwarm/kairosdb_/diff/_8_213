@@ -1,0 +1,12 @@
+[<Line: +	<label>
+>, <Line: +		<small>Interval (seconds)</small>
+>, <Line: +	</label><br>
+>, <Line: +	<input type="number" class="input-mini" ng-model="refresh_interval">
+>, <Line: +	<button type="button" class="btn"
+>, <Line: +			ng-click="set_interval(refresh_interval);dismiss()"><i
+>, <Line: +			class="icon-ok"></i></button>
+>]
+[<Line: -    <label><small>Interval (seconds)</small></label><br>
+>, <Line: -    <input type="number" class="input-mini" ng-model="refresh_interval">
+>, <Line: -    <button type="button" class="btn" ng-click="set_interval(refresh_interval);dismiss()"><i class="icon-ok"></i></button>
+>]

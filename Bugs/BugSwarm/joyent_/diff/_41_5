@@ -1,0 +1,4 @@
+[<Line: +    <logger name="com.joyent.manta.client.multipart.MantaMultipartManagerIT" level="info" />
+>]
+[<Line: -    <logger name="com.joyent.manta.client.multipart.MantaMultipartIT" level="info" />
+>]

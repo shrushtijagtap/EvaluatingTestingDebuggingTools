@@ -1,0 +1,76 @@
+[<Line: +                this(DEFAULT_PROTECTION_DOMAIN, PackageDefinitionStrategy.NoOp.INSTANCE, DEFAULT_FORBID_EXISTING);
+>, <Line: +                return new InjectionDispatcher(protectionDomain, packageDefinitionStrategy, forbidExisting);
+>, <Line: +                return new InjectionDispatcher(protectionDomain, packageDefinitionStrategy, forbidExisting);
+>, <Line: +                return new InjectionDispatcher(protectionDomain, packageDefinitionStrategy, false);
+>, <Line: +                return new WrappingDispatcher(protectionDomain, packageDefinitionStrategy, persistenceHandler, childFirst, forbidExisting);
+>, <Line: +                return new WrappingDispatcher(protectionDomain, packageDefinitionStrategy, persistenceHandler, childFirst, forbidExisting);
+>, <Line: +                return new InjectionDispatcher(protectionDomain, packageDefinitionStrategy, false);
+>, <Line: +         * @param instrumentation The instrumentation to use.
+>, <Line: +         * @param folder          The folder to save jar files in.
+>, <Line: +        public ForBootstrapInjection(Instrumentation instrumentation, File folder) {
+>, <Line: +                    && instrumentation.equals(that.instrumentation);
+>]
+[<Line: -import java.security.AccessControlContext;
+>, <Line: -import java.security.AccessController;
+>, <Line: -        @Override
+>, <Line: -        public Configurable withAccessControlContext(AccessControlContext accessControlContext) {
+>, <Line: -            return dispatcher.withAccessControlContext(accessControlContext);
+>, <Line: -        }
+>, <Line: -            /**
+>, <Line: -             * The access control context to use for loading classes.
+>, <Line: -             */
+>, <Line: -            private final AccessControlContext accessControlContext;
+>, <Line: -                this(DEFAULT_PROTECTION_DOMAIN, AccessController.getContext(), PackageDefinitionStrategy.NoOp.INSTANCE, DEFAULT_FORBID_EXISTING);
+>, <Line: -             * @param accessControlContext      The access control context to use for loading classes.
+>, <Line: -                                        AccessControlContext accessControlContext,
+>, <Line: -                this.accessControlContext = accessControlContext;
+>, <Line: -                return new InjectionDispatcher(protectionDomain, accessControlContext, packageDefinitionStrategy, forbidExisting);
+>, <Line: -                return new InjectionDispatcher(protectionDomain, accessControlContext, packageDefinitionStrategy, forbidExisting);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public Configurable withAccessControlContext(AccessControlContext accessControlContext) {
+>, <Line: -                return new InjectionDispatcher(protectionDomain, accessControlContext, packageDefinitionStrategy, forbidExisting);
+>, <Line: -                return new InjectionDispatcher(protectionDomain, accessControlContext, packageDefinitionStrategy, false);
+>, <Line: -                        && accessControlContext.equals(that.accessControlContext)
+>, <Line: -                result = 31 * result + accessControlContext.hashCode();
+>, <Line: -                        ", accessControlContext=" + accessControlContext +
+>, <Line: -            /**
+>, <Line: -             * The access control context to use for loading classes.
+>, <Line: -             */
+>, <Line: -            private final AccessControlContext accessControlContext;
+>, <Line: -                        AccessController.getContext(),
+>, <Line: -             * @param accessControlContext      The access control context to use for loading classes.
+>, <Line: -                                       AccessControlContext accessControlContext,
+>, <Line: -                this.accessControlContext = accessControlContext;
+>, <Line: -                        accessControlContext,
+>, <Line: -                return new WrappingDispatcher(protectionDomain, accessControlContext, packageDefinitionStrategy, persistenceHandler, childFirst, forbidExisting);
+>, <Line: -                return new WrappingDispatcher(protectionDomain, accessControlContext, packageDefinitionStrategy, persistenceHandler, childFirst, forbidExisting);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public Configurable withAccessControlContext(AccessControlContext accessControlContext) {
+>, <Line: -                return new WrappingDispatcher(protectionDomain, accessControlContext, packageDefinitionStrategy, persistenceHandler, childFirst, forbidExisting);
+>, <Line: -                return new InjectionDispatcher(protectionDomain, accessControlContext, packageDefinitionStrategy, false);
+>, <Line: -                        && accessControlContext.equals(that.accessControlContext)
+>, <Line: -                result = 31 * result + accessControlContext.hashCode();
+>, <Line: -                        ", accessControlContext=" + accessControlContext +
+>, <Line: -        /**
+>, <Line: -         * Defines the supplied access control context to be used for loading classes.
+>, <Line: -         *
+>, <Line: -         * @param accessControlContext The access control context to use for loading classes.
+>, <Line: -         * @return A version of this class loading strategy that applies the supplied access control context.
+>, <Line: -         */
+>, <Line: -        Configurable withAccessControlContext(AccessControlContext accessControlContext);
+>, <Line: -        /**
+>, <Line: -         * The access control context to use.
+>, <Line: -         */
+>, <Line: -        private final AccessControlContext accessControlContext;
+>, <Line: -         * @param instrumentation      The instrumentation to use.
+>, <Line: -         * @param folder               The folder to save jar files in.
+>, <Line: -         * @param accessControlContext The access control context to use.
+>, <Line: -        public ForBootstrapInjection(Instrumentation instrumentation, File folder, AccessControlContext accessControlContext) {
+>, <Line: -            this.accessControlContext = accessControlContext;
+>, <Line: -                    && instrumentation.equals(that.instrumentation)
+>, <Line: -                    && accessControlContext.equals(that.accessControlContext);
+>, <Line: -            result = 31 * result + accessControlContext.hashCode();
+>, <Line: -                    ", accessControlContext=" + accessControlContext +
+>]

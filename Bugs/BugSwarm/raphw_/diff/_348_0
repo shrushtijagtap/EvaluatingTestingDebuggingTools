@@ -1,0 +1,218 @@
+[<Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        ForBoxedDefaultValue that = (ForBoxedDefaultValue) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        ForParameter forParameter = (ForParameter) other;
+>, <Line: +                            public boolean equals(Object other) {
+>, <Line: +                                if (this == other) return true;
+>, <Line: +                                if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                                if (!super.equals(other)) return false;
+>, <Line: +                                WithCasting that = (WithCasting) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        ForField forField = (ForField) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        ForConstantPoolValue that = (ForConstantPoolValue) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        ForBoxedArgument that = (ForBoxedArgument) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        ForBoxedArguments that = (ForBoxedArguments) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        ForSerializedObject that = (ForSerializedObject) other;
+>, <Line: +                public boolean equals(Object other) {
+>, <Line: +                    if (this == other) return true;
+>, <Line: +                    if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                    ForParameter that = (ForParameter) other;
+>, <Line: +                public boolean equals(Object other) {
+>, <Line: +                    if (this == other) return true;
+>, <Line: +                    if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                    ForThisReference that = (ForThisReference) other;
+>, <Line: +                public boolean equals(Object other) {
+>, <Line: +                    if (this == other) return true;
+>, <Line: +                    if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                    ForField forField = (ForField) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        if (!super.equals(other)) return false;
+>, <Line: +                        WithExplicitType that = (WithExplicitType) other;
+>, <Line: +                public boolean equals(Object other) {
+>, <Line: +                    if (this == other) return true;
+>, <Line: +                    if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                    ForOrigin forOrigin = (ForOrigin) other;
+>, <Line: +                        public boolean equals(Object other) {
+>, <Line: +                            if (this == other) return true;
+>, <Line: +                            if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                            ForConstantValue that = (ForConstantValue) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        Factory factory = (Factory) other;
+>, <Line: +                public boolean equals(Object other) {
+>, <Line: +                    if (this == other) return true;
+>, <Line: +                    if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                    ForThrowable forThrowable = (ForThrowable) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        Factory factory = (Factory) other;
+>, <Line: +                public boolean equals(Object other) {
+>, <Line: +                    if (this == other) return true;
+>, <Line: +                    if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                    ForUserValue that = (ForUserValue) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        Factory factory = (Factory) other;
+>, <Line: +                public boolean equals(Object other) {
+>, <Line: +                    if (this == other) return true;
+>, <Line: +                    if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                    Suppressing that = (Suppressing) other;
+>, <Line: +                        public boolean equals(Object other) {
+>, <Line: +                            if (this == other) return true;
+>, <Line: +                            if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                            ForType forType = (ForType) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        if (!super.equals(other)) return false;
+>, <Line: +                        Inlining.Resolved.ForMethodEnter that = (Inlining.Resolved.ForMethodEnter) other;
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        if (!super.equals(other)) return false;
+>, <Line: +                        Delegating.Resolved.ForMethodEnter that = (Delegating.Resolved.ForMethodEnter) other;
+>, <Line: +            public boolean equals(Object other) {
+>, <Line: +                if (this == other) return true;
+>, <Line: +                if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                ForFixedValue that = (ForFixedValue) other;
+>, <Line: +            public boolean equals(Object other) {
+>, <Line: +                if (this == other) return true;
+>, <Line: +                if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                ForAnnotationProperty<?> that = (ForAnnotationProperty<?>) other;
+>, <Line: +        public boolean equals(Object other) {
+>, <Line: +            if (this == other) return true;
+>, <Line: +            if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +            WithCustomMapping that = (WithCustomMapping) other;
+>]
+[<Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        ForBoxedDefaultValue that = (ForBoxedDefaultValue) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        ForParameter forParameter = (ForParameter) object;
+>, <Line: -                            public boolean equals(Object object) {
+>, <Line: -                                if (this == object) return true;
+>, <Line: -                                if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                                if (!super.equals(object)) return false;
+>, <Line: -                                WithCasting that = (WithCasting) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        ForField forField = (ForField) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        ForConstantPoolValue that = (ForConstantPoolValue) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        ForBoxedArgument that = (ForBoxedArgument) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        ForBoxedArguments that = (ForBoxedArguments) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        ForSerializedObject that = (ForSerializedObject) object;
+>, <Line: -                public boolean equals(Object object) {
+>, <Line: -                    if (this == object) return true;
+>, <Line: -                    if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                    ForParameter that = (ForParameter) object;
+>, <Line: -                public boolean equals(Object object) {
+>, <Line: -                    if (this == object) return true;
+>, <Line: -                    if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                    ForThisReference that = (ForThisReference) object;
+>, <Line: -                public boolean equals(Object object) {
+>, <Line: -                    if (this == object) return true;
+>, <Line: -                    if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                    ForField forField = (ForField) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        if (!super.equals(object)) return false;
+>, <Line: -                        WithExplicitType that = (WithExplicitType) object;
+>, <Line: -                public boolean equals(Object object) {
+>, <Line: -                    if (this == object) return true;
+>, <Line: -                    if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                    ForOrigin forOrigin = (ForOrigin) object;
+>, <Line: -                        public boolean equals(Object object) {
+>, <Line: -                            if (this == object) return true;
+>, <Line: -                            if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                            ForConstantValue that = (ForConstantValue) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        Factory factory = (Factory) object;
+>, <Line: -                public boolean equals(Object object) {
+>, <Line: -                    if (this == object) return true;
+>, <Line: -                    if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                    ForThrowable forThrowable = (ForThrowable) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        Factory factory = (Factory) object;
+>, <Line: -                public boolean equals(Object object) {
+>, <Line: -                    if (this == object) return true;
+>, <Line: -                    if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                    ForUserValue that = (ForUserValue) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        Factory factory = (Factory) object;
+>, <Line: -                public boolean equals(Object object) {
+>, <Line: -                    if (this == object) return true;
+>, <Line: -                    if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                    Suppressing that = (Suppressing) object;
+>, <Line: -                        public boolean equals(Object object) {
+>, <Line: -                            if (this == object) return true;
+>, <Line: -                            if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                            ForType forType = (ForType) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        if (!super.equals(object)) return false;
+>, <Line: -                        Inlining.Resolved.ForMethodEnter that = (Inlining.Resolved.ForMethodEnter) object;
+>, <Line: -                    public boolean equals(Object object) {
+>, <Line: -                        if (this == object) return true;
+>, <Line: -                        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                        if (!super.equals(object)) return false;
+>, <Line: -                        Delegating.Resolved.ForMethodEnter that = (Delegating.Resolved.ForMethodEnter) object;
+>, <Line: -            public boolean equals(Object object) {
+>, <Line: -                if (this == object) return true;
+>, <Line: -                if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                ForFixedValue that = (ForFixedValue) object;
+>, <Line: -            public boolean equals(Object object) {
+>, <Line: -                if (this == object) return true;
+>, <Line: -                if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -                ForAnnotationProperty<?> that = (ForAnnotationProperty<?>) object;
+>, <Line: -        public boolean equals(Object object) {
+>, <Line: -            if (this == object) return true;
+>, <Line: -            if (object == null || getClass() != object.getClass()) return false;
+>, <Line: -            WithCustomMapping that = (WithCustomMapping) object;
+>]

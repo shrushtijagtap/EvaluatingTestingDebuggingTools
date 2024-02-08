@@ -1,0 +1,8 @@
+[<Line: +        new TypeAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new Qux.Instance()))
+>, <Line: +        new TypeAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new Baz.Instance()))
+>, <Line: +        new TypeAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new QuxBaz.Instance()))
+>]
+[<Line: -        new TypeAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new Qux.Instance()))
+>, <Line: -        new TypeAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new Baz.Instance()))
+>, <Line: -        new TypeAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new QuxBaz.Instance()))
+>]

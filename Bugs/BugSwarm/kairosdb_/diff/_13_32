@@ -1,0 +1,42 @@
+[<Line: +package org.kairosdb.core.http.rest;
+>, <Line: +import com.google.inject.Binding;
+>, <Line: +import com.google.inject.Injector;
+>, <Line: +import com.google.inject.Key;
+>, <Line: +import org.kairosdb.core.http.rest.json.Query;
+>, <Line: +import org.kairosdb.plugin.QueryPreProcessor;
+>, <Line: +import javax.inject.Inject;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 6/12/17.
+>, <Line: + */
+>, <Line: +public class GuiceQueryPreProcessor implements QueryPreProcessorContainer
+>, <Line: +{
+>, <Line: +	private List<QueryPreProcessor> m_preProcessors;
+>, <Line: +	@Inject
+>, <Line: +	public GuiceQueryPreProcessor(Injector injector)
+>, <Line: +	{
+>, <Line: +		m_preProcessors = new ArrayList<>();
+>, <Line: +		Map<Key<?>, Binding<?>> bindings = injector.getAllBindings();
+>, <Line: +		for (Key<?> key : bindings.keySet())
+>, <Line: +		{
+>, <Line: +			Class<?> bindingClass = key.getTypeLiteral().getRawType();
+>, <Line: +			if (QueryPreProcessor.class.isAssignableFrom(bindingClass))
+>, <Line: +			{
+>, <Line: +				m_preProcessors.add((QueryPreProcessor)injector.getInstance(bindingClass));
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public Query preProcess(Query query)
+>, <Line: +	{
+>, <Line: +		Query ret = query;
+>, <Line: +		for (QueryPreProcessor preProcessor : m_preProcessors)
+>, <Line: +		{
+>, <Line: +			ret = preProcessor.preProcessQuery(ret);
+>, <Line: +		}
+>, <Line: +		return ret;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

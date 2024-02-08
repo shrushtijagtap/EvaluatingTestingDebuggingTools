@@ -1,0 +1,42 @@
+[<Line: +package org.mp4parser.muxer;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.CencSampleEncryptionInformationGroupEntry;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import org.mp4parser.muxer.builder.FragmentedMp4Builder;
+>, <Line: +import org.mp4parser.muxer.builder.Mp4Builder;
+>, <Line: +import org.mp4parser.muxer.container.mp4.MovieCreator;
+>, <Line: +import org.mp4parser.muxer.tracks.CencDecryptingTrackImpl;
+>, <Line: +import org.mp4parser.muxer.tracks.CencEncryptedTrack;
+>, <Line: +import org.mp4parser.muxer.tracks.CencEncryptingTrackImpl;
+>, <Line: +import org.mp4parser.tools.ByteBufferByteChannel;
+>, <Line: +    @Test
+>, <Line: +    public void testSingleKeyFragMp4_cenc() throws IOException {
+>, <Line: +        testMultipleKeys(new FragmentedMp4Builder(), baseDir + "/BBB_qpfile_10sec/BBB_fixedres_B_180x320_80.mp4", keys, null, "cenc", uuidDefault, false);
+>, <Line: +    }
+>, <Line: +        Movie m3 = MovieCreator.build(new ByteBufferByteChannel(baos.toByteArray()), new InMemRandomAccessSourceImpl(baos.toByteArray()), "inmem");
+>, <Line: +        Movie m5 = MovieCreator.build(new ByteBufferByteChannel(baos2.toByteArray()), new InMemRandomAccessSourceImpl(baos2.toByteArray()), "inmem");
+>, <Line: +        int i = 0;
+>, <Line: +            Assert.assertArrayEquals("Sample " + i + " differs", baos1.toByteArray(), baos2.toByteArray());
+>, <Line: +            i++;
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.cenc;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.googlecode.mp4parser.MemoryDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.FragmentedMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.Mp4Builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.CencDecryptingTrackImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.CencEncryptedTrack;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.CencEncryptingTrackImpl;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.CencSampleEncryptionInformationGroupEntry;
+>, <Line: -/**
+>, <Line: - * Created by sannies on 27.09.2014.
+>, <Line: - */
+>, <Line: -        Movie m3 = MovieCreator.build(new MemoryDataSourceImpl(baos.toByteArray()));
+>, <Line: -        Movie m5 = MovieCreator.build(new MemoryDataSourceImpl(baos2.toByteArray()));
+>, <Line: -            Assert.assertArrayEquals(baos1.toByteArray(), baos2.toByteArray());
+>]

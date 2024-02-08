@@ -1,0 +1,6 @@
+[<Line: +  char getValue() {
+>, <Line: +  boolean isFNC1() {
+>]
+[<Line: -  char getValue(){
+>, <Line: -  boolean isFNC1(){
+>]

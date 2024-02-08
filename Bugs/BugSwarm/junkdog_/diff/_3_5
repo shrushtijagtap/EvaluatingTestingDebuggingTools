@@ -1,0 +1,8 @@
+[<Line: +	protected void forEntity(int e) {
+>, <Line: +		entityId = e;
+>]
+[<Line: -import com.artemis.Entity;
+>, <Line: -	protected void forEntity(Entity e) {
+>, <Line: -		entityId = e.getId();
+>, <Line: -//		return this;
+>]

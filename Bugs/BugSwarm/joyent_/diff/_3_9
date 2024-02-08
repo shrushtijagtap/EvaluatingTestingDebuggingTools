@@ -1,0 +1,17 @@
+[<Line: +import java.util.UUID;
+>, <Line: +    @Test
+>, <Line: +    public void lastItemInPathIsCorrectFile() {
+>, <Line: +        final String expected = new UUID(24, 48).toString();
+>, <Line: +        final String path = String.format("/foo/bar/%s", expected);
+>, <Line: +        final String actual = MantaUtils.lastItemInPath(path);
+>, <Line: +        Assert.assertEquals(actual, expected);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void lastItemInPathIsCorrectFileWithTrailingSeparator() {
+>, <Line: +        final String expected = new UUID(24, 48).toString();
+>, <Line: +        final String path = String.format("/foo/bar/%s/", expected);
+>, <Line: +        final String actual = MantaUtils.lastItemInPath(path);
+>, <Line: +        Assert.assertEquals(actual, expected);
+>, <Line: +    }
+>]
+[]

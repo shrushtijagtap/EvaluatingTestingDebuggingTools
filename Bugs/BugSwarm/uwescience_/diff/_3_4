@@ -1,0 +1,35 @@
+[<Line: + * Consuming tuples from the child and sending them to the CacheController.
+>, <Line: +  private CacheController workerCacheController;
+>, <Line: +   * @param child the single child of this operator.
+>, <Line: +    workerCacheController = null;
+>, <Line: +    workerCacheController = getWorker().getCacheController();
+>, <Line: +    workerCacheController.addTupleBatch(tuples);
+>, <Line: +    getWorker().LOGGER.info("At EOS");
+>, <Line: +    workerCacheController.cacheIteratorReset();
+>]
+[<Line: -import edu.washington.escience.myria.storage.TupleBatchBuffer;
+>, <Line: - * Consuming from the operator that opened it and sending tuples to the cacheController
+>, <Line: -  /**
+>, <Line: -   * Buffer to hold finished and in-progress TupleBatches to send to TBC.
+>, <Line: -   */
+>, <Line: -  private TupleBatchBuffer outputBuffer;
+>, <Line: -  private CacheController cacheController;
+>, <Line: -   * @param child the single child of this operator. In this case, the child it the CC This operator is opened by the
+>, <Line: -   *          SCC operator
+>, <Line: -    cacheController = null;
+>, <Line: -    // the operator class was extended to call the getWorker() after the operator called init.... perhaps
+>, <Line: -    // it should be initialized elsewhere at the beginning?
+>, <Line: -    cacheController = getWorker().getCacheController();
+>, <Line: -    getWorker().LOGGER.info("Worker " + getWorker().getID() + " adding to cache");
+>, <Line: -    getWorker().LOGGER.info("First CacheController Status " + cacheController.getCurrentNumberOfTuples());
+>, <Line: -    // need to post the tuples to the local CC, if limit is reached then drop
+>, <Line: -    Operator child = getChild();
+>, <Line: -    cacheController.addTupleBatch(tuples);
+>, <Line: -    getWorker().LOGGER.info("Second CacheController Status " + cacheController.getCurrentNumberOfTuples());
+>, <Line: -    /*
+>, <Line: -     * HashMap<Integer, TupleBatch> cacheTemp = cacheController.getCache();
+>, <Line: -     * 
+>, <Line: -     * for (Integer tb : cacheTemp.keySet()) { String key = tb.toString(); String value = cacheTemp.get(tb).toString();
+>, <Line: -     * getWorker().LOGGER.info("HASHMAP: " + key + " " + value); }
+>, <Line: -     */
+>]

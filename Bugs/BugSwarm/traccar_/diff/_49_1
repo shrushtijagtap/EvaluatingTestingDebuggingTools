@@ -1,0 +1,12 @@
+[<Line: + * Copyright 2015 - 2016 Anton Tananaev (anton@traccar.org)
+>, <Line: +import org.traccar.Context;
+>, <Line: +        return Context.getObjectMapper();
+>]
+[<Line: - * Copyright 2015 Anton Tananaev (anton@traccar.org)
+>, <Line: -import com.fasterxml.jackson.databind.SerializationFeature;
+>, <Line: -    private ObjectMapper mapper = new ObjectMapper();
+>, <Line: -    public ObjectMapperProvider() {
+>, <Line: -        mapper.setConfig(mapper.getSerializationConfig().without(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS));
+>, <Line: -    }
+>, <Line: -        return mapper;
+>]

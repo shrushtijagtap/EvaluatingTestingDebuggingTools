@@ -1,0 +1,37 @@
+[<Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +import org.mockito.ArgumentCaptor;
+>, <Line: +import static org.kairosdb.util.DataPointEventUtil.verifyEvent;
+>, <Line: +	private EventBus m_mockEventBus;
+>, <Line: +	ArgumentCaptor<DataPointEvent> m_event;
+>, <Line: +		m_mockEventBus = mock(EventBus.class);
+>, <Line: +		m_aggregator = new SaveAsAggregator(m_mockEventBus);
+>, <Line: +		m_event = ArgumentCaptor.forClass(DataPointEvent.class);
+>, <Line: +		verifyEvent(m_mockEventBus, "testTtl", dataPoint, 42);
+>, <Line: +		verifyEvent(m_mockEventBus, "testTtl", dataPoint, 42);
+>, <Line: +		verifyEvent(m_mockEventBus, "testTtl", dataPoint, 0);
+>, <Line: +		verifyEvent(m_mockEventBus, "testTtl", dataPoint, 0);
+>, <Line: +		verifyEvent(m_mockEventBus, "testTtl", verifyMap, dataPoint, 0);
+>, <Line: +		verifyEvent(m_mockEventBus, "testTtl", verifyMap, dataPoint, 0);
+>, <Line: +		verifyEvent(m_mockEventBus, "testTtl", verifyMap, dataPoint, 0);
+>, <Line: +		verifyEvent(m_mockEventBus, "testTtl", verifyMap, dataPoint, 0);
+>, <Line: +		verifyEvent(m_mockEventBus, "testTtl", verifyMap, dataPoint, 42);
+>, <Line: +		verifyEvent(m_mockEventBus, "testTtl", verifyMap, dataPoint, 42);
+>]
+[<Line: -import java.util.Map;
+>, <Line: -import java.util.TreeMap;
+>, <Line: -import static org.mockito.Matchers.any;
+>, <Line: -import static org.mockito.Matchers.eq;
+>, <Line: -import static org.mockito.Mockito.verify;
+>, <Line: -		m_aggregator = new SaveAsAggregator(m_mockDatastore);
+>, <Line: -		verify(m_mockDatastore).putDataPoint(eq("testTtl"), any(ImmutableSortedMap.class), eq(dataPoint), eq(42));
+>, <Line: -		verify(m_mockDatastore).putDataPoint(eq("testTtl"), any(ImmutableSortedMap.class), eq(dataPoint), eq(42));
+>, <Line: -		verify(m_mockDatastore).putDataPoint(eq("testTtl"), any(ImmutableSortedMap.class), eq(dataPoint), eq(0));
+>, <Line: -		verify(m_mockDatastore).putDataPoint(eq("testTtl"), any(ImmutableSortedMap.class), eq(dataPoint), eq(0));
+>, <Line: -		verify(m_mockDatastore).putDataPoint(eq("testTtl"), eq(verifyMap), eq(dataPoint), eq(0));
+>, <Line: -		verify(m_mockDatastore).putDataPoint(eq("testTtl"), eq(verifyMap), eq(dataPoint), eq(0));
+>, <Line: -		verify(m_mockDatastore).putDataPoint(eq("testTtl"), eq(verifyMap), eq(dataPoint), eq(0));
+>, <Line: -		verify(m_mockDatastore).putDataPoint(eq("testTtl"), eq(verifyMap), eq(dataPoint), eq(0));
+>, <Line: -		verify(m_mockDatastore).putDataPoint(eq("testTtl"), eq(verifyMap), eq(dataPoint), eq(42));
+>, <Line: -		verify(m_mockDatastore).putDataPoint(eq("testTtl"), eq(verifyMap), eq(dataPoint), eq(42));
+>]

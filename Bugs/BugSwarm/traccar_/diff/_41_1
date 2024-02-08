@@ -1,0 +1,9 @@
+[<Line: + * Copyright 2015 - 2017 Anton Tananaev (anton@traccar.org)
+>, <Line: +                pipeline.addLast("frameDecoder", new WatchFrameDecoder());
+>]
+[<Line: - * Copyright 2015 - 2016 Anton Tananaev (anton@traccar.org)
+>, <Line: -import org.jboss.netty.handler.codec.string.StringDecoder;
+>, <Line: -import org.traccar.CharacterDelimiterFrameDecoder;
+>, <Line: -                pipeline.addLast("frameDecoder", new CharacterDelimiterFrameDecoder(1024, ']'));
+>, <Line: -                pipeline.addLast("stringDecoder", new StringDecoder());
+>]

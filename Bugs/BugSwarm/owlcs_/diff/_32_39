@@ -1,0 +1,100 @@
+[<Line: +        .maximumSize(1024).build(new CacheLoader<String, IRI>() {
+>, <Line: +            @Override
+>, <Line: +            public IRI load(String key) {
+>, <Line: +                return loadOboToIRI(key);
+>, <Line: +            }
+>, <Line: +        });
+>, <Line: +    public static void convertURL(String iri, String outFile, OWLOntologyManager manager)
+>, <Line: +        throws IOException, OWLOntologyCreationException, OWLOntologyStorageException {
+>, <Line: +            manager.applyChange(new SetOntologyID(in,
+>, <Line: +                new OWLOntologyID(optional(IRI.create(DEFAULT_IRI_PREFIX + defaultIDSpace)), emptyOptional())));
+>, <Line: +            .map(a -> a.getValue().asLiteral()).filter(Optional::isPresent).map(x -> x.get().getLiteral()).findAny();
+>, <Line: +                        add(fac.getOWLAnnotationAssertionAxiom(ap, childIRI,
+>, <Line: +                            trTagToAnnotationProp(values[2].toString()).getIRI()));
+>, <Line: +                headerFrame.getClauses(t).forEach(
+>, <Line: +                    c -> addOntologyAnnotation(fac.getRDFSComment(), trLiteral(c.getValue()), trAnnotations(c)));
+>, <Line: +                headerFrame.getTagValues(tag, String.class)
+>, <Line: +                    .forEach(s -> getOwlOntology().add(OwlStringTools.translate(s, manager)));
+>, <Line: +                headerFrame.getClauses(t).forEach(
+>, <Line: +                    c -> addOntologyAnnotation(trTagToAnnotationProp(t), trLiteral(c.getValue()), trAnnotations(c)));
+>, <Line: +            axioms.add(fac.getOWLAnnotationAssertionAxiom(altIdEntity.getIRI(),
+>, <Line: +                fac.getOWLAnnotation(fac.getOWLDeprecated(), fac.getOWLLiteral(true))));
+>, <Line: +            axioms.add(fac.getOWLAnnotationAssertionAxiom(altIdEntity.getIRI(),
+>, <Line: +                fac.getOWLAnnotation(fac.getOWLAnnotationProperty(Obo2OWLVocabulary.IRI_IAO_0100001.iri), replacedBy)));
+>, <Line: +            axioms.add(fac.getOWLAnnotationAssertionAxiom(altIdEntity.getIRI(), fac.getOWLAnnotation(
+>, <Line: +                fac.getOWLAnnotationProperty(Obo2OWLConstants.IRI_IAO_0000231), Obo2OWLConstants.IRI_IAO_0000227)));
+>, <Line: +                ax = fac.getOWLSubClassOfAxiom(clsx,
+>, <Line: +                    trRel((String) clause.getValue(), (String) clause.getValue2(), qvs), annotations);
+>, <Line: +        } else if (tagConstant == OboFormatTag.TAG_IS_INVERSE_FUNCTIONAL
+>, <Line: +            && "true".equals(clause.getValue().toString())) {
+>, <Line: +                ax = fac.getOWLAnnotationAssertionAxiom(trAnnotationProp((String) v), sub,
+>, <Line: +                    trAnnotationProp(v2.toString()).getIRI(), annotations);
+>, <Line: +                    OWLAnnotation ann = fac.getOWLAnnotation(
+>, <Line: +                        trTagToAnnotationProp(OboFormatTag.TAG_HAS_SYNONYM_TYPE.getTag()),
+>, <Line: +                        trAnnotationProp(values[2].toString()).getIRI());
+>, <Line: +                OWLAnnotation owlAnnotation = fac.getOWLAnnotation(fac.getRDFSLabel(),
+>, <Line: +                    fac.getOWLLiteral(xrefAnnotation));
+>, <Line: +        if (type.equals(OboFormatTag.TAG_RELATED.getTag()) || type.equals(OboFormatTag.TAG_EXACT.getTag())
+>, <Line: +            || type.equals(OboFormatTag.TAG_NARROW.getTag()) || type.equals(OboFormatTag.TAG_BROAD.getTag())) {
+>, <Line: +        if (exact != null && exact.intValue() > 0) {
+>, <Line: +            ex = fac.getOWLObjectExactCardinality(exact.intValue(), pe, ce);
+>, <Line: +        } else if (exact != null && exact.intValue() == 0 || max != null && max.intValue() == 0) {
+>, <Line: +            ex = fac.getOWLObjectIntersectionOf(fac.getOWLObjectMinCardinality(min.intValue(), pe, ce),
+>, <Line: +                fac.getOWLObjectMaxCardinality(max.intValue(), pe, ce));
+>, <Line: +            ex = fac.getOWLObjectMinCardinality(min.intValue(), pe, ce);
+>, <Line: +            ex = fac.getOWLObjectMaxCardinality(max.intValue(), pe, ce);
+>, <Line: +            ex = fac.getOWLObjectIntersectionOf(fac.getOWLObjectSomeValuesFrom(pe, ce),
+>, <Line: +                fac.getOWLObjectAllValuesFrom(pe, ce));
+>, <Line: +            return fac.getOWLLiteral(((Boolean) value).booleanValue());
+>]
+[<Line: -        .maximumSize(1024)
+>, <Line: -        .build(
+>, <Line: -            new CacheLoader<String, IRI>() {
+>, <Line: -                @Override
+>, <Line: -                public IRI load(String key) {
+>, <Line: -                    return loadOboToIRI(key);
+>, <Line: -                }
+>, <Line: -            });
+>, <Line: -    public static void convertURL(String iri, String outFile, OWLOntologyManager manager) throws IOException,
+>, <Line: -        OWLOntologyCreationException, OWLOntologyStorageException {
+>, <Line: -            manager.applyChange(new SetOntologyID(in, new OWLOntologyID(optional(IRI.create(DEFAULT_IRI_PREFIX
+>, <Line: -                + defaultIDSpace)), emptyOptional())));
+>, <Line: -            .map(a -> a.getValue().asLiteral())
+>, <Line: -            .filter(Optional::isPresent).map(x -> x.get().getLiteral()).findAny();
+>, <Line: -                        add(fac.getOWLAnnotationAssertionAxiom(ap, childIRI, trTagToAnnotationProp(values[2].toString())
+>, <Line: -                            .getIRI()));
+>, <Line: -                headerFrame.getClauses(t).forEach(c -> addOntologyAnnotation(fac.getRDFSComment(), trLiteral(c
+>, <Line: -                    .getValue()), trAnnotations(c)));
+>, <Line: -                headerFrame.getTagValues(tag, String.class).forEach(s -> getOwlOntology().add(OwlStringTools.translate(
+>, <Line: -                    s, manager)));
+>, <Line: -                headerFrame.getClauses(t).forEach(c -> addOntologyAnnotation(trTagToAnnotationProp(t), trLiteral(c
+>, <Line: -                    .getValue()), trAnnotations(c)));
+>, <Line: -            axioms.add(fac.getOWLAnnotationAssertionAxiom(altIdEntity.getIRI(), fac.getOWLAnnotation(fac
+>, <Line: -                .getOWLDeprecated(), fac.getOWLLiteral(true))));
+>, <Line: -            axioms.add(fac.getOWLAnnotationAssertionAxiom(altIdEntity.getIRI(), fac.getOWLAnnotation(fac
+>, <Line: -                .getOWLAnnotationProperty(Obo2OWLVocabulary.IRI_IAO_0100001.iri), replacedBy)));
+>, <Line: -            axioms.add(fac.getOWLAnnotationAssertionAxiom(altIdEntity.getIRI(), fac.getOWLAnnotation(fac
+>, <Line: -                .getOWLAnnotationProperty(Obo2OWLConstants.IRI_IAO_0000231), Obo2OWLConstants.IRI_IAO_0000227)));
+>, <Line: -                ax = fac.getOWLSubClassOfAxiom(clsx, trRel((String) clause.getValue(), (String) clause.getValue2(),
+>, <Line: -                    qvs), annotations);
+>, <Line: -        } else if (tagConstant == OboFormatTag.TAG_IS_INVERSE_FUNCTIONAL && "true".equals(clause.getValue()
+>, <Line: -            .toString())) {
+>, <Line: -                ax = fac.getOWLAnnotationAssertionAxiom(trAnnotationProp((String) v), sub, trAnnotationProp(v2
+>, <Line: -                    .toString()).getIRI(), annotations);
+>, <Line: -                    OWLAnnotation ann = fac.getOWLAnnotation(trTagToAnnotationProp(OboFormatTag.TAG_HAS_SYNONYM_TYPE
+>, <Line: -                        .getTag()), trAnnotationProp(values[2].toString()).getIRI());
+>, <Line: -                OWLAnnotation owlAnnotation = fac.getOWLAnnotation(fac.getRDFSLabel(), fac.getOWLLiteral(
+>, <Line: -                    xrefAnnotation));
+>, <Line: -        if (type.equals(OboFormatTag.TAG_RELATED.getTag()) || type.equals(OboFormatTag.TAG_EXACT.getTag()) || type
+>, <Line: -            .equals(OboFormatTag.TAG_NARROW.getTag()) || type.equals(OboFormatTag.TAG_BROAD.getTag())) {
+>, <Line: -        if (exact != null && exact > 0) {
+>, <Line: -            ex = fac.getOWLObjectExactCardinality(exact, pe, ce);
+>, <Line: -        } else if (exact != null && exact == 0 || max != null && max == 0) {
+>, <Line: -            ex = fac.getOWLObjectIntersectionOf(fac.getOWLObjectMinCardinality(min, pe, ce), fac
+>, <Line: -                .getOWLObjectMaxCardinality(max, pe, ce));
+>, <Line: -            ex = fac.getOWLObjectMinCardinality(min, pe, ce);
+>, <Line: -            ex = fac.getOWLObjectMaxCardinality(max, pe, ce);
+>, <Line: -            ex = fac.getOWLObjectIntersectionOf(fac.getOWLObjectSomeValuesFrom(pe, ce), fac.getOWLObjectAllValuesFrom(
+>, <Line: -                pe, ce));
+>, <Line: -            return fac.getOWLLiteral((Boolean) value);
+>]

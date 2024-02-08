@@ -1,0 +1,15 @@
+[<Line: +			codes.add(Codes.BinaryOperator(result, target, leftOperand,
+>, <Line: +					rightOperand, OP2BOP(v.op, v, context)), attributes(v));
+>]
+[<Line: -			Expr.BOp bop = v.op;
+>, <Line: -			switch (bop) {
+>, <Line: -			case LISTAPPEND:
+>, <Line: -				codes.add(Codes.ListOperator((Type.EffectiveList) result,
+>, <Line: -						target, leftOperand, rightOperand,
+>, <Line: -						Codes.ListOperatorKind.APPEND), attributes(v));
+>, <Line: -				break;
+>, <Line: -			default:
+>, <Line: -				codes.add(Codes.BinaryOperator(result, target, leftOperand,
+>, <Line: -						rightOperand, OP2BOP(bop, v, context)), attributes(v));
+>, <Line: -			}
+>]

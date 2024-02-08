@@ -1,0 +1,20 @@
+[<Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultFragmenterImpl;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import org.mp4parser.muxer.container.mp4.MovieCreator;
+>, <Line: +import org.mp4parser.muxer.tracks.TextTrackImpl;
+>, <Line: +        Movie m1 = MovieCreator.build(("C:\\dev\\DRMTODAY-872\\Tears_Of_Steel_128000_eng.mp4"));
+>, <Line: +        Movie m2 = MovieCreator.build(("C:\\dev\\DRMTODAY-872\\Tears_Of_Steel_600000.mp4"));
+>]
+[<Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultFragmenterImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.TextTrackImpl;
+>, <Line: -        Movie m1 = MovieCreator.build(new FileDataSourceImpl("C:\\dev\\DRMTODAY-872\\Tears_Of_Steel_128000_eng.mp4"));
+>, <Line: -        Movie m2 = MovieCreator.build(new FileDataSourceImpl("C:\\dev\\DRMTODAY-872\\Tears_Of_Steel_600000.mp4"));
+>]

@@ -1,0 +1,17 @@
+[<Line: +import org.yamcs.parameter.ParameterValue;
+>, <Line: +    List<ParameterValue> sysVariables= new ArrayList<>();
+>, <Line: +    private String spLinkStatus, spDataCount;
+>, <Line: +            spLinkStatus = sysParamCollector.getNamespace()+"/"+name+"/linkStatus";
+>, <Line: +            spDataCount = sysParamCollector.getNamespace()+"/"+name+"/dataCount";
+>, <Line: +        ParameterValue linkStatus = SystemParametersCollector.getPV(spLinkStatus, time, getLinkStatus());
+>, <Line: +        ParameterValue dataCount = SystemParametersCollector.getPV(spDataCount, time, getDataCount());
+>]
+[<Line: -import org.yamcs.protobuf.Pvalue.ParameterValue;
+>, <Line: -import org.yamcs.protobuf.Yamcs.NamedObjectId;
+>, <Line: -    List<ParameterValue> sysVariables= new ArrayList<ParameterValue>();
+>, <Line: -    private NamedObjectId sv_linkStatus_id, sp_dataCount_id;
+>, <Line: -            sv_linkStatus_id = NamedObjectId.newBuilder().setName(sysParamCollector.getNamespace()+"/"+name+"/linkStatus").build();
+>, <Line: -            sp_dataCount_id = NamedObjectId.newBuilder().setName(sysParamCollector.getNamespace()+"/"+name+"/dataCount").build();
+>, <Line: -        ParameterValue linkStatus = SystemParametersCollector.getPV(sv_linkStatus_id, time, getLinkStatus());
+>, <Line: -        ParameterValue dataCount = SystemParametersCollector.getPV(sp_dataCount_id, time, getDataCount());
+>]

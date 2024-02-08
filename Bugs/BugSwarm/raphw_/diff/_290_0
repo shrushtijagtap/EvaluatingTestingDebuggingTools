@@ -1,0 +1,4 @@
+[<Line: +                    return Opcodes.ACC_SYNTHETIC | Opcodes.ACC_FINAL | Opcodes.ACC_STATIC | (instrumentedType.isClassType()
+>]
+[<Line: -                    return Opcodes.ACC_SYNTHETIC | Opcodes.ACC_FINAL | (instrumentedType.isClassType()
+>]

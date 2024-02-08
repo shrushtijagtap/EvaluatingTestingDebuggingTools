@@ -1,0 +1,6 @@
+[<Line: +requires no { i in 0..|coins| | coins[i] >= |Value| }:
+>, <Line: +        where (|cash| == |Value|) && no { k in 0..|cash| | cash[k] < 0 }:
+>]
+[<Line: -requires no { c in coins | c >= |Value| }:
+>, <Line: -        where (|cash| == |Value|) && no { c in cash | c < 0 }:
+>]

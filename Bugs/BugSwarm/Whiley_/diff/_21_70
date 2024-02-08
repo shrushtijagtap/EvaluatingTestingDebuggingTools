@@ -1,0 +1,6 @@
+[<Line: +ensures result ==> some { i in 0..|items| | items[i] == item }
+>, <Line: +ensures !result ==> no { i in 0..|items| | items[i] == item }:
+>]
+[<Line: -ensures result ==> some { i in items | i == item }
+>, <Line: -ensures !result ==> no { i in items | i == item }:
+>]

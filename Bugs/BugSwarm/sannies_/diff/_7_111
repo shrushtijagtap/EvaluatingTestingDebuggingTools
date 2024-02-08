@@ -1,0 +1,8 @@
+[<Line: +package org.mp4parser.boxes;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: +    byte[] data;
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.googlecode.mp4parser.AbstractBox;
+>, <Line: -    byte[] data;
+>]

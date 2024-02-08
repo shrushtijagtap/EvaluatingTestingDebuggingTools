@@ -1,0 +1,104 @@
+[<Line: +	return datasource.metricFindQuery(path + '.*').then(function (result) {
+>, <Line: +		if (!result) {
+>, <Line: +			return null;
+>, <Line: +		}
+>, <Line: +		if (targets.length === 10) {
+>, <Line: +			return null;
+>, <Line: +		}
+>, <Line: +		var promises = _.map(result, function (metric) {
+>, <Line: +			if (metric.expandable) {
+>, <Line: +				return getTargets(path + "." + metric.text);
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				targets.push(path + '.' + metric.text);
+>, <Line: +			}
+>, <Line: +			return null;
+>, <Line: +		});
+>, <Line: +		return services.$q.all(promises);
+>, <Line: +	});
+>, <Line: +	// Intialize a skeleton with nothing but a rows array and service object
+>, <Line: +	var dashboard = {rows: []};
+>, <Line: +	dashboard.title = 'Scripted dash ' + index;
+>, <Line: +	dashboard.time = {
+>, <Line: +		from: "now-6h",
+>, <Line: +		to: "now"
+>, <Line: +	};
+>, <Line: +	dashboard.rows.push({
+>, <Line: +		title: 'Chart',
+>, <Line: +		height: '300px',
+>, <Line: +		panels: [
+>, <Line: +			{
+>, <Line: +				title: 'Events',
+>, <Line: +				type: 'graph',
+>, <Line: +				span: 12,
+>, <Line: +				targets: [{target: target}]
+>, <Line: +			}
+>, <Line: +		]
+>, <Line: +	});
+>, <Line: +	return dashboard;
+>, <Line: +	var model = services.dashboardSrv.create(dashboard);
+>, <Line: +	dashboardDB.saveDashboard(model);
+>, <Line: +return function (callback) {
+>, <Line: +	getTargets('apps').then(function () {
+>, <Line: +		console.log('targets: ', targets);
+>, <Line: +		_.each(targets, function (target, index) {
+>, <Line: +			var dashboard = createDashboard(target, index);
+>, <Line: +			saveDashboard(dashboard);
+>, <Line: +			if (index === targets.length - 1) {
+>, <Line: +				callback(dashboard);
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  return datasource.metricFindQuery(path + '.*').then(function(result) {
+>, <Line: -    if (!result) {
+>, <Line: -      return null;
+>, <Line: -    }
+>, <Line: -    if (targets.length === 10) {
+>, <Line: -      return null;
+>, <Line: -    }
+>, <Line: -    var promises = _.map(result, function(metric) {
+>, <Line: -      if (metric.expandable) {
+>, <Line: -        return getTargets(path + "." + metric.text);
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        targets.push(path + '.' + metric.text);
+>, <Line: -      }
+>, <Line: -      return null;
+>, <Line: -    });
+>, <Line: -    return services.$q.all(promises);
+>, <Line: -  });
+>, <Line: -  // Intialize a skeleton with nothing but a rows array and service object
+>, <Line: -  var dashboard = { rows : [] };
+>, <Line: -  dashboard.title = 'Scripted dash ' + index;
+>, <Line: -  dashboard.time = {
+>, <Line: -    from: "now-6h",
+>, <Line: -    to: "now"
+>, <Line: -  };
+>, <Line: -  dashboard.rows.push({
+>, <Line: -    title: 'Chart',
+>, <Line: -    height: '300px',
+>, <Line: -    panels: [
+>, <Line: -    {
+>, <Line: -      title: 'Events',
+>, <Line: -      type: 'graph',
+>, <Line: -      span: 12,
+>, <Line: -      targets: [ {target: target} ]
+>, <Line: -    }
+>, <Line: -  ]
+>, <Line: -  });
+>, <Line: -  return dashboard;
+>, <Line: -  var model = services.dashboardSrv.create(dashboard);
+>, <Line: -  dashboardDB.saveDashboard(model);
+>, <Line: -return function(callback)  {
+>, <Line: -  getTargets('apps').then(function() {
+>, <Line: -    console.log('targets: ', targets);
+>, <Line: -    _.each(targets, function(target, index) {
+>, <Line: -      var dashboard = createDashboard(target, index);
+>, <Line: -      saveDashboard(dashboard);
+>, <Line: -      if (index === targets.length - 1) {
+>, <Line: -        callback(dashboard);
+>, <Line: -      }
+>, <Line: -    });
+>, <Line: -  });
+>]

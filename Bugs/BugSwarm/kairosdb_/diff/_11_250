@@ -1,0 +1,160 @@
+[<Line: +	'angular',
+>, <Line: +	'lodash',
+>, <Line: +	'moment'
+>, <Line: +	'use strict';
+>, <Line: +	var module = angular.module('grafana.services');
+>, <Line: +	module.service('annotationsSrv', function (datasourceSrv, $q, alertSrv, $rootScope, $sanitize) {
+>, <Line: +		var promiseCached;
+>, <Line: +		var list = [];
+>, <Line: +		var timezone;
+>, <Line: +		this.init = function () {
+>, <Line: +			$rootScope.onAppEvent('refresh', this.clearCache);
+>, <Line: +			$rootScope.onAppEvent('setup-dashboard', this.clearCache);
+>, <Line: +		};
+>, <Line: +		this.clearCache = function () {
+>, <Line: +			promiseCached = null;
+>, <Line: +			list = [];
+>, <Line: +		};
+>, <Line: +		this.getAnnotations = function (rangeUnparsed, dashboard) {
+>, <Line: +			if (!dashboard.annotations.enable) {
+>, <Line: +				return $q.when(null);
+>, <Line: +			}
+>, <Line: +			if (promiseCached) {
+>, <Line: +				return promiseCached;
+>, <Line: +			}
+>, <Line: +			timezone = dashboard.timezone;
+>, <Line: +			var annotations = _.where(dashboard.annotations.list, {enable: true});
+>, <Line: +			var promises = _.map(annotations, function (annotation) {
+>, <Line: +				var datasource = datasourceSrv.get(annotation.datasource);
+>, <Line: +				return datasource.annotationQuery(annotation, rangeUnparsed)
+>, <Line: +					.then(this.receiveAnnotationResults)
+>, <Line: +					.then(null, errorHandler);
+>, <Line: +			}, this);
+>, <Line: +			promiseCached = $q.all(promises)
+>, <Line: +				.then(function () {
+>, <Line: +					return list;
+>, <Line: +				});
+>, <Line: +			return promiseCached;
+>, <Line: +		};
+>, <Line: +		this.receiveAnnotationResults = function (results) {
+>, <Line: +			for (var i = 0; i < results.length; i++) {
+>, <Line: +				addAnnotation(results[i]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		function errorHandler(err) {
+>, <Line: +			console.log('Annotation error: ', err);
+>, <Line: +			var message = err.message || "Annotation query failed";
+>, <Line: +			alertSrv.set('Annotations error', message, 'error');
+>, <Line: +		}
+>, <Line: +		function addAnnotation(options) {
+>, <Line: +			var title = $sanitize(options.title);
+>, <Line: +			var tooltip = "<small><b>" + title + "</b><br/>";
+>, <Line: +			if (options.tags) {
+>, <Line: +				var tags = $sanitize(options.tags);
+>, <Line: +				tooltip += '<span class="tag label label-tag">' + (tags || '') + '</span><br/>';
+>, <Line: +			}
+>, <Line: +			if (timezone === 'browser') {
+>, <Line: +				tooltip += '<i>' + moment(options.time).format('YYYY-MM-DD HH:mm:ss') + '</i><br/>';
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				tooltip += '<i>' + moment.utc(options.time).format('YYYY-MM-DD HH:mm:ss') + '</i><br/>';
+>, <Line: +			}
+>, <Line: +			if (options.text) {
+>, <Line: +				var text = $sanitize(options.text);
+>, <Line: +				tooltip += text.replace(/\n/g, '<br/>');
+>, <Line: +			}
+>, <Line: +			tooltip += "</small>";
+>, <Line: +			list.push({
+>, <Line: +				annotation: options.annotation,
+>, <Line: +				min: options.time,
+>, <Line: +				max: options.time,
+>, <Line: +				eventType: options.annotation.name,
+>, <Line: +				title: null,
+>, <Line: +				description: tooltip,
+>, <Line: +				score: 1
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +		// Now init
+>, <Line: +		this.init();
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'moment'
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.service('annotationsSrv', function(datasourceSrv, $q, alertSrv, $rootScope, $sanitize) {
+>, <Line: -    var promiseCached;
+>, <Line: -    var list = [];
+>, <Line: -    var timezone;
+>, <Line: -    this.init = function() {
+>, <Line: -      $rootScope.onAppEvent('refresh', this.clearCache);
+>, <Line: -      $rootScope.onAppEvent('setup-dashboard', this.clearCache);
+>, <Line: -    };
+>, <Line: -    this.clearCache = function() {
+>, <Line: -      promiseCached = null;
+>, <Line: -      list = [];
+>, <Line: -    };
+>, <Line: -    this.getAnnotations = function(rangeUnparsed, dashboard) {
+>, <Line: -      if (!dashboard.annotations.enable) {
+>, <Line: -        return $q.when(null);
+>, <Line: -      }
+>, <Line: -      if (promiseCached) {
+>, <Line: -        return promiseCached;
+>, <Line: -      }
+>, <Line: -      timezone = dashboard.timezone;
+>, <Line: -      var annotations = _.where(dashboard.annotations.list, { enable: true });
+>, <Line: -      var promises  = _.map(annotations, function(annotation) {
+>, <Line: -        var datasource = datasourceSrv.get(annotation.datasource);
+>, <Line: -        return datasource.annotationQuery(annotation, rangeUnparsed)
+>, <Line: -          .then(this.receiveAnnotationResults)
+>, <Line: -          .then(null, errorHandler);
+>, <Line: -      }, this);
+>, <Line: -      promiseCached = $q.all(promises)
+>, <Line: -        .then(function() {
+>, <Line: -          return list;
+>, <Line: -        });
+>, <Line: -      return promiseCached;
+>, <Line: -    };
+>, <Line: -    this.receiveAnnotationResults = function(results) {
+>, <Line: -      for (var i = 0; i < results.length; i++) {
+>, <Line: -        addAnnotation(results[i]);
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    function errorHandler(err) {
+>, <Line: -      console.log('Annotation error: ', err);
+>, <Line: -      var message = err.message || "Annotation query failed";
+>, <Line: -      alertSrv.set('Annotations error', message,'error');
+>, <Line: -    }
+>, <Line: -    function addAnnotation(options) {
+>, <Line: -      var title = $sanitize(options.title);
+>, <Line: -      var tooltip = "<small><b>" + title + "</b><br/>";
+>, <Line: -      if (options.tags) {
+>, <Line: -        var tags = $sanitize(options.tags);
+>, <Line: -        tooltip += '<span class="tag label label-tag">' + (tags || '') + '</span><br/>';
+>, <Line: -      }
+>, <Line: -      if (timezone === 'browser') {
+>, <Line: -        tooltip += '<i>' + moment(options.time).format('YYYY-MM-DD HH:mm:ss') + '</i><br/>';
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        tooltip += '<i>' + moment.utc(options.time).format('YYYY-MM-DD HH:mm:ss') + '</i><br/>';
+>, <Line: -      }
+>, <Line: -      if (options.text) {
+>, <Line: -        var text = $sanitize(options.text);
+>, <Line: -        tooltip += text.replace(/\n/g, '<br/>');
+>, <Line: -      }
+>, <Line: -      tooltip += "</small>";
+>, <Line: -      list.push({
+>, <Line: -        annotation: options.annotation,
+>, <Line: -        min: options.time,
+>, <Line: -        max: options.time,
+>, <Line: -        eventType: options.annotation.name,
+>, <Line: -        title: null,
+>, <Line: -        description: tooltip,
+>, <Line: -        score: 1
+>, <Line: -      });
+>, <Line: -    }
+>, <Line: -    // Now init
+>, <Line: -    this.init();
+>, <Line: -  });
+>]

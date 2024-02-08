@@ -1,0 +1,63 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_tsv;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.VCFHeaderExtender;
+>, <Line: +import htsjdk.variant.vcf.VCFHeader;
+>, <Line: +import htsjdk.variant.vcf.VCFHeaderLineCount;
+>, <Line: +import htsjdk.variant.vcf.VCFInfoHeaderLine;
+>, <Line: +/**
+>, <Line: + * Helper class for extending {@link VCFHeader}s for generic TSV annotations.
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenericTSVHeaderExtender extends VCFHeaderExtender {
+>, <Line: +	private GenericTSVAnnotationOptions tsvOptions;
+>, <Line: +	public GenericTSVHeaderExtender(GenericTSVAnnotationOptions options) {
+>, <Line: +		super(options);
+>, <Line: +		this.tsvOptions = options;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String getDefaultPrefix() {
+>, <Line: +		return "TSV_";
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void addHeaders(VCFHeader header, String prefix) {
+>, <Line: +		addHeadersInfixes(header, prefix, "", "");
+>, <Line: +		// Only add the overlapping annotations if the REF and ALT columns are
+>, <Line: +		// configured at all
+>, <Line: +		if (tsvOptions.getAltAlleleColumnIndex() > 0 && tsvOptions.getRefAlleleColumnIndex() > 0) {
+>, <Line: +			if (options.isReportOverlapping() && !options.isReportOverlappingAsMatching())
+>, <Line: +				addHeadersInfixes(header, prefix, "OVL_",
+>, <Line: +						" (requiring no genotype match, only position overlap)");
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Add INFO header lines.
+>, <Line: +	 * 
+>, <Line: +	 * <p>
+>, <Line: +	 * In the case of annotating a TSV file with REF and ALT columns, annotate reference and
+>, <Line: +	 * alternative alleles. Otherwise, annotate with a list of values.
+>, <Line: +	 * </p>
+>, <Line: +	 */
+>, <Line: +	private void addHeadersInfixes(VCFHeader header, String prefix, String infix, String note) {
+>, <Line: +		for (String colName : tsvOptions.getColumnNames()) {
+>, <Line: +			final GenericTSVValueColumnDescription desc = tsvOptions.getValueColumnDescriptions()
+>, <Line: +					.get(colName);
+>, <Line: +			final VCFHeaderLineCount count;
+>, <Line: +			if (tsvOptions.getAltAlleleColumnIndex() > 0 && tsvOptions.getRefAlleleColumnIndex() > 0
+>, <Line: +					&& options.isReportOverlapping() && !options.isReportOverlappingAsMatching()) {
+>, <Line: +				if (tsvOptions.isRefAlleleAnnotated()) {
+>, <Line: +					count = VCFHeaderLineCount.R;
+>, <Line: +				} else {
+>, <Line: +					count = VCFHeaderLineCount.A;
+>, <Line: +				}
+>, <Line: +			} else {
+>, <Line: +				count = VCFHeaderLineCount.UNBOUNDED;
+>, <Line: +			}
+>, <Line: +			final VCFInfoHeaderLine headerLine = new VCFInfoHeaderLine(
+>, <Line: +					prefix + infix + desc.getFieldName(), count, desc.getValueType(),
+>, <Line: +					desc.getFieldDescription() + note);
+>, <Line: +			header.addMetaDataLine(headerLine);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

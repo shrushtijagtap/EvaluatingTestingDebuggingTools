@@ -1,0 +1,7 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +    OWLDocumentFormat acceptParser(OWLParser parser, OWLOntology o, OntologyConfigurator config);
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -    OWLDocumentFormat acceptParser(OWLParser parser, OWLOntology o,
+>, <Line: -        OWLOntologyLoaderConfiguration config);
+>]

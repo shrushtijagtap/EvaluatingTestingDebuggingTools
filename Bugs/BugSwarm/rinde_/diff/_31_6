@@ -1,0 +1,6 @@
+[<Line: +    assertThat(tickCount).isEqualTo(afterTickCount);
+>, <Line: +    assertThat(tickCount).isEqualTo(c);
+>]
+[<Line: -    assertThat(tickCount).comparesEqualTo(afterTickCount);
+>, <Line: -    assertThat(tickCount).comparesEqualTo(c);
+>]

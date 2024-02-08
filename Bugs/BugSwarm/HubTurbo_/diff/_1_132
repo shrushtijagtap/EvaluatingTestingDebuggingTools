@@ -1,0 +1,37 @@
+[<Line: +import java.util.Optional;
+>, <Line: +	public static String getPathForAllIssues(String repoId) {
+>, <Line: +		return String.format("https://github.com/%s/issues", repoId);
+>, <Line: +	public static String getPathForIssue(String repoId, int id) {
+>, <Line: +		return String.format("https://github.com/%s/issues/%d", repoId, id);
+>, <Line: +	public static String getPathForNewIssue(String repoId) {
+>, <Line: +		return String.format("https://github.com/%s/issues/new", repoId);
+>, <Line: +	public static String getPathForNewLabel(String repoId) {
+>, <Line: +		return String.format("https://github.com/%s/labels", repoId);
+>, <Line: +	public static String getPathForNewMilestone(String repoId) {
+>, <Line: +		return String.format("https://github.com/%s/milestones/new", repoId);
+>, <Line: +	public static String getPathForPullRequests(String repoId) {
+>, <Line: +		return String.format("https://github.com/%s/pulls", repoId);
+>, <Line: +	public static String getPathForMilestones(String repoId) {
+>, <Line: +		return String.format("https://github.com/%s/milestones", repoId);
+>, <Line: +	public static String getPathForContributors(String repoId) {
+>, <Line: +		return String.format("https://github.com/%s/graphs/contributors", repoId);
+>]
+[<Line: -import java.util.Optional;
+>, <Line: -import service.ServiceManager;
+>, <Line: -	public static String getPathForAllIssues() {
+>, <Line: -		return String.format("https://github.com/%s/%s/issues", ServiceManager.getInstance().getRepoOwner(), ServiceManager.getInstance().getRepoName());
+>, <Line: -	public static String getPathForIssue(int id) {
+>, <Line: -		return String.format("https://github.com/%s/%s/issues/%d", ServiceManager.getInstance().getRepoOwner(), ServiceManager.getInstance().getRepoName(), id);
+>, <Line: -	public static String getPathForNewIssue() {
+>, <Line: -		return String.format("https://github.com/%s/%s/issues/new", ServiceManager.getInstance().getRepoOwner(), ServiceManager.getInstance().getRepoName());
+>, <Line: -	public static String getPathForNewLabel() {
+>, <Line: -		return String.format("https://github.com/%s/%s/labels", ServiceManager.getInstance().getRepoOwner(), ServiceManager.getInstance().getRepoName());
+>, <Line: -	public static String getPathForNewMilestone() {
+>, <Line: -		return String.format("https://github.com/%s/%s/milestones/new", ServiceManager.getInstance().getRepoOwner(), ServiceManager.getInstance().getRepoName());
+>, <Line: -	public static String getPathForPullRequests() {
+>, <Line: -		return String.format("https://github.com/%s/%s/pulls", ServiceManager.getInstance().getRepoOwner(), ServiceManager.getInstance().getRepoName());
+>, <Line: -	public static String getPathForMilestones() {
+>, <Line: -		return String.format("https://github.com/%s/%s/milestones", ServiceManager.getInstance().getRepoOwner(), ServiceManager.getInstance().getRepoName());
+>, <Line: -	public static String getPathForContributors() {
+>, <Line: -		return String.format("https://github.com/%s/%s/graphs/contributors", ServiceManager.getInstance().getRepoOwner(), ServiceManager.getInstance().getRepoName());
+>]

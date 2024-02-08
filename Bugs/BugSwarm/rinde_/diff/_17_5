@@ -1,0 +1,117 @@
+[<Line: +import com.google.common.base.Optional;
+>, <Line: +      final boolean containsObstacle = containsObstacle(tempLoc, path.peek());
+>, <Line: +      if (containsObstacle) {
+>, <Line: +      } else if (travelDistance >= connLength) {
+>, <Line: +        final Point from = isOnConnection(tempLoc) ? tempLoc.conn.get().from()
+>, <Line: +        final Point peekTo = isOnConnection(path.peek()) ?
+>, <Line: +            ((Loc) path.peek()).conn.get().to()
+>, <Line: +  protected boolean containsObstacle(Loc objLoc, Point nextHop) {
+>, <Line: +    return false;
+>, <Line: +  }
+>, <Line: +   * @throws IllegalArgumentException if it the proposed move is invalid.
+>, <Line: +    if (objLoc.isOnConnection() && !nextHop.equals(objLoc.conn.get().to())) {
+>, <Line: +      checkArgument(graph.hasConnection(objLoc, dest.conn.get().to()),
+>, <Line: +      checkArgument(objLoc.equals(dest.conn.get().from()),
+>, <Line: +      checkArgument(start.conn.get().to().equals(to),
+>, <Line: +      checkArgument(end.conn.get().from().equals(from),
+>, <Line: +          "to is not connected to from");
+>, <Line: +      return graph.getConnection(from, to).getLength();
+>, <Line: +        !l.isOnConnection()
+>, <Line: +            || graph.hasConnection(l.conn.get().from(), l.conn.get().to()),
+>, <Line: +      if (conn.data().isPresent()
+>, <Line: +          && conn.data().get() instanceof MultiAttributeData) {
+>, <Line: +        final MultiAttributeData maed = (MultiAttributeData) conn.data()
+>, <Line: +            .get();
+>, <Line: +        if (maed.getMaxSpeed().isPresent()) {
+>, <Line: +          return Math.min(
+>, <Line: +              toInternalSpeedConv.convert(maed.getMaxSpeed().get()), objSpeed);
+>, <Line: +        }
+>, <Line: +        return objSpeed;
+>, <Line: +    Connection<?> conn;
+>, <Line: +        checkArgument(start.conn.get().to().equals(to),
+>, <Line: +      conn = start.conn.get();
+>, <Line: +      checkArgument(end.conn.get().from().equals(from),
+>, <Line: +      conn = end.conn.get();
+>, <Line: +      start = ((Loc) from).conn.get().to();
+>, <Line: +      end = ((Loc) to).conn.get().from();
+>, <Line: +   * road user is at a vertex {@link Optional#absent()} is returned instead.
+>, <Line: +   *         {@link Optional#absent()} otherwise.
+>, <Line: +  public Optional<? extends Connection<?>> getConnection(RoadUser obj) {
+>, <Line: +      return Optional.of(graph
+>, <Line: +          .getConnection(point.conn.get().from(), point.conn.get().to()));
+>, <Line: +    return Optional.absent();
+>, <Line: +    final Point diff = Point.diff(conn.to(), conn.from());
+>, <Line: +    final double roadLength = conn.getLength();
+>, <Line: +      return new Loc(conn.to().x, conn.to().y, null, -1, 0);
+>, <Line: +    return new Loc(conn.from().x + perc * diff.x,
+>, <Line: +        conn.from().y + perc * diff.y,
+>, <Line: +     * The {@link Connection} which this position is on if present.
+>, <Line: +    public final Optional<? extends Connection<?>> conn;
+>, <Line: +      conn = Optional.fromNullable(pConn);
+>, <Line: +      return conn.isPresent();
+>, <Line: +    /*
+>, <Line: +     * TODO equals and hashCode should be removed in next major release
+>, <Line: +     */
+>, <Line: +    @Override
+>, <Line: +    public boolean equals(@Nullable Object o) {
+>, <Line: +      return super.equals(o);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int hashCode() {
+>, <Line: +      return super.hashCode();
+>, <Line: +    }
+>]
+[<Line: -      if (travelDistance >= connLength) {
+>, <Line: -        final Point from = isOnConnection(tempLoc) ? tempLoc.conn.from
+>, <Line: -        final Point peekTo = isOnConnection(path.peek()) ? ((Loc) path.peek()).conn.to
+>, <Line: -    if (objLoc.isOnConnection() && !nextHop.equals(objLoc.conn.to)) {
+>, <Line: -      checkArgument(graph.hasConnection(objLoc, dest.conn.to),
+>, <Line: -      checkArgument(objLoc.equals(dest.conn.from),
+>, <Line: -      checkArgument(start.conn.to.equals(to),
+>, <Line: -      checkArgument(end.conn.from.equals(from), "to is not connected to from");
+>, <Line: -      return getConnectionLength(graph.getConnection(from, to));
+>, <Line: -  /**
+>, <Line: -   * Retrieves the length of the specified connection if it is defined.
+>, <Line: -   * @param conn The connection to check.
+>, <Line: -   * @return The length.
+>, <Line: -   */
+>, <Line: -  protected static double getConnectionLength(Connection<?> conn) {
+>, <Line: -    return conn.getData() == null || Double.isNaN(conn.getData().getLength()) ? Point
+>, <Line: -        .distance(conn.from, conn.to)
+>, <Line: -        : conn.getData().getLength();
+>, <Line: -  }
+>, <Line: -        !l.isOnConnection() || graph.hasConnection(l.conn.from, l.conn.to),
+>, <Line: -      if (conn.getData() instanceof MultiAttributeData) {
+>, <Line: -        final MultiAttributeData maed = (MultiAttributeData) conn.getData();
+>, <Line: -        @SuppressWarnings("null")
+>, <Line: -        final double connSpeedLimit = maed.getMaxSpeed();
+>, <Line: -        return Double.isNaN(connSpeedLimit) ? objSpeed : Math.min(
+>, <Line: -            toInternalSpeedConv.convert(connSpeedLimit), objSpeed);
+>, <Line: -    Connection<?> conn = null;
+>, <Line: -        checkArgument(start.conn.to.equals(to),
+>, <Line: -      conn = start.conn;
+>, <Line: -      checkArgument(end.conn.from.equals(from),
+>, <Line: -      conn = end.conn;
+>, <Line: -      start = ((Loc) from).conn.to;
+>, <Line: -      end = ((Loc) to).conn.from;
+>, <Line: -   * road user is at a vertex <code>null</code> is returned instead.
+>, <Line: -   *         <code>null</code> otherwise.
+>, <Line: -  @Nullable
+>, <Line: -  public Connection<? extends ConnectionData> getConnection(RoadUser obj) {
+>, <Line: -      return graph.getConnection(point.conn.from, point.conn.to);
+>, <Line: -    return null;
+>, <Line: -    final Point diff = Point.diff(conn.to, conn.from);
+>, <Line: -    final double roadLength = getConnectionLength(conn);
+>, <Line: -      return new Loc(conn.to.x, conn.to.y, null, -1, 0);
+>, <Line: -    return new Loc(conn.from.x + perc * diff.x, conn.from.y + perc * diff.y,
+>, <Line: -     * The {@link Connection} which this position is on, can be
+>, <Line: -     * <code>null</code>.
+>, <Line: -    @Nullable
+>, <Line: -    public final Connection<? extends ConnectionData> conn;
+>, <Line: -      conn = pConn;
+>, <Line: -      return conn != null;
+>, <Line: -    @SuppressWarnings("null")
+>, <Line: -      if (!isOnConnection() || !l.isOnConnection()) {
+>, <Line: -        return false;
+>, <Line: -      }
+>]

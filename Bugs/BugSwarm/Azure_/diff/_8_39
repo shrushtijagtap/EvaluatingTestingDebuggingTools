@@ -1,0 +1,6 @@
+[<Line: +import com.microsoft.azure.management.storage.implementation.api.SkuName;
+>, <Line: +                .withSku(SkuName.PREMIUM_LRS)
+>]
+[<Line: -import com.microsoft.azure.management.storage.implementation.api.AccountType;
+>, <Line: -                .withAccountType(AccountType.PREMIUM_LRS)
+>]

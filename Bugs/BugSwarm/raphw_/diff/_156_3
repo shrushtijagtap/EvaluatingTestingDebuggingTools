@@ -1,0 +1,105 @@
+[<Line: +import net.bytebuddy.ByteBuddy;
+>, <Line: +import net.bytebuddy.asm.AsmVisitorWrapper;
+>, <Line: +import net.bytebuddy.description.type.TypeDescription;
+>, <Line: +import net.bytebuddy.test.scope.EnclosingType;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.objectweb.asm.ClassReader;
+>, <Line: +import org.objectweb.asm.ClassVisitor;
+>, <Line: +import org.objectweb.asm.Opcodes;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import java.util.Collection;
+>, <Line: +    @Parameterized.Parameters
+>, <Line: +    public static Collection<Object[]> data() {
+>, <Line: +        return Arrays.asList(new Object[][]{
+>, <Line: +                {Object.class},
+>, <Line: +                {String.class},
+>, <Line: +                {EnclosingType.class},
+>, <Line: +                {new EnclosingType().localMethod},
+>, <Line: +                {new EnclosingType().anonymousMethod},
+>, <Line: +                {new EnclosingType().localConstructor},
+>, <Line: +                {new EnclosingType().anonymousConstructor},
+>, <Line: +                {EnclosingType.LOCAL_INITIALIZER},
+>, <Line: +                {EnclosingType.ANONYMOUS_INITIALIZER},
+>, <Line: +                {EnclosingType.LOCAL_METHOD},
+>, <Line: +                {EnclosingType.ANONYMOUS_METHOD},
+>, <Line: +                {EnclosingType.INNER},
+>, <Line: +                {EnclosingType.NESTED},
+>, <Line: +                {EnclosingType.PRIVATE_INNER},
+>, <Line: +                {EnclosingType.PRIVATE_NESTED},
+>, <Line: +                {EnclosingType.PROTECTED_INNER},
+>, <Line: +                {EnclosingType.PROTECTED_NESTED},
+>, <Line: +                {EnclosingType.PACKAGE_INNER},
+>, <Line: +                {EnclosingType.PACKAGE_NESTED},
+>, <Line: +                {EnclosingType.FINAL_NESTED},
+>, <Line: +                {EnclosingType.FINAL_INNER},
+>, <Line: +                {EnclosingType.DEPRECATED}
+>, <Line: +        });
+>, <Line: +    }
+>, <Line: +    private final Class<?> type;
+>, <Line: +    public TypeWriterModifierPreservationTest(Class<?> type) {
+>, <Line: +        this.type = type;
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testModifiers() throws Exception {
+>, <Line: +        TypeModifierExtractor typeModifierExtractor = new TypeModifierExtractor();
+>, <Line: +        new ClassReader(type.getName()).accept(typeModifierExtractor, 0);
+>, <Line: +        new ByteBuddy()
+>, <Line: +                .redefine(type)
+>, <Line: +                .visit(new TypeValidator.Wrapper(typeModifierExtractor))
+>, <Line: +                .make();
+>, <Line: +    }
+>, <Line: +    private static class TypeModifierExtractor extends ClassVisitor {
+>, <Line: +        private String name;
+>, <Line: +        public int modifiers, inner;
+>, <Line: +        public TypeModifierExtractor() {
+>, <Line: +            super(Opcodes.ASM5);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(int version, int modifiers, String name, String signature, String superName, String[] interfaceName) {
+>, <Line: +            this.modifiers = modifiers;
+>, <Line: +            this.name = name;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visitInnerClass(String name, String outerName, String innerName, int modifiers) {
+>, <Line: +            if (name.equals(this.name)) {
+>, <Line: +                inner = modifiers;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private static class TypeValidator extends ClassVisitor {
+>, <Line: +        private String name;
+>, <Line: +        public final int modifiers, inner;
+>, <Line: +        public TypeValidator(ClassVisitor classVisitor, int modifiers, int inner) {
+>, <Line: +            super(Opcodes.ASM5, classVisitor);
+>, <Line: +            this.modifiers = modifiers;
+>, <Line: +            this.inner = inner;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(int version, int modifiers, String name, String signature, String superName, String[] interfaceName) {
+>, <Line: +            this.name = name;
+>, <Line: +            if (modifiers != this.modifiers) {
+>, <Line: +                throw new AssertionError("Unexpected modifiers: Observed " + modifiers + " instead of " + this.modifiers);
+>, <Line: +            }
+>, <Line: +            super.visit(version, modifiers, name, signature, superName, interfaceName);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visitInnerClass(String name, String outerName, String innerName, int modifiers) {
+>, <Line: +            if (name.equals(this.name) && modifiers != inner) {
+>, <Line: +                throw new AssertionError("Unexpected inner modifiers: Observed " + modifiers + " instead of " + inner);
+>, <Line: +            }
+>, <Line: +            super.visitInnerClass(name, outerName, innerName, modifiers);
+>, <Line: +        }
+>, <Line: +        private static class Wrapper extends AsmVisitorWrapper.AbstractBase {
+>, <Line: +            public final int modifiers, inner;
+>, <Line: +            public Wrapper(TypeModifierExtractor typeModifierExtractor) {
+>, <Line: +                modifiers = typeModifierExtractor.modifiers;
+>, <Line: +                inner = typeModifierExtractor.inner;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public ClassVisitor wrap(TypeDescription instrumentedType, ClassVisitor classVisitor, int writerFlags, int readerFlags) {
+>, <Line: +                return new TypeValidator(classVisitor, modifiers, inner);
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>]
+[]

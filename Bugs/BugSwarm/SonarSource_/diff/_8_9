@@ -1,0 +1,108 @@
+[<Line: +import org.sonar.plugins.php.api.tree.ScriptTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.expression.ExpandableStringCharactersTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.lexical.SyntaxToken;
+>, <Line: +import org.sonar.plugins.php.api.visitors.PHPVisitorCheck;
+>, <Line: +import java.util.ArrayDeque;
+>, <Line: +import java.util.Deque;
+>, <Line: +public class PunctuatorSpacingCheck extends PHPVisitorCheck implements FormattingCheck {
+>, <Line: +  private static final String CLOSE_PARENTHESIS_OPEN_CURLY_MESSAGE = "between the closing parenthesis and the opening curly brace.";
+>, <Line: +  private static final String OPEN_PARENTHESIS_SPACES_MESSAGE = "Remove all space after the opening parenthesis.";
+>, <Line: +  private static final String CLOSE_PARENTHESIS_SPACES_MESSAGE = "Remove all space before the closing parenthesis.";
+>, <Line: +  private static final String BOTH_PARENTHESIS_SPACES_MESSAGE = "Remove all space after the opening parenthesis and before the closing parenthesis.";
+>, <Line: +  private FormattingStandardCheck check;
+>, <Line: +  private SyntaxToken previousToken = null;
+>, <Line: +  private Deque<OpenParenthesisContext> openParenthesisLevel = new ArrayDeque<>();
+>, <Line: +  private static class OpenParenthesisContext {
+>, <Line: +    final SyntaxToken openParenthesis;
+>, <Line: +    final SyntaxToken nextToken;
+>, <Line: +    public OpenParenthesisContext(SyntaxToken openParenthesis, SyntaxToken nextToken) {
+>, <Line: +      this.openParenthesis = openParenthesis;
+>, <Line: +      this.nextToken = nextToken;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void checkFormat(FormattingStandardCheck formattingCheck, ScriptTree scriptTree) {
+>, <Line: +    this.check = formattingCheck;
+>, <Line: +    this.previousToken = null;
+>, <Line: +    openParenthesisLevel.clear();
+>, <Line: +    super.visitScript(scriptTree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitExpandableStringCharacters(ExpandableStringCharactersTree tree) {
+>, <Line: +    // do not process string characters
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitToken(SyntaxToken token) {
+>, <Line: +    super.visitToken(token);
+>, <Line: +    if (previousToken != null) {
+>, <Line: +      if (isCloseParenthesis(previousToken) && isOpenCurly(token)) {
+>, <Line: +        checkSpaceBetweenCloseParenAndOpenCurly(previousToken, token);
+>, <Line: +      }
+>, <Line: +      if (isOpenParenthesis(previousToken)) {
+>, <Line: +        openParenthesisLevel.push(new OpenParenthesisContext(previousToken, token));
+>, <Line: +      }
+>, <Line: +      if (isCloseParenthesis(token)) {
+>, <Line: +        checkSpaceInsideParenthesis(openParenthesisLevel.pop(), token, previousToken);
+>, <Line: +      }
+>, <Line: +    previousToken = token;
+>, <Line: +  private void checkSpaceBetweenCloseParenAndOpenCurly(SyntaxToken closeParenthesis, SyntaxToken openCurly) {
+>, <Line: +    if (check.isOneSpaceBetweenRParentAndLCurly) {
+>, <Line: +      int nbSpace = TokenUtils.getNbSpaceBetween(closeParenthesis, openCurly);
+>, <Line: +      if (TokenUtils.isOnSameLine(closeParenthesis, openCurly) && nbSpace != 1) {
+>, <Line: +        check.reportIssue(TokenUtils.buildIssueMsg(nbSpace, CLOSE_PARENTHESIS_OPEN_CURLY_MESSAGE), closeParenthesis);
+>, <Line: +      }
+>, <Line: +   * Check there is no space after the opening parenthesis and no space before the closing one.
+>, <Line: +  private void checkSpaceInsideParenthesis(OpenParenthesisContext openParenthesisContext, SyntaxToken closeParen, SyntaxToken closeParenPreviousToken) {
+>, <Line: +    if (check.isNoSpaceParenthesis) {
+>, <Line: +      SyntaxToken openParen = openParenthesisContext.openParenthesis;
+>, <Line: +      SyntaxToken openParenNextToken = openParenthesisContext.nextToken;
+>, <Line: +      boolean isLCurlyOK = !TokenUtils.isOnSameLine(openParenNextToken, openParen) || TokenUtils.getNbSpaceBetween(openParen, openParenNextToken) == 0;
+>, <Line: +      boolean isRCurlyOK = !TokenUtils.isOnSameLine(closeParenPreviousToken, closeParen) || TokenUtils.getNbSpaceBetween(closeParenPreviousToken, closeParen) == 0;
+>, <Line: +      if (!isLCurlyOK && isRCurlyOK) {
+>, <Line: +        check.reportIssue(OPEN_PARENTHESIS_SPACES_MESSAGE, openParen);
+>, <Line: +      } else if (isLCurlyOK && !isRCurlyOK) {
+>, <Line: +        check.reportIssue(CLOSE_PARENTHESIS_SPACES_MESSAGE, closeParen);
+>, <Line: +      } else if (!isLCurlyOK && !isRCurlyOK) {
+>, <Line: +        check.reportIssue(BOTH_PARENTHESIS_SPACES_MESSAGE, openParen);
+>, <Line: +  private static boolean isOpenParenthesis(SyntaxToken token) {
+>, <Line: +    return TokenUtils.isType(token, PHPPunctuator.LPARENTHESIS);
+>, <Line: +  }
+>, <Line: +  private static boolean isOpenCurly(SyntaxToken token) {
+>, <Line: +    return TokenUtils.isType(token, PHPPunctuator.LCURLYBRACE);
+>, <Line: +  }
+>, <Line: +  private static boolean isCloseParenthesis(SyntaxToken token) {
+>, <Line: +    return TokenUtils.isType(token, PHPPunctuator.RPARENTHESIS);
+>, <Line: +  }
+>]
+[<Line: -import com.sonar.sslr.api.AstNode;
+>, <Line: -import com.sonar.sslr.api.Token;
+>, <Line: -public class PunctuatorSpacingCheck extends SpacingCheck {
+>, <Line: -  @Override
+>, <Line: -  public void visitNode(FormattingStandardCheck formattingCheck, AstNode node) {
+>, <Line: -    if (formattingCheck.isOneSpaceBetweenRParentAndLCurly && node.is(PHPPunctuator.RPARENTHESIS)) {
+>, <Line: -      checkSpaceBetweenRParentAndLCurly(formattingCheck, node);
+>, <Line: -    if (formattingCheck.isNoSpaceParenthesis && node.is(PHPPunctuator.RPARENTHESIS)) {
+>, <Line: -      checkSpaceInsideParenthesis(formattingCheck, node);
+>, <Line: -  /**
+>, <Line: -   * Check there is no space after the opening parenthesis and no space before the closing one.
+>, <Line: -   */
+>, <Line: -  private void checkSpaceInsideParenthesis(FormattingStandardCheck formattingCheck, AstNode rcurly) {
+>, <Line: -    AstNode lcurly = rcurly.getParent().getFirstChild(PHPPunctuator.LPARENTHESIS);
+>, <Line: -    Token lcurlyNextToken = lcurly.getNextAstNode().getToken();
+>, <Line: -    Token rculyPreviousToken = rcurly.getPreviousAstNode().getLastToken();
+>, <Line: -    boolean isLCurlyOK = !isOnSameLine(lcurlyNextToken, lcurly.getToken()) || getNbSpaceBetween(lcurly.getToken(), lcurlyNextToken) == 0;
+>, <Line: -    boolean isRCurlyOK = !isOnSameLine(rculyPreviousToken, rcurly.getToken()) || getNbSpaceBetween(rculyPreviousToken, rcurly.getToken()) == 0;
+>, <Line: -    if (!isLCurlyOK && isRCurlyOK) {
+>, <Line: -      formattingCheck.reportIssue("Remove all space after the opening parenthesis.", lcurly);
+>, <Line: -    } else if (isLCurlyOK && !isRCurlyOK) {
+>, <Line: -      formattingCheck.reportIssue("Remove all space before the closing parenthesis.", rcurly);
+>, <Line: -    } else if (!isLCurlyOK && !isRCurlyOK) {
+>, <Line: -      formattingCheck.reportIssue("Remove all space after the opening parenthesis and before the closing parenthesis.", lcurly);
+>, <Line: -   * Check that there is exactly one space between a closing parenthesis and a opening curly brace.
+>, <Line: -  private void checkSpaceBetweenRParentAndLCurly(FormattingStandardCheck formattingCheck, AstNode rParenthesis) {
+>, <Line: -    Token nextToken = rParenthesis.getNextAstNode().getToken();
+>, <Line: -    Token rParenToken = rParenthesis.getToken();
+>, <Line: -    if (isType(nextToken, PHPPunctuator.LCURLYBRACE)) {
+>, <Line: -      int nbSpace = getNbSpaceBetween(rParenToken, nextToken);
+>, <Line: -      if (nbSpace != 1 && isOnSameLine(rParenToken, nextToken)) {
+>, <Line: -        formattingCheck.reportIssue(buildIssueMsg(nbSpace, "between the closing parenthesis and the opening curly brace."), rParenthesis);
+>]

@@ -1,0 +1,5 @@
+[<Line: +../../tests/invalid/NegationType_Invalid_2.whiley:2: expected type !(null|int), found int
+>, <Line: +    return x
+>, <Line: +           ^
+>]
+[]

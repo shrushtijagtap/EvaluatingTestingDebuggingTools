@@ -1,0 +1,43 @@
+[]
+[<Line: -import java.util.Arrays;
+>, <Line: -import java.util.Iterator;
+>, <Line: -    @Test
+>, <Line: -    public void testRetransformationChunkedStrategyIsEnabled() throws Exception {
+>, <Line: -        assertThat(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION_CHUNKED.isEnabled(), is(true));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void testRedefinitionChunkedStrategyIsEnabled() throws Exception {
+>, <Line: -        assertThat(AgentBuilder.RedefinitionStrategy.REDEFINITION_CHUNKED.isEnabled(), is(true));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void testRetransformationChunkedStrategyIsRetransforming() throws Exception {
+>, <Line: -        Instrumentation instrumentation = mock(Instrumentation.class);
+>, <Line: -        when(instrumentation.isRetransformClassesSupported()).thenReturn(true);
+>, <Line: -        assertThat(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION_CHUNKED.isRetransforming(instrumentation), is(true));
+>, <Line: -    }
+>, <Line: -    @Test(expected = IllegalArgumentException.class)
+>, <Line: -    public void testRetransformationChunkedStrategyNotSupportedThrowsException() throws Exception {
+>, <Line: -        AgentBuilder.RedefinitionStrategy.RETRANSFORMATION_CHUNKED.isRetransforming(mock(Instrumentation.class));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void testRedefinitionChunkedStrategyIsNotRetransforming() throws Exception {
+>, <Line: -        Instrumentation instrumentation = mock(Instrumentation.class);
+>, <Line: -        when(instrumentation.isRedefineClassesSupported()).thenReturn(true);
+>, <Line: -        assertThat(AgentBuilder.RedefinitionStrategy.REDEFINITION_CHUNKED.isRetransforming(instrumentation), is(false));
+>, <Line: -    }
+>, <Line: -    @Test(expected = IllegalArgumentException.class)
+>, <Line: -    public void testRedefinitionChunkedStrategyNotSupportedThrowsException() throws Exception {
+>, <Line: -        AgentBuilder.RedefinitionStrategy.REDEFINITION_CHUNKED.isRetransforming(mock(Instrumentation.class));
+>, <Line: -    }
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Collector.ForRedefinition.Cumulative.class).applyBasic();
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Collector.ForRedefinition.Chunked.class).applyBasic();
+>, <Line: -        final Iterator<Class<?>> iterator = Arrays.<Class<?>>asList(Object.class, String.class).iterator();
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Collector.ForRedefinition.Entry.class).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: -            @Override
+>, <Line: -            public Class<?> create() {
+>, <Line: -                return iterator.next();
+>, <Line: -            }
+>, <Line: -        }).apply();
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Collector.ForRetransformation.Cumulative.class).applyBasic();
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Collector.ForRetransformation.Chunked.class).applyBasic();
+>]

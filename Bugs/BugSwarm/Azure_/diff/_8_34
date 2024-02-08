@@ -1,0 +1,60 @@
+[<Line: +public class Usage {
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>, <Line: +    private Integer currentValue;
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>, <Line: +    private Integer limit;
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>, <Line: +    public Integer currentValue() {
+>, <Line: +    public Integer limit() {
+>]
+[<Line: -public class UsageInner {
+>, <Line: -    @JsonProperty(required = true)
+>, <Line: -    @JsonProperty(required = true)
+>, <Line: -    private int currentValue;
+>, <Line: -    @JsonProperty(required = true)
+>, <Line: -    private int limit;
+>, <Line: -    @JsonProperty(required = true)
+>, <Line: -    /**
+>, <Line: -     * Set the unit value.
+>, <Line: -     *
+>, <Line: -     * @param unit the unit value to set
+>, <Line: -     * @return the UsageInner object itself.
+>, <Line: -     */
+>, <Line: -    public UsageInner withUnit(UsageUnit unit) {
+>, <Line: -        this.unit = unit;
+>, <Line: -        return this;
+>, <Line: -    }
+>, <Line: -    public int currentValue() {
+>, <Line: -    /**
+>, <Line: -     * Set the currentValue value.
+>, <Line: -     *
+>, <Line: -     * @param currentValue the currentValue value to set
+>, <Line: -     * @return the UsageInner object itself.
+>, <Line: -     */
+>, <Line: -    public UsageInner withCurrentValue(int currentValue) {
+>, <Line: -        this.currentValue = currentValue;
+>, <Line: -        return this;
+>, <Line: -    }
+>, <Line: -    public int limit() {
+>, <Line: -    /**
+>, <Line: -     * Set the limit value.
+>, <Line: -     *
+>, <Line: -     * @param limit the limit value to set
+>, <Line: -     * @return the UsageInner object itself.
+>, <Line: -     */
+>, <Line: -    public UsageInner withLimit(int limit) {
+>, <Line: -        this.limit = limit;
+>, <Line: -        return this;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Set the name value.
+>, <Line: -     *
+>, <Line: -     * @param name the name value to set
+>, <Line: -     * @return the UsageInner object itself.
+>, <Line: -     */
+>, <Line: -    public UsageInner withName(UsageName name) {
+>, <Line: -        this.name = name;
+>, <Line: -        return this;
+>, <Line: -    }
+>]

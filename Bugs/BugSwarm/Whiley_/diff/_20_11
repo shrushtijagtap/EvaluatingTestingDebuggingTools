@@ -1,0 +1,6 @@
+[<Line: +		if (type instanceof Type.Array) {			
+>, <Line: +			Type.Array tt = (Type.Array) type;
+>]
+[<Line: -		if (type instanceof Type.List) {			
+>, <Line: -			Type.List tt = (Type.List) type;
+>]

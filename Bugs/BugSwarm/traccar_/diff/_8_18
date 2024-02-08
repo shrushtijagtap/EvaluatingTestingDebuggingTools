@@ -1,0 +1,7 @@
+[<Line: +    private final ChannelBufferFactory factory = new HeapChannelBufferFactory();
+>]
+[<Line: -    private ChannelBufferFactory factory = new HeapChannelBufferFactory();
+>, <Line: -    @Test
+>, <Line: -    public void testFind() {
+>, <Line: -    }
+>]

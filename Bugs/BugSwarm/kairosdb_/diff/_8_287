@@ -1,0 +1,801 @@
+[<Line: +	<div ng-repeat="target in panel.targets"
+>, <Line: +		 class="grafana-target"
+>, <Line: +		 ng-class="{'grafana-target-hidden': target.hide}"
+>, <Line: +		 ng-controller="KairosDBTargetCtrl"
+>, <Line: +		 ng-init="init()">
+>, <Line: +		<div class="grafana-target-inner">
+>, <Line: +			<ul class="grafana-target-controls">
+>, <Line: +				<li>
+>, <Line: +					<a bs-tooltip="'Group by\'s are always executed before aggregations!'"
+>, <Line: +					   ng-click="alert('Group by\'s are always executed before aggregations!')">
+>, <Line: +						<i class="icon-info"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li class="dropdown">
+>, <Line: +					<a class="pointer dropdown-toggle"
+>, <Line: +					   data-toggle="dropdown"
+>, <Line: +					   tabindex="1">
+>, <Line: +						<i class="icon-cog"></i>
+>, <Line: +					</a>
+>, <Line: +					<ul class="dropdown-menu pull-right" role="menu">
+>, <Line: +						<li role="menuitem">
+>, <Line: +							<a tabindex="1"
+>, <Line: +							   ng-click="duplicate()">
+>, <Line: +								Duplicate
+>, <Line: +							</a>
+>, <Line: +						</li>
+>, <Line: +						<li role="menuitem">
+>, <Line: +							<a tabindex="1"
+>, <Line: +							   ng-click="moveMetricQuery($index, $index-1)">
+>, <Line: +								Move up
+>, <Line: +							</a>
+>, <Line: +						</li>
+>, <Line: +						<li role="menuitem">
+>, <Line: +							<a tabindex="1"
+>, <Line: +							   ng-click="moveMetricQuery($index, $index+1)">
+>, <Line: +								Move down
+>, <Line: +							</a>
+>, <Line: +						</li>
+>, <Line: +					</ul>
+>, <Line: +				</li>
+>, <Line: +				<li>
+>, <Line: +					<a class="pointer" tabindex="1"
+>, <Line: +					   ng-click="removeDataQuery(target)">
+>, <Line: +						<i class="icon-remove"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +			</ul>
+>, <Line: +			<ul class="grafana-segment-list">
+>, <Line: +				<li class="grafana-target-segment"
+>, <Line: +					style="min-width: 15px; text-align: center">
+>, <Line: +					{{targetLetters[$index]}}
+>, <Line: +				</li>
+>, <Line: +				<li>
+>, <Line: +					<a class="grafana-target-segment"
+>, <Line: +					   ng-click="target.hide = !target.hide; targetBlur();"
+>, <Line: +					   role="menuitem">
+>, <Line: +						<i class="icon-eye-open"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +			</ul>
+>, <Line: +			<!-- USEFUL STUFF -->
+>, <Line: +			<ul class="grafana-segment-list" role="menu">
+>, <Line: +				<!-- METRIC NAME -->
+>, <Line: +				<li>
+>, <Line: +					<input type="text"
+>, <Line: +						   class="input-medium grafana-target-text-input"
+>, <Line: +						   ng-model="target.alias"
+>, <Line: +						   spellcheck='false' placeholder="alias"
+>, <Line: +						   ng-blur="targetBlur()">
+>, <Line: +				</li>
+>, <Line: +				<li>
+>, <Line: +					<select style="width: 20em"
+>, <Line: +							class="input-medium grafana-target-segment-input"
+>, <Line: +							ng-change="targetBlur()"
+>, <Line: +							ng-model="metric.value"
+>, <Line: +							bs-tooltip="metricValue.length > 40 ? metricValue : ''"
+>, <Line: +							ng-options="f for f in metric.list">
+>, <Line: +						<option value="">--select metric--</option>
+>, <Line: +					</select>
+>, <Line: +					<a bs-tooltip="target.errors.metric"
+>, <Line: +					   style="color: rgb(229, 189, 28)"
+>, <Line: +					   ng-show="target.errors.metric">
+>, <Line: +						<i class="icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li class="grafana-target-segment">
+>, <Line: +					&nbsp;Peak filter
+>, <Line: +					<input
+>, <Line: +							class="input-medium grafana-target-text-input"
+>, <Line: +							type="checkbox"
+>, <Line: +							ng-model="target.exOuter"
+>, <Line: +							ng-change="targetBlur()">
+>, <Line: +				</li>
+>, <Line: +				<!-- DOWN SAMPLING (auto horizontal aggregation) -->
+>, <Line: +				<!--            <li class="grafana-target-segment">
+>, <Line: +								Downsampling with
+>, <Line: +							</li>
+>, <Line: +							<li>
+>, <Line: +								<select class="input-medium grafana-target-segment-input" ng-change="targetBlur()" ng-model="target.downsampling" ng-options="f for f in ['(NONE)','avg', 'sum', 'min', 'max', 'dev']" ></select>
+>, <Line: +							</li>-->
+>, <Line: +				<!-- SAMPLING RATE -->
+>, <Line: +				<!-- <li ng-hide="target.downsampling=='(NONE)'" class="grafana-target-segment">
+>, <Line: +						every
+>, <Line: +					</li>
+>, <Line: +					<li>
+>, <Line: +						<input type="text"
+>, <Line: +							   ng-hide="target.downsampling=='(NONE)'"
+>, <Line: +							   class="input-mini grafana-target-segment-input"
+>, <Line: +							   ng-model="target.sampling"
+>, <Line: +							   placeholder="{{interval}}"
+>, <Line: +							   bs-tooltip="'Leave blank for auto handling based on time range and panel width'"
+>, <Line: +							   spellcheck='false'
+>, <Line: +							   ng-blur="targetBlur()" >
+>, <Line: +						<a bs-tooltip="target.errors.sampling"
+>, <Line: +						   style="color: rgb(229, 189, 28)"
+>, <Line: +						   ng-show="target.errors.sampling">
+>, <Line: +							<i class="icon-warning-sign"></i>
+>, <Line: +						</a>
+>, <Line: +					</li>
+>, <Line: +		-->
+>, <Line: +			</ul>
+>, <Line: +			<div class="clearfix"></div>
+>, <Line: +		</div>
+>, <Line: +		<!-- Second line -->
+>, <Line: +		<div class="grafana-target-inner">
+>, <Line: +			<ul class="grafana-segment-list" role="menu">
+>, <Line: +				<!-- TAGS  filtering -->
+>, <Line: +				<li class="grafana-target-segment">
+>, <Line: +					:
+>, <Line: +				</li>
+>, <Line: +				<li class="grafana-target-segment">
+>, <Line: +					Filter by Tag:
+>, <Line: +				</li>
+>, <Line: +				<li ng-repeat="(key, value) in target.tags track by $index"
+>, <Line: +					class="grafana-target-segment">
+>, <Line: +					{{key}}&nbsp;=&nbsp;{{value}}
+>, <Line: +					<a ng-click="removeFilterTag(key)">
+>, <Line: +						<i class="icon-remove"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li class="grafana-target-segment" ng-hide="addFilterTagMode">
+>, <Line: +					<a ng-click="addFilterTag()">
+>, <Line: +						<i class="icon-plus-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="addFilterTagMode">
+>, <Line: +					<input type="text"
+>, <Line: +						   class="input-small grafana-target-segment-input"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   bs-typeahead="suggestTagKeys"
+>, <Line: +						   ng-change="validateFilterTag()"
+>, <Line: +						   data-min-length=0 data-items=100
+>, <Line: +						   ng-model="target.currentTagKey"
+>, <Line: +						   placeholder="key">
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="addFilterTagMode">
+>, <Line: +					<input type="text"
+>, <Line: +						   class="input-small grafana-target-segment-input"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   bs-typeahead="suggestTagValues"
+>, <Line: +						   ng-change="validateFilterTag()"
+>, <Line: +						   data-min-length=0 data-items=100
+>, <Line: +						   ng-model="target.currentTagValue"
+>, <Line: +						   placeholder="value">
+>, <Line: +					<a bs-tooltip="target.errors.tags"
+>, <Line: +					   style="color: rgb(229, 189, 28)"
+>, <Line: +					   ng-show="target.errors.tags">
+>, <Line: +						<i class="icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				<li class="grafana-target-segment" ng-show="addFilterTagMode">
+>, <Line: +					<a ng-click="addFilterTag()">
+>, <Line: +						<i ng-show="target.errors.tags" class="icon-remove"></i>
+>, <Line: +						<i ng-hide="target.errors.tags"
+>, <Line: +						   class="icon-plus-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				</li>
+>, <Line: +				<!-- TAGS  GROUP BYS -->
+>, <Line: +				<li class="grafana-target-segment">
+>, <Line: +					Group by
+>, <Line: +				</li>
+>, <Line: +				<li class="grafana-target-segment" ng-show="target.groupByTags">
+>, <Line: +					tags:
+>, <Line: +				</li>
+>, <Line: +				<li ng-repeat="key in target.groupByTags track by $index"
+>, <Line: +					class="grafana-target-segment">
+>, <Line: +					{{key}}
+>, <Line: +					<a ng-click="removeGroupByTag($index)">
+>, <Line: +						<i class="icon-remove"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li class="grafana-target-segment"
+>, <Line: +					ng-show="target.groupByTags && target.nonTagGroupBys">
+>, <Line: +					and by:
+>, <Line: +				</li>
+>, <Line: +				<li ng-repeat="groupByObject in target.nonTagGroupBys track by $index"
+>, <Line: +					class="grafana-target-segment">
+>, <Line: +					{{_.values(groupByObject)}}
+>, <Line: +					<a ng-click="removeNonTagGroupBy($index)">
+>, <Line: +						<i class="icon-remove"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li class="grafana-target-segment" ng-hide="addGroupByMode">
+>, <Line: +					<a ng-click="addGroupBy()">
+>, <Line: +						<i class="icon-plus-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="addGroupByMode">
+>, <Line: +					<select class="input-small grafana-target-segment-input"
+>, <Line: +							ng-change="changeGroupByInput()"
+>, <Line: +							ng-model="target.currentGroupByType"
+>, <Line: +							ng-options="f for f in ['tag','value','time']"></select>
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="isTagGroupBy">
+>, <Line: +					<input type="text"
+>, <Line: +						   class="input-small grafana-target-segment-input"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   bs-typeahead="suggestTagKeys"
+>, <Line: +						   ng-change="validateGroupBy()"
+>, <Line: +						   data-min-length=0 data-items=100
+>, <Line: +						   ng-model="target.groupBy.tagKey"
+>, <Line: +						   placeholder="key">
+>, <Line: +					<a bs-tooltip="target.errors.groupBy.tagKey"
+>, <Line: +					   style="color: rgb(229, 189, 28)"
+>, <Line: +					   ng-show="target.errors.groupBy.tagKey">
+>, <Line: +						<i class="icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="isValueGroupBy">
+>, <Line: +					<input type="text"
+>, <Line: +						   class="input-mini grafana-target-segment-input"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   ng-model="target.groupBy.valueRange"
+>, <Line: +						   placeholder="range"
+>, <Line: +						   bs-tooltip="'Range on which values are considered in the same group'"
+>, <Line: +						   ng-change="validateGroupBy()">
+>, <Line: +					<a bs-tooltip="target.errors.groupBy.valueRange"
+>, <Line: +					   style="color: rgb(229, 189, 28)"
+>, <Line: +					   ng-show="target.errors.groupBy.valueRange">
+>, <Line: +						<i class="icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="isTimeGroupBy">
+>, <Line: +					<input type="text"
+>, <Line: +						   class="input-mini grafana-target-segment-input"
+>, <Line: +						   ng-model="target.groupBy.timeInterval"
+>, <Line: +						   ng-init="target.groupBy.timeInterval='1s'"
+>, <Line: +						   placeholder="interval"
+>, <Line: +						   bs-tooltip="'Duration of time groups'"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   ng-change="validateGroupBy()">
+>, <Line: +					<a bs-tooltip="target.errors.groupBy.timeInterval"
+>, <Line: +					   style="color: rgb(229, 189, 28)"
+>, <Line: +					   ng-show="target.errors.groupBy.timeInterval">
+>, <Line: +						<i class="icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="isTimeGroupBy">
+>, <Line: +					<input type="text"
+>, <Line: +						   class="input-mini grafana-target-segment-input"
+>, <Line: +						   ng-model="target.groupBy.groupCount"
+>, <Line: +						   placeholder="Count"
+>, <Line: +						   bs-tooltip="'Number of time groups to be formed'"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   ng-change="validateGroupBy()">
+>, <Line: +					<a bs-tooltip="target.errors.groupBy.groupCount"
+>, <Line: +					   style="color: rgb(229, 189, 28)"
+>, <Line: +					   ng-show="target.errors.groupBy.groupCount">
+>, <Line: +						<i class="icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li class="grafana-target-segment" ng-show="addGroupByMode">
+>, <Line: +					<a ng-click="addGroupBy()">
+>, <Line: +						<i ng-hide="isGroupByValid" class="icon-remove"></i>
+>, <Line: +						<i ng-show="isGroupByValid" class="icon-plus-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<!-- HORIZONTAL AGGREGATION -->
+>, <Line: +				<li class="grafana-target-segment">
+>, <Line: +					Aggregation:
+>, <Line: +				</li>
+>, <Line: +				<li ng-repeat="aggregatorObject in target.horizontalAggregators track by $index"
+>, <Line: +					class="grafana-target-segment">
+>, <Line: +					{{aggregatorObject.name}}&#40;
+>, <Line: +    <span ng-repeat="aggKey in _.keys(_.omit(aggregatorObject,'name'))"
+>, <Line: +		  bs-tooltip="aggKey">
+>, <Line: +					&#41;
+>, <Line: +					<a ng-click="removeHorizontalAggregator($index)">
+>, <Line: +						<i class="icon-remove"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li class="grafana-target-segment"
+>, <Line: +					ng-hide="addHorizontalAggregatorMode">
+>, <Line: +					<a ng-click="addHorizontalAggregator()">
+>, <Line: +						<i class="icon-plus-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="addHorizontalAggregatorMode">
+>, <Line: +					<select class="input-medium grafana-target-segment-input"
+>, <Line: +							ng-change="changeHorAggregationInput()"
+>, <Line: +							ng-model="target.currentHorizontalAggregatorName"
+>, <Line: +							ng-options="f for f in ['avg','dev','max','min','rate','sampler','count','sum','least_squares','percentile','scale','div']"></select>
+>, <Line: +				</li>
+>, <Line: +				<!-- Different parameters -->
+>, <Line: +				<li ng-show="hasSamplingRate" class="grafana-target-segment">
+>, <Line: +					every
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="hasSamplingRate">
+>, <Line: +					<input type="text"
+>, <Line: +						   class="input-mini grafana-target-segment-input"
+>, <Line: +						   ng-model="target.horAggregator.samplingRate"
+>, <Line: +						   ng-init="target.horAggregator.samplingRate='1s'"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   ng-change="validateHorizontalAggregator()">
+>, <Line: +					<a bs-tooltip="target.errors.horAggregator.samplingRate"
+>, <Line: +					   style="color: rgb(229, 189, 28)"
+>, <Line: +					   ng-show="target.errors.horAggregator.samplingRate">
+>, <Line: +						<i class="icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="hasUnit" class="grafana-target-segment">
+>, <Line: +					every
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="hasUnit">
+>, <Line: +					<select class="input-medium grafana-target-segment-input"
+>, <Line: +							ng-model="target.horAggregator.unit"
+>, <Line: +							ng-init="target.horAggregator.unit='millisecond'"
+>, <Line: +							ng-options="f for f in ['millisecond','second','minute','hour','day','week','month','year']"></select>
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="hasFactor" class="grafana-target-segment">
+>, <Line: +					by
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="hasFactor">
+>, <Line: +					<input type="text"
+>, <Line: +						   class="input-mini grafana-target-segment-input"
+>, <Line: +						   ng-model="target.horAggregator.factor"
+>, <Line: +						   ng-init="target.horAggregator.factor='1'"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   ng-change="validateHorizontalAggregator()">
+>, <Line: +					<a bs-tooltip="target.errors.horAggregator.factor"
+>, <Line: +					   style="color: rgb(229, 189, 28)"
+>, <Line: +					   ng-show="target.errors.horAggregator.factor">
+>, <Line: +						<i class="icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="hasPercentile" class="grafana-target-segment">
+>, <Line: +					percentile
+>, <Line: +				</li>
+>, <Line: +				<li ng-show="hasPercentile">
+>, <Line: +					<input type="text"
+>, <Line: +						   class="input-mini grafana-target-segment-input"
+>, <Line: +						   ng-model="target.horAggregator.percentile"
+>, <Line: +						   ng-init="target.horAggregator.percentile='0.75'"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   ng-change="validateHorizontalAggregator()">
+>, <Line: +					<a bs-tooltip="target.errors.horAggregator.percentile"
+>, <Line: +					   style="color: rgb(229, 189, 28)"
+>, <Line: +					   ng-show="target.errors.horAggregator.percentile">
+>, <Line: +						<i class="icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +				<li class="grafana-target-segment"
+>, <Line: +					ng-show="addHorizontalAggregatorMode">
+>, <Line: +					<a ng-click="addHorizontalAggregator()">
+>, <Line: +						<i ng-hide="isAggregatorValid" class="icon-remove"></i>
+>, <Line: +						<i ng-show="isAggregatorValid"
+>, <Line: +						   class="icon-plus-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +			</ul>
+>, <Line: +			<div class="clearfix"></div>
+>, <Line: +		</div>
+>, <Line: +	</div>
+>, <Line: +	<div class="grafana-target" ng-controller="KairosDBTargetCtrl">
+>, <Line: +		<div class="grafana-target-inner">
+>, <Line: +			<ul class="grafana-segment-list">
+>, <Line: +				<li class="grafana-target-segment">
+>, <Line: +					Downsampling with
+>, <Line: +				</li>
+>, <Line: +				<li>
+>, <Line: +					<select class="input-medium grafana-target-segment-input"
+>, <Line: +							ng-change="panelBlur()"
+>, <Line: +							ng-model="panel.downsampling"
+>, <Line: +							ng-options="f for f in ['(NONE)','avg', 'sum', 'min', 'max', 'dev']"></select>
+>, <Line: +				</li>
+>, <Line: +				<!-- SAMPLING RATE -->
+>, <Line: +				<li ng-hide="panel.downsampling=='(NONE)'"
+>, <Line: +					class="grafana-target-segment">
+>, <Line: +					every
+>, <Line: +				</li>
+>, <Line: +				<li>
+>, <Line: +					<input type="text"
+>, <Line: +						   ng-hide="panel.downsampling=='(NONE)'"
+>, <Line: +						   class="input-mini grafana-target-segment-input"
+>, <Line: +						   ng-model="panel.sampling"
+>, <Line: +						   placeholder="{{interval}}"
+>, <Line: +						   bs-tooltip="'Leave blank for auto handling based on time range and panel width'"
+>, <Line: +						   spellcheck='false'
+>, <Line: +						   ng-blur="panelBlur()">
+>, <Line: +					<a bs-tooltip="target.errors.sampling"
+>, <Line: +					   style="color: rgb(229, 189, 28)"
+>, <Line: +					   ng-show="target.errors.sampling">
+>, <Line: +						<i class="icon-warning-sign"></i>
+>, <Line: +					</a>
+>, <Line: +				</li>
+>, <Line: +			</ul>
+>, <Line: +			<div class="clearfix"></div>
+>, <Line: +		</div>
+>, <Line: +	</div>
+>]
+[<Line: -    <div  ng-repeat="target in panel.targets"
+>, <Line: -         class="grafana-target"
+>, <Line: -         ng-class="{'grafana-target-hidden': target.hide}"
+>, <Line: -         ng-controller="KairosDBTargetCtrl"
+>, <Line: -         ng-init="init()">
+>, <Line: -    <div class="grafana-target-inner">
+>, <Line: -        <ul class="grafana-target-controls">
+>, <Line: -            <li>
+>, <Line: -                <a bs-tooltip="'Group by\'s are always executed before aggregations!'"
+>, <Line: -                   ng-click="alert('Group by\'s are always executed before aggregations!')">
+>, <Line: -                    <i class="icon-info"></i>
+>, <Line: -                </a>
+>, <Line: -            </li>
+>, <Line: -            <li class="dropdown">
+>, <Line: -                <a  class="pointer dropdown-toggle"
+>, <Line: -                    data-toggle="dropdown"
+>, <Line: -                    tabindex="1">
+>, <Line: -                    <i class="icon-cog"></i>
+>, <Line: -                </a>
+>, <Line: -                <ul class="dropdown-menu pull-right" role="menu">
+>, <Line: -                    <li role="menuitem">
+>, <Line: -                        <a  tabindex="1"
+>, <Line: -                            ng-click="duplicate()">
+>, <Line: -                            Duplicate
+>, <Line: -                        </a>
+>, <Line: -                    </li>
+>, <Line: -                    <li role="menuitem">
+>, <Line: -                        <a  tabindex="1"
+>, <Line: -                            ng-click="moveMetricQuery($index, $index-1)">
+>, <Line: -                            Move up
+>, <Line: -                        </a>
+>, <Line: -                    </li>
+>, <Line: -                    <li role="menuitem">
+>, <Line: -                        <a  tabindex="1"
+>, <Line: -                            ng-click="moveMetricQuery($index, $index+1)">
+>, <Line: -                            Move down
+>, <Line: -                        </a>
+>, <Line: -                    </li>
+>, <Line: -                </ul>
+>, <Line: -            </li>
+>, <Line: -            <li>
+>, <Line: -                <a class="pointer" tabindex="1" ng-click="removeDataQuery(target)">
+>, <Line: -                    <i class="icon-remove"></i>
+>, <Line: -                </a>
+>, <Line: -            </li>
+>, <Line: -        </ul>
+>, <Line: -        <ul class="grafana-segment-list">
+>, <Line: -            <li class="grafana-target-segment" style="min-width: 15px; text-align: center">
+>, <Line: -                {{targetLetters[$index]}}
+>, <Line: -            </li>
+>, <Line: -            <li>
+>, <Line: -                <a  class="grafana-target-segment"
+>, <Line: -                    ng-click="target.hide = !target.hide; targetBlur();"
+>, <Line: -                    role="menuitem">
+>, <Line: -                    <i class="icon-eye-open"></i>
+>, <Line: -                </a>
+>, <Line: -            </li>
+>, <Line: -        </ul>
+>, <Line: -        <!-- USEFUL STUFF -->
+>, <Line: -        <ul class="grafana-segment-list" role="menu">
+>, <Line: -            <!-- METRIC NAME -->
+>, <Line: -            <li>
+>, <Line: -                <input type="text" class="input-medium grafana-target-text-input" ng-model="target.alias"
+>, <Line: -                       spellcheck='false' placeholder="alias" ng-blur="targetBlur()">
+>, <Line: -            </li>
+>, <Line: -            <li>
+>, <Line: -                <select style="width: 20em"
+>, <Line: -                        class="input-medium grafana-target-segment-input"
+>, <Line: -                        ng-change="targetBlur()"
+>, <Line: -                        ng-model="metric.value"
+>, <Line: -                        bs-tooltip="metricValue.length > 40 ? metricValue : ''"
+>, <Line: -                        ng-options="f for f in metric.list" >
+>, <Line: -                    <option value="">--select metric--</option>
+>, <Line: -                </select>
+>, <Line: -                <a bs-tooltip="target.errors.metric"
+>, <Line: -                   style="color: rgb(229, 189, 28)"
+>, <Line: -                   ng-show="target.errors.metric">
+>, <Line: -                    <i class="icon-warning-sign"></i>
+>, <Line: -                </a>
+>, <Line: -            </li>
+>, <Line: -            <li  class="grafana-target-segment">
+>, <Line: -                &nbsp;Peak filter
+>, <Line: -                <input
+>, <Line: -                        class="input-medium grafana-target-text-input"
+>, <Line: -                        type="checkbox"
+>, <Line: -                        ng-model="target.exOuter"
+>, <Line: -                        ng-change="targetBlur()">
+>, <Line: -            </li>
+>, <Line: -            <!-- DOWN SAMPLING (auto horizontal aggregation) -->
+>, <Line: -<!--            <li class="grafana-target-segment">
+>, <Line: -                Downsampling with
+>, <Line: -            </li>
+>, <Line: -            <li>
+>, <Line: -                <select class="input-medium grafana-target-segment-input" ng-change="targetBlur()" ng-model="target.downsampling" ng-options="f for f in ['(NONE)','avg', 'sum', 'min', 'max', 'dev']" ></select>
+>, <Line: -            </li>-->
+>, <Line: -            <!-- SAMPLING RATE -->
+>, <Line: -           <!-- <li ng-hide="target.downsampling=='(NONE)'" class="grafana-target-segment">
+>, <Line: -                every
+>, <Line: -            </li>
+>, <Line: -            <li>
+>, <Line: -                <input type="text"
+>, <Line: -                       ng-hide="target.downsampling=='(NONE)'"
+>, <Line: -                       class="input-mini grafana-target-segment-input"
+>, <Line: -                       ng-model="target.sampling"
+>, <Line: -                       placeholder="{{interval}}"
+>, <Line: -                       bs-tooltip="'Leave blank for auto handling based on time range and panel width'"
+>, <Line: -                       spellcheck='false'
+>, <Line: -                       ng-blur="targetBlur()" >
+>, <Line: -                <a bs-tooltip="target.errors.sampling"
+>, <Line: -                   style="color: rgb(229, 189, 28)"
+>, <Line: -                   ng-show="target.errors.sampling">
+>, <Line: -                    <i class="icon-warning-sign"></i>
+>, <Line: -                </a>
+>, <Line: -            </li>
+>, <Line: --->
+>, <Line: -        </ul>
+>, <Line: -        <div class="clearfix"></div>
+>, <Line: -    </div>
+>, <Line: -<!-- Second line -->
+>, <Line: -<div class="grafana-target-inner">
+>, <Line: -<ul class="grafana-segment-list" role="menu">
+>, <Line: -<!-- TAGS  filtering -->
+>, <Line: -    <li class="grafana-target-segment">
+>, <Line: -        :
+>, <Line: -    </li>
+>, <Line: -<li class="grafana-target-segment">
+>, <Line: -    Filter by Tag:
+>, <Line: -</li>
+>, <Line: -<li ng-repeat="(key, value) in target.tags track by $index" class="grafana-target-segment">
+>, <Line: -    {{key}}&nbsp;=&nbsp;{{value}}
+>, <Line: -    <a ng-click="removeFilterTag(key)">
+>, <Line: -        <i class="icon-remove"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li class="grafana-target-segment" ng-hide="addFilterTagMode">
+>, <Line: -    <a ng-click="addFilterTag()">
+>, <Line: -        <i class="icon-plus-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li ng-show="addFilterTagMode">
+>, <Line: -    <input type="text"
+>, <Line: -           class="input-small grafana-target-segment-input"
+>, <Line: -           spellcheck='false'
+>, <Line: -           bs-typeahead="suggestTagKeys"
+>, <Line: -           ng-change="validateFilterTag()"
+>, <Line: -           data-min-length=0 data-items=100
+>, <Line: -           ng-model="target.currentTagKey"
+>, <Line: -           placeholder="key">
+>, <Line: -</li>
+>, <Line: -<li ng-show="addFilterTagMode">
+>, <Line: -    <input type="text"
+>, <Line: -           class="input-small grafana-target-segment-input"
+>, <Line: -           spellcheck='false'
+>, <Line: -           bs-typeahead="suggestTagValues"
+>, <Line: -           ng-change="validateFilterTag()"
+>, <Line: -           data-min-length=0 data-items=100
+>, <Line: -           ng-model="target.currentTagValue"
+>, <Line: -           placeholder="value">
+>, <Line: -    <a bs-tooltip="target.errors.tags"
+>, <Line: -       style="color: rgb(229, 189, 28)"
+>, <Line: -       ng-show="target.errors.tags">
+>, <Line: -        <i class="icon-warning-sign"></i>
+>, <Line: -    </a>
+>, <Line: -<li class="grafana-target-segment" ng-show="addFilterTagMode">
+>, <Line: -    <a ng-click="addFilterTag()">
+>, <Line: -        <i ng-show="target.errors.tags" class="icon-remove"></i>
+>, <Line: -        <i ng-hide="target.errors.tags" class="icon-plus-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -</li>
+>, <Line: -<!-- TAGS  GROUP BYS -->
+>, <Line: -<li class="grafana-target-segment">
+>, <Line: -    Group by
+>, <Line: -</li>
+>, <Line: -<li class="grafana-target-segment" ng-show="target.groupByTags">
+>, <Line: -    tags:
+>, <Line: -</li>
+>, <Line: -<li ng-repeat="key in target.groupByTags track by $index" class="grafana-target-segment">
+>, <Line: -    {{key}}
+>, <Line: -    <a ng-click="removeGroupByTag($index)">
+>, <Line: -        <i class="icon-remove"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li class="grafana-target-segment" ng-show="target.groupByTags && target.nonTagGroupBys">
+>, <Line: -    and by:
+>, <Line: -</li>
+>, <Line: -<li ng-repeat="groupByObject in target.nonTagGroupBys track by $index" class="grafana-target-segment">
+>, <Line: -    {{_.values(groupByObject)}}
+>, <Line: -    <a ng-click="removeNonTagGroupBy($index)">
+>, <Line: -        <i class="icon-remove"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li class="grafana-target-segment" ng-hide="addGroupByMode">
+>, <Line: -    <a ng-click="addGroupBy()">
+>, <Line: -        <i class="icon-plus-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li ng-show="addGroupByMode">
+>, <Line: -    <select class="input-small grafana-target-segment-input"
+>, <Line: -            ng-change="changeGroupByInput()"
+>, <Line: -            ng-model="target.currentGroupByType"
+>, <Line: -            ng-options="f for f in ['tag','value','time']"></select>
+>, <Line: -</li>
+>, <Line: -<li ng-show="isTagGroupBy">
+>, <Line: -    <input type="text"
+>, <Line: -           class="input-small grafana-target-segment-input"
+>, <Line: -           spellcheck='false'
+>, <Line: -           bs-typeahead="suggestTagKeys"
+>, <Line: -           ng-change = "validateGroupBy()"
+>, <Line: -           data-min-length=0 data-items=100
+>, <Line: -           ng-model="target.groupBy.tagKey"
+>, <Line: -           placeholder="key">
+>, <Line: -    <a bs-tooltip="target.errors.groupBy.tagKey"
+>, <Line: -       style="color: rgb(229, 189, 28)"
+>, <Line: -       ng-show="target.errors.groupBy.tagKey">
+>, <Line: -        <i class="icon-warning-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li ng-show="isValueGroupBy">
+>, <Line: -    <input type="text"
+>, <Line: -           class="input-mini grafana-target-segment-input"
+>, <Line: -           spellcheck='false'
+>, <Line: -           ng-model="target.groupBy.valueRange"
+>, <Line: -           placeholder="range"
+>, <Line: -           bs-tooltip="'Range on which values are considered in the same group'"
+>, <Line: -           ng-change = "validateGroupBy()" >
+>, <Line: -    <a bs-tooltip="target.errors.groupBy.valueRange"
+>, <Line: -       style="color: rgb(229, 189, 28)"
+>, <Line: -       ng-show="target.errors.groupBy.valueRange">
+>, <Line: -        <i class="icon-warning-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li ng-show="isTimeGroupBy">
+>, <Line: -    <input type="text"
+>, <Line: -           class="input-mini grafana-target-segment-input"
+>, <Line: -           ng-model="target.groupBy.timeInterval"
+>, <Line: -           ng-init="target.groupBy.timeInterval='1s'"
+>, <Line: -           placeholder="interval"
+>, <Line: -           bs-tooltip="'Duration of time groups'"
+>, <Line: -           spellcheck='false'
+>, <Line: -           ng-change="validateGroupBy()">
+>, <Line: -    <a bs-tooltip="target.errors.groupBy.timeInterval"
+>, <Line: -       style="color: rgb(229, 189, 28)"
+>, <Line: -       ng-show="target.errors.groupBy.timeInterval">
+>, <Line: -        <i class="icon-warning-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li ng-show="isTimeGroupBy">
+>, <Line: -    <input type="text"
+>, <Line: -           class="input-mini grafana-target-segment-input"
+>, <Line: -           ng-model="target.groupBy.groupCount"
+>, <Line: -           placeholder="Count"
+>, <Line: -           bs-tooltip="'Number of time groups to be formed'"
+>, <Line: -           spellcheck='false'
+>, <Line: -           ng-change="validateGroupBy()">
+>, <Line: -    <a bs-tooltip="target.errors.groupBy.groupCount"
+>, <Line: -       style="color: rgb(229, 189, 28)"
+>, <Line: -       ng-show="target.errors.groupBy.groupCount">
+>, <Line: -        <i class="icon-warning-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li class="grafana-target-segment" ng-show="addGroupByMode">
+>, <Line: -    <a ng-click="addGroupBy()">
+>, <Line: -        <i ng-hide="isGroupByValid" class="icon-remove"></i>
+>, <Line: -        <i ng-show="isGroupByValid" class="icon-plus-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<!-- HORIZONTAL AGGREGATION -->
+>, <Line: -<li class="grafana-target-segment">
+>, <Line: -    Aggregation:
+>, <Line: -</li>
+>, <Line: -<li ng-repeat="aggregatorObject in target.horizontalAggregators track by $index" class="grafana-target-segment">
+>, <Line: -    {{aggregatorObject.name}}&#40;
+>, <Line: -    <span ng-repeat="aggKey in _.keys(_.omit(aggregatorObject,'name'))" bs-tooltip="aggKey">
+>, <Line: -    &#41;
+>, <Line: -    <a ng-click="removeHorizontalAggregator($index)">
+>, <Line: -        <i class="icon-remove"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li class="grafana-target-segment" ng-hide="addHorizontalAggregatorMode">
+>, <Line: -    <a ng-click="addHorizontalAggregator()">
+>, <Line: -        <i class="icon-plus-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li ng-show="addHorizontalAggregatorMode">
+>, <Line: -    <select class="input-medium grafana-target-segment-input"
+>, <Line: -            ng-change="changeHorAggregationInput()"
+>, <Line: -            ng-model="target.currentHorizontalAggregatorName"
+>, <Line: -            ng-options="f for f in ['avg','dev','max','min','rate','sampler','count','sum','least_squares','percentile','scale','div']"></select>
+>, <Line: -</li>
+>, <Line: -<!-- Different parameters -->
+>, <Line: -<li ng-show="hasSamplingRate" class="grafana-target-segment">
+>, <Line: -    every
+>, <Line: -</li>
+>, <Line: -<li ng-show="hasSamplingRate">
+>, <Line: -    <input type="text"
+>, <Line: -           class="input-mini grafana-target-segment-input"
+>, <Line: -           ng-model="target.horAggregator.samplingRate"
+>, <Line: -           ng-init="target.horAggregator.samplingRate='1s'"
+>, <Line: -           spellcheck='false'
+>, <Line: -           ng-change="validateHorizontalAggregator()" >
+>, <Line: -    <a bs-tooltip="target.errors.horAggregator.samplingRate"
+>, <Line: -       style="color: rgb(229, 189, 28)"
+>, <Line: -       ng-show="target.errors.horAggregator.samplingRate">
+>, <Line: -        <i class="icon-warning-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li ng-show="hasUnit" class="grafana-target-segment">
+>, <Line: -    every
+>, <Line: -</li>
+>, <Line: -<li ng-show="hasUnit">
+>, <Line: -    <select class="input-medium grafana-target-segment-input"
+>, <Line: -            ng-model="target.horAggregator.unit"
+>, <Line: -            ng-init="target.horAggregator.unit='millisecond'"
+>, <Line: -            ng-options="f for f in ['millisecond','second','minute','hour','day','week','month','year']"></select>
+>, <Line: -</li>
+>, <Line: -<li ng-show="hasFactor" class="grafana-target-segment">
+>, <Line: -    by
+>, <Line: -</li>
+>, <Line: -<li ng-show="hasFactor">
+>, <Line: -    <input type="text"
+>, <Line: -           class="input-mini grafana-target-segment-input"
+>, <Line: -           ng-model="target.horAggregator.factor"
+>, <Line: -           ng-init="target.horAggregator.factor='1'"
+>, <Line: -           spellcheck='false'
+>, <Line: -           ng-change="validateHorizontalAggregator()" >
+>, <Line: -    <a bs-tooltip="target.errors.horAggregator.factor"
+>, <Line: -       style="color: rgb(229, 189, 28)"
+>, <Line: -       ng-show="target.errors.horAggregator.factor">
+>, <Line: -        <i class="icon-warning-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li ng-show="hasPercentile" class="grafana-target-segment">
+>, <Line: -    percentile
+>, <Line: -</li>
+>, <Line: -<li ng-show="hasPercentile">
+>, <Line: -    <input type="text"
+>, <Line: -           class="input-mini grafana-target-segment-input"
+>, <Line: -           ng-model="target.horAggregator.percentile"
+>, <Line: -           ng-init="target.horAggregator.percentile='0.75'"
+>, <Line: -           spellcheck='false'
+>, <Line: -           ng-change="validateHorizontalAggregator()" >
+>, <Line: -    <a bs-tooltip="target.errors.horAggregator.percentile"
+>, <Line: -       style="color: rgb(229, 189, 28)"
+>, <Line: -       ng-show="target.errors.horAggregator.percentile">
+>, <Line: -        <i class="icon-warning-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -<li class="grafana-target-segment" ng-show="addHorizontalAggregatorMode">
+>, <Line: -    <a ng-click="addHorizontalAggregator()">
+>, <Line: -        <i ng-hide="isAggregatorValid" class="icon-remove"></i>
+>, <Line: -        <i ng-show="isAggregatorValid" class="icon-plus-sign"></i>
+>, <Line: -    </a>
+>, <Line: -</li>
+>, <Line: -</ul>
+>, <Line: -<div class="clearfix"></div>
+>, <Line: -</div>
+>, <Line: -</div>
+>, <Line: -    <div class="grafana-target"          ng-controller="KairosDBTargetCtrl">
+>, <Line: -        <div class="grafana-target-inner">
+>, <Line: -            <ul class="grafana-segment-list">
+>, <Line: -                <li class="grafana-target-segment">
+>, <Line: -                    Downsampling with
+>, <Line: -                </li>
+>, <Line: -                <li>
+>, <Line: -                    <select class="input-medium grafana-target-segment-input" ng-change="panelBlur()" ng-model="panel.downsampling" ng-options="f for f in ['(NONE)','avg', 'sum', 'min', 'max', 'dev']" ></select>
+>, <Line: -                </li>
+>, <Line: -                <!-- SAMPLING RATE -->
+>, <Line: -                <li ng-hide="panel.downsampling=='(NONE)'" class="grafana-target-segment">
+>, <Line: -                    every
+>, <Line: -                </li>
+>, <Line: -                <li>
+>, <Line: -                    <input type="text"
+>, <Line: -                           ng-hide="panel.downsampling=='(NONE)'"
+>, <Line: -                           class="input-mini grafana-target-segment-input"
+>, <Line: -                           ng-model="panel.sampling"
+>, <Line: -                           placeholder="{{interval}}"
+>, <Line: -                           bs-tooltip="'Leave blank for auto handling based on time range and panel width'"
+>, <Line: -                           spellcheck='false'
+>, <Line: -                           ng-blur="panelBlur()" >
+>, <Line: -                    <a bs-tooltip="target.errors.sampling"
+>, <Line: -                       style="color: rgb(229, 189, 28)"
+>, <Line: -                       ng-show="target.errors.sampling">
+>, <Line: -                        <i class="icon-warning-sign"></i>
+>, <Line: -                    </a>
+>, <Line: -                </li>
+>, <Line: -            </ul>
+>, <Line: -            <div class="clearfix"></div>
+>, <Line: -        </div>
+>, <Line: -     </div>
+>]

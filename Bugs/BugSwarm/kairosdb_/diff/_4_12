@@ -1,0 +1,12 @@
+[<Line: +import com.google.common.eventbus.Subscribe;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +public class DataPointsMonitor implements KairosMetricReporter
+>, <Line: +	@Subscribe
+>, <Line: +	public void dataPoint(DataPointEvent event)
+>, <Line: +		String metricName = event.getMetricName();
+>]
+[<Line: -import org.kairosdb.core.DataPointListener;
+>, <Line: -public class DataPointsMonitor implements DataPointListener, KairosMetricReporter
+>, <Line: -	@Override
+>, <Line: -	public void dataPoint(String metricName, SortedMap<String, String> tags, DataPoint dataPoint)
+>]

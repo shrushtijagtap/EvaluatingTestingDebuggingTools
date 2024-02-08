@@ -1,0 +1,6 @@
+[<Line: +        instance = super(Model, cls).__new__(cls, *args, **kwargs)
+>, <Line: +        instance.__dict__["model"] = {}
+>, <Line: +        return instance
+>]
+[<Line: -        cls.__new__()
+>]

@@ -1,0 +1,8 @@
+[<Line: +		} else if(from instanceof Type.Array && to instanceof Type.Array) {
+>, <Line: +			Type.Array t1 = (Type.Array) from;
+>, <Line: +			Type.Array t2 = (Type.Array) to;
+>]
+[<Line: -		} else if(from instanceof Type.List && to instanceof Type.List) {
+>, <Line: -			Type.List t1 = (Type.List) from;
+>, <Line: -			Type.List t2 = (Type.List) to;
+>]

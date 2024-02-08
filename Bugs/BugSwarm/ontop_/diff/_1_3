@@ -1,0 +1,14 @@
+[<Line: +	public OBDARDBMappingAxiom getRDBMSMappingAxiom(String id, OBDASQLQuery sourceQuery, CQIE targetQuery);
+>, <Line: +	public OBDARDBMappingAxiom getRDBMSMappingAxiom(String id, String sql, CQIE targetQuery);
+>, <Line: +	public OBDARDBMappingAxiom getRDBMSMappingAxiom(String sql, CQIE targetQuery);
+>]
+[<Line: -	/**
+>, <Line: -	 * Construct a {@link Variable} object with empty name.
+>, <Line: -	 * 
+>, <Line: -	 * @return the variable object.
+>, <Line: -	 */
+>, <Line: -//	public Variable getVariableNondistinguished();
+>, <Line: -	public OBDARDBMappingAxiom getRDBMSMappingAxiom(String id, OBDAQuery sourceQuery, OBDAQuery targetQuery);
+>, <Line: -	public OBDARDBMappingAxiom getRDBMSMappingAxiom(String id, String sql, OBDAQuery targetQuery);
+>, <Line: -	public OBDARDBMappingAxiom getRDBMSMappingAxiom(String sql, OBDAQuery targetQuery);
+>]

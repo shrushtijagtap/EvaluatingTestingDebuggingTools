@@ -1,0 +1,9 @@
+[<Line: +        ObjectPropertyAssertion.of(ByteArrayClassLoader.ClassDefinitionAction.class).apply();
+>]
+[<Line: -        ObjectPropertyAssertion.of(ByteArrayClassLoader.ClassLoaderCreationAction.class).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: -            @Override
+>, <Line: -            public AccessControlContext create() {
+>, <Line: -                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: -            }
+>, <Line: -        }).apply();
+>]

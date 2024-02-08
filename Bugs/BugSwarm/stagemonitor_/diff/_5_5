@@ -1,0 +1,57 @@
+[<Line: +package org.stagemonitor.core.instrument;
+>, <Line: +import org.stagemonitor.core.CorePlugin;
+>, <Line: +import org.stagemonitor.core.Stagemonitor;
+>, <Line: +import org.stagemonitor.core.metrics.aspects.SignatureUtils;
+>, <Line: +import org.stagemonitor.core.util.ClassUtils;
+>, <Line: +import sun.misc.JavaLangAccess;
+>, <Line: +import sun.misc.SharedSecrets;
+>, <Line: +public final class CallerUtil {
+>, <Line: +	private static final Object javaLangAccessObject;
+>, <Line: +	static {
+>, <Line: +		if (ClassUtils.isPresent("sun.misc.SharedSecrets")) {
+>, <Line: +			javaLangAccessObject = SharedSecrets.getJavaLangAccess();
+>, <Line: +		} else {
+>, <Line: +			javaLangAccessObject = null;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private CallerUtil() {
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Returns the signature of the method inside the monitored codebase which was last executed.
+>, <Line: +	 */
+>, <Line: +	public static String getCallerSignature() {
+>, <Line: +		if (Stagemonitor.getPlugin(CorePlugin.class).getIncludePackages().isEmpty()) {
+>, <Line: +			return null;
+>, <Line: +		}
+>, <Line: +		if (javaLangAccessObject != null) {
+>, <Line: +			return getCallerSignatureSharedSecrets();
+>, <Line: +		} else {
+>, <Line: +			return getCallerSignatureGetStackTrace();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private static String getCallerSignatureSharedSecrets() {
+>, <Line: +		String executedBy = null;
+>, <Line: +		Exception exception = new Exception();
+>, <Line: +		final JavaLangAccess javaLangAccess = (JavaLangAccess) javaLangAccessObject;
+>, <Line: +		for (int i = 2; i < javaLangAccess.getStackTraceDepth(exception); i++) {
+>, <Line: +			final StackTraceElement stackTraceElement = javaLangAccess.getStackTraceElement(exception, i);
+>, <Line: +			if (StagemonitorClassNameMatcher.isIncluded(stackTraceElement.getClassName())) {
+>, <Line: +				executedBy = SignatureUtils.getSignature(stackTraceElement.getClassName(), stackTraceElement.getMethodName());
+>, <Line: +				break;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return executedBy;
+>, <Line: +	}
+>, <Line: +	private static String getCallerSignatureGetStackTrace() {
+>, <Line: +		String executedBy = null;
+>, <Line: +		for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
+>, <Line: +			if (StagemonitorClassNameMatcher.isIncluded(stackTraceElement.getClassName())) {
+>, <Line: +				executedBy = SignatureUtils.getSignature(stackTraceElement.getClassName(), stackTraceElement.getMethodName());
+>, <Line: +				break;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return executedBy;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

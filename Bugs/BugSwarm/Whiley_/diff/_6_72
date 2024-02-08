@@ -1,0 +1,273 @@
+[<Line: +import wycc.util.ResolveError;
+>, <Line: +import wyil.lang.SyntaxTree;
+>, <Line: +import wyil.lang.SyntaxTree.Location;
+>, <Line: +		standardFunctions[OPCODE_logicalnot] = new LogicalNot();		
+>, <Line: +		standardFunctions[OPCODE_logicalor] = new LogicalOr();
+>, <Line: +		standardFunctions[OPCODE_logicaland] = new LogicalAnd();
+>, <Line: +		standardFunctions[OPCODE_bitwiseinvert] = new Invert();			
+>, <Line: +		standardFunctions[OPCODE_shl] = new LeftShift();
+>, <Line: +		standardFunctions[OPCODE_shr] = new RightShift();
+>, <Line: +		standardFunctions[OPCODE_arraylength] = new ArrayLength();			
+>, <Line: +		standardFunctions[OPCODE_arraygen] = new ArrayGenerator();
+>, <Line: +		standardFunctions[OPCODE_dereference] = new Dereference();		
+>, <Line: +		standardFunctions[OPCODE_is] = new Is();	
+>, <Line: +		public void translate(Location<Operator> expr, Context context) throws ResolveError {
+>, <Line: +			Location<?> srcOperand = expr.getOperand(0);
+>, <Line: +			Type.Reference pt = context.expandAsReference(srcOperand.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) throws ResolveError {
+>, <Line: +			Type.Reference refType = context.expandAsReference(expr.getType()); 
+>, <Line: +			context.add(new Bytecode.DupX1());
+>, <Line: +			context.add(new Bytecode.Swap());
+>, <Line: +	// Logical
+>, <Line: +	private static final class LogicalNot implements BytecodeTranslator {
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz) context.toJvmType(expr.getType());
+>, <Line: +		}		
+>, <Line: +	}
+>, <Line: +	private static final class LogicalOr implements BytecodeTranslator {
+>, <Line: +		@Override
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +			JvmType.Function ftype = new JvmType.Function(type, type);
+>, <Line: +			context.add(new Bytecode.Invoke(WHILEYBOOL, "or", ftype, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +		}		
+>, <Line: +	}
+>, <Line: +	private static final class LogicalAnd implements BytecodeTranslator {
+>, <Line: +		@Override
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +			JvmType.Function ftype = new JvmType.Function(type, type);
+>, <Line: +			context.add(new Bytecode.Invoke(WHILEYBOOL, "and", ftype, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz) context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(expr.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +		public void translate(Location<Operator> expr, Context context) throws ResolveError {
+>, <Line: +			Location<?> srcOperand = expr.getOperand(0);
+>, <Line: +			Type.EffectiveArray arrType = context.expandAsEffectiveArray(srcOperand.getType());
+>, <Line: +		public void translate(Location<Operator> expr, Context context) throws ResolveError {
+>, <Line: +			Type.EffectiveArray sourceType = context.expandAsEffectiveArray(expr.getType());
+>, <Line: +			Type elementType = sourceType.element();			
+>, <Line: +			JvmType.Function ftype = new JvmType.Function(WHILEYARRAY, WHILEYINT, JAVA_LANG_OBJECT);
+>, <Line: +			context.add(new Bytecode.Swap());
+>, <Line: +	// ====================================================================================
+>, <Line: +	// Other
+>, <Line: +	// ====================================================================================
+>, <Line: +	private static final class Is implements BytecodeTranslator {
+>, <Line: +		public void translate(Location<Operator> expr, Context context) {
+>, <Line: +			JvmType.Function ftype = new JvmType.Function(WHILEYBOOL, JAVA_LANG_OBJECT);
+>, <Line: +			context.add(new Bytecode.Swap());
+>, <Line: +			context.add(new Bytecode.Invoke(WHILEYTYPE, "is", ftype, Bytecode.InvokeMode.VIRTUAL));		
+>]
+[<Line: -		standardFunctions[OPCODE_assign] = new Assign();
+>, <Line: -		standardFunctions[OPCODE_not] = new Not();
+>, <Line: -		standardFunctions[OPCODE_arrayinvert] = new Invert();	
+>, <Line: -		standardFunctions[OPCODE_dereference] = new Dereference();
+>, <Line: -		standardFunctions[OPCODE_arraylength] = new ArrayLength();	
+>, <Line: -		standardFunctions[OPCODE_lshr] = new LeftShift();
+>, <Line: -		standardFunctions[OPCODE_rshr] = new RightShift();
+>, <Line: -		standardFunctions[OPCODE_arrygen] = new ArrayGenerator();
+>, <Line: -		standardFunctions[OPCODE_array] = new ArrayConstructor();
+>, <Line: -		standardFunctions[OPCODE_record] = new RecordConstructor();
+>, <Line: -	// ====================================================================================
+>, <Line: -	// General
+>, <Line: -	// ====================================================================================
+>, <Line: -	private static final class Assign implements BytecodeTranslator {
+>, <Line: -		@Override
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType jt = context.toJvmType(bytecode.type(0));
+>, <Line: -			int[] targets = bytecode.targets();
+>, <Line: -			int[] operands = bytecode.operands();
+>, <Line: -			for (int i = 0; i != operands.length; ++i) {
+>, <Line: -				context.add(new Bytecode.Load(operands[i], jt));
+>, <Line: -				context.add(new Bytecode.Store(targets[i], jt));
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			Type.Reference pt = (Type.Reference) bytecode.type(0);
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			Type.Reference refType = (Type.Reference) bytecode.type(0); 
+>, <Line: -			JvmType type = context.toJvmType(refType);
+>, <Line: -			context.add(new Bytecode.Dup(WHILEYOBJECT));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), elementType));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -	// Boolean
+>, <Line: -	private static final class Not implements BytecodeTranslator {
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz) context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz) context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), type));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), WHILEYINT));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), WHILEYINT));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			JvmType.Clazz type = (JvmType.Clazz)  context.toJvmType(bytecode.type(0));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), type));			
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), type));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			Type.EffectiveArray arrType = (Type.EffectiveArray) bytecode.type(0);
+>, <Line: -			JvmType elementType = context.toJvmType(arrType.element());
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), WHILEYARRAY));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), WHILEYINT));			
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), elementType));
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			Type elementType = ((Type.Array) bytecode.type(0)).element();			
+>, <Line: -			JvmType.Function ftype = new JvmType.Function(WHILEYARRAY, JAVA_LANG_OBJECT, WHILEYINT);
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(0), context.toJvmType(elementType)));
+>, <Line: -			context.add(new Bytecode.Load(bytecode.operand(1), WHILEYINT));
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), WHILEYARRAY));
+>, <Line: -	private static final class ArrayConstructor implements BytecodeTranslator {
+>, <Line: -		@Override
+>, <Line: -		public void translate(Operator bytecode, Context context) {
+>, <Line: -			Type.Array arrType = (Type.Array) bytecode.type(0);
+>, <Line: -			JvmType elementType = context.toJvmType(arrType.element());
+>, <Line: -			JvmType.Function initJvmType = new JvmType.Function(T_VOID, T_INT);
+>, <Line: -			JvmType.Function ftype = new JvmType.Function(WHILEYARRAY, WHILEYARRAY, JAVA_LANG_OBJECT);
+>, <Line: -			context.add(new Bytecode.New(WHILEYARRAY));
+>, <Line: -			context.add(new Bytecode.Dup(WHILEYARRAY));
+>, <Line: -			context.add(new Bytecode.LoadConst(bytecode.operands().length));			
+>, <Line: -			context.add(new Bytecode.Invoke(WHILEYARRAY, "<init>", initJvmType, Bytecode.InvokeMode.SPECIAL));
+>, <Line: -			for (int i = 0; i != bytecode.operands().length; ++i) {
+>, <Line: -				context.add(new Bytecode.Load(bytecode.operands()[i], elementType));
+>, <Line: -				context.addWriteConversion(arrType.element());
+>, <Line: -				context.add(new Bytecode.Invoke(WHILEYARRAY, "internal_add", ftype, Bytecode.InvokeMode.STATIC));
+>, <Line: -			}
+>, <Line: -			context.add(new Bytecode.Store(bytecode.target(0), WHILEYARRAY));
+>, <Line: -		}		
+>, <Line: -	}
+>, <Line: -	private static final class RecordConstructor implements BytecodeTranslator {
+>, <Line: -		public void translate(Operator code, Context context) {
+>, <Line: -			Type.EffectiveRecord recType = (Type.EffectiveRecord) code.type(0); 
+>, <Line: -			JvmType.Function ftype = new JvmType.Function(JAVA_LANG_OBJECT, JAVA_LANG_OBJECT, JAVA_LANG_OBJECT);
+>, <Line: -			context.construct(WHILEYRECORD);
+>, <Line: -			ArrayList<String> keys = new ArrayList<String>(recType.fields().keySet());
+>, <Line: -			Collections.sort(keys);
+>, <Line: -			for (int i = 0; i != code.operands().length; i++) {
+>, <Line: -				int register = code.operands()[i];
+>, <Line: -				String key = keys.get(i);
+>, <Line: -				Type fieldType = recType.field(key);
+>, <Line: -				context.add(new Bytecode.Dup(WHILEYRECORD));
+>, <Line: -				context.add(new Bytecode.LoadConst(key));
+>, <Line: -				context.add(new Bytecode.Load(register, context.toJvmType(fieldType)));
+>, <Line: -				context.addWriteConversion(fieldType);
+>, <Line: -				context.add(new Bytecode.Invoke(WHILEYRECORD, "put", ftype, Bytecode.InvokeMode.VIRTUAL));
+>, <Line: -				context.add(new Bytecode.Pop(JAVA_LANG_OBJECT));
+>, <Line: -			}
+>, <Line: -			context.add(new Bytecode.Store(code.target(0), WHILEYRECORD));
+>]

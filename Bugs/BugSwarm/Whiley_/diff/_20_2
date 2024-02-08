@@ -1,0 +1,18 @@
+[<Line: +	public static final Nominal T_LIST_ANY = new List(Type.T_ARRAY_ANY,Type.T_ARRAY_ANY);
+>, <Line: +		} else if(nominal instanceof Type.EffectiveArray && raw instanceof Type.EffectiveArray) {
+>, <Line: +			return new List((Type.EffectiveArray)nominal,(Type.EffectiveArray)raw);
+>, <Line: +		Type.Array nominal = Type.Array(element.nominal(), nonEmpty);
+>, <Line: +		Type.Array raw = Type.Array(element.raw(), nonEmpty);
+>, <Line: +		private final Type.EffectiveArray nominal;
+>, <Line: +		private final Type.EffectiveArray raw;
+>, <Line: +		List(Type.EffectiveArray nominal, Type.EffectiveArray raw) {
+>]
+[<Line: -	public static final Nominal T_LIST_ANY = new List(Type.T_LIST_ANY,Type.T_LIST_ANY);
+>, <Line: -		} else if(nominal instanceof Type.EffectiveList && raw instanceof Type.EffectiveList) {
+>, <Line: -			return new List((Type.EffectiveList)nominal,(Type.EffectiveList)raw);
+>, <Line: -		Type.List nominal = Type.List(element.nominal(), nonEmpty);
+>, <Line: -		Type.List raw = Type.List(element.raw(), nonEmpty);
+>, <Line: -		private final Type.EffectiveList nominal;
+>, <Line: -		private final Type.EffectiveList raw;
+>, <Line: -		List(Type.EffectiveList nominal, Type.EffectiveList raw) {
+>]

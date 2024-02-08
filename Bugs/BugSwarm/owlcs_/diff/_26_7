@@ -1,0 +1,4 @@
+[<Line: +        sb.append("ObjectInverseOf(");
+>]
+[<Line: -        sb.append("InverseOf(");
+>]

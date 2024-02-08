@@ -1,0 +1,38 @@
+[<Line: +    /**
+>, <Line: +     * Retrieve the target page from the Twilio API.
+>, <Line: +     * 
+>, <Line: +     * @param targetUrl API-generated URL for the requested results page
+>, <Line: +     * @param client TwilioRestClient with which to make the request
+>, <Line: +     * @return CredentialList ResourceSet
+>, <Line: +     */
+>, <Line: +    @Override
+>, <Line: +    @SuppressWarnings("checkstyle:linelength")
+>, <Line: +    public Page<CredentialList> getPage(final String targetUrl, final TwilioRestClient client) {
+>, <Line: +        this.pathAccountSid = this.pathAccountSid == null ? client.getAccountSid() : this.pathAccountSid;
+>, <Line: +        Request request = new Request(
+>, <Line: +            HttpMethod.GET,
+>, <Line: +            targetUrl
+>, <Line: +        );
+>, <Line: +        return pageForRequest(client, request);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Retrieve the previous page from the Twilio API.
+>, <Line: +     * 
+>, <Line: +     * @param page current page
+>, <Line: +     * @param client TwilioRestClient with which to make the request
+>, <Line: +     * @return Previous Page
+>, <Line: +     */
+>, <Line: +    @Override
+>, <Line: +    public Page<CredentialList> previousPage(final Page<CredentialList> page, 
+>, <Line: +                                             final TwilioRestClient client) {
+>, <Line: +        Request request = new Request(
+>, <Line: +            HttpMethod.GET,
+>, <Line: +            page.getPreviousPageUrl(
+>, <Line: +                Domains.API.toString(),
+>, <Line: +                client.getRegion()
+>, <Line: +            )
+>, <Line: +        );
+>, <Line: +        return pageForRequest(client, request);
+>, <Line: +    }
+>]
+[]

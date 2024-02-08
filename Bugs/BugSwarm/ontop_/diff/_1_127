@@ -1,0 +1,27 @@
+[<Line: +		Ontology onto = OWLAPI3TranslatorUtility.loadOntologyFromFile(testEquivalenceClasses);
+>, <Line: +		TBoxReasoner dag = TBoxReasonerImpl.create(onto);
+>, <Line: +		Ontology onto = OWLAPI3TranslatorUtility.loadOntologyFromFile(testEquivalenceRoles);
+>, <Line: +		TBoxReasoner dag = TBoxReasonerImpl.create(onto);
+>, <Line: +		Ontology onto = OWLAPI3TranslatorUtility.loadOntologyFromFile(testEquivalenceRolesInverse);
+>, <Line: +		TBoxReasoner dag = TBoxReasonerImpl.create(onto);
+>]
+[<Line: -import java.io.File;
+>, <Line: -import org.semanticweb.owlapi.apibinding.OWLManager;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntologyManager;
+>, <Line: -		OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+>, <Line: -		OWLOntology owlonto = man.loadOntologyFromOntologyDocument(new File(
+>, <Line: -				testEquivalenceClasses));
+>, <Line: -		Ontology onto = OWLAPI3TranslatorUtility.translate(owlonto);
+>, <Line: -		TBoxReasoner dag = new TBoxReasonerImpl(onto);
+>, <Line: -		OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+>, <Line: -		OWLOntology owlonto = man.loadOntologyFromOntologyDocument(new File(
+>, <Line: -				testEquivalenceRoles));
+>, <Line: -		Ontology onto = OWLAPI3TranslatorUtility.translate(owlonto);
+>, <Line: -		TBoxReasoner dag = new TBoxReasonerImpl(onto);
+>, <Line: -		OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+>, <Line: -		OWLOntology owlonto = man.loadOntologyFromOntologyDocument(new File(
+>, <Line: -				testEquivalenceRolesInverse));
+>, <Line: -		Ontology onto = OWLAPI3TranslatorUtility.translate(owlonto);
+>, <Line: -		TBoxReasoner dag = new TBoxReasonerImpl(onto);
+>]

@@ -1,0 +1,17 @@
+[]
+[<Line: -Baragon Testing Script
+>, <Line: -======================
+>, <Line: -This script will automatically test a number of request scenarios for a Baragon cluster.
+>, <Line: -##Usage
+>, <Line: -- Simply run `python baragon_test.py` to run the tests
+>, <Line: -- The test script will clean requests out of the state datastore as it finishes its tests
+>, <Line: -###Options
+>, <Line: -| Option        | Description                                                   | Default                      |
+>, <Line: -| ------------- | ------------------------------------------------------------- | ---------------------------- |
+>, <Line: -| -u --uri      | Baragon Service base uri                                      | 192.168.33.20:8080/baragon/v2|
+>, <Line: -| -k --key      | Baragon Service auth key                                      | None                         |
+>, <Line: -| -m --master   | Baragon Service master auth key                               | None                         |
+>, <Line: -| --upstream    | Default upstream to use in requests                           | example.com:80               |
+>, <Line: -| -l --lbGroup  | Load balancer group to use for testing                        | vagrant                      |
+>, <Line: -| -s --service  | Only run tests on BAragonService (no interaction with agents) | false                        |
+>]

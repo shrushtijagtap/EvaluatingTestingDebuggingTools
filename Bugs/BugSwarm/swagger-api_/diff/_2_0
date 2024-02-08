@@ -1,0 +1,5 @@
+[<Line: +import io.swagger.oas.annotations.Operation;
+>, <Line: +        final Extension[] extensions = method.getAnnotation(Operation.class).extensions();
+>]
+[<Line: -        final Extension[] extensions = method.getAnnotation(ApiOperation.class).extensions();
+>]

@@ -1,0 +1,3520 @@
+[<Line: +(function (global) {
+>, <Line: +	var req, s, head, baseElement, dataMain, src,
+>, <Line: +		interactiveScript, currentlyAddingScript, mainScript, subPath,
+>, <Line: +		version = '2.1.8',
+>, <Line: +		commentRegExp = /(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/mg,
+>, <Line: +		cjsRequireRegExp = /[^.]\s*require\s*\(\s*["']([^'"\s]+)["']\s*\)/g,
+>, <Line: +		jsSuffixRegExp = /\.js$/,
+>, <Line: +		currDirRegExp = /^\.\//,
+>, <Line: +		op = Object.prototype,
+>, <Line: +		ostring = op.toString,
+>, <Line: +		hasOwn = op.hasOwnProperty,
+>, <Line: +		ap = Array.prototype,
+>, <Line: +		apsp = ap.splice,
+>, <Line: +		isBrowser = !!(typeof window !== 'undefined' && navigator && window.document),
+>, <Line: +		isWebWorker = !isBrowser && typeof importScripts !== 'undefined',
+>, <Line: +	//PS3 indicates loaded and complete, but need to wait for complete
+>, <Line: +	//specifically. Sequence is 'loading', 'loaded', execution,
+>, <Line: +	// then 'complete'. The UA check is unfortunate, but not sure how
+>, <Line: +	//to feature test w/o causing perf issues.
+>, <Line: +		readyRegExp = isBrowser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/,
+>, <Line: +		defContextName = '_',
+>, <Line: +	//Oh the tragedy, detecting opera. See the usage of isOpera for reason.
+>, <Line: +		isOpera = typeof opera !== 'undefined' && opera.toString() === '[object Opera]',
+>, <Line: +		contexts = {},
+>, <Line: +		cfg = {},
+>, <Line: +		globalDefQueue = [],
+>, <Line: +		useInteractive = false;
+>, <Line: +	function isFunction(it) {
+>, <Line: +		return ostring.call(it) === '[object Function]';
+>, <Line: +	}
+>, <Line: +	function isArray(it) {
+>, <Line: +		return ostring.call(it) === '[object Array]';
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Helper function for iterating over an array. If the func returns
+>, <Line: +	 * a true value, it will break out of the loop.
+>, <Line: +	 */
+>, <Line: +	function each(ary, func) {
+>, <Line: +		if (ary) {
+>, <Line: +			var i;
+>, <Line: +			for (i = 0; i < ary.length; i += 1) {
+>, <Line: +				if (ary[i] && func(ary[i], i, ary)) {
+>, <Line: +					break;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Helper function for iterating over an array backwards. If the func
+>, <Line: +	 * returns a true value, it will break out of the loop.
+>, <Line: +	 */
+>, <Line: +	function eachReverse(ary, func) {
+>, <Line: +		if (ary) {
+>, <Line: +			var i;
+>, <Line: +			for (i = ary.length - 1; i > -1; i -= 1) {
+>, <Line: +				if (ary[i] && func(ary[i], i, ary)) {
+>, <Line: +					break;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	function hasProp(obj, prop) {
+>, <Line: +		return hasOwn.call(obj, prop);
+>, <Line: +	}
+>, <Line: +	function getOwn(obj, prop) {
+>, <Line: +		return hasProp(obj, prop) && obj[prop];
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Cycles over properties in an object and calls a function for each
+>, <Line: +	 * property value. If the function returns a truthy value, then the
+>, <Line: +	 * iteration is stopped.
+>, <Line: +	 */
+>, <Line: +	function eachProp(obj, func) {
+>, <Line: +		var prop;
+>, <Line: +		for (prop in obj) {
+>, <Line: +			if (hasProp(obj, prop)) {
+>, <Line: +				if (func(obj[prop], prop)) {
+>, <Line: +					break;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Simple function to mix in properties from source into target,
+>, <Line: +	 * but only if target does not already have a property of the same name.
+>, <Line: +	 */
+>, <Line: +	function mixin(target, source, force, deepStringMixin) {
+>, <Line: +		if (source) {
+>, <Line: +			eachProp(source, function (value, prop) {
+>, <Line: +				if (force || !hasProp(target, prop)) {
+>, <Line: +					if (deepStringMixin && typeof value !== 'string') {
+>, <Line: +						if (!target[prop]) {
+>, <Line: +							target[prop] = {};
+>, <Line: +						}
+>, <Line: +						mixin(target[prop], value, force, deepStringMixin);
+>, <Line: +					} else {
+>, <Line: +						target[prop] = value;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +		return target;
+>, <Line: +	}
+>, <Line: +	//Similar to Function.prototype.bind, but the 'this' object is specified
+>, <Line: +	//first, since it is easier to read/figure out what 'this' will be.
+>, <Line: +	function bind(obj, fn) {
+>, <Line: +		return function () {
+>, <Line: +			return fn.apply(obj, arguments);
+>, <Line: +		};
+>, <Line: +	}
+>, <Line: +	function scripts() {
+>, <Line: +		return document.getElementsByTagName('script');
+>, <Line: +	}
+>, <Line: +	function defaultOnError(err) {
+>, <Line: +		throw err;
+>, <Line: +	}
+>, <Line: +	//Allow getting a global that expressed in
+>, <Line: +	//dot notation, like 'a.b.c'.
+>, <Line: +	function getGlobal(value) {
+>, <Line: +		if (!value) {
+>, <Line: +			return value;
+>, <Line: +		}
+>, <Line: +		var g = global;
+>, <Line: +		each(value.split('.'), function (part) {
+>, <Line: +			g = g[part];
+>, <Line: +		});
+>, <Line: +		return g;
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Constructs an error with a pointer to an URL with more information.
+>, <Line: +	 * @param {String} id the error ID that maps to an ID on a web page.
+>, <Line: +	 * @param {String} message human readable error.
+>, <Line: +	 * @param {Error} [err] the original error, if there is one.
+>, <Line: +	 *
+>, <Line: +	 * @returns {Error}
+>, <Line: +	 */
+>, <Line: +	function makeError(id, msg, err, requireModules) {
+>, <Line: +		var e = new Error(msg + '\nhttp://requirejs.org/docs/errors.html#' + id);
+>, <Line: +		e.requireType = id;
+>, <Line: +		e.requireModules = requireModules;
+>, <Line: +		if (err) {
+>, <Line: +			e.originalError = err;
+>, <Line: +		}
+>, <Line: +		return e;
+>, <Line: +	}
+>, <Line: +	if (typeof define !== 'undefined') {
+>, <Line: +		//If a define is already in play via another AMD loader,
+>, <Line: +		//do not overwrite.
+>, <Line: +		return;
+>, <Line: +	}
+>, <Line: +	if (typeof requirejs !== 'undefined') {
+>, <Line: +		if (isFunction(requirejs)) {
+>, <Line: +			//Do not overwrite and existing requirejs instance.
+>, <Line: +			return;
+>, <Line: +		}
+>, <Line: +		cfg = requirejs;
+>, <Line: +		requirejs = undefined;
+>, <Line: +	}
+>, <Line: +	//Allow for a require config object
+>, <Line: +	if (typeof require !== 'undefined' && !isFunction(require)) {
+>, <Line: +		//assume it is a config object.
+>, <Line: +		cfg = require;
+>, <Line: +		require = undefined;
+>, <Line: +	}
+>, <Line: +	function newContext(contextName) {
+>, <Line: +		var inCheckLoaded, Module, context, handlers,
+>, <Line: +			checkLoadedTimeoutId,
+>, <Line: +			config = {
+>, <Line: +				//Defaults. Do not set a default for map
+>, <Line: +				//config to speed up normalize(), which
+>, <Line: +				//will run faster if there is no default.
+>, <Line: +				waitSeconds: 7,
+>, <Line: +				baseUrl: './',
+>, <Line: +				paths: {},
+>, <Line: +				pkgs: {},
+>, <Line: +				shim: {},
+>, <Line: +				config: {}
+>, <Line: +			},
+>, <Line: +			registry = {},
+>, <Line: +		//registry of just enabled modules, to speed
+>, <Line: +		//cycle breaking code when lots of modules
+>, <Line: +		//are registered, but not activated.
+>, <Line: +			enabledRegistry = {},
+>, <Line: +			undefEvents = {},
+>, <Line: +			defQueue = [],
+>, <Line: +			defined = {},
+>, <Line: +			urlFetched = {},
+>, <Line: +			requireCounter = 1,
+>, <Line: +			unnormalizedCounter = 1;
+>, <Line: +		/**
+>, <Line: +		 * Trims the . and .. from an array of path segments.
+>, <Line: +		 * It will keep a leading path segment if a .. will become
+>, <Line: +		 * the first path segment, to help with module name lookups,
+>, <Line: +		 * which act like paths, but can be remapped. But the end result,
+>, <Line: +		 * all paths that use this function should look normalized.
+>, <Line: +		 * NOTE: this method MODIFIES the input array.
+>, <Line: +		 * @param {Array} ary the array of path segments.
+>, <Line: +		 */
+>, <Line: +		function trimDots(ary) {
+>, <Line: +			var i, part;
+>, <Line: +			for (i = 0; ary[i]; i += 1) {
+>, <Line: +				part = ary[i];
+>, <Line: +				if (part === '.') {
+>, <Line: +					ary.splice(i, 1);
+>, <Line: +					i -= 1;
+>, <Line: +				} else if (part === '..') {
+>, <Line: +					if (i === 1 && (ary[2] === '..' || ary[0] === '..')) {
+>, <Line: +						//End of the line. Keep at least one non-dot
+>, <Line: +						//path segment at the front so it can be mapped
+>, <Line: +						//correctly to disk. Otherwise, there is likely
+>, <Line: +						//no path mapping for a path starting with '..'.
+>, <Line: +						//This can still fail, but catches the most reasonable
+>, <Line: +						//uses of ..
+>, <Line: +						break;
+>, <Line: +					} else if (i > 0) {
+>, <Line: +						ary.splice(i - 1, 2);
+>, <Line: +						i -= 2;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		/**
+>, <Line: +		 * Given a relative module name, like ./something, normalize it to
+>, <Line: +		 * a real name that can be mapped to a path.
+>, <Line: +		 * @param {String} name the relative name
+>, <Line: +		 * @param {String} baseName a real name that the name arg is relative
+>, <Line: +		 * to.
+>, <Line: +		 * @param {Boolean} applyMap apply the map config to the value. Should
+>, <Line: +		 * only be done if this normalization is for a dependency ID.
+>, <Line: +		 * @returns {String} normalized name
+>, <Line: +		 */
+>, <Line: +		function normalize(name, baseName, applyMap) {
+>, <Line: +			var pkgName, pkgConfig, mapValue, nameParts, i, j, nameSegment,
+>, <Line: +				foundMap, foundI, foundStarMap, starI,
+>, <Line: +				baseParts = baseName && baseName.split('/'),
+>, <Line: +				normalizedBaseParts = baseParts,
+>, <Line: +				map = config.map,
+>, <Line: +				starMap = map && map['*'];
+>, <Line: +			//Adjust any relative paths.
+>, <Line: +			if (name && name.charAt(0) === '.') {
+>, <Line: +				//If have a base name, try to normalize against it,
+>, <Line: +				//otherwise, assume it is a top-level require that will
+>, <Line: +				//be relative to baseUrl in the end.
+>, <Line: +				if (baseName) {
+>, <Line: +					if (getOwn(config.pkgs, baseName)) {
+>, <Line: +						//If the baseName is a package name, then just treat it as one
+>, <Line: +						//name to concat the name with.
+>, <Line: +						normalizedBaseParts = baseParts = [baseName];
+>, <Line: +					} else {
+>, <Line: +						//Convert baseName to array, and lop off the last part,
+>, <Line: +						//so that . matches that 'directory' and not name of the baseName's
+>, <Line: +						//module. For instance, baseName of 'one/two/three', maps to
+>, <Line: +						//'one/two/three.js', but we want the directory, 'one/two' for
+>, <Line: +						//this normalization.
+>, <Line: +						normalizedBaseParts = baseParts.slice(0, baseParts.length - 1);
+>, <Line: +					}
+>, <Line: +					name = normalizedBaseParts.concat(name.split('/'));
+>, <Line: +					trimDots(name);
+>, <Line: +					//Some use of packages may use a . path to reference the
+>, <Line: +					//'main' module name, so normalize for that.
+>, <Line: +					pkgConfig = getOwn(config.pkgs, (pkgName = name[0]));
+>, <Line: +					name = name.join('/');
+>, <Line: +					if (pkgConfig && name === pkgName + '/' + pkgConfig.main) {
+>, <Line: +						name = pkgName;
+>, <Line: +					}
+>, <Line: +				} else if (name.indexOf('./') === 0) {
+>, <Line: +					// No baseName, so this is ID is resolved relative
+>, <Line: +					// to baseUrl, pull off the leading dot.
+>, <Line: +					name = name.substring(2);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			//Apply map config if available.
+>, <Line: +			if (applyMap && map && (baseParts || starMap)) {
+>, <Line: +				nameParts = name.split('/');
+>, <Line: +				for (i = nameParts.length; i > 0; i -= 1) {
+>, <Line: +					nameSegment = nameParts.slice(0, i).join('/');
+>, <Line: +					if (baseParts) {
+>, <Line: +						//Find the longest baseName segment match in the config.
+>, <Line: +						//So, do joins on the biggest to smallest lengths of baseParts.
+>, <Line: +						for (j = baseParts.length; j > 0; j -= 1) {
+>, <Line: +							mapValue = getOwn(map, baseParts.slice(0, j).join('/'));
+>, <Line: +							//baseName segment has config, find if it has one for
+>, <Line: +							//this name.
+>, <Line: +							if (mapValue) {
+>, <Line: +								mapValue = getOwn(mapValue, nameSegment);
+>, <Line: +								if (mapValue) {
+>, <Line: +									//Match, update name to the new value.
+>, <Line: +									foundMap = mapValue;
+>, <Line: +									foundI = i;
+>, <Line: +									break;
+>, <Line: +								}
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					if (foundMap) {
+>, <Line: +						break;
+>, <Line: +					}
+>, <Line: +					//Check for a star map match, but just hold on to it,
+>, <Line: +					//if there is a shorter segment match later in a matching
+>, <Line: +					//config, then favor over this star map.
+>, <Line: +					if (!foundStarMap && starMap && getOwn(starMap, nameSegment)) {
+>, <Line: +						foundStarMap = getOwn(starMap, nameSegment);
+>, <Line: +						starI = i;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				if (!foundMap && foundStarMap) {
+>, <Line: +					foundMap = foundStarMap;
+>, <Line: +					foundI = starI;
+>, <Line: +				}
+>, <Line: +				if (foundMap) {
+>, <Line: +					nameParts.splice(0, foundI, foundMap);
+>, <Line: +					name = nameParts.join('/');
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			return name;
+>, <Line: +		}
+>, <Line: +		function removeScript(name) {
+>, <Line: +			if (isBrowser) {
+>, <Line: +				each(scripts(), function (scriptNode) {
+>, <Line: +					if (scriptNode.getAttribute('data-requiremodule') === name && scriptNode.getAttribute('data-requirecontext') === context.contextName) {
+>, <Line: +						scriptNode.parentNode.removeChild(scriptNode);
+>, <Line: +						return true;
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		function hasPathFallback(id) {
+>, <Line: +			var pathConfig = getOwn(config.paths, id);
+>, <Line: +			if (pathConfig && isArray(pathConfig) && pathConfig.length > 1) {
+>, <Line: +				removeScript(id);
+>, <Line: +				//Pop off the first array value, since it failed, and
+>, <Line: +				//retry
+>, <Line: +				pathConfig.shift();
+>, <Line: +				context.require.undef(id);
+>, <Line: +				context.require([id]);
+>, <Line: +				return true;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		//Turns a plugin!resource to [plugin, resource]
+>, <Line: +		//with the plugin being undefined if the name
+>, <Line: +		//did not have a plugin prefix.
+>, <Line: +		function splitPrefix(name) {
+>, <Line: +			var prefix,
+>, <Line: +				index = name ? name.indexOf('!') : -1;
+>, <Line: +			if (index > -1) {
+>, <Line: +				prefix = name.substring(0, index);
+>, <Line: +				name = name.substring(index + 1, name.length);
+>, <Line: +			}
+>, <Line: +			return [prefix, name];
+>, <Line: +		}
+>, <Line: +		/**
+>, <Line: +		 * Creates a module mapping that includes plugin prefix, module
+>, <Line: +		 * name, and path. If parentModuleMap is provided it will
+>, <Line: +		 * also normalize the name via require.normalize()
+>, <Line: +		 *
+>, <Line: +		 * @param {String} name the module name
+>, <Line: +		 * @param {String} [parentModuleMap] parent module map
+>, <Line: +		 * for the module name, used to resolve relative names.
+>, <Line: +		 * @param {Boolean} isNormalized: is the ID already normalized.
+>, <Line: +		 * This is true if this call is done for a define() module ID.
+>, <Line: +		 * @param {Boolean} applyMap: apply the map config to the ID.
+>, <Line: +		 * Should only be true if this map is for a dependency.
+>, <Line: +		 *
+>, <Line: +		 * @returns {Object}
+>, <Line: +		 */
+>, <Line: +		function makeModuleMap(name, parentModuleMap, isNormalized, applyMap) {
+>, <Line: +			var url, pluginModule, suffix, nameParts,
+>, <Line: +				prefix = null,
+>, <Line: +				parentName = parentModuleMap ? parentModuleMap.name : null,
+>, <Line: +				originalName = name,
+>, <Line: +				isDefine = true,
+>, <Line: +				normalizedName = '';
+>, <Line: +			//If no name, then it means it is a require call, generate an
+>, <Line: +			//internal name.
+>, <Line: +			if (!name) {
+>, <Line: +				isDefine = false;
+>, <Line: +				name = '_@r' + (requireCounter += 1);
+>, <Line: +			}
+>, <Line: +			nameParts = splitPrefix(name);
+>, <Line: +			prefix = nameParts[0];
+>, <Line: +			name = nameParts[1];
+>, <Line: +			if (prefix) {
+>, <Line: +				prefix = normalize(prefix, parentName, applyMap);
+>, <Line: +				pluginModule = getOwn(defined, prefix);
+>, <Line: +			}
+>, <Line: +			//Account for relative paths if there is a base name.
+>, <Line: +			if (name) {
+>, <Line: +				if (prefix) {
+>, <Line: +					if (pluginModule && pluginModule.normalize) {
+>, <Line: +						//Plugin is loaded, use its normalize method.
+>, <Line: +						normalizedName = pluginModule.normalize(name, function (name) {
+>, <Line: +							return normalize(name, parentName, applyMap);
+>, <Line: +						});
+>, <Line: +					} else {
+>, <Line: +						normalizedName = normalize(name, parentName, applyMap);
+>, <Line: +					}
+>, <Line: +				} else {
+>, <Line: +					//A regular module.
+>, <Line: +					normalizedName = normalize(name, parentName, applyMap);
+>, <Line: +					//Normalized name may be a plugin ID due to map config
+>, <Line: +					//application in normalize. The map config values must
+>, <Line: +					//already be normalized, so do not need to redo that part.
+>, <Line: +					nameParts = splitPrefix(normalizedName);
+>, <Line: +					prefix = nameParts[0];
+>, <Line: +					normalizedName = nameParts[1];
+>, <Line: +					isNormalized = true;
+>, <Line: +					url = context.nameToUrl(normalizedName);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			//If the id is a plugin id that cannot be determined if it needs
+>, <Line: +			//normalization, stamp it with a unique ID so two matching relative
+>, <Line: +			//ids that may conflict can be separate.
+>, <Line: +			suffix = prefix && !pluginModule && !isNormalized ? '_unnormalized' + (unnormalizedCounter += 1) : '';
+>, <Line: +			return {
+>, <Line: +				prefix: prefix,
+>, <Line: +				name: normalizedName,
+>, <Line: +				parentMap: parentModuleMap,
+>, <Line: +				unnormalized: !!suffix,
+>, <Line: +				url: url,
+>, <Line: +				originalName: originalName,
+>, <Line: +				isDefine: isDefine,
+>, <Line: +				id: (prefix ? prefix + '!' + normalizedName : normalizedName) + suffix
+>, <Line: +			};
+>, <Line: +		}
+>, <Line: +		function getModule(depMap) {
+>, <Line: +			var id = depMap.id,
+>, <Line: +				mod = getOwn(registry, id);
+>, <Line: +			if (!mod) {
+>, <Line: +				mod = registry[id] = new context.Module(depMap);
+>, <Line: +			}
+>, <Line: +			return mod;
+>, <Line: +		}
+>, <Line: +		function on(depMap, name, fn) {
+>, <Line: +			var id = depMap.id,
+>, <Line: +				mod = getOwn(registry, id);
+>, <Line: +			if (hasProp(defined, id) && (!mod || mod.defineEmitComplete)) {
+>, <Line: +				if (name === 'defined') {
+>, <Line: +					fn(defined[id]);
+>, <Line: +				}
+>, <Line: +			} else {
+>, <Line: +				mod = getModule(depMap);
+>, <Line: +				if (mod.error && name === 'error') {
+>, <Line: +					fn(mod.error);
+>, <Line: +				} else {
+>, <Line: +					mod.on(name, fn);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		function onError(err, errback) {
+>, <Line: +			var ids = err.requireModules,
+>, <Line: +				notified = false;
+>, <Line: +			if (errback) {
+>, <Line: +				errback(err);
+>, <Line: +			} else {
+>, <Line: +				each(ids, function (id) {
+>, <Line: +					var mod = getOwn(registry, id);
+>, <Line: +					if (mod) {
+>, <Line: +						//Set error on module, so it skips timeout checks.
+>, <Line: +						mod.error = err;
+>, <Line: +						if (mod.events.error) {
+>, <Line: +							notified = true;
+>, <Line: +							mod.emit('error', err);
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +				if (!notified) {
+>, <Line: +					req.onError(err);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		/**
+>, <Line: +		 * Internal method to transfer globalQueue items to this context's
+>, <Line: +		 * defQueue.
+>, <Line: +		 */
+>, <Line: +		function takeGlobalQueue() {
+>, <Line: +			//Push all the globalDefQueue items into the context's defQueue
+>, <Line: +			if (globalDefQueue.length) {
+>, <Line: +				//Array splice in the values since the context code has a
+>, <Line: +				//local var ref to defQueue, so cannot just reassign the one
+>, <Line: +				//on context.
+>, <Line: +				apsp.apply(defQueue, [defQueue.length - 1, 0].concat(globalDefQueue));
+>, <Line: +				globalDefQueue = [];
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		handlers = {
+>, <Line: +			'require': function (mod) {
+>, <Line: +				if (mod.require) {
+>, <Line: +					return mod.require;
+>, <Line: +				} else {
+>, <Line: +					return (mod.require = context.makeRequire(mod.map));
+>, <Line: +				}
+>, <Line: +			},
+>, <Line: +			'exports': function (mod) {
+>, <Line: +				mod.usingExports = true;
+>, <Line: +				if (mod.map.isDefine) {
+>, <Line: +					if (mod.exports) {
+>, <Line: +						return mod.exports;
+>, <Line: +					} else {
+>, <Line: +						return (mod.exports = defined[mod.map.id] = {});
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			},
+>, <Line: +			'module': function (mod) {
+>, <Line: +				if (mod.module) {
+>, <Line: +					return mod.module;
+>, <Line: +				} else {
+>, <Line: +					return (mod.module = {
+>, <Line: +						id: mod.map.id,
+>, <Line: +						uri: mod.map.url,
+>, <Line: +						config: function () {
+>, <Line: +							var c,
+>, <Line: +								pkg = getOwn(config.pkgs, mod.map.id);
+>, <Line: +							// For packages, only support config targeted
+>, <Line: +							// at the main module.
+>, <Line: +							c = pkg ? getOwn(config.config, mod.map.id + '/' + pkg.main) : getOwn(config.config, mod.map.id);
+>, <Line: +							return c || {};
+>, <Line: +						},
+>, <Line: +						exports: defined[mod.map.id]
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		function cleanRegistry(id) {
+>, <Line: +			//Clean up machinery used for waiting modules.
+>, <Line: +			delete registry[id];
+>, <Line: +			delete enabledRegistry[id];
+>, <Line: +		}
+>, <Line: +		function breakCycle(mod, traced, processed) {
+>, <Line: +			var id = mod.map.id;
+>, <Line: +			if (mod.error) {
+>, <Line: +				mod.emit('error', mod.error);
+>, <Line: +			} else {
+>, <Line: +				traced[id] = true;
+>, <Line: +				each(mod.depMaps, function (depMap, i) {
+>, <Line: +					var depId = depMap.id,
+>, <Line: +						dep = getOwn(registry, depId);
+>, <Line: +					//Only force things that have not completed
+>, <Line: +					//being defined, so still in the registry,
+>, <Line: +					//and only if it has not been matched up
+>, <Line: +					//in the module already.
+>, <Line: +					if (dep && !mod.depMatched[i] && !processed[depId]) {
+>, <Line: +						if (getOwn(traced, depId)) {
+>, <Line: +							mod.defineDep(i, defined[depId]);
+>, <Line: +							mod.check(); //pass false?
+>, <Line: +						} else {
+>, <Line: +							breakCycle(dep, traced, processed);
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +				processed[id] = true;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		function checkLoaded() {
+>, <Line: +			var map, modId, err, usingPathFallback,
+>, <Line: +				waitInterval = config.waitSeconds * 1000,
+>, <Line: +			//It is possible to disable the wait interval by using waitSeconds of 0.
+>, <Line: +				expired = waitInterval && (context.startTime + waitInterval) < new Date().getTime(),
+>, <Line: +				noLoads = [],
+>, <Line: +				reqCalls = [],
+>, <Line: +				stillLoading = false,
+>, <Line: +				needCycleCheck = true;
+>, <Line: +			//Do not bother if this call was a result of a cycle break.
+>, <Line: +			if (inCheckLoaded) {
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			inCheckLoaded = true;
+>, <Line: +			//Figure out the state of all the modules.
+>, <Line: +			eachProp(enabledRegistry, function (mod) {
+>, <Line: +				map = mod.map;
+>, <Line: +				modId = map.id;
+>, <Line: +				//Skip things that are not enabled or in error state.
+>, <Line: +				if (!mod.enabled) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				if (!map.isDefine) {
+>, <Line: +					reqCalls.push(mod);
+>, <Line: +				}
+>, <Line: +				if (!mod.error) {
+>, <Line: +					//If the module should be executed, and it has not
+>, <Line: +					//been inited and time is up, remember it.
+>, <Line: +					if (!mod.inited && expired) {
+>, <Line: +						if (hasPathFallback(modId)) {
+>, <Line: +							usingPathFallback = true;
+>, <Line: +							stillLoading = true;
+>, <Line: +						} else {
+>, <Line: +							noLoads.push(modId);
+>, <Line: +							removeScript(modId);
+>, <Line: +						}
+>, <Line: +					} else if (!mod.inited && mod.fetched && map.isDefine) {
+>, <Line: +						stillLoading = true;
+>, <Line: +						if (!map.prefix) {
+>, <Line: +							//No reason to keep looking for unfinished
+>, <Line: +							//loading. If the only stillLoading is a
+>, <Line: +							//plugin resource though, keep going,
+>, <Line: +							//because it may be that a plugin resource
+>, <Line: +							//is waiting on a non-plugin cycle.
+>, <Line: +							return (needCycleCheck = false);
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			});
+>, <Line: +			if (expired && noLoads.length) {
+>, <Line: +				//If wait time expired, throw error of unloaded modules.
+>, <Line: +				err = makeError('timeout', 'Load timeout for modules: ' + noLoads, null, noLoads);
+>, <Line: +				err.contextName = context.contextName;
+>, <Line: +				return onError(err);
+>, <Line: +			}
+>, <Line: +			//Not expired, check for a cycle.
+>, <Line: +			if (needCycleCheck) {
+>, <Line: +				each(reqCalls, function (mod) {
+>, <Line: +					breakCycle(mod, {}, {});
+>, <Line: +				});
+>, <Line: +			}
+>, <Line: +			//If still waiting on loads, and the waiting load is something
+>, <Line: +			//other than a plugin resource, or there are still outstanding
+>, <Line: +			//scripts, then just try back later.
+>, <Line: +			if ((!expired || usingPathFallback) && stillLoading) {
+>, <Line: +				//Something is still waiting to load. Wait for it, but only
+>, <Line: +				//if a timeout is not already in effect.
+>, <Line: +				if ((isBrowser || isWebWorker) && !checkLoadedTimeoutId) {
+>, <Line: +					checkLoadedTimeoutId = setTimeout(function () {
+>, <Line: +						checkLoadedTimeoutId = 0;
+>, <Line: +						checkLoaded();
+>, <Line: +					}, 50);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			inCheckLoaded = false;
+>, <Line: +		}
+>, <Line: +		Module = function (map) {
+>, <Line: +			this.events = getOwn(undefEvents, map.id) || {};
+>, <Line: +			this.map = map;
+>, <Line: +			this.shim = getOwn(config.shim, map.id);
+>, <Line: +			this.depExports = [];
+>, <Line: +			this.depMaps = [];
+>, <Line: +			this.depMatched = [];
+>, <Line: +			this.pluginMaps = {};
+>, <Line: +			this.depCount = 0;
+>, <Line: +			/* this.exports this.factory
+>, <Line: +			 this.depMaps = [],
+>, <Line: +			 this.enabled, this.fetched
+>, <Line: +			 */
+>, <Line: +		};
+>, <Line: +		Module.prototype = {
+>, <Line: +			init: function (depMaps, factory, errback, options) {
+>, <Line: +				options = options || {};
+>, <Line: +				//Do not do more inits if already done. Can happen if there
+>, <Line: +				//are multiple define calls for the same module. That is not
+>, <Line: +				//a normal, common case, but it is also not unexpected.
+>, <Line: +				if (this.inited) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				this.factory = factory;
+>, <Line: +				if (errback) {
+>, <Line: +					//Register for errors on this module.
+>, <Line: +					this.on('error', errback);
+>, <Line: +				} else if (this.events.error) {
+>, <Line: +					//If no errback already, but there are error listeners
+>, <Line: +					//on this module, set up an errback to pass to the deps.
+>, <Line: +					errback = bind(this, function (err) {
+>, <Line: +						this.emit('error', err);
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				//Do a copy of the dependency array, so that
+>, <Line: +				//source inputs are not modified. For example
+>, <Line: +				//"shim" deps are passed in here directly, and
+>, <Line: +				//doing a direct modification of the depMaps array
+>, <Line: +				//would affect that config.
+>, <Line: +				this.depMaps = depMaps && depMaps.slice(0);
+>, <Line: +				this.errback = errback;
+>, <Line: +				//Indicate this module has be initialized
+>, <Line: +				this.inited = true;
+>, <Line: +				this.ignore = options.ignore;
+>, <Line: +				//Could have option to init this module in enabled mode,
+>, <Line: +				//or could have been previously marked as enabled. However,
+>, <Line: +				//the dependencies are not known until init is called. So
+>, <Line: +				//if enabled previously, now trigger dependencies as enabled.
+>, <Line: +				if (options.enabled || this.enabled) {
+>, <Line: +					//Enable this module and dependencies.
+>, <Line: +					//Will call this.check()
+>, <Line: +					this.enable();
+>, <Line: +				} else {
+>, <Line: +					this.check();
+>, <Line: +				}
+>, <Line: +			},
+>, <Line: +			defineDep: function (i, depExports) {
+>, <Line: +				//Because of cycles, defined callback for a given
+>, <Line: +				//export can be called more than once.
+>, <Line: +				if (!this.depMatched[i]) {
+>, <Line: +					this.depMatched[i] = true;
+>, <Line: +					this.depCount -= 1;
+>, <Line: +					this.depExports[i] = depExports;
+>, <Line: +				}
+>, <Line: +			},
+>, <Line: +			fetch: function () {
+>, <Line: +				if (this.fetched) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				this.fetched = true;
+>, <Line: +				context.startTime = (new Date()).getTime();
+>, <Line: +				var map = this.map;
+>, <Line: +				//If the manager is for a plugin managed resource,
+>, <Line: +				//ask the plugin to load it now.
+>, <Line: +				if (this.shim) {
+>, <Line: +					context.makeRequire(this.map, {
+>, <Line: +						enableBuildCallback: true
+>, <Line: +					})(this.shim.deps || [], bind(this, function () {
+>, <Line: +						return map.prefix ? this.callPlugin() : this.load();
+>, <Line: +					}));
+>, <Line: +				} else {
+>, <Line: +					//Regular dependency.
+>, <Line: +					return map.prefix ? this.callPlugin() : this.load();
+>, <Line: +				}
+>, <Line: +			},
+>, <Line: +			load: function () {
+>, <Line: +				var url = this.map.url;
+>, <Line: +				//Regular dependency.
+>, <Line: +				if (!urlFetched[url]) {
+>, <Line: +					urlFetched[url] = true;
+>, <Line: +					context.load(this.map.id, url);
+>, <Line: +				}
+>, <Line: +			},
+>, <Line: +			/**
+>, <Line: +			 * Checks if the module is ready to define itself, and if so,
+>, <Line: +			 * define it.
+>, <Line: +			 */
+>, <Line: +			check: function () {
+>, <Line: +				if (!this.enabled || this.enabling) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				var err, cjsModule,
+>, <Line: +					id = this.map.id,
+>, <Line: +					depExports = this.depExports,
+>, <Line: +					exports = this.exports,
+>, <Line: +					factory = this.factory;
+>, <Line: +				if (!this.inited) {
+>, <Line: +					this.fetch();
+>, <Line: +				} else if (this.error) {
+>, <Line: +					this.emit('error', this.error);
+>, <Line: +				} else if (!this.defining) {
+>, <Line: +					//The factory could trigger another require call
+>, <Line: +					//that would result in checking this module to
+>, <Line: +					//define itself again. If already in the process
+>, <Line: +					//of doing that, skip this work.
+>, <Line: +					this.defining = true;
+>, <Line: +					if (this.depCount < 1 && !this.defined) {
+>, <Line: +						if (isFunction(factory)) {
+>, <Line: +							//If there is an error listener, favor passing
+>, <Line: +							//to that instead of throwing an error. However,
+>, <Line: +							//only do it for define()'d  modules. require
+>, <Line: +							//errbacks should not be called for failures in
+>, <Line: +							//their callbacks (#699). However if a global
+>, <Line: +							//onError is set, use that.
+>, <Line: +							if ((this.events.error && this.map.isDefine) || req.onError !== defaultOnError) {
+>, <Line: +								try {
+>, <Line: +									exports = context.execCb(id, factory, depExports, exports);
+>, <Line: +								} catch (e) {
+>, <Line: +									err = e;
+>, <Line: +								}
+>, <Line: +							} else {
+>, <Line: +								exports = context.execCb(id, factory, depExports, exports);
+>, <Line: +							}
+>, <Line: +							if (this.map.isDefine) {
+>, <Line: +								//If setting exports via 'module' is in play,
+>, <Line: +								//favor that over return value and exports. After that,
+>, <Line: +								//favor a non-undefined return value over exports use.
+>, <Line: +								cjsModule = this.module;
+>, <Line: +								if (cjsModule && cjsModule.exports !== undefined &&
+>, <Line: +										//Make sure it is not already the exports value
+>, <Line: +									cjsModule.exports !== this.exports) {
+>, <Line: +									exports = cjsModule.exports;
+>, <Line: +								} else if (exports === undefined && this.usingExports) {
+>, <Line: +									//exports already set the defined value.
+>, <Line: +									exports = this.exports;
+>, <Line: +								}
+>, <Line: +							}
+>, <Line: +							if (err) {
+>, <Line: +								err.requireMap = this.map;
+>, <Line: +								err.requireModules = this.map.isDefine ? [this.map.id] : null;
+>, <Line: +								err.requireType = this.map.isDefine ? 'define' : 'require';
+>, <Line: +								return onError((this.error = err));
+>, <Line: +							}
+>, <Line: +						} else {
+>, <Line: +							//Just a literal value
+>, <Line: +							exports = factory;
+>, <Line: +						}
+>, <Line: +						this.exports = exports;
+>, <Line: +						if (this.map.isDefine && !this.ignore) {
+>, <Line: +							defined[id] = exports;
+>, <Line: +							if (req.onResourceLoad) {
+>, <Line: +								req.onResourceLoad(context, this.map, this.depMaps);
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +						//Clean up
+>, <Line: +						cleanRegistry(id);
+>, <Line: +						this.defined = true;
+>, <Line: +					}
+>, <Line: +					//Finished the define stage. Allow calling check again
+>, <Line: +					//to allow define notifications below in the case of a
+>, <Line: +					//cycle.
+>, <Line: +					this.defining = false;
+>, <Line: +					if (this.defined && !this.defineEmitted) {
+>, <Line: +						this.defineEmitted = true;
+>, <Line: +						this.emit('defined', this.exports);
+>, <Line: +						this.defineEmitComplete = true;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			},
+>, <Line: +			callPlugin: function () {
+>, <Line: +				var map = this.map,
+>, <Line: +					id = map.id,
+>, <Line: +				//Map already normalized the prefix.
+>, <Line: +					pluginMap = makeModuleMap(map.prefix);
+>, <Line: +				//Mark this as a dependency for this plugin, so it
+>, <Line: +				//can be traced for cycles.
+>, <Line: +				this.depMaps.push(pluginMap);
+>, <Line: +				on(pluginMap, 'defined', bind(this, function (plugin) {
+>, <Line: +					var load, normalizedMap, normalizedMod,
+>, <Line: +						name = this.map.name,
+>, <Line: +						parentName = this.map.parentMap ? this.map.parentMap.name : null,
+>, <Line: +						localRequire = context.makeRequire(map.parentMap, {
+>, <Line: +							enableBuildCallback: true
+>, <Line: +						});
+>, <Line: +					//If current map is not normalized, wait for that
+>, <Line: +					//normalized name to load instead of continuing.
+>, <Line: +					if (this.map.unnormalized) {
+>, <Line: +						//Normalize the ID if the plugin allows it.
+>, <Line: +						if (plugin.normalize) {
+>, <Line: +							name = plugin.normalize(name, function (name) {
+>, <Line: +									return normalize(name, parentName, true);
+>, <Line: +								}) || '';
+>, <Line: +						}
+>, <Line: +						//prefix and name should already be normalized, no need
+>, <Line: +						//for applying map config again either.
+>, <Line: +						normalizedMap = makeModuleMap(map.prefix + '!' + name,
+>, <Line: +							this.map.parentMap);
+>, <Line: +						on(normalizedMap, 'defined', bind(this, function (value) {
+>, <Line: +							this.init([], function () {
+>, <Line: +								return value;
+>, <Line: +							}, null, {
+>, <Line: +								enabled: true,
+>, <Line: +								ignore: true
+>, <Line: +							});
+>, <Line: +						}));
+>, <Line: +						normalizedMod = getOwn(registry, normalizedMap.id);
+>, <Line: +						if (normalizedMod) {
+>, <Line: +							//Mark this as a dependency for this plugin, so it
+>, <Line: +							//can be traced for cycles.
+>, <Line: +							this.depMaps.push(normalizedMap);
+>, <Line: +							if (this.events.error) {
+>, <Line: +								normalizedMod.on('error', bind(this, function (err) {
+>, <Line: +									this.emit('error', err);
+>, <Line: +								}));
+>, <Line: +							}
+>, <Line: +							normalizedMod.enable();
+>, <Line: +						}
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					load = bind(this, function (value) {
+>, <Line: +						this.init([], function () {
+>, <Line: +							return value;
+>, <Line: +						}, null, {
+>, <Line: +							enabled: true
+>, <Line: +						});
+>, <Line: +					});
+>, <Line: +					load.error = bind(this, function (err) {
+>, <Line: +						this.inited = true;
+>, <Line: +						this.error = err;
+>, <Line: +						err.requireModules = [id];
+>, <Line: +						//Remove temp unnormalized modules for this module,
+>, <Line: +						//since they will never be resolved otherwise now.
+>, <Line: +						eachProp(registry, function (mod) {
+>, <Line: +							if (mod.map.id.indexOf(id + '_unnormalized') === 0) {
+>, <Line: +								cleanRegistry(mod.map.id);
+>, <Line: +							}
+>, <Line: +						});
+>, <Line: +						onError(err);
+>, <Line: +					});
+>, <Line: +					//Allow plugins to load other code without having to know the
+>, <Line: +					//context or how to 'complete' the load.
+>, <Line: +					load.fromText = bind(this, function (text, textAlt) {
+>, <Line: +						/*jslint evil: true */
+>, <Line: +						var moduleName = map.name,
+>, <Line: +							moduleMap = makeModuleMap(moduleName),
+>, <Line: +							hasInteractive = useInteractive;
+>, <Line: +						//As of 2.1.0, support just passing the text, to reinforce
+>, <Line: +						//fromText only being called once per resource. Still
+>, <Line: +						//support old style of passing moduleName but discard
+>, <Line: +						//that moduleName in favor of the internal ref.
+>, <Line: +						if (textAlt) {
+>, <Line: +							text = textAlt;
+>, <Line: +						}
+>, <Line: +						//Turn off interactive script matching for IE for any define
+>, <Line: +						//calls in the text, then turn it back on at the end.
+>, <Line: +						if (hasInteractive) {
+>, <Line: +							useInteractive = false;
+>, <Line: +						}
+>, <Line: +						//Prime the system by creating a module instance for
+>, <Line: +						//it.
+>, <Line: +						getModule(moduleMap);
+>, <Line: +						//Transfer any config to this other module.
+>, <Line: +						if (hasProp(config.config, id)) {
+>, <Line: +							config.config[moduleName] = config.config[id];
+>, <Line: +						}
+>, <Line: +						try {
+>, <Line: +							req.exec(text);
+>, <Line: +						} catch (e) {
+>, <Line: +							return onError(makeError('fromtexteval', 'fromText eval for ' + id + ' failed: ' + e,
+>, <Line: +								e, [id]));
+>, <Line: +						}
+>, <Line: +						if (hasInteractive) {
+>, <Line: +							useInteractive = true;
+>, <Line: +						}
+>, <Line: +						//Mark this as a dependency for the plugin
+>, <Line: +						//resource
+>, <Line: +						this.depMaps.push(moduleMap);
+>, <Line: +						//Support anonymous modules.
+>, <Line: +						context.completeLoad(moduleName);
+>, <Line: +						//Bind the value of that module to the value for this
+>, <Line: +						//resource ID.
+>, <Line: +						localRequire([moduleName], load);
+>, <Line: +					});
+>, <Line: +					//Use parentName here since the plugin's name is not reliable,
+>, <Line: +					//could be some weird string with no path that actually wants to
+>, <Line: +					//reference the parentName's path.
+>, <Line: +					plugin.load(map.name, localRequire, load, config);
+>, <Line: +				}));
+>, <Line: +				context.enable(pluginMap, this);
+>, <Line: +				this.pluginMaps[pluginMap.id] = pluginMap;
+>, <Line: +			},
+>, <Line: +			enable: function () {
+>, <Line: +				enabledRegistry[this.map.id] = this;
+>, <Line: +				this.enabled = true;
+>, <Line: +				//Set flag mentioning that the module is enabling,
+>, <Line: +				//so that immediate calls to the defined callbacks
+>, <Line: +				//for dependencies do not trigger inadvertent load
+>, <Line: +				//with the depCount still being zero.
+>, <Line: +				this.enabling = true;
+>, <Line: +				//Enable each dependency
+>, <Line: +				each(this.depMaps, bind(this, function (depMap, i) {
+>, <Line: +					var id, mod, handler;
+>, <Line: +					if (typeof depMap === 'string') {
+>, <Line: +						//Dependency needs to be converted to a depMap
+>, <Line: +						//and wired up to this module.
+>, <Line: +						depMap = makeModuleMap(depMap, (this.map.isDefine ? this.map : this.map.parentMap),
+>, <Line: +							false, !this.skipMap);
+>, <Line: +						this.depMaps[i] = depMap;
+>, <Line: +						handler = getOwn(handlers, depMap.id);
+>, <Line: +						if (handler) {
+>, <Line: +							this.depExports[i] = handler(this);
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						this.depCount += 1;
+>, <Line: +						on(depMap, 'defined', bind(this, function (depExports) {
+>, <Line: +							this.defineDep(i, depExports);
+>, <Line: +							this.check();
+>, <Line: +						}));
+>, <Line: +						if (this.errback) {
+>, <Line: +							on(depMap, 'error', bind(this, this.errback));
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					id = depMap.id;
+>, <Line: +					mod = registry[id];
+>, <Line: +					//Skip special modules like 'require', 'exports', 'module'
+>, <Line: +					//Also, don't call enable if it is already enabled,
+>, <Line: +					//important in circular dependency cases.
+>, <Line: +					if (!hasProp(handlers, id) && mod && !mod.enabled) {
+>, <Line: +						context.enable(depMap, this);
+>, <Line: +					}
+>, <Line: +				}));
+>, <Line: +				//Enable each plugin that is used in
+>, <Line: +				//a dependency
+>, <Line: +				eachProp(this.pluginMaps, bind(this, function (pluginMap) {
+>, <Line: +					var mod = getOwn(registry, pluginMap.id);
+>, <Line: +					if (mod && !mod.enabled) {
+>, <Line: +						context.enable(pluginMap, this);
+>, <Line: +					}
+>, <Line: +				}));
+>, <Line: +				this.enabling = false;
+>, <Line: +				this.check();
+>, <Line: +			},
+>, <Line: +			on: function (name, cb) {
+>, <Line: +				var cbs = this.events[name];
+>, <Line: +				if (!cbs) {
+>, <Line: +					cbs = this.events[name] = [];
+>, <Line: +				}
+>, <Line: +				cbs.push(cb);
+>, <Line: +			},
+>, <Line: +			emit: function (name, evt) {
+>, <Line: +				each(this.events[name], function (cb) {
+>, <Line: +					cb(evt);
+>, <Line: +				});
+>, <Line: +				if (name === 'error') {
+>, <Line: +					//Now that the error handler was triggered, remove
+>, <Line: +					//the listeners, since this broken Module instance
+>, <Line: +					//can stay around for a while in the registry.
+>, <Line: +					delete this.events[name];
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		function callGetModule(args) {
+>, <Line: +			//Skip modules already defined.
+>, <Line: +			if (!hasProp(defined, args[0])) {
+>, <Line: +				getModule(makeModuleMap(args[0], null, true)).init(args[1], args[2]);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		function removeListener(node, func, name, ieName) {
+>, <Line: +			//Favor detachEvent because of IE9
+>, <Line: +			//issue, see attachEvent/addEventListener comment elsewhere
+>, <Line: +			//in this file.
+>, <Line: +			if (node.detachEvent && !isOpera) {
+>, <Line: +				//Probably IE. If not it will throw an error, which will be
+>, <Line: +				//useful to know.
+>, <Line: +				if (ieName) {
+>, <Line: +					node.detachEvent(ieName, func);
+>, <Line: +				}
+>, <Line: +			} else {
+>, <Line: +				node.removeEventListener(name, func, false);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		/**
+>, <Line: +		 * Given an event from a script node, get the requirejs info from it,
+>, <Line: +		 * and then removes the event listeners on the node.
+>, <Line: +		 * @param {Event} evt
+>, <Line: +		 * @returns {Object}
+>, <Line: +		 */
+>, <Line: +		function getScriptData(evt) {
+>, <Line: +			//Using currentTarget instead of target for Firefox 2.0's sake. Not
+>, <Line: +			//all old browsers will be supported, but this one was easy enough
+>, <Line: +			//to support and still makes sense.
+>, <Line: +			var node = evt.currentTarget || evt.srcElement;
+>, <Line: +			//Remove the listeners once here.
+>, <Line: +			removeListener(node, context.onScriptLoad, 'load', 'onreadystatechange');
+>, <Line: +			removeListener(node, context.onScriptError, 'error');
+>, <Line: +			return {
+>, <Line: +				node: node,
+>, <Line: +				id: node && node.getAttribute('data-requiremodule')
+>, <Line: +			};
+>, <Line: +		}
+>, <Line: +		function intakeDefines() {
+>, <Line: +			var args;
+>, <Line: +			//Any defined modules in the global queue, intake them now.
+>, <Line: +			takeGlobalQueue();
+>, <Line: +			//Make sure any remaining defQueue items get properly processed.
+>, <Line: +			while (defQueue.length) {
+>, <Line: +				args = defQueue.shift();
+>, <Line: +				if (args[0] === null) {
+>, <Line: +					return onError(makeError('mismatch', 'Mismatched anonymous define() module: ' + args[args.length - 1]));
+>, <Line: +				} else {
+>, <Line: +					//args are id, deps, factory. Should be normalized by the
+>, <Line: +					//define() function.
+>, <Line: +					callGetModule(args);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		context = {
+>, <Line: +			config: config,
+>, <Line: +			contextName: contextName,
+>, <Line: +			registry: registry,
+>, <Line: +			defined: defined,
+>, <Line: +			urlFetched: urlFetched,
+>, <Line: +			defQueue: defQueue,
+>, <Line: +			Module: Module,
+>, <Line: +			makeModuleMap: makeModuleMap,
+>, <Line: +			nextTick: req.nextTick,
+>, <Line: +			onError: onError,
+>, <Line: +			/**
+>, <Line: +			 * Set a configuration for the context.
+>, <Line: +			 * @param {Object} cfg config object to integrate.
+>, <Line: +			 */
+>, <Line: +			configure: function (cfg) {
+>, <Line: +				//Make sure the baseUrl ends in a slash.
+>, <Line: +				if (cfg.baseUrl) {
+>, <Line: +					if (cfg.baseUrl.charAt(cfg.baseUrl.length - 1) !== '/') {
+>, <Line: +						cfg.baseUrl += '/';
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				//Save off the paths and packages since they require special processing,
+>, <Line: +				//they are additive.
+>, <Line: +				var pkgs = config.pkgs,
+>, <Line: +					shim = config.shim,
+>, <Line: +					objs = {
+>, <Line: +						paths: true,
+>, <Line: +						config: true,
+>, <Line: +						map: true
+>, <Line: +					};
+>, <Line: +				eachProp(cfg, function (value, prop) {
+>, <Line: +					if (objs[prop]) {
+>, <Line: +						if (prop === 'map') {
+>, <Line: +							if (!config.map) {
+>, <Line: +								config.map = {};
+>, <Line: +							}
+>, <Line: +							mixin(config[prop], value, true, true);
+>, <Line: +						} else {
+>, <Line: +							mixin(config[prop], value, true);
+>, <Line: +						}
+>, <Line: +					} else {
+>, <Line: +						config[prop] = value;
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +				//Merge shim
+>, <Line: +				if (cfg.shim) {
+>, <Line: +					eachProp(cfg.shim, function (value, id) {
+>, <Line: +						//Normalize the structure
+>, <Line: +						if (isArray(value)) {
+>, <Line: +							value = {
+>, <Line: +								deps: value
+>, <Line: +							};
+>, <Line: +						}
+>, <Line: +						if ((value.exports || value.init) && !value.exportsFn) {
+>, <Line: +							value.exportsFn = context.makeShimExports(value);
+>, <Line: +						}
+>, <Line: +						shim[id] = value;
+>, <Line: +					});
+>, <Line: +					config.shim = shim;
+>, <Line: +				}
+>, <Line: +				//Adjust packages if necessary.
+>, <Line: +				if (cfg.packages) {
+>, <Line: +					each(cfg.packages, function (pkgObj) {
+>, <Line: +						var location;
+>, <Line: +						pkgObj = typeof pkgObj === 'string' ? {
+>, <Line: +							name: pkgObj
+>, <Line: +						} : pkgObj;
+>, <Line: +						location = pkgObj.location;
+>, <Line: +						//Create a brand new object on pkgs, since currentPackages can
+>, <Line: +						//be passed in again, and config.pkgs is the internal transformed
+>, <Line: +						//state for all package configs.
+>, <Line: +						pkgs[pkgObj.name] = {
+>, <Line: +							name: pkgObj.name,
+>, <Line: +							location: location || pkgObj.name,
+>, <Line: +							//Remove leading dot in main, so main paths are normalized,
+>, <Line: +							//and remove any trailing .js, since different package
+>, <Line: +							//envs have different conventions: some use a module name,
+>, <Line: +							//some use a file name.
+>, <Line: +							main: (pkgObj.main || 'main')
+>, <Line: +								.replace(currDirRegExp, '')
+>, <Line: +								.replace(jsSuffixRegExp, '')
+>, <Line: +						};
+>, <Line: +					});
+>, <Line: +					//Done with modifications, assing packages back to context config
+>, <Line: +					config.pkgs = pkgs;
+>, <Line: +				}
+>, <Line: +				//If there are any "waiting to execute" modules in the registry,
+>, <Line: +				//update the maps for them, since their info, like URLs to load,
+>, <Line: +				//may have changed.
+>, <Line: +				eachProp(registry, function (mod, id) {
+>, <Line: +					//If module already has init called, since it is too
+>, <Line: +					//late to modify them, and ignore unnormalized ones
+>, <Line: +					//since they are transient.
+>, <Line: +					if (!mod.inited && !mod.map.unnormalized) {
+>, <Line: +						mod.map = makeModuleMap(id);
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +				//If a deps array or a config callback is specified, then call
+>, <Line: +				//require with those args. This is useful when require is defined as a
+>, <Line: +				//config object before require.js is loaded.
+>, <Line: +				if (cfg.deps || cfg.callback) {
+>, <Line: +					context.require(cfg.deps || [], cfg.callback);
+>, <Line: +				}
+>, <Line: +			},
+>, <Line: +			makeShimExports: function (value) {
+>, <Line: +				function fn() {
+>, <Line: +					var ret;
+>, <Line: +					if (value.init) {
+>, <Line: +						ret = value.init.apply(global, arguments);
+>, <Line: +					}
+>, <Line: +					return ret || (value.exports && getGlobal(value.exports));
+>, <Line: +				}
+>, <Line: +				return fn;
+>, <Line: +			},
+>, <Line: +			makeRequire: function (relMap, options) {
+>, <Line: +				options = options || {};
+>, <Line: +				function localRequire(deps, callback, errback) {
+>, <Line: +					var id, map, requireMod;
+>, <Line: +					if (options.enableBuildCallback && callback && isFunction(callback)) {
+>, <Line: +						callback.__requireJsBuild = true;
+>, <Line: +					}
+>, <Line: +					if (typeof deps === 'string') {
+>, <Line: +						if (isFunction(callback)) {
+>, <Line: +							//Invalid call
+>, <Line: +							return onError(makeError('requireargs', 'Invalid require call'), errback);
+>, <Line: +						}
+>, <Line: +						//If require|exports|module are requested, get the
+>, <Line: +						//value for them from the special handlers. Caveat:
+>, <Line: +						//this only works while module is being defined.
+>, <Line: +						if (relMap && hasProp(handlers, deps)) {
+>, <Line: +							return handlers[deps](registry[relMap.id]);
+>, <Line: +						}
+>, <Line: +						//Synchronous access to one module. If require.get is
+>, <Line: +						//available (as in the Node adapter), prefer that.
+>, <Line: +						if (req.get) {
+>, <Line: +							return req.get(context, deps, relMap, localRequire);
+>, <Line: +						}
+>, <Line: +						//Normalize module name, if it contains . or ..
+>, <Line: +						map = makeModuleMap(deps, relMap, false, true);
+>, <Line: +						id = map.id;
+>, <Line: +						if (!hasProp(defined, id)) {
+>, <Line: +							return onError(makeError('notloaded', 'Module name "' + id + '" has not been loaded yet for context: ' + contextName + (relMap ? '' : '. Use require([])')));
+>, <Line: +						}
+>, <Line: +						return defined[id];
+>, <Line: +					}
+>, <Line: +					//Grab defines waiting in the global queue.
+>, <Line: +					intakeDefines();
+>, <Line: +					//Mark all the dependencies as needing to be loaded.
+>, <Line: +					context.nextTick(function () {
+>, <Line: +						//Some defines could have been added since the
+>, <Line: +						//require call, collect them.
+>, <Line: +						intakeDefines();
+>, <Line: +						requireMod = getModule(makeModuleMap(null, relMap));
+>, <Line: +						//Store if map config should be applied to this require
+>, <Line: +						//call for dependencies.
+>, <Line: +						requireMod.skipMap = options.skipMap;
+>, <Line: +						requireMod.init(deps, callback, errback, {
+>, <Line: +							enabled: true
+>, <Line: +						});
+>, <Line: +						checkLoaded();
+>, <Line: +					});
+>, <Line: +					return localRequire;
+>, <Line: +				}
+>, <Line: +				mixin(localRequire, {
+>, <Line: +					isBrowser: isBrowser,
+>, <Line: +					/**
+>, <Line: +					 * Converts a module name + .extension into an URL path.
+>, <Line: +					 * *Requires* the use of a module name. It does not support using
+>, <Line: +					 * plain URLs like nameToUrl.
+>, <Line: +					 */
+>, <Line: +					toUrl: function (moduleNamePlusExt) {
+>, <Line: +						var ext,
+>, <Line: +							index = moduleNamePlusExt.lastIndexOf('.'),
+>, <Line: +							segment = moduleNamePlusExt.split('/')[0],
+>, <Line: +							isRelative = segment === '.' || segment === '..';
+>, <Line: +						//Have a file extension alias, and it is not the
+>, <Line: +						//dots from a relative path.
+>, <Line: +						if (index !== -1 && (!isRelative || index > 1)) {
+>, <Line: +							ext = moduleNamePlusExt.substring(index, moduleNamePlusExt.length);
+>, <Line: +							moduleNamePlusExt = moduleNamePlusExt.substring(0, index);
+>, <Line: +						}
+>, <Line: +						return context.nameToUrl(normalize(moduleNamePlusExt,
+>, <Line: +							relMap && relMap.id, true), ext, true);
+>, <Line: +					},
+>, <Line: +					defined: function (id) {
+>, <Line: +						return hasProp(defined, makeModuleMap(id, relMap, false, true).id);
+>, <Line: +					},
+>, <Line: +					specified: function (id) {
+>, <Line: +						id = makeModuleMap(id, relMap, false, true).id;
+>, <Line: +						return hasProp(defined, id) || hasProp(registry, id);
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +				//Only allow undef on top level require calls
+>, <Line: +				if (!relMap) {
+>, <Line: +					localRequire.undef = function (id) {
+>, <Line: +						//Bind any waiting define() calls to this context,
+>, <Line: +						//fix for #408
+>, <Line: +						takeGlobalQueue();
+>, <Line: +						var map = makeModuleMap(id, relMap, true),
+>, <Line: +							mod = getOwn(registry, id);
+>, <Line: +						delete defined[id];
+>, <Line: +						delete urlFetched[map.url];
+>, <Line: +						delete undefEvents[id];
+>, <Line: +						if (mod) {
+>, <Line: +							//Hold on to listeners in case the
+>, <Line: +							//module will be attempted to be reloaded
+>, <Line: +							//using a different config.
+>, <Line: +							if (mod.events.defined) {
+>, <Line: +								undefEvents[id] = mod.events;
+>, <Line: +							}
+>, <Line: +							cleanRegistry(id);
+>, <Line: +						}
+>, <Line: +					};
+>, <Line: +				}
+>, <Line: +				return localRequire;
+>, <Line: +			},
+>, <Line: +			/**
+>, <Line: +			 * Called to enable a module if it is still in the registry
+>, <Line: +			 * awaiting enablement. A second arg, parent, the parent module,
+>, <Line: +			 * is passed in for context, when this method is overriden by
+>, <Line: +			 * the optimizer. Not shown here to keep code compact.
+>, <Line: +			 */
+>, <Line: +			enable: function (depMap) {
+>, <Line: +				var mod = getOwn(registry, depMap.id);
+>, <Line: +				if (mod) {
+>, <Line: +					getModule(depMap).enable();
+>, <Line: +				}
+>, <Line: +			},
+>, <Line: +			/**
+>, <Line: +			 * Internal method used by environment adapters to complete a load event.
+>, <Line: +			 * A load event could be a script load or just a load pass from a synchronous
+>, <Line: +			 * load call.
+>, <Line: +			 * @param {String} moduleName the name of the module to potentially complete.
+>, <Line: +			 */
+>, <Line: +			completeLoad: function (moduleName) {
+>, <Line: +				var found, args, mod,
+>, <Line: +					shim = getOwn(config.shim, moduleName) || {},
+>, <Line: +					shExports = shim.exports;
+>, <Line: +				takeGlobalQueue();
+>, <Line: +				while (defQueue.length) {
+>, <Line: +					args = defQueue.shift();
+>, <Line: +					if (args[0] === null) {
+>, <Line: +						args[0] = moduleName;
+>, <Line: +						//If already found an anonymous module and bound it
+>, <Line: +						//to this name, then this is some other anon module
+>, <Line: +						//waiting for its completeLoad to fire.
+>, <Line: +						if (found) {
+>, <Line: +							break;
+>, <Line: +						}
+>, <Line: +						found = true;
+>, <Line: +					} else if (args[0] === moduleName) {
+>, <Line: +						//Found matching define call for this script!
+>, <Line: +						found = true;
+>, <Line: +					}
+>, <Line: +					callGetModule(args);
+>, <Line: +				}
+>, <Line: +				//Do this after the cycle of callGetModule in case the result
+>, <Line: +				//of those calls/init calls changes the registry.
+>, <Line: +				mod = getOwn(registry, moduleName);
+>, <Line: +				if (!found && !hasProp(defined, moduleName) && mod && !mod.inited) {
+>, <Line: +					if (config.enforceDefine && (!shExports || !getGlobal(shExports))) {
+>, <Line: +						if (hasPathFallback(moduleName)) {
+>, <Line: +							return;
+>, <Line: +						} else {
+>, <Line: +							return onError(makeError('nodefine', 'No define call for ' + moduleName,
+>, <Line: +								null, [moduleName]));
+>, <Line: +						}
+>, <Line: +					} else {
+>, <Line: +						//A script that does not call define(), so just simulate
+>, <Line: +						//the call for it.
+>, <Line: +						callGetModule([moduleName, (shim.deps || []), shim.exportsFn]);
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				checkLoaded();
+>, <Line: +			},
+>, <Line: +			/**
+>, <Line: +			 * Converts a module name to a file path. Supports cases where
+>, <Line: +			 * moduleName may actually be just an URL.
+>, <Line: +			 * Note that it **does not** call normalize on the moduleName,
+>, <Line: +			 * it is assumed to have already been normalized. This is an
+>, <Line: +			 * internal API, not a public one. Use toUrl for the public API.
+>, <Line: +			 */
+>, <Line: +			nameToUrl: function (moduleName, ext, skipExt) {
+>, <Line: +				var paths, pkgs, pkg, pkgPath, syms, i, parentModule, url,
+>, <Line: +					parentPath;
+>, <Line: +				//If a colon is in the URL, it indicates a protocol is used and it is just
+>, <Line: +				//an URL to a file, or if it starts with a slash, contains a query arg (i.e. ?)
+>, <Line: +				//or ends with .js, then assume the user meant to use an url and not a module id.
+>, <Line: +				//The slash is important for protocol-less URLs as well as full paths.
+>, <Line: +				if (req.jsExtRegExp.test(moduleName)) {
+>, <Line: +					//Just a plain path, not module name lookup, so just return it.
+>, <Line: +					//Add extension if it is included. This is a bit wonky, only non-.js things pass
+>, <Line: +					//an extension, this method probably needs to be reworked.
+>, <Line: +					url = moduleName + (ext || '');
+>, <Line: +				} else {
+>, <Line: +					//A module that needs to be converted to a path.
+>, <Line: +					paths = config.paths;
+>, <Line: +					pkgs = config.pkgs;
+>, <Line: +					syms = moduleName.split('/');
+>, <Line: +					//For each module name segment, see if there is a path
+>, <Line: +					//registered for it. Start with most specific name
+>, <Line: +					//and work up from it.
+>, <Line: +					for (i = syms.length; i > 0; i -= 1) {
+>, <Line: +						parentModule = syms.slice(0, i).join('/');
+>, <Line: +						pkg = getOwn(pkgs, parentModule);
+>, <Line: +						parentPath = getOwn(paths, parentModule);
+>, <Line: +						if (parentPath) {
+>, <Line: +							//If an array, it means there are a few choices,
+>, <Line: +							//Choose the one that is desired
+>, <Line: +							if (isArray(parentPath)) {
+>, <Line: +								parentPath = parentPath[0];
+>, <Line: +							}
+>, <Line: +							syms.splice(0, i, parentPath);
+>, <Line: +							break;
+>, <Line: +						} else if (pkg) {
+>, <Line: +							//If module name is just the package name, then looking
+>, <Line: +							//for the main module.
+>, <Line: +							if (moduleName === pkg.name) {
+>, <Line: +								pkgPath = pkg.location + '/' + pkg.main;
+>, <Line: +							} else {
+>, <Line: +								pkgPath = pkg.location;
+>, <Line: +							}
+>, <Line: +							syms.splice(0, i, pkgPath);
+>, <Line: +							break;
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					//Join the path parts together, then figure out if baseUrl is needed.
+>, <Line: +					url = syms.join('/');
+>, <Line: +					url += (ext || (/\?/.test(url) || skipExt ? '' : '.js'));
+>, <Line: +					url = (url.charAt(0) === '/' || url.match(/^[\w\+\.\-]+:/) ? '' : config.baseUrl) + url;
+>, <Line: +				}
+>, <Line: +				return config.urlArgs ? url + ((url.indexOf('?') === -1 ? '?' : '&') + config.urlArgs) : url;
+>, <Line: +			},
+>, <Line: +			//Delegates to req.load. Broken out as a separate function to
+>, <Line: +			//allow overriding in the optimizer.
+>, <Line: +			load: function (id, url) {
+>, <Line: +				req.load(context, id, url);
+>, <Line: +			},
+>, <Line: +			/**
+>, <Line: +			 * Executes a module callback function. Broken out as a separate function
+>, <Line: +			 * solely to allow the build system to sequence the files in the built
+>, <Line: +			 * layer in the right sequence.
+>, <Line: +			 *
+>, <Line: +			 * @private
+>, <Line: +			 */
+>, <Line: +			execCb: function (name, callback, args, exports) {
+>, <Line: +				return callback.apply(exports, args);
+>, <Line: +			},
+>, <Line: +			/**
+>, <Line: +			 * callback for script loads, used to check status of loading.
+>, <Line: +			 *
+>, <Line: +			 * @param {Event} evt the event from the browser for the script
+>, <Line: +			 * that was loaded.
+>, <Line: +			 */
+>, <Line: +			onScriptLoad: function (evt) {
+>, <Line: +				//Using currentTarget instead of target for Firefox 2.0's sake. Not
+>, <Line: +				//all old browsers will be supported, but this one was easy enough
+>, <Line: +				//to support and still makes sense.
+>, <Line: +				if (evt.type === 'load' || (readyRegExp.test((evt.currentTarget || evt.srcElement).readyState))) {
+>, <Line: +					//Reset interactive script so a script node is not held onto for
+>, <Line: +					//to long.
+>, <Line: +					interactiveScript = null;
+>, <Line: +					//Pull out the name of the module and the context.
+>, <Line: +					var data = getScriptData(evt);
+>, <Line: +					context.completeLoad(data.id);
+>, <Line: +				}
+>, <Line: +			},
+>, <Line: +			/**
+>, <Line: +			 * Callback for script errors.
+>, <Line: +			 */
+>, <Line: +			onScriptError: function (evt) {
+>, <Line: +				var data = getScriptData(evt);
+>, <Line: +				if (!hasPathFallback(data.id)) {
+>, <Line: +					return onError(makeError('scripterror', 'Script error for: ' + data.id, evt, [data.id]));
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		context.require = context.makeRequire();
+>, <Line: +		return context;
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Main entry point.
+>, <Line: +	 *
+>, <Line: +	 * If the only argument to require is a string, then the module that
+>, <Line: +	 * is represented by that string is fetched for the appropriate context.
+>, <Line: +	 *
+>, <Line: +	 * If the first argument is an array, then it will be treated as an array
+>, <Line: +	 * of dependency string names to fetch. An optional function callback can
+>, <Line: +	 * be specified to execute when all of those dependencies are available.
+>, <Line: +	 *
+>, <Line: +	 * Make a local req variable to help Caja compliance (it assumes things
+>, <Line: +	 * on a require that are not standardized), and to give a short
+>, <Line: +	 * name for minification/local scope use.
+>, <Line: +	 */
+>, <Line: +	req = requirejs = function (deps, callback, errback, optional) {
+>, <Line: +		//Find the right context, use default
+>, <Line: +		var context, config,
+>, <Line: +			contextName = defContextName;
+>, <Line: +		// Determine if have config object in the call.
+>, <Line: +		if (!isArray(deps) && typeof deps !== 'string') {
+>, <Line: +			// deps is a config object
+>, <Line: +			config = deps;
+>, <Line: +			if (isArray(callback)) {
+>, <Line: +				// Adjust args if there are dependencies
+>, <Line: +				deps = callback;
+>, <Line: +				callback = errback;
+>, <Line: +				errback = optional;
+>, <Line: +			} else {
+>, <Line: +				deps = [];
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		if (config && config.context) {
+>, <Line: +			contextName = config.context;
+>, <Line: +		}
+>, <Line: +		context = getOwn(contexts, contextName);
+>, <Line: +		if (!context) {
+>, <Line: +			context = contexts[contextName] = req.s.newContext(contextName);
+>, <Line: +		}
+>, <Line: +		if (config) {
+>, <Line: +			context.configure(config);
+>, <Line: +		}
+>, <Line: +		return context.require(deps, callback, errback);
+>, <Line: +	};
+>, <Line: +	/**
+>, <Line: +	 * Support require.config() to make it easier to cooperate with other
+>, <Line: +	 * AMD loaders on globally agreed names.
+>, <Line: +	 */
+>, <Line: +	req.config = function (config) {
+>, <Line: +		return req(config);
+>, <Line: +	};
+>, <Line: +	/**
+>, <Line: +	 * Execute something after the current tick
+>, <Line: +	 * of the event loop. Override for other envs
+>, <Line: +	 * that have a better solution than setTimeout.
+>, <Line: +	 * @param  {Function} fn function to execute later.
+>, <Line: +	 */
+>, <Line: +	req.nextTick = typeof setTimeout !== 'undefined' ? function (fn) {
+>, <Line: +		setTimeout(fn, 4);
+>, <Line: +	} : function (fn) {
+>, <Line: +		fn();
+>, <Line: +	};
+>, <Line: +	/**
+>, <Line: +	 * Export require as a global, but only if it does not already exist.
+>, <Line: +	 */
+>, <Line: +	if (!require) {
+>, <Line: +		require = req;
+>, <Line: +	}
+>, <Line: +	req.version = version;
+>, <Line: +	//Used to filter out dependencies that are already paths.
+>, <Line: +	req.jsExtRegExp = /^\/|:|\?|\.js$/;
+>, <Line: +	req.isBrowser = isBrowser;
+>, <Line: +	s = req.s = {
+>, <Line: +		contexts: contexts,
+>, <Line: +		newContext: newContext
+>, <Line: +	};
+>, <Line: +	//Create default context.
+>, <Line: +	req({});
+>, <Line: +	//Exports some context-sensitive methods on global require.
+>, <Line: +	each(['toUrl', 'undef', 'defined', 'specified'], function (prop) {
+>, <Line: +		//Reference from contexts instead of early binding to default context,
+>, <Line: +		//so that during builds, the latest instance of the default context
+>, <Line: +		//with its config gets used.
+>, <Line: +		req[prop] = function () {
+>, <Line: +			var ctx = contexts[defContextName];
+>, <Line: +			return ctx.require[prop].apply(ctx, arguments);
+>, <Line: +		};
+>, <Line: +	});
+>, <Line: +	if (isBrowser) {
+>, <Line: +		head = s.head = document.getElementsByTagName('head')[0];
+>, <Line: +		//If BASE tag is in play, using appendChild is a problem for IE6.
+>, <Line: +		//When that browser dies, this can be removed. Details in this jQuery bug:
+>, <Line: +		//http://dev.jquery.com/ticket/2709
+>, <Line: +		baseElement = document.getElementsByTagName('base')[0];
+>, <Line: +		if (baseElement) {
+>, <Line: +			head = s.head = baseElement.parentNode;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Any errors that require explicitly generates will be passed to this
+>, <Line: +	 * function. Intercept/override it if you want custom error handling.
+>, <Line: +	 * @param {Error} err the error object.
+>, <Line: +	 */
+>, <Line: +	req.onError = defaultOnError;
+>, <Line: +	/**
+>, <Line: +	 * Creates the node for the load command. Only used in browser envs.
+>, <Line: +	 */
+>, <Line: +	req.createNode = function (config, moduleName, url) {
+>, <Line: +		var node = config.xhtml ? document.createElementNS('http://www.w3.org/1999/xhtml', 'html:script') : document.createElement('script');
+>, <Line: +		node.type = config.scriptType || 'text/javascript';
+>, <Line: +		node.charset = 'utf-8';
+>, <Line: +		node.async = true;
+>, <Line: +		return node;
+>, <Line: +	};
+>, <Line: +	/**
+>, <Line: +	 * Does the request to load a module for the browser case.
+>, <Line: +	 * Make this a separate function to allow other environments
+>, <Line: +	 * to override it.
+>, <Line: +	 *
+>, <Line: +	 * @param {Object} context the require context to find state.
+>, <Line: +	 * @param {String} moduleName the name of the module.
+>, <Line: +	 * @param {Object} url the URL to the module.
+>, <Line: +	 */
+>, <Line: +	req.load = function (context, moduleName, url) {
+>, <Line: +		var config = (context && context.config) || {},
+>, <Line: +			node;
+>, <Line: +		if (isBrowser) {
+>, <Line: +			//In the browser so use a script tag
+>, <Line: +			node = req.createNode(config, moduleName, url);
+>, <Line: +			node.setAttribute('data-requirecontext', context.contextName);
+>, <Line: +			node.setAttribute('data-requiremodule', moduleName);
+>, <Line: +			//Set up load listener. Test attachEvent first because IE9 has
+>, <Line: +			//a subtle issue in its addEventListener and script onload firings
+>, <Line: +			//that do not match the behavior of all other browsers with
+>, <Line: +			//addEventListener support, which fire the onload event for a
+>, <Line: +			//script right after the script execution. See:
+>, <Line: +			//https://connect.microsoft.com/IE/feedback/details/648057/script-onload-event-is-not-fired-immediately-after-script-execution
+>, <Line: +			//UNFORTUNATELY Opera implements attachEvent but does not follow the script
+>, <Line: +			//script execution mode.
+>, <Line: +			if (node.attachEvent &&
+>, <Line: +					//Check if node.attachEvent is artificially added by custom script or
+>, <Line: +					//natively supported by browser
+>, <Line: +					//read https://github.com/jrburke/requirejs/issues/187
+>, <Line: +					//if we can NOT find [native code] then it must NOT natively supported.
+>, <Line: +					//in IE8, node.attachEvent does not have toString()
+>, <Line: +					//Note the test for "[native code" with no closing brace, see:
+>, <Line: +					//https://github.com/jrburke/requirejs/issues/273
+>, <Line: +				!(node.attachEvent.toString && node.attachEvent.toString().indexOf('[native code') < 0) && !isOpera) {
+>, <Line: +				//Probably IE. IE (at least 6-8) do not fire
+>, <Line: +				//script onload right after executing the script, so
+>, <Line: +				//we cannot tie the anonymous define call to a name.
+>, <Line: +				//However, IE reports the script as being in 'interactive'
+>, <Line: +				//readyState at the time of the define call.
+>, <Line: +				useInteractive = true;
+>, <Line: +				node.attachEvent('onreadystatechange', context.onScriptLoad);
+>, <Line: +				//It would be great to add an error handler here to catch
+>, <Line: +				//404s in IE9+. However, onreadystatechange will fire before
+>, <Line: +				//the error handler, so that does not help. If addEventListener
+>, <Line: +				//is used, then IE will fire error before load, but we cannot
+>, <Line: +				//use that pathway given the connect.microsoft.com issue
+>, <Line: +				//mentioned above about not doing the 'script execute,
+>, <Line: +				//then fire the script load event listener before execute
+>, <Line: +				//next script' that other browsers do.
+>, <Line: +				//Best hope: IE10 fixes the issues,
+>, <Line: +				//and then destroys all installs of IE 6-9.
+>, <Line: +				//node.attachEvent('onerror', context.onScriptError);
+>, <Line: +			} else {
+>, <Line: +				node.addEventListener('load', context.onScriptLoad, false);
+>, <Line: +				node.addEventListener('error', context.onScriptError, false);
+>, <Line: +			}
+>, <Line: +			node.src = url;
+>, <Line: +			//For some cache cases in IE 6-8, the script executes before the end
+>, <Line: +			//of the appendChild execution, so to tie an anonymous define
+>, <Line: +			//call to the module name (which is stored on the node), hold on
+>, <Line: +			//to a reference to this node, but clear after the DOM insertion.
+>, <Line: +			currentlyAddingScript = node;
+>, <Line: +			if (baseElement) {
+>, <Line: +				head.insertBefore(node, baseElement);
+>, <Line: +			} else {
+>, <Line: +				head.appendChild(node);
+>, <Line: +			}
+>, <Line: +			currentlyAddingScript = null;
+>, <Line: +			return node;
+>, <Line: +		} else if (isWebWorker) {
+>, <Line: +			try {
+>, <Line: +				//In a web worker, use importScripts. This is not a very
+>, <Line: +				//efficient use of importScripts, importScripts will block until
+>, <Line: +				//its script is downloaded and evaluated. However, if web workers
+>, <Line: +				//are in play, the expectation that a build has been done so that
+>, <Line: +				//only one script needs to be loaded anyway. This may need to be
+>, <Line: +				//reevaluated if other use cases become common.
+>, <Line: +				importScripts(url);
+>, <Line: +				//Account for anonymous modules
+>, <Line: +				context.completeLoad(moduleName);
+>, <Line: +			} catch (e) {
+>, <Line: +				context.onError(makeError('importscripts', 'importScripts failed for ' + moduleName + ' at ' + url,
+>, <Line: +					e, [moduleName]));
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	function getInteractiveScript() {
+>, <Line: +		if (interactiveScript && interactiveScript.readyState === 'interactive') {
+>, <Line: +			return interactiveScript;
+>, <Line: +		}
+>, <Line: +		eachReverse(scripts(), function (script) {
+>, <Line: +			if (script.readyState === 'interactive') {
+>, <Line: +				return (interactiveScript = script);
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +		return interactiveScript;
+>, <Line: +	}
+>, <Line: +	//Look for a data-main script attribute, which could also adjust the baseUrl.
+>, <Line: +	if (isBrowser) {
+>, <Line: +		//Figure out baseUrl. Get it from the script tag with require.js in it.
+>, <Line: +		eachReverse(scripts(), function (script) {
+>, <Line: +			//Set the 'head' where we can append children by
+>, <Line: +			//using the script's parent.
+>, <Line: +			if (!head) {
+>, <Line: +				head = script.parentNode;
+>, <Line: +			}
+>, <Line: +			//Look for a data-main attribute to set main script for the page
+>, <Line: +			//to load. If it is there, the path to data main becomes the
+>, <Line: +			//baseUrl, if it is not already set.
+>, <Line: +			dataMain = script.getAttribute('data-main');
+>, <Line: +			if (dataMain) {
+>, <Line: +				//Preserve dataMain in case it is a path (i.e. contains '?')
+>, <Line: +				mainScript = dataMain;
+>, <Line: +				//Set final baseUrl if there is not already an explicit one.
+>, <Line: +				if (!cfg.baseUrl) {
+>, <Line: +					//Pull off the directory of data-main for use as the
+>, <Line: +					//baseUrl.
+>, <Line: +					src = mainScript.split('/');
+>, <Line: +					mainScript = src.pop();
+>, <Line: +					subPath = src.length ? src.join('/') + '/' : './';
+>, <Line: +					cfg.baseUrl = subPath;
+>, <Line: +				}
+>, <Line: +				//Strip off any trailing .js since mainScript is now
+>, <Line: +				//like a module name.
+>, <Line: +				mainScript = mainScript.replace(jsSuffixRegExp, '');
+>, <Line: +				//If mainScript is still a path, fall back to dataMain
+>, <Line: +				if (req.jsExtRegExp.test(mainScript)) {
+>, <Line: +					mainScript = dataMain;
+>, <Line: +				}
+>, <Line: +				//Put the data-main script in the files to load.
+>, <Line: +				cfg.deps = cfg.deps ? cfg.deps.concat(mainScript) : [mainScript];
+>, <Line: +				return true;
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * The function that handles definitions of modules. Differs from
+>, <Line: +	 * require() in that a string for the module should be the first argument,
+>, <Line: +	 * and the function to execute after dependencies are loaded should
+>, <Line: +	 * return a value to define the module corresponding to the first argument's
+>, <Line: +	 * name.
+>, <Line: +	 */
+>, <Line: +	define = function (name, deps, callback) {
+>, <Line: +		var node, context;
+>, <Line: +		//Allow for anonymous modules
+>, <Line: +		if (typeof name !== 'string') {
+>, <Line: +			//Adjust args appropriately
+>, <Line: +			callback = deps;
+>, <Line: +			deps = name;
+>, <Line: +			name = null;
+>, <Line: +		}
+>, <Line: +		//This module may not have dependencies
+>, <Line: +		if (!isArray(deps)) {
+>, <Line: +			callback = deps;
+>, <Line: +			deps = null;
+>, <Line: +		}
+>, <Line: +		//If no name, and callback is a function, then figure out if it a
+>, <Line: +		//CommonJS thing with dependencies.
+>, <Line: +		if (!deps && isFunction(callback)) {
+>, <Line: +			deps = [];
+>, <Line: +			//Remove comments from the callback string,
+>, <Line: +			//look for require calls, and pull them into the dependencies,
+>, <Line: +			//but only if there are function args.
+>, <Line: +			if (callback.length) {
+>, <Line: +				callback.toString()
+>, <Line: +					.replace(commentRegExp, '')
+>, <Line: +					.replace(cjsRequireRegExp, function (match, dep) {
+>, <Line: +						deps.push(dep);
+>, <Line: +					});
+>, <Line: +				//May be a CommonJS thing even without require calls, but still
+>, <Line: +				//could use exports, and module. Avoid doing exports and module
+>, <Line: +				//work though if it just needs require.
+>, <Line: +				//REQUIRES the function to expect the CommonJS variables in the
+>, <Line: +				//order listed below.
+>, <Line: +				deps = (callback.length === 1 ? ['require'] : ['require', 'exports', 'module']).concat(deps);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		//If in IE 6-8 and hit an anonymous define() call, do the interactive
+>, <Line: +		//work.
+>, <Line: +		if (useInteractive) {
+>, <Line: +			node = currentlyAddingScript || getInteractiveScript();
+>, <Line: +			if (node) {
+>, <Line: +				if (!name) {
+>, <Line: +					name = node.getAttribute('data-requiremodule');
+>, <Line: +				}
+>, <Line: +				context = contexts[node.getAttribute('data-requirecontext')];
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		//Always save off evaluating the def call until the script onload handler.
+>, <Line: +		//This allows multiple modules to be in a file without prematurely
+>, <Line: +		//tracing dependencies, and allows for anonymous module support,
+>, <Line: +		//where the module name is not known until the script onload event
+>, <Line: +		//occurs. If no context, use the global queue, and get it processed
+>, <Line: +		//in the onscript load callback.
+>, <Line: +		(context ? context.defQueue : globalDefQueue).push([name, deps, callback]);
+>, <Line: +	};
+>, <Line: +	define.amd = {
+>, <Line: +		jQuery: true
+>, <Line: +	};
+>, <Line: +	/**
+>, <Line: +	 * Executes the text. Normally just uses eval, but can be modified
+>, <Line: +	 * to use a better, environment-specific call. Only used for transpiling
+>, <Line: +	 * loader plugins, not for plain JS modules.
+>, <Line: +	 * @param {String} text the text to execute/evaluate.
+>, <Line: +	 */
+>, <Line: +	req.exec = function (text) {
+>, <Line: +		/*jslint evil: true */
+>, <Line: +		return eval(text);
+>, <Line: +	};
+>, <Line: +	//Set up with config info.
+>, <Line: +	req(cfg);
+>]
+[<Line: -(function(global) {
+>, <Line: -    var req, s, head, baseElement, dataMain, src,
+>, <Line: -    interactiveScript, currentlyAddingScript, mainScript, subPath,
+>, <Line: -    version = '2.1.8',
+>, <Line: -        commentRegExp = /(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/mg,
+>, <Line: -        cjsRequireRegExp = /[^.]\s*require\s*\(\s*["']([^'"\s]+)["']\s*\)/g,
+>, <Line: -        jsSuffixRegExp = /\.js$/,
+>, <Line: -        currDirRegExp = /^\.\//,
+>, <Line: -        op = Object.prototype,
+>, <Line: -        ostring = op.toString,
+>, <Line: -        hasOwn = op.hasOwnProperty,
+>, <Line: -        ap = Array.prototype,
+>, <Line: -        apsp = ap.splice,
+>, <Line: -        isBrowser = !! (typeof window !== 'undefined' && navigator && window.document),
+>, <Line: -        isWebWorker = !isBrowser && typeof importScripts !== 'undefined',
+>, <Line: -        //PS3 indicates loaded and complete, but need to wait for complete
+>, <Line: -        //specifically. Sequence is 'loading', 'loaded', execution,
+>, <Line: -        // then 'complete'. The UA check is unfortunate, but not sure how
+>, <Line: -        //to feature test w/o causing perf issues.
+>, <Line: -        readyRegExp = isBrowser && navigator.platform === 'PLAYSTATION 3' ? /^complete$/ : /^(complete|loaded)$/,
+>, <Line: -        defContextName = '_',
+>, <Line: -        //Oh the tragedy, detecting opera. See the usage of isOpera for reason.
+>, <Line: -        isOpera = typeof opera !== 'undefined' && opera.toString() === '[object Opera]',
+>, <Line: -        contexts = {},
+>, <Line: -        cfg = {},
+>, <Line: -        globalDefQueue = [],
+>, <Line: -        useInteractive = false;
+>, <Line: -    function isFunction(it) {
+>, <Line: -        return ostring.call(it) === '[object Function]';
+>, <Line: -    }
+>, <Line: -    function isArray(it) {
+>, <Line: -        return ostring.call(it) === '[object Array]';
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Helper function for iterating over an array. If the func returns
+>, <Line: -     * a true value, it will break out of the loop.
+>, <Line: -     */
+>, <Line: -    function each(ary, func) {
+>, <Line: -        if (ary) {
+>, <Line: -            var i;
+>, <Line: -            for (i = 0; i < ary.length; i += 1) {
+>, <Line: -                if (ary[i] && func(ary[i], i, ary)) {
+>, <Line: -                    break;
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Helper function for iterating over an array backwards. If the func
+>, <Line: -     * returns a true value, it will break out of the loop.
+>, <Line: -     */
+>, <Line: -    function eachReverse(ary, func) {
+>, <Line: -        if (ary) {
+>, <Line: -            var i;
+>, <Line: -            for (i = ary.length - 1; i > -1; i -= 1) {
+>, <Line: -                if (ary[i] && func(ary[i], i, ary)) {
+>, <Line: -                    break;
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    function hasProp(obj, prop) {
+>, <Line: -        return hasOwn.call(obj, prop);
+>, <Line: -    }
+>, <Line: -    function getOwn(obj, prop) {
+>, <Line: -        return hasProp(obj, prop) && obj[prop];
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Cycles over properties in an object and calls a function for each
+>, <Line: -     * property value. If the function returns a truthy value, then the
+>, <Line: -     * iteration is stopped.
+>, <Line: -     */
+>, <Line: -    function eachProp(obj, func) {
+>, <Line: -        var prop;
+>, <Line: -        for (prop in obj) {
+>, <Line: -            if (hasProp(obj, prop)) {
+>, <Line: -                if (func(obj[prop], prop)) {
+>, <Line: -                    break;
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Simple function to mix in properties from source into target,
+>, <Line: -     * but only if target does not already have a property of the same name.
+>, <Line: -     */
+>, <Line: -    function mixin(target, source, force, deepStringMixin) {
+>, <Line: -        if (source) {
+>, <Line: -            eachProp(source, function(value, prop) {
+>, <Line: -                if (force || !hasProp(target, prop)) {
+>, <Line: -                    if (deepStringMixin && typeof value !== 'string') {
+>, <Line: -                        if (!target[prop]) {
+>, <Line: -                            target[prop] = {};
+>, <Line: -                        }
+>, <Line: -                        mixin(target[prop], value, force, deepStringMixin);
+>, <Line: -                    } else {
+>, <Line: -                        target[prop] = value;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            });
+>, <Line: -        }
+>, <Line: -        return target;
+>, <Line: -    }
+>, <Line: -    //Similar to Function.prototype.bind, but the 'this' object is specified
+>, <Line: -    //first, since it is easier to read/figure out what 'this' will be.
+>, <Line: -    function bind(obj, fn) {
+>, <Line: -        return function() {
+>, <Line: -            return fn.apply(obj, arguments);
+>, <Line: -        };
+>, <Line: -    }
+>, <Line: -    function scripts() {
+>, <Line: -        return document.getElementsByTagName('script');
+>, <Line: -    }
+>, <Line: -    function defaultOnError(err) {
+>, <Line: -        throw err;
+>, <Line: -    }
+>, <Line: -    //Allow getting a global that expressed in
+>, <Line: -    //dot notation, like 'a.b.c'.
+>, <Line: -    function getGlobal(value) {
+>, <Line: -        if (!value) {
+>, <Line: -            return value;
+>, <Line: -        }
+>, <Line: -        var g = global;
+>, <Line: -        each(value.split('.'), function(part) {
+>, <Line: -            g = g[part];
+>, <Line: -        });
+>, <Line: -        return g;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Constructs an error with a pointer to an URL with more information.
+>, <Line: -     * @param {String} id the error ID that maps to an ID on a web page.
+>, <Line: -     * @param {String} message human readable error.
+>, <Line: -     * @param {Error} [err] the original error, if there is one.
+>, <Line: -     *
+>, <Line: -     * @returns {Error}
+>, <Line: -     */
+>, <Line: -    function makeError(id, msg, err, requireModules) {
+>, <Line: -        var e = new Error(msg + '\nhttp://requirejs.org/docs/errors.html#' + id);
+>, <Line: -        e.requireType = id;
+>, <Line: -        e.requireModules = requireModules;
+>, <Line: -        if (err) {
+>, <Line: -            e.originalError = err;
+>, <Line: -        }
+>, <Line: -        return e;
+>, <Line: -    }
+>, <Line: -    if (typeof define !== 'undefined') {
+>, <Line: -        //If a define is already in play via another AMD loader,
+>, <Line: -        //do not overwrite.
+>, <Line: -        return;
+>, <Line: -    }
+>, <Line: -    if (typeof requirejs !== 'undefined') {
+>, <Line: -        if (isFunction(requirejs)) {
+>, <Line: -            //Do not overwrite and existing requirejs instance.
+>, <Line: -            return;
+>, <Line: -        }
+>, <Line: -        cfg = requirejs;
+>, <Line: -        requirejs = undefined;
+>, <Line: -    }
+>, <Line: -    //Allow for a require config object
+>, <Line: -    if (typeof require !== 'undefined' && !isFunction(require)) {
+>, <Line: -        //assume it is a config object.
+>, <Line: -        cfg = require;
+>, <Line: -        require = undefined;
+>, <Line: -    }
+>, <Line: -    function newContext(contextName) {
+>, <Line: -        var inCheckLoaded, Module, context, handlers,
+>, <Line: -        checkLoadedTimeoutId,
+>, <Line: -        config = {
+>, <Line: -            //Defaults. Do not set a default for map
+>, <Line: -            //config to speed up normalize(), which
+>, <Line: -            //will run faster if there is no default.
+>, <Line: -            waitSeconds: 7,
+>, <Line: -            baseUrl: './',
+>, <Line: -            paths: {},
+>, <Line: -            pkgs: {},
+>, <Line: -            shim: {},
+>, <Line: -            config: {}
+>, <Line: -        },
+>, <Line: -        registry = {},
+>, <Line: -        //registry of just enabled modules, to speed
+>, <Line: -        //cycle breaking code when lots of modules
+>, <Line: -        //are registered, but not activated.
+>, <Line: -        enabledRegistry = {},
+>, <Line: -        undefEvents = {},
+>, <Line: -        defQueue = [],
+>, <Line: -            defined = {},
+>, <Line: -            urlFetched = {},
+>, <Line: -            requireCounter = 1,
+>, <Line: -            unnormalizedCounter = 1;
+>, <Line: -        /**
+>, <Line: -         * Trims the . and .. from an array of path segments.
+>, <Line: -         * It will keep a leading path segment if a .. will become
+>, <Line: -         * the first path segment, to help with module name lookups,
+>, <Line: -         * which act like paths, but can be remapped. But the end result,
+>, <Line: -         * all paths that use this function should look normalized.
+>, <Line: -         * NOTE: this method MODIFIES the input array.
+>, <Line: -         * @param {Array} ary the array of path segments.
+>, <Line: -         */
+>, <Line: -        function trimDots(ary) {
+>, <Line: -            var i, part;
+>, <Line: -            for (i = 0; ary[i]; i += 1) {
+>, <Line: -                part = ary[i];
+>, <Line: -                if (part === '.') {
+>, <Line: -                    ary.splice(i, 1);
+>, <Line: -                    i -= 1;
+>, <Line: -                } else if (part === '..') {
+>, <Line: -                    if (i === 1 && (ary[2] === '..' || ary[0] === '..')) {
+>, <Line: -                        //End of the line. Keep at least one non-dot
+>, <Line: -                        //path segment at the front so it can be mapped
+>, <Line: -                        //correctly to disk. Otherwise, there is likely
+>, <Line: -                        //no path mapping for a path starting with '..'.
+>, <Line: -                        //This can still fail, but catches the most reasonable
+>, <Line: -                        //uses of ..
+>, <Line: -                        break;
+>, <Line: -                    } else if (i > 0) {
+>, <Line: -                        ary.splice(i - 1, 2);
+>, <Line: -                        i -= 2;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        /**
+>, <Line: -         * Given a relative module name, like ./something, normalize it to
+>, <Line: -         * a real name that can be mapped to a path.
+>, <Line: -         * @param {String} name the relative name
+>, <Line: -         * @param {String} baseName a real name that the name arg is relative
+>, <Line: -         * to.
+>, <Line: -         * @param {Boolean} applyMap apply the map config to the value. Should
+>, <Line: -         * only be done if this normalization is for a dependency ID.
+>, <Line: -         * @returns {String} normalized name
+>, <Line: -         */
+>, <Line: -        function normalize(name, baseName, applyMap) {
+>, <Line: -            var pkgName, pkgConfig, mapValue, nameParts, i, j, nameSegment,
+>, <Line: -            foundMap, foundI, foundStarMap, starI,
+>, <Line: -            baseParts = baseName && baseName.split('/'),
+>, <Line: -                normalizedBaseParts = baseParts,
+>, <Line: -                map = config.map,
+>, <Line: -                starMap = map && map['*'];
+>, <Line: -            //Adjust any relative paths.
+>, <Line: -            if (name && name.charAt(0) === '.') {
+>, <Line: -                //If have a base name, try to normalize against it,
+>, <Line: -                //otherwise, assume it is a top-level require that will
+>, <Line: -                //be relative to baseUrl in the end.
+>, <Line: -                if (baseName) {
+>, <Line: -                    if (getOwn(config.pkgs, baseName)) {
+>, <Line: -                        //If the baseName is a package name, then just treat it as one
+>, <Line: -                        //name to concat the name with.
+>, <Line: -                        normalizedBaseParts = baseParts = [baseName];
+>, <Line: -                    } else {
+>, <Line: -                        //Convert baseName to array, and lop off the last part,
+>, <Line: -                        //so that . matches that 'directory' and not name of the baseName's
+>, <Line: -                        //module. For instance, baseName of 'one/two/three', maps to
+>, <Line: -                        //'one/two/three.js', but we want the directory, 'one/two' for
+>, <Line: -                        //this normalization.
+>, <Line: -                        normalizedBaseParts = baseParts.slice(0, baseParts.length - 1);
+>, <Line: -                    }
+>, <Line: -                    name = normalizedBaseParts.concat(name.split('/'));
+>, <Line: -                    trimDots(name);
+>, <Line: -                    //Some use of packages may use a . path to reference the
+>, <Line: -                    //'main' module name, so normalize for that.
+>, <Line: -                    pkgConfig = getOwn(config.pkgs, (pkgName = name[0]));
+>, <Line: -                    name = name.join('/');
+>, <Line: -                    if (pkgConfig && name === pkgName + '/' + pkgConfig.main) {
+>, <Line: -                        name = pkgName;
+>, <Line: -                    }
+>, <Line: -                } else if (name.indexOf('./') === 0) {
+>, <Line: -                    // No baseName, so this is ID is resolved relative
+>, <Line: -                    // to baseUrl, pull off the leading dot.
+>, <Line: -                    name = name.substring(2);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            //Apply map config if available.
+>, <Line: -            if (applyMap && map && (baseParts || starMap)) {
+>, <Line: -                nameParts = name.split('/');
+>, <Line: -                for (i = nameParts.length; i > 0; i -= 1) {
+>, <Line: -                    nameSegment = nameParts.slice(0, i).join('/');
+>, <Line: -                    if (baseParts) {
+>, <Line: -                        //Find the longest baseName segment match in the config.
+>, <Line: -                        //So, do joins on the biggest to smallest lengths of baseParts.
+>, <Line: -                        for (j = baseParts.length; j > 0; j -= 1) {
+>, <Line: -                            mapValue = getOwn(map, baseParts.slice(0, j).join('/'));
+>, <Line: -                            //baseName segment has config, find if it has one for
+>, <Line: -                            //this name.
+>, <Line: -                            if (mapValue) {
+>, <Line: -                                mapValue = getOwn(mapValue, nameSegment);
+>, <Line: -                                if (mapValue) {
+>, <Line: -                                    //Match, update name to the new value.
+>, <Line: -                                    foundMap = mapValue;
+>, <Line: -                                    foundI = i;
+>, <Line: -                                    break;
+>, <Line: -                                }
+>, <Line: -                            }
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                    if (foundMap) {
+>, <Line: -                        break;
+>, <Line: -                    }
+>, <Line: -                    //Check for a star map match, but just hold on to it,
+>, <Line: -                    //if there is a shorter segment match later in a matching
+>, <Line: -                    //config, then favor over this star map.
+>, <Line: -                    if (!foundStarMap && starMap && getOwn(starMap, nameSegment)) {
+>, <Line: -                        foundStarMap = getOwn(starMap, nameSegment);
+>, <Line: -                        starI = i;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -                if (!foundMap && foundStarMap) {
+>, <Line: -                    foundMap = foundStarMap;
+>, <Line: -                    foundI = starI;
+>, <Line: -                }
+>, <Line: -                if (foundMap) {
+>, <Line: -                    nameParts.splice(0, foundI, foundMap);
+>, <Line: -                    name = nameParts.join('/');
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            return name;
+>, <Line: -        }
+>, <Line: -        function removeScript(name) {
+>, <Line: -            if (isBrowser) {
+>, <Line: -                each(scripts(), function(scriptNode) {
+>, <Line: -                    if (scriptNode.getAttribute('data-requiremodule') === name && scriptNode.getAttribute('data-requirecontext') === context.contextName) {
+>, <Line: -                        scriptNode.parentNode.removeChild(scriptNode);
+>, <Line: -                        return true;
+>, <Line: -                    }
+>, <Line: -                });
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        function hasPathFallback(id) {
+>, <Line: -            var pathConfig = getOwn(config.paths, id);
+>, <Line: -            if (pathConfig && isArray(pathConfig) && pathConfig.length > 1) {
+>, <Line: -                removeScript(id);
+>, <Line: -                //Pop off the first array value, since it failed, and
+>, <Line: -                //retry
+>, <Line: -                pathConfig.shift();
+>, <Line: -                context.require.undef(id);
+>, <Line: -                context.require([id]);
+>, <Line: -                return true;
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        //Turns a plugin!resource to [plugin, resource]
+>, <Line: -        //with the plugin being undefined if the name
+>, <Line: -        //did not have a plugin prefix.
+>, <Line: -        function splitPrefix(name) {
+>, <Line: -            var prefix,
+>, <Line: -            index = name ? name.indexOf('!') : -1;
+>, <Line: -            if (index > -1) {
+>, <Line: -                prefix = name.substring(0, index);
+>, <Line: -                name = name.substring(index + 1, name.length);
+>, <Line: -            }
+>, <Line: -            return [prefix, name];
+>, <Line: -        }
+>, <Line: -        /**
+>, <Line: -         * Creates a module mapping that includes plugin prefix, module
+>, <Line: -         * name, and path. If parentModuleMap is provided it will
+>, <Line: -         * also normalize the name via require.normalize()
+>, <Line: -         *
+>, <Line: -         * @param {String} name the module name
+>, <Line: -         * @param {String} [parentModuleMap] parent module map
+>, <Line: -         * for the module name, used to resolve relative names.
+>, <Line: -         * @param {Boolean} isNormalized: is the ID already normalized.
+>, <Line: -         * This is true if this call is done for a define() module ID.
+>, <Line: -         * @param {Boolean} applyMap: apply the map config to the ID.
+>, <Line: -         * Should only be true if this map is for a dependency.
+>, <Line: -         *
+>, <Line: -         * @returns {Object}
+>, <Line: -         */
+>, <Line: -        function makeModuleMap(name, parentModuleMap, isNormalized, applyMap) {
+>, <Line: -            var url, pluginModule, suffix, nameParts,
+>, <Line: -            prefix = null,
+>, <Line: -                parentName = parentModuleMap ? parentModuleMap.name : null,
+>, <Line: -                originalName = name,
+>, <Line: -                isDefine = true,
+>, <Line: -                normalizedName = '';
+>, <Line: -            //If no name, then it means it is a require call, generate an
+>, <Line: -            //internal name.
+>, <Line: -            if (!name) {
+>, <Line: -                isDefine = false;
+>, <Line: -                name = '_@r' + (requireCounter += 1);
+>, <Line: -            }
+>, <Line: -            nameParts = splitPrefix(name);
+>, <Line: -            prefix = nameParts[0];
+>, <Line: -            name = nameParts[1];
+>, <Line: -            if (prefix) {
+>, <Line: -                prefix = normalize(prefix, parentName, applyMap);
+>, <Line: -                pluginModule = getOwn(defined, prefix);
+>, <Line: -            }
+>, <Line: -            //Account for relative paths if there is a base name.
+>, <Line: -            if (name) {
+>, <Line: -                if (prefix) {
+>, <Line: -                    if (pluginModule && pluginModule.normalize) {
+>, <Line: -                        //Plugin is loaded, use its normalize method.
+>, <Line: -                        normalizedName = pluginModule.normalize(name, function(name) {
+>, <Line: -                            return normalize(name, parentName, applyMap);
+>, <Line: -                        });
+>, <Line: -                    } else {
+>, <Line: -                        normalizedName = normalize(name, parentName, applyMap);
+>, <Line: -                    }
+>, <Line: -                } else {
+>, <Line: -                    //A regular module.
+>, <Line: -                    normalizedName = normalize(name, parentName, applyMap);
+>, <Line: -                    //Normalized name may be a plugin ID due to map config
+>, <Line: -                    //application in normalize. The map config values must
+>, <Line: -                    //already be normalized, so do not need to redo that part.
+>, <Line: -                    nameParts = splitPrefix(normalizedName);
+>, <Line: -                    prefix = nameParts[0];
+>, <Line: -                    normalizedName = nameParts[1];
+>, <Line: -                    isNormalized = true;
+>, <Line: -                    url = context.nameToUrl(normalizedName);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            //If the id is a plugin id that cannot be determined if it needs
+>, <Line: -            //normalization, stamp it with a unique ID so two matching relative
+>, <Line: -            //ids that may conflict can be separate.
+>, <Line: -            suffix = prefix && !pluginModule && !isNormalized ? '_unnormalized' + (unnormalizedCounter += 1) : '';
+>, <Line: -            return {
+>, <Line: -                prefix: prefix,
+>, <Line: -                name: normalizedName,
+>, <Line: -                parentMap: parentModuleMap,
+>, <Line: -                unnormalized: !! suffix,
+>, <Line: -                url: url,
+>, <Line: -                originalName: originalName,
+>, <Line: -                isDefine: isDefine,
+>, <Line: -                id: (prefix ? prefix + '!' + normalizedName : normalizedName) + suffix
+>, <Line: -            };
+>, <Line: -        }
+>, <Line: -        function getModule(depMap) {
+>, <Line: -            var id = depMap.id,
+>, <Line: -                mod = getOwn(registry, id);
+>, <Line: -            if (!mod) {
+>, <Line: -                mod = registry[id] = new context.Module(depMap);
+>, <Line: -            }
+>, <Line: -            return mod;
+>, <Line: -        }
+>, <Line: -        function on(depMap, name, fn) {
+>, <Line: -            var id = depMap.id,
+>, <Line: -                mod = getOwn(registry, id);
+>, <Line: -            if (hasProp(defined, id) && (!mod || mod.defineEmitComplete)) {
+>, <Line: -                if (name === 'defined') {
+>, <Line: -                    fn(defined[id]);
+>, <Line: -                }
+>, <Line: -            } else {
+>, <Line: -                mod = getModule(depMap);
+>, <Line: -                if (mod.error && name === 'error') {
+>, <Line: -                    fn(mod.error);
+>, <Line: -                } else {
+>, <Line: -                    mod.on(name, fn);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        function onError(err, errback) {
+>, <Line: -            var ids = err.requireModules,
+>, <Line: -                notified = false;
+>, <Line: -            if (errback) {
+>, <Line: -                errback(err);
+>, <Line: -            } else {
+>, <Line: -                each(ids, function(id) {
+>, <Line: -                    var mod = getOwn(registry, id);
+>, <Line: -                    if (mod) {
+>, <Line: -                        //Set error on module, so it skips timeout checks.
+>, <Line: -                        mod.error = err;
+>, <Line: -                        if (mod.events.error) {
+>, <Line: -                            notified = true;
+>, <Line: -                            mod.emit('error', err);
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                });
+>, <Line: -                if (!notified) {
+>, <Line: -                    req.onError(err);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        /**
+>, <Line: -         * Internal method to transfer globalQueue items to this context's
+>, <Line: -         * defQueue.
+>, <Line: -         */
+>, <Line: -        function takeGlobalQueue() {
+>, <Line: -            //Push all the globalDefQueue items into the context's defQueue
+>, <Line: -            if (globalDefQueue.length) {
+>, <Line: -                //Array splice in the values since the context code has a
+>, <Line: -                //local var ref to defQueue, so cannot just reassign the one
+>, <Line: -                //on context.
+>, <Line: -                apsp.apply(defQueue, [defQueue.length - 1, 0].concat(globalDefQueue));
+>, <Line: -                globalDefQueue = [];
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        handlers = {
+>, <Line: -            'require': function(mod) {
+>, <Line: -                if (mod.require) {
+>, <Line: -                    return mod.require;
+>, <Line: -                } else {
+>, <Line: -                    return (mod.require = context.makeRequire(mod.map));
+>, <Line: -                }
+>, <Line: -            },
+>, <Line: -            'exports': function(mod) {
+>, <Line: -                mod.usingExports = true;
+>, <Line: -                if (mod.map.isDefine) {
+>, <Line: -                    if (mod.exports) {
+>, <Line: -                        return mod.exports;
+>, <Line: -                    } else {
+>, <Line: -                        return (mod.exports = defined[mod.map.id] = {});
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            },
+>, <Line: -            'module': function(mod) {
+>, <Line: -                if (mod.module) {
+>, <Line: -                    return mod.module;
+>, <Line: -                } else {
+>, <Line: -                    return (mod.module = {
+>, <Line: -                        id: mod.map.id,
+>, <Line: -                        uri: mod.map.url,
+>, <Line: -                        config: function() {
+>, <Line: -                            var c,
+>, <Line: -                            pkg = getOwn(config.pkgs, mod.map.id);
+>, <Line: -                            // For packages, only support config targeted
+>, <Line: -                            // at the main module.
+>, <Line: -                            c = pkg ? getOwn(config.config, mod.map.id + '/' + pkg.main) : getOwn(config.config, mod.map.id);
+>, <Line: -                            return c || {};
+>, <Line: -                        },
+>, <Line: -                        exports: defined[mod.map.id]
+>, <Line: -                    });
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        };
+>, <Line: -        function cleanRegistry(id) {
+>, <Line: -            //Clean up machinery used for waiting modules.
+>, <Line: -            delete registry[id];
+>, <Line: -            delete enabledRegistry[id];
+>, <Line: -        }
+>, <Line: -        function breakCycle(mod, traced, processed) {
+>, <Line: -            var id = mod.map.id;
+>, <Line: -            if (mod.error) {
+>, <Line: -                mod.emit('error', mod.error);
+>, <Line: -            } else {
+>, <Line: -                traced[id] = true;
+>, <Line: -                each(mod.depMaps, function(depMap, i) {
+>, <Line: -                    var depId = depMap.id,
+>, <Line: -                        dep = getOwn(registry, depId);
+>, <Line: -                    //Only force things that have not completed
+>, <Line: -                    //being defined, so still in the registry,
+>, <Line: -                    //and only if it has not been matched up
+>, <Line: -                    //in the module already.
+>, <Line: -                    if (dep && !mod.depMatched[i] && !processed[depId]) {
+>, <Line: -                        if (getOwn(traced, depId)) {
+>, <Line: -                            mod.defineDep(i, defined[depId]);
+>, <Line: -                            mod.check(); //pass false?
+>, <Line: -                        } else {
+>, <Line: -                            breakCycle(dep, traced, processed);
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                });
+>, <Line: -                processed[id] = true;
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        function checkLoaded() {
+>, <Line: -            var map, modId, err, usingPathFallback,
+>, <Line: -            waitInterval = config.waitSeconds * 1000,
+>, <Line: -                //It is possible to disable the wait interval by using waitSeconds of 0.
+>, <Line: -                expired = waitInterval && (context.startTime + waitInterval) < new Date().getTime(),
+>, <Line: -                noLoads = [],
+>, <Line: -                reqCalls = [],
+>, <Line: -                stillLoading = false,
+>, <Line: -                needCycleCheck = true;
+>, <Line: -            //Do not bother if this call was a result of a cycle break.
+>, <Line: -            if (inCheckLoaded) {
+>, <Line: -                return;
+>, <Line: -            }
+>, <Line: -            inCheckLoaded = true;
+>, <Line: -            //Figure out the state of all the modules.
+>, <Line: -            eachProp(enabledRegistry, function(mod) {
+>, <Line: -                map = mod.map;
+>, <Line: -                modId = map.id;
+>, <Line: -                //Skip things that are not enabled or in error state.
+>, <Line: -                if (!mod.enabled) {
+>, <Line: -                    return;
+>, <Line: -                }
+>, <Line: -                if (!map.isDefine) {
+>, <Line: -                    reqCalls.push(mod);
+>, <Line: -                }
+>, <Line: -                if (!mod.error) {
+>, <Line: -                    //If the module should be executed, and it has not
+>, <Line: -                    //been inited and time is up, remember it.
+>, <Line: -                    if (!mod.inited && expired) {
+>, <Line: -                        if (hasPathFallback(modId)) {
+>, <Line: -                            usingPathFallback = true;
+>, <Line: -                            stillLoading = true;
+>, <Line: -                        } else {
+>, <Line: -                            noLoads.push(modId);
+>, <Line: -                            removeScript(modId);
+>, <Line: -                        }
+>, <Line: -                    } else if (!mod.inited && mod.fetched && map.isDefine) {
+>, <Line: -                        stillLoading = true;
+>, <Line: -                        if (!map.prefix) {
+>, <Line: -                            //No reason to keep looking for unfinished
+>, <Line: -                            //loading. If the only stillLoading is a
+>, <Line: -                            //plugin resource though, keep going,
+>, <Line: -                            //because it may be that a plugin resource
+>, <Line: -                            //is waiting on a non-plugin cycle.
+>, <Line: -                            return (needCycleCheck = false);
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            });
+>, <Line: -            if (expired && noLoads.length) {
+>, <Line: -                //If wait time expired, throw error of unloaded modules.
+>, <Line: -                err = makeError('timeout', 'Load timeout for modules: ' + noLoads, null, noLoads);
+>, <Line: -                err.contextName = context.contextName;
+>, <Line: -                return onError(err);
+>, <Line: -            }
+>, <Line: -            //Not expired, check for a cycle.
+>, <Line: -            if (needCycleCheck) {
+>, <Line: -                each(reqCalls, function(mod) {
+>, <Line: -                    breakCycle(mod, {}, {});
+>, <Line: -                });
+>, <Line: -            }
+>, <Line: -            //If still waiting on loads, and the waiting load is something
+>, <Line: -            //other than a plugin resource, or there are still outstanding
+>, <Line: -            //scripts, then just try back later.
+>, <Line: -            if ((!expired || usingPathFallback) && stillLoading) {
+>, <Line: -                //Something is still waiting to load. Wait for it, but only
+>, <Line: -                //if a timeout is not already in effect.
+>, <Line: -                if ((isBrowser || isWebWorker) && !checkLoadedTimeoutId) {
+>, <Line: -                    checkLoadedTimeoutId = setTimeout(function() {
+>, <Line: -                        checkLoadedTimeoutId = 0;
+>, <Line: -                        checkLoaded();
+>, <Line: -                    }, 50);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            inCheckLoaded = false;
+>, <Line: -        }
+>, <Line: -        Module = function(map) {
+>, <Line: -            this.events = getOwn(undefEvents, map.id) || {};
+>, <Line: -            this.map = map;
+>, <Line: -            this.shim = getOwn(config.shim, map.id);
+>, <Line: -            this.depExports = [];
+>, <Line: -            this.depMaps = [];
+>, <Line: -            this.depMatched = [];
+>, <Line: -            this.pluginMaps = {};
+>, <Line: -            this.depCount = 0;
+>, <Line: -            /* this.exports this.factory
+>, <Line: -               this.depMaps = [],
+>, <Line: -               this.enabled, this.fetched
+>, <Line: -            */
+>, <Line: -        };
+>, <Line: -        Module.prototype = {
+>, <Line: -            init: function(depMaps, factory, errback, options) {
+>, <Line: -                options = options || {};
+>, <Line: -                //Do not do more inits if already done. Can happen if there
+>, <Line: -                //are multiple define calls for the same module. That is not
+>, <Line: -                //a normal, common case, but it is also not unexpected.
+>, <Line: -                if (this.inited) {
+>, <Line: -                    return;
+>, <Line: -                }
+>, <Line: -                this.factory = factory;
+>, <Line: -                if (errback) {
+>, <Line: -                    //Register for errors on this module.
+>, <Line: -                    this.on('error', errback);
+>, <Line: -                } else if (this.events.error) {
+>, <Line: -                    //If no errback already, but there are error listeners
+>, <Line: -                    //on this module, set up an errback to pass to the deps.
+>, <Line: -                    errback = bind(this, function(err) {
+>, <Line: -                        this.emit('error', err);
+>, <Line: -                    });
+>, <Line: -                }
+>, <Line: -                //Do a copy of the dependency array, so that
+>, <Line: -                //source inputs are not modified. For example
+>, <Line: -                //"shim" deps are passed in here directly, and
+>, <Line: -                //doing a direct modification of the depMaps array
+>, <Line: -                //would affect that config.
+>, <Line: -                this.depMaps = depMaps && depMaps.slice(0);
+>, <Line: -                this.errback = errback;
+>, <Line: -                //Indicate this module has be initialized
+>, <Line: -                this.inited = true;
+>, <Line: -                this.ignore = options.ignore;
+>, <Line: -                //Could have option to init this module in enabled mode,
+>, <Line: -                //or could have been previously marked as enabled. However,
+>, <Line: -                //the dependencies are not known until init is called. So
+>, <Line: -                //if enabled previously, now trigger dependencies as enabled.
+>, <Line: -                if (options.enabled || this.enabled) {
+>, <Line: -                    //Enable this module and dependencies.
+>, <Line: -                    //Will call this.check()
+>, <Line: -                    this.enable();
+>, <Line: -                } else {
+>, <Line: -                    this.check();
+>, <Line: -                }
+>, <Line: -            },
+>, <Line: -            defineDep: function(i, depExports) {
+>, <Line: -                //Because of cycles, defined callback for a given
+>, <Line: -                //export can be called more than once.
+>, <Line: -                if (!this.depMatched[i]) {
+>, <Line: -                    this.depMatched[i] = true;
+>, <Line: -                    this.depCount -= 1;
+>, <Line: -                    this.depExports[i] = depExports;
+>, <Line: -                }
+>, <Line: -            },
+>, <Line: -            fetch: function() {
+>, <Line: -                if (this.fetched) {
+>, <Line: -                    return;
+>, <Line: -                }
+>, <Line: -                this.fetched = true;
+>, <Line: -                context.startTime = (new Date()).getTime();
+>, <Line: -                var map = this.map;
+>, <Line: -                //If the manager is for a plugin managed resource,
+>, <Line: -                //ask the plugin to load it now.
+>, <Line: -                if (this.shim) {
+>, <Line: -                    context.makeRequire(this.map, {
+>, <Line: -                        enableBuildCallback: true
+>, <Line: -                    })(this.shim.deps || [], bind(this, function() {
+>, <Line: -                        return map.prefix ? this.callPlugin() : this.load();
+>, <Line: -                    }));
+>, <Line: -                } else {
+>, <Line: -                    //Regular dependency.
+>, <Line: -                    return map.prefix ? this.callPlugin() : this.load();
+>, <Line: -                }
+>, <Line: -            },
+>, <Line: -            load: function() {
+>, <Line: -                var url = this.map.url;
+>, <Line: -                //Regular dependency.
+>, <Line: -                if (!urlFetched[url]) {
+>, <Line: -                    urlFetched[url] = true;
+>, <Line: -                    context.load(this.map.id, url);
+>, <Line: -                }
+>, <Line: -            },
+>, <Line: -            /**
+>, <Line: -             * Checks if the module is ready to define itself, and if so,
+>, <Line: -             * define it.
+>, <Line: -             */
+>, <Line: -            check: function() {
+>, <Line: -                if (!this.enabled || this.enabling) {
+>, <Line: -                    return;
+>, <Line: -                }
+>, <Line: -                var err, cjsModule,
+>, <Line: -                id = this.map.id,
+>, <Line: -                    depExports = this.depExports,
+>, <Line: -                    exports = this.exports,
+>, <Line: -                    factory = this.factory;
+>, <Line: -                if (!this.inited) {
+>, <Line: -                    this.fetch();
+>, <Line: -                } else if (this.error) {
+>, <Line: -                    this.emit('error', this.error);
+>, <Line: -                } else if (!this.defining) {
+>, <Line: -                    //The factory could trigger another require call
+>, <Line: -                    //that would result in checking this module to
+>, <Line: -                    //define itself again. If already in the process
+>, <Line: -                    //of doing that, skip this work.
+>, <Line: -                    this.defining = true;
+>, <Line: -                    if (this.depCount < 1 && !this.defined) {
+>, <Line: -                        if (isFunction(factory)) {
+>, <Line: -                            //If there is an error listener, favor passing
+>, <Line: -                            //to that instead of throwing an error. However,
+>, <Line: -                            //only do it for define()'d  modules. require
+>, <Line: -                            //errbacks should not be called for failures in
+>, <Line: -                            //their callbacks (#699). However if a global
+>, <Line: -                            //onError is set, use that.
+>, <Line: -                            if ((this.events.error && this.map.isDefine) || req.onError !== defaultOnError) {
+>, <Line: -                                try {
+>, <Line: -                                    exports = context.execCb(id, factory, depExports, exports);
+>, <Line: -                                } catch (e) {
+>, <Line: -                                    err = e;
+>, <Line: -                                }
+>, <Line: -                            } else {
+>, <Line: -                                exports = context.execCb(id, factory, depExports, exports);
+>, <Line: -                            }
+>, <Line: -                            if (this.map.isDefine) {
+>, <Line: -                                //If setting exports via 'module' is in play,
+>, <Line: -                                //favor that over return value and exports. After that,
+>, <Line: -                                //favor a non-undefined return value over exports use.
+>, <Line: -                                cjsModule = this.module;
+>, <Line: -                                if (cjsModule && cjsModule.exports !== undefined &&
+>, <Line: -                                //Make sure it is not already the exports value
+>, <Line: -                                cjsModule.exports !== this.exports) {
+>, <Line: -                                    exports = cjsModule.exports;
+>, <Line: -                                } else if (exports === undefined && this.usingExports) {
+>, <Line: -                                    //exports already set the defined value.
+>, <Line: -                                    exports = this.exports;
+>, <Line: -                                }
+>, <Line: -                            }
+>, <Line: -                            if (err) {
+>, <Line: -                                err.requireMap = this.map;
+>, <Line: -                                err.requireModules = this.map.isDefine ? [this.map.id] : null;
+>, <Line: -                                err.requireType = this.map.isDefine ? 'define' : 'require';
+>, <Line: -                                return onError((this.error = err));
+>, <Line: -                            }
+>, <Line: -                        } else {
+>, <Line: -                            //Just a literal value
+>, <Line: -                            exports = factory;
+>, <Line: -                        }
+>, <Line: -                        this.exports = exports;
+>, <Line: -                        if (this.map.isDefine && !this.ignore) {
+>, <Line: -                            defined[id] = exports;
+>, <Line: -                            if (req.onResourceLoad) {
+>, <Line: -                                req.onResourceLoad(context, this.map, this.depMaps);
+>, <Line: -                            }
+>, <Line: -                        }
+>, <Line: -                        //Clean up
+>, <Line: -                        cleanRegistry(id);
+>, <Line: -                        this.defined = true;
+>, <Line: -                    }
+>, <Line: -                    //Finished the define stage. Allow calling check again
+>, <Line: -                    //to allow define notifications below in the case of a
+>, <Line: -                    //cycle.
+>, <Line: -                    this.defining = false;
+>, <Line: -                    if (this.defined && !this.defineEmitted) {
+>, <Line: -                        this.defineEmitted = true;
+>, <Line: -                        this.emit('defined', this.exports);
+>, <Line: -                        this.defineEmitComplete = true;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            },
+>, <Line: -            callPlugin: function() {
+>, <Line: -                var map = this.map,
+>, <Line: -                    id = map.id,
+>, <Line: -                    //Map already normalized the prefix.
+>, <Line: -                    pluginMap = makeModuleMap(map.prefix);
+>, <Line: -                //Mark this as a dependency for this plugin, so it
+>, <Line: -                //can be traced for cycles.
+>, <Line: -                this.depMaps.push(pluginMap);
+>, <Line: -                on(pluginMap, 'defined', bind(this, function(plugin) {
+>, <Line: -                    var load, normalizedMap, normalizedMod,
+>, <Line: -                    name = this.map.name,
+>, <Line: -                        parentName = this.map.parentMap ? this.map.parentMap.name : null,
+>, <Line: -                        localRequire = context.makeRequire(map.parentMap, {
+>, <Line: -                            enableBuildCallback: true
+>, <Line: -                        });
+>, <Line: -                    //If current map is not normalized, wait for that
+>, <Line: -                    //normalized name to load instead of continuing.
+>, <Line: -                    if (this.map.unnormalized) {
+>, <Line: -                        //Normalize the ID if the plugin allows it.
+>, <Line: -                        if (plugin.normalize) {
+>, <Line: -                            name = plugin.normalize(name, function(name) {
+>, <Line: -                                return normalize(name, parentName, true);
+>, <Line: -                            }) || '';
+>, <Line: -                        }
+>, <Line: -                        //prefix and name should already be normalized, no need
+>, <Line: -                        //for applying map config again either.
+>, <Line: -                        normalizedMap = makeModuleMap(map.prefix + '!' + name,
+>, <Line: -                        this.map.parentMap);
+>, <Line: -                        on(normalizedMap, 'defined', bind(this, function(value) {
+>, <Line: -                            this.init([], function() {
+>, <Line: -                                return value;
+>, <Line: -                            }, null, {
+>, <Line: -                                enabled: true,
+>, <Line: -                                ignore: true
+>, <Line: -                            });
+>, <Line: -                        }));
+>, <Line: -                        normalizedMod = getOwn(registry, normalizedMap.id);
+>, <Line: -                        if (normalizedMod) {
+>, <Line: -                            //Mark this as a dependency for this plugin, so it
+>, <Line: -                            //can be traced for cycles.
+>, <Line: -                            this.depMaps.push(normalizedMap);
+>, <Line: -                            if (this.events.error) {
+>, <Line: -                                normalizedMod.on('error', bind(this, function(err) {
+>, <Line: -                                    this.emit('error', err);
+>, <Line: -                                }));
+>, <Line: -                            }
+>, <Line: -                            normalizedMod.enable();
+>, <Line: -                        }
+>, <Line: -                        return;
+>, <Line: -                    }
+>, <Line: -                    load = bind(this, function(value) {
+>, <Line: -                        this.init([], function() {
+>, <Line: -                            return value;
+>, <Line: -                        }, null, {
+>, <Line: -                            enabled: true
+>, <Line: -                        });
+>, <Line: -                    });
+>, <Line: -                    load.error = bind(this, function(err) {
+>, <Line: -                        this.inited = true;
+>, <Line: -                        this.error = err;
+>, <Line: -                        err.requireModules = [id];
+>, <Line: -                        //Remove temp unnormalized modules for this module,
+>, <Line: -                        //since they will never be resolved otherwise now.
+>, <Line: -                        eachProp(registry, function(mod) {
+>, <Line: -                            if (mod.map.id.indexOf(id + '_unnormalized') === 0) {
+>, <Line: -                                cleanRegistry(mod.map.id);
+>, <Line: -                            }
+>, <Line: -                        });
+>, <Line: -                        onError(err);
+>, <Line: -                    });
+>, <Line: -                    //Allow plugins to load other code without having to know the
+>, <Line: -                    //context or how to 'complete' the load.
+>, <Line: -                    load.fromText = bind(this, function(text, textAlt) {
+>, <Line: -                        /*jslint evil: true */
+>, <Line: -                        var moduleName = map.name,
+>, <Line: -                            moduleMap = makeModuleMap(moduleName),
+>, <Line: -                            hasInteractive = useInteractive;
+>, <Line: -                        //As of 2.1.0, support just passing the text, to reinforce
+>, <Line: -                        //fromText only being called once per resource. Still
+>, <Line: -                        //support old style of passing moduleName but discard
+>, <Line: -                        //that moduleName in favor of the internal ref.
+>, <Line: -                        if (textAlt) {
+>, <Line: -                            text = textAlt;
+>, <Line: -                        }
+>, <Line: -                        //Turn off interactive script matching for IE for any define
+>, <Line: -                        //calls in the text, then turn it back on at the end.
+>, <Line: -                        if (hasInteractive) {
+>, <Line: -                            useInteractive = false;
+>, <Line: -                        }
+>, <Line: -                        //Prime the system by creating a module instance for
+>, <Line: -                        //it.
+>, <Line: -                        getModule(moduleMap);
+>, <Line: -                        //Transfer any config to this other module.
+>, <Line: -                        if (hasProp(config.config, id)) {
+>, <Line: -                            config.config[moduleName] = config.config[id];
+>, <Line: -                        }
+>, <Line: -                        try {
+>, <Line: -                            req.exec(text);
+>, <Line: -                        } catch (e) {
+>, <Line: -                            return onError(makeError('fromtexteval', 'fromText eval for ' + id + ' failed: ' + e,
+>, <Line: -                            e, [id]));
+>, <Line: -                        }
+>, <Line: -                        if (hasInteractive) {
+>, <Line: -                            useInteractive = true;
+>, <Line: -                        }
+>, <Line: -                        //Mark this as a dependency for the plugin
+>, <Line: -                        //resource
+>, <Line: -                        this.depMaps.push(moduleMap);
+>, <Line: -                        //Support anonymous modules.
+>, <Line: -                        context.completeLoad(moduleName);
+>, <Line: -                        //Bind the value of that module to the value for this
+>, <Line: -                        //resource ID.
+>, <Line: -                        localRequire([moduleName], load);
+>, <Line: -                    });
+>, <Line: -                    //Use parentName here since the plugin's name is not reliable,
+>, <Line: -                    //could be some weird string with no path that actually wants to
+>, <Line: -                    //reference the parentName's path.
+>, <Line: -                    plugin.load(map.name, localRequire, load, config);
+>, <Line: -                }));
+>, <Line: -                context.enable(pluginMap, this);
+>, <Line: -                this.pluginMaps[pluginMap.id] = pluginMap;
+>, <Line: -            },
+>, <Line: -            enable: function() {
+>, <Line: -                enabledRegistry[this.map.id] = this;
+>, <Line: -                this.enabled = true;
+>, <Line: -                //Set flag mentioning that the module is enabling,
+>, <Line: -                //so that immediate calls to the defined callbacks
+>, <Line: -                //for dependencies do not trigger inadvertent load
+>, <Line: -                //with the depCount still being zero.
+>, <Line: -                this.enabling = true;
+>, <Line: -                //Enable each dependency
+>, <Line: -                each(this.depMaps, bind(this, function(depMap, i) {
+>, <Line: -                    var id, mod, handler;
+>, <Line: -                    if (typeof depMap === 'string') {
+>, <Line: -                        //Dependency needs to be converted to a depMap
+>, <Line: -                        //and wired up to this module.
+>, <Line: -                        depMap = makeModuleMap(depMap, (this.map.isDefine ? this.map : this.map.parentMap),
+>, <Line: -                        false, !this.skipMap);
+>, <Line: -                        this.depMaps[i] = depMap;
+>, <Line: -                        handler = getOwn(handlers, depMap.id);
+>, <Line: -                        if (handler) {
+>, <Line: -                            this.depExports[i] = handler(this);
+>, <Line: -                            return;
+>, <Line: -                        }
+>, <Line: -                        this.depCount += 1;
+>, <Line: -                        on(depMap, 'defined', bind(this, function(depExports) {
+>, <Line: -                            this.defineDep(i, depExports);
+>, <Line: -                            this.check();
+>, <Line: -                        }));
+>, <Line: -                        if (this.errback) {
+>, <Line: -                            on(depMap, 'error', bind(this, this.errback));
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                    id = depMap.id;
+>, <Line: -                    mod = registry[id];
+>, <Line: -                    //Skip special modules like 'require', 'exports', 'module'
+>, <Line: -                    //Also, don't call enable if it is already enabled,
+>, <Line: -                    //important in circular dependency cases.
+>, <Line: -                    if (!hasProp(handlers, id) && mod && !mod.enabled) {
+>, <Line: -                        context.enable(depMap, this);
+>, <Line: -                    }
+>, <Line: -                }));
+>, <Line: -                //Enable each plugin that is used in
+>, <Line: -                //a dependency
+>, <Line: -                eachProp(this.pluginMaps, bind(this, function(pluginMap) {
+>, <Line: -                    var mod = getOwn(registry, pluginMap.id);
+>, <Line: -                    if (mod && !mod.enabled) {
+>, <Line: -                        context.enable(pluginMap, this);
+>, <Line: -                    }
+>, <Line: -                }));
+>, <Line: -                this.enabling = false;
+>, <Line: -                this.check();
+>, <Line: -            },
+>, <Line: -            on: function(name, cb) {
+>, <Line: -                var cbs = this.events[name];
+>, <Line: -                if (!cbs) {
+>, <Line: -                    cbs = this.events[name] = [];
+>, <Line: -                }
+>, <Line: -                cbs.push(cb);
+>, <Line: -            },
+>, <Line: -            emit: function(name, evt) {
+>, <Line: -                each(this.events[name], function(cb) {
+>, <Line: -                    cb(evt);
+>, <Line: -                });
+>, <Line: -                if (name === 'error') {
+>, <Line: -                    //Now that the error handler was triggered, remove
+>, <Line: -                    //the listeners, since this broken Module instance
+>, <Line: -                    //can stay around for a while in the registry.
+>, <Line: -                    delete this.events[name];
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        };
+>, <Line: -        function callGetModule(args) {
+>, <Line: -            //Skip modules already defined.
+>, <Line: -            if (!hasProp(defined, args[0])) {
+>, <Line: -                getModule(makeModuleMap(args[0], null, true)).init(args[1], args[2]);
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        function removeListener(node, func, name, ieName) {
+>, <Line: -            //Favor detachEvent because of IE9
+>, <Line: -            //issue, see attachEvent/addEventListener comment elsewhere
+>, <Line: -            //in this file.
+>, <Line: -            if (node.detachEvent && !isOpera) {
+>, <Line: -                //Probably IE. If not it will throw an error, which will be
+>, <Line: -                //useful to know.
+>, <Line: -                if (ieName) {
+>, <Line: -                    node.detachEvent(ieName, func);
+>, <Line: -                }
+>, <Line: -            } else {
+>, <Line: -                node.removeEventListener(name, func, false);
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        /**
+>, <Line: -         * Given an event from a script node, get the requirejs info from it,
+>, <Line: -         * and then removes the event listeners on the node.
+>, <Line: -         * @param {Event} evt
+>, <Line: -         * @returns {Object}
+>, <Line: -         */
+>, <Line: -        function getScriptData(evt) {
+>, <Line: -            //Using currentTarget instead of target for Firefox 2.0's sake. Not
+>, <Line: -            //all old browsers will be supported, but this one was easy enough
+>, <Line: -            //to support and still makes sense.
+>, <Line: -            var node = evt.currentTarget || evt.srcElement;
+>, <Line: -            //Remove the listeners once here.
+>, <Line: -            removeListener(node, context.onScriptLoad, 'load', 'onreadystatechange');
+>, <Line: -            removeListener(node, context.onScriptError, 'error');
+>, <Line: -            return {
+>, <Line: -                node: node,
+>, <Line: -                id: node && node.getAttribute('data-requiremodule')
+>, <Line: -            };
+>, <Line: -        }
+>, <Line: -        function intakeDefines() {
+>, <Line: -            var args;
+>, <Line: -            //Any defined modules in the global queue, intake them now.
+>, <Line: -            takeGlobalQueue();
+>, <Line: -            //Make sure any remaining defQueue items get properly processed.
+>, <Line: -            while (defQueue.length) {
+>, <Line: -                args = defQueue.shift();
+>, <Line: -                if (args[0] === null) {
+>, <Line: -                    return onError(makeError('mismatch', 'Mismatched anonymous define() module: ' + args[args.length - 1]));
+>, <Line: -                } else {
+>, <Line: -                    //args are id, deps, factory. Should be normalized by the
+>, <Line: -                    //define() function.
+>, <Line: -                    callGetModule(args);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        context = {
+>, <Line: -            config: config,
+>, <Line: -            contextName: contextName,
+>, <Line: -            registry: registry,
+>, <Line: -            defined: defined,
+>, <Line: -            urlFetched: urlFetched,
+>, <Line: -            defQueue: defQueue,
+>, <Line: -            Module: Module,
+>, <Line: -            makeModuleMap: makeModuleMap,
+>, <Line: -            nextTick: req.nextTick,
+>, <Line: -            onError: onError,
+>, <Line: -            /**
+>, <Line: -             * Set a configuration for the context.
+>, <Line: -             * @param {Object} cfg config object to integrate.
+>, <Line: -             */
+>, <Line: -            configure: function(cfg) {
+>, <Line: -                //Make sure the baseUrl ends in a slash.
+>, <Line: -                if (cfg.baseUrl) {
+>, <Line: -                    if (cfg.baseUrl.charAt(cfg.baseUrl.length - 1) !== '/') {
+>, <Line: -                        cfg.baseUrl += '/';
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -                //Save off the paths and packages since they require special processing,
+>, <Line: -                //they are additive.
+>, <Line: -                var pkgs = config.pkgs,
+>, <Line: -                    shim = config.shim,
+>, <Line: -                    objs = {
+>, <Line: -                        paths: true,
+>, <Line: -                        config: true,
+>, <Line: -                        map: true
+>, <Line: -                    };
+>, <Line: -                eachProp(cfg, function(value, prop) {
+>, <Line: -                    if (objs[prop]) {
+>, <Line: -                        if (prop === 'map') {
+>, <Line: -                            if (!config.map) {
+>, <Line: -                                config.map = {};
+>, <Line: -                            }
+>, <Line: -                            mixin(config[prop], value, true, true);
+>, <Line: -                        } else {
+>, <Line: -                            mixin(config[prop], value, true);
+>, <Line: -                        }
+>, <Line: -                    } else {
+>, <Line: -                        config[prop] = value;
+>, <Line: -                    }
+>, <Line: -                });
+>, <Line: -                //Merge shim
+>, <Line: -                if (cfg.shim) {
+>, <Line: -                    eachProp(cfg.shim, function(value, id) {
+>, <Line: -                        //Normalize the structure
+>, <Line: -                        if (isArray(value)) {
+>, <Line: -                            value = {
+>, <Line: -                                deps: value
+>, <Line: -                            };
+>, <Line: -                        }
+>, <Line: -                        if ((value.exports || value.init) && !value.exportsFn) {
+>, <Line: -                            value.exportsFn = context.makeShimExports(value);
+>, <Line: -                        }
+>, <Line: -                        shim[id] = value;
+>, <Line: -                    });
+>, <Line: -                    config.shim = shim;
+>, <Line: -                }
+>, <Line: -                //Adjust packages if necessary.
+>, <Line: -                if (cfg.packages) {
+>, <Line: -                    each(cfg.packages, function(pkgObj) {
+>, <Line: -                        var location;
+>, <Line: -                        pkgObj = typeof pkgObj === 'string' ? {
+>, <Line: -                            name: pkgObj
+>, <Line: -                        } : pkgObj;
+>, <Line: -                        location = pkgObj.location;
+>, <Line: -                        //Create a brand new object on pkgs, since currentPackages can
+>, <Line: -                        //be passed in again, and config.pkgs is the internal transformed
+>, <Line: -                        //state for all package configs.
+>, <Line: -                        pkgs[pkgObj.name] = {
+>, <Line: -                            name: pkgObj.name,
+>, <Line: -                            location: location || pkgObj.name,
+>, <Line: -                            //Remove leading dot in main, so main paths are normalized,
+>, <Line: -                            //and remove any trailing .js, since different package
+>, <Line: -                            //envs have different conventions: some use a module name,
+>, <Line: -                            //some use a file name.
+>, <Line: -                            main: (pkgObj.main || 'main')
+>, <Line: -                                .replace(currDirRegExp, '')
+>, <Line: -                                .replace(jsSuffixRegExp, '')
+>, <Line: -                        };
+>, <Line: -                    });
+>, <Line: -                    //Done with modifications, assing packages back to context config
+>, <Line: -                    config.pkgs = pkgs;
+>, <Line: -                }
+>, <Line: -                //If there are any "waiting to execute" modules in the registry,
+>, <Line: -                //update the maps for them, since their info, like URLs to load,
+>, <Line: -                //may have changed.
+>, <Line: -                eachProp(registry, function(mod, id) {
+>, <Line: -                    //If module already has init called, since it is too
+>, <Line: -                    //late to modify them, and ignore unnormalized ones
+>, <Line: -                    //since they are transient.
+>, <Line: -                    if (!mod.inited && !mod.map.unnormalized) {
+>, <Line: -                        mod.map = makeModuleMap(id);
+>, <Line: -                    }
+>, <Line: -                });
+>, <Line: -                //If a deps array or a config callback is specified, then call
+>, <Line: -                //require with those args. This is useful when require is defined as a
+>, <Line: -                //config object before require.js is loaded.
+>, <Line: -                if (cfg.deps || cfg.callback) {
+>, <Line: -                    context.require(cfg.deps || [], cfg.callback);
+>, <Line: -                }
+>, <Line: -            },
+>, <Line: -            makeShimExports: function(value) {
+>, <Line: -                function fn() {
+>, <Line: -                    var ret;
+>, <Line: -                    if (value.init) {
+>, <Line: -                        ret = value.init.apply(global, arguments);
+>, <Line: -                    }
+>, <Line: -                    return ret || (value.exports && getGlobal(value.exports));
+>, <Line: -                }
+>, <Line: -                return fn;
+>, <Line: -            },
+>, <Line: -            makeRequire: function(relMap, options) {
+>, <Line: -                options = options || {};
+>, <Line: -                function localRequire(deps, callback, errback) {
+>, <Line: -                    var id, map, requireMod;
+>, <Line: -                    if (options.enableBuildCallback && callback && isFunction(callback)) {
+>, <Line: -                        callback.__requireJsBuild = true;
+>, <Line: -                    }
+>, <Line: -                    if (typeof deps === 'string') {
+>, <Line: -                        if (isFunction(callback)) {
+>, <Line: -                            //Invalid call
+>, <Line: -                            return onError(makeError('requireargs', 'Invalid require call'), errback);
+>, <Line: -                        }
+>, <Line: -                        //If require|exports|module are requested, get the
+>, <Line: -                        //value for them from the special handlers. Caveat:
+>, <Line: -                        //this only works while module is being defined.
+>, <Line: -                        if (relMap && hasProp(handlers, deps)) {
+>, <Line: -                            return handlers[deps](registry[relMap.id]);
+>, <Line: -                        }
+>, <Line: -                        //Synchronous access to one module. If require.get is
+>, <Line: -                        //available (as in the Node adapter), prefer that.
+>, <Line: -                        if (req.get) {
+>, <Line: -                            return req.get(context, deps, relMap, localRequire);
+>, <Line: -                        }
+>, <Line: -                        //Normalize module name, if it contains . or ..
+>, <Line: -                        map = makeModuleMap(deps, relMap, false, true);
+>, <Line: -                        id = map.id;
+>, <Line: -                        if (!hasProp(defined, id)) {
+>, <Line: -                            return onError(makeError('notloaded', 'Module name "' + id + '" has not been loaded yet for context: ' + contextName + (relMap ? '' : '. Use require([])')));
+>, <Line: -                        }
+>, <Line: -                        return defined[id];
+>, <Line: -                    }
+>, <Line: -                    //Grab defines waiting in the global queue.
+>, <Line: -                    intakeDefines();
+>, <Line: -                    //Mark all the dependencies as needing to be loaded.
+>, <Line: -                    context.nextTick(function() {
+>, <Line: -                        //Some defines could have been added since the
+>, <Line: -                        //require call, collect them.
+>, <Line: -                        intakeDefines();
+>, <Line: -                        requireMod = getModule(makeModuleMap(null, relMap));
+>, <Line: -                        //Store if map config should be applied to this require
+>, <Line: -                        //call for dependencies.
+>, <Line: -                        requireMod.skipMap = options.skipMap;
+>, <Line: -                        requireMod.init(deps, callback, errback, {
+>, <Line: -                            enabled: true
+>, <Line: -                        });
+>, <Line: -                        checkLoaded();
+>, <Line: -                    });
+>, <Line: -                    return localRequire;
+>, <Line: -                }
+>, <Line: -                mixin(localRequire, {
+>, <Line: -                    isBrowser: isBrowser,
+>, <Line: -                    /**
+>, <Line: -                     * Converts a module name + .extension into an URL path.
+>, <Line: -                     * *Requires* the use of a module name. It does not support using
+>, <Line: -                     * plain URLs like nameToUrl.
+>, <Line: -                     */
+>, <Line: -                    toUrl: function(moduleNamePlusExt) {
+>, <Line: -                        var ext,
+>, <Line: -                        index = moduleNamePlusExt.lastIndexOf('.'),
+>, <Line: -                            segment = moduleNamePlusExt.split('/')[0],
+>, <Line: -                            isRelative = segment === '.' || segment === '..';
+>, <Line: -                        //Have a file extension alias, and it is not the
+>, <Line: -                        //dots from a relative path.
+>, <Line: -                        if (index !== -1 && (!isRelative || index > 1)) {
+>, <Line: -                            ext = moduleNamePlusExt.substring(index, moduleNamePlusExt.length);
+>, <Line: -                            moduleNamePlusExt = moduleNamePlusExt.substring(0, index);
+>, <Line: -                        }
+>, <Line: -                        return context.nameToUrl(normalize(moduleNamePlusExt,
+>, <Line: -                        relMap && relMap.id, true), ext, true);
+>, <Line: -                    },
+>, <Line: -                    defined: function(id) {
+>, <Line: -                        return hasProp(defined, makeModuleMap(id, relMap, false, true).id);
+>, <Line: -                    },
+>, <Line: -                    specified: function(id) {
+>, <Line: -                        id = makeModuleMap(id, relMap, false, true).id;
+>, <Line: -                        return hasProp(defined, id) || hasProp(registry, id);
+>, <Line: -                    }
+>, <Line: -                });
+>, <Line: -                //Only allow undef on top level require calls
+>, <Line: -                if (!relMap) {
+>, <Line: -                    localRequire.undef = function(id) {
+>, <Line: -                        //Bind any waiting define() calls to this context,
+>, <Line: -                        //fix for #408
+>, <Line: -                        takeGlobalQueue();
+>, <Line: -                        var map = makeModuleMap(id, relMap, true),
+>, <Line: -                            mod = getOwn(registry, id);
+>, <Line: -                        delete defined[id];
+>, <Line: -                        delete urlFetched[map.url];
+>, <Line: -                        delete undefEvents[id];
+>, <Line: -                        if (mod) {
+>, <Line: -                            //Hold on to listeners in case the
+>, <Line: -                            //module will be attempted to be reloaded
+>, <Line: -                            //using a different config.
+>, <Line: -                            if (mod.events.defined) {
+>, <Line: -                                undefEvents[id] = mod.events;
+>, <Line: -                            }
+>, <Line: -                            cleanRegistry(id);
+>, <Line: -                        }
+>, <Line: -                    };
+>, <Line: -                }
+>, <Line: -                return localRequire;
+>, <Line: -            },
+>, <Line: -            /**
+>, <Line: -             * Called to enable a module if it is still in the registry
+>, <Line: -             * awaiting enablement. A second arg, parent, the parent module,
+>, <Line: -             * is passed in for context, when this method is overriden by
+>, <Line: -             * the optimizer. Not shown here to keep code compact.
+>, <Line: -             */
+>, <Line: -            enable: function(depMap) {
+>, <Line: -                var mod = getOwn(registry, depMap.id);
+>, <Line: -                if (mod) {
+>, <Line: -                    getModule(depMap).enable();
+>, <Line: -                }
+>, <Line: -            },
+>, <Line: -            /**
+>, <Line: -             * Internal method used by environment adapters to complete a load event.
+>, <Line: -             * A load event could be a script load or just a load pass from a synchronous
+>, <Line: -             * load call.
+>, <Line: -             * @param {String} moduleName the name of the module to potentially complete.
+>, <Line: -             */
+>, <Line: -            completeLoad: function(moduleName) {
+>, <Line: -                var found, args, mod,
+>, <Line: -                shim = getOwn(config.shim, moduleName) || {},
+>, <Line: -                shExports = shim.exports;
+>, <Line: -                takeGlobalQueue();
+>, <Line: -                while (defQueue.length) {
+>, <Line: -                    args = defQueue.shift();
+>, <Line: -                    if (args[0] === null) {
+>, <Line: -                        args[0] = moduleName;
+>, <Line: -                        //If already found an anonymous module and bound it
+>, <Line: -                        //to this name, then this is some other anon module
+>, <Line: -                        //waiting for its completeLoad to fire.
+>, <Line: -                        if (found) {
+>, <Line: -                            break;
+>, <Line: -                        }
+>, <Line: -                        found = true;
+>, <Line: -                    } else if (args[0] === moduleName) {
+>, <Line: -                        //Found matching define call for this script!
+>, <Line: -                        found = true;
+>, <Line: -                    }
+>, <Line: -                    callGetModule(args);
+>, <Line: -                }
+>, <Line: -                //Do this after the cycle of callGetModule in case the result
+>, <Line: -                //of those calls/init calls changes the registry.
+>, <Line: -                mod = getOwn(registry, moduleName);
+>, <Line: -                if (!found && !hasProp(defined, moduleName) && mod && !mod.inited) {
+>, <Line: -                    if (config.enforceDefine && (!shExports || !getGlobal(shExports))) {
+>, <Line: -                        if (hasPathFallback(moduleName)) {
+>, <Line: -                            return;
+>, <Line: -                        } else {
+>, <Line: -                            return onError(makeError('nodefine', 'No define call for ' + moduleName,
+>, <Line: -                            null, [moduleName]));
+>, <Line: -                        }
+>, <Line: -                    } else {
+>, <Line: -                        //A script that does not call define(), so just simulate
+>, <Line: -                        //the call for it.
+>, <Line: -                        callGetModule([moduleName, (shim.deps || []), shim.exportsFn]);
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -                checkLoaded();
+>, <Line: -            },
+>, <Line: -            /**
+>, <Line: -             * Converts a module name to a file path. Supports cases where
+>, <Line: -             * moduleName may actually be just an URL.
+>, <Line: -             * Note that it **does not** call normalize on the moduleName,
+>, <Line: -             * it is assumed to have already been normalized. This is an
+>, <Line: -             * internal API, not a public one. Use toUrl for the public API.
+>, <Line: -             */
+>, <Line: -            nameToUrl: function(moduleName, ext, skipExt) {
+>, <Line: -                var paths, pkgs, pkg, pkgPath, syms, i, parentModule, url,
+>, <Line: -                parentPath;
+>, <Line: -                //If a colon is in the URL, it indicates a protocol is used and it is just
+>, <Line: -                //an URL to a file, or if it starts with a slash, contains a query arg (i.e. ?)
+>, <Line: -                //or ends with .js, then assume the user meant to use an url and not a module id.
+>, <Line: -                //The slash is important for protocol-less URLs as well as full paths.
+>, <Line: -                if (req.jsExtRegExp.test(moduleName)) {
+>, <Line: -                    //Just a plain path, not module name lookup, so just return it.
+>, <Line: -                    //Add extension if it is included. This is a bit wonky, only non-.js things pass
+>, <Line: -                    //an extension, this method probably needs to be reworked.
+>, <Line: -                    url = moduleName + (ext || '');
+>, <Line: -                } else {
+>, <Line: -                    //A module that needs to be converted to a path.
+>, <Line: -                    paths = config.paths;
+>, <Line: -                    pkgs = config.pkgs;
+>, <Line: -                    syms = moduleName.split('/');
+>, <Line: -                    //For each module name segment, see if there is a path
+>, <Line: -                    //registered for it. Start with most specific name
+>, <Line: -                    //and work up from it.
+>, <Line: -                    for (i = syms.length; i > 0; i -= 1) {
+>, <Line: -                        parentModule = syms.slice(0, i).join('/');
+>, <Line: -                        pkg = getOwn(pkgs, parentModule);
+>, <Line: -                        parentPath = getOwn(paths, parentModule);
+>, <Line: -                        if (parentPath) {
+>, <Line: -                            //If an array, it means there are a few choices,
+>, <Line: -                            //Choose the one that is desired
+>, <Line: -                            if (isArray(parentPath)) {
+>, <Line: -                                parentPath = parentPath[0];
+>, <Line: -                            }
+>, <Line: -                            syms.splice(0, i, parentPath);
+>, <Line: -                            break;
+>, <Line: -                        } else if (pkg) {
+>, <Line: -                            //If module name is just the package name, then looking
+>, <Line: -                            //for the main module.
+>, <Line: -                            if (moduleName === pkg.name) {
+>, <Line: -                                pkgPath = pkg.location + '/' + pkg.main;
+>, <Line: -                            } else {
+>, <Line: -                                pkgPath = pkg.location;
+>, <Line: -                            }
+>, <Line: -                            syms.splice(0, i, pkgPath);
+>, <Line: -                            break;
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                    //Join the path parts together, then figure out if baseUrl is needed.
+>, <Line: -                    url = syms.join('/');
+>, <Line: -                    url += (ext || (/\?/.test(url) || skipExt ? '' : '.js'));
+>, <Line: -                    url = (url.charAt(0) === '/' || url.match(/^[\w\+\.\-]+:/) ? '' : config.baseUrl) + url;
+>, <Line: -                }
+>, <Line: -                return config.urlArgs ? url + ((url.indexOf('?') === -1 ? '?' : '&') + config.urlArgs) : url;
+>, <Line: -            },
+>, <Line: -            //Delegates to req.load. Broken out as a separate function to
+>, <Line: -            //allow overriding in the optimizer.
+>, <Line: -            load: function(id, url) {
+>, <Line: -                req.load(context, id, url);
+>, <Line: -            },
+>, <Line: -            /**
+>, <Line: -             * Executes a module callback function. Broken out as a separate function
+>, <Line: -             * solely to allow the build system to sequence the files in the built
+>, <Line: -             * layer in the right sequence.
+>, <Line: -             *
+>, <Line: -             * @private
+>, <Line: -             */
+>, <Line: -            execCb: function(name, callback, args, exports) {
+>, <Line: -                return callback.apply(exports, args);
+>, <Line: -            },
+>, <Line: -            /**
+>, <Line: -             * callback for script loads, used to check status of loading.
+>, <Line: -             *
+>, <Line: -             * @param {Event} evt the event from the browser for the script
+>, <Line: -             * that was loaded.
+>, <Line: -             */
+>, <Line: -            onScriptLoad: function(evt) {
+>, <Line: -                //Using currentTarget instead of target for Firefox 2.0's sake. Not
+>, <Line: -                //all old browsers will be supported, but this one was easy enough
+>, <Line: -                //to support and still makes sense.
+>, <Line: -                if (evt.type === 'load' || (readyRegExp.test((evt.currentTarget || evt.srcElement).readyState))) {
+>, <Line: -                    //Reset interactive script so a script node is not held onto for
+>, <Line: -                    //to long.
+>, <Line: -                    interactiveScript = null;
+>, <Line: -                    //Pull out the name of the module and the context.
+>, <Line: -                    var data = getScriptData(evt);
+>, <Line: -                    context.completeLoad(data.id);
+>, <Line: -                }
+>, <Line: -            },
+>, <Line: -            /**
+>, <Line: -             * Callback for script errors.
+>, <Line: -             */
+>, <Line: -            onScriptError: function(evt) {
+>, <Line: -                var data = getScriptData(evt);
+>, <Line: -                if (!hasPathFallback(data.id)) {
+>, <Line: -                    return onError(makeError('scripterror', 'Script error for: ' + data.id, evt, [data.id]));
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        };
+>, <Line: -        context.require = context.makeRequire();
+>, <Line: -        return context;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Main entry point.
+>, <Line: -     *
+>, <Line: -     * If the only argument to require is a string, then the module that
+>, <Line: -     * is represented by that string is fetched for the appropriate context.
+>, <Line: -     *
+>, <Line: -     * If the first argument is an array, then it will be treated as an array
+>, <Line: -     * of dependency string names to fetch. An optional function callback can
+>, <Line: -     * be specified to execute when all of those dependencies are available.
+>, <Line: -     *
+>, <Line: -     * Make a local req variable to help Caja compliance (it assumes things
+>, <Line: -     * on a require that are not standardized), and to give a short
+>, <Line: -     * name for minification/local scope use.
+>, <Line: -     */
+>, <Line: -    req = requirejs = function(deps, callback, errback, optional) {
+>, <Line: -        //Find the right context, use default
+>, <Line: -        var context, config,
+>, <Line: -        contextName = defContextName;
+>, <Line: -        // Determine if have config object in the call.
+>, <Line: -        if (!isArray(deps) && typeof deps !== 'string') {
+>, <Line: -            // deps is a config object
+>, <Line: -            config = deps;
+>, <Line: -            if (isArray(callback)) {
+>, <Line: -                // Adjust args if there are dependencies
+>, <Line: -                deps = callback;
+>, <Line: -                callback = errback;
+>, <Line: -                errback = optional;
+>, <Line: -            } else {
+>, <Line: -                deps = [];
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        if (config && config.context) {
+>, <Line: -            contextName = config.context;
+>, <Line: -        }
+>, <Line: -        context = getOwn(contexts, contextName);
+>, <Line: -        if (!context) {
+>, <Line: -            context = contexts[contextName] = req.s.newContext(contextName);
+>, <Line: -        }
+>, <Line: -        if (config) {
+>, <Line: -            context.configure(config);
+>, <Line: -        }
+>, <Line: -        return context.require(deps, callback, errback);
+>, <Line: -    };
+>, <Line: -    /**
+>, <Line: -     * Support require.config() to make it easier to cooperate with other
+>, <Line: -     * AMD loaders on globally agreed names.
+>, <Line: -     */
+>, <Line: -    req.config = function(config) {
+>, <Line: -        return req(config);
+>, <Line: -    };
+>, <Line: -    /**
+>, <Line: -     * Execute something after the current tick
+>, <Line: -     * of the event loop. Override for other envs
+>, <Line: -     * that have a better solution than setTimeout.
+>, <Line: -     * @param  {Function} fn function to execute later.
+>, <Line: -     */
+>, <Line: -    req.nextTick = typeof setTimeout !== 'undefined' ? function(fn) {
+>, <Line: -        setTimeout(fn, 4);
+>, <Line: -    } : function(fn) {
+>, <Line: -        fn();
+>, <Line: -    };
+>, <Line: -    /**
+>, <Line: -     * Export require as a global, but only if it does not already exist.
+>, <Line: -     */
+>, <Line: -    if (!require) {
+>, <Line: -        require = req;
+>, <Line: -    }
+>, <Line: -    req.version = version;
+>, <Line: -    //Used to filter out dependencies that are already paths.
+>, <Line: -    req.jsExtRegExp = /^\/|:|\?|\.js$/;
+>, <Line: -    req.isBrowser = isBrowser;
+>, <Line: -    s = req.s = {
+>, <Line: -        contexts: contexts,
+>, <Line: -        newContext: newContext
+>, <Line: -    };
+>, <Line: -    //Create default context.
+>, <Line: -    req({});
+>, <Line: -    //Exports some context-sensitive methods on global require.
+>, <Line: -    each(['toUrl', 'undef', 'defined', 'specified'], function(prop) {
+>, <Line: -        //Reference from contexts instead of early binding to default context,
+>, <Line: -        //so that during builds, the latest instance of the default context
+>, <Line: -        //with its config gets used.
+>, <Line: -        req[prop] = function() {
+>, <Line: -            var ctx = contexts[defContextName];
+>, <Line: -            return ctx.require[prop].apply(ctx, arguments);
+>, <Line: -        };
+>, <Line: -    });
+>, <Line: -    if (isBrowser) {
+>, <Line: -        head = s.head = document.getElementsByTagName('head')[0];
+>, <Line: -        //If BASE tag is in play, using appendChild is a problem for IE6.
+>, <Line: -        //When that browser dies, this can be removed. Details in this jQuery bug:
+>, <Line: -        //http://dev.jquery.com/ticket/2709
+>, <Line: -        baseElement = document.getElementsByTagName('base')[0];
+>, <Line: -        if (baseElement) {
+>, <Line: -            head = s.head = baseElement.parentNode;
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Any errors that require explicitly generates will be passed to this
+>, <Line: -     * function. Intercept/override it if you want custom error handling.
+>, <Line: -     * @param {Error} err the error object.
+>, <Line: -     */
+>, <Line: -    req.onError = defaultOnError;
+>, <Line: -    /**
+>, <Line: -     * Creates the node for the load command. Only used in browser envs.
+>, <Line: -     */
+>, <Line: -    req.createNode = function(config, moduleName, url) {
+>, <Line: -        var node = config.xhtml ? document.createElementNS('http://www.w3.org/1999/xhtml', 'html:script') : document.createElement('script');
+>, <Line: -        node.type = config.scriptType || 'text/javascript';
+>, <Line: -        node.charset = 'utf-8';
+>, <Line: -        node.async = true;
+>, <Line: -        return node;
+>, <Line: -    };
+>, <Line: -    /**
+>, <Line: -     * Does the request to load a module for the browser case.
+>, <Line: -     * Make this a separate function to allow other environments
+>, <Line: -     * to override it.
+>, <Line: -     *
+>, <Line: -     * @param {Object} context the require context to find state.
+>, <Line: -     * @param {String} moduleName the name of the module.
+>, <Line: -     * @param {Object} url the URL to the module.
+>, <Line: -     */
+>, <Line: -    req.load = function(context, moduleName, url) {
+>, <Line: -        var config = (context && context.config) || {},
+>, <Line: -        node;
+>, <Line: -        if (isBrowser) {
+>, <Line: -            //In the browser so use a script tag
+>, <Line: -            node = req.createNode(config, moduleName, url);
+>, <Line: -            node.setAttribute('data-requirecontext', context.contextName);
+>, <Line: -            node.setAttribute('data-requiremodule', moduleName);
+>, <Line: -            //Set up load listener. Test attachEvent first because IE9 has
+>, <Line: -            //a subtle issue in its addEventListener and script onload firings
+>, <Line: -            //that do not match the behavior of all other browsers with
+>, <Line: -            //addEventListener support, which fire the onload event for a
+>, <Line: -            //script right after the script execution. See:
+>, <Line: -            //https://connect.microsoft.com/IE/feedback/details/648057/script-onload-event-is-not-fired-immediately-after-script-execution
+>, <Line: -            //UNFORTUNATELY Opera implements attachEvent but does not follow the script
+>, <Line: -            //script execution mode.
+>, <Line: -            if (node.attachEvent &&
+>, <Line: -            //Check if node.attachEvent is artificially added by custom script or
+>, <Line: -            //natively supported by browser
+>, <Line: -            //read https://github.com/jrburke/requirejs/issues/187
+>, <Line: -            //if we can NOT find [native code] then it must NOT natively supported.
+>, <Line: -            //in IE8, node.attachEvent does not have toString()
+>, <Line: -            //Note the test for "[native code" with no closing brace, see:
+>, <Line: -            //https://github.com/jrburke/requirejs/issues/273
+>, <Line: -            !(node.attachEvent.toString && node.attachEvent.toString().indexOf('[native code') < 0) && !isOpera) {
+>, <Line: -                //Probably IE. IE (at least 6-8) do not fire
+>, <Line: -                //script onload right after executing the script, so
+>, <Line: -                //we cannot tie the anonymous define call to a name.
+>, <Line: -                //However, IE reports the script as being in 'interactive'
+>, <Line: -                //readyState at the time of the define call.
+>, <Line: -                useInteractive = true;
+>, <Line: -                node.attachEvent('onreadystatechange', context.onScriptLoad);
+>, <Line: -                //It would be great to add an error handler here to catch
+>, <Line: -                //404s in IE9+. However, onreadystatechange will fire before
+>, <Line: -                //the error handler, so that does not help. If addEventListener
+>, <Line: -                //is used, then IE will fire error before load, but we cannot
+>, <Line: -                //use that pathway given the connect.microsoft.com issue
+>, <Line: -                //mentioned above about not doing the 'script execute,
+>, <Line: -                //then fire the script load event listener before execute
+>, <Line: -                //next script' that other browsers do.
+>, <Line: -                //Best hope: IE10 fixes the issues,
+>, <Line: -                //and then destroys all installs of IE 6-9.
+>, <Line: -                //node.attachEvent('onerror', context.onScriptError);
+>, <Line: -            } else {
+>, <Line: -                node.addEventListener('load', context.onScriptLoad, false);
+>, <Line: -                node.addEventListener('error', context.onScriptError, false);
+>, <Line: -            }
+>, <Line: -            node.src = url;
+>, <Line: -            //For some cache cases in IE 6-8, the script executes before the end
+>, <Line: -            //of the appendChild execution, so to tie an anonymous define
+>, <Line: -            //call to the module name (which is stored on the node), hold on
+>, <Line: -            //to a reference to this node, but clear after the DOM insertion.
+>, <Line: -            currentlyAddingScript = node;
+>, <Line: -            if (baseElement) {
+>, <Line: -                head.insertBefore(node, baseElement);
+>, <Line: -            } else {
+>, <Line: -                head.appendChild(node);
+>, <Line: -            }
+>, <Line: -            currentlyAddingScript = null;
+>, <Line: -            return node;
+>, <Line: -        } else if (isWebWorker) {
+>, <Line: -            try {
+>, <Line: -                //In a web worker, use importScripts. This is not a very
+>, <Line: -                //efficient use of importScripts, importScripts will block until
+>, <Line: -                //its script is downloaded and evaluated. However, if web workers
+>, <Line: -                //are in play, the expectation that a build has been done so that
+>, <Line: -                //only one script needs to be loaded anyway. This may need to be
+>, <Line: -                //reevaluated if other use cases become common.
+>, <Line: -                importScripts(url);
+>, <Line: -                //Account for anonymous modules
+>, <Line: -                context.completeLoad(moduleName);
+>, <Line: -            } catch (e) {
+>, <Line: -                context.onError(makeError('importscripts', 'importScripts failed for ' + moduleName + ' at ' + url,
+>, <Line: -                e, [moduleName]));
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -    };
+>, <Line: -    function getInteractiveScript() {
+>, <Line: -        if (interactiveScript && interactiveScript.readyState === 'interactive') {
+>, <Line: -            return interactiveScript;
+>, <Line: -        }
+>, <Line: -        eachReverse(scripts(), function(script) {
+>, <Line: -            if (script.readyState === 'interactive') {
+>, <Line: -                return (interactiveScript = script);
+>, <Line: -            }
+>, <Line: -        });
+>, <Line: -        return interactiveScript;
+>, <Line: -    }
+>, <Line: -    //Look for a data-main script attribute, which could also adjust the baseUrl.
+>, <Line: -    if (isBrowser) {
+>, <Line: -        //Figure out baseUrl. Get it from the script tag with require.js in it.
+>, <Line: -        eachReverse(scripts(), function(script) {
+>, <Line: -            //Set the 'head' where we can append children by
+>, <Line: -            //using the script's parent.
+>, <Line: -            if (!head) {
+>, <Line: -                head = script.parentNode;
+>, <Line: -            }
+>, <Line: -            //Look for a data-main attribute to set main script for the page
+>, <Line: -            //to load. If it is there, the path to data main becomes the
+>, <Line: -            //baseUrl, if it is not already set.
+>, <Line: -            dataMain = script.getAttribute('data-main');
+>, <Line: -            if (dataMain) {
+>, <Line: -                //Preserve dataMain in case it is a path (i.e. contains '?')
+>, <Line: -                mainScript = dataMain;
+>, <Line: -                //Set final baseUrl if there is not already an explicit one.
+>, <Line: -                if (!cfg.baseUrl) {
+>, <Line: -                    //Pull off the directory of data-main for use as the
+>, <Line: -                    //baseUrl.
+>, <Line: -                    src = mainScript.split('/');
+>, <Line: -                    mainScript = src.pop();
+>, <Line: -                    subPath = src.length ? src.join('/') + '/' : './';
+>, <Line: -                    cfg.baseUrl = subPath;
+>, <Line: -                }
+>, <Line: -                //Strip off any trailing .js since mainScript is now
+>, <Line: -                //like a module name.
+>, <Line: -                mainScript = mainScript.replace(jsSuffixRegExp, '');
+>, <Line: -                //If mainScript is still a path, fall back to dataMain
+>, <Line: -                if (req.jsExtRegExp.test(mainScript)) {
+>, <Line: -                    mainScript = dataMain;
+>, <Line: -                }
+>, <Line: -                //Put the data-main script in the files to load.
+>, <Line: -                cfg.deps = cfg.deps ? cfg.deps.concat(mainScript) : [mainScript];
+>, <Line: -                return true;
+>, <Line: -            }
+>, <Line: -        });
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * The function that handles definitions of modules. Differs from
+>, <Line: -     * require() in that a string for the module should be the first argument,
+>, <Line: -     * and the function to execute after dependencies are loaded should
+>, <Line: -     * return a value to define the module corresponding to the first argument's
+>, <Line: -     * name.
+>, <Line: -     */
+>, <Line: -    define = function(name, deps, callback) {
+>, <Line: -        var node, context;
+>, <Line: -        //Allow for anonymous modules
+>, <Line: -        if (typeof name !== 'string') {
+>, <Line: -            //Adjust args appropriately
+>, <Line: -            callback = deps;
+>, <Line: -            deps = name;
+>, <Line: -            name = null;
+>, <Line: -        }
+>, <Line: -        //This module may not have dependencies
+>, <Line: -        if (!isArray(deps)) {
+>, <Line: -            callback = deps;
+>, <Line: -            deps = null;
+>, <Line: -        }
+>, <Line: -        //If no name, and callback is a function, then figure out if it a
+>, <Line: -        //CommonJS thing with dependencies.
+>, <Line: -        if (!deps && isFunction(callback)) {
+>, <Line: -            deps = [];
+>, <Line: -            //Remove comments from the callback string,
+>, <Line: -            //look for require calls, and pull them into the dependencies,
+>, <Line: -            //but only if there are function args.
+>, <Line: -            if (callback.length) {
+>, <Line: -                callback.toString()
+>, <Line: -                    .replace(commentRegExp, '')
+>, <Line: -                    .replace(cjsRequireRegExp, function(match, dep) {
+>, <Line: -                    deps.push(dep);
+>, <Line: -                });
+>, <Line: -                //May be a CommonJS thing even without require calls, but still
+>, <Line: -                //could use exports, and module. Avoid doing exports and module
+>, <Line: -                //work though if it just needs require.
+>, <Line: -                //REQUIRES the function to expect the CommonJS variables in the
+>, <Line: -                //order listed below.
+>, <Line: -                deps = (callback.length === 1 ? ['require'] : ['require', 'exports', 'module']).concat(deps);
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        //If in IE 6-8 and hit an anonymous define() call, do the interactive
+>, <Line: -        //work.
+>, <Line: -        if (useInteractive) {
+>, <Line: -            node = currentlyAddingScript || getInteractiveScript();
+>, <Line: -            if (node) {
+>, <Line: -                if (!name) {
+>, <Line: -                    name = node.getAttribute('data-requiremodule');
+>, <Line: -                }
+>, <Line: -                context = contexts[node.getAttribute('data-requirecontext')];
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        //Always save off evaluating the def call until the script onload handler.
+>, <Line: -        //This allows multiple modules to be in a file without prematurely
+>, <Line: -        //tracing dependencies, and allows for anonymous module support,
+>, <Line: -        //where the module name is not known until the script onload event
+>, <Line: -        //occurs. If no context, use the global queue, and get it processed
+>, <Line: -        //in the onscript load callback.
+>, <Line: -        (context ? context.defQueue : globalDefQueue).push([name, deps, callback]);
+>, <Line: -    };
+>, <Line: -    define.amd = {
+>, <Line: -        jQuery: true
+>, <Line: -    };
+>, <Line: -    /**
+>, <Line: -     * Executes the text. Normally just uses eval, but can be modified
+>, <Line: -     * to use a better, environment-specific call. Only used for transpiling
+>, <Line: -     * loader plugins, not for plain JS modules.
+>, <Line: -     * @param {String} text the text to execute/evaluate.
+>, <Line: -     */
+>, <Line: -    req.exec = function(text) {
+>, <Line: -        /*jslint evil: true */
+>, <Line: -        return eval(text);
+>, <Line: -    };
+>, <Line: -    //Set up with config info.
+>, <Line: -    req(cfg);
+>]

@@ -1,0 +1,9 @@
+[<Line: +		public Builder copy() {
+>, <Line: +			Builder b = new Builder();
+>, <Line: +			b.allTypes.addAll(allTypes);
+>, <Line: +			b.exclusionTypes.addAll(exclusionTypes);
+>, <Line: +			b.oneTypes.addAll(oneTypes);
+>, <Line: +			return b;
+>, <Line: +		}
+>]
+[]

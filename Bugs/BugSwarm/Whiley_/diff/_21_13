@@ -1,0 +1,20 @@
+[]
+[<Line: -			case RANGE: {
+>, <Line: -				int start = lnum.value.intValue();
+>, <Line: -				int end = rnum.value.intValue();
+>, <Line: -				if (BigInteger.valueOf(start).equals(lnum.value)
+>, <Line: -						&& BigInteger.valueOf(end).equals(rnum.value)) {
+>, <Line: -					if (start > -100 && start < 100 && end > -100 && end < 100) {
+>, <Line: -						int dir = start < end ? 1 : -1;
+>, <Line: -						ArrayList<Constant> values = new ArrayList<Constant>();
+>, <Line: -						while (start != end) {
+>, <Line: -							values.add(Constant.V_INTEGER(BigInteger
+>, <Line: -									.valueOf(start)));
+>, <Line: -							start = start + dir;
+>, <Line: -						}
+>, <Line: -						result = Constant.V_LIST(values);
+>, <Line: -						break;
+>, <Line: -					}
+>, <Line: -				}
+>, <Line: -			}
+>]

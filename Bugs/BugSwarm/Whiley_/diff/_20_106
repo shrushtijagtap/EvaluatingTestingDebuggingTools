@@ -1,0 +1,4 @@
+[<Line: +type C_string is (ASCII_char[] chars) 
+>]
+[<Line: -type C_string is ([ASCII_char] chars) 
+>]

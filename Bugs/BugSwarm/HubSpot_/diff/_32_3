@@ -1,0 +1,19 @@
+[<Line: +import com.hubspot.baragon.service.config.BaragonConfiguration;
+>, <Line: +  private final BaragonConfiguration configuration;
+>, <Line: +                              BaragonStateDatastore stateDatastore,
+>, <Line: +                              BaragonConfiguration configuration) {
+>, <Line: +    this.configuration = configuration;
+>, <Line: +  @POST
+>, <Line: +  @Path("/{clusterName}/count")
+>, <Line: +  public Integer setTargetCount(@PathParam("clusterName") String clusterName, @QueryParam("count") int count) {
+>, <Line: +    return loadBalancerDatastore.setTargetCount(clusterName, count);
+>, <Line: +  }
+>, <Line: +  @GET
+>, <Line: +  @NoAuth
+>, <Line: +  @Path("/{clusterName}/count")
+>, <Line: +  public Integer getTargetCount(@PathParam("clusterName") String clusterName) {
+>, <Line: +    return loadBalancerDatastore.getTargetCount(clusterName).or(configuration.getDefaultTargetAgentCount());
+>, <Line: +  }
+>]
+[<Line: -                              BaragonStateDatastore stateDatastore) {
+>]

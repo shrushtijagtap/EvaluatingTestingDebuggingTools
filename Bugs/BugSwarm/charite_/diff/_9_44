@@ -1,0 +1,77 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_tsv;
+>, <Line: +import htsjdk.variant.vcf.VCFHeaderLineType;
+>, <Line: +/**
+>, <Line: + * Description of a value column.
+>, <Line: + *
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenericTSVValueColumnDescription {
+>, <Line: +	private int columnIndex = 6;
+>, <Line: +	private VCFHeaderLineType valueType = VCFHeaderLineType.String;
+>, <Line: +	private String fieldName = "VALUE_";
+>, <Line: +	private String fieldDescription = "";
+>, <Line: +	private GenericTSVAccumulationStrategy accumulationStrategy = GenericTSVAccumulationStrategy.CHOOSE_FIRST;
+>, <Line: +	// Name of field to refer to for min/max
+>, <Line: +	private String refField;
+>, <Line: +	public GenericTSVValueColumnDescription() {
+>, <Line: +	}
+>, <Line: +	public GenericTSVValueColumnDescription(int columnIndex, VCFHeaderLineType valueType,
+>, <Line: +			String fieldName, String fieldDescription,
+>, <Line: +			GenericTSVAccumulationStrategy accumulationStrategy) {
+>, <Line: +		this(columnIndex, valueType, fieldName, fieldDescription, accumulationStrategy, fieldName);
+>, <Line: +	}
+>, <Line: +	public GenericTSVValueColumnDescription(int columnIndex, VCFHeaderLineType valueType,
+>, <Line: +			String fieldName, String fieldDescription,
+>, <Line: +			GenericTSVAccumulationStrategy accumulationStrategy, String refField) {
+>, <Line: +		this.columnIndex = columnIndex;
+>, <Line: +		this.valueType = valueType;
+>, <Line: +		this.fieldName = fieldName;
+>, <Line: +		this.fieldDescription = fieldDescription;
+>, <Line: +		this.accumulationStrategy = accumulationStrategy;
+>, <Line: +		this.refField = refField;
+>, <Line: +	}
+>, <Line: +	public int getColumnIndex() {
+>, <Line: +		return columnIndex;
+>, <Line: +	}
+>, <Line: +	public void setColumnIndex(int columnIndex) {
+>, <Line: +		this.columnIndex = columnIndex;
+>, <Line: +	}
+>, <Line: +	public VCFHeaderLineType getValueType() {
+>, <Line: +		return valueType;
+>, <Line: +	}
+>, <Line: +	public void setValueType(VCFHeaderLineType valueType) {
+>, <Line: +		this.valueType = valueType;
+>, <Line: +	}
+>, <Line: +	public String getFieldName() {
+>, <Line: +		return fieldName;
+>, <Line: +	}
+>, <Line: +	public void setFieldName(String fieldName) {
+>, <Line: +		this.fieldName = fieldName;
+>, <Line: +	}
+>, <Line: +	public String getFieldDescription() {
+>, <Line: +		return fieldDescription;
+>, <Line: +	}
+>, <Line: +	public void setFieldDescription(String fieldDescription) {
+>, <Line: +		this.fieldDescription = fieldDescription;
+>, <Line: +	}
+>, <Line: +	public GenericTSVAccumulationStrategy getAccumulationStrategy() {
+>, <Line: +		return accumulationStrategy;
+>, <Line: +	}
+>, <Line: +	public void setAccumulationStrategy(GenericTSVAccumulationStrategy accumulationStrategy) {
+>, <Line: +		this.accumulationStrategy = accumulationStrategy;
+>, <Line: +	}
+>, <Line: +	public String getRefField() {
+>, <Line: +		return refField;
+>, <Line: +	}
+>, <Line: +	public void setRefField(String refField) {
+>, <Line: +		this.refField = refField;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return "GenericTSVValueColumnDescription [columnIndex=" + columnIndex + ", valueType="
+>, <Line: +				+ valueType + ", fieldName=" + fieldName + ", fieldDescription=" + fieldDescription
+>, <Line: +				+ ", accumulationStrategy=" + accumulationStrategy + ", refField=" + refField + "]";
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

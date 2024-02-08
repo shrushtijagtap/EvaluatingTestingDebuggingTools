@@ -1,0 +1,101 @@
+[<Line: +                validate(doc, danglingReferences, f, tag, tagconstant, c);
+>, <Line: +                validate1(doc, danglingReferences, f, tag, tagConstant, c);
+>, <Line: +    protected void validate1(OBODoc doc, List<String> danglingReferences, Frame f, String tag,
+>, <Line: +        @Nullable OboFormatTag tagConstant, @Nullable Clause c) {
+>, <Line: +        if (c != null) {
+>, <Line: +            if (OboFormatTag.TYPEDEF_FRAMES.contains(tagConstant)) {
+>, <Line: +                String error = checkRelation(c.getValue(String.class), tag, f.getId(), doc);
+>, <Line: +                if (error != null) {
+>, <Line: +                    danglingReferences.add(error);
+>, <Line: +                }
+>, <Line: +            } else if (tagConstant == OboFormatTag.TAG_HOLDS_OVER_CHAIN
+>, <Line: +                || tagConstant == OboFormatTag.TAG_EQUIVALENT_TO_CHAIN
+>, <Line: +                || tagConstant == OboFormatTag.TAG_RELATIONSHIP) {
+>, <Line: +                String error = checkRelation(c.getValue().toString(), tag, f.getId(), doc);
+>, <Line: +                if (error != null) {
+>, <Line: +                    danglingReferences.add(error);
+>, <Line: +                }
+>, <Line: +                error = checkRelation(c.getValue2().toString(), tag, f.getId(), doc);
+>, <Line: +                if (error != null) {
+>, <Line: +                    danglingReferences.add(error);
+>, <Line: +                }
+>, <Line: +            } else if (tagConstant == OboFormatTag.TAG_DOMAIN || tagConstant == OboFormatTag.TAG_RANGE) {
+>, <Line: +                String error = checkClassReference(c.getValue().toString(), tag, f.getId(), doc);
+>, <Line: +                if (error != null) {
+>, <Line: +                    danglingReferences.add(error);
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    protected void validate(OBODoc doc, List<String> danglingReferences, Frame f, String tag,
+>, <Line: +        @Nullable OboFormatTag tagconstant, @Nullable Clause c) {
+>, <Line: +        if (c != null && OboFormatTag.TERM_FRAMES.contains(tagconstant)) {
+>, <Line: +            if (c.getValues().size() > 1) {
+>, <Line: +                String error = checkRelation(c.getValue(String.class), tag, f.getId(), doc);
+>, <Line: +                if (error != null) {
+>, <Line: +                    danglingReferences.add(error);
+>, <Line: +                }
+>, <Line: +                error = checkClassReference(c.getValue2(String.class), tag, f.getId(), doc);
+>, <Line: +                if (error != null) {
+>, <Line: +                    danglingReferences.add(error);
+>, <Line: +                }
+>, <Line: +            } else {
+>, <Line: +                String error = checkClassReference(c.getValue(String.class), tag, f.getId(), doc);
+>, <Line: +                if (error != null) {
+>, <Line: +                    danglingReferences.add(error);
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +            LOG.error("Error: Instance frames are not supported yet. Parsing stopped at line: {}",
+>, <Line: +                Integer.valueOf(stream.getLineNo()));
+>, <Line: +            cl.setValue(Boolean.TRUE);
+>, <Line: +            cl.setValue(Boolean.FALSE);
+>, <Line: +        LOG.warn("LINE: {} {}  LINE:\n{}", Integer.valueOf(stream.lineNo), message, stream.line);
+>]
+[<Line: -                if (c != null && OboFormatTag.TERM_FRAMES.contains(tagconstant)) {
+>, <Line: -                    if (c.getValues().size() > 1) {
+>, <Line: -                        String error = checkRelation(c.getValue(String.class), tag, f.getId(), doc);
+>, <Line: -                        if (error != null) {
+>, <Line: -                            danglingReferences.add(error);
+>, <Line: -                        }
+>, <Line: -                        error = checkClassReference(c.getValue2(String.class), tag, f.getId(), doc);
+>, <Line: -                        if (error != null) {
+>, <Line: -                            danglingReferences.add(error);
+>, <Line: -                        }
+>, <Line: -                    } else {
+>, <Line: -                        String error = checkClassReference(c.getValue(String.class), tag, f.getId(), doc);
+>, <Line: -                        if (error != null) {
+>, <Line: -                            danglingReferences.add(error);
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -                if (c != null) {
+>, <Line: -                    if (OboFormatTag.TYPEDEF_FRAMES.contains(tagConstant)) {
+>, <Line: -                        String error = checkRelation(c.getValue(String.class), tag, f.getId(), doc);
+>, <Line: -                        if (error != null) {
+>, <Line: -                            danglingReferences.add(error);
+>, <Line: -                        }
+>, <Line: -                    } else if (tagConstant == OboFormatTag.TAG_HOLDS_OVER_CHAIN
+>, <Line: -                        || tagConstant == OboFormatTag.TAG_EQUIVALENT_TO_CHAIN
+>, <Line: -                        || tagConstant == OboFormatTag.TAG_RELATIONSHIP) {
+>, <Line: -                        String error = checkRelation(c.getValue().toString(), tag, f.getId(), doc);
+>, <Line: -                        if (error != null) {
+>, <Line: -                            danglingReferences.add(error);
+>, <Line: -                        }
+>, <Line: -                        error = checkRelation(c.getValue2().toString(), tag, f.getId(), doc);
+>, <Line: -                        if (error != null) {
+>, <Line: -                            danglingReferences.add(error);
+>, <Line: -                        }
+>, <Line: -                    } else if (tagConstant == OboFormatTag.TAG_DOMAIN || tagConstant == OboFormatTag.TAG_RANGE) {
+>, <Line: -                        String error = checkClassReference(c.getValue().toString(), tag, f.getId(), doc);
+>, <Line: -                        if (error != null) {
+>, <Line: -                            danglingReferences.add(error);
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            LOG.error("Error: Instance frames are not supported yet. Parsing stopped at line: {}", stream.getLineNo());
+>, <Line: -            cl.setValue(true);
+>, <Line: -            cl.setValue(false);
+>, <Line: -        LOG.warn("LINE: {} {}  LINE:\n{}", stream.lineNo, message, stream.line);
+>]

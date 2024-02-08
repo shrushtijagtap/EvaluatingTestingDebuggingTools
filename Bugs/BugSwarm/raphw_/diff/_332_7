@@ -1,0 +1,23 @@
+[<Line: +            return describe(type, TypeDescription.Generic.AnnotationReader.NoOp.INSTANCE);
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Describes the generic type while using the supplied annotation reader for resolving type annotations if this
+>, <Line: +         * language feature is available on the current JVM.
+>, <Line: +         *
+>, <Line: +         * @param type             The type to describe.
+>, <Line: +         * @param annotationReader The annotation reader for extracting type annotations.
+>, <Line: +         * @return A description of the provided generic annotated type.
+>, <Line: +         */
+>, <Line: +        protected static TypeDescription.Generic describe(Type type, TypeDescription.Generic.AnnotationReader annotationReader) {
+>, <Line: +                return new TypeDescription.Generic.OfNonGenericType.ForLoadedType((Class<?>) type, annotationReader);
+>, <Line: +                return new TypeDescription.Generic.OfGenericArray.ForLoadedType((GenericArrayType) type, annotationReader);
+>, <Line: +                return new TypeDescription.Generic.OfParameterizedType.ForLoadedType((ParameterizedType) type, annotationReader);
+>, <Line: +                return new TypeDescription.Generic.OfTypeVariable.ForLoadedType((TypeVariable<?>) type, annotationReader);
+>, <Line: +                return new TypeDescription.Generic.OfWildcardType.ForLoadedType((WildcardType) type, annotationReader);
+>]
+[<Line: -                return new TypeDescription.Generic.OfNonGenericType.ForLoadedType((Class<?>) type);
+>, <Line: -                return new TypeDescription.Generic.OfGenericArray.ForLoadedType((GenericArrayType) type);
+>, <Line: -                return new TypeDescription.Generic.OfParameterizedType.ForLoadedType((ParameterizedType) type);
+>, <Line: -                return new TypeDescription.Generic.OfTypeVariable.ForLoadedType((TypeVariable<?>) type);
+>, <Line: -                return new TypeDescription.Generic.OfWildcardType.ForLoadedType((WildcardType) type);
+>]

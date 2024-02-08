@@ -1,0 +1,7 @@
+[<Line: +public class ComVerifIntegrationTest extends AbstractIntegrationTest {
+>, <Line: +        assertEquals("REFMDB/SUBSYS1/ALG_VERIF_TC(p1: 10, p2: 20)", response.getSource());
+>]
+[<Line: -public class IntegrationTestComVerif extends AbstractIntegrationTest {
+>, <Line: -        enableDebugging();
+>, <Line: -        assertEquals("REFMDB/SUBSYS1/ALG_VERIF_TC()", response.getSource());
+>]

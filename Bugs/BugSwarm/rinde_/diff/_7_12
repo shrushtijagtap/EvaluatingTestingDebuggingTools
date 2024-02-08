@@ -1,0 +1,7 @@
+[<Line: +import static com.google.common.base.Preconditions.checkNotNull;
+>, <Line: +    public int compare(@Nullable TimedEvent o1, @Nullable TimedEvent o2) {
+>, <Line: +      return (int) (checkNotNull(o1).time - checkNotNull(o2).time);
+>]
+[<Line: -    public int compare(TimedEvent o1, TimedEvent o2) {
+>, <Line: -      return (int) (o1.time - o2.time);
+>]

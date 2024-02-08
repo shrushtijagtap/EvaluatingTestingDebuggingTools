@@ -1,0 +1,4 @@
+[<Line: +            int expSize = explanations.size();
+>]
+[<Line: -            int expSize = checkNotNull(explanations.size());
+>]

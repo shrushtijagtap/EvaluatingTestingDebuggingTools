@@ -1,0 +1,20 @@
+[<Line: +        assertThat(qux.getDeclaredConstructor().newInstance().bar(), is((Object) Object.class));
+>, <Line: +        assertThat(qux.getDeclaredConstructor().newInstance().bar(), is((Object) Object.class));
+>, <Line: +        assertThat(qux.getDeclaredConstructor().newInstance().bar(), is(makeMethodType(void.class, Object.class)));
+>, <Line: +        assertThat(qux.getDeclaredConstructor().newInstance().bar(), is(makeMethodType(void.class, Object.class)));
+>, <Line: +        assertThat(JavaConstant.MethodHandle.ofLoaded(qux.getDeclaredConstructor().newInstance().bar()), is(JavaConstant.MethodHandle.ofLoaded(makeMethodHandle())));
+>, <Line: +        assertThat(JavaConstant.MethodHandle.ofLoaded(qux.getDeclaredConstructor().newInstance().bar()), is(JavaConstant.MethodHandle.ofLoaded(makeMethodHandle())));
+>, <Line: +        assertThat(type.getDeclaredMethod(BAR).invoke(type.getDeclaredConstructor().newInstance()), nullValue(Object.class));
+>, <Line: +        assertThat(type.getDeclaredMethod(BAR).invoke(type.getDeclaredConstructor().newInstance()), is((Object) Baz.class));
+>, <Line: +        Foo instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>]
+[<Line: -        assertThat(qux.newInstance().bar(), is((Object) Object.class));
+>, <Line: -        assertThat(qux.newInstance().bar(), is((Object) Object.class));
+>, <Line: -        assertThat(qux.newInstance().bar(), is(makeMethodType(void.class, Object.class)));
+>, <Line: -        assertThat(qux.newInstance().bar(), is(makeMethodType(void.class, Object.class)));
+>, <Line: -        assertThat(JavaConstant.MethodHandle.ofLoaded(qux.newInstance().bar()), is(JavaConstant.MethodHandle.ofLoaded(makeMethodHandle())));
+>, <Line: -        assertThat(JavaConstant.MethodHandle.ofLoaded(qux.newInstance().bar()), is(JavaConstant.MethodHandle.ofLoaded(makeMethodHandle())));
+>, <Line: -        assertThat(type.getDeclaredMethod(BAR).invoke(type.newInstance()), nullValue(Object.class));
+>, <Line: -        assertThat(type.getDeclaredMethod(BAR).invoke(type.newInstance()), is((Object) Baz.class));
+>, <Line: -        Foo instance = loaded.getLoaded().newInstance();
+>]

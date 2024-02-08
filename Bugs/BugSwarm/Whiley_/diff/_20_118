@@ -1,0 +1,4 @@
+[<Line: +function f(TYPE[] xs, TYPE p) -> int:
+>]
+[<Line: -function f([TYPE] xs, TYPE p) -> int:
+>]

@@ -1,0 +1,4 @@
+[<Line: +        for (String topicTck : logTck.getTopics())
+>]
+[<Line: -        for (String topicTck : logTck.getTopic())
+>]

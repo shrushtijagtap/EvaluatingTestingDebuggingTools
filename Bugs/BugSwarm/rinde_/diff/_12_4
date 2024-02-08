@@ -1,0 +1,11 @@
+[<Line: +  void addConnections(Iterable<? extends Connection<E>> connections);
+>, <Line: +  /**
+>, <Line: +   * Adds connections to the graph.
+>, <Line: +   * @param connections The connections to add.
+>, <Line: +   * @deprecated Use {@link #addConnections(Iterable)} instead.
+>, <Line: +   */
+>, <Line: +  @Deprecated
+>, <Line: +  void addConnections(Collection<? extends Connection<E>> connections);
+>]
+[<Line: -  void addConnections(Collection<Connection<E>> connections);
+>]

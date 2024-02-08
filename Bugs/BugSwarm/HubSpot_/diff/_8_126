@@ -1,0 +1,13 @@
+[<Line: +        $('table.paginated:not([id])').DataTable
+>, <Line: +          dom: "<'row'<'col-md-5'f><'col-md-4'i><'col-md-3'p>><'row't><'clear'>"
+>, <Line: +          ordering: false
+>, <Line: +          lengthChange: false
+>, <Line: +          pageLength: 15
+>, <Line: +          pagingType: 'simple'
+>, <Line: +          language:
+>, <Line: +            paginate:
+>, <Line: +              previous: '<span class="glyphicon glyphicon-chevron-left"></span>'
+>, <Line: +              next: '<span class="glyphicon glyphicon-chevron-right"></span>'
+>, <Line: +            search: 'Search: _INPUT_'
+>]
+[]

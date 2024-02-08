@@ -1,0 +1,6 @@
+[<Line: +    public void storeOntology(OWLOntology ontology, PrintWriter writer, OWLDocumentFormat format)
+>, <Line: +        throws OWLOntologyStorageException {
+>]
+[<Line: -    protected void storeOntology(OWLOntology ontology, PrintWriter writer, OWLDocumentFormat format)
+>, <Line: -            throws OWLOntologyStorageException {
+>]

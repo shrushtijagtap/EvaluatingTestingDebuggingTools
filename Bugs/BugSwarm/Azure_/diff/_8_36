@@ -1,0 +1,25 @@
+[<Line: +import com.fasterxml.jackson.annotation.JsonProperty;
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>]
+[<Line: -    /**
+>, <Line: -     * Set the value value.
+>, <Line: -     *
+>, <Line: -     * @param value the value value to set
+>, <Line: -     * @return the UsageName object itself.
+>, <Line: -     */
+>, <Line: -    public UsageName withValue(String value) {
+>, <Line: -        this.value = value;
+>, <Line: -        return this;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Set the localizedValue value.
+>, <Line: -     *
+>, <Line: -     * @param localizedValue the localizedValue value to set
+>, <Line: -     * @return the UsageName object itself.
+>, <Line: -     */
+>, <Line: -    public UsageName withLocalizedValue(String localizedValue) {
+>, <Line: -        this.localizedValue = localizedValue;
+>, <Line: -        return this;
+>, <Line: -    }
+>]

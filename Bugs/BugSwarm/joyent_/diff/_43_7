@@ -1,0 +1,10 @@
+[<Line: +    /**
+>, <Line: +     * The default number of times to retry failed requests.
+>, <Line: +     */
+>, <Line: +    public static final int DEFAULT_HTTP_RETRIES = 3;
+>, <Line: +    @Override
+>, <Line: +    public Integer getRetries() {
+>, <Line: +        return DEFAULT_HTTP_RETRIES;
+>, <Line: +    }
+>]
+[]

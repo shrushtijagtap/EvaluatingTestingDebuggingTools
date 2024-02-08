@@ -1,0 +1,34 @@
+[<Line: +        assertThat(describe(SampleClass.class), not(describe(SampleInterface.class)));
+>, <Line: +        assertThat(describe(SampleClass.class), not(describe(SampleAnnotation.class)));
+>, <Line: +        assertThat(describe(SampleClass.class), is(describe(SampleClass.class)));
+>, <Line: +        assertThat(describe(SampleInterface.class), is(describe(SampleInterface.class)));
+>, <Line: +        assertThat(describe(SampleAnnotation.class), is(describe(SampleAnnotation.class)));
+>, <Line: +        assertThat(describe(SampleClass.class).hashCode(), not(describe(SampleInterface.class).hashCode()));
+>, <Line: +        assertThat(describe(SampleClass.class).hashCode(), not(describe(SampleAnnotation.class).hashCode()));
+>, <Line: +        assertThat(describe(Object[].class).hashCode(), not(describe(Object.class).hashCode()));
+>, <Line: +        assertThat(identical, is(identical));
+>, <Line: +        assertThat(describe(SampleClass.class), is(equalFirst));
+>, <Line: +        assertThat(describe(SampleClass.class), not(describe(SampleInterface.class)));
+>, <Line: +        assertThat(describe(SampleClass.class), not((TypeDescription) new TypeDescription.ForLoadedType(SampleInterface.class)));
+>, <Line: +        assertThat(describe(SampleClass.class), not(nonRawType));
+>, <Line: +        assertThat(describe(SampleClass.class), not(new Object()));
+>, <Line: +        assertThat(describe(Object[].class), is((TypeDescription) new TypeDescription.ForLoadedType(Object[].class)));
+>, <Line: +        assertThat(describe(Object[].class), not((TypeDescription) new TypeDescription.ForLoadedType(Object.class)));
+>]
+[<Line: -        assertThat(describe(SampleClass.class), not(equalTo(describe(SampleInterface.class))));
+>, <Line: -        assertThat(describe(SampleClass.class), not(equalTo(describe(SampleAnnotation.class))));
+>, <Line: -        assertThat(describe(SampleClass.class), equalTo(describe(SampleClass.class)));
+>, <Line: -        assertThat(describe(SampleInterface.class), equalTo(describe(SampleInterface.class)));
+>, <Line: -        assertThat(describe(SampleAnnotation.class), equalTo(describe(SampleAnnotation.class)));
+>, <Line: -        assertThat(describe(SampleClass.class).hashCode(), not(is(describe(SampleInterface.class).hashCode())));
+>, <Line: -        assertThat(describe(SampleClass.class).hashCode(), not(is(describe(SampleAnnotation.class).hashCode())));
+>, <Line: -        assertThat(describe(Object[].class).hashCode(), not(is(describe(Object.class).hashCode())));
+>, <Line: -        assertThat(identical, equalTo(identical));
+>, <Line: -        assertThat(describe(SampleClass.class), equalTo(equalFirst));
+>, <Line: -        assertThat(describe(SampleClass.class), not(equalTo(describe(SampleInterface.class))));
+>, <Line: -        assertThat(describe(SampleClass.class), not(equalTo((TypeDescription) new TypeDescription.ForLoadedType(SampleInterface.class))));
+>, <Line: -        assertThat(describe(SampleClass.class), not(equalTo(nonRawType)));
+>, <Line: -        assertThat(describe(SampleClass.class), not(equalTo(new Object())));
+>, <Line: -        assertThat(describe(Object[].class), equalTo((TypeDescription) new TypeDescription.ForLoadedType(Object[].class)));
+>, <Line: -        assertThat(describe(Object[].class), not(equalTo((TypeDescription) new TypeDescription.ForLoadedType(Object.class))));
+>]

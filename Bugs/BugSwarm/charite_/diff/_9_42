@@ -1,0 +1,101 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_tsv;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import java.util.List;
+>, <Line: +/**
+>, <Line: + * Store entries for one column of a generic TSV file.
+>, <Line: + * 
+>, <Line: + * Here, we currently only have support for one alternative allele. This reflects more dbNSFP or the
+>, <Line: + * CADD score files than VCF files.
+>, <Line: + *
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenericTSVRecord {
+>, <Line: +	/** Name of the chromosome */
+>, <Line: +	final private String contig;
+>, <Line: +	/** Position of the variant, 0-based */
+>, <Line: +	final private int pos;
+>, <Line: +	/**
+>, <Line: +	 * Reference sequence, <code>null</code> if locations are annotated instead of variants.
+>, <Line: +	 */
+>, <Line: +	final private String ref;
+>, <Line: +	/**
+>, <Line: +	 * Alternative allele in record, <code>null</code> if locations are annotated instead of
+>, <Line: +	 * variants.
+>, <Line: +	 */
+>, <Line: +	final private String alt;
+>, <Line: +	/** Values for each value column from configuration. */
+>, <Line: +	final private ImmutableList<Object> values;
+>, <Line: +	public GenericTSVRecord(String contig, int pos, String ref, String alt, List<Object> values) {
+>, <Line: +		this.contig = contig;
+>, <Line: +		this.pos = pos;
+>, <Line: +		this.ref = ref;
+>, <Line: +		this.alt = alt;
+>, <Line: +		this.values = ImmutableList.copyOf(values);
+>, <Line: +	}
+>, <Line: +	public String getContig() {
+>, <Line: +		return contig;
+>, <Line: +	}
+>, <Line: +	public int getPos() {
+>, <Line: +		return pos;
+>, <Line: +	}
+>, <Line: +	public String getRef() {
+>, <Line: +		return ref;
+>, <Line: +	}
+>, <Line: +	public String getAlt() {
+>, <Line: +		return alt;
+>, <Line: +	}
+>, <Line: +	public List<Object> getValues() {
+>, <Line: +		return values;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return "GenericTSVRecord [chrom=" + contig + ", pos=" + pos + ", ref=" + ref + ", alt=" + alt + ", values="
+>, <Line: +				+ values + "]";
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode() {
+>, <Line: +		final int prime = 31;
+>, <Line: +		int result = 1;
+>, <Line: +		result = prime * result + ((alt == null) ? 0 : alt.hashCode());
+>, <Line: +		result = prime * result + ((contig == null) ? 0 : contig.hashCode());
+>, <Line: +		result = prime * result + pos;
+>, <Line: +		result = prime * result + ((ref == null) ? 0 : ref.hashCode());
+>, <Line: +		result = prime * result + ((values == null) ? 0 : values.hashCode());
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object obj) {
+>, <Line: +		if (this == obj)
+>, <Line: +			return true;
+>, <Line: +		if (obj == null)
+>, <Line: +			return false;
+>, <Line: +		if (getClass() != obj.getClass())
+>, <Line: +			return false;
+>, <Line: +		GenericTSVRecord other = (GenericTSVRecord) obj;
+>, <Line: +		if (alt == null) {
+>, <Line: +			if (other.alt != null)
+>, <Line: +				return false;
+>, <Line: +		} else if (!alt.equals(other.alt))
+>, <Line: +			return false;
+>, <Line: +		if (contig == null) {
+>, <Line: +			if (other.contig != null)
+>, <Line: +				return false;
+>, <Line: +		} else if (!contig.equals(other.contig))
+>, <Line: +			return false;
+>, <Line: +		if (pos != other.pos)
+>, <Line: +			return false;
+>, <Line: +		if (ref == null) {
+>, <Line: +			if (other.ref != null)
+>, <Line: +				return false;
+>, <Line: +		} else if (!ref.equals(other.ref))
+>, <Line: +			return false;
+>, <Line: +		if (values == null) {
+>, <Line: +			if (other.values != null)
+>, <Line: +				return false;
+>, <Line: +		} else if (!values.equals(other.values))
+>, <Line: +			return false;
+>, <Line: +		return true;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

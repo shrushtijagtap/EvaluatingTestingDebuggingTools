@@ -1,0 +1,31 @@
+[<Line: +          <li>class constructors</li>
+>, <Line: +        <p>
+>, <Line: +          Public modifier for constructors in non-public non-protected classes
+>, <Line: +          is always obsolete:
+>, <Line: +        </p>
+>, <Line: +        <source>
+>, <Line: +          public class PublicClass {
+>, <Line: +            public PublicClass() {} // OK
+>, <Line: +          }
+>, <Line: +          class PackagePrivateClass {
+>, <Line: +            public PackagePrivateClass() {} // violation expected
+>, <Line: +          }
+>, <Line: +        </source>
+>, <Line: +        <p>For non-public protected classes public modifier is not obsolete,
+>, <Line: +          removing public from this example will make code not compiling:
+>, <Line: +        </p>
+>, <Line: +        <source>
+>, <Line: +          package a;
+>, <Line: +          public class ClassWithProtectedInnerClass {
+>, <Line: +            protected class ProtectedClass {
+>, <Line: +              public ProtectedClass () {}
+>, <Line: +            }
+>, <Line: +          }
+>, <Line: +          package b;
+>, <Line: +          import a.ClassWithProtectedInnerClass;
+>, <Line: +          public class ClassExtending extends ClassWithProtectedInnerClass {
+>, <Line: +            ProtectedClass pc = new ProtectedClass();
+>, <Line: +          }
+>, <Line: +        </source>
+>]
+[]

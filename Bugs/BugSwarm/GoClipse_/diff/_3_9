@@ -1,0 +1,8 @@
+[<Line: +	boolean isNormalBuildEnabled();
+>, <Line: +	boolean isAutoBuildEnabled();
+>, <Line: +	String getBuildArguments();
+>]
+[<Line: -	boolean isEnabled();
+>, <Line: -	String getBuildArguments();
+>, <Line: -	String getCheckArguments();
+>]

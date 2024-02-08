@@ -1,0 +1,43 @@
+[<Line: +import it.unibz.krdb.obda.ontology.OntologyVocabulary;
+>, <Line: +			OntologyVocabulary voc = ofac.createVocabulary();
+>, <Line: +			tbox = ofac.createOntology(voc);
+>, <Line: +			OWLAPI3ABoxIterator aBoxIter = new OWLAPI3ABoxIterator(closure, questInstance.getVocabulary());
+>, <Line: +			obdaModelForMaterialization.getOntologyVocabulary().merge(tbox.getVocabulary());
+>, <Line: +		Set<URI> graphURIs = new HashSet<>();
+>, <Line: +		OntologyVocabulary vb = ofac.createVocabulary();
+>, <Line: +			vb.merge(o.getVocabulary());
+>, <Line: +		Ontology result = ofac.createOntology(vb);
+>, <Line: +		private OntologyVocabulary vb = ofac.createVocabulary();
+>, <Line: +			return ofac.createOntology(vb);
+>, <Line: +				vb.createDataProperty(dataProperty);
+>, <Line: +				vb.createClass(className);
+>, <Line: +				vb.createObjectProperty(objectProperty);
+>, <Line: +		/* Roman 10/08/15: recover?
+>]
+[<Line: -	public QuestDBClassicStore(String name, java.net.URI tboxFile) 	throws Exception {
+>, <Line: -		this(name, tboxFile, null);
+>, <Line: -	}
+>, <Line: -			tbox = ofac.createOntology();
+>, <Line: -			OWLAPI3ABoxIterator aBoxIter = new OWLAPI3ABoxIterator(closure);
+>, <Line: -			obdaModelForMaterialization.declareAll(tbox.getVocabulary());
+>, <Line: -		Set<URI> graphURIs = new HashSet<URI>();
+>, <Line: -		Ontology result = ofac.createOntology();
+>, <Line: -			result.getVocabulary().merge(o.getVocabulary());
+>, <Line: -		private Ontology ontology = null;
+>, <Line: -			return ontology;
+>, <Line: -		}
+>, <Line: -		@Override
+>, <Line: -		public void startRDF() throws RDFHandlerException {
+>, <Line: -			ontology = ofac.createOntology();
+>, <Line: -				ontology.getVocabulary().createDataProperty(dataProperty);
+>, <Line: -				ontology.getVocabulary().createClass(className);
+>, <Line: -				ontology.getVocabulary().createObjectProperty(objectProperty);
+>, <Line: -		/*
+>, <Line: -		 * ROMAN: this code does nothing because	getTBoxAxiom is null
+>, <Line: -			if (axiom == null) {
+>, <Line: -				return;
+>, <Line: -			}
+>, <Line: -		public Object getTBoxAxiom(Statement st) {
+>, <Line: -			return null;
+>, <Line: -		}
+>]

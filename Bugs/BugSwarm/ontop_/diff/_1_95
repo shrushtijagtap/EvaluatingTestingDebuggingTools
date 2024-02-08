@@ -1,0 +1,4 @@
+[<Line: +			aBoxIter = new OWLAPI3ABoxIterator(set, st.questInstance.getVocabulary());
+>]
+[<Line: -			aBoxIter = new OWLAPI3ABoxIterator(set);
+>]

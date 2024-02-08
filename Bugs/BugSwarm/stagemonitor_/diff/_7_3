@@ -1,0 +1,35 @@
+[<Line: +		classLoader = classLoader == null ? ClassLoader.getSystemClassLoader() : classLoader;
+>, <Line: +			cacheProvider = TypePool.CacheProvider.Simple.withObjectType();
+>, <Line: +			TypePool.CacheProvider previous = cacheProviders.putIfAbsent(classLoader, cacheProvider);
+>, <Line: +			if (previous != null) {
+>, <Line: +				cacheProvider = previous;
+>, <Line: +		return cacheProvider;
+>]
+[<Line: -import java.security.AccessController;
+>, <Line: -import java.security.PrivilegedAction;
+>, <Line: -		classLoader = classLoader == null ? BootstrapClassLoaderMarker.INSTANCE : classLoader;
+>, <Line: -			cacheProviders.putIfAbsent(classLoader, new TypePool.CacheProvider.Simple());
+>, <Line: -			cacheProvider = cacheProviders.get(classLoader);
+>, <Line: -		}
+>, <Line: -		return cacheProvider;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * A marker for the bootstrap class loader which is represented by {@code null}.
+>, <Line: -	 */
+>, <Line: -	private static class BootstrapClassLoaderMarker extends ClassLoader {
+>, <Line: -		/**
+>, <Line: -		 * A static reference to the a singleton instance of the marker to preserve reference equality.
+>, <Line: -		 */
+>, <Line: -		protected static final ClassLoader INSTANCE = AccessController.doPrivileged(new CreationAction());
+>, <Line: -		@Override
+>, <Line: -		protected Class<?> loadClass(String name, boolean resolve) {
+>, <Line: -			throw new UnsupportedOperationException("This loader is only a non-null marker and is not supposed to be used");
+>, <Line: -		}
+>, <Line: -		/**
+>, <Line: -		 * A simple action for creating a bootstrap class loader marker.
+>, <Line: -		 */
+>, <Line: -		private static class CreationAction implements PrivilegedAction<ClassLoader> {
+>, <Line: -			@Override
+>, <Line: -			public ClassLoader run() {
+>, <Line: -				return new BootstrapClassLoaderMarker();
+>]

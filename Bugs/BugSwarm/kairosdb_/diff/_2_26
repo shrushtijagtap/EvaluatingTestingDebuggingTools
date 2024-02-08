@@ -1,0 +1,4 @@
+[<Line: +public @interface Feature
+>]
+[<Line: -public @interface QueryProcessingStage
+>]

@@ -1,0 +1,160 @@
+[<Line: +package org.mp4parser.muxer.tracks;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.CompositionTimeToSample;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDependencyTypeBox;
+>, <Line: +import org.mp4parser.muxer.*;
+>, <Line: +    private DataSource dataSource;
+>, <Line: +    protected static InputStream cleanBuffer(InputStream is) {
+>, <Line: +        return new CleanInputStream(is);
+>, <Line: +    }
+>, <Line: +    protected static byte[] toArray(ByteBuffer buf) {
+>, <Line: +        buf = buf.duplicate();
+>, <Line: +        byte[] b = new byte[buf.remaining()];
+>, <Line: +        buf.get(b, 0, b.length);
+>, <Line: +        return b;
+>, <Line: +    }
+>, <Line: +    public TrackMetaData getTrackMetaData() {
+>, <Line: +        return trackMetaData;
+>, <Line: +    public void close() throws IOException {
+>, <Line: +        dataSource.close();
+>, <Line: +    public static class LookAhead {
+>, <Line: +        long bufferStartPos = 0;
+>, <Line: +        int inBufferPos = 0;
+>, <Line: +        DataSource dataSource;
+>, <Line: +        ByteBuffer buffer;
+>, <Line: +        long start;
+>, <Line: +        public LookAhead(DataSource dataSource) throws IOException {
+>, <Line: +            this.dataSource = dataSource;
+>, <Line: +            fillBuffer();
+>, <Line: +        }
+>, <Line: +        public void fillBuffer() throws IOException {
+>, <Line: +            buffer = dataSource.map(bufferStartPos, Math.min(dataSource.size() - bufferStartPos, BUFFER));
+>, <Line: +        }
+>, <Line: +        public boolean nextThreeEquals001() throws IOException {
+>, <Line: +            if (buffer.limit() - inBufferPos >= 3) {
+>, <Line: +                return (buffer.get(inBufferPos) == 0 &&
+>, <Line: +                        buffer.get(inBufferPos + 1) == 0 &&
+>, <Line: +                        buffer.get(inBufferPos + 2) == 1);
+>, <Line: +            }
+>, <Line: +            if (bufferStartPos + inBufferPos + 3 >= dataSource.size()) {
+>, <Line: +                throw new EOFException();
+>, <Line: +            }
+>, <Line: +            return false;
+>, <Line: +        }
+>, <Line: +        public boolean nextThreeEquals000or001orEof(boolean tripleZeroIsEndOfSequence) throws IOException {
+>, <Line: +            if (buffer.limit() - inBufferPos >= 3) {
+>, <Line: +                return ((buffer.get(inBufferPos) == 0 &&
+>, <Line: +                        buffer.get(inBufferPos + 1) == 0 &&
+>, <Line: +                        ((buffer.get(inBufferPos + 2) == 0 && tripleZeroIsEndOfSequence) || buffer.get(inBufferPos + 2) == 1)));
+>, <Line: +            } else {
+>, <Line: +                if (bufferStartPos + inBufferPos + 3 > dataSource.size()) {
+>, <Line: +                    return bufferStartPos + inBufferPos == dataSource.size();
+>, <Line: +                } else {
+>, <Line: +                    bufferStartPos = start;
+>, <Line: +                    inBufferPos = 0;
+>, <Line: +                    fillBuffer();
+>, <Line: +                    return nextThreeEquals000or001orEof(tripleZeroIsEndOfSequence);
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        public void discardByte() {
+>, <Line: +            inBufferPos++;
+>, <Line: +        }
+>, <Line: +        public void discardNext3AndMarkStart() {
+>, <Line: +            inBufferPos += 3;
+>, <Line: +            start = bufferStartPos + inBufferPos;
+>, <Line: +        }
+>, <Line: +        public ByteBuffer getNal() {
+>, <Line: +            if (start >= bufferStartPos) {
+>, <Line: +                buffer.position((int) (start - bufferStartPos));
+>, <Line: +                Buffer sample = buffer.slice();
+>, <Line: +                sample.limit((int) (inBufferPos - (start - bufferStartPos)));
+>, <Line: +                return (ByteBuffer) sample;
+>, <Line: +            } else {
+>, <Line: +                throw new RuntimeException("damn! NAL exceeds buffer");
+>, <Line: +                // this can only happen if NAL is bigger than the buffer
+>, <Line: +                // and that most likely cannot happen with correct inputs
+>, <Line: +            }
+>, <Line: +        }
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks;
+>, <Line: -import com.coremedia.iso.boxes.CompositionTimeToSample;
+>, <Line: -import com.coremedia.iso.boxes.SampleDependencyTypeBox;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.googlecode.mp4parser.authoring.AbstractTrack;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.SampleImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.TrackMetaData;
+>, <Line: -    private DataSource dataSource;
+>, <Line: -    public TrackMetaData getTrackMetaData() {
+>, <Line: -        return trackMetaData;
+>, <Line: -    }
+>, <Line: -    public static class LookAhead {
+>, <Line: -        long bufferStartPos = 0;
+>, <Line: -        int inBufferPos = 0;
+>, <Line: -        DataSource dataSource;
+>, <Line: -        ByteBuffer buffer;
+>, <Line: -        long start;
+>, <Line: -        public void fillBuffer() throws IOException {
+>, <Line: -            buffer = dataSource.map(bufferStartPos, Math.min(dataSource.size() - bufferStartPos, BUFFER));
+>, <Line: -        }
+>, <Line: -        public LookAhead(DataSource dataSource) throws IOException {
+>, <Line: -            this.dataSource = dataSource;
+>, <Line: -            fillBuffer();
+>, <Line: -        }
+>, <Line: -        public boolean nextThreeEquals001() throws IOException {
+>, <Line: -            if (buffer.limit() - inBufferPos >= 3) {
+>, <Line: -                return (buffer.get(inBufferPos) == 0 &&
+>, <Line: -                        buffer.get(inBufferPos + 1) == 0 &&
+>, <Line: -                        buffer.get(inBufferPos + 2) == 1);
+>, <Line: -            }
+>, <Line: -            if (bufferStartPos + inBufferPos + 3 >= dataSource.size()) {
+>, <Line: -                throw new EOFException();
+>, <Line: -            }
+>, <Line: -            return false;
+>, <Line: -        }
+>, <Line: -        public boolean nextThreeEquals000or001orEof(boolean tripleZeroIsEndOfSequence) throws IOException {
+>, <Line: -            if (buffer.limit() - inBufferPos >= 3) {
+>, <Line: -                return ((buffer.get(inBufferPos) == 0 &&
+>, <Line: -                        buffer.get(inBufferPos + 1) == 0 &&
+>, <Line: -                        ((buffer.get(inBufferPos + 2) == 0 && tripleZeroIsEndOfSequence) || buffer.get(inBufferPos + 2) == 1)));
+>, <Line: -            } else {
+>, <Line: -                if (bufferStartPos + inBufferPos + 3 > dataSource.size()) {
+>, <Line: -                    return bufferStartPos + inBufferPos == dataSource.size();
+>, <Line: -                } else {
+>, <Line: -                    bufferStartPos = start;
+>, <Line: -                    inBufferPos = 0;
+>, <Line: -                    fillBuffer();
+>, <Line: -                    return nextThreeEquals000or001orEof(tripleZeroIsEndOfSequence);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        public void discardByte() {
+>, <Line: -            inBufferPos++;
+>, <Line: -        }
+>, <Line: -        public void discardNext3AndMarkStart() {
+>, <Line: -            inBufferPos += 3;
+>, <Line: -            start = bufferStartPos + inBufferPos;
+>, <Line: -        }
+>, <Line: -        public ByteBuffer getNal() {
+>, <Line: -            if (start >= bufferStartPos) {
+>, <Line: -                buffer.position((int) (start - bufferStartPos));
+>, <Line: -                Buffer sample = buffer.slice();
+>, <Line: -                sample.limit((int) (inBufferPos - (start - bufferStartPos)));
+>, <Line: -                return (ByteBuffer) sample;
+>, <Line: -            } else {
+>, <Line: -                throw new RuntimeException("damn! NAL exceeds buffer");
+>, <Line: -                // this can only happen if NAL is bigger than the buffer
+>, <Line: -                // and that most likely cannot happen with correct inputs
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -    protected static InputStream cleanBuffer(InputStream is) {
+>, <Line: -        return new CleanInputStream(is);
+>, <Line: -    protected static byte[] toArray(ByteBuffer buf) {
+>, <Line: -        buf = buf.duplicate();
+>, <Line: -        byte[] b = new byte[buf.remaining()];
+>, <Line: -        buf.get(b, 0, b.length);
+>, <Line: -        return b;
+>, <Line: -    }
+>, <Line: -    public void close() throws IOException {
+>, <Line: -        dataSource.close();
+>]

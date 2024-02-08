@@ -1,0 +1,45 @@
+[<Line: +	<div class="section">
+>, <Line: +		<h5>Drilldown / detail link
+>, <Line: +			<tip>These links appear in the dropdown menu in the panel menu.
+>, <Line: +			</tip>
+>, <Line: +		</h5>
+>, <Line: +		<div class="grafana-target" ng-repeat="link in panel.links" j>
+>, <Line: +						<i class="icon-remove pointer"
+>, <Line: +						   ng-click="deleteLink(link)"></i>
+>, <Line: +						<input type="text" ng-model="link.title"
+>, <Line: +							   class="input-medium grafana-target-segment-input">
+>, <Line: +						<select class="input-medium grafana-target-segment-input"
+>, <Line: +								style="width: 101px;" ng-model="link.type"
+>, <Line: +								ng-options="f for f in ['dashboard','absolute']"></select>
+>, <Line: +					<li class="grafana-target-segment"
+>, <Line: +						ng-show="link.type === 'dashboard'">dashboard
+>, <Line: +					</li>
+>, <Line: +							   ng-model="link.dashboard"
+>, <Line: +							   bs-typeahead="searchDashboards"
+>, <Line: +							   class="input-large grafana-target-segment-input">
+>, <Line: +					<li class="grafana-target-segment"
+>, <Line: +						ng-show="link.type === 'absolute'">url
+>, <Line: +					</li>
+>, <Line: +						<input type="text" ng-model="link.url"
+>, <Line: +							   class="input-large grafana-target-segment-input">
+>, <Line: +						<tip>Use var-variableName=value to pass templating
+>, <Line: +							variables.
+>, <Line: +						</tip>
+>, <Line: +						<input type="text" ng-model="link.params"
+>, <Line: +							   class="input-medium grafana-target-segment-input">
+>]
+[<Line: -  <div class="section">
+>, <Line: -		<h5>Drilldown / detail link<tip>These links appear in the dropdown menu in the panel menu. </tip></h5>
+>, <Line: -		<div class="grafana-target" ng-repeat="link in panel.links"j>
+>, <Line: -						<i class="icon-remove pointer" ng-click="deleteLink(link)"></i>
+>, <Line: -						<input type="text" ng-model="link.title" class="input-medium grafana-target-segment-input">
+>, <Line: -						<select class="input-medium grafana-target-segment-input" style="width: 101px;" ng-model="link.type" ng-options="f for f in ['dashboard','absolute']"></select>
+>, <Line: -					<li class="grafana-target-segment" ng-show="link.type === 'dashboard'">dashboard</li>
+>, <Line: -						       ng-model="link.dashboard"
+>, <Line: -									 bs-typeahead="searchDashboards"
+>, <Line: -									 class="input-large grafana-target-segment-input">
+>, <Line: -					<li class="grafana-target-segment" ng-show="link.type === 'absolute'">url</li>
+>, <Line: -						<input type="text" ng-model="link.url" class="input-large grafana-target-segment-input">
+>, <Line: -						<tip>Use var-variableName=value to pass templating variables.</tip>
+>, <Line: -						<input type="text" ng-model="link.params" class="input-medium grafana-target-segment-input">
+>]

@@ -1,0 +1,29 @@
+[<Line: +		component.forEntity(entityId);
+>, <Line: +	public A getSafe(int entityId) {
+>, <Line: +		return has(entityId) ? get(entityId) : null;
+>, <Line: +	public boolean has(int entityId) {
+>, <Line: +		return owners.get(entityId);
+>, <Line: +	public A get(int entityId, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
+>, <Line: +			c.forEntity(entityId);
+>, <Line: +			return get(entityId);
+>, <Line: +	public A getSafe(int entityId, boolean forceNewInstance) {
+>, <Line: +		if (has(entityId)) {
+>, <Line: +			return get(entityId, forceNewInstance);
+>]
+[<Line: -		return get(world.getEntity(entityId));
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	@SuppressWarnings("unchecked")
+>, <Line: -	public A get(Entity e) throws ArrayIndexOutOfBoundsException {
+>, <Line: -		component.forEntity(e);
+>, <Line: -	public A getSafe(Entity e) {
+>, <Line: -		return has(e) ? get(e) : null;
+>, <Line: -	public boolean has(Entity e) {
+>, <Line: -		return owners.get(e.getId());
+>, <Line: -	public A get(Entity e, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
+>, <Line: -			c.forEntity(e);
+>, <Line: -			return get(e);
+>, <Line: -	public A getSafe(Entity e, boolean forceNewInstance) {
+>, <Line: -		if (has(e)) {
+>, <Line: -			return get(e, forceNewInstance);
+>]

@@ -1,0 +1,8 @@
+[<Line: +        This Baragon API has auth enabled. You need to specify an <strong>Auth Key</strong> in order to initiate any actions.
+>, <Line: +    <p>
+>, <Line: +        This can be changed at any time in the JS console with
+>, <Line: +        <code>localStorage.setItem(&quot;baragonAuthKey&quot;, &quot;test-key&quot;)</code>
+>, <Line: +    </p>
+>]
+[<Line: -        Input a valid <strong>Auth Key</strong> to enable edit mode.
+>]

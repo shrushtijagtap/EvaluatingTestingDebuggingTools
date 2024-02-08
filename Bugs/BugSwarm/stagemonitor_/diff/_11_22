@@ -1,0 +1,31 @@
+[<Line: +				case "externalRequestStats": {
+>, <Line: +					var executionCountDB = 0;
+>, <Line: +					for (var i = 0; i < value.length; i++) {
+>, <Line: +						var externalRequestStats = value[i];
+>, <Line: +						if (externalRequestStats.requestType == "jdbc") {
+>, <Line: +							executionCountDB = externalRequestStats.executionCount;
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					return executionCountDB > localStorage.getItem("widget-settings-db-count-threshold");
+>, <Line: +				}
+>, <Line: +			"instance": {name: "Instance", description: "The name of the instance of the application that handled the request. The instance name is useful, if you have different environments for the same application (maybe even on the same host). However, it leads to errors if you have a application with the same instance name on the same host. By default, the instance name is the domain name of the server and it is obtained from the first incoming request. You can also choose to set a fixed instance name."},
+>, <Line: +			"externalRequestStats": {name: "Execution time and count of external requests", description: "", formatter: function(externalRequestStats) {
+>, <Line: +				var value = "";
+>, <Line: +				for (var i = 0; i < externalRequestStats.length; i++) {
+>, <Line: +					var stats = externalRequestStats[i];
+>, <Line: +					if (i > 0) {
+>, <Line: +						value += "\n";
+>, <Line: +					}
+>, <Line: +					value += stats.requestType + ":\n";
+>, <Line: +					value += "Number of requests: " + stats.executionCount + "\n";
+>, <Line: +					value += "Execution time: " + stats.executionTime.toFixed(2) + " ms\n";
+>, <Line: +				}
+>, <Line: +				return value;
+>, <Line: +			}}
+>]
+[<Line: -				case "executionCountDb":
+>, <Line: -					return value > localStorage.getItem("widget-settings-db-count-threshold");
+>, <Line: -			"executionTimeDb": {name: "Execution time for SQL-Queries in ms", description: ""},
+>, <Line: -			"executionCountDb": {name: "Number of SQL-Queries", description: "The number of SQL-Queries. Lower is better."},
+>, <Line: -			"instance": {name: "Instance", description: "The name of the instance of the application that handled the request. The instance name is useful, if you have different environments for the same application (maybe even on the same host). However, it leads to errors if you have a application with the same instance name on the same host. By default, the instance name is the domain name of the server and it is obtained from the first incoming request. You can also choose to set a fixed instance name."}
+>]

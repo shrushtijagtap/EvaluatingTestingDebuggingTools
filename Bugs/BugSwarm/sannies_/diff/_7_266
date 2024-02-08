@@ -1,0 +1,22 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +    public static final String TYPE = "vmhd";
+>, <Line: +    public void setGraphicsmode(int graphicsmode) {
+>, <Line: +        this.graphicsmode = graphicsmode;
+>, <Line: +    }
+>, <Line: +    public void setOpcolor(int[] opcolor) {
+>, <Line: +        this.opcolor = opcolor;
+>, <Line: +    }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -    public static final String TYPE = "vmhd";
+>, <Line: -    public void setOpcolor(int[] opcolor) {
+>, <Line: -        this.opcolor = opcolor;
+>, <Line: -    }
+>, <Line: -    public void setGraphicsmode(int graphicsmode) {
+>, <Line: -        this.graphicsmode = graphicsmode;
+>, <Line: -    }
+>]

@@ -1,0 +1,4 @@
+[<Line: +public class TypePoolDefaultGenericTypeListTest extends AbstractTypeListGenericTest<Type> {
+>]
+[<Line: -public class TypePoolGenericTypeListTest extends AbstractTypeListGenericTest<Type> {
+>]

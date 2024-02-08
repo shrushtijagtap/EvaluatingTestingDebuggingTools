@@ -1,0 +1,14 @@
+[<Line: +import org.stagemonitor.core.metrics.metrics2.MetricName;
+>, <Line: +	private MetricName target;
+>, <Line: +	public List<CheckResult> check(MetricName actualTarget, Map<String, Number> currentValuesByMetric) {
+>, <Line: +											  MetricName actualTarget, Map<String, Number> currentValuesByMetric) {
+>, <Line: +	public MetricName getTarget() {
+>, <Line: +	public void setTarget(MetricName target) {
+>]
+[<Line: -import java.util.regex.Pattern;
+>, <Line: -	private Pattern target;
+>, <Line: -	public List<CheckResult> check(String actualTarget, Map<String, Double> currentValuesByMetric) {
+>, <Line: -											  String actualTarget, Map<String, Double> currentValuesByMetric) {
+>, <Line: -	public Pattern getTarget() {
+>, <Line: -	public void setTarget(Pattern target) {
+>]

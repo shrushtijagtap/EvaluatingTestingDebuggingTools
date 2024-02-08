@@ -1,0 +1,62 @@
+[<Line: +# Author: Tom Dupre la Tour <tom.dupre-la-tour@m4x.org>
+>, <Line: +#
+>, <Line: +# License: BSD 3 clause
+>, <Line: +import numpy as np
+>, <Line: +import scipy.sparse as sp
+>, <Line: +from sklearn.utils.seq_dataset import ArrayDataset, CSRDataset
+>, <Line: +from sklearn.datasets import load_iris
+>, <Line: +from numpy.testing import assert_array_equal
+>, <Line: +from nose.tools import assert_equal
+>, <Line: +iris = load_iris()
+>, <Line: +X = iris.data.astype(np.float64)
+>, <Line: +y = iris.target.astype(np.float64)
+>, <Line: +X_csr = sp.csr_matrix(X)
+>, <Line: +sample_weight = np.arange(y.size, dtype=np.float64)
+>, <Line: +def test_seq_dataset():
+>, <Line: +    dataset1 = ArrayDataset(X, y, sample_weight, seed=42)
+>, <Line: +    dataset2 = CSRDataset(X_csr.data, X_csr.indptr, X_csr.indices,
+>, <Line: +                          y, sample_weight, seed=42)
+>, <Line: +    for dataset in (dataset1, dataset2):
+>, <Line: +        for i in range(5):
+>, <Line: +            # next sample
+>, <Line: +            xi_, yi, swi, idx = dataset._next_py()
+>, <Line: +            xi = sp.csr_matrix((xi_), shape=(1, X.shape[1]))
+>, <Line: +            assert_array_equal(xi.data, X_csr[idx].data)
+>, <Line: +            assert_array_equal(xi.indices, X_csr[idx].indices)
+>, <Line: +            assert_array_equal(xi.indptr, X_csr[idx].indptr)
+>, <Line: +            assert_equal(yi, y[idx])
+>, <Line: +            assert_equal(swi, sample_weight[idx])
+>, <Line: +            # random sample
+>, <Line: +            xi_, yi, swi, idx = dataset._random_py()
+>, <Line: +            xi = sp.csr_matrix((xi_), shape=(1, X.shape[1]))
+>, <Line: +            assert_array_equal(xi.data, X_csr[idx].data)
+>, <Line: +            assert_array_equal(xi.indices, X_csr[idx].indices)
+>, <Line: +            assert_array_equal(xi.indptr, X_csr[idx].indptr)
+>, <Line: +            assert_equal(yi, y[idx])
+>, <Line: +            assert_equal(swi, sample_weight[idx])
+>, <Line: +def test_seq_dataset_shuffle():
+>, <Line: +    dataset1 = ArrayDataset(X, y, sample_weight, seed=42)
+>, <Line: +    dataset2 = CSRDataset(X_csr.data, X_csr.indptr, X_csr.indices,
+>, <Line: +                          y, sample_weight, seed=42)
+>, <Line: +    # not shuffled
+>, <Line: +    for i in range(5):
+>, <Line: +        _, _, _, idx1 = dataset1._next_py()
+>, <Line: +        _, _, _, idx2 = dataset2._next_py()
+>, <Line: +        assert_equal(idx1, i)
+>, <Line: +        assert_equal(idx2, i)
+>, <Line: +    for i in range(5):
+>, <Line: +        _, _, _, idx1 = dataset1._random_py()
+>, <Line: +        _, _, _, idx2 = dataset2._random_py()
+>, <Line: +        assert_equal(idx1, idx2)
+>, <Line: +    seed = 77
+>, <Line: +    dataset1._shuffle_py(seed)
+>, <Line: +    dataset2._shuffle_py(seed)
+>, <Line: +    for i in range(5):
+>, <Line: +        _, _, _, idx1 = dataset1._next_py()
+>, <Line: +        _, _, _, idx2 = dataset2._next_py()
+>, <Line: +        assert_equal(idx1, idx2)
+>, <Line: +        _, _, _, idx1 = dataset1._random_py()
+>, <Line: +        _, _, _, idx2 = dataset2._random_py()
+>, <Line: +        assert_equal(idx1, idx2)
+>]
+[]

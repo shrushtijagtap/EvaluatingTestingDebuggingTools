@@ -1,0 +1,28 @@
+[<Line: +package net.bytebuddy.description.type;
+>, <Line: +import net.bytebuddy.description.type.generic.GenericTypeDescription;
+>, <Line: +import net.bytebuddy.test.utility.ObjectPropertyAssertion;
+>, <Line: +import org.junit.Test;
+>, <Line: +import static net.bytebuddy.matcher.ElementMatchers.isMethod;
+>, <Line: +import static org.hamcrest.MatcherAssert.assertThat;
+>, <Line: +import static org.hamcrest.core.Is.is;
+>, <Line: +public class TypeDescriptionAbstractBaseRawTypeWrapperTest {
+>, <Line: +    @Test
+>, <Line: +    public void testRawType() throws Exception {
+>, <Line: +        GenericTypeDescription rawType = new TypeDescription.ForLoadedType(Foo.class).accept(TypeDescription.AbstractBase.RawTypeWrapper.INSTANCE);
+>, <Line: +        assertThat(rawType.getSort(), is(GenericTypeDescription.Sort.NON_GENERIC));
+>, <Line: +        assertThat(rawType.getDeclaredMethods().filter(isMethod()).getOnly().getReturnType().getSort(), is(GenericTypeDescription.Sort.NON_GENERIC));
+>, <Line: +        assertThat(rawType.getDeclaredMethods().filter(isMethod()).getOnly().getReturnType(), is((GenericTypeDescription) TypeDescription.OBJECT));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testObjectProperties() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(TypeDescription.AbstractBase.RawTypeWrapper.class).apply();
+>, <Line: +    }
+>, <Line: +    @SuppressWarnings("unused")
+>, <Line: +    private static class Foo<T> {
+>, <Line: +        T foo() {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

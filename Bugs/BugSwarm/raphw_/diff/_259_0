@@ -1,0 +1,35 @@
+[<Line: +import net.bytebuddy.description.type.TypeDescription;
+>, <Line: +import net.bytebuddy.pool.TypePool;
+>, <Line: +    /**
+>, <Line: +     * A description of {@link ClassByExtensionBenchmark#baseClass}.
+>, <Line: +     */
+>, <Line: +    private TypeDescription baseClassDescription;
+>, <Line: +    /**
+>, <Line: +     * Sets up this benchmark.
+>, <Line: +     */
+>, <Line: +    @Setup
+>, <Line: +    public void setup() {
+>, <Line: +        baseClassDescription = TypePool.Default.ofClassPath().describe(baseClass.getName()).resolve();
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Performs a benchmark of an interface implementation using Byte Buddy. This benchmark uses a type pool to compare against
+>, <Line: +     * usage of the reflection API.
+>, <Line: +     *
+>, <Line: +     * @return The created instance, in order to avoid JIT removal.
+>, <Line: +     * @throws java.lang.Exception If the reflective invocation causes an exception.
+>, <Line: +     */
+>, <Line: +    @Benchmark
+>, <Line: +    public ExampleInterface benchmarkByteBuddyWithTypePool() throws Exception {
+>, <Line: +        return (ExampleInterface) new ByteBuddy()
+>, <Line: +                .with(TypeValidation.DISABLED)
+>, <Line: +                .ignore(none())
+>, <Line: +                .subclass(baseClassDescription)
+>, <Line: +                .method(isDeclaredBy(baseClassDescription)).intercept(StubMethod.INSTANCE)
+>, <Line: +                .make()
+>, <Line: +                .load(newClassLoader(), ClassLoadingStrategy.Default.INJECTION)
+>, <Line: +                .getLoaded()
+>, <Line: +                .getDeclaredConstructor()
+>, <Line: +                .newInstance();
+>, <Line: +    }
+>]
+[]

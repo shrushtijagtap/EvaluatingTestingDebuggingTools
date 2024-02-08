@@ -1,0 +1,7 @@
+[<Line: +	public static final int EOF = -1;
+>, <Line: +		return lookahead() != EOF;
+>, <Line: +		assertTrue(la != EOF);
+>]
+[<Line: -		return lookahead() != -1;
+>, <Line: -		assertTrue(la != -1);
+>]

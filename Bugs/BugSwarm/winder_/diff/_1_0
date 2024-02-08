@@ -1,0 +1,5 @@
+[<Line: +    @Ignore // This test creates a modal dialog.
+>, <Line: +        System.out.println("substituteValuesPrompt");
+>]
+[<Line: -        System.out.println("substituteValues");
+>]

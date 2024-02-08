@@ -1,0 +1,8 @@
+[<Line: +      throw new LockTimeoutException(String.format("Timed out waiting to acquire lock for reload"), agentLock);
+>, <Line: +      throw new LockTimeoutException("Timed out waiting to acquire lock", agentLock);
+>, <Line: +      throw new LockTimeoutException("Timed out waiting to acquire lock for delete", agentLock);
+>]
+[<Line: -      throw new LockTimeoutException(String.format("Timed out waiting to acquire lock, %s others waiting on agent lock", agentLock.getQueueLength()));
+>, <Line: -      throw new LockTimeoutException("Timed out waiting to acquire lock");
+>, <Line: -      throw new LockTimeoutException("Timed out waiting to acquire lock");
+>]

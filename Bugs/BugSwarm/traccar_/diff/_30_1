@@ -1,0 +1,54 @@
+[<Line: +    private void decodeParameter(Position position, int id, ChannelBuffer buf, int length) {
+>, <Line: +                position.set(Position.PREFIX_ADC + 1, buf.readUnsignedShort());
+>, <Line: +                position.set(Position.KEY_POWER, buf.readUnsignedShort() + "mV");
+>, <Line: +            case 67:
+>, <Line: +                position.set(Position.KEY_BATTERY, buf.readUnsignedShort() + "mV");
+>, <Line: +            case 72:
+>, <Line: +                position.set(Position.PREFIX_TEMP + 1, buf.readInt() * 0.1);
+>, <Line: +            case 73:
+>, <Line: +                position.set(Position.PREFIX_TEMP + 2, buf.readInt() * 0.1);
+>, <Line: +                break;
+>, <Line: +            case 74:
+>, <Line: +                position.set(Position.PREFIX_TEMP + 3, buf.readInt() * 0.1);
+>, <Line: +            case 78:
+>, <Line: +                position.set(Position.KEY_RFID, buf.readLong());
+>, <Line: +                break;
+>, <Line: +            case 182:
+>, <Line: +                position.set(Position.KEY_HDOP, buf.readUnsignedShort() * 0.1);
+>, <Line: +                switch (length) {
+>, <Line: +                    case 1:
+>, <Line: +                        position.set(Position.PREFIX_IO + id, buf.readUnsignedByte());
+>, <Line: +                        break;
+>, <Line: +                    case 2:
+>, <Line: +                        position.set(Position.PREFIX_IO + id, buf.readUnsignedShort());
+>, <Line: +                        break;
+>, <Line: +                    case 4:
+>, <Line: +                        position.set(Position.PREFIX_IO + id, buf.readUnsignedInt());
+>, <Line: +                        break;
+>, <Line: +                    case 8:
+>, <Line: +                    default:
+>, <Line: +                        position.set(Position.PREFIX_IO + id, buf.readLong());
+>, <Line: +                        break;
+>, <Line: +                }
+>, <Line: +                decodeParameter(position, buf.readUnsignedByte(), buf, 1);
+>, <Line: +                decodeParameter(position, buf.readUnsignedByte(), buf, 2);
+>, <Line: +                decodeParameter(position, buf.readUnsignedByte(), buf, 4);
+>, <Line: +                decodeParameter(position, buf.readUnsignedByte(), buf, 8);
+>]
+[<Line: -    private void decodeParameter(Position position, int id, long value) {
+>, <Line: -                position.set(Position.PREFIX_ADC + 1, value);
+>, <Line: -                position.set(Position.KEY_POWER, value);
+>, <Line: -            case 68:
+>, <Line: -                position.set(Position.KEY_BATTERY, value);
+>, <Line: -            case 85:
+>, <Line: -                position.set(Position.KEY_RPM, value);
+>, <Line: -            case 182:
+>, <Line: -                position.set(Position.KEY_HDOP, value);
+>, <Line: -            case 239:
+>, <Line: -                position.set(Position.KEY_IGNITION, value == 1);
+>, <Line: -                position.set(Position.PREFIX_IO + id, value);
+>, <Line: -                decodeParameter(position, buf.readUnsignedByte(), buf.readUnsignedByte());
+>, <Line: -                decodeParameter(position, buf.readUnsignedByte(), buf.readUnsignedShort());
+>, <Line: -                decodeParameter(position, buf.readUnsignedByte(), buf.readUnsignedInt());
+>, <Line: -                decodeParameter(position, buf.readUnsignedByte(), buf.readLong());
+>]

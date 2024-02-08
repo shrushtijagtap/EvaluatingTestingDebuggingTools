@@ -1,0 +1,104 @@
+[<Line: +		'angular',
+>, <Line: +		'jquery',
+>, <Line: +		'config',
+>, <Line: +		'lodash'
+>, <Line: +	],
+>, <Line: +	function (angular, $, config, _) {
+>, <Line: +		"use strict";
+>, <Line: +		var module = angular.module('grafana.routes');
+>, <Line: +		module.config(function ($routeProvider) {
+>, <Line: +			$routeProvider
+>, <Line: +				.when('/dashboard/file/:jsonFile', {
+>, <Line: +					templateUrl: 'app/partials/dashboard.html',
+>, <Line: +					controller: 'DashFromFileProvider',
+>, <Line: +					reloadOnSearch: false,
+>, <Line: +				});
+>, <Line: +		});
+>, <Line: +		module.controller('DashFromFileProvider', function ($scope, $rootScope, $http, $routeParams, alertSrv) {
+>, <Line: +			var renderTemplate = function (json, params) {
+>, <Line: +				var _r;
+>, <Line: +				_.templateSettings = {interpolate: /\{\{(.+?)\}\}/g};
+>, <Line: +				var template = _.template(json);
+>, <Line: +				var rendered = template({ARGS: params});
+>, <Line: +				try {
+>, <Line: +					_r = angular.fromJson(rendered);
+>, <Line: +				} catch (e) {
+>, <Line: +					_r = false;
+>, <Line: +				}
+>, <Line: +				return _r;
+>, <Line: +			};
+>, <Line: +			var file_load = function (file) {
+>, <Line: +				return $http({
+>, <Line: +					url: "app/dashboards/" + file.replace(/\.(?!json)/, "/") + '?' + new Date().getTime(),
+>, <Line: +					method: "GET",
+>, <Line: +					transformResponse: function (response) {
+>, <Line: +						return renderTemplate(response, $routeParams);
+>, <Line: +					}
+>, <Line: +				}).then(function (result) {
+>, <Line: +					if (!result) {
+>, <Line: +						return false;
+>, <Line: +					}
+>, <Line: +					return result.data;
+>, <Line: +				}, function () {
+>, <Line: +					alertSrv.set('Error', "Could not load <i>dashboards/" + file + "</i>. Please make sure it exists", 'error');
+>, <Line: +					return false;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			file_load($routeParams.jsonFile).then(function (result) {
+>, <Line: +				$scope.initDashboard(result, $scope);
+>, <Line: +			});
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'jquery',
+>, <Line: -  'config',
+>, <Line: -  'lodash'
+>, <Line: -],
+>, <Line: -function (angular, $, config, _) {
+>, <Line: -  "use strict";
+>, <Line: -  var module = angular.module('grafana.routes');
+>, <Line: -  module.config(function($routeProvider) {
+>, <Line: -    $routeProvider
+>, <Line: -      .when('/dashboard/file/:jsonFile', {
+>, <Line: -        templateUrl: 'app/partials/dashboard.html',
+>, <Line: -        controller : 'DashFromFileProvider',
+>, <Line: -        reloadOnSearch: false,
+>, <Line: -      });
+>, <Line: -  });
+>, <Line: -  module.controller('DashFromFileProvider', function($scope, $rootScope, $http, $routeParams, alertSrv) {
+>, <Line: -    var renderTemplate = function(json,params) {
+>, <Line: -      var _r;
+>, <Line: -      _.templateSettings = {interpolate : /\{\{(.+?)\}\}/g};
+>, <Line: -      var template = _.template(json);
+>, <Line: -      var rendered = template({ARGS:params});
+>, <Line: -      try {
+>, <Line: -        _r = angular.fromJson(rendered);
+>, <Line: -      } catch(e) {
+>, <Line: -        _r = false;
+>, <Line: -      }
+>, <Line: -      return _r;
+>, <Line: -    };
+>, <Line: -    var file_load = function(file) {
+>, <Line: -      return $http({
+>, <Line: -        url: "app/dashboards/"+file.replace(/\.(?!json)/,"/")+'?' + new Date().getTime(),
+>, <Line: -        method: "GET",
+>, <Line: -        transformResponse: function(response) {
+>, <Line: -          return renderTemplate(response,$routeParams);
+>, <Line: -        }
+>, <Line: -      }).then(function(result) {
+>, <Line: -        if(!result) {
+>, <Line: -          return false;
+>, <Line: -        }
+>, <Line: -        return result.data;
+>, <Line: -      },function() {
+>, <Line: -        alertSrv.set('Error',"Could not load <i>dashboards/"+file+"</i>. Please make sure it exists" ,'error');
+>, <Line: -        return false;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    file_load($routeParams.jsonFile).then(function(result) {
+>, <Line: -      $scope.initDashboard(result, $scope);
+>, <Line: -    });
+>, <Line: -  });
+>, <Line: -});
+>]

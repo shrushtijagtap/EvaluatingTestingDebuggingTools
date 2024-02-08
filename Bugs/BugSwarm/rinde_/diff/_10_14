@@ -1,0 +1,65 @@
+[<Line: +/*
+>, <Line: + * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package com.github.rinde.rinsim.experiment.base;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Set;
+>, <Line: +import java.util.concurrent.ExecutionException;
+>, <Line: +import java.util.concurrent.Executors;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import com.google.common.collect.ImmutableSet;
+>, <Line: +import com.google.common.util.concurrent.Futures;
+>, <Line: +import com.google.common.util.concurrent.ListenableFuture;
+>, <Line: +import com.google.common.util.concurrent.ListeningExecutorService;
+>, <Line: +import com.google.common.util.concurrent.MoreExecutors;
+>, <Line: +final class LocalComputer implements Computer {
+>, <Line: +  @Override
+>, <Line: +  public ExperimentResults compute(AbstractExperimentBuilder<?> builder,
+>, <Line: +      Set<SimArgs> inputs) {
+>, <Line: +    final ImmutableList.Builder<ExperimentRunner> runnerBuilder = ImmutableList
+>, <Line: +        .builder();
+>, <Line: +    for (final SimArgs args : inputs) {
+>, <Line: +      runnerBuilder.add(builder.createRunner(args));
+>, <Line: +    }
+>, <Line: +    final List<ExperimentRunner> runners = runnerBuilder.build();
+>, <Line: +    final int threads = Math.min(builder.numThreads, runners.size());
+>, <Line: +    final ListeningExecutorService executor;
+>, <Line: +    if (threads > 1) {
+>, <Line: +      executor = MoreExecutors
+>, <Line: +          .listeningDecorator(Executors.newFixedThreadPool(threads));
+>, <Line: +    } else {
+>, <Line: +      executor = MoreExecutors.newDirectExecutorService();
+>, <Line: +    }
+>, <Line: +    final List<SimulationResult> results;
+>, <Line: +    try {
+>, <Line: +      // safe cast according to javadoc
+>, <Line: +      @SuppressWarnings({ "unchecked", "rawtypes" })
+>, <Line: +      final List<ListenableFuture<SimulationResult>> futures = (List) executor
+>, <Line: +          .invokeAll(runners);
+>, <Line: +      results = Futures.allAsList(futures).get();
+>, <Line: +    } catch (final InterruptedException e) {
+>, <Line: +      throw new IllegalStateException(e);
+>, <Line: +    } catch (final ExecutionException e) {
+>, <Line: +      // FIXME need some way to gracefully handle this error. All data
+>, <Line: +      // should be saved to reproduce this simulation.
+>, <Line: +      throw new IllegalStateException(e);
+>, <Line: +    }
+>, <Line: +    executor.shutdown();
+>, <Line: +    return new ExperimentResults(builder,
+>, <Line: +        ImmutableSet.copyOf(results));
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

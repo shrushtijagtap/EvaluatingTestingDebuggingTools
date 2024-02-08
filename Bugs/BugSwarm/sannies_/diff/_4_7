@@ -1,0 +1,91 @@
+[<Line: +    Map<Integer, ByteBuffer> spsIdToSpsBytes = new HashMap<Integer, ByteBuffer>();
+>, <Line: +    Map<Integer, ByteBuffer> ppsIdToPpsBytes = new HashMap<Integer, ByteBuffer>();
+>, <Line: +    RangeStartMap<Integer, ByteBuffer> seqParameterRangeMap = new RangeStartMap<Integer, ByteBuffer>();
+>, <Line: +    RangeStartMap<Integer, ByteBuffer> pictureParameterRangeMap = new RangeStartMap<Integer, ByteBuffer>();
+>, <Line: +        avcConfigurationBox.setSequenceParameterSets(new ArrayList<ByteBuffer>(spsIdToSpsBytes.values()));
+>, <Line: +        avcConfigurationBox.setPictureParameterSets(new ArrayList<ByteBuffer>(ppsIdToPpsBytes.values()));
+>, <Line: +            int picOrderCntMsb;
+>, <Line: +        ByteBuffer oldPpsSameId = ppsIdToPpsBytes.get(_pictureParameterSet.pic_parameter_set_id);
+>, <Line: +        data.rewind();
+>, <Line: +        if (oldPpsSameId != null && !oldPpsSameId.equals(data)) {
+>, <Line: +                pictureParameterRangeMap.put(samples.size(), data);
+>, <Line: +            ppsIdToPpsBytes.put(_pictureParameterSet.pic_parameter_set_id, data);
+>, <Line: +        data.rewind();
+>, <Line: +        ByteBuffer oldSpsSameId = spsIdToSpsBytes.get(_seqParameterSet.seq_parameter_set_id);
+>, <Line: +        if (oldSpsSameId != null && !oldSpsSameId.equals(data)) {
+>, <Line: +                seqParameterRangeMap.put(samples.size(), data);
+>, <Line: +            spsIdToSpsBytes.put(_seqParameterSet.seq_parameter_set_id, data);
+>]
+[<Line: -    Map<Integer, byte[]> spsIdToSpsBytes = new HashMap<Integer, byte[]>();
+>, <Line: -    Map<Integer, byte[]> ppsIdToPpsBytes = new HashMap<Integer, byte[]>();
+>, <Line: -    RangeStartMap<Integer, byte[]> seqParameterRangeMap = new RangeStartMap<Integer, byte[]>();
+>, <Line: -    RangeStartMap<Integer, byte[]> pictureParameterRangeMap = new RangeStartMap<Integer, byte[]>();
+>, <Line: -        avcConfigurationBox.setSequenceParameterSets(new ArrayList<byte[]>(spsIdToSpsBytes.values()));
+>, <Line: -        avcConfigurationBox.setPictureParameterSets(new ArrayList<byte[]>(ppsIdToPpsBytes.values()));
+>, <Line: -        int offset = 0;
+>, <Line: -            int picOrderCntMsb = 0;
+>, <Line: -    private int calcPoc(int absFrameNum, H264NalUnitHeader nu, SliceHeader sh) {
+>, <Line: -        if (sh.sps.pic_order_cnt_type == 0) {
+>, <Line: -            return calcPOC0(nu, sh);
+>, <Line: -        } else if (sh.sps.pic_order_cnt_type == 1) {
+>, <Line: -            return calcPOC1(absFrameNum, nu, sh);
+>, <Line: -        } else {
+>, <Line: -            return calcPOC2(absFrameNum, nu, sh);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    private int calcPOC2(int absFrameNum, H264NalUnitHeader nu, SliceHeader sh) {
+>, <Line: -        if (nu.nal_ref_idc == 0)
+>, <Line: -            return 2 * absFrameNum - 1;
+>, <Line: -        else
+>, <Line: -            return 2 * absFrameNum;
+>, <Line: -    }
+>, <Line: -    private int calcPOC1(int absFrameNum, H264NalUnitHeader nu, SliceHeader sh) {
+>, <Line: -        if (sh.sps.num_ref_frames_in_pic_order_cnt_cycle == 0)
+>, <Line: -            absFrameNum = 0;
+>, <Line: -        if (nu.nal_ref_idc == 0 && absFrameNum > 0)
+>, <Line: -            absFrameNum = absFrameNum - 1;
+>, <Line: -        int expectedDeltaPerPicOrderCntCycle = 0;
+>, <Line: -        for (int i = 0; i < sh.sps.num_ref_frames_in_pic_order_cnt_cycle; i++)
+>, <Line: -            expectedDeltaPerPicOrderCntCycle += sh.sps.offsetForRefFrame[i];
+>, <Line: -        int expectedPicOrderCnt;
+>, <Line: -        if (absFrameNum > 0) {
+>, <Line: -            int picOrderCntCycleCnt = (absFrameNum - 1) / sh.sps.num_ref_frames_in_pic_order_cnt_cycle;
+>, <Line: -            int frameNumInPicOrderCntCycle = (absFrameNum - 1) % sh.sps.num_ref_frames_in_pic_order_cnt_cycle;
+>, <Line: -            expectedPicOrderCnt = picOrderCntCycleCnt * expectedDeltaPerPicOrderCntCycle;
+>, <Line: -            for (int i = 0; i <= frameNumInPicOrderCntCycle; i++)
+>, <Line: -                expectedPicOrderCnt = expectedPicOrderCnt + sh.sps.offsetForRefFrame[i];
+>, <Line: -        } else {
+>, <Line: -            expectedPicOrderCnt = 0;
+>, <Line: -        }
+>, <Line: -        if (nu.nal_ref_idc == 0)
+>, <Line: -            expectedPicOrderCnt = expectedPicOrderCnt + sh.sps.offset_for_non_ref_pic;
+>, <Line: -        return expectedPicOrderCnt + sh.delta_pic_order_cnt_0;
+>, <Line: -    }
+>, <Line: -    private int calcPOC0(H264NalUnitHeader nu, SliceHeader sh) {
+>, <Line: -        int pocCntLsb = sh.pic_order_cnt_lsb;
+>, <Line: -        int maxPicOrderCntLsb = 1 << (sh.sps.log2_max_pic_order_cnt_lsb_minus4 + 4);
+>, <Line: -        // TODO prevPicOrderCntMsb should be wrapped!!
+>, <Line: -        int picOrderCntMsb;
+>, <Line: -        if ((pocCntLsb < prevPicOrderCntLsb) && ((prevPicOrderCntLsb - pocCntLsb) >= (maxPicOrderCntLsb / 2)))
+>, <Line: -            picOrderCntMsb = prevPicOrderCntMsb + maxPicOrderCntLsb;
+>, <Line: -        else if ((pocCntLsb > prevPicOrderCntLsb) && ((pocCntLsb - prevPicOrderCntLsb) > (maxPicOrderCntLsb / 2)))
+>, <Line: -            picOrderCntMsb = prevPicOrderCntMsb - maxPicOrderCntLsb;
+>, <Line: -        else
+>, <Line: -            picOrderCntMsb = prevPicOrderCntMsb;
+>, <Line: -        if (nu.nal_ref_idc != 0) {
+>, <Line: -            prevPicOrderCntMsb = picOrderCntMsb;
+>, <Line: -            prevPicOrderCntLsb = pocCntLsb;
+>, <Line: -        }
+>, <Line: -        return picOrderCntMsb + pocCntLsb;
+>, <Line: -    }
+>, <Line: -        byte[] ppsBytes = toArray((ByteBuffer) data.rewind());
+>, <Line: -        byte[] oldPpsSameId = ppsIdToPpsBytes.get(_pictureParameterSet.pic_parameter_set_id);
+>, <Line: -        if (oldPpsSameId != null && !Arrays.equals(oldPpsSameId, ppsBytes)) {
+>, <Line: -                pictureParameterRangeMap.put(samples.size(), ppsBytes);
+>, <Line: -            ppsIdToPpsBytes.put(_pictureParameterSet.pic_parameter_set_id, ppsBytes);
+>, <Line: -        byte[] spsBytes = toArray((ByteBuffer) data.rewind());
+>, <Line: -        byte[] oldSpsSameId = spsIdToSpsBytes.get(_seqParameterSet.seq_parameter_set_id);
+>, <Line: -        if (oldSpsSameId != null && !Arrays.equals(oldSpsSameId, spsBytes)) {
+>, <Line: -                seqParameterRangeMap.put(samples.size(), spsBytes);
+>, <Line: -            spsIdToSpsBytes.put(_seqParameterSet.seq_parameter_set_id, spsBytes);
+>]

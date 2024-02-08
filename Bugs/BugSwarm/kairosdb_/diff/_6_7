@@ -1,0 +1,9 @@
+[<Line: +import org.kairosdb.util.AdaptiveExecutorService;
+>, <Line: +import org.kairosdb.util.SimpleStatsReporter;
+>, <Line: +		bind(SimpleStatsReporter.class);
+>, <Line: +		bind(AdaptiveExecutorService.class);
+>]
+[<Line: -import org.kairosdb.util.CongestionExecutorService;
+>, <Line: -import java.util.List;
+>, <Line: -		bind(CongestionExecutorService.class);
+>]

@@ -1,0 +1,112 @@
+[<Line: +package org.mp4parser.muxer.tracks.h263;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.*;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDescriptionBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part14.ESDescriptorBox;
+>, <Line: +import org.mp4parser.boxes.sampleentry.VisualSampleEntry;
+>, <Line: +import org.mp4parser.muxer.*;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import org.mp4parser.muxer.tracks.AbstractH26XTrack;
+>, <Line: +import org.mp4parser.tools.Hex;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.Mp4Arrays;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +import java.io.*;
+>, <Line: +import static org.mp4parser.tools.CastUtils.l2i;
+>, <Line: + *
+>, <Line: +    public static void main1(String[] args) throws IOException {
+>, <Line: +        File[] files = new File("C:\\dev\\mp4parser\\frames").listFiles();
+>, <Line: +        Arrays.sort(files);
+>, <Line: +        Movie m = new Movie();
+>, <Line: +        Track track = new H263TrackImpl(new MultiFileDataSourceImpl(files));
+>, <Line: +        m.addTrack(track);
+>, <Line: +        DefaultMp4Builder builder = new DefaultMp4Builder();
+>, <Line: +        Container c = builder.build(m);
+>, <Line: +        FileOutputStream fos = new FileOutputStream("output.mp4");
+>, <Line: +        c.writeContainer(Channels.newChannel(fos));
+>, <Line: +    }
+>, <Line: +    public static void main(String[] args) throws IOException {
+>, <Line: +        DataSource ds = new FileDataSourceImpl("C:\\content\\bbb.h263");
+>, <Line: +        Movie m = new Movie();
+>, <Line: +        Track track = new H263TrackImpl(ds);
+>, <Line: +        m.addTrack(track);
+>, <Line: +        DefaultMp4Builder builder = new DefaultMp4Builder();
+>, <Line: +        Container c = builder.build(m);
+>, <Line: +        FileOutputStream fos = new FileOutputStream("output.mp4");
+>, <Line: +        c.writeContainer(Channels.newChannel(fos));
+>, <Line: +    }
+>, <Line: +    public static void main2(String[] args) throws IOException {
+>, <Line: +        ESDescriptorBox esds = Path.getPath(new IsoFile(new FileInputStream("C:\\content\\bbb.mp4").getChannel()), "/moov[0]/trak[0]/mdia[0]/minf[0]/stbl[0]/stsd[0]/mp4v[0]/esds[0]");
+>, <Line: +        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+>, <Line: +        esds.getBox(Channels.newChannel(baos));
+>, <Line: +        System.err.println(Hex.encodeHex(baos.toByteArray()));
+>, <Line: +        System.err.println(esds.getEsDescriptor());
+>, <Line: +        baos = new ByteArrayOutputStream();
+>, <Line: +        esds.getBox(Channels.newChannel(baos));
+>, <Line: +        System.err.println(Hex.encodeHex(baos.toByteArray()));
+>, <Line: +    }
+>, <Line: +                brb.readBool();
+>, <Line: +                brb.readBool();
+>, <Line: +                brb.readBool();
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks;
+>, <Line: -import com.coremedia.iso.Hex;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.coremedia.iso.boxes.SampleDescriptionBox;
+>, <Line: -import com.coremedia.iso.boxes.sampleentry.VisualSampleEntry;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.googlecode.mp4parser.FileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.MultiFileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.SampleImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.ESDescriptorBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.*;
+>, <Line: -import com.googlecode.mp4parser.util.Mp4Arrays;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -import java.io.ByteArrayOutputStream;
+>, <Line: -import java.io.File;
+>, <Line: -import java.io.FileOutputStream;
+>, <Line: -import java.io.IOException;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: - * Created by sannies on 26.04.2015.
+>, <Line: -                marker_bit = brb.readBool();
+>, <Line: -                marker_bit = brb.readBool();
+>, <Line: -                marker_bit = brb.readBool();
+>, <Line: -    public static void main1(String[] args) throws IOException {
+>, <Line: -        File[] files = new File("C:\\dev\\mp4parser\\frames").listFiles();
+>, <Line: -        Arrays.sort(files);
+>, <Line: -        Movie m = new Movie();
+>, <Line: -        Track track = new H263TrackImpl(new MultiFileDataSourceImpl(files));
+>, <Line: -        m.addTrack(track);
+>, <Line: -        DefaultMp4Builder builder = new DefaultMp4Builder();
+>, <Line: -        Container c = builder.build(m);
+>, <Line: -        FileOutputStream fos = new FileOutputStream("output.mp4");
+>, <Line: -        c.writeContainer(Channels.newChannel(fos));
+>, <Line: -    }
+>, <Line: -    public static void main(String[] args) throws IOException {
+>, <Line: -        DataSource ds = new FileDataSourceImpl("C:\\content\\bbb.h263");
+>, <Line: -        Movie m = new Movie();
+>, <Line: -        Track track = new H263TrackImpl(ds);
+>, <Line: -        m.addTrack(track);
+>, <Line: -        DefaultMp4Builder builder = new DefaultMp4Builder();
+>, <Line: -        Container c = builder.build(m);
+>, <Line: -        FileOutputStream fos = new FileOutputStream("output.mp4");
+>, <Line: -        c.writeContainer(Channels.newChannel(fos));
+>, <Line: -    }
+>, <Line: -    public static void main2(String[] args) throws IOException {
+>, <Line: -        ESDescriptorBox esds = Path.getPath(new IsoFile("C:\\content\\bbb.mp4"), "/moov[0]/trak[0]/mdia[0]/minf[0]/stbl[0]/stsd[0]/mp4v[0]/esds[0]");
+>, <Line: -        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+>, <Line: -        esds.getBox(Channels.newChannel(baos));
+>, <Line: -        System.err.println(Hex.encodeHex(baos.toByteArray()));
+>, <Line: -        System.err.println(esds.getEsDescriptor());
+>, <Line: -        baos = new ByteArrayOutputStream();
+>, <Line: -        esds.getBox(Channels.newChannel(baos));
+>, <Line: -        System.err.println(Hex.encodeHex(baos.toByteArray()));
+>, <Line: -    }
+>]

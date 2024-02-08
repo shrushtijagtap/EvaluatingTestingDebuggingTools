@@ -1,0 +1,22 @@
+[<Line: +import org.mp4parser.Box;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.sampleentry.VisualSampleEntry;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +        assert sampleEntry != null;
+>]
+[<Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.coremedia.iso.boxes.SampleTableBox;
+>, <Line: -import com.coremedia.iso.boxes.sampleentry.SampleEntry;
+>, <Line: -import com.coremedia.iso.boxes.sampleentry.VisualSampleEntry;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+>, <Line: -import com.googlecode.mp4parser.boxes.apple.PixelAspectRationAtom;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -/**
+>, <Line: - * Created by sannies on 11.01.2015.
+>, <Line: - */
+>]

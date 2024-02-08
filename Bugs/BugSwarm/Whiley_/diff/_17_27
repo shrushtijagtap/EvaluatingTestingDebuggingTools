@@ -1,0 +1,48 @@
+[<Line: +// public function toDecimal(real x) -> string:
+>, <Line: +//     return toDecimal(x,10)
+>, <Line: +// public function toDecimal(real x, int ndigits) -> string:
+>, <Line: +//     string r
+>, <Line: +//     if x < 0.0:
+>, <Line: +//         r = "-"
+>, <Line: +//         x = -x
+>, <Line: +//     else:
+>, <Line: +//         r = ""
+>, <Line: +//     int n / int d = x
+>, <Line: +//     char digit = (char) n / d
+>, <Line: +//     real rem = x - (real) digit
+>, <Line: +//     r = r ++ [digit] ++ "."
+>, <Line: +//     int i = 1
+>, <Line: +//     while i < ndigits && rem != 0.0:
+>, <Line: +//         rem = rem * 10.0
+>, <Line: +//         n / d = rem
+>, <Line: +//         digit = (char) n / d
+>, <Line: +//         rem = rem - (real) digit
+>, <Line: +//         r = r ++ [digit]
+>, <Line: +//         i = i + 1
+>, <Line: +//     // need to support rounding!
+>, <Line: +//     return r
+>]
+[<Line: -public function toDecimal(real x) -> string:
+>, <Line: -    return toDecimal(x,10)
+>, <Line: -public function toDecimal(real x, int ndigits) -> string:
+>, <Line: -    string r
+>, <Line: -    if x < 0.0:
+>, <Line: -        r = "-"
+>, <Line: -        x = -x
+>, <Line: -    else:
+>, <Line: -        r = ""
+>, <Line: -    int n / int d = x
+>, <Line: -    char digit = (char) n / d
+>, <Line: -    real rem = x - (real) digit
+>, <Line: -    r = r ++ [digit] ++ "."
+>, <Line: -    int i = 1
+>, <Line: -    while i < ndigits && rem != 0.0:
+>, <Line: -        rem = rem * 10.0
+>, <Line: -        n / d = rem
+>, <Line: -        digit = (char) n / d
+>, <Line: -        rem = rem - (real) digit
+>, <Line: -        r = r ++ [digit]
+>, <Line: -        i = i + 1
+>, <Line: -    // need to support rounding!
+>, <Line: -    return r
+>]

@@ -1,0 +1,5 @@
+[<Line: +                when(fieldDescription.getActualName()).thenReturn(TypeProxy.INSTANCE_FIELD);
+>]
+[<Line: -import java.util.Collections;
+>, <Line: -                when(fieldDescription.getSourceCodeName()).thenReturn(TypeProxy.INSTANCE_FIELD);
+>]

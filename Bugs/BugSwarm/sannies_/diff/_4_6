@@ -1,0 +1,56 @@
+[<Line: +                        for (ByteBuffer bytes : avcC.getSequenceParameterSets()) {
+>, <Line: +                            IsoTypeWriterVariable.write(bytes.limit(), (ByteBuffer) buf.rewind(), len);
+>, <Line: +                            channel.write(bytes);
+>, <Line: +                        for (ByteBuffer bytes : avcC.getSequenceParameterSetExts()) {
+>, <Line: +                            IsoTypeWriterVariable.write(bytes.limit(), (ByteBuffer) buf.rewind(), len);
+>, <Line: +                            channel.write((bytes));
+>, <Line: +                        for (ByteBuffer bytes : avcC.getPictureParameterSets()) {
+>, <Line: +                            IsoTypeWriterVariable.write(bytes.limit(), (ByteBuffer) buf.rewind(), len);
+>, <Line: +                            channel.write((bytes));
+>, <Line: +                        for (ByteBuffer bytes : avcC.getSequenceParameterSets()) {
+>, <Line: +                            spsPpsSize += len + bytes.limit();
+>, <Line: +                        for (ByteBuffer bytes : avcC.getSequenceParameterSetExts()) {
+>, <Line: +                            spsPpsSize += len + bytes.limit();
+>, <Line: +                        for (ByteBuffer bytes : avcC.getPictureParameterSets()) {
+>, <Line: +                            spsPpsSize += len + bytes.limit();
+>, <Line: +                        for (ByteBuffer bytes : avcC.getSequenceParameterSets()) {
+>, <Line: +                            spsPpsSize += len + bytes.limit();
+>, <Line: +                        for (ByteBuffer bytes : avcC.getSequenceParameterSetExts()) {
+>, <Line: +                            spsPpsSize += len + bytes.limit();
+>, <Line: +                        for (ByteBuffer bytes : avcC.getPictureParameterSets()) {
+>, <Line: +                            spsPpsSize += len + bytes.limit();
+>, <Line: +                        for (ByteBuffer bytes : avcC.getSequenceParameterSets()) {
+>, <Line: +                            IsoTypeWriterVariable.write(bytes.limit(), data, len);
+>, <Line: +                        for (ByteBuffer bytes : avcC.getSequenceParameterSetExts()) {
+>, <Line: +                            IsoTypeWriterVariable.write(bytes.limit(), data, len);
+>, <Line: +                        for (ByteBuffer bytes : avcC.getPictureParameterSets()) {
+>, <Line: +                            IsoTypeWriterVariable.write(bytes.limit(), data, len);
+>]
+[<Line: -                        for (byte[] bytes : avcC.getSequenceParameterSets()) {
+>, <Line: -                            IsoTypeWriterVariable.write(bytes.length, (ByteBuffer) buf.rewind(), len);
+>, <Line: -                            channel.write(ByteBuffer.wrap(bytes));
+>, <Line: -                        for (byte[] bytes : avcC.getSequenceParameterSetExts()) {
+>, <Line: -                            IsoTypeWriterVariable.write(bytes.length, (ByteBuffer) buf.rewind(), len);
+>, <Line: -                            channel.write(ByteBuffer.wrap(bytes));
+>, <Line: -                        for (byte[] bytes : avcC.getPictureParameterSets()) {
+>, <Line: -                            IsoTypeWriterVariable.write(bytes.length, (ByteBuffer) buf.rewind(), len);
+>, <Line: -                            channel.write(ByteBuffer.wrap(bytes));
+>, <Line: -                        for (byte[] bytes : avcC.getSequenceParameterSets()) {
+>, <Line: -                            spsPpsSize += len + bytes.length;
+>, <Line: -                        for (byte[] bytes : avcC.getSequenceParameterSetExts()) {
+>, <Line: -                            spsPpsSize += len + bytes.length;
+>, <Line: -                        for (byte[] bytes : avcC.getPictureParameterSets()) {
+>, <Line: -                            spsPpsSize += len + bytes.length;
+>, <Line: -                        for (byte[] bytes : avcC.getSequenceParameterSets()) {
+>, <Line: -                            spsPpsSize += len + bytes.length;
+>, <Line: -                        for (byte[] bytes : avcC.getSequenceParameterSetExts()) {
+>, <Line: -                            spsPpsSize += len + bytes.length;
+>, <Line: -                        for (byte[] bytes : avcC.getPictureParameterSets()) {
+>, <Line: -                            spsPpsSize += len + bytes.length;
+>, <Line: -                        for (byte[] bytes : avcC.getSequenceParameterSets()) {
+>, <Line: -                            IsoTypeWriterVariable.write(bytes.length, data, len);
+>, <Line: -                        for (byte[] bytes : avcC.getSequenceParameterSetExts()) {
+>, <Line: -                            IsoTypeWriterVariable.write(bytes.length, data, len);
+>, <Line: -                        for (byte[] bytes : avcC.getPictureParameterSets()) {
+>, <Line: -                            IsoTypeWriterVariable.write(bytes.length, data, len);
+>]

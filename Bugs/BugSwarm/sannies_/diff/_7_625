@@ -1,0 +1,62 @@
+[<Line: +package org.mp4parser.streaming.input.aac;
+>, <Line: +/**
+>, <Line: + * Created by sannies on 01.09.2015.
+>, <Line: + */
+>, <Line: +public enum AudioObjectTypes {
+>, <Line: +    NOT_APPLICABLE("n/a"),
+>, <Line: +    AAC_Main("AAC Main"),
+>, <Line: +    AAC_LC("AAC LC (Low Complexity)"),
+>, <Line: +    AAC_SSR("AAC SSR (Scalable Sample Rate)"),
+>, <Line: +    AAC_LTP("AAC LTP (Long Term Prediction)"),
+>, <Line: +    SBR("SBR (Spectral Band Replication)"),
+>, <Line: +    AAC_Scalable("AAC Scalable"),
+>, <Line: +    TwinVQ("TwinVQ"),
+>, <Line: +    CELP("CELP (Code Excited Linear Prediction)"),
+>, <Line: +    HXVC("HXVC (Harmonic Vector eXcitation Coding)"),
+>, <Line: +    Reserved1("Reserved"),
+>, <Line: +    Reserved2("Reserved"),
+>, <Line: +    TTSI("TTSI (Text-To-Speech Interface)"),
+>, <Line: +    Main_Synthesis("Main Synthesis"),
+>, <Line: +    Wavetable_Synthesis("Wavetable Synthesis"),
+>, <Line: +    General_MIDI("General MIDI"),
+>, <Line: +    Algorithmic_Synthesis_and_Audio_Effects("Algorithmic Synthesis and Audio Effects"),
+>, <Line: +    ER_AAC_LC("ER (Error Resilient) AAC LC"),
+>, <Line: +    Reserved3("Reserved"),
+>, <Line: +    ER_AAC_LTP("ER AAC LTP"),
+>, <Line: +    ER_AAC_Scalable("ER AAC Scalable"),
+>, <Line: +    ER_TwinVQ("ER TwinVQ"),
+>, <Line: +    ER_BSAC("ER BSAC (Bit-Sliced Arithmetic Coding)"),
+>, <Line: +    ER_AAC_LD("ER AAC LD (Low Delay)"),
+>, <Line: +    ER_CELP("ER CELP"),
+>, <Line: +    ER_HVXC("ER HVXC"),
+>, <Line: +    ER_HILN("ER HILN (Harmonic and Individual Lines plus Noise)"),
+>, <Line: +    ER_Parametric("ER Parametric"),
+>, <Line: +    SSC("SSC (SinuSoidal Coding)"),
+>, <Line: +    PS("PS (Parametric Stereo)"),
+>, <Line: +    MPEG_Surround("MPEG Surround"),
+>, <Line: +    Escape_value("(Escape value)"),
+>, <Line: +    Layer_1("Layer-1"),
+>, <Line: +    Layer_2("Layer-2"),
+>, <Line: +    Layer_3("Layer-3"),
+>, <Line: +    DST("DST (Direct Stream Transfer)"),
+>, <Line: +    ALS("ALS (Audio Lossless)"),
+>, <Line: +    SLS("SLS (Scalable LosslesS)"),
+>, <Line: +    SLS_non_core("SLS non-core"),
+>, <Line: +    ER_AAC_ELD("ER AAC ELD (Enhanced Low Delay)"),
+>, <Line: +    SMR_Simple("SMR (Symbolic Music Representation) Simple"),
+>, <Line: +    SMR_Main("SMR Main"),
+>, <Line: +    USAC_NO_SBR("USAC (Unified Speech and Audio Coding) (no SBR)"),
+>, <Line: +    SAOC("SAOC (Spatial Audio Object Coding)"),
+>, <Line: +    LD_MPEG_Surround("LD MPEG Surround"),
+>, <Line: +    USAC("USAC");
+>, <Line: +    String name;
+>, <Line: +    AudioObjectTypes(String name) {
+>, <Line: +        this.name = name;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return name;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

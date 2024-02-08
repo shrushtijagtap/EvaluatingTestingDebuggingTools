@@ -1,0 +1,11 @@
+[<Line: +package org.kairosdb.core.http.rest;
+>, <Line: +import org.kairosdb.core.http.rest.json.Query;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 6/12/17.
+>, <Line: + */
+>, <Line: +public interface QueryPreProcessorContainer
+>, <Line: +{
+>, <Line: +	Query preProcess(Query query);
+>, <Line: +}
+>]
+[]

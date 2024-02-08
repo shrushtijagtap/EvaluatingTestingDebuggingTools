@@ -1,0 +1,38 @@
+[<Line: +        final Iterator<Class<?>> execution = Arrays.<Class<?>>asList(Object.class, String.class, Integer.class, Double.class, Float.class).iterator();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.ExecutionDispatcher.class).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: +            @Override
+>, <Line: +            public AccessControlContext create() {
+>, <Line: +                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: +            }
+>, <Line: +        }).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: +            @Override
+>, <Line: +            public Class<?> create() {
+>, <Line: +                return execution.next();
+>, <Line: +            }
+>, <Line: +        }).apply();
+>, <Line: +        final Iterator<Class<?>> java9Dispatcher = Arrays.<Class<?>>asList(Object.class, String.class, Integer.class, Double.class, Float.class).iterator();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.Java9CapableVmDispatcher.class).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: +            @Override
+>, <Line: +            public AccessControlContext create() {
+>, <Line: +                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: +            }
+>, <Line: +        }).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: +            @Override
+>, <Line: +            public Class<?> create() {
+>, <Line: +                return java9Dispatcher.next();
+>, <Line: +            }
+>, <Line: +        }).apply();
+>, <Line: +        final Iterator<Class<?>> legacyDispatcher = Arrays.<Class<?>>asList(Object.class, String.class, Integer.class, Double.class, Float.class).iterator();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.Default.ExecutingTransformer.LegacyDispatcher.class).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: +            @Override
+>, <Line: +            public AccessControlContext create() {
+>, <Line: +                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: +            }
+>, <Line: +        }).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: +            @Override
+>, <Line: +            public Class<?> create() {
+>, <Line: +                return legacyDispatcher.next();
+>, <Line: +            }
+>, <Line: +        }).apply();
+>]
+[]

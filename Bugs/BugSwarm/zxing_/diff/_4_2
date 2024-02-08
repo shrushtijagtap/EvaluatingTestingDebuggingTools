@@ -1,0 +1,8 @@
+[<Line: +  static final int GTIN_SIZE = 40;
+>, <Line: +  final void encodeCompressedGtin(StringBuilder buf, int currentPos) {
+>, <Line: +  final void encodeCompressedGtinWithoutAI(StringBuilder buf, int currentPos, int initialBufferPosition) {
+>]
+[<Line: -  protected static final int GTIN_SIZE = 40;
+>, <Line: -  protected final void encodeCompressedGtin(StringBuilder buf, int currentPos) {
+>, <Line: -  protected final void encodeCompressedGtinWithoutAI(StringBuilder buf, int currentPos, int initialBufferPosition) {
+>]

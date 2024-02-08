@@ -1,0 +1,78 @@
+[]
+[<Line: -	public static ListOperator ListOperator(Type.EffectiveList type, int target,
+>, <Line: -			int leftOperand, int rightOperand, ListOperatorKind dir) {
+>, <Line: -		return new ListOperator(type, target, leftOperand, rightOperand,
+>, <Line: -				dir);
+>, <Line: -	}
+>, <Line: -	public enum ListOperatorKind {
+>, <Line: -		APPEND(0) {
+>, <Line: -			public String toString() {
+>, <Line: -				return "append";
+>, <Line: -			}
+>, <Line: -		};
+>, <Line: -		public final int offset;
+>, <Line: -		private ListOperatorKind(int offset) {
+>, <Line: -			this.offset = offset;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Reads the (effective) list values from two operand registers, performs an
+>, <Line: -	 * operation (e.g. append) on them and writes the result back to a target
+>, <Line: -	 * register. For example, the following Whiley code:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * function f([int] xs, [int] ys) -> [int]:
+>, <Line: -	 *    return xs ++ ys
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * can be translated into the following WyIL code:
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 * function f([int] xs, [int] ys) -> [int]:
+>, <Line: -	 * body:
+>, <Line: -	 *    append %2 = %0, %1   : [int]
+>, <Line: -	 *    return %2            : [int]
+>, <Line: -	 * </pre>
+>, <Line: -	 *
+>, <Line: -	 * This appends two the parameter lists together writting the new list into
+>, <Line: -	 * register <code>%2</code>.
+>, <Line: -	 *
+>, <Line: -	 * @author David J. Pearce
+>, <Line: -	 *
+>, <Line: -	 */
+>, <Line: -	public static final class ListOperator extends
+>, <Line: -			AbstractBinaryAssignable<Type.EffectiveList> {
+>, <Line: -		public final ListOperatorKind kind;
+>, <Line: -		private ListOperator(Type.EffectiveList type, int target, int leftOperand,
+>, <Line: -				int rightOperand, ListOperatorKind operation) {
+>, <Line: -			super(type, target, leftOperand, rightOperand);
+>, <Line: -			if (operation == null) {
+>, <Line: -				throw new IllegalArgumentException(
+>, <Line: -						"ListAppend direction cannot be null");
+>, <Line: -			}
+>, <Line: -			this.kind = operation;
+>, <Line: -		}
+>, <Line: -		public int opcode() {
+>, <Line: -			return OPCODE_append + kind.offset;
+>, <Line: -		}
+>, <Line: -		@Override
+>, <Line: -		public Code.Unit clone(int nTarget, int[] nOperands) {
+>, <Line: -			return ListOperator(type(), nTarget, nOperands[0], nOperands[1],
+>, <Line: -					kind);
+>, <Line: -		}
+>, <Line: -		public int hashCode() {
+>, <Line: -			return super.hashCode() + kind.hashCode();
+>, <Line: -		}
+>, <Line: -		public boolean equals(Object o) {
+>, <Line: -			if (o instanceof ListOperator) {
+>, <Line: -				ListOperator setop = (ListOperator) o;
+>, <Line: -				return super.equals(setop) && kind.equals(setop.kind);
+>, <Line: -			}
+>, <Line: -			return false;
+>, <Line: -		}
+>, <Line: -		public String toString() {
+>, <Line: -			return kind + " %" + target() + " = %" + operand(0) + ", %"
+>, <Line: -					+ operand(1) + " : " + type();
+>, <Line: -		}
+>, <Line: -	}
+>]

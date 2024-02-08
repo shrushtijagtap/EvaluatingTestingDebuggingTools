@@ -1,0 +1,34 @@
+[<Line: +      for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+>, <Line: +        Var v = it.next();
+>, <Line: +        if (isVarInlineForbidden(v)) {
+>, <Line: +          continue;
+>, <Line: +        }
+>, <Line: +        ReferenceCollection referenceInfo = referenceMap.getReferences(v);
+>, <Line: +        if (isInlinableObject(referenceInfo.references)) {
+>, <Line: +          // Blacklist the object itself, as well as any other values
+>, <Line: +          // that it refers to, since they will have been moved around.
+>, <Line: +          staleVars.add(v);
+>, <Line: +          Reference init = referenceInfo.getInitializingReference();
+>, <Line: +          // Split up the object into individual variables if the object
+>, <Line: +          // is never referenced directly in full.
+>, <Line: +          splitObject(v, init, referenceInfo);
+>, <Line: +        vnode = v.getScope().getRootNode().getLastChild().getFirstChild();
+>]
+[<Line: -      if (NodeUtil.isFunctionBlock(t.getScopeRoot())) {
+>, <Line: -        for (Iterator<Var> it = t.getScope().getVars(); it.hasNext();) {
+>, <Line: -          Var v = it.next();
+>, <Line: -          if (isVarInlineForbidden(v)) {
+>, <Line: -            continue;
+>, <Line: -          }
+>, <Line: -          ReferenceCollection referenceInfo = referenceMap.getReferences(v);
+>, <Line: -          if (isInlinableObject(referenceInfo.references)) {
+>, <Line: -            // Blacklist the object itself, as well as any other values
+>, <Line: -            // that it refers to, since they will have been moved around.
+>, <Line: -            staleVars.add(v);
+>, <Line: -            Reference init = referenceInfo.getInitializingReference();
+>, <Line: -            // Split up the object into individual variables if the object
+>, <Line: -            // is never referenced directly in full.
+>, <Line: -            splitObject(v, init, referenceInfo);
+>, <Line: -          }
+>, <Line: -        vnode = v.getScope().getRootNode().getParent().getLastChild().getFirstChild();
+>]

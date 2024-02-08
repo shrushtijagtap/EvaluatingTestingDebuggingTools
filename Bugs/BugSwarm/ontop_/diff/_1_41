@@ -1,0 +1,22 @@
+[<Line: +import it.unibz.krdb.obda.model.ObjectConstant;
+>, <Line: +import it.unibz.krdb.obda.ontology.ObjectPropertyAssertion;
+>, <Line: +import it.unibz.krdb.obda.ontology.ObjectPropertyExpression;
+>, <Line: +/**
+>, <Line: + * Represents ObjectPropertyAssertion from OWL 2 QL Specification
+>, <Line: + * 
+>, <Line: + * ObjectPropertyAssertion := 'ObjectPropertyAssertion' '(' axiomAnnotations
+>, <Line: + * 									ObjectPropertyExpression sourceIndividual targetIndividual ')'
+>, <Line: + * ObjectPropertyExpression := ObjectProperty | InverseObjectProperty
+>, <Line: + * InverseObjectProperty := 'ObjectInverseOf' '(' ObjectProperty ')'
+>, <Line: + * 
+>, <Line: + *  Support for owl:topObjectProperty and owl:bottomObjectProperty
+>, <Line: + *     - the inverses of the two coincide with themselves 
+>, <Line: + * 
+>, <Line: + * @author Roman Kontchakov
+>, <Line: + *
+>, <Line: + */
+>]
+[<Line: -import it.unibz.krdb.obda.model.ObjectConstant;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectPropertyAssertion;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectPropertyExpression;
+>]

@@ -1,0 +1,41 @@
+[<Line: +package org.kairosdb.util;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.Map;
+>, <Line: +/**
+>, <Line: + Contains a map of SimpleStats
+>, <Line: + Created by bhawkins on 1/20/17.
+>, <Line: + */
+>, <Line: +public class StatsMap
+>, <Line: +{
+>, <Line: +	private Map<String, SimpleStats> m_statsMap;
+>, <Line: +	private Object m_mapLock = new Object();
+>, <Line: +	public StatsMap()
+>, <Line: +	{
+>, <Line: +		m_statsMap = new HashMap<>();
+>, <Line: +	}
+>, <Line: +	public void addMetric(String name, long value)
+>, <Line: +	{
+>, <Line: +		synchronized (m_mapLock)
+>, <Line: +		{
+>, <Line: +			SimpleStats stats = m_statsMap.get(name);
+>, <Line: +			if (stats == null)
+>, <Line: +			{
+>, <Line: +				stats = new SimpleStats();
+>, <Line: +				m_statsMap.put(name, stats);
+>, <Line: +			}
+>, <Line: +			stats.addValue(value);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public Map<String, SimpleStats> getStatsMap()
+>, <Line: +	{
+>, <Line: +		Map<String, SimpleStats> ret;
+>, <Line: +		synchronized (m_mapLock)
+>, <Line: +		{
+>, <Line: +			ret = m_statsMap;
+>, <Line: +			m_statsMap = new HashMap<>();
+>, <Line: +		}
+>, <Line: +		return ret;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

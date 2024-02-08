@@ -1,0 +1,173 @@
+[]
+[<Line: -/*
+>, <Line: - * Copyright 2016 KairosDB Authors
+>, <Line: - *
+>, <Line: - *    Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: - *    you may not use this file except in compliance with the License.
+>, <Line: - *    You may obtain a copy of the License at
+>, <Line: - *
+>, <Line: - *        http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - *
+>, <Line: - *    Unless required by applicable law or agreed to in writing, software
+>, <Line: - *    distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - *    See the License for the specific language governing permissions and
+>, <Line: - *    limitations under the License.
+>, <Line: - */
+>, <Line: -package org.kairosdb.datastore.cassandra;
+>, <Line: -import me.prettyprint.cassandra.serializers.ByteBufferSerializer;
+>, <Line: -import me.prettyprint.cassandra.serializers.BytesArraySerializer;
+>, <Line: -import me.prettyprint.cassandra.serializers.IntegerSerializer;
+>, <Line: -import me.prettyprint.hector.api.Keyspace;
+>, <Line: -import me.prettyprint.hector.api.beans.HColumn;
+>, <Line: -import me.prettyprint.hector.api.beans.Row;
+>, <Line: -import me.prettyprint.hector.api.beans.Rows;
+>, <Line: -import me.prettyprint.hector.api.factory.HFactory;
+>, <Line: -import me.prettyprint.hector.api.query.MultigetSliceQuery;
+>, <Line: -import me.prettyprint.hector.api.query.SliceQuery;
+>, <Line: -import org.kairosdb.core.KairosDataPointFactory;
+>, <Line: -import org.kairosdb.core.datapoints.*;
+>, <Line: -import org.kairosdb.core.datastore.CachedSearchResult;
+>, <Line: -import org.kairosdb.core.datastore.Order;
+>, <Line: -import org.kairosdb.core.datastore.QueryCallback;
+>, <Line: -import org.kairosdb.util.KDataInput;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.nio.ByteBuffer;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Map;
+>, <Line: -import static org.kairosdb.datastore.cassandra.CassandraDatastore.*;
+>, <Line: -public class QueryRunner
+>, <Line: -{
+>, <Line: -	public static final DataPointsRowKeySerializer ROW_KEY_SERIALIZER = new DataPointsRowKeySerializer();
+>, <Line: -	private Keyspace m_keyspace;
+>, <Line: -	private String m_columnFamily;
+>, <Line: -	private List<DataPointsRowKey> m_rowKeys;
+>, <Line: -	private int m_startTime; //relative row time
+>, <Line: -	private int m_endTime; //relative row time
+>, <Line: -	private QueryCallback m_queryCallback;
+>, <Line: -	private int m_singleRowReadSize;
+>, <Line: -	private int m_multiRowReadSize;
+>, <Line: -	private boolean m_limit = false;
+>, <Line: -	private boolean m_descending = false;
+>, <Line: -	private LongDataPointFactory m_longDataPointFactory = new LongDataPointFactoryImpl();
+>, <Line: -	private DoubleDataPointFactory m_doubleDataPointFactory = new DoubleDataPointFactoryImpl();
+>, <Line: -	private final KairosDataPointFactory m_kairosDataPointFactory;
+>, <Line: -	public QueryRunner(Keyspace keyspace, String columnFamily,
+>, <Line: -			KairosDataPointFactory kairosDataPointFactory,
+>, <Line: -			List<DataPointsRowKey> rowKeys, long startTime, long endTime,
+>, <Line: -			QueryCallback csResult,
+>, <Line: -			int singleRowReadSize, int multiRowReadSize, int limit, Order order)
+>, <Line: -	{
+>, <Line: -		m_keyspace = keyspace;
+>, <Line: -		m_columnFamily = columnFamily;
+>, <Line: -		m_rowKeys = rowKeys;
+>, <Line: -		m_kairosDataPointFactory = kairosDataPointFactory;
+>, <Line: -		long m_tierRowTime = rowKeys.get(0).getTimestamp();
+>, <Line: -		if (startTime < m_tierRowTime)
+>, <Line: -			m_startTime = 0;
+>, <Line: -		else
+>, <Line: -			m_startTime = getColumnName(m_tierRowTime, startTime);
+>, <Line: -		if (endTime > (m_tierRowTime + ROW_WIDTH))
+>, <Line: -			m_endTime = getColumnName(m_tierRowTime, m_tierRowTime + ROW_WIDTH) +1;
+>, <Line: -		else
+>, <Line: -			m_endTime = getColumnName(m_tierRowTime, endTime) +1; //add 1 so we get 0x1 for last bit
+>, <Line: -		m_queryCallback = csResult;
+>, <Line: -		m_singleRowReadSize = singleRowReadSize;
+>, <Line: -		m_multiRowReadSize = multiRowReadSize;
+>, <Line: -		if (limit != 0)
+>, <Line: -		{
+>, <Line: -			m_limit = true;
+>, <Line: -			m_singleRowReadSize = limit;
+>, <Line: -			m_multiRowReadSize = limit;
+>, <Line: -		}
+>, <Line: -		if (order == Order.DESC)
+>, <Line: -			m_descending = true;
+>, <Line: -	}
+>, <Line: -	public void runQuery() throws IOException
+>, <Line: -	{
+>, <Line: -		MultigetSliceQuery<DataPointsRowKey, Integer, byte[]> msliceQuery =
+>, <Line: -				HFactory.createMultigetSliceQuery(m_keyspace,
+>, <Line: -						ROW_KEY_SERIALIZER,
+>, <Line: -						IntegerSerializer.get(), BytesArraySerializer.get());
+>, <Line: -		msliceQuery.setColumnFamily(m_columnFamily);
+>, <Line: -		msliceQuery.setKeys(m_rowKeys);
+>, <Line: -		if (m_descending)
+>, <Line: -			msliceQuery.setRange(m_endTime, m_startTime, true, m_multiRowReadSize);
+>, <Line: -		else
+>, <Line: -			msliceQuery.setRange(m_startTime, m_endTime, false, m_multiRowReadSize);
+>, <Line: -		Rows<DataPointsRowKey, Integer, byte[]> rows =
+>, <Line: -				msliceQuery.execute().get();
+>, <Line: -		List<Row<DataPointsRowKey, Integer, byte[]>> unfinishedRows =
+>, <Line: -				new ArrayList<Row<DataPointsRowKey, Integer, byte[]>>();
+>, <Line: -		for (Row<DataPointsRowKey, Integer, byte[]> row : rows)
+>, <Line: -		{
+>, <Line: -			List<HColumn<Integer, byte[]>> columns = row.getColumnSlice().getColumns();
+>, <Line: -			if (!m_limit && columns.size() == m_multiRowReadSize)
+>, <Line: -				unfinishedRows.add(row);
+>, <Line: -			writeColumns(row.getKey(), columns);
+>, <Line: -		}
+>, <Line: -		//Iterate through the unfinished rows and get the rest of the data.
+>, <Line: -		//todo: use multiple threads to retrieve this data
+>, <Line: -		for (Row<DataPointsRowKey, Integer, byte[]> unfinishedRow : unfinishedRows)
+>, <Line: -		{
+>, <Line: -			DataPointsRowKey key = unfinishedRow.getKey();
+>, <Line: -			SliceQuery<DataPointsRowKey, Integer, byte[]> sliceQuery =
+>, <Line: -					HFactory.createSliceQuery(m_keyspace, ROW_KEY_SERIALIZER,
+>, <Line: -					IntegerSerializer.get(), BytesArraySerializer.get());
+>, <Line: -			sliceQuery.setColumnFamily(m_columnFamily);
+>, <Line: -			sliceQuery.setKey(key);
+>, <Line: -			List<HColumn<Integer, byte[]>> columns = unfinishedRow.getColumnSlice().getColumns();
+>, <Line: -			do
+>, <Line: -			{
+>, <Line: -				Integer lastTime = columns.get(columns.size() -1).getName();
+>, <Line: -				if (m_descending)
+>, <Line: -					sliceQuery.setRange(lastTime-1, m_startTime, true, m_singleRowReadSize);
+>, <Line: -				else
+>, <Line: -					sliceQuery.setRange(lastTime+1, m_endTime, false, m_singleRowReadSize);
+>, <Line: -				columns = sliceQuery.execute().get().getColumns();
+>, <Line: -				writeColumns(key, columns);
+>, <Line: -			} while (columns.size() == m_singleRowReadSize);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private void writeColumns(DataPointsRowKey rowKey, List<HColumn<Integer, byte[]>> columns)
+>, <Line: -			throws IOException
+>, <Line: -	{
+>, <Line: -		if (columns.size() != 0)
+>, <Line: -		{
+>, <Line: -			Map<String, String> tags = rowKey.getTags();
+>, <Line: -			String type = rowKey.getDataType();
+>, <Line: -			m_queryCallback.startDataPointSet(type, tags);
+>, <Line: -			DataPointFactory dataPointFactory = null;
+>, <Line: -			dataPointFactory = m_kairosDataPointFactory.getFactoryForDataStoreType(type);
+>, <Line: -			for (HColumn<Integer, byte[]> column : columns)
+>, <Line: -			{
+>, <Line: -				int columnTime = column.getName();
+>, <Line: -				byte[] value = column.getValue();
+>, <Line: -				long timestamp = getColumnTimestamp(rowKey.getTimestamp(), columnTime);
+>, <Line: -				//If type is legacy type it will point to the same object, no need for equals
+>, <Line: -				if (type == LegacyDataPointFactory.DATASTORE_TYPE)
+>, <Line: -				{
+>, <Line: -					if (isLongValue(columnTime))
+>, <Line: -					{
+>, <Line: -						m_queryCallback.addDataPoint(
+>, <Line: -								new LegacyLongDataPoint(timestamp,
+>, <Line: -										ValueSerializer.getLongFromByteBuffer(ByteBuffer.wrap(value))));
+>, <Line: -					}
+>, <Line: -					else
+>, <Line: -					{
+>, <Line: -						m_queryCallback.addDataPoint(
+>, <Line: -								new LegacyDoubleDataPoint(timestamp,
+>, <Line: -										ValueSerializer.getDoubleFromByteBuffer(ByteBuffer.wrap(value))));
+>, <Line: -					}
+>, <Line: -				}
+>, <Line: -				else
+>, <Line: -				{
+>, <Line: -					m_queryCallback.addDataPoint(
+>, <Line: -							dataPointFactory.getDataPoint(timestamp, KDataInput.createInput(value)));
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -}
+>]

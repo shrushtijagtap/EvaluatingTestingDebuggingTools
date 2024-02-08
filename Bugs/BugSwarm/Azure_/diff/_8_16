@@ -1,0 +1,66 @@
+[<Line: +/**
+>, <Line: + * Copyright (c) Microsoft Corporation. All rights reserved.
+>, <Line: + * Licensed under the MIT License. See License.txt in the project root for
+>, <Line: + * license information.
+>, <Line: + */
+>, <Line: +package com.microsoft.azure.management.storage.implementation.api;
+>, <Line: +import com.fasterxml.jackson.annotation.JsonProperty;
+>, <Line: +/**
+>, <Line: + * The encryption settings on the account.
+>, <Line: + */
+>, <Line: +public class Encryption {
+>, <Line: +    /**
+>, <Line: +     * Gets the services which are encrypted.
+>, <Line: +     */
+>, <Line: +    private EncryptionServices services;
+>, <Line: +    /**
+>, <Line: +     * Gets the encryption keySource(provider). Possible values
+>, <Line: +     * (case-insensitive):  Microsoft.Storage.
+>, <Line: +     */
+>, <Line: +    @JsonProperty(required = true)
+>, <Line: +    private String keySource;
+>, <Line: +    /**
+>, <Line: +     * Creates an instance of Encryption class.
+>, <Line: +     */
+>, <Line: +    public Encryption() {
+>, <Line: +        keySource = "Microsoft.Storage";
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Get the services value.
+>, <Line: +     *
+>, <Line: +     * @return the services value
+>, <Line: +     */
+>, <Line: +    public EncryptionServices services() {
+>, <Line: +        return this.services;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Set the services value.
+>, <Line: +     *
+>, <Line: +     * @param services the services value to set
+>, <Line: +     * @return the Encryption object itself.
+>, <Line: +     */
+>, <Line: +    public Encryption withServices(EncryptionServices services) {
+>, <Line: +        this.services = services;
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Get the keySource value.
+>, <Line: +     *
+>, <Line: +     * @return the keySource value
+>, <Line: +     */
+>, <Line: +    public String keySource() {
+>, <Line: +        return this.keySource;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Set the keySource value.
+>, <Line: +     *
+>, <Line: +     * @param keySource the keySource value to set
+>, <Line: +     * @return the Encryption object itself.
+>, <Line: +     */
+>, <Line: +    public Encryption withKeySource(String keySource) {
+>, <Line: +        this.keySource = keySource;
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

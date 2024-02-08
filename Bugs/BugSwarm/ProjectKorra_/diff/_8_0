@@ -1,0 +1,280 @@
+[<Line: +import org.bukkit.event.entity.EntityDeathEvent;
+>, <Line: +	public static HashMap<Player, String> bendingDeathPlayer = new HashMap<Player, String>(); // Player killed by Bending
+>, <Line: +			player.sendMessage(ChatColor.YELLOW + "Reminder, you toggled your bending before signing off. Enable it again with /bending toggle.");
+>, <Line: +		if ((player.hasPermission("bending.avatar") || GeneralMethods.getBendingPlayer(player.getName()).getElements().size() > 1) && chatEnabled) {
+>, <Line: +				if (str.equalsIgnoreCase("AirSpout") || str.equalsIgnoreCase("WaterSpout") || str.equalsIgnoreCase("SandSpout")) {
+>, <Line: +		if (WaterWall.wasBrokenFor(player, block) || OctopusForm.wasBrokenFor(player, block) || Torrent.wasBrokenFor(player, block) || WaterWave.wasBrokenFor(player, block)) {
+>, <Line: +		if (Paralyze.isParalyzed(player) || ChiCombo.isParalyzed(player) || Bloodbending.isBloodbended(player) || Suffocate.isBreathbent(player)) {
+>, <Line: +		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity) || Suffocate.isBreathbent(entity))
+>, <Line: +		if (event.getCause() == DamageCause.FIRE && FireStream.ignitedblocks.containsKey(entity.getLocation().getBlock())) {
+>, <Line: +			if (GeneralMethods.getBoundAbility(player) != null && GeneralMethods.getBoundAbility(player).equalsIgnoreCase("HeatControl")) {
+>, <Line: +	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+>, <Line: +	public void onEntityDeath(EntityDeathEvent event) {
+>, <Line: +		if (MetalClips.clipped.containsKey(event.getEntity())) {
+>, <Line: +			List<ItemStack> drops = event.getDrops();
+>, <Line: +			List<ItemStack> newdrops = new ArrayList<ItemStack>();
+>, <Line: +			for (int i = 0; i < drops.size(); i++) {
+>, <Line: +				if (!(drops.get(i).getType() == Material.IRON_HELMET || drops.get(i).getType() == Material.IRON_CHESTPLATE || drops.get(i).getType() == Material.IRON_LEGGINGS || drops.get(i).getType() == Material.IRON_BOOTS || drops.get(i).getType() == Material.AIR))
+>, <Line: +					newdrops.add(drops.get(i));
+>, <Line: +			}
+>, <Line: +			newdrops.add(new ItemStack(Material.IRON_INGOT, MetalClips.clipped.get(event.getEntity())));
+>, <Line: +			newdrops.add(MetalClips.getOriginalHelmet(event.getEntity()));
+>, <Line: +			newdrops.add(MetalClips.getOriginalChestplate(event.getEntity()));
+>, <Line: +			newdrops.add(MetalClips.getOriginalLeggings(event.getEntity()));
+>, <Line: +			newdrops.add(MetalClips.getOriginalBoots(event.getEntity()));
+>, <Line: +			event.getDrops().clear();
+>, <Line: +			event.getDrops().addAll(newdrops);
+>, <Line: +			MetalClips.clipped.remove(event.getEntity());
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +			if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity) || Suffocate.isBreathbent(entity))
+>, <Line: +		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity) || Suffocate.isBreathbent(entity))
+>, <Line: +		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity) || Suffocate.isBreathbent(entity))
+>, <Line: +		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity) || Suffocate.isBreathbent(entity))
+>, <Line: +		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity) || Suffocate.isBreathbent(entity))
+>, <Line: +		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity) || Suffocate.isBreathbent(entity))
+>, <Line: +				double minimumDistance = plugin.getConfig().getDouble("Properties.HorizontalCollisionPhysics.WallDamageMinimumDistance");
+>, <Line: +				double damage = ((e.getDistanceTraveled() - minimumDistance) < 0 ? 0 : e.getDistanceTraveled() - minimumDistance) / (e.getDifference().length());
+>, <Line: +		if (player.hasPermission("bending.avatar") || GeneralMethods.getBendingPlayer(player.getName()).getElements().size() > 1) {
+>, <Line: +			if (GeneralMethods.isBender(player.getName(), Element.Air) && event.getCause() == DamageCause.FALL && GeneralMethods.canBendPassive(player.getName(), Element.Air)) {
+>, <Line: +			if (!event.isCancelled() && GeneralMethods.isBender(player.getName(), Element.Water) && event.getCause() == DamageCause.FALL && GeneralMethods.canBendPassive(player.getName(), Element.Water)) {
+>, <Line: +			if (!event.isCancelled() && GeneralMethods.isBender(player.getName(), Element.Earth) && event.getCause() == DamageCause.FALL && GeneralMethods.canBendPassive(player.getName(), Element.Earth)) {
+>, <Line: +			if (!event.isCancelled() && GeneralMethods.isBender(player.getName(), Element.Chi) && event.getCause() == DamageCause.FALL && GeneralMethods.canBendPassive(player.getName(), Element.Chi)) {
+>, <Line: +			if (GeneralMethods.canBendPassive(player.getName(), Element.Fire) && GeneralMethods.isBender(player.getName(), Element.Fire) && (event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.FIRE_TICK)) {
+>, <Line: +			if (GeneralMethods.isBender(player.getName(), Element.Earth) && event.getCause() == DamageCause.SUFFOCATION && TempBlock.isTempBlock(player.getEyeLocation().getBlock())) {
+>, <Line: +		//		if (Combustion.fireballs.contains(source.getEntityId())) {
+>, <Line: +		//			e.setCancelled(true);
+>, <Line: +		//		}
+>, <Line: +			//			Player p = (Player) en; // This is the player getting hurt.
+>, <Line: +			if (e.getDamager() instanceof Player) { // This is the player hitting someone.
+>, <Line: +					if (GeneralMethods.isBender(sourceplayer.getName(), Element.Chi) && e.getCause() == DamageCause.ENTITY_ATTACK && e.getDamage() == 1) {
+>, <Line: +							if (GeneralMethods.isWeapon(sourceplayer.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Chi.CanBendWithWeapons")) {
+>, <Line: +								if (GeneralMethods.getBoundAbility(sourceplayer) != null && GeneralMethods.getBoundAbility(sourceplayer).equalsIgnoreCase("Paralyze")) {
+>, <Line: +						//						if (sourceplayer.getLocation().distance(targetplayer.getLocation()) <= plugin.getConfig().getDouble("Abilities.Chi.RapidPunch.Distance") && Methods.getBoundAbility(sourceplayer) == null) {
+>, <Line: +						//							if (Methods.isWeapon(sourceplayer.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Chi.CanBendWithWeapons")) {
+>, <Line: +						//								return;
+>, <Line: +						//							} else {
+>, <Line: +						//								if (ChiPassive.willChiBlock(targetplayer)) {
+>, <Line: +						//									ChiPassive.blockChi(targetplayer);
+>, <Line: +						//								}
+>, <Line: +						//							}
+>, <Line: +						//						}
+>, <Line: +					if (GeneralMethods.isWeapon(sourceplayer.getItemInHand().getType()) && !ProjectKorra.plugin.getConfig().getBoolean("Properties.Chi.CanBendWithWeapons")) {
+>, <Line: +						if (GeneralMethods.getBoundAbility(sourceplayer) != null && GeneralMethods.getBoundAbility(sourceplayer).equalsIgnoreCase("Paralyze") && e.getDamage() == 1) {
+>, <Line: +				if (!(drops.get(i).getType() == Material.LEATHER_BOOTS || drops.get(i).getType() == Material.LEATHER_CHESTPLATE || drops.get(i).getType() == Material.LEATHER_HELMET || drops.get(i).getType() == Material.LEATHER_LEGGINGS || drops.get(i).getType() == Material.AIR))
+>, <Line: +				if (!(drops.get(i).getType() == Material.LEATHER_BOOTS || drops.get(i).getType() == Material.LEATHER_CHESTPLATE || drops.get(i).getType() == Material.LEAVES || drops.get(i).getType() == Material.LEAVES_2 || drops.get(i).getType() == Material.LEATHER_LEGGINGS || drops.get(i).getType() == Material.AIR))
+>, <Line: +		if (MetalClips.clipped.containsKey(event.getEntity())) {
+>, <Line: +				if (!(drops.get(i).getType() == Material.IRON_HELMET || drops.get(i).getType() == Material.IRON_CHESTPLATE || drops.get(i).getType() == Material.IRON_LEGGINGS || drops.get(i).getType() == Material.IRON_BOOTS || drops.get(i).getType() == Material.AIR))
+>, <Line: +					newdrops.add(drops.get(i));
+>, <Line: +			newdrops.add(MetalClips.getOriginalHelmet(event.getEntity()));
+>, <Line: +			newdrops.add(MetalClips.getOriginalChestplate(event.getEntity()));
+>, <Line: +			newdrops.add(MetalClips.getOriginalLeggings(event.getEntity()));
+>, <Line: +			newdrops.add(MetalClips.getOriginalBoots(event.getEntity()));
+>, <Line: +			MetalClips.clipped.remove(event.getEntity());
+>, <Line: +			message = message.replace("{victim}", event.getEntity().getName()).replace("{attacker}", event.getEntity().getKiller().getName()).replace("{ability}", GeneralMethods.getAbilityColor(killerAbility) + ability);
+>, <Line: +		if (Paralyze.isParalyzed(player) || ChiCombo.isParalyzed(player) || Bloodbending.isBloodbended(player) || Suffocate.isBreathbent(player)) {
+>, <Line: +		if (WaterSpout.instances.containsKey(event.getPlayer()) || AirSpout.getPlayers().contains(event.getPlayer()) || SandSpout.getPlayers().contains(event.getPlayer())) {
+>, <Line: +			if (MetalClips.instances.get(p).getTarget() != null && MetalClips.instances.get(p).getTarget().getEntityId() == event.getPlayer().getEntityId()) {
+>, <Line: +			if (!GeneralMethods.getBoundAbility(player).equalsIgnoreCase("AirSwipe") || !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("FireBlast") || !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("EarthBlast") || !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("WaterManipulation")) {
+>, <Line: +				if (GeneralMethods.isWeapon(player.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Air.CanBendWithWeapons")) {
+>, <Line: +				if (GeneralMethods.isWeapon(player.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Water.CanBendWithWeapons")) {
+>, <Line: +				if (GeneralMethods.isWeapon(player.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Earth.CanBendWithWeapons")) {
+>, <Line: +				//				if (abil.equalsIgnoreCase("LavaSurge")) {
+>, <Line: +				//					new LavaSurge(player);
+>, <Line: +				//				}
+>, <Line: +				if (GeneralMethods.isWeapon(player.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Fire.CanBendWithWeapons")) {
+>, <Line: +			if (!GeneralMethods.getBoundAbility(player).equalsIgnoreCase("AirSwipe") || !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("FireBlast") || !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("EarthBlast") || !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("WaterManipulation")) {
+>, <Line: +				if (GeneralMethods.isWeapon(player.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Air.CanBendWithWeapons")) {
+>, <Line: +					if (!ProjectKorra.plugin.getConfig().getBoolean("Abilities.Air.Flight.HoverEnabled") || !AirMethods.canAirFlight(player))
+>, <Line: +				if (GeneralMethods.isWeapon(player.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Water.CanBendWithWeapons")) {
+>, <Line: +				if (GeneralMethods.isWeapon(player.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Earth.CanBendWithWeapons")) {
+>, <Line: +						if (MetalClips.instances.get(player).metalclips < (player.hasPermission("bending.ability.MetalClips.4clips") ? 4 : 3))
+>, <Line: +				if (GeneralMethods.isWeapon(player.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Fire.CanBendWithWeapons")) {
+>, <Line: +				if (GeneralMethods.isWeapon(player.getItemInHand().getType()) && !plugin.getConfig().getBoolean("Properties.Chi.CanBendWithWeapons")) {
+>, <Line: +		if (Tornado.getPlayers().contains(p) || Bloodbending.isBloodbended(p) || Suffocate.isBreathbent(p) || FireJet.getPlayers().contains(p) || AvatarState.getPlayers().contains(p)) {
+>, <Line: +		//		if (Combustion.fireballs.contains(id)) {
+>, <Line: +		//			Location loc = event.getEntity().getLocation();
+>, <Line: +		////			for (Entity en: Methods.getEntitiesAroundPoint(loc, 4)) {
+>, <Line: +		////				if (en instanceof LivingEntity) {
+>, <Line: +		////					LivingEntity le = (LivingEntity) en;
+>, <Line: +		////					le.damage(ProjectKorra.plugin.getConfig().getDouble("Abilities.Fire.Combustion.Damage"));
+>, <Line: +		////				}
+>, <Line: +		////			}
+>, <Line: +		//		}
+>]
+[<Line: -	public static HashMap<Player, String> bendingDeathPlayer = new HashMap<Player, String>(); // Player
+>, <Line: -																								// killed
+>, <Line: -																								// by
+>, <Line: -																								// Bending
+>, <Line: -			player.sendMessage(ChatColor.YELLOW
+>, <Line: -					+ "Reminder, you toggled your bending before signing off. Enable it again with /bending toggle.");
+>, <Line: -		if ((player.hasPermission("bending.avatar")
+>, <Line: -				|| GeneralMethods.getBendingPlayer(player.getName()).getElements().size() > 1) && chatEnabled) {
+>, <Line: -				if (str.equalsIgnoreCase("AirSpout") || str.equalsIgnoreCase("WaterSpout")
+>, <Line: -						|| str.equalsIgnoreCase("SandSpout")) {
+>, <Line: -		if (WaterWall.wasBrokenFor(player, block) || OctopusForm.wasBrokenFor(player, block)
+>, <Line: -				|| Torrent.wasBrokenFor(player, block) || WaterWave.wasBrokenFor(player, block)) {
+>, <Line: -		} else if (FireMethods.tempFire.keySet().contains(block.getLocation())) {
+>, <Line: -			FireMethods.revertTempFire(block.getLocation());
+>, <Line: -		if (Paralyze.isParalyzed(player) || ChiCombo.isParalyzed(player) || Bloodbending.isBloodbended(player)
+>, <Line: -				|| Suffocate.isBreathbent(player)) {
+>, <Line: -		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity)
+>, <Line: -				|| Suffocate.isBreathbent(entity))
+>, <Line: -		if (event.getCause() == DamageCause.FIRE
+>, <Line: -				&& FireStream.ignitedblocks.containsKey(entity.getLocation().getBlock())) {
+>, <Line: -			if (GeneralMethods.getBoundAbility(player) != null
+>, <Line: -					&& GeneralMethods.getBoundAbility(player).equalsIgnoreCase("HeatControl")) {
+>, <Line: -			if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity)
+>, <Line: -					|| Suffocate.isBreathbent(entity))
+>, <Line: -		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity)
+>, <Line: -				|| Suffocate.isBreathbent(entity))
+>, <Line: -		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity)
+>, <Line: -				|| Suffocate.isBreathbent(entity))
+>, <Line: -		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity)
+>, <Line: -				|| Suffocate.isBreathbent(entity))
+>, <Line: -		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity)
+>, <Line: -				|| Suffocate.isBreathbent(entity))
+>, <Line: -		if (Paralyze.isParalyzed(entity) || ChiCombo.isParalyzed(entity) || Bloodbending.isBloodbended(entity)
+>, <Line: -				|| Suffocate.isBreathbent(entity))
+>, <Line: -				double minimumDistance = plugin.getConfig()
+>, <Line: -						.getDouble("Properties.HorizontalCollisionPhysics.WallDamageMinimumDistance");
+>, <Line: -				double damage = ((e.getDistanceTraveled() - minimumDistance) < 0 ? 0
+>, <Line: -						: e.getDistanceTraveled() - minimumDistance) / (e.getDifference().length());
+>, <Line: -		if (player.hasPermission("bending.avatar")
+>, <Line: -				|| GeneralMethods.getBendingPlayer(player.getName()).getElements().size() > 1) {
+>, <Line: -			if (GeneralMethods.isBender(player.getName(), Element.Air) && event.getCause() == DamageCause.FALL
+>, <Line: -					&& GeneralMethods.canBendPassive(player.getName(), Element.Air)) {
+>, <Line: -			if (!event.isCancelled() && GeneralMethods.isBender(player.getName(), Element.Water)
+>, <Line: -					&& event.getCause() == DamageCause.FALL
+>, <Line: -					&& GeneralMethods.canBendPassive(player.getName(), Element.Water)) {
+>, <Line: -			if (!event.isCancelled() && GeneralMethods.isBender(player.getName(), Element.Earth)
+>, <Line: -					&& event.getCause() == DamageCause.FALL
+>, <Line: -					&& GeneralMethods.canBendPassive(player.getName(), Element.Earth)) {
+>, <Line: -			if (!event.isCancelled() && GeneralMethods.isBender(player.getName(), Element.Chi)
+>, <Line: -					&& event.getCause() == DamageCause.FALL
+>, <Line: -					&& GeneralMethods.canBendPassive(player.getName(), Element.Chi)) {
+>, <Line: -			if (GeneralMethods.canBendPassive(player.getName(), Element.Fire)
+>, <Line: -					&& GeneralMethods.isBender(player.getName(), Element.Fire)
+>, <Line: -					&& (event.getCause() == DamageCause.FIRE || event.getCause() == DamageCause.FIRE_TICK)) {
+>, <Line: -			if (GeneralMethods.isBender(player.getName(), Element.Earth) && event.getCause() == DamageCause.SUFFOCATION
+>, <Line: -					&& TempBlock.isTempBlock(player.getEyeLocation().getBlock())) {
+>, <Line: -		// if (Combustion.fireballs.contains(source.getEntityId())) {
+>, <Line: -		// e.setCancelled(true);
+>, <Line: -		// }
+>, <Line: -			// Player p = (Player) en; // This is the player getting hurt.
+>, <Line: -			if (e.getDamager() instanceof Player) { // This is the player
+>, <Line: -													// hitting someone.
+>, <Line: -					if (GeneralMethods.isBender(sourceplayer.getName(), Element.Chi)
+>, <Line: -							&& e.getCause() == DamageCause.ENTITY_ATTACK && e.getDamage() == 1) {
+>, <Line: -							if (GeneralMethods.isWeapon(sourceplayer.getItemInHand().getType())
+>, <Line: -									&& !plugin.getConfig().getBoolean("Properties.Chi.CanBendWithWeapons")) {
+>, <Line: -								if (GeneralMethods.getBoundAbility(sourceplayer) != null
+>, <Line: -										&& GeneralMethods.getBoundAbility(sourceplayer).equalsIgnoreCase("Paralyze")) {
+>, <Line: -						// if
+>, <Line: -						// (sourceplayer.getLocation().distance(targetplayer.getLocation())
+>, <Line: -						// <=
+>, <Line: -						// plugin.getConfig().getDouble("Abilities.Chi.RapidPunch.Distance")
+>, <Line: -						// && Methods.getBoundAbility(sourceplayer) == null) {
+>, <Line: -						// if
+>, <Line: -						// (Methods.isWeapon(sourceplayer.getItemInHand().getType())
+>, <Line: -						// &&
+>, <Line: -						// !plugin.getConfig().getBoolean("Properties.Chi.CanBendWithWeapons"))
+>, <Line: -						// {
+>, <Line: -						// return;
+>, <Line: -						// } else {
+>, <Line: -						// if (ChiPassive.willChiBlock(targetplayer)) {
+>, <Line: -						// ChiPassive.blockChi(targetplayer);
+>, <Line: -						// }
+>, <Line: -						// }
+>, <Line: -						// }
+>, <Line: -					if (GeneralMethods.isWeapon(sourceplayer.getItemInHand().getType())
+>, <Line: -							&& !ProjectKorra.plugin.getConfig().getBoolean("Properties.Chi.CanBendWithWeapons")) {
+>, <Line: -						if (GeneralMethods.getBoundAbility(sourceplayer) != null
+>, <Line: -								&& GeneralMethods.getBoundAbility(sourceplayer).equalsIgnoreCase("Paralyze")
+>, <Line: -								&& e.getDamage() == 1) {
+>, <Line: -				if (!(drops.get(i).getType() == Material.LEATHER_BOOTS
+>, <Line: -						|| drops.get(i).getType() == Material.LEATHER_CHESTPLATE
+>, <Line: -						|| drops.get(i).getType() == Material.LEATHER_HELMET
+>, <Line: -						|| drops.get(i).getType() == Material.LEATHER_LEGGINGS
+>, <Line: -						|| drops.get(i).getType() == Material.AIR))
+>, <Line: -				if (!(drops.get(i).getType() == Material.LEATHER_BOOTS
+>, <Line: -						|| drops.get(i).getType() == Material.LEATHER_CHESTPLATE
+>, <Line: -						|| drops.get(i).getType() == Material.LEAVES || drops.get(i).getType() == Material.LEAVES_2
+>, <Line: -						|| drops.get(i).getType() == Material.LEATHER_LEGGINGS
+>, <Line: -						|| drops.get(i).getType() == Material.AIR))
+>, <Line: -		if (MetalClips.instances.containsKey(event.getEntity())) {
+>, <Line: -			MetalClips.instances.get(event.getEntity()).remove();
+>, <Line: -				if (!(drops.get(i).getType() == Material.IRON_HELMET
+>, <Line: -						|| drops.get(i).getType() == Material.IRON_CHESTPLATE
+>, <Line: -						|| drops.get(i).getType() == Material.IRON_LEGGINGS
+>, <Line: -						|| drops.get(i).getType() == Material.IRON_BOOTS || drops.get(i).getType() == Material.AIR))
+>, <Line: -					newdrops.add((drops.get(i)));
+>, <Line: -			message = message.replace("{victim}", event.getEntity().getName())
+>, <Line: -					.replace("{attacker}", event.getEntity().getKiller().getName())
+>, <Line: -					.replace("{ability}", GeneralMethods.getAbilityColor(killerAbility) + ability);
+>, <Line: -		if (Paralyze.isParalyzed(player) || ChiCombo.isParalyzed(player) || Bloodbending.isBloodbended(player)
+>, <Line: -				|| Suffocate.isBreathbent(player)) {
+>, <Line: -		if (WaterSpout.instances.containsKey(event.getPlayer()) || AirSpout.getPlayers().contains(event.getPlayer())
+>, <Line: -				|| SandSpout.getPlayers().contains(event.getPlayer())) {
+>, <Line: -			if (MetalClips.instances.get(p).getTarget() != null
+>, <Line: -					&& MetalClips.instances.get(p).getTarget().getEntityId() == event.getPlayer().getEntityId()) {
+>, <Line: -			if (!GeneralMethods.getBoundAbility(player).equalsIgnoreCase("AirSwipe")
+>, <Line: -					|| !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("FireBlast")
+>, <Line: -					|| !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("EarthBlast")
+>, <Line: -					|| !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("WaterManipulation")) {
+>, <Line: -				if (GeneralMethods.isWeapon(player.getItemInHand().getType())
+>, <Line: -						&& !plugin.getConfig().getBoolean("Properties.Air.CanBendWithWeapons")) {
+>, <Line: -				if (GeneralMethods.isWeapon(player.getItemInHand().getType())
+>, <Line: -						&& !plugin.getConfig().getBoolean("Properties.Water.CanBendWithWeapons")) {
+>, <Line: -				if (GeneralMethods.isWeapon(player.getItemInHand().getType())
+>, <Line: -						&& !plugin.getConfig().getBoolean("Properties.Earth.CanBendWithWeapons")) {
+>, <Line: -				// if (abil.equalsIgnoreCase("LavaSurge")) {
+>, <Line: -				// new LavaSurge(player);
+>, <Line: -				// }
+>, <Line: -				if (GeneralMethods.isWeapon(player.getItemInHand().getType())
+>, <Line: -						&& !plugin.getConfig().getBoolean("Properties.Fire.CanBendWithWeapons")) {
+>, <Line: -			if (!GeneralMethods.getBoundAbility(player).equalsIgnoreCase("AirSwipe")
+>, <Line: -					|| !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("FireBlast")
+>, <Line: -					|| !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("EarthBlast")
+>, <Line: -					|| !GeneralMethods.getBoundAbility(player).equalsIgnoreCase("WaterManipulation")) {
+>, <Line: -				if (GeneralMethods.isWeapon(player.getItemInHand().getType())
+>, <Line: -						&& !plugin.getConfig().getBoolean("Properties.Air.CanBendWithWeapons")) {
+>, <Line: -					if (!ProjectKorra.plugin.getConfig().getBoolean("Abilities.Air.Flight.HoverEnabled")
+>, <Line: -							|| !AirMethods.canAirFlight(player))
+>, <Line: -				if (GeneralMethods.isWeapon(player.getItemInHand().getType())
+>, <Line: -						&& !plugin.getConfig().getBoolean("Properties.Water.CanBendWithWeapons")) {
+>, <Line: -				if (GeneralMethods.isWeapon(player.getItemInHand().getType())
+>, <Line: -						&& !plugin.getConfig().getBoolean("Properties.Earth.CanBendWithWeapons")) {
+>, <Line: -						if (MetalClips.instances
+>, <Line: -								.get(player).metalclips < (player.hasPermission("bending.ability.MetalClips.4clips") ? 4
+>, <Line: -										: 3))
+>, <Line: -				if (GeneralMethods.isWeapon(player.getItemInHand().getType())
+>, <Line: -						&& !plugin.getConfig().getBoolean("Properties.Fire.CanBendWithWeapons")) {
+>, <Line: -				if (GeneralMethods.isWeapon(player.getItemInHand().getType())
+>, <Line: -						&& !plugin.getConfig().getBoolean("Properties.Chi.CanBendWithWeapons")) {
+>, <Line: -		if (Tornado.getPlayers().contains(p) || Bloodbending.isBloodbended(p) || Suffocate.isBreathbent(p)
+>, <Line: -				|| FireJet.getPlayers().contains(p) || AvatarState.getPlayers().contains(p)) {
+>, <Line: -		// if (Combustion.fireballs.contains(id)) {
+>, <Line: -		// Location loc = event.getEntity().getLocation();
+>, <Line: -		//// for (Entity en: Methods.getEntitiesAroundPoint(loc, 4)) {
+>, <Line: -		//// if (en instanceof LivingEntity) {
+>, <Line: -		//// LivingEntity le = (LivingEntity) en;
+>, <Line: -		//// le.damage(ProjectKorra.plugin.getConfig().getDouble("Abilities.Fire.Combustion.Damage"));
+>, <Line: -		//// }
+>, <Line: -		//// }
+>, <Line: -		// }
+>, <Line: -	}
+>, <Line: -	@EventHandler(priority = EventPriority.HIGHEST)
+>, <Line: -	public void onFall(EntityDamageEvent event) {
+>, <Line: -		if (event.getEntity() instanceof Player) {
+>, <Line: -			Player player = (Player) event.getEntity();
+>, <Line: -			if (event.getCause() == DamageCause.FALL) {
+>, <Line: -				if (CoreAbility.getInstances(FireJet.class).containsKey(player.getEntityId())) {
+>, <Line: -					event.setDamage(0);
+>, <Line: -				}
+>, <Line: -				else if (CoreAbility.getInstances(Catapult.class).containsKey(player.getEntityId())) {
+>, <Line: -					event.setDamage(0);
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		}
+>]

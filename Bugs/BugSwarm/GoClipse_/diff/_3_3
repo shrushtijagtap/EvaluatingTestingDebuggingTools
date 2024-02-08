@@ -1,0 +1,6 @@
+[<Line: +import melnorme.utilbox.misc.Location;
+>, <Line: +		Location location = structureInfo.getLocation();
+>, <Line: +		ITextFileBuffer textFileBuffer = location == null ? null : ResourceUtils.getTextFileBuffer(fbm, location);
+>]
+[<Line: -		ITextFileBuffer textFileBuffer = ResourceUtils.getTextFileBuffer(fbm, structureInfo.getLocation());
+>]

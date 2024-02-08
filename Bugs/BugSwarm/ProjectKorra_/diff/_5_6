@@ -1,0 +1,27 @@
+[<Line: +import com.projectkorra.rpg.event.EventManager;
+>, <Line: +				if (EventManager.marker.get(world).equalsIgnoreCase("LunarEclipse")) {
+>, <Line: +					spearRange = 0;
+>, <Line: +					spearSphere = 0;
+>, <Line: +					spearDuration = 0;
+>, <Line: +				} else if (EventManager.marker.get(world).equalsIgnoreCase("FullMoon")) {
+>, <Line: +				spearRange = spearRangeNight;
+>, <Line: +				spearSphere = spearSphereNight;
+>, <Line: +				spearDuration = spearDurationNight;
+>]
+[<Line: -import com.projectkorra.projectkorra.BendingManager;
+>, <Line: -import com.projectkorra.rpg.WorldEvents;
+>, <Line: -				if (BendingManager.events.get(world).equalsIgnoreCase(WorldEvents.LunarEclipse.toString())) {
+>, <Line: -					spearRange = spearRangeFullMoon;
+>, <Line: -					spearSphere = spearSphereFullMoon;
+>, <Line: -					spearDuration = spearDurationFullMoon;
+>, <Line: -				} else if (BendingManager.events.get(world).equalsIgnoreCase("FullMoon")) {
+>, <Line: -				if (WaterMethods.isFullMoon(world)) {
+>, <Line: -					spearRange = spearRangeFullMoon;
+>, <Line: -					spearSphere = spearSphereFullMoon;
+>, <Line: -					spearDuration = spearDurationFullMoon;
+>, <Line: -				} else {
+>, <Line: -					spearRange = spearRangeNight;
+>, <Line: -					spearSphere = spearSphereNight;
+>, <Line: -					spearDuration = spearDurationNight;
+>, <Line: -				}
+>]

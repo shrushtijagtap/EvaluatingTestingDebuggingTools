@@ -1,0 +1,39 @@
+[<Line: +import java.io.OutputStream;
+>, <Line: +import java.io.PrintWriter;
+>, <Line: +     * Stores an ontology to the specified writer in the specified format.
+>, <Line: +     * @param writer
+>, <Line: +     *        The writer where the ontology will be saved to
+>, <Line: +     * @param format
+>, <Line: +     *        The format that the ontology should be stored in
+>, <Line: +    void storeOntology(OWLOntology ontology, PrintWriter writer, OWLDocumentFormat format)
+>, <Line: +        throws OWLOntologyStorageException;
+>, <Line: +     * Stores an ontology to the specified stream.
+>, <Line: +     * @param outputStream
+>, <Line: +     *        Output stream where the ontology should be stored
+>, <Line: +    void storeOntology(OWLOntology ontology, OutputStream outputStream, OWLDocumentFormat format)
+>, <Line: +        throws OWLOntologyStorageException;
+>]
+[<Line: -import java.io.IOException;
+>, <Line: -import org.semanticweb.owlapi.io.OWLOntologyDocumentTarget;
+>, <Line: -     * Stores an ontology to the specified ontology document IRI in the
+>, <Line: -     * specified format.
+>, <Line: -     * @param documentIRI
+>, <Line: -     *        The ontology document IRI where the ontology will be saved to
+>, <Line: -     * @param ontologyFormat
+>, <Line: -     *        The format that the ontology should be stored in @throws
+>, <Line: -     *        OWLOntologyStorageException if there was a problem storing the
+>, <Line: -     *        ontology.
+>, <Line: -     * @throws IOException
+>, <Line: -     *         if there was an IOException when storing the ontology
+>, <Line: -    void storeOntology(OWLOntology ontology, IRI documentIRI, OWLDocumentFormat ontologyFormat)
+>, <Line: -        throws OWLOntologyStorageException, IOException;
+>, <Line: -     * Stores an ontology to the specified target. This method assumes the
+>, <Line: -     * storer can write the ontology to some stream.
+>, <Line: -     * @param target
+>, <Line: -     *        The target which describes the ontology document where the
+>, <Line: -     *        ontology should be stored
+>, <Line: -     * @throws IOException
+>, <Line: -     *         if there was an IOException when storing the ontology.
+>, <Line: -    void storeOntology(OWLOntology ontology, OWLOntologyDocumentTarget target, OWLDocumentFormat format)
+>, <Line: -        throws OWLOntologyStorageException, IOException;
+>]

@@ -1,0 +1,114 @@
+[<Line: +		'angular',
+>, <Line: +	],
+>, <Line: +	function (angular) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('grafanaSimplePanel', function ($compile) {
+>, <Line: +				var panelLoading = '<span ng-show="panelMeta.loading == true">' +
+>, <Line: +					'<span style="font-size:72px;font-weight:200">' +
+>, <Line: +					'<i class="icon-spinner icon-spin"></i> loading ...' +
+>, <Line: +					'</span>' +
+>, <Line: +					'</span>';
+>, <Line: +				return {
+>, <Line: +					restrict: 'E',
+>, <Line: +					link: function ($scope, elem, attr) {
+>, <Line: +						// once we have the template, scan it for controllers and
+>, <Line: +						// load the module.js if we have any
+>, <Line: +						// compile the module and uncloack. We're done
+>, <Line: +						function loadModule($module) {
+>, <Line: +							$module.appendTo(elem);
+>, <Line: +							/* jshint indent:false */
+>, <Line: +							$compile(elem.contents())($scope);
+>, <Line: +							elem.removeClass("ng-cloak");
+>, <Line: +						}
+>, <Line: +						function loadController(name) {
+>, <Line: +							elem.addClass("ng-cloak");
+>, <Line: +							// load the panels module file, then render it in the dom.
+>, <Line: +							var nameAsPath = name.replace(".", "/");
+>, <Line: +							$scope.require([
+>, <Line: +								'jquery',
+>, <Line: +								'text!panels/' + nameAsPath + '/module.html'
+>, <Line: +							], function ($, moduleTemplate) {
+>, <Line: +								var $module = $(moduleTemplate);
+>, <Line: +								// top level controllers
+>, <Line: +								var $controllers = $module.filter('ngcontroller, [ng-controller], .ng-controller');
+>, <Line: +								// add child controllers
+>, <Line: +								$controllers = $controllers.add($module.find('ngcontroller, [ng-controller], .ng-controller'));
+>, <Line: +								if ($controllers.length) {
+>, <Line: +									$controllers.first().prepend(panelLoading);
+>, <Line: +									$scope.require([
+>, <Line: +										'panels/' + nameAsPath + '/module'
+>, <Line: +									], function () {
+>, <Line: +										loadModule($module);
+>, <Line: +									});
+>, <Line: +								} else {
+>, <Line: +									loadModule($module);
+>, <Line: +								}
+>, <Line: +							});
+>, <Line: +						}
+>, <Line: +						$scope.$watch(attr.type, function (name) {
+>, <Line: +							loadController(name);
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -],
+>, <Line: -function (angular) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('grafanaSimplePanel', function($compile) {
+>, <Line: -      var panelLoading = '<span ng-show="panelMeta.loading == true">' +
+>, <Line: -        '<span style="font-size:72px;font-weight:200">'+
+>, <Line: -          '<i class="icon-spinner icon-spin"></i> loading ...' +
+>, <Line: -        '</span>'+
+>, <Line: -      '</span>';
+>, <Line: -      return {
+>, <Line: -        restrict: 'E',
+>, <Line: -        link: function($scope, elem, attr) {
+>, <Line: -          // once we have the template, scan it for controllers and
+>, <Line: -          // load the module.js if we have any
+>, <Line: -          // compile the module and uncloack. We're done
+>, <Line: -          function loadModule($module) {
+>, <Line: -            $module.appendTo(elem);
+>, <Line: -            /* jshint indent:false */
+>, <Line: -            $compile(elem.contents())($scope);
+>, <Line: -            elem.removeClass("ng-cloak");
+>, <Line: -          }
+>, <Line: -          function loadController(name) {
+>, <Line: -            elem.addClass("ng-cloak");
+>, <Line: -            // load the panels module file, then render it in the dom.
+>, <Line: -            var nameAsPath = name.replace(".", "/");
+>, <Line: -            $scope.require([
+>, <Line: -              'jquery',
+>, <Line: -              'text!panels/'+nameAsPath+'/module.html'
+>, <Line: -            ], function ($, moduleTemplate) {
+>, <Line: -              var $module = $(moduleTemplate);
+>, <Line: -              // top level controllers
+>, <Line: -              var $controllers = $module.filter('ngcontroller, [ng-controller], .ng-controller');
+>, <Line: -              // add child controllers
+>, <Line: -              $controllers = $controllers.add($module.find('ngcontroller, [ng-controller], .ng-controller'));
+>, <Line: -              if ($controllers.length) {
+>, <Line: -                $controllers.first().prepend(panelLoading);
+>, <Line: -                $scope.require([
+>, <Line: -                  'panels/'+nameAsPath+'/module'
+>, <Line: -                ], function() {
+>, <Line: -                  loadModule($module);
+>, <Line: -                });
+>, <Line: -              } else {
+>, <Line: -                loadModule($module);
+>, <Line: -              }
+>, <Line: -            });
+>, <Line: -          }
+>, <Line: -          $scope.$watch(attr.type, function (name) {
+>, <Line: -            loadController(name);
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

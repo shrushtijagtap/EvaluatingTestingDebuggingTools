@@ -1,0 +1,4 @@
+[<Line: +            if (ClassFileVersion.ofJavaVersion(enforce.value()).compareTo(currentVersion) > 0) {
+>]
+[<Line: -            if (ClassFileVersion.ofJavaVersion(enforce.value()).compareTo(currentVersion) <= 0) {
+>]

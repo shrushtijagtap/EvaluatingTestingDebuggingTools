@@ -1,0 +1,5 @@
+[<Line: +import static org.stagemonitor.core.instrument.StagemonitorClassNameMatcher.isInsideMonitoredProject;
+>, <Line: +				.or(overridesSuperMethodThat(isAnnotatedWith(MonitorRequests.class)).onSuperClassesThat(isInsideMonitoredProject()));
+>]
+[<Line: -				.or(overridesSuperMethodThat(isAnnotatedWith(MonitorRequests.class)));
+>]

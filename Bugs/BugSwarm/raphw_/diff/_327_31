@@ -1,0 +1,59 @@
+[<Line: +import org.junit.Ignore;
+>, <Line: +    protected TypeDescription.Generic describeType(Field field) {
+>, <Line: +        return TypeDefinition.Sort.describe(field.getGenericType(), TypeDescription.Generic.AnnotationReader.DISPATCHER.resolve(field));
+>, <Line: +    protected TypeDescription.Generic describeReturnType(Method method) {
+>, <Line: +        return TypeDefinition.Sort.describe(method.getGenericReturnType(), TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveReturnType(method));
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected TypeDescription.Generic describeParameterType(Method method, int index) {
+>, <Line: +        return TypeDefinition.Sort.describe(method.getGenericParameterTypes()[index],
+>, <Line: +                TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveParameterType(method, index));
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected TypeDescription.Generic describeExceptionType(Method method, int index) {
+>, <Line: +        return TypeDefinition.Sort.describe(method.getGenericExceptionTypes()[index],
+>, <Line: +                TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveExceptionType(method, index));
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected TypeDescription.Generic describeSuperType(Class<?> type) {
+>, <Line: +        return TypeDefinition.Sort.describe(type.getGenericSuperclass(), TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveSuperType(type));
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected TypeDescription.Generic describeInterfaceType(Class<?> type, int index) {
+>, <Line: +        return TypeDefinition.Sort.describe(type.getGenericInterfaces()[index], TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveInterface(type, index));
+>, <Line: +    @Override
+>, <Line: +    @Test
+>, <Line: +    @Ignore("The Java reflection API suffers a bug that affects parsing of type variable bounds")
+>, <Line: +    public void testTypeVariableU() throws Exception {
+>, <Line: +        super.testTypeVariableU();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    @Test
+>, <Line: +    @Ignore("The Java reflection API suffers a bug that affects parsing of type variable bounds")
+>, <Line: +    public void testTypeVariableV() throws Exception {
+>, <Line: +        super.testTypeVariableV();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    @Test
+>, <Line: +    @Ignore("The Java reflection API suffers a bug that affects parsing of type variable bounds")
+>, <Line: +    public void testTypeVariableW() throws Exception {
+>, <Line: +        super.testTypeVariableW();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    @Test
+>, <Line: +    @Ignore("The Java reflection API suffers a bug that affects parsing of type variable bounds")
+>, <Line: +    public void testTypeVariableX() throws Exception {
+>, <Line: +        super.testTypeVariableX();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    @Test
+>, <Line: +    @Ignore("The Java reflection API does not currently support owner types")
+>, <Line: +    public void testTypeAnnotationOwnerType() throws Exception {
+>, <Line: +        super.testTypeAnnotationOwnerType();
+>, <Line: +    }
+>]
+[<Line: -    protected TypeDescription.Generic describe(Field field) {
+>, <Line: -        return TypeDefinition.Sort.describe(field.getGenericType());
+>, <Line: -    protected TypeDescription.Generic describe(Method method) {
+>, <Line: -        return TypeDefinition.Sort.describe(method.getGenericReturnType());
+>]

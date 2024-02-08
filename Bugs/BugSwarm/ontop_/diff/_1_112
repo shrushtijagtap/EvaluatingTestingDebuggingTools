@@ -1,0 +1,41 @@
+[<Line: +import it.unibz.krdb.obda.ontology.Ontology;
+>, <Line: +import it.unibz.krdb.obda.owlapi3.OWLAPI3TranslatorUtility;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.core.dagjgrapht.EquivalencesDAG;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.core.dagjgrapht.TBoxReasoner;
+>, <Line: +import java.util.Collections;
+>, <Line: +import com.google.common.collect.ImmutableSet;
+>, <Line: +	Logger log = LoggerFactory.getLogger(S_TestTransitiveReduction.class);
+>, <Line: +	public void testR() throws Exception{
+>, <Line: +		Ontology onto = OWLAPI3TranslatorUtility.loadOntologyFromFile("src/test/resources/test/newDag/transitive.owl");
+>, <Line: +		TBoxReasoner dag = TBoxReasonerImpl.create(onto);
+>, <Line: +		ClassExpression A = onto.getVocabulary().getClass("http://www.kro.com/ontologies/A");
+>, <Line: +		ClassExpression B = onto.getVocabulary().getClass("http://www.kro.com/ontologies/B");
+>, <Line: +		ClassExpression C = onto.getVocabulary().getClass("http://www.kro.com/ontologies/C");
+>, <Line: +		EquivalencesDAG<ClassExpression> classes = dag.getClassDAG();
+>, <Line: +		Equivalences<ClassExpression> vA = classes.getVertex(A);
+>, <Line: +		Equivalences<ClassExpression> vB = classes.getVertex(B);
+>, <Line: +		Equivalences<ClassExpression> vC = classes.getVertex(C);
+>, <Line: +		assertEquals(ImmutableSet.of(vB), classes.getDirectSuper(vC));
+>, <Line: +		assertEquals(ImmutableSet.of(vA), classes.getDirectSuper(vB));
+>, <Line: +	}
+>, <Line: +	public void testR2() throws Exception{
+>, <Line: +		Ontology onto = OWLAPI3TranslatorUtility.loadOntologyFromFile("src/test/resources/test/newDag/transitive2.owl");
+>, <Line: +		TBoxReasoner dag = TBoxReasonerImpl.create(onto);
+>, <Line: +		ClassExpression A = onto.getVocabulary().getClass("http://www.kro.com/ontologies/A");
+>, <Line: +		ClassExpression B = onto.getVocabulary().getClass("http://www.kro.com/ontologies/B");
+>, <Line: +		ClassExpression C = onto.getVocabulary().getClass("http://www.kro.com/ontologies/C");
+>, <Line: +		ClassExpression D = onto.getVocabulary().getClass("http://www.kro.com/ontologies/D");
+>, <Line: +		EquivalencesDAG<ClassExpression> classes = dag.getClassDAG();
+>, <Line: +		Equivalences<ClassExpression> vA = classes.getVertex(A);
+>, <Line: +		Equivalences<ClassExpression> vB = classes.getVertex(B);
+>, <Line: +		Equivalences<ClassExpression> vC = classes.getVertex(C);
+>, <Line: +		Equivalences<ClassExpression> vD = classes.getVertex(D);
+>, <Line: +		assertEquals(ImmutableSet.of(vB, vD), classes.getDirectSuper(vC));
+>, <Line: +		assertEquals(ImmutableSet.of(vA), classes.getDirectSuper(vB));
+>, <Line: +		assertEquals(ImmutableSet.of(vA), classes.getDirectSuper(vD));
+>, <Line: +	}
+>, <Line: +			TBoxReasonerImpl dag2 = (TBoxReasonerImpl)TBoxReasonerImpl.create(OWLAPI3TranslatorUtility.loadOntologyFromFile(fileInput));
+>]
+[<Line: -	Logger log = LoggerFactory.getLogger(S_HierarchyTestNewDAG.class);
+>, <Line: -			TBoxReasonerImpl dag2 = new TBoxReasonerImpl(S_InputOWL.createOWL(fileInput));
+>]

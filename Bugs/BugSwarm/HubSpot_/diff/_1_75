@@ -1,0 +1,29 @@
+[<Line: +package com.hubspot.baragon.service.worker;
+>, <Line: +import java.util.concurrent.atomic.AtomicLong;
+>, <Line: +import com.google.inject.Inject;
+>, <Line: +import com.google.inject.Singleton;
+>, <Line: +import com.google.inject.name.Named;
+>, <Line: +import com.hubspot.baragon.BaragonDataModule;
+>, <Line: +import com.hubspot.baragon.service.managers.ElbManager;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +@Singleton
+>, <Line: +public class BaragonElbSyncWorker implements Runnable {
+>, <Line: +  private static final Logger LOG = LoggerFactory.getLogger(BaragonElbSyncWorker.class);
+>, <Line: +  private final ElbManager elbManager;
+>, <Line: +  private final AtomicLong workerLastStartAt;
+>, <Line: +  @Inject
+>, <Line: +  public BaragonElbSyncWorker(ElbManager elbManager,
+>, <Line: +                              @Named(BaragonDataModule.BARAGON_ELB_WORKER_LAST_START) AtomicLong workerLastStartAt) {
+>, <Line: +    this.elbManager = elbManager;
+>, <Line: +    this.workerLastStartAt = workerLastStartAt;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void run() {
+>, <Line: +    workerLastStartAt.set(System.currentTimeMillis());
+>, <Line: +    elbManager.syncAll();
+>, <Line: +    LOG.info("Finished ELB Sync");
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

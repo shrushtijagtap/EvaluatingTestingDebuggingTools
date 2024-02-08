@@ -1,0 +1,27 @@
+[]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.googlecode.mp4parser.FileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import org.junit.Test;
+>, <Line: -import java.io.BufferedInputStream;
+>, <Line: -import java.io.FileOutputStream;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.nio.channels.WritableByteChannel;
+>, <Line: -public class AC3TrackImplTest {
+>, <Line: -    @Test
+>, <Line: -    public void freeze() throws IOException {
+>, <Line: -        Track t = new AC3TrackImpl(new FileDataSourceImpl(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile() + "/com/googlecode/mp4parser/authoring/tracks/ac3-sample.ac3"));
+>, <Line: -        Movie m = new Movie();
+>, <Line: -        m.addTrack(t);
+>, <Line: -        DefaultMp4Builder mp4Builder = new DefaultMp4Builder();
+>, <Line: -        Container c = mp4Builder.build(m);
+>, <Line: -        //c.writeContainer(new FileOutputStream("C:\\dev\\mp4parser\\isoparser\\src\\test\\resources\\com\\googlecode\\mp4parser\\authoring\\tracks\\ac3-sample.mp4").getChannel());
+>, <Line: -        IsoFile isoFileReference = new IsoFile(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile() + "/com/googlecode/mp4parser/authoring/tracks/ac3-sample.mp4");
+>, <Line: -        BoxComparator.check(c, isoFileReference, "/moov[0]/mvhd[0]", "/moov[0]/trak[0]/tkhd[0]", "/moov[0]/trak[0]/mdia[0]/mdhd[0]");
+>, <Line: -    }
+>, <Line: -}
+>]

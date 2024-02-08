@@ -1,0 +1,6 @@
+[<Line: +        ConnectionThrottle throttle = new ConnectionThrottle( 10 );
+>, <Line: +        Thread.sleep( 50 );
+>]
+[<Line: -        ConnectionThrottle throttle = new ConnectionThrottle( 5 );
+>, <Line: -        Thread.sleep( 15 );
+>]

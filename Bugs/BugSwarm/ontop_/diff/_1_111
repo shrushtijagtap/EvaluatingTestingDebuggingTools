@@ -1,0 +1,12 @@
+[<Line: +		Ontology o = OWLAPI3TranslatorUtility.loadOntologyFromFile(roleowlfile);
+>, <Line: +		TBoxReasonerImpl r = (TBoxReasonerImpl)TBoxReasonerImpl.create(o);
+>]
+[<Line: -import java.io.File;
+>, <Line: -import org.semanticweb.owlapi.apibinding.OWLManager;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntologyManager;
+>, <Line: -		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+>, <Line: -		OWLOntology ontology = manager.loadOntologyFromOntologyDocument((new File(roleowlfile)));
+>, <Line: -		Ontology o = OWLAPI3TranslatorUtility.translate(ontology);
+>, <Line: -		TBoxReasonerImpl r = new TBoxReasonerImpl(o);
+>]

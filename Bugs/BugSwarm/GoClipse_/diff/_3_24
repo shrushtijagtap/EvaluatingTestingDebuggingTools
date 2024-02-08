@@ -1,0 +1,74 @@
+[<Line: +import melnorme.lang.ide.core.operations.build.BuildManagerMessages;
+>, <Line: +import melnorme.util.swt.components.fields.CheckBoxField;
+>, <Line: +	protected boolean createEnablementFields = true;
+>, <Line: +	protected final CheckBoxField normalEnableField;
+>, <Line: +	protected final CheckBoxField autoEnableField;
+>, <Line: +	protected BuildTargetData btData = new BuildTargetData();
+>, <Line: +		normalEnableField = new CheckBoxField(BuildManagerMessages.LABEL_EnableForNormalBuild);
+>, <Line: +		normalEnableField.addListener(() -> btData.normalBuildEnabled = normalEnableField.getBooleanFieldValue());
+>, <Line: +		autoEnableField = new CheckBoxField(BuildManagerMessages.LABEL_EnableForAutoBuild);
+>, <Line: +		autoEnableField.addListener(() -> btData.autoBuildEnabled = autoEnableField.getBooleanFieldValue());
+>, <Line: +		buildArgumentsField = init_createArgumentsField();
+>, <Line: +		buildArgumentsField.addListener(() -> btData.buildArguments = getEffectiveBuildArgumentsValue());
+>, <Line: +		programPathField.addListener(() -> btData.executablePath = getEffectiveProgramPathValue());
+>, <Line: +		normalEnableField.setFieldValue(buildTargetData.normalBuildEnabled);
+>, <Line: +		autoEnableField.setFieldValue(buildTargetData.autoBuildEnabled);
+>, <Line: +		if(createEnablementFields) {
+>, <Line: +			normalEnableField.createComponent(topControl, horizontalExpandDefault());
+>, <Line: +			autoEnableField.createComponent(topControl, horizontalExpandDefault());
+>, <Line: +		buildArgumentsField.createComponent(topControl, horizontalExpandDefault(200));
+>, <Line: +		programPathField.createComponent(topControl, horizontalExpandDefault());
+>, <Line: +		normalEnableField.setEnabled(enabled);
+>, <Line: +		autoEnableField.setEnabled(enabled);
+>]
+[<Line: -import org.eclipse.swt.widgets.TabFolder;
+>, <Line: -import org.eclipse.swt.widgets.TabItem;
+>, <Line: -	public final BuildArgumentsField checkArgumentsField;
+>, <Line: -	protected BuildTargetData buildTargetData = new BuildTargetData();
+>, <Line: -			CommonGetter<String> getDefaultCheckArguments,
+>, <Line: -		buildArgumentsField = init_createArgumentsField();
+>, <Line: -		buildArgumentsField.addListener(() -> buildTargetData.buildArguments = getEffectiveBuildArgumentsValue());
+>, <Line: -		if(getDefaultCheckArguments == null) {
+>, <Line: -			checkArgumentsField = null;
+>, <Line: -		} else {
+>, <Line: -			checkArgumentsField = init_createCheckArgumentsField(getDefaultCheckArguments);
+>, <Line: -			checkArgumentsField.addListener(() -> buildTargetData.checkArguments = getEffectiveCheckArgumentsValue());
+>, <Line: -		}
+>, <Line: -		programPathField.addListener(() -> buildTargetData.executablePath = getEffectiveProgramPathValue());
+>, <Line: -	protected BuildArgumentsField init_createCheckArgumentsField(CommonGetter<String> getDefaultCheckArguments) {
+>, <Line: -		return new BuildArgumentsField() {
+>, <Line: -			@Override
+>, <Line: -			protected String getDefaultFieldValue() throws CommonException {
+>, <Line: -				return getDefaultCheckArguments.get();
+>, <Line: -			}
+>, <Line: -			@Override
+>, <Line: -			protected void doSetEnabled(boolean enabled) {
+>, <Line: -				super.doSetEnabled(enabled);
+>, <Line: -			}
+>, <Line: -		};
+>, <Line: -	}
+>, <Line: -	public String getEffectiveCheckArgumentsValue() {
+>, <Line: -		return checkArgumentsField.getEffectiveFieldValue();
+>, <Line: -	}
+>, <Line: -		if(checkArgumentsField != null) {
+>, <Line: -			checkArgumentsField.setEffectiveFieldValue(buildTargetData.checkArguments);
+>, <Line: -		}
+>, <Line: -		if(checkArgumentsField == null) {
+>, <Line: -			buildArgumentsField.createComponent(topControl, 
+>, <Line: -				gdFillDefaults().grab(true, false).hint(200, SWT.DEFAULT).create());
+>, <Line: -		} else {
+>, <Line: -			TabFolder tabFolder = new TabFolder(topControl, SWT.NONE);
+>, <Line: -			TabItem buildArgsTab = new TabItem(tabFolder, SWT.NONE);
+>, <Line: -			buildArgsTab.setText("Build command");
+>, <Line: -			buildArgsTab.setControl(buildArgumentsField.createComponent(tabFolder));
+>, <Line: -			TabItem checkArgsTab = new TabItem(tabFolder, SWT.NONE);
+>, <Line: -			checkArgsTab.setText("Check command" );
+>, <Line: -			checkArgsTab.setControl(checkArgumentsField.createComponent(tabFolder));
+>, <Line: -			tabFolder.setLayoutData(
+>, <Line: -				gdFillDefaults().grab(true, false).hint(200, SWT.DEFAULT).create());
+>, <Line: -		programPathField.createComponent(topControl, 
+>, <Line: -			new GridData(GridData.FILL_HORIZONTAL));
+>, <Line: -		if(checkArgumentsField != null) {
+>, <Line: -			checkArgumentsField.setEnabled(enabled);
+>, <Line: -		}
+>]

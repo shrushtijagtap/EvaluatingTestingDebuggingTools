@@ -1,0 +1,14 @@
+[<Line: +    graph = new ListenableGraph<>(new TableGraph<LengthData>());
+>, <Line: +    graph.addConnection(SE, X, LengthData.create(1d));
+>, <Line: +    graph.addConnection(X, SE, LengthData.create(1d));
+>, <Line: +    graph.addConnection(X, SW, LengthData.create(1d));
+>, <Line: +    graph.addConnection(SW, X, LengthData.create(1d));
+>, <Line: +    graph.setConnectionData(SW, X, LengthData.create(10d));
+>]
+[<Line: -    graph = new ListenableGraph<>(new TableGraph<LengthData>(LengthData.EMPTY));
+>, <Line: -    graph.addConnection(SE, X, new LengthData(1d));
+>, <Line: -    graph.addConnection(X, SE, new LengthData(1d));
+>, <Line: -    graph.addConnection(X, SW, new LengthData(1d));
+>, <Line: -    graph.addConnection(SW, X, new LengthData(1d));
+>, <Line: -    graph.setConnectionData(SW, X, new LengthData(10d));
+>]

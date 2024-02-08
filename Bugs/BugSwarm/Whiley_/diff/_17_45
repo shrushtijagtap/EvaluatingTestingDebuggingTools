@@ -1,0 +1,10 @@
+[]
+[<Line: -type plistv6 is ([int] xs) where no { x in xs | x < 0 }
+>, <Line: -function f(plistv6 xs) -> int:
+>, <Line: -    return |xs|
+>, <Line: -function g(plistv6 left, plistv6 right) -> int:
+>, <Line: -    return f(left ++ right)
+>, <Line: -public export method test() -> void:
+>, <Line: -    int r = g([1, 2, 3], [6, 7, 8])
+>, <Line: -    assume r == 6
+>]

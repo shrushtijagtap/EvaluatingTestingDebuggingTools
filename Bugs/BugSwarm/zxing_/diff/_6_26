@@ -1,0 +1,12 @@
+[<Line: +  AbstractExpandedDecoder(BitArray information) {
+>, <Line: +  public static AbstractExpandedDecoder createDecoder(BitArray information) {
+>, <Line: +    switch (fourBitEncodationMethod) {
+>, <Line: +    switch (fiveBitEncodationMethod) {
+>, <Line: +    switch (sevenBitEncodationMethod) {
+>]
+[<Line: -  AbstractExpandedDecoder(BitArray information){
+>, <Line: -  public static AbstractExpandedDecoder createDecoder(BitArray information){
+>, <Line: -    switch(fourBitEncodationMethod){
+>, <Line: -    switch(fiveBitEncodationMethod){
+>, <Line: -    switch(sevenBitEncodationMethod){
+>]

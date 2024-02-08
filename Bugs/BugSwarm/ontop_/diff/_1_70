@@ -1,0 +1,57 @@
+[<Line: +							activeOBDAModel.getOntologyVocabulary().createClass(oc.getIRI().toString());
+>, <Line: +						} 
+>, <Line: +						else if (entity instanceof OWLObjectProperty) {
+>, <Line: +							activeOBDAModel.getOntologyVocabulary().createObjectProperty(or.getIRI().toString());
+>, <Line: +						} 
+>, <Line: +						else if (entity instanceof OWLDataProperty) {
+>, <Line: +							activeOBDAModel.getOntologyVocabulary().createDataProperty(op.getIRI().toString());
+>, <Line: +							activeOBDAModel.getOntologyVocabulary().removeClass(oc.getIRI().toString());
+>, <Line: +						} 
+>, <Line: +						else if (entity instanceof OWLObjectProperty) {
+>, <Line: +							activeOBDAModel.getOntologyVocabulary().removeObjectProperty(or.getIRI().toString());
+>, <Line: +						} 
+>, <Line: +						else if (entity instanceof OWLDataProperty) {
+>, <Line: +							activeOBDAModel.getOntologyVocabulary().removeDataProperty(op.getIRI().toString());
+>, <Line: +			for (OWLClass c : ontology.getClassesInSignature()) 
+>, <Line: +				activeOBDAModel.getOntologyVocabulary().createClass(c.getIRI().toString());
+>, <Line: +			for (OWLObjectProperty r : ontology.getObjectPropertiesInSignature()) 
+>, <Line: +				activeOBDAModel.getOntologyVocabulary().createObjectProperty(r.getIRI().toString());
+>, <Line: +			for (OWLDataProperty p : ontology.getDataPropertiesInSignature()) 
+>, <Line: +				activeOBDAModel.getOntologyVocabulary().createDataProperty(p.getIRI().toString());
+>, <Line: +					// adding type information to the mapping predicates
+>, <Line: +					OBDAModelValidator.validate(activeOBDAModel);
+>, <Line: +				} 
+>, <Line: +				catch (Exception e) {
+>]
+[<Line: -							OClass c = ofac.createClass(oc.getIRI().toString());
+>, <Line: -							activeOBDAModel.declareClass(c);
+>, <Line: -						} else if (entity instanceof OWLObjectProperty) {
+>, <Line: -							ObjectPropertyExpression r = ofac.createObjectProperty(or.getIRI().toString());
+>, <Line: -							activeOBDAModel.declareObjectProperty(r);
+>, <Line: -						} else if (entity instanceof OWLDataProperty) {
+>, <Line: -							DataPropertyExpression p = ofac.createDataProperty(op.getIRI().toString());
+>, <Line: -							activeOBDAModel.declareDataProperty(p);
+>, <Line: -							OClass c = ofac.createClass(oc.getIRI().toString());
+>, <Line: -							activeOBDAModel.unDeclareClass(c);
+>, <Line: -						} else if (entity instanceof OWLObjectProperty) {
+>, <Line: -							ObjectPropertyExpression r = ofac.createObjectProperty(or.getIRI().toString());
+>, <Line: -							activeOBDAModel.unDeclareObjectProperty(r);
+>, <Line: -						} else if (entity instanceof OWLDataProperty) {
+>, <Line: -							DataPropertyExpression p = ofac.createDataProperty(op.getIRI().toString());
+>, <Line: -							activeOBDAModel.unDeclareDataProperty(p);
+>, <Line: -			for (OWLClass c : ontology.getClassesInSignature()) {
+>, <Line: -				OClass pred = ofac.createClass(c.getIRI().toString());
+>, <Line: -				activeOBDAModel.declareClass(pred);
+>, <Line: -			}
+>, <Line: -			for (OWLObjectProperty r : ontology.getObjectPropertiesInSignature()) {
+>, <Line: -				ObjectPropertyExpression pred = ofac.createObjectProperty(r.getIRI().toString());
+>, <Line: -				activeOBDAModel.declareObjectProperty(pred);
+>, <Line: -			}
+>, <Line: -			for (OWLDataProperty p : ontology.getDataPropertiesInSignature()) {
+>, <Line: -				DataPropertyExpression pred = ofac.createDataProperty(p.getIRI().toString());
+>, <Line: -				activeOBDAModel.declareDataProperty(pred);
+>, <Line: -			}
+>, <Line: -					OBDAModelValidator refactorer = new OBDAModelValidator(activeOBDAModel, activeOntology);
+>, <Line: -					refactorer.run(); // adding type information to the mapping predicates.
+>, <Line: -				} catch (Exception e) {
+>]

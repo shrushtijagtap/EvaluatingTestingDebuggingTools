@@ -1,0 +1,9 @@
+[<Line: +          <dependencies>
+>, <Line: +            <dependency>
+>, <Line: +              <groupId>com.puppycrawl.tools</groupId>
+>, <Line: +              <artifactId>checkstyle</artifactId>
+>, <Line: +              <version>6.19</version>
+>, <Line: +            </dependency>
+>, <Line: +          </dependencies>
+>]
+[]

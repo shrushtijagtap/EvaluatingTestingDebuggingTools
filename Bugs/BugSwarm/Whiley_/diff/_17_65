@@ -1,0 +1,8 @@
+[<Line: +    [int] r = [0; |ls|]
+>, <Line: +            r[i] = -ls[i]
+>, <Line: +            r[i] = ls[i]
+>]
+[<Line: -    [int] r = []
+>, <Line: -            r = r ++ [-ls[i]]
+>, <Line: -            r = r ++ [ls[i]]
+>]

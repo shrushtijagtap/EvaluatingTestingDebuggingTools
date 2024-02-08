@@ -1,0 +1,12 @@
+[<Line: +        verifyAttributes(decoder, binary(
+>, <Line: +                "534D0300865628025161227F030100000000029E03020200A4021405028F0007010658300200028F0007010625F21D028F00070106000027028F00070106584E19028F000701065DCF2707537265696C6C69634E657400E8DE27400DF0A80084C9B2D85A1DB7537265696C6C69634E657400E8DE27401048D44350455F44423745393900A8A668DB7E99A94D794E6574776F726B4E616D6500002675ED6D70AB74686170616E6500002675F4DA3CA94D75666173610088CEFA735AFCA9C524"));
+>, <Line: +        verifyAttributes(decoder, binary(
+>, <Line: +        verifyAttributes(decoder, binary(
+>, <Line: +        verifyAttributes(decoder, binary(
+>, <Line: +        verifyAttributes(decoder, binary(
+>]
+[<Line: -        verifyNothing(decoder, binary(
+>, <Line: -        verifyNothing(decoder, binary(
+>, <Line: -        verifyNothing(decoder, binary(
+>, <Line: -        verifyNothing(decoder, binary(
+>]

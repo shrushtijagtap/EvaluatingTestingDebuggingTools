@@ -1,0 +1,19 @@
+[<Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import org.mp4parser.muxer.container.mp4.MovieCreator;
+>, <Line: +import org.mp4parser.muxer.tracks.AppendTrack;
+>, <Line: +import org.mp4parser.muxer.tracks.ClippedTrack;
+>, <Line: +        nuMovie.addTrack(new AppendTrack(new ClippedTrack(audio, 0, 10), new ClippedTrack(audio, 100, audio.getSamples().size())));
+>]
+[<Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
+>, <Line: -import java.io.FileInputStream;
+>, <Line: -        nuMovie.addTrack(new AppendTrack(new CroppedTrack(audio, 0, 10), new CroppedTrack(audio, 100, audio.getSamples().size())));
+>]

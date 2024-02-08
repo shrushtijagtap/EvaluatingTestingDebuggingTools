@@ -1,0 +1,76 @@
+[<Line: +import net.bytebuddy.description.annotation.AnnotationList;
+>, <Line: +import java.lang.reflect.GenericDeclaration;
+>, <Line: +import java.lang.reflect.TypeVariable;
+>, <Line: +            /**
+>, <Line: +             * A type list that represents loaded type variables.
+>, <Line: +             */
+>, <Line: +            public static class OfTypeVariables extends Generic.AbstractBase {
+>, <Line: +                /**
+>, <Line: +                 * The type variables this list represents.
+>, <Line: +                 */
+>, <Line: +                private final List<TypeVariable<?>> typeVariables;
+>, <Line: +                /**
+>, <Line: +                 * Creates a new type list for loaded type variables.
+>, <Line: +                 *
+>, <Line: +                 * @param typeVariable The type variables this list represents.
+>, <Line: +                 */
+>, <Line: +                protected OfTypeVariables(TypeVariable<?>... typeVariable) {
+>, <Line: +                    this(Arrays.asList(typeVariable));
+>, <Line: +                }
+>, <Line: +                /**
+>, <Line: +                 * Creates a new type list for loaded type variables.
+>, <Line: +                 *
+>, <Line: +                 * @param typeVariables The type variables this list represents.
+>, <Line: +                 */
+>, <Line: +                protected OfTypeVariables(List<TypeVariable<?>> typeVariables) {
+>, <Line: +                    this.typeVariables = typeVariables;
+>, <Line: +                }
+>, <Line: +                /**
+>, <Line: +                 * Creates a list of the type variables of the supplied generic declaration.
+>, <Line: +                 *
+>, <Line: +                 * @param genericDeclaration The generic declaration to represent.
+>, <Line: +                 * @return A genric type list for the returned generic declaration.
+>, <Line: +                 */
+>, <Line: +                public static Generic of(GenericDeclaration genericDeclaration) {
+>, <Line: +                    return new OfTypeVariables(genericDeclaration.getTypeParameters());
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public TypeDescription.Generic get(int index) {
+>, <Line: +                    TypeVariable<?> typeVariable = typeVariables.get(index);
+>, <Line: +                    return TypeDefinition.Sort.describe(typeVariable, TypeDescription.Generic.AnnotationReader.DISPATCHER.resolveTypeVariable(typeVariable));
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public int size() {
+>, <Line: +                    return typeVariables.size();
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +                    @Override
+>, <Line: +                    public AnnotationList getDeclaredAnnotations() {
+>, <Line: +                        return typeVariableToken.getAnnotations();
+>, <Line: +                    }
+>, <Line: +            private static class TypeProjection extends TypeDescription.Generic.LazyProjection.OfAnnotatedElement {
+>, <Line: +                            ? Sort.describe(type[index], getAnnotationReader())
+>, <Line: +                @Override
+>, <Line: +                protected AnnotationReader getAnnotationReader() {
+>, <Line: +                    return AnnotationReader.DISPATCHER.resolveInterface(type, index);
+>, <Line: +                }
+>, <Line: +            private static class TypeProjection extends TypeDescription.Generic.LazyProjection.OfAnnotatedElement {
+>, <Line: +                            ? Sort.describe(type[index], getAnnotationReader())
+>, <Line: +                @Override
+>, <Line: +                protected AnnotationReader getAnnotationReader() {
+>, <Line: +                    return AnnotationReader.DISPATCHER.resolveExceptionType(constructor, index);
+>, <Line: +                }
+>, <Line: +            private static class TypeProjection extends TypeDescription.Generic.LazyProjection.OfAnnotatedElement {
+>, <Line: +                            ? Sort.describe(type[index], getAnnotationReader())
+>, <Line: +                @Override
+>, <Line: +                protected AnnotationReader getAnnotationReader() {
+>, <Line: +                    return AnnotationReader.DISPATCHER.resolveExceptionType(method, index);
+>, <Line: +                }
+>]
+[<Line: -            private static class TypeProjection extends TypeDescription.Generic.LazyProjection {
+>, <Line: -                            ? Sort.describe(type[index])
+>, <Line: -            private static class TypeProjection extends TypeDescription.Generic.LazyProjection {
+>, <Line: -                            ? Sort.describe(type[index])
+>, <Line: -            private static class TypeProjection extends TypeDescription.Generic.LazyProjection {
+>, <Line: -                            ? Sort.describe(type[index])
+>]

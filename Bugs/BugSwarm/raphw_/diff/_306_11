@@ -1,0 +1,20 @@
+[<Line: +        assertThat(describe(Child.class).hashCode(), not(describe(Sample.class).hashCode()));
+>, <Line: +        assertThat(describe(Sample.class).hashCode(), not(describe(Child.class).hashCode()));
+>, <Line: +        assertThat(describe(Child.class).toString(), not(new Object()));
+>, <Line: +        assertThat(describe(Child.class).toString(), is(describe(Child.class).toString()));
+>, <Line: +        assertThat(describe(Child.class).toString(), not(describe(Sample.class).toString()));
+>, <Line: +        assertThat(describe(Sample.class).toString(), is(describe(Sample.class).toString()));
+>, <Line: +        assertThat(describe(Sample.class).toString(), not(describe(Child.class).toString()));
+>, <Line: +        assertThat(describe(Child.class).toString(), not(describe(Sample.class).toString()));
+>, <Line: +        assertThat(describe(Sample.class).toString(), not(describe(Child.class).toString()));
+>]
+[<Line: -        assertThat(describe(Child.class).hashCode(), not(is(describe(Sample.class).hashCode())));
+>, <Line: -        assertThat(describe(Sample.class).hashCode(), not(is(describe(Child.class).hashCode())));
+>, <Line: -        assertThat(describe(Child.class).toString(), not(equalTo(new Object())));
+>, <Line: -        assertThat(describe(Child.class).toString(), equalTo(describe(Child.class).toString()));
+>, <Line: -        assertThat(describe(Child.class).toString(), not(equalTo(describe(Sample.class).toString())));
+>, <Line: -        assertThat(describe(Sample.class).toString(), equalTo(describe(Sample.class).toString()));
+>, <Line: -        assertThat(describe(Sample.class).toString(), not(equalTo(describe(Child.class).toString())));
+>, <Line: -        assertThat(describe(Child.class).toString(), not(is(describe(Sample.class).toString())));
+>, <Line: -        assertThat(describe(Sample.class).toString(), not(is(describe(Child.class).toString())));
+>]

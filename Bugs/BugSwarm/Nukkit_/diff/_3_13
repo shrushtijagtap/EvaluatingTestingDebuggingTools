@@ -1,0 +1,8 @@
+[<Line: +                    entity.attack(ev);
+>, <Line: +                    entity.attack(ev);
+>, <Line: +                    entity.attack(ev);
+>]
+[<Line: -                    entity.attack(ev.getFinalDamage(), ev);
+>, <Line: -                    entity.attack(ev.getFinalDamage(), ev);
+>, <Line: -                    entity.attack(ev.getFinalDamage(), ev);
+>]

@@ -1,0 +1,44 @@
+[]
+[<Line: -<assembly
+>, <Line: -	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+>, <Line: -	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>, <Line: -	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+>, <Line: -	<id>bin</id>
+>, <Line: -	<formats>
+>, <Line: -		<format>zip</format>
+>, <Line: -	</formats>
+>, <Line: -	<fileSets>
+>, <Line: -		<fileSet>
+>, <Line: -			<directory>${project.basedir}</directory>
+>, <Line: -			<outputDirectory>/</outputDirectory>
+>, <Line: -			<includes>
+>, <Line: -				<include>README*</include>
+>, <Line: -				<include>LICENSE*</include>
+>, <Line: -			</includes>
+>, <Line: -		</fileSet>
+>, <Line: -		<fileSet>
+>, <Line: -			<directory>${project.basedir}/examples</directory>
+>, <Line: -			<outputDirectory>/examples</outputDirectory>
+>, <Line: -			<includes>
+>, <Line: -				<include>small.vcf</include>
+>, <Line: -			</includes>
+>, <Line: -		</fileSet>
+>, <Line: -		<fileSet>
+>, <Line: -			<directory>${project.build.directory}</directory>
+>, <Line: -			<outputDirectory>/</outputDirectory>
+>, <Line: -			<includes>
+>, <Line: -				<include>*.jar</include>
+>, <Line: -			</includes>
+>, <Line: -			<excludes>
+>, <Line: -				<exclude>original*.jar</exclude>
+>, <Line: -			</excludes>
+>, <Line: -		</fileSet>
+>, <Line: -		<!--
+>, <Line: -		<fileSet>
+>, <Line: -			<directory>${project.build.directory}/site</directory>
+>, <Line: -			<outputDirectory>docs</outputDirectory>
+>, <Line: -		</fileSet>
+>, <Line: -		-->
+>, <Line: -	</fileSets>
+>, <Line: -</assembly>
+>]

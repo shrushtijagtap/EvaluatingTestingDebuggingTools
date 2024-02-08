@@ -1,0 +1,5 @@
+[<Line: +### 5. February 2016: version 1.2.0
+>, <Line: +- Added support for receiver type retention during type redefinition and rebasement.
+>, <Line: +- Added support for receiver type definitions.
+>]
+[]

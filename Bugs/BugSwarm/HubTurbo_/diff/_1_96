@@ -1,0 +1,160 @@
+[]
+[<Line: -package service;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.concurrent.CancellationException;
+>, <Line: -import java.util.concurrent.CompletableFuture;
+>, <Line: -import java.util.concurrent.ExecutionException;
+>, <Line: -import model.Model;
+>, <Line: -import org.apache.logging.log4j.LogManager;
+>, <Line: -import org.apache.logging.log4j.Logger;
+>, <Line: -import org.eclipse.egit.github.core.Issue;
+>, <Line: -import org.eclipse.egit.github.core.Label;
+>, <Line: -import org.eclipse.egit.github.core.Milestone;
+>, <Line: -import org.eclipse.egit.github.core.RepositoryId;
+>, <Line: -import org.eclipse.egit.github.core.User;
+>, <Line: -import service.updateservice.CollaboratorUpdateService;
+>, <Line: -import service.updateservice.IssueUpdateService;
+>, <Line: -import service.updateservice.LabelUpdateService;
+>, <Line: -import service.updateservice.MilestoneUpdateService;
+>, <Line: -import ui.components.HTStatusBar;
+>, <Line: -public class ModelUpdate {
+>, <Line: -	private static final Logger logger = LogManager.getLogger(ModelUpdate.class.getName());
+>, <Line: -	public static final double PROGRESS_INTERVAL = 1 / 6;
+>, <Line: -	private final Model model;
+>, <Line: -	private final IssueUpdateService issueUpdateService;
+>, <Line: -	private final CollaboratorUpdateService collaboratorUpdateService;
+>, <Line: -	private final LabelUpdateService labelUpdateService;
+>, <Line: -	private final MilestoneUpdateService milestoneUpdateService;
+>, <Line: -	private final UpdatedIssueMetadata updatedIssueMetadata;
+>, <Line: -	public ModelUpdate(ServiceManager serviceManager, GitHubClientExtended client,
+>, <Line: -	                   Model model, UpdateSignature updateSignature) {
+>, <Line: -		this.model = model;
+>, <Line: -		this.issueUpdateService = new IssueUpdateService(client, updateSignature.issuesETag, updateSignature.lastCheckTime);
+>, <Line: -		this.collaboratorUpdateService = new CollaboratorUpdateService(client, updateSignature.collaboratorsETag);
+>, <Line: -		this.labelUpdateService = new LabelUpdateService(client, updateSignature.labelsETag);
+>, <Line: -		this.milestoneUpdateService = new MilestoneUpdateService(client, updateSignature.milestonesETag);
+>, <Line: -		updatedIssueMetadata = new UpdatedIssueMetadata(serviceManager);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Updates the model given a source repository. May fail if the repository changes halfway through.
+>, <Line: -	 * This should not happen under normal circumstances and is a safeguard against concurrency issues.
+>, <Line: -	 * Getting an empty update does not constitute a failure.
+>, <Line: -	 *
+>, <Line: -	 * @param repoId the repository to get updates from
+>, <Line: -	 * @return true if the model update completed successfully
+>, <Line: -	 */
+>, <Line: -	public boolean updateModel(String repoId) {
+>, <Line: -		logger.info("Updating model...");
+>, <Line: -		model.disableModelChanges();
+>, <Line: -		boolean result = true;
+>, <Line: -		HTStatusBar.updateProgress(0.01);
+>, <Line: -		HTStatusBar.displayMessage("Updating collaborators...");
+>, <Line: -		try {
+>, <Line: -			log(updateModelCollaborators(repoId).get(), "collaborators", "labels");
+>, <Line: -			log(updateModelLabels(repoId).get(), "labels", "milestones");
+>, <Line: -			log(updateModelMilestones(repoId).get(), "milestones", "issues");
+>, <Line: -			log(updateModelIssues(repoId).get(), "issues", "comments");
+>, <Line: -		} catch (CancellationException e) {
+>, <Line: -			// Control jumping here means that one of the get methods
+>, <Line: -			// failed, i.e. one of the CompletableFutures was cancelled.
+>, <Line: -			// In that case we return false to stop the model update.
+>, <Line: -			result = false;
+>, <Line: -		} catch (InterruptedException | ExecutionException e) {
+>, <Line: -			logger.error(e.getLocalizedMessage(), e);
+>, <Line: -		}
+>, <Line: -		updatedIssueMetadata.download();
+>, <Line: -		model.enableModelChanges();
+>, <Line: -		return result;
+>, <Line: -	}
+>, <Line: -	private static void log(int updated, String currentResourceName, String nextResourceName) {
+>, <Line: -		HTStatusBar.addProgressAndDisplayMessage(PROGRESS_INTERVAL, "Updating " + nextResourceName + "...");
+>, <Line: -		if (updated == 0) {
+>, <Line: -			logger.info("No " + currentResourceName + " to update");
+>, <Line: -		} else {
+>, <Line: -			logger.info(updated + " " + currentResourceName + " updated");
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Gets updates for issues. Returns a future which is completed on success and cancelled on failure.
+>, <Line: -	 * Failure means that the repository was changed halfway. It's a safeguard against concurrency issues.
+>, <Line: -	 * See {@link #updateModel(String)} for details.
+>, <Line: -	 *
+>, <Line: -	 * @param repoId the repository to get updates from
+>, <Line: -	 * @return a future which completes on success, and is cancelled upon failure
+>, <Line: -	 */
+>, <Line: -	private CompletableFuture<Integer> updateModelIssues(String repoId) {
+>, <Line: -		CompletableFuture<Integer> response = new CompletableFuture<>();
+>, <Line: -		if (model.getRepoId().generateId().equals(repoId)) {
+>, <Line: -			List<Issue> updatedIssues = issueUpdateService.getUpdatedItems(RepositoryId.createFromId(repoId));
+>, <Line: -			if (updatedIssues.size() > 0) {
+>, <Line: -				model.updateCachedIssues(response, updatedIssues, repoId);
+>, <Line: -			} else {
+>, <Line: -				response.complete(0);
+>, <Line: -			}
+>, <Line: -		} else {
+>, <Line: -			logger.info("Repository has changed; not updating issues");
+>, <Line: -			response.cancel(true);
+>, <Line: -		}
+>, <Line: -		return response;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * See {@link #updateModelIssues(String)} for details.
+>, <Line: -	 */
+>, <Line: -	private CompletableFuture<Integer> updateModelCollaborators(String repoId) {
+>, <Line: -		CompletableFuture<Integer> response = new CompletableFuture<>();
+>, <Line: -		if (model.getRepoId().generateId().equals(repoId)) {
+>, <Line: -			List<User> collaborators = collaboratorUpdateService.getUpdatedItems(RepositoryId.createFromId(repoId));
+>, <Line: -			if (collaborators.size() > 0) {
+>, <Line: -				model.updateCachedCollaborators(response, collaborators, repoId);
+>, <Line: -			} else {
+>, <Line: -				response.complete(0);
+>, <Line: -			}
+>, <Line: -		} else {
+>, <Line: -			logger.info("Repository has changed; not updating collaborators");
+>, <Line: -			response.cancel(true);
+>, <Line: -		}
+>, <Line: -		return response;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * See {@link #updateModelIssues(String)} for details.
+>, <Line: -	 */
+>, <Line: -	private CompletableFuture<Integer> updateModelLabels(String repoId) {
+>, <Line: -		CompletableFuture<Integer> response = new CompletableFuture<>();
+>, <Line: -		if (model.getRepoId().generateId().equals(repoId)) {
+>, <Line: -			List<Label> labels = labelUpdateService.getUpdatedItems(RepositoryId.createFromId(repoId));
+>, <Line: -			if (labels.size() > 0) {
+>, <Line: -				model.updateCachedLabels(response, labels, repoId);
+>, <Line: -			} else {
+>, <Line: -				response.complete(0);
+>, <Line: -			}
+>, <Line: -		} else {
+>, <Line: -			logger.info("Repository has changed; not updating labels");
+>, <Line: -			response.cancel(true);
+>, <Line: -		}
+>, <Line: -		return response;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * See {@link #updateModelIssues(String)} for details.
+>, <Line: -	 */
+>, <Line: -	private CompletableFuture<Integer> updateModelMilestones(String repoId) {
+>, <Line: -		CompletableFuture<Integer> response = new CompletableFuture<>();
+>, <Line: -		if (model.getRepoId().generateId().equals(repoId)) {
+>, <Line: -			List<Milestone> milestones = milestoneUpdateService.getUpdatedItems(RepositoryId.createFromId(repoId));
+>, <Line: -			if (milestones.size() > 0) {
+>, <Line: -				model.updateCachedMilestones(response, milestones, repoId);
+>, <Line: -			} else {
+>, <Line: -				response.complete(0);
+>, <Line: -			}
+>, <Line: -		} else {
+>, <Line: -			logger.info("Repository has changed; not updating milestones");
+>, <Line: -			response.cancel(true);
+>, <Line: -		}
+>, <Line: -		return response;
+>, <Line: -	}
+>, <Line: -	public UpdateSignature getNewUpdateSignature() {
+>, <Line: -		return new UpdateSignature(issueUpdateService.getUpdatedETag(),
+>, <Line: -			labelUpdateService.getUpdatedETag(), milestoneUpdateService.getUpdatedETag(),
+>, <Line: -			collaboratorUpdateService.getUpdatedETag(), issueUpdateService.getUpdatedCheckTime());
+>, <Line: -	}
+>, <Line: -}
+>]

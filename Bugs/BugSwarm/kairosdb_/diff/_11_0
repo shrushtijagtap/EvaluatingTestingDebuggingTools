@@ -1,0 +1,4 @@
+[<Line: +//.addPaths(new RegExFileSet("lib/ivy/integration", ".*\\.jar").getFullFilePaths())
+>]
+[<Line: -		//.addPaths(new RegExFileSet("lib/ivy/integration", ".*\\.jar").getFullFilePaths())
+>]

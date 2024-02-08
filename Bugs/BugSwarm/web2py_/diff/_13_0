@@ -1,0 +1,40 @@
+[<Line: +                update_or_insert_values = {'first_name': store_user_firstname,
+>, <Line: +                                           'last_name': store_user_lastname,
+>, <Line: +                                           'email': store_user_mail}
+>, <Line: +                if '@' not in username:
+>, <Line: +                    # ################
+>, <Line: +                    fields = ['first_name', 'last_name', 'email']
+>, <Line: +                elif '@' in username:
+>, <Line: +                    # #############
+>, <Line: +                    fields = ['first_name', 'last_name']
+>, <Line: +                update_or_insert_values = {f: update_or_insert_values[f] for f in fields}
+>, <Line: +                if user_in_db.count() > 0:
+>, <Line: +                    actual_values = user_in_db.select(*[db.auth_user[f] for f in fields]).first().as_dict()
+>, <Line: +                    if update_or_insert_values != actual_values:  # We don't update record if values are the same
+>, <Line: +                        user_in_db.update(**update_or_insert_values)
+>, <Line: +                else:
+>, <Line: +                    db.auth_user.insert(**update_or_insert_values)
+>]
+[<Line: -                try:
+>, <Line: -                    #
+>, <Line: -                    # #################
+>, <Line: -                    if user_in_db.count() > 0:
+>, <Line: -                        user_in_db.update(first_name=store_user_firstname,
+>, <Line: -                                          last_name=store_user_lastname,
+>, <Line: -                                          email=store_user_mail)
+>, <Line: -                    else:
+>, <Line: -                        db.auth_user.insert(first_name=store_user_firstname,
+>, <Line: -                                            last_name=store_user_lastname,
+>, <Line: -                                            email=store_user_mail,
+>, <Line: -                                            username=username)
+>, <Line: -                except:
+>, <Line: -                    #
+>, <Line: -                    # ##############
+>, <Line: -                    if user_in_db.count() > 0:
+>, <Line: -                        user_in_db.update(first_name=store_user_firstname,
+>, <Line: -                                          last_name=store_user_lastname)
+>, <Line: -                    else:
+>, <Line: -                        db.auth_user.insert(first_name=store_user_firstname,
+>, <Line: -                                            last_name=store_user_lastname,
+>, <Line: -                                            email=username)
+>]

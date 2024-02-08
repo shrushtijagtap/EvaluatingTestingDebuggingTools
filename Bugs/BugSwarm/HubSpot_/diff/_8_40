@@ -1,0 +1,72 @@
+[<Line: +package com.hubspot.baragon.data;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.Date;
+>, <Line: +import java.util.Iterator;
+>, <Line: +import java.util.List;
+>, <Line: +import com.fasterxml.jackson.databind.ObjectMapper;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +import com.google.common.collect.Iterables;
+>, <Line: +import com.google.common.collect.Lists;
+>, <Line: +import com.google.inject.Inject;
+>, <Line: +import com.google.inject.Singleton;
+>, <Line: +import com.hubspot.baragon.models.BaragonResponse;
+>, <Line: +import org.apache.curator.framework.CuratorFramework;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +@Singleton
+>, <Line: +public class BaragonResponseHistoryDatastore extends AbstractDataStore {
+>, <Line: +  private static final Logger LOG = LoggerFactory.getLogger(BaragonResponseHistoryDatastore.class);
+>, <Line: +  public static final String RESPONSE_HISTORIES_FORMAT = "/responseHistory";
+>, <Line: +  public static final String RESPONSE_HISTORIES_FOR_SERVICE_FORMAT = RESPONSE_HISTORIES_FORMAT + "/%s";
+>, <Line: +  public static final String RESPONSE_HISTORY_FORMAT = RESPONSE_HISTORIES_FOR_SERVICE_FORMAT + "/%s";
+>, <Line: +  public static final String SERVICE_ID_FOR_REQUEST_FORMAT = RESPONSE_HISTORIES_FORMAT + "/requestIdMapping/%s";
+>, <Line: +  @Inject
+>, <Line: +  public BaragonResponseHistoryDatastore(CuratorFramework curatorFramework, ObjectMapper objectMapper) {
+>, <Line: +    super(curatorFramework, objectMapper);
+>, <Line: +  }
+>, <Line: +  public void addResponse(String serviceId, String requestId, BaragonResponse response) {
+>, <Line: +    writeToZk(String.format(RESPONSE_HISTORY_FORMAT, serviceId, requestId), response);
+>, <Line: +    writeToZk(String.format(SERVICE_ID_FOR_REQUEST_FORMAT, requestId), serviceId);
+>, <Line: +  }
+>, <Line: +  public Optional<String> getServiceIdForRequestId(String requestId) {
+>, <Line: +    return readFromZk(String.format(SERVICE_ID_FOR_REQUEST_FORMAT, requestId), String.class);
+>, <Line: +  }
+>, <Line: +  public Optional<BaragonResponse> getResponse(String serviceId, String requestId) {
+>, <Line: +    return readFromZk(String.format(RESPONSE_HISTORY_FORMAT, serviceId, requestId), BaragonResponse.class);
+>, <Line: +  }
+>, <Line: +  public List<BaragonResponse> getResponsesForService(String serviceId, int limit) {
+>, <Line: +    final List<String> nodes = getChildren(String.format(RESPONSE_HISTORIES_FOR_SERVICE_FORMAT, serviceId));
+>, <Line: +    final List<BaragonResponse> responses = Lists.newArrayListWithCapacity(Math.min(nodes.size(), limit));
+>, <Line: +    for (String requestId : nodes.subList(0, Math.min(nodes.size(), limit))) {
+>, <Line: +      try {
+>, <Line: +        responses.addAll(readFromZk(String.format(RESPONSE_HISTORY_FORMAT, serviceId, requestId), BaragonResponse.class).asSet());
+>, <Line: +      } catch (Exception e) {
+>, <Line: +        LOG.error(String.format("Could not fetch info for group %s due to error %s", requestId, e));
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    return responses;
+>, <Line: +  }
+>, <Line: +  public Optional<Long> getRequestUpdatedAt(String serviceId, String requestId) {
+>, <Line: +    return getUpdatedAt(String.format(RESPONSE_HISTORY_FORMAT, serviceId, requestId));
+>, <Line: +  }
+>, <Line: +  public List<String> getServiceIds() {
+>, <Line: +    return getChildren(RESPONSE_HISTORIES_FORMAT);
+>, <Line: +  }
+>, <Line: +  public List<String> getRequestIdsForService(String serviceId) {
+>, <Line: +    return getChildren(String.format(RESPONSE_HISTORIES_FOR_SERVICE_FORMAT, serviceId));
+>, <Line: +  }
+>, <Line: +  public void deleteResponse(String serviceId, String requestId) {
+>, <Line: +    deleteNode(String.format(RESPONSE_HISTORY_FORMAT, serviceId, requestId));
+>, <Line: +    deleteNode(String.format(SERVICE_ID_FOR_REQUEST_FORMAT, requestId));
+>, <Line: +  }
+>, <Line: +  public void deleteResponses(String serviceId) {
+>, <Line: +    String path = String.format(RESPONSE_HISTORIES_FOR_SERVICE_FORMAT, serviceId);
+>, <Line: +    List<String> requestIds = getChildren(path);
+>, <Line: +    deleteNode(path, true);
+>, <Line: +    for (String requestId : requestIds) {
+>, <Line: +      deleteNode(String.format(SERVICE_ID_FOR_REQUEST_FORMAT, requestId));
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,29 @@
+[<Line: +    <dependency>
+>, <Line: +      <groupId>com.fasterxml.jackson.datatype</groupId>
+>, <Line: +      <artifactId>jackson-datatype-guava</artifactId>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>org.apache.curator</groupId>
+>, <Line: +      <artifactId>curator-client</artifactId>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>com.ning</groupId>
+>, <Line: +      <artifactId>async-http-client</artifactId>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>org.jukito</groupId>
+>, <Line: +      <artifactId>jukito</artifactId>
+>, <Line: +      <scope>test</scope>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>org.apache.curator</groupId>
+>, <Line: +      <artifactId>curator-test</artifactId>
+>, <Line: +      <scope>test</scope>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>junit</groupId>
+>, <Line: +      <artifactId>junit</artifactId>
+>, <Line: +      <scope>test</scope>
+>, <Line: +    </dependency>
+>]
+[]

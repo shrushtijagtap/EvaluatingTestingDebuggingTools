@@ -1,0 +1,29 @@
+[<Line: +package com.hubspot.baragon.agent.healthcheck;
+>, <Line: +import java.util.concurrent.atomic.AtomicReference;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +import com.google.inject.Inject;
+>, <Line: +import com.google.inject.name.Named;
+>, <Line: +import com.hubspot.baragon.agent.BaragonAgentServiceModule;
+>, <Line: +import com.hubspot.baragon.agent.lbs.LocalLbAdapter;
+>, <Line: +import com.hubspot.baragon.exceptions.InvalidConfigException;
+>, <Line: +public class ConfigChecker implements Runnable {
+>, <Line: +  private final LocalLbAdapter adapter;
+>, <Line: +  private final AtomicReference<Optional<String>> errorMessage;
+>, <Line: +  @Inject
+>, <Line: +  public ConfigChecker(LocalLbAdapter adapter,
+>, <Line: +                       @Named(BaragonAgentServiceModule.CONFIG_ERROR_MESSAGE) AtomicReference<Optional<String>> errorMessage) {
+>, <Line: +    this.adapter = adapter;
+>, <Line: +    this.errorMessage = errorMessage;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void run() {
+>, <Line: +    try {
+>, <Line: +      adapter.checkConfigs();
+>, <Line: +      errorMessage.set(Optional.<String>absent());
+>, <Line: +    } catch (InvalidConfigException e) {
+>, <Line: +      errorMessage.set(Optional.of(e.getMessage()));
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

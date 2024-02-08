@@ -1,0 +1,12 @@
+[<Line: +    if secure and legacy.is_bytes(contents): contents = contents.decode(encoding)
+>, <Line: +    return email.mime.text.MIMEText(contents, "plain", encoding)
+>, <Line: +    if secure and legacy.is_bytes(contents): contents = contents.decode(encoding)
+>, <Line: +    return email.mime.text.MIMEText(contents, "html", encoding)
+>]
+[<Line: -    plain = email.mime.text.MIMEText(contents, "plain", encoding)
+>, <Line: -    if secure: plain["Content-Transfer-Encoding"] = "8bit"
+>, <Line: -    return plain
+>, <Line: -    html = email.mime.text.MIMEText(contents, "html", encoding)
+>, <Line: -    if secure: html["Content-Transfer-Encoding"] = "8bit"
+>, <Line: -    return html
+>]

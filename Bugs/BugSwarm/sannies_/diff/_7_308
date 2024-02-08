@@ -1,0 +1,40 @@
+[<Line: +package org.mp4parser.boxes.sampleentry;
+>, <Line: +import org.mp4parser.BoxParser;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import java.nio.channels.ReadableByteChannel;
+>, <Line: +    public void parse(ReadableByteChannel dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>, <Line: +    @Override
+>, <Line: +    public long getSize() {
+>, <Line: +        long s = getContainerSize();
+>, <Line: +        long t = 38; // bytes to container start
+>, <Line: +        return s + t + ((largeBox || (s + t) >= (1L << 32)) ? 16 : 8);
+>, <Line: +    }
+>, <Line: +    /*
+>, <Line: +    class FontRecord {
+>, <Line: +	unsigned int(16) 	font-ID;
+>, <Line: +	unsigned int(8)	font-name-length;
+>, <Line: +	unsigned int(8)	font[font-name-length];
+>, <Line: +}
+>, <Line: +     */
+>]
+[<Line: -package com.coremedia.iso.boxes.sampleentry;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -    public void parse(DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>, <Line: -    /*
+>, <Line: -    class FontRecord {
+>, <Line: -	unsigned int(16) 	font-ID;
+>, <Line: -	unsigned int(8)	font-name-length;
+>, <Line: -	unsigned int(8)	font[font-name-length];
+>, <Line: -}
+>, <Line: -     */
+>, <Line: -    @Override
+>, <Line: -    public long getSize() {
+>, <Line: -        long s = getContainerSize();
+>, <Line: -        long t = 38; // bytes to container start
+>, <Line: -        return s + t + ((largeBox || (s + t) >= (1L << 32)) ? 16 : 8);
+>, <Line: -    }
+>]

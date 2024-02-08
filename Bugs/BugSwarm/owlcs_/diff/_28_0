@@ -1,0 +1,13 @@
+[<Line: +        int expected = 3;
+>, <Line: +        Class[] expectedViolations = {UseOfDefinedDatatypeInDatatypeRestriction.class,
+>, <Line: +            UseOfIllegalFacetRestriction.class, UseOfUndeclaredDatatype.class};
+>, <Line: +        int expected = 1;
+>, <Line: +        Class[] expectedViolations = {UseOfUndeclaredDatatype.class};
+>]
+[<Line: -        int expected = 4;
+>, <Line: -        Class[] expectedViolations = {UseOfBuiltInDatatypeInDatatypeDefinition.class,
+>, <Line: -            UseOfDefinedDatatypeInDatatypeRestriction.class, UseOfIllegalFacetRestriction.class,
+>, <Line: -            UseOfUndeclaredDatatype.class};
+>, <Line: -        int expected = 2;
+>, <Line: -        Class[] expectedViolations = {UseOfUndeclaredDatatype.class, UseOfUndeclaredDatatype.class};
+>]

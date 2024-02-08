@@ -1,0 +1,4 @@
+[<Line: +    public void storeOntology(OWLOntology o, PrintWriter printWriter, OWLDocumentFormat format) {
+>]
+[<Line: -    protected void storeOntology(OWLOntology o, PrintWriter printWriter, OWLDocumentFormat format) {
+>]

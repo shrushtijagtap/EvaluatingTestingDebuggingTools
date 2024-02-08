@@ -1,0 +1,184 @@
+[<Line: +	public Pair<String, Expr>[] divideByZeroCheck(Codes.BinaryOperator binOp, VcBranch branch) {
+>, <Line: +		if (binOp.type(0) instanceof Type.Int) {
+>, <Line: +		return new Pair[] {
+>, <Line: +				new Pair("division by zero", new Expr.Binary(Expr.Binary.Op.NEQ, rhs, constant, rhs.attributes())) };
+>, <Line: +		if (code.type(0) instanceof Type.EffectiveArray) {
+>, <Line: +		List<Type> code_type_params = code.type(0).params();		
+>, <Line: +				Type rawType = expand(environment[operand], attributes);
+>, <Line: +				Expr rawTest = new Expr.Is(branch.read(operand), convert(rawType, attributes));
+>, <Line: +				Expr nominalTest = new Expr.Is(branch.read(operand), convert(t, attributes));
+>, <Line: +				preconditions.add(new Pair("type invariant not satisfied (argument " + i + ")",
+>, <Line: +						new Expr.Binary(Expr.Binary.Op.IMPLIES, rawTest, nominalTest)));
+>, <Line: +		List<AttributedCodeBlock> requires = findPrecondition(code.name, code.type(0), block, branch);
+>, <Line: +			Expr argument = operands.length == 1 ? operands[0] : new Expr.Nary(Expr.Nary.Op.TUPLE, operands);
+>, <Line: +				Expr precondition = new Expr.Invoke(prefix + i, code.name.module(), Collections.EMPTY_LIST, argument);
+>, <Line: +				preconditions.add(new Pair<String, Expr>("precondition not satisfied", precondition));
+>, <Line: +		Expr src = branch.read(code.target(0));
+>, <Line: +				transformNary(Expr.Nary.Op.ARRAY, (Codes.NewArray) code, branch, block);
+>, <Line: +				transformNary(Expr.Nary.Op.TUPLE, (Codes.NewRecord) code, branch, block);
+>, <Line: +		for (int i = 0; i != code.operands().length; ++i) {
+>, <Line: +			branch.write(code.target(i), branch.read(code.operand(i)));
+>, <Line: +		}
+>, <Line: +	protected void transform(Codes.Convert code, AttributedCodeBlock block, VcBranch branch) {
+>, <Line: +		Collection<Attribute> attributes = toWycsAttributes(block.attributes(branch.pc()));
+>, <Line: +		branch.write(code.target(0), new Expr.Cast(type, result, attributes));
+>, <Line: +	protected void transform(Codes.Const code, AttributedCodeBlock block, VcBranch branch) {
+>, <Line: +		branch.write(code.target(), new Expr.Constant(val, toWycsAttributes(block.attributes(branch.pc()))));
+>, <Line: +	protected void transform(Codes.Dereference code, AttributedCodeBlock block, VcBranch branch) {
+>, <Line: +		branch.havoc(code.target(0));
+>, <Line: +	protected void transform(Codes.FieldLoad code, AttributedCodeBlock block, VcBranch branch) {
+>, <Line: +		ArrayList<String> fields = new ArrayList<String>(code.type(0).fields().keySet());
+>, <Line: +		Expr index = new Expr.Constant(Value.Integer(BigInteger.valueOf(fields.indexOf(code.field))));
+>, <Line: +		Expr result = new Expr.IndexOf(src, index, toWycsAttributes(block.attributes(branch.pc())));
+>, <Line: +		branch.write(code.target(0), result);
+>, <Line: +			if (containsNominal(code.type(0).returns().get(0), attributes)) {
+>, <Line: +						convert(code.type(0).returns().get(0), attributes));
+>, <Line: +			List<AttributedCodeBlock> ensures = findPostcondition(code.name, code.type(0), block, branch);
+>, <Line: +	protected void transform(Codes.Invert code, AttributedCodeBlock block, VcBranch branch) {
+>, <Line: +		branch.havoc(code.target(0));
+>, <Line: +	protected void transform(Codes.IndexOf code, AttributedCodeBlock block, VcBranch branch) {
+>, <Line: +		branch.write(code.target(0), new Expr.IndexOf(src, idx, toWycsAttributes(block.attributes(branch.pc()))));
+>, <Line: +		branch.havoc(code.target(0));
+>, <Line: +		Expr arg = new Expr.Nary(Expr.Nary.Op.TUPLE, new Expr[] { branch.read(code.target(0)), element, count },
+>, <Line: +		generics.add(convert(code.type(0).element(),wyilAttributes));
+>, <Line: +	protected void transform(Codes.Lambda code, AttributedCodeBlock block, VcBranch branch) {
+>, <Line: +		branch.havoc(code.target(0));
+>, <Line: +		branch.write(code.target(0), branch.read(code.operand(0)));
+>, <Line: +	protected void transform(Codes.NewObject code, AttributedCodeBlock block, VcBranch branch) {
+>, <Line: +		branch.havoc(code.target(0));
+>, <Line: +	protected void transform(Codes.UnaryOperator code, AttributedCodeBlock block, VcBranch branch) {
+>, <Line: +			branch.havoc(code.target(0));
+>, <Line: +			branch.havoc(code.target(0));
+>, <Line: +	protected void transform(Codes.Update code, AttributedCodeBlock block, VcBranch branch) {
+>, <Line: +		Expr oldSource = branch.read(code.target(0));
+>, <Line: +		Expr newSource = branch.havoc(code.target(0));
+>, <Line: +	protected void transformUnary(Expr.Unary.Op operator, Code.AbstractUnaryAssignable code, VcBranch branch,
+>, <Line: +		branch.write(code.target(0), new Expr.Unary(operator, lhs, toWycsAttributes(block.attributes(branch.pc()))));
+>, <Line: +	protected void transformBinary(Expr.Binary.Op operator, Code.AbstractBinaryAssignable code, VcBranch branch,
+>, <Line: +			branch.write(code.target(0),
+>, <Line: +					new Expr.Binary(operator, lhs, rhs, toWycsAttributes(block.attributes(branch.pc()))));
+>, <Line: +			branch.havoc(code.target(0));
+>, <Line: +	protected void transformNary(Expr.Nary.Op operator, Code.AbstractMultiNaryAssignable code, VcBranch branch,
+>, <Line: +		branch.write(code.target(0), new Expr.Nary(operator, vals, toWycsAttributes(block.attributes(branch.pc()))));
+>, <Line: +	protected List<AttributedCodeBlock> findPrecondition(NameID name, Type.FunctionOrMethod fun,
+>, <Line: +			AttributedCodeBlock block, VcBranch branch) throws Exception {
+>, <Line: +		Path.Entry<WyilFile> e = builder.project().get(name.module(), WyilFile.ContentType);
+>, <Line: +			syntaxError(errorMessage(ErrorMessages.RESOLUTION_ERROR, name.module().toString()), filename,
+>, <Line: +					block.attributes(branch.pc()));
+>, <Line: +	protected List<AttributedCodeBlock> findPostcondition(NameID name, Type.FunctionOrMethod fun,
+>, <Line: +			AttributedCodeBlock block, VcBranch branch) throws Exception {
+>, <Line: +		Path.Entry<WyilFile> e = builder.project().get(name.module(), WyilFile.ContentType);
+>, <Line: +			syntaxError(errorMessage(ErrorMessages.RESOLUTION_ERROR, name.module().toString()), filename,
+>, <Line: +					block.attributes(branch.pc()));
+>]
+[<Line: -	public Pair<String,Expr>[] divideByZeroCheck(Codes.BinaryOperator binOp, VcBranch branch) {
+>, <Line: -		if (binOp.type() instanceof Type.Int) {
+>, <Line: -		return new Pair[] { new Pair("division by zero", new Expr.Binary(
+>, <Line: -				Expr.Binary.Op.NEQ, rhs, constant, rhs.attributes())) };
+>, <Line: -		if (code.type() instanceof Type.EffectiveArray) {
+>, <Line: -		List<Type> code_type_params = code.type().params();		
+>, <Line: -				Type rawType = expand(environment[operand],attributes);
+>, <Line: -				Expr rawTest = new Expr.Is(branch.read(operand), convert(
+>, <Line: -						rawType, attributes));
+>, <Line: -				Expr nominalTest = new Expr.Is(branch.read(operand), convert(t,
+>, <Line: -						attributes));
+>, <Line: -				preconditions.add(new Pair(
+>, <Line: -						"type invariant not satisfied (argument " + i + ")",
+>, <Line: -						new Expr.Binary(Expr.Binary.Op.IMPLIES, rawTest,
+>, <Line: -								nominalTest)));
+>, <Line: -		List<AttributedCodeBlock> requires = findPrecondition(code.name,
+>, <Line: -				code.type(), block, branch);
+>, <Line: -			Expr argument = operands.length == 1 ? operands[0] : new Expr.Nary(
+>, <Line: -					Expr.Nary.Op.TUPLE, operands);
+>, <Line: -				Expr precondition = new Expr.Invoke(prefix + i,
+>, <Line: -						code.name.module(), Collections.EMPTY_LIST, argument);
+>, <Line: -				preconditions.add(new Pair<String,Expr>("precondition not satisfied",precondition));
+>, <Line: -		Expr src = branch.read(code.target());
+>, <Line: -				transformNary(Expr.Nary.Op.ARRAY, (Codes.NewArray) code, branch,
+>, <Line: -						block);
+>, <Line: -				transformNary(Expr.Nary.Op.TUPLE, (Codes.NewRecord) code,
+>, <Line: -						branch, block);
+>, <Line: -		branch.write(code.target(), branch.read(code.operand(0)));
+>, <Line: -	protected void transform(Codes.Convert code, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) {
+>, <Line: -		Collection<Attribute> attributes = toWycsAttributes(block
+>, <Line: -				.attributes(branch.pc()));
+>, <Line: -		branch.write(code.target(), new Expr.Cast(type, result, attributes));
+>, <Line: -	protected void transform(Codes.Const code, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) {
+>, <Line: -		branch.write(code.target(), new Expr.Constant(val,
+>, <Line: -				toWycsAttributes(block.attributes(branch.pc()))));
+>, <Line: -	protected void transform(Codes.Dereference code, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) {
+>, <Line: -		branch.havoc(code.target());
+>, <Line: -	protected void transform(Codes.FieldLoad code, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) {
+>, <Line: -		ArrayList<String> fields = new ArrayList<String>(code.type().fields()
+>, <Line: -				.keySet());
+>, <Line: -		Expr index = new Expr.Constant(Value.Integer(BigInteger.valueOf(fields
+>, <Line: -				.indexOf(code.field))));
+>, <Line: -		Expr result = new Expr.IndexOf(src, index,
+>, <Line: -				toWycsAttributes(block.attributes(branch.pc())));
+>, <Line: -		branch.write(code.target(), result);
+>, <Line: -			if (containsNominal(code.type().returns().get(0), attributes)) {
+>, <Line: -						convert(code.type().returns().get(0), attributes));
+>, <Line: -			List<AttributedCodeBlock> ensures = findPostcondition(code.name,
+>, <Line: -					code.type(), block, branch);
+>, <Line: -	protected void transform(Codes.Invert code, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) {
+>, <Line: -		branch.havoc(code.target());
+>, <Line: -	protected void transform(Codes.IndexOf code, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) {
+>, <Line: -		branch.write(code.target(), new Expr.IndexOf(src, idx,
+>, <Line: -				toWycsAttributes(block.attributes(branch.pc()))));
+>, <Line: -		branch.havoc(code.target());
+>, <Line: -		Expr arg = new Expr.Nary(Expr.Nary.Op.TUPLE, new Expr[] { 
+>, <Line: -				branch.read(code.target()), element, count },
+>, <Line: -		generics.add(convert(code.type().element(),wyilAttributes));
+>, <Line: -	protected void transform(Codes.Lambda code, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) {
+>, <Line: -		branch.havoc(code.target());
+>, <Line: -		branch.write(code.target(), branch.read(code.operand(0)));
+>, <Line: -	protected void transform(Codes.NewObject code, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) {
+>, <Line: -		branch.havoc(code.target());
+>, <Line: -	protected void transform(Codes.UnaryOperator code,
+>, <Line: -			AttributedCodeBlock block, VcBranch branch) {
+>, <Line: -			branch.havoc(code.target());
+>, <Line: -			branch.havoc(code.target());
+>, <Line: -	protected void transform(Codes.Update code, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) {
+>, <Line: -		Expr oldSource = branch.read(code.target());
+>, <Line: -		Expr newSource = branch.havoc(code.target());
+>, <Line: -	protected void transformUnary(Expr.Unary.Op operator,
+>, <Line: -			Code.AbstractUnaryAssignable code, VcBranch branch,
+>, <Line: -		branch.write(code.target(), new Expr.Unary(operator, lhs,
+>, <Line: -				toWycsAttributes(block.attributes(branch.pc()))));
+>, <Line: -	protected void transformBinary(Expr.Binary.Op operator,
+>, <Line: -			Code.AbstractBinaryAssignable code, VcBranch branch,
+>, <Line: -			branch.write(code.target(), new Expr.Binary(operator, lhs, rhs,
+>, <Line: -					toWycsAttributes(block.attributes(branch.pc()))));
+>, <Line: -			branch.havoc(code.target());
+>, <Line: -	protected void transformNary(Expr.Nary.Op operator,
+>, <Line: -			Code.AbstractNaryAssignable code, VcBranch branch,
+>, <Line: -		branch.write(code.target(), new Expr.Nary(operator, vals,
+>, <Line: -				toWycsAttributes(block.attributes(branch.pc()))));
+>, <Line: -	protected List<AttributedCodeBlock> findPrecondition(NameID name,
+>, <Line: -			Type.FunctionOrMethod fun, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) throws Exception {
+>, <Line: -		Path.Entry<WyilFile> e = builder.project().get(name.module(),
+>, <Line: -				WyilFile.ContentType);
+>, <Line: -			syntaxError(
+>, <Line: -					errorMessage(ErrorMessages.RESOLUTION_ERROR, name.module()
+>, <Line: -							.toString()), filename, block.attributes(branch
+>, <Line: -							.pc()));
+>, <Line: -	protected List<AttributedCodeBlock> findPostcondition(NameID name,
+>, <Line: -			Type.FunctionOrMethod fun, AttributedCodeBlock block,
+>, <Line: -			VcBranch branch) throws Exception {
+>, <Line: -		Path.Entry<WyilFile> e = builder.project().get(name.module(),
+>, <Line: -				WyilFile.ContentType);
+>, <Line: -			syntaxError(
+>, <Line: -					errorMessage(ErrorMessages.RESOLUTION_ERROR, name.module()
+>, <Line: -							.toString()), filename, block.attributes(branch
+>, <Line: -							.pc()));
+>]

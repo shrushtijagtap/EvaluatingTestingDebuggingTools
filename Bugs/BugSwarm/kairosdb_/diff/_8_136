@@ -1,0 +1,6 @@
+[<Line: +define([], function () {
+>, <Line: +});
+>]
+[<Line: -define([
+>, <Line: -], function () {});
+>]

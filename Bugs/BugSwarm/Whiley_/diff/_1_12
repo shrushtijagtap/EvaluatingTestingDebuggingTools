@@ -1,0 +1,10 @@
+[<Line: +    int x = 0
+>, <Line: +    while i < |items| where i >= 0 && x >= 0:
+>, <Line: +        x = x + items[i]
+>, <Line: +    return x
+>]
+[<Line: -    int r = 0
+>, <Line: -    while i < |items| where i >= 0 && r >= 0:
+>, <Line: -        r = r + items[i]
+>, <Line: -    return r
+>]

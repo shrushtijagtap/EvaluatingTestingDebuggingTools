@@ -1,0 +1,358 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'config',
+>, <Line: +		'jquery'
+>, <Line: +	],
+>, <Line: +	function (angular, _, config, $) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		module.controller('SearchCtrl', function ($scope, $rootScope, $element, $location, datasourceSrv, $timeout) {
+>, <Line: +			$scope.init = function () {
+>, <Line: +				$scope.giveSearchFocus = 0;
+>, <Line: +				$scope.selectedIndex = -1;
+>, <Line: +				$scope.results = {dashboards: [], tags: [], metrics: []};
+>, <Line: +				$scope.query = {query: 'title:'};
+>, <Line: +				$scope.db = datasourceSrv.getGrafanaDB();
+>, <Line: +				$scope.currentSearchId = 0;
+>, <Line: +				// events
+>, <Line: +				$scope.onAppEvent('dashboard-deleted', $scope.dashboardDeleted);
+>, <Line: +				$timeout(function () {
+>, <Line: +					$scope.giveSearchFocus = $scope.giveSearchFocus + 1;
+>, <Line: +					$scope.query.query = 'title:';
+>, <Line: +					$scope.search();
+>, <Line: +				}, 100);
+>, <Line: +			};
+>, <Line: +			$scope.keyDown = function (evt) {
+>, <Line: +				if (evt.keyCode === 27) {
+>, <Line: +					$scope.appEvent('hide-dash-editor');
+>, <Line: +				}
+>, <Line: +				if (evt.keyCode === 40) {
+>, <Line: +					$scope.moveSelection(1);
+>, <Line: +				}
+>, <Line: +				if (evt.keyCode === 38) {
+>, <Line: +					$scope.moveSelection(-1);
+>, <Line: +				}
+>, <Line: +				if (evt.keyCode === 13) {
+>, <Line: +					if ($scope.tagsOnly) {
+>, <Line: +						var tag = $scope.results.tags[$scope.selectedIndex];
+>, <Line: +						if (tag) {
+>, <Line: +							$scope.filterByTag(tag.term);
+>, <Line: +						}
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					var selectedDash = $scope.results.dashboards[$scope.selectedIndex];
+>, <Line: +					if (selectedDash) {
+>, <Line: +						$location.search({});
+>, <Line: +						$location.path("/dashboard/db/" + selectedDash.id);
+>, <Line: +						setTimeout(function () {
+>, <Line: +							$('body').click(); // hack to force dropdown to close;
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.moveSelection = function (direction) {
+>, <Line: +				$scope.selectedIndex = Math.max(Math.min($scope.selectedIndex + direction, $scope.resultCount - 1), 0);
+>, <Line: +			};
+>, <Line: +			$scope.goToDashboard = function (id) {
+>, <Line: +				$location.search({});
+>, <Line: +				$location.path("/dashboard/db/" + id);
+>, <Line: +			};
+>, <Line: +			$scope.shareDashboard = function (title, id, $event) {
+>, <Line: +				$event.stopPropagation();
+>, <Line: +				var baseUrl = window.location.href.replace(window.location.hash, '');
+>, <Line: +				$scope.share = {
+>, <Line: +					title: title,
+>, <Line: +					url: baseUrl + '#dashboard/db/' + encodeURIComponent(id)
+>, <Line: +				};
+>, <Line: +			};
+>, <Line: +			$scope.searchDashboards = function (queryString) {
+>, <Line: +				// bookeeping for determining stale search requests
+>, <Line: +				var searchId = $scope.currentSearchId + 1;
+>, <Line: +				$scope.currentSearchId = searchId > $scope.currentSearchId ? searchId : $scope.currentSearchId;
+>, <Line: +				return $scope.db.searchDashboards(queryString)
+>, <Line: +					.then(function (results) {
+>, <Line: +						// since searches are async, it's possible that these results are not for the latest search. throw
+>, <Line: +						// them away if so
+>, <Line: +						if (searchId < $scope.currentSearchId) {
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						$scope.tagsOnly = results.tagsOnly;
+>, <Line: +						$scope.results.dashboards = results.dashboards;
+>, <Line: +						$scope.results.tags = results.tags;
+>, <Line: +						$scope.resultCount = results.tagsOnly ? results.tags.length : results.dashboards.length;
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			$scope.filterByTag = function (tag, evt) {
+>, <Line: +				$scope.query.query = "tags:" + tag + " AND title:";
+>, <Line: +				$scope.search();
+>, <Line: +				$scope.giveSearchFocus = $scope.giveSearchFocus + 1;
+>, <Line: +				if (evt) {
+>, <Line: +					evt.stopPropagation();
+>, <Line: +					evt.preventDefault();
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.showTags = function () {
+>, <Line: +				$scope.tagsOnly = !$scope.tagsOnly;
+>, <Line: +				$scope.query.query = $scope.tagsOnly ? "tags!:" : "";
+>, <Line: +				$scope.giveSearchFocus = $scope.giveSearchFocus + 1;
+>, <Line: +				$scope.selectedIndex = -1;
+>, <Line: +				$scope.search();
+>, <Line: +			};
+>, <Line: +			$scope.search = function () {
+>, <Line: +				$scope.showImport = false;
+>, <Line: +				$scope.selectedIndex = 0;
+>, <Line: +				$scope.searchDashboards($scope.query.query);
+>, <Line: +			};
+>, <Line: +			$scope.deleteDashboard = function (dash, evt) {
+>, <Line: +				evt.stopPropagation();
+>, <Line: +				$scope.appEvent('delete-dashboard', {
+>, <Line: +					id: dash.id,
+>, <Line: +					title: dash.title
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			$scope.dashboardDeleted = function (evt, id) {
+>, <Line: +				var dash = _.findWhere($scope.results.dashboards, {id: id});
+>, <Line: +				$scope.results.dashboards = _.without($scope.results.dashboards, dash);
+>, <Line: +			};
+>, <Line: +			$scope.addMetricToCurrentDashboard = function (metricId) {
+>, <Line: +				$scope.dashboard.rows.push({
+>, <Line: +					title: '',
+>, <Line: +					height: '250px',
+>, <Line: +					editable: true,
+>, <Line: +					panels: [
+>, <Line: +						{
+>, <Line: +							type: 'graphite',
+>, <Line: +							title: 'test',
+>, <Line: +							span: 12,
+>, <Line: +							targets: [{target: metricId}]
+>, <Line: +						}
+>, <Line: +					]
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			$scope.toggleImport = function () {
+>, <Line: +				$scope.showImport = !$scope.showImport;
+>, <Line: +			};
+>, <Line: +			$scope.newDashboard = function () {
+>, <Line: +				$location.url('/dashboard/file/empty.json');
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +		module.directive('xngFocus', function () {
+>, <Line: +			return function (scope, element, attrs) {
+>, <Line: +				element.click(function (e) {
+>, <Line: +					e.stopPropagation();
+>, <Line: +				});
+>, <Line: +				scope.$watch(attrs.xngFocus, function (newValue) {
+>, <Line: +					if (!newValue) {
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					setTimeout(function () {
+>, <Line: +						element.focus();
+>, <Line: +						var pos = element.val().length * 2;
+>, <Line: +						element[0].setSelectionRange(pos, pos);
+>, <Line: +					}, 200);
+>, <Line: +				}, true);
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +		module.directive('tagColorFromName', function () {
+>, <Line: +			function djb2(str) {
+>, <Line: +				var hash = 5381;
+>, <Line: +				for (var i = 0; i < str.length; i++) {
+>, <Line: +					hash = ((hash << 5) + hash) + str.charCodeAt(i);
+>, <Line: +					/* hash * 33 + c */
+>, <Line: +				}
+>, <Line: +				return hash;
+>, <Line: +			}
+>, <Line: +			return function (scope, element) {
+>, <Line: +				var name = _.isString(scope.tag) ? scope.tag : scope.tag.term;
+>, <Line: +				var hash = djb2(name.toLowerCase());
+>, <Line: +				var colors = [
+>, <Line: +					"#E24D42", "#1F78C1", "#BA43A9", "#705DA0", "#466803",
+>, <Line: +					"#508642", "#447EBC", "#C15C17", "#890F02", "#757575",
+>, <Line: +					"#0A437C", "#6D1F62", "#584477", "#629E51", "#2F4F4F",
+>, <Line: +					"#BF1B00", "#806EB7", "#8a2eb8", "#699e00", "#000000",
+>, <Line: +					"#3F6833", "#2F575E", "#99440A", "#E0752D", "#0E4AB4",
+>, <Line: +					"#58140C", "#052B51", "#511749", "#3F2B5B",
+>, <Line: +				];
+>, <Line: +				var color = colors[Math.abs(hash % colors.length)];
+>, <Line: +				element.css("background-color", color);
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'config',
+>, <Line: -  'jquery'
+>, <Line: -],
+>, <Line: -function (angular, _, config, $) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  module.controller('SearchCtrl', function($scope, $rootScope, $element, $location, datasourceSrv, $timeout) {
+>, <Line: -    $scope.init = function() {
+>, <Line: -      $scope.giveSearchFocus = 0;
+>, <Line: -      $scope.selectedIndex = -1;
+>, <Line: -      $scope.results = {dashboards: [], tags: [], metrics: []};
+>, <Line: -      $scope.query = { query: 'title:' };
+>, <Line: -      $scope.db = datasourceSrv.getGrafanaDB();
+>, <Line: -      $scope.currentSearchId = 0;
+>, <Line: -      // events
+>, <Line: -      $scope.onAppEvent('dashboard-deleted', $scope.dashboardDeleted);
+>, <Line: -      $timeout(function() {
+>, <Line: -        $scope.giveSearchFocus = $scope.giveSearchFocus + 1;
+>, <Line: -        $scope.query.query = 'title:';
+>, <Line: -        $scope.search();
+>, <Line: -      }, 100);
+>, <Line: -    };
+>, <Line: -    $scope.keyDown = function (evt) {
+>, <Line: -      if (evt.keyCode === 27) {
+>, <Line: -        $scope.appEvent('hide-dash-editor');
+>, <Line: -      }
+>, <Line: -      if (evt.keyCode === 40) {
+>, <Line: -        $scope.moveSelection(1);
+>, <Line: -      }
+>, <Line: -      if (evt.keyCode === 38) {
+>, <Line: -        $scope.moveSelection(-1);
+>, <Line: -      }
+>, <Line: -      if (evt.keyCode === 13) {
+>, <Line: -        if ($scope.tagsOnly) {
+>, <Line: -          var tag = $scope.results.tags[$scope.selectedIndex];
+>, <Line: -          if (tag) {
+>, <Line: -            $scope.filterByTag(tag.term);
+>, <Line: -          }
+>, <Line: -          return;
+>, <Line: -        }
+>, <Line: -        var selectedDash = $scope.results.dashboards[$scope.selectedIndex];
+>, <Line: -        if (selectedDash) {
+>, <Line: -          $location.search({});
+>, <Line: -          $location.path("/dashboard/db/" + selectedDash.id);
+>, <Line: -          setTimeout(function() {
+>, <Line: -            $('body').click(); // hack to force dropdown to close;
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.moveSelection = function(direction) {
+>, <Line: -      $scope.selectedIndex = Math.max(Math.min($scope.selectedIndex + direction, $scope.resultCount - 1), 0);
+>, <Line: -    };
+>, <Line: -    $scope.goToDashboard = function(id) {
+>, <Line: -      $location.search({});
+>, <Line: -      $location.path("/dashboard/db/" + id);
+>, <Line: -    };
+>, <Line: -    $scope.shareDashboard = function(title, id, $event) {
+>, <Line: -      $event.stopPropagation();
+>, <Line: -      var baseUrl = window.location.href.replace(window.location.hash,'');
+>, <Line: -      $scope.share = {
+>, <Line: -        title: title,
+>, <Line: -        url: baseUrl + '#dashboard/db/' + encodeURIComponent(id)
+>, <Line: -      };
+>, <Line: -    };
+>, <Line: -    $scope.searchDashboards = function(queryString) {
+>, <Line: -      // bookeeping for determining stale search requests
+>, <Line: -      var searchId = $scope.currentSearchId + 1;
+>, <Line: -      $scope.currentSearchId = searchId > $scope.currentSearchId ? searchId : $scope.currentSearchId;
+>, <Line: -      return $scope.db.searchDashboards(queryString)
+>, <Line: -        .then(function(results) {
+>, <Line: -          // since searches are async, it's possible that these results are not for the latest search. throw
+>, <Line: -          // them away if so
+>, <Line: -          if (searchId < $scope.currentSearchId) {
+>, <Line: -            return;
+>, <Line: -          }
+>, <Line: -          $scope.tagsOnly = results.tagsOnly;
+>, <Line: -          $scope.results.dashboards = results.dashboards;
+>, <Line: -          $scope.results.tags = results.tags;
+>, <Line: -          $scope.resultCount = results.tagsOnly ? results.tags.length : results.dashboards.length;
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    $scope.filterByTag = function(tag, evt) {
+>, <Line: -      $scope.query.query = "tags:" + tag + " AND title:";
+>, <Line: -      $scope.search();
+>, <Line: -      $scope.giveSearchFocus = $scope.giveSearchFocus + 1;
+>, <Line: -      if (evt) {
+>, <Line: -        evt.stopPropagation();
+>, <Line: -        evt.preventDefault();
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.showTags = function() {
+>, <Line: -      $scope.tagsOnly = !$scope.tagsOnly;
+>, <Line: -      $scope.query.query = $scope.tagsOnly ? "tags!:" : "";
+>, <Line: -      $scope.giveSearchFocus = $scope.giveSearchFocus + 1;
+>, <Line: -      $scope.selectedIndex = -1;
+>, <Line: -      $scope.search();
+>, <Line: -    };
+>, <Line: -    $scope.search = function() {
+>, <Line: -      $scope.showImport = false;
+>, <Line: -      $scope.selectedIndex = 0;
+>, <Line: -      $scope.searchDashboards($scope.query.query);
+>, <Line: -    };
+>, <Line: -    $scope.deleteDashboard = function(dash, evt) {
+>, <Line: -      evt.stopPropagation();
+>, <Line: -      $scope.appEvent('delete-dashboard', { id: dash.id, title: dash.title });
+>, <Line: -    };
+>, <Line: -    $scope.dashboardDeleted = function(evt, id) {
+>, <Line: -      var dash = _.findWhere($scope.results.dashboards, {id: id});
+>, <Line: -      $scope.results.dashboards = _.without($scope.results.dashboards, dash);
+>, <Line: -    };
+>, <Line: -    $scope.addMetricToCurrentDashboard = function (metricId) {
+>, <Line: -      $scope.dashboard.rows.push({
+>, <Line: -        title: '',
+>, <Line: -        height: '250px',
+>, <Line: -        editable: true,
+>, <Line: -        panels: [
+>, <Line: -          {
+>, <Line: -            type: 'graphite',
+>, <Line: -            title: 'test',
+>, <Line: -            span: 12,
+>, <Line: -            targets: [{ target: metricId }]
+>, <Line: -          }
+>, <Line: -        ]
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    $scope.toggleImport = function () {
+>, <Line: -      $scope.showImport = !$scope.showImport;
+>, <Line: -    };
+>, <Line: -    $scope.newDashboard = function() {
+>, <Line: -      $location.url('/dashboard/file/empty.json');
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -  module.directive('xngFocus', function() {
+>, <Line: -    return function(scope, element, attrs) {
+>, <Line: -      element.click(function(e) {
+>, <Line: -        e.stopPropagation();
+>, <Line: -      });
+>, <Line: -      scope.$watch(attrs.xngFocus,function (newValue) {
+>, <Line: -        if (!newValue) {
+>, <Line: -          return;
+>, <Line: -        }
+>, <Line: -        setTimeout(function() {
+>, <Line: -          element.focus();
+>, <Line: -          var pos = element.val().length * 2;
+>, <Line: -          element[0].setSelectionRange(pos, pos);
+>, <Line: -        }, 200);
+>, <Line: -      },true);
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -  module.directive('tagColorFromName', function() {
+>, <Line: -    function djb2(str) {
+>, <Line: -      var hash = 5381;
+>, <Line: -      for (var i = 0; i < str.length; i++) {
+>, <Line: -        hash = ((hash << 5) + hash) + str.charCodeAt(i); /* hash * 33 + c */
+>, <Line: -      }
+>, <Line: -      return hash;
+>, <Line: -    }
+>, <Line: -    return function (scope, element) {
+>, <Line: -      var name = _.isString(scope.tag) ? scope.tag : scope.tag.term;
+>, <Line: -      var hash = djb2(name.toLowerCase());
+>, <Line: -      var colors = [
+>, <Line: -        "#E24D42","#1F78C1","#BA43A9","#705DA0","#466803",
+>, <Line: -        "#508642","#447EBC","#C15C17","#890F02","#757575",
+>, <Line: -        "#0A437C","#6D1F62","#584477","#629E51","#2F4F4F",
+>, <Line: -        "#BF1B00","#806EB7","#8a2eb8", "#699e00","#000000",
+>, <Line: -        "#3F6833","#2F575E","#99440A","#E0752D","#0E4AB4",
+>, <Line: -        "#58140C","#052B51","#511749","#3F2B5B",
+>, <Line: -      ];
+>, <Line: -      var color = colors[Math.abs(hash % colors.length)];
+>, <Line: -      element.css("background-color", color);
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

@@ -1,0 +1,25 @@
+[<Line: +		SyntacticType elementType = convert(Type.T_INT,
+>, <Line: +		Expr lowerBound = new Expr.Binary(Expr.Binary.Op.LTEQ,
+>, <Line: +				root.read(code.startOperand), index);
+>, <Line: +		Expr upperBound = new Expr.Binary(Expr.Binary.Op.LT, index,
+>, <Line: +				root.read(code.endOperand));
+>, <Line: +		Expr range = new Expr.Binary(Expr.Binary.Op.AND, lowerBound, upperBound);
+>, <Line: +				Expr.Binary.Op.IMPLIES, range, forallBody)));
+>, <Line: +			body = new Expr.Binary(Expr.Binary.Op.AND, range, body);
+>]
+[<Line: -		SyntacticType elementType = convert(code.type.element(),
+>, <Line: -		if (code.type instanceof Type.List) {
+>, <Line: -			// FIXME: This case is needed to handle the discrepancy between
+>, <Line: -			// lists and
+>, <Line: -			// maps. Eventually, I plan to eliminate this discrepancy.
+>, <Line: -			Expr.Variable i = new Expr.Variable("_"
+>, <Line: -					+ ((Expr.Variable) index).name);
+>, <Line: -			index = new Expr.Nary(Expr.Nary.Op.TUPLE, new Expr[] { i, index });
+>, <Line: -			pattern = new TypePattern.Tuple(new TypePattern[] {
+>, <Line: -					new TypePattern.Leaf(new SyntacticType.Int(), i), pattern });
+>, <Line: -		}
+>, <Line: -		Expr elementOf = new Expr.Binary(Expr.Binary.Op.IN, index,
+>, <Line: -				root.read(code.sourceOperand));
+>, <Line: -				Expr.Binary.Op.IMPLIES, elementOf, forallBody)));
+>, <Line: -			body = new Expr.Binary(Expr.Binary.Op.AND, elementOf, body);
+>]

@@ -1,0 +1,92 @@
+[<Line: +	rows: [],
+>, <Line: +	from: "now-6h",
+>, <Line: +	to: "now"
+>, <Line: +	enable: true,
+>, <Line: +	list: [
+>, <Line: +		{
+>, <Line: +			name: 'test',
+>, <Line: +			query: 'apps.backend.*',
+>, <Line: +			refresh: true,
+>, <Line: +			options: [],
+>, <Line: +			current: null,
+>, <Line: +		},
+>, <Line: +		{
+>, <Line: +			name: 'test2',
+>, <Line: +			query: '*',
+>, <Line: +			refresh: true,
+>, <Line: +			options: [],
+>, <Line: +			current: null,
+>, <Line: +		}
+>, <Line: +	]
+>, <Line: +if (!_.isUndefined(ARGS.rows)) {
+>, <Line: +	rows = parseInt(ARGS.rows, 10);
+>, <Line: +if (!_.isUndefined(ARGS.name)) {
+>, <Line: +	seriesName = ARGS.name;
+>, <Line: +	dashboard.rows.push({
+>, <Line: +		title: 'Chart',
+>, <Line: +		height: '300px',
+>, <Line: +		panels: [
+>, <Line: +			{
+>, <Line: +				title: 'Events',
+>, <Line: +				type: 'graph',
+>, <Line: +				span: 12,
+>, <Line: +				fill: 1,
+>, <Line: +				linewidth: 2,
+>, <Line: +				targets: [
+>, <Line: +					{
+>, <Line: +						'target': "randomWalk('" + seriesName + "')"
+>, <Line: +					},
+>, <Line: +					{
+>, <Line: +						'target': "randomWalk('[[test2]]')"
+>, <Line: +					}
+>, <Line: +				],
+>, <Line: +			}
+>, <Line: +		]
+>, <Line: +	});
+>]
+[<Line: -  rows : [],
+>, <Line: -  from: "now-6h",
+>, <Line: -  to: "now"
+>, <Line: -  enable: true,
+>, <Line: -  list: [
+>, <Line: -    {
+>, <Line: -      name: 'test',
+>, <Line: -      query: 'apps.backend.*',
+>, <Line: -      refresh: true,
+>, <Line: -      options: [],
+>, <Line: -      current: null,
+>, <Line: -    },
+>, <Line: -    {
+>, <Line: -      name: 'test2',
+>, <Line: -      query: '*',
+>, <Line: -      refresh: true,
+>, <Line: -      options: [],
+>, <Line: -      current: null,
+>, <Line: -    }
+>, <Line: -  ]
+>, <Line: -if(!_.isUndefined(ARGS.rows)) {
+>, <Line: -  rows = parseInt(ARGS.rows, 10);
+>, <Line: -if(!_.isUndefined(ARGS.name)) {
+>, <Line: -  seriesName = ARGS.name;
+>, <Line: -  dashboard.rows.push({
+>, <Line: -    title: 'Chart',
+>, <Line: -    height: '300px',
+>, <Line: -    panels: [
+>, <Line: -      {
+>, <Line: -        title: 'Events',
+>, <Line: -        type: 'graph',
+>, <Line: -        span: 12,
+>, <Line: -        fill: 1,
+>, <Line: -        linewidth: 2,
+>, <Line: -        targets: [
+>, <Line: -          {
+>, <Line: -            'target': "randomWalk('" + seriesName + "')"
+>, <Line: -          },
+>, <Line: -          {
+>, <Line: -            'target': "randomWalk('[[test2]]')"
+>, <Line: -          }
+>, <Line: -        ],
+>, <Line: -      }
+>, <Line: -    ]
+>, <Line: -  });
+>]

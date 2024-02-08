@@ -1,0 +1,84 @@
+[<Line: +package com.hubspot.baragon.service.managers;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import com.hubspot.baragon.data.BaragonResponseHistoryDatastore;
+>, <Line: +import com.hubspot.baragon.service.config.BaragonConfiguration;
+>, <Line: +  private final BaragonResponseHistoryDatastore responseHistoryDatastore;
+>, <Line: +  private final BaragonConfiguration configuration;
+>, <Line: +  public RequestManager(BaragonRequestDatastore requestDatastore,
+>, <Line: +                        BaragonLoadBalancerDatastore loadBalancerDatastore,
+>, <Line: +                        BaragonStateDatastore stateDatastore,
+>, <Line: +                        BaragonAgentResponseDatastore agentResponseDatastore,
+>, <Line: +                        BaragonResponseHistoryDatastore responseHistoryDatastore,
+>, <Line: +                        BaragonConfiguration configuration) {
+>, <Line: +    this.responseHistoryDatastore = responseHistoryDatastore;
+>, <Line: +    this.configuration = configuration;
+>, <Line: +  public List<BaragonResponse> getResponsesForService(String serviceId) {
+>, <Line: +    List<BaragonResponse> responses = new ArrayList<>();
+>, <Line: +    for (String requestId : requestDatastore.getAllRequestIds()) {
+>, <Line: +      Optional<BaragonRequest> maybeRequest = requestDatastore.getRequest(requestId);
+>, <Line: +      if (maybeRequest.isPresent() && maybeRequest.get().getLoadBalancerService().getServiceId().equals(serviceId)) {
+>, <Line: +        Optional<InternalRequestStates> maybeStatus = requestDatastore.getRequestState(requestId);
+>, <Line: +        if (maybeStatus.isPresent()) {
+>, <Line: +          responses.add(new BaragonResponse(requestId, InternalStatesMap.getRequestState(maybeStatus.get()), requestDatastore.getRequestMessage(requestId), Optional.of(agentResponseDatastore.getLastResponses(requestId)), maybeRequest));
+>, <Line: +        }
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    responses.addAll(responseHistoryDatastore.getResponsesForService(serviceId, configuration.getHistoryConfiguration().getMaxResponsesToFetch()));
+>, <Line: +    return responses;
+>, <Line: +  }
+>, <Line: +    Optional<BaragonResponse> maybeActiveRequestResponse = getResponseFromActiveRequests(requestId);
+>, <Line: +    if (maybeActiveRequestResponse.isPresent()) {
+>, <Line: +      return maybeActiveRequestResponse;
+>, <Line: +    } else {
+>, <Line: +      Optional<String> maybeServiceId = responseHistoryDatastore.getServiceIdForRequestId(requestId);
+>, <Line: +      if (maybeServiceId.isPresent()) {
+>, <Line: +        return responseHistoryDatastore.getResponse(maybeServiceId.get(), requestId);
+>, <Line: +      } else {
+>, <Line: +        return Optional.absent();
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  public Optional<BaragonResponse> getResponse(String serviceId, String requestId) {
+>, <Line: +    Optional<BaragonResponse> maybeActiveRequestResponse = getResponseFromActiveRequests(requestId);
+>, <Line: +    if (maybeActiveRequestResponse.isPresent()) {
+>, <Line: +      return maybeActiveRequestResponse;
+>, <Line: +    } else {
+>, <Line: +      return responseHistoryDatastore.getResponse(serviceId, requestId);
+>, <Line: +  }
+>, <Line: +  private Optional<BaragonResponse> getResponseFromActiveRequests(String requestId) {
+>, <Line: +    if (requestDatastore.activeRequestExists(requestId)) {
+>, <Line: +      final Optional<InternalRequestStates> maybeStatus = requestDatastore.getRequestState(requestId);
+>, <Line: +      if (!maybeStatus.isPresent()) {
+>, <Line: +        return Optional.absent();
+>, <Line: +      }
+>, <Line: +      final Optional<BaragonRequest> maybeRequest = requestDatastore.getRequest(requestId);
+>, <Line: +      if (!maybeRequest.isPresent()) {
+>, <Line: +        return Optional.absent();
+>, <Line: +      }
+>, <Line: +      return Optional.of(new BaragonResponse(requestId, InternalStatesMap.getRequestState(maybeStatus.get()), requestDatastore.getRequestMessage(requestId), Optional.of(agentResponseDatastore.getLastResponses(requestId)), maybeRequest));
+>, <Line: +    } else {
+>, <Line: +      return Optional.absent();
+>, <Line: +    }
+>, <Line: +    final Optional<BaragonResponse> maybePreexistingResponse = getResponse(request.getLoadBalancerService().getServiceId(), request.getLoadBalancerRequestId());
+>, <Line: +    if (request.isNoReload() && request.getAction().isPresent() && request.getAction().get().equals(RequestAction.RELOAD)) {
+>, <Line: +      throw new InvalidRequestActionException("You can not specify 'noReload' on a request with action 'RELOAD'");
+>, <Line: +    }
+>, <Line: +    return getResponse(request.getLoadBalancerService().getServiceId(), request.getLoadBalancerRequestId()).get();
+>, <Line: +  public void saveResponseToHistory(BaragonRequest request, InternalRequestStates state) {
+>, <Line: +    BaragonResponse response = new BaragonResponse(request.getLoadBalancerRequestId(), InternalStatesMap.getRequestState(state), requestDatastore.getRequestMessage(request.getLoadBalancerRequestId()), Optional.of(agentResponseDatastore.getLastResponses(request.getLoadBalancerRequestId())), Optional.of(request));
+>, <Line: +    responseHistoryDatastore.addResponse(request.getLoadBalancerService().getServiceId(), request.getLoadBalancerRequestId(), response);
+>, <Line: +  }
+>, <Line: +  public void deleteRequest(String requestId) {
+>, <Line: +    requestDatastore.deleteRequest(requestId);
+>, <Line: +  }
+>]
+[<Line: -package com.hubspot.baragon.managers;
+>, <Line: -  public RequestManager(BaragonRequestDatastore requestDatastore, BaragonLoadBalancerDatastore loadBalancerDatastore,
+>, <Line: -                        BaragonStateDatastore stateDatastore, BaragonAgentResponseDatastore agentResponseDatastore) {
+>, <Line: -    final Optional<InternalRequestStates> maybeStatus = requestDatastore.getRequestState(requestId);
+>, <Line: -    if (!maybeStatus.isPresent()) {
+>, <Line: -      return Optional.absent();
+>, <Line: -    return Optional.of(new BaragonResponse(requestId, InternalStatesMap.getRequestState(maybeStatus.get()), requestDatastore.getRequestMessage(requestId), Optional.of(agentResponseDatastore.getLastResponses(requestId))));
+>, <Line: -    final Optional<BaragonResponse> maybePreexistingResponse = getResponse(request.getLoadBalancerRequestId());
+>, <Line: -    return getResponse(request.getLoadBalancerRequestId()).get();
+>]

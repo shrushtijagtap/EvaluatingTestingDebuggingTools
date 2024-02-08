@@ -1,0 +1,4 @@
+[<Line: +		if(subReader.getReadPosition() == 0) {
+>]
+[<Line: -		if(subReader.getReadOffset() == 0) {
+>]

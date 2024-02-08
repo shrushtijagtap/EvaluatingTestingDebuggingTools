@@ -1,0 +1,6 @@
+[<Line: +						new MethodInsnNode(INVOKEVIRTUAL, fn.owner, fn.name, param(fn), false))
+>, <Line: +						new MethodInsnNode(INVOKEVIRTUAL, fn.owner, fn.name, "()" + fn.desc, false))
+>]
+[<Line: -						new MethodInsnNode(INVOKEVIRTUAL, fn.owner, fn.name, param(fn)))
+>, <Line: -						new MethodInsnNode(INVOKEVIRTUAL, fn.owner, fn.name, "()" + fn.desc))
+>]

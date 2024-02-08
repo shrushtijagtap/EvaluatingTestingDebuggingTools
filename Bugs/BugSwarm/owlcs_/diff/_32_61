@@ -1,0 +1,4 @@
+[<Line: +        return Integer.valueOf(getOntologies().mapToInt(OWLOntology::getAxiomCount).sum());
+>]
+[<Line: -        return getOntologies().mapToInt(OWLOntology::getAxiomCount).sum();
+>]

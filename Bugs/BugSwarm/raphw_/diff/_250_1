@@ -1,0 +1,7 @@
+[<Line: +        classLoader = new ByteArrayClassLoader(ClassLoadingStrategy.BOOTSTRAP_LOADER,
+>]
+[<Line: -import net.bytebuddy.test.utility.JavaVersionRule;
+>, <Line: -    @Rule
+>, <Line: -    public MethodRule javaVersionRule = new JavaVersionRule();
+>, <Line: -        classLoader = new ByteArrayClassLoader(null,
+>]

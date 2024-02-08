@@ -1,0 +1,7 @@
+[<Line: +/**
+>, <Line: + * Package containing classes used for benchmarking the Manta client.
+>, <Line: + * @author <a href="https://github.com/dekobon">Elijah Zupancic</a>
+>, <Line: + */
+>, <Line: +package com.joyent.manta.benchmark;
+>]
+[]

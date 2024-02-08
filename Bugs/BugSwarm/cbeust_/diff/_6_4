@@ -1,0 +1,94 @@
+[<Line: +    private Map<Description, ITestResult> m_findedMethods = new WeakHashMap<>();
+>, <Line: +                        if (description.getTestClass() != null) {
+>, <Line: +                            ITestResult tr = createTestResult(description);
+>, <Line: +                            m_findedMethods.put(description, tr);
+>, <Line: +                        }
+>, <Line: +                            ITestResult tr = createTestResult(description);
+>, <Line: +                            m_findedMethods.put(description, tr);
+>, <Line: +            ITestResult tr = m_findedMethods.get(failure.getDescription());
+>, <Line: +            ITestResult tr = m_findedMethods.get(failure.getDescription());
+>, <Line: +            if (tr == null) {
+>, <Line: +                // Not a test method, should be a config
+>, <Line: +                tr = createTestResult(failure.getDescription());
+>, <Line: +                tr.setStatus(TestResult.FAILURE);
+>, <Line: +                tr.setEndMillis(Calendar.getInstance().getTimeInMillis());
+>, <Line: +                tr.setThrowable(failure.getException());
+>, <Line: +                for (IConfigurationListener l : m_parentRunner.getConfigurationListeners()) {
+>, <Line: +                    l.onConfigurationFailure(tr);
+>, <Line: +                }
+>, <Line: +                for (Description childDesc : failure.getDescription().getChildren()) {
+>, <Line: +                    testIgnored(childDesc);
+>, <Line: +                }
+>, <Line: +            } else {
+>, <Line: +                tr.setStatus(TestResult.FAILURE);
+>, <Line: +                tr.setEndMillis(Calendar.getInstance().getTimeInMillis());
+>, <Line: +                tr.setThrowable(failure.getException());
+>, <Line: +                m_parentRunner.addFailedTest(tr.getMethod(), tr);
+>, <Line: +                for (ITestListener l : m_listeners) {
+>, <Line: +                    l.onTestFailure(tr);
+>, <Line: +                }
+>, <Line: +            ITestResult tr = m_findedMethods.get(description);
+>, <Line: +            if (!notified.contains(description)) {
+>, <Line: +                notified.add(description);
+>, <Line: +                ITestResult tr = m_findedMethods.get(description);
+>, <Line: +                tr.setStatus(TestResult.SKIP);
+>, <Line: +                tr.setEndMillis(tr.getStartMillis());
+>, <Line: +                m_parentRunner.addSkippedTest(tr.getMethod(), tr);
+>, <Line: +                m_methods.add(tr.getMethod());
+>, <Line: +                for (ITestListener l : m_listeners) {
+>, <Line: +                    l.onTestSkipped(tr);
+>, <Line: +                }
+>, <Line: +            ITestResult tr = m_findedMethods.get(description);
+>, <Line: +    }
+>, <Line: +    private ITestResult createTestResult(Description test) {
+>, <Line: +        JUnit4TestClass tc = new JUnit4TestClass(test);
+>, <Line: +        JUnitTestMethod tm = new JUnit4TestMethod(tc, test);
+>, <Line: +        TestResult tr = new TestResult(tc,
+>, <Line: +                test,
+>, <Line: +                tm,
+>, <Line: +                null,
+>, <Line: +                Calendar.getInstance().getTimeInMillis(),
+>, <Line: +                0,
+>, <Line: +                null);
+>, <Line: +        InvokedMethod im = new InvokedMethod(tr.getTestClass(), tr.getMethod(), new Object[0], tr.getStartMillis(), tr);
+>, <Line: +        m_parentRunner.addInvokedMethod(im);
+>, <Line: +        for (IInvokedMethodListener l: m_invokeListeners) {
+>, <Line: +            l.beforeInvocation(im, tr);
+>, <Line: +        return tr;
+>]
+[<Line: -        private Map<Description, ITestResult> runs = new WeakHashMap<>();
+>, <Line: -            ITestResult tr = runs.get(failure.getDescription());
+>, <Line: -            ITestResult tr = runs.get(failure.getDescription());
+>, <Line: -            tr.setStatus(TestResult.FAILURE);
+>, <Line: -            tr.setEndMillis(Calendar.getInstance().getTimeInMillis());
+>, <Line: -            tr.setThrowable(failure.getException());
+>, <Line: -            m_parentRunner.addFailedTest(tr.getMethod(), tr);
+>, <Line: -            for (ITestListener l : m_listeners) {
+>, <Line: -                l.onTestFailure(tr);
+>, <Line: -            ITestResult tr = runs.get(description);
+>, <Line: -            ITestResult tr = createTestResult(description);
+>, <Line: -            tr.setStatus(TestResult.SKIP);
+>, <Line: -            tr.setEndMillis(tr.getStartMillis());
+>, <Line: -            m_parentRunner.addSkippedTest(tr.getMethod(), tr);
+>, <Line: -            m_methods.add(tr.getMethod());
+>, <Line: -            for (ITestListener l : m_listeners) {
+>, <Line: -                l.onTestSkipped(tr);
+>, <Line: -            ITestResult tr = createTestResult(description);
+>, <Line: -            runs.put(description, tr);
+>, <Line: -        private ITestResult createTestResult(Description test) {
+>, <Line: -            JUnit4TestClass tc = new JUnit4TestClass(test);
+>, <Line: -            JUnitTestMethod tm = new JUnit4TestMethod(tc, test);
+>, <Line: -            TestResult tr = new TestResult(tc,
+>, <Line: -                    test,
+>, <Line: -                    tm,
+>, <Line: -                    null,
+>, <Line: -                    Calendar.getInstance().getTimeInMillis(),
+>, <Line: -                    0,
+>, <Line: -                    null);
+>, <Line: -            InvokedMethod im = new InvokedMethod(tr.getTestClass(), tr.getMethod(), new Object[0], tr.getStartMillis(), tr);
+>, <Line: -            m_parentRunner.addInvokedMethod(im);
+>, <Line: -            for (IInvokedMethodListener l: m_invokeListeners) {
+>, <Line: -                l.beforeInvocation(im, tr);
+>, <Line: -            }
+>, <Line: -            return tr;
+>]

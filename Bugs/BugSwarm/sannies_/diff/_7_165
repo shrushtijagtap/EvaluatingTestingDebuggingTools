@@ -1,0 +1,24 @@
+[<Line: +package org.mp4parser.boxes.apple;
+>, <Line: +import org.mp4parser.Box;
+>, <Line: +import org.mp4parser.BoxParser;
+>, <Line: +import org.mp4parser.boxes.sampleentry.AbstractSampleEntry;
+>, <Line: +import org.mp4parser.tools.CastUtils;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import java.nio.channels.ReadableByteChannel;
+>, <Line: +    public void parse(ReadableByteChannel dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>, <Line: +        ByteBuffer content = ByteBuffer.allocate(CastUtils.l2i(contentSize));
+>, <Line: +    public void setBoxes(List<? extends Box> boxes) {
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.apple;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import com.coremedia.iso.boxes.sampleentry.AbstractSampleEntry;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: -    public void parse(DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>, <Line: -        ByteBuffer content = ByteBuffer.allocate(l2i(contentSize));
+>, <Line: -    public void setBoxes(List<Box> boxes) {
+>]

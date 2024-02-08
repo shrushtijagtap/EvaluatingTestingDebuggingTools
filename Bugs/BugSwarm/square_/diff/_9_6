@@ -1,0 +1,85 @@
+[<Line: + * <p>Each segment in a buffer is a circularly-linked list node referencing the following and
+>, <Line: + * preceding segments in the buffer.
+>, <Line: + * <p>Each segment in the pool is a singly-linked list node referencing the rest of segments in the
+>, <Line: + * pool.
+>, <Line: + *
+>, <Line: + * <p>The underlying byte arrays of segments may be shared between buffers and byte strings. When a
+>, <Line: + * segment's byte array is shared the segment may not be recycled, nor may its byte data be changed.
+>, <Line: + * The lone exception is that the owner segment is allowed to append to the segment, writing data at
+>, <Line: + * {@code limit} and beyond. There is a single owning segment for each byte array. Positions,
+>, <Line: + * limits, prev, and next references are not shared.
+>, <Line: +  final byte[] data;
+>, <Line: +  /** True if other segments or byte strings use the same byte array. */
+>, <Line: +  boolean shared;
+>, <Line: +  /** True if this segment owns the byte array and can append to it, extending {@code limit}. */
+>, <Line: +  boolean owner;
+>, <Line: +  Segment() {
+>, <Line: +    this.data = new byte[SIZE];
+>, <Line: +    this.owner = true;
+>, <Line: +    this.shared = false;
+>, <Line: +  }
+>, <Line: +  Segment(Segment shareFrom) {
+>, <Line: +    this(shareFrom.data, shareFrom.pos, shareFrom.limit);
+>, <Line: +    shareFrom.shared = true;
+>, <Line: +  }
+>, <Line: +  Segment(byte[] data, int pos, int limit) {
+>, <Line: +    this.data = data;
+>, <Line: +    this.pos = pos;
+>, <Line: +    this.limit = limit;
+>, <Line: +    this.owner = false;
+>, <Line: +    this.shared = true;
+>, <Line: +  }
+>, <Line: +    if (byteCount <= 0 || byteCount > limit - pos) throw new IllegalArgumentException();
+>, <Line: +    Segment prefix = new Segment(this);
+>, <Line: +    prefix.limit = prefix.pos + byteCount;
+>, <Line: +    pos += byteCount;
+>, <Line: +    prev.push(prefix);
+>, <Line: +    return prefix;
+>, <Line: +    if (!prev.owner) return; // Cannot compact: prev isn't writable.
+>, <Line: +    int byteCount = limit - pos;
+>, <Line: +    int availableByteCount = SIZE - prev.limit + (prev.shared ? 0 : prev.pos);
+>, <Line: +    if (byteCount > availableByteCount) return; // Cannot compact: not enough writable space.
+>, <Line: +    writeTo(prev, byteCount);
+>, <Line: +    SegmentPool.recycle(this);
+>, <Line: +    if (!sink.owner) throw new IllegalArgumentException();
+>, <Line: +      // We can't fit byteCount bytes at the sink's current position. Shift sink first.
+>, <Line: +      if (sink.shared) throw new IllegalArgumentException();
+>, <Line: +      if (sink.limit + byteCount - sink.pos > SIZE) throw new IllegalArgumentException();
+>]
+[<Line: - * <p>Each segment in a buffer is a circularly-linked list node referencing
+>, <Line: - * the following and preceding segments in the buffer.
+>, <Line: - * <p>Each segment in the pool is a singly-linked list node referencing the rest
+>, <Line: - * of segments in the pool.
+>, <Line: -  // TODO: Using fixed-size segments makes pooling easier. But it harms memory
+>, <Line: -  //       efficiency and encourages copying. Try variable sized segments?
+>, <Line: -  // TODO: Is 2 KiB a good default segment size?
+>, <Line: -  final byte[] data = new byte[SIZE];
+>, <Line: -    int aSize = byteCount;
+>, <Line: -    int bSize = (limit - pos) - byteCount;
+>, <Line: -    if (aSize <= 0 || bSize <= 0) throw new IllegalArgumentException();
+>, <Line: -    // Which side of the split is larger? We want to copy as few bytes as possible.
+>, <Line: -    if (aSize < bSize) {
+>, <Line: -      // Create a segment of size 'aSize' before this segment.
+>, <Line: -      Segment before = SegmentPool.INSTANCE.take();
+>, <Line: -      System.arraycopy(data, pos, before.data, before.pos, aSize);
+>, <Line: -      pos += aSize;
+>, <Line: -      before.limit += aSize;
+>, <Line: -      prev.push(before);
+>, <Line: -      return before;
+>, <Line: -    } else {
+>, <Line: -      // Create a new segment of size 'bSize' after this segment.
+>, <Line: -      Segment after = SegmentPool.INSTANCE.take();
+>, <Line: -      System.arraycopy(data, pos + aSize, after.data, after.pos, bSize);
+>, <Line: -      limit -= bSize;
+>, <Line: -      after.limit += bSize;
+>, <Line: -      push(after);
+>, <Line: -      return this;
+>, <Line: -    }
+>, <Line: -    if ((prev.limit - prev.pos) + (limit - pos) > SIZE) return; // Cannot compact.
+>, <Line: -    writeTo(prev, limit - pos);
+>, <Line: -    SegmentPool.INSTANCE.recycle(this);
+>, <Line: -  // TODO: if sink has fewer bytes than this, it may be cheaper to reverse the
+>, <Line: -  //       direction of the copy and swap the segments!
+>, <Line: -    if (byteCount + (sink.limit - sink.pos) > SIZE) throw new IllegalArgumentException();
+>, <Line: -      // We can't fit byteCount bytes at the sink's current position. Compact sink first.
+>]

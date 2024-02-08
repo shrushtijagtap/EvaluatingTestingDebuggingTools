@@ -1,0 +1,11 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import java.io.FileInputStream;
+>, <Line: +        IsoFile isoFile = new IsoFile(new FileInputStream(f).getChannel());
+>, <Line: +        IsoFile isoFile = new IsoFile(new FileInputStream(f).getChannel());
+>]
+[<Line: -package com.mp4parser.iso14496.part12;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -        IsoFile isoFile = new IsoFile(f.getAbsolutePath());
+>, <Line: -        IsoFile isoFile = new IsoFile(f.getAbsolutePath());
+>]

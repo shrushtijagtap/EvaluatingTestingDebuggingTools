@@ -1,0 +1,23 @@
+[<Line: +import org.kairosdb.util.SimpleStatsReporter;
+>, <Line: +				bind(SimpleStatsReporter.class);
+>, <Line: +		@Override
+>, <Line: +		public void setValue(String service, String serviceKey, String key, String value) throws DatastoreException
+>, <Line: +		{
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public String getValue(String service, String serviceKey, String key) throws DatastoreException
+>, <Line: +		{
+>, <Line: +			return null;
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public Iterable<String> listKeys(String service, String serviceKey) throws DatastoreException
+>, <Line: +		{
+>, <Line: +			return null;
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public Iterable<String> listKeys(String service, String serviceKey, String keyStartsWith) throws DatastoreException
+>, <Line: +		{
+>, <Line: +			return null;
+>, <Line: +		}
+>]
+[]

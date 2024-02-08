@@ -1,0 +1,26 @@
+[<Line: +import it.unibz.krdb.obda.ontology.OntologyVocabulary;
+>, <Line: +			 tbox = OWLAPI3TranslatorUtility.translateImportsClosure(owlontology);
+>, <Line: +			OntologyVocabulary voc = OntologyFactoryImpl.getInstance().createVocabulary();
+>, <Line: +			tbox = OntologyFactoryImpl.getInstance().createOntology(voc);
+>, <Line: +		obdaModel.getOntologyVocabulary().merge(tbox.getVocabulary());
+>, <Line: +		Ontology ontology = OWLAPI3TranslatorUtility.translateImportsClosure(tbox);
+>, <Line: +		obdaModel.getOntologyVocabulary().merge(ontology.getVocabulary());
+>]
+[<Line: -			 tbox = getOntologyFromOWLOntology(owlontology);
+>, <Line: -			tbox = OntologyFactoryImpl.getInstance().createOntology();
+>, <Line: -		obdaModel.declareAll(tbox.getVocabulary());
+>, <Line: -		Ontology ontology = getOntologyFromOWLOntology(tbox);
+>, <Line: -		obdaModel.declareAll(ontology.getVocabulary());
+>, <Line: -	/**
+>, <Line: -	 * Given an OWL ontology returns the translated Ontology 
+>, <Line: -	 * of its closure
+>, <Line: -	 * @param owlontology
+>, <Line: -	 * @return the translated Ontology
+>, <Line: -	 * @throws Exception
+>, <Line: -	 */
+>, <Line: -	private Ontology getOntologyFromOWLOntology(OWLOntology owlontology) throws Exception{
+>, <Line: -		//compute closure first (owlontology might contain include other source declarations)
+>, <Line: -		Set<OWLOntology> clousure = owlontology.getOWLOntologyManager().getImportsClosure(owlontology);
+>, <Line: -		return OWLAPI3TranslatorUtility.mergeTranslateOntologies(clousure);
+>, <Line: -	}
+>]

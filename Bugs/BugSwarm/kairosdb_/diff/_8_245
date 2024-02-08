@@ -1,0 +1,98 @@
+[<Line: +		'angular',
+>, <Line: +	],
+>, <Line: +	function (angular) {
+>, <Line: +		"use strict";
+>, <Line: +		var module = angular.module('grafana.routes');
+>, <Line: +		module.config(function ($routeProvider) {
+>, <Line: +			$routeProvider
+>, <Line: +				.when('/dashboard/db/:id', {
+>, <Line: +					templateUrl: 'app/partials/dashboard.html',
+>, <Line: +					controller: 'DashFromDBProvider',
+>, <Line: +					reloadOnSearch: false,
+>, <Line: +				})
+>, <Line: +				.when('/dashboard/elasticsearch/:id', {
+>, <Line: +					templateUrl: 'app/partials/dashboard.html',
+>, <Line: +					controller: 'DashFromDBProvider',
+>, <Line: +					reloadOnSearch: false,
+>, <Line: +				})
+>, <Line: +				.when('/dashboard/temp/:id', {
+>, <Line: +					templateUrl: 'app/partials/dashboard.html',
+>, <Line: +					controller: 'DashFromDBProvider',
+>, <Line: +					reloadOnSearch: false,
+>, <Line: +				})
+>, <Line: +				.when('/dashboard/import/:id', {
+>, <Line: +					templateUrl: 'app/partials/dashboard.html',
+>, <Line: +					controller: 'DashFromImportCtrl',
+>, <Line: +					reloadOnSearch: false,
+>, <Line: +				});
+>, <Line: +		});
+>, <Line: +		module.controller('DashFromDBProvider', function ($scope, $rootScope, datasourceSrv, $routeParams) {
+>, <Line: +			var db = datasourceSrv.getGrafanaDB();
+>, <Line: +			var isTemp = window.location.href.indexOf('dashboard/temp') !== -1;
+>, <Line: +			db.getDashboard($routeParams.id, isTemp)
+>, <Line: +				.then(function (dashboard) {
+>, <Line: +					$scope.initDashboard(dashboard, $scope);
+>, <Line: +				}).then(null, function (error) {
+>, <Line: +					$scope.initDashboard({title: 'Grafana'}, $scope);
+>, <Line: +					$scope.appEvent('alert-error', ['Dashboard load failed', error]);
+>, <Line: +				});
+>, <Line: +		});
+>, <Line: +		module.controller('DashFromImportCtrl', function ($scope, $location) {
+>, <Line: +			if (!window.grafanaImportDashboard) {
+>, <Line: +				$scope.appEvent('alert-warning', ['Dashboard load failed', 'Cannot reload unsaved imported dashboard']);
+>, <Line: +				$location.path('');
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			$scope.initDashboard(window.grafanaImportDashboard, $scope);
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -],
+>, <Line: -function (angular) {
+>, <Line: -  "use strict";
+>, <Line: -  var module = angular.module('grafana.routes');
+>, <Line: -  module.config(function($routeProvider) {
+>, <Line: -    $routeProvider
+>, <Line: -      .when('/dashboard/db/:id', {
+>, <Line: -        templateUrl: 'app/partials/dashboard.html',
+>, <Line: -        controller : 'DashFromDBProvider',
+>, <Line: -        reloadOnSearch: false,
+>, <Line: -      })
+>, <Line: -      .when('/dashboard/elasticsearch/:id', {
+>, <Line: -        templateUrl: 'app/partials/dashboard.html',
+>, <Line: -        controller : 'DashFromDBProvider',
+>, <Line: -        reloadOnSearch: false,
+>, <Line: -      })
+>, <Line: -      .when('/dashboard/temp/:id', {
+>, <Line: -        templateUrl: 'app/partials/dashboard.html',
+>, <Line: -        controller : 'DashFromDBProvider',
+>, <Line: -        reloadOnSearch: false,
+>, <Line: -      })
+>, <Line: -      .when('/dashboard/import/:id', {
+>, <Line: -        templateUrl: 'app/partials/dashboard.html',
+>, <Line: -        controller : 'DashFromImportCtrl',
+>, <Line: -        reloadOnSearch: false,
+>, <Line: -      });
+>, <Line: -  });
+>, <Line: -  module.controller('DashFromDBProvider', function($scope, $rootScope, datasourceSrv, $routeParams) {
+>, <Line: -    var db = datasourceSrv.getGrafanaDB();
+>, <Line: -    var isTemp = window.location.href.indexOf('dashboard/temp') !== -1;
+>, <Line: -    db.getDashboard($routeParams.id, isTemp)
+>, <Line: -    .then(function(dashboard) {
+>, <Line: -      $scope.initDashboard(dashboard, $scope);
+>, <Line: -    }).then(null, function(error) {
+>, <Line: -      $scope.initDashboard({ title: 'Grafana'}, $scope);
+>, <Line: -      $scope.appEvent('alert-error', ['Dashboard load failed', error]);
+>, <Line: -    });
+>, <Line: -  });
+>, <Line: -  module.controller('DashFromImportCtrl', function($scope, $location) {
+>, <Line: -    if (!window.grafanaImportDashboard) {
+>, <Line: -      $scope.appEvent('alert-warning', ['Dashboard load failed', 'Cannot reload unsaved imported dashboard']);
+>, <Line: -      $location.path('');
+>, <Line: -      return;
+>, <Line: -    }
+>, <Line: -    $scope.initDashboard(window.grafanaImportDashboard, $scope);
+>, <Line: -  });
+>, <Line: -});
+>]

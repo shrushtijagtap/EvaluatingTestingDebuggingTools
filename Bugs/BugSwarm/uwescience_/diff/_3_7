@@ -1,0 +1,5 @@
+[<Line: +   * Constructor for the CacheShuffleProducer, just extends from the GenericShuffleProducer.
+>]
+[<Line: -   * Shuffle to the same operator ID on multiple workers. (The old "ShuffleProducer")
+>, <Line: -    // TODO Auto-generated constructor stub
+>]

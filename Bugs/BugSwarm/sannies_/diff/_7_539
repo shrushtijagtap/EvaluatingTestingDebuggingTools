@@ -1,0 +1,20 @@
+[<Line: +package org.mp4parser.muxer.tracks.mjpeg;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.ESDescriptor;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.ObjectDescriptorFactory;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.CompositionTimeToSample;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDescriptionBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part14.ESDescriptorBox;
+>, <Line: +import org.mp4parser.boxes.sampleentry.VisualSampleEntry;
+>, <Line: +import org.mp4parser.muxer.*;
+>, <Line: +import org.mp4parser.tools.Hex;
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks.mjpeg;
+>, <Line: -import com.coremedia.iso.Hex;
+>, <Line: -import com.coremedia.iso.boxes.CompositionTimeToSample;
+>, <Line: -import com.coremedia.iso.boxes.SampleDescriptionBox;
+>, <Line: -import com.coremedia.iso.boxes.sampleentry.VisualSampleEntry;
+>, <Line: -import com.googlecode.mp4parser.authoring.*;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.ESDescriptorBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.ESDescriptor;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.ObjectDescriptorFactory;
+>]

@@ -1,0 +1,29 @@
+[<Line: +import static com.github.rinde.rinsim.core.model.time.RealtimeClockController.RtClockEventType.SWITCH_TO_REAL_TIME;
+>, <Line: +import static com.github.rinde.rinsim.core.model.time.RealtimeClockController.RtClockEventType.SWITCH_TO_SIM_TIME;
+>, <Line: +import com.github.rinde.rinsim.event.Event;
+>, <Line: +import com.github.rinde.rinsim.event.Listener;
+>, <Line: +import com.github.rinde.rinsim.fsm.StateMachine.StateMachineEvent;
+>, <Line: +import com.github.rinde.rinsim.fsm.StateMachine.StateTransitionEvent;
+>, <Line: +    super(builder, RtClockEventType.values());
+>, <Line: +    final RealtimeModel ref = this;
+>, <Line: +    stateMachine.getEventAPI().addListener(new Listener() {
+>, <Line: +      @Override
+>, <Line: +      public void handleEvent(Event e) {
+>, <Line: +        @SuppressWarnings("unchecked")
+>, <Line: +        final StateTransitionEvent<Trigger, RealtimeModel> event =
+>, <Line: +            (StateTransitionEvent<Trigger, RealtimeModel>) e;
+>, <Line: +        if (event.newState == rt || event.newState == INIT_RT) {
+>, <Line: +          if (eventDispatcher.hasListenerFor(SWITCH_TO_REAL_TIME)) {
+>, <Line: +            eventDispatcher.dispatchEvent(new Event(SWITCH_TO_REAL_TIME, ref));
+>, <Line: +          }
+>, <Line: +        } else if (event.newState == ff || event.newState == INIT_ST) {
+>, <Line: +          if (eventDispatcher.hasListenerFor(SWITCH_TO_SIM_TIME)) {
+>, <Line: +            eventDispatcher.dispatchEvent(new Event(SWITCH_TO_SIM_TIME, ref));
+>, <Line: +          }
+>, <Line: +        }
+>, <Line: +      }
+>, <Line: +    },
+>, <Line: +        StateMachineEvent.values());
+>]
+[<Line: -    super(builder);
+>]

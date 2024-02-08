@@ -1,0 +1,21 @@
+[<Line: +            return new AnnotationList.ForLoadedAnnotations(constructor.getDeclaredAnnotations());
+>, <Line: +            return TypeList.Generic.ForLoadedTypes.OfTypeVariables.of(constructor);
+>, <Line: +            return new AnnotationList.ForLoadedAnnotations(method.getDeclaredAnnotations());
+>, <Line: +            return TypeList.Generic.ForLoadedTypes.OfTypeVariables.of(method);
+>, <Line: +                List<TypeDescription.Generic> parameters = new ArrayList<TypeDescription.Generic>(parameterizedType.getTypeArguments().size());
+>, <Line: +                for (TypeDescription.Generic parameter : parameterizedType.getTypeArguments()) {
+>, <Line: +                        parameters,
+>, <Line: +                        parameterizedType.getDeclaredAnnotations());
+>, <Line: +                @Override
+>, <Line: +                public AnnotationList getDeclaredAnnotations() {
+>, <Line: +                    return typeVariable.getDeclaredAnnotations();
+>, <Line: +                }
+>]
+[<Line: -            return new AnnotationList.ForLoadedAnnotation(constructor.getDeclaredAnnotations());
+>, <Line: -            return new TypeList.Generic.ForLoadedTypes(constructor.getTypeParameters());
+>, <Line: -            return new AnnotationList.ForLoadedAnnotation(method.getDeclaredAnnotations());
+>, <Line: -            return new TypeList.Generic.ForLoadedTypes(method.getTypeParameters());
+>, <Line: -                List<TypeDescription.Generic> parameters = new ArrayList<TypeDescription.Generic>(parameterizedType.getParameters().size());
+>, <Line: -                for (TypeDescription.Generic parameter : parameterizedType.getParameters()) {
+>, <Line: -                        parameters);
+>]

@@ -1,0 +1,4 @@
+[<Line: +    assert no { k in 0..|xs| | xs[k] < 0 }
+>]
+[<Line: -    assert no { x in xs | x < 0 }
+>]

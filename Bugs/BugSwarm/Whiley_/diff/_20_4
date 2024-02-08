@@ -1,0 +1,12 @@
+[<Line: +		if (code.type() instanceof Type.EffectiveArray) {
+>, <Line: +		} else if (t instanceof Type.Array) {
+>, <Line: +			Type.Array lt = (Type.Array) t;
+>, <Line: +		} else if (t instanceof Type.Array) {
+>, <Line: +			Type.Array lt = (Type.Array) t;
+>]
+[<Line: -		if (code.type() instanceof Type.EffectiveList) {
+>, <Line: -		} else if (t instanceof Type.List) {
+>, <Line: -			Type.List lt = (Type.List) t;
+>, <Line: -		} else if (t instanceof Type.List) {
+>, <Line: -			Type.List lt = (Type.List) t;
+>]

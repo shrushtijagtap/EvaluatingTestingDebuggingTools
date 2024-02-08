@@ -1,0 +1,10 @@
+[<Line: +        new FieldAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new Qux.Instance())).apply(fieldVisitor, fieldDescription, annotationValueFilter);
+>, <Line: +        new FieldAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new Baz.Instance())).apply(fieldVisitor, fieldDescription, annotationValueFilter);
+>, <Line: +        new FieldAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new QuxBaz.Instance())).apply(fieldVisitor, fieldDescription, annotationValueFilter);
+>, <Line: +        FieldAttributeAppender.Explicit fieldAttributeAppender = new FieldAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new QuxBaz.Instance()));
+>]
+[<Line: -        new FieldAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new Qux.Instance())).apply(fieldVisitor, fieldDescription, annotationValueFilter);
+>, <Line: -        new FieldAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new Baz.Instance())).apply(fieldVisitor, fieldDescription, annotationValueFilter);
+>, <Line: -        new FieldAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new QuxBaz.Instance())).apply(fieldVisitor, fieldDescription, annotationValueFilter);
+>, <Line: -        FieldAttributeAppender.Explicit fieldAttributeAppender = new FieldAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new QuxBaz.Instance()));
+>]

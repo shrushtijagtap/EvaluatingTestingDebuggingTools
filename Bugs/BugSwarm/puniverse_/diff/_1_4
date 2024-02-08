@@ -1,0 +1,6 @@
+[<Line: +import static co.paralleluniverse.fibers.instrument.Classes.SUSPEND_EXECUTION_NAME;
+>, <Line: +                if (ex.equals(SUSPEND_EXECUTION_NAME))
+>]
+[<Line: -import static co.paralleluniverse.fibers.instrument.Classes.EXCEPTION_NAME;
+>, <Line: -                if (ex.equals(EXCEPTION_NAME))
+>]

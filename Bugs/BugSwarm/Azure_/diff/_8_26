@@ -1,0 +1,138 @@
+[<Line: +     * Required. Gets or sets the sku type.
+>, <Line: +     */
+>, <Line: +    @JsonProperty(required = true)
+>, <Line: +    private Sku sku;
+>, <Line: +    /**
+>, <Line: +     * Required. Indicates the type of storage account. Possible values
+>, <Line: +     * include: 'Storage', 'BlobStorage'.
+>, <Line: +     */
+>, <Line: +    @JsonProperty(required = true)
+>, <Line: +    private Kind kind;
+>, <Line: +    /**
+>, <Line: +     * Required. Gets or sets the location of the resource. This will be one
+>, <Line: +     * of the supported and registered Azure Geo Regions (e.g. West US, East
+>, <Line: +     * US, Southeast Asia, etc.). The geo region of a resource cannot be
+>, <Line: +     * changed once it is created, but if an identical geo region is
+>, <Line: +     * specified on update the request will succeed.
+>, <Line: +     * Gets or sets a list of key value pairs that describe the resource.
+>, <Line: +     * These tags can be used in viewing and grouping this resource (across
+>, <Line: +     * resource groups). A maximum of 15 tags can be provided for a resource.
+>, <Line: +     * Each tag must have a key no greater than 128 characters and value no
+>, <Line: +     * greater than 256 characters.
+>, <Line: +     * User domain assigned to the storage account. Name is the CNAME source.
+>, <Line: +     * Only one custom domain is supported per storage account at this time.
+>, <Line: +     * To clear the existing custom domain, use an empty string for the
+>, <Line: +     * custom domain name property.
+>, <Line: +     */
+>, <Line: +    @JsonProperty(value = "properties.customDomain")
+>, <Line: +    private CustomDomain customDomain;
+>, <Line: +    /**
+>, <Line: +     * Provides the encryption settings on the account. If left unspecified
+>, <Line: +     * the account encryption settings will remain. The default setting is
+>, <Line: +     * unencrypted.
+>, <Line: +     */
+>, <Line: +    @JsonProperty(value = "properties.encryption")
+>, <Line: +    private Encryption encryption;
+>, <Line: +    /**
+>, <Line: +     * Required for StandardBlob accounts. The access tier used for billing.
+>, <Line: +     * Access tier cannot be changed more than once every 7 days (168 hours).
+>, <Line: +     * Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS,
+>, <Line: +     * or PremiumLRS account types. Possible values include: 'Hot', 'Cool'.
+>, <Line: +     */
+>, <Line: +    @JsonProperty(value = "properties.accessTier")
+>, <Line: +    private AccessTier accessTier;
+>, <Line: +    /**
+>, <Line: +     * Get the sku value.
+>, <Line: +     *
+>, <Line: +     * @return the sku value
+>, <Line: +     */
+>, <Line: +    public Sku sku() {
+>, <Line: +        return this.sku;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Set the sku value.
+>, <Line: +     *
+>, <Line: +     * @param sku the sku value to set
+>, <Line: +     * @return the StorageAccountCreateParametersInner object itself.
+>, <Line: +     */
+>, <Line: +    public StorageAccountCreateParametersInner withSku(Sku sku) {
+>, <Line: +        this.sku = sku;
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Get the kind value.
+>, <Line: +     *
+>, <Line: +     * @return the kind value
+>, <Line: +     */
+>, <Line: +    public Kind kind() {
+>, <Line: +        return this.kind;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Set the kind value.
+>, <Line: +     *
+>, <Line: +     * @param kind the kind value to set
+>, <Line: +     * @return the StorageAccountCreateParametersInner object itself.
+>, <Line: +    public StorageAccountCreateParametersInner withKind(Kind kind) {
+>, <Line: +        this.kind = kind;
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +     * Get the customDomain value.
+>, <Line: +     *
+>, <Line: +     * @return the customDomain value
+>, <Line: +     */
+>, <Line: +    public CustomDomain customDomain() {
+>, <Line: +        return this.customDomain;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Set the customDomain value.
+>, <Line: +     *
+>, <Line: +     * @param customDomain the customDomain value to set
+>, <Line: +     * @return the StorageAccountCreateParametersInner object itself.
+>, <Line: +     */
+>, <Line: +    public StorageAccountCreateParametersInner withCustomDomain(CustomDomain customDomain) {
+>, <Line: +        this.customDomain = customDomain;
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Get the encryption value.
+>, <Line: +     *
+>, <Line: +     * @return the encryption value
+>, <Line: +     */
+>, <Line: +    public Encryption encryption() {
+>, <Line: +        return this.encryption;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Set the encryption value.
+>, <Line: +     *
+>, <Line: +     * @param encryption the encryption value to set
+>, <Line: +     * @return the StorageAccountCreateParametersInner object itself.
+>, <Line: +     */
+>, <Line: +    public StorageAccountCreateParametersInner withEncryption(Encryption encryption) {
+>, <Line: +        this.encryption = encryption;
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Get the accessTier value.
+>, <Line: +     * @return the accessTier value
+>, <Line: +    public AccessTier accessTier() {
+>, <Line: +        return this.accessTier;
+>, <Line: +     * Set the accessTier value.
+>, <Line: +     * @param accessTier the accessTier value to set
+>, <Line: +    public StorageAccountCreateParametersInner withAccessTier(AccessTier accessTier) {
+>, <Line: +        this.accessTier = accessTier;
+>]
+[<Line: -     * Resource location.
+>, <Line: -     * Resource tags.
+>, <Line: -     * Gets or sets the account type. Possible values include: 'Standard_LRS',
+>, <Line: -     * 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+>, <Line: -    @JsonProperty(value = "properties.accountType", required = true)
+>, <Line: -    private AccountType accountType;
+>, <Line: -     * Get the accountType value.
+>, <Line: -     * @return the accountType value
+>, <Line: -    public AccountType accountType() {
+>, <Line: -        return this.accountType;
+>, <Line: -     * Set the accountType value.
+>, <Line: -     * @param accountType the accountType value to set
+>, <Line: -    public StorageAccountCreateParametersInner withAccountType(AccountType accountType) {
+>, <Line: -        this.accountType = accountType;
+>]

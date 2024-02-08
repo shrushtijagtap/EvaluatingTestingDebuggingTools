@@ -1,0 +1,16 @@
+[<Line: +	protected int readPosition;
+>, <Line: +	public int getReadPosition() {
+>, <Line: +		return readPosition;
+>, <Line: +		assertTrue(readPosition >= 0);
+>, <Line: +		readPosition++;
+>, <Line: +		readPosition--;
+>, <Line: +		readPosition = 0;
+>]
+[<Line: -	protected int readOffset;
+>, <Line: -	public int getReadOffset() {
+>, <Line: -		return readOffset;
+>, <Line: -		assertTrue(readOffset >= 0);
+>, <Line: -		readOffset++;
+>, <Line: -		readOffset--;
+>, <Line: -		readOffset = 0;
+>]

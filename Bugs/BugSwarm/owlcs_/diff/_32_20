@@ -1,0 +1,12 @@
+[<Line: +import static org.junit.Assert.assertTrue;
+>, <Line: +            assertTrue(el == OWL2_EL.checkOntology(o).isInProfile());
+>, <Line: +            assertTrue(ql == OWL2_QL.checkOntology(o).isInProfile());
+>, <Line: +            assertTrue(rl == OWL2_RL.checkOntology(o).isInProfile());
+>, <Line: +            assertTrue(dl == OWL2_DL.checkOntology(o).isInProfile());
+>]
+[<Line: -import static org.junit.Assert.*;
+>, <Line: -            assertEquals(el, OWL2_EL.checkOntology(o).isInProfile());
+>, <Line: -            assertEquals(ql, OWL2_QL.checkOntology(o).isInProfile());
+>, <Line: -            assertEquals(rl, OWL2_RL.checkOntology(o).isInProfile());
+>, <Line: -            assertEquals(dl, OWL2_DL.checkOntology(o).isInProfile());
+>]

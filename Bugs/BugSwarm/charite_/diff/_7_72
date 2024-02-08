@@ -1,0 +1,94 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.pedigree;
+>, <Line: -import org.junit.Assert;
+>, <Line: -import org.junit.Before;
+>, <Line: -import org.junit.Test;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerException;
+>, <Line: -public class CompatibilityCheckerAutosomalDominantMediumTest extends CompatibilityCheckerTestBase {
+>, <Line: -	@Before
+>, <Line: -	public void setUp() throws PedParseException {
+>, <Line: -		ImmutableList.Builder<PedPerson> individuals = new ImmutableList.Builder<PedPerson>();
+>, <Line: -		individuals.add(new PedPerson("ped", "I.1", "0", "0", Sex.MALE, Disease.UNAFFECTED)); // grandfather
+>, <Line: -		individuals.add(new PedPerson("ped", "I.2", "0", "0", Sex.FEMALE, Disease.UNAFFECTED)); // grandmother
+>, <Line: -		individuals.add(new PedPerson("ped", "II.1", "I.1", "I.2", Sex.MALE, Disease.UNAFFECTED)); // uncle
+>, <Line: -		individuals.add(new PedPerson("ped", "II.2", "I.1", "I.2", Sex.MALE, Disease.AFFECTED)); // father
+>, <Line: -		individuals.add(new PedPerson("ped", "II.3", "0", "0", Sex.FEMALE, Disease.UNAFFECTED)); // mother
+>, <Line: -		individuals.add(new PedPerson("ped", "III.1", "II.2", "II.3", Sex.FEMALE, Disease.AFFECTED)); // daughter
+>, <Line: -		individuals.add(new PedPerson("ped", "III.2", "II.2", "II.3", Sex.MALE, Disease.UNAFFECTED)); // son
+>, <Line: -		PedFileContents pedFileContents = new PedFileContents(new ImmutableList.Builder<String>().build(),
+>, <Line: -				individuals.build());
+>, <Line: -		this.pedigree = new Pedigree(pedFileContents, "ped");
+>, <Line: -		this.names = ImmutableList.of("I.1", "I.2", "II.1", "II.2", "II.3", "III.1", "III.2");
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testSizeOfPedigree() {
+>, <Line: -		Assert.assertEquals(7, pedigree.getMembers().size());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCaseNegativesOneVariant() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(HET, HET, HET, HET, HET, HET, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, REF, REF, REF, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(ALT, ALT, ALT, ALT, ALT, ALT, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(UKN, UKN, UKN, UKN, UKN, UKN, UKN)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(HET, REF, REF, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, HET, REF, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, HET, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, HET, HET, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, HET, REF, HET, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(ALT, REF, REF, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, ALT, REF, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, ALT, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, HET, ALT, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, HET, REF, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(HET, REF, REF, ALT, REF, ALT, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, HET, REF, ALT, REF, ALT, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, HET, ALT, REF, ALT, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, ALT, HET, ALT, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, ALT, REF, HET, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(HET, REF, REF, UKN, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, HET, REF, UKN, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, HET, UKN, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, UKN, HET, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, UKN, REF, HET, HET)).run());
+>, <Line: -		// need one het call
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, UKN, REF, UKN, REF)).run());
+>, <Line: -		// Note that the following case are NOT considered as AD since we
+>, <Line: -		// require the mutation to be heterozygous for
+>, <Line: -		// AD.
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, ALT, REF, ALT, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, UKN, REF, ALT, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, ALT, REF, UKN, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, ALT, REF, ALT, UKN)).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCaseNegativesTwoVariants() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, HET, ALT, HET, HET), lst(REF, REF, REF, HET, UKN, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, HET, HET, HET, ALT), lst(REF, REF, REF, HET, UKN, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, HET, REF, ALT, REF), lst(REF, REF, REF, HET, UKN, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, ALT, REF, HET, REF), lst(REF, REF, REF, HET, UKN, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, HET, REF, HET, HET), lst(REF, HET, REF, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, HET, REF, HET, REF, HET, REF), lst(HET, REF, REF, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, HET, HET, HET, REF), lst(ALT, REF, REF, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(lst(REF, REF, REF, HET, REF, HET, ALT), lst(REF, ALT, REF, HET, REF, HET, REF)).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCasePositiveOneVariant() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(REF, REF, REF, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(REF, REF, REF, HET, UKN, HET, UKN)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(REF, REF, REF, HET, UKN, UKN, UKN)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(REF, REF, REF, UKN, UKN, HET, UKN)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(UKN, REF, REF, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(REF, UKN, REF, HET, UKN, HET, UKN)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(UKN, REF, REF, HET, UKN, UKN, UKN)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(REF, REF, UKN, UKN, UKN, HET, UKN)).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCasePositiveTwoVariants() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(REF, REF, REF, HET, REF, HET, REF), lst(REF, REF, REF, HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(REF, REF, REF, HET, UKN, HET, UKN), lst(REF, REF, REF, ALT, ALT, ALT, ALT)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(REF, REF, REF, HET, UKN, UKN, UKN), lst(REF, REF, REF, HET, UKN, UKN, UKN)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(lst(REF, REF, REF, UKN, UKN, HET, UKN), lst(REF, REF, REF, ALT, ALT, ALT, ALT)).run());
+>, <Line: -	}
+>, <Line: -}
+>]

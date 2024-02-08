@@ -1,0 +1,5 @@
+[<Line: +../../tests/invalid/Lambda_Invalid_3.whiley:9: precondition not satisfied
+>, <Line: +    func_t func = &(int x -> f(x + 1))
+>, <Line: +                             ^^^^^^^^
+>]
+[]

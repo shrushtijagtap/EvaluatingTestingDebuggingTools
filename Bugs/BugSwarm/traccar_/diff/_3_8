@@ -1,0 +1,6 @@
+[<Line: +        ActiveDevice activeDevice = Context.getConnectionManager().getActiveDevice(uniqueId);
+>, <Line: +        ActiveDevice activeDevice = Context.getConnectionManager().getActiveDevice(uniqueId);
+>]
+[<Line: -        ActiveDevice activeDevice = Context.getDataManager().getActiveDevice(uniqueId);
+>, <Line: -        ActiveDevice activeDevice = Context.getDataManager().getActiveDevice(uniqueId);
+>]

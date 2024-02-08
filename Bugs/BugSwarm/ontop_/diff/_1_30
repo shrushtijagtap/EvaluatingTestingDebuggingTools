@@ -1,0 +1,81 @@
+[<Line: +import java.util.Collection;
+>, <Line: +public interface Ontology extends Serializable {
+>, <Line: +	/**
+>, <Line: +	 * vocabulary is used to check whether all the symbols referenced in axioms are valid
+>, <Line: +	 * @return ontology vocabulary 
+>, <Line: +	 */
+>, <Line: +	public ImmutableOntologyVocabulary getVocabulary();
+>, <Line: +	// SUBCLASS/PROPERTY
+>, <Line: +	public void addSubClassOfAxiom(ClassExpression concept1, ClassExpression concept2) throws InconsistentOntologyException;
+>, <Line: +	public void addDataPropertyRangeAxiom(DataPropertyRangeExpression range, Datatype datatype) throws InconsistentOntologyException;
+>, <Line: +	public void addSubPropertyOfAxiom(ObjectPropertyExpression included, ObjectPropertyExpression including) throws InconsistentOntologyException;
+>, <Line: +	public void addSubPropertyOfAxiom(DataPropertyExpression included, DataPropertyExpression including) throws InconsistentOntologyException;
+>, <Line: +	public Collection<BinaryAxiom<ClassExpression>> getSubClassAxioms();
+>, <Line: +	public Collection<BinaryAxiom<DataRangeExpression>> getSubDataRangeAxioms();
+>, <Line: +	public Collection<BinaryAxiom<ObjectPropertyExpression>> getSubObjectPropertyAxioms();
+>, <Line: +	public Collection<BinaryAxiom<DataPropertyExpression>> getSubDataPropertyAxioms();
+>, <Line: +	// DISJOINTNESS
+>, <Line: +	public void addDisjointClassesAxiom(ClassExpression... classes) throws InconsistentOntologyException;
+>, <Line: +	public void addDisjointObjectPropertiesAxiom(ObjectPropertyExpression... properties) throws InconsistentOntologyException;
+>, <Line: +	public void addDisjointDataPropertiesAxiom(DataPropertyExpression... properties) throws InconsistentOntologyException;
+>, <Line: +	public Collection<NaryAxiom<ClassExpression>> getDisjointClassesAxioms();
+>, <Line: +	public Collection<NaryAxiom<ObjectPropertyExpression>> getDisjointObjectPropertiesAxioms();
+>, <Line: +	public Collection<NaryAxiom<DataPropertyExpression>> getDisjointDataPropertiesAxioms();
+>, <Line: +	// REFLEXIVITY / IRREFLEXIVITY
+>, <Line: +	public void addReflexiveObjectPropertyAxiom(ObjectPropertyExpression ope) throws InconsistentOntologyException;
+>, <Line: +	public void addIrreflexiveObjectPropertyAxiom(ObjectPropertyExpression ope) throws InconsistentOntologyException;
+>, <Line: +	public Collection<ObjectPropertyExpression> getReflexiveObjectPropertyAxioms();
+>, <Line: +	public Collection<ObjectPropertyExpression> getIrreflexiveObjectPropertyAxioms();
+>, <Line: +	// FUNCTIONALITY 
+>, <Line: +	public void addFunctionalObjectPropertyAxiom(ObjectPropertyExpression prop);
+>, <Line: +	public void addFunctionalDataPropertyAxiom(DataPropertyExpression prop);
+>, <Line: +	// ASSERTIONS
+>, <Line: +	public void addClassAssertion(ClassAssertion assertion);
+>, <Line: +	public void addObjectPropertyAssertion(ObjectPropertyAssertion assertion);
+>, <Line: +	public void addDataPropertyAssertion(DataPropertyAssertion assertion);
+>, <Line: +	/**
+>, <Line: +	 * create an auxiliary object property 
+>, <Line: +	 * (auxiliary properties result from ontology normalization)
+>, <Line: +	 * 
+>, <Line: +	 * @param uri
+>, <Line: +	 */
+>, <Line: +	public ObjectPropertyExpression createAuxiliaryObjectProperty();
+>, <Line: +	/**
+>, <Line: +	 * return all auxiliary object properties
+>, <Line: +	 * (auxiliary properties result from ontology normalization)
+>, <Line: +	 * 
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public Collection<ObjectPropertyExpression> getAuxiliaryObjectProperties();
+>]
+[<Line: -public interface Ontology extends Cloneable, Serializable {
+>, <Line: -	@Deprecated
+>, <Line: -	public void addSubClassOfAxiomWithReferencedEntities(DataRangeExpression concept1, DataRangeExpression concept2);
+>, <Line: -	@Deprecated
+>, <Line: -	public void addSubClassOfAxiomWithReferencedEntities(ClassExpression concept1, ClassExpression concept2);
+>, <Line: -	@Deprecated
+>, <Line: -	public void addSubPropertyOfAxiomWithReferencedEntities(ObjectPropertyExpression included, ObjectPropertyExpression including);
+>, <Line: -	@Deprecated
+>, <Line: -	public void addSubPropertyOfAxiomWithReferencedEntities(DataPropertyExpression included, DataPropertyExpression including);
+>, <Line: -	public void addSubClassOfAxiom(ClassExpression concept1, ClassExpression concept2);
+>, <Line: -	public void addSubClassOfAxiom(DataRangeExpression concept1, DataRangeExpression concept2);
+>, <Line: -	public void addSubPropertyOfAxiom(ObjectPropertyExpression included, ObjectPropertyExpression including);
+>, <Line: -	public void addSubPropertyOfAxiom(DataPropertyExpression included, DataPropertyExpression including);
+>, <Line: -	public void addDisjointClassesAxiom(Set<ClassExpression> classes);
+>, <Line: -	public void addDisjointObjectPropertiesAxiom(Set<ObjectPropertyExpression> properties);
+>, <Line: -	public void addDisjointDataPropertiesAxiom(Set<DataPropertyExpression> properties);
+>, <Line: -	public void addFunctionalObjectPropertyAxiom(ObjectPropertyExpression prop);
+>, <Line: -	public void addFunctionalDataPropertyAxiom(DataPropertyExpression prop);
+>, <Line: -	public void addClassAssertion(ClassAssertion assertion);
+>, <Line: -	public void addObjectPropertyAssertion(ObjectPropertyAssertion assertion);
+>, <Line: -	public void addDataPropertyAssertion(DataPropertyAssertion assertion);
+>, <Line: -	public Ontology clone();
+>, <Line: -	public OntologyVocabulary getVocabulary();
+>, <Line: -	public List<BinaryAxiom<ClassExpression>> getSubClassAxioms();
+>, <Line: -	public List<BinaryAxiom<DataRangeExpression>> getSubDataRangeAxioms();
+>, <Line: -	public List<BinaryAxiom<ObjectPropertyExpression>> getSubObjectPropertyAxioms();
+>, <Line: -	public List<BinaryAxiom<DataPropertyExpression>> getSubDataPropertyAxioms();
+>, <Line: -	public List<NaryAxiom<ClassExpression>> getDisjointClassesAxioms();
+>, <Line: -	public List<NaryAxiom<ObjectPropertyExpression>> getDisjointObjectPropertiesAxioms();
+>, <Line: -	public List<NaryAxiom<DataPropertyExpression>> getDisjointDataPropertiesAxioms();
+>]

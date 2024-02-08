@@ -1,0 +1,99 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.pedigree;
+>, <Line: -import org.junit.Assert;
+>, <Line: -import org.junit.Before;
+>, <Line: -import org.junit.Test;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerException;
+>, <Line: -public class CompatibilityCheckerXRecessiveSmallMaleTest extends CompatibilityCheckerTestBase {
+>, <Line: -	@Before
+>, <Line: -	public void setUp() throws PedParseException {
+>, <Line: -		ImmutableList.Builder<PedPerson> individuals = new ImmutableList.Builder<PedPerson>();
+>, <Line: -		individuals.add(new PedPerson("ped", "I.1", "0", "0", Sex.MALE, Disease.UNAFFECTED)); // father
+>, <Line: -		individuals.add(new PedPerson("ped", "I.2", "0", "0", Sex.FEMALE, Disease.UNAFFECTED)); // mother
+>, <Line: -		individuals.add(new PedPerson("ped", "II.1", "I.1", "I.2", Sex.MALE, Disease.AFFECTED)); // son
+>, <Line: -		individuals.add(new PedPerson("ped", "II.2", "I.1", "I.2", Sex.FEMALE, Disease.UNAFFECTED)); // daughter
+>, <Line: -		PedFileContents pedFileContents = new PedFileContents(new ImmutableList.Builder<String>().build(),
+>, <Line: -				individuals.build());
+>, <Line: -		this.pedigree = new Pedigree(pedFileContents, "ped");
+>, <Line: -		this.names = ImmutableList.of("I.1", "I.2", "II.1", "II.2");
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testSizeOfPedigree() {
+>, <Line: -		Assert.assertEquals(4, pedigree.getMembers().size());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCaseNegativesOneVariant() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, HET, HET, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(REF, REF, REF, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, ALT, ALT, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(UKN, UKN, UKN, UKN)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, REF, HET, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, HET, REF, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, REF, REF, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(REF, REF, REF, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, ALT, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, HET, ALT, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, REF, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, REF, REF, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, HET, REF, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, ALT, REF, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, REF, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, REF, ALT, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, ALT, ALT, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, UKN, ALT, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, ALT, UKN, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, REF, REF, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, REF, REF, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(REF, REF, REF, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, HET, ALT, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, REF, HET, ALT)).run());
+>, <Line: -		// at least one hom_alt
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, UKN, UKN, UKN)).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCaseNegativesTwoVariants() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, ALT, HET, HET), lst(HET, UKN, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, HET, HET, ALT), lst(HET, UKN, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, REF, ALT, REF), lst(HET, UKN, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, REF, HET, REF), lst(HET, UKN, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(REF, ALT, HET, REF), lst(HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, REF, HET, REF), lst(REF, HET, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(HET, HET, HET, REF), lst(REF, HET, HET, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(REF, HET, HET, ALT), lst(ALT, HET, HET, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerXR(lst(ALT, HET, HET, HET), lst(HET, REF, HET, HET)).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCasePositiveOneVariant() throws CompatibilityCheckerException {
+>, <Line: -		// male has it HOM ALT
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, HET, ALT, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, HET, ALT, HET)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, UKN, ALT, UKN)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(UKN, UKN, ALT, UKN)).run());
+>, <Line: -		//Male has it HET (misscall)
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, HET, HET, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, HET, HET, HET)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, UKN, HET, UKN)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(UKN, UKN, HET, UKN)).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCasePositiveTwoVariants() throws CompatibilityCheckerException {
+>, <Line: -		// heterozygous misscalls
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, HET, HET, REF), lst(HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, HET, HET, HET), lst(HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, HET, HET, REF), lst(HET, REF, HET, HET)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(UKN, HET, HET, REF), lst(HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, UKN, HET, HET), lst(HET, REF, HET, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, HET, HET, UKN), lst(HET, REF, HET, HET)).run());
+>, <Line: -		// homozygous
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, HET, ALT, REF), lst(REF, HET, ALT, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, REF, ALT, REF), lst(REF, UKN, ALT, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, UKN, ALT, UKN), lst(REF, HET, ALT, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(REF, HET, ALT, HET), lst(REF, UKN, ALT, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(UKN, HET, ALT, REF), lst(REF, HET, ALT, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(UKN, REF, ALT, REF), lst(REF, UKN, ALT, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(UKN, UKN, ALT, UKN), lst(REF, HET, ALT, REF)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerXR(lst(UKN, HET, ALT, HET), lst(REF, UKN, ALT, REF)).run());
+>, <Line: -	}
+>, <Line: -}
+>]

@@ -1,0 +1,52 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +    public long getBaseDataOffset() {
+>, <Line: +        return baseDataOffset;
+>, <Line: +    }
+>, <Line: +    public long getSampleDescriptionIndex() {
+>, <Line: +        return sampleDescriptionIndex;
+>, <Line: +    }
+>, <Line: +    public long getDefaultSampleDuration() {
+>, <Line: +        return defaultSampleDuration;
+>, <Line: +    }
+>, <Line: +    public long getDefaultSampleSize() {
+>, <Line: +        return defaultSampleSize;
+>, <Line: +    }
+>, <Line: +    public SampleFlags getDefaultSampleFlags() {
+>, <Line: +        return defaultSampleFlags;
+>, <Line: +    }
+>, <Line: +    public boolean isDurationIsEmpty() {
+>, <Line: +        return durationIsEmpty;
+>, <Line: +    }
+>, <Line: +    public boolean isDefaultBaseIsMoof() {
+>, <Line: +        return defaultBaseIsMoof;
+>, <Line: +    }
+>]
+[<Line: -package com.coremedia.iso.boxes.fragment;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -    public long getBaseDataOffset() {
+>, <Line: -        return baseDataOffset;
+>, <Line: -    }
+>, <Line: -    public long getSampleDescriptionIndex() {
+>, <Line: -        return sampleDescriptionIndex;
+>, <Line: -    }
+>, <Line: -    public long getDefaultSampleDuration() {
+>, <Line: -        return defaultSampleDuration;
+>, <Line: -    }
+>, <Line: -    public long getDefaultSampleSize() {
+>, <Line: -        return defaultSampleSize;
+>, <Line: -    }
+>, <Line: -    public SampleFlags getDefaultSampleFlags() {
+>, <Line: -        return defaultSampleFlags;
+>, <Line: -    }
+>, <Line: -    public boolean isDurationIsEmpty() {
+>, <Line: -        return durationIsEmpty;
+>, <Line: -    }
+>, <Line: -    public boolean isDefaultBaseIsMoof() {
+>, <Line: -        return defaultBaseIsMoof;
+>, <Line: -    }
+>]

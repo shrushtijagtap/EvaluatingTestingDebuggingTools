@@ -1,0 +1,12 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part30;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.Utf8;
+>, <Line: +        config = IsoTypeReader.readString(content, content.remaining());
+>]
+[<Line: -package com.mp4parser.iso14496.part30;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.Utf8;
+>, <Line: -import com.googlecode.mp4parser.AbstractBox;
+>, <Line: -       config = IsoTypeReader.readString(content, content.remaining());
+>]

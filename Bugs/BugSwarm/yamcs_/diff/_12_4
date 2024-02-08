@@ -1,0 +1,102 @@
+[<Line: +import org.yamcs.utils.ValueUtility;
+>, <Line: +    private String spJvmTotalMemory;
+>, <Line: +    private String spJvmMemoryUsed;
+>, <Line: +    private String spJvmTheadCount;
+>, <Line: +            spJvmTotalMemory = namespace+"/jvmTotalMemory";
+>, <Line: +            log.debug("publishing jvmTotalMemory with parameter id {}", spJvmTotalMemory);
+>, <Line: +            spJvmMemoryUsed = namespace+"/jvmMemoryUsed";
+>, <Line: +            log.debug("publishing jvmMemoryUsed with parameter id {}", spJvmMemoryUsed);
+>, <Line: +            spJvmTheadCount = namespace+"/jvmThreadCount";
+>, <Line: +            log.debug("publishing jvmThreadCount with parameter id {}", spJvmTheadCount);
+>, <Line: +            String name = pv.getParameterQualifiedNamed();
+>, <Line: +                log.warn("duplicate value for {}\nfirst: {}\n second: {}", name, cols.get(idx), pv);
+>, <Line: +        ParameterValue jvmTotalMemory = SystemParametersCollector.getPV(spJvmTotalMemory, time, r.totalMemory()/1024);
+>, <Line: +        ParameterValue jvmMemoryUsed = SystemParametersCollector.getPV(spJvmMemoryUsed, time, (r.totalMemory()-r.freeMemory())/1024);
+>, <Line: +        ParameterValue jvmThreadCount = SystemParametersCollector.getUnsignedIntPV(spJvmTheadCount, time, Thread.activeCount());
+>, <Line: +    public static ParameterValue getNewPv(String fqn, long time) {
+>, <Line: +        ParameterValue pv = new ParameterValue(fqn);
+>, <Line: +        pv.setAcquisitionTime(time);
+>, <Line: +        pv.setGenerationTime(time);
+>, <Line: +        return pv;      
+>, <Line: +    }
+>, <Line: +    public static ParameterValue getPV(String fqn, long time, String v) {
+>, <Line: +        ParameterValue pv = getNewPv(fqn, time);
+>, <Line: +        pv.setEngValue(ValueUtility.getStringValue(v));
+>, <Line: +        return pv;
+>, <Line: +    public static ParameterValue getPV(String fqn, long time, double v) {
+>, <Line: +        ParameterValue pv = getNewPv(fqn, time);
+>, <Line: +        pv.setEngValue(ValueUtility.getDoubleValue(v));
+>, <Line: +        return pv;
+>, <Line: +    public static ParameterValue getPV(String fqn, long time, boolean v) {
+>, <Line: +        ParameterValue pv = getNewPv(fqn, time);
+>, <Line: +        pv.setEngValue(ValueUtility.getBooleanValue(v));
+>, <Line: +        return pv;
+>, <Line: +    public static ParameterValue getPV(String fqn, long time, long v) {
+>, <Line: +        ParameterValue pv = getNewPv(fqn, time);
+>, <Line: +        pv.setEngValue(ValueUtility.getSint64Value(v));
+>, <Line: +        return pv;
+>, <Line: +    public static ParameterValue getUnsignedIntPV(String fqn, long time, int v) {
+>, <Line: +        ParameterValue pv = getNewPv(fqn, time);
+>, <Line: +        pv.setEngValue(ValueUtility.getUint64Value(v));
+>, <Line: +        return pv;
+>]
+[<Line: -import org.yamcs.protobuf.Pvalue.AcquisitionStatus;
+>, <Line: -import org.yamcs.protobuf.Pvalue.ParameterValue;
+>, <Line: -import org.yamcs.protobuf.Yamcs.NamedObjectId;
+>, <Line: -import org.yamcs.protobuf.Yamcs.Value;
+>, <Line: -import org.yamcs.protobuf.Yamcs.Value.Type;
+>, <Line: -    private NamedObjectId sp_jvmTotalMemory_id;
+>, <Line: -    private NamedObjectId sp_jvmMemoryUsed_id;
+>, <Line: -    private NamedObjectId sp_jvmTheadCount_id;
+>, <Line: -            sp_jvmTotalMemory_id = NamedObjectId.newBuilder().setName(namespace+"/jvmTotalMemory").build();
+>, <Line: -            log.debug("publishing jvmTotalMemory with parameter id {}", sp_jvmTotalMemory_id);
+>, <Line: -            sp_jvmMemoryUsed_id = NamedObjectId.newBuilder().setName(namespace+"/jvmMemoryUsed").build();
+>, <Line: -            log.debug("publishing jvmMemoryUsed with parameter id {}", sp_jvmMemoryUsed_id);
+>, <Line: -            sp_jvmTheadCount_id = NamedObjectId.newBuilder().setName(namespace+"/jvmThreadCount").build();
+>, <Line: -            log.debug("publishing jvmThreadCount with parameter id {}", sp_jvmTheadCount_id);
+>, <Line: -            String name = pv.getId().getName();
+>, <Line: -                log.warn("duplicate value for {}\nfirst: {}\n second: {}", pv.getId(), cols.get(idx), pv);
+>, <Line: -        ParameterValue jvmTotalMemory = SystemParametersCollector.getPV(sp_jvmTotalMemory_id, time, r.totalMemory()/1024);
+>, <Line: -        ParameterValue jvmMemoryUsed = SystemParametersCollector.getPV(sp_jvmMemoryUsed_id, time, (r.totalMemory()-r.freeMemory())/1024);
+>, <Line: -        ParameterValue jvmThreadCount = SystemParametersCollector.getUnsignedIntPV(sp_jvmTheadCount_id, time, Thread.activeCount());
+>, <Line: -    public static ParameterValue getPV(NamedObjectId id, long time, String v) {
+>, <Line: -        return ParameterValue.newBuilder()
+>, <Line: -                .setId(id)
+>, <Line: -                .setAcquisitionStatus(AcquisitionStatus.ACQUIRED)
+>, <Line: -                .setAcquisitionTime(time)
+>, <Line: -                .setGenerationTime(time)
+>, <Line: -                .setEngValue(Value.newBuilder().setType(Type.STRING).setStringValue(v).build())
+>, <Line: -                .build();
+>, <Line: -    public static ParameterValue getPV(NamedObjectId id, long time, double v) {
+>, <Line: -        return ParameterValue.newBuilder()
+>, <Line: -                .setId(id)
+>, <Line: -                .setAcquisitionStatus(AcquisitionStatus.ACQUIRED)
+>, <Line: -                .setAcquisitionTime(time)
+>, <Line: -                .setGenerationTime(time)
+>, <Line: -                .setEngValue(Value.newBuilder().setType(Type.DOUBLE).setDoubleValue(v).build())
+>, <Line: -                .build();
+>, <Line: -    public static ParameterValue getPV(NamedObjectId id, long time, boolean v) {
+>, <Line: -        return ParameterValue.newBuilder()
+>, <Line: -                .setId(id)
+>, <Line: -                .setAcquisitionStatus(AcquisitionStatus.ACQUIRED)
+>, <Line: -                .setAcquisitionTime(time)
+>, <Line: -                .setGenerationTime(time)
+>, <Line: -                .setEngValue(Value.newBuilder().setType(Type.BOOLEAN).setBooleanValue(v).build())
+>, <Line: -                .build();
+>, <Line: -    public static ParameterValue getPV(NamedObjectId id, long time, long v) {
+>, <Line: -        return ParameterValue.newBuilder()
+>, <Line: -                .setId(id)
+>, <Line: -                .setAcquisitionStatus(AcquisitionStatus.ACQUIRED)
+>, <Line: -                .setAcquisitionTime(time)
+>, <Line: -                .setGenerationTime(time)
+>, <Line: -                .setEngValue(Value.newBuilder().setType(Type.SINT64).setSint64Value(v).build())
+>, <Line: -                .build();
+>, <Line: -    public static ParameterValue getUnsignedIntPV(NamedObjectId id, long time, int v) {
+>, <Line: -        return ParameterValue.newBuilder()
+>, <Line: -                .setId(id)
+>, <Line: -                .setAcquisitionStatus(AcquisitionStatus.ACQUIRED)
+>, <Line: -                .setAcquisitionTime(time)
+>, <Line: -                .setGenerationTime(time)
+>, <Line: -                .setEngValue(Value.newBuilder().setType(Type.UINT64).setUint64Value(v).build())
+>, <Line: -                .build();
+>]

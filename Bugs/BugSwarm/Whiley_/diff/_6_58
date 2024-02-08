@@ -1,0 +1,274 @@
+[]
+[<Line: -// Copyright (c) 2011, David J. Pearce (djp@ecs.vuw.ac.nz)
+>, <Line: -// All rights reserved.
+>, <Line: -//
+>, <Line: -// Redistribution and use in source and binary forms, with or without
+>, <Line: -// modification, are permitted provided that the following conditions are met:
+>, <Line: -//    * Redistributions of source code must retain the above copyright
+>, <Line: -//      notice, this list of conditions and the following disclaimer.
+>, <Line: -//    * Redistributions in binary form must reproduce the above copyright
+>, <Line: -//      notice, this list of conditions and the following disclaimer in the
+>, <Line: -//      documentation and/or other materials provided with the distribution.
+>, <Line: -//    * Neither the name of the <organization> nor the
+>, <Line: -//      names of its contributors may be used to endorse or promote products
+>, <Line: -//      derived from this software without specific prior written permission.
+>, <Line: -//
+>, <Line: -// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+>, <Line: -// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+>, <Line: -// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+>, <Line: -// DISCLAIMED. IN NO EVENT SHALL DAVID J. PEARCE BE LIABLE FOR ANY
+>, <Line: -// DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+>, <Line: -// (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+>, <Line: -// LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+>, <Line: -// ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+>, <Line: -// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+>, <Line: -// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+>, <Line: -package wyil.util.dfa;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Map;
+>, <Line: -import wycc.lang.SyntaxError;
+>, <Line: -import wycc.util.Pair;
+>, <Line: -import wyil.attributes.SourceLocation;
+>, <Line: -import wyil.lang.*;
+>, <Line: -import static wyil.util.ErrorMessages.*;
+>, <Line: -public abstract class BackwardFlowAnalysis<T> {
+>, <Line: -	/**
+>, <Line: -	 * The filename of the module currently being propagated through
+>, <Line: -	 */
+>, <Line: -	protected String filename;
+>, <Line: -	/**
+>, <Line: -	 * The function or method currently being propagated through.
+>, <Line: -	 */
+>, <Line: -	protected WyilFile.FunctionOrMethod method;
+>, <Line: -	/**
+>, <Line: -	 * The root block currently being propagated through.
+>, <Line: -	 */
+>, <Line: -	protected BytecodeForest forest;
+>, <Line: -	/**
+>, <Line: -	 * The temporary abstract stores being generated during propagation.
+>, <Line: -	 */
+>, <Line: -	protected HashMap<String, T> stores;
+>, <Line: -	public void apply(WyilFile module) {
+>, <Line: -		filename = module.filename();
+>, <Line: -		for(WyilFile.Block d : module.blocks()) {
+>, <Line: -			if(d instanceof WyilFile.Constant) {
+>, <Line: -				WyilFile.Constant cd = (WyilFile.Constant) d;
+>, <Line: -				module.replace(cd,propagate((cd)));
+>, <Line: -			} else if(d instanceof WyilFile.Type) {
+>, <Line: -				WyilFile.Type td = (WyilFile.Type) d;
+>, <Line: -				module.replace(td,propagate(td));
+>, <Line: -			} else if(d instanceof WyilFile.FunctionOrMethod) {
+>, <Line: -				WyilFile.FunctionOrMethod md = (WyilFile.FunctionOrMethod) d;
+>, <Line: -				if(!md.hasModifier(Modifier.NATIVE)) {
+>, <Line: -					// native functions/methods don't have bodies
+>, <Line: -					module.replace(md,propagate(md));
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	protected WyilFile.Constant propagate(WyilFile.Constant constant) {
+>, <Line: -		return constant;
+>, <Line: -	}
+>, <Line: -	protected WyilFile.Type propagate(WyilFile.Type type) {
+>, <Line: -		return type;
+>, <Line: -	}
+>, <Line: -	protected WyilFile.FunctionOrMethod propagate(
+>, <Line: -			WyilFile.FunctionOrMethod method) {
+>, <Line: -		this.method = method;
+>, <Line: -		this.stores = new HashMap<String,T>();
+>, <Line: -		this.forest = method.code();
+>, <Line: -		T last = lastStore();
+>, <Line: -		propagate(method.body(), last, Collections.EMPTY_LIST);
+>, <Line: -		// FIXME: should we propagate through the precondition and postconditions !?
+>, <Line: -		return new WyilFile.FunctionOrMethod(method.modifiers(), method.name(), method.type(), method.code(),
+>, <Line: -				method.preconditions().length, method.postconditions().length, method.attributes());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Propagate a given store backwards through this bytecode block. A list of
+>, <Line: -	 * exception handlers that are active is provided.
+>, <Line: -	 *
+>, <Line: -	 * @param parentIndex
+>, <Line: -	 *            The bytecode index of the bytecode containing this block, or
+>, <Line: -	 *            the empty index otherwise.
+>, <Line: -	 * @param block
+>, <Line: -	 *            The bytecode block to be propagated through.
+>, <Line: -	 * @param store
+>, <Line: -	 *            The store which holds at the end of this block.
+>, <Line: -	 * @param handlers
+>, <Line: -	 *            The list of active exception handlers
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	protected T propagate(int blockID, T store, List<Pair<Type,String>> handlers) {
+>, <Line: -		BytecodeForest.Block block = forest.get(blockID);
+>, <Line: -		for (int i = block.size()-1; i >= 0; --i) {
+>, <Line: -			Bytecode code = block.get(i).code();
+>, <Line: -			// Construct the bytecode index
+>, <Line: -			BytecodeForest.Index id = new BytecodeForest.Index(blockID,i);
+>, <Line: -			try {
+>, <Line: -				// First, check for a label which may have incoming information.
+>, <Line: -				if (code instanceof Bytecode.Loop) {
+>, <Line: -					Bytecode.Loop loop = (Bytecode.Loop) code;
+>, <Line: -					store = propagate(id, loop, store, handlers);
+>, <Line: -					continue;
+>, <Line: -				} else if (code instanceof Bytecode.Label) {
+>, <Line: -					Bytecode.Label l = (Bytecode.Label) code;
+>, <Line: -					stores.put(l.label(),store);
+>, <Line: -				} else if (code instanceof Bytecode.If) {
+>, <Line: -					Bytecode.If ifgoto = (Bytecode.If) code;
+>, <Line: -					T trueStore = stores.get(ifgoto.destination());
+>, <Line: -					store = propagate(id, ifgoto, trueStore, store);
+>, <Line: -				} else if (code instanceof Bytecode.IfIs) {
+>, <Line: -					Bytecode.IfIs iftype = (Bytecode.IfIs) code;
+>, <Line: -					T trueStore = stores.get(iftype.destination());
+>, <Line: -					store = propagate(id, iftype, trueStore, store);
+>, <Line: -				} else if (code instanceof Bytecode.Switch) {
+>, <Line: -					Bytecode.Switch sw = (Bytecode.Switch) code;
+>, <Line: -					ArrayList<T> swStores = new ArrayList<T>();
+>, <Line: -					for(int j=0;j!=sw.branches().size();++j){
+>, <Line: -						String target = sw.branches().get(j).second();
+>, <Line: -						swStores.add(stores.get(target));
+>, <Line: -					}
+>, <Line: -					T defStore = stores.get(sw.defaultTarget());
+>, <Line: -					store = propagate(id, sw, swStores, defStore);
+>, <Line: -				} else if (code instanceof Bytecode.Goto) {
+>, <Line: -					Bytecode.Goto gto = (Bytecode.Goto) code;
+>, <Line: -					store = stores.get(gto.destination());
+>, <Line: -				} else {
+>, <Line: -					// This indicates a sequential statement was encountered.
+>, <Line: -					if (code instanceof Bytecode.Return
+>, <Line: -						|| code instanceof Bytecode.Fail) {
+>, <Line: -						store = lastStore();
+>, <Line: -					}
+>, <Line: -					store = propagate(id, code, store);
+>, <Line: -				}
+>, <Line: -			} catch (SyntaxError se) {
+>, <Line: -				throw se;
+>, <Line: -			} catch (Throwable ex) {
+>, <Line: -				internalFailure("internal failure", filename, ex, forest.get(id).attribute(SourceLocation.class));
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return store;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * <p>
+>, <Line: -	 * Propagate back from a conditional branch. This produces a potentially
+>, <Line: -	 * updated store representing the state before the branch. The method
+>, <Line: -	 * accepts two stores --- one originating from the true branch, and the
+>, <Line: -	 * other from the false branch.
+>, <Line: -	 * </p>
+>, <Line: -	 *
+>, <Line: -	 * @param index
+>, <Line: -	 *            --- Index of bytecode in root CodeBlock
+>, <Line: -	 * @param ifgoto
+>, <Line: -	 *            --- the code of this statement
+>, <Line: -	 * @param trueStore
+>, <Line: -	 *            --- abstract store which holds true immediately after this
+>, <Line: -	 *            statement on the true branch.
+>, <Line: -	 * @param falseStore
+>, <Line: -	 *            --- abstract store which holds true immediately after this
+>, <Line: -	 *            statement on the false branch.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	protected abstract T propagate(BytecodeForest.Index index, Bytecode.If ifgoto,
+>, <Line: -			T trueStore, T falseStore);
+>, <Line: -	/**
+>, <Line: -	 * <p>
+>, <Line: -	 * Propagate back from a type test. This produces a store representing the
+>, <Line: -	 * state before the branch. The method accepts two stores --- one
+>, <Line: -	 * originating from the true branch, and the other from the false branch.
+>, <Line: -	 * </p>
+>, <Line: -	 *
+>, <Line: -	 * @param index
+>, <Line: -	 *            --- Index of bytecode in root CodeBlock
+>, <Line: -	 * @param iftype
+>, <Line: -	 *            --- the code of this statement
+>, <Line: -	 * @param trueStore
+>, <Line: -	 *            --- abstract store which holds true immediately after this
+>, <Line: -	 *            statement on the true branch.
+>, <Line: -	 * @param falseStore
+>, <Line: -	 *            --- abstract store which holds true immediately after this
+>, <Line: -	 *            statement on the false branch.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	protected abstract T propagate(BytecodeForest.Index index, Bytecode.IfIs iftype, T trueStore,
+>, <Line: -			T falseStore);
+>, <Line: -	/**
+>, <Line: -	 * <p>
+>, <Line: -	 * Propagate back from a multi-way branch. This accepts multiple stores ---
+>, <Line: -	 * one for each of the various branches.
+>, <Line: -	 * </p>
+>, <Line: -	 *
+>, <Line: -	 * @param index
+>, <Line: -	 *            --- Index of bytecode in root CodeBlock
+>, <Line: -	 * @param sw
+>, <Line: -	 *            --- the code of this statement
+>, <Line: -	 * @param stores
+>, <Line: -	 *            --- abstract stores coming from the various branches.
+>, <Line: -	 *            statement.
+>, <Line: -	 * @param defStore
+>, <Line: -	 *            --- abstract store coming from default branch
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	protected abstract T propagate(BytecodeForest.Index index, Bytecode.Switch sw,
+>, <Line: -			List<T> stores, T defStore);
+>, <Line: -	/**
+>, <Line: -	 * <p>
+>, <Line: -	 * Propagate back from a loop statement, producing a store which holds true
+>, <Line: -	 * immediately before the statement
+>, <Line: -	 * </p>
+>, <Line: -	 *
+>, <Line: -	 * @param loop
+>, <Line: -	 *            --- the code of the block
+>, <Line: -	 * @param body
+>, <Line: -	 *            --- the body of the block
+>, <Line: -	 * @param store
+>, <Line: -	 *            --- abstract store which holds true immediately before this
+>, <Line: -	 *            statement.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	protected abstract T propagate(BytecodeForest.Index index, Bytecode.Loop code, T store,
+>, <Line: -			List<Pair<Type, String>> handlers);
+>, <Line: -	/**
+>, <Line: -	 * <p>
+>, <Line: -	 * Propagate back from a sequential statement, producing a store which holds
+>, <Line: -	 * true immediately after the statement
+>, <Line: -	 * </p>
+>, <Line: -	 *
+>, <Line: -	 * @param index
+>, <Line: -	 *            --- Index of bytecode in root CodeBlock
+>, <Line: -	 * @param code
+>, <Line: -	 *            --- Bytecode being propagated through
+>, <Line: -	 * @param store
+>, <Line: -	 *            --- abstract store which holds true immediately before this
+>, <Line: -	 *            statement.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	protected abstract T propagate(BytecodeForest.Index index, Bytecode code, T store);
+>, <Line: -	/**
+>, <Line: -	 * Propagate from an exception handler.
+>, <Line: -	 *
+>, <Line: -	 * @param handler
+>, <Line: -	 *            --- type of handler catching exception
+>, <Line: -	 * @param normalStore
+>, <Line: -	 *            --- store from non-exception flow
+>, <Line: -	 * @param exceptionStore
+>, <Line: -	 *            --- store from exception flow
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	protected abstract T propagate(Type handler, T normalStore, T exceptionStore);
+>, <Line: -	/**
+>, <Line: -	 * Generate the store which holds true immediately after the last statement
+>, <Line: -	 * of the method-case body.  By default, this is null and the first return
+>, <Line: -	 * statement encountered during the backwards propagation initialises things.
+>, <Line: -	 *
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	protected T lastStore() {
+>, <Line: -		return null;
+>, <Line: -	}
+>, <Line: -}
+>]

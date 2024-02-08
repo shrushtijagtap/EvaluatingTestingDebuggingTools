@@ -1,0 +1,73 @@
+[<Line: +import java.util.Iterator;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.Random;
+>, <Line: +import edu.washington.escience.myria.Schema;
+>, <Line: +   * The worker cache (ideally, a partition with a tuple batch).
+>, <Line: +   * The worker cache.
+>, <Line: +  private final Worker ownerWorker;
+>, <Line: +   * Limitation on the number of tuples that can fit in the Cache.
+>, <Line: +   * */
+>, <Line: +  public static final Integer LIMIT_TUPLES = 10000;
+>, <Line: +   * Iterator through the HashMap to read by batches.
+>, <Line: +  public Iterator it;
+>, <Line: +   * Schema of the batch added to the cache.
+>, <Line: +  private Schema schema;
+>, <Line: +    cache = new HashMap<Integer, TupleBatch>();
+>, <Line: +    it = cache.entrySet().iterator();
+>, <Line: +    LOGGER.info("Created Cache Controller For " + ownerWorker.getID());
+>, <Line: +   * 
+>, <Line: +   * @param tb the tuple batch to add
+>, <Line: +    cache.put(new Random().nextInt(LIMIT_TUPLES), tb);
+>, <Line: +    // schema now known, so record it (temporary for now, probably not needed)
+>, <Line: +    schema = tb.getSchema();
+>, <Line: +   * Reads from the cache by iterating through the HashMap.
+>, <Line: +   * 
+>, <Line: +   * @return the next TupleBatch
+>, <Line: +  public TupleBatch readTupleBatch() {
+>, <Line: +    if (it.hasNext()) {
+>, <Line: +      Map.Entry entry = (Map.Entry) it.next();
+>, <Line: +      return (TupleBatch) entry.getValue();
+>, <Line: +    }
+>, <Line: +    return null;
+>, <Line: +   * Reset the iterator after it has read through all the tuple batches.
+>, <Line: +  public void cacheIteratorReset() {
+>, <Line: +    it = cache.entrySet().iterator();
+>, <Line: +   * Checking if there is anything in the cache to read.
+>, <Line: +   * 
+>, <Line: +   * @return a boolean to determine if there is anything to read
+>, <Line: +  public boolean cacheIteratorHasNext() {
+>, <Line: +    return it.hasNext();
+>, <Line: +   * @return the cache
+>]
+[<Line: -import edu.washington.escience.myria.storage.TupleBatchBuffer;
+>, <Line: -   * The worker cache.
+>, <Line: -   * The incoming tuples --- create buffer too?
+>, <Line: -  // private final HashMap<Integer, TupleBatch> incomingTuples;
+>, <Line: -   * Buffer to hold finished and in-progress TupleBatches to place in cache.
+>, <Line: -   */
+>, <Line: -  private TupleBatchBuffer outputBuffer;
+>, <Line: -   * * The worker who owns this cache.
+>, <Line: -  private final Worker ownerWorker;
+>, <Line: -   * @JORTIZ These three variables are temp for now
+>, <Line: -  public static final Integer LIMIT_TUPLES = 10000;
+>, <Line: -  private Integer tupleCount;
+>, <Line: -  private Integer keysUsed;
+>, <Line: -    cache = new HashMap<Integer, TupleBatch>();
+>, <Line: -    // incomingTuples = new HashMap<Integer, TupleBatch>();
+>, <Line: -    keysUsed = 0;
+>, <Line: -    tupleCount = 0;
+>, <Line: -    LOGGER.info("INTIALIZED CACHE CONTROLLER FOR " + ownerWorker.getID());
+>, <Line: -    tupleCount += TupleBatch.BATCH_SIZE;
+>, <Line: -    cache.put(keysUsed++, tb);
+>, <Line: -    // LOGGER.info("WORKER " + ownerWorker.getID() + " Stored for key " + (keysUsed - 1));
+>, <Line: -   * Reads from the cache.
+>, <Line: -  public void readTupleBatch() {
+>, <Line: -    // TODO: implement
+>, <Line: -   * @return tupleCount the number of tuples currently in the cache
+>, <Line: -  public Integer getCurrentNumberOfTuples() {
+>, <Line: -    return tupleCount;
+>, <Line: -   * @return tupleCount the number of tuples currently in the cache
+>, <Line: -  public Integer getKeys() {
+>, <Line: -    return keysUsed;
+>, <Line: -   * @return the number of tuples currently in the cache
+>]

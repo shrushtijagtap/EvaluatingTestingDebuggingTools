@@ -1,0 +1,5 @@
+[<Line: +../../tests/invalid/Switch_Invalid_6.whiley:1: missing return statement
+>, <Line: +function f(int x) -> int:
+>, <Line: +^^^^^^^^^^^^^^^^^^^^^^^^^
+>]
+[]

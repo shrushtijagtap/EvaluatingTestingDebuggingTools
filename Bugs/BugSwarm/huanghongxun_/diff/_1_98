@@ -1,0 +1,11 @@
+[<Line: +    @SerializedName("proxyHost")
+>, <Line: +    private String proxyHost;
+>, <Line: +    @SerializedName("proxyPort")
+>, <Line: +    private String proxyPort;
+>, <Line: +    @SerializedName("proxyUserName")
+>, <Line: +    private String proxyUserName;
+>, <Line: +    @SerializedName("proxyPassword")
+>, <Line: +    private String proxyPassword;
+>]
+[<Line: -    private String proxyHost, proxyPort, proxyUserName, proxyPassword;
+>]

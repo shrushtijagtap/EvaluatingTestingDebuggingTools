@@ -1,0 +1,67 @@
+[<Line: +<!--[if IE 8]>
+>, <Line: +<html class="no-js lt-ie9" lang="en"> <![endif]-->
+>, <Line: +<!--[if gt IE 8]><!-->
+>, <Line: +<html class="no-js" lang="en"> <!--<![endif]-->
+>, <Line: +<head>
+>, <Line: +	<meta charset="utf-8">
+>, <Line: +	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+>, <Line: +	<meta name="viewport" content="width=device-width">
+>, <Line: +	<meta name="google" value="notranslate">
+>, <Line: +	<title>Grafana</title>
+>, <Line: +	<link rel="stylesheet" href="css/grafana.dark.min.css" title="Dark">
+>, <Line: +	<link rel="icon" type="image/png" href="img/fav32.png">
+>, <Line: +	<!-- build:js app/app.js -->
+>, <Line: +	<script src="vendor/require/require.js"></script>
+>, <Line: +	<script src="app/components/require.config.js"></script>
+>, <Line: +	<!-- endbuild -->
+>, <Line: +	<script>require(['app'], function (app) {
+>, <Line: +		app.boot();
+>, <Line: +	})</script>
+>, <Line: +</head>
+>, <Line: +<body ng-cloak ng-controller="GrafanaCtrl">
+>, <Line: +<link rel="stylesheet" href="css/grafana.light.min.css"
+>, <Line: +	  ng-if="grafana.style === 'light'">
+>, <Line: +<div class="page-alert-list">
+>, <Line: +	<div ng-repeat='alert in dashAlerts.list'
+>, <Line: +		 class="alert-{{alert.severity}} alert">
+>, <Line: +		<button type="button" class="alert-close"
+>, <Line: +				ng-click="dashAlerts.clear(alert)">
+>, <Line: +			<i class="icon-remove-sign"></i>
+>, <Line: +		</button>
+>, <Line: +		<div class="alert-title">{{alert.title}}</div>
+>, <Line: +		<div ng-bind-html='alert.text'></div>
+>, <Line: +	</div>
+>, <Line: +</div>
+>, <Line: +<div ng-view></div>
+>, <Line: +</body>
+>]
+[<Line: -  <!--[if IE 8]>         <html class="no-js lt-ie9" lang="en"> <![endif]-->
+>, <Line: -  <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+>, <Line: -  <head>
+>, <Line: -    <meta charset="utf-8">
+>, <Line: -    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+>, <Line: -    <meta name="viewport" content="width=device-width">
+>, <Line: -    <meta name="google" value="notranslate">
+>, <Line: -    <title>Grafana</title>
+>, <Line: -    <link rel="stylesheet" href="css/grafana.dark.min.css" title="Dark">
+>, <Line: -    <link rel="icon" type="image/png" href="img/fav32.png">
+>, <Line: -    <!-- build:js app/app.js -->
+>, <Line: -    <script src="vendor/require/require.js"></script>
+>, <Line: -    <script src="app/components/require.config.js"></script>
+>, <Line: -    <!-- endbuild -->
+>, <Line: -    <script>require(['app'], function (app) { app.boot(); })</script>
+>, <Line: -  </head>
+>, <Line: -  <body ng-cloak ng-controller="GrafanaCtrl">
+>, <Line: -    <link rel="stylesheet" href="css/grafana.light.min.css" ng-if="grafana.style === 'light'">
+>, <Line: -		<div class="page-alert-list">
+>, <Line: -			<div ng-repeat='alert in dashAlerts.list' class="alert-{{alert.severity}} alert">
+>, <Line: -				<button type="button" class="alert-close" ng-click="dashAlerts.clear(alert)">
+>, <Line: -					<i class="icon-remove-sign"></i>
+>, <Line: -				</button>
+>, <Line: -				<div class="alert-title">{{alert.title}}</div>
+>, <Line: -				<div ng-bind-html='alert.text'></div>
+>, <Line: -			</div>
+>, <Line: -		</div>
+>, <Line: -		<div ng-view></div>
+>, <Line: -	</body>
+>]

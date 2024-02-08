@@ -1,0 +1,9 @@
+[<Line: +package org.mp4parser.streaming.input.h264;
+>, <Line: +import org.mp4parser.streaming.input.AbstractStreamingTrack;
+>, <Line: +/**
+>, <Line: + * Created by sannies on 23.10.2015.
+>, <Line: + */
+>, <Line: +public abstract class AbstractH264Track extends AbstractStreamingTrack {
+>, <Line: +}
+>]
+[]

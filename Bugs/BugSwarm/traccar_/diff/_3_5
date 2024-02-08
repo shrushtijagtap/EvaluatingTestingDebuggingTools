@@ -1,0 +1,14 @@
+[<Line: +import java.net.SocketAddress;
+>, <Line: +import org.jboss.netty.channel.Channel;
+>, <Line: +import org.traccar.Protocol;
+>, <Line: +public class ConnectionManager {
+>, <Line: +    private Map<String, ActiveDevice> activeDevices = new HashMap<String, ActiveDevice>();
+>, <Line: +    public void setActiveDevice(String uniqueId, Protocol protocol, Channel channel, SocketAddress remoteAddress) {
+>, <Line: +        activeDevices.put(uniqueId, new ActiveDevice(uniqueId, protocol, channel, remoteAddress));
+>, <Line: +    }
+>, <Line: +    public ActiveDevice getActiveDevice(String uniqueId) {
+>, <Line: +        return activeDevices.get(uniqueId);
+>, <Line: +    }
+>]
+[<Line: -public class DataCache {
+>]

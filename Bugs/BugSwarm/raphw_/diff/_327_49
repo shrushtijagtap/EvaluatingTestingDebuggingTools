@@ -1,0 +1,22 @@
+[<Line: +        new MethodAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new Qux.Instance()))
+>, <Line: +        new MethodAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new Baz.Instance()))
+>, <Line: +        new MethodAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new QuxBaz.Instance()))
+>, <Line: +        new MethodAttributeAppender.Explicit(PARAMETER_INDEX, new AnnotationList.ForLoadedAnnotations(new Qux.Instance()))
+>, <Line: +        new MethodAttributeAppender.Explicit(PARAMETER_INDEX, new AnnotationList.ForLoadedAnnotations(new Baz.Instance()))
+>, <Line: +        new MethodAttributeAppender.Explicit(PARAMETER_INDEX, new AnnotationList.ForLoadedAnnotations(new QuxBaz.Instance()))
+>, <Line: +        new MethodAttributeAppender.Explicit(PARAMETER_INDEX + 1, new AnnotationList.ForLoadedAnnotations(new Baz.Instance()))
+>, <Line: +        MethodAttributeAppender.Explicit methodAttributeAppender = new MethodAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotations(new Qux.Instance()));
+>, <Line: +        when(methodDescription.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotations(new Baz.Instance()));
+>, <Line: +        when(parameterDescription.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotations(new Baz.Instance()));
+>]
+[<Line: -        new MethodAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new Qux.Instance()))
+>, <Line: -        new MethodAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new Baz.Instance()))
+>, <Line: -        new MethodAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new QuxBaz.Instance()))
+>, <Line: -        new MethodAttributeAppender.Explicit(PARAMETER_INDEX, new AnnotationList.ForLoadedAnnotation(new Qux.Instance()))
+>, <Line: -        new MethodAttributeAppender.Explicit(PARAMETER_INDEX, new AnnotationList.ForLoadedAnnotation(new Baz.Instance()))
+>, <Line: -        new MethodAttributeAppender.Explicit(PARAMETER_INDEX, new AnnotationList.ForLoadedAnnotation(new QuxBaz.Instance()))
+>, <Line: -        new MethodAttributeAppender.Explicit(PARAMETER_INDEX + 1, new AnnotationList.ForLoadedAnnotation(new Baz.Instance()))
+>, <Line: -        MethodAttributeAppender.Explicit methodAttributeAppender = new MethodAttributeAppender.Explicit(new AnnotationList.ForLoadedAnnotation(new Qux.Instance()));
+>, <Line: -        when(methodDescription.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotation(new Baz.Instance()));
+>, <Line: -        when(parameterDescription.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotation(new Baz.Instance()));
+>]

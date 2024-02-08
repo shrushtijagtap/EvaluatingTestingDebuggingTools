@@ -1,0 +1,15 @@
+[<Line: +import java.util.*;
+>, <Line: +	Map<String, Class<? extends Component>> types = new HashMap<String, Class<? extends Component>>();
+>, <Line: +//		ComponentLookupSerializer lookup = componentLookup(json);
+>, <Line: +//		Map<String, Class<? extends Component>> components = lookup.identifierToClassMap();
+>, <Line: +//			Class<? extends Component> componentType = components.get(component.name);
+>, <Line: +			Class<? extends Component> componentType = types.get(component.name);
+>]
+[<Line: -import java.util.Collection;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.IdentityHashMap;
+>, <Line: -import java.util.Map;
+>, <Line: -		ComponentLookupSerializer lookup = componentLookup(json);
+>, <Line: -		Map<String, Class<? extends Component>> components = lookup.identifierToClassMap();
+>, <Line: -			Class<? extends Component> componentType = components.get(component.name);
+>]

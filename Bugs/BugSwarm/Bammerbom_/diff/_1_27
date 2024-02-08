@@ -1,0 +1,7 @@
+[<Line: +public class Selector {
+>, <Line: +            org.spongepowered.api.text.selector.Selector selector = org.spongepowered.api.text.selector.Selector.parse(s);
+>]
+[<Line: -import org.spongepowered.api.text.selector.Selector;
+>, <Line: -public class PlayerSelector {
+>, <Line: -            Selector selector = Selector.parse(s);
+>]

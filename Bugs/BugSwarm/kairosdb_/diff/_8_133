@@ -1,0 +1,880 @@
+[<Line: +		'jquery',
+>, <Line: +		'lodash',
+>, <Line: +		'moment'
+>, <Line: +	],
+>, <Line: +	function ($, _, moment) {
+>, <Line: +		'use strict';
+>, <Line: +		var kbn = {};
+>, <Line: +		kbn.valueFormats = {};
+>, <Line: +		kbn.round_interval = function (interval) {
+>, <Line: +			switch (true) {
+>, <Line: +				// 0.5s
+>, <Line: +				case (interval <= 500):
+>, <Line: +					return 100;       // 0.1s
+>, <Line: +				// 5s
+>, <Line: +				case (interval <= 5000):
+>, <Line: +					return 1000;      // 1s
+>, <Line: +				// 7.5s
+>, <Line: +				case (interval <= 7500):
+>, <Line: +					return 5000;      // 5s
+>, <Line: +				// 15s
+>, <Line: +				case (interval <= 15000):
+>, <Line: +					return 10000;     // 10s
+>, <Line: +				// 45s
+>, <Line: +				case (interval <= 45000):
+>, <Line: +					return 30000;     // 30s
+>, <Line: +				// 3m
+>, <Line: +				case (interval <= 180000):
+>, <Line: +					return 60000;     // 1m
+>, <Line: +				// 9m
+>, <Line: +				case (interval <= 450000):
+>, <Line: +					return 300000;    // 5m
+>, <Line: +				// 20m
+>, <Line: +				case (interval <= 1200000):
+>, <Line: +					return 600000;    // 10m
+>, <Line: +				// 45m
+>, <Line: +				case (interval <= 2700000):
+>, <Line: +					return 1800000;   // 30m
+>, <Line: +				// 2h
+>, <Line: +				case (interval <= 7200000):
+>, <Line: +					return 3600000;   // 1h
+>, <Line: +				// 6h
+>, <Line: +				case (interval <= 21600000):
+>, <Line: +					return 10800000;  // 3h
+>, <Line: +				// 24h
+>, <Line: +				case (interval <= 86400000):
+>, <Line: +					return 43200000;  // 12h
+>, <Line: +				// 48h
+>, <Line: +				case (interval <= 172800000):
+>, <Line: +					return 86400000;  // 24h
+>, <Line: +				// 1w
+>, <Line: +				case (interval <= 604800000):
+>, <Line: +					return 86400000;  // 24h
+>, <Line: +				// 3w
+>, <Line: +				case (interval <= 1814400000):
+>, <Line: +					return 604800000; // 1w
+>, <Line: +				// 2y
+>, <Line: +				case (interval < 3628800000):
+>, <Line: +					return 2592000000; // 30d
+>, <Line: +				default:
+>, <Line: +					return 31536000000; // 1y
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		kbn.secondsToHms = function (seconds) {
+>, <Line: +			var numyears = Math.floor(seconds / 31536000);
+>, <Line: +			if (numyears) {
+>, <Line: +				return numyears + 'y';
+>, <Line: +			}
+>, <Line: +			var numdays = Math.floor((seconds % 31536000) / 86400);
+>, <Line: +			if (numdays) {
+>, <Line: +				return numdays + 'd';
+>, <Line: +			}
+>, <Line: +			var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+>, <Line: +			if (numhours) {
+>, <Line: +				return numhours + 'h';
+>, <Line: +			}
+>, <Line: +			var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+>, <Line: +			if (numminutes) {
+>, <Line: +				return numminutes + 'm';
+>, <Line: +			}
+>, <Line: +			var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+>, <Line: +			if (numseconds) {
+>, <Line: +				return numseconds + 's';
+>, <Line: +			}
+>, <Line: +			return 'less then a second'; //'just now' //or other string you like;
+>, <Line: +		};
+>, <Line: +		kbn.to_percent = function (number, outof) {
+>, <Line: +			return Math.floor((number / outof) * 10000) / 100 + "%";
+>, <Line: +		};
+>, <Line: +		kbn.addslashes = function (str) {
+>, <Line: +			str = str.replace(/\\/g, '\\\\');
+>, <Line: +			str = str.replace(/\'/g, '\\\'');
+>, <Line: +			str = str.replace(/\"/g, '\\"');
+>, <Line: +			str = str.replace(/\0/g, '\\0');
+>, <Line: +			return str;
+>, <Line: +		};
+>, <Line: +		kbn.interval_regex = /(\d+(?:\.\d+)?)([Mwdhmsy])/;
+>, <Line: +		// histogram & trends
+>, <Line: +		kbn.intervals_in_seconds = {
+>, <Line: +			y: 31536000,
+>, <Line: +			M: 2592000,
+>, <Line: +			w: 604800,
+>, <Line: +			d: 86400,
+>, <Line: +			h: 3600,
+>, <Line: +			m: 60,
+>, <Line: +			s: 1
+>, <Line: +		};
+>, <Line: +		kbn.calculateInterval = function (range, resolution, userInterval) {
+>, <Line: +			var lowLimitMs = 1; // 1 millisecond default low limit
+>, <Line: +			var intervalMs, lowLimitInterval;
+>, <Line: +			if (userInterval) {
+>, <Line: +				if (userInterval[0] === '>') {
+>, <Line: +					lowLimitInterval = userInterval.slice(1);
+>, <Line: +					lowLimitMs = kbn.interval_to_ms(lowLimitInterval);
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					return userInterval;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			intervalMs = kbn.round_interval((range.to.valueOf() - range.from.valueOf()) / resolution);
+>, <Line: +			if (lowLimitMs > intervalMs) {
+>, <Line: +				intervalMs = lowLimitMs;
+>, <Line: +			}
+>, <Line: +			return kbn.secondsToHms(intervalMs / 1000);
+>, <Line: +		};
+>, <Line: +		kbn.describe_interval = function (string) {
+>, <Line: +			var matches = string.match(kbn.interval_regex);
+>, <Line: +			if (!matches || !_.has(kbn.intervals_in_seconds, matches[2])) {
+>, <Line: +				throw new Error('Invalid interval string, expexcting a number followed by one of "Mwdhmsy"');
+>, <Line: +			} else {
+>, <Line: +				return {
+>, <Line: +					sec: kbn.intervals_in_seconds[matches[2]],
+>, <Line: +					type: matches[2],
+>, <Line: +					count: parseInt(matches[1], 10)
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		kbn.interval_to_ms = function (string) {
+>, <Line: +			var info = kbn.describe_interval(string);
+>, <Line: +			return info.sec * 1000 * info.count;
+>, <Line: +		};
+>, <Line: +		kbn.interval_to_seconds = function (string) {
+>, <Line: +			var info = kbn.describe_interval(string);
+>, <Line: +			return info.sec * info.count;
+>, <Line: +		};
+>, <Line: +		// This should go away, moment.js can do this
+>, <Line: +		kbn.time_ago = function (string) {
+>, <Line: +			return new Date(new Date().getTime() - (kbn.interval_to_ms(string)));
+>, <Line: +		};
+>, <Line: +		/* This is a simplified version of elasticsearch's date parser */
+>, <Line: +		kbn.parseDate = function (text) {
+>, <Line: +			if (_.isDate(text)) {
+>, <Line: +				return text;
+>, <Line: +			}
+>, <Line: +			var time,
+>, <Line: +				mathString = "",
+>, <Line: +				index,
+>, <Line: +				parseString;
+>, <Line: +			if (text.substring(0, 3) === "now") {
+>, <Line: +				time = new Date();
+>, <Line: +				mathString = text.substring("now".length);
+>, <Line: +			} else {
+>, <Line: +				index = text.indexOf("||");
+>, <Line: +				parseString;
+>, <Line: +				if (index === -1) {
+>, <Line: +					parseString = text;
+>, <Line: +					mathString = ""; // nothing else
+>, <Line: +				} else {
+>, <Line: +					parseString = text.substring(0, index);
+>, <Line: +					mathString = text.substring(index + 2);
+>, <Line: +				}
+>, <Line: +				// We're going to just require ISO8601 timestamps, k?
+>, <Line: +				time = new Date(parseString);
+>, <Line: +			}
+>, <Line: +			if (!mathString.length) {
+>, <Line: +				return time;
+>, <Line: +			}
+>, <Line: +			//return [time,parseString,mathString];
+>, <Line: +			return kbn.parseDateMath(mathString, time);
+>, <Line: +		};
+>, <Line: +		kbn.parseDateMath = function (mathString, time, roundUp) {
+>, <Line: +			var dateTime = moment(time);
+>, <Line: +			for (var i = 0; i < mathString.length;) {
+>, <Line: +				var c = mathString.charAt(i++),
+>, <Line: +					type,
+>, <Line: +					num,
+>, <Line: +					unit;
+>, <Line: +				if (c === '/') {
+>, <Line: +					type = 0;
+>, <Line: +				} else if (c === '+') {
+>, <Line: +					type = 1;
+>, <Line: +				} else if (c === '-') {
+>, <Line: +					type = 2;
+>, <Line: +				} else {
+>, <Line: +					return false;
+>, <Line: +				}
+>, <Line: +				if (isNaN(mathString.charAt(i))) {
+>, <Line: +					num = 1;
+>, <Line: +				} else {
+>, <Line: +					var numFrom = i;
+>, <Line: +					while (!isNaN(mathString.charAt(i))) {
+>, <Line: +						i++;
+>, <Line: +					}
+>, <Line: +					num = parseInt(mathString.substring(numFrom, i), 10);
+>, <Line: +				}
+>, <Line: +				if (type === 0) {
+>, <Line: +					// rounding is only allowed on whole numbers
+>, <Line: +					if (num !== 1) {
+>, <Line: +						return false;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				unit = mathString.charAt(i++);
+>, <Line: +				switch (unit) {
+>, <Line: +					case 'y':
+>, <Line: +						if (type === 0) {
+>, <Line: +							roundUp ? dateTime.endOf('year') : dateTime.startOf('year');
+>, <Line: +						} else if (type === 1) {
+>, <Line: +							dateTime.add(num, 'years');
+>, <Line: +						} else if (type === 2) {
+>, <Line: +							dateTime.subtract(num, 'years');
+>, <Line: +						}
+>, <Line: +						break;
+>, <Line: +					case 'M':
+>, <Line: +						if (type === 0) {
+>, <Line: +							roundUp ? dateTime.endOf('month') : dateTime.startOf('month');
+>, <Line: +						} else if (type === 1) {
+>, <Line: +							dateTime.add(num, 'months');
+>, <Line: +						} else if (type === 2) {
+>, <Line: +							dateTime.subtract(num, 'months');
+>, <Line: +						}
+>, <Line: +						break;
+>, <Line: +					case 'w':
+>, <Line: +						if (type === 0) {
+>, <Line: +							roundUp ? dateTime.endOf('week') : dateTime.startOf('week');
+>, <Line: +						} else if (type === 1) {
+>, <Line: +							dateTime.add(num, 'weeks');
+>, <Line: +						} else if (type === 2) {
+>, <Line: +							dateTime.subtract(num, 'weeks');
+>, <Line: +						}
+>, <Line: +						break;
+>, <Line: +					case 'd':
+>, <Line: +						if (type === 0) {
+>, <Line: +							roundUp ? dateTime.endOf('day') : dateTime.startOf('day');
+>, <Line: +						} else if (type === 1) {
+>, <Line: +							dateTime.add(num, 'days');
+>, <Line: +						} else if (type === 2) {
+>, <Line: +							dateTime.subtract(num, 'days');
+>, <Line: +						}
+>, <Line: +						break;
+>, <Line: +					case 'h':
+>, <Line: +					case 'H':
+>, <Line: +						if (type === 0) {
+>, <Line: +							roundUp ? dateTime.endOf('hour') : dateTime.startOf('hour');
+>, <Line: +						} else if (type === 1) {
+>, <Line: +							dateTime.add(num, 'hours');
+>, <Line: +						} else if (type === 2) {
+>, <Line: +							dateTime.subtract(num, 'hours');
+>, <Line: +						}
+>, <Line: +						break;
+>, <Line: +					case 'm':
+>, <Line: +						if (type === 0) {
+>, <Line: +							roundUp ? dateTime.endOf('minute') : dateTime.startOf('minute');
+>, <Line: +						} else if (type === 1) {
+>, <Line: +							dateTime.add(num, 'minutes');
+>, <Line: +						} else if (type === 2) {
+>, <Line: +							dateTime.subtract(num, 'minutes');
+>, <Line: +						}
+>, <Line: +						break;
+>, <Line: +					case 's':
+>, <Line: +						if (type === 0) {
+>, <Line: +							roundUp ? dateTime.endOf('second') : dateTime.startOf('second');
+>, <Line: +						} else if (type === 1) {
+>, <Line: +							dateTime.add(num, 'seconds');
+>, <Line: +						} else if (type === 2) {
+>, <Line: +							dateTime.subtract(num, 'seconds');
+>, <Line: +						}
+>, <Line: +						break;
+>, <Line: +					default:
+>, <Line: +						return false;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			return dateTime.toDate();
+>, <Line: +		};
+>, <Line: +		kbn.query_color_dot = function (color, diameter) {
+>, <Line: +			return '<div class="icon-circle" style="' + [
+>, <Line: +					'display:inline-block',
+>, <Line: +					'color:' + color,
+>, <Line: +					'font-size:' + diameter + 'px',
+>, <Line: +				].join(';') + '"></div>';
+>, <Line: +		};
+>, <Line: +		kbn.valueFormats.percent = function (size, decimals) {
+>, <Line: +			return kbn.toFixed(size, decimals) + '%';
+>, <Line: +		};
+>, <Line: +		kbn.formatFuncCreator = function (factor, extArray) {
+>, <Line: +			return function (size, decimals, scaledDecimals) {
+>, <Line: +				if (size === null) {
+>, <Line: +					return "";
+>, <Line: +				}
+>, <Line: +				var steps = 0;
+>, <Line: +				while (Math.abs(size) >= factor) {
+>, <Line: +					steps++;
+>, <Line: +					size /= factor;
+>, <Line: +				}
+>, <Line: +				if (steps > 0) {
+>, <Line: +					decimals = scaledDecimals + (3 * steps);
+>, <Line: +				}
+>, <Line: +				return kbn.toFixed(size, decimals) + extArray[steps];
+>, <Line: +			};
+>, <Line: +		};
+>, <Line: +		kbn.toFixed = function (value, decimals) {
+>, <Line: +			if (value === null) {
+>, <Line: +				return "";
+>, <Line: +			}
+>, <Line: +			var factor = decimals ? Math.pow(10, Math.max(0, decimals)) : 1;
+>, <Line: +			var formatted = String(Math.round(value * factor) / factor);
+>, <Line: +			// if exponent return directly
+>, <Line: +			if (formatted.indexOf('e') !== -1 || value === 0) {
+>, <Line: +				return formatted;
+>, <Line: +			}
+>, <Line: +			// If tickDecimals was specified, ensure that we have exactly that
+>, <Line: +			// much precision; otherwise default to the value's own precision.
+>, <Line: +			if (decimals != null) {
+>, <Line: +				var decimalPos = formatted.indexOf(".");
+>, <Line: +				var precision = decimalPos === -1 ? 0 : formatted.length - decimalPos - 1;
+>, <Line: +				if (precision < decimals) {
+>, <Line: +					return (precision ? formatted : formatted + ".") + (String(factor)).substr(1, decimals - precision);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			return formatted;
+>, <Line: +		};
+>, <Line: +		kbn.valueFormats.bits = kbn.formatFuncCreator(1024, [' b', ' Kib', ' Mib', ' Gib', ' Tib', ' Pib', ' Eib', ' Zib', ' Yib']);
+>, <Line: +		kbn.valueFormats.bytes = kbn.formatFuncCreator(1024, [' B', ' KiB', ' MiB', ' GiB', ' TiB', ' PiB', ' EiB', ' ZiB', ' YiB']);
+>, <Line: +		kbn.valueFormats.bps = kbn.formatFuncCreator(1000, [' bps', ' Kbps', ' Mbps', ' Gbps', ' Tbps', ' Pbps', ' Ebps', ' Zbps', ' Ybps']);
+>, <Line: +		kbn.valueFormats.short = kbn.formatFuncCreator(1000, ['', ' K', ' Mil', ' Bil', ' Tri', ' Qaudr', ' Quint', ' Sext', ' Sept']);
+>, <Line: +		kbn.valueFormats.none = kbn.toFixed;
+>, <Line: +		kbn.valueFormats.ms = function (size, decimals, scaledDecimals) {
+>, <Line: +			if (size === null) {
+>, <Line: +				return "";
+>, <Line: +			}
+>, <Line: +			if (Math.abs(size) < 1000) {
+>, <Line: +				return kbn.toFixed(size, decimals) + " ms";
+>, <Line: +			}
+>, <Line: +			// Less than 1 min
+>, <Line: +			else if (Math.abs(size) < 60000) {
+>, <Line: +				return kbn.toFixed(size / 1000, scaledDecimals + 3) + " s";
+>, <Line: +			}
+>, <Line: +			// Less than 1 hour, devide in minutes
+>, <Line: +			else if (Math.abs(size) < 3600000) {
+>, <Line: +				return kbn.toFixed(size / 60000, scaledDecimals + 5) + " min";
+>, <Line: +			}
+>, <Line: +			// Less than one day, devide in hours
+>, <Line: +			else if (Math.abs(size) < 86400000) {
+>, <Line: +				return kbn.toFixed(size / 3600000, scaledDecimals + 7) + " hour";
+>, <Line: +			}
+>, <Line: +			// Less than one year, devide in days
+>, <Line: +			else if (Math.abs(size) < 31536000000) {
+>, <Line: +				return kbn.toFixed(size / 86400000, scaledDecimals + 8) + " day";
+>, <Line: +			}
+>, <Line: +			return kbn.toFixed(size / 31536000000, scaledDecimals + 10) + " year";
+>, <Line: +		};
+>, <Line: +		kbn.valueFormats.s = function (size, decimals, scaledDecimals) {
+>, <Line: +			if (size === null) {
+>, <Line: +				return "";
+>, <Line: +			}
+>, <Line: +			if (Math.abs(size) < 600) {
+>, <Line: +				return kbn.toFixed(size, decimals) + " s";
+>, <Line: +			}
+>, <Line: +			// Less than 1 hour, devide in minutes
+>, <Line: +			else if (Math.abs(size) < 3600) {
+>, <Line: +				return kbn.toFixed(size / 60, scaledDecimals + 1) + " min";
+>, <Line: +			}
+>, <Line: +			// Less than one day, devide in hours
+>, <Line: +			else if (Math.abs(size) < 86400) {
+>, <Line: +				return kbn.toFixed(size / 3600, scaledDecimals + 4) + " hour";
+>, <Line: +			}
+>, <Line: +			// Less than one week, devide in days
+>, <Line: +			else if (Math.abs(size) < 604800) {
+>, <Line: +				return kbn.toFixed(size / 86400, scaledDecimals + 5) + " day";
+>, <Line: +			}
+>, <Line: +			// Less than one year, devide in week
+>, <Line: +			else if (Math.abs(size) < 31536000) {
+>, <Line: +				return kbn.toFixed(size / 604800, scaledDecimals + 6) + " week";
+>, <Line: +			}
+>, <Line: +			return kbn.toFixed(size / 3.15569e7, scaledDecimals + 7) + " year";
+>, <Line: +		};
+>, <Line: +		kbn.valueFormats['µs'] = function (size, decimals, scaledDecimals) {
+>, <Line: +			if (size === null) {
+>, <Line: +				return "";
+>, <Line: +			}
+>, <Line: +			if (Math.abs(size) < 1000) {
+>, <Line: +				return kbn.toFixed(size, decimals) + " µs";
+>, <Line: +			}
+>, <Line: +			else if (Math.abs(size) < 1000000) {
+>, <Line: +				return kbn.toFixed(size / 1000, scaledDecimals + 3) + " ms";
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				return kbn.toFixed(size / 1000000, scaledDecimals + 6) + " s";
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		kbn.valueFormats.ns = function (size, decimals, scaledDecimals) {
+>, <Line: +			if (size === null) {
+>, <Line: +				return "";
+>, <Line: +			}
+>, <Line: +			if (Math.abs(size) < 1000) {
+>, <Line: +				return kbn.toFixed(size, decimals) + " ns";
+>, <Line: +			}
+>, <Line: +			else if (Math.abs(size) < 1000000) {
+>, <Line: +				return kbn.toFixed(size / 1000, scaledDecimals + 3) + " µs";
+>, <Line: +			}
+>, <Line: +			else if (Math.abs(size) < 1000000000) {
+>, <Line: +				return kbn.toFixed(size / 1000000, scaledDecimals + 6) + " ms";
+>, <Line: +			}
+>, <Line: +			else if (Math.abs(size) < 60000000000) {
+>, <Line: +				return kbn.toFixed(size / 1000000000, scaledDecimals + 9) + " s";
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				return kbn.toFixed(size / 60000000000, scaledDecimals + 12) + " m";
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		kbn.slugifyForUrl = function (str) {
+>, <Line: +			return str
+>, <Line: +				.toLowerCase()
+>, <Line: +				.replace(/[^\w ]+/g, '')
+>, <Line: +				.replace(/ +/g, '-');
+>, <Line: +		};
+>, <Line: +		kbn.exportSeriesListToCsv = function (seriesList) {
+>, <Line: +			var text = 'Series;Time;Value\n';
+>, <Line: +			_.each(seriesList, function (series) {
+>, <Line: +				_.each(series.datapoints, function (dp) {
+>, <Line: +					text += series.alias + ';' + new Date(dp[1]).toISOString() + ';' + dp[0] + '\n';
+>, <Line: +				});
+>, <Line: +			});
+>, <Line: +			var blob = new Blob([text], {type: "text/csv;charset=utf-8"});
+>, <Line: +			window.saveAs(blob, 'grafana_data_export.csv');
+>, <Line: +		};
+>, <Line: +		kbn.stringToJsRegex = function (str) {
+>, <Line: +			if (str[0] !== '/') {
+>, <Line: +				return new RegExp(str);
+>, <Line: +			}
+>, <Line: +			var match = str.match(new RegExp('^/(.*?)/(g?i?m?y?)$'));
+>, <Line: +			return new RegExp(match[1], match[2]);
+>, <Line: +		};
+>, <Line: +		return kbn;
+>, <Line: +	});
+>]
+[<Line: -  'jquery',
+>, <Line: -  'lodash',
+>, <Line: -  'moment'
+>, <Line: -],
+>, <Line: -function($, _, moment) {
+>, <Line: -  'use strict';
+>, <Line: -  var kbn = {};
+>, <Line: -  kbn.valueFormats = {};
+>, <Line: -  kbn.round_interval = function(interval) {
+>, <Line: -    switch (true) {
+>, <Line: -    // 0.5s
+>, <Line: -    case (interval <= 500):
+>, <Line: -      return 100;       // 0.1s
+>, <Line: -    // 5s
+>, <Line: -    case (interval <= 5000):
+>, <Line: -      return 1000;      // 1s
+>, <Line: -    // 7.5s
+>, <Line: -    case (interval <= 7500):
+>, <Line: -      return 5000;      // 5s
+>, <Line: -    // 15s
+>, <Line: -    case (interval <= 15000):
+>, <Line: -      return 10000;     // 10s
+>, <Line: -    // 45s
+>, <Line: -    case (interval <= 45000):
+>, <Line: -      return 30000;     // 30s
+>, <Line: -    // 3m
+>, <Line: -    case (interval <= 180000):
+>, <Line: -      return 60000;     // 1m
+>, <Line: -    // 9m
+>, <Line: -    case (interval <= 450000):
+>, <Line: -      return 300000;    // 5m
+>, <Line: -    // 20m
+>, <Line: -    case (interval <= 1200000):
+>, <Line: -      return 600000;    // 10m
+>, <Line: -    // 45m
+>, <Line: -    case (interval <= 2700000):
+>, <Line: -      return 1800000;   // 30m
+>, <Line: -    // 2h
+>, <Line: -    case (interval <= 7200000):
+>, <Line: -      return 3600000;   // 1h
+>, <Line: -    // 6h
+>, <Line: -    case (interval <= 21600000):
+>, <Line: -      return 10800000;  // 3h
+>, <Line: -    // 24h
+>, <Line: -    case (interval <= 86400000):
+>, <Line: -      return 43200000;  // 12h
+>, <Line: -    // 48h
+>, <Line: -    case (interval <= 172800000):
+>, <Line: -      return 86400000;  // 24h
+>, <Line: -    // 1w
+>, <Line: -    case (interval <= 604800000):
+>, <Line: -      return 86400000;  // 24h
+>, <Line: -    // 3w
+>, <Line: -    case (interval <= 1814400000):
+>, <Line: -      return 604800000; // 1w
+>, <Line: -    // 2y
+>, <Line: -    case (interval < 3628800000):
+>, <Line: -      return 2592000000; // 30d
+>, <Line: -    default:
+>, <Line: -      return 31536000000; // 1y
+>, <Line: -    }
+>, <Line: -  };
+>, <Line: -  kbn.secondsToHms = function(seconds) {
+>, <Line: -    var numyears = Math.floor(seconds / 31536000);
+>, <Line: -    if(numyears){
+>, <Line: -      return numyears + 'y';
+>, <Line: -    }
+>, <Line: -    var numdays = Math.floor((seconds % 31536000) / 86400);
+>, <Line: -    if(numdays){
+>, <Line: -      return numdays + 'd';
+>, <Line: -    }
+>, <Line: -    var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+>, <Line: -    if(numhours){
+>, <Line: -      return numhours + 'h';
+>, <Line: -    }
+>, <Line: -    var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+>, <Line: -    if(numminutes){
+>, <Line: -      return numminutes + 'm';
+>, <Line: -    }
+>, <Line: -    var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+>, <Line: -    if(numseconds){
+>, <Line: -      return numseconds + 's';
+>, <Line: -    }
+>, <Line: -    return 'less then a second'; //'just now' //or other string you like;
+>, <Line: -  };
+>, <Line: -  kbn.to_percent = function(number,outof) {
+>, <Line: -    return Math.floor((number/outof)*10000)/100 + "%";
+>, <Line: -  };
+>, <Line: -  kbn.addslashes = function(str) {
+>, <Line: -    str = str.replace(/\\/g, '\\\\');
+>, <Line: -    str = str.replace(/\'/g, '\\\'');
+>, <Line: -    str = str.replace(/\"/g, '\\"');
+>, <Line: -    str = str.replace(/\0/g, '\\0');
+>, <Line: -    return str;
+>, <Line: -  };
+>, <Line: -  kbn.interval_regex = /(\d+(?:\.\d+)?)([Mwdhmsy])/;
+>, <Line: -  // histogram & trends
+>, <Line: -  kbn.intervals_in_seconds = {
+>, <Line: -    y: 31536000,
+>, <Line: -    M: 2592000,
+>, <Line: -    w: 604800,
+>, <Line: -    d: 86400,
+>, <Line: -    h: 3600,
+>, <Line: -    m: 60,
+>, <Line: -    s: 1
+>, <Line: -  };
+>, <Line: -  kbn.calculateInterval = function(range, resolution, userInterval) {
+>, <Line: -    var lowLimitMs = 1; // 1 millisecond default low limit
+>, <Line: -    var intervalMs, lowLimitInterval;
+>, <Line: -    if (userInterval) {
+>, <Line: -      if (userInterval[0] === '>') {
+>, <Line: -        lowLimitInterval = userInterval.slice(1);
+>, <Line: -        lowLimitMs = kbn.interval_to_ms(lowLimitInterval);
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        return userInterval;
+>, <Line: -      }
+>, <Line: -    }
+>, <Line: -    intervalMs = kbn.round_interval((range.to.valueOf() - range.from.valueOf()) / resolution);
+>, <Line: -    if (lowLimitMs > intervalMs) {
+>, <Line: -      intervalMs = lowLimitMs;
+>, <Line: -    }
+>, <Line: -    return kbn.secondsToHms(intervalMs / 1000);
+>, <Line: -  };
+>, <Line: -  kbn.describe_interval = function (string) {
+>, <Line: -    var matches = string.match(kbn.interval_regex);
+>, <Line: -    if (!matches || !_.has(kbn.intervals_in_seconds, matches[2])) {
+>, <Line: -      throw new Error('Invalid interval string, expexcting a number followed by one of "Mwdhmsy"');
+>, <Line: -    } else {
+>, <Line: -      return {
+>, <Line: -        sec: kbn.intervals_in_seconds[matches[2]],
+>, <Line: -        type: matches[2],
+>, <Line: -        count: parseInt(matches[1], 10)
+>, <Line: -      };
+>, <Line: -    }
+>, <Line: -  };
+>, <Line: -  kbn.interval_to_ms = function(string) {
+>, <Line: -    var info = kbn.describe_interval(string);
+>, <Line: -    return info.sec * 1000 * info.count;
+>, <Line: -  };
+>, <Line: -  kbn.interval_to_seconds = function (string) {
+>, <Line: -    var info = kbn.describe_interval(string);
+>, <Line: -    return info.sec * info.count;
+>, <Line: -  };
+>, <Line: -  // This should go away, moment.js can do this
+>, <Line: -  kbn.time_ago = function(string) {
+>, <Line: -    return new Date(new Date().getTime() - (kbn.interval_to_ms(string)));
+>, <Line: -  };
+>, <Line: -  /* This is a simplified version of elasticsearch's date parser */
+>, <Line: -  kbn.parseDate = function(text) {
+>, <Line: -    if(_.isDate(text)) {
+>, <Line: -      return text;
+>, <Line: -    }
+>, <Line: -    var time,
+>, <Line: -      mathString = "",
+>, <Line: -      index,
+>, <Line: -      parseString;
+>, <Line: -    if (text.substring(0,3) === "now") {
+>, <Line: -      time = new Date();
+>, <Line: -      mathString = text.substring("now".length);
+>, <Line: -    } else {
+>, <Line: -      index = text.indexOf("||");
+>, <Line: -      parseString;
+>, <Line: -      if (index === -1) {
+>, <Line: -        parseString = text;
+>, <Line: -        mathString = ""; // nothing else
+>, <Line: -      } else {
+>, <Line: -        parseString = text.substring(0, index);
+>, <Line: -        mathString = text.substring(index + 2);
+>, <Line: -      }
+>, <Line: -      // We're going to just require ISO8601 timestamps, k?
+>, <Line: -      time = new Date(parseString);
+>, <Line: -    }
+>, <Line: -    if (!mathString.length) {
+>, <Line: -      return time;
+>, <Line: -    }
+>, <Line: -    //return [time,parseString,mathString];
+>, <Line: -    return kbn.parseDateMath(mathString, time);
+>, <Line: -  };
+>, <Line: -  kbn.parseDateMath = function(mathString, time, roundUp) {
+>, <Line: -    var dateTime = moment(time);
+>, <Line: -    for (var i = 0; i < mathString.length;) {
+>, <Line: -      var c = mathString.charAt(i++),
+>, <Line: -        type,
+>, <Line: -        num,
+>, <Line: -        unit;
+>, <Line: -      if (c === '/') {
+>, <Line: -        type = 0;
+>, <Line: -      } else if (c === '+') {
+>, <Line: -        type = 1;
+>, <Line: -      } else if (c === '-') {
+>, <Line: -        type = 2;
+>, <Line: -      } else {
+>, <Line: -        return false;
+>, <Line: -      }
+>, <Line: -      if (isNaN(mathString.charAt(i))) {
+>, <Line: -        num = 1;
+>, <Line: -      } else {
+>, <Line: -        var numFrom = i;
+>, <Line: -        while (!isNaN(mathString.charAt(i))) {
+>, <Line: -          i++;
+>, <Line: -        }
+>, <Line: -        num = parseInt(mathString.substring(numFrom, i),10);
+>, <Line: -      }
+>, <Line: -      if (type === 0) {
+>, <Line: -        // rounding is only allowed on whole numbers
+>, <Line: -        if (num !== 1) {
+>, <Line: -          return false;
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -      unit = mathString.charAt(i++);
+>, <Line: -      switch (unit) {
+>, <Line: -      case 'y':
+>, <Line: -        if (type === 0) {
+>, <Line: -          roundUp ? dateTime.endOf('year') : dateTime.startOf('year');
+>, <Line: -        } else if (type === 1) {
+>, <Line: -          dateTime.add(num, 'years');
+>, <Line: -        } else if (type === 2) {
+>, <Line: -          dateTime.subtract(num, 'years');
+>, <Line: -        }
+>, <Line: -        break;
+>, <Line: -      case 'M':
+>, <Line: -        if (type === 0) {
+>, <Line: -          roundUp ? dateTime.endOf('month') : dateTime.startOf('month');
+>, <Line: -        } else if (type === 1) {
+>, <Line: -          dateTime.add(num, 'months');
+>, <Line: -        } else if (type === 2) {
+>, <Line: -          dateTime.subtract(num, 'months');
+>, <Line: -        }
+>, <Line: -        break;
+>, <Line: -      case 'w':
+>, <Line: -        if (type === 0) {
+>, <Line: -          roundUp ? dateTime.endOf('week') : dateTime.startOf('week');
+>, <Line: -        } else if (type === 1) {
+>, <Line: -          dateTime.add(num, 'weeks');
+>, <Line: -        } else if (type === 2) {
+>, <Line: -          dateTime.subtract(num, 'weeks');
+>, <Line: -        }
+>, <Line: -        break;
+>, <Line: -      case 'd':
+>, <Line: -        if (type === 0) {
+>, <Line: -          roundUp ? dateTime.endOf('day') : dateTime.startOf('day');
+>, <Line: -        } else if (type === 1) {
+>, <Line: -          dateTime.add(num, 'days');
+>, <Line: -        } else if (type === 2) {
+>, <Line: -          dateTime.subtract(num, 'days');
+>, <Line: -        }
+>, <Line: -        break;
+>, <Line: -      case 'h':
+>, <Line: -      case 'H':
+>, <Line: -        if (type === 0) {
+>, <Line: -          roundUp ? dateTime.endOf('hour') : dateTime.startOf('hour');
+>, <Line: -        } else if (type === 1) {
+>, <Line: -          dateTime.add(num, 'hours');
+>, <Line: -        } else if (type === 2) {
+>, <Line: -          dateTime.subtract(num,'hours');
+>, <Line: -        }
+>, <Line: -        break;
+>, <Line: -      case 'm':
+>, <Line: -        if (type === 0) {
+>, <Line: -          roundUp ? dateTime.endOf('minute') : dateTime.startOf('minute');
+>, <Line: -        } else if (type === 1) {
+>, <Line: -          dateTime.add(num, 'minutes');
+>, <Line: -        } else if (type === 2) {
+>, <Line: -          dateTime.subtract(num, 'minutes');
+>, <Line: -        }
+>, <Line: -        break;
+>, <Line: -      case 's':
+>, <Line: -        if (type === 0) {
+>, <Line: -          roundUp ? dateTime.endOf('second') : dateTime.startOf('second');
+>, <Line: -        } else if (type === 1) {
+>, <Line: -          dateTime.add(num, 'seconds');
+>, <Line: -        } else if (type === 2) {
+>, <Line: -          dateTime.subtract(num, 'seconds');
+>, <Line: -        }
+>, <Line: -        break;
+>, <Line: -      default:
+>, <Line: -        return false;
+>, <Line: -      }
+>, <Line: -    }
+>, <Line: -    return dateTime.toDate();
+>, <Line: -  };
+>, <Line: -  kbn.query_color_dot = function (color, diameter) {
+>, <Line: -    return '<div class="icon-circle" style="' + [
+>, <Line: -      'display:inline-block',
+>, <Line: -      'color:' + color,
+>, <Line: -      'font-size:' + diameter + 'px',
+>, <Line: -    ].join(';') + '"></div>';
+>, <Line: -  };
+>, <Line: -  kbn.valueFormats.percent = function(size, decimals) {
+>, <Line: -    return kbn.toFixed(size, decimals) + '%';
+>, <Line: -  };
+>, <Line: -  kbn.formatFuncCreator = function(factor, extArray) {
+>, <Line: -    return function(size, decimals, scaledDecimals) {
+>, <Line: -      if (size === null) {
+>, <Line: -        return "";
+>, <Line: -      }
+>, <Line: -      var steps = 0;
+>, <Line: -      while (Math.abs(size) >= factor) {
+>, <Line: -        steps++;
+>, <Line: -        size /= factor;
+>, <Line: -      }
+>, <Line: -      if (steps > 0) {
+>, <Line: -        decimals = scaledDecimals + (3 * steps);
+>, <Line: -      }
+>, <Line: -      return kbn.toFixed(size, decimals) + extArray[steps];
+>, <Line: -    };
+>, <Line: -  };
+>, <Line: -  kbn.toFixed = function(value, decimals) {
+>, <Line: -    if (value === null) {
+>, <Line: -      return "";
+>, <Line: -    }
+>, <Line: -    var factor = decimals ? Math.pow(10, Math.max(0, decimals)) : 1;
+>, <Line: -    var formatted = String(Math.round(value * factor) / factor);
+>, <Line: -    // if exponent return directly
+>, <Line: -    if (formatted.indexOf('e') !== -1 || value === 0) {
+>, <Line: -      return formatted;
+>, <Line: -    }
+>, <Line: -    // If tickDecimals was specified, ensure that we have exactly that
+>, <Line: -    // much precision; otherwise default to the value's own precision.
+>, <Line: -    if (decimals != null) {
+>, <Line: -      var decimalPos = formatted.indexOf(".");
+>, <Line: -      var precision = decimalPos === -1 ? 0 : formatted.length - decimalPos - 1;
+>, <Line: -      if (precision < decimals) {
+>, <Line: -        return (precision ? formatted : formatted + ".") + (String(factor)).substr(1, decimals - precision);
+>, <Line: -      }
+>, <Line: -    }
+>, <Line: -    return formatted;
+>, <Line: -  };
+>, <Line: -  kbn.valueFormats.bits = kbn.formatFuncCreator(1024, [' b', ' Kib', ' Mib', ' Gib', ' Tib', ' Pib', ' Eib', ' Zib', ' Yib']);
+>, <Line: -  kbn.valueFormats.bytes = kbn.formatFuncCreator(1024, [' B', ' KiB', ' MiB', ' GiB', ' TiB', ' PiB', ' EiB', ' ZiB', ' YiB']);
+>, <Line: -  kbn.valueFormats.bps = kbn.formatFuncCreator(1000, [' bps', ' Kbps', ' Mbps', ' Gbps', ' Tbps', ' Pbps', ' Ebps', ' Zbps', ' Ybps']);
+>, <Line: -  kbn.valueFormats.short = kbn.formatFuncCreator(1000, ['', ' K', ' Mil', ' Bil', ' Tri', ' Qaudr', ' Quint', ' Sext', ' Sept']);
+>, <Line: -  kbn.valueFormats.none = kbn.toFixed;
+>, <Line: -  kbn.valueFormats.ms = function(size, decimals, scaledDecimals) {
+>, <Line: -    if (size === null) { return ""; }
+>, <Line: -    if (Math.abs(size) < 1000) {
+>, <Line: -      return kbn.toFixed(size, decimals) + " ms";
+>, <Line: -    }
+>, <Line: -    // Less than 1 min
+>, <Line: -    else if (Math.abs(size) < 60000) {
+>, <Line: -      return kbn.toFixed(size / 1000, scaledDecimals + 3) + " s";
+>, <Line: -    }
+>, <Line: -    // Less than 1 hour, devide in minutes
+>, <Line: -    else if (Math.abs(size) < 3600000) {
+>, <Line: -      return kbn.toFixed(size / 60000, scaledDecimals + 5) + " min";
+>, <Line: -    }
+>, <Line: -    // Less than one day, devide in hours
+>, <Line: -    else if (Math.abs(size) < 86400000) {
+>, <Line: -      return kbn.toFixed(size / 3600000, scaledDecimals + 7) + " hour";
+>, <Line: -    }
+>, <Line: -    // Less than one year, devide in days
+>, <Line: -    else if (Math.abs(size) < 31536000000) {
+>, <Line: -      return kbn.toFixed(size / 86400000, scaledDecimals + 8) + " day";
+>, <Line: -    }
+>, <Line: -    return kbn.toFixed(size / 31536000000, scaledDecimals + 10) + " year";
+>, <Line: -  };
+>, <Line: -  kbn.valueFormats.s = function(size, decimals, scaledDecimals) {
+>, <Line: -    if (size === null) { return ""; }
+>, <Line: -    if (Math.abs(size) < 600) {
+>, <Line: -      return kbn.toFixed(size, decimals) + " s";
+>, <Line: -    }
+>, <Line: -    // Less than 1 hour, devide in minutes
+>, <Line: -    else if (Math.abs(size) < 3600) {
+>, <Line: -      return kbn.toFixed(size / 60, scaledDecimals + 1) + " min";
+>, <Line: -    }
+>, <Line: -    // Less than one day, devide in hours
+>, <Line: -    else if (Math.abs(size) < 86400) {
+>, <Line: -      return kbn.toFixed(size / 3600, scaledDecimals + 4) + " hour";
+>, <Line: -    }
+>, <Line: -    // Less than one week, devide in days
+>, <Line: -    else if (Math.abs(size) < 604800) {
+>, <Line: -      return kbn.toFixed(size / 86400, scaledDecimals + 5) + " day";
+>, <Line: -    }
+>, <Line: -    // Less than one year, devide in week
+>, <Line: -    else if (Math.abs(size) < 31536000) {
+>, <Line: -      return kbn.toFixed(size / 604800, scaledDecimals + 6) + " week";
+>, <Line: -    }
+>, <Line: -    return kbn.toFixed(size / 3.15569e7, scaledDecimals + 7) + " year";
+>, <Line: -  };
+>, <Line: -  kbn.valueFormats['µs'] = function(size, decimals, scaledDecimals) {
+>, <Line: -    if (size === null) { return ""; }
+>, <Line: -    if (Math.abs(size) < 1000) {
+>, <Line: -      return kbn.toFixed(size, decimals) + " µs";
+>, <Line: -    }
+>, <Line: -    else if (Math.abs(size) < 1000000) {
+>, <Line: -      return kbn.toFixed(size / 1000, scaledDecimals + 3) + " ms";
+>, <Line: -    }
+>, <Line: -    else {
+>, <Line: -      return kbn.toFixed(size / 1000000, scaledDecimals + 6) + " s";
+>, <Line: -    }
+>, <Line: -  };
+>, <Line: -  kbn.valueFormats.ns = function(size, decimals, scaledDecimals) {
+>, <Line: -    if (size === null) { return ""; }
+>, <Line: -    if (Math.abs(size) < 1000) {
+>, <Line: -      return kbn.toFixed(size, decimals) + " ns";
+>, <Line: -    }
+>, <Line: -    else if (Math.abs(size) < 1000000) {
+>, <Line: -      return kbn.toFixed(size / 1000, scaledDecimals + 3) + " µs";
+>, <Line: -    }
+>, <Line: -    else if (Math.abs(size) < 1000000000) {
+>, <Line: -      return kbn.toFixed(size / 1000000, scaledDecimals + 6) + " ms";
+>, <Line: -    }
+>, <Line: -    else if (Math.abs(size) < 60000000000){
+>, <Line: -      return kbn.toFixed(size / 1000000000, scaledDecimals + 9) + " s";
+>, <Line: -    }
+>, <Line: -    else {
+>, <Line: -      return kbn.toFixed(size / 60000000000, scaledDecimals + 12) + " m";
+>, <Line: -    }
+>, <Line: -  };
+>, <Line: -  kbn.slugifyForUrl = function(str) {
+>, <Line: -    return str
+>, <Line: -      .toLowerCase()
+>, <Line: -      .replace(/[^\w ]+/g,'')
+>, <Line: -      .replace(/ +/g,'-');
+>, <Line: -  };
+>, <Line: -  kbn.exportSeriesListToCsv = function(seriesList) {
+>, <Line: -    var text = 'Series;Time;Value\n';
+>, <Line: -    _.each(seriesList, function(series) {
+>, <Line: -      _.each(series.datapoints, function(dp) {
+>, <Line: -        text += series.alias + ';' + new Date(dp[1]).toISOString() + ';' + dp[0] + '\n';
+>, <Line: -      });
+>, <Line: -    });
+>, <Line: -    var blob = new Blob([text], { type: "text/csv;charset=utf-8" });
+>, <Line: -    window.saveAs(blob, 'grafana_data_export.csv');
+>, <Line: -  };
+>, <Line: -  kbn.stringToJsRegex = function(str) {
+>, <Line: -    if (str[0] !== '/') {
+>, <Line: -      return new RegExp(str);
+>, <Line: -    }
+>, <Line: -    var match = str.match(new RegExp('^/(.*?)/(g?i?m?y?)$'));
+>, <Line: -    return new RegExp(match[1], match[2]);
+>, <Line: -  };
+>, <Line: -  return kbn;
+>, <Line: -});
+>]

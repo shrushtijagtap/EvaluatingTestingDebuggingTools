@@ -1,0 +1,7 @@
+[<Line: +                    exception.printStackTrace();
+>]
+[<Line: -import java.util.logging.Level;
+>, <Line: -import java.util.logging.Logger;
+>, <Line: -                Logger.getLogger("net.bytebuddy").log(Level.WARNING, "Could not enable dumping of class files", exception);
+>, <Line: -                    Logger.getLogger("net.bytebuddy").log(Level.WARNING, "Could not dump class file for " + instrumentedType, exception);
+>]

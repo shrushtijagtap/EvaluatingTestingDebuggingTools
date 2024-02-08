@@ -1,0 +1,68 @@
+[<Line: +						metricMatcher: {
+>, <Line: +							name: "external_request_response_time",
+>, <Line: +							type: "jdbc"
+>, <Line: +						},
+>, <Line: +						groupBy: "signature",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "external_request_response_time",
+>, <Line: +							type: "jdbc"
+>, <Line: +						},
+>, <Line: +						groupBy: "signature",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "external_request_response_time",
+>, <Line: +							type: "jdbc"
+>, <Line: +						},
+>, <Line: +						groupBy: "signature",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "external_request_response_time",
+>, <Line: +							type: "jdbc"
+>, <Line: +						},
+>, <Line: +						groupBy: "signature",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "external_request_response_time",
+>, <Line: +							type: "jdbc"
+>, <Line: +						},
+>, <Line: +						groupBy: "signature",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "external_request_response_time",
+>, <Line: +							type: "jdbc"
+>, <Line: +						},
+>, <Line: +						groupBy: "signature",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "external_request_response_time",
+>, <Line: +							type: "jdbc"
+>, <Line: +						},
+>, <Line: +						groupBy: "signature",
+>, <Line: +						metric: "std",
+>, <Line: +									{
+>, <Line: +										metricPathRegex: "external_request_response_time.jdbc.(${rowName})",
+>, <Line: +										metricMatcher: {
+>, <Line: +											name: "external_request_response_time",
+>, <Line: +											type: "jdbc",
+>, <Line: +											signature: "${rowName}"
+>, <Line: +										},
+>, <Line: +										groupBy: "signature",
+>, <Line: +										metric: "mean"
+>, <Line: +									}
+>, <Line: +									{
+>, <Line: +										metricPathRegex: "external_request_response_time.jdbc.(${rowName})",
+>, <Line: +										metricMatcher: {
+>, <Line: +											name: "external_request_response_time",
+>, <Line: +											type: "jdbc",
+>, <Line: +											signature: "${rowName}"
+>, <Line: +										},
+>, <Line: +										groupBy: "signature",
+>, <Line: +										metric: "m1_rate"
+>, <Line: +									}
+>]
+[<Line: -						metricCategory: "timers",
+>, <Line: -						metricCategory: "timers",
+>, <Line: -						metricCategory: "timers",
+>, <Line: -						metricCategory: "timers",
+>, <Line: -						metricCategory: "timers",
+>, <Line: -						metricCategory: "timers",
+>, <Line: -						metricCategory: "timers",
+>, <Line: -						metric: "stddev",
+>, <Line: -									{ metricCategory: "timers", metricPathRegex: "external_request_response_time.jdbc.(${rowName})", metric: "mean" }
+>, <Line: -									{ metricCategory: "timers", metricPathRegex: "external_request_response_time.jdbc.(${rowName})", metric: "m1_rate"}
+>]

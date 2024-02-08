@@ -1,0 +1,29 @@
+[<Line: +        <version.maven>3.2.5</version.maven>
+>, <Line: +                    <parallelThreads>3</parallelThreads>
+>, <Line: +                <version>3.2.2</version>
+>, <Line: +            <version>3.3</version>
+>, <Line: +            <version>2.0.3</version>
+>, <Line: +            <version>1.5.5</version>
+>, <Line: +            <version>3.0.17</version>
+>, <Line: +            <version>1.0.0.v20140518</version>
+>, <Line: +            <version>1.7.7</version>
+>, <Line: +            <version>17.0</version>
+>, <Line: +            <version>3.18.2-GA</version>
+>, <Line: +            <version>1.9.5</version>
+>, <Line: +            <version>3.1.0</version>
+>, <Line: +            <version>1.8.0.RELEASE</version>
+>]
+[<Line: -        <version.maven>3.3.9</version.maven>
+>, <Line: -                <version>3.2.6</version>
+>, <Line: -            <version>3.4</version>
+>, <Line: -            <version>3.0.1</version>
+>, <Line: -            <version>1.6</version>
+>, <Line: -            <version>3.0.22</version>
+>, <Line: -            <version>1.1.0</version>
+>, <Line: -            <version>1.7.16</version>
+>, <Line: -            <version>19.0</version>
+>, <Line: -            <version>3.20.0-GA</version>
+>, <Line: -            <version>1.10.19</version>
+>, <Line: -            <version>3.3.0</version>
+>, <Line: -            <version>1.11.2.RELEASE</version>
+>]

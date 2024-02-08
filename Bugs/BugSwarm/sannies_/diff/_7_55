@@ -1,0 +1,42 @@
+[<Line: +package org.mp4parser.examples.commonencryption;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.muxer.InMemRandomAccessSourceImpl;
+>, <Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import org.mp4parser.muxer.container.mp4.MovieCreator;
+>, <Line: +import org.mp4parser.muxer.tracks.CencDecryptingTrackImpl;
+>, <Line: +import org.mp4parser.muxer.tracks.CencEncryptedTrack;
+>, <Line: +import org.mp4parser.muxer.tracks.CencEncryptingTrackImpl;
+>, <Line: +import org.mp4parser.tools.ByteBufferByteChannel;
+>, <Line: + * This examples
+>, <Line: + * <ol>
+>, <Line: + * <li>reads an MP4 file into a movie object</li>
+>, <Line: + * <li>creates an encrypted representation from plain representation</li>
+>, <Line: + * <li>writes the encrypted representation into a byte array</li>
+>, <Line: + * <li>reads the encrypted representation into a movie object</li>
+>, <Line: + * <li>creates a plain representation from an encrypted representation</li>
+>, <Line: + * <li>writes the decrypted representation to a file</li>
+>, <Line: + * </ol>
+>, <Line: +        // (1) READING
+>, <Line: +        // (2) ENCRYPT
+>, <Line: +        SecretKey sk = new SecretKeySpec(new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, "AES");
+>, <Line: +        // (3) WRITE ENCRYPTED
+>, <Line: +        /// (4) READ ENCRYPTED
+>, <Line: +        Movie mEncryptIn = MovieCreator.build(new ByteBufferByteChannel(baos.toByteArray()), new InMemRandomAccessSourceImpl(baos.toByteArray()), "inmem");
+>, <Line: +        // (5) DECRYPT
+>, <Line: +        // (6) WRITE PLAIN
+>]
+[<Line: -package com.googlecode.mp4parser;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.CencDecryptingTrackImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.CencEncryptingTrackImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.CencEncryptedTrack;
+>, <Line: - * Created by user on 22.07.2014.
+>, <Line: -        SecretKey sk = new SecretKeySpec(new byte[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, "AES");
+>, <Line: -        Movie mEncryptIn = MovieCreator.build (new MemoryDataSourceImpl(baos.toByteArray()));
+>]

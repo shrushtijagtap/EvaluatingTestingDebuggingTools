@@ -1,0 +1,57 @@
+[]
+[<Line: -/*
+>, <Line: - * Copyright 2012 Sebastian Annies, Hamburg
+>, <Line: - *
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the License);
+>, <Line: - * you may not use this file except in compliance with the License.
+>, <Line: - * You may obtain a copy of the License at
+>, <Line: - *
+>, <Line: - *     http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - *
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an AS IS BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - * See the License for the specific language governing permissions and
+>, <Line: - * limitations under the License.
+>, <Line: - */
+>, <Line: -package com.googlecode.mp4parser.authoring.builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.util.Mp4Arrays;
+>, <Line: -import java.util.Arrays;
+>, <Line: -/**
+>, <Line: - * Finds start samples within a given track so that:
+>, <Line: - * <ul>
+>, <Line: - * <li>Each segment is at least <code>fragmentLength</code> seconds long</li>
+>, <Line: - * <li>The last segment might be almost twice the size of the rest</li>
+>, <Line: - * </ul>
+>, <Line: - */
+>, <Line: -public class DefaultFragmenterImpl implements Fragmenter {
+>, <Line: -    private double fragmentLength = 2.0D;
+>, <Line: -    public DefaultFragmenterImpl(double fragmentLength) {
+>, <Line: -        this.fragmentLength = fragmentLength;
+>, <Line: -    }
+>, <Line: -    public long[] sampleNumbers(Track track) {
+>, <Line: -        long[] segmentStartSamples = new long[]{1L};
+>, <Line: -        long[] sampleDurations = track.getSampleDurations();
+>, <Line: -        long[] syncSamples = track.getSyncSamples();
+>, <Line: -        long timescale = track.getTrackMetaData().getTimescale();
+>, <Line: -        double time = 0.0D;
+>, <Line: -        for (int i = 0; i < sampleDurations.length; ++i) {
+>, <Line: -            time += (double) sampleDurations[i] / (double) timescale;
+>, <Line: -            if (time >= this.fragmentLength && (syncSamples == null || Arrays.binarySearch(syncSamples, (long) (i + 1)) >= 0)) {
+>, <Line: -                if (i > 0) {
+>, <Line: -                    segmentStartSamples = Mp4Arrays.copyOfAndAppend(segmentStartSamples, (long) (i + 1));
+>, <Line: -                }
+>, <Line: -                time = 0.0D;
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        // In case the last Fragment is shorter: make the previous one a bigger and omit the small one
+>, <Line: -        if (time > 0 && segmentStartSamples.length > 1) {
+>, <Line: -            long[] nuSegmentStartSamples = new long[segmentStartSamples.length - 1];
+>, <Line: -            System.arraycopy(segmentStartSamples, 0, nuSegmentStartSamples, 0, segmentStartSamples.length - 1);
+>, <Line: -            segmentStartSamples = nuSegmentStartSamples;
+>, <Line: -        }
+>, <Line: -        return segmentStartSamples;
+>, <Line: -    }
+>, <Line: -}
+>]

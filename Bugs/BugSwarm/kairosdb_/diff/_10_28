@@ -1,0 +1,6 @@
+[<Line: +import org.kairosdb.core.datastore.ServiceKeyStore;
+>, <Line: +import javax.validation.constraints.Null;
+>, <Line: +import javax.xml.ws.Service;
+>, <Line: +		bind(ServiceKeyStore.class).to(NullServiceKeyStore.class);
+>]
+[]

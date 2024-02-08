@@ -1,0 +1,88 @@
+[]
+[<Line: -/*
+>, <Line: - * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: - *
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: - * you may not use this file except in compliance with the License.
+>, <Line: - * You may obtain a copy of the License at
+>, <Line: - *
+>, <Line: - *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - *
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - * See the License for the specific language governing permissions and
+>, <Line: - * limitations under the License.
+>, <Line: - */
+>, <Line: -package com.github.rinde.rinsim.ui.renderers;
+>, <Line: -import static java.util.Objects.requireNonNull;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Map;
+>, <Line: -import java.util.Map.Entry;
+>, <Line: -import javax.annotation.Nullable;
+>, <Line: -import org.eclipse.swt.SWT;
+>, <Line: -import org.eclipse.swt.graphics.GC;
+>, <Line: -import com.github.rinde.rinsim.core.model.ModelProvider;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.GridRoadModel;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.RoadUser;
+>, <Line: -import com.github.rinde.rinsim.geom.Point;
+>, <Line: -import com.google.common.base.Optional;
+>, <Line: -public class GridRoadModelRenderer implements ModelRenderer {
+>, <Line: -  Optional<GridRoadModel> model;
+>, <Line: -  GridRoadModelRenderer() {
+>, <Line: -    model = Optional.absent();
+>, <Line: -  }
+>, <Line: -  @Override
+>, <Line: -  public void registerModelProvider(ModelProvider mp) {
+>, <Line: -    model = Optional.of(requireNonNull(mp.getModel(GridRoadModel.class),
+>, <Line: -        "GridRoadModel could not be found."));
+>, <Line: -  }
+>, <Line: -  @Override
+>, <Line: -  public void renderStatic(GC gc, ViewPort vp) {
+>, <Line: -    gc.setForeground(gc.getDevice().getSystemColor(SWT.COLOR_GRAY));
+>, <Line: -    final int xMin = vp.toCoordX(model.get().getCellSize() / -2);
+>, <Line: -    final int xMax = vp.toCoordX(model.get().getNumXCells()
+>, <Line: -        * model.get().getCellSize() - model.get().getCellSize() / 2);
+>, <Line: -    final int yMin = vp.toCoordY(model.get().getCellSize() / -2);
+>, <Line: -    final int yMax = vp.toCoordY(model.get().getNumYCells()
+>, <Line: -        * model.get().getCellSize() - model.get().getCellSize() / 2);
+>, <Line: -    for (int j = 0; j < model.get().getNumYCells() + 1; j++) {
+>, <Line: -      final int y = vp.toCoordY(j * model.get().getCellSize()
+>, <Line: -          - model.get().getCellSize() / 2);
+>, <Line: -      gc.drawLine(xMin, y, xMax, y);
+>, <Line: -    }
+>, <Line: -    for (int i = 0; i < model.get().getNumXCells() + 1; i++) {
+>, <Line: -      final int x = vp.toCoordY(i * model.get().getCellSize()
+>, <Line: -          - model.get().getCellSize() / 2);
+>, <Line: -      gc.drawLine(x, yMin, x, yMax);
+>, <Line: -    }
+>, <Line: -    // gc.setForeground(gc.getDevice().getSystemColor(SWT.COLOR_BLACK));
+>, <Line: -    // for (int i = 0; i < model.get().getNumXCells(); i++) {
+>, <Line: -    // for (int j = 0; j < model.get().getNumYCells(); j++) {
+>, <Line: -    // final int x = vp.toCoordY(i * model.get().getCellSize());
+>, <Line: -    // final int y = vp.toCoordY(j * model.get().getCellSize());
+>, <Line: -    // gc.drawOval(x - 2, y - 2, 4, 4);
+>, <Line: -    // }
+>, <Line: -    // }
+>, <Line: -  }
+>, <Line: -  @Override
+>, <Line: -  public void renderDynamic(GC gc, ViewPort vp, long time) {
+>, <Line: -    // TODO Auto-generated method stub
+>, <Line: -    final Map<RoadUser, Point> objPos = model.get().getObjectsAndPositions();
+>, <Line: -    for (final Entry<RoadUser, Point> entry : objPos.entrySet()) {
+>, <Line: -    }
+>, <Line: -  }
+>, <Line: -  private static final double MARGIN_CELL_SIZE_PERC = .25;
+>, <Line: -  @Nullable
+>, <Line: -  @Override
+>, <Line: -  public ViewRect getViewRect() {
+>, <Line: -    final List<Point> bounds = model.get().getBounds();
+>, <Line: -    final double margin = MARGIN_CELL_SIZE_PERC * model.get().getCellSize();
+>, <Line: -    final Point min = new Point(bounds.get(0).x - margin, bounds.get(0).y
+>, <Line: -        - margin);
+>, <Line: -    final Point max = new Point(bounds.get(1).x + margin, bounds.get(1).y
+>, <Line: -        + margin);
+>, <Line: -    return new ViewRect(min, max);
+>, <Line: -  }
+>, <Line: -}
+>]

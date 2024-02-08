@@ -1,0 +1,6 @@
+[<Line: +            if (!isPresent(mapConfig.getMantaKeyPath())
+>, <Line: +                    && isPresent(envConfig.getPrivateKeyContent())) {
+>]
+[<Line: -            if (!isPresent(mapConfig.getMantaKeyPath()) &&
+>, <Line: -                    isPresent(envConfig.getPrivateKeyContent())) {
+>]

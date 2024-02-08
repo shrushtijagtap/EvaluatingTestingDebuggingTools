@@ -1,0 +1,32 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.BoxParser;
+>, <Line: +import org.mp4parser.FullBox;
+>, <Line: +import org.mp4parser.boxes.sampleentry.AbstractSampleEntry;
+>, <Line: +import org.mp4parser.boxes.sampleentry.AudioSampleEntry;
+>, <Line: +import org.mp4parser.boxes.sampleentry.TextSampleEntry;
+>, <Line: +import org.mp4parser.boxes.sampleentry.VisualSampleEntry;
+>, <Line: +import org.mp4parser.support.AbstractContainerBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import java.nio.channels.ReadableByteChannel;
+>, <Line: + * @see VisualSampleEntry
+>, <Line: + * @see TextSampleEntry
+>, <Line: + * @see AudioSampleEntry
+>, <Line: +    private int version;
+>, <Line: +    private int flags;
+>, <Line: +    public void parse(ReadableByteChannel dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.boxes.sampleentry.AbstractSampleEntry;
+>, <Line: -import com.googlecode.mp4parser.AbstractContainerBox;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: - * @see com.coremedia.iso.boxes.sampleentry.VisualSampleEntry
+>, <Line: - * @see com.coremedia.iso.boxes.sampleentry.TextSampleEntry
+>, <Line: - * @see com.coremedia.iso.boxes.sampleentry.AudioSampleEntry
+>, <Line: -    private int version;
+>, <Line: -    private int flags;
+>, <Line: -    public void parse(DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>]

@@ -1,0 +1,30 @@
+[<Line: +        when(prepend.mergeReader(FOO)).thenReturn(BAR);
+>, <Line: +        when(wrapper.mergeReader(BAR)).thenReturn(QUX);
+>, <Line: +        when(append.mergeReader(QUX)).thenReturn(BAZ);
+>, <Line: +        when(prepend.mergeWriter(FOO)).thenReturn(BAR);
+>, <Line: +        when(wrapper.mergeWriter(BAR)).thenReturn(QUX);
+>, <Line: +        when(append.mergeWriter(QUX)).thenReturn(BAZ);
+>, <Line: +        assertThat(chain.mergeReader(FOO), is(BAZ));
+>, <Line: +        verify(prepend).mergeReader(FOO);
+>, <Line: +        verify(wrapper).mergeReader(BAR);
+>, <Line: +        verify(append).mergeReader(QUX);
+>, <Line: +        assertThat(chain.mergeWriter(FOO), is(BAZ));
+>, <Line: +        verify(prepend).mergeWriter(FOO);
+>, <Line: +        verify(wrapper).mergeWriter(BAR);
+>, <Line: +        verify(append).mergeWriter(QUX);
+>]
+[<Line: -        when(prepend.wrapReader(FOO)).thenReturn(BAR);
+>, <Line: -        when(wrapper.wrapReader(BAR)).thenReturn(QUX);
+>, <Line: -        when(append.wrapReader(QUX)).thenReturn(BAZ);
+>, <Line: -        when(prepend.wrapWriter(FOO)).thenReturn(BAR);
+>, <Line: -        when(wrapper.wrapWriter(BAR)).thenReturn(QUX);
+>, <Line: -        when(append.wrapWriter(QUX)).thenReturn(BAZ);
+>, <Line: -        assertThat(chain.wrapReader(FOO), is(BAZ));
+>, <Line: -        verify(prepend).wrapReader(FOO);
+>, <Line: -        verify(wrapper).wrapReader(BAR);
+>, <Line: -        verify(append).wrapReader(QUX);
+>, <Line: -        assertThat(chain.wrapWriter(FOO), is(BAZ));
+>, <Line: -        verify(prepend).wrapWriter(FOO);
+>, <Line: -        verify(wrapper).wrapWriter(BAR);
+>, <Line: -        verify(append).wrapWriter(QUX);
+>]

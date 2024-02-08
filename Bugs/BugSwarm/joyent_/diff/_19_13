@@ -1,0 +1,15 @@
+[<Line: +                             Integer mantaTimeout,
+>, <Line: +                             String mantaHttpTransport) {
+>, <Line: +                mantaKeyId, mantaTimeout, 6, mantaHttpTransport));
+>, <Line: +                                          Integer mantaTimeout,
+>, <Line: +                                          Integer retries,
+>, <Line: +                                          String mantaHttpTransport) {
+>, <Line: +                .setTimeout(mantaTimeout)
+>, <Line: +                .setRetries(retries)
+>, <Line: +                .setHttpTransport(mantaHttpTransport);
+>]
+[<Line: -                             Integer mantaTimeout) {
+>, <Line: -                mantaKeyId, mantaTimeout));
+>, <Line: -                                          Integer mantaTimeout) {
+>, <Line: -                .setTimeout(mantaTimeout);
+>]

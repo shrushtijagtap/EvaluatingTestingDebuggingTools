@@ -1,0 +1,28 @@
+[<Line: +| Default                          | TestNG Param   | System Property   | Environment Variable      |
+>, <Line: +|----------------------------------|----------------|-------------------|---------------------------|
+>, <Line: +| https://us-east.manta.joyent.com | manta.url      | manta.url         | MANTA_URL                 |
+>, <Line: +|                                  | manta.user     | manta.user        | MANTA_USER                |
+>, <Line: +|                                  | manta.key_id   | manta.key_id      | MANTA_KEY_ID              |
+>, <Line: +|                                  | manta.key_path | manta.key_path    | MANTA_KEY_PATH            |
+>, <Line: +|                                  |                | manta.key_content | MANTA_KEY_CONTENT         |
+>, <Line: +|                                  |                | manta.password    | MANTA_PASSWORD            |
+>, <Line: +| 20000                            | manta.timeout  | manta.timeout     | MANTA_TIMEOUT             |
+>, <Line: +| 3 (6 for integration tests)      |                | manta.retries     | MANTA_HTTP_RETRIES        |
+>, <Line: +* `manta.key_path` ( **MANTA_KEY_PATH**)
+>, <Line: +* `manta.key_content` ( **MANTA_KEY_CONTENT**)
+>, <Line: +The content of the private key as a string. This is an alternative to `manta.key_path`. Both
+>, <Line: +`manta.key_path` and can't be specified at the same time `manta.key_content`.
+>, <Line: +* `manta.password` ( **MANTA_PASSWORD**)
+>, <Line: +The password associated with the key specified. This is optional and not normally needed.
+>, <Line: +* `manta.retries` ( **MANTA_HTTP_RETRIES**)
+>, <Line: +The number of times to retry failed HTTP requests.
+>]
+[<Line: -| Default                          | TestNG Param   | System Property | Environment Variable |
+>, <Line: -|----------------------------------|----------------|-----------------|----------------------|
+>, <Line: -| https://us-east.manta.joyent.com | manta.url      | manta.url       | MANTA_URL            |
+>, <Line: -|                                  | manta.user     | manta.user      | MANTA_USER           |
+>, <Line: -|                                  | manta.key_id   | manta.key_id    | MANTA_KEY_ID         |
+>, <Line: -|                                  | manta.key_path | manta.key_path  | MANTA_KEY_PATH       |
+>, <Line: -| 20000                            | manta.timeout  | manta.timeout   | MANTA_TIMEOUT        | 
+>, <Line: -* `manta.key_path` ( **MANTA_KEY_PATH** )
+>]

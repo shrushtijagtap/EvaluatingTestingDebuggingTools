@@ -1,0 +1,6 @@
+[<Line: +import com.github.davidmoten.rx.jdbc.exceptions.SQLRuntimeException;
+>, <Line: +        if (query.context().batchSize() > 1 && !query.context().isTransactionOpen()) {
+>, <Line: +            throw new SQLRuntimeException("batching can only be performed within a transaction");
+>, <Line: +        }
+>]
+[]

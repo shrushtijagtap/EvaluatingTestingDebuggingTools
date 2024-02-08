@@ -1,0 +1,12 @@
+[<Line: +		{
+>, <Line: +			"name": "<metric_name>",
+>, <Line: +			"order": "desc",
+>, <Line: +			"aggregators":[
+>, <Line: +				{
+>, <Line: +					"name":"rate",
+>, <Line: +					"unit": "milliseconds"
+>, <Line: +				}
+>, <Line: +			]
+>, <Line: +		},
+>]
+[]

@@ -1,0 +1,24 @@
+[<Line: +     * @return the UsageListResultInner object wrapped in {@link ServiceResponse} if successful.
+>, <Line: +    public ServiceResponse<UsageListResultInner> list() throws CloudException, IOException, IllegalArgumentException {
+>, <Line: +        return listDelegate(call.execute());
+>, <Line: +    public ServiceCall listAsync(final ServiceCallback<UsageListResultInner> serviceCallback) throws IllegalArgumentException {
+>, <Line: +        call.enqueue(new ServiceResponseCallback<UsageListResultInner>(serviceCallback) {
+>, <Line: +                    serviceCallback.success(listDelegate(response));
+>, <Line: +    private ServiceResponse<UsageListResultInner> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+>, <Line: +        return new AzureServiceResponseBuilder<UsageListResultInner, CloudException>(this.client.restClient().mapperAdapter())
+>, <Line: +                .register(200, new TypeToken<UsageListResultInner>() { }.getType())
+>]
+[<Line: -import java.util.List;
+>, <Line: -     * @return the List&lt;UsageInner&gt; object wrapped in {@link ServiceResponse} if successful.
+>, <Line: -    public ServiceResponse<List<UsageInner>> list() throws CloudException, IOException, IllegalArgumentException {
+>, <Line: -        ServiceResponse<PageImpl<UsageInner>> response = listDelegate(call.execute());
+>, <Line: -        List<UsageInner> result = response.getBody().getItems();
+>, <Line: -        return new ServiceResponse<>(result, response.getResponse());
+>, <Line: -    public ServiceCall listAsync(final ServiceCallback<List<UsageInner>> serviceCallback) throws IllegalArgumentException {
+>, <Line: -        call.enqueue(new ServiceResponseCallback<List<UsageInner>>(serviceCallback) {
+>, <Line: -                    ServiceResponse<PageImpl<UsageInner>> result = listDelegate(response);
+>, <Line: -                    serviceCallback.success(new ServiceResponse<>(result.getBody().getItems(), result.getResponse()));
+>, <Line: -    private ServiceResponse<PageImpl<UsageInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
+>, <Line: -        return new AzureServiceResponseBuilder<PageImpl<UsageInner>, CloudException>(this.client.restClient().mapperAdapter())
+>, <Line: -                .register(200, new TypeToken<PageImpl<UsageInner>>() { }.getType())
+>]

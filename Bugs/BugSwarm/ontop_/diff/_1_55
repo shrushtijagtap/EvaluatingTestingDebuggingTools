@@ -1,0 +1,8 @@
+[<Line: +import it.unibz.krdb.obda.model.OBDASQLQuery;
+>, <Line: +	private OBDASQLQuery sourceQuery = null;
+>, <Line: +	public SourceQueryValidator(OBDADataSource source, OBDASQLQuery q) {
+>]
+[<Line: -import it.unibz.krdb.obda.model.OBDAQuery;
+>, <Line: -	private OBDAQuery sourceQuery = null;
+>, <Line: -	public SourceQueryValidator(OBDADataSource source, OBDAQuery q) {
+>]

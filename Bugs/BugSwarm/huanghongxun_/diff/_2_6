@@ -1,0 +1,4 @@
+[<Line: +                        .append(new FileDownloadTask(service.getDownloadType().getProvider().getParsedDownloadURL(v.installer), filepath).setTag("forge"))
+>]
+[<Line: -                        .append(new FileDownloadTask(service.getDownloadType().getProvider().getParsedLibraryDownloadURL(v.installer), filepath).setTag("forge"))
+>]

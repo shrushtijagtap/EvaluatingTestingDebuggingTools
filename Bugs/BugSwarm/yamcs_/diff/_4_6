@@ -1,0 +1,23 @@
+[<Line: +package org.yamcs.web;
+>, <Line: +import io.netty.handler.codec.http.HttpResponseStatus;
+>, <Line: +/**
+>, <Line: + * Something really wrong and unexpected occurred on the server. A bug.
+>, <Line: + */
+>, <Line: +public class ServiceUnavailableException extends HttpException {
+>, <Line: +    private static final long serialVersionUID = 1L;
+>, <Line: +    public ServiceUnavailableException(Throwable t) {
+>, <Line: +        super(t);
+>, <Line: +    }
+>, <Line: +    public ServiceUnavailableException(String message) {
+>, <Line: +        super(message);
+>, <Line: +    }
+>, <Line: +    public ServiceUnavailableException(String message, Throwable t) {
+>, <Line: +        super(message, t);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public HttpResponseStatus getStatus() {
+>, <Line: +        return HttpResponseStatus.SERVICE_UNAVAILABLE;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

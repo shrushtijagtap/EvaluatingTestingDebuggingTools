@@ -1,0 +1,8 @@
+[<Line: +            <exclusions>
+>, <Line: +                <exclusion>
+>, <Line: +                    <groupId>log4j</groupId>
+>, <Line: +                    <artifactId>log4j</artifactId>
+>, <Line: +                </exclusion>
+>, <Line: +            </exclusions>
+>]
+[]

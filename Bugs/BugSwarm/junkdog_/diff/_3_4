@@ -1,0 +1,6 @@
+[<Line: +	protected void forEntity(int entityId) {
+>, <Line: +		this.entityId = entityId;
+>]
+[<Line: -	protected void forEntity(Entity e) {
+>, <Line: -		entityId = e.getId();
+>]

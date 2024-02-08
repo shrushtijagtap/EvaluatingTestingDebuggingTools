@@ -1,0 +1,46 @@
+[<Line: +import com.projectkorra.rpg.event.EventManager;
+>, <Line: +				if (EventManager.marker.get(world).equalsIgnoreCase("LunarEclipse")) {
+>, <Line: +					return RPGMethods.getFactor("LunarEclipse");
+>, <Line: +				} else if (EventManager.marker.get(world).equalsIgnoreCase("FullMoon")) {
+>, <Line: +					return RPGMethods.getFactor("FullMoon");
+>, <Line: +			if (isWater(block) && block.getData() == 0x0 && water) {
+>, <Line: +	        	if (isWater(block) && block.getState().getRawData() == 0x0 &&  water) {
+>, <Line: +	public static double waterbendingNightAugment(double factor, World world) {
+>, <Line: +		if (GeneralMethods.hasRPG()) {
+>, <Line: +			if (isNight(world)) {
+>, <Line: +				if (EventManager.marker.get(world).equalsIgnoreCase("LunarEclipse")) {
+>, <Line: +					return RPGMethods.getFactor("LunarEclipse") * factor;
+>, <Line: +				} else if (EventManager.marker.get(world).equalsIgnoreCase("FullMoon")) {
+>, <Line: +					return RPGMethods.getFactor("FullMoon") * factor;
+>, <Line: +				return config.getDouble("Properties.Water.NightFactor") * factor;
+>, <Line: +				return 1 * factor;
+>, <Line: +			if (isNight(world))
+>, <Line: +				return config.getDouble("Properties.Water.NightFactor") * factor;
+>, <Line: +			return 1 * factor;
+>]
+[<Line: -import com.projectkorra.projectkorra.BendingManager;
+>, <Line: -import com.projectkorra.rpg.WorldEvents;
+>, <Line: -				if (BendingManager.events.get(world).equalsIgnoreCase(WorldEvents.LunarEclipse.toString())) {
+>, <Line: -					return RPGMethods.getFactor(WorldEvents.LunarEclipse);
+>, <Line: -				} else if (BendingManager.events.get(world).equalsIgnoreCase("FullMoon")) {
+>, <Line: -					return config.getDouble("Properties.Water.FullMoonFactor");
+>, <Line: -			if (isNight(world) && BendingManager.events.get(world).equalsIgnoreCase("FullMoon"))
+>, <Line: -				return config.getDouble("Properties.Water.FullMoonFactor");
+>, <Line: -			if (isWater(block) && block.getData() == 0x0  && water) {
+>, <Line: -	        	if (isWater(block) && block.getState().getRawData() == 0x0 && water) {
+>, <Line: -	public static double waterbendingNightAugment(double value, World world) {
+>, <Line: -		if (isNight(world)) {
+>, <Line: -			if (GeneralMethods.hasRPG()) {
+>, <Line: -				if (BendingManager.events.get(world).equalsIgnoreCase(WorldEvents.LunarEclipse.toString())) {
+>, <Line: -					return RPGMethods.getFactor(WorldEvents.LunarEclipse) * value;
+>, <Line: -				} else if (BendingManager.events.get(world).equalsIgnoreCase("FullMoon")) {
+>, <Line: -					return plugin.getConfig().getDouble("Properties.Water.FullMoonFactor") * value;
+>, <Line: -				} else {
+>, <Line: -					return value;
+>, <Line: -				if (isFullMoon(world)) {
+>, <Line: -					return plugin.getConfig().getDouble("Properties.Water.FullMoonFactor") * value;
+>, <Line: -				} else {
+>, <Line: -					return plugin.getConfig().getDouble("Properties.Water.NightFactor") * value;
+>, <Line: -				}
+>, <Line: -			return value;
+>]

@@ -1,0 +1,52 @@
+[<Line: +		rules = new LinkedList<>();
+>, <Line: +		predicateIndex = new HashMap<>();
+>, <Line: +	@Override
+>, <Line: +	@Override
+>, <Line: +	@Override
+>, <Line: +	public void removeRules(Collection<CQIE> rs) {
+>, <Line: +		for (CQIE rule : rs) {
+>, <Line: +			this.rules.remove(rule);
+>, <Line: +			Predicate predicate = rule.getHead().getFunctionSymbol();
+>, <Line: +			List<CQIE> indexedRules = this.predicateIndex.get(predicate);
+>, <Line: +			if (indexedRules != null)
+>, <Line: +				indexedRules.remove(rule);
+>, <Line: +	@Override
+>, <Line: +	@Override
+>, <Line: +			rules = new LinkedList<>();
+>]
+[<Line: -		rules = new LinkedList<CQIE>();
+>, <Line: -		predicateIndex = new HashMap<Predicate, List<CQIE>>();
+>, <Line: -	public void removeRule(CQIE rule) {
+>, <Line: -		if (rule == null) {
+>, <Line: -			throw new RuntimeException("Invalid parameter: null");
+>, <Line: -		}
+>, <Line: -		rules.remove(rule);
+>, <Line: -		Predicate predicate = rule.getHead().getFunctionSymbol();
+>, <Line: -		List<CQIE> indexedRules = this.predicateIndex.get(predicate);
+>, <Line: -		if (indexedRules != null)
+>, <Line: -			indexedRules.remove(rule);
+>, <Line: -	}
+>, <Line: -	public void removeRules(Collection<CQIE> rules) {
+>, <Line: -		for (CQIE rule : rules) {
+>, <Line: -			removeRule(rule);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public boolean isUCQ() {
+>, <Line: -		if (rules.size() > 1) {
+>, <Line: -			boolean isucq = true;
+>, <Line: -			CQIE rule0 = rules.get(0);
+>, <Line: -			Function head0 = rule0.getHead();
+>, <Line: -			for (int i = 1; i < rules.size() && isucq; i++) {
+>, <Line: -				CQIE ruleI = rules.get(i);
+>, <Line: -				Function headI = ruleI.getHead();
+>, <Line: -				if (head0.getArity() != headI.getArity() || !(head0.getFunctionSymbol().equals(headI.getFunctionSymbol()))) {
+>, <Line: -					isucq = false;
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			return isucq;
+>, <Line: -		} else if (rules.size() == 1) {
+>, <Line: -			return true;
+>, <Line: -		} else {
+>, <Line: -			return false;
+>, <Line: -			rules = new LinkedList<CQIE>();
+>]

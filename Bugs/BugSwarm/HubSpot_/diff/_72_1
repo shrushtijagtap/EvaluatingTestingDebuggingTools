@@ -1,0 +1,10 @@
+[<Line: +import com.google.inject.name.Named;
+>, <Line: +import com.hubspot.baragon.service.BaragonServiceModule;
+>, <Line: +import com.hubspot.baragon.service.config.BaragonConfiguration;
+>, <Line: +  private final String hostname;
+>, <Line: +  public BaragonGraphiteReporterManaged(BaragonConfiguration configuration, MetricRegistry registry, @Named(BaragonServiceModule.BARAGON_SERVICE_HOSTNAME) String hostname) {
+>, <Line: +    this.hostname = hostname;
+>]
+[<Line: -import com.hubspot.baragon.service.config.BaragonConfiguration;
+>, <Line: -  public BaragonGraphiteReporterManaged(BaragonConfiguration configuration, MetricRegistry registry) {
+>]

@@ -1,0 +1,9 @@
+[<Line: +     *
+>, <Line: +     * @param out OutputStream, where the output should be written to
+>, <Line: +     * @param configuration Configuration for this SummaryDataWriter; expected contents of the parameter:
+>]
+[<Line: -     * Expected contents of the parameter:
+>, <Line: -     *
+>, <Line: -     * @param out
+>, <Line: -     * @param configuration
+>]

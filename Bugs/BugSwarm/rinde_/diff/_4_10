@@ -1,0 +1,75 @@
+[<Line: +/*
+>, <Line: + * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package com.github.rinde.rinsim.experiment.base;
+>, <Line: +import java.io.PrintStream;
+>, <Line: +import java.util.Set;
+>, <Line: +import com.github.rinde.rinsim.experiment.base.AbstractExperimentBuilder.Computers;
+>, <Line: +import com.google.common.base.Supplier;
+>, <Line: +import com.google.common.collect.ImmutableSet;
+>, <Line: +class DryRunComputer implements Computer {
+>, <Line: +  private final Supplier<Computer> originalComputer;
+>, <Line: +  private final boolean verbose;
+>, <Line: +  private final PrintStream printStream;
+>, <Line: +  private final PrintStream errorStream;
+>, <Line: +  DryRunComputer(Supplier<Computer> c, boolean v, PrintStream stream,
+>, <Line: +      PrintStream error) {
+>, <Line: +    originalComputer = c;
+>, <Line: +    verbose = v;
+>, <Line: +    printStream = stream;
+>, <Line: +    errorStream = error;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public ExperimentResults compute(AbstractExperimentBuilder<?> builder,
+>, <Line: +      Set<SimArgs> inputs) {
+>, <Line: +    printStream
+>, <Line: +    .println("===================== RinSim Experiment start dry run =====================");
+>, <Line: +    if (originalComputer == Computers.LOCAL) {
+>, <Line: +      printStream.println("Using local computation.");
+>, <Line: +      printStream.println("numThreads = " + builder.numThreads);
+>, <Line: +    } else if (originalComputer == Computers.DISTRIBUTED) {
+>, <Line: +      printStream.println("Using distributed computing using JPPF.");
+>, <Line: +      printStream.println("numBatches = " + builder.numBatches);
+>, <Line: +    } else {
+>, <Line: +      errorStream.println("Found unknown computer: " + originalComputer);
+>, <Line: +    }
+>, <Line: +    printStream.println("masterSeed = " + builder.masterSeed);
+>, <Line: +    printStream.println();
+>, <Line: +    printStream.println("Factorial experiment setup:");
+>, <Line: +    printStream.println();
+>, <Line: +    printStream
+>, <Line: +    .println("     # configurations = " + builder.configurationsSet.size());
+>, <Line: +    printStream
+>, <Line: +    .println("          # scenarios = "
+>, <Line: +        + builder.getNumScenarios());
+>, <Line: +    printStream.println("        # repetitions = " + builder.repetitions);
+>, <Line: +    printStream.println("------------------------------------ x");
+>, <Line: +    printStream.println("  total # simulations = " + inputs.size());
+>, <Line: +    printStream.println();
+>, <Line: +    if (verbose) {
+>, <Line: +      printStream
+>, <Line: +      .println("scenario-class,scenario-problem-class,scenario-instance-id,config,seed,obj-func,gui,post-processor,ui-creator");
+>, <Line: +      for (final SimArgs args : inputs) {
+>, <Line: +        printStream.println(args);
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    printStream
+>, <Line: +    .println("===================== RinSim Experiment finished dry run =====================");
+>, <Line: +    return new ExperimentResults(builder,
+>, <Line: +        ImmutableSet.<SimulationResult> of());
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

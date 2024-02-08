@@ -1,0 +1,48 @@
+[<Line: +  GeneralAppIdDecoder(BitArray information) {
+>, <Line: +    do {
+>, <Line: +      if (info.isRemaining()) {
+>, <Line: +      if (currentPosition == info.getNewPosition()) { // No step forward!
+>, <Line: +    } while (true);
+>, <Line: +    if (pos + 7 > this.information.getSize()) {
+>, <Line: +    if (pos + 7 > this.information.getSize()) {
+>, <Line: +      if (numeric == 0) {
+>, <Line: +  int extractNumericValueFromBitArray(int pos, int bits) {
+>, <Line: +    if (remaining != null) {
+>, <Line: +    if (lastDecoded != null && lastDecoded.isRemaining()) {
+>, <Line: +    do {
+>, <Line: +      if (current.isAlpha()) {
+>, <Line: +      } else if (current.isIsoIec646()) {
+>, <Line: +      } else { // it must be numeric
+>, <Line: +      if (!positionChanged && !isFinished) {
+>, <Line: +      if (numeric.isFirstDigitFNC1()) {
+>, <Line: +      if (numeric.isSecondDigitFNC1()) {
+>, <Line: +      if (alpha.isFNC1()) {
+>, <Line: +    if (sevenBitValue >= 64 && sevenBitValue < 116) {
+>, <Line: +    if (pos + 5 > this.information.getSize()) {
+>, <Line: +    switch (sixBitValue) {
+>, <Line: +      if (i == 2) {
+>]
+[<Line: -  GeneralAppIdDecoder(BitArray information){
+>, <Line: -    do{
+>, <Line: -      if(info.isRemaining()) {
+>, <Line: -      if(currentPosition == info.getNewPosition()) {// No step forward!
+>, <Line: -    }while(true);
+>, <Line: -    if(pos + 7 > this.information.getSize()){
+>, <Line: -    if(pos + 7 > this.information.getSize()){
+>, <Line: -      if(numeric == 0) {
+>, <Line: -  int extractNumericValueFromBitArray(int pos, int bits){
+>, <Line: -    if(remaining != null) {
+>, <Line: -    if(lastDecoded != null && lastDecoded.isRemaining()) {
+>, <Line: -    do{
+>, <Line: -      if (current.isAlpha()){
+>, <Line: -      }else if (current.isIsoIec646()){
+>, <Line: -      }else{ // it must be numeric
+>, <Line: -      if(!positionChanged && !isFinished) {
+>, <Line: -      if(numeric.isFirstDigitFNC1()){
+>, <Line: -      if(numeric.isSecondDigitFNC1()){
+>, <Line: -      if(alpha.isFNC1()) {
+>, <Line: -    if(sevenBitValue >= 64 && sevenBitValue < 116) {
+>, <Line: -    if(pos + 5 > this.information.getSize()) {
+>, <Line: -    switch (sixBitValue){
+>, <Line: -      if(i == 2){
+>]

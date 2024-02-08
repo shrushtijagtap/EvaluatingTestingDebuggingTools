@@ -1,0 +1,9 @@
+[<Line: +		QueryMetric query = new QueryMetric(s_startTime - 1, 0, "delete_me");
+>]
+[<Line: -import junit.framework.TestCase;
+>, <Line: -import org.hamcrest.CoreMatchers;
+>, <Line: -import org.kairosdb.core.DataPoint;
+>, <Line: -import org.kairosdb.core.DataPointSet;
+>, <Line: -import static junit.framework.Assert.assertTrue;
+>, <Line: -		QueryMetric query = new QueryMetric(s_startTime -1, 0, "delete_me");
+>]

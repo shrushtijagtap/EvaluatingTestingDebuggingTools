@@ -1,0 +1,11 @@
+[<Line: +		ARRAYGEN(17),
+>, <Line: +		INDEXOF(18),		
+>, <Line: +					|| opcode.offset > Op.ARRAYGEN.offset) {
+>, <Line: +					|| opcode.offset > Op.ARRAYGEN.offset) {
+>, <Line: +			case ARRAYGEN:
+>, <Line: +				return type;
+>]
+[<Line: -		INDEXOF(17),		
+>, <Line: -					|| opcode.offset > Op.LTEQ.offset) {
+>, <Line: -					|| opcode.offset > Op.LTEQ.offset) {
+>]

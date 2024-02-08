@@ -1,0 +1,28 @@
+[<Line: +import org.stagemonitor.core.util.CompletedFuture;
+>, <Line: +		if (getPlugin(CorePlugin.class).isInitAsync()) {
+>, <Line: +			ExecutorService startupThread = ExecutorUtils.createSingleThreadDeamonPool("stagemonitor-startup", 1);
+>, <Line: +			try {
+>, <Line: +				return startupThread.submit(new Runnable() {
+>, <Line: +					@Override
+>, <Line: +					public void run() {
+>, <Line: +						doStartMonitoring();
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +			} finally {
+>, <Line: +				startupThread.shutdown();
+>, <Line: +			}
+>, <Line: +		} else {
+>, <Line: +			doStartMonitoring();
+>, <Line: +			return new CompletedFuture<Void>(null);
+>]
+[<Line: -		ExecutorService startupThread = ExecutorUtils.createSingleThreadDeamonPool("stagemonitor-startup", 1);
+>, <Line: -		try {
+>, <Line: -			return startupThread.submit(new Runnable() {
+>, <Line: -				@Override
+>, <Line: -				public void run() {
+>, <Line: -					doStartMonitoring();
+>, <Line: -				}
+>, <Line: -			});
+>, <Line: -		} finally {
+>, <Line: -			startupThread.shutdown();
+>]

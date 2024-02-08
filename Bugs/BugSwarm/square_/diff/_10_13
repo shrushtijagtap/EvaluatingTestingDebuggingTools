@@ -1,0 +1,42 @@
+[<Line: +import static okio.TestUtil.assertEquivalent;
+>, <Line: +    ByteString byteString = ByteString.encodeUtf8(bronzeHorseman);
+>, <Line: +    assertEquivalent(byteString, TestUtil.reserialize(byteString));
+>, <Line: +    ByteString byteString = ByteString.of();
+>, <Line: +    assertEquivalent(byteString, TestUtil.reserialize(byteString));
+>]
+[<Line: -import java.io.ObjectInputStream;
+>, <Line: -import java.io.ObjectOutputStream;
+>, <Line: -import static org.junit.Assert.assertNotNull;
+>, <Line: -    ByteString original = ByteString.encodeUtf8(bronzeHorseman);
+>, <Line: -    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+>, <Line: -    ObjectOutputStream out = new ObjectOutputStream(bytes);
+>, <Line: -    out.writeObject("before");
+>, <Line: -    out.writeObject(original);
+>, <Line: -    out.writeObject("after");
+>, <Line: -    ObjectInputStream in = new ObjectInputStream(
+>, <Line: -        new ByteArrayInputStream(bytes.toByteArray()));
+>, <Line: -    assertEquals("before", in.readObject());
+>, <Line: -    Object roundTrippedObject = in.readObject();
+>, <Line: -    assertNotNull(roundTrippedObject);
+>, <Line: -    assertTrue("Round tripped object wasn't a ByteString but a " +
+>, <Line: -        roundTrippedObject.getClass(), roundTrippedObject instanceof ByteString);
+>, <Line: -    assertEquals(original, roundTrippedObject);
+>, <Line: -    assertEquals("hashCodes", original.hashCode(), roundTrippedObject.hashCode());
+>, <Line: -    assertEquals("after", in.readObject());
+>, <Line: -    ByteString original = ByteString.of();
+>, <Line: -    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+>, <Line: -    ObjectOutputStream out = new ObjectOutputStream(bytes);
+>, <Line: -    out.writeObject("before");
+>, <Line: -    out.writeObject(original);
+>, <Line: -    out.writeObject("after");
+>, <Line: -    ObjectInputStream in = new ObjectInputStream(
+>, <Line: -        new ByteArrayInputStream(bytes.toByteArray()));
+>, <Line: -    assertEquals("before", in.readObject());
+>, <Line: -    Object roundTrippedObject = in.readObject();
+>, <Line: -    assertNotNull(roundTrippedObject);
+>, <Line: -    assertTrue("Round tripped object wasn't a ByteString but a " +
+>, <Line: -        roundTrippedObject.getClass(), roundTrippedObject instanceof ByteString);
+>, <Line: -    assertEquals(original, roundTrippedObject);
+>, <Line: -    assertEquals("hashCodes", original.hashCode(), roundTrippedObject.hashCode());
+>, <Line: -    assertEquals("after", in.readObject());
+>]

@@ -1,0 +1,47 @@
+[<Line: +import wycc.lang.Attribute;
+>, <Line: +			if(attr instanceof Attribute.Source) {
+>, <Line: +				Attribute.Source l = (Attribute.Source) attr;
+>, <Line: +				throw new wycc.lang.SyntaxError(msg,filename,l.start,l.end);
+>, <Line: +			if(attr instanceof Attribute.Source) {
+>, <Line: +				Attribute.Source l = (Attribute.Source) attr;
+>, <Line: +				throw new wycc.lang.SyntaxError(msg,filename,l.start,l.end);
+>, <Line: +			if(attr instanceof Attribute.Source) {
+>, <Line: +				Attribute.Source l = (Attribute.Source) attr;
+>, <Line: +				throw new wycc.lang.SyntaxError(msg,filename,l.start,l.end,ex);
+>, <Line: +			if(attr instanceof Attribute.Source) {
+>, <Line: +				Attribute.Source l = (Attribute.Source) attr;
+>, <Line: +				throw new wycc.lang.SyntaxError.InternalFailure(msg,filename,l.start,l.end);
+>, <Line: +			if(attr instanceof Attribute.Source) {
+>, <Line: +				Attribute.Source l = (Attribute.Source) attr;
+>, <Line: +				throw new wycc.lang.SyntaxError.InternalFailure(msg,filename,l.start,l.end);
+>, <Line: +			if(attr instanceof Attribute.Source) {
+>, <Line: +				Attribute.Source l = (Attribute.Source) attr;
+>, <Line: +				throw new wycc.lang.SyntaxError.InternalFailure(msg,filename,l.start,l.end,ex);
+>, <Line: +			if(attr instanceof Attribute.Source) {
+>, <Line: +				Attribute.Source l = (Attribute.Source) attr;
+>, <Line: +				throw new wycc.lang.SyntaxError.InternalFailure(msg,filename,l.start,l.end,ex);
+>]
+[<Line: -import wyil.attributes.SourceLocation;
+>, <Line: -import wyil.lang.Attribute;
+>, <Line: -			if(attr instanceof SourceLocation) {
+>, <Line: -				SourceLocation l = (SourceLocation) attr;
+>, <Line: -				throw new wycc.lang.SyntaxError(msg,filename,l.start(),l.end());
+>, <Line: -			if(attr instanceof SourceLocation) {
+>, <Line: -				SourceLocation l = (SourceLocation) attr;
+>, <Line: -				throw new wycc.lang.SyntaxError(msg,filename,l.start(),l.end());
+>, <Line: -			if(attr instanceof SourceLocation) {
+>, <Line: -				SourceLocation l = (SourceLocation) attr;
+>, <Line: -				throw new wycc.lang.SyntaxError(msg,filename,l.start(),l.end(),ex);
+>, <Line: -			if(attr instanceof SourceLocation) {
+>, <Line: -				SourceLocation l = (SourceLocation) attr;
+>, <Line: -				throw new wycc.lang.SyntaxError.InternalFailure(msg,filename,l.start(),l.end());
+>, <Line: -			if(attr instanceof SourceLocation) {
+>, <Line: -				SourceLocation l = (SourceLocation) attr;
+>, <Line: -				throw new wycc.lang.SyntaxError.InternalFailure(msg,filename,l.start(),l.end());
+>, <Line: -			if(attr instanceof SourceLocation) {
+>, <Line: -				SourceLocation l = (SourceLocation) attr;
+>, <Line: -				throw new wycc.lang.SyntaxError.InternalFailure(msg,filename,l.start(),l.end(),ex);
+>, <Line: -			if(attr instanceof SourceLocation) {
+>, <Line: -				SourceLocation l = (SourceLocation) attr;
+>, <Line: -				throw new wycc.lang.SyntaxError.InternalFailure(msg,filename,l.start(),l.end(),ex);
+>]

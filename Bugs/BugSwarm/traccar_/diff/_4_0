@@ -1,0 +1,12 @@
+[<Line: +    private static final int MESSAGE_LIMIT = 120;
+>, <Line: +                if (skip) {
+>, <Line: +                    s.append(" < ...");
+>, <Line: +                }
+>]
+[<Line: -    private static final int MESSAGE_LIMIT = 80;
+>, <Line: -                int count = STACK_LIMIT - 1;
+>, <Line: -                        count -= 1;
+>, <Line: -                        if (count == 0) {
+>, <Line: -                            break;
+>, <Line: -                        }
+>]

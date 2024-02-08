@@ -1,0 +1,6 @@
+[<Line: +package org.mp4parser.tools.boxes;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.FreeBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleTableBox;
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>]

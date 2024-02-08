@@ -1,0 +1,18 @@
+[<Line: +import org.kairosdb.util.StatsMap;
+>, <Line: +	public static void gatherData(StatsMap statsMap)
+>, <Line: +	{
+>, <Line: +		while (s_reporterData.getListSize() != 0)
+>, <Line: +		{
+>, <Line: +			ReporterDataPoint dp = s_reporterData.getNextDataPoint();
+>, <Line: +			if (dp.isStringValue())
+>, <Line: +			{
+>, <Line: +				continue;
+>, <Line: +			}
+>, <Line: +			else
+>, <Line: +			{
+>, <Line: +				statsMap.addMetric(dp.getMetricName(), dp.getValue());
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>]
+[]

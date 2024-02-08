@@ -1,0 +1,47 @@
+[]
+[<Line: -package de.charite.compbio.jannovar;
+>, <Line: -import java.text.NumberFormat;
+>, <Line: -import java.util.Locale;
+>, <Line: -import java.util.Timer;
+>, <Line: -import java.util.TimerTask;
+>, <Line: -import com.google.common.base.Supplier;
+>, <Line: -import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: -/**
+>, <Line: - * Helper for displaying progress
+>, <Line: - * 
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: - */
+>, <Line: -public class ProgressReporter extends TimerTask {
+>, <Line: -	/** Callable to use for retrieving the {@link VariantContext} for the current point */
+>, <Line: -	private final Supplier<VariantContext> getVC;
+>, <Line: -	/** Number of seconds between intervals */
+>, <Line: -	private int seconds;
+>, <Line: -	public ProgressReporter(Supplier<VariantContext> getVC, int seconds) {
+>, <Line: -		this.getVC = getVC;
+>, <Line: -		this.seconds = seconds;
+>, <Line: -	}
+>, <Line: -	public void print() {
+>, <Line: -		final VariantContext vc;
+>, <Line: -		try {
+>, <Line: -			vc = this.getVC.get();
+>, <Line: -			if (vc == null)
+>, <Line: -				return; // ignore, no VC
+>, <Line: -		} catch (Exception e) {
+>, <Line: -			return; // ignore
+>, <Line: -		}
+>, <Line: -		String strPos = NumberFormat.getNumberInstance(Locale.US).format(vc.getStart());
+>, <Line: -		System.err.println(String.format("Currently at %s:%s", vc.getContig(), strPos));
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void run() {
+>, <Line: -		print();
+>, <Line: -	}
+>, <Line: -	public void start() {
+>, <Line: -		Timer timer = new Timer(true);
+>, <Line: -		timer.schedule(this, 0, this.seconds * 1000);
+>, <Line: -	}
+>, <Line: -	public void stop() {
+>, <Line: -		// TODO Auto-generated method stub
+>, <Line: -	}
+>, <Line: -}
+>]

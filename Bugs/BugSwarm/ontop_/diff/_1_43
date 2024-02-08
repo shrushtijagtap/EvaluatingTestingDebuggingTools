@@ -1,0 +1,44 @@
+[<Line: +/* 
+>, <Line: +* #%L
+>, <Line: +* ontop-obdalib-core
+>, <Line: +* %%
+>, <Line: +* Copyright (C) 2009 - 2014 Free University of Bozen-Bolzano
+>, <Line: +* %%
+>, <Line: +* Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: +* you may not use this file except in compliance with the License.
+>, <Line: +* You may obtain a copy of the License at
+>, <Line: +* 
+>, <Line: +*      http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: +* 
+>, <Line: +* Unless required by applicable law or agreed to in writing, software
+>, <Line: +* distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: +* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: +* See the License for the specific language governing permissions and
+>, <Line: +* limitations under the License.
+>, <Line: +* #L%
+>, <Line: +*/
+>, <Line: +/**
+>, <Line: + * subObjectSomeValuesFrom in OWL 2 QL Specification
+>, <Line: + * <p>
+>, <Line: + * subObjectSomeValuesFrom := 'ObjectSomeValuesFrom' '(' ObjectPropertyExpression owl:Thing ')'
+>, <Line: + * <p>
+>, <Line: + * Implements (partially) rule [O5] in methods isTop and isBottom<br>
+>, <Line: + *    - the class expression is equivalent to top if the property is top<br>
+>, <Line: + *    - the class expression is equivalent to bot if the property is bot
+>, <Line: + * 
+>, <Line: + * @author Roman Kontchakov
+>, <Line: + *
+>, <Line: + */
+>, <Line: +		this.string =  new StringBuilder().append("E ").append(property.toString()).toString();
+>, <Line: +		if (this == obj)
+>, <Line: +			return true;
+>, <Line: +	public boolean isBottom() {
+>, <Line: +	public boolean isTop() {
+>]
+[<Line: -		StringBuilder bf = new StringBuilder();
+>, <Line: -		bf.append("E");
+>, <Line: -		bf.append(property.toString());
+>, <Line: -		this.string =  bf.toString();
+>, <Line: -	public boolean isNothing() {
+>, <Line: -	public boolean isThing() {
+>]

@@ -1,0 +1,6 @@
+[<Line: +		if (configuration.getConfig(CorePlugin.class).isReportToJMX()) {
+>, <Line: +	public boolean isReportToJMX() {
+>]
+[<Line: -		if (reportToJMX()) {
+>, <Line: -	public boolean reportToJMX() {
+>]

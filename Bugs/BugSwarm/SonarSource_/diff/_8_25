@@ -1,0 +1,8 @@
+[<Line: +class KO                     // NOK {{Move "extends" keyword to the same line as the declaration of its class name, "KO".}}
+>, <Line: +class KO                     // NOK {{Move "implements" keyword to the same line as the declaration of its class name, "KO".}}
+>, <Line: +class KO                     // NOK {{Move "extends" and "implements" keywords to the same line as the declaration of its class name, "KO".}}
+>]
+[<Line: -class KO
+>, <Line: -class KO
+>, <Line: -class KO
+>]

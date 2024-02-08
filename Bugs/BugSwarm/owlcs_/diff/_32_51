@@ -1,0 +1,23 @@
+[<Line: +public abstract class AbstractTranslator<N extends Serializable, R extends N, P extends N, L extends N>
+>, <Line: +    implements OWLObjectVisitor, SWRLObjectVisitor {
+>, <Line: +        addSingleTripleAxiom(axiom, axiom.getSuperProperty(), OWL_PROPERTY_CHAIN_AXIOM.getIRI(),
+>, <Line: +            axiom.getPropertyChain().stream());
+>, <Line: +        addTriple(getResourceNode(node.getPredicate()), getPredicateNode(RDF_TYPE.getIRI()),
+>, <Line: +            getResourceNode(BUILT_IN_CLASS.getIRI()));
+>, <Line: +        addTriple(getResourceNode(node), getPredicateNode(ARGUMENTS.getIRI()),
+>, <Line: +            translateList(new ArrayList<>(node.getArguments())));
+>, <Line: +    @SuppressWarnings("unchecked")
+>, <Line: +        return manager.getOWLDataFactory().getOWLLiteral(Integer.toString(i),
+>, <Line: +            manager.getOWLDataFactory().getOWLDatatype(XSDVocabulary.NON_NEGATIVE_INTEGER.getIRI()));
+>]
+[<Line: -public abstract class AbstractTranslator<N extends Serializable, R extends N, P extends N, L extends N> implements
+>, <Line: -    OWLObjectVisitor, SWRLObjectVisitor {
+>, <Line: -        addSingleTripleAxiom(axiom, axiom.getSuperProperty(), OWL_PROPERTY_CHAIN_AXIOM.getIRI(), axiom
+>, <Line: -            .getPropertyChain().stream());
+>, <Line: -        addTriple(getResourceNode(node.getPredicate()), getPredicateNode(RDF_TYPE.getIRI()), getResourceNode(
+>, <Line: -            BUILT_IN_CLASS.getIRI()));
+>, <Line: -        addTriple(getResourceNode(node), getPredicateNode(ARGUMENTS.getIRI()), translateList(new ArrayList<>(node
+>, <Line: -            .getArguments())));
+>, <Line: -        return manager.getOWLDataFactory().getOWLLiteral(Integer.toString(i), manager.getOWLDataFactory()
+>, <Line: -            .getOWLDatatype(XSDVocabulary.NON_NEGATIVE_INTEGER.getIRI()));
+>]

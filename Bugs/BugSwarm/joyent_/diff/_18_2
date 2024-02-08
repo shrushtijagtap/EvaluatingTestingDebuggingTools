@@ -1,0 +1,5 @@
+[<Line: +import org.testng.util.RetryAnalyzerCount;
+>, <Line: +@Test(groups = { "job" }, retryAnalyzer = RetryAnalyzerCount.class)
+>]
+[<Line: -@Test(groups = { "job" })
+>]

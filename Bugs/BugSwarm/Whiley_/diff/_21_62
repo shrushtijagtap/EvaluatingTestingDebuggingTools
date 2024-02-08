@@ -1,0 +1,4 @@
+[<Line: +requires no { i in 0..|xs| | xs[i] < 0 }:
+>]
+[<Line: -requires no { w in xs | w < 0 }:
+>]

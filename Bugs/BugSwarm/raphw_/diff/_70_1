@@ -1,0 +1,71 @@
+[<Line: +import net.bytebuddy.description.method.MethodDescription;
+>, <Line: +import net.bytebuddy.matcher.ElementMatchers;
+>, <Line: +import static net.bytebuddy.matcher.ElementMatchers.isBridge;
+>, <Line: +    private static final String FOO = "foo", BAR = "bar", QUX = "qux";
+>, <Line: +        assertThat(typeDescription.getDeclaredFields().getOnly().getType().getSort(),
+>, <Line: +                is(TypeDefinition.Sort.NON_GENERIC));
+>, <Line: +        assertThat(typeDescription.getDeclaredFields().getOnly().getType().asErasure(),
+>, <Line: +                is((TypeDescription) new TypeDescription.ForLoadedType(Number.class)));
+>, <Line: +        assertThat(typeDescription.getDeclaredMethods().filter(named(QUX)).getOnly().getReturnType().getSort(),
+>, <Line: +                is(TypeDefinition.Sort.NON_GENERIC));
+>, <Line: +        assertThat(typeDescription.getDeclaredMethods().filter(named(QUX)).getOnly().getReturnType().asErasure(),
+>, <Line: +                is((TypeDescription) new TypeDescription.ForLoadedType(Number.class)));
+>, <Line: +        assertThat(typeDescription.getDeclaredMethods().filter(named(BAR)).getOnly().getReturnType().getSort(),
+>, <Line: +                is(TypeDefinition.Sort.NON_GENERIC));
+>, <Line: +        assertThat(typeDescription.getDeclaredMethods().filter(named(BAR)).getOnly().getReturnType().asErasure(),
+>, <Line: +                is((TypeDescription) new TypeDescription.ForLoadedType(List.class)));
+>, <Line: +    @Test
+>, <Line: +    public void testNonGenericIntermediateType() throws Exception {
+>, <Line: +        TypeDescription.Generic typeDescription = TypeDescription.Generic.OfNonGenericType.ForReifiedErasure.of(new TypeDescription.ForLoadedType(GenericIntermediate.class))
+>, <Line: +                .getSuperClass();
+>, <Line: +        assertThat(typeDescription.getSuperClass().getSort(), is(TypeDefinition.Sort.PARAMETERIZED));
+>, <Line: +        assertThat(typeDescription.getSuperClass().asErasure(), is((TypeDescription) new TypeDescription.ForLoadedType(Foo.class)));
+>, <Line: +        assertThat(typeDescription.getSuperClass().getTypeArguments().size(), is(1));
+>, <Line: +        assertThat(typeDescription.getSuperClass().getTypeArguments().getOnly().getSort(), is(TypeDefinition.Sort.NON_GENERIC));
+>, <Line: +        assertThat(typeDescription.getSuperClass().getTypeArguments().getOnly().asErasure(),
+>, <Line: +                is((TypeDescription) new TypeDescription.ForLoadedType(Number.class)));
+>, <Line: +        assertThat(typeDescription.getSuperClass().getDeclaredFields().getOnly().getType().getSort(),
+>, <Line: +                is(TypeDefinition.Sort.NON_GENERIC));
+>, <Line: +        assertThat(typeDescription.getSuperClass().getDeclaredFields().getOnly().getType().asErasure(),
+>, <Line: +                is((TypeDescription) new TypeDescription.ForLoadedType(Number.class)));
+>, <Line: +        assertThat(typeDescription.getSuperClass().getDeclaredMethods().filter(named(FOO)).getOnly().getReturnType().getSort(),
+>, <Line: +                is(TypeDefinition.Sort.NON_GENERIC));
+>, <Line: +        assertThat(typeDescription.getSuperClass().getDeclaredMethods().filter(named(FOO)).getOnly().getReturnType().asErasure(),
+>, <Line: +                is((TypeDescription) new TypeDescription.ForLoadedType(Number.class)));
+>, <Line: +        assertThat(typeDescription.getSuperClass().getDeclaredMethods().filter(named(BAR)).getOnly().getReturnType().getSort(),
+>, <Line: +                is(TypeDefinition.Sort.PARAMETERIZED));
+>, <Line: +        assertThat(typeDescription.getSuperClass().getDeclaredMethods().filter(named(BAR)).getOnly().getReturnType().asErasure(),
+>, <Line: +                is((TypeDescription) new TypeDescription.ForLoadedType(List.class)));
+>, <Line: +        assertThat(typeDescription.getInterfaces().getOnly().getSort(), is(TypeDefinition.Sort.PARAMETERIZED));
+>, <Line: +        assertThat(typeDescription.getInterfaces().getOnly().asErasure(), is((TypeDescription) new TypeDescription.ForLoadedType(Bar.class)));
+>, <Line: +        assertThat(typeDescription.getInterfaces().getOnly().getTypeArguments().size(), is(1));
+>, <Line: +        assertThat(typeDescription.getInterfaces().getOnly().getTypeArguments().getOnly().getSort(), is(TypeDefinition.Sort.NON_GENERIC));
+>, <Line: +        assertThat(typeDescription.getInterfaces().getOnly().getTypeArguments().getOnly().asErasure(),
+>, <Line: +                is((TypeDescription) new TypeDescription.ForLoadedType(Number.class)));
+>, <Line: +        assertThat(typeDescription.getInterfaces().getOnly().getDeclaredMethods().filter(named(FOO)).getOnly().getReturnType().getSort(),
+>, <Line: +                is(TypeDefinition.Sort.NON_GENERIC));
+>, <Line: +        assertThat(typeDescription.getInterfaces().getOnly().getDeclaredMethods().filter(named(FOO)).getOnly().getReturnType().asErasure(),
+>, <Line: +                is((TypeDescription) new TypeDescription.ForLoadedType(Number.class)));
+>, <Line: +        assertThat(typeDescription.getInterfaces().getOnly().getDeclaredMethods().filter(named(BAR)).getOnly().getReturnType().getSort(),
+>, <Line: +                is(TypeDefinition.Sort.PARAMETERIZED));
+>, <Line: +        assertThat(typeDescription.getInterfaces().getOnly().getDeclaredMethods().filter(named(BAR)).getOnly().getReturnType().asErasure(),
+>, <Line: +                is((TypeDescription) new TypeDescription.ForLoadedType(List.class)));
+>, <Line: +    }
+>, <Line: +    private static class Foo<T> {
+>, <Line: +    private interface Bar<T> {
+>, <Line: +    private static class Qux<T extends Number> extends Foo<T> implements Bar<T>{
+>, <Line: +        public T qux() {
+>, <Line: +    private static class NonGenericIntermediate extends Foo<Number> implements Bar<Number> {
+>, <Line: +        /* empty */
+>, <Line: +    }
+>, <Line: +    private static class GenericIntermediate<T> extends NonGenericIntermediate {
+>, <Line: +        /* empty */
+>, <Line: +    }
+>]
+[<Line: -    private static final String FOO = "foo", BAR = "bar";
+>, <Line: -    public static class Foo<T> {
+>, <Line: -    public interface Bar<T> {
+>, <Line: -    public static class Qux<T extends Number> extends Foo<T> implements Bar<T>{
+>, <Line: -        @Override
+>, <Line: -        public T foo() {
+>]

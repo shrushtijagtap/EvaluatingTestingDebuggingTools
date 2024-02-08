@@ -1,0 +1,6 @@
+[<Line: +org.eclipse.jdt.core.formatter.brace_position_for_lambda_body=end_of_line
+>, <Line: +org.eclipse.jdt.core.formatter.insert_new_line_after_type_annotation=do not insert
+>, <Line: +org.eclipse.jdt.core.formatter.insert_space_after_lambda_arrow=insert
+>, <Line: +org.eclipse.jdt.core.formatter.insert_space_before_lambda_arrow=insert
+>]
+[]

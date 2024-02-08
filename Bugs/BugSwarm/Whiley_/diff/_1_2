@@ -1,0 +1,8 @@
+[<Line: +			ret = parseOptionalParameter(wf,environment);		
+>, <Line: +				ensures.add(parseLogicalExpression(wf, environment, true));
+>]
+[<Line: -		HashSet<String> ensuresEnvironment = environment;
+>, <Line: -			ensuresEnvironment = new HashSet<String>(environment);						
+>, <Line: -			ret = parseOptionalParameter(wf,ensuresEnvironment);		
+>, <Line: -				ensures.add(parseLogicalExpression(wf, ensuresEnvironment, true));
+>]

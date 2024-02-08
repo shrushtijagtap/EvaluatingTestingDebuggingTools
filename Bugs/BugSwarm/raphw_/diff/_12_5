@@ -1,0 +1,8 @@
+[<Line: +import net.bytebuddy.ClassFileVersion;
+>, <Line: +import net.bytebuddy.description.type.TypeDescription;
+>, <Line: +                {new Class<?>[]{Object.class}, new Class<?>[]{Object.class}, PropertyDispatcher.TYPE_LOADED_ARRAY, Arrays.hashCode(new Class<?>[]{Object.class}),
+>, <Line: +                        ClassFileVersion.forCurrentJavaVersion().isAtLeast(ClassFileVersion.JAVA_V9) ? "{java.lang.Object.class}" : "[class java.lang.Object]"},
+>, <Line: +                {new TypeDescription[]{TypeDescription.OBJECT}, new TypeDescription[]{TypeDescription.OBJECT}, PropertyDispatcher.TYPE_DESCRIBED_ARRAY, Arrays.hashCode(new TypeDescription[]{TypeDescription.OBJECT}),
+>, <Line: +                        ClassFileVersion.forCurrentJavaVersion().isAtLeast(ClassFileVersion.JAVA_V9) ? "{java.lang.Object.class}" : "[class java.lang.Object]"},
+>]
+[]

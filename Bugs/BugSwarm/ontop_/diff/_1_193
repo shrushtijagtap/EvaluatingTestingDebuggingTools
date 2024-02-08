@@ -1,0 +1,47 @@
+[<Line: +import com.google.common.collect.Lists;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.core.mappingprocessing.TMappingExclusionConfig;
+>, <Line: +import it.unibz.krdb.obda.ontology.ImmutableOntologyVocabulary;
+>, <Line: +		reformulationReasoner = TBoxReasonerImpl.create(inputOntology, bOptimizeEquivalences);
+>, <Line: +		vocabularyValidator = new VocabularyValidator(reformulationReasoner, inputOntology.getVocabulary());
+>, <Line: +				dataRepository = new RDBMSSIRepositoryManager(reformulationReasoner, inputOntology.getVocabulary());
+>, <Line: +			/*
+>, <Line: +				unfolder.extendTypesWithMetadata(reformulationReasoner, vocabularyValidator, metadata);
+>, <Line: +			// Setting up the TBox we will use for the reformulation
+>, <Line: +			//TBoxReasoner reasoner = reformulationReasoner;
+>, <Line: +			//if (bOptimizeTBoxSigma) {
+>, <Line: +			//	SigmaTBoxOptimizer reducer = new SigmaTBoxOptimizer(reformulationReasoner);
+>, <Line: +			//	reasoner = TBoxReasonerImpl.create(reducer.getReducedOntology());
+>, <Line: +			//} 
+>, <Line: +			// Setting up the reformulation engine
+>, <Line: +			rewriter.setTBox(reformulationReasoner, inputOntology.getVocabulary(), sigma);
+>, <Line: +	public ImmutableOntologyVocabulary getVocabulary() {
+>, <Line: +		return inputOntology.getVocabulary();
+>, <Line: +	}
+>]
+[<Line: -import it.unibz.krdb.obda.owlrefplatform.core.mappingprocessing.TMappingExclusionConfig;
+>, <Line: -import it.unibz.krdb.obda.owlrefplatform.core.tboxprocessing.SigmaTBoxOptimizer;
+>, <Line: -	private boolean bOptimizeTBoxSigma = true;
+>, <Line: -		bOptimizeTBoxSigma = Boolean.valueOf((String) preferences.get(QuestPreferences.OPTIMIZE_TBOX_SIGMA));
+>, <Line: -		log.debug("Optimize TBox using dependencies in ABox: {}", bOptimizeTBoxSigma);
+>, <Line: -		reformulationReasoner = new TBoxReasonerImpl(inputOntology);
+>, <Line: -		if (bOptimizeEquivalences) {
+>, <Line: -			// generate a new TBox with a simpler vocabulary
+>, <Line: -			reformulationReasoner = TBoxReasonerImpl.getEquivalenceSimplifiedReasoner(reformulationReasoner);
+>, <Line: -		} 
+>, <Line: -		vocabularyValidator = new VocabularyValidator(reformulationReasoner);
+>, <Line: -				dataRepository = new RDBMSSIRepositoryManager(reformulationReasoner);
+>, <Line: -			/***
+>, <Line: -				unfolder.extendTypesWithMetadata(reformulationReasoner, metadata);
+>, <Line: -			/*
+>, <Line: -			 * Setting up the TBox we will use for the reformulation
+>, <Line: -			 */
+>, <Line: -			TBoxReasoner reasoner = reformulationReasoner;
+>, <Line: -			if (bOptimizeTBoxSigma) {
+>, <Line: -				SigmaTBoxOptimizer reducer = new SigmaTBoxOptimizer(reformulationReasoner);
+>, <Line: -				reasoner = new TBoxReasonerImpl(reducer.getReducedOntology());
+>, <Line: -			} 
+>, <Line: -			/*
+>, <Line: -			 * Setting up the reformulation engine
+>, <Line: -			 */
+>, <Line: -			rewriter.setTBox(reasoner, sigma);
+>]

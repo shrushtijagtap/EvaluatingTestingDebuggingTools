@@ -1,0 +1,4 @@
+[<Line: +    while i < |constants| where i >= 0:
+>]
+[<Line: -    while i < |constants|:
+>]

@@ -1,0 +1,4 @@
+[<Line: +	<logger name="org.kairosdb.datastore.h2.orm" level="WARN"/>
+>]
+[<Line: -	<logger name="com.mchange.v2.c3p0" level="WARN"/>
+>]

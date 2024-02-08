@@ -1,0 +1,20 @@
+[<Line: +package net.bytebuddy.test.precompiled;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.concurrent.Callable;
+>, <Line: +public abstract class TypeAnnotationSamples<@TypeAnnotation(0) T,
+>, <Line: +        S,
+>, <Line: +        @TypeAnnotation(2) U extends String & @TypeAnnotation(3) Callable<@TypeAnnotation(4) ?> & @TypeAnnotation(5) List<@TypeAnnotation(6) ?>,
+>, <Line: +        @TypeAnnotation(7) V extends Map<@TypeAnnotation(8) ? extends @TypeAnnotation(9) String, @TypeAnnotation(10) Callable<@TypeAnnotation(11) ? super @TypeAnnotation(12) U>>,
+>, <Line: +        @TypeAnnotation(13) W extends @TypeAnnotation(14) V,
+>, <Line: +        @TypeAnnotation(15) X extends @TypeAnnotation(16) ArrayList<@TypeAnnotation(17) ?>>
+>, <Line: +        extends @TypeAnnotation(18) Object
+>, <Line: +        implements @TypeAnnotation(19) Callable<@TypeAnnotation(20) Object>, Map<@TypeAnnotation(21) String, Object> {
+>, <Line: +    @TypeAnnotation(22) Callable<@TypeAnnotation(23) ?> @TypeAnnotation(24) [] @TypeAnnotation(25) [] foo;
+>, <Line: +    abstract <@TypeAnnotation(26) T extends @TypeAnnotation(27) Exception> @TypeAnnotation(28) int foo(@TypeAnnotation(29) T @TypeAnnotation(30) [] @TypeAnnotation(31) [] v)
+>, <Line: +            throws @TypeAnnotation(32) T, @TypeAnnotation(33) RuntimeException;
+>, <Line: +    abstract @TypeAnnotation(34) int @TypeAnnotation(35) [] @TypeAnnotation(36) [] bar(@TypeAnnotation(37) Void @TypeAnnotation(38) [] @TypeAnnotation(39) [] v);
+>, <Line: +    abstract <T> @TypeAnnotation(40) int @TypeAnnotation(41) [] @TypeAnnotation(42) [] qux(@TypeAnnotation(43) Void @TypeAnnotation(44) [] @TypeAnnotation(45) [] v);
+>, <Line: +}>]
+[]

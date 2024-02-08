@@ -1,0 +1,4 @@
+[<Line: +                @SuppressFBWarnings(value = "DP_DO_INSIDE_DO_PRIVILEGED", justification = "Privilege is explicit user responsibility")
+>]
+[<Line: -                @SuppressFBWarnings(value = "DP_DO_INSIDE_DO_PRIVILEGED", justification = "Privileges should be provided by user")
+>]

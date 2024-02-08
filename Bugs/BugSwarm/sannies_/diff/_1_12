@@ -1,0 +1,65 @@
+[<Line: +                                    sampleGroups = getSampleGroups(
+>, <Line: +                                            stbl.getBoxes(SampleGroupDescriptionBox.class),  // global descriptions
+>, <Line: +                                            Path.<SampleGroupDescriptionBox>getPaths((Container) traf, "sgpd"),  // local description
+>, <Line: +                                            Path.<SampleToGroupBox>getPaths((Container) traf, "sbgp"),
+>, <Line: +                                            sampleGroups, sampleNumber - 1);
+>, <Line: +                        sampleGroups = getSampleGroups(
+>, <Line: +                                stbl.getBoxes(SampleGroupDescriptionBox.class),
+>, <Line: +                                Path.<SampleGroupDescriptionBox>getPaths((Container) traf, "sgpd"),
+>, <Line: +                                Path.<SampleToGroupBox>getPaths((Container) traf, "sbgp"), sampleGroups, 0);
+>, <Line: +            sampleGroups = getSampleGroups(stbl.getBoxes(SampleGroupDescriptionBox.class), null, stbl.getBoxes(SampleToGroupBox.class), sampleGroups, 0);
+>, <Line: +    private Map<GroupEntry, long[]> getSampleGroups(List<SampleGroupDescriptionBox> globalSgdbs, List<SampleGroupDescriptionBox> localSgdbs, List<SampleToGroupBox> sbgps,
+>, <Line: +                                                    Map<GroupEntry, long[]> sampleGroups, long startIndex) {
+>, <Line: +        for (SampleToGroupBox sbgp : sbgps) {
+>, <Line: +            int sampleNum = 0;
+>, <Line: +            for (SampleToGroupBox.Entry entry : sbgp.getEntries()) {
+>, <Line: +                if (entry.getGroupDescriptionIndex() > 0) {
+>, <Line: +                    GroupEntry groupEntry = null;
+>, <Line: +                    if (entry.getGroupDescriptionIndex() > 0xffff) {
+>, <Line: +                        for (SampleGroupDescriptionBox localSgdb : localSgdbs) {
+>, <Line: +                            if (localSgdb.getGroupingType().equals(sbgp.getGroupingType())) {
+>, <Line: +                                groupEntry = localSgdb.getGroupEntries().get((entry.getGroupDescriptionIndex() - 1) & 0xffff);
+>, <Line: +                        }
+>, <Line: +                    } else {
+>, <Line: +                        for (SampleGroupDescriptionBox globalSgdb : globalSgdbs) {
+>, <Line: +                            if (globalSgdb.getGroupingType().equals(sbgp.getGroupingType())) {
+>, <Line: +                                groupEntry = globalSgdb.getGroupEntries().get((entry.getGroupDescriptionIndex() - 1));
+>, <Line: +                    }
+>, <Line: +                    assert groupEntry != null;
+>, <Line: +                    long[] samples = sampleGroups.get(groupEntry);
+>, <Line: +                    if (samples == null) {
+>, <Line: +                        samples = new long[0];
+>, <Line: +                    long[] nuSamples = new long[l2i(entry.getSampleCount()) + samples.length];
+>, <Line: +                    System.arraycopy(samples, 0, nuSamples, 0, samples.length);
+>, <Line: +                    for (int i = 0; i < entry.getSampleCount(); i++) {
+>, <Line: +                        nuSamples[samples.length + i] = startIndex + sampleNum + i;
+>, <Line: +                    }
+>, <Line: +                    sampleGroups.put(groupEntry, nuSamples);
+>, <Line: +                sampleNum += entry.getSampleCount();
+>]
+[<Line: -                        sampleGroups = getSampleGroups(Path.<SampleGroupDescriptionBox>getPaths((Container) traf, "sgpd"), Path.<SampleToGroupBox>getPaths((Container) traf, "sbgp"), sampleGroups);
+>, <Line: -            sampleGroups = getSampleGroups(stbl.getBoxes(SampleGroupDescriptionBox.class), stbl.getBoxes(SampleToGroupBox.class), sampleGroups);
+>, <Line: -    private Map<GroupEntry, long[]> getSampleGroups(List<SampleGroupDescriptionBox> sgdbs, List<SampleToGroupBox> sbgps,
+>, <Line: -                                                    Map<GroupEntry, long[]> sampleGroups) {
+>, <Line: -        for (SampleGroupDescriptionBox sgdb : sgdbs) {
+>, <Line: -            boolean found = false;
+>, <Line: -            for (SampleToGroupBox sbgp : sbgps) {
+>, <Line: -                if (sbgp.getGroupingType().equals(sgdb.getGroupEntries().get(0).getType())) {
+>, <Line: -                    found = true;
+>, <Line: -                    int sampleNum = 0;
+>, <Line: -                    for (SampleToGroupBox.Entry entry : sbgp.getEntries()) {
+>, <Line: -                        if (entry.getGroupDescriptionIndex() > 0) {
+>, <Line: -                            GroupEntry groupEntry = sgdb.getGroupEntries().get(entry.getGroupDescriptionIndex() - 1);
+>, <Line: -                            long[] samples = sampleGroups.get(groupEntry);
+>, <Line: -                            if (samples == null) {
+>, <Line: -                                samples = new long[0];
+>, <Line: -                            long[] nuSamples = new long[l2i(entry.getSampleCount()) + samples.length];
+>, <Line: -                            System.arraycopy(samples, 0, nuSamples, 0, samples.length);
+>, <Line: -                            for (int i = 0; i < entry.getSampleCount(); i++) {
+>, <Line: -                                nuSamples[samples.length + i] = sampleNum + i;
+>, <Line: -                            sampleGroups.put(groupEntry, nuSamples);
+>, <Line: -                        sampleNum += entry.getSampleCount();
+>, <Line: -            }
+>, <Line: -            if (!found) {
+>, <Line: -                throw new RuntimeException("Could not find SampleToGroupBox for " + sgdb.getGroupEntries().get(0).getType() + ".");
+>]

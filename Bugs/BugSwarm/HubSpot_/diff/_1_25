@@ -1,0 +1,33 @@
+[<Line: +  private final Optional<BaragonRequest> request;
+>, <Line: +    return new BaragonResponse(requestId, BaragonRequestState.FAILED, Optional.fromNullable(message), Optional.<Map<String, Collection<AgentResponse>>>absent(), Optional.<BaragonRequest>absent());
+>, <Line: +    return new BaragonResponse(requestId, BaragonRequestState.CANCELED, Optional.<String>of(String.format("Request %s does not exist", requestId)), Optional.<Map<String, Collection<AgentResponse>>>absent(), Optional.<BaragonRequest>absent());
+>, <Line: +    return new BaragonResponse(requestId, BaragonRequestState.INVALID_REQUEST_NOOP, Optional.<String>of(String.format("Service %s not found", serviceId)), Optional.<Map<String, Collection<AgentResponse>>>absent(), Optional.<BaragonRequest>absent());
+>, <Line: +                         @JsonProperty("agentResponses") Optional<Map<String, Collection<AgentResponse>>> agentResponses,
+>, <Line: +                         @JsonProperty("request") Optional<BaragonRequest> request) {
+>, <Line: +    this.request = request;
+>, <Line: +  public Optional<BaragonRequest> getRequest() {
+>, <Line: +    return request;
+>, <Line: +  }
+>, <Line: +    return "BaragonResponse{" +
+>, <Line: +      "loadBalancerRequestId='" + loadBalancerRequestId + '\'' +
+>, <Line: +      ", loadBalancerState=" + loadBalancerState +
+>, <Line: +      ", message=" + message +
+>, <Line: +      ", agentResponses=" + agentResponses +
+>, <Line: +      ", request=" + request +
+>, <Line: +      '}';
+>, <Line: +    if (!request.equals(that.request)) {
+>, <Line: +      return false;
+>, <Line: +    }
+>, <Line: +    result = 31 * result + request.hashCode();
+>]
+[<Line: -    return new BaragonResponse(requestId, BaragonRequestState.FAILED, Optional.fromNullable(message), Optional.<Map<String, Collection<AgentResponse>>>absent());
+>, <Line: -    return new BaragonResponse(requestId, BaragonRequestState.CANCELED, Optional.<String>of(String.format("Request %s does not exist", requestId)), Optional.<Map<String, Collection<AgentResponse>>>absent());
+>, <Line: -    return new BaragonResponse(requestId, BaragonRequestState.INVALID_REQUEST_NOOP, Optional.<String>of(String.format("Service %s not found", serviceId)), Optional.<Map<String, Collection<AgentResponse>>>absent());
+>, <Line: -                         @JsonProperty("agentResponses") Optional<Map<String, Collection<AgentResponse>>> agentResponses) {
+>, <Line: -    return "BaragonResponse [" +
+>, <Line: -        "loadBalancerRequestId='" + loadBalancerRequestId + '\'' +
+>, <Line: -        ", loadBalancerState=" + loadBalancerState +
+>, <Line: -        ", message=" + message +
+>, <Line: -        ", agentResponses=" + agentResponses +
+>, <Line: -        ']';
+>]

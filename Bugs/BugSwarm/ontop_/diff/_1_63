@@ -1,0 +1,102 @@
+[<Line: +package it.unibz.krdb.obda.owlapi3;
+>, <Line: +import org.semanticweb.owlapi.model.OWLClass;
+>, <Line: +import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
+>, <Line: +import org.semanticweb.owlapi.model.OWLClassExpression;
+>, <Line: +import org.semanticweb.owlapi.model.OWLDataProperty;
+>, <Line: +import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
+>, <Line: +import org.semanticweb.owlapi.model.OWLDataPropertyExpression;
+>, <Line: +import org.semanticweb.owlapi.model.OWLIndividual;
+>, <Line: +import org.semanticweb.owlapi.model.OWLLiteral;
+>, <Line: +import org.semanticweb.owlapi.model.OWLObjectInverseOf;
+>, <Line: +import org.semanticweb.owlapi.model.OWLObjectProperty;
+>, <Line: +import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
+>, <Line: +import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
+>, <Line: +import it.unibz.krdb.obda.model.OBDADataFactory;
+>, <Line: +import it.unibz.krdb.obda.model.Predicate;
+>, <Line: +import it.unibz.krdb.obda.model.URIConstant;
+>, <Line: +import it.unibz.krdb.obda.model.ValueConstant;
+>, <Line: +import it.unibz.krdb.obda.model.impl.OBDADataFactoryImpl;
+>, <Line: +import it.unibz.krdb.obda.ontology.ClassAssertion;
+>, <Line: +import it.unibz.krdb.obda.ontology.DataPropertyAssertion;
+>, <Line: +import it.unibz.krdb.obda.ontology.DataPropertyExpression;
+>, <Line: +import it.unibz.krdb.obda.ontology.ImmutableOntologyVocabulary;
+>, <Line: +import it.unibz.krdb.obda.ontology.InconsistentOntologyException;
+>, <Line: +import it.unibz.krdb.obda.ontology.OClass;
+>, <Line: +import it.unibz.krdb.obda.ontology.ObjectPropertyAssertion;
+>, <Line: +import it.unibz.krdb.obda.ontology.ObjectPropertyExpression;
+>, <Line: +import it.unibz.krdb.obda.ontology.OntologyFactory;
+>, <Line: +import it.unibz.krdb.obda.ontology.impl.OntologyFactoryImpl;
+>, <Line: +import it.unibz.krdb.obda.owlapi3.OWLAPI3TranslatorOWL2QL.TranslationException;
+>, <Line: +public class OWLAPI3TranslatorHelper {
+>, <Line: +	private final ImmutableOntologyVocabulary voc;
+>, <Line: +	private static final OntologyFactory ofac = OntologyFactoryImpl.getInstance();
+>, <Line: +	private static final OBDADataFactory dfac = OBDADataFactoryImpl.getInstance();
+>, <Line: +	OWLAPI3TranslatorHelper(ImmutableOntologyVocabulary voc) {
+>, <Line: +		this.voc = voc;
+>, <Line: +	}
+>, <Line: +	public ClassAssertion translate(OWLClassAssertionAxiom ax) throws TranslationException, InconsistentOntologyException {
+>, <Line: +		OWLClassExpression classExpression = ax.getClassExpression();
+>, <Line: +		if (!(classExpression instanceof OWLClass))
+>, <Line: +			throw new TranslationException("complex class expressions are not supported");
+>, <Line: +		OWLClass namedclass = (OWLClass) classExpression;
+>, <Line: +		OClass concept = voc.getClass(namedclass.getIRI().toString());
+>, <Line: +		URIConstant c = getIndividual(ax.getIndividual());
+>, <Line: +		return ofac.createClassAssertion(concept, c);
+>, <Line: +	}
+>, <Line: +	public ObjectPropertyAssertion translate(OWLObjectPropertyAssertionAxiom ax) throws InconsistentOntologyException {
+>, <Line: +		URIConstant c1 = getIndividual(ax.getSubject());
+>, <Line: +		URIConstant c2 = getIndividual(ax.getObject());
+>, <Line: +		ObjectPropertyExpression ope = getPropertyExpression(ax.getProperty());
+>, <Line: +		return ofac.createObjectPropertyAssertion(ope, c1, c2);
+>, <Line: +	}	
+>, <Line: +	public DataPropertyAssertion translate(OWLDataPropertyAssertionAxiom ax) throws TranslationException, InconsistentOntologyException {
+>, <Line: +		OWLLiteral object = ax.getObject();		
+>, <Line: +		Predicate.COL_TYPE type = OWLTypeMapper.getType(object.getDatatype());
+>, <Line: +		ValueConstant c2 = dfac.getConstantLiteral(object.getLiteral(), type);
+>, <Line: +		URIConstant c1 = getIndividual(ax.getSubject());
+>, <Line: +		DataPropertyExpression dpe = getPropertyExpression(ax.getProperty());
+>, <Line: +		return ofac.createDataPropertyAssertion(dpe, c1, c2);	
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * 
+>, <Line: +	 * @param clExpression
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public OClass getOClass(OWLClass clExpression) {
+>, <Line: +		String uri = clExpression.getIRI().toString();
+>, <Line: +		return voc.getClass(uri);		
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * ObjectPropertyExpression := ObjectProperty | InverseObjectProperty
+>, <Line: +	 * InverseObjectProperty := 'ObjectInverseOf' '(' ObjectProperty ')'
+>, <Line: +	 * 
+>, <Line: +	 * @param opeExpression
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public ObjectPropertyExpression getPropertyExpression(OWLObjectPropertyExpression opeExpression) {
+>, <Line: +		if (opeExpression instanceof OWLObjectProperty) 
+>, <Line: +			return voc.getObjectProperty(opeExpression.asOWLObjectProperty().getIRI().toString());
+>, <Line: +		else {
+>, <Line: +			assert(opeExpression instanceof OWLObjectInverseOf);
+>, <Line: +			OWLObjectInverseOf aux = (OWLObjectInverseOf) opeExpression;
+>, <Line: +			return voc.getObjectProperty(aux.getInverse().asOWLObjectProperty().getIRI().toString()).getInverse();
+>, <Line: +		} 			
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * DataPropertyExpression := DataProperty
+>, <Line: +	 * 
+>, <Line: +	 * @param rolExpression
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public DataPropertyExpression getPropertyExpression(OWLDataPropertyExpression dpeExpression)  {
+>, <Line: +		assert (dpeExpression instanceof OWLDataProperty); 
+>, <Line: +		return voc.getDataProperty(dpeExpression.asOWLDataProperty().getIRI().toString());
+>, <Line: +	}
+>, <Line: +	public static URIConstant getIndividual(OWLIndividual ind) {
+>, <Line: +		if (ind.isAnonymous()) 
+>, <Line: +			throw new RuntimeException("Found anonymous individual, this feature is not supported:" + ind);
+>, <Line: +		 return dfac.getConstantURI(ind.asOWLNamedIndividual().getIRI().toString());
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

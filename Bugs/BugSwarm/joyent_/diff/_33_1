@@ -1,0 +1,156 @@
+[<Line: +import com.joyent.manta.exception.MantaException;
+>, <Line: +    /**
+>, <Line: +     * Format for naming Manta jobs.
+>, <Line: +     */
+>, <Line: +    private static final String JOB_NAME_FORMAT = "append-%s";
+>, <Line: +    /**
+>, <Line: +     * Retrieves the state of a given Manta multipart upload.
+>, <Line: +     *
+>, <Line: +     * @param upload multipart upload object
+>, <Line: +     * @return enum representing the state / status of the multipart upload
+>, <Line: +     * @throws IOException thrown if there is a problem connecting to Manta
+>, <Line: +     */
+>, <Line: +    public MantaMultipartStatus getStatus(final MantaMultipartUpload upload)
+>, <Line: +            throws IOException {
+>, <Line: +        if (upload == null) {
+>, <Line: +            throw new IllegalArgumentException("Upload must be present");
+>, <Line: +        }
+>, <Line: +        return getStatus(upload.getId());
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Retrieves the state of a given Manta multipart upload.
+>, <Line: +     *
+>, <Line: +     * @param id multipart upload id
+>, <Line: +     * @return enum representing the state / status of the multipart upload
+>, <Line: +     * @throws IOException thrown if there is a problem connecting to Manta
+>, <Line: +     */
+>, <Line: +    public MantaMultipartStatus getStatus(final UUID id) throws IOException {
+>, <Line: +        final String dir = multipartUploadDir(id);
+>, <Line: +        try {
+>, <Line: +            final MantaObjectResponse response = mantaClient.head(dir);
+>, <Line: +            if (!response.isDirectory()) {
+>, <Line: +                MantaIOException exception = new MantaIOException(
+>, <Line: +                        "Remote path was a file and not a directory as expected");
+>, <Line: +                exception.setContextValue("multipart_upload_dir", dir);
+>, <Line: +                throw exception;
+>, <Line: +            }
+>, <Line: +            final MantaJob job = findJob(id);
+>, <Line: +            if (job == null) {
+>, <Line: +                return MantaMultipartStatus.CREATED;
+>, <Line: +            }
+>, <Line: +            /* If we still have the directory associated with the multipart
+>, <Line: +             * upload AND we are in the state of Cancelled. */
+>, <Line: +            if (job.getCancelled()) {
+>, <Line: +                return MantaMultipartStatus.ABORTING;
+>, <Line: +            }
+>, <Line: +            final String state = job.getState();
+>, <Line: +            /* If we still have the directory associated with the multipart
+>, <Line: +             * upload AND we have the job id, we are in a state where the
+>, <Line: +             * job hasn't finished clearing out the data files. */
+>, <Line: +            if (state.equals("done") || state.equals("running") || state.equals("queued")) {
+>, <Line: +                return MantaMultipartStatus.COMMITTING;
+>, <Line: +            } else {
+>, <Line: +                return MantaMultipartStatus.UNKNOWN;
+>, <Line: +            }
+>, <Line: +        } catch (MantaClientHttpResponseException e) {
+>, <Line: +            if (e.getStatusCode() == HttpStatus.SC_NOT_FOUND) {
+>, <Line: +                final MantaJob job = findJob(id);
+>, <Line: +                if (job == null) {
+>, <Line: +                    return MantaMultipartStatus.UNKNOWN;
+>, <Line: +                } else if (job.getCancelled() != null && job.getCancelled()) {
+>, <Line: +                    return MantaMultipartStatus.ABORTED;
+>, <Line: +                } else if (job.getState().equals("done")) {
+>, <Line: +                    return MantaMultipartStatus.COMPLETED;
+>, <Line: +                } else {
+>, <Line: +                    MantaException mioe = new MantaException("Unexpected job state");
+>, <Line: +                    mioe.setContextValue("job_state", job.getState());
+>, <Line: +                    mioe.setContextValue("job_id", job.getId().toString());
+>, <Line: +                    mioe.setContextValue("multipart_id", id);
+>, <Line: +                    mioe.setContextValue("multipart_upload_dir", dir);
+>, <Line: +                    throw mioe;
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            throw e;
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +        if (job.getState().equals("running") || job.getState().equals("queued")) {
+>, <Line: +    public void complete(final MantaMultipartUpload upload) throws IOException {
+>, <Line: +        complete(upload.getId());
+>, <Line: +    public void complete(final UUID id) throws IOException {
+>, <Line: +                .newJob(String.format(JOB_NAME_FORMAT, id))
+>, <Line: +        return mantaClient.getJobsByName(String.format(JOB_NAME_FORMAT, id))
+>]
+[<Line: -    /**
+>, <Line: -     * When true indicates that multipart upload has already started.
+>, <Line: -     * @param upload multipart upload object
+>, <Line: -     * @return true if the upload has started
+>, <Line: -     * @throws IOException thrown if there is a problem connecting to Manta
+>, <Line: -     */
+>, <Line: -    public boolean isStarted(final MantaMultipartUpload upload) throws IOException {
+>, <Line: -        if (upload == null) {
+>, <Line: -            throw new IllegalArgumentException("Upload must be present");
+>, <Line: -        }
+>, <Line: -        return isStarted(upload.getId());
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * When true indicates that multipart upload has already started.
+>, <Line: -     * @param id multipart transaction id
+>, <Line: -     * @return true if the upload has started
+>, <Line: -     * @throws IOException thrown if there is a problem connecting to Manta
+>, <Line: -     */
+>, <Line: -    public boolean isStarted(final UUID id) throws IOException {
+>, <Line: -        final String dir = multipartUploadDir(id);
+>, <Line: -        try {
+>, <Line: -            final MantaObjectResponse response = mantaClient.head(dir);
+>, <Line: -            if (response.isDirectory()) {
+>, <Line: -                return true;
+>, <Line: -            }
+>, <Line: -            MantaIOException exception = new MantaIOException(
+>, <Line: -                    "Remote path was a file and not a directory as expected");
+>, <Line: -            exception.setContextValue("multipartUploadPath", dir);
+>, <Line: -            throw exception;
+>, <Line: -        } catch (MantaClientHttpResponseException e) {
+>, <Line: -            if (e.getStatusCode() == HttpStatus.SC_NOT_FOUND) {
+>, <Line: -                return false;
+>, <Line: -            }
+>, <Line: -            throw e;
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -        if (job.getState().equals("running")) {
+>, <Line: -    public void commit(final MantaMultipartUpload upload) throws IOException {
+>, <Line: -        commit(upload.getId());
+>, <Line: -    public void commit(final UUID id) throws IOException {
+>, <Line: -                .newJob("append-" + id)
+>, <Line: -    /**
+>, <Line: -     * Indicates if a multipart transfer has completed, cancelled or erred.
+>, <Line: -     *
+>, <Line: -     * @param upload multipart upload object
+>, <Line: -     * @return true if a multipart transfer has completed, cancelled or erred
+>, <Line: -     * @throws IOException thrown if there is a problem connecting to Manta
+>, <Line: -     */
+>, <Line: -    public boolean isComplete(final MantaMultipartUpload upload) throws IOException {
+>, <Line: -        if (upload == null) {
+>, <Line: -            throw new IllegalArgumentException("Upload must be present");
+>, <Line: -        }
+>, <Line: -        return isComplete(upload.getId());
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Indicates if a multipart transfer has completed, cancelled or erred.
+>, <Line: -     *
+>, <Line: -     * @param id multipart upload id
+>, <Line: -     * @return true if a multipart transfer has completed, cancelled or erred
+>, <Line: -     * @throws IOException thrown if there is a problem connecting to Manta
+>, <Line: -     */
+>, <Line: -    public boolean isComplete(final UUID id) throws IOException {
+>, <Line: -        final MantaJob job = findJob(id);
+>, <Line: -        if (job == null) {
+>, <Line: -            return true;
+>, <Line: -        }
+>, <Line: -        if (job.getCancelled()) {
+>, <Line: -            return true;
+>, <Line: -        }
+>, <Line: -        final String state = job.getState();
+>, <Line: -        return state.equals("done");
+>, <Line: -    }
+>, <Line: -        return mantaClient.getJobsByName("append-" + id)
+>]

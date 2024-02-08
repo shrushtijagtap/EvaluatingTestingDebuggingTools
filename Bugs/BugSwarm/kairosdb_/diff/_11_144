@@ -1,0 +1,222 @@
+[<Line: +		'angular',
+>, <Line: +		'jquery',
+>, <Line: +		'config',
+>, <Line: +		'lodash',
+>, <Line: +	],
+>, <Line: +	function (angular, $, config, _) {
+>, <Line: +		"use strict";
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		module.controller('DashboardCtrl', function ($scope,
+>, <Line: +													 $rootScope,
+>, <Line: +													 dashboardKeybindings,
+>, <Line: +													 timeSrv,
+>, <Line: +													 templateValuesSrv,
+>, <Line: +													 dashboardSrv,
+>, <Line: +													 dashboardViewStateSrv,
+>, <Line: +													 $timeout) {
+>, <Line: +			$scope.editor = {index: 0};
+>, <Line: +			$scope.panelNames = _.map(config.panels, function (value, key) {
+>, <Line: +				return key;
+>, <Line: +			});
+>, <Line: +			var resizeEventTimeout;
+>, <Line: +			this.init = function (dashboardData) {
+>, <Line: +				$scope.availablePanels = config.panels;
+>, <Line: +				$scope.reset_row();
+>, <Line: +				$scope.registerWindowResizeEvent();
+>, <Line: +				$scope.onAppEvent('show-json-editor', $scope.showJsonEditor);
+>, <Line: +				$scope.setupDashboard(dashboardData);
+>, <Line: +			};
+>, <Line: +			$scope.registerWindowResizeEvent = function () {
+>, <Line: +				angular.element(window).bind('resize', function () {
+>, <Line: +					$timeout.cancel(resizeEventTimeout);
+>, <Line: +					resizeEventTimeout = $timeout(function () {
+>, <Line: +						$scope.$broadcast('render');
+>, <Line: +					}, 200);
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			$scope.setupDashboard = function (dashboardData) {
+>, <Line: +				$rootScope.performance.dashboardLoadStart = new Date().getTime();
+>, <Line: +				$rootScope.performance.panelsInitialized = 0;
+>, <Line: +				$rootScope.performance.panelsRendered = 0;
+>, <Line: +				$scope.dashboard = dashboardSrv.create(dashboardData);
+>, <Line: +				$scope.dashboardViewState = dashboardViewStateSrv.create($scope);
+>, <Line: +				// init services
+>, <Line: +				timeSrv.init($scope.dashboard);
+>, <Line: +				templateValuesSrv.init($scope.dashboard, $scope.dashboardViewState);
+>, <Line: +				$scope.checkFeatureToggles();
+>, <Line: +				dashboardKeybindings.shortcuts($scope);
+>, <Line: +				$scope.setWindowTitleAndTheme();
+>, <Line: +				$scope.appEvent("dashboard-loaded", $scope.dashboard);
+>, <Line: +			};
+>, <Line: +			$scope.setWindowTitleAndTheme = function () {
+>, <Line: +				window.document.title = config.window_title_prefix + $scope.dashboard.title;
+>, <Line: +				$scope.grafana.style = $scope.dashboard.style;
+>, <Line: +			};
+>, <Line: +			$scope.isPanel = function (obj) {
+>, <Line: +				if (!_.isNull(obj) && !_.isUndefined(obj) && !_.isUndefined(obj.type)) {
+>, <Line: +					return true;
+>, <Line: +				} else {
+>, <Line: +					return false;
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.add_row = function (dash, row) {
+>, <Line: +				dash.rows.push(row);
+>, <Line: +			};
+>, <Line: +			$scope.add_row_default = function () {
+>, <Line: +				$scope.reset_row();
+>, <Line: +				$scope.row.title = 'New row';
+>, <Line: +				$scope.add_row($scope.dashboard, $scope.row);
+>, <Line: +			};
+>, <Line: +			$scope.reset_row = function () {
+>, <Line: +				$scope.row = {
+>, <Line: +					title: '',
+>, <Line: +					height: '250px',
+>, <Line: +					editable: true,
+>, <Line: +				};
+>, <Line: +			};
+>, <Line: +			$scope.panelEditorPath = function (type) {
+>, <Line: +				return 'app/' + config.panels[type].path + '/editor.html';
+>, <Line: +			};
+>, <Line: +			$scope.pulldownEditorPath = function (type) {
+>, <Line: +				return 'app/panels/' + type + '/editor.html';
+>, <Line: +			};
+>, <Line: +			$scope.showJsonEditor = function (evt, options) {
+>, <Line: +				var editScope = $rootScope.$new();
+>, <Line: +				editScope.object = options.object;
+>, <Line: +				editScope.updateHandler = options.updateHandler;
+>, <Line: +				$scope.appEvent('show-dash-editor', {
+>, <Line: +					src: 'app/partials/edit_json.html',
+>, <Line: +					scope: editScope
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			$scope.checkFeatureToggles = function () {
+>, <Line: +				$scope.submenuEnabled = $scope.dashboard.templating.enable || $scope.dashboard.annotations.enable;
+>, <Line: +			};
+>, <Line: +			$scope.onDrop = function (panelId, row, dropTarget) {
+>, <Line: +				var info = $scope.dashboard.getPanelInfoById(panelId);
+>, <Line: +				if (dropTarget) {
+>, <Line: +					var dropInfo = $scope.dashboard.getPanelInfoById(dropTarget.id);
+>, <Line: +					dropInfo.row.panels[dropInfo.index] = info.panel;
+>, <Line: +					info.row.panels[info.index] = dropTarget;
+>, <Line: +					var dragSpan = info.panel.span;
+>, <Line: +					info.panel.span = dropTarget.span;
+>, <Line: +					dropTarget.span = dragSpan;
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					info.row.panels.splice(info.index, 1);
+>, <Line: +					info.panel.span = 12 - $scope.dashboard.rowSpan(row);
+>, <Line: +					row.panels.push(info.panel);
+>, <Line: +				}
+>, <Line: +				$rootScope.$broadcast('render');
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'jquery',
+>, <Line: -  'config',
+>, <Line: -  'lodash',
+>, <Line: -],
+>, <Line: -function (angular, $, config, _) {
+>, <Line: -  "use strict";
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  module.controller('DashboardCtrl', function(
+>, <Line: -      $scope,
+>, <Line: -      $rootScope,
+>, <Line: -      dashboardKeybindings,
+>, <Line: -      timeSrv,
+>, <Line: -      templateValuesSrv,
+>, <Line: -      dashboardSrv,
+>, <Line: -      dashboardViewStateSrv,
+>, <Line: -      $timeout) {
+>, <Line: -    $scope.editor = { index: 0 };
+>, <Line: -    $scope.panelNames = _.map(config.panels, function(value, key) { return key; });
+>, <Line: -    var resizeEventTimeout;
+>, <Line: -    this.init = function(dashboardData) {
+>, <Line: -      $scope.availablePanels = config.panels;
+>, <Line: -      $scope.reset_row();
+>, <Line: -      $scope.registerWindowResizeEvent();
+>, <Line: -      $scope.onAppEvent('show-json-editor', $scope.showJsonEditor);
+>, <Line: -      $scope.setupDashboard(dashboardData);
+>, <Line: -    };
+>, <Line: -    $scope.registerWindowResizeEvent = function() {
+>, <Line: -      angular.element(window).bind('resize', function() {
+>, <Line: -        $timeout.cancel(resizeEventTimeout);
+>, <Line: -        resizeEventTimeout = $timeout(function() { $scope.$broadcast('render'); }, 200);
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    $scope.setupDashboard = function(dashboardData) {
+>, <Line: -      $rootScope.performance.dashboardLoadStart = new Date().getTime();
+>, <Line: -      $rootScope.performance.panelsInitialized = 0;
+>, <Line: -      $rootScope.performance.panelsRendered = 0;
+>, <Line: -      $scope.dashboard = dashboardSrv.create(dashboardData);
+>, <Line: -      $scope.dashboardViewState = dashboardViewStateSrv.create($scope);
+>, <Line: -      // init services
+>, <Line: -      timeSrv.init($scope.dashboard);
+>, <Line: -      templateValuesSrv.init($scope.dashboard, $scope.dashboardViewState);
+>, <Line: -      $scope.checkFeatureToggles();
+>, <Line: -      dashboardKeybindings.shortcuts($scope);
+>, <Line: -      $scope.setWindowTitleAndTheme();
+>, <Line: -      $scope.appEvent("dashboard-loaded", $scope.dashboard);
+>, <Line: -    };
+>, <Line: -    $scope.setWindowTitleAndTheme = function() {
+>, <Line: -      window.document.title = config.window_title_prefix + $scope.dashboard.title;
+>, <Line: -      $scope.grafana.style = $scope.dashboard.style;
+>, <Line: -    };
+>, <Line: -    $scope.isPanel = function(obj) {
+>, <Line: -      if(!_.isNull(obj) && !_.isUndefined(obj) && !_.isUndefined(obj.type)) {
+>, <Line: -        return true;
+>, <Line: -      } else {
+>, <Line: -        return false;
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.add_row = function(dash, row) {
+>, <Line: -      dash.rows.push(row);
+>, <Line: -    };
+>, <Line: -    $scope.add_row_default = function() {
+>, <Line: -      $scope.reset_row();
+>, <Line: -      $scope.row.title = 'New row';
+>, <Line: -      $scope.add_row($scope.dashboard, $scope.row);
+>, <Line: -    };
+>, <Line: -    $scope.reset_row = function() {
+>, <Line: -      $scope.row = {
+>, <Line: -        title: '',
+>, <Line: -        height: '250px',
+>, <Line: -        editable: true,
+>, <Line: -      };
+>, <Line: -    };
+>, <Line: -    $scope.panelEditorPath = function(type) {
+>, <Line: -      return 'app/' + config.panels[type].path + '/editor.html';
+>, <Line: -    };
+>, <Line: -    $scope.pulldownEditorPath = function(type) {
+>, <Line: -      return 'app/panels/'+type+'/editor.html';
+>, <Line: -    };
+>, <Line: -    $scope.showJsonEditor = function(evt, options) {
+>, <Line: -      var editScope = $rootScope.$new();
+>, <Line: -      editScope.object = options.object;
+>, <Line: -      editScope.updateHandler = options.updateHandler;
+>, <Line: -      $scope.appEvent('show-dash-editor', { src: 'app/partials/edit_json.html', scope: editScope });
+>, <Line: -    };
+>, <Line: -    $scope.checkFeatureToggles = function() {
+>, <Line: -      $scope.submenuEnabled = $scope.dashboard.templating.enable || $scope.dashboard.annotations.enable;
+>, <Line: -    };
+>, <Line: -    $scope.onDrop = function(panelId, row, dropTarget) {
+>, <Line: -      var info = $scope.dashboard.getPanelInfoById(panelId);
+>, <Line: -      if (dropTarget) {
+>, <Line: -        var dropInfo = $scope.dashboard.getPanelInfoById(dropTarget.id);
+>, <Line: -        dropInfo.row.panels[dropInfo.index] = info.panel;
+>, <Line: -        info.row.panels[info.index] = dropTarget;
+>, <Line: -        var dragSpan = info.panel.span;
+>, <Line: -        info.panel.span = dropTarget.span;
+>, <Line: -        dropTarget.span = dragSpan;
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        info.row.panels.splice(info.index, 1);
+>, <Line: -        info.panel.span = 12 - $scope.dashboard.rowSpan(row);
+>, <Line: -        row.panels.push(info.panel);
+>, <Line: -      }
+>, <Line: -      $rootScope.$broadcast('render');
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

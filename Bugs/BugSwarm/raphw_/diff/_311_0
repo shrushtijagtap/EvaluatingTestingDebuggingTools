@@ -1,0 +1,211 @@
+[<Line: +        /**
+>, <Line: +         * Invoked when a type is not transformed but ignored.
+>, <Line: +         *
+>, <Line: +         * @param typeDescription The type being ignored.
+>, <Line: +         */
+>, <Line: +        void onIgnored(TypeDescription typeDescription);
+>, <Line: +            public void onIgnored(TypeDescription typeDescription) {
+>, <Line: +            public void onError(String typeName, Throwable throwable) {
+>, <Line: +            private final List<? extends Listener> listeners;
+>, <Line: +                this(Arrays.asList(listener));
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Creates a new compound listener.
+>, <Line: +             *
+>, <Line: +             * @param listeners The listeners to apply in their application order.
+>, <Line: +             */
+>, <Line: +            public Compound(List<? extends Listener> listeners) {
+>, <Line: +                this.listeners = listeners;
+>, <Line: +                for (Listener listener : listeners) {
+>, <Line: +            public void onIgnored(TypeDescription typeDescription) {
+>, <Line: +                for (Listener listener : listeners) {
+>, <Line: +                    listener.onIgnored(typeDescription);
+>, <Line: +            public void onError(String typeName, Throwable throwable) {
+>, <Line: +                for (Listener listener : listeners) {
+>, <Line: +                    listener.onError(typeName, throwable);
+>, <Line: +                for (Listener listener : listeners) {
+>, <Line: +                        && listeners.equals(((Compound) other).listeners);
+>, <Line: +                return listeners.hashCode();
+>, <Line: +                        "listeners=" + listeners +
+>, <Line: +        /**
+>, <Line: +         * The transformation object for handling type transformations.
+>, <Line: +         */
+>, <Line: +         * @param transformation             The transformation object for handling type transformations.
+>, <Line: +                    // The list of all loaded types can be significant what can crash the JVM such that this preselection becomes necessary.
+>, <Line: +                    if (instrumentation.isModifiableClass(type) && transformation.resolve(new TypeDescription.ForLoadedType(type), type.getClassLoader(),
+>, <Line: +                            type, type.getProtectionDomain()).isResolved()) {
+>, <Line: +        /**
+>, <Line: +         * A transformation serves as a handler for modifying a class.
+>, <Line: +         */
+>, <Line: +            /**
+>, <Line: +             * Resolves an attempted transformation to a specific transformation.
+>, <Line: +             *
+>, <Line: +             * @param typeDescription     A description of the type that is to be transformed.
+>, <Line: +             * @param classLoader         The class loader of the type being transformed.
+>, <Line: +             * @param classBeingRedefined In case of a type redefinition, the loaded type being transformed or {@code null} if that is not the case.
+>, <Line: +             * @param protectionDomain    The protection domain of the type being transformed.
+>, <Line: +             * @return A resolution for the given type.
+>, <Line: +             */
+>, <Line: +            /**
+>, <Line: +             * A resolution to a transformation.
+>, <Line: +             */
+>, <Line: +                /**
+>, <Line: +                 * Returns {@code true} if this resolution represents an actual type transformation. If this value is {@code false},
+>, <Line: +                 * this resolution will not attempt to transform a class.
+>, <Line: +                 *
+>, <Line: +                 * @return {@code true} if this resolution attempts to transform a type, {@code false} otherwise.
+>, <Line: +                 */
+>, <Line: +                /**
+>, <Line: +                 * Transforms a type or returns {@code null} if a type is not to be transformed.
+>, <Line: +                 *
+>, <Line: +                 * @param initializationStrategy     The initialization strategy to use.
+>, <Line: +                 * @param initialized                The initialized binary locator to use.
+>, <Line: +                 * @param definitionHandler          The definition handler to use.
+>, <Line: +                 * @param byteBuddy                  The Byte Buddy instance to use.
+>, <Line: +                 * @param methodNameTransformer      The method name transformer to be used.
+>, <Line: +                 * @param bootstrapInjectionStrategy The bootstrap injection strategy to be used.
+>, <Line: +                 * @param accessControlContext       The access control context to be used.
+>, <Line: +                 * @param listener                   The listener to be invoked to inform about an applied or non-applied transformation.
+>, <Line: +                 * @return The class file of the transformed class or {@code null} if no transformation is attempted.
+>, <Line: +                 */
+>, <Line: +                /**
+>, <Line: +                 * A canonical implementation of a non-resolved resolution.
+>, <Line: +                 */
+>, <Line: +                    /**
+>, <Line: +                     * The type that is not transformed.
+>, <Line: +                     */
+>, <Line: +                    /**
+>, <Line: +                     * Creates a new unresolved resolution.
+>, <Line: +                     *
+>, <Line: +                     * @param typeDescription The type that is not transformed.
+>, <Line: +                     */
+>, <Line: +                    @Override
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        return this == other || !(other == null || getClass() != other.getClass())
+>, <Line: +                                && typeDescription.equals(((Unresolved) other).typeDescription);
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public int hashCode() {
+>, <Line: +                        return typeDescription.hashCode();
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public String toString() {
+>, <Line: +                        return "AgentBuilder.Default.Transformation.Resolution.Unresolved{" +
+>, <Line: +                                "typeDescription=" + typeDescription +
+>, <Line: +                                '}';
+>, <Line: +                    }
+>, <Line: +            /**
+>, <Line: +             * A transformation that does not attempt to transform any type.
+>, <Line: +             */
+>, <Line: +                /**
+>, <Line: +                 * The singleton instance.
+>, <Line: +                 */
+>, <Line: +                @Override
+>, <Line: +                public String toString() {
+>, <Line: +                    return "AgentBuilder.Default.Transformation.Ignored." + name();
+>, <Line: +                }
+>, <Line: +            /**
+>, <Line: +             * A simple, active transformation.
+>, <Line: +             */
+>, <Line: +                /**
+>, <Line: +                 * A resolution that performs a type transformation.
+>, <Line: +                 */
+>, <Line: +                    /**
+>, <Line: +                     * A description of the transformed type.
+>, <Line: +                     */
+>, <Line: +                    /**
+>, <Line: +                     * The class loader of the transformed type.
+>, <Line: +                     */
+>, <Line: +                    /**
+>, <Line: +                     * The protection domain of the transformed type.
+>, <Line: +                     */
+>, <Line: +                    /**
+>, <Line: +                     * The transformer to be applied.
+>, <Line: +                     */
+>, <Line: +                    /**
+>, <Line: +                     * Creates a new active transformation.
+>, <Line: +                     *
+>, <Line: +                     * @param typeDescription  A description of the transformed type.
+>, <Line: +                     * @param classLoader      The class loader of the transformed type.
+>, <Line: +                     * @param protectionDomain The protection domain of the transformed type.
+>, <Line: +                     * @param transformer      The transformer to be applied.
+>, <Line: +                     */
+>, <Line: +                    @Override
+>, <Line: +                    public boolean equals(Object other) {
+>, <Line: +                        if (this == other) return true;
+>, <Line: +                        if (other == null || getClass() != other.getClass()) return false;
+>, <Line: +                        Resolution that = (Resolution) other;
+>, <Line: +                        return typeDescription.equals(that.typeDescription)
+>, <Line: +                                && !(classLoader != null ? !classLoader.equals(that.classLoader) : that.classLoader != null)
+>, <Line: +                                && !(protectionDomain != null ? !protectionDomain.equals(that.protectionDomain) : that.protectionDomain != null)
+>, <Line: +                                && transformer.equals(that.transformer);
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public int hashCode() {
+>, <Line: +                        int result = typeDescription.hashCode();
+>, <Line: +                        result = 31 * result + (classLoader != null ? classLoader.hashCode() : 0);
+>, <Line: +                        result = 31 * result + (protectionDomain != null ? protectionDomain.hashCode() : 0);
+>, <Line: +                        result = 31 * result + transformer.hashCode();
+>, <Line: +                        return result;
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    public String toString() {
+>, <Line: +                        return "AgentBuilder.Default.Transformation.Simple.Resolution{" +
+>, <Line: +                                "typeDescription=" + typeDescription +
+>, <Line: +                                ", classLoader=" + classLoader +
+>, <Line: +                                ", protectionDomain=" + protectionDomain +
+>, <Line: +                                ", transformer=" + transformer +
+>, <Line: +                                '}';
+>, <Line: +                    }
+>, <Line: +            /**
+>, <Line: +             * A compound transformation that applied several transformation in the given order and applies the first active transformation.
+>, <Line: +             */
+>, <Line: +                /**
+>, <Line: +                 * The list of transformations to apply in their application order.
+>, <Line: +                 */
+>, <Line: +                /**
+>, <Line: +                 * Creates a new compound transformation.
+>, <Line: +                 *
+>, <Line: +                 * @param transformation An array of transformations to apply in their application order.
+>, <Line: +                 */
+>, <Line: +                /**
+>, <Line: +                 * Creates a new compound transformation.
+>, <Line: +                 *
+>, <Line: +                 * @param transformations A list of transformations to apply in their application order.
+>, <Line: +                 */
+>, <Line: +                @Override
+>, <Line: +                public boolean equals(Object other) {
+>, <Line: +                    return this == other || !(other == null || getClass() != other.getClass())
+>, <Line: +                            && transformations.equals(((Compound) other).transformations);
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public int hashCode() {
+>, <Line: +                    return transformations.hashCode();
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public String toString() {
+>, <Line: +                    return "AgentBuilder.Default.Transformation.Compound{" +
+>, <Line: +                            "transformations=" + transformations +
+>, <Line: +                            '}';
+>, <Line: +                }
+>]
+[<Line: -        void onIgnored(TypeDescription typeDescription);
+>, <Line: -            public void onError(String typeName, Throwable throwable) {
+>, <Line: -            public void onIgnored(TypeDescription typeDescription) {
+>, <Line: -            private final Listener[] listener;
+>, <Line: -                this.listener = listener;
+>, <Line: -                for (Listener listener : this.listener) {
+>, <Line: -            public void onError(String typeName, Throwable throwable) {
+>, <Line: -                for (Listener listener : this.listener) {
+>, <Line: -                    listener.onError(typeName, throwable);
+>, <Line: -            public void onIgnored(TypeDescription typeDescription) {
+>, <Line: -                for (Listener listener : this.listener) {
+>, <Line: -                    listener.onIgnored(typeDescription);
+>, <Line: -                for (Listener listener : this.listener) {
+>, <Line: -                        && Arrays.equals(listener, ((Compound) other).listener);
+>, <Line: -                return Arrays.hashCode(listener);
+>, <Line: -                        "listener=" + Arrays.toString(listener) +
+>, <Line: -                    // The list of all loaded types can be significant what can crash the JVM such that this preselection becomes  necessary.
+>, <Line: -                    if (transformation.resolve(new TypeDescription.ForLoadedType(type), type.getClassLoader(), type, type.getProtectionDomain()).isResolved()) {
+>, <Line: -                        break;
+>]

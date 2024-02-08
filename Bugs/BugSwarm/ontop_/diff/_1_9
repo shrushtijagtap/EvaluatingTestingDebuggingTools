@@ -1,0 +1,8 @@
+[<Line: +	private String id;
+>, <Line: +	@Override
+>, <Line: +	@Override
+>, <Line: +	public abstract OBDAMappingAxiom clone();
+>]
+[<Line: -	private String id = "";
+>, <Line: -	public abstract Object clone();
+>]

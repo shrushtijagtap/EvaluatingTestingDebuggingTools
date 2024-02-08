@@ -1,0 +1,6 @@
+[<Line: +TargetCount = require '../models/TargetCount'
+>, <Line: +        @models.targetCount = new TargetCount {@groupId}
+>, <Line: +                targetCount: @models.targetCount
+>, <Line: +        @models.targetCount.fetch()
+>]
+[]

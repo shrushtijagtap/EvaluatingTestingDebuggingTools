@@ -1,0 +1,22 @@
+[<Line: +import static net.bytebuddy.matcher.ElementMatchers.none;
+>, <Line: +    private static final String FOO = "foo", BAR = "bar";
+>, <Line: +        when(fieldDescription.asToken(none())).thenReturn(fieldToken);
+>, <Line: +    @Test
+>, <Line: +    public void testRetainsInstrumentedType() throws Exception {
+>, <Line: +        TypeDescription typeDescription = new TypeDescription.ForLoadedType(Bar.class);
+>, <Line: +        FieldDescription fieldDescription = typeDescription.getSuperClass().getDeclaredFields().filter(named(BAR)).getOnly();
+>, <Line: +        FieldDescription transformed = Transformer.ForField.withModifiers().transform(typeDescription, fieldDescription);
+>, <Line: +        assertThat(transformed, is(fieldDescription));
+>, <Line: +        assertThat(transformed.getModifiers(), is(fieldDescription.getModifiers()));
+>, <Line: +        assertThat(transformed.getType().asErasure(), is(typeDescription));
+>, <Line: +        assertThat(transformed.getType().getSort(), is(TypeDefinition.Sort.PARAMETERIZED));
+>, <Line: +        assertThat(transformed.getType().getTypeArguments().size(), is(1));
+>, <Line: +        assertThat(transformed.getType().getTypeArguments().getOnly(), is(typeDescription.getSuperClass().getDeclaredFields().filter(named(FOO)).getOnly().getType()));
+>, <Line: +    }
+>, <Line: +        Bar<T> bar;
+>]
+[<Line: -import net.bytebuddy.description.method.MethodDescription;
+>, <Line: -import net.bytebuddy.matcher.ElementMatchers;
+>, <Line: -    private static final String FOO = "foo", BAR = "bar", QUX = "qux";
+>, <Line: -        when(fieldDescription.asToken(ElementMatchers.is(instrumentedType))).thenReturn(fieldToken);
+>]

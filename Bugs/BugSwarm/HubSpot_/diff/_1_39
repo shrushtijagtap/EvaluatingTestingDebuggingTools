@@ -1,0 +1,18 @@
+[<Line: +import java.util.Collections;
+>, <Line: +import java.util.Date;
+>, <Line: +import java.util.List;
+>, <Line: +      deleteNode(String.format(REQUEST_FORMAT, requestId), true);
+>, <Line: +  public List<String> getAllRequestIds() {
+>, <Line: +    return getChildren(REQUESTS_FORMAT);
+>, <Line: +  }
+>, <Line: +  public Optional<Long> getRequestUpdatedAt(String requestId) {
+>, <Line: +    return getUpdatedAt(String.format(String.format(REQUEST_STATE_FORMAT, requestId)));
+>, <Line: +  }
+>, <Line: +  public boolean activeRequestExists(String requestId) {
+>, <Line: +    return nodeExists(String.format(REQUEST_FORMAT, requestId));
+>, <Line: +  }
+>]
+[<Line: -import java.util.Collections;
+>, <Line: -import java.util.List;
+>, <Line: -      deleteNode(String.format(REQUEST_FORMAT, requestId));
+>]

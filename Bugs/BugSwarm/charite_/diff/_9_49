@@ -1,0 +1,62 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_vcf;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.VCFHeaderExtender;
+>, <Line: +import htsjdk.variant.vcf.VCFFileReader;
+>, <Line: +import htsjdk.variant.vcf.VCFHeader;
+>, <Line: +import htsjdk.variant.vcf.VCFHeaderLineCount;
+>, <Line: +import htsjdk.variant.vcf.VCFInfoHeaderLine;
+>, <Line: +import java.io.File;
+>, <Line: +/**
+>, <Line: + * Helper class for extending {@link VCFHeader}s for UK10K annotations.
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenericVCFHeaderExtender extends VCFHeaderExtender {
+>, <Line: +	GenericVCFAnnotationOptions genericVcfOptions;
+>, <Line: +	VCFHeader fileHeader;
+>, <Line: +	public GenericVCFHeaderExtender(GenericVCFAnnotationOptions options) {
+>, <Line: +		super(options);
+>, <Line: +		this.genericVcfOptions = options;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String getDefaultPrefix() {
+>, <Line: +		return "";
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void addHeaders(VCFHeader header, String prefix) {
+>, <Line: +		addHeadersInfixes(header, prefix, "", "");
+>, <Line: +		if (options.isReportOverlapping() && !options.isReportOverlappingAsMatching())
+>, <Line: +			addHeadersInfixes(header, prefix, "OVL_", " (requiring no genotype match, only position overlap)");
+>, <Line: +	}
+>, <Line: +	public void addHeadersInfixes(VCFHeader header, String prefix, String infix, String note) {
+>, <Line: +		try (VCFFileReader reader = new VCFFileReader(new File(genericVcfOptions.getPathVcfFile()), false)) {
+>, <Line: +			fileHeader = reader.getFileHeader();
+>, <Line: +		}
+>, <Line: +		for (String fieldName : genericVcfOptions.getFieldNames()) {
+>, <Line: +			final VCFInfoHeaderLine headerLine = fileHeader.getInfoHeaderLine(fieldName);
+>, <Line: +			final VCFHeaderLineCount countType = headerLine.getCountType();
+>, <Line: +			// TODO(holtgrewe): support more counts, could require using "|" for nested lists
+>, <Line: +			VCFInfoHeaderLine line;
+>, <Line: +			if (countType == VCFHeaderLineCount.R) {
+>, <Line: +				line = new VCFInfoHeaderLine(prefix + infix + fieldName, VCFHeaderLineCount.R, headerLine.getType(),
+>, <Line: +						"Field " + fieldName + " from file " + genericVcfOptions.getPathVcfFile() + note);
+>, <Line: +			} else if (countType == VCFHeaderLineCount.A) {
+>, <Line: +				line = new VCFInfoHeaderLine(prefix + infix + fieldName, VCFHeaderLineCount.A, headerLine.getType(),
+>, <Line: +						"Field " + fieldName + " from file " + genericVcfOptions.getPathVcfFile() + note);
+>, <Line: +			} else if (countType == VCFHeaderLineCount.INTEGER) {
+>, <Line: +				if (headerLine.getCount() != 1) {
+>, <Line: +					throw new RuntimeException("Unsupported integer count " + headerLine.getCount());
+>, <Line: +				}
+>, <Line: +				line = new VCFInfoHeaderLine(prefix + infix + fieldName, 1, headerLine.getType(),
+>, <Line: +						"Field " + fieldName + " from file " + genericVcfOptions.getPathVcfFile() + note);
+>, <Line: +			} else {
+>, <Line: +				throw new RuntimeException("Unsupported count type " + countType);
+>, <Line: +			}
+>, <Line: +			header.addMetaDataLine(line);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public VCFHeader getFileHeader() {
+>, <Line: +		return fileHeader;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

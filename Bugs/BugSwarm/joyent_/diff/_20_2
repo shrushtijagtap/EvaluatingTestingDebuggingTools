@@ -1,0 +1,4 @@
+[<Line: +     * Time in milliseconds to cache HTTP signature headers.
+>]
+[<Line: -     * Time in milliseconds to cache HTTP signature headers
+>]

@@ -1,0 +1,37 @@
+[<Line: +public class AgentBuilderBinaryLocatorTest {
+>, <Line: +        assertThat(AgentBuilder.BinaryLocator.Default.EXTENDED.initialize(classLoader).getTypePool(),
+>, <Line: +        assertThat(AgentBuilder.BinaryLocator.Default.EXTENDED.initialize(classLoader).getClassFileLocator(),
+>, <Line: +                notNullValue(ClassFileLocator.class));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testTypePoolExtendedWithExplicitType() throws Exception {
+>, <Line: +        assertThat(AgentBuilder.BinaryLocator.Default.EXTENDED.initialize(classLoader, FOO, QUX).getTypePool(),
+>, <Line: +                notNullValue(TypePool.class));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testClassFileLocatorExtendedWithExplicitType() throws Exception {
+>, <Line: +        assertThat(AgentBuilder.BinaryLocator.Default.EXTENDED.initialize(classLoader, FOO, QUX).getClassFileLocator(),
+>, <Line: +        assertThat(AgentBuilder.BinaryLocator.Default.FAST.initialize(classLoader).getTypePool(),
+>, <Line: +                notNullValue(TypePool.class));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testClassFileLocatorFast() throws Exception {
+>, <Line: +        assertThat(AgentBuilder.BinaryLocator.Default.FAST.initialize(classLoader).getClassFileLocator(),
+>, <Line: +                notNullValue(ClassFileLocator.class));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testTypePoolFastWithExplicitType() throws Exception {
+>, <Line: +        assertThat(AgentBuilder.BinaryLocator.Default.FAST.initialize(classLoader, FOO, QUX).getTypePool(),
+>, <Line: +    public void testClassFileLocatorFastWithExplicitType() throws Exception {
+>, <Line: +        assertThat(AgentBuilder.BinaryLocator.Default.FAST.initialize(classLoader, FOO, QUX).getClassFileLocator(),
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.BinaryLocator.Initialized.Simple.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.BinaryLocator.Initialized.Extended.class).apply();
+>]
+[<Line: -public class AgentBuilderBinaryLocatorDefaultTest {
+>, <Line: -        assertThat(AgentBuilder.BinaryLocator.Default.EXTENDED.initialize(FOO, QUX, classLoader).getTypePool(),
+>, <Line: -        assertThat(AgentBuilder.BinaryLocator.Default.EXTENDED.initialize(FOO, QUX, classLoader).getClassFileLocator(),
+>, <Line: -        assertThat(AgentBuilder.BinaryLocator.Default.FAST.initialize(FOO, QUX, classLoader).getTypePool(),
+>, <Line: -    public void testClassFileLocator() throws Exception {
+>, <Line: -        assertThat(AgentBuilder.BinaryLocator.Default.FAST.initialize(FOO, QUX, classLoader).getClassFileLocator(),
+>, <Line: -        ObjectPropertyAssertion.of(AgentBuilder.BinaryLocator.Default.Initialized.class).apply();
+>]

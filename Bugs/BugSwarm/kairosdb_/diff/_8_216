@@ -1,0 +1,26 @@
+[<Line: +		<div class="grafana-console-item" ng-repeat="item in events"
+>, <Line: +			 ng-class="{'grafana-console-error': item.error}">
+>, <Line: +			<span class="grafana-console-time gfc-col"
+>, <Line: +				  ng-bind="item.time"></span>
+>, <Line: +			<span class="gfc-col grafana-console-method"
+>, <Line: +				  ng-bind="item.method"></span>
+>, <Line: +			<span class="gfc-col grafana-console-title"
+>, <Line: +				  ng-bind="item.title"></span>
+>, <Line: +			<span class="gfc-col grafana-console-elapsed"
+>, <Line: +				  ng-bind="item.elapsed"></span>
+>, <Line: +			<span class="gfc-col grafana-console-field1"
+>, <Line: +				  ng-bind="item.field1"></span>
+>, <Line: +			<span class="gfc-col grafana-console-field2"
+>, <Line: +				  ng-bind="item.field2"></span>
+>, <Line: +			<span class="gfc-col grafana-console-field3"
+>, <Line: +				  ng-bind="item.field3"></span>
+>]
+[<Line: -		<div class="grafana-console-item" ng-repeat="item in events" ng-class="{'grafana-console-error': item.error}">
+>, <Line: -			<span class="grafana-console-time gfc-col" ng-bind="item.time"></span>
+>, <Line: -			<span class="gfc-col grafana-console-method" ng-bind="item.method"></span>
+>, <Line: -			<span class="gfc-col grafana-console-title" ng-bind="item.title"></span>
+>, <Line: -			<span class="gfc-col grafana-console-elapsed" ng-bind="item.elapsed"></span>
+>, <Line: -			<span class="gfc-col grafana-console-field1" ng-bind="item.field1"></span>
+>, <Line: -			<span class="gfc-col grafana-console-field2" ng-bind="item.field2"></span>
+>, <Line: -			<span class="gfc-col grafana-console-field3" ng-bind="item.field3"></span>
+>]

@@ -1,0 +1,4 @@
+[<Line: +    private static final Pattern pattern = Pattern.compile(
+>]
+[<Line: -    static private Pattern pattern = Pattern.compile(
+>]

@@ -1,0 +1,6 @@
+[<Line: +					buffer.put((byte) 0xFF); //Only used for serialization of end search keys
+>, <Line: +					buffer.put((byte) 0x0); //Marks the beginning of datatype
+>]
+[<Line: -					buffer.put((byte)0xFF); //Only used for serialization of end search keys
+>, <Line: -					buffer.put((byte)0x0); //Marks the beginning of datatype
+>]

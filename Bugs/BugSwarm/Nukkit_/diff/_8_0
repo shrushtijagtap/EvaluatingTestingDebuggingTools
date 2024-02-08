@@ -1,0 +1,38 @@
+[<Line: +### Issue Description
+>, <Line: +### OS and Versions
+>, <Line: +| Storage Size | 1 TB | <!-- Max size -->
+>, <Line: +| Storage Type | SSD | <!-- SSD or HDD -->
+>, <Line: +| CPU Type | Intel Xeon X5650 | <!-- Such as: "Intel Xeon X5650" ,"Hisilicon HI3536C" or "AMD Ryzen 7" -->
+>, <Line: +| CPU Core Count | 12 cores 24 threads | 
+>, <Line: +| Upstream Bandwidth | 100 Mbps | <!-- How many Mbps/Gbps? Such as: 100 Mbps or 1 Gbps. If you are testing in LAN (wired or wifi) , it depends on speed of your router, it is normally 100 Mbps. -->
+>, <Line: +| Client Edition | Android | <!--- Windows 10? Android? iOS? Simulators with x86 platform? -->
+>, <Line: +| Client Version | 1.0.4 | <!--- Client Version, such as 1.1.2, 0.15.90 or 0.15 build 1 and so on -->
+>, <Line: +### Issue Description
+>, <Line: +### OS and Versions
+>, <Line: +| Storage Size | 1 TB | <!-- Max size -->
+>, <Line: +| Storage Type | SSD | <!-- SSD or HDD -->
+>, <Line: +| CPU Type | Intel Xeon X5650 | <!-- Such as: "Intel Xeon X5650" ,"Hisilicon HI3536C" or "AMD Ryzen 7" -->
+>, <Line: +| CPU Core Count | 12 cores 24 threads | 
+>, <Line: +| Upstream Bandwidth | 100 Mbps | <!-- How many Mbps/Gbps? Such as: 100 Mbps or 1 Gbps. If you are testing in LAN (wired or wifi) , it depends on speed of your router, it is normally 100 Mbps. -->
+>, <Line: +| Client Edition | Android | <!--- Windows 10? Android? iOS? Simulators with x86 platform? -->
+>, <Line: +| Client Version | 1.0.4 | <!--- Client Version, such as 1.1.2, 0.15.90 or 0.15 build 1 and so on -->
+>]
+[<Line: -### Issue description
+>, <Line: -### OS and versions
+>, <Line: -| Storage size | 1 TB | <!-- Max size -->
+>, <Line: -| Storage type | SSD | <!-- SSD or HDD -->
+>, <Line: -| CPU type | Intel Xeon X5650 | <!-- Such as: "Intel Xeon X5650" ,"Hisilicon HI3536C" or "AMD Ryzen 7" -->
+>, <Line: -| CPU core count | 12 cores 24 threads | 
+>, <Line: -| Internet upload | 100 Mbps | <!-- How many Mbps/Gbps? Such as: 100 Mbps or 1 Gbps. If you are testing in LAN (wired or wifi) , it depends on speed of your router, it is normally 100 Mbps. -->
+>, <Line: -| Client edition | Android | <!--- Windows 10? Android? iOS? Simulators with x86 platform? -->
+>, <Line: -| Client version | 1.0.4 | <!--- Client Version, such as 1.1.2, 0.15.90 or 0.15 build 1 and so on -->
+>, <Line: -### Issue description
+>, <Line: -### OS and versions
+>, <Line: -| Storage size | 1 TB | <!-- Max size -->
+>, <Line: -| Storage type | SSD | <!-- SSD or HDD -->
+>, <Line: -| CPU type | Intel Xeon X5650 | <!-- Such as: "Intel Xeon X5650" ,"Hisilicon HI3536C" or "AMD Ryzen 7" -->
+>, <Line: -| CPU core count | 12 cores 24 threads | 
+>, <Line: -| Internet upload | 100 Mbps | <!-- How many Mbps/Gbps? Such as: 100 Mbps or 1 Gbps. If you are testing in LAN (wired or wifi) , it depends on speed of your router, it is normally 100 Mbps. -->
+>, <Line: -| Client edition | Android | <!--- Windows 10? Android? iOS? Simulators with x86 platform? -->
+>, <Line: -| Client version | 1.0.4 | <!--- Client Version, such as 1.1.2, 0.15.90 or 0.15 build 1 and so on -->
+>]

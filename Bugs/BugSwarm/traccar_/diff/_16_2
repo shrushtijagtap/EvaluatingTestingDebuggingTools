@@ -1,0 +1,6 @@
+[<Line: +    public Collection<Statistics> getStatistics(Date from, Date to) throws SQLException {
+>, <Line: +                .setDate("from", from)
+>, <Line: +                .setDate("to", to)
+>]
+[<Line: -    public Collection<Statistics> getStatistics() throws SQLException {
+>]

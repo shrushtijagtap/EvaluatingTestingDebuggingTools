@@ -1,0 +1,24 @@
+[<Line: +  padding-left: 20px;
+>, <Line: +  .box-shadow(0 1px 4px rgba(0, 0, 0, .065));
+>, <Line: +  padding-left: 0;
+>, <Line: +  .box-shadow(inset 0 3px 8px rgba(0, 0, 0, .125));
+>, <Line: +  .box-shadow(0 1px 0 rgba(0, 0, 0, .25));
+>, <Line: +    border-left: 7px solid transparent;
+>, <Line: +    border-right: 7px solid transparent;
+>, <Line: +    border-left: 6px solid transparent;
+>, <Line: +    border-right: 6px solid transparent;
+>, <Line: +    text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+>, <Line: +        .box-shadow(0 0 3px rgba(0, 0, 0, .15));
+>]
+[<Line: -  padding-left:  20px;
+>, <Line: -  .box-shadow(0 1px 4px rgba(0,0,0,.065));
+>, <Line: -  padding-left:  0;
+>, <Line: -  .box-shadow(inset 0 3px 8px rgba(0,0,0,.125));
+>, <Line: -  .box-shadow(0 1px 0 rgba(0,0,0,.25));
+>, <Line: -    border-left:   7px solid transparent;
+>, <Line: -    border-right:  7px solid transparent;
+>, <Line: -    border-left:   6px solid transparent;
+>, <Line: -    border-right:  6px solid transparent;
+>, <Line: -    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+>, <Line: -        .box-shadow(0 0 3px rgba(0,0,0,.15));
+>]

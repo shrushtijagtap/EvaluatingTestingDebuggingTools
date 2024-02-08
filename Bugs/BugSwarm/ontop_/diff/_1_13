@@ -1,0 +1,151 @@
+[<Line: +import it.unibz.krdb.obda.model.OBDASQLQuery;
+>, <Line: +import it.unibz.krdb.obda.ontology.impl.OntologyVocabularyImpl;
+>, <Line: +import java.util.Map;
+>, <Line: +	private Map<URI, OBDADataSource> datasources;
+>, <Line: +	private List<OBDAModelListener> sourceslisteners;
+>, <Line: +	private List<OBDAMappingListener> mappinglisteners;
+>, <Line: +	private final OntologyVocabulary vocabulary = new OntologyVocabularyImpl();
+>, <Line: +	private void fireSourceAdded(OBDADataSource source) {
+>, <Line: +	private void fireSourceRemoved(OBDADataSource source) {
+>, <Line: +	private void fireSourceNameUpdated(URI old, OBDADataSource neu) {
+>, <Line: +		List<OBDAMappingAxiom> mappings = getMappings(datasource_uri);
+>, <Line: +		List<OBDAMappingAxiom> mappings = getMappings(source_uri);
+>, <Line: +	public List<OBDAMappingAxiom> getMappings(URI datasource_uri) {
+>, <Line: +		List<OBDAMappingAxiom> current_mappings = mappings.get(datasource_uri);
+>, <Line: +	public void updateMappingsSourceQuery(URI datasource_uri, String mapping_id, OBDASQLQuery sourceQuery) {
+>, <Line: +	public void updateTargetQueryMapping(URI datasource_uri, String mapping_id, CQIE targetQuery) {
+>, <Line: +				CQIE cq = mapping.getTargetQuery();
+>, <Line: +				CQIE cq = mapping.getTargetQuery();
+>, <Line: +	public OntologyVocabulary getOntologyVocabulary() {
+>, <Line: +		return vocabulary;
+>]
+[<Line: -import it.unibz.krdb.obda.model.OBDAQuery;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataPropertyExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.OClass;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectPropertyExpression;
+>, <Line: -import java.util.LinkedHashSet;
+>, <Line: -import java.util.Set;
+>, <Line: -	private HashMap<URI, OBDADataSource> datasources;
+>, <Line: -	private ArrayList<OBDAModelListener> sourceslisteners;
+>, <Line: -	private ArrayList<OBDAMappingListener> mappinglisteners;
+>, <Line: -	private final Set<OClass> declaredClasses = new LinkedHashSet<OClass>();
+>, <Line: -	private final Set<ObjectPropertyExpression> declaredObjectProperties = new LinkedHashSet<ObjectPropertyExpression>();
+>, <Line: -	private final Set<DataPropertyExpression> declaredDataProperties = new LinkedHashSet<DataPropertyExpression>();
+>, <Line: -	// All other predicates (not classes or properties)
+>, <Line: -	// private final LinkedHashSet<Predicate> declaredPredicates = new LinkedHashSet<Predicate>();
+>, <Line: -	@Override
+>, <Line: -	public void fireSourceAdded(OBDADataSource source) {
+>, <Line: -	@Override
+>, <Line: -	public void fireSourceRemoved(OBDADataSource source) {
+>, <Line: -	@Override
+>, <Line: -	public void fireSourceNameUpdated(URI old, OBDADataSource neu) {
+>, <Line: -		ArrayList<OBDAMappingAxiom> mappings = getMappings(datasource_uri);
+>, <Line: -		ArrayList<OBDAMappingAxiom> mappings = getMappings(source_uri);
+>, <Line: -	public ArrayList<OBDAMappingAxiom> getMappings(URI datasource_uri) {
+>, <Line: -		ArrayList<OBDAMappingAxiom> current_mappings = mappings.get(datasource_uri);
+>, <Line: -	public void updateMappingsSourceQuery(URI datasource_uri, String mapping_id, OBDAQuery sourceQuery) {
+>, <Line: -	public void updateTargetQueryMapping(URI datasource_uri, String mapping_id, OBDAQuery targetQuery) {
+>, <Line: -				CQIE cq = (CQIE) mapping.getTargetQuery();
+>, <Line: -				CQIE cq = (CQIE) mapping.getTargetQuery();
+>, <Line: -/*	
+>, <Line: -	@Override
+>, <Line: -	public Set<Predicate> getDeclaredPredicates() {
+>, <Line: -		LinkedHashSet<Predicate> result = new LinkedHashSet<Predicate>();
+>, <Line: -		result.addAll(declaredClasses);
+>, <Line: -		result.addAll(declaredObjectProperties);
+>, <Line: -		result.addAll(declaredDataProperties);
+>, <Line: -		result.addAll(declaredPredicates);
+>, <Line: -		return result;
+>, <Line: -	}
+>, <Line: -*/
+>, <Line: -	@Override
+>, <Line: -	public Set<OClass> getDeclaredClasses() {
+>, <Line: -		return Collections.unmodifiableSet(declaredClasses);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public Set<ObjectPropertyExpression> getDeclaredObjectProperties() {
+>, <Line: -		return Collections.unmodifiableSet(declaredObjectProperties);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public Set<DataPropertyExpression> getDeclaredDataProperties() {
+>, <Line: -		return Collections.unmodifiableSet(declaredDataProperties);
+>, <Line: -	}
+>, <Line: -/*
+>, <Line: -	@Override
+>, <Line: -	public boolean declarePredicate(Predicate predicate) {
+>, <Line: -		if (predicate.isClass()) {
+>, <Line: -			return declaredClasses.add(predicate);
+>, <Line: -		} else if (predicate.isObjectProperty()) {
+>, <Line: -			return declaredObjectProperties.add(predicate);
+>, <Line: -		} else if (predicate.isDataProperty()) {
+>, <Line: -			return declaredDataProperties.add(predicate);
+>, <Line: -		} else {
+>, <Line: -			return declaredPredicates.add(predicate);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -*/
+>, <Line: -	@Override
+>, <Line: -	public boolean declareClass(OClass classname) {
+>, <Line: -//		if (!classname.isClass()) {
+>, <Line: -//			throw new RuntimeException("Cannot declare a non-class predicate as a class. Offending predicate: " + classname);
+>, <Line: -//		}
+>, <Line: -		return declaredClasses.add(classname);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean declareObjectProperty(ObjectPropertyExpression property) {
+>, <Line: -//		if (!property.getPredicate().isObjectProperty()) {
+>, <Line: -//			throw new RuntimeException("Cannot declare a non-object property predicate as an object property. Offending predicate: " + property);
+>, <Line: -//		}
+>, <Line: -		return declaredObjectProperties.add(property);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean declareDataProperty(DataPropertyExpression property) {
+>, <Line: -//		if (!property.getPredicate().isDataProperty()) {
+>, <Line: -//			throw new RuntimeException("Cannot declare a non-data property predicate as an data property. Offending predicate: " + property);
+>, <Line: -//		}
+>, <Line: -		return declaredDataProperties.add(property);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void declareAll(OntologyVocabulary vocabulary) {
+>, <Line: -		for (OClass p : vocabulary.getClasses()) 
+>, <Line: -			declareClass(p);
+>, <Line: -		for (ObjectPropertyExpression p : vocabulary.getObjectProperties()) 
+>, <Line: -			declareObjectProperty(p);
+>, <Line: -		for (DataPropertyExpression p : vocabulary.getDataProperties()) 
+>, <Line: -			declareDataProperty(p);
+>, <Line: -	}
+>, <Line: -/*
+>, <Line: -	@Override
+>, <Line: -	public boolean unDeclarePredicate(Predicate predicate) {
+>, <Line: -		return declaredPredicates.remove(predicate);
+>, <Line: -	}
+>, <Line: -*/
+>, <Line: -	@Override
+>, <Line: -	public boolean unDeclareClass(OClass classname) {
+>, <Line: -		return declaredClasses.remove(classname);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean unDeclareObjectProperty(ObjectPropertyExpression property) {
+>, <Line: -		return declaredObjectProperties.remove(property);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean unDeclareDataProperty(DataPropertyExpression property) {
+>, <Line: -		return declaredDataProperties.remove(property);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean isDeclaredClass(OClass classname) {
+>, <Line: -		return declaredClasses.contains(classname);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean isDeclaredObjectProperty(ObjectPropertyExpression property) {
+>, <Line: -		return declaredObjectProperties.contains(property);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean isDeclaredDataProperty(DataPropertyExpression property) {
+>, <Line: -		return declaredDataProperties.contains(property);
+>, <Line: -	}
+>, <Line: -/*
+>, <Line: -	public boolean isDeclared(Predicate predicate) {
+>, <Line: -		return (isDeclaredClass(predicate) || isDeclaredObjectProperty(predicate) || isDeclaredDataProperty(predicate) || declaredPredicates.contains(predicate));
+>, <Line: -*/	
+>]

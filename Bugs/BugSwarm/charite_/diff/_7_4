@@ -1,0 +1,79 @@
+[<Line: +import java.io.IOException;
+>, <Line: +import de.charite.compbio.jannovar.mendel.filter.ConsumerProcessor;
+>, <Line: +import de.charite.compbio.jannovar.mendel.filter.CoordinateSortingChecker;
+>, <Line: +import de.charite.compbio.jannovar.mendel.filter.GeneWiseMendelianAnnotationProcessor;
+>, <Line: +import de.charite.compbio.jannovar.mendel.filter.VariantContextProcessor;
+>, <Line: +import de.charite.compbio.jannovar.pedigree.PedFileContents;
+>, <Line: +import de.charite.compbio.jannovar.pedigree.PedFileReader;
+>, <Line: +import de.charite.compbio.jannovar.pedigree.PedParseException;
+>, <Line: +import de.charite.compbio.jannovar.pedigree.Pedigree;
+>, <Line: +import de.charite.compbio.jannovar.progress.GenomeRegionListFactoryFromSAMSequenceDictionary;
+>, <Line: +import de.charite.compbio.jannovar.progress.ProgressReporter;
+>, <Line: +import htsjdk.samtools.SAMSequenceDictionary;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: +import htsjdk.variant.vcf.VCFFileReader;
+>, <Line: +import htsjdk.variant.vcf.VCFHeader;
+>, <Line: +	private ProgressReporter progressReporter = null;
+>, <Line: +				if (this.options.verbosity >= 1) {
+>, <Line: +					final SAMSequenceDictionary seqDict = VCFFileReader.getSequenceDictionary(new File(vcfPath));
+>, <Line: +					final GenomeRegionListFactoryFromSAMSequenceDictionary factory = new GenomeRegionListFactoryFromSAMSequenceDictionary();
+>, <Line: +					this.progressReporter = new ProgressReporter(factory.construct(seqDict), 60);
+>, <Line: +					this.progressReporter.printHeader();
+>, <Line: +					this.progressReporter.start();
+>, <Line: +				}
+>, <Line: +						options, args); VariantContextProcessor sink = buildMendelianProcessors(writer);) {
+>, <Line: +					// Make current VC available to progress printer
+>, <Line: +					if (this.progressReporter != null)
+>, <Line: +						stream = stream.peek(vc -> this.progressReporter.setCurrentVC(vc));
+>, <Line: +					stream.forEachOrdered(sink::put);
+>, <Line: +				} catch (IOException e) {
+>, <Line: +					throw new JannovarException("Problem opening file", e);
+>, <Line: +			progressReporter.done();
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Construct the mendelian inheritance annotation processors
+>, <Line: +	 * 
+>, <Line: +	 * @param sink
+>, <Line: +	 *            The place to put put the VariantContext to after filtration
+>, <Line: +	 * @throws IOException
+>, <Line: +	 *             in case of problems with opening the pedigree file
+>, <Line: +	 * @throws PedParseException
+>, <Line: +	 *             in the case of problems with parsing pedigrees
+>, <Line: +	 */
+>, <Line: +	private VariantContextProcessor buildMendelianProcessors(AnnotatedVCFWriter writer)
+>, <Line: +			throws PedParseException, IOException {
+>, <Line: +		if (options.pathPedFile != null) {
+>, <Line: +			final PedFileReader pedReader = new PedFileReader(new File(options.pathPedFile));
+>, <Line: +			final PedFileContents pedContents = pedReader.read();
+>, <Line: +			final Pedigree pedigree = new Pedigree(pedContents, pedContents.getIndividuals().get(0).getPedigree());
+>, <Line: +			final GeneWiseMendelianAnnotationProcessor mendelProcessor = new GeneWiseMendelianAnnotationProcessor(
+>, <Line: +					pedigree, jannovarData, vc -> writer.put(vc));
+>, <Line: +			return new CoordinateSortingChecker(mendelProcessor);
+>, <Line: +		} else {
+>, <Line: +			return new ConsumerProcessor(vc -> writer.put(vc));
+>, <Line: +		}
+>]
+[<Line: -import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: -import htsjdk.variant.vcf.VCFFileReader;
+>, <Line: -import htsjdk.variant.vcf.VCFHeader;
+>, <Line: -import java.util.function.Supplier;
+>, <Line: -import de.charite.compbio.jannovar.ProgressReporter;
+>, <Line: -	/** Currently considered {@link VariantContext}, for progress reporting */
+>, <Line: -	private VariantContext currentVC;
+>, <Line: -	private ProgressReporter progressReporter;
+>, <Line: -		if (this.options.verbosity >= 2)
+>, <Line: -			this.progressReporter = new ProgressReporter(this::getCurrentVC, 60);
+>, <Line: -		else
+>, <Line: -			this.progressReporter = null;
+>, <Line: -		if (progressReporter != null)
+>, <Line: -			progressReporter.start();
+>, <Line: -				// Make current VC available to progress printer
+>, <Line: -				stream = stream.peek(x -> this.currentVC = x);
+>, <Line: -						options, args)) {
+>, <Line: -					stream.forEachOrdered(writer::put);
+>, <Line: -			progressReporter.stop();
+>, <Line: -	/** @return current {@link VariantContext}, for progress reporting */
+>, <Line: -	private VariantContext getCurrentVC() {
+>, <Line: -		return currentVC;
+>, <Line: -	}
+>]

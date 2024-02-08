@@ -1,0 +1,176 @@
+[<Line: +package org.kairosdb.core.http.rest;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.kairosdb.core.exception.DatastoreException;
+>, <Line: +import org.kairosdb.testing.JsonResponse;
+>, <Line: +import java.io.IOException;
+>, <Line: +import static org.hamcrest.CoreMatchers.equalTo;
+>, <Line: +import static org.junit.Assert.assertThat;
+>, <Line: +public class MetadataResourceTest extends ResourceBase
+>, <Line: +{
+>, <Line: +	private static final String SERVICE = "service";
+>, <Line: +	private static final String UNAUTHORIZED_SERVICE = "_service";
+>, <Line: +	private static final String SERVICE_KEY1 = "service_key1";
+>, <Line: +	private static final String SERVICE_KEY2 = "service_key2";
+>, <Line: +	private static final String METADATA_URL = "http://localhost:9001/api/v1/metadata/";
+>, <Line: +	private static final int OK = 200;
+>, <Line: +	private static final int NO_CONTENT = 204;
+>, <Line: +	private static final int UNAUTHORIZED_ERROR = 401;
+>, <Line: +	private static final int INTERNAL_SERVER_ERROR = 500;
+>, <Line: +	@Before
+>, <Line: +	public void setup()
+>, <Line: +			throws DatastoreException
+>, <Line: +	{
+>, <Line: +		datastore.setValue(SERVICE, SERVICE_KEY1, "foo", "bar");
+>, <Line: +		datastore.setValue(SERVICE, SERVICE_KEY1, "foobar", "fi");
+>, <Line: +		datastore.setValue(SERVICE, SERVICE_KEY1, "tee", "too");
+>, <Line: +		datastore.setValue(SERVICE, SERVICE_KEY2, "foo", "bar");
+>, <Line: +	}
+>, <Line: +	@Test(expected = NullPointerException.class)
+>, <Line: +	public void test_constructor_nullDatastore_invalid()
+>, <Line: +	{
+>, <Line: +		new MetadataResource(null);
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void listKeysStartsWith()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "?startsWith=foo");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(OK));
+>, <Line: +		assertThat(response.getJson(), equalTo("{\"results\":[\"foo\",\"foobar\"]}"));
+>, <Line: +		response = client.get(METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "?startsWith=fi");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(OK));
+>, <Line: +		assertThat(response.getJson(), equalTo("{\"results\":[]}"));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void listKeys()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + SERVICE + "/" + SERVICE_KEY1);
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(OK));
+>, <Line: +		assertThat(response.getJson(), equalTo("{\"results\":[\"foo\",\"foobar\",\"tee\"]}"));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void listKeys_notAuthorized()
+>, <Line: +			throws IOException
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + UNAUTHORIZED_SERVICE + "/" + SERVICE_KEY1);
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(UNAUTHORIZED_ERROR));
+>, <Line: +		assertThat(response.getJson(), equalTo(""));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void listKeys_withException()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		datastore.throwException(new DatastoreException("expected"));
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + SERVICE + "/" + SERVICE_KEY1);
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(INTERNAL_SERVER_ERROR));
+>, <Line: +		assertThat(response.getJson(), equalTo("{\"errors\":[\"expected\"]}"));
+>, <Line: +		datastore.throwException(null);
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void listServiceKeys()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + SERVICE);
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(OK));
+>, <Line: +		assertThat(response.getJson(), equalTo("{\"results\":[\"" + SERVICE_KEY1 + "\",\"" + SERVICE_KEY2 + "\"]}"));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void listServiceKeys_notAuthorized()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + UNAUTHORIZED_SERVICE);
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(UNAUTHORIZED_ERROR));
+>, <Line: +		assertThat(response.getJson(), equalTo(""));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void getValue()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/foobar");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(OK));
+>, <Line: +		assertThat(response.getJson(), equalTo("fi"));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void getValue_notAuthorized()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + UNAUTHORIZED_SERVICE + "/" + SERVICE_KEY1 + "/foobar");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(UNAUTHORIZED_ERROR));
+>, <Line: +		assertThat(response.getJson(), equalTo(""));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void getValue_withException()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		datastore.throwException(new DatastoreException("expected"));
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/foobar");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(INTERNAL_SERVER_ERROR));
+>, <Line: +		assertThat(response.getJson(), equalTo("{\"errors\":[\"expected\"]}"));
+>, <Line: +		datastore.throwException(null);
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void getValue_empty()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/bogus");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(OK));
+>, <Line: +		assertThat(response.getJson(), equalTo(""));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void setValue_withException()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		datastore.throwException(new DatastoreException("expected"));
+>, <Line: +		JsonResponse response = client.post("value", METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/foobar");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(INTERNAL_SERVER_ERROR));
+>, <Line: +		assertThat(response.getJson(), equalTo("{\"errors\":[\"expected\"]}"));
+>, <Line: +		datastore.throwException(null);
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void setValue_notAuthorized()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.post("value", METADATA_URL + UNAUTHORIZED_SERVICE + "/" + SERVICE_KEY1 + "/foobar");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(UNAUTHORIZED_ERROR));
+>, <Line: +		assertThat(response.getJson(), equalTo(""));
+>, <Line: +	}
+>, <Line: +	@SuppressWarnings("UnusedAssignment")
+>, <Line: +	@Test
+>, <Line: +	public void deleteKey()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.post("newValue", METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/newKey");
+>, <Line: +		response = client.get(METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/newKey");
+>, <Line: +		assertThat(response.getJson(), equalTo("newValue"));
+>, <Line: +		response = client.delete(METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/newKey");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(NO_CONTENT));
+>, <Line: +		response = client.get(METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/newKey");
+>, <Line: +		assertThat(response.getJson(), equalTo(""));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void deleteKey_notAuthorized()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.get(METADATA_URL + UNAUTHORIZED_SERVICE + "/" + SERVICE_KEY1 + "/newKey");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(UNAUTHORIZED_ERROR));
+>, <Line: +		assertThat(response.getJson(), equalTo(""));
+>, <Line: +	}
+>, <Line: +	@SuppressWarnings("UnusedAssignment")
+>, <Line: +	@Test
+>, <Line: +	public void deleteKey_withException()
+>, <Line: +			throws Exception
+>, <Line: +	{
+>, <Line: +		JsonResponse response = client.post("newValue", METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/newKey");
+>, <Line: +		datastore.throwException(new DatastoreException("expected"));
+>, <Line: +		response = client.delete(METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/newKey");
+>, <Line: +		assertThat(response.getStatusCode(), equalTo(INTERNAL_SERVER_ERROR));
+>, <Line: +		assertThat(response.getJson(), equalTo("{\"errors\":[\"expected\"]}"));
+>, <Line: +		// clean up
+>, <Line: +		datastore.throwException(null);
+>, <Line: +		response = client.delete(METADATA_URL + SERVICE + "/" + SERVICE_KEY1 + "/newKey");
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

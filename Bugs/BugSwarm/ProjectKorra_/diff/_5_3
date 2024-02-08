@@ -1,0 +1,24 @@
+[<Line: +import com.projectkorra.projectkorra.BendingPlayer;
+>, <Line: +import com.projectkorra.projectkorra.GeneralMethods;
+>, <Line: +import com.projectkorra.projectkorra.ProjectKorra;
+>, <Line: +import com.projectkorra.projectkorra.ability.AvatarState;
+>, <Line: +import com.projectkorra.projectkorra.configuration.ConfigLoadable;
+>, <Line: +import com.projectkorra.rpg.event.EventManager;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.concurrent.ConcurrentHashMap;
+>, <Line: +		if (EventManager.marker.containsKey(player.getWorld())) {
+>, <Line: +			if (EventManager.marker.get(player.getWorld()).equalsIgnoreCase("SozinsComet"))
+>]
+[<Line: -import java.util.ArrayList;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.concurrent.ConcurrentHashMap;
+>, <Line: -import com.projectkorra.projectkorra.BendingManager;
+>, <Line: -import com.projectkorra.projectkorra.BendingPlayer;
+>, <Line: -import com.projectkorra.projectkorra.GeneralMethods;
+>, <Line: -import com.projectkorra.projectkorra.ProjectKorra;
+>, <Line: -import com.projectkorra.projectkorra.ability.AvatarState;
+>, <Line: -import com.projectkorra.projectkorra.configuration.ConfigLoadable;
+>, <Line: -		if (BendingManager.events.containsKey(player.getWorld())) {
+>, <Line: -			if (BendingManager.events.get(player.getWorld()).equalsIgnoreCase("SozinsComet"))
+>]

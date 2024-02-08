@@ -1,0 +1,76 @@
+[<Line: +		'angular',
+>, <Line: +		'spectrum'
+>, <Line: +	],
+>, <Line: +	function (angular) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('spectrumPicker', function () {
+>, <Line: +				return {
+>, <Line: +					restrict: 'E',
+>, <Line: +					require: 'ngModel',
+>, <Line: +					scope: false,
+>, <Line: +					replace: true,
+>, <Line: +					template: "<span><input class='input-small' /></span>",
+>, <Line: +					link: function (scope, element, attrs, ngModel) {
+>, <Line: +						var input = element.find('input');
+>, <Line: +						var options = angular.extend({
+>, <Line: +							showAlpha: true,
+>, <Line: +							showButtons: false,
+>, <Line: +							color: ngModel.$viewValue,
+>, <Line: +							change: function (color) {
+>, <Line: +								scope.$apply(function () {
+>, <Line: +									ngModel.$setViewValue(color.toRgbString());
+>, <Line: +								});
+>, <Line: +							}
+>, <Line: +						}, scope.$eval(attrs.options));
+>, <Line: +						ngModel.$render = function () {
+>, <Line: +							input.spectrum('set', ngModel.$viewValue || '');
+>, <Line: +						};
+>, <Line: +						input.spectrum(options);
+>, <Line: +						scope.$on('$destroy', function () {
+>, <Line: +							input.spectrum('destroy');
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'spectrum'
+>, <Line: -],
+>, <Line: -function (angular) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('spectrumPicker', function() {
+>, <Line: -      return {
+>, <Line: -        restrict: 'E',
+>, <Line: -        require: 'ngModel',
+>, <Line: -        scope: false,
+>, <Line: -        replace: true,
+>, <Line: -        template: "<span><input class='input-small' /></span>",
+>, <Line: -        link: function(scope, element, attrs, ngModel) {
+>, <Line: -          var input = element.find('input');
+>, <Line: -          var options = angular.extend({
+>, <Line: -            showAlpha: true,
+>, <Line: -            showButtons: false,
+>, <Line: -            color: ngModel.$viewValue,
+>, <Line: -            change: function(color) {
+>, <Line: -              scope.$apply(function() {
+>, <Line: -                ngModel.$setViewValue(color.toRgbString());
+>, <Line: -              });
+>, <Line: -            }
+>, <Line: -          }, scope.$eval(attrs.options));
+>, <Line: -          ngModel.$render = function() {
+>, <Line: -            input.spectrum('set', ngModel.$viewValue || '');
+>, <Line: -          };
+>, <Line: -          input.spectrum(options);
+>, <Line: -          scope.$on('$destroy', function() {
+>, <Line: -            input.spectrum('destroy');
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

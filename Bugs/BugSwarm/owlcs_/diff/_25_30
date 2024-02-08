@@ -1,0 +1,22 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +    private static Comparator<Clause> clauseListComparator =
+>, <Line: +        Comparator.comparing(Clause::getTag, termsTagsComparator).thenComparing(clauseComparator);
+>, <Line: +            new OntologyConfigurator());
+>, <Line: +                    || OboFormatTag.TAG_EXPAND_ASSERTION_TO.getTag().equals(clauseTag)) {
+>, <Line: +                defaultOboNamespace =
+>, <Line: +                    headerFrame.getTagValue(OboFormatTag.TAG_DEFAULT_NAMESPACE, String.class);
+>, <Line: +                asList(ont.axioms(OWLAnnotationAssertionAxiom.class, OWLAnnotationSubject.class,
+>, <Line: +                    iri, Imports.INCLUDED, IN_SUB_POSITION));
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -    private static Comparator<Clause> clauseListComparator = Comparator
+>, <Line: -        .comparing(Clause::getTag, termsTagsComparator).thenComparing(clauseComparator);
+>, <Line: -            new OWLOntologyLoaderConfiguration());
+>, <Line: -                    || OboFormatTag.TAG_EXPAND_ASSERTION_TO.getTag()
+>, <Line: -                    .equals(clauseTag)) {
+>, <Line: -                defaultOboNamespace = headerFrame.getTagValue(OboFormatTag.TAG_DEFAULT_NAMESPACE,
+>, <Line: -                    String.class);
+>, <Line: -                asList(ont.axioms(OWLAnnotationAssertionAxiom.class,
+>, <Line: -                    OWLAnnotationSubject.class, iri, Imports.INCLUDED,
+>, <Line: -                    IN_SUB_POSITION));
+>]

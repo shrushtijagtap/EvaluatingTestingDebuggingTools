@@ -1,0 +1,10 @@
+[<Line: +* http://hom.nfe.fazenda.gov.br/portal/principal.aspx
+>, <Line: +* https://www.sefaz.rs.gov.br/NFE/NFEindex.aspx
+>]
+[<Line: -O pacote de classes nfe200 refere-se à versão 2.00 da NFe.<br/>
+>, <Line: -Ele deve ser utilizado apenas para tradução de notas antigas pois foi desativado em 31/03/2015. Portanto,
+>, <Line: -faça a integração do seu sistema com as classes contidas no pacote nfe310.<br/>
+>, <Line: -<br/>
+>, <Line: -* https://homologacao.nfe.sefaz.rs.gov.br/
+>, <Line: -* https://nfe.sefaz.rs.gov.br/
+>]

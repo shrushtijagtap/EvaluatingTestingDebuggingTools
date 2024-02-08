@@ -1,0 +1,6 @@
+[<Line: +import com.hubspot.baragon.service.managers.StatusManager;
+>, <Line: +@NoAuth
+>]
+[<Line: -import com.hubspot.baragon.managers.StatusManager;
+>, <Line: -  @NoAuth
+>]

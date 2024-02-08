@@ -1,0 +1,83 @@
+[<Line: +import com.codahale.metrics.*;
+>, <Line: +import org.kairosdb.core.DataPointSet;
+>, <Line: +import org.kairosdb.core.datapoints.DoubleDataPointFactory;
+>, <Line: +import org.kairosdb.core.datapoints.DoubleDataPointFactoryImpl;
+>, <Line: +import org.kairosdb.core.datapoints.LongDataPointFactory;
+>, <Line: +import org.kairosdb.core.datapoints.LongDataPointFactoryImpl;
+>, <Line: +import org.kairosdb.core.reporting.KairosMetricReporter;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +public class CassandraClientImpl implements CassandraClient, KairosMetricReporter
+>, <Line: +	@Inject
+>, <Line: +	@Named("HOSTNAME")
+>, <Line: +	private String m_hostName = "localhost";
+>, <Line: +	@Inject
+>, <Line: +	private LongDataPointFactory m_longDataPointFactory = new LongDataPointFactoryImpl();
+>, <Line: +	@Inject
+>, <Line: +	private DoubleDataPointFactory m_doubleDataPointFactory = new DoubleDataPointFactoryImpl();
+>, <Line: +				.withPoolingOptions(new PoolingOptions().setConnectionsPerHost(HostDistance.LOCAL, 3, 100)
+>, <Line: +					.setMaxRequestsPerConnection(HostDistance.LOCAL, 1024))
+>, <Line: +				.withCompression(ProtocolOptions.Compression.LZ4)
+>, <Line: +				.withoutJMXReporting()
+>, <Line: +				.withTimestampGenerator(new TimestampGenerator()
+>, <Line: +				{
+>, <Line: +					@Override
+>, <Line: +					public long next()
+>, <Line: +					{
+>, <Line: +						return System.currentTimeMillis();
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +	private DataPointSet newDataPointSet(String metricPrefix, String metricSuffix,
+>, <Line: +			long now, long value)
+>, <Line: +	{
+>, <Line: +		DataPointSet dps = new DataPointSet(new StringBuilder(metricPrefix).append(".").append(metricSuffix).toString());
+>, <Line: +		dps.addTag("host", m_hostName);
+>, <Line: +		dps.addDataPoint(m_longDataPointFactory.createDataPoint(now, value));
+>, <Line: +		return dps;
+>, <Line: +	}
+>, <Line: +	private DataPointSet newDataPointSet(String metricPrefix, String metricSuffix,
+>, <Line: +			long now, double value)
+>, <Line: +	{
+>, <Line: +		DataPointSet dps = new DataPointSet(new StringBuilder(metricPrefix).append(".").append(metricSuffix).toString());
+>, <Line: +		dps.addTag("host", m_hostName);
+>, <Line: +		dps.addDataPoint(m_doubleDataPointFactory.createDataPoint(now, value));
+>, <Line: +		return dps;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<DataPointSet> getMetrics(long now)
+>, <Line: +	{
+>, <Line: +		String prefix = "kairosdb.datastore.cassandra.client";
+>, <Line: +		List<DataPointSet> ret = new ArrayList<>();
+>, <Line: +		Metrics metrics = m_cluster.getMetrics();
+>, <Line: +		ret.add(newDataPointSet(prefix, "blocking_executor_queue_depth", now,
+>, <Line: +				metrics.getBlockingExecutorQueueDepth().getValue()));
+>, <Line: +		ret.add(newDataPointSet(prefix, "connected_to_hosts", now,
+>, <Line: +				metrics.getConnectedToHosts().getValue()));
+>, <Line: +		ret.add(newDataPointSet(prefix, "executor_queue_depth", now,
+>, <Line: +				metrics.getExecutorQueueDepth().getValue()));
+>, <Line: +		ret.add(newDataPointSet(prefix, "known_hosts", now,
+>, <Line: +				metrics.getKnownHosts().getValue()));
+>, <Line: +		ret.add(newDataPointSet(prefix, "open_connections", now,
+>, <Line: +				metrics.getOpenConnections().getValue()));
+>, <Line: +		ret.add(newDataPointSet(prefix, "reconnection_scheduler_queue_size", now,
+>, <Line: +				metrics.getReconnectionSchedulerQueueSize().getValue()));
+>, <Line: +		ret.add(newDataPointSet(prefix, "task_scheduler_queue_size", now,
+>, <Line: +				metrics.getTaskSchedulerQueueSize().getValue()));
+>, <Line: +		ret.add(newDataPointSet(prefix, "trashed_connections", now,
+>, <Line: +				metrics.getTrashedConnections().getValue()));
+>, <Line: +		Snapshot snapshot = metrics.getRequestsTimer().getSnapshot();
+>, <Line: +		prefix = prefix + ".requests_timer";
+>, <Line: +		ret.add(newDataPointSet(prefix, "max", now,
+>, <Line: +				snapshot.getMax()));
+>, <Line: +		ret.add(newDataPointSet(prefix, "min", now,
+>, <Line: +				snapshot.getMin()));
+>, <Line: +		ret.add(newDataPointSet(prefix, "avg", now,
+>, <Line: +				snapshot.getMean()));
+>, <Line: +		ret.add(newDataPointSet(prefix, "count", now,
+>, <Line: +				snapshot.size()));
+>, <Line: +		return ret;
+>, <Line: +	}
+>]
+[<Line: -public class CassandraClientImpl implements CassandraClient
+>, <Line: -				.withPoolingOptions(new PoolingOptions().setConnectionsPerHost(HostDistance.LOCAL, 3, 100))
+>, <Line: -				.withCompression(ProtocolOptions.Compression.LZ4);
+>]

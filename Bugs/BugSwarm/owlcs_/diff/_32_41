@@ -1,0 +1,5 @@
+[<Line: +     * @see #translate(Collection,OWLOntologyManager)
+>]
+[<Line: -import java.util.Set;
+>, <Line: -     * @see #translate(Set,OWLOntologyManager)
+>]

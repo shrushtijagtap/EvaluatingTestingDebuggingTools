@@ -1,0 +1,4 @@
+[<Line: +			elasticsearchClient.sendClassPathRessourceBulkAsync("kibana/HostDashboard.bulk");
+>]
+[<Line: -			elasticsearchClient.sendBulkAsync("kibana/HostDashboard.bulk");
+>]

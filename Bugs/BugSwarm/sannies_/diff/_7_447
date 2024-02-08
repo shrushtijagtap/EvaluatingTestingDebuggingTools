@@ -1,0 +1,5 @@
+[<Line: +package org.mp4parser.tools.boxes;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.StaticChunkOffsetBox;
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>]

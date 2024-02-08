@@ -1,0 +1,82 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.filter.facade;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Collection;
+>, <Line: -import java.util.List;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import de.charite.compbio.jannovar.filter.impl.gt.GenotypeFilterAnnotator;
+>, <Line: -import de.charite.compbio.jannovar.filter.impl.var.VariantFilterAnnotator;
+>, <Line: -import htsjdk.variant.variantcontext.Genotype;
+>, <Line: -import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: -import htsjdk.variant.variantcontext.VariantContextBuilder;
+>, <Line: -/**
+>, <Line: - * Perform annotation (sof-filtering) based on coverage/alternative allele
+>, <Line: - * fraction/genotype call quality
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: - */
+>, <Line: -public class ThresholdFilterAnnotator {
+>, <Line: -	/** Configuration for the threshold-based filter */
+>, <Line: -	private final ThresholdFilterOptions options;
+>, <Line: -	/**
+>, <Line: -	 * Names of samples of affected individuals; used for pushing information
+>, <Line: -	 * from genotype-level to variant level
+>, <Line: -	 */
+>, <Line: -	private final ImmutableList<String> affecteds;
+>, <Line: -	/** Helper for genotype-wide application of filters */
+>, <Line: -	private final GenotypeFilterAnnotator gtAnnotator;
+>, <Line: -	/** Helper for pushing genotype-based filters to variant-wise ones */
+>, <Line: -	private final VariantFilterAnnotator varAnnotator;
+>, <Line: -	public ThresholdFilterAnnotator(ThresholdFilterOptions options, Collection<String> affected) {
+>, <Line: -		this.options = options;
+>, <Line: -		this.affecteds = ImmutableList.copyOf(affected);
+>, <Line: -		this.gtAnnotator = new GenotypeFilterAnnotator(this.options);
+>, <Line: -		this.varAnnotator = new VariantFilterAnnotator(this.options, this.affecteds);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Annotate VariantContext with the threshold-based filters
+>, <Line: -	 *
+>, <Line: -	 * @param vc
+>, <Line: -	 *            the {@link VariantContext} to annotate
+>, <Line: -	 * @return copy of <code>vc</code> with applied annotations
+>, <Line: -	 */
+>, <Line: -	public VariantContext annotateVariantContext(VariantContext vc) {
+>, <Line: -		VariantContextBuilder builder = new VariantContextBuilder(vc);
+>, <Line: -		List<Genotype> gts = annotateGenotypes(builder, vc);
+>, <Line: -		varAnnotator.annotateVariant(builder, vc, gts);
+>, <Line: -		return builder.make();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Annotate <code>vc</code> and return modified object
+>, <Line: -	 * 
+>, <Line: -	 * @param builder
+>, <Line: -	 *            the {@link VariantContextBuilder} used for building variant
+>, <Line: -	 * @param vc
+>, <Line: -	 *            the {@link VariantContext} to base builder configuration upon
+>, <Line: -	 * @param affected
+>, <Line: -	 *            names of the samples from affected individuals
+>, <Line: -	 * @return modified <code>vc</code> object
+>, <Line: -	 */
+>, <Line: -	VariantContextBuilder annotate(VariantContextBuilder builder, VariantContext vc) {
+>, <Line: -		List<Genotype> gts = annotateGenotypes(builder, vc);
+>, <Line: -		varAnnotator.annotateVariant(builder, vc, gts);
+>, <Line: -		return builder;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Annotate genotypes individually in <code>vc</code>
+>, <Line: -	 * 
+>, <Line: -	 * @param builder
+>, <Line: -	 *            the {@link VariantContextBuilder} used for building variant
+>, <Line: -	 * @param vc
+>, <Line: -	 *            {@link VariantContext} to annotate
+>, <Line: -	 * @return {@link List} of genotypes after annotation
+>, <Line: -	 */
+>, <Line: -	private List<Genotype> annotateGenotypes(VariantContextBuilder builder, VariantContext vc) {
+>, <Line: -		ArrayList<Genotype> gts = new ArrayList<>();
+>, <Line: -		for (Genotype gt : vc.getGenotypes())
+>, <Line: -			gts.add(gtAnnotator.gtWithAppliedFilters(gt));
+>, <Line: -		builder.genotypes(gts);
+>, <Line: -		return gts;
+>, <Line: -	}
+>, <Line: -}
+>]

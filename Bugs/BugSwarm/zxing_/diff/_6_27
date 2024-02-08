@@ -1,0 +1,8 @@
+[<Line: +  boolean isAlpha() {
+>, <Line: +  boolean isNumeric() {
+>, <Line: +  boolean isIsoIec646() {
+>]
+[<Line: -  boolean isAlpha(){
+>, <Line: -  boolean isNumeric(){
+>, <Line: -  boolean isIsoIec646(){
+>]

@@ -1,0 +1,9 @@
+[<Line: +                        new MethodList.Explicit<MethodDescription>(foo, bar),
+>, <Line: +                        new MethodList.Explicit<MethodDescription>(foo, bar),
+>, <Line: +                        new MethodList.Explicit<MethodDescription>(foo, bar),
+>]
+[<Line: -        when(instrumentedType.getDeclaredMethods()).thenReturn(new MethodList.Explicit<MethodDescription.InDefinedShape>(foo, bar));
+>, <Line: -                        new MethodList.Empty<MethodDescription>(),
+>, <Line: -                        new MethodList.Empty<MethodDescription>(),
+>, <Line: -                        new MethodList.Empty<MethodDescription>(),
+>]

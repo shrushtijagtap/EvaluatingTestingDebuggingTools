@@ -1,0 +1,78 @@
+[<Line: +            classExpressionListTranslator =
+>, <Line: +                new OptimisedListTranslator<>(r, new ClassExpressionListItemTranslator(r, this));
+>, <Line: +            objectPropertyListTranslator =
+>, <Line: +                new OptimisedListTranslator<>(r, new ObjectPropertyListItemTranslator(r));
+>, <Line: +            faceRestrictionListTranslator =
+>, <Line: +                new OptimisedListTranslator<>(r, new OWLFacetRestrictionListItemTranslator(r));
+>, <Line: +            Mode mode =
+>, <Line: +                consumer.getConfiguration().shouldParseWithStrictConfiguration() ? Mode.STRICT
+>, <Line: +                    : Mode.LAX;
+>, <Line: +            return consumer.iris.isClassExpression(mainNode)
+>, <Line: +                || consumer.isParsedAllTriples() && !consumer.iris.isDataRange(mainNode);
+>, <Line: +                    && isResourcePresent(mainNode, OWL_ALL_VALUES_FROM);
+>, <Line: +            if (fillerIRI != null
+>, <Line: +                && !getConsumer().getConfiguration().shouldParseWithStrictConfiguration()) {
+>, <Line: +            OWLLiteral lit =
+>, <Line: +                getConsumer().tripleIndex.literal(mainNode, OWL_HAS_VALUE.getIRI(), true);
+>, <Line: +            if (fillerIRI != null
+>, <Line: +                && !getConsumer().getConfiguration().shouldParseWithStrictConfiguration()) {
+>, <Line: +            if (fillerIRI != null
+>, <Line: +                && !getConsumer().getConfiguration().shouldParseWithStrictConfiguration()) {
+>, <Line: +                    && isResourcePresent(mainNode, OWL_SOME_VALUES_FROM);
+>, <Line: +            IRI fillerIRI =
+>, <Line: +                getConsumer().tripleIndex.resource(mainNode, OWL_SOME_VALUES_FROM, true);
+>, <Line: +                    && isResourcePresent(mainNode, OWL_ALL_VALUES_FROM);
+>, <Line: +            if (fillerIRI != null
+>, <Line: +                && !getConsumer().getConfiguration().shouldParseWithStrictConfiguration()) {
+>, <Line: +            OWLLiteral literal =
+>, <Line: +                getConsumer().tripleIndex.literal(mainNode, OWL_HAS_SELF.getIRI(), false);
+>, <Line: +            if (fillerIRI != null
+>, <Line: +                && !getConsumer().getConfiguration().shouldParseWithStrictConfiguration()) {
+>, <Line: +            if (fillerIRI != null
+>, <Line: +                && !getConsumer().getConfiguration().shouldParseWithStrictConfiguration()) {
+>, <Line: +            return getDataFactory()
+>, <Line: +                .getOWLObjectOneOf(accessor.translateToIndividualSet(verifyNotNull(oneOfObject)));
+>, <Line: +                    && isResourcePresent(mainNode, OWL_SOME_VALUES_FROM);
+>, <Line: +            IRI fillerIRI =
+>, <Line: +                getConsumer().tripleIndex.resource(mainNode, OWL_SOME_VALUES_FROM, true);
+>, <Line: +                    "Don't know how to translate SWRL Atom: data range IRI is null " + firstObject);
+>, <Line: +            OptimisedListTranslator<SWRLDArgument> listTranslator =
+>, <Line: +                new OptimisedListTranslator<>(consumer, new SWRLAtomDObjectListItemTranslator());
+>, <Line: +                    "Don't know how to translate SWRL Atom: class IRI is null " + firstObject);
+>]
+[<Line: -            classExpressionListTranslator = new OptimisedListTranslator<>(r,
+>, <Line: -                new ClassExpressionListItemTranslator(r, this));
+>, <Line: -            objectPropertyListTranslator = new OptimisedListTranslator<>(r,
+>, <Line: -                new ObjectPropertyListItemTranslator(r));
+>, <Line: -            faceRestrictionListTranslator = new OptimisedListTranslator<>(r,
+>, <Line: -                new OWLFacetRestrictionListItemTranslator(r));
+>, <Line: -            Mode mode = consumer.getConfiguration().isStrict() ? Mode.STRICT : Mode.LAX;
+>, <Line: -            return consumer.iris.isClassExpression(mainNode) || consumer.isParsedAllTriples()
+>, <Line: -                && !consumer.iris.isDataRange(mainNode);
+>, <Line: -                && isResourcePresent(mainNode, OWL_ALL_VALUES_FROM);
+>, <Line: -            if (fillerIRI != null && !getConsumer().getConfiguration().isStrict()) {
+>, <Line: -            OWLLiteral lit = getConsumer().tripleIndex.literal(mainNode, OWL_HAS_VALUE.getIRI(),
+>, <Line: -                true);
+>, <Line: -            if (fillerIRI != null && !getConsumer().getConfiguration().isStrict()) {
+>, <Line: -            if (fillerIRI != null && !getConsumer().getConfiguration().isStrict()) {
+>, <Line: -                && isResourcePresent(mainNode, OWL_SOME_VALUES_FROM);
+>, <Line: -            IRI fillerIRI = getConsumer().tripleIndex.resource(mainNode, OWL_SOME_VALUES_FROM,
+>, <Line: -                true);
+>, <Line: -                && isResourcePresent(mainNode, OWL_ALL_VALUES_FROM);
+>, <Line: -            if (fillerIRI != null && !getConsumer().getConfiguration().isStrict()) {
+>, <Line: -            OWLLiteral literal = getConsumer().tripleIndex.literal(mainNode, OWL_HAS_SELF.getIRI(),
+>, <Line: -                false);
+>, <Line: -            if (fillerIRI != null && !getConsumer().getConfiguration().isStrict()) {
+>, <Line: -            if (fillerIRI != null && !getConsumer().getConfiguration().isStrict()) {
+>, <Line: -            return getDataFactory().getOWLObjectOneOf(
+>, <Line: -                accessor.translateToIndividualSet(verifyNotNull(oneOfObject)));
+>, <Line: -                && isResourcePresent(mainNode, OWL_SOME_VALUES_FROM);
+>, <Line: -            IRI fillerIRI = getConsumer().tripleIndex.resource(mainNode, OWL_SOME_VALUES_FROM,
+>, <Line: -                true);
+>, <Line: -                    "Don't know how to translate SWRL Atom: data range IRI is null "
+>, <Line: -                        + firstObject);
+>, <Line: -            OptimisedListTranslator<SWRLDArgument> listTranslator = new OptimisedListTranslator<>(
+>, <Line: -                consumer, new SWRLAtomDObjectListItemTranslator());
+>, <Line: -                    "Don't know how to translate SWRL Atom: class IRI is null "
+>, <Line: -                        + firstObject);
+>]

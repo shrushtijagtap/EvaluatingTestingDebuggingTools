@@ -1,0 +1,7 @@
+[<Line: +import com.projectkorra.rpg.event.EventManager;
+>, <Line: +		if (EventManager.marker.get(p.getWorld()).equalsIgnoreCase("SolarEclipse") && FireMethods.isFireAbility(ability))
+>, <Line: +		if (EventManager.marker.get(p.getWorld()).equalsIgnoreCase("LunarEclipse") && WaterMethods.isWaterAbility(ability))
+>]
+[<Line: -		if (BendingManager.events.get(p.getWorld()) != null && BendingManager.events.get(p.getWorld()).equalsIgnoreCase("SolarEclipse") && FireMethods.isFireAbility(ability))
+>, <Line: -		if (BendingManager.events.get(p.getWorld()) != null && BendingManager.events.get(p.getWorld()).equalsIgnoreCase("LunarEclipse") && WaterMethods.isWaterAbility(ability))
+>]

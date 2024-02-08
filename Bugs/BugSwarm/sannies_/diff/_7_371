@@ -1,0 +1,11 @@
+[<Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.iso23001.part7.AbstractTrackEncryptionBox;
+>, <Line: +import org.mp4parser.tools.UUIDConverter;
+>, <Line: +import java.io.FileInputStream;
+>, <Line: +        IsoFile iso = new IsoFile(new FileInputStream(f).getChannel());
+>]
+[<Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.googlecode.mp4parser.util.UUIDConverter;
+>, <Line: -        IsoFile iso = new IsoFile(f.getAbsolutePath());
+>]

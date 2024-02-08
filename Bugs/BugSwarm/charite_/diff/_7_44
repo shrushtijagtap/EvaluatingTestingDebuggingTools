@@ -1,0 +1,71 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.pedigree.compatibilitychecker.xr;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.GenotypeList;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Pedigree;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerBase;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerException;
+>, <Line: -/**
+>, <Line: - * Helper class for checking a {@link GenotypeList} for compatibility with a
+>, <Line: - * {@link Pedigree} and X recessive mode of inheritance.
+>, <Line: - *
+>, <Line: - * <h2>Compatibility Check</h2>
+>, <Line: - *
+>, <Line: - * If the pedigree has only one sample then the check is as follows. If the
+>, <Line: - * index is female, the checker returns true if the genotype call list is
+>, <Line: - * compatible with autosomal recessive compound heterozygous inheritance or if
+>, <Line: - * the list contains a homozygous alt call. If the index is male then return
+>, <Line: - * true if the list contains a homozygous alt call.
+>, <Line: - *
+>, <Line: - * If the pedigree has more samples, the checks are more involved.
+>, <Line: - *
+>, <Line: - * <b>Note</b> that the case of X-chromosomal compound heterozygous mutations is
+>, <Line: - * only handled in the single case. For larger pedigrees we assume that female
+>, <Line: - * individuals are not affected. Otherwise it will be a dominant mutation,
+>, <Line: - * because only affected males can be heredity the variant. De-novo mutations
+>, <Line: - * will be handled also from dominant compatibility checker. If the gene is
+>, <Line: - * recessive some have to look for the second mutation by its own.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - * @author <a href="mailto:max.schubach@charite.de">Max Schubach</a>
+>, <Line: - * @author <a href="mailto:peter.robinson@charite.de">Peter N Robinson</a>
+>, <Line: - * 
+>, <Line: - * @deprecated use {@link VariantContextCompatibilityCheckerXRecessive} instead.
+>, <Line: - */
+>, <Line: -@Deprecated
+>, <Line: -public class CompatibilityCheckerXRecessive extends CompatibilityCheckerBase {
+>, <Line: -	/**
+>, <Line: -	 * Initialize compatibility checker and perform some sanity checks.
+>, <Line: -	 *
+>, <Line: -	 * The {@link GenotypeList} object passed to the constructor is expected to
+>, <Line: -	 * represent all of the variants found in a certain gene (possibly after
+>, <Line: -	 * filtering for rarity or predicted pathogenicity). The samples represented
+>, <Line: -	 * by the {@link GenotypeList} must be in the same order as the list of
+>, <Line: -	 * individuals contained in this pedigree.
+>, <Line: -	 *
+>, <Line: -	 * @param pedigree
+>, <Line: -	 *            the {@link Pedigree} to use for the initialize
+>, <Line: -	 * @param list
+>, <Line: -	 *            the {@link GenotypeList} to use for the initialization
+>, <Line: -	 * @throws CompatibilityCheckerException
+>, <Line: -	 *             if the pedigree or variant list is invalid
+>, <Line: -	 */
+>, <Line: -	public CompatibilityCheckerXRecessive(Pedigree pedigree, GenotypeList list) throws CompatibilityCheckerException {
+>, <Line: -		super(pedigree, list);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean run() throws CompatibilityCheckerException {
+>, <Line: -		if (!list.isXChromosomal())
+>, <Line: -			return false;
+>, <Line: -		else if (new CompatibilityCheckerXRecessiveHomozygous(pedigree, list).run())
+>, <Line: -			return true;
+>, <Line: -		else
+>, <Line: -			return new CompatibilityCheckerXRecessiveCompoundHet(pedigree, list).run();
+>, <Line: -	}
+>, <Line: -	public boolean runSingleSampleCase() throws CompatibilityCheckerException {
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -	public boolean runMultiSampleCase() {
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -}
+>]

@@ -1,0 +1,51 @@
+[<Line: +package com.hubspot.baragon.models;
+>, <Line: +public class BaragonRequestKey implements Comparable<BaragonRequestKey> {
+>, <Line: +  private final String requestId;
+>, <Line: +  private final long updatedAt;
+>, <Line: +  public BaragonRequestKey(String requestId, long updatedAt) {
+>, <Line: +    this.requestId = requestId;
+>, <Line: +    this.updatedAt = updatedAt;
+>, <Line: +  }
+>, <Line: +  public String getRequestId() {
+>, <Line: +    return requestId;
+>, <Line: +  }
+>, <Line: +  public long getUpdatedAt() {
+>, <Line: +    return updatedAt;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public int compareTo(BaragonRequestKey o) {
+>, <Line: +    return Long.compare(updatedAt, o.updatedAt);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public boolean equals(Object o) {
+>, <Line: +    if (this == o) {
+>, <Line: +      return true;
+>, <Line: +    }
+>, <Line: +    if (o == null || getClass() != o.getClass()) {
+>, <Line: +      return false;
+>, <Line: +    }
+>, <Line: +    BaragonRequestKey that = (BaragonRequestKey) o;
+>, <Line: +    if (updatedAt != that.updatedAt) {
+>, <Line: +      return false;
+>, <Line: +    }
+>, <Line: +    if (requestId != null ? !requestId.equals(that.requestId) : that.requestId != null) {
+>, <Line: +      return false;
+>, <Line: +    }
+>, <Line: +    return true;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public int hashCode() {
+>, <Line: +    int result = requestId != null ? requestId.hashCode() : 0;
+>, <Line: +    result = 31 * result + (int) (updatedAt ^ (updatedAt >>> 32));
+>, <Line: +    return result;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public String toString() {
+>, <Line: +    return "BaragonRequestKey{" +
+>, <Line: +      "requestId='" + requestId + '\'' +
+>, <Line: +      ", updatedAt=" + updatedAt +
+>, <Line: +      '}';
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

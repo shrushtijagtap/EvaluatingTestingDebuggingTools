@@ -1,0 +1,10 @@
+[<Line: +      else if (testClass.getTestName() != null) {
+>, <Line: +        m_name = testClass.getTestName();
+>, <Line: +    if (m_testClass.getTestName() != null) {
+>, <Line: +      return m_testClass.getTestName();
+>]
+[<Line: -      else if (context.getName() != null) {
+>, <Line: -        m_name = context.getName();
+>, <Line: -    if (m_context.getName() != null) {
+>, <Line: -      return m_context.getName();
+>]

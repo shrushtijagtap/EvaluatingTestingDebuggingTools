@@ -1,0 +1,10 @@
+[<Line: +function f(int i) -> ([int],[int]):
+>, <Line: +    return arr1, arr2
+>, <Line: +    assume f(2) == ([1, 2, 64], [1, 2, 3])
+>, <Line: +    assume f(3) == ([1, 2, 64], [1, 2, 3])
+>]
+[<Line: -function f(int i) -> [int]:
+>, <Line: -    return arr1 ++ arr2
+>, <Line: -    assume f(2) == [1, 2, 64, 1, 2, 3]
+>, <Line: -    assume f(3) == [1, 2, 64, 1, 2, 3]
+>]

@@ -1,0 +1,8 @@
+[<Line: +import java.util.Objects;
+>, <Line: + * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#parameterObject"
+>, <Line: +   * @return Map&lt;String, Example&gt; examples
+>]
+[<Line: -import java.util.Objects;
+>, <Line: - * @link https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#parameterObject
+>, <Line: -   * @return Map<String, Example> examples
+>]

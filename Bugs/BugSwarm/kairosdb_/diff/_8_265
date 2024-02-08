@@ -1,0 +1,194 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +	],
+>, <Line: +	function (angular, _) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		module.service('panelSrv', function ($rootScope, $timeout, datasourceSrv) {
+>, <Line: +			this.init = function ($scope) {
+>, <Line: +				if (!$scope.panel.span) {
+>, <Line: +					$scope.panel.span = 12;
+>, <Line: +				}
+>, <Line: +				$scope.inspector = {};
+>, <Line: +				$scope.editPanel = function () {
+>, <Line: +					if ($scope.panelMeta.fullscreen) {
+>, <Line: +						$scope.toggleFullscreen(true);
+>, <Line: +					}
+>, <Line: +					else {
+>, <Line: +						$scope.appEvent('show-dash-editor', {
+>, <Line: +							src: 'app/partials/paneleditor.html',
+>, <Line: +							scope: $scope
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +				$scope.sharePanel = function () {
+>, <Line: +					$scope.appEvent('show-modal', {
+>, <Line: +						src: './app/partials/share-panel.html',
+>, <Line: +						scope: $scope.$new()
+>, <Line: +					});
+>, <Line: +				};
+>, <Line: +				$scope.editPanelJson = function () {
+>, <Line: +					$scope.appEvent('show-json-editor', {
+>, <Line: +						object: $scope.panel,
+>, <Line: +						updateHandler: $scope.replacePanel
+>, <Line: +					});
+>, <Line: +				};
+>, <Line: +				$scope.duplicatePanel = function () {
+>, <Line: +					$scope.dashboard.duplicatePanel($scope.panel, $scope.row);
+>, <Line: +				};
+>, <Line: +				$scope.updateColumnSpan = function (span) {
+>, <Line: +					$scope.panel.span = Math.min(Math.max($scope.panel.span + span, 1), 12);
+>, <Line: +					$timeout(function () {
+>, <Line: +						$scope.$emit('render');
+>, <Line: +					});
+>, <Line: +				};
+>, <Line: +				$scope.addDataQuery = function () {
+>, <Line: +					$scope.panel.targets.push({target: ''});
+>, <Line: +				};
+>, <Line: +				$scope.removeDataQuery = function (query) {
+>, <Line: +					$scope.panel.targets = _.without($scope.panel.targets, query);
+>, <Line: +					$scope.get_data();
+>, <Line: +				};
+>, <Line: +				$scope.setDatasource = function (datasource) {
+>, <Line: +					$scope.panel.datasource = datasource;
+>, <Line: +					$scope.datasource = datasourceSrv.get(datasource);
+>, <Line: +					if (!$scope.datasource) {
+>, <Line: +						$scope.panelMeta.error = "Cannot find datasource " + datasource;
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +				$scope.changeDatasource = function (datasource) {
+>, <Line: +					$scope.setDatasource(datasource);
+>, <Line: +					$scope.get_data();
+>, <Line: +				};
+>, <Line: +				$scope.toggleEditorHelp = function (index) {
+>, <Line: +					if ($scope.editorHelpIndex === index) {
+>, <Line: +						$scope.editorHelpIndex = null;
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					$scope.editorHelpIndex = index;
+>, <Line: +				};
+>, <Line: +				$scope.toggleFullscreen = function (edit) {
+>, <Line: +					$scope.dashboardViewState.update({
+>, <Line: +						fullscreen: true,
+>, <Line: +						edit: edit,
+>, <Line: +						panelId: $scope.panel.id
+>, <Line: +					});
+>, <Line: +				};
+>, <Line: +				$scope.otherPanelInFullscreenMode = function () {
+>, <Line: +					return $scope.dashboardViewState.fullscreen && !$scope.fullscreen;
+>, <Line: +				};
+>, <Line: +				// Post init phase
+>, <Line: +				$scope.fullscreen = false;
+>, <Line: +				$scope.editor = {index: 1};
+>, <Line: +				$scope.datasources = datasourceSrv.getMetricSources();
+>, <Line: +				$scope.setDatasource($scope.panel.datasource);
+>, <Line: +				$scope.dashboardViewState.registerPanel($scope);
+>, <Line: +				if ($scope.get_data) {
+>, <Line: +					var panel_get_data = $scope.get_data;
+>, <Line: +					$scope.get_data = function () {
+>, <Line: +						if ($scope.otherPanelInFullscreenMode()) {
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						delete $scope.panelMeta.error;
+>, <Line: +						$scope.panelMeta.loading = true;
+>, <Line: +						panel_get_data();
+>, <Line: +					};
+>, <Line: +					if (!$scope.skipDataOnInit) {
+>, <Line: +						$scope.get_data();
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -],
+>, <Line: -function (angular, _) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.service('panelSrv', function($rootScope, $timeout, datasourceSrv) {
+>, <Line: -    this.init = function($scope) {
+>, <Line: -      if (!$scope.panel.span) { $scope.panel.span = 12; }
+>, <Line: -      $scope.inspector = {};
+>, <Line: -      $scope.editPanel = function() {
+>, <Line: -        if ($scope.panelMeta.fullscreen) {
+>, <Line: -          $scope.toggleFullscreen(true);
+>, <Line: -        }
+>, <Line: -        else {
+>, <Line: -          $scope.appEvent('show-dash-editor', { src: 'app/partials/paneleditor.html', scope: $scope });
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -      $scope.sharePanel = function() {
+>, <Line: -        $scope.appEvent('show-modal', {
+>, <Line: -          src: './app/partials/share-panel.html',
+>, <Line: -          scope: $scope.$new()
+>, <Line: -        });
+>, <Line: -      };
+>, <Line: -      $scope.editPanelJson = function() {
+>, <Line: -        $scope.appEvent('show-json-editor', { object: $scope.panel, updateHandler: $scope.replacePanel });
+>, <Line: -      };
+>, <Line: -      $scope.duplicatePanel = function() {
+>, <Line: -        $scope.dashboard.duplicatePanel($scope.panel, $scope.row);
+>, <Line: -      };
+>, <Line: -      $scope.updateColumnSpan = function(span) {
+>, <Line: -        $scope.panel.span = Math.min(Math.max($scope.panel.span + span, 1), 12);
+>, <Line: -        $timeout(function() {
+>, <Line: -          $scope.$emit('render');
+>, <Line: -        });
+>, <Line: -      };
+>, <Line: -      $scope.addDataQuery = function() {
+>, <Line: -        $scope.panel.targets.push({target: ''});
+>, <Line: -      };
+>, <Line: -      $scope.removeDataQuery = function (query) {
+>, <Line: -        $scope.panel.targets = _.without($scope.panel.targets, query);
+>, <Line: -        $scope.get_data();
+>, <Line: -      };
+>, <Line: -      $scope.setDatasource = function(datasource) {
+>, <Line: -        $scope.panel.datasource = datasource;
+>, <Line: -        $scope.datasource = datasourceSrv.get(datasource);
+>, <Line: -        if (!$scope.datasource) {
+>, <Line: -          $scope.panelMeta.error = "Cannot find datasource " + datasource;
+>, <Line: -          return;
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -      $scope.changeDatasource = function(datasource) {
+>, <Line: -        $scope.setDatasource(datasource);
+>, <Line: -        $scope.get_data();
+>, <Line: -      };
+>, <Line: -      $scope.toggleEditorHelp = function(index) {
+>, <Line: -        if ($scope.editorHelpIndex === index) {
+>, <Line: -          $scope.editorHelpIndex = null;
+>, <Line: -          return;
+>, <Line: -        }
+>, <Line: -        $scope.editorHelpIndex = index;
+>, <Line: -      };
+>, <Line: -      $scope.toggleFullscreen = function(edit) {
+>, <Line: -        $scope.dashboardViewState.update({ fullscreen: true, edit: edit, panelId: $scope.panel.id });
+>, <Line: -      };
+>, <Line: -      $scope.otherPanelInFullscreenMode = function() {
+>, <Line: -        return $scope.dashboardViewState.fullscreen && !$scope.fullscreen;
+>, <Line: -      };
+>, <Line: -      // Post init phase
+>, <Line: -      $scope.fullscreen = false;
+>, <Line: -      $scope.editor = { index: 1 };
+>, <Line: -      $scope.datasources = datasourceSrv.getMetricSources();
+>, <Line: -      $scope.setDatasource($scope.panel.datasource);
+>, <Line: -      $scope.dashboardViewState.registerPanel($scope);
+>, <Line: -      if ($scope.get_data) {
+>, <Line: -        var panel_get_data = $scope.get_data;
+>, <Line: -        $scope.get_data = function() {
+>, <Line: -          if ($scope.otherPanelInFullscreenMode()) { return; }
+>, <Line: -          delete $scope.panelMeta.error;
+>, <Line: -          $scope.panelMeta.loading = true;
+>, <Line: -          panel_get_data();
+>, <Line: -        };
+>, <Line: -        if (!$scope.skipDataOnInit) {
+>, <Line: -          $scope.get_data();
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

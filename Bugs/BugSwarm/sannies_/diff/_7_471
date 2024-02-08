@@ -1,0 +1,18 @@
+[<Line: +package org.mp4parser.muxer;
+>, <Line: +import org.mp4parser.support.Matrix;
+>, <Line: +    /**
+>, <Line: +     * specifies the front-to-back ordering of video tracks; tracks with lower
+>, <Line: +     * numbers are closer to the viewer. 0 is the normal value, and -1 would be
+>, <Line: +     * in front of track 0, and so on.
+>, <Line: +     */
+>, <Line: +    int layer;
+>]
+[<Line: -package com.googlecode.mp4parser.authoring;
+>, <Line: -import com.googlecode.mp4parser.util.Matrix;
+>, <Line: -    /**
+>, <Line: -     * specifies the front-to-back ordering of video tracks; tracks with lower
+>, <Line: -     * numbers are closer to the viewer. 0 is the normal value, and -1 would be
+>, <Line: -     * in front of track 0, and so on.
+>, <Line: -     */
+>, <Line: -    int layer;
+>]

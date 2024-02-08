@@ -1,0 +1,17 @@
+[<Line: +    [byte] r = [0b; |s|]
+>, <Line: +        r[i] = toByte(s[i])
+>, <Line: +    [byte] r = [0b; amount]
+>, <Line: +        r[i] = state->bytes[state->pos]
+>, <Line: +    return {
+>, <Line: +        read: &(int x -> read(this, x)),
+>, <Line: +        eof: &( -> eof(this))
+>, <Line: +    }
+>, <Line: +    assume read("hello") == [01101100b, 01101111b, 0b]
+>]
+[<Line: -    [byte] r = []
+>, <Line: -        r = r ++ [toByte(s[i])]
+>, <Line: -    [byte] r = []
+>, <Line: -        r = r ++ [state->bytes[state->pos]]
+>, <Line: -    return {read: &(int x -> read(this, x)), eof: &( -> eof(this))}
+>, <Line: -    assume read("hello") == [01101100b, 01101111b]
+>]

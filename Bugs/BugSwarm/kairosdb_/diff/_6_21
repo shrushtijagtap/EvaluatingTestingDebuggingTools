@@ -1,0 +1,26 @@
+[]
+[<Line: -package org.kairosdb.datastore.cassandra;
+>, <Line: -import com.netflix.astyanax.serializers.AbstractSerializer;
+>, <Line: -import java.nio.ByteBuffer;
+>, <Line: -/**
+>, <Line: - Created by bhawkins on 12/12/16.
+>, <Line: - */
+>, <Line: -public class AstyanaxDataPointsRowKeySerializer extends AbstractSerializer<DataPointsRowKey>
+>, <Line: -{
+>, <Line: -	private DataPointsRowKeySerializer m_serializer;
+>, <Line: -	public AstyanaxDataPointsRowKeySerializer()
+>, <Line: -	{
+>, <Line: -		m_serializer = new DataPointsRowKeySerializer();
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public ByteBuffer toByteBuffer(DataPointsRowKey obj)
+>, <Line: -	{
+>, <Line: -		return m_serializer.toByteBuffer(obj);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public DataPointsRowKey fromByteBuffer(ByteBuffer byteBuffer)
+>, <Line: -	{
+>, <Line: -		return m_serializer.fromByteBuffer(byteBuffer);
+>, <Line: -	}
+>, <Line: -}
+>]

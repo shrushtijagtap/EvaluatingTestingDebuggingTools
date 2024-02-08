@@ -1,0 +1,16 @@
+[<Line: +import org.kairosdb.core.annotation.FeatureComponent;
+>, <Line: +import org.kairosdb.core.annotation.FeatureProperty;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.HashSet;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.Set;
+>, <Line: +@FeatureComponent(
+>, <Line: +	@FeatureProperty(
+>]
+[<Line: -import org.kairosdb.core.annotation.QueryProcessor;
+>, <Line: -import org.kairosdb.core.annotation.QueryProperty;
+>, <Line: -import java.util.*;
+>, <Line: -@QueryProcessor(
+>, <Line: -	@QueryProperty(
+>]

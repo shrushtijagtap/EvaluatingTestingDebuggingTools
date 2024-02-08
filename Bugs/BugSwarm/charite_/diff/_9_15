@@ -1,0 +1,24 @@
+[<Line: +	/** Whether or not parents are reference */
+>, <Line: +	public static String FORMAT_PARENTS_REF = "PR";
+>, <Line: +	/** One parent was filtered out. */
+>, <Line: +	public static String FILTER_GT_ONE_PARENT_FILTERED = "OneParentGtFiltered";
+>, <Line: +	/** Both parents were filtered out. */
+>, <Line: +	public static String FILTER_GT_BOTH_PARENTS_FILTERED = "BothParentsGtFiltered";
+>, <Line: +	 * @param header The {@link VCFHeader} to extend.
+>, <Line: +		header.addMetaDataLine(
+>, <Line: +				new VCFFormatHeaderLine(FORMAT_PARENTS_REF, 1, VCFHeaderLineType.Character,
+>, <Line: +						"Whether both parent's genotype is reference, one of {'Y', 'N'}."));
+>, <Line: +		header.addMetaDataLine(new VCFFilterHeaderLine(FILTER_GT_ONE_PARENT_FILTERED,
+>, <Line: +				"One parent was filtered or no-call, filter child as well, important for inheritance "
+>, <Line: +						+ "filtration as filtered variants count as no-call which counts as "
+>, <Line: +						+ "wild-card by default; \"one/both parents filtered\" don't count. (enabled: "
+>, <Line: +						+ options.isApplyParentGtFilteredFilters() + ")"));
+>, <Line: +		header.addMetaDataLine(new VCFFilterHeaderLine(FILTER_GT_BOTH_PARENTS_FILTERED,
+>, <Line: +				"Both parents are filtered or no-call, filter child as well, important for inheritance "
+>, <Line: +						+ "filtration as filtered variants count as no-call which counts as "
+>, <Line: +						+ "wild-card by default; \"one/both parents filtered\" don't count. (enabled: "
+>, <Line: +						+ options.isApplyParentGtFilteredFilters() + ")"));
+>]
+[<Line: -	 * @param header
+>, <Line: -	 *            The {@link VCFHeader} to extend.
+>]

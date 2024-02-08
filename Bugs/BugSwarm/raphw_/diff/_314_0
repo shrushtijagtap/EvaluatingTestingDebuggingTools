@@ -1,0 +1,8 @@
+[<Line: +                } else if (ownerType == null && declaringType != null && !rawType.isStatic()) {
+>, <Line: +                    return new Generic.OfParameterizedType.Latent(rawType, ownerType, parameterTypes, annotations);
+>]
+[<Line: -                } if (ownerType == null && declaringType != null && !rawType.isStatic()) {
+>, <Line: -                    return ownerType == null && parameterTypes.isEmpty()
+>, <Line: -                            ? new Generic.OfNonGenericType.Latent(rawType, annotations)
+>, <Line: -                            : new Generic.OfParameterizedType.Latent(rawType, ownerType, parameterTypes, annotations);
+>]

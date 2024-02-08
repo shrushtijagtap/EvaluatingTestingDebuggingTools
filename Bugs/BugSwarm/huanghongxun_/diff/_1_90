@@ -1,0 +1,8 @@
+[<Line: +import com.google.gson.annotations.SerializedName;
+>, <Line: +    @SerializedName("rules")
+>, <Line: +    @SerializedName("url")
+>, <Line: +    @SerializedName("natives")
+>, <Line: +    @SerializedName("extract")
+>, <Line: +    @SerializedName("downloads")
+>]
+[]

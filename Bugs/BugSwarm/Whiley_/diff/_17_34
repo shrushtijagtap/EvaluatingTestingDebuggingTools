@@ -1,0 +1,42 @@
+[<Line: +function selectOver([int] xs) -> ([int] ys)
+>, <Line: +ensures |ys| <= |xs|
+>, <Line: +ensures no { i in 0..|ys| | ys[i] < 0 }:
+>, <Line: +    int count = 0
+>, <Line: +    while i < |xs| where i >= 0 && count >= 0:
+>, <Line: +        if xs[i] >= 0:
+>, <Line: +            count = count + 1
+>, <Line: +    //
+>, <Line: +    [int] zs = [0; count]
+>, <Line: +    i = 0
+>, <Line: +    int j = 0
+>, <Line: +    while i < |xs| where i >= 0 && j >= 0:
+>, <Line: +        if xs[i] >= 0:
+>, <Line: +            zs[j] = xs[i]
+>, <Line: +            j = j + 1
+>, <Line: +    //
+>, <Line: +    return zs
+>, <Line: +    [int] a1 = selectOver([1, -2, 3, 4])
+>, <Line: +    [int] a2 = selectOver([1, -2, -3, 4])
+>, <Line: +    assume a1 == [1,3,4]
+>, <Line: +    assume a2 == [1,4]
+>]
+[<Line: -function pred([int] xs) -> (bool b)
+>, <Line: -ensures b ==> no { i in 0..|xs| | xs[i] < 0 }:
+>, <Line: -    [int] zs = []
+>, <Line: -    while i < |xs|:
+>, <Line: -        if xs[i] < 0:
+>, <Line: -            zs = zs ++ [xs[i]]
+>, <Line: -    return |zs| == 0
+>, <Line: -function countOver([int] xs, int y) -> int
+>, <Line: -requires pred(xs):
+>, <Line: -    [int] tmp = []
+>, <Line: -    int i = 0
+>, <Line: -    while i < |xs|:
+>, <Line: -        if xs[i] > y:
+>, <Line: -            tmp = tmp ++ [xs[i]]
+>, <Line: -    return |tmp|
+>, <Line: -    int c1 = countOver([1, 2, 3, 4], 1)
+>, <Line: -    int c2 = countOver([1, 2, 3, 4], 3)
+>, <Line: -    assume c1 == 3
+>, <Line: -    assume c2 == 1
+>]

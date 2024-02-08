@@ -1,0 +1,12 @@
+[<Line: +            Entity t = Selector.oneEntity(sender, args[0]).orElse(null);
+>, <Line: +            List<Entity> e = Selector.multipleEntities(sender, args[0]);
+>, <Line: +            Entity t = Selector.oneEntity(sender, args[1]).orElse(null);
+>, <Line: +            List<Entity> e = Selector.multipleEntities(sender, args[0]);
+>, <Line: +            List<Entity> e = Selector.multipleEntities(sender, args[0]);
+>]
+[<Line: -            Entity t = PlayerSelector.oneEntity(sender, args[0]).orElse(null);
+>, <Line: -            List<Entity> e = PlayerSelector.multipleEntities(sender, args[0]);
+>, <Line: -            Entity t = PlayerSelector.oneEntity(sender, args[1]).orElse(null);
+>, <Line: -            List<Entity> e = PlayerSelector.multipleEntities(sender, args[0]);
+>, <Line: -            List<Entity> e = PlayerSelector.multipleEntities(sender, args[0]);
+>]

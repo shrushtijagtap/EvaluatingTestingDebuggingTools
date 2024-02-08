@@ -1,0 +1,50 @@
+[<Line: +    int frameNrInGop = 0;
+>, <Line: +    int[] pictureOrderCounts = new int[0];
+>, <Line: +    int prevPicOrderCntLsb = 0;
+>, <Line: +    int prevPicOrderCntMsb = 0;
+>, <Line: +    private List<Sample> samples;
+>, <Line: +    public static H264NalUnitHeader getNalUnitHeader(ByteBuffer nal) {
+>, <Line: +        H264NalUnitHeader nalUnitHeader = new H264NalUnitHeader();
+>, <Line: +        int type = nal.get(0);
+>, <Line: +        nalUnitHeader.nal_ref_idc = (type >> 5) & 3;
+>, <Line: +        nalUnitHeader.nal_unit_type = type & 0x1f;
+>, <Line: +        return nalUnitHeader;
+>, <Line: +    }
+>, <Line: +            int frame_num;
+>, <Line: +            int pic_parameter_set_id;
+>, <Line: +            boolean field_pic_flag;
+>, <Line: +            boolean bottom_field_flag;
+>, <Line: +            int nal_ref_idc;
+>, <Line: +            int pic_order_cnt_type;
+>, <Line: +            int delta_pic_order_cnt_bottom;
+>, <Line: +            int pic_order_cnt_lsb;
+>, <Line: +            int delta_pic_order_cnt_0;
+>, <Line: +            int delta_pic_order_cnt_1;
+>, <Line: +            boolean idrPicFlag;
+>, <Line: +            int idr_pic_id;
+>]
+[<Line: -    private List<Sample> samples;
+>, <Line: -    int frameNrInGop = 0;
+>, <Line: -    int[] pictureOrderCounts = new int[0];
+>, <Line: -            int frame_num;
+>, <Line: -            int pic_parameter_set_id;
+>, <Line: -            boolean field_pic_flag;
+>, <Line: -            boolean bottom_field_flag;
+>, <Line: -            int nal_ref_idc;
+>, <Line: -            int pic_order_cnt_type;
+>, <Line: -            int delta_pic_order_cnt_bottom;
+>, <Line: -            int pic_order_cnt_lsb;
+>, <Line: -            int delta_pic_order_cnt_0;
+>, <Line: -            int delta_pic_order_cnt_1;
+>, <Line: -            boolean idrPicFlag;
+>, <Line: -            int idr_pic_id;
+>, <Line: -    int prevPicOrderCntLsb = 0;
+>, <Line: -    int prevPicOrderCntMsb = 0;
+>, <Line: -    public static H264NalUnitHeader getNalUnitHeader(ByteBuffer nal) {
+>, <Line: -        H264NalUnitHeader nalUnitHeader = new H264NalUnitHeader();
+>, <Line: -        int type = nal.get(0);
+>, <Line: -        nalUnitHeader.nal_ref_idc = (type >> 5) & 3;
+>, <Line: -        nalUnitHeader.nal_unit_type = type & 0x1f;
+>, <Line: -        return nalUnitHeader;
+>, <Line: -    }
+>]

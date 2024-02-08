@@ -1,0 +1,4 @@
+[<Line: +                Context.getConnectionManager().setActiveDevice(device.getUniqueId(), protocol, channel, remoteAddress);
+>]
+[<Line: -                Context.getDataManager().setActiveDevice(device.getUniqueId(), protocol, channel, remoteAddress);
+>]

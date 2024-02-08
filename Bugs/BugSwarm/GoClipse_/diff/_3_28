@@ -1,0 +1,22 @@
+[<Line: +			if(areEqual(element, obj)) {
+>, <Line: +			}
+>, <Line: +			if(predicate.test(element)) {
+>, <Line: +			}
+>, <Line: +	// BM: is there no function in the JVM standard lib that does this??
+>, <Line: +	/**
+>, <Line: +	 * @return the first element to match given predicate, null otherwise.
+>, <Line: +	 */
+>, <Line: +	public static <T> T findElement(Iterator<? extends T> iterator, Predicate<? super T> predicate) {
+>, <Line: +		while(iterator.hasNext()) {
+>, <Line: +			T element = iterator.next();
+>, <Line: +			if(predicate.test(element)) {
+>, <Line: +				return element;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return null;
+>, <Line: +	}
+>]
+[<Line: -			if(areEqual(element, obj))
+>, <Line: -			if(predicate.test(element))
+>, <Line: -	/* ----------------- retrieval ----------------- */
+>]

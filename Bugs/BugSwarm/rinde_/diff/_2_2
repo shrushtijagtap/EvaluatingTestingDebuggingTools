@@ -1,0 +1,12 @@
+[<Line: +    public void resultsReceived(@Nullable TaskResultEvent event) {
+>, <Line: +      checkNotNull(event);
+>, <Line: +    public int compareTo(@Nullable SimResultWrapper o) {
+>, <Line: +      return Ints.compare(index, checkNotNull(o).index);
+>, <Line: +    public int compareTo(@Nullable SimulationTask o) {
+>, <Line: +      checkNotNull(o);
+>]
+[<Line: -    public void resultsReceived(@SuppressWarnings("null") TaskResultEvent event) {
+>, <Line: -    public int compareTo(SimResultWrapper o) {
+>, <Line: -      return Ints.compare(index, o.index);
+>, <Line: -    public int compareTo(SimulationTask o) {
+>]

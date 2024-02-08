@@ -1,0 +1,73 @@
+[<Line: +package org.kairosdb.core.scheduler;
+>, <Line: +import com.google.inject.Guice;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.kairosdb.core.exception.KairosDBException;
+>, <Line: +import org.kairosdb.rollup.RollUpJob;
+>, <Line: +import org.quartz.*;
+>, <Line: +import org.quartz.impl.JobDetailImpl;
+>, <Line: +import java.util.Set;
+>, <Line: +import static org.hamcrest.CoreMatchers.equalTo;
+>, <Line: +import static org.hamcrest.CoreMatchers.hasItem;
+>, <Line: +import static org.hamcrest.MatcherAssert.assertThat;
+>, <Line: +import static org.quartz.TriggerBuilder.newTrigger;
+>, <Line: +public class KairosDBSchedulerImplTest
+>, <Line: +{
+>, <Line: +	private KairosDBScheduler scheduler;
+>, <Line: +	@Before
+>, <Line: +	public void setup() throws SchedulerException
+>, <Line: +	{
+>, <Line: +		scheduler = new KairosDBSchedulerImpl(Guice.createInjector());
+>, <Line: +	}
+>, <Line: +	@Test(expected = NullPointerException.class)
+>, <Line: +	public void testScheduleNullJobDetailInvalid() throws KairosDBException
+>, <Line: +	{
+>, <Line: +		scheduler.schedule(null, newTrigger().build());
+>, <Line: +	}
+>, <Line: +	@Test(expected = NullPointerException.class)
+>, <Line: +	public void testScheduleNullTriggerInvalid() throws KairosDBException
+>, <Line: +	{
+>, <Line: +		scheduler.schedule(new JobDetailImpl(), null);
+>, <Line: +	}
+>, <Line: +	@Test(expected = NullPointerException.class)
+>, <Line: +	public void testCancelNullIdInvalid() throws KairosDBException
+>, <Line: +	{
+>, <Line: +		scheduler.cancel(null);
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test() throws KairosDBException
+>, <Line: +	{
+>, <Line: +		scheduler.schedule(createJobDetail("1"), createTrigger("1"));
+>, <Line: +		scheduler.schedule(createJobDetail("2"), createTrigger("2"));
+>, <Line: +		Set<String> scheduledJobIds = scheduler.getScheduledJobIds();
+>, <Line: +		assertThat(scheduledJobIds.size(), equalTo(2));
+>, <Line: +		assertThat(scheduledJobIds, hasItem("1"));
+>, <Line: +		assertThat(scheduledJobIds, hasItem("2"));
+>, <Line: +		scheduler.cancel(getJobKey("1"));
+>, <Line: +		scheduledJobIds = scheduler.getScheduledJobIds();
+>, <Line: +		assertThat(scheduledJobIds.size(), equalTo(1));
+>, <Line: +		assertThat(scheduledJobIds, hasItem("2"));
+>, <Line: +		scheduler.cancel(getJobKey("2"));
+>, <Line: +		assertThat(scheduler.getScheduledJobIds().size(), equalTo(0));
+>, <Line: +	}
+>, <Line: +	private JobKey getJobKey(String id)
+>, <Line: +	{
+>, <Line: +		return new JobKey(id, "group");
+>, <Line: +	}
+>, <Line: +	private JobDetail createJobDetail(String key)
+>, <Line: +	{
+>, <Line: +		JobDetailImpl jobDetail = new JobDetailImpl();
+>, <Line: +		jobDetail.setJobClass(RollUpJob.class);
+>, <Line: +		jobDetail.setKey(getJobKey(key));
+>, <Line: +		return jobDetail;
+>, <Line: +	}
+>, <Line: +	private Trigger createTrigger(String key)
+>, <Line: +	{
+>, <Line: +		return newTrigger()
+>, <Line: +				.withIdentity(key + "-" + this.getClass().getSimpleName())
+>, <Line: +				.withSchedule(CronScheduleBuilder.cronSchedule("0 */1 * * * ?"))
+>, <Line: +				.build();
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

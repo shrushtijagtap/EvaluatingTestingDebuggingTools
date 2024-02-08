@@ -1,0 +1,10 @@
+[<Line: +/**
+>, <Line: + * Represents ClassAssertion from OWL 2 QL Specification
+>, <Line: + * 
+>, <Line: + * ClassAssertion := 'ClassAssertion' '(' axiomAnnotations Class Individual ')'
+>, <Line: + * 
+>, <Line: + * @author Roman Kontchakov
+>, <Line: + *
+>, <Line: + */
+>]
+[]

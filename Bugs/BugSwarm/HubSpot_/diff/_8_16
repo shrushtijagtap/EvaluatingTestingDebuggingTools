@@ -1,0 +1,48 @@
+[<Line: +import java.io.File;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +import com.google.common.base.Stopwatch;
+>, <Line: +import com.google.inject.Inject;
+>, <Line: +import com.google.inject.name.Named;
+>, <Line: +import com.hubspot.baragon.agent.BaragonAgentServiceModule;
+>, <Line: +import com.hubspot.baragon.agent.healthcheck.ConfigChecker;
+>, <Line: +import com.hubspot.baragon.agent.lbs.BootstrapFileChecker;
+>, <Line: +import com.hubspot.baragon.agent.lbs.FilesystemConfigHelper;
+>, <Line: +import com.hubspot.baragon.data.BaragonKnownAgentsDatastore;
+>, <Line: +import com.hubspot.baragon.data.BaragonLoadBalancerDatastore;
+>, <Line: +import com.hubspot.baragon.data.BaragonStateDatastore;
+>, <Line: +import com.hubspot.baragon.models.BaragonAgentMetadata;
+>, <Line: +import com.hubspot.baragon.models.BaragonConfigFile;
+>, <Line: +import com.hubspot.baragon.models.BaragonKnownAgentMetadata;
+>, <Line: +import com.hubspot.baragon.models.BaragonServiceState;
+>, <Line: +import com.hubspot.baragon.models.ServiceContext;
+>, <Line: +import io.dropwizard.lifecycle.Managed;
+>, <Line: +  private final ConfigChecker configChecker;
+>, <Line: +  private ScheduledFuture<?> configCheckerFuture = null;
+>, <Line: +                          ConfigChecker configChecker,
+>, <Line: +                          @Named(BaragonAgentServiceModule.BARAGON_AGENT_HTTP_CLIENT) HttpClient httpClient) {
+>, <Line: +    this.configChecker = configChecker;
+>, <Line: +    LOG.info("Starting config checker");
+>, <Line: +    configCheckerFuture = executorService.scheduleAtFixedRate(configChecker, 0, configuration.getConfigCheckIntervalSecs(), TimeUnit.SECONDS);
+>]
+[<Line: -import java.io.FileWriter;
+>, <Line: -import java.io.File;
+>, <Line: -import java.nio.charset.Charset;
+>, <Line: -import com.hubspot.baragon.BaragonDataModule;
+>, <Line: -import com.hubspot.baragon.agent.lbs.BootstrapFileChecker;
+>, <Line: -import com.hubspot.baragon.models.BaragonConfigFile;
+>, <Line: -import com.hubspot.baragon.models.ServiceContext;
+>, <Line: -import com.hubspot.baragon.agent.BaragonAgentServiceModule;
+>, <Line: -import com.hubspot.baragon.agent.lbs.FilesystemConfigHelper;
+>, <Line: -import com.hubspot.baragon.data.BaragonStateDatastore;
+>, <Line: -import com.hubspot.baragon.models.BaragonKnownAgentMetadata;
+>, <Line: -import com.hubspot.baragon.models.BaragonServiceState;
+>, <Line: -import com.google.common.base.Optional;
+>, <Line: -import com.hubspot.baragon.data.BaragonKnownAgentsDatastore;
+>, <Line: -import com.hubspot.baragon.data.BaragonLoadBalancerDatastore;
+>, <Line: -import com.hubspot.baragon.models.BaragonAgentMetadata;
+>, <Line: -import io.dropwizard.lifecycle.Managed;
+>, <Line: -import com.google.common.base.Stopwatch;
+>, <Line: -import com.google.inject.Inject;
+>, <Line: -import com.google.inject.name.Named;
+>, <Line: -                          @Named(BaragonDataModule.BARAGON_AGENT_HTTP_CLIENT) HttpClient httpClient) {
+>]

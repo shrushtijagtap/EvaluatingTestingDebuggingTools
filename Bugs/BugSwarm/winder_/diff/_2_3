@@ -1,0 +1,4 @@
+[<Line: +import com.willwinder.universalgcodesender.model.UGSEvent.ControlState;
+>, <Line: +    public ControlState getControlState();
+>]
+[]

@@ -1,0 +1,18 @@
+[<Line: +import static melnorme.utilbox.core.Assert.AssertNamespace.assertNotNull;
+>, <Line: +import melnorme.util.swt.SWTUtil;
+>, <Line: +		field().set(new EnvironmentSettings());
+>, <Line: +		field().addListener((newValue) -> assertNotNull(newValue));
+>, <Line: +			if(SWTUtil.isOkToUse(appendEnvironment)) {
+>, <Line: +				appendEnvironment.setSelection(newValue.appendEnv);
+>, <Line: +		        replaceEnvironment.setSelection(!newValue.appendEnv);
+>, <Line: +			}
+>, <Line: +			if(SWTUtil.isOkToUse(environmentTable.getTable())) {
+>, <Line: +				environmentTable.setInput(field().get());
+>, <Line: +				environmentTable.refresh();
+>, <Line: +			}
+>]
+[<Line: -			appendEnvironment.setSelection(newValue.appendEnv);
+>, <Line: -	        replaceEnvironment.setSelection(!newValue.appendEnv);
+>, <Line: -			environmentTable.setInput(field().get());
+>, <Line: -			environmentTable.refresh();
+>]

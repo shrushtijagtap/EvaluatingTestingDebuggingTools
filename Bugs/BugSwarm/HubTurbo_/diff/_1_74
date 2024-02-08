@@ -1,0 +1,14 @@
+[<Line: +package github;
+>, <Line: +import com.google.gson.reflect.TypeToken;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.util.List;
+>, <Line: +import static org.eclipse.egit.github.core.client.IGitHubConstants.*;
+>]
+[<Line: -package service;
+>, <Line: -import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_LABELS;
+>, <Line: -import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
+>, <Line: -import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_ISSUES;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.util.List;
+>, <Line: -import com.google.gson.reflect.TypeToken;
+>]

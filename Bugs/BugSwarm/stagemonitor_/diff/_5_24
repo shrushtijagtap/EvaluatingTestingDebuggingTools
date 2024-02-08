@@ -1,0 +1,93 @@
+[<Line: +package org.stagemonitor.requestmonitor;
+>, <Line: +import java.util.Date;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +import com.fasterxml.jackson.annotation.JsonIgnore;
+>, <Line: +import com.fasterxml.jackson.annotation.JsonProperty;
+>, <Line: +import org.stagemonitor.core.util.StringUtils;
+>, <Line: +import org.stagemonitor.requestmonitor.profiler.CallStackElement;
+>, <Line: +public class ExternalRequest {
+>, <Line: +	private final double MS_IN_NANOS = TimeUnit.MILLISECONDS.toNanos(1);
+>, <Line: +	@JsonProperty("@timestamp")
+>, <Line: +	private final String timestamp;
+>, <Line: +	@JsonIgnore
+>, <Line: +	private RequestTrace requestTrace;
+>, <Line: +	@JsonProperty("request_type")
+>, <Line: +	private final String requestType;
+>, <Line: +	@JsonProperty("request_method")
+>, <Line: +	private final String requestMethod;
+>, <Line: +	@JsonIgnore
+>, <Line: +	private long executionTimeNanos;
+>, <Line: +	@JsonProperty("executed_by")
+>, <Line: +	private String executedBy;
+>, <Line: +	private final String request;
+>, <Line: +	@JsonIgnore
+>, <Line: +	private CallStackElement callStackElement;
+>, <Line: +	public ExternalRequest(String requestType, String requestMethod, long executionTimeNanos, String request) {
+>, <Line: +		this.requestType = requestType;
+>, <Line: +		this.requestMethod = requestMethod;
+>, <Line: +		this.executionTimeNanos = executionTimeNanos;
+>, <Line: +		this.request = request;
+>, <Line: +		this.timestamp = StringUtils.dateAsIsoString(new Date());
+>, <Line: +	}
+>, <Line: +	public void setRequestTrace(RequestTrace requestTrace) {
+>, <Line: +		this.requestTrace = requestTrace;
+>, <Line: +	}
+>, <Line: +	@JsonProperty("request_id")
+>, <Line: +	public String getRequestTraceId() {
+>, <Line: +		return requestTrace.getId();
+>, <Line: +	}
+>, <Line: +	@JsonProperty("request_name")
+>, <Line: +	public String getRequestTraceName() {
+>, <Line: +		return requestTrace.getName();
+>, <Line: +	}
+>, <Line: +	public String getTimestamp() {
+>, <Line: +		return timestamp;
+>, <Line: +	}
+>, <Line: +	@JsonProperty("measurement_start")
+>, <Line: +	public long getMeasurementStart() {
+>, <Line: +		return requestTrace.getMeasurementStart();
+>, <Line: +	}
+>, <Line: +	public String getApplication() {
+>, <Line: +		return requestTrace.getApplication();
+>, <Line: +	}
+>, <Line: +	public String getHost() {
+>, <Line: +		return requestTrace.getHost();
+>, <Line: +	}
+>, <Line: +	public String getInstance() {
+>, <Line: +		return requestTrace.getInstance();
+>, <Line: +	}
+>, <Line: +	public String getRequestType() {
+>, <Line: +		return requestType;
+>, <Line: +	}
+>, <Line: +	public String getRequestMethod() {
+>, <Line: +		return requestMethod;
+>, <Line: +	}
+>, <Line: +	@JsonIgnore
+>, <Line: +	public long getExecutionTimeNanos() {
+>, <Line: +		return executionTimeNanos;
+>, <Line: +	}
+>, <Line: +	@JsonProperty("execution_time")
+>, <Line: +	public double getExecutionTime() {
+>, <Line: +		return executionTimeNanos / MS_IN_NANOS;
+>, <Line: +	}
+>, <Line: +	public String getExecutedBy() {
+>, <Line: +		return executedBy;
+>, <Line: +	}
+>, <Line: +	public void setExecutedBy(String executedBy) {
+>, <Line: +		this.executedBy = executedBy;
+>, <Line: +	}
+>, <Line: +	public String getRequest() {
+>, <Line: +		return request;
+>, <Line: +	}
+>, <Line: +	public void incrementExecutionTime(long additionalExecutionTime) {
+>, <Line: +		executionTimeNanos += additionalExecutionTime;
+>, <Line: +	}
+>, <Line: +	public CallStackElement getCallStackElement() {
+>, <Line: +		return callStackElement;
+>, <Line: +	}
+>, <Line: +	public void setCallStackElement(CallStackElement callStackElement) {
+>, <Line: +		this.callStackElement = callStackElement;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

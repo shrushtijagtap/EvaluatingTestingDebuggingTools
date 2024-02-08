@@ -1,0 +1,13 @@
+[<Line: +    public void listEvents(RestRequest req) throws HttpException {
+>, <Line: +            sendOK(req, MediaType.CSV, buf);
+>, <Line: +            sendOK(req, responseb.build(), SchemaRest.ListEventsResponse.WRITE);
+>, <Line: +    public void issueCommand(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req);
+>]
+[<Line: -import io.netty.channel.ChannelFuture;
+>, <Line: -    public ChannelFuture listEvents(RestRequest req) throws HttpException {
+>, <Line: -            return sendOK(req, MediaType.CSV, buf);
+>, <Line: -            return sendOK(req, responseb.build(), SchemaRest.ListEventsResponse.WRITE);
+>, <Line: -    public ChannelFuture issueCommand(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req);
+>]

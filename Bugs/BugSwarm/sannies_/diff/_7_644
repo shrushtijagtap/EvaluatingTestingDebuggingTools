@@ -1,0 +1,32 @@
+[<Line: +package org.mp4parser.streaming.output;
+>, <Line: +import org.mp4parser.streaming.StreamingSample;
+>, <Line: +import org.mp4parser.streaming.StreamingTrack;
+>, <Line: +import org.mp4parser.streaming.output.mp4.FragmentedMp4Writer;
+>, <Line: +import java.io.Closeable;
+>, <Line: +import java.io.IOException;
+>, <Line: +/**
+>, <Line: + * Controls the creation of media files.
+>, <Line: + *
+>, <Line: + * @see FragmentedMp4Writer
+>, <Line: + * @see StreamingTrack#setSampleSink(SampleSink)
+>, <Line: + */
+>, <Line: +public interface SampleSink extends Closeable {
+>, <Line: +    /**
+>, <Line: +     * Free all resources blocked and interrupts the process of
+>, <Line: +     * writing the output. An implementation should flush all samples
+>, <Line: +     * that have not yet been written and write the file footer -
+>, <Line: +     * if exists - before actually freeing the resources.
+>, <Line: +     *
+>, <Line: +     * @throws IOException if closing fails
+>, <Line: +     */
+>, <Line: +    void close() throws IOException;
+>, <Line: +    /**
+>, <Line: +     * Adds a samples to the SampleSink. This might or might not cause writing the sample any output stream or channel.
+>, <Line: +     * Once this method is called the <code>StreamingTrack</code> must be ready and accept calls to any method.
+>, <Line: +     *
+>, <Line: +     * @throws IOException if writing (or reading) fails.
+>, <Line: +     */
+>, <Line: +    void acceptSample(StreamingSample streamingSample, StreamingTrack streamingTrack) throws IOException;
+>, <Line: +}
+>]
+[]

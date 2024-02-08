@@ -1,0 +1,11 @@
+[<Line: +	/**
+>, <Line: +	 * Returns the current value
+>, <Line: +	 *
+>, <Line: +	 * @return the current value
+>, <Line: +	 */
+>, <Line: +	@JsonIgnore
+>, <Line: +	public T get() {
+>, <Line: +		return value;
+>, <Line: +	}
+>]
+[]

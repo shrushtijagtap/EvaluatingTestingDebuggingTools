@@ -1,0 +1,27 @@
+[<Line: +import org.stagemonitor.core.metrics.metrics2.InfluxDbReporter;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.MetricName;
+>, <Line: +	private final ValueType valueType;
+>, <Line: +	public Threshold(@JsonProperty("valueType") String metric, @JsonProperty("operator") Operator operator, @JsonProperty("thresholdValue") double thresholdValue) {
+>, <Line: +		this.valueType = ValueType.valueOf(metric.toUpperCase());
+>, <Line: +	public ValueType getValueType() {
+>, <Line: +		return valueType;
+>, <Line: +		return valueType.getName() + " " + operator.operatorString + " " + thresholdValue;
+>, <Line: +	public String getCheckExpressionAsString(MetricName target) {
+>, <Line: +		return InfluxDbReporter.getInfluxDbLineProtocolString(target) + ' ' + valueType.getName() + " " + operator.operatorString + " " + thresholdValue;
+>, <Line: +	public CheckResult check(CheckResult.Status severity, MetricName target, Map<String, Number> currentValuesByMetric) {
+>, <Line: +		double actualValue = currentValuesByMetric.get(valueType.getName()).doubleValue();
+>, <Line: +	// TODO invert operators?
+>, <Line: +	public enum Operator {
+>]
+[<Line: -	private final String metric;
+>, <Line: -	public Threshold(@JsonProperty("metric") String metric, @JsonProperty("operator") Operator operator, @JsonProperty("thresholdValue") double thresholdValue) {
+>, <Line: -		this.metric = metric;
+>, <Line: -	public String getMetric() {
+>, <Line: -		return metric;
+>, <Line: -		return metric + " " + operator.operatorString + " " + thresholdValue;
+>, <Line: -	public String getCheckExpressionAsString(String target) {
+>, <Line: -		return target + '.' + metric + " " + operator.operatorString + " " + thresholdValue;
+>, <Line: -	public CheckResult check(CheckResult.Status severity, String target, Map<String, Double> currentValuesByMetric) {
+>, <Line: -		Double actualValue = currentValuesByMetric.get(metric);
+>, <Line: -	public static enum Operator {
+>]

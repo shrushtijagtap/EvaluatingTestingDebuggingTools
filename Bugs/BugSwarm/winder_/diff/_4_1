@@ -1,0 +1,12 @@
+[<Line: +        Character expResult = 'c';
+>, <Line: +        version = 1.1;
+>]
+[<Line: -        String expResult = "c";
+>, <Line: -        version = 1.0;
+>, <Line: -        assertEquals(false, result.V1_FORMAT);
+>, <Line: -        version = 1.0;
+>, <Line: -        letter = 'c';
+>, <Line: -        result = GrblUtils.getGrblStatusCapabilities(version, letter);
+>, <Line: -        assertEquals(true, result.REAL_TIME);
+>, <Line: -        assertEquals(true, result.OVERRIDES);
+>]

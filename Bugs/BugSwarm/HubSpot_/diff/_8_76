@@ -1,0 +1,33 @@
+[<Line: +package com.hubspot.baragon.service.worker;
+>, <Line: +import com.google.inject.Singleton;
+>, <Line: +import com.hubspot.baragon.models.RequestAction;
+>, <Line: +import com.hubspot.baragon.service.managers.AgentManager;
+>, <Line: +import com.hubspot.baragon.service.managers.RequestManager;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +@Singleton
+>, <Line: +        for (String loadBalancerGroup : request.getLoadBalancerService().getLoadBalancerGroups()) {
+>, <Line: +          if (agentManager.hasNoAgents(loadBalancerGroup)) {
+>, <Line: +            requestManager.setRequestMessage(request.getLoadBalancerRequestId(), String.format("Invalid request due to no agents present for group: %s", loadBalancerGroup));
+>, <Line: +            return InternalRequestStates.INVALID_REQUEST_NOOP;
+>, <Line: +          }
+>, <Line: +        }
+>, <Line: +      requestManager.saveResponseToHistory(maybeRequest.get(), newState);
+>, <Line: +      requestManager.deleteRequest(requestId);
+>]
+[<Line: -package com.hubspot.baragon.worker;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.Map.Entry;
+>, <Line: -import com.hubspot.baragon.models.BaragonAgentMetadata;
+>, <Line: -import com.hubspot.baragon.models.RequestAction;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -import com.hubspot.baragon.managers.AgentManager;
+>, <Line: -import com.hubspot.baragon.managers.RequestManager;
+>, <Line: -//        for (String loadBalancerGroup : request.getLoadBalancerService().getLoadBalancerGroups()) {
+>, <Line: -//          if (agentManager.hasNoAgents(loadBalancerGroup)) {
+>, <Line: -//            requestManager.setRequestMessage(request.getLoadBalancerRequestId(), String.format("Invalid request due to no agents present for group: %s", loadBalancerGroup));
+>, <Line: -//            return InternalRequestStates.INVALID_REQUEST_NOOP;
+>, <Line: -//          }
+>, <Line: -//        }
+>]

@@ -1,0 +1,54 @@
+[<Line: +	function ($) {
+>, <Line: +		'use strict';
+>, <Line: +		/**
+>, <Line: +		 * jQuery extensions
+>, <Line: +		 */
+>, <Line: +		var $win = $(window);
+>, <Line: +		$.fn.place_tt = (function () {
+>, <Line: +			var defaults = {
+>, <Line: +				offset: 5,
+>, <Line: +			};
+>, <Line: +			return function (x, y, opts) {
+>, <Line: +				opts = $.extend(true, {}, defaults, opts);
+>, <Line: +				return this.each(function () {
+>, <Line: +					var $tooltip = $(this), width, height;
+>, <Line: +					$tooltip.addClass('grafana-tooltip');
+>, <Line: +					$("#tooltip").remove();
+>, <Line: +					$tooltip.appendTo(document.body);
+>, <Line: +					width = $tooltip.outerWidth(true);
+>, <Line: +					height = $tooltip.outerHeight(true);
+>, <Line: +					$tooltip.css('left', x + opts.offset + width > $win.width() ? x - opts.offset - width : x + opts.offset);
+>, <Line: +					$tooltip.css('top', y + opts.offset + height > $win.height() ? y - opts.offset - height : y + opts.offset);
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +		})();
+>, <Line: +		return $;
+>, <Line: +	});
+>]
+[<Line: -function ($) {
+>, <Line: -  'use strict';
+>, <Line: -  /**
+>, <Line: -   * jQuery extensions
+>, <Line: -   */
+>, <Line: -  var $win = $(window);
+>, <Line: -  $.fn.place_tt = (function () {
+>, <Line: -    var defaults = {
+>, <Line: -      offset: 5,
+>, <Line: -    };
+>, <Line: -    return function (x, y, opts) {
+>, <Line: -      opts = $.extend(true, {}, defaults, opts);
+>, <Line: -      return this.each(function () {
+>, <Line: -        var $tooltip = $(this), width, height;
+>, <Line: -        $tooltip.addClass('grafana-tooltip');
+>, <Line: -        $("#tooltip").remove();
+>, <Line: -        $tooltip.appendTo(document.body);
+>, <Line: -        width = $tooltip.outerWidth(true);
+>, <Line: -        height = $tooltip.outerHeight(true);
+>, <Line: -        $tooltip.css('left', x + opts.offset + width > $win.width() ? x - opts.offset - width : x + opts.offset);
+>, <Line: -        $tooltip.css('top', y + opts.offset + height > $win.height() ? y - opts.offset - height : y + opts.offset);
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -  })();
+>, <Line: -  return $;
+>, <Line: -});
+>]

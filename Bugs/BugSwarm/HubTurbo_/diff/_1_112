@@ -1,0 +1,332 @@
+[<Line: +import backend.Logic;
+>, <Line: +import backend.UIManager;
+>, <Line: +import browserview.BrowserComponent;
+>, <Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import com.sun.jna.platform.win32.User32;
+>, <Line: +import com.sun.jna.platform.win32.WinDef.HWND;
+>, <Line: +import prefs.Preferences;
+>, <Line: +import ui.components.StatusUI;
+>, <Line: +import util.events.*;
+>, <Line: +import java.awt.*;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Optional;
+>, <Line: +	private static final int VERSION_MINOR = 7;
+>, <Line: +	// Application-level state
+>, <Line: +	public UIManager uiManager;
+>, <Line: +	public Logic logic;
+>, <Line: +	public Preferences prefs;
+>, <Line: +	public static StatusUI status;
+>, <Line: +	public static EventDispatcher events;
+>, <Line: +	public EventBus eventBus;
+>, <Line: +	private HashMap<String, String> commandLineArgs;
+>, <Line: +	public void start(Stage stage) {
+>, <Line: +		initPreApplicationState();
+>, <Line: +		initUI(stage);
+>, <Line: +		initApplicationState();
+>, <Line: +		new LoginDialog(this, prefs, mainStage).show().thenApply(result -> {
+>, <Line: +			if (result.success) {
+>, <Line: +				logic.openRepository(result.repoId);
+>, <Line: +				logic.setDefaultRepo(result.repoId);
+>, <Line: +				repoSelector.setText(result.repoId);
+>, <Line: +				browserComponent = new BrowserComponent(this);
+>, <Line: +				browserComponent.initialise();
+>, <Line: +				setExpandedWidth(false);
+>, <Line: +				columns.init();
+>, <Line: +	private void initPreApplicationState() {
+>, <Line: +		UI.events = this;
+>, <Line: +		Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) ->
+>, <Line: +			logger.error(throwable.getMessage(), throwable));
+>, <Line: +		prefs = new Preferences(this, columns);
+>, <Line: +		eventBus = new EventBus();
+>, <Line: +		registerEvent((RepoOpenedEventHandler) e -> onRepoOpened());
+>, <Line: +		uiManager = new UIManager(this);
+>, <Line: +		logic = new Logic(uiManager, prefs);
+>, <Line: +		status = new HTStatusBar(this);
+>, <Line: +	private void initApplicationState() {
+>, <Line: +		commandLineArgs = initialiseCommandLineArguments();
+>, <Line: +		clearCacheIfNecessary();
+>, <Line: +	}
+>, <Line: +	private void initUI(Stage stage) {
+>, <Line: +		repoSelector = createRepoSelector();
+>, <Line: +		mainStage = stage;
+>, <Line: +		stage.setMaximized(false);
+>, <Line: +		Scene scene = new Scene(createRoot());
+>, <Line: +		setupMainStage(scene);
+>, <Line: +		loadFonts();
+>, <Line: +		String css = initCSS();
+>, <Line: +		applyCSS(css, scene);
+>, <Line: +	public void quit() {
+>, <Line: +		columns.saveSession();
+>, <Line: +		prefs.saveGlobalConfig();
+>, <Line: +		if (browserComponent != null) {
+>, <Line: +			browserComponent.onAppQuit();
+>, <Line: +		}
+>, <Line: +		Platform.exit();
+>, <Line: +		System.exit(0);
+>, <Line: +	}
+>, <Line: +	public void onRepoOpened() {
+>, <Line: +		repoSelector.refreshContents();
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * TODO Stop-gap measure pending a more robust updater
+>, <Line: +	 */
+>, <Line: +	private void clearCacheIfNecessary() {
+>, <Line: +		if (getCommandLineArgs().containsKey(ARG_UPDATED_TO)) {
+>, <Line: +			// TODO
+>, <Line: +//			CacheFileHandler.deleteCacheDirectory();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public String initCSS() {
+>, <Line: +		return getClass().getResource("hubturbo.css").toString();
+>, <Line: +	}
+>, <Line: +	public static void applyCSS(String css, Scene scene) {
+>, <Line: +		scene.getStylesheets().clear();
+>, <Line: +		scene.getStylesheets().add(css);
+>, <Line: +	}
+>, <Line: +	public static void loadFonts(){
+>, <Line: +		Font.loadFont(UI.class.getResource("octicons/octicons-local.ttf").toExternalForm(), 32);
+>, <Line: +					boolean shouldRefresh = browserComponent.hasBviewChanged();
+>, <Line: +						logger.info("Browser view has changed; refreshing");
+>, <Line: +						logic.refresh();
+>, <Line: +	private Parent createRoot() {
+>, <Line: +		columns = new ColumnControl(this, prefs);
+>, <Line: +		menuBar = new MenuControl(this, columns, columnsScrollPane, prefs);
+>, <Line: +		root.setBottom((HTStatusBar) status);
+>, <Line: +	public void registerEvent(EventHandler handler) {
+>, <Line: +		eventBus.register(handler);
+>, <Line: +	@Override
+>, <Line: +	public void unregisterEvent(EventHandler handler) {
+>, <Line: +		eventBus.unregister(handler);
+>, <Line: +		logger.info("Unregistered event handler " + handler.getClass().getInterfaces()[0].getSimpleName());
+>, <Line: +	}
+>, <Line: +		eventBus.post(event);
+>, <Line: +		mainStage.setMinWidth(columns.getPanelWidth());
+>, <Line: +		RepositorySelector repoSelector = new RepositorySelector(this);
+>, <Line: +		repoSelector.setOnValueChange(this::primaryRepoChanged);
+>, <Line: +	private void primaryRepoChanged(String repoId) {
+>, <Line: +		logic.openRepository(repoId);
+>, <Line: +		logic.setDefaultRepo(repoId);
+>, <Line: +		repoSelector.setText(repoId);
+>, <Line: +		columns.refresh();
+>, <Line: +		mainStage.setMinWidth(columns.getPanelWidth());
+>, <Line: +		mainStage.setMaxWidth(columns.getPanelWidth());
+>]
+[<Line: -import java.awt.Rectangle;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.net.SocketTimeoutException;
+>, <Line: -import java.net.UnknownHostException;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Optional;
+>, <Line: -import javafx.concurrent.Task;
+>, <Line: -import org.eclipse.egit.github.core.IRepositoryIdProvider;
+>, <Line: -import org.eclipse.egit.github.core.RepositoryId;
+>, <Line: -import service.ServiceManager;
+>, <Line: -import storage.CacheFileHandler;
+>, <Line: -import storage.DataManager;
+>, <Line: -import util.DialogMessage;
+>, <Line: -import util.events.BoardSavedEvent;
+>, <Line: -import util.events.EventDispatcher;
+>, <Line: -import util.events.EventHandler;
+>, <Line: -import browserview.BrowserComponent;
+>, <Line: -import com.google.common.eventbus.EventBus;
+>, <Line: -import com.sun.jna.platform.win32.User32;
+>, <Line: -import com.sun.jna.platform.win32.WinDef.HWND;
+>, <Line: -	private static final int VERSION_MINOR = 6;
+>, <Line: -	// Events
+>, <Line: -	private EventBus events;
+>, <Line: -	// Application arguments
+>, <Line: -	private HashMap<String, String> commandLineArgs;
+>, <Line: -	private static UI instance;
+>, <Line: -	public static UI getInstance() {
+>, <Line: -		return instance;
+>, <Line: -	}
+>, <Line: -	public void start(Stage stage) throws IOException {
+>, <Line: -		instance = this;
+>, <Line: -		//log all uncaught exceptions
+>, <Line: -		Thread.currentThread().setUncaughtExceptionHandler((thread, throwable) -> {
+>, <Line: -            logger.error(throwable.getMessage(), throwable);
+>, <Line: -        });
+>, <Line: -		events = new EventBus();
+>, <Line: -		commandLineArgs = initialiseCommandLineArguments();
+>, <Line: -		DataManager.getInstance();
+>, <Line: -		clearCacheIfNecessary();
+>, <Line: -		repoSelector = createRepoSelector();
+>, <Line: -		browserComponent = new BrowserComponent(this);
+>, <Line: -		initCSS();
+>, <Line: -		mainStage = stage;
+>, <Line: -		stage.setMaximized(false);
+>, <Line: -//		stage.setAlwaysOnTop(true);
+>, <Line: -		Scene scene = new Scene(createRoot());
+>, <Line: -		setupMainStage(scene);
+>, <Line: -		loadFonts();
+>, <Line: -		applyCSS(scene);
+>, <Line: -	/**
+>, <Line: -	 * TODO Stop-gap measure pending a more robust updater
+>, <Line: -	 */
+>, <Line: -	private void clearCacheIfNecessary() {
+>, <Line: -		if (getCommandLineArgs().containsKey(ARG_UPDATED_TO)) {
+>, <Line: -			CacheFileHandler.deleteCacheDirectory();
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -		repoSelector.setDisable(true);
+>, <Line: -		new LoginDialog(mainStage, columns).show().thenApply(success -> {
+>, <Line: -			if (success) {
+>, <Line: -				setExpandedWidth(false);
+>, <Line: -				columns.loadIssues();
+>, <Line: -				repoSelector.setDisable(false);
+>, <Line: -				repoSelector.refreshComboBoxContents(ServiceManager.getInstance().getRepoId().generateId());
+>, <Line: -	private static String CSS = "";
+>, <Line: -	public void initCSS() {
+>, <Line: -		System.out.println(getClass().getResource("octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("resources/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("/resources/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("src/resources/ui/UI/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("/src/resources/ui/UI/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("src/resources/ui/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("/src/resources/ui/octicons/octicons-local.ttf"));
+>, <Line: -		Font.loadFont(getClass().getResource("octicons/octicons-local.ttf").toExternalForm(), 32);
+>, <Line: -		CSS = getClass().getResource("hubturbo.css").toString();
+>, <Line: -	public void applyCSS(Scene scene) {
+>, <Line: -		scene.getStylesheets().clear();
+>, <Line: -		scene.getStylesheets().add(CSS);
+>, <Line: -	public void loadFonts(){
+>, <Line: -		System.out.println(getClass());
+>, <Line: -		System.out.println(getClass().getResource("octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("resources/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("/resources/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("src/resources/ui/UI/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("/src/resources/ui/UI/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("src/resources/ui/octicons/octicons-local.ttf"));
+>, <Line: -		System.out.println(getClass().getResource("/src/resources/ui/octicons/octicons-local.ttf"));
+>, <Line: -		Font.loadFont(getClass().getResource("octicons/octicons-local.ttf").toExternalForm(), 32);
+>, <Line: -					// A refresh is triggered if:
+>, <Line: -					// 1. Repo-switching is not disabled (meaning an update is not in progress)
+>, <Line: -					// 2. The repo-switching box is not in focus (clicks on it won't trigger this)
+>, <Line: -					boolean shouldRefresh = isRepoSwitchingAllowed() && !repoSelector.isInFocus() && browserComponent.hasBviewChanged();
+>, <Line: -						logger.info("Gained focus; refreshing");
+>, <Line: -						ServiceManager.getInstance().updateModelNow();
+>, <Line: -	public void quit() {
+>, <Line: -		ServiceManager.getInstance().stopModelUpdate();
+>, <Line: -		columns.saveSession();
+>, <Line: -		DataManager.getInstance().saveLocalConfig();
+>, <Line: -		DataManager.getInstance().saveSessionConfig();
+>, <Line: -		browserComponent.onAppQuit();
+>, <Line: -		Platform.exit();
+>, <Line: -		System.exit(0);
+>, <Line: -	}
+>, <Line: -	private Parent createRoot() throws IOException {
+>, <Line: -		columns = new ColumnControl(this, mainStage, ServiceManager.getInstance().getModel());
+>, <Line: -		menuBar = new MenuControl(this, columns, columnsScrollPane);
+>, <Line: -		root.setBottom(HTStatusBar.getInstance());
+>, <Line: -	public <T extends Event> void registerEvent(EventHandler handler) {
+>, <Line: -		events.register(handler);
+>, <Line: -		events.post(event);
+>, <Line: -	public ColumnControl getColumnControl() {
+>, <Line: -		return columns;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Tracks whether or not the window is in an expanded state.
+>, <Line: -	 */
+>, <Line: -	private boolean expanded = false;
+>, <Line: -	public boolean isExpanded() {
+>, <Line: -		return expanded;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Toggles the expansion state of the window.
+>, <Line: -	 */
+>, <Line: -	public boolean toggleExpandedWidth() {
+>, <Line: -		expanded = !expanded;
+>, <Line: -		setExpandedWidth(expanded);
+>, <Line: -		return expanded;
+>, <Line: -	}
+>, <Line: -		this.expanded = expanded;
+>, <Line: -		mainStage.setMinWidth(columns.getColumnWidth());
+>, <Line: -		browserComponent.resize(mainStage.getWidth());
+>, <Line: -		RepositorySelector repoSelector = new RepositorySelector();
+>, <Line: -		repoSelector.setOnValueChange(this::loadRepo);
+>, <Line: -	private boolean checkRepoAccess(IRepositoryIdProvider currRepo){
+>, <Line: -		try {
+>, <Line: -			if(!ServiceManager.getInstance().isRepositoryValid(currRepo)){
+>, <Line: -				Platform.runLater(() -> {
+>, <Line: -					DialogMessage.showWarningDialog("Error loading repository", "Repository does not exist or you do not have permission to access the repository");
+>, <Line: -				});
+>, <Line: -				return false;
+>, <Line: -			}
+>, <Line: -		} catch (SocketTimeoutException e){
+>, <Line: -			DialogMessage.showWarningDialog("Internet Connection Timeout",
+>, <Line: -					"Timeout while connecting to GitHub, please check your internet connection.");
+>, <Line: -			logger.error(e.getLocalizedMessage(), e);
+>, <Line: -		} catch (UnknownHostException e){
+>, <Line: -			DialogMessage.showWarningDialog("No Internet Connection",
+>, <Line: -					"Please check your internet connection and try again.");
+>, <Line: -			logger.error(e.getLocalizedMessage(), e);
+>, <Line: -		}catch (IOException e) {
+>, <Line: -			logger.error(e.getLocalizedMessage(), e);
+>, <Line: -		}
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -	private boolean repoSwitchingAllowed = true;
+>, <Line: -	public boolean isRepoSwitchingAllowed() {
+>, <Line: -		return repoSwitchingAllowed;
+>, <Line: -	}
+>, <Line: -	public void enableRepositorySwitching() {
+>, <Line: -		repoSwitchingAllowed = true;
+>, <Line: -		repoSelector.setLabelText("");
+>, <Line: -		repoSelector.enable();
+>, <Line: -	}
+>, <Line: -	public void disableRepositorySwitching() {
+>, <Line: -		repoSwitchingAllowed = false;
+>, <Line: -		repoSelector.setLabelText("Syncing...");
+>, <Line: -		repoSelector.disable();
+>, <Line: -	}
+>, <Line: -	private void loadRepo(String repoString) {
+>, <Line: -		RepositoryId repoId = RepositoryId.createFromId(repoString);
+>, <Line: -		if(repoId == null
+>, <Line: -		  || repoId.equals(ServiceManager.getInstance().getRepoId())
+>, <Line: -		  || !checkRepoAccess(repoId)){
+>, <Line: -			return;
+>, <Line: -		}
+>, <Line: -		logger.info("Switching repository to " + repoString + "...");
+>, <Line: -		columns.saveSession();
+>, <Line: -		DataManager.getInstance().addToLastViewedRepositories(repoId.generateId());
+>, <Line: -		Task<Boolean> task = new Task<Boolean>(){
+>, <Line: -			@Override
+>, <Line: -			protected Boolean call() throws IOException {
+>, <Line: -				updateProgress(0, 1);
+>, <Line: -				updateMessage(String.format("Switching to %s...",
+>, <Line: -					ServiceManager.getInstance().getRepoId().generateId()));
+>, <Line: -				ServiceManager.getInstance().switchRepository(repoId, (message, progress) -> {
+>, <Line: -					updateProgress(progress * 100, 100);
+>, <Line: -					updateMessage(message);
+>, <Line: -				});
+>, <Line: -                PlatformEx.runAndWait(() -> {
+>, <Line: -                    columns.restoreColumns();
+>, <Line: -                    triggerEvent(new BoardSavedEvent());
+>, <Line: -                });
+>, <Line: -				return true;
+>, <Line: -			}
+>, <Line: -		};
+>, <Line: -		DialogMessage.showProgressDialog(task, "Switching to " + repoId.generateId() + "...");
+>, <Line: -		Thread thread = new Thread(task);
+>, <Line: -		thread.setDaemon(true);
+>, <Line: -		thread.start();
+>, <Line: -		task.setOnSucceeded(wse -> {
+>, <Line: -			repoSelector.refreshComboBoxContents(ServiceManager.getInstance().getRepoId().generateId());
+>, <Line: -			logger.info("Repository " + repoString + " successfully switched to!");
+>, <Line: -			ensureSelectedPanelHasFocus();
+>, <Line: -		});
+>, <Line: -		task.setOnFailed(wse -> {
+>, <Line: -			Throwable err = task.getException();
+>, <Line: -			logger.error(err.getLocalizedMessage(), err);
+>, <Line: -			HTStatusBar.displayMessage("An error occurred with repository switching: " + err);
+>, <Line: -		});
+>, <Line: -		mainStage.setMinWidth(columns.getColumnWidth());
+>, <Line: -		mainStage.setMaxWidth(columns.getColumnWidth());
+>, <Line: -	public Stage getMainStage() {
+>, <Line: -		return mainStage;
+>, <Line: -	}
+>]

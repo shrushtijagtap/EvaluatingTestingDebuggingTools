@@ -1,0 +1,15 @@
+[<Line: +			KairosDataPointFactory dataPointFactory,
+>, <Line: +	/*public void putDataPoint(String metricName,
+>, <Line: +	}*/
+>]
+[<Line: -import org.kairosdb.core.DataPointListener;
+>, <Line: -	private final List<DataPointListener> m_dataPointListeners;
+>, <Line: -			List<DataPointListener> dataPointListeners, KairosDataPointFactory dataPointFactory,
+>, <Line: -		m_dataPointListeners = checkNotNull(dataPointListeners);
+>, <Line: -	public void putDataPoint(String metricName,
+>, <Line: -		for (DataPointListener dataPointListener : m_dataPointListeners)
+>, <Line: -		{
+>, <Line: -			dataPointListener.dataPoint(metricName, tags, dataPoint);
+>, <Line: -		}
+>, <Line: -	}
+>]

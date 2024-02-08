@@ -1,0 +1,6 @@
+[<Line: +        pk.x = (int) this.x;
+>, <Line: +        pk.z = (int) this.z;
+>]
+[<Line: -        pk.x = this.x;
+>, <Line: -        pk.z = this.z;
+>]

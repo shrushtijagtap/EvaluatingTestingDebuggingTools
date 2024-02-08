@@ -1,0 +1,6 @@
+[<Line: +function f(real e) -> int[]:
+>, <Line: +            return "int[]"
+>]
+[<Line: -function f(real e) -> [int]:
+>, <Line: -            return "[int]"
+>]

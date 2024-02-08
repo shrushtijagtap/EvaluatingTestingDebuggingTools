@@ -1,0 +1,283 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_tsv;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.DatabaseVariantContextProvider;
+>, <Line: +import htsjdk.samtools.util.CloseableIterator;
+>, <Line: +import htsjdk.tribble.readers.TabixReader;
+>, <Line: +import htsjdk.tribble.readers.TabixReader.Iterator;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContextBuilder;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.HashSet;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.Set;
+>, <Line: +import java.util.stream.Collectors;
+>, <Line: +/**
+>, <Line: + * Read TSV records as {@link VariantContext} entries.
+>, <Line: + * 
+>, <Line: + * <p>
+>, <Line: + * Note that there cannot be concurrent queries with the same
+>, <Line: + * <code>GenericTSVVariantContextProvider</code> because we currently only shallowly wrap HTSJDK's
+>, <Line: + * TabixReader.
+>, <Line: + * </p>
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenericTSVVariantContextProvider implements DatabaseVariantContextProvider {
+>, <Line: +	private final GenericTSVAnnotationOptions options;
+>, <Line: +	private final TabixReader tabixReader;
+>, <Line: +	public GenericTSVVariantContextProvider(GenericTSVAnnotationOptions options) {
+>, <Line: +		this.options = options;
+>, <Line: +		final String tsvPath = this.options.getTsvFile().toString();
+>, <Line: +		try {
+>, <Line: +			this.tabixReader = new TabixReader(tsvPath, tsvPath + ".tbi");
+>, <Line: +		} catch (IOException e) {
+>, <Line: +			throw new RuntimeException("Could not open TABIX file " + tsvPath, e);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public CloseableIterator<VariantContext> query(String contig, int beginPos, int endPos) {
+>, <Line: +		return new TabixIteratorWrapper(tabixReader.query(contig, beginPos, endPos));
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Wrapper for iterator from {@link TabixReader}.
+>, <Line: +	 * 
+>, <Line: +	 * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: +	 */
+>, <Line: +	private class TabixIteratorWrapper implements CloseableIterator<VariantContext> {
+>, <Line: +		private final Iterator iter;
+>, <Line: +		private String next;
+>, <Line: +		public TabixIteratorWrapper(Iterator iter) {
+>, <Line: +			this.iter = iter;
+>, <Line: +			try {
+>, <Line: +				this.next = iter.next();
+>, <Line: +			} catch (IOException e) {
+>, <Line: +				throw new RuntimeException("Problem reading from " + options.getTsvFile(), e);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public boolean hasNext() {
+>, <Line: +			return this.next != null;
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public VariantContext next() {
+>, <Line: +			final String resultLine = next;
+>, <Line: +			try {
+>, <Line: +				next = iter.next();
+>, <Line: +			} catch (IOException e) {
+>, <Line: +				throw new RuntimeException("Problem reading from " + options.getTsvFile(), e);
+>, <Line: +			}
+>, <Line: +			return parseTabixLine(resultLine);
+>, <Line: +		}
+>, <Line: +		private VariantContext parseTabixLine(String resultLine) {
+>, <Line: +			final String[] tokens = resultLine.split("\t");
+>, <Line: +			final VariantContextBuilder builder = new VariantContextBuilder();
+>, <Line: +			builder.chr(tokens[options.getContigColumnIndex() - 1]);
+>, <Line: +			final int delta = options.isOneBasedPositions() ? 0 : 1;
+>, <Line: +			final int startPos = Integer.parseInt(tokens[options.getBeginColumnIndex() - 1])
+>, <Line: +					- delta;
+>, <Line: +			builder.start(startPos);
+>, <Line: +			builder.stop(startPos);
+>, <Line: +			if (options.getRefAlleleColumnIndex() > 0 && options.getAltAlleleColumnIndex() > 0) {
+>, <Line: +				builder.alleles(tokens[options.getRefAlleleColumnIndex() - 1],
+>, <Line: +						tokens[options.getAltAlleleColumnIndex() - 1]);
+>, <Line: +			} else {
+>, <Line: +				builder.alleles("N");
+>, <Line: +			}
+>, <Line: +			// Collect all required column names (ref column names might not be selected for
+>, <Line: +			// printing)
+>, <Line: +			Set<String> allColNames = new HashSet<>(options.getColumnNames());
+>, <Line: +			for (String colName : options.getColumnNames()) {
+>, <Line: +				final GenericTSVValueColumnDescription desc = options.getValueColumnDescriptions()
+>, <Line: +						.get(colName);
+>, <Line: +				if (desc.getRefField() != null) {
+>, <Line: +					allColNames.add(desc.getRefField());
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			// Collect values from all required columns
+>, <Line: +			Map<String, List<Object>> colValues = new HashMap<>();
+>, <Line: +			for (String colName : allColNames) {
+>, <Line: +				final GenericTSVValueColumnDescription desc = options.getValueColumnDescriptions()
+>, <Line: +						.get(colName);
+>, <Line: +				final String token = tokens[desc.getColumnIndex() - 1];
+>, <Line: +				final String sep = ";";
+>, <Line: +				final ImmutableList<String> splitTokens = ImmutableList.copyOf(token.split(sep));
+>, <Line: +				switch (desc.getValueType()) {
+>, <Line: +				case Flag:
+>, <Line: +					colValues.put(colName, splitTokens.stream().map(s -> {
+>, <Line: +						if (s == null || ".".equals(s)) {
+>, <Line: +							return null;
+>, <Line: +						} else {
+>, <Line: +							return (Object) ImmutableList.of("1", "Y", "y", "T", "t", "yes", "true")
+>, <Line: +									.contains(s);
+>, <Line: +						}
+>, <Line: +					}).collect(Collectors.toList()));
+>, <Line: +					break;
+>, <Line: +				case Float:
+>, <Line: +					colValues.put(colName, splitTokens.stream().map(s -> {
+>, <Line: +						if (s == null || ".".equals(s)) {
+>, <Line: +							return null;
+>, <Line: +						} else {
+>, <Line: +							return (Object) Double.parseDouble(s);
+>, <Line: +						}
+>, <Line: +					}).collect(Collectors.toList()));
+>, <Line: +					break;
+>, <Line: +				case Integer:
+>, <Line: +					colValues.put(colName, splitTokens.stream().map(s -> {
+>, <Line: +						if (s == null || ".".equals(s)) {
+>, <Line: +							return null;
+>, <Line: +						} else {
+>, <Line: +							return (Object) Integer.parseInt(s);
+>, <Line: +						}
+>, <Line: +					}).collect(Collectors.toList()));
+>, <Line: +					break;
+>, <Line: +				case Character:
+>, <Line: +				case String:
+>, <Line: +				default:
+>, <Line: +					colValues.put(colName, ImmutableList.<Object> copyOf(splitTokens));
+>, <Line: +					break;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			// For each, now select the best according to strategy.
+>, <Line: +			Map<String, Object> values = new HashMap<>();
+>, <Line: +			for (String colName : options.getColumnNames()) {
+>, <Line: +				final GenericTSVValueColumnDescription desc = options.getValueColumnDescriptions()
+>, <Line: +						.get(colName);
+>, <Line: +				final GenericTSVValueColumnDescription refDesc = options
+>, <Line: +						.getValueColumnDescriptions().get(desc.getRefField());
+>, <Line: +				switch (refDesc.getValueType()) {
+>, <Line: +				case Character:
+>, <Line: +				case Flag:
+>, <Line: +				case String:
+>, <Line: +					// Pick first one
+>, <Line: +					values.put(colName, colValues.get(colName).get(0));
+>, <Line: +					break;
+>, <Line: +				case Float:
+>, <Line: +					final List<
+>, <Line: +							LabeledValue<Double, Object>> doubleLabeledValues = new ArrayList<>();
+>, <Line: +					for (int i = 0; i < colValues.get(refDesc.getFieldName()).size(); ++i) {
+>, <Line: +						Double value = (Double) colValues.get(refDesc.getFieldName()).get(i);
+>, <Line: +						if (value == null && refDesc
+>, <Line: +								.getAccumulationStrategy() == GenericTSVAccumulationStrategy.CHOOSE_MIN) {
+>, <Line: +							value = Double.MAX_VALUE;
+>, <Line: +						} else if (value == null && refDesc
+>, <Line: +								.getAccumulationStrategy() == GenericTSVAccumulationStrategy.CHOOSE_MAX) {
+>, <Line: +							value = Double.MIN_VALUE;
+>, <Line: +						}
+>, <Line: +						doubleLabeledValues.add(new LabeledValue<Double, Object>(value, i));
+>, <Line: +					}
+>, <Line: +					if (doubleLabeledValues.isEmpty()) {
+>, <Line: +						values.put(colName, ".");
+>, <Line: +					} else {
+>, <Line: +						final int key;
+>, <Line: +						switch (refDesc.getAccumulationStrategy()) {
+>, <Line: +						case CHOOSE_MIN:
+>, <Line: +							Collections.sort(doubleLabeledValues);
+>, <Line: +							key = (int) doubleLabeledValues.get(0).getValue();
+>, <Line: +							break;
+>, <Line: +						case CHOOSE_MAX:
+>, <Line: +							Collections.sort(doubleLabeledValues);
+>, <Line: +							key = (int) doubleLabeledValues.get(doubleLabeledValues.size() - 1)
+>, <Line: +									.getValue();
+>, <Line: +							break;
+>, <Line: +						case CHOOSE_FIRST:
+>, <Line: +						case AVERAGE:
+>, <Line: +						default:
+>, <Line: +							key = 0;
+>, <Line: +						}
+>, <Line: +						if (colValues.get(desc.getFieldName()).size() == 1) {  // might be single value...
+>, <Line: +							values.put(colName, colValues.get(desc.getFieldName()).get(0));
+>, <Line: +						} else {
+>, <Line: +							values.put(colName, colValues.get(desc.getFieldName()).get(key));
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					break;
+>, <Line: +				case Integer:
+>, <Line: +					final List<LabeledValue<Integer, Object>> intLabeledValues = new ArrayList<>();
+>, <Line: +					for (int i = 0; i < colValues.get(refDesc.getFieldName()).size(); ++i) {
+>, <Line: +						Integer value = (Integer) colValues.get(refDesc.getFieldName()).get(i);
+>, <Line: +						if (value == null && refDesc
+>, <Line: +								.getAccumulationStrategy() == GenericTSVAccumulationStrategy.CHOOSE_MIN) {
+>, <Line: +							value = Integer.MAX_VALUE;
+>, <Line: +						} else if (value == null && refDesc
+>, <Line: +								.getAccumulationStrategy() == GenericTSVAccumulationStrategy.CHOOSE_MAX) {
+>, <Line: +							value = Integer.MIN_VALUE;
+>, <Line: +						}
+>, <Line: +						intLabeledValues.add(new LabeledValue<Integer, Object>(
+>, <Line: +								(Integer) colValues.get(refDesc.getFieldName()).get(i), i));
+>, <Line: +					}
+>, <Line: +					if (intLabeledValues.isEmpty()) {
+>, <Line: +						values.put(colName, ".");
+>, <Line: +					} else {
+>, <Line: +						final int key;
+>, <Line: +						switch (refDesc.getAccumulationStrategy()) {
+>, <Line: +						case CHOOSE_MIN:
+>, <Line: +							Collections.sort(intLabeledValues);
+>, <Line: +							key = (int) intLabeledValues.get(0).getValue();
+>, <Line: +							break;
+>, <Line: +						case CHOOSE_MAX:
+>, <Line: +							Collections.sort(intLabeledValues);
+>, <Line: +							key = (int) intLabeledValues.get(intLabeledValues.size() - 1)
+>, <Line: +									.getValue();
+>, <Line: +							break;
+>, <Line: +						case CHOOSE_FIRST:
+>, <Line: +						case AVERAGE:
+>, <Line: +						default:
+>, <Line: +							key = 0;
+>, <Line: +						}
+>, <Line: +						if (colValues.get(desc.getFieldName()).size() == 1) {  // might be single value...
+>, <Line: +							values.put(colName, colValues.get(desc.getFieldName()).get(0));
+>, <Line: +						} else {
+>, <Line: +							values.put(colName, colValues.get(desc.getFieldName()).get(key));
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					break;
+>, <Line: +				default:
+>, <Line: +					break;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			// Finally, write out one value
+>, <Line: +			for (String colName : options.getColumnNames()) {
+>, <Line: +				final GenericTSVValueColumnDescription desc = options.getValueColumnDescriptions()
+>, <Line: +						.get(colName);
+>, <Line: +				builder.attribute(desc.getFieldName(), values.get(colName));
+>, <Line: +			}
+>, <Line: +			return builder.make();
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public void close() {
+>, <Line: +			/* nop */
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Helper for comparable pairs.
+>, <Line: +	 */
+>, <Line: +	private static class LabeledValue<Label extends Comparable<Label>, Value>
+>, <Line: +			implements Comparable<LabeledValue<Label, Value>> {
+>, <Line: +		private final Label label;
+>, <Line: +		private final Value value;
+>, <Line: +		public LabeledValue(Label label, Value value) {
+>, <Line: +			this.label = label;
+>, <Line: +			this.value = value;
+>, <Line: +		}
+>, <Line: +		public Label getLabel() {
+>, <Line: +			return label;
+>, <Line: +		}
+>, <Line: +		public Value getValue() {
+>, <Line: +			return value;
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public String toString() {
+>, <Line: +			return "LabeledValue [label=" + label + ", value=" + value + "]";
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public int compareTo(LabeledValue<Label, Value> o) {
+>, <Line: +			return label.compareTo(o.getLabel());
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

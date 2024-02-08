@@ -1,0 +1,6 @@
+[<Line: +type IntList is int | int[]
+>, <Line: +function f(int[] xs) -> int:
+>]
+[<Line: -type IntList is int | [int]
+>, <Line: -function f([int] xs) -> int:
+>]

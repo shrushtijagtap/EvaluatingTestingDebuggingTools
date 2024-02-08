@@ -1,0 +1,6 @@
+[<Line: +    hexfile.write(contents.encode(encoding='UTF-8'))
+>, <Line: +            assert memBlock.bytes == unhexlify(data.encode(encoding='UTF-8'))
+>]
+[<Line: -    hexfile.write(contents.translate('UTF-8').encode())
+>, <Line: -            assert memBlock.bytes == unhexlify(data)
+>]

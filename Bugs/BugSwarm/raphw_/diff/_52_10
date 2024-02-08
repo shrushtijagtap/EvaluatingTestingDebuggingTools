@@ -1,0 +1,20 @@
+[<Line: +                        MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(ClassLoader.class.getMethod("getSystemClassLoader"))),
+>, <Line: +                        MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(ClassLoader.class.getMethod("loadClass", String.class))),
+>, <Line: +                        MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(Class.class.getMethod("getMethod", String.class, Class[].class))),
+>, <Line: +                                                MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(Integer.class.getMethod("valueOf", int.class)))))),
+>, <Line: +                        MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(Method.class.getMethod("invoke", Object.class, Object[].class))),
+>, <Line: +                    return new Dispatcher.Available(nexusType.getMethod("register", String.class, ClassLoader.class, ReferenceQueue.class, int.class, Object.class),
+>, <Line: +                            nexusType.getMethod("clean", Reference.class));
+>, <Line: +                        return new Dispatcher.Available(nexusType.getMethod("register", String.class, ClassLoader.class, ReferenceQueue.class, int.class, Object.class),
+>, <Line: +                                nexusType.getMethod("clean", Reference.class));
+>]
+[<Line: -                        MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(ClassLoader.class.getDeclaredMethod("getSystemClassLoader"))),
+>, <Line: -                        MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(ClassLoader.class.getDeclaredMethod("loadClass", String.class))),
+>, <Line: -                        MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(Class.class.getDeclaredMethod("getDeclaredMethod", String.class, Class[].class))),
+>, <Line: -                                                MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(Integer.class.getDeclaredMethod("valueOf", int.class)))))),
+>, <Line: -                        MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(Method.class.getDeclaredMethod("invoke", Object.class, Object[].class))),
+>, <Line: -                    return new Dispatcher.Available(nexusType.getDeclaredMethod("register", String.class, ClassLoader.class, ReferenceQueue.class, int.class, Object.class),
+>, <Line: -                            nexusType.getDeclaredMethod("clean", Reference.class));
+>, <Line: -                        return new Dispatcher.Available(nexusType.getDeclaredMethod("register", String.class, ClassLoader.class, ReferenceQueue.class, int.class, Object.class),
+>, <Line: -                                nexusType.getDeclaredMethod("clean", Reference.class));
+>]

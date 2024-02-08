@@ -1,0 +1,79 @@
+[<Line: +package net.bytebuddy.agent.builder;
+>, <Line: +import net.bytebuddy.test.utility.ObjectPropertyAssertion;
+>, <Line: +import org.junit.Test;
+>, <Line: +import java.io.PrintStream;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.List;
+>, <Line: +import static org.hamcrest.MatcherAssert.assertThat;
+>, <Line: +import static org.hamcrest.core.Is.is;
+>, <Line: +import static org.mockito.Mockito.*;
+>, <Line: +public class AgentBuilderRedefinitionStrategyListenerTest {
+>, <Line: +    @Test
+>, <Line: +    public void testNoOp() throws Exception {
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener.NoOp.INSTANCE.onBatch(0, Collections.<Class<?>>emptyList(), Collections.<Class<?>>emptyList());
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener.NoOp.INSTANCE.onError(0, Collections.<Class<?>>emptyList(), new Throwable(), Collections.<Class<?>>emptyList());
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener.NoOp.INSTANCE.onComplete(0, Collections.<Class<?>>emptyList(), Collections.<List<Class<?>>, Throwable>emptyMap());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testYielding() throws Exception {
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener.Yielding.INSTANCE.onBatch(0, Collections.<Class<?>>emptyList(), Collections.<Class<?>>emptyList());
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener.Yielding.INSTANCE.onBatch(1, Collections.<Class<?>>emptyList(), Collections.<Class<?>>emptyList());
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener.Yielding.INSTANCE.onError(0, Collections.<Class<?>>emptyList(), new Throwable(), Collections.<Class<?>>emptyList());
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener.Yielding.INSTANCE.onComplete(0, Collections.<Class<?>>emptyList(), Collections.<List<Class<?>>, Throwable>emptyMap());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testPausing() throws Exception {
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener listener = new AgentBuilder.RedefinitionStrategy.Listener.Pausing(1L);
+>, <Line: +        listener.onBatch(0, Collections.<Class<?>>emptyList(), Collections.<Class<?>>emptyList());
+>, <Line: +        listener.onBatch(1, Collections.<Class<?>>emptyList(), Collections.<Class<?>>emptyList());
+>, <Line: +        listener.onError(0, Collections.<Class<?>>emptyList(), new Throwable(), Collections.<Class<?>>emptyList());
+>, <Line: +        listener.onComplete(0, Collections.<Class<?>>emptyList(), Collections.<List<Class<?>>, Throwable>emptyMap());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testStreamWriting() throws Exception {
+>, <Line: +        PrintStream printStream = mock(PrintStream.class);
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener listener = new AgentBuilder.RedefinitionStrategy.Listener.StreamWriting(printStream);
+>, <Line: +        listener.onBatch(0, Collections.<Class<?>>emptyList(), Collections.<Class<?>>emptyList());
+>, <Line: +        Throwable throwable = mock(Throwable.class);
+>, <Line: +        listener.onError(0, Collections.<Class<?>>emptyList(), throwable, Collections.<Class<?>>emptyList());
+>, <Line: +        listener.onComplete(0, Collections.<Class<?>>emptyList(), Collections.<List<Class<?>>, Throwable>emptyMap());
+>, <Line: +        verify(printStream, times(3)).println(any(String.class));
+>, <Line: +        verifyNoMoreInteractions(printStream);
+>, <Line: +        verify(throwable).printStackTrace(printStream);
+>, <Line: +        verifyNoMoreInteractions(throwable);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testStreamWritingFactories() throws Exception {
+>, <Line: +        assertThat(AgentBuilder.RedefinitionStrategy.Listener.StreamWriting.toSystemOut(),
+>, <Line: +                is((AgentBuilder.RedefinitionStrategy.Listener) new AgentBuilder.RedefinitionStrategy.Listener.StreamWriting(System.out)));
+>, <Line: +        assertThat(AgentBuilder.RedefinitionStrategy.Listener.StreamWriting.toSystemError(),
+>, <Line: +                is((AgentBuilder.RedefinitionStrategy.Listener) new AgentBuilder.RedefinitionStrategy.Listener.StreamWriting(System.err)));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testCompound() throws Exception {
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener first = mock(AgentBuilder.RedefinitionStrategy.Listener.class), second = mock(AgentBuilder.RedefinitionStrategy.Listener.class);
+>, <Line: +        AgentBuilder.RedefinitionStrategy.Listener listener = new AgentBuilder.RedefinitionStrategy.Listener.Compound(first, second);
+>, <Line: +        Throwable throwable = new Throwable();
+>, <Line: +        listener.onBatch(0, Collections.<Class<?>>emptyList(), Collections.<Class<?>>emptyList());
+>, <Line: +        listener.onError(0, Collections.<Class<?>>emptyList(), throwable, Collections.<Class<?>>emptyList());
+>, <Line: +        listener.onComplete(0, Collections.<Class<?>>emptyList(), Collections.<List<Class<?>>, Throwable>emptyMap());
+>, <Line: +        verify(first).onBatch(0, Collections.<Class<?>>emptyList(), Collections.<Class<?>>emptyList());
+>, <Line: +        verify(first).onError(0, Collections.<Class<?>>emptyList(), throwable, Collections.<Class<?>>emptyList());
+>, <Line: +        verify(first).onComplete(0, Collections.<Class<?>>emptyList(), Collections.<List<Class<?>>, Throwable>emptyMap());
+>, <Line: +        verifyNoMoreInteractions(first);
+>, <Line: +        verify(second).onBatch(0, Collections.<Class<?>>emptyList(), Collections.<Class<?>>emptyList());
+>, <Line: +        verify(second).onError(0, Collections.<Class<?>>emptyList(), throwable, Collections.<Class<?>>emptyList());
+>, <Line: +        verify(second).onComplete(0, Collections.<Class<?>>emptyList(), Collections.<List<Class<?>>, Throwable>emptyMap());
+>, <Line: +        verifyNoMoreInteractions(second);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testObjectProperties() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Listener.NoOp.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Listener.Compound.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Listener.Pausing.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Listener.StreamWriting.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Listener.Yielding.class).apply();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,35 @@
+[<Line: +            position.setDeviceTime(parser.nextDateTime());
+>, <Line: +            position.setDeviceTime(parser.nextDateTime());
+>, <Line: +            position.setDeviceTime(parser.nextDateTime());
+>, <Line: +            position.setDeviceTime(parser.nextDateTime());
+>, <Line: +            position.setDeviceTime(parser.nextDateTime());
+>, <Line: +            position.setDeviceTime(parser.nextDateTime());
+>]
+[<Line: -import java.util.Date;
+>, <Line: -            Date date = parser.nextDateTime();
+>, <Line: -            if (!position.getOutdated() && position.getFixTime().after(date)) {
+>, <Line: -                position.setTime(date);
+>, <Line: -            }
+>, <Line: -        // workaround for wrong location time
+>, <Line: -            Date date = parser.nextDateTime();
+>, <Line: -            if (!position.getOutdated() && position.getFixTime().after(date)) {
+>, <Line: -                position.setTime(date);
+>, <Line: -            }
+>, <Line: -            Date date = parser.nextDateTime();
+>, <Line: -            if (!position.getOutdated() && position.getFixTime().after(date)) {
+>, <Line: -                position.setTime(date);
+>, <Line: -            }
+>, <Line: -            Date date = parser.nextDateTime();
+>, <Line: -            if (!position.getOutdated() && position.getFixTime().after(date)) {
+>, <Line: -                position.setTime(date);
+>, <Line: -            }
+>, <Line: -        // workaround for wrong location time
+>, <Line: -            Date date = parser.nextDateTime();
+>, <Line: -            if (!position.getOutdated() && position.getFixTime().after(date)) {
+>, <Line: -                position.setTime(date);
+>, <Line: -            }
+>, <Line: -            Date date = parser.nextDateTime();
+>, <Line: -            if (!position.getOutdated() && position.getFixTime().after(date)) {
+>, <Line: -                position.setTime(date);
+>, <Line: -            }
+>]

@@ -1,0 +1,6 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +    protected OWLDocumentFormat parse(OWLOntology o, OntologyConfigurator config,
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -    protected OWLDocumentFormat parse(OWLOntology o, OWLOntologyLoaderConfiguration config,
+>]

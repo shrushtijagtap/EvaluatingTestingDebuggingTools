@@ -1,0 +1,10 @@
+[<Line: +import io.dropwizard.setup.Bootstrap;
+>, <Line: +import io.dropwizard.setup.Environment;
+>, <Line: +import com.codahale.metrics.MetricRegistry;
+>, <Line: +  @Provides
+>, <Line: +  @Singleton
+>, <Line: +  public MetricRegistry provideRegistry(Environment environment) {
+>, <Line: +    return environment.metrics();
+>, <Line: +  }
+>]
+[]

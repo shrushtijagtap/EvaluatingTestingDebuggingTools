@@ -1,0 +1,150 @@
+[<Line: +package org.kairosdb.util;
+>, <Line: +import com.datastax.driver.core.exceptions.NoHostAvailableException;
+>, <Line: +import com.datastax.driver.core.exceptions.UnavailableException;
+>, <Line: +import com.github.rholder.retry.Retryer;
+>, <Line: +import com.github.rholder.retry.RetryerBuilder;
+>, <Line: +import com.github.rholder.retry.WaitStrategies;
+>, <Line: +import com.google.common.base.Stopwatch;
+>, <Line: +import com.google.common.collect.ImmutableSortedMap;
+>, <Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import org.kairosdb.core.DataPointSet;
+>, <Line: +import org.kairosdb.core.datapoints.DoubleDataPointFactory;
+>, <Line: +import org.kairosdb.core.datapoints.DoubleDataPointFactoryImpl;
+>, <Line: +import org.kairosdb.core.reporting.KairosMetricReporter;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +import javax.inject.Inject;
+>, <Line: +import javax.inject.Named;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.concurrent.*;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 10/27/16.
+>, <Line: + */
+>, <Line: +public class IngestExecutorService implements KairosMetricReporter
+>, <Line: +{
+>, <Line: +	public static final String PERMIT_COUNT = "kairosdb.ingest_executor.thread_count";
+>, <Line: +	private final EventBus m_eventBus;
+>, <Line: +	private final ExecutorService m_internalExecutor;
+>, <Line: +	private final ThreadGroup m_threadGroup;
+>, <Line: +	//Original idea behind this is that the number of threads could
+>, <Line: +	//adjust via incrementing or decrementing the semaphore count.
+>, <Line: +	private final CongestionSemaphore m_semaphore;
+>, <Line: +	private final SimpleStats m_ingestTimeStats = new SimpleStats();
+>, <Line: +	private int m_permitCount = 10;
+>, <Line: +	private final Retryer<Boolean> m_retryer;
+>, <Line: +	@Inject
+>, <Line: +	private DoubleDataPointFactory m_dataPointFactory = new DoubleDataPointFactoryImpl();
+>, <Line: +	@Inject
+>, <Line: +	private SimpleStatsReporter m_simpleStatsReporter = new SimpleStatsReporter();
+>, <Line: +	@Inject
+>, <Line: +	public IngestExecutorService(EventBus eventBus, @Named(PERMIT_COUNT) int permitCount)
+>, <Line: +	{
+>, <Line: +		m_eventBus = eventBus;
+>, <Line: +		m_permitCount = permitCount;
+>, <Line: +		//m_congestionTimer = new CongestionTimer(m_permitCount);
+>, <Line: +		m_semaphore = new CongestionSemaphore(m_permitCount);
+>, <Line: +		m_threadGroup = new ThreadGroup("KairosDynamic");
+>, <Line: +		m_internalExecutor = Executors.newCachedThreadPool(new ThreadFactory()
+>, <Line: +		{
+>, <Line: +			private int m_count = 0;
+>, <Line: +			@Override
+>, <Line: +			public Thread newThread(Runnable r)
+>, <Line: +			{
+>, <Line: +				Thread t = new Thread(m_threadGroup, r,"Ingest worker-"+m_count++);
+>, <Line: +				return t;
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +		m_retryer = RetryerBuilder.<Boolean>newBuilder()
+>, <Line: +				.retryIfExceptionOfType(NoHostAvailableException.class)
+>, <Line: +				.retryIfExceptionOfType(UnavailableException.class)
+>, <Line: +				.withWaitStrategy(WaitStrategies.fibonacciWait(1, TimeUnit.MINUTES))
+>, <Line: +				.build();
+>, <Line: +	}
+>, <Line: +	/*private void increasePermitCount()
+>, <Line: +	{
+>, <Line: +		m_permitCount ++;
+>, <Line: +		//m_congestionTimer.setTaskPerBatch(m_permitCount);
+>, <Line: +		m_semaphore.release();
+>, <Line: +	}*/
+>, <Line: +	public void shutdown()
+>, <Line: +	{
+>, <Line: +	}
+>, <Line: +	private Stopwatch m_timer = Stopwatch.createStarted();
+>, <Line: +	/**
+>, <Line: +	 Calls to submit will block until a permit is available to process the request
+>, <Line: +	 @param callable
+>, <Line: +	 */
+>, <Line: +	public void submit(Callable<Boolean> callable)
+>, <Line: +	{
+>, <Line: +		try
+>, <Line: +		{
+>, <Line: +			//System.out.println("Execute called");
+>, <Line: +			m_semaphore.acquire();
+>, <Line: +			//System.out.println("Submitting");
+>, <Line: +			m_internalExecutor.submit(
+>, <Line: +					new IngestFutureTask(m_retryer.wrap(callable)));
+>, <Line: +			//System.out.println("Done submitting");
+>, <Line: +		}
+>, <Line: +		//Potentially thrown by acquire
+>, <Line: +		catch (InterruptedException e)
+>, <Line: +		{
+>, <Line: +			e.printStackTrace();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<DataPointSet> getMetrics(long now)
+>, <Line: +	{
+>, <Line: +		List<DataPointSet> ret = new ArrayList<>();
+>, <Line: +		m_simpleStatsReporter.reportStats(m_ingestTimeStats.getAndClear(), now,
+>, <Line: +				"kairosdb.ingest_executor.write_time_micro", ret);
+>, <Line: +		return ret;
+>, <Line: +	}
+>, <Line: +	private class IngestFutureTask extends FutureTask<Boolean>
+>, <Line: +	{
+>, <Line: +		private final Stopwatch m_stopwatch;
+>, <Line: +		public IngestFutureTask(Callable<Boolean> callable)
+>, <Line: +		{
+>, <Line: +			super(callable);
+>, <Line: +			m_stopwatch = Stopwatch.createUnstarted();
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public void run()
+>, <Line: +		{
+>, <Line: +			//System.out.println("DynamicFutureTask.run");
+>, <Line: +			try
+>, <Line: +			{
+>, <Line: +				m_stopwatch.start();
+>, <Line: +				super.run();
+>, <Line: +				m_stopwatch.stop();
+>, <Line: +				m_ingestTimeStats.addValue(m_stopwatch.elapsed(TimeUnit.MICROSECONDS));
+>, <Line: +			}
+>, <Line: +			finally
+>, <Line: +			{
+>, <Line: +				m_semaphore.release();
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public void set(Boolean full)
+>, <Line: +		{
+>, <Line: +			//Todo Calculate time to run and adjust number of threads
+>, <Line: +			/*if (full)
+>, <Line: +			{
+>, <Line: +			}*/
+>, <Line: +			super.set(full);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private static class CongestionSemaphore extends Semaphore
+>, <Line: +	{
+>, <Line: +		public CongestionSemaphore(int permits)
+>, <Line: +		{
+>, <Line: +			super(permits);
+>, <Line: +		}
+>, <Line: +		public void reducePermits(int reduction)
+>, <Line: +		{
+>, <Line: +			super.reducePermits(reduction);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

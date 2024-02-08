@@ -1,0 +1,17 @@
+[<Line: +        /**
+>, <Line: +         * Creates a new latent type.
+>, <Line: +         *
+>, <Line: +         * @param name        The name of the type.
+>, <Line: +         * @param modifiers   The modifiers of the type.
+>, <Line: +         * @param superClass  The super type or {@code null} if no such type exists.
+>, <Line: +         * @param anInterface The interfaces that this type implements.
+>, <Line: +         */
+>, <Line: +        public Latent(String name, int modifiers, Generic superClass, Generic... anInterface) {
+>, <Line: +            this(name, modifiers, superClass, Arrays.asList(anInterface));
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public int getSegmentCount() {
+>, <Line: +            return 0;
+>, <Line: +        }
+>]
+[]

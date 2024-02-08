@@ -1,0 +1,8 @@
+[<Line: +        assertThat(instrumentedType, is(other));
+>, <Line: +        assertThat(makePlainInstrumentedType().getSuperType(), not((GenericTypeDescription) new TypeDescription.ForLoadedType(Integer.class)));
+>, <Line: +        assertThat(makePlainInstrumentedType().getSuperType(), not((GenericTypeDescription) new TypeDescription.ForLoadedType(Serializable.class)));
+>]
+[<Line: -        assertThat(instrumentedType, equalTo(other));
+>, <Line: -        assertThat(makePlainInstrumentedType().getSuperType(), not(is((GenericTypeDescription) new TypeDescription.ForLoadedType(Integer.class))));
+>, <Line: -        assertThat(makePlainInstrumentedType().getSuperType(), not(is((GenericTypeDescription) new TypeDescription.ForLoadedType(Serializable.class))));
+>]

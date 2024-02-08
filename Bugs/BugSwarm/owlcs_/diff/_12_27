@@ -1,0 +1,11 @@
+[<Line: +    public void storeOntology(OWLOntology ontology, PrintWriter writer, OWLDocumentFormat format)
+>, <Line: +        throws OWLOntologyStorageException {
+>, <Line: +        ManchesterOWLSyntaxFrameRenderer ren = new ManchesterOWLSyntaxFrameRenderer(ontology, writer,
+>, <Line: +            new ManchesterOWLSyntaxPrefixNameShortFormProvider(format));
+>]
+[<Line: -    protected void storeOntology(OWLOntology ontology, PrintWriter writer,
+>, <Line: -            OWLDocumentFormat format) throws OWLOntologyStorageException {
+>, <Line: -        ManchesterOWLSyntaxFrameRenderer ren = new ManchesterOWLSyntaxFrameRenderer(
+>, <Line: -                ontology, writer,
+>, <Line: -                new ManchesterOWLSyntaxPrefixNameShortFormProvider(format));
+>]

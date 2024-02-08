@@ -1,0 +1,6 @@
+[<Line: +import io.swagger.oas.models.ExternalDocumentation;
+>, <Line: +import java.util.Map;
+>, <Line: +   * @return List&lt;BigDecimal&gt; _enum
+>]
+[<Line: -   * @return List<BigDecimal> _enum
+>]

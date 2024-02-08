@@ -1,0 +1,10 @@
+[<Line: +        return null;
+>, <Line: +        return null;
+>, <Line: +        return null;
+>]
+[<Line: -    private XmlTest m_xmlTest;
+>, <Line: -    private XmlClass m_xmlClass;
+>, <Line: -        return m_xmlTest.getName();
+>, <Line: -        return m_xmlTest;
+>, <Line: -        return m_xmlClass;
+>]

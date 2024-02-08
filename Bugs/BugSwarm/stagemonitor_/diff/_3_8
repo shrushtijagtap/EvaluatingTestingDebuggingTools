@@ -1,0 +1,5 @@
+[<Line: +	public static ElementMatcher.Junction<TypeDescription> isInsideMonitoredProject() {
+>, <Line: +		return INSTANCE;
+>, <Line: +	}
+>]
+[]

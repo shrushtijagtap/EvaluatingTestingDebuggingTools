@@ -1,0 +1,13 @@
+[<Line: +  public String toString(){
+>, <Line: +    return new StringBuilder()
+>, <Line: +            .append("Person(")
+>, <Line: +            .append(id)
+>, <Line: +            .append(", ")
+>, <Line: +            .append(name)
+>, <Line: +            .append(", ")
+>, <Line: +            .append(items)
+>, <Line: +            .append(" )")
+>, <Line: +            .toString();
+>, <Line: +  }
+>]
+[]

@@ -1,0 +1,35 @@
+[<Line: +package github.update;
+>, <Line: +import github.GitHubClientExtended;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.net.HttpURLConnection;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Date;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Optional;
+>, <Line: +import static org.eclipse.egit.github.core.client.IGitHubConstants.CONTENT_TYPE_JSON;
+>, <Line: +import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
+>, <Line: +		String resourceDesc = repoId.generateId() + apiSuffix;
+>, <Line: +		logger.info(String.format("Updating %s with ETag %s", resourceDesc, lastETag));
+>, <Line: +				logger.info(String.format("%s: %d", resourceDesc, responseCode));
+>, <Line: +					result = new ArrayList<>(getPagedItems(resourceDesc, new PageIterator<>(request, client)));
+>, <Line: +					logger.info(String.format("New ETag for %s: %s", resourceDesc, updatedETag));
+>, <Line: +	private List<T> getPagedItems(String resourceDesc, PageIterator<T> iterator) throws IOException {
+>, <Line: +				logger.info(resourceDesc + " | page " + (page++) + ": " + diff + " items");
+>]
+[<Line: -package service.updateservice;
+>, <Line: -import static org.eclipse.egit.github.core.client.IGitHubConstants.CONTENT_TYPE_JSON;
+>, <Line: -import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.net.HttpURLConnection;
+>, <Line: -import java.net.SocketTimeoutException;
+>, <Line: -import java.net.UnknownHostException;
+>, <Line: -import java.util.*;
+>, <Line: -import service.GitHubClientExtended;
+>, <Line: -		logger.info(String.format("Starting update of %s with ETag %s", apiSuffix, lastETag));
+>, <Line: -				logger.info("UpdateService response: " + responseCode);
+>, <Line: -					result = new ArrayList<>(getPagedItems(new PageIterator<>(request, client)));
+>, <Line: -					logger.info(String.format("New ETag for resource %s: %s", apiSuffix, updatedETag));
+>, <Line: -	private List<T> getPagedItems(PageIterator<T> iterator) throws IOException {
+>, <Line: -		logger.info("Getting paged items from " + apiSuffix + ": " + (iterator.getLastPage()+1) + " pages");
+>, <Line: -				logger.info("Page " + page++ + ": " + diff + " items");
+>]

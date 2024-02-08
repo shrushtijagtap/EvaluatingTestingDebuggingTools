@@ -1,0 +1,30 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +            df.getOWLAnnotationPropertyDomainAxiom(rdfsComment, clsA.getIRI());
+>, <Line: +            df.getOWLAnnotationPropertyRangeAxiom(rdfsComment, clsB.getIRI());
+>, <Line: +            df.getOWLSubAnnotationPropertyOfAxiom(myComment, rdfsComment);
+>, <Line: +        throws OWLOntologyStorageException, OWLOntologyCreationException {
+>, <Line: +            asUnorderedSet(axioms.stream().filter(OWLAxiom::isAnnotationAxiom));
+>, <Line: +        OntologyConfigurator withAnnosConfig = new OntologyConfigurator();
+>, <Line: +        OntologyConfigurator withoutAnnosConfig =
+>, <Line: +            new OntologyConfigurator().setLoadAnnotationAxioms(false);
+>, <Line: +            asUnorderedSet(reloadedWithoutAnnoAxioms.axioms()));
+>, <Line: +        OntologyConfigurator configuration)
+>, <Line: +        throws OWLOntologyStorageException, OWLOntologyCreationException {
+>, <Line: +        OWLOntology reloaded =
+>, <Line: +            loadOntologyWithConfig(saveOntology(ontology, format), format, configuration);
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -                        df.getOWLAnnotationPropertyDomainAxiom(rdfsComment, clsA.getIRI());
+>, <Line: -                        df.getOWLAnnotationPropertyRangeAxiom(rdfsComment, clsB.getIRI());
+>, <Line: -                        df.getOWLSubAnnotationPropertyOfAxiom(myComment, rdfsComment);
+>, <Line: -                    throws OWLOntologyStorageException, OWLOntologyCreationException {
+>, <Line: -                        asUnorderedSet(axioms.stream().filter(OWLAxiom::isAnnotationAxiom));
+>, <Line: -        OWLOntologyLoaderConfiguration withAnnosConfig = new OWLOntologyLoaderConfiguration();
+>, <Line: -        OWLOntologyLoaderConfiguration withoutAnnosConfig =
+>, <Line: -                        new OWLOntologyLoaderConfiguration().setLoadAnnotationAxioms(false);
+>, <Line: -                        asUnorderedSet(reloadedWithoutAnnoAxioms.axioms()));
+>, <Line: -                    OWLOntologyLoaderConfiguration configuration)
+>, <Line: -                    throws OWLOntologyStorageException, OWLOntologyCreationException {
+>, <Line: -        OWLOntology reloaded = loadOntologyWithConfig(saveOntology(ontology, format), format,
+>, <Line: -                        configuration);
+>]

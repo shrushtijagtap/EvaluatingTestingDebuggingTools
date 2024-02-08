@@ -1,0 +1,10 @@
+[<Line: +    <version>2.2.0.0</version>
+>, <Line: +        <elasticsearch.version>2.2.0</elasticsearch.version>
+>, <Line: +        <org.xbib.elasticsearch.helper.version>2.2.0.0</org.xbib.elasticsearch.helper.version>
+>, <Line: +            <version>0.5</version>
+>]
+[<Line: -    <version>2.1.1.2</version>
+>, <Line: -        <elasticsearch.version>2.1.1</elasticsearch.version>
+>, <Line: -        <org.xbib.elasticsearch.helper.version>2.1.1.0</org.xbib.elasticsearch.helper.version>
+>, <Line: -            <version>0.4.1</version>
+>]

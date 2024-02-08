@@ -1,0 +1,9 @@
+[<Line: +package util.events;
+>, <Line: +public class RepoOpenedEvent extends Event {
+>, <Line: +	public final String repoId;
+>, <Line: +	public RepoOpenedEvent(String repoId) {
+>, <Line: +		this.repoId = repoId;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

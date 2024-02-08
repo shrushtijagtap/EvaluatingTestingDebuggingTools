@@ -1,0 +1,59 @@
+[<Line: +	private StringBuilder escapeAppend(StringBuilder sb, String value, char escape)
+>, <Line: +	{
+>, <Line: +		int startPos = 0;
+>, <Line: +		for (int i = 0; i < value.length(); i++)
+>, <Line: +		{
+>, <Line: +			char ch = value.charAt(i);
+>, <Line: +			if (ch == ':' || ch == '=')
+>, <Line: +			{
+>, <Line: +				sb.append(value, startPos, i);
+>, <Line: +				sb.append(escape).append(ch);
+>, <Line: +				startPos = i + 1;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		if (startPos <= value.length())
+>, <Line: +		{
+>, <Line: +			sb.append(value, startPos, value.length());
+>, <Line: +		}
+>, <Line: +		return sb;
+>, <Line: +	}
+>, <Line: +	private String unEscape(CharSequence source, int start, int end, char escape)
+>, <Line: +	{
+>, <Line: +		int startPos = start;
+>, <Line: +		StringBuilder sb = new StringBuilder(end - start);
+>, <Line: +		for (int i = start; i < end; i++)
+>, <Line: +		{
+>, <Line: +			char ch = source.charAt(i);
+>, <Line: +			if (ch == escape)
+>, <Line: +			{
+>, <Line: +				sb.append(source, startPos, i);
+>, <Line: +				i++; //Skip next char as it was escaped
+>, <Line: +				startPos = i;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		if (startPos <= end)
+>, <Line: +		{
+>, <Line: +			sb.append(source, startPos, end);
+>, <Line: +		}
+>, <Line: +		return sb.toString();
+>, <Line: +	}
+>, <Line: +			//Escape tag names using :
+>, <Line: +			escapeAppend(sb, key, ':').append("=");
+>, <Line: +			//Escape tag values using =
+>, <Line: +			escapeAppend(sb, tags.get(key), '=').append(":");
+>, <Line: +					tag = unEscape(tagString, mark, position, ':');
+>, <Line: +				if (tagString.charAt(position) == ':')
+>, <Line: +				{
+>, <Line: +					position ++;
+>, <Line: +				}
+>, <Line: +					value = unEscape(tagString, mark, position, '=');
+>, <Line: +				if (tagString.charAt(position) == '=')
+>, <Line: +				{
+>, <Line: +					position ++;
+>, <Line: +				}
+>]
+[<Line: -			sb.append(key).append("=");
+>, <Line: -			sb.append(tags.get(key)).append(":");
+>, <Line: -					tag = tagString.substring(mark, position);
+>, <Line: -					value = tagString.substring(mark, position);
+>]

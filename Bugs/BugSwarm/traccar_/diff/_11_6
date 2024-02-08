@@ -1,0 +1,6 @@
+[<Line: +        if (coordinate > 0x7fffffffL) {
+>, <Line: +            coordinate = 0xffffffffL - coordinate;
+>]
+[<Line: -        if (coordinate > 0x7fffffffl) {
+>, <Line: -            coordinate = 0xffffffffl - coordinate;
+>]

@@ -1,0 +1,7 @@
+[<Line: +class UsageImpl extends WrapperImpl<com.microsoft.azure.management.storage.implementation.api.Usage> implements Usage {
+>, <Line: +    UsageImpl(com.microsoft.azure.management.storage.implementation.api.Usage innerObject) {
+>]
+[<Line: -import com.microsoft.azure.management.storage.implementation.api.UsageInner;
+>, <Line: -class UsageImpl extends WrapperImpl<UsageInner> implements Usage {
+>, <Line: -    UsageImpl(UsageInner innerObject) {
+>]

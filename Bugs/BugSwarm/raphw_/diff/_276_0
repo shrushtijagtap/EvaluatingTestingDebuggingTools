@@ -1,0 +1,4 @@
+[<Line: +                ClassFileExtraction.of(Foo.class, Bar.class, AgentBuilderDefaultApplicationSuperTypeLoadingTest.class),
+>]
+[<Line: -                ClassFileExtraction.of(Foo.class, Bar.class),
+>]

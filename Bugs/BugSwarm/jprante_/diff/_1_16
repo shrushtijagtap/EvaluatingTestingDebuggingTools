@@ -1,0 +1,75 @@
+[<Line: +package org.xbib.metrics;
+>, <Line: +import org.xbib.elasticsearch.helper.client.IngestMetric;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.HashSet;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.Set;
+>, <Line: +public class ElasticsearchIngestMetric implements IngestMetric {
+>, <Line: +    private final Set<String> indexNames = new HashSet<String>();
+>, <Line: +    private final Map<String, Long> startBulkRefreshIntervals = new HashMap<String, Long>();
+>, <Line: +    private final Map<String, Long> stopBulkRefreshIntervals = new HashMap<String, Long>();
+>, <Line: +    private final MeanMetric totalIngest = new ElasticsearchMeanMetric();
+>, <Line: +    private final CounterMetric totalIngestSizeInBytes = new ElasticsearchCounterMetric();
+>, <Line: +    private final CounterMetric currentIngest = new ElasticsearchCounterMetric();
+>, <Line: +    private final CounterMetric currentIngestNumDocs = new ElasticsearchCounterMetric();
+>, <Line: +    private final CounterMetric submitted = new ElasticsearchCounterMetric();
+>, <Line: +    private final CounterMetric succeeded = new ElasticsearchCounterMetric();
+>, <Line: +    private final CounterMetric failed = new ElasticsearchCounterMetric();
+>, <Line: +    private long started;
+>, <Line: +    public MeanMetric getTotalIngest() {
+>, <Line: +        return totalIngest;
+>, <Line: +    }
+>, <Line: +    public CounterMetric getTotalIngestSizeInBytes() {
+>, <Line: +        return totalIngestSizeInBytes;
+>, <Line: +    }
+>, <Line: +    public CounterMetric getCurrentIngest() {
+>, <Line: +        return currentIngest;
+>, <Line: +    }
+>, <Line: +    public CounterMetric getCurrentIngestNumDocs() {
+>, <Line: +        return currentIngestNumDocs;
+>, <Line: +    }
+>, <Line: +    public CounterMetric getSubmitted() {
+>, <Line: +        return submitted;
+>, <Line: +    }
+>, <Line: +    public CounterMetric getSucceeded() {
+>, <Line: +        return succeeded;
+>, <Line: +    }
+>, <Line: +    public CounterMetric getFailed() {
+>, <Line: +        return failed;
+>, <Line: +    }
+>, <Line: +    public ElasticsearchIngestMetric start() {
+>, <Line: +        this.started = System.nanoTime();
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    public long elapsed() {
+>, <Line: +        return System.nanoTime() - started;
+>, <Line: +    }
+>, <Line: +    public ElasticsearchIngestMetric setupBulk(String indexName, long startRefreshInterval, long stopRefreshInterval) {
+>, <Line: +        synchronized (indexNames) {
+>, <Line: +            indexNames.add(indexName);
+>, <Line: +            startBulkRefreshIntervals.put(indexName, startRefreshInterval);
+>, <Line: +            stopBulkRefreshIntervals.put(indexName, stopRefreshInterval);
+>, <Line: +        }
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    public boolean isBulk(String indexName) {
+>, <Line: +        return indexNames.contains(indexName);
+>, <Line: +    }
+>, <Line: +    public ElasticsearchIngestMetric removeBulk(String indexName) {
+>, <Line: +        synchronized (indexNames) {
+>, <Line: +            indexNames.remove(indexName);
+>, <Line: +        }
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    public Set<String> indices() {
+>, <Line: +        return indexNames;
+>, <Line: +    }
+>, <Line: +    public Map<String, Long> getStartBulkRefreshIntervals() {
+>, <Line: +        return startBulkRefreshIntervals;
+>, <Line: +    }
+>, <Line: +    public Map<String, Long> getStopBulkRefreshIntervals() {
+>, <Line: +        return stopBulkRefreshIntervals;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

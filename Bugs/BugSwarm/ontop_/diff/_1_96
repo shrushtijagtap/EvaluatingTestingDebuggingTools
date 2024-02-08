@@ -1,0 +1,14 @@
+[<Line: +		try (OWLAPI3Materializer materializer = new OWLAPI3Materializer(obdaModel, false)) {
+>, <Line: +		try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fout, true)))) {
+>, <Line: +		} 
+>]
+[<Line: -		OWLAPI3Materializer materializer = new OWLAPI3Materializer(obdaModel, false);
+>, <Line: -		PrintWriter out = null;
+>, <Line: -		try {
+>, <Line: -		    out = new PrintWriter(new BufferedWriter(new FileWriter(fout, true)));
+>, <Line: -		} finally {
+>, <Line: -		    if (out != null) {
+>, <Line: -		    	out.close();
+>, <Line: -		    }
+>, <Line: -		    materializer.disconnect();
+>]

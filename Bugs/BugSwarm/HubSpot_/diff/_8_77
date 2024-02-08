@@ -1,0 +1,177 @@
+[<Line: +package com.hubspot.baragon.service.worker;
+>, <Line: +import java.io.Serializable;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.Comparator;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.Iterator;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.TreeMap;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +import com.google.common.collect.Iterables;
+>, <Line: +import com.google.inject.Inject;
+>, <Line: +import com.hubspot.baragon.data.BaragonAgentResponseDatastore;
+>, <Line: +import com.hubspot.baragon.data.BaragonRequestDatastore;
+>, <Line: +import com.hubspot.baragon.data.BaragonResponseHistoryDatastore;
+>, <Line: +import com.hubspot.baragon.data.BaragonStateDatastore;
+>, <Line: +import com.hubspot.baragon.models.BaragonRequest;
+>, <Line: +import com.hubspot.baragon.models.BaragonRequestKey;
+>, <Line: +import com.hubspot.baragon.models.BaragonResponse;
+>, <Line: +import com.hubspot.baragon.models.InternalRequestStates;
+>, <Line: +import com.hubspot.baragon.models.InternalStatesMap;
+>, <Line: +import com.hubspot.baragon.service.config.BaragonConfiguration;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +public class RequestPurgingWorker implements Runnable {
+>, <Line: +  private static final Logger LOG = LoggerFactory.getLogger(RequestPurgingWorker.class);
+>, <Line: +  private final BaragonRequestDatastore requestDatastore;
+>, <Line: +  private final BaragonConfiguration configuration;
+>, <Line: +  private final BaragonAgentResponseDatastore agentResponseDatastore;
+>, <Line: +  private final BaragonResponseHistoryDatastore responseHistoryDatastore;
+>, <Line: +  private final BaragonStateDatastore stateDatastore;
+>, <Line: +  @Inject
+>, <Line: +  public RequestPurgingWorker(BaragonRequestDatastore requestDatastore,
+>, <Line: +                              BaragonConfiguration configuration,
+>, <Line: +                              BaragonAgentResponseDatastore agentResponseDatastore,
+>, <Line: +                              BaragonResponseHistoryDatastore responseHistoryDatastore,
+>, <Line: +                              BaragonStateDatastore stateDatastore) {
+>, <Line: +    this.requestDatastore = requestDatastore;
+>, <Line: +    this.configuration = configuration;
+>, <Line: +    this.agentResponseDatastore = agentResponseDatastore;
+>, <Line: +    this.responseHistoryDatastore = responseHistoryDatastore;
+>, <Line: +    this.stateDatastore = stateDatastore;
+>, <Line: +  }
+>, <Line: +  private enum PurgeAction {
+>, <Line: +    PURGE, SAVE, NONE
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void run() {
+>, <Line: +    try {
+>, <Line: +      long referenceTime = System.currentTimeMillis() - (TimeUnit.DAYS.toMillis(configuration.getHistoryConfiguration().getPurgeOldRequestsAfterDays()));
+>, <Line: +      cleanUpActiveRequests(referenceTime);
+>, <Line: +      if (configuration.getHistoryConfiguration().isPurgeOldRequests() && !Thread.interrupted()) {
+>, <Line: +        purgeHistoricalRequests(referenceTime);
+>, <Line: +        trimNumRequestsPerService();
+>, <Line: +      }
+>, <Line: +    } catch (Exception e) {
+>, <Line: +      LOG.error("Caught exception during old request purging", e);
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  public void cleanUpActiveRequests(long referenceTime) {
+>, <Line: +    List<String> allMaybeActiveRequestIds = requestDatastore.getAllRequestIds();
+>, <Line: +    for (String requestId : allMaybeActiveRequestIds) {
+>, <Line: +      try {
+>, <Line: +        Optional<InternalRequestStates> maybeState = requestDatastore.getRequestState(requestId);
+>, <Line: +        switch (getPurgeActionForMaybeActiveRequest(requestId, referenceTime, maybeState)) {
+>, <Line: +          case PURGE:
+>, <Line: +            requestDatastore.deleteRequest(requestId);
+>, <Line: +            break;
+>, <Line: +          case SAVE:
+>, <Line: +            Optional<BaragonRequest> maybeRequest = requestDatastore.getRequest(requestId);
+>, <Line: +            if (maybeRequest.isPresent()) {
+>, <Line: +              BaragonResponse response = new BaragonResponse(maybeRequest.get().getLoadBalancerRequestId(), InternalStatesMap.getRequestState(maybeState.get()), requestDatastore.getRequestMessage(maybeRequest.get().getLoadBalancerRequestId()), Optional.of(agentResponseDatastore.getLastResponses(maybeRequest.get().getLoadBalancerRequestId())), maybeRequest);
+>, <Line: +              responseHistoryDatastore.addResponse(maybeRequest.get().getLoadBalancerService().getServiceId(), maybeRequest.get().getLoadBalancerRequestId(), response);
+>, <Line: +              requestDatastore.deleteRequest(requestId);
+>, <Line: +            } else {
+>, <Line: +              LOG.warn(String.format("Could not get request data to save history for request %s", requestId));
+>, <Line: +            }
+>, <Line: +            break;
+>, <Line: +          case NONE:
+>, <Line: +          default:
+>, <Line: +            break;
+>, <Line: +        }
+>, <Line: +      } catch (Exception e) {
+>, <Line: +        LOG.error(String.format("Caught exception trying to clean up request %s", requestId));
+>, <Line: +      }
+>, <Line: +      if (Thread.interrupted()) {
+>, <Line: +        LOG.warn("Purger was interrupted, stopping purge");
+>, <Line: +        break;
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  private PurgeAction getPurgeActionForMaybeActiveRequest(String requestId, long referenceTime, Optional<InternalRequestStates> maybeState) {
+>, <Line: +    Optional<Long> maybeUpdatedAt = requestDatastore.getRequestUpdatedAt(requestId);
+>, <Line: +    if (!maybeState.isPresent() || InternalStatesMap.isRemovable(maybeState.get())) {
+>, <Line: +      if (configuration.getHistoryConfiguration().isPurgeOldRequests()) {
+>, <Line: +        if (shouldPurge(maybeUpdatedAt, referenceTime)) {
+>, <Line: +          LOG.trace(String.format("Updated at time: %s is earlier than reference time: %s, purging request %s", maybeUpdatedAt.get(), referenceTime, requestId));
+>, <Line: +          return PurgeAction.PURGE;
+>, <Line: +        } else {
+>, <Line: +          return PurgeAction.SAVE;
+>, <Line: +        }
+>, <Line: +      } else {
+>, <Line: +        return PurgeAction.SAVE;
+>, <Line: +      }
+>, <Line: +    } else {
+>, <Line: +      return PurgeAction.NONE;
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  private void purgeHistoricalRequests(long referenceTime) {
+>, <Line: +    for (String serviceId : responseHistoryDatastore.getServiceIds()) {
+>, <Line: +      if (!serviceId.equals("requestIdMapping")) {
+>, <Line: +        List<String> requestIds = responseHistoryDatastore.getRequestIdsForService(serviceId);
+>, <Line: +        if (stateDatastore.serviceExists(serviceId)) {
+>, <Line: +          if (!requestIds.isEmpty()) {
+>, <Line: +            for (String requestId : requestIds) {
+>, <Line: +              Optional<Long> maybeUpdatedAt = responseHistoryDatastore.getRequestUpdatedAt(serviceId, requestId);
+>, <Line: +              if (shouldPurge(maybeUpdatedAt, referenceTime)) {
+>, <Line: +                LOG.trace(String.format("Updated at time: %s is earlier than reference time: %s, purging request %s", maybeUpdatedAt.get(), referenceTime, requestId));
+>, <Line: +                responseHistoryDatastore.deleteResponse(serviceId, requestId);
+>, <Line: +              }
+>, <Line: +              if (Thread.interrupted()) {
+>, <Line: +                LOG.warn("Purger was interrupted, stopping purge");
+>, <Line: +                break;
+>, <Line: +              }
+>, <Line: +            }
+>, <Line: +          }
+>, <Line: +        } else {
+>, <Line: +          responseHistoryDatastore.deleteResponses(serviceId);
+>, <Line: +        }
+>, <Line: +      }
+>, <Line: +      if (Thread.interrupted()) {
+>, <Line: +        LOG.warn("Purger was interrupted, stopping purge");
+>, <Line: +        break;
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  private boolean shouldPurge(Optional<Long> maybeUpdatedAt, long referenceTime) {
+>, <Line: +    return (maybeUpdatedAt.isPresent() && maybeUpdatedAt.get() < referenceTime) || (!maybeUpdatedAt.isPresent() && configuration.getHistoryConfiguration().isPurgeWhenDateNotFound());
+>, <Line: +  }
+>, <Line: +  private void trimNumRequestsPerService() {
+>, <Line: +    LOG.debug("Checking for services with too many requests");
+>, <Line: +    for (String serviceId : responseHistoryDatastore.getServiceIds()) {
+>, <Line: +      if (!serviceId.equals("requestIdMapping")) {
+>, <Line: +        try {
+>, <Line: +          List<String> requestIds = responseHistoryDatastore.getRequestIdsForService(serviceId);
+>, <Line: +          if (requestIds.size() > configuration.getHistoryConfiguration().getMaxRequestsPerService()) {
+>, <Line: +            removeOldestRequestIds(serviceId, requestIds);
+>, <Line: +          }
+>, <Line: +        } catch (Exception e) {
+>, <Line: +          LOG.error(String.format("Caught exception purging old requests for service %s", serviceId), e);
+>, <Line: +        }
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  private void removeOldestRequestIds(String serviceId, List<String> requestIds) {
+>, <Line: +    LOG.debug(String.format("Service %s has %s requests, over limit of %s, will remove oldest requests", serviceId, requestIds.size(), configuration.getHistoryConfiguration().getMaxRequestsPerService()));
+>, <Line: +    List<BaragonRequestKey> requestKeyList = new ArrayList<>();
+>, <Line: +    for (String requestId : requestIds) {
+>, <Line: +      Optional<Long> maybeUpdatedAt = responseHistoryDatastore.getRequestUpdatedAt(serviceId, requestId);
+>, <Line: +      if (maybeUpdatedAt.isPresent()) {
+>, <Line: +        requestKeyList.add(new BaragonRequestKey(requestId, maybeUpdatedAt.get()));
+>, <Line: +      } else {
+>, <Line: +        if (configuration.getHistoryConfiguration().isPurgeWhenDateNotFound()) {
+>, <Line: +          responseHistoryDatastore.deleteResponse(serviceId, requestId);
+>, <Line: +        }
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    Collections.sort(requestKeyList);
+>, <Line: +    for (BaragonRequestKey requestKey : requestKeyList.subList(configuration.getHistoryConfiguration().getMaxRequestsPerService(), requestKeyList.size())) {
+>, <Line: +      responseHistoryDatastore.deleteResponse(serviceId, requestKey.getRequestId());
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

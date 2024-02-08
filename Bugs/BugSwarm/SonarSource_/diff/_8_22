@@ -1,0 +1,20 @@
+[<Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import org.sonar.plugins.php.api.tests.PHPCheckTest;
+>, <Line: +import org.sonar.plugins.php.api.visitors.Issue;
+>, <Line: +    PHPCheckTest.check(check, TEST_FILE);
+>, <Line: +    PHPCheckTest.check(check, TEST_FILE, ImmutableList.<Issue>of());
+>]
+[<Line: -import org.sonar.php.PHPAstScanner;
+>, <Line: -import org.sonar.squidbridge.api.SourceFile;
+>, <Line: -    SourceFile file = PHPAstScanner.scanSingleFile(TEST_FILE, check);
+>, <Line: -    checkMessagesVerifier.verify(file.getCheckMessages())
+>, <Line: -      .next().atLine(6).withMessage("Put one space between the closing parenthesis and the opening curly brace.")
+>, <Line: -      .next().atLine(8).withMessage("Put only one space between the closing parenthesis and the opening curly brace.")
+>, <Line: -      .next().atLine(24).withMessage("Remove all space after the opening parenthesis.")
+>, <Line: -      .next().atLine(25).withMessage("Remove all space before the closing parenthesis.")
+>, <Line: -      .next().atLine(26).withMessage("Remove all space after the opening parenthesis and before the closing parenthesis.")
+>, <Line: -      .noMore();
+>, <Line: -    SourceFile file = PHPAstScanner.scanSingleFile(TEST_FILE, check);
+>, <Line: -    checkMessagesVerifier.verify(file.getCheckMessages())
+>, <Line: -      .noMore();
+>]

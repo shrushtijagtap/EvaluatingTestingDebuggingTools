@@ -1,0 +1,215 @@
+[<Line: +import static co.paralleluniverse.fibers.instrument.Classes.THROWABLE_NAME;
+>, <Line: +import static co.paralleluniverse.fibers.instrument.Classes.SUSPEND_EXECUTION_NAME;
+>, <Line: +import static co.paralleluniverse.fibers.instrument.Classes.blockingCallIdx;
+>, <Line: +    private int[] suspCallsIndexes = null;
+>, <Line: +    public boolean callsSuspendables() {
+>, <Line: +        if (suspCallsIndexes == null) {
+>, <Line: +            suspCallsIndexes = new int[8];
+>, <Line: +            final int numIns = mn.instructions.size();
+>, <Line: +            int currSourceLine = -1;
+>, <Line: +            int count = 0;
+>, <Line: +            for (int i = 0; i < numIns; i++) {
+>, <Line: +                final Frame f = frames[i];
+>, <Line: +                if (f != null) { // reachable ?
+>, <Line: +                    final AbstractInsnNode in = mn.instructions.get(i);
+>, <Line: +                    if (in.getType() == AbstractInsnNode.LINE) {
+>, <Line: +                        final LineNumberNode lnn = (LineNumberNode) in;
+>, <Line: +                        currSourceLine = lnn.line;
+>, <Line: +                        if (startSourceLine == -1 || currSourceLine < startSourceLine)
+>, <Line: +                            startSourceLine = currSourceLine;
+>, <Line: +                        if (endSourceLine == -1 || currSourceLine > endSourceLine)
+>, <Line: +                            endSourceLine = currSourceLine;
+>, <Line: +                    } else if (in.getType() == AbstractInsnNode.METHOD_INSN || in.getType() == AbstractInsnNode.INVOKE_DYNAMIC_INSN) {
+>, <Line: +                        if (isSuspendableCall(in)) {
+>, <Line: +                            if (count >= suspCallsIndexes.length)
+>, <Line: +                                suspCallsIndexes = Arrays.copyOf(suspCallsIndexes, suspCallsIndexes.length * 2);
+>, <Line: +                            if (count >= suspCallsSourceLines.length)
+>, <Line: +                                suspCallsSourceLines = Arrays.copyOf(suspCallsSourceLines, suspCallsSourceLines.length * 2);
+>, <Line: +                            suspCallsIndexes[count] = i;
+>, <Line: +                            suspCallsSourceLines[count] = currSourceLine;
+>, <Line: +                            count++;
+>, <Line: +                        } else
+>, <Line: +                            possiblyWarnAboutBlocking((MethodInsnNode) in);
+>, <Line: +            if (count < suspCallsSourceLines.length)
+>, <Line: +                suspCallsSourceLines = Arrays.copyOf(suspCallsSourceLines, count);
+>, <Line: +            if (count < suspCallsIndexes.length)
+>, <Line: +                suspCallsIndexes = Arrays.copyOf(suspCallsIndexes, count);
+>, <Line: +        }
+>, <Line: +        return suspCallsIndexes.length > 0;
+>, <Line: +                            possiblyWarnAboutBlocking(min);
+>, <Line: +    private void possiblyWarnAboutBlocking(final MethodInsnNode min) throws UnableToInstrumentException {
+>, <Line: +        int blockingId = blockingCallIdx(min);
+>, <Line: +        if (blockingId >= 0 && !isAllowedToBlock(className, mn.name)) {
+>, <Line: +            int mask = 1 << blockingId;
+>, <Line: +            if (!db.isAllowBlocking()) {
+>, <Line: +                throw new UnableToInstrumentException("blocking call to "
+>, <Line: +                        + min.owner + "#" + min.name + min.desc, className, mn.name, mn.desc);
+>, <Line: +            } else if ((warnedAboutBlocking & mask) == 0) {
+>, <Line: +                warnedAboutBlocking |= mask;
+>, <Line: +                db.log(LogLevel.WARNING, "Method %s#%s%s contains potentially blocking call to "
+>, <Line: +                        + min.owner + "#" + min.name + min.desc, className, mn.name, mn.desc);
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public void accept(MethodVisitor mv, boolean hasAnnotation) {
+>, <Line: +        db.log(LogLevel.INFO, "Instrumenting method %s#%s%s", className, mn.name, mn.desc);
+>, <Line: +        final boolean skipInstrumentation = canInstrumentationBeSkipped(suspCallsIndexes);
+>, <Line: +        emitInstrumentedAnn(mv, skipInstrumentation);
+>, <Line: +        if (skipInstrumentation) {
+>, <Line: +            db.log(LogLevel.INFO, "[OPTIMIZE] Skipping instrumentation for method %s#%s%s", className, mn.name, mn.desc);
+>, <Line: +            mn.accept(mv); // Dump
+>, <Line: +        mv.visitTryCatchBlock(lMethodStart, lMethodEnd, lCatchSEE, SUSPEND_EXECUTION_NAME);
+>, <Line: +            if (SUSPEND_EXECUTION_NAME.equals(tcb.type) && !hasAnnotation) // we allow catch of SuspendExecution in method annotated with @Suspendable.
+>, <Line: +                    mv.visitTypeInsn(Opcodes.INSTANCEOF, SUSPEND_EXECUTION_NAME);
+>, <Line: +            mv.visitTypeInsn(Opcodes.INSTANCEOF, SUSPEND_EXECUTION_NAME);
+>, <Line: +    private boolean canInstrumentationBeSkipped(int[] susCallsIndexes) {
+>, <Line: +        db.log(LogLevel.DEBUG, "[OPTIMIZE] Examining method %s#%s%s with susCallsIndexes=%s", className, mn.name, mn.desc, Arrays.toString(susCallsIndexes));
+>, <Line: +        // Fully instrumentation-transparent methods
+>, <Line: +        if (susCallsIndexes.length == 1) // => Exactly one suspendable call
+>, <Line: +            return
+>, <Line: +                (db.isAllowMonitors() || !hasMonitors()) && // If not checking we could optimize away and skip collectCodeBlocks' exception/warning
+>, <Line: +                !hasSuspendableTryCatchBlocksStartingIn(susCallsIndexes, 0) &&
+>, <Line: +                !hasCalls(susCallsIndexes, 0) && // They could alter fields
+>, <Line: +                !accessesFields(susCallsIndexes, 0) && // They could alter fields
+>, <Line: +                !branchesBack(susCallsIndexes, 0) && // We assume instrumenting is cheaper than for-loops recalculating locals
+>, <Line: +                (db.isAllowBlocking() || !callsBlocking(susCallsIndexes, 1)) && // If not checking we could optimize away and skip collectCodeBlocks' exception/warning
+>, <Line: +                !branchesAtOrBeforeStart(susCallsIndexes, 1) && // Suspendable is called only ones
+>, <Line: +                startsWithSuspCallButNotYield(susCallsIndexes, 1); // Direct yield calls need instrumentation support
+>, <Line: +        return false;
+>, <Line: +    }
+>, <Line: +    private boolean hasMonitors() {
+>, <Line: +        for (int i = 0; i < mn.instructions.size() - 1; i++) {
+>, <Line: +            AbstractInsnNode ins = mn.instructions.get(i);
+>, <Line: +            switch (ins.getOpcode()) {
+>, <Line: +                case Opcodes.MONITORENTER:
+>, <Line: +                case Opcodes.MONITOREXIT:
+>, <Line: +                    return true;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return false;
+>, <Line: +    private boolean hasSuspendableTryCatchBlocksStartingIn(int[] susCallsIndexes, int blockNum) {
+>, <Line: +        final int end = getBlockEndInsnIdxInclusive(blockNum, susCallsIndexes);
+>, <Line: +        for(Object o : mn.tryCatchBlocks) {
+>, <Line: +            TryCatchBlockNode tcb = (TryCatchBlockNode) o;
+>, <Line: +            if (mn.instructions.indexOf(tcb.start) <= end) {
+>, <Line: +                if (THROWABLE_NAME.equals(tcb.type)
+>, <Line: +                    || EXCEPTION_NAME.equals(tcb.type)
+>, <Line: +                    || SUSPEND_EXECUTION_NAME.equals(tcb.type))
+>, <Line: +                return true;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return false;
+>, <Line: +    }
+>, <Line: +    private boolean hasCalls(int[] susCallsIndexes, int blockNum) {
+>, <Line: +    private boolean callsBlocking(int[] susCallsIndexes, int blockNum) {
+>, <Line: +        final int start = getBlockStartInsnIdxInclusive(blockNum, susCallsIndexes);
+>, <Line: +        final int end = getBlockEndInsnIdxInclusive(blockNum, susCallsIndexes);
+>, <Line: +        for (int i = start; i <= end; i++) {
+>, <Line: +            final AbstractInsnNode ain = mn.instructions.get(i);
+>, <Line: +            if (ain instanceof MethodInsnNode && blockingCallIdx((MethodInsnNode) ain) != -1)
+>, <Line: +                return true;
+>, <Line: +        }
+>, <Line: +        return false;
+>, <Line: +    }
+>, <Line: +    private boolean accessesFields(int[] susCallsIndexes, int blockNum) {
+>, <Line: +        final int start = getBlockStartInsnIdxInclusive(blockNum, susCallsIndexes);
+>, <Line: +        final int end = getBlockEndInsnIdxInclusive(blockNum, susCallsIndexes);
+>, <Line: +        for (int i = start; i <= end; i++) {
+>, <Line: +            final AbstractInsnNode ain = mn.instructions.get(i);
+>, <Line: +            if (ain.getType() == AbstractInsnNode.FIELD_INSN)
+>, <Line: +                return true;
+>, <Line: +        }
+>, <Line: +        return false;
+>, <Line: +    }
+>, <Line: +    private boolean branchesAtOrBeforeStart(int[] susCallsIndexes, int blockNum) {
+>, <Line: +    private boolean branchesBack(int[] susCallsIndexes, int blockNum) {
+>, <Line: +        final StringBuilder sb = new StringBuilder();
+>, <Line: +        sb.append("@Instrumented(");
+>, <Line: +        final AnnotationVisitor linesAV = instrumentedAV.visitArray("suspendableCallSites");
+>, <Line: +        sb.append("suspendableCallSites=[");
+>, <Line: +        for(int i = 0; i < suspCallsSourceLines.length; i++) {
+>, <Line: +            if (i != 0)
+>, <Line: +                sb.append(", ");
+>, <Line: +            final int l = suspCallsSourceLines[i];
+>, <Line: +            linesAV.visit("", l);
+>, <Line: +            sb.append(l);
+>, <Line: +        }
+>, <Line: +        sb.append("],");
+>, <Line: +        sb.append("methodStart=").append(startSourceLine).append(",");
+>, <Line: +        sb.append("methodEnd=").append(endSourceLine).append(",");
+>, <Line: +        sb.append("methodOptimized=").append(skip);
+>, <Line: +        sb.append(")");
+>, <Line: +        db.log(LogLevel.INFO, "Annotating method %s#%s%s with %s", className, mn.name, mn.desc, sb);
+>]
+[<Line: -import static co.paralleluniverse.fibers.instrument.Classes.isBlockingCall;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -    public int[] getSuspCallsIndexes() {
+>, <Line: -        final int numIns = mn.instructions.size();
+>, <Line: -        int[] suspCallsIndexes = new int[8];
+>, <Line: -        int currSourceLine = -1;
+>, <Line: -        int count = 0;
+>, <Line: -        for (int i = 0; i < numIns; i++) {
+>, <Line: -            final Frame f = frames[i];
+>, <Line: -            if (f != null) { // reachable ?
+>, <Line: -                final AbstractInsnNode in = mn.instructions.get(i);
+>, <Line: -                if (in.getType() == AbstractInsnNode.LINE) {
+>, <Line: -                    final LineNumberNode lnn = (LineNumberNode) in;
+>, <Line: -                    currSourceLine = lnn.line;
+>, <Line: -                    if (startSourceLine == -1 || currSourceLine < startSourceLine)
+>, <Line: -                        startSourceLine = currSourceLine;
+>, <Line: -                    if (endSourceLine == -1 || currSourceLine > endSourceLine)
+>, <Line: -                        endSourceLine = currSourceLine;
+>, <Line: -                } else if (in.getType() == AbstractInsnNode.METHOD_INSN || in.getType() == AbstractInsnNode.INVOKE_DYNAMIC_INSN) {
+>, <Line: -                    if (isSuspendableCall(in)) {
+>, <Line: -                        if (count >= suspCallsIndexes.length)
+>, <Line: -                            suspCallsIndexes = Arrays.copyOf(suspCallsIndexes, suspCallsIndexes.length * 2);
+>, <Line: -                        if (count >= suspCallsSourceLines.length)
+>, <Line: -                            suspCallsSourceLines = Arrays.copyOf(suspCallsSourceLines, suspCallsSourceLines.length * 2);
+>, <Line: -                        suspCallsIndexes[count] = i;
+>, <Line: -                        suspCallsSourceLines[count] = currSourceLine;
+>, <Line: -                        count++;
+>, <Line: -        }
+>, <Line: -        if (count < suspCallsSourceLines.length)
+>, <Line: -            Arrays.copyOf(suspCallsSourceLines, count);
+>, <Line: -        return count < suspCallsIndexes.length ? Arrays.copyOf(suspCallsIndexes, count) : suspCallsIndexes;
+>, <Line: -                            int blockingId = isBlockingCall(min);
+>, <Line: -                            if (blockingId >= 0 && !isAllowedToBlock(className, mn.name)) {
+>, <Line: -                                int mask = 1 << blockingId;
+>, <Line: -                                if (!db.isAllowBlocking()) {
+>, <Line: -                                    throw new UnableToInstrumentException("blocking call to "
+>, <Line: -                                            + min.owner + "#" + min.name + min.desc, className, mn.name, mn.desc);
+>, <Line: -                                } else if ((warnedAboutBlocking & mask) == 0) {
+>, <Line: -                                    warnedAboutBlocking |= mask;
+>, <Line: -                                    db.log(LogLevel.WARNING, "Method %s#%s%s contains potentially blocking call to "
+>, <Line: -                                            + min.owner + "#" + min.name + min.desc, className, mn.name, mn.desc);
+>, <Line: -                                }
+>, <Line: -                            }
+>, <Line: -    public void accept(MethodVisitor mv, boolean hasAnnotation, int[] susCallsIndexes) {
+>, <Line: -        db.log(LogLevel.INFO, "Instrumenting method %s#%s%s", className, mn.name, mn.desc);
+>, <Line: -        // Called by InstrumentClass => we need at least to dump the @Instrumented annotation
+>, <Line: -        final boolean skip = skip(susCallsIndexes);
+>, <Line: -        emitInstrumentedAnn(mv, skip);
+>, <Line: -        if (skip) {
+>, <Line: -            db.log(LogLevel.INFO, "[OPTIMIZE] skipping instrumentation for method %s#%s%s", className, mn.name, mn.desc);
+>, <Line: -            mn.accept(mv);
+>, <Line: -        mv.visitTryCatchBlock(lMethodStart, lMethodEnd, lCatchSEE, EXCEPTION_NAME);
+>, <Line: -            if (EXCEPTION_NAME.equals(tcb.type) && !hasAnnotation) // we allow catch of SuspendExecution in method annotated with @Suspendable.
+>, <Line: -                    mv.visitTypeInsn(Opcodes.INSTANCEOF, EXCEPTION_NAME);
+>, <Line: -            mv.visitTypeInsn(Opcodes.INSTANCEOF, EXCEPTION_NAME);
+>, <Line: -    private boolean skip(int[] susCallsIndexes) {
+>, <Line: -        if (susCallsIndexes.length == 1) { // => Exactly one suspendable call
+>, <Line: -            boolean ret =
+>, <Line: -                !containsInvocations(susCallsIndexes, 0) &&
+>, <Line: -                !containsBackBranches(susCallsIndexes, 0) &&
+>, <Line: -                !containsBackBranchesAtOrBeforeStart(susCallsIndexes, 1) &&
+>, <Line: -                startsWithSuspCallButNotYield(susCallsIndexes, 1);
+>, <Line: -            return ret;
+>, <Line: -        } else
+>, <Line: -            return false;
+>, <Line: -    private boolean containsInvocations(int[] susCallsIndexes, int blockNum) {
+>, <Line: -    private boolean containsBackBranchesAtOrBeforeStart(int[] susCallsIndexes, int blockNum) {
+>, <Line: -    private boolean containsBackBranches(int[] susCallsIndexes, int blockNum) {
+>, <Line: -        final AnnotationVisitor linesAV = instrumentedAV.visitArray("suspendableCallsites");
+>, <Line: -        for(int i = 0; i < suspCallsSourceLines.length; i++)
+>, <Line: -            linesAV.visit("", suspCallsSourceLines[i]);
+>]

@@ -1,0 +1,10 @@
+[<Line: +    return new Adapter<>(sup);
+>, <Line: +  ModelSupplierScenGen<T> {
+>, <Line: +  ModelSupplierScenGen<RoadModel> {
+>, <Line: +              allowDiversion);
+>]
+[<Line: -    return new Adapter<T>(sup);
+>, <Line: -      ModelSupplierScenGen<T> {
+>, <Line: -      ModelSupplierScenGen<RoadModel> {
+>, <Line: -          allowDiversion);
+>]

@@ -1,0 +1,20 @@
+[<Line: +package prefs;
+>, <Line: +import org.apache.logging.log4j.LogManager;
+>, <Line: +import org.apache.logging.log4j.Logger;
+>, <Line: +import org.eclipse.egit.github.core.IRepositoryIdProvider;
+>, <Line: +import javax.crypto.BadPaddingException;
+>, <Line: +import javax.crypto.Cipher;
+>, <Line: +import javax.crypto.IllegalBlockSizeException;
+>, <Line: +import javax.crypto.NoSuchPaddingException;
+>, <Line: +import javax.crypto.spec.SecretKeySpec;
+>]
+[<Line: -package storage;
+>, <Line: -import javax.crypto.BadPaddingException;
+>, <Line: -import javax.crypto.Cipher;
+>, <Line: -import javax.crypto.IllegalBlockSizeException;
+>, <Line: -import javax.crypto.NoSuchPaddingException;
+>, <Line: -import javax.crypto.spec.SecretKeySpec;
+>, <Line: -import org.apache.logging.log4j.LogManager;
+>, <Line: -import org.apache.logging.log4j.Logger;
+>, <Line: -import org.eclipse.egit.github.core.IRepositoryIdProvider;
+>]

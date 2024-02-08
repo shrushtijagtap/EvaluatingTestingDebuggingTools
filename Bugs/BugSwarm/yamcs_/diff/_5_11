@@ -1,0 +1,29 @@
+[<Line: +package org.yamcs.archive;
+>, <Line: +import java.util.Collection;
+>, <Line: +import org.yamcs.yarch.Stream;
+>, <Line: +import org.yamcs.yarch.StreamSubscriber;
+>, <Line: +import org.yamcs.yarch.TableWriter;
+>, <Line: +import org.yamcs.yarch.YarchDatabase;
+>, <Line: +public class Utils {
+>, <Line: +    /**
+>, <Line: +     * close all table writers subscribed to any of the stream in the list
+>, <Line: +     * 
+>, <Line: +     * @param ydb
+>, <Line: +     * @param streamNames
+>, <Line: +     */
+>, <Line: +    static public void closeTableWriters(YarchDatabase ydb, Collection<String> streamNames) {
+>, <Line: +        for(String streamName: streamNames) {
+>, <Line: +            Stream s = ydb.getStream(streamName);
+>, <Line: +            if(s!=null) {
+>, <Line: +                for(StreamSubscriber ss:s.getSubscribers()) {
+>, <Line: +                    if(ss instanceof TableWriter) {
+>, <Line: +                        s.removeSubscriber(ss);
+>, <Line: +                        ((TableWriter)ss).close();
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

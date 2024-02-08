@@ -1,0 +1,4 @@
+[<Line: +        when(methodDescription.getActualName()).thenReturn(BAR);
+>]
+[<Line: -        when(methodDescription.getSourceCodeName()).thenReturn(BAR);
+>]

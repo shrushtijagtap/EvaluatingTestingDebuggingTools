@@ -1,0 +1,45 @@
+[<Line: +package com.artemis.injection;
+>, <Line: +import com.artemis.annotations.Wire;
+>, <Line: +import com.artemis.utils.reflect.Field;
+>, <Line: +/**
+>, <Line: + * Provides cached information about a class, limiting the need for reflection
+>, <Line: + * on repeated access. CachedClass is typically managed by {@link InjectionCache},
+>, <Line: + * and can be retrieved with {@link InjectionCache#getCachedClass(Class)}.
+>, <Line: + *
+>, <Line: + * @author Snorre E. Brekke
+>, <Line: + */
+>, <Line: +public class CachedClass {
+>, <Line: +    public CachedClass(Class<?> clazz) {
+>, <Line: +        this.clazz = clazz;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * The class that this CachedClass represents.
+>, <Line: +     */
+>, <Line: +    public Class<?> clazz;
+>, <Line: +    /**
+>, <Line: +     * All fields relevant for the class. If the {@see Wire} annotation has injectInherited
+>, <Line: +     * set to true, this array will contain ALL declared fields for this class and superclasses.
+>, <Line: +     * If injectInherited is false, only the declared fields for {@code clazz} will be cached here.
+>, <Line: +     */
+>, <Line: +    public Field[] allFields;
+>, <Line: +    /**
+>, <Line: +     * The {@link Wire} annotation for this class (at class level).
+>, <Line: +     * Only set if {@link #wireType} is set to {@link WireType#WIRE}.
+>, <Line: +     */
+>, <Line: +    public Wire wireAnnotation;
+>, <Line: +    /**
+>, <Line: +     * Cached value of {@link Wire#injectInherited()}
+>, <Line: +     */
+>, <Line: +    public boolean injectInherited;
+>, <Line: +    /**
+>, <Line: +     * Cached value of {@link Wire#failOnNull()}
+>, <Line: +     */
+>, <Line: +    public boolean failOnNull;
+>, <Line: +    /**
+>, <Line: +     * If the class is annotated with {@link Wire}, this will have the type {@link WireType#WIRE}, otherwise it will be
+>, <Line: +     * {@link WireType#IGNORED}.
+>, <Line: +     */
+>, <Line: +    public WireType wireType;
+>, <Line: +}
+>]
+[]

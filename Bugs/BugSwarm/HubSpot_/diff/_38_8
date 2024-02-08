@@ -1,0 +1,12 @@
+[<Line: +import com.hubspot.baragon.service.config.BaragonConfiguration;
+>, <Line: +  private final BaragonConfiguration configuration;
+>, <Line: +                      BaragonConfiguration configuration,
+>, <Line: +    this.configuration = configuration;
+>, <Line: +  public boolean invalidAgentCount(String loadBalancerGroup) {
+>, <Line: +    int agentCount = loadBalancerDatastore.getAgentMetadata(loadBalancerGroup).size();
+>, <Line: +    int targetCount = loadBalancerDatastore.getTargetCount(loadBalancerGroup).or(configuration.getDefaultTargetAgentCount());
+>, <Line: +    return (agentCount == 0 || (configuration.isEnforceTargetAgentCount() && agentCount < targetCount));
+>]
+[<Line: -  public boolean hasNoAgents(String loadBalancerGroup) {
+>, <Line: -    return loadBalancerDatastore.getAgentMetadata(loadBalancerGroup).isEmpty();
+>]

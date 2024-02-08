@@ -1,0 +1,11 @@
+[<Line: +    private static final String STRING_ONTOLOGY = "string:ontology";
+>, <Line: +        this(target.toString(), STRING_ONTOLOGY, f, null);
+>, <Line: +        this(string, STRING_ONTOLOGY, f, null);
+>, <Line: +        this(string, STRING_ONTOLOGY, null, null);
+>, <Line: +        super(documentIRI, () -> null, f, mime);
+>]
+[<Line: -        this(target.toString(), "string:ontology", f, null);
+>, <Line: -        this(string, "string:ontology", f, null);
+>, <Line: -        this(string, "string:ontology", null, null);
+>, <Line: -        super(documentIRI, f, mime);
+>]

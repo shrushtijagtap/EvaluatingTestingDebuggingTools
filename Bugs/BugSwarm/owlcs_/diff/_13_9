@@ -1,0 +1,5 @@
+[<Line: +        super(documentIRI, () -> new XZInputStream(new FileInputStream(in)), format, mime);
+>]
+[<Line: -        super(documentIRI, format, mime);
+>, <Line: -        inputStream = () -> new XZInputStream(new FileInputStream(in));
+>]

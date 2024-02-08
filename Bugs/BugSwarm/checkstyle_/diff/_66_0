@@ -1,0 +1,57 @@
+[<Line: +          <br/>
+>, <Line: +          The NPATH metric was designed base on Cyclomatic complexity to
+>, <Line: +          avoid problem of Cyclomatic complexity metric like nesting level within a function.
+>, <Line: +        </p>
+>, <Line: +        <p>
+>, <Line: +          Metic wsa described at <a href="http://dl.acm.org/citation.cfm?id=42379">"NPATH: a measure of execution pathcomplexity and its applications"</a>. If you need detaled description of algorithm, please read that article,
+>, <Line: +          it is well written and have number of examples and details.
+>, <Line: +        <p>Here is some quotes:</p>
+>, <Line: +        <blockquote>An NPATH threshold value of 200 has been established
+>, <Line: +          for a function. The value 200 is based on studies done
+>, <Line: +          at AT&amp;T Bell Laboratories [1988 year].
+>, <Line: +        </blockquote>
+>, <Line: +        <blockquote>
+>, <Line: +        Some of the most effective methods of reducing the NPATH value include<br/>
+>, <Line: +        - distributing functionality,<br/>
+>, <Line: +        - implementing multiple if statements as a switch statement<br/>
+>, <Line: +        - creating a separate function for logical expressions with a high count of and (&amp;&amp;) and or (||) operators.
+>, <Line: +        </blockquote>
+>, <Line: +        <blockquote>
+>, <Line: +        Although strategies to reduce the NPATH complexity
+>, <Line: +        of functions are important, care must be taken not to
+>, <Line: +        distort the logical clarity of the software by applying a
+>, <Line: +        strategy to reduce the complexity of functions. That is,
+>, <Line: +        there is a point of diminishing return beyond which a
+>, <Line: +        further attempt at reduction of complexity distorts the
+>, <Line: +        logical clarity of the system structure.
+>, <Line: +        </blockquote>
+>, <Line: +        <table>
+>, <Line: +        <thead><tr><th>Structure</th><th> Complexity expression </th></tr></thead>
+>, <Line: +        <tr><td>if</td><td>NP((if-range))+NP((expr))+1</td></tr>
+>, <Line: +        <tr><td>if-else</td><td>NP((if-range))+NP((else-range))+NP((expr))</td></tr>
+>, <Line: +        <tr><td>while</td><td>NP((while-range))+NP((expr))+1</td></tr>
+>, <Line: +        <tr><td>do while</td><td>NP((do-range))+NP((expr))+1</td></tr>
+>, <Line: +        <tr><td>for</td><td>NP((for-range))+NP((exprl))+NP((expr2))+NP((expr3))+1</td></tr>
+>, <Line: +        <tr><td>switch</td><td>NP((expr))+ S(i=1:i=n)NP((case-range(i)))+ NP((default-range))</td></tr>
+>, <Line: +        <tr><td>?</td><td>NP((exprl))+NP((expr2))+NP((expr3))+2</td></tr>
+>, <Line: +        <tr><td>goto label</td><td>1</td></tr>
+>, <Line: +        <tr><td>break</td><td>1</td></tr>
+>, <Line: +        <tr><td>Expressions</td><td>Number of &amp;&amp; and || operators in expression</td></tr>
+>, <Line: +        <tr><td>continue</td><td>1</td></tr>
+>, <Line: +        <tr><td>return</td><td>1</td></tr>
+>, <Line: +        <tr><td>sequential</td><td>1</td></tr>
+>, <Line: +        <tr><td>Function call</td><td>1</td></tr>
+>, <Line: +        <tr><td>C function</td><td>P(i=1:i=N) NP(Statement(i))</td></tr>
+>, <Line: +        </table>
+>, <Line: +          <b>Rationale:</b> Nejmeh says that his group had an informal NPATH
+>, <Line: +          <b>Please do not be fanatic with limit 200</b>
+>, <Line: +          - choose number that suites your project style. Limit 200 is
+>, <Line: +          empirical number base on some sources of at AT&amp;T Bell Laboratories
+>, <Line: +          of 1988 year.
+>, <Line: +          To configure the check with a threshold of 1000:
+>, <Line: +    &lt;property name=&quot;max&quot; value=&quot;1000&quot;/&gt;
+>]
+[<Line: -          Rationale: Nejmeh says that his group had an informal NPATH
+>, <Line: -          To configure the check with a threshold of 20:
+>, <Line: -    &lt;property name=&quot;max&quot; value=&quot;20&quot;/&gt;
+>]

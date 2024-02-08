@@ -1,0 +1,410 @@
+[]
+[<Line: -package wyil.builders;
+>, <Line: -import static wyil.util.ErrorMessages.errorMessage;
+>, <Line: -import static wyil.util.ErrorMessages.internalFailure;
+>, <Line: -import static wyil.util.ErrorMessages.syntaxError;
+>, <Line: -import java.math.BigInteger;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Collection;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.Iterator;
+>, <Line: -import wybs.lang.Builder;
+>, <Line: -import wycc.lang.Attribute;
+>, <Line: -import wycc.lang.NameID;
+>, <Line: -import wycc.lang.SyntaxError;
+>, <Line: -import wycc.lang.SyntaxError.InternalFailure;
+>, <Line: -import wycs.core.Value;
+>, <Line: -import wycs.syntax.Expr;
+>, <Line: -import wycs.syntax.SyntacticType;
+>, <Line: -import wyfs.lang.Path;
+>, <Line: -import wyfs.util.Trie;
+>, <Line: -import wyil.lang.Bytecode;
+>, <Line: -import wyil.lang.BytecodeForest;
+>, <Line: -import wyil.lang.Type;
+>, <Line: -import wyil.lang.WyilFile;
+>, <Line: -import wyil.util.ErrorMessages;
+>, <Line: -public class VcExprGenerator {
+>, <Line: -	private final String filename;
+>, <Line: -	private final Builder builder;
+>, <Line: -	private final VcUtils utils;
+>, <Line: -	public VcExprGenerator(String filename, Builder builder, VcUtils utils) {
+>, <Line: -		this.filename = filename;
+>, <Line: -		this.builder = builder;
+>, <Line: -		this.utils = utils;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Dispatch transform over unit bytecodes. Each unit bytecode is guaranteed
+>, <Line: -	 * to continue afterwards, and not to fork any new branches.
+>, <Line: -	 * 
+>, <Line: -	 * @param code
+>, <Line: -	 *            The bytecode being transformed over.
+>, <Line: -	 * @param block
+>, <Line: -	 *            The root block being iterated over.
+>, <Line: -	 * @param branch
+>, <Line: -	 *            The branch on entry to the bytecode.
+>, <Line: -	 */
+>, <Line: -	public void transform(Bytecode code, BytecodeForest forest, VcBranch branch) {
+>, <Line: -		try {
+>, <Line: -			if (code instanceof Bytecode.Operator) {
+>, <Line: -				transform((Bytecode.Operator) code, forest, branch);				
+>, <Line: -			} else if (code instanceof Bytecode.Convert) {
+>, <Line: -				transform((Bytecode.Convert) code, forest, branch);
+>, <Line: -			} else if (code instanceof Bytecode.Const) {
+>, <Line: -				transform((Bytecode.Const) code, forest, branch);
+>, <Line: -			} else if (code instanceof Bytecode.Debug) {
+>, <Line: -				// skip
+>, <Line: -			} else if (code instanceof Bytecode.FieldLoad) {
+>, <Line: -				transform((Bytecode.FieldLoad) code, forest, branch);
+>, <Line: -			} else if (code instanceof Bytecode.IndirectInvoke) {
+>, <Line: -				transform((Bytecode.IndirectInvoke) code, forest, branch);
+>, <Line: -			} else if (code instanceof Bytecode.Invoke) {
+>, <Line: -				transform((Bytecode.Invoke) code, forest, branch);
+>, <Line: -			} else if (code instanceof Bytecode.Label) {
+>, <Line: -				// skip
+>, <Line: -			} else if (code instanceof Bytecode.Update) {
+>, <Line: -				transform((Bytecode.Update) code, forest, branch);
+>, <Line: -			} else if (code instanceof Bytecode.Lambda) {
+>, <Line: -				transform((Bytecode.Lambda) code, forest, branch);
+>, <Line: -			} else {
+>, <Line: -				internalFailure("unknown: " + code.getClass().getName(), filename,
+>, <Line: -						forest.get(branch.pc()).attributes());
+>, <Line: -			}
+>, <Line: -		} catch (InternalFailure e) {
+>, <Line: -			throw e;
+>, <Line: -		} catch (SyntaxError e) {
+>, <Line: -			throw e;
+>, <Line: -		} catch (Throwable e) {
+>, <Line: -			internalFailure(e.getMessage(), filename, e, forest.get(branch.pc()).attributes());
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Maps unary bytecodes into expression opcodes.
+>, <Line: -	 */
+>, <Line: -	private static Expr.Unary.Op[] unaryOperatorMap = {
+>, <Line: -			Expr.Unary.Op.NEG, // neg
+>, <Line: -			Expr.Unary.Op.NOT, // not
+>, <Line: -			null, // invert
+>, <Line: -			null, // deref
+>, <Line: -			Expr.Unary.Op.LENGTHOF
+>, <Line: -	};
+>, <Line: -	/**
+>, <Line: -	 * Maps binary bytecodes into expression opcodes.
+>, <Line: -	 */
+>, <Line: -	private static Expr.Binary.Op[] binaryOperatorMap = {
+>, <Line: -			null, // neg
+>, <Line: -			null, // not
+>, <Line: -			null, // invert
+>, <Line: -			null, // deref
+>, <Line: -			null, // lengthof
+>, <Line: -			Expr.Binary.Op.ADD,
+>, <Line: -			Expr.Binary.Op.SUB, 
+>, <Line: -			Expr.Binary.Op.MUL, 
+>, <Line: -			Expr.Binary.Op.DIV,
+>, <Line: -			Expr.Binary.Op.REM,
+>, <Line: -			Expr.Binary.Op.EQ,
+>, <Line: -			Expr.Binary.Op.NEQ,
+>, <Line: -			Expr.Binary.Op.LT,
+>, <Line: -			Expr.Binary.Op.LTEQ,
+>, <Line: -			Expr.Binary.Op.GT,
+>, <Line: -			Expr.Binary.Op.GTEQ,
+>, <Line: -			null, // bitwise or
+>, <Line: -			null, // bitwise xor
+>, <Line: -			null, // bitwise and
+>, <Line: -			null, // left shift
+>, <Line: -			null // right shift
+>, <Line: -	};
+>, <Line: -	protected void transform(Bytecode.Operator code, BytecodeForest forest, VcBranch branch) {
+>, <Line: -		switch(code.kind()) {
+>, <Line: -		case ASSIGN:
+>, <Line: -			for (int i = 0; i != code.operands().length; ++i) {
+>, <Line: -				branch.write(code.target(i), branch.read(code.operand(i)));
+>, <Line: -			}
+>, <Line: -			break;
+>, <Line: -		case NOT:
+>, <Line: -		case NEG:
+>, <Line: -		case ARRAYLENGTH: {
+>, <Line: -			Bytecode.Operator bc = (Bytecode.Operator) code;
+>, <Line: -			transformUnary(unaryOperatorMap[code.kind().ordinal()], bc, branch, forest);
+>, <Line: -			break;
+>, <Line: -		}
+>, <Line: -		case BITWISEINVERT: 
+>, <Line: -		case DEREFERENCE: {
+>, <Line: -			branch.havoc(code.target(0));
+>, <Line: -			break;
+>, <Line: -		}
+>, <Line: -		case ADD:
+>, <Line: -		case SUB:
+>, <Line: -		case MUL:
+>, <Line: -		case DIV:
+>, <Line: -		case REM:
+>, <Line: -		case EQ:
+>, <Line: -		case NEQ:
+>, <Line: -		case LT:
+>, <Line: -		case LTEQ:
+>, <Line: -		case GT:
+>, <Line: -		case GTEQ: {
+>, <Line: -			transformBinary(binaryOperatorMap[code.kind().ordinal()], code, branch, forest);
+>, <Line: -			break;
+>, <Line: -		}
+>, <Line: -		case BITWISEAND:
+>, <Line: -		case BITWISEOR:
+>, <Line: -		case BITWISEXOR: 
+>, <Line: -		case LEFTSHIFT:
+>, <Line: -		case RIGHTSHIFT: {
+>, <Line: -			branch.havoc(code.target(0));
+>, <Line: -			break;
+>, <Line: -		}
+>, <Line: -		case ARRAYINDEX: {
+>, <Line: -			Expr src = branch.read(code.operand(0));
+>, <Line: -			Expr idx = branch.read(code.operand(1));
+>, <Line: -			branch.write(code.target(0),
+>, <Line: -					new Expr.IndexOf(src, idx, VcUtils.toWycsAttributes(forest.get(branch.pc()).attributes())));
+>, <Line: -			break;
+>, <Line: -		}
+>, <Line: -		case ARRAYGENERATOR:
+>, <Line: -			transformArrayGenerator(code,forest,branch);
+>, <Line: -			break;
+>, <Line: -		case ARRAYCONSTRUCTOR:
+>, <Line: -			transformNary(Expr.Nary.Op.ARRAY,code,branch,forest);
+>, <Line: -			break;
+>, <Line: -		case RECORDCONSTRUCTOR:
+>, <Line: -			transformNary(Expr.Nary.Op.TUPLE,code,branch,forest);
+>, <Line: -			break;
+>, <Line: -		case NEW:
+>, <Line: -			branch.havoc(code.target(0));
+>, <Line: -			break;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	protected void transform(Bytecode.Convert code, BytecodeForest forest, VcBranch branch) {
+>, <Line: -		Collection<Attribute> attributes = VcUtils.toWycsAttributes(forest.get(branch.pc()).attributes());
+>, <Line: -		Expr result = branch.read(code.operand(0));
+>, <Line: -		SyntacticType type = utils.convert(code.result(), forest.get(branch.pc()).attributes());
+>, <Line: -		branch.write(code.target(0), new Expr.Cast(type, result, attributes));
+>, <Line: -	}
+>, <Line: -	protected void transform(Bytecode.Const code, BytecodeForest forest, VcBranch branch) {
+>, <Line: -		Value val = utils.convert(code.constant(), forest, branch);
+>, <Line: -		branch.write(code.target(), new Expr.Constant(val, VcUtils.toWycsAttributes(forest.get(branch.pc()).attributes())));
+>, <Line: -	}
+>, <Line: -	protected void transform(Bytecode.Debug code, BytecodeForest forest,
+>, <Line: -			VcBranch branch) {
+>, <Line: -		// do nout
+>, <Line: -	}
+>, <Line: -	protected void transform(Bytecode.FieldLoad code, BytecodeForest forest, VcBranch branch) {
+>, <Line: -		Type.EffectiveRecord er = (Type.EffectiveRecord) code.type(0); 
+>, <Line: -		ArrayList<String> fields = new ArrayList<String>(er.fields().keySet());
+>, <Line: -		Collections.sort(fields);
+>, <Line: -		Expr src = branch.read(code.operand(0));
+>, <Line: -		Expr index = new Expr.Constant(Value.Integer(BigInteger.valueOf(fields.indexOf(code.fieldName()))));
+>, <Line: -		Expr result = new Expr.IndexOf(src, index, VcUtils.toWycsAttributes(forest.get(branch.pc()).attributes()));
+>, <Line: -		branch.write(code.target(0), result);
+>, <Line: -	}
+>, <Line: -	protected void transform(Bytecode.IndirectInvoke code,
+>, <Line: -			BytecodeForest forest, VcBranch branch) {
+>, <Line: -		for(int target : code.targets()) {
+>, <Line: -			branch.havoc(target);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	protected void transform(Bytecode.Invoke code, BytecodeForest forest,
+>, <Line: -			VcBranch branch) throws Exception {
+>, <Line: -		Collection<wyil.lang.Attribute> attributes =  forest.get(branch.pc()).attributes();
+>, <Line: -		Collection<Attribute> wyccAttributes = VcUtils.toWycsAttributes(attributes);
+>, <Line: -		int[] code_operands = code.operands();
+>, <Line: -		int[] targets = code.targets();
+>, <Line: -		if (targets.length > 0) {
+>, <Line: -			// Need to assume the post-condition holds.
+>, <Line: -			Expr[] operands = new Expr[code_operands.length];
+>, <Line: -			for (int i = 0; i != code_operands.length; ++i) {
+>, <Line: -				operands[i] = branch.read(code_operands[i]);
+>, <Line: -			}
+>, <Line: -			Expr argument = operands.length == 1 ? operands[0] : new Expr.Nary(
+>, <Line: -					Expr.Nary.Op.TUPLE, operands,wyccAttributes);
+>, <Line: -			branch.write(code.targets()[0], new Expr.Invoke(code.name().name(),
+>, <Line: -					code.name().module(), Collections.EMPTY_LIST, argument,
+>, <Line: -					wyccAttributes));
+>, <Line: -			// This is a potential fix for #488, although it doesn't work
+>, <Line: -			// FIXME: needs to updated to handle multiple returns as well
+>, <Line: -			if (utils.containsNominal(code.type(0).returns().get(0), attributes)) {
+>, <Line: -				// This is required to handle the implicit constraints implied
+>, <Line: -				// by a nominal type. See #488.
+>, <Line: -				Expr nominalTest = new Expr.Is(branch.read(code.targets()[0]),
+>, <Line: -						utils.convert(code.type(0).returns().get(0), attributes));
+>, <Line: -				branch.assume(nominalTest);
+>, <Line: -			}
+>, <Line: -			// Here, we must find the name of the corresponding postcondition so
+>, <Line: -			// that we can assume it.
+>, <Line: -			int numPostconditions = countPostconditions(code.name(), code.type(0), forest, branch);
+>, <Line: -			if (numPostconditions > 0) {
+>, <Line: -				// To assume the post-condition holds after the method, we
+>, <Line: -				// simply called the corresponding post-condition macros.
+>, <Line: -				Expr[] arguments = new Expr[operands.length + targets.length];
+>, <Line: -				System.arraycopy(operands, 0, arguments, 0, operands.length);
+>, <Line: -				for(int i=0;i!=targets.length;++i) {
+>, <Line: -					arguments[operands.length+i] = branch.read(targets[i]);						
+>, <Line: -				}				
+>, <Line: -				String prefix = code.name().name() + "_ensures_";
+>, <Line: -				for (int i = 0; i != numPostconditions; ++i) {
+>, <Line: -					Expr.Invoke macro = new Expr.Invoke(prefix + i,
+>, <Line: -							code.name().module(), Collections.EMPTY_LIST,
+>, <Line: -							new Expr.Nary(Expr.Nary.Op.TUPLE, arguments));
+>, <Line: -					branch.assume(macro);
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	protected void transformArrayGenerator(Bytecode.Operator code, BytecodeForest forest, VcBranch branch) {
+>, <Line: -		Type elementType = ((Type.Array) code.type(0)).element();
+>, <Line: -		Collection<wyil.lang.Attribute> wyilAttributes = forest.get(branch.pc()).attributes();
+>, <Line: -		Collection<Attribute> attributes = VcUtils.toWycsAttributes(wyilAttributes);
+>, <Line: -		Expr element = branch.read(code.operand(0));
+>, <Line: -		Expr count = branch.read(code.operand(1));
+>, <Line: -		branch.havoc(code.target(0));
+>, <Line: -		Expr arg = new Expr.Nary(Expr.Nary.Op.TUPLE, new Expr[] { branch.read(code.target(0)), element, count },
+>, <Line: -				attributes);
+>, <Line: -		ArrayList<SyntacticType> generics = new ArrayList<SyntacticType>();
+>, <Line: -		generics.add(utils.convert(elementType, wyilAttributes));
+>, <Line: -		Expr.Invoke macro = new Expr.Invoke("generate", Trie.fromString("wycs/core/Array"), generics, arg);
+>, <Line: -		branch.assume(macro);
+>, <Line: -	}
+>, <Line: -	protected void transform(Bytecode.Lambda code, BytecodeForest forest, VcBranch branch) {
+>, <Line: -		// TODO: implement lambdas somehow?
+>, <Line: -		branch.havoc(code.target(0));
+>, <Line: -	}
+>, <Line: -	protected void transform(Bytecode.Update code, BytecodeForest forest, VcBranch branch) {
+>, <Line: -		Expr result = branch.read(code.result());
+>, <Line: -		Expr oldSource = branch.read(code.target(0));
+>, <Line: -		Expr newSource = branch.havoc(code.target(0));
+>, <Line: -		updateHelper(code.iterator(), oldSource, newSource, result, branch, forest);
+>, <Line: -	}
+>, <Line: -	protected void updateHelper(Iterator<Bytecode.LVal> iter, Expr oldSource, Expr newSource, Expr result, VcBranch branch,
+>, <Line: -			BytecodeForest forest) {
+>, <Line: -		Collection<Attribute> attributes = VcUtils.toWycsAttributes(forest.get(branch.pc()).attributes());
+>, <Line: -		if (!iter.hasNext()) {
+>, <Line: -			branch.assume(new Expr.Binary(Expr.Binary.Op.EQ, newSource, result, attributes));
+>, <Line: -		} else {
+>, <Line: -			Bytecode.LVal lv = iter.next();
+>, <Line: -			if (lv instanceof Bytecode.RecordLVal) {
+>, <Line: -				Bytecode.RecordLVal rlv = (Bytecode.RecordLVal) lv;
+>, <Line: -				ArrayList<String> fields = new ArrayList<String>(rlv.rawType().fields().keySet());
+>, <Line: -				Collections.sort(fields);
+>, <Line: -				int index = fields.indexOf(rlv.field);
+>, <Line: -				for (int i = 0; i != fields.size(); ++i) {
+>, <Line: -					Expr j = new Expr.Constant(Value.Integer(BigInteger.valueOf(i)));
+>, <Line: -					Expr oldS = new Expr.IndexOf(oldSource, j, attributes);
+>, <Line: -					Expr newS = new Expr.IndexOf(newSource, j, attributes);
+>, <Line: -					if (i != index) {
+>, <Line: -						branch.assume(new Expr.Binary(Expr.Binary.Op.EQ, oldS, newS, attributes));
+>, <Line: -					} else {
+>, <Line: -						updateHelper(iter, oldS, newS, result, branch, forest);
+>, <Line: -					}
+>, <Line: -				}
+>, <Line: -			} else if (lv instanceof Bytecode.ArrayLVal) {
+>, <Line: -				Bytecode.ArrayLVal rlv = (Bytecode.ArrayLVal) lv;
+>, <Line: -				Expr index = branch.read(rlv.indexOperand);
+>, <Line: -				Expr oldS = new Expr.IndexOf(oldSource, index, attributes);
+>, <Line: -				Expr newS = new Expr.IndexOf(newSource, index, attributes);
+>, <Line: -				updateHelper(iter, oldS, newS, result, branch, forest);
+>, <Line: -				Expr arg = new Expr.Nary(Expr.Nary.Op.TUPLE, new Expr[] { oldSource, newSource, index }, attributes);
+>, <Line: -				ArrayList<SyntacticType> generics = new ArrayList<SyntacticType>();
+>, <Line: -				generics.add(utils.convert(rlv.rawType().element(),Collections.EMPTY_LIST));
+>, <Line: -				Expr.Invoke macro = new Expr.Invoke("update", Trie.fromString("wycs/core/Array"), generics, arg);
+>, <Line: -				branch.assume(macro);
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Transform an assignable unary bytecode using a given target operator.
+>, <Line: -	 * This must read the operand and then create the appropriate target
+>, <Line: -	 * expression. Finally, the result of the bytecode must be written back to
+>, <Line: -	 * the enclosing branch.
+>, <Line: -	 * 
+>, <Line: -	 * @param operator
+>, <Line: -	 *            --- The target operator
+>, <Line: -	 * @param code
+>, <Line: -	 *            --- The bytecode being translated
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- The enclosing branch
+>, <Line: -	 */
+>, <Line: -	protected void transformUnary(Expr.Unary.Op operator, Bytecode code, VcBranch branch,
+>, <Line: -			BytecodeForest forest) {
+>, <Line: -		Expr lhs = branch.read(code.operand(0));
+>, <Line: -		branch.write(code.target(0),
+>, <Line: -				new Expr.Unary(operator, lhs, VcUtils.toWycsAttributes(forest.get(branch.pc()).attributes())));
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Transform an assignable binary bytecode using a given target operator.
+>, <Line: -	 * This must read both operands and then create the appropriate target
+>, <Line: -	 * expression. Finally, the result of the bytecode must be written back to
+>, <Line: -	 * the enclosing branch.
+>, <Line: -	 * 
+>, <Line: -	 * @param operator
+>, <Line: -	 *            --- The target operator
+>, <Line: -	 * @param code
+>, <Line: -	 *            --- The bytecode being translated
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- The enclosing branch
+>, <Line: -	 */
+>, <Line: -	protected void transformBinary(Expr.Binary.Op operator, Bytecode code, VcBranch branch,
+>, <Line: -			BytecodeForest forest) {
+>, <Line: -		Expr lhs = branch.read(code.operand(0));
+>, <Line: -		Expr rhs = branch.read(code.operand(1));
+>, <Line: -		if (operator != null) {
+>, <Line: -			branch.write(code.target(0),
+>, <Line: -					new Expr.Binary(operator, lhs, rhs, VcUtils.toWycsAttributes(forest.get(branch.pc()).attributes())));
+>, <Line: -		} else {
+>, <Line: -			// In this case, we have a binary operator which we don't know how
+>, <Line: -			// to translate into WyCS. Therefore, we need to invalidate the
+>, <Line: -			// target register to signal this.
+>, <Line: -			branch.havoc(code.target(0));
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Transform an assignable nary bytecode using a given target operator. This
+>, <Line: -	 * must read all operands and then create the appropriate target expression.
+>, <Line: -	 * Finally, the result of the bytecode must be written back to the enclosing
+>, <Line: -	 * branch.
+>, <Line: -	 * 
+>, <Line: -	 * @param operator
+>, <Line: -	 *            --- The target operator
+>, <Line: -	 * @param code
+>, <Line: -	 *            --- The bytecode being translated
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- The enclosing branch
+>, <Line: -	 */
+>, <Line: -	protected void transformNary(Expr.Nary.Op operator, Bytecode code, VcBranch branch,
+>, <Line: -			BytecodeForest forest) {
+>, <Line: -		int[] code_operands = code.operands();
+>, <Line: -		Expr[] vals = new Expr[code_operands.length];
+>, <Line: -		for (int i = 0; i != vals.length; ++i) {
+>, <Line: -			vals[i] = branch.read(code_operands[i]);
+>, <Line: -		}
+>, <Line: -		branch.write(code.target(0), new Expr.Nary(operator, vals, VcUtils.toWycsAttributes(forest.get(branch.pc()).attributes())));
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Find the postcondition associated with a given function or method. This
+>, <Line: -	 * maybe contained in the same file, or in a different file. This may
+>, <Line: -	 * require loading that file in memory to access this information.
+>, <Line: -	 * 
+>, <Line: -	 * @param name
+>, <Line: -	 *            --- Fully qualified name of function
+>, <Line: -	 * @param fun
+>, <Line: -	 *            --- Type of fucntion.
+>, <Line: -	 * @param block
+>, <Line: -	 *            --- Enclosing block (for debugging purposes).
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- Enclosing branch (for debugging purposes).
+>, <Line: -	 * @return
+>, <Line: -	 * @throws Exception
+>, <Line: -	 */
+>, <Line: -	private int countPostconditions(NameID name, Type.FunctionOrMethod fun,
+>, <Line: -			BytecodeForest forest, VcBranch branch) throws Exception {
+>, <Line: -		Path.Entry<WyilFile> e = builder.project().get(name.module(), WyilFile.ContentType);
+>, <Line: -		if (e == null) {
+>, <Line: -			syntaxError(errorMessage(ErrorMessages.RESOLUTION_ERROR, name.module().toString()), filename,
+>, <Line: -					forest.get(branch.pc()).attributes());
+>, <Line: -		}
+>, <Line: -		WyilFile m = e.read();
+>, <Line: -		WyilFile.FunctionOrMethod method = m.functionOrMethod(name.name(), fun);
+>, <Line: -		return method.postconditions().length;
+>, <Line: -	}
+>, <Line: -}
+>]

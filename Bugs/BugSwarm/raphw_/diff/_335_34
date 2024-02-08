@@ -1,0 +1,282 @@
+[<Line: +package net.bytebuddy.utility;
+>, <Line: +import net.bytebuddy.description.NamedElement;
+>, <Line: +import java.lang.reflect.InvocationTargetException;
+>, <Line: +import java.lang.reflect.Method;
+>, <Line: +import java.security.AccessControlContext;
+>, <Line: +import java.security.AccessController;
+>, <Line: +import java.security.PrivilegedAction;
+>, <Line: +/**
+>, <Line: + * Type-safe representation of a {@code java.lang.reflect.Module}. On platforms that do not support the module API, modules are represented by {@code null}.
+>, <Line: + */
+>, <Line: +public class JavaModule implements NamedElement.WithOptionalName, PrivilegedAction<ClassLoader> {
+>, <Line: +    /**
+>, <Line: +     * Canonical representation of a Java module on a JVM that does not support the module API.
+>, <Line: +     */
+>, <Line: +    public static final JavaModule UNSUPPORTED = null;
+>, <Line: +    /**
+>, <Line: +     * The dispatcher to use for accessing Java modules, if available.
+>, <Line: +     */
+>, <Line: +    private static final Dispatcher DISPATCHER;
+>, <Line: +    /*
+>, <Line: +     * Extracts the dispatcher for Java modules that is supported by the current JVM.
+>, <Line: +     */
+>, <Line: +    static {
+>, <Line: +        Dispatcher dispatcher;
+>, <Line: +        try {
+>, <Line: +            Class<?> module = Class.forName("java.lang.reflect.Module");
+>, <Line: +            dispatcher = new Dispatcher.Enabled(Class.class.getDeclaredMethod("getModule"),
+>, <Line: +                    module.getDeclaredMethod("getClassLoader"),
+>, <Line: +                    module.getDeclaredMethod("isNamed"),
+>, <Line: +                    module.getDeclaredMethod("getName"));
+>, <Line: +        } catch (RuntimeException exception) {
+>, <Line: +            throw exception;
+>, <Line: +        } catch (Exception ignored) {
+>, <Line: +            dispatcher = Dispatcher.Disabled.INSTANCE;
+>, <Line: +        }
+>, <Line: +        DISPATCHER = dispatcher;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * The {@code java.lang.reflect.Module} instance this wrapper represents.
+>, <Line: +     */
+>, <Line: +    private final Object module;
+>, <Line: +    /**
+>, <Line: +     * Creates a new Java module representation.
+>, <Line: +     *
+>, <Line: +     * @param module The {@code java.lang.reflect.Module} instance this wrapper represents.
+>, <Line: +     */
+>, <Line: +    protected JavaModule(Object module) {
+>, <Line: +        this.module = module;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Returns a representation of the supplied type's {@code java.lang.reflect.Module} or {@code null} if the current VM does not support modules.
+>, <Line: +     *
+>, <Line: +     * @param type The type for which to describe the module.
+>, <Line: +     * @return A representation of the type's module or {@code null} if the current VM does not support modules.
+>, <Line: +     */
+>, <Line: +    public static JavaModule ofType(Class<?> type) {
+>, <Line: +        return DISPATCHER.moduleOf(type);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Represents the supplied {@code java.lang.reflect.Module} as an instance of this class and validates that the
+>, <Line: +     * supplied instance really represents a Java {@code Module}.
+>, <Line: +     *
+>, <Line: +     * @param module The module to represent.
+>, <Line: +     * @return A representation of the supplied Java module.
+>, <Line: +     */
+>, <Line: +    public static JavaModule of(Object module) {
+>, <Line: +        if (!JavaType.MODULE.getTypeStub().isInstance(module)) {
+>, <Line: +            throw new IllegalArgumentException("Not a Java module: " + module);
+>, <Line: +        }
+>, <Line: +        return new JavaModule(module);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public boolean isNamed() {
+>, <Line: +        return DISPATCHER.isNamed(module);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String getActualName() {
+>, <Line: +        return DISPATCHER.getName(module);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Returns the class loader of this module.
+>, <Line: +     *
+>, <Line: +     * @param accessControlContext The access control context to use for using extracting the class loader.
+>, <Line: +     * @return The class loader of the represented module.
+>, <Line: +     */
+>, <Line: +    public ClassLoader getClassLoader(AccessControlContext accessControlContext) {
+>, <Line: +        return AccessController.doPrivileged(this, accessControlContext);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Unwraps this instance to a {@code java.lang.reflect.Module}.
+>, <Line: +     *
+>, <Line: +     * @return The represented {@code java.lang.reflect.Module}.
+>, <Line: +     */
+>, <Line: +    public Object unwrap() {
+>, <Line: +        return module;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public boolean equals(Object object) {
+>, <Line: +        if (this == object) return true;
+>, <Line: +        if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +        JavaModule that = (JavaModule) object;
+>, <Line: +        return module.equals(that.module);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int hashCode() {
+>, <Line: +        return module.hashCode();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return module.toString();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public ClassLoader run() {
+>, <Line: +        return DISPATCHER.getClassLoader(module);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * A dispatcher for accessing the {@code java.lang.reflect.Module} API if it is available on the current VM.
+>, <Line: +     */
+>, <Line: +    protected interface Dispatcher {
+>, <Line: +        /**
+>, <Line: +         * Extracts the Java {@code Module} for the provided class or returns {@code null} if the current VM does not support modules.
+>, <Line: +         *
+>, <Line: +         * @param type The type for which to extract the module.
+>, <Line: +         * @return The class's {@code Module} or {@code null} if the current VM does not support modules.
+>, <Line: +         */
+>, <Line: +        JavaModule moduleOf(Class<?> type);
+>, <Line: +        /**
+>, <Line: +         * Returns {@code true} if the supplied module is named.
+>, <Line: +         *
+>, <Line: +         * @param module The {@code java.lang.reflect.Module} to check for the existence of a name.
+>, <Line: +         * @return {@code true} if the supplied module is named.
+>, <Line: +         */
+>, <Line: +        boolean isNamed(Object module);
+>, <Line: +        /**
+>, <Line: +         * Returns the module's name.
+>, <Line: +         *
+>, <Line: +         * @param module The {@code java.lang.reflect.Module} to check for its name.
+>, <Line: +         * @return The module's (implicit or explicit) name.
+>, <Line: +         */
+>, <Line: +        String getName(Object module);
+>, <Line: +        /**
+>, <Line: +         * Returns the module's class loader.
+>, <Line: +         *
+>, <Line: +         * @param module The {@code java.lang.reflect.Module}
+>, <Line: +         * @return The module's class loader.
+>, <Line: +         */
+>, <Line: +        ClassLoader getClassLoader(Object module);
+>, <Line: +        /**
+>, <Line: +         * A dispatcher for a VM that does support the {@code java.lang.reflect.Module} API.
+>, <Line: +         */
+>, <Line: +        class Enabled implements Dispatcher {
+>, <Line: +            /**
+>, <Line: +             * The {@code java.lang.Class#getModule()} method.
+>, <Line: +             */
+>, <Line: +            private final Method getModule;
+>, <Line: +            /**
+>, <Line: +             * The {@code java.lang.reflect.Module#getClassLoader()} method.
+>, <Line: +             */
+>, <Line: +            private final Method getClassLoader;
+>, <Line: +            /**
+>, <Line: +             * The {@code java.lang.reflect.Module#isNamed()} method.
+>, <Line: +             */
+>, <Line: +            private final Method isNamed;
+>, <Line: +            /**
+>, <Line: +             * The {@code java.lang.reflect.Module#getName()} method.
+>, <Line: +             */
+>, <Line: +            private final Method getName;
+>, <Line: +            /**
+>, <Line: +             * Creates a new enabled dispatcher.
+>, <Line: +             *
+>, <Line: +             * @param getModule      The {@code java.lang.Class#getModule()} method.
+>, <Line: +             * @param getClassLoader The {@code java.lang.reflect.Module#getClassLoader()} method.
+>, <Line: +             * @param isNamed        The {@code java.lang.reflect.Module#isNamed()} method.
+>, <Line: +             * @param getName        The {@code java.lang.reflect.Module#getName()} method.
+>, <Line: +             */
+>, <Line: +            protected Enabled(Method getModule, Method getClassLoader, Method isNamed, Method getName) {
+>, <Line: +                this.getModule = getModule;
+>, <Line: +                this.getClassLoader = getClassLoader;
+>, <Line: +                this.isNamed = isNamed;
+>, <Line: +                this.getName = getName;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public JavaModule moduleOf(Class<?> type) {
+>, <Line: +                try {
+>, <Line: +                    return new JavaModule(getModule.invoke(type));
+>, <Line: +                } catch (IllegalAccessException exception) {
+>, <Line: +                    throw new IllegalStateException("Cannot access " + getModule, exception);
+>, <Line: +                } catch (InvocationTargetException exception) {
+>, <Line: +                    throw new IllegalStateException("Cannot invoke " + getModule, exception.getCause());
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public ClassLoader getClassLoader(Object module) {
+>, <Line: +                try {
+>, <Line: +                    return (ClassLoader) getClassLoader.invoke(module);
+>, <Line: +                } catch (IllegalAccessException exception) {
+>, <Line: +                    throw new IllegalStateException("Cannot access " + getClassLoader, exception);
+>, <Line: +                } catch (InvocationTargetException exception) {
+>, <Line: +                    throw new IllegalStateException("Cannot invoke " + getClassLoader, exception.getCause());
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public boolean isNamed(Object module) {
+>, <Line: +                try {
+>, <Line: +                    return (Boolean) isNamed.invoke(module);
+>, <Line: +                } catch (IllegalAccessException exception) {
+>, <Line: +                    throw new IllegalStateException("Cannot access " + isNamed, exception);
+>, <Line: +                } catch (InvocationTargetException exception) {
+>, <Line: +                    throw new IllegalStateException("Cannot invoke " + isNamed, exception.getCause());
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public String getName(Object module) {
+>, <Line: +                try {
+>, <Line: +                    return (String) getName.invoke(module);
+>, <Line: +                } catch (IllegalAccessException exception) {
+>, <Line: +                    throw new IllegalStateException("Cannot access " + getName, exception);
+>, <Line: +                } catch (InvocationTargetException exception) {
+>, <Line: +                    throw new IllegalStateException("Cannot invoke " + getName, exception.getCause());
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public boolean equals(Object object) {
+>, <Line: +                if (this == object) return true;
+>, <Line: +                if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +                Enabled enabled = (Enabled) object;
+>, <Line: +                if (!getModule.equals(enabled.getModule)) return false;
+>, <Line: +                if (!getClassLoader.equals(enabled.getClassLoader)) return false;
+>, <Line: +                if (!isNamed.equals(enabled.isNamed)) return false;
+>, <Line: +                return getName.equals(enabled.getName);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public int hashCode() {
+>, <Line: +                int result = getModule.hashCode();
+>, <Line: +                result = 31 * result + getClassLoader.hashCode();
+>, <Line: +                result = 31 * result + isNamed.hashCode();
+>, <Line: +                result = 31 * result + getName.hashCode();
+>, <Line: +                return result;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public String toString() {
+>, <Line: +                return "JavaModule.Dispatcher.Enabled{" +
+>, <Line: +                        "getModule=" + getModule +
+>, <Line: +                        ", getClassLoader=" + getClassLoader +
+>, <Line: +                        ", isNamed=" + isNamed +
+>, <Line: +                        ", getName=" + getName +
+>, <Line: +                        '}';
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * A disabled dispatcher for a VM that does not support the {@code java.lang.reflect.Module} API.
+>, <Line: +         */
+>, <Line: +        enum Disabled implements Dispatcher {
+>, <Line: +            /**
+>, <Line: +             * The singleton instance.
+>, <Line: +             */
+>, <Line: +            INSTANCE;
+>, <Line: +            @Override
+>, <Line: +            public JavaModule moduleOf(Class<?> type) {
+>, <Line: +                return UNSUPPORTED;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public ClassLoader getClassLoader(Object module) {
+>, <Line: +                throw new IllegalStateException("Current VM does not support modules");
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public boolean isNamed(Object module) {
+>, <Line: +                throw new IllegalStateException("Current VM does not support modules");
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public String getName(Object module) {
+>, <Line: +                throw new IllegalStateException("Current VM does not support modules");
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public String toString() {
+>, <Line: +                return "JavaModule.Dispatcher.Disabled." + name();
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,19 @@
+[]
+[<Line: -    py34-1.5.X,
+>, <Line: -    py27-1.5.X,
+>, <Line: -    py27-1.4.X
+>, <Line: -[testenv:py34-1.5.X]
+>, <Line: -basepython = python3.4
+>, <Line: -deps =
+>, <Line: -    django-discover-runner
+>, <Line: -    django>=1.5, <1.6
+>, <Line: -[testenv:py27-1.5.X]
+>, <Line: -basepython = python2.7
+>, <Line: -deps =
+>, <Line: -    django-discover-runner
+>, <Line: -    django>=1.5, <1.6
+>, <Line: -[testenv:py27-1.4.X]
+>, <Line: -basepython = python2.7
+>, <Line: -deps =
+>, <Line: -    django-discover-runner
+>, <Line: -    django>=1.4, <1.5>]

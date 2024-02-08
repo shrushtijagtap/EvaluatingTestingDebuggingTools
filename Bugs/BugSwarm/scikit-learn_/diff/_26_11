@@ -1,0 +1,10 @@
+[<Line: +    #Test decision_function
+>, <Line: +    #Sanity check, test that decision_function implemented in python
+>, <Line: +    #returns the same as the one in libsvm
+>]
+[<Line: -    """
+>, <Line: -    Test decision_function
+>, <Line: -    Sanity check, test that decision_function implemented in python
+>, <Line: -    returns the same as the one in libsvm
+>, <Line: -    """
+>]

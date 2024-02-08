@@ -1,0 +1,78 @@
+[<Line: +    OPERACAO_TRIBUTAVEL_CUMULATIVO_NAO_CUMULATIVO("01", "Opera\u00e7\u00e3o tribut\u00e1vel cumulativo/n\u00e3o cumulativo"),
+>, <Line: +    OPERACAO_TRIBUTAVEL_ALIQUOTA_DIFERENCIADA("02", "Opera\u00e7\u00e3o tribut\u00e1vel al\u00edquota diferenciada"),
+>, <Line: +    OPERACAO_TRIBUTAVEL_QUANTIDADE_VENDIDA_POR_ALIQUOTA_POR_UNIDADE_PRODUTO("03", "Opera\u00e7\u00e3o tribut\u00e1vel quantidade vendida por al\u00edquota por unidade produto"),
+>, <Line: +    OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO("04", "Opera\u00e7\u00e3o tribut\u00e1vel monof\u00e1sica al\u00edquota zero"),
+>, <Line: +    OPERACAO_TRIBUTAVEL_SUBSTITUICAO_TRIBUTARIA("05", "Opera\u00e7\u00e3o tribut\u00e1vel ST"),
+>, <Line: +    OPERACAO_TRIBUTAVEL_ALIQUOTA_ZERO("06", "Opera\u00e7\u00e3o tribut\u00e1vel al\u00edquota zero"),
+>, <Line: +    OPERACAO_ISENTA_CONTRIBUICAO("07", "Opera\u00e7\u00e3o isenta de contribui\u00e7\u00e3o"),
+>, <Line: +    OPERACAO_SEM_INCIDENCIA_CONTRIBUICAO("08", "Opera\u00e7\u00e3o sem incid\u00eancia de contribui\u00e7\u00e3o"),
+>, <Line: +    OPERACAO_COM_SUSPENSAO_CONTRIBUICAO("09", "Opera\u00e7\u00e3o com suspens\u00e3o de contribui\u00e7\u00e3o"),
+>, <Line: +    OUTRAS_OPERACOES_SAIDA("49", "Outras opera\u00e7\u00f5es de sa\u00edda"),
+>, <Line: +    OPERACAO_DIREITO_CREDITO_VINCULADA_EXCLUSIVAMENTE_RECEITA_TRIBUTADA_MERCADO_INTERNO("50", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada exclusivamente receita tributada mercado interno"),
+>, <Line: +    OPERACAO_DIREITO_CREDITO_VINCULADA_EXCLUSIVAMENTE_RECEITA_NAO_TRIBUTADA_MERCADO_INTERNO("51", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada exclusivamente receita n\u00e3o tributada mercado interno"),
+>, <Line: +    OPERACAO_DIREITO_CREDITO_VINCULADA_EXCLUSIVAMENTE_RECEITA_EXPORTACAO("52", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada exclusivamente receita exporta\u00e7\u00e3o"),
+>, <Line: +    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_TRIBUTADA_E_NAO_TRIBUTADA_MERCADO_INTERNO("53", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada receitas tributada e n\u00e3o tributada mercado interno"),
+>, <Line: +    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_TRIBUTADAS_NO_MERCADO_INTERNO_EXPORTACAO("54", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada receitas tributadas no mercado interno exporta\u00e7\u00e3o"),
+>, <Line: +    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_NAO_TRIBUTADA_NO_MERCADO_INTERNO_EXPORTACAO("55", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada receitas n\u00e3o tributada no mercado interno exporta\u00e7\u00e3o"),
+>, <Line: +    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_MERCADO_INTERNO_EXPORTACAO("56", "Opera\u00e7\u00e3o direito cr\u00e9dito vinculada receitas tributadas e n\u00e3o tributadas mercado interno exporta\u00e7\u00e3o"),
+>, <Line: +    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_EXCLUSIVAMENTE_RECEITA_TRIBUTADA_MERCADO_INTERNO("60", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada exclusivamente receita tributada mercado interno"),
+>, <Line: +    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_EXCLUSIVAMENTE_A_RECEITA_NAO_TRIBUTADA_MERCADO_INTERNO("61", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada exclusivamente \u00e0 receita n\u00e3o tributada mercado interno"),
+>, <Line: +    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_EXCLUSIVAMENTE_RECEITA_EXPORTACAO("62", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada exclusivamente receita exporta\u00e7\u00e3o"),
+>, <Line: +    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_MERCADO_INTERNO("63", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada receitas tributadas mercado interno"),
+>, <Line: +    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_TRIBUTADA_MERCADO_INTERNO_EXPORTACAO("64", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada receitas tributadas mercado interno exporta\u00e7\u00e3o"),
+>, <Line: +    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_NAO_TRIBUTADAS_MERCADO_INTERNO_EXPORTACAO("65", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada receitas n\u00e3o tributadas mercado interno exporta\u00e7\u00e3o"),
+>, <Line: +    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_MERCADO_INTERNO_EXPORTACAO("66", "Cr\u00e9dito presumido opera\u00e7\u00e3o aquisi\u00e7\u00e3o vinculada receitas tributadas e n\u00e3o tributadas mercado interno exporta\u00e7\u00e3o"),
+>, <Line: +    CREDITO_PRESUMIDO_OUTRAS_OPERACOES("67", "Cr\u00e9dito presumido outras opera\u00e7\u00f5es"),
+>, <Line: +    OPERACAO_AQUISICAO_SEM_DIREITO_CREDITO("70", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o sem direito cr\u00e9dito"),
+>, <Line: +    OPERACAO_AQUISICAO_COM_ISENCAO("71", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o com isen\u00e7\u00e3o"),
+>, <Line: +    OPERACAO_AQUISICAO_COM_SUSPENSAO("72", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o com suspens\u00e3o"),
+>, <Line: +    OPERACAO_AQUISICAO_ALIQUOTA_ZERO("73", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o al\u00edquota zero"),
+>, <Line: +    OPERACAO_AQUISICAO_SEM_INCIDENCIA_CONTRIBUICAO("74", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o sem incid\u00eancia de contribui\u00e7\u00e3o"),
+>, <Line: +    OPERACAO_AQUISICAO_POR_SUBSTITUICAO_TRIBUTARIA("75", "Opera\u00e7\u00e3o aquisi\u00e7\u00e3o por substitui\u00e7\u00e3o tribut\u00e1ria"),
+>, <Line: +    OUTRAS_OPERACOES_ENTRADA("98", "Outras opera\u00e7\u00f5es de entrada"),
+>, <Line: +    OUTRAS_OPERACOES("99", "Outras opera\u00e7\u00f5es");
+>, <Line: +    private final String codigo;
+>, <Line: +    private final String descricao;
+>, <Line: +    NFNotaInfoSituacaoTributariaCOFINS(final String codigo, final String descricao) {
+>, <Line: +        this.descricao = descricao;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    OPERACAO_TRIBUTAVEL_CUMULATIVO_NAO_CUMULATIVO("01"),
+>, <Line: -    OPERACAO_TRIBUTAVEL_ALIQUOTA_DIFERENCIADA("02"),
+>, <Line: -    OPERACAO_TRIBUTAVEL_QUANTIDADE_VENDIDA_POR_ALIQUOTA_POR_UNIDADE_PRODUTO("03"),
+>, <Line: -    OPERACAO_TRIBUTAVEL_MONOFASICA_ALIQUOTA_ZERO("04"),
+>, <Line: -    OPERACAO_TRIBUTAVEL_SUBSTITUICAO_TRIBUTARIA("05"),
+>, <Line: -    OPERACAO_TRIBUTAVEL_ALIQUOTA_ZERO("06"),
+>, <Line: -    OPERACAO_ISENTA_CONTRIBUICAO("07"),
+>, <Line: -    OPERACAO_SEM_INCIDENCIA_CONTRIBUICAO("08"),
+>, <Line: -    OPERACAO_COM_SUSPENSAO_CONTRIBUICAO("09"),
+>, <Line: -    OUTRAS_OPERACOES_SAIDA("49"),
+>, <Line: -    OPERACAO_DIREITO_CREDITO_VINCULADA_EXCLUSIVAMENTE_RECEITA_TRIBUTADA_MERCADO_INTERNO("50"),
+>, <Line: -    OPERACAO_DIREITO_CREDITO_VINCULADA_EXCLUSIVAMENTE_RECEITA_NAO_TRIBUTADA_MERCADO_INTERNO("51"),
+>, <Line: -    OPERACAO_DIREITO_CREDITO_VINCULADA_EXCLUSIVAMENTE_RECEITA_EXPORTACAO("52"),
+>, <Line: -    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_TRIBUTADA_E_NAO_TRIBUTADA_MERCADO_INTERNO("53"),
+>, <Line: -    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_TRIBUTADAS_NO_MERCADO_INTERNO_EXPORTACAO("54"),
+>, <Line: -    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_NAO_TRIBUTADA_NO_MERCADO_INTERNO_EXPORTACAO("55"),
+>, <Line: -    OPERACAO_DIREITO_CREDITO_VINCULADA_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_MERCADO_INTERNO_EXPORTACAO("56"),
+>, <Line: -    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_EXCLUSIVAMENTE_RECEITA_TRIBUTADA_MERCADO_INTERNO("60"),
+>, <Line: -    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_EXCLUSIVAMENTE_A_RECEITA_NAO_TRIBUTADA_MERCADO_INTERNO("61"),
+>, <Line: -    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_EXCLUSIVAMENTE_RECEITA_EXPORTACAO("62"),
+>, <Line: -    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_MERCADO_INTERNO("63"),
+>, <Line: -    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_TRIBUTADA_MERCADO_INTERNO_EXPORTACAO("64"),
+>, <Line: -    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_NAO_TRIBUTADAS_MERCADO_INTERNO_EXPORTACAO("65"),
+>, <Line: -    CREDITO_PRESUMIDO_OPERACAO_AQUISICAO_VINCULADA_RECEITAS_TRIBUTADAS_E_NAO_TRIBUTADAS_MERCADO_INTERNO_EXPORTACAO("66"),
+>, <Line: -    CREDITO_PRESUMIDO_OUTRAS_OPERACOES("67"),
+>, <Line: -    OPERACAO_AQUISICAO_SEM_DIREITO_CREDITO("70"),
+>, <Line: -    OPERACAO_AQUISICAO_COM_ISENCAO("71"),
+>, <Line: -    OPERACAO_AQUISICAO_COM_SUSPENSAO("72"),
+>, <Line: -    OPERACAO_AQUISICAO_ALIQUOTA_ZERO("73"),
+>, <Line: -    OPERACAO_AQUISICAO_SEM_INCIDENCIA_CONTRIBUICAO("74"),
+>, <Line: -    OPERACAO_AQUISICAO_SUBSTITUICAO_TRIBUTARIA("75"),
+>, <Line: -    OUTRAS_OPERACOES_ENTRADA("98"),
+>, <Line: -    OUTRAS_OPERACOES("99");
+>, <Line: -    private String codigo;
+>, <Line: -    NFNotaInfoSituacaoTributariaCOFINS(final String codigo) {
+>]

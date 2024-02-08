@@ -1,0 +1,23 @@
+[<Line: +package de.charite.compbio.jannovar.mendel;
+>, <Line: +import org.junit.Assert;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +public class GenotypeCallsBuilderTest {
+>, <Line: +	@Before
+>, <Line: +	public void setUp() throws Exception {
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test() {
+>, <Line: +		GenotypeCallsBuilder builder = new GenotypeCallsBuilder();
+>, <Line: +		builder.setPayload(1);
+>, <Line: +		builder.setChromType(ChromosomeType.AUTOSOMAL);
+>, <Line: +		builder.getSampleToGenotype().put("example", new Genotype(ImmutableList.of(0, 1)));
+>, <Line: +		GenotypeCalls calls = builder.build();
+>, <Line: +		Assert.assertEquals(1, calls.getPayload());
+>, <Line: +		Assert.assertEquals(1, calls.getNSamples());
+>, <Line: +		Assert.assertEquals("Genotype [alleleNumbers=[0, 1]]", calls.getGenotypeForSample("example").toString());
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

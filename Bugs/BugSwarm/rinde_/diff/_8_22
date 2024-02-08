@@ -1,0 +1,154 @@
+[<Line: +/*
+>, <Line: + * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package com.github.rinde.rinsim.experiment.base;
+>, <Line: +import static com.google.common.base.MoreObjects.toStringHelper;
+>, <Line: +import static java.util.Objects.requireNonNull;
+>, <Line: +import static org.junit.Assert.assertEquals;
+>, <Line: +import static org.mockito.Mockito.inOrder;
+>, <Line: +import static org.mockito.Mockito.mock;
+>, <Line: +import static org.mockito.Mockito.times;
+>, <Line: +import javax.annotation.Nonnull;
+>, <Line: +import javax.annotation.Nullable;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.mockito.ArgumentCaptor;
+>, <Line: +import org.mockito.Captor;
+>, <Line: +import org.mockito.InOrder;
+>, <Line: +import org.mockito.MockitoAnnotations;
+>, <Line: +import com.google.common.base.Function;
+>, <Line: +/**
+>, <Line: + *
+>, <Line: + * @author Rinde van Lon
+>, <Line: + *
+>, <Line: + */
+>, <Line: +public class ExperimentTest {
+>, <Line: +  @SuppressWarnings("null")
+>, <Line: +  @Captor
+>, <Line: +  private ArgumentCaptor<SimResult> captor;
+>, <Line: +  /**
+>, <Line: +   * 
+>, <Line: +   */
+>, <Line: +  @Before
+>, <Line: +  public void init() {
+>, <Line: +    MockitoAnnotations.initMocks(this);
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * Tests usage via inheritance.
+>, <Line: +   */
+>, <Line: +  @Test
+>, <Line: +  public void testInheritance() {
+>, <Line: +    TestExperiment te = new TestExperiment();
+>, <Line: +    te.addConfiguration(new TestConfig("config1"))
+>, <Line: +        .addConfiguration(new TestConfig("config2"))
+>, <Line: +        .addScenario(
+>, <Line: +            new DefaultScenario(new StringProblemClass("class0"), "instance0"))
+>, <Line: +        .repeat(5);
+>, <Line: +    ExperimentResults er = te.perform();
+>, <Line: +    assertEquals(10, er.sortedResults().size());
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * Tests usage via default builder.
+>, <Line: +   */
+>, <Line: +  @Test
+>, <Line: +  public void testDefaultBuilder() {
+>, <Line: +    ExperimentResults er = ExperimentBuilder
+>, <Line: +        .defaultInstance(ComputeFunc.INSTANCE)
+>, <Line: +        .addConfiguration(new TestConfig("config1"))
+>, <Line: +        .addConfiguration(new TestConfig("config2"))
+>, <Line: +        .addConfiguration(new TestConfig("config3"))
+>, <Line: +        .addScenario(
+>, <Line: +            new DefaultScenario(new StringProblemClass("class0"), "instance0"))
+>, <Line: +        .addScenario(
+>, <Line: +            new DefaultScenario(new StringProblemClass("class0"), "instance1"))
+>, <Line: +        .repeat(10)
+>, <Line: +        .perform();
+>, <Line: +    assertEquals(60, er.results.size());
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * Test for checking that {@link ResultListener} is called in correct order
+>, <Line: +   * and correct number of times.
+>, <Line: +   */
+>, <Line: +  @Test
+>, <Line: +  public void testResultListener() {
+>, <Line: +    ResultListener list = mock(ResultListener.class);
+>, <Line: +    // setup: 3 x 2 x 10 = 60 simulations
+>, <Line: +    ExperimentResults er = ExperimentBuilder
+>, <Line: +        .defaultInstance(ComputeFunc.INSTANCE)
+>, <Line: +        .addConfiguration(new TestConfig("config1"))
+>, <Line: +        .addConfiguration(new TestConfig("config2"))
+>, <Line: +        .addConfiguration(new TestConfig("config3"))
+>, <Line: +        .addScenario(
+>, <Line: +            new DefaultScenario(new StringProblemClass("class0"), "instance0"))
+>, <Line: +        .addScenario(
+>, <Line: +            new DefaultScenario(new StringProblemClass("class0"), "instance1"))
+>, <Line: +        .repeat(10)
+>, <Line: +        .addResultListener(list)
+>, <Line: +        .perform();
+>, <Line: +    InOrder inOrder = inOrder(list);
+>, <Line: +    inOrder.verify(list).startComputing(60);
+>, <Line: +    inOrder.verify(list, times(60)).receive(captor.capture());
+>, <Line: +    inOrder.verify(list, times(1)).doneComputing();
+>, <Line: +    assertEquals(60, er.results.size());
+>, <Line: +  }
+>, <Line: +  enum ComputeFunc implements Function<SimArgs, SimResult> {
+>, <Line: +    INSTANCE {
+>, <Line: +      @Override
+>, <Line: +      @Nonnull
+>, <Line: +      public SimResult apply(@Nullable SimArgs input) {
+>, <Line: +        return new Result(requireNonNull(input));
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  static class TestExperiment extends ExperimentBuilder<TestExperiment> {
+>, <Line: +    TestExperiment() {
+>, <Line: +      super(ComputeFunc.INSTANCE);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected TestExperiment self() {
+>, <Line: +      return this;
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  static class Result implements SimResult {
+>, <Line: +    final SimArgs args;
+>, <Line: +    Result(SimArgs args) {
+>, <Line: +      this.args = args;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +      return toStringHelper("Result").add("args", args).toString();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public SimArgs getSimArgs() {
+>, <Line: +      return args;
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  static class TestConfig implements Configuration {
+>, <Line: +    private final String name;
+>, <Line: +    TestConfig(String name) {
+>, <Line: +      this.name = name;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +      return name;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int compareTo(@Nullable Configuration o) {
+>, <Line: +      return name.compareTo(requireNonNull(o).toString());
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

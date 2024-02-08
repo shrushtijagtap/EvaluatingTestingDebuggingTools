@@ -1,0 +1,6 @@
+[<Line: +						Validator.isNotNullOrEmpty(validationErrors, tagContext, entry.getKey());
+>, <Line: +						Validator.isNotNullOrEmpty(validationErrors, tagContext, entry.getValue());
+>]
+[<Line: -						Validator.isValidateCharacterSet(validationErrors, tagContext, entry.getKey());
+>, <Line: -						Validator.isValidateCharacterSet(validationErrors, tagContext, entry.getValue());
+>]

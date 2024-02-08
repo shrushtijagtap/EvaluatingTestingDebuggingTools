@@ -1,0 +1,62 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.filter;
+>, <Line: -import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: -/**
+>, <Line: - * Adds a boolean flag to a {@link VariantContext} that shows whether the variant has been included.
+>, <Line: - *
+>, <Line: - * By default, variants are not included.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite">Manuel Holtgrewe</a>
+>, <Line: - */
+>, <Line: -public class FlaggedVariant {
+>, <Line: -	private boolean included = false;
+>, <Line: -	private final VariantContext vc;
+>, <Line: -	/** Initialize with the given {@link VariantContext}. */
+>, <Line: -	public FlaggedVariant(VariantContext vc) {
+>, <Line: -		this.vc = vc;
+>, <Line: -	}
+>, <Line: -	public VariantContext getVC() {
+>, <Line: -		return vc;
+>, <Line: -	}
+>, <Line: -	/** @return <code>true</code> if flagged as included */
+>, <Line: -	public boolean isIncluded() {
+>, <Line: -		return included;
+>, <Line: -	}
+>, <Line: -	/** Sets inclusion flag. */
+>, <Line: -	public void setIncluded(boolean included) {
+>, <Line: -		this.included = included;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public int hashCode() {
+>, <Line: -		final int prime = 31;
+>, <Line: -		int result = 1;
+>, <Line: -		result = prime * result + ((vc == null) ? 0 : vc.getContig().hashCode());
+>, <Line: -		result = prime * result + ((vc == null) ? 0 : vc.getStart());
+>, <Line: -		result = prime * result + ((vc == null) ? 0 : vc.getReference().hashCode());
+>, <Line: -		result = prime * result + ((vc == null) ? 0 : vc.getAlleles().hashCode());
+>, <Line: -		return result;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean equals(Object obj) {
+>, <Line: -		if (this == obj)
+>, <Line: -			return true;
+>, <Line: -		if (obj == null)
+>, <Line: -			return false;
+>, <Line: -		if (getClass() != obj.getClass())
+>, <Line: -			return false;
+>, <Line: -		FlaggedVariant other = (FlaggedVariant) obj;
+>, <Line: -		if (included != other.included)
+>, <Line: -			return false;
+>, <Line: -		if (vc == null) {
+>, <Line: -			if (other.vc != null)
+>, <Line: -				return false;
+>, <Line: -		} else if (!vc.equals(other.vc))
+>, <Line: -			return false;
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public String toString() {
+>, <Line: -		return "Included:" + isIncluded() + " -> " + getVC().toString();
+>, <Line: -	}
+>, <Line: -}
+>]

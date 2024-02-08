@@ -1,0 +1,57 @@
+[<Line: +    public FluentListImpl(final Class<E> componentClass, final List<E> list, FluentControl control,
+>, <Line: +            final ComponentInstantiator instantiator) {
+>, <Line: +        hookControl = new HookControlImpl<>(this, proxy, control, instantiator, new Supplier<FluentList<E>>() {
+>, <Line: +        return Lists.transform(this, new Function<E, String>() {
+>, <Line: +            public String apply(E webElement) {
+>, <Line: +                return webElement.value();
+>, <Line: +            }
+>, <Line: +        });
+>, <Line: +        return Lists.transform(this, new Function<E, String>() {
+>, <Line: +            public String apply(E webElement) {
+>, <Line: +                return webElement.id();
+>, <Line: +            }
+>, <Line: +        });
+>, <Line: +        return Lists.transform(this, new Function<E, String>() {
+>, <Line: +            public String apply(E webElement) {
+>, <Line: +                return webElement.attribute(attribute);
+>, <Line: +            }
+>, <Line: +        });
+>, <Line: +        return Lists.transform(this, new Function<E, String>() {
+>, <Line: +            public String apply(E webElement) {
+>, <Line: +                return webElement.name();
+>, <Line: +            }
+>, <Line: +        });
+>, <Line: +        return Lists.transform(this, new Function<E, String>() {
+>, <Line: +            public String apply(E webElement) {
+>, <Line: +                return webElement.tagName();
+>, <Line: +            }
+>, <Line: +        });
+>, <Line: +        return Lists.transform(this, new Function<E, String>() {
+>, <Line: +            public String apply(E webElement) {
+>, <Line: +                return webElement.textContent();
+>, <Line: +            }
+>, <Line: +        });
+>, <Line: +        return Lists.transform(this, new Function<E, String>() {
+>, <Line: +            public String apply(E webElement) {
+>, <Line: +                return webElement.text();
+>, <Line: +            }
+>, <Line: +        });
+>]
+[<Line: -    public FluentListImpl(Class<E> componentClass, List<E> list, FluentControl control,
+>, <Line: -            ComponentInstantiator instantiator) {
+>, <Line: -        hookControl = new HookControlImpl<>(this, proxy, control, instantiator, (Supplier<FluentList<E>>) () -> {
+>, <Line: -            LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(proxy);
+>, <Line: -            ElementLocator locator = locatorHandler.getLocator();
+>, <Line: -            List<WebElement> webElementList = LocatorProxies.createWebElementList(locator);
+>, <Line: -            return instantiator.asComponentList(this.getClass(), componentClass, webElementList);
+>, <Line: -        });
+>, <Line: -        label = new FluentLabelImpl<>(this, list::toString);
+>, <Line: -        javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new Supplier<FluentWebElement>() {
+>, <Line: -        return stream().map(FluentWebElement::value).collect(Collectors.toList());
+>, <Line: -        return stream().map(FluentWebElement::id).collect(Collectors.toList());
+>, <Line: -        return stream().map(webElement -> webElement.attribute(attribute)).collect(Collectors.toList());
+>, <Line: -        return stream().map(FluentWebElement::name).collect(Collectors.toList());
+>, <Line: -        return stream().map(FluentWebElement::tagName).collect(Collectors.toList());
+>, <Line: -        return stream().map(FluentWebElement::textContent).collect(Collectors.toList());
+>, <Line: -        return stream().map(FluentWebElement::text).collect(Collectors.toList());
+>]

@@ -1,0 +1,12 @@
+[<Line: +package org.mp4parser.tools.boxes.fragment;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleFlags;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.TrackRunBox;
+>, <Line: +import java.io.FileInputStream;
+>, <Line: +        IsoFile isoFile = new IsoFile(new FileInputStream(f).getChannel());
+>]
+[<Line: -package com.coremedia.iso.boxes.fragment;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -        IsoFile isoFile = new IsoFile(f.getAbsolutePath());
+>]

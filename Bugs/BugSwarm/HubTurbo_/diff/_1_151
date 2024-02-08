@@ -1,0 +1,181 @@
+[<Line: +//package tests;
+>, <Line: +//
+>, <Line: +//import static org.junit.Assert.assertEquals;
+>, <Line: +//
+>, <Line: +//import java.io.File;
+>, <Line: +//import java.util.Arrays;
+>, <Line: +//import java.util.List;
+>, <Line: +//
+>, <Line: +//import org.apache.commons.io.FileUtils;
+>, <Line: +//import org.eclipse.egit.github.core.RepositoryId;
+>, <Line: +//import org.junit.AfterClass;
+>, <Line: +//import org.junit.BeforeClass;
+>, <Line: +//import org.junit.Test;
+>, <Line: +//
+>, <Line: +//import service.ServiceManager;
+>, <Line: +//import storage.ConfigFileHandler;
+>, <Line: +//import storage.DataManager;
+>, <Line: +//
+>, <Line: +//public class DataManagerTests {
+>, <Line: +//
+>, <Line: +//	private static final String FILE_CONFIG_SESSION = "session-config-test.json";
+>, <Line: +//	private static final String FILE_CONFIG_LOCAL = "local-config-test.json";
+>, <Line: +//
+>, <Line: +//	private static DataManager dataManager;
+>, <Line: +//	private static ConfigFileHandler stubFileHandler;
+>, <Line: +//
+>, <Line: +//	@BeforeClass
+>, <Line: +//	public static void setup() {
+>, <Line: +//
+>, <Line: +//		ServiceManager.isInTestMode = true;
+>, <Line: +//
+>, <Line: +//		dataManager = DataManager.getInstance();
+>, <Line: +//		stubFileHandler = new ConfigFileHandler(FILE_CONFIG_SESSION, FILE_CONFIG_LOCAL);
+>, <Line: +//
+>, <Line: +//		dataManager.setConfigFileHandler(stubFileHandler);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@AfterClass
+>, <Line: +//	public static void tearDown() {
+>, <Line: +//		cleanup();
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void basics() {
+>, <Line: +//		// Saving and loading of empty configuration
+>, <Line: +//		dataManager.saveLocalConfig();
+>, <Line: +//		dataManager.saveSessionConfig();
+>, <Line: +//		reload();
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void session() {
+>, <Line: +//		List<String> filters = Arrays.asList(new String[] {"assignee:a milestone:b", "id:1 updated:<24"});
+>, <Line: +//		String lastLogin = "testertest";
+>, <Line: +//		RepositoryId repo = new RepositoryId("hubturbo", "hubturbo");
+>, <Line: +//
+>, <Line: +//		dataManager.setLastOpenFilters(repo, filters);
+>, <Line: +//		dataManager.setLastLoginUsername(lastLogin);
+>, <Line: +//
+>, <Line: +//		dataManager.saveSessionConfig();
+>, <Line: +//		reload();
+>, <Line: +//
+>, <Line: +//		List<String> loadedFilters = dataManager.getLastOpenFilters(repo);
+>, <Line: +//		String loadedLogin = dataManager.getLastLoginUsername();
+>, <Line: +//		assertEquals(filters, loadedFilters);
+>, <Line: +//		assertEquals(lastLogin, loadedLogin);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void local() {
+>, <Line: +//		List<String> savedSet1 = Arrays.asList(new String[] {"assignee:a milestone:b", "id:1 updated:<24"});
+>, <Line: +//		List<String> savedSet2 = Arrays.asList(new String[] {"some syntax", "id:2 & id:3"});
+>, <Line: +//
+>, <Line: +//		dataManager.addBoard("aaa", savedSet1);
+>, <Line: +//		dataManager.addBoard("bbb", savedSet2);
+>, <Line: +//
+>, <Line: +//		dataManager.saveLocalConfig();
+>, <Line: +//		reload();
+>, <Line: +//
+>, <Line: +//		List<String> loadedSet1 = dataManager.getBoardPanels("aaa");
+>, <Line: +//		List<String> loadedSet2 = dataManager.getBoardPanels("bbb");
+>, <Line: +//		assertEquals(savedSet1, loadedSet1);
+>, <Line: +//		assertEquals(savedSet2, loadedSet2);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	/**
+>, <Line: +//	 * Causes DataManager to reload configuration files.
+>, <Line: +//	 */
+>, <Line: +//	private void reload() {
+>, <Line: +//		// Sets the file handler again, which causes the side effect of reloading data files.
+>, <Line: +//		dataManager.setConfigFileHandler(stubFileHandler);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	/**
+>, <Line: +//	 * Deletes all files created. Fails silently so can be called whenever.
+>, <Line: +//	 */
+>, <Line: +//	private static void cleanup() {
+>, <Line: +//		FileUtils.deleteQuietly(new File(FILE_CONFIG_LOCAL));
+>, <Line: +//		FileUtils.deleteQuietly(new File(FILE_CONFIG_SESSION));
+>, <Line: +//	}
+>, <Line: +//}
+>]
+[<Line: -package tests;
+>, <Line: -import static org.junit.Assert.assertEquals;
+>, <Line: -import java.io.File;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import java.util.List;
+>, <Line: -import org.apache.commons.io.FileUtils;
+>, <Line: -import org.eclipse.egit.github.core.RepositoryId;
+>, <Line: -import org.junit.AfterClass;
+>, <Line: -import org.junit.BeforeClass;
+>, <Line: -import org.junit.Test;
+>, <Line: -import service.ServiceManager;
+>, <Line: -import storage.ConfigFileHandler;
+>, <Line: -import storage.DataManager;
+>, <Line: -public class DataManagerTests {
+>, <Line: -	private static final String FILE_CONFIG_SESSION = "session-config-test.json";
+>, <Line: -	private static final String FILE_CONFIG_LOCAL = "local-config-test.json";
+>, <Line: -	private static DataManager dataManager;
+>, <Line: -	private static ConfigFileHandler stubFileHandler;
+>, <Line: -	@BeforeClass
+>, <Line: -	public static void setup() {
+>, <Line: -		ServiceManager.isInTestMode = true;
+>, <Line: -		dataManager = DataManager.getInstance();
+>, <Line: -		stubFileHandler = new ConfigFileHandler(FILE_CONFIG_SESSION, FILE_CONFIG_LOCAL);
+>, <Line: -		dataManager.setConfigFileHandler(stubFileHandler);
+>, <Line: -	}
+>, <Line: -	@AfterClass
+>, <Line: -	public static void tearDown() {
+>, <Line: -		cleanup();
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void basics() {
+>, <Line: -		// Saving and loading of empty configuration
+>, <Line: -		dataManager.saveLocalConfig();
+>, <Line: -		dataManager.saveSessionConfig();
+>, <Line: -		reload();
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void session() {
+>, <Line: -		List<String> filters = Arrays.asList(new String[] {"assignee:a milestone:b", "id:1 updated:<24"});
+>, <Line: -		String lastLogin = "testertest";
+>, <Line: -		RepositoryId repo = new RepositoryId("hubturbo", "hubturbo");
+>, <Line: -		dataManager.setFiltersForNextSession(repo, filters);
+>, <Line: -		dataManager.setLastLoginUsername(lastLogin);
+>, <Line: -		dataManager.saveSessionConfig();
+>, <Line: -		reload();
+>, <Line: -		List<String> loadedFilters = dataManager.getFiltersFromPreviousSession(repo);
+>, <Line: -		String loadedLogin = dataManager.getLastLoginUsername();
+>, <Line: -		assertEquals(filters, loadedFilters);
+>, <Line: -		assertEquals(lastLogin, loadedLogin);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void local() {
+>, <Line: -		List<String> savedSet1 = Arrays.asList(new String[] {"assignee:a milestone:b", "id:1 updated:<24"});
+>, <Line: -		List<String> savedSet2 = Arrays.asList(new String[] {"some syntax", "id:2 & id:3"});
+>, <Line: -		dataManager.addBoard("aaa", savedSet1);
+>, <Line: -		dataManager.addBoard("bbb", savedSet2);
+>, <Line: -		dataManager.saveLocalConfig();
+>, <Line: -		reload();
+>, <Line: -		List<String> loadedSet1 = dataManager.getBoardPanels("aaa");
+>, <Line: -		List<String> loadedSet2 = dataManager.getBoardPanels("bbb");
+>, <Line: -		assertEquals(savedSet1, loadedSet1);
+>, <Line: -		assertEquals(savedSet2, loadedSet2);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Causes DataManager to reload configuration files.
+>, <Line: -	 */
+>, <Line: -	private void reload() {
+>, <Line: -		// Sets the file handler again, which causes the side effect of reloading data files.
+>, <Line: -		dataManager.setConfigFileHandler(stubFileHandler);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Deletes all files created. Fails silently so can be called whenever.
+>, <Line: -	 */
+>, <Line: -	private static void cleanup() {
+>, <Line: -		FileUtils.deleteQuietly(new File(FILE_CONFIG_LOCAL));
+>, <Line: -		FileUtils.deleteQuietly(new File(FILE_CONFIG_SESSION));
+>, <Line: -	}
+>, <Line: -}
+>]

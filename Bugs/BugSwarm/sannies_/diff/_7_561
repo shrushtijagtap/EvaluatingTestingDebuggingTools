@@ -1,0 +1,28 @@
+[<Line: +package org.mp4parser.muxer.tracks;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.muxer.FileDataSourceImpl;
+>, <Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import org.mp4parser.support.BoxComparator;
+>, <Line: +import java.io.FileInputStream;
+>, <Line: +import java.io.IOException;
+>, <Line: +public class AC3TrackImplTest {
+>, <Line: +    @Test
+>, <Line: +    public void freeze() throws IOException {
+>, <Line: +        Track t = new AC3TrackImpl(new FileDataSourceImpl(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile() + "/org/mp4parser/muxer/tracks/ac3-sample.ac3"));
+>, <Line: +        Movie m = new Movie();
+>, <Line: +        m.addTrack(t);
+>, <Line: +        DefaultMp4Builder mp4Builder = new DefaultMp4Builder();
+>, <Line: +        Container isoFile = mp4Builder.build(m);
+>, <Line: +        //WritableByteChannel fc = new FileOutputStream("ac3-sample.mp4").getChannel();
+>, <Line: +        //isoFile.writeContainer(fc);
+>, <Line: +        //fc.close();
+>, <Line: +        IsoFile isoFileReference = new IsoFile(new FileInputStream(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile() + "/org/mp4parser/muxer/tracks/ac3-sample.mp4").getChannel());
+>, <Line: +        BoxComparator.check(isoFile, isoFileReference, "moov[0]/mvhd[0]", "moov[0]/trak[0]/tkhd[0]", "moov[0]/trak[0]/mdia[0]/mdhd[0]");
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

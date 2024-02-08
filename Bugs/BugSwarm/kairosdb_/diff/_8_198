@@ -1,0 +1,508 @@
+[<Line: +		'angular',
+>, <Line: +		'app',
+>, <Line: +		'jquery',
+>, <Line: +		'lodash',
+>, <Line: +		'kbn',
+>, <Line: +		'moment',
+>, <Line: +		'components/timeSeries',
+>, <Line: +		'components/panelmeta',
+>, <Line: +		'services/panelSrv',
+>, <Line: +		'services/annotationsSrv',
+>, <Line: +		'services/datasourceSrv',
+>, <Line: +		'./seriesOverridesCtrl',
+>, <Line: +		'./graph',
+>, <Line: +		'./legend',
+>, <Line: +	],
+>, <Line: +	function (angular, app, $, _, kbn, moment, TimeSeries, PanelMeta) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.panels.graph');
+>, <Line: +		module.controller('GraphCtrl', function ($scope, $rootScope, panelSrv, annotationsSrv, timeSrv) {
+>, <Line: +			$scope.panelMeta = new PanelMeta({
+>, <Line: +				description: 'Graph panel',
+>, <Line: +				fullscreen: true,
+>, <Line: +				metricsEditor: true
+>, <Line: +			});
+>, <Line: +			$scope.panelMeta.addEditorTab('Axes & Grid', 'app/panels/graph/axisEditor.html');
+>, <Line: +			$scope.panelMeta.addEditorTab('Display Styles', 'app/panels/graph/styleEditor.html');
+>, <Line: +			$scope.panelMeta.addExtendedMenuItem('Export CSV', '', 'exportCsv()');
+>, <Line: +			$scope.panelMeta.addExtendedMenuItem('Toggle legend', '', 'toggleLegend()');
+>, <Line: +			// Set and populate defaults
+>, <Line: +			var _d = {
+>, <Line: +				// datasource name, null = default datasource
+>, <Line: +				datasource: null,
+>, <Line: +				// sets client side (flot) or native graphite png renderer (png)
+>, <Line: +				renderer: 'flot',
+>, <Line: +				// Show/hide the x-axis
+>, <Line: +				'x-axis': true,
+>, <Line: +				// Show/hide y-axis
+>, <Line: +				'y-axis': true,
+>, <Line: +				// y axis formats, [left axis,right axis]
+>, <Line: +				y_formats: ['short', 'short'],
+>, <Line: +				// grid options
+>, <Line: +				grid: {
+>, <Line: +					leftMax: null,
+>, <Line: +					rightMax: null,
+>, <Line: +					leftMin: null,
+>, <Line: +					rightMin: null,
+>, <Line: +					threshold1: null,
+>, <Line: +					threshold2: null,
+>, <Line: +					threshold1Color: 'rgba(216, 200, 27, 0.27)',
+>, <Line: +					threshold2Color: 'rgba(234, 112, 112, 0.22)'
+>, <Line: +				},
+>, <Line: +				// show/hide lines
+>, <Line: +				lines: true,
+>, <Line: +				// fill factor
+>, <Line: +				fill: 0,
+>, <Line: +				// line width in pixels
+>, <Line: +				linewidth: 1,
+>, <Line: +				// show hide points
+>, <Line: +				points: false,
+>, <Line: +				// point radius in pixels
+>, <Line: +				pointradius: 5,
+>, <Line: +				// show hide bars
+>, <Line: +				bars: false,
+>, <Line: +				// enable/disable stacking
+>, <Line: +				stack: false,
+>, <Line: +				// stack percentage mode
+>, <Line: +				percentage: false,
+>, <Line: +				// legend options
+>, <Line: +				legend: {
+>, <Line: +					show: true, // disable/enable legend
+>, <Line: +					values: false, // disable/enable legend values
+>, <Line: +					min: false,
+>, <Line: +					max: false,
+>, <Line: +					current: false,
+>, <Line: +					total: false,
+>, <Line: +					avg: false
+>, <Line: +				},
+>, <Line: +				// how null points should be handled
+>, <Line: +				nullPointMode: 'connected',
+>, <Line: +				// staircase line mode
+>, <Line: +				steppedLine: false,
+>, <Line: +				// tooltip options
+>, <Line: +				tooltip: {
+>, <Line: +					value_type: 'cumulative',
+>, <Line: +					shared: false,
+>, <Line: +				},
+>, <Line: +				// metric queries
+>, <Line: +				targets: [{}],
+>, <Line: +				// series color overrides
+>, <Line: +				aliasColors: {},
+>, <Line: +				// other style overrides
+>, <Line: +				seriesOverrides: [],
+>, <Line: +			};
+>, <Line: +			_.defaults($scope.panel, _d);
+>, <Line: +			_.defaults($scope.panel.tooltip, _d.tooltip);
+>, <Line: +			_.defaults($scope.panel.annotate, _d.annotate);
+>, <Line: +			_.defaults($scope.panel.grid, _d.grid);
+>, <Line: +			_.defaults($scope.panel.legend, _d.legend);
+>, <Line: +			$scope.hiddenSeries = {};
+>, <Line: +			$scope.seriesList = [];
+>, <Line: +			$scope.updateTimeRange = function () {
+>, <Line: +				$scope.range = timeSrv.timeRange();
+>, <Line: +				$scope.rangeUnparsed = timeSrv.timeRange(false);
+>, <Line: +				if ($scope.panel.maxDataPoints) {
+>, <Line: +					$scope.resolution = $scope.panel.maxDataPoints;
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					$scope.resolution = Math.ceil($(window).width() * ($scope.panel.span / 12));
+>, <Line: +				}
+>, <Line: +				$scope.interval = kbn.calculateInterval($scope.range, $scope.resolution, $scope.panel.interval);
+>, <Line: +			};
+>, <Line: +			$scope.get_data = function () {
+>, <Line: +				$scope.updateTimeRange();
+>, <Line: +				var metricsQuery = {
+>, <Line: +					range: $scope.rangeUnparsed,
+>, <Line: +					interval: $scope.interval,
+>, <Line: +					targets: $scope.panel.targets,
+>, <Line: +					format: $scope.panel.renderer === 'png' ? 'png' : 'json',
+>, <Line: +					maxDataPoints: $scope.resolution,
+>, <Line: +					cacheTimeout: $scope.panel.cacheTimeout
+>, <Line: +				};
+>, <Line: +				$scope.annotationsPromise = annotationsSrv.getAnnotations($scope.rangeUnparsed, $scope.dashboard);
+>, <Line: +				return $scope.datasource.query(metricsQuery)
+>, <Line: +					.then($scope.dataHandler)
+>, <Line: +					.then(null, function (err) {
+>, <Line: +						$scope.panelMeta.loading = false;
+>, <Line: +						$scope.panelMeta.error = err.message || "Timeseries data request error";
+>, <Line: +						$scope.inspector.error = err;
+>, <Line: +						$scope.seriesList = [];
+>, <Line: +						$scope.render([]);
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			$scope.dataHandler = function (results) {
+>, <Line: +				// png renderer returns just a url
+>, <Line: +				if (_.isString(results)) {
+>, <Line: +					$scope.panelMeta.loading = false;
+>, <Line: +					$scope.render(results);
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				$scope.datapointsWarning = false;
+>, <Line: +				$scope.datapointsCount = 0;
+>, <Line: +				$scope.datapointsOutside = false;
+>, <Line: +				$scope.seriesList = _.map(results.data, $scope.seriesHandler);
+>, <Line: +				$scope.datapointsWarning = $scope.datapointsCount === 0 || $scope.datapointsOutside;
+>, <Line: +				$scope.annotationsPromise
+>, <Line: +					.then(function (annotations) {
+>, <Line: +						$scope.panelMeta.loading = false;
+>, <Line: +						$scope.seriesList.annotations = annotations;
+>, <Line: +						$scope.render($scope.seriesList);
+>, <Line: +					}, function () {
+>, <Line: +						$scope.panelMeta.loading = false;
+>, <Line: +						$scope.render($scope.seriesList);
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			$scope.seriesHandler = function (seriesData, index) {
+>, <Line: +				var datapoints = seriesData.datapoints;
+>, <Line: +				var alias = seriesData.target;
+>, <Line: +				var color = $scope.panel.aliasColors[alias] || $rootScope.colors[index];
+>, <Line: +				var series = new TimeSeries({
+>, <Line: +					datapoints: datapoints,
+>, <Line: +					alias: alias,
+>, <Line: +					color: color,
+>, <Line: +				});
+>, <Line: +				if (datapoints && datapoints.length > 0) {
+>, <Line: +					var last = moment.utc(datapoints[datapoints.length - 1][1]);
+>, <Line: +					var from = moment.utc($scope.range.from);
+>, <Line: +					if (last - from < -10000) {
+>, <Line: +						$scope.datapointsOutside = true;
+>, <Line: +					}
+>, <Line: +					$scope.datapointsCount += datapoints.length;
+>, <Line: +				}
+>, <Line: +				return series;
+>, <Line: +			};
+>, <Line: +			$scope.render = function (data) {
+>, <Line: +				$scope.$broadcast('render', data);
+>, <Line: +			};
+>, <Line: +			$scope.changeSeriesColor = function (series, color) {
+>, <Line: +				series.color = color;
+>, <Line: +				$scope.panel.aliasColors[series.alias] = series.color;
+>, <Line: +				$scope.render();
+>, <Line: +			};
+>, <Line: +			$scope.toggleSeries = function (serie, event) {
+>, <Line: +				if (event.ctrlKey || event.metaKey || event.shiftKey) {
+>, <Line: +					if ($scope.hiddenSeries[serie.alias]) {
+>, <Line: +						delete $scope.hiddenSeries[serie.alias];
+>, <Line: +					}
+>, <Line: +					else {
+>, <Line: +						$scope.hiddenSeries[serie.alias] = true;
+>, <Line: +					}
+>, <Line: +				} else {
+>, <Line: +					$scope.toggleSeriesExclusiveMode(serie);
+>, <Line: +				}
+>, <Line: +				$scope.render();
+>, <Line: +			};
+>, <Line: +			$scope.toggleSeriesExclusiveMode = function (serie) {
+>, <Line: +				var hidden = $scope.hiddenSeries;
+>, <Line: +				if (hidden[serie.alias]) {
+>, <Line: +					delete hidden[serie.alias];
+>, <Line: +				}
+>, <Line: +				// check if every other series is hidden
+>, <Line: +				var alreadyExclusive = _.every($scope.seriesList, function (value) {
+>, <Line: +					if (value.alias === serie.alias) {
+>, <Line: +						return true;
+>, <Line: +					}
+>, <Line: +					return hidden[value.alias];
+>, <Line: +				});
+>, <Line: +				if (alreadyExclusive) {
+>, <Line: +					// remove all hidden series
+>, <Line: +					_.each($scope.seriesList, function (value) {
+>, <Line: +						delete $scope.hiddenSeries[value.alias];
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					// hide all but this serie
+>, <Line: +					_.each($scope.seriesList, function (value) {
+>, <Line: +						if (value.alias === serie.alias) {
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						$scope.hiddenSeries[value.alias] = true;
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.toggleYAxis = function (info) {
+>, <Line: +				var override = _.findWhere($scope.panel.seriesOverrides, {alias: info.alias});
+>, <Line: +				if (!override) {
+>, <Line: +					override = {alias: info.alias};
+>, <Line: +					$scope.panel.seriesOverrides.push(override);
+>, <Line: +				}
+>, <Line: +				override.yaxis = info.yaxis === 2 ? 1 : 2;
+>, <Line: +				$scope.render();
+>, <Line: +			};
+>, <Line: +			$scope.toggleGridMinMax = function (key) {
+>, <Line: +				$scope.panel.grid[key] = _.toggle($scope.panel.grid[key], null, 0);
+>, <Line: +				$scope.render();
+>, <Line: +			};
+>, <Line: +			$scope.addSeriesOverride = function (override) {
+>, <Line: +				$scope.panel.seriesOverrides.push(override || {});
+>, <Line: +			};
+>, <Line: +			$scope.removeSeriesOverride = function (override) {
+>, <Line: +				$scope.panel.seriesOverrides = _.without($scope.panel.seriesOverrides, override);
+>, <Line: +				$scope.render();
+>, <Line: +			};
+>, <Line: +			// Called from panel menu
+>, <Line: +			$scope.toggleLegend = function () {
+>, <Line: +				$scope.panel.legend.show = !$scope.panel.legend.show;
+>, <Line: +				$scope.get_data();
+>, <Line: +			};
+>, <Line: +			$scope.exportCsv = function () {
+>, <Line: +				kbn.exportSeriesListToCsv($scope.seriesList);
+>, <Line: +			};
+>, <Line: +			panelSrv.init($scope);
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'app',
+>, <Line: -  'jquery',
+>, <Line: -  'lodash',
+>, <Line: -  'kbn',
+>, <Line: -  'moment',
+>, <Line: -  'components/timeSeries',
+>, <Line: -  'components/panelmeta',
+>, <Line: -  'services/panelSrv',
+>, <Line: -  'services/annotationsSrv',
+>, <Line: -  'services/datasourceSrv',
+>, <Line: -  './seriesOverridesCtrl',
+>, <Line: -  './graph',
+>, <Line: -  './legend',
+>, <Line: -],
+>, <Line: -function (angular, app, $, _, kbn, moment, TimeSeries, PanelMeta) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.panels.graph');
+>, <Line: -  module.controller('GraphCtrl', function($scope, $rootScope, panelSrv, annotationsSrv, timeSrv) {
+>, <Line: -    $scope.panelMeta = new PanelMeta({
+>, <Line: -      description: 'Graph panel',
+>, <Line: -      fullscreen: true,
+>, <Line: -      metricsEditor: true
+>, <Line: -    });
+>, <Line: -    $scope.panelMeta.addEditorTab('Axes & Grid', 'app/panels/graph/axisEditor.html');
+>, <Line: -    $scope.panelMeta.addEditorTab('Display Styles', 'app/panels/graph/styleEditor.html');
+>, <Line: -    $scope.panelMeta.addExtendedMenuItem('Export CSV', '', 'exportCsv()');
+>, <Line: -    $scope.panelMeta.addExtendedMenuItem('Toggle legend', '', 'toggleLegend()');
+>, <Line: -    // Set and populate defaults
+>, <Line: -    var _d = {
+>, <Line: -      // datasource name, null = default datasource
+>, <Line: -      datasource: null,
+>, <Line: -       // sets client side (flot) or native graphite png renderer (png)
+>, <Line: -      renderer: 'flot',
+>, <Line: -       // Show/hide the x-axis
+>, <Line: -      'x-axis'      : true,
+>, <Line: -      // Show/hide y-axis
+>, <Line: -      'y-axis'      : true,
+>, <Line: -      // y axis formats, [left axis,right axis]
+>, <Line: -      y_formats    : ['short', 'short'],
+>, <Line: -      // grid options
+>, <Line: -      grid          : {
+>, <Line: -        leftMax: null,
+>, <Line: -        rightMax: null,
+>, <Line: -        leftMin: null,
+>, <Line: -        rightMin: null,
+>, <Line: -        threshold1: null,
+>, <Line: -        threshold2: null,
+>, <Line: -        threshold1Color: 'rgba(216, 200, 27, 0.27)',
+>, <Line: -        threshold2Color: 'rgba(234, 112, 112, 0.22)'
+>, <Line: -      },
+>, <Line: -      // show/hide lines
+>, <Line: -      lines         : true,
+>, <Line: -      // fill factor
+>, <Line: -      fill          : 0,
+>, <Line: -      // line width in pixels
+>, <Line: -      linewidth     : 1,
+>, <Line: -      // show hide points
+>, <Line: -      points        : false,
+>, <Line: -      // point radius in pixels
+>, <Line: -      pointradius   : 5,
+>, <Line: -      // show hide bars
+>, <Line: -      bars          : false,
+>, <Line: -      // enable/disable stacking
+>, <Line: -      stack         : false,
+>, <Line: -      // stack percentage mode
+>, <Line: -      percentage    : false,
+>, <Line: -      // legend options
+>, <Line: -      legend: {
+>, <Line: -        show: true, // disable/enable legend
+>, <Line: -        values: false, // disable/enable legend values
+>, <Line: -        min: false,
+>, <Line: -        max: false,
+>, <Line: -        current: false,
+>, <Line: -        total: false,
+>, <Line: -        avg: false
+>, <Line: -      },
+>, <Line: -      // how null points should be handled
+>, <Line: -      nullPointMode : 'connected',
+>, <Line: -      // staircase line mode
+>, <Line: -      steppedLine: false,
+>, <Line: -      // tooltip options
+>, <Line: -      tooltip       : {
+>, <Line: -        value_type: 'cumulative',
+>, <Line: -        shared: false,
+>, <Line: -      },
+>, <Line: -      // metric queries
+>, <Line: -      targets: [{}],
+>, <Line: -      // series color overrides
+>, <Line: -      aliasColors: {},
+>, <Line: -      // other style overrides
+>, <Line: -      seriesOverrides: [],
+>, <Line: -    };
+>, <Line: -    _.defaults($scope.panel,_d);
+>, <Line: -    _.defaults($scope.panel.tooltip, _d.tooltip);
+>, <Line: -    _.defaults($scope.panel.annotate, _d.annotate);
+>, <Line: -    _.defaults($scope.panel.grid, _d.grid);
+>, <Line: -    _.defaults($scope.panel.legend, _d.legend);
+>, <Line: -    $scope.hiddenSeries = {};
+>, <Line: -    $scope.seriesList = [];
+>, <Line: -    $scope.updateTimeRange = function () {
+>, <Line: -      $scope.range = timeSrv.timeRange();
+>, <Line: -      $scope.rangeUnparsed = timeSrv.timeRange(false);
+>, <Line: -      if ($scope.panel.maxDataPoints) {
+>, <Line: -        $scope.resolution = $scope.panel.maxDataPoints;
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        $scope.resolution = Math.ceil($(window).width() * ($scope.panel.span / 12));
+>, <Line: -      }
+>, <Line: -      $scope.interval = kbn.calculateInterval($scope.range, $scope.resolution, $scope.panel.interval);
+>, <Line: -    };
+>, <Line: -    $scope.get_data = function() {
+>, <Line: -      $scope.updateTimeRange();
+>, <Line: -      var metricsQuery = {
+>, <Line: -        range: $scope.rangeUnparsed,
+>, <Line: -        interval: $scope.interval,
+>, <Line: -        targets: $scope.panel.targets,
+>, <Line: -        format: $scope.panel.renderer === 'png' ? 'png' : 'json',
+>, <Line: -        maxDataPoints: $scope.resolution,
+>, <Line: -        cacheTimeout: $scope.panel.cacheTimeout
+>, <Line: -      };
+>, <Line: -      $scope.annotationsPromise = annotationsSrv.getAnnotations($scope.rangeUnparsed, $scope.dashboard);
+>, <Line: -      return $scope.datasource.query(metricsQuery)
+>, <Line: -        .then($scope.dataHandler)
+>, <Line: -        .then(null, function(err) {
+>, <Line: -          $scope.panelMeta.loading = false;
+>, <Line: -          $scope.panelMeta.error = err.message || "Timeseries data request error";
+>, <Line: -          $scope.inspector.error = err;
+>, <Line: -          $scope.seriesList = [];
+>, <Line: -          $scope.render([]);
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    $scope.dataHandler = function(results) {
+>, <Line: -      // png renderer returns just a url
+>, <Line: -      if (_.isString(results)) {
+>, <Line: -        $scope.panelMeta.loading = false;
+>, <Line: -        $scope.render(results);
+>, <Line: -        return;
+>, <Line: -      }
+>, <Line: -      $scope.datapointsWarning = false;
+>, <Line: -      $scope.datapointsCount = 0;
+>, <Line: -      $scope.datapointsOutside = false;
+>, <Line: -      $scope.seriesList = _.map(results.data, $scope.seriesHandler);
+>, <Line: -      $scope.datapointsWarning = $scope.datapointsCount === 0 || $scope.datapointsOutside;
+>, <Line: -      $scope.annotationsPromise
+>, <Line: -        .then(function(annotations) {
+>, <Line: -          $scope.panelMeta.loading = false;
+>, <Line: -          $scope.seriesList.annotations = annotations;
+>, <Line: -          $scope.render($scope.seriesList);
+>, <Line: -        }, function() {
+>, <Line: -          $scope.panelMeta.loading = false;
+>, <Line: -          $scope.render($scope.seriesList);
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    $scope.seriesHandler = function(seriesData, index) {
+>, <Line: -      var datapoints = seriesData.datapoints;
+>, <Line: -      var alias = seriesData.target;
+>, <Line: -      var color = $scope.panel.aliasColors[alias] || $rootScope.colors[index];
+>, <Line: -      var series = new TimeSeries({
+>, <Line: -        datapoints: datapoints,
+>, <Line: -        alias: alias,
+>, <Line: -        color: color,
+>, <Line: -      });
+>, <Line: -      if (datapoints && datapoints.length > 0) {
+>, <Line: -        var last = moment.utc(datapoints[datapoints.length - 1][1]);
+>, <Line: -        var from = moment.utc($scope.range.from);
+>, <Line: -        if (last - from < -10000) {
+>, <Line: -          $scope.datapointsOutside = true;
+>, <Line: -        }
+>, <Line: -        $scope.datapointsCount += datapoints.length;
+>, <Line: -      }
+>, <Line: -      return series;
+>, <Line: -    };
+>, <Line: -    $scope.render = function(data) {
+>, <Line: -      $scope.$broadcast('render', data);
+>, <Line: -    };
+>, <Line: -    $scope.changeSeriesColor = function(series, color) {
+>, <Line: -      series.color = color;
+>, <Line: -      $scope.panel.aliasColors[series.alias] = series.color;
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    $scope.toggleSeries = function(serie, event) {
+>, <Line: -      if (event.ctrlKey || event.metaKey || event.shiftKey) {
+>, <Line: -        if ($scope.hiddenSeries[serie.alias]) {
+>, <Line: -          delete $scope.hiddenSeries[serie.alias];
+>, <Line: -        }
+>, <Line: -        else {
+>, <Line: -          $scope.hiddenSeries[serie.alias] = true;
+>, <Line: -        }
+>, <Line: -      } else {
+>, <Line: -        $scope.toggleSeriesExclusiveMode(serie);
+>, <Line: -      }
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    $scope.toggleSeriesExclusiveMode = function(serie) {
+>, <Line: -      var hidden = $scope.hiddenSeries;
+>, <Line: -      if (hidden[serie.alias]) {
+>, <Line: -        delete hidden[serie.alias];
+>, <Line: -      }
+>, <Line: -      // check if every other series is hidden
+>, <Line: -      var alreadyExclusive = _.every($scope.seriesList, function(value) {
+>, <Line: -        if (value.alias === serie.alias) {
+>, <Line: -          return true;
+>, <Line: -        }
+>, <Line: -        return hidden[value.alias];
+>, <Line: -      });
+>, <Line: -      if (alreadyExclusive) {
+>, <Line: -        // remove all hidden series
+>, <Line: -        _.each($scope.seriesList, function(value) {
+>, <Line: -          delete $scope.hiddenSeries[value.alias];
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        // hide all but this serie
+>, <Line: -        _.each($scope.seriesList, function(value) {
+>, <Line: -          if (value.alias === serie.alias) {
+>, <Line: -            return;
+>, <Line: -          }
+>, <Line: -          $scope.hiddenSeries[value.alias] = true;
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.toggleYAxis = function(info) {
+>, <Line: -      var override = _.findWhere($scope.panel.seriesOverrides, { alias: info.alias });
+>, <Line: -      if (!override) {
+>, <Line: -        override = { alias: info.alias };
+>, <Line: -        $scope.panel.seriesOverrides.push(override);
+>, <Line: -      }
+>, <Line: -      override.yaxis = info.yaxis === 2 ? 1 : 2;
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    $scope.toggleGridMinMax = function(key) {
+>, <Line: -      $scope.panel.grid[key] = _.toggle($scope.panel.grid[key], null, 0);
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    $scope.addSeriesOverride = function(override) {
+>, <Line: -      $scope.panel.seriesOverrides.push(override || {});
+>, <Line: -    };
+>, <Line: -    $scope.removeSeriesOverride = function(override) {
+>, <Line: -      $scope.panel.seriesOverrides = _.without($scope.panel.seriesOverrides, override);
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    // Called from panel menu
+>, <Line: -    $scope.toggleLegend = function() {
+>, <Line: -      $scope.panel.legend.show = !$scope.panel.legend.show;
+>, <Line: -      $scope.get_data();
+>, <Line: -    };
+>, <Line: -    $scope.exportCsv = function() {
+>, <Line: -      kbn.exportSeriesListToCsv($scope.seriesList);
+>, <Line: -    };
+>, <Line: -    panelSrv.init($scope);
+>, <Line: -  });
+>, <Line: -});
+>]

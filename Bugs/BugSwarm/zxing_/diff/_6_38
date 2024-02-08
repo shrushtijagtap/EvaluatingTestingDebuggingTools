@@ -1,0 +1,4 @@
+[<Line: +    for (int i = 0; i < dotsAndXs.length(); ++i) {
+>]
+[<Line: -    for(int i = 0; i < dotsAndXs.length(); ++i){
+>]

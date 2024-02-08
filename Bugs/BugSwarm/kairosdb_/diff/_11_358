@@ -1,0 +1,15 @@
+[<Line: +				var metricName = $('#metricContainer' + tabContainerMap[selectedTabIndex]).find(".metricName").combobox("value");
+>, <Line: +					if (metricName){
+>, <Line: +			<td colspan="3" align="center" class="ui-widget header">Absolute</td>
+>, <Line: +		<td colspan="2" align="center" class="ui-widget header">Relative</td>
+>, <Line: +		<td align="center" class="ui-widget header">Time Zone</td>
+>]
+[<Line: -					var metricName = $('#metricContainer' + tabContainerMap[selectedTabIndex]).find(".metricName").combobox("value");
+>, <Line: -					if (metricName) {
+>, <Line: -			<td colspan="3" align="center" class="ui-widget header">Absolute
+>, <Line: -			</td>
+>, <Line: -			<td colspan="2" align="center" class="ui-widget header">Relative
+>, <Line: -			</td>
+>, <Line: -			<td align="center" class="ui-widget header">Time Zone
+>, <Line: -			</td>
+>]

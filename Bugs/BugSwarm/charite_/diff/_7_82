@@ -1,0 +1,108 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.pedigree;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import de.charite.compbio.jannovar.data.ReferenceDictionary;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerException;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.ad.CompatibilityCheckerAutosomalDominant;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.ar.CompatibilityCheckerAutosomalRecessive;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.xd.CompatibilityCheckerXDominant;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.xr.CompatibilityCheckerXRecessive;
+>, <Line: -import de.charite.compbio.jannovar.reference.HG19RefDictBuilder;
+>, <Line: -/** Base class for compatibility checkers with utility methods. */
+>, <Line: -public class CompatibilityCheckerTestBase {
+>, <Line: -	static protected final ReferenceDictionary refDict = HG19RefDictBuilder.build();
+>, <Line: -	static protected final String geneName = "<fakeName>";
+>, <Line: -	protected final Genotype HET = Genotype.HETEROZYGOUS;
+>, <Line: -	protected final Genotype REF = Genotype.HOMOZYGOUS_REF;
+>, <Line: -	protected final Genotype ALT = Genotype.HOMOZYGOUS_ALT;
+>, <Line: -	protected final Genotype UKN = Genotype.NOT_OBSERVED;
+>, <Line: -	protected Pedigree pedigree;
+>, <Line: -	protected ImmutableList<String> names;
+>, <Line: -	protected CompatibilityCheckerAutosomalDominant buildCheckerAD(Genotype gt) throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, false, ImmutableList.of(ImmutableList.of(gt)));
+>, <Line: -		return new CompatibilityCheckerAutosomalDominant(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerAutosomalDominant buildCheckerAD(Genotype gt1, Genotype gt2)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, false, ImmutableList.of(ImmutableList.of(gt1),
+>, <Line: -				ImmutableList.of(gt2)));
+>, <Line: -		return new CompatibilityCheckerAutosomalDominant(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerAutosomalDominant buildCheckerAD(ImmutableList<Genotype> list)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, false, ImmutableList.of(list));
+>, <Line: -		return new CompatibilityCheckerAutosomalDominant(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerAutosomalDominant buildCheckerAD(ImmutableList<Genotype> list1,
+>, <Line: -			ImmutableList<Genotype> list2) throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, false, ImmutableList.of(list1, list2));
+>, <Line: -		return new CompatibilityCheckerAutosomalDominant(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerAutosomalRecessive buildCheckerAR(Genotype gt) throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, false, ImmutableList.of(ImmutableList.of(gt)));
+>, <Line: -		return new CompatibilityCheckerAutosomalRecessive(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerAutosomalRecessive buildCheckerAR(Genotype gt1, Genotype gt2)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, false, ImmutableList.of(ImmutableList.of(gt1),
+>, <Line: -				ImmutableList.of(gt2)));
+>, <Line: -		return new CompatibilityCheckerAutosomalRecessive(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerAutosomalRecessive buildCheckerAR(ImmutableList<Genotype> list)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, false, ImmutableList.of(list));
+>, <Line: -		return new CompatibilityCheckerAutosomalRecessive(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerAutosomalRecessive buildCheckerAR(ImmutableList<Genotype> list1,
+>, <Line: -			ImmutableList<Genotype> list2) throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, false, ImmutableList.of(list1, list2));
+>, <Line: -		return new CompatibilityCheckerAutosomalRecessive(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerXRecessive buildCheckerXR(Genotype gt) throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, true, ImmutableList.of(ImmutableList.of(gt)));
+>, <Line: -		return new CompatibilityCheckerXRecessive(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerXRecessive buildCheckerXR(Genotype gt1, Genotype gt2)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, true, ImmutableList.of(ImmutableList.of(gt1),
+>, <Line: -				ImmutableList.of(gt2)));
+>, <Line: -		return new CompatibilityCheckerXRecessive(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerXRecessive buildCheckerXR(ImmutableList<Genotype> list)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, true, ImmutableList.of(list));
+>, <Line: -		return new CompatibilityCheckerXRecessive(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerXRecessive buildCheckerXR(ImmutableList<Genotype> list1, ImmutableList<Genotype> list2)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, true, ImmutableList.of(list1, list2));
+>, <Line: -		return new CompatibilityCheckerXRecessive(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerXDominant buildCheckerXD(Genotype gt) throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, true, ImmutableList.of(ImmutableList.of(gt)));
+>, <Line: -		return new CompatibilityCheckerXDominant(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerXDominant buildCheckerXD(ImmutableList<Genotype> list)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, true, ImmutableList.of(list));
+>, <Line: -		return new CompatibilityCheckerXDominant(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerXDominant buildCheckerXD(ImmutableList<Genotype> list1, ImmutableList<Genotype> list2)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, true, ImmutableList.of(list1, list2));
+>, <Line: -		return new CompatibilityCheckerXDominant(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected CompatibilityCheckerXDominant buildCheckerXD(Genotype gt1, Genotype gt2)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		GenotypeList lst = new GenotypeList(geneName, names, true, ImmutableList.of(ImmutableList.of(gt1),
+>, <Line: -				ImmutableList.of(gt2)));
+>, <Line: -		return new CompatibilityCheckerXDominant(pedigree, lst);
+>, <Line: -	}
+>, <Line: -	protected ImmutableList<Genotype> lst(Genotype... gts) {
+>, <Line: -		ImmutableList.Builder<Genotype> builder = new ImmutableList.Builder<Genotype>();
+>, <Line: -		for (int i = 0; i < gts.length; ++i)
+>, <Line: -			builder.add(gts[i]);
+>, <Line: -		return builder.build();
+>, <Line: -	}
+>, <Line: -}
+>]

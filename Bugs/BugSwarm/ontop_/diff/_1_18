@@ -1,0 +1,14 @@
+[<Line: +/**
+>, <Line: + * Represents ClassAssertion from OWL 2 QL Specification
+>, <Line: + * ClassAssertion := 'ClassAssertion' '(' axiomAnnotations Class Individual ')'
+>, <Line: + * @author Roman Kontchakov
+>]
+[<Line: -/***
+>, <Line: - * Represents ClassAssertion in the OWL 2 QL specification
+>, <Line: - * ClassAssertion := 'ClassAssertion' '(' axiomAnnotations Class Individual ')'
+>, <Line: - * A data assertion for a class, 
+>, <Line: - *    e.g., Person(mariano), where mariano is an object identifier.
+>, <Line: - * 
+>, <Line: - * These also correspond to rdf:type assertions, 
+>, <Line: - *    e.g., :mariano rdf:type :Person.
+>]

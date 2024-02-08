@@ -1,0 +1,4 @@
+[<Line: +                    classFileTransformers.put(classFileTransformer, new LambdaFactory(classFileFactory, classFileFactory.getClass().getMethod("make",
+>]
+[<Line: -                    classFileTransformers.put(classFileTransformer, new LambdaFactory(classFileFactory, classFileFactory.getClass().getDeclaredMethod("make",
+>]

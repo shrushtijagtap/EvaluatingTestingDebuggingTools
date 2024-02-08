@@ -1,0 +1,13 @@
+[<Line: +import net.bytebuddy.dynamic.scaffold.TypeValidation;
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testDelegationToInvisibleFieldTypeThrowsException() throws Exception {
+>, <Line: +        new ByteBuddy()
+>, <Line: +                .with(TypeValidation.DISABLED)
+>, <Line: +                .subclass(Object.class)
+>, <Line: +                .defineField("foo", Foo.class)
+>, <Line: +                .method(isToString())
+>, <Line: +                .intercept(MethodDelegation.toField("foo"))
+>, <Line: +                .make();
+>, <Line: +    }
+>]
+[]

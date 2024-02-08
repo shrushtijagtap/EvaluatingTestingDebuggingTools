@@ -1,0 +1,10 @@
+[<Line: +        tabs.add(0, Integer.valueOf(size));
+>, <Line: +            base = tabs.get(0).intValue();
+>, <Line: +        tabs.add(0, Integer.valueOf(base + increment));
+>, <Line: +        int tab = tabs.get(0).intValue();
+>]
+[<Line: -        tabs.add(0, size);
+>, <Line: -            base = tabs.get(0);
+>, <Line: -        tabs.add(0, base + increment);
+>, <Line: -        int tab = tabs.get(0);
+>]

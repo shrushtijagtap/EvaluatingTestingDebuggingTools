@@ -1,0 +1,10 @@
+[<Line: +import static org.stagemonitor.core.instrument.StagemonitorClassNameMatcher.isInsideMonitoredProject;
+>, <Line: +		return makeSureClassesAreNotProfiledTwice();
+>, <Line: +		return isSubclass() ? isInsideMonitoredProject() : ElementMatchers.<TypeDescription>none();
+>]
+[<Line: -import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
+>, <Line: -import org.stagemonitor.core.instrument.StagemonitorClassNameMatcher;
+>, <Line: -		return nameStartsWith(Profiler.class.getPackage().getName())
+>, <Line: -				.or(makeSureClassesAreNotProfiledTwice());
+>, <Line: -		return isSubclass() ? StagemonitorClassNameMatcher.INSTANCE : ElementMatchers.<TypeDescription>none();
+>]

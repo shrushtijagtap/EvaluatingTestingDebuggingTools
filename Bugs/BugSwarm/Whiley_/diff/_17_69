@@ -1,0 +1,12 @@
+[<Line: +function buildNatList(int n) -> ([int] m)
+>, <Line: +requires n >= 0:
+>, <Line: +    [int] rs = [0; n]
+>, <Line: +        where all { r in 0..i | rs[r] >= 0 }:
+>, <Line: +        rs[i] = i
+>]
+[<Line: -function buildNatList(int n) -> ([int] m):
+>, <Line: -    [int] rs = []
+>, <Line: -        where all { r in 0..|rs| | rs[r] >= 0 }:
+>, <Line: -        rs = rs ++ [i]
+>, <Line: -    assume buildNatList(-1) == []
+>]

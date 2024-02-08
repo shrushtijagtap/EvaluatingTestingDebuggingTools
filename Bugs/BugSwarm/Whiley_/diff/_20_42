@@ -1,0 +1,4 @@
+[<Line: +function f(real[] ls) -> int:
+>]
+[<Line: -function f([real] ls) -> int:
+>]

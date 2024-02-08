@@ -1,0 +1,14 @@
+[<Line: +    connection = client.open(server.url("/foo").url());
+>, <Line: +    connection = client.open(server.url("/foo").url());
+>, <Line: +    HttpURLConnection settingsConnection = client.open(server.url("/").url());
+>, <Line: +    HttpURLConnection connection1 = client.open(server.url("/").url());
+>, <Line: +    HttpURLConnection connection2 = client.open(server.url("/").url());
+>, <Line: +    HttpURLConnection connection3 = client.open(server.url("/").url());
+>]
+[<Line: -    connection = client.open(server.getUrl("/foo"));
+>, <Line: -    connection = client.open(server.getUrl("/foo"));
+>, <Line: -    HttpURLConnection settingsConnection = client.open(server.getUrl("/"));
+>, <Line: -    HttpURLConnection connection1 = client.open(server.getUrl("/"));
+>, <Line: -    HttpURLConnection connection2 = client.open(server.getUrl("/"));
+>, <Line: -    HttpURLConnection connection3 = client.open(server.getUrl("/"));
+>]

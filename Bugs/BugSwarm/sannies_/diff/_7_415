@@ -1,0 +1,12 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part15;
+>, <Line: +import org.mp4parser.ParsableBox;
+>, <Line: +    public TierInfoBoxTest(ParsableBox parsableBoxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: +        super(parsableBoxUnderTest, properties);
+>, <Line: +    }
+>]
+[<Line: -package com.mp4parser.iso14496.part15;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -    public TierInfoBoxTest(Box boxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: -        super(boxUnderTest, properties);
+>, <Line: -    }
+>]

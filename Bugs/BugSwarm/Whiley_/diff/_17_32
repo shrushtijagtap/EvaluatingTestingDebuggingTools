@@ -1,0 +1,10 @@
+[<Line: +    [[int]] C_data = [[]; A.height]
+>, <Line: +        [int] row = [0; B.width]
+>, <Line: +            row[j] = r
+>, <Line: +        C_data[i] = row
+>]
+[<Line: -    [[int]] C_data = []
+>, <Line: -        [int] row = []
+>, <Line: -            row = row ++ [r]
+>, <Line: -        C_data = C_data ++ [row]
+>]

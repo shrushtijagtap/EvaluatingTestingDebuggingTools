@@ -1,0 +1,70 @@
+[<Line: +import org.sonar.plugins.php.api.tree.ScriptTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.Tree.Kind;
+>, <Line: +import org.sonar.plugins.php.api.tree.declaration.ClassDeclarationTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.lexical.SyntaxToken;
+>, <Line: +import org.sonar.plugins.php.api.visitors.PHPVisitorCheck;
+>, <Line: +public class ExtendsImplementsLineCheck extends PHPVisitorCheck implements FormattingCheck {
+>, <Line: +  private static final String MESSAGE = "Move %s to the same line as the declaration of its class name, \"%s\".";
+>, <Line: +  private FormattingStandardCheck check;
+>, <Line: +  @Override
+>, <Line: +  public void checkFormat(FormattingStandardCheck formattingCheck, ScriptTree scriptTree) {
+>, <Line: +    this.check = formattingCheck;
+>, <Line: +    super.visitScript(scriptTree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitClassDeclaration(ClassDeclarationTree tree) {
+>, <Line: +    if (check.isExtendsAndImplementsLine && tree.is(Kind.CLASS_DECLARATION)) {
+>, <Line: +      checkExtendsAndImplementsLine(tree);
+>, <Line: +    super.visitClassDeclaration(tree);
+>, <Line: +  private void checkExtendsAndImplementsLine(ClassDeclarationTree tree) {
+>, <Line: +    SyntaxToken classNameToken = tree.name().token();
+>, <Line: +    int nameLine = classNameToken.line();
+>, <Line: +    boolean isExtendsOnClassNameLine = isExtendsOnClassNameLine(tree, nameLine);
+>, <Line: +    boolean isImplementsOnClassNameLine = isImplementsOnClassNameLine(tree, nameLine);
+>, <Line: +    String partialMessage = getIssuePartialMessage(isExtendsOnClassNameLine, isImplementsOnClassNameLine);
+>, <Line: +    if (partialMessage != null) {
+>, <Line: +      check.reportIssue(String.format(MESSAGE, partialMessage, classNameToken.text()), tree);
+>, <Line: +  private boolean isExtendsOnClassNameLine(ClassDeclarationTree classDeclaration, int classNameLine) {
+>, <Line: +    SyntaxToken extendsToken = classDeclaration.extendsToken();
+>, <Line: +    return extendsToken == null || classNameLine == extendsToken.line();
+>, <Line: +  private boolean isImplementsOnClassNameLine(ClassDeclarationTree classDeclaration, int classNameLine) {
+>, <Line: +    SyntaxToken implementsToken = classDeclaration.implementsToken();
+>, <Line: +    return implementsToken == null || classNameLine == implementsToken.line();
+>, <Line: +  private String getIssuePartialMessage(boolean isExtendsOnClassNameLine, boolean isImplementsOnClassNameLine) {
+>, <Line: +    }
+>, <Line: +    if (!isExtendsOnClassNameLine && isImplementsOnClassNameLine) {
+>, <Line: +    }
+>, <Line: +    if (isExtendsOnClassNameLine && !isImplementsOnClassNameLine) {
+>]
+[<Line: -import com.sonar.sslr.api.AstNode;
+>, <Line: -import org.sonar.php.api.PHPKeyword;
+>, <Line: -import org.sonar.php.parser.PHPGrammar;
+>, <Line: -public class ExtendsImplementsLineCheck {
+>, <Line: -  public void visitNode(FormattingStandardCheck formattingCheck, AstNode node) {
+>, <Line: -    if (formattingCheck.isExtendsAndImplementsLine && node.is(PHPGrammar.CLASS_DECLARATION)) {
+>, <Line: -      checkExtendsAndImplementsLine(formattingCheck, node);
+>, <Line: -  private void checkExtendsAndImplementsLine(FormattingStandardCheck formattingCheck, AstNode node) {
+>, <Line: -    AstNode identifier = node.getFirstChild(PHPGrammar.IDENTIFIER);
+>, <Line: -    String className = identifier.getTokenOriginalValue();
+>, <Line: -    int classNameLine = identifier.getTokenLine();
+>, <Line: -    boolean isExtendsOnClassNameLine = isExtendsOnClassNameLine(node, classNameLine);
+>, <Line: -    boolean isImplementsOnClassNameLine = isImplementsOnClassNameLine(node, classNameLine);
+>, <Line: -    String msg = getIssueMessage(isExtendsOnClassNameLine, isImplementsOnClassNameLine);
+>, <Line: -    if (msg != null) {
+>, <Line: -      formattingCheck.reportIssue("Move " + msg + " to the same line as the declaration of its class name, \"" + className + "\".", node);
+>, <Line: -  private boolean isExtendsOnClassNameLine(AstNode classDeclaration, int classNameLine) {
+>, <Line: -    AstNode extendsNode = classDeclaration.getFirstChild(PHPGrammar.EXTENDS_FROM);
+>, <Line: -    if (extendsNode != null) {
+>, <Line: -      return classNameLine == extendsNode.getFirstChild(PHPKeyword.EXTENDS).getTokenLine();
+>, <Line: -    }
+>, <Line: -    return true;
+>, <Line: -  private boolean isImplementsOnClassNameLine(AstNode classDeclaration, int classNameLine) {
+>, <Line: -    AstNode implementsNode = classDeclaration.getFirstChild(PHPGrammar.IMPLEMENTS_LIST);
+>, <Line: -    if (implementsNode != null) {
+>, <Line: -      return classNameLine == implementsNode.getFirstChild(PHPKeyword.IMPLEMENTS).getTokenLine();
+>, <Line: -    }
+>, <Line: -    return true;
+>, <Line: -  private String getIssueMessage(boolean isExtendsOnClassNameLine, boolean isImplementsOnClassNameLine) {
+>, <Line: -    } else if (!isExtendsOnClassNameLine && isImplementsOnClassNameLine) {
+>, <Line: -    } else if (isExtendsOnClassNameLine && !isImplementsOnClassNameLine) {
+>]

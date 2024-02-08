@@ -1,0 +1,31 @@
+[<Line: +        when(implementationTarget.invokeDefault(token)).thenReturn(specialMethodInvocation);
+>, <Line: +        when(implementationTarget.invokeDefault(eq(token), any(TypeDescription.class))).thenReturn(specialMethodInvocation);
+>, <Line: +        verify(implementationTarget).invokeDefault(token);
+>, <Line: +        verify(implementationTarget).invokeDefault(token);
+>, <Line: +        verify(implementationTarget).invokeDefault(token, new TypeDescription.ForLoadedType(INTERFACE_TYPE));
+>]
+[<Line: -        when(implementationTarget.invokeDefault(any(TypeDescription.class), eq(token))).thenReturn(specialMethodInvocation);
+>, <Line: -        when(source.isSpecializableFor(firstInterface)).thenReturn(true);
+>, <Line: -        when(instrumentedType.getInterfaces()).thenReturn(new TypeList.Generic.Explicit(firstInterface, secondInterface));
+>, <Line: -        verify(implementationTarget).getInstrumentedType();
+>, <Line: -        verify(implementationTarget).invokeDefault(firstInterface, token);
+>, <Line: -        verifyNoMoreInteractions(implementationTarget);
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void testImplicitLookupIsAmbiguous() throws Exception {
+>, <Line: -        when(targetParameterType.represents(any(Class.class))).thenReturn(true);
+>, <Line: -        when(specialMethodInvocation.isValid()).thenReturn(true, false);
+>, <Line: -        doReturn(VOID_TYPE).when(annotation).targetType();
+>, <Line: -        when(source.asSignatureToken()).thenReturn(token);
+>, <Line: -        when(source.isSpecializableFor(firstInterface)).thenReturn(true);
+>, <Line: -        when(source.isSpecializableFor(secondInterface)).thenReturn(true);
+>, <Line: -        when(instrumentedType.getInterfaces()).thenReturn(new TypeList.Generic.Explicit(firstInterface, secondInterface));
+>, <Line: -        MethodDelegationBinder.ParameterBinding<?> parameterBinding = DefaultCall.Binder.INSTANCE
+>, <Line: -                .bind(annotationDescription, source, target, implementationTarget, assigner);
+>, <Line: -        assertThat(parameterBinding.isValid(), is(false));
+>, <Line: -        verify(implementationTarget).getInstrumentedType();
+>, <Line: -        verify(implementationTarget).invokeDefault(firstInterface, token);
+>, <Line: -        verify(implementationTarget).getInstrumentedType();
+>, <Line: -        verify(implementationTarget).invokeDefault(firstInterface, token);
+>, <Line: -        verify(implementationTarget).invokeDefault(new TypeDescription.ForLoadedType(INTERFACE_TYPE), token);
+>]

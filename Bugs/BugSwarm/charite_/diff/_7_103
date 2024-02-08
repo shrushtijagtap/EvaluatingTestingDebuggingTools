@@ -1,0 +1,25 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.filter;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.List;
+>, <Line: -import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: -/**
+>, <Line: - * keep variants
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - */
+>, <Line: -public class WriterFilterHelper implements VariantContextFilter {
+>, <Line: -	private List<VariantContext> variants = new ArrayList<VariantContext>();
+>, <Line: -	public WriterFilterHelper() {
+>, <Line: -	}
+>, <Line: -	public void put(FlaggedVariant fv) throws FilterException {
+>, <Line: -		variants.add(fv.getVC());
+>, <Line: -	}
+>, <Line: -	public List<VariantContext> getVariants() {
+>, <Line: -		return variants;
+>, <Line: -	}
+>, <Line: -	public void finish() {
+>, <Line: -		/* no-op */
+>, <Line: -	}
+>, <Line: -}
+>]

@@ -1,0 +1,4 @@
+[<Line: +    while i < |this->items| where i >= 0:
+>]
+[<Line: -    while i < |this->items|:
+>]

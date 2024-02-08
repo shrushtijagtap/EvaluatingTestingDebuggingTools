@@ -1,0 +1,13 @@
+[]
+[<Line: -package com.mp4parser.streaming;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import java.nio.ByteBuffer;
+>, <Line: -/**
+>, <Line: - * The most simple sample has a presentation time and content.
+>, <Line: - */
+>, <Line: -public interface StreamingSample {
+>, <Line: -    ByteBuffer getContent();
+>, <Line: -    long getDuration();
+>, <Line: -    SampleExtension[] getExtensions();
+>, <Line: -}
+>]

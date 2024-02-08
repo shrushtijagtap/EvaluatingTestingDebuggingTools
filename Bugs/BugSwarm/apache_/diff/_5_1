@@ -1,0 +1,16 @@
+[<Line: +     * @param excludeNullValues
+>, <Line: +     * @since 3.6
+>, <Line: +            final boolean outputStatics, boolean excludeNullValues, final Class<? super T> reflectUpToClass) {
+>, <Line: +        return new ReflectionToStringBuilder(object, style, null, reflectUpToClass, outputTransients, outputStatics, excludeNullValues)
+>, <Line: +     * @since 3.6
+>, <Line: +                    if (!excludeNullValues || fieldValue != null) {
+>, <Line: +     * @since 3.6
+>, <Line: +     * @since 3.6
+>]
+[<Line: -     * @param excludeNulls
+>, <Line: -     * @since 2.1
+>, <Line: -            final boolean outputStatics, boolean excludeNulls, final Class<? super T> reflectUpToClass) {
+>, <Line: -        return new ReflectionToStringBuilder(object, style, null, reflectUpToClass, outputTransients, outputStatics, excludeNulls)
+>, <Line: -     * @since 2.1
+>, <Line: -                    if(!excludeNullValues || fieldValue != null){
+>]

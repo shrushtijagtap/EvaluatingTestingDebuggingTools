@@ -1,0 +1,177 @@
+[<Line: +package org.kairosdb.rollup;
+>, <Line: +import com.google.inject.name.Named;
+>, <Line: +import org.kairosdb.core.KairosDBService;
+>, <Line: +import org.kairosdb.core.datastore.Duration;
+>, <Line: +import org.kairosdb.core.datastore.KairosDatastore;
+>, <Line: +import org.kairosdb.core.datastore.TimeUnit;
+>, <Line: +import org.kairosdb.core.exception.KairosDBException;
+>, <Line: +import org.kairosdb.core.scheduler.KairosDBScheduler;
+>, <Line: +import org.quartz.DateBuilder;
+>, <Line: +import org.quartz.JobDataMap;
+>, <Line: +import org.quartz.JobKey;
+>, <Line: +import org.quartz.Trigger;
+>, <Line: +import org.quartz.impl.JobDetailImpl;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +import javax.inject.Inject;
+>, <Line: +import java.util.List;
+>, <Line: +import static com.google.common.base.Preconditions.checkNotNull;
+>, <Line: +import static com.google.common.base.Preconditions.checkState;
+>, <Line: +import static org.quartz.CalendarIntervalScheduleBuilder.calendarIntervalSchedule;
+>, <Line: +import static org.quartz.TriggerBuilder.newTrigger;
+>, <Line: +public class RollUpManager implements KairosDBService, RollupTaskChangeListener
+>, <Line: +{
+>, <Line: +	public static final Logger logger = LoggerFactory.getLogger(RollUpManager.class);
+>, <Line: +	private static final String GROUP_ID = RollUpJob.class.getSimpleName();
+>, <Line: +	private final KairosDBScheduler scheduler;
+>, <Line: +	private final KairosDatastore dataStore;
+>, <Line: +	@Inject
+>, <Line: +	@Named("HOSTNAME")
+>, <Line: +	private String hostName = "localhost";
+>, <Line: +	@Inject
+>, <Line: +	public RollUpManager(RollUpTasksStore taskStore,
+>, <Line: +			KairosDBScheduler scheduler, KairosDatastore dataStore) throws RollUpException
+>, <Line: +	{
+>, <Line: +		checkNotNull(taskStore, "taskStore cannot be null");
+>, <Line: +		this.scheduler = checkNotNull(scheduler, "scheduler cannot be null");
+>, <Line: +		this.dataStore = checkNotNull(dataStore, "dataStore cannot be null");
+>, <Line: +		// Load saved tasks
+>, <Line: +		List<RollupTask> tasks = taskStore.read();
+>, <Line: +		for (RollupTask task : tasks)
+>, <Line: +		{
+>, <Line: +			scheduleNewTask(task);
+>, <Line: +		}
+>, <Line: +		taskStore.addListener(this);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void change(RollupTask task, Action action)
+>, <Line: +	{
+>, <Line: +		checkNotNull(task, "task cannot be null");
+>, <Line: +		switch (action)
+>, <Line: +		{
+>, <Line: +			case ADDED:
+>, <Line: +				scheduleNewTask(task);
+>, <Line: +				break;
+>, <Line: +			case CHANGED:
+>, <Line: +				updateScheduledTask(task);
+>, <Line: +				break;
+>, <Line: +			case REMOVED:
+>, <Line: +				removeScheduledTask(task);
+>, <Line: +				break;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private void scheduleNewTask(RollupTask task)
+>, <Line: +	{
+>, <Line: +		try
+>, <Line: +		{
+>, <Line: +			logger.info("Scheduling rollup " + task.getName());
+>, <Line: +			Trigger trigger = createTrigger(task);
+>, <Line: +			JobDetailImpl jobDetail = createJobDetail(task, dataStore, hostName);
+>, <Line: +			scheduler.schedule(jobDetail, trigger);
+>, <Line: +			logger.info("Roll-up task " + jobDetail.getFullName() + " scheduled. Next execution time " + trigger.getNextFireTime());
+>, <Line: +		}
+>, <Line: +		catch (KairosDBException e)
+>, <Line: +		{
+>, <Line: +			logger.error("Failed to schedule new roll up task job " + task, e);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private void updateScheduledTask(RollupTask task)
+>, <Line: +	{
+>, <Line: +		try
+>, <Line: +		{
+>, <Line: +			scheduler.cancel(getJobKey(task));
+>, <Line: +		}
+>, <Line: +		catch (KairosDBException e)
+>, <Line: +		{
+>, <Line: +			logger.error("Could not cancel roll up task job " + task, e);
+>, <Line: +			return;
+>, <Line: +		}
+>, <Line: +		try
+>, <Line: +		{
+>, <Line: +			logger.info("Updating schedule for rollup " + task.getName());
+>, <Line: +			JobDetailImpl jobDetail = createJobDetail(task, dataStore, hostName);
+>, <Line: +			Trigger trigger = createTrigger(task);
+>, <Line: +			scheduler.schedule(jobDetail, trigger);
+>, <Line: +			logger.info("Roll-up task " + jobDetail.getFullName() + " scheduled. Next execution time " + trigger.getNextFireTime());
+>, <Line: +		}
+>, <Line: +		catch (KairosDBException e)
+>, <Line: +		{
+>, <Line: +			logger.error("Could not schedule roll up task job " + task, e);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private void removeScheduledTask(RollupTask task)
+>, <Line: +	{
+>, <Line: +		try
+>, <Line: +		{
+>, <Line: +			JobKey jobKey = getJobKey(task);
+>, <Line: +			logger.info("Cancelling rollup " + task.getName());
+>, <Line: +			scheduler.cancel(jobKey);
+>, <Line: +		}
+>, <Line: +		catch (KairosDBException e)
+>, <Line: +		{
+>, <Line: +			logger.error("Could not cancel roll up task job " + task.getName(), e);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private static JobKey getJobKey(RollupTask task)
+>, <Line: +	{
+>, <Line: +		return new JobKey(task.getId() + "-" + task.getName(), RollUpJob.class.getSimpleName());
+>, <Line: +	}
+>, <Line: +	static JobDetailImpl createJobDetail(RollupTask task, KairosDatastore dataStore, String hostName)
+>, <Line: +	{
+>, <Line: +		JobDetailImpl jobDetail = new JobDetailImpl();
+>, <Line: +		jobDetail.setJobClass(RollUpJob.class);
+>, <Line: +		jobDetail.setKey(getJobKey(task));
+>, <Line: +		JobDataMap map = new JobDataMap();
+>, <Line: +		map.put("task", task);
+>, <Line: +		map.put("datastore", dataStore);
+>, <Line: +		map.put("hostName", hostName);
+>, <Line: +		jobDetail.setJobDataMap(map);
+>, <Line: +		return jobDetail;
+>, <Line: +	}
+>, <Line: +	@SuppressWarnings("ConstantConditions")
+>, <Line: +	static Trigger createTrigger(RollupTask task)
+>, <Line: +	{
+>, <Line: +		Duration executionInterval = task.getExecutionInterval();
+>, <Line: +		return newTrigger()
+>, <Line: +				.withIdentity(task.getId(), GROUP_ID)
+>, <Line: +				.startAt(DateBuilder.futureDate((int) executionInterval.getValue(), toIntervalUnit(executionInterval.getUnit())))
+>, <Line: +				.withSchedule(calendarIntervalSchedule()
+>, <Line: +						.withInterval((int) executionInterval.getValue(), toIntervalUnit(executionInterval.getUnit())))
+>, <Line: +				.build();
+>, <Line: +	}
+>, <Line: +	private static DateBuilder.IntervalUnit toIntervalUnit(TimeUnit unit)
+>, <Line: +	{
+>, <Line: +		switch (unit)
+>, <Line: +		{
+>, <Line: +			case MILLISECONDS:
+>, <Line: +				return DateBuilder.IntervalUnit.MILLISECOND;
+>, <Line: +			case SECONDS:
+>, <Line: +				return DateBuilder.IntervalUnit.SECOND;
+>, <Line: +			case MINUTES:
+>, <Line: +				return DateBuilder.IntervalUnit.MINUTE;
+>, <Line: +			case HOURS:
+>, <Line: +				return DateBuilder.IntervalUnit.HOUR;
+>, <Line: +			case DAYS:
+>, <Line: +				return DateBuilder.IntervalUnit.DAY;
+>, <Line: +			case WEEKS:
+>, <Line: +				return DateBuilder.IntervalUnit.WEEK;
+>, <Line: +			case MONTHS:
+>, <Line: +				return DateBuilder.IntervalUnit.MONTH;
+>, <Line: +			case YEARS:
+>, <Line: +				return DateBuilder.IntervalUnit.YEAR;
+>, <Line: +			default:
+>, <Line: +				checkState(false, "Invalid time unit" + unit);
+>, <Line: +				return null;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void start() throws KairosDBException
+>, <Line: +	{
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void stop()
+>, <Line: +	{
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

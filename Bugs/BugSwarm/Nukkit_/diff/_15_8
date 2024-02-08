@@ -1,0 +1,36 @@
+[<Line: +package cn.nukkit.item;
+>, <Line: +import cn.nukkit.block.Block;
+>, <Line: +import cn.nukkit.level.Level;
+>, <Line: +import cn.nukkit.Player;
+>, <Line: +public class GlassBottle extends Item{
+>, <Line: +    public GlassBottle(){
+>, <Line: +        this(0, 1);
+>, <Line: +    }
+>, <Line: +    public GlassBottle(int meta){
+>, <Line: +        this(meta, 1);
+>, <Line: +    }
+>, <Line: +    public GlassBottle(int meta, int count){
+>, <Line: +        super(GLASS_BOTTLE, meta, count, "Glass Bottle");
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public boolean onActivate(Level level, Player player, Block block, Block target, int face, double fx, double fy, double fz){
+>, <Line: +        boolean isWater = false;
+>, <Line: +        if(target.getId() == WATER || target.getId() == STILL_WATER){
+>, <Line: +            isWater = true;
+>, <Line: +        }
+>, <Line: +        if(isWater){
+>, <Line: +            if(this.getCount() > 1){
+>, <Line: +                if(player.getInventory().canAddItem(Item.get(Item.POTION))){
+>, <Line: +                    this.setCount(this.getCount() - 1);
+>, <Line: +                    player.getInventory().addItem(Item.get(Item.POTION));
+>, <Line: +                    return true;
+>, <Line: +                }
+>, <Line: +            }else{
+>, <Line: +                player.getInventory().setItemInHand(Item.get(Item.POTION));
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return false;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

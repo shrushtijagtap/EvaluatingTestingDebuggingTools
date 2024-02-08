@@ -1,0 +1,104 @@
+[<Line: +/*
+>, <Line: + * Copyright 2017 Anton Tananaev (anton@traccar.org)
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *     http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package org.traccar.protocol;
+>, <Line: +import org.jboss.netty.buffer.ChannelBuffer;
+>, <Line: +import org.jboss.netty.buffer.ChannelBuffers;
+>, <Line: +import org.jboss.netty.channel.Channel;
+>, <Line: +import org.traccar.BaseProtocolDecoder;
+>, <Line: +import org.traccar.DeviceSession;
+>, <Line: +import org.traccar.helper.DateBuilder;
+>, <Line: +import org.traccar.helper.UnitsConverter;
+>, <Line: +import org.traccar.model.Position;
+>, <Line: +import java.net.SocketAddress;
+>, <Line: +import java.nio.charset.StandardCharsets;
+>, <Line: +public class Gps056ProtocolDecoder extends BaseProtocolDecoder {
+>, <Line: +    public Gps056ProtocolDecoder(Gps056Protocol protocol) {
+>, <Line: +        super(protocol);
+>, <Line: +    }
+>, <Line: +    private static void sendResponse(Channel channel, String type, String imei, ChannelBuffer content) {
+>, <Line: +        if (channel != null) {
+>, <Line: +            ChannelBuffer response = ChannelBuffers.dynamicBuffer();
+>, <Line: +            String header = "*" + type + imei;
+>, <Line: +            response.writeBytes(header.getBytes(StandardCharsets.US_ASCII));
+>, <Line: +            if (content != null) {
+>, <Line: +                response.writeBytes(content);
+>, <Line: +            }
+>, <Line: +            response.writeByte('#');
+>, <Line: +            channel.write(response);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private static double decodeCoordinate(ChannelBuffer buf) {
+>, <Line: +        double degrees = buf.getUnsignedShort(buf.readerIndex()) / 100;
+>, <Line: +        double minutes = buf.readUnsignedShort() % 100 + buf.readUnsignedShort() * 0.0001;
+>, <Line: +        degrees += minutes / 60;
+>, <Line: +        byte hemisphere = buf.readByte();
+>, <Line: +        if (hemisphere == 'S' || hemisphere == 'W') {
+>, <Line: +            degrees = -degrees;
+>, <Line: +        }
+>, <Line: +        return degrees;
+>, <Line: +    }
+>, <Line: +    private static void decodeStatus(ChannelBuffer buf, Position position) {
+>, <Line: +        position.set(Position.KEY_INPUT, buf.readUnsignedByte());
+>, <Line: +        position.set(Position.KEY_OUTPUT, buf.readUnsignedByte());
+>, <Line: +        position.set(Position.PREFIX_ADC + 1, ChannelBuffers.swapShort(buf.readShort()) * 5.06); // mV
+>, <Line: +        position.set(Position.KEY_SATELLITES, buf.readUnsignedByte());
+>, <Line: +        position.set(Position.KEY_RSSI, buf.readUnsignedByte());
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected Object decode(
+>, <Line: +            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+>, <Line: +        ChannelBuffer buf = (ChannelBuffer) msg;
+>, <Line: +        buf.skipBytes(2); // header
+>, <Line: +        buf.skipBytes(2); // length
+>, <Line: +        String type = buf.readBytes(7).toString(StandardCharsets.US_ASCII);
+>, <Line: +        String imei = buf.readBytes(15).toString(StandardCharsets.US_ASCII);
+>, <Line: +        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, imei);
+>, <Line: +        if (deviceSession == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        if (type.startsWith("LOGN")) {
+>, <Line: +            sendResponse(channel, "LGSA" + type.substring(4), imei,
+>, <Line: +                    ChannelBuffers.copiedBuffer("1", StandardCharsets.US_ASCII));
+>, <Line: +        } else if (type.startsWith("GPSL")) {
+>, <Line: +            Position position = new Position();
+>, <Line: +            position.setProtocol(getProtocolName());
+>, <Line: +            position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: +            DateBuilder dateBuilder = new DateBuilder()
+>, <Line: +                    .setDateReverse(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte())
+>, <Line: +                    .setTime(buf.readUnsignedByte(), buf.readUnsignedByte(), buf.readUnsignedByte());
+>, <Line: +            position.setValid(true);
+>, <Line: +            position.setTime(dateBuilder.getDate());
+>, <Line: +            position.setLatitude(decodeCoordinate(buf));
+>, <Line: +            position.setLongitude(decodeCoordinate(buf));
+>, <Line: +            position.setSpeed(UnitsConverter.knotsFromKph(buf.readUnsignedByte()));
+>, <Line: +            position.setCourse(buf.readUnsignedShort());
+>, <Line: +            decodeStatus(buf, position);
+>, <Line: +            sendResponse(channel, "GPSA" + type.substring(4), imei, buf.readBytes(2));
+>, <Line: +            return position;
+>, <Line: +        } else if (type.startsWith("SYNC")) {
+>, <Line: +            Position position = new Position();
+>, <Line: +            position.setProtocol(getProtocolName());
+>, <Line: +            position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: +            getLastLocation(position, null);
+>, <Line: +            decodeStatus(buf, position);
+>, <Line: +            sendResponse(channel, "SYSA" + type.substring(4), imei, null);
+>, <Line: +            return position;
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

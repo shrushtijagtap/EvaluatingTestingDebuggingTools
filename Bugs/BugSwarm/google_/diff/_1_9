@@ -1,0 +1,42 @@
+[]
+[<Line: -  public void testInlineInBlock() {
+>, <Line: -    test("if (true) {var x = 1; var z = x;}", "if (true) {var z = 1;}");
+>, <Line: -    test("if (true) {if (true) {var x = 1; var z = x;}}", "if (true) {if (true) {var z = 1;}}");
+>, <Line: -  }
+>, <Line: -  public void testInlineParameterAliasInBlock() {
+>, <Line: -    test("function f(p) {if (true) {var x = p; x; x;}}", "function f(p) {if (true) { p; p;}}");
+>, <Line: -  }
+>, <Line: -  public void testInlineInFunctionInBlock() {
+>, <Line: -    test("if (true) {function baz() { var x = 1; var z = x; }}",
+>, <Line: -        "if (true) {function baz() { var z = 1; }}");
+>, <Line: -  }
+>, <Line: -  public void testInlineBetweenBlocks() {
+>, <Line: -    test(LINE_JOINER.join(
+>, <Line: -        "function foo() {",
+>, <Line: -        "  var a = this;",
+>, <Line: -        "  if (a && a.bar) {",
+>, <Line: -        "    var b = a.bar;",
+>, <Line: -        "    b.baz;",
+>, <Line: -        "    b;",
+>, <Line: -        "    a;",
+>, <Line: -        "  }",
+>, <Line: -        "}"),
+>, <Line: -        LINE_JOINER.join(
+>, <Line: -        "function foo() {\n",
+>, <Line: -        "  if (this && this.bar) {",
+>, <Line: -        "    var b = this.bar;",
+>, <Line: -        "    b.baz;",
+>, <Line: -        "    b;",
+>, <Line: -        "    this;",
+>, <Line: -        "  }",
+>, <Line: -        "}"));
+>, <Line: -  }
+>, <Line: -  public void testInlineInFunctionIfBlock() {
+>, <Line: -    test("function baz() { if (true) {var x = 1; var z = x; }}",
+>, <Line: -        "function baz() { if (true) { var z = 1; }}");
+>, <Line: -  }
+>, <Line: -  public void testInlineConstantAliasInBlock() {
+>, <Line: -    test("if (true) {var XXX = new Foo(); q(XXX); var YYY = XXX; bar(YYY)}",
+>, <Line: -         "if (true) {var XXX = new Foo(); q(XXX); bar(XXX)}");
+>, <Line: -  }
+>]

@@ -1,0 +1,14 @@
+[<Line: +package org.mp4parser.muxer.samples;
+>, <Line: +import org.mp4parser.boxes.iso23001.part7.CencSampleAuxiliaryDataFormat;
+>, <Line: +import org.mp4parser.muxer.Sample;
+>, <Line: +import org.mp4parser.muxer.SampleImpl;
+>, <Line: +import org.mp4parser.tools.RangeStartMap;
+>, <Line: +import static org.mp4parser.tools.CastUtils.l2i;
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.cenc;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.SampleImpl;
+>, <Line: -import com.googlecode.mp4parser.util.RangeStartMap;
+>, <Line: -import com.mp4parser.iso23001.part7.CencSampleAuxiliaryDataFormat;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>]

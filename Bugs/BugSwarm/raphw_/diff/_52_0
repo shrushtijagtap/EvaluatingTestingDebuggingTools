@@ -1,0 +1,8 @@
+[<Line: +                    .getMethod(ATTACH_METHOD_NAME, String.class)
+>, <Line: +                        return new ForJava9CapableVm(Class.forName("java.lang.ProcessHandle").getMethod("current"),
+>, <Line: +                                Class.forName("java.lang.ProcessHandle").getMethod("getPid"));
+>]
+[<Line: -                    .getDeclaredMethod(ATTACH_METHOD_NAME, String.class)
+>, <Line: -                        return new ForJava9CapableVm(Class.forName("java.lang.ProcessHandle").getDeclaredMethod("current"),
+>, <Line: -                                Class.forName("java.lang.ProcessHandle").getDeclaredMethod("getPid"));
+>]

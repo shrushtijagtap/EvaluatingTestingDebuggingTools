@@ -1,0 +1,20 @@
+[<Line: +        PagedListConverter<com.microsoft.azure.management.storage.implementation.api.Usage, Usage> converter =
+>, <Line: +                new PagedListConverter<com.microsoft.azure.management.storage.implementation.api.Usage, Usage>() {
+>, <Line: +            public Usage typeConvert(com.microsoft.azure.management.storage.implementation.api.Usage usageInner) {
+>, <Line: +                return new UsageImpl(usageInner);
+>, <Line: +        return converter.convert(toPagedList(client.usages().list().getBody().value()));
+>, <Line: +    private PagedList<com.microsoft.azure.management.storage.implementation.api.Usage> toPagedList(List<com.microsoft.azure.management.storage.implementation.api.Usage> list) {
+>, <Line: +        PageImpl<com.microsoft.azure.management.storage.implementation.api.Usage> page = new PageImpl<>();
+>, <Line: +        return new PagedList<com.microsoft.azure.management.storage.implementation.api.Usage>(page) {
+>, <Line: +            public Page<com.microsoft.azure.management.storage.implementation.api.Usage> nextPage(String nextPageLink) throws RestException, IOException {
+>]
+[<Line: -import com.microsoft.azure.management.storage.implementation.api.UsageInner;
+>, <Line: -        PagedListConverter<UsageInner, Usage> converter = new PagedListConverter<UsageInner, Usage>() {
+>, <Line: -            public Usage typeConvert(UsageInner resourceGroupInner) {
+>, <Line: -                return new UsageImpl(resourceGroupInner);
+>, <Line: -        return converter.convert(toPagedList(client.usages().list().getBody()));
+>, <Line: -    private PagedList<UsageInner> toPagedList(List<UsageInner> list) {
+>, <Line: -        PageImpl<UsageInner> page = new PageImpl<>();
+>, <Line: -        return new PagedList<UsageInner>(page) {
+>, <Line: -            public Page<UsageInner> nextPage(String nextPageLink) throws RestException, IOException {
+>]

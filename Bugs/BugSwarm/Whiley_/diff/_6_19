@@ -1,0 +1,38 @@
+[<Line: +@rank(2)
+>, <Line: +@name("And{Equals[VExpr,Array],BExpr...}")
+>, <Line: +reduce And{Equals[Type t, {|VExpr x, Array y|}] eq, BExpr... bs}:
+>, <Line: +    => let cs = { b[x\y] | b in bs }
+>, <Line: +       in And (eq ++ cs)
+>, <Line: +// ====================================================================
+>, <Line: +// Array Generators
+>, <Line: +// ====================================================================
+>, <Line: +// An array is a mapping from an index value to another value.
+>, <Line: +term ArrayGen[Expr,Expr]
+>, <Line: +@rank(2)
+>, <Line: +@name("ArrayGen[Expr,Num]")
+>, <Line: +reduce ArrayGen[Expr x, Num(real r)]:
+>, <Line: +    => let n = num r,
+>, <Line: +           xs = [ x | i in 0..n ]
+>, <Line: +       in Array(xs)
+>, <Line: +@rank(2)
+>, <Line: +@name("And{Equals[VExpr,ArrayGen],BExpr...}")
+>, <Line: +reduce And{Equals[Type t, {|VExpr x, ArrayGen y|}] eq, BExpr... bs}:
+>, <Line: +    => let cs = { b[x\y] | b in bs }
+>, <Line: +       in And (eq ++ cs)
+>, <Line: +// ====================================================================
+>, <Line: +// Length Expressions
+>, <Line: +// ====================================================================
+>, <Line: +@rank(2)
+>, <Line: +@name("LengthOf(ArrayGen)")
+>, <Line: +reduce LengthOf(ArrayGen[Expr v, Expr n]):
+>, <Line: +    => n
+>, <Line: +@rank(0)
+>, <Line: +@name("IndexOf[ArrayGen]")
+>, <Line: +reduce IndexOf[ArrayGen[Expr v,Expr n], Expr]:
+>, <Line: +    => v
+>, <Line: +define Value as Array[Value...] | ArrayGen[Value,Value] | ...
+>, <Line: +define SExpr as VExpr | Array | ArrayGen | ...
+>]
+[<Line: -define Value as Array[Value...] | ...
+>, <Line: -define SExpr as VExpr | Array | ...
+>]

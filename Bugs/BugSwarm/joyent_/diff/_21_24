@@ -1,0 +1,31 @@
+[<Line: +public class IntegrationTestConfigContext extends BaseChainedConfigContext {
+>, <Line: +    public IntegrationTestConfigContext(ConfigContext context, Properties properties,
+>, <Line: +                                        boolean includeEnvironmentVars) {
+>, <Line: +    public IntegrationTestConfigContext(ConfigContext context, Properties properties) {
+>, <Line: +    public IntegrationTestConfigContext(ConfigContext context) {
+>, <Line: +    public IntegrationTestConfigContext(String mantaUrl,
+>, <Line: +                                        String mantaUser,
+>, <Line: +                                        String mantaKeyPath,
+>, <Line: +                                        String mantaKeyId,
+>, <Line: +                                        Integer mantaTimeout,
+>, <Line: +                                        String mantaHttpTransport) {
+>, <Line: +                mantaKeyId, mantaTimeout, 6, mantaHttpTransport));
+>, <Line: +                                          Integer retries,
+>, <Line: +                                          String mantaHttpTransport) {
+>, <Line: +                .setRetries(retries)
+>, <Line: +                .setHttpTransport(mantaHttpTransport);
+>]
+[<Line: -public class TestConfigContext extends BaseChainedConfigContext {
+>, <Line: -    public TestConfigContext(ConfigContext context, Properties properties,
+>, <Line: -                             boolean includeEnvironmentVars) {
+>, <Line: -    public TestConfigContext(ConfigContext context, Properties properties) {
+>, <Line: -    public TestConfigContext(ConfigContext context) {
+>, <Line: -    public TestConfigContext(String mantaUrl,
+>, <Line: -                             String mantaUser,
+>, <Line: -                             String mantaKeyPath,
+>, <Line: -                             String mantaKeyId,
+>, <Line: -                             Integer mantaTimeout) {
+>, <Line: -                mantaKeyId, mantaTimeout, 6));
+>, <Line: -                                          Integer retries) {
+>, <Line: -                .setRetries(retries);
+>]

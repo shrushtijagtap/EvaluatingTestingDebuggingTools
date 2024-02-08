@@ -1,0 +1,27 @@
+[<Line: +import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
+>, <Line: +import org.semanticweb.owlapi.search.EntitySearcher;
+>, <Line: +        OWLDataFactory dataFactory, Set<OWLSubObjectPropertyOfAxiom> result,
+>, <Line: +        Set<OWLObjectPropertyExpression> nonSimpleProperties) {
+>, <Line: +            p -> addIfSimple(p, entity, dataFactory, result, nonSimpleProperties, reasoner));
+>, <Line: +    }
+>, <Line: +    protected void addIfSimple(OWLObjectPropertyExpression p, OWLObjectProperty entity,
+>, <Line: +        OWLDataFactory dataFactory, Set<OWLSubObjectPropertyOfAxiom> result,
+>, <Line: +        Set<OWLObjectPropertyExpression> nonSimpleProperties, OWLReasoner reasoner) {
+>, <Line: +        boolean nonSimple = false;
+>, <Line: +        boolean inverse = false;
+>, <Line: +        if (!simple(nonSimpleProperties, entity)) {
+>, <Line: +            nonSimple = true;
+>, <Line: +        }
+>, <Line: +        if (p.isAnonymous()
+>, <Line: +            && EntitySearcher.isTransitive(p.getInverseProperty(), reasoner.getRootOntology())) {
+>, <Line: +            inverse = true;
+>, <Line: +        }
+>, <Line: +        if (!(nonSimple && inverse)) {
+>, <Line: +            // having both non simple properties and inverses in an subproperty axiom may cause
+>, <Line: +            // exceptions later on
+>, <Line: +            result.add(dataFactory.getOWLSubObjectPropertyOfAxiom(entity, p));
+>, <Line: +        }
+>]
+[<Line: -        OWLDataFactory dataFactory, Set<OWLSubObjectPropertyOfAxiom> result) {
+>, <Line: -            p -> result.add(dataFactory.getOWLSubObjectPropertyOfAxiom(entity, p)));
+>]

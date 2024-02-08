@@ -1,0 +1,9 @@
+[<Line: +    [int] r = [0; |ls| + 1]
+>, <Line: +        r[i] = 1
+>, <Line: +    assume rs == [1, 1, 1, 1, 1, 1, 1, 0]
+>, <Line: +    assume rs == [0]>]
+[<Line: -    [int] r = [1]
+>, <Line: -        r = r ++ [1]
+>, <Line: -    assume rs == [1, 1, 1, 1, 1, 1, 1, 1]
+>, <Line: -    assume rs == [1]
+>]

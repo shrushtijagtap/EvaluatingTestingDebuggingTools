@@ -1,0 +1,74 @@
+[<Line: +import org.kairosdb.datastore.h2.orm.DSEnvelope;
+>, <Line: +import org.kairosdb.datastore.h2.orm.DeleteMetricsQuery;
+>, <Line: +import org.kairosdb.datastore.h2.orm.GenOrmDataSource;
+>, <Line: +import org.kairosdb.datastore.h2.orm.InsertDataPointQuery;
+>, <Line: +import org.kairosdb.datastore.h2.orm.Metric;
+>, <Line: +import org.kairosdb.datastore.h2.orm.MetricIdResults;
+>, <Line: +import org.kairosdb.datastore.h2.orm.MetricIdsQuery;
+>, <Line: +import org.kairosdb.datastore.h2.orm.MetricIdsWithTagsQuery;
+>, <Line: +import org.kairosdb.datastore.h2.orm.MetricNamesQuery;
+>, <Line: +import org.kairosdb.datastore.h2.orm.MetricTag;
+>, <Line: +import org.kairosdb.datastore.h2.orm.ServiceIndex;
+>, <Line: +import org.kairosdb.datastore.h2.orm.ServiceIndex_base;
+>, <Line: +import org.kairosdb.datastore.h2.orm.Tag;
+>, <Line: +import org.kairosdb.datastore.h2.orm.TagNamesQuery;
+>, <Line: +import org.kairosdb.datastore.h2.orm.TagValuesQuery;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Iterator;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.Set;
+>, <Line: +import java.util.SortedMap;
+>, <Line: +import java.util.TreeMap;
+>, <Line: +public class H2Datastore implements Datastore, ServiceKeyStore
+>, <Line: +			ServiceIndex serviceIndex = ServiceIndex.factory.findOrCreate(service, serviceKey, key);
+>, <Line: +	@Override
+>, <Line: +	public Iterable<String> listServiceKeys(String service) throws DatastoreException
+>, <Line: +	{
+>, <Line: +		final ServiceIndex_base.ResultSet keys = ServiceIndex.factory.getServiceKeys(service);
+>, <Line: +		return new Iterable<String>()
+>, <Line: +		{
+>, <Line: +			@Override
+>, <Line: +			public Iterator<String> iterator()
+>, <Line: +			{
+>, <Line: +				return new Iterator<String>()
+>, <Line: +				{
+>, <Line: +					@Override
+>, <Line: +					public boolean hasNext()
+>, <Line: +					{
+>, <Line: +						return keys.next();
+>, <Line: +					}
+>, <Line: +					@Override
+>, <Line: +					public String next()
+>, <Line: +					{
+>, <Line: +						return keys.getRecord().getServiceKey();
+>, <Line: +					}
+>, <Line: +					@Override
+>, <Line: +					public void remove() { }
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +	}
+>, <Line: +    @Override
+>, <Line: +    public void deleteKey(String service, String serviceKey, String key)
+>, <Line: +            throws DatastoreException
+>, <Line: +    {
+>, <Line: +        GenOrmDataSource.attachAndBegin();
+>, <Line: +        try
+>, <Line: +        {
+>, <Line: +            ServiceIndex.factory.delete(service, serviceKey, key);
+>, <Line: +            GenOrmDataSource.commit();
+>, <Line: +        }
+>, <Line: +        finally
+>, <Line: +        {
+>, <Line: +            GenOrmDataSource.close();
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private String createMetricKey(String metricName, SortedMap<String, String> tags,
+>]
+[<Line: -import org.kairosdb.datastore.h2.orm.*;
+>, <Line: -import java.util.*;
+>, <Line: -public class H2Datastore implements Datastore
+>, <Line: -			ServiceIndex serviceIndex = ServiceIndex.factory.create(service, serviceKey, key);
+>, <Line: -	private String createMetricKey(String metricName, SortedMap<String, String> tags,
+>]

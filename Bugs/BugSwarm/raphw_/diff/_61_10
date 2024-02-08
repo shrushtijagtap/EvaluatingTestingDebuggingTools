@@ -1,0 +1,6 @@
+[<Line: +        when(implementationTarget.invokeDefault(token, typeDescription)).thenReturn(specialMethodInvocation);
+>, <Line: +        verify(implementationTarget).invokeDefault(token, typeDescription);
+>]
+[<Line: -        when(implementationTarget.invokeDefault(typeDescription, token)).thenReturn(specialMethodInvocation);
+>, <Line: -        verify(implementationTarget).invokeDefault(typeDescription, token);
+>]

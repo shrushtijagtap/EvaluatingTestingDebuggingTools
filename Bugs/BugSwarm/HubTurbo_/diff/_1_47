@@ -1,0 +1,98 @@
+[<Line: +import com.sun.jna.platform.win32.User32;
+>, <Line: +import com.sun.jna.platform.win32.WinDef.HWND;
+>, <Line: +import com.sun.jna.platform.win32.WinUser;
+>, <Line: +import org.openqa.selenium.*;
+>, <Line: +import java.awt.*;
+>, <Line: +import java.io.*;
+>, <Line: +import java.util.Optional;
+>, <Line: +import java.util.concurrent.Executor;
+>, <Line: +import java.util.concurrent.Executors;
+>, <Line: +		executor.execute(() -> {
+>, <Line: +			driver = createChromeDriver();
+>, <Line: +			logger.info("Successfully initialised browser component and ChromeDriver");
+>, <Line: +        });
+>, <Line: +		login();
+>, <Line: +			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForNewLabel(ui.logic.getDefaultRepo()))) {
+>, <Line: +				driver.get(GitHubURL.getPathForNewLabel(ui.logic.getDefaultRepo()));
+>, <Line: +			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForNewMilestone(ui.logic.getDefaultRepo()))) {
+>, <Line: +				driver.get(GitHubURL.getPathForNewMilestone(ui.logic.getDefaultRepo()));
+>, <Line: +			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForNewIssue(ui.logic.getDefaultRepo()))) {
+>, <Line: +				driver.get(GitHubURL.getPathForNewIssue(ui.logic.getDefaultRepo()));
+>, <Line: +	public void showIssue(String repoId, int id) {
+>, <Line: +			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForIssue(repoId, id))) {
+>, <Line: +				driver.get(GitHubURL.getPathForIssue(repoId, id));
+>, <Line: +			// Throws an exception if unable to switch to original HT tab
+>, <Line: +			// which then triggers a browser reset when called from runBrowserOperation
+>, <Line: +			driver.switchTo().window(driver.getWindowHandle());
+>, <Line: +			// When the HT tab is closed (but the window is still alive),
+>, <Line: +			// a lot of the operations on the driver (such as getCurrentURL)
+>, <Line: +			// will hang (without throwing an exception, the thread will just freeze the UI forever),
+>, <Line: +			// so we cannot use getCurrentURL/getTitle to check if the original HT tab
+>, <Line: +			// is still open. The above line does not hang the driver but still throws
+>, <Line: +			// an exception, thus letting us detect that the HT tab is not active any more.
+>, <Line: +			return true;
+>, <Line: +		} catch (WebDriverException e) {
+>, <Line: +			logger.warn("Unable to reach bview. Resetting.");
+>, <Line: +				searchBox.sendKeys(ui.logic.credentials.username);
+>, <Line: +				searchBox.sendKeys(ui.logic.credentials.password);
+>, <Line: +			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForAllIssues(ui.logic.getDefaultRepo()))) {
+>, <Line: +				driver.get(GitHubURL.getPathForAllIssues(ui.logic.getDefaultRepo()));
+>, <Line: +			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForPullRequests(ui.logic.getDefaultRepo()))) {
+>, <Line: +				driver.get(GitHubURL.getPathForPullRequests(ui.logic.getDefaultRepo()));
+>, <Line: +			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForMilestones(ui.logic.getDefaultRepo()))) {
+>, <Line: +				driver.get(GitHubURL.getPathForMilestones(ui.logic.getDefaultRepo()));
+>, <Line: +			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForContributors(ui.logic.getDefaultRepo()))) {
+>, <Line: +				driver.get(GitHubURL.getPathForContributors(ui.logic.getDefaultRepo()));
+>]
+[<Line: -import java.awt.Rectangle;
+>, <Line: -import java.io.File;
+>, <Line: -import java.io.FileOutputStream;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.io.InputStream;
+>, <Line: -import java.io.OutputStream;
+>, <Line: -import java.util.Optional;
+>, <Line: -import java.util.concurrent.Executor;
+>, <Line: -import java.util.concurrent.Executors;
+>, <Line: -import org.openqa.selenium.By;
+>, <Line: -import org.openqa.selenium.JavascriptExecutor;
+>, <Line: -import org.openqa.selenium.NoSuchElementException;
+>, <Line: -import org.openqa.selenium.WebDriverException;
+>, <Line: -import org.openqa.selenium.WebElement;
+>, <Line: -import com.sun.jna.platform.win32.User32;
+>, <Line: -import com.sun.jna.platform.win32.WinDef.HWND;
+>, <Line: -import com.sun.jna.platform.win32.WinUser;
+>, <Line: -import service.ServiceManager;
+>, <Line: -		driver = createChromeDriver();
+>, <Line: -		logger.info("Successfully initialised browser component and ChromeDriver");
+>, <Line: -			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForNewLabel())) {
+>, <Line: -				driver.get(GitHubURL.getPathForNewLabel());
+>, <Line: -			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForNewMilestone())) {
+>, <Line: -				driver.get(GitHubURL.getPathForNewMilestone());
+>, <Line: -			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForNewIssue())) {
+>, <Line: -				driver.get(GitHubURL.getPathForNewIssue());
+>, <Line: -	public void showIssue(int id) {
+>, <Line: -			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForIssue(id))) {
+>, <Line: -				driver.get(GitHubURL.getPathForIssue(id));
+>, <Line: -		if (driver == null){
+>, <Line: -			logger.warn("chromedriver process was killed !");
+>, <Line: -			return false;
+>, <Line: - 		}
+>, <Line: -			String url = driver.getCurrentUrl();
+>, <Line: -			if(url.isEmpty() || url == null){
+>, <Line: -				return false;
+>, <Line: -			}
+>, <Line: -		} catch (WebDriverException e){
+>, <Line: -			logger.warn("Unable to read url from bview. Resetting.");
+>, <Line: -		return true;
+>, <Line: -		initialiseJNA();
+>, <Line: -				searchBox.sendKeys(ServiceManager.getInstance().getUserId());
+>, <Line: -				searchBox.sendKeys(ServiceManager.getInstance().getLastUsedPassword());
+>, <Line: -			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForAllIssues())) {
+>, <Line: -				driver.get(GitHubURL.getPathForAllIssues());
+>, <Line: -			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForPullRequests())) {
+>, <Line: -				driver.get(GitHubURL.getPathForPullRequests());
+>, <Line: -			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForMilestones())) {
+>, <Line: -				driver.get(GitHubURL.getPathForMilestones());
+>, <Line: -			if (!driver.getCurrentUrl().equals(GitHubURL.getPathForContributors())) {
+>, <Line: -				driver.get(GitHubURL.getPathForContributors());
+>]

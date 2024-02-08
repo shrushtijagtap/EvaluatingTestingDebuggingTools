@@ -1,0 +1,41 @@
+[]
+[<Line: -package com.coremedia.iso.boxes.mdat;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.coremedia.iso.boxes.TrackBox;
+>, <Line: -import com.coremedia.iso.boxes.fragment.MovieExtendsBox;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.samples.DefaultMp4SampleList;
+>, <Line: -import com.googlecode.mp4parser.authoring.samples.FragmentedMp4SampleList;
+>, <Line: -import java.lang.ref.SoftReference;
+>, <Line: -import java.lang.reflect.Array;
+>, <Line: -import java.nio.ByteBuffer;
+>, <Line: -import java.util.AbstractList;
+>, <Line: -import java.util.List;
+>, <Line: -/**
+>, <Line: - * Creates a list of <code>ByteBuffer</code>s that represent the samples of a given track.
+>, <Line: - */
+>, <Line: -public class SampleList extends AbstractList<Sample> {
+>, <Line: -    List<Sample> samples;
+>, <Line: -    public SampleList(TrackBox trackBox, IsoFile... additionalFragments) {
+>, <Line: -        Container topLevel = ((Box) trackBox.getParent()).getParent();
+>, <Line: -        if (trackBox.getParent().getBoxes(MovieExtendsBox.class).isEmpty()) {
+>, <Line: -            if (additionalFragments.length > 0) {
+>, <Line: -                throw new RuntimeException("The TrackBox comes from a standard MP4 file. Only use the additionalFragments param if you are dealing with ( fragmented MP4 files AND additional fragments in standalone files )");
+>, <Line: -            }
+>, <Line: -            samples = new DefaultMp4SampleList(trackBox.getTrackHeaderBox().getTrackId(), topLevel);
+>, <Line: -        } else {
+>, <Line: -            samples = new FragmentedMp4SampleList(trackBox.getTrackHeaderBox().getTrackId(), topLevel, additionalFragments);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Sample get(int index) {
+>, <Line: -        return samples.get(index);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public int size() {
+>, <Line: -        return samples.size();
+>, <Line: -    }
+>, <Line: -}
+>]

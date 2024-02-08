@@ -1,0 +1,6 @@
+[<Line: +		public wyil.lang.Type.Array type() {
+>, <Line: +			return wyil.lang.Type.Array(t, !values.isEmpty());
+>]
+[<Line: -		public wyil.lang.Type.List type() {
+>, <Line: -			return wyil.lang.Type.List(t, !values.isEmpty());
+>]

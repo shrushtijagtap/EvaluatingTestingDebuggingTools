@@ -1,0 +1,11 @@
+[<Line: +import melnorme.lang.ide.core.text.format.ILangAutoEditsPreferencesAccess;
+>, <Line: +import melnorme.lang.ide.core.text.format.LangAutoEditStrategy;
+>, <Line: +public class GoAutoEditStrategy extends LangAutoEditStrategy {
+>, <Line: +	public GoAutoEditStrategy(String contentType, ITextViewer viewer, ILangAutoEditsPreferencesAccess preferences) {
+>, <Line: +		super(viewer, TextSettings_Actual.PARTITIONING_ID, contentType, preferences);
+>]
+[<Line: -import melnorme.lang.ide.core.text.format.LangAutoEditStrategyExt;
+>, <Line: -public class GoAutoEditStrategy extends LangAutoEditStrategyExt {
+>, <Line: -	public GoAutoEditStrategy(String contentType, ITextViewer viewer, ILangAutoEditsPreferencesAccessExt preferences) {
+>, <Line: -		super(TextSettings_Actual.PARTITIONING_ID, contentType, viewer, preferences);
+>]

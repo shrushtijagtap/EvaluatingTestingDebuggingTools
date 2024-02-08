@@ -1,0 +1,47 @@
+[<Line: +import com.fasterxml.jackson.annotation.JsonProperty;
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>, <Line: +    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+>]
+[<Line: -    /**
+>, <Line: -     * Set the blob value.
+>, <Line: -     *
+>, <Line: -     * @param blob the blob value to set
+>, <Line: -     * @return the Endpoints object itself.
+>, <Line: -     */
+>, <Line: -    public Endpoints withBlob(String blob) {
+>, <Line: -        this.blob = blob;
+>, <Line: -        return this;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Set the queue value.
+>, <Line: -     *
+>, <Line: -     * @param queue the queue value to set
+>, <Line: -     * @return the Endpoints object itself.
+>, <Line: -     */
+>, <Line: -    public Endpoints withQueue(String queue) {
+>, <Line: -        this.queue = queue;
+>, <Line: -        return this;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Set the table value.
+>, <Line: -     *
+>, <Line: -     * @param table the table value to set
+>, <Line: -     * @return the Endpoints object itself.
+>, <Line: -     */
+>, <Line: -    public Endpoints withTable(String table) {
+>, <Line: -        this.table = table;
+>, <Line: -        return this;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Set the file value.
+>, <Line: -     *
+>, <Line: -     * @param file the file value to set
+>, <Line: -     * @return the Endpoints object itself.
+>, <Line: -     */
+>, <Line: -    public Endpoints withFile(String file) {
+>, <Line: -        this.file = file;
+>, <Line: -        return this;
+>, <Line: -    }
+>]

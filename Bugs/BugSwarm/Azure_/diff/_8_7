@@ -1,0 +1,175 @@
+[<Line: +import com.microsoft.azure.management.storage.implementation.api.AccessTier;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.Encryption;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.Kind;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.Sku;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.SkuName;
+>, <Line: +import com.microsoft.azure.management.storage.implementation.api.StorageAccountKey;
+>, <Line: +import java.util.List;
+>, <Line: +     * @return the sku of this storage account. Possible names include:
+>, <Line: +     * 'Premium_LRS'. Possible tiers include: 'Standard', 'Premium'.
+>, <Line: +    Sku sku();
+>, <Line: +    /**
+>, <Line: +     * @return the kind of the storage account. Possible values are 'Storage',
+>, <Line: +     * 'BlobStorage'.
+>, <Line: +     */
+>, <Line: +    Kind kind();
+>, <Line: +    /**
+>, <Line: +     * @return the encryption settings on the account. If unspecified the account
+>, <Line: +     * is unencrypted.
+>, <Line: +     */
+>, <Line: +    Encryption encryption();
+>, <Line: +    /**
+>, <Line: +     * @return access tier used for billing. Access tier cannot be changed more
+>, <Line: +     * than once every 7 days (168 hours). Access tier cannot be set for
+>, <Line: +     * StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types.
+>, <Line: +     * Possible values include: 'Hot', 'Cool'.
+>, <Line: +     */
+>, <Line: +    AccessTier accessTier();
+>, <Line: +    List<StorageAccountKey> keys() throws CloudException, IOException;
+>, <Line: +    List<StorageAccountKey> regenerateKey(KeyType keyType) throws CloudException, IOException;
+>, <Line: +        DefinitionCreatable,
+>, <Line: +        DefinitionCreatableWithAccessTier {
+>, <Line: +         * Specifies the sku of the storage account. This used to be called
+>, <Line: +         * account types. Possible values include: 'Standard_LRS',
+>, <Line: +         * 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+>, <Line: +         *
+>, <Line: +         * @param skuName the sku
+>, <Line: +         * @return the next stage of storage account definition
+>, <Line: +         */
+>, <Line: +        DefinitionCreatable withSku(SkuName skuName);
+>, <Line: +        /**
+>, <Line: +         * Specifies the storage account kind to be "BlobStorage". The access
+>, <Line: +         * tier is defaulted to be "Hot".
+>, <Line: +         *
+>, <Line: +         * @return the next stage of storage account definition
+>, <Line: +         */
+>, <Line: +        DefinitionCreatableWithAccessTier withBlobStorageAccountKind();
+>, <Line: +        /**
+>, <Line: +         * Specifies the storage account kind to be "Storage", the kind for
+>, <Line: +         * general purposes.
+>, <Line: +         *
+>, <Line: +         * @return the next stage of storage account definition
+>, <Line: +         */
+>, <Line: +        DefinitionCreatable withGeneralPurposeAccountKind();
+>, <Line: +        /**
+>, <Line: +         * Specifies the encryption settings on the account. The default
+>, <Line: +         * setting is unencrypted.
+>, <Line: +         *
+>, <Line: +         * @param encryption the encryption setting
+>, <Line: +         * @return the nest stage of storage account definition
+>, <Line: +         */
+>, <Line: +        DefinitionCreatable withEncryption(Encryption encryption);
+>, <Line: +        /**
+>, <Line: +         * Specifies the user domain assigned to the storage account. Name is the CNAME source.
+>, <Line: +         * Only one custom domain is supported per storage account at this time.
+>, <Line: +         * To clear the existing custom domain, use an empty string for the
+>, <Line: +         * custom domain name property.
+>, <Line: +         *
+>, <Line: +         * @param customDomain the user domain assigned to the storage account
+>, <Line: +         * @return the next stage of storage account update
+>, <Line: +         */
+>, <Line: +        DefinitionCreatable withCustomDomain(CustomDomain customDomain);
+>, <Line: +        /**
+>, <Line: +         * Specifies the user domain assigned to the storage account. Name is the CNAME source.
+>, <Line: +         * Only one custom domain is supported per storage account at this time.
+>, <Line: +         * To clear the existing custom domain, use an empty string for the
+>, <Line: +         * custom domain name property.
+>, <Line: +         *
+>, <Line: +         * @param name the custom domain name, which is the CNAME source
+>, <Line: +         * @return the next stage of storage account update
+>, <Line: +         */
+>, <Line: +        DefinitionCreatable withCustomDomain(String name);
+>, <Line: +        /**
+>, <Line: +         * Specifies the user domain assigned to the storage account. Name is the CNAME source.
+>, <Line: +         * Only one custom domain is supported per storage account at this time.
+>, <Line: +         * To clear the existing custom domain, use an empty string for the
+>, <Line: +         * custom domain name property.
+>, <Line: +         *
+>, <Line: +         * @param name the custom domain name, which is the CNAME source
+>, <Line: +         * @param useSubDomain whether indirect CName validation is enabled
+>, <Line: +         * @return the next stage of storage account update
+>, <Line: +         */
+>, <Line: +        DefinitionCreatable withCustomDomain(String name, boolean useSubDomain);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * A storage account definition allowing access tier to be set.
+>, <Line: +     */
+>, <Line: +    interface DefinitionCreatableWithAccessTier extends DefinitionCreatable {
+>, <Line: +        /**
+>, <Line: +         * Specifies the access tier used for billing.
+>, <Line: +         * <p>
+>, <Line: +         * Access tier cannot be changed more than once every 7 days (168 hours).
+>, <Line: +         * Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS,
+>, <Line: +         * or PremiumLRS account types. Possible values include: 'Hot', 'Cool'.
+>, <Line: +         * @param accessTier the access tier value
+>, <Line: +        DefinitionCreatable withAccessTier(AccessTier accessTier);
+>, <Line: +     * A storage account update allowing to change the parameters.
+>, <Line: +    interface UpdateWithSku {
+>, <Line: +         * Specifies the sku of the storage account. This used to be called
+>, <Line: +         * account types. Possible values include: 'Standard_LRS',
+>, <Line: +         * 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+>, <Line: +         * @param skuName the sku
+>, <Line: +        Update withSku(SkuName skuName);
+>, <Line: +     * A storageaccount update allowing to change the parameters.
+>, <Line: +        /**
+>, <Line: +         * Clears the existing user domain assigned to the storage account.
+>, <Line: +         *
+>, <Line: +         * @return the next stage of storage account update
+>, <Line: +         */
+>, <Line: +        Update withoutCustomDomain();
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * A storage account update allowing encryption to be specified.
+>, <Line: +     */
+>, <Line: +    interface UpdateWithEncryption {
+>, <Line: +        /**
+>, <Line: +         * Specifies the encryption settings on the account. The default
+>, <Line: +         * setting is unencrypted.
+>, <Line: +         *
+>, <Line: +         * @param encryption the encryption setting
+>, <Line: +         * @return the nest stage of storage account update
+>, <Line: +         */
+>, <Line: +        Update withEncryption(Encryption encryption);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * A blob storage account update allowing access tier to be specified.
+>, <Line: +     */
+>, <Line: +    interface UpdateWithAccessTier {
+>, <Line: +        /**
+>, <Line: +         * Specifies the access tier used for billing.
+>, <Line: +         * <p>
+>, <Line: +         * Access tier cannot be changed more than once every 7 days (168 hours).
+>, <Line: +         * Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS,
+>, <Line: +         * or PremiumLRS account types. Possible values include: 'Hot', 'Cool'.
+>, <Line: +         *
+>, <Line: +         * @param accessTier the access tier value
+>, <Line: +         * @return the next stage of storage account update
+>, <Line: +         */
+>, <Line: +        Update withAccessTier(AccessTier accessTier);
+>, <Line: +            UpdateWithSku,
+>, <Line: +            UpdateWithEncryption,
+>, <Line: +            UpdateWithAccessTier,
+>]
+[<Line: -import com.microsoft.azure.management.storage.implementation.StorageAccountKeys;
+>, <Line: -import com.microsoft.azure.management.storage.implementation.api.AccountType;
+>, <Line: -     * @return the type of this storage account. Possible values include:
+>, <Line: -     * 'Premium_LRS'
+>, <Line: -    AccountType accountType();
+>, <Line: -    StorageAccountKeys getKeys() throws CloudException, IOException;
+>, <Line: -    StorageAccountKeys regenerateKey(KeyType keyType) throws CloudException, IOException;
+>, <Line: -        DefinitionCreatable {
+>, <Line: -         * Specifies the type of the storage account. Possible values include:
+>, <Line: -         * 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
+>, <Line: -         * 'Premium_LRS'.
+>, <Line: -         * @param accountType the account type
+>, <Line: -        DefinitionCreatable withAccountType(AccountType accountType);
+>, <Line: -     * A deployment update allowing to change the parameters.
+>, <Line: -    interface UpdateWithAccountType {
+>, <Line: -         * Specifies the type of the storage account. Possible values include:
+>, <Line: -         * 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
+>, <Line: -         * 'Premium_LRS'.
+>, <Line: -         * @param accountType the account type
+>, <Line: -        Update withAccountType(AccountType accountType);
+>, <Line: -     * A deployment update allowing to change the parameters.
+>, <Line: -            UpdateWithAccountType,
+>]

@@ -1,0 +1,292 @@
+[<Line: +import org.apache.commons.lang3.SerializationUtils;
+>, <Line: +import org.apache.commons.lang3.builder.ToStringBuilder;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +import java.io.Serializable;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.Objects;
+>, <Line: +import java.util.Set;
+>, <Line: +    /**
+>, <Line: +     * Logger instance.
+>, <Line: +     */
+>, <Line: +    private static final Logger LOG = LoggerFactory.getLogger(HttpHelper.class);
+>, <Line: +    /**
+>, <Line: +     * Metadata file containing information about final multipart file.
+>, <Line: +     */
+>, <Line: +    static final String METADATA_FILE = "metadata";
+>, <Line: +     *
+>, <Line: +        return initiateUpload(path, null, null);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Initializes a new multipart upload for an object.
+>, <Line: +     *
+>, <Line: +     * @param path remote path of Manta object to be uploaded
+>, <Line: +     * @param mantaMetadata metadata to write to final Manta object
+>, <Line: +     * @return unique id for the multipart upload
+>, <Line: +     * @throws IOException thrown when there are network issues
+>, <Line: +     */
+>, <Line: +    public UUID initiateUpload(final String path,
+>, <Line: +                               final MantaMetadata mantaMetadata) throws IOException {
+>, <Line: +        return initiateUpload(path, mantaMetadata, null);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Initializes a new multipart upload for an object.
+>, <Line: +     *
+>, <Line: +     * @param path remote path of Manta object to be uploaded
+>, <Line: +     * @param mantaMetadata metadata to write to final Manta object
+>, <Line: +     * @param httpHeaders HTTP headers to read from to write to final Manta object
+>, <Line: +     * @return unique id for the multipart upload
+>, <Line: +     * @throws IOException thrown when there are network issues
+>, <Line: +     */
+>, <Line: +    public UUID initiateUpload(final String path,
+>, <Line: +                               final MantaMetadata mantaMetadata,
+>, <Line: +                               final MantaHttpHeaders httpHeaders) throws IOException {
+>, <Line: +        if (LOG.isDebugEnabled()) {
+>, <Line: +            LOG.debug("Creating a new multipart upload [{}] for {}",
+>, <Line: +                    id, path);
+>, <Line: +        }
+>, <Line: +        final String metadataPath = uploadDir + SEPARATOR + METADATA_FILE;
+>, <Line: +        final MultipartMetadata metadata = new MultipartMetadata()
+>, <Line: +                .setPath(path)
+>, <Line: +                .setObjectMetadata(mantaMetadata);
+>, <Line: +        if (httpHeaders != null) {
+>, <Line: +            metadata.setContentType(httpHeaders.getContentType());
+>, <Line: +        }
+>, <Line: +        final byte[] metadataBytes = SerializationUtils.serialize(metadata);
+>, <Line: +        mantaClient.put(metadataPath, metadataBytes);
+>, <Line: +    public Stream<Part> listParts(final UUID id) throws IOException {
+>, <Line: +                .filter(value -> !Paths.get(value.getPath())
+>, <Line: +                        .getFileName().toString().equals(METADATA_FILE))
+>, <Line: +                .map(Part::new);
+>, <Line: +            .map(Part::getPartNumber)
+>, <Line: +        final MantaJob job = findJob(id);
+>, <Line: +        final String metadataPath = uploadDir + SEPARATOR + METADATA_FILE;
+>, <Line: +        final MultipartMetadata metadata = SerializationUtils.deserialize(
+>, <Line: +                mantaClient.getAsInputStream(metadataPath)
+>, <Line: +        );
+>, <Line: +        final String path = metadata.getPath();
+>, <Line: +        final Stream<Part> parts = listParts(id).sorted();
+>, <Line: +                jobExecText.append(part.getObjectPath())
+>, <Line: +                   .append(path)
+>, <Line: +                   .append(" ");
+>, <Line: +        if (metadata.getContentType() != null) {
+>, <Line: +            jobExecText.append("-H 'Content-Type: ")
+>, <Line: +                       .append(metadata.getContentType())
+>, <Line: +                       .append("' ");
+>, <Line: +        }
+>, <Line: +        final MantaMetadata objectMetadata = metadata.getObjectMetadata();
+>, <Line: +        if (objectMetadata != null) {
+>, <Line: +            Set<Map.Entry<String, String>> entries = objectMetadata.entrySet();
+>, <Line: +            for (Map.Entry<String, String> entry : entries) {
+>, <Line: +                jobExecText.append("-H '")
+>, <Line: +                           .append(entry.getKey()).append(": ")
+>, <Line: +                           .append(entry.getValue())
+>, <Line: +                           .append("' ");
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        MantaJobBuilder.Run run = mantaClient.jobBuilder()
+>, <Line: +        if (LOG.isDebugEnabled()) {
+>, <Line: +            LOG.debug("Created job for concatenating parts: {}",
+>, <Line: +                    run.getJob().getId());
+>, <Line: +        }
+>, <Line: +        final MantaJob job = findJob(id);
+>, <Line: +        if (LOG.isDebugEnabled()) {
+>, <Line: +            LOG.debug("No longer waiting for multipart to complete."
+>, <Line: +                    + " Actual job state: {}", run.getJob().getState());
+>, <Line: +        }
+>, <Line: +        final MantaJob job = findJob(id);
+>, <Line: +    /**
+>, <Line: +     * Returns the Manta job used to concatenate multiple file parts.
+>, <Line: +     *
+>, <Line: +     * @param id multipart upload id
+>, <Line: +     * @return Manta job object
+>, <Line: +     * @throws IOException thrown if there is a problem connecting to Manta
+>, <Line: +     */
+>, <Line: +    MantaJob findJob(final UUID id) throws IOException {
+>, <Line: +        return mantaClient.getJobsByName("append-" + id)
+>, <Line: +                .findFirst()
+>, <Line: +                .orElse(null);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * A single part of a multipart upload.
+>, <Line: +     */
+>, <Line: +    public static class Part implements Comparable<Part> {
+>, <Line: +        /**
+>, <Line: +         * Non-zero positive integer representing the relative position of the
+>, <Line: +         * part in relation to the other parts for the multipart upload.
+>, <Line: +         */
+>, <Line: +        private final int partNumber;
+>, <Line: +        /**
+>, <Line: +         * Remote path on Manta for the part's file.
+>, <Line: +         */
+>, <Line: +        private final String objectPath;
+>, <Line: +        /**
+>, <Line: +         * Etag value of the part.
+>, <Line: +         */
+>, <Line: +        private final String etag;
+>, <Line: +        /**
+>, <Line: +         * Creates a new instance based on explicitly defined parameters.
+>, <Line: +         *
+>, <Line: +         * @param partNumber Non-zero positive integer representing the relative position of the part
+>, <Line: +         * @param objectPath Remote path on Manta for the part's file
+>, <Line: +         * @param etag Etag value of the part
+>, <Line: +         */
+>, <Line: +        public Part(final int partNumber, final String objectPath, final String etag) {
+>, <Line: +            this.partNumber = partNumber;
+>, <Line: +            this.objectPath = objectPath;
+>, <Line: +            this.etag = etag;
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Creates a new instance based on a response from {@link MantaClient}.
+>, <Line: +         *
+>, <Line: +         * @param object response object from returned from {@link MantaClient}
+>, <Line: +         */
+>, <Line: +        protected Part(final MantaObject object) {
+>, <Line: +            final String filename = Paths.get(object.getPath()).getFileName().toString();
+>, <Line: +            this.objectPath = object.getPath();
+>, <Line: +            this.partNumber = Integer.parseInt(filename);
+>, <Line: +            this.etag = object.getEtag();
+>, <Line: +        }
+>, <Line: +        public int getPartNumber() {
+>, <Line: +            return partNumber;
+>, <Line: +        }
+>, <Line: +        public String getEtag() {
+>, <Line: +            return etag;
+>, <Line: +        }
+>, <Line: +        protected String getObjectPath() {
+>, <Line: +            return objectPath;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public int compareTo(final Part that) {
+>, <Line: +            return Integer.compare(this.getPartNumber(), that.getPartNumber());
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public boolean equals(final Object that) {
+>, <Line: +            if (this == that) {
+>, <Line: +                return true;
+>, <Line: +            }
+>, <Line: +            if (that == null || getClass() != that.getClass()) {
+>, <Line: +                return false;
+>, <Line: +            }
+>, <Line: +            final Part part = (Part) that;
+>, <Line: +            return partNumber == part.partNumber
+>, <Line: +                    && Objects.equals(objectPath, part.objectPath)
+>, <Line: +                    && Objects.equals(etag, part.etag);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public int hashCode() {
+>, <Line: +            return Objects.hash(partNumber, objectPath, etag);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public String toString() {
+>, <Line: +            return new ToStringBuilder(this)
+>, <Line: +                    .append("partNumber", partNumber)
+>, <Line: +                    .append("objectPath", objectPath)
+>, <Line: +                    .append("etag", etag)
+>, <Line: +                    .toString();
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Inner class used only with the jobs-based multipart implementation for
+>, <Line: +     * storing header and metadata information.
+>, <Line: +     */
+>, <Line: +    static class MultipartMetadata implements Serializable {
+>, <Line: +        private static final long serialVersionUID = -4410867990710890357L;
+>, <Line: +        /**
+>, <Line: +         * Path to final object on Manta.
+>, <Line: +         */
+>, <Line: +        private String path;
+>, <Line: +        /**
+>, <Line: +         * Metadata of final object.
+>, <Line: +         */
+>, <Line: +        private HashMap<String, String> objectMetadata;
+>, <Line: +        /**
+>, <Line: +         * HTTP content type to write to the final object.
+>, <Line: +         */
+>, <Line: +        private String contentType;
+>, <Line: +        /**
+>, <Line: +         * Creates a new instance.
+>, <Line: +         */
+>, <Line: +        MultipartMetadata() {
+>, <Line: +        }
+>, <Line: +        public String getPath() {
+>, <Line: +            return path;
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Sets the path to the final object on Manta.
+>, <Line: +         *
+>, <Line: +         * @param path remote Manta path
+>, <Line: +         * @return this instance
+>, <Line: +         */
+>, <Line: +        public MultipartMetadata setPath(final String path) {
+>, <Line: +            this.path = path;
+>, <Line: +            return this;
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Gets the metadata associated with the final Manta object.
+>, <Line: +         *
+>, <Line: +         * @return new instance of {@link MantaMetadata} with data populated
+>, <Line: +         */
+>, <Line: +        public MantaMetadata getObjectMetadata() {
+>, <Line: +            if (this.objectMetadata == null) {
+>, <Line: +                return null;
+>, <Line: +            }
+>, <Line: +            return new MantaMetadata(this.objectMetadata);
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Sets the metadata to be written to the final object on Manta.
+>, <Line: +         *
+>, <Line: +         * @param objectMetadata metadata to write
+>, <Line: +         * @return this instance
+>, <Line: +         */
+>, <Line: +        public MultipartMetadata setObjectMetadata(final MantaMetadata objectMetadata) {
+>, <Line: +            if (objectMetadata != null) {
+>, <Line: +                this.objectMetadata = new HashMap<>(objectMetadata);
+>, <Line: +            } else {
+>, <Line: +                this.objectMetadata = null;
+>, <Line: +            }
+>, <Line: +            return this;
+>, <Line: +        }
+>, <Line: +        public String getContentType() {
+>, <Line: +            return contentType;
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Sets http headers to write to the final object on Manta. Actually,
+>, <Line: +         * we only consume Content-Type for now.
+>, <Line: +         *
+>, <Line: +         * @param contentType HTTP content type to set for the object
+>, <Line: +         * @return this instance
+>, <Line: +         */
+>, <Line: +        public MultipartMetadata setContentType(final String contentType) {
+>, <Line: +            this.contentType = contentType;
+>, <Line: +            return this;
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -        final String pathData = uploadDir + SEPARATOR + "path";
+>, <Line: -        mantaClient.put(pathData, path);
+>, <Line: -    public Stream<Integer> listParts(final UUID id) throws IOException {
+>, <Line: -                .map(mantaObject -> Paths.get(mantaObject.getPath())
+>, <Line: -                        .getFileName().toString())
+>, <Line: -                .filter(value -> !value.equals("path"))
+>, <Line: -                .map(Integer::parseInt);
+>, <Line: -        MantaJob job = mantaClient.getJobsByName("append-" + id)
+>, <Line: -                .findFirst()
+>, <Line: -                .orElse(null);
+>, <Line: -        final String pathData = uploadDir + SEPARATOR + "path";
+>, <Line: -        final String path = mantaClient.getAsString(pathData);
+>, <Line: -        final Stream<Integer> parts = listParts(id)
+>, <Line: -                .sorted();
+>, <Line: -                jobExecText.append(uploadDir)
+>, <Line: -                           .append(SEPARATOR)
+>, <Line: -                           .append(part)
+>, <Line: -                   .append(path);
+>, <Line: -        mantaClient.jobBuilder()
+>, <Line: -        MantaJob job = mantaClient.getJobsByName("append-" + id)
+>, <Line: -                .findFirst()
+>, <Line: -                .orElse(null);
+>, <Line: -        MantaJob job = mantaClient.getJobsByName("append-" + id)
+>, <Line: -                .findFirst()
+>, <Line: -                .orElse(null);
+>]

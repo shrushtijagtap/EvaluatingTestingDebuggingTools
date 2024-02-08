@@ -1,0 +1,23 @@
+[<Line: +    private final Map<String, String> meta;
+>, <Line: +    private final Params params;
+>, <Line: +        this(ToXContent.EMPTY_PARAMS);
+>, <Line: +    public PlainIndexableObject(Params params) {
+>, <Line: +        this.meta = new LinkedHashMap<String, String>();
+>, <Line: +        this.core = new LinkedHashMap<String, Object>();
+>, <Line: +        this.params = params;
+>, <Line: +        toXContent(builder, params);
+>, <Line: +            if (params.paramAsBoolean("ignore_null", false) && (o == null || (o instanceof Values) && ((Values) o).isNull())) {
+>, <Line: +            if (params.paramAsBoolean("ignore_null", false)  && (o == null || (o instanceof Values) && ((Values) o).isNull())) {
+>]
+[<Line: -    private Map<String, String> meta;
+>, <Line: -    private boolean ignoreNull;
+>, <Line: -        this.meta = new LinkedHashMap<String, String>();
+>, <Line: -        this.core = new LinkedHashMap<String, Object>();
+>, <Line: -    @Override
+>, <Line: -    public IndexableObject ignoreNull(boolean ignorenull) {
+>, <Line: -        this.ignoreNull = ignorenull;
+>, <Line: -        return this;
+>, <Line: -        toXContent(builder, ToXContent.EMPTY_PARAMS);
+>, <Line: -            if (ignoreNull && (o == null || (o instanceof Values) && ((Values) o).isNull())) {
+>, <Line: -            if (ignoreNull && (o == null || (o instanceof Values) && ((Values) o).isNull())) {
+>]

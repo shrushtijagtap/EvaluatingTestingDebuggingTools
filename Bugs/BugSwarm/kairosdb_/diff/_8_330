@@ -1,0 +1,4561 @@
+[<Line: +body {
+>, <Line: +    /* Addresses a small issue in webkit: http://bit.ly/NEdoDq */
+>, <Line: +    -webkit-backface-visibility: hidden;
+>, <Line: +    -webkit-animation-duration: 1s;
+>, <Line: +    -moz-animation-duration: 1s;
+>, <Line: +    -o-animation-duration: 1s;
+>, <Line: +    animation-duration: 1s;
+>, <Line: +    -webkit-animation-fill-mode: both;
+>, <Line: +    -moz-animation-fill-mode: both;
+>, <Line: +    -o-animation-fill-mode: both;
+>, <Line: +    animation-fill-mode: both;
+>, <Line: +    -webkit-animation-iteration-count: infinite;
+>, <Line: +    -moz-animation-iteration-count: infinite;
+>, <Line: +    -o-animation-iteration-count: infinite;
+>, <Line: +    animation-iteration-count: infinite;
+>, <Line: +    -webkit-animation-duration: 2s;
+>, <Line: +    -moz-animation-duration: 2s;
+>, <Line: +    -o-animation-duration: 2s;
+>, <Line: +    animation-duration: 2s;
+>, <Line: +    0%, 50%, 100% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    25%, 75% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0%, 50%, 100% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    25%, 75% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0%, 50%, 100% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    25%, 75% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0%, 50%, 100% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    25%, 75% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: flash;
+>, <Line: +    -moz-animation-name: flash;
+>, <Line: +    -o-animation-name: flash;
+>, <Line: +    animation-name: flash;
+>, <Line: +    0%, 100% {
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    10%, 30%, 50%, 70%, 90% {
+>, <Line: +        -webkit-transform: translateX(-10px);
+>, <Line: +    }
+>, <Line: +    20%, 40%, 60%, 80% {
+>, <Line: +        -webkit-transform: translateX(10px);
+>, <Line: +    }
+>, <Line: +    0%, 100% {
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    10%, 30%, 50%, 70%, 90% {
+>, <Line: +        -moz-transform: translateX(-10px);
+>, <Line: +    }
+>, <Line: +    20%, 40%, 60%, 80% {
+>, <Line: +        -moz-transform: translateX(10px);
+>, <Line: +    }
+>, <Line: +    0%, 100% {
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    10%, 30%, 50%, 70%, 90% {
+>, <Line: +        -o-transform: translateX(-10px);
+>, <Line: +    }
+>, <Line: +    20%, 40%, 60%, 80% {
+>, <Line: +        -o-transform: translateX(10px);
+>, <Line: +    }
+>, <Line: +    0%, 100% {
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    10%, 30%, 50%, 70%, 90% {
+>, <Line: +        transform: translateX(-10px);
+>, <Line: +    }
+>, <Line: +    20%, 40%, 60%, 80% {
+>, <Line: +        transform: translateX(10px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: shake;
+>, <Line: +    -moz-animation-name: shake;
+>, <Line: +    -o-animation-name: shake;
+>, <Line: +    animation-name: shake;
+>, <Line: +    0%, 20%, 50%, 80%, 100% {
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -webkit-transform: translateY(-30px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -webkit-transform: translateY(-15px);
+>, <Line: +    }
+>, <Line: +    0%, 20%, 50%, 80%, 100% {
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -moz-transform: translateY(-30px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -moz-transform: translateY(-15px);
+>, <Line: +    }
+>, <Line: +    0%, 20%, 50%, 80%, 100% {
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -o-transform: translateY(-30px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -o-transform: translateY(-15px);
+>, <Line: +    }
+>, <Line: +    0%, 20%, 50%, 80%, 100% {
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        transform: translateY(-30px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        transform: translateY(-15px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounce;
+>, <Line: +    -moz-animation-name: bounce;
+>, <Line: +    -o-animation-name: bounce;
+>, <Line: +    animation-name: bounce;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    10%, 20% {
+>, <Line: +        -webkit-transform: scale(0.9) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    30%, 50%, 70%, 90% {
+>, <Line: +        -webkit-transform: scale(1.1) rotate(3deg);
+>, <Line: +    }
+>, <Line: +    40%, 60%, 80% {
+>, <Line: +        -webkit-transform: scale(1.1) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: scale(1) rotate(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    10%, 20% {
+>, <Line: +        -moz-transform: scale(0.9) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    30%, 50%, 70%, 90% {
+>, <Line: +        -moz-transform: scale(1.1) rotate(3deg);
+>, <Line: +    }
+>, <Line: +    40%, 60%, 80% {
+>, <Line: +        -moz-transform: scale(1.1) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: scale(1) rotate(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    10%, 20% {
+>, <Line: +        -o-transform: scale(0.9) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    30%, 50%, 70%, 90% {
+>, <Line: +        -o-transform: scale(1.1) rotate(3deg);
+>, <Line: +    }
+>, <Line: +    40%, 60%, 80% {
+>, <Line: +        -o-transform: scale(1.1) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: scale(1) rotate(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: scale(1);
+>, <Line: +    }
+>, <Line: +    10%, 20% {
+>, <Line: +        transform: scale(0.9) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    30%, 50%, 70%, 90% {
+>, <Line: +        transform: scale(1.1) rotate(3deg);
+>, <Line: +    }
+>, <Line: +    40%, 60%, 80% {
+>, <Line: +        transform: scale(1.1) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: scale(1) rotate(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: tada;
+>, <Line: +    -moz-animation-name: tada;
+>, <Line: +    -o-animation-name: tada;
+>, <Line: +    animation-name: tada;
+>, <Line: +    20%, 40%, 60%, 80%, 100% {
+>, <Line: +        -webkit-transform-origin: top center;
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        -webkit-transform: rotate(15deg);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -webkit-transform: rotate(-10deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -webkit-transform: rotate(5deg);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -webkit-transform: rotate(-5deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: rotate(0deg);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        -moz-transform: rotate(15deg);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -moz-transform: rotate(-10deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -moz-transform: rotate(5deg);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -moz-transform: rotate(-5deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: rotate(0deg);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        -o-transform: rotate(15deg);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -o-transform: rotate(-10deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -o-transform: rotate(5deg);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -o-transform: rotate(-5deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: rotate(0deg);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        transform: rotate(15deg);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        transform: rotate(-10deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        transform: rotate(5deg);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        transform: rotate(-5deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: rotate(0deg);
+>, <Line: +    }
+>, <Line: +    -webkit-transform-origin: top center;
+>, <Line: +    -moz-transform-origin: top center;
+>, <Line: +    -o-transform-origin: top center;
+>, <Line: +    transform-origin: top center;
+>, <Line: +    -webkit-animation-name: swing;
+>, <Line: +    -moz-animation-name: swing;
+>, <Line: +    -o-animation-name: swing;
+>, <Line: +    animation-name: swing;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: translateX(0%);
+>, <Line: +    }
+>, <Line: +    15% {
+>, <Line: +        -webkit-transform: translateX(-25%) rotate(-5deg);
+>, <Line: +    }
+>, <Line: +    30% {
+>, <Line: +        -webkit-transform: translateX(20%) rotate(3deg);
+>, <Line: +    }
+>, <Line: +    45% {
+>, <Line: +        -webkit-transform: translateX(-15%) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -webkit-transform: translateX(10%) rotate(2deg);
+>, <Line: +    }
+>, <Line: +    75% {
+>, <Line: +        -webkit-transform: translateX(-5%) rotate(-1deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: translateX(0%);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: translateX(0%);
+>, <Line: +    }
+>, <Line: +    15% {
+>, <Line: +        -moz-transform: translateX(-25%) rotate(-5deg);
+>, <Line: +    }
+>, <Line: +    30% {
+>, <Line: +        -moz-transform: translateX(20%) rotate(3deg);
+>, <Line: +    }
+>, <Line: +    45% {
+>, <Line: +        -moz-transform: translateX(-15%) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -moz-transform: translateX(10%) rotate(2deg);
+>, <Line: +    }
+>, <Line: +    75% {
+>, <Line: +        -moz-transform: translateX(-5%) rotate(-1deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: translateX(0%);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: translateX(0%);
+>, <Line: +    }
+>, <Line: +    15% {
+>, <Line: +        -o-transform: translateX(-25%) rotate(-5deg);
+>, <Line: +    }
+>, <Line: +    30% {
+>, <Line: +        -o-transform: translateX(20%) rotate(3deg);
+>, <Line: +    }
+>, <Line: +    45% {
+>, <Line: +        -o-transform: translateX(-15%) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -o-transform: translateX(10%) rotate(2deg);
+>, <Line: +    }
+>, <Line: +    75% {
+>, <Line: +        -o-transform: translateX(-5%) rotate(-1deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: translateX(0%);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: translateX(0%);
+>, <Line: +    }
+>, <Line: +    15% {
+>, <Line: +        transform: translateX(-25%) rotate(-5deg);
+>, <Line: +    }
+>, <Line: +    30% {
+>, <Line: +        transform: translateX(20%) rotate(3deg);
+>, <Line: +    }
+>, <Line: +    45% {
+>, <Line: +        transform: translateX(-15%) rotate(-3deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        transform: translateX(10%) rotate(2deg);
+>, <Line: +    }
+>, <Line: +    75% {
+>, <Line: +        transform: translateX(-5%) rotate(-1deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: translateX(0%);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: wobble;
+>, <Line: +    -moz-animation-name: wobble;
+>, <Line: +    -o-animation-name: wobble;
+>, <Line: +    animation-name: wobble;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        -webkit-transform: scale(1.1);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        -moz-transform: scale(1.1);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        -o-transform: scale(1.1);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: scale(1);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        transform: scale(1.1);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: scale(1);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: pulse;
+>, <Line: +    -moz-animation-name: pulse;
+>, <Line: +    -o-animation-name: pulse;
+>, <Line: +    animation-name: pulse;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: perspective(400px) rotateY(0);
+>, <Line: +        -webkit-animation-timing-function: ease-out;
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -webkit-transform: perspective(400px) translateZ(150px) rotateY(170deg);
+>, <Line: +        -webkit-animation-timing-function: ease-out;
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        -webkit-transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+>, <Line: +        -webkit-animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -webkit-transform: perspective(400px) rotateY(360deg) scale(.95);
+>, <Line: +        -webkit-animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: perspective(400px) scale(1);
+>, <Line: +        -webkit-animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: perspective(400px) rotateY(0);
+>, <Line: +        -moz-animation-timing-function: ease-out;
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -moz-transform: perspective(400px) translateZ(150px) rotateY(170deg);
+>, <Line: +        -moz-animation-timing-function: ease-out;
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        -moz-transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+>, <Line: +        -moz-animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -moz-transform: perspective(400px) rotateY(360deg) scale(.95);
+>, <Line: +        -moz-animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: perspective(400px) scale(1);
+>, <Line: +        -moz-animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: perspective(400px) rotateY(0);
+>, <Line: +        -o-animation-timing-function: ease-out;
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -o-transform: perspective(400px) translateZ(150px) rotateY(170deg);
+>, <Line: +        -o-animation-timing-function: ease-out;
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        -o-transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+>, <Line: +        -o-animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -o-transform: perspective(400px) rotateY(360deg) scale(.95);
+>, <Line: +        -o-animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: perspective(400px) scale(1);
+>, <Line: +        -o-animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: perspective(400px) rotateY(0);
+>, <Line: +        animation-timing-function: ease-out;
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        transform: perspective(400px) translateZ(150px) rotateY(170deg);
+>, <Line: +        animation-timing-function: ease-out;
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+>, <Line: +        animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        transform: perspective(400px) rotateY(360deg) scale(.95);
+>, <Line: +        animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: perspective(400px) scale(1);
+>, <Line: +        animation-timing-function: ease-in;
+>, <Line: +    }
+>, <Line: +    -webkit-backface-visibility: visible !important;
+>, <Line: +    -webkit-animation-name: flip;
+>, <Line: +    -moz-backface-visibility: visible !important;
+>, <Line: +    -moz-animation-name: flip;
+>, <Line: +    -o-backface-visibility: visible !important;
+>, <Line: +    -o-animation-name: flip;
+>, <Line: +    backface-visibility: visible !important;
+>, <Line: +    animation-name: flip;
+>, <Line: +    -webkit-backface-visibility: visible !important;
+>, <Line: +    -webkit-animation-name: flipInX;
+>, <Line: +    -moz-backface-visibility: visible !important;
+>, <Line: +    -moz-animation-name: flipInX;
+>, <Line: +    -o-backface-visibility: visible !important;
+>, <Line: +    -o-animation-name: flipInX;
+>, <Line: +    backface-visibility: visible !important;
+>, <Line: +    animation-name: flipInX;
+>, <Line: +    100% {
+>, <Line: +    100% {
+>, <Line: +    100% {
+>, <Line: +    100% {
+>, <Line: +    -webkit-animation-name: flipOutX;
+>, <Line: +    -webkit-backface-visibility: visible !important;
+>, <Line: +    -moz-animation-name: flipOutX;
+>, <Line: +    -moz-backface-visibility: visible !important;
+>, <Line: +    -o-animation-name: flipOutX;
+>, <Line: +    -o-backface-visibility: visible !important;
+>, <Line: +    animation-name: flipOutX;
+>, <Line: +    backface-visibility: visible !important;
+>, <Line: +    -webkit-backface-visibility: visible !important;
+>, <Line: +    -webkit-animation-name: flipInY;
+>, <Line: +    -moz-backface-visibility: visible !important;
+>, <Line: +    -moz-animation-name: flipInY;
+>, <Line: +    -o-backface-visibility: visible !important;
+>, <Line: +    -o-animation-name: flipInY;
+>, <Line: +    backface-visibility: visible !important;
+>, <Line: +    animation-name: flipInY;
+>, <Line: +    100% {
+>, <Line: +    100% {
+>, <Line: +    100% {
+>, <Line: +    100% {
+>, <Line: +    -webkit-backface-visibility: visible !important;
+>, <Line: +    -webkit-animation-name: flipOutY;
+>, <Line: +    -moz-backface-visibility: visible !important;
+>, <Line: +    -moz-animation-name: flipOutY;
+>, <Line: +    -o-backface-visibility: visible !important;
+>, <Line: +    -o-animation-name: flipOutY;
+>, <Line: +    backface-visibility: visible !important;
+>, <Line: +    animation-name: flipOutY;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +}
+>, <Line: +@-o-keyframes fadeIn {
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +}
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeIn;
+>, <Line: +    -moz-animation-name: fadeIn;
+>, <Line: +    -o-animation-name: fadeIn;
+>, <Line: +    animation-name: fadeIn;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeInUp;
+>, <Line: +    -moz-animation-name: fadeInUp;
+>, <Line: +    -o-animation-name: fadeInUp;
+>, <Line: +    animation-name: fadeInUp;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeInDown;
+>, <Line: +    -moz-animation-name: fadeInDown;
+>, <Line: +    -o-animation-name: fadeInDown;
+>, <Line: +    animation-name: fadeInDown;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeInLeft;
+>, <Line: +    -moz-animation-name: fadeInLeft;
+>, <Line: +    -o-animation-name: fadeInLeft;
+>, <Line: +    animation-name: fadeInLeft;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeInRight;
+>, <Line: +    -moz-animation-name: fadeInRight;
+>, <Line: +    -o-animation-name: fadeInRight;
+>, <Line: +    animation-name: fadeInRight;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeInUpBig;
+>, <Line: +    -moz-animation-name: fadeInUpBig;
+>, <Line: +    -o-animation-name: fadeInUpBig;
+>, <Line: +    animation-name: fadeInUpBig;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeInDownBig;
+>, <Line: +    -moz-animation-name: fadeInDownBig;
+>, <Line: +    -o-animation-name: fadeInDownBig;
+>, <Line: +    animation-name: fadeInDownBig;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeInLeftBig;
+>, <Line: +    -moz-animation-name: fadeInLeftBig;
+>, <Line: +    -o-animation-name: fadeInLeftBig;
+>, <Line: +    animation-name: fadeInLeftBig;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeInRightBig;
+>, <Line: +    -moz-animation-name: fadeInRightBig;
+>, <Line: +    -o-animation-name: fadeInRightBig;
+>, <Line: +    animation-name: fadeInRightBig;
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeOut;
+>, <Line: +    -moz-animation-name: fadeOut;
+>, <Line: +    -o-animation-name: fadeOut;
+>, <Line: +    animation-name: fadeOut;
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeOutUp;
+>, <Line: +    -moz-animation-name: fadeOutUp;
+>, <Line: +    -o-animation-name: fadeOutUp;
+>, <Line: +    animation-name: fadeOutUp;
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeOutDown;
+>, <Line: +    -moz-animation-name: fadeOutDown;
+>, <Line: +    -o-animation-name: fadeOutDown;
+>, <Line: +    animation-name: fadeOutDown;
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeOutLeft;
+>, <Line: +    -moz-animation-name: fadeOutLeft;
+>, <Line: +    -o-animation-name: fadeOutLeft;
+>, <Line: +    animation-name: fadeOutLeft;
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeOutRight;
+>, <Line: +    -moz-animation-name: fadeOutRight;
+>, <Line: +    -o-animation-name: fadeOutRight;
+>, <Line: +    animation-name: fadeOutRight;
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeOutUpBig;
+>, <Line: +    -moz-animation-name: fadeOutUpBig;
+>, <Line: +    -o-animation-name: fadeOutUpBig;
+>, <Line: +    animation-name: fadeOutUpBig;
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeOutDownBig;
+>, <Line: +    -moz-animation-name: fadeOutDownBig;
+>, <Line: +    -o-animation-name: fadeOutDownBig;
+>, <Line: +    animation-name: fadeOutDownBig;
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeOutLeftBig;
+>, <Line: +    -moz-animation-name: fadeOutLeftBig;
+>, <Line: +    -o-animation-name: fadeOutLeftBig;
+>, <Line: +    animation-name: fadeOutLeftBig;
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: fadeOutRightBig;
+>, <Line: +    -moz-animation-name: fadeOutRightBig;
+>, <Line: +    -o-animation-name: fadeOutRightBig;
+>, <Line: +    animation-name: fadeOutRightBig;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: scale(.3);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: scale(1.05);
+>, <Line: +    }
+>, <Line: +    70% {
+>, <Line: +        -webkit-transform: scale(.9);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: scale(.3);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: scale(1.05);
+>, <Line: +    }
+>, <Line: +    70% {
+>, <Line: +        -moz-transform: scale(.9);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: scale(.3);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: scale(1.05);
+>, <Line: +    }
+>, <Line: +    70% {
+>, <Line: +        -o-transform: scale(.9);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: scale(.3);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: scale(1.05);
+>, <Line: +    }
+>, <Line: +    70% {
+>, <Line: +        transform: scale(.9);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: scale(1);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounceIn;
+>, <Line: +    -moz-animation-name: bounceIn;
+>, <Line: +    -o-animation-name: bounceIn;
+>, <Line: +    animation-name: bounceIn;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(-30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -webkit-transform: translateY(10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(-30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -moz-transform: translateY(10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(-30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -o-transform: translateY(10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(-30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        transform: translateY(10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounceInUp;
+>, <Line: +    -moz-animation-name: bounceInUp;
+>, <Line: +    -o-animation-name: bounceInUp;
+>, <Line: +    animation-name: bounceInUp;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -webkit-transform: translateY(-10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -moz-transform: translateY(-10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -o-transform: translateY(-10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        transform: translateY(-10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounceInDown;
+>, <Line: +    -moz-animation-name: bounceInDown;
+>, <Line: +    -o-animation-name: bounceInDown;
+>, <Line: +    animation-name: bounceInDown;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -webkit-transform: translateX(-10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -moz-transform: translateX(-10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -o-transform: translateX(-10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        transform: translateX(-10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounceInLeft;
+>, <Line: +    -moz-animation-name: bounceInLeft;
+>, <Line: +    -o-animation-name: bounceInLeft;
+>, <Line: +    animation-name: bounceInLeft;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(-30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -webkit-transform: translateX(10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(-30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -moz-transform: translateX(10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(-30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -o-transform: translateX(10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(-30px);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        transform: translateX(10px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounceInRight;
+>, <Line: +    -moz-animation-name: bounceInRight;
+>, <Line: +    -o-animation-name: bounceInRight;
+>, <Line: +    animation-name: bounceInRight;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    25% {
+>, <Line: +        -webkit-transform: scale(.95);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: scale(1.1);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: scale(.3);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    25% {
+>, <Line: +        -moz-transform: scale(.95);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: scale(1.1);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: scale(.3);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: scale(1);
+>, <Line: +    }
+>, <Line: +    25% {
+>, <Line: +        -o-transform: scale(.95);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: scale(1.1);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: scale(.3);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: scale(1);
+>, <Line: +    }
+>, <Line: +    25% {
+>, <Line: +        transform: scale(.95);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: scale(1.1);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: scale(.3);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounceOut;
+>, <Line: +    -moz-animation-name: bounceOut;
+>, <Line: +    -o-animation-name: bounceOut;
+>, <Line: +    animation-name: bounceOut;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(-2000px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounceOutUp;
+>, <Line: +    -moz-animation-name: bounceOutUp;
+>, <Line: +    -o-animation-name: bounceOutUp;
+>, <Line: +    animation-name: bounceOutUp;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: translateY(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateY(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateY(2000px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounceOutDown;
+>, <Line: +    -moz-animation-name: bounceOutDown;
+>, <Line: +    -o-animation-name: bounceOutDown;
+>, <Line: +    animation-name: bounceOutDown;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(-2000px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounceOutLeft;
+>, <Line: +    -moz-animation-name: bounceOutLeft;
+>, <Line: +    -o-animation-name: bounceOutLeft;
+>, <Line: +    animation-name: bounceOutLeft;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: translateX(0);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(-20px);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(2000px);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: bounceOutRight;
+>, <Line: +    -moz-animation-name: bounceOutRight;
+>, <Line: +    -o-animation-name: bounceOutRight;
+>, <Line: +    animation-name: bounceOutRight;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform-origin: center center;
+>, <Line: +        -webkit-transform: rotate(-200deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform-origin: center center;
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform-origin: center center;
+>, <Line: +        -moz-transform: rotate(-200deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform-origin: center center;
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform-origin: center center;
+>, <Line: +        -o-transform: rotate(-200deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform-origin: center center;
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform-origin: center center;
+>, <Line: +        transform: rotate(-200deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform-origin: center center;
+>, <Line: +        transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rotateIn;
+>, <Line: +    -moz-animation-name: rotateIn;
+>, <Line: +    -o-animation-name: rotateIn;
+>, <Line: +    animation-name: rotateIn;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform-origin: left bottom;
+>, <Line: +        -webkit-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform-origin: left bottom;
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform-origin: left bottom;
+>, <Line: +        -moz-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform-origin: left bottom;
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform-origin: left bottom;
+>, <Line: +        -o-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform-origin: left bottom;
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform-origin: left bottom;
+>, <Line: +        transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform-origin: left bottom;
+>, <Line: +        transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rotateInUpLeft;
+>, <Line: +    -moz-animation-name: rotateInUpLeft;
+>, <Line: +    -o-animation-name: rotateInUpLeft;
+>, <Line: +    animation-name: rotateInUpLeft;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform-origin: left bottom;
+>, <Line: +        -webkit-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform-origin: left bottom;
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform-origin: left bottom;
+>, <Line: +        -moz-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform-origin: left bottom;
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform-origin: left bottom;
+>, <Line: +        -o-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform-origin: left bottom;
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform-origin: left bottom;
+>, <Line: +        transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform-origin: left bottom;
+>, <Line: +        transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rotateInDownLeft;
+>, <Line: +    -moz-animation-name: rotateInDownLeft;
+>, <Line: +    -o-animation-name: rotateInDownLeft;
+>, <Line: +    animation-name: rotateInDownLeft;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform-origin: right bottom;
+>, <Line: +        -webkit-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform-origin: right bottom;
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform-origin: right bottom;
+>, <Line: +        -moz-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform-origin: right bottom;
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform-origin: right bottom;
+>, <Line: +        -o-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform-origin: right bottom;
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform-origin: right bottom;
+>, <Line: +        transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform-origin: right bottom;
+>, <Line: +        transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rotateInUpRight;
+>, <Line: +    -moz-animation-name: rotateInUpRight;
+>, <Line: +    -o-animation-name: rotateInUpRight;
+>, <Line: +    animation-name: rotateInUpRight;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform-origin: right bottom;
+>, <Line: +        -webkit-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform-origin: right bottom;
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform-origin: right bottom;
+>, <Line: +        -moz-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform-origin: right bottom;
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform-origin: right bottom;
+>, <Line: +        -o-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform-origin: right bottom;
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform-origin: right bottom;
+>, <Line: +        transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform-origin: right bottom;
+>, <Line: +        transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rotateInDownRight;
+>, <Line: +    -moz-animation-name: rotateInDownRight;
+>, <Line: +    -o-animation-name: rotateInDownRight;
+>, <Line: +    animation-name: rotateInDownRight;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform-origin: center center;
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform-origin: center center;
+>, <Line: +        -webkit-transform: rotate(200deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform-origin: center center;
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform-origin: center center;
+>, <Line: +        -moz-transform: rotate(200deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform-origin: center center;
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform-origin: center center;
+>, <Line: +        -o-transform: rotate(200deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform-origin: center center;
+>, <Line: +        transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform-origin: center center;
+>, <Line: +        transform: rotate(200deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rotateOut;
+>, <Line: +    -moz-animation-name: rotateOut;
+>, <Line: +    -o-animation-name: rotateOut;
+>, <Line: +    animation-name: rotateOut;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform-origin: left bottom;
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform-origin: left bottom;
+>, <Line: +        -webkit-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform-origin: left bottom;
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform-origin: left bottom;
+>, <Line: +        -moz-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform-origin: left bottom;
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform-origin: left bottom;
+>, <Line: +        -o-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform-origin: left bottom;
+>, <Line: +        transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform-origin: left bottom;
+>, <Line: +        transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rotateOutUpLeft;
+>, <Line: +    -moz-animation-name: rotateOutUpLeft;
+>, <Line: +    -o-animation-name: rotateOutUpLeft;
+>, <Line: +    animation-name: rotateOutUpLeft;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform-origin: left bottom;
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform-origin: left bottom;
+>, <Line: +        -webkit-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform-origin: left bottom;
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform-origin: left bottom;
+>, <Line: +        -moz-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform-origin: left bottom;
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform-origin: left bottom;
+>, <Line: +        -o-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform-origin: left bottom;
+>, <Line: +        transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform-origin: left bottom;
+>, <Line: +        transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rotateOutDownLeft;
+>, <Line: +    -moz-animation-name: rotateOutDownLeft;
+>, <Line: +    -o-animation-name: rotateOutDownLeft;
+>, <Line: +    animation-name: rotateOutDownLeft;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform-origin: right bottom;
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform-origin: right bottom;
+>, <Line: +        -webkit-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform-origin: right bottom;
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform-origin: right bottom;
+>, <Line: +        -moz-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform-origin: right bottom;
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform-origin: right bottom;
+>, <Line: +        -o-transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform-origin: right bottom;
+>, <Line: +        transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform-origin: right bottom;
+>, <Line: +        transform: rotate(90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rotateOutUpRight;
+>, <Line: +    -moz-animation-name: rotateOutUpRight;
+>, <Line: +    -o-animation-name: rotateOutUpRight;
+>, <Line: +    animation-name: rotateOutUpRight;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform-origin: right bottom;
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform-origin: right bottom;
+>, <Line: +        -webkit-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform-origin: right bottom;
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform-origin: right bottom;
+>, <Line: +        -moz-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform-origin: right bottom;
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform-origin: right bottom;
+>, <Line: +        -o-transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform-origin: right bottom;
+>, <Line: +        transform: rotate(0);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform-origin: right bottom;
+>, <Line: +        transform: rotate(-90deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rotateOutDownRight;
+>, <Line: +    -moz-animation-name: rotateOutDownRight;
+>, <Line: +    -o-animation-name: rotateOutDownRight;
+>, <Line: +    animation-name: rotateOutDownRight;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: rotate(0);
+>, <Line: +        -webkit-transform-origin: top left;
+>, <Line: +        -webkit-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    20%, 60% {
+>, <Line: +        -webkit-transform: rotate(80deg);
+>, <Line: +        -webkit-transform-origin: top left;
+>, <Line: +        -webkit-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -webkit-transform: rotate(60deg);
+>, <Line: +        -webkit-transform-origin: top left;
+>, <Line: +        -webkit-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -webkit-transform: rotate(60deg) translateY(0);
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform-origin: top left;
+>, <Line: +        -webkit-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: translateY(700px);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: rotate(0);
+>, <Line: +        -moz-transform-origin: top left;
+>, <Line: +        -moz-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    20%, 60% {
+>, <Line: +        -moz-transform: rotate(80deg);
+>, <Line: +        -moz-transform-origin: top left;
+>, <Line: +        -moz-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -moz-transform: rotate(60deg);
+>, <Line: +        -moz-transform-origin: top left;
+>, <Line: +        -moz-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -moz-transform: rotate(60deg) translateY(0);
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform-origin: top left;
+>, <Line: +        -moz-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: translateY(700px);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: rotate(0);
+>, <Line: +        -o-transform-origin: top left;
+>, <Line: +        -o-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    20%, 60% {
+>, <Line: +        -o-transform: rotate(80deg);
+>, <Line: +        -o-transform-origin: top left;
+>, <Line: +        -o-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -o-transform: rotate(60deg);
+>, <Line: +        -o-transform-origin: top left;
+>, <Line: +        -o-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -o-transform: rotate(60deg) translateY(0);
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform-origin: top left;
+>, <Line: +        -o-animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: translateY(700px);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: rotate(0);
+>, <Line: +        transform-origin: top left;
+>, <Line: +        animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    20%, 60% {
+>, <Line: +        transform: rotate(80deg);
+>, <Line: +        transform-origin: top left;
+>, <Line: +        animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        transform: rotate(60deg);
+>, <Line: +        transform-origin: top left;
+>, <Line: +        animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        transform: rotate(60deg) translateY(0);
+>, <Line: +        opacity: 1;
+>, <Line: +        transform-origin: top left;
+>, <Line: +        animation-timing-function: ease-in-out;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: translateY(700px);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: hinge;
+>, <Line: +    -moz-animation-name: hinge;
+>, <Line: +    -o-animation-name: hinge;
+>, <Line: +    animation-name: hinge;
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(-100%) rotate(-120deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(0px) rotate(0deg);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(-100%) rotate(-120deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(0px) rotate(0deg);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(-100%) rotate(-120deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(0px) rotate(0deg);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(-100%) rotate(-120deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(0px) rotate(0deg);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rollIn;
+>, <Line: +    -moz-animation-name: rollIn;
+>, <Line: +    -o-animation-name: rollIn;
+>, <Line: +    animation-name: rollIn;
+>, <Line: +        opacity: 1;
+>, <Line: +        -webkit-transform: translateX(0px) rotate(0deg);
+>, <Line: +    }
+>, <Line: +        opacity: 0;
+>, <Line: +        -webkit-transform: translateX(100%) rotate(120deg);
+>, <Line: +    }
+>, <Line: +        opacity: 1;
+>, <Line: +        -moz-transform: translateX(0px) rotate(0deg);
+>, <Line: +    }
+>, <Line: +        opacity: 0;
+>, <Line: +        -moz-transform: translateX(100%) rotate(120deg);
+>, <Line: +    }
+>, <Line: +        opacity: 1;
+>, <Line: +        -o-transform: translateX(0px) rotate(0deg);
+>, <Line: +    }
+>, <Line: +        opacity: 0;
+>, <Line: +        -o-transform: translateX(100%) rotate(120deg);
+>, <Line: +    }
+>, <Line: +        opacity: 1;
+>, <Line: +        transform: translateX(0px) rotate(0deg);
+>, <Line: +    }
+>, <Line: +        opacity: 0;
+>, <Line: +        transform: translateX(100%) rotate(120deg);
+>, <Line: +    }
+>, <Line: +    -webkit-animation-name: rollOut;
+>, <Line: +    -moz-animation-name: rollOut;
+>, <Line: +    -o-animation-name: rollOut;
+>, <Line: +    animation-name: rollOut;
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: translateX(100%) skewX(-30deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -webkit-transform: translateX(-20%) skewX(30deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -webkit-transform: translateX(0%) skewX(-15deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: translateX(0%) skewX(0deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: translateX(100%) skewX(-30deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -moz-transform: translateX(-20%) skewX(30deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -moz-transform: translateX(0%) skewX(-15deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: translateX(0%) skewX(0deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: translateX(100%) skewX(-30deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -o-transform: translateX(-20%) skewX(30deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -o-transform: translateX(0%) skewX(-15deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: translateX(0%) skewX(0deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: translateX(100%) skewX(-30deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        transform: translateX(-20%) skewX(30deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        transform: translateX(0%) skewX(-15deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: translateX(0%) skewX(0deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: translateX(0%) skewX(0deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: translateX(100%) skewX(-30deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: translateX(0%) skewX(0deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: translateX(100%) skewX(-30deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: translateX(0%) skewX(0deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: translateX(100%) skewX(-30deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: translateX(0%) skewX(0deg);
+>, <Line: +        opacity: 1;
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: translateX(100%) skewX(-30deg);
+>, <Line: +        opacity: 0;
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -webkit-transform: skewX(9deg);
+>, <Line: +    }
+>, <Line: +    10% {
+>, <Line: +        -webkit-transform: skewX(-8deg);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        -webkit-transform: skewX(7deg);
+>, <Line: +    }
+>, <Line: +    30% {
+>, <Line: +        -webkit-transform: skewX(-6deg);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -webkit-transform: skewX(5deg);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        -webkit-transform: skewX(-4deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -webkit-transform: skewX(3deg);
+>, <Line: +    }
+>, <Line: +    70% {
+>, <Line: +        -webkit-transform: skewX(-2deg);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -webkit-transform: skewX(1deg);
+>, <Line: +    }
+>, <Line: +    90% {
+>, <Line: +        -webkit-transform: skewX(0deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -webkit-transform: skewX(0deg);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -moz-transform: skewX(9deg);
+>, <Line: +    }
+>, <Line: +    10% {
+>, <Line: +        -moz-transform: skewX(-8deg);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        -moz-transform: skewX(7deg);
+>, <Line: +    }
+>, <Line: +    30% {
+>, <Line: +        -moz-transform: skewX(-6deg);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -moz-transform: skewX(5deg);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        -moz-transform: skewX(-4deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -moz-transform: skewX(3deg);
+>, <Line: +    }
+>, <Line: +    70% {
+>, <Line: +        -moz-transform: skewX(-2deg);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -moz-transform: skewX(1deg);
+>, <Line: +    }
+>, <Line: +    90% {
+>, <Line: +        -moz-transform: skewX(0deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -moz-transform: skewX(0deg);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        -o-transform: skewX(9deg);
+>, <Line: +    }
+>, <Line: +    10% {
+>, <Line: +        -o-transform: skewX(-8deg);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        -o-transform: skewX(7deg);
+>, <Line: +    }
+>, <Line: +    30% {
+>, <Line: +        -o-transform: skewX(-6deg);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        -o-transform: skewX(5deg);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        -o-transform: skewX(-4deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        -o-transform: skewX(3deg);
+>, <Line: +    }
+>, <Line: +    70% {
+>, <Line: +        -o-transform: skewX(-2deg);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        -o-transform: skewX(1deg);
+>, <Line: +    }
+>, <Line: +    90% {
+>, <Line: +        -o-transform: skewX(0deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        -o-transform: skewX(0deg);
+>, <Line: +    }
+>, <Line: +    0% {
+>, <Line: +        transform: skewX(9deg);
+>, <Line: +    }
+>, <Line: +    10% {
+>, <Line: +        transform: skewX(-8deg);
+>, <Line: +    }
+>, <Line: +    20% {
+>, <Line: +        transform: skewX(7deg);
+>, <Line: +    }
+>, <Line: +    30% {
+>, <Line: +        transform: skewX(-6deg);
+>, <Line: +    }
+>, <Line: +    40% {
+>, <Line: +        transform: skewX(5deg);
+>, <Line: +    }
+>, <Line: +    50% {
+>, <Line: +        transform: skewX(-4deg);
+>, <Line: +    }
+>, <Line: +    60% {
+>, <Line: +        transform: skewX(3deg);
+>, <Line: +    }
+>, <Line: +    70% {
+>, <Line: +        transform: skewX(-2deg);
+>, <Line: +    }
+>, <Line: +    80% {
+>, <Line: +        transform: skewX(1deg);
+>, <Line: +    }
+>, <Line: +    90% {
+>, <Line: +        transform: skewX(0deg);
+>, <Line: +    }
+>, <Line: +    100% {
+>, <Line: +        transform: skewX(0deg);
+>, <Line: +    }
+>]
+[<Line: -body { /* Addresses a small issue in webkit: http://bit.ly/NEdoDq */
+>, <Line: -  -webkit-backface-visibility: hidden;
+>, <Line: -  -webkit-animation-duration: 1s;
+>, <Line: -     -moz-animation-duration: 1s;
+>, <Line: -       -o-animation-duration: 1s;
+>, <Line: -          animation-duration: 1s;
+>, <Line: -  -webkit-animation-fill-mode: both;
+>, <Line: -     -moz-animation-fill-mode: both;
+>, <Line: -       -o-animation-fill-mode: both;
+>, <Line: -          animation-fill-mode: both;
+>, <Line: -  -webkit-animation-iteration-count: infinite;
+>, <Line: -     -moz-animation-iteration-count: infinite;
+>, <Line: -       -o-animation-iteration-count: infinite;
+>, <Line: -          animation-iteration-count: infinite; 
+>, <Line: -  -webkit-animation-duration: 2s;
+>, <Line: -     -moz-animation-duration: 2s;
+>, <Line: -       -o-animation-duration: 2s;
+>, <Line: -          animation-duration: 2s;
+>, <Line: -  0%, 50%, 100% {opacity: 1;} 
+>, <Line: -  25%, 75% {opacity: 0;}
+>, <Line: -  0%, 50%, 100% {opacity: 1;} 
+>, <Line: -  25%, 75% {opacity: 0;}
+>, <Line: -  0%, 50%, 100% {opacity: 1;} 
+>, <Line: -  25%, 75% {opacity: 0;}
+>, <Line: -  0%, 50%, 100% {opacity: 1;} 
+>, <Line: -  25%, 75% {opacity: 0;}
+>, <Line: -  -webkit-animation-name: flash;
+>, <Line: -  -moz-animation-name: flash;
+>, <Line: -  -o-animation-name: flash;
+>, <Line: -  animation-name: flash;
+>, <Line: -  0%, 100% {-webkit-transform: translateX(0);}
+>, <Line: -  10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-10px);}
+>, <Line: -  20%, 40%, 60%, 80% {-webkit-transform: translateX(10px);}
+>, <Line: -  0%, 100% {-moz-transform: translateX(0);}
+>, <Line: -  10%, 30%, 50%, 70%, 90% {-moz-transform: translateX(-10px);}
+>, <Line: -  20%, 40%, 60%, 80% {-moz-transform: translateX(10px);}
+>, <Line: -  0%, 100% {-o-transform: translateX(0);}
+>, <Line: -  10%, 30%, 50%, 70%, 90% {-o-transform: translateX(-10px);}
+>, <Line: -  20%, 40%, 60%, 80% {-o-transform: translateX(10px);}
+>, <Line: -  0%, 100% {transform: translateX(0);}
+>, <Line: -  10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
+>, <Line: -  20%, 40%, 60%, 80% {transform: translateX(10px);}
+>, <Line: -  -webkit-animation-name: shake;
+>, <Line: -  -moz-animation-name: shake;
+>, <Line: -  -o-animation-name: shake;
+>, <Line: -  animation-name: shake;
+>, <Line: -  0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);}
+>, <Line: -  40% {-webkit-transform: translateY(-30px);}
+>, <Line: -  60% {-webkit-transform: translateY(-15px);}
+>, <Line: -  0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+>, <Line: -  40% {-moz-transform: translateY(-30px);}
+>, <Line: -  60% {-moz-transform: translateY(-15px);}
+>, <Line: -  0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+>, <Line: -  40% {-o-transform: translateY(-30px);}
+>, <Line: -  60% {-o-transform: translateY(-15px);}
+>, <Line: -  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+>, <Line: -  40% {transform: translateY(-30px);}
+>, <Line: -  60% {transform: translateY(-15px);}
+>, <Line: -  -webkit-animation-name: bounce;
+>, <Line: -  -moz-animation-name: bounce;
+>, <Line: -  -o-animation-name: bounce;
+>, <Line: -  animation-name: bounce;
+>, <Line: -  0% {-webkit-transform: scale(1);} 
+>, <Line: -  10%, 20% {-webkit-transform: scale(0.9) rotate(-3deg);}
+>, <Line: -  30%, 50%, 70%, 90% {-webkit-transform: scale(1.1) rotate(3deg);}
+>, <Line: -  40%, 60%, 80% {-webkit-transform: scale(1.1) rotate(-3deg);}
+>, <Line: -  100% {-webkit-transform: scale(1) rotate(0);}
+>, <Line: -  0% {-moz-transform: scale(1);}  
+>, <Line: -  10%, 20% {-moz-transform: scale(0.9) rotate(-3deg);}
+>, <Line: -  30%, 50%, 70%, 90% {-moz-transform: scale(1.1) rotate(3deg);}
+>, <Line: -  40%, 60%, 80% {-moz-transform: scale(1.1) rotate(-3deg);}
+>, <Line: -  100% {-moz-transform: scale(1) rotate(0);}
+>, <Line: -  0% {-o-transform: scale(1);}  
+>, <Line: -  10%, 20% {-o-transform: scale(0.9) rotate(-3deg);}
+>, <Line: -  30%, 50%, 70%, 90% {-o-transform: scale(1.1) rotate(3deg);}
+>, <Line: -  40%, 60%, 80% {-o-transform: scale(1.1) rotate(-3deg);}
+>, <Line: -  100% {-o-transform: scale(1) rotate(0);}
+>, <Line: -  0% {transform: scale(1);} 
+>, <Line: -  10%, 20% {transform: scale(0.9) rotate(-3deg);}
+>, <Line: -  30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);}
+>, <Line: -  40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);}
+>, <Line: -  100% {transform: scale(1) rotate(0);}
+>, <Line: -  -webkit-animation-name: tada;
+>, <Line: -  -moz-animation-name: tada;
+>, <Line: -  -o-animation-name: tada;
+>, <Line: -  animation-name: tada;
+>, <Line: -  20%, 40%, 60%, 80%, 100% { -webkit-transform-origin: top center; }
+>, <Line: -  20% { -webkit-transform: rotate(15deg); } 
+>, <Line: -  40% { -webkit-transform: rotate(-10deg); }
+>, <Line: -  60% { -webkit-transform: rotate(5deg); }  
+>, <Line: -  80% { -webkit-transform: rotate(-5deg); } 
+>, <Line: -  100% { -webkit-transform: rotate(0deg); }
+>, <Line: -  20% { -moz-transform: rotate(15deg); }  
+>, <Line: -  40% { -moz-transform: rotate(-10deg); }
+>, <Line: -  60% { -moz-transform: rotate(5deg); } 
+>, <Line: -  80% { -moz-transform: rotate(-5deg); }  
+>, <Line: -  100% { -moz-transform: rotate(0deg); }
+>, <Line: -  20% { -o-transform: rotate(15deg); }  
+>, <Line: -  40% { -o-transform: rotate(-10deg); }
+>, <Line: -  60% { -o-transform: rotate(5deg); } 
+>, <Line: -  80% { -o-transform: rotate(-5deg); }  
+>, <Line: -  100% { -o-transform: rotate(0deg); }
+>, <Line: -  20% { transform: rotate(15deg); } 
+>, <Line: -  40% { transform: rotate(-10deg); }
+>, <Line: -  60% { transform: rotate(5deg); }  
+>, <Line: -  80% { transform: rotate(-5deg); } 
+>, <Line: -  100% { transform: rotate(0deg); }
+>, <Line: -  -webkit-transform-origin: top center;
+>, <Line: -  -moz-transform-origin: top center;
+>, <Line: -  -o-transform-origin: top center;
+>, <Line: -  transform-origin: top center;
+>, <Line: -  -webkit-animation-name: swing;
+>, <Line: -  -moz-animation-name: swing;
+>, <Line: -  -o-animation-name: swing;
+>, <Line: -  animation-name: swing;
+>, <Line: -  0% { -webkit-transform: translateX(0%); }
+>, <Line: -  15% { -webkit-transform: translateX(-25%) rotate(-5deg); }
+>, <Line: -  30% { -webkit-transform: translateX(20%) rotate(3deg); }
+>, <Line: -  45% { -webkit-transform: translateX(-15%) rotate(-3deg); }
+>, <Line: -  60% { -webkit-transform: translateX(10%) rotate(2deg); }
+>, <Line: -  75% { -webkit-transform: translateX(-5%) rotate(-1deg); }
+>, <Line: -  100% { -webkit-transform: translateX(0%); }
+>, <Line: -  0% { -moz-transform: translateX(0%); }
+>, <Line: -  15% { -moz-transform: translateX(-25%) rotate(-5deg); }
+>, <Line: -  30% { -moz-transform: translateX(20%) rotate(3deg); }
+>, <Line: -  45% { -moz-transform: translateX(-15%) rotate(-3deg); }
+>, <Line: -  60% { -moz-transform: translateX(10%) rotate(2deg); }
+>, <Line: -  75% { -moz-transform: translateX(-5%) rotate(-1deg); }
+>, <Line: -  100% { -moz-transform: translateX(0%); }
+>, <Line: -  0% { -o-transform: translateX(0%); }
+>, <Line: -  15% { -o-transform: translateX(-25%) rotate(-5deg); }
+>, <Line: -  30% { -o-transform: translateX(20%) rotate(3deg); }
+>, <Line: -  45% { -o-transform: translateX(-15%) rotate(-3deg); }
+>, <Line: -  60% { -o-transform: translateX(10%) rotate(2deg); }
+>, <Line: -  75% { -o-transform: translateX(-5%) rotate(-1deg); }
+>, <Line: -  100% { -o-transform: translateX(0%); }
+>, <Line: -  0% { transform: translateX(0%); }
+>, <Line: -  15% { transform: translateX(-25%) rotate(-5deg); }
+>, <Line: -  30% { transform: translateX(20%) rotate(3deg); }
+>, <Line: -  45% { transform: translateX(-15%) rotate(-3deg); }
+>, <Line: -  60% { transform: translateX(10%) rotate(2deg); }
+>, <Line: -  75% { transform: translateX(-5%) rotate(-1deg); }
+>, <Line: -  100% { transform: translateX(0%); }
+>, <Line: -  -webkit-animation-name: wobble;
+>, <Line: -  -moz-animation-name: wobble;
+>, <Line: -  -o-animation-name: wobble;
+>, <Line: -  animation-name: wobble;
+>, <Line: -    0% { -webkit-transform: scale(1); } 
+>, <Line: -  50% { -webkit-transform: scale(1.1); }
+>, <Line: -    100% { -webkit-transform: scale(1); }
+>, <Line: -    0% { -moz-transform: scale(1); }  
+>, <Line: -  50% { -moz-transform: scale(1.1); }
+>, <Line: -    100% { -moz-transform: scale(1); }
+>, <Line: -    0% { -o-transform: scale(1); }  
+>, <Line: -  50% { -o-transform: scale(1.1); }
+>, <Line: -    100% { -o-transform: scale(1); }
+>, <Line: -    0% { transform: scale(1); } 
+>, <Line: -  50% { transform: scale(1.1); }
+>, <Line: -    100% { transform: scale(1); }
+>, <Line: -  -webkit-animation-name: pulse;
+>, <Line: -  -moz-animation-name: pulse;
+>, <Line: -  -o-animation-name: pulse;
+>, <Line: -  animation-name: pulse;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform: perspective(400px) rotateY(0);
+>, <Line: -    -webkit-animation-timing-function: ease-out;
+>, <Line: -  }
+>, <Line: -  40% {
+>, <Line: -    -webkit-transform: perspective(400px) translateZ(150px) rotateY(170deg);
+>, <Line: -    -webkit-animation-timing-function: ease-out;
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    -webkit-transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+>, <Line: -    -webkit-animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -webkit-transform: perspective(400px) rotateY(360deg) scale(.95);
+>, <Line: -    -webkit-animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform: perspective(400px) scale(1);
+>, <Line: -    -webkit-animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform: perspective(400px) rotateY(0);
+>, <Line: -    -moz-animation-timing-function: ease-out;
+>, <Line: -  }
+>, <Line: -  40% {
+>, <Line: -    -moz-transform: perspective(400px) translateZ(150px) rotateY(170deg);
+>, <Line: -    -moz-animation-timing-function: ease-out;
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    -moz-transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+>, <Line: -    -moz-animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -moz-transform: perspective(400px) rotateY(360deg) scale(.95);
+>, <Line: -    -moz-animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform: perspective(400px) scale(1);
+>, <Line: -    -moz-animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform: perspective(400px) rotateY(0);
+>, <Line: -    -o-animation-timing-function: ease-out;
+>, <Line: -  }
+>, <Line: -  40% {
+>, <Line: -    -o-transform: perspective(400px) translateZ(150px) rotateY(170deg);
+>, <Line: -    -o-animation-timing-function: ease-out;
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    -o-transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+>, <Line: -    -o-animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -o-transform: perspective(400px) rotateY(360deg) scale(.95);
+>, <Line: -    -o-animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform: perspective(400px) scale(1);
+>, <Line: -    -o-animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform: perspective(400px) rotateY(0);
+>, <Line: -    animation-timing-function: ease-out;
+>, <Line: -  }
+>, <Line: -  40% {
+>, <Line: -    transform: perspective(400px) translateZ(150px) rotateY(170deg);
+>, <Line: -    animation-timing-function: ease-out;
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+>, <Line: -    animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    transform: perspective(400px) rotateY(360deg) scale(.95);
+>, <Line: -    animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform: perspective(400px) scale(1);
+>, <Line: -    animation-timing-function: ease-in;
+>, <Line: -  }
+>, <Line: -  -webkit-backface-visibility: visible !important;
+>, <Line: -  -webkit-animation-name: flip;
+>, <Line: -  -moz-backface-visibility: visible !important;
+>, <Line: -  -moz-animation-name: flip;
+>, <Line: -  -o-backface-visibility: visible !important;
+>, <Line: -  -o-animation-name: flip;
+>, <Line: -  backface-visibility: visible !important;
+>, <Line: -  animation-name: flip;
+>, <Line: -  -webkit-backface-visibility: visible !important;
+>, <Line: -  -webkit-animation-name: flipInX;
+>, <Line: -  -moz-backface-visibility: visible !important;
+>, <Line: -  -moz-animation-name: flipInX;
+>, <Line: -  -o-backface-visibility: visible !important;
+>, <Line: -  -o-animation-name: flipInX;
+>, <Line: -  backface-visibility: visible !important;
+>, <Line: -  animation-name: flipInX;
+>, <Line: -  100% {
+>, <Line: -  100% {
+>, <Line: -  100% {
+>, <Line: -  100% {
+>, <Line: -  -webkit-animation-name: flipOutX;
+>, <Line: -  -webkit-backface-visibility: visible !important;
+>, <Line: -  -moz-animation-name: flipOutX;
+>, <Line: -  -moz-backface-visibility: visible !important;
+>, <Line: -  -o-animation-name: flipOutX;
+>, <Line: -  -o-backface-visibility: visible !important;
+>, <Line: -  animation-name: flipOutX;
+>, <Line: -  backface-visibility: visible !important;
+>, <Line: -  -webkit-backface-visibility: visible !important;
+>, <Line: -  -webkit-animation-name: flipInY;
+>, <Line: -  -moz-backface-visibility: visible !important;
+>, <Line: -  -moz-animation-name: flipInY;
+>, <Line: -  -o-backface-visibility: visible !important;
+>, <Line: -  -o-animation-name: flipInY;
+>, <Line: -  backface-visibility: visible !important;
+>, <Line: -  animation-name: flipInY;
+>, <Line: -  100% {
+>, <Line: -  100% {
+>, <Line: -  100% {
+>, <Line: -  100% {
+>, <Line: -  -webkit-backface-visibility: visible !important;
+>, <Line: -  -webkit-animation-name: flipOutY;
+>, <Line: -  -moz-backface-visibility: visible !important;
+>, <Line: -  -moz-animation-name: flipOutY;
+>, <Line: -  -o-backface-visibility: visible !important;
+>, <Line: -  -o-animation-name: flipOutY;
+>, <Line: -  backface-visibility: visible !important;
+>, <Line: -  animation-name: flipOutY;
+>, <Line: -  0% {opacity: 0;}  
+>, <Line: -  100% {opacity: 1;}
+>, <Line: -  0% {opacity: 0;}  
+>, <Line: -  100% {opacity: 1;}
+>, <Line: -}
+>, <Line: -@-o-keyframes fadeIn {
+>, <Line: -  0% {opacity: 0;}  
+>, <Line: -  100% {opacity: 1;}
+>, <Line: -}
+>, <Line: -  0% {opacity: 0;}  
+>, <Line: -  100% {opacity: 1;}
+>, <Line: -  -webkit-animation-name: fadeIn;
+>, <Line: -  -moz-animation-name: fadeIn;
+>, <Line: -  -o-animation-name: fadeIn;
+>, <Line: -  animation-name: fadeIn;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeInUp;
+>, <Line: -  -moz-animation-name: fadeInUp;
+>, <Line: -  -o-animation-name: fadeInUp;
+>, <Line: -  animation-name: fadeInUp;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeInDown;
+>, <Line: -  -moz-animation-name: fadeInDown;
+>, <Line: -  -o-animation-name: fadeInDown;
+>, <Line: -  animation-name: fadeInDown;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeInLeft;
+>, <Line: -  -moz-animation-name: fadeInLeft;
+>, <Line: -  -o-animation-name: fadeInLeft;
+>, <Line: -  animation-name: fadeInLeft;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeInRight;
+>, <Line: -  -moz-animation-name: fadeInRight;
+>, <Line: -  -o-animation-name: fadeInRight;
+>, <Line: -  animation-name: fadeInRight;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeInUpBig;
+>, <Line: -  -moz-animation-name: fadeInUpBig;
+>, <Line: -  -o-animation-name: fadeInUpBig;
+>, <Line: -  animation-name: fadeInUpBig;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeInDownBig;
+>, <Line: -  -moz-animation-name: fadeInDownBig;
+>, <Line: -  -o-animation-name: fadeInDownBig;
+>, <Line: -  animation-name: fadeInDownBig;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeInLeftBig;
+>, <Line: -  -moz-animation-name: fadeInLeftBig;
+>, <Line: -  -o-animation-name: fadeInLeftBig;
+>, <Line: -  animation-name: fadeInLeftBig;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeInRightBig;
+>, <Line: -  -moz-animation-name: fadeInRightBig;
+>, <Line: -  -o-animation-name: fadeInRightBig;
+>, <Line: -  animation-name: fadeInRightBig;
+>, <Line: -  0% {opacity: 1;}
+>, <Line: -  100% {opacity: 0;}
+>, <Line: -  0% {opacity: 1;}
+>, <Line: -  100% {opacity: 0;}
+>, <Line: -  0% {opacity: 1;}
+>, <Line: -  100% {opacity: 0;}
+>, <Line: -  0% {opacity: 1;}
+>, <Line: -  100% {opacity: 0;}
+>, <Line: -  -webkit-animation-name: fadeOut;
+>, <Line: -  -moz-animation-name: fadeOut;
+>, <Line: -  -o-animation-name: fadeOut;
+>, <Line: -  animation-name: fadeOut;
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeOutUp;
+>, <Line: -  -moz-animation-name: fadeOutUp;
+>, <Line: -  -o-animation-name: fadeOutUp;
+>, <Line: -  animation-name: fadeOutUp;
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeOutDown;
+>, <Line: -  -moz-animation-name: fadeOutDown;
+>, <Line: -  -o-animation-name: fadeOutDown;
+>, <Line: -  animation-name: fadeOutDown;
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeOutLeft;
+>, <Line: -  -moz-animation-name: fadeOutLeft;
+>, <Line: -  -o-animation-name: fadeOutLeft;
+>, <Line: -  animation-name: fadeOutLeft;
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeOutRight;
+>, <Line: -  -moz-animation-name: fadeOutRight;
+>, <Line: -  -o-animation-name: fadeOutRight;
+>, <Line: -  animation-name: fadeOutRight;
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeOutUpBig;
+>, <Line: -  -moz-animation-name: fadeOutUpBig;
+>, <Line: -  -o-animation-name: fadeOutUpBig;
+>, <Line: -  animation-name: fadeOutUpBig;
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeOutDownBig;
+>, <Line: -  -moz-animation-name: fadeOutDownBig;
+>, <Line: -  -o-animation-name: fadeOutDownBig;
+>, <Line: -  animation-name: fadeOutDownBig;
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeOutLeftBig;
+>, <Line: -  -moz-animation-name: fadeOutLeftBig;
+>, <Line: -  -o-animation-name: fadeOutLeftBig;
+>, <Line: -  animation-name: fadeOutLeftBig;
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: fadeOutRightBig;
+>, <Line: -  -moz-animation-name: fadeOutRightBig;
+>, <Line: -  -o-animation-name: fadeOutRightBig;
+>, <Line: -  animation-name: fadeOutRightBig;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: scale(.3);
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: scale(1.05);
+>, <Line: -  }
+>, <Line: -  70% {
+>, <Line: -    -webkit-transform: scale(.9);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform: scale(1);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: scale(.3);
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: scale(1.05);
+>, <Line: -  }
+>, <Line: -  70% {
+>, <Line: -    -moz-transform: scale(.9);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform: scale(1);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: scale(.3);
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: scale(1.05);
+>, <Line: -  }
+>, <Line: -  70% {
+>, <Line: -    -o-transform: scale(.9);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform: scale(1);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: scale(.3);
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: scale(1.05);
+>, <Line: -  }
+>, <Line: -  70% {
+>, <Line: -    transform: scale(.9);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform: scale(1);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: bounceIn;
+>, <Line: -  -moz-animation-name: bounceIn;
+>, <Line: -  -o-animation-name: bounceIn;
+>, <Line: -  animation-name: bounceIn;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(-30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -webkit-transform: translateY(10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(-30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -moz-transform: translateY(10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(-30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -o-transform: translateY(10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(-30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    transform: translateY(10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: bounceInUp;
+>, <Line: -  -moz-animation-name: bounceInUp;
+>, <Line: -  -o-animation-name: bounceInUp;
+>, <Line: -  animation-name: bounceInUp;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -webkit-transform: translateY(-10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -moz-transform: translateY(-10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -o-transform: translateY(-10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    transform: translateY(-10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: bounceInDown;
+>, <Line: -  -moz-animation-name: bounceInDown;
+>, <Line: -  -o-animation-name: bounceInDown;
+>, <Line: -  animation-name: bounceInDown;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -webkit-transform: translateX(-10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -moz-transform: translateX(-10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -o-transform: translateX(-10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    transform: translateX(-10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: bounceInLeft;
+>, <Line: -  -moz-animation-name: bounceInLeft;
+>, <Line: -  -o-animation-name: bounceInLeft;
+>, <Line: -  animation-name: bounceInLeft;
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(-30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -webkit-transform: translateX(10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(-30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -moz-transform: translateX(10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(-30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    -o-transform: translateX(10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  60% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(-30px);
+>, <Line: -  }
+>, <Line: -  80% {
+>, <Line: -    transform: translateX(10px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: bounceInRight;
+>, <Line: -  -moz-animation-name: bounceInRight;
+>, <Line: -  -o-animation-name: bounceInRight;
+>, <Line: -  animation-name: bounceInRight;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform: scale(1);
+>, <Line: -  }
+>, <Line: -  25% {
+>, <Line: -    -webkit-transform: scale(.95);
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: scale(1.1);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: scale(.3);
+>, <Line: -  } 
+>, <Line: -  0% {
+>, <Line: -    -moz-transform: scale(1);
+>, <Line: -  }
+>, <Line: -  25% {
+>, <Line: -    -moz-transform: scale(.95);
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: scale(1.1);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: scale(.3);
+>, <Line: -  } 
+>, <Line: -  0% {
+>, <Line: -    -o-transform: scale(1);
+>, <Line: -  }
+>, <Line: -  25% {
+>, <Line: -    -o-transform: scale(.95);
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: scale(1.1);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: scale(.3);
+>, <Line: -  } 
+>, <Line: -  0% {
+>, <Line: -    transform: scale(1);
+>, <Line: -  }
+>, <Line: -  25% {
+>, <Line: -    transform: scale(.95);
+>, <Line: -  }
+>, <Line: -  50% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: scale(1.1);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: scale(.3);
+>, <Line: -  } 
+>, <Line: -  -webkit-animation-name: bounceOut;
+>, <Line: -  -moz-animation-name: bounceOut;
+>, <Line: -  -o-animation-name: bounceOut;
+>, <Line: -  animation-name: bounceOut;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(-2000px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: bounceOutUp;
+>, <Line: -  -moz-animation-name: bounceOutUp;
+>, <Line: -  -o-animation-name: bounceOutUp;
+>, <Line: -  animation-name: bounceOutUp;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform: translateY(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateY(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateY(2000px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: bounceOutDown;
+>, <Line: -  -moz-animation-name: bounceOutDown;
+>, <Line: -  -o-animation-name: bounceOutDown;
+>, <Line: -  animation-name: bounceOutDown;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(-2000px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: bounceOutLeft;
+>, <Line: -  -moz-animation-name: bounceOutLeft;
+>, <Line: -  -o-animation-name: bounceOutLeft;
+>, <Line: -  animation-name: bounceOutLeft;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform: translateX(0);
+>, <Line: -  }
+>, <Line: -  20% {
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(-20px);
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(2000px);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: bounceOutRight;
+>, <Line: -  -moz-animation-name: bounceOutRight;
+>, <Line: -  -o-animation-name: bounceOutRight;
+>, <Line: -  animation-name: bounceOutRight;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform-origin: center center;
+>, <Line: -    -webkit-transform: rotate(-200deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform-origin: center center;
+>, <Line: -    -webkit-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform-origin: center center;
+>, <Line: -    -moz-transform: rotate(-200deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform-origin: center center;
+>, <Line: -    -moz-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform-origin: center center;
+>, <Line: -    -o-transform: rotate(-200deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform-origin: center center;
+>, <Line: -    -o-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform-origin: center center;
+>, <Line: -    transform: rotate(-200deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform-origin: center center;
+>, <Line: -    transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rotateIn;
+>, <Line: -  -moz-animation-name: rotateIn;
+>, <Line: -  -o-animation-name: rotateIn;
+>, <Line: -  animation-name: rotateIn;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform-origin: left bottom;
+>, <Line: -    -webkit-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform-origin: left bottom;
+>, <Line: -    -webkit-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform-origin: left bottom;
+>, <Line: -    -moz-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform-origin: left bottom;
+>, <Line: -    -moz-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform-origin: left bottom;
+>, <Line: -    -o-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform-origin: left bottom;
+>, <Line: -    -o-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform-origin: left bottom;
+>, <Line: -    transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform-origin: left bottom;
+>, <Line: -    transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rotateInUpLeft;
+>, <Line: -  -moz-animation-name: rotateInUpLeft;
+>, <Line: -  -o-animation-name: rotateInUpLeft;
+>, <Line: -  animation-name: rotateInUpLeft;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform-origin: left bottom;
+>, <Line: -    -webkit-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform-origin: left bottom;
+>, <Line: -    -webkit-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform-origin: left bottom;
+>, <Line: -    -moz-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform-origin: left bottom;
+>, <Line: -    -moz-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform-origin: left bottom;
+>, <Line: -    -o-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform-origin: left bottom;
+>, <Line: -    -o-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform-origin: left bottom;
+>, <Line: -    transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform-origin: left bottom;
+>, <Line: -    transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rotateInDownLeft;
+>, <Line: -  -moz-animation-name: rotateInDownLeft;
+>, <Line: -  -o-animation-name: rotateInDownLeft;
+>, <Line: -  animation-name: rotateInDownLeft;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform-origin: right bottom;
+>, <Line: -    -webkit-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform-origin: right bottom;
+>, <Line: -    -webkit-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform-origin: right bottom;
+>, <Line: -    -moz-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform-origin: right bottom;
+>, <Line: -    -moz-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform-origin: right bottom;
+>, <Line: -    -o-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform-origin: right bottom;
+>, <Line: -    -o-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform-origin: right bottom;
+>, <Line: -    transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform-origin: right bottom;
+>, <Line: -    transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rotateInUpRight;
+>, <Line: -  -moz-animation-name: rotateInUpRight;
+>, <Line: -  -o-animation-name: rotateInUpRight;
+>, <Line: -  animation-name: rotateInUpRight;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform-origin: right bottom;
+>, <Line: -    -webkit-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform-origin: right bottom;
+>, <Line: -    -webkit-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform-origin: right bottom;
+>, <Line: -    -moz-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform-origin: right bottom;
+>, <Line: -    -moz-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform-origin: right bottom;
+>, <Line: -    -o-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform-origin: right bottom;
+>, <Line: -    -o-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform-origin: right bottom;
+>, <Line: -    transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform-origin: right bottom;
+>, <Line: -    transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rotateInDownRight;
+>, <Line: -  -moz-animation-name: rotateInDownRight;
+>, <Line: -  -o-animation-name: rotateInDownRight;
+>, <Line: -  animation-name: rotateInDownRight;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform-origin: center center;
+>, <Line: -    -webkit-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform-origin: center center;
+>, <Line: -    -webkit-transform: rotate(200deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform-origin: center center;
+>, <Line: -    -moz-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform-origin: center center;
+>, <Line: -    -moz-transform: rotate(200deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform-origin: center center;
+>, <Line: -    -o-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform-origin: center center;
+>, <Line: -    -o-transform: rotate(200deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform-origin: center center;
+>, <Line: -    transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform-origin: center center;
+>, <Line: -    transform: rotate(200deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rotateOut;
+>, <Line: -  -moz-animation-name: rotateOut;
+>, <Line: -  -o-animation-name: rotateOut;
+>, <Line: -  animation-name: rotateOut;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform-origin: left bottom;
+>, <Line: -    -webkit-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform-origin: left bottom;
+>, <Line: -    -webkit-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform-origin: left bottom;
+>, <Line: -    -moz-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform-origin: left bottom;
+>, <Line: -    -moz-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform-origin: left bottom;
+>, <Line: -    -o-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform-origin: left bottom;
+>, <Line: -    -o-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform-origin: left bottom;
+>, <Line: -    transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform-origin: left bottom;
+>, <Line: -    transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rotateOutUpLeft;
+>, <Line: -  -moz-animation-name: rotateOutUpLeft;
+>, <Line: -  -o-animation-name: rotateOutUpLeft;
+>, <Line: -  animation-name: rotateOutUpLeft;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform-origin: left bottom;
+>, <Line: -    -webkit-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform-origin: left bottom;
+>, <Line: -    -webkit-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform-origin: left bottom;
+>, <Line: -    -moz-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform-origin: left bottom;
+>, <Line: -    -moz-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform-origin: left bottom;
+>, <Line: -    -o-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform-origin: left bottom;
+>, <Line: -    -o-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform-origin: left bottom;
+>, <Line: -    transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform-origin: left bottom;
+>, <Line: -    transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rotateOutDownLeft;
+>, <Line: -  -moz-animation-name: rotateOutDownLeft;
+>, <Line: -  -o-animation-name: rotateOutDownLeft;
+>, <Line: -  animation-name: rotateOutDownLeft;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform-origin: right bottom;
+>, <Line: -    -webkit-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform-origin: right bottom;
+>, <Line: -    -webkit-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform-origin: right bottom;
+>, <Line: -    -moz-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform-origin: right bottom;
+>, <Line: -    -moz-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform-origin: right bottom;
+>, <Line: -    -o-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform-origin: right bottom;
+>, <Line: -    -o-transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform-origin: right bottom;
+>, <Line: -    transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform-origin: right bottom;
+>, <Line: -    transform: rotate(90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rotateOutUpRight;
+>, <Line: -  -moz-animation-name: rotateOutUpRight;
+>, <Line: -  -o-animation-name: rotateOutUpRight;
+>, <Line: -  animation-name: rotateOutUpRight;
+>, <Line: -  0% {
+>, <Line: -    -webkit-transform-origin: right bottom;
+>, <Line: -    -webkit-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -webkit-transform-origin: right bottom;
+>, <Line: -    -webkit-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -moz-transform-origin: right bottom;
+>, <Line: -    -moz-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -moz-transform-origin: right bottom;
+>, <Line: -    -moz-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    -o-transform-origin: right bottom;
+>, <Line: -    -o-transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    -o-transform-origin: right bottom;
+>, <Line: -    -o-transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  0% {
+>, <Line: -    transform-origin: right bottom;
+>, <Line: -    transform: rotate(0);
+>, <Line: -    opacity: 1;
+>, <Line: -  }
+>, <Line: -  100% {
+>, <Line: -    transform-origin: right bottom;
+>, <Line: -    transform: rotate(-90deg);
+>, <Line: -    opacity: 0;
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rotateOutDownRight;
+>, <Line: -  -moz-animation-name: rotateOutDownRight;
+>, <Line: -  -o-animation-name: rotateOutDownRight;
+>, <Line: -  animation-name: rotateOutDownRight;
+>, <Line: -  0% { -webkit-transform: rotate(0); -webkit-transform-origin: top left; -webkit-animation-timing-function: ease-in-out; }  
+>, <Line: -  20%, 60% { -webkit-transform: rotate(80deg); -webkit-transform-origin: top left; -webkit-animation-timing-function: ease-in-out; }  
+>, <Line: -  40% { -webkit-transform: rotate(60deg); -webkit-transform-origin: top left; -webkit-animation-timing-function: ease-in-out; } 
+>, <Line: -  80% { -webkit-transform: rotate(60deg) translateY(0); opacity: 1; -webkit-transform-origin: top left; -webkit-animation-timing-function: ease-in-out; } 
+>, <Line: -  100% { -webkit-transform: translateY(700px); opacity: 0; }
+>, <Line: -  0% { -moz-transform: rotate(0); -moz-transform-origin: top left; -moz-animation-timing-function: ease-in-out; } 
+>, <Line: -  20%, 60% { -moz-transform: rotate(80deg); -moz-transform-origin: top left; -moz-animation-timing-function: ease-in-out; } 
+>, <Line: -  40% { -moz-transform: rotate(60deg); -moz-transform-origin: top left; -moz-animation-timing-function: ease-in-out; }  
+>, <Line: -  80% { -moz-transform: rotate(60deg) translateY(0); opacity: 1; -moz-transform-origin: top left; -moz-animation-timing-function: ease-in-out; }  
+>, <Line: -  100% { -moz-transform: translateY(700px); opacity: 0; }
+>, <Line: -  0% { -o-transform: rotate(0); -o-transform-origin: top left; -o-animation-timing-function: ease-in-out; } 
+>, <Line: -  20%, 60% { -o-transform: rotate(80deg); -o-transform-origin: top left; -o-animation-timing-function: ease-in-out; } 
+>, <Line: -  40% { -o-transform: rotate(60deg); -o-transform-origin: top left; -o-animation-timing-function: ease-in-out; }  
+>, <Line: -  80% { -o-transform: rotate(60deg) translateY(0); opacity: 1; -o-transform-origin: top left; -o-animation-timing-function: ease-in-out; }  
+>, <Line: -  100% { -o-transform: translateY(700px); opacity: 0; }
+>, <Line: -  0% { transform: rotate(0); transform-origin: top left; animation-timing-function: ease-in-out; }  
+>, <Line: -  20%, 60% { transform: rotate(80deg); transform-origin: top left; animation-timing-function: ease-in-out; }  
+>, <Line: -  40% { transform: rotate(60deg); transform-origin: top left; animation-timing-function: ease-in-out; } 
+>, <Line: -  80% { transform: rotate(60deg) translateY(0); opacity: 1; transform-origin: top left; animation-timing-function: ease-in-out; } 
+>, <Line: -  100% { transform: translateY(700px); opacity: 0; }
+>, <Line: -  -webkit-animation-name: hinge;
+>, <Line: -  -moz-animation-name: hinge;
+>, <Line: -  -o-animation-name: hinge;
+>, <Line: -  animation-name: hinge;
+>, <Line: -  0% { opacity: 0; -webkit-transform: translateX(-100%) rotate(-120deg); }
+>, <Line: -  100% { opacity: 1; -webkit-transform: translateX(0px) rotate(0deg); }
+>, <Line: -  0% { opacity: 0; -moz-transform: translateX(-100%) rotate(-120deg); }
+>, <Line: -  100% { opacity: 1; -moz-transform: translateX(0px) rotate(0deg); }
+>, <Line: -  0% { opacity: 0; -o-transform: translateX(-100%) rotate(-120deg); }
+>, <Line: -  100% { opacity: 1; -o-transform: translateX(0px) rotate(0deg); }
+>, <Line: -  0% { opacity: 0; transform: translateX(-100%) rotate(-120deg); }
+>, <Line: -  100% { opacity: 1; transform: translateX(0px) rotate(0deg); }
+>, <Line: -  -webkit-animation-name: rollIn;
+>, <Line: -  -moz-animation-name: rollIn;
+>, <Line: -  -o-animation-name: rollIn;
+>, <Line: -  animation-name: rollIn;
+>, <Line: -    opacity: 1;
+>, <Line: -    -webkit-transform: translateX(0px) rotate(0deg);
+>, <Line: -  }
+>, <Line: -    opacity: 0;
+>, <Line: -    -webkit-transform: translateX(100%) rotate(120deg);
+>, <Line: -  }
+>, <Line: -    opacity: 1;
+>, <Line: -    -moz-transform: translateX(0px) rotate(0deg);
+>, <Line: -  }
+>, <Line: -    opacity: 0;
+>, <Line: -    -moz-transform: translateX(100%) rotate(120deg);
+>, <Line: -  }
+>, <Line: -    opacity: 1;
+>, <Line: -    -o-transform: translateX(0px) rotate(0deg);
+>, <Line: -  }
+>, <Line: -    opacity: 0;
+>, <Line: -    -o-transform: translateX(100%) rotate(120deg);
+>, <Line: -  }
+>, <Line: -    opacity: 1;
+>, <Line: -    transform: translateX(0px) rotate(0deg);
+>, <Line: -  }
+>, <Line: -    opacity: 0;
+>, <Line: -    transform: translateX(100%) rotate(120deg);
+>, <Line: -  }
+>, <Line: -  -webkit-animation-name: rollOut;
+>, <Line: -  -moz-animation-name: rollOut;
+>, <Line: -  -o-animation-name: rollOut;
+>, <Line: -  animation-name: rollOut;
+>, <Line: -  0% { -webkit-transform: translateX(100%) skewX(-30deg); opacity: 0; }
+>, <Line: -  60% { -webkit-transform: translateX(-20%) skewX(30deg); opacity: 1; }
+>, <Line: -  80% { -webkit-transform: translateX(0%) skewX(-15deg); opacity: 1; }
+>, <Line: -  100% { -webkit-transform: translateX(0%) skewX(0deg); opacity: 1; }
+>, <Line: -  0% { -moz-transform: translateX(100%) skewX(-30deg); opacity: 0; }
+>, <Line: -  60% { -moz-transform: translateX(-20%) skewX(30deg); opacity: 1; }
+>, <Line: -  80% { -moz-transform: translateX(0%) skewX(-15deg); opacity: 1; }
+>, <Line: -  100% { -moz-transform: translateX(0%) skewX(0deg); opacity: 1; }
+>, <Line: -  0% { -o-transform: translateX(100%) skewX(-30deg); opacity: 0; }
+>, <Line: -  60% { -o-transform: translateX(-20%) skewX(30deg); opacity: 1; }
+>, <Line: -  80% { -o-transform: translateX(0%) skewX(-15deg); opacity: 1; }
+>, <Line: -  100% { -o-transform: translateX(0%) skewX(0deg); opacity: 1; }
+>, <Line: -  0% { transform: translateX(100%) skewX(-30deg); opacity: 0; }
+>, <Line: -  60% { transform: translateX(-20%) skewX(30deg); opacity: 1; }
+>, <Line: -  80% { transform: translateX(0%) skewX(-15deg); opacity: 1; }
+>, <Line: -  100% { transform: translateX(0%) skewX(0deg); opacity: 1; }
+>, <Line: -    0% { -webkit-transform: translateX(0%) skewX(0deg); opacity: 1; }
+>, <Line: -  100% { -webkit-transform: translateX(100%) skewX(-30deg); opacity: 0; }
+>, <Line: -  0% { -moz-transform: translateX(0%) skewX(0deg); opacity: 1; }
+>, <Line: -  100% { -moz-transform: translateX(100%) skewX(-30deg); opacity: 0; }
+>, <Line: -  0% { -o-transform: translateX(0%) skewX(0deg); opacity: 1; }
+>, <Line: -  100% { -o-transform: translateX(100%) skewX(-30deg); opacity: 0; }
+>, <Line: -  0% { transform: translateX(0%) skewX(0deg); opacity: 1; }
+>, <Line: -  100% { transform: translateX(100%) skewX(-30deg); opacity: 0; }
+>, <Line: -    0% { -webkit-transform: skewX(9deg); }
+>, <Line: -    10% { -webkit-transform: skewX(-8deg); }
+>, <Line: -    20% { -webkit-transform: skewX(7deg); }
+>, <Line: -    30% { -webkit-transform: skewX(-6deg); }
+>, <Line: -    40% { -webkit-transform: skewX(5deg); }
+>, <Line: -    50% { -webkit-transform: skewX(-4deg); }
+>, <Line: -    60% { -webkit-transform: skewX(3deg); }
+>, <Line: -    70% { -webkit-transform: skewX(-2deg); }
+>, <Line: -    80% { -webkit-transform: skewX(1deg); }
+>, <Line: -    90% { -webkit-transform: skewX(0deg); }
+>, <Line: -  100% { -webkit-transform: skewX(0deg); }
+>, <Line: -    0% { -moz-transform: skewX(9deg); }
+>, <Line: -    10% { -moz-transform: skewX(-8deg); }
+>, <Line: -    20% { -moz-transform: skewX(7deg); }
+>, <Line: -    30% { -moz-transform: skewX(-6deg); }
+>, <Line: -    40% { -moz-transform: skewX(5deg); }
+>, <Line: -    50% { -moz-transform: skewX(-4deg); }
+>, <Line: -    60% { -moz-transform: skewX(3deg); }
+>, <Line: -    70% { -moz-transform: skewX(-2deg); }
+>, <Line: -    80% { -moz-transform: skewX(1deg); }
+>, <Line: -    90% { -moz-transform: skewX(0deg); }
+>, <Line: -  100% { -moz-transform: skewX(0deg); }
+>, <Line: -    0% { -o-transform: skewX(9deg); }
+>, <Line: -    10% { -o-transform: skewX(-8deg); }
+>, <Line: -    20% { -o-transform: skewX(7deg); }
+>, <Line: -    30% { -o-transform: skewX(-6deg); }
+>, <Line: -    40% { -o-transform: skewX(5deg); }
+>, <Line: -    50% { -o-transform: skewX(-4deg); }
+>, <Line: -    60% { -o-transform: skewX(3deg); }
+>, <Line: -    70% { -o-transform: skewX(-2deg); }
+>, <Line: -    80% { -o-transform: skewX(1deg); }
+>, <Line: -    90% { -o-transform: skewX(0deg); }
+>, <Line: -  100% { -o-transform: skewX(0deg); }
+>, <Line: -    0% { transform: skewX(9deg); }
+>, <Line: -    10% { transform: skewX(-8deg); }
+>, <Line: -    20% { transform: skewX(7deg); }
+>, <Line: -    30% { transform: skewX(-6deg); }
+>, <Line: -    40% { transform: skewX(5deg); }
+>, <Line: -    50% { transform: skewX(-4deg); }
+>, <Line: -    60% { transform: skewX(3deg); }
+>, <Line: -    70% { transform: skewX(-2deg); }
+>, <Line: -    80% { transform: skewX(1deg); }
+>, <Line: -    90% { transform: skewX(0deg); }
+>, <Line: -  100% { transform: skewX(0deg); }
+>]

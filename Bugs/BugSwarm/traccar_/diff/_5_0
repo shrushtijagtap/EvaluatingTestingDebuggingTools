@@ -1,0 +1,42 @@
+[<Line: +import java.nio.ByteOrder;
+>, <Line: +import java.util.Date;
+>, <Line: +    private static final short MSG_LOGIN = 0x1001;
+>, <Line: +    private static final short MSG_LOGIN_RESPONSE = (short) 0x9001;
+>, <Line: +    private static final short MSG_HEARTBEAT = 0x1003;
+>, <Line: +    private static final short MSG_HEARTBEAT_RESPONSE = (short) 0x9003;
+>, <Line: +    private static final short MSG_GPS = 0x4001;
+>, <Line: +        int type = ChannelBuffers.swapShort(buf.readShort());
+>, <Line: +                ChannelBuffer response = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, 31);
+>, <Line: +                response.writeByte(0x40); response.writeByte(0x40);
+>, <Line: +                response.writeShort(response.capacity());
+>, <Line: +                response.writeShort(ChannelBuffers.swapShort(MSG_HEARTBEAT_RESPONSE));
+>, <Line: +                response.writeShort(Crc.crc16Ccitt(response.toByteBuffer(0, response.writerIndex())));
+>, <Line: +                response.writeByte(0x0D); response.writeByte(0x0A);
+>, <Line: +                    ChannelBuffer response = ChannelBuffers.directBuffer(ByteOrder.LITTLE_ENDIAN, 41);
+>, <Line: +                    response.writeByte(0x40); response.writeByte(0x40);
+>, <Line: +                    response.writeShort(response.capacity());
+>, <Line: +                    response.writeShort(ChannelBuffers.swapShort(MSG_LOGIN_RESPONSE));
+>, <Line: +                    response.writeInt((int) (new Date().getTime() / 1000));
+>, <Line: +                    response.writeShort(Crc.crc16Ccitt(response.toByteBuffer(0, response.writerIndex())));
+>, <Line: +                    response.writeByte(0x0D); response.writeByte(0x0A);
+>]
+[<Line: -    private static final int MSG_LOGIN = 0x0110;
+>, <Line: -    private static final int MSG_LOGIN_RESPONSE = 0x0190;
+>, <Line: -    private static final int MSG_HEARTBEAT = 0x0301;
+>, <Line: -    private static final int MSG_HEARTBEAT_RESPONSE = 0x0390;
+>, <Line: -    private static final int MSG_GPS = 0x0140;
+>, <Line: -        int type = buf.readUnsignedShort();
+>, <Line: -                ChannelBuffer response = ChannelBuffers.directBuffer(31);
+>, <Line: -                response.writeByte(0x40); response.writeByte(0x40); // header
+>, <Line: -                response.writeShort(response.capacity()); // size
+>, <Line: -                response.writeShort(MSG_HEARTBEAT_RESPONSE);
+>, <Line: -                response.writeShort(Crc.crc16Ccitt(response.toByteBuffer(2, 4))); // TODO
+>, <Line: -                response.writeByte(0x0D); response.writeByte(0x0A); // ending
+>, <Line: -                    ChannelBuffer response = ChannelBuffers.directBuffer(41);
+>, <Line: -                    response.writeByte(0x40); response.writeByte(0x40); // header
+>, <Line: -                    response.writeShort(response.capacity()); // size
+>, <Line: -                    response.writeShort(MSG_LOGIN_RESPONSE);
+>, <Line: -                    response.writeInt(0); // TODO
+>, <Line: -                    response.writeShort(Crc.crc16Ccitt(response.toByteBuffer(2, 4))); // TODO
+>, <Line: -                    response.writeByte(0x0D); response.writeByte(0x0A); // ending
+>]

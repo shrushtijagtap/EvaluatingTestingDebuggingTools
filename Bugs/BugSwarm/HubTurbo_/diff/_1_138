@@ -1,0 +1,12 @@
+[<Line: +	 * Takes an event handler to be called upon an event being fired.
+>, <Line: +	public void registerEvent(EventHandler handler);
+>, <Line: +	/**
+>, <Line: +	 * Takes an event handler to be unregistered.
+>, <Line: +	 */
+>, <Line: +	public void unregisterEvent(EventHandler handler);
+>]
+[<Line: -	 * Takes a lambda expression to be called upon an event being fired.
+>, <Line: -	 * @param handler
+>, <Line: -	public <T extends Event> void registerEvent(EventHandler handler);
+>, <Line: -	 * @param handler
+>]

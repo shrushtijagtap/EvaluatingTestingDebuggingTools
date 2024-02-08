@@ -1,0 +1,23 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part30;
+>, <Line: +import org.mp4parser.BoxParser;
+>, <Line: +import org.mp4parser.boxes.sampleentry.AbstractSampleEntry;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +import java.nio.channels.ReadableByteChannel;
+>, <Line: + * Sample Entry for WebVTT subtitles.
+>, <Line: + * <pre>
+>, <Line: + * class WVTTSampleEntry() extends PlainTextSampleEntry (‘wvtt’){
+>, <Line: + *   WebVTTConfigurationBox config;
+>, <Line: + *   WebVTTSourceLabelBox label; // recommended
+>, <Line: + *   MPEG4BitRateBox (); // optional
+>, <Line: + * }
+>, <Line: + * </pre>
+>, <Line: +    public void parse(ReadableByteChannel dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>]
+[<Line: -package com.mp4parser.iso14496.part30;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.coremedia.iso.boxes.sampleentry.AbstractSampleEntry;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: - * Created by sannies on 04.12.2014.
+>, <Line: -    public void parse(DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>]

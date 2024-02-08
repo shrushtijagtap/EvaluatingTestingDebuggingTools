@@ -1,0 +1,116 @@
+[<Line: +/*
+>, <Line: + * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package com.github.rinde.rinsim.experiment.base;
+>, <Line: +import static com.google.common.collect.Lists.newArrayList;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Objects;
+>, <Line: +import javax.annotation.Nullable;
+>, <Line: +import com.google.common.base.MoreObjects;
+>, <Line: +import com.google.common.collect.ImmutableSet;
+>, <Line: +/**
+>, <Line: + * Value object containing all the results of a single experiment as performed
+>, <Line: + * by ...
+>, <Line: + * @author Rinde van Lon
+>, <Line: + */
+>, <Line: +public final class ExperimentResults {
+>, <Line: +  /**
+>, <Line: +   * The .. that was used for this experiment.
+>, <Line: +   */
+>, <Line: +  public final Object objectiveFunction;
+>, <Line: +  /**
+>, <Line: +   * The configurations that were used in this experiment.
+>, <Line: +   */
+>, <Line: +  public final ImmutableSet<Configuration> configurations;
+>, <Line: +  /**
+>, <Line: +   * The scenarios that were used in this experiment.
+>, <Line: +   */
+>, <Line: +  public final ImmutableSet<? extends Scenario> scenarios;
+>, <Line: +  /**
+>, <Line: +   * Indicates whether the experiment was executed with or without the graphical
+>, <Line: +   * user interface.
+>, <Line: +   */
+>, <Line: +  public final boolean showGui;
+>, <Line: +  /**
+>, <Line: +   * The number of repetitions for each run (with a different seed).
+>, <Line: +   */
+>, <Line: +  public final int repetitions;
+>, <Line: +  /**
+>, <Line: +   * The seed of the master random generator.
+>, <Line: +   */
+>, <Line: +  public final long masterSeed;
+>, <Line: +  /**
+>, <Line: +   * The set of individual simulation results. Note that this set has an
+>, <Line: +   * undefined iteration order, if you want a sorted view on the results use
+>, <Line: +   * {@link #sortedResults()}.
+>, <Line: +   */
+>, <Line: +  public final ImmutableSet<SimulationResult> results;
+>, <Line: +  ExperimentResults(AbstractExperimentBuilder exp,
+>, <Line: +      ImmutableSet<SimulationResult> res) {
+>, <Line: +    objectiveFunction = exp.objectiveFunction;
+>, <Line: +    configurations = ImmutableSet.copyOf(exp.configurationsSet);
+>, <Line: +    scenarios = exp.scenariosBuilder.build();
+>, <Line: +    showGui = exp.showGui;
+>, <Line: +    repetitions = exp.repetitions;
+>, <Line: +    masterSeed = exp.masterSeed;
+>, <Line: +    results = res;
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * @return A unmodifiable {@link List} containing the results sorted by its
+>, <Line: +   *         comparator.
+>, <Line: +   */
+>, <Line: +  public List<SimulationResult> sortedResults() {
+>, <Line: +    List<SimulationResult> list = newArrayList(results);
+>, <Line: +    Collections.sort(list);
+>, <Line: +    return Collections.unmodifiableList(list);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public int hashCode() {
+>, <Line: +    return Objects.hash(objectiveFunction, configurations, scenarios,
+>, <Line: +        showGui, repetitions, masterSeed, results);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public boolean equals(@Nullable Object other) {
+>, <Line: +    if (other == null) {
+>, <Line: +      return false;
+>, <Line: +    }
+>, <Line: +    if (other.getClass() != getClass()) {
+>, <Line: +      return false;
+>, <Line: +    }
+>, <Line: +    final ExperimentResults er = (ExperimentResults) other;
+>, <Line: +    return Objects.equals(objectiveFunction, er.objectiveFunction)
+>, <Line: +        && Objects.equals(configurations, er.configurations)
+>, <Line: +        && Objects.equals(scenarios, er.scenarios)
+>, <Line: +        && Objects.equals(showGui, er.showGui)
+>, <Line: +        && Objects.equals(repetitions, er.repetitions)
+>, <Line: +        && Objects.equals(masterSeed, er.masterSeed)
+>, <Line: +        && Objects.equals(results, er.results);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public String toString() {
+>, <Line: +    return MoreObjects.toStringHelper(this)
+>, <Line: +        .add("objectiveFunction", objectiveFunction)
+>, <Line: +        .add("configurations", configurations)
+>, <Line: +        .add("scenarios", scenarios)
+>, <Line: +        .add("showGui", showGui)
+>, <Line: +        .add("repetitions", repetitions)
+>, <Line: +        .add("masterSeed", masterSeed)
+>, <Line: +        .add("results", results)
+>, <Line: +        .toString();
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,44 @@
+[<Line: +import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: +            && reasoner.isEntailed(axiom)
+>, <Line: +            && !triviallyTransitiveCheck(property, reasoner, dataFactory)) {
+>, <Line: +            result.add(axiom);
+>, <Line: +     *         OWLObjectPropertyAssertionAxioms is not supported.
+>, <Line: +    protected void addAxioms(OWLObjectProperty entity, OWLReasoner reasoner, OWLDataFactory df,
+>, <Line: +        Set<OWLObjectPropertyCharacteristicAxiom> result,
+>, <Line: +        Set<OWLObjectPropertyExpression> nonSimpleProperties) {
+>, <Line: +        addIfEntailed(df.getOWLSymmetricObjectPropertyAxiom(entity), reasoner, result);
+>, <Line: +        addIfEntailed(df.getOWLReflexiveObjectPropertyAxiom(entity), reasoner, result);
+>, <Line: +        if (simple(entity, reasoner, nonSimpleProperties)) {
+>, <Line: +            addIfEntailed(df.getOWLFunctionalObjectPropertyAxiom(entity), reasoner, result);
+>, <Line: +            addIfEntailed(df.getOWLInverseFunctionalObjectPropertyAxiom(entity), reasoner, result);
+>, <Line: +            addIfEntailed(df.getOWLAsymmetricObjectPropertyAxiom(entity), reasoner, result);
+>, <Line: +            addTransitiveAxiomIfEntailed(entity, reasoner, df, result);
+>, <Line: +            addIfEntailed(df.getOWLIrreflexiveObjectPropertyAxiom(entity), reasoner, result);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    protected boolean simple(OWLObjectProperty entity, OWLReasoner reasoner,
+>, <Line: +        Set<OWLObjectPropertyExpression> nonSimpleProperties) {
+>, <Line: +        if (nonSimpleProperties.contains(entity)) {
+>, <Line: +            return false;
+>, <Line: +        }
+>, <Line: +        OWLOntology current = reasoner.getRootOntology();
+>, <Line: +        OWLObjectPropertyManager objectPropertyManager = new OWLObjectPropertyManager(current);
+>, <Line: +        return !objectPropertyManager.isNonSimple(entity);
+>]
+[<Line: -            && reasoner.isEntailed(axiom)) {
+>, <Line: -            if (!triviallyTransitiveCheck(property, reasoner, dataFactory)) {
+>, <Line: -                result.add(axiom);
+>, <Line: -            }
+>, <Line: -     * OWLObjectPropertyAssertionAxioms is not supported.
+>, <Line: -    protected void addAxioms(OWLObjectProperty entity, OWLReasoner reasoner,
+>, <Line: -        OWLDataFactory dataFactory, Set<OWLObjectPropertyCharacteristicAxiom> result) {
+>, <Line: -        addIfEntailed(dataFactory.getOWLFunctionalObjectPropertyAxiom(entity), reasoner, result);
+>, <Line: -        addIfEntailed(dataFactory.getOWLInverseFunctionalObjectPropertyAxiom(entity), reasoner,
+>, <Line: -            result);
+>, <Line: -        addIfEntailed(dataFactory.getOWLSymmetricObjectPropertyAxiom(entity), reasoner, result);
+>, <Line: -        addIfEntailed(dataFactory.getOWLAsymmetricObjectPropertyAxiom(entity), reasoner, result);
+>, <Line: -        addTransitiveAxiomIfEntailed(entity, reasoner, dataFactory, result);
+>, <Line: -        addIfEntailed(dataFactory.getOWLReflexiveObjectPropertyAxiom(entity), reasoner, result);
+>, <Line: -        addIfEntailed(dataFactory.getOWLIrreflexiveObjectPropertyAxiom(entity), reasoner, result);
+>]

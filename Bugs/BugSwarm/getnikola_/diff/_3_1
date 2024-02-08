@@ -1,0 +1,23 @@
+[<Line: +        dummy_opener_mock = mock.mock_open(read_data="No metadata in the file!")
+>, <Line: +            with mock.patch('nikola.post.io.open', dummy_opener_mock, create=True):
+>, <Line: +        dummy_opener_mock = mock.mock_open(read_data="No metadata in the file!")
+>, <Line: +        with mock.patch('nikola.post.io.open', dummy_opener_mock, create=True):
+>, <Line: +        u = str(S)
+>, <Line: +        u = str(S)
+>, <Line: +        u = str(S)
+>]
+[<Line: -            with mock.patch('nikola.post.io.open', create=True):
+>, <Line: -        with mock.patch('nikola.post.io.open', create=True):
+>, <Line: -        try:
+>, <Line: -            u = unicode(S)
+>, <Line: -        except NameError:  # Python 3
+>, <Line: -            u = str(S)
+>, <Line: -        try:
+>, <Line: -            u = unicode(S)
+>, <Line: -        except NameError:  # Python 3
+>, <Line: -            u = str(S)
+>, <Line: -        try:
+>, <Line: -            u = unicode(S)
+>, <Line: -        except NameError:  # Python 3
+>, <Line: -            u = str(S)
+>]

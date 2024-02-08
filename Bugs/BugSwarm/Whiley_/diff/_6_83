@@ -1,0 +1,9 @@
+[]
+[<Line: -type nat is (int x) where x >= 0
+>, <Line: -type dict is {int=>nat}
+>, <Line: -function f(int key, dict d) -> int:
+>, <Line: -    return d[key]
+>, <Line: -public method g() -> int:
+>, <Line: -    dict d = {-2=>20, -1=>-1, 0=>0, 1=>10, 2=>20}
+>, <Line: -    return f(0,d)
+>]

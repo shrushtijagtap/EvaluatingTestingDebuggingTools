@@ -1,0 +1,18 @@
+[<Line: +package org.traccar.protocol;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.traccar.ProtocolTest;
+>, <Line: +public class SmokeyProtocolDecoderTest extends ProtocolTest {
+>, <Line: +    @Test
+>, <Line: +    public void testDecode() throws Exception {
+>, <Line: +        SmokeyProtocolDecoder decoder = new SmokeyProtocolDecoder(new SmokeyProtocol());
+>, <Line: +        verifyNothing(decoder, binary(
+>, <Line: +                "534d0300865628025163272f031400000000001c000200000c0168028f000102c9f93a011f538d"));
+>, <Line: +        verifyNothing(decoder, binary(
+>, <Line: +                "534d0300865628025163272f031400000000001f000200000c0167028f000102c9f93a011f5082"));
+>, <Line: +        verifyNothing(decoder, binary(
+>, <Line: +                "534d0300865628025163272f031400000000001d000200000c0167028f000102c9f93a011f5282"));
+>, <Line: +        verifyNothing(decoder, binary(
+>, <Line: +                "534d0300865628025163272f031400000000001e000200000c0167028f000102c9f93a011f5182"));
+>, <Line: +    }
+>, <Line: +}>]
+[]

@@ -1,0 +1,6 @@
+[<Line: +    private Position decodeNormalMessage(ChannelBuffer buf, Channel channel) {
+>, <Line: +    private Position decodeAlertMessage(ChannelBuffer buf, Channel channel) {
+>]
+[<Line: -    private Position decodeNormalMessage(ChannelBuffer buf, Channel channel) throws Exception {
+>, <Line: -    private Position decodeAlertMessage(ChannelBuffer buf, Channel channel) throws Exception {
+>]

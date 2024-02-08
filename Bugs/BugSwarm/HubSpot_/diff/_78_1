@@ -1,0 +1,8 @@
+[<Line: +import org.apache.zookeeper.KeeperException;
+>, <Line: +            } catch (KeeperException ke) {
+>, <Line: +              String message = String.format("Caught zookeeper error for path %s: %s", ke.getPath(), ke);
+>, <Line: +              LOG.error(message);
+>, <Line: +              requestManager.setRequestMessage(request.getLoadBalancerRequestId(), message);
+>, <Line: +              return InternalRequestStates.FAILED_SEND_REVERT_REQUESTS;
+>]
+[]

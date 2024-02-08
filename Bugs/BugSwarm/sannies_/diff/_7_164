@@ -1,0 +1,13 @@
+[<Line: +package org.mp4parser.boxes.apple;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: +    public PixelAspectRationAtom() {
+>, <Line: +        super(TYPE);
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.apple;
+>, <Line: -import com.googlecode.mp4parser.AbstractBox;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -    public PixelAspectRationAtom() {
+>, <Line: -        super(TYPE);
+>, <Line: -    }
+>]

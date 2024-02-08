@@ -1,0 +1,103 @@
+[<Line: +    private final Database db;
+>, <Line: +    private final int batchSize;
+>, <Line: +    QueryContext(Database db) {
+>, <Line: +        this(db, 1);
+>, <Line: +    }
+>, <Line: +    public QueryContext(Database db, int batchSize) {
+>, <Line: +        this.db = db;
+>, <Line: +        this.batchSize = batchSize;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Returns the scheduler service to use to run queries with this context.
+>, <Line: +     * 
+>, <Line: +     * @return
+>, <Line: +     */
+>, <Line: +    Scheduler scheduler() {
+>, <Line: +        return db.currentScheduler();
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Returns the connection provider for queries with this context.
+>, <Line: +     * 
+>, <Line: +     * @return
+>, <Line: +     */
+>, <Line: +    ConnectionProvider connectionProvider() {
+>, <Line: +        return db.connectionProvider();
+>, <Line: +    }
+>, <Line: +    void beginTransactionObserve() {
+>, <Line: +        db.beginTransactionObserve();
+>, <Line: +    }
+>, <Line: +    void beginTransactionSubscribe() {
+>, <Line: +        db.beginTransactionSubscribe();
+>, <Line: +    }
+>, <Line: +    void endTransactionSubscribe() {
+>, <Line: +        db.endTransactionSubscribe();
+>, <Line: +    }
+>, <Line: +    void endTransactionObserve() {
+>, <Line: +        db.endTransactionObserve();
+>, <Line: +    }
+>, <Line: +    void setupBatching() {
+>, <Line: +        db.batching(batchSize);
+>, <Line: +    }
+>, <Line: +    boolean isTransactionOpen() {
+>, <Line: +        return db.isTransactionOpen();
+>, <Line: +    }
+>, <Line: +    Func1<ResultSet, ? extends ResultSet> resultSetTransform() {
+>, <Line: +        return db.getResultSetTransform();
+>, <Line: +    }
+>, <Line: +    QueryContext batched(int batchSize) {
+>, <Line: +        return new QueryContext(db, batchSize);
+>, <Line: +    }
+>, <Line: +    int batchSize() {
+>, <Line: +        return batchSize;
+>, <Line: +    }
+>]
+[<Line: -	private final Database db;
+>, <Line: -	private final int batchSize;
+>, <Line: -	QueryContext(Database db) {
+>, <Line: -		this(db, 1);
+>, <Line: -	}
+>, <Line: -	public QueryContext(Database db, int batchSize) {
+>, <Line: -		this.db = db;
+>, <Line: -		this.batchSize = batchSize;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the scheduler service to use to run queries with this context.
+>, <Line: -	 * 
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	Scheduler scheduler() {
+>, <Line: -		return db.currentScheduler();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the connection provider for queries with this context.
+>, <Line: -	 * 
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	ConnectionProvider connectionProvider() {
+>, <Line: -		return db.connectionProvider();
+>, <Line: -	}
+>, <Line: -	void beginTransactionObserve() {
+>, <Line: -		db.beginTransactionObserve();
+>, <Line: -	}
+>, <Line: -	void beginTransactionSubscribe() {
+>, <Line: -		db.beginTransactionSubscribe();
+>, <Line: -	}
+>, <Line: -	void endTransactionSubscribe() {
+>, <Line: -		db.endTransactionSubscribe();
+>, <Line: -	}
+>, <Line: -	void endTransactionObserve() {
+>, <Line: -		db.endTransactionObserve();
+>, <Line: -	}
+>, <Line: -	void setupBatching() {
+>, <Line: -		db.batching(batchSize);
+>, <Line: -	}
+>, <Line: -	Func1<ResultSet, ? extends ResultSet> resultSetTransform() {
+>, <Line: -		return db.getResultSetTransform();
+>, <Line: -	}
+>, <Line: -	QueryContext batched(int batchSize) {
+>, <Line: -		return new QueryContext(db, batchSize);
+>, <Line: -	}
+>, <Line: -	int batchSize() {
+>, <Line: -		return batchSize;
+>, <Line: -	}
+>]

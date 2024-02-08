@@ -1,0 +1,14 @@
+[<Line: +        Object max = maxExplanations == 0 ? "all" : Integer.valueOf(maxExplanations);
+>, <Line: +        LOGGER.info("MUPS {}: {}", Integer.valueOf(allMups.size()), mups);
+>, <Line: +                LOGGER.info("Computed {} explanations", Integer.valueOf(maxExplanations));
+>, <Line: +            LOGGER.info("Removing axiom: {} {} more removed: {}", axiom, Integer.valueOf(currentPathContents.size()),
+>, <Line: +        Set<Set<OWLAxiom>> satPaths, Set<OWLAxiom> currentPathContents, int maxExplanations, List<OWLAxiom> orderedMups,
+>, <Line: +        OWLAxiom axiom) throws OWLException {
+>]
+[<Line: -        Object max = maxExplanations == 0 ? "all" : maxExplanations;
+>, <Line: -        LOGGER.info("MUPS {}: {}", allMups.size(), mups);
+>, <Line: -                LOGGER.info("Computed {} explanations", maxExplanations);
+>, <Line: -            LOGGER.info("Removing axiom: {} {} more removed: {}", axiom, currentPathContents.size(),
+>, <Line: -        Set<Set<OWLAxiom>> satPaths, Set<OWLAxiom> currentPathContents, int maxExplanations,
+>, <Line: -        List<OWLAxiom> orderedMups, OWLAxiom axiom) throws OWLException {
+>]

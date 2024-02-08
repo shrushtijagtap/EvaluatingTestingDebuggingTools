@@ -1,0 +1,7 @@
+[<Line: +## [2.3.0] - ?
+>, <Line: +### Added
+>, <Line: + - Added logging message for signing algorithm.
+>, <Line: + - Added x-request-id output on HTTP errors.
+>, <Line: + - Add toString methods for ConfigContext.
+>]
+[]

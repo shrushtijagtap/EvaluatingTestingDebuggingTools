@@ -1,0 +1,6 @@
+[<Line: +../../tests/invalid/Cast_Invalid_2.whiley:4: expected type int[], found real[]
+>, <Line: +    return (int[]) xs
+>]
+[<Line: -../../tests/invalid/Cast_Invalid_2.whiley:4: expected type [int], found [real]
+>, <Line: -    return ([int]) xs
+>]

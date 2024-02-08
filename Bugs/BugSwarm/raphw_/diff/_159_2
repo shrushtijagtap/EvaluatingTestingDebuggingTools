@@ -1,0 +1,4 @@
+[<Line: +        blackHole = (Blackhole) method.invoke(blackHoleGenerator.getDeclaredConstructor().newInstance());
+>]
+[<Line: -        blackHole = (Blackhole) method.invoke(blackHoleGenerator.newInstance());
+>]

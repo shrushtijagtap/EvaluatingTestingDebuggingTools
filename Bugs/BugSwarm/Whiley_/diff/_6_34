@@ -1,0 +1,650 @@
+[]
+[<Line: -// Copyright (c) 2012, David J. Pearce (djp@ecs.vuw.ac.nz)
+>, <Line: -// All rights reserved.
+>, <Line: -//
+>, <Line: -// Redistribution and use in source and binary forms, with or without
+>, <Line: -// modification, are permitted provided that the following conditions are met:
+>, <Line: -//    * Redistributions of source code must retain the above copyright
+>, <Line: -//      notice, this list of conditions and the following disclaimer.
+>, <Line: -//    * Redistributions in binary form must reproduce the above copyright
+>, <Line: -//      notice, this list of conditions and the following disclaimer in the
+>, <Line: -//      documentation and/or other materials provided with the distribution.
+>, <Line: -//    * Neither the name of the <organization> nor the
+>, <Line: -//      names of its contributors may be used to endorse or promote products
+>, <Line: -//      derived from this software without specific prior written permission.
+>, <Line: -//
+>, <Line: -// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+>, <Line: -// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+>, <Line: -// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+>, <Line: -// DISCLAIMED. IN NO EVENT SHALL DAVID J. PEARCE BE LIABLE FOR ANY
+>, <Line: -// DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+>, <Line: -// (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+>, <Line: -// LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+>, <Line: -// ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+>, <Line: -// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+>, <Line: -// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+>, <Line: -package wyil.builders;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import java.util.BitSet;
+>, <Line: -import wycc.util.Pair;
+>, <Line: -import wycs.core.Value;
+>, <Line: -import wycs.syntax.Expr;
+>, <Line: -import wyil.lang.*;
+>, <Line: -/**
+>, <Line: - * <p>
+>, <Line: - * Represents a path through the body of a Wyil method or function. A branch
+>, <Line: - * accumulates the constraints known to hold through that particular execution
+>, <Line: - * path. These constraints can then be checked for satisfiability at various
+>, <Line: - * critical points in the function (i.e. by generating verification conditions).
+>, <Line: - * </p>
+>, <Line: - * <p>
+>, <Line: - * When verifying a given function or method, the verifier starts with a single
+>, <Line: - * branch at the beginning of the method. When split points in the control-flow
+>, <Line: - * graph are encountered, branches are accordingly forked off to represent the
+>, <Line: - * alternate control-flow path. At control-flow meet points, branches may also
+>, <Line: - * be joined back together (although this is not always strictly necessary). A
+>, <Line: - * diagrammatic view might be:
+>, <Line: - * </p>
+>, <Line: - *
+>, <Line: - * <pre>
+>, <Line: - *  entry
+>, <Line: - *   ||
+>, <Line: - *   ||
+>, <Line: - *   ##\
+>, <Line: - *   ||\\
+>, <Line: - *   || \\
+>, <Line: - *   || ||
+>, <Line: - *   || ##\
+>, <Line: - *   || ||\\
+>, <Line: - *   ||//  \\
+>, <Line: - *   ##/   ||
+>, <Line: - *   ||    ||
+>, <Line: - *   \/    \/
+>, <Line: - *   B1    B3
+>, <Line: - * </pre>
+>, <Line: - * <p>
+>, <Line: - * In the above example, we initially start with one branch <code>B1</code>.
+>, <Line: - * This is then forked to give branch <code>B2</code> which, in turn, is forked
+>, <Line: - * again to give <code>B3</code>. Subsequently, branch <code>B2</code> is joined
+>, <Line: - * back with <code>B1</code>. However, <code>B3</code> is never joined and
+>, <Line: - * terminates separately.
+>, <Line: - * </p>
+>, <Line: - * <p>
+>, <Line: - * Every branch (except the first) has one or more <i>parent</i> branches which
+>, <Line: - * it was either forked or joined from. Given any two branches there is always a
+>, <Line: - * <i>Least Common Ancestor (LCA)</i> --- that is, the latest point which is
+>, <Line: - * common to both branches. Finding the LCA can be useful, for example, to
+>, <Line: - * identify constraints common to both branches.
+>, <Line: - * </p>
+>, <Line: - *
+>, <Line: - * @author David J. Pearce
+>, <Line: - *
+>, <Line: - */
+>, <Line: -public class VcBranch {
+>, <Line: -	public enum State {
+>, <Line: -		ACTIVE, // Branch currently progressing through code block
+>, <Line: -		INTERNAL, // Branch is internal (i.e. has been forked or joined)
+>, <Line: -		TERMINATED, // Branch reached return statement
+>, <Line: -		FAILED // Branch reached failed statement
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * The parent branch which this branch was forked from, or <code>null</code>
+>, <Line: -	 * if it is the initial "master" branch for the function or method in
+>, <Line: -	 * question.
+>, <Line: -	 */
+>, <Line: -	private final VcBranch[] parents;
+>, <Line: -	/**
+>, <Line: -	 * Maintains the current assignment of variables to expressions.
+>, <Line: -	 */
+>, <Line: -	private final Expr[] environment;
+>, <Line: -	/**
+>, <Line: -	 * A fixed list of variable "prefixes". These are the names given to each
+>, <Line: -	 * register slot, and which are then appended with their SSA number to form
+>, <Line: -	 * an actual register name. Note that the prefixes are fixed for the entire
+>, <Line: -	 * branch graph of a function / method.
+>, <Line: -	 */
+>, <Line: -	private final String[] prefixes;
+>, <Line: -	/**
+>, <Line: -	 * For each variable we maintain the current "version". This is an integer
+>, <Line: -	 * value which is used to determine the appropriate SSA number for a given
+>, <Line: -	 * variable.
+>, <Line: -	 */
+>, <Line: -	final int[] versions;
+>, <Line: -	/**
+>, <Line: -	 * Contains the accumulated constraints in the order they were added.
+>, <Line: -	 */
+>, <Line: -	private Expr constraints;
+>, <Line: -	/**
+>, <Line: -	 * The bytecode index into the above block that this branch is currently at.
+>, <Line: -	 */
+>, <Line: -	private BytecodeForest.Index pc;
+>, <Line: -	/**
+>, <Line: -	 * Indicates the state of this branch. In particular, whether its active,
+>, <Line: -	 * terminated or failed. A branch is terminated when a return bytecode is
+>, <Line: -	 * reached. Likewise, a branch is failed when a fail statement is bytecode.
+>, <Line: -	 * Otherwise, a branch is active.
+>, <Line: -	 */
+>, <Line: -	private State state;
+>, <Line: -	/**
+>, <Line: -	 * Construct the master verification branch for a given attributed code
+>, <Line: -	 * block. The pc for the master branch of a block is the root index (i.e.
+>, <Line: -	 * the branch begins at the entry of the block).
+>, <Line: -	 *
+>, <Line: -	 * @param numInputs
+>, <Line: -	 *            --- the minimum number of register slots required
+>, <Line: -	 * @param prefixes
+>, <Line: -	 *            --- Variable names to use as prefixes when generating register
+>, <Line: -	 *            names. If null, the default names are used instead.
+>, <Line: -	 */
+>, <Line: -	public VcBranch(int numInputs, BytecodeForest.Index pc, String[] prefixes) {
+>, <Line: -		int numSlots = numInputs;
+>, <Line: -		this.parents = new VcBranch[0];
+>, <Line: -		this.environment = new Expr[numSlots];
+>, <Line: -		this.versions = new int[numSlots];
+>, <Line: -		this.constraints = null;
+>, <Line: -		this.pc = pc;
+>, <Line: -		this.state = State.ACTIVE;
+>, <Line: -		if (prefixes == null) {
+>, <Line: -			// Construct default variable prefixes if none are given.
+>, <Line: -			this.prefixes = new String[numSlots];
+>, <Line: -			for (int i = 0; i != numSlots; ++i) {
+>, <Line: -				this.prefixes[i] = "r" + i;
+>, <Line: -			}
+>, <Line: -		} else {
+>, <Line: -			this.prefixes = prefixes;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Private constructor used for forking a child-branch from a parent branch.
+>, <Line: -	 *
+>, <Line: -	 * @param parent
+>, <Line: -	 *            --- parent branch being forked from.
+>, <Line: -	 */
+>, <Line: -	private VcBranch(VcBranch parent) {
+>, <Line: -		this.parents = new VcBranch[] { parent };
+>, <Line: -		this.environment = parent.environment.clone();
+>, <Line: -		this.versions = Arrays.copyOf(parent.versions,
+>, <Line: -				parent.versions.length);
+>, <Line: -		this.constraints = null;
+>, <Line: -		this.prefixes = parent.prefixes;
+>, <Line: -		this.pc = parent.pc;
+>, <Line: -		this.state = State.ACTIVE;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Private constructor used for joining two or more parent branches.
+>, <Line: -	 *
+>, <Line: -	 * @param parent
+>, <Line: -	 *            --- Parent branches being forked from. There must be at least
+>, <Line: -	 *            two of these.
+>, <Line: -	 * @param environment
+>, <Line: -	 *            --- Environment for this branch which is the converged
+>, <Line: -	 *            environments of all branches.
+>, <Line: -	 * @param state
+>, <Line: -	 *            --- State which this branch should be in. This may not be
+>, <Line: -	 *            active, for example, if none of the parents were active.
+>, <Line: -	 * 
+>, <Line: -	 */
+>, <Line: -	private VcBranch(VcBranch[] parents, Expr[] environment, 
+>, <Line: -			int[] versions, State state, String[] prefixes) {
+>, <Line: -		this.parents = parents;
+>, <Line: -		this.environment = environment;
+>, <Line: -		this.versions = versions;		
+>, <Line: -		this.constraints = null;
+>, <Line: -		this.pc = parents[0].pc;
+>, <Line: -		this.state = state;
+>, <Line: -		this.prefixes = prefixes;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Return the current Program Counter (PC) value for this branch. This must
+>, <Line: -	 * be a valid index into the code block this branch is operating over.
+>, <Line: -	 *
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public BytecodeForest.Index pc() {
+>, <Line: -		return pc;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Return the parents for this node. Note, the root node has no parents.
+>, <Line: -	 * 
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public VcBranch[] parents() {
+>, <Line: -		return parents;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Return the constraints which are known to hold on this branch segment,
+>, <Line: -	 * excluding those which hold on ancestor branches.
+>, <Line: -	 */
+>, <Line: -	public Expr constraints() {
+>, <Line: -		if (constraints == null) {
+>, <Line: -			return new Expr.Constant(Value.Bool(true));
+>, <Line: -		} else {
+>, <Line: -			return constraints;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public int numSlots() {
+>, <Line: -		return environment.length;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Determine the current state of this branch. In particular, whether or not
+>, <Line: -	 * it is ACTIVE.
+>, <Line: -	 * 
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public State state() {
+>, <Line: -		return state;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Update the state of this branch.
+>, <Line: -	 * 
+>, <Line: -	 * @param state
+>, <Line: -	 */
+>, <Line: -	public void setState(State state) {
+>, <Line: -		this.state = state;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Get the static list of prefixes
+>, <Line: -	 * 
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public String[] prefixes() {
+>, <Line: -		return prefixes;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Update the program counter for this branch. This can, for example, be
+>, <Line: -	 * used to move the branch to the next logical instruction. Or, it can be
+>, <Line: -	 * used to jump the branch to an entirely different location.
+>, <Line: -	 * 
+>, <Line: -	 * <p>
+>, <Line: -	 * <b>NOTE:</b>The branch must be ACTIVE for this operation to be permitted,
+>, <Line: -	 * since it changes the state of the branch.
+>, <Line: -	 * </p>
+>, <Line: -	 * 
+>, <Line: -	 * @param pc
+>, <Line: -	 */
+>, <Line: -	public void goTo(BytecodeForest.Index pc) {
+>, <Line: -		if (state != State.ACTIVE) {
+>, <Line: -			// Sanity check
+>, <Line: -			throw new IllegalArgumentException(
+>, <Line: -					"Attempt to modify an inactive branch");
+>, <Line: -		}
+>, <Line: -		this.pc = pc;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Get the constraint variable which corresponds to the given Wyil bytecode
+>, <Line: -	 * register at this point on this branch.
+>, <Line: -	 *
+>, <Line: -	 * @param register
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Expr read(int register) {
+>, <Line: -		return environment[register];
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Assign an expression to a given Wyil bytecode register. This stores the
+>, <Line: -	 * assigned expression for recall when the given register is subsequently
+>, <Line: -	 * read.
+>, <Line: -	 * <p>
+>, <Line: -	 * <b>NOTE:</b>The branch must be ACTIVE for this operation to be permitted,
+>, <Line: -	 * since it changes the state of the branch.
+>, <Line: -	 * </p>
+>, <Line: -	 * 
+>, <Line: -	 * @param register
+>, <Line: -	 *            --- Register being written.
+>, <Line: -	 * @param expr
+>, <Line: -	 *            --- Expression being assigned.
+>, <Line: -	 */
+>, <Line: -	public void write(int register, Expr expr) {
+>, <Line: -		if (state != State.ACTIVE) {
+>, <Line: -			// Sanity check
+>, <Line: -			throw new IllegalArgumentException(
+>, <Line: -					"Attempt to modify an inactive branch");
+>, <Line: -		}
+>, <Line: -		versions[register]++;
+>, <Line: -		environment[register] = expr;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Terminate the current flow for a given register and begin a new one. In
+>, <Line: -	 * terms of static-single assignment, this means simply change the index of
+>, <Line: -	 * the register in question. This is also known in the verification
+>, <Line: -	 * community as "havocing" the variable, or sending the variable to "havoc".
+>, <Line: -	 * <p>
+>, <Line: -	 * <b>NOTE:</b>The branch must be ACTIVE for this operation to be permitted,
+>, <Line: -	 * since it changes the state of the branch.
+>, <Line: -	 * </p>
+>, <Line: -	 * 
+>, <Line: -	 * @param register
+>, <Line: -	 *            Register number to havoc
+>, <Line: -	 * @param type
+>, <Line: -	 *            Type of register being havoced
+>, <Line: -	 */
+>, <Line: -	public Expr.Variable havoc(int register) {
+>, <Line: -		if (state != State.ACTIVE) {
+>, <Line: -			// Sanity check
+>, <Line: -			throw new IllegalArgumentException(
+>, <Line: -					"Attempt to modify an inactive branch");
+>, <Line: -		}		
+>, <Line: -		// to invalidate a variable, we assign it a "skolem" constant. That is,
+>, <Line: -		// a fresh variable which has not been previously encountered in the
+>, <Line: -		// branch.			
+>, <Line: -		versions[register] = versions[register] + 1;			
+>, <Line: -		String prefix = prefixes[register] == null ? "r%" + register : prefixes[register];		
+>, <Line: -		Expr.Variable var = new Expr.Variable(prefix + "$"
+>, <Line: -				+ versions[register]);
+>, <Line: -		environment[register] = var;	
+>, <Line: -		return var;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Assume a given condition holds on this branch.
+>, <Line: -	 * 
+>, <Line: -	 * <p>
+>, <Line: -	 * <b>NOTE:</b>The branch must be ACTIVE for this operation to be permitted,
+>, <Line: -	 * since it changes the state of the branch.
+>, <Line: -	 * </p>
+>, <Line: -	 * 
+>, <Line: -	 * @param e
+>, <Line: -	 *            The condition to assume
+>, <Line: -	 */
+>, <Line: -	public void assume(Expr e) {
+>, <Line: -		if (state != State.ACTIVE) {
+>, <Line: -			// Sanity check
+>, <Line: -			throw new IllegalArgumentException(
+>, <Line: -					"Attempt to modify an inactive branch");
+>, <Line: -		}
+>, <Line: -		if (constraints == null) {
+>, <Line: -			constraints = e;
+>, <Line: -		} else {
+>, <Line: -			constraints = new Expr.Binary(Expr.Binary.Op.AND, constraints, e);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * <p>
+>, <Line: -	 * Fork this branch into a child branch with this branch as parent. This
+>, <Line: -	 * branch enters the INTERNAL state and is now immutable (otherwise, changes
+>, <Line: -	 * to this branch would change its children as well). The child branch is
+>, <Line: -	 * (initially) identical to this branch in every way. However, the
+>, <Line: -	 * expectation is that it will diverge as verification condition generation
+>, <Line: -	 * progresses. Finally, multiple children may be forked from the same
+>, <Line: -	 * parent.
+>, <Line: -	 * </p>
+>, <Line: -	 *
+>, <Line: -	 * <pre>
+>, <Line: -	 *    B1
+>, <Line: -	 *    ||
+>, <Line: -	 *    ||
+>, <Line: -	 *    ##    <- origin
+>, <Line: -	 *    | \
+>, <Line: -	 *    ||\\
+>, <Line: -	 *    || \\
+>, <Line: -	 *    \/  \/
+>, <Line: -	 *    B1  B2
+>, <Line: -	 * </pre>
+>, <Line: -	 * <p>
+>, <Line: -	 * The origin for the forked branch is the <code>PC</code value at the split
+>, <Line: -	 * point. Initially, the <code>PC</code> value for the forked branch is
+>, <Line: -	 * identical to that of the parent, however it is expected that a
+>, <Line: -	 * <code>goTo</code> will be used immediately after the fork to jump the
+>, <Line: -	 * child branched to their logical starting point.
+>, <Line: -	 * </p>
+>, <Line: -	 *
+>, <Line: -	 * @return --- The child branch which is forked off this branch.
+>, <Line: -	 */
+>, <Line: -	public VcBranch fork() {
+>, <Line: -		// Mark this branch as having been forked and, hence, it is now
+>, <Line: -		// inactive.
+>, <Line: -		this.state = State.INTERNAL;
+>, <Line: -		// Construct the two child branch
+>, <Line: -		return new VcBranch(this);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * <p>
+>, <Line: -	 * Join two (or more) branches together to form a single active branch with
+>, <Line: -	 * two (or more) parents. The parent branches enter the INTERNAL state and,
+>, <Line: -	 * hence, become immutable (since, otherwise, changes to them would affect
+>, <Line: -	 * their children).
+>, <Line: -	 * </p>
+>, <Line: -	 * 
+>, <Line: -	 * <pre>
+>, <Line: -	 *        B1 	  B2
+>, <Line: -	 *        ||      ||
+>, <Line: -	 *         \\    //
+>, <Line: -	 *          \\  //
+>, <Line: -	 *           \\//
+>, <Line: -	 *            ##
+>, <Line: -	 *            B3
+>, <Line: -	 * </pre>
+>, <Line: -	 * <p>
+>, <Line: -	 * An important concern is how the environment in the child branch is
+>, <Line: -	 * constructed from its parents. The issue being that the environments in
+>, <Line: -	 * the parent branches may diverged. HOW TO RESOLVE THIS??
+>, <Line: -	 * </p>
+>, <Line: -	 * 
+>, <Line: -	 * @param parent
+>, <Line: -	 *            --- The parent branches which are being joined with this one.
+>, <Line: -	 *            These must all have the same PC value as this branch.
+>, <Line: -	 */
+>, <Line: -	public VcBranch join(VcBranch... parents) {
+>, <Line: -		// Quick sanity check that all branches being joined have same pc
+>, <Line: -		// location and are in the same state.
+>, <Line: -		State parentState = this.state;
+>, <Line: -		for (VcBranch parent : parents) {
+>, <Line: -			if (!pc.equals(parent.pc())) {
+>, <Line: -				throw new IllegalArgumentException(
+>, <Line: -						"Attempt to join parents at different locations");
+>, <Line: -			} else if (!state.equals(parent.state())) {
+>, <Line: -				throw new IllegalArgumentException(
+>, <Line: -						"Attempt to join parents in different states");
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		// Mark all branches involved in the join as internal. This
+>, <Line: -		// effectively renders them immutable from now on, thereby preventing
+>, <Line: -		// changes which could affect the joined branch or its children.
+>, <Line: -		for (VcBranch parent : parents) {
+>, <Line: -			parent.state = State.INTERNAL;
+>, <Line: -		}
+>, <Line: -		this.state = State.INTERNAL;
+>, <Line: -		// Construct the array of all branches, including this.
+>, <Line: -		VcBranch[] nparents = new VcBranch[parents.length + 1];
+>, <Line: -		System.arraycopy(parents, 0, nparents, 1, parents.length);
+>, <Line: -		nparents[0] = this;
+>, <Line: -		// Converge versions between the different parents. This is done
+>, <Line: -		// simply by calculating the max subscript for each variable across all
+>, <Line: -		// environments.		
+>, <Line: -		int[] nVersions = convergeVersions(nparents);
+>, <Line: -		// Converge environments to ensure obtain a single environment which
+>, <Line: -		// correctly represents the environments of all branches being joined.
+>, <Line: -		// In some cases, individual environments may need to be patched to get
+>, <Line: -		// them all into identical states.
+>, <Line: -		Expr[] nEnvironment = convergeEnvironments(nparents, nVersions);
+>, <Line: -		// Finally, create the new branch representing the join of all branches,
+>, <Line: -		// and with those branches as its declared parents.
+>, <Line: -		return new VcBranch(nparents, nEnvironment, nVersions, parentState,
+>, <Line: -				prefixes);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Converge the versions across all parent branches. This is done by
+>, <Line: -	 * calculating the max subscript for each variable across all environments.
+>, <Line: -	 * For example:
+>, <Line: -	 * 
+>, <Line: -	 * <pre>
+>, <Line: -	 * Branch 1:   Branch 2:
+>, <Line: -	 * 
+>, <Line: -	 * |0|1|2|3|   |0|1|2|3|
+>, <Line: -	 * =========   =========
+>, <Line: -	 * |2|2|3|2|   |2|1|4|2|
+>, <Line: -	 * </pre>
+>, <Line: -	 * 
+>, <Line: -	 * Here, the register slot number if given on top, and then subscript is
+>, <Line: -	 * given below. The converged subscripts array would then be:
+>, <Line: -	 * 
+>, <Line: -	 * <pre>
+>, <Line: -	 * |0|1|2|3|
+>, <Line: -	 * =========
+>, <Line: -	 * |2|2|4|2|
+>, <Line: -	 * </pre>
+>, <Line: -	 * 
+>, <Line: -	 * Here, for example, slot 0 retains subscript 2 as this is true for both
+>, <Line: -	 * branches. However, slot 2 is given subscript 4 as this is the maximum
+>, <Line: -	 * subscript for that slot across both branches.
+>, <Line: -	 * 
+>, <Line: -	 * @param parents
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private int[] convergeVersions(VcBranch[] parents) {
+>, <Line: -		int[] nVersions = new int[versions.length];
+>, <Line: -		for (int i = 0; i != parents.length; ++i) {
+>, <Line: -			int[] pSubscripts = parents[i].versions;
+>, <Line: -			for (int j = 0; j != nVersions.length; ++j) {
+>, <Line: -				nVersions[j] = Math.max(nVersions[j], pSubscripts[j]);
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return nVersions;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Convert environments from one or more branches together. The key
+>, <Line: -	 * challenge here lies with variables that have diverged between branches.
+>, <Line: -	 * For example, consider converging two branch environments:
+>, <Line: -	 * 
+>, <Line: -	 * <pre>
+>, <Line: -	 * Branch 1:   Branch 2:
+>, <Line: -	 * 
+>, <Line: -	 * |0|1|2|3|   |0|1|2|3|
+>, <Line: -	 * =========   =========
+>, <Line: -	 * |X|Y|Z|/|   |X|Z|/|/|
+>, <Line: -	 * </pre>
+>, <Line: -	 * 
+>, <Line: -	 * <p>
+>, <Line: -	 * Here, we see the four main cases to be concerned with. Firstly, register
+>, <Line: -	 * 0 has the same value on both branches (namely, X) and, hence, will have
+>, <Line: -	 * this same value in the final joined branch. Register 1 has different
+>, <Line: -	 * values in both branches and will need to be patched. Register 2 has null
+>, <Line: -	 * on one branch signalling it is undefined on that branch and, hence, will
+>, <Line: -	 * be undefined in the resulting joined branch. Finally, register 3 is
+>, <Line: -	 * undefined on both branches and hence will be undefined in the final
+>, <Line: -	 * joined branch as well.
+>, <Line: -	 * </p>
+>, <Line: -	 * 
+>, <Line: -	 * <p>
+>, <Line: -	 * Before joining the above two branches they need to be patched to ensure
+>, <Line: -	 * register 1 has the same value on both branches. This is done by creating
+>, <Line: -	 * a new variable to store the value from each branch. The following
+>, <Line: -	 * illustrates the two patched environments (which are children of the two
+>, <Line: -	 * above):
+>, <Line: -	 * </p>
+>, <Line: -	 * 
+>, <Line: -	 * <pre>
+>, <Line: -	 * Branch 3:   Branch 4:
+>, <Line: -	 * parent: 1   parent: 2
+>, <Line: -	 * 
+>, <Line: -	 * |0|1|2|3|   |0|1|2|3|
+>, <Line: -	 * =========   =========
+>, <Line: -	 * |X|W|Z|/|   |X|W|/|/|
+>, <Line: -	 * 
+>, <Line: -	 * (W == Y)    (W == Z)
+>, <Line: -	 * </pre>
+>, <Line: -	 * 
+>, <Line: -	 * <p>
+>, <Line: -	 * Below the patched branches we can see the constraints which have been
+>, <Line: -	 * assumed to ensure information from both branches is correctly retained.
+>, <Line: -	 * The finaly joined branch is thus:
+>, <Line: -	 * </p>
+>, <Line: -	 * 
+>, <Line: -	 * <pre>
+>, <Line: -	 * Branch 5:
+>, <Line: -	 * parents: 3,4
+>, <Line: -	 * 
+>, <Line: -	 * |0|1|2|3|
+>, <Line: -	 * =========
+>, <Line: -	 * |X|W|/|/|
+>, <Line: -	 * </pre>
+>, <Line: -	 * 
+>, <Line: -	 * Finally, it is worth noting that in the special case that no variables
+>, <Line: -	 * need to be patched, then no patch environments need to be created.
+>, <Line: -	 * 
+>, <Line: -	 * @param branches
+>, <Line: -	 *            --- Branches whose environments are to be converged.
+>, <Line: -	 * @param versions
+>, <Line: -	 *            --- the converged set of subscripts
+>, <Line: -	 * 
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private Expr[] convergeEnvironments(VcBranch[] branches, int[] versions) {
+>, <Line: -		Expr[] newEnvironment = Arrays.copyOf(environment, environment.length);
+>, <Line: -		// First, go through and find all registers whose values differ between
+>, <Line: -		// parents. These registers will need to be patched.
+>, <Line: -		Pair<BitSet,BitSet> pvs = determinePatchVariables(newEnvironment, branches);
+>, <Line: -		BitSet toPatch = pvs.first();
+>, <Line: -		BitSet toNull = pvs.second();
+>, <Line: -		// Second, patch any registers which were marked in previous phase. Such
+>, <Line: -		// registers are given new names which are common to all branches, and
+>, <Line: -		// appropriate assumptions are added to connect the old register names
+>, <Line: -		// with the new.
+>, <Line: -		if (toPatch.isEmpty() && toNull.isEmpty()) {
+>, <Line: -			// This is the special case where there are no variables needing to
+>, <Line: -			// be patched or nulled.
+>, <Line: -			return newEnvironment;
+>, <Line: -		} else {
+>, <Line: -			// In this case, there is at least one varaible which needs to be
+>, <Line: -			// patched. First, we go through and fork all branches to create the
+>, <Line: -			// patch branches.
+>, <Line: -			for (int j = 0; j != branches.length; ++j) {
+>, <Line: -				branches[j] = branches[j].fork();
+>, <Line: -			}
+>, <Line: -			// Now, patch each variable which is marked for patching.
+>, <Line: -			for (int i = 0; i != newEnvironment.length; ++i) {
+>, <Line: -				if(toNull.get(i)) {
+>, <Line: -					// This register needs to be nulled since it was undefined
+>, <Line: -					// in one or more of the source branches. This check needs
+>, <Line: -					// to come before the patch check, because a variable can be
+>, <Line: -					// marked as both toNull and toPatch. In such case, it
+>, <Line: -					// should be nulled.
+>, <Line: -					newEnvironment[i] = null;
+>, <Line: -				} else if (toPatch.get(i)) {
+>, <Line: -					// This register needs to be patched. First, check whether
+>, <Line: -					// this register has a prefix or not.
+>, <Line: -					String prefix = prefixes[i] == null ? "r%" + i : prefixes[i];
+>, <Line: -					Expr.Variable var = new Expr.Variable(prefix + "$" + versions[i]);
+>, <Line: -					for (int j = 0; j != branches.length; ++j) {
+>, <Line: -						branches[j].assume(new Expr.Binary(Expr.Binary.Op.EQ,
+>, <Line: -								var, branches[j].read(i)));
+>, <Line: -					}
+>, <Line: -					newEnvironment[i] = var;
+>, <Line: -				} 
+>, <Line: -			}
+>, <Line: -			// Done
+>, <Line: -			return newEnvironment;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Determine which variables differ between two or more branches. Such
+>, <Line: -	 * variables need to be "patched" or "nulled".
+>, <Line: -	 * 
+>, <Line: -	 * @param environment
+>, <Line: -	 * @param parents
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private static Pair<BitSet,BitSet> determinePatchVariables(Expr[] environment,
+>, <Line: -			VcBranch[] parents) {
+>, <Line: -		BitSet toPatch = new BitSet(environment.length);
+>, <Line: -		BitSet toNull = new BitSet(environment.length);
+>, <Line: -		for (int i = 0; i != environment.length; ++i) {
+>, <Line: -			environment[i] = parents[0].environment[i];
+>, <Line: -			for (int j = 0; j != parents.length; ++j) {
+>, <Line: -				VcBranch parent = parents[j];
+>, <Line: -				if (environment[i] == null || parent.environment[i] == null) {
+>, <Line: -					// In this case, the variable is undefined on one or both
+>, <Line: -					// parents. This means it cannot be used after this point
+>, <Line: -					// and, hence, can be safey ignored.
+>, <Line: -					toNull.set(i);
+>, <Line: -				} else if (!parent.environment[i].equivalent(environment[i])) {
+>, <Line: -					// In this case, there is some difference between this parent's
+>, <Line: -					// environment and at least one others. In such case, the
+>, <Line: -					// variable in question needs to be patched.
+>, <Line: -					toPatch.set(i);
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return new Pair<BitSet,BitSet>(toPatch,toNull);
+>, <Line: -	}
+>, <Line: -}
+>]

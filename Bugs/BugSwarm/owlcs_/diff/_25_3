@@ -1,0 +1,10 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +    private final OntologyConfigurator config;
+>, <Line: +    public OWLParserParameters(OWLOntology o, OntologyConfigurator c, IRI iri) {
+>, <Line: +    public OntologyConfigurator getConfig() {
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -    private final OWLOntologyLoaderConfiguration config;
+>, <Line: -    public OWLParserParameters(OWLOntology o, OWLOntologyLoaderConfiguration c, IRI iri) {
+>, <Line: -    public OWLOntologyLoaderConfiguration getConfig() {
+>]

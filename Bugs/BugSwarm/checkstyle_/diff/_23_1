@@ -1,0 +1,8 @@
+[<Line: +              <a href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#DIV">DIV</a>,
+>, <Line: +              <a href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#PLUS">PLUS</a>,
+>, <Line: +              <a href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#DIV">DIV</a>,
+>, <Line: +              <a href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#PLUS">PLUS</a>,
+>]
+[<Line: -              <a href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#DIV, PLUS">DIV, PLUS</a>,
+>, <Line: -              <a href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#DIV, PLUS">DIV, PLUS</a>,
+>]

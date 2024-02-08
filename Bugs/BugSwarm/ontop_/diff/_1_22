@@ -1,0 +1,5 @@
+[<Line: +	public Datatype getDatatype();
+>]
+[<Line: - * DataRange is always assumed to be owl:TopDataProperty due to the NORMALIZATION of the ontology
+>, <Line: - * (auxiliary data sub-properties are introduced if needed)
+>]

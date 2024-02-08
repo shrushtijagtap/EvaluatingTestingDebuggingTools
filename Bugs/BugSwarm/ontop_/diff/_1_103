@@ -1,0 +1,8 @@
+[<Line: +		TBoxReasoner reasoner= TBoxReasonerImpl.create(o);
+>, <Line: +		TBoxReasoner  reasoner = TBoxReasonerImpl.create(o);
+>, <Line: +		TBoxReasoner  reasoner= TBoxReasonerImpl.create(o);
+>]
+[<Line: -		TBoxReasoner reasoner= new TBoxReasonerImpl(o);
+>, <Line: -		TBoxReasoner  reasoner = new TBoxReasonerImpl(o);
+>, <Line: -		TBoxReasoner  reasoner= new TBoxReasonerImpl(o);
+>]

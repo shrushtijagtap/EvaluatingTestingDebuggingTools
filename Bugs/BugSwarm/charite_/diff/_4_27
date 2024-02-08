@@ -1,0 +1,19 @@
+[<Line: +import de.charite.compbio.jannovar.UncheckedJannovarException;
+>, <Line: +	 *
+>, <Line: +	 * @throws UncheckedJannovarException
+>, <Line: +	 *             on problems with annotation of the variant
+>, <Line: +		if (gene == null) {
+>, <Line: +			// Compute modes of inheritance on its own, don't assign to any gene, just marked as active
+>, <Line: +			try {
+>, <Line: +				annotator.annotateRecord(vc);
+>, <Line: +			} catch (CannotAnnotateMendelianInheritance e) {
+>, <Line: +				throw new UncheckedJannovarException("Problem with mendelian variant annotation in variant context", e);
+>, <Line: +			}
+>, <Line: +			return;
+>, <Line: +		}
+>]
+[<Line: -import com.google.common.base.Joiner;
+>, <Line: -		// TODO(holtgrewe): upstream and downstream is ignored...
+>, <Line: -		if (gene == null)
+>, <Line: -			return; // done, just marked is as active
+>]

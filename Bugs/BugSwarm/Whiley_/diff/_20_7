@@ -1,0 +1,42 @@
+[<Line: +	public static LengthOf LengthOf(Type.EffectiveArray type, int target,
+>, <Line: +	public static ListGenerator ListGenerator(Type.Array type, int target,
+>, <Line: +	public static IndexOf IndexOf(Type.EffectiveArray type, int target,
+>, <Line: +	public static NewList NewList(Type.Array type, int target,
+>, <Line: +	public static NewList NewList(Type.Array type, int target, int[] operands) {
+>, <Line: +			super(Type.Array(Type.T_INT,false), operand);
+>, <Line: +	public static final class ListGenerator extends AbstractBinaryAssignable<Type.Array> {
+>, <Line: +		private ListGenerator(Type.Array type, int target, int element, int count) {
+>, <Line: +			AbstractUnaryAssignable<Type.EffectiveArray> {
+>, <Line: +		private LengthOf(Type.EffectiveArray type, int target, int operand) {
+>, <Line: +			AbstractBinaryAssignable<Type.EffectiveArray> {
+>, <Line: +		private IndexOf(Type.EffectiveArray type, int target,
+>, <Line: +	public static final class ListLVal extends LVal<Type.EffectiveArray> {
+>, <Line: +		public ListLVal(Type.EffectiveArray t, int indexOperand) {
+>, <Line: +			} else if (iter instanceof Type.EffectiveArray) {
+>, <Line: +				Type.EffectiveArray list = (Type.EffectiveArray) iter;
+>, <Line: +				} else if (iter instanceof Type.EffectiveArray) {
+>, <Line: +					Type.EffectiveArray list = (Type.EffectiveArray) iter;
+>, <Line: +	public static final class NewList extends AbstractNaryAssignable<Type.Array> {
+>, <Line: +		private NewList(Type.Array type, int target, int[] operands) {
+>]
+[<Line: -	public static LengthOf LengthOf(Type.EffectiveList type, int target,
+>, <Line: -	public static ListGenerator ListGenerator(Type.List type, int target,
+>, <Line: -	public static IndexOf IndexOf(Type.EffectiveList type, int target,
+>, <Line: -	public static NewList NewList(Type.List type, int target,
+>, <Line: -	public static NewList NewList(Type.List type, int target, int[] operands) {
+>, <Line: -			super(Type.List(Type.T_INT,false), operand);
+>, <Line: -	public static final class ListGenerator extends AbstractBinaryAssignable<Type.List> {
+>, <Line: -		private ListGenerator(Type.List type, int target, int element, int count) {
+>, <Line: -			AbstractUnaryAssignable<Type.EffectiveList> {
+>, <Line: -		private LengthOf(Type.EffectiveList type, int target, int operand) {
+>, <Line: -			AbstractBinaryAssignable<Type.EffectiveList> {
+>, <Line: -		private IndexOf(Type.EffectiveList type, int target,
+>, <Line: -	public static final class ListLVal extends LVal<Type.EffectiveList> {
+>, <Line: -		public ListLVal(Type.EffectiveList t, int indexOperand) {
+>, <Line: -			} else if (iter instanceof Type.EffectiveList) {
+>, <Line: -				Type.EffectiveList list = (Type.EffectiveList) iter;
+>, <Line: -				} else if (iter instanceof Type.EffectiveList) {
+>, <Line: -					Type.EffectiveList list = (Type.EffectiveList) iter;
+>, <Line: -	public static final class NewList extends AbstractNaryAssignable<Type.List> {
+>, <Line: -		private NewList(Type.List type, int target, int[] operands) {
+>]

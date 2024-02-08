@@ -1,0 +1,29 @@
+[<Line: +{
+>, <Line: +    "fragments": [
+>, <Line: +        {
+>, <Line: +            "operators": [
+>, <Line: +                 {
+>, <Line: +                    "opName": "V0",
+>, <Line: +                    "opType": "DbInsert",
+>, <Line: +                    "argOverwriteTable": true,
+>, <Line: +                    "relationKey": {
+>, <Line: +                        "userName": "public",
+>, <Line: +                        "relationName": "fromCache",
+>, <Line: +                        "programName": "adhoc"
+>, <Line: +                    },
+>, <Line: +                    "argChild": 0,
+>, <Line: +                    "opId": 1
+>, <Line: +                },
+>, <Line: +                {
+>, <Line: +                        "opName": "V0", 
+>, <Line: +                        "opType": "CacheLeaf", 
+>, <Line: +                        "opId": 0
+>, <Line: +                }
+>, <Line: +            ]
+>, <Line: +        }
+>, <Line: +    ],
+>, <Line: +    "logicalRa": "cache example",
+>, <Line: +    "rawQuery": "cache example"
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,5 @@
+[<Line: +public interface Usage extends Wrapper<com.microsoft.azure.management.storage.implementation.api.Usage> {
+>]
+[<Line: -import com.microsoft.azure.management.storage.implementation.api.UsageInner;
+>, <Line: -public interface Usage extends Wrapper<UsageInner> {
+>]

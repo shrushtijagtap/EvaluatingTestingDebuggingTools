@@ -1,0 +1,43 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +            + "subsetdef: unit_slim \"unit slim\"\n" + "subsetdef: value_slim \"Value slim\"\n"
+>, <Line: +            + "default-namespace: quality\n" + "namespace-id-rule: * UO:$sequence(7,0,9999999)$\n"
+>, <Line: +            + "remark: Filtered by Ancestor ID equals \"UO:0000000\"\n" + "ontology: uo\n"
+>, <Line: +            + "ontology: pato\n" + "ontology: pato\n" + "ontology: pato\n" + '\n' + "[Term]\n"
+>, <Line: +            + "id: UO:0000000\n" + "name: unit\n" + "namespace: unit.ontology\n"
+>, <Line: +            + "relationship: is_unit_of PATO:0001708 ! 1-D extent\n" + "created_by: george gkoutos";
+>, <Line: +        OntologyConfigurator loaderConfig = new OntologyConfigurator()
+>, <Line: +            Declaration(hasDbXref), Declaration(defaultnamespace), Declaration(subsetProperty),
+>, <Line: +            Declaration(hasOBOFormatVersion), Declaration(iao0000115), Declaration(namespaceIdRule),
+>, <Line: +            AnnotationAssertion(hasOBONamespace, uo1.getIRI(), literal("unit.ontology")),
+>, <Line: +            AnnotationAssertion(hasOBONamespace, uo0.getIRI(), literal("unit.ontology")),
+>, <Line: +            label(hasDbXref.getIRI(), literal("database_cross_reference")), SubClassOf(uo1, uo0),
+>, <Line: +            df.getOWLAnnotationAssertionAxiom(iao0000115, uo0.getIRI(),
+>, <Line: +                literal("A unit of measurement is a standardized quantity of a physical quality."),
+>, <Line: +            df.getOWLAnnotationAssertionAxiom(iao0000115, uo1.getIRI(),
+>, <Line: +                literal("A unit which is a standard measure of the distance between two points."),
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -            + "subsetdef: unit_slim \"unit slim\"\n"
+>, <Line: -            + "subsetdef: value_slim \"Value slim\"\n" + "default-namespace: quality\n"
+>, <Line: -            + "namespace-id-rule: * UO:$sequence(7,0,9999999)$\n"
+>, <Line: -            + "remark: Filtered by Ancestor ID equals \"UO:0000000\"\n"
+>, <Line: -            + "ontology: uo\n" + "ontology: pato\n" + "ontology: pato\n"
+>, <Line: -            + "ontology: pato\n" + '\n' + "[Term]\n" + "id: UO:0000000\n"
+>, <Line: -            + "name: unit\n" + "namespace: unit.ontology\n"
+>, <Line: -            + "relationship: is_unit_of PATO:0001708 ! 1-D extent\n"
+>, <Line: -            + "created_by: george gkoutos";
+>, <Line: -        OWLOntologyLoaderConfiguration loaderConfig = new OWLOntologyLoaderConfiguration()
+>, <Line: -            Declaration(hasDbXref), Declaration(defaultnamespace),
+>, <Line: -            Declaration(subsetProperty), Declaration(hasOBOFormatVersion),
+>, <Line: -            Declaration(iao0000115), Declaration(namespaceIdRule),
+>, <Line: -            AnnotationAssertion(hasOBONamespace, uo1.getIRI(),
+>, <Line: -                literal("unit.ontology")),
+>, <Line: -            AnnotationAssertion(hasOBONamespace, uo0.getIRI(),
+>, <Line: -                literal("unit.ontology")),
+>, <Line: -            label(hasDbXref.getIRI(), literal("database_cross_reference")),
+>, <Line: -            SubClassOf(uo1, uo0),
+>, <Line: -            df.getOWLAnnotationAssertionAxiom(iao0000115, uo0.getIRI(), literal(
+>, <Line: -                "A unit of measurement is a standardized quantity of a physical quality."),
+>, <Line: -            df.getOWLAnnotationAssertionAxiom(iao0000115, uo1.getIRI(), literal(
+>, <Line: -                "A unit which is a standard measure of the distance between two points."),
+>]

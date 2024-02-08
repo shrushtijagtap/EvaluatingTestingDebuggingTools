@@ -1,0 +1,36 @@
+[<Line: +    protected boolean checkNegative(OWLClassExpression c) {
+>, <Line: +        return c.accept(negative).booleanValue();
+>, <Line: +    protected boolean checkPositive(OWLClassExpression c) {
+>, <Line: +        return c.accept(positive).booleanValue();
+>, <Line: +        return Boolean.valueOf(checkNegative(axiom.getSubClass()) && checkNegative(axiom.getSuperClass()));
+>, <Line: +        return Boolean.valueOf(!axiom.classExpressions().anyMatch(c -> !checkNegative(c)));
+>, <Line: +        return Boolean.valueOf(checkPositive(axiom.getDomain()));
+>, <Line: +        return Boolean.valueOf(checkPositive(axiom.getRange()));
+>, <Line: +        return Boolean.valueOf(!checkPositive(c1) || !checkNegative(c1));
+>, <Line: +            return Boolean.valueOf(!ce.operands().anyMatch(c -> c.accept(this) == Boolean.FALSE));
+>, <Line: +            return Boolean.valueOf(checkNegative(ce.getOperand()));
+>, <Line: +            return Boolean.valueOf(ce.getCardinality() <= 1 && ce.getFiller().accept(this).booleanValue()
+>, <Line: +                && checkNegative(ce.getFiller()));
+>, <Line: +            return Boolean.valueOf(ce.getCardinality() <= 1 && checkNegative(ce.getFiller()));
+>, <Line: +            return Boolean.valueOf(!ce.operands().anyMatch(c -> c.accept(this) == Boolean.FALSE));
+>, <Line: +            return Boolean.valueOf(!ce.operands().anyMatch(c -> c.accept(this) == Boolean.FALSE));
+>, <Line: +            return Boolean.valueOf(ce.getCardinality() <= 1 && ce.getFiller().accept(this).booleanValue());
+>]
+[<Line: -    protected Boolean checkNegative(OWLClassExpression c) {
+>, <Line: -        return Boolean.valueOf(c.accept(negative).booleanValue());
+>, <Line: -    protected Boolean checkPositive(OWLClassExpression c) {
+>, <Line: -        return Boolean.valueOf(c.accept(positive).booleanValue());
+>, <Line: -        return checkNegative(axiom.getSubClass()) && checkNegative(axiom.getSuperClass());
+>, <Line: -        return !axiom.classExpressions().anyMatch(c -> !checkNegative(c));
+>, <Line: -        return checkPositive(axiom.getDomain());
+>, <Line: -        return checkPositive(axiom.getRange());
+>, <Line: -        return Boolean.valueOf(!checkPositive(c1).booleanValue() || !checkNegative(c1).booleanValue());
+>, <Line: -            return !ce.operands().anyMatch(c -> !c.accept(this));
+>, <Line: -            return checkNegative(ce.getOperand());
+>, <Line: -            return ce.getCardinality() <= 1 && ce.getFiller().accept(this).booleanValue()
+>, <Line: -                && checkNegative(ce.getFiller());
+>, <Line: -            return ce.getCardinality() <= 1 && checkNegative(ce.getFiller());
+>, <Line: -            return !ce.operands().anyMatch(c -> !c.accept(this));
+>, <Line: -            return !ce.operands().anyMatch(c -> !c.accept(this));
+>, <Line: -            return ce.getCardinality() <= 1 && ce.getFiller().accept(this).booleanValue();
+>]

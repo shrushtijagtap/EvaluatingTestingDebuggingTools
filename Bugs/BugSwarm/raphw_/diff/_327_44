@@ -1,0 +1,4 @@
+[<Line: +        ObjectPropertyAssertion.of(DynamicType.Builder.AbstractBase.Adapter.TypeVariableDefinitionAdapter.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(DynamicType.Builder.AbstractBase.Adapter.MethodDefinitionAdapter.TypeVariableAnnotationAdapter.class).apply();
+>]
+[]

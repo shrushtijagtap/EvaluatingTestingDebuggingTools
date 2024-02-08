@@ -1,0 +1,20 @@
+[<Line: +import com.hubspot.baragon.agent.BaragonAgentServiceModule;
+>, <Line: +import com.hubspot.baragon.exceptions.LockTimeoutException;
+>, <Line: +import com.hubspot.baragon.exceptions.MissingTemplateException;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +      configHelper.delete(request.getLoadBalancerService(), maybeOldService, request.isNoReload(), request.isNoValidate());
+>, <Line: +      configHelper.apply(update, maybeOldService, true, request.isNoReload(), request.isNoValidate());
+>, <Line: +      configHelper.apply(update, Optional.<BaragonService>absent(), false, request.isNoReload(), request.isNoValidate());
+>]
+[<Line: -import java.util.concurrent.TimeUnit;
+>, <Line: -import java.util.concurrent.locks.Lock;
+>, <Line: -import com.hubspot.baragon.exceptions.LockTimeoutException;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -import com.hubspot.baragon.agent.BaragonAgentServiceModule;
+>, <Line: -import com.hubspot.baragon.exceptions.MissingTemplateException;
+>, <Line: -      configHelper.delete(request.getLoadBalancerService(), maybeOldService);
+>, <Line: -      configHelper.apply(update, maybeOldService, true);
+>, <Line: -      configHelper.apply(update, Optional.<BaragonService>absent(), false);
+>]

@@ -1,0 +1,36 @@
+[<Line: +        when(implementationTarget.invokeDefault(token)).thenReturn(specialMethodInvocation);
+>, <Line: +        when(implementationTarget.invokeDefault(token)).thenReturn(specialMethodInvocation);
+>, <Line: +        when(implementationTarget.invokeDefault(token, new TypeDescription.ForLoadedType(Runnable.class))).thenReturn(specialMethodInvocation);
+>, <Line: +        when(implementationTarget.invokeDefault(token)).thenReturn(specialMethodInvocation);
+>]
+[<Line: -import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+>, <Line: -        when(implementationTarget.invokeDefault(interfaceType, token)).thenReturn(specialMethodInvocation);
+>, <Line: -        when(source.isSpecializableFor(interfaceType)).thenReturn(true);
+>, <Line: -    @Test
+>, <Line: -    @SuppressWarnings("unchecked")
+>, <Line: -    public void testBindNonSpecializable() throws Exception {
+>, <Line: -        when(targetType.isAssignableFrom(Method.class)).thenReturn(true);
+>, <Line: -        when(source.isMethod()).thenReturn(true);
+>, <Line: -        when(implementationTarget.invokeDefault(interfaceType, token)).thenReturn(specialMethodInvocation);
+>, <Line: -        when(specialMethodInvocation.isValid()).thenReturn(true);
+>, <Line: -        when(annotation.targetType()).thenReturn((Class) void.class);
+>, <Line: -        when(source.isSpecializableFor(interfaceType)).thenReturn(false);
+>, <Line: -        MethodDelegationBinder.ParameterBinding<?> binding = DefaultMethod.Binder.INSTANCE.bind(annotationDescription, source, target, implementationTarget, assigner);
+>, <Line: -        assertThat(binding.isValid(), is(false));
+>, <Line: -    }
+>, <Line: -        when(source.isSpecializableFor(interfaceType)).thenReturn(false);
+>, <Line: -        MethodDelegationBinder.ParameterBinding<?> binding = DefaultMethod.Binder.INSTANCE.bind(annotationDescription, source, target, implementationTarget, assigner);
+>, <Line: -        assertThat(binding.isValid(), is(false));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    @SuppressWarnings("unchecked")
+>, <Line: -    public void testBindAmbiguous() throws Exception {
+>, <Line: -        when(targetType.isAssignableFrom(Method.class)).thenReturn(true);
+>, <Line: -        when(source.isMethod()).thenReturn(true);
+>, <Line: -        when(implementationTarget.invokeDefault(interfaceType, token)).thenReturn(specialMethodInvocation);
+>, <Line: -        when(specialMethodInvocation.isValid()).thenReturn(true);
+>, <Line: -        when(annotation.targetType()).thenReturn((Class) void.class);
+>, <Line: -        when(instrumentedType.getInterfaces()).thenReturn(new TypeList.Generic.Explicit(genericInterfaceType, genericInterfaceType));
+>, <Line: -        when(implementationTarget.invokeDefault(new TypeDescription.ForLoadedType(Runnable.class), token)).thenReturn(specialMethodInvocation);
+>, <Line: -        when(implementationTarget.invokeDefault(interfaceType, token)).thenReturn(specialMethodInvocation);
+>]

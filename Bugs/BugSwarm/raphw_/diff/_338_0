@@ -1,0 +1,10 @@
+[<Line: +import org.objectweb.asm.*;
+>, <Line: + * class constants before Java 5. As a benefit for this limitation, the registered wrapper does not require any additional work by a {@link ClassWriter}
+>, <Line: + * or {@link ClassReader}, i.e. does not set any flags.
+>]
+[<Line: -import org.objectweb.asm.ClassVisitor;
+>, <Line: -import org.objectweb.asm.MethodVisitor;
+>, <Line: -import org.objectweb.asm.Opcodes;
+>, <Line: -import org.objectweb.asm.Type;
+>, <Line: - * class constants before Java 5.
+>]

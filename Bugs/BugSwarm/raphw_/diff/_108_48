@@ -1,0 +1,41 @@
+[<Line: +import net.bytebuddy.description.NamedElement;
+>, <Line: +import net.bytebuddy.utility.JavaModule;
+>, <Line: +        when(byteCodeElement.getActualName()).thenReturn(FOO);
+>, <Line: +        when(byteCodeElement.getActualName()).thenReturn(FOO);
+>, <Line: +        when(byteCodeElement.getActualName()).thenReturn(FOO);
+>, <Line: +        when(byteCodeElement.getActualName()).thenReturn(FOO);
+>, <Line: +        when(byteCodeElement.getActualName()).thenReturn(FOO);
+>, <Line: +        when(byteCodeElement.getActualName()).thenReturn(FOO);
+>, <Line: +        when(byteCodeElement.getActualName()).thenReturn(FOO);
+>, <Line: +        when(byteCodeElement.getActualName()).thenReturn(FOO);
+>, <Line: +        when(byteCodeElement.getActualName()).thenReturn(FOO);
+>, <Line: +    @Test
+>, <Line: +    public void testIsNamed() throws Exception {
+>, <Line: +        NamedElement.WithOptionalName namedElement = mock(NamedElement.WithOptionalName.class);
+>, <Line: +        assertThat(ElementMatchers.isNamed().matches(namedElement), is(false));
+>, <Line: +        when(namedElement.isNamed()).thenReturn(true);
+>, <Line: +        assertThat(ElementMatchers.isNamed().matches(namedElement), is(true));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testHasSuperType() throws Exception {
+>, <Line: +        assertThat(ElementMatchers.hasSuperType(ElementMatchers.is(Object.class)).matches(TypeDescription.STRING), is(true));
+>, <Line: +        assertThat(ElementMatchers.hasSuperType(ElementMatchers.is(String.class)).matches(TypeDescription.OBJECT), is(false));
+>, <Line: +        assertThat(ElementMatchers.hasSuperType(ElementMatchers.is(Serializable.class)).matches(TypeDescription.STRING), is(true));
+>, <Line: +        assertThat(ElementMatchers.hasSuperType(ElementMatchers.is(Serializable.class)).matches(TypeDescription.OBJECT), is(false));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testSupportsModules() throws Exception {
+>, <Line: +        assertThat(ElementMatchers.supportsModules().matches(mock(JavaModule.class)), is(true));
+>, <Line: +        assertThat(ElementMatchers.supportsModules().matches(null), is(false));
+>, <Line: +    }
+>]
+[<Line: -        when(byteCodeElement.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(byteCodeElement.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(byteCodeElement.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(byteCodeElement.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(byteCodeElement.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(byteCodeElement.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(byteCodeElement.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(byteCodeElement.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(byteCodeElement.getSourceCodeName()).thenReturn(FOO);
+>]

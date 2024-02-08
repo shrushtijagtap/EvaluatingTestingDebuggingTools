@@ -1,0 +1,15 @@
+[<Line: +public class SystemOutDocumentTarget extends OWLOntologyDocumentTargetBase {
+>, <Line: +    /**
+>, <Line: +     * Constructor setting the writer
+>, <Line: +     */
+>, <Line: +    public SystemOutDocumentTarget() {
+>, <Line: +        super(() -> System.out, null);
+>]
+[<Line: -import static org.semanticweb.owlapi.util.OWLAPIPreconditions.optional;
+>, <Line: -import java.io.OutputStream;
+>, <Line: -import java.util.Optional;
+>, <Line: -public class SystemOutDocumentTarget implements OWLOntologyDocumentTarget {
+>, <Line: -    @Override
+>, <Line: -    public Optional<OutputStream> getOutputStream() {
+>, <Line: -        return optional(System.out);
+>]

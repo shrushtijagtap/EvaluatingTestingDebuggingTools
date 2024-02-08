@@ -1,0 +1,144 @@
+[<Line: +package org.mp4parser.muxer.builder;
+>, <Line: +import org.mp4parser.*;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.*;
+>, <Line: +import org.mp4parser.boxes.iso23001.part7.CencSampleAuxiliaryDataFormat;
+>, <Line: +import org.mp4parser.boxes.iso23001.part7.SampleEncryptionBox;
+>, <Line: +import org.mp4parser.boxes.iso23001.part7.TrackEncryptionBox;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.GroupEntry;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.SampleGroupDescriptionBox;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.SampleToGroupBox;
+>, <Line: +import org.mp4parser.muxer.Edit;
+>, <Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Sample;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.tracks.CencEncryptedTrack;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +import static org.mp4parser.tools.CastUtils.l2i;
+>, <Line: +    public ParsableBox createFtyp(Movie movie) {
+>, <Line: +        List<Box> moofsMdats = new ArrayList<Box>();
+>, <Line: +                earliestTime += (double) times[l2i(i - 1)] / timscale;
+>, <Line: +            createSaio(startSample, endSample, (CencEncryptedTrack) track, sequenceNumber, traf, parent);
+>, <Line: +    protected void createSaio(long startSample, long endSample,
+>, <Line: +                              CencEncryptedTrack track, int sequenceNumber,
+>, <Line: +                              TrackFragmentBox parent, MovieFragmentBox moof) {
+>, <Line: +            assert tenc != null;
+>, <Line: +                    sflags.setSampleIsDependedOn(e.getSampleIsDependedOn());
+>, <Line: +    protected ParsableBox createMoof(long startSample, long endSample, Track track, int sequenceNumber) {
+>, <Line: +    protected ParsableBox createMvhd(Movie movie) {
+>, <Line: +     * <li>{@link #createMvhd(Movie) mvhd}</li>
+>, <Line: +     * <li>{@link #createMvex(Movie)  mvex}</li>
+>, <Line: +     * <li>a {@link #createTrak(Track, Movie)  trak} for every track</li>
+>, <Line: +    protected ParsableBox createMoov(Movie movie) {
+>, <Line: +     * isofile. Uses {@link #createTfra(Track, Container)}
+>, <Line: +    protected ParsableBox createMfra(Movie movie, Container isoFile) {
+>, <Line: +    protected ParsableBox createTrex(Movie movie, Track track) {
+>, <Line: +     * by calling {@link #createTrex(Movie, Track)}
+>, <Line: +    protected ParsableBox createMvex(Movie movie) {
+>, <Line: +    protected ParsableBox createTkhd(Movie movie, Track track) {
+>, <Line: +    protected ParsableBox createMdhd(Movie movie, Track track) {
+>, <Line: +    protected ParsableBox createStbl(Movie movie, Track track) {
+>, <Line: +    protected ParsableBox createMinf(Track track, Movie movie) {
+>, <Line: +    protected ParsableBox createMdiaHdlr(Track track, Movie movie) {
+>, <Line: +    protected ParsableBox createMdia(Track track, Movie movie) {
+>, <Line: +    protected ParsableBox createTrak(Track track, Movie movie) {
+>, <Line: +        ParsableBox edts = createEdts(track, movie);
+>, <Line: +    protected ParsableBox createEdts(Track track, Movie movie) {
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.builder;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.boxes.*;
+>, <Line: -import com.coremedia.iso.boxes.fragment.*;
+>, <Line: -import com.googlecode.mp4parser.BasicContainer;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.googlecode.mp4parser.authoring.Edit;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.CencEncryptedTrack;
+>, <Line: -import com.googlecode.mp4parser.boxes.dece.SampleEncryptionBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.GroupEntry;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.SampleGroupDescriptionBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.SampleToGroupBox;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -import com.mp4parser.iso14496.part12.SampleAuxiliaryInformationOffsetsBox;
+>, <Line: -import com.mp4parser.iso14496.part12.SampleAuxiliaryInformationSizesBox;
+>, <Line: -import com.mp4parser.iso23001.part7.CencSampleAuxiliaryDataFormat;
+>, <Line: -import com.mp4parser.iso23001.part7.TrackEncryptionBox;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: -    public Box createFtyp(Movie movie) {
+>, <Line: -    /**
+>, <Line: -     * Sorts fragments by start time.
+>, <Line: -     *
+>, <Line: -     * @param tracks          the list of tracks to returned sorted
+>, <Line: -     * @param cycle           current fragment (sorting may vary between the fragments)
+>, <Line: -     * @param intersectionMap a map from tracks to their fragments' first samples.
+>, <Line: -     * @return the list of tracks in order of appearance in the fragment
+>, <Line: -     */
+>, <Line: -    protected List<Track> sortTracksInSequence(List<Track> tracks, final int cycle, final Map<Track, long[]> intersectionMap) {
+>, <Line: -        tracks = new LinkedList<Track>(tracks);
+>, <Line: -        Collections.sort(tracks, new Comparator<Track>() {
+>, <Line: -            public int compare(Track o1, Track o2) {
+>, <Line: -                long startSample1 = intersectionMap.get(o1)[cycle];
+>, <Line: -                // one based sample numbers - the first sample is 1
+>, <Line: -                long startSample2 = intersectionMap.get(o2)[cycle];
+>, <Line: -                // one based sample numbers - the first sample is 1
+>, <Line: -                // now let's get the start times
+>, <Line: -                long[] decTimes1 = o1.getSampleDurations();
+>, <Line: -                long[] decTimes2 = o2.getSampleDurations();
+>, <Line: -                long startTime1 = 0;
+>, <Line: -                long startTime2 = 0;
+>, <Line: -                for (int i = 1; i < startSample1; i++) {
+>, <Line: -                    startTime1 += decTimes1[i - 1];
+>, <Line: -                }
+>, <Line: -                for (int i = 1; i < startSample2; i++) {
+>, <Line: -                    startTime2 += decTimes2[i - 1];
+>, <Line: -                }
+>, <Line: -                // and compare
+>, <Line: -                return (int) (((double) startTime1 / o1.getTrackMetaData().getTimescale() - (double) startTime2 / o2.getTrackMetaData().getTimescale()) * 100);
+>, <Line: -            }
+>, <Line: -        });
+>, <Line: -        return tracks;
+>, <Line: -    }
+>, <Line: -        List<Box> moofsMdats = new LinkedList<Box>();
+>, <Line: -                earliestTime += (double) times[l2i(i-1)] / timscale;
+>, <Line: -            Container parent;
+>, <Line: -            public Container getParent() {
+>, <Line: -                return parent;
+>, <Line: -            }
+>, <Line: -            public void setParent(Container parent) {
+>, <Line: -                this.parent = parent;
+>, <Line: -            }
+>, <Line: -            public long getOffset() {
+>, <Line: -                throw new RuntimeException("Doesn't have any meaning for programmatically created boxes");
+>, <Line: -            }
+>, <Line: -            public void parse(DataSource fileChannel, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>, <Line: -            }
+>, <Line: -            createSaio(startSample, endSample, (CencEncryptedTrack) track, sequenceNumber, traf);
+>, <Line: -    protected void createSaio(long startSample, long endSample, CencEncryptedTrack track, int sequenceNumber, TrackFragmentBox parent) {
+>, <Line: -        MovieFragmentBox moof = (MovieFragmentBox) parent.getParent();
+>, <Line: -        SchemeTypeBox schm = Path.getPath(sampleDescriptionBox, "enc.[0]/sinf[0]/schm[0]");
+>, <Line: -                    sflags.setSampleIsDependedOn(e.getSampleIsDependentOn());
+>, <Line: -    protected Box createMoof(long startSample, long endSample, Track track, int sequenceNumber) {
+>, <Line: -    protected Box createMvhd(Movie movie) {
+>, <Line: -     * <li>{@link #createMvhd(com.googlecode.mp4parser.authoring.Movie) mvhd}</li>
+>, <Line: -     * <li>{@link #createMvex(com.googlecode.mp4parser.authoring.Movie)  mvex}</li>
+>, <Line: -     * <li>a {@link #createTrak(com.googlecode.mp4parser.authoring.Track, com.googlecode.mp4parser.authoring.Movie)  trak} for every track</li>
+>, <Line: -    protected Box createMoov(Movie movie) {
+>, <Line: -     * isofile. Uses {@link #createTfra(com.googlecode.mp4parser.authoring.Track, Container)}
+>, <Line: -    protected Box createMfra(Movie movie, Container isoFile) {
+>, <Line: -    protected Box createTrex(Movie movie, Track track) {
+>, <Line: -     * by calling {@link #createTrex(com.googlecode.mp4parser.authoring.Movie, com.googlecode.mp4parser.authoring.Track)}
+>, <Line: -    protected Box createMvex(Movie movie) {
+>, <Line: -    protected Box createTkhd(Movie movie, Track track) {
+>, <Line: -    protected Box createMdhd(Movie movie, Track track) {
+>, <Line: -    protected Box createStbl(Movie movie, Track track) {
+>, <Line: -    protected Box createMinf(Track track, Movie movie) {
+>, <Line: -    protected Box createMdiaHdlr(Track track, Movie movie) {
+>, <Line: -    protected Box createMdia(Track track, Movie movie) {
+>, <Line: -    protected Box createTrak(Track track, Movie movie) {
+>, <Line: -        Box edts = createEdts(track, movie);
+>, <Line: -    protected Box createEdts(Track track, Movie movie) {
+>]

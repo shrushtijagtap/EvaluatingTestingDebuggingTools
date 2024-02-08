@@ -1,0 +1,11 @@
+[<Line: +    public void setData(@Nullable E data) {
+>, <Line: +    public void addConnections(Iterable<? extends Connection<E>> connections) {
+>, <Line: +      throw new UnsupportedOperationException();
+>, <Line: +    }
+>, <Line: +    @Deprecated
+>, <Line: +    @Override
+>, <Line: +    public void addConnections(Collection<? extends Connection<E>> connections) {
+>]
+[<Line: -    public void setData(E data) {
+>, <Line: -    public void addConnections(Collection<Connection<E>> connections) {
+>]

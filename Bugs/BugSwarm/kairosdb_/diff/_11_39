@@ -1,0 +1,11 @@
+[<Line: +			KairosDataPointFactory dataPointFactory)
+>, <Line: +			//				Validator.isGreaterThanOrEqualTo(validationErrors, context.setAttribute("timestamp"), metric.getTimestamp(), 1);
+>, <Line: +		public int getTtl()
+>, <Line: +		{
+>, <Line: +			return ttl;
+>, <Line: +		}
+>]
+[<Line: -	                        KairosDataPointFactory dataPointFactory)
+>, <Line: -//				Validator.isGreaterThanOrEqualTo(validationErrors, context.setAttribute("timestamp"), metric.getTimestamp(), 1);
+>, <Line: -		public int getTtl() { return ttl; }
+>]

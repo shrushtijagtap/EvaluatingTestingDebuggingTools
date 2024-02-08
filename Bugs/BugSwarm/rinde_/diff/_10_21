@@ -1,0 +1,6 @@
+[<Line: +		<dependency>
+>, <Line: +			<groupId>com.github.rinde</groupId>
+>, <Line: +			<artifactId>rinsim-experiment-base</artifactId>
+>, <Line: +		</dependency>
+>]
+[]

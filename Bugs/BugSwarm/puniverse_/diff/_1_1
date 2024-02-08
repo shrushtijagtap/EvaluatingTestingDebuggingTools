@@ -1,0 +1,8 @@
+[<Line: +                if (i != null) {
+>, <Line: +                    int[] susCallSites = i.suspendableCallSites();
+>, <Line: +                        .append(", susCallSites=").append(susCallSites == null ? "[]" : Arrays.toString(susCallSites))
+>, <Line: +                }
+>]
+[<Line: -                if (i != null)
+>, <Line: -                        .append(", susCallSites=").append(i.suspendableCallsites() == null ? "[]" : Arrays.toString(i.suspendableCallsites()))
+>]

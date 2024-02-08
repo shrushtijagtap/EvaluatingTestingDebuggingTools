@@ -1,0 +1,16 @@
+[<Line: +import org.stagemonitor.alerting.check.ValueType;
+>, <Line: +		ValueType[] valueTypes = slaAnnotation.metric();
+>, <Line: +		if (valueTypes.length != thresholdValues.length) {
+>, <Line: +		for (int i = 0; i < valueTypes.length; i++) {
+>, <Line: +			thresholds.add(new Threshold(valueTypes[i].getName(), slaAnnotation.operator(), thresholdValues[i]));
+>, <Line: +		final Threshold t = new Threshold(ValueType.M1_RATE.getName(), Threshold.Operator.GREATER_EQUAL, slaAnnotation.errorRateThreshold());
+>, <Line: +		check.setTarget(metricName);
+>]
+[<Line: -import java.util.regex.Pattern;
+>, <Line: -		SLA.Metric[] metrics = slaAnnotation.metric();
+>, <Line: -		if (metrics.length != thresholdValues.length) {
+>, <Line: -		for (int i = 0; i < metrics.length; i++) {
+>, <Line: -			thresholds.add(new Threshold(metrics[i].getValue(), slaAnnotation.operator(), thresholdValues[i]));
+>, <Line: -		final Threshold t = new Threshold(SLA.Metric.M1_RATE.getValue(), Threshold.Operator.GREATER_EQUAL, slaAnnotation.errorRateThreshold());
+>, <Line: -		check.setTarget(Pattern.compile(Pattern.quote(metricName.toGraphiteName())));
+>]

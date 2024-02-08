@@ -1,0 +1,64 @@
+[<Line: +package net.bytebuddy.matcher;
+>, <Line: +import net.bytebuddy.description.type.TypeDefinition;
+>, <Line: +import net.bytebuddy.description.type.TypeDescription;
+>, <Line: +import java.util.HashSet;
+>, <Line: +import java.util.Set;
+>, <Line: +/**
+>, <Line: + * An element matcher that matches a super type.
+>, <Line: + *
+>, <Line: + * @param <T> The type of the matched entity.
+>, <Line: + */
+>, <Line: +public class HasSuperTypeMatcher<T extends TypeDescription> extends ElementMatcher.Junction.AbstractBase<T> {
+>, <Line: +    /**
+>, <Line: +     * The matcher to apply to any super type of the matched type.
+>, <Line: +     */
+>, <Line: +    private final ElementMatcher<? super TypeDescription.Generic> matcher;
+>, <Line: +    /**
+>, <Line: +     * Creates a new matcher for a super type.
+>, <Line: +     *
+>, <Line: +     * @param matcher The matcher to apply to any super type of the matched type.
+>, <Line: +     */
+>, <Line: +    public HasSuperTypeMatcher(ElementMatcher<? super TypeDescription.Generic> matcher) {
+>, <Line: +        this.matcher = matcher;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public boolean matches(T target) {
+>, <Line: +        Set<TypeDescription> checkedInterfaces = new HashSet<TypeDescription>();
+>, <Line: +        for (TypeDefinition typeDefinition : target) {
+>, <Line: +            if (matcher.matches(typeDefinition.asGenericType()) || hasInterface(typeDefinition, checkedInterfaces)) {
+>, <Line: +                return true;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return false;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Matches a type's interfaces against the provided matcher.
+>, <Line: +     *
+>, <Line: +     * @param typeDefinition    The type for which to check all implemented interfaces.
+>, <Line: +     * @param checkedInterfaces The interfaces that have already been checked.
+>, <Line: +     * @return {@code true} if any interface matches the supplied matcher.
+>, <Line: +     */
+>, <Line: +    private boolean hasInterface(TypeDefinition typeDefinition, Set<TypeDescription> checkedInterfaces) {
+>, <Line: +        for (TypeDefinition interfaceType : typeDefinition.getInterfaces()) {
+>, <Line: +            if (checkedInterfaces.add(interfaceType.asErasure()) && (matcher.matches(interfaceType.asGenericType()) || hasInterface(interfaceType, checkedInterfaces))) {
+>, <Line: +                return true;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return false;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public boolean equals(Object other) {
+>, <Line: +        return this == other || !(other == null || getClass() != other.getClass())
+>, <Line: +                && matcher.equals(((HasSuperTypeMatcher<?>) other).matcher);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int hashCode() {
+>, <Line: +        return matcher.hashCode();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "hasSuperType(" + matcher + ")";
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

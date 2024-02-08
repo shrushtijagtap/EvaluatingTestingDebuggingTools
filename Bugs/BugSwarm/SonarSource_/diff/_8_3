@@ -1,0 +1,216 @@
+[<Line: +import org.sonar.php.checks.utils.TokenVisitor;
+>, <Line: +import org.sonar.plugins.php.api.tree.ScriptTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.Tree;
+>, <Line: +import org.sonar.plugins.php.api.tree.declaration.ClassDeclarationTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.declaration.FunctionDeclarationTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.declaration.MethodDeclarationTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.declaration.ParameterListTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.lexical.SyntaxToken;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.BlockTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.CatchBlockTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.DoWhileStatementTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.ElseClauseTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.ElseifClauseTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.ForEachStatementTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.ForStatementTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.IfStatementTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.StatementTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.SwitchStatementTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.TryStatementTree;
+>, <Line: +import org.sonar.plugins.php.api.tree.statement.WhileStatementTree;
+>, <Line: +import org.sonar.plugins.php.api.visitors.PHPVisitorCheck;
+>, <Line: +import java.util.List;
+>, <Line: +public class CurlyBraceCheck extends PHPVisitorCheck implements FormattingCheck {
+>, <Line: +  private static final String DECLARATIONS_OPEN_CURLY_MESSAGE = "Move this open curly brace to the beginning of the next line.";
+>, <Line: +  private static final String CONTROL_STRUCTURES_OPEN_CURLY_MESSAGE = "Move this open curly brace to the end of the previous line.";
+>, <Line: +  private static final String KEYWORD_MESSAGE = "Move this \"%s\" to the same line as the previous closing curly brace.";
+>, <Line: +  private FormattingStandardCheck check = null;
+>, <Line: +  @Override
+>, <Line: +  public void checkFormat(FormattingStandardCheck formattingCheck, ScriptTree scriptTree) {
+>, <Line: +    this.check = formattingCheck;
+>, <Line: +    super.visitScript(scriptTree);
+>, <Line: +   * Class & function declarations open curly brace
+>, <Line: +  @Override
+>, <Line: +  public void visitClassDeclaration(ClassDeclarationTree tree) {
+>, <Line: +    SyntaxToken previousToken = new TokenVisitor(tree).prevToken(tree.openCurlyBraceToken());
+>, <Line: +    checkDeclarationOpenCurly(previousToken, tree.openCurlyBraceToken());
+>, <Line: +    super.visitClassDeclaration(tree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitMethodDeclaration(MethodDeclarationTree tree) {
+>, <Line: +    if (tree.body().is(Tree.Kind.BLOCK)) {
+>, <Line: +      checkDeclarationOpenCurly(getPreviousToken(tree.parameters()), ((BlockTree) tree.body()).openCurlyBraceToken());
+>, <Line: +    super.visitMethodDeclaration(tree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitFunctionDeclaration(FunctionDeclarationTree tree) {
+>, <Line: +    checkDeclarationOpenCurly(getPreviousToken(tree.parameters()), tree.body().openCurlyBraceToken());
+>, <Line: +    super.visitFunctionDeclaration(tree);
+>, <Line: +   *
+>, <Line: +   * Returns token previous to closing parenthesis token.
+>, <Line: +   * It is required to cover case (which should not raise issues):
+>, <Line: +   * <code>
+>, <Line: +   *  function g($p1, $p2,
+>, <Line: +   *           $p3, $p4
+>, <Line: +   *  ) {
+>, <Line: +   *  }
+>, <Line: +   * </code>
+>, <Line: +  private SyntaxToken getPreviousToken(ParameterListTree parameterList) {
+>, <Line: +    return new TokenVisitor(parameterList).prevToken(parameterList.closeParenthesisToken());
+>, <Line: +   * Control structures open curly brace
+>, <Line: +  @Override
+>, <Line: +  public void visitElseifClause(ElseifClauseTree tree) {
+>, <Line: +    checkControlStructureOpenCurly(tree.condition().closeParenthesis(), getOpenCurlyIfBlock(tree.statements()));
+>, <Line: +    super.visitElseifClause(tree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitIfStatement(IfStatementTree tree) {
+>, <Line: +    checkControlStructureOpenCurly(tree.condition().closeParenthesis(), getOpenCurlyIfBlock(tree.statements()));
+>, <Line: +    // Check else keyword
+>, <Line: +    ElseClauseTree elseClause = tree.elseClause();
+>, <Line: +    if (elseClause != null) {
+>, <Line: +      checkCloseCurlyNextToKeyword(new TokenVisitor(tree).prevToken(elseClause.elseToken()), elseClause.elseToken());
+>, <Line: +    super.visitIfStatement(tree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitElseClause(ElseClauseTree tree) {
+>, <Line: +    checkControlStructureOpenCurly(tree.elseToken(), getOpenCurlyIfBlock(tree.statements()));
+>, <Line: +    super.visitElseClause(tree);
+>, <Line: +  @Override
+>, <Line: +  public void visitWhileStatement(WhileStatementTree tree) {
+>, <Line: +    checkControlStructureOpenCurly(tree.condition().closeParenthesis(), getOpenCurlyIfBlock(tree.statements()));
+>, <Line: +    super.visitWhileStatement(tree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitDoWhileStatement(DoWhileStatementTree tree) {
+>, <Line: +    if (tree.statement().is(Tree.Kind.BLOCK)) {
+>, <Line: +      checkControlStructureOpenCurly(tree.doToken(), ((BlockTree) tree.statement()).openCurlyBraceToken());
+>, <Line: +    super.visitDoWhileStatement(tree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitForStatement(ForStatementTree tree) {
+>, <Line: +    checkControlStructureOpenCurly(tree.closeParenthesisToken(), getOpenCurlyIfBlock(tree.statements()));
+>, <Line: +    super.visitForStatement(tree);
+>, <Line: +  @Override
+>, <Line: +  public void visitForEachStatement(ForEachStatementTree tree) {
+>, <Line: +    checkControlStructureOpenCurly(tree.closeParenthesisToken(), getOpenCurlyIfBlock(tree.statements()));
+>, <Line: +    super.visitForEachStatement(tree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitCatchBlock(CatchBlockTree tree) {
+>, <Line: +    checkControlStructureOpenCurly(tree.closeParenthesisToken(), tree.block().openCurlyBraceToken());
+>, <Line: +    super.visitCatchBlock(tree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitTryStatement(TryStatementTree tree) {
+>, <Line: +    checkControlStructureOpenCurly(tree.tryToken(), tree.block().openCurlyBraceToken());
+>, <Line: +    TokenVisitor tokenVisitor = new TokenVisitor(tree);
+>, <Line: +    // Check catch keyword
+>, <Line: +    for (CatchBlockTree catchBlock : tree.catchBlocks()) {
+>, <Line: +      checkCloseCurlyNextToKeyword(tokenVisitor.prevToken(catchBlock.catchToken()), catchBlock.catchToken());
+>, <Line: +    }
+>, <Line: +    // Check finally keyword
+>, <Line: +    if (tree.finallyBlock() != null) {
+>, <Line: +      checkCloseCurlyNextToKeyword(tokenVisitor.prevToken(tree.finallyToken()), tree.finallyToken());
+>, <Line: +    }
+>, <Line: +    super.visitTryStatement(tree);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void visitSwitchStatement(SwitchStatementTree tree) {
+>, <Line: +    checkControlStructureOpenCurly(tree.expression().closeParenthesis(), tree.openCurlyBraceToken());
+>, <Line: +    super.visitSwitchStatement(tree);
+>, <Line: +  }
+>, <Line: +  private void checkDeclarationOpenCurly(@Nullable SyntaxToken previousToken, @Nullable SyntaxToken openCurly) {
+>, <Line: +    if (!check.isOpenCurlyBraceForClassAndFunction || previousToken == null || openCurly == null) {
+>, <Line: +      return;
+>, <Line: +    }
+>, <Line: +    if (TokenUtils.isOnSameLine(previousToken, openCurly)) {
+>, <Line: +      reportIssue(openCurly, DECLARATIONS_OPEN_CURLY_MESSAGE);
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  private void checkControlStructureOpenCurly(@Nullable SyntaxToken previousToken, @Nullable SyntaxToken openCurly) {
+>, <Line: +    if (!check.isOpenCurlyBraceForControlStructures || previousToken == null || openCurly == null) {
+>, <Line: +      return;
+>, <Line: +    }
+>, <Line: +    if (!TokenUtils.isOnSameLine(previousToken, openCurly)) {
+>, <Line: +      reportIssue(openCurly, CONTROL_STRUCTURES_OPEN_CURLY_MESSAGE);
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  private void checkCloseCurlyNextToKeyword(@Nullable SyntaxToken previousToken, @Nullable SyntaxToken keyword) {
+>, <Line: +    if (!check.isClosingCurlyNextToKeyword || previousToken == null || keyword == null) {
+>, <Line: +      return;
+>, <Line: +    }
+>, <Line: +    if (isCloseCurly(previousToken) && !TokenUtils.isOnSameLine(previousToken, keyword)) {
+>, <Line: +      reportIssue(keyword, String.format(KEYWORD_MESSAGE, keyword.text()));
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  private static boolean isCloseCurly(SyntaxToken token) {
+>, <Line: +    return PHPPunctuator.RCURLYBRACE.getValue().equals(token.text());
+>, <Line: +  private SyntaxToken getOpenCurlyIfBlock(List<StatementTree> statements) {
+>, <Line: +    if (!statements.isEmpty()) {
+>, <Line: +      StatementTree firstStmt = statements.get(0);
+>, <Line: +      return firstStmt.is(Tree.Kind.BLOCK) ? ((BlockTree) firstStmt).openCurlyBraceToken() : null;
+>, <Line: +    return null;
+>, <Line: +  }
+>, <Line: +  private void reportIssue(Tree tree, String message) {
+>, <Line: +    check.reportIssue(message, tree);
+>]
+[<Line: -import com.sonar.sslr.api.AstNode;
+>, <Line: -import com.sonar.sslr.api.Token;
+>, <Line: -import org.sonar.php.api.PHPKeyword;
+>, <Line: -import org.sonar.php.parser.PHPGrammar;
+>, <Line: -public class CurlyBraceCheck {
+>, <Line: -  public void visitNode(FormattingStandardCheck formattingCheck, AstNode node) {
+>, <Line: -    if (node.is(FormattingStandardCheck.getClassAndFunctionNodes()) && formattingCheck.isOpenCurlyBraceForClassAndFunction) {
+>, <Line: -      checkLCurlyForClassAndFunction(formattingCheck, getLeftCurlyBraceNode(node));
+>, <Line: -    }
+>, <Line: -    if (node.is(FormattingStandardCheck.getControlStructureNodes()) && formattingCheck.isOpenCurlyBraceForControlStructures) {
+>, <Line: -      checkLCurlyForControlStructure(formattingCheck, getLeftCurlyBraceNode(node));
+>, <Line: -    }
+>, <Line: -    if (node.is(PHPGrammar.ELSE_CLAUSE, PHPGrammar.CATCH_STATEMENT, PHPGrammar.FINALLY_STATEMENT) && formattingCheck.isClosingCurlyNextToKeyword) {
+>, <Line: -      checkRCurlyBraceOnSameLine(formattingCheck, node);
+>, <Line: -    }
+>, <Line: -   * Check that else, catch or finally keywords are on the same line as the previous closing curly brace.
+>, <Line: -  private void checkRCurlyBraceOnSameLine(FormattingStandardCheck formattingCheck, AstNode node) {
+>, <Line: -    Token previsouToken = node.getPreviousAstNode().getLastToken();
+>, <Line: -    String keyword = node.getFirstChild(PHPKeyword.ELSE, PHPKeyword.CATCH, PHPKeyword.FINALLY).getTokenOriginalValue();
+>, <Line: -    if (previsouToken.getType().equals(PHPPunctuator.RCURLYBRACE) && previsouToken.getLine() != node.getTokenLine()) {
+>, <Line: -      formattingCheck.reportIssue("Move this \"" + keyword + "\" to the same line as the previous closing curly brace.", node);
+>, <Line: -   * Check that control structure opening curly brace ends line.
+>, <Line: -  private void checkLCurlyForControlStructure(FormattingStandardCheck formattingCheck, @Nullable AstNode leftCurlyBrace) {
+>, <Line: -    if (leftCurlyBrace != null && !endsLine(leftCurlyBrace)) {
+>, <Line: -      formattingCheck.reportIssue("Move this open curly brace to the end of the previous line.", leftCurlyBrace);
+>, <Line: -    }
+>, <Line: -   * Check that class and function opening curly brace starts line.
+>, <Line: -  private void checkLCurlyForClassAndFunction(FormattingStandardCheck formattingCheck, @Nullable AstNode leftCurlyBrace) {
+>, <Line: -    if (leftCurlyBrace != null && !isFirstOnline(leftCurlyBrace)) {
+>, <Line: -      formattingCheck.reportIssue("Move this open curly brace to the beginning of the next line.", leftCurlyBrace);
+>, <Line: -  private boolean isFirstOnline(AstNode curlyBrace) {
+>, <Line: -    Token previousToken = curlyBrace.getPreviousAstNode().getLastToken();
+>, <Line: -    // In one case, clonsing parenthesis can be on the same line as the opening curly brace
+>, <Line: -    if (previousToken.getType().equals(PHPPunctuator.RPARENTHESIS)) {
+>, <Line: -      previousToken = curlyBrace.getPreviousAstNode().getPreviousAstNode().getLastToken();
+>, <Line: -    return previousToken.getLine() != curlyBrace.getTokenLine();
+>, <Line: -  private boolean endsLine(AstNode curlyBrace) {
+>, <Line: -    return curlyBrace.getPreviousAstNode().getLastToken().getLine() == curlyBrace.getTokenLine();
+>, <Line: -  private AstNode getLeftCurlyBraceNode(AstNode node) {
+>, <Line: -    AstNode lcurlyBrace = null;
+>, <Line: -    AstNode child = node.getFirstChild(PHPPunctuator.LCURLYBRACE, PHPGrammar.BLOCK, PHPGrammar.STATEMENT, PHPGrammar.METHOD_BODY, PHPGrammar.SWITCH_CASE_LIST);
+>, <Line: -    if (child == null) {
+>, <Line: -      // do nothing
+>, <Line: -    } else if (child.is(PHPGrammar.BLOCK, PHPGrammar.SWITCH_CASE_LIST)) {
+>, <Line: -      lcurlyBrace = child.getFirstChild(PHPPunctuator.LCURLYBRACE);
+>, <Line: -    } else if (child.is(PHPGrammar.STATEMENT)) {
+>, <Line: -      AstNode stmtChild = child.getFirstChild();
+>, <Line: -      if (stmtChild.is(PHPGrammar.BLOCK)) {
+>, <Line: -        lcurlyBrace = stmtChild.getFirstChild(PHPPunctuator.LCURLYBRACE);
+>, <Line: -      }
+>, <Line: -    } else if (child.is(PHPGrammar.METHOD_BODY)) {
+>, <Line: -      AstNode body = child.getFirstChild(PHPGrammar.BLOCK);
+>, <Line: -      if (body != null) {
+>, <Line: -        lcurlyBrace = body.getFirstChild(PHPPunctuator.LCURLYBRACE);
+>, <Line: -      }
+>, <Line: -    } else {
+>, <Line: -      lcurlyBrace = child;
+>, <Line: -    return lcurlyBrace;
+>]

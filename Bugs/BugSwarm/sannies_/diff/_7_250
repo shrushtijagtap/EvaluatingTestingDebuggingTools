@@ -1,0 +1,18 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.tools.CastUtils;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +    protected long getContentSize() {
+>, <Line: +        return 8 + chunkOffsets.length * 4;
+>, <Line: +    }
+>, <Line: +        int entryCount = CastUtils.l2i(IsoTypeReader.readUInt32(content));
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: -    protected long getContentSize() {
+>, <Line: -        return 8 + chunkOffsets.length * 4;
+>, <Line: -    }
+>, <Line: -        int entryCount = l2i(IsoTypeReader.readUInt32(content));
+>]

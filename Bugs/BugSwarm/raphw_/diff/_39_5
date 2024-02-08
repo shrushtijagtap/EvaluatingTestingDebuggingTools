@@ -1,0 +1,4 @@
+[<Line: +                    method = annotation.annotationType().getMethod(property.getName());
+>]
+[<Line: -                    method = annotation.annotationType().getDeclaredMethod(property.getName());
+>]

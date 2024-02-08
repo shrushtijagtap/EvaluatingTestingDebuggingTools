@@ -1,0 +1,67 @@
+[<Line: +define([],
+>, <Line: +	function () {
+>, <Line: +		"use strict";
+>, <Line: +		function PanelMeta(options) {
+>, <Line: +			this.description = options.description;
+>, <Line: +			this.fullscreen = options.fullscreen;
+>, <Line: +			this.menu = [];
+>, <Line: +			this.editorTabs = [];
+>, <Line: +			this.extendedMenu = [];
+>, <Line: +			if (options.fullscreen) {
+>, <Line: +				this.addMenuItem('view', 'icon-eye-open', 'toggleFullscreen(false); dismiss();');
+>, <Line: +			}
+>, <Line: +			this.addMenuItem('edit', 'icon-cog', 'editPanel(); dismiss();');
+>, <Line: +			this.addMenuItem('duplicate', 'icon-copy', 'duplicatePanel()');
+>, <Line: +			this.addMenuItem('share', 'icon-share', 'sharePanel(); dismiss();');
+>, <Line: +			this.addEditorTab('General', 'app/partials/panelgeneral.html');
+>, <Line: +			if (options.metricsEditor) {
+>, <Line: +				this.addEditorTab('Metrics', 'app/partials/metrics.html');
+>, <Line: +			}
+>, <Line: +			this.addExtendedMenuItem('Panel JSON', '', 'editPanelJson(); dismiss();');
+>, <Line: +		}
+>, <Line: +		PanelMeta.prototype.addMenuItem = function (text, icon, click) {
+>, <Line: +			this.menu.push({text: text, icon: icon, click: click});
+>, <Line: +		};
+>, <Line: +		PanelMeta.prototype.addExtendedMenuItem = function (text, icon, click) {
+>, <Line: +			this.extendedMenu.push({text: text, icon: icon, click: click});
+>, <Line: +		};
+>, <Line: +		PanelMeta.prototype.addEditorTab = function (title, src) {
+>, <Line: +			this.editorTabs.push({title: title, src: src});
+>, <Line: +		};
+>, <Line: +		return PanelMeta;
+>, <Line: +	});
+>]
+[<Line: -define([
+>, <Line: -],
+>, <Line: -function () {
+>, <Line: -  "use strict";
+>, <Line: -  function PanelMeta(options) {
+>, <Line: -    this.description = options.description;
+>, <Line: -    this.fullscreen = options.fullscreen;
+>, <Line: -    this.menu = [];
+>, <Line: -    this.editorTabs = [];
+>, <Line: -    this.extendedMenu = [];
+>, <Line: -    if (options.fullscreen) {
+>, <Line: -      this.addMenuItem('view', 'icon-eye-open', 'toggleFullscreen(false); dismiss();');
+>, <Line: -    }
+>, <Line: -    this.addMenuItem('edit', 'icon-cog', 'editPanel(); dismiss();');
+>, <Line: -    this.addMenuItem('duplicate', 'icon-copy', 'duplicatePanel()');
+>, <Line: -    this.addMenuItem('share', 'icon-share', 'sharePanel(); dismiss();');
+>, <Line: -    this.addEditorTab('General', 'app/partials/panelgeneral.html');
+>, <Line: -    if (options.metricsEditor) {
+>, <Line: -      this.addEditorTab('Metrics', 'app/partials/metrics.html');
+>, <Line: -    }
+>, <Line: -    this.addExtendedMenuItem('Panel JSON', '', 'editPanelJson(); dismiss();');
+>, <Line: -  }
+>, <Line: -  PanelMeta.prototype.addMenuItem = function(text, icon, click) {
+>, <Line: -    this.menu.push({text: text, icon: icon, click: click});
+>, <Line: -  };
+>, <Line: -  PanelMeta.prototype.addExtendedMenuItem = function(text, icon, click) {
+>, <Line: -    this.extendedMenu.push({text: text, icon: icon, click: click});
+>, <Line: -  };
+>, <Line: -  PanelMeta.prototype.addEditorTab = function(title, src) {
+>, <Line: -    this.editorTabs.push({title: title, src: src});
+>, <Line: -  };
+>, <Line: -  return PanelMeta;
+>, <Line: -});
+>]

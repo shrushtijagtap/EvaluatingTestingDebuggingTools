@@ -1,0 +1,33 @@
+[<Line: +package test.methodinterceptors.multipleinterceptors;
+>, <Line: +import org.testng.IMethodInstance;
+>, <Line: +import org.testng.IMethodInterceptor;
+>, <Line: +import org.testng.ITestContext;
+>, <Line: +import org.testng.ITestNGMethod;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +public abstract class MethodNameFilterInterceptor implements IMethodInterceptor {
+>, <Line: +  private final String methodName;
+>, <Line: +  protected MethodNameFilterInterceptor(String methodName) {
+>, <Line: +    this.methodName = methodName;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public List<IMethodInstance> intercept(List<IMethodInstance> methods, ITestContext context) {
+>, <Line: +    List<IMethodInstance> result = new ArrayList<>();
+>, <Line: +    for (IMethodInstance methodInstance : methods) {
+>, <Line: +      ITestNGMethod method = methodInstance.getMethod();
+>, <Line: +      String name = method.getMethodName();
+>, <Line: +      if (!name.equals(methodName)) {
+>, <Line: +        result.add(methodInstance);
+>, <Line: +        String currentDescription = method.getDescription();
+>, <Line: +        if (currentDescription == null) {
+>, <Line: +          method.setDescription(methodName);
+>, <Line: +        } else {
+>, <Line: +          method.setDescription(currentDescription + methodName);
+>, <Line: +        }
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    return result;
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

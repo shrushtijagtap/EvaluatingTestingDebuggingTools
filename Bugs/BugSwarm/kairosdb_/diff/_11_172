@@ -1,0 +1,151 @@
+[<Line: +		'angular',
+>, <Line: +		'jquery'
+>, <Line: +	],
+>, <Line: +	function (angular, $) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('dashEditorLink', function ($timeout) {
+>, <Line: +				return {
+>, <Line: +					restrict: 'A',
+>, <Line: +					link: function (scope, elem, attrs) {
+>, <Line: +						var partial = attrs.dashEditorLink;
+>, <Line: +						elem.bind('click', function () {
+>, <Line: +							$timeout(function () {
+>, <Line: +								var editorScope = attrs.editorScope === 'isolated' ? null : scope;
+>, <Line: +								scope.appEvent('show-dash-editor', {
+>, <Line: +									src: partial,
+>, <Line: +									scope: editorScope
+>, <Line: +								});
+>, <Line: +							});
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('dashEditorView', function ($compile) {
+>, <Line: +				return {
+>, <Line: +					restrict: 'A',
+>, <Line: +					link: function (scope, elem) {
+>, <Line: +						var editorScope;
+>, <Line: +						var lastEditor;
+>, <Line: +						function hideScrollbars(value) {
+>, <Line: +							if (value) {
+>, <Line: +								window.scrollTo(0, 0);
+>, <Line: +								document.documentElement.style.overflow = 'hidden';  // firefox, chrome
+>, <Line: +								document.body.scroll = "no"; // ie only
+>, <Line: +							} else {
+>, <Line: +								document.documentElement.style.overflow = 'auto';
+>, <Line: +								document.body.scroll = "yes";
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +						function hideEditorPane() {
+>, <Line: +							hideScrollbars(false);
+>, <Line: +							if (editorScope) {
+>, <Line: +								editorScope.dismiss();
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +						scope.onAppEvent("dashboard-loaded", hideEditorPane);
+>, <Line: +						scope.onAppEvent('hide-dash-editor', hideEditorPane);
+>, <Line: +						scope.onAppEvent('show-dash-editor', function (evt, payload) {
+>, <Line: +							if (lastEditor === payload.src) {
+>, <Line: +								hideEditorPane();
+>, <Line: +								return;
+>, <Line: +							}
+>, <Line: +							hideEditorPane();
+>, <Line: +							scope.exitFullscreen();
+>, <Line: +							lastEditor = payload.src;
+>, <Line: +							editorScope = payload.scope ? payload.scope.$new() : scope.$new();
+>, <Line: +							editorScope.dismiss = function () {
+>, <Line: +								editorScope.$destroy();
+>, <Line: +								elem.empty();
+>, <Line: +								lastEditor = null;
+>, <Line: +								editorScope = null;
+>, <Line: +								hideScrollbars(false);
+>, <Line: +							};
+>, <Line: +							// hide page scrollbars while edit pane is visible
+>, <Line: +							hideScrollbars(true);
+>, <Line: +							var src = "'" + payload.src + "'";
+>, <Line: +							var view = $('<div class="dashboard-edit-view" ng-include="' + src + '"></div>');
+>, <Line: +							elem.append(view);
+>, <Line: +							$compile(elem.contents())(editorScope);
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'jquery'
+>, <Line: -],
+>, <Line: -function (angular, $) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('dashEditorLink', function($timeout) {
+>, <Line: -      return {
+>, <Line: -        restrict: 'A',
+>, <Line: -        link: function(scope, elem, attrs) {
+>, <Line: -          var partial = attrs.dashEditorLink;
+>, <Line: -          elem.bind('click',function() {
+>, <Line: -            $timeout(function() {
+>, <Line: -              var editorScope = attrs.editorScope === 'isolated' ? null : scope;
+>, <Line: -              scope.appEvent('show-dash-editor', { src: partial, scope: editorScope });
+>, <Line: -            });
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('dashEditorView', function($compile) {
+>, <Line: -      return {
+>, <Line: -        restrict: 'A',
+>, <Line: -        link: function(scope, elem) {
+>, <Line: -          var editorScope;
+>, <Line: -          var lastEditor;
+>, <Line: -          function hideScrollbars(value) {
+>, <Line: -            if (value) {
+>, <Line: -              window.scrollTo(0,0);
+>, <Line: -              document.documentElement.style.overflow = 'hidden';  // firefox, chrome
+>, <Line: -              document.body.scroll = "no"; // ie only
+>, <Line: -            } else {
+>, <Line: -              document.documentElement.style.overflow = 'auto';
+>, <Line: -              document.body.scroll = "yes";
+>, <Line: -            }
+>, <Line: -          }
+>, <Line: -          function hideEditorPane() {
+>, <Line: -            hideScrollbars(false);
+>, <Line: -            if (editorScope) { editorScope.dismiss(); }
+>, <Line: -          }
+>, <Line: -          scope.onAppEvent("dashboard-loaded", hideEditorPane);
+>, <Line: -          scope.onAppEvent('hide-dash-editor', hideEditorPane);
+>, <Line: -          scope.onAppEvent('show-dash-editor', function(evt, payload) {
+>, <Line: -            if (lastEditor === payload.src) {
+>, <Line: -              hideEditorPane();
+>, <Line: -              return;
+>, <Line: -            }
+>, <Line: -            hideEditorPane();
+>, <Line: -            scope.exitFullscreen();
+>, <Line: -            lastEditor = payload.src;
+>, <Line: -            editorScope = payload.scope ? payload.scope.$new() : scope.$new();
+>, <Line: -            editorScope.dismiss = function() {
+>, <Line: -              editorScope.$destroy();
+>, <Line: -              elem.empty();
+>, <Line: -              lastEditor = null;
+>, <Line: -              editorScope = null;
+>, <Line: -              hideScrollbars(false);
+>, <Line: -            };
+>, <Line: -            // hide page scrollbars while edit pane is visible
+>, <Line: -            hideScrollbars(true);
+>, <Line: -            var src = "'" + payload.src + "'";
+>, <Line: -            var view = $('<div class="dashboard-edit-view" ng-include="' + src + '"></div>');
+>, <Line: -            elem.append(view);
+>, <Line: -            $compile(elem.contents())(editorScope);
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

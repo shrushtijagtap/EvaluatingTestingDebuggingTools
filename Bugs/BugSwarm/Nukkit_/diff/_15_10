@@ -1,0 +1,152 @@
+[<Line: +package cn.nukkit.item;
+>, <Line: +import cn.nukkit.entity.Effect;
+>, <Line: +import cn.nukkit.entity.Entity;
+>, <Line: +import cn.nukkit.event.entity.EntityDamageEvent;
+>, <Line: +import cn.nukkit.event.entity.EntityRegainHealthEvent;
+>, <Line: +public class Potion extends Item{
+>, <Line: +    public static final int NO_EFFECTS = 0;
+>, <Line: +    public static final int MUNDANE = 1;
+>, <Line: +    public static final int MUNDANE_II = 2;
+>, <Line: +    public static final int THICK = 3;
+>, <Line: +    public static final int AWKWARD = 4;
+>, <Line: +    public static final int NIGHT_VISION = 5;
+>, <Line: +    public static final int NIGHT_VISION_LONG = 6;
+>, <Line: +    public static final int INVISIBLE = 7;
+>, <Line: +    public static final int INVISIBLE_LONG = 8;
+>, <Line: +    public static final int LEAPING = 9;
+>, <Line: +    public static final int LEAPING_LONG = 10;
+>, <Line: +    public static final int LEAPING_II = 11;
+>, <Line: +    public static final int FIRE_RESISTANCE = 12;
+>, <Line: +    public static final int FIRE_RESISTANCE_LONG = 13;
+>, <Line: +    public static final int SPEED = 14;
+>, <Line: +    public static final int SPEED_LONG = 15;
+>, <Line: +    public static final int SPEED_II = 16;
+>, <Line: +    public static final int SLOWNESS = 17;
+>, <Line: +    public static final int SLOWNESS_LONG = 18;
+>, <Line: +    public static final int WATER_BREATHING = 19;
+>, <Line: +    public static final int WATER_BREATHING_LONG = 20;
+>, <Line: +    public static final int INSTANT_HEALTH = 21;
+>, <Line: +    public static final int INSTANT_HEALTH_II = 22;
+>, <Line: +    public static final int HARMING = 23;
+>, <Line: +    public static final int HARMING_II = 24;
+>, <Line: +    public static final int POISON = 25;
+>, <Line: +    public static final int POISON_LONG = 26;
+>, <Line: +    public static final int POISON_II = 27;
+>, <Line: +    public static final int REGENERATION = 28;
+>, <Line: +    public static final int REGENERATION_LONG = 29;
+>, <Line: +    public static final int REGENERATION_II = 30;
+>, <Line: +    public static final int STRENGTH = 31;
+>, <Line: +    public static final int STRENGTH_LONG = 32;
+>, <Line: +    public static final int STRENGTH_II = 33;
+>, <Line: +    public static final int WEAKNESS = 34;
+>, <Line: +    public static final int WEAKNESS_LONG = 35;
+>, <Line: +    public Potion(){
+>, <Line: +        this(0, 1);
+>, <Line: +    }
+>, <Line: +    public Potion(int meta){
+>, <Line: +        this(meta, 1);
+>, <Line: +    }
+>, <Line: +    public Potion(int meta, int count){
+>, <Line: +        super(POTION, meta, count, "Potion");
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int getMaxStackSize(){
+>, <Line: +        return 1;
+>, <Line: +    }
+>, <Line: +    public void applyPotion(Entity entity){
+>, <Line: +        switch (this.getDamage()) {
+>, <Line: +            case 5: //night vision
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.NIGHT_VISION).setAmplifier(0).setDuration(180 * 20));
+>, <Line: +                break;
+>, <Line: +            case 6: //night vision
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.NIGHT_VISION).setAmplifier(0).setDuration(8 * 60 * 20));
+>, <Line: +                break;
+>, <Line: +            case 7: //invisible
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.INVISIBILITY).setAmplifier(0).setDuration(180 * 20));
+>, <Line: +                break;
+>, <Line: +            case 8: //invisible
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.INVISIBILITY).setAmplifier(0).setDuration(8 * 60 * 20));
+>, <Line: +                break;
+>, <Line: +            case 9: //leaping
+>, <Line: +                break;
+>, <Line: +            case 10: //leaping
+>, <Line: +                break;
+>, <Line: +            case 11: //leaping
+>, <Line: +                break;
+>, <Line: +            case 12: //fire resistance
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.FIRE_RESISTANCE).setAmplifier(0).setDuration(180 * 20));
+>, <Line: +                break;
+>, <Line: +            case 13: //fire resistance
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.FIRE_RESISTANCE).setAmplifier(0).setDuration(8 * 60 * 20));
+>, <Line: +                break;
+>, <Line: +            case 14: //speed I
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.SPEED).setAmplifier(0).setDuration(180 * 20));
+>, <Line: +                break;
+>, <Line: +            case 15: //speed I
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.SPEED).setAmplifier(0).setDuration(8 * 60 * 20));
+>, <Line: +                break;
+>, <Line: +            case 16: //speed II
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.SPEED).setAmplifier(1).setDuration(90 * 20));
+>, <Line: +                break;
+>, <Line: +            case 17: //slownes
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.SLOWNESS).setAmplifier(0).setDuration(90 * 20));
+>, <Line: +                break;
+>, <Line: +            case 18: //slownes
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.SLOWNESS).setAmplifier(0).setDuration(4 * 60 * 20));
+>, <Line: +                break;
+>, <Line: +            case 19: //water breathing
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.WATER_BREATHING).setAmplifier(0).setDuration(180 * 20));
+>, <Line: +                break;
+>, <Line: +            case 20: //water breathing
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.WATER_BREATHING).setAmplifier(0).setDuration(8 * 60 * 20));
+>, <Line: +                break;
+>, <Line: +            case 21:
+>, <Line: +                entity.heal(4, new EntityRegainHealthEvent(entity, 4, EntityRegainHealthEvent.CAUSE_EATING));
+>, <Line: +                break;
+>, <Line: +            case 22:
+>, <Line: +                entity.heal(8, new EntityRegainHealthEvent(entity, 8, EntityRegainHealthEvent.CAUSE_EATING));
+>, <Line: +                break;
+>, <Line: +            case 23: //harming
+>, <Line: +                entity.attack(new EntityDamageEvent(entity, EntityDamageEvent.CAUSE_MAGIC, 6));
+>, <Line: +                break;
+>, <Line: +            case 24: //harming II
+>, <Line: +                entity.attack(new EntityDamageEvent(entity, EntityDamageEvent.CAUSE_MAGIC, 12));
+>, <Line: +                break;
+>, <Line: +            case 25: //poison
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.POISON).setAmplifier(0).setDuration(45 * 20));
+>, <Line: +                break;
+>, <Line: +            case 26: //poison
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.POISON).setAmplifier(0).setDuration(90 * 20));
+>, <Line: +                break;
+>, <Line: +            case 27: //poison II
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.POISON).setAmplifier(1).setDuration(22 * 20));
+>, <Line: +                break;
+>, <Line: +            case 28: //regen I
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.REGENERATION).setAmplifier(0).setDuration(45 * 20));
+>, <Line: +                break;
+>, <Line: +            case 29: //regen I
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.REGENERATION).setAmplifier(0).setDuration(120 * 20));
+>, <Line: +                break;
+>, <Line: +            case 30: //regen II
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.REGENERATION).setAmplifier(1).setDuration(22 * 20));
+>, <Line: +                break;
+>, <Line: +            case 31: //strenght I
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.STRENGTH).setAmplifier(0).setDuration(180 * 20));
+>, <Line: +                break;
+>, <Line: +            case 32: //strenght I
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.STRENGTH).setAmplifier(0).setDuration(480 * 20));
+>, <Line: +                break;
+>, <Line: +            case 33: //strenght II
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.STRENGTH).setAmplifier(1).setDuration(90 * 20));
+>, <Line: +                break;
+>, <Line: +            case 34: //weakness
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.WEAKNESS).setAmplifier(0).setDuration(90 * 20));
+>, <Line: +                break;
+>, <Line: +            case 35: //weakness
+>, <Line: +                entity.addEffect(Effect.getEffect(Effect.WEAKNESS).setAmplifier(0).setDuration(4 * 60 * 20));
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

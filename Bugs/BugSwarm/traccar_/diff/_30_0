@@ -1,0 +1,17 @@
+[<Line: +import java.nio.ByteOrder;
+>, <Line: +            ChannelBuffer response = ChannelBuffers.dynamicBuffer(ByteOrder.LITTLE_ENDIAN, 0);
+>, <Line: +                    Checksum.CRC16_XMODEM, response.toByteBuffer(1, response.readableBytes() - 1)));
+>, <Line: +            ChannelBuffer encoded = ChannelBuffers.dynamicBuffer();
+>, <Line: +            while (response.readable()) {
+>, <Line: +                int b = response.readByte();
+>, <Line: +                if (response.readerIndex() != 1 && response.readableBytes() != 0
+>, <Line: +                        && (b == 0x01 || b == 0x04 || b == 0x10 || b == 0x11 || b == 0x13)) {
+>, <Line: +                    encoded.writeByte(0x10);
+>, <Line: +                    b += 0x20;
+>, <Line: +                }
+>, <Line: +                response.writeByte(b);
+>, <Line: +            }
+>]
+[<Line: -            ChannelBuffer response = ChannelBuffers.dynamicBuffer();
+>, <Line: -                    Checksum.CRC16_CCITT_FALSE, response.toByteBuffer(0, response.readableBytes())));
+>]

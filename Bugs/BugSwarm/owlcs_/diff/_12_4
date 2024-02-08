@@ -1,0 +1,58 @@
+[<Line: +import org.semanticweb.owlapi.model.OWLDocumentFormat;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+>, <Line: +import org.semanticweb.owlapi.model.OWLStorer;
+>, <Line: + * Specifies an interface that provides output management when an ontology is
+>, <Line: + * saved.
+>, <Line: +     * @param storer
+>, <Line: +     *        storer which will carry out the serialization
+>, <Line: +     * @param ontology
+>, <Line: +     *        ontology to save
+>, <Line: +     * @param format
+>, <Line: +     *        format of the ontology
+>, <Line: +     * @throws OWLOntologyStorageException
+>, <Line: +     *         ifan exception is raised, e.g., IO errors
+>, <Line: +    void store(OWLStorer storer, OWLOntology ontology, OWLDocumentFormat format) throws OWLOntologyStorageException;
+>]
+[<Line: -import static org.semanticweb.owlapi.util.OWLAPIPreconditions.emptyOptional;
+>, <Line: -import java.io.OutputStream;
+>, <Line: -import java.io.Writer;
+>, <Line: -import java.util.Optional;
+>, <Line: -import org.semanticweb.owlapi.model.IRI;
+>, <Line: - * Specifies an interface that provides a pointer to an ontology document where
+>, <Line: - * an ontology can be stored. <br>
+>, <Line: - * Any client that writes an ontology to a "stream" will first try to obtain a
+>, <Line: - * writer, followed by an OutputStream , followed by trying to open a stream
+>, <Line: - * from a document IRI. <br>
+>, <Line: - * A client that writes an ontology to a database or some similar storage will
+>, <Line: - * simply try to use the {@link IRI} returned by {@link #getDocumentIRI()}.
+>, <Line: -     * Gets a {@link java.io.Writer} that can be used to write an ontology to an
+>, <Line: -     * ontology document. If none is available, return Optional.absent. Do not
+>, <Line: -     * call multiple times for the same file: the output file will be opened for
+>, <Line: -     * write multiple times.
+>, <Line: -     * 
+>, <Line: -     * @return The writer
+>, <Line: -     */
+>, <Line: -    default Optional<Writer> getWriter() {
+>, <Line: -        return emptyOptional();
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Gets an {@link java.io.OutputStream} that can be used to write an
+>, <Line: -     * ontology to an ontology document. If none is available, return
+>, <Line: -     * Optional.absent. Do not call multiple times for the same file: the output
+>, <Line: -     * file will be opened for write multiple times.
+>, <Line: -     * 
+>, <Line: -     * @return The output stream
+>, <Line: -     */
+>, <Line: -    default Optional<OutputStream> getOutputStream() {
+>, <Line: -        return emptyOptional();
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Gets an IRI that points to an ontology document. If none is available,
+>, <Line: -     * return Optional.absent.
+>, <Line: -     * 
+>, <Line: -     * @return The IRI
+>, <Line: -    default Optional<IRI> getDocumentIRI() {
+>, <Line: -        return emptyOptional();
+>, <Line: -    }
+>]

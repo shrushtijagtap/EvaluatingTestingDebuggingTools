@@ -1,0 +1,105 @@
+[<Line: + * The parameters to provide for the account.
+>, <Line: +     * Gets or sets the sku type. Note that sku cannot be updated to
+>, <Line: +     * StandardZRS or ProvisionedLRS, nor can accounts of that sku type be
+>, <Line: +     * updated to any other value.
+>, <Line: +    private Sku sku;
+>, <Line: +     * Gets or sets a list of key value pairs that describe the resource.
+>, <Line: +     * These tags can be used in viewing and grouping this resource (across
+>, <Line: +     * resource groups). A maximum of 15 tags can be provided for a resource.
+>, <Line: +     * Each tag must have a key no greater than 128 characters and value no
+>, <Line: +     * greater than 256 characters.
+>, <Line: +    private Map<String, String> tags;
+>, <Line: +     * Provides the encryption settings on the account. The default setting is
+>, <Line: +     * unencrypted.
+>, <Line: +     */
+>, <Line: +    @JsonProperty(value = "properties.encryption")
+>, <Line: +    private Encryption encryption;
+>, <Line: +    /**
+>, <Line: +     * The access tier used for billing. Access tier cannot be changed more
+>, <Line: +     * than once every 7 days (168 hours). Access tier cannot be set for
+>, <Line: +     * StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types.
+>, <Line: +     * Possible values include: 'Hot', 'Cool'.
+>, <Line: +     */
+>, <Line: +    @JsonProperty(value = "properties.accessTier")
+>, <Line: +    private AccessTier accessTier;
+>, <Line: +    /**
+>, <Line: +     * Get the sku value.
+>, <Line: +     * @return the sku value
+>, <Line: +    public Sku sku() {
+>, <Line: +        return this.sku;
+>, <Line: +     * Set the sku value.
+>, <Line: +     * @param sku the sku value to set
+>, <Line: +    public StorageAccountUpdateParametersInner withSku(Sku sku) {
+>, <Line: +        this.sku = sku;
+>, <Line: +     * Get the tags value.
+>, <Line: +     * @return the tags value
+>, <Line: +    public Map<String, String> tags() {
+>, <Line: +        return this.tags;
+>, <Line: +     * Set the tags value.
+>, <Line: +     * @param tags the tags value to set
+>, <Line: +    public StorageAccountUpdateParametersInner withTags(Map<String, String> tags) {
+>, <Line: +        this.tags = tags;
+>, <Line: +    /**
+>, <Line: +     * Get the encryption value.
+>, <Line: +     *
+>, <Line: +     * @return the encryption value
+>, <Line: +     */
+>, <Line: +    public Encryption encryption() {
+>, <Line: +        return this.encryption;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Set the encryption value.
+>, <Line: +     *
+>, <Line: +     * @param encryption the encryption value to set
+>, <Line: +     * @return the StorageAccountUpdateParametersInner object itself.
+>, <Line: +     */
+>, <Line: +    public StorageAccountUpdateParametersInner withEncryption(Encryption encryption) {
+>, <Line: +        this.encryption = encryption;
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Get the accessTier value.
+>, <Line: +     *
+>, <Line: +     * @return the accessTier value
+>, <Line: +     */
+>, <Line: +    public AccessTier accessTier() {
+>, <Line: +        return this.accessTier;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Set the accessTier value.
+>, <Line: +     *
+>, <Line: +     * @param accessTier the accessTier value to set
+>, <Line: +     * @return the StorageAccountUpdateParametersInner object itself.
+>, <Line: +     */
+>, <Line: +    public StorageAccountUpdateParametersInner withAccessTier(AccessTier accessTier) {
+>, <Line: +        this.accessTier = accessTier;
+>, <Line: +        return this;
+>, <Line: +    }
+>]
+[<Line: - * The parameters to update on the account.
+>, <Line: -     * Resource tags.
+>, <Line: -    private Map<String, String> tags;
+>, <Line: -     * Gets or sets the account type. Note that StandardZRS and PremiumLRS
+>, <Line: -     * accounts cannot be changed to other account types, and other account
+>, <Line: -     * types cannot be changed to StandardZRS or PremiumLRS. Possible values
+>, <Line: -     * include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+>, <Line: -     * 'Standard_RAGRS', 'Premium_LRS'.
+>, <Line: -    @JsonProperty(value = "properties.accountType")
+>, <Line: -    private AccountType accountType;
+>, <Line: -     * Get the tags value.
+>, <Line: -     * @return the tags value
+>, <Line: -    public Map<String, String> tags() {
+>, <Line: -        return this.tags;
+>, <Line: -     * Set the tags value.
+>, <Line: -     * @param tags the tags value to set
+>, <Line: -    public StorageAccountUpdateParametersInner withTags(Map<String, String> tags) {
+>, <Line: -        this.tags = tags;
+>, <Line: -     * Get the accountType value.
+>, <Line: -     * @return the accountType value
+>, <Line: -    public AccountType accountType() {
+>, <Line: -        return this.accountType;
+>, <Line: -     * Set the accountType value.
+>, <Line: -     * @param accountType the accountType value to set
+>, <Line: -    public StorageAccountUpdateParametersInner withAccountType(AccountType accountType) {
+>, <Line: -        this.accountType = accountType;
+>]

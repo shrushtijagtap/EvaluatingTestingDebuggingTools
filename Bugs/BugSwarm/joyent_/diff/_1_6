@@ -1,0 +1,17 @@
+[<Line: +    DIRECTORY_DOES_NOT_EXIST_ERROR("DirectoryDoesNotExist"),
+>, <Line: +    DIRECTORY_EXISTS_ERROR("DirectoryExists"),
+>, <Line: +    DIRECTORY_NOT_EMPTY_ERROR("DirectoryNotEmpty"),
+>, <Line: +    DIRECTORY_OPERATION_ERROR("DirectoryOperation"),
+>, <Line: +    INTERNAL_ERROR("Internal"),
+>, <Line: +    NOT_ACCEPTABLE_ERROR("NotAcceptable"),
+>, <Line: +    NOT_ENOUGH_SPACE_ERROR("NotEnoughSpace"),
+>, <Line: +    OPERATION_NOT_ALLOWED_ON_ROOT_DIRECTORY_ERROR("OperationNotAllowedOnRootDirectory"),
+>]
+[<Line: -    DIRECTORY_DOES_NOT_EXIST_ERROR("DirectoryDoesNotExist"),
+>, <Line: -    DIRECTORY_EXISTS_ERROR("DirectoryExists"),
+>, <Line: -    DIRECTORY_NOT_EMPTY_ERROR("DirectoryNotEmpty"),
+>, <Line: -    DIRECTORY_OPERATION_ERROR("DirectoryOperation"),
+>, <Line: -    INTERNAL_ERROR("Internal"),
+>, <Line: -    NOT_ACCEPTABLE_ERROR("NotAcceptable"),
+>, <Line: -    NOT_ENOUGH_SPACE_ERROR("NotEnoughSpace"),
+>]

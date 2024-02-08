@@ -1,0 +1,116 @@
+[<Line: +package org.kairosdb.rollup;
+>, <Line: +import com.google.gson.annotations.SerializedName;
+>, <Line: +import org.apache.bval.constraints.NotEmpty;
+>, <Line: +import org.kairosdb.core.datastore.Duration;
+>, <Line: +import javax.validation.constraints.NotNull;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.UUID;
+>, <Line: +import static com.google.common.base.Preconditions.checkArgument;
+>, <Line: +import static com.google.common.base.Preconditions.checkNotNull;
+>, <Line: +import static org.kairosdb.util.Preconditions.checkNotNullOrEmpty;
+>, <Line: +/**
+>, <Line: + Roll up task.
+>, <Line: + */
+>, <Line: +public class RollupTask
+>, <Line: +{
+>, <Line: +	// todo regular expressions
+>, <Line: +	// todo one time go back and redo option
+>, <Line: +	// todo setup annotations for validation
+>, <Line: +	// todo add tags
+>, <Line: +	private final String id;
+>, <Line: +	private final transient List<Rollup> rollups = new ArrayList<Rollup>();
+>, <Line: +	@NotNull
+>, <Line: +	@NotEmpty()
+>, <Line: +	private String name;
+>, <Line: +	@NotNull
+>, <Line: +	@SerializedName("execution_interval")
+>, <Line: +	private Duration executionInterval;
+>, <Line: +	private long timestamp;
+>, <Line: +	private String json;
+>, <Line: +	public RollupTask()
+>, <Line: +	{
+>, <Line: +		id = UUID.randomUUID().toString();
+>, <Line: +	}
+>, <Line: +	public RollupTask(String name, Duration executionInterval, List<Rollup> rollups)
+>, <Line: +	{
+>, <Line: +		checkNotNull(rollups);
+>, <Line: +		checkArgument(rollups.size() > 0);
+>, <Line: +		id = UUID.randomUUID().toString();
+>, <Line: +		initialize(name, executionInterval, rollups);
+>, <Line: +	}
+>, <Line: +	public RollupTask(String id, String name, Duration executionInterval, List<Rollup> rollups, String json)
+>, <Line: +	{
+>, <Line: +		checkNotNullOrEmpty(id);
+>, <Line: +		checkNotNullOrEmpty(json);
+>, <Line: +		checkNotNull(rollups);
+>, <Line: +		checkArgument(rollups.size() > 0);
+>, <Line: +		this.id = id;
+>, <Line: +		this.json = json;
+>, <Line: +		initialize(name, executionInterval, rollups);
+>, <Line: +	}
+>, <Line: +	private void initialize(String name, Duration executionInterval, List<Rollup> rollups)
+>, <Line: +	{
+>, <Line: +		this.name = checkNotNullOrEmpty(name);
+>, <Line: +		this.rollups.addAll(rollups);
+>, <Line: +		this.executionInterval = checkNotNull(executionInterval);
+>, <Line: +		this.timestamp = System.currentTimeMillis();
+>, <Line: +	}
+>, <Line: +	public String getName()
+>, <Line: +	{
+>, <Line: +		return name;
+>, <Line: +	}
+>, <Line: +	public String getId()
+>, <Line: +	{
+>, <Line: +		return id;
+>, <Line: +	}
+>, <Line: +	public List<Rollup> getRollups()
+>, <Line: +	{
+>, <Line: +		return rollups;
+>, <Line: +	}
+>, <Line: +	public void addRollup(Rollup rollup)
+>, <Line: +	{
+>, <Line: +		rollups.add(rollup);
+>, <Line: +	}
+>, <Line: +	public void addJson(String json)
+>, <Line: +	{
+>, <Line: +		checkNotNullOrEmpty(json);
+>, <Line: +		if (json.contains("\"id\":"))
+>, <Line: +		{
+>, <Line: +			// if id already exist in the json replace it
+>, <Line: +			this.json = json.replaceFirst("\"id\":\".\",", "\"id\":\" + id + \"");
+>, <Line: +		}
+>, <Line: +		else
+>, <Line: +		{
+>, <Line: +			// if not add it
+>, <Line: +			this.json = json.replaceFirst("\\{", "{\"id\":\"" + id + "\",");
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public Duration getExecutionInterval()
+>, <Line: +	{
+>, <Line: +		return executionInterval;
+>, <Line: +	}
+>, <Line: +	public long getTimestamp()
+>, <Line: +	{
+>, <Line: +		return timestamp;
+>, <Line: +	}
+>, <Line: +	public String getJson()
+>, <Line: +	{
+>, <Line: +		return json;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object o)
+>, <Line: +	{
+>, <Line: +		if (this == o) return true;
+>, <Line: +		if (o == null || getClass() != o.getClass()) return false;
+>, <Line: +		RollupTask that = (RollupTask) o;
+>, <Line: +		return !(id != null ? !id.equals(that.id) : that.id != null);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode()
+>, <Line: +	{
+>, <Line: +		return id != null ? id.hashCode() : 0;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

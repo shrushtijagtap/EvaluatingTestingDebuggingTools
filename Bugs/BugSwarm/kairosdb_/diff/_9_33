@@ -1,0 +1,303 @@
+[]
+[<Line: -/*
+>, <Line: - * Copyright 2016 KairosDB Authors
+>, <Line: - *
+>, <Line: - *    Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: - *    you may not use this file except in compliance with the License.
+>, <Line: - *    You may obtain a copy of the License at
+>, <Line: - *
+>, <Line: - *        http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - *
+>, <Line: - *    Unless required by applicable law or agreed to in writing, software
+>, <Line: - *    distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - *    See the License for the specific language governing permissions and
+>, <Line: - *    limitations under the License.
+>, <Line: - */
+>, <Line: -package org.kairosdb.datastore.cassandra;
+>, <Line: -import com.google.common.util.concurrent.ThreadFactoryBuilder;
+>, <Line: -import me.prettyprint.cassandra.model.HColumnImpl;
+>, <Line: -import me.prettyprint.cassandra.model.MutatorImpl;
+>, <Line: -import me.prettyprint.hector.api.Keyspace;
+>, <Line: -import me.prettyprint.hector.api.Serializer;
+>, <Line: -import me.prettyprint.hector.api.mutation.Mutator;
+>, <Line: -import org.kairosdb.util.Triple;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.concurrent.ExecutorService;
+>, <Line: -import java.util.concurrent.Executors;
+>, <Line: -import java.util.concurrent.TimeUnit;
+>, <Line: -import java.util.concurrent.locks.ReentrantLock;
+>, <Line: -public class WriteBuffer<RowKeyType, ColumnKeyType, ValueType>  implements Runnable
+>, <Line: -{
+>, <Line: -	public static final Logger logger = LoggerFactory.getLogger(WriteBuffer.class);
+>, <Line: -	private Keyspace m_keyspace;
+>, <Line: -	private String m_cfName;
+>, <Line: -	private List<Triple<RowKeyType, ColumnKeyType, ValueType>> m_buffer;
+>, <Line: -	private Mutator<RowKeyType> m_mutator;
+>, <Line: -	private volatile int m_bufferCount = 0;
+>, <Line: -	private ReentrantLock m_mutatorLock;
+>, <Line: -	private Thread m_writeThread;
+>, <Line: -	private boolean m_exit = false;
+>, <Line: -	private int m_writeDelay;
+>, <Line: -	private Serializer<RowKeyType> m_rowKeySerializer;
+>, <Line: -	private Serializer<ColumnKeyType> m_columnKeySerializer;
+>, <Line: -	private Serializer<ValueType> m_valueSerializer;
+>, <Line: -	private WriteBufferStats m_writeStats;
+>, <Line: -	private int m_maxBufferSize;
+>, <Line: -	private int m_initialMaxBufferSize;
+>, <Line: -	private ExecutorService m_executorService;
+>, <Line: -	public WriteBuffer(Keyspace keyspace, String cfName,
+>, <Line: -			int writeDelay, int maxWriteSize, Serializer<RowKeyType> keySerializer,
+>, <Line: -			Serializer<ColumnKeyType> columnKeySerializer,
+>, <Line: -			Serializer<ValueType> valueSerializer,
+>, <Line: -			WriteBufferStats stats,
+>, <Line: -			ReentrantLock mutatorLock,
+>, <Line: -			int threadCount)
+>, <Line: -	{
+>, <Line: -		m_executorService = Executors.newFixedThreadPool(threadCount,
+>, <Line: -				new ThreadFactoryBuilder().setNameFormat("WriteBuffer-"+cfName+"-%d").build());
+>, <Line: -		m_keyspace = keyspace;
+>, <Line: -		m_cfName = cfName;
+>, <Line: -		m_writeDelay = writeDelay;
+>, <Line: -		m_initialMaxBufferSize = m_maxBufferSize = maxWriteSize;
+>, <Line: -		m_rowKeySerializer = keySerializer;
+>, <Line: -		m_columnKeySerializer = columnKeySerializer;
+>, <Line: -		m_valueSerializer = valueSerializer;
+>, <Line: -		m_writeStats = stats;
+>, <Line: -		m_mutatorLock = mutatorLock;
+>, <Line: -		m_buffer = new ArrayList<>();
+>, <Line: -		m_mutator = new MutatorImpl<>(keyspace, keySerializer);
+>, <Line: -		m_writeThread = new Thread(this, "WriteBuffer Scheduler for "+cfName);
+>, <Line: -		m_writeThread.start();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Add a datapoint without a TTL. 
+>, <Line: -	 * This datapoint will never be automatically deleted
+>, <Line: -	 */
+>, <Line: -	public void addData(
+>, <Line: -		RowKeyType rowKey, 
+>, <Line: -		ColumnKeyType columnKey, 
+>, <Line: -		ValueType value, 
+>, <Line: -		long timestamp)
+>, <Line: -	{
+>, <Line: -		addData(rowKey, columnKey, value, timestamp, 0);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Add a datapoint with a TTL.
+>, <Line: -	 * This datapoint will be removed after ttl seconds
+>, <Line: -	 */
+>, <Line: -	public void addData(
+>, <Line: -			RowKeyType rowKey,
+>, <Line: -			ColumnKeyType columnKey,
+>, <Line: -			ValueType value,
+>, <Line: -			long timestamp,
+>, <Line: -			int ttl)
+>, <Line: -	{
+>, <Line: -		m_mutatorLock.lock();
+>, <Line: -		try
+>, <Line: -		{
+>, <Line: -			waitOnBufferFull();
+>, <Line: -			m_bufferCount ++;
+>, <Line: -			if (columnKey.toString().length() > 0)
+>, <Line: -			{
+>, <Line: -				m_buffer.add(new Triple<>(rowKey, columnKey, value, timestamp, ttl));
+>, <Line: -			}
+>, <Line: -			else
+>, <Line: -			{
+>, <Line: -				logger.info("Discarded " + m_cfName + " row with empty column name. This should never happen.");
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		finally
+>, <Line: -		{
+>, <Line: -			m_mutatorLock.unlock();
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public void deleteRow(RowKeyType rowKey, long timestamp)
+>, <Line: -	{
+>, <Line: -		m_mutatorLock.lock();
+>, <Line: -		try
+>, <Line: -		{
+>, <Line: -			waitOnBufferFull();
+>, <Line: -			m_bufferCount ++;
+>, <Line: -			m_mutator.addDeletion(rowKey, m_cfName, timestamp);
+>, <Line: -		}
+>, <Line: -		finally
+>, <Line: -		{
+>, <Line: -			m_mutatorLock.unlock();
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public void deleteColumn(RowKeyType rowKey, ColumnKeyType columnKey, long timestamp)
+>, <Line: -	{
+>, <Line: -		m_mutatorLock.lock();
+>, <Line: -		try
+>, <Line: -		{
+>, <Line: -			waitOnBufferFull();
+>, <Line: -			m_bufferCount ++;
+>, <Line: -			m_mutator.addDeletion(rowKey, m_cfName, columnKey, m_columnKeySerializer, timestamp);
+>, <Line: -		}
+>, <Line: -		finally
+>, <Line: -		{
+>, <Line: -			m_mutatorLock.unlock();
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private void waitOnBufferFull()
+>, <Line: -	{
+>, <Line: -		if ((m_bufferCount > m_maxBufferSize) && (m_mutatorLock.getHoldCount() == 1))
+>, <Line: -		{
+>, <Line: -			submitJob();
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public void close() throws InterruptedException
+>, <Line: -	{
+>, <Line: -		m_exit = true;
+>, <Line: -		m_writeThread.interrupt();
+>, <Line: -		m_writeThread.join();
+>, <Line: -		m_executorService.shutdown();
+>, <Line: -		m_executorService.awaitTermination(1, TimeUnit.MINUTES);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 This will slowly increase the max buffer size up to the initial size.
+>, <Line: -	 The design is that this method is called periodically to correct 3/4
+>, <Line: -	 throttling that occurs down below.
+>, <Line: -	 */
+>, <Line: -	public void increaseMaxBufferSize()
+>, <Line: -	{
+>, <Line: -		if (m_maxBufferSize < m_initialMaxBufferSize)
+>, <Line: -		{
+>, <Line: -			m_maxBufferSize += 1000;
+>, <Line: -			logger.info("Increasing write buffer " + m_cfName + " size to "+m_maxBufferSize);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private void submitJob()
+>, <Line: -	{
+>, <Line: -		Mutator<RowKeyType> pendingMutations;
+>, <Line: -		List<Triple<RowKeyType, ColumnKeyType, ValueType>> buffer;
+>, <Line: -		m_writeStats.saveWriteSize(m_bufferCount);
+>, <Line: -		pendingMutations = m_mutator;
+>, <Line: -		buffer = m_buffer;
+>, <Line: -		m_mutator = new MutatorImpl<>(m_keyspace, m_rowKeySerializer);
+>, <Line: -		m_buffer = new ArrayList<>();
+>, <Line: -		m_bufferCount = 0;
+>, <Line: -		WriteDataJob writeDataJob = new WriteDataJob(pendingMutations, buffer);
+>, <Line: -		//submit job
+>, <Line: -		m_executorService.submit(writeDataJob);
+>, <Line: -		writeDataJob.waitTillStarted();
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void run()
+>, <Line: -	{
+>, <Line: -		while (!m_exit)
+>, <Line: -		{
+>, <Line: -			try
+>, <Line: -			{
+>, <Line: -				Thread.sleep(m_writeDelay);
+>, <Line: -			}
+>, <Line: -			catch (InterruptedException ignored) {}
+>, <Line: -			if (m_bufferCount != 0)
+>, <Line: -			{
+>, <Line: -				m_mutatorLock.lock();
+>, <Line: -				try
+>, <Line: -				{
+>, <Line: -					submitJob();
+>, <Line: -				}
+>, <Line: -				finally
+>, <Line: -				{
+>, <Line: -					m_mutatorLock.unlock();
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private class WriteDataJob implements Runnable
+>, <Line: -	{
+>, <Line: -		private final Object m_jobLock = new Object();
+>, <Line: -		private boolean m_started = false;
+>, <Line: -		private Mutator<RowKeyType> m_pendingMutations;
+>, <Line: -		private final List<Triple<RowKeyType, ColumnKeyType, ValueType>> m_buffer;
+>, <Line: -		public WriteDataJob(Mutator<RowKeyType> pendingMutations, List<Triple<RowKeyType, ColumnKeyType, ValueType>> buffer)
+>, <Line: -		{
+>, <Line: -			m_pendingMutations = pendingMutations;
+>, <Line: -			m_buffer = buffer;
+>, <Line: -		}
+>, <Line: -		public void waitTillStarted()
+>, <Line: -		{
+>, <Line: -			synchronized (m_jobLock)
+>, <Line: -			{
+>, <Line: -				while (!m_started)
+>, <Line: -				{
+>, <Line: -					try
+>, <Line: -					{
+>, <Line: -						m_jobLock.wait();
+>, <Line: -					}
+>, <Line: -					catch (InterruptedException e)
+>, <Line: -					{
+>, <Line: -						e.printStackTrace();
+>, <Line: -					}
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		@Override
+>, <Line: -		public void run()
+>, <Line: -		{
+>, <Line: -			synchronized (m_jobLock)
+>, <Line: -			{
+>, <Line: -				m_started = true;
+>, <Line: -				m_jobLock.notifyAll();
+>, <Line: -			}
+>, <Line: -			try
+>, <Line: -			{
+>, <Line: -				if (m_pendingMutations != null)
+>, <Line: -				{
+>, <Line: -					for (Triple<RowKeyType, ColumnKeyType, ValueType> data : m_buffer)
+>, <Line: -					{
+>, <Line: -						HColumnImpl<ColumnKeyType, ValueType> col =
+>, <Line: -								new HColumnImpl<>(data.getSecond(), data.getThird(), data.getTime(), m_columnKeySerializer, m_valueSerializer);
+>, <Line: -						//if a TTL is set apply it to the column. This will
+>, <Line: -						//cause it to be removed after this number of seconds
+>, <Line: -						if (data.getTtl() != 0)
+>, <Line: -						{
+>, <Line: -							col.setTtl(data.getTtl());
+>, <Line: -						}
+>, <Line: -						m_pendingMutations.addInsertion(
+>, <Line: -								data.getFirst(),
+>, <Line: -								m_cfName,
+>, <Line: -								col
+>, <Line: -						);
+>, <Line: -					}
+>, <Line: -					m_pendingMutations.execute();
+>, <Line: -				}
+>, <Line: -				m_pendingMutations = null;
+>, <Line: -			}
+>, <Line: -			catch (Exception e)
+>, <Line: -			{
+>, <Line: -				logger.error("Error sending data to Cassandra (" + m_cfName + ")", e);
+>, <Line: -				m_maxBufferSize = m_maxBufferSize * 3 / 4;
+>, <Line: -				logger.error("Reducing write buffer size to " + m_maxBufferSize +
+>, <Line: -						".  You need to increase your cassandra capacity or change the kairosdb.datastore.cassandra.write_buffer_max_size property.");
+>, <Line: -			}
+>, <Line: -			//If the batch failed we will retry it without changing the buffer size.
+>, <Line: -			while (m_pendingMutations != null)
+>, <Line: -			{
+>, <Line: -				try
+>, <Line: -				{
+>, <Line: -					Thread.sleep(100);
+>, <Line: -				}
+>, <Line: -				catch (InterruptedException ignored)
+>, <Line: -				{
+>, <Line: -				}
+>, <Line: -				try
+>, <Line: -				{
+>, <Line: -					m_pendingMutations.execute();
+>, <Line: -					m_pendingMutations = null;
+>, <Line: -				}
+>, <Line: -				catch (Exception e)
+>, <Line: -				{
+>, <Line: -					logger.error("Error resending data", e);
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -}
+>]

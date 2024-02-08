@@ -1,0 +1,21 @@
+[]
+[<Line: -package com.mp4parser.streaming;
+>, <Line: -public class StreamingSampleHelper {
+>, <Line: -    static boolean hasSampleExtension(StreamingSample streamingSample, Class<? extends SampleExtension> clazz) {
+>, <Line: -        for (SampleExtension sampleExtension : streamingSample.getExtensions()) {
+>, <Line: -            if (clazz.isAssignableFrom(sampleExtension.getClass())) {
+>, <Line: -                return true;
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        return false;
+>, <Line: -    }
+>, <Line: -    static <B extends SampleExtension> B getSampleExtension(StreamingSample streamingSample, Class<B> clazz) {
+>, <Line: -        for (SampleExtension sampleExtension : streamingSample.getExtensions()) {
+>, <Line: -            if (clazz.isAssignableFrom(sampleExtension.getClass())) {
+>, <Line: -                return (B) sampleExtension;
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        return null;
+>, <Line: -    }
+>, <Line: -}
+>]

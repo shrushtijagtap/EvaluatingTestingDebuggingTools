@@ -1,0 +1,195 @@
+[]
+[<Line: -package model;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Collection;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Optional;
+>, <Line: -import javafx.scene.Node;
+>, <Line: -import javafx.scene.control.Tooltip;
+>, <Line: -import org.eclipse.egit.github.core.Label;
+>, <Line: -public class TurboLabel implements TurboResource {
+>, <Line: -	/*
+>, <Line: -	 * Attributes, Getters & Setters
+>, <Line: -	 */
+>, <Line: -	public static final String EXCLUSIVE_DELIM = ".";
+>, <Line: -	public static final String NONEXCLUSIVE_DELIM = "-";
+>, <Line: -	public String getValue() {return getName();}
+>, <Line: -	public void setValue(String value) {setName(value);}
+>, <Line: -	private String name = "";
+>, <Line: -    public String getName() {
+>, <Line: -    	return name;
+>, <Line: -    }
+>, <Line: -    public void setName(String value) {
+>, <Line: -    	assert value != "";
+>, <Line: -    	assert value != null;
+>, <Line: -    	name = value;
+>, <Line: -    }
+>, <Line: -    private String colour = "";
+>, <Line: -    public final String getColour() {return colour;}
+>, <Line: -    public final void setColour(String value) {colour = value;}
+>, <Line: -    private String group = "";
+>, <Line: -    public final String getGroup() {return group;}
+>, <Line: -    public final void setGroup(String value) {group = value;}
+>, <Line: -	private boolean isExclusive; // exclusive: "." non-exclusive: "-"
+>, <Line: -	public boolean isExclusive() {return isExclusive;}
+>, <Line: -	public void setExclusive(boolean isExclusive) {
+>, <Line: -		if (getGroup() != null) this.isExclusive = isExclusive;
+>, <Line: -	}
+>, <Line: -	/*
+>, <Line: -	 * Constructors and Public Methods
+>, <Line: -	 */
+>, <Line: -	public TurboLabel(TurboLabel other){
+>, <Line: -		this(other.toGhResource());
+>, <Line: -	}
+>, <Line: -	public TurboLabel(){
+>, <Line: -		setColour("000000");
+>, <Line: -	}
+>, <Line: -	public TurboLabel(Label label) {
+>, <Line: -		assert label != null;
+>, <Line: -		String labelName = label.getName();
+>, <Line: -		Optional<String[]> tokens = TurboLabel.parseName(labelName);
+>, <Line: -		if(!tokens.isPresent()){
+>, <Line: -			setName(labelName);
+>, <Line: -		}else{
+>, <Line: -			setGroup(tokens.get()[0]);
+>, <Line: -			setName(tokens.get()[1]);
+>, <Line: -			setExclusive(tokens.get()[2].equals(EXCLUSIVE_DELIM));
+>, <Line: -		}
+>, <Line: -		setColour(label.getColor());
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void copyValuesFrom(TurboResource other) {
+>, <Line: -		assert other != null;
+>, <Line: -		assert other instanceof TurboLabel;
+>, <Line: -		TurboLabel obj = (TurboLabel) other;
+>, <Line: -		setName(obj.getName());
+>, <Line: -		setColour(obj.getColour());
+>, <Line: -		setGroup(obj.getGroup());
+>, <Line: -	}
+>, <Line: -	public Label toGhResource() {
+>, <Line: -		Label ghLabel = new Label();
+>, <Line: -		ghLabel.setName(toGhName());
+>, <Line: -		ghLabel.setColor(getColour());
+>, <Line: -		return ghLabel;
+>, <Line: -	}
+>, <Line: -	public String getGroupDelimiter(){
+>, <Line: -		String groupDelimiter = isExclusive ? EXCLUSIVE_DELIM : NONEXCLUSIVE_DELIM;
+>, <Line: -		return groupDelimiter;
+>, <Line: -	}
+>, <Line: -	public String toGhName() {
+>, <Line: -		String groupDelimiter = isExclusive ? EXCLUSIVE_DELIM : NONEXCLUSIVE_DELIM;
+>, <Line: -		String groupPrefix = (getGroup() == null || getGroup().isEmpty()) ? "" : getGroup() + groupDelimiter;
+>, <Line: -		String groupAppended = groupPrefix + getName();
+>, <Line: -		return groupAppended;
+>, <Line: -	}
+>, <Line: -	public static List<Label> toGhLabels(List<TurboLabel> turboLabels) {
+>, <Line: -		List<Label> ghLabels = new ArrayList<Label>();
+>, <Line: -		if (turboLabels == null) return ghLabels;
+>, <Line: -		for (TurboLabel turboLabel : turboLabels) {
+>, <Line: -			Label label = new Label();
+>, <Line: -			label.setName(turboLabel.toGhName());
+>, <Line: -			label.setColor(turboLabel.getColour());
+>, <Line: -			ghLabels.add(label);
+>, <Line: -		}
+>, <Line: -		return ghLabels;
+>, <Line: -	}
+>, <Line: -	private String getStyle() {
+>, <Line: -		String colour = getColour();
+>, <Line: -		int R = Integer.parseInt(colour.substring(0, 2), 16);
+>, <Line: -		int G = Integer.parseInt(colour.substring(2, 4), 16);
+>, <Line: -		int B = Integer.parseInt(colour.substring(4, 6), 16);
+>, <Line: -		double L = 0.2126 * R + 0.7152 * G + 0.0722 * B;
+>, <Line: -		boolean bright = L > 128;
+>, <Line: -		return "-fx-background-color: #" + getColour() + "; -fx-text-fill: " + (bright ? "black" : "white");
+>, <Line: -	}
+>, <Line: -	public Node getNode() {
+>, <Line: -		javafx.scene.control.Label node = new javafx.scene.control.Label(getName());
+>, <Line: -		node.getStyleClass().add("labels");
+>, <Line: -		node.setStyle(getStyle());
+>, <Line: -		if (getGroup() != null) {
+>, <Line: -			Tooltip groupTooltip = new Tooltip(getGroup());
+>, <Line: -			node.setTooltip(groupTooltip);
+>, <Line: -		}
+>, <Line: -		return node;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns an array in the format:
+>, <Line: -	 * 
+>, <Line: -	 * {
+>, <Line: -	 *     label group,
+>, <Line: -	 *     label name,
+>, <Line: -	 *     separator
+>, <Line: -	 * }
+>, <Line: -	 * 
+>, <Line: -	 * May fail if the string is not in the format group.name or group-name.
+>, <Line: -	 */
+>, <Line: -	public static Optional<String[]> parseName(String name) {
+>, <Line: -		String[] result = new String[3];
+>, <Line: -		int dotPos = name.indexOf(EXCLUSIVE_DELIM);
+>, <Line: -		int dashPos = name.indexOf(NONEXCLUSIVE_DELIM);
+>, <Line: -		int pos = -1;
+>, <Line: -		if(dotPos == -1){
+>, <Line: -			pos = dashPos;
+>, <Line: -		}else if(dashPos == -1){
+>, <Line: -			pos = dotPos;
+>, <Line: -		}else{
+>, <Line: -			pos = Math.min(dashPos, dotPos);
+>, <Line: -		}
+>, <Line: -		if (pos == -1) {
+>, <Line: -			return Optional.empty();
+>, <Line: -		} else {
+>, <Line: -			result[0] = name.substring(0, pos);
+>, <Line: -			result[1] = name.substring(pos+1);
+>, <Line: -			result[2] = name.substring(pos, pos+1);
+>, <Line: -			return Optional.of(result);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public static HashMap<String, ArrayList<TurboLabel>> groupLabels(Collection<TurboLabel> labels, String ungroupedName) {
+>, <Line: -		HashMap<String, ArrayList<TurboLabel>> groups = new HashMap<>();
+>, <Line: -		for (TurboLabel l : labels) {
+>, <Line: -			String groupName = l.getGroup() == null ? ungroupedName : l.getGroup();
+>, <Line: -			if (groups.get(groupName) == null) {
+>, <Line: -				groups.put(groupName, new ArrayList<TurboLabel>());
+>, <Line: -			}
+>, <Line: -			groups.get(groupName).add(l);
+>, <Line: -		}
+>, <Line: -		return groups;
+>, <Line: -	}
+>, <Line: -	/*
+>, <Line: -	 * Overriden Methods
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public int hashCode() {
+>, <Line: -		final int prime = 31;
+>, <Line: -		int result = 1;
+>, <Line: -		result = prime * result + ((name == null) ? 0 : toGhName().hashCode());
+>, <Line: -		return result;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean equals(Object obj) {
+>, <Line: -		if (this == obj)
+>, <Line: -			return true;
+>, <Line: -		if (obj == null)
+>, <Line: -			return false;
+>, <Line: -		if (getClass() != obj.getClass())
+>, <Line: -			return false;
+>, <Line: -		TurboLabel other = (TurboLabel) obj;
+>, <Line: -		if (name == null) {
+>, <Line: -			return other.name == null;
+>, <Line: -		}
+>, <Line: -		return this.toGhName().equals(other.toGhName());
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public String toString() {
+>, <Line: -		return "TurboLabel [name=" + name + ", group=" + group + "]";
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * A convenient string representation of this object, for purposes of readable logs.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public String logString() {
+>, <Line: -		return toGhName();
+>, <Line: -	}
+>, <Line: -}
+>]

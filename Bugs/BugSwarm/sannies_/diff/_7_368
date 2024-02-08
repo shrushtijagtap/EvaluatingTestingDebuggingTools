@@ -1,0 +1,15 @@
+[]
+[<Line: -package com.googlecode.mp4parser.authoring.subtext;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.TextTrackImpl;
+>, <Line: -import com.googlecode.mp4parser.srt.SrtParser;
+>, <Line: -import org.junit.Test;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.io.InputStream;
+>, <Line: -public class SrtParserTest {
+>, <Line: -    @Test
+>, <Line: -    public void test() throws IOException {
+>, <Line: -        InputStream is = SrtParserTest.class.getResourceAsStream("/subs.srt");
+>, <Line: -        TextTrackImpl track = SrtParser.parse(is);
+>, <Line: -    }
+>, <Line: -}
+>]

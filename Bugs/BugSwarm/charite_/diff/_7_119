@@ -1,0 +1,94 @@
+[<Line: +package de.charite.compbio.jannovar.progress;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import com.google.common.collect.ImmutableMap;
+>, <Line: +/**
+>, <Line: + * A list of {@link GenomeRegion} objects
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +final public class GenomeRegionList {
+>, <Line: +	/** List of {@link GenomeRegion} objects */
+>, <Line: +	ImmutableList<GenomeRegion> genomeRegions;
+>, <Line: +	/** Mapping from contig name to {@link GenomeRegion} */
+>, <Line: +	ImmutableMap<String, GenomeRegion> nameToRegion;
+>, <Line: +	public GenomeRegionList(Iterable<GenomeRegion> regions) {
+>, <Line: +		ImmutableList.Builder<GenomeRegion> listBuilder = new ImmutableList.Builder<>();
+>, <Line: +		ImmutableMap.Builder<String, GenomeRegion> mapBuilder = new ImmutableMap.Builder<>();
+>, <Line: +		for (GenomeRegion region : regions) {
+>, <Line: +			listBuilder.add(region);
+>, <Line: +			mapBuilder.put(region.getContig(), region);
+>, <Line: +		}
+>, <Line: +		this.genomeRegions = listBuilder.build();
+>, <Line: +		this.nameToRegion = mapBuilder.build();
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * @return Number of bases up to position (contig, pos).
+>, <Line: +	 */
+>, <Line: +	public long lengthUpTo(String contig, int pos) {
+>, <Line: +		if (getGenomeRegion(contig) == null)
+>, <Line: +			throw new IllegalArgumentException("Contig " + contig + " not found");
+>, <Line: +		long result = 0;
+>, <Line: +		for (GenomeRegion region : genomeRegions) {
+>, <Line: +			if (region.getContig().equals(contig)) {
+>, <Line: +				result += pos;
+>, <Line: +				break;
+>, <Line: +			} else {
+>, <Line: +				result += region.length();
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +	public long totalLength() {
+>, <Line: +		return this.genomeRegions.stream().mapToLong(r -> r.length()).sum();
+>, <Line: +	}
+>, <Line: +	public GenomeRegion getGenomeRegion(String name) {
+>, <Line: +		return this.nameToRegion.getOrDefault(name, null);
+>, <Line: +	}
+>, <Line: +	public ImmutableList<GenomeRegion> getGenomeRegions() {
+>, <Line: +		return genomeRegions;
+>, <Line: +	}
+>, <Line: +	public void setGenomeRegions(ImmutableList<GenomeRegion> genomeRegions) {
+>, <Line: +		this.genomeRegions = genomeRegions;
+>, <Line: +	}
+>, <Line: +	public ImmutableMap<String, GenomeRegion> getNameToRegion() {
+>, <Line: +		return nameToRegion;
+>, <Line: +	}
+>, <Line: +	public void setNameToRegion(ImmutableMap<String, GenomeRegion> nameToRegion) {
+>, <Line: +		this.nameToRegion = nameToRegion;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return "GenomeRegionList [genomeRegions=" + genomeRegions + ", nameToRegion=" + nameToRegion + "]";
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode() {
+>, <Line: +		final int prime = 31;
+>, <Line: +		int result = 1;
+>, <Line: +		result = prime * result + ((genomeRegions == null) ? 0 : genomeRegions.hashCode());
+>, <Line: +		result = prime * result + ((nameToRegion == null) ? 0 : nameToRegion.hashCode());
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object obj) {
+>, <Line: +		if (this == obj)
+>, <Line: +			return true;
+>, <Line: +		if (obj == null)
+>, <Line: +			return false;
+>, <Line: +		if (getClass() != obj.getClass())
+>, <Line: +			return false;
+>, <Line: +		GenomeRegionList other = (GenomeRegionList) obj;
+>, <Line: +		if (genomeRegions == null) {
+>, <Line: +			if (other.genomeRegions != null)
+>, <Line: +				return false;
+>, <Line: +		} else if (!genomeRegions.equals(other.genomeRegions))
+>, <Line: +			return false;
+>, <Line: +		if (nameToRegion == null) {
+>, <Line: +			if (other.nameToRegion != null)
+>, <Line: +				return false;
+>, <Line: +		} else if (!nameToRegion.equals(other.nameToRegion))
+>, <Line: +			return false;
+>, <Line: +		return true;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,16 @@
+[<Line: +package org.mp4parser.boxes.iso23009.part1;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import org.mp4parser.tools.Utf8;
+>, <Line: + * The Event Message box ('emsg') provides signalling for generic events related to the media
+>, <Line: + * presentation time.
+>]
+[<Line: -package com.mp4parser.iso23009.part1;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.Utf8;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: - *  The Event Message box ('emsg') provides signalling for generic events related to the media
+>, <Line: - *  presentation time.
+>]

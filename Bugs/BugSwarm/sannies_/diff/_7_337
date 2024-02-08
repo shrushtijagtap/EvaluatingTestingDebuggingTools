@@ -1,0 +1,6 @@
+[<Line: +package org.mp4parser.support;
+>, <Line: + * @see RequiresParseDetailAspect
+>]
+[<Line: -package com.googlecode.mp4parser.annotations;
+>, <Line: - * @see com.googlecode.mp4parser.RequiresParseDetailAspect
+>]

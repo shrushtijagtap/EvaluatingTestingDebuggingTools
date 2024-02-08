@@ -1,0 +1,18 @@
+[<Line: +			<span class="span4"></span>
+>, <Line: +			<button type="button" class="btn btn-success span2"
+>, <Line: +					ng-click="dismiss()">No
+>, <Line: +			</button>
+>, <Line: +			<button type="button" class="btn btn-danger span2"
+>, <Line: +					ng-click="onConfirm();dismiss();">Yes
+>, <Line: +			</button>
+>, <Line: +			<span class="span4"></span>
+>, <Line: +		</div>
+>, <Line: +	</div>
+>]
+[<Line: -		<span class="span4"></span>
+>, <Line: -	  <button type="button" class="btn btn-success span2" ng-click="dismiss()">No</button>
+>, <Line: -	  <button type="button" class="btn btn-danger span2" ng-click="onConfirm();dismiss();">Yes</button>
+>, <Line: -		<span class="span4"></span>
+>, <Line: -  </div>
+>, <Line: -</div>
+>]

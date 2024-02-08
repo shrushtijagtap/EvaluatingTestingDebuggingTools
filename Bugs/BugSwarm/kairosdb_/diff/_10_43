@@ -1,0 +1,20 @@
+[<Line: +import org.apache.http.client.methods.HttpDelete;
+>, <Line: +import javax.net.ssl.SSLContext;
+>, <Line: +import java.security.KeyManagementException;
+>, <Line: +import java.security.KeyStore;
+>, <Line: +import java.security.KeyStoreException;
+>, <Line: +import java.security.NoSuchAlgorithmException;
+>, <Line: +import java.security.UnrecoverableKeyException;
+>, <Line: +	public JsonResponse delete(String url) throws IOException
+>, <Line: +	{
+>, <Line: +		HttpClientContext context = setCredentials(url);
+>, <Line: +		HttpDelete get = new HttpDelete(url);
+>, <Line: +		try(CloseableHttpResponse response = client.execute(get, context))
+>, <Line: +		{
+>, <Line: +			return new JsonResponse(response);
+>, <Line: +		}
+>, <Line: +	}
+>]
+[<Line: -import java.security.*;
+>, <Line: -import javax.net.ssl.SSLContext;
+>]

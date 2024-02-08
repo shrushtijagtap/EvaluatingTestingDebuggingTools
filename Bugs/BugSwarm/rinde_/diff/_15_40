@@ -1,0 +1,8 @@
+[<Line: +			<dependency>
+>, <Line: +				<groupId>org.inferred</groupId>
+>, <Line: +				<artifactId>freebuilder</artifactId>
+>, <Line: +				<version>1.0-rc3</version>
+>, <Line: +				<optional>true</optional>
+>, <Line: +			</dependency>
+>]
+[]

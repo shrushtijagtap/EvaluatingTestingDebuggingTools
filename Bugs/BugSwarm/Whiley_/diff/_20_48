@@ -1,0 +1,5 @@
+[<Line: +../../tests/invalid/ListGenerator_Invalid_2.whiley:2: negative length possible
+>, <Line: +    return [0; n]
+>, <Line: +           ^^^^^^
+>]
+[]

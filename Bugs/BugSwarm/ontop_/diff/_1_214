@@ -1,0 +1,84 @@
+[<Line: +import it.unibz.krdb.obda.owlrefplatform.core.dagjgrapht.Equivalences;
+>, <Line: +    private Map<Predicate, Datatype> getDataTypeFromOntology(TBoxReasoner reasoner) {
+>, <Line: +    	final Map<Predicate, Datatype> dataTypesMap = new HashMap<>();
+>, <Line: +        // Traverse the graph searching for dataProperty
+>, <Line: +		for (Equivalences<DataRangeExpression> nodes : reasoner.getDataRangeDAG()) {
+>, <Line: +			DataRangeExpression node = nodes.getRepresentative();
+>, <Line: +			for (Equivalences<DataRangeExpression> descendants : reasoner.getDataRangeDAG().getSub(nodes)) {
+>, <Line: +				DataRangeExpression descendant = descendants.getRepresentative();
+>, <Line: +				if (descendant != node)
+>, <Line: +					onDataRangeInclusion(dataTypesMap, descendant, node);				
+>, <Line: +			}
+>, <Line: +			for (DataRangeExpression equivalent : nodes) {
+>, <Line: +				if (equivalent != node) {
+>, <Line: +					onDataRangeInclusion(dataTypesMap, node, equivalent);
+>, <Line: +					onDataRangeInclusion(dataTypesMap, equivalent, node);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}	
+>, <Line: +    private static void onDataRangeInclusion(Map<Predicate, Datatype> dataTypesMap, DataRangeExpression sub, DataRangeExpression sup) {
+>, <Line: +        //if sup is a datatype property  we store it in the map
+>, <Line: +        //it means that sub is of datatype sup
+>, <Line: +    	if (sup instanceof Datatype) {
+>, <Line: +    		Datatype supDataType = (Datatype)sup;
+>, <Line: +    		Predicate key;
+>, <Line: +    		if (sub instanceof Datatype) {
+>, <Line: +    			// datatype inclusion
+>, <Line: +    			key = ((Datatype)sub).getPredicate();
+>, <Line: +    		}
+>, <Line: +    		else if (sub instanceof DataPropertyRangeExpression) {
+>, <Line: +    			// range 
+>, <Line: +    			key = ((DataPropertyRangeExpression)sub).getProperty().getPredicate();
+>, <Line: +    		}
+>, <Line: +    		else
+>, <Line: +    			return;
+>, <Line: +			if (dataTypesMap.containsKey(key))
+>, <Line: +                throw new PredicateRedefinitionException("Predicate " + key + " with " + dataTypesMap.get(key) + " is redefined as " + supDataType + " in the ontology");
+>, <Line: +			dataTypesMap.put(key, supDataType);
+>, <Line: +    	}
+>, <Line: +    }
+>, <Line: +    public void insertDataTyping(List<CQIE> mappingRules, TBoxReasoner reasoner, VocabularyValidator qvv) throws OBDAException {
+>]
+[<Line: -import it.unibz.krdb.obda.owlrefplatform.core.tboxprocessing.TBoxTraversal;
+>, <Line: -import it.unibz.krdb.obda.owlrefplatform.core.tboxprocessing.TBoxTraverseListener;
+>, <Line: -    private Map<Predicate, Datatype> getDataTypeFromOntology(TBoxReasoner reasoner){
+>, <Line: -    	final Map<Predicate, Datatype> dataTypesMap = new HashMap<Predicate, Datatype>();
+>, <Line: -        /*
+>, <Line: -        Traverse the graph searching for dataProperty
+>, <Line: -         */
+>, <Line: -        TBoxTraversal.traverse(reasoner, new TBoxTraverseListener() {
+>, <Line: -            @Override
+>, <Line: -            public void onInclusion(ObjectPropertyExpression sub, ObjectPropertyExpression sup) {
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void onInclusion(DataPropertyExpression sub, DataPropertyExpression sup) {
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void onInclusion(ClassExpression sub, ClassExpression sup) {
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void onInclusion(DataRangeExpression sub, DataRangeExpression sup) {
+>, <Line: -                //if sup is a datatype property  we store it in the map
+>, <Line: -                //it means that sub is of datatype sup
+>, <Line: -            	if (sup instanceof Datatype) {
+>, <Line: -            		Datatype supDataType = (Datatype)sup;
+>, <Line: -            		Predicate key;
+>, <Line: -            		if (sub instanceof Datatype) {
+>, <Line: -            			// datatype inclusion
+>, <Line: -            			key = ((Datatype)sub).getPredicate();
+>, <Line: -            		}
+>, <Line: -            		else if (sub instanceof DataPropertyRangeExpression) {
+>, <Line: -            			// range 
+>, <Line: -            			key = ((DataPropertyRangeExpression)sub).getProperty().getPredicate();
+>, <Line: -            		}
+>, <Line: -            		else
+>, <Line: -            			return;
+>, <Line: -        			if (dataTypesMap.containsKey(key))
+>, <Line: -                        throw new PredicateRedefinitionException("Predicate " + key + " with " + dataTypesMap.get(key) + " is redefined as " + supDataType + " in the ontology");
+>, <Line: -        			dataTypesMap.put(key, supDataType);
+>, <Line: -            	}
+>, <Line: -            }
+>, <Line: -        });
+>, <Line: -    public void insertDataTyping(List<CQIE> mappingRules, TBoxReasoner reasoner) throws OBDAException {
+>, <Line: -		VocabularyValidator qvv = new VocabularyValidator(reasoner);
+>]

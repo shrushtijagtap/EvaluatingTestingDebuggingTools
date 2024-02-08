@@ -1,0 +1,26 @@
+[<Line: +package org.mp4parser.boxes.iso23001.part7;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.CastUtils;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import org.mp4parser.tools.UUIDConverter;
+>, <Line: +    List<UUID> keyIds = new ArrayList<UUID>();
+>, <Line: +    public ProtectionSystemSpecificHeaderBox() {
+>, <Line: +        super(TYPE);
+>, <Line: +    }
+>, <Line: +            int count = CastUtils.l2i(IsoTypeReader.readUInt32(content));
+>]
+[<Line: -package com.mp4parser.iso23001.part7;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.piff.UuidBasedProtectionSystemSpecificHeaderBox;
+>, <Line: -import com.googlecode.mp4parser.util.UUIDConverter;
+>, <Line: -import java.util.LinkedList;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: -    List<UUID> keyIds = new ArrayList<UUID>();
+>, <Line: -    public ProtectionSystemSpecificHeaderBox() {
+>, <Line: -        super(TYPE);
+>, <Line: -    }
+>, <Line: -            int count = l2i(IsoTypeReader.readUInt32(content));
+>]

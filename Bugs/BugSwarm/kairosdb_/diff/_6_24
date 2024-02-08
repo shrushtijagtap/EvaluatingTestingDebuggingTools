@@ -1,0 +1,74 @@
+[<Line: +import com.datastax.driver.core.*;
+>, <Line: +import java.util.Date;
+>, <Line: +	private final CassandraDatastore.PreparedStatements m_preparedStatements;
+>, <Line: +	private final BatchStats m_batchStats;
+>, <Line: +	private final ConsistencyLevel m_consistencyLevel;
+>, <Line: +	private final long m_now;
+>, <Line: +			int defaultTtl, ConsistencyLevel consistencyLevel, DataCache<DataPointsRowKey>
+>, <Line: +			Session session, CassandraDatastore.PreparedStatements preparedStatements,
+>, <Line: +			boolean fullBatch, BatchStats batchStats)
+>, <Line: +		super(events, callBack, defaultTtl, rowKeyCache, metricNameCache, eventBus, fullBatch);
+>, <Line: +		m_consistencyLevel = consistencyLevel;
+>, <Line: +		m_preparedStatements = preparedStatements;
+>, <Line: +		m_batchStats = batchStats;
+>, <Line: +		m_now = System.currentTimeMillis();
+>, <Line: +		ByteBuffer bb = ByteBuffer.allocate(8);
+>, <Line: +		bb.putLong(0, rowKey.getTimestamp());
+>, <Line: +		BoundStatement bs = m_preparedStatements.psRowKeyTimeInsert.bind()
+>, <Line: +				.setString(0, metricName)
+>, <Line: +				.setTimestamp(1, new Date(rowKey.getTimestamp()))
+>, <Line: +				//.setBytesUnsafe(1, bb) //Setting timestamp in a more optimal way
+>, <Line: +				.setInt(2, rowKeyTtl)
+>, <Line: +				.setLong(3, m_now);
+>, <Line: +		bs.setConsistencyLevel(m_consistencyLevel);
+>, <Line: +		rowKeyBatch.add(bs);
+>, <Line: +		bs = m_preparedStatements.psRowKeyInsert.bind()
+>, <Line: +				.setString(0, metricName)
+>, <Line: +				.setTimestamp(1, new Date(rowKey.getTimestamp()))
+>, <Line: +				//.setBytesUnsafe(1, bb)  //Setting timestamp in a more optimal way
+>, <Line: +				.setString(2, rowKey.getDataType())
+>, <Line: +				.setMap(3, rowKey.getTags())
+>, <Line: +				.setInt(4, rowKeyTtl);
+>, <Line: +				//.setLong(5, m_now);
+>, <Line: +		bs.setConsistencyLevel(m_consistencyLevel);
+>, <Line: +		BoundStatement bs = new BoundStatement(m_preparedStatements.psStringIndexInsert);
+>, <Line: +		bs.setBytesUnsafe(1, ByteBuffer.wrap(metricName.getBytes(UTF_8)));
+>, <Line: +		bs.setConsistencyLevel(m_consistencyLevel);
+>, <Line: +		BoundStatement boundStatement = new BoundStatement(m_preparedStatements.psDataPointsInsert);
+>, <Line: +		boundStatement.setLong(4, m_now);
+>, <Line: +		boundStatement.setConsistencyLevel(m_consistencyLevel);
+>, <Line: +		{
+>, <Line: +			m_batchStats.addNameBatch(metricNamesBatch.size());
+>, <Line: +		}
+>, <Line: +		{
+>, <Line: +			rowKeyBatch.enableTracing();
+>, <Line: +			ResultSet resultSet = m_session.execute(rowKeyBatch);
+>, <Line: +			m_batchStats.addRowKeyBatch(rowKeyBatch.size());
+>, <Line: +		}
+>, <Line: +		{
+>, <Line: +			m_batchStats.addDatapointsBatch(dataPointBatch.size());
+>, <Line: +		}
+>]
+[<Line: -import com.datastax.driver.core.BatchStatement;
+>, <Line: -import com.datastax.driver.core.BoundStatement;
+>, <Line: -import com.datastax.driver.core.PreparedStatement;
+>, <Line: -import com.datastax.driver.core.Session;
+>, <Line: -	private final PreparedStatement m_psInsertData;
+>, <Line: -	private final PreparedStatement m_psInsertRowKey;
+>, <Line: -	private final PreparedStatement m_psInsertString;
+>, <Line: -			int defaultTtl, DataCache<DataPointsRowKey>
+>, <Line: -			Session session, PreparedStatement psInsertData,
+>, <Line: -			PreparedStatement psInsertRowKey, PreparedStatement psInsertString)
+>, <Line: -		super(events, callBack, defaultTtl, rowKeyCache, metricNameCache, eventBus);
+>, <Line: -		m_psInsertData = psInsertData;
+>, <Line: -		m_psInsertRowKey = psInsertRowKey;
+>, <Line: -		m_psInsertString = psInsertString;
+>, <Line: -		BoundStatement bs = new BoundStatement(m_psInsertRowKey);
+>, <Line: -		bs.setBytesUnsafe(0, ByteBuffer.wrap(metricName.getBytes(UTF_8)));
+>, <Line: -		bs.setBytesUnsafe(1, DATA_POINTS_ROW_KEY_SERIALIZER.toByteBuffer(rowKey));
+>, <Line: -		bs.setInt(2, rowKeyTtl);
+>, <Line: -		BoundStatement bs = new BoundStatement(m_psInsertString);
+>, <Line: -		bs.setString(1, metricName);
+>, <Line: -		BoundStatement boundStatement = new BoundStatement(m_psInsertData);
+>, <Line: -			m_session.executeAsync(rowKeyBatch);
+>]

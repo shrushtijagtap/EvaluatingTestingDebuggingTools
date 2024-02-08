@@ -1,0 +1,26 @@
+[<Line: +package org.mp4parser.boxes.microsoft.contentprotection;
+>, <Line: +import org.mp4parser.boxes.microsoft.ProtectionSpecificHeader;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +    private long length;
+>, <Line: +    private List<PlayReadyRecord> records;
+>, <Line: +    public void setRecords(List<PlayReadyRecord> records) {
+>, <Line: +        this.records = records;
+>, <Line: +    }
+>, <Line: +            public void setHeader(String header) {
+>, <Line: +                this.header = header;
+>, <Line: +            }
+>]
+[<Line: -package com.googlecode.mp4parser.contentprotection;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.boxes.piff.ProtectionSpecificHeader;
+>, <Line: -    private long length;
+>, <Line: -    private List<PlayReadyRecord> records;
+>, <Line: -    public void setRecords(List<PlayReadyRecord> records) {
+>, <Line: -        this.records = records;
+>, <Line: -    }
+>, <Line: -            public void setHeader(String header) {
+>, <Line: -                this.header = header;
+>, <Line: -            }
+>]

@@ -1,0 +1,10 @@
+[<Line: +    HashMap<Algorithm,AlgorithmExecutor> engineByAlgorithm=new HashMap<Algorithm,AlgorithmExecutor>();
+>, <Line: +    public AlgorithmExecutor getExecutor(Algorithm algo) {
+>, <Line: +    public void addAlgorithm(Algorithm algorithm, AlgorithmExecutor engine) {
+>, <Line: +    public AlgorithmExecutor remove(Algorithm algo) {
+>]
+[<Line: -    HashMap<Algorithm,AlgorithmEngine> engineByAlgorithm=new HashMap<Algorithm,AlgorithmEngine>();
+>, <Line: -    public AlgorithmEngine getEngine(Algorithm algo) {
+>, <Line: -    public void addAlgorithm(Algorithm algorithm, AlgorithmEngine engine) {
+>, <Line: -    public AlgorithmEngine remove(Algorithm algo) {
+>]

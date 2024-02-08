@@ -1,0 +1,4 @@
+[<Line: +type c4nat is (int x) where x < 10
+>]
+[<Line: -type c4nat is int x where x < 10
+>]

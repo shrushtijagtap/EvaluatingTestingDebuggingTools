@@ -1,0 +1,19 @@
+[<Line: +<?xml version="1.0" encoding="UTF-8"?>
+>, <Line: +<projectDescription>
+>, <Line: +	<name>HubTurbo</name>
+>, <Line: +	<comment></comment>
+>, <Line: +	<projects>
+>, <Line: +	</projects>
+>, <Line: +	<buildSpec>
+>, <Line: +		<buildCommand>
+>, <Line: +			<name>org.eclipse.jdt.core.javabuilder</name>
+>, <Line: +			<arguments>
+>, <Line: +			</arguments>
+>, <Line: +		</buildCommand>
+>, <Line: +	</buildSpec>
+>, <Line: +	<natures>
+>, <Line: +		<nature>org.eclipse.jdt.core.javanature</nature>
+>, <Line: +	</natures>
+>, <Line: +</projectDescription>
+>]
+[]

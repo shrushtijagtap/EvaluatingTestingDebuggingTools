@@ -1,0 +1,10 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part15;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +        if (interlaced_source_flag) {
+>]
+[<Line: -package com.mp4parser.iso14496.part15;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -        if ( interlaced_source_flag) {
+>]

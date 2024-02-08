@@ -1,0 +1,8 @@
+[<Line: +                    Collections.singletonMap(InconsistentGenerics.class.getName(), classWriter.toByteArray()),
+>, <Line: +                    ByteArrayClassLoader.PersistenceHandler.MANIFEST)
+>]
+[<Line: -import net.bytebuddy.dynamic.loading.PackageDefinitionStrategy;
+>, <Line: -import net.bytebuddy.dynamic.scaffold.MethodGraphCompilerDefaultTest;
+>, <Line: -import org.junit.Ignore;
+>, <Line: -                    Collections.singletonMap(InconsistentGenerics.class.getName(), classWriter.toByteArray()))
+>]

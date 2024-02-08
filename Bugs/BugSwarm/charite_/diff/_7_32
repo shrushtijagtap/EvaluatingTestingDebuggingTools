@@ -1,0 +1,8 @@
+[<Line: + * Builder for {@link GenotypeCalls}.
+>, <Line: +	 * Set "is X chromosomal" flag of next build GenotypeCalls.
+>, <Line: +	 * @return new {@link GenotypeCalls}
+>]
+[<Line: - * Builder for {@link GenotypeList}.
+>, <Line: -	 * Set "is X chromosomal" flag of next build GenotypeList.
+>, <Line: -	 * @return new {@link GenotypeList}
+>]

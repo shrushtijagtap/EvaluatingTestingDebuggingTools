@@ -1,0 +1,58 @@
+[<Line: +    /**
+>, <Line: +     * Returns a {@link FixedTapSendPort} that will always forward to a single {@link SendPort}.
+>, <Line: +     *
+>, <Line: +     * @param target        The tapped {@link SendPort}.
+>, <Line: +     * @param strandFactory The {@link StrandFactory} that will build send strands when the {@link SendPort} would block.
+>, <Line: +     * @param forwardTo     The additional {@link SendPort} that will receive messages.
+>, <Line: +     * @return a {@link FixedTapSendPort} that will always forward to a single {@code forwardTo}.
+>, <Line: +     */
+>, <Line: +    public static <M> SendPort<M> fixedSendTap(final SendPort<M> target, final SendPort<? super M> forwardTo, final StrandFactory strandFactory) {
+>, <Line: +        return new FixedTapSendPort<>(target, forwardTo, strandFactory);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Returns a {@link FixedTapSendPort} that will always forward to a single {@link SendPort}. {@link DefaultFiberFactory} will build
+>, <Line: +     * send strands when the {@link SendPort} would block.
+>, <Line: +     *
+>, <Line: +     * @param target        The tapped {@link SendPort}.
+>, <Line: +     * @param forwardTo     The additional {@link SendPort} that will receive messages.
+>, <Line: +     * @return a {@link FixedTapSendPort} that will always forward to a single {@code forwardTo}.
+>, <Line: +     */
+>, <Line: +    public static <M> SendPort<M> fixedSendTap(final SendPort<M> target, final SendPort<? super M> forwardTo) {
+>, <Line: +        return new FixedTapSendPort<>(target, forwardTo);
+>, <Line: +    }
+>, <Line: +    public static <M> ReceivePort<M> fixedReceiveTap(final ReceivePort<M> target, final SendPort<? super M> forwardTo, final StrandFactory strandFactory) {
+>, <Line: +        return new FixedTapReceivePort<>(target, forwardTo, strandFactory);
+>, <Line: +    public static <M> ReceivePort<M> fixedReceiveTap(final ReceivePort<M> target, final SendPort<? super M> forwardTo) {
+>, <Line: +        return new ReceivePortGroup<>(channels);
+>, <Line: +        return new ReceivePortGroup<>(channels);
+>, <Line: +        return new FilteringReceivePort<>(channel, pred);
+>, <Line: +        return new MappingReceivePort<>(channel, f);
+>, <Line: +        return new ErrorMappingReceivePort<>(channel, f);
+>, <Line: +        return new FlatMappingReceivePort<>(channel, f);
+>, <Line: +        return new ZippingReceivePort<>(f, cs);
+>, <Line: +        return new TransformingReceivePort<>(channel);
+>, <Line: +        return new FilteringSendPort<>(channel, pred);
+>, <Line: +        return new MappingSendPort<>(channel, f);
+>, <Line: +     * <p/>
+>, <Line: +     * <p/>
+>, <Line: +     * <p/>
+>, <Line: +        return new PipeChannel<>(pipe, channel);
+>]
+[<Line: -    public static <M> ReceivePort<M> fixedTap(final ReceivePort<M> target, final StrandFactory strandFactory, final SendPort<? super M> forwardTo) {
+>, <Line: -        return new FixedTapReceivePort<>(target, strandFactory, forwardTo);
+>, <Line: -    public static <M> ReceivePort<M> fixedTap(final ReceivePort<M> target, final SendPort<? super M> forwardTo) {
+>, <Line: -        return new ReceivePortGroup<M>(channels);
+>, <Line: -        return new ReceivePortGroup<M>(channels);
+>, <Line: -        return new FilteringReceivePort<M>(channel, pred);
+>, <Line: -        return new MappingReceivePort<S, T>(channel, f);
+>, <Line: -        return new ErrorMappingReceivePort<T>(channel, f);
+>, <Line: -        return new FlatMappingReceivePort<S, T>(channel, f);
+>, <Line: -        return new ZippingReceivePort<M>(f, cs);
+>, <Line: -        return new TransformingReceivePort<M>(channel);
+>, <Line: -        return new FilteringSendPort<M>(channel, pred);
+>, <Line: -        return new MappingSendPort<S, T>(channel, f);
+>, <Line: -     * <p>
+>, <Line: -     * <p>
+>, <Line: -     * <p>
+>, <Line: -        return new PipeChannel<S>(pipe, channel);
+>]

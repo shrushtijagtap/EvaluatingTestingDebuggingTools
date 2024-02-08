@@ -1,0 +1,233 @@
+[<Line: +		'angular',
+>, <Line: +		'app',
+>, <Line: +		'lodash',
+>, <Line: +		'jquery',
+>, <Line: +	],
+>, <Line: +	function (angular, app, _, $) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('graphiteSegment', function ($compile, $sce) {
+>, <Line: +				var inputTemplate = '<input type="text" data-provide="typeahead" ' +
+>, <Line: +					' class="grafana-target-text-input input-medium"' +
+>, <Line: +					' spellcheck="false" style="display:none"></input>';
+>, <Line: +				var buttonTemplate = '<a class="grafana-target-segment" tabindex="1" focus-me="segment.focus" ng-bind-html="segment.html"></a>';
+>, <Line: +				return {
+>, <Line: +					link: function ($scope, elem) {
+>, <Line: +						var $input = $(inputTemplate);
+>, <Line: +						var $button = $(buttonTemplate);
+>, <Line: +						var segment = $scope.segment;
+>, <Line: +						var options = null;
+>, <Line: +						var cancelBlur = null;
+>, <Line: +						$input.appendTo(elem);
+>, <Line: +						$button.appendTo(elem);
+>, <Line: +						$scope.updateVariableValue = function (value) {
+>, <Line: +							if (value === '' || segment.value === value) {
+>, <Line: +								return;
+>, <Line: +							}
+>, <Line: +							$scope.$apply(function () {
+>, <Line: +								var selected = _.findWhere($scope.altSegments, {value: value});
+>, <Line: +								if (selected) {
+>, <Line: +									segment.value = selected.value;
+>, <Line: +									segment.html = selected.html;
+>, <Line: +									segment.expandable = selected.expandable;
+>, <Line: +								}
+>, <Line: +								else {
+>, <Line: +									segment.value = value;
+>, <Line: +									segment.html = $sce.trustAsHtml(value);
+>, <Line: +									segment.expandable = true;
+>, <Line: +								}
+>, <Line: +								$scope.segmentValueChanged(segment, $scope.$index);
+>, <Line: +							});
+>, <Line: +						};
+>, <Line: +						$scope.switchToLink = function (now) {
+>, <Line: +							if (now === true || cancelBlur) {
+>, <Line: +								clearTimeout(cancelBlur);
+>, <Line: +								cancelBlur = null;
+>, <Line: +								$input.hide();
+>, <Line: +								$button.show();
+>, <Line: +								$scope.updateVariableValue($input.val());
+>, <Line: +							}
+>, <Line: +							else {
+>, <Line: +								// need to have long delay because the blur
+>, <Line: +								// happens long before the click event on the typeahead options
+>, <Line: +								cancelBlur = setTimeout($scope.switchToLink, 350);
+>, <Line: +							}
+>, <Line: +						};
+>, <Line: +						$scope.source = function (query, callback) {
+>, <Line: +							if (options) {
+>, <Line: +								return options;
+>, <Line: +							}
+>, <Line: +							$scope.$apply(function () {
+>, <Line: +								$scope.getAltSegments($scope.$index).then(function () {
+>, <Line: +									options = _.map($scope.altSegments, function (alt) {
+>, <Line: +										return alt.value;
+>, <Line: +									});
+>, <Line: +									// add custom values
+>, <Line: +									if (segment.value !== 'select metric' && _.indexOf(options, segment.value) === -1) {
+>, <Line: +										options.unshift(segment.value);
+>, <Line: +									}
+>, <Line: +									callback(options);
+>, <Line: +								});
+>, <Line: +							});
+>, <Line: +						};
+>, <Line: +						$scope.updater = function (value) {
+>, <Line: +							if (value === segment.value) {
+>, <Line: +								clearTimeout(cancelBlur);
+>, <Line: +								$input.focus();
+>, <Line: +								return value;
+>, <Line: +							}
+>, <Line: +							$input.val(value);
+>, <Line: +							$scope.switchToLink(true);
+>, <Line: +							return value;
+>, <Line: +						};
+>, <Line: +						$input.attr('data-provide', 'typeahead');
+>, <Line: +						$input.typeahead({
+>, <Line: +							source: $scope.source,
+>, <Line: +							minLength: 0,
+>, <Line: +							items: 10000,
+>, <Line: +							updater: $scope.updater
+>, <Line: +						});
+>, <Line: +						var typeahead = $input.data('typeahead');
+>, <Line: +						typeahead.lookup = function () {
+>, <Line: +							this.query = this.$element.val() || '';
+>, <Line: +							var items = this.source(this.query, $.proxy(this.process, this));
+>, <Line: +							return items ? this.process(items) : items;
+>, <Line: +						};
+>, <Line: +						$button.keydown(function (evt) {
+>, <Line: +							// trigger typeahead on down arrow or enter key
+>, <Line: +							if (evt.keyCode === 40 || evt.keyCode === 13) {
+>, <Line: +								$button.click();
+>, <Line: +							}
+>, <Line: +						});
+>, <Line: +						$button.click(function () {
+>, <Line: +							options = null;
+>, <Line: +							$input.css('width', ($button.width() + 16) + 'px');
+>, <Line: +							$button.hide();
+>, <Line: +							$input.show();
+>, <Line: +							$input.focus();
+>, <Line: +							var typeahead = $input.data('typeahead');
+>, <Line: +							if (typeahead) {
+>, <Line: +								$input.val('');
+>, <Line: +								typeahead.lookup();
+>, <Line: +							}
+>, <Line: +						});
+>, <Line: +						$input.blur($scope.switchToLink);
+>, <Line: +						$compile(elem.contents())($scope);
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'app',
+>, <Line: -  'lodash',
+>, <Line: -  'jquery',
+>, <Line: -],
+>, <Line: -function (angular, app, _, $) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('graphiteSegment', function($compile, $sce) {
+>, <Line: -      var inputTemplate = '<input type="text" data-provide="typeahead" ' +
+>, <Line: -                            ' class="grafana-target-text-input input-medium"' +
+>, <Line: -                            ' spellcheck="false" style="display:none"></input>';
+>, <Line: -      var buttonTemplate = '<a class="grafana-target-segment" tabindex="1" focus-me="segment.focus" ng-bind-html="segment.html"></a>';
+>, <Line: -      return {
+>, <Line: -        link: function($scope, elem) {
+>, <Line: -          var $input = $(inputTemplate);
+>, <Line: -          var $button = $(buttonTemplate);
+>, <Line: -          var segment = $scope.segment;
+>, <Line: -          var options = null;
+>, <Line: -          var cancelBlur = null;
+>, <Line: -          $input.appendTo(elem);
+>, <Line: -          $button.appendTo(elem);
+>, <Line: -          $scope.updateVariableValue = function(value) {
+>, <Line: -            if (value === '' || segment.value === value) {
+>, <Line: -              return;
+>, <Line: -            }
+>, <Line: -            $scope.$apply(function() {
+>, <Line: -              var selected = _.findWhere($scope.altSegments, { value: value });
+>, <Line: -              if (selected) {
+>, <Line: -                segment.value = selected.value;
+>, <Line: -                segment.html = selected.html;
+>, <Line: -                segment.expandable = selected.expandable;
+>, <Line: -              }
+>, <Line: -              else {
+>, <Line: -                segment.value = value;
+>, <Line: -                segment.html = $sce.trustAsHtml(value);
+>, <Line: -                segment.expandable = true;
+>, <Line: -              }
+>, <Line: -              $scope.segmentValueChanged(segment, $scope.$index);
+>, <Line: -            });
+>, <Line: -          };
+>, <Line: -          $scope.switchToLink = function(now) {
+>, <Line: -            if (now === true || cancelBlur) {
+>, <Line: -              clearTimeout(cancelBlur);
+>, <Line: -              cancelBlur = null;
+>, <Line: -              $input.hide();
+>, <Line: -              $button.show();
+>, <Line: -              $scope.updateVariableValue($input.val());
+>, <Line: -            }
+>, <Line: -            else {
+>, <Line: -              // need to have long delay because the blur
+>, <Line: -              // happens long before the click event on the typeahead options
+>, <Line: -              cancelBlur = setTimeout($scope.switchToLink, 350);
+>, <Line: -            }
+>, <Line: -          };
+>, <Line: -          $scope.source = function(query, callback) {
+>, <Line: -            if (options) { return options; }
+>, <Line: -            $scope.$apply(function() {
+>, <Line: -              $scope.getAltSegments($scope.$index).then(function() {
+>, <Line: -                options = _.map($scope.altSegments, function(alt) { return alt.value; });
+>, <Line: -                // add custom values
+>, <Line: -                if (segment.value !== 'select metric' &&  _.indexOf(options, segment.value) === -1) {
+>, <Line: -                  options.unshift(segment.value);
+>, <Line: -                }
+>, <Line: -                callback(options);
+>, <Line: -              });
+>, <Line: -            });
+>, <Line: -          };
+>, <Line: -          $scope.updater = function(value) {
+>, <Line: -            if (value === segment.value) {
+>, <Line: -              clearTimeout(cancelBlur);
+>, <Line: -              $input.focus();
+>, <Line: -              return value;
+>, <Line: -            }
+>, <Line: -            $input.val(value);
+>, <Line: -            $scope.switchToLink(true);
+>, <Line: -            return value;
+>, <Line: -          };
+>, <Line: -          $input.attr('data-provide', 'typeahead');
+>, <Line: -          $input.typeahead({ source: $scope.source, minLength: 0, items: 10000, updater: $scope.updater });
+>, <Line: -          var typeahead = $input.data('typeahead');
+>, <Line: -          typeahead.lookup = function () {
+>, <Line: -            this.query = this.$element.val() || '';
+>, <Line: -            var items = this.source(this.query, $.proxy(this.process, this));
+>, <Line: -            return items ? this.process(items) : items;
+>, <Line: -          };
+>, <Line: -          $button.keydown(function(evt) {
+>, <Line: -            // trigger typeahead on down arrow or enter key
+>, <Line: -            if (evt.keyCode === 40 || evt.keyCode === 13) {
+>, <Line: -              $button.click();
+>, <Line: -            }
+>, <Line: -          });
+>, <Line: -          $button.click(function() {
+>, <Line: -            options = null;
+>, <Line: -            $input.css('width', ($button.width() + 16) + 'px');
+>, <Line: -            $button.hide();
+>, <Line: -            $input.show();
+>, <Line: -            $input.focus();
+>, <Line: -            var typeahead = $input.data('typeahead');
+>, <Line: -            if (typeahead) {
+>, <Line: -              $input.val('');
+>, <Line: -              typeahead.lookup();
+>, <Line: -            }
+>, <Line: -          });
+>, <Line: -          $input.blur($scope.switchToLink);
+>, <Line: -          $compile(elem.contents())($scope);
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

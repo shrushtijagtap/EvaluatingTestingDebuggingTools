@@ -1,0 +1,16 @@
+[<Line: +    public void issueCommand(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, response.build(), SchemaRest.IssueCommandResponse.WRITE);
+>, <Line: +    public void updateCommandHistory(RestRequest req) throws HttpException {
+>, <Line: +        } catch (NoPermissionException e) {
+>, <Line: +        sendOK(req);
+>]
+[<Line: -import io.netty.channel.ChannelFuture;
+>, <Line: -    public ChannelFuture issueCommand(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, response.build(), SchemaRest.IssueCommandResponse.WRITE);
+>, <Line: -    public ChannelFuture updateCommandHistory(RestRequest req) throws HttpException {
+>, <Line: -        }
+>, <Line: -        catch (NoPermissionException e) {
+>, <Line: -        } catch (YamcsException e) { // could be anything, consider as internal server error
+>, <Line: -            throw new InternalServerErrorException(e);
+>, <Line: -        return sendOK(req);
+>]

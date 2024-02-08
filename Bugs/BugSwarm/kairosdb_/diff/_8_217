@@ -1,0 +1,19 @@
+[<Line: +	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+>, <Line: +		×
+>, <Line: +	</button>
+>, <Line: +	<h3>{{share.title}}
+>, <Line: +		<small>shareable link</small>
+>, <Line: +	</h3>
+>, <Line: +	<label>Share this dashboard with this URL</label>
+>, <Line: +	<input ng-model='share.url' type="text" style="width:90%"
+>, <Line: +		   onclick="this.select()" onfocus="this.select()">
+>, <Line: +	<button type="button" class="btn btn-success"
+>, <Line: +			ng-click="dismiss();$broadcast('render')">Close
+>, <Line: +	</button>
+>]
+[<Line: -  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+>, <Line: -  <h3>{{share.title}} <small>shareable link</small></h3>
+>, <Line: -  <label>Share this dashboard with this URL</label>
+>, <Line: -  <input ng-model='share.url' type="text" style="width:90%" onclick="this.select()" onfocus="this.select()">
+>, <Line: -  <button type="button" class="btn btn-success" ng-click="dismiss();$broadcast('render')">Close</button>
+>]

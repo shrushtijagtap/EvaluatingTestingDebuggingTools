@@ -1,0 +1,8 @@
+[<Line: +        Foo instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +                .getDeclaredConstructor()
+>, <Line: +                .newInstance()
+>, <Line: +                .foo();
+>]
+[<Line: -        Foo instance = loaded.getLoaded().newInstance();
+>, <Line: -                .newInstance();
+>]

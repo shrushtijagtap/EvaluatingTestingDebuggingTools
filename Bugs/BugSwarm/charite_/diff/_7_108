@@ -1,0 +1,30 @@
+[<Line: +package de.charite.compbio.jannovar.mendel.filter;
+>, <Line: +import java.util.function.Consumer;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: +/**
+>, <Line: + * Call a function for each variant put into the pipeline step
+>, <Line: + *
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class ConsumerProcessor implements VariantContextProcessor {
+>, <Line: +	/** The logger object to use */
+>, <Line: +	private static final Logger LOGGER = LoggerFactory.getLogger(ConsumerProcessor.class);
+>, <Line: +	/** Write out variant into this consumer */
+>, <Line: +	private final Consumer<VariantContext> sink;
+>, <Line: +	public ConsumerProcessor(Consumer<VariantContext> sink) {
+>, <Line: +		this.sink = sink;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void put(VariantContext vc) throws VariantContextFilterException {
+>, <Line: +		LOGGER.trace("Putting VariantContext into consumer " + vc.toString());
+>, <Line: +		sink.accept(vc);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void close() {
+>, <Line: +		// Nothing to do here
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

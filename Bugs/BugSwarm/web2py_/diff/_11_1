@@ -1,0 +1,4 @@
+[<Line: +        v = value and str(value)[:self.max_length]
+>]
+[<Line: -        v = v and str(v)[:self.max_length]
+>]

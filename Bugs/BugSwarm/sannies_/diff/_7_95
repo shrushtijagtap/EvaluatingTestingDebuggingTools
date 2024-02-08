@@ -1,0 +1,31 @@
+[]
+[<Line: -package com.mp4parser.streaming;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.nio.ByteBuffer;
+>, <Line: -public abstract class WriteOnlyBox implements Box {
+>, <Line: -    private final String type;
+>, <Line: -    private Container parent;
+>, <Line: -    public Container getParent() {
+>, <Line: -        return parent;
+>, <Line: -    }
+>, <Line: -    public void setParent(Container parent) {
+>, <Line: -        this.parent = parent;
+>, <Line: -    }
+>, <Line: -    public long getOffset() {
+>, <Line: -        throw new RuntimeException("It's a´write only box");
+>, <Line: -    }
+>, <Line: -    public void parse(DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>, <Line: -        throw new RuntimeException("It's a´write only box");
+>, <Line: -    }
+>, <Line: -    public WriteOnlyBox(String type) {
+>, <Line: -        this.type = type;
+>, <Line: -    }
+>, <Line: -    public String getType() {
+>, <Line: -        return type;
+>, <Line: -    }
+>, <Line: -}
+>]

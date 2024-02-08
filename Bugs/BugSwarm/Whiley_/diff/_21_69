@@ -1,0 +1,7 @@
+[<Line: +    while i < |ls| 
+>, <Line: +        where i >= 0
+>, <Line: +        where no { j in 0..|r| | r[j] < 0 }:
+>, <Line: +        //
+>]
+[<Line: -    while i < |ls| where (i >= 0) && no { x in r | x < 0 }:
+>]

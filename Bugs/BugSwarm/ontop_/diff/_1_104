@@ -1,0 +1,82 @@
+[]
+[<Line: -package it.unibz.krdb.obda.quest.dag;
+>, <Line: -/*
+>, <Line: - * #%L
+>, <Line: - * ontop-quest-owlapi3
+>, <Line: - * %%
+>, <Line: - * Copyright (C) 2009 - 2014 Free University of Bozen-Bolzano
+>, <Line: - * %%
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: - * you may not use this file except in compliance with the License.
+>, <Line: - * You may obtain a copy of the License at
+>, <Line: - * 
+>, <Line: - *      http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - * 
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - * See the License for the specific language governing permissions and
+>, <Line: - * limitations under the License.
+>, <Line: - * #L%
+>, <Line: - */
+>, <Line: -import it.unibz.krdb.obda.ontology.Ontology;
+>, <Line: -import it.unibz.krdb.obda.owlapi3.OWLAPI3TranslatorUtility;
+>, <Line: -import it.unibz.krdb.obda.owlrefplatform.core.dagjgrapht.TBoxReasoner;
+>, <Line: -import it.unibz.krdb.obda.owlrefplatform.core.dagjgrapht.TBoxReasonerImpl;
+>, <Line: -import java.io.File;
+>, <Line: -import junit.framework.TestCase;
+>, <Line: -import org.semanticweb.owlapi.apibinding.OWLManager;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntologyManager;
+>, <Line: -public class R_TBoxReasonerImpl extends TestCase {
+>, <Line: -	/**
+>, <Line: -	 * R1 = R2^- = R3, S1 = S2^- = S3, R1 ISA S1
+>, <Line: -	 */
+>, <Line: -	private final String testIndexClasses = "src/test/resources/test/dag/tbox-reasoner-impl.owl";
+>, <Line: -	public void setUp() {
+>, <Line: -		// NO-OP
+>, <Line: -	}
+>, <Line: -	public void testIndexClasses() throws Exception {
+>, <Line: -		String testURI = "http://it.unibz.krdb/obda/ontologies/test.owl#";
+>, <Line: -		OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+>, <Line: -		OWLOntology owlonto = man.loadOntologyFromOntologyDocument(new File(testIndexClasses));
+>, <Line: -		Ontology onto = OWLAPI3TranslatorUtility.translate(owlonto);
+>, <Line: -		// generate DAG
+>, <Line: -		TBoxReasoner dag = new TBoxReasonerImpl(onto);
+>, <Line: -/*		
+>, <Line: -		SemanticIndexBuilder engine = new SemanticIndexBuilder(dag);
+>, <Line: -		List<Interval> nodeInterval = engine.getIntervals(ofac
+>, <Line: -				.createClass(testURI + "B1"));
+>, <Line: -		assertEquals(nodeInterval.size(), 1);
+>, <Line: -		Interval interval = nodeInterval.get(0);
+>, <Line: -		assertEquals(interval.getStart(), 2);
+>, <Line: -		assertEquals(interval.getEnd(), 2);
+>, <Line: -		nodeInterval = engine.getIntervals(ofac.createClass(testURI + "B2"));
+>, <Line: -		assertEquals(nodeInterval.size(), 1);
+>, <Line: -		interval = nodeInterval.get(0);
+>, <Line: -		assertEquals(interval.getStart(), 2);
+>, <Line: -		assertEquals(interval.getEnd(), 2);
+>, <Line: -		nodeInterval = engine.getIntervals(ofac.createClass(testURI + "B3"));
+>, <Line: -		assertEquals(nodeInterval.size(), 1);
+>, <Line: -		interval = nodeInterval.get(0);
+>, <Line: -		assertEquals(interval.getStart(), 2);
+>, <Line: -		assertEquals(interval.getEnd(), 2);
+>, <Line: -		nodeInterval = engine.getIntervals(ofac.createClass(testURI + "A1"));
+>, <Line: -		assertEquals(nodeInterval.size(), 1);
+>, <Line: -		interval = nodeInterval.get(0);
+>, <Line: -		assertEquals(interval.getStart(), 1);
+>, <Line: -		assertEquals(interval.getEnd(), 2);
+>, <Line: -		nodeInterval = engine.getIntervals(ofac.createClass(testURI + "A2"));
+>, <Line: -		assertEquals(nodeInterval.size(), 1);
+>, <Line: -		interval = nodeInterval.get(0);
+>, <Line: -		assertEquals(interval.getStart(), 1);
+>, <Line: -		assertEquals(interval.getEnd(), 2);
+>, <Line: -		nodeInterval = engine.getIntervals(ofac.createClass(testURI + "A3"));
+>, <Line: -		assertEquals(nodeInterval.size(), 1);
+>, <Line: -		interval = nodeInterval.get(0);
+>, <Line: -		assertEquals(interval.getStart(), 1);
+>, <Line: -		assertEquals(interval.getEnd(), 2);
+>, <Line: -*/		
+>, <Line: -	}
+>, <Line: -}
+>]

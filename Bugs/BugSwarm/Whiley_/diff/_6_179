@@ -1,0 +1,19 @@
+[<Line: +function count(int n) -> (int r)
+>, <Line: +requires n >= 0
+>, <Line: +ensures r == n || r == n+1:
+>, <Line: +    //
+>, <Line: +    int i = 0
+>, <Line: +    //
+>, <Line: +    while i < n where i >= 0 && i <= n + 1:
+>, <Line: +        if i == 3:
+>, <Line: +            i = i + 2
+>, <Line: +            continue
+>, <Line: +        i = i + 1
+>, <Line: +    //
+>, <Line: +    return i
+>, <Line: +public export method test():
+>, <Line: +    assume count(0) == 0
+>, <Line: +    assume count(1) == 1
+>, <Line: +    assume count(2) == 2        
+>]
+[]

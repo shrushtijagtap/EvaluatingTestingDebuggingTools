@@ -1,0 +1,15 @@
+[<Line: +    private final Cache<InetAddress, Boolean> throttle;
+>, <Line: +                .expireAfterWrite( throttleTime, TimeUnit.MILLISECONDS )
+>, <Line: +        boolean isThrottled = throttle.getIfPresent( address ) != null;
+>, <Line: +        throttle.put( address, true );
+>, <Line: +        return isThrottled;
+>]
+[<Line: -    private final int throttleTime;
+>, <Line: -    private final Cache<InetAddress, Long> throttle;
+>, <Line: -        this.throttleTime = throttleTime;
+>, <Line: -                .expireAfterAccess( throttleTime, TimeUnit.MILLISECONDS )
+>, <Line: -        Long value = throttle.getIfPresent( address );
+>, <Line: -        long currentTime = System.currentTimeMillis();
+>, <Line: -        throttle.put( address, currentTime );
+>, <Line: -        return value != null && currentTime - value < throttleTime;
+>]

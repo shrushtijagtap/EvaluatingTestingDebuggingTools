@@ -1,0 +1,155 @@
+[<Line: +public class SamplingTest
+>, <Line: +{
+>, <Line: +	@Test
+>, <Line: +	public void test_getUnitDuration_year_no_leap() throws Exception
+>, <Line: +	{
+>, <Line: +		Sampling sampling = new Sampling(1, TimeUnit.YEARS);
+>, <Line: +		DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: +		DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: +		assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(365 * 24 * 60 * 60 * 1000L));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getUnitDuration_year_over_leap() throws Exception
+>, <Line: +	{
+>, <Line: +		Sampling sampling = new Sampling(1, TimeUnit.YEARS);
+>, <Line: +		DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: +		DateTime dt = new DateTime(2012, 2, 18, 1, 2, 3, 4, timezone);
+>, <Line: +		assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(366 * 24 * 60 * 60 * 1000L));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getUnitDuration_month_january() throws Exception
+>, <Line: +	{
+>, <Line: +		Sampling sampling = new Sampling(1, TimeUnit.MONTHS);
+>, <Line: +		DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: +		DateTime dt = new DateTime(2014, 1, 18, 1, 2, 3, 4, timezone);
+>, <Line: +		assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(31 * 24 * 60 * 60 * 1000L));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getUnitDuration_month_february() throws Exception
+>, <Line: +	{
+>, <Line: +		Sampling sampling = new Sampling(1, TimeUnit.MONTHS);
+>, <Line: +		DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: +		DateTime dt = new DateTime(2014, 2, 18, 1, 2, 3, 4, timezone);
+>, <Line: +		assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(28 * 24 * 60 * 60 * 1000L));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getUnitDuration_week() throws Exception
+>, <Line: +	{
+>, <Line: +		Sampling sampling = new Sampling(1, TimeUnit.WEEKS);
+>, <Line: +		DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: +		DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: +		assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(7 * 24 * 60 * 60 * 1000L));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getUnitDuration_day() throws Exception
+>, <Line: +	{
+>, <Line: +		Sampling sampling = new Sampling(1, TimeUnit.DAYS);
+>, <Line: +		DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: +		DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: +		assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(24 * 60 * 60 * 1000L));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getUnitDuration_hour() throws Exception
+>, <Line: +	{
+>, <Line: +		Sampling sampling = new Sampling(1, TimeUnit.HOURS);
+>, <Line: +		DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: +		DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: +		assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(60 * 60 * 1000L));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getUnitDuration_minute() throws Exception
+>, <Line: +	{
+>, <Line: +		Sampling sampling = new Sampling(1, TimeUnit.MINUTES);
+>, <Line: +		DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: +		DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: +		assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(1000 * 60L));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getUnitDuration_seconds() throws Exception
+>, <Line: +	{
+>, <Line: +		Sampling sampling = new Sampling(1, TimeUnit.SECONDS);
+>, <Line: +		DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: +		DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: +		assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(1000L));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getUnitDuration_milliseconds() throws Exception
+>, <Line: +	{
+>, <Line: +		Sampling sampling = new Sampling(1, TimeUnit.MILLISECONDS);
+>, <Line: +		DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: +		DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: +		assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(1L));
+>, <Line: +	}
+>]
+[<Line: -public class SamplingTest {
+>, <Line: -    @Test
+>, <Line: -    public void test_getUnitDuration_year_no_leap() throws Exception {
+>, <Line: -        Sampling sampling = new Sampling(1, TimeUnit.YEARS);
+>, <Line: -        DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: -        DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: -        assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(365 * 24 * 60 * 60 * 1000L));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void test_getUnitDuration_year_over_leap() throws Exception {
+>, <Line: -        Sampling sampling = new Sampling(1, TimeUnit.YEARS);
+>, <Line: -        DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: -        DateTime dt = new DateTime(2012, 2, 18, 1, 2, 3, 4, timezone);
+>, <Line: -        assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(366 * 24 * 60 * 60 * 1000L));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void test_getUnitDuration_month_january() throws Exception {
+>, <Line: -        Sampling sampling = new Sampling(1, TimeUnit.MONTHS);
+>, <Line: -        DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: -        DateTime dt = new DateTime(2014, 1, 18, 1, 2, 3, 4, timezone);
+>, <Line: -        assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(31 * 24 * 60 * 60 * 1000L));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void test_getUnitDuration_month_february() throws Exception {
+>, <Line: -        Sampling sampling = new Sampling(1, TimeUnit.MONTHS);
+>, <Line: -        DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: -        DateTime dt = new DateTime(2014, 2, 18, 1, 2, 3, 4, timezone);
+>, <Line: -        assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(28 * 24 * 60 * 60 * 1000L));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void test_getUnitDuration_week() throws Exception {
+>, <Line: -        Sampling sampling = new Sampling(1, TimeUnit.WEEKS);
+>, <Line: -        DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: -        DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: -        assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(7 * 24 * 60 * 60 * 1000L));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void test_getUnitDuration_day() throws Exception {
+>, <Line: -        Sampling sampling = new Sampling(1, TimeUnit.DAYS);
+>, <Line: -        DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: -        DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: -        assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(24 * 60 * 60 * 1000L));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void test_getUnitDuration_hour() throws Exception {
+>, <Line: -        Sampling sampling = new Sampling(1, TimeUnit.HOURS);
+>, <Line: -        DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: -        DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: -        assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(60 * 60 * 1000L));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void test_getUnitDuration_minute() throws Exception {
+>, <Line: -        Sampling sampling = new Sampling(1, TimeUnit.MINUTES);
+>, <Line: -        DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: -        DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: -        assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(1000 * 60L));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void test_getUnitDuration_seconds() throws Exception {
+>, <Line: -        Sampling sampling = new Sampling(1, TimeUnit.SECONDS);
+>, <Line: -        DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: -        DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: -        assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(1000L));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void test_getUnitDuration_milliseconds() throws Exception {
+>, <Line: -        Sampling sampling = new Sampling(1, TimeUnit.MILLISECONDS);
+>, <Line: -        DateTimeZone timezone = DateTimeZone.forID("Europe/Brussels");
+>, <Line: -        DateTime dt = new DateTime(2014, 12, 18, 1, 2, 3, 4, timezone);
+>, <Line: -        assertThat(Util.getSamplingDuration(dt.getMillis(), sampling, timezone), is(1L));
+>, <Line: -    }
+>]

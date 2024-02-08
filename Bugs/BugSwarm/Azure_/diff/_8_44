@@ -1,0 +1,23 @@
+[<Line: +/**
+>, <Line: + * Test utilities.
+>, <Line: + */
+>, <Line: +public final class Utils {
+>, <Line: +    private Utils() {
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Shows the virtual machine.
+>, <Line: +     * @param resource virtual machine to show
+>, <Line: +     */
+>, <Line: +            storageProfile.append("\n\t\tImageReference:");
+>, <Line: +            storageProfile.append("\n\t\tOSDisk:");
+>, <Line: +                storageProfile.append("\n\t\tDataDisk: #").append(i++);
+>, <Line: +        osProfile.append("\n\t\tComputerName:").append(resource.osProfile().computerName());
+>, <Line: +            networkProfile.append("\n\t\tId:").append(networkInterfaceId);
+>]
+[<Line: -public class Utils {
+>, <Line: -            storageProfile.append("\n\t\tImageReference:" );
+>, <Line: -            storageProfile.append("\n\t\tOSDisk:" );
+>, <Line: -                storageProfile.append("\n\t\tDataDisk: #" ).append(i++);
+>, <Line: -        osProfile.append("\n\t\tComputerName:" ).append(resource.osProfile().computerName());
+>, <Line: -            networkProfile.append("\n\t\tId:" ).append(networkInterfaceId);
+>]

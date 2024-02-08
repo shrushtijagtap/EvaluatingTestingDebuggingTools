@@ -1,0 +1,336 @@
+[<Line: +		'jquery',
+>, <Line: +	],
+>, <Line: +	function ($) {
+>, <Line: +		'use strict';
+>, <Line: +		function GraphTooltip(elem, dashboard, scope, getSeriesFn) {
+>, <Line: +			var self = this;
+>, <Line: +			var $tooltip = $('<div id="tooltip">');
+>, <Line: +			this.findHoverIndexFromDataPoints = function (posX, series, last) {
+>, <Line: +				var ps = series.datapoints.pointsize;
+>, <Line: +				var initial = last * ps;
+>, <Line: +				var len = series.datapoints.points.length;
+>, <Line: +				for (var j = initial; j < len; j += ps) {
+>, <Line: +					if (series.datapoints.points[j] > posX) {
+>, <Line: +						return Math.max(j - ps, 0) / ps;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				return j / ps - 1;
+>, <Line: +			};
+>, <Line: +			this.findHoverIndexFromData = function (posX, series) {
+>, <Line: +				var len = series.data.length;
+>, <Line: +				for (var j = 0; j < len; j++) {
+>, <Line: +					if (series.data[j][0] > posX) {
+>, <Line: +						return Math.max(j - 1, 0);
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				return j - 1;
+>, <Line: +			};
+>, <Line: +			this.showTooltip = function (title, innerHtml, pos) {
+>, <Line: +				var body = '<div class="graph-tooltip small"><div class="graph-tooltip-time">' + title + '</div> ';
+>, <Line: +				body += innerHtml + '</div>';
+>, <Line: +				$tooltip.html(body).place_tt(pos.pageX + 20, pos.pageY);
+>, <Line: +			};
+>, <Line: +			this.getMultiSeriesPlotHoverInfo = function (seriesList, pos) {
+>, <Line: +				var value, i, series, hoverIndex, seriesTmp;
+>, <Line: +				var results = [];
+>, <Line: +				var pointCount;
+>, <Line: +				for (i = 0; i < seriesList.length; i++) {
+>, <Line: +					seriesTmp = seriesList[i];
+>, <Line: +					if (!seriesTmp.data.length) {
+>, <Line: +						continue;
+>, <Line: +					}
+>, <Line: +					if (!pointCount) {
+>, <Line: +						series = seriesTmp;
+>, <Line: +						pointCount = series.data.length;
+>, <Line: +						continue;
+>, <Line: +					}
+>, <Line: +					if (seriesTmp.data.length !== pointCount) {
+>, <Line: +						results.pointCountMismatch = true;
+>, <Line: +						return results;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				hoverIndex = this.findHoverIndexFromData(pos.x, series);
+>, <Line: +				var lasthoverIndex = 0;
+>, <Line: +				if (!scope.panel.steppedLine) {
+>, <Line: +					lasthoverIndex = hoverIndex;
+>, <Line: +				}
+>, <Line: +				//now we know the current X (j) position for X and Y values
+>, <Line: +				results.time = series.data[hoverIndex][0];
+>, <Line: +				var last_value = 0; //needed for stacked values
+>, <Line: +				for (i = 0; i < seriesList.length; i++) {
+>, <Line: +					series = seriesList[i];
+>, <Line: +					if (!series.data.length) {
+>, <Line: +						results.push({hidden: true});
+>, <Line: +						continue;
+>, <Line: +					}
+>, <Line: +					if (scope.panel.stack) {
+>, <Line: +						if (scope.panel.tooltip.value_type === 'individual') {
+>, <Line: +							value = series.data[hoverIndex][1];
+>, <Line: +						} else {
+>, <Line: +							last_value += series.data[hoverIndex][1];
+>, <Line: +							value = last_value;
+>, <Line: +						}
+>, <Line: +					} else {
+>, <Line: +						value = series.data[hoverIndex][1];
+>, <Line: +					}
+>, <Line: +					// Highlighting multiple Points depending on the plot type
+>, <Line: +					if (scope.panel.steppedLine || (scope.panel.stack && scope.panel.nullPointMode == "null")) {
+>, <Line: +						// stacked and steppedLine plots can have series with different length.
+>, <Line: +						// Stacked series can increase its length  on each new stacked serie if null points found,
+>, <Line: +						// to speed the index search we begin always on the las found hoverIndex.
+>, <Line: +						var newhoverIndex = this.findHoverIndexFromDataPoints(pos.x, series, lasthoverIndex);
+>, <Line: +						// update lasthoverIndex depends also on the plot type.
+>, <Line: +						if (!scope.panel.steppedLine) {
+>, <Line: +							// on stacked graphs new will be always greater than last
+>, <Line: +							lasthoverIndex = newhoverIndex;
+>, <Line: +						} else {
+>, <Line: +							// if steppeLine, not always series increases its length, so we should begin
+>, <Line: +							// to search correct index from the original hoverIndex on each serie.
+>, <Line: +							lasthoverIndex = hoverIndex;
+>, <Line: +						}
+>, <Line: +						results.push({value: value, hoverIndex: newhoverIndex});
+>, <Line: +					} else {
+>, <Line: +						results.push({value: value, hoverIndex: hoverIndex});
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				return results;
+>, <Line: +			};
+>, <Line: +			elem.mouseleave(function () {
+>, <Line: +				if (scope.panel.tooltip.shared || dashboard.sharedCrosshair) {
+>, <Line: +					var plot = elem.data().plot;
+>, <Line: +					if (plot) {
+>, <Line: +						$tooltip.detach();
+>, <Line: +						plot.unhighlight();
+>, <Line: +						scope.appEvent('clearCrosshair');
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			});
+>, <Line: +			elem.bind("plothover", function (event, pos, item) {
+>, <Line: +				var plot = elem.data().plot;
+>, <Line: +				var plotData = plot.getData();
+>, <Line: +				var seriesList = getSeriesFn();
+>, <Line: +				var group, value, timestamp, hoverInfo, i, series, seriesHtml;
+>, <Line: +				if (dashboard.sharedCrosshair) {
+>, <Line: +					scope.appEvent('setCrosshair', {pos: pos, scope: scope});
+>, <Line: +				}
+>, <Line: +				if (seriesList.length === 0) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				if (scope.panel.tooltip.shared) {
+>, <Line: +					plot.unhighlight();
+>, <Line: +					var seriesHoverInfo = self.getMultiSeriesPlotHoverInfo(plotData, pos);
+>, <Line: +					if (seriesHoverInfo.pointCountMismatch) {
+>, <Line: +						self.showTooltip('Shared tooltip error', '<ul>' +
+>, <Line: +							'<li>Series point counts are not the same</li>' +
+>, <Line: +							'<li>Set null point mode to null or null as zero</li>' +
+>, <Line: +							'<li>For influxdb users set fill(0) in your query</li></ul>', pos);
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					seriesHtml = '';
+>, <Line: +					timestamp = dashboard.formatDate(seriesHoverInfo.time);
+>, <Line: +					for (i = 0; i < seriesHoverInfo.length; i++) {
+>, <Line: +						hoverInfo = seriesHoverInfo[i];
+>, <Line: +						if (hoverInfo.hidden) {
+>, <Line: +							continue;
+>, <Line: +						}
+>, <Line: +						series = seriesList[i];
+>, <Line: +						value = series.formatValue(hoverInfo.value);
+>, <Line: +						seriesHtml += '<div class="graph-tooltip-list-item"><div class="graph-tooltip-series-name">';
+>, <Line: +						seriesHtml += '<i class="icon-minus" style="color:' + series.color + ';"></i> ' + series.label + ':</div>';
+>, <Line: +						seriesHtml += '<div class="graph-tooltip-value">' + value + '</div></div>';
+>, <Line: +						plot.highlight(i, hoverInfo.hoverIndex);
+>, <Line: +					}
+>, <Line: +					self.showTooltip(timestamp, seriesHtml, pos);
+>, <Line: +				}
+>, <Line: +				// single series tooltip
+>, <Line: +				else if (item) {
+>, <Line: +					series = seriesList[item.seriesIndex];
+>, <Line: +					group = '<div class="graph-tooltip-list-item"><div class="graph-tooltip-series-name">';
+>, <Line: +					group += '<i class="icon-minus" style="color:' + item.series.color + ';"></i> ' + series.label + ':</div>';
+>, <Line: +					if (scope.panel.stack && scope.panel.tooltip.value_type === 'individual') {
+>, <Line: +						value = item.datapoint[1] - item.datapoint[2];
+>, <Line: +					}
+>, <Line: +					else {
+>, <Line: +						value = item.datapoint[1];
+>, <Line: +					}
+>, <Line: +					value = series.formatValue(value);
+>, <Line: +					timestamp = dashboard.formatDate(item.datapoint[0]);
+>, <Line: +					group += '<div class="graph-tooltip-value">' + value + '</div>';
+>, <Line: +					self.showTooltip(timestamp, group, pos);
+>, <Line: +				}
+>, <Line: +				// no hit
+>, <Line: +				else {
+>, <Line: +					$tooltip.detach();
+>, <Line: +				}
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +		return GraphTooltip;
+>, <Line: +	});
+>]
+[<Line: -  'jquery',
+>, <Line: -],
+>, <Line: -function ($) {
+>, <Line: -  'use strict';
+>, <Line: -  function GraphTooltip(elem, dashboard, scope, getSeriesFn) {
+>, <Line: -    var self = this;
+>, <Line: -    var $tooltip = $('<div id="tooltip">');
+>, <Line: -    this.findHoverIndexFromDataPoints = function(posX, series,last) {
+>, <Line: -      var ps = series.datapoints.pointsize;
+>, <Line: -      var initial = last*ps;
+>, <Line: -      var len = series.datapoints.points.length;
+>, <Line: -      for (var j = initial; j < len; j += ps) {
+>, <Line: -        if (series.datapoints.points[j] > posX) {
+>, <Line: -          return Math.max(j - ps,  0)/ps;
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -      return j/ps - 1;
+>, <Line: -    };
+>, <Line: -    this.findHoverIndexFromData = function(posX, series) {
+>, <Line: -      var len = series.data.length;
+>, <Line: -      for (var j = 0; j < len; j++) {
+>, <Line: -        if (series.data[j][0] > posX) {
+>, <Line: -          return Math.max(j - 1,  0);
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -      return j - 1;
+>, <Line: -    };
+>, <Line: -    this.showTooltip = function(title, innerHtml, pos) {
+>, <Line: -      var body = '<div class="graph-tooltip small"><div class="graph-tooltip-time">'+ title + '</div> ' ;
+>, <Line: -      body += innerHtml + '</div>';
+>, <Line: -      $tooltip.html(body).place_tt(pos.pageX + 20, pos.pageY);
+>, <Line: -    };
+>, <Line: -    this.getMultiSeriesPlotHoverInfo = function(seriesList, pos) {
+>, <Line: -      var value, i, series, hoverIndex, seriesTmp;
+>, <Line: -      var results = [];
+>, <Line: -      var pointCount;
+>, <Line: -      for (i = 0; i < seriesList.length; i++) {
+>, <Line: -        seriesTmp = seriesList[i];
+>, <Line: -        if (!seriesTmp.data.length) { continue; }
+>, <Line: -        if (!pointCount) {
+>, <Line: -          series = seriesTmp;
+>, <Line: -          pointCount = series.data.length;
+>, <Line: -          continue;
+>, <Line: -        }
+>, <Line: -        if (seriesTmp.data.length !== pointCount) {
+>, <Line: -          results.pointCountMismatch = true;
+>, <Line: -          return results;
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -      hoverIndex = this.findHoverIndexFromData(pos.x, series);
+>, <Line: -      var lasthoverIndex = 0;
+>, <Line: -      if(!scope.panel.steppedLine) {
+>, <Line: -        lasthoverIndex = hoverIndex;
+>, <Line: -      }
+>, <Line: -      //now we know the current X (j) position for X and Y values
+>, <Line: -      results.time = series.data[hoverIndex][0];
+>, <Line: -      var last_value = 0; //needed for stacked values
+>, <Line: -      for (i = 0; i < seriesList.length; i++) {
+>, <Line: -        series = seriesList[i];
+>, <Line: -        if (!series.data.length) {
+>, <Line: -          results.push({ hidden: true });
+>, <Line: -          continue;
+>, <Line: -        }
+>, <Line: -        if (scope.panel.stack) {
+>, <Line: -          if (scope.panel.tooltip.value_type === 'individual') {
+>, <Line: -            value = series.data[hoverIndex][1];
+>, <Line: -          } else {
+>, <Line: -            last_value += series.data[hoverIndex][1];
+>, <Line: -            value = last_value;
+>, <Line: -          }
+>, <Line: -        } else {
+>, <Line: -          value = series.data[hoverIndex][1];
+>, <Line: -        }
+>, <Line: -        // Highlighting multiple Points depending on the plot type
+>, <Line: -        if (scope.panel.steppedLine || (scope.panel.stack && scope.panel.nullPointMode == "null")) {
+>, <Line: -          // stacked and steppedLine plots can have series with different length.
+>, <Line: -          // Stacked series can increase its length  on each new stacked serie if null points found,
+>, <Line: -          // to speed the index search we begin always on the las found hoverIndex.
+>, <Line: -          var newhoverIndex = this.findHoverIndexFromDataPoints(pos.x, series,lasthoverIndex);
+>, <Line: -          // update lasthoverIndex depends also on the plot type.
+>, <Line: -          if(!scope.panel.steppedLine) {
+>, <Line: -            // on stacked graphs new will be always greater than last
+>, <Line: -            lasthoverIndex = newhoverIndex;
+>, <Line: -          } else {
+>, <Line: -            // if steppeLine, not always series increases its length, so we should begin
+>, <Line: -            // to search correct index from the original hoverIndex on each serie.
+>, <Line: -            lasthoverIndex = hoverIndex;
+>, <Line: -          }
+>, <Line: -          results.push({ value: value, hoverIndex: newhoverIndex});
+>, <Line: -        } else {
+>, <Line: -          results.push({ value: value, hoverIndex: hoverIndex});
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -      return results;
+>, <Line: -    };
+>, <Line: -    elem.mouseleave(function () {
+>, <Line: -      if (scope.panel.tooltip.shared || dashboard.sharedCrosshair) {
+>, <Line: -        var plot = elem.data().plot;
+>, <Line: -        if (plot) {
+>, <Line: -          $tooltip.detach();
+>, <Line: -          plot.unhighlight();
+>, <Line: -          scope.appEvent('clearCrosshair');
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -    });
+>, <Line: -    elem.bind("plothover", function (event, pos, item) {
+>, <Line: -      var plot = elem.data().plot;
+>, <Line: -      var plotData = plot.getData();
+>, <Line: -      var seriesList = getSeriesFn();
+>, <Line: -      var group, value, timestamp, hoverInfo, i, series, seriesHtml;
+>, <Line: -      if(dashboard.sharedCrosshair){
+>, <Line: -        scope.appEvent('setCrosshair',  { pos: pos, scope: scope });
+>, <Line: -      }
+>, <Line: -      if (seriesList.length === 0) {
+>, <Line: -        return;
+>, <Line: -      }
+>, <Line: -      if (scope.panel.tooltip.shared) {
+>, <Line: -        plot.unhighlight();
+>, <Line: -        var seriesHoverInfo = self.getMultiSeriesPlotHoverInfo(plotData, pos);
+>, <Line: -        if (seriesHoverInfo.pointCountMismatch) {
+>, <Line: -          self.showTooltip('Shared tooltip error', '<ul>' +
+>, <Line: -            '<li>Series point counts are not the same</li>' +
+>, <Line: -            '<li>Set null point mode to null or null as zero</li>' +
+>, <Line: -            '<li>For influxdb users set fill(0) in your query</li></ul>', pos);
+>, <Line: -          return;
+>, <Line: -        }
+>, <Line: -        seriesHtml = '';
+>, <Line: -        timestamp = dashboard.formatDate(seriesHoverInfo.time);
+>, <Line: -        for (i = 0; i < seriesHoverInfo.length; i++) {
+>, <Line: -          hoverInfo = seriesHoverInfo[i];
+>, <Line: -          if (hoverInfo.hidden) {
+>, <Line: -            continue;
+>, <Line: -          }
+>, <Line: -          series = seriesList[i];
+>, <Line: -          value = series.formatValue(hoverInfo.value);
+>, <Line: -          seriesHtml += '<div class="graph-tooltip-list-item"><div class="graph-tooltip-series-name">';
+>, <Line: -          seriesHtml += '<i class="icon-minus" style="color:' + series.color +';"></i> ' + series.label + ':</div>';
+>, <Line: -          seriesHtml += '<div class="graph-tooltip-value">' + value + '</div></div>';
+>, <Line: -          plot.highlight(i, hoverInfo.hoverIndex);
+>, <Line: -        }
+>, <Line: -        self.showTooltip(timestamp, seriesHtml, pos);
+>, <Line: -      }
+>, <Line: -      // single series tooltip
+>, <Line: -      else if (item) {
+>, <Line: -        series = seriesList[item.seriesIndex];
+>, <Line: -        group = '<div class="graph-tooltip-list-item"><div class="graph-tooltip-series-name">';
+>, <Line: -        group += '<i class="icon-minus" style="color:' + item.series.color +';"></i> ' + series.label + ':</div>';
+>, <Line: -        if (scope.panel.stack && scope.panel.tooltip.value_type === 'individual') {
+>, <Line: -          value = item.datapoint[1] - item.datapoint[2];
+>, <Line: -        }
+>, <Line: -        else {
+>, <Line: -          value = item.datapoint[1];
+>, <Line: -        }
+>, <Line: -        value = series.formatValue(value);
+>, <Line: -        timestamp = dashboard.formatDate(item.datapoint[0]);
+>, <Line: -        group += '<div class="graph-tooltip-value">' + value + '</div>';
+>, <Line: -        self.showTooltip(timestamp, group, pos);
+>, <Line: -      }
+>, <Line: -      // no hit
+>, <Line: -      else {
+>, <Line: -        $tooltip.detach();
+>, <Line: -      }
+>, <Line: -    });
+>, <Line: -  }
+>, <Line: -  return GraphTooltip;
+>, <Line: -});
+>]

@@ -1,0 +1,19 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.tools.ByteBufferByteChannel;
+>, <Line: +import java.io.*;
+>, <Line: +        IsoFile isoFile = new IsoFile(new ByteBufferByteChannel(baos.toByteArray()));
+>, <Line: +        IsoFile isoFile = new IsoFile(new ByteBufferByteChannel(baos.toByteArray()));
+>, <Line: +        IsoFile isoFile = new IsoFile(new FileInputStream(f).getChannel());
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.googlecode.mp4parser.MemoryDataSourceImpl;
+>, <Line: -import java.io.ByteArrayOutputStream;
+>, <Line: -import java.io.File;
+>, <Line: -import java.io.FileOutputStream;
+>, <Line: -import java.io.IOException;
+>, <Line: -        IsoFile isoFile = new IsoFile(new MemoryDataSourceImpl(baos.toByteArray()));
+>, <Line: -        IsoFile isoFile = new IsoFile(new MemoryDataSourceImpl(baos.toByteArray()));
+>, <Line: -        IsoFile isoFile = new IsoFile(f.getAbsolutePath());
+>]

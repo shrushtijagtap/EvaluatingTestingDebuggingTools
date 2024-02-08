@@ -1,0 +1,7 @@
+[<Line: +import java.util.Locale;
+>, <Line: +import org.hotswap.agent.logging.AgentLogger;
+>, <Line: +            return AgentLogger.Level.valueOf(levelName.toUpperCase(Locale.ENGLISH));
+>]
+[<Line: -import org.hotswap.agent.logging.AgentLogger;
+>, <Line: -            return AgentLogger.Level.valueOf(levelName.toUpperCase());
+>]

@@ -1,0 +1,12 @@
+[<Line: +public class FeatureProcessorMetadata
+>, <Line: +    private final ImmutableList<FeaturePropertyMetadata> properties;
+>, <Line: +    public FeatureProcessorMetadata(String name, String label, String description, List<FeaturePropertyMetadata> properties)
+>, <Line: +        properties.sort(Comparator.comparing(FeaturePropertyMetadata::getLabel));
+>, <Line: +    public ImmutableList<FeaturePropertyMetadata> getProperties()
+>]
+[<Line: -public class QueryProcessorMetadata
+>, <Line: -    private final ImmutableList<QueryPropertyMetadata> properties;
+>, <Line: -    public QueryProcessorMetadata(String name, String label, String description, List<QueryPropertyMetadata> properties)
+>, <Line: -        properties.sort(Comparator.comparing(QueryPropertyMetadata::getLabel));
+>, <Line: -    public ImmutableList<QueryPropertyMetadata> getProperties()
+>]

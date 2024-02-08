@@ -1,0 +1,36 @@
+[<Line: +DROP TABLE Professors IF EXISTS;
+>, <Line: +DROP TABLE Lecturers IF EXISTS;
+>, <Line: +DROP TABLE Chairs IF EXISTS;
+>, <Line: +DROP TABLE SupportStaff IF EXISTS;
+>, <Line: +---
+>, <Line: +CREATE TABLE Professors (
+>, <Line: +deptID integer NOT NULL, 
+>, <Line: +uniID integer NOT NULL, 
+>, <Line: +profID integer NOT NULL,
+>, <Line: +profType varchar(200) NOT NULL,
+>, <Line: +isWorking integer NOT NULL,
+>, <Line: +isHeadOfDep integer NOT NULL
+>, <Line: +);
+>, <Line: +---
+>, <Line: +CREATE TABLE Lecturers (
+>, <Line: +deptID integer NOT NULL, 
+>, <Line: +uniID integer NOT NULL,
+>, <Line: +lecturerID integer NOT NULL,
+>, <Line: +isWorking integer NOT NULL
+>, <Line: +);
+>, <Line: +---
+>, <Line: +CREATE TABLE Chairs (
+>, <Line: +deptID integer NOT NULL, 
+>, <Line: +uniID integer NOT NULL, 
+>, <Line: +chairID integer NOT NULL
+>, <Line: +);
+>, <Line: +---
+>, <Line: +CREATE TABLE SupportStaff (
+>, <Line: +deptID integer NOT NULL, 
+>, <Line: +uniID integer NOT NULL, 
+>, <Line: +ssID integer NOT NULL, 
+>, <Line: +staffType varchar(200) NOT NULL
+>, <Line: +);
+>, <Line: +---
+>]
+[]

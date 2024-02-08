@@ -1,0 +1,4 @@
+[<Line: +function sum(int[] ls) -> int:
+>]
+[<Line: -function sum([int] ls) -> int:
+>]

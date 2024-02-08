@@ -1,0 +1,21 @@
+[<Line: +        List<MantaMultipart.Part> partsList = new LinkedList<>();
+>, <Line: +            MantaMultipart.Part part = new MantaMultipart.Part(i, null, null);
+>, <Line: +            partsList.add(part);
+>, <Line: +        List<MantaMultipart.Part> partsList = new LinkedList<>();
+>, <Line: +            MantaMultipart.Part part = new MantaMultipart.Part(i, null, null);
+>, <Line: +            partsList.add(part);
+>, <Line: +        Collections.shuffle(partsList);
+>, <Line: +        ArrayList<MantaMultipart.Part> partsList = new ArrayList<>();
+>, <Line: +            MantaMultipart.Part part = new MantaMultipart.Part(i, null, null);
+>, <Line: +            partsList.add(part);
+>, <Line: +        Collections.shuffle(partsList);
+>]
+[<Line: -        List<String> partsList = new LinkedList<>();
+>, <Line: -            partsList.add(String.valueOf(i));
+>, <Line: -        List<String> partsList = new LinkedList<>();
+>, <Line: -        Collections.shuffle(partsList);
+>, <Line: -            partsList.add(String.valueOf(i));
+>, <Line: -        ArrayList<String> partsList = new ArrayList<>();
+>, <Line: -        Collections.shuffle(partsList);
+>, <Line: -            partsList.add(String.valueOf(i));
+>]

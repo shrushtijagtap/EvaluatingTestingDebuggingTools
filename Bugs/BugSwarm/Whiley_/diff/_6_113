@@ -1,0 +1,6 @@
+[<Line: +type binop is ({int op, expr left, expr right} r) where r.op == ADD || r.op == SUB || r.op == MUL || r.op == DIV
+>, <Line: +type asbinop is ({int op, expr left, expr right} r) where r.op == ADD || r.op == SUB
+>]
+[<Line: -type binop is {int op, expr left, expr right} where op in {ADD, SUB, MUL, DIV}
+>, <Line: -type asbinop is {int op, expr left, expr right} where op in {ADD, SUB}
+>]

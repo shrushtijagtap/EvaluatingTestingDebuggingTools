@@ -1,0 +1,64 @@
+[<Line: +package net.bytebuddy.description.modifier;
+>, <Line: +import org.objectweb.asm.Opcodes;
+>, <Line: +/**
+>, <Line: + * Describes if a field is {@code transient}.
+>, <Line: + */
+>, <Line: +public enum FieldPersistence implements ModifierContributor.ForField {
+>, <Line: +    /**
+>, <Line: +     * Modifier for a non-transient field. (This is the default modifier.)
+>, <Line: +     */
+>, <Line: +    PLAIN(EMPTY_MASK),
+>, <Line: +    /**
+>, <Line: +     * Modifier for a {@code transient} field.
+>, <Line: +     */
+>, <Line: +    TRANSIENT(Opcodes.ACC_TRANSIENT);
+>, <Line: +    /**
+>, <Line: +     * This modifier contributor's mask.
+>, <Line: +     */
+>, <Line: +    private final int mask;
+>, <Line: +    /**
+>, <Line: +     * Creates a new modifier contributor for field persistence.
+>, <Line: +     *
+>, <Line: +     * @param mask This modifier contributor's mask.
+>, <Line: +     */
+>, <Line: +    FieldPersistence(int mask) {
+>, <Line: +        this.mask = mask;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Returns a field persistence modifier contributor.
+>, <Line: +     *
+>, <Line: +     * @param isTransient {@code true} if a field is supposed to be {@code transient}
+>, <Line: +     * @return An appropriate field persistence modifier contributor.
+>, <Line: +     */
+>, <Line: +    public static FieldPersistence isTransient(boolean isTransient) {
+>, <Line: +        return isTransient
+>, <Line: +                ? TRANSIENT
+>, <Line: +                : PLAIN;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int getMask() {
+>, <Line: +        return mask;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int getRange() {
+>, <Line: +        return Opcodes.ACC_TRANSIENT;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public boolean isDefault() {
+>, <Line: +        return this == PLAIN;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Checks if this field persistence modifier contributor is transient.
+>, <Line: +     *
+>, <Line: +     * @return {@code true} if this field persisitent modifier contributor is transient.
+>, <Line: +     */
+>, <Line: +    public boolean isTransient() {
+>, <Line: +        return this == TRANSIENT;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "FieldPersistence." + name();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

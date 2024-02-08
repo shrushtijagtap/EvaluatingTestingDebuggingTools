@@ -1,0 +1,49 @@
+[<Line: +package org.stagemonitor.web.metrics;
+>, <Line: +import static org.junit.Assert.assertEquals;
+>, <Line: +import static org.junit.Assert.assertTrue;
+>, <Line: +import static org.mockito.Mockito.mock;
+>, <Line: +import static org.stagemonitor.core.metrics.metrics2.MetricName.name;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.springframework.mock.web.MockHttpServletRequest;
+>, <Line: +import org.springframework.mock.web.MockHttpServletResponse;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.Metric2Registry;
+>, <Line: +import org.stagemonitor.core.util.JsonUtils;
+>, <Line: +import org.stagemonitor.web.WebPlugin;
+>, <Line: +public class StagemonitorMetricsServletTest {
+>, <Line: +	private StagemonitorMetricsServlet servlet;
+>, <Line: +	private Metric2Registry registry;
+>, <Line: +	@Before
+>, <Line: +	public void setUp() throws Exception {
+>, <Line: +		registry = new Metric2Registry();
+>, <Line: +		servlet = new StagemonitorMetricsServlet(registry, mock(WebPlugin.class), JsonUtils.getMapper());
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void getAllMetrics() throws Exception {
+>, <Line: +		registry.counter(name("foo").tag("bar", "baz").build()).inc();
+>, <Line: +		registry.counter(name("qux").tag("quux", "foo").build()).inc();
+>, <Line: +		final MockHttpServletResponse resp = new MockHttpServletResponse();
+>, <Line: +		servlet.doGet(new MockHttpServletRequest(), resp);
+>, <Line: +		assertEquals("[{\"name\":\"qux\",\"quux\":\"foo\",\"count\":1},{\"name\":\"foo\",\"bar\":\"baz\",\"count\":1}]", resp.getContentAsString());
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void getFilteredMetrics() throws Exception {
+>, <Line: +		registry.counter(name("foo").tag("bar", "baz").build()).inc();
+>, <Line: +		registry.counter(name("qux").tag("quux", "foo").build()).inc();
+>, <Line: +		final MockHttpServletResponse resp = new MockHttpServletResponse();
+>, <Line: +		final MockHttpServletRequest req = new MockHttpServletRequest();
+>, <Line: +		req.addParameter("metricNames[]", "foo");
+>, <Line: +		servlet.doGet(req, resp);
+>, <Line: +		assertEquals("[{\"name\":\"foo\",\"bar\":\"baz\",\"count\":1}]", resp.getContentAsString());
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void getMeter() throws Exception {
+>, <Line: +		registry.meter(name("foo").tag("bar", "baz").build()).mark();
+>, <Line: +		final MockHttpServletResponse resp = new MockHttpServletResponse();
+>, <Line: +		servlet.doGet(new MockHttpServletRequest(), resp);
+>, <Line: +		final double mean_rate = JsonUtils.getMapper().readTree(resp.getContentAsString()).get(0).get("mean_rate").doubleValue();
+>, <Line: +		assertTrue("Expected m1 rate of > 0, but got " + mean_rate, mean_rate > 0);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

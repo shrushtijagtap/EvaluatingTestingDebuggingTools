@@ -1,0 +1,3 @@
+[<Line: +    required { gradle.taskGraph.hasTask("uploadArchives") }
+>]
+[]

@@ -1,0 +1,54 @@
+[<Line: +//package tests;
+>, <Line: +//
+>, <Line: +//import model.Model;
+>, <Line: +//
+>, <Line: +//import org.junit.BeforeClass;
+>, <Line: +//import org.junit.runner.RunWith;
+>, <Line: +//import org.junit.runners.Suite;
+>, <Line: +//
+>, <Line: +//import service.ServiceManager;
+>, <Line: +//
+>, <Line: +//@RunWith(Suite.class)
+>, <Line: +//
+>, <Line: +//@Suite.SuiteClasses({
+>, <Line: +//	DataManagerTests.class,
+>, <Line: +//	FilterEvalTests.class,
+>, <Line: +//	FilterParserTests.class,
+>, <Line: +//	EventTests.class,
+>, <Line: +//	ServiceManagerTests.class,
+>, <Line: +//	ModelTests.class,
+>, <Line: +//	TickingTimerTests.class
+>, <Line: +//})
+>, <Line: +//
+>, <Line: +//public class Tests {
+>, <Line: +//	@BeforeClass
+>, <Line: +//	public static void setup() {
+>, <Line: +//		ServiceManager.isInTestMode = true;
+>, <Line: +//		Model.isInTestMode = true;
+>, <Line: +//	}
+>, <Line: +//}
+>]
+[<Line: -package tests;
+>, <Line: -import model.Model;
+>, <Line: -import org.junit.BeforeClass;
+>, <Line: -import org.junit.runner.RunWith;
+>, <Line: -import org.junit.runners.Suite;
+>, <Line: -import service.ServiceManager;
+>, <Line: -@RunWith(Suite.class)
+>, <Line: -@Suite.SuiteClasses({
+>, <Line: -	DataManagerTests.class,
+>, <Line: -	FilterEvalTests.class,
+>, <Line: -	FilterParserTests.class,
+>, <Line: -	EventTests.class,
+>, <Line: -	ServiceManagerTests.class,
+>, <Line: -	ModelTests.class,
+>, <Line: -	TickingTimerTests.class
+>, <Line: -})
+>, <Line: -public class Tests {
+>, <Line: -	@BeforeClass
+>, <Line: -	public static void setup() {
+>, <Line: -		ServiceManager.isInTestMode = true;
+>, <Line: -		Model.isInTestMode = true;
+>, <Line: -	}
+>, <Line: -}
+>]

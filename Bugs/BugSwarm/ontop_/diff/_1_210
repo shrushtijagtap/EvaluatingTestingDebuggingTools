@@ -1,0 +1,15 @@
+[<Line: +import com.google.common.collect.ImmutableSet;
+>, <Line: + * The implemented algorithm follows Cheriyan-Mehlhorn/Gabow's algorithm
+>, <Line: + * Presented in Path-based depth-first search for strong and biconnected components by Gabow (2000).
+>, <Line: + * The running time is order of O(|V|+|E|)
+>, <Line: + *
+>, <Line: + * TODO: replace by GabowStrongConnectivityInspector (from an updated JGraphT)
+>, <Line: +         ImmutableSet.Builder<V> L = new ImmutableSet.Builder<>(); 
+>, <Line: +             stronglyConnectedSets.add(new Equivalences<V>(L.build())); 
+>]
+[<Line: - *The implemented algorithm follows Cheriyan-Mehlhorn/Gabow's algorithm
+>, <Line: - *Presented in Path-based depth-first search for strong and biconnected components by Gabow (2000).
+>, <Line: - *The running time is order of O(|V|+|E|)
+>, <Line: -         Set<V> L = new HashSet<V>(); 
+>, <Line: -             stronglyConnectedSets.add(new Equivalences<V>(L)); 
+>]

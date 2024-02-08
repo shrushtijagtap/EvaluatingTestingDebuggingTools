@@ -1,0 +1,6 @@
+[<Line: +        ClassLoader classLoader = new ByteArrayClassLoader(ClassLoadingStrategy.BOOTSTRAP_LOADER,
+>, <Line: +                ClassFileExtraction.of(SimpleType.class),
+>, <Line: +                ByteArrayClassLoader.PersistenceHandler.MANIFEST);
+>]
+[<Line: -        ClassLoader classLoader = new ByteArrayClassLoader(ClassLoadingStrategy.BOOTSTRAP_LOADER, ClassFileExtraction.of(SimpleType.class));
+>]

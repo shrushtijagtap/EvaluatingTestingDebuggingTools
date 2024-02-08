@@ -1,0 +1,6 @@
+[<Line: +import melnorme.lang.ide.core.text.TextSourceUtils;
+>, <Line: +		String spaceIndent = TextSourceUtils.getNSpaces(spaceIndentationSize);
+>]
+[<Line: -import melnorme.lang.ide.core.text.format.AutoEditUtils;
+>, <Line: -		String spaceIndent = AutoEditUtils.getNSpaces(spaceIndentationSize);
+>]

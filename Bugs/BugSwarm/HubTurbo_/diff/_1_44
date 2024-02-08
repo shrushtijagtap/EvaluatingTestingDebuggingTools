@@ -1,0 +1,139 @@
+[<Line: +package backend.stub;
+>, <Line: +import backend.UserCredentials;
+>, <Line: +import backend.interfaces.Repo;
+>, <Line: +import backend.resource.TurboIssue;
+>, <Line: +import backend.resource.TurboLabel;
+>, <Line: +import backend.resource.TurboMilestone;
+>, <Line: +import backend.resource.TurboUser;
+>, <Line: +import github.TurboIssueEvent;
+>, <Line: +import org.apache.commons.lang3.tuple.ImmutablePair;
+>, <Line: +import org.apache.commons.lang3.tuple.ImmutableTriple;
+>, <Line: +import org.eclipse.egit.github.core.Comment;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Date;
+>, <Line: +import java.util.List;
+>, <Line: +public class DummyRepo implements Repo {
+>, <Line: +	private static final String DUMMY_REPO_ID = "dummy/dummy";
+>, <Line: +	private static int issueCounter = 10;
+>, <Line: +	private static int labelCounter = 10;
+>, <Line: +	private static int milestoneCounter = 10;
+>, <Line: +	private static int userCounter = 10;
+>, <Line: +	public DummyRepo() {
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean login(UserCredentials credentials) {
+>, <Line: +		return true;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public ImmutableTriple<List<TurboIssue>, String, Date>
+>, <Line: +		getUpdatedIssues(String repoId, String ETag, Date lastCheckTime) {
+>, <Line: +		List<TurboIssue> issues = new ArrayList<>();
+>, <Line: +		issues.add(updateRandomIssue(DUMMY_REPO_ID));
+>, <Line: +		issues.add(makeDummyIssue(DUMMY_REPO_ID));
+>, <Line: +		return new ImmutableTriple<>(issues, ETag, lastCheckTime);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public ImmutablePair<List<TurboLabel>, String> getUpdatedLabels(String repoId, String ETag) {
+>, <Line: +		List<TurboLabel> labels = new ArrayList<>();
+>, <Line: +		labels.add(updateRandomLabel(DUMMY_REPO_ID));
+>, <Line: +		labels.add(makeDummyLabel(DUMMY_REPO_ID));
+>, <Line: +		return new ImmutablePair<>(labels, ETag);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public ImmutablePair<List<TurboMilestone>, String> getUpdatedMilestones(String repoId, String ETag) {
+>, <Line: +		List<TurboMilestone> milestones = new ArrayList<>();
+>, <Line: +		milestones.add(updateRandomMilestone(DUMMY_REPO_ID));
+>, <Line: +		milestones.add(makeDummyMilestone(DUMMY_REPO_ID));
+>, <Line: +		return new ImmutablePair<>(milestones, ETag);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public ImmutablePair<List<TurboUser>, String> getUpdatedCollaborators(String repoId, String ETag) {
+>, <Line: +		List<TurboUser> users = new ArrayList<>();
+>, <Line: +		users.add(updateRandomUser(DUMMY_REPO_ID));
+>, <Line: +		users.add(makeDummyUser(DUMMY_REPO_ID));
+>, <Line: +		return new ImmutablePair<>(users, ETag);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<TurboIssue> getIssues(String repoName) {
+>, <Line: +		List<TurboIssue> issues = new ArrayList<>();
+>, <Line: +		for (int i=0; i<10; i++) {
+>, <Line: +			issues.add(makeDummyIssue(DUMMY_REPO_ID));
+>, <Line: +		}
+>, <Line: +		return issues;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<TurboLabel> getLabels(String repoId) {
+>, <Line: +		List<TurboLabel> labels = new ArrayList<>();
+>, <Line: +		for (int i=0; i<10; i++) {
+>, <Line: +			labels.add(makeDummyLabel(DUMMY_REPO_ID));
+>, <Line: +		}
+>, <Line: +		return labels;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<TurboMilestone> getMilestones(String repoId) {
+>, <Line: +		List<TurboMilestone> milestones = new ArrayList<>();
+>, <Line: +		for (int i=0; i<10; i++) {
+>, <Line: +			milestones.add(makeDummyMilestone(DUMMY_REPO_ID));
+>, <Line: +		}
+>, <Line: +		return milestones;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<TurboUser> getCollaborators(String repoId) {
+>, <Line: +		List<TurboUser> users = new ArrayList<>();
+>, <Line: +		for (int i=0; i<10; i++) {
+>, <Line: +			users.add(makeDummyUser(DUMMY_REPO_ID));
+>, <Line: +		}
+>, <Line: +		return users;
+>, <Line: +	}
+>, <Line: +	private static TurboIssue updateRandomIssue(String repoId) {
+>, <Line: +		int i = (int) (Math.random() * issueCounter);
+>, <Line: +		return new TurboIssue(repoId, i, "Issue " + i + " " + Math.random());
+>, <Line: +	}
+>, <Line: +	private static TurboIssue makeDummyIssue(String repoId) {
+>, <Line: +		TurboIssue issue = new TurboIssue(repoId, issueCounter + 1, "Issue " + (issueCounter + 1));
+>, <Line: +		issueCounter++;
+>, <Line: +		return issue;
+>, <Line: +	}
+>, <Line: +	private static TurboLabel updateRandomLabel(String repoId) {
+>, <Line: +		int i = (int) (Math.random() * issueCounter);
+>, <Line: +		return new TurboLabel(repoId, "Label " + i + " " + Math.random());
+>, <Line: +	}
+>, <Line: +	private static TurboLabel makeDummyLabel(String repoId) {
+>, <Line: +		TurboLabel label = new TurboLabel(repoId, "Label " + (labelCounter + 1));
+>, <Line: +		labelCounter++;
+>, <Line: +		return label;
+>, <Line: +	}
+>, <Line: +	private static TurboMilestone updateRandomMilestone(String repoId) {
+>, <Line: +		int i = (int) (Math.random() * milestoneCounter);
+>, <Line: +		return new TurboMilestone(repoId, i, "Milestone " + i + " " + Math.random());
+>, <Line: +	}
+>, <Line: +	private static TurboMilestone makeDummyMilestone(String repoId) {
+>, <Line: +		TurboMilestone milestone = new TurboMilestone(repoId, milestoneCounter + 1,
+>, <Line: +			"Milestone " + (milestoneCounter + 1));
+>, <Line: +		milestoneCounter++;
+>, <Line: +		return milestone;
+>, <Line: +	}
+>, <Line: +	private static TurboUser updateRandomUser(String repoId) {
+>, <Line: +		int i = (int) (Math.random() * userCounter);
+>, <Line: +		return new TurboUser(repoId, "User " + i + " " + Math.random());
+>, <Line: +	}
+>, <Line: +	private static TurboUser makeDummyUser(String repoId) {
+>, <Line: +		TurboUser user = new TurboUser(repoId, "User " + (userCounter + 1));
+>, <Line: +		userCounter++;
+>, <Line: +		return user;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<TurboIssueEvent> getEvents(String repoId, int issueId) {
+>, <Line: +		return new ArrayList<>();
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<Comment> getComments(String repoId, int issueId) {
+>, <Line: +		return new ArrayList<>();
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean isRepositoryValid(String repoId) {
+>, <Line: +		return true;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

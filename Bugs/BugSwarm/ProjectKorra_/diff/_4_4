@@ -1,0 +1,4 @@
+[<Line: +				config.addDefault("Properties.RegionProtection.Residence.Flag", "bending");
+>, <Line: +				config.addDefault("Properties.RegionProtection.Residence.Respect", true);
+>]
+[]

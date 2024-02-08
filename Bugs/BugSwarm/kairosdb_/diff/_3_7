@@ -1,0 +1,297 @@
+[<Line: +import com.datastax.driver.core.*;
+>, <Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import org.kairosdb.core.queue.EventCompletionCallBack;
+>, <Line: +import org.kairosdb.core.queue.ProcessorHandler;
+>, <Line: +import org.kairosdb.core.queue.QueueProcessor;
+>, <Line: +import org.kairosdb.events.RowKeyEvent;
+>, <Line: +import org.kairosdb.util.CongestionExecutorService;
+>, <Line: +import java.util.concurrent.Callable;
+>, <Line: +public class CassandraDatastore implements Datastore, ProcessorHandler
+>, <Line: +	private final EventBus m_eventBus;
+>, <Line: +	private final QueueProcessor m_queueProcessor;
+>, <Line: +	private final CongestionExecutorService m_congestionExecutor;
+>, <Line: +			KairosDataPointFactory kairosDataPointFactory,
+>, <Line: +			QueueProcessor queueProcessor,
+>, <Line: +			EventBus eventBus,
+>, <Line: +			CongestionExecutorService congestionExecutor) throws DatastoreException
+>, <Line: +		m_queueProcessor = queueProcessor;
+>, <Line: +		m_congestionExecutor = congestionExecutor;
+>, <Line: +		m_eventBus = eventBus;
+>, <Line: +		//This needs to be done last as it tells the processor we are ready for data
+>, <Line: +		m_queueProcessor.setProcessorHandler(this);
+>, <Line: +		m_eventBus.unregister(this);
+>, <Line: +		m_queueProcessor.shutdown();
+>, <Line: +		m_queueProcessor.put(dataPointEvent);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void handleEvents(List<DataPointEvent> events, EventCompletionCallBack eventCompletionCallBack)
+>, <Line: +	{
+>, <Line: +		BatchHandler batchHandler = new BatchHandler(events, eventCompletionCallBack);
+>, <Line: +		m_congestionExecutor.submit(batchHandler);
+>, <Line: +	private class BatchHandler implements Callable<Long>
+>, <Line: +	{
+>, <Line: +		private final List<DataPointEvent> m_events;
+>, <Line: +		private final EventCompletionCallBack m_callBack;
+>, <Line: +		public BatchHandler(List<DataPointEvent> events, EventCompletionCallBack eventCompletionCallBack)
+>, <Line: +		{
+>, <Line: +			m_events = events;
+>, <Line: +			m_callBack = eventCompletionCallBack;
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public Long call()
+>, <Line: +		{
+>, <Line: +			//System.out.println("Running Batch");
+>, <Line: +			BatchStatement metricNamesBatch = new BatchStatement(BatchStatement.Type.UNLOGGED);
+>, <Line: +			BatchStatement tagNameBatch = new BatchStatement(BatchStatement.Type.UNLOGGED);
+>, <Line: +			BatchStatement tagValueBatch = new BatchStatement(BatchStatement.Type.UNLOGGED);
+>, <Line: +			BatchStatement dataPointBatch = new BatchStatement(BatchStatement.Type.UNLOGGED);
+>, <Line: +			BatchStatement rowKeyBatch = new BatchStatement(BatchStatement.Type.UNLOGGED);
+>, <Line: +			//System.out.println(events.size());
+>, <Line: +			try
+>, <Line: +			{
+>, <Line: +				for (DataPointEvent event : m_events)
+>, <Line: +				{
+>, <Line: +					String metricName = event.getMetricName();
+>, <Line: +					ImmutableSortedMap<String, String> tags = event.getTags();
+>, <Line: +					DataPoint dataPoint = event.getDataPoint();
+>, <Line: +					int ttl = event.getTtl();
+>, <Line: +					DataPointsRowKey rowKey = null;
+>, <Line: +					//time the data is written.
+>, <Line: +					long writeTime = System.currentTimeMillis();
+>, <Line: +					if (0 == ttl)
+>, <Line: +						ttl = m_cassandraConfiguration.getDatapointTtl();
+>, <Line: +					int rowKeyTtl = 0;
+>, <Line: +					//Row key will expire 3 weeks after the data in the row expires
+>, <Line: +					if (ttl != 0)
+>, <Line: +						rowKeyTtl = ttl + ((int) (ROW_WIDTH / 1000));
+>, <Line: +					long rowTime = calculateRowTime(dataPoint.getTimestamp());
+>, <Line: +					rowKey = new DataPointsRowKey(metricName, rowTime, dataPoint.getDataStoreDataType(),
+>, <Line: +							tags);
+>, <Line: +					//Write out the row key if it is not cached
+>, <Line: +					DataPointsRowKey cachedKey = m_rowKeyCache.cacheItem(rowKey);
+>, <Line: +					if (cachedKey == null)
+>, <Line: +					{
+>, <Line: +						BoundStatement bs = new BoundStatement(m_psInsertRowKey);
+>, <Line: +						bs.setBytes(0, ByteBuffer.wrap(metricName.getBytes(UTF_8)));
+>, <Line: +						bs.setBytes(1, DATA_POINTS_ROW_KEY_SERIALIZER.toByteBuffer(rowKey));
+>, <Line: +						bs.setInt(2, rowKeyTtl);
+>, <Line: +						rowKeyBatch.add(bs);
+>, <Line: +						m_eventBus.post(new RowKeyEvent(metricName, rowKey, rowKeyTtl));
+>, <Line: +					}
+>, <Line: +					else
+>, <Line: +						rowKey = cachedKey;
+>, <Line: +					//Write metric name if not in cache
+>, <Line: +					String cachedName = m_metricNameCache.cacheItem(metricName);
+>, <Line: +					if (cachedName == null)
+>, <Line: +					{
+>, <Line: +						if (metricName.length() == 0)
+>, <Line: +						{
+>, <Line: +							logger.warn(
+>, <Line: +									"Attempted to add empty metric name to string index. Row looks like: " + dataPoint
+>, <Line: +							);
+>, <Line: +						}
+>, <Line: +						BoundStatement bs = new BoundStatement(m_psInsertString);
+>, <Line: +						bs.setBytes(0, ByteBuffer.wrap(ROW_KEY_METRIC_NAMES.getBytes(UTF_8)));
+>, <Line: +						bs.setString(1, metricName);
+>, <Line: +						metricNamesBatch.add(bs);
+>, <Line: +				/*m_stringIndexWriteBuffer.addData(ROW_KEY_METRIC_NAMES,
+>, <Line: +						metricName, "", now);*/
+>, <Line: +					}
+>, <Line: +					//Check tag names and values to write them out
+>, <Line: +					for (String tagName : tags.keySet())
+>, <Line: +					{
+>, <Line: +						String cachedTagName = m_tagNameCache.cacheItem(tagName);
+>, <Line: +						if (cachedTagName == null)
+>, <Line: +						{
+>, <Line: +							if (tagName.length() == 0)
+>, <Line: +							{
+>, <Line: +								logger.warn(
+>, <Line: +										"Attempted to add empty tagName to string cache for metric: " + metricName
+>, <Line: +								);
+>, <Line: +							}
+>, <Line: +							BoundStatement bs = new BoundStatement(m_psInsertString);
+>, <Line: +							bs.setBytes(0, ByteBuffer.wrap(ROW_KEY_TAG_NAMES.getBytes(UTF_8)));
+>, <Line: +							bs.setString(1, tagName);
+>, <Line: +							tagNameBatch.add(bs);
+>, <Line: +						}
+>, <Line: +						String value = tags.get(tagName);
+>, <Line: +						String cachedValue = m_tagValueCache.cacheItem(value);
+>, <Line: +						if (cachedValue == null)
+>, <Line: +						{
+>, <Line: +							if (value.length() == 0)
+>, <Line: +							{
+>, <Line: +								logger.warn(
+>, <Line: +										"Attempted to add empty tagValue (tag name " + tagName + ") to string cache for metric: " + metricName
+>, <Line: +								);
+>, <Line: +							}
+>, <Line: +							BoundStatement bs = new BoundStatement(m_psInsertString);
+>, <Line: +							bs.setBytes(0, ByteBuffer.wrap(ROW_KEY_TAG_VALUES.getBytes(UTF_8)));
+>, <Line: +							bs.setString(1, value);
+>, <Line: +							tagValueBatch.add(bs);
+>, <Line: +					/*m_stringIndexWriteBuffer.addData(ROW_KEY_TAG_VALUES,
+>, <Line: +							value, "", now);*/
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					int columnTime = getColumnName(rowTime, dataPoint.getTimestamp());
+>, <Line: +					KDataOutput kDataOutput = new KDataOutput();
+>, <Line: +					dataPoint.writeValueToBuffer(kDataOutput);
+>, <Line: +			/*m_dataPointWriteBuffer.addData(rowKey, columnTime,
+>, <Line: +					kDataOutput.getBytes(), writeTime, ttl);*/
+>, <Line: +					BoundStatement boundStatement = new BoundStatement(m_psInsertData);
+>, <Line: +					boundStatement.setBytes(0, DATA_POINTS_ROW_KEY_SERIALIZER.toByteBuffer(rowKey));
+>, <Line: +					ByteBuffer b = ByteBuffer.allocate(4);
+>, <Line: +					b.putInt(columnTime);
+>, <Line: +					b.rewind();
+>, <Line: +					boundStatement.setBytes(1, b);
+>, <Line: +					boundStatement.setBytes(2, ByteBuffer.wrap(kDataOutput.getBytes()));
+>, <Line: +					boundStatement.setInt(3, ttl);
+>, <Line: +					//m_session.executeAsync(boundStatement);
+>, <Line: +					dataPointBatch.add(boundStatement);
+>, <Line: +					//m_session.executeAsync(m_batchStatement);
+>, <Line: +				}
+>, <Line: +				if (metricNamesBatch.size() != 0)
+>, <Line: +					m_session.executeAsync(metricNamesBatch);
+>, <Line: +				if (tagNameBatch.size() != 0)
+>, <Line: +					m_session.executeAsync(tagNameBatch);
+>, <Line: +				if (tagValueBatch.size() != 0)
+>, <Line: +					m_session.executeAsync(tagValueBatch);
+>, <Line: +				if (rowKeyBatch.size() != 0)
+>, <Line: +					m_session.executeAsync(rowKeyBatch);
+>, <Line: +				m_session.execute(dataPointBatch);
+>, <Line: +				m_callBack.complete();
+>, <Line: +			}
+>, <Line: +			catch (Exception e)
+>, <Line: +			{
+>, <Line: +				logger.error("Error sending data points", e);
+>, <Line: +			}
+>, <Line: +			return null;
+>, <Line: +		}
+>, <Line: +	}
+>]
+[<Line: -import com.datastax.driver.core.BatchStatement;
+>, <Line: -import com.datastax.driver.core.BoundStatement;
+>, <Line: -import com.datastax.driver.core.PreparedStatement;
+>, <Line: -import com.datastax.driver.core.Session;
+>, <Line: -public class CassandraDatastore implements Datastore
+>, <Line: -	@Inject
+>, <Line: -	private List<RowKeyListener> m_rowKeyListeners = Collections.emptyList();
+>, <Line: -			KairosDataPointFactory kairosDataPointFactory) throws DatastoreException
+>, <Line: -		String metricName = dataPointEvent.getMetricName();
+>, <Line: -		ImmutableSortedMap<String, String> tags = dataPointEvent.getTags();
+>, <Line: -		DataPoint dataPoint = dataPointEvent.getDataPoint();
+>, <Line: -		int ttl = dataPointEvent.getTtl();
+>, <Line: -		try
+>, <Line: -		{
+>, <Line: -			DataPointsRowKey rowKey = null;
+>, <Line: -			//time the data is written.
+>, <Line: -			long writeTime = System.currentTimeMillis();
+>, <Line: -			if (0 == ttl)
+>, <Line: -				ttl = m_cassandraConfiguration.getDatapointTtl();
+>, <Line: -			int rowKeyTtl = 0;
+>, <Line: -			//Row key will expire 3 weeks after the data in the row expires
+>, <Line: -			if (ttl != 0)
+>, <Line: -				rowKeyTtl = ttl + ((int) (ROW_WIDTH / 1000));
+>, <Line: -			long rowTime = calculateRowTime(dataPoint.getTimestamp());
+>, <Line: -			rowKey = new DataPointsRowKey(metricName, rowTime, dataPoint.getDataStoreDataType(),
+>, <Line: -					tags);
+>, <Line: -			long now = System.currentTimeMillis();
+>, <Line: -			//Write out the row key if it is not cached
+>, <Line: -			DataPointsRowKey cachedKey = m_rowKeyCache.cacheItem(rowKey);
+>, <Line: -			if (cachedKey == null)
+>, <Line: -			{
+>, <Line: -				BoundStatement bs = new BoundStatement(m_psInsertRowKey);
+>, <Line: -				bs.setBytes(0, ByteBuffer.wrap(metricName.getBytes(UTF_8)));
+>, <Line: -				bs.setBytes(1, DATA_POINTS_ROW_KEY_SERIALIZER.toByteBuffer(rowKey));
+>, <Line: -				bs.setInt(2, rowKeyTtl);
+>, <Line: -				m_session.executeAsync(bs);
+>, <Line: -				/*m_rowKeyWriteBuffer.addData(metricName, rowKey, "", now, rowKeyTtl);*/
+>, <Line: -				for (RowKeyListener rowKeyListener : m_rowKeyListeners)
+>, <Line: -					rowKeyListener.addRowKey(metricName, rowKey, rowKeyTtl);
+>, <Line: -			}
+>, <Line: -			else
+>, <Line: -				rowKey = cachedKey;
+>, <Line: -			//Write metric name if not in cache
+>, <Line: -			String cachedName = m_metricNameCache.cacheItem(metricName);
+>, <Line: -			if (cachedName == null)
+>, <Line: -			{
+>, <Line: -				if (metricName.length() == 0)
+>, <Line: -				{
+>, <Line: -					logger.warn(
+>, <Line: -							"Attempted to add empty metric name to string index. Row looks like: " + dataPoint
+>, <Line: -					);
+>, <Line: -				}
+>, <Line: -				BoundStatement bs = new BoundStatement(m_psInsertString);
+>, <Line: -				bs.setBytes(0, ByteBuffer.wrap(ROW_KEY_METRIC_NAMES.getBytes(UTF_8)));
+>, <Line: -				bs.setString(1, metricName);
+>, <Line: -				m_session.executeAsync(bs);
+>, <Line: -				/*m_stringIndexWriteBuffer.addData(ROW_KEY_METRIC_NAMES,
+>, <Line: -						metricName, "", now);*/
+>, <Line: -			}
+>, <Line: -			//Check tag names and values to write them out
+>, <Line: -			for (String tagName : tags.keySet())
+>, <Line: -			{
+>, <Line: -				String cachedTagName = m_tagNameCache.cacheItem(tagName);
+>, <Line: -				if (cachedTagName == null)
+>, <Line: -				{
+>, <Line: -					if (tagName.length() == 0)
+>, <Line: -					{
+>, <Line: -						logger.warn(
+>, <Line: -								"Attempted to add empty tagName to string cache for metric: " + metricName
+>, <Line: -						);
+>, <Line: -					}
+>, <Line: -					BoundStatement bs = new BoundStatement(m_psInsertString);
+>, <Line: -					bs.setBytes(0, ByteBuffer.wrap(ROW_KEY_TAG_NAMES.getBytes(UTF_8)));
+>, <Line: -					bs.setString(1, tagName);
+>, <Line: -					m_session.executeAsync(bs);
+>, <Line: -					/*m_stringIndexWriteBuffer.addData(ROW_KEY_TAG_NAMES,
+>, <Line: -							tagName, "", now);*/
+>, <Line: -				}
+>, <Line: -				String value = tags.get(tagName);
+>, <Line: -				String cachedValue = m_tagValueCache.cacheItem(value);
+>, <Line: -				if (cachedValue == null)
+>, <Line: -				{
+>, <Line: -					if (value.length() == 0)
+>, <Line: -					{
+>, <Line: -						logger.warn(
+>, <Line: -								"Attempted to add empty tagValue (tag name " + tagName + ") to string cache for metric: " + metricName
+>, <Line: -						);
+>, <Line: -					}
+>, <Line: -					BoundStatement bs = new BoundStatement(m_psInsertString);
+>, <Line: -					bs.setBytes(0, ByteBuffer.wrap(ROW_KEY_TAG_VALUES.getBytes(UTF_8)));
+>, <Line: -					bs.setString(1, value);
+>, <Line: -					m_session.executeAsync(bs);
+>, <Line: -					/*m_stringIndexWriteBuffer.addData(ROW_KEY_TAG_VALUES,
+>, <Line: -							value, "", now);*/
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			int columnTime = getColumnName(rowTime, dataPoint.getTimestamp());
+>, <Line: -			KDataOutput kDataOutput = new KDataOutput();
+>, <Line: -			dataPoint.writeValueToBuffer(kDataOutput);
+>, <Line: -			/*m_dataPointWriteBuffer.addData(rowKey, columnTime,
+>, <Line: -					kDataOutput.getBytes(), writeTime, ttl);*/
+>, <Line: -			BoundStatement boundStatement = new BoundStatement(m_psInsertData);
+>, <Line: -			boundStatement.setBytes(0, DATA_POINTS_ROW_KEY_SERIALIZER.toByteBuffer(rowKey));
+>, <Line: -			ByteBuffer b = ByteBuffer.allocate(4);
+>, <Line: -			b.putInt(columnTime);
+>, <Line: -			b.rewind();
+>, <Line: -			boundStatement.setBytes(1, b);
+>, <Line: -			boundStatement.setBytes(2, ByteBuffer.wrap(kDataOutput.getBytes()));
+>, <Line: -			boundStatement.setInt(3, ttl);
+>, <Line: -			//m_session.executeAsync(boundStatement);
+>, <Line: -			if (m_batchStatement == null)
+>, <Line: -				m_batchStatement = new BatchStatement();
+>, <Line: -			m_batchStatement.add(boundStatement);
+>, <Line: -			if (m_batchStatement.size() > 390)
+>, <Line: -			{
+>, <Line: -				synchronized (m_batchLock)
+>, <Line: -				{
+>, <Line: -					m_session.executeAsync(m_batchStatement);
+>, <Line: -					m_batchStatement = new BatchStatement();
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		catch (Exception e)
+>, <Line: -		{
+>, <Line: -			throw new DatastoreException(e);
+>, <Line: -		}
+>]

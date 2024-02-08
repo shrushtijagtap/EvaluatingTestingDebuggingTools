@@ -1,0 +1,10 @@
+[<Line: +		request.addHeader("Referer", "https://www.github.com/stagemonitor/stagemonitor");
+>, <Line: +		assertEquals(new HashSet<String>(asList("referer", "accept")), requestTrace.getHeaders().keySet());
+>, <Line: +	@Test
+>, <Line: +	public void testReferringSite() throws Exception {
+>, <Line: +		final HttpRequestTrace requestTrace = monitoredHttpRequest.createRequestTrace();
+>, <Line: +		assertEquals("github.com", requestTrace.getReferringSite());
+>, <Line: +	}
+>]
+[<Line: -		assertEquals(new HashSet<String>(asList("accept")), requestTrace.getHeaders().keySet());
+>]

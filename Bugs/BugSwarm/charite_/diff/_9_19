@@ -1,0 +1,38 @@
+[<Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.HashSet;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.NoSuchElementException;
+>, <Line: + * Class for pushing genotype-based filters to the variant level, also consider population
+>, <Line: + * frequencies.
+>, <Line: +public class VariantThresholdFilterAnnotator {
+>, <Line: +	public VariantThresholdFilterAnnotator(ThresholdFilterOptions options,
+>, <Line: +			List<String> affecteds) {
+>, <Line: +		this.affecteds = ImmutableList.copyOf(affecteds);
+>, <Line: +	 * @param builder {@link VariantContextBuilder} to create new variant context for
+>, <Line: +	 * @param vc {@link VariantContext} to annotate
+>, <Line: +	public VariantContext annotateVariantContext(VariantContext vc) {
+>, <Line: +		VariantContextBuilder builder = new VariantContextBuilder(vc);
+>, <Line: +			for (Genotype gt : vc.getGenotypes())
+>, <Line: +		return builder.make();
+>]
+[<Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.HashSet;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.NoSuchElementException;
+>, <Line: - * Class for pushing genotype-based filters to the variant level
+>, <Line: -public class VariantFilterAnnotator {
+>, <Line: -	public VariantFilterAnnotator(ThresholdFilterOptions options, ImmutableList<String> affecteds) {
+>, <Line: -		this.affecteds = affecteds;
+>, <Line: -	 * @param builder
+>, <Line: -	 *            {@link VariantContextBuilder} to create new variant context for
+>, <Line: -	 * @param vc
+>, <Line: -	 *            {@link VariantContext} to annotate
+>, <Line: -	 * @param gts
+>, <Line: -	 *            Updated genotypes with filter annotation
+>, <Line: -	public VariantContextBuilder annotateVariant(VariantContextBuilder builder, VariantContext vc,
+>, <Line: -			List<Genotype> gts) {
+>, <Line: -			for (Genotype gt : gts)
+>, <Line: -		return builder;
+>]

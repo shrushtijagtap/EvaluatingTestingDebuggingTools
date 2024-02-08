@@ -1,0 +1,4 @@
+[<Line: +import static org.junit.Assert.assertEquals;
+>]
+[<Line: -import static junit.framework.Assert.assertEquals;
+>]

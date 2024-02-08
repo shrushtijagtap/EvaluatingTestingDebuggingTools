@@ -1,0 +1,3 @@
+[<Line: +                bind(QueryPreProcessorContainer.class).to(GuiceQueryPreProcessor.class).in(javax.inject.Singleton.class);
+>]
+[]

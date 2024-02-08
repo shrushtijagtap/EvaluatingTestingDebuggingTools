@@ -1,0 +1,8 @@
+[<Line: +        return uri.toURL().openStream();
+>, <Line: +    } catch(MalformedURLException e) {
+>, <Line: +    } catch(IOException e) {
+>]
+[<Line: -        return openFileInputStream(filenameOrUrl);
+>, <Line: -    } catch (MalformedURLException e) {
+>, <Line: -    } catch (IOException e) {
+>]

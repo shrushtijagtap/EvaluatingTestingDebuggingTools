@@ -1,0 +1,10 @@
+[<Line: +    [[int]] C = [[]; |A|]
+>, <Line: +        [int] row = [0; |B|]
+>, <Line: +            row[j] = r
+>, <Line: +        C[i] = row
+>]
+[<Line: -    [[int]] C = []
+>, <Line: -        [int] row = []
+>, <Line: -            row = row ++ [r]
+>, <Line: -        C = C ++ [row]
+>]

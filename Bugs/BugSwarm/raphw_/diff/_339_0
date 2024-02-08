@@ -1,0 +1,3 @@
+[<Line: +    @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Legal state where reflection communicates errors by exception")
+>]
+[]

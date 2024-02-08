@@ -1,0 +1,6 @@
+[<Line: +	//Used for parsing incoming metrics
+>, <Line: +			logger.error("Failed to open temp folder " + datastore.getCacheDir(), e);
+>]
+[<Line: -	//Used for parsing incomming metrices
+>, <Line: -			logger.error("Failed to open temp folder "+datastore.getCacheDir(), e);
+>]

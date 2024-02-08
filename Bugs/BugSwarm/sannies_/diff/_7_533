@@ -1,0 +1,68 @@
+[<Line: +package org.mp4parser.muxer.tracks.h265;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.BitReaderBuffer;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDescriptionBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part15.HevcConfigurationBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part15.HevcDecoderConfigurationRecord;
+>, <Line: +import org.mp4parser.boxes.sampleentry.VisualSampleEntry;
+>, <Line: +import org.mp4parser.muxer.*;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import org.mp4parser.muxer.tracks.AbstractH26XTrack;
+>, <Line: +import org.mp4parser.tools.ByteBufferByteChannel;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: + * Takes a raw H265 stream and muxes into an MP4.
+>, <Line: +    public static H265NalUnitHeader getNalUnitHeader(ByteBuffer nal) {
+>, <Line: +        nal.position(0);
+>, <Line: +        int nal_unit_header = IsoTypeReader.readUInt16(nal);
+>, <Line: +        H265NalUnitHeader nalUnitHeader = new H265NalUnitHeader();
+>, <Line: +        nalUnitHeader.forbiddenZeroFlag = (nal_unit_header & 0x8000) >> 15;
+>, <Line: +        nalUnitHeader.nalUnitType = (nal_unit_header & 0x7E00) >> 9;
+>, <Line: +        nalUnitHeader.nuhLayerId = (nal_unit_header & 0x1F8) >> 3;
+>, <Line: +        nalUnitHeader.nuhTemporalIdPlusOne = (nal_unit_header & 0x7);
+>, <Line: +        return nalUnitHeader;
+>, <Line: +    }
+>, <Line: +    public static void main(String[] args) throws IOException {
+>, <Line: +        Track track = new H265TrackImpl(new FileDataSourceImpl("c:\\content\\test-UHD-HEVC_01_FMV_Med_track1.hvc"));
+>, <Line: +        Movie movie = new Movie();
+>, <Line: +        movie.addTrack(track);
+>, <Line: +        DefaultMp4Builder mp4Builder = new DefaultMp4Builder();
+>, <Line: +        Container c = mp4Builder.build(movie);
+>, <Line: +        c.writeContainer(new FileOutputStream("output.mp4").getChannel());
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks.h265;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.coremedia.iso.boxes.SampleDescriptionBox;
+>, <Line: -import com.coremedia.iso.boxes.sampleentry.VisualSampleEntry;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.googlecode.mp4parser.FileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.AbstractH26XTrack;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.BitReaderBuffer;
+>, <Line: -import com.googlecode.mp4parser.util.ByteBufferByteChannel;
+>, <Line: -import com.mp4parser.iso14496.part15.HevcConfigurationBox;
+>, <Line: -import com.mp4parser.iso14496.part15.HevcDecoderConfigurationRecord;
+>, <Line: - * Created by sannies on 02.01.2015.
+>, <Line: -    public static H265NalUnitHeader getNalUnitHeader(ByteBuffer nal) {
+>, <Line: -        nal.position(0);
+>, <Line: -        int nal_unit_header = IsoTypeReader.readUInt16(nal);
+>, <Line: -        H265NalUnitHeader nalUnitHeader = new H265NalUnitHeader();
+>, <Line: -        nalUnitHeader.forbiddenZeroFlag = (nal_unit_header & 0x8000) >> 15;
+>, <Line: -        nalUnitHeader.nalUnitType = (nal_unit_header & 0x7E00) >> 9;
+>, <Line: -        nalUnitHeader.nuhLayerId = (nal_unit_header & 0x1F8) >> 3;
+>, <Line: -        nalUnitHeader.nuhTemporalIdPlusOne = (nal_unit_header & 0x7);
+>, <Line: -        return nalUnitHeader;
+>, <Line: -    }
+>, <Line: -    public static void main(String[] args) throws IOException {
+>, <Line: -        Track track = new H265TrackImpl(new FileDataSourceImpl("c:\\content\\test-UHD-HEVC_01_FMV_Med_track1.hvc"));
+>, <Line: -        Movie movie = new Movie();
+>, <Line: -        movie.addTrack(track);
+>, <Line: -        DefaultMp4Builder mp4Builder = new DefaultMp4Builder();
+>, <Line: -        Container c = mp4Builder.build(movie);
+>, <Line: -        c.writeContainer(new FileOutputStream("output.mp4").getChannel());
+>, <Line: -    }
+>]

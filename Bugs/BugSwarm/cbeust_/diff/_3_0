@@ -1,0 +1,23 @@
+[<Line: +	<classpathentry kind="src" path="src/test/java"/>
+>, <Line: +	<classpathentry kind="src" path="src/main/resources"/>
+>, <Line: +	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+>]
+[<Line: -	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+>, <Line: -		<attributes>
+>, <Line: -			<attribute name="maven.pomderived" value="true"/>
+>, <Line: -		</attributes>
+>, <Line: -	</classpathentry>
+>, <Line: -	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+>, <Line: -		<attributes>
+>, <Line: -			<attribute name="optional" value="true"/>
+>, <Line: -			<attribute name="maven.pomderived" value="true"/>
+>, <Line: -		</attributes>
+>, <Line: -	</classpathentry>
+>, <Line: -	<classpathentry kind="src" output="target/classes" path="target/generated-sources/version">
+>, <Line: -		<attributes>
+>, <Line: -			<attribute name="optional" value="true"/>
+>, <Line: -			<attribute name="maven.pomderived" value="true"/>
+>, <Line: -		</attributes>
+>, <Line: -	</classpathentry>
+>, <Line: -	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5">
+>]

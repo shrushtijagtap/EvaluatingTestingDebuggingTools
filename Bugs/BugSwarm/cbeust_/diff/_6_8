@@ -1,0 +1,20 @@
+[<Line: +package test.junit4;
+>, <Line: +import org.junit.AfterClass;
+>, <Line: +import org.junit.BeforeClass;
+>, <Line: +import org.junit.Test;
+>, <Line: +public class BeforeClassJUnit4Sample {
+>, <Line: +    @BeforeClass
+>, <Line: +    public static void before() {
+>, <Line: +        throw new IllegalArgumentException("before failed");
+>, <Line: +    }
+>, <Line: +    @AfterClass
+>, <Line: +    public static void after() {
+>, <Line: +        //throw new IllegalArgumentException("after failed");
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void myTest() {
+>, <Line: +        System.out.println("yay!");
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

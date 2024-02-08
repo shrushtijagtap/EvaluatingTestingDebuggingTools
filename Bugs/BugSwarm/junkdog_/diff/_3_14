@@ -1,0 +1,4 @@
+[<Line: +	void forEntity(int entityId) {
+>]
+[<Line: -	void forEntity(Entity e) {
+>]

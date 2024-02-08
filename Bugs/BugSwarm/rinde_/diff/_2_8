@@ -1,0 +1,28 @@
+[<Line: +          public boolean accept(@Nullable File file) {
+>, <Line: +          .startPosition(depotPosition)
+>, <Line: +          .speed(truckSpeed)
+>, <Line: +          .capacity(0)
+>, <Line: +          .availabilityTimeWindow(new TimeWindow(0, totalTime))
+>, <Line: +          .build()));
+>, <Line: +                  .deliveryTimeWindow(new TimeWindow(
+>, <Line: +                      deliveryTimeWindowBegin, deliveryTimeWindowEnd))
+>, <Line: +                      .neededCapacity(PARCEL_MAGNITUDE)
+>, <Line: +                      .orderAnnounceTime(arrTime)
+>, <Line: +                      .pickupDuration(pickupServiceTime)
+>, <Line: +                      .deliveryDuration(deliveryServiceTime)
+>, <Line: +                      .build();
+>]
+[<Line: -          public boolean accept(File file) {
+>, <Line: -              .startPosition(depotPosition)
+>, <Line: -              .speed(truckSpeed)
+>, <Line: -              .capacity(0)
+>, <Line: -              .availabilityTimeWindow(new TimeWindow(0, totalTime))
+>, <Line: -              .build()));
+>, <Line: -              .deliveryTimeWindow(new TimeWindow(
+>, <Line: -                  deliveryTimeWindowBegin, deliveryTimeWindowEnd))
+>, <Line: -              .neededCapacity(PARCEL_MAGNITUDE)
+>, <Line: -              .orderAnnounceTime(arrTime)
+>, <Line: -              .pickupDuration(pickupServiceTime)
+>, <Line: -              .deliveryDuration(deliveryServiceTime)
+>, <Line: -              .build();
+>]

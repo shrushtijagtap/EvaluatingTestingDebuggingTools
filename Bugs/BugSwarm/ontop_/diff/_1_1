@@ -1,0 +1,5 @@
+[<Line: +import java.io.Serializable;
+>, <Line: +public interface CQIE extends Serializable {
+>]
+[<Line: -public interface CQIE extends OBDAQuery {
+>]

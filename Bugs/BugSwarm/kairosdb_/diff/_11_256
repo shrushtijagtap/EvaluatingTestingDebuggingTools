@@ -1,0 +1,1242 @@
+[<Line: +		'lodash',
+>, <Line: +		'jquery'
+>, <Line: +	],
+>, <Line: +	function (_, $) {
+>, <Line: +		'use strict';
+>, <Line: +		var index = [];
+>, <Line: +		var categories = {
+>, <Line: +			Combine: [],
+>, <Line: +			Transform: [],
+>, <Line: +			Calculate: [],
+>, <Line: +			Filter: [],
+>, <Line: +			Special: []
+>, <Line: +		};
+>, <Line: +		function addFuncDef(funcDef) {
+>, <Line: +			funcDef.params = funcDef.params || [];
+>, <Line: +			funcDef.defaultParams = funcDef.defaultParams || [];
+>, <Line: +			if (funcDef.category) {
+>, <Line: +				funcDef.category.push(funcDef);
+>, <Line: +			}
+>, <Line: +			index[funcDef.name] = funcDef;
+>, <Line: +			index[funcDef.shortName || funcDef.name] = funcDef;
+>, <Line: +		}
+>, <Line: +		var optionalSeriesRefArgs = [
+>, <Line: +			{name: 'other', type: 'value_or_series', optional: true},
+>, <Line: +			{name: 'other', type: 'value_or_series', optional: true},
+>, <Line: +			{name: 'other', type: 'value_or_series', optional: true},
+>, <Line: +			{name: 'other', type: 'value_or_series', optional: true},
+>, <Line: +			{name: 'other', type: 'value_or_series', optional: true}
+>, <Line: +		];
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'scaleToSeconds',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [{name: 'seconds', type: 'int'}],
+>, <Line: +			defaultParams: [1],
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'perSecond',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [],
+>, <Line: +			defaultParams: [],
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: "holtWintersForecast",
+>, <Line: +			category: categories.Calculate,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: "holtWintersConfidenceBands",
+>, <Line: +			category: categories.Calculate,
+>, <Line: +			params: [{name: "delta", type: 'int'}],
+>, <Line: +			defaultParams: [3]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: "holtWintersAberration",
+>, <Line: +			category: categories.Calculate,
+>, <Line: +			params: [{name: "delta", type: 'int'}],
+>, <Line: +			defaultParams: [3]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: "nPercentile",
+>, <Line: +			category: categories.Calculate,
+>, <Line: +			params: [{name: "Nth percentile", type: 'int'}],
+>, <Line: +			defaultParams: [95]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'diffSeries',
+>, <Line: +			params: optionalSeriesRefArgs,
+>, <Line: +			defaultParams: ['#A'],
+>, <Line: +			category: categories.Calculate,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'divideSeries',
+>, <Line: +			params: optionalSeriesRefArgs,
+>, <Line: +			defaultParams: ['#A'],
+>, <Line: +			category: categories.Calculate,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'asPercent',
+>, <Line: +			params: optionalSeriesRefArgs,
+>, <Line: +			defaultParams: ['#A'],
+>, <Line: +			category: categories.Calculate,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'group',
+>, <Line: +			params: optionalSeriesRefArgs,
+>, <Line: +			defaultParams: ['#A', '#B'],
+>, <Line: +			category: categories.Combine,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'mapSeries',
+>, <Line: +			shortName: 'map',
+>, <Line: +			params: [{name: "node", type: 'int'}],
+>, <Line: +			defaultParams: [3],
+>, <Line: +			category: categories.Combine,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'reduceSeries',
+>, <Line: +			shortName: 'reduce',
+>, <Line: +			params: [
+>, <Line: +				{
+>, <Line: +					name: "function",
+>, <Line: +					type: 'string',
+>, <Line: +					options: ['asPercent', 'diffSeries', 'divideSeries']
+>, <Line: +				},
+>, <Line: +				{
+>, <Line: +					name: "reduceNode",
+>, <Line: +					type: 'int',
+>, <Line: +					options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+>, <Line: +				},
+>, <Line: +				{name: "reduceMatchers", type: 'string'},
+>, <Line: +				{name: "reduceMatchers", type: 'string'},
+>, <Line: +			],
+>, <Line: +			defaultParams: ['asPercent', 2, 'used_bytes', 'total_bytes'],
+>, <Line: +			category: categories.Combine,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'sumSeries',
+>, <Line: +			shortName: 'sum',
+>, <Line: +			category: categories.Combine,
+>, <Line: +			params: optionalSeriesRefArgs,
+>, <Line: +			defaultParams: [''],
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'averageSeries',
+>, <Line: +			shortName: 'avg',
+>, <Line: +			category: categories.Combine,
+>, <Line: +			params: optionalSeriesRefArgs,
+>, <Line: +			defaultParams: [''],
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'isNonNull',
+>, <Line: +			category: categories.Combine,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'rangeOfSeries',
+>, <Line: +			category: categories.Combine
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'percentileOfSeries',
+>, <Line: +			category: categories.Combine,
+>, <Line: +			params: [{name: "n", type: "int"}, {
+>, <Line: +				name: "interpolate",
+>, <Line: +				type: "select",
+>, <Line: +				options: ["true", "false"]
+>, <Line: +			}],
+>, <Line: +			defaultParams: [95, "false"]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'sumSeriesWithWildcards',
+>, <Line: +			category: categories.Combine,
+>, <Line: +			params: [
+>, <Line: +				{name: "node", type: "int"},
+>, <Line: +				{name: "node", type: "int", optional: true},
+>, <Line: +				{name: "node", type: "int", optional: true},
+>, <Line: +				{name: "node", type: "int", optional: true}
+>, <Line: +			],
+>, <Line: +			defaultParams: [3]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'maxSeries',
+>, <Line: +			shortName: 'max',
+>, <Line: +			category: categories.Combine,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'minSeries',
+>, <Line: +			shortName: 'min',
+>, <Line: +			category: categories.Combine,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'averageSeriesWithWildcards',
+>, <Line: +			category: categories.Combine,
+>, <Line: +			params: [
+>, <Line: +				{name: "node", type: "int"},
+>, <Line: +				{name: "node", type: "int", optional: true},
+>, <Line: +			],
+>, <Line: +			defaultParams: [3]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: "alias",
+>, <Line: +			category: categories.Special,
+>, <Line: +			params: [{name: "alias", type: 'string'}],
+>, <Line: +			defaultParams: ['alias']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: "aliasSub",
+>, <Line: +			category: categories.Special,
+>, <Line: +			params: [{name: "search", type: 'string'}, {
+>, <Line: +				name: "replace",
+>, <Line: +				type: 'string'
+>, <Line: +			}],
+>, <Line: +			defaultParams: ['', '\\1']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: "stacked",
+>, <Line: +			category: categories.Special,
+>, <Line: +			params: [{name: "stack", type: 'string'}],
+>, <Line: +			defaultParams: ['stacked']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: "consolidateBy",
+>, <Line: +			category: categories.Special,
+>, <Line: +			params: [
+>, <Line: +				{
+>, <Line: +					name: 'function',
+>, <Line: +					type: 'string',
+>, <Line: +					options: ['sum', 'average', 'min', 'max']
+>, <Line: +				}
+>, <Line: +			],
+>, <Line: +			defaultParams: ['max']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: "groupByNode",
+>, <Line: +			category: categories.Special,
+>, <Line: +			params: [
+>, <Line: +				{
+>, <Line: +					name: "node",
+>, <Line: +					type: "int",
+>, <Line: +					options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
+>, <Line: +				},
+>, <Line: +				{
+>, <Line: +					name: "function",
+>, <Line: +					type: "string",
+>, <Line: +					options: ['sum', 'avg']
+>, <Line: +				}
+>, <Line: +			],
+>, <Line: +			defaultParams: [3, "sum"]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'aliasByNode',
+>, <Line: +			category: categories.Special,
+>, <Line: +			params: [
+>, <Line: +				{
+>, <Line: +					name: "node",
+>, <Line: +					type: "int",
+>, <Line: +					options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
+>, <Line: +				},
+>, <Line: +				{
+>, <Line: +					name: "node",
+>, <Line: +					type: "int",
+>, <Line: +					options: [0, -1, -2, -3, -4, -5, -6, -7],
+>, <Line: +					optional: true
+>, <Line: +				},
+>, <Line: +				{
+>, <Line: +					name: "node",
+>, <Line: +					type: "int",
+>, <Line: +					options: [0, -1, -2, -3, -4, -5, -6, -7],
+>, <Line: +					optional: true
+>, <Line: +				},
+>, <Line: +				{
+>, <Line: +					name: "node",
+>, <Line: +					type: "int",
+>, <Line: +					options: [0, -1, -2, -3, -4, -5, -6, -7],
+>, <Line: +					optional: true
+>, <Line: +				},
+>, <Line: +			],
+>, <Line: +			defaultParams: [3]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'substr',
+>, <Line: +			category: categories.Special,
+>, <Line: +			params: [
+>, <Line: +				{
+>, <Line: +					name: "start",
+>, <Line: +					type: "int",
+>, <Line: +					options: [-6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
+>, <Line: +				},
+>, <Line: +				{
+>, <Line: +					name: "stop",
+>, <Line: +					type: "int",
+>, <Line: +					options: [-6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
+>, <Line: +				},
+>, <Line: +			],
+>, <Line: +			defaultParams: [0, 0]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'sortByName',
+>, <Line: +			category: categories.Special
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'sortByMaxima',
+>, <Line: +			category: categories.Special
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'sortByMinima',
+>, <Line: +			category: categories.Special
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'sortByTotal',
+>, <Line: +			category: categories.Special
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'aliasByMetric',
+>, <Line: +			category: categories.Special,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'randomWalk',
+>, <Line: +			fake: true,
+>, <Line: +			category: categories.Special,
+>, <Line: +			params: [{name: "name", type: "string",}],
+>, <Line: +			defaultParams: ['randomWalk']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'countSeries',
+>, <Line: +			category: categories.Special
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'constantLine',
+>, <Line: +			category: categories.Special,
+>, <Line: +			params: [{name: "value", type: "int",}],
+>, <Line: +			defaultParams: [10]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'cactiStyle',
+>, <Line: +			category: categories.Special,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'keepLastValue',
+>, <Line: +			category: categories.Special,
+>, <Line: +			params: [{name: "n", type: "int",}],
+>, <Line: +			defaultParams: [100]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'scale',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [{name: "factor", type: "int",}],
+>, <Line: +			defaultParams: [1]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'offset',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [{name: "amount", type: "int",}],
+>, <Line: +			defaultParams: [10]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'offsetToZero',
+>, <Line: +			category: categories.Transform,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'transformNull',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [{name: "amount", type: "int",}],
+>, <Line: +			defaultParams: [0]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'integral',
+>, <Line: +			category: categories.Transform,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'derivative',
+>, <Line: +			category: categories.Transform,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'nonNegativeDerivative',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [{name: "max value or 0", type: "int", optional: true}],
+>, <Line: +			defaultParams: ['']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'timeShift',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [{
+>, <Line: +				name: "amount",
+>, <Line: +				type: "select",
+>, <Line: +				options: ['1h', '6h', '12h', '1d', '2d', '7d', '14d', '30d']
+>, <Line: +			}],
+>, <Line: +			defaultParams: ['1d']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'timeStack',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [
+>, <Line: +				{
+>, <Line: +					name: "timeShiftUnit",
+>, <Line: +					type: "select",
+>, <Line: +					options: ['1h', '6h', '12h', '1d', '2d', '7d', '14d', '30d']
+>, <Line: +				},
+>, <Line: +				{name: "timeShiftStart", type: "int"},
+>, <Line: +				{name: "timeShiftEnd", type: "int"}
+>, <Line: +			],
+>, <Line: +			defaultParams: ['1d', 0, 7]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'summarize',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [
+>, <Line: +				{name: "interval", type: "string"},
+>, <Line: +				{
+>, <Line: +					name: "func",
+>, <Line: +					type: "select",
+>, <Line: +					options: ['sum', 'avg', 'min', 'max', 'last']
+>, <Line: +				},
+>, <Line: +				{
+>, <Line: +					name: "alignToFrom",
+>, <Line: +					type: "boolean",
+>, <Line: +					optional: true,
+>, <Line: +					options: ['false', 'true']
+>, <Line: +				},
+>, <Line: +			],
+>, <Line: +			defaultParams: ['1h', 'sum', 'false']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'smartSummarize',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [{name: "interval", type: "string"}, {
+>, <Line: +				name: "func",
+>, <Line: +				type: "select",
+>, <Line: +				options: ['sum', 'avg', 'min', 'max', 'last']
+>, <Line: +			}],
+>, <Line: +			defaultParams: ['1h', 'sum']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'absolute',
+>, <Line: +			category: categories.Transform,
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'hitcount',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [{name: "interval", type: "string"}],
+>, <Line: +			defaultParams: ['10s']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'log',
+>, <Line: +			category: categories.Transform,
+>, <Line: +			params: [{name: "base", type: "int"}],
+>, <Line: +			defaultParams: ['10']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'averageAbove',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int",}],
+>, <Line: +			defaultParams: [25]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'averageBelow',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int",}],
+>, <Line: +			defaultParams: [25]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'currentAbove',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int",}],
+>, <Line: +			defaultParams: [25]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'currentBelow',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int",}],
+>, <Line: +			defaultParams: [25]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'maximumAbove',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "value", type: "int"}],
+>, <Line: +			defaultParams: [0]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'maximumBelow',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "value", type: "int"}],
+>, <Line: +			defaultParams: [0]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'minimumAbove',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "value", type: "int"}],
+>, <Line: +			defaultParams: [0]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'limit',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int"}],
+>, <Line: +			defaultParams: [5]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'mostDeviant',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int"}],
+>, <Line: +			defaultParams: [10]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: "exclude",
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "exclude", type: 'string'}],
+>, <Line: +			defaultParams: ['exclude']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'highestCurrent',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "count", type: "int"}],
+>, <Line: +			defaultParams: [5]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'highestMax',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "count", type: "int"}],
+>, <Line: +			defaultParams: [5]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'lowestCurrent',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "count", type: "int"}],
+>, <Line: +			defaultParams: [5]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'movingAverage',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{
+>, <Line: +				name: "windowSize",
+>, <Line: +				type: "int_or_interval",
+>, <Line: +				options: ['5', '7', '10', '5min', '10min', '30min', '1hour']
+>, <Line: +			}],
+>, <Line: +			defaultParams: [10]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'movingMedian',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{
+>, <Line: +				name: "windowSize",
+>, <Line: +				type: "int_or_interval",
+>, <Line: +				options: ['5', '7', '10', '5min', '10min', '30min', '1hour']
+>, <Line: +			}],
+>, <Line: +			defaultParams: ['5']
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'stdev',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int"}, {
+>, <Line: +				name: "tolerance",
+>, <Line: +				type: "int"
+>, <Line: +			}],
+>, <Line: +			defaultParams: [5, 0.1]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'highestAverage',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "count", type: "int"}],
+>, <Line: +			defaultParams: [5]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'lowestAverage',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "count", type: "int"}],
+>, <Line: +			defaultParams: [5]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'removeAbovePercentile',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int"}],
+>, <Line: +			defaultParams: [5]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'removeAboveValue',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int"}],
+>, <Line: +			defaultParams: [5]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'removeBelowPercentile',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int"}],
+>, <Line: +			defaultParams: [5]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'removeBelowValue',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [{name: "n", type: "int"}],
+>, <Line: +			defaultParams: [5]
+>, <Line: +		});
+>, <Line: +		addFuncDef({
+>, <Line: +			name: 'useSeriesAbove',
+>, <Line: +			category: categories.Filter,
+>, <Line: +			params: [
+>, <Line: +				{name: "value", type: "int"},
+>, <Line: +				{name: "search", type: "string"},
+>, <Line: +				{name: "replace", type: "string"}
+>, <Line: +			],
+>, <Line: +			defaultParams: [0, 'search', 'replace']
+>, <Line: +		});
+>, <Line: +		_.each(categories, function (funcList, catName) {
+>, <Line: +			categories[catName] = _.sortBy(funcList, 'name');
+>, <Line: +		});
+>, <Line: +		function FuncInstance(funcDef, options) {
+>, <Line: +			this.def = funcDef;
+>, <Line: +			this.params = [];
+>, <Line: +			if (options && options.withDefaultParams) {
+>, <Line: +				this.params = funcDef.defaultParams.slice(0);
+>, <Line: +			}
+>, <Line: +			this.updateText();
+>, <Line: +		}
+>, <Line: +		FuncInstance.prototype.render = function (metricExp) {
+>, <Line: +			var str = this.def.name + '(';
+>, <Line: +			var parameters = _.map(this.params, function (value, index) {
+>, <Line: +				var paramType = this.def.params[index].type;
+>, <Line: +				if (paramType === 'int' || paramType === 'value_or_series' || paramType === 'boolean') {
+>, <Line: +					return value;
+>, <Line: +				}
+>, <Line: +				else if (paramType === 'int_or_interval' && $.isNumeric(value)) {
+>, <Line: +					return value;
+>, <Line: +				}
+>, <Line: +				return "'" + value + "'";
+>, <Line: +			}, this);
+>, <Line: +			if (metricExp) {
+>, <Line: +				parameters.unshift(metricExp);
+>, <Line: +			}
+>, <Line: +			return str + parameters.join(', ') + ')';
+>, <Line: +		};
+>, <Line: +		FuncInstance.prototype._hasMultipleParamsInString = function (strValue, index) {
+>, <Line: +			if (strValue.indexOf(',') === -1) {
+>, <Line: +				return false;
+>, <Line: +			}
+>, <Line: +			return this.def.params[index + 1] && this.def.params[index + 1].optional;
+>, <Line: +		};
+>, <Line: +		FuncInstance.prototype.updateParam = function (strValue, index) {
+>, <Line: +			// handle optional parameters
+>, <Line: +			// if string contains ',' and next param is optional, split and update both
+>, <Line: +			if (this._hasMultipleParamsInString(strValue, index)) {
+>, <Line: +				_.each(strValue.split(','), function (partVal, idx) {
+>, <Line: +					this.updateParam(partVal.trim(), idx);
+>, <Line: +				}, this);
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			if (strValue === '' && this.def.params[index].optional) {
+>, <Line: +				this.params.splice(index, 1);
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				this.params[index] = strValue;
+>, <Line: +			}
+>, <Line: +			this.updateText();
+>, <Line: +		};
+>, <Line: +		FuncInstance.prototype.updateText = function () {
+>, <Line: +			if (this.params.length === 0) {
+>, <Line: +				this.text = this.def.name + '()';
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			var text = this.def.name + '(';
+>, <Line: +			text += this.params.join(', ');
+>, <Line: +			text += ')';
+>, <Line: +			this.text = text;
+>, <Line: +		};
+>, <Line: +		return {
+>, <Line: +			createFuncInstance: function (funcDef, options) {
+>, <Line: +				if (_.isString(funcDef)) {
+>, <Line: +					if (!index[funcDef]) {
+>, <Line: +						throw {message: 'Method not found ' + name};
+>, <Line: +					}
+>, <Line: +					funcDef = index[funcDef];
+>, <Line: +				}
+>, <Line: +				return new FuncInstance(funcDef, options);
+>, <Line: +			},
+>, <Line: +			getFuncDef: function (name) {
+>, <Line: +				return index[name];
+>, <Line: +			},
+>, <Line: +			getCategories: function () {
+>, <Line: +				return categories;
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +	});
+>]
+[<Line: -  'lodash',
+>, <Line: -  'jquery'
+>, <Line: -],
+>, <Line: -function (_, $) {
+>, <Line: -  'use strict';
+>, <Line: -  var index = [];
+>, <Line: -  var categories = {
+>, <Line: -    Combine: [],
+>, <Line: -    Transform: [],
+>, <Line: -    Calculate: [],
+>, <Line: -    Filter: [],
+>, <Line: -    Special: []
+>, <Line: -  };
+>, <Line: -  function addFuncDef(funcDef) {
+>, <Line: -    funcDef.params = funcDef.params || [];
+>, <Line: -    funcDef.defaultParams = funcDef.defaultParams || [];
+>, <Line: -    if (funcDef.category) {
+>, <Line: -      funcDef.category.push(funcDef);
+>, <Line: -    }
+>, <Line: -    index[funcDef.name] = funcDef;
+>, <Line: -    index[funcDef.shortName || funcDef.name] = funcDef;
+>, <Line: -  }
+>, <Line: -  var optionalSeriesRefArgs = [
+>, <Line: -    { name: 'other', type: 'value_or_series', optional: true },
+>, <Line: -    { name: 'other', type: 'value_or_series', optional: true },
+>, <Line: -    { name: 'other', type: 'value_or_series', optional: true },
+>, <Line: -    { name: 'other', type: 'value_or_series', optional: true },
+>, <Line: -    { name: 'other', type: 'value_or_series', optional: true }
+>, <Line: -  ];
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'scaleToSeconds',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [{ name: 'seconds', type: 'int' }],
+>, <Line: -    defaultParams: [1],
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'perSecond',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [],
+>, <Line: -    defaultParams: [],
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: "holtWintersForecast",
+>, <Line: -    category: categories.Calculate,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: "holtWintersConfidenceBands",
+>, <Line: -    category: categories.Calculate,
+>, <Line: -    params: [{ name: "delta", type: 'int' }],
+>, <Line: -    defaultParams: [3]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: "holtWintersAberration",
+>, <Line: -    category: categories.Calculate,
+>, <Line: -    params: [{ name: "delta", type: 'int' }],
+>, <Line: -    defaultParams: [3]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: "nPercentile",
+>, <Line: -    category: categories.Calculate,
+>, <Line: -    params: [{ name: "Nth percentile", type: 'int' }],
+>, <Line: -    defaultParams: [95]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'diffSeries',
+>, <Line: -    params: optionalSeriesRefArgs,
+>, <Line: -    defaultParams: ['#A'],
+>, <Line: -    category: categories.Calculate,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'divideSeries',
+>, <Line: -    params: optionalSeriesRefArgs,
+>, <Line: -    defaultParams: ['#A'],
+>, <Line: -    category: categories.Calculate,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'asPercent',
+>, <Line: -    params: optionalSeriesRefArgs,
+>, <Line: -    defaultParams: ['#A'],
+>, <Line: -    category: categories.Calculate,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'group',
+>, <Line: -    params: optionalSeriesRefArgs,
+>, <Line: -    defaultParams: ['#A', '#B'],
+>, <Line: -    category: categories.Combine,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'mapSeries',
+>, <Line: -    shortName: 'map',
+>, <Line: -    params: [{ name: "node", type: 'int' }],
+>, <Line: -    defaultParams: [3],
+>, <Line: -    category: categories.Combine,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'reduceSeries',
+>, <Line: -    shortName: 'reduce',
+>, <Line: -    params: [
+>, <Line: -      { name: "function", type: 'string', options: ['asPercent', 'diffSeries', 'divideSeries'] },
+>, <Line: -      { name: "reduceNode", type: 'int', options: [0,1,2,3,4,5,6,7,8,9,10,11,12,13] },
+>, <Line: -      { name: "reduceMatchers", type: 'string' },
+>, <Line: -      { name: "reduceMatchers", type: 'string' },
+>, <Line: -    ],
+>, <Line: -    defaultParams: ['asPercent', 2, 'used_bytes', 'total_bytes'],
+>, <Line: -    category: categories.Combine,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'sumSeries',
+>, <Line: -    shortName: 'sum',
+>, <Line: -    category: categories.Combine,
+>, <Line: -    params: optionalSeriesRefArgs,
+>, <Line: -    defaultParams: [''],
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'averageSeries',
+>, <Line: -    shortName: 'avg',
+>, <Line: -    category: categories.Combine,
+>, <Line: -    params: optionalSeriesRefArgs,
+>, <Line: -    defaultParams: [''],
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'isNonNull',
+>, <Line: -    category: categories.Combine,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'rangeOfSeries',
+>, <Line: -    category: categories.Combine
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'percentileOfSeries',
+>, <Line: -    category: categories.Combine,
+>, <Line: -    params: [{ name: "n", type: "int" }, { name: "interpolate", type: "select", options: ["true", "false"] }],
+>, <Line: -    defaultParams: [95, "false"]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'sumSeriesWithWildcards',
+>, <Line: -    category: categories.Combine,
+>, <Line: -    params: [
+>, <Line: -      { name: "node", type: "int" },
+>, <Line: -      { name: "node", type: "int", optional: true },
+>, <Line: -      { name: "node", type: "int", optional: true },
+>, <Line: -      { name: "node", type: "int", optional: true }
+>, <Line: -    ],
+>, <Line: -    defaultParams: [3]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'maxSeries',
+>, <Line: -    shortName: 'max',
+>, <Line: -    category: categories.Combine,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'minSeries',
+>, <Line: -    shortName: 'min',
+>, <Line: -    category: categories.Combine,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'averageSeriesWithWildcards',
+>, <Line: -    category: categories.Combine,
+>, <Line: -    params: [
+>, <Line: -      { name: "node", type: "int" },
+>, <Line: -      { name: "node", type: "int", optional: true },
+>, <Line: -    ],
+>, <Line: -    defaultParams: [3]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: "alias",
+>, <Line: -    category: categories.Special,
+>, <Line: -    params: [{ name: "alias", type: 'string' }],
+>, <Line: -    defaultParams: ['alias']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: "aliasSub",
+>, <Line: -    category: categories.Special,
+>, <Line: -    params: [{ name: "search", type: 'string' }, { name: "replace", type: 'string' }],
+>, <Line: -    defaultParams: ['', '\\1']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: "stacked",
+>, <Line: -    category: categories.Special,
+>, <Line: -    params: [{ name: "stack", type: 'string' }],
+>, <Line: -    defaultParams: ['stacked']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: "consolidateBy",
+>, <Line: -    category: categories.Special,
+>, <Line: -    params: [
+>, <Line: -      {
+>, <Line: -        name: 'function',
+>, <Line: -        type: 'string',
+>, <Line: -        options: ['sum', 'average', 'min', 'max']
+>, <Line: -      }
+>, <Line: -    ],
+>, <Line: -    defaultParams: ['max']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: "groupByNode",
+>, <Line: -    category: categories.Special,
+>, <Line: -    params: [
+>, <Line: -      {
+>, <Line: -        name: "node",
+>, <Line: -        type: "int",
+>, <Line: -        options: [0,1,2,3,4,5,6,7,8,9,10,12]
+>, <Line: -      },
+>, <Line: -      {
+>, <Line: -        name: "function",
+>, <Line: -        type: "string",
+>, <Line: -        options: ['sum', 'avg']
+>, <Line: -      }
+>, <Line: -    ],
+>, <Line: -    defaultParams: [3, "sum"]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'aliasByNode',
+>, <Line: -    category: categories.Special,
+>, <Line: -    params: [
+>, <Line: -      { name: "node", type: "int", options: [0,1,2,3,4,5,6,7,8,9,10,12] },
+>, <Line: -      { name: "node", type: "int", options: [0,-1,-2,-3,-4,-5,-6,-7], optional: true },
+>, <Line: -      { name: "node", type: "int", options: [0,-1,-2,-3,-4,-5,-6,-7], optional: true },
+>, <Line: -      { name: "node", type: "int", options: [0,-1,-2,-3,-4,-5,-6,-7], optional: true },
+>, <Line: -    ],
+>, <Line: -    defaultParams: [3]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'substr',
+>, <Line: -    category: categories.Special,
+>, <Line: -    params: [
+>, <Line: -      { name: "start", type: "int", options: [-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,12] },
+>, <Line: -      { name: "stop", type: "int", options: [-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,12] },
+>, <Line: -    ],
+>, <Line: -    defaultParams: [0, 0]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'sortByName',
+>, <Line: -    category: categories.Special
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'sortByMaxima',
+>, <Line: -    category: categories.Special
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'sortByMinima',
+>, <Line: -    category: categories.Special
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'sortByTotal',
+>, <Line: -    category: categories.Special
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'aliasByMetric',
+>, <Line: -    category: categories.Special,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'randomWalk',
+>, <Line: -    fake: true,
+>, <Line: -    category: categories.Special,
+>, <Line: -    params: [{ name: "name", type: "string", }],
+>, <Line: -    defaultParams: ['randomWalk']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'countSeries',
+>, <Line: -    category: categories.Special
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'constantLine',
+>, <Line: -    category: categories.Special,
+>, <Line: -    params: [{ name: "value", type: "int", }],
+>, <Line: -    defaultParams: [10]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'cactiStyle',
+>, <Line: -    category: categories.Special,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'keepLastValue',
+>, <Line: -    category: categories.Special,
+>, <Line: -    params: [{ name: "n", type: "int", }],
+>, <Line: -    defaultParams: [100]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'scale',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [{ name: "factor", type: "int", }],
+>, <Line: -    defaultParams: [1]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'offset',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [{ name: "amount", type: "int", }],
+>, <Line: -    defaultParams: [10]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'offsetToZero',
+>, <Line: -    category: categories.Transform,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'transformNull',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [{ name: "amount", type: "int", }],
+>, <Line: -    defaultParams: [0]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'integral',
+>, <Line: -    category: categories.Transform,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'derivative',
+>, <Line: -    category: categories.Transform,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'nonNegativeDerivative',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [{ name: "max value or 0", type: "int", optional: true }],
+>, <Line: -    defaultParams: ['']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'timeShift',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [{ name: "amount", type: "select", options: ['1h', '6h', '12h', '1d', '2d', '7d', '14d', '30d'] }],
+>, <Line: -    defaultParams: ['1d']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'timeStack',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [
+>, <Line: -      { name: "timeShiftUnit", type: "select", options: ['1h', '6h', '12h', '1d', '2d', '7d', '14d', '30d'] },
+>, <Line: -      { name: "timeShiftStart", type: "int" },
+>, <Line: -      { name: "timeShiftEnd", type: "int" }
+>, <Line: -    ],
+>, <Line: -    defaultParams: ['1d', 0, 7]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'summarize',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [
+>, <Line: -      { name: "interval", type: "string" },
+>, <Line: -      { name: "func", type: "select", options: ['sum', 'avg', 'min', 'max', 'last'] },
+>, <Line: -      { name: "alignToFrom", type: "boolean", optional: true, options: ['false', 'true'] },
+>, <Line: -    ],
+>, <Line: -    defaultParams: ['1h', 'sum', 'false']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'smartSummarize',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [{ name: "interval", type: "string" }, { name: "func", type: "select", options: ['sum', 'avg', 'min', 'max', 'last'] }],
+>, <Line: -    defaultParams: ['1h', 'sum']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'absolute',
+>, <Line: -    category: categories.Transform,
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'hitcount',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [{ name: "interval", type: "string" }],
+>, <Line: -    defaultParams: ['10s']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'log',
+>, <Line: -    category: categories.Transform,
+>, <Line: -    params: [{ name: "base", type: "int" }],
+>, <Line: -    defaultParams: ['10']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'averageAbove',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int", }],
+>, <Line: -    defaultParams: [25]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'averageBelow',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int", }],
+>, <Line: -    defaultParams: [25]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'currentAbove',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int", }],
+>, <Line: -    defaultParams: [25]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'currentBelow',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int", }],
+>, <Line: -    defaultParams: [25]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'maximumAbove',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "value", type: "int" }],
+>, <Line: -    defaultParams: [0]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'maximumBelow',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "value", type: "int" }],
+>, <Line: -    defaultParams: [0]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'minimumAbove',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "value", type: "int" }],
+>, <Line: -    defaultParams: [0]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'limit',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int" }],
+>, <Line: -    defaultParams: [5]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'mostDeviant',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int" }],
+>, <Line: -    defaultParams: [10]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: "exclude",
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "exclude", type: 'string' }],
+>, <Line: -    defaultParams: ['exclude']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'highestCurrent',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "count", type: "int" }],
+>, <Line: -    defaultParams: [5]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'highestMax',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "count", type: "int" }],
+>, <Line: -    defaultParams: [5]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'lowestCurrent',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "count", type: "int" }],
+>, <Line: -    defaultParams: [5]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'movingAverage',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "windowSize", type: "int_or_interval", options: ['5', '7', '10', '5min', '10min', '30min', '1hour'] }],
+>, <Line: -    defaultParams: [10]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'movingMedian',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "windowSize", type: "int_or_interval", options: ['5', '7', '10', '5min', '10min', '30min', '1hour'] }],
+>, <Line: -    defaultParams: ['5']
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'stdev',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int" }, { name: "tolerance", type: "int" }],
+>, <Line: -    defaultParams: [5,0.1]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'highestAverage',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "count", type: "int" }],
+>, <Line: -    defaultParams: [5]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'lowestAverage',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "count", type: "int" }],
+>, <Line: -    defaultParams: [5]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'removeAbovePercentile',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int" }],
+>, <Line: -    defaultParams: [5]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'removeAboveValue',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int" }],
+>, <Line: -    defaultParams: [5]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'removeBelowPercentile',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int" }],
+>, <Line: -    defaultParams: [5]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'removeBelowValue',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [{ name: "n", type: "int" }],
+>, <Line: -    defaultParams: [5]
+>, <Line: -  });
+>, <Line: -  addFuncDef({
+>, <Line: -    name: 'useSeriesAbove',
+>, <Line: -    category: categories.Filter,
+>, <Line: -    params: [
+>, <Line: -      { name: "value", type: "int" },
+>, <Line: -      { name: "search", type: "string" },
+>, <Line: -      { name: "replace", type: "string" }
+>, <Line: -    ],
+>, <Line: -    defaultParams: [0, 'search', 'replace']
+>, <Line: -  });
+>, <Line: -  _.each(categories, function(funcList, catName) {
+>, <Line: -    categories[catName] = _.sortBy(funcList, 'name');
+>, <Line: -  });
+>, <Line: -  function FuncInstance(funcDef, options) {
+>, <Line: -    this.def = funcDef;
+>, <Line: -    this.params = [];
+>, <Line: -    if (options && options.withDefaultParams) {
+>, <Line: -      this.params = funcDef.defaultParams.slice(0);
+>, <Line: -    }
+>, <Line: -    this.updateText();
+>, <Line: -  }
+>, <Line: -  FuncInstance.prototype.render = function(metricExp) {
+>, <Line: -    var str = this.def.name + '(';
+>, <Line: -    var parameters = _.map(this.params, function(value, index) {
+>, <Line: -      var paramType = this.def.params[index].type;
+>, <Line: -      if (paramType === 'int' || paramType === 'value_or_series' || paramType === 'boolean') {
+>, <Line: -        return value;
+>, <Line: -      }
+>, <Line: -      else if (paramType === 'int_or_interval' && $.isNumeric(value)) {
+>, <Line: -        return value;
+>, <Line: -      }
+>, <Line: -      return "'" + value + "'";
+>, <Line: -    }, this);
+>, <Line: -    if (metricExp) {
+>, <Line: -      parameters.unshift(metricExp);
+>, <Line: -    }
+>, <Line: -    return str + parameters.join(', ') + ')';
+>, <Line: -  };
+>, <Line: -  FuncInstance.prototype._hasMultipleParamsInString = function(strValue, index) {
+>, <Line: -    if (strValue.indexOf(',') === -1) {
+>, <Line: -      return false;
+>, <Line: -    }
+>, <Line: -    return this.def.params[index + 1] && this.def.params[index + 1].optional;
+>, <Line: -  };
+>, <Line: -  FuncInstance.prototype.updateParam = function(strValue, index) {
+>, <Line: -    // handle optional parameters
+>, <Line: -    // if string contains ',' and next param is optional, split and update both
+>, <Line: -    if (this._hasMultipleParamsInString(strValue, index)) {
+>, <Line: -      _.each(strValue.split(','), function(partVal, idx) {
+>, <Line: -        this.updateParam(partVal.trim(), idx);
+>, <Line: -      }, this);
+>, <Line: -      return;
+>, <Line: -    }
+>, <Line: -    if (strValue === '' && this.def.params[index].optional) {
+>, <Line: -      this.params.splice(index, 1);
+>, <Line: -    }
+>, <Line: -    else {
+>, <Line: -      this.params[index] = strValue;
+>, <Line: -    }
+>, <Line: -    this.updateText();
+>, <Line: -  };
+>, <Line: -  FuncInstance.prototype.updateText = function () {
+>, <Line: -    if (this.params.length === 0) {
+>, <Line: -      this.text = this.def.name + '()';
+>, <Line: -      return;
+>, <Line: -    }
+>, <Line: -    var text = this.def.name + '(';
+>, <Line: -    text += this.params.join(', ');
+>, <Line: -    text += ')';
+>, <Line: -    this.text = text;
+>, <Line: -  };
+>, <Line: -  return {
+>, <Line: -    createFuncInstance: function(funcDef, options) {
+>, <Line: -      if (_.isString(funcDef)) {
+>, <Line: -        if (!index[funcDef]) {
+>, <Line: -          throw { message: 'Method not found ' + name };
+>, <Line: -        }
+>, <Line: -        funcDef = index[funcDef];
+>, <Line: -      }
+>, <Line: -      return new FuncInstance(funcDef, options);
+>, <Line: -    },
+>, <Line: -    getFuncDef: function(name) {
+>, <Line: -      return index[name];
+>, <Line: -    },
+>, <Line: -    getCategories: function() {
+>, <Line: -      return categories;
+>, <Line: -    }
+>, <Line: -  };
+>, <Line: -});
+>]

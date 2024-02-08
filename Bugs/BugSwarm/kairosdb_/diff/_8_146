@@ -1,0 +1,179 @@
+[<Line: +		'angular',
+>, <Line: +		'config',
+>, <Line: +		'lodash',
+>, <Line: +		'jquery',
+>, <Line: +		'store',
+>, <Line: +	],
+>, <Line: +	function (angular, config, _, $, store) {
+>, <Line: +		"use strict";
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		module.controller('GrafanaCtrl', function ($scope, alertSrv, utilSrv, grafanaVersion, $rootScope, $controller) {
+>, <Line: +			$scope.grafanaVersion = grafanaVersion[0] === '@' ? 'master' : grafanaVersion;
+>, <Line: +			$scope._ = _;
+>, <Line: +			$rootScope.profilingEnabled = store.getBool('profilingEnabled');
+>, <Line: +			$rootScope.performance = {loadStart: new Date().getTime()};
+>, <Line: +			$scope.init = function () {
+>, <Line: +				if ($rootScope.profilingEnabled) {
+>, <Line: +					$scope.initProfiling();
+>, <Line: +				}
+>, <Line: +				alertSrv.init();
+>, <Line: +				utilSrv.init();
+>, <Line: +				$scope.dashAlerts = alertSrv;
+>, <Line: +				$scope.grafana = {style: 'dark'};
+>, <Line: +			};
+>, <Line: +			$scope.toggleConsole = function () {
+>, <Line: +				$scope.consoleEnabled = !$scope.consoleEnabled;
+>, <Line: +				store.set('grafanaConsole', $scope.consoleEnabled);
+>, <Line: +			};
+>, <Line: +			$scope.initDashboard = function (dashboardData, viewScope) {
+>, <Line: +				$controller('DashboardCtrl', {$scope: viewScope}).init(dashboardData);
+>, <Line: +			};
+>, <Line: +			$rootScope.onAppEvent = function (name, callback) {
+>, <Line: +				var unbind = $rootScope.$on(name, callback);
+>, <Line: +				this.$on('$destroy', unbind);
+>, <Line: +			};
+>, <Line: +			$rootScope.appEvent = function (name, payload) {
+>, <Line: +				$rootScope.$emit(name, payload);
+>, <Line: +			};
+>, <Line: +			$rootScope.colors = [
+>, <Line: +				"#7EB26D", "#EAB839", "#6ED0E0", "#EF843C", "#E24D42", "#1F78C1", "#BA43A9", "#705DA0", //1
+>, <Line: +				"#508642", "#CCA300", "#447EBC", "#C15C17", "#890F02", "#0A437C", "#6D1F62", "#584477", //2
+>, <Line: +				"#B7DBAB", "#F4D598", "#70DBED", "#F9BA8F", "#F29191", "#82B5D8", "#E5A8E2", "#AEA2E0", //3
+>, <Line: +				"#629E51", "#E5AC0E", "#64B0C8", "#E0752D", "#BF1B00", "#0A50A1", "#962D82", "#614D93", //4
+>, <Line: +				"#9AC48A", "#F2C96D", "#65C5DB", "#F9934E", "#EA6460", "#5195CE", "#D683CE", "#806EB7", //5
+>, <Line: +				"#3F6833", "#967302", "#2F575E", "#99440A", "#58140C", "#052B51", "#511749", "#3F2B5B", //6
+>, <Line: +				"#E0F9D7", "#FCEACA", "#CFFAFF", "#F9E2D2", "#FCE2DE", "#BADFF4", "#F9D9F9", "#DEDAF7"  //7
+>, <Line: +			];
+>, <Line: +			$scope.getTotalWatcherCount = function () {
+>, <Line: +				var count = 0;
+>, <Line: +				var scopes = 0;
+>, <Line: +				var root = $(document.getElementsByTagName('body'));
+>, <Line: +				var f = function (element) {
+>, <Line: +					if (element.data().hasOwnProperty('$scope')) {
+>, <Line: +						scopes++;
+>, <Line: +						angular.forEach(element.data().$scope.$$watchers, function () {
+>, <Line: +							count++;
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +					angular.forEach(element.children(), function (childElement) {
+>, <Line: +						f($(childElement));
+>, <Line: +					});
+>, <Line: +				};
+>, <Line: +				f(root);
+>, <Line: +				$rootScope.performance.scopeCount = scopes;
+>, <Line: +				return count;
+>, <Line: +			};
+>, <Line: +			$scope.initProfiling = function () {
+>, <Line: +				var count = 0;
+>, <Line: +				$scope.$watch(function digestCounter() {
+>, <Line: +					count++;
+>, <Line: +				}, function () {
+>, <Line: +				});
+>, <Line: +				$scope.onAppEvent('dashboard-loaded', function () {
+>, <Line: +					count = 0;
+>, <Line: +					setTimeout(function () {
+>, <Line: +						console.log("Dashboard::Performance Total Digests: " + count);
+>, <Line: +						console.log("Dashboard::Performance Total Watchers: " + $scope.getTotalWatcherCount());
+>, <Line: +						console.log("Dashboard::Performance Total ScopeCount: " + $rootScope.performance.scopeCount);
+>, <Line: +						var timeTaken = $rootScope.performance.allPanelsInitialized - $rootScope.performance.dashboardLoadStart;
+>, <Line: +						console.log("Dashboard::Performance - All panels initialized in " + timeTaken + " ms");
+>, <Line: +						// measure digest performance
+>, <Line: +						var rootDigestStart = window.performance.now();
+>, <Line: +						for (var i = 0; i < 30; i++) {
+>, <Line: +							$rootScope.$apply();
+>, <Line: +						}
+>, <Line: +						console.log("Dashboard::Performance Root Digest " + ((window.performance.now() - rootDigestStart) / 30));
+>, <Line: +					}, 3000);
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			$scope.init();
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'config',
+>, <Line: -  'lodash',
+>, <Line: -  'jquery',
+>, <Line: -  'store',
+>, <Line: -],
+>, <Line: -function (angular, config, _, $, store) {
+>, <Line: -  "use strict";
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  module.controller('GrafanaCtrl', function($scope, alertSrv, utilSrv, grafanaVersion, $rootScope, $controller) {
+>, <Line: -    $scope.grafanaVersion = grafanaVersion[0] === '@' ? 'master' : grafanaVersion;
+>, <Line: -    $scope._ = _;
+>, <Line: -    $rootScope.profilingEnabled = store.getBool('profilingEnabled');
+>, <Line: -    $rootScope.performance = { loadStart: new Date().getTime() };
+>, <Line: -    $scope.init = function() {
+>, <Line: -      if ($rootScope.profilingEnabled) { $scope.initProfiling(); }
+>, <Line: -      alertSrv.init();
+>, <Line: -      utilSrv.init();
+>, <Line: -      $scope.dashAlerts = alertSrv;
+>, <Line: -      $scope.grafana = { style: 'dark' };
+>, <Line: -    };
+>, <Line: -    $scope.toggleConsole = function() {
+>, <Line: -      $scope.consoleEnabled = !$scope.consoleEnabled;
+>, <Line: -      store.set('grafanaConsole', $scope.consoleEnabled);
+>, <Line: -    };
+>, <Line: -    $scope.initDashboard = function(dashboardData, viewScope) {
+>, <Line: -      $controller('DashboardCtrl', { $scope: viewScope }).init(dashboardData);
+>, <Line: -    };
+>, <Line: -    $rootScope.onAppEvent = function(name, callback) {
+>, <Line: -      var unbind = $rootScope.$on(name, callback);
+>, <Line: -      this.$on('$destroy', unbind);
+>, <Line: -    };
+>, <Line: -    $rootScope.appEvent = function(name, payload) {
+>, <Line: -      $rootScope.$emit(name, payload);
+>, <Line: -    };
+>, <Line: -    $rootScope.colors = [
+>, <Line: -      "#7EB26D","#EAB839","#6ED0E0","#EF843C","#E24D42","#1F78C1","#BA43A9","#705DA0", //1
+>, <Line: -      "#508642","#CCA300","#447EBC","#C15C17","#890F02","#0A437C","#6D1F62","#584477", //2
+>, <Line: -      "#B7DBAB","#F4D598","#70DBED","#F9BA8F","#F29191","#82B5D8","#E5A8E2","#AEA2E0", //3
+>, <Line: -      "#629E51","#E5AC0E","#64B0C8","#E0752D","#BF1B00","#0A50A1","#962D82","#614D93", //4
+>, <Line: -      "#9AC48A","#F2C96D","#65C5DB","#F9934E","#EA6460","#5195CE","#D683CE","#806EB7", //5
+>, <Line: -      "#3F6833","#967302","#2F575E","#99440A","#58140C","#052B51","#511749","#3F2B5B", //6
+>, <Line: -      "#E0F9D7","#FCEACA","#CFFAFF","#F9E2D2","#FCE2DE","#BADFF4","#F9D9F9","#DEDAF7"  //7
+>, <Line: -    ];
+>, <Line: -    $scope.getTotalWatcherCount = function() {
+>, <Line: -      var count = 0;
+>, <Line: -      var scopes = 0;
+>, <Line: -      var root = $(document.getElementsByTagName('body'));
+>, <Line: -      var f = function (element) {
+>, <Line: -        if (element.data().hasOwnProperty('$scope')) {
+>, <Line: -          scopes++;
+>, <Line: -          angular.forEach(element.data().$scope.$$watchers, function () {
+>, <Line: -            count++;
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -        angular.forEach(element.children(), function (childElement) {
+>, <Line: -          f($(childElement));
+>, <Line: -        });
+>, <Line: -      };
+>, <Line: -      f(root);
+>, <Line: -      $rootScope.performance.scopeCount = scopes;
+>, <Line: -      return count;
+>, <Line: -    };
+>, <Line: -    $scope.initProfiling = function() {
+>, <Line: -      var count = 0;
+>, <Line: -      $scope.$watch(function digestCounter() { count++; }, function() { });
+>, <Line: -      $scope.onAppEvent('dashboard-loaded', function() {
+>, <Line: -        count = 0;
+>, <Line: -        setTimeout(function() {
+>, <Line: -          console.log("Dashboard::Performance Total Digests: " + count);
+>, <Line: -          console.log("Dashboard::Performance Total Watchers: " + $scope.getTotalWatcherCount());
+>, <Line: -          console.log("Dashboard::Performance Total ScopeCount: " + $rootScope.performance.scopeCount);
+>, <Line: -          var timeTaken = $rootScope.performance.allPanelsInitialized - $rootScope.performance.dashboardLoadStart;
+>, <Line: -          console.log("Dashboard::Performance - All panels initialized in " + timeTaken + " ms");
+>, <Line: -          // measure digest performance
+>, <Line: -          var rootDigestStart = window.performance.now();
+>, <Line: -          for (var i = 0; i < 30; i++) {
+>, <Line: -            $rootScope.$apply();
+>, <Line: -          }
+>, <Line: -          console.log("Dashboard::Performance Root Digest " + ((window.performance.now() - rootDigestStart) / 30));
+>, <Line: -        }, 3000);
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    $scope.init();
+>, <Line: -  });
+>, <Line: -});
+>]

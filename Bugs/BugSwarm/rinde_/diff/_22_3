@@ -1,0 +1,216 @@
+[<Line: +import java.util.Collection;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.Queue;
+>, <Line: +import java.util.Set;
+>, <Line: +import com.github.rinde.rinsim.core.TimeLapse;
+>, <Line: +import com.github.rinde.rinsim.event.Event;
+>, <Line: +import com.github.rinde.rinsim.event.Listener;
+>, <Line: +import com.github.rinde.rinsim.geom.Connection;
+>, <Line: +import com.github.rinde.rinsim.geom.ListenableGraph.GraphEvent;
+>, <Line: +import com.github.rinde.rinsim.geom.Point;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +import com.google.common.collect.BiMap;
+>, <Line: +import com.google.common.collect.HashBiMap;
+>, <Line: +import com.google.common.primitives.Doubles;
+>, <Line: + * For information about modifying the graph see {@link DynamicGraphRoadModel}.
+>, <Line: + * For creating instances see {@link #builder(ListenableGraph)}.
+>, <Line: + * @author Rinde van Lon
+>, <Line: +  private final double minConnLength;
+>, <Line: +  private final BiMap<Point, RoadUser> occupiedNodes;
+>, <Line: +  CollisionGraphRoadModel(Builder builder, double pMinConnLength) {
+>, <Line: +    minConnLength = pMinConnLength;
+>, <Line: +    occupiedNodes = HashBiMap.create();
+>, <Line: +    builder.graph.getEventAPI().addListener(
+>, <Line: +        new ModificationChecker(minConnLength),
+>, <Line: +        ListenableGraph.EventTypes.ADD_CONNECTION,
+>, <Line: +        ListenableGraph.EventTypes.CHANGE_CONNECTION_DATA);
+>, <Line: +  @Override
+>, <Line: +  protected MoveProgress doFollowPath(MovingRoadUser object, Queue<Point> path,
+>, <Line: +      TimeLapse time) {
+>, <Line: +    if (occupiedNodes.containsValue(object)) {
+>, <Line: +      occupiedNodes.inverse().remove(object);
+>, <Line: +    }
+>, <Line: +    // it should be checked whether the road is clear
+>, <Line: +    final MoveProgress mp = super.doFollowPath(object, path, time);
+>, <Line: +    // detects if the new location of the object occupies a node
+>, <Line: +    // objLocs.get(object)
+>, <Line: +    return mp;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  protected void checkIsValidMove(Loc objLoc, Point nextHop) {
+>, <Line: +    super.checkIsValidMove(objLoc, nextHop);
+>, <Line: +    final Point from = objLoc.isOnConnection() ? objLoc.conn.get().from()
+>, <Line: +        : objLoc;
+>, <Line: +    // check if there is a vehicle driving in the opposite direction
+>, <Line: +    checkArgument(
+>, <Line: +        !connMap.containsKey(Conn.create(nextHop, from)),
+>, <Line: +        "Deadlock detected: there is a vehicle driving in the opposite direction on the same connection.");
+>, <Line: +  }
+>, <Line: +  // todo deadlock! -> move to checkIsValidMove ?
+>, <Line: +  @Override
+>, <Line: +  protected boolean containsObstacle(Loc objLoc, Point nextHop) {
+>, <Line: +    if (occupiedNodes.containsKey(nextHop)) {
+>, <Line: +      return true;
+>, <Line: +    }
+>, <Line: +    Collection<RoadUser> obstacles;
+>, <Line: +    if (objLoc.isOnConnection()) {
+>, <Line: +      final Connection<?> conn = objLoc.conn.get();
+>, <Line: +      obstacles = connMap.get(Conn.create(conn.from(), conn.to()));
+>, <Line: +    }
+>, <Line: +    else {
+>, <Line: +      obstacles = connMap.get(Conn.create(objLoc, nextHop));
+>, <Line: +      // check if there is an obstacle in front of the current position
+>, <Line: +      for (final RoadUser ru : obstacles) {
+>, <Line: +        // objLocs.get(ru)
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    return obstacles.isEmpty();
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  @Deprecated
+>, <Line: +  public void addObjectAtSamePosition(RoadUser newObj, RoadUser existingObj) {
+>, <Line: +    throw new UnsupportedOperationException(
+>, <Line: +        "Vehicles can not be added at the same position.");
+>, <Line: +  }
+>, <Line: +  public boolean isOccupied(Point node) {
+>, <Line: +    return occupiedNodes.containsKey(node);
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * @return A read-only indeterministic ordered live view of all currently
+>, <Line: +   *         occupied nodes in the graph.
+>, <Line: +   */
+>, <Line: +  public Set<Point> getOccupiedNodes() {
+>, <Line: +    return Collections.unmodifiableSet(occupiedNodes.keySet());
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * @return The length of all vehicles. The length is expressed in the unit as
+>, <Line: +   *         specified by {@link #getDistanceUnit()}.
+>, <Line: +   */
+>, <Line: +  public double getVehicleLength() {
+>, <Line: +    return vehicleLength;
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * @return The minimum distance vehicles need to be apart from each other. The
+>, <Line: +   *         length is expressed in the unit as specified by
+>, <Line: +   *         {@link #getDistanceUnit()}.
+>, <Line: +   */
+>, <Line: +  public double getMinDistance() {
+>, <Line: +    return minDistance;
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * @return The minimum length all connections need to have in the graph. The
+>, <Line: +   *         length is expressed in the unit as specified by
+>, <Line: +   *         {@link #getDistanceUnit()}.
+>, <Line: +   */
+>, <Line: +  public double getMinConnLength() {
+>, <Line: +    return minConnLength;
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * Create a {@link Builder} for constructing {@link CollisionGraphRoadModel}
+>, <Line: +   * instances.
+>, <Line: +   * @param graph A {@link ListenableGraph}
+>, <Line: +   * @return A new {@link Builder} instance.
+>, <Line: +   */
+>, <Line: +  /**
+>, <Line: +   * A builder for constructing {@link CollisionGraphRoadModel} instances. Use
+>, <Line: +   * {@link CollisionGraphRoadModel#builder(ListenableGraph)} for obtaining
+>, <Line: +   * builder instances.
+>, <Line: +   * @author Rinde van Lon
+>, <Line: +   */
+>, <Line: +  public static final class Builder {
+>, <Line: +    /**
+>, <Line: +     * The default distance unit: {@link SI#METER}.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * The default speed unit: {@link NonSI#KILOMETERS_PER_HOUR}.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * The default vehicle length: <code>1</code>.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * The default minimum distance: <code>.25</code>.
+>, <Line: +     */
+>, <Line: +    public static final double DEFAULT_MIN_DISTANCE = .25;
+>, <Line: +    /**
+>, <Line: +     * Sets the distance unit used to interpret all coordinates and distances,
+>, <Line: +     * including those of the supplied {@link ListenableGraph}. The default
+>, <Line: +     * value is {@link #DEFAULT_DISTANCE_UNIT}.
+>, <Line: +     * @param unit The unit to set.
+>, <Line: +     * @return This, as per the builder pattern.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * Sets the speed unit used to interpret the speeds of all vehicles. The
+>, <Line: +     * default value is {@link #DEFAULT_SPEED_UNIT}.
+>, <Line: +     * @param unit The unit to set.
+>, <Line: +     * @return This, as per the builder pattern.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * Sets the length of each vehicle added to the
+>, <Line: +     * {@link CollisionGraphRoadModel} that will be constructed by this builder.
+>, <Line: +     * The vehicle length must be a strictly positive number. The default value
+>, <Line: +     * is {@link #DEFAULT_VEHICLE_LENGTH}.
+>, <Line: +     * @param length A length expressed in the unit set by
+>, <Line: +     *          {@link #setDistanceUnit(Unit)}.
+>, <Line: +     * @return This, as per the builder pattern.
+>, <Line: +     */
+>, <Line: +      checkArgument(length > 0d,
+>, <Line: +          "Only positive vehicle lengths are allowed, found %s.", length);
+>, <Line: +      checkArgument(Doubles.isFinite(length),
+>, <Line: +          "%s is not a valid vehicle length.", length);
+>, <Line: +    /**
+>, <Line: +     * Sets the minimum required distance between two vehicles. The minimum
+>, <Line: +     * distance must be a positive number &le; to 2 * vehicle length. The
+>, <Line: +     * default value is {@link #DEFAULT_MIN_DISTANCE}.
+>, <Line: +     * @param dist A distance expressed in the unit set by
+>, <Line: +     *          {@link #setDistanceUnit(Unit)}.
+>, <Line: +     * @return This, as per the builder pattern.
+>, <Line: +     */
+>, <Line: +      checkArgument(dist >= 0d);
+>, <Line: +    /**
+>, <Line: +     * @return A new {@link CollisionGraphRoadModel} instance.
+>, <Line: +     */
+>, <Line: +      final double minConnLength = 2 * vehicleLength;
+>, <Line: +      checkArgument(
+>, <Line: +          minDistance <= minConnLength,
+>, <Line: +          "Min distance must be smaller than 2 * vehicle length (%s), but is %s.",
+>, <Line: +          vehicleLength, minDistance);
+>, <Line: +      for (final Connection<? extends ConnectionData> conn : graph
+>, <Line: +          .getConnections()) {
+>, <Line: +        checkConnectionLength(minConnLength, conn.from(), conn.to(),
+>, <Line: +            conn.data());
+>, <Line: +      }
+>, <Line: +      return new CollisionGraphRoadModel(this, minConnLength);
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  static void checkConnectionLength(double minConnLength,
+>, <Line: +      Point from, Point to, Optional<? extends ConnectionData> connData) {
+>, <Line: +    checkArgument(
+>, <Line: +        Point.distance(from, to) >= minConnLength,
+>, <Line: +        "Invalid graph: the minimum connection length is %s, connection %s->%s is too short.",
+>, <Line: +        minConnLength, from, to);
+>, <Line: +    if (connData.isPresent() && connData.get().getLength().isPresent()) {
+>, <Line: +      checkArgument(
+>, <Line: +          connData.get().getLength().get() >= minConnLength,
+>, <Line: +          "Invalid graph: the minimum connection length is %s, connection %s->%s defines length data that is too short.",
+>, <Line: +          connData.get().getLength(), from, to);
+>, <Line: +  }
+>, <Line: +  static class ModificationChecker implements Listener {
+>, <Line: +    private final double minConnLength;
+>, <Line: +    ModificationChecker(double minLength) {
+>, <Line: +      minConnLength = minLength;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void handleEvent(Event e) {
+>, <Line: +      final GraphEvent event = (GraphEvent) e;
+>, <Line: +      checkConnectionLength(minConnLength, event.getFrom(), event.getTo(),
+>, <Line: +          event.getConnData());
+>, <Line: +    }
+>]
+[<Line: - * @author Rinde van Lon
+>, <Line: -  CollisionGraphRoadModel(Builder builder) {
+>, <Line: -  public static class Builder {
+>, <Line: -    public static final double DEFAULT_MIN_DISTANCE = 0.25;
+>, <Line: -      checkArgument(length > 0d);
+>, <Line: -      checkArgument(dist > 0d);
+>, <Line: -      return new CollisionGraphRoadModel(this);
+>]

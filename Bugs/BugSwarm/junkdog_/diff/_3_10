@@ -1,0 +1,6 @@
+[<Line: +	protected void forEntity(int entityId) {
+>, <Line: +		this.$stride = $_SIZE_OF * entityId;
+>]
+[<Line: -	protected void forEntity(Entity e) {
+>, <Line: -		this.$stride = $_SIZE_OF * e.getId();
+>]

@@ -1,0 +1,10 @@
+[<Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.HandlerBox;
+>, <Line: +import java.io.FileInputStream;
+>, <Line: +        String f = VideoAudioChecker.class.getProtectionDomain().getCodeSource().getLocation().getFile() + "/count-video.mp4";
+>, <Line: +        IsoFile isoFile = new IsoFile(new FileInputStream(f).getChannel());
+>]
+[<Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.HandlerBox;
+>, <Line: -        IsoFile isoFile = new IsoFile(VideoAudioChecker.class.getProtectionDomain().getCodeSource().getLocation().getFile() + "/count-video.mp4");
+>]

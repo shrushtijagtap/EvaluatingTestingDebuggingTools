@@ -1,0 +1,22 @@
+[<Line: +public function resize(int[] items, int size, int element) -> (int[] result)
+>, <Line: +ensures |result| == size
+>, <Line: +ensures all { i in 0 .. |items| | i >= size || result[i] == items[i] }
+>, <Line: +ensures all { i in |items| .. size | result[i] == element}:
+>, <Line: +    int[] nitems = [0; end-start]
+>, <Line: +    while i < |nitems|
+>, <Line: +    where i >= 0 && |nitems| == (end-start)
+>, <Line: +    where all { k in 0..i | nitems[k] == items[k+start] }:
+>, <Line: +        nitems[i] = items[i+start]
+>, <Line: +    return nitems
+>]
+[<Line: -public function resize(int[] items, int size, int element) -> (int[] nitems)
+>, <Line: -ensures |nitems| == size
+>, <Line: -ensures all { i in 0 .. |items| | i >= size || nitems[i] == items[i] }
+>, <Line: -ensures all { i in |items| .. size | nitems[i] == element}:
+>, <Line: -    int[] r = [0; end-start]
+>, <Line: -    while i < |r|
+>, <Line: -    where i >= 0 && |r| == (end-start)
+>, <Line: -    where all { k in 0..i | r[k] == items[k+start] }:
+>, <Line: -        r[i] = items[i+start]
+>, <Line: -    return r
+>]

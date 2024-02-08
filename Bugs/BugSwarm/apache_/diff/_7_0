@@ -1,0 +1,3 @@
+[<Line: +    <action issue="LANG-1319" type="fix" dev="djones">MultilineRecursiveToStringStyle StackOverflowError when object is an array</action>
+>]
+[]

@@ -1,0 +1,27 @@
+[<Line: +	public static PedigreeFilterOptions buildDefaultOptions() {
+>, <Line: +		return new PedigreeFilterOptions(1, true);
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Whether or not to apply {@code OneParentGtFiltered} and {@code BothParentGtFiltered} genotype filter. 
+>, <Line: +	 */
+>, <Line: +	private final boolean applyParentGtFilteredFilters;
+>, <Line: +	public PedigreeFilterOptions(int deNovoMaxParentAd2, boolean applyParentGtFilteredFilters) {
+>, <Line: +		this.deNovoMaxParentAd2 = deNovoMaxParentAd2;
+>, <Line: +		this.applyParentGtFilteredFilters = applyParentGtFilteredFilters;
+>, <Line: +		return "PedigreeFilterOptions [deNovoMaxParentAd2=" + deNovoMaxParentAd2
+>, <Line: +				+ ", applyParentGtFilteredFilters=" + applyParentGtFilteredFilters + "]";
+>, <Line: +	public int getDeNovoMaxParentAd2() {
+>, <Line: +		return deNovoMaxParentAd2;
+>, <Line: +	}
+>, <Line: +	public boolean isApplyParentGtFilteredFilters() {
+>, <Line: +		return applyParentGtFilteredFilters;
+>]
+[<Line: -	public PedigreeFilterOptions(int deNovoMaxParentAd2) {
+>, <Line: -		this.deNovoMaxParentAd2 = deNovoMaxParentAd2;
+>, <Line: -	}
+>, <Line: -	public int getDeNovoMaxParentAd2() {
+>, <Line: -		return deNovoMaxParentAd2;
+>, <Line: -		return "PedigreeFilterOptions [deNovoMaxParentAd2=" + deNovoMaxParentAd2 + "]";
+>, <Line: -	public static PedigreeFilterOptions buildDefaultOptions() {
+>, <Line: -		return new PedigreeFilterOptions(1);
+>]

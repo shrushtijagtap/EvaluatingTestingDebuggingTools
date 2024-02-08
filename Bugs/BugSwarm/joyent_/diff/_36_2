@@ -1,0 +1,82 @@
+[<Line: +package com.joyent.manta.client.multipart;
+>, <Line: +import org.apache.commons.lang3.builder.ToStringBuilder;
+>, <Line: +import java.io.Serializable;
+>, <Line: +import java.util.Objects;
+>, <Line: +/**
+>, <Line: + * Minimal class representing the logical pairing of a ETag value and a
+>, <Line: + * part number for a multipart upload part. This minimum set of identifying
+>, <Line: + * values is needed when completing a Manta multipart upload.
+>, <Line: + *
+>, <Line: + * @author <a href="https://github.com/dekobon">Elijah Zupancic</a>
+>, <Line: + * @since 2.5.0
+>, <Line: + */
+>, <Line: +public class MantaMultipartUploadTuple implements Serializable,
+>, <Line: +        Comparable<MantaMultipartUploadTuple> {
+>, <Line: +    private static final long serialVersionUID = -4050887694675747077L;
+>, <Line: +    /**
+>, <Line: +     * Non-zero positive integer representing the relative position of the
+>, <Line: +     * part in relation to the other parts for the multipart upload.
+>, <Line: +     */
+>, <Line: +    private final int partNumber;
+>, <Line: +    /**
+>, <Line: +     * HTTP Etag value returned by Manta for the multipart upload part.
+>, <Line: +     */
+>, <Line: +    private final String etag;
+>, <Line: +    /**
+>, <Line: +     * Creates a new instance based on the passed parameters.
+>, <Line: +     *
+>, <Line: +     * @param partNumber Non-zero positive integer representing the relative
+>, <Line: +     *                   position of the part in relation to the other parts for the multipart upload.
+>, <Line: +     * @param etag HTTP Etag value returned by Manta for the multipart upload part
+>, <Line: +     */
+>, <Line: +    public MantaMultipartUploadTuple(final int partNumber, final String etag) {
+>, <Line: +        if (partNumber < 1) {
+>, <Line: +            String msg = String.format("Part number must be greater than or "
+>, <Line: +                    + "equal to 1. Actual value: %d", partNumber);
+>, <Line: +            throw new IllegalArgumentException(msg);
+>, <Line: +        }
+>, <Line: +        this.partNumber = partNumber;
+>, <Line: +        this.etag = etag;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * @return An positive non-zero integer part number identifying the part's order
+>, <Line: +     */
+>, <Line: +    public int getPartNumber() {
+>, <Line: +        return this.partNumber;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * @return HTTP Etag value returned by Manta for the multipart upload part
+>, <Line: +     */
+>, <Line: +    public String getEtag() {
+>, <Line: +        return this.etag;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int compareTo(final MantaMultipartUploadTuple that) {
+>, <Line: +        return Integer.compare(this.getPartNumber(), that.getPartNumber());
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public boolean equals(final Object that) {
+>, <Line: +        if (this == that) {
+>, <Line: +            return true;
+>, <Line: +        }
+>, <Line: +        if (that == null || getClass() != that.getClass()) {
+>, <Line: +            return false;
+>, <Line: +        }
+>, <Line: +        MantaMultipartUploadTuple tuple = (MantaMultipartUploadTuple) that;
+>, <Line: +        return partNumber == tuple.partNumber
+>, <Line: +                && Objects.equals(etag, tuple.etag);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int hashCode() {
+>, <Line: +        return Objects.hash(partNumber, etag);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return new ToStringBuilder(this)
+>, <Line: +                .append("partNumber", partNumber)
+>, <Line: +                .append("etag", etag)
+>, <Line: +                .toString();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

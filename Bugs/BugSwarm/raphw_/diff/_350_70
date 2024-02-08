@@ -1,0 +1,10 @@
+[<Line: +    @Test
+>, <Line: +    public void testAnnotationRegistrantObjectProperties() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.AnnotationRegistrant.ForByteCodeElement.class).applyBasic();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.AnnotationRegistrant.ForByteCodeElement.WithIndex.class).applyBasic();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.AnnotationRegistrant.ForTypeVariable.class).applyBasic();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.AnnotationRegistrant.ForTypeVariable.WithIndex.class).applyBasic();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.AnnotationRegistrant.ForTypeVariable.WithIndex.DoubleIndexed.class).applyBasic();
+>, <Line: +    }
+>]
+[]

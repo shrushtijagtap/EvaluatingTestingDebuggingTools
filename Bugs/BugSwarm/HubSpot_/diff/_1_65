@@ -1,0 +1,10 @@
+[<Line: +  @Path("/key/verify")
+>, <Line: +  public void verifyKey() {
+>, <Line: +  }
+>, <Line: +  @GET
+>, <Line: +  @NoAuth
+>, <Line: +  @NoAuth
+>, <Line: +  @NoAuth
+>]
+[<Line: -@NoAuth
+>]

@@ -1,0 +1,22 @@
+[<Line: +    SEFAZ("0", "Sefaz"),
+>, <Line: +    JUSTICA_FEDERAL("1", "Justi\u00e7a Federal"),
+>, <Line: +    JUSTICA_ESTADUAL("2", "Justi\u00e7a Estadual"),
+>, <Line: +    SECEX_RFB("3", "Secex RFB"),
+>, <Line: +    OUTROS("9", "Outros");
+>, <Line: +    private final String codigo;
+>, <Line: +    private final String descricao;
+>, <Line: +    NFOrigemProcesso(final String codigo, final String descricao) {
+>, <Line: +        this.descricao = descricao;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    SEFAZ("0"),
+>, <Line: -    JUSTICA_FEDERAL("1"),
+>, <Line: -    JUSTICA_ESTADUAL("2"),
+>, <Line: -    SECEX_RFB("3"),
+>, <Line: -    OUTROS("9");
+>, <Line: -    private String codigo;
+>, <Line: -    NFOrigemProcesso(final String codigo) {
+>]

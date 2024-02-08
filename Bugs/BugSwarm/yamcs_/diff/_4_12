@@ -1,0 +1,4 @@
+[<Line: +        super(req.getCompletableFuture());
+>]
+[<Line: -        super();
+>]

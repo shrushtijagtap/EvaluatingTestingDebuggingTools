@@ -1,0 +1,7 @@
+[<Line: +import com.google.inject.matcher.Matchers;
+>, <Line: +		KairosMetricReporterListProvider reporterProvider = new KairosMetricReporterListProvider();
+>, <Line: +		bind(KairosMetricReporterListProvider.class).toInstance(reporterProvider);
+>, <Line: +		bindListener(Matchers.any(), reporterProvider);
+>]
+[<Line: -		bind(new TypeLiteral<Set<KairosMetricReporter>>(){}).toProvider(KairosMetricReporterListProvider.class);
+>]

@@ -1,0 +1,54 @@
+[]
+[<Line: -package it.unibz.krdb.obda.owlrefplatform.core.tboxprocessing;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataPropertyExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataRangeExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataSomeValuesFrom;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectPropertyExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectSomeValuesFrom;
+>, <Line: -import it.unibz.krdb.obda.ontology.Ontology;
+>, <Line: -import it.unibz.krdb.obda.ontology.OntologyFactory;
+>, <Line: -import it.unibz.krdb.obda.ontology.ClassExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.impl.OntologyFactoryImpl;
+>, <Line: -import it.unibz.krdb.obda.owlrefplatform.core.dagjgrapht.TBoxReasoner;
+>, <Line: -public class TBoxReasonerToOntology {
+>, <Line: -	private static final OntologyFactory fac = OntologyFactoryImpl.getInstance();
+>, <Line: -	public static Ontology getOntology(TBoxReasoner reasoner, final boolean excludeExistentials) {
+>, <Line: -		final Ontology sigma = fac.createOntology();
+>, <Line: -		TBoxTraversal.traverse(reasoner, new TBoxTraverseListener() {
+>, <Line: -			@Override
+>, <Line: -			public void onInclusion(ObjectPropertyExpression sub, ObjectPropertyExpression sup) {
+>, <Line: -				if (sub != sup) {
+>, <Line: -					sigma.addSubPropertyOfAxiomWithReferencedEntities(sub, sup);
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			@Override
+>, <Line: -			public void onInclusion(DataPropertyExpression sub, DataPropertyExpression sup) {
+>, <Line: -				if (sub != sup) {
+>, <Line: -					sigma.addSubPropertyOfAxiomWithReferencedEntities(sub, sup);
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			@Override
+>, <Line: -			public void onInclusion(ClassExpression sub, ClassExpression sup) {
+>, <Line: -				if (sub != sup) {
+>, <Line: -					if (!excludeExistentials || (!(sup instanceof ObjectSomeValuesFrom) && !(sup instanceof DataSomeValuesFrom))) {
+>, <Line: -						sigma.addSubClassOfAxiomWithReferencedEntities(sub, sup);
+>, <Line: -					}
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			@Override
+>, <Line: -			public void onInclusion(DataRangeExpression sub, DataRangeExpression sup) {
+>, <Line: -				if (sub != sup) {
+>, <Line: -					// TODO: to be cleaned
+>, <Line: -					if (!excludeExistentials || (!(sup instanceof ObjectSomeValuesFrom) && !(sup instanceof DataSomeValuesFrom))) {
+>, <Line: -						sigma.addSubClassOfAxiomWithReferencedEntities(sub, sup);
+>, <Line: -					}
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		});
+>, <Line: -		return sigma;	
+>, <Line: -	}
+>, <Line: -	public static Ontology getOntology(TBoxReasoner reasoner) {
+>, <Line: -		return getOntology(reasoner, false);
+>, <Line: -	}
+>, <Line: -}
+>]

@@ -1,0 +1,147 @@
+[<Line: +class Tokenizer(object):
+>, <Line: +    # I don't use these two
+>, <Line: +    special_chars = ' =+-*/\\()[]{},.:;!"%&~<>?\'`|$#@'     # Table 3.1
+>, <Line: +    lexical_tokens = '=+-*/()[],.:;%&<>'                    # Meaningful?
+>, <Line: +    # I only use this one
+>, <Line: +    punctuation = '=+-*/\\()[]{},:;%&~<>?`|$#@'    # Unhandled Table 3.1 tokens
+>, <Line: +    # Token pairs (syntax and operators)
+>, <Line: +    # TODO: (/ and /) are currently removed, for reasons discussed below.
+>, <Line: +    pairs = ('::', '=>', '**', '//', '==', '/=', '<=', '>=')
+>, <Line: +    def __init__(self):
+>, <Line: +        self.characters = None
+>, <Line: +        self.prior_char = None
+>, <Line: +        self.char = None
+>, <Line: +        self.idx = None
+>, <Line: +        self.prior_delim = None
+>, <Line: +    def parse(self, line, macros={}):
+>, <Line: +        """Tokenize a line of Fortran source."""
+>, <Line: +        tokens = []
+>, <Line: +        self.idx = -1   # Bogus value to ensure idx = 0 after first iteration
+>, <Line: +        self.characters = iter(line)
+>, <Line: +        self.update_chars()
+>, <Line: +        while self.char != '\n':
+>, <Line: +            word = ''
+>, <Line: +            if self.char in ' \t':
+>, <Line: +                while self.char in ' \t':
+>, <Line: +                    word += self.char
+>, <Line: +                    self.update_chars()
+>, <Line: +            elif self.char in '"\'' or self.prior_delim:
+>, <Line: +                word = self.parse_string()
+>, <Line: +                if (self.prior_char, self.char) == ('&', '\n'):
+>, <Line: +                    tokens.append(word)
+>, <Line: +                    word = self.prior_char
+>, <Line: +            elif self.char.isalpha() or self.char == '_':
+>, <Line: +                # NOTE: Variables cannot start with underscore
+>, <Line: +                #       But keep for now to accommodate preprocessed tags
+>, <Line: +                while self.char.isalnum() or self.char in  '\'"_':
+>, <Line: +                    word += self.char
+>, <Line: +                    self.update_chars()
+>, <Line: +            elif self.char.isdigit() or self.char == '-':
+>, <Line: +                word = self.parse_numeric()
+>, <Line: +            elif self.char in ('!', '#'):
+>, <Line: +                # Abort the iteration and build the comment token
+>, <Line: +                word = line[self.idx:-1]
+>, <Line: +                self.char = '\n'
+>, <Line: +            elif self.char == '.':
+>, <Line: +                self.update_chars()
+>, <Line: +                if self.char.isdigit():
+>, <Line: +                    frac = self.parse_numeric()
+>, <Line: +                    word = '.' + frac
+>, <Line: +                else:
+>, <Line: +                    word = '.'
+>, <Line: +                    while self.char.isalpha():
+>, <Line: +                        word += self.char
+>, <Line: +                        self.update_chars()
+>, <Line: +                    if self.char == '.':
+>, <Line: +                        word += self.char
+>, <Line: +                        self.update_chars()
+>, <Line: +            elif self.char in Tokenizer.punctuation:
+>, <Line: +                word = self.char
+>, <Line: +                self.update_chars()
+>, <Line: +                # NOTE: The following check does not work for (/ and /) because
+>, <Line: +                # it produces false tokens inside `operator (/)` declarations.
+>, <Line: +                # One potential solution is to check for the `operator` token
+>, <Line: +                # inside of `tokens`, but it's a little more complicated...
+>, <Line: +                # For now, I just omit (/ and /).
+>, <Line: +                if self.prior_char + self.char in self.pairs:
+>, <Line: +                    word = self.prior_char + self.char
+>, <Line: +                    tokens.append(word)
+>, <Line: +                    self.update_chars()
+>, <Line: +                    continue
+>, <Line: +            else:
+>, <Line: +                # This should never happen
+>, <Line: +                raise ValueError
+>, <Line: +            # Modify token if needed
+>, <Line: +            if word in macros:
+>, <Line: +                # TODO: Multiword substitutions are not tokenized!
+>, <Line: +                print('replacing {} with {}'.format(word, macros[word]))
+>, <Line: +                word = macros[word]
+>, <Line: +            tokens.append(word)
+>, <Line: +        return tokens
+>, <Line: +    def parse_string(self):
+>, <Line: +        word = ''
+>, <Line: +        if self.prior_delim:
+>, <Line: +            delim = self.prior_delim
+>, <Line: +            self.prior_delim = None
+>, <Line: +        else:
+>, <Line: +            delim = self.char
+>, <Line: +            word += self.char
+>, <Line: +            self.update_chars()
+>, <Line: +        next_delim = None
+>, <Line: +        while True:
+>, <Line: +            if self.char == '&':
+>, <Line: +                self.update_chars()
+>, <Line: +                if self.char == '\n':
+>, <Line: +                    next_delim = delim
+>, <Line: +                    break
+>, <Line: +                else:
+>, <Line: +                    word += '&'
+>, <Line: +            elif self.char == delim:
+>, <Line: +                # Check for escaped delimiters
+>, <Line: +                self.update_chars()
+>, <Line: +                if self.char == delim:
+>, <Line: +                    word += 2 * delim
+>, <Line: +                    self.update_chars()
+>, <Line: +                else:
+>, <Line: +                    word += delim
+>, <Line: +                    break
+>, <Line: +            else:
+>, <Line: +                word += self.char
+>, <Line: +                self.update_chars()
+>, <Line: +        self.prior_delim = next_delim
+>, <Line: +        return word
+>, <Line: +    def parse_numeric(self):
+>, <Line: +        word = ''
+>, <Line: +        frac = False
+>, <Line: +        if self.char == '-':
+>, <Line: +            word += self.char
+>, <Line: +            self.update_chars()
+>, <Line: +        while self.char.isdigit() or (self.char == '.' and not frac):
+>, <Line: +            # Only allow one decimal point
+>, <Line: +            if self.char == '.':
+>, <Line: +                frac = True
+>, <Line: +            word += self.char
+>, <Line: +            self.update_chars()
+>, <Line: +        # Check for float exponent
+>, <Line: +        if self.char in 'eEdD':
+>, <Line: +            word += self.char
+>, <Line: +            self.update_chars()
+>, <Line: +        if self.char in '+-':
+>, <Line: +            word += self.char
+>, <Line: +            self.update_chars()
+>, <Line: +        while self.char.isdigit():
+>, <Line: +            word += self.char
+>, <Line: +            self.update_chars()
+>, <Line: +        if self.char == '_':
+>, <Line: +            word += self.char
+>, <Line: +            self.update_chars()
+>, <Line: +            named = self.char.isalpha()
+>, <Line: +            while (self.char.isdigit() or
+>, <Line: +                   (self.char.isalpha() or self.char == '_' and named)):
+>, <Line: +                word += self.char
+>, <Line: +                self.update_chars()
+>, <Line: +        return word
+>, <Line: +    def update_chars(self):
+>, <Line: +        self.prior_char, self.char = self.char, next(self.characters)
+>, <Line: +        self.idx += 1>]
+[]

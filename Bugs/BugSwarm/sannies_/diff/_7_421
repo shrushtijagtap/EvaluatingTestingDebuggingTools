@@ -1,0 +1,13 @@
+[<Line: +package org.mp4parser.boxes.iso23009.part1;
+>, <Line: +import org.mp4parser.ParsableBox;
+>, <Line: +    public EventMessageBoxTest(ParsableBox parsableBoxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: +        super(parsableBoxUnderTest, properties);
+>, <Line: +    }
+>]
+[<Line: -package com.mp4parser.iso23009.part1;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import static org.junit.Assert.*;
+>, <Line: -    public EventMessageBoxTest(Box boxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: -        super(boxUnderTest, properties);
+>, <Line: -    }
+>]

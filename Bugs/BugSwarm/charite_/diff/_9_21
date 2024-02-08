@@ -1,0 +1,6 @@
+[<Line: +			<version>${guava.version}</version>
+>, <Line: +			<version>${antlr.version}</version>
+>]
+[<Line: -			<version>19.0</version>
+>, <Line: -			<version>4.5.1-1</version>
+>]

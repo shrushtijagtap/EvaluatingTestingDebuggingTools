@@ -1,0 +1,8 @@
+[<Line: +ensures !result ==> all { i in 0..|items| | items[i] != item }:
+>, <Line: +        where all { i in 0 .. lo | items[i] != item }
+>, <Line: +        where all { i in hi .. |items| | items[i] != item }:
+>]
+[<Line: -ensures !result ==> no { i in 0..|items| | items[i] == item }:
+>, <Line: -        where no { i in 0 .. lo | items[i] == item }
+>, <Line: -        where no { i in hi .. |items| | items[i] == item }:
+>]

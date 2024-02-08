@@ -1,0 +1,4 @@
+[<Line: +            type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance());
+>]
+[<Line: -            type.getDeclaredMethod(FOO).invoke(type.newInstance());
+>]

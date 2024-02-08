@@ -1,0 +1,57 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.pedigree;
+>, <Line: -import org.junit.Assert;
+>, <Line: -import org.junit.Before;
+>, <Line: -import org.junit.Test;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerException;
+>, <Line: -public class CompatibilityCheckerAutosomalRecessiveVerySmallTest extends CompatibilityCheckerTestBase {
+>, <Line: -	@Before
+>, <Line: -	public void setUp() throws PedParseException {
+>, <Line: -		ImmutableList.Builder<PedPerson> individuals = new ImmutableList.Builder<PedPerson>();
+>, <Line: -		individuals.add(new PedPerson("ped", "I.1", "0", "0", Sex.MALE, Disease.UNAFFECTED)); // father
+>, <Line: -		individuals.add(new PedPerson("ped", "II.1", "I.1", "0", Sex.MALE, Disease.AFFECTED)); // son
+>, <Line: -		PedFileContents pedFileContents = new PedFileContents(new ImmutableList.Builder<String>().build(),
+>, <Line: -				individuals.build());
+>, <Line: -		this.pedigree = new Pedigree(pedFileContents, "ped");
+>, <Line: -		this.names = ImmutableList.of("I.1", "II.1");
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testSizeOfPedigree() {
+>, <Line: -		Assert.assertEquals(2, pedigree.getMembers().size());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCaseNegativesOneVariant() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertFalse(buildCheckerAR(lst(HET, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAR(lst(REF, REF)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAR(lst(ALT, ALT)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAR(lst(UKN, UKN)).run());
+>, <Line: -		// at least one hom_alt
+>, <Line: -		Assert.assertFalse(buildCheckerAR(lst(HET, UKN)).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCaseNegativesTwoVariants() throws CompatibilityCheckerException {
+>, <Line: -		// compound heterozygous
+>, <Line: -		Assert.assertFalse(buildCheckerAR(lst(HET, HET), lst(HET, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAR(lst(ALT, HET), lst(HET, HET)).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAR(lst(ALT, HET), lst(REF, HET)).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCasePositiveOneVariant() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertTrue(buildCheckerAR(lst(HET, ALT)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAR(lst(HET, ALT)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAR(lst(UKN, ALT)).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCasePositiveTwoVariants() throws CompatibilityCheckerException {
+>, <Line: -		// compound heterozygous
+>, <Line: -		Assert.assertTrue(buildCheckerAR(lst(REF, HET), lst(HET, HET)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAR(lst(UKN, HET), lst(HET, HET)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAR(lst(HET, HET), lst(REF, HET)).run());
+>, <Line: -		// homozygous
+>, <Line: -		Assert.assertTrue(buildCheckerAR(lst(REF, HET), lst(HET, ALT)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAR(lst(ALT, HET), lst(HET, ALT)).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAR(lst(HET, HET), lst(UKN, ALT)).run());
+>, <Line: -	}
+>, <Line: -}
+>]

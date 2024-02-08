@@ -1,0 +1,233 @@
+[<Line: +        OWLAxiomVisitor visitor = new Translator();
+>, <Line: +                    exact = Integer.valueOf(card.getCardinality());
+>, <Line: +                    min = Integer.valueOf(card.getCardinality());
+>, <Line: +                    max = Integer.valueOf(card.getCardinality());
+>, <Line: +                        exact = Integer.valueOf(0);
+>, <Line: +                                min = Integer.valueOf(card.getCardinality());
+>, <Line: +                                max = Integer.valueOf(card.getCardinality());
+>, <Line: +    class Translator implements OWLAxiomVisitor {
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLDeclarationAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLSubClassOfAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLDisjointClassesAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLEquivalentClassesAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLClassAssertionAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLEquivalentObjectPropertiesAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLSubAnnotationPropertyOfAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLSubObjectPropertyOfAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLObjectPropertyRangeAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLFunctionalObjectPropertyAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLSymmetricObjectPropertyAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLAsymmetricObjectPropertyAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLObjectPropertyDomainAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLInverseFunctionalObjectPropertyAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLInverseObjectPropertiesAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLDisjointObjectPropertiesAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLReflexiveObjectPropertyAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLTransitiveObjectPropertyAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void visit(OWLSubPropertyChainOfAxiom ax) {
+>, <Line: +            tr(ax);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public void doDefault(Object o) {
+>, <Line: +            if (!(o instanceof OWLAnnotationAssertionAxiom)) {
+>, <Line: +                error((OWLAxiom) o, false);
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +                isMerged = handleIAO227(isMerged, unrelatedAxioms, axiom);
+>, <Line: +                replacedBy = handleIAO10001(replacedBy, unrelatedAxioms, axiom);
+>, <Line: +    protected static boolean handleIAO227(boolean isMerged, final Set<OWLAnnotationAssertionAxiom> unrelatedAxioms,
+>, <Line: +        OWLAnnotationAssertionAxiom axiom) {
+>, <Line: +        OWLAnnotationValue value = axiom.getValue();
+>, <Line: +        Optional<IRI> asIRI = value.asIRI();
+>, <Line: +        if (asIRI.isPresent()) {
+>, <Line: +            return Obo2OWLConstants.IRI_IAO_0000227.equals(asIRI.get());
+>, <Line: +        }
+>, <Line: +        unrelatedAxioms.add(axiom);
+>, <Line: +        return isMerged;
+>, <Line: +    }
+>, <Line: +    @Nullable
+>, <Line: +    protected static String handleIAO10001(@Nullable String replacedBy,
+>, <Line: +        final Set<OWLAnnotationAssertionAxiom> unrelatedAxioms, OWLAnnotationAssertionAxiom axiom) {
+>, <Line: +        OWLAnnotationValue value = axiom.getValue();
+>, <Line: +        Optional<OWLLiteral> asLiteral = value.asLiteral();
+>, <Line: +        if (asLiteral.isPresent()) {
+>, <Line: +            return asLiteral.get().getLiteral();
+>, <Line: +        }
+>, <Line: +        // fallback: also check for an IRI
+>, <Line: +        Optional<IRI> asIRI = value.asIRI();
+>, <Line: +        if (asIRI.isPresent()) {
+>, <Line: +            // translate IRI to OBO style ID
+>, <Line: +            return getIdentifier(asIRI.get());
+>, <Line: +        }
+>, <Line: +        unrelatedAxioms.add(axiom);
+>, <Line: +        return replacedBy;
+>, <Line: +    }
+>]
+[<Line: -        OWLAxiomVisitor visitor = new OWLAxiomVisitor() {
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLDeclarationAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLSubClassOfAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLDisjointClassesAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLEquivalentClassesAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLClassAssertionAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLEquivalentObjectPropertiesAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLSubAnnotationPropertyOfAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLSubObjectPropertyOfAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLObjectPropertyRangeAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLFunctionalObjectPropertyAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLSymmetricObjectPropertyAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLAsymmetricObjectPropertyAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLObjectPropertyDomainAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLInverseFunctionalObjectPropertyAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLInverseObjectPropertiesAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLDisjointObjectPropertiesAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLReflexiveObjectPropertyAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLTransitiveObjectPropertyAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void visit(OWLSubPropertyChainOfAxiom ax) {
+>, <Line: -                tr(ax);
+>, <Line: -            }
+>, <Line: -            @Override
+>, <Line: -            public void doDefault(Object o) {
+>, <Line: -                if (!(o instanceof OWLAnnotationAssertionAxiom)) {
+>, <Line: -                    error((OWLAxiom) o, false);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        };
+>, <Line: -                    exact = card.getCardinality();
+>, <Line: -                    min = card.getCardinality();
+>, <Line: -                    max = card.getCardinality();
+>, <Line: -                        exact = 0;
+>, <Line: -                                min = card.getCardinality();
+>, <Line: -                                max = card.getCardinality();
+>, <Line: -                OWLAnnotationValue value = axiom.getValue();
+>, <Line: -                Optional<IRI> asIRI = value.asIRI();
+>, <Line: -                if (asIRI.isPresent()) {
+>, <Line: -                    isMerged = Obo2OWLConstants.IRI_IAO_0000227.equals(asIRI.get());
+>, <Line: -                } else {
+>, <Line: -                    unrelatedAxioms.add(axiom);
+>, <Line: -                }
+>, <Line: -                OWLAnnotationValue value = axiom.getValue();
+>, <Line: -                Optional<OWLLiteral> asLiteral = value.asLiteral();
+>, <Line: -                if (asLiteral.isPresent()) {
+>, <Line: -                    replacedBy = asLiteral.get().getLiteral();
+>, <Line: -                } else {
+>, <Line: -                    // fallback: also check for an IRI
+>, <Line: -                    Optional<IRI> asIRI = value.asIRI();
+>, <Line: -                    if (asIRI.isPresent()) {
+>, <Line: -                        // translate IRI to OBO style ID
+>, <Line: -                        replacedBy = getIdentifier(asIRI.get());
+>, <Line: -                    } else {
+>, <Line: -                        unrelatedAxioms.add(axiom);
+>, <Line: -                    }
+>, <Line: -                }
+>]

@@ -1,0 +1,22 @@
+[<Line: +import net.bytebuddy.test.packaging.SimpleType;
+>, <Line: +                ClassFileExtraction.of(Foo.class,
+>, <Line: +                        Bar.class,
+>, <Line: +                        Qux.class,
+>, <Line: +                        Baz.class,
+>, <Line: +                        SimpleType.class),
+>, <Line: +        // A redefinition reflects on loaded types which are eagerly validated types (Java 7- for redefinition).
+>, <Line: +        // This causes type equality for outer/inner classes to fail which is whz an external class is used.
+>, <Line: +        assertThat(classLoader.loadClass(SimpleType.class.getName()).getName(), is(SimpleType.class.getName())); // ensure that class is loaded
+>, <Line: +            Class<?> type = classLoader.loadClass(SimpleType.class.getName());
+>]
+[<Line: -import net.bytebuddy.ByteBuddy;
+>, <Line: -import net.bytebuddy.test.utility.DebuggingWrapper;
+>, <Line: -import org.junit.Ignore;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import java.util.Map;
+>, <Line: -        // Need to add enclosing class. Otherwise, the child first semantics break runtime validation of inner class logic.
+>, <Line: -                ClassFileExtraction.of(Foo.class, Bar.class, Qux.class, Baz.class, getClass()),
+>, <Line: -        assertThat(classLoader.loadClass(Foo.class.getName()).getName(), is(Foo.class.getName())); // ensure that class is loaded
+>, <Line: -                .withListener(AgentBuilder.Listener.NoOp.INSTANCE)
+>, <Line: -            Class<?> type = classLoader.loadClass(Foo.class.getName());
+>]

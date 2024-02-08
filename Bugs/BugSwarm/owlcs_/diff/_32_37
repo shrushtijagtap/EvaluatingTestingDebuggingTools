@@ -1,0 +1,7 @@
+[<Line: +import static org.junit.Assert.assertTrue;
+>, <Line: +        assertTrue(lock.tryLock() == true);
+>, <Line: +        assertTrue(lock.tryLock(3, TimeUnit.MILLISECONDS) == true);
+>]
+[<Line: -        assertThat(lock.tryLock(), is(true));
+>, <Line: -        assertThat(lock.tryLock(3, TimeUnit.MILLISECONDS), is(true));
+>]

@@ -1,0 +1,40 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.BitReaderBuffer;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.BitWriterBuffer;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "SegmentIndexBox{" +
+>, <Line: +                "entries=" + entries +
+>, <Line: +                ", referenceId=" + referenceId +
+>, <Line: +                ", timeScale=" + timeScale +
+>, <Line: +                ", earliestPresentationTime=" + earliestPresentationTime +
+>, <Line: +                ", firstOffset=" + firstOffset +
+>, <Line: +                ", reserved=" + reserved +
+>, <Line: +                '}';
+>, <Line: +    }
+>, <Line: +            this.startsWithSap = (byte) (startsWithSap ? 1 : 0);
+>, <Line: +         *
+>, <Line: +         *
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.threegpp26244;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.BitReaderBuffer;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.BitWriterBuffer;
+>, <Line: -            this.startsWithSap = (byte) (startsWithSap?1:0);
+>, <Line: -    @Override
+>, <Line: -    public String toString() {
+>, <Line: -        return "SegmentIndexBox{" +
+>, <Line: -                "entries=" + entries +
+>, <Line: -                ", referenceId=" + referenceId +
+>, <Line: -                ", timeScale=" + timeScale +
+>, <Line: -                ", earliestPresentationTime=" + earliestPresentationTime +
+>, <Line: -                ", firstOffset=" + firstOffset +
+>, <Line: -                ", reserved=" + reserved +
+>, <Line: -                '}';
+>, <Line: -    }
+>]

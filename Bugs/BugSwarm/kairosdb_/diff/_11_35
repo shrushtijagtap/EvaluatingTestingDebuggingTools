@@ -1,0 +1,8 @@
+[<Line: +			@Named(JETTY_PORT_PROPERTY) int port,
+>, <Line: +			@Named(JETTY_WEB_ROOT_PROPERTY) String webRoot)
+>, <Line: +				if (m_protocols != null && m_protocols.length > 0)
+>]
+[<Line: -	                 @Named(JETTY_PORT_PROPERTY) int port,
+>, <Line: -	                 @Named(JETTY_WEB_ROOT_PROPERTY) String webRoot)
+>, <Line: -				if (m_protocols!= null && m_protocols.length > 0)
+>]

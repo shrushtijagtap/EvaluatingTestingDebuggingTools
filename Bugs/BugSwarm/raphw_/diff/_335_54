@@ -1,0 +1,56 @@
+[<Line: +package net.bytebuddy.utility;
+>, <Line: +import net.bytebuddy.test.utility.ObjectPropertyAssertion;
+>, <Line: +import org.junit.Test;
+>, <Line: +import java.lang.reflect.Method;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import java.util.Iterator;
+>, <Line: +import static org.hamcrest.CoreMatchers.nullValue;
+>, <Line: +import static org.hamcrest.CoreMatchers.sameInstance;
+>, <Line: +import static org.hamcrest.core.Is.is;
+>, <Line: +import static org.junit.Assert.assertThat;
+>, <Line: +import static org.mockito.Mockito.mock;
+>, <Line: +public class JavaModuleTest {
+>, <Line: +    @Test(expected = IllegalArgumentException.class)
+>, <Line: +    public void testExtractModule() throws Exception {
+>, <Line: +        JavaModule.of(mock(Object.class));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testUnwrap() throws Exception {
+>, <Line: +        Object object = new Object();
+>, <Line: +        JavaModule module = new JavaModule(object);
+>, <Line: +        assertThat(module.unwrap(), sameInstance(object));
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testIsNamedDisabledThrowException() throws Exception {
+>, <Line: +        JavaModule.Dispatcher.Disabled.INSTANCE.isNamed(mock(Object.class));
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testGetNameDisabledThrowException() throws Exception {
+>, <Line: +        JavaModule.Dispatcher.Disabled.INSTANCE.getName(mock(Object.class));
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testGetClassLoaderDisabledThrowException() throws Exception {
+>, <Line: +        JavaModule.Dispatcher.Disabled.INSTANCE.getClassLoader(mock(Object.class));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testDisabledModuleIsNull() throws Exception {
+>, <Line: +        assertThat(JavaModule.Dispatcher.Disabled.INSTANCE.moduleOf(Object.class), nullValue(JavaModule.class));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testObjectProperties() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(JavaModule.class).skipToString().apply();
+>, <Line: +        Object object = new Object();
+>, <Line: +        assertThat(new JavaModule(object).hashCode(), is(object.hashCode()));
+>, <Line: +        assertThat(new JavaModule(object).toString(), is(object.toString()));
+>, <Line: +        final Iterator<Method> iterator = Arrays.asList(Object.class.getDeclaredMethods()).iterator();
+>, <Line: +        ObjectPropertyAssertion.of(JavaModule.Dispatcher.Enabled.class).create(new ObjectPropertyAssertion.Creator<Method>() {
+>, <Line: +            @Override
+>, <Line: +            public Method create() {
+>, <Line: +                return iterator.next();
+>, <Line: +            }
+>, <Line: +        }).apply();
+>, <Line: +        ObjectPropertyAssertion.of(JavaModule.Dispatcher.Disabled.class).apply();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

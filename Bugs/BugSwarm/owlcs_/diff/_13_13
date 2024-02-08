@@ -1,0 +1,42 @@
+[<Line: +        return equiv ? (Stream<C>) axiom.classExpressions() : doDefault(axiom);
+>, <Line: +        return equiv ? (Stream<C>) axiom.properties() : doDefault(axiom);
+>, <Line: +        return equiv ? (Stream<C>) axiom.properties() : doDefault(axiom);
+>, <Line: +        return equiv ? doDefault(axiom) : (Stream<C>) axiom.individuals();
+>, <Line: +        return equiv ? (Stream<C>) axiom.individuals() : doDefault(axiom);
+>, <Line: +        return equiv ? doDefault(axiom) : (Stream<C>) axiom.classExpressions();
+>, <Line: +        return equiv ? doDefault(axiom) : (Stream<C>) axiom.properties();
+>, <Line: +        return equiv ? doDefault(axiom) : (Stream<C>) axiom.properties();
+>]
+[<Line: -        if (equiv) {
+>, <Line: -            return (Stream<C>) axiom.classExpressions();
+>, <Line: -        }
+>, <Line: -        return doDefault(axiom);
+>, <Line: -        if (equiv) {
+>, <Line: -            return (Stream<C>) axiom.properties();
+>, <Line: -        }
+>, <Line: -        return doDefault(axiom);
+>, <Line: -        if (equiv) {
+>, <Line: -            return (Stream<C>) axiom.properties();
+>, <Line: -        }
+>, <Line: -        return doDefault(axiom);
+>, <Line: -        if (!equiv) {
+>, <Line: -            return (Stream<C>) axiom.individuals();
+>, <Line: -        }
+>, <Line: -        return doDefault(axiom);
+>, <Line: -        if (equiv) {
+>, <Line: -            return (Stream<C>) axiom.individuals();
+>, <Line: -        }
+>, <Line: -        return doDefault(axiom);
+>, <Line: -        if (!equiv) {
+>, <Line: -            return (Stream<C>) axiom.classExpressions();
+>, <Line: -        }
+>, <Line: -        return doDefault(axiom);
+>, <Line: -        if (!equiv) {
+>, <Line: -            return (Stream<C>) axiom.properties();
+>, <Line: -        }
+>, <Line: -        return doDefault(axiom);
+>, <Line: -        if (!equiv) {
+>, <Line: -            return (Stream<C>) axiom.properties();
+>, <Line: -        }
+>, <Line: -        return doDefault(axiom);
+>]

@@ -1,0 +1,4 @@
+[<Line: +            except BaseException as exception:
+>]
+[<Line: -            except BaseException, exception:
+>]

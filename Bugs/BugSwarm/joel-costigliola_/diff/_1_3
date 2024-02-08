@@ -1,0 +1,10 @@
+[<Line: +import org.assertj.core.util.Strings;
+>, <Line: +    AnotherMethodsClass m = new AnotherMethodsClass();
+>, <Line: +    Strings.isNullOrEmpty(m.string); // causes a synthetic method in AnotherMethodsClass
+>, <Line: +    actual = AnotherMethodsClass.class;
+>, <Line: +  }
+>, <Line: +  private static class AnotherMethodsClass extends MethodsClass {
+>, <Line: +    private String string;
+>]
+[<Line: -    actual = MethodsClass.class;
+>]

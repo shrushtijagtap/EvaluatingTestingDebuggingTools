@@ -1,0 +1,17 @@
+[<Line: +import javax.ws.rs.DefaultValue;
+>, <Line: +import javax.ws.rs.QueryParam;
+>, <Line: +import com.hubspot.baragon.auth.NoAuth;
+>, <Line: +import com.hubspot.baragon.service.managers.ServiceManager;
+>, <Line: +  @NoAuth
+>, <Line: +  @NoAuth
+>, <Line: +  public BaragonResponse reloadConfigs(@PathParam("serviceId") String serviceId, @DefaultValue("false") @QueryParam("noValidate") boolean noValidate) {
+>, <Line: +    return serviceManager.enqueueReloadServiceConfigs(serviceId, noValidate);
+>, <Line: +  public BaragonResponse removeService(@PathParam("serviceId") String serviceId, @DefaultValue("false") @QueryParam("noValidate") boolean noValidate, @DefaultValue("false") @QueryParam("noReload") boolean noReload) {
+>, <Line: +    return serviceManager.enqueueRemoveService(serviceId, noValidate, noReload);
+>]
+[<Line: -import com.hubspot.baragon.managers.ServiceManager;
+>, <Line: -  public BaragonResponse reloadConfigs(@PathParam("serviceId") String serviceId) {
+>, <Line: -    return serviceManager.enqueueReloadServiceConfigs(serviceId);
+>, <Line: -  public BaragonResponse removeService(@PathParam("serviceId") String serviceId) {
+>, <Line: -    return serviceManager.enqueueRemoveService(serviceId);
+>]

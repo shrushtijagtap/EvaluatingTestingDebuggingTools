@@ -1,0 +1,55 @@
+[<Line: +import java.util.Objects;
+>, <Line: +    /**
+>, <Line: +     * A key is pointing to the warning message text in "messages.properties"
+>, <Line: +     * file.
+>, <Line: +     */
+>, <Line: +    public static final String MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE =
+>, <Line: +            "default.comes.last.in.casegroup";
+>, <Line: +    /** Whether to process skipIfLastAndSharedWithCaseInSwitch() invocations. */
+>, <Line: +    private boolean skipIfLastAndSharedWithCase;
+>, <Line: +    /**
+>, <Line: +     * Whether to allow default keyword not in last but surrounded with case.
+>, <Line: +     * @param newValue whether to ignore checking.
+>, <Line: +     */
+>, <Line: +    public void setSkipIfLastAndSharedWithCase(boolean newValue) {
+>, <Line: +        skipIfLastAndSharedWithCase = newValue;
+>, <Line: +    }
+>, <Line: +            if (skipIfLastAndSharedWithCase) {
+>, <Line: +                if (Objects.nonNull(findNextSibling(ast, TokenTypes.LITERAL_CASE))) {
+>, <Line: +                    log(ast, MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE);
+>, <Line: +                }
+>, <Line: +                else if (ast.getPreviousSibling() == null
+>, <Line: +                    && Objects.nonNull(findNextSibling(defaultGroupAST,
+>, <Line: +                                                       TokenTypes.CASE_GROUP))) {
+>, <Line: +                    log(ast, MSG_KEY);
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            else if (Objects.nonNull(findNextSibling(defaultGroupAST,
+>, <Line: +                                                     TokenTypes.CASE_GROUP))) {
+>, <Line: +    /**
+>, <Line: +     * Return token type only if passed tokenType in argument is found or returns -1.
+>, <Line: +     *
+>, <Line: +     * @param ast root node.
+>, <Line: +     * @param tokenType tokentype to be processed.
+>, <Line: +     * @return token if desired token is found or else null.
+>, <Line: +     */
+>, <Line: +    private static DetailAST findNextSibling(DetailAST ast, int tokenType) {
+>, <Line: +        DetailAST token = null;
+>, <Line: +        DetailAST node = ast.getNextSibling();
+>, <Line: +        while (node != null) {
+>, <Line: +            if (node.getType() == tokenType) {
+>, <Line: +                token = node;
+>, <Line: +                break;
+>, <Line: +            }
+>, <Line: +            node = node.getNextSibling();
+>, <Line: +        }
+>, <Line: +        return token;
+>, <Line: +    }
+>]
+[<Line: -            final DetailAST switchAST = defaultGroupAST.getParent();
+>, <Line: -            final DetailAST lastGroupAST =
+>, <Line: -                switchAST.getLastChild().getPreviousSibling();
+>, <Line: -            if (defaultGroupAST.getLineNo() != lastGroupAST.getLineNo()
+>, <Line: -                || defaultGroupAST.getColumnNo()
+>, <Line: -                    != lastGroupAST.getColumnNo()) {
+>]

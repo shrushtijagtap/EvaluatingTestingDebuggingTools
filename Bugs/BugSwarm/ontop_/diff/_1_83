@@ -1,0 +1,7 @@
+[<Line: +		CQIE tquery = axiom.getTargetQuery();
+>, <Line: +		CQIE tquery = axiom.getTargetQuery();
+>]
+[<Line: -		CQIE tquery = (CQIE) axiom.getTargetQuery();
+>, <Line: -		OBDAQueryModifiers modifiers = squery.getQueryModifiers();
+>, <Line: -		CQIE tquery = (CQIE) axiom.getTargetQuery();
+>]

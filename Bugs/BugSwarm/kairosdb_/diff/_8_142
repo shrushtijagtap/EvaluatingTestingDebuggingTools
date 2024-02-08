@@ -1,0 +1,126 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'jquery'
+>, <Line: +	],
+>, <Line: +	function (angular, _, $) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		module.controller('AnnotationsEditorCtrl', function ($scope, datasourceSrv) {
+>, <Line: +			var annotationDefaults = {
+>, <Line: +				name: '',
+>, <Line: +				datasource: null,
+>, <Line: +				showLine: true,
+>, <Line: +				iconColor: '#C0C6BE',
+>, <Line: +				lineColor: 'rgba(255, 96, 96, 0.592157)',
+>, <Line: +				iconSize: 13,
+>, <Line: +				enable: true
+>, <Line: +			};
+>, <Line: +			$scope.init = function () {
+>, <Line: +				$scope.editor = {index: 0};
+>, <Line: +				$scope.datasources = datasourceSrv.getAnnotationSources();
+>, <Line: +				$scope.annotations = $scope.dashboard.annotations.list;
+>, <Line: +				$scope.reset();
+>, <Line: +				$scope.$watch('editor.index', function (newVal) {
+>, <Line: +					if (newVal !== 2) {
+>, <Line: +						$scope.reset();
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			$scope.datasourceChanged = function () {
+>, <Line: +				$scope.currentDatasource = _.findWhere($scope.datasources, {name: $scope.currentAnnotation.datasource});
+>, <Line: +				if (!$scope.currentDatasource) {
+>, <Line: +					$scope.currentDatasource = $scope.datasources[0];
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.edit = function (annotation) {
+>, <Line: +				$scope.currentAnnotation = annotation;
+>, <Line: +				$scope.currentIsNew = false;
+>, <Line: +				$scope.datasourceChanged();
+>, <Line: +				$scope.editor.index = 2;
+>, <Line: +				$(".tooltip.in").remove();
+>, <Line: +			};
+>, <Line: +			$scope.reset = function () {
+>, <Line: +				$scope.currentAnnotation = angular.copy(annotationDefaults);
+>, <Line: +				$scope.currentIsNew = true;
+>, <Line: +				$scope.datasourceChanged();
+>, <Line: +				$scope.currentAnnotation.datasource = $scope.currentDatasource.name;
+>, <Line: +			};
+>, <Line: +			$scope.update = function () {
+>, <Line: +				$scope.reset();
+>, <Line: +				$scope.editor.index = 0;
+>, <Line: +			};
+>, <Line: +			$scope.add = function () {
+>, <Line: +				$scope.annotations.push($scope.currentAnnotation);
+>, <Line: +				$scope.reset();
+>, <Line: +				$scope.editor.index = 0;
+>, <Line: +			};
+>, <Line: +			$scope.removeAnnotation = function (annotation) {
+>, <Line: +				var index = _.indexOf($scope.annotations, annotation);
+>, <Line: +				$scope.annotations.splice(index, 1);
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'jquery'
+>, <Line: -],
+>, <Line: -function (angular, _, $) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  module.controller('AnnotationsEditorCtrl', function($scope, datasourceSrv) {
+>, <Line: -    var annotationDefaults = {
+>, <Line: -      name: '',
+>, <Line: -      datasource: null,
+>, <Line: -      showLine: true,
+>, <Line: -      iconColor: '#C0C6BE',
+>, <Line: -      lineColor: 'rgba(255, 96, 96, 0.592157)',
+>, <Line: -      iconSize: 13,
+>, <Line: -      enable: true
+>, <Line: -    };
+>, <Line: -    $scope.init = function() {
+>, <Line: -      $scope.editor = { index: 0 };
+>, <Line: -      $scope.datasources = datasourceSrv.getAnnotationSources();
+>, <Line: -      $scope.annotations = $scope.dashboard.annotations.list;
+>, <Line: -      $scope.reset();
+>, <Line: -      $scope.$watch('editor.index', function(newVal) {
+>, <Line: -        if (newVal !== 2) {
+>, <Line: -          $scope.reset();
+>, <Line: -        }
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    $scope.datasourceChanged = function() {
+>, <Line: -      $scope.currentDatasource = _.findWhere($scope.datasources, { name: $scope.currentAnnotation.datasource });
+>, <Line: -      if (!$scope.currentDatasource) {
+>, <Line: -        $scope.currentDatasource = $scope.datasources[0];
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.edit = function(annotation) {
+>, <Line: -      $scope.currentAnnotation = annotation;
+>, <Line: -      $scope.currentIsNew = false;
+>, <Line: -      $scope.datasourceChanged();
+>, <Line: -      $scope.editor.index = 2;
+>, <Line: -      $(".tooltip.in").remove();
+>, <Line: -    };
+>, <Line: -    $scope.reset = function() {
+>, <Line: -      $scope.currentAnnotation = angular.copy(annotationDefaults);
+>, <Line: -      $scope.currentIsNew = true;
+>, <Line: -      $scope.datasourceChanged();
+>, <Line: -      $scope.currentAnnotation.datasource = $scope.currentDatasource.name;
+>, <Line: -    };
+>, <Line: -    $scope.update = function() {
+>, <Line: -      $scope.reset();
+>, <Line: -      $scope.editor.index = 0;
+>, <Line: -    };
+>, <Line: -    $scope.add = function() {
+>, <Line: -      $scope.annotations.push($scope.currentAnnotation);
+>, <Line: -      $scope.reset();
+>, <Line: -      $scope.editor.index = 0;
+>, <Line: -    };
+>, <Line: -    $scope.removeAnnotation = function(annotation) {
+>, <Line: -      var index = _.indexOf($scope.annotations, annotation);
+>, <Line: -      $scope.annotations.splice(index, 1);
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

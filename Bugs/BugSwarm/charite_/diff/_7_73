@@ -1,0 +1,46 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.pedigree;
+>, <Line: -import org.junit.Assert;
+>, <Line: -import org.junit.Before;
+>, <Line: -import org.junit.Test;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerException;
+>, <Line: -public class CompatibilityCheckerAutosomalDominantSingletonTest extends CompatibilityCheckerTestBase {
+>, <Line: -	@Before
+>, <Line: -	public void setUp() throws PedParseException {
+>, <Line: -		ImmutableList.Builder<PedPerson> individuals = new ImmutableList.Builder<PedPerson>();
+>, <Line: -		individuals.add(new PedPerson("ped", "I.1", "0", "0", Sex.MALE, Disease.AFFECTED));
+>, <Line: -		PedFileContents pedFileContents = new PedFileContents(new ImmutableList.Builder<String>().build(),
+>, <Line: -				individuals.build());
+>, <Line: -		this.pedigree = new Pedigree(pedFileContents, "ped");
+>, <Line: -		this.names = ImmutableList.of("I.1");
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testSizeOfPedigree() {
+>, <Line: -		Assert.assertEquals(1, pedigree.getMembers().size());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCaseNegativesOneVariant() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertFalse(buildCheckerAD(ALT).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(REF).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(UKN).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCaseNegativesTwoVariants() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertFalse(buildCheckerAD(ALT, REF).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(REF, UKN).run());
+>, <Line: -		Assert.assertFalse(buildCheckerAD(UKN, ALT).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCasePositiveOneVariant() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertTrue(buildCheckerAD(HET).run());
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void testCasePositiveTwoVariants() throws CompatibilityCheckerException {
+>, <Line: -		Assert.assertTrue(buildCheckerAD(HET, REF).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(HET, HET).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(HET, ALT).run());
+>, <Line: -		Assert.assertTrue(buildCheckerAD(HET, UKN).run());
+>, <Line: -	}
+>, <Line: -}
+>]

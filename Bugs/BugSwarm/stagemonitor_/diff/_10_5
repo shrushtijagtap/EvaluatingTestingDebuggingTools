@@ -1,0 +1,27 @@
+[<Line: +  width: 100%;
+>, <Line: +  width: 100%;
+>, <Line: +  float: left;
+>, <Line: +.tt-dropdown-menu,
+>, <Line: +.tt-menu {
+>, <Line: +.tt-dropdown-menu .tt-suggestion,
+>, <Line: +.tt-menu .tt-suggestion {
+>, <Line: +.tt-dropdown-menu .tt-suggestion.tt-cursor,
+>, <Line: +.tt-menu .tt-suggestion.tt-cursor,
+>, <Line: +.tt-dropdown-menu .tt-suggestion:hover,
+>, <Line: +.tt-menu .tt-suggestion:hover {
+>, <Line: +  cursor: pointer;
+>, <Line: +.tt-dropdown-menu .tt-suggestion.tt-cursor a,
+>, <Line: +.tt-menu .tt-suggestion.tt-cursor a,
+>, <Line: +.tt-dropdown-menu .tt-suggestion:hover a,
+>, <Line: +.tt-menu .tt-suggestion:hover a {
+>, <Line: +.tt-dropdown-menu .tt-suggestion p,
+>, <Line: +.tt-menu .tt-suggestion p {
+>]
+[<Line: -  float: left;
+>, <Line: -.tt-dropdown-menu {
+>, <Line: -.tt-dropdown-menu .tt-suggestion {
+>, <Line: -  white-space: nowrap;
+>, <Line: -.tt-dropdown-menu .tt-suggestion.tt-cursor {
+>, <Line: -.tt-dropdown-menu .tt-suggestion.tt-cursor a {
+>, <Line: -.tt-dropdown-menu .tt-suggestion p {
+>]

@@ -1,0 +1,362 @@
+[<Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":726
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":727
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":728
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":729
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":733
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":734
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":735
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":736
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":740
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":741
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":750
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":751
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":752
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":754
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":755
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":756
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":758
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":759
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":761
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":762
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":763
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":765
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":766
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":767
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":769
+>, <Line: +static char __pyx_k_cal_homes_tdupre_work_src_sciki[] = "/cal/homes/tdupre/work/src/scikit-learn/sklearn/linear_model/cd_fast.pyx";
+>, <Line: +static PyObject *__pyx_kp_s_cal_homes_tdupre_work_src_sciki;
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":197
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":203
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":206
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":207
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":209
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":211
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":212
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":214
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":216
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":217
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":218
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":220
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":221
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":222
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":224
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":225
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":226
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":229
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":230
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":231
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":232
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":233
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":235
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":236
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":237
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":238
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":239
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":242
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":243
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":247
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":249
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":251
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":254
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":256
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":257
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":258
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":259
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":260
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":277
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":261
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":262
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":263
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":264
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":265
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":266
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":267
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":268
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":269
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":270
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":271
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":272
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":273
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":274
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":275
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":276
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":277
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":279
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":280
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":281
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":283
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":284
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":285
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":286
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":289
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":197
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":291
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":292
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":293
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":294
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":295
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":291
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":771
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":772
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":771
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":774
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":775
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":774
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":777
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":778
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":777
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":780
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":781
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":780
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":783
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":784
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":783
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":786
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":793
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":794
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":797
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":798
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":799
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":801
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":802
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":804
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":805
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":806
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":816
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":817
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":818
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":819
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":821
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":823
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":824
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":825
+>, <Line: +        /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":826
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":829
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":830
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":831
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":832
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":833
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":834
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":835
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":836
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":837
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":838
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":839
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":840
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":841
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":842
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":843
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":844
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":845
+>, <Line: +        /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":847
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":848
+>, <Line: +      /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":852
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":797
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":853
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":786
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":969
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":971
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":972
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":974
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":975
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":976
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":977
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":969
+>, <Line: +/* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":979
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":980
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":981
+>, <Line: +    /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":983
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":979
+>, <Line: +  {&__pyx_kp_s_cal_homes_tdupre_work_src_sciki, __pyx_k_cal_homes_tdupre_work_src_sciki, sizeof(__pyx_k_cal_homes_tdupre_work_src_sciki), 0, 0, 1, 0},
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":218
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":222
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":260
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":802
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":806
+>, <Line: +  /* "../../../.conda/envs/py27/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":826
+>, <Line: +  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(10, 0, 35, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cal_homes_tdupre_work_src_sciki, __pyx_n_s_enet_coordinate_descent, 126, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+>, <Line: +  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(13, 0, 45, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cal_homes_tdupre_work_src_sciki, __pyx_n_s_sparse_enet_coordinate_descent, 290, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+>, <Line: +  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(11, 0, 38, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cal_homes_tdupre_work_src_sciki, __pyx_n_s_enet_coordinate_descent_gram, 490, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 490; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+>, <Line: +  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(9, 0, 42, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cal_homes_tdupre_work_src_sciki, __pyx_n_s_enet_coordinate_descent_multi_ta, 633, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+>]
+[<Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":726
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":727
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":728
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":729
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":733
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":734
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":735
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":736
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":740
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":741
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":750
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":751
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":752
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":754
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":755
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":756
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":758
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":759
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":761
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":762
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":763
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":765
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":766
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":767
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":769
+>, <Line: -static char __pyx_k_media_data_Documents_Work_sciki[] = "/media/data/Documents/Work/scikit-learn/sklearn/linear_model/cd_fast.pyx";
+>, <Line: -static PyObject *__pyx_kp_s_media_data_Documents_Work_sciki;
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":197
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":203
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":206
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":207
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":209
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":211
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":212
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":214
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":216
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":217
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":218
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":220
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":221
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":222
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":224
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":225
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":226
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":229
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":230
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":231
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":232
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":233
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":235
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":236
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":237
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":238
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":239
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":242
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":243
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":247
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":249
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":251
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":254
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":256
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":257
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":258
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":259
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":260
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":277
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":261
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":262
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":263
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":264
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":265
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":266
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":267
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":268
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":269
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":270
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":271
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":272
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":273
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":274
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":275
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":276
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":277
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":279
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":280
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":281
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":283
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":284
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":285
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":286
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":289
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":197
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":291
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":292
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":293
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":294
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":295
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":291
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":771
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":772
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":771
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":774
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":775
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":774
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":777
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":778
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":777
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":780
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":781
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":780
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":783
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":784
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":783
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":786
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":793
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":794
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":797
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":798
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":799
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":801
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":802
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":804
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":805
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":806
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":816
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":817
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":818
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":819
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":821
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":823
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":824
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":825
+>, <Line: -        /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":826
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":829
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":830
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":831
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":832
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":833
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":834
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":835
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":836
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":837
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":838
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":839
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":840
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":841
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":842
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":843
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":844
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":845
+>, <Line: -        /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":847
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":848
+>, <Line: -      /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":852
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":797
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":853
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":786
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":969
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":971
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":972
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":974
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":975
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":976
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":977
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":969
+>, <Line: -/* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":979
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":980
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":981
+>, <Line: -    /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":983
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":979
+>, <Line: -  {&__pyx_kp_s_media_data_Documents_Work_sciki, __pyx_k_media_data_Documents_Work_sciki, sizeof(__pyx_k_media_data_Documents_Work_sciki), 0, 0, 1, 0},
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":218
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":222
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":260
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":802
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":806
+>, <Line: -  /* "../../../../../home/arthur/.virtualenvs/parietal-python/local/lib/python2.7/site-packages/Cython/Includes/numpy/__init__.pxd":826
+>, <Line: -  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(10, 0, 35, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_media_data_Documents_Work_sciki, __pyx_n_s_enet_coordinate_descent, 126, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+>, <Line: -  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(13, 0, 45, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_media_data_Documents_Work_sciki, __pyx_n_s_sparse_enet_coordinate_descent, 290, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 290; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+>, <Line: -  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(11, 0, 38, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_media_data_Documents_Work_sciki, __pyx_n_s_enet_coordinate_descent_gram, 490, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 490; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+>, <Line: -  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(9, 0, 42, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_media_data_Documents_Work_sciki, __pyx_n_s_enet_coordinate_descent_multi_ta, 633, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+>]

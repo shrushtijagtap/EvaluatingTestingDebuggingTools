@@ -1,0 +1,7 @@
+[<Line: +import org.kairosdb.util.IngestExecutorService;
+>, <Line: +		bind(IngestExecutorService.class);
+>]
+[<Line: -import org.apache.commons.math3.analysis.function.Sin;
+>, <Line: -import org.kairosdb.util.AdaptiveExecutorService;
+>, <Line: -		bind(AdaptiveExecutorService.class);
+>]

@@ -1,0 +1,6 @@
+[<Line: +	 * Check whether the {@link #names} of this GenotypeCalls are the same as the names of the members of
+>, <Line: +		return "GenotypeCalls(" + calls + ")";
+>]
+[<Line: -	 * Check whether the {@link #names} of this GenotypeList are the same as the names of the members of
+>, <Line: -		return "GenotypeList(" + calls + ")";
+>]

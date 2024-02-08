@@ -1,0 +1,74 @@
+[<Line: +package com.artemis.benchmark;
+>, <Line: +import com.artemis.World;
+>, <Line: +import com.artemis.WorldConfiguration;
+>, <Line: +import com.artemis.benchmark.domain.Domain.ComplexSystem;
+>, <Line: +import com.artemis.benchmark.domain.Domain.CustomWired;
+>, <Line: +import com.artemis.benchmark.domain.Domain.DamageSystem;
+>, <Line: +import com.artemis.benchmark.domain.Domain.PositionSystem;
+>, <Line: +import com.artemis.benchmark.domain.Domain.VelocitySystem;
+>, <Line: +import com.artemis.injection.CachedInjector;
+>, <Line: +import com.artemis.managers.TagManager;
+>, <Line: +import com.artemis.managers.UuidEntityManager;
+>, <Line: +import org.openjdk.jmh.annotations.Benchmark;
+>, <Line: +import org.openjdk.jmh.annotations.BenchmarkMode;
+>, <Line: +import org.openjdk.jmh.annotations.Fork;
+>, <Line: +import org.openjdk.jmh.annotations.Level;
+>, <Line: +import org.openjdk.jmh.annotations.Measurement;
+>, <Line: +import org.openjdk.jmh.annotations.Mode;
+>, <Line: +import org.openjdk.jmh.annotations.OutputTimeUnit;
+>, <Line: +import org.openjdk.jmh.annotations.Scope;
+>, <Line: +import org.openjdk.jmh.annotations.Setup;
+>, <Line: +import org.openjdk.jmh.annotations.State;
+>, <Line: +import org.openjdk.jmh.annotations.Threads;
+>, <Line: +import org.openjdk.jmh.annotations.Warmup;
+>, <Line: +import org.openjdk.jmh.profile.StackProfiler;
+>, <Line: +import org.openjdk.jmh.results.format.ResultFormatType;
+>, <Line: +import org.openjdk.jmh.runner.Runner;
+>, <Line: +import org.openjdk.jmh.runner.RunnerException;
+>, <Line: +import org.openjdk.jmh.runner.options.Options;
+>, <Line: +import org.openjdk.jmh.runner.options.OptionsBuilder;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +@State(Scope.Benchmark)
+>, <Line: +@BenchmarkMode(Mode.Throughput)
+>, <Line: +@Threads(1)
+>, <Line: +@Fork(1)
+>, <Line: +@OutputTimeUnit(TimeUnit.SECONDS)
+>, <Line: +@Warmup(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+>, <Line: +@Measurement(iterations = 10, time = 2, timeUnit = TimeUnit.SECONDS)
+>, <Line: +public class InjectionBenchmark {
+>, <Line: +    WorldConfiguration configuration;
+>, <Line: +    @Setup(Level.Iteration)
+>, <Line: +    public void restart() {
+>, <Line: +        configuration = new WorldConfiguration();
+>, <Line: +        configuration.setManager(new TagManager());
+>, <Line: +        configuration.setManager(new UuidEntityManager());
+>, <Line: +        configuration.setSystem(new PositionSystem());
+>, <Line: +        configuration.setSystem(new VelocitySystem());
+>, <Line: +        configuration.setSystem(new DamageSystem());
+>, <Line: +        configuration.setSystem(new ComplexSystem());
+>, <Line: +        configuration.register("string", "STRING");
+>, <Line: +        configuration.register(new Object());
+>, <Line: +    }
+>, <Line: +    @Benchmark
+>, <Line: +    public void createWorld_with_injectionCache() {
+>, <Line: +        configuration.setInjector(new CachedInjector());
+>, <Line: +        createWorld();
+>, <Line: +    }
+>, <Line: +    private void createWorld() {
+>, <Line: +        World world = new World(configuration);
+>, <Line: +        world.inject(new CustomWired());
+>, <Line: +    }
+>, <Line: +    public static void main(String[] args) throws RunnerException {
+>, <Line: +        Options opt = new OptionsBuilder()
+>, <Line: +                .include(InjectionBenchmark.class.getSimpleName())
+>, <Line: +                .shouldDoGC(true)
+>, <Line: +                .resultFormat(ResultFormatType.JSON)
+>, <Line: +                .result("benchmark" + System.currentTimeMillis() + ".json")
+>, <Line: +                .addProfiler(StackProfiler.class)
+>, <Line: +                .jvmArgsAppend("-Djmh.stack.period=1")
+>, <Line: +                .build();
+>, <Line: +        new Runner(opt).run();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,12 @@
+[<Line: +        String path = this.getDataPath() + "players/";
+>, <Line: +        }
+>, <Line: +        this.saveOfflinePlayerData(name, nbt);
+>, <Line: +        try {
+>, <Line: +        }
+>]
+[<Line: -        /*String path = this.getDataPath() + "players/";
+>, <Line: -        }*/
+>, <Line: -        //this.saveOfflinePlayerData(name, nbt);
+>, <Line: -        /*try {
+>, <Line: -        }*/
+>]

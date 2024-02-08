@@ -1,0 +1,59 @@
+[<Line: +package org.mp4parser.boxes.sampleentry;
+>, <Line: +import org.mp4parser.BoxParser;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.ProtectionSchemeInformationBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import org.mp4parser.tools.Utf8;
+>, <Line: +import java.nio.channels.ReadableByteChannel;
+>, <Line: + * <br>
+>, <Line: +     * @see ProtectionSchemeInformationBox
+>, <Line: +    public void parse(final ReadableByteChannel dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>, <Line: +        initContainer(dataSource, contentSize - 78, boxParser);
+>]
+[<Line: -package com.coremedia.iso.boxes.sampleentry;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.Utf8;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: - *
+>, <Line: -     * @see com.coremedia.iso.boxes.ProtectionSchemeInformationBox
+>, <Line: -    public void parse(final DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>, <Line: -        final long endPosition = dataSource.position() + contentSize;
+>, <Line: -        final DataSource dsLimited = new DataSource() {
+>, <Line: -            public int read(ByteBuffer byteBuffer) throws IOException {
+>, <Line: -                if (endPosition == dataSource.position()) {
+>, <Line: -                    return -1;
+>, <Line: -                } else if (byteBuffer.remaining() > endPosition - dataSource.position()) {
+>, <Line: -                    ByteBuffer bb = ByteBuffer.allocate(l2i(endPosition - dataSource.position()));
+>, <Line: -                    dataSource.read(bb);
+>, <Line: -                    byteBuffer.put((ByteBuffer) bb.rewind());
+>, <Line: -                    return bb.capacity();
+>, <Line: -                } else {
+>, <Line: -                    return dataSource.read(byteBuffer);
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            public long size() throws IOException {
+>, <Line: -                return endPosition;
+>, <Line: -            }
+>, <Line: -            public long position() throws IOException {
+>, <Line: -                return dataSource.position();
+>, <Line: -            }
+>, <Line: -            public void position(long nuPos) throws IOException {
+>, <Line: -                dataSource.position(nuPos);
+>, <Line: -            }
+>, <Line: -            public long transferTo(long position, long count, WritableByteChannel target) throws IOException {
+>, <Line: -                return dataSource.transferTo(position, count, target);
+>, <Line: -            }
+>, <Line: -            public ByteBuffer map(long startPosition, long size) throws IOException {
+>, <Line: -                return dataSource.map(startPosition, size);
+>, <Line: -            }
+>, <Line: -            public void close() throws IOException {
+>, <Line: -                dataSource.close();
+>, <Line: -            }
+>, <Line: -        };
+>, <Line: -        initContainer(dsLimited, contentSize - 78, boxParser);
+>]

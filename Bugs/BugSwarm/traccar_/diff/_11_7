@@ -1,0 +1,180 @@
+[<Line: +    private void decodeExtraData(Position position, ChannelBuffer buf, int end) {
+>, <Line: +        while (buf.readerIndex() < end) {
+>, <Line: +            int type = buf.readUnsignedByte();
+>, <Line: +            int length = buf.readUnsignedByte();
+>, <Line: +            if (length == 255) {
+>, <Line: +                length += buf.readUnsignedByte();
+>, <Line: +            }
+>, <Line: +            int n;
+>, <Line: +            switch (type) {
+>, <Line: +                case 2:
+>, <Line: +                    position.set(Event.KEY_ODOMETER, buf.readUnsignedMedium());
+>, <Line: +                    break;
+>, <Line: +                case 5:
+>, <Line: +                    position.set(Event.KEY_INPUT, buf.readUnsignedByte());
+>, <Line: +                    break;
+>, <Line: +                case 6:
+>, <Line: +                    n = buf.readUnsignedByte() >> 4;
+>, <Line: +                    if (n < 2) {
+>, <Line: +                        position.set(Event.PREFIX_ADC + n, readSwappedFloat(buf));
+>, <Line: +                    } else {
+>, <Line: +                        position.set("di" + (n - 2), readSwappedFloat(buf));
+>, <Line: +                    }
+>, <Line: +                    break;
+>, <Line: +                case 7:
+>, <Line: +                    int alarm = buf.readUnsignedByte();
+>, <Line: +                    buf.readUnsignedByte();
+>, <Line: +                    if (BitUtil.check(alarm, 5)) {
+>, <Line: +                        position.set(Event.KEY_ALARM, BitUtil.range(alarm, 0, 4));
+>, <Line: +                    }
+>, <Line: +                    break;
+>, <Line: +                case 8:
+>, <Line: +                    position.set("antihijack", buf.readUnsignedByte());
+>, <Line: +                    break;
+>, <Line: +                case 9:
+>, <Line: +                    position.set("authorized", ChannelBufferTools.readHexString(buf, 16));
+>, <Line: +                    break;
+>, <Line: +                case 10:
+>, <Line: +                    position.set("unauthorized", ChannelBufferTools.readHexString(buf, 16));
+>, <Line: +                    break;
+>, <Line: +                case 24:
+>, <Line: +                    Set<Integer> temps = new LinkedHashSet<>();
+>, <Line: +                    int temp = buf.readUnsignedByte();
+>, <Line: +                    for (int i = 3; i >= 0; i--) {
+>, <Line: +                        n = (temp >> (2 * i)) & 0x03;
+>, <Line: +                        if (!temps.contains(n)) {
+>, <Line: +                            temps.add(n);
+>, <Line: +                        }
+>, <Line: +                    }
+>, <Line: +                    for (int i : temps) {
+>, <Line: +                        position.set(Event.PREFIX_TEMP + i, buf.readUnsignedByte());
+>, <Line: +                    }
+>, <Line: +                    break;
+>, <Line: +                case 28:
+>, <Line: +                    position.set("weight", buf.readUnsignedShort());
+>, <Line: +                    buf.readUnsignedByte();
+>, <Line: +                    break;
+>, <Line: +                case 90:
+>, <Line: +                    position.set(Event.KEY_POWER, readSwappedFloat(buf));
+>, <Line: +                    break;
+>, <Line: +                case 101:
+>, <Line: +                    position.set(Event.KEY_OBD_SPEED, buf.readUnsignedByte());
+>, <Line: +                    break;
+>, <Line: +                case 102:
+>, <Line: +                    position.set(Event.KEY_RPM, buf.readUnsignedByte() * 50);
+>, <Line: +                    break;
+>, <Line: +                case 107:
+>, <Line: +                    int fuel = buf.readUnsignedShort();
+>, <Line: +                    int fuelFormat = fuel >> 14;
+>, <Line: +                    if (fuelFormat == 1) {
+>, <Line: +                        position.set(Event.KEY_FUEL, (fuel & 0x3fff) * 0.4 + "%");
+>, <Line: +                    } else if (fuelFormat == 2) {
+>, <Line: +                        position.set(Event.KEY_FUEL, (fuel & 0x3fff) * 0.5 + " l");
+>, <Line: +                    } else if (fuelFormat == 3) {
+>, <Line: +                        position.set(Event.KEY_FUEL, (fuel & 0x3fff) * -0.5 + " l");
+>, <Line: +                    }
+>, <Line: +                    break;
+>, <Line: +                case 108:
+>, <Line: +                    position.set(Event.KEY_OBD_ODOMETER, buf.readUnsignedInt() * 5);
+>, <Line: +                    break;
+>, <Line: +                case 150:
+>, <Line: +                    position.set("door", buf.readUnsignedByte());
+>, <Line: +                    break;
+>, <Line: +                default:
+>, <Line: +                    buf.skipBytes(length);
+>, <Line: +                    break;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+>, <Line: +            decodeExtraData(position, buf, end);
+>]
+[<Line: -            Channel channel, SocketAddress remoteAddress, Object msg)
+>, <Line: -            throws Exception {
+>, <Line: -            while (buf.readerIndex() < end) {
+>, <Line: -                int type = buf.readUnsignedByte();
+>, <Line: -                int length = buf.readUnsignedByte();
+>, <Line: -                if (length == 255) {
+>, <Line: -                    length += buf.readUnsignedByte();
+>, <Line: -                }
+>, <Line: -                int n = 0;
+>, <Line: -                switch (type) {
+>, <Line: -                    case 2:
+>, <Line: -                        position.set(Event.KEY_ODOMETER, buf.readUnsignedMedium());
+>, <Line: -                        break;
+>, <Line: -                    case 5:
+>, <Line: -                        position.set(Event.KEY_INPUT, buf.readUnsignedByte());
+>, <Line: -                        break;
+>, <Line: -                    case 6:
+>, <Line: -                        n = buf.readUnsignedByte() >> 4;
+>, <Line: -                        if (n < 2) {
+>, <Line: -                            position.set(Event.PREFIX_ADC + n, readSwappedFloat(buf));
+>, <Line: -                        } else {
+>, <Line: -                            position.set("di" + (n - 2), readSwappedFloat(buf));
+>, <Line: -                        }
+>, <Line: -                        break;
+>, <Line: -                    case 7:
+>, <Line: -                        int alarm = buf.readUnsignedByte();
+>, <Line: -                        buf.readUnsignedByte();
+>, <Line: -                        if (BitUtil.check(alarm, 5)) {
+>, <Line: -                            position.set(Event.KEY_ALARM, BitUtil.range(alarm, 0, 4));
+>, <Line: -                        }
+>, <Line: -                        break;
+>, <Line: -                    case 8:
+>, <Line: -                        position.set("antihijack", buf.readUnsignedByte());
+>, <Line: -                        break;
+>, <Line: -                    case 9:
+>, <Line: -                        position.set("authorized", ChannelBufferTools.readHexString(buf, 16));
+>, <Line: -                        break;
+>, <Line: -                    case 10:
+>, <Line: -                        position.set("unauthorized", ChannelBufferTools.readHexString(buf, 16));
+>, <Line: -                        break;
+>, <Line: -                    case 24:
+>, <Line: -                        Set<Integer> temps = new LinkedHashSet<>();
+>, <Line: -                        int temp = buf.readUnsignedByte();
+>, <Line: -                        for (int i = 3; i >= 0; i--) {
+>, <Line: -                            n = (temp >> (2 * i)) & 0x03;
+>, <Line: -                            if (!temps.contains(n)) {
+>, <Line: -                                temps.add(n);
+>, <Line: -                            }
+>, <Line: -                        }
+>, <Line: -                        for (int i : temps) {
+>, <Line: -                            position.set(Event.PREFIX_TEMP + i, buf.readUnsignedByte());
+>, <Line: -                        }
+>, <Line: -                        break;
+>, <Line: -                    case 28:
+>, <Line: -                        position.set("weight", buf.readUnsignedShort());
+>, <Line: -                        buf.readUnsignedByte();
+>, <Line: -                        break;
+>, <Line: -                    case 90:
+>, <Line: -                        position.set(Event.KEY_POWER, readSwappedFloat(buf));
+>, <Line: -                        break;
+>, <Line: -                    case 101:
+>, <Line: -                        position.set(Event.KEY_OBD_SPEED, buf.readUnsignedByte());
+>, <Line: -                        break;
+>, <Line: -                    case 102:
+>, <Line: -                        position.set(Event.KEY_RPM, buf.readUnsignedByte() * 50);
+>, <Line: -                        break;
+>, <Line: -                    case 107:
+>, <Line: -                        int fuel = buf.readUnsignedShort();
+>, <Line: -                        int fuelFormat = fuel >> 14;
+>, <Line: -                        if (fuelFormat == 1) {
+>, <Line: -                            position.set(Event.KEY_FUEL, (fuel & 0x3fff) * 0.4 + "%");
+>, <Line: -                        } else if (fuelFormat == 2) {
+>, <Line: -                            position.set(Event.KEY_FUEL, (fuel & 0x3fff) * 0.5 + " l");
+>, <Line: -                        } else if (fuelFormat == 3) {
+>, <Line: -                            position.set(Event.KEY_FUEL, (fuel & 0x3fff) * -0.5 + " l");
+>, <Line: -                        }
+>, <Line: -                        break;
+>, <Line: -                    case 108:
+>, <Line: -                        position.set(Event.KEY_OBD_ODOMETER, buf.readUnsignedInt() * 5);
+>, <Line: -                        break;
+>, <Line: -                    case 150:
+>, <Line: -                        position.set("door", buf.readUnsignedByte());
+>, <Line: -                        break;
+>, <Line: -                    default:
+>, <Line: -                        buf.skipBytes(length);
+>, <Line: -                        break;
+>, <Line: -                }
+>, <Line: -            }
+>]

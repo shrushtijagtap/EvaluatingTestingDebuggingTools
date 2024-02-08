@@ -1,0 +1,99 @@
+[<Line: +/*
+>, <Line: +Copyright (c) 2011 Stanislav Vitvitskiy
+>, <Line: +Permission is hereby granted, free of charge, to any person obtaining a copy of this
+>, <Line: +software and associated documentation files (the "Software"), to deal in the Software
+>, <Line: +without restriction, including without limitation the rights to use, copy, modify,
+>, <Line: +merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+>, <Line: +permit persons to whom the Software is furnished to do so, subject to the following
+>, <Line: +conditions:
+>, <Line: +The above copyright notice and this permission notice shall be included in all copies or
+>, <Line: +substantial portions of the Software.
+>, <Line: +THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+>, <Line: +INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+>, <Line: +PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+>, <Line: +FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+>, <Line: +TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+>, <Line: +OR OTHER DEALINGS IN THE SOFTWARE.
+>, <Line: +*/
+>, <Line: +package org.mp4parser.muxer.tracks.h264.parsing.model;
+>, <Line: +public class VUIParameters {
+>, <Line: +    public boolean aspect_ratio_info_present_flag;
+>, <Line: +    public int sar_width;
+>, <Line: +    public int sar_height;
+>, <Line: +    public boolean overscan_info_present_flag;
+>, <Line: +    public boolean overscan_appropriate_flag;
+>, <Line: +    public boolean video_signal_type_present_flag;
+>, <Line: +    public int video_format;
+>, <Line: +    public boolean video_full_range_flag;
+>, <Line: +    public boolean colour_description_present_flag;
+>, <Line: +    public int colour_primaries;
+>, <Line: +    public int transfer_characteristics;
+>, <Line: +    public int matrix_coefficients;
+>, <Line: +    public boolean chroma_loc_info_present_flag;
+>, <Line: +    public int chroma_sample_loc_type_top_field;
+>, <Line: +    public int chroma_sample_loc_type_bottom_field;
+>, <Line: +    public boolean timing_info_present_flag;
+>, <Line: +    public int num_units_in_tick;
+>, <Line: +    public int time_scale;
+>, <Line: +    public boolean fixed_frame_rate_flag;
+>, <Line: +    public boolean low_delay_hrd_flag;
+>, <Line: +    public boolean pic_struct_present_flag;
+>, <Line: +    public HRDParameters nalHRDParams;
+>, <Line: +    public HRDParameters vclHRDParams;
+>, <Line: +    public BitstreamRestriction bitstreamRestriction;
+>, <Line: +    public AspectRatio aspect_ratio;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "VUIParameters{" + "\n" +
+>, <Line: +                "aspect_ratio_info_present_flag=" + aspect_ratio_info_present_flag + "\n" +
+>, <Line: +                ", sar_width=" + sar_width + "\n" +
+>, <Line: +                ", sar_height=" + sar_height + "\n" +
+>, <Line: +                ", overscan_info_present_flag=" + overscan_info_present_flag + "\n" +
+>, <Line: +                ", overscan_appropriate_flag=" + overscan_appropriate_flag + "\n" +
+>, <Line: +                ", video_signal_type_present_flag=" + video_signal_type_present_flag + "\n" +
+>, <Line: +                ", video_format=" + video_format + "\n" +
+>, <Line: +                ", video_full_range_flag=" + video_full_range_flag + "\n" +
+>, <Line: +                ", colour_description_present_flag=" + colour_description_present_flag + "\n" +
+>, <Line: +                ", colour_primaries=" + colour_primaries + "\n" +
+>, <Line: +                ", transfer_characteristics=" + transfer_characteristics + "\n" +
+>, <Line: +                ", matrix_coefficients=" + matrix_coefficients + "\n" +
+>, <Line: +                ", chroma_loc_info_present_flag=" + chroma_loc_info_present_flag + "\n" +
+>, <Line: +                ", chroma_sample_loc_type_top_field=" + chroma_sample_loc_type_top_field + "\n" +
+>, <Line: +                ", chroma_sample_loc_type_bottom_field=" + chroma_sample_loc_type_bottom_field + "\n" +
+>, <Line: +                ", timing_info_present_flag=" + timing_info_present_flag + "\n" +
+>, <Line: +                ", num_units_in_tick=" + num_units_in_tick + "\n" +
+>, <Line: +                ", time_scale=" + time_scale + "\n" +
+>, <Line: +                ", fixed_frame_rate_flag=" + fixed_frame_rate_flag + "\n" +
+>, <Line: +                ", low_delay_hrd_flag=" + low_delay_hrd_flag + "\n" +
+>, <Line: +                ", pic_struct_present_flag=" + pic_struct_present_flag + "\n" +
+>, <Line: +                ", nalHRDParams=" + nalHRDParams + "\n" +
+>, <Line: +                ", vclHRDParams=" + vclHRDParams + "\n" +
+>, <Line: +                ", bitstreamRestriction=" + bitstreamRestriction + "\n" +
+>, <Line: +                ", aspect_ratio=" + aspect_ratio + "\n" +
+>, <Line: +                '}';
+>, <Line: +    }
+>, <Line: +    public static class BitstreamRestriction {
+>, <Line: +        public boolean motion_vectors_over_pic_boundaries_flag;
+>, <Line: +        public int max_bytes_per_pic_denom;
+>, <Line: +        public int max_bits_per_mb_denom;
+>, <Line: +        public int log2_max_mv_length_horizontal;
+>, <Line: +        public int log2_max_mv_length_vertical;
+>, <Line: +        public int num_reorder_frames;
+>, <Line: +        public int max_dec_frame_buffering;
+>, <Line: +        @Override
+>, <Line: +        public String toString() {
+>, <Line: +            final StringBuilder sb = new StringBuilder("BitstreamRestriction{");
+>, <Line: +            sb.append("motion_vectors_over_pic_boundaries_flag=").append(motion_vectors_over_pic_boundaries_flag);
+>, <Line: +            sb.append(", max_bytes_per_pic_denom=").append(max_bytes_per_pic_denom);
+>, <Line: +            sb.append(", max_bits_per_mb_denom=").append(max_bits_per_mb_denom);
+>, <Line: +            sb.append(", log2_max_mv_length_horizontal=").append(log2_max_mv_length_horizontal);
+>, <Line: +            sb.append(", log2_max_mv_length_vertical=").append(log2_max_mv_length_vertical);
+>, <Line: +            sb.append(", num_reorder_frames=").append(num_reorder_frames);
+>, <Line: +            sb.append(", max_dec_frame_buffering=").append(max_dec_frame_buffering);
+>, <Line: +            sb.append('}');
+>, <Line: +            return sb.toString();
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

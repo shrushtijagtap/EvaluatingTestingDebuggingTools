@@ -1,0 +1,3 @@
+[<Line: +Added kairosdb.queries.aggregate_stats=false to aggregate query stats instead of reporting with each call
+>]
+[]

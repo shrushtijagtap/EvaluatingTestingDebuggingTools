@@ -1,0 +1,7 @@
+[<Line: +import static org.hamcrest.MatcherAssert.assertThat;
+>, <Line: +import static org.mockito.Mockito.mock;
+>, <Line: +import static org.mockito.Mockito.verifyZeroInteractions;
+>]
+[<Line: -import static org.junit.Assert.assertThat;
+>, <Line: -import static org.mockito.Mockito.*;
+>]

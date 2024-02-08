@@ -1,0 +1,6 @@
+[]
+[<Line: -package de.charite.compbio.jped;
+>, <Line: -public class HelpRequestedException extends Exception {
+>, <Line: -	private static final long serialVersionUID = 1L;
+>, <Line: -}
+>]

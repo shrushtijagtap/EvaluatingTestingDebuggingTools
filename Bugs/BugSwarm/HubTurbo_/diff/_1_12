@@ -1,0 +1,202 @@
+[<Line: +package backend.github;
+>, <Line: +import backend.UserCredentials;
+>, <Line: +import backend.interfaces.Repo;
+>, <Line: +import backend.resource.TurboIssue;
+>, <Line: +import backend.resource.TurboLabel;
+>, <Line: +import backend.resource.TurboMilestone;
+>, <Line: +import backend.resource.TurboUser;
+>, <Line: +import github.GitHubClientExtended;
+>, <Line: +import github.IssueServiceExtended;
+>, <Line: +import github.LabelServiceFixed;
+>, <Line: +import github.TurboIssueEvent;
+>, <Line: +import github.update.*;
+>, <Line: +import org.apache.commons.lang3.tuple.ImmutablePair;
+>, <Line: +import org.apache.commons.lang3.tuple.ImmutableTriple;
+>, <Line: +import org.apache.logging.log4j.Logger;
+>, <Line: +import org.eclipse.egit.github.core.Comment;
+>, <Line: +import org.eclipse.egit.github.core.Issue;
+>, <Line: +import org.eclipse.egit.github.core.RepositoryId;
+>, <Line: +import org.eclipse.egit.github.core.client.*;
+>, <Line: +import org.eclipse.egit.github.core.service.CollaboratorService;
+>, <Line: +import org.eclipse.egit.github.core.service.IssueService;
+>, <Line: +import org.eclipse.egit.github.core.service.MilestoneService;
+>, <Line: +import ui.UI;
+>, <Line: +import util.HTLog;
+>, <Line: +import util.events.UpdateProgressEvent;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.net.HttpURLConnection;
+>, <Line: +import java.util.*;
+>, <Line: +import java.util.function.BiFunction;
+>, <Line: +import java.util.stream.Collectors;
+>, <Line: +import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
+>, <Line: +public class GitHubRepo implements Repo {
+>, <Line: +	private static final Logger logger = HTLog.get(GitHubRepo.class);
+>, <Line: +	private final GitHubClientExtended client = new GitHubClientExtended();
+>, <Line: +	private final IssueServiceExtended issueService = new IssueServiceExtended(client);
+>, <Line: +	private final CollaboratorService collaboratorService = new CollaboratorService(client);
+>, <Line: +	private final LabelServiceFixed labelService = new LabelServiceFixed(client);
+>, <Line: +	final private MilestoneService milestoneService = new MilestoneService(client);
+>, <Line: +	public GitHubRepo() {
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean login(UserCredentials credentials) {
+>, <Line: +		client.setCredentials(credentials.username, credentials.password);
+>, <Line: +		// Attempt login
+>, <Line: +		try {
+>, <Line: +			GitHubRequest request = new GitHubRequest();
+>, <Line: +			request.setUri("/");
+>, <Line: +			client.get(request);
+>, <Line: +		} catch (IOException e) {
+>, <Line: +			// Login failed
+>, <Line: +			return false;
+>, <Line: +		}
+>, <Line: +		return true;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public ImmutableTriple<List<TurboIssue>, String, Date> getUpdatedIssues(String repoId, String ETag, Date lastCheckTime) {
+>, <Line: +		IssueUpdateService issueUpdateService = new IssueUpdateService(client, ETag, lastCheckTime);
+>, <Line: +		List<Issue> updatedItems = issueUpdateService.getUpdatedItems(RepositoryId.createFromId(repoId));
+>, <Line: +		List<TurboIssue> items = updatedItems.stream()
+>, <Line: +			.map(i -> new TurboIssue(repoId, i))
+>, <Line: +			.collect(Collectors.toList());
+>, <Line: +		return new ImmutableTriple<>(items, issueUpdateService.getUpdatedETag(), issueUpdateService.getUpdatedCheckTime());
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public ImmutablePair<List<TurboLabel>, String> getUpdatedLabels(String repoId, String ETag) {
+>, <Line: +		return getUpdatedResource(repoId, ETag, LabelUpdateService::new, TurboLabel::new);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public ImmutablePair<List<TurboMilestone>, String> getUpdatedMilestones(String repoId, String ETag) {
+>, <Line: +		return getUpdatedResource(repoId, ETag, MilestoneUpdateService::new, TurboMilestone::new);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public ImmutablePair<List<TurboUser>, String> getUpdatedCollaborators(String repoId, String ETag) {
+>, <Line: +		return getUpdatedResource(repoId, ETag, UserUpdateService::new, TurboUser::new);
+>, <Line: +	}
+>, <Line: +	private <TR, R, S extends UpdateService<R>> ImmutablePair<List<TR>, String> getUpdatedResource(
+>, <Line: +		String repoId, String ETag, BiFunction<GitHubClientExtended, String, S> constructService,
+>, <Line: +		BiFunction<String, R, TR> resourceConstructor) {
+>, <Line: +		S updateService = constructService.apply(client, ETag);
+>, <Line: +		List<R> updatedItems = updateService.getUpdatedItems(RepositoryId.createFromId(repoId));
+>, <Line: +		List<TR> items = updatedItems.stream()
+>, <Line: +			.map(i -> resourceConstructor.apply(repoId, i))
+>, <Line: +			.collect(Collectors.toList());
+>, <Line: +		return new ImmutablePair<>(items,
+>, <Line: +			updateService.getUpdatedETag());
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<TurboLabel> getLabels(String repoId) {
+>, <Line: +		try {
+>, <Line: +			return labelService.getLabels(RepositoryId.createFromId(repoId)).stream()
+>, <Line: +				.map(l -> new TurboLabel(repoId, l))
+>, <Line: +				.collect(Collectors.toList());
+>, <Line: +		} catch (IOException e) {
+>, <Line: +			HTLog.error(logger, e);
+>, <Line: +			return new ArrayList<>();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<TurboMilestone> getMilestones(String repoId) {
+>, <Line: +		try {
+>, <Line: +			return milestoneService.getMilestones(RepositoryId.createFromId(repoId), "all").stream()
+>, <Line: +				.map(m -> new TurboMilestone(repoId, m))
+>, <Line: +				.collect(Collectors.toList());
+>, <Line: +		} catch (IOException e) {
+>, <Line: +			HTLog.error(logger, e);
+>, <Line: +			return new ArrayList<>();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<TurboUser> getCollaborators(String repoId) {
+>, <Line: +		try {
+>, <Line: +			return collaboratorService.getCollaborators(RepositoryId.createFromId(repoId)).stream()
+>, <Line: +				.map(u -> new TurboUser(repoId, u))
+>, <Line: +				.collect(Collectors.toList());
+>, <Line: +		} catch (RequestException e) {
+>, <Line: +			if (e.getStatus() == 403) {
+>, <Line: +				logger.info(HTLog.format(repoId, "Unable to get collaborators: " + e.getLocalizedMessage()));
+>, <Line: +			} else {
+>, <Line: +				HTLog.error(logger, e);
+>, <Line: +			}
+>, <Line: +		} catch (IOException e) {
+>, <Line: +			HTLog.error(logger, e);
+>, <Line: +		}
+>, <Line: +		return new ArrayList<>();
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<TurboIssue> getIssues(String repoId) {
+>, <Line: +		Map<String, String> filters = new HashMap<>();
+>, <Line: +		filters.put(IssueService.FIELD_FILTER, "all");
+>, <Line: +		filters.put(IssueService.FILTER_STATE, "all");
+>, <Line: +		return getAll(issueService.pageIssues(RepositoryId.createFromId(repoId), filters), repoId).stream()
+>, <Line: +			.map(i -> new TurboIssue(repoId, i))
+>, <Line: +			.collect(Collectors.toList());
+>, <Line: +	}
+>, <Line: +	private List<Issue> getAll(PageIterator<Issue> iterator, String repoId) {
+>, <Line: +		List<Issue> elements = new ArrayList<>();
+>, <Line: +		// Assume there is at least one page
+>, <Line: +		int knownLastPage = 1;
+>, <Line: +		try {
+>, <Line: +			while (iterator.hasNext()) {
+>, <Line: +				Collection<Issue> additions = iterator.next();
+>, <Line: +				elements.addAll(additions);
+>, <Line: +				// Compute progress
+>, <Line: +				// iterator.getLastPage() only has a value after iterator.next() is called,
+>, <Line: +				// so it's used directly in this loop. It returns the 1-based index of the last
+>, <Line: +				// page, except when we are actually on the last page, in which case it returns -1.
+>, <Line: +				// This portion deals with all these quirks.
+>, <Line: +				knownLastPage = Math.max(knownLastPage, iterator.getLastPage());
+>, <Line: +				int totalIssueCount = knownLastPage * PagedRequest.PAGE_SIZE;
+>, <Line: +				// Total is approximate: always >= the actual amount
+>, <Line: +				assert totalIssueCount >= elements.size();
+>, <Line: +				float progress = ((float) elements.size() / (float) totalIssueCount);
+>, <Line: +				UI.events.triggerEvent(new UpdateProgressEvent(repoId, progress));
+>, <Line: +				logger.info(HTLog.format(repoId, "Loaded %d issues (%.0f%% done)", elements.size(), progress * 100));
+>, <Line: +			}
+>, <Line: +			UI.events.triggerEvent(new UpdateProgressEvent(repoId));
+>, <Line: +		} catch (NoSuchPageException pageException) {
+>, <Line: +			try {
+>, <Line: +				throw pageException.getCause();
+>, <Line: +			} catch (IOException e) {
+>, <Line: +				HTLog.error(logger, e);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return elements;
+>, <Line: +	}
+>, <Line: +	public List<TurboIssueEvent> getEvents(String repoId, int issueId) {
+>, <Line: +		try {
+>, <Line: +			return issueService.getIssueEvents(RepositoryId.createFromId(repoId), issueId).getTurboIssueEvents();
+>, <Line: +		} catch (IOException e) {
+>, <Line: +			HTLog.error(logger, e);
+>, <Line: +			return new ArrayList<>();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public List<Comment> getComments(String repoId, int issueId) {
+>, <Line: +		try {
+>, <Line: +			return issueService.getComments(RepositoryId.createFromId(repoId), issueId);
+>, <Line: +		} catch (IOException e) {
+>, <Line: +			HTLog.error(logger, e);
+>, <Line: +			return new ArrayList<>();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean isRepositoryValid(String repoId) {
+>, <Line: +		String repoURL = SEGMENT_REPOS + "/" + repoId;
+>, <Line: +		try {
+>, <Line: +			GitHubRequest req = new GitHubRequest();
+>, <Line: +			client.get(req.setUri(repoURL));
+>, <Line: +			return true;
+>, <Line: +		} catch (RequestException e) {
+>, <Line: +			if (e.getStatus() == HttpURLConnection.HTTP_NOT_FOUND) {
+>, <Line: +				return false;
+>, <Line: +			} else {
+>, <Line: +				HTLog.error(logger, e);
+>, <Line: +			}
+>, <Line: +		} catch (IOException e) {
+>, <Line: +			HTLog.error(logger, e);
+>, <Line: +		}
+>, <Line: +		return false;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

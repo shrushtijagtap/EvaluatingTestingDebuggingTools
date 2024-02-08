@@ -1,0 +1,8 @@
+[<Line: +package org.mp4parser.muxer.tracks.h264;
+>, <Line: +    int UNSPECIFIED = 0;
+>, <Line: +    int CODED_SLICE_EXT = 20;
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks.h264;
+>, <Line: -    int UNSPECIFIED =  0;
+>, <Line: -    int CODED_SLICE_EXT =20;
+>]

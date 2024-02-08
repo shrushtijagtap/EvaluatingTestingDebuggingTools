@@ -1,0 +1,10 @@
+[<Line: +        SwingUtilities.invokeLater(() -> {
+>, <Line: +            dispose();
+>, <Line: +            suc = true;
+>, <Line: +            HMCLog.log("Tasks are finished.");
+>, <Line: +        });
+>]
+[<Line: -        SwingUtilities.invokeLater(this::dispose);
+>, <Line: -        suc = true;
+>, <Line: -        HMCLog.log("Tasks are finished.");
+>]

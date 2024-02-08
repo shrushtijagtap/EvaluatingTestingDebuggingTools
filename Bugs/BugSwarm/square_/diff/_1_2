@@ -1,0 +1,6 @@
+[<Line: +    final URL url = mockWebServer.url("/").url();
+>, <Line: +        final URL url = mockWebServer.url(path).url();
+>]
+[<Line: -    final URL url = mockWebServer.getUrl("/");
+>, <Line: -        final URL url = mockWebServer.getUrl(path);
+>]

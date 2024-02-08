@@ -1,0 +1,7 @@
+[<Line: +    @SuppressWarnings("unchecked")
+>, <Line: +    public <T> T getParameter(Serializable key, T defaultValue) {
+>, <Line: +        return (T) val;
+>]
+[<Line: -    public Serializable getParameter(Serializable key, Serializable defaultValue) {
+>, <Line: -        return val;
+>]

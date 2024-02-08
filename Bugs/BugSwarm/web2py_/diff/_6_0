@@ -1,0 +1,7 @@
+[<Line: +from gluon.serializers import custom_json, xml
+>, <Line: +DAL.serializers = {'json': custom_json, 'xml': xml}
+>]
+[<Line: -import copy_reg as copyreg
+>, <Line: -from gluon import serializers as w2p_serializers
+>, <Line: -DAL.serializers = w2p_serializers
+>]

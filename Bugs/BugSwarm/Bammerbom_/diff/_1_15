@@ -1,0 +1,8 @@
+[<Line: +import bammerbom.ultimatecore.sponge.utils.Selector;
+>, <Line: +        } else if (Selector.one(sender, args[1]).isPresent()) {
+>, <Line: +            Player t = Selector.one(sender, args[1]).get();
+>]
+[<Line: -import bammerbom.ultimatecore.sponge.utils.PlayerSelector;
+>, <Line: -        } else if (PlayerSelector.one(sender, args[1]).isPresent()) {
+>, <Line: -            Player t = PlayerSelector.one(sender, args[1]).get();
+>]

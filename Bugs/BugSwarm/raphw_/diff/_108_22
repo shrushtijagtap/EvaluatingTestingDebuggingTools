@@ -1,0 +1,18 @@
+[<Line: +    private final ElementMatcher<? super T> matcher;
+>, <Line: +     * @param matcher  The delegate matcher that might throw an exception.
+>, <Line: +    public FailSafeMatcher(ElementMatcher<? super T> matcher, boolean fallback) {
+>, <Line: +        this.matcher = matcher;
+>, <Line: +            return matcher.matches(target);
+>, <Line: +        return fallback == that.fallback && matcher.equals(that.matcher);
+>, <Line: +        int result = matcher.hashCode();
+>, <Line: +        return "failSafe(try(" + matcher + ") or " + fallback + ")";
+>]
+[<Line: -    private final ElementMatcher<? super T> delegate;
+>, <Line: -     * @param delegate The delegate matcher that might throw an exception.
+>, <Line: -    public FailSafeMatcher(ElementMatcher<? super T> delegate, boolean fallback) {
+>, <Line: -        this.delegate = delegate;
+>, <Line: -            return delegate.matches(target);
+>, <Line: -        return fallback == that.fallback && delegate.equals(that.delegate);
+>, <Line: -        int result = delegate.hashCode();
+>, <Line: -        return "failSafe(try(" + delegate + ") or " + fallback + ")";
+>]

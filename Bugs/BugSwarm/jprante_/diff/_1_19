@@ -1,0 +1,88 @@
+[<Line: +package org.xbib.metrics;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +import java.util.concurrent.atomic.LongAdder;
+>, <Line: +/**
+>, <Line: + * An exponentially-weighted moving average.
+>, <Line: + *
+>, <Line: + * @see <a href="http://www.teamquest.com/pdfs/whitepaper/ldavg1.pdf">UNIX Load Average Part 1: How It Works</a>
+>, <Line: + * @see <a href="http://www.teamquest.com/pdfs/whitepaper/ldavg2.pdf">UNIX Load Average Part 2: Not Your Average Average</a>
+>, <Line: + */
+>, <Line: +public class ExpWeightedMovingAverage {
+>, <Line: +    private static final double M1_ALPHA = 1 - Math.exp(-5 / 60.0);
+>, <Line: +    private static final double M5_ALPHA = 1 - Math.exp(-5 / 60.0 / 5);
+>, <Line: +    private static final double M15_ALPHA = 1 - Math.exp(-5 / 60.0 / 15);
+>, <Line: +    private final LongAdder uncounted = new LongAdder();
+>, <Line: +    private final double alpha, interval;
+>, <Line: +    private volatile boolean initialized = false;
+>, <Line: +    private volatile double rate = 0.0;
+>, <Line: +    /**
+>, <Line: +     * Create a new EWMA with a specific smoothing constant.
+>, <Line: +     *
+>, <Line: +     * @param alpha        the smoothing constant
+>, <Line: +     * @param interval     the expected tick interval
+>, <Line: +     * @param intervalUnit the time unit of the tick interval
+>, <Line: +     */
+>, <Line: +    public ExpWeightedMovingAverage(double alpha, long interval, TimeUnit intervalUnit) {
+>, <Line: +        this.interval = intervalUnit.toNanos(interval);
+>, <Line: +        this.alpha = alpha;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Creates a new EWMA which is equivalent to the UNIX one minute load average and which expects to be ticked every
+>, <Line: +     * 5 seconds.
+>, <Line: +     *
+>, <Line: +     * @return a one-minute EWMA
+>, <Line: +     */
+>, <Line: +    public static ExpWeightedMovingAverage oneMinuteEWMA() {
+>, <Line: +        return new ExpWeightedMovingAverage(M1_ALPHA, 5, TimeUnit.SECONDS);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Creates a new EWMA which is equivalent to the UNIX five minute load average and which expects to be ticked every
+>, <Line: +     * 5 seconds.
+>, <Line: +     *
+>, <Line: +     * @return a five-minute EWMA
+>, <Line: +     */
+>, <Line: +    public static ExpWeightedMovingAverage fiveMinuteEWMA() {
+>, <Line: +        return new ExpWeightedMovingAverage(M5_ALPHA, 5, TimeUnit.SECONDS);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Creates a new EWMA which is equivalent to the UNIX fifteen minute load average and which expects to be ticked
+>, <Line: +     * every 5 seconds.
+>, <Line: +     *
+>, <Line: +     * @return a fifteen-minute EWMA
+>, <Line: +     */
+>, <Line: +    public static ExpWeightedMovingAverage fifteenMinuteEWMA() {
+>, <Line: +        return new ExpWeightedMovingAverage(M15_ALPHA, 5, TimeUnit.SECONDS);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Update the moving average with a new value.
+>, <Line: +     *
+>, <Line: +     * @param n the new value
+>, <Line: +     */
+>, <Line: +    public void update(long n) {
+>, <Line: +        uncounted.add(n);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Mark the passage of time and decay the current rate accordingly.
+>, <Line: +     */
+>, <Line: +    public void tick() {
+>, <Line: +        final long count = uncounted.sumThenReset();
+>, <Line: +        double instantRate = count / interval;
+>, <Line: +        if (initialized) {
+>, <Line: +            rate += (alpha * (instantRate - rate));
+>, <Line: +        } else {
+>, <Line: +            rate = instantRate;
+>, <Line: +            initialized = true;
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Returns the rate in the given units of time.
+>, <Line: +     *
+>, <Line: +     * @param rateUnit the unit of time
+>, <Line: +     * @return the rate
+>, <Line: +     */
+>, <Line: +    public double rate(TimeUnit rateUnit) {
+>, <Line: +        return rate * (double) rateUnit.toNanos(1);
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

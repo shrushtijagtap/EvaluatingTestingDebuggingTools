@@ -1,0 +1,9 @@
+[<Line: +    test_utils, test_datastructures, test_exceptions, test_http,
+>, <Line: +    test_http_accept, test_wsgi, test_requests, test_responses, test_routing,
+>, <Line: +    test_dispatch, test_accept, test_views, test_application,
+>, <Line: +    loader.loadTestsFromModule(test_http_accept),
+>]
+[<Line: -    test_utils, test_datastructures, test_exceptions, test_http, test_wsgi,
+>, <Line: -    test_requests, test_responses, test_routing, test_dispatch,
+>, <Line: -    test_accept, test_views, test_application,
+>]

@@ -1,0 +1,38 @@
+[<Line: +package org.mp4parser;
+>, <Line: +import java.nio.channels.ReadableByteChannel;
+>, <Line: + * This box is parsable and can not only be used to write data it can as well be used to read data.
+>, <Line: +public interface ParsableBox extends Box {
+>, <Line: +     * @param dataSource  the source for this box
+>, <Line: +    void parse(ReadableByteChannel dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException;
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import java.nio.channels.WritableByteChannel;
+>, <Line: - * Defines basic interaction possibilities for any ISO box. Each box has a parent box and a type.
+>, <Line: -public interface Box {
+>, <Line: -    Container getParent();
+>, <Line: -    void setParent(Container parent);
+>, <Line: -    long getSize();
+>, <Line: -    /**
+>, <Line: -     * Returns the position of the box in the original file.
+>, <Line: -     *
+>, <Line: -     * @return the start offset in the source file
+>, <Line: -     */
+>, <Line: -    long getOffset();
+>, <Line: -    /**
+>, <Line: -     * The box's 4-cc type.
+>, <Line: -     *
+>, <Line: -     * @return the 4 character type of the box
+>, <Line: -     */
+>, <Line: -    String getType();
+>, <Line: -    /**
+>, <Line: -     * Writes the complete box - size | 4-cc | content - to the given <code>writableByteChannel</code>.
+>, <Line: -     *
+>, <Line: -     * @param writableByteChannel the box's sink
+>, <Line: -     * @throws IOException in case of problems with the <code>Channel</code>
+>, <Line: -     */
+>, <Line: -    void getBox(WritableByteChannel writableByteChannel) throws IOException;
+>, <Line: -     * @param dataSource the source for this box
+>, <Line: -    void parse(DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException;
+>]

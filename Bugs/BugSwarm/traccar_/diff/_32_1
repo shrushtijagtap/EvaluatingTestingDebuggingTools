@@ -1,0 +1,4 @@
+[<Line: +        if (position.getNetwork() != null && position.getNetwork().getCellTowers() != null) {
+>]
+[<Line: -        if (position.getNetwork() != null) {
+>]

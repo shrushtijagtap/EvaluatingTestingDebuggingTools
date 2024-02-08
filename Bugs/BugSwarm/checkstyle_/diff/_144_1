@@ -1,0 +1,5 @@
+[<Line: +                checkFinal = checkFinal || classModifiers.branchContains(TokenTypes.FINAL);
+>]
+[<Line: -                checkFinal |=
+>, <Line: -                    classModifiers.branchContains(TokenTypes.FINAL);
+>]

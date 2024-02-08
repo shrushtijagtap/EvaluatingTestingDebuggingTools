@@ -1,0 +1,134 @@
+[<Line: +package de.charite.compbio.jannovar.cmd.annotate_vcf;
+>, <Line: +import java.util.function.BiFunction;
+>, <Line: +import de.charite.compbio.jannovar.UncheckedJannovarException;
+>, <Line: +import de.charite.compbio.jannovar.cmd.CommandLineParsingException;
+>, <Line: +import de.charite.compbio.jannovar.cmd.JannovarAnnotationOptions;
+>, <Line: +import de.charite.compbio.jannovar.cmd.JannovarBaseOptions;
+>, <Line: +import net.sourceforge.argparse4j.impl.Arguments;
+>, <Line: +import net.sourceforge.argparse4j.inf.ArgumentGroup;
+>, <Line: +import net.sourceforge.argparse4j.inf.ArgumentParser;
+>, <Line: +import net.sourceforge.argparse4j.inf.Namespace;
+>, <Line: +import net.sourceforge.argparse4j.inf.Subparser;
+>, <Line: +import net.sourceforge.argparse4j.inf.Subparsers;
+>, <Line: +/**
+>, <Line: + * Options for annotating VCF files
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
+>, <Line: +	/** Whether or not to escape ANN field */
+>, <Line: +	private boolean escapeAnnField = true;
+>, <Line: +	/** Path to input VCF file */
+>, <Line: +	private String pathInputVCF = null;
+>, <Line: +	/** Path to output VCF file */
+>, <Line: +	private String pathOutputVCF = null;
+>, <Line: +	/** Path to dbSNP VCF file to use for the annotation */
+>, <Line: +	public String pathVCFDBSNP = null;
+>, <Line: +	/** Prefix to use for dbSNP VCF INFO Fields */
+>, <Line: +	public String prefixDBSNP = null;
+>, <Line: +	/** Path to the reference FAI-indexed FASTA file (required for dbSNP/ExAC/UK10K-based annotation */
+>, <Line: +	public String pathFASTARef = null;
+>, <Line: +	/** Path to ExAC VCF file to use for the annotation */
+>, <Line: +	public String pathVCFExac;
+>, <Line: +	/** Prefix to use for ExAC VCF INFO Fields */
+>, <Line: +	public String prefixExac;
+>, <Line: +	/** Path to UK10K VCF file to use for the annotation */
+>, <Line: +	public String pathVCFUK10K;
+>, <Line: +	/** Prefix to use for UK10K VCF INFO Fields */
+>, <Line: +	public String prefixUK10K;
+>, <Line: +	/** Path to pedigree file */
+>, <Line: +	public String pathPedFile;
+>, <Line: +	/**
+>, <Line: +	 * Setup {@link ArgumentParser}
+>, <Line: +	 * 
+>, <Line: +	 * @param subParsers
+>, <Line: +	 *            {@link Subparsers} to setup
+>, <Line: +	 */
+>, <Line: +	public static void setupParser(Subparsers subParsers) {
+>, <Line: +		BiFunction<String[], Namespace, AnnotateVCFCommand> handler = (argv, args) -> {
+>, <Line: +			try {
+>, <Line: +				return new AnnotateVCFCommand(argv, args);
+>, <Line: +			} catch (CommandLineParsingException e) {
+>, <Line: +				throw new UncheckedJannovarException("Could not parse command line", e);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		Subparser subParser = subParsers.addParser("annotate-vcf", true).help("annotate VCF files").setDefault("cmd",
+>, <Line: +				handler);
+>, <Line: +		subParser.description("Perform annotation of a single VCF file");
+>, <Line: +		subParser.addArgument("-i", "--input-vcf").help("Path to input VCF file").required(true);
+>, <Line: +		subParser.addArgument("-o", "--output-vcf").help("Path to output VCF file").required(true);
+>, <Line: +		subParser.addArgument("-d", "--database").help("Path to database .ser file").required(true);
+>, <Line: +		ArgumentGroup annotationGroup = subParser.addArgumentGroup("Annotation Arguments (optional)");
+>, <Line: +		annotationGroup.addArgument("--pedigree-file").help("Pedigree file to use for Mendelian inheritance annotation")
+>, <Line: +				.required(false);
+>, <Line: +		annotationGroup.addArgument("--ref-fasta")
+>, <Line: +				.help("Path to FAI-indexed reference FASTA file, required for dbSNP/ExAC/UK10K-based annotation");
+>, <Line: +		annotationGroup.addArgument("--dbsnp-vcf").help("Path to dbSNP VCF file, activates dbSNP annotation")
+>, <Line: +				.required(false);
+>, <Line: +		annotationGroup.addArgument("--dbsnp-prefix").help("Prefix for dbSNP annotations").setDefault("DBSNP_")
+>, <Line: +				.required(false);
+>, <Line: +		annotationGroup.addArgument("--exac-vcf").help("Path to ExAC VCF file, activates ExAC annotation")
+>, <Line: +				.required(false);
+>, <Line: +		annotationGroup.addArgument("--exac-prefix").help("Prefix for ExAC annotations").setDefault("EXAC_")
+>, <Line: +				.required(false);
+>, <Line: +		annotationGroup.addArgument("--uk10k-vcf").help("Path to UK10K VCF file, activates UK10K annotation")
+>, <Line: +				.required(false);
+>, <Line: +		annotationGroup.addArgument("--uk10k-prefix").help("Prefix for UK10K annotations").setDefault("UK10K_")
+>, <Line: +				.required(false);
+>, <Line: +		ArgumentGroup optionalGroup = subParser.addArgumentGroup("Other, optional Arguments");
+>, <Line: +		optionalGroup.addArgument("--no-escape-ann-field").help("Disable escaping of INFO/ANN field in VCF output")
+>, <Line: +				.dest("escape_ann_field").setDefault(true).action(Arguments.storeFalse());
+>, <Line: +		optionalGroup.addArgument("--show-all").help("Show all effects").setDefault(false);
+>, <Line: +		optionalGroup.addArgument("--no-3-prime-shifting").help("Disable shifting towards 3' of transcript")
+>, <Line: +				.dest("3_prime_shifting").setDefault(true).action(Arguments.storeFalse());
+>, <Line: +		optionalGroup.addArgument("--3-letter-amino-acids").help("Enable usage of 3 letter amino acid codes")
+>, <Line: +				.setDefault(false).action(Arguments.storeTrue());
+>, <Line: +		JannovarBaseOptions.setupParser(subParser);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void setFromArgs(Namespace args) throws CommandLineParsingException {
+>, <Line: +		super.setFromArgs(args);
+>, <Line: +		escapeAnnField = args.getBoolean("escape_ann_field");
+>, <Line: +		pathInputVCF = args.getString("input_vcf");
+>, <Line: +		pathOutputVCF = args.getString("output_vcf");
+>, <Line: +		pathPedFile = args.getString("pedigree_file");
+>, <Line: +		pathFASTARef = args.getString("ref_fasta");
+>, <Line: +		pathVCFDBSNP = args.getString("dbsnp_vcf");
+>, <Line: +		prefixDBSNP = args.getString("dbsnp_prefix");
+>, <Line: +		pathVCFExac = args.getString("exac_vcf");
+>, <Line: +		prefixExac = args.getString("exac_prefix");
+>, <Line: +		pathVCFUK10K = args.getString("uk10k_vcf");
+>, <Line: +		prefixUK10K = args.getString("uk10k_prefix");
+>, <Line: +	}
+>, <Line: +	public String getPathInputVCF() {
+>, <Line: +		return pathInputVCF;
+>, <Line: +	}
+>, <Line: +	public void setPathInputVCF(String pathInputVCF) {
+>, <Line: +		this.pathInputVCF = pathInputVCF;
+>, <Line: +	}
+>, <Line: +	public String getPathOutputVCF() {
+>, <Line: +		return pathOutputVCF;
+>, <Line: +	}
+>, <Line: +	public void setPathOutputVCF(String pathOutputVCF) {
+>, <Line: +		this.pathOutputVCF = pathOutputVCF;
+>, <Line: +	}
+>, <Line: +	public boolean isEscapeAnnField() {
+>, <Line: +		return escapeAnnField;
+>, <Line: +	}
+>, <Line: +	public void setEscapeAnnField(boolean escapeAnnField) {
+>, <Line: +		this.escapeAnnField = escapeAnnField;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return "JannovarAnnotateVCFOptions [escapeAnnField=" + escapeAnnField + ", pathInputVCF=" + pathInputVCF
+>, <Line: +				+ ", pathOutputVCF=" + pathOutputVCF + ", pathVCFDBSNP=" + pathVCFDBSNP + ", prefixDBSNP=" + prefixDBSNP
+>, <Line: +				+ ", pathFASTARef=" + pathFASTARef + ", pathVCFExac=" + pathVCFExac + ", prefixExac=" + prefixExac
+>, <Line: +				+ ", pathVCFUK10K=" + pathVCFUK10K + ", prefixUK10K=" + prefixUK10K + ", pathPedFile=" + pathPedFile
+>, <Line: +				+ ", isUseThreeLetterAminoAcidCode()=" + isUseThreeLetterAminoAcidCode() + ", isNt3PrimeShifting()="
+>, <Line: +				+ isNt3PrimeShifting() + ", getDatabaseFilePath()=" + getDatabaseFilePath() + ", isReportProgress()="
+>, <Line: +				+ isReportProgress() + ", getHttpProxy()=" + getHttpProxy() + ", getHttpsProxy()=" + getHttpsProxy()
+>, <Line: +				+ ", getFtpProxy()=" + getFtpProxy() + "]";
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

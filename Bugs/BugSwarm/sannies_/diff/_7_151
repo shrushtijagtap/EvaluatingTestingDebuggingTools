@@ -1,0 +1,10 @@
+[<Line: +package org.mp4parser.boxes.apple;
+>, <Line: +public class AppleTempoBox extends AppleVariableSignedIntegerBox {
+>, <Line: +    public AppleTempoBox() {
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.apple;
+>, <Line: -public class AppleTempoBox extends AppleVariableSignedIntegerBox
+>, <Line: -{
+>, <Line: -    public AppleTempoBox()
+>, <Line: -    {
+>]

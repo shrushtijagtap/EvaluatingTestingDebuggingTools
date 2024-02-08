@@ -1,0 +1,59 @@
+[<Line: +package backend;
+>, <Line: +import java.util.Date;
+>, <Line: +/**
+>, <Line: + * Aggregation of resource ETags and last-check time.
+>, <Line: + * Characterises the state of a Model after the last update that occurred.
+>, <Line: + */
+>, <Line: +public class UpdateSignature {
+>, <Line: +	public static final UpdateSignature empty = new UpdateSignature();
+>, <Line: +	public final String issuesETag;
+>, <Line: +	public final String labelsETag;
+>, <Line: +	public final String milestonesETag;
+>, <Line: +	public final String collaboratorsETag;
+>, <Line: +	public final Date lastCheckTime;
+>, <Line: +	private UpdateSignature() {
+>, <Line: +		issuesETag = null;
+>, <Line: +		labelsETag = null;
+>, <Line: +		milestonesETag = null;
+>, <Line: +		collaboratorsETag = null;
+>, <Line: +		// This initialisation is a reasonable default
+>, <Line: +		lastCheckTime = new Date();
+>, <Line: +	}
+>, <Line: +	public UpdateSignature(String issuesETag, String labelsETag, String milestonesETag, String collaboratorsETag,
+>, <Line: +	                       Date lastCheckTime) {
+>, <Line: +		this.issuesETag = issuesETag;
+>, <Line: +		this.labelsETag = labelsETag;
+>, <Line: +		this.milestonesETag = milestonesETag;
+>, <Line: +		this.collaboratorsETag = collaboratorsETag;
+>, <Line: +		this.lastCheckTime = lastCheckTime;
+>, <Line: +	}
+>, <Line: +	public boolean isEmpty() {
+>, <Line: +		return this == empty;
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * lastCheckTime does not contribute to equality of signatures
+>, <Line: +	 */
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object o) {
+>, <Line: +		if (this == o) return true;
+>, <Line: +		if (o == null || getClass() != o.getClass()) return false;
+>, <Line: +		UpdateSignature that = (UpdateSignature) o;
+>, <Line: +		if (collaboratorsETag != null ? !collaboratorsETag.equals(that.collaboratorsETag) : that.collaboratorsETag != null)
+>, <Line: +			return false;
+>, <Line: +		if (issuesETag != null ? !issuesETag.equals(that.issuesETag) : that.issuesETag != null) return false;
+>, <Line: +		if (labelsETag != null ? !labelsETag.equals(that.labelsETag) : that.labelsETag != null) return false;
+>, <Line: +		if (milestonesETag != null ? !milestonesETag.equals(that.milestonesETag) : that.milestonesETag != null)
+>, <Line: +			return false;
+>, <Line: +		return true;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode() {
+>, <Line: +		int result = issuesETag != null ? issuesETag.hashCode() : 0;
+>, <Line: +		result = 31 * result + (labelsETag != null ? labelsETag.hashCode() : 0);
+>, <Line: +		result = 31 * result + (milestonesETag != null ? milestonesETag.hashCode() : 0);
+>, <Line: +		result = 31 * result + (collaboratorsETag != null ? collaboratorsETag.hashCode() : 0);
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

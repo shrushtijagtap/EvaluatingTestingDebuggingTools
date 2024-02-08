@@ -1,0 +1,4 @@
+[<Line: +          options != null ? nullOrEmpty(options.resultSets()) : null);
+>]
+[<Line: -          select != null ? nullOrEmpty(select.resultSets()) : null);
+>]

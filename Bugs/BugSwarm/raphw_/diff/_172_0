@@ -1,0 +1,6 @@
+[<Line: +            return module.isNamed()
+>, <Line: +                    ? new ForModule(module)
+>, <Line: +                    : ForClassLoader.of(module.getClassLoader());
+>]
+[<Line: -            return new ForModule(module);
+>]

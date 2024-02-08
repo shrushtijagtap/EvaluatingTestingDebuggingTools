@@ -1,0 +1,146 @@
+[<Line: +import java.util.Arrays;
+>, <Line: +import org.yamcs.utils.ByteArrayUtils;
+>, <Line: +    // size in bytes of value if partitioned by value
+>, <Line: +                strictStart = range.strictStart;
+>, <Line: +            iws = rdb.newAscendingIterators(partValues, rangeStart, !strictStart, follow);
+>, <Line: +            int index = 0;
+>, <Line: +                numRecordsRead++;
+>, <Line: +                orderedQueue.add(getRawTuple(it, index++));
+>, <Line: +            //publish the first element from the priority queue till it becomes empty
+>, <Line: +                    byte[] key = rt.iterator.key();
+>, <Line: +                    if(ByteArrayUtils.startsWith(key, rt.partition)) {
+>, <Line: +                        rt.key = Arrays.copyOfRange(key, partitionSize, key.length);
+>, <Line: +    private RdbRawTuple getRawTuple(RocksIterator it, int index ) {
+>, <Line: +        byte[] rdbKey = it.key();
+>, <Line: +        byte[] p = Arrays.copyOf(rdbKey, partitionSize);
+>, <Line: +        byte[] key = Arrays.copyOfRange(rdbKey, partitionSize, rdbKey.length);
+>, <Line: +        return new RdbRawTuple(p, key, it.value(), it, index);
+>, <Line: +    }
+>, <Line: +            iws = rdb.newDescendingIterators(partValues, rangeEnd, !strictEnd);
+>, <Line: +            int index = 0;
+>, <Line: +                numRecordsRead++;
+>, <Line: +                orderedQueue.add(getRawTuple(it, index++));
+>, <Line: +            //publish the first element from the priority queue till it becomes empty
+>, <Line: +                RdbRawTuple rt = orderedQueue.poll();
+>, <Line: +                boolean finished = true;
+>, <Line: +                    byte[] key = rt.iterator.key();
+>, <Line: +                    if(ByteArrayUtils.startsWith(key,  rt.partition)) {
+>, <Line: +                        rt.key = Arrays.copyOfRange(key, partitionSize, key.length);
+>, <Line: +                        rt.value = rt.iterator.value();
+>, <Line: +                        orderedQueue.add(rt);
+>, <Line: +                        finished = false;
+>, <Line: +                    }
+>, <Line: +                } 
+>, <Line: +                if(!finished) {
+>, <Line: +        int index; //used for sorting tuples with equals keys
+>, <Line: +        byte[] partition;
+>, <Line: +        byte[] key;
+>, <Line: +        byte[] value;
+>, <Line: +        public RdbRawTuple(byte[] partition, byte[] key, byte[] value, RocksIterator iterator, int index) {
+>, <Line: +            super(index);
+>, <Line: +            this.partition = partition;
+>, <Line: +            this.key = key;
+>, <Line: +            this.value = value;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        protected byte[] getKey() {
+>, <Line: +            return key;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        protected byte[] getValue() {
+>, <Line: +            return value;
+>]
+[<Line: -                strictStart=range.strictStart;
+>, <Line: -            iws = rdb.newIterators(partValues, follow);
+>, <Line: -            int i=0;
+>, <Line: -                boolean found=true;
+>, <Line: -                if(rangeStart!=null) {
+>, <Line: -                    it.seek(rangeStart);
+>, <Line: -                    if(it.isValid()) {                  
+>, <Line: -                        if((strictStart)&&(compare(rangeStart, it.key())==0)) {
+>, <Line: -                            //if filter condition is ">" we skip the first record if it is equal to the key
+>, <Line: -                            it.next();
+>, <Line: -                            found=it.isValid();
+>, <Line: -                        }
+>, <Line: -                    } else {
+>, <Line: -                        found=false;
+>, <Line: -                    }
+>, <Line: -                    if(!found) log.debug("no record corresponding to the StartFilter");
+>, <Line: -                } else {
+>, <Line: -                    it.seekToFirst();
+>, <Line: -                    if(!it.isValid()) {
+>, <Line: -                        log.debug("tcb contains no record");
+>, <Line: -                        found = false;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -                if(!found) {
+>, <Line: -                    it.close();                                        
+>, <Line: -                } else {
+>, <Line: -                    numRecordsRead++;
+>, <Line: -                    orderedQueue.add(new RdbRawTuple(it.key(), it.value(), it, i++));
+>, <Line: -                }
+>, <Line: -            //now continue publishing the first element from the priority queue till it becomes empty
+>, <Line: -                    byte[]b = rt.iterator.key();
+>, <Line: -                    if(equalPrefix(rt.key, b, partitionSize)) {
+>, <Line: -                        rt.key = b;;
+>, <Line: -            iws = rdb.newIterators(partValues, follow);
+>, <Line: -            int i=0;
+>, <Line: -                boolean found=true;
+>, <Line: -                if(rangeEnd!=null) {
+>, <Line: -                    //seek moves cursor beyond the match
+>, <Line: -                    it.seek(rangeEnd);
+>, <Line: -                    boolean verify=false;
+>, <Line: -                    if(it.isValid()) {
+>, <Line: -                        if((strictEnd)||(compare(rangeEnd, it.key())!=0)) {
+>, <Line: -                            it.prev();
+>, <Line: -                            verify=true;
+>, <Line: -                        }
+>, <Line: -                    } else if (!it.isValid()) { //at end of iterator, check last entry
+>, <Line: -                        it.seekToLast();
+>, <Line: -                        verify=true;
+>, <Line: -                    }
+>, <Line: -                    if(verify && it.isValid()) {
+>, <Line: -                        int c = compare(it.key(), rangeEnd);
+>, <Line: -                        if (c>0) {//don't care about non-strict, covered before
+>, <Line: -                            it.seek(rangeEnd);
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                    if(it.isValid()) {
+>, <Line: -                        if((strictEnd)&&(compare(rangeEnd, it.key())==0)) {
+>, <Line: -                            //if filter condition is "<" we skip the first record if it is equal to the key
+>, <Line: -                            it.prev();
+>, <Line: -                            found=it.isValid();
+>, <Line: -                        }
+>, <Line: -                    } else {
+>, <Line: -                        found=false;
+>, <Line: -                    }
+>, <Line: -                    if(!found) log.debug("no record corresponding to the StartFilter");
+>, <Line: -                } else {
+>, <Line: -                    it.seekToLast();
+>, <Line: -                    if(!it.isValid()) {
+>, <Line: -                        log.debug("rdb contains no record");
+>, <Line: -                        found=false;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -                if(!found) {
+>, <Line: -                    it.close();                                        
+>, <Line: -                } else {
+>, <Line: -                    orderedQueue.add(new RdbRawTuple(it.key(), it.value(), it, i++));
+>, <Line: -                }
+>, <Line: -            //now continue publishing the first element from the priority queue till it becomes empty
+>, <Line: -                RdbRawTuple rt=orderedQueue.poll();
+>, <Line: -                    rt.key=rt.iterator.key();
+>, <Line: -                    rt.value=rt.iterator.value();
+>, <Line: -                    orderedQueue.add(rt);
+>, <Line: -                } else {
+>, <Line: -    private boolean equalPrefix(byte[] a, byte b[], int length) {
+>, <Line: -        for(int i=0;i<length; i++) {
+>, <Line: -            if(a[i]!=b[i]) return false;
+>, <Line: -        }
+>, <Line: -        return true;
+>, <Line: -    }
+>, <Line: -        int index;//used for sorting tuples with equals keys
+>, <Line: -        public RdbRawTuple(byte[] key, byte[] value, RocksIterator iterator, int index) {
+>, <Line: -            super(key,value, index);
+>, <Line: -            this.index=index;
+>]

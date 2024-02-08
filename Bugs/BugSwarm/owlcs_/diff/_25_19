@@ -1,0 +1,34 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +        boolean expectParse, boolean expectRoundtrip, boolean logfailures,
+>, <Line: +        boolean annotationsSupported) throws Exception {
+>, <Line: +                new OntologyConfigurator());
+>, <Line: +            || o.containsAxiom(object, Imports.EXCLUDED, AxiomAnnotations.IGNORE_AXIOM_ANNOTATIONS)
+>, <Line: +            || object instanceof OWLObjectPropertyAssertionAxiom
+>, <Line: +                && o.containsAxiom(((OWLObjectPropertyAssertionAxiom) object).getSimplified());
+>, <Line: +            new ManchesterSyntaxDocumentFormat(), logicalAxiom, logicalAxiom, true, true);
+>, <Line: +            new KRSS2DocumentFormat(), false, false, false, false);
+>, <Line: +            false, false, false, false);
+>, <Line: +            new TurtleDocumentFormat(), true, true, true, true);
+>, <Line: +            new FunctionalSyntaxDocumentFormat(), true, true, true, true);
+>, <Line: +            true, true, true);
+>, <Line: +            true, true, true);
+>, <Line: +            new DLSyntaxDocumentFormat(), false, false, true, false);
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -                    boolean expectParse, boolean expectRoundtrip, boolean logfailures,
+>, <Line: -                    boolean annotationsSupported) throws Exception {
+>, <Line: -                            new OWLOntologyLoaderConfiguration());
+>, <Line: -                        || o.containsAxiom(object, Imports.EXCLUDED,
+>, <Line: -                                        AxiomAnnotations.IGNORE_AXIOM_ANNOTATIONS)
+>, <Line: -                        || object instanceof OWLObjectPropertyAssertionAxiom && o.containsAxiom(
+>, <Line: -                                        ((OWLObjectPropertyAssertionAxiom) object).getSimplified());
+>, <Line: -                        new ManchesterSyntaxDocumentFormat(), logicalAxiom, logicalAxiom, true,
+>, <Line: -                        true);
+>, <Line: -                        new KRSS2DocumentFormat(), false, false, false, false);
+>, <Line: -                        false, false, false, false);
+>, <Line: -                        new TurtleDocumentFormat(), true, true, true, true);
+>, <Line: -                        new FunctionalSyntaxDocumentFormat(), true, true, true, true);
+>, <Line: -                        true, true, true);
+>, <Line: -                        true, true, true);
+>, <Line: -                        new DLSyntaxDocumentFormat(), false, false, true, false);
+>]

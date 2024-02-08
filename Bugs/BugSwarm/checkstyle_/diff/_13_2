@@ -1,0 +1,25 @@
+[<Line: +import static org.junit.Assert.fail;
+>, <Line: +    @Test
+>, <Line: +    public void testStrictCondition() throws Exception {
+>, <Line: +        final DefaultConfiguration checkConfig = createCheckConfig(IndentationCheck.class);
+>, <Line: +        checkConfig.addAttribute("arrayInitIndent", "4");
+>, <Line: +        checkConfig.addAttribute("basicOffset", "4");
+>, <Line: +        checkConfig.addAttribute("braceAdjustment", "4");
+>, <Line: +        checkConfig.addAttribute("caseIndent", "4");
+>, <Line: +        checkConfig.addAttribute("forceStrictCondition", "true");
+>, <Line: +        checkConfig.addAttribute("lineWrappingIndentation", "8");
+>, <Line: +        checkConfig.addAttribute("tabWidth", "4");
+>, <Line: +        checkConfig.addAttribute("throwsIndent", "8");
+>, <Line: +        final String[] expected = CommonUtils.EMPTY_STRING_ARRAY;
+>, <Line: +        verifyWarns(checkConfig, getPath("InputStrictCondition.java"), expected);
+>, <Line: +    }
+>, <Line: +            "137: " + getCheckMessage(MSG_ERROR_MULTI, "object def rcurly", 8, "10, 14"),
+>, <Line: +            "145: " + getCheckMessage(MSG_ERROR_MULTI, "object def rcurly", 6, "8, 12"),
+>, <Line: +            if (position >= comments.length) {
+>, <Line: +                fail("found a warning when none was expected for #" + position + " at line " + line
+>, <Line: +                        + " with message " + message);
+>, <Line: +            }
+>]
+[<Line: -            "137: " + getCheckMessage(MSG_ERROR, "}", 8, 10),
+>, <Line: -            "145: " + getCheckMessage(MSG_ERROR, "}", 6, 8),
+>]

@@ -1,0 +1,8 @@
+[<Line: +* [classic GUI](http://bit.ly/1hftIhy) - The classic UGS interface.
+>, <Line: +* [classic GUI](http://bit.ly/2ssmIqt) - Somewhat stable build classic UGS interface.
+>, <Line: +* [UGS Platform](http://bit.ly/1DkClRW) - Universal Gcode Platform, the next generation platform-based interface
+>, <Line: +* [UGS Platform](http://bit.ly/2rk84y2) - Somewhat stable build Universal Gcode Platform, the next generation platform-based interface
+>]
+[<Line: -* [classic GUI](http://bit.ly/1hftIhy) - The classic UGS GUI.
+>, <Line: -* [UGS Platform](http://bit.ly/1DkClRW) - This is a work in progress. The next generation platform-based GUI utilizing the UGS API.
+>]

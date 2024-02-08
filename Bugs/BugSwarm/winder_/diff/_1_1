@@ -1,0 +1,11 @@
+[<Line: +import com.willwinder.universalgcodesender.model.BackendAPI;
+>, <Line: +    BackendAPI backend;
+>, <Line: +        backend = CentralLookup.getDefault().lookup(BackendAPI.class);
+>, <Line: +        mp = new MacroPanel(backend);
+>, <Line: +        SettingsFactory.saveSettings(backend.getSettings());
+>]
+[<Line: -    Settings settings;
+>, <Line: -        settings = CentralLookup.getDefault().lookup(Settings.class);
+>, <Line: -        mp = new MacroPanel(settings, null);
+>, <Line: -        SettingsFactory.saveSettings(settings);
+>]

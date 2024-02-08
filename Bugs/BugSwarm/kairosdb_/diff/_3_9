@@ -1,0 +1,10 @@
+[]
+[<Line: -package org.kairosdb.datastore.cassandra;
+>, <Line: -/**
+>, <Line: - Created by bhawkins on 11/7/14.
+>, <Line: - */
+>, <Line: -public interface RowKeyListener
+>, <Line: -{
+>, <Line: -	void addRowKey(String metricName, DataPointsRowKey rowKey, int rowKeyTtl);
+>, <Line: -}
+>]

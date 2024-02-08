@@ -1,0 +1,40 @@
+[]
+[<Line: -package de.charite.compbio.jped;
+>, <Line: -import java.io.PrintStream;
+>, <Line: -import com.google.common.base.Joiner;
+>, <Line: -import com.google.common.collect.ImmutableSet;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.ModeOfInheritance;
+>, <Line: -/**
+>, <Line: - * Configuration for the jannovar-filter app.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - */
+>, <Line: -public class JPedOptions {
+>, <Line: -	/** verbosity level */
+>, <Line: -	int verbosity = 1;
+>, <Line: -	/** path to the Jannovar DB */
+>, <Line: -	String jannovarDB = null;
+>, <Line: -	/** path to pedigree file */
+>, <Line: -	String pedPath = null;
+>, <Line: -	/** path to input file */
+>, <Line: -	String inputPath = null;
+>, <Line: -	/** path to output file */
+>, <Line: -	String outputPath = null;
+>, <Line: -	/** selected mode of inheritance */
+>, <Line: -	ImmutableSet<ModeOfInheritance> modeOfInheritances = ImmutableSet.of(ModeOfInheritance.UNINITIALIZED);
+>, <Line: -	/** gene-wise instead of variant-wise processing (required for composite heterozygous) */
+>, <Line: -	boolean geneWise = false;
+>, <Line: -	/**
+>, <Line: -	 * Print option values to stderr.
+>, <Line: -	 */
+>, <Line: -	public void print(PrintStream out) {
+>, <Line: -		out.println("verbosity: " + verbosity);
+>, <Line: -		out.println("db path: " + jannovarDB);
+>, <Line: -		out.println("ped path: " + pedPath);
+>, <Line: -		out.println("input path: " + inputPath);
+>, <Line: -		out.println("output path: " + outputPath);
+>, <Line: -		out.println("modeOfInheritance: " + Joiner.on(", ").join(modeOfInheritances));
+>, <Line: -		out.println("geneWise: " + geneWise);
+>, <Line: -	}
+>, <Line: -}
+>]

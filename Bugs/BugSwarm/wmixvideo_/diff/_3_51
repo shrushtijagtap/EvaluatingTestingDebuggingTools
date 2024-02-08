@@ -1,0 +1,15 @@
+[<Line: +import com.fincatto.nfe310.classes.lote.envio.NFLoteEnvioRetornoDados;
+>, <Line: +    public NFLoteEnvioRetornoDados enviaLote(final NFLoteEnvio lote) throws Exception {
+>, <Line: +        return this.wsLoteEnvio.enviaLoteAssinado(loteAssinadoXml, NFModelo.NFE);
+>, <Line: +    }
+>, <Line: +    public NFLoteEnvioRetorno enviaLoteAssinado(final String loteAssinadoXml, NFModelo modelo) throws Exception {
+>, <Line: +    	return this.wsLoteEnvio.enviaLoteAssinado(loteAssinadoXml, modelo);
+>, <Line: +    public NFRetornoEventoInutilizacao inutilizaNota(final int anoInutilizacaoNumeracao, final String cnpjEmitente, final String serie, final String numeroInicial, final String numeroFinal, final String justificativa, NFModelo modelo) throws Exception {
+>, <Line: +        return this.wsInutilizacao.inutilizaNota(anoInutilizacaoNumeracao, cnpjEmitente, serie, numeroInicial, numeroFinal, justificativa, modelo);
+>, <Line: +    }
+>, <Line: +    	return inutilizaNota(anoInutilizacaoNumeracao, cnpjEmitente, serie, numeroInicial, numeroFinal, justificativa, NFModelo.NFE);
+>]
+[<Line: -    public NFLoteEnvioRetorno enviaLote(final NFLoteEnvio lote) throws Exception {
+>, <Line: -        return this.wsLoteEnvio.enviaLoteAssinado(loteAssinadoXml);
+>, <Line: -        return this.wsInutilizacao.inutilizaNota(anoInutilizacaoNumeracao, cnpjEmitente, serie, numeroInicial, numeroFinal, justificativa);
+>]

@@ -1,0 +1,33 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.cmd.annotate_vcf;
+>, <Line: -import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: -import java.io.Closeable;
+>, <Line: -import java.io.IOException;
+>, <Line: -import de.charite.compbio.jannovar.annotation.AnnotationException;
+>, <Line: -/**
+>, <Line: - * Interface for output writers in Jannovar class.
+>, <Line: - *
+>, <Line: - * The task of such a writer is to take a HTSJDK annotation, perform annotation with the Jannovar code and then write it
+>, <Line: - * out into some output format.
+>, <Line: - *
+>, <Line: - * Currently, we have to convert HTSJDK VariantContext objects into Jannovar Variant objects but that should be
+>, <Line: - * simplified later on.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - */
+>, <Line: -public abstract class AnnotatedVariantWriter implements Closeable {
+>, <Line: -	/**
+>, <Line: -	 * Write out the given VariantContext with additional annotation.
+>, <Line: -	 *
+>, <Line: -	 * @throws AnnotationException
+>, <Line: -	 *             when a problem with annotation occurs
+>, <Line: -	 * @throws IOException
+>, <Line: -	 *             when problem with I/O occurs
+>, <Line: -	 */
+>, <Line: -	public abstract void put(VariantContext vc) throws AnnotationException, IOException;
+>, <Line: -	/** Returns output path */
+>, <Line: -	public abstract String getOutFileName();
+>, <Line: -	/** Close writer, free resources */
+>, <Line: -	public abstract void close();
+>, <Line: -}
+>]

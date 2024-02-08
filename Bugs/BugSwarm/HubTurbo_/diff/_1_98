@@ -1,0 +1,700 @@
+[]
+[<Line: -package service;
+>, <Line: -import javafx.application.Platform;
+>, <Line: -import model.*;
+>, <Line: -import org.apache.logging.log4j.LogManager;
+>, <Line: -import org.apache.logging.log4j.Logger;
+>, <Line: -import org.eclipse.egit.github.core.*;
+>, <Line: -import org.eclipse.egit.github.core.client.*;
+>, <Line: -import org.eclipse.egit.github.core.service.*;
+>, <Line: -import org.markdown4j.Markdown4jProcessor;
+>, <Line: -import org.ocpsoft.prettytime.PrettyTime;
+>, <Line: -import storage.CacheFileHandler;
+>, <Line: -import storage.CachedRepoData;
+>, <Line: -import ui.UI;
+>, <Line: -import ui.components.HTStatusBar;
+>, <Line: -import util.PlatformEx;
+>, <Line: -import util.Utility;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.net.HttpURLConnection;
+>, <Line: -import java.time.LocalDateTime;
+>, <Line: -import java.util.*;
+>, <Line: -import java.util.concurrent.CountDownLatch;
+>, <Line: -import java.util.function.BiConsumer;
+>, <Line: -import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_REPOS;
+>, <Line: -/**
+>, <Line: - * Singleton class that provides access to the GitHub API services required by
+>, <Line: - * HubTurbo
+>, <Line: - * <p>
+>, <Line: - * Only data from a single repository can be loaded at any point of time. The
+>, <Line: - * currently loaded repository is stored in the application's ServiceManager
+>, <Line: - * instance
+>, <Line: - * <p>
+>, <Line: - * Also holds a reference to the application's current Model instance, which
+>, <Line: - * stores the repository's labels, milestones, assignees and issues.
+>, <Line: - */
+>, <Line: -@SuppressWarnings("unused")
+>, <Line: -public class ServiceManager {
+>, <Line: -	private static final ServiceManager instance = new ServiceManager();
+>, <Line: -	// Set externally by test runners
+>, <Line: -	public static boolean isInTestMode = false;
+>, <Line: -	public static ServiceManager getInstance() {
+>, <Line: -		if (!isInTestMode) {
+>, <Line: -			return instance;
+>, <Line: -		} else {
+>, <Line: -			return instance;
+>, <Line: -			// TODO fix tests
+>, <Line: -//			return new ServiceManagerStub();
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private static final Logger logger = LogManager.getLogger(ServiceManager.class.getName());
+>, <Line: -	public static final int SYNC_PERIOD = 60;
+>, <Line: -	// Login state
+>, <Line: -	protected String lastUsedPassword;
+>, <Line: -	// Services
+>, <Line: -	private GitHubClientExtended githubClient;
+>, <Line: -	private CollaboratorService collabService;
+>, <Line: -	private IssueServiceExtended issueService;
+>, <Line: -	private LabelServiceFixed labelService;
+>, <Line: -	private MilestoneService milestoneService;
+>, <Line: -	private RepositoryServiceExtended repositoryService;
+>, <Line: -	private MarkdownService markdownService;
+>, <Line: -	private ContentsService contentService;
+>, <Line: -	// Model updates
+>, <Line: -	private ModelUpdate modelUpdate;
+>, <Line: -	protected Model model;
+>, <Line: -	protected RepositoryId repoId;
+>, <Line: -	private UpdateSignature updateSignature = new UpdateSignature();
+>, <Line: -	private final TickingTimer timer;
+>, <Line: -	private static final String ISSUE_STATE_ALL = "all";
+>, <Line: -	public static final String STATE_OPEN = "open";
+>, <Line: -	public static final String STATE_CLOSED = "closed";
+>, <Line: -	protected ServiceManager() {
+>, <Line: -		githubClient = new GitHubClientExtended();
+>, <Line: -		collabService = new CollaboratorService(githubClient);
+>, <Line: -		issueService = new IssueServiceExtended(githubClient);
+>, <Line: -		labelService = new LabelServiceFixed(githubClient);
+>, <Line: -		milestoneService = new MilestoneService(githubClient);
+>, <Line: -		repositoryService = new RepositoryServiceExtended(githubClient);
+>, <Line: -		markdownService = new MarkdownService(githubClient);
+>, <Line: -		contentService = new ContentsService(githubClient);
+>, <Line: -		timer = createTickingTimer();
+>, <Line: -		// TODO construct model later
+>, <Line: -		model = new Model();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Methods concerned with login logic
+>, <Line: -	 */
+>, <Line: -	private void ______LOGIN______() {
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Given a username and password, attempts to log into GitHub.
+>, <Line: -	 * Returns true on success and false otherwise.
+>, <Line: -	 *
+>, <Line: -	 * @param userId
+>, <Line: -	 * @param password
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public boolean login(String userId, String password) {
+>, <Line: -		this.lastUsedPassword = password;
+>, <Line: -		githubClient.setCredentials(userId, password);
+>, <Line: -		// Attempt login
+>, <Line: -		try {
+>, <Line: -			GitHubRequest request = new GitHubRequest();
+>, <Line: -			request.setUri("/");
+>, <Line: -			githubClient.get(request);
+>, <Line: -		} catch (IOException e) {
+>, <Line: -			// Login failed
+>, <Line: -			logger.error(e.getLocalizedMessage(), e);
+>, <Line: -			return false;
+>, <Line: -		}
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the username last used to log in.
+>, <Line: -	 *
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public String getUserId() {
+>, <Line: -		return githubClient.getUser();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the password last used to log in.
+>, <Line: -	 *
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public String getLastUsedPassword() {
+>, <Line: -		assert lastUsedPassword != null;
+>, <Line: -		return lastUsedPassword;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Methods concerned with dealing with online GitHub repositories
+>, <Line: -	 */
+>, <Line: -	private void ______REPOSITORY______() {
+>, <Line: -	}
+>, <Line: -	// TODO should return a copy
+>, <Line: -	public IRepositoryIdProvider getRepoId() {
+>, <Line: -		return repoId;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Given a repository owner and name, loads its contents into the model.
+>, <Line: -	 * Assumes that authentication has already been done, so should be called
+>, <Line: -	 * after {@link #login(String, String) login}.
+>, <Line: -	 *
+>, <Line: -	 * @param owner the owner of the repository
+>, <Line: -	 * @param name the repository name
+>, <Line: -	 * @param taskUpdate a callback to handle progress updates
+>, <Line: -	 * @return
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	public boolean setupRepository(String owner, String name, BiConsumer<String, Float> taskUpdate) throws IOException {
+>, <Line: -		assert lastUsedPassword != null : "setupRepository should be called only after login";
+>, <Line: -		logger.info("Authenticating...");
+>, <Line: -		this.repoId = RepositoryId.create(owner, name);
+>, <Line: -		if (isRepositoryValid(repoId)) {
+>, <Line: -			return model.loadComponents(repoId, taskUpdate);
+>, <Line: -		} else {
+>, <Line: -			// TODO: create specific exception for this
+>, <Line: -			throw new IOException("Cannot access repository");
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public String getRepoOwner() {
+>, <Line: -		return repoId.getOwner();
+>, <Line: -	}
+>, <Line: -	public String getRepoName() {
+>, <Line: -		return repoId.getName();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Determines if a repository is a valid one. Returns false if not, otherwise
+>, <Line: -	 * returns true. Throws an IOException if the check fails in any other way.
+>, <Line: -	 *
+>, <Line: -	 * @param repo
+>, <Line: -	 * @return
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	public boolean isRepositoryValid(IRepositoryIdProvider repo) throws IOException {
+>, <Line: -		return isRepositoryValid(repo.generateId());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Determines if a repository is a valid one. Returns false if not, otherwise
+>, <Line: -	 * returns true. Throws an IOException if the check fails in any other way.
+>, <Line: -	 *
+>, <Line: -	 * @param repo
+>, <Line: -	 * @return
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	private boolean isRepositoryValid(String repo) throws IOException {
+>, <Line: -		String repoURL = SEGMENT_REPOS + "/" + repo;
+>, <Line: -		return checkRepositoryValidity(repoURL);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Determines if a repository is a valid one. Returns false if not, otherwise
+>, <Line: -	 * returns true. Throws an IOException if the check fails in any other way.
+>, <Line: -	 * @param uri the URL of the repository
+>, <Line: -	 * @return true if the repository is valid
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	protected boolean checkRepositoryValidity(String uri) throws IOException {
+>, <Line: -		try {
+>, <Line: -			GitHubRequest req = new GitHubRequest();
+>, <Line: -			githubClient.get(req.setUri(uri));
+>, <Line: -			return true;
+>, <Line: -		} catch (RequestException e) {
+>, <Line: -			logger.error(e.getLocalizedMessage(), e);
+>, <Line: -			if (e.getStatus() == HttpURLConnection.HTTP_NOT_FOUND) {
+>, <Line: -				return false;
+>, <Line: -			}
+>, <Line: -			throw e;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public String getRemainingRequestsDesc() {
+>, <Line: -		return githubClient.getRemainingRequests() + "/" + githubClient.getRequestLimit();
+>, <Line: -	}
+>, <Line: -	public boolean hasRemainingRequests() {
+>, <Line: -		return githubClient.getRequestLimit() > 0;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns a list of the user's public repositories.
+>, <Line: -	 *
+>, <Line: -	 * @return
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	public List<Repository> getRepositories() throws IOException {
+>, <Line: -		return repositoryService.getRepositories();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns a list of the names of the user's public repositories
+>, <Line: -	 *
+>, <Line: -	 * @return
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	public List<String> getRepositoriesNames() throws IOException {
+>, <Line: -		return repositoryService.getRepositoriesNames(getUserId());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns a list of the public repositories belonging to the user and the
+>, <Line: -	 * user's organisations
+>, <Line: -	 *
+>, <Line: -	 * @return
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	public List<Repository> getAllRepositories() throws IOException {
+>, <Line: -		return repositoryService.getAllRepositories(getUserId());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns a list of the names of the public repositories belonging to the
+>, <Line: -	 * user and the user's organisations
+>, <Line: -	 */
+>, <Line: -	public List<String> getAllRepositoryNames() throws IOException {
+>, <Line: -		return repositoryService.getAllRepositoriesNames(getUserId());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Methods concerned with updating or interfacing with the model
+>, <Line: -	 */
+>, <Line: -	private void ______MODEL______() {
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Retrieves resources for the given repository. Abstracts away differences
+>, <Line: -	 * between a cache and online source
+>, <Line: -	 * @param repoId the repository to load
+>, <Line: -	 * @param taskUpdate a callback to handle progress updates
+>, <Line: -	 * @return all requested resources for the given repository
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	public RepositoryResources getResources(RepositoryId repoId, BiConsumer<String, Float> taskUpdate) throws IOException {
+>, <Line: -		this.repoId = repoId;
+>, <Line: -		CacheFileHandler dcHandler = new CacheFileHandler(repoId.toString());
+>, <Line: -		// TODO set these paramters in constructor instead
+>, <Line: -		model.setDataCacheFileHandler(dcHandler);
+>, <Line: -		model.setRepoId(repoId);
+>, <Line: -		boolean needToGetResources = true;
+>, <Line: -		CachedRepoData repo = dcHandler.getRepo();
+>, <Line: -		if (repo != null) {
+>, <Line: -			needToGetResources = false;
+>, <Line: -		}
+>, <Line: -		if (!needToGetResources) {
+>, <Line: -			return getCacheResources(repo, taskUpdate);
+>, <Line: -		} else {
+>, <Line: -			logger.info("Cache not found, loading data from GitHub...");
+>, <Line: -			return getGitHubResources(taskUpdate);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Loads resources from the cache.
+>, <Line: -	 * @param repo the repository to load
+>, <Line: -	 * @param taskUpdate a callback to handle progress updates
+>, <Line: -	 * @return the requested resources
+>, <Line: -	 */
+>, <Line: -	private RepositoryResources getCacheResources(CachedRepoData repo, BiConsumer<String, Float> taskUpdate) {
+>, <Line: -		logger.info("Loading from cache...");
+>, <Line: -		Date issueCheckTime = repo.getIssueCheckTime() == null
+>, <Line: -			? new Date()
+>, <Line: -			: Utility.localDateTimeToDate(repo.getIssueCheckTime());
+>, <Line: -		updateSignature = new UpdateSignature(repo.getIssuesETag(), repo.getLabelsETag(),
+>, <Line: -			repo.getMilestonesETag(), repo.getCollaboratorsETag(), issueCheckTime);
+>, <Line: -		taskUpdate.accept("Loading collaborators...", 0f);
+>, <Line: -		List<TurboUser> collaborators = repo.getCollaborators();
+>, <Line: -		taskUpdate.accept("Loading labels...", 0.25f);
+>, <Line: -		List<TurboLabel> labels = repo.getLabels();
+>, <Line: -		taskUpdate.accept("Loading milestones...", 0.5f);
+>, <Line: -		List<TurboMilestone> milestones = repo.getMilestones();
+>, <Line: -		taskUpdate.accept("Loading issues...", 0.75f);
+>, <Line: -		List<TurboIssue> issues = repo.getIssues(model);
+>, <Line: -		return RepositoryResources.fromCache(issues, labels, milestones, collaborators);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Loads resources from github
+>, <Line: -	 * @param taskUpdate a callback to handle progress updates
+>, <Line: -	 * @return the requested resources
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	public RepositoryResources getGitHubResources(BiConsumer<String, Float> taskUpdate) throws IOException {
+>, <Line: -		updateSignature = new UpdateSignature();
+>, <Line: -		taskUpdate.accept("Loading collaborators...", 0f);
+>, <Line: -		List<User> users = new ArrayList<>();
+>, <Line: -		taskUpdate.accept("Loading labels...", 0.25f);
+>, <Line: -		List<Label> labels = getLabels();
+>, <Line: -		taskUpdate.accept("Loading milestones...", 0.5f);
+>, <Line: -		List<Milestone> milestones = getMilestones();
+>, <Line: -		taskUpdate.accept("Loading issues...", 0.75f);
+>, <Line: -		List<Issue> issues = getAllIssues(repoId, taskUpdate);
+>, <Line: -		return RepositoryResources.fromGitHub(issues, labels, milestones, users);
+>, <Line: -	}
+>, <Line: -	public Model getModel() {
+>, <Line: -		return model;
+>, <Line: -	}
+>, <Line: -	private TickingTimer createTickingTimer() {
+>, <Line: -		return new TickingTimer("Sync Timer", SYNC_PERIOD, HTStatusBar::updateRefreshTimer, () -> {
+>, <Line: -			preventRepoSwitchingAndUpdateModel(model.getRepoId().generateId());
+>, <Line: -		});
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Updates the contents of the model with data from the given repository.
+>, <Line: -	 *
+>, <Line: -	 * @param repoId the repository get updates for/from
+>, <Line: -	 */
+>, <Line: -	private void preventRepoSwitchingAndUpdateModel(String repoId) {
+>, <Line: -		if (!hasRemainingRequests()) {
+>, <Line: -			handleNoMoreRequests();
+>, <Line: -			return;
+>, <Line: -		}
+>, <Line: -		modelUpdate = new ModelUpdate(this, githubClient, model, updateSignature);
+>, <Line: -		// Disable repository selection
+>, <Line: -		PlatformEx.runAndWait(() -> {
+>, <Line: -			UI.getInstance().disableRepositorySwitching();
+>, <Line: -		});
+>, <Line: -		// Wait for the update to complete
+>, <Line: -		if (modelUpdate.updateModel(repoId)) {
+>, <Line: -			updateSignature = modelUpdate.getNewUpdateSignature();
+>, <Line: -			model.updateCache(updateSignature);
+>, <Line: -			model.triggerModelChangeEvent();
+>, <Line: -		} else {
+>, <Line: -			logger.warn("Model update stopped due to repository changing halfway -- likely concurrency problem!");
+>, <Line: -		}
+>, <Line: -		// Reset progress UI
+>, <Line: -		HTStatusBar.displayMessage("Sync complete! " + getRemainingRequestsDesc());
+>, <Line: -		HTStatusBar.updateProgress(0);
+>, <Line: -		// Enable repository switching
+>, <Line: -		Platform.runLater(() -> {
+>, <Line: -			UI.getInstance().enableRepositorySwitching();
+>, <Line: -		});
+>, <Line: -	}
+>, <Line: -	private void handleNoMoreRequests() {
+>, <Line: -		Optional<LocalDateTime> resetTime = githubClient.getRateLimitResetTime();
+>, <Line: -		if (resetTime.isPresent()) {
+>, <Line: -			String prettyTime = new PrettyTime().format(Utility.localDateTimeToDate(resetTime.get()));
+>, <Line: -			HTStatusBar.displayMessage("No requests remaining! More " + prettyTime);
+>, <Line: -			logger.info("No remaining requests -- more reset at " + resetTime + ", " + prettyTime);
+>, <Line: -		} else {
+>, <Line: -			HTStatusBar.displayMessage("No requests remaining!");
+>, <Line: -			logger.info("No remaining requests -- reset time unknown");
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * To be called when the app starts.
+>, <Line: -	 */
+>, <Line: -	public void startModelUpdate() {
+>, <Line: -		timer.start();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * To be called when the app closes.
+>, <Line: -	 */
+>, <Line: -	public void stopModelUpdate() {
+>, <Line: -		timer.stop();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Triggers an update of the model.
+>, <Line: -	 *
+>, <Line: -	 * @return a latch which blocks until the model is finished updating
+>, <Line: -	 */
+>, <Line: -	public CountDownLatch updateModelNow() {
+>, <Line: -		return timer.trigger();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Compound, synchronous action. After being called the contents of the
+>, <Line: -	 * model will be of the given repoId.
+>, <Line: -	 *
+>, <Line: -	 * @param repoId the repository to switch to
+>, <Line: -	 * @param taskUpdate a callback to handle progress updates
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	public void switchRepository(RepositoryId repoId, BiConsumer<String, Float> taskUpdate) throws IOException {
+>, <Line: -		timer.pause();
+>, <Line: -		model.populateComponents(repoId, getResources(repoId, taskUpdate));
+>, <Line: -		timer.resume();
+>, <Line: -		taskUpdate.accept("Making sure everything is updated...", 1f);
+>, <Line: -		try {
+>, <Line: -			updateModelNow().await();
+>, <Line: -		} catch (InterruptedException e) {
+>, <Line: -			logger.error(e.getLocalizedMessage(), e);
+>, <Line: -		}
+>, <Line: -		taskUpdate.accept("Done!", 1f);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Compound, synchronous action. After being called the contents of the
+>, <Line: -	 * model reflect the latest version of the currently-loaded repository.
+>, <Line: -	 *
+>, <Line: -	 * @param taskUpdate a callback to handle progress updates
+>, <Line: -	 */
+>, <Line: -	public void forceRefresh(BiConsumer<String, Float> taskUpdate) {
+>, <Line: -		timer.pause();
+>, <Line: -		try {
+>, <Line: -			model.forceReloadComponents(taskUpdate);
+>, <Line: -		} catch (IOException e) {
+>, <Line: -			logger.error(e.getLocalizedMessage(), e);
+>, <Line: -		}
+>, <Line: -		timer.resume();
+>, <Line: -		taskUpdate.accept("Making sure everything is updated...", 1f);
+>, <Line: -		try {
+>, <Line: -			updateModelNow().await();
+>, <Line: -		} catch (InterruptedException e) {
+>, <Line: -			logger.error(e.getLocalizedMessage(), e);
+>, <Line: -		}
+>, <Line: -		taskUpdate.accept("Done!", 1f);
+>, <Line: -	}
+>, <Line: -	private void ______LABELS______() {
+>, <Line: -	}
+>, <Line: -	public List<Label> getLabels() throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return labelService.getLabels(repoId);
+>, <Line: -		}
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -	public Label createLabel(Label ghLabel) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return labelService.createLabel(repoId, ghLabel);
+>, <Line: -		}
+>, <Line: -		return null;
+>, <Line: -	}
+>, <Line: -	public void deleteLabel(String label) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			labelService.deleteLabel(repoId, label);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public Label editLabel(Label label, String name) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return labelService.editLabel(repoId, label, name);
+>, <Line: -		}
+>, <Line: -		return null;
+>, <Line: -	}
+>, <Line: -	private void ______MILESTONES______() {
+>, <Line: -	}
+>, <Line: -	public List<Milestone> getMilestones() throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return milestoneService.getMilestones(repoId, ISSUE_STATE_ALL);
+>, <Line: -		}
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -	public Milestone createMilestone(Milestone milestone) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return milestoneService.createMilestone(repoId, milestone);
+>, <Line: -		}
+>, <Line: -		return null;
+>, <Line: -	}
+>, <Line: -	public void deleteMilestone(int milestoneNum) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			milestoneService.deleteMilestone(repoId, milestoneNum);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public Milestone editMilestone(Milestone milestone) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return milestoneService.editMilestone(repoId, milestone);
+>, <Line: -		}
+>, <Line: -		return null;
+>, <Line: -	}
+>, <Line: -	private void ______ISSUES______() {
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Retrieves issues from the given repository.
+>, <Line: -	 * @param repoId the repository to get issues from
+>, <Line: -	 * @param taskUpdate a callback to handle progress updates
+>, <Line: -	 * @return the requested issues
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	public List<Issue> getAllIssues(RepositoryId repoId, BiConsumer<String, Float> taskUpdate) throws IOException {
+>, <Line: -		// TODO make this an assertion
+>, <Line: -		if (repoId != null) {
+>, <Line: -			Map<String, String> filters = new HashMap<>();
+>, <Line: -			filters.put(IssueService.FIELD_FILTER, ISSUE_STATE_ALL);
+>, <Line: -			filters.put(IssueService.FILTER_STATE, ISSUE_STATE_ALL);
+>, <Line: -			return getAllIssuesPaged(repoId, filters, taskUpdate);
+>, <Line: -		}
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -	private List<Issue> getAllIssuesPaged(IRepositoryIdProvider repoId, Map<String, String> filters,
+>, <Line: -	                                      BiConsumer<String, Float> taskUpdate) throws IOException {
+>, <Line: -		return getAll(issueService.pageIssues(repoId, filters), taskUpdate);
+>, <Line: -	}
+>, <Line: -	private List<Issue> getAll(PageIterator<Issue> iterator, BiConsumer<String, Float> taskUpdate) throws IOException {
+>, <Line: -		List<Issue> elements = new ArrayList<>();
+>, <Line: -		// Assume there is at least one page
+>, <Line: -		int knownLastPage = 1;
+>, <Line: -		try {
+>, <Line: -			while (iterator.hasNext()) {
+>, <Line: -				Collection<Issue> additions = iterator.next();
+>, <Line: -				elements.addAll(additions);
+>, <Line: -				// Compute progress
+>, <Line: -				// iterator.getLastPage() only has a value after iterator.next() is called,
+>, <Line: -				// so it's used directly in this loop. It returns the 1-based index of the last
+>, <Line: -				// page, except when we are actually on the last page, in which case it returns -1.
+>, <Line: -				// This portion deals with all these quirks.
+>, <Line: -				knownLastPage = Math.max(knownLastPage, iterator.getLastPage());
+>, <Line: -				int totalIssueCount = knownLastPage * PagedRequest.PAGE_SIZE;
+>, <Line: -				// Total is approximate: always >= the actual amount
+>, <Line: -				assert totalIssueCount >= elements.size();
+>, <Line: -				float progress = 0.75f + 0.25f * ((float) elements.size() / (float) totalIssueCount);
+>, <Line: -				logger.info(String.format("Loaded %d issues (%.2f%% done)", elements.size(), progress * 100));
+>, <Line: -				taskUpdate.accept("Loaded " + elements.size() + " issues...", progress);
+>, <Line: -			}
+>, <Line: -		} catch (NoSuchPageException pageException) {
+>, <Line: -			throw pageException.getCause();
+>, <Line: -		}
+>, <Line: -		return elements;
+>, <Line: -	}
+>, <Line: -	public Issue createIssue(Issue issue) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return issueService.createIssue(repoId, issue);
+>, <Line: -		}
+>, <Line: -		return null;
+>, <Line: -	}
+>, <Line: -	public Issue getIssue(int issueId) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return issueService.getIssue(repoId, issueId);
+>, <Line: -		}
+>, <Line: -		return null;
+>, <Line: -	}
+>, <Line: -	public HashMap<String, Object> getIssueData(int issueId) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return issueService.getIssueData(repoId, issueId);
+>, <Line: -		}
+>, <Line: -		return new HashMap<>();
+>, <Line: -	}
+>, <Line: -	public String getDateFromIssueData(HashMap<String, Object> issueData) {
+>, <Line: -		return (String) issueData.get(IssueServiceExtended.ISSUE_DATE);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Get user repositories
+>, <Line: -	 */
+>, <Line: -	public Issue getIssueFromIssueData(HashMap<String, Object> issueData) {
+>, <Line: -		return (Issue) issueData.get(IssueServiceExtended.ISSUE_CONTENTS);
+>, <Line: -	}
+>, <Line: -	public Issue editIssue(Issue latest, String dateModified) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return issueService.editIssue(repoId, latest, dateModified);
+>, <Line: -		}
+>, <Line: -		return null;
+>, <Line: -	}
+>, <Line: -	public Issue editIssueTitle(int issueId, String title) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return issueService.editIssueTitle(repoId, issueId, title);
+>, <Line: -		}
+>, <Line: -		return null;
+>, <Line: -	}
+>, <Line: -	public Issue editIssueBody(int issueId, String body) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return issueService.editIssueBody(repoId, issueId, body);
+>, <Line: -		}
+>, <Line: -		return null;
+>, <Line: -	}
+>, <Line: -	public void closeIssue(int issueId) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			issueService.editIssueState(repoId, issueId, false);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public void openIssue(int issueId) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			issueService.editIssueState(repoId, issueId, true);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Methods to work with issue labels
+>, <Line: -	 */
+>, <Line: -	public List<Label> setLabelsForIssue(long issueId, List<Label> labels) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return labelService.setLabels(repoId, Long.toString(issueId), labels);
+>, <Line: -		}
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Adds list of labels to a github issue. Returns all the labels for the
+>, <Line: -	 * issue.
+>, <Line: -	 */
+>, <Line: -	public List<Label> addLabelsToIssue(int issueId, List<Label> labels) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return labelService.addLabelsToIssue(repoId, Integer.toString(issueId), labels);
+>, <Line: -		}
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -	public void deleteLabelsFromIssue(int issueId, List<Label> labels) throws IOException {
+>, <Line: -		for (Label label : labels) {
+>, <Line: -			deleteLabelFromIssue(issueId, label);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public void deleteLabelFromIssue(int issueId, Label label) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			labelService.deleteLabelFromIssue(repoId, Integer.toString(issueId), label);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public boolean setIssueMilestone(int issueId, Milestone milestone) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			Issue result = issueService.setIssueMilestone(repoId, issueId, milestone);
+>, <Line: -			Milestone resMilestone = result.getMilestone();
+>, <Line: -			if (resMilestone == null) {
+>, <Line: -				return milestone == null;
+>, <Line: -			} else {
+>, <Line: -				return milestone.getNumber() == resMilestone.getNumber();
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -	public boolean setIssueAssignee(int issueId, User user) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			Issue result = issueService.setIssueAssignee(repoId, issueId, user);
+>, <Line: -			User assignee = result.getAssignee();
+>, <Line: -			if (assignee == null) {
+>, <Line: -				return user == null;
+>, <Line: -			} else {
+>, <Line: -				return assignee.getLogin().equals(user.getLogin());
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -	private void ______COLLABORATORS______() {
+>, <Line: -	}
+>, <Line: -	public List<User> getCollaborators() throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return collabService.getCollaborators(repoId);
+>, <Line: -		}
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -	private void ______EVENTS______() {
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Gets events for a issue from GitHub. This only includes information
+>, <Line: -	 * that GitHub exposes, such as milestones being added, labels being
+>, <Line: -	 * removed, etc. Events like comments being added must be gotten separately.
+>, <Line: -	 *
+>, <Line: -	 * @param issueId
+>, <Line: -	 * @return
+>, <Line: -	 * @throws IOException
+>, <Line: -	 */
+>, <Line: -	public List<TurboIssueEvent> getEvents(int issueId) throws IOException {
+>, <Line: -		assert repoId != null;
+>, <Line: -		return issueService.getIssueEvents(repoId, issueId).getTurboIssueEvents();
+>, <Line: -	}
+>, <Line: -	private void ______MARKDOWN______() {
+>, <Line: -	}
+>, <Line: -	public String getContentMarkup(final String text) throws IOException {
+>, <Line: -		if (text.contains("#")) {
+>, <Line: -			return getRepositoryHtml(text);
+>, <Line: -		}
+>, <Line: -		return new Markdown4jProcessor().process(text);
+>, <Line: -	}
+>, <Line: -	public String getRepositoryHtml(final String text) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return markdownService.getRepositoryHtml(repoId, text);
+>, <Line: -		} else {
+>, <Line: -			return "";
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public String getHtml(final String text, final String mode) throws IOException {
+>, <Line: -		return markdownService.getHtml(text, mode);
+>, <Line: -	}
+>, <Line: -	private void ______REPOSITORY_CONTENTS______() {
+>, <Line: -	}
+>, <Line: -	public List<RepositoryContents> getContents(IRepositoryIdProvider repository) throws IOException {
+>, <Line: -		return contentService.getContents(repository);
+>, <Line: -	}
+>, <Line: -	public List<RepositoryContents> getContents(IRepositoryIdProvider repository, String path) throws IOException {
+>, <Line: -		return contentService.getContents(repository, path);
+>, <Line: -	}
+>, <Line: -	private void ______COMMENTS______() {
+>, <Line: -	}
+>, <Line: -	public List<Comment> getLatestComments(int issueId) throws IOException {
+>, <Line: -		if (repoId != null) {
+>, <Line: -			return issueService.getComments(repoId, issueId);
+>, <Line: -		}
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -}
+>]

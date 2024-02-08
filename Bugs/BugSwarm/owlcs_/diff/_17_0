@@ -1,0 +1,7 @@
+[<Line: +4.2.1 5 March 2016
+>, <Line: +Bug fixes:
+>, <Line: +Fix Anonymous individuals parsing problems #494
+>, <Line: +Fix makeLoadImportRequest log should be a warning #489
+>, <Line: +Fix Saving fails for ontologies containing XMLLiteral #495
+>]
+[]

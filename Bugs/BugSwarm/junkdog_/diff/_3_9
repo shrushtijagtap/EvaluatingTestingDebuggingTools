@@ -1,0 +1,88 @@
+[<Line: +package com.artemis.benchmark.domain;
+>, <Line: +import com.artemis.Aspect;
+>, <Line: +import com.artemis.AspectSubscriptionManager;
+>, <Line: +import com.artemis.Component;
+>, <Line: +import com.artemis.ComponentMapper;
+>, <Line: +import com.artemis.EntitySystem;
+>, <Line: +import com.artemis.annotations.Mapper;
+>, <Line: +import com.artemis.annotations.Wire;
+>, <Line: +import com.artemis.managers.TagManager;
+>, <Line: +/**
+>, <Line: + * Date: 29/7/2015
+>, <Line: + * Time: 20:04 PM
+>, <Line: + *
+>, <Line: + * @author Snorre E. Brekke
+>, <Line: + */
+>, <Line: +public class Domain{
+>, <Line: +    public static class Position extends Component {
+>, <Line: +    }
+>, <Line: +    public static class Velocity extends Component{
+>, <Line: +    }
+>, <Line: +    public static class Health extends Component{
+>, <Line: +    }
+>, <Line: +    public static class Damage extends Component{
+>, <Line: +    }
+>, <Line: +    public static class Size extends Component{
+>, <Line: +    }
+>, <Line: +    public static class Color extends Component{
+>, <Line: +    }
+>, <Line: +    @Wire
+>, <Line: +    public static class CustomWired{
+>, <Line: +        private PositionSystem positionSystem;
+>, <Line: +        private TagManager tagManager;
+>, <Line: +        private ComponentMapper<Velocity> cm;
+>, <Line: +        private String undrelated;
+>, <Line: +        @Wire(name = "string")
+>, <Line: +        private String injectedString;
+>, <Line: +        @Wire
+>, <Line: +        private Object injectedObject;
+>, <Line: +    }
+>, <Line: +    @Wire
+>, <Line: +    public static class PositionSystem extends EntitySystem {
+>, <Line: +        protected ComponentMapper<Position> pm;
+>, <Line: +        public PositionSystem() {
+>, <Line: +            super(Aspect.all(Position.class));
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        protected void processSystem() {
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    @Wire
+>, <Line: +         public static class VelocitySystem extends EntitySystem{
+>, <Line: +        protected ComponentMapper<Position> pm;
+>, <Line: +        protected ComponentMapper<Velocity> vm;
+>, <Line: +        public VelocitySystem() {
+>, <Line: +            super(Aspect.all(Position.class, Velocity.class));
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        protected void processSystem() {
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public static class DamageSystem extends EntitySystem{
+>, <Line: +        @Mapper
+>, <Line: +        protected ComponentMapper<Health> pm;
+>, <Line: +        @Mapper
+>, <Line: +        protected ComponentMapper<Damage> vm;
+>, <Line: +        public DamageSystem() {
+>, <Line: +            super(Aspect.one(Health.class, Damage.class));
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        protected void processSystem() {
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    @Wire
+>, <Line: +    public static class ComplexSystem extends EntitySystem{
+>, <Line: +        protected ComponentMapper<Position> pm;
+>, <Line: +        protected ComponentMapper<Color> cm;
+>, <Line: +        protected ComponentMapper<Size> sm;
+>, <Line: +        protected AspectSubscriptionManager asm;
+>, <Line: +        public ComplexSystem() {
+>, <Line: +            super(Aspect.all(Position.class, Color.class, Size.class));
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        protected void processSystem() {
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

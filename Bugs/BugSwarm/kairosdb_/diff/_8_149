@@ -1,0 +1,182 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash'
+>, <Line: +	],
+>, <Line: +	function (angular, _) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		var seriesList = null;
+>, <Line: +		module.controller('InfluxTargetCtrl', function ($scope, $timeout) {
+>, <Line: +			$scope.init = function () {
+>, <Line: +				var target = $scope.target;
+>, <Line: +				target.function = target.function || 'mean';
+>, <Line: +				target.column = target.column || 'value';
+>, <Line: +				// backward compatible correction of schema
+>, <Line: +				if (target.condition_value) {
+>, <Line: +					target.condition = target.condition_key + ' ' + target.condition_op + ' ' + target.condition_value;
+>, <Line: +					delete target.condition_key;
+>, <Line: +					delete target.condition_op;
+>, <Line: +					delete target.condition_value;
+>, <Line: +				}
+>, <Line: +				if (target.groupby_field_add === false) {
+>, <Line: +					target.groupby_field = '';
+>, <Line: +					delete target.groupby_field_add;
+>, <Line: +				}
+>, <Line: +				$scope.rawQuery = false;
+>, <Line: +				$scope.functions = [
+>, <Line: +					'count', 'mean', 'sum', 'min',
+>, <Line: +					'max', 'mode', 'distinct', 'median',
+>, <Line: +					'derivative', 'stddev', 'first', 'last',
+>, <Line: +					'difference'
+>, <Line: +				];
+>, <Line: +				$scope.operators = ['=', '=~', '>', '<', '!~', '<>'];
+>, <Line: +				$scope.oldSeries = target.series;
+>, <Line: +				$scope.$on('typeahead-updated', function () {
+>, <Line: +					$timeout($scope.get_data);
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			$scope.showQuery = function () {
+>, <Line: +				$scope.target.rawQuery = true;
+>, <Line: +			};
+>, <Line: +			$scope.hideQuery = function () {
+>, <Line: +				$scope.target.rawQuery = false;
+>, <Line: +			};
+>, <Line: +			// Cannot use typeahead and ng-change on blur at the same time
+>, <Line: +			$scope.seriesBlur = function () {
+>, <Line: +				if ($scope.oldSeries !== $scope.target.series) {
+>, <Line: +					$scope.oldSeries = $scope.target.series;
+>, <Line: +					$scope.columnList = null;
+>, <Line: +					$scope.get_data();
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.changeFunction = function (func) {
+>, <Line: +				$scope.target.function = func;
+>, <Line: +				$scope.get_data();
+>, <Line: +			};
+>, <Line: +			// called outside of digest
+>, <Line: +			$scope.listColumns = function (query, callback) {
+>, <Line: +				if (!$scope.columnList) {
+>, <Line: +					$scope.$apply(function () {
+>, <Line: +						$scope.datasource.listColumns($scope.target.series).then(function (columns) {
+>, <Line: +							$scope.columnList = columns;
+>, <Line: +							callback(columns);
+>, <Line: +						});
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					return $scope.columnList;
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.listSeries = function (query, callback) {
+>, <Line: +				if (query !== '') {
+>, <Line: +					seriesList = [];
+>, <Line: +					$scope.datasource.listSeries(query).then(function (series) {
+>, <Line: +						seriesList = series;
+>, <Line: +						console.log(series);
+>, <Line: +						callback(seriesList);
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					return seriesList;
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.moveMetricQuery = function (fromIndex, toIndex) {
+>, <Line: +				_.move($scope.panel.targets, fromIndex, toIndex);
+>, <Line: +			};
+>, <Line: +			$scope.duplicate = function () {
+>, <Line: +				var clone = angular.copy($scope.target);
+>, <Line: +				$scope.panel.targets.push(clone);
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash'
+>, <Line: -],
+>, <Line: -function (angular, _) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  var seriesList = null;
+>, <Line: -  module.controller('InfluxTargetCtrl', function($scope, $timeout) {
+>, <Line: -    $scope.init = function() {
+>, <Line: -      var target = $scope.target;
+>, <Line: -      target.function = target.function || 'mean';
+>, <Line: -      target.column = target.column || 'value';
+>, <Line: -      // backward compatible correction of schema
+>, <Line: -      if (target.condition_value) {
+>, <Line: -        target.condition = target.condition_key + ' ' + target.condition_op + ' ' + target.condition_value;
+>, <Line: -        delete target.condition_key;
+>, <Line: -        delete target.condition_op;
+>, <Line: -        delete target.condition_value;
+>, <Line: -      }
+>, <Line: -      if (target.groupby_field_add === false) {
+>, <Line: -        target.groupby_field = '';
+>, <Line: -        delete target.groupby_field_add;
+>, <Line: -      }
+>, <Line: -      $scope.rawQuery = false;
+>, <Line: -      $scope.functions = [
+>, <Line: -        'count', 'mean', 'sum', 'min',
+>, <Line: -        'max', 'mode', 'distinct', 'median',
+>, <Line: -        'derivative', 'stddev', 'first', 'last',
+>, <Line: -        'difference'
+>, <Line: -      ];
+>, <Line: -      $scope.operators = ['=', '=~', '>', '<', '!~', '<>'];
+>, <Line: -      $scope.oldSeries = target.series;
+>, <Line: -      $scope.$on('typeahead-updated', function() {
+>, <Line: -        $timeout($scope.get_data);
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    $scope.showQuery = function () {
+>, <Line: -      $scope.target.rawQuery = true;
+>, <Line: -    };
+>, <Line: -    $scope.hideQuery = function () {
+>, <Line: -      $scope.target.rawQuery = false;
+>, <Line: -    };
+>, <Line: -    // Cannot use typeahead and ng-change on blur at the same time
+>, <Line: -    $scope.seriesBlur = function() {
+>, <Line: -      if ($scope.oldSeries !== $scope.target.series) {
+>, <Line: -        $scope.oldSeries = $scope.target.series;
+>, <Line: -        $scope.columnList = null;
+>, <Line: -        $scope.get_data();
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.changeFunction = function(func) {
+>, <Line: -      $scope.target.function = func;
+>, <Line: -      $scope.get_data();
+>, <Line: -    };
+>, <Line: -    // called outside of digest
+>, <Line: -    $scope.listColumns = function(query, callback) {
+>, <Line: -      if (!$scope.columnList) {
+>, <Line: -        $scope.$apply(function() {
+>, <Line: -          $scope.datasource.listColumns($scope.target.series).then(function(columns) {
+>, <Line: -            $scope.columnList = columns;
+>, <Line: -            callback(columns);
+>, <Line: -          });
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        return $scope.columnList;
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.listSeries = function(query, callback) {
+>, <Line: -      if (query !== '') {
+>, <Line: -        seriesList = [];
+>, <Line: -        $scope.datasource.listSeries(query).then(function(series) {
+>, <Line: -          seriesList = series;
+>, <Line: -          console.log(series);
+>, <Line: -          callback(seriesList);
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        return seriesList;
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.moveMetricQuery = function(fromIndex, toIndex) {
+>, <Line: -      _.move($scope.panel.targets, fromIndex, toIndex);
+>, <Line: -    };
+>, <Line: -    $scope.duplicate = function() {
+>, <Line: -      var clone = angular.copy($scope.target);
+>, <Line: -      $scope.panel.targets.push(clone);
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

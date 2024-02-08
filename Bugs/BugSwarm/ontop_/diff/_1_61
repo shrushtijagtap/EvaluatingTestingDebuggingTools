@@ -1,0 +1,22 @@
+[]
+[<Line: -package it.unibz.krdb.obda.owlapi3;
+>, <Line: -import it.unibz.krdb.obda.ontology.Ontology;
+>, <Line: -import org.semanticweb.owlapi.model.OWLAxiomVisitor;
+>, <Line: -import org.semanticweb.owlapi.model.OWLClass;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectProperty;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDataProperty;
+>, <Line: -public abstract class OWLAPI3TranslatorBase implements OWLAxiomVisitor {
+>, <Line: -	public abstract Ontology getOntology();
+>, <Line: -	public abstract void declare(OWLClass entity);
+>, <Line: -	public abstract void declare(OWLObjectProperty prop);
+>, <Line: -	public abstract void declare(OWLDataProperty prop);
+>, <Line: -	public static class TranslationException extends Exception {
+>, <Line: -		private static final long serialVersionUID = 7917688953760608030L;
+>, <Line: -		public TranslationException() {
+>, <Line: -		}
+>, <Line: -		public TranslationException(String msg) {
+>, <Line: -			super(msg);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -}
+>]

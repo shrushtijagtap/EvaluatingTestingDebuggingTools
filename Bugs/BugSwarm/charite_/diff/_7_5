@@ -1,0 +1,5 @@
+[<Line: +		if (cmd.hasOption("pedigree-file"))
+>, <Line: +			result.pathPedFile = cmd.getOptionValue("pedigree-file");
+>, <Line: +		options.addOption(new Option(null, "pedigree-file", true, "path to pedigree file"));
+>]
+[]

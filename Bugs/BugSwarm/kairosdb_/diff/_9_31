@@ -1,0 +1,159 @@
+[]
+[<Line: -//
+>, <Line: -//  HectorConfiguration.java
+>, <Line: -//
+>, <Line: -// Copyright 2016, KairosDB Authors
+>, <Line: -//        
+>, <Line: -package org.kairosdb.datastore.cassandra;
+>, <Line: -import com.google.inject.Inject;
+>, <Line: -import com.google.inject.name.Named;
+>, <Line: -import me.prettyprint.cassandra.connection.DynamicLoadBalancingPolicy;
+>, <Line: -import me.prettyprint.cassandra.connection.LeastActiveBalancingPolicy;
+>, <Line: -import me.prettyprint.cassandra.connection.RoundRobinBalancingPolicy;
+>, <Line: -import me.prettyprint.cassandra.service.CassandraHostConfigurator;
+>, <Line: -import java.util.List;
+>, <Line: -public class HectorConfiguration
+>, <Line: -{
+>, <Line: -	private static final String HOST_LIST_PROPERTY = "kairosdb.datastore.cassandra.host_list";
+>, <Line: -	private static final String MAX_ACTIVE = "kairosdb.datastore.cassandra.hector.maxActive";
+>, <Line: -	private static final String MAX_WAIT_TIME_WHEN_EXHAUSTED = "kairosdb.datastore.cassandra.hector.maxWaitTimeWhenExhausted";
+>, <Line: -	private static final String USE_SOCKET_KEEP_ALIVE = "kairosdb.datastore.cassandra.hector.useSocketKeepalive";
+>, <Line: -	private static final String CASSANDRA_THRIFT_SOCKET_TIMEOUT = "kairosdb.datastore.cassandra.hector.cassandraThriftSocketTimeout";
+>, <Line: -	private static final String RETRY_DOWNED_HOSTS = "kairosdb.datastore.cassandra.hector.retryDownedHosts";
+>, <Line: -	private static final String RETRY_DOWNED_HOSTS_DELAY_IN_SECONDS = "kairosdb.datastore.cassandra.hector.retryDownedHostsDelayInSeconds";
+>, <Line: -	private static final String RETRY_DOWNED_HOSTS_QUEUE_SIZE = "kairosdb.datastore.cassandra.hector.retryDownedHostsQueueSize";
+>, <Line: -	private static final String AUTO_DISCOVER_HOSTS = "kairosdb.datastore.cassandra.hector.autoDiscoverHosts";
+>, <Line: -	private static final String AUTO_DISCOVER_DELAY_IN_SECONDS = "kairosdb.datastore.cassandra.hector.autoDiscoveryDelayInSeconds";
+>, <Line: -	private static final String AUTO_DISCOVERY_DATA_CENTERS = "kairosdb.datastore.cassandra.hector.autoDiscoveryDataCenters";
+>, <Line: -	private static final String RUN_AUTO_DISCOVERY_AT_STARTUP = "kairosdb.datastore.cassandra.hector.runAutoDiscoveryAtStartup";
+>, <Line: -	private static final String USE_HOST_TIME_OUT_TRACKER = "kairosdb.datastore.cassandra.hector.useHostTimeoutTracker";
+>, <Line: -	private static final String MAX_FRAME_SIZE = "kairosdb.datastore.cassandra.hector.maxFrameSize";
+>, <Line: -	private static final String LOAD_BALANCING_POLICY = "kairosdb.datastore.cassandra.hector.loadBalancingPolicy";
+>, <Line: -	private static final String HOST_TIME_OUT_COUNTER = "kairosdb.datastore.cassandra.hector.hostTimeoutCounter";
+>, <Line: -	private static final String HOST_TIME_OUT_WINDOW = "kairosdb.datastore.cassandra.hector.hostTimeoutWindow";
+>, <Line: -	private static final String HOST_TIME_OUT_SUSPENSION_DURATION_IN_SECONDS = "kairosdb.datastore.cassandra.hector.hostTimeoutSuspensionDurationInSeconds";
+>, <Line: -	private static final String HOST_TIME_OUT_UNSUSPEND_CHECK_DELAY = "kairosdb.datastore.cassandra.hector.hostTimeoutUnsuspendCheckDelay";
+>, <Line: -	private static final String MAX_CONNECT_TIME_MILLIS = "kairosdb.datastore.cassandra.hector.maxConnectTimeMillis";
+>, <Line: -	private static final String MAX_LAST_SUCCESS_TIME_MILLIS = "kairosdb.datastore.cassandra.hector.maxLastSuccessTimeMillis";
+>, <Line: -	private CassandraHostConfigurator hostConfig;
+>, <Line: -	@Inject
+>, <Line: -	public HectorConfiguration(@Named(HOST_LIST_PROPERTY) String cassandraHostList)
+>, <Line: -	{
+>, <Line: -		hostConfig = new CassandraHostConfigurator(cassandraHostList);
+>, <Line: -	}
+>, <Line: -	public CassandraHostConfigurator getConfiguration()
+>, <Line: -	{
+>, <Line: -		return hostConfig;
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setMaxActive(@Named(MAX_ACTIVE) int maxActive)
+>, <Line: -	{
+>, <Line: -		hostConfig.setMaxActive(maxActive);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setMaxWaitTimeWhenExhausted(@Named(MAX_WAIT_TIME_WHEN_EXHAUSTED) long maxWaitTimeWhenExhausted)
+>, <Line: -	{
+>, <Line: -		hostConfig.setMaxWaitTimeWhenExhausted(maxWaitTimeWhenExhausted);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setUseSocketKeepalive(@Named(USE_SOCKET_KEEP_ALIVE) boolean useSocketKeepalive)
+>, <Line: -	{
+>, <Line: -		hostConfig.setUseSocketKeepalive(useSocketKeepalive);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setCassandraThriftSocketTimeout(@Named(CASSANDRA_THRIFT_SOCKET_TIMEOUT) int cassandraThriftSocketTimeout)
+>, <Line: -	{
+>, <Line: -		hostConfig.setCassandraThriftSocketTimeout(cassandraThriftSocketTimeout);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setRetryDownedHosts(@Named(RETRY_DOWNED_HOSTS) boolean retryDownedHosts)
+>, <Line: -	{
+>, <Line: -		hostConfig.setRetryDownedHosts(retryDownedHosts);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setRetryDownedHostsDelayInSeconds(@Named(RETRY_DOWNED_HOSTS_DELAY_IN_SECONDS)
+>, <Line: -	                                              int retryDownedHostsDelayInSeconds)
+>, <Line: -	{
+>, <Line: -		hostConfig.setRetryDownedHostsDelayInSeconds(retryDownedHostsDelayInSeconds);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setRetryDownedHostsQueueSize(@Named(RETRY_DOWNED_HOSTS_QUEUE_SIZE) int retryDownedHostsQueueSize)
+>, <Line: -	{
+>, <Line: -		hostConfig.setRetryDownedHostsQueueSize(retryDownedHostsQueueSize);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setAutoDiscoverHosts(@Named(AUTO_DISCOVER_HOSTS) boolean autoDiscoverHosts)
+>, <Line: -	{
+>, <Line: -		hostConfig.setAutoDiscoverHosts(autoDiscoverHosts);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setAutoDiscoveryDelayInSeconds(@Named(AUTO_DISCOVER_DELAY_IN_SECONDS) int autoDiscoveryDelayInSeconds)
+>, <Line: -	{
+>, <Line: -		hostConfig.setAutoDiscoveryDelayInSeconds(autoDiscoveryDelayInSeconds);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setAutoDiscoveryDataCenters(@Named(AUTO_DISCOVERY_DATA_CENTERS) List<String> autoDiscoveryDataCenters)
+>, <Line: -	{
+>, <Line: -		hostConfig.setAutoDiscoveryDataCenter(autoDiscoveryDataCenters);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setRunAutoDiscoveryAtStartup(@Named(RUN_AUTO_DISCOVERY_AT_STARTUP) boolean runAutoDiscoveryAtStartup)
+>, <Line: -	{
+>, <Line: -		hostConfig.setRunAutoDiscoveryAtStartup(runAutoDiscoveryAtStartup);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setUseHostTimeoutTracker(@Named(USE_HOST_TIME_OUT_TRACKER) boolean useHostTimeoutTracker)
+>, <Line: -	{
+>, <Line: -		hostConfig.setUseHostTimeoutTracker(useHostTimeoutTracker);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setMaxFrameSize(@Named(MAX_FRAME_SIZE) int maxFrameSize)
+>, <Line: -	{
+>, <Line: -		hostConfig.setMaxFrameSize(maxFrameSize);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setLoadBalancingPolicy(@Named(LOAD_BALANCING_POLICY) String loadBalancingPolicy)
+>, <Line: -	{
+>, <Line: -		if (loadBalancingPolicy.equals("dynamic"))
+>, <Line: -			hostConfig.setLoadBalancingPolicy(new DynamicLoadBalancingPolicy());
+>, <Line: -		else if (loadBalancingPolicy.equals("leastActive"))
+>, <Line: -			hostConfig.setLoadBalancingPolicy(new LeastActiveBalancingPolicy());
+>, <Line: -		else if (loadBalancingPolicy.equals("roundRobin"))
+>, <Line: -			hostConfig.setLoadBalancingPolicy(new RoundRobinBalancingPolicy());
+>, <Line: -		else
+>, <Line: -			throw new IllegalArgumentException("Invalid load balancing policy. Must be dynamic, leastActive, or roundRobin");
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setHostTimeOutCounter(@Named(HOST_TIME_OUT_COUNTER) int hostTimeoutCounter)
+>, <Line: -	{
+>, <Line: -		hostConfig.setHostTimeoutCounter(hostTimeoutCounter);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setHostTimeoutWindow(@Named(HOST_TIME_OUT_WINDOW) int hostTimeoutWindow)
+>, <Line: -	{
+>, <Line: -		hostConfig.setHostTimeoutWindow(hostTimeoutWindow);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setHostTimeOutSuspensionDurationInSeconds(@Named(HOST_TIME_OUT_SUSPENSION_DURATION_IN_SECONDS)
+>, <Line: -	                                                      int hostTimeoutSuspensionDurationInSeconds)
+>, <Line: -	{
+>, <Line: -		hostConfig.setHostTimeoutSuspensionDurationInSeconds(hostTimeoutSuspensionDurationInSeconds);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setHostTimeOutUnsuspendCheckDelay(@Named(HOST_TIME_OUT_UNSUSPEND_CHECK_DELAY)
+>, <Line: -	                                              int hostTimeoutUnsuspendCheckDelay)
+>, <Line: -	{
+>, <Line: -		hostConfig.setHostTimeoutUnsuspendCheckDelay(hostTimeoutUnsuspendCheckDelay);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setMaxConnectTimeMillis(@Named(MAX_CONNECT_TIME_MILLIS) long maxConnectTimeMillis)
+>, <Line: -	{
+>, <Line: -		hostConfig.setMaxConnectTimeMillis(maxConnectTimeMillis);
+>, <Line: -	}
+>, <Line: -	@Inject(optional = true)
+>, <Line: -	public void setMaxLastSuccessTimeMillis(@Named(MAX_LAST_SUCCESS_TIME_MILLIS) long maxLastSuccessTimeMillis)
+>, <Line: -	{
+>, <Line: -		hostConfig.setMaxLastSuccessTimeMillis(maxLastSuccessTimeMillis);
+>, <Line: -	}
+>, <Line: -}
+>]

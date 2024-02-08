@@ -1,0 +1,8 @@
+[<Line: +type nat is int
+>, <Line: +function g(nat[] xs) -> nat[]:
+>, <Line: +    nat[] ys = [0; |xs|]
+>]
+[<Line: -type fr6nat is int
+>, <Line: -function g([fr6nat] xs) -> [fr6nat]:
+>, <Line: -    [fr6nat] ys = [0; |xs|]
+>]

@@ -1,0 +1,4 @@
+[<Line: +        icmsUFDestino.setPercentualInterestadual(new BigDecimal("7.00"));
+>]
+[<Line: -        icmsUFDestino.setPercentualInterestadual(new BigDecimal("999.9999"));
+>]

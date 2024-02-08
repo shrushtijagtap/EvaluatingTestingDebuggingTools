@@ -1,0 +1,8 @@
+[<Line: +    @Override
+>, <Line: +    public void resetBuffers() {
+>, <Line: +        if (activeCommandList != null) {
+>, <Line: +            activeCommandList.clear();
+>, <Line: +        }
+>, <Line: +    }
+>]
+[]

@@ -1,0 +1,12 @@
+[<Line: +            m = new HashMap<>();
+>, <Line: +        if(x==0xFFFF) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +                int rt = e.getKey()&0xFFFF;
+>, <Line: +                out.println("\t("+getType(et)+", "+getType(rt)+") -> "+parameterId);
+>]
+[<Line: -            m = new HashMap<Integer, Integer>();
+>, <Line: -        if(x==0xFFFF) return null;
+>, <Line: -        int rt = e.getKey()&0xFFFF;
+>, <Line: -        out.println("\t("+getType(et)+", "+getType(rt)+") -> "+parameterId);
+>]

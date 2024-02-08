@@ -1,0 +1,12 @@
+[]
+[<Line: -package com.coremedia.iso.boxes.sampleentry;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -/**
+>, <Line: - * Created by sannies on 30.05.13.
+>, <Line: - */
+>, <Line: -public interface SampleEntry extends Box, Container {
+>, <Line: -    int getDataReferenceIndex();
+>, <Line: -    void setDataReferenceIndex(int dataReferenceIndex);
+>, <Line: -}
+>]

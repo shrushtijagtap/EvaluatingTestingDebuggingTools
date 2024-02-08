@@ -1,0 +1,5 @@
+[<Line: +                        if (!bridgeMethod.getReturnType().asErasure().isAssignableFrom(bridgeTarget.getReturnType().asErasure())) {
+>, <Line: +                            throw new IllegalStateException("Cannot implement bridge " + bridgeMethod + " to " + bridgeTarget);
+>, <Line: +                        }
+>]
+[]

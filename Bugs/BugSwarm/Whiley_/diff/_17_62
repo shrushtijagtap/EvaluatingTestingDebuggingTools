@@ -1,0 +1,21 @@
+[<Line: +function cons(int item, [int] input) -> [int]:
+>, <Line: +    [int] result = [0; |input|+1]
+>, <Line: +    int i = 0
+>, <Line: +    //
+>, <Line: +    while i < |input|
+>, <Line: +        where i >= 0
+>, <Line: +        where |result| == |input|+1:
+>, <Line: +        //
+>, <Line: +        result[i+1] = input[i]
+>, <Line: +        i = i + 1
+>, <Line: +    //
+>, <Line: +    result[0] = item
+>, <Line: +    return result
+>, <Line: +        [int] t = cons(0,e)
+>, <Line: +    assume f(e) == [0, 1, 2, 3, 4]
+>]
+[<Line: -function g([int] input) -> [int]:
+>, <Line: -    return input ++ [-1]
+>, <Line: -        [int] t = g(e)
+>, <Line: -    assume f(e) == [1, 2, 3, 4, -1]
+>]

@@ -1,0 +1,25 @@
+[<Line: +		Constant startOperand = frame[bytecode.startOperand];
+>, <Line: +		Constant endOperand = frame[bytecode.endOperand];
+>, <Line: +		checkType(startOperand, context, Constant.Integer.class);
+>, <Line: +		checkType(endOperand, context, Constant.Integer.class);
+>, <Line: +		Constant.Integer so = (Constant.Integer) startOperand;
+>, <Line: +		Constant.Integer eo = (Constant.Integer) endOperand;
+>, <Line: +		int start = so.value.intValue();
+>, <Line: +		int end = eo.value.intValue();
+>, <Line: +		for (int i = start; i < end; ++i) {		
+>, <Line: +			frame[bytecode.indexOperand] = Constant.V_INTEGER(BigInteger.valueOf(i));
+>]
+[<Line: -		case RANGE:
+>, <Line: -			ArrayList<Constant> values = new ArrayList<Constant>();
+>, <Line: -			int start = i1.value.intValue();
+>, <Line: -			int end = i2.value.intValue();
+>, <Line: -			for (int i = start; i < end; ++i) {
+>, <Line: -				values.add(Constant.V_INTEGER(BigInteger.valueOf(i)));
+>, <Line: -			}
+>, <Line: -			return Constant.V_LIST(values);
+>, <Line: -		Constant operand = frame[bytecode.sourceOperand];
+>, <Line: -		checkType(operand, context, Constant.List.class);		
+>, <Line: -		Constant.List list = (Constant.List) operand;
+>, <Line: -		for (Constant value : list.values) {
+>, <Line: -			frame[bytecode.indexOperand] = value;
+>]
