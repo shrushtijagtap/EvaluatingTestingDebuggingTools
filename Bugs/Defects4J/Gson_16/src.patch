@@ -1,0 +1,17 @@
+diff --git a/Gson_16/buggy/com/google/gson/internal/$Gson$Types.java b/Gson_16/fixed/com/google/gson/internal/$Gson$Types.java
+index 17ed0ff..f66ac15 100644
+--- a/Gson_16/buggy/com/google/gson/internal/$Gson$Types.java
++++ b/Gson_16/fixed/com/google/gson/internal/$Gson$Types.java
+@@ -339,7 +339,12 @@ public final class $Gson$Types {
+     while (true) {
+       if (toResolve instanceof TypeVariable) {
+         TypeVariable<?> typeVariable = (TypeVariable<?>) toResolve;
++        if (visitedTypeVariables.contains(typeVariable)) {
+           // cannot reduce due to infinite recursion
++          return toResolve;
++        } else {
++          visitedTypeVariables.add(typeVariable);
++        }
+         toResolve = resolveTypeVariable(context, contextRawType, typeVariable);
+         if (toResolve == typeVariable) {
+           return toResolve;

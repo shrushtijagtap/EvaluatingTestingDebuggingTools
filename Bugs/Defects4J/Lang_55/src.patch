@@ -1,0 +1,14 @@
+diff --git a/Lang_55/buggy/org/apache/commons/lang/time/StopWatch.java b/Lang_55/fixed/org/apache/commons/lang/time/StopWatch.java
+index 8f39421..0f0786a 100644
+--- a/Lang_55/buggy/org/apache/commons/lang/time/StopWatch.java
++++ b/Lang_55/fixed/org/apache/commons/lang/time/StopWatch.java
+@@ -115,7 +115,9 @@ public class StopWatch {
+         if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {
+             throw new IllegalStateException("Stopwatch is not running. ");
+         }
++        if(this.runningState == STATE_RUNNING) {
+             stopTime = System.currentTimeMillis();
++        }
+         this.runningState = STATE_STOPPED;
+     }
+ 

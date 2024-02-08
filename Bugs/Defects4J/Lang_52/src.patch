@@ -1,0 +1,15 @@
+diff --git a/Lang_52/buggy/org/apache/commons/lang/StringEscapeUtils.java b/Lang_52/fixed/org/apache/commons/lang/StringEscapeUtils.java
+index 4fda091..db2d7bd 100644
+--- a/Lang_52/buggy/org/apache/commons/lang/StringEscapeUtils.java
++++ b/Lang_52/fixed/org/apache/commons/lang/StringEscapeUtils.java
+@@ -233,6 +233,10 @@ public class StringEscapeUtils {
+                         out.write('\\');
+                         out.write('\\');
+                         break;
++                    case '/':
++                        out.write('\\');
++                        out.write('/');
++                        break;
+                     default :
+                         out.write(ch);
+                         break;

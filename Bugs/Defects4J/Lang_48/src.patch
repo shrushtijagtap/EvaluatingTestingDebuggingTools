@@ -1,0 +1,17 @@
+diff --git a/Lang_48/buggy/org/apache/commons/lang/builder/EqualsBuilder.java b/Lang_48/fixed/org/apache/commons/lang/builder/EqualsBuilder.java
+index a783b35..6901c8e 100644
+--- a/Lang_48/buggy/org/apache/commons/lang/builder/EqualsBuilder.java
++++ b/Lang_48/fixed/org/apache/commons/lang/builder/EqualsBuilder.java
+@@ -377,8 +377,12 @@ public class EqualsBuilder {
+         }
+         Class lhsClass = lhs.getClass();
+         if (!lhsClass.isArray()) {
++            if (lhs instanceof java.math.BigDecimal) {
++                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);
++            } else {
+                 // The simple case, not an array, just test the element
+                 isEquals = lhs.equals(rhs);
++            }
+         } else if (lhs.getClass() != rhs.getClass()) {
+             // Here when we compare different dimensions, for example: a boolean[][] to a boolean[] 
+             this.setEquals(false);

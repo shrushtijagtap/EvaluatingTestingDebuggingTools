@@ -1,0 +1,40 @@
+diff --git a/Mockito_16/buggy/org/mockito/Mockito.java b/Mockito_16/fixed/org/mockito/Mockito.java
+index f6f67a8..7ac98a6 100644
+--- a/Mockito_16/buggy/org/mockito/Mockito.java
++++ b/Mockito_16/fixed/org/mockito/Mockito.java
+@@ -824,7 +824,7 @@ public class Mockito extends Matchers {
+      * @return mock object
+      */
+     public static <T> T mock(Class<T> classToMock, MockSettings mockSettings) {
+-        return MOCKITO_CORE.mock(classToMock, mockSettings);
++        return MOCKITO_CORE.mock(classToMock, mockSettings, true);
+     }
+     
+     /**
+@@ -896,7 +896,7 @@ public class Mockito extends Matchers {
+     public static <T> T spy(T object) {
+         return MOCKITO_CORE.mock((Class<T>) object.getClass(), withSettings()
+                 .spiedInstance(object)
+-                .defaultAnswer(CALLS_REAL_METHODS)); 
++                .defaultAnswer(CALLS_REAL_METHODS), true); 
+     }
+ 
+     /**
+diff --git a/Mockito_16/buggy/org/mockito/internal/MockitoCore.java b/Mockito_16/fixed/org/mockito/internal/MockitoCore.java
+index bd9c32e..49aaf37 100755
+--- a/Mockito_16/buggy/org/mockito/internal/MockitoCore.java
++++ b/Mockito_16/fixed/org/mockito/internal/MockitoCore.java
+@@ -29,10 +29,11 @@ public class MockitoCore {
+     private final MockUtil mockUtil = new MockUtil();
+     private final MockingProgress mockingProgress = new ThreadSafeMockingProgress();
+     
+-    public <T> T mock(Class<T> classToMock, MockSettings mockSettings, boolean shouldResetOngoingStubbing) { return mock(classToMock, mockSettings); }
+-    public <T> T mock(Class<T> classToMock, MockSettings mockSettings) {
++    public <T> T mock(Class<T> classToMock, MockSettings mockSettings, boolean shouldResetOngoingStubbing) {
+         mockingProgress.validateState();
++        if (shouldResetOngoingStubbing) {
+             mockingProgress.resetOngoingStubbing();
++        }
+         return mockUtil.createMock(classToMock, (MockSettingsImpl) mockSettings);
+     }
+     

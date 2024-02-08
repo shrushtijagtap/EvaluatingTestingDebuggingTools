@@ -1,0 +1,13 @@
+diff --git a/Lang_26/buggy/org/apache/commons/lang3/time/FastDateFormat.java b/Lang_26/fixed/org/apache/commons/lang3/time/FastDateFormat.java
+index e30da2a..95925fc 100644
+--- a/Lang_26/buggy/org/apache/commons/lang3/time/FastDateFormat.java
++++ b/Lang_26/fixed/org/apache/commons/lang3/time/FastDateFormat.java
+@@ -817,7 +817,7 @@ public class FastDateFormat extends Format {
+      * @return the formatted string
+      */
+     public String format(Date date) {
+-        Calendar c = new GregorianCalendar(mTimeZone);
++        Calendar c = new GregorianCalendar(mTimeZone, mLocale);
+         c.setTime(date);
+         return applyRules(c, new StringBuffer(mMaxLengthEstimate)).toString();
+     }

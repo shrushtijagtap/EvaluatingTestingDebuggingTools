@@ -1,0 +1,13 @@
+diff --git a/Lang_61/buggy/org/apache/commons/lang/text/StrBuilder.java b/Lang_61/fixed/org/apache/commons/lang/text/StrBuilder.java
+index 0e88989..c7cbfb3 100644
+--- a/Lang_61/buggy/org/apache/commons/lang/text/StrBuilder.java
++++ b/Lang_61/fixed/org/apache/commons/lang/text/StrBuilder.java
+@@ -1773,7 +1773,7 @@ public class StrBuilder implements Cloneable {
+             return -1;
+         }
+         char[] thisBuf = buffer;
+-        int len = thisBuf.length - strLen;
++        int len = size - strLen + 1;
+         outer:
+         for (int i = startIndex; i < len; i++) {
+             for (int j = 0; j < strLen; j++) {

@@ -1,0 +1,12 @@
+diff --git a/Mockito_7/buggy/org/mockito/internal/util/reflection/GenericMetadataSupport.java b/Mockito_7/fixed/org/mockito/internal/util/reflection/GenericMetadataSupport.java
+index ff95514..a96dac4 100644
+--- a/Mockito_7/buggy/org/mockito/internal/util/reflection/GenericMetadataSupport.java
++++ b/Mockito_7/fixed/org/mockito/internal/util/reflection/GenericMetadataSupport.java
+@@ -376,6 +376,7 @@ public abstract class GenericMetadataSupport {
+             for (Type type : typeVariable.getBounds()) {
+                 registerTypeVariablesOn(type);
+             }
++            registerTypeParametersOn(new TypeVariable[] { typeVariable });
+             registerTypeVariablesOn(getActualTypeArgumentFor(typeVariable));
+         }
+ 

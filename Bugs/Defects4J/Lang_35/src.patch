@@ -1,0 +1,22 @@
+diff --git a/Lang_35/buggy/org/apache/commons/lang3/ArrayUtils.java b/Lang_35/fixed/org/apache/commons/lang3/ArrayUtils.java
+index ac22f8f..3a543ce 100644
+--- a/Lang_35/buggy/org/apache/commons/lang3/ArrayUtils.java
++++ b/Lang_35/fixed/org/apache/commons/lang3/ArrayUtils.java
+@@ -3292,7 +3292,7 @@ public class ArrayUtils {
+         } else if (element != null) {
+             type = element.getClass();
+         } else {
+-            type = Object.class;
++            throw new IllegalArgumentException("Arguments cannot both be null");            
+         }
+         @SuppressWarnings("unchecked") // type must be T
+         T[] newArray = (T[]) copyArrayGrow1(array, type);
+@@ -3571,7 +3571,7 @@ public class ArrayUtils {
+         } else if (element != null) {
+             clss = element.getClass();
+         } else {
+-            return (T[]) new Object[] { null };
++            throw new IllegalArgumentException("Array and element cannot both be null");            
+         }
+         @SuppressWarnings("unchecked") // the add method creates an array of type clss, which is type T
+         final T[] newArray = (T[]) add(array, index, element, clss);
