@@ -1,0 +1,13 @@
+diff --git a/Cli_34/buggy/org/apache/commons/cli/OptionBuilder.java b/Cli_34/fixed/org/apache/commons/cli/OptionBuilder.java
+index f9eb13a..6fd1b43 100644
+--- a/Cli_34/buggy/org/apache/commons/cli/OptionBuilder.java
++++ b/Cli_34/fixed/org/apache/commons/cli/OptionBuilder.java
+@@ -81,7 +81,7 @@ public final class OptionBuilder
+         description = null;
+         argName = null;
+         longopt = null;
+-        type = null;
++        type = String.class;
+         required = false;
+         numberOfArgs = Option.UNINITIALIZED;
+         optionalArg = false;

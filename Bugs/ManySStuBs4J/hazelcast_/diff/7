@@ -1,0 +1,13 @@
+diff --git a/hazelcast/src/main/java/com/hazelcast/nio/tcp/BindHandler.java b/hazelcast/src/main/java/com/hazelcast/nio/tcp/BindHandler.java
+index 69b8907..97b67a6 100644
+--- a/hazelcast/src/main/java/com/hazelcast/nio/tcp/BindHandler.java
++++ b/hazelcast/src/main/java/com/hazelcast/nio/tcp/BindHandler.java
+@@ -191,7 +191,7 @@
+         }
+         boolean returnValue = tcpIpEndpointManager.registerConnection(remoteEndpoint, connection);
+ 
+-        if (remoteAddressAliases != null) {
++        if (remoteAddressAliases != null && returnValue) {
+             for (Address remoteAddressAlias : remoteAddressAliases) {
+                 if (logger.isLoggable(Level.FINEST)) {
+                     logger.finest("Registering connection " + connection + " to address alias " + remoteAddressAlias);

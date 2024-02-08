@@ -1,0 +1,13 @@
+diff --git a/hazelcast/src/main/java/com/hazelcast/internal/ascii/rest/HttpPostCommandProcessor.java b/hazelcast/src/main/java/com/hazelcast/internal/ascii/rest/HttpPostCommandProcessor.java
+index 8d3a842..365b4e9 100644
+--- a/hazelcast/src/main/java/com/hazelcast/internal/ascii/rest/HttpPostCommandProcessor.java
++++ b/hazelcast/src/main/java/com/hazelcast/internal/ascii/rest/HttpPostCommandProcessor.java
+@@ -847,7 +847,7 @@
+         if (data == null) {
+             return false;
+         }
+-        final String[] strList = bytesToString(data).split("&");
++        final String[] strList = bytesToString(data).split("&", -1);
+         return authenticate(command, strList[0], strList.length > 1 ? strList[1] : null);
+     }
+ 

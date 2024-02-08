@@ -1,0 +1,14 @@
+diff --git a/transactions/src/main/java/org/jboss/as/txn/service/ArjunaRecoveryManagerService.java b/transactions/src/main/java/org/jboss/as/txn/service/ArjunaRecoveryManagerService.java
+index 24372fe..def3309 100755
+--- a/transactions/src/main/java/org/jboss/as/txn/service/ArjunaRecoveryManagerService.java
++++ b/transactions/src/main/java/org/jboss/as/txn/service/ArjunaRecoveryManagerService.java
+@@ -110,7 +110,8 @@
+         recoveryExtensions.add(SubordinateAtomicActionRecoveryModule.class.getName());
+ 
+         final List<String> expiryScanners;
+-        if (System.getProperty("RecoveryEnvironmentBean.expiryScannerClassNames") != null) {
++        if (System.getProperty("RecoveryEnvironmentBean.expiryScannerClassNames") != null ||
++                System.getProperty("com.arjuna.ats.arjuna.common.RecoveryEnvironmentBean.expiryScannerClassNames") != null) {
+             expiryScanners = recoveryEnvironmentBean.getExpiryScannerClassNames();
+         } else {
+             expiryScanners = new ArrayList<String>();

@@ -1,0 +1,18 @@
+diff --git a/Bears-25/buggy/src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java b/Bears-25/fixed/src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java
+index 2462f2e..369e659 100644
+--- a/Bears-25/buggy/src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java
++++ b/Bears-25/fixed/src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializers.java
+@@ -207,6 +207,13 @@ public class StdKeySerializers
+         protected JsonSerializer<Object> _findAndAddDynamic(PropertySerializerMap map,
+                 Class<?> type, SerializerProvider provider) throws JsonMappingException
+         {
++            // 27-Jun-2017, tatu: [databind#1679] Need to avoid StackOverflowError...
++            if (type == Object.class) {
++                // basically just need to call `toString()`, easiest way:
++                JsonSerializer<Object> ser = new Default(Default.TYPE_TO_STRING, type);
++                _dynamicSerializers = map.newWith(type, ser);
++                return ser;
++            }
+             PropertySerializerMap.SerializerAndMapResult result =
+                     // null -> for now we won't keep ref or pass BeanProperty; could change
+                     map.findAndAddKeySerializer(type, provider, null);

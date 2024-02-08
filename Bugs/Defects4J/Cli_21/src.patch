@@ -1,0 +1,18 @@
+diff --git a/Cli_21/buggy/org/apache/commons/cli2/option/GroupImpl.java b/Cli_21/fixed/org/apache/commons/cli2/option/GroupImpl.java
+index 75d87f7..fc5a82d 100644
+--- a/Cli_21/buggy/org/apache/commons/cli2/option/GroupImpl.java
++++ b/Cli_21/fixed/org/apache/commons/cli2/option/GroupImpl.java
+@@ -510,7 +510,13 @@ public class GroupImpl
+      */
+     private boolean looksLikeOption(final WriteableCommandLine commandLine,
+             final String trigger) {
++        Option oldOption = commandLine.getCurrentOption();
++        try {
++            commandLine.setCurrentOption(this);
+             return commandLine.looksLikeOption(trigger);
++        } finally {
++            commandLine.setCurrentOption(oldOption);
++        }
+     }
+ }
+ 

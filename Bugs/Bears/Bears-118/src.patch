@@ -1,0 +1,15 @@
+diff --git a/Bears-118/buggy/src/org/traccar/FilterHandler.java b/Bears-118/fixed/src/org/traccar/FilterHandler.java
+index 5e1214a..f2a80a9 100644
+--- a/Bears-118/buggy/src/org/traccar/FilterHandler.java
++++ b/Bears-118/fixed/src/org/traccar/FilterHandler.java
+@@ -84,7 +84,9 @@ public class FilterHandler extends BaseDataHandler {
+     }
+ 
+     private boolean filterInvalid(Position position) {
+-        return filterInvalid && !position.getValid();
++        return filterInvalid && (!position.getValid()
++           || position.getLatitude() > 90 || position.getLongitude() > 180
++           || position.getLatitude() < -90 || position.getLongitude() < -180);
+     }
+ 
+     private boolean filterZero(Position position) {

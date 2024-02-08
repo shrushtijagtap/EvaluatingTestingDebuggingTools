@@ -1,0 +1,14 @@
+diff --git a/Bears-225/buggy/src/main/java/io/lettuce/core/dynamic/DeclaredCommandMethod.java b/Bears-225/fixed/src/main/java/io/lettuce/core/dynamic/DeclaredCommandMethod.java
+index 7540f73..3d14f1e 100644
+--- a/Bears-225/buggy/src/main/java/io/lettuce/core/dynamic/DeclaredCommandMethod.java
++++ b/Bears-225/fixed/src/main/java/io/lettuce/core/dynamic/DeclaredCommandMethod.java
+@@ -79,8 +79,7 @@ public class DeclaredCommandMethod implements CommandMethod {
+ 
+         ResolvableType actualReturnType = this.returnType;
+ 
+-        while (Future.class.isAssignableFrom(actualReturnType.getRawClass())
+-                || ReactiveTypes.supports(actualReturnType.getRawClass())) {
++        while (Future.class.isAssignableFrom(actualReturnType.getRawClass())) {
+             ResolvableType[] generics = actualReturnType.getGenerics();
+ 
+             if (generics.length != 1) {

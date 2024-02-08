@@ -1,0 +1,17 @@
+diff --git a/Bears-169/buggy/pinot-core/src/main/java/com/linkedin/pinot/core/data/manager/realtime/LLRealtimeSegmentDataManager.java b/Bears-169/fixed/pinot-core/src/main/java/com/linkedin/pinot/core/data/manager/realtime/LLRealtimeSegmentDataManager.java
+index b2c25a8..ebb2371 100644
+--- a/Bears-169/buggy/pinot-core/src/main/java/com/linkedin/pinot/core/data/manager/realtime/LLRealtimeSegmentDataManager.java
++++ b/Bears-169/fixed/pinot-core/src/main/java/com/linkedin/pinot/core/data/manager/realtime/LLRealtimeSegmentDataManager.java
+@@ -139,7 +139,11 @@ public class LLRealtimeSegmentDataManager extends RealtimeSegmentDataManager {
+     }
+ 
+     public void deleteSegmentFile() {
+-      FileUtils.deleteQuietly(new File(_segmentFile));
++      // If segment build fails with an exception then we will not be able to create a segment file and
++      // the file name will be null.
++      if (_segmentFile != null) {
++        FileUtils.deleteQuietly(new File(_segmentFile));
++      }
+     }
+   }
+ 

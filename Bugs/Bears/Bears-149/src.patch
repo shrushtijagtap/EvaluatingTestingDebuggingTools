@@ -1,0 +1,14 @@
+diff --git a/Bears-149/buggy/dubbo-cluster/src/main/java/com/alibaba/dubbo/rpc/cluster/router/condition/ConditionRouter.java b/Bears-149/fixed/dubbo-cluster/src/main/java/com/alibaba/dubbo/rpc/cluster/router/condition/ConditionRouter.java
+index 0e88557..c3b5845 100644
+--- a/Bears-149/buggy/dubbo-cluster/src/main/java/com/alibaba/dubbo/rpc/cluster/router/condition/ConditionRouter.java
++++ b/Bears-149/fixed/dubbo-cluster/src/main/java/com/alibaba/dubbo/rpc/cluster/router/condition/ConditionRouter.java
+@@ -204,6 +204,9 @@ public class ConditionRouter implements Router, Comparable<Router> {
+                 sampleValue = invocation.getMethodName();
+             } else {
+                 sampleValue = sample.get(key);
++                if (sampleValue == null) {
++                    sampleValue = sample.get(Constants.DEFAULT_KEY_PREFIX + key);
++                }
+             }
+             if (sampleValue != null) {
+                 if (!matchPair.getValue().isMatch(sampleValue, param)) {

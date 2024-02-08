@@ -1,0 +1,15 @@
+diff --git a/Bears-109/buggy/src/org/traccar/protocol/SuntechProtocolDecoder.java b/Bears-109/fixed/src/org/traccar/protocol/SuntechProtocolDecoder.java
+index e19335c..42e81f6 100644
+--- a/Bears-109/buggy/src/org/traccar/protocol/SuntechProtocolDecoder.java
++++ b/Bears-109/fixed/src/org/traccar/protocol/SuntechProtocolDecoder.java
+@@ -67,7 +67,9 @@ public class SuntechProtocolDecoder extends BaseProtocolDecoder {
+         }
+         position.setDeviceId(deviceSession.getDeviceId());
+ 
+-        position.set(Position.KEY_VERSION_FW, values[index++]);
++        if (!type.equals("Alert") || protocolType == 0) {
++            position.set(Position.KEY_VERSION_FW, values[index++]);
++        }
+ 
+         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHH:mm:ss");
+         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));

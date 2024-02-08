@@ -1,0 +1,13 @@
+diff --git a/hazelcast-client/src/test/java/com/hazelcast/client/statistics/ClientStatisticsTest.java b/hazelcast-client/src/test/java/com/hazelcast/client/statistics/ClientStatisticsTest.java
+index 09b4191..a062c9b 100644
+--- a/hazelcast-client/src/test/java/com/hazelcast/client/statistics/ClientStatisticsTest.java
++++ b/hazelcast-client/src/test/java/com/hazelcast/client/statistics/ClientStatisticsTest.java
+@@ -343,7 +343,7 @@
+             public void run() {
+                 getStats(client, clientEngine);
+             }
+-        }, STATS_PERIOD_SECONDS * 3);
++        });
+     }
+ 
+     private static void waitForNextStatsCollection(final HazelcastClientInstanceImpl client, final ClientEngineImpl clientEngine,

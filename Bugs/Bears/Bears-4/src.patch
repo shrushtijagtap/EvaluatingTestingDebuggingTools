@@ -1,0 +1,20 @@
+diff --git a/Bears-4/buggy/src/main/java/com/fasterxml/jackson/databind/deser/impl/InnerClassProperty.java b/Bears-4/fixed/src/main/java/com/fasterxml/jackson/databind/deser/impl/InnerClassProperty.java
+index 311802e..4a9ca99 100644
+--- a/Bears-4/buggy/src/main/java/com/fasterxml/jackson/databind/deser/impl/InnerClassProperty.java
++++ b/Bears-4/fixed/src/main/java/com/fasterxml/jackson/databind/deser/impl/InnerClassProperty.java
+@@ -83,6 +83,15 @@ public final class InnerClassProperty
+     public InnerClassProperty withValueDeserializer(JsonDeserializer<?> deser) {
+         return new InnerClassProperty(this, deser);
+     }
++
++    @Override
++    public void assignIndex(int index) { _delegate.assignIndex(index); }
++
++    @Override
++    public int getPropertyIndex() { return _delegate.getPropertyIndex(); }
++
++    @Override
++    public int getCreatorIndex() { return _delegate.getCreatorIndex(); }
+     
+     // // // BeanProperty impl
+     
