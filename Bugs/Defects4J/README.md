@@ -51,6 +51,28 @@ cd /tmp/csv_1_buggy && defects4j compile && defects4j test
 
 ## Tests per Bug
 
+| Project         | Relevant Tests |
+|-----------------|---------------:|
+| Chart           |            928 |
+| Cli             |            554 |
+| Closure         |          15085 |
+| Codec           |            104 |
+| Collections     |             19 |
+| Compress        |            953 |
+| Csv             |             84 |
+| Gson            |           1096 |
+| JacksonCore     |           1356 |
+| JacksonDatabind |          29104 |
+| JacksonXml      |            306 |
+| Jsoup           |           1478 |
+| JxPath          |            345 |
+| Lang            |            417 |
+| Math            |           1940 |
+| Mockito         |           4758 |
+| Time            |           1873 |
+
+## Samples
+
 Project: jfreechart
 Bug ID: 1
 
