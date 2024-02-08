@@ -1,0 +1,24 @@
+diff --git a/Chart_18/buggy/org/jfree/data/DefaultKeyedValues2D.java b/Chart_18/fixed/org/jfree/data/DefaultKeyedValues2D.java
+index 798d5d0..cb81694 100644
+--- a/Chart_18/buggy/org/jfree/data/DefaultKeyedValues2D.java
++++ b/Chart_18/fixed/org/jfree/data/DefaultKeyedValues2D.java
+@@ -452,10 +452,19 @@ public class DefaultKeyedValues2D implements KeyedValues2D,
+      * @see #removeRow(Comparable)
+      */
+     public void removeColumn(Comparable columnKey) {
++    	if (columnKey == null) {
++    		throw new IllegalArgumentException("Null 'columnKey' argument.");
++    	}
++    	if (!this.columnKeys.contains(columnKey)) {
++    		throw new UnknownKeyException("Unknown key: " + columnKey);
++    	}
+         Iterator iterator = this.rows.iterator();
+         while (iterator.hasNext()) {
+             DefaultKeyedValues rowData = (DefaultKeyedValues) iterator.next();
++            int index = rowData.getIndex(columnKey);
++            if (index >= 0) {
+                 rowData.removeValue(columnKey);
++            }
+         }
+         this.columnKeys.remove(columnKey);
+     }
