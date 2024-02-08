@@ -36,8 +36,6 @@ Bug ID: Bears-109
 Tests : 233 Total, 232 Passing, 1 Error
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bears-109.png)
-[alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Bugswarmbug1-2.png)
-
 
 
 
