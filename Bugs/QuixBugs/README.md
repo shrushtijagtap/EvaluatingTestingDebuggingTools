@@ -112,36 +112,65 @@ Bugs Collected for Python: Total = 277 bugs
 
 
 ## Tests per Bug
-Program: GCD 
+Program: GCD (Java)
+
+Tests: 5 Total, 0 Passed, 5 Failed
+
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_GCD_Java.png)
+
+Program: GCD (Python)
 
 Tests: 6 Total, 1 Passed, 5 Failed
 
-![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_GCD.png)
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_GCD_Python.png)
 
-
-Program: Breadth First Search
+Program: Breadth First Search (Java)
 
 Tests: 5 Total, 4 Passed, 1 Failed
 
-![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_BFS.png)
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_BFS_Java.png)
 
-Program: Detect Cycle
+Program: Breadth First Search (Python)
+
+Tests: 5 Total, 4 Passed, 1 Failed
+
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_BFS_Python.png)
+
+Program: Detect Cycle (Java)
 
 Tests: 6 Total, 5 Passed, 1 failed
 
-![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_DetectCycle.png)
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_DetectCycle_Java.png)
 
-Program: Get Factors
+Program: Detect Cycle (Python)
+
+Tests: 6 Total, 5 Passed, 1 failed
+
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_DetectCycle_Python.png)
+
+Program: Get Factors (Java)
 
 Tests: 11 Total, 1 Passed, 10 Failed
 
-![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_GetFactors.png)
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_GetFactors_Java.png)
 
-Program: Hanoi
+Program: Get Factors (Python)
+
+Tests: 11 Total, 1 Passed, 10 Failed
+
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_GetFactors_Python.png)
+
+Program: Hanoi (Java)
+
+Tests: 7 Total, 0 Passed, 7 Failed
+
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_Hanoi_Java.png)
+
+Program: Hanoi (Python)
 
 Tests: 8 Total, 1 Passed, 7 Failed
 
-![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_Hanoi.png)
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/QuixBugs_Hanoi_Python.png)
 
 
 
