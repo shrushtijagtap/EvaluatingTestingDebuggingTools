@@ -20,7 +20,8 @@ We wrote a script that refers to the SHA's in the jason file<br>
 ```
 and the diff urls to extract the files that <br>
 
-[Diff URL](https://github.com/gwtbootstrap3/gwtbootstrap3/compare/eb7b4f991d67017538569e02b25f962af42aecac..41d93b14bf4c8ba2ae75d561ad3a640319e5a4ce)
+"diff_url": "https://github.com/gwtbootstrap3/gwtbootstrap3/compare/eb7b4f991d67017538569e02b25f962af42aecac..41d93b14bf4c8ba2ae75d561ad3a640319e5a4ce"
+
 <br>
 We then extrated the fixed and buggy files and generated a diff file. <br>
 Due to time constraint we were able to extract the files for 64 repositories and  extract all the buggy and fixed file as well as the difference between them.<br>
