@@ -1,8 +1,0 @@
-[<Line: +        return withNewStorageAccount(definitionAfterGroup);
->, <Line: +        List<String> nicIds = new ArrayList<>();
->]
-[<Line: -import com.microsoft.azure.management.storage.implementation.api.AccountType;
->, <Line: -        return withNewStorageAccount(definitionAfterGroup.withAccountType(AccountType.STANDARD_GRS));
->, <Line: -        List nicIds = new ArrayList();
->, <Line: -                    .withAccountType(AccountType.STANDARD_GRS)
->]

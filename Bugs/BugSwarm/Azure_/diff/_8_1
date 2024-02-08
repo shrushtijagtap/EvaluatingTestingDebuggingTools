@@ -1,7 +1,0 @@
-[<Line: +import com.microsoft.azure.management.storage.implementation.api.Sku;
->, <Line: +import com.microsoft.azure.management.storage.implementation.api.SkuName;
->, <Line: +        parameters.withSku(new Sku().withName(SkuName.STANDARD_LRS));
->]
-[<Line: -import com.microsoft.azure.management.storage.implementation.api.AccountType;
->, <Line: -        parameters.withAccountType(AccountType.STANDARD_LRS);
->]

@@ -1,4 +1,0 @@
-[<Line: +import bammerbom.ultimatecore.sponge.modules.afk.runnables.AfkCheckTask;
->]
-[<Line: -import bammerbom.ultimatecore.sponge.modules.afk.runnable.AfkCheckTask;
->]

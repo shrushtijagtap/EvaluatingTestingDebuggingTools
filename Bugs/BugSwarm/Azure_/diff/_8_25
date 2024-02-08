@@ -1,9 +1,0 @@
-[<Line: +    @JsonProperty(required = true)
->, <Line: +    /**
->, <Line: +     * Creates an instance of StorageAccountCheckNameAvailabilityParameters class.
->, <Line: +     */
->, <Line: +    public StorageAccountCheckNameAvailabilityParameters() {
->, <Line: +        type = "Microsoft.Storage/storageAccounts";
->, <Line: +    }
->]
-[]
