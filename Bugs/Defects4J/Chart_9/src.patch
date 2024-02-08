@@ -1,5 +1,5 @@
 diff --git a/Chart_9/buggy/org/jfree/data/time/TimeSeries.java b/Chart_9/fixed/org/jfree/data/time/TimeSeries.java
-index 4067e3e..d16d447 100644
+index 0f4e21a..b40598d 100644
 --- a/Chart_9/buggy/org/jfree/data/time/TimeSeries.java
 +++ b/Chart_9/fixed/org/jfree/data/time/TimeSeries.java
 @@ -941,7 +941,7 @@ public class TimeSeries extends Series implements Cloneable, Serializable {

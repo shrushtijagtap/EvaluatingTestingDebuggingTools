@@ -1,0 +1,22 @@
+diff --git a/Math_35/buggy/org/apache/commons/math3/genetics/ElitisticListPopulation.java b/Math_35/fixed/org/apache/commons/math3/genetics/ElitisticListPopulation.java
+index 67b368d..829c97d 100644
+--- a/Math_35/buggy/org/apache/commons/math3/genetics/ElitisticListPopulation.java
++++ b/Math_35/fixed/org/apache/commons/math3/genetics/ElitisticListPopulation.java
+@@ -48,7 +48,7 @@ public class ElitisticListPopulation extends ListPopulation {
+                                    final int populationLimit,
+                                    final double elitismRate) {
+         super(chromosomes, populationLimit);
+-        this.elitismRate = elitismRate;
++        setElitismRate(elitismRate);
+     }
+ 
+     /**
+@@ -62,7 +62,7 @@ public class ElitisticListPopulation extends ListPopulation {
+      */
+     public ElitisticListPopulation(final int populationLimit, final double elitismRate) {
+         super(populationLimit);
+-        this.elitismRate = elitismRate;
++        setElitismRate(elitismRate);
+     }
+ 
+     /**

@@ -1,5 +1,5 @@
 diff --git a/Chart_7/buggy/org/jfree/data/time/TimePeriodValues.java b/Chart_7/fixed/org/jfree/data/time/TimePeriodValues.java
-index 0a3e7a1..589c7ca 100644
+index c51ebcb..3e1ab6e 100644
 --- a/Chart_7/buggy/org/jfree/data/time/TimePeriodValues.java
 +++ b/Chart_7/fixed/org/jfree/data/time/TimePeriodValues.java
 @@ -297,9 +297,9 @@ public class TimePeriodValues extends Series implements Serializable {

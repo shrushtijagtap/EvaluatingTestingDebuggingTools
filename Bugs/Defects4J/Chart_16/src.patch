@@ -1,5 +1,5 @@
 diff --git a/Chart_16/buggy/org/jfree/data/category/DefaultIntervalCategoryDataset.java b/Chart_16/fixed/org/jfree/data/category/DefaultIntervalCategoryDataset.java
-index 2efdfcb..bde3922 100644
+index 661936b..e217002 100644
 --- a/Chart_16/buggy/org/jfree/data/category/DefaultIntervalCategoryDataset.java
 +++ b/Chart_16/fixed/org/jfree/data/category/DefaultIntervalCategoryDataset.java
 @@ -204,8 +204,8 @@ public class DefaultIntervalCategoryDataset extends AbstractSeriesDataset

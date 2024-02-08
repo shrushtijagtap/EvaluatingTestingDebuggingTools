@@ -1,5 +1,5 @@
 diff --git a/Chart_22/buggy/org/jfree/data/KeyedObjects2D.java b/Chart_22/fixed/org/jfree/data/KeyedObjects2D.java
-index d0e832f..7cc5ad6 100644
+index 898af19..86d08c2 100644
 --- a/Chart_22/buggy/org/jfree/data/KeyedObjects2D.java
 +++ b/Chart_22/fixed/org/jfree/data/KeyedObjects2D.java
 @@ -228,9 +228,10 @@ public class KeyedObjects2D implements Cloneable, Serializable {

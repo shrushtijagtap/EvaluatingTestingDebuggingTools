@@ -1,5 +1,5 @@
 diff --git a/Chart_25/buggy/org/jfree/chart/renderer/category/StatisticalBarRenderer.java b/Chart_25/fixed/org/jfree/chart/renderer/category/StatisticalBarRenderer.java
-index ab65ba3..6ff5e36 100644
+index 67043e7..13dd26a 100644
 --- a/Chart_25/buggy/org/jfree/chart/renderer/category/StatisticalBarRenderer.java
 +++ b/Chart_25/fixed/org/jfree/chart/renderer/category/StatisticalBarRenderer.java
 @@ -256,6 +256,9 @@ public class StatisticalBarRenderer extends BarRenderer

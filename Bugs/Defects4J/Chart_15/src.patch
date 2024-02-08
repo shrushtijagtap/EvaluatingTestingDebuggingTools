@@ -1,5 +1,5 @@
 diff --git a/Chart_15/buggy/org/jfree/chart/plot/PiePlot.java b/Chart_15/fixed/org/jfree/chart/plot/PiePlot.java
-index f575e72..7c3cd04 100644
+index b12eaa2..fd2d7e5 100644
 --- a/Chart_15/buggy/org/jfree/chart/plot/PiePlot.java
 +++ b/Chart_15/fixed/org/jfree/chart/plot/PiePlot.java
 @@ -1375,6 +1375,9 @@ public class PiePlot extends Plot implements Cloneable, Serializable {

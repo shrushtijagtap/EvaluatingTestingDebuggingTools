@@ -1,5 +1,5 @@
 diff --git a/Chart_5/buggy/org/jfree/data/xy/XYSeries.java b/Chart_5/fixed/org/jfree/data/xy/XYSeries.java
-index 0b37e6e..b26e11e 100644
+index a9d2e51..6cc4373 100644
 --- a/Chart_5/buggy/org/jfree/data/xy/XYSeries.java
 +++ b/Chart_5/fixed/org/jfree/data/xy/XYSeries.java
 @@ -541,11 +541,15 @@ public class XYSeries extends Series implements Cloneable, Serializable {

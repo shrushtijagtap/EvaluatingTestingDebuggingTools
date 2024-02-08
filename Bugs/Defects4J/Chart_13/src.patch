@@ -1,5 +1,5 @@
 diff --git a/Chart_13/buggy/org/jfree/chart/block/BorderArrangement.java b/Chart_13/fixed/org/jfree/chart/block/BorderArrangement.java
-index 730aeb3..b3ae54b 100644
+index 23ef9e3..e45a8e5 100644
 --- a/Chart_13/buggy/org/jfree/chart/block/BorderArrangement.java
 +++ b/Chart_13/fixed/org/jfree/chart/block/BorderArrangement.java
 @@ -452,7 +452,7 @@ public class BorderArrangement implements Arrangement, Serializable {

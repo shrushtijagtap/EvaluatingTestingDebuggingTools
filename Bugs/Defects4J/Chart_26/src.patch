@@ -1,5 +1,5 @@
 diff --git a/Chart_26/buggy/org/jfree/chart/axis/Axis.java b/Chart_26/fixed/org/jfree/chart/axis/Axis.java
-index 78a6c66..3f74811 100644
+index ce6f5ca..2cbb1a2 100644
 --- a/Chart_26/buggy/org/jfree/chart/axis/Axis.java
 +++ b/Chart_26/fixed/org/jfree/chart/axis/Axis.java
 @@ -1189,11 +1189,13 @@ public abstract class Axis implements Cloneable, Serializable {

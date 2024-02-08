@@ -1,5 +1,5 @@
 diff --git a/Chart_19/buggy/org/jfree/chart/plot/CategoryPlot.java b/Chart_19/fixed/org/jfree/chart/plot/CategoryPlot.java
-index cf3f52f..ec31907 100644
+index d4ed558..ae7b62d 100644
 --- a/Chart_19/buggy/org/jfree/chart/plot/CategoryPlot.java
 +++ b/Chart_19/fixed/org/jfree/chart/plot/CategoryPlot.java
 @@ -695,6 +695,9 @@ public class CategoryPlot extends Plot implements ValueAxisPlot,

@@ -1,0 +1,12 @@
+diff --git a/Math_34/buggy/org/apache/commons/math3/genetics/ListPopulation.java b/Math_34/fixed/org/apache/commons/math3/genetics/ListPopulation.java
+index 1eb0053..3f3919c 100644
+--- a/Math_34/buggy/org/apache/commons/math3/genetics/ListPopulation.java
++++ b/Math_34/fixed/org/apache/commons/math3/genetics/ListPopulation.java
+@@ -206,6 +206,6 @@ public abstract class ListPopulation implements Population {
+      * @return chromosome iterator
+      */
+     public Iterator<Chromosome> iterator() {
+-        return chromosomes.iterator();
++        return getChromosomes().iterator();
+     }
+ }

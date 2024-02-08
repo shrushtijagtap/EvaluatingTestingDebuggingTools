@@ -77,18 +77,18 @@ Tests : 5 Total, 4 Passing, 1 Error
 
 
 Project: commons-math
-Bug ID: 
+Bug ID: 2
 
-Tests : --- Total, --- Passing, --- Error
+Tests : 1 Total, 0 Passing, 1 Error
 
-![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Defects4J-X.png)
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Defects4J-Math-2.png)
 
 
 
 
 Project: commons-math
-Bug ID: 
+Bug ID: 3
 
-Tests : --- Total, --- Passing, --- Error
+Tests : 1 Total, 0 Passing, 1 Error
 
-![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Defects4J-X.png)
+![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/Defects4J-Math-3.png)

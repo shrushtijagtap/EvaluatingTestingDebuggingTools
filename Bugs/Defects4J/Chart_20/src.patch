@@ -1,5 +1,5 @@
 diff --git a/Chart_20/buggy/org/jfree/chart/plot/ValueMarker.java b/Chart_20/fixed/org/jfree/chart/plot/ValueMarker.java
-index 075683d..58d5289 100644
+index a2dadf4..11ce6f3 100644
 --- a/Chart_20/buggy/org/jfree/chart/plot/ValueMarker.java
 +++ b/Chart_20/fixed/org/jfree/chart/plot/ValueMarker.java
 @@ -92,7 +92,7 @@ public class ValueMarker extends Marker {

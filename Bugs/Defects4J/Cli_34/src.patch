@@ -1,3 +1,16 @@
+diff --git a/Cli_34/buggy/org/apache/commons/cli/Option.java b/Cli_34/fixed/org/apache/commons/cli/Option.java
+index 11a3685..66c7ef9 100644
+--- a/Cli_34/buggy/org/apache/commons/cli/Option.java
++++ b/Cli_34/fixed/org/apache/commons/cli/Option.java
+@@ -69,7 +69,7 @@ public class Option implements Cloneable, Serializable
+     private int numberOfArgs = UNINITIALIZED;
+ 
+     /** the type of this Option */
+-    private Class type;
++    private Class type = String.class;
+ 
+     /** the list of argument values **/
+     private List values = new ArrayList();
 diff --git a/Cli_34/buggy/org/apache/commons/cli/OptionBuilder.java b/Cli_34/fixed/org/apache/commons/cli/OptionBuilder.java
 index f9eb13a..6fd1b43 100644
 --- a/Cli_34/buggy/org/apache/commons/cli/OptionBuilder.java

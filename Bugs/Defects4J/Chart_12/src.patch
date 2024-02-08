@@ -1,5 +1,5 @@
 diff --git a/Chart_12/buggy/org/jfree/chart/plot/MultiplePiePlot.java b/Chart_12/fixed/org/jfree/chart/plot/MultiplePiePlot.java
-index fedc205..5fe04cb 100644
+index d5867e0..b4e938d 100644
 --- a/Chart_12/buggy/org/jfree/chart/plot/MultiplePiePlot.java
 +++ b/Chart_12/fixed/org/jfree/chart/plot/MultiplePiePlot.java
 @@ -142,7 +142,7 @@ public class MultiplePiePlot extends Plot implements Cloneable, Serializable {

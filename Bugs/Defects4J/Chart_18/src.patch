@@ -1,5 +1,29 @@
+diff --git a/Chart_18/buggy/org/jfree/data/DefaultKeyedValues.java b/Chart_18/fixed/org/jfree/data/DefaultKeyedValues.java
+index 707eb0a..5569198 100644
+--- a/Chart_18/buggy/org/jfree/data/DefaultKeyedValues.java
++++ b/Chart_18/fixed/org/jfree/data/DefaultKeyedValues.java
+@@ -315,9 +315,7 @@ public class DefaultKeyedValues implements KeyedValues,
+     public void removeValue(int index) {
+         this.keys.remove(index);
+         this.values.remove(index);
+-        if (index < this.keys.size()) {
+         rebuildIndex();
+-        }
+     }
+ 
+     /**
+@@ -332,7 +330,8 @@ public class DefaultKeyedValues implements KeyedValues,
+     public void removeValue(Comparable key) {
+         int index = getIndex(key);
+         if (index < 0) {
+-			return;
++            throw new UnknownKeyException("The key (" + key 
++                    + ") is not recognised.");
+         }
+         removeValue(index);
+     }
 diff --git a/Chart_18/buggy/org/jfree/data/DefaultKeyedValues2D.java b/Chart_18/fixed/org/jfree/data/DefaultKeyedValues2D.java
-index 798d5d0..cb81694 100644
+index 2ed53f3..ceb213b 100644
 --- a/Chart_18/buggy/org/jfree/data/DefaultKeyedValues2D.java
 +++ b/Chart_18/fixed/org/jfree/data/DefaultKeyedValues2D.java
 @@ -452,10 +452,19 @@ public class DefaultKeyedValues2D implements KeyedValues2D,

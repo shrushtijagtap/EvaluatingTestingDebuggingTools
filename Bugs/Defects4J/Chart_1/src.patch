@@ -1,5 +1,5 @@
 diff --git a/Chart_1/buggy/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java b/Chart_1/fixed/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
-index 226b25a..4a54655 100644
+index ce2248b..f4d1264 100644
 --- a/Chart_1/buggy/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
 +++ b/Chart_1/fixed/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java
 @@ -1794,7 +1794,7 @@ public abstract class AbstractCategoryItemRenderer extends AbstractRenderer
