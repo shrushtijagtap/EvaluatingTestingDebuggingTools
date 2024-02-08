@@ -1,0 +1,7 @@
+[<Line: +package org.mp4parser;
+>, <Line: +public interface FullBox extends ParsableBox {
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -public interface FullBox extends Box {
+>]

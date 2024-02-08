@@ -1,0 +1,8 @@
+[<Line: +- The receiver type of a executingTransformer is no longer considered parameterized for a static inner type.
+>, <Line: +- Added additional `InitiailizationStrategy`s for self-injection where the new default strategy loads types that are independent of the instrumented type before completing the instrumentation. This way, the resolution does not fail for types that are accessed via reflection before initializing the types if a executingTransformer is rebased.
+>, <Line: +executingTransformer interception where a hard-coded super method call is required by the Java verifier.
+>]
+[<Line: -- The receiver type of a constructor is no longer considered parameterized for a static inner type.
+>, <Line: -- Added additional `InitiailizationStrategy`s for self-injection where the new default strategy loads types that are independent of the instrumented type before completing the instrumentation. This way, the resolution does not fail for types that are accessed via reflection before initializing the types if a constructor is rebased.
+>, <Line: -constructor interception where a hard-coded super method call is required by the Java verifier.
+>]

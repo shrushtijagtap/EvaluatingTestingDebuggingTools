@@ -1,0 +1,4 @@
+[<Line: +import org.kairosdb.core.datastore.ServiceKeyStore;
+>, <Line: +		bind(ServiceKeyStore.class).to(H2Datastore.class).in(Scopes.SINGLETON);
+>]
+[]

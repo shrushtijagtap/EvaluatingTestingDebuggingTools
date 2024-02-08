@@ -1,0 +1,55 @@
+[<Line: +						metricMatcher: {
+>, <Line: +							name: "cache_hit_ratio",
+>, <Line: +							tier: "All"
+>, <Line: +						},
+>, <Line: +						groupBy: "cache_name",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "cache_size_bytes",
+>, <Line: +							tier: "All"
+>, <Line: +						},
+>, <Line: +						groupBy: "cache_name",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "cache_size_count",
+>, <Line: +							tier: "All"
+>, <Line: +						},
+>, <Line: +						groupBy: "cache_name",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "cache_get",
+>, <Line: +							tier: "All"
+>, <Line: +						},
+>, <Line: +						groupBy: "cache_name",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "cache_get",
+>, <Line: +							tier: "All"
+>, <Line: +						},
+>, <Line: +						groupBy: "cache_name",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "cache_get",
+>, <Line: +							tier: "All"
+>, <Line: +						},
+>, <Line: +						groupBy: "cache_name",
+>, <Line: +					defaultRowSelection: '*',
+>, <Line: +										metricMatcher: {
+>, <Line: +											name: "cache_hit_ratio",
+>, <Line: +											tier: "All",
+>, <Line: +											cache_name: "${rowName}"
+>, <Line: +										},
+>, <Line: +										groupBy: "cache_name",
+>, <Line: +										metricMatcher: {
+>, <Line: +											name: "cache_size_bytes",
+>, <Line: +											tier: "All",
+>, <Line: +											cache_name: "${rowName}"
+>, <Line: +										},
+>, <Line: +										groupBy: "cache_name",
+>]
+[<Line: -						// the metrics are grouped by the categories gauges, counters, timers, meters and histograms
+>, <Line: -						metricCategory: "gauges",
+>, <Line: -						metricCategory: "gauges",
+>, <Line: -						metricCategory: "gauges",
+>, <Line: -						metricCategory: "timers",
+>, <Line: -						metricCategory: "timers",
+>, <Line: -						metricCategory: "timers",
+>, <Line: -					defaultRowSelection: '[^\\.]+',
+>, <Line: -										metricCategory: "gauges",
+>, <Line: -										metricCategory: "gauges",
+>]

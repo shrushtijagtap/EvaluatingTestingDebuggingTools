@@ -1,0 +1,8 @@
+[<Line: +&types_nml
+>, <Line: +    v_integer = 5
+>, <Line: +    v_float = 1.0
+>, <Line: +    v_complex = (1.0, 2.0)
+>, <Line: +    v_logical = .false.
+>, <Line: +    v_string = 'Hello'
+>, <Line: +/>]
+[]

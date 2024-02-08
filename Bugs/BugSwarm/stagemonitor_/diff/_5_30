@@ -1,0 +1,20 @@
+[<Line: +import org.stagemonitor.core.metrics.MetricUtils;
+>, <Line: +		if (!MetricUtils.isFasterThanXPercentOfAllRequests(context.getRequestTrace().getExecutionTime(),
+>, <Line: +				percentileLimit, context.getTimerForThisRequest())) {
+>, <Line: +			exclude(context);
+>]
+[<Line: -import com.codahale.metrics.Timer;
+>, <Line: -		if (percentileLimit > 0) {
+>, <Line: -			if (percentileLimit >= 1) {
+>, <Line: -				exclude(context);
+>, <Line: -			} else {
+>, <Line: -				final Timer timer = context.getTimerForThisRequest();
+>, <Line: -				if (timer != null) {
+>, <Line: -					final double percentile = timer.getSnapshot().getValue(percentileLimit);
+>, <Line: -					final long executionTime = context.getRequestTrace().getExecutionTime();
+>, <Line: -					if (executionTime < percentile) {
+>, <Line: -						exclude(context);
+>, <Line: -					}
+>, <Line: -				}
+>, <Line: -			}
+>]

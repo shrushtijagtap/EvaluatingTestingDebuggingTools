@@ -1,0 +1,6 @@
+[<Line: +import org.traccar.helper.Checksum;
+>, <Line: +        buf.writeShort(Checksum.crc16Ccitt(buf.toByteBuffer(2, buf.writerIndex() - 2)));
+>]
+[<Line: -import org.traccar.helper.Crc;
+>, <Line: -        buf.writeShort(Crc.crc16Ccitt(buf.toByteBuffer(2, buf.writerIndex() - 2)));
+>]

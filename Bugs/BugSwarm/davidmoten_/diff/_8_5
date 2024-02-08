@@ -1,0 +1,6 @@
+[<Line: +import com.github.davidmoten.junit.Asserts;
+>, <Line: +        Asserts.assertIsUtilityClass(Tuples.class);
+>]
+[<Line: -import com.github.davidmoten.rx.jdbc.TestingUtil;
+>, <Line: -        TestingUtil.instantiateUsingPrivateConstructor(Tuples.class);
+>]

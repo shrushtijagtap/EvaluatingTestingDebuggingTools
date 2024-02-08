@@ -1,0 +1,4 @@
+[<Line: +    private final long defaultMask;
+>]
+[<Line: -    private long defaultMask;
+>]

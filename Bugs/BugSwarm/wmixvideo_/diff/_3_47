@@ -1,0 +1,16 @@
+[<Line: +    NAO("0", "N\u00e3o"),
+>, <Line: +    SIM("1", "Sim");
+>, <Line: +    private final String codigo;
+>, <Line: +    private final String descricao;
+>, <Line: +    NFOperacaoConsumidorFinal(final String codigo, final String descricao) {
+>, <Line: +        this.descricao = descricao;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    NAO("0"),
+>, <Line: -    SIM("1");
+>, <Line: -    private String codigo;
+>, <Line: -    NFOperacaoConsumidorFinal(final String codigo) {
+>]

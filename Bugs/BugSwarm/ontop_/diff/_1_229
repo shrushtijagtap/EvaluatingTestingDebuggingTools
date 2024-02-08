@@ -1,0 +1,37 @@
+[<Line: +import it.unibz.krdb.obda.model.CQIE;
+>, <Line: +import it.unibz.krdb.obda.model.DatatypePredicate;
+>, <Line: +import it.unibz.krdb.obda.model.Function;
+>, <Line: +import it.unibz.krdb.obda.model.Term;
+>, <Line: +import it.unibz.krdb.obda.model.OBDADataFactory;
+>, <Line: +import it.unibz.krdb.obda.model.OBDADataSource;
+>, <Line: +import it.unibz.krdb.obda.model.OBDAMappingAxiom;
+>, <Line: +import it.unibz.krdb.obda.model.OBDAModel;
+>, <Line: +import it.unibz.krdb.obda.model.Predicate;
+>, <Line: +import it.unibz.krdb.obda.model.URITemplatePredicate;
+>, <Line: +import it.unibz.krdb.obda.ontology.ImmutableOntologyVocabulary;
+>, <Line: +import it.unibz.krdb.obda.model.impl.OBDADataFactoryImpl;
+>, <Line: +import java.util.Collection;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.LinkedList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +	public static void fixOBDAModel(OBDAModel model, ImmutableOntologyVocabulary vocabulary) {
+>, <Line: +	private static Collection<OBDAMappingAxiom> fixMappingPredicates(Collection<OBDAMappingAxiom> originalMappings, ImmutableOntologyVocabulary vocabulary) {
+>, <Line: +			urimap.put(p.getName(), p.getPredicate());
+>, <Line: +			urimap.put(p.getName(), p.getPredicate());
+>, <Line: +			urimap.put(p.getName(), p.getPredicate());
+>, <Line: +			CQIE targetQuery = mapping.getTargetQuery();
+>, <Line: +			result.add(dfac.getRDBMSMappingAxiom(mapping.getId(), mapping.getSourceQuery().toString(), newTargetQuery));
+>]
+[<Line: -import it.unibz.krdb.obda.model.*;
+>, <Line: -import it.unibz.krdb.obda.model.impl.OBDADataFactoryImpl;
+>, <Line: -import it.unibz.krdb.obda.ontology.OntologyVocabulary;
+>, <Line: -import java.util.*;
+>, <Line: -	public static void fixOBDAModel(OBDAModel model, OntologyVocabulary vocabulary) {
+>, <Line: -	private static Collection<OBDAMappingAxiom> fixMappingPredicates(Collection<OBDAMappingAxiom> originalMappings, OntologyVocabulary vocabulary) {
+>, <Line: -			urimap.put(p.getPredicate().getName(), p.getPredicate());
+>, <Line: -			urimap.put(p.getPredicate().getName(), p.getPredicate());
+>, <Line: -			urimap.put(p.getPredicate().getName(), p.getPredicate());
+>, <Line: -			CQIE targetQuery = (CQIE) mapping.getTargetQuery();
+>, <Line: -			result.add(dfac.getRDBMSMappingAxiom(mapping.getId(), ((OBDASQLQuery) mapping.getSourceQuery()).toString(), newTargetQuery));
+>]

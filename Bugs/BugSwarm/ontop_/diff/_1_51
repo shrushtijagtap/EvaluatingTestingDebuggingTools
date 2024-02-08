@@ -1,0 +1,4 @@
+[<Line: +	public MappingParser(Connection conn, List<OBDAMappingAxiom> mappingAxioms) throws SQLException{
+>]
+[<Line: -	public MappingParser(Connection conn, ArrayList<OBDAMappingAxiom> mappingAxioms) throws SQLException{
+>]

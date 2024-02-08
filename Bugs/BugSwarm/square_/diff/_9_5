@@ -1,0 +1,4 @@
+[<Line: +            SegmentPool.recycle(head);
+>]
+[<Line: -            SegmentPool.INSTANCE.recycle(head);
+>]

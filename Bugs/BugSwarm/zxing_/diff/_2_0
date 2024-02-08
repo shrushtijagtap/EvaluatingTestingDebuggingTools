@@ -1,0 +1,15 @@
+[<Line: +# unzip *.zip; rm *.zip
+>, <Line: +# # Or different, more recent versions; see sdkmanager --list
+>, <Line: +# cp tools/source.properties ..
+>, <Line: +#
+>, <Line: +# ./tools/bin/sdkmanager --uninstall tools
+>, <Line: +#
+>, <Line: +# mkdir tools; mv ../source.properties tools
+>, <Line: +#
+>]
+[<Line: -# unzip *.zip
+>, <Line: -# rm *.zip
+>, <Line: -# # Or different, more recent versions:
+>, <Line: -# ./tools/bin/sdkmanager --uninstall tools
+>, <Line: -#
+>]

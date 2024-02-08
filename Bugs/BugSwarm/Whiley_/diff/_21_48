@@ -1,0 +1,4 @@
+[<Line: +ensures b ==> no { i in 0..|xs| | xs[i] < 0 }:
+>]
+[<Line: -ensures b ==> no { z in xs | z < 0 }:
+>]

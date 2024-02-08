@@ -1,0 +1,11 @@
+[<Line: +        self.comment_alt_nml = {'comment_alt_nml':
+>, <Line: +                                {'x': 1,
+>, <Line: +                                 'z': 3}
+>, <Line: +                               }
+>, <Line: +    def test_comment_alt(self):
+>, <Line: +        parser = f90nml.Parser()
+>, <Line: +        parser.comment_tokens = '#'
+>, <Line: +        test_nml = parser.read('comment_alt.nml')
+>, <Line: +        self.assertEqual(self.comment_alt_nml, test_nml)
+>]
+[]

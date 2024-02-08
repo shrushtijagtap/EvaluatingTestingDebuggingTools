@@ -1,0 +1,10 @@
+[<Line: +    public <O> Optional<O> accept(OWLProfileViolationVisitorEx<O> visitor) {
+>, <Line: +        return visitor.visit(this);
+>, <Line: +    public String toString() {
+>, <Line: +        return toString("Use of reserved vocabulary for ontology IRI: %s", getExpression());
+>]
+[<Line: -    public String toString() {
+>, <Line: -        return toString("Use of reserved vocabulary for ontology IRI: %s", getExpression());
+>, <Line: -    public <O> Optional<O> accept(OWLProfileViolationVisitorEx<O> visitor) {
+>, <Line: -        return visitor.visit(this);
+>]

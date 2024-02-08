@@ -1,0 +1,108 @@
+[<Line: +	public static ConcurrentHashMap<Entity, Integer> clipped = new ConcurrentHashMap<Entity, Integer>();
+>, <Line: +	private static Player player;
+>, <Line: +	private static LivingEntity targetent;
+>, <Line: +	private static ItemStack[] oldarmor;
+>, <Line: +	public MetalClips(Player p, int var) {
+>, <Line: +		if (instances.containsKey(p))
+>, <Line: +		player = p;
+>, <Line: +		instances.put(p, this);
+>, <Line: +	}
+>, <Line: +	public static ItemStack getOriginalHelmet(LivingEntity ent) {
+>, <Line: +		if (clipped.containsKey(ent)) {
+>, <Line: +			return oldarmor[3];
+>, <Line: +		}
+>, <Line: +		return null;
+>, <Line: +	}
+>, <Line: +	public static ItemStack getOriginalChestplate(LivingEntity ent) {
+>, <Line: +		if (clipped.containsKey(ent)) {
+>, <Line: +			return oldarmor[2];
+>, <Line: +		}
+>, <Line: +		return null;
+>, <Line: +	}
+>, <Line: +	public static ItemStack getOriginalLeggings(LivingEntity ent) {
+>, <Line: +		if (clipped.containsKey(ent)) {
+>, <Line: +			return oldarmor[1];
+>, <Line: +		}
+>, <Line: +		return null;
+>, <Line: +	}
+>, <Line: +	public static ItemStack getOriginalBoots(LivingEntity ent) {
+>, <Line: +		if (clipped.containsKey(ent)) {
+>, <Line: +			return oldarmor[0];
+>, <Line: +		}
+>, <Line: +		return null;
+>, <Line: +		GeneralMethods.getBendingPlayer(player.getName()).addCooldown("MetalClips", cooldown);
+>, <Line: +		if (targetent instanceof Player) {
+>, <Line: +			Player target = (Player) targetent;
+>, <Line: +			clipped.put(target, metalclips);
+>, <Line: +				oldarmor = targetent.getEquipment().getArmorContents();
+>, <Line: +			clipped.put(targetent, metalclips);
+>, <Line: +			targetent.getEquipment().setArmorContents(metalarmor);
+>, <Line: +			lastDistanceCheck = player.getLocation().distance(targetent.getLocation());
+>, <Line: +		if (targetent == null || oldarmor == null || targetent.isDead())
+>, <Line: +		if (targetent instanceof Player)
+>, <Line: +			((Player) targetent).getInventory().setArmorContents(oldarmor);
+>, <Line: +			targetent.getEquipment().setArmorContents(oldarmor);
+>, <Line: +		player.getWorld().dropItem(targetent.getLocation(), new ItemStack(Material.IRON_INGOT, metalclips));
+>, <Line: +		Location target = targetent.getLocation().clone();
+>, <Line: +		targetent.setVelocity(vector.multiply(2));
+>, <Line: +		if (targetent != null) {
+>, <Line: +			if ((targetent instanceof Player && !((Player) targetent).isOnline()) || targetent.isDead()) {
+>, <Line: +				Location oldLocation = targetent.getLocation();
+>, <Line: +				Vector v = GeneralMethods.getDirection(targetent.getLocation(), player.getLocation());
+>, <Line: +					targetent.setVelocity(v.normalize().multiply(0.2));
+>, <Line: +				Location oldLocation = targetent.getLocation();
+>, <Line: +				Vector v = GeneralMethods.getDirection(targetent.getLocation(), GeneralMethods.getTargetedLocation(player, 10));
+>, <Line: +					targetent.setVelocity(v.normalize().multiply(0.2));
+>, <Line: +				Location oldLocation = targetent.getLocation();
+>, <Line: +					targetent.setVelocity(v.normalize().multiply(.5));
+>, <Line: +					targetent.setVelocity(new Vector(0, 0, 0));
+>, <Line: +				targetent.setFallDistance(0);
+>, <Line: +				double distance = player.getLocation().distance(targetent.getLocation());
+>, <Line: +					double height = targetent.getLocation().getY();
+>, <Line: +							GeneralMethods.damageEntity(player, targetent, (crushDamage + (crushDamage * 1.2)));
+>, <Line: +							if (targetent == null)
+>, <Line: +								targetent = (LivingEntity) e;
+>, <Line: +		return targetent;
+>, <Line: +		for (Entity ent : clipped.keySet()) {
+>, <Line: +			clipped.remove(ent);
+>, <Line: +		}
+>]
+[<Line: -	private Player player;
+>, <Line: -	private LivingEntity target;
+>, <Line: -	private ItemStack[] oldarmor;
+>, <Line: -	public MetalClips(Player player, int var) {
+>, <Line: -		if (instances.containsKey(player))
+>, <Line: -		this.player = player;
+>, <Line: -		instances.put(player, this);
+>, <Line: -		GeneralMethods.getBendingPlayer(player.getName()).addCooldown("MetalManipulation", cooldown);
+>, <Line: -		if (target instanceof Player) {
+>, <Line: -			Player target = (Player) this.target;
+>, <Line: -				oldarmor = target.getEquipment().getArmorContents();
+>, <Line: -			target.getEquipment().setArmorContents(metalarmor);
+>, <Line: -			lastDistanceCheck = player.getLocation().distance(target.getLocation());
+>, <Line: -		if (target == null || oldarmor == null)
+>, <Line: -		if (target instanceof Player)
+>, <Line: -			((Player) target).getInventory().setArmorContents(oldarmor);
+>, <Line: -			target.getEquipment().setArmorContents(oldarmor);
+>, <Line: -		player.getWorld().dropItem(target.getLocation(), new ItemStack(Material.IRON_INGOT, metalclips));
+>, <Line: -		Location target = this.target.getLocation().clone();
+>, <Line: -		this.target.setVelocity(vector.multiply(2));
+>, <Line: -		if (target != null) {
+>, <Line: -			if ((target instanceof Player && !((Player) target).isOnline()) || target.isDead()) {
+>, <Line: -				Location oldLocation = target.getLocation();
+>, <Line: -				Vector v = GeneralMethods.getDirection(target.getLocation(), player.getLocation());
+>, <Line: -					target.setVelocity(v.normalize().multiply(0.2));
+>, <Line: -				Location oldLocation = target.getLocation();
+>, <Line: -				Vector v = GeneralMethods.getDirection(target.getLocation(), GeneralMethods.getTargetedLocation(player, 10));
+>, <Line: -					target.setVelocity(v.normalize().multiply(0.2));
+>, <Line: -				Location oldLocation = target.getLocation();
+>, <Line: -					target.setVelocity(v.normalize().multiply(.5));
+>, <Line: -					target.setVelocity(new Vector(0, 0, 0));
+>, <Line: -				target.setFallDistance(0);
+>, <Line: -				double distance = player.getLocation().distance(target.getLocation());
+>, <Line: -					double height = target.getLocation().getY();
+>, <Line: -							GeneralMethods.damageEntity(player, target, (crushDamage + (crushDamage * 1.2)));
+>, <Line: -							if (target == null)
+>, <Line: -								target = (LivingEntity) e;
+>, <Line: -		return target;
+>]

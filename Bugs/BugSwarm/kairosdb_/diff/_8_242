@@ -1,0 +1,23 @@
+[<Line: +	<h4 class="text-center"><i class="icon-warning-sign"></i> Unsaved changes
+>, <Line: +	</h4>
+>, <Line: +	<div class="row-fluid">
+>, <Line: +		<button type="button" class="btn btn-success span2"
+>, <Line: +				ng-click="dismiss()">Cancel
+>, <Line: +		</button>
+>, <Line: +		<button type="button" class="btn btn-success span2"
+>, <Line: +				ng-click="save();dismiss();">Save
+>, <Line: +		</button>
+>, <Line: +		<button type="button" class="btn btn-warning span2"
+>, <Line: +				ng-click="ignore();dismiss();">Ignore
+>, <Line: +		</button>
+>, <Line: +		<span class="span3"></span>
+>, <Line: +	</div>
+>]
+[<Line: -  <h4 class="text-center"><i class="icon-warning-sign"></i> Unsaved changes</h4>
+>, <Line: -  <div class="row-fluid">
+>, <Line: -	<button type="button" class="btn btn-success span2" ng-click="dismiss()">Cancel</button>
+>, <Line: -	<button type="button" class="btn btn-success span2" ng-click="save();dismiss();">Save</button>
+>, <Line: -	<button type="button" class="btn btn-warning span2" ng-click="ignore();dismiss();">Ignore</button>
+>, <Line: -	<span class="span3"></span>
+>, <Line: -  </div>
+>]

@@ -1,0 +1,9 @@
+[<Line: +    /**
+>, <Line: +     * A reference to the {@link OnMethodEnter#skipOn()} method.
+>, <Line: +     */
+>, <Line: +         * A private constructor as this class is not supposed to be invoked.
+>, <Line: +            throw new UnsupportedOperationException("This marker class is not supposed to be instantiated");
+>]
+[<Line: -         * Disallows instantiation and always throws an exception.
+>, <Line: -            throw new UnsupportedOperationException("This type is not intended for instantiatiom");
+>]

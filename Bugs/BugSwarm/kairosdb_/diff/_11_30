@@ -1,0 +1,6 @@
+[<Line: +	public void setStartTime(long startTime)
+>, <Line: +	{
+>, <Line: +		this.startTime = startTime;
+>, <Line: +	}
+>]
+[]

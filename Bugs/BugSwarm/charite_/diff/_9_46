@@ -1,0 +1,46 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_tsv;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.VariantContextToRecordConverter;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: +/**
+>, <Line: + * Helper class for converting {@link VariantContext} to {@link GenericTSVRecord}.
+>, <Line: + * 
+>, <Line: + * <p>
+>, <Line: + * It is a bit complex to first generate a {@link VariantContext} from TSV and then use this for
+>, <Line: + * converting back into {@link GenericTSVRecord}. However, this is the easiest way to use the
+>, <Line: + * existing machinery for annotation and allele matching.
+>, <Line: + * </p>
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +final class GenericTSVVariantContextToRecordConverter
+>, <Line: +		implements VariantContextToRecordConverter<GenericTSVRecord> {
+>, <Line: +	private GenericTSVAnnotationOptions tsvOptions;
+>, <Line: +	public GenericTSVVariantContextToRecordConverter(GenericTSVAnnotationOptions options) {
+>, <Line: +		this.tsvOptions = options;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public GenericTSVRecord convert(VariantContext vc) {
+>, <Line: +		GenericTSVRecordBuilder builder = new GenericTSVRecordBuilder();
+>, <Line: +		if (vc.getAlternateAlleles().size() > 1) {
+>, <Line: +			throw new RuntimeException(
+>, <Line: +					"Must have exactly zero or one ALT allele but this == " + this.toString());
+>, <Line: +		}
+>, <Line: +		builder.setContig(vc.getContig());
+>, <Line: +		builder.setPos(vc.getStart() - 1);
+>, <Line: +		if (vc.getAlternateAlleles().size() == 0) {
+>, <Line: +			builder.setRef("N");
+>, <Line: +			builder.setAlt("N");
+>, <Line: +		} else {
+>, <Line: +			builder.setRef(vc.getReference().toString());
+>, <Line: +			builder.setAlt(vc.getAlternateAllele(0).toString());
+>, <Line: +		}
+>, <Line: +		for (String colName : tsvOptions.getColumnNames()) {
+>, <Line: +			final GenericTSVValueColumnDescription desc = tsvOptions.getValueColumnDescriptions()
+>, <Line: +					.get(colName);
+>, <Line: +			builder.getValues().add(vc.getAttribute(desc.getFieldName()));
+>, <Line: +		}
+>, <Line: +		return builder.build();
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

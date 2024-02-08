@@ -1,0 +1,761 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'kbn'
+>, <Line: +	],
+>, <Line: +	function (angular, _, kbn) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		var tagList = null;
+>, <Line: +		module.factory('KairosDBDatasource', function ($q, $http) {
+>, <Line: +			function KairosDBDatasource(datasource) {
+>, <Line: +				this.type = datasource.type;
+>, <Line: +				this.editorSrc = 'plugins/kairosdb/editor.html';
+>, <Line: +				this.url = datasource.url;
+>, <Line: +				this.name = datasource.name;
+>, <Line: +				this.supportMetrics = true;
+>, <Line: +				this.grafanaDB = datasource.grafanaDB;
+>, <Line: +			}
+>, <Line: +			// Called once per panel (graph)
+>, <Line: +			KairosDBDatasource.prototype.query = function (options) {
+>, <Line: +				var start = options.range.from;
+>, <Line: +				var end = options.range.to;
+>, <Line: +				var queries = _.compact(_.map(options.targets, _.partial(convertTargetToQuery, options)));
+>, <Line: +				var plotParams = _.compact(_.map(options.targets, function (target) {
+>, <Line: +					var alias = target.alias;
+>, <Line: +					if (typeof target.alias == 'undefined' || target.alias == "")
+>, <Line: +						alias = target.metric;
+>, <Line: +					return !target.hide
+>, <Line: +						? {
+>, <Line: +						alias: alias,
+>, <Line: +						exouter: target.exOuter
+>, <Line: +					}
+>, <Line: +						: null;
+>, <Line: +				}));
+>, <Line: +				var handleKairosDBQueryResponseAlias = _.partial(handleKairosDBQueryResponse, plotParams);
+>, <Line: +				// No valid targets, return the empty result to save a round trip.
+>, <Line: +				if (_.isEmpty(queries)) {
+>, <Line: +					var d = $q.defer();
+>, <Line: +					d.resolve({data: []});
+>, <Line: +					return d.promise;
+>, <Line: +				}
+>, <Line: +				return this.performTimeSeriesQuery(queries, start, end).then(handleKairosDBQueryResponseAlias, handleQueryError);
+>, <Line: +			};
+>, <Line: +			///////////////////////////////////////////////////////////////////////
+>, <Line: +			/// Query methods
+>, <Line: +			///////////////////////////////////////////////////////////////////////
+>, <Line: +			KairosDBDatasource.prototype.performTimeSeriesQuery = function (queries, start, end) {
+>, <Line: +				var reqBody = {
+>, <Line: +					metrics: queries
+>, <Line: +				};
+>, <Line: +				reqBody.cache_time = 0;
+>, <Line: +				convertToKairosTime(start, reqBody, 'start');
+>, <Line: +				convertToKairosTime(end, reqBody, 'end');
+>, <Line: +				var options = {
+>, <Line: +					method: 'POST',
+>, <Line: +					url: '/api/v1/datapoints/query',
+>, <Line: +					data: reqBody
+>, <Line: +				};
+>, <Line: +				options.url = this.url + options.url;
+>, <Line: +				return $http(options);
+>, <Line: +			};
+>, <Line: +			/**
+>, <Line: +			 * Gets the list of metrics
+>, <Line: +			 * @returns {*|Promise}
+>, <Line: +			 */
+>, <Line: +			KairosDBDatasource.prototype.performMetricSuggestQuery = function () {
+>, <Line: +				var options = {
+>, <Line: +					url: this.url + '/api/v1/metricnames',
+>, <Line: +					method: 'GET'
+>, <Line: +				};
+>, <Line: +				return $http(options).then(function (results) {
+>, <Line: +					if (!results.data) {
+>, <Line: +						return [];
+>, <Line: +					}
+>, <Line: +					return results.data.results;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			KairosDBDatasource.prototype.performTagSuggestQuery = function (metricname, range, type, keyValue) {
+>, <Line: +				if (tagList && (metricname === tagList.metricName) && (range.from === tagList.range.from) &&
+>, <Line: +					(range.to === tagList.range.to)) {
+>, <Line: +					return getTagListFromResponse(tagList.results, type, keyValue);
+>, <Line: +				}
+>, <Line: +				tagList = {
+>, <Line: +					metricName: metricname,
+>, <Line: +					range: range
+>, <Line: +				};
+>, <Line: +				var body = {
+>, <Line: +					metrics: [{name: metricname}]
+>, <Line: +				};
+>, <Line: +				convertToKairosTime(range.from, body, 'start');
+>, <Line: +				convertToKairosTime(range.to, body, 'end');
+>, <Line: +				var options = {
+>, <Line: +					url: this.url + '/api/v1/datapoints/query/tags',
+>, <Line: +					method: 'POST',
+>, <Line: +					data: body
+>, <Line: +				};
+>, <Line: +				return $http(options).then(function (results) {
+>, <Line: +					tagList.results = results;
+>, <Line: +					return getTagListFromResponse(results, type, keyValue);
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			/////////////////////////////////////////////////////////////////////////
+>, <Line: +			/// Formatting methods
+>, <Line: +			////////////////////////////////////////////////////////////////////////
+>, <Line: +			function getTagListFromResponse(results, type, keyValue) {
+>, <Line: +				if (!results.data) {
+>, <Line: +					return [];
+>, <Line: +				}
+>, <Line: +				if (type === "key") {
+>, <Line: +					return _.keys(results.data.queries[0].results[0].tags);
+>, <Line: +				}
+>, <Line: +				else if (type === "value" && _.has(results.data.queries[0].results[0].tags, keyValue)) {
+>, <Line: +					return results.data.queries[0].results[0].tags[keyValue];
+>, <Line: +				}
+>, <Line: +				return [];
+>, <Line: +			}
+>, <Line: +			/**
+>, <Line: +			 * Requires a verion of KairosDB with every CORS defects fixed
+>, <Line: +			 * @param results
+>, <Line: +			 * @returns {*}
+>, <Line: +			 */
+>, <Line: +			function handleQueryError(results) {
+>, <Line: +				if (results.data.errors && !_.isEmpty(results.data.errors)) {
+>, <Line: +					var errors = {
+>, <Line: +						message: results.data.errors[0]
+>, <Line: +					};
+>, <Line: +					return $q.reject(errors);
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					return $q.reject(results);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			function handleKairosDBQueryResponse(plotParams, results) {
+>, <Line: +				var output = [];
+>, <Line: +				var index = 0;
+>, <Line: +				_.each(results.data.queries, function (series) {
+>, <Line: +					var sample_size = series.sample_size;
+>, <Line: +					console.log("sample_size:" + sample_size + " samples");
+>, <Line: +					_.each(series.results, function (result) {
+>, <Line: +						//var target = result.name;
+>, <Line: +						var target = plotParams[index].alias;
+>, <Line: +						var details = " ( ";
+>, <Line: +						_.each(result.group_by, function (element) {
+>, <Line: +							if (element.name === "tag") {
+>, <Line: +								_.each(element.group, function (value, key) {
+>, <Line: +									details += key + "=" + value + " ";
+>, <Line: +								});
+>, <Line: +							}
+>, <Line: +							else if (element.name === "value") {
+>, <Line: +								details += 'value_group=' + element.group.group_number + " ";
+>, <Line: +							}
+>, <Line: +							else if (element.name === "time") {
+>, <Line: +								details += 'time_group=' + element.group.group_number + " ";
+>, <Line: +							}
+>, <Line: +						});
+>, <Line: +						details += ") ";
+>, <Line: +						if (details != " ( ) ")
+>, <Line: +							target += details;
+>, <Line: +						var datapoints = [];
+>, <Line: +						for (var i = 0; i < result.values.length; i++) {
+>, <Line: +							var t = Math.floor(result.values[i][0]);
+>, <Line: +							var v = result.values[i][1];
+>, <Line: +							datapoints[i] = [v, t];
+>, <Line: +						}
+>, <Line: +						if (plotParams[index].exouter)
+>, <Line: +							datapoints = PeakFilter(datapoints, 10);
+>, <Line: +						output.push({target: target, datapoints: datapoints});
+>, <Line: +					});
+>, <Line: +					index++;
+>, <Line: +				});
+>, <Line: +				var output2 = {data: _.flatten(output)};
+>, <Line: +				return output2;
+>, <Line: +			}
+>, <Line: +			function convertTargetToQuery(options, target) {
+>, <Line: +				if (!target.metric || target.hide) {
+>, <Line: +					return null;
+>, <Line: +				}
+>, <Line: +				var query = {
+>, <Line: +					name: target.metric
+>, <Line: +				};
+>, <Line: +				query.aggregators = [];
+>, <Line: +				if (target.downsampling !== '(NONE)') {
+>, <Line: +					query.aggregators.push({
+>, <Line: +						name: target.downsampling,
+>, <Line: +						align_sampling: true,
+>, <Line: +						align_start_time: true,
+>, <Line: +						sampling: KairosDBDatasource.prototype.convertToKairosInterval(target.sampling || options.interval)
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				if (target.horizontalAggregators) {
+>, <Line: +					_.each(target.horizontalAggregators, function (chosenAggregator) {
+>, <Line: +						var returnedAggregator = {
+>, <Line: +							name: chosenAggregator.name
+>, <Line: +						};
+>, <Line: +						if (chosenAggregator.sampling_rate) {
+>, <Line: +							returnedAggregator.sampling = KairosDBDatasource.prototype.convertToKairosInterval(chosenAggregator.sampling_rate);
+>, <Line: +							returnedAggregator.align_sampling = true;
+>, <Line: +							returnedAggregator.align_start_time = true;
+>, <Line: +						}
+>, <Line: +						if (chosenAggregator.unit) {
+>, <Line: +							returnedAggregator.unit = chosenAggregator.unit + 's';
+>, <Line: +						}
+>, <Line: +						if (chosenAggregator.factor && chosenAggregator.name === 'div') {
+>, <Line: +							returnedAggregator.divisor = chosenAggregator.factor;
+>, <Line: +						}
+>, <Line: +						else if (chosenAggregator.factor && chosenAggregator.name === 'scale') {
+>, <Line: +							returnedAggregator.factor = chosenAggregator.factor;
+>, <Line: +						}
+>, <Line: +						if (chosenAggregator.percentile) {
+>, <Line: +							returnedAggregator.percentile = chosenAggregator.percentile;
+>, <Line: +						}
+>, <Line: +						query.aggregators.push(returnedAggregator);
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				if (_.isEmpty(query.aggregators)) {
+>, <Line: +					delete query.aggregators;
+>, <Line: +				}
+>, <Line: +				if (target.tags) {
+>, <Line: +					query.tags = angular.copy(target.tags);
+>, <Line: +				}
+>, <Line: +				if (target.groupByTags || target.nonTagGroupBys) {
+>, <Line: +					query.group_by = [];
+>, <Line: +					if (target.groupByTags) {
+>, <Line: +						query.group_by.push({
+>, <Line: +							name: "tag",
+>, <Line: +							tags: angular.copy(target.groupByTags)
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +					if (target.nonTagGroupBys) {
+>, <Line: +						_.each(target.nonTagGroupBys, function (rawGroupBy) {
+>, <Line: +							var formattedGroupBy = angular.copy(rawGroupBy);
+>, <Line: +							if (formattedGroupBy.name === 'time') {
+>, <Line: +								formattedGroupBy.range_size = KairosDBDatasource.prototype.convertToKairosInterval(formattedGroupBy.range_size);
+>, <Line: +							}
+>, <Line: +							query.group_by.push(formattedGroupBy);
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				return query;
+>, <Line: +			}
+>, <Line: +			///////////////////////////////////////////////////////////////////////
+>, <Line: +			/// Time conversion functions specifics to KairosDB
+>, <Line: +			//////////////////////////////////////////////////////////////////////
+>, <Line: +			KairosDBDatasource.prototype.convertToKairosInterval = function (intervalString) {
+>, <Line: +				var interval_regex = /(\d+(?:\.\d+)?)([Mwdhmsy])/;
+>, <Line: +				var interval_regex_ms = /(\d+(?:\.\d+)?)(ms)/;
+>, <Line: +				var matches = intervalString.match(interval_regex_ms);
+>, <Line: +				if (!matches) {
+>, <Line: +					matches = intervalString.match(interval_regex);
+>, <Line: +				}
+>, <Line: +				if (!matches) {
+>, <Line: +					throw new Error('Invalid interval string, expecting a number followed by one of "y M w d h m s ms"');
+>, <Line: +				}
+>, <Line: +				var value = matches[1];
+>, <Line: +				var unit = matches[2];
+>, <Line: +				if (value % 1 !== 0) {
+>, <Line: +					if (unit === 'ms') {
+>, <Line: +						throw new Error('Invalid interval value, cannot be smaller than the millisecond');
+>, <Line: +					}
+>, <Line: +					value = Math.round(kbn.intervals_in_seconds[unit] * value * 1000);
+>, <Line: +					unit = 'ms';
+>, <Line: +				}
+>, <Line: +				switch (unit) {
+>, <Line: +					case 'ms':
+>, <Line: +						unit = 'milliseconds';
+>, <Line: +						break;
+>, <Line: +					case 's':
+>, <Line: +						unit = 'seconds';
+>, <Line: +						break;
+>, <Line: +					case 'm':
+>, <Line: +						unit = 'minutes';
+>, <Line: +						break;
+>, <Line: +					case 'h':
+>, <Line: +						unit = 'hours';
+>, <Line: +						break;
+>, <Line: +					case 'd':
+>, <Line: +						unit = 'days';
+>, <Line: +						break;
+>, <Line: +					case 'w':
+>, <Line: +						unit = 'weeks';
+>, <Line: +						break;
+>, <Line: +					case 'M':
+>, <Line: +						unit = 'months';
+>, <Line: +						break;
+>, <Line: +					case 'y':
+>, <Line: +						unit = 'years';
+>, <Line: +						break;
+>, <Line: +					default:
+>, <Line: +						console.log("Unknown interval ", intervalString);
+>, <Line: +						break;
+>, <Line: +				}
+>, <Line: +				return {
+>, <Line: +					"value": value,
+>, <Line: +					"unit": unit
+>, <Line: +				};
+>, <Line: +			};
+>, <Line: +			function convertToKairosTime(date, response_obj, start_stop_name) {
+>, <Line: +				var name;
+>, <Line: +				if (_.isString(date)) {
+>, <Line: +					if (date === 'now') {
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					else if (date.indexOf('now-') >= 0) {
+>, <Line: +						name = start_stop_name + "_relative";
+>, <Line: +						date = date.substring(4);
+>, <Line: +						var re_date = /(\d+)\s*(\D+)/;
+>, <Line: +						var result = re_date.exec(date);
+>, <Line: +						if (result) {
+>, <Line: +							var value = result[1];
+>, <Line: +							var unit = result[2];
+>, <Line: +							switch (unit) {
+>, <Line: +								case 'ms':
+>, <Line: +									unit = 'milliseconds';
+>, <Line: +									break;
+>, <Line: +								case 's':
+>, <Line: +									unit = 'seconds';
+>, <Line: +									break;
+>, <Line: +								case 'm':
+>, <Line: +									unit = 'minutes';
+>, <Line: +									break;
+>, <Line: +								case 'h':
+>, <Line: +									unit = 'hours';
+>, <Line: +									break;
+>, <Line: +								case 'd':
+>, <Line: +									unit = 'days';
+>, <Line: +									break;
+>, <Line: +								case 'w':
+>, <Line: +									unit = 'weeks';
+>, <Line: +									break;
+>, <Line: +								case 'M':
+>, <Line: +									unit = 'months';
+>, <Line: +									break;
+>, <Line: +								case 'y':
+>, <Line: +									unit = 'years';
+>, <Line: +									break;
+>, <Line: +								default:
+>, <Line: +									console.log("Unknown date ", date);
+>, <Line: +									break;
+>, <Line: +							}
+>, <Line: +							response_obj[name] = {
+>, <Line: +								"value": value,
+>, <Line: +								"unit": unit
+>, <Line: +							};
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						console.log("Unparseable date", date);
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					date = kbn.parseDate(date);
+>, <Line: +				}
+>, <Line: +				if (_.isDate(date)) {
+>, <Line: +					name = start_stop_name + "_absolute";
+>, <Line: +					response_obj[name] = date.getTime();
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				console.log("Date is neither string nor date");
+>, <Line: +			}
+>, <Line: +			function PeakFilter(dataIn, limit) {
+>, <Line: +				var datapoints = dataIn;
+>, <Line: +				var arrLength = datapoints.length;
+>, <Line: +				if (arrLength <= 3)
+>, <Line: +					return datapoints;
+>, <Line: +				var LastIndx = arrLength - 1;
+>, <Line: +				// Check first point
+>, <Line: +				var prvDelta = Math.abs((datapoints[1][0] - datapoints[0][0]) / datapoints[0][0]);
+>, <Line: +				var nxtDelta = Math.abs((datapoints[1][0] - datapoints[2][0]) / datapoints[2][0]);
+>, <Line: +				if (prvDelta >= limit && nxtDelta < limit)
+>, <Line: +					datapoints[0][0] = datapoints[1][0];
+>, <Line: +				// Check last point
+>, <Line: +				prvDelta = Math.abs((datapoints[LastIndx - 1][0] - datapoints[LastIndx - 2][0]) / datapoints[LastIndx - 2][0]);
+>, <Line: +				nxtDelta = Math.abs((datapoints[LastIndx - 1][0] - datapoints[LastIndx][0]) / datapoints[LastIndx][0]);
+>, <Line: +				if (prvDelta >= limit && nxtDelta < limit)
+>, <Line: +					datapoints[LastIndx][0] = datapoints[LastIndx - 1][0];
+>, <Line: +				for (var i = 1; i < arrLength - 1; i++) {
+>, <Line: +					prvDelta = Math.abs((datapoints[i][0] - datapoints[i - 1][0]) / datapoints[i - 1][0]);
+>, <Line: +					nxtDelta = Math.abs((datapoints[i][0] - datapoints[i + 1][0]) / datapoints[i + 1][0]);
+>, <Line: +					if (prvDelta >= limit && nxtDelta >= limit)
+>, <Line: +						datapoints[i][0] = (datapoints[i - 1][0] + datapoints[i + 1][0]) / 2;
+>, <Line: +				}
+>, <Line: +				return datapoints;
+>, <Line: +			}
+>, <Line: +			////////////////////////////////////////////////////////////////////////
+>, <Line: +			return KairosDBDatasource;
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'kbn'
+>, <Line: -],
+>, <Line: -function (angular, _, kbn) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  var tagList = null;
+>, <Line: -  module.factory('KairosDBDatasource', function($q, $http) {
+>, <Line: -    function KairosDBDatasource(datasource) {
+>, <Line: -      this.type = datasource.type;
+>, <Line: -      this.editorSrc = 'plugins/kairosdb/editor.html';
+>, <Line: -      this.url = datasource.url;
+>, <Line: -      this.name = datasource.name;
+>, <Line: -      this.supportMetrics = true;
+>, <Line: -      this.grafanaDB = datasource.grafanaDB;
+>, <Line: -    }
+>, <Line: -    // Called once per panel (graph)
+>, <Line: -    KairosDBDatasource.prototype.query = function(options) {
+>, <Line: -      var start = options.range.from;
+>, <Line: -      var end = options.range.to;
+>, <Line: -      var queries = _.compact(_.map(options.targets, _.partial(convertTargetToQuery, options)));
+>, <Line: -      var plotParams = _.compact(_.map(options.targets, function(target){
+>, <Line: -        var alias = target.alias;
+>, <Line: -        if (typeof target.alias == 'undefined' || target.alias == "")
+>, <Line: -          alias = target.metric;
+>, <Line: -        return !target.hide
+>, <Line: -            ?  {alias: alias,
+>, <Line: -                exouter: target.exOuter}
+>, <Line: -            : null;
+>, <Line: -      }));
+>, <Line: -      var handleKairosDBQueryResponseAlias = _.partial(handleKairosDBQueryResponse, plotParams);
+>, <Line: -      // No valid targets, return the empty result to save a round trip.
+>, <Line: -      if (_.isEmpty(queries)) {
+>, <Line: -        var d = $q.defer();
+>, <Line: -        d.resolve({ data: [] });
+>, <Line: -        return d.promise;
+>, <Line: -      }
+>, <Line: -      return this.performTimeSeriesQuery(queries, start, end).then(handleKairosDBQueryResponseAlias,handleQueryError);
+>, <Line: -    };
+>, <Line: -    ///////////////////////////////////////////////////////////////////////
+>, <Line: -    /// Query methods
+>, <Line: -    ///////////////////////////////////////////////////////////////////////
+>, <Line: -    KairosDBDatasource.prototype.performTimeSeriesQuery = function(queries, start, end) {
+>, <Line: -      var reqBody = {
+>, <Line: -        metrics: queries
+>, <Line: -      };
+>, <Line: -      reqBody.cache_time=0;
+>, <Line: -      convertToKairosTime(start,reqBody,'start');
+>, <Line: -      convertToKairosTime(end,reqBody,'end');
+>, <Line: -      var options = {
+>, <Line: -        method: 'POST',
+>, <Line: -        url: '/api/v1/datapoints/query',
+>, <Line: -        data: reqBody
+>, <Line: -      };
+>, <Line: -      options.url = this.url + options.url;
+>, <Line: -      return $http(options);
+>, <Line: -    };
+>, <Line: -    /**
+>, <Line: -     * Gets the list of metrics
+>, <Line: -     * @returns {*|Promise}
+>, <Line: -     */
+>, <Line: -    KairosDBDatasource.prototype.performMetricSuggestQuery = function() {
+>, <Line: -      var options = {
+>, <Line: -        url : this.url + '/api/v1/metricnames',
+>, <Line: -        method : 'GET'
+>, <Line: -      };
+>, <Line: -      return $http(options).then(function(results) {
+>, <Line: -        if (!results.data) {
+>, <Line: -          return [];
+>, <Line: -        }
+>, <Line: -        return results.data.results;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    KairosDBDatasource.prototype.performTagSuggestQuery = function(metricname,range,type,keyValue) {
+>, <Line: -      if(tagList && (metricname === tagList.metricName) && (range.from === tagList.range.from) &&
+>, <Line: -        (range.to === tagList.range.to)) {
+>, <Line: -        return getTagListFromResponse(tagList.results,type,keyValue);
+>, <Line: -      }
+>, <Line: -      tagList = {
+>, <Line: -        metricName:metricname,
+>, <Line: -        range:range
+>, <Line: -      };
+>, <Line: -      var body = {
+>, <Line: -        metrics : [{name : metricname}]
+>, <Line: -      };
+>, <Line: -      convertToKairosTime(range.from,body,'start');
+>, <Line: -      convertToKairosTime(range.to,body,'end');
+>, <Line: -      var options = {
+>, <Line: -        url : this.url + '/api/v1/datapoints/query/tags',
+>, <Line: -        method : 'POST',
+>, <Line: -        data : body
+>, <Line: -      };
+>, <Line: -      return $http(options).then(function(results) {
+>, <Line: -        tagList.results = results;
+>, <Line: -        return getTagListFromResponse(results,type,keyValue);
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    /////////////////////////////////////////////////////////////////////////
+>, <Line: -    /// Formatting methods
+>, <Line: -    ////////////////////////////////////////////////////////////////////////
+>, <Line: -    function getTagListFromResponse(results,type,keyValue) {
+>, <Line: -      if (!results.data) {
+>, <Line: -        return [];
+>, <Line: -      }
+>, <Line: -      if(type==="key") {
+>, <Line: -        return _.keys(results.data.queries[0].results[0].tags);
+>, <Line: -      }
+>, <Line: -      else if(type==="value" && _.has(results.data.queries[0].results[0].tags,keyValue)) {
+>, <Line: -        return results.data.queries[0].results[0].tags[keyValue];
+>, <Line: -      }
+>, <Line: -      return [];
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Requires a verion of KairosDB with every CORS defects fixed
+>, <Line: -     * @param results
+>, <Line: -     * @returns {*}
+>, <Line: -     */
+>, <Line: -    function handleQueryError(results) {
+>, <Line: -      if(results.data.errors && !_.isEmpty(results.data.errors)) {
+>, <Line: -        var errors = {
+>, <Line: -          message: results.data.errors[0]
+>, <Line: -        };
+>, <Line: -        return $q.reject(errors);
+>, <Line: -      }
+>, <Line: -      else{
+>, <Line: -        return $q.reject(results);
+>, <Line: -      }
+>, <Line: -    }
+>, <Line: -    function handleKairosDBQueryResponse(plotParams, results) {
+>, <Line: -      var output = [];
+>, <Line: -      var index = 0;
+>, <Line: -      _.each(results.data.queries, function (series) {
+>, <Line: -        var sample_size = series.sample_size;
+>, <Line: -        console.log("sample_size:" + sample_size + " samples");
+>, <Line: -        _.each(series.results, function (result) {
+>, <Line: -          //var target = result.name;
+>, <Line: -          var target = plotParams[index].alias;
+>, <Line: -          var details = " ( ";
+>, <Line: -          _.each(result.group_by,function(element) {
+>, <Line: -            if(element.name==="tag") {
+>, <Line: -              _.each(element.group,function(value, key) {
+>, <Line: -                details+= key+"="+value+" ";
+>, <Line: -              });
+>, <Line: -            }
+>, <Line: -            else if(element.name==="value") {
+>, <Line: -              details+= 'value_group='+element.group.group_number+" ";
+>, <Line: -            }
+>, <Line: -            else if(element.name==="time") {
+>, <Line: -              details+= 'time_group='+element.group.group_number+" ";
+>, <Line: -            }
+>, <Line: -          });
+>, <Line: -          details+= ") ";
+>, <Line: -          if (details != " ( ) ")
+>, <Line: -            target += details;
+>, <Line: -          var datapoints = [];
+>, <Line: -          for (var i = 0; i < result.values.length; i++) {
+>, <Line: -            var t = Math.floor(result.values[i][0]);
+>, <Line: -            var v = result.values[i][1];
+>, <Line: -            datapoints[i] = [v, t];
+>, <Line: -          }
+>, <Line: -          if (plotParams[index].exouter)
+>, <Line: -            datapoints = PeakFilter(datapoints, 10);
+>, <Line: -          output.push({ target: target, datapoints: datapoints });
+>, <Line: -        });
+>, <Line: -        index ++;
+>, <Line: -      });
+>, <Line: -      var output2 = { data: _.flatten(output) };
+>, <Line: -      return output2;
+>, <Line: -    }
+>, <Line: -    function convertTargetToQuery(options,target) {
+>, <Line: -      if (!target.metric || target.hide) {
+>, <Line: -        return null;
+>, <Line: -      }
+>, <Line: -      var query = {
+>, <Line: -        name: target.metric
+>, <Line: -      };
+>, <Line: -      query.aggregators = [];
+>, <Line: -      if(target.downsampling!=='(NONE)') {
+>, <Line: -        query.aggregators.push({
+>, <Line: -          name: target.downsampling,
+>, <Line: -          align_sampling: true,
+>, <Line: -          align_start_time: true,
+>, <Line: -          sampling: KairosDBDatasource.prototype.convertToKairosInterval(target.sampling || options.interval)
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -      if(target.horizontalAggregators) {
+>, <Line: -        _.each(target.horizontalAggregators,function(chosenAggregator) {
+>, <Line: -          var returnedAggregator = {
+>, <Line: -            name:chosenAggregator.name
+>, <Line: -          };
+>, <Line: -          if(chosenAggregator.sampling_rate) {
+>, <Line: -            returnedAggregator.sampling = KairosDBDatasource.prototype.convertToKairosInterval(chosenAggregator.sampling_rate);
+>, <Line: -            returnedAggregator.align_sampling = true;
+>, <Line: -            returnedAggregator.align_start_time=true;
+>, <Line: -          }
+>, <Line: -          if(chosenAggregator.unit) {
+>, <Line: -            returnedAggregator.unit = chosenAggregator.unit+'s';
+>, <Line: -          }
+>, <Line: -          if(chosenAggregator.factor && chosenAggregator.name==='div') {
+>, <Line: -            returnedAggregator.divisor = chosenAggregator.factor;
+>, <Line: -          }
+>, <Line: -          else if(chosenAggregator.factor && chosenAggregator.name==='scale') {
+>, <Line: -            returnedAggregator.factor  = chosenAggregator.factor;
+>, <Line: -          }
+>, <Line: -          if(chosenAggregator.percentile) {
+>, <Line: -            returnedAggregator.percentile = chosenAggregator.percentile;
+>, <Line: -          }
+>, <Line: -          query.aggregators.push(returnedAggregator);
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -      if(_.isEmpty(query.aggregators)) {
+>, <Line: -        delete query.aggregators;
+>, <Line: -      }
+>, <Line: -      if(target.tags) {
+>, <Line: -        query.tags = angular.copy(target.tags);
+>, <Line: -      }
+>, <Line: -      if(target.groupByTags || target.nonTagGroupBys) {
+>, <Line: -        query.group_by = [];
+>, <Line: -        if(target.groupByTags) {query.group_by.push({name: "tag", tags: angular.copy(target.groupByTags)});}
+>, <Line: -        if(target.nonTagGroupBys) {
+>, <Line: -          _.each(target.nonTagGroupBys,function(rawGroupBy) {
+>, <Line: -            var formattedGroupBy = angular.copy(rawGroupBy);
+>, <Line: -            if(formattedGroupBy.name==='time') {
+>, <Line: -              formattedGroupBy.range_size=KairosDBDatasource.prototype.convertToKairosInterval(formattedGroupBy.range_size);
+>, <Line: -            }
+>, <Line: -            query.group_by.push(formattedGroupBy);
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -      return query;
+>, <Line: -    }
+>, <Line: -    ///////////////////////////////////////////////////////////////////////
+>, <Line: -    /// Time conversion functions specifics to KairosDB
+>, <Line: -    //////////////////////////////////////////////////////////////////////
+>, <Line: -    KairosDBDatasource.prototype.convertToKairosInterval = function(intervalString) {
+>, <Line: -      var interval_regex = /(\d+(?:\.\d+)?)([Mwdhmsy])/;
+>, <Line: -      var interval_regex_ms = /(\d+(?:\.\d+)?)(ms)/;
+>, <Line: -      var matches = intervalString.match(interval_regex_ms);
+>, <Line: -      if(!matches) {
+>, <Line: -        matches = intervalString.match(interval_regex);
+>, <Line: -      }
+>, <Line: -      if (!matches) {
+>, <Line: -        throw new Error('Invalid interval string, expecting a number followed by one of "y M w d h m s ms"');
+>, <Line: -      }
+>, <Line: -      var value = matches[1];
+>, <Line: -      var unit = matches[2];
+>, <Line: -      if (value%1!==0) {
+>, <Line: -        if(unit==='ms') {throw new Error('Invalid interval value, cannot be smaller than the millisecond');}
+>, <Line: -        value = Math.round(kbn.intervals_in_seconds[unit]*value*1000);
+>, <Line: -        unit = 'ms';
+>, <Line: -      }
+>, <Line: -      switch(unit) {
+>, <Line: -        case 'ms':
+>, <Line: -          unit = 'milliseconds';
+>, <Line: -          break;
+>, <Line: -        case 's':
+>, <Line: -          unit = 'seconds';
+>, <Line: -          break;
+>, <Line: -        case 'm':
+>, <Line: -          unit = 'minutes';
+>, <Line: -          break;
+>, <Line: -        case 'h':
+>, <Line: -          unit = 'hours';
+>, <Line: -          break;
+>, <Line: -        case 'd':
+>, <Line: -          unit = 'days';
+>, <Line: -          break;
+>, <Line: -        case 'w':
+>, <Line: -          unit = 'weeks';
+>, <Line: -          break;
+>, <Line: -        case 'M':
+>, <Line: -          unit = 'months';
+>, <Line: -          break;
+>, <Line: -        case 'y':
+>, <Line: -          unit = 'years';
+>, <Line: -          break;
+>, <Line: -        default:
+>, <Line: -          console.log("Unknown interval ", intervalString);
+>, <Line: -          break;
+>, <Line: -      }
+>, <Line: -      return {
+>, <Line: -        "value": value,
+>, <Line: -        "unit": unit
+>, <Line: -      };
+>, <Line: -    };
+>, <Line: -    function convertToKairosTime(date, response_obj, start_stop_name) {
+>, <Line: -      var name;
+>, <Line: -      if (_.isString(date)) {
+>, <Line: -        if (date === 'now') {
+>, <Line: -          return;
+>, <Line: -        }
+>, <Line: -        else if (date.indexOf('now-') >= 0) {
+>, <Line: -          name = start_stop_name + "_relative";
+>, <Line: -          date = date.substring(4);
+>, <Line: -          var re_date = /(\d+)\s*(\D+)/;
+>, <Line: -          var result = re_date.exec(date);
+>, <Line: -          if (result) {
+>, <Line: -            var value = result[1];
+>, <Line: -            var unit = result[2];
+>, <Line: -            switch(unit) {
+>, <Line: -              case 'ms':
+>, <Line: -                unit = 'milliseconds';
+>, <Line: -                break;
+>, <Line: -              case 's':
+>, <Line: -                unit = 'seconds';
+>, <Line: -                break;
+>, <Line: -              case 'm':
+>, <Line: -                unit = 'minutes';
+>, <Line: -                break;
+>, <Line: -              case 'h':
+>, <Line: -                unit = 'hours';
+>, <Line: -                break;
+>, <Line: -              case 'd':
+>, <Line: -                unit = 'days';
+>, <Line: -                break;
+>, <Line: -              case 'w':
+>, <Line: -                unit = 'weeks';
+>, <Line: -                break;
+>, <Line: -              case 'M':
+>, <Line: -                unit = 'months';
+>, <Line: -                break;
+>, <Line: -              case 'y':
+>, <Line: -                unit = 'years';
+>, <Line: -                break;
+>, <Line: -              default:
+>, <Line: -                console.log("Unknown date ", date);
+>, <Line: -                break;
+>, <Line: -            }
+>, <Line: -            response_obj[name] = {
+>, <Line: -              "value": value,
+>, <Line: -              "unit": unit
+>, <Line: -            };
+>, <Line: -            return;
+>, <Line: -          }
+>, <Line: -          console.log("Unparseable date", date);
+>, <Line: -          return;
+>, <Line: -        }
+>, <Line: -        date = kbn.parseDate(date);
+>, <Line: -      }
+>, <Line: -      if(_.isDate(date)) {
+>, <Line: -        name = start_stop_name + "_absolute";
+>, <Line: -        response_obj[name] = date.getTime();
+>, <Line: -        return;
+>, <Line: -      }
+>, <Line: -      console.log("Date is neither string nor date");
+>, <Line: -    }
+>, <Line: -    function PeakFilter(dataIn, limit) {
+>, <Line: -      var datapoints = dataIn;
+>, <Line: -      var arrLength = datapoints.length;
+>, <Line: -      if (arrLength <= 3)
+>, <Line: -        return datapoints;
+>, <Line: -      var LastIndx = arrLength - 1;
+>, <Line: -      // Check first point
+>, <Line: -      var prvDelta = Math.abs((datapoints[1][0] - datapoints[0][0]) / datapoints[0][0]);
+>, <Line: -      var nxtDelta = Math.abs((datapoints[1][0] - datapoints[2][0]) / datapoints[2][0]);
+>, <Line: -      if (prvDelta >= limit && nxtDelta < limit)
+>, <Line: -        datapoints[0][0] = datapoints[1][0];
+>, <Line: -      // Check last point
+>, <Line: -      prvDelta = Math.abs((datapoints[LastIndx - 1][0] - datapoints[LastIndx - 2][0]) / datapoints[LastIndx - 2][0]);
+>, <Line: -      nxtDelta = Math.abs((datapoints[LastIndx - 1][0] - datapoints[LastIndx][0]) / datapoints[LastIndx][0]);
+>, <Line: -      if (prvDelta >= limit && nxtDelta < limit)
+>, <Line: -        datapoints[LastIndx][0] = datapoints[LastIndx - 1][0];
+>, <Line: -      for (var i = 1; i < arrLength - 1; i++){
+>, <Line: -        prvDelta = Math.abs((datapoints[i][0] - datapoints[i - 1][0]) / datapoints[i - 1][0]);
+>, <Line: -        nxtDelta = Math.abs((datapoints[i][0] - datapoints[i + 1][0]) / datapoints[i + 1][0]);
+>, <Line: -        if (prvDelta >= limit && nxtDelta >= limit)
+>, <Line: -          datapoints[i][0] = (datapoints[i-1][0] + datapoints[i+1][0]) / 2;
+>, <Line: -      }
+>, <Line: -      return datapoints;
+>, <Line: -    }
+>, <Line: -    ////////////////////////////////////////////////////////////////////////
+>, <Line: -    return KairosDBDatasource;
+>, <Line: -  });
+>, <Line: -});
+>]

@@ -1,0 +1,5 @@
+[<Line: +import co.paralleluniverse.fibers.Instrumented;
+>, <Line: +import co.paralleluniverse.fibers.Suspendable;
+>, <Line: +        @Suspendable
+>]
+[]

@@ -1,0 +1,6 @@
+[<Line: +    <dependency>
+>, <Line: +      <groupId>com.codahale.metrics</groupId>
+>, <Line: +      <artifactId>metrics-annotation</artifactId>
+>, <Line: +    </dependency>
+>]
+[]

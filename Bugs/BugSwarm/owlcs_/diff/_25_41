@@ -1,0 +1,4 @@
+[<Line: +            ontology.getOWLOntologyManager().getOntologyConfigurator());
+>]
+[<Line: -            ontology.getOWLOntologyManager().getOntologyWriterConfiguration());
+>]

@@ -1,0 +1,25 @@
+[<Line: +import co.paralleluniverse.strands.StrandFactory;
+>, <Line: +    /**
+>, <Line: +     * Returns a {@link FixedTapSendPort} that will always forward to a single {@link SendPort}.
+>, <Line: +     *
+>, <Line: +     * @param target        The tapped {@link SendPort}.
+>, <Line: +     * @param forwardTo     The additional {@link SendPort} that will receive messages.
+>, <Line: +     * @param strandFactory The {@link StrandFactory} that will build send strands when the {@link SendPort} would block.
+>, <Line: +     * @return a {@link FixedTapSendPort} that will always forward to a single {@code forwardTo}.
+>, <Line: +     */
+>, <Line: +    public static <M> TransformingSendPort<M> fixedTap(final SendPort<M> target, final SendPort<? super M> forwardTo, final StrandFactory strandFactory) {
+>, <Line: +        return Channels.transformSend(Channels.fixedSendTap(target, forwardTo, strandFactory));
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Returns a {@link FixedTapSendPort} that will always forward to a single {@link SendPort}. {@link DefaultFiberFactory} will build
+>, <Line: +     * send strands when the {@link SendPort} would block.
+>, <Line: +     *
+>, <Line: +     * @param target        The tapped {@link SendPort}.
+>, <Line: +     * @param forwardTo     The additional {@link SendPort} that will receive messages.
+>, <Line: +     * @return a {@link FixedTapReceivePort} that will always forward to a single {@code forwardTo}.
+>, <Line: +     */
+>, <Line: +    public static <M> TransformingSendPort<M> fixedTap(final SendPort<M> target, final SendPort<? super M> forwardTo) {
+>, <Line: +        return Channels.transformSend(Channels.fixedSendTap(target, forwardTo));
+>, <Line: +    }
+>]
+[]

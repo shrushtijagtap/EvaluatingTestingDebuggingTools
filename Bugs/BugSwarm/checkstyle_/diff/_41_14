@@ -1,0 +1,51 @@
+[<Line: +      <subsection name="Properties">
+>, <Line: +        <table>
+>, <Line: +          <tr>
+>, <Line: +            <th>name</th>
+>, <Line: +            <th>description</th>
+>, <Line: +            <th>type</th>
+>, <Line: +            <th>default value</th>
+>, <Line: +          </tr>
+>, <Line: +          <tr>
+>, <Line: +            <td>skipIfLastAndSharedWithCase</td>
+>, <Line: +            <td>whether to allow <code>default</code> along with case if they are not last</td>
+>, <Line: +            <td><a href="property_types.html#boolean">Boolean</a></td>
+>, <Line: +            <td>false</td>
+>, <Line: +          </tr>
+>, <Line: +        </table>
+>, <Line: +      </subsection>
+>, <Line: +        <p>
+>, <Line: +            To configure the check for skipIfLastAndSharedWithCase:
+>, <Line: +        </p>
+>, <Line: +        <source>
+>, <Line: +&lt;module name=&quot;DefaultComesLast&quot;&gt;
+>, <Line: +    &lt;property name=&quot;skipIfLastAndSharedWithCase&quot; value=&quot;true&quot;/&gt;
+>, <Line: +&lt;/module&gt;
+>, <Line: +        </source>
+>, <Line: +        <p>
+>, <Line: +            Example when skipIfLastAndSharedWithCase is set to true.
+>, <Line: +        </p>
+>, <Line: +        <source>
+>, <Line: +switch (i) {
+>, <Line: +    case 1:
+>, <Line: +        break;
+>, <Line: +    case 2:
+>, <Line: +    default: // No violation with the new option is expected
+>, <Line: +        break;
+>, <Line: +    case 3:
+>, <Line: +        break;
+>, <Line: +}
+>, <Line: +switch (i) {
+>, <Line: +    case 1:
+>, <Line: +        break;
+>, <Line: +    default: // violation with the new option is expected
+>, <Line: +    case 2:
+>, <Line: +        break;
+>, <Line: +}
+>, <Line: +        </source>
+>, <Line: +          <li>
+>, <Line: +            <a href="https://github.com/search?q=path%3Asrc%2Fmain%2Fresources%2Fcom%2Fpuppycrawl%2Ftools%2Fcheckstyle%2Fchecks%2Fcoding+filename%3Amessages*.properties+repo%3Acheckstyle%2Fcheckstyle+%22default.comes.last.in.casegroup%22">
+>, <Line: +            default.comes.last.in.casegroup</a>
+>, <Line: +          </li>
+>]
+[]

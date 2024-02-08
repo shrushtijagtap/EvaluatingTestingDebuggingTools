@@ -1,0 +1,346 @@
+[<Line: +		'angular',
+>, <Line: +		'app',
+>, <Line: +		'lodash',
+>, <Line: +		'jquery',
+>, <Line: +		'jquery.flot',
+>, <Line: +	],
+>, <Line: +	function (angular, app, _, $) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.panels.singlestat', []);
+>, <Line: +		app.useModule(module);
+>, <Line: +		module.directive('singlestatPanel', function ($location, linkSrv, $timeout) {
+>, <Line: +			return {
+>, <Line: +				link: function (scope, elem) {
+>, <Line: +					var data, panel;
+>, <Line: +					var $panelContainer = elem.parents('.panel-container');
+>, <Line: +					scope.$on('render', function () {
+>, <Line: +						render();
+>, <Line: +					});
+>, <Line: +					function setElementHeight() {
+>, <Line: +						try {
+>, <Line: +							var height = scope.height || panel.height || scope.row.height;
+>, <Line: +							if (_.isString(height)) {
+>, <Line: +								height = parseInt(height.replace('px', ''), 10);
+>, <Line: +							}
+>, <Line: +							height -= 5; // padding
+>, <Line: +							height -= panel.title ? 24 : 9; // subtract panel title bar
+>, <Line: +							elem.css('height', height + 'px');
+>, <Line: +							return true;
+>, <Line: +						} catch (e) { // IE throws errors sometimes
+>, <Line: +							return false;
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					function applyColoringThresholds(value, valueString) {
+>, <Line: +						if (!panel.colorValue) {
+>, <Line: +							return valueString;
+>, <Line: +						}
+>, <Line: +						var color = getColorForValue(value);
+>, <Line: +						if (color) {
+>, <Line: +							return '<span style="color:' + color + '">' + valueString + '</span>';
+>, <Line: +						}
+>, <Line: +						return valueString;
+>, <Line: +					}
+>, <Line: +					function getColorForValue(value) {
+>, <Line: +						for (var i = data.thresholds.length - 1; i >= 0; i--) {
+>, <Line: +							if (value >= data.thresholds[i]) {
+>, <Line: +								return data.colorMap[i];
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +						return null;
+>, <Line: +					}
+>, <Line: +					function getSpan(className, fontSize, value) {
+>, <Line: +						return '<span class="' + className + '" style="font-size:' + fontSize + '">' +
+>, <Line: +							value + '</span>';
+>, <Line: +					}
+>, <Line: +					function getBigValueHtml() {
+>, <Line: +						var body = '<div class="singlestat-panel-value-container">';
+>, <Line: +						if (panel.prefix) {
+>, <Line: +							body += getSpan('singlestat-panel-prefix', panel.prefixFontSize, scope.panel.prefix);
+>, <Line: +						}
+>, <Line: +						var value = applyColoringThresholds(data.mainValue, data.mainValueFormated);
+>, <Line: +						body += getSpan('singlestat-panel-value', panel.valueFontSize, value);
+>, <Line: +						if (panel.postfix) {
+>, <Line: +							body += getSpan('singlestat-panel-postfix', panel.postfixFontSize, panel.postfix);
+>, <Line: +						}
+>, <Line: +						body += '</div>';
+>, <Line: +						return body;
+>, <Line: +					}
+>, <Line: +					function addSparkline() {
+>, <Line: +						var panel = scope.panel;
+>, <Line: +						var width = elem.width() + 20;
+>, <Line: +						var height = elem.height() || 100;
+>, <Line: +						var plotCanvas = $('<div></div>');
+>, <Line: +						var plotCss = {};
+>, <Line: +						plotCss.position = 'absolute';
+>, <Line: +						if (panel.sparkline.full) {
+>, <Line: +							plotCss.bottom = '5px';
+>, <Line: +							plotCss.left = '-5px';
+>, <Line: +							plotCss.width = (width - 10) + 'px';
+>, <Line: +							plotCss.height = (height - 45) + 'px';
+>, <Line: +						}
+>, <Line: +						else {
+>, <Line: +							plotCss.bottom = "0px";
+>, <Line: +							plotCss.left = "-5px";
+>, <Line: +							plotCss.width = (width - 10) + 'px';
+>, <Line: +							plotCss.height = Math.floor(height * 0.25) + "px";
+>, <Line: +						}
+>, <Line: +						plotCanvas.css(plotCss);
+>, <Line: +						var options = {
+>, <Line: +							legend: {show: false},
+>, <Line: +							series: {
+>, <Line: +								lines: {
+>, <Line: +									show: true,
+>, <Line: +									fill: 1,
+>, <Line: +									lineWidth: 1,
+>, <Line: +									fillColor: panel.sparkline.fillColor,
+>, <Line: +								},
+>, <Line: +							},
+>, <Line: +							yaxes: {show: false},
+>, <Line: +							xaxis: {
+>, <Line: +								show: false,
+>, <Line: +								mode: "time",
+>, <Line: +								min: scope.range.from.getTime(),
+>, <Line: +								max: scope.range.to.getTime(),
+>, <Line: +							},
+>, <Line: +							grid: {hoverable: false, show: false},
+>, <Line: +						};
+>, <Line: +						elem.append(plotCanvas);
+>, <Line: +						var plotSeries = {
+>, <Line: +							data: data.flotpairs,
+>, <Line: +							color: panel.sparkline.lineColor
+>, <Line: +						};
+>, <Line: +						setTimeout(function () {
+>, <Line: +							$.plot(plotCanvas, [plotSeries], options);
+>, <Line: +						}, 10);
+>, <Line: +					}
+>, <Line: +					function render() {
+>, <Line: +						if (!scope.data) {
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						data = scope.data;
+>, <Line: +						panel = scope.panel;
+>, <Line: +						setElementHeight();
+>, <Line: +						var body = getBigValueHtml();
+>, <Line: +						if (panel.colorBackground && !isNaN(data.mainValue)) {
+>, <Line: +							var color = getColorForValue(data.mainValue);
+>, <Line: +							if (color) {
+>, <Line: +								$panelContainer.css('background-color', color);
+>, <Line: +								if (scope.fullscreen) {
+>, <Line: +									elem.css('background-color', color);
+>, <Line: +								} else {
+>, <Line: +									elem.css('background-color', '');
+>, <Line: +								}
+>, <Line: +							}
+>, <Line: +						} else {
+>, <Line: +							$panelContainer.css('background-color', '');
+>, <Line: +							elem.css('background-color', '');
+>, <Line: +						}
+>, <Line: +						elem.html(body);
+>, <Line: +						if (panel.sparkline.show) {
+>, <Line: +							addSparkline();
+>, <Line: +						}
+>, <Line: +						elem.toggleClass('pointer', panel.links.length > 0);
+>, <Line: +					}
+>, <Line: +					// drilldown link tooltip
+>, <Line: +					var drilldownTooltip = $('<div id="tooltip" class="">gello</div>"');
+>, <Line: +					elem.mouseleave(function () {
+>, <Line: +						if (panel.links.length === 0) {
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						drilldownTooltip.detach();
+>, <Line: +					});
+>, <Line: +					elem.click(function () {
+>, <Line: +						if (panel.links.length === 0) {
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						var linkInfo = linkSrv.getPanelLinkAnchorInfo(panel.links[0]);
+>, <Line: +						if (linkInfo.href[0] === '#') {
+>, <Line: +							linkInfo.href = linkInfo.href.substring(1);
+>, <Line: +						}
+>, <Line: +						if (linkInfo.href.indexOf('http') === 0) {
+>, <Line: +							window.location.href = linkInfo.href;
+>, <Line: +						} else {
+>, <Line: +							$timeout(function () {
+>, <Line: +								$location.url(linkInfo.href);
+>, <Line: +							});
+>, <Line: +						}
+>, <Line: +						drilldownTooltip.detach();
+>, <Line: +					});
+>, <Line: +					elem.mousemove(function (e) {
+>, <Line: +						if (panel.links.length === 0) {
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						drilldownTooltip.text('click to go to: ' + panel.links[0].title);
+>, <Line: +						drilldownTooltip.place_tt(e.pageX + 20, e.pageY - 15);
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'app',
+>, <Line: -  'lodash',
+>, <Line: -  'jquery',
+>, <Line: -  'jquery.flot',
+>, <Line: -],
+>, <Line: -function (angular, app, _, $) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.panels.singlestat', []);
+>, <Line: -  app.useModule(module);
+>, <Line: -  module.directive('singlestatPanel', function($location, linkSrv, $timeout) {
+>, <Line: -    return {
+>, <Line: -      link: function(scope, elem) {
+>, <Line: -        var data, panel;
+>, <Line: -        var $panelContainer = elem.parents('.panel-container');
+>, <Line: -        scope.$on('render', function() {
+>, <Line: -          render();
+>, <Line: -        });
+>, <Line: -        function setElementHeight() {
+>, <Line: -          try {
+>, <Line: -            var height = scope.height || panel.height || scope.row.height;
+>, <Line: -            if (_.isString(height)) {
+>, <Line: -              height = parseInt(height.replace('px', ''), 10);
+>, <Line: -            }
+>, <Line: -            height -= 5; // padding
+>, <Line: -            height -= panel.title ? 24 : 9; // subtract panel title bar
+>, <Line: -            elem.css('height', height + 'px');
+>, <Line: -            return true;
+>, <Line: -          } catch(e) { // IE throws errors sometimes
+>, <Line: -            return false;
+>, <Line: -          }
+>, <Line: -        }
+>, <Line: -        function applyColoringThresholds(value, valueString) {
+>, <Line: -          if (!panel.colorValue) {
+>, <Line: -            return valueString;
+>, <Line: -          }
+>, <Line: -          var color = getColorForValue(value);
+>, <Line: -          if (color) {
+>, <Line: -            return '<span style="color:' + color + '">'+ valueString + '</span>';
+>, <Line: -          }
+>, <Line: -          return valueString;
+>, <Line: -        }
+>, <Line: -        function getColorForValue(value) {
+>, <Line: -          for (var i = data.thresholds.length - 1; i >= 0 ; i--) {
+>, <Line: -            if (value >= data.thresholds[i]) {
+>, <Line: -              return data.colorMap[i];
+>, <Line: -            }
+>, <Line: -          }
+>, <Line: -          return null;
+>, <Line: -        }
+>, <Line: -        function getSpan(className, fontSize, value)  {
+>, <Line: -          return '<span class="' + className + '" style="font-size:' + fontSize + '">' +
+>, <Line: -            value + '</span>';
+>, <Line: -        }
+>, <Line: -        function getBigValueHtml() {
+>, <Line: -          var body = '<div class="singlestat-panel-value-container">';
+>, <Line: -          if (panel.prefix) { body += getSpan('singlestat-panel-prefix', panel.prefixFontSize, scope.panel.prefix); }
+>, <Line: -          var value = applyColoringThresholds(data.mainValue, data.mainValueFormated);
+>, <Line: -          body += getSpan('singlestat-panel-value', panel.valueFontSize, value);
+>, <Line: -          if (panel.postfix) { body += getSpan('singlestat-panel-postfix', panel.postfixFontSize, panel.postfix); }
+>, <Line: -          body += '</div>';
+>, <Line: -          return body;
+>, <Line: -        }
+>, <Line: -        function addSparkline() {
+>, <Line: -          var panel = scope.panel;
+>, <Line: -          var width = elem.width() + 20;
+>, <Line: -          var height = elem.height() || 100;
+>, <Line: -          var plotCanvas = $('<div></div>');
+>, <Line: -          var plotCss = {};
+>, <Line: -          plotCss.position = 'absolute';
+>, <Line: -          if (panel.sparkline.full) {
+>, <Line: -            plotCss.bottom = '5px';
+>, <Line: -            plotCss.left = '-5px';
+>, <Line: -            plotCss.width = (width - 10) + 'px';
+>, <Line: -            plotCss.height = (height - 45) + 'px';
+>, <Line: -          }
+>, <Line: -          else {
+>, <Line: -            plotCss.bottom = "0px";
+>, <Line: -            plotCss.left = "-5px";
+>, <Line: -            plotCss.width = (width - 10) + 'px';
+>, <Line: -            plotCss.height = Math.floor(height * 0.25) + "px";
+>, <Line: -          }
+>, <Line: -          plotCanvas.css(plotCss);
+>, <Line: -          var options = {
+>, <Line: -            legend: { show: false },
+>, <Line: -            series: {
+>, <Line: -              lines:  {
+>, <Line: -                show: true,
+>, <Line: -                fill: 1,
+>, <Line: -                lineWidth: 1,
+>, <Line: -                fillColor: panel.sparkline.fillColor,
+>, <Line: -              },
+>, <Line: -            },
+>, <Line: -            yaxes: { show: false },
+>, <Line: -            xaxis: {
+>, <Line: -              show: false,
+>, <Line: -              mode: "time",
+>, <Line: -              min: scope.range.from.getTime(),
+>, <Line: -              max: scope.range.to.getTime(),
+>, <Line: -            },
+>, <Line: -            grid: { hoverable: false, show: false },
+>, <Line: -          };
+>, <Line: -          elem.append(plotCanvas);
+>, <Line: -          var plotSeries = {
+>, <Line: -            data: data.flotpairs,
+>, <Line: -            color: panel.sparkline.lineColor
+>, <Line: -          };
+>, <Line: -          setTimeout(function() {
+>, <Line: -            $.plot(plotCanvas, [plotSeries], options);
+>, <Line: -          }, 10);
+>, <Line: -        }
+>, <Line: -        function render() {
+>, <Line: -          if (!scope.data) { return; }
+>, <Line: -          data = scope.data;
+>, <Line: -          panel = scope.panel;
+>, <Line: -          setElementHeight();
+>, <Line: -          var body = getBigValueHtml();
+>, <Line: -          if (panel.colorBackground && !isNaN(data.mainValue)) {
+>, <Line: -            var color = getColorForValue(data.mainValue);
+>, <Line: -            if (color) {
+>, <Line: -              $panelContainer.css('background-color', color);
+>, <Line: -              if (scope.fullscreen) {
+>, <Line: -                elem.css('background-color', color);
+>, <Line: -              } else {
+>, <Line: -                elem.css('background-color', '');
+>, <Line: -              }
+>, <Line: -            }
+>, <Line: -          } else {
+>, <Line: -            $panelContainer.css('background-color', '');
+>, <Line: -            elem.css('background-color', '');
+>, <Line: -          }
+>, <Line: -          elem.html(body);
+>, <Line: -          if (panel.sparkline.show) {
+>, <Line: -            addSparkline();
+>, <Line: -          }
+>, <Line: -          elem.toggleClass('pointer', panel.links.length > 0);
+>, <Line: -        }
+>, <Line: -        // drilldown link tooltip
+>, <Line: -        var drilldownTooltip = $('<div id="tooltip" class="">gello</div>"');
+>, <Line: -        elem.mouseleave(function() {
+>, <Line: -          if (panel.links.length === 0) { return;}
+>, <Line: -          drilldownTooltip.detach();
+>, <Line: -        });
+>, <Line: -        elem.click(function() {
+>, <Line: -          if (panel.links.length === 0) { return; }
+>, <Line: -          var linkInfo = linkSrv.getPanelLinkAnchorInfo(panel.links[0]);
+>, <Line: -          if (linkInfo.href[0] === '#') { linkInfo.href = linkInfo.href.substring(1); }
+>, <Line: -          if (linkInfo.href.indexOf('http') === 0) {
+>, <Line: -            window.location.href = linkInfo.href;
+>, <Line: -          } else {
+>, <Line: -            $timeout(function() {
+>, <Line: -              $location.url(linkInfo.href);
+>, <Line: -            });
+>, <Line: -          }
+>, <Line: -          drilldownTooltip.detach();
+>, <Line: -        });
+>, <Line: -        elem.mousemove(function(e) {
+>, <Line: -          if (panel.links.length === 0) { return;}
+>, <Line: -          drilldownTooltip.text('click to go to: ' + panel.links[0].title);
+>, <Line: -          drilldownTooltip.place_tt(e.pageX+20, e.pageY-15);
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

@@ -1,0 +1,45 @@
+[<Line: +import static org.stagemonitor.core.metrics.metrics2.MetricName.name;
+>, <Line: +import org.stagemonitor.alerting.check.ValueType;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.MetricName;
+>, <Line: +				@SLA(metric = {ValueType.P95, ValueType.MAX}, threshold = {0, 0}),
+>, <Line: +		@SLA(metric = {ValueType.P95, ValueType.MAX}, threshold = 0)
+>, <Line: +		@SLA(metric = {ValueType.P95, ValueType.MAX}, threshold = {0, 0})
+>, <Line: +		@SLA(metric = {ValueType.P95, ValueType.MAX}, threshold = {0, 0})
+>, <Line: +		@SLA(metric = {ValueType.P95, ValueType.MAX}, threshold = {0, 0})
+>, <Line: +		@SLA(metric = {ValueType.P95, ValueType.MAX}, threshold = {0, 0})
+>, <Line: +				name("error_rate_server").tag("request_name", "Monitor Sla").layer("All").build());
+>, <Line: +				name("response_time_server").tag("request_name", "Monitor Sla").layer("All").build());
+>, <Line: +	private void testErrorRateCheck(String checkId, MetricName checkTarget) {
+>, <Line: +		assertEquals(checkTarget, errorRateCheck.getTarget());
+>, <Line: +	private void testResponseTimeCheck(String checkId, MetricName checkTarget) {
+>, <Line: +		assertEquals(checkTarget, responseTimeChek.getTarget());
+>, <Line: +		assertEquals(ValueType.P95, p95.getValueType());
+>, <Line: +		assertEquals(ValueType.MAX, max.getValueType());
+>, <Line: +				name("response_time_server").tag("request_name", "monitor requests custom name").layer("All").build());
+>, <Line: +				name("timer").tag("signature", "timed custom name").build());
+>, <Line: +				name("timer").tag("signature", "SlaCheckCreatingClassPathScannerTest$SlaTestClass#slaOnTimed").build());
+>, <Line: +				name("exception_rate").tag("signature", "SlaCheckCreatingClassPathScannerTest$SlaTestClass#slaOnExceptionMetered").build());
+>, <Line: +				name("response_time_server").tag("request_name", "Sla Monitor Requests Class Level").layer("All").build());
+>, <Line: +		@SLA(metric = {ValueType.P95, ValueType.MAX}, threshold = {0, 0})
+>]
+[<Line: -				@SLA(metric = {SLA.Metric.P95, SLA.Metric.MAX}, threshold = {0, 0}),
+>, <Line: -		@SLA(metric = {SLA.Metric.P95, SLA.Metric.MAX}, threshold = 0)
+>, <Line: -		@SLA(metric = {SLA.Metric.P95, SLA.Metric.MAX}, threshold = {0, 0})
+>, <Line: -		@SLA(metric = {SLA.Metric.P95, SLA.Metric.MAX}, threshold = {0, 0})
+>, <Line: -		@SLA(metric = {SLA.Metric.P95, SLA.Metric.MAX}, threshold = {0, 0})
+>, <Line: -		@SLA(metric = {SLA.Metric.P95, SLA.Metric.MAX}, threshold = {0, 0})
+>, <Line: -				"\\Qerror_rate_server.Monitor-Sla.All\\E");
+>, <Line: -				"\\Qresponse_time_server.Monitor-Sla.All\\E");
+>, <Line: -	private void testErrorRateCheck(String checkId, String checkTargetRegex) {
+>, <Line: -		assertEquals(checkTargetRegex, errorRateCheck.getTarget().toString());
+>, <Line: -	private void testResponseTimeCheck(String checkId, String checkTargetRegex) {
+>, <Line: -		assertEquals(checkTargetRegex, responseTimeChek.getTarget().toString());
+>, <Line: -		assertEquals("p95", p95.getMetric());
+>, <Line: -		assertEquals("max", max.getMetric());
+>, <Line: -				"\\Qresponse_time_server.monitor-requests-custom-name.All\\E");
+>, <Line: -				"\\Qtimer.timed-custom-name\\E");
+>, <Line: -				"\\Qtimer.SlaCheckCreatingClassPathScannerTest$SlaTestClass#slaOnTimed\\E");
+>, <Line: -				"\\Qexception_rate.SlaCheckCreatingClassPathScannerTest$SlaTestClass#slaOnExceptionMetered\\E");
+>, <Line: -				"\\Qresponse_time_server.Sla-Monitor-Requests-Class-Level.All\\E");
+>, <Line: -		@SLA(metric = {SLA.Metric.P95, SLA.Metric.MAX}, threshold = {0, 0})
+>]

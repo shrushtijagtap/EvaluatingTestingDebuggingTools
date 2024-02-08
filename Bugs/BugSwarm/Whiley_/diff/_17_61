@@ -1,0 +1,6 @@
+[<Line: +    [int] r = [0; size]
+>, <Line: +        r[i] = value
+>]
+[<Line: -    [int] r = []
+>, <Line: -        r = r ++ [value]
+>]

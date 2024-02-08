@@ -1,0 +1,24 @@
+[<Line: +	<button class="btn btn-success pull-right"
+>, <Line: +			ng-click="addDataQuery(panel.target)">Add query
+>, <Line: +	</button>
+>, <Line: +	<div class="btn-group pull-right" style="margin-right: 10px;">
+>, <Line: +		<button class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+>, <Line: +				bs-tooltip="'Datasource'">{{datasource.name}} <span
+>, <Line: +				class="caret"></span></button>
+>, <Line: +		<ul class="dropdown-menu" role="menu">
+>, <Line: +			<li ng-repeat="datasource in datasources" role="menuitem">
+>, <Line: +				<a ng-click="changeDatasource(datasource.value);">{{datasource.name}}</a>
+>, <Line: +			</li>
+>, <Line: +		</ul>
+>, <Line: +	</div>
+>]
+[<Line: -  <button class="btn btn-success pull-right" ng-click="addDataQuery(panel.target)">Add query</button>
+>, <Line: -  <div class="btn-group pull-right" style="margin-right: 10px;">
+>, <Line: -    <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" bs-tooltip="'Datasource'">{{datasource.name}} <span class="caret"></span></button>
+>, <Line: -    <ul class="dropdown-menu" role="menu">
+>, <Line: -      <li ng-repeat="datasource in datasources" role="menuitem">
+>, <Line: -        <a ng-click="changeDatasource(datasource.value);">{{datasource.name}}</a>
+>, <Line: -      </li>
+>, <Line: -    </ul>
+>, <Line: -  </div>
+>]

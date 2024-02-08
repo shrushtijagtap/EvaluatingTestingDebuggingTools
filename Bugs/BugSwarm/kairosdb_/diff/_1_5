@@ -1,0 +1,315 @@
+[<Line: +package org.kairosdb.core.queue;
+>, <Line: +import com.google.common.base.Stopwatch;
+>, <Line: +import org.apache.commons.collections4.queue.CircularFifoQueue;
+>, <Line: +import org.apache.commons.lang3.tuple.Pair;
+>, <Line: +import org.kairosdb.core.DataPointSet;
+>, <Line: +import org.kairosdb.core.datapoints.LongDataPointFactory;
+>, <Line: +import org.kairosdb.core.datapoints.LongDataPointFactoryImpl;
+>, <Line: +import org.kairosdb.core.reporting.KairosMetricReporter;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +import se.ugli.bigqueue.BigArray;
+>, <Line: +import javax.inject.Inject;
+>, <Line: +import javax.inject.Named;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.concurrent.Executor;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +import java.util.concurrent.atomic.AtomicInteger;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 10/12/16.
+>, <Line: + */
+>, <Line: +public class QueueProcessor implements KairosMetricReporter
+>, <Line: +{
+>, <Line: +	public static final Logger logger = LoggerFactory.getLogger(QueueProcessor.class);
+>, <Line: +	public static final String QUEUE_PROCESSOR = "queue_processor";
+>, <Line: +	public static final String BATCH_SIZE = "kairosdb.queue_processor.batch_size";
+>, <Line: +	public static final String MEMORY_QUEUE_SIZE = "kairosdb.queue_processor.memory_queue_size";
+>, <Line: +	public static final String SECONDS_TILL_CHECKPOINT = "kairosdb.queue_processor.seconds_till_checkpoint";
+>, <Line: +	private final Object m_lock = new Object();
+>, <Line: +	private final BigArray m_bigArray;
+>, <Line: +	private final CircularFifoQueue<IndexedEvent> m_memoryQueue;
+>, <Line: +	private final DeliveryThread m_deliveryThread;
+>, <Line: +	private final int m_batchSize;
+>, <Line: +	private final int m_secondsTillCheckpoint;
+>, <Line: +	private final DataPointEventSerializer m_eventSerializer;
+>, <Line: +	private AtomicInteger m_readFromFileCount = new AtomicInteger();
+>, <Line: +	private AtomicInteger m_readFromQueueCount = new AtomicInteger();
+>, <Line: +	private ProcessorHandler m_processorHandler;
+>, <Line: +	private long m_nextIndex = -1L;
+>, <Line: +	@Inject @Named("HOSTNAME")
+>, <Line: +	private String m_hostName = "none";
+>, <Line: +	@Inject
+>, <Line: +	private LongDataPointFactory m_dataPointFactory = new LongDataPointFactoryImpl();
+>, <Line: +	@Inject
+>, <Line: +	public QueueProcessor(
+>, <Line: +			DataPointEventSerializer eventSerializer,
+>, <Line: +			BigArray bigArray,
+>, <Line: +			@Named(QUEUE_PROCESSOR) Executor executor,
+>, <Line: +			@Named(BATCH_SIZE) int batchSize,
+>, <Line: +			@Named(MEMORY_QUEUE_SIZE) int memoryQueueSize,
+>, <Line: +			@Named(SECONDS_TILL_CHECKPOINT) int secondsTillCheckpoint)
+>, <Line: +	{
+>, <Line: +		m_bigArray = bigArray;
+>, <Line: +		m_memoryQueue = new CircularFifoQueue<>(memoryQueueSize);
+>, <Line: +		m_deliveryThread = new DeliveryThread();
+>, <Line: +		m_batchSize = batchSize;
+>, <Line: +		m_secondsTillCheckpoint = secondsTillCheckpoint;
+>, <Line: +		m_eventSerializer = eventSerializer;
+>, <Line: +		m_nextIndex = m_bigArray.getTailIndex();
+>, <Line: +		executor.execute(m_deliveryThread);
+>, <Line: +	}
+>, <Line: +	public void setProcessorHandler(ProcessorHandler processorHandler)
+>, <Line: +	{
+>, <Line: +		m_processorHandler = processorHandler;
+>, <Line: +	}
+>, <Line: +	public void shutdown()
+>, <Line: +	{
+>, <Line: +		//todo: would like to drain the queue before shutting down.
+>, <Line: +		m_deliveryThread.shutdown();
+>, <Line: +		m_bigArray.flush();
+>, <Line: +		m_bigArray.close();
+>, <Line: +		//m_deliveryThread.interrupt();
+>, <Line: +	}
+>, <Line: +	public void put(DataPointEvent dataPointEvent)
+>, <Line: +	{
+>, <Line: +		byte[] eventBytes = m_eventSerializer.serializeEvent(dataPointEvent);
+>, <Line: +		synchronized (m_lock)
+>, <Line: +		{
+>, <Line: +			//Add data to bigArray first
+>, <Line: +			long index = m_bigArray.append(eventBytes);
+>, <Line: +			//Then stick it into the in memory queue
+>, <Line: +			m_memoryQueue.add(new IndexedEvent(dataPointEvent, index));
+>, <Line: +			//Notify the reader thread if it is waiting for data
+>, <Line: +			m_lock.notify();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 @return Returns a Pair containing the latest index
+>, <Line: +	 and a list of events from the queue, maybe empty
+>, <Line: +	 */
+>, <Line: +	private Pair<Long, List<DataPointEvent>> get()
+>, <Line: +	{
+>, <Line: +		List<DataPointEvent> ret = new ArrayList<>();
+>, <Line: +		long returnIndex = 0L;
+>, <Line: +		synchronized (m_lock)
+>, <Line: +		{
+>, <Line: +			for (int i = 0; i < m_batchSize; i++)
+>, <Line: +			{
+>, <Line: +				//System.out.println(m_nextIndex);
+>, <Line: +				IndexedEvent event = m_memoryQueue.peek();
+>, <Line: +				if (event != null && event.m_index == m_nextIndex)
+>, <Line: +				{
+>, <Line: +					m_memoryQueue.remove();
+>, <Line: +				}
+>, <Line: +				else
+>, <Line: +				{
+>, <Line: +					if (m_nextIndex != m_bigArray.getHeadIndex())
+>, <Line: +					{
+>, <Line: +						DataPointEvent dataPointEvent = m_eventSerializer.deserializeEvent(m_bigArray.get(m_nextIndex));
+>, <Line: +						event = new IndexedEvent(dataPointEvent, m_nextIndex);
+>, <Line: +						m_readFromFileCount.incrementAndGet();
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				if (event != null)
+>, <Line: +				{
+>, <Line: +					returnIndex = m_nextIndex;
+>, <Line: +					m_nextIndex = incrementIndex(m_nextIndex);
+>, <Line: +					ret.add(event.m_dataPointEvent);
+>, <Line: +				}
+>, <Line: +				else
+>, <Line: +					break; //exhausted queue
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		m_readFromQueueCount.getAndAdd(ret.size());
+>, <Line: +		return Pair.of(returnIndex, ret);
+>, <Line: +	}
+>, <Line: +	private long incrementIndex(long index)
+>, <Line: +	{
+>, <Line: +		if (index == Long.MAX_VALUE)
+>, <Line: +			return 0;
+>, <Line: +		return index + 1;
+>, <Line: +	}
+>, <Line: +	private void waitForEvent()
+>, <Line: +	{
+>, <Line: +		synchronized (m_lock)
+>, <Line: +		{
+>, <Line: +			if (m_memoryQueue.isEmpty())
+>, <Line: +			{
+>, <Line: +				try
+>, <Line: +				{
+>, <Line: +					m_lock.wait();
+>, <Line: +				}
+>, <Line: +				catch (InterruptedException e)
+>, <Line: +				{
+>, <Line: +					logger.info("Queue processor sleep interrupted");
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		try
+>, <Line: +		{
+>, <Line: +			//Adding sleep after waiting for data helps ensure we batch incoming
+>, <Line: +			//data instead of getting the first one right off and sending it alone
+>, <Line: +			Thread.sleep(100);
+>, <Line: +		}
+>, <Line: +		catch (InterruptedException e)
+>, <Line: +		{
+>, <Line: +			e.printStackTrace();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public List<DataPointSet> getMetrics(long now)
+>, <Line: +	{
+>, <Line: +		List<DataPointSet> ret = new ArrayList<>();
+>, <Line: +		DataPointSet dps = new DataPointSet("kairosdb.queue.file_queue.size");
+>, <Line: +		dps.addTag("host", m_hostName);
+>, <Line: +		dps.addDataPoint(m_dataPointFactory.createDataPoint(now, m_bigArray.size()));
+>, <Line: +		ret.add(dps);
+>, <Line: +		dps = new DataPointSet("kairosdb.queue.read_from_file");
+>, <Line: +		dps.addTag("host", m_hostName);
+>, <Line: +		dps.addDataPoint(m_dataPointFactory.createDataPoint(now, m_readFromFileCount.getAndSet(0)));
+>, <Line: +		ret.add(dps);
+>, <Line: +		dps = new DataPointSet("kairosdb.queue.process_count");
+>, <Line: +		dps.addTag("host", m_hostName);
+>, <Line: +		dps.addDataPoint(m_dataPointFactory.createDataPoint(now, m_readFromQueueCount.getAndSet(0)));
+>, <Line: +		ret.add(dps);
+>, <Line: +		return ret;
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 Single thread that pulls data out of the queue and sends it to the callback
+>, <Line: +	 in batches
+>, <Line: +	 */
+>, <Line: +	public class DeliveryThread implements Runnable
+>, <Line: +	{
+>, <Line: +		private boolean m_running = true;
+>, <Line: +		private boolean m_runOnce = false;
+>, <Line: +		public void shutdown()
+>, <Line: +		{
+>, <Line: +			m_running = false;
+>, <Line: +		}
+>, <Line: +		/**
+>, <Line: +		 Used for testing the queue processor to reset the running state
+>, <Line: +		 @param running
+>, <Line: +		 */
+>, <Line: +		public void setRunning(boolean running)
+>, <Line: +		{
+>, <Line: +			m_running = running;
+>, <Line: +		}
+>, <Line: +		/**
+>, <Line: +		 Used for testing the queue processor
+>, <Line: +		 @param runOnce
+>, <Line: +		 */
+>, <Line: +		public void setRunOnce(boolean runOnce)
+>, <Line: +		{
+>, <Line: +			m_runOnce = runOnce;
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public void run()
+>, <Line: +		{
+>, <Line: +			CompletionCallBack completionCallBack = new CompletionCallBack();
+>, <Line: +			Stopwatch stopwatch = Stopwatch.createStarted();
+>, <Line: +			while (m_running)
+>, <Line: +			{
+>, <Line: +				if (m_runOnce)
+>, <Line: +					m_running = false;
+>, <Line: +				try
+>, <Line: +				{
+>, <Line: +					//Fix race condition on startup
+>, <Line: +					if (m_processorHandler == null)
+>, <Line: +						waitForEvent();
+>, <Line: +					CompletionCallBack callbackToPass = completionCallBack;
+>, <Line: +					Pair<Long, List<DataPointEvent>> results = get();
+>, <Line: +					//check if list is not empty
+>, <Line: +					if (results.getRight().isEmpty())
+>, <Line: +					{
+>, <Line: +						waitForEvent();
+>, <Line: +					}
+>, <Line: +					else
+>, <Line: +					{
+>, <Line: +						//Important to call increment before potentially calling finalize
+>, <Line: +						callbackToPass.increment();
+>, <Line: +						//System.out.println("timer: "+stopwatch.elapsed(TimeUnit.SECONDS));
+>, <Line: +						if (stopwatch.elapsed(TimeUnit.SECONDS) > m_secondsTillCheckpoint)
+>, <Line: +						{
+>, <Line: +							System.out.println("Checkpoint");
+>, <Line: +							callbackToPass.finalize(results.getLeft());
+>, <Line: +							completionCallBack = new CompletionCallBack();
+>, <Line: +							callbackToPass.setChildCallBack(completionCallBack);
+>, <Line: +							stopwatch.reset();
+>, <Line: +							stopwatch.start();
+>, <Line: +						}
+>, <Line: +						m_processorHandler.handleEvents(results.getRight(), callbackToPass);
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				catch (Exception e)
+>, <Line: +				{
+>, <Line: +					logger.error("DeliveryThread Exception", e);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 The purpose of this class is to track all batches sent up to a certain point
+>, <Line: +	 and once they are finished (via a call to complete) this will move the
+>, <Line: +	 tail of the big array.
+>, <Line: +	 */
+>, <Line: +	private class CompletionCallBack implements EventCompletionCallBack
+>, <Line: +	{
+>, <Line: +		private long m_completionIndex;
+>, <Line: +		private final AtomicInteger m_counter;
+>, <Line: +		private volatile boolean m_finalized;
+>, <Line: +		private CompletionCallBack m_childCallBack;
+>, <Line: +		private CompletionCallBack()
+>, <Line: +		{
+>, <Line: +			m_counter = new AtomicInteger(0);
+>, <Line: +			m_finalized = false;
+>, <Line: +		}
+>, <Line: +		public void setChildCallBack(CompletionCallBack childCallBack)
+>, <Line: +		{
+>, <Line: +			m_childCallBack = childCallBack;
+>, <Line: +			m_childCallBack.increment();
+>, <Line: +		}
+>, <Line: +		public void increment()
+>, <Line: +		{
+>, <Line: +			m_counter.incrementAndGet();
+>, <Line: +		}
+>, <Line: +		/**
+>, <Line: +		 The finalize method gets called always before the last call to complete
+>, <Line: +		 No need for locking
+>, <Line: +		 @param completionIndex
+>, <Line: +		 */
+>, <Line: +		public void finalize(long completionIndex)
+>, <Line: +		{
+>, <Line: +			m_finalized = true;
+>, <Line: +			m_completionIndex = completionIndex;
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public void complete()
+>, <Line: +		{
+>, <Line: +			if (m_counter.decrementAndGet() == 0 && m_finalized)
+>, <Line: +			{
+>, <Line: +				System.out.println("Setting index");
+>, <Line: +				m_childCallBack.complete();
+>, <Line: +				//Checkpoint big queue
+>, <Line: +				m_bigArray.removeBeforeIndex(m_completionIndex);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 Holds a DataPointEvent and the index it is at in the BigArray.
+>, <Line: +	 Basically to keep the in memory circular queue and BigArray in sync.
+>, <Line: +	 */
+>, <Line: +	private static class IndexedEvent
+>, <Line: +	{
+>, <Line: +		public final DataPointEvent m_dataPointEvent;
+>, <Line: +		public final long m_index;
+>, <Line: +		public IndexedEvent(DataPointEvent dataPointEvent, long index)
+>, <Line: +		{
+>, <Line: +			m_dataPointEvent = dataPointEvent;
+>, <Line: +			m_index = index;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

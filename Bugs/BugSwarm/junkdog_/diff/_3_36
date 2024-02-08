@@ -1,0 +1,13 @@
+[<Line: +	/**
+>, <Line: +	 * Get the tag the given entity is tagged with.
+>, <Line: +	 *
+>, <Line: +	 * @param entity
+>, <Line: +	 *			the entity
+>, <Line: +	 *
+>, <Line: +	 * @return the tag
+>, <Line: +	 */
+>, <Line: +	public String getTag(Entity entity) {
+>, <Line: +		return tagsByEntity.get(entity);
+>, <Line: +	}
+>]
+[]

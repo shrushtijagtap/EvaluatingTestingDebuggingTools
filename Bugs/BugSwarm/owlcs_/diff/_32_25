@@ -1,0 +1,11 @@
+[<Line: +        assert type != null;
+>, <Line: +            i.getAxiomsByType().forEach(type,
+>, <Line: +                ax -> ax.accept((InitCollectionVisitor<K>) visitor).forEach(key -> putInternal(key, (V) ax)));
+>, <Line: +    public synchronized boolean containsKey(K key) {
+>, <Line: +        return map.containsKey(key);
+>]
+[<Line: -            i.getAxiomsByType().forEach(type, ax -> ax.accept((InitCollectionVisitor<K>) visitor).forEach(
+>, <Line: -                key -> putInternal(key, (V) ax)));
+>, <Line: -    public synchronized Boolean containsKey(K key) {
+>, <Line: -        return Boolean.valueOf(map.containsKey(key));
+>]

@@ -1,0 +1,13 @@
+[<Line: +import com.google.common.eventbus.Subscribe;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +	@Subscribe
+>, <Line: +	public synchronized void putDataPoint(DataPointEvent event) throws DatastoreException
+>, <Line: +			ImmutableSortedMap<String, String> tags = event.getTags();
+>, <Line: +			String metricName = event.getMetricName();
+>, <Line: +			org.kairosdb.core.DataPoint dataPoint = event.getDataPoint();
+>]
+[<Line: -	@Override
+>, <Line: -	public synchronized void putDataPoint(String metricName,
+>, <Line: -			ImmutableSortedMap<String, String> tags,
+>, <Line: -			org.kairosdb.core.DataPoint dataPoint, int ttl) throws DatastoreException
+>]

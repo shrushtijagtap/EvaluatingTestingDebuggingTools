@@ -1,0 +1,10 @@
+[<Line: +                        return new Dispatcher.ForJava8CapableVm(executableType.getMethod("getParameters"),
+>, <Line: +                                parameterType.getMethod("getName"),
+>, <Line: +                                parameterType.getMethod("isNamePresent"),
+>, <Line: +                                parameterType.getMethod("getModifiers"));
+>]
+[<Line: -                        return new Dispatcher.ForJava8CapableVm(executableType.getDeclaredMethod("getParameters"),
+>, <Line: -                                parameterType.getDeclaredMethod("getName"),
+>, <Line: -                                parameterType.getDeclaredMethod("isNamePresent"),
+>, <Line: -                                parameterType.getDeclaredMethod("getModifiers"));
+>]

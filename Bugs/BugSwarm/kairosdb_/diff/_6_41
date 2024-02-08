@@ -1,0 +1,12 @@
+[<Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +			if (s_logger.isInfoEnabled())
+>, <Line: +				s_logger.info(String.valueOf(genorm_quryTime));
+>, <Line: +			if (s_logger.isInfoEnabled())
+>, <Line: +				s_logger.info(String.valueOf(genorm_quryTime));
+>]
+[<Line: -			if (s_logger.isInfo())
+>, <Line: -				s_logger.info(genorm_quryTime);
+>, <Line: -			if (s_logger.isInfo())
+>, <Line: -				s_logger.info(genorm_quryTime);
+>]

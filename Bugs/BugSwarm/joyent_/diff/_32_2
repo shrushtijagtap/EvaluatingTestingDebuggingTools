@@ -1,0 +1,35 @@
+[<Line: +    /**
+>, <Line: +     * Executes a HTTP GET against the remote Manta API.
+>, <Line: +     *
+>, <Line: +     * @param path The fully qualified path of the object. i.e. /user/stor/foo/bar/baz
+>, <Line: +     * @param parser Parser used for parsing response into a POJO
+>, <Line: +     * @param headers optional HTTP headers to include when getting an object
+>, <Line: +     * @return Google HTTP Client response object
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     */
+>, <Line: +    protected HttpResponse httpGet(final String path,
+>, <Line: +                                   final ObjectParser parser,
+>, <Line: +                                   final MantaHttpHeaders headers) throws IOException {
+>, <Line: +        Objects.requireNonNull(path, "Path must not be null");
+>, <Line: +        final GenericUrl genericUrl = new GenericUrl(this.url + formatPath(path));
+>, <Line: +        return httpGet(genericUrl, parser, headers);
+>, <Line: +    }
+>, <Line: +        return httpGet(genericUrl, parser, null);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Executes a HTTP GET against the remote Manta API.
+>, <Line: +     *
+>, <Line: +     * @param genericUrl The URL to the object on Manta
+>, <Line: +     * @param parser Parser used for parsing response into a POJO
+>, <Line: +     * @param headers optional HTTP headers to include when getting an object
+>, <Line: +     * @return Google HTTP Client response object
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     */
+>, <Line: +    protected HttpResponse httpGet(final GenericUrl genericUrl,
+>, <Line: +                                   final ObjectParser parser,
+>, <Line: +                                   final MantaHttpHeaders headers) throws IOException {
+>, <Line: +        if (headers != null) {
+>, <Line: +            request.setHeaders(headers.asGoogleClientHttpHeaders());
+>, <Line: +        }
+>]
+[]

@@ -1,0 +1,22 @@
+[<Line: +   * must contain {@linkplain Protocol#HTTP_1_1}. It must not contain null.
+>, <Line: +   *
+>, <Line: +   * negotiating TLS.
+>, <Line: +   * {@code unit}
+>, <Line: +   * {@code timeout} parameter
+>, <Line: +   * with {@link #setDispatcher(Dispatcher)}.
+>, <Line: +   * tests should always use port 0 to avoid flakiness when a specific port
+>, <Line: +   * is unavailable.
+>, <Line: +   * tests should always use port 0 to avoid flakiness when a specific port
+>, <Line: +   * is unavailable.
+>]
+[<Line: -   *     must contain {@linkplain Protocol#HTTP_1_1}. It must not contain null.
+>, <Line: -   *     negotiating TLS.
+>, <Line: -  *        {@code unit}
+>, <Line: -   *        {@code timeout} parameter
+>, <Line: -   *     with {@link #setDispatcher(Dispatcher)}.
+>, <Line: -   *     tests should always use port 0 to avoid flakiness when a specific port
+>, <Line: -   *     is unavailable.
+>, <Line: -   *
+>, <Line: -   *     tests should always use port 0 to avoid flakiness when a specific port
+>, <Line: -   *     is unavailable.
+>]

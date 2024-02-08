@@ -1,0 +1,31 @@
+[<Line: +import com.google.inject.Provides;
+>, <Line: +import org.apache.commons.math3.analysis.function.Sin;
+>, <Line: +import org.kairosdb.core.queue.DataPointEventSerializer;
+>, <Line: +import org.kairosdb.core.queue.QueueProcessor;
+>, <Line: +import org.kairosdb.util.CongestionExecutorService;
+>, <Line: +import se.ugli.bigqueue.BigArray;
+>, <Line: +import javax.inject.Named;
+>, <Line: +import javax.inject.Singleton;
+>, <Line: +import java.util.concurrent.Executor;
+>, <Line: +import java.util.concurrent.Executors;
+>, <Line: +import static org.kairosdb.core.queue.QueueProcessor.QUEUE_PROCESSOR;
+>, <Line: +	public static final String QUEUE_PATH = "kairosdb.queue_processor.queue_path";
+>, <Line: +	public static final String PAGE_SIZE = "kairosdb.queue_processor.page_size";
+>, <Line: +		bind(QueueProcessor.class).in(Singleton.class);
+>, <Line: +		bind(DataPointEventSerializer.class).in(Singleton.class);
+>, <Line: +		bind(CongestionExecutorService.class);
+>, <Line: +	@Provides
+>, <Line: +	@Singleton
+>, <Line: +	public BigArray getBigArray(@Named(QUEUE_PATH) String queuePath,
+>, <Line: +			@Named(PAGE_SIZE) int pageSize)
+>, <Line: +	{
+>, <Line: +		return new BigArray(queuePath, "kairos_queue", pageSize);
+>, <Line: +	}
+>, <Line: +	@Provides @Named(QUEUE_PROCESSOR) @Singleton
+>, <Line: +	public Executor getQueueExecutor()
+>, <Line: +	{
+>, <Line: +		return Executors.newSingleThreadExecutor();
+>, <Line: +	}
+>]
+[<Line: -import com.google.inject.Singleton;
+>]

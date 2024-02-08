@@ -1,0 +1,10 @@
+[<Line: +function f(int|null x) -> int:
+>, <Line: +    return 0
+>, <Line: +function g(function(int)->int func) -> int:
+>, <Line: +    assume g(&f) == 0
+>]
+[<Line: -function f(real x) -> real:
+>, <Line: -    return x + 1
+>, <Line: -function g(function(int)->real func) -> real:
+>, <Line: -    assume g(&f) == 2.0
+>]

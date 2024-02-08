@@ -1,0 +1,20 @@
+[<Line: +import net.bytebuddy.ClassFileVersion;
+>, <Line: +             * @param classFileVersion  The class file version of the visited class.
+>, <Line: +                               ClassFileVersion classFileVersion,
+>, <Line: +                                      ClassFileVersion classFileVersion,
+>, <Line: +                return methodVisitorWrapper.wrap(instrumentedType, methodDescription, methodVisitor, classFileVersion, writerFlags, readerFlags);
+>, <Line: +            /**
+>, <Line: +             * The class file version of the visited class.
+>, <Line: +             */
+>, <Line: +            private ClassFileVersion classFileVersion;
+>, <Line: +            @Override
+>, <Line: +            public void visit(int version, int modifiers, String name, String signature, String superTypeName, String[] interfaceName) {
+>, <Line: +                classFileVersion = ClassFileVersion.ofMinorMajor(version);
+>, <Line: +                super.visit(version, modifiers, name, signature, superTypeName, interfaceName);
+>, <Line: +            }
+>, <Line: +                        methodVisitor = entry.wrap(instrumentedType, methodDescription, methodVisitor, classFileVersion, writerFlags, readerFlags);
+>, <Line: +                        ", classFileVersion=" + classFileVersion +
+>]
+[<Line: -                return methodVisitorWrapper.wrap(instrumentedType, methodDescription, methodVisitor, writerFlags, readerFlags);
+>, <Line: -                        methodVisitor = entry.wrap(instrumentedType, methodDescription, methodVisitor, writerFlags, readerFlags);
+>]

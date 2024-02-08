@@ -1,0 +1,9 @@
+[<Line: +package com.joyent.manta.client.multipart;
+>, <Line: +import com.joyent.manta.client.MantaClient;
+>, <Line: +import com.joyent.manta.client.MantaHttpHeaders;
+>, <Line: +import com.joyent.manta.client.MantaJob;
+>, <Line: +import com.joyent.manta.client.MantaMetadata;
+>, <Line: +import com.joyent.manta.client.MantaObjectResponse;
+>]
+[<Line: -package com.joyent.manta.client;
+>]

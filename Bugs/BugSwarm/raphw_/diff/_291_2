@@ -1,0 +1,17 @@
+[<Line: +                            .filter(hasMethodName(targetMethod.getName())
+>, <Line: +                        StackManipulation preparation = targetMethod.isConstructor()
+>, <Line: +                                ? new StackManipulation.Compound(TypeCreation.of(targetMethod.getDeclaringType().asErasure()), Duplication.SINGLE)
+>, <Line: +                                : StackManipulation.Trivial.INSTANCE;
+>, <Line: +                        List<StackManipulation> fieldAccess = new ArrayList<StackManipulation>(declaredFields.size() * 2 + 1);
+>, <Line: +                                preparation,
+>, <Line: +                                Assigner.DEFAULT.assign(targetMethod.isConstructor()
+>, <Line: +                                                ? targetMethod.getDeclaringType().asGenericType()
+>, <Line: +                                                : targetMethod.getReturnType(),
+>, <Line: +                                        specializedLambdaMethod.getReturnType().asGenericType(),
+>, <Line: +                                        Assigner.Typing.DYNAMIC),
+>, <Line: +                                MethodReturn.of(specializedLambdaMethod.getReturnType())
+>]
+[<Line: -                            .filter(named(targetMethod.getName())
+>, <Line: -                        List<StackManipulation> fieldAccess = new ArrayList<StackManipulation>(declaredFields.size() * 2);
+>, <Line: -                                MethodReturn.of(targetMethod.getReturnType())
+>]

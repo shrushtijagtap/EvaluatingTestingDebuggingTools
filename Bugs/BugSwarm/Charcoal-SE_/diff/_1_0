@@ -1,0 +1,3 @@
+[<Line: +     {'regex': u"(?i)\\b(fifabay)\\b", 'all': True, 'reason': "Bad keyword in {}", 'all': True, 'sites': [], 'title': True, 'body': True, 'username': True},
+>]
+[]

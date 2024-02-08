@@ -1,0 +1,32 @@
+[<Line: +from ..base import BaseEstimator, ClassifierMixin, ChangedBehaviorWarning
+>, <Line: +from ..multiclass import _ovr_decision_function
+>, <Line: +class BaseSVC(six.with_metaclass(ABCMeta, BaseLibSVM, ClassifierMixin)):
+>, <Line: +    @abstractmethod
+>, <Line: +    def __init__(self, impl, kernel, degree, gamma, coef0, tol, C, nu,
+>, <Line: +                 shrinking, probability, cache_size, class_weight, verbose,
+>, <Line: +                 max_iter, decision_function_shape, random_state):
+>, <Line: +        self.decision_function_shape = decision_function_shape
+>, <Line: +        super(BaseSVC, self).__init__(
+>, <Line: +            impl=impl, kernel=kernel, degree=degree, gamma=gamma, coef0=coef0,
+>, <Line: +            tol=tol, C=C, nu=nu, epsilon=0., shrinking=shrinking,
+>, <Line: +            probability=probability, cache_size=cache_size,
+>, <Line: +            class_weight=class_weight, verbose=verbose, max_iter=max_iter,
+>, <Line: +            random_state=random_state)
+>, <Line: +        X : array-like, shape (n_samples, n_classes * (n_classes-1) / 2)
+>, <Line: +            If decision_function_shape='ovr', the shape is (n_samples,
+>, <Line: +            n_classes)
+>, <Line: +        dec = self._decision_function(X)
+>, <Line: +        if self.decision_function_shape is None and len(self.classes_) > 2:
+>, <Line: +            warnings.warn("The decision_function_shape default value will "
+>, <Line: +                          "change from 'ovo' to 'ovr' in 0.18. This will change "
+>, <Line: +                          "the shape of the decision function returned by "
+>, <Line: +                          "SVC.", ChangedBehaviorWarning)
+>, <Line: +        if self.decision_function_shape == 'ovr':
+>, <Line: +            return _ovr_decision_function(dec < 0, dec, len(self.classes_))
+>, <Line: +        return dec
+>]
+[<Line: -from ..base import BaseEstimator, ClassifierMixin
+>, <Line: -class BaseSVC(BaseLibSVM, ClassifierMixin):
+>, <Line: -        X : array-like, shape (n_samples, n_class * (n_class-1) / 2)
+>, <Line: -        return self._decision_function(X)
+>]

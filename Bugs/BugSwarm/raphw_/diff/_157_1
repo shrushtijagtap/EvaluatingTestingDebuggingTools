@@ -1,0 +1,391 @@
+[<Line: +import java.security.PrivilegedAction;
+>, <Line: +            protected ExecutingTransformer(ByteBuddy byteBuddy,
+>, <Line: +                                           TypeLocator typeLocator,
+>, <Line: +                                           TypeStrategy typeStrategy,
+>, <Line: +                                           LocationStrategy locationStrategy,
+>, <Line: +                                           Listener listener,
+>, <Line: +                                           NativeMethodStrategy nativeMethodStrategy,
+>, <Line: +                                           AccessControlContext accessControlContext,
+>, <Line: +                                           InitializationStrategy initializationStrategy,
+>, <Line: +                                           BootstrapInjectionStrategy bootstrapInjectionStrategy,
+>, <Line: +                                           DescriptionStrategy descriptionStrategy,
+>, <Line: +                                           RawMatcher ignoredTypeMatcher,
+>, <Line: +                                           Transformation transformation) {
+>, <Line: +                return AccessController.doPrivileged(new LegacyDispatcher(classLoader,
+>, <Line: +                        internalTypeName,
+>, <Line: +                        classBeingRedefined,
+>, <Line: +                        protectionDomain,
+>, <Line: +                        binaryRepresentation));
+>, <Line: +             * Applies a transformation for a class that was captured by this {@link ClassFileTransformer}. Invoking this method
+>, <Line: +             * allows to process module information which is available since Java 9.
+>, <Line: +                return AccessController.doPrivileged(new Java9CapableVmDispatcher(rawModule,
+>, <Line: +                        binaryRepresentation));
+>, <Line: +                return AccessController.doPrivileged(new ExecutionDispatcher(module,
+>, <Line: +                        classLoader,
+>, <Line: +                        internalTypeName.replace('/', '.'),
+>, <Line: +                        classBeingRedefined,
+>, <Line: +                        protectionDomain,
+>, <Line: +                        binaryRepresentation), accessControlContext);
+>, <Line: +            /**
+>, <Line: +             * A privileged action for transforming a class on a JVM prior to Java 9.
+>, <Line: +             */
+>, <Line: +            protected class LegacyDispatcher implements PrivilegedAction<byte[]> {
+>, <Line: +                /**
+>, <Line: +                 * The type's class loader or {@code null} if the bootstrap class loader is represented.
+>, <Line: +                 */
+>, <Line: +                private final ClassLoader classLoader;
+>, <Line: +                /**
+>, <Line: +                 * The type's internal name or {@code null} if no such name exists.
+>, <Line: +                 */
+>, <Line: +                private final String internalTypeName;
+>, <Line: +                /**
+>, <Line: +                 * The class being redefined or {@code null} if no such class exists.
+>, <Line: +                 */
+>, <Line: +                private final Class<?> classBeingRedefined;
+>, <Line: +                /**
+>, <Line: +                 * The type's protection domain.
+>, <Line: +                 */
+>, <Line: +                private final ProtectionDomain protectionDomain;
+>, <Line: +                /**
+>, <Line: +                 * The type's binary representation.
+>, <Line: +                 */
+>, <Line: +                private final byte[] binaryRepresentation;
+>, <Line: +                /**
+>, <Line: +                 * Creates a new type transformation dispatcher.
+>, <Line: +                 *
+>, <Line: +                 * @param classLoader          The type's class loader or {@code null} if the bootstrap class loader is represented.
+>, <Line: +                 * @param internalTypeName     The type's internal name or {@code null} if no such name exists.
+>, <Line: +                 * @param classBeingRedefined  The class being redefined or {@code null} if no such class exists.
+>, <Line: +                 * @param protectionDomain     The type's protection domain.
+>, <Line: +                 * @param binaryRepresentation The type's binary representation.
+>, <Line: +                 */
+>, <Line: +                protected LegacyDispatcher(ClassLoader classLoader,
+>, <Line: +                                           String internalTypeName,
+>, <Line: +                                           Class<?> classBeingRedefined,
+>, <Line: +                                           ProtectionDomain protectionDomain,
+>, <Line: +                                           byte[] binaryRepresentation) {
+>, <Line: +                    this.classLoader = classLoader;
+>, <Line: +                    this.internalTypeName = internalTypeName;
+>, <Line: +                    this.classBeingRedefined = classBeingRedefined;
+>, <Line: +                    this.protectionDomain = protectionDomain;
+>, <Line: +                    this.binaryRepresentation = binaryRepresentation;
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public byte[] run() {
+>, <Line: +                    return transform(JavaModule.UNSUPPORTED,
+>, <Line: +                            classLoader,
+>, <Line: +                            internalTypeName,
+>, <Line: +                            classBeingRedefined,
+>, <Line: +                            protectionDomain,
+>, <Line: +                            binaryRepresentation);
+>, <Line: +                }
+>, <Line: +                /**
+>, <Line: +                 * Returns the outer instance.
+>, <Line: +                 *
+>, <Line: +                 * @return The outer instance.
+>, <Line: +                 */
+>, <Line: +                private ExecutingTransformer getOuter() {
+>, <Line: +                    return ExecutingTransformer.this;
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public boolean equals(Object object) {
+>, <Line: +                    if (this == object) return true;
+>, <Line: +                    if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +                    LegacyDispatcher that = (LegacyDispatcher) object;
+>, <Line: +                    return (classLoader != null ? classLoader.equals(that.classLoader) : that.classLoader == null)
+>, <Line: +                            && (internalTypeName != null ? internalTypeName.equals(that.internalTypeName) : that.internalTypeName == null)
+>, <Line: +                            && (classBeingRedefined != null ? classBeingRedefined.equals(that.classBeingRedefined) : that.classBeingRedefined == null)
+>, <Line: +                            && protectionDomain.equals(that.protectionDomain)
+>, <Line: +                            && ExecutingTransformer.this.equals(that.getOuter())
+>, <Line: +                            && Arrays.equals(binaryRepresentation, that.binaryRepresentation);
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public int hashCode() {
+>, <Line: +                    int result = classLoader != null ? classLoader.hashCode() : 0;
+>, <Line: +                    result = 31 * result + (internalTypeName != null ? internalTypeName.hashCode() : 0);
+>, <Line: +                    result = 31 * result + (classBeingRedefined != null ? classBeingRedefined.hashCode() : 0);
+>, <Line: +                    result = 31 * result + protectionDomain.hashCode();
+>, <Line: +                    result = 31 * result + ExecutingTransformer.this.hashCode();
+>, <Line: +                    result = 31 * result + Arrays.hashCode(binaryRepresentation);
+>, <Line: +                    return result;
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public String toString() {
+>, <Line: +                    return "AgentBuilder.Default.ExecutingTransformer.LegacyDispatcher{" +
+>, <Line: +                            "outer=" + ExecutingTransformer.this +
+>, <Line: +                            ", classLoader=" + classLoader +
+>, <Line: +                            ", internalTypeName='" + internalTypeName + '\'' +
+>, <Line: +                            ", classBeingRedefined=" + classBeingRedefined +
+>, <Line: +                            ", protectionDomain=" + protectionDomain +
+>, <Line: +                            ", binaryRepresentation=<" + binaryRepresentation.length + " bytes>" +
+>, <Line: +                            '}';
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * A privileged action for transforming a class on a JVM that supports modules.
+>, <Line: +             */
+>, <Line: +            protected class Java9CapableVmDispatcher implements PrivilegedAction<byte[]> {
+>, <Line: +                /**
+>, <Line: +                 * The type's {@code java.lang.reflect.Module}.
+>, <Line: +                 */
+>, <Line: +                private final Object rawModule;
+>, <Line: +                /**
+>, <Line: +                 * The type's internal name or {@code null} if no such name exists.
+>, <Line: +                 */
+>, <Line: +                private final String internalTypeName;
+>, <Line: +                /**
+>, <Line: +                 * The class being redefined or {@code null} if no such class exists.
+>, <Line: +                 */
+>, <Line: +                private final Class<?> classBeingRedefined;
+>, <Line: +                /**
+>, <Line: +                 * The type's protection domain.
+>, <Line: +                 */
+>, <Line: +                private final ProtectionDomain protectionDomain;
+>, <Line: +                /**
+>, <Line: +                 * The type's binary representation.
+>, <Line: +                 */
+>, <Line: +                private final byte[] binaryRepresentation;
+>, <Line: +                /**
+>, <Line: +                 * Creates a new legacy dispatcher.
+>, <Line: +                 *
+>, <Line: +                 * @param rawModule            The type's {@code java.lang.reflect.Module}.
+>, <Line: +                 * @param internalTypeName     The type's internal name or {@code null} if no such name exists.
+>, <Line: +                 * @param classBeingRedefined  The class being redefined or {@code null} if no such class exists.
+>, <Line: +                 * @param protectionDomain     The type's protection domain.
+>, <Line: +                 * @param binaryRepresentation The type's binary representation.
+>, <Line: +                 */
+>, <Line: +                protected Java9CapableVmDispatcher(Object rawModule,
+>, <Line: +                                                   String internalTypeName,
+>, <Line: +                                                   Class<?> classBeingRedefined,
+>, <Line: +                                                   ProtectionDomain protectionDomain,
+>, <Line: +                                                   byte[] binaryRepresentation) {
+>, <Line: +                    this.rawModule = rawModule;
+>, <Line: +                    this.internalTypeName = internalTypeName;
+>, <Line: +                    this.classBeingRedefined = classBeingRedefined;
+>, <Line: +                    this.protectionDomain = protectionDomain;
+>, <Line: +                    this.binaryRepresentation = binaryRepresentation;
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public byte[] run() {
+>, <Line: +                    JavaModule module = JavaModule.of(rawModule);
+>, <Line: +                    return transform(module,
+>, <Line: +                            module.getClassLoader(accessControlContext),
+>, <Line: +                            internalTypeName,
+>, <Line: +                            classBeingRedefined,
+>, <Line: +                            protectionDomain,
+>, <Line: +                            binaryRepresentation);
+>, <Line: +                }
+>, <Line: +                /**
+>, <Line: +                 * Returns the outer instance.
+>, <Line: +                 *
+>, <Line: +                 * @return The outer instance.
+>, <Line: +                 */
+>, <Line: +                private ExecutingTransformer getOuter() {
+>, <Line: +                    return ExecutingTransformer.this;
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public boolean equals(Object object) {
+>, <Line: +                    if (this == object) return true;
+>, <Line: +                    if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +                    Java9CapableVmDispatcher that = (Java9CapableVmDispatcher) object;
+>, <Line: +                    return rawModule.equals(that.rawModule)
+>, <Line: +                            && (internalTypeName != null ? internalTypeName.equals(that.internalTypeName) : that.internalTypeName == null)
+>, <Line: +                            && (classBeingRedefined != null ? classBeingRedefined.equals(that.classBeingRedefined) : that.classBeingRedefined == null)
+>, <Line: +                            && protectionDomain.equals(that.protectionDomain)
+>, <Line: +                            && ExecutingTransformer.this.equals(that.getOuter())
+>, <Line: +                            && Arrays.equals(binaryRepresentation, that.binaryRepresentation);
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public int hashCode() {
+>, <Line: +                    int result = rawModule.hashCode();
+>, <Line: +                    result = 31 * result + (internalTypeName != null ? internalTypeName.hashCode() : 0);
+>, <Line: +                    result = 31 * result + (classBeingRedefined != null ? classBeingRedefined.hashCode() : 0);
+>, <Line: +                    result = 31 * result + protectionDomain.hashCode();
+>, <Line: +                    result = 31 * result + ExecutingTransformer.this.hashCode();
+>, <Line: +                    result = 31 * result + Arrays.hashCode(binaryRepresentation);
+>, <Line: +                    return result;
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public String toString() {
+>, <Line: +                    return "AgentBuilder.Default.ExecutingTransformer.Java9CapableVmDispatcher{" +
+>, <Line: +                            "outer=" + ExecutingTransformer.this +
+>, <Line: +                            ", rawModule=" + rawModule +
+>, <Line: +                            ", internalTypeName='" + internalTypeName + '\'' +
+>, <Line: +                            ", classBeingRedefined=" + classBeingRedefined +
+>, <Line: +                            ", protectionDomain=" + protectionDomain +
+>, <Line: +                            ", binaryRepresentation=<" + binaryRepresentation.length + " bytes>" +
+>, <Line: +                            '}';
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * A dispatcher for applying the actual transformation. In order to avoid that all code within a transformer is executed as
+>, <Line: +             * privileged code, the supplied {@link AccessControlContext} is used to limit the available privileges to the intersection
+>, <Line: +             * of privileges during the transformation process.
+>, <Line: +             */
+>, <Line: +            protected class ExecutionDispatcher implements PrivilegedAction<byte[]> {
+>, <Line: +                /**
+>, <Line: +                 * The Java module of the transformed class or {@code null} if the current VM does not support modules.
+>, <Line: +                 */
+>, <Line: +                private final JavaModule module;
+>, <Line: +                /**
+>, <Line: +                 * The type's class loader or {@code null} if it is the bootstrap class loader.
+>, <Line: +                 */
+>, <Line: +                private final ClassLoader classLoader;
+>, <Line: +                /**
+>, <Line: +                 * The type's internal name or {@code null} if no such name exists.
+>, <Line: +                 */
+>, <Line: +                private final String binaryTypeName;
+>, <Line: +                /**
+>, <Line: +                 * The class being redefined or {@code null} if no such class exists.
+>, <Line: +                 */
+>, <Line: +                private final Class<?> classBeingRedefined;
+>, <Line: +                /**
+>, <Line: +                 * The type's protection domain.
+>, <Line: +                 */
+>, <Line: +                private final ProtectionDomain protectionDomain;
+>, <Line: +                /**
+>, <Line: +                 * The type's binary representation.
+>, <Line: +                 */
+>, <Line: +                private final byte[] binaryRepresentation;
+>, <Line: +                /**
+>, <Line: +                 * Creates a new execution dispatcher.
+>, <Line: +                 *
+>, <Line: +                 * @param module               The Java module of the transformed class or {@code null} if the current VM does not support modules.
+>, <Line: +                 * @param classLoader          The type's class loader or {@code null} if it is the bootstrap class loader.
+>, <Line: +                 * @param binaryTypeName       The type's internal name or {@code null} if no such name exists.
+>, <Line: +                 * @param classBeingRedefined  The class being redefined or {@code null} if no such class exists.
+>, <Line: +                 * @param protectionDomain     The type's protection domain.
+>, <Line: +                 * @param binaryRepresentation The type's binary representation.
+>, <Line: +                 */
+>, <Line: +                protected ExecutionDispatcher(JavaModule module,
+>, <Line: +                                              ClassLoader classLoader,
+>, <Line: +                                              String binaryTypeName,
+>, <Line: +                                              Class<?> classBeingRedefined,
+>, <Line: +                                              ProtectionDomain protectionDomain,
+>, <Line: +                                              byte[] binaryRepresentation) {
+>, <Line: +                    this.module = module;
+>, <Line: +                    this.classLoader = classLoader;
+>, <Line: +                    this.binaryTypeName = binaryTypeName;
+>, <Line: +                    this.classBeingRedefined = classBeingRedefined;
+>, <Line: +                    this.protectionDomain = protectionDomain;
+>, <Line: +                    this.binaryRepresentation = binaryRepresentation;
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public byte[] run() {
+>, <Line: +                    try {
+>, <Line: +                        ClassFileLocator classFileLocator = ClassFileLocator.Simple.of(binaryTypeName,
+>, <Line: +                                binaryRepresentation,
+>, <Line: +                                locationStrategy.classFileLocator(classLoader, module, accessControlContext));
+>, <Line: +                        TypePool typePool = typeLocator.typePool(classFileLocator, classLoader);
+>, <Line: +                        return transformation.resolve(descriptionStrategy.apply(binaryTypeName, classBeingRedefined, typePool),
+>, <Line: +                                classLoader,
+>, <Line: +                                module,
+>, <Line: +                                classBeingRedefined,
+>, <Line: +                                protectionDomain,
+>, <Line: +                                typePool,
+>, <Line: +                                ignoredTypeMatcher).apply(initializationStrategy,
+>, <Line: +                                classFileLocator,
+>, <Line: +                                typeStrategy,
+>, <Line: +                                byteBuddy,
+>, <Line: +                                nativeMethodStrategy,
+>, <Line: +                                bootstrapInjectionStrategy,
+>, <Line: +                                accessControlContext,
+>, <Line: +                                listener);
+>, <Line: +                    } catch (Throwable throwable) {
+>, <Line: +                        listener.onError(binaryTypeName, classLoader, module, throwable);
+>, <Line: +                        return NO_TRANSFORMATION;
+>, <Line: +                    } finally {
+>, <Line: +                        listener.onComplete(binaryTypeName, classLoader, module);
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +                /**
+>, <Line: +                 * Returns the outer instance.
+>, <Line: +                 *
+>, <Line: +                 * @return The outer instance.
+>, <Line: +                 */
+>, <Line: +                private ExecutingTransformer getOuter() {
+>, <Line: +                    return ExecutingTransformer.this;
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public boolean equals(Object object) {
+>, <Line: +                    if (this == object) return true;
+>, <Line: +                    if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +                    ExecutionDispatcher that = (ExecutionDispatcher) object;
+>, <Line: +                    return module.equals(that.module)
+>, <Line: +                            && binaryTypeName.equals(that.binaryTypeName)
+>, <Line: +                            && (classLoader != null ? classLoader.equals(that.classLoader) : that.classLoader == null)
+>, <Line: +                            && (classBeingRedefined != null ? classBeingRedefined.equals(that.classBeingRedefined) : that.classBeingRedefined == null)
+>, <Line: +                            && protectionDomain.equals(that.protectionDomain)
+>, <Line: +                            && ExecutingTransformer.this.equals(that.getOuter())
+>, <Line: +                            && Arrays.equals(binaryRepresentation, that.binaryRepresentation);
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public int hashCode() {
+>, <Line: +                    int result = module != null ? module.hashCode() : 0;
+>, <Line: +                    result = 31 * result + (classLoader != null ? classLoader.hashCode() : 0);
+>, <Line: +                    result = 31 * result + binaryTypeName.hashCode();
+>, <Line: +                    result = 31 * result + (classBeingRedefined != null ? classBeingRedefined.hashCode() : 0);
+>, <Line: +                    result = 31 * result + protectionDomain.hashCode();
+>, <Line: +                    result = 31 * result + ExecutingTransformer.this.hashCode();
+>, <Line: +                    result = 31 * result + Arrays.hashCode(binaryRepresentation);
+>, <Line: +                    return result;
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public String toString() {
+>, <Line: +                    return "AgentBuilder.Default.ExecutingTransformer.ExecutionDispatcher{" +
+>, <Line: +                            "outer=" + ExecutingTransformer.this +
+>, <Line: +                            ", module=" + module +
+>, <Line: +                            ", classLoader=" + classLoader +
+>, <Line: +                            ", binaryTypeName='" + binaryTypeName + '\'' +
+>, <Line: +                            ", classBeingRedefined=" + classBeingRedefined +
+>, <Line: +                            ", protectionDomain=" + protectionDomain +
+>, <Line: +                            ", binaryRepresentation=<" + binaryRepresentation.length + " bytes>" +
+>, <Line: +                            '}';
+>, <Line: +                }
+>, <Line: +            }
+>]
+[<Line: -            public ExecutingTransformer(ByteBuddy byteBuddy,
+>, <Line: -                                        TypeLocator typeLocator,
+>, <Line: -                                        TypeStrategy typeStrategy,
+>, <Line: -                                        LocationStrategy locationStrategy,
+>, <Line: -                                        Listener listener,
+>, <Line: -                                        NativeMethodStrategy nativeMethodStrategy,
+>, <Line: -                                        AccessControlContext accessControlContext,
+>, <Line: -                                        InitializationStrategy initializationStrategy,
+>, <Line: -                                        BootstrapInjectionStrategy bootstrapInjectionStrategy,
+>, <Line: -                                        DescriptionStrategy descriptionStrategy,
+>, <Line: -                                        RawMatcher ignoredTypeMatcher,
+>, <Line: -                                        Transformation transformation) {
+>, <Line: -                return transform(JavaModule.UNSUPPORTED, classLoader, internalTypeName, classBeingRedefined, protectionDomain, binaryRepresentation);
+>, <Line: -             * Applies a transformation for a class that was captured by this {@link ClassFileTransformer}.
+>, <Line: -                JavaModule module = JavaModule.of(rawModule);
+>, <Line: -                return transform(module,
+>, <Line: -                        module.getClassLoader(accessControlContext),
+>, <Line: -                        binaryRepresentation);
+>, <Line: -                String binaryTypeName = internalTypeName.replace('/', '.');
+>, <Line: -                try {
+>, <Line: -                    ClassFileLocator classFileLocator = ClassFileLocator.Simple.of(binaryTypeName,
+>, <Line: -                            binaryRepresentation,
+>, <Line: -                            locationStrategy.classFileLocator(classLoader, module, accessControlContext));
+>, <Line: -                    TypePool typePool = typeLocator.typePool(classFileLocator, classLoader);
+>, <Line: -                    return transformation.resolve(descriptionStrategy.apply(binaryTypeName, classBeingRedefined, typePool),
+>, <Line: -                            classLoader,
+>, <Line: -                            module,
+>, <Line: -                            classBeingRedefined,
+>, <Line: -                            protectionDomain,
+>, <Line: -                            typePool,
+>, <Line: -                            ignoredTypeMatcher).apply(initializationStrategy,
+>, <Line: -                            classFileLocator,
+>, <Line: -                            typeStrategy,
+>, <Line: -                            byteBuddy,
+>, <Line: -                            nativeMethodStrategy,
+>, <Line: -                            bootstrapInjectionStrategy,
+>, <Line: -                            accessControlContext,
+>, <Line: -                            listener);
+>, <Line: -                } catch (Throwable throwable) {
+>, <Line: -                    listener.onError(binaryTypeName, classLoader, module, throwable);
+>, <Line: -                    return NO_TRANSFORMATION;
+>, <Line: -                } finally {
+>, <Line: -                    listener.onComplete(binaryTypeName, classLoader, module);
+>, <Line: -                }
+>]

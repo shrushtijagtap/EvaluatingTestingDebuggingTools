@@ -1,0 +1,6 @@
+[<Line: +        no { i in 0..|data| | |data[i]| != width }
+>, <Line: +requires (|data| == height) && no { i in 0..|data| | |data[i]| != width }
+>]
+[<Line: -        no { i in data | |i| != width }
+>, <Line: -requires (|data| == height) && no { i in data | |i| != width }
+>]

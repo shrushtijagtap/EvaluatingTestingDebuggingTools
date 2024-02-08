@@ -1,0 +1,29 @@
+[<Line: +import io.dropwizard.views.View;
+>, <Line: +import static com.google.common.base.Preconditions.checkNotNull;
+>, <Line: +  private final boolean authEnabled;
+>, <Line: +    this.authEnabled = (configuration.getAuthConfiguration().getKey().isPresent() && configuration.getAuthConfiguration().isEnabled());
+>, <Line: +  public boolean isAuthEnabled() {
+>, <Line: +  public boolean isElbEnabled() {
+>, <Line: +      ", authEnabled=" + authEnabled +
+>]
+[<Line: -import static com.google.common.base.Preconditions.checkNotNull;
+>, <Line: -import io.dropwizard.views.View;
+>, <Line: -import com.google.common.base.Optional;
+>, <Line: -  private final String navColor;
+>, <Line: -  private final Boolean allowEdit;
+>, <Line: -  private final boolean authEnabled;
+>, <Line: -    this.allowEdit = configuration.getUiConfiguration().allowEdit();
+>, <Line: -    this.authEnabled = configuration.getAuthConfiguration().isEnabled();
+>, <Line: -    this.navColor = configuration.getUiConfiguration().getNavColor();
+>, <Line: -  public boolean getAllowEdit() {
+>, <Line: -    return allowEdit;
+>, <Line: -  }
+>, <Line: -  public boolean getAuthEnabled() {
+>, <Line: -  public String getNavColor() {
+>, <Line: -    return navColor;
+>, <Line: -  }
+>, <Line: -  public boolean getElbEnabled() {
+>, <Line: -      ", authKey=" + authEnabled +
+>, <Line: -      ", navColor=" + navColor +
+>, <Line: -      ", readOnly=" + allowEdit +
+>]

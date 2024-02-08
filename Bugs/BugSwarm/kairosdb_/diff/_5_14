@@ -1,0 +1,12 @@
+[<Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +			EventBus eventBus) throws DatastoreException
+>, <Line: +			DataPointEvent dataPointEvent;
+>, <Line: +				dataPointEvent = new DataPointEvent(dp.getMetricName(), dp.getTags(),
+>, <Line: +				dataPointEvent = new DataPointEvent(dp.getMetricName(), dp.getTags(),
+>, <Line: +			eventBus.post(dataPointEvent);
+>]
+[<Line: -			KairosDatastore datastore) throws DatastoreException
+>, <Line: -				datastore.putDataPoint(dp.getMetricName(), dp.getTags(),
+>, <Line: -				datastore.putDataPoint(dp.getMetricName(), dp.getTags(),
+>]

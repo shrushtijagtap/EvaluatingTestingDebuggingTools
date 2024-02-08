@@ -1,0 +1,16 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +     *
+>, <Line: +     *
+>, <Line: +     *
+>, <Line: +     *
+>, <Line: +     *
+>, <Line: +     *
+>]
+[<Line: -package com.mp4parser.iso14496.part12;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractBox;
+>]

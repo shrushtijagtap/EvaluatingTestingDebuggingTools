@@ -1,0 +1,145 @@
+[<Line: +import net.bytebuddy.utility.JavaModule;
+>, <Line: +import java.lang.instrument.Instrumentation;
+>, <Line: +import static org.mockito.Mockito.*;
+>, <Line: +    @Test
+>, <Line: +    public void testResubmission() throws Exception {
+>, <Line: +        Instrumentation instrumentation = mock(Instrumentation.class);
+>, <Line: +        AgentBuilder.Listener.Resubmitting resubmitting = new AgentBuilder.Listener.Resubmitting(instrumentation);
+>, <Line: +        resubmitting.onError(Foo.class.getName(), Foo.class.getClassLoader(), JavaModule.ofType(Foo.class), false, new Throwable());
+>, <Line: +        when(instrumentation.isModifiableClass(Foo.class)).thenReturn(true);
+>, <Line: +        resubmitting.run();
+>, <Line: +        verify(instrumentation).isModifiableClass(Foo.class);
+>, <Line: +        verify(instrumentation).retransformClasses(Foo.class);
+>, <Line: +        verifyNoMoreInteractions(instrumentation);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testResubmissionNonModifiable() throws Exception {
+>, <Line: +        Instrumentation instrumentation = mock(Instrumentation.class);
+>, <Line: +        AgentBuilder.Listener.Resubmitting resubmitting = new AgentBuilder.Listener.Resubmitting(instrumentation);
+>, <Line: +        resubmitting.onError(Foo.class.getName(), Foo.class.getClassLoader(), JavaModule.ofType(Foo.class), false, new Throwable());
+>, <Line: +        when(instrumentation.isModifiableClass(Foo.class)).thenReturn(false);
+>, <Line: +        resubmitting.run();
+>, <Line: +        verify(instrumentation).isModifiableClass(Foo.class);
+>, <Line: +        verifyNoMoreInteractions(instrumentation);
+>, <Line: +    }
+>, <Line: +    public void testResubmissionCollected() throws Exception {
+>, <Line: +        Instrumentation instrumentation = mock(Instrumentation.class);
+>, <Line: +        ClassLoader classLoader = mock(ClassLoader.class);
+>, <Line: +        AgentBuilder.Listener.Resubmitting resubmitting = new AgentBuilder.Listener.Resubmitting(instrumentation);
+>, <Line: +        resubmitting.onError(Foo.class.getName(), classLoader, JavaModule.ofType(Foo.class), false, new Throwable());
+>, <Line: +        classLoader = null; // Make GC eligible.
+>, <Line: +        System.gc();
+>, <Line: +        resubmitting.run();
+>, <Line: +        verifyZeroInteractions(instrumentation);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testResubmissionNonLoadable() throws Exception {
+>, <Line: +        Instrumentation instrumentation = mock(Instrumentation.class);
+>, <Line: +        AgentBuilder.Listener.Resubmitting resubmitting = new AgentBuilder.Listener.Resubmitting(instrumentation);
+>, <Line: +        resubmitting.onError("foo", Foo.class.getClassLoader(), JavaModule.ofType(Foo.class), false, new Throwable());
+>, <Line: +        resubmitting.run();
+>, <Line: +        verifyZeroInteractions(instrumentation);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testResubmissionAlreadyLoaded() throws Exception {
+>, <Line: +        Instrumentation instrumentation = mock(Instrumentation.class);
+>, <Line: +        AgentBuilder.Listener.Resubmitting resubmitting = new AgentBuilder.Listener.Resubmitting(instrumentation);
+>, <Line: +        resubmitting.onError(Foo.class.getName(), Foo.class.getClassLoader(), JavaModule.ofType(Foo.class), true, new Throwable());
+>, <Line: +        resubmitting.run();
+>, <Line: +        verifyZeroInteractions(instrumentation);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testResubmissionSeveralTypes() throws Exception {
+>, <Line: +        Instrumentation instrumentation = mock(Instrumentation.class);
+>, <Line: +        AgentBuilder.Listener.Resubmitting resubmitting = new AgentBuilder.Listener.Resubmitting(instrumentation);
+>, <Line: +        resubmitting.onError(Foo.class.getName(), Foo.class.getClassLoader(), JavaModule.ofType(Foo.class), false, new Throwable());
+>, <Line: +        resubmitting.onError(Bar.class.getName(), Bar.class.getClassLoader(), JavaModule.ofType(Bar.class), false, new Throwable());
+>, <Line: +        resubmitting.onError(Object.class.getName(), Object.class.getClassLoader(), JavaModule.ofType(Object.class), false, new Throwable());
+>, <Line: +        when(instrumentation.isModifiableClass(Foo.class)).thenReturn(true);
+>, <Line: +        when(instrumentation.isModifiableClass(Bar.class)).thenReturn(true);
+>, <Line: +        when(instrumentation.isModifiableClass(Object.class)).thenReturn(true);
+>, <Line: +        resubmitting.run();
+>, <Line: +        verify(instrumentation).isModifiableClass(Foo.class);
+>, <Line: +        verify(instrumentation).isModifiableClass(Bar.class);
+>, <Line: +        verify(instrumentation).isModifiableClass(Object.class);
+>, <Line: +        verify(instrumentation).retransformClasses((Class<?>[]) anyVararg());
+>, <Line: +        verifyNoMoreInteractions(instrumentation);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testLookupKeyBootstrapLoaderReference() throws Exception {
+>, <Line: +        AgentBuilder.Listener.Resubmitting.LookupKey key = new AgentBuilder.Listener.Resubmitting.LookupKey(ClassLoadingStrategy.BOOTSTRAP_LOADER);
+>, <Line: +        assertThat(key.hashCode(), is(0));
+>, <Line: +        AgentBuilder.Listener.Resubmitting.LookupKey other = new AgentBuilder.Listener.Resubmitting.LookupKey(new URLClassLoader(new URL[0]));
+>, <Line: +        System.gc();
+>, <Line: +        assertThat(key, not(is(other)));
+>, <Line: +        assertThat(key, is(new AgentBuilder.Listener.Resubmitting.LookupKey(ClassLoadingStrategy.BOOTSTRAP_LOADER)));
+>, <Line: +        assertThat(key, is((Object) new AgentBuilder.Listener.Resubmitting.StorageKey(ClassLoadingStrategy.BOOTSTRAP_LOADER)));
+>, <Line: +        assertThat(key, not(is((Object) new AgentBuilder.Listener.Resubmitting.StorageKey(new URLClassLoader(new URL[0])))));
+>, <Line: +        assertThat(key, is(key));
+>, <Line: +        assertThat(key, not(is(new Object())));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testLookupKeyNonBootstrapReference() throws Exception {
+>, <Line: +        ClassLoader classLoader = new URLClassLoader(new URL[0]);
+>, <Line: +        AgentBuilder.Listener.Resubmitting.LookupKey key = new AgentBuilder.Listener.Resubmitting.LookupKey(classLoader);
+>, <Line: +        assertThat(key, is(new AgentBuilder.Listener.Resubmitting.LookupKey(classLoader)));
+>, <Line: +        assertThat(key.hashCode(), is(classLoader.hashCode()));
+>, <Line: +        assertThat(key, not(is(new AgentBuilder.Listener.Resubmitting.LookupKey(ClassLoadingStrategy.BOOTSTRAP_LOADER))));
+>, <Line: +        assertThat(key, not(is((Object) new AgentBuilder.Listener.Resubmitting.StorageKey(new URLClassLoader(new URL[0])))));
+>, <Line: +        assertThat(key, is(key));
+>, <Line: +        assertThat(key, not(is(new Object())));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testStorageKeyBootstrapLoaderReference() throws Exception {
+>, <Line: +        AgentBuilder.Listener.Resubmitting.StorageKey key = new AgentBuilder.Listener.Resubmitting.StorageKey(ClassLoadingStrategy.BOOTSTRAP_LOADER);
+>, <Line: +        assertThat(key.isBootstrapLoader(), is(true));
+>, <Line: +        assertThat(key.hashCode(), is(0));
+>, <Line: +        assertThat(key.get(), nullValue(ClassLoader.class));
+>, <Line: +        AgentBuilder.Listener.Resubmitting.StorageKey other = new AgentBuilder.Listener.Resubmitting.StorageKey(new URLClassLoader(new URL[0]));
+>, <Line: +        assertThat(key, not(is(other)));
+>, <Line: +        assertThat(key, is(new AgentBuilder.Listener.Resubmitting.StorageKey(ClassLoadingStrategy.BOOTSTRAP_LOADER)));
+>, <Line: +        assertThat(key, is((Object) new AgentBuilder.Listener.Resubmitting.LookupKey(ClassLoadingStrategy.BOOTSTRAP_LOADER)));
+>, <Line: +        assertThat(key, not(is((Object) new AgentBuilder.Listener.Resubmitting.LookupKey(new URLClassLoader(new URL[0])))));
+>, <Line: +        assertThat(key, is(key));
+>, <Line: +        assertThat(key, not(is(new Object())));
+>, <Line: +    public void testStorageKeyNonBootstrapReference() throws Exception {
+>, <Line: +        AgentBuilder.Listener.Resubmitting.StorageKey key = new AgentBuilder.Listener.Resubmitting.StorageKey(classLoader);
+>, <Line: +        assertThat(key.isBootstrapLoader(), is(false));
+>, <Line: +        assertThat(key, is(new AgentBuilder.Listener.Resubmitting.StorageKey(classLoader)));
+>, <Line: +        assertThat(key.hashCode(), is(classLoader.hashCode()));
+>, <Line: +        assertThat(key.get(), is(classLoader));
+>, <Line: +        assertThat(key.get(), nullValue(ClassLoader.class));
+>, <Line: +        assertThat(key, not(is(new AgentBuilder.Listener.Resubmitting.StorageKey(ClassLoadingStrategy.BOOTSTRAP_LOADER))));
+>, <Line: +        assertThat(key, not(is((Object) new AgentBuilder.Listener.Resubmitting.LookupKey(new URLClassLoader(new URL[0])))));
+>, <Line: +        assertThat(key, is(key));
+>, <Line: +        assertThat(key, not(is(new Object())));
+>, <Line: +        assertThat(key.isBootstrapLoader(), is(false));
+>, <Line: +    }
+>, <Line: +    private static class Foo {
+>, <Line: +        /* empty */
+>, <Line: +    }
+>, <Line: +    private static class Bar {
+>, <Line: +        /* empty */
+>]
+[<Line: -    // TODO: Implement remainding tests
+>, <Line: -    public void testBootstrapLoaderReference() throws Exception {
+>, <Line: -        AgentBuilder.Listener.Resubmitting.ClassLoaderReference classLoaderReference =
+>, <Line: -                new AgentBuilder.Listener.Resubmitting.ClassLoaderReference(ClassLoadingStrategy.BOOTSTRAP_LOADER);
+>, <Line: -        assertThat(classLoaderReference.isBootstrapLoader(), is(true));
+>, <Line: -        assertThat(classLoaderReference.hashCode(), is(0));
+>, <Line: -        assertThat(classLoaderReference.get(), nullValue(ClassLoader.class));
+>, <Line: -        AgentBuilder.Listener.Resubmitting.ClassLoaderReference other =
+>, <Line: -                new AgentBuilder.Listener.Resubmitting.ClassLoaderReference(new URLClassLoader(new URL[0]));
+>, <Line: -        assertThat(classLoaderReference, not(is(other)));
+>, <Line: -        assertThat(classLoaderReference, is(new AgentBuilder.Listener.Resubmitting.ClassLoaderReference(ClassLoadingStrategy.BOOTSTRAP_LOADER)));
+>, <Line: -    public void testNonBootstrapReference() throws Exception {
+>, <Line: -        AgentBuilder.Listener.Resubmitting.ClassLoaderReference classLoaderReference =
+>, <Line: -                new AgentBuilder.Listener.Resubmitting.ClassLoaderReference(classLoader);
+>, <Line: -        assertThat(classLoaderReference.isBootstrapLoader(), is(false));
+>, <Line: -        assertThat(classLoaderReference, is(new AgentBuilder.Listener.Resubmitting.ClassLoaderReference(classLoader)));
+>, <Line: -        assertThat(classLoaderReference.hashCode(), is(classLoader.hashCode()));
+>, <Line: -        assertThat(classLoaderReference.get(), is(classLoader));
+>, <Line: -        assertThat(classLoaderReference.get(), nullValue(ClassLoader.class));
+>, <Line: -        assertThat(classLoaderReference, not(is(new AgentBuilder.Listener.Resubmitting.ClassLoaderReference(ClassLoadingStrategy.BOOTSTRAP_LOADER))));
+>, <Line: -        assertThat(classLoaderReference.isBootstrapLoader(), is(false));
+>]

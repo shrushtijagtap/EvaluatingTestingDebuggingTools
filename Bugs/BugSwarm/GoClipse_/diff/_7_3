@@ -1,0 +1,16 @@
+[<Line: +			execute0();
+>, <Line: +		} catch(CoreException ce) {
+>, <Line: +			handleError(ce);
+>, <Line: +	protected void handleError(CoreException ce) {
+>, <Line: +		handleError(LangCore.createCommonException(ce));
+>, <Line: +	}
+>]
+[<Line: -			execute();
+>, <Line: -	private final void execute() throws CommonException {
+>, <Line: -		try {
+>, <Line: -			execute0();
+>, <Line: -		} catch(CoreException ce) {
+>, <Line: -			throw LangCore.createCommonException(ce);
+>, <Line: -		}
+>, <Line: -	}
+>]

@@ -1,0 +1,4 @@
+[<Line: +            @SuppressFBWarnings(value = "SE_BAD_FIELD", justification = "Fields of enumerations are never serialized")
+>]
+[<Line: -            @SuppressFBWarnings(value = "SE_BAD_FIELD", justification = "Enumerations are not serialized by field")
+>]

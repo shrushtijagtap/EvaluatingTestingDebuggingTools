@@ -1,0 +1,6 @@
+[<Line: +                            <mainClass>com.joyent.manta.benchmark.Benchmark</mainClass>
+>, <Line: +                    <mainClass>com.joyent.manta.benchmark.Benchmark</mainClass>
+>]
+[<Line: -                            <mainClass>com.joyent.manta.Benchmark</mainClass>
+>, <Line: -                    <mainClass>com.joyent.manta.Benchmark</mainClass>
+>]

@@ -1,0 +1,24 @@
+[<Line: +        self._fact_cache = FactCache()
+>, <Line: +        self._nonpersistent_fact_cache = defaultdict(dict)
+>, <Line: +        self._vars_cache = defaultdict(dict)
+>, <Line: +        self._extra_vars = defaultdict(dict)
+>, <Line: +        self._host_vars_files = defaultdict(dict)
+>, <Line: +        self._inventory = None
+>, <Line: +        self._omit_token = '__omit_place_holder__%s' % sha1(os.urandom(64)).hexdigest()
+>, <Line: +            # finally, the facts caches for this host, if it exists
+>, <Line: +                all_vars = combine_vars(all_vars, self._nonpersistent_fact_cache.get(host.name, dict()))
+>, <Line: +            self._nonpersistent_fact_cache[host.name] = facts
+>, <Line: +                self._nonpersistent_fact_cache[host.name].update(facts)
+>, <Line: +                self._nonpersistent_fact_cache[host.name] = facts
+>]
+[<Line: -        self._fact_cache       = FactCache()
+>, <Line: -        self._vars_cache       = defaultdict(dict)
+>, <Line: -        self._extra_vars       = defaultdict(dict)
+>, <Line: -        self._host_vars_files  = defaultdict(dict)
+>, <Line: -        self._inventory        = None
+>, <Line: -        self._omit_token       = '__omit_place_holder__%s' % sha1(os.urandom(64)).hexdigest()
+>, <Line: -            # finally, the facts cache for this host, if it exists
+>, <Line: -            self._fact_cache[host.name] = facts
+>, <Line: -                self._fact_cache[host.name].update(facts)
+>, <Line: -                self._fact_cache[host.name] = facts
+>]

@@ -1,0 +1,6 @@
+[<Line: +package org.mp4parser;
+>, <Line: +    private static final Logger LOG = Logger.getLogger(Version.class.getName());
+>]
+[<Line: -package com.googlecode.mp4parser;
+>, <Line: -    private static final Logger LOG = Logger.getLogger(Version.class.getName());
+>]

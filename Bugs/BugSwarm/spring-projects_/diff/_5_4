@@ -1,0 +1,4 @@
+[<Line: +	public void usesRootMappingOfTargetClassForMethodsOfParent() throws Exception {
+>]
+[<Line: -	public void usesRootMappingOfTargetClassForMethodsOfParen() throws Exception {
+>]

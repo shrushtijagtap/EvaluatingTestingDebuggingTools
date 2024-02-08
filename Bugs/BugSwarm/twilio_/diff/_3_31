@@ -1,0 +1,39 @@
+[<Line: +    private URI announceUrl;
+>, <Line: +    private HttpMethod announceUrlMethod;
+>, <Line: +    /**
+>, <Line: +     * The announce_url.
+>, <Line: +     * 
+>, <Line: +     * @param announceUrl The announce_url
+>, <Line: +     * @return this
+>, <Line: +     */
+>, <Line: +    public ParticipantUpdater setAnnounceUrl(final URI announceUrl) {
+>, <Line: +        this.announceUrl = announceUrl;
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * The announce_url.
+>, <Line: +     * 
+>, <Line: +     * @param announceUrl The announce_url
+>, <Line: +     * @return this
+>, <Line: +     */
+>, <Line: +    public ParticipantUpdater setAnnounceUrl(final String announceUrl) {
+>, <Line: +        return setAnnounceUrl(Promoter.uriFromString(announceUrl));
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * The announce_url_method.
+>, <Line: +     * 
+>, <Line: +     * @param announceUrlMethod The announce_url_method
+>, <Line: +     * @return this
+>, <Line: +     */
+>, <Line: +    public ParticipantUpdater setAnnounceUrlMethod(final HttpMethod announceUrlMethod) {
+>, <Line: +        this.announceUrlMethod = announceUrlMethod;
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +        if (announceUrl != null) {
+>, <Line: +            request.addPostParam("AnnounceUrl", announceUrl.toString());
+>, <Line: +        }
+>, <Line: +        if (announceUrlMethod != null) {
+>, <Line: +            request.addPostParam("AnnounceUrlMethod", announceUrlMethod.toString());
+>, <Line: +        }
+>]
+[]

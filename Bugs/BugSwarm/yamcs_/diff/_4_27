@@ -1,0 +1,23 @@
+[<Line: +    public void listTags(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, responseb.build(), SchemaRest.ListTagsResponse.WRITE);
+>, <Line: +    public void getTag(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, tag, SchemaYamcs.ArchiveTag.WRITE);
+>, <Line: +    public void createTag(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, newTag, SchemaYamcs.ArchiveTag.WRITE);
+>, <Line: +    public void updateTag(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, updatedTag, SchemaYamcs.ArchiveTag.WRITE);
+>, <Line: +    public void deleteTag(RestRequest req, TagDb tagDb, long tagTime, int tagId) throws HttpException {
+>, <Line: +        sendOK(req, deletedTag, SchemaYamcs.ArchiveTag.WRITE);
+>]
+[<Line: -import io.netty.channel.ChannelFuture;
+>, <Line: -    public ChannelFuture listTags(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, responseb.build(), SchemaRest.ListTagsResponse.WRITE);
+>, <Line: -    public ChannelFuture getTag(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, tag, SchemaYamcs.ArchiveTag.WRITE);
+>, <Line: -    public ChannelFuture createTag(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, newTag, SchemaYamcs.ArchiveTag.WRITE);
+>, <Line: -    public ChannelFuture updateTag(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, updatedTag, SchemaYamcs.ArchiveTag.WRITE);
+>, <Line: -    public ChannelFuture deleteTag(RestRequest req, TagDb tagDb, long tagTime, int tagId) throws HttpException {
+>, <Line: -        return sendOK(req, deletedTag, SchemaYamcs.ArchiveTag.WRITE);
+>]

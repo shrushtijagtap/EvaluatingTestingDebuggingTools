@@ -1,0 +1,6 @@
+[<Line: +import melnorme.lang.ide.core.text.TextSourceUtils;
+>, <Line: +		return TextSourceUtils.isPrefix(prefix, rplString, true);
+>]
+[<Line: -import melnorme.lang.ide.core.text.TextUtils;
+>, <Line: -		return TextUtils.isPrefix(prefix, rplString, true);
+>]

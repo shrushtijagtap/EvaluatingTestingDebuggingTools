@@ -1,0 +1,9 @@
+[<Line: +import javax.swing.JFrame;
+>, <Line: +    public static Task install(JFrame parFrame, final File input, final IMinecraftService service, final String idFUCK) {
+>, <Line: +                int result = JOptionPane.showOptionDialog(parFrame, msgs, (String) msgs[0], JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+>, <Line: +                    c.add(service.download().downloadMinecraftJar(mv, new File(nowFile, id + ".jar")));
+>]
+[<Line: -    public static Task install(final File input, final IMinecraftService service, final String idFUCK) {
+>, <Line: -                int result = JOptionPane.showOptionDialog(null, msgs, (String) msgs[0], JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+>, <Line: -                    c.add(service.download().downloadMinecraftJarTo(mv, new File(nowFile, id + ".jar")));
+>]

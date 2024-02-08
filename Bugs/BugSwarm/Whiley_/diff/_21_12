@@ -1,0 +1,74 @@
+[<Line: +	public static Quantify Quantify(
+>, <Line: +			int startOperand, int endOperand, int indexOperand,
+>, <Line: +		return new Quantify(startOperand, endOperand, indexOperand,
+>, <Line: +	public static Quantify Quantify(
+>, <Line: +			int startOperand, int endOperand, int indexOperand, int[] modifiedOperands,
+>, <Line: +		return new Quantify(startOperand, endOperand, indexOperand,
+>, <Line: +		BITWISEOR(5) {
+>, <Line: +		BITWISEXOR(6) {
+>, <Line: +		BITWISEAND(7) {
+>, <Line: +		LEFTSHIFT(8) {
+>, <Line: +		RIGHTSHIFT(9) {
+>, <Line: +		public final int startOperand;
+>, <Line: +		public final int endOperand;
+>, <Line: +		private Quantify(int startOperand,int endOperand,
+>, <Line: +			this.startOperand = startOperand;
+>, <Line: +			this.endOperand = endOperand;
+>, <Line: +		private Quantify(int startOperand, int endOperand, int indexOperand,
+>, <Line: +				int[] modifies, Code[] bytecodes) {
+>, <Line: +			this.startOperand = startOperand;
+>, <Line: +			this.endOperand = endOperand;
+>, <Line: +			registers.add(startOperand);
+>, <Line: +			registers.add(endOperand);
+>, <Line: +			Integer nStartOperand = binding.get(startOperand);
+>, <Line: +			Integer nEndOperand = binding.get(endOperand);
+>, <Line: +			if (nStartOperand != null || nEndOperand != null || nIndexOperand != null
+>, <Line: +				nStartOperand = nStartOperand != null ? nStartOperand
+>, <Line: +						: startOperand;
+>, <Line: +				nEndOperand = nEndOperand != null ? nEndOperand
+>, <Line: +						: endOperand;
+>, <Line: +				return Quantify(nStartOperand, nEndOperand, nIndexOperand,
+>, <Line: +			return super.hashCode() + startOperand + endOperand + indexOperand
+>, <Line: +				return startOperand == f.startOperand
+>, <Line: +						&& endOperand == f.endOperand
+>, <Line: +			return "quantify %" + indexOperand + " in %" + startOperand + "..%"
+>, <Line: +					+ endOperand + arrayToString(modifiedOperands);
+>]
+[<Line: -	public static Quantify Quantify(Type.EffectiveList type,
+>, <Line: -			int sourceOperand, int indexOperand,
+>, <Line: -		return new Quantify(type, sourceOperand, indexOperand,
+>, <Line: -	public static Quantify Quantify(Type.EffectiveList type,
+>, <Line: -			int sourceOperand, int indexOperand, int[] modifiedOperands,
+>, <Line: -		return new Quantify(type, sourceOperand, indexOperand,
+>, <Line: -		RANGE(5) {
+>, <Line: -			public String toString() {
+>, <Line: -				return "range";
+>, <Line: -			}
+>, <Line: -		},
+>, <Line: -		BITWISEOR(6) {
+>, <Line: -		BITWISEXOR(7) {
+>, <Line: -		BITWISEAND(8) {
+>, <Line: -		LEFTSHIFT(9) {
+>, <Line: -		RIGHTSHIFT(10) {
+>, <Line: -	 * <li><i>range</i></li>
+>, <Line: -		public final int sourceOperand;
+>, <Line: -		public final Type.EffectiveList type;
+>, <Line: -		private Quantify(Type.EffectiveList type, int sourceOperand,
+>, <Line: -			this.type = type;
+>, <Line: -			this.sourceOperand = sourceOperand;
+>, <Line: -		private Quantify(Type.EffectiveList type, int sourceOperand,
+>, <Line: -				int indexOperand, int[] modifies, Code[] bytecodes) {
+>, <Line: -			this.type = type;
+>, <Line: -			this.sourceOperand = sourceOperand;
+>, <Line: -			registers.add(sourceOperand);
+>, <Line: -			Integer nSourceOperand = binding.get(sourceOperand);
+>, <Line: -			if (nSourceOperand != null || nIndexOperand != null
+>, <Line: -				nSourceOperand = nSourceOperand != null ? nSourceOperand
+>, <Line: -						: sourceOperand;
+>, <Line: -				return Quantify(type, nSourceOperand, nIndexOperand,
+>, <Line: -			return super.hashCode() + sourceOperand + indexOperand
+>, <Line: -				return type.equals(f.type)
+>, <Line: -						&& sourceOperand == f.sourceOperand
+>, <Line: -			return "quantify %" + indexOperand + " in %" + sourceOperand + " "
+>, <Line: -					+ arrayToString(modifiedOperands) + " : " + type;
+>]

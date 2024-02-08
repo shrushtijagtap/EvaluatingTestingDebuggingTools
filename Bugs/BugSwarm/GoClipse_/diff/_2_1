@@ -1,0 +1,16 @@
+[<Line: +import java.util.Optional;
+>, <Line: +import java.util.function.Supplier;
+>, <Line: +	public VariablesResolver getVariablesManager(Optional<IProject> project) {
+>, <Line: +	protected void setupVariableResolver(VariablesResolver variablesResolver, Optional<IProject> project) {
+>, <Line: +		Supplier<String> sdkToolPath;
+>, <Line: +		if(project.isPresent()) {
+>, <Line: +			sdkToolPath = ToolchainPreferences.SDK_PATH2.getProperty(project.get());
+>, <Line: +		} else {
+>, <Line: +			sdkToolPath = ToolchainPreferences.SDK_PATH2.getGlobalPreference();
+>, <Line: +		}
+>, <Line: +			sdkToolPath)
+>]
+[<Line: -	public VariablesResolver getVariablesManager(IProject project) {
+>, <Line: -	protected void setupVariableResolver(VariablesResolver variablesResolver, IProject project) {
+>, <Line: -			ToolchainPreferences.SDK_PATH2.getProperty(project))
+>]

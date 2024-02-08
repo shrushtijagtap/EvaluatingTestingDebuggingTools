@@ -1,0 +1,26 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.filter;
+>, <Line: -/**
+>, <Line: - * Filter for {@link FlaggedVariant} objects, designed as a sink.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - */
+>, <Line: -public interface VariantContextFilter {
+>, <Line: -	/**
+>, <Line: -	 * Put a Variant Context into the filter.
+>, <Line: -	 *
+>, <Line: -	 * @param vc
+>, <Line: -	 *            {@link FlaggedVariant} to put into the filter.
+>, <Line: -	 * @throws FilterException
+>, <Line: -	 *             on problems during the filtration
+>, <Line: -	 */
+>, <Line: -	public void put(FlaggedVariant vc) throws FilterException;
+>, <Line: -	/**
+>, <Line: -	 * Mark processing as done, no more variants will come in.
+>, <Line: -	 *
+>, <Line: -	 * @throws FilterException
+>, <Line: -	 *             on problems during the filtration
+>, <Line: -	 */
+>, <Line: -	public void finish() throws FilterException;
+>, <Line: -}
+>]

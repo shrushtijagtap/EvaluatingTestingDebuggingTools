@@ -1,0 +1,19 @@
+[<Line: +import org.kairosdb.core.KairosFeatureProcessor;
+>, <Line: +import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+>, <Line: +import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
+>, <Line: +import static javax.ws.rs.core.Response.Status.NOT_FOUND;
+>, <Line: +import static javax.ws.rs.core.Response.Status.NO_CONTENT;
+>, <Line: +import static javax.ws.rs.core.Response.Status.OK;
+>, <Line: +import static org.mockito.Mockito.anyCollection;
+>, <Line: +import static org.mockito.Mockito.doThrow;
+>, <Line: +import static org.mockito.Mockito.mock;
+>, <Line: +import static org.mockito.Mockito.times;
+>, <Line: +import static org.mockito.Mockito.verify;
+>, <Line: +import static org.mockito.Mockito.when;
+>, <Line: +		queryParser = new QueryParser(new KairosFeatureProcessor(new TestAggregatorFactory(), new TestGroupByFactory()),
+>]
+[<Line: -import org.kairosdb.core.KairosQueryProcessingChain;
+>, <Line: -import static javax.ws.rs.core.Response.Status.*;
+>, <Line: -import static org.mockito.Mockito.*;
+>, <Line: -		queryParser = new QueryParser(new KairosQueryProcessingChain(new TestAggregatorFactory(), new TestGroupByFactory()),
+>]

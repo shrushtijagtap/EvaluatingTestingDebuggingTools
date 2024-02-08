@@ -1,0 +1,19 @@
+[<Line: +    private static final long serialVersionUID = 16937856072206L;
+>, <Line: +    private final String locality;
+>, <Line: +                  @JsonProperty("locality")
+>, <Line: +                  final String locality, 
+>, <Line: +        this.locality = locality;
+>, <Line: +    /**
+>, <Line: +     * Returns The The locality.
+>, <Line: +     * 
+>, <Line: +     * @return The locality
+>, <Line: +     */
+>, <Line: +    public final String getLocality() {
+>, <Line: +        return this.locality;
+>, <Line: +    }
+>, <Line: +               Objects.equals(locality, other.locality) && 
+>, <Line: +                            locality,
+>, <Line: +                          .add("locality", locality)
+>]
+[<Line: -    private static final long serialVersionUID = 250162359733040L;
+>]

@@ -1,0 +1,24 @@
+[<Line: +//	private final OClass filler;
+>, <Line: +//	private static final OntologyFactory ontFactory = OntologyFactoryImpl.getInstance();
+>, <Line: +	public TreeWitnessGenerator(TBoxReasoner reasoner, ObjectPropertyExpression property/*, OClass filler*/) {
+>, <Line: +//		this.filler = filler;
+>, <Line: +						twg = new TreeWitnessGenerator(reasoner, some.getProperty());			
+>, <Line: +		return subc.contains(existsRinv); // || subc.contains(filler);
+>, <Line: +		return subc.subsumes(existsRinv); // || subc.subsumes(filler);
+>, <Line: +		return "tw-generator E" + property.toString(); // + "." + filler.toString();
+>, <Line: +		return property.hashCode(); // ^ filler.hashCode();
+>, <Line: +			return this.property.equals(o.property); // && this.filler.equals(o.filler));		
+>]
+[<Line: -import it.unibz.krdb.obda.ontology.OntologyFactory;
+>, <Line: -import it.unibz.krdb.obda.ontology.impl.OntologyFactoryImpl;
+>, <Line: -	private final OClass filler;
+>, <Line: -	private static final OntologyFactory ontFactory = OntologyFactoryImpl.getInstance();
+>, <Line: -	public TreeWitnessGenerator(TBoxReasoner reasoner, ObjectPropertyExpression property, OClass filler) {
+>, <Line: -		this.filler = filler;
+>, <Line: -						twg = new TreeWitnessGenerator(reasoner, some.getProperty(), ontFactory.getThing());			
+>, <Line: -		return subc.contains(existsRinv) || subc.contains(filler);
+>, <Line: -		return subc.subsumes(existsRinv) || subc.subsumes(filler);
+>, <Line: -		return "tw-generator E" + property.toString() + "." + filler.toString();
+>, <Line: -		return property.hashCode() ^ filler.hashCode();
+>, <Line: -			return (this.property.equals(o.property) && this.filler.equals(o.filler));		
+>]

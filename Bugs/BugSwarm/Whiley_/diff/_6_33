@@ -1,0 +1,127 @@
+[]
+[<Line: -// Copyright (c) 2014, David J. Pearce (djp@ecs.vuw.ac.nz)
+>, <Line: -// All rights reserved.
+>, <Line: -//
+>, <Line: -// Redistribution and use in source and binary forms, with or without
+>, <Line: -// modification, are permitted provided that the following conditions are met:
+>, <Line: -//    * Redistributions of source code must retain the above copyright
+>, <Line: -//      notice, this list of conditions and the following disclaimer.
+>, <Line: -//    * Redistributions in binary form must reproduce the above copyright
+>, <Line: -//      notice, this list of conditions and the following disclaimer in the
+>, <Line: -//      documentation and/or other materials provided with the distribution.
+>, <Line: -//    * Neither the name of the <organization> nor the
+>, <Line: -//      names of its contributors may be used to endorse or promote products
+>, <Line: -//      derived from this software without specific prior written permission.
+>, <Line: -//
+>, <Line: -// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+>, <Line: -// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+>, <Line: -// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+>, <Line: -// DISCLAIMED. IN NO EVENT SHALL DAVID J. PEARCE BE LIABLE FOR ANY
+>, <Line: -// DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+>, <Line: -// (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+>, <Line: -// LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+>, <Line: -// ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+>, <Line: -// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+>, <Line: -// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+>, <Line: -package wyil.attributes;
+>, <Line: -import java.util.List;
+>, <Line: -import wyil.attributes.VariableDeclarations.Declaration;
+>, <Line: -import wyil.lang.Attribute;
+>, <Line: -import wyil.lang.Type;
+>, <Line: -/**
+>, <Line: - * <p>
+>, <Line: - * Provides the declaration information for each register within a given WyIL
+>, <Line: - * bytecode block. This includes declared <i>types</i>, <i>names</i> and
+>, <Line: - * <i>constraints</i>.
+>, <Line: - * </p>
+>, <Line: - *
+>, <Line: - * <p>
+>, <Line: - * Declared type information is typically taken directly from the variable
+>, <Line: - * declarations in the source language. However, in some cases, they may be
+>, <Line: - * inferred from those declarations. For example, consider the following Whiley
+>, <Line: - * code snippet:
+>, <Line: - * </p>
+>, <Line: - *
+>, <Line: - * <pre>
+>, <Line: - * function f(int x, int y) => int:
+>, <Line: - *    x = x + (y * 2)
+>, <Line: - *    return x
+>, <Line: - * </pre>
+>, <Line: - *
+>, <Line: - * This might generate the following WyIL bytecode:
+>, <Line: - *
+>, <Line: - * <pre>
+>, <Line: - * const %2 = 2
+>, <Line: - * mul %3 = %1, %2
+>, <Line: - * add %0 = %0, %3
+>, <Line: - * return %0
+>, <Line: - * </pre>
+>, <Line: - *
+>, <Line: - * <p>
+>, <Line: - * Here, the local variables <code>%0</code> and <code>%1</code> will have
+>, <Line: - * declared types in the originating source file. However, the registers
+>, <Line: - * <code>%2</code> and <code>%3</code> will not. Nevertheless, their types can
+>, <Line: - * be inferred from the source expressions which gave rise to them.
+>, <Line: - * </p>
+>, <Line: - *
+>, <Line: - * <p>
+>, <Line: - * The declared information associated with each variable also include an optional
+>, <Line: - * constraint. As before, such information is
+>, <Line: - * either taken directly from the originating source code, or inferred from it
+>, <Line: - * in some way. In this case, however, inferring such information is
+>, <Line: - * challenging. For example, a simple approach for integer variables might be to
+>, <Line: - * employ an <i>integer range analysis</i> to constraint the possible bounds of
+>, <Line: - * any integer variables.
+>, <Line: - * </p>
+>, <Line: - * <p>
+>, <Line: - * Finally, each declaration can include an optional <i>variable name</i>. The
+>, <Line: - * intention here is to retain useful identifying information from the original
+>, <Line: - * source file, to help with debugging and/or error reporting.
+>, <Line: - * </p>
+>, <Line: - *
+>, <Line: - * @author David J. Pearce
+>, <Line: - *
+>, <Line: - */
+>, <Line: -public class VariableDeclarations implements Attribute {
+>, <Line: -	private Declaration[] declarations;
+>, <Line: -	public VariableDeclarations(Declaration... declarations) {
+>, <Line: -		this.declarations = declarations;
+>, <Line: -	}
+>, <Line: -	public VariableDeclarations(List<Declaration> declarations) {
+>, <Line: -		this.declarations = declarations.toArray(new Declaration[declarations.size()]);
+>, <Line: -	}
+>, <Line: -	public Declaration get(int register) {
+>, <Line: -		return declarations[register];
+>, <Line: -	}
+>, <Line: -	public void set(int register, Declaration declaration) {
+>, <Line: -		declarations[register] = declaration;
+>, <Line: -	}
+>, <Line: -	public int size() {
+>, <Line: -		return declarations.length;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Represents the declaration information associated with a given register.
+>, <Line: -	 *
+>, <Line: -	 * @author David J. Pearce
+>, <Line: -	 *
+>, <Line: -	 */
+>, <Line: -	public static class Declaration {
+>, <Line: -		private final Type type;
+>, <Line: -		// private final AttributableBlock constraint ?
+>, <Line: -		private final String name;
+>, <Line: -		public Declaration(Type type, String name) {
+>, <Line: -			this.type = type;
+>, <Line: -			this.name = name;
+>, <Line: -		}
+>, <Line: -		public Type type() {
+>, <Line: -			return type;
+>, <Line: -		}
+>, <Line: -		public String name() {
+>, <Line: -			return name;
+>, <Line: -		}
+>, <Line: -		public String toString() {
+>, <Line: -			return type + " " + name;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -}
+>]

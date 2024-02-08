@@ -1,0 +1,38 @@
+[<Line: +/*
+>, <Line: + * Copyright 2017 Anton Tananaev (anton@traccar.org)
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *     http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package org.traccar.protocol;
+>, <Line: +import org.jboss.netty.bootstrap.ServerBootstrap;
+>, <Line: +import org.jboss.netty.channel.ChannelPipeline;
+>, <Line: +import org.traccar.BaseProtocol;
+>, <Line: +import org.traccar.TrackerServer;
+>, <Line: +import java.util.List;
+>, <Line: +public class Gps056Protocol extends BaseProtocol {
+>, <Line: +    public Gps056Protocol() {
+>, <Line: +        super("gps056");
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void initTrackerServers(List<TrackerServer> serverList) {
+>, <Line: +        serverList.add(new TrackerServer(new ServerBootstrap(), getName()) {
+>, <Line: +            @Override
+>, <Line: +            protected void addSpecificHandlers(ChannelPipeline pipeline) {
+>, <Line: +                pipeline.addLast("frameDecoder", new Gps056FrameDecoder());
+>, <Line: +                pipeline.addLast("objectDecoder", new Gps056ProtocolDecoder(Gps056Protocol.this));
+>, <Line: +            }
+>, <Line: +        });
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

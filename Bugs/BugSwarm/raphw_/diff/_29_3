@@ -1,0 +1,6 @@
+[<Line: +import net.bytebuddy.ByteBuddy;
+>, <Line: +import static net.bytebuddy.matcher.ElementMatchers.named;
+>, <Line: +        new ByteBuddy().redefine(FooBarQuxBaz.class).method(named("bar")).intercept(FixedValue.self()).make();
+>]
+[<Line: -        implement(FooBarQuxBaz.class, FixedValue.self());
+>]

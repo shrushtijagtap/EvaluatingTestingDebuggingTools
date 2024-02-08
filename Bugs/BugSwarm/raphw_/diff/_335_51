@@ -1,0 +1,4 @@
+[<Line: +        when(namedElement.getActualName()).thenReturn(FOO);
+>]
+[<Line: -        when(namedElement.getSourceCodeName()).thenReturn(FOO);
+>]

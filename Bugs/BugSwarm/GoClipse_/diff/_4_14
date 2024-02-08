@@ -1,0 +1,38 @@
+[]
+[<Line: -/*******************************************************************************
+>, <Line: - * Copyright (c) 2015 Bruno Medeiros and other Contributors.
+>, <Line: - * All rights reserved. This program and the accompanying materials
+>, <Line: - * are made available under the terms of the Eclipse Public License v1.0
+>, <Line: - * which accompanies this distribution, and is available at
+>, <Line: - * http://www.eclipse.org/legal/epl-v10.html
+>, <Line: - *
+>, <Line: - * Contributors:
+>, <Line: - *     Bruno Medeiros - initial API and implementation
+>, <Line: - *******************************************************************************/
+>, <Line: -package LANG_PROJECT_ID.ide.core.engine;
+>, <Line: -import melnorme.lang.ide.core.engine.SourceModelManager;
+>, <Line: -import melnorme.lang.tooling.ElementAttributes;
+>, <Line: -import melnorme.lang.tooling.ast.SourceRange;
+>, <Line: -import melnorme.lang.tooling.structure.SourceFileStructure;
+>, <Line: -import melnorme.lang.tooling.structure.StructureElement;
+>, <Line: -import melnorme.lang.tooling.structure.StructureElementKind;
+>, <Line: -import melnorme.utilbox.collections.ArrayList2;
+>, <Line: -import melnorme.utilbox.misc.Location;
+>, <Line: -public class LANGUAGE_SourceModelManager extends SourceModelManager {
+>, <Line: -	public LANGUAGE_SourceModelManager() {
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	protected StructureUpdateTask createUpdateTask(StructureInfo structureInfo, String source) {
+>, <Line: -		return new StructureUpdateTask(structureInfo) {
+>, <Line: -			@Override
+>, <Line: -			protected SourceFileStructure createNewData() {
+>, <Line: -				Location location = structureInfo.getLocation();
+>, <Line: -				SourceRange sr = new SourceRange(0, source.length());
+>, <Line: -				StructureElement element = new StructureElement("NOT_IMPLEMENTED", sr, sr, 
+>, <Line: -					StructureElementKind.MODULEDEC, new ElementAttributes(null), null, null);
+>, <Line: -				return new SourceFileStructure(location, new ArrayList2<StructureElement>(element), null);
+>, <Line: -			}
+>, <Line: -		};
+>, <Line: -	}
+>, <Line: -}
+>]

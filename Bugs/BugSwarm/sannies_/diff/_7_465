@@ -1,0 +1,80 @@
+[<Line: +package org.mp4parser.muxer;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.*;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.GroupEntry;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.SampleGroupDescriptionBox;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.SampleToGroupBox;
+>, <Line: +import org.mp4parser.muxer.samples.SampleList;
+>, <Line: +import org.mp4parser.tools.Mp4Arrays;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +import static org.mp4parser.tools.CastUtils.l2i;
+>, <Line: +     * @param trackId      ID of the track to extract
+>, <Line: +     * @param isofile      the parsed MP4 file
+>, <Line: +     * @param randomAccess the RandomAccessSource to read the samples from
+>, <Line: +     * @param name         an arbitrary naem to identify track later - e.g. filename
+>, <Line: +    public Mp4TrackImpl(final long trackId, Container isofile, RandomAccessSource randomAccess, String name) {
+>, <Line: +        samples = new SampleList(trackId, isofile, randomAccess);
+>, <Line: +        TrackBox trackBox = null;
+>, <Line: +        for (TrackBox box : Path.<TrackBox>getPaths(isofile, "moov/trak")) {
+>, <Line: +            if (box.getTrackHeaderBox().getTrackId() == trackId) {
+>, <Line: +                trackBox = box;
+>, <Line: +                break;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        assert trackBox != null : "Could not find TrackBox with trackID " + trackId;
+>, <Line: +        movieFragmentBoxes.addAll(isofile.getBoxes(MovieFragmentBox.class));
+>, <Line: +        final List<MovieExtendsBox> movieExtendsBoxes = Path.getPaths(isofile, "moov/mvex");
+>, <Line: +                        List<SubSampleInformationBox> subss = Path.getPaths(isofile, "moof/traf/subs");
+>, <Line: +                                        final TrackFragmentHeaderBox tfhd = traf.getTrackFragmentHeaderBox();
+>, <Line: +            for (MovieFragmentBox movieFragmentBox : movieFragmentBoxes) {
+>, <Line: +                for (TrackFragmentBox traf : movieFragmentBox.getBoxes(TrackFragmentBox.class)) {
+>, <Line: +                    if (traf.getTrackFragmentHeaderBox().getTrackId() == trackId) {
+>, <Line: +                        sampleGroups = getSampleGroups(
+>, <Line: +                                stbl.getBoxes(SampleGroupDescriptionBox.class),
+>, <Line: +                                Path.<SampleGroupDescriptionBox>getPaths((Container) traf, "sgpd"),
+>, <Line: +                                Path.<SampleToGroupBox>getPaths((Container) traf, "sbgp"), sampleGroups, 0);
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        MovieHeaderBox mvhd = Path.getPath(isofile, "moov/mvhd");
+>, <Line: +            assert mvhd != null;
+>]
+[<Line: -package com.googlecode.mp4parser.authoring;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.*;
+>, <Line: -import com.coremedia.iso.boxes.fragment.*;
+>, <Line: -import com.coremedia.iso.boxes.mdat.SampleList;
+>, <Line: -import com.googlecode.mp4parser.BasicContainer;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.GroupEntry;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.SampleGroupDescriptionBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.SampleToGroupBox;
+>, <Line: -import com.googlecode.mp4parser.util.Mp4Arrays;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: -    TrackBox trackBox;
+>, <Line: -    IsoFile[] fragments;
+>, <Line: -     * @param name      a name for the track for better identification
+>, <Line: -     * @param trackBox  the <code>TrackBox</code> describing the track.
+>, <Line: -     * @param fragments additional fragments if located in more than a single file
+>, <Line: -    public Mp4TrackImpl(String name, TrackBox trackBox, IsoFile... fragments) {
+>, <Line: -        this.trackBox = trackBox;
+>, <Line: -        final long trackId = trackBox.getTrackHeaderBox().getTrackId();
+>, <Line: -        samples = new SampleList(trackBox, fragments);
+>, <Line: -        movieFragmentBoxes.addAll(((Box) trackBox.getParent()).getParent().getBoxes(MovieFragmentBox.class));
+>, <Line: -        for (IsoFile fragment : fragments) {
+>, <Line: -            movieFragmentBoxes.addAll(fragment.getBoxes(MovieFragmentBox.class));
+>, <Line: -        }
+>, <Line: -        final List<MovieExtendsBox> movieExtendsBoxes = trackBox.getParent().getBoxes(MovieExtendsBox.class);
+>, <Line: -                        List<SubSampleInformationBox> subss = Path.getPaths(((Box) trackBox.getParent()).getParent(), "/moof/traf/subs");
+>, <Line: -                                        final TrackFragmentHeaderBox tfhd = ((TrackFragmentBox) trun.getParent()).getTrackFragmentHeaderBox();
+>, <Line: -        MovieHeaderBox mvhd = Path.getPath(trackBox, "../mvhd");
+>, <Line: -        Container c = trackBox.getParent();
+>, <Line: -        if (c instanceof BasicContainer) {
+>, <Line: -            ((BasicContainer) c).close();
+>, <Line: -        }
+>, <Line: -        if (fragments != null) {
+>, <Line: -            for (IsoFile fragment : fragments) {
+>, <Line: -                fragment.close();
+>, <Line: -            }
+>, <Line: -        }
+>]

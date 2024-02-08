@@ -1,0 +1,55 @@
+[<Line: +import it.unibz.krdb.obda.ontology.DataPropertyExpression;
+>, <Line: +import it.unibz.krdb.obda.ontology.impl.DatatypeImpl;
+>, <Line: +    private Ontology onto;
+>, <Line: +        Ontology ontology = OWLAPI3TranslatorUtility.loadOntologyFromFile(owlfile);
+>, <Line: +    	onto = load_onto(ontoname);
+>, <Line: +    	return TBoxReasonerImpl.create(onto);
+>, <Line: +                    	if (onto.getVocabulary().containsObjectProperty(uri)) {
+>, <Line: +                        	ObjectPropertyExpression prop = onto.getVocabulary().getObjectProperty(uri);
+>, <Line: +                        	if (inverse)
+>, <Line: +                        		prop = prop.getInverse();
+>, <Line: +                            description = prop.getDomain();
+>, <Line: +                    	}
+>, <Line: +                    	else {
+>, <Line: +                    		DataPropertyExpression prop = onto.getVocabulary().getDataProperty(uri);
+>, <Line: +                    		description = prop.getDomainRestriction(DatatypeImpl.rdfsLiteral);
+>, <Line: +                    	}
+>, <Line: +                        description = onto.getVocabulary().getClass(uri);
+>, <Line: +                } 
+>, <Line: +                else {
+>, <Line: +                	if (onto.getVocabulary().containsObjectProperty(uri)) {	
+>, <Line: +                    	ObjectPropertyExpression prop = onto.getVocabulary().getObjectProperty(uri);
+>, <Line: +                        if (inverse)
+>, <Line: +                        	description = prop.getInverse();
+>, <Line: +                        else
+>, <Line: +                        	description = prop;
+>, <Line: +                	}
+>, <Line: +                	else {
+>, <Line: +                		description = onto.getVocabulary().getDataProperty(uri);
+>, <Line: +                	}
+>]
+[<Line: -import it.unibz.krdb.obda.ontology.OntologyFactory;
+>, <Line: -import it.unibz.krdb.obda.ontology.impl.OntologyFactoryImpl;
+>, <Line: -import org.semanticweb.owlapi.apibinding.OWLManager;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntologyManager;
+>, <Line: -    public OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+>, <Line: -    private final  OntologyFactory descFactory = OntologyFactoryImpl.getInstance();
+>, <Line: -        OWLOntology owlOntology = manager.loadOntologyFromOntologyDocument(new File(owlfile));
+>, <Line: -        Ontology ontology = OWLAPI3TranslatorUtility.translate(owlOntology);
+>, <Line: -    	return new TBoxReasonerImpl(load_onto(ontoname));
+>, <Line: -        //return DAGBuilder.getDAG(load_onto(ontoname));
+>, <Line: -                    	// TODO: check whether object properties are enough
+>, <Line: -                    	ObjectPropertyExpression prop = descFactory.createObjectProperty(uri);
+>, <Line: -                    	if (inverse)
+>, <Line: -                    		prop = prop.getInverse();
+>, <Line: -                        description = prop.getDomain();
+>, <Line: -                        description = descFactory.createClass(uri);
+>, <Line: -                } else {
+>, <Line: -                	// TODO: check whether object properties are enough
+>, <Line: -                	ObjectPropertyExpression prop = descFactory.createObjectProperty(uri);
+>, <Line: -                    if (inverse)
+>, <Line: -                    	description = prop.getInverse();
+>, <Line: -                    else
+>, <Line: -                    	description = prop;
+>]

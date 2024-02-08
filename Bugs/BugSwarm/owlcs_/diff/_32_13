@@ -1,0 +1,11 @@
+[<Line: +public class KRSS2OntologyFormat extends org.semanticweb.owlapi.formats.KRSS2DocumentFormat
+>, <Line: +    implements OWLOntologyFormat {
+>, <Line: +        return ((Boolean) getParameter(IGNORE_ONTOLOGYURI, Boolean.FALSE)).booleanValue();
+>, <Line: +        setParameter(IGNORE_ONTOLOGYURI, Boolean.valueOf(ignore));
+>]
+[<Line: -public class KRSS2OntologyFormat extends
+>, <Line: -        org.semanticweb.owlapi.formats.KRSS2DocumentFormat implements
+>, <Line: -        OWLOntologyFormat {
+>, <Line: -        return (Boolean) getParameter(IGNORE_ONTOLOGYURI, false);
+>, <Line: -        setParameter(IGNORE_ONTOLOGYURI, ignore);
+>]

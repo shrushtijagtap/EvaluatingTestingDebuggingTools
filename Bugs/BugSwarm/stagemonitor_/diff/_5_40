@@ -1,0 +1,336 @@
+[]
+[<Line: -{
+>, <Line: -	"title": "Recent Requests",
+>, <Line: -	"services": {
+>, <Line: -		"query": {
+>, <Line: -			"list": {
+>, <Line: -				"0": {
+>, <Line: -					"query": "",
+>, <Line: -					"alias": "",
+>, <Line: -					"color": "#7EB26D",
+>, <Line: -					"id": 0,
+>, <Line: -					"pin": false,
+>, <Line: -					"type": "lucene",
+>, <Line: -					"enable": true
+>, <Line: -				}
+>, <Line: -			},
+>, <Line: -			"ids": [0]
+>, <Line: -		},
+>, <Line: -		"filter": {
+>, <Line: -			"list": {
+>, <Line: -				"0": {
+>, <Line: -					"type": "time",
+>, <Line: -					"field": "@timestamp",
+>, <Line: -					"from": "now-1h",
+>, <Line: -					"to": "now",
+>, <Line: -					"mandate": "must",
+>, <Line: -					"active": true,
+>, <Line: -					"alias": "",
+>, <Line: -					"id": 0
+>, <Line: -				}
+>, <Line: -			},
+>, <Line: -			"ids": [0]
+>, <Line: -		}
+>, <Line: -	},
+>, <Line: -	"rows": [
+>, <Line: -		{
+>, <Line: -			"title": "Graph",
+>, <Line: -			"height": "300px",
+>, <Line: -			"editable": true,
+>, <Line: -			"collapse": false,
+>, <Line: -			"collapsable": true,
+>, <Line: -			"panels": [
+>, <Line: -				{
+>, <Line: -					"span": 9,
+>, <Line: -					"editable": true,
+>, <Line: -					"group": ["default"],
+>, <Line: -					"type": "histogram",
+>, <Line: -					"mode": "total",
+>, <Line: -					"time_field": "@timestamp",
+>, <Line: -					"value_field": "executionTime",
+>, <Line: -					"auto_int": true,
+>, <Line: -					"resolution": 100,
+>, <Line: -					"interval": "30s",
+>, <Line: -					"fill": 3,
+>, <Line: -					"linewidth": 3,
+>, <Line: -					"timezone": "browser",
+>, <Line: -					"spyable": true,
+>, <Line: -					"zoomlinks": true,
+>, <Line: -					"bars": true,
+>, <Line: -					"stack": true,
+>, <Line: -					"points": false,
+>, <Line: -					"lines": false,
+>, <Line: -					"legend": true,
+>, <Line: -					"x-axis": true,
+>, <Line: -					"y-axis": true,
+>, <Line: -					"percentage": false,
+>, <Line: -					"interactive": true,
+>, <Line: -					"queries": {
+>, <Line: -						"mode": "all",
+>, <Line: -						"ids": [0]
+>, <Line: -					},
+>, <Line: -					"title": "Recent Requests",
+>, <Line: -					"intervals": ["auto", "1s", "1m", "5m", "10m", "30m", "1h", "3h", "12h", "1d", "1w", "1M", "1y"],
+>, <Line: -					"options": true,
+>, <Line: -					"tooltip": {
+>, <Line: -						"value_type": "cumulative",
+>, <Line: -						"query_as_alias": true
+>, <Line: -					},
+>, <Line: -					"scale": 1,
+>, <Line: -					"y_format": "none",
+>, <Line: -					"grid": {
+>, <Line: -						"leftMin": 0
+>, <Line: -					},
+>, <Line: -					"annotate": {
+>, <Line: -						"enable": false,
+>, <Line: -						"query": "*",
+>, <Line: -						"size": 20,
+>, <Line: -						"field": "_type",
+>, <Line: -						"sort": ["_score", "desc"]
+>, <Line: -					},
+>, <Line: -					"pointradius": 5,
+>, <Line: -					"show_query": true,
+>, <Line: -					"legend_counts": true,
+>, <Line: -					"zerofill": true,
+>, <Line: -					"derivative": false
+>, <Line: -				},
+>, <Line: -				{
+>, <Line: -					"error": false,
+>, <Line: -					"span": 3,
+>, <Line: -					"editable": true,
+>, <Line: -					"type": "terms",
+>, <Line: -					"loadingEditor": false,
+>, <Line: -					"field": "statusCode",
+>, <Line: -					"exclude": [],
+>, <Line: -					"missing": false,
+>, <Line: -					"other": true,
+>, <Line: -					"size": 10,
+>, <Line: -					"order": "count",
+>, <Line: -					"style": {
+>, <Line: -						"font-size": "10pt"
+>, <Line: -					},
+>, <Line: -					"donut": false,
+>, <Line: -					"tilt": false,
+>, <Line: -					"labels": true,
+>, <Line: -					"arrangement": "horizontal",
+>, <Line: -					"chart": "pie",
+>, <Line: -					"counter_pos": "above",
+>, <Line: -					"spyable": true,
+>, <Line: -					"queries": {
+>, <Line: -						"mode": "all",
+>, <Line: -						"ids": [0]
+>, <Line: -					},
+>, <Line: -					"tmode": "terms",
+>, <Line: -					"tstat": "total",
+>, <Line: -					"valuefield": "",
+>, <Line: -					"title": "Status Code"
+>, <Line: -				}
+>, <Line: -			],
+>, <Line: -			"notice": false
+>, <Line: -		},
+>, <Line: -		{
+>, <Line: -			"title": "Stats by Request Name",
+>, <Line: -			"height": "150px",
+>, <Line: -			"editable": true,
+>, <Line: -			"collapse": false,
+>, <Line: -			"collapsable": true,
+>, <Line: -			"panels": [
+>, <Line: -				{
+>, <Line: -					"error": false,
+>, <Line: -					"span": 4,
+>, <Line: -					"editable": true,
+>, <Line: -					"type": "terms",
+>, <Line: -					"loadingEditor": false,
+>, <Line: -					"field": "name",
+>, <Line: -					"exclude": [],
+>, <Line: -					"missing": false,
+>, <Line: -					"other": true,
+>, <Line: -					"size": 10,
+>, <Line: -					"order": "count",
+>, <Line: -					"style": {
+>, <Line: -						"font-size": "10pt"
+>, <Line: -					},
+>, <Line: -					"donut": false,
+>, <Line: -					"tilt": false,
+>, <Line: -					"labels": true,
+>, <Line: -					"arrangement": "horizontal",
+>, <Line: -					"chart": "bar",
+>, <Line: -					"counter_pos": "none",
+>, <Line: -					"spyable": true,
+>, <Line: -					"queries": {
+>, <Line: -						"mode": "all",
+>, <Line: -						"ids": [0]
+>, <Line: -					},
+>, <Line: -					"tmode": "terms_stats",
+>, <Line: -					"tstat": "count",
+>, <Line: -					"valuefield": "executionTime",
+>, <Line: -					"title": "Request Cout"
+>, <Line: -				},
+>, <Line: -				{
+>, <Line: -					"error": false,
+>, <Line: -					"span": 4,
+>, <Line: -					"editable": true,
+>, <Line: -					"type": "terms",
+>, <Line: -					"loadingEditor": false,
+>, <Line: -					"field": "name",
+>, <Line: -					"exclude": [],
+>, <Line: -					"missing": false,
+>, <Line: -					"other": true,
+>, <Line: -					"size": 10,
+>, <Line: -					"order": "mean",
+>, <Line: -					"style": {
+>, <Line: -						"font-size": "10pt"
+>, <Line: -					},
+>, <Line: -					"donut": false,
+>, <Line: -					"tilt": false,
+>, <Line: -					"labels": true,
+>, <Line: -					"arrangement": "vertical",
+>, <Line: -					"chart": "bar",
+>, <Line: -					"counter_pos": "none",
+>, <Line: -					"spyable": true,
+>, <Line: -					"queries": {
+>, <Line: -						"mode": "all",
+>, <Line: -						"ids": [0]
+>, <Line: -					},
+>, <Line: -					"tmode": "terms_stats",
+>, <Line: -					"tstat": "mean",
+>, <Line: -					"valuefield": "executionTime",
+>, <Line: -					"title": "Avg Execution Time"
+>, <Line: -				},
+>, <Line: -				{
+>, <Line: -					"error": false,
+>, <Line: -					"span": 4,
+>, <Line: -					"editable": true,
+>, <Line: -					"type": "terms",
+>, <Line: -					"loadingEditor": false,
+>, <Line: -					"field": "name",
+>, <Line: -					"exclude": [],
+>, <Line: -					"missing": false,
+>, <Line: -					"other": true,
+>, <Line: -					"size": 10,
+>, <Line: -					"order": "total",
+>, <Line: -					"style": {
+>, <Line: -						"font-size": "10pt"
+>, <Line: -					},
+>, <Line: -					"donut": false,
+>, <Line: -					"tilt": false,
+>, <Line: -					"labels": true,
+>, <Line: -					"arrangement": "horizontal",
+>, <Line: -					"chart": "bar",
+>, <Line: -					"counter_pos": "none",
+>, <Line: -					"spyable": true,
+>, <Line: -					"queries": {
+>, <Line: -						"mode": "all",
+>, <Line: -						"ids": [0]
+>, <Line: -					},
+>, <Line: -					"tmode": "terms_stats",
+>, <Line: -					"tstat": "total",
+>, <Line: -					"valuefield": "executionTime",
+>, <Line: -					"title": "Total Execution Time"
+>, <Line: -				}
+>, <Line: -			],
+>, <Line: -			"notice": false
+>, <Line: -		},
+>, <Line: -		{
+>, <Line: -			"title": "Events",
+>, <Line: -			"height": "350px",
+>, <Line: -			"editable": true,
+>, <Line: -			"collapse": false,
+>, <Line: -			"collapsable": true,
+>, <Line: -			"panels": [
+>, <Line: -				{
+>, <Line: -					"title": "Request Details",
+>, <Line: -					"error": false,
+>, <Line: -					"span": 12,
+>, <Line: -					"editable": true,
+>, <Line: -					"group": ["default"],
+>, <Line: -					"type": "table",
+>, <Line: -					"size": 20,
+>, <Line: -					"pages": 2,
+>, <Line: -					"offset": 0,
+>, <Line: -					"sort": ["@timestamp", "desc"],
+>, <Line: -					"style": {
+>, <Line: -						"font-size": "9pt"
+>, <Line: -					},
+>, <Line: -					"overflow": "min-height",
+>, <Line: -					"fields": ["name", "method", "url", "statusCode", "executionTime", "@application", "@instance", "@host", "@timestamp"],
+>, <Line: -					"localTime": true,
+>, <Line: -					"timeField": "@timestamp",
+>, <Line: -					"highlight": [],
+>, <Line: -					"sortable": true,
+>, <Line: -					"header": true,
+>, <Line: -					"paging": true,
+>, <Line: -					"spyable": true,
+>, <Line: -					"queries": {
+>, <Line: -						"mode": "all",
+>, <Line: -						"ids": [0]
+>, <Line: -					},
+>, <Line: -					"field_list": true,
+>, <Line: -					"status": "Stable",
+>, <Line: -					"trimFactor": 300,
+>, <Line: -					"normTimes": true,
+>, <Line: -					"all_fields": false
+>, <Line: -				}
+>, <Line: -			],
+>, <Line: -			"notice": false
+>, <Line: -		}
+>, <Line: -	],
+>, <Line: -	"editable": true,
+>, <Line: -	"failover": false,
+>, <Line: -	"index": {
+>, <Line: -		"interval": "day",
+>, <Line: -		"pattern": "[stagemonitor-requests-]YYYY.MM.DD",
+>, <Line: -		"default": "NO_TIME_FILTER_OR_INDEX_PATTERN_NOT_MATCHED",
+>, <Line: -		"warm_fields": true
+>, <Line: -	},
+>, <Line: -	"style": "dark",
+>, <Line: -	"panel_hints": true,
+>, <Line: -	"pulldowns": [
+>, <Line: -		{
+>, <Line: -			"type": "query",
+>, <Line: -			"collapse": false,
+>, <Line: -			"notice": false,
+>, <Line: -			"query": "*",
+>, <Line: -			"pinned": true,
+>, <Line: -			"history": ["", "statusCode:200", "statusCode:", "statusCode"],
+>, <Line: -			"remember": 10,
+>, <Line: -			"enable": true
+>, <Line: -		},
+>, <Line: -		{
+>, <Line: -			"type": "filtering",
+>, <Line: -			"collapse": true,
+>, <Line: -			"notice": true,
+>, <Line: -			"enable": true
+>, <Line: -		}
+>, <Line: -	],
+>, <Line: -	"nav": [
+>, <Line: -		{
+>, <Line: -			"type": "timepicker",
+>, <Line: -			"collapse": false,
+>, <Line: -			"notice": false,
+>, <Line: -			"status": "Stable",
+>, <Line: -			"time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"],
+>, <Line: -			"refresh_intervals": ["5s", "10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d"],
+>, <Line: -			"timefield": "@timestamp",
+>, <Line: -			"now": true,
+>, <Line: -			"filter_id": 0,
+>, <Line: -			"enable": true
+>, <Line: -		}
+>, <Line: -	],
+>, <Line: -	"loader": {
+>, <Line: -		"save_gist": false,
+>, <Line: -		"save_elasticsearch": true,
+>, <Line: -		"save_local": true,
+>, <Line: -		"save_default": true,
+>, <Line: -		"save_temp": true,
+>, <Line: -		"save_temp_ttl_enable": true,
+>, <Line: -		"save_temp_ttl": "30d",
+>, <Line: -		"load_gist": true,
+>, <Line: -		"load_elasticsearch": true,
+>, <Line: -		"load_elasticsearch_size": 20,
+>, <Line: -		"load_local": true,
+>, <Line: -		"hide": false
+>, <Line: -	},
+>, <Line: -	"refresh": false
+>, <Line: -}
+>]

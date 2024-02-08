@@ -1,0 +1,82 @@
+[<Line: +import static java.util.Objects.requireNonNull;
+>, <Line: +public abstract class ExperimentBuilder<T extends ExperimentBuilder<T>> {
+>, <Line: +  Optional<? extends Function<Path, ? extends Scenario>> fileReader;
+>, <Line: +  Function<SimArgs, SimResult> computeFunction;
+>, <Line: +  protected ExperimentBuilder(Function<SimArgs, SimResult> computeFunc) {
+>, <Line: +    computeFunction = computeFunc;
+>, <Line: +    fileReader = Optional.absent();
+>, <Line: +  /**
+>, <Line: +   * Creates a default builder for defining experiments.
+>, <Line: +   * 
+>, <Line: +   * @param computeFunc A {@link Function} that converts {@link SimArgs} to
+>, <Line: +   *          {@link SimResult}s.
+>, <Line: +   * @return A new {@link ExperimentBuilder} instance.
+>, <Line: +   */
+>, <Line: +  public static DefaultExperimentBuilder defaultInstance(
+>, <Line: +      Function<SimArgs, SimResult> computeFunc) {
+>, <Line: +    return new DefaultExperimentBuilder(computeFunc);
+>, <Line: +  }
+>, <Line: +  // abstract SimTask createTask(SimArgs args);
+>, <Line: +  /**
+>, <Line: +   * Add a configuration to the experiment.
+>, <Line: +  /**
+>, <Line: +   * Adds all configurations to the experiment.
+>, <Line: +  public T setScenarioReader(Function<Path, ? extends Scenario> reader) {
+>, <Line: +    fileReader = Optional.of(reader);
+>, <Line: +   * will be called each time a simulation is done.
+>, <Line: +      checkArgument(fileReader.isPresent(),
+>, <Line: +          "A scenario reader must be specified.");
+>, <Line: +      scenarios.addAll(scenarioProviderBuilder.get().build(fileReader.get())
+>, <Line: +          .get());
+>, <Line: +              .add(new SimArgs(scenario, configuration, seed, showGui, postProc));
+>, <Line: +  public static class DefaultExperimentBuilder extends
+>, <Line: +      ExperimentBuilder<DefaultExperimentBuilder> {
+>, <Line: +    DefaultExperimentBuilder(Function<SimArgs, SimResult> computeFunc) {
+>, <Line: +      super(computeFunc);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected DefaultExperimentBuilder self() {
+>, <Line: +      return this;
+>, <Line: +    }
+>, <Line: +    // @Override
+>, <Line: +    // SimTask createTask(SimArgs args) {
+>, <Line: +    // return new FunctionRunner(args, function);
+>, <Line: +    // }
+>, <Line: +  }
+>, <Line: +  static class FunctionRunner implements SimTask {
+>, <Line: +    private final SimArgs args;
+>, <Line: +    private final Function<SimArgs, SimResult> executor;
+>, <Line: +    FunctionRunner(SimArgs args, Function<SimArgs, SimResult> exec) {
+>, <Line: +      this.args = args;
+>, <Line: +      executor = exec;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public SimResult call() throws Exception {
+>, <Line: +      return requireNonNull(executor.apply(args));
+>, <Line: +    }
+>, <Line: +  }
+>]
+[<Line: -public abstract class AbstractExperimentBuilder<T extends AbstractExperimentBuilder<T>> {
+>, <Line: -  final Object objectiveFunction;
+>, <Line: -  Function<Path, ? extends Scenario> fileReader;
+>, <Line: -  AbstractExperimentBuilder(Object objectiveFunction) {
+>, <Line: -    this.objectiveFunction = objectiveFunction;
+>, <Line: -    fileReader = null;// ScenarioIO.reader();
+>, <Line: -  abstract ExperimentRunner createRunner(SimArgs args);
+>, <Line: -  /*
+>, <Line: -   * Add a configuration to the experiment. For each simulation {@link
+>, <Line: -   * StochasticSupplier#get(long)} is called and the resulting {@link
+>, <Line: -   * MASConfiguration} is used for a <i>single</i> simulation.
+>, <Line: -  /*
+>, <Line: -   * Adds all configurations to the experiment. For each simulation {@link
+>, <Line: -   * StochasticSupplier#get(long)} is called and the resulting {@link
+>, <Line: -   * MASConfiguration} is used for a <i>single</i> simulation.
+>, <Line: -  public T setScenarioReader(
+>, <Line: -      Function<Path, ? extends Scenario> reader) {
+>, <Line: -    // fileReader = reader;
+>, <Line: -   * will be called each time a simulation is done. <b>Currently only works for
+>, <Line: -   * distributed computation</b>.
+>, <Line: -      scenarios.addAll(scenarioProviderBuilder.get().build(fileReader).get());
+>, <Line: -              .add(new SimArgs(scenario, configuration,
+>, <Line: -                  seed, objectiveFunction, showGui, postProc));
+>]

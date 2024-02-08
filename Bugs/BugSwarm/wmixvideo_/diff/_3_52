@@ -1,0 +1,17 @@
+[<Line: +import com.fincatto.nfe310.classes.NFModelo;
+>, <Line: +    NFRetornoEventoInutilizacao inutilizaNota(final int anoInutilizacaoNumeracao, final String cnpjEmitente, final String serie, 
+>, <Line: +    		final String numeroInicial, final String numeroFinal, final String justificativa, NFModelo modelo) throws Exception {
+>, <Line: +        final String inutilizacaoXML = this.geraDadosInutilizacao(anoInutilizacaoNumeracao, cnpjEmitente, serie, 
+>, <Line: +        		numeroInicial, numeroFinal, justificativa, modelo).toString();
+>, <Line: +    private NFEnviaEventoInutilizacao geraDadosInutilizacao(final int anoInutilizacaoNumeracao, final String cnpjEmitente, 
+>, <Line: +    		final String serie, final String numeroInicial, final String numeroFinal, final String justificativa, NFModelo modelo) {
+>, <Line: +        dados.setModeloDocumentoFiscal(modelo.getCodigo());
+>, <Line: +        dados.setIdentificador("ID" + this.config.getCUF().getCodigoIbge() + String.valueOf(anoInutilizacaoNumeracao) + cnpjEmitente + modelo.getCodigo() + serieTamanhoMaximo + numeroInicialTamanhoMaximo + numeroFinalTamanhoMaximo);
+>]
+[<Line: -    private static final String MODELO_DOCUMENTO = "55";
+>, <Line: -    NFRetornoEventoInutilizacao inutilizaNota(final int anoInutilizacaoNumeracao, final String cnpjEmitente, final String serie, final String numeroInicial, final String numeroFinal, final String justificativa) throws Exception {
+>, <Line: -        final String inutilizacaoXML = this.geraDadosInutilizacao(anoInutilizacaoNumeracao, cnpjEmitente, serie, numeroInicial, numeroFinal, justificativa).toString();
+>, <Line: -    private NFEnviaEventoInutilizacao geraDadosInutilizacao(final int anoInutilizacaoNumeracao, final String cnpjEmitente, final String serie, final String numeroInicial, final String numeroFinal, final String justificativa) {
+>, <Line: -        dados.setModeloDocumentoFiscal(WSInutilizacao.MODELO_DOCUMENTO);
+>, <Line: -        dados.setIdentificador("ID" + this.config.getCUF().getCodigoIbge() + String.valueOf(anoInutilizacaoNumeracao) + cnpjEmitente + WSInutilizacao.MODELO_DOCUMENTO + serieTamanhoMaximo + numeroInicialTamanhoMaximo + numeroFinalTamanhoMaximo);
+>]

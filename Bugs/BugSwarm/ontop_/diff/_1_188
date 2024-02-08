@@ -1,0 +1,5 @@
+[<Line: +		onto = OWLAPI3TranslatorUtility.translate(ontology);
+>]
+[<Line: -		OWLAPI3TranslatorUtility translator = new OWLAPI3TranslatorUtility();
+>, <Line: -		onto = translator.translate(ontology);
+>]

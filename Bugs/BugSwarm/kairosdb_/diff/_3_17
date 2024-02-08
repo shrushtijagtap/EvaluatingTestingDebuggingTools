@@ -1,0 +1,137 @@
+[<Line: +package org.kairosdb.core.queue;
+>, <Line: +import com.google.common.collect.ImmutableSortedMap;
+>, <Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.kairosdb.core.DataPoint;
+>, <Line: +import org.kairosdb.core.TestDataPointFactory;
+>, <Line: +import org.kairosdb.core.datapoints.LongDataPointFactory;
+>, <Line: +import org.kairosdb.core.datapoints.LongDataPointFactoryImpl;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +import org.mockito.Matchers;
+>, <Line: +import se.ugli.bigqueue.BigArray;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.concurrent.Executor;
+>, <Line: +import static org.mockito.Matchers.*;
+>, <Line: +import static org.mockito.Mockito.*;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 10/15/16.
+>, <Line: + */
+>, <Line: +public class QueueProcessorTest
+>, <Line: +{
+>, <Line: +	private LongDataPointFactory m_longDataPointFactory = new LongDataPointFactoryImpl();
+>, <Line: +	private QueueProcessor.DeliveryThread m_deliveryThread;
+>, <Line: +	private class TestExecutor implements Executor
+>, <Line: +	{
+>, <Line: +		@Override
+>, <Line: +		public void execute(Runnable command)
+>, <Line: +		{
+>, <Line: +			m_deliveryThread = (QueueProcessor.DeliveryThread)command;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	@Before
+>, <Line: +	public void setup()
+>, <Line: +	{
+>, <Line: +		m_deliveryThread = null;
+>, <Line: +	}
+>, <Line: +	@Test(expected = IndexOutOfBoundsException.class)
+>, <Line: +	public void test_bigArray_readingEmptyArray()
+>, <Line: +	{
+>, <Line: +		BigArray bigArray = new BigArray("big_array", "kairos_queue", 512*1024*1024);
+>, <Line: +		long index = bigArray.getTailIndex();
+>, <Line: +		byte[] data = bigArray.get(index);
+>, <Line: +	}
+>, <Line: +	@Test(expected = IndexOutOfBoundsException.class)
+>, <Line: +	public void test_bigArray_readingNonExistingIndex()
+>, <Line: +	{
+>, <Line: +		BigArray bigArray = new BigArray("big_array", "kairos_queue", 512*1024*1024);
+>, <Line: +		long index = bigArray.getTailIndex();
+>, <Line: +		index ++;
+>, <Line: +		byte[] data = bigArray.get(index);
+>, <Line: +	}
+>, <Line: +	private DataPointEvent createDataPointEvent()
+>, <Line: +	{
+>, <Line: +		ImmutableSortedMap<String, String> tags =
+>, <Line: +				ImmutableSortedMap.<String, String>naturalOrder()
+>, <Line: +						.put("tag1", "val1")
+>, <Line: +						.put("tag2", "val2")
+>, <Line: +						.put("tag3", "val3").build();
+>, <Line: +		DataPoint dataPoint = m_longDataPointFactory.createDataPoint(123L, 43);
+>, <Line: +		DataPointEvent event = new DataPointEvent("new_metric", tags, dataPoint, 500);
+>, <Line: +		return event;
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_eventIsPulledFromMemoryQueue()
+>, <Line: +	{
+>, <Line: +		EventBus eventBus = mock(EventBus.class);
+>, <Line: +		BigArray bigArray = mock(BigArray.class);
+>, <Line: +		when(bigArray.append(Matchers.<byte[]>any())).thenReturn(0L);
+>, <Line: +		when(bigArray.getTailIndex()).thenReturn(0L);
+>, <Line: +		when(bigArray.getHeadIndex()).thenReturn(1L);
+>, <Line: +		DataPointEventSerializer serializer = new DataPointEventSerializer(new TestDataPointFactory());
+>, <Line: +		ProcessorHandler processorHandler = mock(ProcessorHandler.class);
+>, <Line: +		QueueProcessor queueProcessor = new QueueProcessor(serializer,
+>, <Line: +				bigArray, new TestExecutor(), 2, 10, 500);
+>, <Line: +		queueProcessor.setProcessorHandler(processorHandler);
+>, <Line: +		DataPointEvent event = createDataPointEvent();
+>, <Line: +		queueProcessor.put(event);
+>, <Line: +		m_deliveryThread.setRunOnce(true);
+>, <Line: +		m_deliveryThread.run();
+>, <Line: +		verify(bigArray, times(1)).append(eq(serializer.serializeEvent(event)));
+>, <Line: +		verify(processorHandler, times(1)).handleEvents(eq(Arrays.asList(event)), Matchers.<EventCompletionCallBack>any());
+>, <Line: +		verify(bigArray, times(0)).get(anyLong());
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_eventIsPulledFromMemoryQueueThenBigArray()
+>, <Line: +	{
+>, <Line: +		EventBus eventBus = mock(EventBus.class);
+>, <Line: +		BigArray bigArray = mock(BigArray.class);
+>, <Line: +		when(bigArray.append(Matchers.<byte[]>any())).thenReturn(0L);
+>, <Line: +		when(bigArray.getHeadIndex()).thenReturn(2L);
+>, <Line: +		DataPointEventSerializer serializer = new DataPointEventSerializer(new TestDataPointFactory());
+>, <Line: +		ProcessorHandler processorHandler = mock(ProcessorHandler.class);
+>, <Line: +		QueueProcessor queueProcessor = new QueueProcessor(serializer,
+>, <Line: +				bigArray, new TestExecutor(), 3, 1, 500);
+>, <Line: +		queueProcessor.setProcessorHandler(processorHandler);
+>, <Line: +		DataPointEvent event = createDataPointEvent();
+>, <Line: +		queueProcessor.put(event);
+>, <Line: +		queueProcessor.put(event);
+>, <Line: +		when(bigArray.get(1L)).thenReturn(serializer.serializeEvent(event));
+>, <Line: +		m_deliveryThread.setRunOnce(true);
+>, <Line: +		m_deliveryThread.run();
+>, <Line: +		verify(bigArray, times(2)).append(eq(serializer.serializeEvent(event)));
+>, <Line: +		verify(processorHandler, times(1)).handleEvents(eq(Arrays.asList(event, event)), Matchers.<EventCompletionCallBack>any());
+>, <Line: +		verify(bigArray, times(1)).get(anyLong());
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_checkPointIsCalled()
+>, <Line: +	{
+>, <Line: +		EventBus eventBus = mock(EventBus.class);
+>, <Line: +		BigArray bigArray = mock(BigArray.class);
+>, <Line: +		when(bigArray.append(Matchers.<byte[]>any())).thenReturn(0L);
+>, <Line: +		when(bigArray.getHeadIndex()).thenReturn(2L);
+>, <Line: +		DataPointEventSerializer serializer = new DataPointEventSerializer(new TestDataPointFactory());
+>, <Line: +		ProcessorHandler processorHandler = new ProcessorHandler()
+>, <Line: +		{
+>, <Line: +			@Override
+>, <Line: +			public void handleEvents(List<DataPointEvent> events, EventCompletionCallBack eventCompletionCallBack)
+>, <Line: +			{
+>, <Line: +				eventCompletionCallBack.complete();
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		QueueProcessor queueProcessor = new QueueProcessor(serializer,
+>, <Line: +				bigArray, new TestExecutor(), 3, 1, -1);
+>, <Line: +		queueProcessor.setProcessorHandler(processorHandler);
+>, <Line: +		DataPointEvent event = createDataPointEvent();
+>, <Line: +		queueProcessor.put(event);
+>, <Line: +		queueProcessor.put(event);
+>, <Line: +		when(bigArray.get(1L)).thenReturn(serializer.serializeEvent(event));
+>, <Line: +		m_deliveryThread.setRunOnce(true);
+>, <Line: +		m_deliveryThread.run();
+>, <Line: +		verify(bigArray, times(2)).append(eq(serializer.serializeEvent(event)));
+>, <Line: +		verify(bigArray, times(1)).get(anyLong());
+>, <Line: +		verify(bigArray, times(1)).removeBeforeIndex(eq(1l));
+>, <Line: +	}
+>, <Line: +}>]
+[]

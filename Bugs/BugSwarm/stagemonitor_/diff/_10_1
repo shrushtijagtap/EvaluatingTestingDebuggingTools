@@ -1,0 +1,28 @@
+[<Line: +							{
+>, <Line: +								render: function (data, type, full, meta) {
+>, <Line: +									return utils.metricAsString(full.target, "");
+>, <Line: +								}
+>, <Line: +							},
+>, <Line: +				$checkModal.on('change', "#target-name-input, .tag-key, .tag-value, .tt-dropdown-menu", function () {
+>, <Line: +					rerenderCheckModal();
+>, <Line: +				});
+>, <Line: +				$checkModal.on('typeahead:change', ".typeahead", function () {
+>, <Line: +						var matchingMetrics = getMatchingMetrics(metrics, check.target);
+>, <Line: +						var matchingValueTypes = $.unique([].concat.apply([], $.map(matchingMetrics, function(metric) { return Object.keys(metric.values) })));
+>, <Line: +							hasTagFilters: Object.keys(check.target.tags).length > 0,
+>, <Line: +							valueTypes: matchingValueTypes
+>, <Line: +						$(".tip").tooltip({html: true});
+>, <Line: +						allMetricNames.sort();
+>, <Line: +						typeahead("#target-name-input", allMetricNames);
+>, <Line: +						matchingTagKeys.sort();
+>, <Line: +							source: substringMatcher(source),
+>, <Line: +							limit: 100
+>]
+[<Line: -							{ data: "target" },
+>, <Line: -				$checkModal.on('change', "#target-name-input, .tag-key, .tag-value", function () {
+>, <Line: -					$(".tip").tooltip({html: true});
+>, <Line: -							hasTagFilters: Object.keys(check.target.tags).length > 0
+>, <Line: -						var matchingMetrics = getMatchingMetrics(metrics, check.target);
+>, <Line: -						typeahead("#target-name-input", allMetricNames);
+>, <Line: -							source: substringMatcher(source)
+>]

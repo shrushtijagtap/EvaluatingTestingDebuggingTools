@@ -1,0 +1,8 @@
+[<Line: +public class GeocodeFarmGeocoder extends JsonGeocoder {
+>, <Line: +    public GeocodeFarmGeocoder(int cacheSize) {
+>, <Line: +    public GeocodeFarmGeocoder(String key, int cacheSize) {
+>]
+[<Line: -public class GeocodeFarmReverseGeocoder extends JsonReverseGeocoder {
+>, <Line: -    public GeocodeFarmReverseGeocoder(int cacheSize) {
+>, <Line: -    public GeocodeFarmReverseGeocoder(String key, int cacheSize) {
+>]

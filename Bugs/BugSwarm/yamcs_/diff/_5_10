@@ -1,0 +1,6 @@
+[<Line: +    /**
+>, <Line: +     * close the database and release resources
+>, <Line: +     * the object is unusable after this call.
+>, <Line: +     */
+>]
+[]

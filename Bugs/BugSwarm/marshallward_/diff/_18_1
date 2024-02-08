@@ -1,0 +1,6 @@
+[<Line: +        self.winfmt_nml = {'blah': {'blah': 1}}
+>, <Line: +    def test_winfmt(self):
+>, <Line: +        test_nml = f90nml.read('winfmt.nml')
+>, <Line: +        self.assertEqual(self.winfmt_nml, test_nml)
+>]
+[]

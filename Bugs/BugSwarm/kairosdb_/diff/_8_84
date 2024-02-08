@@ -1,0 +1,5 @@
+[<Line: +		if (value == null || value.isEmpty() || !CharacterSet.isValidTagNameValue(value))
+>, <Line: +		{
+>]
+[<Line: -		if (value == null || value.isEmpty() || !CharacterSet.isValidTagNameValue(value)){
+>]

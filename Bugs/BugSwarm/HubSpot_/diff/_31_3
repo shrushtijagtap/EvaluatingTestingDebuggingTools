@@ -1,0 +1,31 @@
+[<Line: +import com.google.common.base.Function;
+>, <Line: +  protected <T> Optional<T> readFromZk(String path, final Class<T> klass) {
+>, <Line: +    return readFromZk(path).transform(new Function<byte[], T>() {
+>, <Line: +      @Override
+>, <Line: +      public T apply(byte[] data) {
+>, <Line: +        return deserialize(data, klass);
+>, <Line: +      }
+>, <Line: +    });
+>, <Line: +  }
+>, <Line: +  protected <T> Optional<T> readFromZk(String path, final TypeReference<T> typeReference) {
+>, <Line: +    return readFromZk(path).transform(new Function<byte[], T>() {
+>, <Line: +      @Override
+>, <Line: +      public T apply(byte[] data) {
+>, <Line: +        return deserialize(data, typeReference);
+>, <Line: +      }
+>, <Line: +    });
+>, <Line: +  protected Optional<byte[]> readFromZk(String path) {
+>, <Line: +      return Optional.of(curatorFramework.getData().forPath(path));
+>]
+[<Line: -import java.util.Date;
+>, <Line: -  protected <T> Optional<T> readFromZk(String path, Class<T> klass) {
+>, <Line: -    try {
+>, <Line: -      return Optional.of(deserialize(curatorFramework.getData().forPath(path), klass));
+>, <Line: -    } catch (KeeperException.NoNodeException nne) {
+>, <Line: -      return Optional.absent();
+>, <Line: -    } catch (Exception e) {
+>, <Line: -      throw Throwables.propagate(e);
+>, <Line: -    }
+>, <Line: -  protected <T> Optional<T> readFromZk(String path, TypeReference<T> typeReference) {
+>, <Line: -      return Optional.of(deserialize(curatorFramework.getData().forPath(path), typeReference));
+>]

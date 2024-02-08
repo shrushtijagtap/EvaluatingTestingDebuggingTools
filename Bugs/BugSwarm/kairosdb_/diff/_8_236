@@ -1,0 +1,30 @@
+[<Line: +							<th style="white-space: nowrap;">Remove as
+>, <Line: +								favorite
+>, <Line: +							</th>
+>, <Line: +								<input id="dash-{{$index}}" class="cr1"
+>, <Line: +									   type="checkbox"
+>, <Line: +									   ng-model="dashboard.include"
+>, <Line: +									   ng-checked="dashboard.include"/>
+>, <Line: +								<label for="dash-{{$index}}"
+>, <Line: +									   class="cr1"></label>
+>, <Line: +								<i class="icon-remove pointer"
+>, <Line: +								   ng-click="removeAsFavorite(dashboard)"></i>
+>, <Line: +								<i class="icon-warning"></i> No dashboards
+>, <Line: +								marked as favorites
+>, <Line: +					<input type="text" class="input-small" ng-model="timespan"/>
+>, <Line: +		<button class="btn btn-success" ng-click="start();dismiss();"><i
+>, <Line: +				class="icon-play"></i> Start
+>, <Line: +		</button>
+>, <Line: +		<button type="button" class="btn btn-success pull-right"
+>, <Line: +				ng-click="dismiss();"><i class="icon-ban-circle"></i> Close
+>, <Line: +		</button>
+>]
+[<Line: -							<th style="white-space: nowrap;">Remove as favorite</th>
+>, <Line: -								<input id="dash-{{$index}}" class="cr1" type="checkbox" ng-model="dashboard.include" ng-checked="dashboard.include" />
+>, <Line: -								<label for="dash-{{$index}}" class="cr1"></label>
+>, <Line: -								<i class="icon-remove pointer" ng-click="removeAsFavorite(dashboard)"></i>
+>, <Line: -								<i class="icon-warning"></i> No dashboards marked as favorites
+>, <Line: -					<input type="text" class="input-small" ng-model="timespan" />
+>, <Line: -		<button class="btn btn-success" ng-click="start();dismiss();"><i class="icon-play"></i> Start</button>
+>, <Line: -		<button type="button" class="btn btn-success pull-right" ng-click="dismiss();"><i class="icon-ban-circle"></i> Close</button>
+>]

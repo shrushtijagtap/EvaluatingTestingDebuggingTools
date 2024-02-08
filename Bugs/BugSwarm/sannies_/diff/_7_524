@@ -1,0 +1,32 @@
+[<Line: +/*
+>, <Line: +Copyright (c) 2011 Stanislav Vitvitskiy
+>, <Line: +Permission is hereby granted, free of charge, to any person obtaining a copy of this
+>, <Line: +software and associated documentation files (the "Software"), to deal in the Software
+>, <Line: +without restriction, including without limitation the rights to use, copy, modify,
+>, <Line: +merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+>, <Line: +permit persons to whom the Software is furnished to do so, subject to the following
+>, <Line: +conditions:
+>, <Line: +The above copyright notice and this permission notice shall be included in all copies or
+>, <Line: +substantial portions of the Software.
+>, <Line: +THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+>, <Line: +INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+>, <Line: +PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+>, <Line: +FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+>, <Line: +TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+>, <Line: +OR OTHER DEALINGS IN THE SOFTWARE.
+>, <Line: +*/
+>, <Line: +package org.mp4parser.muxer.tracks.h264.parsing.model;
+>, <Line: +import java.util.Arrays;
+>, <Line: +public class ScalingMatrix {
+>, <Line: +    public ScalingList[] ScalingList4x4;
+>, <Line: +    public ScalingList[] ScalingList8x8;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "ScalingMatrix{" +
+>, <Line: +                "ScalingList4x4=" + (ScalingList4x4 == null ? null : Arrays.asList(ScalingList4x4)) + "\n" +
+>, <Line: +                ", ScalingList8x8=" + (ScalingList8x8 == null ? null : Arrays.asList(ScalingList8x8)) + "\n" +
+>, <Line: +                '}';
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,83 @@
+[<Line: +import com.google.common.base.Throwables;
+>, <Line: +import com.google.inject.name.Named;
+>, <Line: +import com.hubspot.baragon.agent.BaragonAgentServiceModule;
+>, <Line: +import com.hubspot.baragon.exceptions.LockTimeoutException;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +  public void remove(BaragonService service) throws LbAdapterExecuteException, IOException {
+>, <Line: +        remove(service);
+>, <Line: +  public void apply(ServiceContext context, Optional<BaragonService> maybeOldService, boolean revertOnFailure, boolean noReload, boolean noValidate) throws InvalidConfigException, LbAdapterExecuteException, IOException, MissingTemplateException, InterruptedException, LockTimeoutException {
+>, <Line: +          remove(oldService);
+>, <Line: +        remove(service);
+>, <Line: +      if (!noValidate) {
+>, <Line: +        adapter.checkConfigs();
+>, <Line: +      } else {
+>, <Line: +        LOG.debug("Not validating configs due to 'noValidate' specified in request");
+>, <Line: +      }
+>, <Line: +      if (!noReload) {
+>, <Line: +        adapter.reloadConfigs();
+>, <Line: +      } else {
+>, <Line: +        LOG.debug("Not reloading configs due to 'noReload' specified in request");
+>, <Line: +      }
+>, <Line: +          remove(service);
+>, <Line: +  public void delete(BaragonService service, Optional<BaragonService> maybeOldService, boolean noReload, boolean noValidate) throws InvalidConfigException, LbAdapterExecuteException, IOException, MissingTemplateException, InterruptedException, LockTimeoutException {
+>, <Line: +        if (!agentLock.tryLock(agentLockTimeoutMs, TimeUnit.MILLISECONDS)) {
+>, <Line: +          throw new LockTimeoutException("Timed out waiting to acquire lock");
+>, <Line: +        }
+>, <Line: +     try {
+>, <Line: +       if (previousConfigsExist) {
+>, <Line: +         backupConfigs(service);
+>, <Line: +         remove(service);
+>, <Line: +       }
+>, <Line: +       if (oldServiceExists && !maybeOldService.get().equals(service)) {
+>, <Line: +         backupConfigs(maybeOldService.get());
+>, <Line: +         remove(maybeOldService.get());
+>, <Line: +       }
+>, <Line: +       if (!noValidate) {
+>, <Line: +         adapter.checkConfigs();
+>, <Line: +       } else {
+>, <Line: +         LOG.debug("Not validating configs due to 'noValidate' specified in request");
+>, <Line: +       }
+>, <Line: +       if (!noReload) {
+>, <Line: +         adapter.reloadConfigs();
+>, <Line: +       } else {
+>, <Line: +         LOG.debug("Not reloading configs due to 'noReload' specified in request");
+>, <Line: +       }
+>, <Line: +        remove(service);
+>, <Line: +     }
+>]
+[<Line: -import com.google.inject.name.Named;
+>, <Line: -import com.hubspot.baragon.agent.BaragonAgentServiceModule;
+>, <Line: -import com.hubspot.baragon.exceptions.LockTimeoutException;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -import com.google.common.base.Throwables;
+>, <Line: -  public void remove(BaragonService service, boolean reloadConfigs) throws LbAdapterExecuteException, IOException {
+>, <Line: -    if (reloadConfigs) {
+>, <Line: -      adapter.reloadConfigs();
+>, <Line: -    }
+>, <Line: -        remove(service, false);
+>, <Line: -  public void apply(ServiceContext context, Optional<BaragonService> maybeOldService, boolean revertOnFailure) throws InvalidConfigException, LbAdapterExecuteException, IOException, MissingTemplateException, InterruptedException, LockTimeoutException  {
+>, <Line: -          remove(oldService, false);
+>, <Line: -        remove(service, false);
+>, <Line: -      adapter.checkConfigs();
+>, <Line: -      adapter.reloadConfigs();
+>, <Line: -          remove(service, false);
+>, <Line: -  public void delete(BaragonService service, Optional<BaragonService> maybeOldService) throws InvalidConfigException, LbAdapterExecuteException, IOException, MissingTemplateException, InterruptedException, LockTimeoutException {
+>, <Line: -    if (!agentLock.tryLock(agentLockTimeoutMs, TimeUnit.MILLISECONDS)) {
+>, <Line: -      throw new LockTimeoutException("Timed out waiting to acquire lock");
+>, <Line: -    }
+>, <Line: -    try {
+>, <Line: -      if (previousConfigsExist) {
+>, <Line: -        backupConfigs(service);
+>, <Line: -        remove(service, false);
+>, <Line: -      }
+>, <Line: -      if (oldServiceExists && !maybeOldService.get().equals(service)) {
+>, <Line: -        backupConfigs(maybeOldService.get());
+>, <Line: -        remove(maybeOldService.get(), false);
+>, <Line: -      }
+>, <Line: -      adapter.checkConfigs();
+>, <Line: -      adapter.reloadConfigs();
+>, <Line: -        remove(service, false);
+>, <Line: -    }
+>]

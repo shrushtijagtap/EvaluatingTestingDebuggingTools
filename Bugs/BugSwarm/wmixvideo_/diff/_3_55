@@ -1,0 +1,6 @@
+[<Line: +    @Test
+>, <Line: +    public void devePermitirPisNulo() {
+>]
+[<Line: -    @Test(expected = IllegalStateException.class)
+>, <Line: -    public void naoDevePermitirPisNulo() {
+>]

@@ -1,0 +1,55 @@
+[<Line: +package wyil.util;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import java.util.BitSet;
+>, <Line: +import wyil.lang.Bytecode;
+>, <Line: +import wyil.lang.SyntaxTree.Location;
+>, <Line: +/**
+>, <Line: + * Helper functions for working with SyntaxTrees.
+>, <Line: + * 
+>, <Line: + * @author David J. Pearce
+>, <Line: + *
+>, <Line: + */
+>, <Line: +public class SyntaxTrees {
+>, <Line: +	/**
+>, <Line: +	 * Traverse a syntax tree from one or more roots looking for variable
+>, <Line: +	 * accesses (uses).
+>, <Line: +	 * 
+>, <Line: +	 * @param roots
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public static int[] determineUsedVariables(Location<?>... roots) {
+>, <Line: +		BitSet usedVariables = new BitSet();
+>, <Line: +		for(int i=0;i!=roots.length;++i) {
+>, <Line: +			determineUsedVariables(roots[i],usedVariables);
+>, <Line: +		}
+>, <Line: +		int[] vars = new int[usedVariables.cardinality()];
+>, <Line: +		int index = 0;
+>, <Line: +		for (int i = usedVariables.nextSetBit(0); i >= 0; i = usedVariables.nextSetBit(i+1)) {
+>, <Line: +			vars[index++] = i;
+>, <Line: +		}
+>, <Line: +		return vars;
+>, <Line: +	}
+>, <Line: +	private static void determineUsedVariables(Location<?> root, BitSet usedVariables) {
+>, <Line: +		switch(root.getOpcode()) {
+>, <Line: +		case Bytecode.OPCODE_vardecl:
+>, <Line: +		case Bytecode.OPCODE_vardeclinit:
+>, <Line: +		case Bytecode.OPCODE_aliasdecl:
+>, <Line: +			usedVariables.set(root.getIndex());
+>, <Line: +			return;		
+>, <Line: +		}		
+>, <Line: +		for(int i=0;i!=root.numberOfOperands();++i) {
+>, <Line: +			determineUsedVariables(root.getOperand(i),usedVariables);
+>, <Line: +		}		
+>, <Line: +		for(int i=0;i!=root.numberOfOperandGroups();++i) {
+>, <Line: +			Location<?>[] group = root.getOperandGroup(i);
+>, <Line: +			for(int j=0;j!=group.length;++j) {
+>, <Line: +				determineUsedVariables(group[j],usedVariables);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		for(int i=0;i!=root.numberOfBlocks();++i) {
+>, <Line: +			determineUsedVariables(root.getBlock(i),usedVariables);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

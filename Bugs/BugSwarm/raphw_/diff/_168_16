@@ -1,0 +1,17 @@
+[<Line: +        ClassLoadingStrategy bootstrapStrategy = new ClassLoadingStrategy.ForBootstrapInjection(ByteBuddyAgent.install(), file);
+>, <Line: +        ClassLoadingStrategy bootstrapStrategy = new ClassLoadingStrategy.ForBootstrapInjection(ByteBuddyAgent.install(), file);
+>, <Line: +        ObjectPropertyAssertion.of(ClassLoadingStrategy.ForBootstrapInjection.class).apply();
+>]
+[<Line: -import java.security.AccessControlContext;
+>, <Line: -import java.security.AccessController;
+>, <Line: -import java.security.ProtectionDomain;
+>, <Line: -import static org.mockito.Mockito.mock;
+>, <Line: -        ClassLoadingStrategy bootstrapStrategy = new ClassLoadingStrategy.ForBootstrapInjection(ByteBuddyAgent.install(), file, AccessController.getContext());
+>, <Line: -        ClassLoadingStrategy bootstrapStrategy = new ClassLoadingStrategy.ForBootstrapInjection(ByteBuddyAgent.install(), file, AccessController.getContext());
+>, <Line: -        ObjectPropertyAssertion.of(ClassLoadingStrategy.ForBootstrapInjection.class).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: -            @Override
+>, <Line: -            public AccessControlContext create() {
+>, <Line: -                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: -            }
+>, <Line: -        }).apply();
+>]

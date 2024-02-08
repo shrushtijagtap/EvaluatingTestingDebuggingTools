@@ -1,0 +1,16 @@
+[<Line: + Copyright (C) 2015 ZXing authors
+>, <Line: + Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + you may not use this file except in compliance with the License.
+>, <Line: + You may obtain a copy of the License at
+>, <Line: +      http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + Unless required by applicable law or agreed to in writing, software
+>, <Line: + distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + See the License for the specific language governing permissions and
+>, <Line: + limitations under the License.
+>, <Line: + -->
+>, <Line: +<!--
+>, <Line: + Derived from checkstyle's Sun code style config
+>]
+[<Line: - Derived from checkstlye's Sun code style config
+>]

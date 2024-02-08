@@ -1,0 +1,32 @@
+[<Line: +package org.mp4parser.streaming.input;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.TrackHeaderBox;
+>, <Line: +import org.mp4parser.streaming.StreamingTrack;
+>, <Line: +import org.mp4parser.streaming.TrackExtension;
+>, <Line: +import org.mp4parser.streaming.output.SampleSink;
+>, <Line: +    protected SampleSink sampleSink;
+>, <Line: +    public void setSampleSink(SampleSink sampleSink) {
+>, <Line: +        this.sampleSink = sampleSink;
+>]
+[<Line: -package com.mp4parser.streaming;
+>, <Line: -import com.coremedia.iso.boxes.SampleDescriptionBox;
+>, <Line: -import com.coremedia.iso.boxes.TrackHeaderBox;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.HashSet;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Set;
+>, <Line: -import java.util.concurrent.ArrayBlockingQueue;
+>, <Line: -import java.util.concurrent.BlockingQueue;
+>, <Line: -    protected BlockingQueue<StreamingSample> samples = new ArrayBlockingQueue<StreamingSample>(1000);
+>, <Line: -    protected SampleDescriptionBox stsd;
+>, <Line: -    public BlockingQueue<StreamingSample> getSamples() {
+>, <Line: -        return samples;
+>, <Line: -    }
+>, <Line: -    public boolean hasMoreSamples() {
+>, <Line: -        return false;
+>, <Line: -    }
+>, <Line: -    public TrackHeaderBox getTrackHeaderBox() {
+>, <Line: -        return tkhd;
+>, <Line: -    }
+>, <Line: -    public SampleDescriptionBox getSampleDescriptionBox() {
+>, <Line: -        return stsd;
+>]

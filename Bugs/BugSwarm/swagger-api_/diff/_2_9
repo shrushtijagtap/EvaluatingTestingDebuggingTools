@@ -1,0 +1,6 @@
+[<Line: + * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#headerObject"
+>, <Line: +   * @return List&lt;Example&gt; examples
+>]
+[<Line: - * @link https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#headerObject
+>, <Line: -   * @return List<Example> examples
+>]

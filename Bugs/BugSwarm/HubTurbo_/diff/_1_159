@@ -1,0 +1,60 @@
+[<Line: +import filter.expression.*;
+>, <Line: +import org.junit.Test;
+>, <Line: +import java.time.LocalDate;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import static org.junit.Assert.assertEquals;
+>, <Line: +import static org.junit.Assert.fail;
+>, <Line: +        assertEquals(Parser.parse(null), Qualifier.EMPTY);
+>, <Line: +        } catch (ParseException ignored) {}
+>, <Line: +        } catch (ParseException ignored) {}
+>, <Line: +        } catch (ParseException ignored) {}
+>, <Line: +        } catch (ParseException ignored) {}
+>, <Line: +                new Qualifier("created", new DateRange(LocalDate.of(2014, 6, 1), LocalDate.of(2013, 3, 15))));
+>, <Line: +                new Qualifier("created", new DateRange(LocalDate.of(2014, 6, 1), null)));
+>, <Line: +        						new Qualifier("created", new DateRange(LocalDate.of(2014, 6, 1), LocalDate.of(2013, 03, 15)))),
+>, <Line: +        						new Qualifier("created", LocalDate.of(2014, 6, 1))),
+>, <Line: +        assertEquals(new Lexer("").lex(), Arrays.asList(
+>, <Line: +                new Token(TokenType.EOF, "", 0)));
+>, <Line: +        assertEquals(new Lexer("a' b' c'").lex(), Arrays.asList(
+>, <Line: +                new Token(TokenType.EOF, "", 0)));
+>, <Line: +	    assertEquals(new Lexer("test/test").lex(), Arrays.asList(
+>, <Line: +		    new Token(TokenType.SYMBOL, "test/test", 0),
+>, <Line: +		    new Token(TokenType.EOF, "", 0)));
+>, <Line: +    	// We want to ensure that parsing some filter and parsing the serialised version
+>, <Line: +    	// of that filter result in the same data structure.
+>, <Line: +	    for (String test : tests) {
+>, <Line: +		    assert test != null;
+>, <Line: +		    assertEquals(Parser.parse(Parser.parse(test).toString()), Parser.parse(test));
+>, <Line: +	    }
+>]
+[<Line: -import static org.junit.Assert.assertEquals;
+>, <Line: -import static org.junit.Assert.fail;
+>, <Line: -import java.time.LocalDate;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import org.junit.Test;
+>, <Line: -import filter.expression.Conjunction;
+>, <Line: -import filter.expression.DateRange;
+>, <Line: -import filter.expression.Disjunction;
+>, <Line: -import filter.expression.Negation;
+>, <Line: -import filter.expression.NumberRange;
+>, <Line: -import filter.expression.Qualifier;
+>, <Line: -        assertEquals(Parser.parse(null), null);
+>, <Line: -        } catch (ParseException e) {}
+>, <Line: -        } catch (ParseException e) {}
+>, <Line: -        } catch (ParseException e) {}
+>, <Line: -        } catch (ParseException e) {}
+>, <Line: -                new Qualifier("created", new DateRange(LocalDate.of(2014, 06, 01), LocalDate.of(2013, 03, 15))));
+>, <Line: -                new Qualifier("created", new DateRange(LocalDate.of(2014, 06, 01), null)));
+>, <Line: -        						new Qualifier("created", new DateRange(LocalDate.of(2014, 06, 01), LocalDate.of(2013, 03, 15)))),
+>, <Line: -        						new Qualifier("created", LocalDate.of(2014, 06, 01))),
+>, <Line: -        assertEquals(new Lexer("").lex(), new ArrayList<Token>(Arrays.asList(
+>, <Line: -                new Token(TokenType.EOF, "", 0))));
+>, <Line: -        assertEquals(new Lexer("a' b' c'").lex(), new ArrayList<Token>(Arrays.asList(
+>, <Line: -                new Token(TokenType.EOF, "", 0))));
+>, <Line: -    	// We want to ensure that parsing some filter, and parsing the serialised version
+>, <Line: -    	// of that filter, results in the same data structure.
+>, <Line: -    	for (int i=0; i<tests.length; i++) {
+>, <Line: -        	assertEquals(Parser.parse(Parser.parse(tests[i]).toString()), Parser.parse(tests[i]));
+>, <Line: -    	}
+>]

@@ -1,0 +1,107 @@
+[<Line: +package org.mp4parser.muxer.builder;
+>, <Line: +import org.mp4parser.*;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.*;
+>, <Line: +import org.mp4parser.boxes.iso23001.part7.CencSampleAuxiliaryDataFormat;
+>, <Line: +import org.mp4parser.boxes.iso23001.part7.SampleEncryptionBox;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.GroupEntry;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.SampleGroupDescriptionBox;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.SampleToGroupBox;
+>, <Line: +import org.mp4parser.muxer.Edit;
+>, <Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Sample;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.tracks.CencEncryptedTrack;
+>, <Line: +import org.mp4parser.support.Logger;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import org.mp4parser.tools.Mp4Arrays;
+>, <Line: +import org.mp4parser.tools.Offsets;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +import static org.mp4parser.tools.CastUtils.l2i;
+>, <Line: +import static org.mp4parser.tools.Mp4Math.lcm;
+>, <Line: +        ParsableBox moov = createMovieBox(movie, chunks);
+>, <Line: +        long dataOffset = 16;
+>, <Line: +        for (Box lightBox : isoFile.getBoxes()) {
+>, <Line: +            dataOffset += lightBox.getSize();
+>, <Line: +        }
+>, <Line: +            offset = Offsets.find(isoFile, saio, offset);
+>, <Line: +        ParsableBox udta = createUdta(movie);
+>, <Line: +    protected ParsableBox createUdta(Movie movie) {
+>, <Line: +        ParsableBox stbl = createStbl(track, movie, chunks);
+>, <Line: +    protected ParsableBox createEdts(Track track, Movie movie) {
+>, <Line: +    protected ParsableBox createStbl(Track track, Movie movie, Map<Track, int[]> chunks) {
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.builder;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.boxes.*;
+>, <Line: -import com.googlecode.mp4parser.BasicContainer;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.googlecode.mp4parser.authoring.Edit;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.CencEncryptedTrack;
+>, <Line: -import com.googlecode.mp4parser.boxes.dece.SampleEncryptionBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.GroupEntry;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.SampleGroupDescriptionBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.SampleToGroupBox;
+>, <Line: -import com.googlecode.mp4parser.util.Logger;
+>, <Line: -import com.googlecode.mp4parser.util.Mp4Arrays;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -import com.mp4parser.iso14496.part12.SampleAuxiliaryInformationOffsetsBox;
+>, <Line: -import com.mp4parser.iso14496.part12.SampleAuxiliaryInformationSizesBox;
+>, <Line: -import com.mp4parser.iso23001.part7.CencSampleAuxiliaryDataFormat;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: -import static com.googlecode.mp4parser.util.Math.lcm;
+>, <Line: -    public static long gcd(long a, long b) {
+>, <Line: -        if (b == 0) {
+>, <Line: -            return a;
+>, <Line: -        }
+>, <Line: -        return gcd(b, a % b);
+>, <Line: -    }
+>, <Line: -        Box moov = createMovieBox(movie, chunks);
+>, <Line: -        long dataOffset = mdat.getDataOffset();
+>, <Line: -            Object b = saio;
+>, <Line: -            do {
+>, <Line: -                Object current = b;
+>, <Line: -                b = ((Box) b).getParent();
+>, <Line: -                for (Box box : ((Container) b).getBoxes()) {
+>, <Line: -                    if (box == current) {
+>, <Line: -                        break;
+>, <Line: -                    }
+>, <Line: -                    offset += box.getSize();
+>, <Line: -                }
+>, <Line: -            } while (b instanceof Box);
+>, <Line: -        Box udta = createUdta(movie);
+>, <Line: -    protected Box createUdta(Movie movie) {
+>, <Line: -        Box stbl = createStbl(track, movie, chunks);
+>, <Line: -    protected Box createEdts(Track track, Movie movie) {
+>, <Line: -    protected Box createStbl(Track track, Movie movie, Map<Track, int[]> chunks) {
+>, <Line: -        Container parent;
+>, <Line: -        public Container getParent() {
+>, <Line: -            return parent;
+>, <Line: -        }
+>, <Line: -        public void setParent(Container parent) {
+>, <Line: -            this.parent = parent;
+>, <Line: -        }
+>, <Line: -        public long getOffset() {
+>, <Line: -            throw new RuntimeException("Doesn't have any meaning for programmatically created boxes");
+>, <Line: -        }
+>, <Line: -        public void parse(DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>, <Line: -        }
+>, <Line: -        public long getDataOffset() {
+>, <Line: -            Object b = this;
+>, <Line: -            long offset = 16;
+>, <Line: -            while (b instanceof Box) {
+>, <Line: -                for (Box box : ((Box) b).getParent().getBoxes()) {
+>, <Line: -                    if (b == box) {
+>, <Line: -                        break;
+>, <Line: -                    }
+>, <Line: -                    offset += box.getSize();
+>, <Line: -                }
+>, <Line: -                b = ((Box) b).getParent();
+>, <Line: -            }
+>, <Line: -            return offset;
+>, <Line: -        }
+>]

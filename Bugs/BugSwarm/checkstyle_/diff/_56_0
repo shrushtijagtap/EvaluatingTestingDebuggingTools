@@ -1,0 +1,6 @@
+[<Line: +    <maven.sevntu.checkstyle.plugin.version>1.24.1</maven.sevntu.checkstyle.plugin.version>
+>, <Line: +    <maven.sevntu-checkstyle-check.checkstyle.version>8.0</maven.sevntu-checkstyle-check.checkstyle.version>
+>]
+[<Line: -    <maven.sevntu.checkstyle.plugin.version>1.24.0</maven.sevntu.checkstyle.plugin.version>
+>, <Line: -    <maven.sevntu-checkstyle-check.checkstyle.version>7.8.2</maven.sevntu-checkstyle-check.checkstyle.version>
+>]

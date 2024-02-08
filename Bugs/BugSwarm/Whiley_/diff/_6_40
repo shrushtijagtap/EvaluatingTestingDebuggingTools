@@ -1,0 +1,39 @@
+[<Line: +import wycc.lang.Attribute;
+>, <Line: +		for(WyilFile.Type type : module.types()) {
+>, <Line: +			check(type.getTree());
+>, <Line: +		for(WyilFile.FunctionOrMethod method : module.functionOrMethods()) {
+>, <Line: +			check(method.getTree());
+>, <Line: +	protected void check(SyntaxTree tree) {
+>, <Line: +		List<SyntaxTree.Location<?>> expressions = tree.getLocations();
+>, <Line: +		for (int i = 0; i != expressions.size(); ++i) {
+>, <Line: +			SyntaxTree.Location<?> l = expressions.get(i);
+>, <Line: +			if (l.getBytecode() instanceof Bytecode.Expr) {
+>, <Line: +				Bytecode.Expr e = (Bytecode.Expr) l.getBytecode();
+>, <Line: +				if (e instanceof Bytecode.Convert) {
+>, <Line: +					Bytecode.Convert c = (Bytecode.Convert) e;
+>, <Line: +					// FIXME: need to fix this :)
+>, <Line: +					// check(conv.type(0), c.type(), new HashSet<Pair<Type,
+>, <Line: +					// Type>>(), e.attribute(SourceLocation.class));
+>, <Line: +				}
+>, <Line: +	protected void check(Type from, Type to, HashSet<Pair<Type, Type>> visited, Attribute.Source location) {
+>, <Line: +			Attribute.Source location) {
+>]
+[<Line: -import wyil.attributes.SourceLocation;
+>, <Line: -		for(WyilFile.FunctionOrMethod method : module.functionOrMethods()) {
+>, <Line: -			check(method);
+>, <Line: -	}
+>, <Line: -	public void check(WyilFile.FunctionOrMethod method) {
+>, <Line: -		BytecodeForest forest = method.code();
+>, <Line: -		for(int i=0;i!=forest.numBlocks();++i) {
+>, <Line: -			check(i, forest, method);
+>, <Line: -	protected void check(int blockID, BytecodeForest forest, WyilFile.FunctionOrMethod method) {
+>, <Line: -		BytecodeForest.Block block = forest.get(blockID);
+>, <Line: -		for (int i = 0; i != block.size(); ++i) {
+>, <Line: -			BytecodeForest.Entry e = block.get(i);
+>, <Line: -			Bytecode code = e.code();
+>, <Line: -			if (code instanceof Bytecode.Convert) {
+>, <Line: -				Bytecode.Convert conv = (Bytecode.Convert) code;
+>, <Line: -				check(conv.type(0), conv.result(), new HashSet<Pair<Type, Type>>(), e.attribute(SourceLocation.class));
+>, <Line: -	protected void check(Type from, Type to, HashSet<Pair<Type, Type>> visited, SourceLocation location) {
+>, <Line: -			SourceLocation location) {
+>]

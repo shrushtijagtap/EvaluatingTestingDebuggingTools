@@ -1,0 +1,14 @@
+[<Line: +        return "http://bmclapi2.bangbang93.com/mc/game/version_manifest.json";
+>, <Line: +    public String getParsedDownloadURL(String str) {
+>, <Line: +        return str == null ? null
+>, <Line: +               : str.replace("https://launchermeta.mojang.com", "http://bmclapi2.bangbang93.com")
+>, <Line: +            .replace("https://launcher.mojang.com", "http://bmclapi2.bangbang93.com")
+>, <Line: +            .replace("https://libraries.minecraft.net", "http://bmclapi2.bangbang93.com/libraries")
+>, <Line: +            .replace("http://files.minecraftforge.net/maven", "http://bmclapi2.bangbang93.com/maven");
+>, <Line: +        return true;
+>]
+[<Line: -        return "http://bmclapi2.bangbang93.com/versions/versions.json";
+>, <Line: -    public String getParsedLibraryDownloadURL(String str) {
+>, <Line: -        return str == null ? null : str.replace("http://files.minecraftforge.net/maven", "http://bmclapi2.bangbang93.com/maven");
+>, <Line: -        return false;
+>]

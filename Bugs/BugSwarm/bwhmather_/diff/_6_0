@@ -1,0 +1,14 @@
+[<Line: +from urllib.parse import parse_qsl
+>, <Line: +        qs = wsgi_decoding_dance(
+>, <Line: +            self.environ.get('QUERY_STRING', ''),
+>, <Line: +            charset=self.url_charset, errors=self.encoding_errors,
+>, <Line: +        )
+>, <Line: +        return self.parameter_storage_class(parse_qsl(
+>, <Line: +            qs, encoding=self.url_charset, errors=self.encoding_errors,
+>, <Line: +        ))
+>]
+[<Line: -from werkzeug.urls import url_decode
+>, <Line: -        return url_decode(wsgi_get_bytes(self.environ.get('QUERY_STRING', '')),
+>, <Line: -                          self.url_charset, errors=self.encoding_errors,
+>, <Line: -                          cls=self.parameter_storage_class)
+>]

@@ -1,0 +1,18 @@
+[<Line: +		public ProcessBuilder getToolProcessBuilder() throws CommonException, OperationCancellation {
+>, <Line: +			ProcessBuilder pb = super.getToolProcessBuilder();
+>, <Line: +			if(workingDirectory != null) {
+>, <Line: +				pb.directory(workingDirectory.toFile());
+>, <Line: +			}
+>, <Line: +					Indexable<String> commandLineOriginal = new ArrayList2<>(getEffectiveProccessCommandLine());
+>, <Line: +					ProcessBuilder pb = getToolProcessBuilder();
+>, <Line: +						runBuildToolAndProcessOutput(pb, pm);
+>, <Line: +						pb.command(argumentsTemplate);
+>, <Line: +						runBuildToolAndProcessOutput(pb, pm);
+>]
+[<Line: -		protected ProcessBuilder getProcessBuilder3(Indexable<String> commandLine)
+>, <Line: -				throws CommonException {
+>, <Line: -			ProcessBuilder pb = getToolManager().createToolProcessBuilder(commandLine, workingDirectory);
+>, <Line: -					Indexable<String> commandLineOriginal = getEffectiveProccessCommandLine();
+>, <Line: -						runBuildToolAndProcessOutput(getProcessBuilder3(commandLineOriginal), pm);
+>, <Line: -						runBuildToolAndProcessOutput(getProcessBuilder3(argumentsTemplate), pm);
+>]

@@ -1,0 +1,42 @@
+[<Line: +		OWLDataFactory dataFactory = manager.getOWLDataFactory();
+>, <Line: +		for (OClass c :  model.getOntologyVocabulary().getClasses()) {
+>, <Line: +			OWLClass newclass = dataFactory.getOWLClass(IRI.create(c.getName()));
+>, <Line: +			manager.addAxiom(ontology, declarationAxiom);
+>, <Line: +		for (ObjectPropertyExpression p : model.getOntologyVocabulary().getObjectProperties()){
+>, <Line: +			OWLObjectProperty newclass = dataFactory.getOWLObjectProperty(IRI.create(p.getName()));
+>, <Line: +			manager.addAxiom(ontology, declarationAxiom);
+>, <Line: +		for (DataPropertyExpression p : model.getOntologyVocabulary().getDataProperties()){
+>, <Line: +			OWLDataProperty newclass = dataFactory.getOWLDataProperty(IRI.create(p.getName()));
+>, <Line: +			manager.addAxiom(ontology, declarationAxiom);
+>, <Line: +				CQIE rule = mapping.getTargetQuery();
+>, <Line: +						model.getOntologyVocabulary().createClass(f.getFunctionSymbol().getName());
+>, <Line: +					else if (f.getFunctionSymbol().getType(1).equals(COL_TYPE.OBJECT))
+>, <Line: +						model.getOntologyVocabulary().createObjectProperty(f.getFunctionSymbol().getName());
+>, <Line: +						model.getOntologyVocabulary().createDataProperty(f.getFunctionSymbol().getName());
+>]
+[<Line: -import it.unibz.krdb.obda.model.OBDAQuery;
+>, <Line: -import java.util.Iterator;
+>, <Line: -import java.util.Set;
+>, <Line: -//import com.hp.hpl.jena.iri.impl.IRIFactoryImpl;
+>, <Line: -//import it.unibz.krdb.obda.model.net.IRIFactory;
+>, <Line: -		OWLDataFactory dataFactory = manager.getOWLDataFactory();
+>, <Line: -		Set<OClass> classset = model.getDeclaredClasses();
+>, <Line: -		Set<ObjectPropertyExpression> objectset = model.getDeclaredObjectProperties();
+>, <Line: -		Set<DataPropertyExpression> dataset = model.getDeclaredDataProperties();
+>, <Line: -		for(Iterator<OClass> it = classset.iterator(); it.hasNext(); ) {
+>, <Line: -			OWLClass newclass = dataFactory.getOWLClass(IRI.create(it.next().getPredicate().getName()));
+>, <Line: -			manager.addAxiom(ontology,declarationAxiom );
+>, <Line: -		for(Iterator<ObjectPropertyExpression> it = objectset.iterator(); it.hasNext();){
+>, <Line: -			OWLObjectProperty newclass = dataFactory.getOWLObjectProperty(IRI.create(it.next().getPredicate().getName().toString()));
+>, <Line: -			manager.addAxiom(ontology,declarationAxiom );
+>, <Line: -		for(Iterator<DataPropertyExpression> it = dataset.iterator(); it.hasNext();){
+>, <Line: -			OWLDataProperty newclass = dataFactory.getOWLDataProperty(IRI.create(it.next().getPredicate().getName().toString()));
+>, <Line: -			manager.addAxiom(ontology,declarationAxiom );
+>, <Line: -				OBDAQuery q = mapping.getTargetQuery();
+>, <Line: -				CQIE rule = (CQIE) q;
+>, <Line: -						model.declareClass(ofac.createClass(f.getFunctionSymbol().getName()));
+>, <Line: -					else if (f.getFunctionSymbol().getType(1)
+>, <Line: -							.equals(COL_TYPE.OBJECT))
+>, <Line: -						model.declareObjectProperty(ofac.createObjectProperty(f.getFunctionSymbol().getName()));
+>, <Line: -						model.declareDataProperty(ofac.createDataProperty(f.getFunctionSymbol().getName()));
+>]

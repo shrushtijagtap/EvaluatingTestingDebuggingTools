@@ -1,0 +1,156 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.pedigree.compatibilitychecker.xr;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import com.google.common.collect.ImmutableSet;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Disease;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Genotype;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.GenotypeList;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Pedigree;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.PedigreeQueryDecorator;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Person;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Sex;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerBase;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerException;
+>, <Line: -/**
+>, <Line: - * Helper class for checking a {@link GenotypeList} for compatibility with a {@link Pedigree} and autosomal recessive
+>, <Line: - * homozygous mode.
+>, <Line: - *
+>, <Line: - * <h2>Compatibility Check</h2>
+>, <Line: - *
+>, <Line: - * In the case of a single individual, we require {@link Genotype#HOMOZYGOUS_ALT}.
+>, <Line: - *
+>, <Line: - * In the case of multiple individuals, we require that the affects are compatible, that the unaffected parents of
+>, <Line: - * affected individuals are not {@link Genotype#HOMOZYGOUS_ALT}, unaffected females are not are not
+>, <Line: - * {@link Genotype#HOMOZYGOUS_REF}, and that all unaffected individuals are not {@link Genotype#HOMOZYGOUS_ALT}. The
+>, <Line: - * affected individuals are compatible if no affected individual is {@link Genotype#HOMOZYGOUS_REF} or
+>, <Line: - * {@link Genotype#HETEROZYGOUS} and there is at least one affected individual that is {@link Genotype#HOMOZYGOUS_ALT}.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - * @author <a href="mailto:max.schubach@charite.de">Max Schubach</a>
+>, <Line: - * @author <a href="mailto:peter.robinson@charite.de">Peter N Robinson</a>
+>, <Line: - * 
+>, <Line: - * @deprecated use {@link VariantContextCompatibilityCheckerXRecessiveHomozygous} instead.
+>, <Line: - */
+>, <Line: -@Deprecated
+>, <Line: -class CompatibilityCheckerXRecessiveHomozygous extends CompatibilityCheckerBase {
+>, <Line: -	/**
+>, <Line: -	 * decorator for getting unaffected individuals and such from the {@link Pedigree}
+>, <Line: -	 */
+>, <Line: -	protected final PedigreeQueryDecorator queryDecorator;
+>, <Line: -	/**
+>, <Line: -	 * Initialize compatibility checker and perform some sanity checks.
+>, <Line: -	 *
+>, <Line: -	 * The {@link GenotypeList} object passed to the constructor is expected to represent all of the variants found in a
+>, <Line: -	 * certain gene (possibly after filtering for rarity or predicted pathogenicity). The samples represented by the
+>, <Line: -	 * {@link GenotypeList} must be in the same order as the list of individuals contained in this pedigree.
+>, <Line: -	 *
+>, <Line: -	 * @param pedigree
+>, <Line: -	 *            the {@link Pedigree} to use for the initialize
+>, <Line: -	 * @param list
+>, <Line: -	 *            the {@link GenotypeList} to use for the initialization
+>, <Line: -	 * @throws CompatibilityCheckerException
+>, <Line: -	 *             if the pedigree or variant list is invalid
+>, <Line: -	 */
+>, <Line: -	public CompatibilityCheckerXRecessiveHomozygous(Pedigree pedigree, GenotypeList list)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		super(pedigree, list);
+>, <Line: -		this.queryDecorator = new PedigreeQueryDecorator(pedigree);
+>, <Line: -	}
+>, <Line: -	public boolean runSingleSampleCase() {
+>, <Line: -		// for both male and female subjects, return true if homozygous alt
+>, <Line: -		for (ImmutableList<Genotype> gtList : list.getCalls())
+>, <Line: -			if (gtList.get(0) == Genotype.HOMOZYGOUS_ALT)
+>, <Line: -				return true;
+>, <Line: -			else if (pedigree.getMembers().get(0).getSex() != Sex.FEMALE && gtList.get(0) == Genotype.HETEROZYGOUS)
+>, <Line: -				return true;
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -	public boolean runMultiSampleCase() {
+>, <Line: -		for (ImmutableList<Genotype> gtList : list.getCalls()) {
+>, <Line: -			// Check whether this list of genotype calls is compatible when with
+>, <Line: -			// the set of affected individuals, the
+>, <Line: -			// parents, and the unaffected individuals.
+>, <Line: -			if (checkCompatibilityAffected(gtList) && checkCompatibilityParents(gtList)
+>, <Line: -					&& checkCompatibilityUnaffected(gtList))
+>, <Line: -				return true;
+>, <Line: -		}
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -	private boolean checkCompatibilityAffected(ImmutableList<Genotype> gtList) {
+>, <Line: -		int numMut = 0;
+>, <Line: -		int i = 0;
+>, <Line: -		for (Person person : pedigree.getMembers()) {
+>, <Line: -			if (person.getDisease() == Disease.AFFECTED) {
+>, <Line: -				if (gtList.get(i) == Genotype.HOMOZYGOUS_REF)
+>, <Line: -					/**
+>, <Line: -					 * acnnot be disease-causing mutation, an affected male or female does not have it.
+>, <Line: -					 */
+>, <Line: -					return false;
+>, <Line: -				else if (person.getSex() == Sex.FEMALE && gtList.get(i) == Genotype.HETEROZYGOUS)
+>, <Line: -					/**
+>, <Line: -					 * cannot be disease-causing mutation if a female have it heterozygous. For a male we think it is a
+>, <Line: -					 * misscall (alt instead of het)
+>, <Line: -					 */
+>, <Line: -					return false;
+>, <Line: -				else if (gtList.get(i) == Genotype.HOMOZYGOUS_ALT
+>, <Line: -						|| (person.getSex() != Sex.FEMALE && gtList.get(i) == Genotype.HETEROZYGOUS))
+>, <Line: -					numMut += 1;
+>, <Line: -			}
+>, <Line: -			++i;
+>, <Line: -		}
+>, <Line: -		return (numMut > 0);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * For XR the parents of male and female behaves different. The father of a Female individual must always be
+>, <Line: -	 * affected. If the sex is unknown to check is made!
+>, <Line: -	 * 
+>, <Line: -	 * @param gtList
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private boolean checkCompatibilityParents(ImmutableList<Genotype> gtList) {
+>, <Line: -		final ImmutableSet<String> femaleParentNames = queryDecorator.getAffectedFemaleParentNames();
+>, <Line: -		final ImmutableSet<String> maleParentNames = queryDecorator.getAffectedFemaleParentNames();
+>, <Line: -		int i = 0;
+>, <Line: -		for (Person person : pedigree.getMembers()) {
+>, <Line: -			final Genotype gt = gtList.get(i);
+>, <Line: -			if (femaleParentNames.contains(person.getName())) {
+>, <Line: -				if (person.getSex() == Sex.MALE && person.getDisease() == Disease.UNAFFECTED)
+>, <Line: -					return false; // must always be affected. If affected it is
+>, <Line: -									// already checked!
+>, <Line: -				if (person.getSex() == Sex.FEMALE && (gt == Genotype.HOMOZYGOUS_ALT || gt == Genotype.HOMOZYGOUS_REF))
+>, <Line: -					return false; // cannot be disease-causing mutation if
+>, <Line: -									// mother of patient is homozygous or not
+>, <Line: -									// the carrier
+>, <Line: -			} else if (maleParentNames.contains(person.getName())) {
+>, <Line: -				if (person.getSex() == Sex.MALE && person.getDisease() == Disease.UNAFFECTED
+>, <Line: -						&& (gt == Genotype.HOMOZYGOUS_ALT || gt != Genotype.HETEROZYGOUS))
+>, <Line: -					return false; // unaffected male can not me heterozygos
+>, <Line: -									// (wrong call) or hemizygous
+>, <Line: -				if (person.getSex() == Sex.FEMALE && gt == Genotype.HOMOZYGOUS_ALT)
+>, <Line: -					return false; // cannot be disease-causing mutation if
+>, <Line: -									// mother of patient is homozygous
+>, <Line: -			}
+>, <Line: -			++i;
+>, <Line: -		}
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -	private boolean checkCompatibilityUnaffected(ImmutableList<Genotype> gtList) {
+>, <Line: -		final ImmutableSet<String> unaffectedNames = queryDecorator.getUnaffectedNames();
+>, <Line: -		int i = 0;
+>, <Line: -		for (Person person : pedigree.getMembers()) {
+>, <Line: -			if (unaffectedNames.contains(person.getName())) {
+>, <Line: -				final Genotype gt = gtList.get(i);
+>, <Line: -				// Strict handling. Males cannot be called heterozygous (will be
+>, <Line: -				// seen as a homozygous mutation)
+>, <Line: -				if (person.isMale() && (gt == Genotype.HETEROZYGOUS || gt == Genotype.HOMOZYGOUS_ALT))
+>, <Line: -					return false;
+>, <Line: -				else if (gt == Genotype.HOMOZYGOUS_ALT)
+>, <Line: -					return false; // cannot be disease-causing mutation (female
+>, <Line: -									// or unknown)
+>, <Line: -			}
+>, <Line: -			++i;
+>, <Line: -		}
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -}
+>]

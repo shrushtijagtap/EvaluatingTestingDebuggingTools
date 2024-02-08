@@ -1,0 +1,31 @@
+[<Line: +import org.yamcs.parameter.ParameterValue;
+>, <Line: +    String spQueueState;
+>, <Line: +    String spNumSentCommands;
+>, <Line: +    String spNumRejectedCommands;
+>, <Line: +    String spNumCommands;
+>, <Line: +        spQueueState = sysParamCollector.getNamespace()+"/cmdQueue/"+name+"/state";
+>, <Line: +        spNumCommands = sysParamCollector.getNamespace()+"/cmdQueue/"+name+"/numCommands";
+>, <Line: +        spNumSentCommands = sysParamCollector.getNamespace()+"/cmdQueue/"+name+"/numSentCommands";
+>, <Line: +        spNumRejectedCommands = sysParamCollector.getNamespace()+"/cmdQueue/"+name+"/numRejectedCommands";
+>, <Line: +    void fillInSystemParameters(List<ParameterValue> params, long time) {
+>, <Line: +        params.add(SystemParametersCollector.getPV(spQueueState, time, state.name()));
+>, <Line: +        params.add(SystemParametersCollector.getPV(spNumCommands, time, commands.size()));
+>, <Line: +        params.add(SystemParametersCollector.getPV(spNumSentCommands, time, nbSentCommands));
+>, <Line: +        params.add(SystemParametersCollector.getPV(spNumRejectedCommands, time, nbRejectedCommands));
+>]
+[<Line: -import org.yamcs.protobuf.Pvalue;
+>, <Line: -import org.yamcs.protobuf.Yamcs.NamedObjectId;
+>, <Line: -    NamedObjectId sp_queueState_id;
+>, <Line: -    NamedObjectId sp_numSentCommands_id;
+>, <Line: -    NamedObjectId sp_numRejectedCommands_id;
+>, <Line: -    NamedObjectId sp_numCommands_id;
+>, <Line: -        sp_queueState_id = NamedObjectId.newBuilder().setName(sysParamCollector.getNamespace()+"/cmdQueue/"+name+"/state").build();
+>, <Line: -        sp_numCommands_id = NamedObjectId.newBuilder().setName(sysParamCollector.getNamespace()+"/cmdQueue/"+name+"/numCommands").build();
+>, <Line: -        sp_numSentCommands_id = NamedObjectId.newBuilder().setName(sysParamCollector.getNamespace()+"/cmdQueue/"+name+"/numSentCommands").build();
+>, <Line: -        sp_numRejectedCommands_id = NamedObjectId.newBuilder().setName(sysParamCollector.getNamespace()+"/cmdQueue/"+name+"/numRejectedCommands").build();
+>, <Line: -    void fillInSystemParameters(List<Pvalue.ParameterValue> params, long time) {
+>, <Line: -        params.add(SystemParametersCollector.getPV(sp_queueState_id, time, state.name()));
+>, <Line: -        params.add(SystemParametersCollector.getPV(sp_numCommands_id, time, commands.size()));
+>, <Line: -        params.add(SystemParametersCollector.getPV(sp_numSentCommands_id, time, nbSentCommands));
+>, <Line: -        params.add(SystemParametersCollector.getPV(sp_numRejectedCommands_id, time, nbRejectedCommands));
+>]

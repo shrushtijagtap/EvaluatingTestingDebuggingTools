@@ -1,0 +1,23 @@
+[<Line: +	/**
+>, <Line: +	 * Represents a named function or method. This is used when taking the
+>, <Line: +	 * address of a function or method.
+>, <Line: +	 * 
+>, <Line: +	 * @author David J. Pearce
+>, <Line: +	 *
+>, <Line: +	 */
+>, <Line: +	public static final class FunctionOrMethod extends Constant {
+>, <Line: +		public FunctionOrMethod(NameID name, wyil.lang.Type.FunctionOrMethod type, Constant... arguments) {
+>, <Line: +		public FunctionOrMethod(NameID name, wyil.lang.Type.FunctionOrMethod type, Collection<Constant> arguments) {
+>, <Line: +			if(o instanceof FunctionOrMethod) {
+>, <Line: +				FunctionOrMethod i = (FunctionOrMethod) o;
+>, <Line: +			if(v instanceof FunctionOrMethod) {
+>, <Line: +				FunctionOrMethod t = (FunctionOrMethod) v;
+>]
+[<Line: -	public static final class Lambda extends Constant {
+>, <Line: -		public Lambda(NameID name, wyil.lang.Type.FunctionOrMethod type, Constant... arguments) {
+>, <Line: -		public Lambda(NameID name, wyil.lang.Type.FunctionOrMethod type, Collection<Constant> arguments) {
+>, <Line: -			if(o instanceof Lambda) {
+>, <Line: -				Lambda i = (Lambda) o;
+>, <Line: -			if(v instanceof Lambda) {
+>, <Line: -				Lambda t = (Lambda) v;
+>]

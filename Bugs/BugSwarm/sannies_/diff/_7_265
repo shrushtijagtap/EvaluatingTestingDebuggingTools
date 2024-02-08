@@ -1,0 +1,12 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.BoxParser;
+>, <Line: +import org.mp4parser.support.AbstractContainerBox;
+>, <Line: +import java.nio.channels.ReadableByteChannel;
+>, <Line: +    public void parse(ReadableByteChannel dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.googlecode.mp4parser.AbstractContainerBox;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -    public void parse(DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>]

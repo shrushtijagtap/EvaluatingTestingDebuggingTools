@@ -1,0 +1,8 @@
+[<Line: +    [&Actor] row = [createActor(0); n]
+>, <Line: +    int j = 1
+>, <Line: +        row[j] = m
+>]
+[<Line: -    [&Actor] row = []
+>, <Line: -    int j = 0
+>, <Line: -        row = row ++ [m]
+>]

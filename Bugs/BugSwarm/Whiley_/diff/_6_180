@@ -1,0 +1,4 @@
+[<Line: +        where all { j in 0..|rs| | rs[j] >= 0 }:
+>]
+[<Line: -        where no { j in 0..|rs| | rs[j] < 0 }:
+>]

@@ -1,0 +1,16 @@
+[<Line: +			@Named(MEMORY_QUEUE_SIZE) int memoryQueueSize,
+>, <Line: +			@Named(MINIMUM_BATCH_SIZE) int minimumBatchSize)
+>, <Line: +		super(executor, batchSize, minimumBatchSize);
+>, <Line: +	public void addReportedMetrics(ArrayList<DataPointSet> metrics, long now)
+>, <Line: +		metrics.add(dps);
+>, <Line: +	@Override
+>, <Line: +	protected int getAvailableDataPointEvents()
+>, <Line: +	{
+>, <Line: +		return m_queue.size();
+>, <Line: +	}
+>]
+[<Line: -			@Named(MEMORY_QUEUE_SIZE) int memoryQueueSize)
+>, <Line: -		super(executor, batchSize);
+>, <Line: -	public List<DataPointSet> getMetrics(long now)
+>, <Line: -		return Collections.singletonList(dps);
+>]

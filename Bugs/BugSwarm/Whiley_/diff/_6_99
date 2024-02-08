@@ -1,0 +1,4 @@
+[<Line: +type EmptyList is int[] & bool[]
+>]
+[<Line: -type EmptyList is int[] & real[]
+>]

@@ -1,0 +1,18 @@
+[<Line: +package org.mp4parser.boxes.sampleentry;
+>, <Line: +import org.mp4parser.BoxParser;
+>, <Line: +import org.mp4parser.support.AbstractContainerBox;
+>, <Line: +import java.nio.channels.ReadableByteChannel;
+>, <Line: + * @see AudioSampleEntry
+>, <Line: + * @see VisualSampleEntry
+>, <Line: + * @see TextSampleEntry
+>, <Line: +    public abstract void parse(ReadableByteChannel dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException;
+>]
+[<Line: -package com.coremedia.iso.boxes.sampleentry;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.googlecode.mp4parser.AbstractContainerBox;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: - * @see com.coremedia.iso.boxes.sampleentry.AudioSampleEntry
+>, <Line: - * @see com.coremedia.iso.boxes.sampleentry.VisualSampleEntry
+>, <Line: - * @see com.coremedia.iso.boxes.sampleentry.TextSampleEntry
+>, <Line: -    public abstract void parse(DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException;
+>]

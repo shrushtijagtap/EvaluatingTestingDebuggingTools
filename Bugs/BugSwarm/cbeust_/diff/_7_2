@@ -1,0 +1,47 @@
+[<Line: +import java.lang.reflect.InvocationTargetException;
+>, <Line: +import java.lang.reflect.Method;
+>, <Line: +      } else if (testClass.getTestName() != null) {
+>, <Line: +      } else {
+>, <Line: +        } catch(NoSuchMethodException ignore) {
+>, <Line: +  private static String toString(int status) {
+>, <Line: +    m_parameters = new Object[parameters.length];
+>, <Line: +    for (int i=0; i<parameters.length; i++) {
+>, <Line: +      // Copy parameter if possible because user may change it later
+>, <Line: +      if (parameters[i] instanceof Cloneable) {
+>, <Line: +        Method clone;
+>, <Line: +        try {
+>, <Line: +          clone = parameters[i].getClass().getDeclaredMethod("clone");
+>, <Line: +          clone.setAccessible(true);
+>, <Line: +          m_parameters[i] = clone.invoke(parameters[i]);
+>, <Line: +        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | SecurityException e) {
+>, <Line: +          m_parameters[i] = parameters[i];
+>, <Line: +        }
+>, <Line: +      } else {
+>, <Line: +        m_parameters[i] = parameters[i];
+>, <Line: +      }
+>, <Line: +    }
+>]
+[<Line: -  /**
+>, <Line: -   *
+>, <Line: -   * @param testClass
+>, <Line: -   * @param instance
+>, <Line: -   * @param method
+>, <Line: -   * @param throwable
+>, <Line: -   * @param start
+>, <Line: -   * @param end
+>, <Line: -   */
+>, <Line: -      }
+>, <Line: -      else if (testClass.getTestName() != null) {
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        }
+>, <Line: -        catch(NoSuchMethodException ignore) {
+>, <Line: -  private static void ppp(String s) {
+>, <Line: -    System.out.println("[TestResult] " + s);
+>, <Line: -  }
+>, <Line: -//  public List<String> getOutput() {
+>, <Line: -//    return m_output;
+>, <Line: -//  }
+>, <Line: -  private String toString(int status) {
+>, <Line: -    m_parameters = parameters;
+>]

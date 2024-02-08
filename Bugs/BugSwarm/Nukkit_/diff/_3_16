@@ -1,0 +1,24 @@
+[<Line: +                if ((pair.x + ((int) pair.z << 15)) > (this.x + ((int) this.z << 15))) { //Order them correctly
+>, <Line: +        this.namedTag.putInt("pairx", (int) tile.x);
+>, <Line: +        this.namedTag.putInt("pairz", (int) tile.z);
+>, <Line: +        tile.namedTag.putInt("pairx", (int) this.x);
+>, <Line: +        tile.namedTag.putInt("pairz", (int) this.z);
+>, <Line: +                    .putInt("x", (int) this.x)
+>, <Line: +                    .putInt("y", (int) this.y)
+>, <Line: +                    .putInt("z", (int) this.z)
+>, <Line: +                    .putInt("x", (int) this.x)
+>, <Line: +                    .putInt("y", (int) this.y)
+>, <Line: +                    .putInt("z", (int) this.z);
+>]
+[<Line: -                if ((pair.x + (pair.z << 15)) > (this.x + (this.z << 15))) { //Order them correctly
+>, <Line: -        this.namedTag.putInt("pairx", tile.x);
+>, <Line: -        this.namedTag.putInt("pairz", tile.z);
+>, <Line: -        tile.namedTag.putInt("pairx", this.x);
+>, <Line: -        tile.namedTag.putInt("pairz", this.z);
+>, <Line: -                    .putInt("x", this.x)
+>, <Line: -                    .putInt("y", this.y)
+>, <Line: -                    .putInt("z", this.z)
+>, <Line: -                    .putInt("x", this.x)
+>, <Line: -                    .putInt("y", this.y)
+>, <Line: -                    .putInt("z", this.z);
+>]

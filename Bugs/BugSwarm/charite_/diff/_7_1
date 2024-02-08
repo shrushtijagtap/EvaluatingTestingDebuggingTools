@@ -1,0 +1,5 @@
+[<Line: +	/** Path to pedigree file */
+>, <Line: +	public String pathPedFile;
+>, <Line: +			out.println("PED file: " + pathPedFile);
+>]
+[]

@@ -1,0 +1,8 @@
+[<Line: +    super.addObjectAt(newObj, pos);
+>, <Line: +     * The default vehicle length: <code>2</code>.
+>, <Line: +    public static final double DEFAULT_VEHICLE_LENGTH = 2;
+>]
+[<Line: -    super.addObjectAt(newObj, pos);
+>, <Line: -     * The default vehicle length: <code>1</code>.
+>, <Line: -    public static final double DEFAULT_VEHICLE_LENGTH = 1;
+>]

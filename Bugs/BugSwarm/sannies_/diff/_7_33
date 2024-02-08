@@ -1,0 +1,9 @@
+[<Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.container.mp4.MovieCreator;
+>]
+[<Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+>]

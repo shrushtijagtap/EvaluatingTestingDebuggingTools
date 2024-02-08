@@ -1,0 +1,6 @@
+[<Line: +import org.fest.assertions.api.Assertions;
+>, <Line: +      Assertions.assertThat(content)
+>, <Line: +               .matches("(?s).*action=\"" + client.getContextPath() + "/faces/error\\.xhtml.*");
+>]
+[<Line: -      Assert.assertTrue(content.matches("(?s).*action=\"" + client.getContextPath() + "/faces/error\\.xhtml.*"));
+>]

@@ -1,0 +1,22 @@
+[<Line: +import net.bytebuddy.dynamic.scaffold.MethodGraphCompilerDefaultTest;
+>, <Line: +import org.junit.Ignore;
+>, <Line: +    @Test
+>, <Line: +    @Ignore("Does not currently work correctly")
+>, <Line: +    public void testRawType() throws Exception {
+>, <Line: +        TypeDescription.Generic type = describeType(RawType.class.getDeclaredField(FOO)).getSuperClass().getSuperClass();
+>, <Line: +        FieldDescription fieldDescription = type.getDeclaredFields().filter(named(BAR)).getOnly();
+>, <Line: +        assertThat(fieldDescription.getType().getSort(), is(TypeDefinition.Sort.NON_GENERIC));
+>, <Line: +        assertThat(fieldDescription.getType().asErasure(), is((TypeDescription) new TypeDescription.ForLoadedType(Number.class)));
+>, <Line: +    }
+>, <Line: +    public static class RawType<T> {
+>, <Line: +        Extension foo;
+>, <Line: +        T bar;
+>, <Line: +        public static class Intermediate<T extends Number> extends RawType<T> {
+>, <Line: +            /* empty */
+>, <Line: +        }
+>, <Line: +        public static class Extension extends Intermediate {
+>, <Line: +            /* empty */
+>, <Line: +        }
+>, <Line: +    }
+>]
+[]

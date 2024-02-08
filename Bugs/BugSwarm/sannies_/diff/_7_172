@@ -1,0 +1,91 @@
+[<Line: +package org.mp4parser.boxes.dece;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.support.DoNotParseDetail;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.Utf8;
+>, <Line: +    public static class Entry {
+>, <Line: +        public String namespace;
+>, <Line: +        public String profileLevelIdc;
+>, <Line: +        public String assetId;
+>, <Line: +        public Entry(String namespace, String profileLevelIdc, String assetId) {
+>, <Line: +            this.namespace = namespace;
+>, <Line: +            this.profileLevelIdc = profileLevelIdc;
+>, <Line: +            this.assetId = assetId;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public String toString() {
+>, <Line: +            return "{" +
+>, <Line: +                    "namespace='" + namespace + '\'' +
+>, <Line: +                    ", profileLevelIdc='" + profileLevelIdc + '\'' +
+>, <Line: +                    ", assetId='" + assetId + '\'' +
+>, <Line: +                    '}';
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public boolean equals(Object o) {
+>, <Line: +            if (this == o) return true;
+>, <Line: +            if (o == null || getClass() != o.getClass()) return false;
+>, <Line: +            Entry entry = (Entry) o;
+>, <Line: +            if (!assetId.equals(entry.assetId)) return false;
+>, <Line: +            if (!namespace.equals(entry.namespace)) return false;
+>, <Line: +            if (!profileLevelIdc.equals(entry.profileLevelIdc)) return false;
+>, <Line: +            return true;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public int hashCode() {
+>, <Line: +            int result = namespace.hashCode();
+>, <Line: +            result = 31 * result + profileLevelIdc.hashCode();
+>, <Line: +            result = 31 * result + assetId.hashCode();
+>, <Line: +            return result;
+>, <Line: +        }
+>, <Line: +        public int getSize() {
+>, <Line: +            return 3 + Utf8.utf8StringLengthInBytes(namespace) +
+>, <Line: +                    Utf8.utf8StringLengthInBytes(profileLevelIdc) + Utf8.utf8StringLengthInBytes(assetId);
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.dece;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.Utf8;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -import com.googlecode.mp4parser.annotations.DoNotParseDetail;
+>, <Line: -import java.util.List;
+>, <Line: -    public static class Entry {
+>, <Line: -        public Entry(String namespace, String profileLevelIdc, String assetId) {
+>, <Line: -            this.namespace = namespace;
+>, <Line: -            this.profileLevelIdc = profileLevelIdc;
+>, <Line: -            this.assetId = assetId;
+>, <Line: -        }
+>, <Line: -        public String namespace;
+>, <Line: -        public String profileLevelIdc;
+>, <Line: -        public String assetId;
+>, <Line: -        @Override
+>, <Line: -        public String toString() {
+>, <Line: -            return "{" +
+>, <Line: -                    "namespace='" + namespace + '\'' +
+>, <Line: -                    ", profileLevelIdc='" + profileLevelIdc + '\'' +
+>, <Line: -                    ", assetId='" + assetId + '\'' +
+>, <Line: -                    '}';
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public boolean equals(Object o) {
+>, <Line: -            if (this == o) return true;
+>, <Line: -            if (o == null || getClass() != o.getClass()) return false;
+>, <Line: -            Entry entry = (Entry) o;
+>, <Line: -            if (!assetId.equals(entry.assetId)) return false;
+>, <Line: -            if (!namespace.equals(entry.namespace)) return false;
+>, <Line: -            if (!profileLevelIdc.equals(entry.profileLevelIdc)) return false;
+>, <Line: -            return true;
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public int hashCode() {
+>, <Line: -            int result = namespace.hashCode();
+>, <Line: -            result = 31 * result + profileLevelIdc.hashCode();
+>, <Line: -            result = 31 * result + assetId.hashCode();
+>, <Line: -            return result;
+>, <Line: -        }
+>, <Line: -        public int getSize() {
+>, <Line: -            return 3 + Utf8.utf8StringLengthInBytes(namespace) +
+>, <Line: -                    Utf8.utf8StringLengthInBytes(profileLevelIdc) + Utf8.utf8StringLengthInBytes(assetId);
+>, <Line: -        }
+>, <Line: -    }
+>]

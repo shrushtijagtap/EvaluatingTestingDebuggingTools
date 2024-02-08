@@ -1,0 +1,4 @@
+[<Line: +    while i < |ls| where i >= 0:
+>]
+[<Line: -    while i < |ls|:
+>]

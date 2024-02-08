@@ -1,0 +1,51 @@
+[<Line: +        if (!BitUtil.check(status, 0)) {
+>, <Line: +            position.set(Position.KEY_ALARM, Position.ALARM_VIBRATION);
+>, <Line: +        } else if (!BitUtil.check(status, 1)) {
+>, <Line: +            position.set(Position.KEY_ALARM, Position.ALARM_SOS);
+>, <Line: +        } else if (!BitUtil.check(status, 2)) {
+>, <Line: +            position.set(Position.KEY_ALARM, Position.ALARM_OVERSPEED);
+>, <Line: +        switch (marker) {
+>, <Line: +            case "*":
+>, <Line: +                String sentence = buf.toString(StandardCharsets.US_ASCII);
+>, <Line: +                if (sentence.contains(",NBR,")) {
+>, <Line: +                    return decodeLbs(sentence, channel, remoteAddress);
+>, <Line: +                } else {
+>, <Line: +                    return decodeText(sentence, channel, remoteAddress);
+>, <Line: +                }
+>, <Line: +            case "$":
+>, <Line: +                return decodeBinary(buf, channel, remoteAddress);
+>, <Line: +            case "X":
+>, <Line: +            default:
+>, <Line: +                return null;
+>]
+[<Line: -        if (!BitUtil.check(status, 0) || !BitUtil.check(status, 1)
+>, <Line: -                || !BitUtil.check(status, 2)) {
+>, <Line: -            if (!BitUtil.check(status, 0)) {
+>, <Line: -                position.set(Position.KEY_ALARM, Position.ALARM_VIBRATION);
+>, <Line: -            } else if (!BitUtil.check(status, 1)) {
+>, <Line: -                position.set(Position.KEY_ALARM, Position.ALARM_SOS);
+>, <Line: -            } else if (!BitUtil.check(status, 2)) {
+>, <Line: -                position.set(Position.KEY_ALARM, Position.ALARM_OVERSPEED);
+>, <Line: -            }
+>, <Line: -        if (parser.hasNext(4)) {
+>, <Line: -            int mcc = parser.nextInt(16);
+>, <Line: -            int mnc = parser.nextInt(16);
+>, <Line: -            int lac = parser.nextInt(16);
+>, <Line: -            int cid = parser.nextInt(16);
+>, <Line: -            if (mcc != 0 && mnc != 0 && lac != 0 && cid != 0) {
+>, <Line: -                position.setNetwork(new Network(CellTower.from(mcc, mnc, lac, cid)));
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        if (marker.equals("*")) {
+>, <Line: -            String sentence = buf.toString(StandardCharsets.US_ASCII);
+>, <Line: -            if (sentence.contains(",NBR,")) {
+>, <Line: -                return decodeLbs(sentence, channel, remoteAddress);
+>, <Line: -            } else {
+>, <Line: -                return decodeText(sentence, channel, remoteAddress);
+>, <Line: -            }
+>, <Line: -        } else if (marker.equals("$")) {
+>, <Line: -            return decodeBinary(buf, channel, remoteAddress);
+>, <Line: -        } else if (marker.equals("X")) {
+>, <Line: -            return null; // X mode
+>, <Line: -        return null;
+>]

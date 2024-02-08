@@ -1,0 +1,8 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: +    ByteBuffer data = ByteBuffer.allocate(0);
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.googlecode.mp4parser.AbstractBox;
+>, <Line: -    ByteBuffer data = ByteBuffer.allocate(0);
+>]

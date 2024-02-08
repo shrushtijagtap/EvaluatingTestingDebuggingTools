@@ -1,0 +1,4 @@
+[<Line: +import org.kairosdb.core.http.rest.MetadataResource;
+>, <Line: +		bind(MetadataResource.class).in(Scopes.SINGLETON);
+>]
+[]

@@ -1,0 +1,13 @@
+[<Line: +package com.artemis.component;
+>, <Line: +import com.artemis.Component;
+>, <Line: +public class NameComponent extends Component {
+>, <Line: +	public String name;
+>, <Line: +	public NameComponent(String name) {
+>, <Line: +		this.name = name;
+>, <Line: +	}
+>, <Line: +	public NameComponent() {
+>, <Line: +		this("");
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,4 @@
+[<Line: +            url: "#{ config.apiRoot }/load-balancer/#{group}/base-path?#{$.param({authkey: localStorage.getItem 'baragonAuthKey', basePath: basePath})}"
+>]
+[<Line: -            url: "#{ config.apiRoot }/load-balancer/#{group}/base-path?#{$.param({authkey: config.authKey, basePath: basePath})}"
+>]

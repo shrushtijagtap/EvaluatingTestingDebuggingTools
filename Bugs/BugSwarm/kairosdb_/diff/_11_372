@@ -1,0 +1,399 @@
+[<Line: +/* ========================================================================
+>, <Line: + * Bootstrap: tooltip.js v3.3.5
+>, <Line: + * http://getbootstrap.com/javascript/#tooltip
+>, <Line: + * Inspired by the original jQuery.tipsy by Jason Frame
+>, <Line: + * ========================================================================
+>, <Line: + * Copyright 2011-2015 Twitter, Inc.
+>, <Line: + * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+>, <Line: + * ======================================================================== */
+>, <Line: ++function ($) {
+>, <Line: +  'use strict';
+>, <Line: +  // TOOLTIP PUBLIC CLASS DEFINITION
+>, <Line: +  // ===============================
+>, <Line: +  var Tooltip = function (element, options) {
+>, <Line: +    this.type       = null
+>, <Line: +    this.options    = null
+>, <Line: +    this.enabled    = null
+>, <Line: +    this.timeout    = null
+>, <Line: +    this.hoverState = null
+>, <Line: +    this.$element   = null
+>, <Line: +    this.inState    = null
+>, <Line: +    this.init('tooltip', element, options)
+>, <Line: +  }
+>, <Line: +  Tooltip.VERSION  = '3.3.5'
+>, <Line: +  Tooltip.TRANSITION_DURATION = 150
+>, <Line: +  Tooltip.DEFAULTS = {
+>, <Line: +    animation: true,
+>, <Line: +    placement: 'top',
+>, <Line: +    selector: false,
+>, <Line: +    template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',
+>, <Line: +    trigger: 'hover focus',
+>, <Line: +    title: '',
+>, <Line: +    delay: 0,
+>, <Line: +    html: false,
+>, <Line: +    container: false,
+>, <Line: +    viewport: {
+>, <Line: +      selector: 'body',
+>, <Line: +      padding: 0
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.init = function (type, element, options) {
+>, <Line: +    this.enabled   = true
+>, <Line: +    this.type      = type
+>, <Line: +    this.$element  = $(element)
+>, <Line: +    this.options   = this.getOptions(options)
+>, <Line: +    this.$viewport = this.options.viewport && $($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : (this.options.viewport.selector || this.options.viewport))
+>, <Line: +    this.inState   = { click: false, hover: false, focus: false }
+>, <Line: +    if (this.$element[0] instanceof document.constructor && !this.options.selector) {
+>, <Line: +      throw new Error('`selector` option must be specified when initializing ' + this.type + ' on the window.document object!')
+>, <Line: +    }
+>, <Line: +    var triggers = this.options.trigger.split(' ')
+>, <Line: +    for (var i = triggers.length; i--;) {
+>, <Line: +      var trigger = triggers[i]
+>, <Line: +      if (trigger == 'click') {
+>, <Line: +        this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
+>, <Line: +      } else if (trigger != 'manual') {
+>, <Line: +        var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
+>, <Line: +        var eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
+>, <Line: +        this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
+>, <Line: +        this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    this.options.selector ?
+>, <Line: +      (this._options = $.extend({}, this.options, { trigger: 'manual', selector: '' })) :
+>, <Line: +      this.fixTitle()
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.getDefaults = function () {
+>, <Line: +    return Tooltip.DEFAULTS
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.getOptions = function (options) {
+>, <Line: +    options = $.extend({}, this.getDefaults(), this.$element.data(), options)
+>, <Line: +    if (options.delay && typeof options.delay == 'number') {
+>, <Line: +      options.delay = {
+>, <Line: +        show: options.delay,
+>, <Line: +        hide: options.delay
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    return options
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.getDelegateOptions = function () {
+>, <Line: +    var options  = {}
+>, <Line: +    var defaults = this.getDefaults()
+>, <Line: +    this._options && $.each(this._options, function (key, value) {
+>, <Line: +      if (defaults[key] != value) options[key] = value
+>, <Line: +    })
+>, <Line: +    return options
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.enter = function (obj) {
+>, <Line: +    var self = obj instanceof this.constructor ?
+>, <Line: +      obj : $(obj.currentTarget).data('bs.' + this.type)
+>, <Line: +    if (!self) {
+>, <Line: +      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
+>, <Line: +      $(obj.currentTarget).data('bs.' + this.type, self)
+>, <Line: +    }
+>, <Line: +    if (obj instanceof $.Event) {
+>, <Line: +      self.inState[obj.type == 'focusin' ? 'focus' : 'hover'] = true
+>, <Line: +    }
+>, <Line: +    if (self.tip().hasClass('in') || self.hoverState == 'in') {
+>, <Line: +      self.hoverState = 'in'
+>, <Line: +      return
+>, <Line: +    }
+>, <Line: +    clearTimeout(self.timeout)
+>, <Line: +    self.hoverState = 'in'
+>, <Line: +    if (!self.options.delay || !self.options.delay.show) return self.show()
+>, <Line: +    self.timeout = setTimeout(function () {
+>, <Line: +      if (self.hoverState == 'in') self.show()
+>, <Line: +    }, self.options.delay.show)
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.isInStateTrue = function () {
+>, <Line: +    for (var key in this.inState) {
+>, <Line: +      if (this.inState[key]) return true
+>, <Line: +    }
+>, <Line: +    return false
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.leave = function (obj) {
+>, <Line: +    var self = obj instanceof this.constructor ?
+>, <Line: +      obj : $(obj.currentTarget).data('bs.' + this.type)
+>, <Line: +    if (!self) {
+>, <Line: +      self = new this.constructor(obj.currentTarget, this.getDelegateOptions())
+>, <Line: +      $(obj.currentTarget).data('bs.' + this.type, self)
+>, <Line: +    }
+>, <Line: +    if (obj instanceof $.Event) {
+>, <Line: +      self.inState[obj.type == 'focusout' ? 'focus' : 'hover'] = false
+>, <Line: +    }
+>, <Line: +    if (self.isInStateTrue()) return
+>, <Line: +    clearTimeout(self.timeout)
+>, <Line: +    self.hoverState = 'out'
+>, <Line: +    if (!self.options.delay || !self.options.delay.hide) return self.hide()
+>, <Line: +    self.timeout = setTimeout(function () {
+>, <Line: +      if (self.hoverState == 'out') self.hide()
+>, <Line: +    }, self.options.delay.hide)
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.show = function () {
+>, <Line: +    var e = $.Event('show.bs.' + this.type)
+>, <Line: +    if (this.hasContent() && this.enabled) {
+>, <Line: +      this.$element.trigger(e)
+>, <Line: +      var inDom = $.contains(this.$element[0].ownerDocument.documentElement, this.$element[0])
+>, <Line: +      if (e.isDefaultPrevented() || !inDom) return
+>, <Line: +      var that = this
+>, <Line: +      var $tip = this.tip()
+>, <Line: +      var tipId = this.getUID(this.type)
+>, <Line: +      this.setContent()
+>, <Line: +      $tip.attr('id', tipId)
+>, <Line: +      this.$element.attr('aria-describedby', tipId)
+>, <Line: +      if (this.options.animation) $tip.addClass('fade')
+>, <Line: +      var placement = typeof this.options.placement == 'function' ?
+>, <Line: +        this.options.placement.call(this, $tip[0], this.$element[0]) :
+>, <Line: +        this.options.placement
+>, <Line: +      var autoToken = /\s?auto?\s?/i
+>, <Line: +      var autoPlace = autoToken.test(placement)
+>, <Line: +      if (autoPlace) placement = placement.replace(autoToken, '') || 'top'
+>, <Line: +      $tip
+>, <Line: +        .detach()
+>, <Line: +        .css({ top: 0, left: 0, display: 'block' })
+>, <Line: +        .addClass(placement)
+>, <Line: +        .data('bs.' + this.type, this)
+>, <Line: +      this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
+>, <Line: +      this.$element.trigger('inserted.bs.' + this.type)
+>, <Line: +      var pos          = this.getPosition()
+>, <Line: +      var actualWidth  = $tip[0].offsetWidth
+>, <Line: +      var actualHeight = $tip[0].offsetHeight
+>, <Line: +      if (autoPlace) {
+>, <Line: +        var orgPlacement = placement
+>, <Line: +        var viewportDim = this.getPosition(this.$viewport)
+>, <Line: +        placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top'    :
+>, <Line: +                    placement == 'top'    && pos.top    - actualHeight < viewportDim.top    ? 'bottom' :
+>, <Line: +                    placement == 'right'  && pos.right  + actualWidth  > viewportDim.width  ? 'left'   :
+>, <Line: +                    placement == 'left'   && pos.left   - actualWidth  < viewportDim.left   ? 'right'  :
+>, <Line: +                    placement
+>, <Line: +        $tip
+>, <Line: +          .removeClass(orgPlacement)
+>, <Line: +          .addClass(placement)
+>, <Line: +      }
+>, <Line: +      var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
+>, <Line: +      this.applyPlacement(calculatedOffset, placement)
+>, <Line: +      var complete = function () {
+>, <Line: +        var prevHoverState = that.hoverState
+>, <Line: +        that.$element.trigger('shown.bs.' + that.type)
+>, <Line: +        that.hoverState = null
+>, <Line: +        if (prevHoverState == 'out') that.leave(that)
+>, <Line: +      }
+>, <Line: +      $.support.transition && this.$tip.hasClass('fade') ?
+>, <Line: +        $tip
+>, <Line: +          .one('bsTransitionEnd', complete)
+>, <Line: +          .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
+>, <Line: +        complete()
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.applyPlacement = function (offset, placement) {
+>, <Line: +    var $tip   = this.tip()
+>, <Line: +    var width  = $tip[0].offsetWidth
+>, <Line: +    var height = $tip[0].offsetHeight
+>, <Line: +    // manually read margins because getBoundingClientRect includes difference
+>, <Line: +    var marginTop = parseInt($tip.css('margin-top'), 10)
+>, <Line: +    var marginLeft = parseInt($tip.css('margin-left'), 10)
+>, <Line: +    // we must check for NaN for ie 8/9
+>, <Line: +    if (isNaN(marginTop))  marginTop  = 0
+>, <Line: +    if (isNaN(marginLeft)) marginLeft = 0
+>, <Line: +    offset.top  += marginTop
+>, <Line: +    offset.left += marginLeft
+>, <Line: +    // $.fn.offset doesn't round pixel values
+>, <Line: +    // so we use setOffset directly with our own function B-0
+>, <Line: +    $.offset.setOffset($tip[0], $.extend({
+>, <Line: +      using: function (props) {
+>, <Line: +        $tip.css({
+>, <Line: +          top: Math.round(props.top),
+>, <Line: +          left: Math.round(props.left)
+>, <Line: +        })
+>, <Line: +      }
+>, <Line: +    }, offset), 0)
+>, <Line: +    $tip.addClass('in')
+>, <Line: +    // check to see if placing tip in new offset caused the tip to resize itself
+>, <Line: +    var actualWidth  = $tip[0].offsetWidth
+>, <Line: +    var actualHeight = $tip[0].offsetHeight
+>, <Line: +    if (placement == 'top' && actualHeight != height) {
+>, <Line: +      offset.top = offset.top + height - actualHeight
+>, <Line: +    }
+>, <Line: +    var delta = this.getViewportAdjustedDelta(placement, offset, actualWidth, actualHeight)
+>, <Line: +    if (delta.left) offset.left += delta.left
+>, <Line: +    else offset.top += delta.top
+>, <Line: +    var isVertical          = /top|bottom/.test(placement)
+>, <Line: +    var arrowDelta          = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight
+>, <Line: +    var arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight'
+>, <Line: +    $tip.offset(offset)
+>, <Line: +    this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical)
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.replaceArrow = function (delta, dimension, isVertical) {
+>, <Line: +    this.arrow()
+>, <Line: +      .css(isVertical ? 'left' : 'top', 50 * (1 - delta / dimension) + '%')
+>, <Line: +      .css(isVertical ? 'top' : 'left', '')
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.setContent = function () {
+>, <Line: +    var $tip  = this.tip()
+>, <Line: +    var title = this.getTitle()
+>, <Line: +    $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)
+>, <Line: +    $tip.removeClass('fade in top bottom left right')
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.hide = function (callback) {
+>, <Line: +    var that = this
+>, <Line: +    var $tip = $(this.$tip)
+>, <Line: +    var e    = $.Event('hide.bs.' + this.type)
+>, <Line: +    function complete() {
+>, <Line: +      if (that.hoverState != 'in') $tip.detach()
+>, <Line: +      that.$element
+>, <Line: +        .removeAttr('aria-describedby')
+>, <Line: +        .trigger('hidden.bs.' + that.type)
+>, <Line: +      callback && callback()
+>, <Line: +    }
+>, <Line: +    this.$element.trigger(e)
+>, <Line: +    if (e.isDefaultPrevented()) return
+>, <Line: +    $tip.removeClass('in')
+>, <Line: +    $.support.transition && $tip.hasClass('fade') ?
+>, <Line: +      $tip
+>, <Line: +        .one('bsTransitionEnd', complete)
+>, <Line: +        .emulateTransitionEnd(Tooltip.TRANSITION_DURATION) :
+>, <Line: +      complete()
+>, <Line: +    this.hoverState = null
+>, <Line: +    return this
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.fixTitle = function () {
+>, <Line: +    var $e = this.$element
+>, <Line: +    if ($e.attr('title') || typeof $e.attr('data-original-title') != 'string') {
+>, <Line: +      $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.hasContent = function () {
+>, <Line: +    return this.getTitle()
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.getPosition = function ($element) {
+>, <Line: +    $element   = $element || this.$element
+>, <Line: +    var el     = $element[0]
+>, <Line: +    var isBody = el.tagName == 'BODY'
+>, <Line: +    var elRect    = el.getBoundingClientRect()
+>, <Line: +    if (elRect.width == null) {
+>, <Line: +      // width and height are missing in IE8, so compute them manually; see https://github.com/twbs/bootstrap/issues/14093
+>, <Line: +      elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top })
+>, <Line: +    }
+>, <Line: +    var elOffset  = isBody ? { top: 0, left: 0 } : $element.offset()
+>, <Line: +    var scroll    = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
+>, <Line: +    var outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null
+>, <Line: +    return $.extend({}, elRect, scroll, outerDims, elOffset)
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.getCalculatedOffset = function (placement, pos, actualWidth, actualHeight) {
+>, <Line: +    return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2 } :
+>, <Line: +           placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 } :
+>, <Line: +           placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
+>, <Line: +        /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width }
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.getViewportAdjustedDelta = function (placement, pos, actualWidth, actualHeight) {
+>, <Line: +    var delta = { top: 0, left: 0 }
+>, <Line: +    if (!this.$viewport) return delta
+>, <Line: +    var viewportPadding = this.options.viewport && this.options.viewport.padding || 0
+>, <Line: +    var viewportDimensions = this.getPosition(this.$viewport)
+>, <Line: +    if (/right|left/.test(placement)) {
+>, <Line: +      var topEdgeOffset    = pos.top - viewportPadding - viewportDimensions.scroll
+>, <Line: +      var bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight
+>, <Line: +      if (topEdgeOffset < viewportDimensions.top) { // top overflow
+>, <Line: +        delta.top = viewportDimensions.top - topEdgeOffset
+>, <Line: +      } else if (bottomEdgeOffset > viewportDimensions.top + viewportDimensions.height) { // bottom overflow
+>, <Line: +        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset
+>, <Line: +      }
+>, <Line: +    } else {
+>, <Line: +      var leftEdgeOffset  = pos.left - viewportPadding
+>, <Line: +      var rightEdgeOffset = pos.left + viewportPadding + actualWidth
+>, <Line: +      if (leftEdgeOffset < viewportDimensions.left) { // left overflow
+>, <Line: +        delta.left = viewportDimensions.left - leftEdgeOffset
+>, <Line: +      } else if (rightEdgeOffset > viewportDimensions.right) { // right overflow
+>, <Line: +        delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    return delta
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.getTitle = function () {
+>, <Line: +    var title
+>, <Line: +    var $e = this.$element
+>, <Line: +    var o  = this.options
+>, <Line: +    title = $e.attr('data-original-title')
+>, <Line: +      || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
+>, <Line: +    return title
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.getUID = function (prefix) {
+>, <Line: +    do prefix += ~~(Math.random() * 1000000)
+>, <Line: +    while (document.getElementById(prefix))
+>, <Line: +    return prefix
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.tip = function () {
+>, <Line: +    if (!this.$tip) {
+>, <Line: +      this.$tip = $(this.options.template)
+>, <Line: +      if (this.$tip.length != 1) {
+>, <Line: +        throw new Error(this.type + ' `template` option must consist of exactly 1 top-level element!')
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    return this.$tip
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.arrow = function () {
+>, <Line: +    return (this.$arrow = this.$arrow || this.tip().find('.tooltip-arrow'))
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.enable = function () {
+>, <Line: +    this.enabled = true
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.disable = function () {
+>, <Line: +    this.enabled = false
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.toggleEnabled = function () {
+>, <Line: +    this.enabled = !this.enabled
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.toggle = function (e) {
+>, <Line: +    var self = this
+>, <Line: +    if (e) {
+>, <Line: +      self = $(e.currentTarget).data('bs.' + this.type)
+>, <Line: +      if (!self) {
+>, <Line: +        self = new this.constructor(e.currentTarget, this.getDelegateOptions())
+>, <Line: +        $(e.currentTarget).data('bs.' + this.type, self)
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    if (e) {
+>, <Line: +      self.inState.click = !self.inState.click
+>, <Line: +      if (self.isInStateTrue()) self.enter(self)
+>, <Line: +      else self.leave(self)
+>, <Line: +    } else {
+>, <Line: +      self.tip().hasClass('in') ? self.leave(self) : self.enter(self)
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  Tooltip.prototype.destroy = function () {
+>, <Line: +    var that = this
+>, <Line: +    clearTimeout(this.timeout)
+>, <Line: +    this.hide(function () {
+>, <Line: +      that.$element.off('.' + that.type).removeData('bs.' + that.type)
+>, <Line: +      if (that.$tip) {
+>, <Line: +        that.$tip.detach()
+>, <Line: +      }
+>, <Line: +      that.$tip = null
+>, <Line: +      that.$arrow = null
+>, <Line: +      that.$viewport = null
+>, <Line: +    })
+>, <Line: +  }
+>, <Line: +  // TOOLTIP PLUGIN DEFINITION
+>, <Line: +  // =========================
+>, <Line: +  function Plugin(option) {
+>, <Line: +    return this.each(function () {
+>, <Line: +      var $this   = $(this)
+>, <Line: +      var data    = $this.data('bs.tooltip')
+>, <Line: +      var options = typeof option == 'object' && option
+>, <Line: +      if (!data && /destroy|hide/.test(option)) return
+>, <Line: +      if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
+>, <Line: +      if (typeof option == 'string') data[option]()
+>, <Line: +    })
+>, <Line: +  }
+>, <Line: +  var old = $.fn.tooltip
+>, <Line: +  $.fn.tooltip             = Plugin
+>, <Line: +  $.fn.tooltip.Constructor = Tooltip
+>, <Line: +  // TOOLTIP NO CONFLICT
+>, <Line: +  // ===================
+>, <Line: +  $.fn.tooltip.noConflict = function () {
+>, <Line: +    $.fn.tooltip = old
+>, <Line: +    return this
+>, <Line: +  }
+>, <Line: +}(jQuery);
+>]
+[]

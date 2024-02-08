@@ -1,0 +1,20 @@
+[<Line: +package org.kairosdb.core;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 5/19/17.
+>, <Line: + */
+>, <Line: +public class PluginException extends Exception
+>, <Line: +{
+>, <Line: +	public PluginException()
+>, <Line: +	{
+>, <Line: +	}
+>, <Line: +	public PluginException(String pluginName, String message)
+>, <Line: +	{
+>, <Line: +		super("Exception in "+pluginName+": "+message);
+>, <Line: +	}
+>, <Line: +	public PluginException(String pluginName, String message, Throwable cause)
+>, <Line: +	{
+>, <Line: +		super("Exception in "+pluginName+": "+message, cause);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

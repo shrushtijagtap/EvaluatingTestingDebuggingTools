@@ -1,0 +1,22 @@
+[<Line: +package cn.nukkit.network.protocol;
+>, <Line: +/**
+>, <Line: + * author: MagicDroidX
+>, <Line: + * Nukkit Project
+>, <Line: + */
+>, <Line: +public class SetPlayerGameTypePacket extends DataPacket {
+>, <Line: +    public final static byte NETWORK_ID = ProtocolInfo.SET_PLAYER_GAMETYPE_PACKET;
+>, <Line: +    @Override
+>, <Line: +    public byte pid() {
+>, <Line: +        return NETWORK_ID;
+>, <Line: +    }
+>, <Line: +    public int gamemode;
+>, <Line: +    @Override
+>, <Line: +    public void decode() {
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void encode() {
+>, <Line: +        this.reset();
+>, <Line: +        this.putInt(this.gamemode);
+>, <Line: +    }
+>, <Line: +}>]
+[]

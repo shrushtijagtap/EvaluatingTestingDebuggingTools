@@ -1,0 +1,46 @@
+[<Line: +import org.assertj.core.api.iterable.Extractor;
+>, <Line: +import static org.assertj.core.api.Assertions.assertThat;
+>, <Line: +  private static final Extractor NAME_EXTRACTOR = new Extractor<ITestResult, String>() {
+>, <Line: +    @Override
+>, <Line: +    public String extract(ITestResult input) {
+>, <Line: +      return input.getName();
+>, <Line: +    }
+>, <Line: +  };
+>, <Line: +    TestNG tng = create(AnnotationTransformerSampleTest.class);
+>, <Line: +    tng.setPreserveOrder(true);
+>, <Line: +    assertThat(tla.getPassedTests()).extracting(NAME_EXTRACTOR)
+>, <Line: +        .containsExactly(
+>, <Line: +            "five",
+>, <Line: +            "four", "four", "four", "four", "four",
+>, <Line: +            "three", "three", "three", "three", "three",
+>, <Line: +            "two", "two"
+>, <Line: +        );
+>, <Line: +    assertThat(tla.getFailedTests()).extracting(NAME_EXTRACTOR)
+>, <Line: +        .containsExactly("verify");
+>, <Line: +    TestNG tng = create(AnnotationTransformerSampleTest.class);
+>, <Line: +    tng.setPreserveOrder(true);
+>, <Line: +    MyTransformer transformer = new MyTransformer();
+>, <Line: +    tng.setAnnotationTransformer(transformer);
+>, <Line: +    assertThat(transformer.getMethodNames()).contains("two", "three", "four", "five", "verify");
+>, <Line: +    assertThat(tla.getPassedTests()).extracting(NAME_EXTRACTOR)
+>, <Line: +        .containsExactly(
+>, <Line: +            "five", "five", "five", "five", "five",
+>, <Line: +            "four", "four", "four", "four",
+>, <Line: +            "three", "three", "three",
+>, <Line: +            "two", "two",
+>, <Line: +            "verify"
+>, <Line: +        );
+>, <Line: +    assertThat(tla.getFailedTests()).isEmpty();
+>]
+[<Line: -    TestNG tng = new TestNG();
+>, <Line: -    tng.setVerbose(0);
+>, <Line: -    tng.setTestClasses(new Class[] { AnnotationTransformerClassInvocationSampleTest.class});
+>, <Line: -    List passed = tla.getPassedTests();
+>, <Line: -    Assert.assertEquals(passed.size(), 6);
+>, <Line: -    TestNG tng = new TestNG();
+>, <Line: -    tng.setVerbose(0);
+>, <Line: -    tng.setAnnotationTransformer(new MyTransformer());
+>, <Line: -    tng.setTestClasses(new Class[] { AnnotationTransformerSampleTest.class});
+>, <Line: -    List passed = tla.getPassedTests();
+>, <Line: -    Assert.assertEquals(passed.size(), 15);
+>]

@@ -1,0 +1,5 @@
+[<Line: +        boolean alternative = Context.getIdentityManager().lookupAttributeBoolean(
+>]
+[<Line: -import org.traccar.model.Device;
+>, <Line: -        boolean alternative = Context.getDeviceManager().lookupAttributeBoolean(
+>]

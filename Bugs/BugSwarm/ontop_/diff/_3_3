@@ -1,0 +1,11 @@
+[<Line: +import it.unibz.krdb.obda.owlrefplatform.core.mappingprocessing.TMappingExclusionConfig;
+>, <Line: +			SQLDialectAdapter sqladapter = SQLAdapterFactory
+>, <Line: +					.getSQLDialectAdapter(datasource
+>, <Line: +							.getParameter(RDBMSourceParameterConstants.DATABASE_DRIVER), metadata.getDatabaseVersion());
+>]
+[<Line: -import com.google.common.collect.Lists;
+>, <Line: -import it.unibz.krdb.obda.owlrefplatform.core.mappingprocessing.TMappingExclusionConfig;
+>, <Line: -            SQLDialectAdapter sqladapter = SQLAdapterFactory
+>, <Line: -                    .getSQLDialectAdapter(datasource
+>, <Line: -                            .getParameter(RDBMSourceParameterConstants.DATABASE_DRIVER));
+>]

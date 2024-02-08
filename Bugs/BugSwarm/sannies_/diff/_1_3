@@ -1,0 +1,138 @@
+[<Line: +package com.googlecode.mp4parser;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import org.mp4parser.muxer.builder.TimeBasedFragmenter;
+>, <Line: +import org.mp4parser.muxer.container.mp4.MovieCreator;
+>, <Line: +import org.mp4parser.muxer.tracks.TextTrackImpl;
+>, <Line: +import java.io.*;
+>, <Line: +import java.nio.channels.WritableByteChannel;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.regex.Matcher;
+>, <Line: +import java.util.regex.Pattern;
+>, <Line: +/**
+>, <Line: + * Adds subtitles.
+>, <Line: + */
+>, <Line: +public class SubTitleExample {
+>, <Line: +    public static void main(String[] args) throws IOException {
+>, <Line: +        Movie m1 = MovieCreator.build(("C:\\dev\\DRMTODAY-872\\Tears_Of_Steel_128000_eng.mp4"));
+>, <Line: +        Movie m2 = MovieCreator.build(("C:\\dev\\DRMTODAY-872\\Tears_Of_Steel_600000.mp4"));
+>, <Line: +        //WebVttTrack webVttTrack = new WebVttTrack(new , "subs", Locale.ENGLISH);
+>, <Line: +        TextTrackImpl textTrack = new TextTrackImpl();
+>, <Line: +        textTrack.getSubs().addAll(
+>, <Line: +                WebVttParser.parse(new FileInputStream("C:\\dev\\DRMTODAY-872\\Tears_Of_Steel_eng.vtt")));
+>, <Line: +        Movie m = new Movie();
+>, <Line: +        for (Track track : m2.getTracks()) {
+>, <Line: +            m.addTrack(track);
+>, <Line: +        }
+>, <Line: +        for (Track track : m1.getTracks()) {
+>, <Line: +            m.addTrack(track);
+>, <Line: +        }
+>, <Line: +        m.addTrack(textTrack);
+>, <Line: +        DefaultMp4Builder builder = new DefaultMp4Builder();
+>, <Line: +        builder.setFragmenter(new TimeBasedFragmenter(2));
+>, <Line: +        Container c = builder.build(m);
+>, <Line: +        WritableByteChannel wbc = new FileOutputStream("output.mp4").getChannel();
+>, <Line: +        c.writeContainer(wbc);
+>, <Line: +    }
+>, <Line: +    public static class WebVttParser {
+>, <Line: +        private static final String WEBVTT_FILE_HEADER_STRING = "^\uFEFF?WEBVTT((\\u0020|\u0009).*)?$";
+>, <Line: +        private static final Pattern WEBVTT_FILE_HEADER =
+>, <Line: +                Pattern.compile(WEBVTT_FILE_HEADER_STRING);
+>, <Line: +        private static final String WEBVTT_METADATA_HEADER_STRING = "\\S*[:=]\\S*";
+>, <Line: +        private static final Pattern WEBVTT_METADATA_HEADER =
+>, <Line: +                Pattern.compile(WEBVTT_METADATA_HEADER_STRING);
+>, <Line: +        private static final String WEBVTT_CUE_IDENTIFIER_STRING = "^(?!.*(-->)).*$";
+>, <Line: +        private static final Pattern WEBVTT_CUE_IDENTIFIER =
+>, <Line: +                Pattern.compile(WEBVTT_CUE_IDENTIFIER_STRING);
+>, <Line: +        private static final String WEBVTT_TIMESTAMP_STRING = "(\\d+:)?[0-5]\\d:[0-5]\\d\\.\\d{3}";
+>, <Line: +        private static final Pattern WEBVTT_TIMESTAMP = Pattern.compile(WEBVTT_TIMESTAMP_STRING);
+>, <Line: +        private static final String WEBVTT_CUE_SETTING_STRING = "\\S*:\\S*";
+>, <Line: +        private static final Pattern WEBVTT_CUE_SETTING = Pattern.compile(WEBVTT_CUE_SETTING_STRING);
+>, <Line: +        static List<TextTrackImpl.Line> parse(InputStream in) throws IOException {
+>, <Line: +            BufferedReader webvttData = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+>, <Line: +            String line;
+>, <Line: +            List<TextTrackImpl.Line> samples = new ArrayList<TextTrackImpl.Line>();
+>, <Line: +            // file should start with "WEBVTT"
+>, <Line: +            line = webvttData.readLine();
+>, <Line: +            if (line == null || !WEBVTT_FILE_HEADER.matcher(line).matches()) {
+>, <Line: +                throw new IOException("Expected WEBVTT. Got " + line);
+>, <Line: +            }
+>, <Line: +            while (true) {
+>, <Line: +                line = webvttData.readLine();
+>, <Line: +                if (line == null) {
+>, <Line: +                    // we reached EOF before finishing the header
+>, <Line: +                    throw new IOException("Expected an empty line after webvtt header");
+>, <Line: +                } else if (line.isEmpty()) {
+>, <Line: +                    // we've read the newline that separates the header from the body
+>, <Line: +                    break;
+>, <Line: +                }
+>, <Line: +                Matcher matcher = WEBVTT_METADATA_HEADER.matcher(line);
+>, <Line: +                if (!matcher.find()) {
+>, <Line: +                    throw new IOException("Expected WebVTT metadata header. Got " + line);
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            // process the cues and text
+>, <Line: +            while ((line = webvttData.readLine()) != null) {
+>, <Line: +                if ("".equals(line.trim())) {
+>, <Line: +                    continue;
+>, <Line: +                }
+>, <Line: +                // parse the cue identifier (if present) {
+>, <Line: +                Matcher matcher = WEBVTT_CUE_IDENTIFIER.matcher(line);
+>, <Line: +                if (matcher.find()) {
+>, <Line: +                    // ignore the identifier (we currently don't use it) and read the next line
+>, <Line: +                    line = webvttData.readLine();
+>, <Line: +                }
+>, <Line: +                long startTime;
+>, <Line: +                long endTime;
+>, <Line: +                // parse the cue timestamps
+>, <Line: +                matcher = WEBVTT_TIMESTAMP.matcher(line);
+>, <Line: +                // parse start timestamp
+>, <Line: +                if (!matcher.find()) {
+>, <Line: +                    throw new IOException("Expected cue start time: " + line);
+>, <Line: +                } else {
+>, <Line: +                    startTime = parseTimestampUs(matcher.group());
+>, <Line: +                }
+>, <Line: +                // parse end timestamp
+>, <Line: +                String endTimeString;
+>, <Line: +                if (!matcher.find()) {
+>, <Line: +                    throw new IOException("Expected cue end time: " + line);
+>, <Line: +                } else {
+>, <Line: +                    endTimeString = matcher.group();
+>, <Line: +                    endTime = parseTimestampUs(endTimeString);
+>, <Line: +                }
+>, <Line: +                // parse the (optional) cue setting list
+>, <Line: +                line = line.substring(line.indexOf(endTimeString) + endTimeString.length());
+>, <Line: +                matcher = WEBVTT_CUE_SETTING.matcher(line);
+>, <Line: +                String settings = null;
+>, <Line: +                while (matcher.find()) {
+>, <Line: +                    settings = matcher.group();
+>, <Line: +                }
+>, <Line: +                StringBuilder payload = new StringBuilder();
+>, <Line: +                while (((line = webvttData.readLine()) != null) && (!line.isEmpty())) {
+>, <Line: +                    if (payload.length() > 0) {
+>, <Line: +                        payload.append("\n");
+>, <Line: +                    }
+>, <Line: +                    payload.append(line.trim());
+>, <Line: +                }
+>, <Line: +                samples.add(new TextTrackImpl.Line(startTime, endTime, payload.toString()));
+>, <Line: +            }
+>, <Line: +            return samples;
+>, <Line: +        }
+>, <Line: +        private static long parseTimestampUs(String s) throws NumberFormatException {
+>, <Line: +            if (!s.matches(WEBVTT_TIMESTAMP_STRING)) {
+>, <Line: +                throw new NumberFormatException("has invalid format");
+>, <Line: +            }
+>, <Line: +            String[] parts = s.split("\\.", 2);
+>, <Line: +            long value = 0;
+>, <Line: +            for (String group : parts[0].split(":")) {
+>, <Line: +                value = value * 60 + Long.parseLong(group);
+>, <Line: +            }
+>, <Line: +            return (value * 1000 + Long.parseLong(parts[1]));
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

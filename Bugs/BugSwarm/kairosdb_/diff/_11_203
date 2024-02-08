@@ -1,0 +1,392 @@
+[<Line: +		'angular',
+>, <Line: +		'app',
+>, <Line: +		'lodash',
+>, <Line: +		'components/timeSeries',
+>, <Line: +		'kbn',
+>, <Line: +		'components/panelmeta',
+>, <Line: +		'services/panelSrv',
+>, <Line: +		'./singleStatPanel',
+>, <Line: +	],
+>, <Line: +	function (angular, app, _, TimeSeries, kbn, PanelMeta) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.panels.singlestat');
+>, <Line: +		app.useModule(module);
+>, <Line: +		module.controller('SingleStatCtrl', function ($scope, panelSrv, timeSrv) {
+>, <Line: +			$scope.panelMeta = new PanelMeta({
+>, <Line: +				description: 'Singlestat panel',
+>, <Line: +				fullscreen: true,
+>, <Line: +				metricsEditor: true
+>, <Line: +			});
+>, <Line: +			$scope.fontSizes = ['20%', '30%', '50%', '70%', '80%', '100%', '110%', '120%', '150%', '170%', '200%'];
+>, <Line: +			$scope.panelMeta.addEditorTab('Options', 'app/panels/singlestat/editor.html');
+>, <Line: +			// Set and populate defaults
+>, <Line: +			var _d = {
+>, <Line: +				links: [],
+>, <Line: +				maxDataPoints: 100,
+>, <Line: +				interval: null,
+>, <Line: +				targets: [{}],
+>, <Line: +				cacheTimeout: null,
+>, <Line: +				format: 'none',
+>, <Line: +				prefix: '',
+>, <Line: +				postfix: '',
+>, <Line: +				nullText: null,
+>, <Line: +				valueMaps: [
+>, <Line: +					{value: 'null', op: '=', text: 'N/A'}
+>, <Line: +				],
+>, <Line: +				nullPointMode: 'connected',
+>, <Line: +				valueName: 'avg',
+>, <Line: +				prefixFontSize: '50%',
+>, <Line: +				valueFontSize: '80%',
+>, <Line: +				postfixFontSize: '50%',
+>, <Line: +				thresholds: '',
+>, <Line: +				colorBackground: false,
+>, <Line: +				colorValue: false,
+>, <Line: +				colors: ["rgba(245, 54, 54, 0.9)", "rgba(237, 129, 40, 0.89)", "rgba(50, 172, 45, 0.97)"],
+>, <Line: +				sparkline: {
+>, <Line: +					show: false,
+>, <Line: +					full: false,
+>, <Line: +					lineColor: 'rgb(31, 120, 193)',
+>, <Line: +					fillColor: 'rgba(31, 118, 189, 0.18)',
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			_.defaults($scope.panel, _d);
+>, <Line: +			$scope.init = function () {
+>, <Line: +				panelSrv.init($scope);
+>, <Line: +				$scope.$on('refresh', $scope.get_data);
+>, <Line: +			};
+>, <Line: +			$scope.updateTimeRange = function () {
+>, <Line: +				$scope.range = timeSrv.timeRange();
+>, <Line: +				$scope.rangeUnparsed = timeSrv.timeRange(false);
+>, <Line: +				$scope.resolution = $scope.panel.maxDataPoints;
+>, <Line: +				$scope.interval = kbn.calculateInterval($scope.range, $scope.resolution, $scope.panel.interval);
+>, <Line: +			};
+>, <Line: +			$scope.get_data = function () {
+>, <Line: +				$scope.updateTimeRange();
+>, <Line: +				var metricsQuery = {
+>, <Line: +					range: $scope.rangeUnparsed,
+>, <Line: +					interval: $scope.interval,
+>, <Line: +					targets: $scope.panel.targets,
+>, <Line: +					maxDataPoints: $scope.resolution,
+>, <Line: +					cacheTimeout: $scope.panel.cacheTimeout
+>, <Line: +				};
+>, <Line: +				return $scope.datasource.query(metricsQuery)
+>, <Line: +					.then($scope.dataHandler)
+>, <Line: +					.then(null, function (err) {
+>, <Line: +						console.log("err");
+>, <Line: +						$scope.panelMeta.loading = false;
+>, <Line: +						$scope.panelMeta.error = err.message || "Timeseries data request error";
+>, <Line: +						$scope.inspector.error = err;
+>, <Line: +						$scope.render();
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			$scope.dataHandler = function (results) {
+>, <Line: +				$scope.panelMeta.loading = false;
+>, <Line: +				$scope.series = _.map(results.data, $scope.seriesHandler);
+>, <Line: +				$scope.render();
+>, <Line: +			};
+>, <Line: +			$scope.seriesHandler = function (seriesData) {
+>, <Line: +				var series = new TimeSeries({
+>, <Line: +					datapoints: seriesData.datapoints,
+>, <Line: +					alias: seriesData.target,
+>, <Line: +				});
+>, <Line: +				series.flotpairs = series.getFlotPairs($scope.panel.nullPointMode);
+>, <Line: +				return series;
+>, <Line: +			};
+>, <Line: +			$scope.setColoring = function (options) {
+>, <Line: +				if (options.background) {
+>, <Line: +					$scope.panel.colorValue = false;
+>, <Line: +					$scope.panel.colors = ['rgba(71, 212, 59, 0.4)', 'rgba(245, 150, 40, 0.73)', 'rgba(225, 40, 40, 0.59)'];
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					$scope.panel.colorBackground = false;
+>, <Line: +					$scope.panel.colors = ['rgba(50, 172, 45, 0.97)', 'rgba(237, 129, 40, 0.89)', 'rgba(245, 54, 54, 0.9)'];
+>, <Line: +				}
+>, <Line: +				$scope.render();
+>, <Line: +			};
+>, <Line: +			$scope.invertColorOrder = function () {
+>, <Line: +				var tmp = $scope.panel.colors[0];
+>, <Line: +				$scope.panel.colors[0] = $scope.panel.colors[2];
+>, <Line: +				$scope.panel.colors[2] = tmp;
+>, <Line: +				$scope.render();
+>, <Line: +			};
+>, <Line: +			$scope.getDecimalsForValue = function (value) {
+>, <Line: +				var delta = value / 2;
+>, <Line: +				var dec = -Math.floor(Math.log(delta) / Math.LN10);
+>, <Line: +				var magn = Math.pow(10, -dec),
+>, <Line: +					norm = delta / magn, // norm is between 1.0 and 10.0
+>, <Line: +					size;
+>, <Line: +				if (norm < 1.5) {
+>, <Line: +					size = 1;
+>, <Line: +				} else if (norm < 3) {
+>, <Line: +					size = 2;
+>, <Line: +					// special case for 2.5, requires an extra decimal
+>, <Line: +					if (norm > 2.25) {
+>, <Line: +						size = 2.5;
+>, <Line: +						++dec;
+>, <Line: +					}
+>, <Line: +				} else if (norm < 7.5) {
+>, <Line: +					size = 5;
+>, <Line: +				} else {
+>, <Line: +					size = 10;
+>, <Line: +				}
+>, <Line: +				size *= magn;
+>, <Line: +				// reduce starting decimals if not needed
+>, <Line: +				if (Math.floor(value) === value) {
+>, <Line: +					dec = 0;
+>, <Line: +				}
+>, <Line: +				var result = {};
+>, <Line: +				result.decimals = Math.max(0, dec);
+>, <Line: +				result.scaledDecimals = result.decimals - Math.floor(Math.log(size) / Math.LN10) + 2;
+>, <Line: +				return result;
+>, <Line: +			};
+>, <Line: +			$scope.render = function () {
+>, <Line: +				var data = {};
+>, <Line: +				if (!$scope.series || $scope.series.length === 0) {
+>, <Line: +					data.flotpairs = [];
+>, <Line: +					data.mainValue = Number.NaN;
+>, <Line: +					data.mainValueFormated = $scope.getFormatedValue(null);
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					var series = $scope.series[0];
+>, <Line: +					data.mainValue = series.stats[$scope.panel.valueName];
+>, <Line: +					data.mainValueFormated = $scope.getFormatedValue(data.mainValue);
+>, <Line: +					data.flotpairs = series.flotpairs;
+>, <Line: +				}
+>, <Line: +				data.thresholds = $scope.panel.thresholds.split(',').map(function (strVale) {
+>, <Line: +					return Number(strVale.trim());
+>, <Line: +				});
+>, <Line: +				data.colorMap = $scope.panel.colors;
+>, <Line: +				$scope.data = data;
+>, <Line: +				$scope.$emit('render');
+>, <Line: +			};
+>, <Line: +			$scope.getFormatedValue = function (mainValue) {
+>, <Line: +				// first check value to text mappings
+>, <Line: +				for (var i = 0; i < $scope.panel.valueMaps.length; i++) {
+>, <Line: +					var map = $scope.panel.valueMaps[i];
+>, <Line: +					// special null case
+>, <Line: +					if (map.value === 'null') {
+>, <Line: +						if (mainValue === null || mainValue === void 0) {
+>, <Line: +							return map.text;
+>, <Line: +						}
+>, <Line: +						continue;
+>, <Line: +					}
+>, <Line: +					// value/number to text mapping
+>, <Line: +					var value = parseFloat(map.value);
+>, <Line: +					if (value === mainValue) {
+>, <Line: +						return map.text;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				if (mainValue === null || mainValue === void 0) {
+>, <Line: +					return "no value";
+>, <Line: +				}
+>, <Line: +				var decimalInfo = $scope.getDecimalsForValue(mainValue);
+>, <Line: +				var formatFunc = kbn.valueFormats[$scope.panel.format];
+>, <Line: +				return formatFunc(mainValue, decimalInfo.decimals, decimalInfo.scaledDecimals);
+>, <Line: +			};
+>, <Line: +			$scope.removeValueMap = function (map) {
+>, <Line: +				var index = _.indexOf($scope.panel.valueMaps, map);
+>, <Line: +				$scope.panel.valueMaps.splice(index, 1);
+>, <Line: +				$scope.render();
+>, <Line: +			};
+>, <Line: +			$scope.addValueMap = function () {
+>, <Line: +				$scope.panel.valueMaps.push({value: '', op: '=', text: ''});
+>, <Line: +			};
+>, <Line: +			$scope.init();
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'app',
+>, <Line: -  'lodash',
+>, <Line: -  'components/timeSeries',
+>, <Line: -  'kbn',
+>, <Line: -  'components/panelmeta',
+>, <Line: -  'services/panelSrv',
+>, <Line: -  './singleStatPanel',
+>, <Line: -],
+>, <Line: -function (angular, app, _, TimeSeries, kbn, PanelMeta) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.panels.singlestat');
+>, <Line: -  app.useModule(module);
+>, <Line: -  module.controller('SingleStatCtrl', function($scope, panelSrv, timeSrv) {
+>, <Line: -    $scope.panelMeta = new PanelMeta({
+>, <Line: -      description: 'Singlestat panel',
+>, <Line: -      fullscreen: true,
+>, <Line: -      metricsEditor: true
+>, <Line: -    });
+>, <Line: -    $scope.fontSizes = ['20%', '30%','50%','70%','80%','100%', '110%', '120%', '150%', '170%', '200%'];
+>, <Line: -    $scope.panelMeta.addEditorTab('Options', 'app/panels/singlestat/editor.html');
+>, <Line: -    // Set and populate defaults
+>, <Line: -    var _d = {
+>, <Line: -      links: [],
+>, <Line: -      maxDataPoints: 100,
+>, <Line: -      interval: null,
+>, <Line: -      targets: [{}],
+>, <Line: -      cacheTimeout: null,
+>, <Line: -      format: 'none',
+>, <Line: -      prefix: '',
+>, <Line: -      postfix: '',
+>, <Line: -      nullText: null,
+>, <Line: -      valueMaps: [
+>, <Line: -        { value: 'null', op: '=', text: 'N/A' }
+>, <Line: -      ],
+>, <Line: -      nullPointMode: 'connected',
+>, <Line: -      valueName: 'avg',
+>, <Line: -      prefixFontSize: '50%',
+>, <Line: -      valueFontSize: '80%',
+>, <Line: -      postfixFontSize: '50%',
+>, <Line: -      thresholds: '',
+>, <Line: -      colorBackground: false,
+>, <Line: -      colorValue: false,
+>, <Line: -      colors: ["rgba(245, 54, 54, 0.9)", "rgba(237, 129, 40, 0.89)", "rgba(50, 172, 45, 0.97)"],
+>, <Line: -      sparkline: {
+>, <Line: -        show: false,
+>, <Line: -        full: false,
+>, <Line: -        lineColor: 'rgb(31, 120, 193)',
+>, <Line: -        fillColor: 'rgba(31, 118, 189, 0.18)',
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    _.defaults($scope.panel, _d);
+>, <Line: -    $scope.init = function() {
+>, <Line: -      panelSrv.init($scope);
+>, <Line: -      $scope.$on('refresh', $scope.get_data);
+>, <Line: -    };
+>, <Line: -    $scope.updateTimeRange = function () {
+>, <Line: -      $scope.range = timeSrv.timeRange();
+>, <Line: -      $scope.rangeUnparsed = timeSrv.timeRange(false);
+>, <Line: -      $scope.resolution = $scope.panel.maxDataPoints;
+>, <Line: -      $scope.interval = kbn.calculateInterval($scope.range, $scope.resolution, $scope.panel.interval);
+>, <Line: -    };
+>, <Line: -    $scope.get_data = function() {
+>, <Line: -      $scope.updateTimeRange();
+>, <Line: -      var metricsQuery = {
+>, <Line: -        range: $scope.rangeUnparsed,
+>, <Line: -        interval: $scope.interval,
+>, <Line: -        targets: $scope.panel.targets,
+>, <Line: -        maxDataPoints: $scope.resolution,
+>, <Line: -        cacheTimeout: $scope.panel.cacheTimeout
+>, <Line: -      };
+>, <Line: -      return $scope.datasource.query(metricsQuery)
+>, <Line: -        .then($scope.dataHandler)
+>, <Line: -        .then(null, function(err) {
+>, <Line: -          console.log("err");
+>, <Line: -          $scope.panelMeta.loading = false;
+>, <Line: -          $scope.panelMeta.error = err.message || "Timeseries data request error";
+>, <Line: -          $scope.inspector.error = err;
+>, <Line: -          $scope.render();
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    $scope.dataHandler = function(results) {
+>, <Line: -      $scope.panelMeta.loading = false;
+>, <Line: -      $scope.series = _.map(results.data, $scope.seriesHandler);
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    $scope.seriesHandler = function(seriesData) {
+>, <Line: -      var series = new TimeSeries({
+>, <Line: -        datapoints: seriesData.datapoints,
+>, <Line: -        alias: seriesData.target,
+>, <Line: -      });
+>, <Line: -      series.flotpairs = series.getFlotPairs($scope.panel.nullPointMode);
+>, <Line: -      return series;
+>, <Line: -    };
+>, <Line: -    $scope.setColoring = function(options) {
+>, <Line: -      if (options.background) {
+>, <Line: -        $scope.panel.colorValue = false;
+>, <Line: -        $scope.panel.colors = ['rgba(71, 212, 59, 0.4)', 'rgba(245, 150, 40, 0.73)', 'rgba(225, 40, 40, 0.59)'];
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        $scope.panel.colorBackground = false;
+>, <Line: -        $scope.panel.colors = ['rgba(50, 172, 45, 0.97)', 'rgba(237, 129, 40, 0.89)', 'rgba(245, 54, 54, 0.9)'];
+>, <Line: -      }
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    $scope.invertColorOrder = function() {
+>, <Line: -      var tmp = $scope.panel.colors[0];
+>, <Line: -      $scope.panel.colors[0] = $scope.panel.colors[2];
+>, <Line: -      $scope.panel.colors[2] = tmp;
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    $scope.getDecimalsForValue = function(value) {
+>, <Line: -      var delta = value / 2;
+>, <Line: -      var dec = -Math.floor(Math.log(delta) / Math.LN10);
+>, <Line: -      var magn = Math.pow(10, -dec),
+>, <Line: -          norm = delta / magn, // norm is between 1.0 and 10.0
+>, <Line: -          size;
+>, <Line: -      if (norm < 1.5) {
+>, <Line: -        size = 1;
+>, <Line: -      } else if (norm < 3) {
+>, <Line: -        size = 2;
+>, <Line: -        // special case for 2.5, requires an extra decimal
+>, <Line: -        if (norm > 2.25) {
+>, <Line: -          size = 2.5;
+>, <Line: -          ++dec;
+>, <Line: -        }
+>, <Line: -      } else if (norm < 7.5) {
+>, <Line: -        size = 5;
+>, <Line: -      } else {
+>, <Line: -        size = 10;
+>, <Line: -      }
+>, <Line: -      size *= magn;
+>, <Line: -      // reduce starting decimals if not needed
+>, <Line: -      if (Math.floor(value) === value) { dec = 0; }
+>, <Line: -      var result = {};
+>, <Line: -      result.decimals = Math.max(0, dec);
+>, <Line: -      result.scaledDecimals = result.decimals - Math.floor(Math.log(size) / Math.LN10) + 2;
+>, <Line: -      return result;
+>, <Line: -    };
+>, <Line: -    $scope.render = function() {
+>, <Line: -      var data = {};
+>, <Line: -      if (!$scope.series || $scope.series.length === 0) {
+>, <Line: -        data.flotpairs = [];
+>, <Line: -        data.mainValue = Number.NaN;
+>, <Line: -        data.mainValueFormated = $scope.getFormatedValue(null);
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        var series = $scope.series[0];
+>, <Line: -        data.mainValue = series.stats[$scope.panel.valueName];
+>, <Line: -        data.mainValueFormated = $scope.getFormatedValue(data.mainValue);
+>, <Line: -        data.flotpairs = series.flotpairs;
+>, <Line: -      }
+>, <Line: -      data.thresholds = $scope.panel.thresholds.split(',').map(function(strVale) {
+>, <Line: -        return Number(strVale.trim());
+>, <Line: -      });
+>, <Line: -      data.colorMap = $scope.panel.colors;
+>, <Line: -      $scope.data = data;
+>, <Line: -      $scope.$emit('render');
+>, <Line: -    };
+>, <Line: -    $scope.getFormatedValue = function(mainValue) {
+>, <Line: -      // first check value to text mappings
+>, <Line: -      for(var i = 0; i < $scope.panel.valueMaps.length; i++) {
+>, <Line: -        var map = $scope.panel.valueMaps[i];
+>, <Line: -        // special null case
+>, <Line: -        if (map.value === 'null') {
+>, <Line: -          if (mainValue === null || mainValue === void 0) {
+>, <Line: -            return map.text;
+>, <Line: -          }
+>, <Line: -          continue;
+>, <Line: -        }
+>, <Line: -        // value/number to text mapping
+>, <Line: -        var value = parseFloat(map.value);
+>, <Line: -        if (value === mainValue) {
+>, <Line: -          return map.text;
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -      if (mainValue === null || mainValue === void 0) {
+>, <Line: -        return "no value";
+>, <Line: -      }
+>, <Line: -      var decimalInfo = $scope.getDecimalsForValue(mainValue);
+>, <Line: -      var formatFunc = kbn.valueFormats[$scope.panel.format];
+>, <Line: -      return formatFunc(mainValue, decimalInfo.decimals, decimalInfo.scaledDecimals);
+>, <Line: -    };
+>, <Line: -    $scope.removeValueMap = function(map) {
+>, <Line: -      var index = _.indexOf($scope.panel.valueMaps, map);
+>, <Line: -      $scope.panel.valueMaps.splice(index, 1);
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    $scope.addValueMap = function() {
+>, <Line: -      $scope.panel.valueMaps.push({value: '', op: '=', text: '' });
+>, <Line: -    };
+>, <Line: -    $scope.init();
+>, <Line: -  });
+>, <Line: -});
+>]

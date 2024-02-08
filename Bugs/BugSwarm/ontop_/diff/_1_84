@@ -1,0 +1,76 @@
+[<Line: +import it.unibz.krdb.obda.ontology.AssertionFactory;
+>, <Line: +import it.unibz.krdb.obda.ontology.InconsistentOntologyException;
+>, <Line: +import it.unibz.krdb.obda.ontology.impl.AssertionFactoryImpl;
+>, <Line: +	private final AssertionFactory ofac = AssertionFactoryImpl.getInstance();
+>, <Line: +		Assertion assertion;
+>, <Line: +		try {
+>, <Line: +			if (currentPredicate.getArity() == 1) {
+>, <Line: +				assertion = ofac.createClassAssertion(currentPredicate.getName(), c);
+>, <Line: +			else if (currentPredicate.getArity() == 2) {
+>, <Line: +				if (currObject instanceof URI) {
+>, <Line: +					ObjectConstant c2 = obdafac.getConstantURI(currObject.stringValue());
+>, <Line: +					assertion = ofac.createObjectPropertyAssertion(currentPredicate.getName(), c, c2);
+>, <Line: +				} 
+>, <Line: +				else if (currObject instanceof BNode) {
+>, <Line: +					ObjectConstant c2 = obdafac.getConstantBNode(currObject.stringValue());
+>, <Line: +					assertion = ofac.createObjectPropertyAssertion(currentPredicate.getName(), c, c2);
+>, <Line: +				} 
+>, <Line: +				else if (currObject instanceof Literal) {
+>, <Line: +					Literal l = (Literal) currObject;				
+>, <Line: +					String lang = l.getLanguage();
+>, <Line: +					ValueConstant c2;
+>, <Line: +					if (lang == null) {
+>, <Line: +						URI datatype = l.getDatatype();
+>, <Line: +						Predicate.COL_TYPE type; 
+>, <Line: +						if (datatype == null) {
+>, <Line: +							type = Predicate.COL_TYPE.LITERAL;
+>, <Line: +						} 
+>, <Line: +						else {
+>, <Line: +							type = dtfac.getDatatype(datatype);
+>, <Line: +							if (type == null)
+>, <Line: +								type = Predicate.COL_TYPE.UNSUPPORTED;
+>, <Line: +						}			
+>, <Line: +						c2 = obdafac.getConstantLiteral(l.getLabel(), type);
+>, <Line: +						c2 = obdafac.getConstantLiteral(l.getLabel(), lang);
+>, <Line: +					assertion = ofac.createDataPropertyAssertion(currentPredicate.getName(), c, c2);			
+>, <Line: +					throw new RuntimeException("Unsupported object found in triple: " + st.toString() + " (Required URI, BNode or Literal)");
+>, <Line: +				throw new RuntimeException("Unsupported statement: " + st.toString());
+>, <Line: +		catch (InconsistentOntologyException e) {
+>, <Line: +			throw new RuntimeException("InconsistentOntologyException: " + currentPredicate + " " + currSubject + " " + currObject);
+>]
+[<Line: -	private final OntologyFactory ofac = OntologyFactoryImpl.getInstance();
+>, <Line: -		Assertion assertion = null;
+>, <Line: -		if (currentPredicate.getArity() == 1) {
+>, <Line: -			OClass concept = ofac.createClass(currentPredicate.getName());
+>, <Line: -			assertion = ofac.createClassAssertion(concept, c);
+>, <Line: -		} 
+>, <Line: -		else if (currentPredicate.getArity() == 2) {
+>, <Line: -			if (currObject instanceof URI) {
+>, <Line: -				ObjectConstant c2 = obdafac.getConstantURI(currObject.stringValue());
+>, <Line: -				ObjectPropertyExpression prop = ofac.createObjectProperty(currentPredicate.getName());
+>, <Line: -				assertion = ofac.createObjectPropertyAssertion(prop, c, c2);
+>, <Line: -			} 
+>, <Line: -			else if (currObject instanceof BNode) {
+>, <Line: -				ObjectConstant c2 = obdafac.getConstantBNode(currObject.stringValue());
+>, <Line: -				ObjectPropertyExpression prop = ofac.createObjectProperty(currentPredicate.getName());
+>, <Line: -				assertion = ofac.createObjectPropertyAssertion(prop, c, c2);
+>, <Line: -			else if (currObject instanceof Literal) {
+>, <Line: -				Literal l = (Literal) currObject;				
+>, <Line: -				String lang = l.getLanguage();
+>, <Line: -				ValueConstant c2;
+>, <Line: -				if (lang == null) {
+>, <Line: -					URI datatype = l.getDatatype();
+>, <Line: -					Predicate.COL_TYPE type; 
+>, <Line: -					if (datatype == null) {
+>, <Line: -						type = Predicate.COL_TYPE.LITERAL;
+>, <Line: -						type = dtfac.getDatatype(datatype);
+>, <Line: -						if (type == null)
+>, <Line: -							type = Predicate.COL_TYPE.UNSUPPORTED;
+>, <Line: -					c2 = obdafac.getConstantLiteral(l.getLabel(), type);
+>, <Line: -					c2 = obdafac.getConstantLiteral(l.getLabel(), lang);
+>, <Line: -				DataPropertyExpression prop = ofac.createDataProperty(currentPredicate.getName());
+>, <Line: -				assertion = ofac.createDataPropertyAssertion(prop, c, c2);			
+>, <Line: -				throw new RuntimeException("Unsupported object found in triple: " + st.toString() + " (Required URI, BNode or Literal)");
+>, <Line: -		else {
+>, <Line: -			throw new RuntimeException("Unsupported statement: " + st.toString());
+>]

@@ -1,0 +1,4 @@
+[<Line: +    public static final int MSG_DOWNLINK = 0x80;
+>]
+[<Line: -    public static final int MSG_INTERACTIVE = 0x80;
+>]

@@ -1,0 +1,15 @@
+[<Line: +import de.charite.compbio.jannovar.Jannovar;
+>, <Line: +		String[] argv = new String[] { "annotate-vcf", "-o", outFolder.toString() + "/small.jv.vcf", "-d",
+>, <Line: +				pathToSmallSer, "-i", inputFilePath };
+>, <Line: +		Jannovar.main(argv);
+>, <Line: +		String[] argv = new String[] { "annotate-vcf", "-o", outFolder.toString() + "/semicolons.jv.vcf", "-d",
+>, <Line: +				pathToSmallSer, "-i", inputFilePath };
+>, <Line: +		Jannovar.main(argv);
+>]
+[<Line: -		String[] argv = new String[] { "annotate", "-o", outFolder.toString(), "-d", pathToSmallSer, "-i",
+>, <Line: -				inputFilePath };
+>, <Line: -		new AnnotateVCFCommand(argv).run();
+>, <Line: -		String[] argv = new String[] { "annotate", "-o", outFolder.toString(), "-d", pathToSmallSer, "-i",
+>, <Line: -				inputFilePath };
+>, <Line: -		new AnnotateVCFCommand(argv).run();
+>]

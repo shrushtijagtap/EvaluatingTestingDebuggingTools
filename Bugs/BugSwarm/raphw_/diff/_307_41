@@ -1,0 +1,14 @@
+[<Line: +import static org.hamcrest.CoreMatchers.is;
+>, <Line: +import static org.hamcrest.CoreMatchers.not;
+>, <Line: +            assertThat(parameterBinding.getIdentificationToken(), is(expectedToken));
+>, <Line: +            assertThat(parameterBinding.getIdentificationToken().hashCode(), is(expectedToken.hashCode()));
+>, <Line: +            assertThat(parameterBinding.getIdentificationToken(), not(expectedToken));
+>, <Line: +            assertThat(parameterBinding.getIdentificationToken().hashCode(), not(expectedToken.hashCode()));
+>]
+[<Line: -import static org.hamcrest.CoreMatchers.*;
+>, <Line: -import static org.mockito.Mockito.any;
+>, <Line: -            assertThat(parameterBinding.getIdentificationToken(), equalTo(expectedToken));
+>, <Line: -            assertThat(parameterBinding.getIdentificationToken().hashCode(), equalTo(expectedToken.hashCode()));
+>, <Line: -            assertThat(parameterBinding.getIdentificationToken(), not(equalTo(expectedToken)));
+>, <Line: -            assertThat(parameterBinding.getIdentificationToken().hashCode(), not(equalTo(expectedToken.hashCode())));
+>]

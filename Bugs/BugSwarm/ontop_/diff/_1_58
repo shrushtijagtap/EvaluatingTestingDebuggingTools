@@ -1,0 +1,40 @@
+[<Line: + * Validates an OBDAModel (mappings) against the vocabulary of an ontology 
+>, <Line: + * and adds type information to the mapping predicates
+>, <Line: + * 
+>, <Line: + * Used by the Protege 4 plugin in
+>, <Line: +//TODO: move to a more appropriate package
+>, <Line: +	public static void validate(OBDAModel obdaModel) throws Exception {
+>, <Line: +		 TargetQueryVocabularyValidator validator = new TargetQueryValidator(obdaModel.getOntologyVocabulary());
+>, <Line: +		 Hashtable<URI, ArrayList<OBDAMappingAxiom>> mappingTable = obdaModel.getMappings();
+>, <Line: +		 for (URI datasourceUri : mappingTable.keySet()) {
+>, <Line: +			 for (OBDAMappingAxiom mapping : mappingTable.get(datasourceUri)) {
+>, <Line: +				 CQIE tq = mapping.getTargetQuery();
+>, <Line: +				 boolean bSuccess = validator.validate(tq);
+>, <Line: +				 if (!bSuccess) {
+>, <Line: +					 throw new Exception("Found an invalid target query: " + tq.toString());
+>, <Line: +				 }
+>, <Line: +			 }
+>, <Line: +		 }
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: - * Validates an OBDAModel (mappings) against the vocabulary of an ontology. Used
+>, <Line: - * by the Protege 4 plugin in
+>, <Line: -	private final OBDAModel obdaModel;
+>, <Line: -	private final TargetQueryVocabularyValidator validator;
+>, <Line: -	// TODO We should reduce the dependency to OWL-API to define the ontology.
+>, <Line: -	public OBDAModelValidator(OBDAModel obdaModel, OWLOntology ontology) {
+>, <Line: -		this.obdaModel = obdaModel;
+>, <Line: -		validator = new TargetQueryValidator(obdaModel);
+>, <Line: -	}
+>, <Line: -	public void run() throws Exception {
+>, <Line: -		Hashtable<URI, ArrayList<OBDAMappingAxiom>> mappingTable = obdaModel.getMappings();
+>, <Line: -		for (URI datasourceUri : mappingTable.keySet()) {
+>, <Line: -			for (OBDAMappingAxiom mapping : mappingTable.get(datasourceUri)) {
+>, <Line: -				CQIE tq = (CQIE) mapping.getTargetQuery();
+>, <Line: -				boolean bSuccess = validator.validate(tq);
+>, <Line: -				if (!bSuccess) {
+>, <Line: -					throw new Exception("Found an invalid target query: " + tq.toString());
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -	}
+>]

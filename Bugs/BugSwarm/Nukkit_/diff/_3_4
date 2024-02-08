@@ -1,0 +1,4 @@
+[<Line: +public class Furnace extends BurningFurnace {
+>]
+[<Line: -public class Furnace extends BurningFurnace{
+>]

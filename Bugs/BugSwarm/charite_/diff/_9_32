@@ -1,0 +1,26 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.base;
+>, <Line: +import htsjdk.samtools.util.CloseableIterator;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: +import htsjdk.variant.vcf.VCFFileReader;
+>, <Line: +import java.io.File;
+>, <Line: +/**
+>, <Line: + * VCF file--backed provider of {@link VariantContext}s.
+>, <Line: + *
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class VCFReaderVariantProvider implements DatabaseVariantContextProvider {
+>, <Line: +	/** VCFReader to use for loading the VCF records */
+>, <Line: +	private final VCFFileReader vcfReader;
+>, <Line: +	public VCFReaderVariantProvider(String vcfPath) {
+>, <Line: +		this.vcfReader = new VCFFileReader(new File(vcfPath), true);
+>, <Line: +	}
+>, <Line: +	public VCFFileReader getVcfReader() {
+>, <Line: +		return vcfReader;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public CloseableIterator<VariantContext> query(String contig, int beginPos, int endPos) {
+>, <Line: +		return vcfReader.query(contig, beginPos, endPos);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

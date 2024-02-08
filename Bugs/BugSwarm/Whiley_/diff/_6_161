@@ -1,0 +1,18 @@
+[<Line: +type Rec1 is {int x, int y}
+>, <Line: +type Rec2 is {int x}
+>, <Line: +    return rec.x
+>, <Line: +    Rec1 rec = {x: 1, y: 2}
+>, <Line: +    assume f((Rec2) rec) == 1
+>, <Line: +    assert rec == {x:1, y: 2}
+>]
+[<Line: -type Rec1 is {int x}
+>, <Line: -type Rec2 is {real x}
+>, <Line: -    int x
+>, <Line: -    int y
+>, <Line: -    x,y = rec.x
+>, <Line: -    return x
+>, <Line: -    Rec1 rec = {x: 1}
+>, <Line: -    int num = f((Rec2) rec)
+>, <Line: -    assume num == 1
+>, <Line: -    assert rec == {x:1}
+>]

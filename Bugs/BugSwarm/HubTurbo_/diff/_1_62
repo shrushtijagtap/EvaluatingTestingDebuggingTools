@@ -1,0 +1,10 @@
+[<Line: +import filter.expression.Qualifier;
+>, <Line: +			.filter(q -> q.getName().equals("in"))
+>, <Line: +			.collect(Collectors.toList());
+>, <Line: +		if (inQualifiers.isEmpty()) {
+>]
+[<Line: -import filter.expression.Qualifier;
+>, <Line: -				.filter(q -> q.getName().equals("in"))
+>, <Line: -				.collect(Collectors.toList());
+>, <Line: -		if (inQualifiers.size() == 0) {
+>]

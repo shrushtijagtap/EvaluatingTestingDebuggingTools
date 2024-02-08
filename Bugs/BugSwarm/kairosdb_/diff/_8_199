@@ -1,0 +1,150 @@
+[<Line: +	'angular',
+>, <Line: +	'app',
+>, <Line: +	'lodash',
+>, <Line: +], function (angular, app, _) {
+>, <Line: +	'use strict';
+>, <Line: +	var module = angular.module('grafana.panels.graph', []);
+>, <Line: +	app.useModule(module);
+>, <Line: +	module.controller('SeriesOverridesCtrl', function ($scope) {
+>, <Line: +		$scope.overrideMenu = [];
+>, <Line: +		$scope.currentOverrides = [];
+>, <Line: +		$scope.override = $scope.override || {};
+>, <Line: +		$scope.addOverrideOption = function (name, propertyName, values) {
+>, <Line: +			var option = {};
+>, <Line: +			option.text = name;
+>, <Line: +			option.propertyName = propertyName;
+>, <Line: +			option.index = $scope.overrideMenu.length;
+>, <Line: +			option.values = values;
+>, <Line: +			option.submenu = _.map(values, function (value, index) {
+>, <Line: +				return {
+>, <Line: +					text: String(value),
+>, <Line: +					click: 'menuItemSelected(' + option.index + ',' + index + ')'
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +			$scope.overrideMenu.push(option);
+>, <Line: +		};
+>, <Line: +		$scope.setOverride = function (optionIndex, valueIndex) {
+>, <Line: +			var option = $scope.overrideMenu[optionIndex];
+>, <Line: +			var value = option.values[valueIndex];
+>, <Line: +			$scope.override[option.propertyName] = value;
+>, <Line: +			// automatically disable lines for this series and the fill bellow to series
+>, <Line: +			// can be removed by the user if they still want lines
+>, <Line: +			if (option.propertyName === 'fillBelowTo') {
+>, <Line: +				$scope.override['lines'] = false;
+>, <Line: +				$scope.addSeriesOverride({alias: value, lines: false});
+>, <Line: +			}
+>, <Line: +			$scope.updateCurrentOverrides();
+>, <Line: +			$scope.render();
+>, <Line: +		};
+>, <Line: +		$scope.removeOverride = function (option) {
+>, <Line: +			delete $scope.override[option.propertyName];
+>, <Line: +			$scope.updateCurrentOverrides();
+>, <Line: +			$scope.render();
+>, <Line: +		};
+>, <Line: +		$scope.getSeriesNames = function () {
+>, <Line: +			return _.map($scope.seriesList, function (series) {
+>, <Line: +				return series.alias;
+>, <Line: +			});
+>, <Line: +		};
+>, <Line: +		$scope.updateCurrentOverrides = function () {
+>, <Line: +			$scope.currentOverrides = [];
+>, <Line: +			_.each($scope.overrideMenu, function (option) {
+>, <Line: +				var value = $scope.override[option.propertyName];
+>, <Line: +				if (_.isUndefined(value)) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				$scope.currentOverrides.push({
+>, <Line: +					name: option.text,
+>, <Line: +					propertyName: option.propertyName,
+>, <Line: +					value: String(value)
+>, <Line: +				});
+>, <Line: +			});
+>, <Line: +		};
+>, <Line: +		$scope.addOverrideOption('Bars', 'bars', [true, false]);
+>, <Line: +		$scope.addOverrideOption('Lines', 'lines', [true, false]);
+>, <Line: +		$scope.addOverrideOption('Line fill', 'fill', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+>, <Line: +		$scope.addOverrideOption('Line width', 'linewidth', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+>, <Line: +		$scope.addOverrideOption('Fill below to', 'fillBelowTo', $scope.getSeriesNames());
+>, <Line: +		$scope.addOverrideOption('Staircase line', 'steppedLine', [true, false]);
+>, <Line: +		$scope.addOverrideOption('Points', 'points', [true, false]);
+>, <Line: +		$scope.addOverrideOption('Points Radius', 'pointradius', [1, 2, 3, 4, 5]);
+>, <Line: +		$scope.addOverrideOption('Stack', 'stack', [true, false, 2, 3, 4, 5]);
+>, <Line: +		$scope.addOverrideOption('Y-axis', 'yaxis', [1, 2]);
+>, <Line: +		$scope.addOverrideOption('Z-index', 'zindex', [-1, -2, -3, 0, 1, 2, 3]);
+>, <Line: +		$scope.updateCurrentOverrides();
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'app',
+>, <Line: -  'lodash',
+>, <Line: -], function(angular, app, _) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.panels.graph', []);
+>, <Line: -  app.useModule(module);
+>, <Line: -  module.controller('SeriesOverridesCtrl', function($scope) {
+>, <Line: -    $scope.overrideMenu = [];
+>, <Line: -    $scope.currentOverrides = [];
+>, <Line: -    $scope.override = $scope.override || {};
+>, <Line: -    $scope.addOverrideOption = function(name, propertyName, values) {
+>, <Line: -      var option = {};
+>, <Line: -      option.text = name;
+>, <Line: -      option.propertyName = propertyName;
+>, <Line: -      option.index = $scope.overrideMenu.length;
+>, <Line: -      option.values = values;
+>, <Line: -      option.submenu = _.map(values, function(value, index) {
+>, <Line: -        return {
+>, <Line: -          text: String(value),
+>, <Line: -          click: 'menuItemSelected(' + option.index + ',' + index + ')'
+>, <Line: -        };
+>, <Line: -      });
+>, <Line: -      $scope.overrideMenu.push(option);
+>, <Line: -    };
+>, <Line: -    $scope.setOverride = function(optionIndex, valueIndex) {
+>, <Line: -      var option = $scope.overrideMenu[optionIndex];
+>, <Line: -      var value = option.values[valueIndex];
+>, <Line: -      $scope.override[option.propertyName] = value;
+>, <Line: -      // automatically disable lines for this series and the fill bellow to series
+>, <Line: -      // can be removed by the user if they still want lines
+>, <Line: -      if (option.propertyName === 'fillBelowTo') {
+>, <Line: -        $scope.override['lines'] = false;
+>, <Line: -        $scope.addSeriesOverride({ alias: value, lines: false });
+>, <Line: -      }
+>, <Line: -      $scope.updateCurrentOverrides();
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    $scope.removeOverride = function(option) {
+>, <Line: -      delete $scope.override[option.propertyName];
+>, <Line: -      $scope.updateCurrentOverrides();
+>, <Line: -      $scope.render();
+>, <Line: -    };
+>, <Line: -    $scope.getSeriesNames = function() {
+>, <Line: -      return _.map($scope.seriesList, function(series) {
+>, <Line: -        return series.alias;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    $scope.updateCurrentOverrides = function() {
+>, <Line: -      $scope.currentOverrides = [];
+>, <Line: -      _.each($scope.overrideMenu, function(option) {
+>, <Line: -        var value = $scope.override[option.propertyName];
+>, <Line: -        if (_.isUndefined(value)) { return; }
+>, <Line: -        $scope.currentOverrides.push({
+>, <Line: -          name: option.text,
+>, <Line: -          propertyName: option.propertyName,
+>, <Line: -          value: String(value)
+>, <Line: -        });
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    $scope.addOverrideOption('Bars', 'bars', [true, false]);
+>, <Line: -    $scope.addOverrideOption('Lines', 'lines', [true, false]);
+>, <Line: -    $scope.addOverrideOption('Line fill', 'fill', [0,1,2,3,4,5,6,7,8,9,10]);
+>, <Line: -    $scope.addOverrideOption('Line width', 'linewidth', [0,1,2,3,4,5,6,7,8,9,10]);
+>, <Line: -    $scope.addOverrideOption('Fill below to', 'fillBelowTo', $scope.getSeriesNames());
+>, <Line: -    $scope.addOverrideOption('Staircase line', 'steppedLine', [true, false]);
+>, <Line: -    $scope.addOverrideOption('Points', 'points', [true, false]);
+>, <Line: -    $scope.addOverrideOption('Points Radius', 'pointradius', [1,2,3,4,5]);
+>, <Line: -    $scope.addOverrideOption('Stack', 'stack', [true, false, 2, 3, 4, 5]);
+>, <Line: -    $scope.addOverrideOption('Y-axis', 'yaxis', [1, 2]);
+>, <Line: -    $scope.addOverrideOption('Z-index', 'zindex', [-1,-2,-3,0,1,2,3]);
+>, <Line: -    $scope.updateCurrentOverrides();
+>, <Line: -  });
+>]

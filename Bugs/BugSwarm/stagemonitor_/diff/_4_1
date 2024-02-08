@@ -1,0 +1,16 @@
+[<Line: +		long timestamp = clock.getTime();
+>, <Line: +		final MetricsOutputStreamHandler metricsOutputStreamHandler = new MetricsOutputStreamHandler(gauges, counters, histograms, meters, timers, timestamp);
+>, <Line: +					metricsOutputStreamHandler, new ElasticsearchClient.BulkErrorReportingResponseHandler());
+>, <Line: +							  Map<MetricName, Timer> timers, OutputStream os, byte[] bulkActionBytes, long timestamp) throws IOException {
+>, <Line: +		private final long timestamp;
+>, <Line: +		public MetricsOutputStreamHandler(Map<MetricName, Gauge> gauges, Map<MetricName, Counter> counters, Map<MetricName, Histogram> histograms, Map<MetricName, Meter> meters, Map<MetricName, Timer> timers, long timestamp) {
+>, <Line: +			this.timestamp = timestamp;
+>, <Line: +			reportMetrics(gauges, counters, histograms, meters, timers, os, bulkActionBytes, timestamp);
+>]
+[<Line: -		final MetricsOutputStreamHandler metricsOutputStreamHandler = new MetricsOutputStreamHandler(gauges, counters, histograms, meters, timers);
+>, <Line: -					metricsOutputStreamHandler);
+>, <Line: -							  Map<MetricName, Timer> timers, OutputStream os, byte[] bulkActionBytes) throws IOException {
+>, <Line: -		long timestamp = clock.getTime();
+>, <Line: -		public MetricsOutputStreamHandler(Map<MetricName, Gauge> gauges, Map<MetricName, Counter> counters, Map<MetricName, Histogram> histograms, Map<MetricName, Meter> meters, Map<MetricName, Timer> timers) {
+>, <Line: -			reportMetrics(gauges, counters, histograms, meters, timers, os, bulkActionBytes);
+>]

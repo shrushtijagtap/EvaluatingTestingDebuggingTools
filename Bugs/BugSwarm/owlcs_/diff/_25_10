@@ -1,0 +1,192 @@
+[]
+[<Line: -/* This file is part of the OWL API.
+>, <Line: - * The contents of this file are subject to the LGPL License, Version 3.0.
+>, <Line: - * Copyright 2014, The University of Manchester
+>, <Line: - * 
+>, <Line: - * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+>, <Line: - * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+>, <Line: - * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
+>, <Line: - *
+>, <Line: - * Alternatively, the contents of this file may be used under the terms of the Apache License, Version 2.0 in which case, the provisions of the Apache License Version 2.0 are applicable instead of those above.
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+>, <Line: - * http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. */
+>, <Line: -package org.semanticweb.owlapi.model;
+>, <Line: -import java.io.Serializable;
+>, <Line: -/**
+>, <Line: - * A configuration object that specifies options for output.
+>, <Line: - *
+>, <Line: - * @author Ignazio
+>, <Line: - * @since 5.0.0
+>, <Line: - */
+>, <Line: -public class OWLOntologyWriterConfiguration implements Serializable {
+>, <Line: -    private boolean addMissingTypes = true;
+>, <Line: -    private boolean bannersEnabled = true;
+>, <Line: -    private boolean indenting = true;
+>, <Line: -    private int indentSize = 4;
+>, <Line: -    private boolean labelsAsBanner = false;
+>, <Line: -    private boolean remapIds = true;
+>, <Line: -    private boolean saveIds = false;
+>, <Line: -    private boolean useNamespaceEntities = false;
+>, <Line: -    private OWLOntologyWriterConfiguration copy() {
+>, <Line: -        OWLOntologyWriterConfiguration toReturn = new OWLOntologyWriterConfiguration();
+>, <Line: -        toReturn.addMissingTypes = addMissingTypes;
+>, <Line: -        toReturn.bannersEnabled = bannersEnabled;
+>, <Line: -        toReturn.indenting = indenting;
+>, <Line: -        toReturn.indentSize = indentSize;
+>, <Line: -        toReturn.labelsAsBanner = labelsAsBanner;
+>, <Line: -        toReturn.remapIds = remapIds;
+>, <Line: -        toReturn.saveIds = saveIds;
+>, <Line: -        toReturn.useNamespaceEntities = useNamespaceEntities;
+>, <Line: -        return toReturn;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Determines if untyped entities should automatically be typed (declared) during rendering.
+>, <Line: -     * (This is a hint to an RDF renderer - the reference implementation will respect this).
+>, <Line: -     *
+>, <Line: -     * @return {@code true} if untyped entities should automatically be typed during rendering,
+>, <Line: -     * otherwise {@code false}.
+>, <Line: -     */
+>, <Line: -    public boolean shouldAddMissingTypes() {
+>, <Line: -        return addMissingTypes;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return should output banners
+>, <Line: -     */
+>, <Line: -    public boolean shouldUseBanners() {
+>, <Line: -        return bannersEnabled;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return true if all anonymous individuals should have their ids persisted
+>, <Line: -     */
+>, <Line: -    public boolean shouldSaveIdsForAllAnonymousIndividuals() {
+>, <Line: -        return saveIds;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return true if all anonymous individuals should have their ids remapped upon reading
+>, <Line: -     */
+>, <Line: -    public boolean shouldRemapAllAnonymousIndividualsIds() {
+>, <Line: -        return remapIds;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return use namespace entities
+>, <Line: -     */
+>, <Line: -    public boolean isUseNamespaceEntities() {
+>, <Line: -        return useNamespaceEntities;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return indenting
+>, <Line: -     */
+>, <Line: -    public boolean isIndenting() {
+>, <Line: -        return indenting;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return indent size
+>, <Line: -     */
+>, <Line: -    public int getIndentSize() {
+>, <Line: -        return indentSize;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return true if labels should be used for banner comments
+>, <Line: -     */
+>, <Line: -    public boolean isLabelsAsBanner() {
+>, <Line: -        return labelsAsBanner;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param label True if banner comments should be enabled.
+>, <Line: -     * @return new config object
+>, <Line: -     */
+>, <Line: -    public OWLOntologyWriterConfiguration withBannersEnabled(boolean label) {
+>, <Line: -        if (labelsAsBanner == label) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyWriterConfiguration copy = copy();
+>, <Line: -        copy.labelsAsBanner = label;
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param b true if all anonymous individuals should have their ids persisted
+>, <Line: -     * @return new config object
+>, <Line: -     */
+>, <Line: -    public OWLOntologyWriterConfiguration withSaveIdsForAllAnonymousIndividuals(boolean b) {
+>, <Line: -        if (saveIds == b) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyWriterConfiguration copy = copy();
+>, <Line: -        copy.saveIds = b;
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param b true if all anonymous individuals should have their ids remapped after parsing
+>, <Line: -     * @return new config object
+>, <Line: -     */
+>, <Line: -    public OWLOntologyWriterConfiguration withRemapAllAnonymousIndividualsIds(boolean b) {
+>, <Line: -        if (remapIds == b) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyWriterConfiguration copy = copy();
+>, <Line: -        copy.remapIds = b;
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param useEntities useNamespaceEntities
+>, <Line: -     * @return new config object
+>, <Line: -     */
+>, <Line: -    public OWLOntologyWriterConfiguration withUseNamespaceEntities(boolean useEntities) {
+>, <Line: -        if (useNamespaceEntities == useEntities) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyWriterConfiguration copy = copy();
+>, <Line: -        copy.useNamespaceEntities = useEntities;
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param indent indent
+>, <Line: -     * @return new config object
+>, <Line: -     */
+>, <Line: -    public OWLOntologyWriterConfiguration withIndenting(boolean indent) {
+>, <Line: -        if (indenting == indent) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyWriterConfiguration copy = copy();
+>, <Line: -        copy.indenting = indent;
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param indent indent size
+>, <Line: -     * @return new config object
+>, <Line: -     */
+>, <Line: -    public OWLOntologyWriterConfiguration withIndentSize(int indent) {
+>, <Line: -        if (indentSize == indent) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyWriterConfiguration copy = copy();
+>, <Line: -        copy.indentSize = indent;
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param label true if labels should be used for banner comments
+>, <Line: -     * @return new config object
+>, <Line: -     */
+>, <Line: -    public OWLOntologyWriterConfiguration withLabelsAsBanner(boolean label) {
+>, <Line: -        if (labelsAsBanner == label) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyWriterConfiguration copy = copy();
+>, <Line: -        copy.labelsAsBanner = label;
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param addTypes true if missing type declarations should be added
+>, <Line: -     * @return new config object
+>, <Line: -     */
+>, <Line: -    public OWLOntologyWriterConfiguration withAddMissingTypes(boolean addTypes) {
+>, <Line: -        if (addMissingTypes == addTypes) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyWriterConfiguration copy = copy();
+>, <Line: -        copy.addMissingTypes = addTypes;
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -}
+>]

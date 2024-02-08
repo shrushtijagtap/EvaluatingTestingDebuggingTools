@@ -1,0 +1,8 @@
+[<Line: +import org.jackhuang.hellominecraft.util.func.BiFunction;
+>, <Line: +    public final BiFunction<MinecraftVersion, Boolean, String> ASSET_PROVIDER_IMPL = (t, allow) -> {
+>, <Line: +        if (allow && !checkAssetsExistance(t.getAssetsIndex()))
+>]
+[<Line: -import org.jackhuang.hellominecraft.util.func.Function;
+>, <Line: -    public final Function<MinecraftVersion, String> ASSET_PROVIDER_IMPL = t -> {
+>, <Line: -        if (!checkAssetsExistance(t.getAssetsIndex()))
+>]

@@ -1,0 +1,114 @@
+[<Line: +	'use strict';
+>, <Line: +	var module = angular.module('grafana.filters');
+>, <Line: +	module.filter('stringSort', function () {
+>, <Line: +		return function (input) {
+>, <Line: +			return input.sort();
+>, <Line: +		};
+>, <Line: +	});
+>, <Line: +	module.filter('slice', function () {
+>, <Line: +		return function (arr, start, end) {
+>, <Line: +			if (!_.isUndefined(arr)) {
+>, <Line: +				return arr.slice(start, end);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +	});
+>, <Line: +	module.filter('stringify', function () {
+>, <Line: +		return function (arr) {
+>, <Line: +			if (_.isObject(arr) && !_.isArray(arr)) {
+>, <Line: +				return angular.toJson(arr);
+>, <Line: +			} else {
+>, <Line: +				return _.isNull(arr) ? null : arr.toString();
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +	});
+>, <Line: +	module.filter('moment', function () {
+>, <Line: +		return function (date, mode) {
+>, <Line: +			switch (mode) {
+>, <Line: +				case 'ago':
+>, <Line: +					return moment(date).fromNow();
+>, <Line: +			}
+>, <Line: +			return moment(date).fromNow();
+>, <Line: +		};
+>, <Line: +	});
+>, <Line: +	module.filter('noXml', function () {
+>, <Line: +		var noXml = function (text) {
+>, <Line: +			return _.isString(text)
+>, <Line: +				? text
+>, <Line: +				.replace(/&/g, '&amp;')
+>, <Line: +				.replace(/</g, '&lt;')
+>, <Line: +				.replace(/>/g, '&gt;')
+>, <Line: +				.replace(/'/g, '&#39;')
+>, <Line: +				.replace(/"/g, '&quot;')
+>, <Line: +				: text;
+>, <Line: +		};
+>, <Line: +		return function (text) {
+>, <Line: +			return _.isArray(text)
+>, <Line: +				? _.map(text, noXml)
+>, <Line: +				: noXml(text);
+>, <Line: +		};
+>, <Line: +	});
+>, <Line: +	module.filter('interpolateTemplateVars', function (templateSrv) {
+>, <Line: +		function interpolateTemplateVars(text) {
+>, <Line: +			return templateSrv.replaceWithText(text);
+>, <Line: +		}
+>, <Line: +		interpolateTemplateVars.$stateful = true;
+>, <Line: +		return interpolateTemplateVars;
+>, <Line: +	});
+>]
+[<Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.filters');
+>, <Line: -  module.filter('stringSort', function() {
+>, <Line: -    return function(input) {
+>, <Line: -      return input.sort();
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -  module.filter('slice', function() {
+>, <Line: -    return function(arr, start, end) {
+>, <Line: -      if(!_.isUndefined(arr)) {
+>, <Line: -        return arr.slice(start, end);
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -  module.filter('stringify', function() {
+>, <Line: -    return function(arr) {
+>, <Line: -      if(_.isObject(arr) && !_.isArray(arr)) {
+>, <Line: -        return angular.toJson(arr);
+>, <Line: -      } else {
+>, <Line: -        return _.isNull(arr) ? null : arr.toString();
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -  module.filter('moment', function() {
+>, <Line: -    return function(date,mode) {
+>, <Line: -      switch(mode) {
+>, <Line: -      case 'ago':
+>, <Line: -        return moment(date).fromNow();
+>, <Line: -      }
+>, <Line: -      return moment(date).fromNow();
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -  module.filter('noXml', function() {
+>, <Line: -    var noXml = function(text) {
+>, <Line: -      return _.isString(text)
+>, <Line: -        ? text
+>, <Line: -            .replace(/&/g, '&amp;')
+>, <Line: -            .replace(/</g, '&lt;')
+>, <Line: -            .replace(/>/g, '&gt;')
+>, <Line: -            .replace(/'/g, '&#39;')
+>, <Line: -            .replace(/"/g, '&quot;')
+>, <Line: -        : text;
+>, <Line: -    };
+>, <Line: -    return function(text) {
+>, <Line: -      return _.isArray(text)
+>, <Line: -        ? _.map(text, noXml)
+>, <Line: -        : noXml(text);
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -  module.filter('interpolateTemplateVars', function(templateSrv) {
+>, <Line: -    function interpolateTemplateVars(text) {
+>, <Line: -      return templateSrv.replaceWithText(text);
+>, <Line: -    }
+>, <Line: -    interpolateTemplateVars.$stateful = true;
+>, <Line: -    return interpolateTemplateVars;
+>, <Line: -  });
+>]

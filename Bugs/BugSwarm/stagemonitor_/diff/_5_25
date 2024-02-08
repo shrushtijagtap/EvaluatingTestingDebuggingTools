@@ -1,0 +1,36 @@
+[<Line: +package org.stagemonitor.requestmonitor;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +import com.fasterxml.jackson.annotation.JsonIgnore;
+>, <Line: +public class ExternalRequestStats {
+>, <Line: +	private final double MS_IN_NANOS = TimeUnit.MILLISECONDS.toNanos(1);
+>, <Line: +	private final String requestType;
+>, <Line: +	private int executionCount;
+>, <Line: +	@JsonIgnore
+>, <Line: +	private long executionTimeNanos;
+>, <Line: +	public ExternalRequestStats(ExternalRequest externalRequest) {
+>, <Line: +		requestType = externalRequest.getRequestType();
+>, <Line: +		executionCount = 1;
+>, <Line: +		executionTimeNanos = externalRequest.getExecutionTimeNanos();
+>, <Line: +	}
+>, <Line: +	public double getExecutionTime() {
+>, <Line: +		return executionTimeNanos / MS_IN_NANOS;
+>, <Line: +	}
+>, <Line: +	public long getExecutionTimeNanos() {
+>, <Line: +		return executionTimeNanos;
+>, <Line: +	}
+>, <Line: +	public int getExecutionCount() {
+>, <Line: +		return executionCount;
+>, <Line: +	}
+>, <Line: +	public String getRequestType() {
+>, <Line: +		return requestType;
+>, <Line: +	}
+>, <Line: +	public void add(ExternalRequest externalRequest) {
+>, <Line: +		executionCount++;
+>, <Line: +		executionTimeNanos += externalRequest.getExecutionTimeNanos();
+>, <Line: +	}
+>, <Line: +	public void incrementExecutionTime(long additionalExecutionTime) {
+>, <Line: +		executionTimeNanos += additionalExecutionTime;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

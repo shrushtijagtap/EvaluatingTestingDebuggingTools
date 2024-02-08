@@ -1,0 +1,400 @@
+[<Line: + plusplus: true */
+>, <Line: +	|| (navigator.msSaveOrOpenBlob && navigator.msSaveOrOpenBlob.bind(navigator))
+>, <Line: +	|| (function (view) {
+>, <Line: +		"use strict";
+>, <Line: +		var
+>, <Line: +			doc = view.document
+>, <Line: +		// only get URL when necessary in case BlobBuilder.js hasn't overridden it yet
+>, <Line: +			, get_URL = function () {
+>, <Line: +				return view.URL || view.webkitURL || view;
+>, <Line: +			}
+>, <Line: +			, URL = view.URL || view.webkitURL || view
+>, <Line: +			, save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a")
+>, <Line: +			, can_use_save_link = !view.externalHost && "download" in save_link
+>, <Line: +			, click = function (node) {
+>, <Line: +				var event = doc.createEvent("MouseEvents");
+>, <Line: +				event.initMouseEvent(
+>, <Line: +					"click", true, false, view, 0, 0, 0, 0, 0
+>, <Line: +					, false, false, false, false, 0, null
+>, <Line: +				);
+>, <Line: +				node.dispatchEvent(event);
+>, <Line: +			}
+>, <Line: +			, webkit_req_fs = view.webkitRequestFileSystem
+>, <Line: +			, req_fs = view.requestFileSystem || webkit_req_fs || view.mozRequestFileSystem
+>, <Line: +			, throw_outside = function (ex) {
+>, <Line: +				(view.setImmediate || view.setTimeout)(function () {
+>, <Line: +					throw ex;
+>, <Line: +				}, 0);
+>, <Line: +			}
+>, <Line: +			, force_saveable_type = "application/octet-stream"
+>, <Line: +			, fs_min_size = 0
+>, <Line: +			, deletion_queue = []
+>, <Line: +			, process_deletion_queue = function () {
+>, <Line: +				var i = deletion_queue.length;
+>, <Line: +				while (i--) {
+>, <Line: +					var file = deletion_queue[i];
+>, <Line: +					if (typeof file === "string") { // file is an object URL
+>, <Line: +						URL.revokeObjectURL(file);
+>, <Line: +					} else { // file is a File
+>, <Line: +						file.remove();
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				deletion_queue.length = 0; // clear queue
+>, <Line: +			}
+>, <Line: +			, dispatch = function (filesaver, event_types, event) {
+>, <Line: +				event_types = [].concat(event_types);
+>, <Line: +				var i = event_types.length;
+>, <Line: +				while (i--) {
+>, <Line: +					var listener = filesaver["on" + event_types[i]];
+>, <Line: +					if (typeof listener === "function") {
+>, <Line: +						try {
+>, <Line: +							listener.call(filesaver, event || filesaver);
+>, <Line: +						} catch (ex) {
+>, <Line: +							throw_outside(ex);
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			, FileSaver = function (blob, name) {
+>, <Line: +				// First try a.download, then web filesystem, then object URLs
+>, <Line: +				var
+>, <Line: +					filesaver = this
+>, <Line: +					, type = blob.type
+>, <Line: +					, blob_changed = false
+>, <Line: +					, object_url
+>, <Line: +					, target_view
+>, <Line: +					, get_object_url = function () {
+>, <Line: +						var object_url = get_URL().createObjectURL(blob);
+>, <Line: +						deletion_queue.push(object_url);
+>, <Line: +						return object_url;
+>, <Line: +					}
+>, <Line: +					, dispatch_all = function () {
+>, <Line: +						dispatch(filesaver, "writestart progress write writeend".split(" "));
+>, <Line: +					}
+>, <Line: +				// on any filesys errors revert to saving with object URLs
+>, <Line: +					, fs_error = function () {
+>, <Line: +						// don't create more object URLs than needed
+>, <Line: +						if (blob_changed || !object_url) {
+>, <Line: +							object_url = get_object_url(blob);
+>, <Line: +						}
+>, <Line: +						if (target_view) {
+>, <Line: +							target_view.location.href = object_url;
+>, <Line: +						} else {
+>, <Line: +							window.open(object_url, "_blank");
+>, <Line: +						}
+>, <Line: +						filesaver.readyState = filesaver.DONE;
+>, <Line: +						dispatch_all();
+>, <Line: +					}
+>, <Line: +					, abortable = function (func) {
+>, <Line: +						return function () {
+>, <Line: +							if (filesaver.readyState !== filesaver.DONE) {
+>, <Line: +								return func.apply(this, arguments);
+>, <Line: +							}
+>, <Line: +						};
+>, <Line: +					}
+>, <Line: +					, create_if_not_found = {create: true, exclusive: false}
+>, <Line: +					, slice
+>, <Line: +					;
+>, <Line: +				filesaver.readyState = filesaver.INIT;
+>, <Line: +				if (!name) {
+>, <Line: +					name = "download";
+>, <Line: +				}
+>, <Line: +				if (can_use_save_link) {
+>, <Line: +					object_url = get_object_url(blob);
+>, <Line: +					save_link.href = object_url;
+>, <Line: +					save_link.download = name;
+>, <Line: +					click(save_link);
+>, <Line: +					filesaver.readyState = filesaver.DONE;
+>, <Line: +					dispatch_all();
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				// Object and web filesystem URLs have a problem saving in Google Chrome when
+>, <Line: +				// viewed in a tab, so I force save with application/octet-stream
+>, <Line: +				// http://code.google.com/p/chromium/issues/detail?id=91158
+>, <Line: +				if (view.chrome && type && type !== force_saveable_type) {
+>, <Line: +					slice = blob.slice || blob.webkitSlice;
+>, <Line: +					blob = slice.call(blob, 0, blob.size, force_saveable_type);
+>, <Line: +					blob_changed = true;
+>, <Line: +				}
+>, <Line: +				// Since I can't be sure that the guessed media type will trigger a download
+>, <Line: +				// in WebKit, I append .download to the filename.
+>, <Line: +				// https://bugs.webkit.org/show_bug.cgi?id=65440
+>, <Line: +				if (webkit_req_fs && name !== "download") {
+>, <Line: +					name += ".download";
+>, <Line: +				}
+>, <Line: +				if (type === force_saveable_type || webkit_req_fs) {
+>, <Line: +					target_view = view;
+>, <Line: +				}
+>, <Line: +				if (!req_fs) {
+>, <Line: +					fs_error();
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				fs_min_size += blob.size;
+>, <Line: +				req_fs(view.TEMPORARY, fs_min_size, abortable(function (fs) {
+>, <Line: +					fs.root.getDirectory("saved", create_if_not_found, abortable(function (dir) {
+>, <Line: +						var save = function () {
+>, <Line: +							dir.getFile(name, create_if_not_found, abortable(function (file) {
+>, <Line: +								file.createWriter(abortable(function (writer) {
+>, <Line: +									writer.onwriteend = function (event) {
+>, <Line: +										target_view.location.href = file.toURL();
+>, <Line: +										deletion_queue.push(file);
+>, <Line: +										filesaver.readyState = filesaver.DONE;
+>, <Line: +										dispatch(filesaver, "writeend", event);
+>, <Line: +									};
+>, <Line: +									writer.onerror = function () {
+>, <Line: +										var error = writer.error;
+>, <Line: +										if (error.code !== error.ABORT_ERR) {
+>, <Line: +											fs_error();
+>, <Line: +										}
+>, <Line: +									};
+>, <Line: +									"writestart progress write abort".split(" ").forEach(function (event) {
+>, <Line: +										writer["on" + event] = filesaver["on" + event];
+>, <Line: +									});
+>, <Line: +									writer.write(blob);
+>, <Line: +									filesaver.abort = function () {
+>, <Line: +										writer.abort();
+>, <Line: +										filesaver.readyState = filesaver.DONE;
+>, <Line: +									};
+>, <Line: +									filesaver.readyState = filesaver.WRITING;
+>, <Line: +								}), fs_error);
+>, <Line: +							}), fs_error);
+>, <Line: +						};
+>, <Line: +						dir.getFile(name, {create: false}, abortable(function (file) {
+>, <Line: +							// delete file if it already exists
+>, <Line: +							file.remove();
+>, <Line: +							save();
+>, <Line: +						}), abortable(function (ex) {
+>, <Line: +							if (ex.code === ex.NOT_FOUND_ERR) {
+>, <Line: +								save();
+>, <Line: +							} else {
+>, <Line: +								fs_error();
+>, <Line: +							}
+>, <Line: +						}));
+>, <Line: +					}), fs_error);
+>, <Line: +				}), fs_error);
+>, <Line: +			}
+>, <Line: +			, FS_proto = FileSaver.prototype
+>, <Line: +			, saveAs = function (blob, name) {
+>, <Line: +				return new FileSaver(blob, name);
+>, <Line: +			}
+>, <Line: +			;
+>, <Line: +		FS_proto.abort = function () {
+>, <Line: +			var filesaver = this;
+>, <Line: +			filesaver.readyState = filesaver.DONE;
+>, <Line: +			dispatch(filesaver, "abort");
+>, <Line: +		};
+>, <Line: +		FS_proto.readyState = FS_proto.INIT = 0;
+>, <Line: +		FS_proto.WRITING = 1;
+>, <Line: +		FS_proto.DONE = 2;
+>, <Line: +		FS_proto.error =
+>, <Line: +			FS_proto.onwritestart =
+>, <Line: +				FS_proto.onprogress =
+>, <Line: +					FS_proto.onwrite =
+>, <Line: +						FS_proto.onabort =
+>, <Line: +							FS_proto.onerror =
+>, <Line: +								FS_proto.onwriteend =
+>, <Line: +									null;
+>, <Line: +		view.addEventListener("unload", process_deletion_queue, false);
+>, <Line: +		return saveAs;
+>, <Line: +	}(self));
+>]
+[<Line: -  plusplus: true */
+>, <Line: -  || (navigator.msSaveOrOpenBlob && navigator.msSaveOrOpenBlob.bind(navigator))
+>, <Line: -  || (function(view) {
+>, <Line: -  "use strict";
+>, <Line: -  var
+>, <Line: -      doc = view.document
+>, <Line: -      // only get URL when necessary in case BlobBuilder.js hasn't overridden it yet
+>, <Line: -    , get_URL = function() {
+>, <Line: -      return view.URL || view.webkitURL || view;
+>, <Line: -    }
+>, <Line: -    , URL = view.URL || view.webkitURL || view
+>, <Line: -    , save_link = doc.createElementNS("http://www.w3.org/1999/xhtml", "a")
+>, <Line: -    , can_use_save_link =  !view.externalHost && "download" in save_link
+>, <Line: -    , click = function(node) {
+>, <Line: -      var event = doc.createEvent("MouseEvents");
+>, <Line: -      event.initMouseEvent(
+>, <Line: -        "click", true, false, view, 0, 0, 0, 0, 0
+>, <Line: -        , false, false, false, false, 0, null
+>, <Line: -      );
+>, <Line: -      node.dispatchEvent(event);
+>, <Line: -    }
+>, <Line: -    , webkit_req_fs = view.webkitRequestFileSystem
+>, <Line: -    , req_fs = view.requestFileSystem || webkit_req_fs || view.mozRequestFileSystem
+>, <Line: -    , throw_outside = function (ex) {
+>, <Line: -      (view.setImmediate || view.setTimeout)(function() {
+>, <Line: -        throw ex;
+>, <Line: -      }, 0);
+>, <Line: -    }
+>, <Line: -    , force_saveable_type = "application/octet-stream"
+>, <Line: -    , fs_min_size = 0
+>, <Line: -    , deletion_queue = []
+>, <Line: -    , process_deletion_queue = function() {
+>, <Line: -      var i = deletion_queue.length;
+>, <Line: -      while (i--) {
+>, <Line: -        var file = deletion_queue[i];
+>, <Line: -        if (typeof file === "string") { // file is an object URL
+>, <Line: -          URL.revokeObjectURL(file);
+>, <Line: -        } else { // file is a File
+>, <Line: -          file.remove();
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -      deletion_queue.length = 0; // clear queue
+>, <Line: -    }
+>, <Line: -    , dispatch = function(filesaver, event_types, event) {
+>, <Line: -      event_types = [].concat(event_types);
+>, <Line: -      var i = event_types.length;
+>, <Line: -      while (i--) {
+>, <Line: -        var listener = filesaver["on" + event_types[i]];
+>, <Line: -        if (typeof listener === "function") {
+>, <Line: -          try {
+>, <Line: -            listener.call(filesaver, event || filesaver);
+>, <Line: -          } catch (ex) {
+>, <Line: -            throw_outside(ex);
+>, <Line: -          }
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -    }
+>, <Line: -    , FileSaver = function(blob, name) {
+>, <Line: -      // First try a.download, then web filesystem, then object URLs
+>, <Line: -      var
+>, <Line: -          filesaver = this
+>, <Line: -        , type = blob.type
+>, <Line: -        , blob_changed = false
+>, <Line: -        , object_url
+>, <Line: -        , target_view
+>, <Line: -        , get_object_url = function() {
+>, <Line: -          var object_url = get_URL().createObjectURL(blob);
+>, <Line: -          deletion_queue.push(object_url);
+>, <Line: -          return object_url;
+>, <Line: -        }
+>, <Line: -        , dispatch_all = function() {
+>, <Line: -          dispatch(filesaver, "writestart progress write writeend".split(" "));
+>, <Line: -        }
+>, <Line: -        // on any filesys errors revert to saving with object URLs
+>, <Line: -        , fs_error = function() {
+>, <Line: -          // don't create more object URLs than needed
+>, <Line: -          if (blob_changed || !object_url) {
+>, <Line: -            object_url = get_object_url(blob);
+>, <Line: -          }
+>, <Line: -          if (target_view) {
+>, <Line: -            target_view.location.href = object_url;
+>, <Line: -          } else {
+>, <Line: -                        window.open(object_url, "_blank");
+>, <Line: -                    }
+>, <Line: -          filesaver.readyState = filesaver.DONE;
+>, <Line: -          dispatch_all();
+>, <Line: -        }
+>, <Line: -        , abortable = function(func) {
+>, <Line: -          return function() {
+>, <Line: -            if (filesaver.readyState !== filesaver.DONE) {
+>, <Line: -              return func.apply(this, arguments);
+>, <Line: -            }
+>, <Line: -          };
+>, <Line: -        }
+>, <Line: -        , create_if_not_found = {create: true, exclusive: false}
+>, <Line: -        , slice
+>, <Line: -      ;
+>, <Line: -      filesaver.readyState = filesaver.INIT;
+>, <Line: -      if (!name) {
+>, <Line: -        name = "download";
+>, <Line: -      }
+>, <Line: -      if (can_use_save_link) {
+>, <Line: -        object_url = get_object_url(blob);
+>, <Line: -        save_link.href = object_url;
+>, <Line: -        save_link.download = name;
+>, <Line: -        click(save_link);
+>, <Line: -        filesaver.readyState = filesaver.DONE;
+>, <Line: -        dispatch_all();
+>, <Line: -        return;
+>, <Line: -      }
+>, <Line: -      // Object and web filesystem URLs have a problem saving in Google Chrome when
+>, <Line: -      // viewed in a tab, so I force save with application/octet-stream
+>, <Line: -      // http://code.google.com/p/chromium/issues/detail?id=91158
+>, <Line: -      if (view.chrome && type && type !== force_saveable_type) {
+>, <Line: -        slice = blob.slice || blob.webkitSlice;
+>, <Line: -        blob = slice.call(blob, 0, blob.size, force_saveable_type);
+>, <Line: -        blob_changed = true;
+>, <Line: -      }
+>, <Line: -      // Since I can't be sure that the guessed media type will trigger a download
+>, <Line: -      // in WebKit, I append .download to the filename.
+>, <Line: -      // https://bugs.webkit.org/show_bug.cgi?id=65440
+>, <Line: -      if (webkit_req_fs && name !== "download") {
+>, <Line: -        name += ".download";
+>, <Line: -      }
+>, <Line: -      if (type === force_saveable_type || webkit_req_fs) {
+>, <Line: -        target_view = view;
+>, <Line: -      }
+>, <Line: -      if (!req_fs) {
+>, <Line: -        fs_error();
+>, <Line: -        return;
+>, <Line: -      }
+>, <Line: -      fs_min_size += blob.size;
+>, <Line: -      req_fs(view.TEMPORARY, fs_min_size, abortable(function(fs) {
+>, <Line: -        fs.root.getDirectory("saved", create_if_not_found, abortable(function(dir) {
+>, <Line: -          var save = function() {
+>, <Line: -            dir.getFile(name, create_if_not_found, abortable(function(file) {
+>, <Line: -              file.createWriter(abortable(function(writer) {
+>, <Line: -                writer.onwriteend = function(event) {
+>, <Line: -                  target_view.location.href = file.toURL();
+>, <Line: -                  deletion_queue.push(file);
+>, <Line: -                  filesaver.readyState = filesaver.DONE;
+>, <Line: -                  dispatch(filesaver, "writeend", event);
+>, <Line: -                };
+>, <Line: -                writer.onerror = function() {
+>, <Line: -                  var error = writer.error;
+>, <Line: -                  if (error.code !== error.ABORT_ERR) {
+>, <Line: -                    fs_error();
+>, <Line: -                  }
+>, <Line: -                };
+>, <Line: -                "writestart progress write abort".split(" ").forEach(function(event) {
+>, <Line: -                  writer["on" + event] = filesaver["on" + event];
+>, <Line: -                });
+>, <Line: -                writer.write(blob);
+>, <Line: -                filesaver.abort = function() {
+>, <Line: -                  writer.abort();
+>, <Line: -                  filesaver.readyState = filesaver.DONE;
+>, <Line: -                };
+>, <Line: -                filesaver.readyState = filesaver.WRITING;
+>, <Line: -              }), fs_error);
+>, <Line: -            }), fs_error);
+>, <Line: -          };
+>, <Line: -          dir.getFile(name, {create: false}, abortable(function(file) {
+>, <Line: -            // delete file if it already exists
+>, <Line: -            file.remove();
+>, <Line: -            save();
+>, <Line: -          }), abortable(function(ex) {
+>, <Line: -            if (ex.code === ex.NOT_FOUND_ERR) {
+>, <Line: -              save();
+>, <Line: -            } else {
+>, <Line: -              fs_error();
+>, <Line: -            }
+>, <Line: -          }));
+>, <Line: -        }), fs_error);
+>, <Line: -      }), fs_error);
+>, <Line: -    }
+>, <Line: -    , FS_proto = FileSaver.prototype
+>, <Line: -    , saveAs = function(blob, name) {
+>, <Line: -      return new FileSaver(blob, name);
+>, <Line: -    }
+>, <Line: -  ;
+>, <Line: -  FS_proto.abort = function() {
+>, <Line: -    var filesaver = this;
+>, <Line: -    filesaver.readyState = filesaver.DONE;
+>, <Line: -    dispatch(filesaver, "abort");
+>, <Line: -  };
+>, <Line: -  FS_proto.readyState = FS_proto.INIT = 0;
+>, <Line: -  FS_proto.WRITING = 1;
+>, <Line: -  FS_proto.DONE = 2;
+>, <Line: -  FS_proto.error =
+>, <Line: -  FS_proto.onwritestart =
+>, <Line: -  FS_proto.onprogress =
+>, <Line: -  FS_proto.onwrite =
+>, <Line: -  FS_proto.onabort =
+>, <Line: -  FS_proto.onerror =
+>, <Line: -  FS_proto.onwriteend =
+>, <Line: -    null;
+>, <Line: -  view.addEventListener("unload", process_deletion_queue, false);
+>, <Line: -  return saveAs;
+>, <Line: -}(self));
+>]

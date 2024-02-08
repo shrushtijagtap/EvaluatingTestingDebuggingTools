@@ -1,0 +1,10 @@
+[<Line: +import de.charite.compbio.jannovar.mendel.ModeOfInheritance;
+>, <Line: +	 * compatible with a given {@link de.charite.compbio.jannovar.mendel.ModeOfInheritance} and
+>, <Line: +	 * compatible with a given {@link de.charite.compbio.jannovar.mendel.ModeOfInheritance} and
+>, <Line: +			case ANY:
+>]
+[<Line: -import de.charite.compbio.jannovar.pedigree.ModeOfInheritance;
+>, <Line: -	 * compatible with a given {@link de.charite.compbio.jannovar.pedigree.ModeOfInheritance} and
+>, <Line: -	 * compatible with a given {@link de.charite.compbio.jannovar.pedigree.ModeOfInheritance} and
+>, <Line: -			case UNINITIALIZED:
+>]

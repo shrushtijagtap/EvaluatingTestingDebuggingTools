@@ -1,0 +1,78 @@
+[<Line: +package org.mp4parser.muxer.tracks.ttml;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import javax.xml.transform.*;
+>, <Line: +import java.util.*;
+>, <Line: +    public static final String SMPTE_TT_NAMESPACE = "http://www.smpte-ra.org/schemas/2052-1/2010/smpte-tt";
+>, <Line: +    public static final String TTML_NAMESPACE = "http://www.w3.org/ns/ttml";
+>, <Line: +    public static final NamespaceContext NAMESPACE_CONTEXT = new TextTrackNamespaceContext();
+>, <Line: +    private static class TextTrackNamespaceContext implements NamespaceContext {
+>, <Line: +        public String getNamespaceURI(String prefix) {
+>, <Line: +            if (prefix.equals("ttml")) {
+>, <Line: +                return TTML_NAMESPACE;
+>, <Line: +            }
+>, <Line: +            if (prefix.equals("smpte")) {
+>, <Line: +                return SMPTE_TT_NAMESPACE;
+>, <Line: +            }
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        public Iterator getPrefixes(String val) {
+>, <Line: +            return Arrays.asList("ttml", "smpte").iterator();
+>, <Line: +        }
+>, <Line: +        public String getPrefix(String uri) {
+>, <Line: +            if (uri.equals(TTML_NAMESPACE)) {
+>, <Line: +                return "ttml";
+>, <Line: +            }
+>, <Line: +            if (uri.equals(SMPTE_TT_NAMESPACE)) {
+>, <Line: +                return "smpte";
+>, <Line: +            }
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks.ttml;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import javax.xml.transform.OutputKeys;
+>, <Line: -import javax.xml.transform.Result;
+>, <Line: -import javax.xml.transform.Source;
+>, <Line: -import javax.xml.transform.Transformer;
+>, <Line: -import javax.xml.transform.TransformerConfigurationException;
+>, <Line: -import javax.xml.transform.TransformerException;
+>, <Line: -import javax.xml.transform.TransformerFactory;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import java.util.Iterator;
+>, <Line: -import java.util.LinkedHashSet;
+>, <Line: -import java.util.List;
+>, <Line: -    public static final String SMPTE_TT_NAMESPACE = "http://www.smpte-ra.org/schemas/2052-1/2010/smpte-tt";
+>, <Line: -    public static final String TTML_NAMESPACE = "http://www.w3.org/ns/ttml";
+>, <Line: -    public static final NamespaceContext NAMESPACE_CONTEXT = new TextTrackNamespaceContext();
+>, <Line: -    private static class TextTrackNamespaceContext implements NamespaceContext {
+>, <Line: -        public String getNamespaceURI(String prefix) {
+>, <Line: -            if (prefix.equals("ttml")) {
+>, <Line: -                return TTML_NAMESPACE;
+>, <Line: -            }
+>, <Line: -            if (prefix.equals("smpte")) {
+>, <Line: -                return SMPTE_TT_NAMESPACE;
+>, <Line: -            }
+>, <Line: -            return null;
+>, <Line: -        }
+>, <Line: -        public Iterator getPrefixes(String val) {
+>, <Line: -            return Arrays.asList("ttml", "smpte").iterator();
+>, <Line: -        }
+>, <Line: -        public String getPrefix(String uri) {
+>, <Line: -            if (uri.equals(TTML_NAMESPACE)) {
+>, <Line: -                return "ttml";
+>, <Line: -            }
+>, <Line: -            if (uri.equals(SMPTE_TT_NAMESPACE)) {
+>, <Line: -                return "smpte";
+>, <Line: -            }
+>, <Line: -            return null;
+>, <Line: -        }
+>, <Line: -    }
+>]

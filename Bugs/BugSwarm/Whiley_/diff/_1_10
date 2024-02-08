@@ -1,0 +1,6 @@
+[<Line: +    int x
+>, <Line: +    int y
+>, <Line: +    x/y = rec.x
+>]
+[<Line: -    int x / int y = rec.x
+>]

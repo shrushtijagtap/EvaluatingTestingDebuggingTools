@@ -1,0 +1,22 @@
+[<Line: +package com.fincatto.nfe310.classes.evento.inutilizacao;
+>, <Line: +import java.math.BigDecimal;
+>, <Line: +import org.junit.Assert;
+>, <Line: +import org.junit.Test;
+>, <Line: +public class NFRetornoEventoInutilizacaoTest {
+>, <Line: +    @Test
+>, <Line: +    public void deveObterVersaoComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacao eventoInutilizacao = new NFRetornoEventoInutilizacao();
+>, <Line: +        final String versao = "1.30";
+>, <Line: +        eventoInutilizacao.setVersao(new BigDecimal(versao));
+>, <Line: +        Assert.assertEquals(versao, eventoInutilizacao.getVersao());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterDadosComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacao eventoInutilizacao = new NFRetornoEventoInutilizacao();
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        eventoInutilizacao.setDados(dados);
+>, <Line: +        Assert.assertEquals(dados, eventoInutilizacao.getDados());
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

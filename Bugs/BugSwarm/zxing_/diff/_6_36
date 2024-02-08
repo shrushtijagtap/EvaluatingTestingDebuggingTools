@@ -1,0 +1,4 @@
+[<Line: +      bits.toBytes(8 * dataBytesOffset, dataBytes, 0, size);
+>]
+[<Line: -      bits.toBytes(8*dataBytesOffset, dataBytes, 0, size);
+>]

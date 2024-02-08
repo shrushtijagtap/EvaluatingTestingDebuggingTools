@@ -1,0 +1,34 @@
+[<Line: +	public void test_tagName_characters_validColonTagName() throws DatastoreException, ValidationException
+>, <Line: +		command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum:fi=barfum"});
+>, <Line: +	public void test_tagValue_characters_validColonTagValue() throws DatastoreException, ValidationException
+>, <Line: +		command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum=bar:fum"});
+>]
+[<Line: -	public void test_tagName_characters_invalid() throws DatastoreException, ValidationException
+>, <Line: -		try
+>, <Line: -		{
+>, <Line: -			command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum:fi=barfum"});
+>, <Line: -			fail("ValidationException expected");
+>, <Line: -		}
+>, <Line: -		catch (DatastoreException e)
+>, <Line: -		{
+>, <Line: -			fail("ValidationException expected");
+>, <Line: -		}
+>, <Line: -		catch (ValidationException e)
+>, <Line: -		{
+>, <Line: -			assertThat(e.getMessage(), equalTo("tag[1].name may contain any character except colon ':', and equals '='."));
+>, <Line: -		}
+>, <Line: -	public void test_tagValue_characters_invalid() throws DatastoreException, ValidationException
+>, <Line: -		try
+>, <Line: -		{
+>, <Line: -			command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum=bar:fum"});
+>, <Line: -			fail("ValidationException expected");
+>, <Line: -		}
+>, <Line: -		catch (DatastoreException e)
+>, <Line: -		{
+>, <Line: -			fail("ValidationException expected");
+>, <Line: -		}
+>, <Line: -		catch (ValidationException e)
+>, <Line: -		{
+>, <Line: -			assertThat(e.getMessage(), equalTo("tag[1].value may contain any character except colon ':', and equals '='."));
+>, <Line: -		}
+>]

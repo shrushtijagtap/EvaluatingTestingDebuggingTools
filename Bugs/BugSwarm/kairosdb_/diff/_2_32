@@ -1,0 +1,10 @@
+[<Line: +import org.kairosdb.core.annotation.Feature;
+>, <Line: +import org.kairosdb.core.processingstage.GenericFeatureProcessorFactory;
+>, <Line: +@Feature(
+>, <Line: +public class GroupByFactory extends GenericFeatureProcessorFactory<GroupBy>
+>]
+[<Line: -import org.kairosdb.core.annotation.QueryProcessingStage;
+>, <Line: -import org.kairosdb.core.processingstage.GenericQueryProcessingStageFactory;
+>, <Line: -@QueryProcessingStage(
+>, <Line: -public class GroupByFactory extends GenericQueryProcessingStageFactory<GroupBy>
+>]

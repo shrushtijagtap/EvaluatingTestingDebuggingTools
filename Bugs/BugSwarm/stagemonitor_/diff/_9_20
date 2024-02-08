@@ -1,0 +1,44 @@
+[<Line: +						metricMatcher: {
+>, <Line: +							name: "logging"
+>, <Line: +						},
+>, <Line: +						groupBy: "log_level",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "logging"
+>, <Line: +						},
+>, <Line: +						groupBy: "log_level",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "logging"
+>, <Line: +						},
+>, <Line: +						groupBy: "log_level",
+>, <Line: +						metricMatcher: {
+>, <Line: +							name: "logging"
+>, <Line: +						},
+>, <Line: +						groupBy: "log_level",
+>, <Line: +					defaultRowSelection: '*',
+>, <Line: +									{
+>, <Line: +										metricPathRegex: "logging.(${rowName})",
+>, <Line: +										metricMatcher: {
+>, <Line: +											name: "logging",
+>, <Line: +											log_level: "${rowName}"
+>, <Line: +										},
+>, <Line: +										groupBy: "log_level",
+>, <Line: +										metric: "m1_rate" 
+>, <Line: +									}
+>, <Line: +									{
+>, <Line: +										metricPathRegex: "logging.(${rowName})",
+>, <Line: +										metricMatcher: {
+>, <Line: +											name: "logging",
+>, <Line: +											log_level: "${rowName}"
+>, <Line: +										},
+>, <Line: +										groupBy: "log_level",
+>, <Line: +										metric: "m5_rate"
+>, <Line: +									}
+>]
+[<Line: -						metricCategory: "meters",
+>, <Line: -						metricCategory: "meters",
+>, <Line: -						metricCategory: "meters",
+>, <Line: -						metricCategory: "meters",
+>, <Line: -					defaultRowSelection: '[^\\.]+',
+>, <Line: -									{ metricCategory: "meters", metricPathRegex: "logging.(${rowName})", metric: "m1_rate" }
+>, <Line: -									{ metricCategory: "meters", metricPathRegex: "logging.(${rowName})", metric: "m5_rate"}
+>]

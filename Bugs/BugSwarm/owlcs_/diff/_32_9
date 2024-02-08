@@ -1,0 +1,185 @@
+[<Line: +import java.util.Collection;
+>, <Line: +public class OWLClassExpressionCollector extends AbstractCollectorEx<OWLClassExpression> {
+>, <Line: +    /** The default collection is a set */
+>, <Line: +    public OWLClassExpressionCollector() {
+>, <Line: +        super(new HashSet<>());
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLOntology ontology) {
+>, <Line: +        ontology.logicalAxioms().forEach(ax -> ax.accept(this));
+>, <Line: +        return objects;
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLClass ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return objects;
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectIntersectionOf ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return super.visit(ce);
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectUnionOf ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return super.visit(ce);
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectComplementOf ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return super.visit(ce);
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectSomeValuesFrom ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return super.visit(ce);
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectAllValuesFrom ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return super.visit(ce);
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectHasValue ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return objects;
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectMinCardinality ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return super.visit(ce);
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectExactCardinality ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return super.visit(ce);
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectMaxCardinality ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return super.visit(ce);
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectHasSelf ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return objects;
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLObjectOneOf ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return objects;
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLDataSomeValuesFrom ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return objects;
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLDataAllValuesFrom ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return objects;
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLDataHasValue ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return objects;
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLDataMinCardinality ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return objects;
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLDataExactCardinality ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return objects;
+>, <Line: +    public Collection<OWLClassExpression> visit(OWLDataMaxCardinality ce) {
+>, <Line: +        objects.add(ce);
+>, <Line: +        return objects;
+>]
+[<Line: -import static org.semanticweb.owlapi.util.CollectionFactory.createSet;
+>, <Line: -import static org.semanticweb.owlapi.util.OWLAPIStreamUtils.asSet;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.Set;
+>, <Line: -public class OWLClassExpressionCollector implements
+>, <Line: -        OWLObjectVisitorEx<Set<OWLClassExpression>> {
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> doDefault(Object o) {
+>, <Line: -        return Collections.<OWLClassExpression> emptySet();
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(SWRLClassAtom node) {
+>, <Line: -        return node.getPredicate().accept(this);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLSubClassOfAxiom axiom) {
+>, <Line: -        Set<OWLClassExpression> result = new HashSet<>();
+>, <Line: -        result.addAll(axiom.getSubClass().accept(this));
+>, <Line: -        result.addAll(axiom.getSuperClass().accept(this));
+>, <Line: -        return result;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLOntology ontology) {
+>, <Line: -        return asSet(ontology.logicalAxioms().flatMap(
+>, <Line: -                ax -> ax.accept(this).stream()));
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLClass ce) {
+>, <Line: -        return createSet(ce);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectIntersectionOf ce) {
+>, <Line: -        Set<OWLClassExpression> result = createSet(ce);
+>, <Line: -        ce.operands().forEach(op -> result.addAll(op.accept(this)));
+>, <Line: -        return result;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectUnionOf ce) {
+>, <Line: -        Set<OWLClassExpression> result = createSet(ce);
+>, <Line: -        ce.operands().forEach(op -> result.addAll(op.accept(this)));
+>, <Line: -        return result;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectComplementOf ce) {
+>, <Line: -        Set<OWLClassExpression> result = createSet(ce);
+>, <Line: -        result.addAll(ce.getOperand().accept(this));
+>, <Line: -        return result;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectSomeValuesFrom ce) {
+>, <Line: -        Set<OWLClassExpression> result = createSet(ce);
+>, <Line: -        result.addAll(ce.getFiller().accept(this));
+>, <Line: -        return result;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectAllValuesFrom ce) {
+>, <Line: -        Set<OWLClassExpression> result = createSet(ce);
+>, <Line: -        result.addAll(ce.getFiller().accept(this));
+>, <Line: -        return result;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLDisjointClassesAxiom axiom) {
+>, <Line: -        return asSet(axiom.classExpressions().flatMap(
+>, <Line: -                ce -> ce.accept(this).stream()));
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectHasValue ce) {
+>, <Line: -        return createSet(ce);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Set<OWLClassExpression> visit(OWLDataPropertyDomainAxiom axiom) {
+>, <Line: -        return axiom.getDomain().accept(this);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectMinCardinality ce) {
+>, <Line: -        Set<OWLClassExpression> result = createSet(ce);
+>, <Line: -        result.addAll(ce.getFiller().accept(this));
+>, <Line: -        return result;
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectPropertyDomainAxiom axiom) {
+>, <Line: -        return axiom.getDomain().accept(this);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectExactCardinality ce) {
+>, <Line: -        Set<OWLClassExpression> result = createSet(ce);
+>, <Line: -        result.addAll(ce.getFiller().accept(this));
+>, <Line: -        return result;
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectMaxCardinality ce) {
+>, <Line: -        Set<OWLClassExpression> result = createSet(ce);
+>, <Line: -        result.addAll(ce.getFiller().accept(this));
+>, <Line: -        return result;
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectHasSelf ce) {
+>, <Line: -        return createSet(ce);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectOneOf ce) {
+>, <Line: -        return createSet(ce);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLDataSomeValuesFrom ce) {
+>, <Line: -        return createSet(ce);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLDataAllValuesFrom ce) {
+>, <Line: -        return createSet(ce);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLDataHasValue ce) {
+>, <Line: -        return createSet(ce);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLDataMinCardinality ce) {
+>, <Line: -        return createSet(ce);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLObjectPropertyRangeAxiom axiom) {
+>, <Line: -        return axiom.getRange().accept(this);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLDataExactCardinality ce) {
+>, <Line: -        return createSet(ce);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLDataMaxCardinality ce) {
+>, <Line: -        return createSet(ce);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLDisjointUnionAxiom axiom) {
+>, <Line: -        return asSet(axiom.classExpressions().flatMap(
+>, <Line: -                ce -> ce.accept(this).stream()));
+>, <Line: -    public Set<OWLClassExpression> visit(OWLDeclarationAxiom axiom) {
+>, <Line: -        return axiom.getEntity().accept(this);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLClassAssertionAxiom axiom) {
+>, <Line: -        return axiom.getClassExpression().accept(this);
+>, <Line: -    public Set<OWLClassExpression> visit(OWLEquivalentClassesAxiom axiom) {
+>, <Line: -        return asSet(axiom.classExpressions().flatMap(
+>, <Line: -                ce -> ce.accept(this).stream()));
+>, <Line: -    public Set<OWLClassExpression> visit(OWLHasKeyAxiom axiom) {
+>, <Line: -        return axiom.getClassExpression().accept(this);
+>, <Line: -    public Set<OWLClassExpression> visit(SWRLRule rule) {
+>, <Line: -        Set<OWLClassExpression> result = new HashSet<>();
+>, <Line: -        rule.body().forEach(a -> result.addAll(a.accept(this)));
+>, <Line: -        rule.head().forEach(a -> result.addAll(a.accept(this)));
+>, <Line: -        return result;
+>]

@@ -1,0 +1,14 @@
+[<Line: +import backend.interfaces.IModel;
+>, <Line: +import backend.resource.TurboIssue;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.function.Predicate;
+>, <Line: +	public boolean isSatisfiedBy(IModel model, TurboIssue issue, MetaQualifierInfo info);
+>, <Line: +	public void applyTo(TurboIssue issue, IModel model) throws QualifierApplicationException;
+>]
+[<Line: -import java.util.List;
+>, <Line: -import java.util.function.Predicate;
+>, <Line: -import model.Model;
+>, <Line: -import model.TurboIssue;
+>, <Line: -	public boolean isSatisfiedBy(TurboIssue issue, MetaQualifierInfo info);
+>, <Line: -	public void applyTo(TurboIssue issue, Model model) throws QualifierApplicationException;
+>]

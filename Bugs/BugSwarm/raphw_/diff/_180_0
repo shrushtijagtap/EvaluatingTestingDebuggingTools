@@ -1,0 +1,7 @@
+[<Line: +        compile files(location)
+>, <Line: +    } else {
+>, <Line: +        logger.info('Byte Buddy location does not exist, cannot only clean but not build project')
+>]
+[<Line: -        throw new GradleException("Byte Buddy jar does not exist: $location");
+>, <Line: -    compile files(location)
+>]

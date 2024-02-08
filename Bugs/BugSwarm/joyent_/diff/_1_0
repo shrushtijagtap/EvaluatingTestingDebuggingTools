@@ -1,0 +1,267 @@
+[<Line: +import com.fasterxml.jackson.databind.ObjectMapper;
+>, <Line: +import com.google.api.client.http.ByteArrayContent;
+>, <Line: +import com.google.api.client.http.HttpHeaders;
+>, <Line: +import com.joyent.manta.exception.MantaErrorCode;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.Scanner;
+>, <Line: +import java.util.stream.Stream;
+>, <Line: +    /**
+>, <Line: +     * The standard http status code representing that the request was accepted.
+>, <Line: +     */
+>, <Line: +    private static final int HTTP_STATUSCODE_202_ACCEPTED = 202;
+>, <Line: +    /**
+>, <Line: +     * {@link ObjectParser} implementation used for parsing JSON HTTP responses.
+>, <Line: +     */
+>, <Line: +    private static final MantaObjectParser OBJECT_PARSER =
+>, <Line: +            new MantaObjectParser();
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     * @throws IOException when there is a problem getting the object over the network
+>, <Line: +     * @throws IOException when there is a problem sending the object over the network
+>, <Line: +     * @throws IOException when there is a problem sending the object over the network
+>, <Line: +     * @throws IOException when there is a problem sending the object over the network
+>, <Line: +     * @throws IOException when there is a problem sending the object over the network
+>, <Line: +     * @throws IOException when there is a problem sending the object over the network
+>, <Line: +     * @throws IOException when there is a problem sending the object over the network
+>, <Line: +     * @throws IOException when there is a problem sending the object over the network
+>, <Line: +     * @throws IOException when there is a problem sending the metadata over the network
+>, <Line: +     * @throws IOException when there is a problem sending the metadata over the network
+>, <Line: +     * @throws IOException when there is a problem sending the metadata over the network
+>, <Line: +    /*************************************************************************
+>, <Line: +     * Job Methods
+>, <Line: +     *************************************************************************/
+>, <Line: +    /**
+>, <Line: +     * Submits a new job to be executed. This call is not idempotent, so calling
+>, <Line: +     * it twice will create two jobs.
+>, <Line: +     *
+>, <Line: +     * @param job Object populated with details about the request job
+>, <Line: +     * @return id of the newly created job
+>, <Line: +     * @throws IOException thrown when there are problems creating the job over the network
+>, <Line: +     */
+>, <Line: +    public UUID createJob(final MantaJob job) throws IOException {
+>, <Line: +        Objects.requireNonNull(job, "Manta job must be present");
+>, <Line: +        String path = String.format("%s/jobs", home);
+>, <Line: +        ObjectMapper mapper = MantaObjectParser.MAPPER;
+>, <Line: +        byte[] json = mapper.writeValueAsBytes(job);
+>, <Line: +        HttpContent content = new ByteArrayContent(
+>, <Line: +                ContentType.APPLICATION_JSON.toString(),
+>, <Line: +                json);
+>, <Line: +        LOG.debug("POST   {}", path);
+>, <Line: +        final GenericUrl genericUrl = new GenericUrl(this.url + formatPath(path));
+>, <Line: +        final HttpRequestFactory httpRequestFactory = httpRequestFactoryProvider.getRequestFactory();
+>, <Line: +        final HttpRequest request = httpRequestFactory.buildPostRequest(genericUrl, content);
+>, <Line: +        request.setContent(content);
+>, <Line: +        HttpResponse response = executeAndCloseRequest(request,
+>, <Line: +                "POST   {} response [{}] {} ", path);
+>, <Line: +        final String location = response.getHeaders().getLocation();
+>, <Line: +        String id = MantaUtils.lastItemInPath(location);
+>, <Line: +        return UUID.fromString(id);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Submits inputs to an already created job, as created by createJob().
+>, <Line: +     * Inputs are object names, and are fed in as a \n separated stream.
+>, <Line: +     * Inputs will be processed as they are received.
+>, <Line: +     *
+>, <Line: +     * @param jobId UUID of the Manta job
+>, <Line: +     * @param inputs iterator of paths to Manta objects to be added as inputs
+>, <Line: +     * @throws IOException thrown when we are unable to add inputs over the network
+>, <Line: +     */
+>, <Line: +    public void addJobInputs(final UUID jobId,
+>, <Line: +                             final Iterator<String> inputs) throws IOException {
+>, <Line: +        Objects.requireNonNull(jobId, "Manta job id must be present");
+>, <Line: +        Objects.requireNonNull(inputs, "Inputs must be present");
+>, <Line: +        String contentType = "text/plain; charset=utf-8";
+>, <Line: +        HttpContent content = new StringIteratorHttpContent(inputs, contentType);
+>, <Line: +        processJobInputs(jobId, content);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Submits inputs to an already created job, as created by createJob().
+>, <Line: +     * Inputs are object names, and are fed in as a \n separated stream.
+>, <Line: +     * Inputs will be processed as they are received.
+>, <Line: +     *
+>, <Line: +     * @param jobId UUID of the Manta job
+>, <Line: +     * @param inputs stream of paths to Manta objects to be added as inputs
+>, <Line: +     * @throws IOException thrown when we are unable to add inputs over the network
+>, <Line: +     */
+>, <Line: +    public void addJobInputs(final UUID jobId,
+>, <Line: +                             final Stream<String> inputs) throws IOException {
+>, <Line: +        Objects.requireNonNull(jobId, "Manta job id must be present");
+>, <Line: +        Objects.requireNonNull(inputs, "Inputs must be present");
+>, <Line: +        String contentType = "text/plain; charset=utf-8";
+>, <Line: +        HttpContent content = new StringIteratorHttpContent(inputs, contentType);
+>, <Line: +        processJobInputs(jobId, content);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Utility method for processing the addition of job inputs over HTTP.
+>, <Line: +     *
+>, <Line: +     * @param jobId UUID of the Manta job
+>, <Line: +     * @param content content object containing input objects
+>, <Line: +     * @throws IOException thrown when we are unable to add inputs over the network
+>, <Line: +     */
+>, <Line: +    protected void processJobInputs(final UUID jobId,
+>, <Line: +                                    final HttpContent content)
+>, <Line: +            throws IOException {
+>, <Line: +        String path = String.format("%s/jobs/%s/live/in", home, jobId);
+>, <Line: +        HttpHeaders headers = new HttpHeaders();
+>, <Line: +        headers.setContentEncoding("chunked");
+>, <Line: +        httpPost(path, content, headers);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Get a list of all of the input objects submitted for a job.
+>, <Line: +     *
+>, <Line: +     * @param jobId UUID of the Manta job
+>, <Line: +     * @return List of input objects associated with a job
+>, <Line: +     * @throws IOException thrown when there is a problem getting objects over the network
+>, <Line: +     */
+>, <Line: +    public List<String> getJobInputs(final UUID jobId) throws IOException {
+>, <Line: +        Objects.requireNonNull(jobId, "Manta job id must not be null");
+>, <Line: +        String path = String.format("%s/jobs/%s/live/in", home, jobId);
+>, <Line: +        HttpResponse response = httpGet(path);
+>, <Line: +        ArrayList<String> inputs = new ArrayList<>();
+>, <Line: +        try (InputStream is = response.getContent();
+>, <Line: +             Scanner scanner = new Scanner(is, "UTF-8")) {
+>, <Line: +            while (scanner.hasNextLine()) {
+>, <Line: +                inputs.add(scanner.nextLine());
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return Collections.unmodifiableList(inputs);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Submits inputs to an already created job, as created by CreateJob.
+>, <Line: +     *
+>, <Line: +     * @param jobId UUID of the Manta job
+>, <Line: +     * @return true when Manta has accepted the ending input
+>, <Line: +     * @throws IOException thrown when there is a problem ending input over the network
+>, <Line: +     */
+>, <Line: +    public boolean endJobInput(final UUID jobId) throws IOException {
+>, <Line: +        Objects.requireNonNull(jobId, "Manta job id must not be null");
+>, <Line: +        String path = String.format("%s/jobs/%s/live/in/end", home, jobId);
+>, <Line: +        final HttpContent content = new EmptyContent();
+>, <Line: +        HttpResponse response = httpPost(path, content);
+>, <Line: +        // We expect a return value of 202 when the cancel request was accepted
+>, <Line: +        return response.getStatusCode() == HTTP_STATUSCODE_202_ACCEPTED;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * <p>This cancels a job from doing any further work. Cancellation is
+>, <Line: +     * asynchronous and "best effort"; there is no guarantee the job will
+>, <Line: +     * actually stop. For example, short jobs where input is already
+>, <Line: +     * closed will likely still run to completion. This is however useful
+>, <Line: +     * when:</p>
+>, <Line: +     * <ul>
+>, <Line: +     * <li>input is still open</li>
+>, <Line: +     * <li>you have a long-running job</li>
+>, <Line: +     * </ul>
+>, <Line: +     * @param jobId UUID of the Manta job
+>, <Line: +     * @return true when Manta has accepted the cancel request
+>, <Line: +     * @throws IOException thrown when we have a problem canceling over the network
+>, <Line: +     */
+>, <Line: +    public boolean cancelJob(final UUID jobId) throws IOException {
+>, <Line: +        Objects.requireNonNull(jobId, "Manta job id must not be null");
+>, <Line: +        String path = String.format("%s/jobs/%s/live/cancel",
+>, <Line: +                home, jobId);
+>, <Line: +        final HttpContent content = new EmptyContent();
+>, <Line: +        HttpResponse response = httpPost(path, content);
+>, <Line: +        // We expect a return value of 202 when the cancel request was accepted
+>, <Line: +        return response.getStatusCode() == HTTP_STATUSCODE_202_ACCEPTED;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Gets the high-level job container object for a given id.
+>, <Line: +     * First, attempts to get the live status object and if it can't be
+>, <Line: +     * retrieved, then we get the archived status object.
+>, <Line: +     *
+>, <Line: +     * @param jobId UUID of the Manta job
+>, <Line: +     * @return Object representing the properties of the job
+>, <Line: +     * @throws IOException thrown when we can't get the job over the network
+>, <Line: +     */
+>, <Line: +        final String livePath = String.format("%s/jobs/%s/live/status",
+>, <Line: +        MantaJob job;
+>, <Line: +        try {
+>, <Line: +            final HttpResponse response = httpGet(livePath, OBJECT_PARSER);
+>, <Line: +            job = response.parseAs(MantaJob.class);
+>, <Line: +        } catch (MantaClientHttpResponseException e) {
+>, <Line: +            // If we can't get the live status of the job, we try to get the archived
+>, <Line: +            // status of the job just like the CLI mjob utility.
+>, <Line: +            if (e.getServerCode().equals(MantaErrorCode.RESOURCE_NOT_FOUND_ERROR)) {
+>, <Line: +                final String archivePath = String.format("%s/jobs/%s/job.json",
+>, <Line: +                        home, jobId);
+>, <Line: +                final HttpResponse response = httpGet(archivePath, OBJECT_PARSER);
+>, <Line: +                job = response.parseAs(MantaJob.class);
+>, <Line: +            } else {
+>, <Line: +                throw e;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    /**
+>, <Line: +     * Utility method for handling HTTP POST to the Google HTTP Client.
+>, <Line: +     *
+>, <Line: +     * @param path path to post to (without hostname)
+>, <Line: +     * @param content content object to post
+>, <Line: +     * @return HTTP response object
+>, <Line: +     * @throws IOException thrown when there is a problem POSTing over the network
+>, <Line: +     */
+>, <Line: +    protected HttpResponse httpPost(final String path,
+>, <Line: +                                    final HttpContent content) throws IOException {
+>, <Line: +        return httpPost(path, content, null);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Utility method for handling HTTP POST to the Google HTTP Client.
+>, <Line: +     *
+>, <Line: +     * @param path path to post to (without hostname)
+>, <Line: +     * @param content content object to post
+>, <Line: +     * @param headers HTTP headers to attach to request
+>, <Line: +     * @return HTTP response object
+>, <Line: +     * @throws IOException thrown when there is a problem POSTing over the network
+>, <Line: +     */
+>, <Line: +    protected HttpResponse httpPost(final String path,
+>, <Line: +                                    final HttpContent content,
+>, <Line: +                                    final HttpHeaders headers) throws IOException {
+>, <Line: +        LOG.debug("POST   {}", path);
+>, <Line: +        final GenericUrl genericUrl = new GenericUrl(this.url + formatPath(path));
+>, <Line: +        final HttpRequestFactory httpRequestFactory = httpRequestFactoryProvider.getRequestFactory();
+>, <Line: +        final HttpRequest request = httpRequestFactory.buildPostRequest(genericUrl, content);
+>, <Line: +        if (content != null) {
+>, <Line: +            request.setContent(content);
+>, <Line: +        }
+>, <Line: +        if (headers != null) {
+>, <Line: +            request.setHeaders(headers);
+>, <Line: +        }
+>, <Line: +        return executeAndCloseRequest(request,
+>, <Line: +                "POST   {} response [{}] {} ", path);
+>, <Line: +    }
+>, <Line: +     * @throws IOException thrown when we are unable to process the request on the network
+>]
+[<Line: -import com.google.api.client.json.JsonFactory;
+>, <Line: -import com.google.api.client.json.JsonObjectParser;
+>, <Line: -import com.google.api.client.json.jackson2.JacksonFactory;
+>, <Line: -     * @throws IOException when there is a problem getting the object over the wire
+>, <Line: -     * @throws IOException when there is a problem getting the object over the wire
+>, <Line: -     * @throws IOException when there is a problem getting the object over the wire
+>, <Line: -     * @throws IOException when there is a problem getting the object over the wire
+>, <Line: -     * @throws IOException when there is a problem getting the object over the wire
+>, <Line: -     * @throws IOException when there is a problem getting the object over the wire
+>, <Line: -     * @throws IOException when there is a problem getting the object over the wire
+>, <Line: -     * @throws IOException when there is a problem getting the object over the wire
+>, <Line: -     * @throws IOException when there is a problem getting the object over the wire
+>, <Line: -     * @throws IOException when there is a problem getting the object over the wire
+>, <Line: -     * @throws IOException when there is a problem sending the object over the wire
+>, <Line: -     * @throws IOException when there is a problem sending the object over the wire
+>, <Line: -     * @throws IOException when there is a problem sending the object over the wire
+>, <Line: -     * @throws IOException when there is a problem sending the object over the wire
+>, <Line: -     * @throws IOException when there is a problem sending the object over the wire
+>, <Line: -     * @throws IOException when there is a problem sending the object over the wire
+>, <Line: -     * @throws IOException when there is a problem sending the object over the wire
+>, <Line: -     * @throws IOException when there is a problem sending the metadata over the wire
+>, <Line: -     * @throws IOException when there is a problem sending the metadata over the wire
+>, <Line: -     * @throws IOException when there is a problem sending the metadata over the wire
+>, <Line: -        final String path = String.format("%s/jobs/%s/live/status",
+>, <Line: -        final ObjectParser parser = new MantaObjectParser();
+>, <Line: -        final HttpResponse response = httpGet(path, parser);
+>, <Line: -        MantaJob job = response.parseAs(MantaJob.class);
+>, <Line: -     * @throws IOException thrown when we are unable to process the request on the wire
+>]

@@ -1,0 +1,16 @@
+[<Line: +        SimpleField instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        SimpleStaticField instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        SimpleStaticField instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        ExtendedField instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        SimpleField instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        SimpleField instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        SimpleFieldAccessor instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>]
+[<Line: -        SimpleField instance = loaded.getLoaded().newInstance();
+>, <Line: -        SimpleStaticField instance = loaded.getLoaded().newInstance();
+>, <Line: -        SimpleStaticField instance = loaded.getLoaded().newInstance();
+>, <Line: -        ExtendedField instance = loaded.getLoaded().newInstance();
+>, <Line: -        SimpleField instance = loaded.getLoaded().newInstance();
+>, <Line: -        SimpleField instance = loaded.getLoaded().newInstance();
+>, <Line: -        SimpleFieldAccessor instance = loaded.getLoaded().newInstance();
+>]

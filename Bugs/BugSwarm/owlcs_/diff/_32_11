@@ -1,0 +1,8 @@
+[<Line: +            .anyMatch(ax -> !ax.accept(checker.setOWLClass(cls)).booleanValue());
+>, <Line: +            return Boolean.TRUE;
+>, <Line: +            return Boolean.valueOf(ce.operands().anyMatch(op -> op.accept(this).booleanValue()));
+>]
+[<Line: -            .anyMatch(ax -> !ax.accept(checker.setOWLClass(cls)));
+>, <Line: -            return namedSuper;
+>, <Line: -            return ce.operands().anyMatch(op -> op.accept(this));
+>]

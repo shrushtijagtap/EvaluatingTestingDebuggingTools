@@ -1,0 +1,10 @@
+[<Line: +package org.mp4parser.boxes.apple;
+>, <Line: +public class AppleGenreIDBox extends AppleVariableSignedIntegerBox {
+>, <Line: +    public AppleGenreIDBox() {
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.apple;
+>, <Line: -public class AppleGenreIDBox extends AppleVariableSignedIntegerBox
+>, <Line: -{
+>, <Line: -    public AppleGenreIDBox()
+>, <Line: -    {
+>]

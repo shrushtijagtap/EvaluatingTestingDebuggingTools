@@ -1,0 +1,13 @@
+[<Line: +from .base import MetaEstimatorMixin, ChangedBehaviorWarning
+>, <Line: +                         decision_function_shape=None, degree=..., gamma=...,
+>, <Line: +                         kernel='rbf', max_iter=-1, probability=False,
+>, <Line: +                         random_state=None, shrinking=True, tol=...,
+>, <Line: +                         verbose=False),
+>]
+[<Line: -from .base import MetaEstimatorMixin
+>, <Line: -class ChangedBehaviorWarning(UserWarning):
+>, <Line: -    pass
+>, <Line: -                         degree=..., gamma=..., kernel='rbf', max_iter=-1,
+>, <Line: -                         probability=False, random_state=None, shrinking=True,
+>, <Line: -                         tol=..., verbose=False),
+>]

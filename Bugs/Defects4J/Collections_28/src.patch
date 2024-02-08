@@ -1,0 +1,21 @@
+diff --git a/Collections_28/buggy/org/apache/commons/collections4/trie/AbstractPatriciaTrie.java b/Collections_28/fixed/org/apache/commons/collections4/trie/AbstractPatriciaTrie.java
+index 41f8535..bd11f75 100644
+--- a/Collections_28/buggy/org/apache/commons/collections4/trie/AbstractPatriciaTrie.java
++++ b/Collections_28/fixed/org/apache/commons/collections4/trie/AbstractPatriciaTrie.java
+@@ -2259,6 +2259,16 @@ abstract class AbstractPatriciaTrie<K, V> extends AbstractBitwiseTrie<K, V> {
+             return new RangeEntryMap(fromKey, fromInclusive, toKey, toInclusive);
+         }
+ 
++        @Override
++        public void clear() {
++            Iterator<Map.Entry<K, V>> it = AbstractPatriciaTrie.this.entrySet().iterator();
++            Set<K> currentKeys = keySet();
++            while (it.hasNext()) {
++                if (currentKeys.contains(it.next().getKey())) {
++                    it.remove();
++                }
++            }
++        }
+     }
+ 
+     /**

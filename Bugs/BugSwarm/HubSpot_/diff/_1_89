@@ -1,0 +1,9 @@
+[<Line: +Collection = require './collection'
+>, <Line: +Request = require '../models/Request'
+>, <Line: +class Responses extends Collection
+>, <Line: +    model: Request
+>, <Line: +    url: => "#{ config.apiRoot }/request/history/#{ @serviceId }"
+>, <Line: +    initialize: (models, { @serviceId }) =>
+>, <Line: +module.exports = Responses
+>]
+[]

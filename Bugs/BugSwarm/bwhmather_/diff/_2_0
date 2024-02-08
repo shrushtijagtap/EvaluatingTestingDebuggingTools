@@ -1,0 +1,74 @@
+[]
+[<Line: -    def test_html_builder(self):
+>, <Line: -        html = utils.html
+>, <Line: -        xhtml = utils.xhtml
+>, <Line: -        self.assertEqual(
+>, <Line: -            html.p('Hello World'),
+>, <Line: -            '<p>Hello World</p>'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            html.a('Test', href='#'),
+>, <Line: -            '<a href="#">Test</a>'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            html.br(),
+>, <Line: -            '<br>'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            xhtml.br(),
+>, <Line: -            '<br />'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            html.img(src='foo'),
+>, <Line: -            '<img src="foo">'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            xhtml.img(src='foo'),
+>, <Line: -            '<img src="foo" />'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            html.html(html.head(
+>, <Line: -                html.title('foo'),
+>, <Line: -                html.script(type='text/javascript')
+>, <Line: -            )),
+>, <Line: -            (
+>, <Line: -                '<html><head><title>foo</title><script type="text/javascript">'
+>, <Line: -                '</script></head></html>'
+>, <Line: -            )
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            html('<foo>'), '&lt;foo&gt;'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            html.input(disabled=True),
+>, <Line: -            '<input disabled>'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            xhtml.input(disabled=True),
+>, <Line: -            '<input disabled="disabled" />'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            html.input(disabled=''),
+>, <Line: -            '<input>'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            xhtml.input(disabled=''),
+>, <Line: -            '<input />'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            html.input(disabled=None),
+>, <Line: -            '<input>'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            xhtml.input(disabled=None),
+>, <Line: -            '<input />'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            html.script('alert("Hello World");'),
+>, <Line: -            '<script>alert("Hello World");</script>'
+>, <Line: -        )
+>, <Line: -        self.assertEqual(
+>, <Line: -            xhtml.script('alert("Hello World");'),
+>, <Line: -            '<script>/*<![CDATA[*/alert("Hello World");/*]]>*/</script>'
+>, <Line: -        )
+>]

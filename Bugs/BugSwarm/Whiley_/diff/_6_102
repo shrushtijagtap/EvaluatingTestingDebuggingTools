@@ -1,0 +1,4 @@
+[<Line: +type FileReader is {int position, byte[] data}
+>]
+[<Line: -type FileReader is {int position, [byte] data}
+>]

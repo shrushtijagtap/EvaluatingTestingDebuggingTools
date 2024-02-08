@@ -1,0 +1,4 @@
+[<Line: +                for (MethodDescription methodDescription : typeDefinition.getDeclaredMethods().filter(isVirtual().and(not(isBridge())).and(isVisibleTo(viewPoint)))) {
+>]
+[<Line: -                for (MethodDescription methodDescription : typeDefinition.getDeclaredMethods().filter(not(isBridge()).<MethodDescription>and(isVisibleTo(viewPoint)))) {
+>]

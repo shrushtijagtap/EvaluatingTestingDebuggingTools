@@ -1,0 +1,5 @@
+[<Line: +import java.io.Serializable;
+>, <Line: +  public static class ValueComparator implements Comparator<String>, Serializable {
+>]
+[<Line: -  class ValueComparator implements Comparator<String> {
+>]

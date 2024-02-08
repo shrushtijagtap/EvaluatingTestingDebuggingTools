@@ -1,0 +1,11 @@
+[<Line: +package org.mp4parser.boxes.dece;
+>, <Line: +import org.mp4parser.ParsableBox;
+>, <Line: +    public ContentInformationBoxTest(ParsableBox parsableBoxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: +        super(parsableBoxUnderTest, properties);
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.dece;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import static org.junit.Assert.*;
+>, <Line: -    public ContentInformationBoxTest(Box boxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: -        super(boxUnderTest, properties);
+>]

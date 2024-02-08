@@ -1,0 +1,117 @@
+[<Line: +package com.artemis.injection;
+>, <Line: +import com.artemis.World;
+>, <Line: +import com.artemis.utils.Bag;
+>, <Line: +import com.artemis.utils.reflect.Field;
+>, <Line: +import java.util.Map;
+>, <Line: +/**
+>, <Line: + * FieldHandler provides dependency-values to an {@link com.artemis.injection.Injector}
+>, <Line: + * by sequentially iterating over a list of registered {@link FieldResolver}.
+>, <Line: + * <p>
+>, <Line: + * The method {@link #resolve(Class, Field)} will return the first non-null value provided by
+>, <Line: + * {@link FieldResolver#resolve(Class, Field)}, or null if no resolver returned a valid value.
+>, <Line: + * </p>
+>, <Line: + * <p>
+>, <Line: + * During {@link World} construction, after systems and managers have been created, {@link #initialize(World)}
+>, <Line: + * will be called for each registered {@link FieldResolver}
+>, <Line: + * </p>
+>, <Line: + * <p>
+>, <Line: + * If {@link FieldResolver} implements {@link UseInjectionCache}, {@link UseInjectionCache#setCache(InjectionCache)}
+>, <Line: + * will be called prior to  {@link FieldResolver#initialize(World)} being called, availing the {@link InjectionCache}
+>, <Line: + * used by this handler.
+>, <Line: + * </p>
+>, <Line: + *
+>, <Line: + * @author Snorre E. Brekke
+>, <Line: + */
+>, <Line: +public class FieldHandler {
+>, <Line: +    private InjectionCache cache;
+>, <Line: +    protected Bag<FieldResolver> fieldResolvers;
+>, <Line: +    /**
+>, <Line: +     * Constructs a new FieldHandler with the provided fieldResolvers. This constructor should be used when full
+>, <Line: +     * control over the {@link FieldResolver} order is required.
+>, <Line: +     * <p>
+>, <Line: +     * For Artemis to function correctly, {@link ArtemisFieldResolver} should be added somewhere in the bag, or
+>, <Line: +     * added via {@link #addFieldResolver(FieldResolver)} prior to world construction.
+>, <Line: +     * </p>
+>, <Line: +     * @param cache used for better reflection-speed.
+>, <Line: +     * @param fieldResolvers bag of fieldresolver this FieldHandler should use.
+>, <Line: +     * @see ArtemisFieldResolver
+>, <Line: +     */
+>, <Line: +    public FieldHandler(InjectionCache cache, Bag<FieldResolver> fieldResolvers) {
+>, <Line: +        this.cache = cache;
+>, <Line: +        this.fieldResolvers = fieldResolvers;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Constructs a ned FieldHandler with an {@link ArtemisFieldResolver} already registered, which can resolve
+>, <Line: +     * {@link com.artemis.ComponentMapper}, {@link com.artemis.BaseSystem}
+>, <Line: +     * and {@link com.artemis.Manager} types registered in the {@link World}
+>, <Line: +     * @param cache used for better reflection-speed.
+>, <Line: +     *
+>, <Line: +     * @see ArtemisFieldResolver
+>, <Line: +     */
+>, <Line: +    public FieldHandler(InjectionCache cache) {
+>, <Line: +        this.fieldResolvers = new Bag<FieldResolver>();
+>, <Line: +        this.cache = cache;
+>, <Line: +        addFieldResolver(new ArtemisFieldResolver());
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Constructs a ned FieldHandler with an {@link ArtemisFieldResolver} and {@link WiredFieldResolver} already registered.
+>, <Line: +     * {@link com.artemis.annotations.Wire}.
+>, <Line: +     * @param cache used for better reflection-speed.
+>, <Line: +     * @param injectables typically registered via registered via {@link com.artemis.WorldConfiguration#register}
+>, <Line: +     *
+>, <Line: +     * @see ArtemisFieldResolver
+>, <Line: +     * @see WiredFieldResolver
+>, <Line: +     * @see FieldHandler#FieldHandler(InjectionCache)
+>, <Line: +     */
+>, <Line: +    public FieldHandler(InjectionCache cache, Map<String, Object> injectables) {
+>, <Line: +        this(cache);
+>, <Line: +        addFieldResolver(new WiredFieldResolver(injectables));
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * During {@link World} construction, after systems and managers have been created, {@link #initialize(World)}
+>, <Line: +     * will be called for each registered {@link FieldResolver}
+>, <Line: +     * </p>
+>, <Line: +     * <p>
+>, <Line: +     * If {@link FieldResolver} implements {@link UseInjectionCache}, {@link UseInjectionCache#setCache(InjectionCache)}
+>, <Line: +     * will be called prior to  {@link FieldResolver#initialize(World)} being called, availing the {@link InjectionCache}
+>, <Line: +     * used by this handler.
+>, <Line: +     *
+>, <Line: +     * @param world the world this FieldHandler is being used for
+>, <Line: +     */
+>, <Line: +    public void initialize(World world) {
+>, <Line: +        for (int i = 0, s = fieldResolvers.size(); i < s; i++) {
+>, <Line: +            FieldResolver fieldResolver = fieldResolvers.get(i);
+>, <Line: +            if (fieldResolver instanceof UseInjectionCache) {
+>, <Line: +                ((UseInjectionCache) fieldResolver).setCache(cache);
+>, <Line: +            }
+>, <Line: +            fieldResolver.initialize(world);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Returns the first non-null value provided by
+>, <Line: +     * {@link FieldResolver#resolve(Class, Field)}, or null if no resolver returned a valid value.
+>, <Line: +     * @param fieldType class of the field
+>, <Line: +     * @param field field for which a value should be resolved
+>, <Line: +     * @return a non-null value if any {@link FieldResolver} could provide an instance
+>, <Line: +     * for the {@code field}, null if the {@code field} could not be resolved
+>, <Line: +     */
+>, <Line: +    public Object resolve(Class<?> fieldType, Field field) {
+>, <Line: +        for (int i = 0, s = fieldResolvers.size(); i < s; i++) {
+>, <Line: +            Object resolved = fieldResolvers.get(i).resolve(fieldType, field);
+>, <Line: +            if (resolved != null) {
+>, <Line: +                return resolved;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Adds a {@link FieldResolver} to this handler. Resolvers added first, will be used first for resolving fields,
+>, <Line: +     * so the order of add operations is significant.
+>, <Line: +     * @param fieldResolver is added to this FieldHandler fieldresolver-list
+>, <Line: +     */
+>, <Line: +    public final void addFieldResolver(FieldResolver fieldResolver) {
+>, <Line: +        fieldResolvers.add(fieldResolver);
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

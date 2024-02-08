@@ -1,0 +1,18 @@
+[<Line: +package de.charite.compbio.jannovar.mendel;
+>, <Line: +import de.charite.compbio.jannovar.JannovarException;
+>, <Line: +/**
+>, <Line: + * Thrown when the pedigree does not fit to the {@link GenotypeCalls}
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class IncompatiblePedigreeException extends JannovarException {
+>, <Line: +	private static final long serialVersionUID = 1L;
+>, <Line: +	public IncompatiblePedigreeException(String msg, Throwable cause) {
+>, <Line: +		super(msg, cause);
+>, <Line: +	}
+>, <Line: +	public IncompatiblePedigreeException(String msg) {
+>, <Line: +		super(msg);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

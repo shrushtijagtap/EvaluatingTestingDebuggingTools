@@ -1,0 +1,35 @@
+[<Line: +import com.google.common.collect.Lists;
+>, <Line: +	 * Match genotypes of two {@link VariantContext}s (chrom, position, ref, and alt have to be
+>, <Line: +	 * equal)
+>, <Line: +					result.add(new GenotypeMatch(i, j, obsVC, dbVC, true));
+>, <Line: +	 * Pair genotypes of two {@link VariantContext}s based on their position, regardless of their
+>, <Line: +	 * genotype
+>, <Line: +	 * In the end, all genotypes will be matched regardless of matching alleles, such that later the
+>, <Line: +	 * "best" (e.g., the highest frequency one) can be used for annotating a variant.
+>, <Line: +				if (dbVar.equals(obsVar)) {
+>, <Line: +					result.add(new GenotypeMatch(i, j, obsVC, dbVC, true));
+>, <Line: +				} else if (dbVar.overlapsWith(obsVar)) {
+>, <Line: +					result.add(new GenotypeMatch(i, j, obsVC, dbVC, false));
+>, <Line: +				}
+>, <Line: +	 * This will generate one {@link VariantDescription} for each alternative allele in
+>, <Line: +	 * <code>vcf</code>.
+>, <Line: +	 * @return A {@link Collection} of {@link VariantDescription} objects corresponding to
+>, <Line: +	 *         <code>vc</code>
+>, <Line: +		// Short-circuit in the case that we see a "database only" allele, e.g., as created when
+>, <Line: +		// using generic TSV annotation without REF/ALT columns. In this case, the position is
+>, <Line: +		// enough.
+>, <Line: +		if (vc.getReference().toString().equals("N*") && vc.getNAlleles() == 1) {
+>, <Line: +			return Lists.newArrayList(
+>, <Line: +					new VariantDescription(vc.getContig(), vc.getStart() - 1, "N", "N"));
+>, <Line: +		}
+>]
+[<Line: -	 * Match genotypes of two {@link VariantContext}s (chrom, position, ref, and alt have to be equal)
+>, <Line: -					result.add(new GenotypeMatch(i, j, obsVC, dbVC));
+>, <Line: -	 * Pair genotypes of two {@link VariantContext}s based on their position, regardless of their genotype
+>, <Line: -	 * In the end, all genotypes will be matched regardless of matching alleles, such that later the "best" (e.g., the
+>, <Line: -	 * highest frequency one) can be used for annotating a variant.
+>, <Line: -				if (dbVar.overlapsWith(obsVar))
+>, <Line: -					result.add(new GenotypeMatch(i, j, obsVC, dbVC));
+>, <Line: -	 * This will generate one {@link VariantDescription} for each alternative allele in <code>vcf</code>.
+>, <Line: -	 * @return A {@link Collection} of {@link VariantDescription} objects corresponding to <code>vc</code>
+>]

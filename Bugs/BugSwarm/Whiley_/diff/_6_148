@@ -1,0 +1,6 @@
+[<Line: +requires |x| > 0 && x[0] == 0:
+>, <Line: +requires |x| > 0 && x[0] == 0:
+>]
+[<Line: -requires x[0] == 0:
+>, <Line: -requires x[0] == 0:
+>]

@@ -1,0 +1,12 @@
+[<Line: +		return reader.lookahead(readPosition + offset);
+>, <Line: +		return reader.lookaheadString(readPosition + offset, length);
+>, <Line: +		return Math.max(0, reader.bufferedCharCount() - readPosition);
+>, <Line: +		reader.consume(readPosition);
+>, <Line: +		readPosition = 0;
+>]
+[<Line: -		return reader.lookahead(readOffset + offset);
+>, <Line: -		return reader.lookaheadString(readOffset + offset, length);
+>, <Line: -		return Math.max(0, reader.bufferedCharCount() - readOffset);
+>, <Line: -		reader.consume(readOffset);
+>, <Line: -		readOffset = 0;
+>]

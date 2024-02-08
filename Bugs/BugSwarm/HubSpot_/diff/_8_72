@@ -1,0 +1,14 @@
+[<Line: +import javax.inject.Singleton;
+>, <Line: +import javax.ws.rs.GET;
+>, <Line: +import javax.ws.rs.Path;
+>, <Line: +import javax.ws.rs.Produces;
+>, <Line: +import javax.ws.rs.core.MediaType;
+>, <Line: +@NoAuth
+>]
+[<Line: -import javax.inject.Singleton;
+>, <Line: -import javax.ws.rs.GET;
+>, <Line: -import javax.ws.rs.Path;
+>, <Line: -import javax.ws.rs.Produces;
+>, <Line: -import javax.ws.rs.core.MediaType;
+>, <Line: -  @NoAuth
+>]

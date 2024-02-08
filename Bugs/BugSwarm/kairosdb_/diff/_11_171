@@ -1,0 +1,48 @@
+[<Line: +		'angular',
+>, <Line: +		'kbn'
+>, <Line: +	],
+>, <Line: +	function (angular) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.directives');
+>, <Line: +		module.directive('confirmClick', function () {
+>, <Line: +			return {
+>, <Line: +				restrict: 'A',
+>, <Line: +				link: function (scope, elem, attrs) {
+>, <Line: +					elem.bind('click', function () {
+>, <Line: +						var message = attrs.confirmation || "Are you sure you want to do that?";
+>, <Line: +						if (window.confirm(message)) {
+>, <Line: +							var action = attrs.confirmClick;
+>, <Line: +							if (action) {
+>, <Line: +								scope.$apply(scope.$eval(action));
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +					});
+>, <Line: +				},
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'kbn'
+>, <Line: -],
+>, <Line: -function (angular) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.directives');
+>, <Line: -  module.directive('confirmClick', function() {
+>, <Line: -    return {
+>, <Line: -      restrict: 'A',
+>, <Line: -      link: function(scope, elem, attrs) {
+>, <Line: -        elem.bind('click', function() {
+>, <Line: -          var message = attrs.confirmation || "Are you sure you want to do that?";
+>, <Line: -          if (window.confirm(message)) {
+>, <Line: -            var action = attrs.confirmClick;
+>, <Line: -            if (action) {
+>, <Line: -              scope.$apply(scope.$eval(action));
+>, <Line: -            }
+>, <Line: -          }
+>, <Line: -        });
+>, <Line: -      },
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

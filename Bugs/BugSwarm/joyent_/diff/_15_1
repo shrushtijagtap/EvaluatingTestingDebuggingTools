@@ -1,0 +1,26 @@
+[<Line: +        try {
+>, <Line: +            return getAllJobIds().map(id -> {
+>, <Line: +                if (id == null) {
+>, <Line: +                    return null;
+>, <Line: +                }
+>, <Line: +                try {
+>, <Line: +                    return getJob(id);
+>, <Line: +                } catch (IOException e) {
+>, <Line: +                    throw new UncheckedIOException(e);
+>, <Line: +                }
+>, <Line: +            });
+>, <Line: +        } catch (UncheckedIOException e) {
+>, <Line: +            throw e.getCause();
+>, <Line: +        }
+>, <Line: +    /**
+>, <Line: +     * Creates an instance of a {@link MantaJobBuilder} class that allows you
+>, <Line: +     * to fluently build Manta jobs.
+>, <Line: +     *
+>, <Line: +     * @return Manta job builder fluent interface class
+>, <Line: +     */
+>, <Line: +    public MantaJobBuilder jobBuilder() {
+>, <Line: +        return new MantaJobBuilder(this);
+>, <Line: +    }
+>]
+[<Line: -        return getAllJobs(MAX_RESULTS);
+>]

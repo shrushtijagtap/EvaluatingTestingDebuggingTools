@@ -1,0 +1,100 @@
+[<Line: +/*******************************************************************************
+>, <Line: + * Copyright (c) 2014 Bruno Medeiros and other Contributors.
+>, <Line: + * All rights reserved. This program and the accompanying materials
+>, <Line: + * are made available under the terms of the Eclipse Public License v1.0
+>, <Line: + * which accompanies this distribution, and is available at
+>, <Line: + * http://www.eclipse.org/legal/epl-v10.html
+>, <Line: + *
+>, <Line: + * Contributors:
+>, <Line: + *     Bruno Medeiros - initial API and implementation
+>, <Line: + *******************************************************************************/
+>, <Line: +package melnorme.lang.ide.core.text;
+>, <Line: +import static melnorme.utilbox.core.Assert.AssertNamespace.assertTrue;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import melnorme.lang.utils.parse.StringParseSource;
+>, <Line: +public class TextSourceUtils {
+>, <Line: +	public static char getBracePair(char braceChar) {
+>, <Line: +		switch (braceChar) {
+>, <Line: +		case '(': return ')';
+>, <Line: +		case ')': return '(';
+>, <Line: +		case '[': return ']';
+>, <Line: +		case ']': return '[';
+>, <Line: +		case '{': return '}';
+>, <Line: +		case '}': return '{';
+>, <Line: +		case '\"': return '\"';
+>, <Line: +		case '\'': return '\'';
+>, <Line: +		}		
+>, <Line: +		return braceChar;
+>, <Line: +	}
+>, <Line: +	public static boolean isPrefix(String prefix, String string, boolean ignoreCase) {
+>, <Line: +		if(prefix.length() > string.length()) {
+>, <Line: +			return false;
+>, <Line: +		}
+>, <Line: +		String subString = string.substring(0, prefix.length());
+>, <Line: +		return ignoreCase ? subString.equalsIgnoreCase(prefix) : subString.equals(prefix);
+>, <Line: +	}
+>, <Line: +	/* -----------------  ----------------- */
+>, <Line: +	public static String getLineIndentForOffset(String source, int offset) {
+>, <Line: +		int lineStart = TextSourceUtils.findLineStartForOffset(source, offset);
+>, <Line: +		return getLineIndentForLineStart(source, lineStart);
+>, <Line: +	}
+>, <Line: +	public static String getLineIndentForLineStart(String source, int lineStart) {
+>, <Line: +		return getLineIndentForLineStart(source, lineStart, source.length());
+>, <Line: +	}
+>, <Line: +	public static String getLineIndentForLineStart(String source, int lineStart, int endLimit) {
+>, <Line: +		int indentEnd = TextSourceUtils.findEndOfIndent(source, lineStart, endLimit);
+>, <Line: +		return source.substring(lineStart, indentEnd);
+>, <Line: +	}
+>, <Line: +	public static int findEndOfIndent(String source, int offset) {
+>, <Line: +		return findEndOfIndent(source, offset, source.length());
+>, <Line: +	}
+>, <Line: +	public static int findEndOfIndent(String source, int offset, int endLimit) {
+>, <Line: +		assertTrue(endLimit <= source.length());
+>, <Line: +		assertTrue(offset <= endLimit);
+>, <Line: +		StringParseSource parseSource = new StringParseSource(source);
+>, <Line: +		parseSource.consume(offset);
+>, <Line: +		while(offset < endLimit) {
+>, <Line: +			if(parseSource.tryConsume(' ') || parseSource.tryConsume('\t')) {
+>, <Line: +				offset++;
+>, <Line: +				continue;
+>, <Line: +			} 
+>, <Line: +			break;
+>, <Line: +		}
+>, <Line: +		return parseSource.getReadPosition();
+>, <Line: +	}
+>, <Line: +	public static int findLineStartForOffset(String source, int offset) {
+>, <Line: +		assertTrue(offset <= source.length());
+>, <Line: +		StringParseSource parseSource = new StringParseSource(source);
+>, <Line: +		while(offset > 0) {
+>, <Line: +			int previousChar = parseSource.lookahead(offset-1);
+>, <Line: +			if(previousChar == '\n' || previousChar == '\r') {
+>, <Line: +				break;
+>, <Line: +			}
+>, <Line: +			offset--;
+>, <Line: +		}
+>, <Line: +		return offset;
+>, <Line: +	}
+>, <Line: +	public static String getLineSegmentBeforeOffset(String source, int offset) {
+>, <Line: +		int lineStart = TextSourceUtils.findLineStartForOffset(source, offset);
+>, <Line: +		return source.substring(lineStart, offset);
+>, <Line: +	}
+>, <Line: +	/* -----------------  ----------------- */
+>, <Line: +	public static String getNSpaces(int spaces) {
+>, <Line: +		return getNChars(spaces, ' ');
+>, <Line: +	}
+>, <Line: +	public static String getNChars(int count, char ch) {
+>, <Line: +		char[] array = new char[count];
+>, <Line: +		Arrays.fill(array, ch);
+>, <Line: +		return new String(array);
+>, <Line: +	}
+>, <Line: +	public static String stringNTimes(String string, int count) {
+>, <Line: +		assertTrue(count >=0);
+>, <Line: +		StringBuffer result = new StringBuffer(string.length() * count);
+>, <Line: +		while(count-- > 0) {
+>, <Line: +			result.append(string);
+>, <Line: +		}
+>, <Line: +		return result.toString();
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

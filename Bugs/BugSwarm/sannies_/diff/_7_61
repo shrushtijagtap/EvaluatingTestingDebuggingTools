@@ -1,0 +1,14 @@
+[<Line: +package org.mp4parser.examples.metadata;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.apple.AppleNameBox;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +import java.io.FileInputStream;
+>, <Line: +        IsoFile isoFile = new IsoFile(new FileInputStream(videoFilePath).getChannel());
+>]
+[<Line: -package com.googlecode.mp4parser.stuff;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.googlecode.mp4parser.FileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.boxes.apple.AppleNameBox;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -        IsoFile isoFile = new IsoFile(new FileDataSourceImpl(videoFilePath));
+>]

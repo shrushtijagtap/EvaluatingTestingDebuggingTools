@@ -1,0 +1,8 @@
+[<Line: +            LOGGER.trace("pendingNodes={}", Integer.valueOf(pendingNodes.size()));
+>, <Line: +            LOGGER.trace("renderedStatements={}", Integer.valueOf(renderedStatements.size()));
+>, <Line: +            LOGGER.trace("triples.size()={}", Integer.valueOf(triples.size()));
+>]
+[<Line: -            LOGGER.trace("pendingNodes={}", pendingNodes.size());
+>, <Line: -            LOGGER.trace("renderedStatements={}", renderedStatements.size());
+>, <Line: -            LOGGER.trace("triples.size()={}", triples.size());
+>]

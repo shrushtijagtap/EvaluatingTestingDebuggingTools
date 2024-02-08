@@ -1,0 +1,23 @@
+[<Line: +    private OntologyConfigurator loaderConfig;
+>, <Line: +        loaderConfig = configurationProvider;
+>, <Line: +                if (loaderConfig.shouldLoadAnnotations()) {
+>, <Line: +                ont.getOWLOntologyManager().makeLoadImportRequest(decl, loaderConfig);
+>, <Line: +            ont.getOWLOntologyManager().makeLoadImportRequest(decl, loaderConfig);
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -    private OWLOntologyLoaderConfiguration loaderConfig;
+>, <Line: -        loaderConfig = configurationProvider.buildLoaderConfiguration();
+>, <Line: -    @Override
+>, <Line: -    public OWLOntologyLoaderConfiguration getOntologyLoaderConfiguration() {
+>, <Line: -        return loaderConfig;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void setOntologyLoaderConfiguration(OWLOntologyLoaderConfiguration conf) {
+>, <Line: -        loaderConfig = conf;
+>, <Line: -    }
+>, <Line: -                if (getOntologyLoaderConfiguration().isLoadAnnotationAxioms()) {
+>, <Line: -                ont.getOWLOntologyManager().makeLoadImportRequest(decl,
+>, <Line: -                    getOntologyLoaderConfiguration());
+>, <Line: -            ont.getOWLOntologyManager().makeLoadImportRequest(decl,
+>, <Line: -                getOntologyLoaderConfiguration());
+>]

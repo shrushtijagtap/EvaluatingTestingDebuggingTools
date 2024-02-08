@@ -1,0 +1,11 @@
+[<Line: +import static net.bytebuddy.matcher.ElementMatchers.none;
+>, <Line: +            return new TransformedField(instrumentedType,
+>, <Line: +                    fieldDescription.getDeclaringType(),
+>, <Line: +                    transformer.transform(instrumentedType, fieldDescription.asToken(none())),
+>, <Line: +                    fieldDescription.asDefined());
+>, <Line: +                    transformer.transform(instrumentedType, methodDescription.asToken(none())),
+>]
+[<Line: -import static net.bytebuddy.matcher.ElementMatchers.is;
+>, <Line: -            return new TransformedField(instrumentedType, fieldDescription.getDeclaringType(), transformer.transform(instrumentedType, fieldDescription.asToken(is(instrumentedType))), fieldDescription.asDefined());
+>, <Line: -                    transformer.transform(instrumentedType, methodDescription.asToken(is(instrumentedType))),
+>]

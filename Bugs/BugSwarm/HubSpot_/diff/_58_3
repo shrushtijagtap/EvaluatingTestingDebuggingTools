@@ -1,0 +1,10 @@
+[<Line: +import java.util.concurrent.locks.ReentrantLock;
+>, <Line: +  private final String lockInfo;
+>, <Line: +  public LockTimeoutException(String message, ReentrantLock agentLock) {
+>, <Line: +    this.lockInfo = String.format("LockState: %s, Queue Length: %s, Hold Count: %s", agentLock.toString(), agentLock.getQueueLength(), agentLock.getHoldCount());
+>, <Line: +  }
+>, <Line: +  public String getLockInfo() {
+>, <Line: +    return lockInfo;
+>]
+[<Line: -  public LockTimeoutException(String message) {
+>]

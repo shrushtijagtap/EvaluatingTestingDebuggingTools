@@ -1,0 +1,6 @@
+[<Line: +    while i < |items|
+>, <Line: +        where i >= 0
+>, <Line: +        where all { k in 0..|items| | items[k] >= 0 }:
+>]
+[<Line: -    while i < |items|:
+>]

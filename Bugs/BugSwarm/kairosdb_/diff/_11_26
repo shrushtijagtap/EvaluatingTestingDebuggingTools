@@ -1,0 +1,23 @@
+[<Line: +	@Override
+>, <Line: +	public boolean equals(Object o)
+>, <Line: +	{
+>, <Line: +		if (this == o)
+>, <Line: +		{
+>, <Line: +			return true;
+>, <Line: +		}
+>, <Line: +		if (o == null || getClass() != o.getClass())
+>, <Line: +		{
+>, <Line: +			return false;
+>, <Line: +		}
+>, <Line: +		Duration duration = (Duration) o;
+>, <Line: +		return value == duration.value && unit == duration.unit;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode()
+>, <Line: +	{
+>, <Line: +		int result = (int) (value ^ (value >>> 32));
+>, <Line: +		result = 31 * result + (unit != null ? unit.hashCode() : 0);
+>, <Line: +		return result;
+>, <Line: +	}
+>]
+[]

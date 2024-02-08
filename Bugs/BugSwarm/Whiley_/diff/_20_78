@@ -1,0 +1,6 @@
+[<Line: +function f(scf3nat[] xs) -> int:
+>, <Line: +    int[] x = [1]
+>]
+[<Line: -function f([scf3nat] xs) -> int:
+>, <Line: -    [int] x = [1]
+>]

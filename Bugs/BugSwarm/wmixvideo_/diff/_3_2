@@ -1,0 +1,4 @@
+[<Line: +            throw new IllegalStateException(e.getMessage(), e);
+>]
+[<Line: -            throw new IllegalStateException(e.getMessage());
+>]

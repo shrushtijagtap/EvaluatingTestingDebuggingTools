@@ -1,0 +1,15 @@
+[<Line: +	private static final AutoEvictingCachingBinaryLocator binaryLocator = new AutoEvictingCachingBinaryLocator();
+>]
+[<Line: -	private static final DeactivatableCachingBinaryLocator binaryLocator = new DeactivatableCachingBinaryLocator();
+>, <Line: -				binaryLocator.deactivateCaching();
+>, <Line: -	/**
+>, <Line: -	 * This method should be called as soon as most classes are loaded.
+>, <Line: -	 * <p/>
+>, <Line: -	 * It disables caching of {@link net.bytebuddy.description.type.TypeDescription}s which makes further
+>, <Line: -	 * transformations a bit slower but also clears the underlying cache which frees resources.
+>, <Line: -	 */
+>, <Line: -	public static void onMostClassesLoaded() {
+>, <Line: -		TimedElementMatcherDecorator.logMetrics();
+>, <Line: -		binaryLocator.deactivateCaching();
+>, <Line: -	}
+>]

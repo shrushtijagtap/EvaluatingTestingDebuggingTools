@@ -1,0 +1,57 @@
+[<Line: +/*
+>, <Line: + * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package com.github.rinde.rinsim.experiment.base;
+>, <Line: +import static java.util.Objects.requireNonNull;
+>, <Line: +import javax.annotation.Nullable;
+>, <Line: +/**
+>, <Line: + * String based implementation of {@link ProblemClass}.
+>, <Line: + * @author Rinde van Lon
+>, <Line: + */
+>, <Line: +public final class StringProblemClass implements ProblemClass {
+>, <Line: +  private final String id;
+>, <Line: +  /**
+>, <Line: +   * Create a new instance.
+>, <Line: +   * @param name The name to use as id.
+>, <Line: +   */
+>, <Line: +  public StringProblemClass(String name) {
+>, <Line: +    id = name;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public String getId() {
+>, <Line: +    return id;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public String toString() {
+>, <Line: +    return String.format("SimpleProblemClass(%s)", id);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public int hashCode() {
+>, <Line: +    return id.hashCode();
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public boolean equals(@Nullable Object o) {
+>, <Line: +    if (null == o || getClass() != o.getClass()) {
+>, <Line: +      return false;
+>, <Line: +    }
+>, <Line: +    return id.equals(((StringProblemClass) o).id);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public int compareTo(@Nullable ProblemClass o) {
+>, <Line: +    return id.compareTo(requireNonNull(o).getId());
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

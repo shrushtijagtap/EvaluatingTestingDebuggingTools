@@ -1,0 +1,11 @@
+[<Line: +import static org.kairosdb.core.http.rest.MetricsResource.setHeaders;
+>]
+[<Line: -	private ResponseBuilder setHeaders(ResponseBuilder responseBuilder)
+>, <Line: -	{
+>, <Line: -		responseBuilder.header("Access-Control-Allow-Origin", "*");
+>, <Line: -		responseBuilder.header("Pragma", "no-cache");
+>, <Line: -		responseBuilder.header("Cache-Control", "no-cache");
+>, <Line: -		responseBuilder.header("Expires", 0);
+>, <Line: -		return (responseBuilder);
+>, <Line: -	}
+>]

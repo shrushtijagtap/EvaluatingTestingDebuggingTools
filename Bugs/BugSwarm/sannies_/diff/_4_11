@@ -1,0 +1,65 @@
+[<Line: +import java.nio.ByteBuffer;
+>, <Line: +        while ((nal = st.getNext()) != null) {
+>, <Line: +            consumeNal(ByteBuffer.wrap(nal));
+>, <Line: +        pushSample(createSample(buffered, fvnd.sliceHeader, sliceNalUnitHeader), true, true);
+>, <Line: +                if (!(pattern == 2 && c == 3)) {
+>, <Line: +                    next.write(c);
+>, <Line: +                    if (pattern == 0 && c == 0) {
+>, <Line: +                        pattern = 1;
+>, <Line: +                    } else if (pattern == 1 && c == 0) {
+>, <Line: +                        pattern = 2;
+>, <Line: +                    } else if (pattern == 2 && c == 0) {
+>, <Line: +                        byte[] s = next.toByteArrayLess3();
+>, <Line: +                        next.reset();
+>, <Line: +                        if (s != null) {
+>, <Line: +                            return s;
+>, <Line: +                        }
+>, <Line: +                    } else if (pattern == 2 && c == 1) {
+>, <Line: +                        byte[] s = next.toByteArrayLess3();
+>, <Line: +                        next.reset();
+>, <Line: +                        pattern = 0;
+>, <Line: +                        if (s != null) {
+>, <Line: +                            return s;
+>, <Line: +                        }
+>, <Line: +                    } else if (pattern != 0) {
+>, <Line: +                        pattern = 0;
+>, <Line: +                } else {
+>]
+[<Line: -import java.util.concurrent.CountDownLatch;
+>, <Line: -    CountDownLatch countDownLatch = new CountDownLatch(1);
+>, <Line: -    private boolean closed = false;
+>, <Line: -    public boolean isClosed() {
+>, <Line: -        return closed;
+>, <Line: -    }
+>, <Line: -    public void close() throws IOException {
+>, <Line: -        closed = true;
+>, <Line: -        try {
+>, <Line: -            countDownLatch.await();
+>, <Line: -        } catch (InterruptedException e) {
+>, <Line: -            throw new IOException(e);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -        while ((nal = st.getNext()) != null && !closed) {
+>, <Line: -            consumeNal(nal);
+>, <Line: -        drainDecPictureBuffer(true);
+>, <Line: -        closed = true;
+>, <Line: -        countDownLatch.countDown();
+>, <Line: -                next.write(c);
+>, <Line: -                if (pattern == 0 && c == 0) {
+>, <Line: -                    pattern = 1;
+>, <Line: -                } else if (pattern == 1 && c == 0) {
+>, <Line: -                    pattern = 2;
+>, <Line: -                } else if (pattern == 2 && c == 0) {
+>, <Line: -                    byte[] s = next.toByteArrayLess3();
+>, <Line: -                    next.reset();
+>, <Line: -                    if (s != null) {
+>, <Line: -                        return s;
+>, <Line: -                    }
+>, <Line: -                } else if (pattern == 2 && c == 1) {
+>, <Line: -                    byte[] s = next.toByteArrayLess3();
+>, <Line: -                    next.reset();
+>, <Line: -                    pattern = 0;
+>, <Line: -                    if (s != null) {
+>, <Line: -                        return s;
+>, <Line: -                } else if (pattern != 0) {
+>]

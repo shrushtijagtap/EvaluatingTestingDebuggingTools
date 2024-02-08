@@ -1,0 +1,12 @@
+[<Line: +package cn.nukkit.level.generator.biome;
+>, <Line: +/**
+>, <Line: + * Nukkit Project
+>, <Line: + * Author: MagicDroidX
+>, <Line: + */
+>, <Line: +public interface CaveBiome {
+>, <Line: +    int getStoneBlock();
+>, <Line: +    int getSurfaceBlock();
+>, <Line: +    int getGroundBlock();
+>, <Line: +}
+>]
+[]

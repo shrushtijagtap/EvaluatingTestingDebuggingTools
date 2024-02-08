@@ -1,0 +1,11 @@
+[<Line: +      env: DESC="tests" CMD="mvn clean integration-test failsafe:verify" COVERAGE_CMD="" DEPLOY="true"
+>, <Line: +    # unit tests in German locale (oraclejdk8)
+>, <Line: +    - jdk: oraclejdk8
+>, <Line: +      env: DESC="tests" CMD="mvn clean integration-test failsafe:verify -DargLine='-Duser.language=de -Duser.country=DE'" COVERAGE_CMD=""
+>, <Line: +  - if [[ $TRAVIS_REPO_SLUG == 'checkstyle/checkstyle' && $TRAVIS_BRANCH == 'master' && $TRAVIS_PULL_REQUEST == 'false' && $DEPLOY == 'true' ]]; then mvn -s config/deploy-settings.xml deploy ; fi
+>]
+[<Line: -      env: DESC="tests" CMD="mvn clean integration-test failsafe:verify" COVERAGE_CMD=""
+>, <Line: -    # unit tests in German locale (oraclejdk8)
+>, <Line: -    - jdk: oraclejdk8
+>, <Line: -      env: DESC="tests" CMD="mvn clean integration-test failsafe:verify -DargLine='-Duser.language=de -Duser.country=DE'" COVERAGE_CMD=""
+>]

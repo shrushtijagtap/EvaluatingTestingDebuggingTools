@@ -1,0 +1,20 @@
+[<Line: +package com.hubspot.baragon.service.managers;
+>, <Line: +  public BaragonResponse enqueueReloadServiceConfigs(String serviceId, boolean noValidate) {
+>, <Line: +        return requestManager.enqueueRequest(buildReloadRequest(maybeService.get(), requestId, noValidate));
+>, <Line: +  public BaragonResponse enqueueRemoveService(String serviceId, boolean noValidate, boolean noReload) {
+>, <Line: +        return requestManager.enqueueRequest(buildRemoveRequest(maybeService.get(), requestId, noValidate, noReload));
+>, <Line: +  private BaragonRequest buildRemoveRequest(BaragonService service, String requestId, boolean noValidate, boolean noReload) throws Exception {
+>, <Line: +    return new BaragonRequest(requestId, service, empty, remove, empty, Optional.<String>absent(), Optional.of(RequestAction.DELETE), noValidate, noReload);
+>, <Line: +  private BaragonRequest buildReloadRequest(BaragonService service, String requestId, boolean noValidate) {
+>, <Line: +    return new BaragonRequest(requestId, service, empty, empty, empty, Optional.<String>absent(), Optional.of(RequestAction.RELOAD), noValidate, false);
+>]
+[<Line: -package com.hubspot.baragon.managers;
+>, <Line: -  public BaragonResponse enqueueReloadServiceConfigs(String serviceId) {
+>, <Line: -        return requestManager.enqueueRequest(buildReloadRequest(maybeService.get(), requestId));
+>, <Line: -  public BaragonResponse enqueueRemoveService(String serviceId) {
+>, <Line: -        return requestManager.enqueueRequest(buildRemoveRequest(maybeService.get(), requestId));
+>, <Line: -  private BaragonRequest buildRemoveRequest(BaragonService service, String requestId) throws Exception {
+>, <Line: -    return new BaragonRequest(requestId, service, empty, remove, empty, Optional.<String>absent(), Optional.of(RequestAction.DELETE));
+>, <Line: -  private BaragonRequest buildReloadRequest(BaragonService service, String requestId) {
+>, <Line: -    return new BaragonRequest(requestId, service, empty, empty, empty, Optional.<String>absent(), Optional.of(RequestAction.RELOAD));
+>]

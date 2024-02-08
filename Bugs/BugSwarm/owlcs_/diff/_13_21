@@ -1,0 +1,7 @@
+[<Line: +import static org.mockito.Mockito.mock;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +        source.acceptParser(mockParser, mock(OWLOntology.class), mock(OntologyConfigurator.class));
+>]
+[<Line: -        source.acceptParser(mockParser, null, null);
+>]

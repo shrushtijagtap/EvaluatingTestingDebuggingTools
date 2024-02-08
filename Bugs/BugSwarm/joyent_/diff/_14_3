@@ -1,0 +1,88 @@
+[<Line: + * <p>Class that wraps the paging of directory listing in Manta to a single
+>, <Line: + * continuous iterator.</p>
+>, <Line: + *
+>, <Line: + * <p><a href="https://apidocs.joyent.com/manta/api.html#ListDirectory">
+>, <Line: + * Listing Manta directories</a> is done by getting pages of data with N number
+>, <Line: + * of records per page. Each page of data is requested using a limit (number
+>, <Line: + * of records) and a marker (the last seen item in the list). This class
+>, <Line: + * automates that process and abstracts out the details of the paging process.</p>
+>, <Line: + *
+>, <Line: +public class MantaDirectoryListingIterator implements Iterator<Map<String, Object>>,
+>, <Line: +    /**
+>, <Line: +     * Size of result set requested against the Manta API (2-1024).
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * Base Manta URL that all paths are appended to.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * Path to directory in which we will iterate through its contents.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * HTTP request helper class.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * The total number of lines that we have iterated through.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * The next line of data that we haven't iterated to yet.
+>, <Line: +     */
+>, <Line: +    private final AtomicReference<String> nextLine = new AtomicReference<>();
+>, <Line: +    /**
+>, <Line: +     * Flag indicated if we have finished and there is nothing left to iterate.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * Jackson JSON parsing instance.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * The last marker we used to request against the Manta API.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * The current {@link BufferedReader} instance that wraps the HTTP response
+>, <Line: +     * {@link java.io.InputStream} from our most recent request to the API.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * The most recent response object from the page of data that we are currently
+>, <Line: +     * parsing.
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * Create a new instance of a directory list iterator.
+>, <Line: +     *
+>, <Line: +     * @param url base Manta URL that all paths are appended to
+>, <Line: +     * @param path path to directory in which we will iterate through its contents
+>, <Line: +     * @param httpHelper HTTP request helper class
+>, <Line: +     * @param pagingSize size of result set requested against the Manta API (2-1024).
+>, <Line: +     */
+>, <Line: +    public MantaDirectoryListingIterator(final String url,
+>, <Line: +                                         final String path,
+>, <Line: +                                         final HttpHelper httpHelper,
+>, <Line: +                                         final int pagingSize) {
+>, <Line: +        Objects.requireNonNull(url, "URL must be present");
+>, <Line: +        Objects.requireNonNull(path, "Path must be present");
+>, <Line: +        Objects.requireNonNull(httpHelper, "HTTP help must be present");
+>, <Line: +    /**
+>, <Line: +     * Chooses the next reader by opening a HTTP connection to get the next
+>, <Line: +     * page of input from the Manta API. If there isn't another page of data
+>, <Line: +     * available, we mark ourselves as finished.
+>, <Line: +     *
+>, <Line: +     * @throws IOException thrown when we can't successfully open an HTTP connection
+>, <Line: +     */
+>, <Line: +    /**
+>, <Line: +     * @return total lines processed
+>, <Line: +     */
+>, <Line: +    public long getLines() {
+>, <Line: +        return lines.get();
+>, <Line: +    }
+>]
+[<Line: -public class MantaDirectoryIterator implements Iterator<Map<String, Object>>,
+>, <Line: -    private final AtomicLong currentLine = new AtomicLong(0);
+>, <Line: -    private final AtomicReference<String> nextLine =
+>, <Line: -            new AtomicReference<>();
+>, <Line: -    public MantaDirectoryIterator(final String url,
+>, <Line: -                                  final String path,
+>, <Line: -                                  final HttpHelper httpHelper,
+>, <Line: -                                  final int pagingSize) throws IOException {
+>, <Line: -            // Reset count of lines for the current stream
+>, <Line: -            currentLine.set(0);
+>, <Line: -        currentLine.incrementAndGet();
+>, <Line: -            currentLine.incrementAndGet();
+>]

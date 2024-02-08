@@ -1,0 +1,43 @@
+[<Line: +import static com.willwinder.universalgcodesender.model.UGSEvent.ControlState.COMM_SENDING;
+>, <Line: +import static com.willwinder.universalgcodesender.model.UGSEvent.ControlState.COMM_SENDING_PAUSED;
+>, <Line: +    // Maintain the current state given actions performed.
+>, <Line: +    // Concrete classes with a status field should override getControlState.
+>, <Line: +    private ControlState currentState = COMM_DISCONNECTED;
+>, <Line: +        this.setCurrentState(COMM_IDLE);
+>, <Line: +        this.setCurrentState(ControlState.COMM_SENDING);
+>, <Line: +        this.setCurrentState(COMM_SENDING_PAUSED);
+>, <Line: +        this.setCurrentState(COMM_SENDING);
+>, <Line: +    @Override
+>, <Line: +    public ControlState getControlState() {
+>, <Line: +        return this.currentState;
+>, <Line: +    };
+>, <Line: +        return getControlState() == COMM_SENDING_PAUSED;
+>, <Line: +            return getControlState() == COMM_IDLE && isIdleEvent();
+>, <Line: +        this.setCurrentState(COMM_IDLE);
+>, <Line: +        if (this.activeCommands.isEmpty()) {
+>, <Line: +            this.setCurrentState(COMM_IDLE);
+>, <Line: +        }
+>, <Line: +        dispatchCommandComplete(command);
+>, <Line: +    private void setCurrentState(ControlState state) {
+>, <Line: +        this.currentState = state;
+>, <Line: +        if (!this.handlesAllStateChangeEvents()) {
+>, <Line: +            this.dispatchStateChange(state);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +        if (this.currentState == COMM_SENDING_PAUSED && state != this.currentState
+>, <Line: +                && this.comm.isPaused() && !this.isStreaming()) {
+>, <Line: +            this.comm.resumeSend();
+>, <Line: +        }
+>]
+[<Line: -    private Boolean paused = false;
+>, <Line: -    protected ControlState currentState = COMM_DISCONNECTED;
+>, <Line: -        this.currentState = COMM_IDLE;
+>, <Line: -        this.dispatchStateChange(ControlState.COMM_SENDING);
+>, <Line: -        this.paused = true;
+>, <Line: -        this.paused = false;
+>, <Line: -        return paused;
+>, <Line: -            return !isPaused() && !isStreaming && isIdleEvent();
+>, <Line: -        paused = false;
+>, <Line: -        dispatchCommandComplete(command);
+>, <Line: -        currentState = state;
+>]

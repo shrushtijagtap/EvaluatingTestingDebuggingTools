@@ -1,0 +1,50 @@
+[<Line: +import java.util.HashMap;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +import com.fasterxml.jackson.databind.ObjectMapper;
+>, <Line: +import com.hubspot.baragon.config.HttpClientConfiguration;
+>, <Line: +import com.hubspot.baragon.models.BaragonAgentEc2Metadata;
+>, <Line: +import com.hubspot.horizon.HttpClient;
+>, <Line: +import com.hubspot.horizon.HttpConfig;
+>, <Line: +import com.hubspot.horizon.apache.ApacheHttpClient;
+>, <Line: +import io.dropwizard.jetty.HttpConnectorFactory;
+>, <Line: +import io.dropwizard.server.SimpleServerFactory;
+>, <Line: +import org.apache.curator.framework.recipes.leader.LeaderLatch;
+>, <Line: +  public static final String BARAGON_AGENT_HTTP_CLIENT = "baragon.agent.http.client";
+>, <Line: +  public static final String CONFIG_ERROR_MESSAGE = "baragon.agent.config.error.message";
+>, <Line: +  @Provides
+>, <Line: +  @Singleton
+>, <Line: +  @Named(CONFIG_ERROR_MESSAGE)
+>, <Line: +  public AtomicReference<Optional<String>> providesConfigErrorMessage() {
+>, <Line: +    return new AtomicReference<>();
+>, <Line: +  }
+>, <Line: +    return Executors.newScheduledThreadPool(2);
+>, <Line: +  }
+>, <Line: +  @Provides
+>, <Line: +  @Singleton
+>, <Line: +  @Named(BARAGON_AGENT_HTTP_CLIENT)
+>, <Line: +  public HttpClient providesApacheHttpClient(HttpClientConfiguration config, ObjectMapper objectMapper) {
+>, <Line: +    HttpConfig.Builder configBuilder = HttpConfig.newBuilder()
+>, <Line: +      .setRequestTimeoutSeconds(config.getRequestTimeoutInMs() / 1000)
+>, <Line: +      .setUserAgent(config.getUserAgent())
+>, <Line: +      .setConnectTimeoutSeconds(config.getConnectionTimeoutInMs() / 1000)
+>, <Line: +      .setFollowRedirects(true)
+>, <Line: +      .setMaxRetries(config.getMaxRequestRetry())
+>, <Line: +      .setObjectMapper(objectMapper);
+>, <Line: +    return new ApacheHttpClient(configBuilder.build());
+>]
+[<Line: -import com.hubspot.baragon.config.ElbConfiguration;
+>, <Line: -import com.hubspot.baragon.config.HttpClientConfiguration;
+>, <Line: -import com.hubspot.baragon.models.BaragonAgentEc2Metadata;
+>, <Line: -import io.dropwizard.jetty.HttpConnectorFactory;
+>, <Line: -import io.dropwizard.server.SimpleServerFactory;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Map;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import org.apache.curator.framework.recipes.leader.LeaderLatch;
+>, <Line: -  @Provides
+>, <Line: -  public Optional<ElbConfiguration> providesElbConfiguration() {
+>, <Line: -    return Optional.absent();
+>, <Line: -  }
+>, <Line: -    return Executors.newScheduledThreadPool(1);
+>]

@@ -1,0 +1,26 @@
+[<Line: +    assertEquals(0, SegmentPool.byteCount);
+>, <Line: +    assertEquals(SegmentPool.MAX_SIZE, SegmentPool.byteCount);
+>, <Line: +    assertEquals(SegmentPool.MAX_SIZE, SegmentPool.byteCount);
+>, <Line: +    assertEquals(0, SegmentPool.byteCount);
+>, <Line: +    assertEquals(0, SegmentPool.byteCount);
+>, <Line: +  @Test public void copyToEmptySource() throws Exception {
+>, <Line: +    Buffer source = new Buffer();
+>, <Line: +    Buffer target = new Buffer().writeUtf8("aaa");
+>, <Line: +    source.copyTo(target, 0L, 0L);
+>, <Line: +    assertEquals("", source.readUtf8());
+>, <Line: +    assertEquals("aaa", target.readUtf8());
+>, <Line: +  }
+>, <Line: +  @Test public void copyToEmptyTarget() throws Exception {
+>, <Line: +    Buffer source = new Buffer().writeUtf8("aaa");
+>, <Line: +    Buffer target = new Buffer();
+>, <Line: +    source.copyTo(target, 0L, 3L);
+>, <Line: +    assertEquals("aaa", source.readUtf8());
+>, <Line: +    assertEquals("aaa", target.readUtf8());
+>, <Line: +  }
+>]
+[<Line: -    assertEquals(0, SegmentPool.INSTANCE.byteCount);
+>, <Line: -    assertEquals(SegmentPool.MAX_SIZE, SegmentPool.INSTANCE.byteCount);
+>, <Line: -    assertEquals(SegmentPool.MAX_SIZE, SegmentPool.INSTANCE.byteCount);
+>, <Line: -    assertEquals(0, SegmentPool.INSTANCE.byteCount);
+>, <Line: -    assertEquals(0, SegmentPool.INSTANCE.byteCount);
+>]

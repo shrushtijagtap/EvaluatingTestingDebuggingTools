@@ -1,0 +1,6 @@
+[<Line: +        if (isinstance(cls, neighbors.KNeighborsClassifier) or
+>, <Line: +                isinstance(cls, neighbors.KNeighborsRegressor)):
+>, <Line: +            nbrs = cls(n_neighbors=-1)
+>, <Line: +            assert_raises(ValueError, nbrs.fit, X, y)
+>]
+[]

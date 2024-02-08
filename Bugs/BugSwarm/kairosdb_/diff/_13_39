@@ -1,0 +1,37 @@
+[<Line: +					if (failedLogger.isTraceEnabled())
+>, <Line: +						for (DataPointEvent event : m_events)
+>, <Line: +							StringWriter sw = new StringWriter();
+>, <Line: +							JSONWriter jsonWriter = new JSONWriter(sw);
+>, <Line: +							jsonWriter.object();
+>, <Line: +							jsonWriter.key("name").value(event.getMetricName());
+>, <Line: +							jsonWriter.key("timestamp").value(event.getDataPoint().getTimestamp());
+>, <Line: +							jsonWriter.key("value");
+>, <Line: +							event.getDataPoint().writeValueToJson(jsonWriter);
+>, <Line: +							jsonWriter.key("tags").object();
+>, <Line: +							ImmutableSortedMap<String, String> tags = event.getTags();
+>, <Line: +							for (Map.Entry<String, String> entry : tags.entrySet())
+>, <Line: +							{
+>, <Line: +								jsonWriter.key(entry.getKey()).value(entry.getValue());
+>, <Line: +							}
+>, <Line: +							jsonWriter.endObject();
+>, <Line: +							jsonWriter.key("ttl").value(event.getTtl());
+>, <Line: +							jsonWriter.endObject();
+>, <Line: +							failedLogger.trace(sw.toString());
+>]
+[<Line: -					for (DataPointEvent event : m_events)
+>, <Line: -						StringWriter sw = new StringWriter();
+>, <Line: -						JSONWriter jsonWriter = new JSONWriter(sw);
+>, <Line: -						jsonWriter.object();
+>, <Line: -						jsonWriter.key("name").value(event.getMetricName());
+>, <Line: -						jsonWriter.key("timestamp").value(event.getDataPoint().getTimestamp());
+>, <Line: -						jsonWriter.key("value");
+>, <Line: -						event.getDataPoint().writeValueToJson(jsonWriter);
+>, <Line: -						jsonWriter.key("tags").object();
+>, <Line: -						ImmutableSortedMap<String, String> tags = event.getTags();
+>, <Line: -						for (Map.Entry<String, String> entry : tags.entrySet())
+>, <Line: -							jsonWriter.key(entry.getKey()).value(entry.getValue());
+>, <Line: -						jsonWriter.endObject();
+>, <Line: -						jsonWriter.key("ttl").value(event.getTtl());
+>, <Line: -						jsonWriter.endObject();
+>, <Line: -						failedLogger.trace(sw.toString());
+>]

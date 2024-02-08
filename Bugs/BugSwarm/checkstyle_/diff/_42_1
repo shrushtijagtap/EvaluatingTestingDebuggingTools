@@ -1,0 +1,20 @@
+[<Line: +                + "blocks" + File.separator + filename);
+>, <Line: +        verify(checkConfig, getPath("InputSemantic.java"), expected);
+>, <Line: +        verify(checkConfig, getPath("InputSemantic.java"), expected);
+>, <Line: +        verify(checkConfig, getPath("InputSemantic.java"), expected);
+>, <Line: +        verify(checkConfig, getPath("InputSemantic2.java"), expected);
+>, <Line: +        verify(checkConfig, getPath("InputSemantic2.java"), expected);
+>, <Line: +            verify(checkConfig, getPath("InputSemantic.java"), expected);
+>, <Line: +        verify(checkConfig, getPath("InputEmptyCase.java"), expected);
+>, <Line: +        verify(checkConfig, getPath("InputEmptyCase.java"), expected);
+>]
+[<Line: -                + "blocks" + File.separator + "emptyblock" + File.separator + filename);
+>, <Line: -        verify(checkConfig, getPath("InputEmptyBlockDefault.java"), expected);
+>, <Line: -        verify(checkConfig, getPath("InputEmptyBlockDefault.java"), expected);
+>, <Line: -        verify(checkConfig, getPath("InputEmptyBlockDefault.java"), expected);
+>, <Line: -        verify(checkConfig, getPath("InputEmptyBlockAllowEmptyLoops.java"), expected);
+>, <Line: -        verify(checkConfig, getPath("InputEmptyBlockAllowEmptyLoops.java"), expected);
+>, <Line: -            verify(checkConfig, getPath("InputEmptyBlockDefault.java"), expected);
+>, <Line: -        verify(checkConfig, getPath("InputEmptyBlockCase.java"), expected);
+>, <Line: -        verify(checkConfig, getPath("InputEmptyBlockCase.java"), expected);
+>]

@@ -1,0 +1,6 @@
+[]
+[<Line: -package model;
+>, <Line: -public interface TurboResource {
+>, <Line: -	public void copyValuesFrom(TurboResource other);
+>, <Line: -}
+>]

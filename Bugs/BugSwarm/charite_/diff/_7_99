@@ -1,0 +1,29 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.filter;
+>, <Line: -import htsjdk.variant.variantcontext.writer.VariantContextWriter;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -/**
+>, <Line: - * Write results to a {@link VariantContextWriter}
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - */
+>, <Line: -public class WriterFilter implements VariantContextFilter {
+>, <Line: -	/** the logger object to use */
+>, <Line: -	private static final Logger LOGGER = LoggerFactory.getLogger(WriterFilter.class);
+>, <Line: -	/** the {@link VariantContextWriter} to use for writing out */
+>, <Line: -	private final VariantContextWriter writer;
+>, <Line: -	/** Initialize with the given {@link VariantContextWriter}. */
+>, <Line: -	public WriterFilter(VariantContextWriter writer) {
+>, <Line: -		this.writer = writer;
+>, <Line: -	}
+>, <Line: -	public void put(FlaggedVariant fv) throws FilterException {
+>, <Line: -		LOGGER.trace("Variant added to writer {} => included? {}", new Object[] { fv.getVC(), fv.isIncluded() });
+>, <Line: -		if (fv.isIncluded())
+>, <Line: -			writer.add(fv.getVC());
+>, <Line: -	}
+>, <Line: -	public void finish() {
+>, <Line: -		/* no-op */
+>, <Line: -	}
+>, <Line: -}
+>]

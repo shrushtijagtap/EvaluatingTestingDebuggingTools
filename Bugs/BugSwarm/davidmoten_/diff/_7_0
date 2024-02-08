@@ -1,0 +1,8 @@
+[<Line: +        <dependency>
+>, <Line: +            <groupId>com.github.davidmoten</groupId>
+>, <Line: +            <artifactId>junit-extras</artifactId>
+>, <Line: +            <version>0.3</version>
+>, <Line: +            <scope>test</scope>
+>, <Line: +        </dependency>
+>]
+[]

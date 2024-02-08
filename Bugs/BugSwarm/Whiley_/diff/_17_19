@@ -1,0 +1,22 @@
+[]
+[<Line: -		} else if(code instanceof Codes.ListOperator) {
+>, <Line: -			infer(index,(Codes.ListOperator)code,environment);
+>, <Line: -	public void infer(CodeBlock.Index index, Codes.ListOperator code, Env environment) {
+>, <Line: -		Constant lhs = environment.get(code.operand(0));
+>, <Line: -		Constant rhs = environment.get(code.operand(1));
+>, <Line: -		Constant result = null;
+>, <Line: -		switch (code.kind) {
+>, <Line: -		case APPEND:
+>, <Line: -			if (lhs instanceof Constant.List && rhs instanceof Constant.List) {
+>, <Line: -				Constant.List left = (Constant.List) lhs;
+>, <Line: -				Constant.List right = (Constant.List) rhs;
+>, <Line: -				ArrayList<Constant> values = new ArrayList<Constant>(
+>, <Line: -						left.values);
+>, <Line: -				values.addAll(right.values);
+>, <Line: -				result = Constant.V_LIST(values);
+>, <Line: -			}
+>, <Line: -			break;		
+>, <Line: -		}
+>, <Line: -		assign(code.target(), result, environment, index);
+>, <Line: -	}
+>]

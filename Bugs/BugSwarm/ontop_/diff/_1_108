@@ -1,0 +1,19 @@
+[<Line: +		TBoxReasoner dag = TBoxReasonerImpl.create(OWLAPI3TranslatorUtility.loadOntologyFromFile(fileInput));
+>, <Line: +		Ontology onto = OWLAPI3TranslatorUtility.loadOntologyFromFile(fileInput);
+>, <Line: +		DAG pureIsa = DAGConstructor.filterPureISA(dag2, onto.getVocabulary());
+>, <Line: +		//System.out.println(d1.getRoleNode(ofac.createObjectProperty("http://obda.inf.unibz.it/ontologies/tests/dllitef/test.owl#B2")));
+>]
+[<Line: -import it.unibz.krdb.obda.ontology.OntologyFactory;
+>, <Line: -import it.unibz.krdb.obda.ontology.impl.OntologyFactoryImpl;
+>, <Line: -import java.io.File;
+>, <Line: -import org.semanticweb.owlapi.apibinding.OWLManager;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntologyManager;
+>, <Line: -		TBoxReasoner dag = new TBoxReasonerImpl(S_InputOWL.createOWL(fileInput));
+>, <Line: -		OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+>, <Line: -		OWLOntology owlonto = man.loadOntologyFromOntologyDocument(new File(fileInput));
+>, <Line: -		Ontology onto = OWLAPI3TranslatorUtility.translate(owlonto);
+>, <Line: -		DAG pureIsa = DAGConstructor.filterPureISA(dag2);
+>, <Line: -		OntologyFactory ofac = OntologyFactoryImpl.getInstance();
+>, <Line: -		System.out.println(d1.getRoleNode(ofac.createObjectProperty("http://obda.inf.unibz.it/ontologies/tests/dllitef/test.owl#B2")));
+>]

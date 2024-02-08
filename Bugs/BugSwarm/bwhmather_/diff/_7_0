@@ -1,0 +1,15 @@
+[<Line: +    :param app:
+>, <Line: +        The application to execute.
+>, <Line: +    :param environ:
+>, <Line: +        The wsgi environment in which to execute the application.
+>, <Line: +    :param buffered:
+>, <Line: +        Set to `True` to enforce buffering.
+>, <Line: +    :return:
+>, <Line: +        Tuple on the form ``(app_iter, status, headers)``
+>]
+[<Line: -from werkzeug._internal import _get_environ
+>, <Line: -    :param app: the application to execute.
+>, <Line: -    :param buffered: set to `True` to enforce buffering.
+>, <Line: -    :return: tuple in the form ``(app_iter, status, headers)``
+>, <Line: -    environ = _get_environ(environ)
+>]

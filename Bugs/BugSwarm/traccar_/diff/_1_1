@@ -1,0 +1,7 @@
+[]
+[<Line: -        //@PermitAll
+>, <Line: -        //@DenyAll
+>, <Line: -        //AuthorizationBasic
+>, <Line: -        //@RolesAllowed
+>, <Line: -        //SecurityContext
+>]

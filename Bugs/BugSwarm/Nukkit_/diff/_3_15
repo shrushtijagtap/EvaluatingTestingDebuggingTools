@@ -1,0 +1,4 @@
+[<Line: +                synchronized (generator.getChunkManager()) {
+>]
+[<Line: -                synchronized (generator.getChunkManager()){
+>]

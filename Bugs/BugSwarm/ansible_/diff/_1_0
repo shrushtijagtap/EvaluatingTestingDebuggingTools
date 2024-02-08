@@ -1,0 +1,8 @@
+[<Line: +            new_msg = u"\n[ERROR]: %s" % msg
+>, <Line: +            new_msg = u"\n".join(wrapped) + u"\n"
+>, <Line: +        return sys.stdout.encoding or 'utf-8'
+>]
+[<Line: -            new_msg = "\n[ERROR]: %s" % msg
+>, <Line: -            new_msg = "\n".join(wrapped) + "\n"
+>, <Line: -        return sys.stout.encoding or 'utf-8'
+>]

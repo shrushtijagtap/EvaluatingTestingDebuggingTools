@@ -1,0 +1,16 @@
+[<Line: +package backend;
+>, <Line: +import backend.resource.MultiModel;
+>, <Line: +import javafx.application.Platform;
+>, <Line: +import ui.UI;
+>, <Line: +import util.events.ModelUpdatedEvent;
+>, <Line: +public class UIManager {
+>, <Line: +	private final UI ui;
+>, <Line: +	public UIManager(UI ui) {
+>, <Line: +		this.ui = ui;
+>, <Line: +	}
+>, <Line: +	public void update(MultiModel models) {
+>, <Line: +		Platform.runLater(() -> ui.triggerEvent(new ModelUpdatedEvent(models)));
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

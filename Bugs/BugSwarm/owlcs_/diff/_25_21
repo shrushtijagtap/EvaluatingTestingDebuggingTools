@@ -1,0 +1,20 @@
+[<Line: +        OntologyConfigurator configuration) {
+>, <Line: +    protected @Nonnull OntologyConfigurator config = new OntologyConfigurator();
+>, <Line: +            new OntologyConfigurator().setReportStackTraces(true));
+>, <Line: +        return loadOntologyWithConfig(o, f, new OntologyConfigurator().setStrict(true));
+>, <Line: +        OntologyConfigurator c) throws OWLOntologyCreationException {
+>, <Line: +    protected OWLOntology loadOntologyWithConfig(StringDocumentSource o, OntologyConfigurator c)
+>, <Line: +        throws OWLOntologyCreationException {
+>, <Line: +    protected OWLOntology roundTrip(OWLOntology o, OWLDocumentFormat format, OntologyConfigurator c)
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -        OWLOntologyLoaderConfiguration configuration) {
+>, <Line: -    protected @Nonnull OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
+>, <Line: -            new OWLOntologyLoaderConfiguration().setReportStackTraces(true));
+>, <Line: -        return loadOntologyWithConfig(o, f, new OWLOntologyLoaderConfiguration().setStrict(true));
+>, <Line: -        OWLOntologyLoaderConfiguration c) throws OWLOntologyCreationException {
+>, <Line: -    protected OWLOntology loadOntologyWithConfig(StringDocumentSource o,
+>, <Line: -        OWLOntologyLoaderConfiguration c) throws OWLOntologyCreationException {
+>, <Line: -    protected OWLOntology roundTrip(OWLOntology o, OWLDocumentFormat format,
+>, <Line: -        OWLOntologyLoaderConfiguration c)
+>]

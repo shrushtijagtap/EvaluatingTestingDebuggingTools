@@ -1,0 +1,22 @@
+[<Line: +import gnu.trove.list.TIntList;
+>, <Line: +import gnu.trove.list.array.TIntArrayList;
+>, <Line: +     *        key
+>, <Line: +     *        key
+>, <Line: +    public TIntList keySet() {
+>, <Line: +        TIntList toReturn = new TIntArrayList();
+>, <Line: +    public TIntList getAllValues() {
+>, <Line: +        TIntList toReturn = new TIntArrayList();
+>, <Line: +                    toReturn.add(f.get(i));
+>, <Line: +        return toReturn;
+>, <Line: +     *        key
+>]
+[<Line: -     *            key
+>, <Line: -     *            key
+>, <Line: -    public List<Integer> keySet() {
+>, <Line: -        List<Integer> toReturn = new ArrayList<>();
+>, <Line: -    public List<Integer> getAllValues() {
+>, <Line: -        List<Integer> list = new ArrayList<>();
+>, <Line: -                    list.add(f.get(i));
+>, <Line: -        return list;
+>, <Line: -     *            key
+>]

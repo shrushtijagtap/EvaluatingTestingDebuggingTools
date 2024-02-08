@@ -1,0 +1,20 @@
+[<Line: +						metricPathRegex: /external_request_response_time.jdbc.([^\.]+).+/,
+>, <Line: +						metricPathRegex: /external_request_response_time.jdbc.([^\.]+).+/,
+>, <Line: +						metricPathRegex: /external_request_response_time.jdbc.([^\.]+).+/,
+>, <Line: +						metricPathRegex: /external_request_response_time.jdbc.([^\.]+).+/,
+>, <Line: +						metricPathRegex: /external_request_response_time.jdbc.([^\.]+).+/,
+>, <Line: +						metricPathRegex: /external_request_response_time.jdbc.([^\.]+).+/,
+>, <Line: +						metricPathRegex: /external_request_response_time.jdbc.([^\.]+).+/,
+>, <Line: +									{ metricCategory: "timers", metricPathRegex: "external_request_response_time.jdbc.(${rowName})", metric: "mean" }
+>, <Line: +									{ metricCategory: "timers", metricPathRegex: "external_request_response_time.jdbc.(${rowName})", metric: "m1_rate"}
+>]
+[<Line: -						metricPathRegex: /jdbc.(.+)/,
+>, <Line: -						metricPathRegex: /jdbc.(.+)/,
+>, <Line: -						metricPathRegex: /jdbc.(.+)/,
+>, <Line: -						metricPathRegex: /jdbc.(.+)/,
+>, <Line: -						metricPathRegex: /jdbc.(.+)/,
+>, <Line: -						metricPathRegex: /jdbc.(.+)/,
+>, <Line: -						metricPathRegex: /jdbc.(.+)/,
+>, <Line: -									{ metricCategory: "timers", metricPathRegex: "jdbc.(${rowName})", metric: "mean" }
+>, <Line: -									{ metricCategory: "timers", metricPathRegex: "jdbc.(${rowName})", metric: "m1_rate"}
+>]

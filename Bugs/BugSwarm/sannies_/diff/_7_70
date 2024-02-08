@@ -1,0 +1,86 @@
+[]
+[<Line: -/*  
+>, <Line: - * Copyright 2008 CoreMedia AG, Hamburg
+>, <Line: - *
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the License); 
+>, <Line: - * you may not use this file except in compliance with the License. 
+>, <Line: - * You may obtain a copy of the License at 
+>, <Line: - * 
+>, <Line: - *     http://www.apache.org/licenses/LICENSE-2.0 
+>, <Line: - * 
+>, <Line: - * Unless required by applicable law or agreed to in writing, software 
+>, <Line: - * distributed under the License is distributed on an AS IS BASIS, 
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+>, <Line: - * See the License for the specific language governing permissions and 
+>, <Line: - * limitations under the License. 
+>, <Line: - */
+>, <Line: -package com.coremedia.iso.boxes.mdat;
+>, <Line: -import com.coremedia.iso.BoxParser;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.nio.ByteBuffer;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import java.nio.channels.WritableByteChannel;
+>, <Line: -import java.util.logging.Logger;
+>, <Line: -/**
+>, <Line: - * <h1>4cc = "{@value #TYPE}"</h1>
+>, <Line: - * This box contains the media data. In video tracks, this box would contain video frames. A presentation may
+>, <Line: - * contain zero or more Media Data Boxes. The actual media data follows the type field; its structure is described
+>, <Line: - * by the metadata (see {@link com.coremedia.iso.boxes.SampleTableBox}).<br>
+>, <Line: - * In large presentations, it may be desirable to have more data in this box than a 32-bit size would permit. In this
+>, <Line: - * case, the large variant of the size field is used.<br>
+>, <Line: - * There may be any number of these boxes in the file (including zero, if all the media data is in other files). The
+>, <Line: - * metadata refers to media data by its absolute offset within the file (see {@link com.coremedia.iso.boxes.StaticChunkOffsetBox});
+>, <Line: - * so Media Data Box headers and free space may easily be skipped, and files without any box structure may
+>, <Line: - * also be referenced and used.
+>, <Line: - */
+>, <Line: -public final class MediaDataBox implements Box {
+>, <Line: -    public static final String TYPE = "mdat";
+>, <Line: -    Container parent;
+>, <Line: -    // These fields are for the special case of a DataSource as input.
+>, <Line: -    private DataSource dataSource;
+>, <Line: -    private long offset;
+>, <Line: -    private long size;
+>, <Line: -    public Container getParent() {
+>, <Line: -        return parent;
+>, <Line: -    }
+>, <Line: -    public void setParent(Container parent) {
+>, <Line: -        this.parent = parent;
+>, <Line: -    }
+>, <Line: -    public String getType() {
+>, <Line: -        return TYPE;
+>, <Line: -    }
+>, <Line: -    private static void transfer(DataSource from, long position, long count, WritableByteChannel to) throws IOException {
+>, <Line: -        long maxCount = (64 * 1024 * 1024) - (32 * 1024);
+>, <Line: -        // Transfer data in chunks a bit less than 64MB
+>, <Line: -        // People state that this is a kind of magic number on Windows.
+>, <Line: -        // I don't care. The size seems reasonable.
+>, <Line: -        long offset = 0;
+>, <Line: -        while (offset < count) {
+>, <Line: -            offset += from.transferTo(position + offset, Math.min(maxCount, count - offset), to);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    public void getBox(WritableByteChannel writableByteChannel) throws IOException {
+>, <Line: -        transfer(dataSource, offset, size, writableByteChannel);
+>, <Line: -    }
+>, <Line: -    public long getSize() {
+>, <Line: -        return size;
+>, <Line: -    }
+>, <Line: -    public long getOffset() {
+>, <Line: -        return offset;
+>, <Line: -    }
+>, <Line: -    public void parse(DataSource dataSource, ByteBuffer header, long contentSize, BoxParser boxParser) throws IOException {
+>, <Line: -        this.offset = dataSource.position() - header.remaining();
+>, <Line: -        this.dataSource = dataSource;
+>, <Line: -        this.size = contentSize + header.remaining();
+>, <Line: -        dataSource.position(dataSource.position() + contentSize);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public String toString() {
+>, <Line: -        return "MediaDataBox{" +
+>, <Line: -                "size=" + size +
+>, <Line: -                '}';
+>, <Line: -    }
+>, <Line: -}
+>]

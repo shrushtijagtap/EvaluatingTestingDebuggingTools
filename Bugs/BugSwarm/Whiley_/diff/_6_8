@@ -1,0 +1,6 @@
+[<Line: +		SOME, ALL,
+>]
+[<Line: -		NONE, // implies value == null
+>, <Line: -		SOME, // implies value == null
+>, <Line: -		ALL, // implies value == null
+>]

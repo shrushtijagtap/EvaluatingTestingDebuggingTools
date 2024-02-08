@@ -1,0 +1,6 @@
+[<Line: +            with open('types.nml') as target:
+>, <Line: +                source_str = sys.stdout.read()
+>]
+[<Line: -            with open('types.nml') as target, sys.stdout as source:
+>, <Line: -                source_str = source.read()
+>]

@@ -1,0 +1,11 @@
+[<Line: +    private OntologyConfigurator cf;
+>, <Line: +        cf = m;
+>, <Line: +        if (cf.shouldRemapIds()) {
+>, <Line: +        if (!cf.shouldRemapIds()) {
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyWriterConfiguration;
+>, <Line: -    private OWLOntologyWriterConfiguration cf;
+>, <Line: -        cf = m.buildWriterConfiguration();
+>, <Line: -        if (cf.shouldRemapAllAnonymousIndividualsIds()) {
+>, <Line: -        if (!cf.shouldRemapAllAnonymousIndividualsIds()) {
+>]

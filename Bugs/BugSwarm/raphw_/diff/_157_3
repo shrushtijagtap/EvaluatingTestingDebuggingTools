@@ -1,0 +1,39 @@
+[<Line: +import java.security.PrivilegedAction;
+>, <Line: +public enum NexusAccessor implements PrivilegedAction<NexusAccessor.Dispatcher> {
+>, <Line: +        this.dispatcher = AccessController.doPrivileged(this);
+>, <Line: +        getSystemClassLoader = new TypeDescription.ForLoadedType(ClassLoader.class).getDeclaredMethods()
+>, <Line: +                .filter(named("getSystemClassLoader").and(takesArguments(0))).getOnly();
+>, <Line: +        loadClass = new TypeDescription.ForLoadedType(ClassLoader.class).getDeclaredMethods()
+>, <Line: +                .filter(named("loadClass").and(takesArguments(String.class))).getOnly();
+>, <Line: +        getDeclaredMethod = new TypeDescription.ForLoadedType(Class.class).getDeclaredMethods()
+>, <Line: +                .filter(named("getDeclaredMethod").and(takesArguments(String.class, Class[].class))).getOnly();
+>, <Line: +        invokeMethod = new TypeDescription.ForLoadedType(Method.class).getDeclaredMethods()
+>, <Line: +                .filter(named("invoke").and(takesArguments(Object.class, Object[].class))).getOnly();
+>, <Line: +        valueOf = new TypeDescription.ForLoadedType(Integer.class).getDeclaredMethods()
+>, <Line: +                .filter(named("valueOf").and(takesArguments(int.class))).getOnly();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Explicit delegation of the exception")
+>, <Line: +    public Dispatcher run() {
+>, <Line: +            return new Dispatcher.Available(new ClassInjector.UsingReflection(ClassLoader.getSystemClassLoader(), NexusAccessor.class.getProtectionDomain(), AccessController.getContext()) // REFACTOR
+>, <Line: +                return new Dispatcher.Available(AccessController.doPrivileged(SystemClassLoaderAction.INSTANCE)
+>, <Line: +                return new Dispatcher.Unavailable(exception);
+>]
+[<Line: -public enum NexusAccessor {
+>, <Line: -    @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Explicit delegation of the exception")
+>, <Line: -        Dispatcher dispatcher;
+>, <Line: -            dispatcher = new Dispatcher.Available(ClassInjector.UsingReflection.ofSystemClassLoader()
+>, <Line: -                dispatcher = new Dispatcher.Available(AccessController.doPrivileged(SystemClassLoaderAction.INSTANCE)
+>, <Line: -                dispatcher = new Dispatcher.Unavailable(exception);
+>, <Line: -        this.dispatcher = dispatcher;
+>, <Line: -        getSystemClassLoader = new TypeDescription.ForLoadedType(ClassLoader.class).getDeclaredMethods()
+>, <Line: -                .filter(named("getSystemClassLoader").and(takesArguments(0))).getOnly();
+>, <Line: -        loadClass = new TypeDescription.ForLoadedType(ClassLoader.class).getDeclaredMethods()
+>, <Line: -                .filter(named("loadClass").and(takesArguments(String.class))).getOnly();
+>, <Line: -        getDeclaredMethod = new TypeDescription.ForLoadedType(Class.class).getDeclaredMethods()
+>, <Line: -                .filter(named("getDeclaredMethod").and(takesArguments(String.class, Class[].class))).getOnly();
+>, <Line: -        invokeMethod = new TypeDescription.ForLoadedType(Method.class).getDeclaredMethods()
+>, <Line: -                .filter(named("invoke").and(takesArguments(Object.class, Object[].class))).getOnly();
+>, <Line: -        valueOf = new TypeDescription.ForLoadedType(Integer.class).getDeclaredMethods()
+>, <Line: -                .filter(named("valueOf").and(takesArguments(int.class))).getOnly();
+>]

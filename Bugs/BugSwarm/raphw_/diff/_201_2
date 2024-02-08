@@ -1,0 +1,16 @@
+[<Line: +                .with(AgentBuilder.RedefinitionStrategy.REDEFINITION)
+>, <Line: +                .with(AgentBuilder.RedefinitionStrategy.BatchAllocator.ForFixedSize.ofSize(1))
+>, <Line: +                .with(AgentBuilder.RedefinitionStrategy.REDEFINITION)
+>, <Line: +                .with(AgentBuilder.RedefinitionStrategy.BatchAllocator.ForFixedSize.ofSize(1))
+>, <Line: +                .with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
+>, <Line: +                .with(AgentBuilder.RedefinitionStrategy.BatchAllocator.ForFixedSize.ofSize(1))
+>, <Line: +                .with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
+>, <Line: +                .with(AgentBuilder.RedefinitionStrategy.BatchAllocator.ForFixedSize.ofSize(1))
+>]
+[<Line: -import java.lang.annotation.Retention;
+>, <Line: -import java.lang.annotation.RetentionPolicy;
+>, <Line: -                .with(AgentBuilder.RedefinitionStrategy.REDEFINITION_CHUNKED)
+>, <Line: -                .with(AgentBuilder.RedefinitionStrategy.REDEFINITION_CHUNKED)
+>, <Line: -                .with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION_CHUNKED)
+>, <Line: -                .with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION_CHUNKED)
+>]

@@ -1,0 +1,28 @@
+[<Line: +import java.util.ArrayList;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import com.github.rinde.rinsim.core.model.ModelProvider;
+>, <Line: +import com.github.rinde.rinsim.ui.renderers.CanvasRenderer;
+>, <Line: +    final List<Factory<? extends CanvasRenderer, ModelProvider>> renderFactories;
+>, <Line: +      rendererList = new ArrayList<>();
+>, <Line: +      renderFactories = new ArrayList<>();
+>, <Line: +      accelerators = new HashMap<>();
+>, <Line: +    public Builder with(
+>, <Line: +        Factory<? extends CanvasRenderer, ModelProvider> renderFactory) {
+>, <Line: +      renderFactories.add(renderFactory);
+>, <Line: +      return this;
+>, <Line: +    }
+>, <Line: +    public Builder with(
+>, <Line: +        IBuilder<? extends Factory<? extends CanvasRenderer, ModelProvider>> renderFactoryBuilder) {
+>, <Line: +      renderFactories.add(renderFactoryBuilder.build());
+>, <Line: +      return this;
+>, <Line: +    }
+>, <Line: +      checkArgument(!(rendererList.isEmpty() && renderFactories.isEmpty()),
+>, <Line: +          renderFactories, accelerators);
+>]
+[<Line: -import static com.google.common.collect.Lists.newArrayList;
+>, <Line: -import static com.google.common.collect.Maps.newHashMap;
+>, <Line: -      rendererList = newArrayList();
+>, <Line: -      accelerators = newHashMap();
+>, <Line: -      checkArgument(!rendererList.isEmpty(),
+>, <Line: -          accelerators);
+>]

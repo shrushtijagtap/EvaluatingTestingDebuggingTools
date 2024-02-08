@@ -1,0 +1,11 @@
+[<Line: +public class GeolocationHandler implements ChannelUpstreamHandler {
+>, <Line: +    public GeolocationHandler(GeolocationProvider geolocationProvider, boolean processInvalidPositions) {
+>, <Line: +                geolocationProvider.getLocation(position.getNetwork(),
+>, <Line: +                        new GeolocationProvider.LocationProviderCallback() {
+>, <Line: +                        Log.warning(e);
+>]
+[<Line: -public class LocationProviderHandler implements ChannelUpstreamHandler {
+>, <Line: -    public LocationProviderHandler(GeolocationProvider geolocationProvider, boolean processInvalidPositions) {
+>, <Line: -                geolocationProvider.getLocation(position.getNetwork(), new GeolocationProvider.LocationProviderCallback() {
+>, <Line: -                        Log.warning("Geolocation failed", e);
+>]

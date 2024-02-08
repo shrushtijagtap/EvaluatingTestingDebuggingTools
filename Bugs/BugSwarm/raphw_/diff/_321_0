@@ -1,0 +1,22 @@
+[<Line: +                            FieldLocator.Resolution resolution = fieldLocator(instrumentedMethod.getDeclaringType()).locate(name);
+>, <Line: +                            if (!resolution.isResolved()) {
+>, <Line: +                                throw new IllegalStateException("Cannot locate field named " + name + " for " + instrumentedMethod);
+>, <Line: +                            } else if (!resolution.getFieldDescription().getType().asErasure().isAssignableTo(targetType)) {
+>, <Line: +                                throw new IllegalStateException("Cannot assign type of field " + resolution.getFieldDescription() + " to " + targetType);
+>, <Line: +                            } else if (!resolution.getFieldDescription().isStatic() && instrumentedMethod.isStatic()) {
+>, <Line: +                                throw new IllegalStateException("Cannot read non-static field " + resolution.getFieldDescription() + " from static method " + instrumentedMethod);
+>, <Line: +                            return new Target.ForField(resolution.getFieldDescription());
+>, <Line: +                        protected abstract FieldLocator fieldLocator(TypeDescription instrumentedType);
+>, <Line: +                            protected FieldLocator fieldLocator(TypeDescription instrumentedType) {
+>, <Line: +                            protected FieldLocator fieldLocator(TypeDescription instrumentedType) {
+>]
+[<Line: -                            FieldDescription fieldDescription = fieldLocator(instrumentedMethod.getDeclaringType()).locate(name);
+>, <Line: -                            if (!fieldDescription.getType().asErasure().isAssignableTo(targetType)) {
+>, <Line: -                                throw new IllegalStateException("Cannot assign type of field " + fieldDescription + " to " + targetType);
+>, <Line: -                            } else if (!fieldDescription.isStatic() && instrumentedMethod.isStatic()) {
+>, <Line: -                                throw new IllegalStateException("Cannot read non-static field " + fieldDescription + " from static method " + instrumentedMethod);
+>, <Line: -                            return new Target.ForField(fieldDescription);
+>, <Line: -                        protected abstract FieldLocator<?> fieldLocator(TypeDescription instrumentedType);
+>, <Line: -                            protected FieldLocator<?> fieldLocator(TypeDescription instrumentedType) {
+>, <Line: -                            protected FieldLocator<?> fieldLocator(TypeDescription instrumentedType) {
+>]

@@ -1,0 +1,9 @@
+[<Line: +import wycc.util.Triple;
+>, <Line: +		public final ArrayList<Triple<String,Expr,Expr>> sources;
+>, <Line: +				Collection<Triple<String, Expr, Expr>> sources, Expr condition,
+>, <Line: +			this.sources = new ArrayList<Triple<String, Expr, Expr>>(sources);
+>]
+[<Line: -		public final ArrayList<Pair<String,Expr>> sources;
+>, <Line: -				Collection<Pair<String, Expr>> sources, Expr condition,
+>, <Line: -			this.sources = new ArrayList<Pair<String, Expr>>(sources);
+>]

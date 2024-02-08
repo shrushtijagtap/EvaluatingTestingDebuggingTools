@@ -1,0 +1,6 @@
+[<Line: +package org.mp4parser.muxer.tracks.h265;
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks.h265;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.BitReaderBuffer;
+>, <Line: -import com.googlecode.mp4parser.h264.read.BitstreamReader;
+>]

@@ -1,0 +1,15 @@
+[<Line: +            tmIndexer = loadIndexerFromClass(icn, yamcsInstance, readonly);
+>, <Line: +            tmIndexer = new CccsdsTmIndex(yamcsInstance, readonly);
+>, <Line: +           hqIndexServer.stopAsync();
+>, <Line: +           hqIndexServer.awaitTerminated();
+>, <Line: +           tmIndexer.close();
+>, <Line: +           tagDb.close();
+>]
+[<Line: -            tmIndexer=loadIndexerFromClass(icn, yamcsInstance, readonly);
+>, <Line: -            tmIndexer=new CccsdsTmIndex(yamcsInstance, readonly);
+>, <Line: -        hqIndexServer.stopAsync();
+>, <Line: -        hqIndexServer.awaitTerminated();
+>, <Line: -        tmIndexer.close();
+>, <Line: -        tagDb.close();
+>, <Line: -        notifyStopped();
+>]

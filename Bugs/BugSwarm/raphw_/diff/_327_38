@@ -1,0 +1,4 @@
+[<Line: +        ObjectPropertyAssertion.of(TypeDescription.Generic.Visitor.ForSignatureVisitor.OfTypeArgument.class).apply();
+>]
+[<Line: -        ObjectPropertyAssertion.of(TypeDescription.Generic.Visitor.ForSignatureVisitor.OfParameter.class).apply();
+>]

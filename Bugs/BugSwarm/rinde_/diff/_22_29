@@ -1,0 +1,140 @@
+[<Line: +import com.google.common.base.Optional;
+>, <Line: +    return Objects.equal(g1.getConnections(), g2.getConnections());
+>, <Line: +      return Collections.unmodifiableList(delegate.getConnections());
+>, <Line: +    public Optional<E> setConnectionData(Point from, Point to, E edgeData) {
+>, <Line: +    public Optional<E> removeConnectionData(Point from, Point to) {
+>, <Line: +      throw new UnsupportedOperationException();
+>]
+[<Line: -  /**
+>, <Line: -   * Returns an unmodifiable view on the specified {@link Connection}.
+>, <Line: -   * @param conn A connection.
+>, <Line: -   * @param <E> The type of connection data.
+>, <Line: -   * @return An unmodifiable view on the connection.
+>, <Line: -   */
+>, <Line: -  public static <E extends ConnectionData> Connection<E> unmodifiableConnection(
+>, <Line: -      Connection<E> conn) {
+>, <Line: -    return new UnmodifiableConnection<>(conn);
+>, <Line: -  }
+>, <Line: -  /**
+>, <Line: -   * Returns an unmodifiable view on the specified {@link ConnectionData}.
+>, <Line: -   * @param connData Connection data.
+>, <Line: -   * @param <E> The type of connection data.
+>, <Line: -   * @return An unmodifiable view on the connection data.
+>, <Line: -   */
+>, <Line: -  @SuppressWarnings("unchecked")
+>, <Line: -  @Nullable
+>, <Line: -  public static <E extends ConnectionData> E unmodifiableConnectionData(
+>, <Line: -      @Nullable E connData) {
+>, <Line: -    if (connData instanceof MultiAttributeData) {
+>, <Line: -      return (E) new UnmodifiableMultiAttributeEdgeData(
+>, <Line: -          (MultiAttributeData) connData);
+>, <Line: -    }
+>, <Line: -    return connData;
+>, <Line: -  }
+>, <Line: -    if (g1.getNumberOfNodes() != g2.getNumberOfNodes()) {
+>, <Line: -      return false;
+>, <Line: -    }
+>, <Line: -    if (g1.getNumberOfConnections() != g2.getNumberOfConnections()) {
+>, <Line: -      return false;
+>, <Line: -    }
+>, <Line: -    for (final Connection<?> g1conn : g1.getConnections()) {
+>, <Line: -      if (!g2.hasConnection(g1conn.from, g1conn.to)) {
+>, <Line: -        return false;
+>, <Line: -      }
+>, <Line: -      final ConnectionData g2connEdgeData = g2.connectionData(g1conn.from,
+>, <Line: -          g1conn.to);
+>, <Line: -      if (!Objects.equal(g1conn.getData(), g2connEdgeData)) {
+>, <Line: -        return false;
+>, <Line: -      }
+>, <Line: -    }
+>, <Line: -    return true;
+>, <Line: -  private static class UnmodifiableMultiAttributeEdgeData extends
+>, <Line: -      MultiAttributeData {
+>, <Line: -    private final MultiAttributeData original;
+>, <Line: -    UnmodifiableMultiAttributeEdgeData(MultiAttributeData pOriginal) {
+>, <Line: -      super(-1);
+>, <Line: -      original = pOriginal;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public double getLength() {
+>, <Line: -      return original.getLength();
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public double getMaxSpeed() {
+>, <Line: -      return original.getMaxSpeed();
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Map<String, Object> getAttributes() {
+>, <Line: -      return original.getAttributes();
+>, <Line: -    }
+>, <Line: -    @Nullable
+>, <Line: -    @Override
+>, <Line: -    public <E> E get(String key, Class<E> type) {
+>, <Line: -      return original.get(key, type);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public double setMaxSpeed(double maxSpeed) {
+>, <Line: -      throw new UnsupportedOperationException();
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public <E> void put(String key, E value) {
+>, <Line: -      throw new UnsupportedOperationException();
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public boolean equals(@Nullable Object obj) {
+>, <Line: -      return original.equals(obj);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public int hashCode() {
+>, <Line: -      return original.hashCode();
+>, <Line: -    }
+>, <Line: -  }
+>, <Line: -  private static final class UnmodifiableConnection<E extends ConnectionData>
+>, <Line: -      extends Connection<E> {
+>, <Line: -    private final Connection<E> original;
+>, <Line: -    UnmodifiableConnection(Connection<E> c) {
+>, <Line: -      super(c.from, c.to, null);
+>, <Line: -      original = c;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void setData(@Nullable E data) {
+>, <Line: -      throw new UnsupportedOperationException();
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    @Nullable
+>, <Line: -    public E getData() {
+>, <Line: -      final E d = original.getData();
+>, <Line: -      if (d == null) {
+>, <Line: -        return null;
+>, <Line: -      }
+>, <Line: -      return Graphs.unmodifiableConnectionData(d);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public boolean equals(@Nullable Object obj) {
+>, <Line: -      return original.equals(obj);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public int hashCode() {
+>, <Line: -      return original.hashCode();
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public String toString() {
+>, <Line: -      return original.toString();
+>, <Line: -    }
+>, <Line: -  }
+>, <Line: -      final List<Connection<E>> conn = delegate.getConnections();
+>, <Line: -      final List<Connection<E>> unmodConn = new ArrayList<>();
+>, <Line: -      for (final Connection<E> c : conn) {
+>, <Line: -        unmodConn.add(unmodifiableConnection(c));
+>, <Line: -      }
+>, <Line: -      return Collections.unmodifiableList(unmodConn);
+>, <Line: -    @Nullable
+>, <Line: -    @Override
+>, <Line: -    public E connectionData(Point from, Point to) {
+>, <Line: -      return unmodifiableConnectionData(delegate.connectionData(from, to));
+>, <Line: -    }
+>, <Line: -    @Nullable
+>, <Line: -    public E setConnectionData(Point from, Point to, @Nullable E edgeData) {
+>, <Line: -    public Connection<E> getConnection(Point from, Point to) {
+>, <Line: -      return unmodifiableConnection(delegate.getConnection(from, to));
+>]

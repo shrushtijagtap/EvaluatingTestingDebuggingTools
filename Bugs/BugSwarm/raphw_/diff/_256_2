@@ -1,0 +1,4 @@
+[<Line: +        ObjectPropertyAssertion.of(AgentBuilder.Transformer.ForAdvice.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.Transformer.ForAdvice.Entry.class).apply();
+>]
+[]

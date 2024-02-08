@@ -1,0 +1,27 @@
+[<Line: +import net.bytebuddy.test.utility.*;
+>, <Line: +import java.util.concurrent.Future;
+>, <Line: +import static org.mockito.Mockito.mock;
+>, <Line: +import static org.mockito.Mockito.verify;
+>, <Line: +import static org.mockito.Mockito.verifyNoMoreInteractions;
+>, <Line: +    @Test
+>, <Line: +    public void testResubmissionCancelationNonOperational() throws Exception {
+>, <Line: +        AgentBuilder.RedefinitionStrategy.ResubmissionScheduler.Cancelable.NoOp.INSTANCE.cancel();
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testResubmissionCancelationForFuture() throws Exception {
+>, <Line: +        Future<?> future = mock(Future.class);
+>, <Line: +        new AgentBuilder.RedefinitionStrategy.ResubmissionScheduler.Cancelable.ForFuture(future).cancel();
+>, <Line: +        verify(future).cancel(true);
+>, <Line: +        verifyNoMoreInteractions(future);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testObjectProperties() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.ResubmissionScheduler.Cancelable.NoOp.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.ResubmissionScheduler.Cancelable.ForFuture.class).apply();
+>, <Line: +    }
+>]
+[<Line: -import net.bytebuddy.test.utility.AgentAttachmentRule;
+>, <Line: -import net.bytebuddy.test.utility.ClassFileExtraction;
+>, <Line: -import net.bytebuddy.test.utility.IntegrationRule;
+>, <Line: -import net.bytebuddy.test.utility.JavaVersionRule;
+>]

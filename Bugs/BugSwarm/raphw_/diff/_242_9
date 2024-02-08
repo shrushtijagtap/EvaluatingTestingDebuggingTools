@@ -1,0 +1,15 @@
+[<Line: +import net.bytebuddy.description.field.FieldDescription;
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testCannotCreateFieldGetter() throws Exception {
+>, <Line: +        new Implementation.Context.Disabled(instrumentedType, classFileVersion).registerGetterFor(mock(FieldDescription.class), MethodAccessorFactory.AccessType.DEFAULT);
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testCannotCreateFieldSetter() throws Exception {
+>, <Line: +        new Implementation.Context.Disabled(instrumentedType, classFileVersion).registerSetterFor(mock(FieldDescription.class), MethodAccessorFactory.AccessType.DEFAULT);
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testCannotCreateMethodAccessor() throws Exception {
+>, <Line: +        new Implementation.Context.Disabled(instrumentedType, classFileVersion).registerAccessorFor(mock(Implementation.SpecialMethodInvocation.class), MethodAccessorFactory.AccessType.DEFAULT);
+>, <Line: +    }
+>]
+[]

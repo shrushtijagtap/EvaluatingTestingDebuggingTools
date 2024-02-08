@@ -1,0 +1,47 @@
+[<Line: +        private static final MethodDescription.InDefinedShape TARGET_TYPE;
+>, <Line: +        private static final MethodDescription.InDefinedShape SERIALIZABLE_PROXY;
+>, <Line: +        /**
+>, <Line: +         * A reference to the null if possible method of the default call annotation.
+>, <Line: +         */
+>, <Line: +        private static final MethodDescription.InDefinedShape NULL_IF_IMPOSSIBLE;
+>, <Line: +        /*
+>, <Line: +         * Looks up method constants of the default call annotation.
+>, <Line: +         */
+>, <Line: +        static {
+>, <Line: +            TARGET_TYPE = annotationProperties.filter(named("targetType")).getOnly();
+>, <Line: +            SERIALIZABLE_PROXY = annotationProperties.filter(named("serializableProxy")).getOnly();
+>, <Line: +            NULL_IF_IMPOSSIBLE = annotationProperties.filter(named("nullIfImpossible")).getOnly();
+>, <Line: +                return annotation.getValue(NULL_IF_IMPOSSIBLE).resolve(Boolean.class)
+>, <Line: +            TypeDescription typeDescription = annotation.getValue(TARGET_TYPE).resolve(TypeDescription.class);
+>, <Line: +                stackManipulation = new MethodCallProxy.AssignableSignatureCall(specialMethodInvocation, annotation.getValue(SERIALIZABLE_PROXY).resolve(Boolean.class));
+>, <Line: +                public Implementation.SpecialMethodInvocation resolve(Implementation.Target implementationTarget, MethodDescription source) {
+>, <Line: +                    return implementationTarget.invokeDefault(source.asSignatureToken());
+>, <Line: +                public Implementation.SpecialMethodInvocation resolve(Implementation.Target implementationTarget, MethodDescription source) {
+>, <Line: +                    return implementationTarget.invokeDefault(source.asSignatureToken(), typeDescription);
+>]
+[<Line: -        private final MethodDescription.InDefinedShape targetType;
+>, <Line: -        private final MethodDescription.InDefinedShape serializableProxy;
+>, <Line: -        private final MethodDescription.InDefinedShape nullIfImpossible;
+>, <Line: -        Binder() {
+>, <Line: -            targetType= annotationProperties.filter(named("targetType")).getOnly();
+>, <Line: -            serializableProxy = annotationProperties.filter(named("serializableProxy")).getOnly();
+>, <Line: -            nullIfImpossible = annotationProperties.filter(named("nullIfImpossible")).getOnly();
+>, <Line: -                return annotation.getValue(nullIfImpossible).resolve(Boolean.class)
+>, <Line: -            TypeDescription typeDescription = annotation.getValue(this.targetType).resolve(TypeDescription.class);
+>, <Line: -                stackManipulation = new MethodCallProxy.AssignableSignatureCall(specialMethodInvocation, annotation.getValue(serializableProxy).resolve(Boolean.class));
+>, <Line: -                public Implementation.SpecialMethodInvocation resolve(Implementation.Target implementationTarget,
+>, <Line: -                                                                      MethodDescription source) {
+>, <Line: -                    Implementation.SpecialMethodInvocation specialMethodInvocation = Implementation.SpecialMethodInvocation.Illegal.INSTANCE;
+>, <Line: -                    for (TypeDescription candidate : implementationTarget.getInstrumentedType().getInterfaces().asErasures()) {
+>, <Line: -                        if (source.isSpecializableFor(candidate)) {
+>, <Line: -                            if (specialMethodInvocation.isValid()) {
+>, <Line: -                                return Implementation.SpecialMethodInvocation.Illegal.INSTANCE;
+>, <Line: -                            }
+>, <Line: -                            specialMethodInvocation = implementationTarget.invokeDefault(candidate, source.asSignatureToken());
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                    return specialMethodInvocation;
+>, <Line: -                public Implementation.SpecialMethodInvocation resolve(Implementation.Target implementationTarget,
+>, <Line: -                                                                      MethodDescription source) {
+>, <Line: -                    return implementationTarget.invokeDefault(typeDescription, source.asSignatureToken());
+>]

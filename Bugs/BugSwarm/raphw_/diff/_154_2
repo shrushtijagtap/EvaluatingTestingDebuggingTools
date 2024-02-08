@@ -1,0 +1,21 @@
+[<Line: +import static net.bytebuddy.matcher.ElementMatchers.none;
+>, <Line: +        when(methodDescription.asToken(none())).thenReturn(methodToken);
+>, <Line: +    @Test
+>, <Line: +    public void testRetainsInstrumentedType() throws Exception {
+>, <Line: +        TypeDescription typeDescription = new TypeDescription.ForLoadedType(Bar.class);
+>, <Line: +        MethodDescription methodDescription = typeDescription.getSuperClass().getDeclaredMethods().filter(named(BAR)).getOnly();
+>, <Line: +        MethodDescription transformed = Transformer.ForMethod.withModifiers().transform(typeDescription, methodDescription);
+>, <Line: +        assertThat(transformed, is(methodDescription));
+>, <Line: +        assertThat(transformed.getModifiers(), is(methodDescription.getModifiers()));
+>, <Line: +        assertThat(transformed.getReturnType().asErasure(), is(typeDescription));
+>, <Line: +        assertThat(transformed.getReturnType().getSort(), is(TypeDefinition.Sort.PARAMETERIZED));
+>, <Line: +        assertThat(transformed.getReturnType().getTypeArguments().size(), is(1));
+>, <Line: +        assertThat(transformed.getReturnType().getTypeArguments().getOnly(), is(typeDescription.getSuperClass().getDeclaredMethods().filter(named(FOO)).getOnly().getReturnType()));
+>, <Line: +    }
+>, <Line: +        Bar<T> bar() {
+>, <Line: +            return null;
+>, <Line: +        }
+>]
+[<Line: -import net.bytebuddy.matcher.ElementMatchers;
+>, <Line: -        when(methodDescription.asToken(ElementMatchers.is(instrumentedType))).thenReturn(methodToken);
+>]

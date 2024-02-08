@@ -1,0 +1,9 @@
+[<Line: +  public static final String LOAD_BALANCER_GROUP_LAST_REQUEST_FORMAT = LOAD_BALANCER_GROUP_FORMAT + "/lastRequest";
+>, <Line: +  public Optional<String> getLastRequestForGroup(String loadBalancerGroup) {
+>, <Line: +    return readFromZk(String.format(LOAD_BALANCER_GROUP_LAST_REQUEST_FORMAT, loadBalancerGroup), String.class);
+>, <Line: +  }
+>, <Line: +  public void setLastRequestId(String loadBalancerGroup, String requestId) {
+>, <Line: +    writeToZk(String.format(LOAD_BALANCER_GROUP_LAST_REQUEST_FORMAT, loadBalancerGroup), requestId);
+>, <Line: +  }
+>]
+[]

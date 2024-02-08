@@ -1,0 +1,9 @@
+[<Line: +    public String getCustomizedURL(DownloadType dt) {
+>, <Line: +        return dt.getProvider().getIndexesDownloadURL() + id + ".json";
+>]
+[<Line: -    public String getUrl(DownloadType dt, boolean allowSelf) {
+>, <Line: -        if (url != null && dt.getProvider().isAllowedToUseSelfURL())
+>, <Line: -            return url;
+>, <Line: -        else
+>, <Line: -            return dt.getProvider().getIndexesDownloadURL() + id + ".json";
+>]

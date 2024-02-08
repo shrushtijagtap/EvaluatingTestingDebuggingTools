@@ -1,0 +1,35 @@
+[<Line: +========
+>, <Line: +Roll-ups
+>, <Line: +========
+>, <Line: +Roll-ups are a way to improve query performance by aggregating or rolling up data into a larger time range such as averaging millisecond data over a minute.
+>, <Line: +Roll-ups perform queries on existing data, aggregate the data, and write the results to another metric. The original data is left intact.
+>, <Line: +Roll-ups are continuously run on a schedule rolling up a small time period of data on each execution.
+>, <Line: +Roll-ups are scheduled by creating a roll-up task. A task contains one or more roll-ups and an execution interval (how often the task is executed).
+>, <Line: +Roll-ups can be created using the :doc:`Roll-up REST API <restapi/Roll-ups>` or by using the Web UI (`http://<kairosServer>:<port>/rollup.html`).
+>, <Line: +----------
+>, <Line: +Installing
+>, <Line: +----------
+>, <Line: +Roll-ups are installed with KairosDB but disabled by default. You enable roll-ups by uncommenting the following line from kairosdb.properties and restarting KairosDB:
+>, <Line: +	::
+>, <Line: +		kairosdb.service.rollups=org.kairosdb.rollup.RollUpModule
+>, <Line: +-------
+>, <Line: +Example
+>, <Line: +-------
+>, <Line: +A common use case for Roll-ups is monitoring systems with dashboards. We monitor the health of our systems by viewing dashboards that span several days or weeks
+>, <Line: +worth of data. The dashboards update regularly and we want them to update quickly when the data is refreshed. But if a dashboard shows an anomaly we
+>, <Line: +want the option to drill down into more granular data. So data is reported at millisecond precision, but dashboards are created by roll-up tasks that
+>, <Line: +roll-up the data on hourly, daily, or weekly precision. Roll-ups improve the performance of the queries because fewer data points are required to plot a graph
+>, <Line: +of daily values versus aggregating millisecond data.
+>, <Line: +We measure, for example, the total number of a particular type of event that enters our system and track that over a 3 month period. The data is measured in milliseconds.
+>, <Line: +The results of a query for 3 months and aggregated over a week are:
+>, <Line: + ::
+>, <Line: +    Query Time: 24 seconds
+>, <Line: +    Data Points Returned: 1,535,711
+>, <Line: +    Data Points Plotted: 12
+>, <Line: +If however, we create a roll-up task that rolls up to daily values, the query is significantly faster:
+>, <Line: + ::
+>, <Line: +    Query Time: 417 milliseconds
+>, <Line: +    Data Points Returned: 2,045
+>, <Line: +    Data Points Plotted: 12
+>]
+[]

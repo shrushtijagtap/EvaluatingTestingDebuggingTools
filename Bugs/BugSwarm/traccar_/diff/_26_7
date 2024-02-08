@@ -1,0 +1,4 @@
+[<Line: +public interface Geocoder {
+>]
+[<Line: -public interface ReverseGeocoder {
+>]

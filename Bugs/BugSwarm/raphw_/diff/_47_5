@@ -1,0 +1,185 @@
+[<Line: +import net.bytebuddy.implementation.bind.ArgumentTypeResolver;
+>, <Line: +import static org.hamcrest.CoreMatchers.*;
+>, <Line: +import static org.mockito.Mockito.any;
+>, <Line: +                                                                                    Object identificationToken) {
+>, <Line: +        when(parameterBinding.isValid()).thenReturn(true);
+>, <Line: +        when(termination.apply(any(MethodVisitor.class), any(Implementation.Context.class))).thenReturn(new StackManipulation.Size(0, 0));
+>, <Line: +        TargetMethodAnnotationDrivenBinder.of(Arrays.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>asList(firstParameterBinder, secondParameterBinder));
+>, <Line: +        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(Collections.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>emptyList());
+>, <Line: +        assertThat(methodDelegationBinder.compile(targetMethod).bind(implementationTarget,
+>, <Line: +                sourceMethod,
+>, <Line: +                methodInvoker,
+>, <Line: +                assigner).isValid(), is(false));
+>, <Line: +        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(Collections.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>emptyList());
+>, <Line: +        assertThat(methodDelegationBinder.compile(targetMethod).bind(implementationTarget,
+>, <Line: +                sourceMethod,
+>, <Line: +                methodInvoker,
+>, <Line: +                assigner).isValid(), is(false));
+>, <Line: +                new Key(FOO));
+>, <Line: +                new Key(BAR));
+>, <Line: +        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(Arrays.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>asList(firstParameterBinder, secondParameterBinder));
+>, <Line: +        MethodDelegationBinder.MethodBinding methodBinding = methodDelegationBinder.compile(targetMethod).bind(implementationTarget,
+>, <Line: +                sourceMethod,
+>, <Line: +                methodInvoker,
+>, <Line: +                assigner);
+>, <Line: +    public void testBindingByDefault() throws Exception {
+>, <Line: +        when(firstParameter.getType()).thenReturn(TypeDescription.Generic.OBJECT);
+>, <Line: +        when(secondParameter.getType()).thenReturn(TypeDescription.Generic.OBJECT);
+>, <Line: +        when(sourceMethod.getParameters()).thenReturn(new ParameterList.Explicit(firstParameter, secondParameter));
+>, <Line: +        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(Collections.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>emptyList());
+>, <Line: +        MethodDelegationBinder.MethodBinding methodBinding = methodDelegationBinder.compile(targetMethod).bind(implementationTarget,
+>, <Line: +                sourceMethod,
+>, <Line: +                methodInvoker,
+>, <Line: +                assigner);
+>, <Line: +        assertThat(methodBinding.getTargetParameterIndex(new ArgumentTypeResolver.ParameterIndexToken(0)), is(0));
+>, <Line: +        assertThat(methodBinding.getTargetParameterIndex(new ArgumentTypeResolver.ParameterIndexToken(1)), is(1));
+>, <Line: +        assertThat(size.getSizeImpact(), is(2));
+>, <Line: +        assertThat(size.getMaximalSize(), is(2));
+>, <Line: +                new Key(FOO));
+>, <Line: +                new Key(BAR));
+>, <Line: +        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(Arrays.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>asList(firstParameterBinder, secondParameterBinder));
+>, <Line: +        MethodDelegationBinder.MethodBinding methodBinding = methodDelegationBinder.compile(targetMethod).bind(implementationTarget,
+>, <Line: +                methodInvoker,
+>, <Line: +                assigner);
+>, <Line: +        verifyNoMoreInteractions(assigner);
+>, <Line: +        ObjectPropertyAssertion.of(TargetMethodAnnotationDrivenBinder.Record.class).apply();
+>]
+[<Line: -import static org.hamcrest.CoreMatchers.equalTo;
+>, <Line: -import static org.hamcrest.CoreMatchers.is;
+>, <Line: -import static org.hamcrest.CoreMatchers.not;
+>, <Line: -                                                                                    Object identificationToken,
+>, <Line: -                                                                                    boolean bindingResult) {
+>, <Line: -        when(parameterBinding.isValid()).thenReturn(bindingResult);
+>, <Line: -        when(termination.apply(any(MethodVisitor.class), any(Implementation.Context.class)))
+>, <Line: -                .thenReturn(new StackManipulation.Size(0, 0));
+>, <Line: -        TargetMethodAnnotationDrivenBinder.of(Arrays.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>asList(firstParameterBinder, secondParameterBinder), terminationHandler, assigner, methodInvoker);
+>, <Line: -        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(
+>, <Line: -                Collections.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>emptyList(),
+>, <Line: -                assigner,
+>, <Line: -                methodInvoker);
+>, <Line: -        assertThat(methodDelegationBinder.compile(targetMethod).bind(implementationTarget, sourceMethod).isValid(), is(false));
+>, <Line: -        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(
+>, <Line: -                Collections.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>emptyList(),
+>, <Line: -                assigner,
+>, <Line: -                methodInvoker);
+>, <Line: -        assertThat(methodDelegationBinder.compile(targetMethod).bind(implementationTarget, sourceMethod).isValid(), is(false));
+>, <Line: -                new Key(FOO),
+>, <Line: -                true);
+>, <Line: -                new Key(BAR),
+>, <Line: -                true);
+>, <Line: -        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(
+>, <Line: -                Arrays.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>asList(firstParameterBinder, secondParameterBinder),
+>, <Line: -                assigner,
+>, <Line: -                methodInvoker);
+>, <Line: -        MethodDelegationBinder.MethodBinding methodBinding = methodDelegationBinder.compile(targetMethod).bind(implementationTarget, sourceMethod);
+>, <Line: -    public void testBindingByDefaults() throws Exception {
+>, <Line: -        MethodDelegationBinder.ParameterBinding<?> firstBinding = prepareArgumentBinder(
+>, <Line: -                firstParameterBinder,
+>, <Line: -                FirstPseudoAnnotation.class,
+>, <Line: -                new Key(FOO),
+>, <Line: -                true);
+>, <Line: -        MethodDelegationBinder.ParameterBinding<?> secondBinding = prepareArgumentBinder(
+>, <Line: -                secondParameterBinder,
+>, <Line: -                SecondPseudoAnnotation.class,
+>, <Line: -                new Key(BAR),
+>, <Line: -                true);
+>, <Line: -        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(
+>, <Line: -                Arrays.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>asList(firstParameterBinder, secondParameterBinder),
+>, <Line: -                assigner,
+>, <Line: -                methodInvoker);
+>, <Line: -        MethodDelegationBinder.MethodBinding methodBinding = methodDelegationBinder.compile(targetMethod).bind(implementationTarget, sourceMethod);
+>, <Line: -        assertThat(methodBinding.getTargetParameterIndex(new Key(FOO)), is(1));
+>, <Line: -        assertThat(methodBinding.getTargetParameterIndex(new Key(BAR)), is(0));
+>, <Line: -        assertThat(size.getSizeImpact(), is(0));
+>, <Line: -        assertThat(size.getMaximalSize(), is(0));
+>, <Line: -        verifyZeroInteractions(methodVisitor);
+>, <Line: -        verifyZeroInteractions(assigner);
+>, <Line: -        verify(firstParameterBinder, atLeast(1)).getHandledType();
+>, <Line: -        verify((TargetMethodAnnotationDrivenBinder.ParameterBinder) firstParameterBinder).bind(firstPseudoAnnotation,
+>, <Line: -                sourceMethod,
+>, <Line: -                secondParameter,
+>, <Line: -                implementationTarget,
+>, <Line: -                assigner);
+>, <Line: -        verifyNoMoreInteractions(firstParameterBinder);
+>, <Line: -        verify(secondParameterBinder, atLeast(1)).getHandledType();
+>, <Line: -        verify((TargetMethodAnnotationDrivenBinder.ParameterBinder) secondParameterBinder).bind(secondPseudoAnnotation,
+>, <Line: -                sourceMethod,
+>, <Line: -                firstParameter,
+>, <Line: -                implementationTarget,
+>, <Line: -                assigner);
+>, <Line: -        verifyNoMoreInteractions(secondParameterBinder);
+>, <Line: -        verify(firstBinding, atLeast(1)).isValid();
+>, <Line: -        verify(firstBinding).getIdentificationToken();
+>, <Line: -        verify(secondBinding, atLeast(1)).isValid();
+>, <Line: -        verify(secondBinding).getIdentificationToken();
+>, <Line: -                new Key(FOO),
+>, <Line: -                true);
+>, <Line: -                new Key(BAR),
+>, <Line: -                true);
+>, <Line: -        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(
+>, <Line: -                Arrays.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>asList(firstParameterBinder, secondParameterBinder),
+>, <Line: -                terminationHandler,
+>, <Line: -                assigner,
+>, <Line: -                methodInvoker);
+>, <Line: -        MethodDelegationBinder.MethodBinding methodBinding = methodDelegationBinder.compile(targetMethod).bind(implementationTarget, sourceMethod);
+>, <Line: -        assertThat(methodBinding.isValid(), is(true));
+>, <Line: -        assertThat(methodBinding.getTarget(), is(targetMethod));
+>, <Line: -        assertThat(methodBinding.getTargetParameterIndex(new Key(FOO)), is(1));
+>, <Line: -        assertThat(methodBinding.getTargetParameterIndex(new Key(BAR)), is(0));
+>, <Line: -        StackManipulation.Size size = methodBinding.apply(methodVisitor, implementationContext);
+>, <Line: -        assertThat(size.getSizeImpact(), is(0));
+>, <Line: -        assertThat(size.getMaximalSize(), is(0));
+>, <Line: -        verifyZeroInteractions(methodVisitor);
+>, <Line: -        verify(targetMethod, atLeast(1)).getDeclaredAnnotations();
+>, <Line: -        verify(firstParameter, atLeast(1)).getDeclaredAnnotations();
+>, <Line: -        verify(secondParameter, atLeast(1)).getDeclaredAnnotations();
+>, <Line: -        verifyNoMoreInteractions(assigner);
+>, <Line: -        verify(terminationHandler).resolve(assigner, sourceMethod, targetMethod);
+>, <Line: -        verifyNoMoreInteractions(terminationHandler);
+>, <Line: -        verify(methodInvoker).invoke(targetMethod);
+>, <Line: -        verifyNoMoreInteractions(methodInvoker);
+>, <Line: -        verify(firstParameterBinder, atLeast(1)).getHandledType();
+>, <Line: -        verify((TargetMethodAnnotationDrivenBinder.ParameterBinder) firstParameterBinder).bind(firstPseudoAnnotation,
+>, <Line: -                secondParameter,
+>, <Line: -                implementationTarget,
+>, <Line: -                assigner);
+>, <Line: -        verifyNoMoreInteractions(firstParameterBinder);
+>, <Line: -        verify(secondParameterBinder, atLeast(1)).getHandledType();
+>, <Line: -        verify((TargetMethodAnnotationDrivenBinder.ParameterBinder) secondParameterBinder).bind(secondPseudoAnnotation,
+>, <Line: -                sourceMethod,
+>, <Line: -                firstParameter,
+>, <Line: -                implementationTarget,
+>, <Line: -                assigner);
+>, <Line: -        verifyNoMoreInteractions(secondParameterBinder);
+>, <Line: -        verify(firstBinding, atLeast(1)).isValid();
+>, <Line: -        verify(firstBinding).getIdentificationToken();
+>, <Line: -        verify(secondBinding, atLeast(1)).isValid();
+>, <Line: -        verify(secondBinding).getIdentificationToken();
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    @SuppressWarnings("unchecked")
+>, <Line: -    public void testBindingByParameterAnnotationsAndDefaults() throws Exception {
+>, <Line: -        when(assignmentBinding.isValid()).thenReturn(true);
+>, <Line: -        when(methodInvocation.isValid()).thenReturn(true);
+>, <Line: -        when(termination.isValid()).thenReturn(true);
+>, <Line: -        when(targetMethod.getDeclaredAnnotations()).thenReturn(new AnnotationList.Empty());
+>, <Line: -        when(firstParameter.getDeclaredAnnotations()).thenReturn(new AnnotationList.Empty());
+>, <Line: -        when(secondParameter.getDeclaredAnnotations()).thenReturn(new AnnotationList.Explicit(Collections.singletonList(firstPseudoAnnotation)));
+>, <Line: -        MethodDelegationBinder.ParameterBinding<?> firstBinding = prepareArgumentBinder(
+>, <Line: -                firstParameterBinder,
+>, <Line: -                FirstPseudoAnnotation.class,
+>, <Line: -                new Key(FOO),
+>, <Line: -                true);
+>, <Line: -        MethodDelegationBinder.ParameterBinding<?> secondBinding = prepareArgumentBinder(
+>, <Line: -                secondParameterBinder,
+>, <Line: -                SecondPseudoAnnotation.class,
+>, <Line: -                new Key(BAR),
+>, <Line: -                true);
+>, <Line: -        MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(
+>, <Line: -                Arrays.<TargetMethodAnnotationDrivenBinder.ParameterBinder<?>>asList(firstParameterBinder, secondParameterBinder),
+>, <Line: -                assigner,
+>, <Line: -                methodInvoker);
+>, <Line: -        MethodDelegationBinder.MethodBinding methodBinding = methodDelegationBinder.compile(targetMethod).bind(implementationTarget, sourceMethod);
+>, <Line: -        verifyZeroInteractions(assigner);
+>, <Line: -        ObjectPropertyAssertion.of(TargetMethodAnnotationDrivenBinder.Compiled.class).apply();
+>]

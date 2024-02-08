@@ -1,0 +1,18 @@
+[<Line: +    private final ElementMatcher<? super TypeDescription> matcher;
+>, <Line: +     * @param matcher The type matcher to apply to an annotation's type.
+>, <Line: +    public AnnotationTypeMatcher(ElementMatcher<? super TypeDescription> matcher) {
+>, <Line: +        this.matcher = matcher;
+>, <Line: +        return matcher.matches(target.getAnnotationType());
+>, <Line: +                && matcher.equals(((AnnotationTypeMatcher<?>) other).matcher);
+>, <Line: +        return matcher.hashCode();
+>, <Line: +        return "ofAnnotationType(" + matcher + ')';
+>]
+[<Line: -    private final ElementMatcher<? super TypeDescription> typeMatcher;
+>, <Line: -     * @param typeMatcher The type matcher to apply to an annotation's type.
+>, <Line: -    public AnnotationTypeMatcher(ElementMatcher<? super TypeDescription> typeMatcher) {
+>, <Line: -        this.typeMatcher = typeMatcher;
+>, <Line: -        return typeMatcher.matches(target.getAnnotationType());
+>, <Line: -                && typeMatcher.equals(((AnnotationTypeMatcher<?>) other).typeMatcher);
+>, <Line: -        return typeMatcher.hashCode();
+>, <Line: -        return "ofAnnotationType(" + typeMatcher + ')';
+>]

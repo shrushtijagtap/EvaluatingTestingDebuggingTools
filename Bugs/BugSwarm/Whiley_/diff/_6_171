@@ -1,0 +1,15 @@
+[<Line: +function f(int|null x) -> (int r)
+>, <Line: +ensures x is null || r == x:
+>, <Line: +    //
+>, <Line: +    if x is int:
+>, <Line: +        return x
+>, <Line: +    else:
+>, <Line: +        return 0
+>, <Line: +public export method test():
+>, <Line: +    assume f(-1) == -1
+>, <Line: +    assume f(0)  == 0
+>, <Line: +    assume f(1)  == 1
+>, <Line: +    assume f(2)  == 2
+>, <Line: +    assume f(null) == 0
+>]
+[]

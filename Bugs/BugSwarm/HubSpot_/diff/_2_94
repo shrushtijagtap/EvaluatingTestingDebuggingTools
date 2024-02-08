@@ -1,0 +1,4 @@
+[<Line: +            url: "#{ config.apiRoot }/load-balancer/#{@groupId}/known-agents/#{@agentId}?authkey=#{ localStorage.getItem 'baragonAuthKey' }"
+>]
+[<Line: -            url: "#{ config.apiRoot }/load-balancer/#{@groupId}/known-agents/#{@agentId}?authkey=#{ config.authKey }"
+>]

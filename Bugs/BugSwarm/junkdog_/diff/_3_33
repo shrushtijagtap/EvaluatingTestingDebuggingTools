@@ -1,0 +1,16 @@
+[<Line: +package com.artemis.injection;
+>, <Line: +import com.artemis.World;
+>, <Line: +/**
+>, <Line: + * {@link FieldResolver} implementing this interface will have the {@link #setCache(InjectionCache)}
+>, <Line: + * method called during {@link FieldHandler#initialize(World)}, prior to {@link FieldResolver#initialize(World)}
+>, <Line: + * being called.
+>, <Line: + * @author Snorre E. Brekke
+>, <Line: + */
+>, <Line: +public interface UseInjectionCache {
+>, <Line: +    /**
+>, <Line: +     * @param cache used by the {@link FieldHandler}
+>, <Line: +     */
+>, <Line: +    void setCache(InjectionCache cache);
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,47 @@
+[]
+[<Line: -package com.artemis.io;
+>, <Line: -import com.artemis.Component;
+>, <Line: -import com.artemis.EntityEdit;
+>, <Line: -import com.artemis.World;
+>, <Line: -import com.artemis.component.ComponentX;
+>, <Line: -import com.artemis.component.ComponentY;
+>, <Line: -import com.artemis.component.ReusedComponent;
+>, <Line: -import com.esotericsoftware.jsonbeans.Json;
+>, <Line: -import com.esotericsoftware.jsonbeans.OutputType;
+>, <Line: -import com.google.gwt.junit.client.GWTTestCase;
+>, <Line: -import java.util.IdentityHashMap;
+>, <Line: -/**
+>, <Line: - * @author Daan van Yperen
+>, <Line: - */
+>, <Line: -public class ComponentLookupSerializerTest extends GWTTestCase {
+>, <Line: -	@Override
+>, <Line: -	public String getModuleName() {
+>, <Line: -		return "com.ArtemisTest";
+>, <Line: -	}
+>, <Line: -	public void test_read_write_read_components() {
+>, <Line: -		World world = new World();
+>, <Line: -		EntityEdit ee = world.createEntity().edit();
+>, <Line: -		ee.create(ComponentX.class);
+>, <Line: -		ee.create(ComponentY.class);
+>, <Line: -		ee.create(ReusedComponent.class);
+>, <Line: -		world.process();
+>, <Line: -		Json json = new Json(OutputType.javascript);
+>, <Line: -		ComponentLookupSerializer serializer = new ComponentLookupSerializer(world);
+>, <Line: -		IdentityHashMap<Class<? extends Component>, String> componentMap = serializer.classToIdentifierMap();
+>, <Line: -		json.setSerializer(IdentityHashMap.class, new ComponentLookupSerializer(world));
+>, <Line: -		String serialized = json.toJson(componentMap);
+>, <Line: -		IdentityHashMap map = json.fromJson(IdentityHashMap.class, serialized);
+>, <Line: -		assertArrayEquals(componentMap.values().toArray(), map.values().toArray());
+>, <Line: -		assertEquals(componentMap.keySet(), map.keySet());
+>, <Line: -	}
+>, <Line: -	/** Assert array equals for poor people. */
+>, <Line: -	protected void assertArrayEquals(Object[] a1, Object[] a2) {
+>, <Line: -		assertEquals(a1.length, a2.length);
+>, <Line: -		int index=0;
+>, <Line: -		for (Object o1 : a1) {
+>, <Line: -			final Object o2 = a2[index++];
+>, <Line: -			assertEquals(o1, o2);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -}
+>]

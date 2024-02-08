@@ -1,0 +1,156 @@
+[]
+[<Line: -package it.unibz.krdb.obda.owlrefplatform.core.dagjgrapht;
+>, <Line: -/*
+>, <Line: - * #%L
+>, <Line: - * ontop-reformulation-core
+>, <Line: - * %%
+>, <Line: - * Copyright (C) 2009 - 2014 Free University of Bozen-Bolzano
+>, <Line: - * %%
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: - * you may not use this file except in compliance with the License.
+>, <Line: - * You may obtain a copy of the License at
+>, <Line: - * 
+>, <Line: - *      http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - * 
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - * See the License for the specific language governing permissions and
+>, <Line: - * limitations under the License.
+>, <Line: - * #L%
+>, <Line: - */
+>, <Line: -import it.unibz.krdb.obda.ontology.ClassExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataPropertyExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataRangeExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.OClass;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectPropertyExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectSomeValuesFrom;
+>, <Line: -import it.unibz.krdb.obda.ontology.Ontology;
+>, <Line: -import it.unibz.krdb.obda.ontology.BinaryAxiom;
+>, <Line: -import org.jgrapht.graph.DefaultDirectedGraph;
+>, <Line: -import org.jgrapht.graph.DefaultEdge;
+>, <Line: -public class OntologyGraph {
+>, <Line: -	/**
+>, <Line: -	 *  graph representation of property inclusions in the ontology
+>, <Line: -	 *  
+>, <Line: -	 *  adds inclusions between the inverses of R and S if
+>, <Line: -	 *         R is declared a sub-property of S in the ontology
+>, <Line: -	 * 
+>, <Line: -	 * @param an ontology 
+>, <Line: -	 * @return the graph of the property inclusions 
+>, <Line: -	 */
+>, <Line: -	public static DefaultDirectedGraph<ObjectPropertyExpression,DefaultEdge> getObjectPropertyGraph (Ontology ontology) {
+>, <Line: -		DefaultDirectedGraph<ObjectPropertyExpression,DefaultEdge> graph 
+>, <Line: -							= new  DefaultDirectedGraph<ObjectPropertyExpression,DefaultEdge>(DefaultEdge.class);
+>, <Line: -		for (ObjectPropertyExpression role : ontology.getVocabulary().getObjectProperties()) {
+>, <Line: -			graph.addVertex(role);
+>, <Line: -			graph.addVertex(role.getInverse());
+>, <Line: -		}
+>, <Line: -		for (ObjectPropertyExpression role : ontology.getVocabulary().getAuxiliaryObjectProperties()) {
+>, <Line: -			graph.addVertex(role);
+>, <Line: -			graph.addVertex(role.getInverse());
+>, <Line: -		}
+>, <Line: -		// property inclusions
+>, <Line: -		for (BinaryAxiom<ObjectPropertyExpression> roleIncl : ontology.getSubObjectPropertyAxioms()) {
+>, <Line: -			// adds the direct edge and the inverse (e.g., R ISA S and R- ISA S-)
+>, <Line: -			graph.addEdge(roleIncl.getSub(), roleIncl.getSuper());			
+>, <Line: -			graph.addEdge(roleIncl.getSub().getInverse(), roleIncl.getSuper().getInverse());
+>, <Line: -		}
+>, <Line: -		return graph;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 *  graph representation of property inclusions in the ontology
+>, <Line: -	 *  
+>, <Line: -	 *  adds inclusions between the inverses of R and S if
+>, <Line: -	 *         R is declared a sub-property of S in the ontology
+>, <Line: -	 * 
+>, <Line: -	 * @param an ontology 
+>, <Line: -	 * @return the graph of the property inclusions 
+>, <Line: -	 */
+>, <Line: -	public static DefaultDirectedGraph<DataPropertyExpression,DefaultEdge> getDataPropertyGraph (Ontology ontology) {
+>, <Line: -		DefaultDirectedGraph<DataPropertyExpression,DefaultEdge> graph 
+>, <Line: -							= new  DefaultDirectedGraph<DataPropertyExpression,DefaultEdge>(DefaultEdge.class);
+>, <Line: -		for (DataPropertyExpression role : ontology.getVocabulary().getDataProperties()) 
+>, <Line: -			graph.addVertex(role);
+>, <Line: -		for (DataPropertyExpression role : ontology.getVocabulary().getAuxiliaryDataProperties()) 
+>, <Line: -			graph.addVertex(role);
+>, <Line: -		for (BinaryAxiom<DataPropertyExpression> roleIncl : ontology.getSubDataPropertyAxioms()) 
+>, <Line: -			graph.addEdge(roleIncl.getSub(), roleIncl.getSuper());
+>, <Line: -		return graph;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * graph representation of the class inclusions in the ontology
+>, <Line: -	 * 
+>, <Line: -	 * adds inclusions of the domain of R in the domain of S if
+>, <Line: -	 *           the provided property graph has an edge from R to S
+>, <Line: -	 *           (given the getPropertyGraph algorithm, this also 
+>, <Line: -	 *           implies inclusions of the range of R in the range of S
+>, <Line: -	 * 
+>, <Line: -	 * @param ontology
+>, <Line: -	 * @param propertyGraph obtained by getPropertyGraph
+>, <Line: -	 * @param chain adds all equivalences \exists R = \exists R-, so that 
+>, <Line: -	 *              the result can be used to construct Sigma chains
+>, <Line: -	 * @return the graph of the concept inclusions
+>, <Line: -	 */
+>, <Line: -	public static DefaultDirectedGraph<ClassExpression,DefaultEdge> getClassGraph (Ontology ontology, 
+>, <Line: -													DefaultDirectedGraph<ObjectPropertyExpression,DefaultEdge> objectPropertyGraph, 
+>, <Line: -													DefaultDirectedGraph<DataPropertyExpression,DefaultEdge> dataPropertyGraph,
+>, <Line: -													boolean chain) {
+>, <Line: -		DefaultDirectedGraph<ClassExpression,DefaultEdge> classGraph 
+>, <Line: -									= new  DefaultDirectedGraph<ClassExpression,DefaultEdge>(DefaultEdge.class);
+>, <Line: -		for (OClass concept : ontology.getVocabulary().getClasses()) 
+>, <Line: -			classGraph.addVertex(concept);
+>, <Line: -		// domains and ranges of roles
+>, <Line: -		for (ObjectPropertyExpression role : objectPropertyGraph.vertexSet()) 
+>, <Line: -			classGraph.addVertex(role.getDomain());			
+>, <Line: -		// edges between the domains and ranges for sub-properties
+>, <Line: -		for (DefaultEdge edge : objectPropertyGraph.edgeSet()) {
+>, <Line: -			ObjectPropertyExpression child = objectPropertyGraph.getEdgeSource(edge);
+>, <Line: -			ObjectPropertyExpression parent = objectPropertyGraph.getEdgeTarget(edge);
+>, <Line: -			classGraph.addEdge(child.getDomain(), parent.getDomain());		
+>, <Line: -		}
+>, <Line: -		// domains and ranges of roles
+>, <Line: -		for (DataPropertyExpression role : dataPropertyGraph.vertexSet()) 
+>, <Line: -			classGraph.addVertex(role.getDomain());			
+>, <Line: -		// edges between the domains and ranges for sub-properties
+>, <Line: -		for (DefaultEdge edge : dataPropertyGraph.edgeSet()) {
+>, <Line: -			DataPropertyExpression child = dataPropertyGraph.getEdgeSource(edge);
+>, <Line: -			DataPropertyExpression parent = dataPropertyGraph.getEdgeTarget(edge);
+>, <Line: -			classGraph.addEdge(child.getDomain(), parent.getDomain());		
+>, <Line: -		}
+>, <Line: -		// edges between the domain and the range of each property for the chain graph
+>, <Line: -		if (chain)  {
+>, <Line: -			for (ObjectPropertyExpression role : objectPropertyGraph.vertexSet()) {
+>, <Line: -				ObjectSomeValuesFrom existsRole = role.getDomain();
+>, <Line: -				ObjectSomeValuesFrom existsRoleInv = role.getRange();
+>, <Line: -				classGraph.addEdge(existsRoleInv, existsRole);				
+>, <Line: -				classGraph.addEdge(existsRole, existsRoleInv);				
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		// class inclusions from the ontology
+>, <Line: -		for (BinaryAxiom<ClassExpression> clsIncl : ontology.getSubClassAxioms()) 
+>, <Line: -			classGraph.addEdge(clsIncl.getSub(), clsIncl.getSuper());
+>, <Line: -		return classGraph;
+>, <Line: -	}
+>, <Line: -	public static DefaultDirectedGraph<DataRangeExpression,DefaultEdge> getDataRangeGraph (Ontology ontology, 
+>, <Line: -							DefaultDirectedGraph<DataPropertyExpression,DefaultEdge> dataPropertyGraph) {
+>, <Line: -		DefaultDirectedGraph<DataRangeExpression,DefaultEdge> dataRangeGraph 
+>, <Line: -					= new  DefaultDirectedGraph<DataRangeExpression,DefaultEdge>(DefaultEdge.class);
+>, <Line: -		// ranges of roles
+>, <Line: -		for (DataPropertyExpression role : dataPropertyGraph.vertexSet()) 
+>, <Line: -			dataRangeGraph.addVertex(role.getRange());			
+>, <Line: -		// edges between the ranges for sub-properties
+>, <Line: -		for (DefaultEdge edge : dataPropertyGraph.edgeSet()) {
+>, <Line: -			DataPropertyExpression child = dataPropertyGraph.getEdgeSource(edge);
+>, <Line: -			DataPropertyExpression parent = dataPropertyGraph.getEdgeTarget(edge);
+>, <Line: -			dataRangeGraph.addEdge(child.getRange(), parent.getRange());		
+>, <Line: -		}
+>, <Line: -		// data range inclusions from the ontology
+>, <Line: -		for (BinaryAxiom<DataRangeExpression> clsIncl : ontology.getSubDataRangeAxioms()) {
+>, <Line: -			dataRangeGraph.addVertex(clsIncl.getSuper()); // Datatype is not among the vertices from the start
+>, <Line: -			dataRangeGraph.addEdge(clsIncl.getSub(), clsIncl.getSuper());
+>, <Line: -		}
+>, <Line: -		return dataRangeGraph;
+>, <Line: -	}
+>, <Line: -}
+>]

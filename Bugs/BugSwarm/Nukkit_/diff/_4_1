@@ -1,0 +1,36 @@
+[<Line: +package cn.nukkit.block;
+>, <Line: +import cn.nukkit.item.Item;
+>, <Line: +import cn.nukkit.item.Tool;
+>, <Line: +import java.util.Random;
+>, <Line: +/*
+>, <Line: + * Created on 2015/12/11 by Pub4Game.
+>, <Line: + * Package package cn.nukkit.block in project Nukkit .
+>, <Line: +*/
+>, <Line: +public class Melon extends Transparent {
+>, <Line: +    public Melon() {
+>, <Line: +        this(0);
+>, <Line: +    }
+>, <Line: +    public Melon(int meta) {
+>, <Line: +        super(0);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int getId() {
+>, <Line: +        return MELON_BLOCK;
+>, <Line: +    }
+>, <Line: +    public String getName() {
+>, <Line: +        return "Melon Block";
+>, <Line: +    }
+>, <Line: +    public double getHardness() {
+>, <Line: +        return 1;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int[][] getDrops(Item item) {
+>, <Line: +        return new int[][]{new int[]{Item.MELON_SLICE, 0, new Random().nextInt(4) + 3}};
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public int getToolType() {
+>, <Line: +        return Tool.TYPE_AXE;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

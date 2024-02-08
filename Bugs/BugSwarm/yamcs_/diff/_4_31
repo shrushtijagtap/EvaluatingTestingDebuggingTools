@@ -1,0 +1,17 @@
+[<Line: +    public void getContainer(RestRequest req) throws HttpException {
+>, <Line: +            getContainerInfo(req);
+>, <Line: +            listContainers(req);
+>, <Line: +    private void getContainerInfo(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, cinfo, SchemaMdb.ContainerInfo.WRITE);
+>, <Line: +    private void listContainers(RestRequest req) throws HttpException {
+>, <Line: +        sendOK(req, responseb.build(), SchemaRest.ListContainerInfoResponse.WRITE);
+>]
+[<Line: -import io.netty.channel.ChannelFuture;
+>, <Line: -    public ChannelFuture getContainer(RestRequest req) throws HttpException {
+>, <Line: -            return getContainerInfo(req);
+>, <Line: -            return listContainers(req);
+>, <Line: -    private ChannelFuture getContainerInfo(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, cinfo, SchemaMdb.ContainerInfo.WRITE);
+>, <Line: -    private ChannelFuture listContainers(RestRequest req) throws HttpException {
+>, <Line: -        return sendOK(req, responseb.build(), SchemaRest.ListContainerInfoResponse.WRITE);
+>]

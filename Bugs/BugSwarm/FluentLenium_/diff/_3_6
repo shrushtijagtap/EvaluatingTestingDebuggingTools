@@ -1,0 +1,11 @@
+[<Line: +import static org.mockito.Mockito.times;
+>, <Line: +import static org.mockito.Mockito.verify;
+>, <Line: +        verify(listenerAdapter, times(2))
+>, <Line: +                .onConfigurationFailure(Mockito.any(ITestResult.class));
+>, <Line: +        verify(listenerAdapter).onTestSkipped(Mockito.any(ITestResult.class));
+>, <Line: +        verify(listenerAdapter, Mockito.never()).onTestSuccess(Mockito.any(ITestResult.class));
+>]
+[<Line: -        Mockito.verify(listenerAdapter).onConfigurationFailure(Mockito.any(ITestResult.class));
+>, <Line: -        Mockito.verify(listenerAdapter).onTestSkipped(Mockito.any(ITestResult.class));
+>, <Line: -        Mockito.verify(listenerAdapter, Mockito.never()).onTestSuccess(Mockito.any(ITestResult.class));
+>]

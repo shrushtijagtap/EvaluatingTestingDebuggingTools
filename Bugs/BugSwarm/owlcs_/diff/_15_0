@@ -1,0 +1,6 @@
+[<Line: +import java.util.Collection;
+>, <Line: +    boolean isLocal(OWLAxiom axiom, Collection<OWLEntity> signature);
+>]
+[<Line: -import java.util.Set;
+>, <Line: -    boolean isLocal(OWLAxiom axiom, Set<? extends OWLEntity> signature);
+>]

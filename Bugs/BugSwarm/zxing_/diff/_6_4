@@ -1,0 +1,18 @@
+[<Line: +      while ((i = rawText.indexOf('\n', i)) >= 0) { // Really, end in \r\n
+>, <Line: +            (rawText.charAt(i + 1) == ' ' ||        // this is only a continuation
+>, <Line: +             rawText.charAt(i + 1) == '\t')) {
+>, <Line: +                   ((i >= 1 && rawText.charAt(i - 1) == '=') || // this is a continuation
+>, <Line: +                    (i >= 2 && rawText.charAt(i - 2) == '='))) {
+>, <Line: +        if (i >= 1 && rawText.charAt(i - 1) == '\r') {
+>, <Line: +            char nextChar = value.charAt(i + 1);
+>, <Line: +              char nextNextChar = value.charAt(i + 2);
+>]
+[<Line: -      while ((i = rawText.indexOf((int) '\n', i)) >= 0) { // Really, end in \r\n
+>, <Line: -            (rawText.charAt(i+1) == ' ' ||        // this is only a continuation
+>, <Line: -             rawText.charAt(i+1) == '\t')) {
+>, <Line: -                   ((i >= 1 && rawText.charAt(i-1) == '=') || // this is a continuation
+>, <Line: -                    (i >= 2 && rawText.charAt(i-2) == '='))) {
+>, <Line: -        if (i >= 1 && rawText.charAt(i-1) == '\r') {
+>, <Line: -            char nextChar = value.charAt(i+1);
+>, <Line: -              char nextNextChar = value.charAt(i+2);
+>]

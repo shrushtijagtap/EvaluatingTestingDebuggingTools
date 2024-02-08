@@ -1,0 +1,19 @@
+[<Line: +    // max standard deviation = 10ms
+>, <Line: +    static final double MAX_STD_NS = 10000000d;
+>, <Line: +    // max mean deviation = 2ms
+>, <Line: +    static final double MAX_MEAN_DEVIATION_NS = 2000000d;
+>, <Line: +          "Std is above threshold of %sns: %sns.", MAX_STD_NS,
+>, <Line: +          sum.getStandardDeviation(), interArrivalTimes);
+>, <Line: +          "Mean interval is above threshold of %sns: %s.",
+>, <Line: +          MAX_MEAN_DEVIATION_NS, sum.getMean());
+>, <Line: +    static final double UPPER_LIMIT_FACTOR = 1.2d;
+>]
+[<Line: -    // max standard deviation = 5ms
+>, <Line: -    static final double MAX_STD_NS = 5000000d;
+>, <Line: -    // max mean deviation = 1ms
+>, <Line: -    static final double MAX_MEAN_DEVIATION_NS = 1000000d;
+>, <Line: -          "Std is above threshold of 5ms: %s.", sum.getStandardDeviation(),
+>, <Line: -          interArrivalTimes);
+>, <Line: -          "Mean interval is above threshold of 1ms: %s.", sum.getMean());
+>, <Line: -    static final double UPPER_LIMIT_FACTOR = 1.1d;
+>]

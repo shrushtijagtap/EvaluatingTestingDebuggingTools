@@ -1,0 +1,6 @@
+[<Line: +package com.puppycrawl.tools.checkstyle.checks.blocks;
+>, <Line: +class InputEmptyCase
+>]
+[<Line: -package com.puppycrawl.tools.checkstyle.checks.blocks.emptyblock;
+>, <Line: -class InputEmptyBlockCase
+>]

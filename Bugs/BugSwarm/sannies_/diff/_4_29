@@ -1,0 +1,5 @@
+[<Line: +        H264AnnexBTrack b = new H264AnnexBTrack(StandardMp4WriterTest.class.getResourceAsStream("/org/mp4parser/streaming/input/h264/tos.h264"));
+>]
+[<Line: -import java.io.FileInputStream;
+>, <Line: -        H264AnnexBTrack b = new H264AnnexBTrack(new FileInputStream("C:\\dev\\mp4parser\\out.264"));
+>]

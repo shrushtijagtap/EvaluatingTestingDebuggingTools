@@ -1,0 +1,13 @@
+[<Line: +package org.kairosdb.core.datastore;
+>, <Line: +import org.kairosdb.core.PluginException;
+>, <Line: +import java.io.File;
+>, <Line: +import java.io.IOException;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 5/18/17.
+>, <Line: + */
+>, <Line: +public interface QueryPostProcessingPlugin extends QueryPlugin
+>, <Line: +{
+>, <Line: +	File processQueryResults(File queryResults) throws IOException, PluginException;
+>, <Line: +}
+>]
+[]

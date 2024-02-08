@@ -1,0 +1,18 @@
+[<Line: +ensures index is int ==> all { i in 0 .. index | items[i] != item }
+>, <Line: +ensures index is null ==> all { i in 0 .. |items| | items[i] != item }:
+>, <Line: +ensures index is int ==> all { i in start .. index | items[i] != item }
+>, <Line: +ensures index is null ==> all { i in start .. |items| | items[i] != item }:
+>, <Line: +    where all { j in start .. i | items[j] != item }:
+>, <Line: +ensures index is int ==> all { i in (index+1) .. |items| | items[i] != item }
+>, <Line: +ensures index is null ==> all { i in 0 .. |items| | items[i] != item }:
+>, <Line: +    where all { j in i..|items| | items[j] != item }:
+>]
+[<Line: -ensures index is int ==> no { i in 0 .. index | items[i] == item }
+>, <Line: -ensures index is null ==> no { i in 0 .. |items| | items[i] == item }:
+>, <Line: -ensures index is int ==> no { i in start .. index | items[i] == item }
+>, <Line: -ensures index is null ==> no { i in start .. |items| | items[i] == item }:
+>, <Line: -    where no { j in start .. i | items[j] == item }:
+>, <Line: -ensures index is int ==> no { i in (index+1) .. |items| | items[i] == item }
+>, <Line: -ensures index is null ==> no { i in 0 .. |items| | items[i] == item }:
+>, <Line: -    where no { j in i..|items| | items[j] == item }:
+>]

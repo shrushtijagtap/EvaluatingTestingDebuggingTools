@@ -1,0 +1,22 @@
+[<Line: +        LOGGER.info("     - Window size: {}", Integer.valueOf(fastPruningWindowSize));
+>, <Line: +        LOGGER.info("Initial axiom count: {}", Integer.valueOf(debuggingAxioms.size()));
+>, <Line: +            LOGGER.info("Expanding axioms (expansion {})", Integer.valueOf(expansionCount));
+>, <Line: +            LOGGER.info("    ... expanded by {}", Integer.valueOf(numberAdded));
+>, <Line: +        LOGGER.info("Total number of axioms added: {}", Integer.valueOf(totalAdded));
+>, <Line: +        LOGGER.info("FOUND CLASH! Pruning {} axioms...", Integer.valueOf(debuggingAxioms.size()));
+>, <Line: +        LOGGER.info("... end of fast pruning. Axioms remaining: {}", Integer.valueOf(debuggingAxioms.size()));
+>, <Line: +        LOGGER.info("Performed {} satisfiability tests during fast pruning", Integer.valueOf(satTestCount));
+>, <Line: +        LOGGER.info("Performed {} satisfiability tests during slow pruning", Integer.valueOf(satTestCount));
+>, <Line: +        LOGGER.info("Total number of satisfiability tests performed: {}", Integer.valueOf(totalSatTests));
+>]
+[<Line: -        LOGGER.info("     - Window size: {}", fastPruningWindowSize);
+>, <Line: -        LOGGER.info("Initial axiom count: {}", debuggingAxioms.size());
+>, <Line: -            LOGGER.info("Expanding axioms (expansion {})", expansionCount);
+>, <Line: -            LOGGER.info("    ... expanded by {}", numberAdded);
+>, <Line: -        LOGGER.info("Total number of axioms added: {}", totalAdded);
+>, <Line: -        LOGGER.info("FOUND CLASH! Pruning {} axioms...", debuggingAxioms.size());
+>, <Line: -        LOGGER.info("... end of fast pruning. Axioms remaining: {}", debuggingAxioms.size());
+>, <Line: -        LOGGER.info("Performed {} satisfiability tests during fast pruning", satTestCount);
+>, <Line: -        LOGGER.info("Performed {} satisfiability tests during slow pruning", satTestCount);
+>, <Line: -        LOGGER.info("Total number of satisfiability tests performed: {}", totalSatTests);
+>]

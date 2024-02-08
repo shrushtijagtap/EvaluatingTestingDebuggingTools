@@ -1,0 +1,4 @@
+[<Line: +    url: => "#{ config.apiRoot }/load-balancer/#{@groupId}/known-agents"
+>]
+[<Line: -    url: => "#{ config.apiRoot }/load-balancer/#{@groupId}/known-agents?authkey=#{ config.authKey }"
+>]

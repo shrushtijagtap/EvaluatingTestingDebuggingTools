@@ -1,0 +1,18 @@
+[<Line: +    assertEquals(8, info.matrixWidth);
+>, <Line: +    assertEquals(8, info.matrixHeight);
+>, <Line: +    assertEquals(16, info.matrixWidth);
+>, <Line: +    assertEquals(6, info.matrixHeight);
+>, <Line: +    assertEquals(14, info.matrixWidth);
+>, <Line: +    assertEquals(6, info.matrixHeight);
+>, <Line: +    assertEquals(14, info.matrixWidth);
+>, <Line: +    assertEquals(14, info.matrixHeight);
+>]
+[<Line: -    assertEquals(8, info.getMatrixWidth());
+>, <Line: -    assertEquals(8, info.getMatrixHeight());
+>, <Line: -    assertEquals(16, info.getMatrixWidth());
+>, <Line: -    assertEquals(6, info.getMatrixHeight());
+>, <Line: -    assertEquals(14, info.getMatrixWidth());
+>, <Line: -    assertEquals(6, info.getMatrixHeight());
+>, <Line: -    assertEquals(14, info.getMatrixWidth());
+>, <Line: -    assertEquals(14, info.getMatrixHeight());
+>]

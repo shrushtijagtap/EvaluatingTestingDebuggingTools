@@ -1,0 +1,73 @@
+[<Line: +package com.fincatto.nfe310.classes.nota;
+>, <Line: +import java.math.BigDecimal;
+>, <Line: +import org.simpleframework.xml.Element;
+>, <Line: +import com.fincatto.nfe310.classes.NFBase;
+>, <Line: +import com.fincatto.nfe310.validadores.BigDecimalParser;
+>, <Line: +public class NFNotaaInfoItemImpostoICMSUFDestino extends NFBase {
+>, <Line: +    @Element(name = "vBCUFDest", required = true)
+>, <Line: +    private String valorBaseCalculoDestino;
+>, <Line: +    @Element(name = "pFCPUFDest", required = true)
+>, <Line: +    private String percentualRelativoFundoCombatePobrezaDestino;
+>, <Line: +    @Element(name = "pICMSUFDest", required = true)
+>, <Line: +    private String percentualAliquotaInternaDestino;
+>, <Line: +    @Element(name = "pICMSInter", required = true)
+>, <Line: +    private String percentualInterestadual;
+>, <Line: +    @Element(name = "pICMSInterPart", required = true)
+>, <Line: +    private String percentualProvisorioPartilha;
+>, <Line: +    @Element(name = "vFCPUFDest", required = true)
+>, <Line: +    private String valorRelativoFundoCombatePobrezaDestino;
+>, <Line: +    @Element(name = "vICMSUFDest", required = true)
+>, <Line: +    private String valorICMSInterestadualDestino;
+>, <Line: +    @Element(name = "vICMSUFRemet", required = true)
+>, <Line: +    private String valorICMSInterestadualRemetente;
+>, <Line: +    public String getValorBaseCalculoDestino() {
+>, <Line: +        return this.valorBaseCalculoDestino;
+>, <Line: +    }
+>, <Line: +    public void setValorBaseCalculoDestino(final BigDecimal valorBaseCalculoDestino) {
+>, <Line: +        this.valorBaseCalculoDestino = BigDecimalParser.tamanho15Com2CasasDecimais(valorBaseCalculoDestino);
+>, <Line: +    }
+>, <Line: +    public String getPercentualRelativoFundoCombatePobrezaDestino() {
+>, <Line: +        return this.percentualRelativoFundoCombatePobrezaDestino;
+>, <Line: +    }
+>, <Line: +    public void setPercentualRelativoFundoCombatePobrezaDestino(final BigDecimal percentualRelativoFundoCombatePobrezaDestino) {
+>, <Line: +        this.percentualRelativoFundoCombatePobrezaDestino = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualRelativoFundoCombatePobrezaDestino);
+>, <Line: +    }
+>, <Line: +    public String getPercentualAliquotaInternaDestino() {
+>, <Line: +        return this.percentualAliquotaInternaDestino;
+>, <Line: +    }
+>, <Line: +    public void setPercentualAliquotaInternaDestino(final BigDecimal percentualAliquotaInternaDestino) {
+>, <Line: +        this.percentualAliquotaInternaDestino = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualAliquotaInternaDestino);
+>, <Line: +    }
+>, <Line: +    public String getPercentualInterestadual() {
+>, <Line: +        return this.percentualInterestadual;
+>, <Line: +    }
+>, <Line: +    public void setPercentualInterestadual(final BigDecimal percentualInterestadual) {
+>, <Line: +        this.percentualInterestadual = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualInterestadual);
+>, <Line: +    }
+>, <Line: +    public String getPercentualProvisorioPartilha() {
+>, <Line: +        return this.percentualProvisorioPartilha;
+>, <Line: +    }
+>, <Line: +    public void setPercentualProvisorioPartilha(final BigDecimal percentualProvisorioPartilha) {
+>, <Line: +        this.percentualProvisorioPartilha = BigDecimalParser.tamanho7ComAte4CasasDecimais(percentualProvisorioPartilha);
+>, <Line: +    }
+>, <Line: +    public String getValorRelativoFundoCombatePobrezaDestino() {
+>, <Line: +        return this.valorRelativoFundoCombatePobrezaDestino;
+>, <Line: +    }
+>, <Line: +    public void setValorRelativoFundoCombatePobrezaDestino(final BigDecimal valorRelativoFundoCombatePobrezaDestino) {
+>, <Line: +        this.valorRelativoFundoCombatePobrezaDestino = BigDecimalParser.tamanho15Com2CasasDecimais(valorRelativoFundoCombatePobrezaDestino);
+>, <Line: +    }
+>, <Line: +    public String getValorICMSInterestadualDestino() {
+>, <Line: +        return this.valorICMSInterestadualDestino;
+>, <Line: +    }
+>, <Line: +    public void setValorICMSInterestadualDestino(final BigDecimal valorICMSInterestadualDestino) {
+>, <Line: +        this.valorICMSInterestadualDestino = BigDecimalParser.tamanho15Com2CasasDecimais(valorICMSInterestadualDestino);
+>, <Line: +    }
+>, <Line: +    public String getValorICMSInterestadualRemetente() {
+>, <Line: +        return this.valorICMSInterestadualRemetente;
+>, <Line: +    }
+>, <Line: +    public void setValorICMSInterestadualRemetente(final BigDecimal valorICMSInterestadualRemetente) {
+>, <Line: +        this.valorICMSInterestadualRemetente = BigDecimalParser.tamanho15Com2CasasDecimais(valorICMSInterestadualRemetente);
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

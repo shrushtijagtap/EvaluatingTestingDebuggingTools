@@ -1,0 +1,577 @@
+[<Line: + Copyright (c) 2007-2013 IOLA and Ole Laursen.
+>, <Line: + Licensed under the MIT license.
+>, <Line: + The plugin supports these options:
+>, <Line: + selection: {
+>, <Line: + mode: null or "x" or "y" or "xy",
+>, <Line: + color: color,
+>, <Line: + shape: "round" or "miter" or "bevel",
+>, <Line: + minSize: number of pixels
+>, <Line: + }
+>, <Line: + Selection support is enabled by setting the mode to one of "x", "y" or "xy".
+>, <Line: + In "x" mode, the user will only be able to specify the x range, similarly for
+>, <Line: + "y" mode. For "xy", the selection becomes a rectangle where both ranges can be
+>, <Line: + specified. "color" is color of the selection (if you need to change the color
+>, <Line: + later on, you can get to it with plot.getOptions().selection.color). "shape"
+>, <Line: + is the shape of the corners of the selection.
+>, <Line: + "minSize" is the minimum size a selection can be in pixels. This value can
+>, <Line: + be customized to determine the smallest size a selection can be and still
+>, <Line: + have the selection rectangle be displayed. When customizing this value, the
+>, <Line: + fact that it refers to pixels, not axis units must be taken into account.
+>, <Line: + Thus, for example, if there is a bar graph in time mode with BarWidth set to 1
+>, <Line: + minute, setting "minSize" to 1 will not make the minimum selection size 1
+>, <Line: + minute, but rather 1 pixel. Note also that setting "minSize" to 0 will prevent
+>, <Line: + "plotunselected" events from being fired when the user clicks the mouse without
+>, <Line: + dragging.
+>, <Line: + When selection support is enabled, a "plotselected" event will be emitted on
+>, <Line: + the DOM element you passed into the plot function. The event handler gets a
+>, <Line: + parameter with the ranges selected on the axes, like this:
+>, <Line: + placeholder.bind( "plotselected", function( event, ranges ) {
+>, <Line: + alert("You selected " + ranges.xaxis.from + " to " + ranges.xaxis.to)
+>, <Line: + // similar for yaxis - with multiple axes, the extra ones are in
+>, <Line: + // x2axis, x3axis, ...
+>, <Line: + });
+>, <Line: + The "plotselected" event is only fired when the user has finished making the
+>, <Line: + selection. A "plotselecting" event is fired during the process with the same
+>, <Line: + parameters as the "plotselected" event, in case you want to know what's
+>, <Line: + happening while it's happening,
+>, <Line: + A "plotunselected" event with no arguments is emitted when the user clicks the
+>, <Line: + mouse to remove the selection. As stated above, setting "minSize" to 0 will
+>, <Line: + destroy this behavior.
+>, <Line: + The plugin allso adds the following methods to the plot object:
+>, <Line: + - setSelection( ranges, preventEvent )
+>, <Line: + Set the selection rectangle. The passed in ranges is on the same form as
+>, <Line: + returned in the "plotselected" event. If the selection mode is "x", you
+>, <Line: + should put in either an xaxis range, if the mode is "y" you need to put in
+>, <Line: + an yaxis range and both xaxis and yaxis if the selection mode is "xy", like
+>, <Line: + this:
+>, <Line: + setSelection({ xaxis: { from: 0, to: 10 }, yaxis: { from: 40, to: 60 } });
+>, <Line: + setSelection will trigger the "plotselected" event when called. If you don't
+>, <Line: + want that to happen, e.g. if you're inside a "plotselected" handler, pass
+>, <Line: + true as the second parameter. If you are using multiple axes, you can
+>, <Line: + specify the ranges on any of those, e.g. as x2axis/x3axis/... instead of
+>, <Line: + xaxis, the plugin picks the first one it sees.
+>, <Line: + - clearSelection( preventEvent )
+>, <Line: + Clear the selection rectangle. Pass in true to avoid getting a
+>, <Line: + "plotunselected" event.
+>, <Line: + - getSelection()
+>, <Line: + Returns the current selection in the same format as the "plotselected"
+>, <Line: + event. If there's currently no selection, the function returns null.
+>, <Line: + */
+>, <Line: +	function init(plot) {
+>, <Line: +		var selection = {
+>, <Line: +			first: {x: -1, y: -1}, second: {x: -1, y: -1},
+>, <Line: +			show: false,
+>, <Line: +			active: false
+>, <Line: +		};
+>, <Line: +		// FIXME: The drag handling implemented here should be
+>, <Line: +		// abstracted out, there's some similar code from a library in
+>, <Line: +		// the navigation plugin, this should be massaged a bit to fit
+>, <Line: +		// the Flot cases here better and reused. Doing this would
+>, <Line: +		// make this plugin much slimmer.
+>, <Line: +		var savedhandlers = {};
+>, <Line: +		var mouseUpHandler = null;
+>, <Line: +		function onMouseMove(e) {
+>, <Line: +			if (selection.active) {
+>, <Line: +				updateSelection(e);
+>, <Line: +				plot.getPlaceholder().trigger("plotselecting", [getSelection()]);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		function onMouseDown(e) {
+>, <Line: +			if (e.which != 1)  // only accept left-click
+>, <Line: +				return;
+>, <Line: +			// cancel out any text selections
+>, <Line: +			document.body.focus();
+>, <Line: +			// prevent text selection and drag in old-school browsers
+>, <Line: +			if (document.onselectstart !== undefined && savedhandlers.onselectstart == null) {
+>, <Line: +				savedhandlers.onselectstart = document.onselectstart;
+>, <Line: +				document.onselectstart = function () {
+>, <Line: +					return false;
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +			if (document.ondrag !== undefined && savedhandlers.ondrag == null) {
+>, <Line: +				savedhandlers.ondrag = document.ondrag;
+>, <Line: +				document.ondrag = function () {
+>, <Line: +					return false;
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +			setSelectionPos(selection.first, e);
+>, <Line: +			selection.active = true;
+>, <Line: +			// this is a bit silly, but we have to use a closure to be
+>, <Line: +			// able to whack the same handler again
+>, <Line: +			mouseUpHandler = function (e) {
+>, <Line: +				onMouseUp(e);
+>, <Line: +			};
+>, <Line: +			$(document).one("mouseup", mouseUpHandler);
+>, <Line: +		}
+>, <Line: +		function onMouseUp(e) {
+>, <Line: +			mouseUpHandler = null;
+>, <Line: +			// revert drag stuff for old-school browsers
+>, <Line: +			if (document.onselectstart !== undefined)
+>, <Line: +				document.onselectstart = savedhandlers.onselectstart;
+>, <Line: +			if (document.ondrag !== undefined)
+>, <Line: +				document.ondrag = savedhandlers.ondrag;
+>, <Line: +			// no more dragging
+>, <Line: +			selection.active = false;
+>, <Line: +			updateSelection(e);
+>, <Line: +			if (selectionIsSane())
+>, <Line: +				triggerSelectedEvent();
+>, <Line: +			else {
+>, <Line: +				// this counts as a clear
+>, <Line: +				plot.getPlaceholder().trigger("plotunselected", []);
+>, <Line: +				plot.getPlaceholder().trigger("plotselecting", [null]);
+>, <Line: +			}
+>, <Line: +			return false;
+>, <Line: +		}
+>, <Line: +		function getSelection() {
+>, <Line: +			if (!selectionIsSane())
+>, <Line: +				return null;
+>, <Line: +			if (!selection.show) return null;
+>, <Line: +			var r = {}, c1 = selection.first, c2 = selection.second;
+>, <Line: +			$.each(plot.getAxes(), function (name, axis) {
+>, <Line: +				if (axis.used) {
+>, <Line: +					var p1 = axis.c2p(c1[axis.direction]), p2 = axis.c2p(c2[axis.direction]);
+>, <Line: +					r[name] = {from: Math.min(p1, p2), to: Math.max(p1, p2)};
+>, <Line: +				}
+>, <Line: +			});
+>, <Line: +			return r;
+>, <Line: +		}
+>, <Line: +		function triggerSelectedEvent() {
+>, <Line: +			var r = getSelection();
+>, <Line: +			plot.getPlaceholder().trigger("plotselected", [r]);
+>, <Line: +			// backwards-compat stuff, to be removed in future
+>, <Line: +			if (r.xaxis && r.yaxis)
+>, <Line: +				plot.getPlaceholder().trigger("selected", [{
+>, <Line: +					x1: r.xaxis.from,
+>, <Line: +					y1: r.yaxis.from,
+>, <Line: +					x2: r.xaxis.to,
+>, <Line: +					y2: r.yaxis.to
+>, <Line: +				}]);
+>, <Line: +		}
+>, <Line: +		function clamp(min, value, max) {
+>, <Line: +			return value < min ? min : (value > max ? max : value);
+>, <Line: +		}
+>, <Line: +		function setSelectionPos(pos, e) {
+>, <Line: +			var o = plot.getOptions();
+>, <Line: +			var offset = plot.getPlaceholder().offset();
+>, <Line: +			var plotOffset = plot.getPlotOffset();
+>, <Line: +			pos.x = clamp(0, e.pageX - offset.left - plotOffset.left, plot.width());
+>, <Line: +			pos.y = clamp(0, e.pageY - offset.top - plotOffset.top, plot.height());
+>, <Line: +			if (o.selection.mode == "y")
+>, <Line: +				pos.x = pos == selection.first ? 0 : plot.width();
+>, <Line: +			if (o.selection.mode == "x")
+>, <Line: +				pos.y = pos == selection.first ? 0 : plot.height();
+>, <Line: +		}
+>, <Line: +		function updateSelection(pos) {
+>, <Line: +			if (pos.pageX == null)
+>, <Line: +				return;
+>, <Line: +			setSelectionPos(selection.second, pos);
+>, <Line: +			if (selectionIsSane()) {
+>, <Line: +				selection.show = true;
+>, <Line: +				plot.triggerRedrawOverlay();
+>, <Line: +			}
+>, <Line: +			else
+>, <Line: +				clearSelection(true);
+>, <Line: +		}
+>, <Line: +		function clearSelection(preventEvent) {
+>, <Line: +			if (selection.show) {
+>, <Line: +				selection.show = false;
+>, <Line: +				plot.triggerRedrawOverlay();
+>, <Line: +				if (!preventEvent)
+>, <Line: +					plot.getPlaceholder().trigger("plotunselected", []);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		// function taken from markings support in Flot
+>, <Line: +		function extractRange(ranges, coord) {
+>, <Line: +			var axis, from, to, key, axes = plot.getAxes();
+>, <Line: +			for (var k in axes) {
+>, <Line: +				axis = axes[k];
+>, <Line: +				if (axis.direction == coord) {
+>, <Line: +					key = coord + axis.n + "axis";
+>, <Line: +					if (!ranges[key] && axis.n == 1)
+>, <Line: +						key = coord + "axis"; // support x1axis as xaxis
+>, <Line: +					if (ranges[key]) {
+>, <Line: +						from = ranges[key].from;
+>, <Line: +						to = ranges[key].to;
+>, <Line: +						break;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			// backwards-compat stuff - to be removed in future
+>, <Line: +			if (!ranges[key]) {
+>, <Line: +				axis = coord == "x" ? plot.getXAxes()[0] : plot.getYAxes()[0];
+>, <Line: +				from = ranges[coord + "1"];
+>, <Line: +				to = ranges[coord + "2"];
+>, <Line: +			}
+>, <Line: +			// auto-reverse as an added bonus
+>, <Line: +			if (from != null && to != null && from > to) {
+>, <Line: +				var tmp = from;
+>, <Line: +				from = to;
+>, <Line: +				to = tmp;
+>, <Line: +			}
+>, <Line: +			return {from: from, to: to, axis: axis};
+>, <Line: +		}
+>, <Line: +		function setSelection(ranges, preventEvent) {
+>, <Line: +			var axis, range, o = plot.getOptions();
+>, <Line: +			if (o.selection.mode == "y") {
+>, <Line: +				selection.first.x = 0;
+>, <Line: +				selection.second.x = plot.width();
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				range = extractRange(ranges, "x");
+>, <Line: +				selection.first.x = range.axis.p2c(range.from);
+>, <Line: +				selection.second.x = range.axis.p2c(range.to);
+>, <Line: +			}
+>, <Line: +			if (o.selection.mode == "x") {
+>, <Line: +				selection.first.y = 0;
+>, <Line: +				selection.second.y = plot.height();
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				range = extractRange(ranges, "y");
+>, <Line: +				selection.first.y = range.axis.p2c(range.from);
+>, <Line: +				selection.second.y = range.axis.p2c(range.to);
+>, <Line: +			}
+>, <Line: +			selection.show = true;
+>, <Line: +			plot.triggerRedrawOverlay();
+>, <Line: +			if (!preventEvent && selectionIsSane())
+>, <Line: +				triggerSelectedEvent();
+>, <Line: +		}
+>, <Line: +		function selectionIsSane() {
+>, <Line: +			var minSize = plot.getOptions().selection.minSize;
+>, <Line: +			return Math.abs(selection.second.x - selection.first.x) >= minSize &&
+>, <Line: +				Math.abs(selection.second.y - selection.first.y) >= minSize;
+>, <Line: +		}
+>, <Line: +		plot.clearSelection = clearSelection;
+>, <Line: +		plot.setSelection = setSelection;
+>, <Line: +		plot.getSelection = getSelection;
+>, <Line: +		plot.hooks.bindEvents.push(function (plot, eventHolder) {
+>, <Line: +			var o = plot.getOptions();
+>, <Line: +			if (o.selection.mode != null) {
+>, <Line: +				eventHolder.mousemove(onMouseMove);
+>, <Line: +				eventHolder.mousedown(onMouseDown);
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +		plot.hooks.drawOverlay.push(function (plot, ctx) {
+>, <Line: +			// draw selection
+>, <Line: +			if (selection.show && selectionIsSane()) {
+>, <Line: +				var plotOffset = plot.getPlotOffset();
+>, <Line: +				var o = plot.getOptions();
+>, <Line: +				ctx.save();
+>, <Line: +				ctx.translate(plotOffset.left, plotOffset.top);
+>, <Line: +				var c = $.color.parse(o.selection.color);
+>, <Line: +				ctx.strokeStyle = c.scale('a', 0.8).toString();
+>, <Line: +				ctx.lineWidth = 1;
+>, <Line: +				ctx.lineJoin = o.selection.shape;
+>, <Line: +				ctx.fillStyle = c.scale('a', 0.4).toString();
+>, <Line: +				var x = Math.min(selection.first.x, selection.second.x) + 0.5,
+>, <Line: +					y = Math.min(selection.first.y, selection.second.y) + 0.5,
+>, <Line: +					w = Math.abs(selection.second.x - selection.first.x) - 1,
+>, <Line: +					h = Math.abs(selection.second.y - selection.first.y) - 1;
+>, <Line: +				ctx.fillRect(x, y, w, h);
+>, <Line: +				ctx.strokeRect(x, y, w, h);
+>, <Line: +				ctx.restore();
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +		plot.hooks.shutdown.push(function (plot, eventHolder) {
+>, <Line: +			eventHolder.unbind("mousemove", onMouseMove);
+>, <Line: +			eventHolder.unbind("mousedown", onMouseDown);
+>, <Line: +			if (mouseUpHandler)
+>, <Line: +				$(document).unbind("mouseup", mouseUpHandler);
+>, <Line: +		});
+>, <Line: +	}
+>, <Line: +	$.plot.plugins.push({
+>, <Line: +		init: init,
+>, <Line: +		options: {
+>, <Line: +			selection: {
+>, <Line: +				mode: null, // one of null, "x", "y" or "xy"
+>, <Line: +				color: "#e8cfac",
+>, <Line: +				shape: "round", // one of "round", "miter", or "bevel"
+>, <Line: +				minSize: 5 // minimum number of pixels
+>, <Line: +			}
+>, <Line: +		},
+>, <Line: +		name: 'selection',
+>, <Line: +		version: '1.1'
+>, <Line: +	});
+>]
+[<Line: -Copyright (c) 2007-2013 IOLA and Ole Laursen.
+>, <Line: -Licensed under the MIT license.
+>, <Line: -The plugin supports these options:
+>, <Line: -selection: {
+>, <Line: -	mode: null or "x" or "y" or "xy",
+>, <Line: -	color: color,
+>, <Line: -	shape: "round" or "miter" or "bevel",
+>, <Line: -	minSize: number of pixels
+>, <Line: -}
+>, <Line: -Selection support is enabled by setting the mode to one of "x", "y" or "xy".
+>, <Line: -In "x" mode, the user will only be able to specify the x range, similarly for
+>, <Line: -"y" mode. For "xy", the selection becomes a rectangle where both ranges can be
+>, <Line: -specified. "color" is color of the selection (if you need to change the color
+>, <Line: -later on, you can get to it with plot.getOptions().selection.color). "shape"
+>, <Line: -is the shape of the corners of the selection.
+>, <Line: -"minSize" is the minimum size a selection can be in pixels. This value can
+>, <Line: -be customized to determine the smallest size a selection can be and still
+>, <Line: -have the selection rectangle be displayed. When customizing this value, the
+>, <Line: -fact that it refers to pixels, not axis units must be taken into account.
+>, <Line: -Thus, for example, if there is a bar graph in time mode with BarWidth set to 1
+>, <Line: -minute, setting "minSize" to 1 will not make the minimum selection size 1
+>, <Line: -minute, but rather 1 pixel. Note also that setting "minSize" to 0 will prevent
+>, <Line: -"plotunselected" events from being fired when the user clicks the mouse without
+>, <Line: -dragging.
+>, <Line: -When selection support is enabled, a "plotselected" event will be emitted on
+>, <Line: -the DOM element you passed into the plot function. The event handler gets a
+>, <Line: -parameter with the ranges selected on the axes, like this:
+>, <Line: -	placeholder.bind( "plotselected", function( event, ranges ) {
+>, <Line: -		alert("You selected " + ranges.xaxis.from + " to " + ranges.xaxis.to)
+>, <Line: -		// similar for yaxis - with multiple axes, the extra ones are in
+>, <Line: -		// x2axis, x3axis, ...
+>, <Line: -	});
+>, <Line: -The "plotselected" event is only fired when the user has finished making the
+>, <Line: -selection. A "plotselecting" event is fired during the process with the same
+>, <Line: -parameters as the "plotselected" event, in case you want to know what's
+>, <Line: -happening while it's happening,
+>, <Line: -A "plotunselected" event with no arguments is emitted when the user clicks the
+>, <Line: -mouse to remove the selection. As stated above, setting "minSize" to 0 will
+>, <Line: -destroy this behavior.
+>, <Line: -The plugin allso adds the following methods to the plot object:
+>, <Line: -- setSelection( ranges, preventEvent )
+>, <Line: -  Set the selection rectangle. The passed in ranges is on the same form as
+>, <Line: -  returned in the "plotselected" event. If the selection mode is "x", you
+>, <Line: -  should put in either an xaxis range, if the mode is "y" you need to put in
+>, <Line: -  an yaxis range and both xaxis and yaxis if the selection mode is "xy", like
+>, <Line: -  this:
+>, <Line: -	setSelection({ xaxis: { from: 0, to: 10 }, yaxis: { from: 40, to: 60 } });
+>, <Line: -  setSelection will trigger the "plotselected" event when called. If you don't
+>, <Line: -  want that to happen, e.g. if you're inside a "plotselected" handler, pass
+>, <Line: -  true as the second parameter. If you are using multiple axes, you can
+>, <Line: -  specify the ranges on any of those, e.g. as x2axis/x3axis/... instead of
+>, <Line: -  xaxis, the plugin picks the first one it sees.
+>, <Line: -- clearSelection( preventEvent )
+>, <Line: -  Clear the selection rectangle. Pass in true to avoid getting a
+>, <Line: -  "plotunselected" event.
+>, <Line: -- getSelection()
+>, <Line: -  Returns the current selection in the same format as the "plotselected"
+>, <Line: -  event. If there's currently no selection, the function returns null.
+>, <Line: -*/
+>, <Line: -    function init(plot) {
+>, <Line: -        var selection = {
+>, <Line: -                first: { x: -1, y: -1}, second: { x: -1, y: -1},
+>, <Line: -                show: false,
+>, <Line: -                active: false
+>, <Line: -            };
+>, <Line: -        // FIXME: The drag handling implemented here should be
+>, <Line: -        // abstracted out, there's some similar code from a library in
+>, <Line: -        // the navigation plugin, this should be massaged a bit to fit
+>, <Line: -        // the Flot cases here better and reused. Doing this would
+>, <Line: -        // make this plugin much slimmer.
+>, <Line: -        var savedhandlers = {};
+>, <Line: -        var mouseUpHandler = null;
+>, <Line: -        function onMouseMove(e) {
+>, <Line: -            if (selection.active) {
+>, <Line: -                updateSelection(e);
+>, <Line: -                plot.getPlaceholder().trigger("plotselecting", [ getSelection() ]);
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        function onMouseDown(e) {
+>, <Line: -            if (e.which != 1)  // only accept left-click
+>, <Line: -                return;
+>, <Line: -            // cancel out any text selections
+>, <Line: -            document.body.focus();
+>, <Line: -            // prevent text selection and drag in old-school browsers
+>, <Line: -            if (document.onselectstart !== undefined && savedhandlers.onselectstart == null) {
+>, <Line: -                savedhandlers.onselectstart = document.onselectstart;
+>, <Line: -                document.onselectstart = function () { return false; };
+>, <Line: -            }
+>, <Line: -            if (document.ondrag !== undefined && savedhandlers.ondrag == null) {
+>, <Line: -                savedhandlers.ondrag = document.ondrag;
+>, <Line: -                document.ondrag = function () { return false; };
+>, <Line: -            }
+>, <Line: -            setSelectionPos(selection.first, e);
+>, <Line: -            selection.active = true;
+>, <Line: -            // this is a bit silly, but we have to use a closure to be
+>, <Line: -            // able to whack the same handler again
+>, <Line: -            mouseUpHandler = function (e) { onMouseUp(e); };
+>, <Line: -            $(document).one("mouseup", mouseUpHandler);
+>, <Line: -        }
+>, <Line: -        function onMouseUp(e) {
+>, <Line: -            mouseUpHandler = null;
+>, <Line: -            // revert drag stuff for old-school browsers
+>, <Line: -            if (document.onselectstart !== undefined)
+>, <Line: -                document.onselectstart = savedhandlers.onselectstart;
+>, <Line: -            if (document.ondrag !== undefined)
+>, <Line: -                document.ondrag = savedhandlers.ondrag;
+>, <Line: -            // no more dragging
+>, <Line: -            selection.active = false;
+>, <Line: -            updateSelection(e);
+>, <Line: -            if (selectionIsSane())
+>, <Line: -                triggerSelectedEvent();
+>, <Line: -            else {
+>, <Line: -                // this counts as a clear
+>, <Line: -                plot.getPlaceholder().trigger("plotunselected", [ ]);
+>, <Line: -                plot.getPlaceholder().trigger("plotselecting", [ null ]);
+>, <Line: -            }
+>, <Line: -            return false;
+>, <Line: -        }
+>, <Line: -        function getSelection() {
+>, <Line: -            if (!selectionIsSane())
+>, <Line: -                return null;
+>, <Line: -            if (!selection.show) return null;
+>, <Line: -            var r = {}, c1 = selection.first, c2 = selection.second;
+>, <Line: -            $.each(plot.getAxes(), function (name, axis) {
+>, <Line: -                if (axis.used) {
+>, <Line: -                    var p1 = axis.c2p(c1[axis.direction]), p2 = axis.c2p(c2[axis.direction]); 
+>, <Line: -                    r[name] = { from: Math.min(p1, p2), to: Math.max(p1, p2) };
+>, <Line: -                }
+>, <Line: -            });
+>, <Line: -            return r;
+>, <Line: -        }
+>, <Line: -        function triggerSelectedEvent() {
+>, <Line: -            var r = getSelection();
+>, <Line: -            plot.getPlaceholder().trigger("plotselected", [ r ]);
+>, <Line: -            // backwards-compat stuff, to be removed in future
+>, <Line: -            if (r.xaxis && r.yaxis)
+>, <Line: -                plot.getPlaceholder().trigger("selected", [ { x1: r.xaxis.from, y1: r.yaxis.from, x2: r.xaxis.to, y2: r.yaxis.to } ]);
+>, <Line: -        }
+>, <Line: -        function clamp(min, value, max) {
+>, <Line: -            return value < min ? min: (value > max ? max: value);
+>, <Line: -        }
+>, <Line: -        function setSelectionPos(pos, e) {
+>, <Line: -            var o = plot.getOptions();
+>, <Line: -            var offset = plot.getPlaceholder().offset();
+>, <Line: -            var plotOffset = plot.getPlotOffset();
+>, <Line: -            pos.x = clamp(0, e.pageX - offset.left - plotOffset.left, plot.width());
+>, <Line: -            pos.y = clamp(0, e.pageY - offset.top - plotOffset.top, plot.height());
+>, <Line: -            if (o.selection.mode == "y")
+>, <Line: -                pos.x = pos == selection.first ? 0 : plot.width();
+>, <Line: -            if (o.selection.mode == "x")
+>, <Line: -                pos.y = pos == selection.first ? 0 : plot.height();
+>, <Line: -        }
+>, <Line: -        function updateSelection(pos) {
+>, <Line: -            if (pos.pageX == null)
+>, <Line: -                return;
+>, <Line: -            setSelectionPos(selection.second, pos);
+>, <Line: -            if (selectionIsSane()) {
+>, <Line: -                selection.show = true;
+>, <Line: -                plot.triggerRedrawOverlay();
+>, <Line: -            }
+>, <Line: -            else
+>, <Line: -                clearSelection(true);
+>, <Line: -        }
+>, <Line: -        function clearSelection(preventEvent) {
+>, <Line: -            if (selection.show) {
+>, <Line: -                selection.show = false;
+>, <Line: -                plot.triggerRedrawOverlay();
+>, <Line: -                if (!preventEvent)
+>, <Line: -                    plot.getPlaceholder().trigger("plotunselected", [ ]);
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        // function taken from markings support in Flot
+>, <Line: -        function extractRange(ranges, coord) {
+>, <Line: -            var axis, from, to, key, axes = plot.getAxes();
+>, <Line: -            for (var k in axes) {
+>, <Line: -                axis = axes[k];
+>, <Line: -                if (axis.direction == coord) {
+>, <Line: -                    key = coord + axis.n + "axis";
+>, <Line: -                    if (!ranges[key] && axis.n == 1)
+>, <Line: -                        key = coord + "axis"; // support x1axis as xaxis
+>, <Line: -                    if (ranges[key]) {
+>, <Line: -                        from = ranges[key].from;
+>, <Line: -                        to = ranges[key].to;
+>, <Line: -                        break;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            // backwards-compat stuff - to be removed in future
+>, <Line: -            if (!ranges[key]) {
+>, <Line: -                axis = coord == "x" ? plot.getXAxes()[0] : plot.getYAxes()[0];
+>, <Line: -                from = ranges[coord + "1"];
+>, <Line: -                to = ranges[coord + "2"];
+>, <Line: -            }
+>, <Line: -            // auto-reverse as an added bonus
+>, <Line: -            if (from != null && to != null && from > to) {
+>, <Line: -                var tmp = from;
+>, <Line: -                from = to;
+>, <Line: -                to = tmp;
+>, <Line: -            }
+>, <Line: -            return { from: from, to: to, axis: axis };
+>, <Line: -        }
+>, <Line: -        function setSelection(ranges, preventEvent) {
+>, <Line: -            var axis, range, o = plot.getOptions();
+>, <Line: -            if (o.selection.mode == "y") {
+>, <Line: -                selection.first.x = 0;
+>, <Line: -                selection.second.x = plot.width();
+>, <Line: -            }
+>, <Line: -            else {
+>, <Line: -                range = extractRange(ranges, "x");
+>, <Line: -                selection.first.x = range.axis.p2c(range.from);
+>, <Line: -                selection.second.x = range.axis.p2c(range.to);
+>, <Line: -            }
+>, <Line: -            if (o.selection.mode == "x") {
+>, <Line: -                selection.first.y = 0;
+>, <Line: -                selection.second.y = plot.height();
+>, <Line: -            }
+>, <Line: -            else {
+>, <Line: -                range = extractRange(ranges, "y");
+>, <Line: -                selection.first.y = range.axis.p2c(range.from);
+>, <Line: -                selection.second.y = range.axis.p2c(range.to);
+>, <Line: -            }
+>, <Line: -            selection.show = true;
+>, <Line: -            plot.triggerRedrawOverlay();
+>, <Line: -            if (!preventEvent && selectionIsSane())
+>, <Line: -                triggerSelectedEvent();
+>, <Line: -        }
+>, <Line: -        function selectionIsSane() {
+>, <Line: -            var minSize = plot.getOptions().selection.minSize;
+>, <Line: -            return Math.abs(selection.second.x - selection.first.x) >= minSize &&
+>, <Line: -                Math.abs(selection.second.y - selection.first.y) >= minSize;
+>, <Line: -        }
+>, <Line: -        plot.clearSelection = clearSelection;
+>, <Line: -        plot.setSelection = setSelection;
+>, <Line: -        plot.getSelection = getSelection;
+>, <Line: -        plot.hooks.bindEvents.push(function(plot, eventHolder) {
+>, <Line: -            var o = plot.getOptions();
+>, <Line: -            if (o.selection.mode != null) {
+>, <Line: -                eventHolder.mousemove(onMouseMove);
+>, <Line: -                eventHolder.mousedown(onMouseDown);
+>, <Line: -            }
+>, <Line: -        });
+>, <Line: -        plot.hooks.drawOverlay.push(function (plot, ctx) {
+>, <Line: -            // draw selection
+>, <Line: -            if (selection.show && selectionIsSane()) {
+>, <Line: -                var plotOffset = plot.getPlotOffset();
+>, <Line: -                var o = plot.getOptions();
+>, <Line: -                ctx.save();
+>, <Line: -                ctx.translate(plotOffset.left, plotOffset.top);
+>, <Line: -                var c = $.color.parse(o.selection.color);
+>, <Line: -                ctx.strokeStyle = c.scale('a', 0.8).toString();
+>, <Line: -                ctx.lineWidth = 1;
+>, <Line: -                ctx.lineJoin = o.selection.shape;
+>, <Line: -                ctx.fillStyle = c.scale('a', 0.4).toString();
+>, <Line: -                var x = Math.min(selection.first.x, selection.second.x) + 0.5,
+>, <Line: -                    y = Math.min(selection.first.y, selection.second.y) + 0.5,
+>, <Line: -                    w = Math.abs(selection.second.x - selection.first.x) - 1,
+>, <Line: -                    h = Math.abs(selection.second.y - selection.first.y) - 1;
+>, <Line: -                ctx.fillRect(x, y, w, h);
+>, <Line: -                ctx.strokeRect(x, y, w, h);
+>, <Line: -                ctx.restore();
+>, <Line: -            }
+>, <Line: -        });
+>, <Line: -        plot.hooks.shutdown.push(function (plot, eventHolder) {
+>, <Line: -            eventHolder.unbind("mousemove", onMouseMove);
+>, <Line: -            eventHolder.unbind("mousedown", onMouseDown);
+>, <Line: -            if (mouseUpHandler)
+>, <Line: -                $(document).unbind("mouseup", mouseUpHandler);
+>, <Line: -        });
+>, <Line: -    }
+>, <Line: -    $.plot.plugins.push({
+>, <Line: -        init: init,
+>, <Line: -        options: {
+>, <Line: -            selection: {
+>, <Line: -                mode: null, // one of null, "x", "y" or "xy"
+>, <Line: -                color: "#e8cfac",
+>, <Line: -                shape: "round", // one of "round", "miter", or "bevel"
+>, <Line: -                minSize: 5 // minimum number of pixels
+>, <Line: -            }
+>, <Line: -        },
+>, <Line: -        name: 'selection',
+>, <Line: -        version: '1.1'
+>, <Line: -    });
+>]

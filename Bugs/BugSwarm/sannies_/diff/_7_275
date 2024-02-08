@@ -1,0 +1,6 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part15;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.GroupEntry;
+>]
+[<Line: -package com.mp4parser.iso14496.part15;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.GroupEntry;
+>]

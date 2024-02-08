@@ -1,0 +1,18 @@
+[<Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.XmlBox;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +import java.nio.channels.FileChannel;
+>, <Line: +        FileChannel channel = new FileInputStream("/home/sannies2/Mission_Impossible_Ghost_Protocol_Feature_SDUV_480p_16avg192max.uvu").getChannel();
+>, <Line: +        IsoFile isoFile = new IsoFile(channel);
+>, <Line: +        XmlBox xmlBox = Path.getPath(isoFile, "/moov/meta/xml ");
+>, <Line: +        assert xmlBox != null;
+>]
+[<Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.XmlBox;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.googlecode.mp4parser.FileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -        DataSource ds = new FileDataSourceImpl("/home/sannies2/Mission_Impossible_Ghost_Protocol_Feature_SDUV_480p_16avg192max.uvu");
+>, <Line: -        IsoFile isoFile = new IsoFile(ds);
+>, <Line: -        XmlBox xmlBox = (XmlBox) Path.getPath(isoFile, "/moov/meta/xml ");
+>]

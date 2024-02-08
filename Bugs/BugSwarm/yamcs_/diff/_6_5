@@ -1,0 +1,6 @@
+[<Line: +import org.yamcs.hornetq.AbstractHornetQTranslatorService;
+>, <Line: +                    setFilter(new SimpleString(AbstractHornetQTranslatorService.UNIQUEID_HDR_NAME+"<>"+AbstractHornetQTranslatorService.UNIQUEID)).
+>]
+[<Line: -import org.yamcs.hornetq.StreamAdapter;
+>, <Line: -                    setFilter(new SimpleString(StreamAdapter.UNIQUEID_HDR_NAME+"<>"+StreamAdapter.UNIQUEID)).
+>]

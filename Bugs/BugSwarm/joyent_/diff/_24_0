@@ -1,0 +1,33 @@
+[<Line: +import org.slf4j.MDC;
+>, <Line: +        } catch (IOException | UncheckedIOException e) {
+>, <Line: +            final String requestId = MDC.get("mantaRequestId");
+>, <Line: +            final String msg = String.format("An IO problem happened when making "
+>, <Line: +                            + "a request (request: %s). Request details: %s", requestId,
+>, <Line: +                    request);
+>, <Line: +            throw new IOException(msg, e);
+>, <Line: +        } catch (IOException | UncheckedIOException e) {
+>, <Line: +            final String requestId = MDC.get("mantaRequestId");
+>, <Line: +            final String msg = String.format("An IO problem happened when making "
+>, <Line: +                    + "a request (request: %s). Request details: %s", requestId,
+>, <Line: +                    request);
+>, <Line: +            throw new IOException(msg, e);
+>, <Line: +        } catch (IOException | UncheckedIOException e) {
+>, <Line: +            final String requestId = MDC.get("mantaRequestId");
+>, <Line: +            final String msg = String.format("An IO problem happened when making "
+>, <Line: +                            + "a request (request: %s). Request details: %s", requestId,
+>, <Line: +                    request);
+>, <Line: +            throw new IOException(msg, e);
+>, <Line: +        } catch (IOException | UncheckedIOException e) {
+>, <Line: +            final String requestId = MDC.get("mantaRequestId");
+>, <Line: +            final String msg = String.format("An IO problem happened when making "
+>, <Line: +                            + "a request (request: %s). Request details: %s", requestId,
+>, <Line: +                    request);
+>, <Line: +            throw new IOException(msg, e);
+>, <Line: +            final String requestId = MDC.get("mantaRequestId");
+>, <Line: +            final String msg = String.format("An IO problem happened when making "
+>, <Line: +                            + "a request (request: %s). Request details: %s", requestId,
+>, <Line: +                    request);
+>, <Line: +            throw new IOException(msg, e.getCause());
+>]
+[<Line: -            throw e.getCause();
+>]

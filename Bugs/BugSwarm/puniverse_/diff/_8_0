@@ -1,0 +1,11 @@
+[<Line: + * Copyright (c) 2013-2016, Parallel Universe Software Co. All rights reserved.
+>]
+[<Line: - * Copyright (c) 2013-2015, Parallel Universe Software Co. All rights reserved.
+>, <Line: -    private transient boolean shouldVerifyInstrumentation;
+>, <Line: -        shouldVerifyInstrumentation = true;
+>, <Line: -        shouldVerifyInstrumentation = false;
+>, <Line: -        if (shouldVerifyInstrumentation) {
+>, <Line: -            Fiber.verifySuspend(fiber);
+>, <Line: -            shouldVerifyInstrumentation = false;
+>, <Line: -        }
+>]

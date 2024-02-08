@@ -1,0 +1,6 @@
+[<Line: +			if(code instanceof Codes.Invoke && ((Codes.Invoke)code).type(0) instanceof Type.Method) {
+>, <Line: +			} else if (code instanceof Codes.IndirectInvoke && ((Codes.IndirectInvoke)code).type(0) instanceof Type.Method) {
+>]
+[<Line: -			if(code instanceof Codes.Invoke && ((Codes.Invoke)code).type() instanceof Type.Method) {
+>, <Line: -			} else if (code instanceof Codes.IndirectInvoke && ((Codes.IndirectInvoke)code).type() instanceof Type.Method) {
+>]

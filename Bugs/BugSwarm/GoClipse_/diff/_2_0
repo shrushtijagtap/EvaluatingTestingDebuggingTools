@@ -1,0 +1,4 @@
+[<Line: +		testGetBuildTargetFor(pbi, ":go_package", "go_package", "build");
+>]
+[<Line: -		testGetBuildTargetFor(pbi, "go_package", "go_package", "build");
+>]

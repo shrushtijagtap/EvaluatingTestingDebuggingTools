@@ -1,0 +1,4 @@
+[<Line: +            assertThat(type.getDeclaredConstructor().newInstance(), notNullValue(Object.class));
+>]
+[<Line: -            assertThat(type.newInstance(), notNullValue(Object.class));
+>]

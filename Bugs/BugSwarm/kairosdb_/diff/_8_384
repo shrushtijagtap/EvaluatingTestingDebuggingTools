@@ -1,0 +1,317 @@
+[<Line: +// todo Add "Last Exectuted", "When to execute next", Pause button, and maybe "create by | or owned by team"
+>, <Line: +var ROLLUP_URL = "/api/v1/rollups/";
+>, <Line: +var module = angular.module('rollupApp', ['mgcrea.ngStrap',
+>, <Line: +	'mgcrea.ngStrap.tooltip', 'ui.bootstrap.modal', 'template/modal/backdrop.html',
+>, <Line: +	'template/modal/window.html']);
+>, <Line: +module.controller('rollupController', function ($scope, $http, $uibModal, orderByFilter) {
+>, <Line: +	$scope.lastSaved = null;
+>, <Line: +	$scope.tasks = [];
+>, <Line: +	$scope.taskCopies = [];
+>, <Line: +	$http.get(ROLLUP_URL)
+>, <Line: +		.success(function (response) {
+>, <Line: +			if (response) {
+>, <Line: +				$scope.tasks = response;
+>, <Line: +				$scope.taskCopies = angular.copy($scope.tasks);
+>, <Line: +				for(var i = 0; i < $scope.tasks.length; i++){
+>, <Line: +					$scope.tasks[i].executionValue = $scope.tasks[i].execution_interval.value;
+>, <Line: +					$scope.tasks[i].executionUnit = $scope.tasks[i].execution_interval.unit;
+>, <Line: +				}
+>, <Line: +				$scope.tasks = orderByFilter($scope.tasks, "name");
+>, <Line: +			}
+>, <Line: +			else
+>, <Line: +				$scope.tasks = [];
+>, <Line: +		})
+>, <Line: +		.error(function (data, status, headers, config) {
+>, <Line: +			$scope.alert("Could not read list of roll-ups from server.", status, data);
+>, <Line: +		});
+>, <Line: +	$scope.isUnchanged = function (task) {
+>, <Line: +		for (var i = 0; i < $scope.taskCopies.length; i++) {
+>, <Line: +			var original = $scope.taskCopies[i];
+>, <Line: +			if (task.id == original.id) {
+>, <Line: +				return angular.equals(task, original);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return false; // New task
+>, <Line: +	};
+>, <Line: +	$scope.updateCopy = function (task) {
+>, <Line: +		for (var i = 0; i < $scope.taskCopies.length; i++) {
+>, <Line: +			var original = $scope.taskCopies[i];
+>, <Line: +			if (task.id == original.id) {
+>, <Line: +				$scope.taskCopies[i] = angular.copy(task);
+>, <Line: +				break;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	$scope.onBlur = function (task) {
+>, <Line: +		$scope.errors = validate(task);
+>, <Line: +		if (!$scope.hasErrors()) {
+>, <Line: +			$scope.tasks = orderByFilter($scope.tasks, "name");
+>, <Line: +			if ($scope.isUnchanged(task))
+>, <Line: +				return;
+>, <Line: +			$scope.saveRollupTask(task);
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	$scope.toHumanReadableTimeUnit = function (timeUnit) {
+>, <Line: +		if (timeUnit.value == 1)
+>, <Line: +			return timeUnit.value + " " + timeUnit.unit.substring(0, timeUnit.unit.length - 1);
+>, <Line: +		else
+>, <Line: +			return timeUnit.value + " " + timeUnit.unit;
+>, <Line: +	};
+>, <Line: +	$scope.executionUnits = ["Seconds", "Minutes", "Hours", "Weeks", "Months"];
+>, <Line: +	$scope.toTql = function (query) {
+>, <Line: +		tql = "SELECT " + query.query.metrics[0].name;
+>, <Line: +		tql += " FROM " + $scope.toHumanReadableTimeUnit(query.query.start_relative) + " to now";
+>, <Line: +		// Tags
+>, <Line: +		var first = true;
+>, <Line: +		if (query.query.metrics[0].tags && Object.keys(query.query.metrics[0].tags).length > 0) {
+>, <Line: +			tql += " WHERE ";
+>, <Line: +			var tags = query.query.metrics[0].tags;
+>, <Line: +			for (var tag in tags) {
+>, <Line: +				if (first)
+>, <Line: +					first = false;
+>, <Line: +				else {
+>, <Line: +					tql += ", ";
+>, <Line: +				}
+>, <Line: +				//noinspection JSUnfilteredForInLoop
+>, <Line: +				tql += tag + ' = [' + tags[tag] + ']';
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		// Aggregators
+>, <Line: +		if (query.query.metrics[0].aggregators && query.query.metrics[0].aggregators.length > 0) {
+>, <Line: +			tql += " AGGREGATE ";
+>, <Line: +			first = true;
+>, <Line: +			query.query.metrics[0].aggregators.forEach(function (aggregator) {
+>, <Line: +				if (first)
+>, <Line: +					first = false;
+>, <Line: +				else
+>, <Line: +					tql += " | ";
+>, <Line: +				tql += $scope.toHumanReadableAggregator(aggregator);
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +		// Group By
+>, <Line: +		var groupBy = query.query.metrics[0].group_by;
+>, <Line: +		if (groupBy && groupBy.length > 0) {
+>, <Line: +			var groupExists = false;
+>, <Line: +			tql += " GROUP BY";
+>, <Line: +			_.each(groupBy, function (group) {
+>, <Line: +				if (groupExists) {
+>, <Line: +					tql += " AND";
+>, <Line: +				}
+>, <Line: +				if (group.name == "tag") {
+>, <Line: +					groupExists = true;
+>, <Line: +					tql += " tags(";
+>, <Line: +					_.each(group.tags, function (tag) {
+>, <Line: +						tql += '"' + tag + '", ';
+>, <Line: +					});
+>, <Line: +					tql = tql.substring(0, tql.length - 2); // Remove trailing comma and space
+>, <Line: +					tql += ")";
+>, <Line: +				}
+>, <Line: +				if (group.name == "time") {
+>, <Line: +					groupExists = true;
+>, <Line: +					tql += " time(" + $scope.toHumanReadableTimeUnit(group.range_size) + ", ";
+>, <Line: +					tql += group.group_count;
+>, <Line: +					tql += ")";
+>, <Line: +				}
+>, <Line: +				if (group.name == "value") {
+>, <Line: +					groupExists = true;
+>, <Line: +					tql += " value(" + group.range_size + ")";
+>, <Line: +				}
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +		// Save As
+>, <Line: +		tql += " SAVE AS " + query.save_as;
+>, <Line: +		return tql;
+>, <Line: +	};
+>, <Line: +	$scope.toHumanReadableAggregator = function (aggregator) {
+>, <Line: +		var result = aggregator.name + '(';
+>, <Line: +		if (aggregator.sampling) {
+>, <Line: +			result += $scope.toHumanReadableTimeUnit(aggregator.sampling);
+>, <Line: +			result += aggregator.align_start_time ? ", align-start" : "";
+>, <Line: +			result += aggregator.align_sampling ? ", align-sampling" : "";
+>, <Line: +		}
+>, <Line: +		else {
+>, <Line: +			_.each(_.values(_.omit(aggregator, 'name')), function (value) {
+>, <Line: +				result += value + ",";
+>, <Line: +			});
+>, <Line: +			result = result.substring(0, result.length - 1); // Remove trailing comma
+>, <Line: +		}
+>, <Line: +		result += ')';
+>, <Line: +		return result;
+>, <Line: +	};
+>, <Line: +	$scope.scheduleModified = function (task, unit) {
+>, <Line: +		task.executionUnit = unit;
+>, <Line: +		$scope.onBlur(task);
+>, <Line: +	};
+>, <Line: +	$scope.startTimeModified = function (rollup, item) {
+>, <Line: +		rollup.tasks[0].query.start_relative = item;
+>, <Line: +	};
+>, <Line: +	$scope.aggregatorModified = function (rollup, item) {
+>, <Line: +		rollup.tasks[0].query.metrics[0].aggregators[0].name = item;
+>, <Line: +	};
+>, <Line: +	$scope.aggregatorSamplingModified = function (rollup, item) {
+>, <Line: +		rollup.tasks[0].query.metrics[0].aggregators[0].sampling = item;
+>, <Line: +	};
+>, <Line: +	$scope.addRollupTask = function () {
+>, <Line: +		var task = {executionValue: 1, executionUnit: "Hours", rollups: []};
+>, <Line: +		task.edit = true;
+>, <Line: +		$scope.tasks.push(task);
+>, <Line: +	};
+>, <Line: +	$scope.editRollupTask = function (task) {
+>, <Line: +		task.edit = true;
+>, <Line: +	};
+>, <Line: +	$scope.saveRollupTask = function (task) {
+>, <Line: +		$scope.saveTask(task);
+>, <Line: +		task.edit = false;
+>, <Line: +	};
+>, <Line: +	$scope.deleteRollupTask = function (task) {
+>, <Line: +		bootbox.confirm({
+>, <Line: +			size: 'medium',
+>, <Line: +			message: "Are you sure you want to delete the rollup?",
+>, <Line: +			callback: function (result) {
+>, <Line: +				if (result) {
+>, <Line: +					var res = $http.delete(ROLLUP_URL + task.id);
+>, <Line: +					res.success(function (data, status, headers, config) {
+>, <Line: +						var i = $scope.tasks.indexOf(task);
+>, <Line: +						if (i != -1) {
+>, <Line: +							$scope.tasks.splice(i, 1);
+>, <Line: +						}
+>, <Line: +					});
+>, <Line: +					res.error(function (data, status, headers, config) {
+>, <Line: +						$scope.alert("Failed to delete roll-up.", status, data);
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +	};
+>, <Line: +	$scope.addRollup = function (task, rollup, edit) {
+>, <Line: +		var modalInstance = $uibModal.open({
+>, <Line: +			templateUrl: 'rollup-create.html?cacheBust=' + Math.random().toString(36).slice(2), //keep dialog from caching
+>, <Line: +			controller: 'CreateController',
+>, <Line: +			size: 'lg',
+>, <Line: +			backdrop: 'static', // disable closing of dialog with click away
+>, <Line: +			keyboard: false, // disable closing dialog with ESC
+>, <Line: +			resolve: {
+>, <Line: +				rollup: function () {
+>, <Line: +					return rollup;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +		modalInstance.result.then(
+>, <Line: +			function (newRollup) {
+>, <Line: +				if (edit) {
+>, <Line: +					task.rollups.splice(task.rollups.indexOf(rollup), 1);
+>, <Line: +				}
+>, <Line: +				task.rollups.push(newRollup);
+>, <Line: +				$scope.saveTask(task);
+>, <Line: +			});
+>, <Line: +	};
+>, <Line: +	$scope.pasteQuery = function (task, rollup, edit) {
+>, <Line: +		var modalInstance = $uibModal.open({
+>, <Line: +			templateUrl: 'paste-query.html?cacheBust=' + Math.random().toString(36).slice(2), //keep dialog from caching
+>, <Line: +			controller: 'PasteQueryCtrl',
+>, <Line: +			size: 'lg',
+>, <Line: +			backdrop: 'static', // disable closing of dialog with click away
+>, <Line: +			keyboard: false, // disable closing dialog with ESC
+>, <Line: +			resolve: {
+>, <Line: +				rollup: function () {
+>, <Line: +					return rollup;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +		modalInstance.result.then(
+>, <Line: +			function (newRollup) {
+>, <Line: +				task.rollups.push(newRollup);
+>, <Line: +				$scope.saveTask(task);
+>, <Line: +			});
+>, <Line: +	};
+>, <Line: +	$scope.editRollup = function (task, rollup) {
+>, <Line: +		$scope.addRollup(task, rollup, true);
+>, <Line: +	};
+>, <Line: +	$scope.saveRollup = function (task, rollup) {
+>, <Line: +		rollup.edit = false;
+>, <Line: +	};
+>, <Line: +	$scope.deleteRollup = function (task, rollup) {
+>, <Line: +		bootbox.confirm({
+>, <Line: +			size: 'medium',
+>, <Line: +			message: "Are you sure you want to delete the query?",
+>, <Line: +			callback: function (result) {
+>, <Line: +				if (result) {
+>, <Line: +					task.rollups.splice(task.rollups.indexOf(rollup), 1);
+>, <Line: +					$scope.saveRollupTask(task);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +	};
+>, <Line: +	$scope.saveTask = function (task) {
+>, <Line: +		// todo remove these properties from task: executionUnit, edit, executionValue
+>, <Line: +		task.execution_interval = {
+>, <Line: +			value: task.executionValue,
+>, <Line: +			unit: task.executionUnit
+>, <Line: +		};
+>, <Line: +		var res = $http.post(ROLLUP_URL, task);
+>, <Line: +		res.success(function (data, status, headers, config) {
+>, <Line: +			task.id = data.id;
+>, <Line: +			currentDate = new Date();
+>, <Line: +			$scope.lastSaved = (currentDate.getHours() < 10 ? "0" + currentDate.getHours() : currentDate.getHours()) + ":" +
+>, <Line: +				(currentDate.getMinutes() < 10 ? "0" + currentDate.getMinutes() : currentDate.getMinutes()) + ":" +
+>, <Line: +				(currentDate.getSeconds() < 10 ? "0" + currentDate.getSeconds() : currentDate.getSeconds());
+>, <Line: +			// Flash Last Saved message
+>, <Line: +			$('#lastSaved').fadeOut('slow').fadeIn('slow').animate({opacity: 1.0}, 1000);
+>, <Line: +		});
+>, <Line: +		res.error(function (data, status, headers, config) {
+>, <Line: +			$scope.alert("Could not save query.", status, data);
+>, <Line: +		});
+>, <Line: +	};
+>, <Line: +	// TODO how to not duplicate in the other controller?
+>, <Line: +	$scope.alert = function (message, status, data) {
+>, <Line: +		if (status) {
+>, <Line: +			var error = "";
+>, <Line: +			if (data && data.errors)
+>, <Line: +				error = data.errors;
+>, <Line: +			bootbox.alert({
+>, <Line: +				title: message,
+>, <Line: +				message: status + ":" + (error ? error : "" )
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +		else {
+>, <Line: +			bootbox.alert({
+>, <Line: +				message: message
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	$scope.isNumber = function (num) {
+>, <Line: +		return !isNaN(num)
+>, <Line: +	};
+>, <Line: +	//////////////////////////////
+>, <Line: +	// VALIDATION
+>, <Line: +	//////////////////////////////
+>, <Line: +	$scope.hasErrors = function () {
+>, <Line: +		return !_.isEmpty($scope.errors);
+>, <Line: +	};
+>, <Line: +	function validate(task) {
+>, <Line: +		var errs = {};
+>, <Line: +		if (!task.name || _.isEmpty(task.name)) {
+>, <Line: +			errs.name = "Name cannot be empty.";
+>, <Line: +			$scope.alert(errs.name);
+>, <Line: +		}
+>, <Line: +		if (!task.executionValue) {
+>, <Line: +			errs.executionValue = "You must specify when the roll-up will be executed.";
+>, <Line: +			$scope.alert(errs.executionValue);
+>, <Line: +		}
+>, <Line: +		if (task.executionValue && !$scope.isNumber(task.executionValue)) {
+>, <Line: +			errs.executionValue = "Must be a number.";
+>, <Line: +			$scope.alert(errs.executionValue);
+>, <Line: +		}
+>, <Line: +		return errs;
+>, <Line: +	}
+>, <Line: +});
+>, <Line: +/**
+>, <Line: + * Set focus for dynamically create element
+>, <Line: + */
+>, <Line: +module.directive('focus', function () {
+>, <Line: +	return function (scope, element, attr) {
+>, <Line: +		element[0].focus();
+>, <Line: +	};
+>, <Line: +});
+>]
+[]

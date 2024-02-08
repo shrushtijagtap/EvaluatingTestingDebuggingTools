@@ -1,0 +1,9 @@
+[<Line: +	<div ng-repeat="tab in panelMeta.editorTabs"
+>, <Line: +		 ng-show="editor.index == $index">
+>, <Line: +	<button type="button" class="btn btn-success pull-right"
+>, <Line: +			ng-click="editor.index=0;dismiss()">Close
+>, <Line: +	</button>
+>]
+[<Line: -	<div ng-repeat="tab in panelMeta.editorTabs" ng-show="editor.index == $index">
+>, <Line: -	<button type="button" class="btn btn-success pull-right" ng-click="editor.index=0;dismiss()">Close</button>
+>]

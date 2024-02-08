@@ -1,0 +1,4 @@
+[<Line: +                        injectFullFrame(methodVisitor, CompoundList.of(requiredTypes, yieldedTypes), false);
+>]
+[<Line: -                        injectFullFrame(methodVisitor, yieldedTypes, false);
+>]

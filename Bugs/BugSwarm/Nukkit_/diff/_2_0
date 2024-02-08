@@ -1,0 +1,5 @@
+[<Line: +    public static long START_TIME = System.currentTimeMillis();
+>, <Line: +            e.printStackTrace();
+>]
+[<Line: -    public final static Long START_TIME = System.currentTimeMillis();
+>]

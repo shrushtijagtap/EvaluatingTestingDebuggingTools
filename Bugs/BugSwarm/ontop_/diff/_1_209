@@ -1,0 +1,136 @@
+[<Line: +import java.util.HashSet;
+>, <Line: +import com.google.common.collect.ImmutableMap;
+>, <Line: + *  @author Roman Kontchakov
+>, <Line: +	private final ImmutableMap<T, Equivalences<T>> vertexIndex;
+>, <Line: +	// maps all Ts (even from the non-reduced DAG) to the vertices of the possibly reduced  DAG
+>, <Line: +	private final ImmutableMap<T, Equivalences<T>> fullVertexIndex;   
+>, <Line: +	private DefaultDirectedGraph<T,DefaultEdge> graph; // used in tests only
+>, <Line: +	private EquivalencesDAGImpl(DefaultDirectedGraph<T,DefaultEdge> graph, SimpleDirectedGraph <Equivalences<T>,DefaultEdge> dag, ImmutableMap<T, Equivalences<T>> vertexIndex, ImmutableMap<T, Equivalences<T>> fullVertexIndex) {	
+>, <Line: +		this.vertexIndex = vertexIndex;
+>, <Line: +		this.fullVertexIndex = fullVertexIndex;
+>, <Line: +		return vertexIndex.get(v);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public T getCanonicalForm(T v) {
+>, <Line: +		Equivalences<T> vs = fullVertexIndex.get(v);
+>, <Line: +		if (vs == null)
+>, <Line: +			return null;
+>, <Line: +		return vs.getRepresentative();		
+>, <Line: +		Set<Equivalences<T>> result = new LinkedHashSet<>();
+>, <Line: +		Equivalences<T> eq = vertexIndex.get(v);
+>, <Line: +		Set<Equivalences<T>> result = new LinkedHashSet<>();
+>, <Line: +		Set<Equivalences<T>> result = new LinkedHashSet<>();
+>, <Line: +				"\n\nEquivalencesMap\n" + vertexIndex;
+>, <Line: +	public int edgeSetSize() {
+>, <Line: +		GabowSCC<TT, DefaultEdge> inspector = new GabowSCC<>(graph);
+>, <Line: +		// create the vertex index
+>, <Line: +		ImmutableMap.Builder<TT, Equivalences<TT>> vertexIndexBuilder = new ImmutableMap.Builder<>();
+>, <Line: +		for (Equivalences<TT> equivalenceSet : equivalenceSets) {
+>, <Line: +				vertexIndexBuilder.put(node, equivalenceSet);
+>, <Line: +		}
+>, <Line: +		ImmutableMap<TT, Equivalences<TT>> vertexIndex = vertexIndexBuilder.build();
+>, <Line: +		// compute the edges between the SCCs
+>, <Line: +		Map<Equivalences<TT>, Set<Equivalences<TT>>> outgoingEdges = new HashMap<>();
+>, <Line: +		for (DefaultEdge edge : graph.edgeSet()) {
+>, <Line: +			Equivalences<TT> v1 = vertexIndex.get(graph.getEdgeSource(edge));
+>, <Line: +			Equivalences<TT> v2 = vertexIndex.get(graph.getEdgeTarget(edge));
+>, <Line: +			if (v1 == v2)
+>, <Line: +				continue; // do not add loops
+>, <Line: +			Set<Equivalences<TT>> out = outgoingEdges.get(v1);
+>, <Line: +			if (out == null) {
+>, <Line: +				out = new HashSet<>();
+>, <Line: +				outgoingEdges.put(v1, out);
+>, <Line: +			}
+>, <Line: +			out.add(v2);
+>, <Line: +		// compute the transitively reduced DAG
+>, <Line: +		SimpleDirectedGraph<Equivalences<TT>,DefaultEdge> dag = new SimpleDirectedGraph<>(DefaultEdge.class);
+>, <Line: +		for (Equivalences<TT> equivalenceSet : equivalenceSets)  
+>, <Line: +			dag.addVertex(equivalenceSet);
+>, <Line: +		for (Map.Entry<Equivalences<TT>, Set<Equivalences<TT>>> edges : outgoingEdges.entrySet()) {
+>, <Line: +			Equivalences<TT> v1 = edges.getKey();
+>, <Line: +			for (Equivalences<TT> v2 : edges.getValue()) {
+>, <Line: +				// an edge from v1 to v2 is redundant if 
+>, <Line: +				//  v1 has an edge going to a vertex v2p 
+>, <Line: +				//         from which v2 is reachable (in one step) 
+>, <Line: +				boolean redundant = false;
+>, <Line: +				if (edges.getValue().size() > 1) {
+>, <Line: +	 				for (Equivalences<TT> v2p : edges.getValue()) {
+>, <Line: +						Set<Equivalences<TT>> t2p = outgoingEdges.get(v2p);
+>, <Line: +						if (t2p!= null && t2p.contains(v2)) {
+>, <Line: +							redundant = true;
+>, <Line: +							break;
+>, <Line: +						}	
+>, <Line: +					}
+>, <Line: +				if (!redundant)
+>, <Line: +					dag.addEdge(v1, v2);
+>, <Line: +		return new EquivalencesDAGImpl<TT>(graph, dag, vertexIndex, vertexIndex);
+>, <Line: +	}
+>, <Line: +	public static <T> EquivalencesDAGImpl<T> reduce(EquivalencesDAGImpl<T> source, SimpleDirectedGraph <Equivalences<T>,DefaultEdge> target) {
+>, <Line: +		ImmutableMap.Builder<T, Equivalences<T>> vertexIndexBuilder = new ImmutableMap.Builder<>();
+>, <Line: +		for (Equivalences<T> tSet : target.vertexSet()) {
+>, <Line: +			for (T s : source.getVertex(tSet.getRepresentative())) 
+>, <Line: +				if (tSet.contains(s)) 		
+>, <Line: +					vertexIndexBuilder.put(s, tSet);
+>, <Line: +		}
+>, <Line: +		ImmutableMap<T, Equivalences<T>> vertexIndex = vertexIndexBuilder.build();	
+>, <Line: +		// create induced edges in the target graph		
+>, <Line: +		for (Equivalences<T> sSet : source) {
+>, <Line: +			Equivalences<T> tSet = vertexIndex.get(sSet.getRepresentative());
+>, <Line: +			for (Equivalences<T> sSetSub : source.getDirectSub(sSet)) {
+>, <Line: +				Equivalences<T> tSetSub = vertexIndex.get(sSetSub.getRepresentative());
+>, <Line: +				target.addEdge(tSetSub, tSet);
+>, <Line: +		return new EquivalencesDAGImpl<>(null, target, vertexIndex, source.vertexIndex);
+>]
+[<Line: - * The key component is the Gabow SCC algorithm for computing 
+>, <Line: - * strongly connected components
+>, <Line: -	private final Map<T, Equivalences<T>> equivalencesMap;
+>, <Line: -	private DefaultDirectedGraph<T,DefaultEdge> graph; // used in tests and SIGMA reduction
+>, <Line: -	public EquivalencesDAGImpl(DefaultDirectedGraph<T,DefaultEdge> graph, SimpleDirectedGraph <Equivalences<T>,DefaultEdge> dag, Map<T, Equivalences<T>> equivalencesMap) {	
+>, <Line: -		this.equivalencesMap = equivalencesMap;
+>, <Line: -		return equivalencesMap.get(v);
+>, <Line: -		LinkedHashSet<Equivalences<T>> result = new LinkedHashSet<Equivalences<T>>();
+>, <Line: -		Equivalences<T> eq = equivalencesMap.get(v);
+>, <Line: -		LinkedHashSet<Equivalences<T>> result = new LinkedHashSet<Equivalences<T>>();
+>, <Line: -		LinkedHashSet<Equivalences<T>> result = new LinkedHashSet<Equivalences<T>>();
+>, <Line: -				"\n\nEquivalencesMap\n" + equivalencesMap;
+>, <Line: -	int edgeSetSize() {
+>, <Line: -		GabowSCC<TT, DefaultEdge> inspector = new GabowSCC<TT, DefaultEdge>(graph);
+>, <Line: -		SimpleDirectedGraph<Equivalences<TT>,DefaultEdge> dag0 = 
+>, <Line: -					new SimpleDirectedGraph<>(DefaultEdge.class);
+>, <Line: -		Map<TT, Equivalences<TT>> equivalencesMap = new HashMap<>();
+>, <Line: -		for (Equivalences<TT> equivalenceSet : equivalenceSets)  {
+>, <Line: -				equivalencesMap.put(node, equivalenceSet);
+>, <Line: -			dag0.addVertex(equivalenceSet);
+>, <Line: -		for (Equivalences<TT> equivalenceSet : equivalenceSets)  {
+>, <Line: -			for (TT e : equivalenceSet) {			
+>, <Line: -				for (DefaultEdge edge : graph.outgoingEdgesOf(e)) {
+>, <Line: -					TT t = graph.getEdgeTarget(edge);
+>, <Line: -					if (!equivalenceSet.contains(t))
+>, <Line: -						dag0.addEdge(equivalenceSet, equivalencesMap.get(t));
+>, <Line: -				}
+>, <Line: -				for (DefaultEdge edge : graph.incomingEdgesOf(e)) {
+>, <Line: -					TT s = graph.getEdgeSource(edge);
+>, <Line: -					if (!equivalenceSet.contains(s))
+>, <Line: -						dag0.addEdge(equivalencesMap.get(s), equivalenceSet);
+>, <Line: -		// removed redundant edges
+>, <Line: -		SimpleDirectedGraph <Equivalences<TT>,DefaultEdge> dag = 
+>, <Line: -						new SimpleDirectedGraph<>(DefaultEdge.class);
+>, <Line: -		for (Equivalences<TT> v : dag0.vertexSet())
+>, <Line: -			dag.addVertex(v);
+>, <Line: -		for (DefaultEdge edge : dag0.edgeSet()) {
+>, <Line: -			Equivalences<TT> v1 = dag0.getEdgeSource(edge);
+>, <Line: -			Equivalences<TT> v2 = dag0.getEdgeTarget(edge);
+>, <Line: -			boolean redundant = false;
+>, <Line: -			if (dag0.outDegreeOf(v1) > 1) {
+>, <Line: -				// an edge is redundant if 
+>, <Line: -				//  its source has an edge going to a vertex 
+>, <Line: -				//         from which the target is reachable (in one step) 
+>, <Line: -				for (DefaultEdge e2 : dag0.outgoingEdgesOf(v1)) 
+>, <Line: -					if (dag0.containsEdge(dag0.getEdgeTarget(e2), v2)) {
+>, <Line: -						redundant = true;
+>, <Line: -						break;
+>, <Line: -					}
+>, <Line: -			if (!redundant)
+>, <Line: -				dag.addEdge(v1, v2);
+>, <Line: -		return new EquivalencesDAGImpl<TT>(graph, dag, equivalencesMap);
+>]

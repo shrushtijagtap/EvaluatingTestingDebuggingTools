@@ -1,0 +1,4 @@
+[<Line: +      if (possibleFormats.contains(BarcodeFormat.RSS_EXPANDED)) {
+>]
+[<Line: -      if (possibleFormats.contains(BarcodeFormat.RSS_EXPANDED)){
+>]

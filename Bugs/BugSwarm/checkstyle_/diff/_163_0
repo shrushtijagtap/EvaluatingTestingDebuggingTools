@@ -1,0 +1,4 @@
+[<Line: +        final Object instance;
+>]
+[<Line: -        Object instance = null;
+>]

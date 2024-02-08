@@ -1,0 +1,5 @@
+[<Line: +### 02. September 2016: version 1.4.22
+>, <Line: +- Added Byte Buddy plugin for Gradle.
+>, <Line: +- Improved Byte Buddy plugin for Maven.
+>]
+[]

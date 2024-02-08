@@ -1,0 +1,4 @@
+[<Line: +  final void encodeCompressedWeight(StringBuilder buf, int currentPos, int weightSize) {
+>]
+[<Line: -  protected final void encodeCompressedWeight(StringBuilder buf, int currentPos, int weightSize) {
+>]

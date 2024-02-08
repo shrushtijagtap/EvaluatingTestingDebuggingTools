@@ -1,0 +1,4 @@
+[<Line: +    @JavaVersionRule.Enforce(value = 8, sort = JavaVersionRule.Sort.AT_MOST)
+>]
+[<Line: -    @JavaVersionRule.Enforce(value = 8, direction = JavaVersionRule.Sort.AT_MOST)
+>]

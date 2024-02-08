@@ -1,0 +1,5 @@
+[<Line: +        OWLDataFactory dataFactory, Set<OWLEquivalentObjectPropertiesAxiom> result,
+>, <Line: +        Set<OWLObjectPropertyExpression> nonSimpleProperties) {
+>]
+[<Line: -        OWLDataFactory dataFactory, Set<OWLEquivalentObjectPropertiesAxiom> result) {
+>]

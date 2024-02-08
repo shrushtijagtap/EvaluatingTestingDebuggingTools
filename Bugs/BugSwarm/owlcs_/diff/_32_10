@@ -1,0 +1,9 @@
+[<Line: +        indexMap.put(prop, Integer.valueOf(index));
+>, <Line: +        lowlinkMap.put(prop, Integer.valueOf(index));
+>, <Line: +        lowlinkMap.put(prop,
+>, <Line: +            Integer.valueOf(Math.min(lowlinkMap.get(prop).intValue(), indexMap.get(supProp).intValue())));
+>]
+[<Line: -        indexMap.put(prop, index);
+>, <Line: -        lowlinkMap.put(prop, index);
+>, <Line: -        lowlinkMap.put(prop, Math.min(lowlinkMap.get(prop), indexMap.get(supProp)));
+>]

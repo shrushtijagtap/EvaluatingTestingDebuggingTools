@@ -1,0 +1,184 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +	],
+>, <Line: +	function (angular, _) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		module.controller('TemplateEditorCtrl', function ($scope, datasourceSrv, templateSrv, templateValuesSrv, alertSrv) {
+>, <Line: +			var replacementDefaults = {
+>, <Line: +				type: 'query',
+>, <Line: +				datasource: null,
+>, <Line: +				refresh_on_load: false,
+>, <Line: +				name: '',
+>, <Line: +				options: [],
+>, <Line: +				includeAll: false,
+>, <Line: +				allFormat: 'glob',
+>, <Line: +			};
+>, <Line: +			$scope.init = function () {
+>, <Line: +				$scope.editor = {index: 0};
+>, <Line: +				$scope.datasources = datasourceSrv.getMetricSources();
+>, <Line: +				$scope.variables = templateSrv.variables;
+>, <Line: +				$scope.reset();
+>, <Line: +				$scope.$watch('editor.index', function (index) {
+>, <Line: +					if ($scope.currentIsNew === false && index === 1) {
+>, <Line: +						$scope.reset();
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			$scope.add = function () {
+>, <Line: +				if ($scope.isValid()) {
+>, <Line: +					$scope.variables.push($scope.current);
+>, <Line: +					$scope.update();
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.isValid = function () {
+>, <Line: +				if (!$scope.current.name) {
+>, <Line: +					$scope.appEvent('alert-warning', ['Validation', 'Template variable requires a name']);
+>, <Line: +					return false;
+>, <Line: +				}
+>, <Line: +				if (!$scope.current.name.match(/^\w+$/)) {
+>, <Line: +					$scope.appEvent('alert-warning', ['Validation', 'Only word and digit characters are allowed in variable names']);
+>, <Line: +					return false;
+>, <Line: +				}
+>, <Line: +				var sameName = _.findWhere($scope.variables, {name: $scope.current.name});
+>, <Line: +				if (sameName && sameName !== $scope.current) {
+>, <Line: +					$scope.appEvent('alert-warning', ['Validation', 'Variable with the same name already exists']);
+>, <Line: +					return false;
+>, <Line: +				}
+>, <Line: +				return true;
+>, <Line: +			};
+>, <Line: +			$scope.runQuery = function () {
+>, <Line: +				return templateValuesSrv.updateOptions($scope.current).then(function () {
+>, <Line: +				}, function (err) {
+>, <Line: +					alertSrv.set('Templating', 'Failed to run query for variable values: ' + err.message, 'error');
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			$scope.edit = function (variable) {
+>, <Line: +				$scope.current = variable;
+>, <Line: +				$scope.currentIsNew = false;
+>, <Line: +				$scope.editor.index = 2;
+>, <Line: +				if ($scope.current.datasource === void 0) {
+>, <Line: +					$scope.current.datasource = null;
+>, <Line: +					$scope.current.type = 'query';
+>, <Line: +					$scope.current.allFormat = 'Glob';
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.update = function () {
+>, <Line: +				if ($scope.isValid()) {
+>, <Line: +					$scope.runQuery().then(function () {
+>, <Line: +						$scope.reset();
+>, <Line: +						$scope.editor.index = 0;
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.reset = function () {
+>, <Line: +				$scope.currentIsNew = true;
+>, <Line: +				$scope.current = angular.copy(replacementDefaults);
+>, <Line: +			};
+>, <Line: +			$scope.typeChanged = function () {
+>, <Line: +				if ($scope.current.type === 'interval') {
+>, <Line: +					$scope.current.query = '1m,10m,30m,1h,6h,12h,1d,7d,14d,30d';
+>, <Line: +				}
+>, <Line: +				if ($scope.current.type === 'query') {
+>, <Line: +					$scope.current.query = '';
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			$scope.removeVariable = function (variable) {
+>, <Line: +				var index = _.indexOf($scope.variables, variable);
+>, <Line: +				$scope.variables.splice(index, 1);
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -],
+>, <Line: -function (angular, _) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  module.controller('TemplateEditorCtrl', function($scope, datasourceSrv, templateSrv, templateValuesSrv, alertSrv) {
+>, <Line: -    var replacementDefaults = {
+>, <Line: -      type: 'query',
+>, <Line: -      datasource: null,
+>, <Line: -      refresh_on_load: false,
+>, <Line: -      name: '',
+>, <Line: -      options: [],
+>, <Line: -      includeAll: false,
+>, <Line: -      allFormat: 'glob',
+>, <Line: -    };
+>, <Line: -    $scope.init = function() {
+>, <Line: -      $scope.editor = { index: 0 };
+>, <Line: -      $scope.datasources = datasourceSrv.getMetricSources();
+>, <Line: -      $scope.variables = templateSrv.variables;
+>, <Line: -      $scope.reset();
+>, <Line: -      $scope.$watch('editor.index', function(index) {
+>, <Line: -        if ($scope.currentIsNew === false && index === 1) {
+>, <Line: -          $scope.reset();
+>, <Line: -        }
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    $scope.add = function() {
+>, <Line: -      if ($scope.isValid()) {
+>, <Line: -        $scope.variables.push($scope.current);
+>, <Line: -        $scope.update();
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.isValid = function() {
+>, <Line: -      if (!$scope.current.name) {
+>, <Line: -        $scope.appEvent('alert-warning', ['Validation', 'Template variable requires a name']);
+>, <Line: -        return false;
+>, <Line: -      }
+>, <Line: -      if (!$scope.current.name.match(/^\w+$/)) {
+>, <Line: -        $scope.appEvent('alert-warning', ['Validation', 'Only word and digit characters are allowed in variable names']);
+>, <Line: -        return false;
+>, <Line: -      }
+>, <Line: -      var sameName = _.findWhere($scope.variables, { name: $scope.current.name });
+>, <Line: -      if (sameName && sameName !== $scope.current) {
+>, <Line: -        $scope.appEvent('alert-warning', ['Validation', 'Variable with the same name already exists']);
+>, <Line: -        return false;
+>, <Line: -      }
+>, <Line: -      return true;
+>, <Line: -    };
+>, <Line: -    $scope.runQuery = function() {
+>, <Line: -      return templateValuesSrv.updateOptions($scope.current).then(function() {
+>, <Line: -      }, function(err) {
+>, <Line: -        alertSrv.set('Templating', 'Failed to run query for variable values: ' + err.message, 'error');
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    $scope.edit = function(variable) {
+>, <Line: -      $scope.current = variable;
+>, <Line: -      $scope.currentIsNew = false;
+>, <Line: -      $scope.editor.index = 2;
+>, <Line: -      if ($scope.current.datasource === void 0) {
+>, <Line: -        $scope.current.datasource = null;
+>, <Line: -        $scope.current.type = 'query';
+>, <Line: -        $scope.current.allFormat = 'Glob';
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.update = function() {
+>, <Line: -      if ($scope.isValid()) {
+>, <Line: -        $scope.runQuery().then(function() {
+>, <Line: -          $scope.reset();
+>, <Line: -          $scope.editor.index = 0;
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.reset = function() {
+>, <Line: -      $scope.currentIsNew = true;
+>, <Line: -      $scope.current = angular.copy(replacementDefaults);
+>, <Line: -    };
+>, <Line: -    $scope.typeChanged = function () {
+>, <Line: -      if ($scope.current.type === 'interval') {
+>, <Line: -        $scope.current.query = '1m,10m,30m,1h,6h,12h,1d,7d,14d,30d';
+>, <Line: -      }
+>, <Line: -      if ($scope.current.type === 'query') {
+>, <Line: -        $scope.current.query = '';
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    $scope.removeVariable = function(variable) {
+>, <Line: -      var index = _.indexOf($scope.variables, variable);
+>, <Line: -      $scope.variables.splice(index, 1);
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

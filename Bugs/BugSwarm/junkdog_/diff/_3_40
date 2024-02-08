@@ -1,0 +1,15 @@
+[<Line: +	@Test
+>, <Line: +	public void try_inject_on_wired_object_mirrors_inject_behaviour() {
+>, <Line: +		World world = new World(new WorldConfiguration().register("world").setManager(TagManager.class));
+>, <Line: +		SomeThing st = new SomeThing();
+>, <Line: +		world.inject(st, false);
+>, <Line: +		assertEquals("world", st.hello);
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void try_inject_on_plain_object_does_nothing() {
+>, <Line: +		World world = new World(new WorldConfiguration());
+>, <Line: +		Object object = new Object();
+>, <Line: +		world.inject(object, false);
+>, <Line: +	}
+>]
+[]

@@ -1,0 +1,22 @@
+[<Line: +        assertThat(describe(Boolean.class).asUnboxed(), is(describe(boolean.class)));
+>, <Line: +        assertThat(describe(Byte.class).asUnboxed(), is(describe(byte.class)));
+>, <Line: +        assertThat(describe(Short.class).asUnboxed(), is(describe(short.class)));
+>, <Line: +        assertThat(describe(Character.class).asUnboxed(), is(describe(char.class)));
+>, <Line: +        assertThat(describe(Integer.class).asUnboxed(), is(describe(int.class)));
+>, <Line: +        assertThat(describe(Long.class).asUnboxed(), is(describe(long.class)));
+>, <Line: +        assertThat(describe(Float.class).asUnboxed(), is(describe(float.class)));
+>, <Line: +        assertThat(describe(Double.class).asUnboxed(), is(describe(double.class)));
+>, <Line: +        assertThat(describe(Void.class).asUnboxed(), is(describe(Void.class)));
+>, <Line: +        assertThat(describe(Object.class).asUnboxed(), is(describe(Object.class)));
+>]
+[<Line: -        assertThat(describe(Boolean.class).asBoxed(), is(describe(boolean.class)));
+>, <Line: -        assertThat(describe(Byte.class).asBoxed(), is(describe(byte.class)));
+>, <Line: -        assertThat(describe(Short.class).asBoxed(), is(describe(short.class)));
+>, <Line: -        assertThat(describe(Character.class).asBoxed(), is(describe(char.class)));
+>, <Line: -        assertThat(describe(Integer.class).asBoxed(), is(describe(int.class)));
+>, <Line: -        assertThat(describe(Long.class).asBoxed(), is(describe(long.class)));
+>, <Line: -        assertThat(describe(Float.class).asBoxed(), is(describe(float.class)));
+>, <Line: -        assertThat(describe(Double.class).asBoxed(), is(describe(double.class)));
+>, <Line: -        assertThat(describe(Void.class).asBoxed(), is(describe(Void.class)));
+>, <Line: -        assertThat(describe(Object.class).asBoxed(), is(describe(Object.class)));
+>]

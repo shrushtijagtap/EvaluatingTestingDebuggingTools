@@ -1,0 +1,23 @@
+[<Line: +    @Nonnull private static final Integer _1 = Integer.valueOf(1);
+>, <Line: +    @Nonnull private static final Integer _0 = Integer.valueOf(0);
+>, <Line: +        return _0;
+>, <Line: +    Integer counter(Stream<? extends OWLObject> stream) {
+>, <Line: +        return Integer.valueOf(stream.mapToInt(o -> o.accept(this).intValue()).max().orElse(0));
+>, <Line: +        return Integer.valueOf(Math.max(subClassModalDepth, superClassModalDepth));
+>, <Line: +        return Integer.valueOf(1 + ce.getFiller().accept(this).intValue());
+>, <Line: +        return Integer.valueOf(1 + ce.getFiller().accept(this).intValue());
+>, <Line: +        return Integer.valueOf(1 + ce.getFiller().accept(this).intValue());
+>, <Line: +        return Integer.valueOf(1 + ce.getFiller().accept(this).intValue());
+>, <Line: +        return Integer.valueOf(1 + ce.getFiller().accept(this).intValue());
+>]
+[<Line: -    @Nonnull private static final Integer _1 = 1;
+>, <Line: -        return 0;
+>, <Line: -    int counter(Stream<? extends OWLObject> stream) {
+>, <Line: -        return stream.mapToInt(o -> o.accept(this).intValue()).max().orElse(0);
+>, <Line: -        return Math.max(subClassModalDepth, superClassModalDepth);
+>, <Line: -        return 1 + ce.getFiller().accept(this).intValue();
+>, <Line: -        return 1 + ce.getFiller().accept(this).intValue();
+>, <Line: -        return 1 + ce.getFiller().accept(this).intValue();
+>, <Line: -        return 1 + ce.getFiller().accept(this).intValue();
+>, <Line: -        return 1 + ce.getFiller().accept(this).intValue();
+>]

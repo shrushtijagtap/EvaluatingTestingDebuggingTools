@@ -1,0 +1,74 @@
+[<Line: +package org.mp4parser.muxer.tracks;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.*;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.CompositionTimeToSample;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDependencyTypeBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDescriptionBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SubSampleInformationBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part14.ESDescriptorBox;
+>, <Line: +import org.mp4parser.boxes.sampleentry.AudioSampleEntry;
+>, <Line: +import org.mp4parser.muxer.AbstractTrack;
+>, <Line: +import org.mp4parser.muxer.DataSource;
+>, <Line: +import org.mp4parser.muxer.Sample;
+>, <Line: +import org.mp4parser.muxer.TrackMetaData;
+>, <Line: +    public static Map<Integer, Integer> samplingFrequencyIndexMap = new HashMap<Integer, Integer>();
+>, <Line: +    public void close() throws IOException {
+>, <Line: +        // doing everything to get rid of references to memory mapped things
+>, <Line: +        dataSource.close();
+>, <Line: +    }
+>, <Line: +    class AdtsHeader {
+>, <Line: +        int sampleFrequencyIndex;
+>, <Line: +        int mpegVersion;
+>, <Line: +        int layer;
+>, <Line: +        int protectionAbsent;
+>, <Line: +        int profile;
+>, <Line: +        int sampleRate;
+>, <Line: +        int channelconfig;
+>, <Line: +        int original;
+>, <Line: +        int home;
+>, <Line: +        int copyrightedStream;
+>, <Line: +        int copyrightStart;
+>, <Line: +        int frameLength;
+>, <Line: +        int bufferFullness;
+>, <Line: +        int numAacFramesPerAdtsFrame;
+>, <Line: +        int getSize() {
+>, <Line: +            return 7 + (protectionAbsent == 0 ? 2 : 0);
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.coremedia.iso.boxes.*;
+>, <Line: -import com.coremedia.iso.boxes.sampleentry.AudioSampleEntry;
+>, <Line: -import com.googlecode.mp4parser.authoring.AbstractTrack;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.SampleImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.TrackMetaData;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.ESDescriptorBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.*;
+>, <Line: -    public static Map<Integer, Integer> samplingFrequencyIndexMap = new HashMap<Integer, Integer>();
+>, <Line: -    private String lang = "eng";
+>, <Line: -    public void close() throws IOException {
+>, <Line: -        // doing everything to get rid of references to memory mapped things
+>, <Line: -        dataSource.close();
+>, <Line: -    }
+>, <Line: -        this.lang = lang;
+>, <Line: -    class AdtsHeader {
+>, <Line: -        int getSize() {
+>, <Line: -            return 7 + (protectionAbsent == 0 ? 2 : 0);
+>, <Line: -        }
+>, <Line: -        int sampleFrequencyIndex;
+>, <Line: -        int mpegVersion;
+>, <Line: -        int layer;
+>, <Line: -        int protectionAbsent;
+>, <Line: -        int profile;
+>, <Line: -        int sampleRate;
+>, <Line: -        int channelconfig;
+>, <Line: -        int original;
+>, <Line: -        int home;
+>, <Line: -        int copyrightedStream;
+>, <Line: -        int copyrightStart;
+>, <Line: -        int frameLength;
+>, <Line: -        int bufferFullness;
+>, <Line: -        int numAacFramesPerAdtsFrame;
+>, <Line: -    }
+>]

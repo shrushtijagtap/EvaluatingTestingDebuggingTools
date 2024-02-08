@@ -1,0 +1,8 @@
+[<Line: +				bigArray, new TestExecutor(), 2, 10, 500, 1);
+>, <Line: +				bigArray, new TestExecutor(), 3, 1, 500, 1);
+>, <Line: +				bigArray, new TestExecutor(), 3, 2, -1, 1);
+>]
+[<Line: -				bigArray, new TestExecutor(), 2, 10, 500);
+>, <Line: -				bigArray, new TestExecutor(), 3, 1, 500);
+>, <Line: -				bigArray, new TestExecutor(), 3, 2, -1);
+>]

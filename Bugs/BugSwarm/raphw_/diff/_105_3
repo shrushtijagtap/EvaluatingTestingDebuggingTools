@@ -1,0 +1,7 @@
+[<Line: +import net.bytebuddy.ClassFileVersion;
+>, <Line: +        when(methodVisitorWrapper.wrap(instrumentedType, foo, methodVisitor, null, FLAGS, FLAGS * 2)).thenReturn(wrappedVisitor);
+>, <Line: +        verify(methodVisitorWrapper).wrap(instrumentedType, foo, methodVisitor, null, FLAGS, FLAGS * 2);
+>]
+[<Line: -        when(methodVisitorWrapper.wrap(instrumentedType, foo, methodVisitor, FLAGS, FLAGS * 2)).thenReturn(wrappedVisitor);
+>, <Line: -        verify(methodVisitorWrapper).wrap(instrumentedType, foo, methodVisitor, FLAGS, FLAGS * 2);
+>]

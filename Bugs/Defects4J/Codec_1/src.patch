@@ -1,3 +1,29 @@
+diff --git a/Codec_1/buggy/org/apache/commons/codec/language/Caverphone.java b/Codec_1/fixed/org/apache/commons/codec/language/Caverphone.java
+index 0712295..ea43985 100644
+--- a/Codec_1/buggy/org/apache/commons/codec/language/Caverphone.java
++++ b/Codec_1/fixed/org/apache/commons/codec/language/Caverphone.java
+@@ -56,7 +56,7 @@ public class Caverphone implements StringEncoder {
+         }
+ 
+         // 1. Convert to lowercase
+-        txt = txt.toLowerCase();
++        txt = txt.toLowerCase(java.util.Locale.ENGLISH);
+ 
+         // 2. Remove anything not A-Z
+         txt = txt.replaceAll("[^a-z]", "");
+diff --git a/Codec_1/buggy/org/apache/commons/codec/language/Metaphone.java b/Codec_1/fixed/org/apache/commons/codec/language/Metaphone.java
+index 88fea67..a90e0ae 100644
+--- a/Codec_1/buggy/org/apache/commons/codec/language/Metaphone.java
++++ b/Codec_1/fixed/org/apache/commons/codec/language/Metaphone.java
+@@ -85,7 +85,7 @@ public class Metaphone implements StringEncoder {
+         }
+         // single character is itself
+         if (txt.length() == 1) {
+-            return txt.toUpperCase() ;
++            return txt.toUpperCase(java.util.Locale.ENGLISH) ;
+         }
+       
+         char[] inwd = txt.toUpperCase(java.util.Locale.ENGLISH).toCharArray() ;
 diff --git a/Codec_1/buggy/org/apache/commons/codec/language/SoundexUtils.java b/Codec_1/fixed/org/apache/commons/codec/language/SoundexUtils.java
 index 1c6b983..2b04c08 100644
 --- a/Codec_1/buggy/org/apache/commons/codec/language/SoundexUtils.java

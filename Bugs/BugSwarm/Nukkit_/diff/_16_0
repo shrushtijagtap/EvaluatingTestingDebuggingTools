@@ -1,0 +1,80 @@
+[]
+[<Line: -        if(!this.namedTag.contains("XpLevel")){
+>, <Line: -            this.namedTag.putInt("XpLevel", 0);
+>, <Line: -        }
+>, <Line: -        if(!this.namedTag.contains("XpP")){
+>, <Line: -            this.namedTag.putFloat("XpP", 0);
+>, <Line: -        }
+>, <Line: -        if(!this.namedTag.contains("XpTotal")){
+>, <Line: -            this.namedTag.putInt("XpTotal", this.expTotal);
+>, <Line: -        }
+>, <Line: -        this.setExpLevel(this.namedTag.getInt("XpLevel"));
+>, <Line: -        this.setExp(this.namedTag.getFloat("XpP"));
+>, <Line: -        this.setTotalExperience(this.namedTag.getInt("XpTotal"));
+>, <Line: -            this.namedTag.putInt("XpLevel", this.expLevel);
+>, <Line: -            this.namedTag.putFloat("XpP", this.exp);
+>, <Line: -            this.namedTag.putInt("XpTotal", this.expTotal);
+>, <Line: -    public int oldLevel = -1;
+>, <Line: -    public int expLevel;
+>, <Line: -    public int expTotal;
+>, <Line: -    public float exp;
+>, <Line: -    public void addExp(int i) {
+>, <Line: -        int j = 2147483647 - this.expTotal;
+>, <Line: -        if(i > j) {
+>, <Line: -            i = j;
+>, <Line: -        }
+>, <Line: -        this.exp += (float)i / (float)this.getExpToLevel();
+>, <Line: -        for(this.expTotal += i; this.exp >= 1.0F; this.exp /= (float)this.getExpToLevel()) {
+>, <Line: -            this.exp = (this.exp - 1.0F) * (float)this.getExpToLevel();
+>, <Line: -            this.levelDown(1);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    public void addExpLevels(int i){
+>, <Line: -        this.levelDown(i);
+>, <Line: -    }
+>, <Line: -    public float getExp(){
+>, <Line: -        return this.exp;
+>, <Line: -    }
+>, <Line: -    public void setExp(float i){
+>, <Line: -        this.exp = i;
+>, <Line: -    }
+>, <Line: -    public int getExpLevel(){
+>, <Line: -        return this.expLevel;
+>, <Line: -    }
+>, <Line: -    public void setExpLevel(int i){
+>, <Line: -        this.expLevel = i;
+>, <Line: -    }
+>, <Line: -    public int getTotalExperience(){
+>, <Line: -        return this.expTotal;
+>, <Line: -    }
+>, <Line: -    public void setTotalExperience(int i){
+>, <Line: -        this.expTotal = i;
+>, <Line: -    }
+>, <Line: -    public void levelDown(int i){
+>, <Line: -        this.expLevel += i;
+>, <Line: -        if(this.expLevel < 0) {
+>, <Line: -            this.expLevel = 0;
+>, <Line: -            this.exp = 0.0F;
+>, <Line: -            this.expTotal = 0;
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    public int getExpToLevel() {
+>, <Line: -        return this.expLevel >= 30?112 + (this.expLevel - 30) * 9:(this.expLevel >= 15?37 + (this.expLevel - 15) * 5:7 + this.expLevel * 2);
+>, <Line: -    }
+>, <Line: -    public void sendExpLevel(){
+>, <Line: -        UpdateAttributesPacket pk = new UpdateAttributesPacket();
+>, <Line: -        pk.entityId = 0;
+>, <Line: -        pk.entries = new Attribute[]{
+>, <Line: -                Attribute.getAttribute(Attribute.EXPERIENCE_LEVEL).setMaxValue(2147483647).setValue(this.expLevel)
+>, <Line: -        };
+>, <Line: -        this.dataPacket(pk);
+>, <Line: -    }
+>, <Line: -    public void sendExp(){
+>, <Line: -        UpdateAttributesPacket pk = new UpdateAttributesPacket();
+>, <Line: -        pk.entityId = 0;
+>, <Line: -        pk.entries = new Attribute[]{
+>, <Line: -                Attribute.getAttribute(Attribute.EXPERIENCE).setMaxValue(1).setValue(this.exp)
+>, <Line: -        };
+>, <Line: -        this.dataPacket(pk);
+>, <Line: -    }
+>]

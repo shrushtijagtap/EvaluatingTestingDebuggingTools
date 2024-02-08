@@ -1,0 +1,12 @@
+[<Line: + * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#operationObject"
+>, <Line: +   * @return List&lt;String&gt; tags
+>, <Line: +   * @return List&lt;Parameter&gt; parameters
+>, <Line: +   * @return List&lt;SecurityRequirement&gt; security
+>, <Line: +   * @return List&lt;Server&gt; servers
+>]
+[<Line: - * @link https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#operationObject
+>, <Line: -   * @return List<String> tags
+>, <Line: -   * @return List<Parameter> parameters
+>, <Line: -   * @return List<SecurityRequirement> security
+>, <Line: -   * @return List<Server> servers
+>]

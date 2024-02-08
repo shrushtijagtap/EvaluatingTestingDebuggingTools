@@ -1,0 +1,24 @@
+[<Line: +import static org.semanticweb.owlapi.util.OWLAPIPreconditions.checkNotNull;
+>, <Line: +public class GZipStreamDocumentTarget extends OWLOntologyDocumentTargetBase {
+>, <Line: +        super(() -> new GZIPOutputStream(checkNotNull(os, "os cannot be null")), null);
+>]
+[<Line: -import static org.semanticweb.owlapi.util.OWLAPIPreconditions.*;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.util.Optional;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -public class GZipStreamDocumentTarget implements OWLOntologyDocumentTarget {
+>, <Line: -    private static final Logger LOGGER = LoggerFactory
+>, <Line: -        .getLogger(GZipFileDocumentTarget.class);
+>, <Line: -    private final OutputStream outputStream;
+>, <Line: -        outputStream = os;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Optional<OutputStream> getOutputStream() {
+>, <Line: -        try {
+>, <Line: -            return optional(new GZIPOutputStream(outputStream));
+>, <Line: -        } catch (IOException e) {
+>, <Line: -            LOGGER.error("Fille cannot be found or opened", e);
+>, <Line: -            return emptyOptional();
+>, <Line: -        }
+>]

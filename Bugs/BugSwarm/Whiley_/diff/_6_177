@@ -1,0 +1,10 @@
+[<Line: +ensures r ==> all { j in 1 .. |items| | items[j-1] <= items[j] }:
+>, <Line: +    where all { j in 1 .. i | items[j-1] <= items[j] }:
+>, <Line: +        if items[i-1] > items[i]:
+>, <Line: +    assume isSorted([0;2])
+>]
+[<Line: -ensures r ==> all { j in 1 .. |items| | items[j-1] < items[j] }:
+>, <Line: -    where all { j in 1 .. i | items[j-1] < items[j] }:
+>, <Line: -        if items[i-1] >= items[i]:
+>, <Line: -    assume isSorted([0;0])
+>]

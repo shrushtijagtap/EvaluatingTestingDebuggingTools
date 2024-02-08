@@ -1,0 +1,77 @@
+[<Line: +	<style>
+>, <Line: +		.timepicker-timestring {
+>, <Line: +			font-weight: normal;
+>, <Line: +		}
+>, <Line: +		.timepicker-dropdown {
+>, <Line: +			margin: 0px !important;
+>, <Line: +			border: 0px !important;
+>, <Line: +		}
+>, <Line: +	</style>
+>, <Line: +	<form name="input" style="margin:0">
+>, <Line: +				<a class="dropdown-toggle timepicker-dropdown"
+>, <Line: +				   data-toggle="dropdown" href="" bs-tooltip="time.tooltip"
+>, <Line: +				   data-placement="bottom" ng-click="dismiss();">
+>, <Line: +					<li bindonce
+>, <Line: +						ng-repeat='timespan in panel.time_options track by $index'>
+>, <Line: +						<a ng-click="setRelativeFilter(timespan)"
+>, <Line: +						   bo-text="'Last ' + timespan"></a>
+>, <Line: +					</li>
+>, <Line: +					<!-- Auto refresh submenu -->
+>, <Line: +					<li class="dropdown-submenu">
+>, <Line: +						<a href="#">Auto-Refresh</a>
+>, <Line: +						<ul class="dropdown-menu">
+>, <Line: +							<li>
+>, <Line: +								<a ng-click="timeSrv.set_interval(false)">Off</a>
+>, <Line: +							</li>
+>, <Line: +							<li bindonce
+>, <Line: +								ng-repeat="interval in panel.refresh_intervals track by $index">
+>, <Line: +								<a ng-click="timeSrv.set_interval(interval)"
+>, <Line: +								   bo-text="'Every ' + interval"></a>
+>, <Line: +							</li>
+>, <Line: +						</ul>
+>, <Line: +					</li>
+>, <Line: +					<li><a ng-click="customTime()">Custom</a></li>
+>, <Line: +				</ul>
+>, <Line: +			</li>
+>, <Line: +			<li ng-show="!dashboard.refresh" class="grafana-menu-refresh">
+>, <Line: +				<a ng-click="timeSrv.refreshDashboard()"><i
+>, <Line: +						class="icon-refresh"></i></a>
+>, <Line: +			</li>
+>, <Line: +		</ul>
+>, <Line: +	</form>
+>]
+[<Line: -  <style>
+>, <Line: -    .timepicker-timestring {
+>, <Line: -      font-weight: normal;
+>, <Line: -    }
+>, <Line: -    .timepicker-dropdown {
+>, <Line: -      margin: 0px !important;
+>, <Line: -      border: 0px !important;
+>, <Line: -    }
+>, <Line: -  </style>
+>, <Line: -  <form name="input" style="margin:0">
+>, <Line: -				<a class="dropdown-toggle timepicker-dropdown" data-toggle="dropdown" href="" bs-tooltip="time.tooltip" data-placement="bottom" ng-click="dismiss();">
+>, <Line: -					<li bindonce ng-repeat='timespan in panel.time_options track by $index'>
+>, <Line: -						<a ng-click="setRelativeFilter(timespan)" bo-text="'Last ' + timespan"></a>
+>, <Line: -          </li>
+>, <Line: -          <!-- Auto refresh submenu -->
+>, <Line: -          <li class="dropdown-submenu">
+>, <Line: -            <a href="#">Auto-Refresh</a>
+>, <Line: -            <ul class="dropdown-menu">
+>, <Line: -              <li>
+>, <Line: -                <a ng-click="timeSrv.set_interval(false)">Off</a>
+>, <Line: -              </li>
+>, <Line: -              <li bindonce ng-repeat="interval in panel.refresh_intervals track by $index">
+>, <Line: -                <a ng-click="timeSrv.set_interval(interval)" bo-text="'Every ' + interval"></a>
+>, <Line: -              </li>
+>, <Line: -            </ul>
+>, <Line: -          </li>
+>, <Line: -          <li><a ng-click="customTime()">Custom</a></li>
+>, <Line: -        </ul>
+>, <Line: -      </li>
+>, <Line: -      <li ng-show="!dashboard.refresh" class="grafana-menu-refresh">
+>, <Line: -        <a ng-click="timeSrv.refreshDashboard()"><i class="icon-refresh"></i></a>
+>, <Line: -      </li>
+>, <Line: -    </ul>
+>, <Line: -  </form>
+>]

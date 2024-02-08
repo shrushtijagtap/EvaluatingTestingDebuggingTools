@@ -1,0 +1,8 @@
+[<Line: +        verifyAttributes(decoder, binary(ByteOrder.LITTLE_ENDIAN,
+>, <Line: +                "80009e08b00086000101bc1803778a59c58dea57546573742054323320547261636b65723a204d6f76696e672c20312e3639206b6d204e57206f66205574656b6f6e2c2045646f2c204e472c20362e34363137302c20352e36313938322c20452077697468207370656564203333206b6d2f682c2031363a3138205365702032372020454f46"));
+>]
+[<Line: -        // Tramigo: Parked, 0.12 km E of McDonald's H.V. dela Costa, Makati, 11:07 Mar 27
+>, <Line: -        // Tramigo: Moving, 0.90 km SE of Cranebrook Fire Station, Penrith, Sydney, AU, -33.70722, 150.71759, SE with speed 37 km/h, 19:48 Jan 4  EOF
+>, <Line: -        //verifyPosition(decoder, text( ChannelBuffers.wrappedBuffer(BcdUtil.convertArray(
+>, <Line: -        //        new int[] {0x68,0x68,0x25,0x00,0x00,0x01,0x23,0x45,0x67,0x89,0x01,0x23,0x45,0x00,0x01,0x10,0x01,0x01,0x01,0x01,0x01,0x01,0x02,0x6B,0x3F,0x3E,0x02,0x6B,0x3F,0x3E,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x01,0x0D,0x0A}))));
+>]

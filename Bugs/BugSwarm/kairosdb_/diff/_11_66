@@ -1,0 +1,45 @@
+[<Line: +import java.util.ArrayList;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.List;
+>, <Line: +		 Check for at least a single data point for a given metric id
+>, <Line: +		public DataPoint getWithMetricId(String metricId);
+>, <Line: +			/**
+>, <Line: +			 */
+>, <Line: +		 Check for at least a single data point for a given metric id
+>, <Line: +		{
+>, <Line: +			String query = SELECT + "from data_point this\n				where\n				this.\"metric_id\" = ?\n				limit 1";
+>, <Line: +			{
+>, <Line: +			}
+>, <Line: +			{
+>, <Line: +				{
+>, <Line: +				}
+>, <Line: +				catch (java.sql.SQLException sqle2)
+>, <Line: +				{
+>, <Line: +				}
+>, <Line: +		}
+>, <Line: +			//---------------------------------------------------------------------------
+>, <Line: +			/**
+>, <Line: +			 */
+>, <Line: +				System.out.println("DataPoint.getWithMetricId");
+>, <Line: +				getWithMetricId("foo");
+>]
+[<Line: -import java.util.*;
+>, <Line: -			Check for at least a single data point for a given metric id
+>, <Line: -		*/
+>, <Line: -		public DataPoint getWithMetricId(String metricId);/**
+>, <Line: -			Check for at least a single data point for a given metric id
+>, <Line: -			{
+>, <Line: -			String query = SELECT+"from data_point this\n				where\n				this.\"metric_id\" = ?\n				limit 1";
+>, <Line: -				{
+>, <Line: -				}
+>, <Line: -				{
+>, <Line: -					{
+>, <Line: -					}
+>, <Line: -				catch (java.sql.SQLException sqle2) { }
+>, <Line: -				}
+>, <Line: -		//---------------------------------------------------------------------------
+>, <Line: -		/**
+>, <Line: -		*/
+>, <Line: -			System.out.println("DataPoint.getWithMetricId");
+>, <Line: -			getWithMetricId("foo");
+>]

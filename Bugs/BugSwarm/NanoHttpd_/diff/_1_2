@@ -1,0 +1,137 @@
+[<Line: +package fi.iki.elonen.integration;
+>, <Line: +/*
+>, <Line: + * #%L
+>, <Line: + * NanoHttpd-Core
+>, <Line: + * %%
+>, <Line: + * Copyright (C) 2012 - 2015 nanohttpd
+>, <Line: + * %%
+>, <Line: + * Redistribution and use in source and binary forms, with or without modification,
+>, <Line: + * are permitted provided that the following conditions are met:
+>, <Line: + * 
+>, <Line: + * 1. Redistributions of source code must retain the above copyright notice, this
+>, <Line: + *    list of conditions and the following disclaimer.
+>, <Line: + * 
+>, <Line: + * 2. Redistributions in binary form must reproduce the above copyright notice,
+>, <Line: + *    this list of conditions and the following disclaimer in the documentation
+>, <Line: + *    and/or other materials provided with the distribution.
+>, <Line: + * 
+>, <Line: + * 3. Neither the name of the nanohttpd nor the names of its contributors
+>, <Line: + *    may be used to endorse or promote products derived from this software without
+>, <Line: + *    specific prior written permission.
+>, <Line: + * 
+>, <Line: + * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+>, <Line: + * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+>, <Line: + * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+>, <Line: + * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+>, <Line: + * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+>, <Line: + * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+>, <Line: + * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+>, <Line: + * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+>, <Line: + * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+>, <Line: + * OF THE POSSIBILITY OF SUCH DAMAGE.
+>, <Line: + * #L%
+>, <Line: + */
+>, <Line: +import fi.iki.elonen.NanoHTTPD;
+>, <Line: +import org.apache.http.Header;
+>, <Line: +import org.apache.http.HttpResponse;
+>, <Line: +import org.apache.http.client.methods.HttpGet;
+>, <Line: +import org.apache.http.impl.client.DecompressingHttpClient;
+>, <Line: +import org.apache.http.util.EntityUtils;
+>, <Line: +import org.junit.Test;
+>, <Line: +import java.io.*;
+>, <Line: +import static org.hamcrest.CoreMatchers.*;
+>, <Line: +import static org.junit.Assert.*;
+>, <Line: +public class GZipIntegrationTest extends IntegrationTestBase<GZipIntegrationTest.TestServer> {
+>, <Line: +    public static class TestServer extends NanoHTTPD {
+>, <Line: +        public Response response;
+>, <Line: +        public TestServer() {
+>, <Line: +            super(8192);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public Response serve(IHTTPSession session) {
+>, <Line: +            return response;
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public TestServer createTestServer() {
+>, <Line: +        return new TestServer();
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void contentEncodingShouldBeAddedToFixedLengthResponses() throws IOException {
+>, <Line: +        testServer.response = testServer.newFixedLengthResponse("This is a test");
+>, <Line: +        HttpGet request = new HttpGet("http://localhost:8192/");
+>, <Line: +        request.addHeader("Accept-encoding", "gzip");
+>, <Line: +        HttpResponse response = httpclient.execute(request);
+>, <Line: +        Header contentEncoding = response.getFirstHeader("content-encoding");
+>, <Line: +        assertNotNull("Content-Encoding should be set", contentEncoding);
+>, <Line: +        assertEquals("gzip", contentEncoding.getValue());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void contentEncodingShouldBeAddedToChunkedResponses() throws IOException {
+>, <Line: +        InputStream data = new ByteArrayInputStream("This is a test".getBytes("UTF-8"));
+>, <Line: +        testServer.response = testServer.newChunkedResponse(NanoHTTPD.Response.Status.OK, "text/plain", data);
+>, <Line: +        HttpGet request = new HttpGet("http://localhost:8192/");
+>, <Line: +        request.addHeader("Accept-encoding", "gzip");
+>, <Line: +        HttpResponse response = httpclient.execute(request);
+>, <Line: +        Header contentEncoding = response.getFirstHeader("content-encoding");
+>, <Line: +        assertNotNull("Content-Encoding should be set", contentEncoding);
+>, <Line: +        assertEquals("gzip", contentEncoding.getValue());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void shouldFindCorrectAcceptEncodingAmongMany() throws IOException {
+>, <Line: +        testServer.response = testServer.newFixedLengthResponse("This is a test");
+>, <Line: +        HttpGet request = new HttpGet("http://localhost:8192/");
+>, <Line: +        request.addHeader("Accept-encoding", "deflate,gzip");
+>, <Line: +        HttpResponse response = httpclient.execute(request);
+>, <Line: +        Header contentEncoding = response.getFirstHeader("content-encoding");
+>, <Line: +        assertNotNull("Content-Encoding should be set", contentEncoding);
+>, <Line: +        assertEquals("gzip", contentEncoding.getValue());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void contentLengthShouldBeRemovedFromZippedResponses() throws IOException {
+>, <Line: +        testServer.response = testServer.newFixedLengthResponse("This is a test");
+>, <Line: +        HttpGet request = new HttpGet("http://localhost:8192/");
+>, <Line: +        request.addHeader("Accept-encoding", "gzip");
+>, <Line: +        HttpResponse response = httpclient.execute(request);
+>, <Line: +        Header contentLength = response.getFirstHeader("content-length");
+>, <Line: +        assertNull("Content-Length should not be set when gzipping response", contentLength);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void fixedLengthContentIsEncodedProperly() throws IOException {
+>, <Line: +        testServer.response = testServer.newFixedLengthResponse("This is a test");
+>, <Line: +        HttpGet request = new HttpGet("http://localhost:8192/");
+>, <Line: +        request.addHeader("Accept-encoding", "gzip");
+>, <Line: +        HttpResponse response = new DecompressingHttpClient(httpclient).execute(request);
+>, <Line: +        assertEquals("This is a test", EntityUtils.toString(response.getEntity()));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void chunkedContentIsEncodedProperly() throws IOException {
+>, <Line: +        InputStream data = new ByteArrayInputStream("This is a test".getBytes("UTF-8"));
+>, <Line: +        testServer.response = testServer.newChunkedResponse(NanoHTTPD.Response.Status.OK, "text/plain", data);
+>, <Line: +        HttpGet request = new HttpGet("http://localhost:8192/");
+>, <Line: +        request.addHeader("Accept-encoding", "gzip");
+>, <Line: +        HttpResponse response = new DecompressingHttpClient(httpclient).execute(request);
+>, <Line: +        assertEquals("This is a test", EntityUtils.toString(response.getEntity()));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void noGzipWithoutAcceptEncoding() throws IOException {
+>, <Line: +        testServer.response = testServer.newFixedLengthResponse("This is a test");
+>, <Line: +        HttpGet request = new HttpGet("http://localhost:8192/");
+>, <Line: +        HttpResponse response = httpclient.execute(request);
+>, <Line: +        Header contentEncoding = response.getFirstHeader("content-encoding");
+>, <Line: +        assertThat(contentEncoding, is(nullValue()));
+>, <Line: +        assertEquals("This is a test", EntityUtils.toString(response.getEntity()));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void contentShouldNotBeGzippedIfContentLengthIsAddedManually() throws IOException {
+>, <Line: +        testServer.response = testServer.newFixedLengthResponse("This is a test");
+>, <Line: +        testServer.response.addHeader("Content-Length", "" + ("This is a test".getBytes("UTF-8").length));
+>, <Line: +        HttpGet request = new HttpGet("http://localhost:8192/");
+>, <Line: +        request.addHeader("Accept-encoding", "gzip");
+>, <Line: +        HttpResponse response = httpclient.execute(request);
+>, <Line: +        Header contentEncoding = response.getFirstHeader("content-encoding");
+>, <Line: +        assertNull("Content-Encoding should not be set when manually setting content-length", contentEncoding);
+>, <Line: +        assertEquals("This is a test", EntityUtils.toString(response.getEntity()));
+>, <Line: +    }
+>, <Line: +}>]
+[]

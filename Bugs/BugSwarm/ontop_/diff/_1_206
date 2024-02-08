@@ -1,0 +1,137 @@
+[<Line: +import it.unibz.krdb.obda.ontology.ImmutableOntologyVocabulary;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +	private final ImmutableOntologyVocabulary voc;
+>, <Line: +	public VocabularyValidator(TBoxReasoner reasoner, ImmutableOntologyVocabulary voc) {
+>, <Line: +		this.voc = voc;
+>, <Line: +	public CQIE replaceEquivalences(CQIE query) {
+>, <Line: +		return dfac.getCQIE(query.getHead(), replaceEquivalences(query.getBody()));
+>, <Line: +	private <T extends Term> List<T> replaceEquivalences(List<T> body) {
+>, <Line: +		List<T> result = new ArrayList<T>(body.size());
+>, <Line: +		for (Term t : body) {
+>, <Line: +			Term nt;
+>, <Line: +				if (atom.isBooleanFunction()) {
+>, <Line: +					nt = t;
+>, <Line: +				}
+>, <Line: +				else if (atom.isAlgebraFunction()) {
+>, <Line: +					// Calling recursively for nested expressions
+>, <Line: +					nt = dfac.getFunction(atom.getFunctionSymbol(), replaceEquivalences(atom.getTerms()));
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					nt = (T)getNormal(atom);
+>, <Line: +			else
+>, <Line: +				nt = t;
+>, <Line: +			result.add((T)nt);
+>, <Line: +		return result;
+>, <Line: +		// the contains tests are inefficient, but tests fails without them 
+>, <Line: +		// p.isClass etc. do not work correctly -- throw exceptions because COL_TYPE is null
+>, <Line: +		if (/*p.isClass()*/ (p.getArity() == 1) && voc.containsClass(p.getName())) {
+>, <Line: +			OClass c = voc.getClass(p.getName());
+>, <Line: +			OClass equivalent = (OClass)reasoner.getClassDAG().getCanonicalForm(c);
+>, <Line: +			if (equivalent != null && !equivalent.equals(c))
+>, <Line: +		else if (/*p.isObjectProperty()*/ (p.getArity() == 2) && voc.containsObjectProperty(p.getName())) {
+>, <Line: +			ObjectPropertyExpression ope = voc.getObjectProperty(p.getName());
+>, <Line: +			ObjectPropertyExpression equivalent = reasoner.getObjectPropertyDAG().getCanonicalForm(ope);
+>, <Line: +			if (equivalent != null && !equivalent.equals(ope)) { 
+>, <Line: +		}
+>, <Line: +		else if (/*p.isDataProperty()*/ (p.getArity() == 2)  && voc.containsDataProperty(p.getName())) {
+>, <Line: +			DataPropertyExpression dpe = voc.getDataProperty(p.getName());
+>, <Line: +			DataPropertyExpression equivalent = reasoner.getDataPropertyDAG().getCanonicalForm(dpe);
+>, <Line: +			if (equivalent != null && !equivalent.equals(dpe)) 
+>, <Line: +				return dfac.getFunction(equivalent.getPredicate(), atom.getTerms());
+>, <Line: +		Collection<OBDAMappingAxiom> result = new ArrayList<OBDAMappingAxiom>(originalMappings.size());
+>, <Line: +			CQIE targetQuery = mapping.getTargetQuery();	
+>, <Line: +			CQIE newTargetQuery = dfac.getCQIE(targetQuery.getHead(), replaceEquivalences(targetQuery.getBody()));
+>, <Line: +			result.add(dfac.getRDBMSMappingAxiom(mapping.getId(), mapping.getSourceQuery(), newTargetQuery));
+>]
+[<Line: -import it.unibz.krdb.obda.model.DatalogProgram;
+>, <Line: -import it.unibz.krdb.obda.ontology.OntologyFactory;
+>, <Line: -import it.unibz.krdb.obda.ontology.impl.OntologyFactoryImpl;
+>, <Line: -import java.util.LinkedList;
+>, <Line: -	public VocabularyValidator(TBoxReasoner reasoner) {
+>, <Line: -/*
+>, <Line: -	public boolean validatePredicates0(DatalogProgram input) {
+>, <Line: -		boolean isValid = true;
+>, <Line: -		for (CQIE query : input.getRules()) {
+>, <Line: -			for  (Function atom : query.getBody()) {
+>, <Line: -				if (!validate(atom))
+>, <Line: -					isValid = false;
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return isValid;
+>, <Line: -	}
+>, <Line: -*/
+>, <Line: -/*	
+>, <Line: -	private boolean validate(Function atom) {
+>, <Line: -		Predicate predicate = atom.getPredicate();
+>, <Line: -//		boolean isClass = vocabulary.contains(predicate)
+>, <Line: -//				|| equivalences.containsKey(predicate);
+>, <Line: -//		boolean isObjectProp =  vocabulary.contains(predicate)
+>, <Line: -//				|| equivalences.containsKey(predicate);
+>, <Line: -//		boolean isDataProp = vocabulary.contains(predicate)
+>, <Line: -//				|| equivalences.containsKey(predicate);
+>, <Line: -//		boolean isBooleanOpFunction = (predicate instanceof BooleanOperationPredicate);
+>, <Line: -		// Check if the predicate contains in the ontology vocabulary as one
+>, <Line: -		// of these components (i.e., class, object property, data property).
+>, <Line: -		// isClass || isObjectProp || isDataProp || isBooleanOpFunction;
+>, <Line: -		boolean isPredicateValid = vocabulary.contains(predicate)
+>, <Line: -				|| equivalences.containsKey(predicate) 
+>, <Line: -				|| (predicate instanceof BooleanOperationPredicate);
+>, <Line: -		if (!isPredicateValid) {
+>, <Line: -			String debugMsg = "The predicate: [" + predicate.toString() + "]";
+>, <Line: -			log.warn("WARNING: {} is missing in the ontology!", debugMsg);
+>, <Line: -			return false;
+>, <Line: -		}
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -*/
+>, <Line: -	/*
+>, <Line: -	 * Substitute atoms based on the equivalence map.
+>, <Line: -	 */
+>, <Line: -	public DatalogProgram replaceEquivalences(DatalogProgram queries) {
+>, <Line: -		OBDADataFactory fac = OBDADataFactoryImpl.getInstance();
+>, <Line: -		DatalogProgram newprogram = fac.getDatalogProgram(queries.getQueryModifiers());
+>, <Line: -		for (CQIE query : queries.getRules()) {
+>, <Line: -			newprogram.appendRule(replaceEquivalences(query.clone(), true));
+>, <Line: -		}
+>, <Line: -		return newprogram;
+>, <Line: -	public CQIE replaceEquivalences(CQIE query, boolean inplace) {
+>, <Line: -		if (!inplace) {
+>, <Line: -			query = query.clone();
+>, <Line: -		}
+>, <Line: -		replaceEquivalences(query.getBody());
+>, <Line: -		return query;
+>, <Line: -	}
+>, <Line: -	public <T extends Term> void replaceEquivalences(List<T> body) {
+>, <Line: -		for (int i = 0; i < body.size(); i++) {
+>, <Line: -			Term t = body.get(i);
+>, <Line: -				/*
+>, <Line: -				 * Calling recursively for nested expressions
+>, <Line: -				 */
+>, <Line: -				if (atom.isAlgebraFunction()) {
+>, <Line: -					replaceEquivalences(atom.getTerms());
+>, <Line: -					continue;
+>, <Line: -				if (atom.isBooleanFunction())
+>, <Line: -					continue;
+>, <Line: -				T newAtom = (T)getNormal(atom);
+>, <Line: -				body.set(i, newAtom);
+>, <Line: -	private static OntologyFactory ofac = OntologyFactoryImpl.getInstance();
+>, <Line: -		if (p.getArity() == 1) {
+>, <Line: -			OClass c = ofac.createClass(p.getName());
+>, <Line: -			OClass equivalent = reasoner.getClassRepresentative(c);
+>, <Line: -			if (equivalent != null)
+>, <Line: -		else {
+>, <Line: -			ObjectPropertyExpression op = ofac.createObjectProperty(p.getName());
+>, <Line: -			ObjectPropertyExpression equivalent = reasoner.getObjectPropertyRepresentative(op);
+>, <Line: -			if (equivalent != null) {
+>, <Line: -			else {
+>, <Line: -				DataPropertyExpression dp = ofac.createDataProperty(p.getName());
+>, <Line: -				DataPropertyExpression equiv2 = reasoner.getDataPropertyRepresentative(dp);
+>, <Line: -				if (equiv2 != null) {
+>, <Line: -					return dfac.getFunction(equiv2.getPredicate(), atom.getTerms());
+>, <Line: -				}				
+>, <Line: -			}
+>, <Line: -		Collection<OBDAMappingAxiom> result = new LinkedList<OBDAMappingAxiom>();
+>, <Line: -			CQIE targetQuery = (CQIE) mapping.getTargetQuery();
+>, <Line: -			CQIE newTargetQuery = replaceEquivalences(targetQuery, false);
+>, <Line: -			result.add(dfac.getRDBMSMappingAxiom(mapping.getId(), mapping.getSourceQuery().toString(), newTargetQuery));
+>]

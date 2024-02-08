@@ -1,0 +1,67 @@
+[<Line: +package de.charite.compbio.jannovar.progress;
+>, <Line: +/**
+>, <Line: + * A region on a genome, can be a whole chromosome
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenomeRegion {
+>, <Line: +	/** Name of the containing chromosome */
+>, <Line: +	private final String contig;
+>, <Line: +	/** 0-based begin position of half-open interval */
+>, <Line: +	private final int beginPos;
+>, <Line: +	/** 0-based end position of half-open interval */
+>, <Line: +	private final int endPos;
+>, <Line: +	public GenomeRegion(String contig, int beginPos, int endPos) {
+>, <Line: +		super();
+>, <Line: +		this.contig = contig;
+>, <Line: +		this.beginPos = beginPos;
+>, <Line: +		this.endPos = endPos;
+>, <Line: +	}
+>, <Line: +	public String getContig() {
+>, <Line: +		return contig;
+>, <Line: +	}
+>, <Line: +	public int getBeginPos() {
+>, <Line: +		return beginPos;
+>, <Line: +	}
+>, <Line: +	public int getEndPos() {
+>, <Line: +		return endPos;
+>, <Line: +	}
+>, <Line: +	public int length() {
+>, <Line: +		return endPos - beginPos;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return "GenomeRegion [contig=" + contig + ", beginPos=" + beginPos + ", endPos=" + endPos + "]";
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode() {
+>, <Line: +		final int prime = 31;
+>, <Line: +		int result = 1;
+>, <Line: +		result = prime * result + beginPos;
+>, <Line: +		result = prime * result + ((contig == null) ? 0 : contig.hashCode());
+>, <Line: +		result = prime * result + endPos;
+>, <Line: +		return result;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object obj) {
+>, <Line: +		if (this == obj)
+>, <Line: +			return true;
+>, <Line: +		if (obj == null)
+>, <Line: +			return false;
+>, <Line: +		if (getClass() != obj.getClass())
+>, <Line: +			return false;
+>, <Line: +		GenomeRegion other = (GenomeRegion) obj;
+>, <Line: +		if (beginPos != other.beginPos)
+>, <Line: +			return false;
+>, <Line: +		if (contig == null) {
+>, <Line: +			if (other.contig != null)
+>, <Line: +				return false;
+>, <Line: +		} else if (!contig.equals(other.contig))
+>, <Line: +			return false;
+>, <Line: +		if (endPos != other.endPos)
+>, <Line: +			return false;
+>, <Line: +		return true;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

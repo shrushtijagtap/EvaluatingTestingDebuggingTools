@@ -1,0 +1,10 @@
+[<Line: +    PRECO_TABELADO_MAXIMO("2", "Pre\u00e7o tabelado m\u00e1ximo"),
+>, <Line: +    VALOR_OPERACAO("3", "Valor da opera\u00e7\u00e3o");
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    PRECO_TABELADO_MAXIMO("2", "Preco tabelado maximo"),
+>, <Line: -    VALOR_OPERACAO("3", "Valor da operacao");
+>]

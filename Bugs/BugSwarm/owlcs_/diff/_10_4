@@ -1,0 +1,4 @@
+[]
+[<Line: -        toReturn.add(new Object[] { ACCEPT_HTTP_COMPRESSION, Boolean.TRUE });
+>, <Line: -        toReturn.add(new Object[] { FOLLOW_REDIRECTS, Boolean.TRUE });
+>]

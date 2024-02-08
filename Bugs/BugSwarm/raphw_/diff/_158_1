@@ -1,0 +1,43 @@
+[<Line: +            /**
+>, <Line: +             * {@code true} if the advice method ever returns non-exceptionally.
+>, <Line: +             */
+>, <Line: +            protected boolean doesReturn;
+>, <Line: +                doesReturn = false;
+>, <Line: +                doesReturn = true;
+>, <Line: +                doesReturn = true;
+>, <Line: +                methodVisitor.visitLabel(returnHandler);
+>, <Line: +                if (doesReturn) {
+>, <Line: +                    stackMapFrameHandler.injectReturnFrame(methodVisitor);
+>, <Line: +                    if (!returnType.equals(Type.VOID_TYPE)) {
+>, <Line: +                        variable(returnType.getOpcode(Opcodes.ISTORE));
+>, <Line: +                    }
+>, <Line: +                            ", doesReturn=" + doesReturn +
+>, <Line: +                    if (doesReturn) {
+>, <Line: +                        methodVisitor.visitInsn(Opcodes.ACONST_NULL);
+>, <Line: +                        variable(Opcodes.ASTORE, instrumentedMethod.getReturnType().getStackSize().getSize());
+>, <Line: +                        methodVisitor.visitJumpInsn(Opcodes.GOTO, endOfHandler);
+>, <Line: +                    }
+>, <Line: +                    if (doesReturn) {
+>, <Line: +                        methodVisitor.visitLabel(endOfHandler);
+>, <Line: +                    }
+>, <Line: +                            ", doesReturn=" + doesReturn +
+>, <Line: +                    /**
+>, <Line: +                     * {@code true} if the method can return non-exceptionally.
+>, <Line: +                     */
+>, <Line: +                    private boolean doesReturn;
+>, <Line: +                        doesReturn = false;
+>, <Line: +                        doesReturn = true;
+>, <Line: +                        doesReturn = true;
+>, <Line: +                        if (doesReturn && !returnType.equals(Type.VOID_TYPE)) {
+>, <Line: +                                ", doesReturn=" + doesReturn +
+>]
+[<Line: -                methodVisitor.visitLabel(returnHandler);
+>, <Line: -                stackMapFrameHandler.injectReturnFrame(methodVisitor);
+>, <Line: -                if (!returnType.equals(Type.VOID_TYPE)) {
+>, <Line: -                    variable(returnType.getOpcode(Opcodes.ISTORE));
+>, <Line: -                    methodVisitor.visitInsn(Opcodes.ACONST_NULL);
+>, <Line: -                    variable(Opcodes.ASTORE, instrumentedMethod.getReturnType().getStackSize().getSize());
+>, <Line: -                    methodVisitor.visitJumpInsn(Opcodes.GOTO, endOfHandler);
+>, <Line: -                    methodVisitor.visitLabel(endOfHandler);
+>, <Line: -                        if (!returnType.equals(Type.VOID_TYPE)) {
+>]

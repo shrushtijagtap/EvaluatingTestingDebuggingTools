@@ -1,0 +1,52 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +            .thenReturn(Boolean.TRUE);
+>, <Line: +            any(OWLOntologyID.class), any(IRI.class),
+>, <Line: +            any(OWLOntologyFactory.OWLOntologyCreationHandler.class)))
+>, <Line: +                .thenAnswer(i -> notify(3, i, owlOntology));
+>, <Line: +            any(OWLOntologyDocumentSource.class),
+>, <Line: +            any(OWLOntologyFactory.OWLOntologyCreationHandler.class),
+>, <Line: +            any(OntologyConfigurator.class))).thenAnswer(i -> notify(2, i, owlOntology));
+>, <Line: +            new OWLImportsDeclarationImpl(IRI.create("http://owlapi/", "ont"));
+>, <Line: +        throws OWLOntologyCreationException {
+>, <Line: +        OntologyConfigurator arg1 = mock(OntologyConfigurator.class);
+>, <Line: +        throws OWLOntologyCreationException {
+>, <Line: +        throws OWLOntologyCreationException {
+>, <Line: +        throws OWLOntologyCreationException {
+>, <Line: +        throws OWLOntologyCreationException {
+>, <Line: +        OntologyConfigurator arg1 = mock(OntologyConfigurator.class);
+>, <Line: +            new OWLImportsDeclarationImpl(IRI.create("http://owlapi/", "otheront"));
+>, <Line: +        when(mock.getOntologyID()).thenReturn(
+>, <Line: +            new OWLOntologyID(optional(IRI.create("urn:mock:", "ontology")), emptyOptional()));
+>, <Line: +        OntologyConfigurator arg0 = mock(OntologyConfigurator.class);
+>, <Line: +        manager.setOntologyConfigurator(arg0);
+>, <Line: +        OntologyConfigurator arg0 = mock(OntologyConfigurator.class);
+>, <Line: +        manager.setOntologyConfigurator(arg0);
+>, <Line: +        manager.getOntologyConfigurator();
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -import org.semanticweb.owlapi.model.OWLOntologyWriterConfiguration;
+>, <Line: -                        .thenReturn(Boolean.TRUE);
+>, <Line: -                        any(OWLOntologyID.class), any(IRI.class),
+>, <Line: -                        any(OWLOntologyFactory.OWLOntologyCreationHandler.class)))
+>, <Line: -                                        .thenAnswer(i -> notify(3, i, owlOntology));
+>, <Line: -                        any(OWLOntologyDocumentSource.class),
+>, <Line: -                        any(OWLOntologyFactory.OWLOntologyCreationHandler.class),
+>, <Line: -                        any(OWLOntologyLoaderConfiguration.class)))
+>, <Line: -                                        .thenAnswer(i -> notify(2, i, owlOntology));
+>, <Line: -                        new OWLImportsDeclarationImpl(IRI.create("http://owlapi/", "ont"));
+>, <Line: -                    throws OWLOntologyCreationException {
+>, <Line: -        OWLOntologyLoaderConfiguration arg1 = mock(OWLOntologyLoaderConfiguration.class);
+>, <Line: -                    throws OWLOntologyCreationException {
+>, <Line: -                    throws OWLOntologyCreationException {
+>, <Line: -                    throws OWLOntologyCreationException {
+>, <Line: -                    throws OWLOntologyCreationException {
+>, <Line: -        OWLOntologyLoaderConfiguration arg1 = mock(OWLOntologyLoaderConfiguration.class);
+>, <Line: -                        new OWLImportsDeclarationImpl(IRI.create("http://owlapi/", "otheront"));
+>, <Line: -        when(mock.getOntologyID()).thenReturn(new OWLOntologyID(
+>, <Line: -                        optional(IRI.create("urn:mock:", "ontology")), emptyOptional()));
+>, <Line: -        OWLOntologyWriterConfiguration arg0 = mock(OWLOntologyWriterConfiguration.class);
+>, <Line: -        manager.setOntologyWriterConfiguration(arg0);
+>, <Line: -        OWLOntologyLoaderConfiguration arg0 = mock(OWLOntologyLoaderConfiguration.class);
+>, <Line: -        manager.setOntologyLoaderConfiguration(arg0);
+>, <Line: -        manager.getOntologyLoaderConfiguration();
+>]

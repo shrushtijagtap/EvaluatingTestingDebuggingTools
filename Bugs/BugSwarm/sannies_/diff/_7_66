@@ -1,0 +1,8 @@
+[<Line: +handlers = java.util.logging.ConsoleHandler
+>, <Line: +.level = ALL
+>, <Line: +# Console Logging
+>, <Line: +java.util.logging.ConsoleHandler.level = FINEST
+>, <Line: +java.util.logging.ConsoleHandler.formatter = java.util.logging.SimpleFormatter
+>, <Line: +java.util.logging.SimpleFormatter.format=%4$s: %5$s %n
+>]
+[]

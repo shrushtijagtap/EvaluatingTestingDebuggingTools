@@ -1,0 +1,330 @@
+[]
+[<Line: -/*
+>, <Line: - * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: - *
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: - * you may not use this file except in compliance with the License.
+>, <Line: - * You may obtain a copy of the License at
+>, <Line: - *
+>, <Line: - *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - *
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - * See the License for the specific language governing permissions and
+>, <Line: - * limitations under the License.
+>, <Line: - */
+>, <Line: -package com.github.rinde.rinsim.ui.renderers;
+>, <Line: -import static com.google.common.base.Preconditions.checkState;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Collection;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.Comparator;
+>, <Line: -import java.util.Iterator;
+>, <Line: -import java.util.LinkedHashSet;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Set;
+>, <Line: -import javax.annotation.Nullable;
+>, <Line: -import org.apache.commons.math3.geometry.euclidean.twod.Line;
+>, <Line: -import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+>, <Line: -import org.eclipse.swt.SWT;
+>, <Line: -import org.eclipse.swt.graphics.GC;
+>, <Line: -import org.eclipse.swt.graphics.Path;
+>, <Line: -import com.github.rinde.rinsim.core.model.ModelProvider;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.CollisionGraphRoadModel;
+>, <Line: -import com.github.rinde.rinsim.geom.Connection;
+>, <Line: -import com.github.rinde.rinsim.geom.ConnectionData;
+>, <Line: -import com.github.rinde.rinsim.geom.Graph;
+>, <Line: -import com.github.rinde.rinsim.geom.Point;
+>, <Line: -import com.google.common.base.Optional;
+>, <Line: -import com.google.common.collect.HashBasedTable;
+>, <Line: -import com.google.common.collect.Iterators;
+>, <Line: -import com.google.common.collect.PeekingIterator;
+>, <Line: -import com.google.common.collect.Table;
+>, <Line: -/**
+>, <Line: - * @author Rinde van Lon
+>, <Line: - *
+>, <Line: - */
+>, <Line: -public class CollisionGraphRoadModelRenderer implements ModelRenderer {
+>, <Line: -  Optional<CollisionGraphRoadModel> model;
+>, <Line: -  private final int margin = 2;
+>, <Line: -  private static final int NODE_RADIUS = 2;
+>, <Line: -  private static final Point RELATIVE_TEXT_POSITION = new Point(4, -14);
+>, <Line: -  /**
+>, <Line: -   *
+>, <Line: -   */
+>, <Line: -  public CollisionGraphRoadModelRenderer() {
+>, <Line: -    model = Optional.absent();
+>, <Line: -  }
+>, <Line: -  @Override
+>, <Line: -  public void registerModelProvider(ModelProvider mp) {
+>, <Line: -    model = Optional.fromNullable(mp.getModel(CollisionGraphRoadModel.class));
+>, <Line: -  }
+>, <Line: -  static class AdaptedGC {
+>, <Line: -    private final GC gc;
+>, <Line: -    private final ViewPort vp;
+>, <Line: -    AdaptedGC(GC g, ViewPort v) {
+>, <Line: -      gc = g;
+>, <Line: -      vp = v;
+>, <Line: -    }
+>, <Line: -    void drawLine(Point p1, Point p2) {
+>, <Line: -      gc.drawLine(
+>, <Line: -          vp.toCoordX(p1.x), vp.toCoordY(p1.y),
+>, <Line: -          vp.toCoordX(p2.x), vp.toCoordY(p2.y));
+>, <Line: -    }
+>, <Line: -    void setForegroundSysCol(int next) {
+>, <Line: -      gc.setForeground(gc.getDevice().getSystemColor(next));
+>, <Line: -    }
+>, <Line: -    void setBackgroundSysCol(int next) {
+>, <Line: -      gc.setBackground(gc.getDevice().getSystemColor(next));
+>, <Line: -    }
+>, <Line: -    void drawCurve(Point p1, Point p2, Point control) {
+>, <Line: -      final Path path = new Path(gc.getDevice());
+>, <Line: -      path.moveTo(vp.toCoordX(p1.x), vp.toCoordY(p1.y));
+>, <Line: -      path.quadTo(
+>, <Line: -          vp.toCoordX(control.x), vp.toCoordY(control.y),
+>, <Line: -          vp.toCoordX(p2.x), vp.toCoordY(p2.y));
+>, <Line: -      gc.drawPath(path);
+>, <Line: -      path.dispose();
+>, <Line: -    }
+>, <Line: -    void drawCircle(Point p, double radius) {
+>, <Line: -      gc.drawOval(vp.toCoordX(p.x - radius), vp.toCoordY(p.y - radius),
+>, <Line: -          vp.toCoordX(radius * 2d), vp.toCoordY(radius * 2d));
+>, <Line: -    }
+>, <Line: -    void drawCircle(Point p, int radius) {
+>, <Line: -      gc.drawOval(vp.toCoordX(p.x - radius), vp.toCoordY(p.y - radius),
+>, <Line: -          radius * 2, radius * 2);
+>, <Line: -    }
+>, <Line: -  }
+>, <Line: -  static double length(Connection<?> conn) {
+>, <Line: -    return length(conn.from(), conn.to());
+>, <Line: -  }
+>, <Line: -  static double length(Point from, Point to) {
+>, <Line: -    return Point.distance(from, to);
+>, <Line: -  }
+>, <Line: -  static Point unit(Connection<?> conn) {
+>, <Line: -    return unit(conn.from(), conn.to());
+>, <Line: -  }
+>, <Line: -  static Point unit(Point from, Point to) {
+>, <Line: -    return normalize(Point.diff(from, to));
+>, <Line: -  }
+>, <Line: -  static double length(Point p) {
+>, <Line: -    return Math.sqrt(Math.pow(p.x, 2) + Math.pow(p.y, 2));
+>, <Line: -  }
+>, <Line: -  static Point normalize(Point p) {
+>, <Line: -    return Point.divide(p, length(p));
+>, <Line: -  }
+>, <Line: -  static Point on(Point from, Point to, double dist) {
+>, <Line: -    final double length = length(from, to);
+>, <Line: -    final double ratio = dist / length;
+>, <Line: -    final double invRatio = 1 - ratio;
+>, <Line: -    final double x = to.x * ratio + invRatio * from.x;
+>, <Line: -    final double y = to.y * ratio + invRatio * from.y;
+>, <Line: -    return new Point(x, y);
+>, <Line: -  }
+>, <Line: -  static Point on(Connection<?> conn, double dist) {
+>, <Line: -    return on(conn.from(), conn.to(), dist);
+>, <Line: -  }
+>, <Line: -  static Point perp(Point from, Point to, double distOnLine, double distFromLine) {
+>, <Line: -    final Point on = on(from, to, distOnLine);
+>, <Line: -    final Point unit = unit(from, to);
+>, <Line: -    return new Point(
+>, <Line: -        on.x + -unit.y * distFromLine,
+>, <Line: -        on.y + unit.x * distFromLine);
+>, <Line: -  }
+>, <Line: -  static Point perp(Connection<?> conn, double distOnLine, double distFromLine) {
+>, <Line: -    return perp(conn.from(), conn.to(), distOnLine, distFromLine);
+>, <Line: -  }
+>, <Line: -  static Optional<Point> intersectionPoint(Point own1, Point own2,
+>, <Line: -      Point other1,
+>, <Line: -      Point other2) {
+>, <Line: -    final Line line1 = new Line(new Vector2D(own1.x, own1.y), new Vector2D(
+>, <Line: -        own2.x,
+>, <Line: -        own2.y), 0.00001);
+>, <Line: -    final Line line2 = new Line(new Vector2D(other1.x, other1.y), new Vector2D(
+>, <Line: -        other2.x,
+>, <Line: -        other2.y), 0.00001);
+>, <Line: -    final Vector2D intersect = line1.intersection(line2);
+>, <Line: -    if (intersect == null) {
+>, <Line: -      return Optional.absent();
+>, <Line: -    }
+>, <Line: -    return Optional.of(new Point(intersect.getX(), intersect.getY()));
+>, <Line: -    // final Point dxyOwn = Point.diff(own2, own1);
+>, <Line: -    // final Point dxyOth = Point.diff(other2, other1);
+>, <Line: -    //
+>, <Line: -    // final double mOwn;
+>, <Line: -    // if (dxyOwn.x == 0) {
+>, <Line: -    // mOwn = 1;
+>, <Line: -    // } else if (dxyOwn.y == 0) {
+>, <Line: -    // mOwn = 0;
+>, <Line: -    // } else {
+>, <Line: -    // mOwn = dxyOwn.y / dxyOwn.x;
+>, <Line: -    // }
+>, <Line: -    //
+>, <Line: -    // final double mOth;
+>, <Line: -    // if (dxyOth.x == 0) {
+>, <Line: -    // mOth = 1;
+>, <Line: -    // } else if (dxyOth.y == 0) {
+>, <Line: -    // mOth = 0;
+>, <Line: -    // } else {
+>, <Line: -    // mOth = dxyOth.y / dxyOth.x;
+>, <Line: -    // }
+>, <Line: -    //
+>, <Line: -    // System.out.println(mOwn + " " + mOth);
+>, <Line: -    // if (Math.abs(mOwn - mOth) < .0000001) {
+>, <Line: -    // return Optional.absent();
+>, <Line: -    // }
+>, <Line: -    //
+>, <Line: -    // final double cOwn = own1.y - mOwn * own1.x;
+>, <Line: -    // final double cOth = other1.y - mOth * other1.y;
+>, <Line: -    //
+>, <Line: -    // final double x = (cOth - cOwn) / (mOwn - mOth);
+>, <Line: -    // final double y = mOwn * x + cOwn;
+>, <Line: -    // return Optional.of(new Point(x, y));
+>, <Line: -    // final double A2 = other2.y - other1.y;
+>, <Line: -    // final double B2 = other2.x - other1.x;
+>, <Line: -    // final double C2 = A2 * other1.x + B2 * other1.y;
+>, <Line: -    //
+>, <Line: -    // final double A1 = own2.y - own1.y;
+>, <Line: -    // final double B1 = own2.x - own1.x;
+>, <Line: -    // final double C1 = A1 * own1.x + B1 * own1.y;
+>, <Line: -    //
+>, <Line: -    // final double det = A1 * B2 - A2 * B1;
+>, <Line: -    // if (Math.abs(det) < .0000001) {
+>, <Line: -    // return Optional.absent();
+>, <Line: -    // }
+>, <Line: -    // final Point d = new Point((B2 * C1 - B1 * C2) / det, -(A1 * C2 - A2 * C1)
+>, <Line: -    // / det);
+>, <Line: -    // return Optional.of(d);
+>, <Line: -  }
+>, <Line: -  // static Point rotate(Point p, double angle) {
+>, <Line: -  // return new Point(p.x * Math.cos(angle) - p.y * Math.sin(angle),
+>, <Line: -  // p.x * Math.sin(angle) + p.y * Math.cos(angle));
+>, <Line: -  // }
+>, <Line: -  static double angle(Point p1, Point p2) {
+>, <Line: -    final double dx = p1.x - p2.x;
+>, <Line: -    final double dy = p1.y - p2.y;
+>, <Line: -    return Math.atan2(dy, dx);
+>, <Line: -  }
+>, <Line: -  @Override
+>, <Line: -  public void renderStatic(GC gc, ViewPort vp) {
+>, <Line: -    final Graph<? extends ConnectionData> graph = model.get().getGraph();
+>, <Line: -    final AdaptedGC adapter = new AdaptedGC(gc, vp);
+>, <Line: -    // if (showNodes || showNodeLabels) {
+>, <Line: -    // for (final Point node : graph.getNodes()) {
+>, <Line: -    // final int x1 = vp.toCoordX(node.x) - NODE_RADIUS;
+>, <Line: -    // final int y1 = vp.toCoordY(node.y) - NODE_RADIUS;
+>, <Line: -    //
+>, <Line: -    // // if (showNodes) {
+>, <Line: -    // final int size = NODE_RADIUS * 2;
+>, <Line: -    // gc.setBackground(gc.getDevice().getSystemColor(SWT.COLOR_RED));
+>, <Line: -    // gc.fillOval(x1, y1, size, size);
+>, <Line: -    // // }
+>, <Line: -    // // if (showNodeLabels) {
+>, <Line: -    // // gc.setForeground(gc.getDevice().getSystemColor(SWT.COLOR_GRAY));
+>, <Line: -    // // gc.drawString(node.toString(), x1 + (int) RELATIVE_TEXT_POSITION.x,
+>, <Line: -    // // y1 + (int) RELATIVE_TEXT_POSITION.y, true);
+>, <Line: -    // // }
+>, <Line: -    // // }
+>, <Line: -    // }
+>, <Line: -    final double vehicleLength = model.get().getVehicleLength();
+>, <Line: -    final double roadWidth = model.get().getVehicleLength() / 2d;
+>, <Line: -    final double halfRoadWidth = roadWidth / 2d;
+>, <Line: -    // filter connections to avoid double work for bidirectional roads
+>, <Line: -    final Table<Point, Point, Connection<?>> filteredConnections = HashBasedTable
+>, <Line: -        .create();
+>, <Line: -    for (final Connection<?> e : graph.getConnections()) {
+>, <Line: -      if (!filteredConnections.contains(e.to(), e.from())) {
+>, <Line: -        filteredConnections.put(e.from(), e.to(), e);
+>, <Line: -      }
+>, <Line: -    }
+>, <Line: -    for (final Connection<?> e : filteredConnections.values()) {
+>, <Line: -      gc.setForeground(gc.getDevice().getSystemColor(SWT.COLOR_GRAY));
+>, <Line: -      final double length = length(e);
+>, <Line: -      final Point a = perp(e, vehicleLength, halfRoadWidth);
+>, <Line: -      final Point b = perp(e, length - vehicleLength, halfRoadWidth);
+>, <Line: -      adapter.drawLine(a, b);
+>, <Line: -      final Point c = perp(e, vehicleLength, -halfRoadWidth);
+>, <Line: -      final Point d = perp(e, length - vehicleLength, -halfRoadWidth);
+>, <Line: -      adapter.drawLine(c, d);
+>, <Line: -    }
+>, <Line: -    for (final Point p : graph.getNodes()) {
+>, <Line: -      final Set<Point> conns = new LinkedHashSet<>();
+>, <Line: -      conns.addAll(graph.getIncomingConnections(p));
+>, <Line: -      conns.addAll(graph.getOutgoingConnections(p));
+>, <Line: -      final List<Point> neighbors = new ArrayList<>(conns);
+>, <Line: -      Collections.sort(neighbors, new Comparator<Point>() {
+>, <Line: -        @Override
+>, <Line: -        public int compare(@Nullable Point o1, @Nullable Point o2) {
+>, <Line: -          assert o1 != null;
+>, <Line: -          assert o2 != null;
+>, <Line: -          return Double.compare(angle(p, o1), angle(p, o2));
+>, <Line: -        }
+>, <Line: -      });
+>, <Line: -      final Iterator<Integer> colors = Iterators.cycle(SWT.COLOR_BLUE,
+>, <Line: -          SWT.COLOR_GREEN, SWT.COLOR_RED, SWT.COLOR_CYAN, SWT.COLOR_MAGENTA);
+>, <Line: -      System.out.println(neighbors);
+>, <Line: -      neighbors.add(neighbors.get(0));
+>, <Line: -      final PeekingIterator<Point> it = Iterators.peekingIterator(neighbors
+>, <Line: -          .iterator());
+>, <Line: -      for (Point n = it.next(); it.hasNext(); n = it.next()) {
+>, <Line: -        if (!it.hasNext()) {
+>, <Line: -          break;
+>, <Line: -        }
+>, <Line: -        adapter.setForegroundSysCol(colors.next());
+>, <Line: -        // adapter.drawLine(p, on(p, n, 1));
+>, <Line: -        // adapter.drawLine(perp(p, n, 1, .5), perp(p, n, 2, .5));
+>, <Line: -        final Point a = perp(p, n, vehicleLength, -halfRoadWidth);
+>, <Line: -        final Point a2 = perp(p, n, vehicleLength - 1, -halfRoadWidth);
+>, <Line: -        final Point b = perp(p, it.peek(), vehicleLength, halfRoadWidth);
+>, <Line: -        final Point b2 = perp(p, it.peek(), vehicleLength - 1, halfRoadWidth);
+>, <Line: -        final Optional<Point> intersect = intersectionPoint(a, a2, b, b2);
+>, <Line: -        // adapter.drawLine(a, a2);
+>, <Line: -        // adapter.drawLine(b, b2);
+>, <Line: -        if (intersect.isPresent()) {
+>, <Line: -          final Point control = intersect.get();// perp(p, n, halfRoadWidth,
+>, <Line: -                                                // halfRoadWidth);
+>, <Line: -                                                // adapter.drawCircle(control,
+>, <Line: -                                                // 2);
+>, <Line: -          adapter.setForegroundSysCol(SWT.COLOR_GRAY);
+>, <Line: -          adapter.drawCurve(a, b, control);
+>, <Line: -        }
+>, <Line: -        else {
+>, <Line: -          adapter.setForegroundSysCol(SWT.COLOR_GRAY);
+>, <Line: -          adapter.drawLine(a, b);
+>, <Line: -        }
+>, <Line: -        // final Path path = new Path(gc.getDevice());
+>, <Line: -        // path.moveTo(vp.toCoordX(a.x), vp.toCoordY(a.y));
+>, <Line: -        // path.quadTo(vp.toCoordX(p.x), vp.toCoordY(p.y),
+>, <Line: -        // vp.toCoordX(b.x), vp.toCoordY(b.y));
+>, <Line: -        // gc.drawPath(path);
+>, <Line: -        // path.dispose();
+>, <Line: -        // adapter.drawLine(perp(p, n, vehicleLength, -halfRoadWidth),
+>, <Line: -        // perp(p, it.peek(), vehicleLength, halfRoadWidth));
+>, <Line: -      }
+>, <Line: -    }
+>, <Line: -  }
+>, <Line: -  @Override
+>, <Line: -  public void renderDynamic(GC gc, ViewPort vp, long time) {}
+>, <Line: -  @Nullable
+>, <Line: -  @Override
+>, <Line: -  public ViewRect getViewRect() {
+>, <Line: -    final Graph<?> graph = model.get().getGraph();
+>, <Line: -    checkState(!model.get().getGraph().isEmpty(),
+>, <Line: -        "graph may not be empty at this point");
+>, <Line: -    final Collection<Point> nodes = model.get().getGraph().getNodes();
+>, <Line: -    double minX = Double.POSITIVE_INFINITY;
+>, <Line: -    double maxX = Double.NEGATIVE_INFINITY;
+>, <Line: -    double minY = Double.POSITIVE_INFINITY;
+>, <Line: -    double maxY = Double.NEGATIVE_INFINITY;
+>, <Line: -    for (final Point p : nodes) {
+>, <Line: -      minX = Math.min(minX, p.x);
+>, <Line: -      maxX = Math.max(maxX, p.x);
+>, <Line: -      minY = Math.min(minY, p.y);
+>, <Line: -      maxY = Math.max(maxY, p.y);
+>, <Line: -    }
+>, <Line: -    return new ViewRect(new Point(minX - margin, minY - margin), new Point(maxX
+>, <Line: -        + margin, maxY + margin));
+>, <Line: -  }
+>, <Line: -}
+>]

@@ -1,0 +1,30 @@
+[<Line: +import org.kairosdb.core.DataPoint;
+>, <Line: +import org.kairosdb.core.DataPointSet;
+>, <Line: +import org.kairosdb.core.KairosDataPointFactory;
+>, <Line: +import org.kairosdb.core.TestDataPointFactory;
+>, <Line: +import org.kairosdb.core.datastore.*;
+>, <Line: +import static org.hamcrest.CoreMatchers.equalTo;
+>, <Line: +import static org.hamcrest.CoreMatchers.hasItem;
+>, <Line: +import static org.hamcrest.CoreMatchers.instanceOf;
+>, <Line: +	private static class FakeDataStore implements Datastore, ServiceKeyStore
+>, <Line: +		@Override
+>, <Line: +		public Iterable<String> listServiceKeys(String service)
+>, <Line: +				throws DatastoreException
+>, <Line: +		{
+>, <Line: +			return null;
+>, <Line: +		}
+>, <Line: +		@Override
+>, <Line: +		public void deleteKey(String service, String serviceKey, String key)
+>, <Line: +				throws DatastoreException
+>, <Line: +		{
+>, <Line: +		}
+>]
+[<Line: -import com.google.common.collect.ImmutableSortedMap;
+>, <Line: -import org.kairosdb.core.*;
+>, <Line: -import org.kairosdb.core.datastore.Datastore;
+>, <Line: -import org.kairosdb.core.datastore.DatastoreMetricQuery;
+>, <Line: -import org.kairosdb.core.datastore.QueryCallback;
+>, <Line: -import org.kairosdb.core.datastore.TagSet;
+>, <Line: -import static org.hamcrest.CoreMatchers.*;
+>, <Line: -	private static class FakeDataStore implements Datastore
+>]

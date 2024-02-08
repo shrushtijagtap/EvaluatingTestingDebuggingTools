@@ -1,0 +1,10 @@
+[<Line: +	Quest qest = new Quest(OWLAPI3TranslatorUtility.translateImportsClosure(ontology), obdaModel, dbMetadata, preference);
+>]
+[<Line: -private OWLAPI3TranslatorUtility translator = new OWLAPI3TranslatorUtility();
+>, <Line: -	Quest qest = new Quest(getOntologyFromOWLOntology(ontology), obdaModel, dbMetadata, preference);
+>, <Line: -private Ontology getOntologyFromOWLOntology(OWLOntology owlontology) throws Exception{
+>, <Line: -	//compute closure first (owlontology might contain include other source declarations)
+>, <Line: -	Set<OWLOntology> clousure = owlontology.getOWLOntologyManager().getImportsClosure(owlontology);
+>, <Line: -	return translator.mergeTranslateOntologies(clousure);
+>, <Line: -	}
+>]

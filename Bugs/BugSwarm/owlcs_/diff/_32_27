@@ -1,0 +1,9 @@
+[<Line: +        Caffeine<Object, Object> annotationsCacheBuilder = Caffeine.newBuilder().maximumSize(512).expireAfterAccess(2,
+>, <Line: +            TimeUnit.MINUTES);
+>, <Line: +                logger.debug("{}: Annotations Cache stats: {}", Integer.valueOf(n), annotationsCache.stats());
+>]
+[<Line: -        Caffeine<Object, Object> annotationsCacheBuilder = Caffeine.newBuilder()
+>, <Line: -            .maximumSize(512)
+>, <Line: -            .expireAfterAccess(2, TimeUnit.MINUTES);
+>, <Line: -                logger.debug("{}: Annotations Cache stats: {}", n, annotationsCache.stats());
+>]

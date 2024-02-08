@@ -1,0 +1,4 @@
+[<Line: +        logger.info(" - Total: Pass: {}, Failed: {} - ", pass, fails);
+>]
+[<Line: -        logger.info(" Total: Pass: {}, Failed: {}", pass, fails);
+>]

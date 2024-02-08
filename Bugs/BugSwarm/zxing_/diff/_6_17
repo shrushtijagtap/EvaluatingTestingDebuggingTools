@@ -1,0 +1,6 @@
+[<Line: +    int checksumPortion = oddChecksumPortion + 3 * evenChecksumPortion;
+>, <Line: +    } else */ if (mismatch == 1) {
+>]
+[<Line: -    int checksumPortion = oddChecksumPortion + 3*evenChecksumPortion;
+>, <Line: -    } else */if (mismatch == 1) {
+>]

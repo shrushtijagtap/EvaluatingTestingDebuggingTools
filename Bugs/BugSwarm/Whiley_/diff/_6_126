@@ -1,0 +1,5 @@
+[<Line: +../../tests/invalid/TypeEquals_Invalid_11.whiley:8: incomparable operands: bool and int
+>, <Line: +        return x == 0
+>, <Line: +               ^^^^^^
+>]
+[]

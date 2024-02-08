@@ -1,0 +1,186 @@
+[]
+[<Line: -package command;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.net.SocketTimeoutException;
+>, <Line: -import java.net.UnknownHostException;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import java.util.HashSet;
+>, <Line: -import java.util.List;
+>, <Line: -import javafx.application.Platform;
+>, <Line: -import javafx.collections.ObservableList;
+>, <Line: -import model.Model;
+>, <Line: -import model.TurboIssue;
+>, <Line: -import model.TurboLabel;
+>, <Line: -import model.TurboMilestone;
+>, <Line: -import model.TurboUser;
+>, <Line: -import org.eclipse.egit.github.core.Issue;
+>, <Line: -import org.eclipse.egit.github.core.client.RequestException;
+>, <Line: -import service.ServiceManager;
+>, <Line: -import util.CollectionUtilities;
+>, <Line: -import util.DialogMessage;
+>, <Line: -public class TurboIssueEdit extends TurboIssueCommand{
+>, <Line: -	protected static final String TITLE_FIELD = "title";
+>, <Line: -	protected static final String DESCRIPTION_FIELD = "desc";
+>, <Line: -	protected static final String LABEL_FIELD = "label";
+>, <Line: -	protected static final String MILESTONE_FIELD = "milestone";
+>, <Line: -	protected static final String ASSIGNEE_FIELD = "assignee";
+>, <Line: -	protected static final String PARENT_FIELD = "parent";
+>, <Line: -	private TurboIssue editedIssue;
+>, <Line: -	public TurboIssueEdit(Model model, TurboIssue originalIssue, TurboIssue editedIssue){
+>, <Line: -		super(model, originalIssue);
+>, <Line: -		this.editedIssue = editedIssue;
+>, <Line: -	}
+>, <Line: -	public TurboIssue getEditedIssue(){
+>, <Line: -		return editedIssue;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean performExecuteAction() {
+>, <Line: -		isSuccessful = updateIssue(issue, editedIssue);
+>, <Line: -		return isSuccessful;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean performUndoAction() {
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -	private void updateIssueInGithub(Issue sent, String dateModified) throws IOException{
+>, <Line: -		ServiceManager.getInstance().editIssue(sent, dateModified);
+>, <Line: -	}
+>, <Line: -	private boolean updateIssue(TurboIssue originalIssue, TurboIssue editedIssue){
+>, <Line: -		int issueId = editedIssue.getId();
+>, <Line: -		HashMap<String, Object> issueQuery;
+>, <Line: -		try {
+>, <Line: -			issueQuery = ServiceManager.getInstance().getIssueData(issueId);
+>, <Line: -			String dateModified = ServiceManager.getInstance().getDateFromIssueData(issueQuery);
+>, <Line: -			TurboIssue latestIssue = new TurboIssue(ServiceManager.getInstance().getIssueFromIssueData(issueQuery), model.get());
+>, <Line: -			boolean descUpdated = mergeIssues(originalIssue, editedIssue, latestIssue);
+>, <Line: -			Issue latest = latestIssue.toGhResource();
+>, <Line: -			updateIssueInGithub(latest, dateModified);
+>, <Line: -			if(!descUpdated){
+>, <Line: -				DialogMessage.showWarningDialog("Issue description not updated", "The issue description has been concurrently modified. "
+>, <Line: -						+ "Please reload and enter your descripton again.");
+>, <Line: -			}
+>, <Line: -			Platform.runLater(() -> {
+>, <Line: -				//Must be run on application thread since this triggers ui updates.
+>, <Line: -				model.get().updateCachedIssue(latestIssue);
+>, <Line: -			});
+>, <Line: -			return true;
+>, <Line: -		} catch (IOException e) {
+>, <Line: -			if(e instanceof SocketTimeoutException | e instanceof UnknownHostException){
+>, <Line: -				Platform.runLater(()->{
+>, <Line: -					DialogMessage.showWarningDialog("Internet Connection Timeout", 
+>, <Line: -							"Timeout while editing issue in GitHub, please check your internet connection.");
+>, <Line: -				});
+>, <Line: -				logger.info("Could not edit issue: " + e.getLocalizedMessage());
+>, <Line: -			}else if(e instanceof RequestException){
+>, <Line: -				Platform.runLater(()->{
+>, <Line: -					DialogMessage.showWarningDialog("No repository permissions", 
+>, <Line: -							"Cannot edit issue.");
+>, <Line: -				});
+>, <Line: -				logger.info("Could not edit issue: " + e.getLocalizedMessage());
+>, <Line: -			}else{
+>, <Line: -				logger.error(e.getLocalizedMessage(), e);
+>, <Line: -			}
+>, <Line: -			return false;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Modifies @param latest to contain the merged changes of @param edited and @param latest wrt @param edited
+>, <Line: -	 * Stores change log in @param changeLog
+>, <Line: -	 * @return true if issue description has been successfully merged, false otherwise
+>, <Line: -	 * */
+>, <Line: -	private boolean mergeIssues(TurboIssue original, TurboIssue edited, TurboIssue latest){
+>, <Line: -		mergeTitle(original, edited, latest);
+>, <Line: -		boolean fullMerge = mergeDescription(original, edited, latest);
+>, <Line: -		mergeIssueParent(original, edited, latest);
+>, <Line: -		mergeLabels(original, edited, latest);
+>, <Line: -		mergeAssignee(original, edited, latest);
+>, <Line: -		mergeMilestone(original, edited, latest);
+>, <Line: -		mergeOpen(original, edited, latest);
+>, <Line: -		return fullMerge;
+>, <Line: -	}
+>, <Line: -	private void mergeLabels(TurboIssue original, TurboIssue edited, TurboIssue latest) {
+>, <Line: -		List<TurboLabel> originalLabels = original.getLabels();
+>, <Line: -		List<TurboLabel> editedLabels = edited.getLabels();
+>, <Line: -		HashMap<String, HashSet<TurboLabel>> changeSet = CollectionUtilities.getChangesToList(originalLabels, editedLabels);
+>, <Line: -		List<TurboLabel> latestLabels = latest.getLabels();
+>, <Line: -		HashSet<TurboLabel> removed = changeSet.get(CollectionUtilities.REMOVED_TAG);
+>, <Line: -		HashSet<TurboLabel> added = changeSet.get(CollectionUtilities.ADDED_TAG);
+>, <Line: -		latestLabels.removeAll(removed);
+>, <Line: -		for(TurboLabel label: added){
+>, <Line: -			if(!latestLabels.contains(label)){
+>, <Line: -				latestLabels.add(label);
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -//		changeLogs.put(LABEL_FIELD, IssueChangeLogger.getLabelsChangeLog(model.get(), originalLabels, editedLabels));
+>, <Line: -		latest.setLabels(latestLabels);
+>, <Line: -	}
+>, <Line: -	private void mergeMilestone(TurboIssue original, TurboIssue edited, TurboIssue latest) {
+>, <Line: -		TurboMilestone originalMilestone = original.getMilestone();
+>, <Line: -		TurboMilestone editedMilestone = edited.getMilestone();
+>, <Line: -		int originalMNumber = (originalMilestone != null) ? originalMilestone.getNumber() : 0;
+>, <Line: -		int editedMNumber = (editedMilestone != null) ? editedMilestone.getNumber() : 0;
+>, <Line: -		if (editedMNumber != originalMNumber) {
+>, <Line: -			// this check is for cleared milestone
+>, <Line: -			if (editedMilestone == null) {
+>, <Line: -				editedMilestone = new TurboMilestone();
+>, <Line: -			}
+>, <Line: -			if (originalMilestone == null) {
+>, <Line: -				originalMilestone = new TurboMilestone();
+>, <Line: -			}
+>, <Line: -			latest.setMilestone(editedMilestone);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private void mergeOpen(TurboIssue original, TurboIssue edited, TurboIssue latest) {
+>, <Line: -		Boolean originalState = original.isOpen();
+>, <Line: -		Boolean editedState = edited.isOpen();
+>, <Line: -		if (!editedState.equals(originalState)) {
+>, <Line: -			latest.setOpen(editedState);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private void mergeAssignee(TurboIssue original, TurboIssue edited, TurboIssue latest) {
+>, <Line: -		TurboUser originalAssignee = original.getAssignee();
+>, <Line: -		TurboUser editedAssignee = edited.getAssignee();
+>, <Line: -		// this check is for cleared assignee
+>, <Line: -		if(originalAssignee == null){
+>, <Line: -			originalAssignee = new TurboUser();
+>, <Line: -		}
+>, <Line: -		if (editedAssignee == null) {
+>, <Line: -			editedAssignee = new TurboUser();
+>, <Line: -		} 
+>, <Line: -		if (!originalAssignee.equals(editedAssignee)) {
+>, <Line: -			latest.setAssignee(editedAssignee);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Merges changes to description only if the description in the latest version has not been updated. 
+>, <Line: -	 * Returns false if description was not merged because the issue's description has been modified in @param latest
+>, <Line: -	 * */
+>, <Line: -	private boolean mergeDescription(TurboIssue original, TurboIssue edited, TurboIssue latest) {
+>, <Line: -		String originalDesc = original.getDescription();
+>, <Line: -		String editedDesc = edited.getDescription();
+>, <Line: -		String latestDesc = latest.getDescription();
+>, <Line: -		if (!editedDesc.equals(originalDesc)) {
+>, <Line: -			if(!latestDesc.equals(originalDesc)){
+>, <Line: -				return false;
+>, <Line: -			}
+>, <Line: -			latest.setDescription(editedDesc);
+>, <Line: -		}
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -	private void mergeIssueParent(TurboIssue original, TurboIssue edited, TurboIssue latest){
+>, <Line: -		Integer originalParent = original.getParentIssue();
+>, <Line: -		Integer editedParent = edited.getParentIssue();
+>, <Line: -		if(originalParent != editedParent){
+>, <Line: -			latest.setParentIssue(editedParent);
+>, <Line: -			processInheritedLabels(originalParent, editedParent, edited);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private void mergeTitle(TurboIssue original, TurboIssue edited, TurboIssue latest) {
+>, <Line: -		String originalTitle = original.getTitle();
+>, <Line: -		String editedTitle = edited.getTitle();
+>, <Line: -		if (!editedTitle.equals(originalTitle)) {
+>, <Line: -			latest.setTitle(editedTitle);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -}
+>]

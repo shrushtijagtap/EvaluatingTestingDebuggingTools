@@ -1,0 +1,8 @@
+[<Line: +package org.mp4parser.boxes.sampleentry;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.FreeBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part30.XMLSubtitleSampleEntry;
+>]
+[<Line: -package com.coremedia.iso.boxes.sampleentry;
+>, <Line: -import com.coremedia.iso.boxes.FreeBox;
+>, <Line: -import com.mp4parser.iso14496.part30.XMLSubtitleSampleEntry;
+>]

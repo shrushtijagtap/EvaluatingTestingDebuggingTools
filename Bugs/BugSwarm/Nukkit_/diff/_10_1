@@ -1,0 +1,7 @@
+[<Line: +        </dependency>
+>, <Line: +		<dependency>
+>, <Line: +            <groupId>org.iq80.leveldb</groupId>
+>, <Line: +            <artifactId>leveldb</artifactId>
+>, <Line: +            <version>0.7</version>
+>]
+[]

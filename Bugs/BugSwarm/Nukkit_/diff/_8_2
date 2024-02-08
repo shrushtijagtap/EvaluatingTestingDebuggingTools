@@ -1,0 +1,8 @@
+[<Line: +            <exclusions>
+>, <Line: +                <exclusion>
+>, <Line: +                    <groupId>org.slf4j</groupId>
+>, <Line: +                    <artifactId>slf4j-api</artifactId>
+>, <Line: +                </exclusion>
+>, <Line: +            </exclusions>
+>]
+[]

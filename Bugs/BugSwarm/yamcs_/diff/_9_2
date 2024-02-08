@@ -1,0 +1,16 @@
+[<Line: +            int c=compare(rt.getKey(), rangeEnd);
+>, <Line: +        lastEmitted = dataToTuple(rt.getKey(), rt.getValue());
+>, <Line: +            int c = compare(rt.getKey(), rangeStart);
+>, <Line: +        lastEmitted = dataToTuple(rt.getKey(), rt.getValue());
+>, <Line: +    protected Tuple dataToTuple(byte[] k, byte[] v) {
+>, <Line: +        return tableDefinition.deserialize(k, v); //TODO adapt to the stream schema
+>, <Line: +    }
+>]
+[<Line: -            int c=compare(rt.key, rangeEnd);
+>, <Line: -        lastEmitted=dataToTuple(rt.key, rt.value);
+>, <Line: -            int c=compare(rt.key, rangeStart);
+>, <Line: -        lastEmitted=dataToTuple(rt.key, rt.value);
+>, <Line: -    private Tuple dataToTuple(byte[] k, byte[] v) {
+>, <Line: -        return tableDefinition.deserialize(k,v); //TODO adapt to the stream schema
+>, <Line: -    }
+>]

@@ -1,0 +1,11 @@
+[<Line: +   - The new solver ``sag`` implements a Stochastic Average Gradient descent
+>, <Line: +     and is available in both :class:`linear_model.LogisticRegression` and
+>, <Line: +     :class:`linear_model.Ridge`. This solver is very efficient for large
+>, <Line: +     datasets. By `Danny Sullivan`_ and `Tom Dupre la Tour`_.
+>, <Line: +     (`#4738 <https://github.com/scikit-learn/scikit-learn/pull/4738>`_)
+>, <Line: +   - Added optional parameter ``random_state`` in :class:`linear_model.Ridge`
+>, <Line: +     , to set the seed of the pseudo random generator used in ``sag`` solver. By `Tom Dupre la Tour`_.
+>, <Line: +   - Added optional parameter ``warm_start`` in
+>, <Line: +     :class:`linear_model.LogisticRegression`. If set to True, the solvers ``lbfgs``, ``newton-cg`` and ``sag`` will be initialized with the coefficients computed in the previous fit. By `Tom Dupre la Tour`_.
+>]
+[]

@@ -1,0 +1,8 @@
+[<Line: +    string r = [0; 'b']
+>, <Line: +            r[7-i] = '1'
+>, <Line: +            r[7-i] = '0'
+>]
+[<Line: -    string r = "b"
+>, <Line: -            r = "1" ++ r
+>, <Line: -            r = "0" ++ r
+>]

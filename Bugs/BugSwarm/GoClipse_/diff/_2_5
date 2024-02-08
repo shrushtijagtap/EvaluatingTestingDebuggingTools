@@ -1,0 +1,40 @@
+[<Line: +/*******************************************************************************
+>, <Line: + * Copyright (c) 2016 Bruno Medeiros and other Contributors.
+>, <Line: + * All rights reserved. This program and the accompanying materials
+>, <Line: + * are made available under the terms of the Eclipse Public License v1.0
+>, <Line: + * which accompanies this distribution, and is available at
+>, <Line: + * http://www.eclipse.org/legal/epl-v10.html
+>, <Line: + *
+>, <Line: + * Contributors:
+>, <Line: + *     Bruno Medeiros - initial API and implementation
+>, <Line: + *******************************************************************************/
+>, <Line: +package melnorme.lang.ide.core.operations.build;
+>, <Line: +import static melnorme.utilbox.core.Assert.AssertNamespace.assertNotNull;
+>, <Line: +import java.util.Optional;
+>, <Line: +import org.eclipse.core.resources.IProject;
+>, <Line: +import org.eclipse.debug.core.DebugPlugin;
+>, <Line: +import melnorme.lang.ide.core.operations.ToolManager;
+>, <Line: +import melnorme.utilbox.collections.ArrayList2;
+>, <Line: +import melnorme.utilbox.collections.Indexable;
+>, <Line: +import melnorme.utilbox.core.CommonException;
+>, <Line: +public class CommandInvocation {
+>, <Line: +	protected final String commandInvocation;
+>, <Line: +	protected final ToolManager toolManager;
+>, <Line: +	protected final Optional<IProject> project; 
+>, <Line: +	public CommandInvocation(String commandInvocation, ToolManager toolManager, Optional<IProject> project) {
+>, <Line: +		this.commandInvocation = assertNotNull(commandInvocation);
+>, <Line: +		this.toolManager = assertNotNull(toolManager);
+>, <Line: +		this.project = assertNotNull(project);
+>, <Line: +	}
+>, <Line: +	public ToolManager getToolManager() {
+>, <Line: +		return toolManager;
+>, <Line: +	}
+>, <Line: +	public Indexable<String> getEffectiveCommandLine() throws CommonException {
+>, <Line: +		VariablesResolver variablesManager = getToolManager().getVariablesManager(project);
+>, <Line: +		String evaluatedCommandLine = variablesManager.performStringSubstitution(commandInvocation);
+>, <Line: +		String[] evaluatedArguments = DebugPlugin.parseArguments(evaluatedCommandLine);
+>, <Line: +		return new ArrayList2<>(evaluatedArguments);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

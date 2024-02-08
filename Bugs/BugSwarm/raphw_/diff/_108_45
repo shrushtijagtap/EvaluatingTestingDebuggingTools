@@ -1,0 +1,22 @@
+[<Line: +        when(fieldDescription.getActualName()).thenReturn(FOO);
+>, <Line: +        when(source.getActualName()).thenReturn("getFoo");
+>, <Line: +        when(fieldDescription.getActualName()).thenReturn(FOO);
+>, <Line: +        when(source.getActualName()).thenReturn("getFoo");
+>, <Line: +        when(fieldDescription.getActualName()).thenReturn(FOO);
+>, <Line: +        when(source.getActualName()).thenReturn("setFoo");
+>, <Line: +        when(fieldDescription.getActualName()).thenReturn(FOO);
+>, <Line: +        when(fieldDescription.getActualName()).thenReturn(FOO);
+>, <Line: +        when(source.getActualName()).thenReturn("setFoo");
+>, <Line: +        when(fieldDescription.getActualName()).thenReturn(FOO);
+>]
+[<Line: -        when(fieldDescription.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(source.getSourceCodeName()).thenReturn("getFoo");
+>, <Line: -        when(fieldDescription.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(source.getSourceCodeName()).thenReturn("getFoo");
+>, <Line: -        when(fieldDescription.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(source.getSourceCodeName()).thenReturn("setFoo");
+>, <Line: -        when(fieldDescription.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(fieldDescription.getSourceCodeName()).thenReturn(FOO);
+>, <Line: -        when(source.getSourceCodeName()).thenReturn("setFoo");
+>, <Line: -        when(fieldDescription.getSourceCodeName()).thenReturn(FOO);
+>]

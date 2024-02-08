@@ -1,0 +1,5 @@
+[<Line: +        public void start(Stage primaryStage) {
+>]
+[<Line: -import java.io.IOException;
+>, <Line: -        public void start(Stage primaryStage) throws IOException {
+>]

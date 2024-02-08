@@ -1,0 +1,5 @@
+[<Line: +- Added HTTP retries as a configuration parameter.
+>, <Line: +### Removed
+>, <Line: +- Removed all non-context based constructors from MantaClient. 
+>]
+[]

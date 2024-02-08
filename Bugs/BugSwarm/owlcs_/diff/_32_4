@@ -1,0 +1,22 @@
+[<Line: +    protected static final Set<IRI> ALLOWED_DATATYPES = asUnorderedSet(
+>, <Line: +        OWL2Datatype.EL_DATATYPES.stream().map(i -> i.getIRI()));
+>, <Line: +            axiom.classExpressions().filter(ce -> !isOWL2QLSubClassExpression(ce))
+>, <Line: +                .forEach(ce -> violations.add(new UseOfNonSubClassExpression(getCurrentOntology(), axiom, ce)));
+>, <Line: +                violations
+>, <Line: +                    .add(new UseOfNonAtomicClassExpression(getCurrentOntology(), axiom, axiom.getClassExpression()));
+>, <Line: +            return Boolean.valueOf(ce.getFiller().isOWLThing());
+>, <Line: +            return Boolean.valueOf(!ce.operands().anyMatch(e -> e.accept(this) == Boolean.FALSE));
+>, <Line: +            return Boolean.valueOf(isOWL2QLSubClassExpression(ce.getOperand()));
+>, <Line: +            return Boolean.valueOf(!ce.getFiller().isAnonymous());
+>]
+[<Line: -    protected static final Set<IRI> ALLOWED_DATATYPES = asUnorderedSet(OWL2Datatype.EL_DATATYPES.stream().map(i -> i
+>, <Line: -        .getIRI()));
+>, <Line: -            axiom.classExpressions().filter(ce -> !isOWL2QLSubClassExpression(ce)).forEach(ce -> violations.add(
+>, <Line: -                new UseOfNonSubClassExpression(getCurrentOntology(), axiom, ce)));
+>, <Line: -                violations.add(
+>, <Line: -                    new UseOfNonAtomicClassExpression(getCurrentOntology(), axiom, axiom.getClassExpression()));
+>, <Line: -            return ce.getFiller().isOWLThing();
+>, <Line: -            return !ce.operands().anyMatch(e -> !e.accept(this));
+>, <Line: -            return isOWL2QLSubClassExpression(ce.getOperand());
+>, <Line: -            return !ce.getFiller().isAnonymous();
+>]

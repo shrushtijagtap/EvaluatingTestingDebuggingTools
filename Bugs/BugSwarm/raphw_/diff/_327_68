@@ -1,0 +1,4 @@
+[<Line: +public class TypePoolDefaultLazyTypeListTest extends AbstractTypeListTest<Class<?>> {
+>]
+[<Line: -public class TypePoolLazyTypeListTest extends AbstractTypeListTest<Class<?>> {
+>]

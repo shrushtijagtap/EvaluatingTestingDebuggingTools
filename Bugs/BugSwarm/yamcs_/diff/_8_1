@@ -1,0 +1,13 @@
+[<Line: +import org.yamcs.protobuf.Commanding.CommandQueueInfo;
+>, <Line: +       //enableDebugging();
+>, <Line: +        LinkedBlockingQueue<CommandQueueInfo> cmdQueueInfoList = new LinkedBlockingQueue<>();
+>, <Line: +            case COMMAND_QUEUE_INFO:
+>, <Line: +                cmdQueueInfoList.add(data.getCommandQueueInfo());
+>, <Line: +                break;
+>]
+[<Line: -     //  enableDebugging();
+>, <Line: -                if((count %1000) ==0 ){
+>, <Line: -                    System.out.println("received pdata "+count);
+>, <Line: -                }
+>, <Line: -                //System.out.println("COMMAND HISTORY-------------"+cmdhistData);
+>]

@@ -1,0 +1,19 @@
+[<Line: +    private static final long serialVersionUID = 113059783533989L;
+>, <Line: +    private final String origin;
+>, <Line: +                  @JsonProperty("origin")
+>, <Line: +                  final String origin, 
+>, <Line: +        this.origin = origin;
+>, <Line: +    /**
+>, <Line: +     * Returns The The origin.
+>, <Line: +     * 
+>, <Line: +     * @return The origin
+>, <Line: +     */
+>, <Line: +    public final String getOrigin() {
+>, <Line: +        return this.origin;
+>, <Line: +    }
+>, <Line: +               Objects.equals(origin, other.origin) && 
+>, <Line: +                            origin,
+>, <Line: +                          .add("origin", origin)
+>]
+[<Line: -    private static final long serialVersionUID = 145405771566124L;
+>]

@@ -1,0 +1,58 @@
+[<Line: +import static org.semanticweb.owlapi.util.OWLAPIPreconditions.checkNotNull;
+>, <Line: +public class XZFileDocumentTarget extends OWLOntologyDocumentTargetBase {
+>, <Line: +    /**
+>, <Line: +     * @param os
+>, <Line: +     *        the actual file
+>, <Line: +     * @param filterOptions
+>, <Line: +     *        Settings for XZ compression
+>, <Line: +     */
+>, <Line: +    public XZFileDocumentTarget(File os, FilterOptions... filterOptions) {
+>, <Line: +        super(() -> new XZOutputStream(new FileOutputStream(checkNotNull(os, "os cannot be null")), filterOptions),
+>, <Line: +            null);
+>]
+[<Line: -import static org.semanticweb.owlapi.util.OWLAPIPreconditions.*;
+>, <Line: -import java.io.BufferedOutputStream;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.io.OutputStream;
+>, <Line: -import java.util.Optional;
+>, <Line: -import javax.annotation.Nullable;
+>, <Line: -import org.semanticweb.owlapi.model.IRI;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -import com.google.common.io.Closeables;
+>, <Line: -public class XZFileDocumentTarget implements OWLOntologyDocumentTarget, AutoCloseable {
+>, <Line: -    private static final Logger LOGGER = LoggerFactory.getLogger(XZFileDocumentTarget.class);
+>, <Line: -    private final File out;
+>, <Line: -    private final FilterOptions[] filterOptions;
+>, <Line: -    @Nullable private OutputStream outputStream;
+>, <Line: -    /**
+>, <Line: -     * @param os
+>, <Line: -     *        the actual file
+>, <Line: -     * @param filterOptions
+>, <Line: -     *        Settings for XZ compression
+>, <Line: -     */
+>, <Line: -    public XZFileDocumentTarget(File os, FilterOptions... filterOptions) {
+>, <Line: -        out = os;
+>, <Line: -        this.filterOptions = filterOptions;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Optional<OutputStream> getOutputStream() {
+>, <Line: -        try {
+>, <Line: -            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(out));
+>, <Line: -            outputStream = new XZOutputStream(bufferedOutputStream, filterOptions);
+>, <Line: -        } catch (IOException e) {
+>, <Line: -            LOGGER.error("Cannot create output stream", e);
+>, <Line: -            return emptyOptional();
+>, <Line: -        }
+>, <Line: -        return optional(outputStream);
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Optional<IRI> getDocumentIRI() {
+>, <Line: -        return optional(IRI.create(out));
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void close() throws Exception {
+>, <Line: -        OutputStream toReturn = outputStream;
+>, <Line: -        outputStream = null;
+>, <Line: -        Closeables.close(toReturn, false);
+>]

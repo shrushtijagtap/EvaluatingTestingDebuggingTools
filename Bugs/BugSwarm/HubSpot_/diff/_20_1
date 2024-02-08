@@ -1,0 +1,39 @@
+[<Line: +package com.hubspot.baragon.cache;
+>, <Line: +import com.google.inject.Inject;
+>, <Line: +import com.google.inject.Singleton;
+>, <Line: +import com.hubspot.baragon.data.BaragonStateDatastore;
+>, <Line: +import java.util.concurrent.atomic.AtomicReference;
+>, <Line: +@Singleton
+>, <Line: +public class BaragonStateCache {
+>, <Line: +  private final BaragonStateDatastore stateDatastore;
+>, <Line: +  private final AtomicReference<CachedBaragonState> currentState;
+>, <Line: +  @Inject
+>, <Line: +  public BaragonStateCache(BaragonStateDatastore stateDatastore) {
+>, <Line: +    this.stateDatastore = stateDatastore;
+>, <Line: +    this.currentState = new AtomicReference<>(new CachedBaragonState(new byte[0], -2));
+>, <Line: +  }
+>, <Line: +  public CachedBaragonState getState() {
+>, <Line: +    CachedBaragonState previousState = currentState.get();
+>, <Line: +    int version = stateDatastore.getStateVersion().or(-1);
+>, <Line: +    if (previousState.getVersion() == version) {
+>, <Line: +      return previousState;
+>, <Line: +    } else {
+>, <Line: +      return updateState(version);
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  private synchronized CachedBaragonState updateState(int version) {
+>, <Line: +    CachedBaragonState previousState = currentState.get();
+>, <Line: +    if (previousState.getVersion() >= version) {
+>, <Line: +      return previousState;
+>, <Line: +    } else {
+>, <Line: +      CachedBaragonState newState = fetchState(version);
+>, <Line: +      currentState.set(newState);
+>, <Line: +      return newState;
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  private CachedBaragonState fetchState(int version) {
+>, <Line: +    return new CachedBaragonState(stateDatastore.getGlobalStateAsBytes(), version);
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

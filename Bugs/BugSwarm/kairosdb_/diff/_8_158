@@ -1,0 +1,136 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash'
+>, <Line: +	],
+>, <Line: +	function (angular, _) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		module.controller('SharePanelCtrl', function ($scope, $location, $timeout, timeSrv, $element, templateSrv) {
+>, <Line: +			$scope.init = function () {
+>, <Line: +				$scope.editor = {index: 0};
+>, <Line: +				$scope.forCurrent = true;
+>, <Line: +				$scope.toPanel = true;
+>, <Line: +				$scope.includeTemplateVars = true;
+>, <Line: +				$scope.buildUrl();
+>, <Line: +			};
+>, <Line: +			$scope.buildUrl = function () {
+>, <Line: +				var baseUrl = $location.absUrl();
+>, <Line: +				var queryStart = baseUrl.indexOf('?');
+>, <Line: +				if (queryStart !== -1) {
+>, <Line: +					baseUrl = baseUrl.substring(0, queryStart);
+>, <Line: +				}
+>, <Line: +				var panelId = $scope.panel.id;
+>, <Line: +				var params = angular.copy($location.search());
+>, <Line: +				var range = timeSrv.timeRangeForUrl();
+>, <Line: +				params.from = range.from;
+>, <Line: +				params.to = range.to;
+>, <Line: +				if ($scope.includeTemplateVars) {
+>, <Line: +					_.each(templateSrv.variables, function (variable) {
+>, <Line: +						params['var-' + variable.name] = variable.current.text;
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					_.each(templateSrv.variables, function (variable) {
+>, <Line: +						delete params['var-' + variable.name];
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				if (!$scope.forCurrent) {
+>, <Line: +					delete params.from;
+>, <Line: +					delete params.to;
+>, <Line: +				}
+>, <Line: +				if ($scope.toPanel) {
+>, <Line: +					params.panelId = panelId;
+>, <Line: +					params.fullscreen = true;
+>, <Line: +				} else {
+>, <Line: +					delete params.panelId;
+>, <Line: +					delete params.fullscreen;
+>, <Line: +				}
+>, <Line: +				var paramsArray = [];
+>, <Line: +				_.each(params, function (value, key) {
+>, <Line: +					if (value === null) {
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					if (value === true) {
+>, <Line: +						paramsArray.push(key);
+>, <Line: +					} else {
+>, <Line: +						key += '=' + encodeURIComponent(value);
+>, <Line: +						paramsArray.push(key);
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +				$scope.shareUrl = baseUrl + "?" + paramsArray.join('&');
+>, <Line: +				$timeout(function () {
+>, <Line: +					var input = $element.find('[data-share-panel-url]');
+>, <Line: +					input.focus();
+>, <Line: +					input.select();
+>, <Line: +				}, 10);
+>, <Line: +			};
+>, <Line: +			$scope.init();
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash'
+>, <Line: -],
+>, <Line: -function (angular, _) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  module.controller('SharePanelCtrl', function($scope, $location, $timeout, timeSrv, $element, templateSrv) {
+>, <Line: -    $scope.init = function() {
+>, <Line: -      $scope.editor = { index: 0 };
+>, <Line: -      $scope.forCurrent = true;
+>, <Line: -      $scope.toPanel = true;
+>, <Line: -      $scope.includeTemplateVars = true;
+>, <Line: -      $scope.buildUrl();
+>, <Line: -    };
+>, <Line: -    $scope.buildUrl = function() {
+>, <Line: -      var baseUrl = $location.absUrl();
+>, <Line: -      var queryStart = baseUrl.indexOf('?');
+>, <Line: -      if (queryStart !== -1) {
+>, <Line: -        baseUrl = baseUrl.substring(0, queryStart);
+>, <Line: -      }
+>, <Line: -      var panelId = $scope.panel.id;
+>, <Line: -      var params = angular.copy($location.search());
+>, <Line: -      var range = timeSrv.timeRangeForUrl();
+>, <Line: -      params.from = range.from;
+>, <Line: -      params.to = range.to;
+>, <Line: -      if ($scope.includeTemplateVars) {
+>, <Line: -        _.each(templateSrv.variables, function(variable) {
+>, <Line: -          params['var-' + variable.name] = variable.current.text;
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        _.each(templateSrv.variables, function(variable) {
+>, <Line: -          delete params['var-' + variable.name];
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -      if (!$scope.forCurrent) {
+>, <Line: -        delete params.from;
+>, <Line: -        delete params.to;
+>, <Line: -      }
+>, <Line: -      if ($scope.toPanel) {
+>, <Line: -        params.panelId = panelId;
+>, <Line: -        params.fullscreen = true;
+>, <Line: -      } else {
+>, <Line: -        delete params.panelId;
+>, <Line: -        delete params.fullscreen;
+>, <Line: -      }
+>, <Line: -      var paramsArray = [];
+>, <Line: -      _.each(params, function(value, key) {
+>, <Line: -        if (value === null) { return; }
+>, <Line: -        if (value === true) {
+>, <Line: -          paramsArray.push(key);
+>, <Line: -        } else {
+>, <Line: -          key += '=' + encodeURIComponent(value);
+>, <Line: -          paramsArray.push(key);
+>, <Line: -        }
+>, <Line: -      });
+>, <Line: -      $scope.shareUrl = baseUrl + "?" + paramsArray.join('&') ;
+>, <Line: -      $timeout(function() {
+>, <Line: -        var input = $element.find('[data-share-panel-url]');
+>, <Line: -        input.focus();
+>, <Line: -        input.select();
+>, <Line: -      }, 10);
+>, <Line: -    };
+>, <Line: -    $scope.init();
+>, <Line: -  });
+>, <Line: -});
+>]

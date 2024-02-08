@@ -1,0 +1,209 @@
+[<Line: +/*
+>, <Line: + * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package com.github.rinde.rinsim.ui.renderers;
+>, <Line: +import static com.google.common.base.Preconditions.checkArgument;
+>, <Line: +import static com.google.common.base.Preconditions.checkState;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Collection;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.Comparator;
+>, <Line: +import java.util.LinkedHashSet;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Set;
+>, <Line: +import javax.annotation.Nullable;
+>, <Line: +import org.eclipse.swt.SWT;
+>, <Line: +import org.eclipse.swt.graphics.GC;
+>, <Line: +import org.inferred.freebuilder.FreeBuilder;
+>, <Line: +import com.github.rinde.rinsim.core.model.ModelProvider;
+>, <Line: +import com.github.rinde.rinsim.core.model.road.CollisionGraphRoadModel;
+>, <Line: +import com.github.rinde.rinsim.geom.Connection;
+>, <Line: +import com.github.rinde.rinsim.geom.Graph;
+>, <Line: +import com.github.rinde.rinsim.geom.Point;
+>, <Line: +import com.github.rinde.rinsim.ui.Factory;
+>, <Line: +import com.github.rinde.rinsim.ui.IBuilder;
+>, <Line: +import com.github.rinde.rinsim.ui.renderers.WarehouseRenderer.WarehouseRendererFactory.Builder;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +import com.google.common.collect.HashBasedTable;
+>, <Line: +import com.google.common.collect.Iterators;
+>, <Line: +import com.google.common.collect.PeekingIterator;
+>, <Line: +import com.google.common.collect.Table;
+>, <Line: +/**
+>, <Line: + * @author Rinde van Lon
+>, <Line: + *
+>, <Line: + */
+>, <Line: +public final class WarehouseRenderer implements CanvasRenderer {
+>, <Line: +  private final CollisionGraphRoadModel model;
+>, <Line: +  private final double margin;
+>, <Line: +  private final RenderHelper adapter;
+>, <Line: +  private final double vehicleLength;
+>, <Line: +  private final double roadWidth;
+>, <Line: +  private final double halfRoadWidth;
+>, <Line: +  private final Graph<?> graph;
+>, <Line: +  private final boolean drawOneWayStreetArrows;
+>, <Line: +  WarehouseRenderer(WarehouseRendererFactory factory, CollisionGraphRoadModel m) {
+>, <Line: +    model = m;
+>, <Line: +    graph = model.getGraph();
+>, <Line: +    margin = factory.getMargin() + m.getVehicleLength() / 2d;
+>, <Line: +    drawOneWayStreetArrows = factory.isDrawOneWayStreetArrows();
+>, <Line: +    adapter = new RenderHelper();
+>, <Line: +    vehicleLength = model.getVehicleLength();
+>, <Line: +    roadWidth = model.getVehicleLength() / 2d;
+>, <Line: +    halfRoadWidth = roadWidth / 2d;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void renderStatic(GC gc, ViewPort vp) {
+>, <Line: +    adapter.adapt(gc, vp);
+>, <Line: +    // filter connections to avoid double work for bidirectional roads
+>, <Line: +    final Table<Point, Point, Connection<?>> filteredConnections = HashBasedTable
+>, <Line: +        .create();
+>, <Line: +    for (final Connection<?> e : graph.getConnections()) {
+>, <Line: +      if (!filteredConnections.contains(e.to(), e.from())) {
+>, <Line: +        filteredConnections.put(e.from(), e.to(), e);
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +    adapter.setForegroundSysCol(SWT.COLOR_GRAY);
+>, <Line: +    adapter.setBackgroundSysCol(SWT.COLOR_GRAY);
+>, <Line: +    // draw connections
+>, <Line: +    for (final Connection<?> e : filteredConnections.values()) {
+>, <Line: +      if (!graph.hasConnection(e.to(), e.from()) && drawOneWayStreetArrows) {
+>, <Line: +        if (PointUtil.length(e) > 3 * vehicleLength) {
+>, <Line: +          final Point start1 = PointUtil.on(e, 1 * vehicleLength);
+>, <Line: +          final Point end1 = PointUtil.on(e, 1.5 * vehicleLength);
+>, <Line: +          adapter.drawArrow(start1, end1, roadWidth / 2d, vehicleLength / 4d);
+>, <Line: +          final Point start2 = PointUtil.on(e.to(), e.from(),
+>, <Line: +              1.5 * vehicleLength);
+>, <Line: +          final Point end2 = PointUtil.on(e.to(), e.from(), 1 * vehicleLength);
+>, <Line: +          adapter.drawArrow(start2, end2, roadWidth / 2d, vehicleLength / 4d);
+>, <Line: +        } else {
+>, <Line: +          final double center = PointUtil.length(e) / 2d;
+>, <Line: +          final Point start1 = PointUtil.on(e, center - vehicleLength / 4d);
+>, <Line: +          final Point end1 = PointUtil.on(e, center + vehicleLength / 4d);
+>, <Line: +          adapter.drawArrow(start1, end1, roadWidth / 2d, vehicleLength / 4d);
+>, <Line: +        }
+>, <Line: +      }
+>, <Line: +      final double length = PointUtil.length(e);
+>, <Line: +      final Point a = PointUtil.perp(e, vehicleLength, halfRoadWidth);
+>, <Line: +      final Point b = PointUtil.perp(e, length - vehicleLength, halfRoadWidth);
+>, <Line: +      adapter.drawLine(a, b);
+>, <Line: +      final Point c = PointUtil.perp(e, vehicleLength, -halfRoadWidth);
+>, <Line: +      final Point d = PointUtil.perp(e, length - vehicleLength, -halfRoadWidth);
+>, <Line: +      adapter.drawLine(c, d);
+>, <Line: +    }
+>, <Line: +    // draw node connectors
+>, <Line: +    for (final Point p : graph.getNodes()) {
+>, <Line: +      final Set<Point> conns = new LinkedHashSet<>();
+>, <Line: +      conns.addAll(graph.getIncomingConnections(p));
+>, <Line: +      conns.addAll(graph.getOutgoingConnections(p));
+>, <Line: +      final List<Point> neighbors = new ArrayList<>(conns);
+>, <Line: +      Collections.sort(neighbors, new Comparator<Point>() {
+>, <Line: +        @Override
+>, <Line: +        public int compare(@Nullable Point o1, @Nullable Point o2) {
+>, <Line: +          assert o1 != null;
+>, <Line: +          assert o2 != null;
+>, <Line: +          return Double.compare(PointUtil.angle(p, o1), PointUtil.angle(p, o2));
+>, <Line: +        }
+>, <Line: +      });
+>, <Line: +      neighbors.add(neighbors.get(0));
+>, <Line: +      final PeekingIterator<Point> it = Iterators.peekingIterator(neighbors
+>, <Line: +          .iterator());
+>, <Line: +      for (Point n = it.next(); it.hasNext(); n = it.next()) {
+>, <Line: +        if (!it.hasNext()) {
+>, <Line: +          break;
+>, <Line: +        }
+>, <Line: +        final Point a = PointUtil.perp(p, n, vehicleLength, -halfRoadWidth);
+>, <Line: +        final Point a2 = PointUtil
+>, <Line: +            .perp(p, n, vehicleLength + 1, -halfRoadWidth);
+>, <Line: +        final Point b = PointUtil.perp(p, it.peek(), vehicleLength,
+>, <Line: +            halfRoadWidth);
+>, <Line: +        final Point b2 = PointUtil.perp(p, it.peek(), vehicleLength + 1,
+>, <Line: +            halfRoadWidth);
+>, <Line: +        final Optional<Point> intersect = PointUtil.intersectionPoint(a, a2, b,
+>, <Line: +            b2);
+>, <Line: +        if (intersect.isPresent()) {
+>, <Line: +          final Point control = intersect.get();
+>, <Line: +          adapter.setForegroundSysCol(SWT.COLOR_GRAY);
+>, <Line: +          adapter.drawCurve(a, b, control);
+>, <Line: +        } else {
+>, <Line: +          adapter.setForegroundSysCol(SWT.COLOR_GRAY);
+>, <Line: +          adapter.drawLine(a, b);
+>, <Line: +        }
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void renderDynamic(GC gc, ViewPort vp, long time) {}
+>, <Line: +  @Nullable
+>, <Line: +  @Override
+>, <Line: +  public ViewRect getViewRect() {
+>, <Line: +    final Graph<?> graph = model.getGraph();
+>, <Line: +    checkState(!graph.isEmpty(),
+>, <Line: +        "graph may not be empty at this point");
+>, <Line: +    final Collection<Point> nodes = graph.getNodes();
+>, <Line: +    double minX = Double.POSITIVE_INFINITY;
+>, <Line: +    double maxX = Double.NEGATIVE_INFINITY;
+>, <Line: +    double minY = Double.POSITIVE_INFINITY;
+>, <Line: +    double maxY = Double.NEGATIVE_INFINITY;
+>, <Line: +    for (final Point p : nodes) {
+>, <Line: +      minX = Math.min(minX, p.x);
+>, <Line: +      maxX = Math.max(maxX, p.x);
+>, <Line: +      minY = Math.min(minY, p.y);
+>, <Line: +      maxY = Math.max(maxY, p.y);
+>, <Line: +    }
+>, <Line: +    return new ViewRect(new Point(minX - margin, minY - margin), new Point(maxX
+>, <Line: +        + margin, maxY + margin));
+>, <Line: +  }
+>, <Line: +  public static Builder builder() {
+>, <Line: +    return new Builder();
+>, <Line: +  }
+>, <Line: +  @FreeBuilder
+>, <Line: +  public abstract static class WarehouseRendererFactory implements
+>, <Line: +      Factory<WarehouseRenderer, ModelProvider> {
+>, <Line: +    WarehouseRendererFactory() {}
+>, <Line: +    /**
+>, <Line: +     * @return
+>, <Line: +     */
+>, <Line: +    abstract boolean isDrawOneWayStreetArrows();
+>, <Line: +    /**
+>, <Line: +     * Margin around the warehouse in the unit used by the
+>, <Line: +     * {@link CollisionGraphRoadModel}..
+>, <Line: +     * @return The margin.
+>, <Line: +     */
+>, <Line: +    abstract double getMargin();
+>, <Line: +    @Override
+>, <Line: +    public WarehouseRenderer create(ModelProvider argument) {
+>, <Line: +      return new WarehouseRenderer(this,
+>, <Line: +          argument.getModel(CollisionGraphRoadModel.class));
+>, <Line: +    }
+>, <Line: +    public static class Builder extends
+>, <Line: +        WarehouseRenderer_WarehouseRendererFactory_Builder implements
+>, <Line: +        IBuilder<WarehouseRendererFactory> {
+>, <Line: +      Builder() {
+>, <Line: +        setMargin(0d);
+>, <Line: +        setDrawOneWayStreetArrows(false);
+>, <Line: +      }
+>, <Line: +      /**
+>, <Line: +       * {@inheritDoc} Must be a positive value.
+>, <Line: +       */
+>, <Line: +      @Override
+>, <Line: +      public Builder setMargin(double margin) {
+>, <Line: +        checkArgument(margin >= 0d);
+>, <Line: +        return super.setMargin(margin);
+>, <Line: +      }
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

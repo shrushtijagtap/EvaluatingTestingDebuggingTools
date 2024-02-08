@@ -1,0 +1,44 @@
+[<Line: +import static net.bytebuddy.matcher.ElementMatchers.any;
+>, <Line: +import static net.bytebuddy.matcher.ElementMatchers.isBootstrapClassLoader;
+>, <Line: +import static net.bytebuddy.matcher.ElementMatchers.nameContains;
+>, <Line: +import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
+>, <Line: +import static net.bytebuddy.matcher.ElementMatchers.not;
+>, <Line: +import static org.stagemonitor.core.instrument.ClassLoaderNameMatcher.classLoaderWithName;
+>, <Line: +import static org.stagemonitor.core.instrument.ClassLoaderNameMatcher.isReflectionClassLoader;
+>, <Line: +import static org.stagemonitor.core.instrument.TimedElementMatcherDecorator.timed;
+>, <Line: +import java.util.concurrent.ConcurrentHashMap;
+>, <Line: +import net.bytebuddy.ByteBuddy;
+>, <Line: +import net.bytebuddy.agent.ByteBuddyAgent;
+>, <Line: +import net.bytebuddy.agent.builder.AgentBuilder;
+>, <Line: +import net.bytebuddy.dynamic.scaffold.TypeValidation;
+>, <Line: +import net.bytebuddy.pool.TypePool;
+>, <Line: +//		installNoOpAgent();
+>, <Line: +	private static void installNoOpAgent() {
+>, <Line: +		ByteBuddyAgent.install();
+>, <Line: +		new AgentBuilder.Default(new ByteBuddy().with(TypeValidation.of(false)))
+>, <Line: +				.with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
+>, <Line: +				.with(new AgentBuilder.BinaryLocator.WithTypePoolCache.Simple(TypePool.Default.ReaderMode.FAST, new ConcurrentHashMap<Object, TypePool.CacheProvider>()))
+>, <Line: +				.ignore(any(), timed("classloader", "bootstrap", isBootstrapClassLoader()))
+>, <Line: +				.or(any(), timed("classloader", "reflection", isReflectionClassLoader()))
+>, <Line: +				.or(any(), timed("classloader", "groovy-call-site", classLoaderWithName("org.codehaus.groovy.runtime.callsite.CallSiteClassLoader")))
+>, <Line: +				.or(timed("type", "global-exclude", nameStartsWith("java")
+>, <Line: +						.or(nameStartsWith("com.sun."))
+>, <Line: +						.or(nameStartsWith("sun."))
+>, <Line: +						.or(nameStartsWith("jdk."))
+>, <Line: +						.or(nameStartsWith("org.aspectj."))
+>, <Line: +						.or(nameStartsWith("org.groovy."))
+>, <Line: +						.or(nameStartsWith("com.p6spy."))
+>, <Line: +						.or(nameStartsWith("net.bytebuddy."))
+>, <Line: +						.or(nameStartsWith("org.slf4j.").and(not(nameStartsWith("org.slf4j.impl."))))
+>, <Line: +						.or(nameContains("javassist"))
+>, <Line: +						.or(nameContains(".asm."))
+>, <Line: +						.or(nameStartsWith("org.stagemonitor")
+>, <Line: +								.and(not(nameContains("Test").or(nameContains("benchmark")))))
+>, <Line: +				))
+>, <Line: +				.disableClassFormatChanges()
+>, <Line: +				.type(nameStartsWith("org.elasticsearch"))
+>, <Line: +				.transform(AgentBuilder.Transformer.NoOp.INSTANCE)
+>, <Line: +				.installOnByteBuddyAgent();
+>, <Line: +	}
+>]
+[]

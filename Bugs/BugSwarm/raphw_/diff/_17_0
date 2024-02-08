@@ -1,0 +1,52 @@
+[<Line: +             * @param typeDescription     The type description of the type that is to be considered.
+>, <Line: +             * @param type                The loaded representation of the type that is to be considered.
+>, <Line: +             * @param classBeingRedefined The loaded representation of the type that is to be considered or {@code null} if the
+>, <Line: +             *                            loaded type representation should not be considered.
+>, <Line: +             * @param ignoredTypeMatcher  Identifies types that should not be instrumented.
+>, <Line: +            boolean consider(TypeDescription typeDescription, Class<?> type, Class<?> classBeingRedefined, RawMatcher ignoredTypeMatcher);
+>, <Line: +                public boolean consider(TypeDescription typeDescription, Class<?> type, Class<?> classBeingRedefined, RawMatcher ignoredTypeMatcher) {
+>, <Line: +                            classBeingRedefined,
+>, <Line: +                public boolean consider(TypeDescription typeDescription, Class<?> type, Class<?> classBeingRedefined, RawMatcher ignoredTypeMatcher) {
+>, <Line: +                            classBeingRedefined,
+>, <Line: +        /**
+>, <Line: +         * Indicates that a loaded type should be considered as non-available.
+>, <Line: +         */
+>, <Line: +        private static final Class<?> NO_LOADED_TYPE = null;
+>, <Line: +                                doConsider(descriptionStrategy.apply(TypeDescription.ForLoadedType.getName(type), type, typePool), type, type, module, collector, !instrumentation.isModifiableClass(type));
+>, <Line: +                                    doConsider(typePool.describe(TypeDescription.ForLoadedType.getName(type)).resolve(), type, NO_LOADED_TYPE, module, collector, false);
+>, <Line: +         * @param typeDescription     The type description of the type being considered.
+>, <Line: +         * @param type                The loaded type being considered.
+>, <Line: +         * @param classBeingRedefined The loaded type being considered or {@code null} if it should be considered non-available.
+>, <Line: +         * @param module              The type's Java module or {@code null} if the current VM does not support modules.
+>, <Line: +         * @param collector           The collector to apply.
+>, <Line: +         * @param unmodifiable        {@code true} if the current type should be considered unmodifiable.
+>, <Line: +        private void doConsider(TypeDescription typeDescription,
+>, <Line: +                                Class<?> type,
+>, <Line: +                                Class<?> classBeingRedefined,
+>, <Line: +                                JavaModule module,
+>, <Line: +                                RedefinitionStrategy.Collector collector,
+>, <Line: +                                boolean unmodifiable) {
+>, <Line: +            if (unmodifiable || !collector.consider(typeDescription, type, classBeingRedefined, ignoredTypeMatcher)) {
+>]
+[<Line: -             * @param typeDescription    The type description of the type that is to be considered.
+>, <Line: -             * @param type               The loaded representation of the type that is to be considered.
+>, <Line: -             * @param ignoredTypeMatcher Identifies types that should not be instrumented.
+>, <Line: -            boolean consider(TypeDescription typeDescription, Class<?> type, RawMatcher ignoredTypeMatcher);
+>, <Line: -                public boolean consider(TypeDescription typeDescription, Class<?> type, RawMatcher ignoredTypeMatcher) {
+>, <Line: -                            type,
+>, <Line: -                public boolean consider(TypeDescription typeDescription, Class<?> type, RawMatcher ignoredTypeMatcher) {
+>, <Line: -                            type,
+>, <Line: -                                doConsider(descriptionStrategy.apply(TypeDescription.ForLoadedType.getName(type), type, typePool), type, module, collector, !instrumentation.isModifiableClass(type));
+>, <Line: -                                    doConsider(typePool.describe(TypeDescription.ForLoadedType.getName(type)).resolve(), type, module, collector, false);
+>, <Line: -         * @param typeDescription The type description of the type being considered.
+>, <Line: -         * @param type            The loaded type being considered.
+>, <Line: -         * @param module          The type's Java module or {@code null} if the current VM does not support modules.
+>, <Line: -         * @param collector       The collector to apply.
+>, <Line: -         * @param unmodifiable    {@code true} if the current type should be considered unmodifiable.
+>, <Line: -        private void doConsider(TypeDescription typeDescription, Class<?> type, JavaModule module, RedefinitionStrategy.Collector collector, boolean unmodifiable) {
+>, <Line: -            if (unmodifiable || !collector.consider(typeDescription, type, ignoredTypeMatcher)) {
+>, <Line: -            /**
+>, <Line: -             * Indicates that no loaded type representation is provided.
+>, <Line: -             */
+>, <Line: -            private static final Class<?> NO_LOADED_TYPE = null;
+>]

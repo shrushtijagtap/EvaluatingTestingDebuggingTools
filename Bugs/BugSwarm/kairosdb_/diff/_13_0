@@ -1,0 +1,5 @@
+[<Line: +import org.kairosdb.core.http.rest.GuiceQueryPreProcessor;
+>, <Line: +import org.kairosdb.core.http.rest.QueryPreProcessorContainer;
+>, <Line: +		bind(QueryPreProcessorContainer.class).to(GuiceQueryPreProcessor.class).in(Singleton.class);
+>]
+[]

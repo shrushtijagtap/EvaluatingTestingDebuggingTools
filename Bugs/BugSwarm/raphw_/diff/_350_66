@@ -1,0 +1,58 @@
+[<Line: +package net.bytebuddy.pool;
+>, <Line: +import net.bytebuddy.test.utility.ObjectPropertyAssertion;
+>, <Line: +import org.junit.Test;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import java.util.Iterator;
+>, <Line: +import static org.hamcrest.CoreMatchers.is;
+>, <Line: +import static org.hamcrest.MatcherAssert.assertThat;
+>, <Line: +public class TypePoolDefaultLazyObjectPropertiesTest {
+>, <Line: +    @Test
+>, <Line: +    public void testObjectProperties() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.FieldToken.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.MethodToken.class).apply();
+>, <Line: +        final Iterator<Integer> iterator = Arrays.asList(1, 2).iterator();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.MethodToken.ParameterToken.class).create(new ObjectPropertyAssertion.Creator<Integer>() {
+>, <Line: +            @Override
+>, <Line: +            public Integer create() {
+>, <Line: +                return iterator.next();
+>, <Line: +            }
+>, <Line: +        }).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.AnnotationToken.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.AnnotationToken.Resolution.Simple.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.AnnotationToken.Resolution.Illegal.class).apply();
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testIllegalResolutionThrowsException() throws Exception {
+>, <Line: +        new TypePool.Default.LazyTypeDescription.AnnotationToken.Resolution.Illegal("foo").resolve();
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testIllegalResolutionIsNotResolved() throws Exception {
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.AnnotationToken.Resolution.Illegal("foo").isResolved(), is(false));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testGenericTypeTokenObjectPropertiesTest() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.ForPrimitiveType.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.ForRawType.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.ForTypeVariable.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.ForTypeVariable.Formal.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.ForGenericArray.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.ForUnboundWildcard.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.ForLowerBoundWildcard.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.ForUpperBoundWildcard.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.ForParameterizedType.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.ForParameterizedType.Nested.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.Resolution.ForType.Tokenized.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.Resolution.ForMethod.Tokenized.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.Resolution.ForField.Tokenized.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.Resolution.Raw.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.GenericTypeToken.Resolution.Malformed.class).apply();
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testDeclarationContextObjectProperties() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInType.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInMethod.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(TypePool.Default.LazyTypeDescription.DeclarationContext.SelfDeclared.class).apply();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

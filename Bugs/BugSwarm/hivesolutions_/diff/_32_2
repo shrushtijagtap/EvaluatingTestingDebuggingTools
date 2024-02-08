@@ -1,0 +1,8 @@
+[<Line: +            params = dict(url = "https://httpbin.org"),
+>, <Line: +        file = appier.get_f("https://httpbin.org/image/png")
+>, <Line: +        file = appier.get_f("https://httpbin.org/image/png", name = "dummy")
+>]
+[<Line: -            params = dict(url = "http://hive.pt"),
+>, <Line: -        file = appier.get_file("https://httpbin.org/image/png")
+>, <Line: -        file = appier.get_file("https://httpbin.org/image/png", name = "dummy")
+>]

@@ -1,0 +1,270 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'jquery',
+>, <Line: +	],
+>, <Line: +	function (angular, _, $) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		module.factory('dashboardViewStateSrv', function ($location, $timeout) {
+>, <Line: +			// represents the transient view state
+>, <Line: +			// like fullscreen panel & edit
+>, <Line: +			function DashboardViewState($scope) {
+>, <Line: +				var self = this;
+>, <Line: +				self.state = {};
+>, <Line: +				self.panelScopes = [];
+>, <Line: +				self.$scope = $scope;
+>, <Line: +				$scope.exitFullscreen = function () {
+>, <Line: +					if (self.state.fullscreen) {
+>, <Line: +						self.update({fullscreen: false});
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +				$scope.onAppEvent('$routeUpdate', function () {
+>, <Line: +					var urlState = self.getQueryStringState();
+>, <Line: +					if (self.needsSync(urlState)) {
+>, <Line: +						self.update(urlState, true);
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +				this.update(this.getQueryStringState(), true);
+>, <Line: +				this.expandRowForPanel();
+>, <Line: +			}
+>, <Line: +			DashboardViewState.prototype.expandRowForPanel = function () {
+>, <Line: +				if (!this.state.panelId) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				var panelInfo = this.$scope.dashboard.getPanelInfoById(this.state.panelId);
+>, <Line: +				if (panelInfo) {
+>, <Line: +					panelInfo.row.collapse = false;
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			DashboardViewState.prototype.needsSync = function (urlState) {
+>, <Line: +				return _.isEqual(this.state, urlState) === false;
+>, <Line: +			};
+>, <Line: +			DashboardViewState.prototype.getQueryStringState = function () {
+>, <Line: +				var state = $location.search();
+>, <Line: +				state.panelId = parseInt(state.panelId) || null;
+>, <Line: +				state.fullscreen = state.fullscreen ? true : null;
+>, <Line: +				state.edit = (state.edit === "true" || state.edit === true) || null;
+>, <Line: +				return state;
+>, <Line: +			};
+>, <Line: +			DashboardViewState.prototype.serializeToUrl = function () {
+>, <Line: +				var urlState = _.clone(this.state);
+>, <Line: +				urlState.fullscreen = this.state.fullscreen ? true : null,
+>, <Line: +					urlState.edit = this.state.edit ? true : null;
+>, <Line: +				return urlState;
+>, <Line: +			};
+>, <Line: +			DashboardViewState.prototype.update = function (state, skipUrlSync) {
+>, <Line: +				_.extend(this.state, state);
+>, <Line: +				this.fullscreen = this.state.fullscreen;
+>, <Line: +				if (!this.state.fullscreen) {
+>, <Line: +					this.state.panelId = null;
+>, <Line: +					this.state.fullscreen = null;
+>, <Line: +					this.state.edit = null;
+>, <Line: +				}
+>, <Line: +				if (!skipUrlSync) {
+>, <Line: +					$location.search(this.serializeToUrl());
+>, <Line: +				}
+>, <Line: +				this.syncState();
+>, <Line: +			};
+>, <Line: +			DashboardViewState.prototype.syncState = function () {
+>, <Line: +				if (this.panelScopes.length === 0) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				if (this.fullscreen) {
+>, <Line: +					if (this.fullscreenPanel) {
+>, <Line: +						this.leaveFullscreen(false);
+>, <Line: +					}
+>, <Line: +					var panelScope = this.getPanelScope(this.state.panelId);
+>, <Line: +					this.enterFullscreen(panelScope);
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				if (this.fullscreenPanel) {
+>, <Line: +					this.leaveFullscreen(true);
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			DashboardViewState.prototype.getPanelScope = function (id) {
+>, <Line: +				return _.find(this.panelScopes, function (panelScope) {
+>, <Line: +					return panelScope.panel.id === id;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			DashboardViewState.prototype.leaveFullscreen = function (render) {
+>, <Line: +				var self = this;
+>, <Line: +				self.fullscreenPanel.editMode = false;
+>, <Line: +				self.fullscreenPanel.fullscreen = false;
+>, <Line: +				delete self.fullscreenPanel.height;
+>, <Line: +				if (!render) {
+>, <Line: +					return false;
+>, <Line: +				}
+>, <Line: +				$timeout(function () {
+>, <Line: +					if (self.oldTimeRange !== self.fullscreenPanel.range) {
+>, <Line: +						self.$scope.dashboard.emit_refresh();
+>, <Line: +					}
+>, <Line: +					else {
+>, <Line: +						self.fullscreenPanel.$emit('render');
+>, <Line: +					}
+>, <Line: +					delete self.fullscreenPanel;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			DashboardViewState.prototype.enterFullscreen = function (panelScope) {
+>, <Line: +				var docHeight = $(window).height();
+>, <Line: +				var editHeight = Math.floor(docHeight * 0.3);
+>, <Line: +				var fullscreenHeight = Math.floor(docHeight * 0.7);
+>, <Line: +				this.oldTimeRange = panelScope.range;
+>, <Line: +				panelScope.height = this.state.edit ? editHeight : fullscreenHeight;
+>, <Line: +				panelScope.editMode = this.state.edit;
+>, <Line: +				this.fullscreenPanel = panelScope;
+>, <Line: +				$(window).scrollTop(0);
+>, <Line: +				panelScope.fullscreen = true;
+>, <Line: +				$timeout(function () {
+>, <Line: +					panelScope.$emit('render');
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			DashboardViewState.prototype.registerPanel = function (panelScope) {
+>, <Line: +				var self = this;
+>, <Line: +				self.panelScopes.push(panelScope);
+>, <Line: +				if (self.state.panelId === panelScope.panel.id) {
+>, <Line: +					self.enterFullscreen(panelScope);
+>, <Line: +				}
+>, <Line: +				panelScope.$on('$destroy', function () {
+>, <Line: +					self.panelScopes = _.without(self.panelScopes, panelScope);
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			return {
+>, <Line: +				create: function ($scope) {
+>, <Line: +					return new DashboardViewState($scope);
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'jquery',
+>, <Line: -],
+>, <Line: -function (angular, _, $) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.factory('dashboardViewStateSrv', function($location, $timeout) {
+>, <Line: -    // represents the transient view state
+>, <Line: -    // like fullscreen panel & edit
+>, <Line: -    function DashboardViewState($scope) {
+>, <Line: -      var self = this;
+>, <Line: -      self.state = {};
+>, <Line: -      self.panelScopes = [];
+>, <Line: -      self.$scope = $scope;
+>, <Line: -      $scope.exitFullscreen = function() {
+>, <Line: -        if (self.state.fullscreen) {
+>, <Line: -          self.update({ fullscreen: false });
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -      $scope.onAppEvent('$routeUpdate', function() {
+>, <Line: -        var urlState = self.getQueryStringState();
+>, <Line: -        if (self.needsSync(urlState)) {
+>, <Line: -          self.update(urlState, true);
+>, <Line: -        }
+>, <Line: -      });
+>, <Line: -      this.update(this.getQueryStringState(), true);
+>, <Line: -      this.expandRowForPanel();
+>, <Line: -    }
+>, <Line: -    DashboardViewState.prototype.expandRowForPanel = function() {
+>, <Line: -      if (!this.state.panelId) { return; }
+>, <Line: -      var panelInfo = this.$scope.dashboard.getPanelInfoById(this.state.panelId);
+>, <Line: -      if (panelInfo) {
+>, <Line: -        panelInfo.row.collapse = false;
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    DashboardViewState.prototype.needsSync = function(urlState) {
+>, <Line: -      return _.isEqual(this.state, urlState) === false;
+>, <Line: -    };
+>, <Line: -    DashboardViewState.prototype.getQueryStringState = function() {
+>, <Line: -      var state = $location.search();
+>, <Line: -      state.panelId = parseInt(state.panelId) || null;
+>, <Line: -      state.fullscreen = state.fullscreen ? true : null;
+>, <Line: -      state.edit =  (state.edit === "true" || state.edit === true) || null;
+>, <Line: -      return state;
+>, <Line: -    };
+>, <Line: -    DashboardViewState.prototype.serializeToUrl = function() {
+>, <Line: -      var urlState = _.clone(this.state);
+>, <Line: -      urlState.fullscreen = this.state.fullscreen ? true : null,
+>, <Line: -      urlState.edit = this.state.edit ? true : null;
+>, <Line: -      return urlState;
+>, <Line: -    };
+>, <Line: -    DashboardViewState.prototype.update = function(state, skipUrlSync) {
+>, <Line: -      _.extend(this.state, state);
+>, <Line: -      this.fullscreen = this.state.fullscreen;
+>, <Line: -      if (!this.state.fullscreen) {
+>, <Line: -        this.state.panelId = null;
+>, <Line: -        this.state.fullscreen = null;
+>, <Line: -        this.state.edit = null;
+>, <Line: -      }
+>, <Line: -      if (!skipUrlSync) {
+>, <Line: -        $location.search(this.serializeToUrl());
+>, <Line: -      }
+>, <Line: -      this.syncState();
+>, <Line: -    };
+>, <Line: -    DashboardViewState.prototype.syncState = function() {
+>, <Line: -      if (this.panelScopes.length === 0) { return; }
+>, <Line: -      if (this.fullscreen) {
+>, <Line: -        if (this.fullscreenPanel) {
+>, <Line: -          this.leaveFullscreen(false);
+>, <Line: -        }
+>, <Line: -        var panelScope = this.getPanelScope(this.state.panelId);
+>, <Line: -        this.enterFullscreen(panelScope);
+>, <Line: -        return;
+>, <Line: -      }
+>, <Line: -      if (this.fullscreenPanel) {
+>, <Line: -        this.leaveFullscreen(true);
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    DashboardViewState.prototype.getPanelScope = function(id) {
+>, <Line: -      return _.find(this.panelScopes, function(panelScope) {
+>, <Line: -        return panelScope.panel.id === id;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    DashboardViewState.prototype.leaveFullscreen = function(render) {
+>, <Line: -      var self = this;
+>, <Line: -      self.fullscreenPanel.editMode = false;
+>, <Line: -      self.fullscreenPanel.fullscreen = false;
+>, <Line: -      delete self.fullscreenPanel.height;
+>, <Line: -      if (!render) { return false;}
+>, <Line: -      $timeout(function() {
+>, <Line: -        if (self.oldTimeRange !== self.fullscreenPanel.range) {
+>, <Line: -          self.$scope.dashboard.emit_refresh();
+>, <Line: -        }
+>, <Line: -        else {
+>, <Line: -          self.fullscreenPanel.$emit('render');
+>, <Line: -        }
+>, <Line: -        delete self.fullscreenPanel;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    DashboardViewState.prototype.enterFullscreen = function(panelScope) {
+>, <Line: -      var docHeight = $(window).height();
+>, <Line: -      var editHeight = Math.floor(docHeight * 0.3);
+>, <Line: -      var fullscreenHeight = Math.floor(docHeight * 0.7);
+>, <Line: -      this.oldTimeRange = panelScope.range;
+>, <Line: -      panelScope.height = this.state.edit ? editHeight : fullscreenHeight;
+>, <Line: -      panelScope.editMode = this.state.edit;
+>, <Line: -      this.fullscreenPanel = panelScope;
+>, <Line: -      $(window).scrollTop(0);
+>, <Line: -      panelScope.fullscreen = true;
+>, <Line: -      $timeout(function() {
+>, <Line: -        panelScope.$emit('render');
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    DashboardViewState.prototype.registerPanel = function(panelScope) {
+>, <Line: -      var self = this;
+>, <Line: -      self.panelScopes.push(panelScope);
+>, <Line: -      if (self.state.panelId === panelScope.panel.id) {
+>, <Line: -        self.enterFullscreen(panelScope);
+>, <Line: -      }
+>, <Line: -      panelScope.$on('$destroy', function() {
+>, <Line: -        self.panelScopes = _.without(self.panelScopes, panelScope);
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    return {
+>, <Line: -      create: function($scope) {
+>, <Line: -        return new DashboardViewState($scope);
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

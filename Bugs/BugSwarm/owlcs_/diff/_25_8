@@ -1,0 +1,358 @@
+[]
+[<Line: -/* This file is part of the OWL API.
+>, <Line: - * The contents of this file are subject to the LGPL License, Version 3.0.
+>, <Line: - * Copyright 2014, The University of Manchester
+>, <Line: - * 
+>, <Line: - * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+>, <Line: - * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+>, <Line: - * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
+>, <Line: - *
+>, <Line: - * Alternatively, the contents of this file may be used under the terms of the Apache License, Version 2.0 in which case, the provisions of the Apache License Version 2.0 are applicable instead of those above.
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+>, <Line: - * http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. */
+>, <Line: -package org.semanticweb.owlapi.model;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.BANNED_PARSERS;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.CONNECTION_TIMEOUT;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.ENTITY_EXPANSION_LIMIT;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.LOAD_ANNOTATIONS;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.MISSING_IMPORT_HANDLING_STRATEGY;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.MISSING_ONTOLOGY_HEADER_STRATEGY;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.PARSE_WITH_STRICT_CONFIGURATION;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.PRIORITY_COLLECTION_SORTING;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.REPORT_STACK_TRACES;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.RETRIES_TO_ATTEMPT;
+>, <Line: -import static org.semanticweb.owlapi.model.parameters.ConfigurationOptions.TREAT_DUBLINCORE_AS_BUILTIN;
+>, <Line: -import java.io.Serializable;
+>, <Line: -import java.util.EnumMap;
+>, <Line: -import java.util.HashSet;
+>, <Line: -import java.util.Set;
+>, <Line: -import org.semanticweb.owlapi.model.parameters.ConfigurationOptions;
+>, <Line: -import org.semanticweb.owlapi.vocab.Namespaces;
+>, <Line: -/**
+>, <Line: - * A configuration object that specifies options and hints to objects that load OWLOntologies. Every
+>, <Line: - * {@code OWLOntologyLoaderConfiguration} is immutable. Changing a setting results in the creation
+>, <Line: - * of a new {@code OWLOntologyLoaderConfiguration} with that setting. For example,
+>, <Line: - *
+>, <Line: - * <pre>
+>, <Line: - * OWLOntologyLoaderConfiguration config = new OWLOntologyLoaderConfiguration();
+>, <Line: - * config = config.setLoadAnnotationAxioms(false);
+>, <Line: - * </pre>
+>, <Line: - *
+>, <Line: - * creates an {@code OWLOntologyLoaderConfiguration} object with the load annotation axioms set to
+>, <Line: - * {@code false}.
+>, <Line: - *
+>, <Line: - * @author Matthew Horridge, The University of Manchester, Bio-Health Informatics Group
+>, <Line: - * @since 3.2.0
+>, <Line: - */
+>, <Line: -public class OWLOntologyLoaderConfiguration implements Serializable {
+>, <Line: -    /**
+>, <Line: -     * set of imports to ignore
+>, <Line: -     */
+>, <Line: -    private final Set<IRI> ignoredImports = new HashSet<>();
+>, <Line: -    /**
+>, <Line: -     * Local override map.
+>, <Line: -     */
+>, <Line: -    private EnumMap<ConfigurationOptions, Object> overrides =
+>, <Line: -        new EnumMap<>(ConfigurationOptions.class);
+>, <Line: -    /**
+>, <Line: -     * Adds an ontology document IRI to the list of ontology imports that will be ignored during
+>, <Line: -     * ontology loading.
+>, <Line: -     *
+>, <Line: -     * @param ontologyDocumentIRI The ontology document IRI that will be ignored if it is
+>, <Line: -     * encountered as an imported ontology during loading.
+>, <Line: -     * @return An {@code OWLOntologyLoaderConfiguration} with the ignored ontology document IRI set.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration addIgnoredImport(IRI ontologyDocumentIRI) {
+>, <Line: -        OWLOntologyLoaderConfiguration configuration = copyConfiguration();
+>, <Line: -        configuration.ignoredImports.add(ontologyDocumentIRI);
+>, <Line: -        return configuration;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Clears all ontology document IRIs from the list of ignored ontology document IRIs.
+>, <Line: -     *
+>, <Line: -     * @return An {@code OWLOntologyLoaderConfiguration} with the list of ignored ontology document
+>, <Line: -     * IRIs set to be empty.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration clearIgnoredImports() {
+>, <Line: -        OWLOntologyLoaderConfiguration configuration = copyConfiguration();
+>, <Line: -        configuration.ignoredImports.clear();
+>, <Line: -        return configuration;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param iri iri to check
+>, <Line: -     * @return true if iri should be ignored
+>, <Line: -     */
+>, <Line: -    public boolean isIgnoredImport(IRI iri) {
+>, <Line: -        return Namespaces.isDefaultIgnoredImport(iri) || ignoredImports.contains(iri);
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Removes an ontology document IRI from the list of ontology imports that will be ignored
+>, <Line: -     * during ontology loading.
+>, <Line: -     *
+>, <Line: -     * @param ontologyDocumentIRI The ontology document IRI that would be ignored if it is
+>, <Line: -     * encountered as an imported ontology during loading.
+>, <Line: -     * @return An {@code OWLOntologyLoaderConfiguration} with the ignored ontology document IRI
+>, <Line: -     * removed.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration removeIgnoredImport(IRI ontologyDocumentIRI) {
+>, <Line: -        OWLOntologyLoaderConfiguration configuration = copyConfiguration();
+>, <Line: -        configuration.ignoredImports.remove(ontologyDocumentIRI);
+>, <Line: -        return configuration;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Internally copies this configuaration object.
+>, <Line: -     *
+>, <Line: -     * @return The copied configuration
+>, <Line: -     */
+>, <Line: -    private OWLOntologyLoaderConfiguration copyConfiguration() {
+>, <Line: -        OWLOntologyLoaderConfiguration copy = new OWLOntologyLoaderConfiguration();
+>, <Line: -        copy.overrides.putAll(overrides);
+>, <Line: -        copy.ignoredImports.clear();
+>, <Line: -        copy.ignoredImports.addAll(ignoredImports);
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return The {@code PriorityCollectionSorting} for this configuration. It determines how
+>, <Line: -     * parsers, storers and mappers are ordered. Default is {@link PriorityCollectionSorting#ON_SET_INJECTION_ONLY}
+>, <Line: -     */
+>, <Line: -    public PriorityCollectionSorting getPriorityCollectionSorting() {
+>, <Line: -        return PRIORITY_COLLECTION_SORTING.getValue(PriorityCollectionSorting.class, overrides);
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Set the priorty collection sorting option.
+>, <Line: -     *
+>, <Line: -     * @param sorting the sorting option to be used.
+>, <Line: -     * @return An {@code OWLOntologyLoaderConfiguration} with the new sorting option set.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setPriorityCollectionSorting(
+>, <Line: -        PriorityCollectionSorting sorting) {
+>, <Line: -        if (sorting.equals(getPriorityCollectionSorting())) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration configuration = copyConfiguration();
+>, <Line: -        configuration.overrides.put(PRIORITY_COLLECTION_SORTING, sorting);
+>, <Line: -        return configuration;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return the connection timeout for this configuration
+>, <Line: -     */
+>, <Line: -    public int getConnectionTimeout() {
+>, <Line: -        return CONNECTION_TIMEOUT.getValue(Integer.class, overrides).intValue();
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param l new timeout Note: the timeout is an int and represents milliseconds.
+>, <Line: -     * @return A {@code OWLOntologyLoaderConfiguration} with the connection timeout set to the new
+>, <Line: -     * value.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setConnectionTimeout(int l) {
+>, <Line: -        if (getConnectionTimeout() == l) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration configuration = copyConfiguration();
+>, <Line: -        configuration.overrides.put(CONNECTION_TIMEOUT, Integer.valueOf(l));
+>, <Line: -        return configuration;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Gets the strategy used for missing imports.
+>, <Line: -     *
+>, <Line: -     * @return The strategy. See {@link MissingImportHandlingStrategy} for the strategies and their
+>, <Line: -     * descriptions.
+>, <Line: -     * @since 3.3
+>, <Line: -     */
+>, <Line: -    public MissingImportHandlingStrategy getMissingImportHandlingStrategy() {
+>, <Line: -        return MISSING_IMPORT_HANDLING_STRATEGY.getValue(MissingImportHandlingStrategy.class,
+>, <Line: -            overrides);
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Sets the strategy that is used for missing imports handling. See
+>, <Line: -     * {@link MissingImportHandlingStrategy} for the strategies and their descriptions.
+>, <Line: -     *
+>, <Line: -     * @param missingImportHandlingStrategy The strategy to be used.
+>, <Line: -     * @return An {@code OWLOntologyLoaderConfiguration} object with the strategy set.
+>, <Line: -     * @since 3.3
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setMissingImportHandlingStrategy(
+>, <Line: -        MissingImportHandlingStrategy missingImportHandlingStrategy) {
+>, <Line: -        // do not make copies if setting the same value
+>, <Line: -        if (getMissingImportHandlingStrategy() == missingImportHandlingStrategy) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration copy = copyConfiguration();
+>, <Line: -        copy.overrides.put(MISSING_IMPORT_HANDLING_STRATEGY, missingImportHandlingStrategy);
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return the ontology header strategy
+>, <Line: -     */
+>, <Line: -    public MissingOntologyHeaderStrategy getMissingOntologyHeaderStrategy() {
+>, <Line: -        return MISSING_ONTOLOGY_HEADER_STRATEGY.getValue(MissingOntologyHeaderStrategy.class,
+>, <Line: -            overrides);
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param missingOntologyHeaderStrategy new value
+>, <Line: -     * @return a copy of this configuration object with a different strategy
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setMissingOntologyHeaderStrategy(
+>, <Line: -        MissingOntologyHeaderStrategy missingOntologyHeaderStrategy) {
+>, <Line: -        // do not make copies if setting the same value
+>, <Line: -        if (getMissingOntologyHeaderStrategy() == missingOntologyHeaderStrategy) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration copy = copyConfiguration();
+>, <Line: -        copy.overrides.put(MISSING_ONTOLOGY_HEADER_STRATEGY, missingOntologyHeaderStrategy);
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return number of retries to attempt when retrieving an ontology from a remote URL.
+>, <Line: -     */
+>, <Line: -    public int getRetriesToAttempt() {
+>, <Line: -        return RETRIES_TO_ATTEMPT.getValue(Integer.class, overrides).intValue();
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param retries new value of retries to attempt
+>, <Line: -     * @return copy of this configuration with modified retries attempts.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setRetriesToAttempt(int retries) {
+>, <Line: -        // do not make copies if setting the same value
+>, <Line: -        if (getRetriesToAttempt() == retries) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration copy = copyConfiguration();
+>, <Line: -        copy.overrides.put(RETRIES_TO_ATTEMPT, Integer.valueOf(retries));
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Determines whether or not annotation axioms (instances of {@code OWLAnnotationAxiom}) should
+>, <Line: -     * be loaded. By default, the loading of annotation axioms is enabled.
+>, <Line: -     *
+>, <Line: -     * @return {@code true} if annotation assertions will be loaded, or {@code false} if annotation
+>, <Line: -     * assertions will not be loaded because they will be discarded on loading.
+>, <Line: -     */
+>, <Line: -    public boolean isLoadAnnotationAxioms() {
+>, <Line: -        return LOAD_ANNOTATIONS.getValue(Boolean.class, overrides).booleanValue();
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Specifies whether or not annotation axioms (instances of {@code OWLAnnotationAxiom}) should
+>, <Line: -     * be loaded or whether they should be discarded on loading. By default, the loading of
+>, <Line: -     * annotation axioms is enabled.
+>, <Line: -     *
+>, <Line: -     * @param b {@code true} if annotation axioms should be loaded, or {@code false} if annotation
+>, <Line: -     * axioms should not be loaded and should be discarded on loading.
+>, <Line: -     * @return An {@code OWLOntologyLoaderConfiguration} object with the option set.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setLoadAnnotationAxioms(boolean b) {
+>, <Line: -        // do not make copies if setting the same value
+>, <Line: -        if (isLoadAnnotationAxioms() == b) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration copy = copyConfiguration();
+>, <Line: -        copy.overrides.put(LOAD_ANNOTATIONS, Boolean.valueOf(b));
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return value for the report stack trace flag.
+>, <Line: -     */
+>, <Line: -    public boolean isReportStackTrace() {
+>, <Line: -        return REPORT_STACK_TRACES.getValue(Boolean.class, overrides).booleanValue();
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return true if parsing should be strict
+>, <Line: -     */
+>, <Line: -    public boolean isStrict() {
+>, <Line: -        return PARSE_WITH_STRICT_CONFIGURATION.getValue(Boolean.class, overrides).booleanValue();
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param strict new value for strict
+>, <Line: -     * @return copy of the configuration with new strict value
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setStrict(boolean strict) {
+>, <Line: -        // do not make copies if setting the same value
+>, <Line: -        if (isStrict() == strict) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration copy = copyConfiguration();
+>, <Line: -        copy.overrides.put(PARSE_WITH_STRICT_CONFIGURATION, Boolean.valueOf(strict));
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Determines if the various parsers, for formats such as RDF based formats that do not require
+>, <Line: -     * strong typing, should treat Dublin Core Vocabulary as built in vocabulary, so that Dublin
+>, <Line: -     * Core metadata properties are interpreted as annotation properties.
+>, <Line: -     *
+>, <Line: -     * @return {@code true} if the Dublin Core Vocabulary should be treated as built in vocabulary
+>, <Line: -     * and Dublin Core properties are interpreted as annotation properties, otherwise {@code false}.
+>, <Line: -     * The defaut is {@code true}.
+>, <Line: -     */
+>, <Line: -    public boolean isTreatDublinCoreAsBuiltIn() {
+>, <Line: -        return TREAT_DUBLINCORE_AS_BUILTIN.getValue(Boolean.class, overrides).booleanValue();
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param value true if Dublin Core vocabulary should be treated as built in.
+>, <Line: -     * @return a copy of the current object with treatDublinCoreAsBuiltIn set to the new value.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setTreatDublinCoreAsBuiltIn(boolean value) {
+>, <Line: -        // as the objects are immutable, setting to the same value returns the
+>, <Line: -        // same object
+>, <Line: -        if (isTreatDublinCoreAsBuiltIn() == value) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration copy = copyConfiguration();
+>, <Line: -        copy.overrides.put(TREAT_DUBLINCORE_AS_BUILTIN, Boolean.valueOf(value));
+>, <Line: -        return copy;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return list of parser factory class names that should be skipped when attempting ontology
+>, <Line: -     * parsing. The list is space separated.
+>, <Line: -     */
+>, <Line: -    public String getBannedParsers() {
+>, <Line: -        return BANNED_PARSERS.getValue(String.class, overrides);
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param ban list of parser factory class names that should be skipped when attempting ontology
+>, <Line: -     * parsing. The list is space separated.
+>, <Line: -     * @return An {@code OntologyConfigurator} with the new option set.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setBannedParsers(String ban) {
+>, <Line: -        if (getBannedParsers().equals(ban)) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration configuration = copyConfiguration();
+>, <Line: -        configuration.overrides.put(BANNED_PARSERS, ban);
+>, <Line: -        return configuration;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @return max number of XML entity expansions to perform while parsing RDF/XML.
+>, <Line: -     */
+>, <Line: -    public String getEntityExpansionLimit() {
+>, <Line: -        return ENTITY_EXPANSION_LIMIT.getValue(String.class, overrides);
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * @param limit maximum number of XML entities to expand.
+>, <Line: -     * @return An {@code OntologyConfigurator} with the new option set.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setEntityExpansionLimit(String limit) {
+>, <Line: -        if (getEntityExpansionLimit().equals(limit)) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration configuration = copyConfiguration();
+>, <Line: -        configuration.overrides.put(ConfigurationOptions.ENTITY_EXPANSION_LIMIT, limit);
+>, <Line: -        return configuration;
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Set the value for the report stack traces flag. If true, parsing exceptions will have the
+>, <Line: -     * full stack trace for the source exceptions. Default is false.
+>, <Line: -     *
+>, <Line: -     * @param b the new value for the flag
+>, <Line: -     * @return A {@code OWLOntologyLoaderConfiguration} with the report flag set to the new value.
+>, <Line: -     */
+>, <Line: -    public OWLOntologyLoaderConfiguration setReportStackTraces(boolean b) {
+>, <Line: -        if (isReportStackTrace() == b) {
+>, <Line: -            return this;
+>, <Line: -        }
+>, <Line: -        OWLOntologyLoaderConfiguration configuration = copyConfiguration();
+>, <Line: -        configuration.overrides.put(REPORT_STACK_TRACES, Boolean.valueOf(b));
+>, <Line: -        return configuration;
+>, <Line: -    }
+>, <Line: -}
+>]

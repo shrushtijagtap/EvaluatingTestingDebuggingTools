@@ -1,0 +1,10 @@
+[<Line: +      final Connection<?> conn = newLoc.conn.get();
+>, <Line: +      blockedNodes.add(conn.to());
+>, <Line: +      vehicleBlocks.put(object, conn.to());
+>]
+[<Line: -import static com.google.common.base.Preconditions.checkNotNull;
+>, <Line: -      final Connection<?> conn = newLoc.conn;
+>, <Line: -      checkNotNull(conn);
+>, <Line: -      blockedNodes.add(conn.to);
+>, <Line: -      vehicleBlocks.put(object, conn.to);
+>]

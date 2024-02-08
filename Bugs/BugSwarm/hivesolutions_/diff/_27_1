@@ -1,0 +1,4 @@
+[<Line: +def get_f(*args, **kwargs):
+>]
+[<Line: -def get_file(*args, **kwargs):
+>]

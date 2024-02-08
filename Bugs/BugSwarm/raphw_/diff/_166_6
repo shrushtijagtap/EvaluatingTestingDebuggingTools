@@ -1,0 +1,41 @@
+[<Line: +import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+>, <Line: +    private static final PackageLookupStrategy PACKAGE_LOOKUP_STRATEGY = packageLookupStrategy();
+>, <Line: +    /**
+>, <Line: +     *
+>, <Line: +     * @return A package lookup strategy for the current VM.
+>, <Line: +    @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception should not be rethrown but trigger a fallback")
+>, <Line: +    private static PackageLookupStrategy packageLookupStrategy() {
+>, <Line: +            return new PackageLookupStrategy.ForJava9CapableVm(ClassLoader.class.getDeclaredMethod("getDefinedPackage", String.class));
+>, <Line: +        } catch (Exception ignored) {
+>, <Line: +            return PackageLookupStrategy.ForLegacyVm.INSTANCE;
+>, <Line: +        return persistenceHandler.url(name, typeDefinitions);
+>, <Line: +        URL url = persistenceHandler.url(name, typeDefinitions);
+>, <Line: +            protected URL url(String resourceName, Map<String, byte[]> typeDefinitions) {
+>, <Line: +                        : AccessController.doPrivileged(new UrlDefinitionAction(resourceName, binaryRepresentation));
+>, <Line: +            protected URL url(String resourceName, Map<String, byte[]> typeDefinitions) {
+>, <Line: +         * @param resourceName    The name of the requested resource.
+>, <Line: +         * @param typeDefinitions A mapping of byte arrays by their type names.
+>, <Line: +        protected abstract URL url(String resourceName, Map<String, byte[]> typeDefinitions);
+>, <Line: +            URL url = persistenceHandler.url(name, typeDefinitions);
+>, <Line: +            URL url = persistenceHandler.url(name, typeDefinitions);
+>]
+[<Line: -    private static final PackageLookupStrategy PACKAGE_LOOKUP_STRATEGY;
+>, <Line: -    /*
+>, <Line: -    static {
+>, <Line: -        PackageLookupStrategy packageLookupStrategy;
+>, <Line: -            packageLookupStrategy = new PackageLookupStrategy.ForJava9CapableVm(ClassLoader.class.getDeclaredMethod("getDefinedPackage", String.class));
+>, <Line: -        } catch (NoSuchMethodException ignored) {
+>, <Line: -            packageLookupStrategy = PackageLookupStrategy.ForLegacyVm.INSTANCE;
+>, <Line: -        PACKAGE_LOOKUP_STRATEGY = packageLookupStrategy;
+>, <Line: -        return persistenceHandler.url(name, typeDefinitions, accessControlContext);
+>, <Line: -        URL url = persistenceHandler.url(name, typeDefinitions, accessControlContext);
+>, <Line: -            protected URL url(String resourceName, Map<String, byte[]> typeDefinitions, AccessControlContext accessControlContext) {
+>, <Line: -                        : AccessController.doPrivileged(new UrlDefinitionAction(resourceName, binaryRepresentation), accessControlContext);
+>, <Line: -            protected URL url(String resourceName, Map<String, byte[]> typeDefinitions, AccessControlContext accessControlContext) {
+>, <Line: -         * @param resourceName         The name of the requested resource.
+>, <Line: -         * @param typeDefinitions      A mapping of byte arrays by their type names.
+>, <Line: -         * @param accessControlContext The access control context to be used for creating the URL.
+>, <Line: -        protected abstract URL url(String resourceName, Map<String, byte[]> typeDefinitions, AccessControlContext accessControlContext);
+>, <Line: -            URL url = persistenceHandler.url(name, typeDefinitions, accessControlContext);
+>, <Line: -            URL url = persistenceHandler.url(name, typeDefinitions, accessControlContext);
+>]

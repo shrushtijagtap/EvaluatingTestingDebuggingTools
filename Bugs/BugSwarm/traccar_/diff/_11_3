@@ -1,0 +1,4 @@
+[<Line: +    private static final byte[] delimiter = {(byte) '\r', (byte) '\n'};
+>]
+[<Line: -    private static final byte delimiter[] = {(byte) '\r', (byte) '\n'};
+>]

@@ -1,0 +1,60 @@
+[<Line: +	private DateTimeZone m_timeZone = DateTimeZone.UTC;
+>, <Line: +	;
+>, <Line: +		if (m_exhaustive)
+>, <Line: +			return (new ExhaustiveRangeDataPointAggregator(dataPointGroup, getSubAggregator()));
+>, <Line: +			return (new RangeDataPointAggregator(dataPointGroup, getSubAggregator()));
+>, <Line: +		m_sampling = sampling;
+>, <Line: +	}
+>, <Line: +	public Sampling getSampling()
+>, <Line: +	{
+>, <Line: +		return m_sampling;
+>, <Line: +	}
+>, <Line: +		/**
+>, <Line: +		 Computes the data point time for the aggregated value.
+>, <Line: +		 Different strategies could be added here such as
+>, <Line: +		 datapoint time = range start time
+>, <Line: +		 = range end time
+>, <Line: +		 = range median
+>, <Line: +		 = current datapoint time
+>, <Line: +		 @return
+>, <Line: +		 */
+>, <Line: +		private long getDataPointTime()
+>, <Line: +		{
+>, <Line: +			return currentDataPoint.getTimestamp();
+>, <Line: +		}
+>, <Line: +		/**
+>, <Line: +		 @return true if there is a subrange left
+>, <Line: +		 */
+>, <Line: +		private void setNextStartTime(long timeStamp)
+>, <Line: +				if (!m_started)
+>, <Line: +				{
+>, <Line: +					m_started = true;
+>, <Line: +					startTime = currentDataPoint.getTimestamp();
+>]
+[<Line: -	private DateTimeZone m_timeZone = DateTimeZone.UTC;;
+>, <Line: -		if(m_exhaustive)
+>, <Line: -			return(new ExhaustiveRangeDataPointAggregator(dataPointGroup, getSubAggregator()));
+>, <Line: -			return(new RangeDataPointAggregator(dataPointGroup, getSubAggregator()));
+>, <Line: -        m_sampling = sampling;
+>, <Line: -    }
+>, <Line: -        /**
+>, <Line: -         * Computes the data point time for the aggregated value.
+>, <Line: -         * Different strategies could be added here such as
+>, <Line: -         * datapoint time = range start time
+>, <Line: -         *                = range end time
+>, <Line: -         *                = range median
+>, <Line: -         *                = current datapoint time
+>, <Line: -         * @return
+>, <Line: -         */
+>, <Line: -        private long getDataPointTime() {
+>, <Line: -            return currentDataPoint.getTimestamp();
+>, <Line: -        }
+>, <Line: -        /**
+>, <Line: -         *
+>, <Line: -         * @return true if there is a subrange left
+>, <Line: -         */
+>, <Line: -		private void setNextStartTime( long timeStamp)
+>, <Line: -				if( !m_started ){
+>, <Line: -					m_started=true;
+>, <Line: -					startTime=currentDataPoint.getTimestamp();
+>]

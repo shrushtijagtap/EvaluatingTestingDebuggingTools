@@ -1,0 +1,6 @@
+[<Line: +function f(real[] xs) -> int[]:
+>, <Line: +    return (int[]) xs
+>]
+[<Line: -function f([real] xs) -> [int]:
+>, <Line: -    return ([int]) xs
+>]

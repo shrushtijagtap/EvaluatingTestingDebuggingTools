@@ -1,0 +1,80 @@
+[<Line: +            LOGGER.info("  Loop {}", Integer.valueOf(loopNumber));
+>, <Line: +                LOGGER.info("  Loop {}", Integer.valueOf(loopNumber));
+>, <Line: +                    differentIndividualAxioms.forEach(
+>, <Line: +                        a -> LOGGER.info("  Added different individual axiom:   {}", minusOntologyURI(a.toString())));
+>, <Line: +            negativeLevel(superVsSub, reasoner, classesInSig, superOrSubClasses);
+>, <Line: +            positiveLevel(superOrSubClassLevel, superVsSub, reasoner, classesInSig, superOrSubClasses);
+>, <Line: +    protected static void positiveLevel(int superOrSubClassLevel, boolean superVsSub, OWLReasoner reasoner,
+>, <Line: +        Set<OWLClass> classesInSig, Set<OWLClass> superOrSubClasses) {
+>, <Line: +        Queue<OWLClass> toBeSuClassedNow;
+>, <Line: +        Queue<OWLClass> toBeSuClassedNext = new LinkedList<>(classesInSig);
+>, <Line: +        Queue<OWLClass> suClassesToBeAdded = new LinkedList<>();
+>, <Line: +        for (int i = 0; i < superOrSubClassLevel; i++) {
+>, <Line: +            toBeSuClassedNow = toBeSuClassedNext;
+>, <Line: +            toBeSuClassedNext = new LinkedList<>();
+>, <Line: +            processLayer(superVsSub, reasoner, classesInSig, toBeSuClassedNow, toBeSuClassedNext, suClassesToBeAdded);
+>, <Line: +        }
+>, <Line: +        superOrSubClasses.addAll(suClassesToBeAdded);
+>, <Line: +    }
+>, <Line: +    protected static void processLayer(boolean superVsSub, OWLReasoner reasoner, Set<OWLClass> classesInSig,
+>, <Line: +        Queue<OWLClass> toBeSuClassedNow, Queue<OWLClass> toBeSuClassedNext, Queue<OWLClass> suClassesToBeAdded) {
+>, <Line: +        for (OWLClassExpression ce : toBeSuClassedNow) {
+>, <Line: +            Stream<OWLClass> suClasses;
+>, <Line: +            if (superVsSub) {
+>, <Line: +                suClasses = reasoner.getSuperClasses(ce, true).entities();
+>, <Line: +            } else {
+>, <Line: +                suClasses = reasoner.getSubClasses(ce, true).entities();
+>, <Line: +            }
+>, <Line: +            suClasses.filter(c -> !classesInSig.contains(c) && suClassesToBeAdded.add(c))
+>, <Line: +                .forEach(toBeSuClassedNext::add);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    protected static void negativeLevel(boolean superVsSub, OWLReasoner reasoner, Set<OWLClass> classesInSig,
+>, <Line: +        Set<OWLClass> superOrSubClasses) {
+>, <Line: +        for (OWLClassExpression ent : classesInSig) {
+>, <Line: +            NodeSet<OWLClass> nodes;
+>, <Line: +            if (superVsSub) {
+>, <Line: +                nodes = reasoner.getSuperClasses(ent, false);
+>, <Line: +            } else {
+>, <Line: +                nodes = reasoner.getSubClasses(ent, false);
+>, <Line: +            }
+>, <Line: +            add(superOrSubClasses, nodes.entities());
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -            LOGGER.info("  Loop {}", loopNumber);
+>, <Line: -                LOGGER.info("  Loop {}", loopNumber);
+>, <Line: -                    differentIndividualAxioms.forEach(a -> LOGGER.info("  Added different individual axiom:   {}",
+>, <Line: -                        minusOntologyURI(a.toString())));
+>, <Line: -            for (OWLClassExpression ent : classesInSig) {
+>, <Line: -                NodeSet<OWLClass> nodes;
+>, <Line: -                if (superVsSub) {
+>, <Line: -                    nodes = reasoner.getSuperClasses(ent, false);
+>, <Line: -                } else {
+>, <Line: -                    nodes = reasoner.getSubClasses(ent, false);
+>, <Line: -                }
+>, <Line: -                add(superOrSubClasses, nodes.entities());
+>, <Line: -            }
+>, <Line: -            Queue<OWLClass> toBeSuClassedNow;
+>, <Line: -            Queue<OWLClass> toBeSuClassedNext = new LinkedList<>(classesInSig);
+>, <Line: -            Queue<OWLClass> suClassesToBeAdded = new LinkedList<>();
+>, <Line: -            for (int i = 0; i < superOrSubClassLevel; i++) {
+>, <Line: -                toBeSuClassedNow = toBeSuClassedNext;
+>, <Line: -                toBeSuClassedNext = new LinkedList<>();
+>, <Line: -                for (OWLClassExpression ce : toBeSuClassedNow) {
+>, <Line: -                    Set<OWLClass> suClasses;
+>, <Line: -                    if (superVsSub) {
+>, <Line: -                        suClasses = asUnorderedSet(reasoner.getSuperClasses(ce, true).entities());
+>, <Line: -                    } else {
+>, <Line: -                        suClasses = asUnorderedSet(reasoner.getSubClasses(ce, true).entities());
+>, <Line: -                    }
+>, <Line: -                    for (OWLClass suClass : suClasses) {
+>, <Line: -                        if (!classesInSig.contains(suClass) && !suClassesToBeAdded.contains(suClass)) {
+>, <Line: -                            toBeSuClassedNext.add(suClass);
+>, <Line: -                            suClassesToBeAdded.add(suClass);
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            superOrSubClasses.addAll(suClassesToBeAdded);
+>]

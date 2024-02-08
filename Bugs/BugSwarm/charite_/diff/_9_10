@@ -1,0 +1,9 @@
+[<Line: +		int endPos = codonStart + 3;
+>, <Line: +		if (transcript.getSequence().length() < endPos)
+>, <Line: +			throw new InvalidCodonException("Could not access codon " + codonStart + " - " + endPos
+>, <Line: +		return transcript.getSequence().substring(codonStart, endPos);
+>]
+[<Line: -		if (transcript.getSequence().length() <= codonStart + 3)
+>, <Line: -			throw new InvalidCodonException("Could not access codon " + codonStart + " - " + (codonStart + 3)
+>, <Line: -		return transcript.getSequence().substring(codonStart, codonStart + 3);
+>]

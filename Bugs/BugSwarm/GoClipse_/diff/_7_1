@@ -1,0 +1,10 @@
+[<Line: +import melnorme.lang.ide.ui.utils.operations.AbstractUIOperation;
+>, <Line: +			new AbstractUIOperation(getJobTitle()) {
+>, <Line: +			}.executeAndHandleAsynchronouslyInJob();
+>, <Line: +				getProject().getName(), buildTargetElement.getTargetDisplayName());
+>]
+[<Line: -import melnorme.lang.ide.ui.utils.operations.EclipseJobUIOperation;
+>, <Line: -			new EclipseJobUIOperation(getJobTitle()) {
+>, <Line: -			}.executeAndHandle();
+>, <Line: -				getProject(), buildTargetElement.getTargetDisplayName());
+>]

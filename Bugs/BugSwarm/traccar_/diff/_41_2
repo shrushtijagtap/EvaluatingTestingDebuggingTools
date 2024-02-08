@@ -1,0 +1,68 @@
+[<Line: +import org.jboss.netty.buffer.ChannelBuffer;
+>, <Line: +import java.nio.charset.StandardCharsets;
+>, <Line: +            .expression("(.*)")                  // cell and wifi
+>, <Line: +        ChannelBuffer buf = (ChannelBuffer) msg;
+>, <Line: +        buf.skipBytes(1); // header
+>, <Line: +        String manufacturer = buf.readBytes(2).toString(StandardCharsets.US_ASCII);
+>, <Line: +        buf.skipBytes(1); // delimiter
+>, <Line: +        String id = buf.readBytes(10).toString(StandardCharsets.US_ASCII);
+>, <Line: +        buf.skipBytes(1); // delimiter
+>, <Line: +        buf.skipBytes(4); // length
+>, <Line: +        buf.skipBytes(1); // delimiter
+>, <Line: +        String content = null;
+>, <Line: +        int contentIndex = buf.indexOf(buf.readerIndex(), buf.writerIndex(), (byte) ',');
+>, <Line: +        if (contentIndex > 0) {
+>, <Line: +            content = buf.toString(contentIndex + 1, buf.writerIndex() - 2 - contentIndex, StandardCharsets.US_ASCII);
+>, <Line: +        } else {
+>, <Line: +            contentIndex = buf.writerIndex() - 1;
+>, <Line: +        }
+>, <Line: +        String type = buf.readBytes(contentIndex - buf.readerIndex()).toString(StandardCharsets.US_ASCII);
+>, <Line: +            if (content != null) {
+>, <Line: +                if (values.length >= 3) {
+>, <Line: +                    position.set(Position.KEY_BATTERY_LEVEL, Integer.parseInt(values[2]));
+>, <Line: +            Parser parser = new Parser(PATTERN_POSITION, content);
+>, <Line: +            if (content != null) {
+>, <Line: +                Position position = new Position();
+>, <Line: +                position.setProtocol(getProtocolName());
+>, <Line: +                position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: +                getLastLocation(position, new Date());
+>, <Line: +                position.setValid(false);
+>, <Line: +                position.set("pulse", content);
+>, <Line: +                position.set(Position.KEY_RESULT, content);
+>, <Line: +                return position;
+>, <Line: +            }
+>]
+[<Line: -    private static final Pattern PATTERN = new PatternBuilder()
+>, <Line: -            .text("[")
+>, <Line: -            .expression("(..)").text("*")        // manufacturer
+>, <Line: -            .number("(d+)").text("*")            // equipment id
+>, <Line: -            .number("xxxx").text("*")            // length
+>, <Line: -            .expression("([^,]+)")               // type
+>, <Line: -            .expression("(.*)")                  // content
+>, <Line: -            .compile();
+>, <Line: -            .text(",")
+>, <Line: -            .expression("([^\\]]*)")             // cell and wifi
+>, <Line: -            .text("]")
+>, <Line: -        Parser parser = new Parser(PATTERN, (String) msg);
+>, <Line: -        if (!parser.matches()) {
+>, <Line: -            return null;
+>, <Line: -        }
+>, <Line: -        String manufacturer = parser.next();
+>, <Line: -        String id = parser.next();
+>, <Line: -        String type = parser.next();
+>, <Line: -        String content = parser.next();
+>, <Line: -            if (!content.isEmpty()) {
+>, <Line: -                if (values.length >= 4) {
+>, <Line: -                    position.set(Position.KEY_BATTERY_LEVEL,
+>, <Line: -                            Integer.parseInt(values[3].substring(0, values[3].length() - 1)));
+>, <Line: -            parser = new Parser(PATTERN_POSITION, content);
+>, <Line: -            Position position = new Position();
+>, <Line: -            position.setProtocol(getProtocolName());
+>, <Line: -            position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: -            getLastLocation(position, new Date());
+>, <Line: -            position.setValid(false);
+>, <Line: -            String pulse = content.substring(1);
+>, <Line: -            position.set("pulse", pulse);
+>, <Line: -            position.set(Position.KEY_RESULT, pulse);
+>, <Line: -            return position;
+>]

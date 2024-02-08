@@ -1,0 +1,6 @@
+[<Line: +org.eclipse.jdt.core.compiler.problem.rawTypeReference=warning
+>, <Line: +org.eclipse.jdt.core.compiler.problem.uncheckedTypeOperation=warning
+>]
+[<Line: -org.eclipse.jdt.core.compiler.problem.rawTypeReference=ignore
+>, <Line: -org.eclipse.jdt.core.compiler.problem.uncheckedTypeOperation=ignore
+>]

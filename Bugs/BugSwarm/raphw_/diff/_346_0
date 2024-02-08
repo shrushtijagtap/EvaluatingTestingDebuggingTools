@@ -1,0 +1,29 @@
+[<Line: +            private final List<Transformer> transformers;
+>, <Line: +                this(Arrays.asList(transformer));
+>, <Line: +            }
+>, <Line: +            /**
+>, <Line: +             * Creates a new compound transformer.
+>, <Line: +             *
+>, <Line: +             * @param transformers The transformers to apply in their application order.
+>, <Line: +             */
+>, <Line: +            public Compound(List<? extends Transformer> transformers) {
+>, <Line: +                this.transformers = new ArrayList<Transformer>();
+>, <Line: +                for (Transformer transformer : transformers) {
+>, <Line: +                    if (transformer instanceof Compound) {
+>, <Line: +                        this.transformers.addAll(((Compound) transformer).transformers);
+>, <Line: +                    } else {
+>, <Line: +                        this.transformers.add(transformer);
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +                for (Transformer transformer : transformers) {
+>, <Line: +                        && transformers.equals(((Compound) other).transformers);
+>, <Line: +                return transformers.hashCode();
+>, <Line: +                        "transformers=" + transformers +
+>]
+[<Line: -            private final Transformer[] transformer;
+>, <Line: -                this.transformer = transformer;
+>, <Line: -                for (Transformer transformer : this.transformer) {
+>, <Line: -                        && Arrays.equals(transformer, ((Compound) other).transformer);
+>, <Line: -                return Arrays.hashCode(transformer);
+>, <Line: -                        "transformer=" + Arrays.toString(transformer) +
+>]

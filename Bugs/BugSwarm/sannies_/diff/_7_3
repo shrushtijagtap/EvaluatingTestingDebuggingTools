@@ -1,0 +1,8 @@
+[<Line: +<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+>, <Line: +    <groupId>org.mp4parser</groupId>
+>, <Line: +            <groupId>org.mp4parser</groupId>
+>]
+[<Line: -<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>, <Line: -    <groupId>com.googlecode.mp4parser</groupId>
+>, <Line: -            <groupId>com.googlecode.mp4parser</groupId>
+>]

@@ -1,0 +1,17 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +        OntologyConfigurator config = new OntologyConfigurator().setStrict(false);
+>, <Line: +        System.out.println(
+>, <Line: +            "MemoryBenchmark.memoryProfile() elapsed: " + (System.currentTimeMillis() - start));
+>, <Line: +        HotSpotDiagnosticMXBean hotSpotDiagnosticMXBean =
+>, <Line: +            newPlatformMXBeanProxy(getPlatformMBeanServer(),
+>, <Line: +                "com.sun.management:type=HotSpotDiagnostic", HotSpotDiagnosticMXBean.class);
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -        OWLOntologyLoaderConfiguration config =
+>, <Line: -            new OWLOntologyLoaderConfiguration().setStrict(false);
+>, <Line: -        System.out.println("MemoryBenchmark.memoryProfile() elapsed: "
+>, <Line: -            + (System.currentTimeMillis() - start));
+>, <Line: -        HotSpotDiagnosticMXBean hotSpotDiagnosticMXBean = newPlatformMXBeanProxy(
+>, <Line: -            getPlatformMBeanServer(), "com.sun.management:type=HotSpotDiagnostic",
+>, <Line: -            HotSpotDiagnosticMXBean.class);
+>]

@@ -1,0 +1,20 @@
+[]
+[<Line: -<?xml version="1.0" encoding="UTF-8"?>
+>, <Line: -<Configuration status="info">
+>, <Line: -	<Appenders>
+>, <Line: -		<Console name="CONSOLE" target="SYSTEM_OUT">
+>, <Line: -			<PatternLayout pattern="%m%n" />
+>, <Line: -		</Console>
+>, <Line: -		<!-- Async Appender should be configured after the appenders it references. 
+>, <Line: -			This will allow it to shutdown properly. -->
+>, <Line: -		<Async name="ASYNC">
+>, <Line: -			<AppenderRef ref="CONSOLE" />
+>, <Line: -		</Async>
+>, <Line: -	</Appenders>
+>, <Line: -	<Loggers>
+>, <Line: -		<Root level="info">
+>, <Line: -			<AppenderRef ref="ASYNC" />
+>, <Line: -		</Root>
+>, <Line: -	</Loggers>
+>, <Line: -</Configuration>
+>]

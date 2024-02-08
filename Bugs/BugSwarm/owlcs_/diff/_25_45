@@ -1,0 +1,9 @@
+[<Line: +                inputConsumer.getConfiguration().getEntityExpansionLimit()).parse(source, this);
+>, <Line: +     *        reified statement
+>, <Line: +     *        reified statement
+>]
+[<Line: -                inputConsumer.getConfiguration().getEntityExpansionLimit())
+>, <Line: -                .parse(source, this);
+>, <Line: -     * reified statement
+>, <Line: -     * reified statement
+>]

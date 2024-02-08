@@ -1,0 +1,21 @@
+[<Line: +import com.google.gson.annotations.SerializedName;
+>, <Line: +    @SerializedName("artifact")
+>, <Line: +    public String artifact;
+>, <Line: +    @SerializedName("webpath")
+>, <Line: +    public String webpath;
+>, <Line: +    @SerializedName("adfly")
+>, <Line: +    public String adfly;
+>, <Line: +    @SerializedName("homepage")
+>, <Line: +    public String homepage;
+>, <Line: +    @SerializedName("name")
+>, <Line: +    public String name;
+>, <Line: +    @SerializedName("branches")
+>, <Line: +    public Map<String, int[]> branches;
+>, <Line: +    @SerializedName("mcversion")
+>, <Line: +    public Map<String, int[]> mcversion;
+>, <Line: +    @SerializedName("promos")
+>, <Line: +    @SerializedName("number")
+>]
+[<Line: -    public String artifact, webpath, adfly, homepage, name;
+>, <Line: -    public Map<String, int[]> branches, mcversion;
+>]

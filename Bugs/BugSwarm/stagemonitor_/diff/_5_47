@@ -1,0 +1,50 @@
+[<Line: +package org.stagemonitor.requestmonitor.reporter;
+>, <Line: +import static org.mockito.Mockito.mock;
+>, <Line: +import static org.mockito.Mockito.when;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.UUID;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.stagemonitor.core.CorePlugin;
+>, <Line: +import org.stagemonitor.core.MeasurementSession;
+>, <Line: +import org.stagemonitor.core.configuration.Configuration;
+>, <Line: +import org.stagemonitor.core.elasticsearch.ElasticsearchClient;
+>, <Line: +import org.stagemonitor.core.metrics.metrics2.Metric2Registry;
+>, <Line: +import org.stagemonitor.requestmonitor.RequestMonitor;
+>, <Line: +import org.stagemonitor.requestmonitor.RequestMonitorPlugin;
+>, <Line: +import org.stagemonitor.requestmonitor.RequestTrace;
+>, <Line: +import org.stagemonitor.requestmonitor.profiler.CallStackElement;
+>, <Line: +public class AbstractElasticsearchRequestTraceReporterTest {
+>, <Line: +	protected ElasticsearchClient elasticsearchClient;
+>, <Line: +	protected RequestMonitorPlugin requestMonitorPlugin;
+>, <Line: +	protected Logger requestTraceLogger;
+>, <Line: +	protected Metric2Registry registry;
+>, <Line: +	protected Configuration configuration;
+>, <Line: +	@Before
+>, <Line: +	public void setUp() throws Exception {
+>, <Line: +		configuration = mock(Configuration.class);
+>, <Line: +		CorePlugin corePlugin = mock(CorePlugin.class);
+>, <Line: +		requestMonitorPlugin = mock(RequestMonitorPlugin.class);
+>, <Line: +		when(configuration.getConfig(CorePlugin.class)).thenReturn(corePlugin);
+>, <Line: +		when(configuration.getConfig(RequestMonitorPlugin.class)).thenReturn(requestMonitorPlugin);
+>, <Line: +		when(requestMonitorPlugin.getOnlyReportNRequestsPerMinuteToElasticsearch()).thenReturn(1000000d);
+>, <Line: +		when(requestMonitorPlugin.getOnlyReportRequestsWithNameToElasticsearch()).thenReturn(Collections.singleton("Report Me"));
+>, <Line: +		when(corePlugin.getElasticsearchUrl()).thenReturn("http://localhost:9200");
+>, <Line: +		when(corePlugin.getElasticsearchUrls()).thenReturn(Collections.singletonList("http://localhost:9200"));
+>, <Line: +		when(corePlugin.getElasticsearchClient()).thenReturn(elasticsearchClient = mock(ElasticsearchClient.class));
+>, <Line: +		registry = new Metric2Registry();
+>, <Line: +		when(corePlugin.getMetricRegistry()).thenReturn(registry);
+>, <Line: +		requestTraceLogger = mock(Logger.class);
+>, <Line: +	}
+>, <Line: +	protected RequestTrace createTestRequestTraceWithCallTree(long executionTime) {
+>, <Line: +		final RequestTrace requestTrace = new RequestTrace(UUID.randomUUID().toString(), new MeasurementSession("ERTRT", "test", "test"), requestMonitorPlugin);
+>, <Line: +		requestTrace.setCallStack(CallStackElement.createRoot("test"));
+>, <Line: +		requestTrace.setName("Report Me");
+>, <Line: +		requestTrace.setExecutionTime(executionTime);
+>, <Line: +		registry.timer(RequestMonitor.getTimerMetricName(requestTrace.getName())).update(executionTime, TimeUnit.NANOSECONDS);
+>, <Line: +		return requestTrace;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

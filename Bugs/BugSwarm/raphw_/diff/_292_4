@@ -1,0 +1,21 @@
+[<Line: +package net.bytebuddy.agent.builder;
+>, <Line: +import net.bytebuddy.test.utility.ObjectPropertyAssertion;
+>, <Line: +import org.junit.Test;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import java.util.Iterator;
+>, <Line: +public class AgentBuilderRedefinitionStrategy {
+>, <Line: +    @Test
+>, <Line: +    public void testObjectProperties() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Collector.ForRedefinition.class).applyBasic();
+>, <Line: +        final Iterator<Class<?>> iterator = Arrays.<Class<?>>asList(Object.class, String.class).iterator();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Collector.ForRedefinition.Entry.class).create(new ObjectPropertyAssertion.Creator<Class<?>>() {
+>, <Line: +            @Override
+>, <Line: +            public Class<?> create() {
+>, <Line: +                return iterator.next();
+>, <Line: +            }
+>, <Line: +        }).apply();
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.Collector.ForRetransformation.class).applyBasic();
+>, <Line: +    }
+>, <Line: +}>]
+[]

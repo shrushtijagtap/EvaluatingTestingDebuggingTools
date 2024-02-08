@@ -1,0 +1,16 @@
+[<Line: +                "  title: the title\n" +
+>, <Line: +                "  description: My API\n" +
+>, <Line: +                "    name: Fred\n" +
+>, <Line: +                "    url: http://gigantic-server.com\n" +
+>, <Line: +                "    email: Fred@gigagantic-server.com\n" +
+>, <Line: +                "    name: Apache 2.0\n" +
+>, <Line: +                "    url: http://foo.bar\n" +
+>]
+[<Line: -                "  title: \"the title\"\n" +
+>, <Line: -                "  description: \"My API\"\n" +
+>, <Line: -                "    name: \"Fred\"\n" +
+>, <Line: -                "    url: \"http://gigantic-server.com\"\n" +
+>, <Line: -                "    email: \"Fred@gigagantic-server.com\"\n" +
+>, <Line: -                "    name: \"Apache 2.0\"\n" +
+>, <Line: -                "    url: \"http://foo.bar\"\n" +
+>]

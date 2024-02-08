@@ -1,0 +1,27 @@
+[<Line: +  }
+>, <Line: +  public static int calculateInvokedMethodCount(List<ITestNGMethod> methods) {
+>, <Line: +    return methods.size();
+>, <Line: +  }
+>]
+[<Line: -  /**
+>, <Line: -   * @return The number of methods invoked, taking into account the number
+>, <Line: -   * of instances.
+>, <Line: -   */
+>, <Line: -//  public static int calculateInvokedMethodCount(IResultMap map) {
+>, <Line: -//    return calculateInvokedMethodCount(
+>, <Line: -//        (ITestNGMethod[]) map.getAllMethods().toArray(new ITestNGMethod[map.size()]));
+>, <Line: -//  }
+>, <Line: -//    int result = 0;
+>, <Line: -//
+>, <Line: -//    for (ITestNGMethod method : methods) {
+>, <Line: -//      int instanceCount = method.getInvocationCount();
+>, <Line: -//      result += instanceCount;
+>, <Line: -//    }
+>, <Line: -//
+>, <Line: -//    return result;
+>, <Line: -  }
+>, <Line: -//  public static int calculateInvokedMethodCount(Map<ITestNGMethod, ITestResult> methods) {
+>, <Line: -//    return calculateInvokedMethodCount(methods.keySet().toArray(new ITestNGMethod[methods.values()
+>, <Line: -//                                                                .size()]));
+>, <Line: -//  }
+>]

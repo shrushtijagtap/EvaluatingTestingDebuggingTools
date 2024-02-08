@@ -1,0 +1,6 @@
+[<Line: +                for(int j : i.suspendableCallSites()) {
+>, <Line: +                        return new Pair<>(true, i.suspendableCallSites());
+>]
+[<Line: -                for(int j : i.suspendableCallsites()) {
+>, <Line: -                        return new Pair<>(true, i.suspendableCallsites());
+>]

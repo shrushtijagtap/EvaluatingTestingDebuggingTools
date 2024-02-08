@@ -1,0 +1,6 @@
+[<Line: +import org.fest.assertions.api.Assertions;
+>, <Line: +      Assertions.assertThat(action.getResponseContent())
+>, <Line: +               .contains("The parameter was correctly injected");
+>]
+[<Line: -      Assert.assertTrue(action.getResponseContent().contains("The parameter was correctly injected"));
+>]

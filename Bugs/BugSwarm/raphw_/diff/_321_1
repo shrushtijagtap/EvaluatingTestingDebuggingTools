@@ -1,0 +1,252 @@
+[<Line: +/**
+>, <Line: + * A field locator offers an interface for locating a field that is declared by a specified type.
+>, <Line: + */
+>, <Line: +public interface FieldLocator {
+>, <Line: +    /**
+>, <Line: +     * Locates a field with the given name and throws an exception if no such type exists.
+>, <Line: +     *
+>, <Line: +     * @param name The name of the field to locate.
+>, <Line: +     * @return A resolution for a field lookup.
+>, <Line: +     */
+>, <Line: +    Resolution locate(String name);
+>, <Line: +    /**
+>, <Line: +     * Locates a field with the given name and type and throws an exception if no such type exists.
+>, <Line: +     *
+>, <Line: +     * @param name The name of the field to locate.
+>, <Line: +     * @param type The type fo the field to locate.
+>, <Line: +     * @return A resolution for a field lookup.
+>, <Line: +     */
+>, <Line: +    Resolution locate(String name, TypeDescription type);
+>, <Line: +    /**
+>, <Line: +     * A resolution for a field lookup.
+>, <Line: +     */
+>, <Line: +    interface Resolution {
+>, <Line: +        /**
+>, <Line: +         * Returns {@code true} if a field was located.
+>, <Line: +         *
+>, <Line: +         * @return {@code true} if a field was located.
+>, <Line: +         */
+>, <Line: +        boolean isResolved();
+>, <Line: +        /**
+>, <Line: +         * Returns the field description if a field was located. This method must only be called if
+>, <Line: +         * this resolution was actually resolved.
+>, <Line: +         *
+>, <Line: +         * @return The located field.
+>, <Line: +         */
+>, <Line: +        FieldDescription getFieldDescription();
+>, <Line: +        /**
+>, <Line: +         * An illegal resolution.
+>, <Line: +         */
+>, <Line: +        enum Illegal implements Resolution {
+>, <Line: +            /**
+>, <Line: +             * The singleton instance.
+>, <Line: +             */
+>, <Line: +            INSTANCE;
+>, <Line: +            @Override
+>, <Line: +            public boolean isResolved() {
+>, <Line: +                return false;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public FieldDescription getFieldDescription() {
+>, <Line: +                throw new IllegalStateException("Could not locate field");
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public String toString() {
+>, <Line: +                return "FieldLocator.Resolution.Illegal." + name();
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * A simple implementation for a field resolution.
+>, <Line: +         */
+>, <Line: +        class Simple implements Resolution {
+>, <Line: +            /**
+>, <Line: +             * A description of the located field.
+>, <Line: +             */
+>, <Line: +            private final FieldDescription fieldDescription;
+>, <Line: +            /**
+>, <Line: +             * Creates a new simple resolution for a field.
+>, <Line: +             *
+>, <Line: +             * @param fieldDescription A description of the located field.
+>, <Line: +             */
+>, <Line: +            protected Simple(FieldDescription fieldDescription) {
+>, <Line: +                this.fieldDescription = fieldDescription;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public boolean isResolved() {
+>, <Line: +                return true;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public FieldDescription getFieldDescription() {
+>, <Line: +                return fieldDescription;
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public boolean equals(Object object) {
+>, <Line: +                if (this == object) return true;
+>, <Line: +                if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +                Simple simple = (Simple) object;
+>, <Line: +                return fieldDescription.equals(simple.fieldDescription);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public int hashCode() {
+>, <Line: +                return fieldDescription.hashCode();
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public String toString() {
+>, <Line: +                return "FieldLocator.Resolution.Simple{" +
+>, <Line: +                        "fieldDescription=" + fieldDescription +
+>, <Line: +                        '}';
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * An abstract base implementation of a field locator.
+>, <Line: +     */
+>, <Line: +    abstract class AbstractBase implements FieldLocator {
+>, <Line: +        /**
+>, <Line: +         * The type accessing the field.
+>, <Line: +         */
+>, <Line: +        protected final TypeDescription accessingType;
+>, <Line: +        /**
+>, <Line: +         * Creates a new field locator.
+>, <Line: +         *
+>, <Line: +         * @param accessingType The type accessing the field.
+>, <Line: +         */
+>, <Line: +        public Resolution locate(String name) {
+>, <Line: +            FieldList<?> candidates = locate(named(name).and(isVisibleTo(accessingType)));
+>, <Line: +            return candidates.size() == 1
+>, <Line: +                    ? new Resolution.Simple(candidates.getOnly())
+>, <Line: +                    : Resolution.Illegal.INSTANCE;
+>, <Line: +        public Resolution locate(String name, TypeDescription type) {
+>, <Line: +            FieldList<?> candidates = locate(named(name).and(fieldType(type)).and(isVisibleTo(accessingType)));
+>, <Line: +            return candidates.size() == 1
+>, <Line: +                    ? new Resolution.Simple(candidates.getOnly())
+>, <Line: +                    : Resolution.Illegal.INSTANCE;
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Locates fields that match the given matcher.
+>, <Line: +         *
+>, <Line: +         * @param matcher The matcher that identifies fields of interest.
+>, <Line: +         * @return A list of fields that match the specified matcher.
+>, <Line: +         */
+>, <Line: +        protected abstract FieldList<?> locate(ElementMatcher<? super FieldDescription> matcher);
+>, <Line: +        @Override
+>, <Line: +        public boolean equals(Object object) {
+>, <Line: +            if (this == object) return true;
+>, <Line: +            if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +            AbstractBase that = (AbstractBase) object;
+>, <Line: +            return accessingType.equals(that.accessingType);
+>, <Line: +        @Override
+>, <Line: +        public int hashCode() {
+>, <Line: +            return accessingType.hashCode();
+>, <Line: +        }
+>, <Line: +    /**
+>, <Line: +     * A field locator that only looks up fields that are declared by a specific type.
+>, <Line: +     */
+>, <Line: +    class ForExactType extends AbstractBase {
+>, <Line: +        /**
+>, <Line: +         * The type for which to look up fields.
+>, <Line: +         */
+>, <Line: +        /**
+>, <Line: +         * Creates a new field locator for locating fields from a declared type.
+>, <Line: +         *
+>, <Line: +         * @param typeDescription The type for which to look up fields that is also providing the accessing type.
+>, <Line: +         */
+>, <Line: +        /**
+>, <Line: +         * Creates a new field locator for locating fields from a declared type.
+>, <Line: +         *
+>, <Line: +         * @param typeDescription The type for which to look up fields.
+>, <Line: +         * @param accessingType   The accessing type.
+>, <Line: +         */
+>, <Line: +        public ForExactType(TypeDescription typeDescription, TypeDescription accessingType) {
+>, <Line: +        protected FieldList<?> locate(ElementMatcher<? super FieldDescription> matcher) {
+>, <Line: +        @Override
+>, <Line: +        public boolean equals(Object object) {
+>, <Line: +            if (this == object) return true;
+>, <Line: +            if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +            if (!super.equals(object)) return false;
+>, <Line: +            ForExactType that = (ForExactType) object;
+>, <Line: +            return typeDescription.equals(that.typeDescription);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public int hashCode() {
+>, <Line: +            int result = super.hashCode();
+>, <Line: +            result = 31 * result + typeDescription.hashCode();
+>, <Line: +            return result;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public String toString() {
+>, <Line: +            return "FieldLocator.ForExactType{" +
+>, <Line: +                    "accessingType=" + accessingType +
+>, <Line: +                    ", typeDescription=" + typeDescription +
+>, <Line: +                    '}';
+>, <Line: +        }
+>, <Line: +    /**
+>, <Line: +     * A field locator that looks up fields that are declared within a class's class hierarchy.
+>, <Line: +     */
+>, <Line: +    class ForClassHierarchy extends AbstractBase {
+>, <Line: +        /**
+>, <Line: +         * The type for which to look up a field within its class hierarchy.
+>, <Line: +         */
+>, <Line: +        /**
+>, <Line: +         * Creates a field locator that looks up fields that are declared within a class's class hierarchy.
+>, <Line: +         *
+>, <Line: +         * @param typeDescription The type for which to look up a field within its class hierarchy which is also the accessing type.
+>, <Line: +         */
+>, <Line: +        /**
+>, <Line: +         * Creates a field locator that looks up fields that are declared within a class's class hierarchy.
+>, <Line: +         *
+>, <Line: +         * @param typeDescription The type for which to look up a field within its class hierarchy.
+>, <Line: +         * @param accessingType   The accessing type.
+>, <Line: +         */
+>, <Line: +        protected FieldList<?> locate(ElementMatcher<? super FieldDescription> matcher) {
+>, <Line: +                    return candidates;
+>, <Line: +        @Override
+>, <Line: +        public boolean equals(Object object) {
+>, <Line: +            if (this == object) return true;
+>, <Line: +            if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +            if (!super.equals(object)) return false;
+>, <Line: +            ForClassHierarchy that = (ForClassHierarchy) object;
+>, <Line: +            return typeDescription.equals(that.typeDescription);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public int hashCode() {
+>, <Line: +            int result = super.hashCode();
+>, <Line: +            result = 31 * result + typeDescription.hashCode();
+>, <Line: +            return result;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public String toString() {
+>, <Line: +            return "FieldLocator.ForClassHierarchy{" +
+>, <Line: +                    "accessingType=" + accessingType +
+>, <Line: +                    ", typeDescription=" + typeDescription +
+>, <Line: +                    '}';
+>, <Line: +        }
+>]
+[<Line: -public interface FieldLocator<T extends FieldDescription> {
+>, <Line: -    T locate(String name);
+>, <Line: -    T locate(String name, TypeDescription type);
+>, <Line: -    abstract class AbstractBase<S extends FieldDescription> implements FieldLocator<S> {
+>, <Line: -        private final TypeDescription accessingType;
+>, <Line: -        public S locate(String name) {
+>, <Line: -            FieldList<S> candidates = locate(named(name).and(isVisibleTo(accessingType)));
+>, <Line: -            if (candidates.size() == 1) {
+>, <Line: -                return candidates.getOnly();
+>, <Line: -            } else {
+>, <Line: -                throw new IllegalStateException();
+>, <Line: -            }
+>, <Line: -        public S locate(String name, TypeDescription type) {
+>, <Line: -            FieldList<S> candidates = locate(named(name).and(fieldType(type)).and(isVisibleTo(accessingType)));
+>, <Line: -            if (candidates.isEmpty()) {
+>, <Line: -                throw new IllegalStateException();
+>, <Line: -            } else {
+>, <Line: -                return candidates.getOnly();
+>, <Line: -            }
+>, <Line: -        protected abstract FieldList<S> locate(ElementMatcher<? super S> matcher);
+>, <Line: -    class ForExactType extends AbstractBase<FieldDescription.InDefinedShape> {
+>, <Line: -        protected ForExactType(TypeDescription typeDescription, TypeDescription accessingType) {
+>, <Line: -        protected FieldList<FieldDescription.InDefinedShape> locate(ElementMatcher<? super FieldDescription.InDefinedShape> matcher) {
+>, <Line: -    class ForClassHierarchy extends AbstractBase<FieldDescription> {
+>, <Line: -        @SuppressWarnings("unchecked")
+>, <Line: -        protected FieldList<FieldDescription> locate(ElementMatcher<? super FieldDescription> matcher) {
+>, <Line: -                    return (FieldList<FieldDescription>) candidates;
+>]

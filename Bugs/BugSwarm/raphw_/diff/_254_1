@@ -1,0 +1,90 @@
+[<Line: +            private final ConcurrentMap<StorageKey, Set<String>> types;
+>, <Line: +                types = new ConcurrentHashMap<StorageKey, Set<String>>();
+>, <Line: +            @SuppressFBWarnings(value = "GC_UNRELATED_TYPES", justification = "Cross-comparison is intended")
+>, <Line: +                    Set<String> types = this.types.get(new LookupKey(classLoader));
+>, <Line: +                    if (types == null) {
+>, <Line: +                        types = Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
+>, <Line: +                        Set<String> previous = this.types.putIfAbsent(new StorageKey(classLoader), types);
+>, <Line: +                        if (previous != null) {
+>, <Line: +                            types = previous;
+>, <Line: +                        }
+>, <Line: +                Iterator<Map.Entry<StorageKey, Set<String>>> entries = types.entrySet().iterator();
+>, <Line: +                    Map.Entry<StorageKey, Set<String>> entry = entries.next();
+>, <Line: +                            } catch (Throwable ignored) {
+>, <Line: +            /* does not implement hashCode and equals in order to align with identity treatment of the JVM */
+>, <Line: +            /**
+>, <Line: +             * A key for a class loader that can only be used for looking up a preexisting value but avoids reference management.
+>, <Line: +             */
+>, <Line: +            protected static class LookupKey {
+>, <Line: +                /**
+>, <Line: +                 * The represented class loader.
+>, <Line: +                 */
+>, <Line: +                private final ClassLoader classLoader;
+>, <Line: +                /**
+>, <Line: +                 * The represented class loader's hash code or {@code 0} if this entry represents the bootstrap class loader.
+>, <Line: +                 */
+>, <Line: +                private final int hashCode;
+>, <Line: +                /**
+>, <Line: +                 * Creates a new lookup key.
+>, <Line: +                 *
+>, <Line: +                 * @param classLoader The represented class loader.
+>, <Line: +                 */
+>, <Line: +                protected LookupKey(ClassLoader classLoader) {
+>, <Line: +                    this.classLoader = classLoader;
+>, <Line: +                    hashCode = System.identityHashCode(classLoader);
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                @SuppressFBWarnings(value = "EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS", justification = "Cross-comparison is intended")
+>, <Line: +                public boolean equals(Object object) {
+>, <Line: +                    if (this == object) {
+>, <Line: +                        return true;
+>, <Line: +                    } else if (object instanceof LookupKey) {
+>, <Line: +                        return classLoader == ((LookupKey) object).classLoader;
+>, <Line: +                    } else if (object instanceof StorageKey) {
+>, <Line: +                        StorageKey storageKey = (StorageKey) object;
+>, <Line: +                        return hashCode == storageKey.hashCode && classLoader == storageKey.get();
+>, <Line: +                    } else {
+>, <Line: +                        return false;
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +                @Override
+>, <Line: +                public int hashCode() {
+>, <Line: +                    return hashCode;
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +             * A key for a class loader that only weakly references the class loader.
+>, <Line: +            protected static class StorageKey extends WeakReference<ClassLoader> {
+>, <Line: +                 * Creates a new storage key.
+>, <Line: +                protected StorageKey(ClassLoader classLoader) {
+>, <Line: +                @SuppressFBWarnings(value = "EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS", justification = "Cross-comparison is intended")
+>, <Line: +                    if (this == object) {
+>, <Line: +                        return true;
+>, <Line: +                    } else if (object instanceof LookupKey) {
+>, <Line: +                        LookupKey lookupKey = (LookupKey) object;
+>, <Line: +                        return hashCode == lookupKey.hashCode && get() == lookupKey.classLoader;
+>, <Line: +                    } else if (object instanceof StorageKey) {
+>, <Line: +                        StorageKey storageKey = (StorageKey) object;
+>, <Line: +                        return hashCode == storageKey.hashCode && get() == storageKey.get();
+>, <Line: +                    } else {
+>, <Line: +                        return false;
+>, <Line: +                    }
+>]
+[<Line: -            private final ConcurrentMap<ClassLoaderReference, Set<String>> types;
+>, <Line: -                types = new ConcurrentHashMap<ClassLoaderReference, Set<String>>();
+>, <Line: -                    ClassLoaderReference classLoaderReference = new ClassLoaderReference(classLoader);
+>, <Line: -                    Set<String> types = Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
+>, <Line: -                    Set<String> previous = this.types.putIfAbsent(classLoaderReference, types);
+>, <Line: -                    if (previous != null) {
+>, <Line: -                        types = previous;
+>, <Line: -                Iterator<Map.Entry<ClassLoaderReference, Set<String>>> entries = types.entrySet().iterator();
+>, <Line: -                    Map.Entry<ClassLoaderReference, Set<String>> entry = entries.next();
+>, <Line: -                            } catch (ClassNotFoundException ignored) {
+>, <Line: -             * A reference for a class loader that also allows the identification of the bootstrap loader.
+>, <Line: -            protected static class ClassLoaderReference extends WeakReference<ClassLoader> {
+>, <Line: -                 * Creates a new class loader reference.
+>, <Line: -                protected ClassLoaderReference(ClassLoader classLoader) {
+>, <Line: -                    if (this == object) return true;
+>, <Line: -                    if (!(object instanceof ClassLoaderReference)) return false;
+>, <Line: -                    ClassLoaderReference that = (ClassLoaderReference) object;
+>, <Line: -                    return hashCode == that.hashCode && get() == that.get();
+>]

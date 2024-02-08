@@ -1,0 +1,6 @@
+[<Line: +function f(int x) -> u8[]
+>, <Line: +    u8[] bytes = f(0)
+>]
+[<Line: -function f(int x) -> [u8]
+>, <Line: -    [u8] bytes = f(0)
+>]

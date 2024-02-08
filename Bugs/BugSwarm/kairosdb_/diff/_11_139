@@ -1,0 +1,34 @@
+[<Line: +define([], function () {
+>, <Line: +	'use strict';
+>, <Line: +	return {
+>, <Line: +		get: function (key) {
+>, <Line: +			return window.localStorage[key];
+>, <Line: +		},
+>, <Line: +		set: function (key, value) {
+>, <Line: +			window.localStorage[key] = value;
+>, <Line: +		},
+>, <Line: +		getBool: function (key) {
+>, <Line: +			return window.localStorage[key] === 'true' ? true : false;
+>, <Line: +		},
+>, <Line: +		delete: function (key) {
+>, <Line: +			window.localStorage.removeItem(key);
+>, <Line: +		}
+>, <Line: +	};
+>]
+[<Line: -define([], function() {
+>, <Line: -  'use strict';
+>, <Line: -  return {
+>, <Line: -    get: function(key) {
+>, <Line: -      return window.localStorage[key];
+>, <Line: -    },
+>, <Line: -    set: function(key, value) {
+>, <Line: -      window.localStorage[key] = value;
+>, <Line: -    },
+>, <Line: -    getBool: function(key) {
+>, <Line: -      return window.localStorage[key] === 'true' ? true : false;
+>, <Line: -    },
+>, <Line: -    delete: function(key) {
+>, <Line: -      window.localStorage.removeItem(key);
+>, <Line: -    }
+>, <Line: -  };
+>]

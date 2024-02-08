@@ -1,0 +1,150 @@
+[<Line: +		'angular',
+>, <Line: +		'jquery',
+>, <Line: +	],
+>, <Line: +	function (angular, $) {
+>, <Line: +		"use strict";
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		module.service('dashboardKeybindings', function ($rootScope, keyboardManager, $modal, $q) {
+>, <Line: +			this.shortcuts = function (scope) {
+>, <Line: +				scope.$on('$destroy', function () {
+>, <Line: +					keyboardManager.unbind('ctrl+f');
+>, <Line: +					keyboardManager.unbind('ctrl+h');
+>, <Line: +					keyboardManager.unbind('ctrl+s');
+>, <Line: +					keyboardManager.unbind('ctrl+r');
+>, <Line: +					keyboardManager.unbind('ctrl+z');
+>, <Line: +					keyboardManager.unbind('ctrl+o');
+>, <Line: +					keyboardManager.unbind('esc');
+>, <Line: +				});
+>, <Line: +				var helpModalScope = null;
+>, <Line: +				keyboardManager.bind('shift+?', function () {
+>, <Line: +					if (helpModalScope) {
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					helpModalScope = $rootScope.$new();
+>, <Line: +					var helpModal = $modal({
+>, <Line: +						template: './app/partials/help_modal.html',
+>, <Line: +						persist: false,
+>, <Line: +						show: false,
+>, <Line: +						scope: helpModalScope,
+>, <Line: +						keyboard: false
+>, <Line: +					});
+>, <Line: +					helpModalScope.$on('$destroy', function () {
+>, <Line: +						helpModalScope = null;
+>, <Line: +					});
+>, <Line: +					$q.when(helpModal).then(function (modalEl) {
+>, <Line: +						modalEl.modal('show');
+>, <Line: +					});
+>, <Line: +				}, {inputDisabled: true});
+>, <Line: +				keyboardManager.bind('ctrl+f', function () {
+>, <Line: +					scope.appEvent('show-dash-editor', {src: 'app/partials/search.html'});
+>, <Line: +				}, {inputDisabled: true});
+>, <Line: +				keyboardManager.bind('ctrl+o', function () {
+>, <Line: +					var current = scope.dashboard.sharedCrosshair;
+>, <Line: +					scope.dashboard.sharedCrosshair = !current;
+>, <Line: +					scope.dashboard.emit_refresh('refresh');
+>, <Line: +				}, {inputDisabled: true});
+>, <Line: +				keyboardManager.bind('ctrl+l', function () {
+>, <Line: +					scope.$broadcast('toggle-all-legends');
+>, <Line: +				}, {inputDisabled: true});
+>, <Line: +				keyboardManager.bind('ctrl+h', function () {
+>, <Line: +					var current = scope.dashboard.hideControls;
+>, <Line: +					scope.dashboard.hideControls = !current;
+>, <Line: +				}, {inputDisabled: true});
+>, <Line: +				keyboardManager.bind('ctrl+s', function (evt) {
+>, <Line: +					scope.appEvent('save-dashboard', evt);
+>, <Line: +				}, {inputDisabled: true});
+>, <Line: +				keyboardManager.bind('ctrl+r', function () {
+>, <Line: +					scope.dashboard.emit_refresh();
+>, <Line: +				}, {inputDisabled: true});
+>, <Line: +				keyboardManager.bind('ctrl+z', function (evt) {
+>, <Line: +					scope.appEvent('zoom-out', evt);
+>, <Line: +				}, {inputDisabled: true});
+>, <Line: +				keyboardManager.bind('esc', function () {
+>, <Line: +					var popups = $('.popover.in');
+>, <Line: +					if (popups.length > 0) {
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					// close modals
+>, <Line: +					var modalData = $(".modal").data();
+>, <Line: +					if (modalData && modalData.$scope && modalData.$scope.dismiss) {
+>, <Line: +						modalData.$scope.dismiss();
+>, <Line: +					}
+>, <Line: +					scope.appEvent('hide-dash-editor');
+>, <Line: +					scope.exitFullscreen();
+>, <Line: +				}, {inputDisabled: true});
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'jquery',
+>, <Line: -],
+>, <Line: -function(angular, $) {
+>, <Line: -  "use strict";
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.service('dashboardKeybindings', function($rootScope, keyboardManager, $modal, $q) {
+>, <Line: -    this.shortcuts = function(scope) {
+>, <Line: -      scope.$on('$destroy', function() {
+>, <Line: -        keyboardManager.unbind('ctrl+f');
+>, <Line: -        keyboardManager.unbind('ctrl+h');
+>, <Line: -        keyboardManager.unbind('ctrl+s');
+>, <Line: -        keyboardManager.unbind('ctrl+r');
+>, <Line: -        keyboardManager.unbind('ctrl+z');
+>, <Line: -        keyboardManager.unbind('ctrl+o');
+>, <Line: -        keyboardManager.unbind('esc');
+>, <Line: -      });
+>, <Line: -      var helpModalScope = null;
+>, <Line: -      keyboardManager.bind('shift+?', function() {
+>, <Line: -        if (helpModalScope) { return; }
+>, <Line: -        helpModalScope = $rootScope.$new();
+>, <Line: -        var helpModal = $modal({
+>, <Line: -          template: './app/partials/help_modal.html',
+>, <Line: -          persist: false,
+>, <Line: -          show: false,
+>, <Line: -          scope: helpModalScope,
+>, <Line: -          keyboard: false
+>, <Line: -        });
+>, <Line: -        helpModalScope.$on('$destroy', function() { helpModalScope = null; });
+>, <Line: -        $q.when(helpModal).then(function(modalEl) { modalEl.modal('show'); });
+>, <Line: -      }, { inputDisabled: true });
+>, <Line: -      keyboardManager.bind('ctrl+f', function() {
+>, <Line: -        scope.appEvent('show-dash-editor', { src: 'app/partials/search.html' });
+>, <Line: -      }, { inputDisabled: true });
+>, <Line: -      keyboardManager.bind('ctrl+o', function() {
+>, <Line: -        var current = scope.dashboard.sharedCrosshair;
+>, <Line: -        scope.dashboard.sharedCrosshair = !current;
+>, <Line: -        scope.dashboard.emit_refresh('refresh');
+>, <Line: -      }, { inputDisabled: true });
+>, <Line: -      keyboardManager.bind('ctrl+l', function() {
+>, <Line: -        scope.$broadcast('toggle-all-legends');
+>, <Line: -      }, { inputDisabled: true });
+>, <Line: -      keyboardManager.bind('ctrl+h', function() {
+>, <Line: -        var current = scope.dashboard.hideControls;
+>, <Line: -        scope.dashboard.hideControls = !current;
+>, <Line: -      }, { inputDisabled: true });
+>, <Line: -      keyboardManager.bind('ctrl+s', function(evt) {
+>, <Line: -        scope.appEvent('save-dashboard', evt);
+>, <Line: -      }, { inputDisabled: true });
+>, <Line: -      keyboardManager.bind('ctrl+r', function() {
+>, <Line: -        scope.dashboard.emit_refresh();
+>, <Line: -      }, { inputDisabled: true });
+>, <Line: -      keyboardManager.bind('ctrl+z', function(evt) {
+>, <Line: -        scope.appEvent('zoom-out', evt);
+>, <Line: -      }, { inputDisabled: true });
+>, <Line: -      keyboardManager.bind('esc', function() {
+>, <Line: -        var popups = $('.popover.in');
+>, <Line: -        if (popups.length > 0) {
+>, <Line: -          return;
+>, <Line: -        }
+>, <Line: -        // close modals
+>, <Line: -        var modalData = $(".modal").data();
+>, <Line: -        if (modalData && modalData.$scope && modalData.$scope.dismiss) {
+>, <Line: -          modalData.$scope.dismiss();
+>, <Line: -        }
+>, <Line: -        scope.appEvent('hide-dash-editor');
+>, <Line: -        scope.exitFullscreen();
+>, <Line: -      }, { inputDisabled: true });
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

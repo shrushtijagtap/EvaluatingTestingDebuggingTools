@@ -1,0 +1,68 @@
+[<Line: +/*
+>, <Line: +Copyright (c) 2011 Stanislav Vitvitskiy
+>, <Line: +Permission is hereby granted, free of charge, to any person obtaining a copy of this
+>, <Line: +software and associated documentation files (the "Software"), to deal in the Software
+>, <Line: +without restriction, including without limitation the rights to use, copy, modify,
+>, <Line: +merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+>, <Line: +permit persons to whom the Software is furnished to do so, subject to the following
+>, <Line: +conditions:
+>, <Line: +The above copyright notice and this permission notice shall be included in all copies or
+>, <Line: +substantial portions of the Software.
+>, <Line: +THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+>, <Line: +INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+>, <Line: +PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+>, <Line: +FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+>, <Line: +TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+>, <Line: +OR OTHER DEALINGS IN THE SOFTWARE.
+>, <Line: +*/
+>, <Line: +package org.mp4parser.muxer.tracks.h264.parsing.model;
+>, <Line: +/**
+>, <Line: + * Chroma format enum
+>, <Line: + *
+>, <Line: + * @author Stanislav Vitvitskiy
+>, <Line: + */
+>, <Line: +public class ChromaFormat {
+>, <Line: +    public static ChromaFormat MONOCHROME = new ChromaFormat(0, 0, 0);
+>, <Line: +    public static ChromaFormat YUV_420 = new ChromaFormat(1, 2, 2);
+>, <Line: +    public static ChromaFormat YUV_422 = new ChromaFormat(2, 2, 1);
+>, <Line: +    public static ChromaFormat YUV_444 = new ChromaFormat(3, 1, 1);
+>, <Line: +    private int id;
+>, <Line: +    private int subWidth;
+>, <Line: +    private int subHeight;
+>, <Line: +    public ChromaFormat(int id, int subWidth, int subHeight) {
+>, <Line: +        this.id = id;
+>, <Line: +        this.subWidth = subWidth;
+>, <Line: +        this.subHeight = subHeight;
+>, <Line: +    }
+>, <Line: +    public static ChromaFormat fromId(int id) {
+>, <Line: +        if (id == MONOCHROME.id) {
+>, <Line: +            return MONOCHROME;
+>, <Line: +        } else if (id == YUV_420.id) {
+>, <Line: +            return YUV_420;
+>, <Line: +        } else if (id == YUV_422.id) {
+>, <Line: +            return YUV_422;
+>, <Line: +        } else if (id == YUV_444.id) {
+>, <Line: +            return YUV_444;
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +    public int getId() {
+>, <Line: +        return id;
+>, <Line: +    }
+>, <Line: +    public int getSubWidth() {
+>, <Line: +        return subWidth;
+>, <Line: +    }
+>, <Line: +    public int getSubHeight() {
+>, <Line: +        return subHeight;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "ChromaFormat{" + "\n" +
+>, <Line: +                "id=" + id + ",\n" +
+>, <Line: +                " subWidth=" + subWidth + ",\n" +
+>, <Line: +                " subHeight=" + subHeight +
+>, <Line: +                '}';
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,46 @@
+[]
+[<Line: -/*
+>, <Line: - * Copyright 2016 KairosDB Authors
+>, <Line: - *
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: - * you may not use this file except in compliance with the License.
+>, <Line: - * You may obtain a copy of the License at
+>, <Line: - *
+>, <Line: - *    http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - *
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - * See the License for the specific language governing permissions and
+>, <Line: - * limitations under the License.
+>, <Line: - */
+>, <Line: -package org.kairosdb.datastore.cassandra;
+>, <Line: -import me.prettyprint.hector.api.HConsistencyLevel;
+>, <Line: -/**
+>, <Line: - Created with IntelliJ IDEA.
+>, <Line: - User: bhawkins
+>, <Line: - Date: 11/18/13
+>, <Line: - Time: 8:42 AM
+>, <Line: - To change this template use File | Settings | File Templates.
+>, <Line: - */
+>, <Line: -public enum ConsistencyLevel
+>, <Line: -{
+>, <Line: -	ANY (HConsistencyLevel.ANY),
+>, <Line: -	ONE (HConsistencyLevel.ONE),
+>, <Line: -	TWO (HConsistencyLevel.TWO),
+>, <Line: -	THREE (HConsistencyLevel.THREE),
+>, <Line: -	LOCAL_QUORUM (HConsistencyLevel.LOCAL_QUORUM),
+>, <Line: -	EACH_QUORUM (HConsistencyLevel.EACH_QUORUM),
+>, <Line: -	QUORUM (HConsistencyLevel.QUORUM),
+>, <Line: -	ALL (HConsistencyLevel.ALL);
+>, <Line: -	private final HConsistencyLevel m_level;
+>, <Line: -	ConsistencyLevel(HConsistencyLevel level)
+>, <Line: -	{
+>, <Line: -		m_level = level;
+>, <Line: -	}
+>, <Line: -	public HConsistencyLevel getHectorLevel()
+>, <Line: -	{
+>, <Line: -		return (m_level);
+>, <Line: -	}
+>, <Line: -}
+>]

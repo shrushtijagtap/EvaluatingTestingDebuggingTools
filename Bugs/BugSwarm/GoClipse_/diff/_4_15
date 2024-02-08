@@ -1,0 +1,10 @@
+[<Line: +import melnorme.lang.ide.core.text.format.ILangAutoEditsPreferencesAccess;
+>, <Line: +public class LangAutoEditsPreferencesAccess implements ILangAutoEditsPreferencesAccess {
+>]
+[<Line: -import melnorme.lang.ide.core.text.format.LangAutoEditStrategyExt.ILangAutoEditsPreferencesAccessExt;
+>, <Line: -public class LangAutoEditsPreferencesAccess implements ILangAutoEditsPreferencesAccessExt {
+>, <Line: -	@Override
+>, <Line: -	public boolean closeBlocks() {
+>, <Line: -		return closeBraces();
+>, <Line: -	}
+>]

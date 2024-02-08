@@ -1,0 +1,10 @@
+[<Line: +import org.quartz.InterruptableJob;
+>, <Line: +public interface KairosDBJob extends InterruptableJob
+>, <Line: +	/**
+>, <Line: +	 Called by the scheduler when the job is to be interrupted.
+>, <Line: +	 */
+>, <Line: +	void interrupt();
+>]
+[<Line: -import org.quartz.Job;
+>, <Line: -public interface KairosDBJob extends Job
+>]

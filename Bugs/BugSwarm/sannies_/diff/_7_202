@@ -1,0 +1,63 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.CastUtils;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +    /**
+>, <Line: +     * Decompresses the list of entries and returns the list of composition times.
+>, <Line: +     *
+>, <Line: +     * @param entries composition time to sample entries in compressed form
+>, <Line: +     * @return decoding time per sample
+>, <Line: +     */
+>, <Line: +    public static int[] blowupCompositionTimes(List<CompositionTimeToSample.Entry> entries) {
+>, <Line: +        long numOfSamples = 0;
+>, <Line: +        for (CompositionTimeToSample.Entry entry : entries) {
+>, <Line: +            numOfSamples += entry.getCount();
+>, <Line: +        }
+>, <Line: +        assert numOfSamples <= Integer.MAX_VALUE;
+>, <Line: +        int[] decodingTime = new int[(int) numOfSamples];
+>, <Line: +        int current = 0;
+>, <Line: +        for (CompositionTimeToSample.Entry entry : entries) {
+>, <Line: +            for (int i = 0; i < entry.getCount(); i++) {
+>, <Line: +                decodingTime[current++] = entry.getOffset();
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return decodingTime;
+>, <Line: +    }
+>, <Line: +        int numberOfEntries = CastUtils.l2i(IsoTypeReader.readUInt32(content));
+>, <Line: +            Entry e = new Entry(CastUtils.l2i(IsoTypeReader.readUInt32(content)), content.getInt());
+>, <Line: +        public int getOffset() {
+>, <Line: +            return offset;
+>, <Line: +        }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: -        int numberOfEntries = l2i(IsoTypeReader.readUInt32(content));
+>, <Line: -            Entry e = new Entry(l2i(IsoTypeReader.readUInt32(content)), content.getInt());
+>, <Line: -        public int getOffset() {
+>, <Line: -            return offset;
+>, <Line: -        }
+>, <Line: -    /**
+>, <Line: -     * Decompresses the list of entries and returns the list of composition times.
+>, <Line: -     * @param entries composition time to sample entries in compressed form
+>, <Line: -     * @return decoding time per sample
+>, <Line: -     */
+>, <Line: -    public static int[] blowupCompositionTimes(List<CompositionTimeToSample.Entry> entries) {
+>, <Line: -        long numOfSamples = 0;
+>, <Line: -        for (CompositionTimeToSample.Entry entry : entries) {
+>, <Line: -            numOfSamples += entry.getCount();
+>, <Line: -        }
+>, <Line: -        assert numOfSamples <= Integer.MAX_VALUE;
+>, <Line: -        int[] decodingTime = new int[(int) numOfSamples];
+>, <Line: -        int current = 0;
+>, <Line: -        for (CompositionTimeToSample.Entry entry : entries) {
+>, <Line: -            for (int i = 0; i < entry.getCount(); i++) {
+>, <Line: -                decodingTime[current++] = entry.getOffset();
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        return decodingTime;
+>, <Line: -    }
+>]

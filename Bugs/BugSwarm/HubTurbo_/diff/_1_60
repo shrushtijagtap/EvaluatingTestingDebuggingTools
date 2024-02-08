@@ -1,0 +1,68 @@
+[]
+[<Line: -package command;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.net.SocketTimeoutException;
+>, <Line: -import java.net.UnknownHostException;
+>, <Line: -import javafx.application.Platform;
+>, <Line: -import org.eclipse.egit.github.core.client.RequestException;
+>, <Line: -import service.ServiceManager;
+>, <Line: -import util.DialogMessage;
+>, <Line: -import model.Model;
+>, <Line: -import model.TurboIssue;
+>, <Line: -import model.TurboMilestone;
+>, <Line: -/**
+>, <Line: - * Updates issue milestone on github. 
+>, <Line: - * Also sets the milestone of the given TurboIssue object to the given TurboMilestone object
+>, <Line: - * */
+>, <Line: -public class TurboIssueSetMilestone extends TurboIssueCommand{
+>, <Line: -	private TurboMilestone previousMilestone;
+>, <Line: -	private TurboMilestone newMilestone = new TurboMilestone();
+>, <Line: -	public TurboIssueSetMilestone(Model model, TurboIssue issue, TurboMilestone milestone){
+>, <Line: -		super(model, issue);
+>, <Line: -		this.previousMilestone = issue.getMilestone();
+>, <Line: -		if(milestone != null){
+>, <Line: -			this.newMilestone = milestone;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private void logMilestoneChange(TurboMilestone prevMilestone, TurboMilestone newMilestone, boolean logRemarks){
+>, <Line: -		lastOperationExecuted = IssueChangeLogger.logMilestoneChange(issue, prevMilestone, newMilestone);
+>, <Line: -	}
+>, <Line: -	private boolean setIssueMilestone(TurboMilestone prev, TurboMilestone milestone, boolean logRemarks){
+>, <Line: -		try {
+>, <Line: -			boolean result = ServiceManager.getInstance().setIssueMilestone(issue.getId(), milestone.toGhResource());
+>, <Line: -			if(result){
+>, <Line: -				issue.setMilestone(milestone);
+>, <Line: -				logMilestoneChange(prev, milestone, logRemarks);
+>, <Line: -			}
+>, <Line: -			return result;
+>, <Line: -		} catch (IOException e) {
+>, <Line: -			if(e instanceof SocketTimeoutException | e instanceof UnknownHostException){
+>, <Line: -				Platform.runLater(()->{
+>, <Line: -					DialogMessage.showWarningDialog("Internet Connection Timeout", 
+>, <Line: -							"Timeout modifying milestone for issue in GitHub, please check your internet connection.");
+>, <Line: -				});
+>, <Line: -				logger.info("Could not set issue milestone: " + e.getLocalizedMessage());
+>, <Line: -			}else if(e instanceof RequestException){
+>, <Line: -				Platform.runLater(()->{
+>, <Line: -					DialogMessage.showWarningDialog("No repository permissions", 
+>, <Line: -							"Cannot modify issue milestone.");
+>, <Line: -				});
+>, <Line: -				logger.info("Could not set issue milestone: " + e.getLocalizedMessage());
+>, <Line: -			}else{
+>, <Line: -				logger.error(e.getLocalizedMessage(), e);
+>, <Line: -			}
+>, <Line: -			return false;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	protected boolean performExecuteAction() {
+>, <Line: -		isSuccessful = setIssueMilestone(previousMilestone, newMilestone, true);
+>, <Line: -		return isSuccessful;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	protected boolean performUndoAction() {
+>, <Line: -		isUndone = setIssueMilestone(newMilestone, previousMilestone, false);
+>, <Line: -		return isUndone;
+>, <Line: -	}
+>, <Line: -}
+>]

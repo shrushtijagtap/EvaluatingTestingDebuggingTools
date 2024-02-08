@@ -1,0 +1,14 @@
+[<Line: +package net.bytebuddy.test.precompiled;
+>, <Line: +public abstract class TypeAnnotationOtherSamples<T> {
+>, <Line: +    @TypeAnnotation(0)
+>, <Line: +    Void foo;
+>, <Line: +    @TypeAnnotation(1) TypeAnnotationOtherSamples<@TypeAnnotation(2) Void>.@TypeAnnotation(3) Bar<@TypeAnnotation(4) Void> bar;
+>, <Line: +    @TypeAnnotation(5) @OtherTypeAnnotation(6) Void qux;
+>, <Line: +    @TypeAnnotation(7)
+>, <Line: +    abstract Void foo(@TypeAnnotation(8) Void v) throws @TypeAnnotation(9) Exception;
+>, <Line: +    class Bar<S> {
+>, <Line: +        /* empty */
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

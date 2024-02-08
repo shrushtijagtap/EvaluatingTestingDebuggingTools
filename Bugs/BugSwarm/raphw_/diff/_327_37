@@ -1,0 +1,17 @@
+[<Line: +        unboundWildcard = listWildcard.getTypeArguments().getOnly();
+>, <Line: +        typeVariableT = arrayListTypeVariableT.getTypeArguments().getOnly();
+>, <Line: +        typeVariableS = arrayListTypeVariableS.getTypeArguments().getOnly();
+>, <Line: +        typeVariableU = arrayListTypeVariableU.getTypeArguments().getOnly();
+>, <Line: +        typeVariableV = arrayListTypeVariableV.getTypeArguments().getOnly();
+>, <Line: +        when(source.getTypeArguments()).thenReturn(new TypeList.Generic.Empty());
+>, <Line: +        when(target.getTypeArguments()).thenReturn(new TypeList.Generic.Explicit(mock(TypeDescription.Generic.class)));
+>]
+[<Line: -        unboundWildcard = listWildcard.getParameters().getOnly();
+>, <Line: -        typeVariableT = arrayListTypeVariableT.getParameters().getOnly();
+>, <Line: -        typeVariableS = arrayListTypeVariableS.getParameters().getOnly();
+>, <Line: -        typeVariableU = arrayListTypeVariableU.getParameters().getOnly();
+>, <Line: -        typeVariableV = arrayListTypeVariableV.getParameters().getOnly();
+>, <Line: -        when(source.getParameters()).thenReturn(new TypeList.Generic.Empty());
+>, <Line: -        when(target.getParameters()).thenReturn(new TypeList.Generic.Explicit(mock(TypeDescription.Generic.class)));
+>, <Line: -    // TODO: assignParameterizedTypeFromXXX
+>]

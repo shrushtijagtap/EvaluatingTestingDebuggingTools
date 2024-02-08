@@ -1,0 +1,13 @@
+[<Line: +import com.projectkorra.rpg.event.EventManager;
+>, <Line: +				if (EventManager.marker.get(world).equalsIgnoreCase("SozinsComet")) {
+>, <Line: +					return RPGMethods.getFactor("SozinsComet") * value;
+>, <Line: +				} else if (EventManager.marker.get(world).equalsIgnoreCase("SolarEclipse")) {
+>, <Line: +					return RPGMethods.getFactor("SolarEclipse") * value;
+>]
+[<Line: -import com.projectkorra.projectkorra.BendingManager;
+>, <Line: -import com.projectkorra.rpg.WorldEvents;
+>, <Line: -				if (BendingManager.events.get(world).equalsIgnoreCase(WorldEvents.SozinsComet.toString())) {
+>, <Line: -					return RPGMethods.getFactor(WorldEvents.SozinsComet) * value;
+>, <Line: -				} else if (BendingManager.events.get(world).equalsIgnoreCase(WorldEvents.SolarEclipse.toString())) {
+>, <Line: -					return RPGMethods.getFactor(WorldEvents.SolarEclipse) * value;
+>]

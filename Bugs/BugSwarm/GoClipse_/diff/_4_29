@@ -1,0 +1,22 @@
+[<Line: +	/**
+>, <Line: +	 * @return character from current read position, plus given offset (offset can be negative). 
+>, <Line: +	 * EOF if resulting position is out of bounds.
+>, <Line: +	 */
+>, <Line: +	public int lookahead(int offset) {
+>, <Line: +		int index = readPosition + offset;
+>, <Line: +		if(index < 0 || index >= source.length()) {
+>, <Line: +			return EOF;
+>, <Line: +		return source.substring(readPosition + startPos, readPosition + endPos);
+>, <Line: +		return source.length() - readPosition;
+>, <Line: +		readPosition += amount;
+>, <Line: +		assertTrue(readPosition <= source.length());
+>]
+[<Line: -	public int lookahead(int n) {
+>, <Line: -		int index = readOffset + n;
+>, <Line: -		if(index >= source.length()) {
+>, <Line: -			return -1;
+>, <Line: -		return source.substring(readOffset + startPos, readOffset + endPos);
+>, <Line: -		return source.length() - readOffset;
+>, <Line: -		readOffset += amount;
+>, <Line: -		assertTrue(readOffset <= source.length());
+>]

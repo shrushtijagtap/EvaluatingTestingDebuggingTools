@@ -1,0 +1,10 @@
+[<Line: +        assertThat(type.getDeclaredMethod(FOO, String.class).invoke(type.getDeclaredConstructor().newInstance(), FOO), is((Object) FOO));
+>, <Line: +        assertThat(type.getDeclaredMethod(FOO, String.class).invoke(type.getDeclaredConstructor().newInstance(), FOO), is((Object) FOO));
+>, <Line: +        assertThat(type.getDeclaredMethod(FOO, String.class).invoke(type.getDeclaredConstructor().newInstance(), FOO), is((Object) FOO));
+>, <Line: +        assertThat(type.getDeclaredMethod(FOO, String.class).invoke(type.getDeclaredConstructor().newInstance(), FOO), is((Object) FOO));
+>]
+[<Line: -        assertThat(type.getDeclaredMethod(FOO, String.class).invoke(type.newInstance(), FOO), is((Object) FOO));
+>, <Line: -        assertThat(type.getDeclaredMethod(FOO, String.class).invoke(type.newInstance(), FOO), is((Object) FOO));
+>, <Line: -        assertThat(type.getDeclaredMethod(FOO, String.class).invoke(type.newInstance(), FOO), is((Object) FOO));
+>, <Line: -        assertThat(type.getDeclaredMethod(FOO, String.class).invoke(type.newInstance(), FOO), is((Object) FOO));
+>]

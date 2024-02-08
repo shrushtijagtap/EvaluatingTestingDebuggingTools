@@ -1,0 +1,6 @@
+[<Line: +public class CachedSearchResult implements SearchResult
+>, <Line: +		//todo: need a lock around this, cql returns results overlapping.
+>, <Line: +	@Override
+>]
+[<Line: -public class CachedSearchResult implements QueryCallback
+>]

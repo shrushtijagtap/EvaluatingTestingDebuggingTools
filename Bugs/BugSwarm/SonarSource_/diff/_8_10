@@ -1,0 +1,42 @@
+[<Line: +import org.sonar.plugins.php.api.tree.lexical.SyntaxToken;
+>, <Line: +public class TokenUtils {
+>, <Line: +  private TokenUtils() {
+>, <Line: +  }
+>, <Line: +  public static String buildIssueMsg(int nbSpace, String end) {
+>, <Line: +  public static boolean isType(SyntaxToken token, TokenType... types) {
+>, <Line: +      isOneOfType |= type.getValue().equals(token.text());
+>, <Line: +  public static boolean isOnSameLine(SyntaxToken... tokens) {
+>, <Line: +    int lineRef = tokens[0].line();
+>, <Line: +    for (SyntaxToken token : tokens) {
+>, <Line: +      if (token.line() != lineRef) {
+>, <Line: +  protected static int getNbSpaceBetween(SyntaxToken token1, SyntaxToken token2) {
+>, <Line: +    Preconditions.checkArgument(token1 != null && token2 != null);
+>, <Line: +    int token1EndColumn = token1.column() + (token1.text().length() - 1);
+>, <Line: +    int tok2StartColumn = token2.column();
+>, <Line: +    return tok2StartColumn - token1EndColumn - 1;
+>]
+[<Line: -import com.sonar.sslr.api.AstNode;
+>, <Line: -import com.sonar.sslr.api.Token;
+>, <Line: -import org.sonar.php.checks.FormattingStandardCheck;
+>, <Line: -public abstract class SpacingCheck {
+>, <Line: -  public abstract void visitNode(FormattingStandardCheck formattingCheck, AstNode node);
+>, <Line: -  protected String buildIssueMsg(int nbSpace, String end) {
+>, <Line: -  protected boolean isType(Token token, TokenType... types) {
+>, <Line: -      isOneOfType |= token.getType().equals(type);
+>, <Line: -  protected boolean isOnSameLine(Token... tokens) {
+>, <Line: -    int lineRef = tokens[0].getLine();
+>, <Line: -    for (Token token : tokens) {
+>, <Line: -      if (token.getLine() != lineRef) {
+>, <Line: -  protected int getNbSpaceBetween(Token token1, Token token2) {
+>, <Line: -    int token1EndColumn = token1.getColumn() + (token1.getValue().length() - 1);
+>, <Line: -    int tok2StartColumn = token2.getColumn();
+>, <Line: -    return tok2StartColumn - token1EndColumn - 1;
+>, <Line: -  }
+>, <Line: -  /**
+>, <Line: -   * Check the number of space before and after the given node.
+>, <Line: -   */
+>, <Line: -  protected boolean isSpaceAround(AstNode node, int before, int after) {
+>, <Line: -    int spaceBefore = getNbSpaceBetween(node.getPreviousAstNode().getLastToken(), node.getToken());
+>, <Line: -    int spaceAfter = getNbSpaceBetween(node.getToken(), node.getNextAstNode().getToken());
+>, <Line: -    return spaceBefore == before && spaceAfter == after;
+>]

@@ -1,0 +1,58 @@
+[<Line: +import util.Utility;
+>, <Line: +import java.util.function.Consumer;
+>, <Line: +	private final UI ui;
+>, <Line: +	private Consumer<String> onValueChangeCallback = e -> {};
+>, <Line: +	private boolean changesDisabled = false;
+>, <Line: +	public RepositorySelector(UI ui) {
+>, <Line: +		this.ui = ui;
+>, <Line: +		loadContents();
+>, <Line: +			if (Utility.isWellFormedRepoId(newVal) && !changesDisabled) {
+>, <Line: +	public void setOnValueChange(Consumer<String> callback) {
+>, <Line: +		assert callback != null;
+>, <Line: +		onValueChangeCallback = callback;
+>, <Line: +	private void loadContents() {
+>, <Line: +		comboBox.getItems().addAll(ui.logic.getOpenRepositories());
+>, <Line: +	private String getText() {
+>, <Line: +		return comboBox.getValue();
+>, <Line: +	public void setText(String repoId) {
+>, <Line: +		changesDisabled = true;
+>, <Line: +		comboBox.setValue(repoId);
+>, <Line: +		changesDisabled = false;
+>, <Line: +	public void refreshContents() {
+>, <Line: +		String text = getText();
+>, <Line: +		loadContents();
+>, <Line: +		setText(text);
+>]
+[<Line: -import java.util.List;
+>, <Line: -import java.util.function.Consumer;
+>, <Line: -import javafx.scene.control.Label;
+>, <Line: -import storage.DataManager;
+>, <Line: -	private final Label label = new Label();
+>, <Line: -	private Consumer<String> onValueChangeCallback = null;
+>, <Line: -	public RepositorySelector() {
+>, <Line: -		getChildren().addAll(label);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Meant as a replacement for {@link #isInFocus isInFocus} (which is final).
+>, <Line: -	 * @return true if the combobox portion of this element is in focus
+>, <Line: -	 */
+>, <Line: -	public boolean isInFocus() {
+>, <Line: -		return comboBox.isFocused();
+>, <Line: -		loadComboBoxContents();
+>, <Line: -			if (onValueChangeCallback != null) {
+>, <Line: -	public void setLabelText(String text) {
+>, <Line: -		label.setText(text);
+>, <Line: -	public void enable() {
+>, <Line: -		comboBox.setDisable(false);
+>, <Line: -	public void disable() {
+>, <Line: -		comboBox.setDisable(true);
+>, <Line: -	public void setOnValueChange(Consumer<String> callback) {
+>, <Line: -		onValueChangeCallback = callback;
+>, <Line: -	private void loadComboBoxContents() {
+>, <Line: -		List<String> items = DataManager.getInstance().getLastViewedRepositories();
+>, <Line: -		comboBox.getItems().addAll(items);
+>, <Line: -	}
+>, <Line: -	public void refreshComboBoxContents(String repoId) {
+>, <Line: -		loadComboBoxContents();
+>, <Line: -		comboBox.setValue(repoId);
+>]

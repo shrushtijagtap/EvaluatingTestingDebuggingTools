@@ -1,0 +1,10 @@
+[<Line: +        VoidMethod instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        ReferenceMethod instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        LongMethod instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        IntegerMethod instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>]
+[<Line: -        VoidMethod instance = loaded.getLoaded().newInstance();
+>, <Line: -        ReferenceMethod instance = loaded.getLoaded().newInstance();
+>, <Line: -        LongMethod instance = loaded.getLoaded().newInstance();
+>, <Line: -        IntegerMethod instance = loaded.getLoaded().newInstance();
+>]

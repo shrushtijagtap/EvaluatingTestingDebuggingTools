@@ -1,0 +1,8 @@
+[<Line: +	public WyBool and(WyBool b) {
+>, <Line: +		return new WyBool(value & b.value);
+>, <Line: +	}
+>, <Line: +	public WyBool or(WyBool b) {
+>, <Line: +		return new WyBool(value | b.value);
+>, <Line: +	}
+>]
+[]

@@ -1,0 +1,11 @@
+[<Line: +function f(int|null x, int|null y) -> (int r)
+>, <Line: +ensures r == 0 || r == x:
+>, <Line: +    //
+>, <Line: +    x = y
+>, <Line: +    //
+>, <Line: +    if x is int && x >= 0:
+>, <Line: +        return x
+>, <Line: +    else:
+>, <Line: +        return 0
+>]
+[]

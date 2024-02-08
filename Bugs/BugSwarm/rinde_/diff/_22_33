@@ -1,0 +1,145 @@
+[<Line: +import static com.google.common.base.Preconditions.checkArgument;
+>, <Line: +import org.inferred.freebuilder.FreeBuilder;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +import com.google.common.collect.ImmutableMap;
+>, <Line: +import com.google.common.primitives.Doubles;
+>, <Line: +@FreeBuilder
+>, <Line: +public abstract class MultiAttributeData implements ConnectionData {
+>, <Line: +  MultiAttributeData() {}
+>, <Line: +  public abstract Optional<Double> getLength();
+>, <Line: +   * specified {@link Optional#absent()} is returned.
+>, <Line: +  public abstract Optional<Double> getMaxSpeed();
+>, <Line: +   * @return All attributes that are defined in this object.
+>, <Line: +  public abstract ImmutableMap<String, Object> getAttributes();
+>, <Line: +   * @return A new {@link Builder} instance for creating
+>, <Line: +   *         {@link MultiAttributeData} instances.
+>, <Line: +  public static Builder builder() {
+>, <Line: +    return new Builder();
+>, <Line: +   * A builder for creating {@link MultiAttributeData} instances.
+>, <Line: +   * @author Rinde van Lon
+>, <Line: +  public static class Builder extends MultiAttributeData_Builder {
+>, <Line: +    Builder() {}
+>, <Line: +    @Override
+>, <Line: +    public Builder setLength(double length) {
+>, <Line: +      checkArgument(length >= 0d && Doubles.isFinite(length),
+>, <Line: +          "Expected positive value for length but found %s.", length);
+>, <Line: +      return super.setLength(length);
+>, <Line: +    @Override
+>, <Line: +    public Builder setMaxSpeed(double speed) {
+>, <Line: +      checkArgument(speed > 0d && Doubles.isFinite(speed),
+>, <Line: +          "Expected positive value for maxSpeed but found %s.", speed);
+>, <Line: +      return super.setMaxSpeed(speed);
+>]
+[<Line: -import java.util.Collections;
+>, <Line: -import java.util.Map;
+>, <Line: -import javax.annotation.Nullable;
+>, <Line: -public class MultiAttributeData implements ConnectionData {
+>, <Line: -  /**
+>, <Line: -   * Represents an empty value for usage in {@link TableGraph}.
+>, <Line: -   */
+>, <Line: -  public static final MultiAttributeData EMPTY = new MultiAttributeData(0);
+>, <Line: -  static {
+>, <Line: -    EMPTY.attributes.clear();
+>, <Line: -  }
+>, <Line: -  /**
+>, <Line: -   * Key for length of a connection.
+>, <Line: -   */
+>, <Line: -  public static final String KEY_LENGTH = "data.length";
+>, <Line: -  /**
+>, <Line: -   * Key for maximum speed of a connection.
+>, <Line: -   */
+>, <Line: -  public static final String KEY_MAX_SPEED = "data.max.speed";
+>, <Line: -  private final Map<String, Object> attributes;
+>, <Line: -  /**
+>, <Line: -   * New instance only using a single attribute: length.
+>, <Line: -   * @param length The length to set.
+>, <Line: -   */
+>, <Line: -  public MultiAttributeData(double length) {
+>, <Line: -    attributes = new HashMap<>();
+>, <Line: -    attributes.put(KEY_LENGTH, length);
+>, <Line: -  }
+>, <Line: -  /**
+>, <Line: -   * New instance using both length and maximum speed attributes.
+>, <Line: -   * @param length The length of the connection.
+>, <Line: -   * @param maxSpeed The maximum speed for the connection.
+>, <Line: -   */
+>, <Line: -  public MultiAttributeData(double length, double maxSpeed) {
+>, <Line: -    attributes = new HashMap<>();
+>, <Line: -    attributes.put(KEY_LENGTH, length);
+>, <Line: -    attributes.put(KEY_MAX_SPEED, maxSpeed);
+>, <Line: -  }
+>, <Line: -  /**
+>, <Line: -   * 
+>, <Line: -   * @return Length of the connection. If the length is not specified the
+>, <Line: -   *         {@link Double#NaN} value is returned
+>, <Line: -   * @see com.github.rinde.rinsim.geom.ConnectionData#getLength()
+>, <Line: -   */
+>, <Line: -  public double getLength() {
+>, <Line: -    final Object l = attributes.get(KEY_LENGTH);
+>, <Line: -    if (l instanceof Double) {
+>, <Line: -      return (Double) l;
+>, <Line: -    }
+>, <Line: -    return Double.NaN;
+>, <Line: -  }
+>, <Line: -   * specified the {@link Double#NaN} value is returned
+>, <Line: -   * @see com.github.rinde.rinsim.geom.ConnectionData#getLength()
+>, <Line: -  public double getMaxSpeed() {
+>, <Line: -    final Object l = attributes.get(KEY_MAX_SPEED);
+>, <Line: -    if (l instanceof Double) {
+>, <Line: -      return (Double) l;
+>, <Line: -    }
+>, <Line: -    return Double.NaN;
+>, <Line: -  }
+>, <Line: -   * Set max speed.
+>, <Line: -   * @param maxSpeed The new speed.
+>, <Line: -   * @return old max speed or {@link Double#NaN}.
+>, <Line: -  public double setMaxSpeed(double maxSpeed) {
+>, <Line: -    final Object l = attributes.put(KEY_MAX_SPEED, maxSpeed);
+>, <Line: -    if (l instanceof Double) {
+>, <Line: -      return (Double) l;
+>, <Line: -    }
+>, <Line: -    return Double.NaN;
+>, <Line: -  }
+>, <Line: -   * Add an attribute. Note: this can override existing attributes.
+>, <Line: -   * @param key A string used as key.
+>, <Line: -   * @param value The value associated with <code>key</code>.
+>, <Line: -   * @param <E> The type of value.
+>, <Line: -  public <E> void put(String key, E value) {
+>, <Line: -    attributes.put(key, value);
+>, <Line: -   * Retrieve an attribute.
+>, <Line: -   * @param key The key to use.
+>, <Line: -   * @param type The type of object that needs to be retrieved.
+>, <Line: -   * @param <E> The type.
+>, <Line: -   * @return An object associated to the key or <code>null</code> if it does not
+>, <Line: -   *         exist.
+>, <Line: -  @SuppressWarnings("unchecked")
+>, <Line: -  @Nullable
+>, <Line: -  public <E> E get(String key, Class<E> type) {
+>, <Line: -    final Object r = attributes.get(key);
+>, <Line: -    if (r != null && type.isAssignableFrom(r.getClass())) {
+>, <Line: -      return (E) r;
+>, <Line: -    return null;
+>, <Line: -  }
+>, <Line: -  /**
+>, <Line: -   * @return Unmodifiable view on the attributes.
+>, <Line: -   */
+>, <Line: -  public Map<String, Object> getAttributes() {
+>, <Line: -    return Collections.unmodifiableMap(attributes);
+>, <Line: -  }
+>, <Line: -  @Override
+>, <Line: -  public int hashCode() {
+>, <Line: -    return attributes.hashCode();
+>, <Line: -  }
+>, <Line: -  @Override
+>, <Line: -  public boolean equals(@Nullable Object obj) {
+>, <Line: -    if (this == obj) {
+>, <Line: -      return true;
+>, <Line: -    }
+>, <Line: -    if (obj == null) {
+>, <Line: -      return false;
+>, <Line: -    }
+>, <Line: -    if (!(obj instanceof MultiAttributeData)) {
+>, <Line: -      return false;
+>, <Line: -    final MultiAttributeData other = (MultiAttributeData) obj;
+>, <Line: -    return attributes.equals(other.getAttributes());
+>]

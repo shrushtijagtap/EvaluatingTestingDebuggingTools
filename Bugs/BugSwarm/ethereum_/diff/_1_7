@@ -1,0 +1,6 @@
+[<Line: +import org.spongycastle.util.encoders.Hex;
+>, <Line: +import static org.ethereum.util.ByteUtil.EMPTY_BYTE_ARRAY;
+>, <Line: +        this.update(key, EMPTY_BYTE_ARRAY);
+>]
+[<Line: -        super.delete(sha3(key));
+>]

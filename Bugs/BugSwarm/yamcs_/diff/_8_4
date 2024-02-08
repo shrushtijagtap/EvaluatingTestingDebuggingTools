@@ -1,0 +1,4 @@
+[<Line: +public class ParameterArchiveIntegrationTest extends AbstractIntegrationTest {
+>]
+[<Line: -public class IntegrationTestParameterArchive extends AbstractIntegrationTest {
+>]

@@ -1,0 +1,4 @@
+[<Line: +    public String getParsedDownloadURL(String str) {
+>]
+[<Line: -    public String getParsedLibraryDownloadURL(String str) {
+>]

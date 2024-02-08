@@ -1,0 +1,16 @@
+[<Line: +package github.update;
+>, <Line: +import com.google.gson.reflect.TypeToken;
+>, <Line: +import github.GitHubClientExtended;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_COLLABORATORS;
+>, <Line: +public class UserUpdateService extends UpdateService<User>{
+>, <Line: +	public UserUpdateService(GitHubClientExtended client, String collabsETag){
+>]
+[<Line: -package service.updateservice;
+>, <Line: -import static org.eclipse.egit.github.core.client.IGitHubConstants.SEGMENT_COLLABORATORS;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import service.GitHubClientExtended;
+>, <Line: -import com.google.gson.reflect.TypeToken;
+>, <Line: -public class CollaboratorUpdateService extends UpdateService<User>{	
+>, <Line: -	public CollaboratorUpdateService(GitHubClientExtended client, String collabsETag){
+>]

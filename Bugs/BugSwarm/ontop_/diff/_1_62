@@ -1,0 +1,720 @@
+[]
+[<Line: -package it.unibz.krdb.obda.owlapi3;
+>, <Line: -import it.unibz.krdb.obda.model.OBDADataFactory;
+>, <Line: -import it.unibz.krdb.obda.model.Predicate;
+>, <Line: -import it.unibz.krdb.obda.model.URIConstant;
+>, <Line: -import it.unibz.krdb.obda.model.ValueConstant;
+>, <Line: -import it.unibz.krdb.obda.model.Predicate.COL_TYPE;
+>, <Line: -import it.unibz.krdb.obda.model.impl.OBDADataFactoryImpl;
+>, <Line: -import it.unibz.krdb.obda.ontology.ClassAssertion;
+>, <Line: -import it.unibz.krdb.obda.ontology.ClassExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataPropertyAssertion;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataPropertyExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataPropertyRangeExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.DataSomeValuesFrom;
+>, <Line: -import it.unibz.krdb.obda.ontology.Datatype;
+>, <Line: -import it.unibz.krdb.obda.ontology.OClass;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectPropertyAssertion;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectPropertyExpression;
+>, <Line: -import it.unibz.krdb.obda.ontology.ObjectSomeValuesFrom;
+>, <Line: -import it.unibz.krdb.obda.ontology.Ontology;
+>, <Line: -import it.unibz.krdb.obda.ontology.OntologyFactory;
+>, <Line: -import it.unibz.krdb.obda.ontology.OntologyVocabulary;
+>, <Line: -import it.unibz.krdb.obda.ontology.impl.OntologyFactoryImpl;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import java.util.HashSet;
+>, <Line: -import java.util.LinkedList;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Map;
+>, <Line: -import java.util.Set;
+>, <Line: -import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLAnnotationPropertyDomainAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLAnnotationPropertyRangeAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLAsymmetricObjectPropertyAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLClass;
+>, <Line: -import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLClassExpression;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDataMinCardinality;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDataProperty;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDataPropertyDomainAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDataPropertyExpression;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDataPropertyRangeAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDataRange;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDataSomeValuesFrom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDatatype;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDatatypeDefinitionAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDeclarationAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDifferentIndividualsAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDisjointDataPropertiesAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDisjointObjectPropertiesAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDisjointUnionAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLEquivalentDataPropertiesAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLEquivalentObjectPropertiesAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLFunctionalDataPropertyAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLFunctionalObjectPropertyAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLHasKeyAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLIndividual;
+>, <Line: -import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLLiteral;
+>, <Line: -import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectComplementOf;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectInverseOf;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectMinCardinality;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectProperty;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectPropertyDomainAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectPropertyRangeAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectSomeValuesFrom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLReflexiveObjectPropertyAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLSameIndividualAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLSubAnnotationPropertyOfAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLSubDataPropertyOfAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLSubPropertyChainOfAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLSymmetricObjectPropertyAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
+>, <Line: -import org.semanticweb.owlapi.model.SWRLRule;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -/* 	RDFS(1), OWL2QL(2), DLLITEA(3); */
+>, <Line: -public class OWLAPI3TranslatorDLLiteA extends OWLAPI3TranslatorBase {
+>, <Line: -	/*
+>, <Line: -	 * If we need to construct auxiliary subclass axioms for A ISA exists R.C we
+>, <Line: -	 * put them in this map to avoid generating too many auxiliary
+>, <Line: -	 * roles/classes.
+>, <Line: -	 */
+>, <Line: -	private final Map<OWLObjectSomeValuesFrom, ObjectSomeValuesFrom> auxiliaryClassProperties = new HashMap<>();
+>, <Line: -	private final Map<OWLDataSomeValuesFrom, DataSomeValuesFrom> auxiliaryDatatypeProperties = new HashMap<>();
+>, <Line: -	private static final OntologyFactory ofac = OntologyFactoryImpl.getInstance();
+>, <Line: -	private static final OBDADataFactory dfac = OBDADataFactoryImpl.getInstance();
+>, <Line: -	private static final Logger log = LoggerFactory.getLogger(OWLAPI3TranslatorDLLiteA.class);
+>, <Line: -	private final Ontology dl_onto = ofac.createOntology();
+>, <Line: -	public OntologyVocabulary getVocabulary() {
+>, <Line: -		return dl_onto.getVocabulary();
+>, <Line: -	}
+>, <Line: -	public Ontology getOntology() {
+>, <Line: -		return dl_onto;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLAnnotationAssertionAxiom arg0) {
+>, <Line: -		// Annotation Axioms are ignored
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLSubAnnotationPropertyOfAxiom arg0) {
+>, <Line: -		// Annotation Axioms are ignored
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLAnnotationPropertyDomainAxiom arg0) {
+>, <Line: -		// Annotation Axioms are ignored
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLAnnotationPropertyRangeAxiom arg0) {
+>, <Line: -		// Annotation Axioms are ignored
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLDeclarationAxiom ax) {
+>, <Line: -		// Declaration Axioms are ignored
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * SubClassOf := 'SubClassOf' '(' axiomAnnotations subClassExpression superClassExpression ')'
+>, <Line: -	 * subClassExpression := Class | subObjectSomeValuesFrom | subObjectSomeValuesFrom
+>, <Line: -	 * subObjectSomeValuesFrom := 'ObjectSomeValuesFrom' '(' ObjectPropertyExpression owl:Thing ')'
+>, <Line: -	 * DataSomeValuesFrom := 'DataSomeValuesFrom' '(' DataPropertyExpression { DataPropertyExpression } DataRange ')'
+>, <Line: -	 * superClassExpression := Class | superObjectIntersectionOf | superObjectComplementOf |  
+>, <Line: -	 *                         superObjectSomeValuesFrom | DataSomeValuesFrom
+>, <Line: -	 * superObjectIntersectionOf := 'ObjectIntersectionOf' '(' superClassExpression superClassExpression 
+>, <Line: -	 *                           { superClassExpression } ')'                        
+>, <Line: -	 * superObjectComplementOf := 'ObjectComplementOf' '(' subClassExpression ')'
+>, <Line: -	 * superObjectSomeValuesFrom := 'ObjectSomeValuesFrom' '(' ObjectPropertyExpression Class ')'                          
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLSubClassOfAxiom ax) {
+>, <Line: -		try {
+>, <Line: -			ClassExpression subDescription = getSubclassExpression(ax.getSubClass());
+>, <Line: -			addSubClassAxioms(subDescription, ax.getSuperClass().asConjunctSet());
+>, <Line: -		} catch (TranslationException e) {
+>, <Line: -			log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLNegativeObjectPropertyAssertionAxiom ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * AsymmetricObjectProperty :='AsymmetricObjectProperty' '(' axiomAnnotations ObjectPropertyExpression ')'
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLAsymmetricObjectPropertyAxiom ax) {
+>, <Line: -		ObjectPropertyExpression p = getPropertyExpression(ax.getProperty());
+>, <Line: -		// [R3] of the grammar simplifications
+>, <Line: -		Set<ObjectPropertyExpression> disjointProperties = new HashSet<>();
+>, <Line: -		disjointProperties.add(p);
+>, <Line: -		disjointProperties.add(p.getInverse());
+>, <Line: -		dl_onto.addDisjointObjectPropertiesAxiom(disjointProperties);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLReflexiveObjectPropertyAxiom ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * DisjointClasses := 'DisjointClasses' '(' axiomAnnotations subClassExpression subClassExpression 
+>, <Line: -	 *                     { subClassExpression } ')'
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLDisjointClassesAxiom ax) {
+>, <Line: -		try {
+>, <Line: -			Set<ClassExpression> disjointClasses = new HashSet<>();
+>, <Line: -			for (OWLClassExpression oc : ax.getClassExpressionsAsList()) {
+>, <Line: -				ClassExpression c = getSubclassExpression(oc);
+>, <Line: -				disjointClasses.add(c);
+>, <Line: -			}			
+>, <Line: -			dl_onto.addDisjointClassesAxiom(disjointClasses);
+>, <Line: -		} 
+>, <Line: -		catch (TranslationException e) {
+>, <Line: -			log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * DataPropertyDomain := 'DataPropertyDomain' '(' axiomAnnotations DataPropertyExpression superClassExpression ')'
+>, <Line: -	 * 
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLDataPropertyDomainAxiom ax) {
+>, <Line: -		try {
+>, <Line: -			DataPropertyExpression role = getPropertyExpression(ax.getProperty());
+>, <Line: -			addSubClassAxioms(role.getDomain(), ax.getDomain().asConjunctSet());		
+>, <Line: -		} catch (TranslationException e) {
+>, <Line: -			log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * ObjectPropertyDomain := 'ObjectPropertyDomain' '(' axiomAnnotations ObjectPropertyExpression superClassExpression ')'
+>, <Line: -	 * 
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLObjectPropertyDomainAxiom ax) {
+>, <Line: -		try {
+>, <Line: -			ObjectPropertyExpression role = getPropertyExpression(ax.getProperty());
+>, <Line: -			// [R3] of the grammar simplifications
+>, <Line: -			addSubClassAxioms(role.getDomain(), ax.getDomain().asConjunctSet());
+>, <Line: -		} catch (TranslationException e) {
+>, <Line: -			log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * EquivalentObjectProperties := 'EquivalentObjectProperties' '(' axiomAnnotations 
+>, <Line: -	 * 								ObjectPropertyExpression ObjectPropertyExpression { ObjectPropertyExpression } ')'
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLEquivalentObjectPropertiesAxiom ax) {
+>, <Line: -		// TODO: avoid using intermediate list 		
+>, <Line: -		List<ObjectPropertyExpression> result = new LinkedList<>();
+>, <Line: -		for (OWLObjectPropertyExpression rolExpression : ax.getProperties()) 
+>, <Line: -			result.add(getPropertyExpression(rolExpression));
+>, <Line: -		// [R2] from grammar simplifications		
+>, <Line: -		for (int i = 0; i < result.size() - 1; i++) 
+>, <Line: -			dl_onto.addSubPropertyOfAxiom(result.get(i), result.get(i + 1));
+>, <Line: -		dl_onto.addSubPropertyOfAxiom(result.get(result.size() - 1), result.get(0));
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLNegativeDataPropertyAssertionAxiom ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLDifferentIndividualsAxiom ax) {
+>, <Line: -		// NO-OP: DifferentInfividuals has no effect in OWL 2 QL and DL-Lite_A
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLDisjointDataPropertiesAxiom ax) {
+>, <Line: -		Set<DataPropertyExpression> disjointProperties = new HashSet<>();
+>, <Line: -		for (OWLDataPropertyExpression prop : ax.getProperties()) {
+>, <Line: -			DataPropertyExpression p = getPropertyExpression(prop);
+>, <Line: -			disjointProperties.add(p);
+>, <Line: -		}
+>, <Line: -		dl_onto.addDisjointDataPropertiesAxiom(disjointProperties);		
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLDisjointObjectPropertiesAxiom ax) {
+>, <Line: -		Set<ObjectPropertyExpression> disjointProperties = new HashSet<>();
+>, <Line: -		for (OWLObjectPropertyExpression prop : ax.getProperties()) {
+>, <Line: -			ObjectPropertyExpression p = getPropertyExpression(prop);
+>, <Line: -			disjointProperties.add(p);
+>, <Line: -		}
+>, <Line: -		dl_onto.addDisjointObjectPropertiesAxiom(disjointProperties);		
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * ObjectPropertyRange := 'ObjectPropertyRange' '(' axiomAnnotations ObjectPropertyExpression superClassExpression ')'
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLObjectPropertyRangeAxiom ax) {
+>, <Line: -		try {
+>, <Line: -			ObjectPropertyExpression role = getPropertyExpression(ax.getProperty());
+>, <Line: -			// [R3] of the grammar simplifications			
+>, <Line: -			addSubClassAxioms(role.getRange(), ax.getRange().asConjunctSet());
+>, <Line: -		} catch (TranslationException e) {
+>, <Line: -			log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLObjectPropertyAssertionAxiom ax) {
+>, <Line: -		ObjectPropertyAssertion assertion = translate(ax);
+>, <Line: -		dl_onto.addObjectPropertyAssertion(assertion);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLFunctionalObjectPropertyAxiom ax) {
+>, <Line: -		//if (profile.order() < LanguageProfile.OWL2QL.order())
+>, <Line: -		//	throw new TranslationException();
+>, <Line: -		ObjectPropertyExpression role = getPropertyExpression(ax.getProperty());	
+>, <Line: -		dl_onto.addFunctionalObjectPropertyAxiom(role);				
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLSubObjectPropertyOfAxiom ax) {
+>, <Line: -		ObjectPropertyExpression subrole = getPropertyExpression(ax.getSubProperty());
+>, <Line: -		ObjectPropertyExpression superrole = getPropertyExpression(ax.getSuperProperty());
+>, <Line: -		dl_onto.addSubPropertyOfAxiom(subrole, superrole);	
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLDisjointUnionAxiom ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * SymmetricObjectProperty := 'SymmetricObjectProperty' '(' axiomAnnotations ObjectPropertyExpression ')'
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLSymmetricObjectPropertyAxiom ax) {
+>, <Line: -		//if (profile.order() < LanguageProfile.OWL2QL.order())
+>, <Line: -		//	throw new TranslationException();
+>, <Line: -		// [R3] of the grammar simplifications
+>, <Line: -		ObjectPropertyExpression role = getPropertyExpression(ax.getProperty());
+>, <Line: -		dl_onto.addSubPropertyOfAxiom(role, role.getInverse());
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLDataPropertyRangeAxiom ax) {
+>, <Line: -		DataPropertyExpression role = getPropertyExpression(ax.getProperty());
+>, <Line: -		DataPropertyRangeExpression subclass = role.getRange(); // ofac.createDataPropertyRange(role);
+>, <Line: -		OWLDataRange range = ax.getRange();
+>, <Line: -		if (range.isDatatype()) {
+>, <Line: -			OWLDatatype rangeDatatype = range.asOWLDatatype();
+>, <Line: -			if (rangeDatatype.isBuiltIn()) {
+>, <Line: -				try {
+>, <Line: -					Predicate.COL_TYPE columnType = OWLTypeMapper.getType(rangeDatatype);
+>, <Line: -					Datatype datatype = ofac.createDataType(columnType);
+>, <Line: -					dl_onto.addSubClassOfAxiom(subclass, datatype);
+>, <Line: -				} catch (TranslationException e) {
+>, <Line: -					log.warn("Error in " + ax + "(" + e + ")");
+>, <Line: -				}
+>, <Line: -			} else {
+>, <Line: -				log.warn("Ignoring range axiom since it refers to a non-supported datatype: " + ax);
+>, <Line: -			}
+>, <Line: -		} else {
+>, <Line: -			log.warn("Ignoring range axiom since it is not a datatype: " + ax);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLFunctionalDataPropertyAxiom ax) {
+>, <Line: -		//if (profile.order() < LanguageProfile.DLLITEA.order())
+>, <Line: -		//	throw new TranslationException();
+>, <Line: -		DataPropertyExpression role = getPropertyExpression(ax.getProperty());
+>, <Line: -		dl_onto.addFunctionalDataPropertyAxiom(role);		
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * EquivalentDataProperties := 'EquivalentDataProperties' '(' axiomAnnotations 
+>, <Line: -	 * 								DataPropertyExpression DataPropertyExpression { DataPropertyExpression } ')'
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLEquivalentDataPropertiesAxiom ax) {
+>, <Line: -		//if (profile.order() < LanguageProfile.OWL2QL.order())
+>, <Line: -		//	throw new TranslationException();
+>, <Line: -		List<DataPropertyExpression> result = new LinkedList<>();
+>, <Line: -		for (OWLDataPropertyExpression rolExpression : ax.getProperties()) 
+>, <Line: -			result.add(getPropertyExpression(rolExpression));
+>, <Line: -		// [R2] of the grammar simplifictaions
+>, <Line: -		for (int i = 0; i < result.size() - 1; i++) 
+>, <Line: -			dl_onto.addSubPropertyOfAxiom(result.get(i), result.get(i + 1));
+>, <Line: -		dl_onto.addSubPropertyOfAxiom(result.get(result.size() - 1), result.get(0));
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLClassAssertionAxiom ax) {
+>, <Line: -		ClassAssertion a = translate(ax);
+>, <Line: -		if (a != null)
+>, <Line: -			dl_onto.addClassAssertion(a);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * EquivalentClasses := 'EquivalentClasses' '(' axiomAnnotations 
+>, <Line: -	 * 						subClassExpression subClassExpression { subClassExpression } ')'
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLEquivalentClassesAxiom ax) {
+>, <Line: -		//if (profile.order() < LanguageProfile.OWL2QL.order())
+>, <Line: -		//	throw new TranslationException();
+>, <Line: -		try {
+>, <Line: -			List<ClassExpression> result = new LinkedList<>();
+>, <Line: -			for (OWLClassExpression OWLClassExpression : ax.getClassExpressions())
+>, <Line: -				result.add(getSubclassExpression(OWLClassExpression));
+>, <Line: -			// [R2] from grammar simplifications
+>, <Line: -			for (int i = 0; i < result.size() - 1; i++) 
+>, <Line: -				dl_onto.addSubClassOfAxiom(result.get(i), result.get(i + 1));
+>, <Line: -			dl_onto.addSubClassOfAxiom(result.get(result.size() - 1), result.get(0));	
+>, <Line: -		} 
+>, <Line: -		catch (TranslationException e) {
+>, <Line: -			log.warn("Error in " + ax);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLDataPropertyAssertionAxiom ax) {
+>, <Line: -		DataPropertyAssertion assertion = translate(ax);
+>, <Line: -		dl_onto.addDataPropertyAssertion(assertion);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLTransitiveObjectPropertyAxiom ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLIrreflexiveObjectPropertyAxiom ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLSubDataPropertyOfAxiom ax) {
+>, <Line: -		DataPropertyExpression subrole = getPropertyExpression(ax.getSubProperty());
+>, <Line: -		DataPropertyExpression superrole = getPropertyExpression(ax.getSuperProperty());
+>, <Line: -		dl_onto.addSubPropertyOfAxiom(subrole, superrole);	
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLInverseFunctionalObjectPropertyAxiom ax) {
+>, <Line: -		//if (profile.order() < LanguageProfile.OWL2QL.order())
+>, <Line: -		//	throw new TranslationException();
+>, <Line: -		ObjectPropertyExpression role = getPropertyExpression(ax.getProperty());
+>, <Line: -		dl_onto.addFunctionalObjectPropertyAxiom(role.getInverse());
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLSameIndividualAxiom ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLSubPropertyChainOfAxiom ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * InverseObjectProperties := 'InverseObjectProperties' '(' axiomAnnotations 
+>, <Line: -	 * 									ObjectPropertyExpression ObjectPropertyExpression ')'
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLInverseObjectPropertiesAxiom ax) {
+>, <Line: -		//if (profile.order() < LanguageProfile.OWL2QL.order())
+>, <Line: -		//	throw new TranslationException();
+>, <Line: -		ObjectPropertyExpression role1 = getPropertyExpression(ax.getFirstProperty());
+>, <Line: -		ObjectPropertyExpression role2 = getPropertyExpression(ax.getSecondProperty());
+>, <Line: -		// [R2] of the grammar simplifications
+>, <Line: -		if (!role1.equals(role2.getInverse())) {
+>, <Line: -			dl_onto.addSubPropertyOfAxiom(role1, role2.getInverse());
+>, <Line: -			dl_onto.addSubPropertyOfAxiom(role2, role1.getInverse());		
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLHasKeyAxiom ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(OWLDatatypeDefinitionAxiom ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void visit(SWRLRule ax) {
+>, <Line: -		log.warn("Axiom not yet supported by Quest: {}", ax.toString());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * 
+>, <Line: -	 * SERVICE METHODS
+>, <Line: -	 * 
+>, <Line: -	 */
+>, <Line: -	private static ClassExpression getClassExpression(OWLClass rest) {
+>, <Line: -		String uri = rest.getIRI().toString();
+>, <Line: -		return ofac.createClass(uri);		
+>, <Line: -	}
+>, <Line: -	private static ClassExpression getClassExpression(OWLObjectSomeValuesFrom rest) throws TranslationException {
+>, <Line: -		OWLClassExpression filler = rest.getFiller();
+>, <Line: -		if (!filler.isOWLThing()) 
+>, <Line: -			throw new TranslationException();
+>, <Line: -		return getPropertyExpression(rest.getProperty()).getDomain();		
+>, <Line: -	}
+>, <Line: -	private static ClassExpression getClassExpression(OWLDataSomeValuesFrom rest) throws TranslationException {
+>, <Line: -		OWLDataRange filler = rest.getFiller();
+>, <Line: -		if (!filler.isTopDatatype()) 
+>, <Line: -			throw new TranslationException();
+>, <Line: -		return getPropertyExpression(rest.getProperty()).getDomain();
+>, <Line: -	}
+>, <Line: -	private static ClassExpression getClassExpression(OWLObjectMinCardinality rest) throws TranslationException {
+>, <Line: -		int cardinatlity = rest.getCardinality();
+>, <Line: -		OWLClassExpression filler = rest.getFiller();
+>, <Line: -		if (cardinatlity != 1 || !filler.isOWLThing()) 
+>, <Line: -			throw new TranslationException();
+>, <Line: -		return getPropertyExpression(rest.getProperty()).getDomain();
+>, <Line: -	}
+>, <Line: -	private static ClassExpression getClassExpression(OWLDataMinCardinality rest) throws TranslationException {
+>, <Line: -		int cardinatlity = rest.getCardinality();
+>, <Line: -		OWLDataRange range = rest.getFiller();
+>, <Line: -		if (cardinatlity != 1 || !range.isTopDatatype()) 
+>, <Line: -			throw new TranslationException();
+>, <Line: -		return getPropertyExpression(rest.getProperty()).getDomain();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * subClassExpression := Class | subObjectSomeValuesFrom | subObjectSomeValuesFrom
+>, <Line: -	 * 
+>, <Line: -	 * @param owlExpression
+>, <Line: -	 * @return
+>, <Line: -	 * @throws TranslationException
+>, <Line: -	 */
+>, <Line: -	private static ClassExpression getSubclassExpression(OWLClassExpression owlExpression) throws TranslationException {
+>, <Line: -		if (owlExpression instanceof OWLClass) {
+>, <Line: -			return getClassExpression((OWLClass)owlExpression);
+>, <Line: -		} 
+>, <Line: -		else if (owlExpression instanceof OWLObjectSomeValuesFrom) {
+>, <Line: -			//if (profile.order() < LanguageProfile.OWL2QL.order())
+>, <Line: -			//	throw new TranslationException();
+>, <Line: -			return getClassExpression((OWLObjectSomeValuesFrom)owlExpression);
+>, <Line: -		} 
+>, <Line: -		else if (owlExpression instanceof OWLDataSomeValuesFrom) {
+>, <Line: -			//if (profile.order() < LanguageProfile.OWL2QL.order())
+>, <Line: -			//	throw new TranslationException();
+>, <Line: -			return getClassExpression((OWLDataSomeValuesFrom) owlExpression);
+>, <Line: -		}
+>, <Line: -		else if (owlExpression instanceof OWLObjectMinCardinality) {
+>, <Line: -			//if (profile.order() < LanguageProfile.DLLITEA.order())
+>, <Line: -			//	throw new TranslationException();
+>, <Line: -			return getClassExpression((OWLObjectMinCardinality) owlExpression);
+>, <Line: -		} 
+>, <Line: -		else if (owlExpression instanceof OWLDataMinCardinality) {
+>, <Line: -			//if (profile.order() < LanguageProfile.DLLITEA.order())
+>, <Line: -			//	throw new TranslationException();
+>, <Line: -			return getClassExpression((OWLDataMinCardinality) owlExpression);
+>, <Line: -		} 
+>, <Line: -		else
+>, <Line: -			throw new TranslationException();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * DataPropertyExpression := DataProperty
+>, <Line: -	 * 
+>, <Line: -	 * @param rolExpression
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private static DataPropertyExpression getPropertyExpression(OWLDataPropertyExpression rolExpression)  {
+>, <Line: -		assert (rolExpression instanceof OWLDataProperty); 
+>, <Line: -		return ofac.createDataProperty((rolExpression.asOWLDataProperty().getIRI().toString()));
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * ObjectPropertyExpression := ObjectProperty | InverseObjectProperty
+>, <Line: -	 * InverseObjectProperty := 'ObjectInverseOf' '(' ObjectProperty ')'
+>, <Line: -	 * 
+>, <Line: -	 * @param rolExpression
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private static ObjectPropertyExpression getPropertyExpression(OWLObjectPropertyExpression rolExpression) {
+>, <Line: -		if (rolExpression instanceof OWLObjectProperty) 
+>, <Line: -			return ofac.createObjectProperty(rolExpression.asOWLObjectProperty().getIRI().toString());
+>, <Line: -		else {
+>, <Line: -			assert(rolExpression instanceof OWLObjectInverseOf);
+>, <Line: -		//	if (profile.order() < LanguageProfile.OWL2QL.order())
+>, <Line: -		//		throw new TranslationException();
+>, <Line: -			OWLObjectInverseOf aux = (OWLObjectInverseOf) rolExpression;
+>, <Line: -			return ofac.createObjectProperty(aux.getInverse().asOWLObjectProperty().getIRI().toString()).getInverse();
+>, <Line: -		} 			
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * superClassExpression := Class | superObjectIntersectionOf | superObjectComplementOf | 
+>, <Line: -	 * 								superObjectSomeValuesFrom | DataSomeValuesFrom
+>, <Line: -	 * 
+>, <Line: -	 * superObjectIntersectionOf := 'ObjectIntersectionOf' '(' superClassExpression superClassExpression { superClassExpression } ')'
+>, <Line: -	 * superObjectComplementOf := 'ObjectComplementOf' '(' subClassExpression ')'
+>, <Line: -	 * superObjectSomeValuesFrom := 'ObjectSomeValuesFrom' '(' ObjectPropertyExpression Class ')'
+>, <Line: -	 * DataSomeValuesFrom := 'DataSomeValuesFrom' '(' DataPropertyExpression DataRange ')'
+>, <Line: -	 */
+>, <Line: -	// Set<OWLClassExpression> is for [R4] in the grammar simplification
+>, <Line: -	private void addSubClassAxioms(ClassExpression subDescription, Set<OWLClassExpression> superclasses) throws TranslationException {
+>, <Line: -		for (OWLClassExpression superClass : superclasses) {
+>, <Line: -			if (superClass instanceof OWLClass) {
+>, <Line: -				dl_onto.addSubClassOfAxiom(subDescription, getClassExpression((OWLClass)superClass));
+>, <Line: -			} 
+>, <Line: -			else if (superClass instanceof OWLObjectSomeValuesFrom) {
+>, <Line: -				//if (profile.order() < LanguageProfile.OWL2QL.order()) {
+>, <Line: -				//	throw new TranslationException();
+>, <Line: -				//}
+>, <Line: -				OWLObjectSomeValuesFrom someexp = (OWLObjectSomeValuesFrom) superClass;
+>, <Line: -				OWLClassExpression filler = someexp.getFiller();
+>, <Line: -				if (filler.isOWLThing()) 
+>, <Line: -					dl_onto.addSubClassOfAxiom(subDescription, getClassExpression(someexp));
+>, <Line: -				else 
+>, <Line: -					// [R5] of the grammar simplifications
+>, <Line: -					dl_onto.addSubClassOfAxiom(subDescription, getPropertySomeClassRestriction(someexp));
+>, <Line: -			} 
+>, <Line: -			else if (superClass instanceof OWLDataSomeValuesFrom) {
+>, <Line: -				//if (profile.order() < LanguageProfile.OWL2QL.order()) {
+>, <Line: -				//	throw new TranslationException();
+>, <Line: -				//}
+>, <Line: -				OWLDataSomeValuesFrom someexp = (OWLDataSomeValuesFrom) superClass;
+>, <Line: -				OWLDataRange filler = someexp.getFiller();
+>, <Line: -				if (filler.isTopDatatype()) 
+>, <Line: -					dl_onto.addSubClassOfAxiom(subDescription, getClassExpression(someexp));
+>, <Line: -				else
+>, <Line: -					dl_onto.addSubClassOfAxiom(subDescription, getPropertySomeDatatypeRestriction(someexp));
+>, <Line: -			} 
+>, <Line: -			else if (superClass instanceof OWLObjectComplementOf) {
+>, <Line: -				// TODO: handle negation via disjointness
+>, <Line: -			}
+>, <Line: -			else if (superClass instanceof OWLObjectMinCardinality) {
+>, <Line: -				//if (profile.order() < LanguageProfile.DLLITEA.order())
+>, <Line: -				//	throw new TranslationException();
+>, <Line: -				dl_onto.addSubClassOfAxiom(subDescription, getClassExpression((OWLObjectMinCardinality) superClass));
+>, <Line: -			} 
+>, <Line: -			else if (superClass instanceof OWLDataMinCardinality) {
+>, <Line: -				//if (profile.order() < LanguageProfile.DLLITEA.order())
+>, <Line: -				//	throw new TranslationException();
+>, <Line: -				dl_onto.addSubClassOfAxiom(subDescription, getClassExpression((OWLDataMinCardinality) superClass));
+>, <Line: -			} 
+>, <Line: -			else
+>, <Line: -				throw new TranslationException();			
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	// [R5] of the grammar simplifcation
+>, <Line: -	private ClassExpression getPropertySomeClassRestriction(OWLObjectSomeValuesFrom someexp) throws TranslationException {
+>, <Line: -		ObjectSomeValuesFrom auxclass = auxiliaryClassProperties.get(someexp);
+>, <Line: -		if (auxclass == null) {
+>, <Line: -			// no replacement found for this exists R.A, creating a new one
+>, <Line: -			ObjectPropertyExpression role = getPropertyExpression(someexp.getProperty());
+>, <Line: -			OWLClassExpression owlFiller = someexp.getFiller();
+>, <Line: -			if (!(owlFiller instanceof OWLClass)) 
+>, <Line: -				throw new TranslationException();
+>, <Line: -			ClassExpression filler = getSubclassExpression(owlFiller);
+>, <Line: -			ObjectPropertyExpression auxRole = dl_onto.getVocabulary().createAuxiliaryObjectProperty();
+>, <Line: -			// if \exists R.C then auxRole = P, auxclass = \exists P, P <= R, \exists P^- <= C
+>, <Line: -			// if \exists R^-.C then auxRole = P^-, auxclass = \exists P^-, P^- <= R^-, \exists P <= C
+>, <Line: -			if (role.isInverse())
+>, <Line: -				auxRole = auxRole.getInverse();
+>, <Line: -			auxclass = auxRole.getDomain();
+>, <Line: -			auxiliaryClassProperties.put(someexp, auxclass);
+>, <Line: -			dl_onto.addSubPropertyOfAxiom(auxRole, role);
+>, <Line: -			dl_onto.addSubClassOfAxiom(auxRole.getRange(), filler);
+>, <Line: -		}
+>, <Line: -		return auxclass;
+>, <Line: -	}
+>, <Line: -	private ClassExpression getPropertySomeDatatypeRestriction(OWLDataSomeValuesFrom someexp) throws TranslationException {
+>, <Line: -		DataSomeValuesFrom auxclass = auxiliaryDatatypeProperties.get(someexp);
+>, <Line: -		if (auxclass == null) {			
+>, <Line: -			// no replacement found for this exists R.A, creating a new one
+>, <Line: -			DataPropertyExpression role = getPropertyExpression(someexp.getProperty());
+>, <Line: -			// TODO: handle more complex fillers
+>, <Line: -			// if (filler instanceof OWLDatatype);
+>, <Line: -			OWLDatatype owlDatatype = (OWLDatatype) someexp.getFiller();
+>, <Line: -			COL_TYPE datatype = OWLTypeMapper.getType(owlDatatype);
+>, <Line: -			Datatype filler = ofac.createDataType(datatype);
+>, <Line: -			DataPropertyExpression auxRole = dl_onto.getVocabulary().createAuxiliaryDataProperty();
+>, <Line: -			auxclass = auxRole.getDomain(); 
+>, <Line: -			auxiliaryDatatypeProperties.put(someexp, auxclass);
+>, <Line: -			dl_onto.addSubPropertyOfAxiom(auxRole, role);
+>, <Line: -			dl_onto.addSubClassOfAxiom(auxRole.getRange(), filler);
+>, <Line: -		}
+>, <Line: -		return auxclass;
+>, <Line: -	}
+>, <Line: -	public static ObjectPropertyAssertion translate(OWLObjectPropertyAssertionAxiom ax) {
+>, <Line: -		URIConstant c1 = getIndividual(ax.getSubject());
+>, <Line: -		URIConstant c2 = getIndividual(ax.getObject());
+>, <Line: -		ObjectPropertyExpression prop = getPropertyExpression(ax.getProperty());
+>, <Line: -		// TODO: check for bottom			
+>, <Line: -		return ofac.createObjectPropertyAssertion(prop, c1, c2);						
+>, <Line: -	}
+>, <Line: -	public static DataPropertyAssertion translate(OWLDataPropertyAssertionAxiom aux) {
+>, <Line: -		try {
+>, <Line: -			OWLLiteral object = aux.getObject();
+>, <Line: -			Predicate.COL_TYPE type = OWLTypeMapper.getType(object.getDatatype());
+>, <Line: -			ValueConstant c2 = dfac.getConstantLiteral(object.getLiteral(), type);
+>, <Line: -			DataPropertyExpression prop = getPropertyExpression(aux.getProperty());
+>, <Line: -			// TODO: CHECK FOR BOT AND TOP
+>, <Line: -			URIConstant c1 = getIndividual(aux.getSubject());
+>, <Line: -			return ofac.createDataPropertyAssertion(prop, c1, c2);
+>, <Line: -		} catch (TranslationException e) {
+>, <Line: -			throw new RuntimeException(e.getMessage());
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public static ClassAssertion translate(OWLClassAssertionAxiom aux) {
+>, <Line: -		OWLClassExpression classExpression = aux.getClassExpression();
+>, <Line: -		if (!(classExpression instanceof OWLClass))
+>, <Line: -			throw new RuntimeException("Found complex class in assertion, this feature is not supported");
+>, <Line: -		if (classExpression.isOWLThing())
+>, <Line: -			return null;
+>, <Line: -		if (classExpression.isOWLNothing())
+>, <Line: -			throw new RuntimeException("Unsatisfiable class assertion: " + aux);
+>, <Line: -		OWLClass namedclass = (OWLClass) classExpression;
+>, <Line: -		OClass concept = ofac.createClass(namedclass.getIRI().toString());
+>, <Line: -		URIConstant c = getIndividual(aux.getIndividual());
+>, <Line: -		return ofac.createClassAssertion(concept, c);
+>, <Line: -	}
+>, <Line: -	private static URIConstant getIndividual(OWLIndividual ind) {
+>, <Line: -		if (ind.isAnonymous()) 
+>, <Line: -			throw new RuntimeException("Found anonymous individual, this feature is not supported:" + ind);
+>, <Line: -		 return dfac.getConstantURI(ind.asOWLNamedIndividual().getIRI().toString());
+>, <Line: -	}
+>, <Line: -	private final Set<String> objectproperties = new HashSet<>();
+>, <Line: -	private final Set<String> dataproperties = new HashSet<>();
+>, <Line: -	private final Set<String> punnedPredicates = new HashSet<>();
+>, <Line: -	@Override
+>, <Line: -	public void declare(OWLClass entity) {
+>, <Line: -		/* We ignore TOP and BOTTOM (Thing and Nothing) */
+>, <Line: -		//if (entity.isOWLThing() || entity.isOWLNothing()) 
+>, <Line: -		//	continue;				
+>, <Line: -		String uri = entity.getIRI().toString();
+>, <Line: -		dl_onto.getVocabulary().createClass(uri);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void declare(OWLObjectProperty prop) {
+>, <Line: -		//if (prop.isOWLTopObjectProperty() || prop.isOWLBottomObjectProperty()) 
+>, <Line: -		//	continue;
+>, <Line: -		String uri = prop.getIRI().toString();
+>, <Line: -		if (dataproperties.contains(uri))  {
+>, <Line: -			punnedPredicates.add(uri); 
+>, <Line: -			log.warn("Quest can become unstable with properties declared as both data and object. Offending property: " + uri);
+>, <Line: -		}
+>, <Line: -		else {
+>, <Line: -			objectproperties.add(uri);
+>, <Line: -			dl_onto.getVocabulary().createObjectProperty(uri);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void declare(OWLDataProperty prop) {
+>, <Line: -		//if (prop.isOWLTopDataProperty() || prop.isOWLBottomDataProperty()) 
+>, <Line: -		//	continue;
+>, <Line: -		String uri = prop.getIRI().toString();
+>, <Line: -		if (objectproperties.contains(uri)) {
+>, <Line: -			punnedPredicates.add(uri);
+>, <Line: -			log.warn("Quest can become unstable with properties declared as both data and object. Offending property: " + uri);
+>, <Line: -		}
+>, <Line: -		else {
+>, <Line: -			dataproperties.add(uri);
+>, <Line: -			dl_onto.getVocabulary().createDataProperty(uri);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -/*		
+>, <Line: -	OWL2QLProfile owlprofile = new OWL2QLProfile();
+>, <Line: -	OWLProfileReport report = owlprofile.checkOntology(owl);
+>, <Line: -	if (!report.isInProfile()) {
+>, <Line: -		log.warn("WARNING. The current ontology is not in the OWL 2 QL profile.");
+>, <Line: -		try {
+>, <Line: -			File profileReport = new File("quest-profile-report.log");
+>, <Line: -			if (profileReport.canWrite()) {
+>, <Line: -				BufferedWriter bf = new BufferedWriter(new FileWriter(profileReport));
+>, <Line: -				bf.write(report.toString());
+>, <Line: -				bf.flush();
+>, <Line: -				bf.close();
+>, <Line: -			}
+>, <Line: -		} catch (Exception e) {
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -*/
+>, <Line: -}
+>]

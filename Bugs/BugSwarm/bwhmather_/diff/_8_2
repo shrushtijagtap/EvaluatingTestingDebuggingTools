@@ -1,0 +1,193 @@
+[<Line: +    :copyright: (c) 2015 by Ben Mather.
+>, <Line: +import functools
+>, <Line: +from verktyg.http import (
+>, <Line: +    parse_content_type_header, parse_language_header, parse_charset_header,
+>, <Line: +    parse_accept_header, parse_accept_language_header,
+>, <Line: +    parse_accept_charset_header,
+>, <Line: +)
+>, <Line: +@functools.total_ordering
+>, <Line: +class Acceptability(object):
+>, <Line: +    def __init__(
+>, <Line: +                self, *,
+>, <Line: +                content_type_acceptability,
+>, <Line: +                language_acceptability,
+>, <Line: +                charset_acceptability,
+>, <Line: +                qs
+>, <Line: +            ):
+>, <Line: +        self._content_type_acceptability = content_type_acceptability
+>, <Line: +        self._language_acceptability = language_acceptability
+>, <Line: +        self._charset_acceptability = charset_acceptability
+>, <Line: +        self._qs = qs
+>, <Line: +    def __eq__(self, other):
+>, <Line: +        if (other._content_type_acceptability !=
+>, <Line: +                self._content_type_acceptability):
+>, <Line: +            return False
+>, <Line: +        if other._language_acceptability != self._language_acceptability:
+>, <Line: +            return False
+>, <Line: +        if other._charset_acceptability != self._charset_acceptability:
+>, <Line: +            return False
+>, <Line: +        if other._qs != self._qs:
+>, <Line: +            return False
+>, <Line: +        return True
+>, <Line: +    def __gt__(self, other):
+>, <Line: +        def _gt(self, other):
+>, <Line: +            if (self is None) and (other is None):
+>, <Line: +                return False
+>, <Line: +            if self <= other:
+>, <Line: +                return False
+>, <Line: +            return True
+>, <Line: +        if _gt(
+>, <Line: +                self._content_type_acceptability,
+>, <Line: +                other._content_type_acceptability):
+>, <Line: +            return True
+>, <Line: +        if _gt(
+>, <Line: +                self._language_acceptability,
+>, <Line: +                other._language_acceptability):
+>, <Line: +            return True
+>, <Line: +        if _gt(
+>, <Line: +                self._charset_acceptability,
+>, <Line: +                other._charset_acceptability):
+>, <Line: +            return True
+>, <Line: +        if _gt(
+>, <Line: +                self._qs,
+>, <Line: +                other._qs):
+>, <Line: +            return True
+>, <Line: +        return False
+>, <Line: +            representations,
+>, <Line: +            accept='*/*', accept_language='*', accept_charset='*'
+>, <Line: +        ):
+>, <Line: +    highest_acceptability = None
+>, <Line: +    best_representation = None
+>, <Line: +    if accept is None:
+>, <Line: +        accept = '*/*'
+>, <Line: +    if isinstance(accept, str):
+>, <Line: +        accept = parse_accept_header(accept)
+>, <Line: +    if accept_language is None:
+>, <Line: +        accept_language = '*'
+>, <Line: +    if isinstance(accept_language, str):
+>, <Line: +        accept_language = parse_accept_language_header(accept_language)
+>, <Line: +    if accept_charset is None:
+>, <Line: +        accept_charset = '*'
+>, <Line: +    if isinstance(accept_charset, str):
+>, <Line: +        accept_charset = parse_accept_charset_header(accept_charset)
+>, <Line: +            acceptability = representation.acceptability(
+>, <Line: +                accept=accept,
+>, <Line: +                accept_language=accept_language,
+>, <Line: +                accept_charset=accept_charset
+>, <Line: +            )
+>, <Line: +        if (highest_acceptability is None or
+>, <Line: +                acceptability >= highest_acceptability):
+>, <Line: +            highest_acceptability = acceptability
+>, <Line: +            best_representation = representation
+>, <Line: +    if best_representation is None:
+>, <Line: +    return best_representation
+>, <Line: +        if isinstance(content_type, str):
+>, <Line: +            content_type = parse_content_type_header(content_type)
+>, <Line: +        self._content_type = content_type
+>, <Line: +        if isinstance(language, str):
+>, <Line: +            language = parse_language_header(language)
+>, <Line: +        self._language = language
+>, <Line: +        if isinstance(charset, str):
+>, <Line: +            charset = parse_charset_header(charset)
+>, <Line: +        self._charset = charset
+>, <Line: +        if qs is None:
+>, <Line: +            qs = 1.0
+>, <Line: +        self._qs = max(min(float(qs), 1.0), 0.0)
+>, <Line: +    def acceptability(
+>, <Line: +                self, *,
+>, <Line: +                accept=None,
+>, <Line: +                accept_charset=None,
+>, <Line: +                accept_language=None
+>, <Line: +            ):
+>, <Line: +        :param accept:
+>, <Line: +            String in the same format as an http `Accept` header
+>, <Line: +        :param accept_language:
+>, <Line: +            String in the same format as an http `Accept-Language` header
+>, <Line: +        :param accept_charset:
+>, <Line: +            String in the same format as an http `Accept-Charset` header
+>, <Line: +        :return:
+>, <Line: +            An orderable `Acceptability` object representing the quality of the
+>, <Line: +            match.
+>, <Line: +        :raises NotAcceptable: If the binding does not match the request.
+>, <Line: +        content_type_acceptability = (
+>, <Line: +            self._content_type.acceptability(accept)
+>, <Line: +            if self._content_type is not None else
+>, <Line: +            None
+>, <Line: +        )
+>, <Line: +        language_acceptability = (
+>, <Line: +            self._content_type.acceptability(accept)
+>, <Line: +            if self._language is not None else
+>, <Line: +            None
+>, <Line: +        )
+>, <Line: +        charset_acceptability = (
+>, <Line: +            self._charset.acceptability
+>, <Line: +            if self._charset is not None else
+>, <Line: +            None
+>, <Line: +        return Acceptability(
+>, <Line: +            content_type_acceptability=content_type_acceptability,
+>, <Line: +            language_acceptability=language_acceptability,
+>, <Line: +            charset_acceptability=charset_acceptability,
+>, <Line: +            qs=self._qs,
+>, <Line: +        )
+>, <Line: +    def __repr__(self):
+>, <Line: +        output = "<%s" % self.__class__.__name__
+>, <Line: +        if self._content_type is not None:
+>, <Line: +            output += " content_type=%r" % self._content_type
+>, <Line: +        if self._language is not None:
+>, <Line: +            output += " language=%r" % self._language
+>, <Line: +        if self._charset is not None:
+>, <Line: +            output += " charset=%r" % self._charset
+>, <Line: +        output += ">"
+>, <Line: +        return output
+>]
+[<Line: -    :copyright: (c) 2014 by Ben Mather.
+>, <Line: -import mimeparse
+>, <Line: -        representations,
+>, <Line: -        accept='*/*', accept_language=None, accept_charset=None):
+>, <Line: -    max_quality = tuple()
+>, <Line: -    best = None
+>, <Line: -            quality = representation.quality(accept=accept,
+>, <Line: -                                             accept_language=accept_language,
+>, <Line: -                                             accept_charset=accept_charset)
+>, <Line: -        if not isinstance(quality, tuple):
+>, <Line: -            quality = (quality,)
+>, <Line: -        # Later bindings take precedence
+>, <Line: -        if quality >= max_quality:
+>, <Line: -            best = representation
+>, <Line: -            max_quality = quality
+>, <Line: -    if best is None:
+>, <Line: -    return best
+>, <Line: -        self.content_type = content_type
+>, <Line: -        self.language = language
+>, <Line: -        self.charset = charset
+>, <Line: -        if qs is None:
+>, <Line: -            if content_type is None:
+>, <Line: -                self.qs = 0.001
+>, <Line: -            else:
+>, <Line: -                self.qs = 1.0
+>, <Line: -    def quality(self, *, accept=None,
+>, <Line: -                accept_charset=None, accept_language=None):
+>, <Line: -        :param accept: string in the same format as an http `Accept` header
+>, <Line: -        :param accept_language: string in the same format as an http
+>, <Line: -            `Accept-Language` header
+>, <Line: -        :param accept_charset: string in the same format as an http
+>, <Line: -            `Accept-Charset` header
+>, <Line: -        :return: a number or tuple of tuples representing the quality of
+>, <Line: -            the match. By convention outer tuples should be in content type,
+>, <Line: -            language, charset order.  Raises `NotAcceptable If the binding does
+>, <Line: -            not match the request.
+>, <Line: -        if self.content_type is None:
+>, <Line: -            # TODO
+>, <Line: -            return 5, self.qs
+>, <Line: -        if accept is None:
+>, <Line: -            return 0, self.qs
+>, <Line: -        accept = [
+>, <Line: -            mimeparse.parse_media_range(media_range)
+>, <Line: -            for media_range in accept.split(',')
+>, <Line: -        ]
+>, <Line: -        fitness, quality = mimeparse.fitness_and_quality_parsed(
+>, <Line: -            self.content_type, accept
+>, <Line: -        if fitness == -1:
+>, <Line: -            raise NotAcceptable()
+>, <Line: -        return fitness, quality * self.qs
+>]

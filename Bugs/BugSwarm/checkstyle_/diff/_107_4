@@ -1,0 +1,5 @@
+[<Line: +            rootNode.getDeclaredNamespaces(
+>, <Line: +                    new NamespaceBinding[] {new NamespaceBinding("prefix", "uri")});
+>]
+[<Line: -            rootNode.getDeclaredNamespaces(new NamespaceBinding("prefix", "uri"));
+>]

@@ -1,0 +1,73 @@
+[<Line: +from verktyg import http
+>, <Line: +from verktyg.exceptions import NotAcceptable
+>, <Line: +from verktyg.accept import Representation, select_representation
+>, <Line: +        accept = http.parse_accept_header(
+>, <Line: +            'text/xml,'
+>, <Line: +            'application/xml,'
+>, <Line: +            'application/xhtml+xml,'
+>, <Line: +            'application/foo;q=0.6;quiet=no;bar=baz,'
+>, <Line: +            'text/html;q=0.9,'
+>, <Line: +            'text/plain;q=0.8,'
+>, <Line: +            'image/png,'
+>, <Line: +            '*/*;q=0.5'
+>, <Line: +        default_repr = Representation()
+>, <Line: +        png_repr = Representation(content_type='image/png')
+>, <Line: +        plain_repr = Representation(content_type='text/plain')
+>, <Line: +        json_repr = Representation(content_type='application/json')
+>, <Line: +        default_match = default_repr.acceptability(accept=accept)
+>, <Line: +        png_match = png_repr.acceptability(accept=accept)
+>, <Line: +        plain_match = plain_repr.acceptability(accept=accept)
+>, <Line: +        json_match = json_repr.acceptability(accept=accept)
+>, <Line: +        self.assertLess(default_match, png_match)
+>, <Line: +        self.assertLess(default_match, plain_match)
+>, <Line: +        self.assertLess(default_match, json_match)
+>, <Line: +        self.assertGreater(png_match, plain_match)
+>, <Line: +        self.assertGreater(png_match, json_match)
+>, <Line: +        self.assertGreater(plain_match, json_match)
+>, <Line: +    def test_select_representation(self):
+>, <Line: +        json_repr = Representation(content_type='application/json')
+>, <Line: +        html_repr = Representation(content_type='text/html')
+>, <Line: +        xml_repr = Representation(content_type='application/xml')
+>, <Line: +        blank_repr = Representation()
+>, <Line: +        representations = [json_repr, html_repr, xml_repr, blank_repr]
+>, <Line: +            json_repr, select_representation(
+>, <Line: +                representations, accept='application/json'
+>, <Line: +            )
+>, <Line: +            xml_repr,
+>, <Line: +            select_representation(
+>, <Line: +                representations,
+>, <Line: +                accept='application/xml;q=0.9,text/html;q=0.8'
+>, <Line: +            )
+>, <Line: +            blank_repr,
+>, <Line: +            select_representation(
+>, <Line: +                representations, accept='image/png'
+>, <Line: +            )
+>, <Line: +    def test_not_acceptable(self):
+>, <Line: +        pdf_repr = Representation(content_type='text/pdf')
+>, <Line: +        self.assertRaises(
+>, <Line: +            NotAcceptable,
+>, <Line: +            pdf_repr.acceptability,
+>, <Line: +            accept=http.parse_accept_header('text/html')
+>, <Line: +        )
+>, <Line: +        self.assertRaises(
+>, <Line: +            NotAcceptable,
+>, <Line: +            select_representation, [pdf_repr], accept='text/html'
+>, <Line: +        )
+>]
+[<Line: -from verktyg.accept import Representation
+>, <Line: -        default_binding = Representation()
+>, <Line: -        html_binding = Representation(content_type='text/html')
+>, <Line: -        self.assertEqual(
+>, <Line: -            (5, 0.001),
+>, <Line: -            default_binding.quality(accept='text/html')
+>, <Line: -            (110, 1.0),
+>, <Line: -            html_binding.quality(accept='text/html')
+>, <Line: -            (110, 0.9),
+>, <Line: -            html_binding.quality(accept='text/html;q=0.9')
+>, <Line: -            (0, 0.01),
+>, <Line: -            html_binding.quality(accept='application/json, */*; q=0.01')
+>, <Line: -def suite():
+>, <Line: -    suite = unittest.TestSuite()
+>, <Line: -    suite.addTest(unittest.makeSuite(RepresentationTestCase))
+>, <Line: -    return suite
+>]

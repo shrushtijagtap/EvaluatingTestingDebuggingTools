@@ -1,0 +1,24 @@
+[<Line: +            double f = (block.y + 1) - (((Water) block).getFluidHeightPercent() - 0.1111111);
+>, <Line: +            this.motionX += vector.x * d;
+>, <Line: +            this.motionY += vector.y * d;
+>, <Line: +            this.motionZ += vector.z * d;
+>, <Line: +        this.x = pos.x;
+>, <Line: +        this.y = pos.y;
+>, <Line: +        this.z = pos.z;
+>, <Line: +        this.boundingBox.setBounds(pos.x - radius, pos.y, pos.z - radius, pos.x + radius, pos.y + this.getHealth(), pos.z + radius);
+>, <Line: +        this.motionX = motion.x;
+>, <Line: +        this.motionY = motion.y;
+>, <Line: +        this.motionZ = motion.z;
+>]
+[<Line: -            double f = (block.getY() + 1) - (((Water) block).getFluidHeightPercent() - 0.1111111);
+>, <Line: -            this.motionX += vector.getX() * d;
+>, <Line: -            this.motionY += vector.getY() * d;
+>, <Line: -            this.motionZ += vector.getZ() * d;
+>, <Line: -        this.x = pos.getX();
+>, <Line: -        this.y = pos.getY();
+>, <Line: -        this.z = pos.getZ();
+>, <Line: -        this.boundingBox.setBounds(pos.getX() - radius, pos.getY(), pos.getZ() - radius, pos.getX() + radius, pos.getY() + this.getHealth(), pos.getZ() + radius);
+>, <Line: -        this.motionX = motion.getX();
+>, <Line: -        this.motionY = motion.getY();
+>, <Line: -        this.motionZ = motion.getZ();
+>]

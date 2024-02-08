@@ -1,0 +1,22 @@
+[<Line: +package org.mp4parser.streaming.input.aac;
+>, <Line: +public class AdtsHeader {
+>, <Line: +    int sampleFrequencyIndex;
+>, <Line: +    int mpegVersion;
+>, <Line: +    int layer;
+>, <Line: +    int protectionAbsent;
+>, <Line: +    int profile;
+>, <Line: +    int sampleRate;
+>, <Line: +    int channelconfig;
+>, <Line: +    int original;
+>, <Line: +    int home;
+>, <Line: +    int copyrightedStream;
+>, <Line: +    int copyrightStart;
+>, <Line: +    int frameLength;
+>, <Line: +    int bufferFullness;
+>, <Line: +    int numAacFramesPerAdtsFrame;
+>, <Line: +    int getSize() {
+>, <Line: +        return 7 + (protectionAbsent == 0 ? 2 : 0);
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

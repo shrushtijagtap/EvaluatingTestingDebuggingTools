@@ -1,0 +1,5 @@
+[<Line: +import com.google.gson.annotations.SerializedName;
+>, <Line: +    @SerializedName("versions")
+>, <Line: +    @SerializedName("meta")
+>]
+[]

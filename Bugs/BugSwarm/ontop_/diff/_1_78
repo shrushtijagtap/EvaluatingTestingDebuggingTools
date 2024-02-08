@@ -1,0 +1,7 @@
+[<Line: +        for (OClass c : obdaModel.getOntologyVocabulary().getClasses()) {
+>, <Line: +			CQIE target = prepareTargetQuery(predicateSubjectMap, predicateObjectMapsList);
+>]
+[<Line: -import it.unibz.krdb.obda.model.OBDAQuery;
+>, <Line: -        for (OClass c : obdaModel.getDeclaredClasses()) {
+>, <Line: -			OBDAQuery target = prepareTargetQuery(predicateSubjectMap, predicateObjectMapsList);
+>]

@@ -1,0 +1,197 @@
+[<Line: +    .box-shadow(inset 0 1px 1px rgba(0, 0, 0, .075)); // Redeclare so transitions work
+>, <Line: +      @shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px lighten(@borderColor, 20%);
+>, <Line: +  -moz-border-radius: @radius;
+>, <Line: +  border-radius: @radius;
+>, <Line: +  -moz-border-radius-topleft: @radius;
+>, <Line: +  border-top-left-radius: @radius;
+>, <Line: +  -moz-border-radius-topright: @radius;
+>, <Line: +  border-top-right-radius: @radius;
+>, <Line: +  -moz-border-radius-bottomright: @radius;
+>, <Line: +  border-bottom-right-radius: @radius;
+>, <Line: +  -moz-border-radius-bottomleft: @radius;
+>, <Line: +  border-bottom-left-radius: @radius;
+>, <Line: +  -moz-box-shadow: @shadow;
+>, <Line: +  box-shadow: @shadow;
+>, <Line: +  -moz-transition: @transition;
+>, <Line: +  -o-transition: @transition;
+>, <Line: +  transition: @transition;
+>, <Line: +  -moz-transition-delay: @transition-delay;
+>, <Line: +  -o-transition-delay: @transition-delay;
+>, <Line: +  transition-delay: @transition-delay;
+>, <Line: +  -moz-transition-duration: @transition-duration;
+>, <Line: +  -o-transition-duration: @transition-duration;
+>, <Line: +  transition-duration: @transition-duration;
+>, <Line: +  -moz-transform: rotate(@degrees);
+>, <Line: +  -ms-transform: rotate(@degrees);
+>, <Line: +  -o-transform: rotate(@degrees);
+>, <Line: +  transform: rotate(@degrees);
+>, <Line: +  -moz-transform: scale(@ratio);
+>, <Line: +  -ms-transform: scale(@ratio);
+>, <Line: +  -o-transform: scale(@ratio);
+>, <Line: +  transform: scale(@ratio);
+>, <Line: +  -moz-transform: translate(@x, @y);
+>, <Line: +  -ms-transform: translate(@x, @y);
+>, <Line: +  -o-transform: translate(@x, @y);
+>, <Line: +  transform: translate(@x, @y);
+>, <Line: +  -moz-transform: skew(@x, @y);
+>, <Line: +  -ms-transform: skewX(@x) skewY(@y); // See https://github.com/twbs/bootstrap/issues/4885
+>, <Line: +  -o-transform: skew(@x, @y);
+>, <Line: +  transform: skew(@x, @y);
+>, <Line: +  -moz-transform: translate3d(@x, @y, @z);
+>, <Line: +  -o-transform: translate3d(@x, @y, @z);
+>, <Line: +  transform: translate3d(@x, @y, @z);
+>, <Line: +.backface-visibility(@visibility) {
+>, <Line: +  -webkit-backface-visibility: @visibility;
+>, <Line: +  -moz-backface-visibility: @visibility;
+>, <Line: +  backface-visibility: @visibility;
+>, <Line: +  -moz-background-clip: @clip;
+>, <Line: +  background-clip: @clip;
+>, <Line: +  -moz-background-size: @size;
+>, <Line: +  -o-background-size: @size;
+>, <Line: +  background-size: @size;
+>, <Line: +  -moz-box-sizing: @boxmodel;
+>, <Line: +  box-sizing: @boxmodel;
+>, <Line: +  -moz-user-select: @select;
+>, <Line: +  -ms-user-select: @select;
+>, <Line: +  -o-user-select: @select;
+>, <Line: +  user-select: @select;
+>, <Line: +  -moz-column-count: @columnCount;
+>, <Line: +  column-count: @columnCount;
+>, <Line: +  -moz-column-gap: @columnGap;
+>, <Line: +  column-gap: @columnGap;
+>, <Line: +  -moz-hyphens: @mode;
+>, <Line: +  -ms-hyphens: @mode;
+>, <Line: +  -o-hyphens: @mode;
+>, <Line: +  hyphens: @mode;
+>, <Line: +  border-color: rgba(0, 0, 0, .1) rgba(0, 0, 0, .1) fadein(rgba(0, 0, 0, .1), 15%);
+>, <Line: +    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)", argb(@startColor), argb(@endColor))); // IE9 and down
+>, <Line: +    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)", argb(@startColor), argb(@endColor))); // IE9 and down
+>, <Line: +    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)", argb(@startColor), argb(@endColor))); // IE9 and down, gets no color-stop at all for proper fallback
+>, <Line: +    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)", argb(@startColor), argb(@endColor))); // IE9 and down, gets no color-stop at all for proper fallback
+>, <Line: +    background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255, 255, 255, .15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .15)), color-stop(.75, rgba(255, 255, 255, .15)), color-stop(.75, transparent), to(transparent));
+>, <Line: +    background-image: -webkit-linear-gradient(@angle, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+>, <Line: +    background-image: -moz-linear-gradient(@angle, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+>, <Line: +    background-image: -o-linear-gradient(@angle, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+>, <Line: +    background-image: linear-gradient(@angle, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+>, <Line: +      .span@{index} {
+>, <Line: +        .span(@index);
+>, <Line: +      }
+>, <Line: +    .spanX (0) {
+>, <Line: +    }
+>, <Line: +      .offset@{index} {
+>, <Line: +        .offset(@index);
+>, <Line: +      }
+>, <Line: +    .offsetX (0) {
+>, <Line: +    }
+>, <Line: +    .navbar-fixed-bottom .container {
+>, <Line: +      .span(@gridColumns);
+>, <Line: +    }
+>, <Line: +      .span@{index} {
+>, <Line: +        .span(@index);
+>, <Line: +      }
+>, <Line: +    .spanX (0) {
+>, <Line: +    }
+>, <Line: +      .offset@{index} {
+>, <Line: +        .offset(@index);
+>, <Line: +      }
+>, <Line: +      .offset@{index}:first-child {
+>, <Line: +        .offsetFirstChild(@index);
+>, <Line: +      }
+>, <Line: +    .offsetX (0) {
+>, <Line: +    }
+>, <Line: +      *margin-left: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) - (.5 / @gridRowWidth * 100 * 1%) + (@fluidGridGutterWidth*2) - (.5 / @gridRowWidth * 100 * 1%);
+>, <Line: +      input.span@{index}, textarea.span@{index}, .uneditable-input.span@{index} {
+>, <Line: +        .span(@index);
+>, <Line: +      }
+>, <Line: +    .spanX (0) {
+>, <Line: +    }
+>]
+[<Line: -    .box-shadow(inset 0 1px 1px rgba(0,0,0,.075)); // Redeclare so transitions work
+>, <Line: -      @shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten(@borderColor, 20%);
+>, <Line: -     -moz-border-radius: @radius;
+>, <Line: -          border-radius: @radius;
+>, <Line: -      -moz-border-radius-topleft: @radius;
+>, <Line: -          border-top-left-radius: @radius;
+>, <Line: -      -moz-border-radius-topright: @radius;
+>, <Line: -          border-top-right-radius: @radius;
+>, <Line: -      -moz-border-radius-bottomright: @radius;
+>, <Line: -          border-bottom-right-radius: @radius;
+>, <Line: -      -moz-border-radius-bottomleft: @radius;
+>, <Line: -          border-bottom-left-radius: @radius;
+>, <Line: -     -moz-box-shadow: @shadow;
+>, <Line: -          box-shadow: @shadow;
+>, <Line: -     -moz-transition: @transition;
+>, <Line: -       -o-transition: @transition;
+>, <Line: -          transition: @transition;
+>, <Line: -     -moz-transition-delay: @transition-delay;
+>, <Line: -       -o-transition-delay: @transition-delay;
+>, <Line: -          transition-delay: @transition-delay;
+>, <Line: -     -moz-transition-duration: @transition-duration;
+>, <Line: -       -o-transition-duration: @transition-duration;
+>, <Line: -          transition-duration: @transition-duration;
+>, <Line: -     -moz-transform: rotate(@degrees);
+>, <Line: -      -ms-transform: rotate(@degrees);
+>, <Line: -       -o-transform: rotate(@degrees);
+>, <Line: -          transform: rotate(@degrees);
+>, <Line: -     -moz-transform: scale(@ratio);
+>, <Line: -      -ms-transform: scale(@ratio);
+>, <Line: -       -o-transform: scale(@ratio);
+>, <Line: -          transform: scale(@ratio);
+>, <Line: -     -moz-transform: translate(@x, @y);
+>, <Line: -      -ms-transform: translate(@x, @y);
+>, <Line: -       -o-transform: translate(@x, @y);
+>, <Line: -          transform: translate(@x, @y);
+>, <Line: -     -moz-transform: skew(@x, @y);
+>, <Line: -      -ms-transform: skewX(@x) skewY(@y); // See https://github.com/twbs/bootstrap/issues/4885
+>, <Line: -       -o-transform: skew(@x, @y);
+>, <Line: -          transform: skew(@x, @y);
+>, <Line: -     -moz-transform: translate3d(@x, @y, @z);
+>, <Line: -       -o-transform: translate3d(@x, @y, @z);
+>, <Line: -          transform: translate3d(@x, @y, @z);
+>, <Line: -.backface-visibility(@visibility){
+>, <Line: -	-webkit-backface-visibility: @visibility;
+>, <Line: -	   -moz-backface-visibility: @visibility;
+>, <Line: -	        backface-visibility: @visibility;
+>, <Line: -     -moz-background-clip: @clip;
+>, <Line: -          background-clip: @clip;
+>, <Line: -     -moz-background-size: @size;
+>, <Line: -       -o-background-size: @size;
+>, <Line: -          background-size: @size;
+>, <Line: -     -moz-box-sizing: @boxmodel;
+>, <Line: -          box-sizing: @boxmodel;
+>, <Line: -     -moz-user-select: @select;
+>, <Line: -      -ms-user-select: @select;
+>, <Line: -       -o-user-select: @select;
+>, <Line: -          user-select: @select;
+>, <Line: -     -moz-column-count: @columnCount;
+>, <Line: -          column-count: @columnCount;
+>, <Line: -     -moz-column-gap: @columnGap;
+>, <Line: -          column-gap: @columnGap;
+>, <Line: -     -moz-hyphens: @mode;
+>, <Line: -      -ms-hyphens: @mode;
+>, <Line: -       -o-hyphens: @mode;
+>, <Line: -          hyphens: @mode;
+>, <Line: -  border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) fadein(rgba(0,0,0,.1), 15%);
+>, <Line: -    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@startColor),argb(@endColor))); // IE9 and down
+>, <Line: -    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+>, <Line: -    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down, gets no color-stop at all for proper fallback
+>, <Line: -    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down, gets no color-stop at all for proper fallback
+>, <Line: -    background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255,255,255,.15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255,255,255,.15)), color-stop(.75, rgba(255,255,255,.15)), color-stop(.75, transparent), to(transparent));
+>, <Line: -    background-image: -webkit-linear-gradient(@angle, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+>, <Line: -    background-image: -moz-linear-gradient(@angle, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+>, <Line: -    background-image: -o-linear-gradient(@angle, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+>, <Line: -    background-image: linear-gradient(@angle, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+>, <Line: -      .span@{index} { .span(@index); }
+>, <Line: -    .spanX (0) {}
+>, <Line: -      .offset@{index} { .offset(@index); }
+>, <Line: -    .offsetX (0) {}
+>, <Line: -    .navbar-fixed-bottom .container { .span(@gridColumns); }
+>, <Line: -      .span@{index} { .span(@index); }
+>, <Line: -    .spanX (0) {}
+>, <Line: -      .offset@{index} { .offset(@index); }
+>, <Line: -      .offset@{index}:first-child { .offsetFirstChild(@index); }
+>, <Line: -    .offsetX (0) {}
+>, <Line: -  	  *margin-left: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) - (.5 / @gridRowWidth * 100 * 1%) + (@fluidGridGutterWidth*2) - (.5 / @gridRowWidth * 100 * 1%);
+>, <Line: -      input.span@{index}, textarea.span@{index}, .uneditable-input.span@{index} { .span(@index); }
+>, <Line: -    .spanX (0) {}
+>]

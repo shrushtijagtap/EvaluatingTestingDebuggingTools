@@ -1,0 +1,14 @@
+[]
+[<Line: -type nat is (int x) where x >= 0
+>, <Line: -function sum(int start, int end) -> nat:
+>, <Line: -    int r = 0
+>, <Line: -    [int] xs = start .. end
+>, <Line: -    int i = 0
+>, <Line: -    while i < |xs| where r >= 0:
+>, <Line: -        r = r + 1
+>, <Line: -        i = i + 1
+>, <Line: -    return r
+>, <Line: -public export method test() -> void:
+>, <Line: -    assume sum(0, 10) == 10
+>, <Line: -    assume sum(10, 13) == 3
+>]

@@ -1,0 +1,56 @@
+[<Line: +/*
+>, <Line: + * Copyright 2012 Sebastian Annies, Hamburg
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the License);
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *     http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an AS IS BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package org.mp4parser.muxer.builder;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.tools.Mp4Arrays;
+>, <Line: +import java.util.Arrays;
+>, <Line: +/**
+>, <Line: + * This <code>FragmentIntersectionFinder</code> cuts the input movie in 2 second
+>, <Line: + * snippets.
+>, <Line: + */
+>, <Line: +public class DefaultFragmenterImpl implements Fragmenter {
+>, <Line: +    private double fragmentLength = 2;
+>, <Line: +    public DefaultFragmenterImpl(double fragmentLength) {
+>, <Line: +        this.fragmentLength = fragmentLength;
+>, <Line: +    }
+>, <Line: +    public static void main(String[] args) {
+>, <Line: +        DefaultMp4Builder b = new DefaultMp4Builder();
+>, <Line: +        b.setFragmenter(new DefaultFragmenterImpl(0.5));
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * {@inheritDoc}
+>, <Line: +     */
+>, <Line: +    public long[] sampleNumbers(Track track) {
+>, <Line: +        long[] segmentStartSamples = new long[]{1};
+>, <Line: +        long[] sampleDurations = track.getSampleDurations();
+>, <Line: +        long[] syncSamples = track.getSyncSamples();
+>, <Line: +        long timescale = track.getTrackMetaData().getTimescale();
+>, <Line: +        double time = 0;
+>, <Line: +        for (int i = 0; i < sampleDurations.length; i++) {
+>, <Line: +            time += (double) sampleDurations[i] / timescale;
+>, <Line: +            if (time >= fragmentLength &&
+>, <Line: +                    (syncSamples == null || Arrays.binarySearch(syncSamples, i + 1) >= 0)) {
+>, <Line: +                if (i > 0) {
+>, <Line: +                    segmentStartSamples = Mp4Arrays.copyOfAndAppend(segmentStartSamples, i + 1);
+>, <Line: +                }
+>, <Line: +                time = 0;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return segmentStartSamples;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

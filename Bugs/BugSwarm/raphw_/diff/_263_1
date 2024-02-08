@@ -1,0 +1,26 @@
+[<Line: +import net.bytebuddy.implementation.bytecode.Removal;
+>, <Line: +import net.bytebuddy.implementation.bytecode.assign.Assigner;
+>, <Line: +    @Test
+>, <Line: +    @IntegrationRule.Enforce
+>, <Line: +    public void testAdviceTransformer() throws Exception {
+>, <Line: +        assertThat(ByteBuddyAgent.install(), instanceOf(Instrumentation.class));
+>, <Line: +        ClassFileTransformer classFileTransformer = new AgentBuilder.Default()
+>, <Line: +                .with(poolStrategy)
+>, <Line: +                .ignore(none())
+>, <Line: +                .with(AgentBuilder.InitializationStrategy.NoOp.INSTANCE)
+>, <Line: +                .type(ElementMatchers.is(Foo.class), ElementMatchers.is(classLoader)).transform(new AgentBuilder.Transformer.ForAdvice()
+>, <Line: +                        .with(poolStrategy)
+>, <Line: +                        .include(BarAdvice.class.getClassLoader())
+>, <Line: +                        .with(Assigner.DEFAULT)
+>, <Line: +                        .withExceptionHandler(Removal.SINGLE)
+>, <Line: +                        .advice(named(FOO), BarAdvice.class.getName()))
+>, <Line: +                .installOnByteBuddyAgent();
+>, <Line: +        try {
+>, <Line: +            Class<?> type = classLoader.loadClass(Foo.class.getName());
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) (FOO + BAR)));
+>, <Line: +        } finally {
+>, <Line: +            ByteBuddyAgent.getInstrumentation().removeTransformer(classFileTransformer);
+>, <Line: +        }
+>, <Line: +    }
+>]
+[]

@@ -1,0 +1,24 @@
+[]
+[<Line: -input.big-search-box
+>, <Line: -    height 50px
+>, <Line: -    line-height 50px
+>, <Line: -    border 0
+>, <Line: -    font-size 20px
+>, <Line: -    font-family inherit
+>, <Line: -    padding 0 10px !important
+>, <Line: -    margin 0
+>, <Line: -    color inherit
+>, <Line: -    opacity .5
+>, <Line: -    background rgba(0, 0, 0, .1)
+>, <Line: -    margin-bottom 4px
+>, <Line: -    width 100%
+>, <Line: -    display block
+>, <Line: -    font-weight bold
+>, <Line: -    &::-webkit-search-cancel-button:after
+>, <Line: -        line-height 1.8rem
+>, <Line: -        font-weight normal
+>, <Line: -    &:focus
+>, <Line: -        background rgba(0, 0, 0, .05)
+>, <Line: -        opacity 1
+>, <Line: -        outline none
+>]

@@ -1,0 +1,6 @@
+[<Line: +    @SuppressFBWarnings(value = {"MS_MUTABLE_ARRAY", "MS_OOI_PKGPROTECT"}, justification = "Value is null")
+>, <Line: +        @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Value is null")
+>]
+[<Line: -    @SuppressFBWarnings(value = {"MS_MUTABLE_ARRAY", "MS_OOI_PKGPROTECT"}, justification = "value is null and should be available to extensions")
+>, <Line: -        @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Return value is always null")
+>]

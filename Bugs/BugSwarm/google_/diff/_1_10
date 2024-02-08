@@ -1,0 +1,15 @@
+[<Line: +import com.google.javascript.jscomp.CompilerOptions.LanguageMode;
+>, <Line: +    assertAmbiguous("if (false) { function f() {} }  f();");
+>, <Line: +    assertAmbiguous("function g() { if (false) { function f() {} }  f(); }");
+>, <Line: +  /**
+>, <Line: +   * Expects the JS to generate one bad-write warning.
+>, <Line: +   */
+>, <Line: +  private void assertAmbiguous(String js) {
+>, <Line: +    testWarning(js, VariableReferenceCheck.AMBIGUOUS_FUNCTION_DECL,
+>, <Line: +        LanguageMode.ECMASCRIPT5);
+>, <Line: +    testSameEs6(js); // In ES6, these are block scoped functions, so no ambiguity.
+>, <Line: +  }
+>]
+[<Line: -    testSameEs6("if (false) { function f() {} }  f();");
+>, <Line: -    testSameEs6("function g() { if (false) { function f() {} }  f(); }");
+>]

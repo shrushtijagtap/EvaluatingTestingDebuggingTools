@@ -1,0 +1,39 @@
+[<Line: +<!DOCTYPE tables SYSTEM "https://raw.githubusercontent.com/brianhks/genormous/master/doc/tables_1_4.dtd">
+>, <Line: +	<table name="service_index">
+>, <Line: +		<property key="hsqldb_tableType" value="CACHED"/>
+>, <Line: +		<col name="service" type="string" primary_key="true"/>
+>, <Line: +		<col name="service_key" type="string" primary_key="true"/>
+>, <Line: +		<col name="key" type="string" primary_key="true"/>
+>, <Line: +		<col name="value" type="string"/>
+>, <Line: +		<table_query name="keys" result_type="multi">
+>, <Line: +			<input>
+>, <Line: +				<param name="service" type="string" test="foo"/>
+>, <Line: +				<param name="service_key" type="string" test="foo"/>
+>, <Line: +			</input>
+>, <Line: +			<sql>
+>, <Line: +				from service_index this
+>, <Line: +				where
+>, <Line: +				this."service" = ?
+>, <Line: +				and this."service_key" = ?
+>, <Line: +				order by this."key" asc
+>, <Line: +			</sql>
+>, <Line: +		</table_query>
+>, <Line: +		<table_query name="keys_like" result_type="multi">
+>, <Line: +			<input>
+>, <Line: +				<param name="service" type="string" test="foo"/>
+>, <Line: +				<param name="service_key" type="string" test="foo"/>
+>, <Line: +				<param name="key_prefix" type="string" test="key%"/>
+>, <Line: +			</input>
+>, <Line: +			<sql>
+>, <Line: +				from service_index this
+>, <Line: +				where
+>, <Line: +				this."service" = ?
+>, <Line: +				AND this."service_key" = ?
+>, <Line: +				AND this."key" LIKE ?
+>, <Line: +				ORDER BY this."key" asc
+>, <Line: +			</sql>
+>, <Line: +		</table_query>
+>, <Line: +	</table>
+>]
+[<Line: -<!DOCTYPE tables SYSTEM "http://genormous.googlecode.com/svn/trunk/genormous/doc/tables_1_4.dtd">
+>]

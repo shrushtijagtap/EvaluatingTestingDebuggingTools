@@ -1,0 +1,9 @@
+[<Line: +ensures (|result| == length)
+>, <Line: +ensures all { i in 0..|result| | result[i] == value }:
+>, <Line: +    while i != length 
+>, <Line: +        where i == |data|
+>, <Line: +        where all { j in 0..|data| | data[j] == value }:
+>]
+[<Line: -ensures (|result| == length) && all { i in result | i == value }:
+>, <Line: -    while i != length where i == |data| && all { d in data | d == value }:
+>]

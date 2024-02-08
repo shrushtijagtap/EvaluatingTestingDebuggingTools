@@ -1,0 +1,4 @@
+[<Line: +				checks.add((HealthStatus) injector.getInstance(bindingClass));
+>]
+[<Line: -				checks.add((HealthStatus)injector.getInstance(bindingClass));
+>]

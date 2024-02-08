@@ -1,0 +1,18 @@
+[<Line: +import org.traccar.helper.Checksum;
+>, <Line: +    public static final int MSG_ADDRESS_REQUEST = 0x0001;
+>, <Line: +    public static final int MSG_STATUS = 0x0002;
+>, <Line: +    public static final int MSG_LOCATION_REPORT = 0x0003;
+>, <Line: +    public static final int MSG_LOCATION_REQUEST = 0x0004;
+>, <Line: +    public static final int MSG_LOCATION_INTERVAL = 0x0005;
+>, <Line: +    public static final int MSG_PHONE_NUMBER = 0x0006;
+>, <Line: +    public static final int MSG_MONITORING = 0x0007;
+>, <Line: +    public static final int MSG_TIMEZONE = 0x0008;
+>, <Line: +            if (!identify(imei + Checksum.luhnChecksum(Long.parseLong(imei)), channel)) {
+>, <Line: +        if (type == MSG_LOCATION_REPORT || type == MSG_LOCATION_REQUEST) {
+>]
+[<Line: -import org.traccar.helper.Crc;
+>, <Line: -    private static final int MSG_LOCATION_REPORT = 0x0003;
+>, <Line: -    private static final int MSG_LOCATION_INQUIRY_RESPONSE = 0x0004;
+>, <Line: -            if (!identify(imei + Crc.luhnChecksum(Long.parseLong(imei)), channel)) {
+>, <Line: -        if (type == MSG_LOCATION_REPORT || type == MSG_LOCATION_INQUIRY_RESPONSE) {
+>]

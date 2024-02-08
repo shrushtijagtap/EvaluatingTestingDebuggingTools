@@ -1,0 +1,4 @@
+[<Line: +        if(!root.containsKey(key)) return defaultValue;
+>]
+[<Line: -        if(m==null) return defaultValue;
+>]

@@ -1,0 +1,59 @@
+[]
+[<Line: -package command;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.net.SocketTimeoutException;
+>, <Line: -import java.net.UnknownHostException;
+>, <Line: -import javafx.application.Platform;
+>, <Line: -import org.eclipse.egit.github.core.client.RequestException;
+>, <Line: -import service.ServiceManager;
+>, <Line: -import util.DialogMessage;
+>, <Line: -import model.Model;
+>, <Line: -import model.TurboIssue;
+>, <Line: -/**
+>, <Line: - * Updates issue title on github. 
+>, <Line: - * Also sets the title of the given TurboIssue object to the given description String.
+>, <Line: - * */
+>, <Line: -public class TurboIssueEditTitle extends TurboIssueCommand{
+>, <Line: -	private String newTitle;
+>, <Line: -	public TurboIssueEditTitle(Model model, TurboIssue issue, String title){
+>, <Line: -		super(model, issue);
+>, <Line: -		this.newTitle = title;
+>, <Line: -	}
+>, <Line: -	private void logTitleChange(String prevTitle, String newTitle){
+>, <Line: -		String changeLog = IssueChangeLogger.logTitleChange(issue, prevTitle, newTitle);
+>, <Line: -		lastOperationExecuted = changeLog;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	protected boolean performExecuteAction() {
+>, <Line: -		String previousTitle = issue.getTitle();
+>, <Line: -		try {
+>, <Line: -			ServiceManager.getInstance().editIssueTitle(issue.getId(), newTitle);
+>, <Line: -			issue.setTitle(newTitle);
+>, <Line: -			logTitleChange(previousTitle, newTitle);
+>, <Line: -			isSuccessful = true;
+>, <Line: -		} catch (IOException e) {
+>, <Line: -			isSuccessful = false;
+>, <Line: -			if(e instanceof SocketTimeoutException | e instanceof UnknownHostException){
+>, <Line: -				Platform.runLater(()->{
+>, <Line: -					DialogMessage.showWarningDialog("Internet Connection Timeout", 
+>, <Line: -							"Timeout modifying title for issue in GitHub, please check your internet connection.");
+>, <Line: -				});
+>, <Line: -				logger.info("Could not edit issue title: " + e.getLocalizedMessage());
+>, <Line: -			}else if(e instanceof RequestException){
+>, <Line: -				Platform.runLater(()->{
+>, <Line: -					DialogMessage.showWarningDialog("No repository permissions", 
+>, <Line: -							"Cannot modify issue title.");
+>, <Line: -				});
+>, <Line: -				logger.info("Could not edit issue title: " + e.getLocalizedMessage());
+>, <Line: -			}else{
+>, <Line: -				logger.error(e.getLocalizedMessage(), e);
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return isSuccessful;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	protected boolean performUndoAction() {
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -}
+>]

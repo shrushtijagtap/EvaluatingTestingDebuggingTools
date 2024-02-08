@@ -1,0 +1,6 @@
+[<Line: +package org.mp4parser.boxes.microsoft.contentprotection;
+>, <Line: +import org.mp4parser.boxes.microsoft.ProtectionSpecificHeader;
+>]
+[<Line: -package com.googlecode.mp4parser.contentprotection;
+>, <Line: -import com.googlecode.mp4parser.boxes.piff.ProtectionSpecificHeader;
+>]

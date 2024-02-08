@@ -1,0 +1,8 @@
+[<Line: +import string
+>, <Line: +        self.whitespace = string.whitespace.replace('\n', '')
+>, <Line: +            if self.char in self.whitespace:
+>, <Line: +                while self.char in self.whitespace:
+>]
+[<Line: -            if self.char in ' \t\r':
+>, <Line: -                while self.char in ' \t\r':
+>]

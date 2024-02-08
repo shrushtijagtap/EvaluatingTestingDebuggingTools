@@ -1,0 +1,28 @@
+[<Line: +      string.append(serializer.serializeConnection(idMap.get(entry.from()),
+>, <Line: +          idMap
+>, <Line: +              .get(entry.to()), entry));
+>, <Line: +          .append(Math.round(conn.data().get().getLength().get()) / 10d)
+>, <Line: +          .append("\"]\n");
+>, <Line: +      return LengthData.create(distance);
+>, <Line: +          .append(Math.round(conn.data().get().getLength().get()) / 10d);
+>, <Line: +      if (conn.data().get().getMaxSpeed().isPresent()) {
+>, <Line: +            .append(conn.data().get().getMaxSpeed().get());
+>, <Line: +        return MultiAttributeData.builder()
+>, <Line: +            .setLength(distance)
+>, <Line: +            .setMaxSpeed(maxSpeed)
+>, <Line: +            .build();
+>, <Line: +        return MultiAttributeData.builder()
+>, <Line: +            .setLength(distance)
+>, <Line: +            .build();
+>]
+[<Line: -      string.append(serializer.serializeConnection(idMap.get(entry.from), idMap
+>, <Line: -          .get(entry.to), entry));
+>, <Line: -          .append(Math.round(conn.getData().getLength()) / 10d).append("\"]\n");
+>, <Line: -      return new LengthData(distance);
+>, <Line: -          .append(Math.round(conn.getData().getLength()) / 10d);
+>, <Line: -      if (!Double.isNaN(conn.getData().getMaxSpeed())
+>, <Line: -          && conn.getData().getMaxSpeed() > 0) {
+>, <Line: -            .append(conn.getData().getMaxSpeed());
+>, <Line: -        return new MultiAttributeData(distance, maxSpeed);
+>, <Line: -        return new MultiAttributeData(distance);
+>]

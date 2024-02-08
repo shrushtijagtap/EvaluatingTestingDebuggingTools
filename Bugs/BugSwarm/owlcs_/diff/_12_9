@@ -1,0 +1,20 @@
+[<Line: +import static org.semanticweb.owlapi.util.OWLAPIPreconditions.checkNotNull;
+>, <Line: +import java.io.PrintWriter;
+>, <Line: +public class WriterDocumentTarget extends OWLOntologyDocumentTargetBase {
+>, <Line: +     * @param w
+>, <Line: +    public WriterDocumentTarget(Writer w) {
+>, <Line: +        super(() -> null, null);
+>, <Line: +        writer = () -> new PrintWriter(checkNotNull(w, "writer cannot be null"));
+>]
+[<Line: -import static org.semanticweb.owlapi.util.OWLAPIPreconditions.*;
+>, <Line: -import java.util.Optional;
+>, <Line: -public class WriterDocumentTarget implements OWLOntologyDocumentTarget {
+>, <Line: -    private final Optional<Writer> writer;
+>, <Line: -     * @param writer
+>, <Line: -    public WriterDocumentTarget(Writer writer) {
+>, <Line: -        this.writer = optional(checkNotNull(writer, "writer cannot be null"));
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public Optional<Writer> getWriter() {
+>, <Line: -        return writer;
+>]

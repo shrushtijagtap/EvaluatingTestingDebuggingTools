@@ -1,0 +1,251 @@
+[]
+[<Line: -/*
+>, <Line: - * NOTE:  Dervived from openrdf sesame version 2.9.0.  See
+>, <Line: - *  sesame distribution, available at https://bitbucket.org/openrdf/sesame
+>, <Line: - * for license details referenced below.
+>, <Line: - * Licensed to Aduna under one or more contributor license agreements.
+>, <Line: - * See the NOTICE.txt file distributed with this work for additional
+>, <Line: - * information regarding copyright ownership.
+>, <Line: - *
+>, <Line: - * Aduna licenses this file to you under the terms of the Aduna BSD
+>, <Line: - * License (the "License"); you may not use this file except in compliance
+>, <Line: - * with the License. See the LICENSE.txt file distributed with this work
+>, <Line: - * for the full License.
+>, <Line: - *
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+>, <Line: - * implied. See the License for the specific language governing permissions
+>, <Line: - * and limitations under the License.
+>, <Line: - */
+>, <Line: -package org.semanticweb.owlapi.rio;
+>, <Line: -import static org.openrdf.rio.trix.TriXConstants.*;
+>, <Line: -import static org.semanticweb.owlapi.util.OWLAPIPreconditions.verifyNotNull;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.io.InputStream;
+>, <Line: -import java.io.Reader;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Map;
+>, <Line: -import javax.annotation.Nullable;
+>, <Line: -import org.apache.commons.io.input.BOMInputStream;
+>, <Line: -import org.openrdf.model.IRI;
+>, <Line: -import org.openrdf.model.Resource;
+>, <Line: -import org.openrdf.model.Statement;
+>, <Line: -import org.openrdf.model.Value;
+>, <Line: -import org.openrdf.model.ValueFactory;
+>, <Line: -import org.openrdf.model.impl.ValueFactoryImpl;
+>, <Line: -import org.openrdf.rio.RDFFormat;
+>, <Line: -import org.openrdf.rio.RDFHandlerException;
+>, <Line: -import org.openrdf.rio.RDFParseException;
+>, <Line: -import org.openrdf.rio.helpers.RDFParserBase;
+>, <Line: -import org.openrdf.rio.helpers.TriXParserSettings;
+>, <Line: -import org.semanticweb.owlapi.rio.utils.OWLAPISimpleSAXParser;
+>, <Line: -import org.xml.sax.SAXException;
+>, <Line: -import org.xml.sax.SAXParseException;
+>, <Line: -import info.aduna.xml.SimpleSAXAdapter;
+>, <Line: -/**
+>, <Line: - * A parser that can parse RDF files that are in the
+>, <Line: - * <a href="http://www.w3.org/2004/03/trix/">TriX format</a>. Cloned from
+>, <Line: - * org.openrdf.rio.trix.TrixParser
+>, <Line: - * 
+>, <Line: - * @author Arjohn Kampman Modified to install error handler by Simon Spero,
+>, <Line: - *         because error handler.
+>, <Line: - */
+>, <Line: -@SuppressWarnings("synthetic-access")
+>, <Line: -class OWLAPIRioTrixParser extends RDFParserBase {
+>, <Line: -    /*--------------*
+>, <Line: -     * Constructors *
+>, <Line: -     *--------------*/
+>, <Line: -    /**
+>, <Line: -     * Creates a new TriXParser that will use a {@link ValueFactoryImpl} to
+>, <Line: -     * create objects for resources, bNodes, literals and statements.
+>, <Line: -     */
+>, <Line: -    public OWLAPIRioTrixParser() {
+>, <Line: -        super();
+>, <Line: -    }
+>, <Line: -    /**
+>, <Line: -     * Creates a new TriXParser that will use the supplied ValueFactory to
+>, <Line: -     * create objects for resources, bNodes, literals and statements.
+>, <Line: -     *
+>, <Line: -     * @param valueFactory
+>, <Line: -     *        A ValueFactory.
+>, <Line: -     */
+>, <Line: -    public OWLAPIRioTrixParser(ValueFactory valueFactory) {
+>, <Line: -        super(valueFactory);
+>, <Line: -    }
+>, <Line: -    /*---------*
+>, <Line: -     * Methods *
+>, <Line: -     *---------*/
+>, <Line: -    @Override
+>, <Line: -    public final RDFFormat getRDFFormat() {
+>, <Line: -        return RDFFormat.TRIX;
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void parse(@Nullable InputStream in, @Nullable String baseURI) throws IOException, RDFParseException,
+>, <Line: -        RDFHandlerException {
+>, <Line: -        parse(new BOMInputStream(in, false));
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void parse(@Nullable Reader reader, @Nullable String baseURI) throws IOException, RDFParseException,
+>, <Line: -        RDFHandlerException {
+>, <Line: -        parse(verifyNotNull(reader, "reader cannot be null"));
+>, <Line: -    }
+>, <Line: -    private void parse(Object inputStreamOrReader) throws IOException, RDFParseException, RDFHandlerException {
+>, <Line: -        if (rdfHandler != null) {
+>, <Line: -            rdfHandler.startRDF();
+>, <Line: -        }
+>, <Line: -        try {
+>, <Line: -            OWLAPISimpleSAXParser saxParser = new OWLAPISimpleSAXParser();
+>, <Line: -            saxParser.setPreserveWhitespace(true);
+>, <Line: -            saxParser.setListener(new TriXSAXHandler());
+>, <Line: -            if (inputStreamOrReader instanceof InputStream) {
+>, <Line: -                saxParser.parse((InputStream) inputStreamOrReader);
+>, <Line: -            } else {
+>, <Line: -                saxParser.parse((Reader) inputStreamOrReader);
+>, <Line: -            }
+>, <Line: -        } catch (SAXParseException e) {
+>, <Line: -            Exception wrappedExc = e.getException();
+>, <Line: -            if (wrappedExc == null) {
+>, <Line: -                reportFatalError(e, e.getLineNumber(), e.getColumnNumber());
+>, <Line: -            } else {
+>, <Line: -                reportFatalError(wrappedExc, e.getLineNumber(), e.getColumnNumber());
+>, <Line: -            }
+>, <Line: -        } catch (SAXException e) {
+>, <Line: -            Exception wrappedExc = e.getException();
+>, <Line: -            if (wrappedExc == null) {
+>, <Line: -                reportFatalError(e);
+>, <Line: -            } else if (wrappedExc instanceof RDFParseException) {
+>, <Line: -                throw (RDFParseException) wrappedExc;
+>, <Line: -            } else if (wrappedExc instanceof RDFHandlerException) {
+>, <Line: -                throw (RDFHandlerException) wrappedExc;
+>, <Line: -            } else {
+>, <Line: -                reportFatalError(wrappedExc);
+>, <Line: -            }
+>, <Line: -        } finally {
+>, <Line: -            clear();
+>, <Line: -        }
+>, <Line: -        if (rdfHandler != null) {
+>, <Line: -            rdfHandler.endRDF();
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    /*----------------------------*
+>, <Line: -     * Inner class TriXSAXHandler *
+>, <Line: -     *----------------------------*/
+>, <Line: -    private class TriXSAXHandler extends SimpleSAXAdapter {
+>, <Line: -        @Nullable private Resource currentContext;
+>, <Line: -        private boolean parsingContext;
+>, <Line: -        private List<Value> valueList;
+>, <Line: -        public TriXSAXHandler() {
+>, <Line: -            currentContext = null;
+>, <Line: -            valueList = new ArrayList<>(3);
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public void startTag(@Nullable String tagName, @Nullable Map<String, String> atts, @Nullable String text)
+>, <Line: -            throws SAXException {
+>, <Line: -            try {
+>, <Line: -                switch (verifyNotNull(tagName, "tagName cannot be null")) {
+>, <Line: -                    case URI_TAG:
+>, <Line: -                        valueList.add(createURI(text));
+>, <Line: -                        break;
+>, <Line: -                    case BNODE_TAG:
+>, <Line: -                        valueList.add(createBNode(text));
+>, <Line: -                        break;
+>, <Line: -                    case PLAIN_LITERAL_TAG:
+>, <Line: -                        String lang = verifyNotNull(atts, "attributes cannot be null").get(LANGUAGE_ATT);
+>, <Line: -                        valueList.add(createLiteral(text, lang, null));
+>, <Line: -                        break;
+>, <Line: -                    case TYPED_LITERAL_TAG:
+>, <Line: -                        String datatype = verifyNotNull(atts, "attributes cannot be null").get(DATATYPE_ATT);
+>, <Line: -                        if (datatype == null) {
+>, <Line: -                            reportError(DATATYPE_ATT + " attribute missing for typed literal",
+>, <Line: -                                TriXParserSettings.FAIL_ON_TRIX_MISSING_DATATYPE);
+>, <Line: -                            valueList.add(createLiteral(text, null, null));
+>, <Line: -                        } else {
+>, <Line: -                            IRI dtURI = createURI(datatype);
+>, <Line: -                            valueList.add(createLiteral(text, null, dtURI));
+>, <Line: -                        }
+>, <Line: -                        break;
+>, <Line: -                    case TRIPLE_TAG:
+>, <Line: -                        if (parsingContext) {
+>, <Line: -                            try {
+>, <Line: -                                // First triple in a context, valueList can
+>, <Line: -                                // contain
+>, <Line: -                                // context information
+>, <Line: -                                if (valueList.size() > 1) {
+>, <Line: -                                    reportError("At most 1 resource can be specified for the context",
+>, <Line: -                                        TriXParserSettings.FAIL_ON_TRIX_INVALID_STATEMENT);
+>, <Line: -                                } else if (valueList.size() == 1) {
+>, <Line: -                                    try {
+>, <Line: -                                        currentContext = (Resource) valueList.get(0);
+>, <Line: -                                    } catch (ClassCastException e) {
+>, <Line: -                                        reportError("Context identifier should be a URI or blank node",
+>, <Line: -                                            TriXParserSettings.FAIL_ON_TRIX_INVALID_STATEMENT);
+>, <Line: -                                    }
+>, <Line: -                                }
+>, <Line: -                            } finally {
+>, <Line: -                                parsingContext = false;
+>, <Line: -                                valueList.clear();
+>, <Line: -                            }
+>, <Line: -                        }
+>, <Line: -                        break;
+>, <Line: -                    case CONTEXT_TAG:
+>, <Line: -                        parsingContext = true;
+>, <Line: -                        break;
+>, <Line: -                    default:
+>, <Line: -                        break;
+>, <Line: -                }
+>, <Line: -            } catch (RDFParseException e) {
+>, <Line: -                throw new SAXException(e);
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public void endTag(@Nullable String tagName) throws SAXException {
+>, <Line: -            try {
+>, <Line: -                if (TRIPLE_TAG.equals(tagName)) {
+>, <Line: -                    reportStatement();
+>, <Line: -                } else if (CONTEXT_TAG.equals(tagName)) {
+>, <Line: -                    currentContext = null;
+>, <Line: -                }
+>, <Line: -            } catch (RDFParseException e) {
+>, <Line: -                throw new SAXException(e);
+>, <Line: -            } catch (RDFHandlerException e) {
+>, <Line: -                throw new SAXException(e);
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        private void reportStatement() throws RDFParseException, RDFHandlerException {
+>, <Line: -            try {
+>, <Line: -                if (valueList.size() != 3) {
+>, <Line: -                    reportError("exactly 3 values are required for a triple",
+>, <Line: -                        TriXParserSettings.FAIL_ON_TRIX_INVALID_STATEMENT);
+>, <Line: -                    return;
+>, <Line: -                }
+>, <Line: -                Resource subj;
+>, <Line: -                IRI pred;
+>, <Line: -                Value obj;
+>, <Line: -                try {
+>, <Line: -                    subj = (Resource) valueList.get(0);
+>, <Line: -                } catch (ClassCastException e) {
+>, <Line: -                    reportError("First value for a triple should be a URI or blank node",
+>, <Line: -                        TriXParserSettings.FAIL_ON_TRIX_INVALID_STATEMENT);
+>, <Line: -                    return;
+>, <Line: -                }
+>, <Line: -                try {
+>, <Line: -                    pred = (IRI) valueList.get(1);
+>, <Line: -                } catch (ClassCastException e) {
+>, <Line: -                    reportError("Second value for a triple should be a URI",
+>, <Line: -                        TriXParserSettings.FAIL_ON_TRIX_INVALID_STATEMENT);
+>, <Line: -                    return;
+>, <Line: -                }
+>, <Line: -                obj = valueList.get(2);
+>, <Line: -                Statement st = createStatement(subj, pred, obj, currentContext);
+>, <Line: -                if (rdfHandler != null) {
+>, <Line: -                    rdfHandler.handleStatement(st);
+>, <Line: -                }
+>, <Line: -            } finally {
+>, <Line: -                valueList.clear();
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -    } // end inner class TriXSAXHandler
+>, <Line: -}
+>]

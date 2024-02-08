@@ -1,0 +1,11 @@
+[<Line: +import com.hubspot.baragon.config.GraphiteConfiguration;
+>, <Line: +  @JsonProperty("graphite")
+>, <Line: +  private GraphiteConfiguration graphiteConfiguration = new GraphiteConfiguration();
+>, <Line: +  public GraphiteConfiguration getGraphiteConfiguration() {
+>, <Line: +    return graphiteConfiguration;
+>, <Line: +  }
+>, <Line: +  public void setGraphiteConfiguration(GraphiteConfiguration graphiteConfiguration) {
+>, <Line: +    this.graphiteConfiguration = graphiteConfiguration;
+>, <Line: +  }
+>]
+[]

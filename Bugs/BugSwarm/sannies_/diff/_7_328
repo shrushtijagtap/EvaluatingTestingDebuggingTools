@@ -1,0 +1,36 @@
+[<Line: +package org.mp4parser.boxes.threegpp.ts26244;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import org.mp4parser.tools.Utf8;
+>, <Line: +    public String getLanguage() {
+>, <Line: +        return language;
+>, <Line: +    public void setRatingEntity(String ratingEntity) {
+>, <Line: +        this.ratingEntity = ratingEntity;
+>, <Line: +    }
+>, <Line: +    public void setRatingCriteria(String ratingCriteria) {
+>, <Line: +        this.ratingCriteria = ratingCriteria;
+>, <Line: +    }
+>, <Line: +    public void setRatingInfo(String ratingInfo) {
+>, <Line: +        this.ratingInfo = ratingInfo;
+>, <Line: +    }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.Utf8;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -    public void setRatingEntity(String ratingEntity) {
+>, <Line: -        this.ratingEntity = ratingEntity;
+>, <Line: -    }
+>, <Line: -    public void setRatingCriteria(String ratingCriteria) {
+>, <Line: -        this.ratingCriteria = ratingCriteria;
+>, <Line: -    public void setRatingInfo(String ratingInfo) {
+>, <Line: -        this.ratingInfo = ratingInfo;
+>, <Line: -    }
+>, <Line: -    public String getLanguage() {
+>, <Line: -        return language;
+>, <Line: -    }
+>]

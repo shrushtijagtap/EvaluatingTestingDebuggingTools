@@ -1,0 +1,59 @@
+[<Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import com.google.common.eventbus.Subscribe;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +	private PutCommand m_command;
+>, <Line: +	private FakeDatastore m_datastore;
+>, <Line: +	private EventBus m_eventBus;
+>, <Line: +		m_eventBus = new EventBus();
+>, <Line: +		m_datastore = new FakeDatastore();
+>, <Line: +		m_eventBus.register(m_datastore);
+>, <Line: +		m_command = new PutCommand(m_eventBus, "test", new LongDataPointFactoryImpl(),
+>, <Line: +		m_command.execute(new FakeChannel(), new String[]{"telnet", "MetricName", "12345678999", "789", "foo=bar", "fum=barfum"});
+>, <Line: +		assertThat(m_datastore.getSet().getName(), equalTo("MetricName"));
+>, <Line: +		assertThat(m_datastore.getSet().getTags().size(), equalTo(2));
+>, <Line: +		assertThat(m_datastore.getSet().getTags().get("foo"), equalTo("bar"));
+>, <Line: +		assertThat(m_datastore.getSet().getTags().get("fum"), equalTo("barfum"));
+>, <Line: +		assertThat(m_datastore.getSet().getDataPoints().get(0).getTimestamp(), equalTo(12345678999L));
+>, <Line: +		assertThat(m_datastore.getSet().getDataPoints().get(0).getLongValue(), equalTo(789L));
+>, <Line: +			m_command.execute(new FakeChannel(), new String[]{"telnet", "", "12345678999", "789", "foo=bar", "fum=barfum"});
+>, <Line: +		m_command.execute(new FakeChannel(), new String[]{"telnet", "你好", "12345678999", "789", "foo=bar", "fum=barfum"});
+>, <Line: +			m_command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "=barfum"});
+>, <Line: +			m_command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum:fi=barfum"});
+>, <Line: +			m_command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum="});
+>, <Line: +			m_command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum=bar:fum"});
+>, <Line: +			m_command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum-barfum"});
+>, <Line: +		@Subscribe
+>, <Line: +		public void putDataPoint(DataPointEvent event) throws DatastoreException
+>, <Line: +				set = new DataPointSet(event.getMetricName(), event.getTags(), Collections.EMPTY_LIST);
+>, <Line: +			set.addDataPoint(event.getDataPoint());
+>]
+[<Line: -import com.google.common.collect.ImmutableSortedMap;
+>, <Line: -import org.kairosdb.core.DataPoint;
+>, <Line: -import org.kairosdb.core.DataPointListener;
+>, <Line: -	private PutCommand command;
+>, <Line: -	private FakeDatastore datastore;
+>, <Line: -		datastore = new FakeDatastore();
+>, <Line: -		KairosDatastore kairosDatastore = new KairosDatastore(datastore, new QueryQueuingManager(1, "test"),
+>, <Line: -				Collections.<DataPointListener>emptyList(), new TestDataPointFactory(), false);
+>, <Line: -		command = new PutCommand(kairosDatastore, "test", new LongDataPointFactoryImpl(),
+>, <Line: -		command.execute(new FakeChannel(), new String[]{"telnet", "MetricName", "12345678999", "789", "foo=bar", "fum=barfum"});
+>, <Line: -		assertThat(datastore.getSet().getName(), equalTo("MetricName"));
+>, <Line: -		assertThat(datastore.getSet().getTags().size(), equalTo(2));
+>, <Line: -		assertThat(datastore.getSet().getTags().get("foo"), equalTo("bar"));
+>, <Line: -		assertThat(datastore.getSet().getTags().get("fum"), equalTo("barfum"));
+>, <Line: -		assertThat(datastore.getSet().getDataPoints().get(0).getTimestamp(), equalTo(12345678999L));
+>, <Line: -		assertThat(datastore.getSet().getDataPoints().get(0).getLongValue(), equalTo(789L));
+>, <Line: -			command.execute(new FakeChannel(), new String[]{"telnet", "", "12345678999", "789", "foo=bar", "fum=barfum"});
+>, <Line: -		command.execute(new FakeChannel(), new String[]{"telnet", "你好", "12345678999", "789", "foo=bar", "fum=barfum"});
+>, <Line: -			command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "=barfum"});
+>, <Line: -			command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum:fi=barfum"});
+>, <Line: -			command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum="});
+>, <Line: -			command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum=bar:fum"});
+>, <Line: -			command.execute(new FakeChannel(), new String[]{"telnet", "metricName", "12345678999", "789", "foo=bar", "fum-barfum"});
+>, <Line: -		@Override
+>, <Line: -		public void putDataPoint(String metricName,
+>, <Line: -				ImmutableSortedMap<String, String> tags,
+>, <Line: -				DataPoint dataPoint, int ttl) throws DatastoreException
+>, <Line: -				set = new DataPointSet(metricName, tags, Collections.EMPTY_LIST);
+>, <Line: -			set.addDataPoint(dataPoint);
+>]

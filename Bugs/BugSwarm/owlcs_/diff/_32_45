@@ -1,0 +1,4 @@
+[<Line: +                .setCheckStructure(format.getParameter(OBODocumentFormat.VALIDATION, Boolean.TRUE).booleanValue());
+>]
+[<Line: -                .setCheckStructure((Boolean) format.getParameter(OBODocumentFormat.VALIDATION, Boolean.TRUE));
+>]

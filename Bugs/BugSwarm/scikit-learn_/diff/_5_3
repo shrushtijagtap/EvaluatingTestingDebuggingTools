@@ -1,0 +1,23 @@
+[<Line: +        X_sofar = X[:(i + 1), :]
+>, <Line: +def test_robust_scaler_transform_one_row_csr():
+>, <Line: +    # Check RobustScaler on transforming csr matrix with one row
+>, <Line: +    rng = np.random.RandomState(0)
+>, <Line: +    X = rng.randn(4, 5)
+>, <Line: +    single_row = np.array([[0.1, 1., 2., 0., -1.]])
+>, <Line: +    scaler = RobustScaler(with_centering=False)
+>, <Line: +    scaler = scaler.fit(X)
+>, <Line: +    row_trans = scaler.transform(sparse.csr_matrix(single_row))
+>, <Line: +    row_expected = single_row / scaler.scale_
+>, <Line: +    assert_array_almost_equal(row_trans.toarray(), row_expected)
+>, <Line: +    row_scaled_back = scaler.inverse_transform(row_trans)
+>, <Line: +    assert_array_almost_equal(single_row, row_scaled_back.toarray())
+>, <Line: +    # Check MaxAbsScaler on toy data with a large negative value
+>, <Line: +    # Check MaxAbsScaler on transforming csr matrix with one row
+>, <Line: +        np.array([[0.,  0.,  0.,  0.,  1.,  0.,  0.]]))
+>]
+[<Line: -        X_sofar = X[:(i+1), :]
+>, <Line: -    """Check MaxAbsScaler on toy data with a large negative value"""
+>, <Line: -    """Check MaxAbsScaler on transforming csr matrix with one row"""
+>, <Line: -        np.array([[0.,  0.,  0.,  0.,  1.,  0.,  0.]])
+>, <Line: -        )
+>]

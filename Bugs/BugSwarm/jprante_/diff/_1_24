@@ -1,0 +1,4 @@
+[<Line: +import org.xbib.metrics.ElasticsearchIngestMetric;
+>]
+[<Line: -import org.xbib.elasticsearch.common.metrics.ElasticsearchIngestMetric;
+>]

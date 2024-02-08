@@ -1,0 +1,54 @@
+[<Line: +	public static final Array T_ARRAY_ANY = Array(T_ANY,false);
+>, <Line: +	public static final Type.Array Array(Type element, boolean nonEmpty) {
+>, <Line: +		return (Type.Array) construct(K_LIST, nonEmpty, element);
+>, <Line: +	public interface EffectiveArray {
+>, <Line: +		public EffectiveArray update(Type key, Type Value);
+>, <Line: +	public static final class Array extends Compound implements EffectiveArray {
+>, <Line: +		private Array(Automaton automaton) {
+>, <Line: +		public EffectiveArray update(Type key, Type value) {
+>, <Line: +			return Type.Array(Type.Union(value, element()), nonEmpty());
+>, <Line: +	public static final class UnionOfArrays extends Union implements
+>, <Line: +			EffectiveArray {
+>, <Line: +		private UnionOfArrays(Automaton automaton) {
+>, <Line: +			HashSet<Type.Array> bounds = (HashSet) bounds();
+>, <Line: +			for(Type.Array bound : bounds) {
+>, <Line: +		public EffectiveArray update(Type key, Type type) {
+>, <Line: +			HashSet<Type.Array> bounds = (HashSet) bounds();
+>, <Line: +			for(Type.Array bound : bounds) {
+>, <Line: +			return (EffectiveArray) Type.Union(nbounds);
+>, <Line: +			middle = toString(state.children[0], visited, headers, automaton)
+>, <Line: +					+ "[]";
+>, <Line: +			type = new Array(automaton);
+>, <Line: +				boolean isList = bound instanceof Array;
+>, <Line: +				type = new UnionOfArrays(automaton);
+>]
+[<Line: -	public static final List T_LIST_ANY = List(T_ANY,false);
+>, <Line: -	public static final Type.List List(Type element, boolean nonEmpty) {
+>, <Line: -		return (Type.List) construct(K_LIST, nonEmpty, element);
+>, <Line: -	public interface EffectiveList {
+>, <Line: -		public EffectiveList update(Type key, Type Value);
+>, <Line: -	public static final class List extends Compound implements EffectiveList {
+>, <Line: -		private List(Automaton automaton) {
+>, <Line: -		public EffectiveList update(Type key, Type value) {
+>, <Line: -			return Type.List(Type.Union(value, element()), nonEmpty());
+>, <Line: -	public static final class UnionOfLists extends Union implements
+>, <Line: -			EffectiveList {
+>, <Line: -		private UnionOfLists(Automaton automaton) {
+>, <Line: -			HashSet<Type.List> bounds = (HashSet) bounds();
+>, <Line: -			for(Type.List bound : bounds) {
+>, <Line: -		public EffectiveList update(Type key, Type type) {
+>, <Line: -			HashSet<Type.List> bounds = (HashSet) bounds();
+>, <Line: -			for(Type.List bound : bounds) {
+>, <Line: -			return (EffectiveList) Type.Union(nbounds);
+>, <Line: -			boolean nonEmpty = (Boolean) state.data;
+>, <Line: -			if(nonEmpty) {
+>, <Line: -				middle = "[" + toString(state.children[0], visited, headers, automaton)
+>, <Line: -						+ "+]";
+>, <Line: -			} else {
+>, <Line: -				middle = "[" + toString(state.children[0], visited, headers, automaton)
+>, <Line: -						+ "]";
+>, <Line: -			}
+>, <Line: -			type = new List(automaton);
+>, <Line: -				boolean isList = bound instanceof List;
+>, <Line: -				type = new UnionOfLists(automaton);
+>]

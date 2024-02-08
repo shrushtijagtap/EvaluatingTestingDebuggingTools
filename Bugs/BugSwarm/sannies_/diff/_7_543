@@ -1,0 +1,94 @@
+[<Line: +package org.mp4parser.muxer.tracks.webvtt;
+>, <Line: +import org.mp4parser.Box;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDescriptionBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part30.WebVTTConfigurationBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part30.WebVTTSampleEntry;
+>, <Line: +import org.mp4parser.boxes.iso14496.part30.WebVTTSourceLabelBox;
+>, <Line: +import org.mp4parser.muxer.AbstractTrack;
+>, <Line: +import org.mp4parser.muxer.Sample;
+>, <Line: +import org.mp4parser.muxer.TrackMetaData;
+>, <Line: +import org.mp4parser.muxer.tracks.webvtt.sampleboxes.CuePayloadBox;
+>, <Line: +import org.mp4parser.muxer.tracks.webvtt.sampleboxes.CueSettingsBox;
+>, <Line: +import org.mp4parser.muxer.tracks.webvtt.sampleboxes.VTTCueBox;
+>, <Line: +import org.mp4parser.muxer.tracks.webvtt.sampleboxes.VTTEmptyCueBox;
+>, <Line: +import org.mp4parser.tools.ByteBufferByteChannel;
+>, <Line: +import org.mp4parser.tools.Mp4Arrays;
+>, <Line: +import static org.mp4parser.tools.CastUtils.l2i;
+>, <Line: +public class WebVttTrack extends AbstractTrack {
+>, <Line: +    TrackMetaData trackMetaData = new TrackMetaData();
+>, <Line: +    SampleDescriptionBox stsd;
+>, <Line: +    private static class BoxBearingSample implements Sample {
+>, <Line: +        List<Box> boxes;
+>, <Line: +        public BoxBearingSample(List<Box> boxes) {
+>, <Line: +            this.boxes = boxes;
+>, <Line: +        }
+>, <Line: +        public void writeTo(WritableByteChannel channel) throws java.io.IOException {
+>, <Line: +            for (Box box : boxes) {
+>, <Line: +                box.getBox(channel);
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        public long getSize() {
+>, <Line: +            long l = 0;
+>, <Line: +            for (Box box : boxes) {
+>, <Line: +                l += box.getSize();
+>, <Line: +            }
+>, <Line: +            return l;
+>, <Line: +        }
+>, <Line: +        public ByteBuffer asByteBuffer() {
+>, <Line: +            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+>, <Line: +            try {
+>, <Line: +                writeTo(Channels.newChannel(baos));
+>, <Line: +            } catch (java.io.IOException e) {
+>, <Line: +                throw new RuntimeException(e);
+>, <Line: +            }
+>, <Line: +            return ByteBuffer.wrap(baos.toByteArray());
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks.webvtt;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import com.coremedia.iso.boxes.SampleDescriptionBox;
+>, <Line: -import com.googlecode.mp4parser.authoring.AbstractTrack;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.TrackMetaData;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.webvtt.sampleboxes.CuePayloadBox;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.webvtt.sampleboxes.CueSettingsBox;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.webvtt.sampleboxes.VTTCueBox;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.webvtt.sampleboxes.VTTEmptyCueBox;
+>, <Line: -import com.googlecode.mp4parser.util.ByteBufferByteChannel;
+>, <Line: -import com.googlecode.mp4parser.util.Mp4Arrays;
+>, <Line: -import com.mp4parser.iso14496.part30.WebVTTConfigurationBox;
+>, <Line: -import com.mp4parser.iso14496.part30.WebVTTSampleEntry;
+>, <Line: -import com.mp4parser.iso14496.part30.WebVTTSourceLabelBox;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: -public class WebVttTrack extends AbstractTrack {
+>, <Line: -    TrackMetaData trackMetaData = new TrackMetaData();
+>, <Line: -    SampleDescriptionBox stsd;
+>, <Line: -    private static class BoxBearingSample implements Sample {
+>, <Line: -        List<Box> boxes;
+>, <Line: -        public BoxBearingSample(List<Box> boxes) {
+>, <Line: -            this.boxes = boxes;
+>, <Line: -        }
+>, <Line: -        public void writeTo(WritableByteChannel channel) throws java.io.IOException {
+>, <Line: -            for (Box box : boxes) {
+>, <Line: -                box.getBox(channel);
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        public long getSize() {
+>, <Line: -            long l = 0;
+>, <Line: -            for (Box box : boxes) {
+>, <Line: -                l += box.getSize();
+>, <Line: -            }
+>, <Line: -            return l;
+>, <Line: -        }
+>, <Line: -        public ByteBuffer asByteBuffer() {
+>, <Line: -            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+>, <Line: -            try {
+>, <Line: -                writeTo(Channels.newChannel(baos));
+>, <Line: -            } catch (java.io.IOException e) {
+>, <Line: -                throw new RuntimeException(e);
+>, <Line: -            }
+>, <Line: -            return ByteBuffer.wrap(baos.toByteArray());
+>, <Line: -        }
+>, <Line: -    }
+>]

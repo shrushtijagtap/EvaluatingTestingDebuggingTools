@@ -1,0 +1,42 @@
+[<Line: +import backend.interfaces.IModel;
+>, <Line: +import backend.resource.TurboIssue;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.HashSet;
+>, <Line: +	private final IModel model;
+>, <Line: +	public IssuePanel(UI ui, IModel model, ColumnControl parentColumnControl, int columnIndex) {
+>, <Line: +		super(ui, model, parentColumnControl, columnIndex);
+>, <Line: +		listView.setCellFactory(list -> new IssuePanelCell(model, IssuePanel.this, columnIndex, issuesWithNewComments));
+>, <Line: +			ui.triggerEvent(new IssueSelectedEvent(issue.getRepoId(), issue.getId(), columnIndex));
+>, <Line: +					ui.logic.refresh();
+>]
+[<Line: -import java.lang.ref.WeakReference;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import java.util.HashSet;
+>, <Line: -import javafx.scene.control.ListCell;
+>, <Line: -import javafx.scene.control.ListView;
+>, <Line: -import javafx.stage.Stage;
+>, <Line: -import javafx.util.Callback;
+>, <Line: -import model.Model;
+>, <Line: -import model.TurboIssue;
+>, <Line: -import service.ServiceManager;
+>, <Line: -import command.TurboCommandExecutor;
+>, <Line: -	private final Model model;
+>, <Line: -	public IssuePanel(UI ui, Stage mainStage, Model model, ColumnControl parentColumnControl, int columnIndex, TurboCommandExecutor dragAndDropExecutor) {
+>, <Line: -		super(ui, mainStage, model, parentColumnControl, columnIndex, dragAndDropExecutor);
+>, <Line: -	@Override
+>, <Line: -	public void deselect() {
+>, <Line: -	}
+>, <Line: -		WeakReference<IssuePanel> that = new WeakReference<IssuePanel>(this);
+>, <Line: -		listView.setCellFactory(new Callback<ListView<TurboIssue>, ListCell<TurboIssue>>() {
+>, <Line: -			@Override
+>, <Line: -			public ListCell<TurboIssue> call(ListView<TurboIssue> list) {
+>, <Line: -				if(that.get() != null){
+>, <Line: -					return new IssuePanelCell(ui, model, that.get(), columnIndex, issuesWithNewComments);
+>, <Line: -				} else{
+>, <Line: -					return null;
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -		});
+>, <Line: -			ui.triggerEvent(new IssueSelectedEvent(issue.getId(), columnIndex));
+>, <Line: -					ServiceManager.getInstance().updateModelNow();
+>]

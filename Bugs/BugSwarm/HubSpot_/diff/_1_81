@@ -1,0 +1,32 @@
+[<Line: +package com.hubspot.baragon.service;
+>, <Line: +import com.hubspot.baragon.BaragonServiceTestModule;
+>, <Line: +import com.hubspot.baragon.exceptions.InvalidRequestActionException;
+>, <Line: +import com.hubspot.baragon.exceptions.InvalidUpstreamsException;
+>, <Line: +import com.hubspot.baragon.service.managers.RequestManager;
+>, <Line: +import com.hubspot.baragon.service.worker.BaragonRequestWorker;
+>, <Line: +import org.jukito.JukitoModule;
+>, <Line: +import org.jukito.JukitoRunner;
+>, <Line: +import org.junit.After;
+>, <Line: +import org.junit.Before;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.junit.runner.RunWith;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +      install(new BaragonServiceTestModule());
+>]
+[<Line: -package com.hubspot.baragon;
+>, <Line: -import com.hubspot.baragon.exceptions.InvalidRequestActionException;
+>, <Line: -import com.hubspot.baragon.exceptions.InvalidUpstreamsException;
+>, <Line: -import org.jukito.JukitoModule;
+>, <Line: -import org.jukito.JukitoRunner;
+>, <Line: -import org.junit.After;
+>, <Line: -import org.junit.Before;
+>, <Line: -import org.junit.Test;
+>, <Line: -import org.junit.runner.RunWith;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -import com.hubspot.baragon.managers.RequestManager;
+>, <Line: -import com.hubspot.baragon.worker.BaragonRequestWorker;
+>, <Line: -import static org.junit.Assert.assertFalse;
+>, <Line: -      install(new BaragonDataTestModule());
+>]

@@ -1,0 +1,123 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_vcf;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.AbstractDBAnnotationDriver;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.AnnotatingRecord;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.GenotypeMatch;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.JannovarVarDBException;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.VCFHeaderExtender;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.VCFReaderVariantProvider;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContextBuilder;
+>, <Line: +import htsjdk.variant.vcf.VCFHeaderLineCount;
+>, <Line: +import htsjdk.variant.vcf.VCFInfoHeaderLine;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.Map.Entry;
+>, <Line: +/**
+>, <Line: + * Annotation driver class for annotations using generic VCF data
+>, <Line: + *
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenericVCFAnnotationDriver extends AbstractDBAnnotationDriver<VariantContext> {
+>, <Line: +	private final GenericVCFAnnotationOptions genericVcfOptions;
+>, <Line: +	private GenericVCFHeaderExtender genericVcfHeaderExtender;
+>, <Line: +	public GenericVCFAnnotationDriver(String vcfPath, String fastaPath, GenericVCFAnnotationOptions options)
+>, <Line: +			throws JannovarVarDBException {
+>, <Line: +		super(new VCFReaderVariantProvider(options.getPathVcfFile()), fastaPath, options,
+>, <Line: +				new GenericVCFVariantContextToRecordConverter());
+>, <Line: +		this.genericVcfOptions = options;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	protected HashMap<Integer, AnnotatingRecord<VariantContext>> pickAnnotatingDBRecords(
+>, <Line: +			HashMap<Integer, ArrayList<GenotypeMatch>> annotatingRecords,
+>, <Line: +			HashMap<GenotypeMatch, AnnotatingRecord<VariantContext>> matchToRecord, boolean isMatch) {
+>, <Line: +		// Pick annotation for each alternative allele.
+>, <Line: +		//
+>, <Line: +		// Note that no smart allele picking has been implemented. Rather, the one from the first
+>, <Line: +		// record is returned. In case of {@code !isMatch} (overlaps) and there is a match, this
+>, <Line: +		// will be the first and thus used for annotation.
+>, <Line: +		//
+>, <Line: +		// TODO(holtgrewe): Implement better accumulation strategy? compare to handling TSV
+>, <Line: +		HashMap<Integer, AnnotatingRecord<VariantContext>> annotatingRecord = new HashMap<>();
+>, <Line: +		for (Entry<Integer, ArrayList<GenotypeMatch>> entry : annotatingRecords.entrySet()) {
+>, <Line: +			final int alleleNo = entry.getKey();
+>, <Line: +			for (GenotypeMatch m : entry.getValue()) {
+>, <Line: +				// Select first or match. 
+>, <Line: +				if (!annotatingRecord.containsKey(alleleNo) || m.isMatch()) {
+>, <Line: +					annotatingRecord.put(alleleNo, matchToRecord.get(m));
+>, <Line: +					if (m.isMatch()) { // stop looking forward in case of match
+>, <Line: +						break;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return annotatingRecord;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public VCFHeaderExtender constructVCFHeaderExtender() {
+>, <Line: +		// TODO(holtgrewe): This side-effect is very unclean, this whole module needs tests and
+>, <Line: +		// refactoring
+>, <Line: +		genericVcfHeaderExtender = new GenericVCFHeaderExtender(genericVcfOptions);
+>, <Line: +		return genericVcfHeaderExtender;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	protected VariantContext annotateWithDBRecords(VariantContext vc,
+>, <Line: +			HashMap<Integer, AnnotatingRecord<VariantContext>> matchRecords,
+>, <Line: +			HashMap<Integer, AnnotatingRecord<VariantContext>> overlapRecords) {
+>, <Line: +		VariantContextBuilder builder = new VariantContextBuilder(vc);
+>, <Line: +		// Annotate with records with matching allele
+>, <Line: +		for (String fieldName : genericVcfOptions.getFieldNames()) {
+>, <Line: +			annotate(vc, "", matchRecords, fieldName, builder);
+>, <Line: +		}
+>, <Line: +		// Annotate with records with overlapping positions
+>, <Line: +		if (options.isReportOverlapping() && !options.isReportOverlappingAsMatching()) {
+>, <Line: +			for (String fieldName : genericVcfOptions.getFieldNames()) {
+>, <Line: +				annotate(vc, "OVL_", overlapRecords, fieldName, builder);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return builder.make();
+>, <Line: +	}
+>, <Line: +	private void annotate(VariantContext vc, String infix, HashMap<Integer, AnnotatingRecord<VariantContext>> records,
+>, <Line: +			String fieldName, VariantContextBuilder builder) {
+>, <Line: +		final VCFInfoHeaderLine headerLine = genericVcfHeaderExtender.getFileHeader().getInfoHeaderLine(fieldName);
+>, <Line: +		final VCFHeaderLineCount countType = headerLine.getCountType();
+>, <Line: +		// Note that any all cases are already caught in header extension and cause a
+>, <Line: +		// RuntimeException.
+>, <Line: +		int start = 0;
+>, <Line: +		int end = vc.getNAlleles();
+>, <Line: +		boolean annotatePos = false;
+>, <Line: +		if (countType == VCFHeaderLineCount.R) {
+>, <Line: +			/* nop */
+>, <Line: +		} else if (countType == VCFHeaderLineCount.A) {
+>, <Line: +			start = 1;
+>, <Line: +		} else if (countType == VCFHeaderLineCount.INTEGER) {
+>, <Line: +			assert headerLine.getCount() == 1;
+>, <Line: +			annotatePos = true;
+>, <Line: +		}
+>, <Line: +		final String attrID = options.getVCFIdentifierPrefix() + infix + fieldName;
+>, <Line: +		if (annotatePos) {
+>, <Line: +			for (AnnotatingRecord<VariantContext> record : records.values()) {
+>, <Line: +				if (record.getRecord().hasAttribute(fieldName)) {
+>, <Line: +					builder.attribute(attrID, record.getRecord().getAttribute(fieldName));
+>, <Line: +					return; // done annotating, default is "."
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		} else {
+>, <Line: +			final ArrayList<Object> valueList = new ArrayList<>();
+>, <Line: +			for (int i = start; i < end; ++i) {
+>, <Line: +				int offset = (countType == VCFHeaderLineCount.R) ? 0 : 1;
+>, <Line: +				if (records.containsKey(i) && records.get(i).getRecord().hasAttribute(fieldName)) {
+>, <Line: +					final AnnotatingRecord<VariantContext> annoRecord = records.get(i);
+>, <Line: +					valueList.add(annoRecord.getRecord().getAttributeAsList(fieldName).get(
+>, <Line: +							annoRecord.getAlleleNo() - offset));
+>, <Line: +				} else {
+>, <Line: +					valueList.add(".");
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			if (!valueList.stream().allMatch(s -> ".".equals(s))) {
+>, <Line: +				builder.attribute(attrID, valueList);
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,51 @@
+[<Line: +import net.bytebuddy.utility.CompoundList;
+>, <Line: +import java.lang.reflect.Field;
+>, <Line: +import java.security.ProtectionDomain;
+>, <Line: +import java.util.logging.Logger;
+>, <Line: +import static org.hamcrest.CoreMatchers.notNullValue;
+>, <Line: +import static org.hamcrest.CoreMatchers.nullValue;
+>, <Line: +    @Test
+>, <Line: +    public void testUnsafeDispatcher() throws Exception {
+>, <Line: +        Class<?> unsafe = Class.forName("sun.misc.Unsafe");
+>, <Line: +        Field theUnsafe = unsafe.getDeclaredField("theUnsafe");
+>, <Line: +        theUnsafe.setAccessible(true);
+>, <Line: +        Method defineClass = unsafe.getDeclaredMethod("defineClass",
+>, <Line: +                String.class,
+>, <Line: +                byte[].class,
+>, <Line: +                int.class,
+>, <Line: +                int.class,
+>, <Line: +                ClassLoader.class,
+>, <Line: +                ProtectionDomain.class);
+>, <Line: +        ClassInjector.UsingReflection.Dispatcher dispatcher = new ClassInjector.UsingReflection.Dispatcher.Resolved.UnsafeDispatcher(theUnsafe.get(null),
+>, <Line: +                defineClass);
+>, <Line: +        ClassLoader classLoader = new URLClassLoader(new URL[0], null);
+>, <Line: +        assertThat(dispatcher.findClass(classLoader, Bar.class.getName()), nullValue(Class.class));
+>, <Line: +        Class<?> type = dispatcher.defineClass(classLoader, Bar.class.getName(), ClassFileExtraction.extract(Bar.class), null);
+>, <Line: +        assertThat(dispatcher.findClass(classLoader, Bar.class.getName()), is((Object) type));
+>, <Line: +    }
+>, <Line: +    @Test(expected = UnsupportedOperationException.class)
+>, <Line: +    public void testUnsafeDispatcherGetPackage() throws Exception {
+>, <Line: +        new ClassInjector.UsingReflection.Dispatcher.Resolved.UnsafeDispatcher(null, null).getPackage(null, FOO);
+>, <Line: +    }
+>, <Line: +    @Test(expected = UnsupportedOperationException.class)
+>, <Line: +    public void testUnsafeDispatcherDefinePackage() throws Exception {
+>, <Line: +        new ClassInjector.UsingReflection.Dispatcher.Resolved.UnsafeDispatcher(null, null).definePackage(null, FOO, null, null, null, null, null, null, null);
+>, <Line: +    }
+>, <Line: +        final Iterator<Field> fields = Arrays.asList(String.class.getDeclaredFields()).iterator();
+>, <Line: +        final Iterator<Method> methods = Arrays.asList(String.class.getDeclaredMethods()).iterator();
+>, <Line: +                return methods.next();
+>, <Line: +            }
+>, <Line: +        }).create(new ObjectPropertyAssertion.Creator<Field>() {
+>, <Line: +            @Override
+>, <Line: +            public Field create() {
+>, <Line: +                return fields.next();
+>, <Line: +            }
+>, <Line: +        }).apply();
+>, <Line: +        ObjectPropertyAssertion.of(ClassInjector.UsingReflection.Dispatcher.Resolved.UnsafeDispatcher.class).create(new ObjectPropertyAssertion.Creator<Method>() {
+>, <Line: +            @Override
+>, <Line: +            public Method create() {
+>, <Line: +                return methods.next();
+>]
+[<Line: -        final Iterator<Method> iterator = Arrays.asList(Object.class.getDeclaredMethods()).iterator();
+>, <Line: -                return iterator.next();
+>]

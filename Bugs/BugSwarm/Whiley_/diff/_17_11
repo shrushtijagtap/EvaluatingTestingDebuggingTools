@@ -1,0 +1,11 @@
+[<Line: +term Array[Expr...]
+>, <Line: +reduce LengthOf(Array[Expr... xs]):
+>, <Line: +    => Num((real) |xs|)
+>, <Line: +reduce IndexOf[Array[Expr... xs], Num(real i)]:
+>, <Line: +    => let j = num i
+>, <Line: +       in xs[j], if j >= 0 && j < |xs|
+>, <Line: +define Value as Array[Value...] | ...
+>]
+[<Line: -term Array{[Expr,Expr]...}
+>, <Line: -define Value as Array{[Value,Value]...} | ...
+>]

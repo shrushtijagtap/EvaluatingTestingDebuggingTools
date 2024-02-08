@@ -1,0 +1,12 @@
+[<Line: +package org.mp4parser.boxes.sampleentry;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.ParsableBox;
+>, <Line: +/**
+>, <Line: + * Created by sannies on 30.05.13.
+>, <Line: + */
+>, <Line: +public interface SampleEntry extends ParsableBox, Container {
+>, <Line: +    int getDataReferenceIndex();
+>, <Line: +    void setDataReferenceIndex(int dataReferenceIndex);
+>, <Line: +}
+>]
+[]

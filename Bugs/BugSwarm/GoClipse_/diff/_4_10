@@ -1,0 +1,7 @@
+[<Line: +import melnorme.lang.ide.core.text.TextSourceUtils;
+>, <Line: +	public boolean parenthesesAsBlocks();
+>, <Line: +			return TextSourceUtils.getNSpaces(getIndentSize());
+>]
+[<Line: -	boolean closeBlocks();
+>, <Line: -			return AutoEditUtils.getNSpaces(getIndentSize());
+>]

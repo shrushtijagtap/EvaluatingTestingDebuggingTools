@@ -1,0 +1,90 @@
+[<Line: +import java.util.function.Predicate;
+>, <Line: +        LoggerFactory.getLogger(SyntacticLocalityModuleExtractor.class);
+>, <Line: +        ModuleType moduleType) {
+>, <Line: +        this(man, axs, moduleType, false);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Creates a new module extractor for a subset of a given ontology, its manager, and a specified
+>, <Line: +     * type of locality.
+>, <Line: +     *
+>, <Line: +     * @param man the manager for the associated ontology
+>, <Line: +     * @param axs the subset of the ontology as a set of axioms
+>, <Line: +     * @param moduleType the type of module this extractor will construct
+>, <Line: +     * @param excludeAssertions true if assertions should be excluded
+>, <Line: +     */
+>, <Line: +    public SyntacticLocalityModuleExtractor(OWLOntologyManager man, Stream<OWLAxiom> axs,
+>, <Line: +        ModuleType moduleType, boolean excludeAssertions) {
+>, <Line: +        Predicate<OWLAxiom> filter =
+>, <Line: +            ax -> excludeAssertions ? !AxiomType.ABoxAxiomTypes.contains(ax.getAxiomType()) : true;
+>, <Line: +        List<OWLAxiom> collect = asList(axs.filter(filter));
+>, <Line: +        ModuleType moduleType) {
+>, <Line: +        LocalityClass localityClass) {
+>, <Line: +        LocalityClass localityClass) {
+>, <Line: +        LOGGER.info(
+>, <Line: +            "\nEnriching with declaration axioms, annotation axioms, same/different individual axioms ...");
+>, <Line: +                asList(ontology.declarationAxioms(entity));
+>, <Line: +                declarationAxioms
+>, <Line: +                    .forEach(a -> LOGGER.info("  Added entity declaration axiom:   {}", a));
+>, <Line: +                List<OWLSameIndividualAxiom> sameIndividualAxioms =
+>, <Line: +                    asList(ontology.sameIndividualAxioms(entity.asOWLNamedIndividual()));
+>, <Line: +                    sameIndividualAxioms
+>, <Line: +                        .forEach(i -> LOGGER.info("  Added same individual axiom:   {}", i));
+>, <Line: +                List<OWLDifferentIndividualsAxiom> differentIndividualAxioms =
+>, <Line: +                    asList(ontology.differentIndividualAxioms(entity.asOWLNamedIndividual()));
+>, <Line: +                    differentIndividualAxioms
+>, <Line: +                        .forEach(a -> LOGGER.info("  Added different individual axiom:   {}", a));
+>, <Line: +            sig);
+>, <Line: +        @Nullable OWLReasoner reasoner, Set<OWLClass> classesInSig) {
+>, <Line: +                superOrSubClasses);
+>, <Line: +        OWLReasoner reasoner, Set<OWLClass> classesInSig, Set<OWLClass> superOrSubClasses) {
+>, <Line: +                suClassesToBeAdded);
+>, <Line: +        Set<OWLClass> classesInSig, Queue<OWLClass> toBeSuClassedNow,
+>, <Line: +        Queue<OWLClass> toBeSuClassedNext, Queue<OWLClass> suClassesToBeAdded) {
+>, <Line: +                .forEach(toBeSuClassedNext::add);
+>, <Line: +        Set<OWLClass> classesInSig, Set<OWLClass> superOrSubClasses) {
+>, <Line: +        @Nullable OWLReasoner reasoner) {
+>, <Line: +        @Nullable OWLReasoner reasoner) {
+>, <Line: +            outputSignature(
+>, <Line: +                "\nExtracting " + localityClass + " module for the following seed signature: ",
+>, <Line: +                enrichedSig);
+>, <Line: +        throws OWLOntologyCreationException {
+>, <Line: +        int subClassLevel, @Nullable OWLReasoner reasoner) throws OWLOntologyCreationException {
+>, <Line: +            iri);
+>]
+[<Line: -                    LoggerFactory.getLogger(SyntacticLocalityModuleExtractor.class);
+>, <Line: -                    ModuleType moduleType) {
+>, <Line: -        List<OWLAxiom> collect = asList(axs);
+>, <Line: -                    ModuleType moduleType) {
+>, <Line: -                    LocalityClass localityClass) {
+>, <Line: -                    LocalityClass localityClass) {
+>, <Line: -        LOGGER.info("\nEnriching with declaration axioms, annotation axioms, same/different individual axioms ...");
+>, <Line: -                            asList(ontology.declarationAxioms(entity));
+>, <Line: -                declarationAxioms.forEach(
+>, <Line: -                                a -> LOGGER.info("  Added entity declaration axiom:   {}", a));
+>, <Line: -                List<OWLSameIndividualAxiom> sameIndividualAxioms = asList(
+>, <Line: -                                ontology.sameIndividualAxioms(entity.asOWLNamedIndividual()));
+>, <Line: -                    sameIndividualAxioms.forEach(
+>, <Line: -                                    i -> LOGGER.info("  Added same individual axiom:   {}", i));
+>, <Line: -                List<OWLDifferentIndividualsAxiom> differentIndividualAxioms = asList(
+>, <Line: -                                ontology.differentIndividualAxioms(entity.asOWLNamedIndividual()));
+>, <Line: -                    differentIndividualAxioms.forEach(a -> LOGGER
+>, <Line: -                                    .info("  Added different individual axiom:   {}", a));
+>, <Line: -                        sig);
+>, <Line: -                    @Nullable OWLReasoner reasoner, Set<OWLClass> classesInSig) {
+>, <Line: -                            superOrSubClasses);
+>, <Line: -                    OWLReasoner reasoner, Set<OWLClass> classesInSig,
+>, <Line: -                    Set<OWLClass> superOrSubClasses) {
+>, <Line: -                            suClassesToBeAdded);
+>, <Line: -                    Set<OWLClass> classesInSig, Queue<OWLClass> toBeSuClassedNow,
+>, <Line: -                    Queue<OWLClass> toBeSuClassedNext, Queue<OWLClass> suClassesToBeAdded) {
+>, <Line: -                            .forEach(toBeSuClassedNext::add);
+>, <Line: -                    Set<OWLClass> classesInSig, Set<OWLClass> superOrSubClasses) {
+>, <Line: -                    @Nullable OWLReasoner reasoner) {
+>, <Line: -                    @Nullable OWLReasoner reasoner) {
+>, <Line: -            outputSignature("\nExtracting " + localityClass
+>, <Line: -                            + " module for the following seed signature: ", enrichedSig);
+>, <Line: -                    throws OWLOntologyCreationException {
+>, <Line: -                    int subClassLevel, @Nullable OWLReasoner reasoner)
+>, <Line: -                    throws OWLOntologyCreationException {
+>, <Line: -                        iri);
+>]

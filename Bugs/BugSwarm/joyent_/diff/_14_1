@@ -1,0 +1,8 @@
+[<Line: +    /**
+>, <Line: +     * Number of times to retry failed requests.
+>, <Line: +     */
+>, <Line: +    private static final int HTTP_RETRIES = 3;
+>, <Line: +        defaultHttpClient.setHttpRequestRetryHandler(new DefaultHttpRequestRetryHandler(HTTP_RETRIES, false));
+>]
+[<Line: -        defaultHttpClient.setHttpRequestRetryHandler(new DefaultHttpRequestRetryHandler(3, false));
+>]

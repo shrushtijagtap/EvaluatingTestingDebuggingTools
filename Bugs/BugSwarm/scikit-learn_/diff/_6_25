@@ -1,0 +1,10 @@
+[<Line: +    k = 0
+>, <Line: +    while k < maxiter:
+>, <Line: +    if warn and k >= maxiter:
+>, <Line: +    return xk, k
+>]
+[<Line: -    k = 1
+>, <Line: -    while k <= maxiter:
+>, <Line: -    if warn and k > maxiter:
+>, <Line: -    return xk
+>]

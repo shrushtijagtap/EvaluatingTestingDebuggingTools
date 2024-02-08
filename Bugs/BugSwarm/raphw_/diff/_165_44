@@ -1,0 +1,12 @@
+[<Line: +        Object instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        Object instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        Object instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        Object instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        Object instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>]
+[<Line: -        Object instance = loaded.getLoaded().newInstance();
+>, <Line: -        Object instance = loaded.getLoaded().newInstance();
+>, <Line: -        Object instance = loaded.getLoaded().newInstance();
+>, <Line: -        Object instance = loaded.getLoaded().newInstance();
+>, <Line: -        Object instance = loaded.getLoaded().newInstance();
+>]

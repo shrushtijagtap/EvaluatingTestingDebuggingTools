@@ -1,0 +1,237 @@
+[<Line: +        accessControlContext = AccessController.getContext();
+>, <Line: +    @SuppressFBWarnings(value = "DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED", justification = "Privilege is explicit user responsibility")
+>, <Line: +        return childFirst
+>, <Line: +                ? new ChildFirst(parent, namedTypeDefinitions, protectionDomain, persistenceHandler, packageDefinitionStrategy)
+>, <Line: +                : new ByteArrayClassLoader(parent, namedTypeDefinitions, protectionDomain, persistenceHandler, packageDefinitionStrategy);
+>, <Line: +        byte[] binaryRepresentation = persistenceHandler.lookup(name, typeDefinitions);
+>, <Line: +        if (binaryRepresentation == null) {
+>, <Line: +            throw new ClassNotFoundException(name);
+>, <Line: +        } else {
+>, <Line: +            return AccessController.doPrivileged(new ClassDefinitionAction(name, binaryRepresentation), accessControlContext);
+>, <Line: +    /**
+>, <Line: +     * An action for defining a located class that is not yet loaded.
+>, <Line: +     */
+>, <Line: +    protected class ClassDefinitionAction implements PrivilegedAction<Class<?>> {
+>, <Line: +        /**
+>, <Line: +         * The binary name of the class to define.
+>, <Line: +         */
+>, <Line: +        private final String name;
+>, <Line: +        /**
+>, <Line: +         * The binary representation of the class to be loaded.
+>, <Line: +         */
+>, <Line: +        private final byte[] binaryRepresentation;
+>, <Line: +        /**
+>, <Line: +         * Creates a new class definition action.
+>, <Line: +         *
+>, <Line: +         * @param name                 The binary name of the class to define.
+>, <Line: +         * @param binaryRepresentation The binary representation of the class to be loaded.
+>, <Line: +         */
+>, <Line: +        protected ClassDefinitionAction(String name, byte[] binaryRepresentation) {
+>, <Line: +            this.name = name;
+>, <Line: +            this.binaryRepresentation = binaryRepresentation;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public Class<?> run() {
+>, <Line: +            int packageIndex = name.lastIndexOf('.');
+>, <Line: +            if (packageIndex != -1) {
+>, <Line: +                String packageName = name.substring(0, packageIndex);
+>, <Line: +                PackageDefinitionStrategy.Definition definition = packageDefinitionStrategy.define(ByteArrayClassLoader.this, packageName, name);
+>, <Line: +                if (definition.isDefined()) {
+>, <Line: +                    Package definedPackage = PACKAGE_LOOKUP_STRATEGY.apply(ByteArrayClassLoader.this, packageName);
+>, <Line: +                    if (definedPackage == null) {
+>, <Line: +                        definePackage(packageName,
+>, <Line: +                                definition.getSpecificationTitle(),
+>, <Line: +                                definition.getSpecificationVersion(),
+>, <Line: +                                definition.getSpecificationVendor(),
+>, <Line: +                                definition.getImplementationTitle(),
+>, <Line: +                                definition.getImplementationVersion(),
+>, <Line: +                                definition.getImplementationVendor(),
+>, <Line: +                                definition.getSealBase());
+>, <Line: +                    } else if (!definition.isCompatibleTo(definedPackage)) {
+>, <Line: +                        throw new SecurityException("Sealing violation for package " + packageName);
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            return defineClass(name, binaryRepresentation, FROM_BEGINNING, binaryRepresentation.length, protectionDomain);
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Returns the outer instance.
+>, <Line: +         *
+>, <Line: +         * @return The outer instance.
+>, <Line: +         */
+>, <Line: +        private ByteArrayClassLoader getOuter() {
+>, <Line: +            return ByteArrayClassLoader.this;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public boolean equals(Object object) {
+>, <Line: +            if (this == object) return true;
+>, <Line: +            if (object == null || getClass() != object.getClass()) return false;
+>, <Line: +            ClassDefinitionAction that = (ClassDefinitionAction) object;
+>, <Line: +            return name.equals(that.name)
+>, <Line: +                    && ByteArrayClassLoader.this.equals(that.getOuter())
+>, <Line: +                    && Arrays.equals(binaryRepresentation, that.binaryRepresentation);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public int hashCode() {
+>, <Line: +            int result = name.hashCode();
+>, <Line: +            result = 31 * result + ByteArrayClassLoader.this.hashCode();
+>, <Line: +            result = 31 * result + Arrays.hashCode(binaryRepresentation);
+>, <Line: +            return result;
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public String toString() {
+>, <Line: +            return "ByteArrayClassLoader.ClassDefinitionAction{" +
+>, <Line: +                    "outer=" + ByteArrayClassLoader.this +
+>, <Line: +                    ", name='" + name + '\'' +
+>, <Line: +                    ", binaryRepresentation=<" + binaryRepresentation.length + " bytes>" +
+>, <Line: +                    '}';
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +            super(parent, typeDefinitions, protectionDomain, persistenceHandler, packageDefinitionStrategy);
+>, <Line: +                    ", accessControlContext=" + accessControlContext +
+>]
+[<Line: -     * @param accessControlContext      The access control context to use for loading classes.
+>, <Line: -                                AccessControlContext accessControlContext,
+>, <Line: -        this.accessControlContext = accessControlContext;
+>, <Line: -     * @param accessControlContext      The access control context to use for loading classes.
+>, <Line: -                                 AccessControlContext accessControlContext,
+>, <Line: -        return AccessController.doPrivileged(new ClassLoaderCreationAction(parent,
+>, <Line: -                namedTypeDefinitions,
+>, <Line: -                protectionDomain,
+>, <Line: -                accessControlContext,
+>, <Line: -                persistenceHandler,
+>, <Line: -                packageDefinitionStrategy,
+>, <Line: -                childFirst), accessControlContext);
+>, <Line: -     * @param accessControlContext      The access control context to use for loading classes.
+>, <Line: -                                                      AccessControlContext accessControlContext,
+>, <Line: -                accessControlContext,
+>, <Line: -        byte[] javaType = persistenceHandler.lookup(name, typeDefinitions);
+>, <Line: -        if (javaType != null) {
+>, <Line: -            int packageIndex = name.lastIndexOf('.');
+>, <Line: -            if (packageIndex != -1) {
+>, <Line: -                String packageName = name.substring(0, packageIndex);
+>, <Line: -                PackageDefinitionStrategy.Definition definition = packageDefinitionStrategy.define(ByteArrayClassLoader.this, packageName, name);
+>, <Line: -                if (definition.isDefined()) {
+>, <Line: -                    Package definedPackage = PACKAGE_LOOKUP_STRATEGY.apply(this, packageName);
+>, <Line: -                    if (definedPackage == null) {
+>, <Line: -                        definePackage(packageName,
+>, <Line: -                                definition.getSpecificationTitle(),
+>, <Line: -                                definition.getSpecificationVersion(),
+>, <Line: -                                definition.getSpecificationVendor(),
+>, <Line: -                                definition.getImplementationTitle(),
+>, <Line: -                                definition.getImplementationVersion(),
+>, <Line: -                                definition.getImplementationVendor(),
+>, <Line: -                                definition.getSealBase());
+>, <Line: -                    } else if (!definition.isCompatibleTo(definedPackage)) {
+>, <Line: -                        throw new SecurityException("Sealing violation for package " + packageName);
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            return defineClass(name, javaType, FROM_BEGINNING, javaType.length, protectionDomain);
+>, <Line: -        throw new ClassNotFoundException(name);
+>, <Line: -         * @param accessControlContext      The access control context to use for loading classes.
+>, <Line: -                          AccessControlContext accessControlContext,
+>, <Line: -            super(parent, typeDefinitions, protectionDomain, accessControlContext, persistenceHandler, packageDefinitionStrategy);
+>, <Line: -                    ", accessControlContext=" + accessControlContext +
+>, <Line: -    /**
+>, <Line: -     * An action for creating a class loader.
+>, <Line: -     */
+>, <Line: -    protected static class ClassLoaderCreationAction implements PrivilegedAction<ClassLoader> {
+>, <Line: -        /**
+>, <Line: -         * The {@link java.lang.ClassLoader} that is the parent of this class loader.
+>, <Line: -         */
+>, <Line: -        private final ClassLoader parent;
+>, <Line: -        /**
+>, <Line: -         * A map of fully qualified class names pointing to their binary representations.
+>, <Line: -         */
+>, <Line: -        private final Map<String, byte[]> typeDefinitions;
+>, <Line: -        /**
+>, <Line: -         * The protection domain to apply where {@code null} references an implicit protection domain.
+>, <Line: -         */
+>, <Line: -        private final ProtectionDomain protectionDomain;
+>, <Line: -        /**
+>, <Line: -         * The access control context to use for loading classes.
+>, <Line: -         */
+>, <Line: -        private final AccessControlContext accessControlContext;
+>, <Line: -        /**
+>, <Line: -         * The persistence handler of this class loader.
+>, <Line: -         */
+>, <Line: -        private final PersistenceHandler persistenceHandler;
+>, <Line: -        /**
+>, <Line: -         * The package definer to be queried for package definitions.
+>, <Line: -         */
+>, <Line: -        private final PackageDefinitionStrategy packageDefinitionStrategy;
+>, <Line: -        /**
+>, <Line: -         * {@code true} if this action should create a child-first class loader.
+>, <Line: -         */
+>, <Line: -        private final boolean childFirst;
+>, <Line: -        /**
+>, <Line: -         * Creates a new class loader creation action.
+>, <Line: -         *
+>, <Line: -         * @param parent                    The {@link java.lang.ClassLoader} that is the parent of this class loader.
+>, <Line: -         * @param typeDefinitions           A map of fully qualified class names pointing to their binary representations.
+>, <Line: -         * @param protectionDomain          The protection domain to apply where {@code null} references an implicit protection domain.
+>, <Line: -         * @param accessControlContext      The access control context to use for loading classes.
+>, <Line: -         * @param persistenceHandler        The persistence handler of this class loader.
+>, <Line: -         * @param packageDefinitionStrategy The package definer to be queried for package definitions.
+>, <Line: -         * @param childFirst                {@code true} if this action should create a child-first class loader.
+>, <Line: -         */
+>, <Line: -        protected ClassLoaderCreationAction(ClassLoader parent,
+>, <Line: -                                            Map<String, byte[]> typeDefinitions,
+>, <Line: -                                            ProtectionDomain protectionDomain,
+>, <Line: -                                            AccessControlContext accessControlContext,
+>, <Line: -                                            PersistenceHandler persistenceHandler,
+>, <Line: -                                            PackageDefinitionStrategy packageDefinitionStrategy,
+>, <Line: -                                            boolean childFirst) {
+>, <Line: -            this.parent = parent;
+>, <Line: -            this.typeDefinitions = typeDefinitions;
+>, <Line: -            this.protectionDomain = protectionDomain;
+>, <Line: -            this.accessControlContext = accessControlContext;
+>, <Line: -            this.persistenceHandler = persistenceHandler;
+>, <Line: -            this.packageDefinitionStrategy = packageDefinitionStrategy;
+>, <Line: -            this.childFirst = childFirst;
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public ClassLoader run() {
+>, <Line: -            return childFirst
+>, <Line: -                    ? new ChildFirst(parent, typeDefinitions, protectionDomain, accessControlContext, persistenceHandler, packageDefinitionStrategy)
+>, <Line: -                    : new ByteArrayClassLoader(parent, typeDefinitions, protectionDomain, accessControlContext, persistenceHandler, packageDefinitionStrategy);
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public boolean equals(Object other) {
+>, <Line: -            if (this == other) return true;
+>, <Line: -            if (other == null || getClass() != other.getClass()) return false;
+>, <Line: -            ClassLoaderCreationAction that = (ClassLoaderCreationAction) other;
+>, <Line: -            return childFirst == that.childFirst
+>, <Line: -                    && parent.equals(that.parent)
+>, <Line: -                    && typeDefinitions.equals(that.typeDefinitions)
+>, <Line: -                    && !(protectionDomain != null ? !protectionDomain.equals(that.protectionDomain) : that.protectionDomain != null)
+>, <Line: -                    && accessControlContext.equals(that.accessControlContext)
+>, <Line: -                    && persistenceHandler == that.persistenceHandler
+>, <Line: -                    && packageDefinitionStrategy.equals(that.packageDefinitionStrategy);
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public int hashCode() {
+>, <Line: -            int result = parent.hashCode();
+>, <Line: -            result = 31 * result + typeDefinitions.hashCode();
+>, <Line: -            result = 31 * result + (protectionDomain != null ? protectionDomain.hashCode() : 0);
+>, <Line: -            result = 31 * result + accessControlContext.hashCode();
+>, <Line: -            result = 31 * result + persistenceHandler.hashCode();
+>, <Line: -            result = 31 * result + packageDefinitionStrategy.hashCode();
+>, <Line: -            result = 31 * result + (childFirst ? 1 : 0);
+>, <Line: -            return result;
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public String toString() {
+>, <Line: -            return "ByteArrayClassLoader.ClassLoaderCreationAction{" +
+>, <Line: -                    "parent=" + parent +
+>, <Line: -                    ", typeDefinitions=" + typeDefinitions +
+>, <Line: -                    ", protectionDomain=" + protectionDomain +
+>, <Line: -                    ", accessControlContext=" + accessControlContext +
+>, <Line: -                    ", persistenceHandler=" + persistenceHandler +
+>, <Line: -                    ", packageDefinitionStrategy=" + packageDefinitionStrategy +
+>, <Line: -                    ", childFirst=" + childFirst +
+>, <Line: -                    '}';
+>, <Line: -        }
+>, <Line: -    }
+>]

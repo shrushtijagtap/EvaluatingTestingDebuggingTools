@@ -1,0 +1,74 @@
+[<Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.boxes.apple.AppleItemListBox;
+>, <Line: +import org.mp4parser.boxes.apple.AppleNameBox;
+>, <Line: +        cmd.writeRandomMetadata("c:\\content\\Mobile_H264 - Kopie.mp4",
+>, <Line: +                "lore ipsum tralalala");
+>, <Line: +    public void writeRandomMetadata(String videoFilePath, String title) throws IOException {
+>, <Line: +        FreeBox freeBox = findFreeBox(moov);
+>, <Line: +        // Create structure or just navigate to Apple List Box.
+>, <Line: +            HandlerBox hdlr = new HandlerBox();
+>, <Line: +            hdlr.setHandlerType("mdir");
+>, <Line: +            metaBox.addBox(hdlr);
+>, <Line: +        AppleItemListBox ilst;
+>, <Line: +        if ((ilst = Path.getPath(metaBox, "ilst")) == null) {
+>, <Line: +            ilst = new AppleItemListBox();
+>, <Line: +            metaBox.addBox(ilst);
+>, <Line: +        }
+>, <Line: +        if (freeBox == null) {
+>, <Line: +            freeBox = new FreeBox(128 * 1024);
+>, <Line: +            metaBox.addBox(freeBox);
+>, <Line: +        }
+>, <Line: +        // Got Apple List Box
+>, <Line: +        AppleNameBox nam;
+>, <Line: +        if ((nam = Path.getPath(ilst, "©nam")) == null) {
+>, <Line: +            nam = new AppleNameBox();
+>, <Line: +        }
+>, <Line: +        nam.setDataCountry(0);
+>, <Line: +        nam.setDataLanguage(0);
+>, <Line: +        nam.setValue(title);
+>, <Line: +        ilst.addBox(nam);
+>, <Line: +        long diff = sizeAfter - sizeBefore;
+>, <Line: +        // This is the difference of before/after
+>, <Line: +        // can we compensate by resizing a Free Box we have found?
+>, <Line: +        if (freeBox.getData().limit() > diff) {
+>, <Line: +            // either shrink or grow!
+>, <Line: +            freeBox.setData(ByteBuffer.allocate((int) (freeBox.getData().limit() - diff)));
+>, <Line: +            sizeAfter = moov.getSize();
+>, <Line: +            diff = sizeAfter - sizeBefore;
+>, <Line: +        }
+>, <Line: +        if (correctOffset && diff != 0) {
+>, <Line: +            correctChunkOffsets(moov, diff);
+>, <Line: +        FileChannel fc;
+>, <Line: +        if (diff != 0) {
+>, <Line: +            // this is not good: We have to insert bytes in the middle of the file
+>, <Line: +            // and this costs time as it requires re-writing most of the file's data
+>, <Line: +            fc = splitFileAndInsert(videoFile, offset, sizeAfter - sizeBefore);
+>, <Line: +        } else {
+>, <Line: +            // simple overwrite of something with the file
+>, <Line: +            fc = new RandomAccessFile(videoFile, "rw").getChannel();
+>, <Line: +        }
+>, <Line: +    FreeBox findFreeBox(Container c) {
+>, <Line: +        for (Box box : c.getBoxes()) {
+>, <Line: +            System.err.println(box.getType());
+>, <Line: +            if (box instanceof FreeBox) {
+>, <Line: +                return (FreeBox) box;
+>, <Line: +            }
+>, <Line: +            if (box instanceof Container) {
+>, <Line: +                FreeBox freeBox = findFreeBox((Container) box);
+>, <Line: +                if (freeBox != null) {
+>, <Line: +                    return freeBox;
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>]
+[<Line: -        cmd.writeRandomMetadata("c:\\content\\pbs_sba101d_browser_multi.wvm_0.mp4", "lore ipsum tralalala");
+>, <Line: -    public void writeRandomMetadata(String videoFilePath, String text) throws IOException {
+>, <Line: -        XmlBox xmlBox = new XmlBox();
+>, <Line: -        xmlBox.setXml(text);
+>, <Line: -        metaBox.addBox(xmlBox);
+>, <Line: -        if (correctOffset) {
+>, <Line: -            correctChunkOffsets(moov, sizeAfter - sizeBefore);
+>, <Line: -        FileChannel fc = splitFileAndInsert(videoFile, offset, sizeAfter - sizeBefore);
+>]

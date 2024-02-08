@@ -1,0 +1,60 @@
+[<Line: +		'angular',
+>, <Line: +		'app',
+>, <Line: +		'lodash'
+>, <Line: +	],
+>, <Line: +	function (angular, app, _) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('arrayJoin', function () {
+>, <Line: +				return {
+>, <Line: +					restrict: 'A',
+>, <Line: +					require: 'ngModel',
+>, <Line: +					link: function (scope, element, attr, ngModel) {
+>, <Line: +						function split_array(text) {
+>, <Line: +							return (text || '').split(',');
+>, <Line: +						}
+>, <Line: +						function join_array(text) {
+>, <Line: +							if (_.isArray(text)) {
+>, <Line: +								return (text || '').join(',');
+>, <Line: +							} else {
+>, <Line: +								return text;
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +						ngModel.$parsers.push(split_array);
+>, <Line: +						ngModel.$formatters.push(join_array);
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'app',
+>, <Line: -  'lodash'
+>, <Line: -],
+>, <Line: -function (angular, app, _) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('arrayJoin', function() {
+>, <Line: -      return {
+>, <Line: -        restrict: 'A',
+>, <Line: -        require: 'ngModel',
+>, <Line: -        link: function(scope, element, attr, ngModel) {
+>, <Line: -          function split_array(text) {
+>, <Line: -            return (text || '').split(',');
+>, <Line: -          }
+>, <Line: -          function join_array(text) {
+>, <Line: -            if(_.isArray(text)) {
+>, <Line: -              return (text || '').join(',');
+>, <Line: -            } else {
+>, <Line: -              return text;
+>, <Line: -            }
+>, <Line: -          }
+>, <Line: -          ngModel.$parsers.push(split_array);
+>, <Line: -          ngModel.$formatters.push(join_array);
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

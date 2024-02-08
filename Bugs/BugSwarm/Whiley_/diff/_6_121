@@ -1,0 +1,11 @@
+[<Line: +function g() -> (int x, bool r):
+>, <Line: +    return 1, false
+>, <Line: +function f() -> int:
+>, <Line: +    int x
+>, <Line: +    int y
+>, <Line: +    x,y = g()
+>]
+[<Line: -function f(int,real r) -> int:
+>, <Line: -    int x, int y
+>, <Line: -    x,y = r
+>]

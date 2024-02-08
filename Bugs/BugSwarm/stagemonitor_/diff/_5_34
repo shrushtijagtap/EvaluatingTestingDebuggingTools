@@ -1,0 +1,23 @@
+[<Line: +import org.stagemonitor.requestmonitor.RequestMonitor;
+>, <Line: +	 * @param reportArguments The parameter object which contains the actual parameters
+>, <Line: +	 * This method is called at most once from {@link RequestMonitor} for one request.
+>, <Line: +	 * <p/>
+>, <Line: +	 * If none of the currently registered {@link RequestTraceReporter}s (
+>, <Line: +	 * see {@link RequestMonitor#requestTraceReporters}) which {@link #requiresCallTree()}
+>, <Line: +	 * is active (see {@link RequestMonitor#isAnyRequestTraceReporterActiveWhichNeedsTheCallTree(RequestTrace)},
+>, <Line: +	 * the profiler does not have to be enabled for the current request.
+>, <Line: +	 * @param isActiveArguments The parameter object which contains the actual parameters
+>, <Line: +	/**
+>, <Line: +	 * @return <code>true</code>, if this {@link RequestTraceReporter} needs access to the call tree
+>, <Line: +	 * ({@link RequestTrace#getCallStack()})
+>, <Line: +	 *
+>, <Line: +	 * @see #isActive(IsActiveArguments)
+>, <Line: +	 */
+>, <Line: +	public boolean requiresCallTree() {
+>, <Line: +		return true;
+>, <Line: +	}
+>]
+[<Line: -	 * @param reportArguments
+>, <Line: -	 * This method is called at most once from {@link org.stagemonitor.requestmonitor.RequestMonitor} for one request.
+>, <Line: -	 * @param isActiveArguments
+>]

@@ -1,0 +1,81 @@
+[<Line: +package org.kairosdb.util;
+>, <Line: +import com.google.inject.name.Named;
+>, <Line: +import org.kairosdb.core.DataPointSet;
+>, <Line: +import org.kairosdb.core.datapoints.DoubleDataPointFactory;
+>, <Line: +import org.kairosdb.core.datapoints.DoubleDataPointFactoryImpl;
+>, <Line: +import org.kairosdb.core.datapoints.LongDataPointFactory;
+>, <Line: +import org.kairosdb.core.datapoints.LongDataPointFactoryImpl;
+>, <Line: +import javax.inject.Inject;
+>, <Line: +import java.util.List;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 1/26/17.
+>, <Line: + */
+>, <Line: +public class SimpleStatsReporter
+>, <Line: +{
+>, <Line: +	private final String m_hostName;
+>, <Line: +	private final LongDataPointFactory m_longDataPointFactory;
+>, <Line: +	private final DoubleDataPointFactory m_doubleDataPointFactory;
+>, <Line: +	@Inject
+>, <Line: +	public SimpleStatsReporter(@Named("HOSTNAME")String hostName,
+>, <Line: +			LongDataPointFactory longDataPointFactory, DoubleDataPointFactory doubleDataPointFactory)
+>, <Line: +	{
+>, <Line: +		m_hostName = hostName;
+>, <Line: +		m_longDataPointFactory = longDataPointFactory;
+>, <Line: +		m_doubleDataPointFactory = doubleDataPointFactory;
+>, <Line: +	}
+>, <Line: +	public SimpleStatsReporter()
+>, <Line: +	{
+>, <Line: +		m_hostName = "localhost";
+>, <Line: +		m_longDataPointFactory = new LongDataPointFactoryImpl();
+>, <Line: +		m_doubleDataPointFactory = new DoubleDataPointFactoryImpl();
+>, <Line: +	}
+>, <Line: +	private DataPointSet newDataPointSet(String metricPrefix, String metricSuffix)
+>, <Line: +	{
+>, <Line: +		DataPointSet dps = new DataPointSet(new StringBuilder(metricPrefix).append(".").append(metricSuffix).toString());
+>, <Line: +		dps.addTag("host", m_hostName);
+>, <Line: +		return dps;
+>, <Line: +	}
+>, <Line: +	private DataPointSet newDataPointSet(String metricPrefix, String metricSuffix, long now, long value)
+>, <Line: +	{
+>, <Line: +		DataPointSet dps = newDataPointSet(metricPrefix, metricSuffix);
+>, <Line: +		dps.addDataPoint(m_longDataPointFactory.createDataPoint(now, value));
+>, <Line: +		return dps;
+>, <Line: +	}
+>, <Line: +	private DataPointSet newDataPointSet(String metricPrefix, String metricSuffix, long now, double value)
+>, <Line: +	{
+>, <Line: +		DataPointSet dps = newDataPointSet(metricPrefix, metricSuffix);
+>, <Line: +		dps.addDataPoint(m_doubleDataPointFactory.createDataPoint(now, value));
+>, <Line: +		return dps;
+>, <Line: +	}
+>, <Line: +	public void reportStats(SimpleStats.Data stats, long now, String metricPrefix,
+>, <Line: +			List<DataPointSet> dataPointSets)
+>, <Line: +	{
+>, <Line: +		dataPointSets.add(newDataPointSet(metricPrefix, "min", now, stats.min));
+>, <Line: +		dataPointSets.add(newDataPointSet(metricPrefix, "max", now, stats.max));
+>, <Line: +		dataPointSets.add(newDataPointSet(metricPrefix, "avg", now, stats.avg));
+>, <Line: +		dataPointSets.add(newDataPointSet(metricPrefix, "count", now, stats.count));
+>, <Line: +		dataPointSets.add(newDataPointSet(metricPrefix, "sum", now, stats.sum));
+>, <Line: +	}
+>, <Line: +	public void reportStats(SimpleStats.Data stats, long now, String metricPrefix,
+>, <Line: +			String tagName, String tagValue, List<DataPointSet> dataPointSets)
+>, <Line: +	{
+>, <Line: +		DataPointSet dps;
+>, <Line: +		dps = newDataPointSet(metricPrefix, "min", now, stats.min);
+>, <Line: +		dps.addTag(tagName, tagValue);
+>, <Line: +		dataPointSets.add(dps);
+>, <Line: +		dps = newDataPointSet(metricPrefix, "max", now, stats.max);
+>, <Line: +		dps.addTag(tagName, tagValue);
+>, <Line: +		dataPointSets.add(dps);
+>, <Line: +		dps = newDataPointSet(metricPrefix, "avg", now, stats.avg);
+>, <Line: +		dps.addTag(tagName, tagValue);
+>, <Line: +		dataPointSets.add(dps);
+>, <Line: +		dps = newDataPointSet(metricPrefix, "count", now, stats.count);
+>, <Line: +		dps.addTag(tagName, tagValue);
+>, <Line: +		dataPointSets.add(dps);
+>, <Line: +		dps = newDataPointSet(metricPrefix, "sum", now, stats.sum);
+>, <Line: +		dps.addTag(tagName, tagValue);
+>, <Line: +		dataPointSets.add(dps);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

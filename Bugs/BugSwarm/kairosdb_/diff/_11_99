@@ -1,0 +1,5 @@
+[]
+[<Line: -import junit.framework.Assert;
+>, <Line: -import org.kairosdb.core.TestDataPointFactory;
+>, <Line: -import static junit.framework.TestCase.assertFalse;
+>]

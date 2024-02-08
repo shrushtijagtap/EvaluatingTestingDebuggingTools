@@ -1,0 +1,296 @@
+[<Line: +    .rc-a-tryit {
+>, <Line: +        cursor: pointer;
+>, <Line: +    }
+>, <Line: +    a {
+>, <Line: +        text-decoration: none !important;
+>, <Line: +    }
+>, <Line: +    .paypal-button {
+>, <Line: +        display: inline !important;
+>, <Line: +    }
+>, <Line: +    <div class="container well" style="text-align: center;">
+>, <Line: +        <div class="" id="banner">
+>, <Line: +            <div class="row">
+>, <Line: +                <div class="col-lg-12">
+>, <Line: +                    <div style="font-size: 67.5px;">REST Countries</div>
+>, <Line: +                    <p class="lead">Get information about countries via a RESTful API</p>
+>, <Line: +                    <div>v1.1.2 <a href="https://github.com/fayder/restcountries/wiki/API-1.x.x">Wiki</a></div>
+>, <Line: +                    <br />
+>, <Line: +                    <a href="https://github.com/fayder/restcountries">
+>, <Line: +                        <img alt="github-octocat" src="img/octocat60px.png">
+>, <Line: +                    </a>
+>, <Line: +                    <br /><br />
+>, <Line: +                    <div>
+>, <Line: +                        You can help me to keep providing this service in the best way possible
+>, <Line: +                        <script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=fayderflorez@gmail.com" 
+>, <Line: +                            data-button="donate" 
+>, <Line: +                            data-name="REST Countries" 
+>, <Line: +                            data-currency="EUR"
+>, <Line: +                            ></script>
+>, <Line: +                    </div>
+>, <Line: +                    <br/>
+>, <Line: +                    <div>Have questions? Found a problem? <a href="https://twitter.com/restcountries">Tweet it</a> or email me to
+>, <Line: +                    support@restcountries.eu</div>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +        </div>
+>, <Line: +    <div id="rc-searchers" class="container">
+>, <Line: +        <div class="row">
+>, <Line: +            <div class="col-lg-4">
+>, <Line: +                <h3>Get all the countries!</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code id="rc-a-all" class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/all</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div class="col-lg-4">
+>, <Line: +                <h3> Currency</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/currency/eur</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div class="col-lg-4">
+>, <Line: +                <h3> Capital City</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/capital/tallinn</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div class="col-lg-4">
+>, <Line: +                <h3> Calling Code</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/callingcode/7</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div class="col-lg-4">
+>, <Line: +                <h3> Region</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/region/africa</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div class="col-lg-4">
+>, <Line: +                <h3> Sub Region</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/subregion/western asia</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div class="col-lg-4">
+>, <Line: +                <h3> ISO 639-1 Language</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/lang/et</code>
+>, <Line: +                </div>
+>, <Line: +                <br />
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/lang/no</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div class="col-lg-4">
+>, <Line: +                <h3> Country Code</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code id="rc-a-alpha2" class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/alpha/co</code>
+>, <Line: +                </div>
+>, <Line: +                <br />
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code id="rc-a-alpha3" class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/alpha/col</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div class="col-lg-4">
+>, <Line: +                <h3> Country Name Substring</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/name/eesti</code>
+>, <Line: +                </div>
+>, <Line: +                <br />
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/name/estonia</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div class="col-lg-12">
+>, <Line: +                <h3> Country Codes</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/alpha?codes=co;rus;no</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div class="col-lg-12">
+>, <Line: +                <h3> Country Name Full Text</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +                    <code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/name/aruba?fullText=true</code>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div id="rc-div-diy" class="col-lg-12" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+>, <Line: +                <h3>Try it yourself</h3>
+>, <Line: +                <div class="input-group">
+>, <Line: +            </div>
+>, <Line: +        </div>
+>, <Line: +    </div>
+>, <Line: +    <div class="container">
+>, <Line: +        <div class="row">
+>, <Line: +            <!-- json preview -->
+>, <Line: +            <div class="col-lg-11" style="margin-top: 10px;">
+>, <Line: +                <div id="rc-json-well" class="well hidden"></div>
+>, <Line: +            </div>
+>, <Line: +            <div id="rc-warning" class="col-lg-11 hidden" style="margin-top: 10px;">
+>, <Line: +                <div class="alert alert-warning fade in">
+>, <Line: +                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+>, <Line: +                    <strong>Holy guacamole!</strong> We don't have country data about that one =(
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +            <div id="rc-error" class="col-lg-11 hidden" style="margin-top: 10px;">
+>, <Line: +                <div class="alert alert-block alert-danger fade in">
+>, <Line: +                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+>, <Line: +                    <h4>Well... you just broke it</h4>
+>, <Line: +                    <p>I will greatly appreciate if you report a bug in either <a href="https://twitter.com/faydertvp">twitter</a> or <a href="https://github.com/fayder/restcountries/issues">github</a></p>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +        </div>
+>, <Line: +    </div>
+>, <Line: +    <br /><br />
+>, <Line: +    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+>, <Line: +    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+>, <Line: +    <script src="//www.paypalobjects.com/js/external/paypal-button.min.js"></script>
+>, <Line: +    <script src="js/restcountries.min.js"></script>
+>]
+[<Line: -	.rc-a-tryit {
+>, <Line: -		cursor: pointer;
+>, <Line: -	}
+>, <Line: -	a {
+>, <Line: -		text-decoration: none !important;
+>, <Line: -	}
+>, <Line: -	.paypal-button {
+>, <Line: -		display: inline !important;
+>, <Line: -	}
+>, <Line: -	<div class="container well" style="text-align: center;">
+>, <Line: -		<div class="" id="banner">
+>, <Line: -        	<div class="row">
+>, <Line: -          		<div class="col-lg-12">
+>, <Line: -           			<div style="font-size: 67.5px;">REST Countries</div>
+>, <Line: -            		<p class="lead">Get information about countries via a RESTful API</p>
+>, <Line: -            		<div>v1.1.2 <a href="https://github.com/fayder/restcountries/wiki/API-1.x.x">Wiki</a></div>
+>, <Line: -            		<br />
+>, <Line: -            		<a href="https://github.com/fayder/restcountries">
+>, <Line: -            			<img alt="github-octocat" src="img/octocat60px.png">
+>, <Line: -        			</a>
+>, <Line: -					<br /><br />
+>, <Line: -					<div>
+>, <Line: -						You can help me to keep providing this service in the best way possible
+>, <Line: -						<script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=fayderflorez@gmail.com" 
+>, <Line: -							data-button="donate" 
+>, <Line: -							data-name="REST Countries" 
+>, <Line: -							data-currency="EUR"
+>, <Line: -							></script>
+>, <Line: -					</div>
+>, <Line: -					<br/>
+>, <Line: -					<div>Have questions? Found a problem? <a href="https://twitter.com/restcountries">Tweet it</a> or email me to
+>, <Line: -					support@restcountries.eu</div>
+>, <Line: -				</div>
+>, <Line: -        	</div>
+>, <Line: -      	</div>
+>, <Line: -	<div id="rc-searchers" class="container">
+>, <Line: -		<div class="row">
+>, <Line: -			<div class="col-lg-4">
+>, <Line: -				<h3>Get all the countries!</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code id="rc-a-all" class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/all</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div class="col-lg-4">
+>, <Line: -				<h3> Currency</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/currency/eur</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div class="col-lg-4">
+>, <Line: -				<h3> Capital City</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/capital/tallinn</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div class="col-lg-4">
+>, <Line: -				<h3> Calling Code</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/callingcode/7</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div class="col-lg-4">
+>, <Line: -				<h3> Region</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/region/africa</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div class="col-lg-4">
+>, <Line: -				<h3> Sub Region</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/subregion/western asia</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div class="col-lg-4">
+>, <Line: -				<h3> ISO 639-1 Language</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/lang/et</code>
+>, <Line: -				</div>
+>, <Line: -				<br />
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/lang/no</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div class="col-lg-4">
+>, <Line: -				<h3> Country Code</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/alpha/co</code>
+>, <Line: -				</div>
+>, <Line: -				<br />
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code id="rc-a-alpha3" class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/alpha/col</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div class="col-lg-4">
+>, <Line: -				<h3> Country Name Substring</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/name/eesti</code>
+>, <Line: -				</div>
+>, <Line: -				<br />
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/name/estonia</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div class="col-lg-12">
+>, <Line: -				<h3> Country Codes</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code id="rc-a-alpha2" class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/alpha?codes=co;rus;no</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div class="col-lg-12">
+>, <Line: -				<h3> Country Name Full Text</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -					<code class="rc-a-tryit rc-a-code">https://restcountries.eu/rest/v1/name/aruba?fullText=true</code>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -			<div id="rc-div-diy" class="col-lg-12" style="margin-top: 10px; margin-bottom: 10px; text-align: center;">
+>, <Line: -				<h3>Try it yourself</h3>
+>, <Line: -				<div class="input-group">
+>, <Line: -			</div>
+>, <Line: -		</div>
+>, <Line: -	</div>
+>, <Line: -	<div class="container">
+>, <Line: -		<div class="row">
+>, <Line: -			<!-- json preview -->
+>, <Line: -			<div class="col-lg-11" style="margin-top: 10px;">
+>, <Line: -				<div id="rc-json-well" class="well hidden"></div>
+>, <Line: -			</div>
+>, <Line: -			<div id="rc-warning" class="col-lg-11 hidden" style="margin-top: 10px;">
+>, <Line: -       			<div class="alert alert-warning fade in">
+>, <Line: -			        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+>, <Line: -			        <strong>Holy guacamole!</strong> We don't have country data about that one =(
+>, <Line: -				</div>
+>, <Line: -        	</div>
+>, <Line: -        	<div id="rc-error" class="col-lg-11 hidden" style="margin-top: 10px;">
+>, <Line: -	        	<div class="alert alert-block alert-danger fade in">
+>, <Line: -			        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+>, <Line: -			        <h4>Well... you just broke it</h4>
+>, <Line: -			        <p>I will greatly appreciate if you report a bug in either <a href="https://twitter.com/faydertvp">twitter</a> or <a href="https://github.com/fayder/restcountries/issues">github</a></p>
+>, <Line: -				</div>
+>, <Line: -			</div>
+>, <Line: -		</div>
+>, <Line: -	</div>
+>, <Line: -	<br /><br />
+>, <Line: -	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+>, <Line: -	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+>, <Line: -	<script src="//www.paypalobjects.com/js/external/paypal-button.min.js"></script>
+>, <Line: -	<script src="js/restcountries.min.js"></script>
+>]

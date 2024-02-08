@@ -1,0 +1,11 @@
+[<Line: +import org.jboss.netty.bootstrap.ConnectionlessBootstrap;
+>, <Line: +        server = new TrackerServer(new ConnectionlessBootstrap(), getName()) {
+>, <Line: +            @Override
+>, <Line: +            protected void addSpecificHandlers(ChannelPipeline pipeline) {
+>, <Line: +                pipeline.addLast("objectDecoder", new CellocatorProtocolDecoder(CellocatorProtocol.this));
+>, <Line: +            }
+>, <Line: +        };
+>, <Line: +        server.setEndianness(ByteOrder.LITTLE_ENDIAN);
+>, <Line: +        serverList.add(server);
+>]
+[]

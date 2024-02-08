@@ -1,0 +1,4 @@
+[<Line: +function f(int[] xs) -> bool
+>]
+[<Line: -function f([int] xs) -> bool
+>]

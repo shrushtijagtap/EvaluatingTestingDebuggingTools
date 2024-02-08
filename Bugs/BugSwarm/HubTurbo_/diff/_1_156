@@ -1,0 +1,44 @@
+[]
+[<Line: -package tests.stubs;
+>, <Line: -import model.Model;
+>, <Line: -import org.eclipse.egit.github.core.IRepositoryIdProvider;
+>, <Line: -import org.eclipse.egit.github.core.Repository;
+>, <Line: -import org.eclipse.egit.github.core.RepositoryId;
+>, <Line: -import service.ServiceManager;
+>, <Line: -import tests.ServiceManagerTests;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.List;
+>, <Line: -public class ServiceManagerStub extends ServiceManager {
+>, <Line: -	public ServiceManagerStub() {
+>, <Line: -		model = new Model();
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean isRepositoryValid(IRepositoryIdProvider repo) throws IOException {
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void stopModelUpdate() {
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public RepositoryId getRepoId() {
+>, <Line: -		return RepositoryId.create(ServiceManagerTests.TEST_GITHUB_USERNAME, ServiceManagerTests.TEST_REPO_NAME);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public List<Repository> getRepositories() throws IOException {
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public List<String> getRepositoriesNames() throws IOException {
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public List<Repository> getAllRepositories() throws IOException {
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public List<String> getAllRepositoryNames() throws IOException {
+>, <Line: -		return new ArrayList<>();
+>, <Line: -	}
+>, <Line: -}
+>]

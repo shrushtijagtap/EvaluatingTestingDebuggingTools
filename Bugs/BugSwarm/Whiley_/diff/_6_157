@@ -1,0 +1,11 @@
+[<Line: +function f(int[][] xs) -> (int[] rs)
+>, <Line: +requires |xs| > 0
+>, <Line: +requires |xs[0]| > 0:
+>, <Line: +    //
+>, <Line: +    xs[0][0] = xs[0][0]
+>, <Line: +    return xs[0]
+>, <Line: +public export method test():
+>, <Line: +    int[][] xs = [[0]]
+>, <Line: +    assume f(xs) == [0]
+>]
+[]

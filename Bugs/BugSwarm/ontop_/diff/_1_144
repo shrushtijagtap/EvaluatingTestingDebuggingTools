@@ -1,0 +1,67 @@
+[<Line: +package it.unibz.krdb.obda.reformulation.tests;
+>, <Line: +import it.unibz.krdb.obda.io.ModelIOManager;
+>, <Line: +import it.unibz.krdb.obda.model.OBDADataFactory;
+>, <Line: +import it.unibz.krdb.obda.model.OBDAModel;
+>, <Line: +import it.unibz.krdb.obda.model.impl.OBDADataFactoryImpl;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.core.QuestConstants;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.core.QuestPreferences;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.owlapi3.QuestOWL;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.owlapi3.QuestOWLFactory;
+>, <Line: +import java.io.BufferedReader;
+>, <Line: +import java.io.File;
+>, <Line: +import java.io.FileReader;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.sql.Connection;
+>, <Line: +import java.sql.DriverManager;
+>, <Line: +import java.sql.SQLException;
+>, <Line: +import java.sql.Statement;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.semanticweb.owlapi.apibinding.OWLManager;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntologyManager;
+>, <Line: +import org.semanticweb.owlapi.reasoner.SimpleConfiguration;
+>, <Line: +public class TMappingUOBMShortTest {
+>, <Line: +	@Test
+>, <Line: +	public void testTMappings() throws Exception {
+>, <Line: +		String url = "jdbc:h2:mem:uobm";
+>, <Line: +		String username = "sa";
+>, <Line: +		String password = "";
+>, <Line: +		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+>, <Line: +		OWLOntology owlOnto = manager.loadOntologyFromOntologyDocument(new File("src/test/resources/tmapping-uobm/univ-bench-dl.owl")); 		
+>, <Line: +		Connection conn = DriverManager.getConnection(url, username, password);
+>, <Line: +		execute(conn, "src/test/resources/tmapping-uobm/univ-bench-dl.sql");
+>, <Line: +		OBDADataFactory fac = OBDADataFactoryImpl.getInstance();
+>, <Line: +		OBDAModel obdaModel = fac.getOBDAModel();
+>, <Line: +		ModelIOManager ioManager = new ModelIOManager(obdaModel);
+>, <Line: +		ioManager.load("src/test/resources/tmapping-uobm/univ-bench-dl.obda");
+>, <Line: +		QuestPreferences pref = new QuestPreferences();
+>, <Line: +		//pref.setCurrentValueOf(QuestPreferences.DBTYPE, QuestConstants.SEMANTIC_INDEX);
+>, <Line: +		pref.setCurrentValueOf(QuestPreferences.ABOX_MODE, QuestConstants.VIRTUAL);
+>, <Line: +		pref.setCurrentValueOf(QuestPreferences.REFORMULATION_TECHNIQUE, QuestConstants.TW);
+>, <Line: +		pref.setCurrentValueOf(QuestPreferences.REWRITE, QuestConstants.TRUE);
+>, <Line: +		pref.setCurrentValueOf(QuestPreferences.PRINT_KEYS, QuestConstants.TRUE);
+>, <Line: +		QuestOWLFactory factory = new QuestOWLFactory();
+>, <Line: +		factory.setOBDAController(obdaModel);
+>, <Line: +		factory.setPreferenceHolder(pref);
+>, <Line: +		QuestOWL reasoner = factory.createReasoner(owlOnto, new SimpleConfiguration());
+>, <Line: +	}
+>, <Line: +	private static void execute(Connection conn, String filename) throws IOException, SQLException {		
+>, <Line: +		Statement st = conn.createStatement();
+>, <Line: +		int i = 1;
+>, <Line: +		FileReader reader = new FileReader(filename);
+>, <Line: +		StringBuilder bf = new StringBuilder();
+>, <Line: +		try (BufferedReader in = new BufferedReader(reader)) {
+>, <Line: +			for (String line = in.readLine(); line != null; line = in.readLine()) {
+>, <Line: +				bf.append(line + "\n");
+>, <Line: +				if (line.startsWith("--")) {
+>, <Line: +					System.out.println("EXECUTING " + i++ + ":\n" + bf.toString());
+>, <Line: +					st.executeUpdate(bf.toString());
+>, <Line: +					conn.commit();
+>, <Line: +					bf = new StringBuilder();
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

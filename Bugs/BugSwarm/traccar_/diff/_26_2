@@ -1,0 +1,12 @@
+[<Line: +import org.traccar.geocoder.Geocoder;
+>, <Line: +public class GeocoderHandler implements ChannelUpstreamHandler {
+>, <Line: +    private final Geocoder geocoder;
+>, <Line: +    public GeocoderHandler(Geocoder geocoder, boolean processInvalidPositions) {
+>, <Line: +                        new Geocoder.ReverseGeocoderCallback() {
+>]
+[<Line: -import org.traccar.geocoder.ReverseGeocoder;
+>, <Line: -public class ReverseGeocoderHandler implements ChannelUpstreamHandler {
+>, <Line: -    private final ReverseGeocoder geocoder;
+>, <Line: -    public ReverseGeocoderHandler(ReverseGeocoder geocoder, boolean processInvalidPositions) {
+>, <Line: -                        new ReverseGeocoder.ReverseGeocoderCallback() {
+>]

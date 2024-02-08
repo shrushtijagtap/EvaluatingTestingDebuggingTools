@@ -1,0 +1,25 @@
+[<Line: +        xmlns="http://www.w3.org/ns/ttml"
+>, <Line: +                    region="fullscreen" tts:backgroundImage="../ttml/0_08-Rocket-starts.jpg">Rocket Starts
+>, <Line: +            </p>
+>, <Line: +                    region="fullscreen" tts:backgroundImage="animagehere/0_40-Fourty-Years-Later.jpg">Fourty Years Later
+>, <Line: +            </p>
+>, <Line: +                    region="fullscreen" tts:backgroundImage="3_03-Show-Starts.jpg">The Show Starts
+>, <Line: +            </p>
+>, <Line: +                    region="fullscreen" tts:backgroundImage="5_29-Things-go-south.jpg">Things Go South
+>, <Line: +            </p>
+>, <Line: +                    region="fullscreen" tts:backgroundImage="7_05-attack-starts.jpg">Attack Peace
+>, <Line: +            </p>
+>, <Line: +                    region="fullscreen" tts:backgroundImage="8_51-making-peace.jpg">Making Peace
+>, <Line: +            </p>
+>, <Line: +                    region="fullscreen" tts:backgroundImage="9_49-Epilog.jpg">Epilog
+>, <Line: +            </p>
+>]
+[<Line: -        xmlns="http://www.w3.org/ns/ttml"
+>, <Line: -                    region="fullscreen" tts:backgroundImage="../ttml/0_08-Rocket-starts.jpg">Rocket Starts</p>
+>, <Line: -                    region="fullscreen" tts:backgroundImage="animagehere/0_40-Fourty-Years-Later.jpg">Fourty Years Later</p>
+>, <Line: -                    region="fullscreen" tts:backgroundImage="3_03-Show-Starts.jpg">The Show Starts</p>
+>, <Line: -                    region="fullscreen" tts:backgroundImage="5_29-Things-go-south.jpg">Things Go South</p>
+>, <Line: -                    region="fullscreen" tts:backgroundImage="7_05-attack-starts.jpg">Attack Peace</p>
+>, <Line: -                    region="fullscreen" tts:backgroundImage="8_51-making-peace.jpg">Making Peace</p>
+>, <Line: -                    region="fullscreen" tts:backgroundImage="9_49-Epilog.jpg">Epilog</p>
+>]

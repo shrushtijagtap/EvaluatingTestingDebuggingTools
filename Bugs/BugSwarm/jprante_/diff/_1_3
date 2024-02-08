@@ -1,0 +1,67 @@
+[<Line: +dependencies {
+>, <Line: +    testCompile "com.h2database:h2:1.4.191"
+>, <Line: +}
+>, <Line: +task h2IntegrationTest(type: Test) {
+>, <Line: +    systemProperty 'path.home', projectDir.absolutePath + "/build"
+>, <Line: +    systemProperty 'java.io.tmpdir', projectDir.absolutePath + "/build/tmp"
+>, <Line: +    ext.useDefaultListeners = true
+>, <Line: +    ext.workingDirectory = projectDir.absolutePath + '/build'
+>, <Line: +    useTestNG() {
+>, <Line: +        testLogging.showStandardStreams = false
+>, <Line: +        suiteXmlBuilder().suite(name: 'gradle-testng-jdbc-h2', verbose: '1') {
+>, <Line: +            parameter(name: 'starturl', value: 'jdbc:h2:./build/test')
+>, <Line: +            parameter(name: 'stopurl', value: 'jdbc:h2:./build/test')
+>, <Line: +            parameter(name: 'user', value: '')
+>, <Line: +            parameter(name: 'password', value: '')
+>, <Line: +            test(name : 'h2 Source Tests') {
+>, <Line: +                parameter(name: 'create', value: 'h2/create-ordertables.sql')
+>, <Line: +                parameter(name: 'delete', value: 'h2/delete-ordertables.sql')
+>, <Line: +                parameter(name: 'sql1', value: 'select * from "orders"')
+>, <Line: +                parameter(name: 'sql2', value: 'select * from "orders"')
+>, <Line: +                parameter(name: 'sql3', value: 'select * from "products" where "amount" is NULL')
+>, <Line: +                classes([:]) {
+>, <Line: +                    'class'(name: 'org.xbib.elasticsearch.jdbc.strategy.standard.StandardSourceTests')
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            test(name: 'h2 Sink Tests') {
+>, <Line: +                parameter(name: 'create', value: 'h2/create-ordertables.sql')
+>, <Line: +                parameter(name: 'delete', value: 'h2/delete-ordertables.sql')
+>, <Line: +                parameter(name: 'task1', value: 'h2/task1.json')
+>, <Line: +                parameter(name: 'task2', value: 'h2/task2.json')
+>, <Line: +                parameter(name: 'task3', value: 'h2/task3.json')
+>, <Line: +                parameter(name: 'sql1', value: 'insert into "products" ("name", "amount", "price") values(?,?,?)')
+>, <Line: +                classes([:]) {
+>, <Line: +                    'class'(name: 'org.xbib.elasticsearch.jdbc.strategy.standard.StandardSinkTests')
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            test(name: 'h2 Job Tests') {
+>, <Line: +                parameter(name: 'create', value: 'h2/create-jobtables.sql')
+>, <Line: +                parameter(name: 'delete', value: 'h2/delete-jobtables.sql')
+>, <Line: +                parameter(name: 'task1', value: 'h2/jobtask1.json')
+>, <Line: +                parameter(name: 'sql1', value: 'select count(*) from "products"')
+>, <Line: +                parameter(name: 'sql2', value: 'insert into "products" ("_job", "name", "amount", "price") values(?,?,?,?)')
+>, <Line: +                classes([:]) {
+>, <Line: +                    'class'(name: 'org.xbib.elasticsearch.jdbc.strategy.standard.StandardCounterTests')
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            test(name: 'h2 Schedule Tests') {
+>, <Line: +                parameter(name: 'create', value: 'h2/create-ordertables.sql')
+>, <Line: +                parameter(name: 'delete', value: 'h2/delete-ordertables.sql')
+>, <Line: +                parameter(name: 'task6', value: 'h2/task6.json')
+>, <Line: +                parameter(name: 'task7', value: 'h2/task7.json')
+>, <Line: +                parameter(name: 'sql1', value: 'insert into "products" ("name", "amount", "price") values(?,?,?)')
+>, <Line: +                parameter(name: 'sql2', value: 'insert into "logs" ("modified", "message") values(?,?)')
+>, <Line: +                classes([:]) {
+>, <Line: +                    'class'(name: 'org.xbib.elasticsearch.jdbc.strategy.standard.StandardScheduleTests')
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    options {
+>, <Line: +        listeners << 'org.xbib.elasticsearch.util.TestListener'
+>, <Line: +        listeners << 'org.uncommons.reportng.HTMLReporter'
+>, <Line: +        listeners << 'org.uncommons.reportng.JUnitXMLReporter'
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

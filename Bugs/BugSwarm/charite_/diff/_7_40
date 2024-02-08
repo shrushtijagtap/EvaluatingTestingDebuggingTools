@@ -1,0 +1,58 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.pedigree.compatibilitychecker.ar;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.GenotypeList;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Pedigree;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerBase;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerException;
+>, <Line: -/**
+>, <Line: - * Helper class for checking a {@link GenotypeList} for compatibility with a {@link Pedigree} and autosomal recessive
+>, <Line: - * mode of inheritance.
+>, <Line: - *
+>, <Line: - * <h2>Compatibility Check</h2>
+>, <Line: - *
+>, <Line: - * This class first checks whether we have a case of autosomal recessive homozygous and falls back to a check to
+>, <Line: - * autosomal recessive compound heterozygous. The checks themselves are delegated to
+>, <Line: - * {@link CompatibilityCheckerAutosomalRecessiveHomozygous} and
+>, <Line: - * {@link CompatibilityCheckerAutosomalRecessiveCompoundHet}.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - * @author <a href="mailto:max.schubach@charite.de">Max Schubach</a>
+>, <Line: - * @author <a href="mailto:peter.robinson@charite.de">Peter N Robinson</a>
+>, <Line: - * 
+>, <Line: - * @deprecated use {@link VariantContextCompatibilityCheckerAutosomalDominant} instead.
+>, <Line: - */
+>, <Line: -@Deprecated
+>, <Line: -public class CompatibilityCheckerAutosomalRecessive extends CompatibilityCheckerBase {
+>, <Line: -	/**
+>, <Line: -	 * Initialize compatibility checker and perform some sanity checks.
+>, <Line: -	 *
+>, <Line: -	 * The {@link GenotypeList} object passed to the constructor is expected to represent all of the variants found in a
+>, <Line: -	 * certain gene (possibly after filtering for rarity or predicted pathogenicity). The samples represented by the
+>, <Line: -	 * {@link GenotypeList} must be in the same order as the list of individuals contained in this pedigree.
+>, <Line: -	 *
+>, <Line: -	 * @param pedigree
+>, <Line: -	 *            the {@link Pedigree} to use for the initialize
+>, <Line: -	 * @param list
+>, <Line: -	 *            the {@link GenotypeList} to use for the initialization
+>, <Line: -	 * @throws CompatibilityCheckerException
+>, <Line: -	 *             if the pedigree or variant list is invalid
+>, <Line: -	 */
+>, <Line: -	public CompatibilityCheckerAutosomalRecessive(Pedigree pedigree, GenotypeList list)
+>, <Line: -			throws CompatibilityCheckerException {
+>, <Line: -		super(pedigree, list);
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean run() throws CompatibilityCheckerException {
+>, <Line: -		if (new CompatibilityCheckerAutosomalRecessiveHomozygous(pedigree, list).run())
+>, <Line: -			return true;
+>, <Line: -		else
+>, <Line: -			return new CompatibilityCheckerAutosomalRecessiveCompoundHet(pedigree, list).run();
+>, <Line: -	}
+>, <Line: -	public boolean runSingleSampleCase() throws CompatibilityCheckerException {
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -	public boolean runMultiSampleCase() {
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -}
+>]

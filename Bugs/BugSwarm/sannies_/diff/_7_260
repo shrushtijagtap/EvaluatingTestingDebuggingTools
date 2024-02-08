@@ -1,0 +1,104 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeReaderVariable;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriterVariable;
+>, <Line: + * Each entry contains the location and the presentation time of the random accessible sample.
+>, <Line: + * It indicates that the sample in the entry can be randomaccessed. Note that not every random
+>, <Line: + * accessible sample in the track needs to be listed in the table.
+>, <Line: + *
+>, <Line: + * @see MovieFragmentRandomAccessBox
+>, <Line: +    public long getTrackId() {
+>, <Line: +        return trackId;
+>, <Line: +    }
+>, <Line: +    public void setLengthSizeOfTrafNum(int lengthSizeOfTrafNum) {
+>, <Line: +        this.lengthSizeOfTrafNum = lengthSizeOfTrafNum;
+>, <Line: +    }
+>, <Line: +    public void setLengthSizeOfTrunNum(int lengthSizeOfTrunNum) {
+>, <Line: +        this.lengthSizeOfTrunNum = lengthSizeOfTrunNum;
+>, <Line: +    }
+>, <Line: +    public void setLengthSizeOfSampleNum(int lengthSizeOfSampleNum) {
+>, <Line: +        this.lengthSizeOfSampleNum = lengthSizeOfSampleNum;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "TrackFragmentRandomAccessBox{" +
+>, <Line: +                "trackId=" + trackId +
+>, <Line: +                ", entries=" + entries +
+>, <Line: +                '}';
+>, <Line: +    }
+>, <Line: +        public long getMoofOffset() {
+>, <Line: +            return moofOffset;
+>, <Line: +        }
+>, <Line: +        public long getTrafNumber() {
+>, <Line: +            return trafNumber;
+>, <Line: +        }
+>, <Line: +        public long getTrunNumber() {
+>, <Line: +            return trunNumber;
+>, <Line: +        }
+>, <Line: +        public long getSampleNumber() {
+>, <Line: +            return sampleNumber;
+>, <Line: +        }
+>]
+[<Line: -package com.coremedia.iso.boxes.fragment;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeReaderVariable;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.IsoTypeWriterVariable;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: - * <h1>4cc = "{@value #TYPE}"</h1>
+>, <Line: - * <pre>
+>, <Line: - * aligned(8) class TrackFragmentRandomAccessBox extends FullBox('tfra', version, 0) {
+>, <Line: - *  unsigned int(32) track_ID;
+>, <Line: - *  const unsigned int(26) reserved = 0;
+>, <Line: - *  unsigned int(2) length_size_of_traf_num;
+>, <Line: - *  unsigned int(2) length_size_of_trun_num;
+>, <Line: - *  unsigned int(2) length_size_of_sample_num;
+>, <Line: - *  unsigned int(32) number_of_entry;
+>, <Line: - *  for(i=1; i &lt;= number_of_entry; i++){
+>, <Line: - *   if(version==1){
+>, <Line: - *    unsigned int(64) time;
+>, <Line: - *    unsigned int(64) moof_offset;
+>, <Line: - *   }else{
+>, <Line: - *    unsigned int(32) time;
+>, <Line: - *    unsigned int(32) moof_offset;
+>, <Line: - *   }
+>, <Line: - *  unsigned int((length_size_of_traf_num+1) * 8) traf_number;
+>, <Line: - *  unsigned int((length_size_of_trun_num+1) * 8) trun_number;
+>, <Line: - *  unsigned int((length_size_of_sample_num+1) * 8) sample_number;
+>, <Line: - *  }
+>, <Line: - * }
+>, <Line: - * </pre>
+>, <Line: -    public void setLengthSizeOfTrafNum(int lengthSizeOfTrafNum) {
+>, <Line: -        this.lengthSizeOfTrafNum = lengthSizeOfTrafNum;
+>, <Line: -    }
+>, <Line: -    public void setLengthSizeOfTrunNum(int lengthSizeOfTrunNum) {
+>, <Line: -        this.lengthSizeOfTrunNum = lengthSizeOfTrunNum;
+>, <Line: -    }
+>, <Line: -    public void setLengthSizeOfSampleNum(int lengthSizeOfSampleNum) {
+>, <Line: -        this.lengthSizeOfSampleNum = lengthSizeOfSampleNum;
+>, <Line: -    }
+>, <Line: -    public long getTrackId() {
+>, <Line: -        return trackId;
+>, <Line: -    }
+>, <Line: -        public long getMoofOffset() {
+>, <Line: -            return moofOffset;
+>, <Line: -        }
+>, <Line: -        public long getTrafNumber() {
+>, <Line: -            return trafNumber;
+>, <Line: -        }
+>, <Line: -        public long getTrunNumber() {
+>, <Line: -            return trunNumber;
+>, <Line: -        }
+>, <Line: -        public long getSampleNumber() {
+>, <Line: -            return sampleNumber;
+>, <Line: -        }
+>, <Line: -    @Override
+>, <Line: -    public String toString() {
+>, <Line: -        return "TrackFragmentRandomAccessBox{" +
+>, <Line: -                "trackId=" + trackId +
+>, <Line: -                ", entries=" + entries +
+>, <Line: -                '}';
+>, <Line: -    }
+>]

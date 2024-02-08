@@ -1,0 +1,27 @@
+[<Line: +package net.bytebuddy.matcher;
+>, <Line: +import net.bytebuddy.description.NamedElement;
+>, <Line: +import net.bytebuddy.description.type.TypeDescription;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.mockito.Mock;
+>, <Line: +import static org.hamcrest.CoreMatchers.is;
+>, <Line: +import static org.hamcrest.MatcherAssert.assertThat;
+>, <Line: +import static org.mockito.Mockito.when;
+>, <Line: +public class IsNamedMatcherTest extends AbstractElementMatcherTest<IsNamedMatcher<?>> {
+>, <Line: +    @Mock
+>, <Line: +    private NamedElement.WithOptionalName namedElement;
+>, <Line: +    @SuppressWarnings("unchecked")
+>, <Line: +    public IsNamedMatcherTest() {
+>, <Line: +        super((Class<IsNamedMatcher<?>>) (Object) IsNamedMatcher.class, "isNamed");
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testMatch() throws Exception {
+>, <Line: +        when(namedElement.isNamed()).thenReturn(true);
+>, <Line: +        assertThat(new IsNamedMatcher<NamedElement.WithOptionalName>().matches(namedElement), is(true));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testPositiveToNegative() throws Exception {
+>, <Line: +        assertThat(new IsNamedMatcher<NamedElement.WithOptionalName>().matches(namedElement), is(false));
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

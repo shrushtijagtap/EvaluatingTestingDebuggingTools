@@ -1,0 +1,56 @@
+[<Line: +/*
+>, <Line: +Copyright (c) 2011 Stanislav Vitvitskiy
+>, <Line: +Permission is hereby granted, free of charge, to any person obtaining a copy of this
+>, <Line: +software and associated documentation files (the "Software"), to deal in the Software
+>, <Line: +without restriction, including without limitation the rights to use, copy, modify,
+>, <Line: +merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+>, <Line: +permit persons to whom the Software is furnished to do so, subject to the following
+>, <Line: +conditions:
+>, <Line: +The above copyright notice and this permission notice shall be included in all copies or
+>, <Line: +substantial portions of the Software.
+>, <Line: +THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+>, <Line: +INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+>, <Line: +PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+>, <Line: +FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+>, <Line: +TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+>, <Line: +OR OTHER DEALINGS IN THE SOFTWARE.
+>, <Line: +*/
+>, <Line: +package org.mp4parser.streaming.input.h264.spspps;
+>, <Line: +import java.io.IOException;
+>, <Line: +/**
+>, <Line: + * Scaling list entity
+>, <Line: + * <p>
+>, <Line: + * capable to serialize / deserialize with CAVLC bitstream</p>
+>, <Line: + *
+>, <Line: + * @author Stanislav Vitvitskiy
+>, <Line: + */
+>, <Line: +public class ScalingList {
+>, <Line: +    public int[] scalingList;
+>, <Line: +    public boolean useDefaultScalingMatrixFlag;
+>, <Line: +    public static ScalingList read(ByteBufferBitreader is, int sizeOfScalingList)
+>, <Line: +            throws IOException {
+>, <Line: +        ScalingList sl = new ScalingList();
+>, <Line: +        sl.scalingList = new int[sizeOfScalingList];
+>, <Line: +        int lastScale = 8;
+>, <Line: +        int nextScale = 8;
+>, <Line: +        for (int j = 0; j < sizeOfScalingList; j++) {
+>, <Line: +            if (nextScale != 0) {
+>, <Line: +                int deltaScale = is.readSE();
+>, <Line: +                nextScale = (lastScale + deltaScale + 256) % 256;
+>, <Line: +                sl.useDefaultScalingMatrixFlag = (j == 0 && nextScale == 0);
+>, <Line: +            }
+>, <Line: +            sl.scalingList[j] = nextScale == 0 ? lastScale : nextScale;
+>, <Line: +            lastScale = sl.scalingList[j];
+>, <Line: +        }
+>, <Line: +        return sl;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "ScalingList{" +
+>, <Line: +                "scalingList=" + scalingList +
+>, <Line: +                ", useDefaultScalingMatrixFlag=" + useDefaultScalingMatrixFlag +
+>, <Line: +                '}';
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

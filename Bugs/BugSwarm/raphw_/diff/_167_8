@@ -1,0 +1,9 @@
+[<Line: +import org.junit.Ignore;
+>, <Line: +    @Ignore("Needs to be reset after access controller clean up") // REFACTOR
+>, <Line: +        }).create(new ObjectPropertyAssertion.Creator<AccessControlContext>() {
+>, <Line: +            @Override
+>, <Line: +            public AccessControlContext create() {
+>, <Line: +                return new AccessControlContext(new ProtectionDomain[]{mock(ProtectionDomain.class)});
+>, <Line: +            }
+>]
+[]

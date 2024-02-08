@@ -1,0 +1,6 @@
+[<Line: +                value = new AnnotationList.ForLoadedAnnotations((Annotation[]) value).toArray(new AnnotationDescription[((Annotation[]) value).length]);
+>, <Line: +                    new AnnotationList.ForLoadedAnnotations(annotation).toArray(new AnnotationDescription[annotation.length]));
+>]
+[<Line: -                value = new AnnotationList.ForLoadedAnnotation((Annotation[]) value).toArray(new AnnotationDescription[((Annotation[]) value).length]);
+>, <Line: -                    new AnnotationList.ForLoadedAnnotation(annotation).toArray(new AnnotationDescription[annotation.length]));
+>]

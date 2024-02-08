@@ -1,0 +1,15 @@
+[<Line: +package org.mp4parser.tools.boxes;
+>, <Line: +import org.mp4parser.ParsableBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.FileTypeBox;
+>, <Line: +    public FileTypeBoxTest(ParsableBox parsableBoxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: +        super(parsableBoxUnderTest, properties);
+>, <Line: +    }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.googlecode.mp4parser.boxes.BoxWriteReadBase;
+>, <Line: -import com.mp4parser.iso14496.part12.BitRateBox;
+>, <Line: -import static org.junit.Assert.*;
+>, <Line: -    public FileTypeBoxTest(Box boxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: -        super(boxUnderTest, properties);
+>, <Line: -    }
+>]

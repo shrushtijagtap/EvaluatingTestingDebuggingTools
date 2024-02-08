@@ -1,0 +1,55 @@
+[<Line: +package org.kairosdb.core.http.rest;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import com.google.gson.Gson;
+>, <Line: +import com.google.inject.Inject;
+>, <Line: +import org.kairosdb.core.http.rest.json.JsonResponseBuilder;
+>, <Line: +import org.kairosdb.core.processingstage.FeatureProcessingFactory;
+>, <Line: +import org.kairosdb.core.processingstage.FeatureProcessor;
+>, <Line: +import org.kairosdb.core.processingstage.metadata.FeatureProcessingMetadata;
+>, <Line: +import org.kairosdb.core.processingstage.metadata.FeatureProcessorMetadata;
+>, <Line: +import javax.ws.rs.GET;
+>, <Line: +import javax.ws.rs.Path;
+>, <Line: +import javax.ws.rs.PathParam;
+>, <Line: +import javax.ws.rs.Produces;
+>, <Line: +import javax.ws.rs.core.MediaType;
+>, <Line: +import javax.ws.rs.core.Response;
+>, <Line: +import static org.kairosdb.core.http.rest.MetricsResource.setHeaders;
+>, <Line: +@Path("/api/v1/features")
+>, <Line: +public class FeaturesResource
+>, <Line: +{
+>, <Line: +    private FeatureProcessor m_featureProcessor;
+>, <Line: +    private Gson gson = new Gson();
+>, <Line: +    @Inject
+>, <Line: +    public FeaturesResource(FeatureProcessor featureProcessor)
+>, <Line: +    {
+>, <Line: +        this.m_featureProcessor = featureProcessor;
+>, <Line: +    }
+>, <Line: +    @GET
+>, <Line: +    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+>, <Line: +    @Path("{feature}")
+>, <Line: +    public Response getFeature(@PathParam("feature") String feature)
+>, <Line: +    {
+>, <Line: +        FeatureProcessingFactory<?> featureProcessingFactory = m_featureProcessor.getFeatureProcessingFactory(feature);
+>, <Line: +        if (featureProcessingFactory == null)
+>, <Line: +        {
+>, <Line: +            JsonResponseBuilder builder = new JsonResponseBuilder(Response.Status.NOT_FOUND);
+>, <Line: +            builder.addError("Unknown feature '" + feature.toLowerCase() + "'");
+>, <Line: +            return builder.build();
+>, <Line: +        }
+>, <Line: +        ImmutableList<FeatureProcessorMetadata> featureProcessorMetadata = featureProcessingFactory.getFeatureProcessorMetadata();
+>, <Line: +        Response.ResponseBuilder responseBuilder = Response.status(Response.Status.OK).entity(gson.toJson(featureProcessorMetadata));
+>, <Line: +        setHeaders(responseBuilder);
+>, <Line: +        return responseBuilder.build();
+>, <Line: +    }
+>, <Line: +    @GET
+>, <Line: +    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+>, <Line: +    public Response getFeatures()
+>, <Line: +    {
+>, <Line: +        ImmutableList<FeatureProcessingMetadata> processingChainMetadata = m_featureProcessor.getFeatureProcessingMetadata();
+>, <Line: +        Response.ResponseBuilder responseBuilder = Response.status(Response.Status.OK).entity(gson.toJson(processingChainMetadata));
+>, <Line: +        setHeaders(responseBuilder);
+>, <Line: +        return responseBuilder.build();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

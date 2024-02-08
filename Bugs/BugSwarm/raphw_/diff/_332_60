@@ -1,0 +1,7 @@
+[]
+[<Line: -import java.util.Collections;
+>, <Line: -        ObjectPropertyAssertion.of(TypePool.Default.TypeExtractor.OnTypeCollector.class).applyBasic();
+>, <Line: -        ObjectPropertyAssertion.of(TypePool.Default.TypeExtractor.MethodExtractor.OnMethodCollector.class).applyBasic();
+>, <Line: -        ObjectPropertyAssertion.of(TypePool.Default.TypeExtractor.MethodExtractor.OnMethodParameterCollector.class).applyBasic();
+>, <Line: -        ObjectPropertyAssertion.of(TypePool.Default.TypeExtractor.FieldExtractor.OnFieldCollector.class).applyBasic();
+>]

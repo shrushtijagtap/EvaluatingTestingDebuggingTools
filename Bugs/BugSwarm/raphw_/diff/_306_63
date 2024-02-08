@@ -1,0 +1,5 @@
+[<Line: +        assertThat(methodCalls.get(0).arguments, is(arguments));
+>]
+[<Line: -import static org.hamcrest.CoreMatchers.equalTo;
+>, <Line: -        assertThat(methodCalls.get(0).arguments, equalTo(arguments));
+>]

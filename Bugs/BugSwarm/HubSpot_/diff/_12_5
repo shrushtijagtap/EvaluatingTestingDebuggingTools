@@ -1,0 +1,8 @@
+[<Line: +    updateLastRequestForGroups(request);
+>, <Line: +  }
+>, <Line: +  private void updateLastRequestForGroups(BaragonRequest request) {
+>, <Line: +    for (String loadBalancerGroup : request.getLoadBalancerService().getLoadBalancerGroups()) {
+>, <Line: +      loadBalancerDatastore.setLastRequestId(loadBalancerGroup, request.getLoadBalancerRequestId());
+>, <Line: +    }
+>]
+[]

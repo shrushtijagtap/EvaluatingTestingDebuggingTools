@@ -1,0 +1,10 @@
+[<Line: +                Instrumentation instrumentation = (Instrumentation) ClassLoader.getSystemClassLoader()
+>, <Line: +                        .get(STATIC_FIELD);
+>, <Line: +                if (instrumentation == null) {
+>, <Line: +                    throw new IllegalStateException("The Byte Buddy agent is not installed");
+>, <Line: +                }
+>, <Line: +                return installOn(instrumentation);
+>]
+[<Line: -                return installOn((Instrumentation) ClassLoader.getSystemClassLoader()
+>, <Line: -                        .get(STATIC_FIELD));
+>]

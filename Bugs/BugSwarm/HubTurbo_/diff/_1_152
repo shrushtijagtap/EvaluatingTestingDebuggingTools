@@ -1,0 +1,649 @@
+[<Line: +//package tests;
+>, <Line: +//
+>, <Line: +//import static org.junit.Assert.assertEquals;
+>, <Line: +//import static org.junit.Assert.fail;
+>, <Line: +//
+>, <Line: +//import java.text.SimpleDateFormat;
+>, <Line: +//import java.time.LocalDateTime;
+>, <Line: +//import java.util.Date;
+>, <Line: +//
+>, <Line: +//import backend.resource.*;
+>, <Line: +//import org.eclipse.egit.github.core.PullRequest;
+>, <Line: +//import org.junit.BeforeClass;
+>, <Line: +//import org.junit.Test;
+>, <Line: +//
+>, <Line: +//import util.Utility;
+>, <Line: +//import filter.ParseException;
+>, <Line: +//import filter.Parser;
+>, <Line: +//import filter.expression.Qualifier;
+>, <Line: +//
+>, <Line: +//public class FilterEvalTests {
+>, <Line: +//
+>, <Line: +//	private final Model model = new Model();
+>, <Line: +//
+>, <Line: +//	@BeforeClass
+>, <Line: +//	public static void setup() {
+>, <Line: +//		Model.isInTestMode = true;
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	/**
+>, <Line: +//	 * Tests for the presence of keywords in a particular issue.
+>, <Line: +//	 *
+>, <Line: +//	 * @param issue
+>, <Line: +//	 */
+>, <Line: +//	private void testForKeywords(String prefix, TurboIssue issue) {
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("test"), issue), true);
+>, <Line: +//
+>, <Line: +//		// Substring
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("te"), issue), true);
+>, <Line: +//
+>, <Line: +//		// Implicit conjunction
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is a"), issue), true);
+>, <Line: +//
+>, <Line: +//		// Like above but out of order
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("a is"), issue), true);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	private void testForKeywords(TurboIssue issue) {
+>, <Line: +//		testForKeywords("", issue);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	/**
+>, <Line: +//	 * Creates a milestone and takes care of adding it to the model.
+>, <Line: +//	 *
+>, <Line: +//	 * @param title
+>, <Line: +//	 * @return
+>, <Line: +//	 */
+>, <Line: +//	private TurboMilestone createMilestone(String title) {
+>, <Line: +//		TurboMilestone milestone = new TurboMilestone(title);
+>, <Line: +//		model.addMilestone(milestone);
+>, <Line: +//		return milestone;
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	/**
+>, <Line: +//	 * Creates a label and takes care of adding it to the model.
+>, <Line: +//	 *
+>, <Line: +//	 * @param group
+>, <Line: +//	 * @param name
+>, <Line: +//	 * @return
+>, <Line: +//	 */
+>, <Line: +//	private TurboLabel createLabel(String group, String name) {
+>, <Line: +//		TurboLabel label = new TurboLabel();
+>, <Line: +//		label.setGroup(group);
+>, <Line: +//		label.setName(name);
+>, <Line: +//		model.addLabel(label);
+>, <Line: +//		return label;
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	/**
+>, <Line: +//	 * Creates a user and takes care of adding it to the model.
+>, <Line: +//	 *
+>, <Line: +//	 * @param realName
+>, <Line: +//	 * @param gitHubName
+>, <Line: +//	 * @return
+>, <Line: +//	 */
+>, <Line: +//	private TurboUser createUser(String gitHubName, String realName) {
+>, <Line: +//		TurboUser user = new TurboUser();
+>, <Line: +//		user.setGithubName(gitHubName);
+>, <Line: +//		user.setRealName(realName);
+>, <Line: +//		model.addCollaborator(user);
+>, <Line: +//		return user;
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void id() {
+>, <Line: +//		TurboIssue issue = new TurboIssue("1", "desc", model);
+>, <Line: +//		issue.setId(1);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("id:1"), issue), true);
+>, <Line: +//
+>, <Line: +//		// Non-number
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("id:a"), issue), false);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void keyword() {
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "this is a test", model);
+>, <Line: +//		testForKeywords(issue);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void title() {
+>, <Line: +//		TurboIssue issue = new TurboIssue("this is a test", "", model);
+>, <Line: +//		testForKeywords(issue);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void body() {
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "this is a test", model);
+>, <Line: +//		testForKeywords(issue);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void in() {
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "this is a test", model);
+>, <Line: +//		testForKeywords("in:body ", issue);
+>, <Line: +//
+>, <Line: +//		issue = new TurboIssue("this is a test", "", model);
+>, <Line: +//		testForKeywords("in:title ", issue);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void milestone() {
+>, <Line: +//		TurboMilestone milestone = createMilestone("v1.0");
+>, <Line: +//
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.setMilestone(milestone);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("milestone:v1.0"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("milestone:v1"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("milestone:1"), issue), false);
+>, <Line: +//		try {
+>, <Line: +//			assertEquals(Qualifier.process(Parser.parse("milestone:."), issue), true);
+>, <Line: +//			fail(". is not a valid token on its own");
+>, <Line: +//		} catch (ParseException e) {
+>, <Line: +//		}
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("milestone:what"), issue), false);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void parent() {
+>, <Line: +//		// TODO implement when parent issue feature returns
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void label() {
+>, <Line: +//		TurboLabel label = createLabel("type", "bug");
+>, <Line: +//
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.addLabel(label);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("label:type"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("label:type."), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("label:type.bug"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("label:bug"), issue), true);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void assignee() {
+>, <Line: +//		TurboUser user = createUser("bob", "alice");
+>, <Line: +//		model.addCollaborator(user);
+>, <Line: +//
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.setAssignee(user);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("assignee:BOB"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("assignee:bob"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("assignee:alice"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("assignee:o"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("assignee:lic"), issue), true);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void author() {
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.setCreator("bob");
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("author:BOB"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("author:bob"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("author:alice"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("author:o"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("author:lic"), issue), false);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void involves() {
+>, <Line: +//		// involves = assignee || author
+>, <Line: +//
+>, <Line: +//		// assignee
+>, <Line: +//		TurboUser user = createUser("bob", "alice");
+>, <Line: +//		model.addCollaborator(user);
+>, <Line: +//
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.setAssignee(user);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("involves:BOB"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("involves:bob"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("involves:alice"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("involves:o"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("involves:lic"), issue), true);
+>, <Line: +//
+>, <Line: +//		// author
+>, <Line: +//		issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.setCreator("bob");
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("involves:BOB"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("involves:bob"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("involves:alice"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("involves:o"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("involves:lic"), issue), false);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void state() {
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.setOpen(false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("state:open"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("state:o"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("state:closed"), issue), true);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void has() {
+>, <Line: +//		TurboLabel label = createLabel("type", "bug");
+>, <Line: +//		TurboUser user = createUser("bob", "alice");
+>, <Line: +//		TurboMilestone milestone = createMilestone("v1.0");
+>, <Line: +//
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:label"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:milestone"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:assignee"), issue), false);
+>, <Line: +//
+>, <Line: +//		issue.addLabel(label);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:label"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:milestone"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:assignee"), issue), false);
+>, <Line: +//
+>, <Line: +//		issue.setMilestone(milestone);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:label"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:milestone"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:assignee"), issue), false);
+>, <Line: +//
+>, <Line: +//		issue.setAssignee(user);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:label"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:milestone"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("has:assignee"), issue), true);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void no() {
+>, <Line: +//		TurboLabel label = createLabel("type", "bug");
+>, <Line: +//		TurboUser user = createUser("bob", "alice");
+>, <Line: +//		TurboMilestone milestone = createMilestone("v1.0");
+>, <Line: +//
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:label"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:milestone"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:assignee"), issue), true);
+>, <Line: +//
+>, <Line: +//		issue.addLabel(label);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:label"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:milestone"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:assignee"), issue), true);
+>, <Line: +//
+>, <Line: +//		issue.setMilestone(milestone);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:label"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:milestone"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:assignee"), issue), true);
+>, <Line: +//
+>, <Line: +//		issue.setAssignee(user);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:label"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:milestone"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("no:assignee"), issue), false);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void type() {
+>, <Line: +//		PullRequest pr = new PullRequest();
+>, <Line: +//		pr.setUrl("something");
+>, <Line: +//
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.setPullRequest(pr);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is:issue"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is:pr"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is:ssu"), issue), false);
+>, <Line: +//
+>, <Line: +//		issue = new TurboIssue("", "", model);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is:issue"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is:pr"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is:ssu"), issue), false);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void is() {
+>, <Line: +//		PullRequest pr = new PullRequest();
+>, <Line: +//		pr.setUrl("something");
+>, <Line: +//
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.setPullRequest(pr);
+>, <Line: +//		issue.setOpen(false);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is:merged"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is:unmerged"), issue), false);
+>, <Line: +//
+>, <Line: +//		issue.setOpen(true);
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is:merged"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("is:unmerged"), issue), true);
+>, <Line: +//
+>, <Line: +//		// The rest are delegated to state and type, so this should pass if they pass
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void created() {
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//		Date date = new Date(Utility.localDateTimeToLong(LocalDateTime.of(2014, 12, 2, 12, 0)));
+>, <Line: +//		issue.setCreatedAt(new SimpleDateFormat("d MMM yy, h:mm a").format(date));
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("created:<2014-12-1"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("created:<=2014-12-1"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("created:>2014-12-1"), issue), true);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//	@Test
+>, <Line: +//	public void updated() {
+>, <Line: +//		LocalDateTime now = LocalDateTime.now();
+>, <Line: +//		Qualifier.setCurrentTime(now);
+>, <Line: +//
+>, <Line: +//		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.setUpdatedAt(now.minusDays(2));
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("updated:<24"), issue), false);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("updated:>24"), issue), true);
+>, <Line: +//
+>, <Line: +//		issue = new TurboIssue("", "", model);
+>, <Line: +//		issue.setUpdatedAt(now.minusDays(1));
+>, <Line: +//
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("updated:<26"), issue), true);
+>, <Line: +//		assertEquals(Qualifier.process(Parser.parse("updated:>26"), issue), false);
+>, <Line: +//	}
+>, <Line: +//
+>, <Line: +//}
+>]
+[<Line: -package tests;
+>, <Line: -import static org.junit.Assert.assertEquals;
+>, <Line: -import static org.junit.Assert.fail;
+>, <Line: -import java.text.SimpleDateFormat;
+>, <Line: -import java.time.LocalDateTime;
+>, <Line: -import java.util.Date;
+>, <Line: -import model.Model;
+>, <Line: -import model.TurboIssue;
+>, <Line: -import model.TurboLabel;
+>, <Line: -import model.TurboMilestone;
+>, <Line: -import model.TurboUser;
+>, <Line: -import org.eclipse.egit.github.core.PullRequest;
+>, <Line: -import org.junit.BeforeClass;
+>, <Line: -import org.junit.Test;
+>, <Line: -import util.Utility;
+>, <Line: -import filter.ParseException;
+>, <Line: -import filter.Parser;
+>, <Line: -import filter.expression.Qualifier;
+>, <Line: -public class FilterEvalTests {
+>, <Line: -	private final Model model = new Model();
+>, <Line: -	@BeforeClass
+>, <Line: -	public static void setup() {
+>, <Line: -		Model.isInTestMode = true;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Tests for the presence of keywords in a particular issue.
+>, <Line: -	 * 
+>, <Line: -	 * @param issue
+>, <Line: -	 */
+>, <Line: -	private void testForKeywords(String prefix, TurboIssue issue) {
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("test"), issue), true);
+>, <Line: -		// Substring
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("te"), issue), true);
+>, <Line: -		// Implicit conjunction
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is a"), issue), true);
+>, <Line: -		// Like above but out of order
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("a is"), issue), true);
+>, <Line: -	}
+>, <Line: -	private void testForKeywords(TurboIssue issue) {
+>, <Line: -		testForKeywords("", issue);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Creates a milestone and takes care of adding it to the model.
+>, <Line: -	 * 
+>, <Line: -	 * @param title
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private TurboMilestone createMilestone(String title) {
+>, <Line: -		TurboMilestone milestone = new TurboMilestone(title);
+>, <Line: -		model.addMilestone(milestone);
+>, <Line: -		return milestone;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Creates a label and takes care of adding it to the model.
+>, <Line: -	 * 
+>, <Line: -	 * @param group
+>, <Line: -	 * @param name
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private TurboLabel createLabel(String group, String name) {
+>, <Line: -		TurboLabel label = new TurboLabel();
+>, <Line: -		label.setGroup(group);
+>, <Line: -		label.setName(name);
+>, <Line: -		model.addLabel(label);
+>, <Line: -		return label;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Creates a user and takes care of adding it to the model.
+>, <Line: -	 * 
+>, <Line: -	 * @param realName
+>, <Line: -	 * @param gitHubName
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	private TurboUser createUser(String gitHubName, String realName) {
+>, <Line: -		TurboUser user = new TurboUser();
+>, <Line: -		user.setGithubName(gitHubName);
+>, <Line: -		user.setRealName(realName);
+>, <Line: -		model.addCollaborator(user);
+>, <Line: -		return user;
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void id() {
+>, <Line: -		TurboIssue issue = new TurboIssue("1", "desc", model);
+>, <Line: -		issue.setId(1);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("id:1"), issue), true);
+>, <Line: -		// Non-number
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("id:a"), issue), false);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void keyword() {
+>, <Line: -		TurboIssue issue = new TurboIssue("", "this is a test", model);
+>, <Line: -		testForKeywords(issue);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void title() {
+>, <Line: -		TurboIssue issue = new TurboIssue("this is a test", "", model);
+>, <Line: -		testForKeywords(issue);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void body() {
+>, <Line: -		TurboIssue issue = new TurboIssue("", "this is a test", model);
+>, <Line: -		testForKeywords(issue);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void in() {
+>, <Line: -		TurboIssue issue = new TurboIssue("", "this is a test", model);
+>, <Line: -		testForKeywords("in:body ", issue);
+>, <Line: -		issue = new TurboIssue("this is a test", "", model);
+>, <Line: -		testForKeywords("in:title ", issue);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void milestone() {
+>, <Line: -		TurboMilestone milestone = createMilestone("v1.0");
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		issue.setMilestone(milestone);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("milestone:v1.0"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("milestone:v1"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("milestone:1"), issue), false);
+>, <Line: -		try {
+>, <Line: -			assertEquals(Qualifier.process(Parser.parse("milestone:."), issue), true);
+>, <Line: -			fail(". is not a valid token on its own");
+>, <Line: -		} catch (ParseException e) {
+>, <Line: -		}
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("milestone:what"), issue), false);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void parent() {
+>, <Line: -		// TODO implement when parent issue feature returns
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void label() {
+>, <Line: -		TurboLabel label = createLabel("type", "bug");
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		issue.addLabel(label);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("label:type"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("label:type."), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("label:type.bug"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("label:bug"), issue), true);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void assignee() {
+>, <Line: -		TurboUser user = createUser("bob", "alice");
+>, <Line: -		model.addCollaborator(user);
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		issue.setAssignee(user);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("assignee:BOB"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("assignee:bob"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("assignee:alice"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("assignee:o"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("assignee:lic"), issue), true);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void author() {
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		issue.setCreator("bob");
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("author:BOB"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("author:bob"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("author:alice"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("author:o"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("author:lic"), issue), false);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void involves() {
+>, <Line: -		// involves = assignee || author
+>, <Line: -		// assignee
+>, <Line: -		TurboUser user = createUser("bob", "alice");
+>, <Line: -		model.addCollaborator(user);
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		issue.setAssignee(user);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("involves:BOB"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("involves:bob"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("involves:alice"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("involves:o"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("involves:lic"), issue), true);
+>, <Line: -		// author
+>, <Line: -		issue = new TurboIssue("", "", model);
+>, <Line: -		issue.setCreator("bob");
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("involves:BOB"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("involves:bob"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("involves:alice"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("involves:o"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("involves:lic"), issue), false);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void state() {
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		issue.setOpen(false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("state:open"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("state:o"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("state:closed"), issue), true);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void has() {
+>, <Line: -		TurboLabel label = createLabel("type", "bug");
+>, <Line: -		TurboUser user = createUser("bob", "alice");
+>, <Line: -		TurboMilestone milestone = createMilestone("v1.0");
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:label"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:milestone"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:assignee"), issue), false);
+>, <Line: -		issue.addLabel(label);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:label"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:milestone"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:assignee"), issue), false);
+>, <Line: -		issue.setMilestone(milestone);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:label"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:milestone"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:assignee"), issue), false);
+>, <Line: -		issue.setAssignee(user);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:label"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:milestone"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("has:assignee"), issue), true);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void no() {
+>, <Line: -		TurboLabel label = createLabel("type", "bug");
+>, <Line: -		TurboUser user = createUser("bob", "alice");
+>, <Line: -		TurboMilestone milestone = createMilestone("v1.0");
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:label"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:milestone"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:assignee"), issue), true);
+>, <Line: -		issue.addLabel(label);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:label"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:milestone"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:assignee"), issue), true);
+>, <Line: -		issue.setMilestone(milestone);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:label"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:milestone"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:assignee"), issue), true);
+>, <Line: -		issue.setAssignee(user);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:label"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:milestone"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("no:assignee"), issue), false);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void type() {
+>, <Line: -		PullRequest pr = new PullRequest();
+>, <Line: -		pr.setUrl("something");
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		issue.setPullRequest(pr);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is:issue"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is:pr"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is:ssu"), issue), false);
+>, <Line: -		issue = new TurboIssue("", "", model);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is:issue"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is:pr"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is:ssu"), issue), false);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void is() {
+>, <Line: -		PullRequest pr = new PullRequest();
+>, <Line: -		pr.setUrl("something");
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		issue.setPullRequest(pr);
+>, <Line: -		issue.setOpen(false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is:merged"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is:unmerged"), issue), false);
+>, <Line: -		issue.setOpen(true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is:merged"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("is:unmerged"), issue), true);
+>, <Line: -		// The rest are delegated to state and type, so this should pass if they pass
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void created() {
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		Date date = new Date(Utility.localDateTimeToLong(LocalDateTime.of(2014, 12, 2, 12, 0)));
+>, <Line: -		issue.setCreatedAt(new SimpleDateFormat("d MMM yy, h:mm a").format(date));
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("created:<2014-12-1"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("created:<=2014-12-1"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("created:>2014-12-1"), issue), true);
+>, <Line: -	}
+>, <Line: -	@Test
+>, <Line: -	public void updated() {
+>, <Line: -		LocalDateTime now = LocalDateTime.now();
+>, <Line: -		Qualifier.setCurrentTime(now);
+>, <Line: -		TurboIssue issue = new TurboIssue("", "", model);
+>, <Line: -		issue.setUpdatedAt(now.minusDays(2));
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("updated:<24"), issue), false);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("updated:>24"), issue), true);
+>, <Line: -		issue = new TurboIssue("", "", model);
+>, <Line: -		issue.setUpdatedAt(now.minusDays(1));
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("updated:<26"), issue), true);
+>, <Line: -		assertEquals(Qualifier.process(Parser.parse("updated:>26"), issue), false);
+>, <Line: -	}
+>, <Line: -}
+>]

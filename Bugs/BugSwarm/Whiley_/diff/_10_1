@@ -1,0 +1,16 @@
+[<Line: +					Expr v = convert(constant, stmt, context.getEnvironment());
+>, <Line: +		return convert(bytecode.constant(), expr, environment);
+>, <Line: +	private Expr convert(Constant c, SyntaxTree.Location<?> context, LocalEnvironment environment) {
+>, <Line: +				items[i] = convert(cb_values.get(i), context, environment);
+>, <Line: +				WyalFile.Expr val = convert(e.getValue(), context, environment);
+>, <Line: +			// Constant.Lambda --- basically just treat as unknown variable
+>, <Line: +			return translateAsUnknown(context,environment);
+>]
+[<Line: -					Expr v = convert(constant, stmt);
+>, <Line: -		return convert(bytecode.constant(), expr);
+>, <Line: -	private Expr convert(Constant c, SyntaxTree.Location<?> context) {
+>, <Line: -				items[i] = convert(cb_values.get(i), context);
+>, <Line: -				WyalFile.Expr val = convert(e.getValue(), context);
+>, <Line: -			WyilFile.Declaration decl = context.getEnclosingTree().getEnclosingDeclaration();
+>, <Line: -			throw new InternalFailure("unknown constant encountered (" + c + ")", decl.parent().getEntry(), context);
+>]

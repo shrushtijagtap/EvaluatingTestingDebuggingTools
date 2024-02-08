@@ -1,0 +1,8 @@
+[<Line: +  image: hubspot/baragonservice:0.1.10
+>, <Line: +  image: hubspot/baragonagent:0.1.10
+>, <Line: +  image: hubspot/baragonagent:0.1.10
+>]
+[<Line: -  image: hubspot/baragonservice:0.1.9-SNAPSHOT
+>, <Line: -  image: hubspot/baragonagent:0.1.9-SNAPSHOT
+>, <Line: -  image: hubspot/baragonagent:0.1.9-SNAPSHOT
+>]

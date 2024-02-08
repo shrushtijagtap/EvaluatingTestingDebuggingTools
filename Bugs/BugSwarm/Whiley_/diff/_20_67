@@ -1,0 +1,4 @@
+[<Line: +native function f(int[] x) -> int:
+>]
+[<Line: -native function f([int] x) -> int:
+>]

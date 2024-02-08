@@ -1,0 +1,11 @@
+[<Line: +import cn.nukkit.utils.EventException;
+>, <Line: +    public void execute(Listener listener, Event event) throws EventException {
+>, <Line: +        } catch (InvocationTargetException ex) {
+>, <Line: +            throw new EventException(ex.getCause());
+>, <Line: +        } catch (Throwable t) {
+>, <Line: +            throw new EventException(t);
+>]
+[<Line: -    public void execute(Listener listener, Event event) {
+>, <Line: -        } catch (IllegalAccessException | InvocationTargetException e) {
+>, <Line: -            Server.getInstance().getLogger().logException(e);
+>]

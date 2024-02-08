@@ -1,0 +1,15 @@
+[<Line: +                    <releaseProfiles>extras,gpg</releaseProfiles>
+>]
+[<Line: -        <bytebuddy.release>false</bytebuddy.release>
+>, <Line: -                    <releaseProfiles>extras,gpg,release</releaseProfiles>
+>, <Line: -        <!-- For the Gradle plugin release, a property is required -->
+>, <Line: -        <profile>
+>, <Line: -            <id>release</id>
+>, <Line: -            <activation>
+>, <Line: -                <activeByDefault>false</activeByDefault>
+>, <Line: -            </activation>
+>, <Line: -            <properties>
+>, <Line: -                <bytebuddy.release>true</bytebuddy.release>
+>, <Line: -            </properties>
+>, <Line: -        </profile>
+>]

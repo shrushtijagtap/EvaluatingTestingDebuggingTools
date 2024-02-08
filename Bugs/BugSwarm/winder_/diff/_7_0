@@ -1,0 +1,6 @@
+[<Line: +        String g0 = "G90 " + g + " G0";
+>, <Line: +        if (params.zSpacing < 0 && params.retractHeight > params.zOffset) {
+>]
+[<Line: -        String g0 = "G91 " + g + " G0";
+>, <Line: -        if (params.zSpacing < 0 || params.retractHeight < params.zOffset) {
+>]

@@ -1,0 +1,9 @@
+[<Line: +        OWLDataFactory dataFactory, Set<OWLInverseObjectPropertiesAxiom> result,
+>, <Line: +        Set<OWLObjectPropertyExpression> nonSimpleProperties) {
+>, <Line: +            if (!prop.isAnonymous()) {
+>, <Line: +                result.add(dataFactory.getOWLInverseObjectPropertiesAxiom(entity, prop));
+>, <Line: +            }
+>]
+[<Line: -        OWLDataFactory dataFactory, Set<OWLInverseObjectPropertiesAxiom> result) {
+>, <Line: -            result.add(dataFactory.getOWLInverseObjectPropertiesAxiom(entity, prop));
+>]

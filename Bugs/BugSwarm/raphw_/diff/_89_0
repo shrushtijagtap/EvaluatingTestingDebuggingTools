@@ -1,0 +1,251 @@
+[<Line: +import java.lang.reflect.*;
+>, <Line: +     * Description of a loaded parameter with support for the information exposed by {@code java.lang.reflect.Parameter}.
+>, <Line: +     *
+>, <Line: +     * @param <T> The type of the {@code java.lang.reflect.Executable} that this list represents.
+>, <Line: +    abstract class ForLoadedParameter<T> extends InDefinedShape.AbstractBase {
+>, <Line: +         * A dispatcher for reading properties from {@code java.lang.reflect.Executable} instances.
+>, <Line: +                Class<?> executableType = Class.forName("java.lang.reflect.Executable");
+>, <Line: +                dispatcher = new Dispatcher.ForModernVm(executableType.getDeclaredMethod("getParameters"),
+>, <Line: +                        parameterType.getDeclaredMethod("getName"),
+>, <Line: +                        parameterType.getDeclaredMethod("getModifiers"));
+>, <Line: +         * The {@code java.lang.reflect.Executable} for which the parameter types are described.
+>, <Line: +        protected final T executable;
+>, <Line: +        protected final int index;
+>, <Line: +         * Creates a new description for a loaded parameter.
+>, <Line: +         * @param executable The {@code java.lang.reflect.Executable} for which the parameter types are described.
+>, <Line: +         * @param index      The parameter's index.
+>, <Line: +        protected ForLoadedParameter(T executable, int index) {
+>, <Line: +            this.executable = executable;
+>, <Line: +            return DISPATCHER.getName(executable, index);
+>, <Line: +            return DISPATCHER.isNamePresent(executable, index);
+>, <Line: +            return DISPATCHER.getModifiers(executable, index);
+>, <Line: +         * A dispatcher creating parameter descriptions based on the API that is available for the current JVM.
+>, <Line: +             * @param executable The executable to introspect.
+>, <Line: +             * @param index      The parameter's index.
+>, <Line: +            int getModifiers(Object executable, int index);
+>, <Line: +             * @param executable The parameter to introspect.
+>, <Line: +             * @param index      The parameter's index.
+>, <Line: +            boolean isNamePresent(Object executable, int index);
+>, <Line: +             * @param executable The parameter to introspect.
+>, <Line: +             * @param index      The parameter's index.
+>, <Line: +            String getName(Object executable, int index);
+>, <Line: +                 * A reference to {@code java.lang.reflect.Executable#getParameters}.
+>, <Line: +                private final Method getParameters;
+>, <Line: +                 * A reference to {@code java.lang.reflect.Parameter#getName}.
+>, <Line: +                private final Method getName;
+>, <Line: +                 * @param getParameters A reference to {@code java.lang.reflect.Executable#getParameters}.
+>, <Line: +                 * @param getName       A reference to {@code java.lang.reflect.Parameter#getName}.
+>, <Line: +                 * @param isNamePresent A reference to {@code java.lang.reflect.Parameter#isNamePresent}.
+>, <Line: +                 * @param getModifiers  A reference to {@code java.lang.reflect.Parameter#getModifiers}.
+>, <Line: +                protected ForModernVm(Method getParameters, Method getName, Method isNamePresent, Method getModifiers) {
+>, <Line: +                    this.getParameters = getParameters;
+>, <Line: +                public int getModifiers(Object executable, int index) {
+>, <Line: +                        return (Integer) getModifiers.invoke(getParameter(executable, index));
+>, <Line: +                public boolean isNamePresent(Object executable, int index) {
+>, <Line: +                        return (Boolean) isNamePresent.invoke(getParameter(executable, index));
+>, <Line: +                public String getName(Object executable, int index) {
+>, <Line: +                        return (String) getName.invoke(getParameter(executable, index));
+>, <Line: +                /**
+>, <Line: +                 * Returns the {@code java.lang.reflect.Parameter} of an executable at a given index.
+>, <Line: +                 *
+>, <Line: +                 * @param executable The executable for which a parameter should be read.
+>, <Line: +                 * @param index      The index of the parameter.
+>, <Line: +                 * @return The parameter for the given index.
+>, <Line: +                 */
+>, <Line: +                private Object getParameter(Object executable, int index) {
+>, <Line: +                        return Array.get(getParameters.invoke(executable), index);
+>, <Line: +                        throw new IllegalStateException("Cannot access java.lang.reflect.Executable#getParameters", exception);
+>, <Line: +                        throw new IllegalStateException("Error invoking java.lang.reflect.Executable#getParameters", exception.getCause());
+>, <Line: +                    return getParameters.equals(legal.getParameters)
+>, <Line: +                            && getName.equals(legal.getName)
+>, <Line: +                            && getModifiers.equals(legal.getModifiers);
+>, <Line: +                    int result = getParameters.hashCode();
+>, <Line: +                    result = 31 * result + getName.hashCode();
+>, <Line: +                            "getParameters=" + getParameters +
+>, <Line: +                            ", getName=" + getName +
+>, <Line: +                public int getModifiers(Object executable, int index) {
+>, <Line: +                public boolean isNamePresent(Object executable, int index) {
+>, <Line: +                public String getName(Object executable, int index) {
+>, <Line: +        /**
+>, <Line: +         * A description of a loaded {@link Method} parameter for a modern VM.
+>, <Line: +         */
+>, <Line: +        protected static class OfMethod extends ForLoadedParameter<Method> {
+>, <Line: +            /**
+>, <Line: +             * Creates a new description for a loaded method.
+>, <Line: +             *
+>, <Line: +             * @param method The method for which a parameter is represented.
+>, <Line: +             * @param index  The index of the parameter.
+>, <Line: +             */
+>, <Line: +            protected OfMethod(Method method, int index) {
+>, <Line: +                super(method, index);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public MethodDescription.InDefinedShape getDeclaringMethod() {
+>, <Line: +                return new MethodDescription.ForLoadedMethod(executable);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public GenericTypeDescription getType() {
+>, <Line: +                return new TypeDescription.LazyProjection.OfMethodParameter(executable, index, executable.getParameterTypes()[index]);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public AnnotationList getDeclaredAnnotations() {
+>, <Line: +                return new AnnotationList.ForLoadedAnnotation(executable.getParameterAnnotations()[index]);
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * A description of a loaded {@link Constructor} parameter for a modern VM.
+>, <Line: +         */
+>, <Line: +        protected static class OfConstructor extends ForLoadedParameter<Constructor<?>> {
+>, <Line: +            /**
+>, <Line: +             * Creates a new description for a loaded constructor.
+>, <Line: +             *
+>, <Line: +             * @param constructor The constructor for which a parameter is represented.
+>, <Line: +             * @param index       The index of the parameter.
+>, <Line: +             */
+>, <Line: +            protected OfConstructor(Constructor<?> constructor, int index) {
+>, <Line: +                super(constructor, index);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public MethodDescription.InDefinedShape getDeclaringMethod() {
+>, <Line: +                return new MethodDescription.ForLoadedConstructor(executable);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public GenericTypeDescription getType() {
+>, <Line: +                return new TypeDescription.LazyProjection.OfConstructorParameter(executable, index, executable.getParameterTypes()[index]);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public AnnotationList getDeclaredAnnotations() {
+>, <Line: +                return new AnnotationList.ForLoadedAnnotation(executable.getParameterAnnotations()[index]);
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +                return new TypeDescription.LazyProjection.OfMethodParameter(method, index, parameterType);
+>, <Line: +                return new TypeDescription.LazyProjection.OfConstructorParameter(constructor, index, parameterType);
+>]
+[<Line: -import java.lang.reflect.Constructor;
+>, <Line: -import java.lang.reflect.InvocationTargetException;
+>, <Line: -import java.lang.reflect.Method;
+>, <Line: -import java.lang.reflect.Modifier;
+>, <Line: -import java.util.Arrays;
+>, <Line: -     * Description of a loaded parameter, represented by a Java 8 {@code java.lang.reflect.Parameter}.
+>, <Line: -    class ForLoadedParameter extends InDefinedShape.AbstractBase {
+>, <Line: -         * A dispatcher for reading properties from {@code java.lang.reflect.Parameter} instances.
+>, <Line: -                dispatcher = new Dispatcher.ForModernVm(parameterType.getDeclaredMethod("getName"),
+>, <Line: -                        parameterType.getDeclaredMethod("getDeclaringExecutable"),
+>, <Line: -                        parameterType.getDeclaredMethod("getModifiers"),
+>, <Line: -                        parameterType.getDeclaredMethod("getDeclaredAnnotations"));
+>, <Line: -         * An instance of {@code java.lang.reflect.Parameter}.
+>, <Line: -        private final Object parameter;
+>, <Line: -        private final int index;
+>, <Line: -         * Creates a representation of a loaded parameter.
+>, <Line: -         * @param parameter An instance of {@code java.lang.reflect.Parameter}.
+>, <Line: -         * @param index     The parameter's index.
+>, <Line: -        protected ForLoadedParameter(Object parameter, int index) {
+>, <Line: -            this.parameter = parameter;
+>, <Line: -        @Override
+>, <Line: -        public GenericTypeDescription getType() {
+>, <Line: -            return new GenericTypeDescription.LazyProjection.OfLoadedParameter(parameter);
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public MethodDescription.InDefinedShape getDeclaringMethod() {
+>, <Line: -            Object executable = DISPATCHER.getDeclaringExecutable(parameter);
+>, <Line: -            if (executable instanceof Method) {
+>, <Line: -                return new MethodDescription.ForLoadedMethod((Method) executable);
+>, <Line: -            } else if (executable instanceof Constructor) {
+>, <Line: -                return new MethodDescription.ForLoadedConstructor((Constructor<?>) executable);
+>, <Line: -            } else {
+>, <Line: -                throw new IllegalStateException("Unknown executable type: " + executable);
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        @Override
+>, <Line: -        public AnnotationList getDeclaredAnnotations() {
+>, <Line: -            return new AnnotationList.ForLoadedAnnotation(DISPATCHER.getDeclaredAnnotations(parameter));
+>, <Line: -        }
+>, <Line: -            return DISPATCHER.getName(parameter);
+>, <Line: -            return DISPATCHER.isNamePresent(parameter);
+>, <Line: -            return DISPATCHER.getModifiers(parameter);
+>, <Line: -         * A dispatcher for {@code java.lang.reflect.Parameter} instances.
+>, <Line: -             * @param parameter The parameter to introspect.
+>, <Line: -            int getModifiers(Object parameter);
+>, <Line: -             * @param parameter The parameter to introspect.
+>, <Line: -            boolean isNamePresent(Object parameter);
+>, <Line: -             * @param parameter The parameter to introspect.
+>, <Line: -            String getName(Object parameter);
+>, <Line: -            /**
+>, <Line: -             * Returns the given parameter's annotations.
+>, <Line: -             *
+>, <Line: -             * @param parameter The parameter to introspect.
+>, <Line: -             * @return The parameter's declared annotations.
+>, <Line: -             */
+>, <Line: -            List<Annotation> getDeclaredAnnotations(Object parameter);
+>, <Line: -            /**
+>, <Line: -             * Returns the given parameter's declaring exectuable, i.e, method or constructor.
+>, <Line: -             *
+>, <Line: -             * @param parameter The parameter to introspect.
+>, <Line: -             * @return The parameter's declaring executable.
+>, <Line: -             */
+>, <Line: -            Object getDeclaringExecutable(Object parameter);
+>, <Line: -                 * A reference to {@code java.lang.reflect.Parameter#getName}.
+>, <Line: -                private final Method getName;
+>, <Line: -                 * A reference to {@code java.lang.reflect.Parameter#getDeclaringExecutable}.
+>, <Line: -                private final Method getDeclaringExecutable;
+>, <Line: -                /**
+>, <Line: -                 * A reference to {@code java.lang.reflect.Parameter#getDeclaredAnnotations}.
+>, <Line: -                 */
+>, <Line: -                private final Method getDeclaredAnnotations;
+>, <Line: -                 * @param getName                A reference to {@code java.lang.reflect.Parameter#getName}.
+>, <Line: -                 * @param getDeclaringExecutable A reference to {@code java.lang.reflect.Parameter#getDeclaringExecutable}.
+>, <Line: -                 * @param isNamePresent          A reference to {@code java.lang.reflect.Parameter#isNamePresent}.
+>, <Line: -                 * @param getModifiers           A reference to {@code java.lang.reflect.Parameter#getModifiers}.
+>, <Line: -                 * @param getDeclaredAnnotations A reference to {@code java.lang.reflect.Parameter#getDeclaredAnnotations}.
+>, <Line: -                protected ForModernVm(Method getName,
+>, <Line: -                                      Method getDeclaringExecutable,
+>, <Line: -                                      Method isNamePresent,
+>, <Line: -                                      Method getModifiers,
+>, <Line: -                                      Method getDeclaredAnnotations) {
+>, <Line: -                    this.getDeclaringExecutable = getDeclaringExecutable;
+>, <Line: -                    this.getDeclaredAnnotations = getDeclaredAnnotations;
+>, <Line: -                public int getModifiers(Object parameter) {
+>, <Line: -                        return (Integer) getModifiers.invoke(parameter);
+>, <Line: -                public boolean isNamePresent(Object parameter) {
+>, <Line: -                        return (Boolean) isNamePresent.invoke(parameter);
+>, <Line: -                public String getName(Object parameter) {
+>, <Line: -                        return (String) getName.invoke(parameter);
+>, <Line: -                @Override
+>, <Line: -                public List<Annotation> getDeclaredAnnotations(Object parameter) {
+>, <Line: -                    try {
+>, <Line: -                        return Arrays.asList((Annotation[]) getDeclaredAnnotations.invoke(parameter));
+>, <Line: -                    } catch (IllegalAccessException exception) {
+>, <Line: -                        throw new IllegalStateException("Cannot access java.lang.reflect.Parameter#getDeclaredAnnotations", exception);
+>, <Line: -                    } catch (InvocationTargetException exception) {
+>, <Line: -                        throw new IllegalStateException("Error invoking java.lang.reflect.Parameter#getDeclaredAnnotations", exception.getCause());
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -                @Override
+>, <Line: -                public Object getDeclaringExecutable(Object parameter) {
+>, <Line: -                        return getDeclaringExecutable.invoke(parameter);
+>, <Line: -                        throw new IllegalStateException("Cannot access java.lang.reflect.Parameter#getDeclaringExecutable", exception);
+>, <Line: -                        throw new IllegalStateException("Error invoking java.lang.reflect.Parameter#getDeclaringExecutable", exception.getCause());
+>, <Line: -                    return getName.equals(legal.getName)
+>, <Line: -                            && getDeclaringExecutable.equals(legal.getDeclaringExecutable)
+>, <Line: -                            && getModifiers.equals(legal.getModifiers)
+>, <Line: -                            && getDeclaredAnnotations.equals(legal.getDeclaredAnnotations);
+>, <Line: -                    int result = getName.hashCode();
+>, <Line: -                    result = 31 * result + getDeclaringExecutable.hashCode();
+>, <Line: -                    result = 31 * result + getDeclaredAnnotations.hashCode();
+>, <Line: -                            "getName=" + getName +
+>, <Line: -                            ", getDeclaringExecutable=" + getDeclaringExecutable +
+>, <Line: -                            ", getDeclaredAnnotations=" + getDeclaredAnnotations +
+>, <Line: -                public int getModifiers(Object parameter) {
+>, <Line: -                public boolean isNamePresent(Object parameter) {
+>, <Line: -                public String getName(Object parameter) {
+>, <Line: -                    throw new IllegalStateException("Cannot dispatch method for java.lang.reflect.Parameter");
+>, <Line: -                }
+>, <Line: -                @Override
+>, <Line: -                public List<Annotation> getDeclaredAnnotations(Object parameter) {
+>, <Line: -                    throw new IllegalStateException("Cannot dispatch method for java.lang.reflect.Parameter");
+>, <Line: -                }
+>, <Line: -                @Override
+>, <Line: -                public Object getDeclaringExecutable(Object parameter) {
+>, <Line: -                return new TypeDescription.LazyProjection.OfLoadedParameter.OfLegacyVmMethod(method, index, parameterType);
+>, <Line: -                return new TypeDescription.LazyProjection.OfLoadedParameter.OfLegacyVmConstructor(constructor, index, parameterType);
+>]

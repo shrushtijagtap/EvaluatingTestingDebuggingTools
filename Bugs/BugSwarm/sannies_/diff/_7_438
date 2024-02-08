@@ -1,0 +1,16 @@
+[<Line: +package org.mp4parser.tools.boxes;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.FreeBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.FreeSpaceBox;
+>, <Line: +import java.io.*;
+>, <Line: +        IsoFile isoFile = new IsoFile(new FileInputStream(f).getChannel());
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import java.io.ByteArrayOutputStream;
+>, <Line: -import java.io.File;
+>, <Line: -import java.io.FileOutputStream;
+>, <Line: -import java.io.IOException;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -        IsoFile isoFile = new IsoFile(f.getAbsolutePath());
+>]

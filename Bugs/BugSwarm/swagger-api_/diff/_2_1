@@ -1,0 +1,23 @@
+[<Line: +import java.util.List;
+>, <Line: + * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#componentsObject"
+>, <Line: +   * @return Map&lt;String, Schema&gt; schemas
+>, <Line: +   * @return Map&lt;String, ApiResponse&gt; responses
+>, <Line: +   * @return Map&lt;String, Parameter&gt; parameters
+>, <Line: +   * @return Map&lt;String, Example&gt; examples
+>, <Line: +   * @return Map&lt;String, RequestBody&gt; requestBodies
+>, <Line: +   * @return Map&lt;String, Header&gt; headers
+>, <Line: +   * @return Map&lt;String, SecurityScheme&gt; securitySchemes
+>, <Line: +   * @return Map&lt;String, Link&gt; links
+>, <Line: +   * @return Map&lt;String, Callback&gt; callbacks
+>]
+[<Line: - * @link https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc0/versions/3.0.md#componentsObject
+>, <Line: -   * @return Map<String, Schema> schemas
+>, <Line: -   * @return Map<String, ApiResponse> responses
+>, <Line: -   * @return Map<String, Parameter> parameters
+>, <Line: -   * @return Map<String, Example> examples
+>, <Line: -   * @return Map<String, RequestBody> requestBodies
+>, <Line: -   * @return Map<String, Header> headers
+>, <Line: -   * @return Map<String, SecurityScheme> securitySchemes
+>, <Line: -   * @return Map<String, Link> links
+>, <Line: -   * @return Map<String, Callback> callbacks
+>]

@@ -1,0 +1,37 @@
+[<Line: +                            throw new IllegalStateException("Inconsistent frame length for " + methodDescription + ": " + localVariableLength);
+>, <Line: +                            if (!translationMode.isPossibleThisFrameValue(instrumentedType, instrumentedMethod, localVariable[0])) {
+>, <Line: +                                throw new IllegalStateException(methodDescription + " is inconsistent for 'this' reference: " + localVariable[0]);
+>, <Line: +                                throw new IllegalStateException(methodDescription + " is inconsistent at " + index + ": " + localVariable[index + offset]);
+>, <Line: +                    @Override
+>, <Line: +                    protected boolean isPossibleThisFrameValue(TypeDescription instrumentedType, MethodDescription instrumentedMethod, Object frame) {
+>, <Line: +                        if (instrumentedMethod.isConstructor()) {
+>, <Line: +                            return Opcodes.UNINITIALIZED_THIS.equals(frame);
+>, <Line: +                        }
+>, <Line: +                        return toFrame(instrumentedType).equals(frame);
+>, <Line: +                    }
+>, <Line: +                    }
+>, <Line: +                    @Override
+>, <Line: +                    protected boolean isPossibleThisFrameValue(TypeDescription instrumentedType, MethodDescription instrumentedMethod, Object frame) {
+>, <Line: +                        return instrumentedMethod.isConstructor()
+>, <Line: +                                ? Opcodes.UNINITIALIZED_THIS.equals(frame)
+>, <Line: +                                : toFrame(instrumentedType).equals(frame);
+>, <Line: +                    @Override
+>, <Line: +                    protected boolean isPossibleThisFrameValue(TypeDescription instrumentedType, MethodDescription instrumentedMethod, Object frame) {
+>, <Line: +                        return toFrame(instrumentedType).equals(frame);
+>, <Line: +                    }
+>, <Line: +                /**
+>, <Line: +                 * Checks if a variable value in a stack map frame is a legal value for describing a {@code this} reference.
+>, <Line: +                 *
+>, <Line: +                 * @param instrumentedType   The instrumented type.
+>, <Line: +                 * @param instrumentedMethod The instrumented method.
+>, <Line: +                 * @param frame              The frame value representing the {@code this} reference.
+>, <Line: +                 * @return {@code true} if the value is a legal representation of the {@code this} reference.
+>, <Line: +                 */
+>, <Line: +                protected abstract boolean isPossibleThisFrameValue(TypeDescription instrumentedType, MethodDescription instrumentedMethod, Object frame);
+>]
+[<Line: -                            throw new IllegalStateException("Inconsistent frame length for " + methodDescription);
+>, <Line: -                            if (localVariable[0] != Opcodes.UNINITIALIZED_THIS
+>, <Line: -                                    && !toFrame(methodDescription.getDeclaringType().asErasure()).equals(localVariable[0])) {
+>, <Line: -                                throw new IllegalStateException("Inconsistent frame type for this reference found for " + methodDescription);
+>, <Line: -                                throw new IllegalStateException("Inconsistent frame at parameter index " + index + " found for " + methodDescription);
+>]

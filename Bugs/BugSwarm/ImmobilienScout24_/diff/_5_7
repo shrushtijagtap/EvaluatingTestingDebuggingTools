@@ -1,0 +1,10 @@
+[<Line: +    @Nonnull
+>, <Line: +    public static StaticLoggerBinder getSingleton() {
+>, <Line: +        return INSTANCE;
+>, <Line: +    }
+>]
+[<Line: -    @Nonnull
+>, <Line: -    public static StaticLoggerBinder getSingleton() {
+>, <Line: -        return INSTANCE;
+>, <Line: -    }
+>]

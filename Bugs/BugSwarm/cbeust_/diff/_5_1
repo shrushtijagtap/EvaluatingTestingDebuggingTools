@@ -1,0 +1,5 @@
+[<Line: +    if (a == null) {
+>, <Line: +      return null;
+>, <Line: +    }
+>]
+[]

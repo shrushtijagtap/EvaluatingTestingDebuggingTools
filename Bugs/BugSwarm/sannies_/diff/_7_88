@@ -1,0 +1,65 @@
+[]
+[<Line: -package com.googlecode.mp4parser.util;
+>, <Line: -import java.util.AbstractList;
+>, <Line: -import java.util.Iterator;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.NoSuchElementException;
+>, <Line: -/**
+>, <Line: - * This lazy list tries to postpone the size() call as much as possible.
+>, <Line: - */
+>, <Line: -public class LazyList<E> extends AbstractList<E> {
+>, <Line: -    private static final Logger LOG = Logger.getLogger(LazyList.class);
+>, <Line: -    List<E> underlying;
+>, <Line: -    Iterator<E> elementSource;
+>, <Line: -    public LazyList(List<E> underlying, Iterator<E> elementSource) {
+>, <Line: -        this.underlying = underlying;
+>, <Line: -        this.elementSource = elementSource;
+>, <Line: -    }
+>, <Line: -    public List<E> getUnderlying() {
+>, <Line: -        return underlying;
+>, <Line: -    }
+>, <Line: -    private void blowup() {
+>, <Line: -        LOG.logDebug("blowup running");
+>, <Line: -        while (elementSource.hasNext()) {
+>, <Line: -            underlying.add(elementSource.next());
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    public E get(int i) {
+>, <Line: -        if (underlying.size() > i) {
+>, <Line: -            return underlying.get(i);
+>, <Line: -        } else {
+>, <Line: -            if (elementSource.hasNext()) {
+>, <Line: -                underlying.add(elementSource.next());
+>, <Line: -                return get(i);
+>, <Line: -            } else {
+>, <Line: -                throw new NoSuchElementException();
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    public Iterator<E> iterator() {
+>, <Line: -        return new Iterator<E>() {
+>, <Line: -            int pos = 0;
+>, <Line: -            public boolean hasNext() {
+>, <Line: -                return pos < underlying.size() || elementSource.hasNext();
+>, <Line: -            }
+>, <Line: -            public E next() {
+>, <Line: -                if (pos < underlying.size()) {
+>, <Line: -                    return underlying.get(pos++);
+>, <Line: -                } else {
+>, <Line: -                    underlying.add(elementSource.next());
+>, <Line: -                    return next();
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            public void remove() {
+>, <Line: -                throw new UnsupportedOperationException();
+>, <Line: -            }
+>, <Line: -        };
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public int size() {
+>, <Line: -        LOG.logDebug("potentially expensive size() call");
+>, <Line: -        blowup();
+>, <Line: -        return underlying.size();
+>, <Line: -    }
+>, <Line: -}
+>]

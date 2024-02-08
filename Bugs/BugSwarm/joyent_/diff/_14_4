@@ -1,0 +1,12 @@
+[<Line: +public class MantaDirectoryListingIteratorIT {
+>, <Line: +        try (MantaDirectoryListingIterator itr = new MantaDirectoryListingIterator(url,
+>, <Line: +        try (MantaDirectoryListingIterator itr = new MantaDirectoryListingIterator(url,
+>, <Line: +        try (MantaDirectoryListingIterator itr = new MantaDirectoryListingIterator(url,
+>, <Line: +        try (MantaDirectoryListingIterator itr = new MantaDirectoryListingIterator(url,
+>]
+[<Line: -public class MantaDirectoryIteratorIT {
+>, <Line: -        try (MantaDirectoryIterator itr = new MantaDirectoryIterator(url,
+>, <Line: -        try (MantaDirectoryIterator itr = new MantaDirectoryIterator(url,
+>, <Line: -        try (MantaDirectoryIterator itr = new MantaDirectoryIterator(url,
+>, <Line: -        try (MantaDirectoryIterator itr = new MantaDirectoryIterator(url,
+>]

@@ -1,0 +1,11 @@
+[]
+[<Line: -package net.bytebuddy.utility;
+>, <Line: -import net.bytebuddy.test.utility.ObjectPropertyAssertion;
+>, <Line: -import org.junit.Test;
+>, <Line: -public class PropertyDispatcherObjectPropertiesTest {
+>, <Line: -    @Test
+>, <Line: -    public void testObjectProperties() throws Exception {
+>, <Line: -        ObjectPropertyAssertion.of(PropertyDispatcher.class).apply();
+>, <Line: -    }
+>, <Line: -}
+>]

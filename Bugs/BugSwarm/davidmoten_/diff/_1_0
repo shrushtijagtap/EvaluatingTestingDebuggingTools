@@ -1,0 +1,75 @@
+[<Line: +package com.github.davidmoten.rx;
+>, <Line: +import static java.lang.annotation.ElementType.METHOD;
+>, <Line: +import static org.junit.Assert.assertEquals;
+>, <Line: +import java.lang.annotation.Retention;
+>, <Line: +import java.lang.annotation.RetentionPolicy;
+>, <Line: +import java.lang.annotation.Target;
+>, <Line: +import java.lang.reflect.Method;
+>, <Line: +import org.junit.Test;
+>, <Line: +public class DynamicProxyTest {
+>, <Line: +    @Target({ METHOD })
+>, <Line: +    @Retention(RetentionPolicy.RUNTIME)
+>, <Line: +    public static @interface Column {
+>, <Line: +        String value();
+>, <Line: +    }
+>, <Line: +    @Target({ METHOD })
+>, <Line: +    @Retention(RetentionPolicy.RUNTIME)
+>, <Line: +    public static @interface Index {
+>, <Line: +        /**
+>, <Line: +         * 1 based index corresponding the index in a
+>, <Line: +         * <code>ResultSet.getObject(index)</code> call.
+>, <Line: +         * 
+>, <Line: +         * @return the 1 based index that the annotated method corresponds to in
+>, <Line: +         *         the ResultSet
+>, <Line: +         */
+>, <Line: +        int value();
+>, <Line: +    }
+>, <Line: +    public static interface Thing {
+>, <Line: +        @Column("table_id")
+>, <Line: +        int id();
+>, <Line: +        int nonNullNumber();
+>, <Line: +        @Index(2)
+>, <Line: +        String name();
+>, <Line: +        @Column("desc")
+>, <Line: +        String description();
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testDynamicProxy() {
+>, <Line: +        Thing t = ProxyService.newInstance(Thing.class);
+>, <Line: +        assertEquals(123, t.id());
+>, <Line: +        assertEquals("fred 2", t.name());
+>, <Line: +        assertEquals("he's the business! desc", t.description());
+>, <Line: +    }
+>, <Line: +    @Test(expected=NullPointerException.class)
+>, <Line: +    public void testDynamicProxyReturnsNullForNonNullMethod() {
+>, <Line: +        Thing t = ProxyService.newInstance(Thing.class);
+>, <Line: +        t.nonNullNumber();
+>, <Line: +    }
+>, <Line: +    public static class ProxyService implements java.lang.reflect.InvocationHandler {
+>, <Line: +        @SuppressWarnings("unchecked")
+>, <Line: +        public static <T> T newInstance(Class<T> cls) {
+>, <Line: +            return (T) java.lang.reflect.Proxy.newProxyInstance(cls.getClassLoader(),
+>, <Line: +                    new Class[] { cls }, new ProxyService());
+>, <Line: +        }
+>, <Line: +        public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {
+>, <Line: +            Column a = m.getAnnotation(Column.class);
+>, <Line: +            final String column;
+>, <Line: +            if (a == null)
+>, <Line: +                column = null;
+>, <Line: +            else
+>, <Line: +                column = a.value();
+>, <Line: +            String name = m.getName();
+>, <Line: +            if (name.equals("id")) {
+>, <Line: +                return 123;
+>, <Line: +            } else if (name.equals("name")) {
+>, <Line: +                return "fred " + m.getAnnotation(Index.class).value();
+>, <Line: +            } else if (name.equals("description")) {
+>, <Line: +                return "he's the business! " + column;
+>, <Line: +            } else if (name.equals("nonNullNumber")) 
+>, <Line: +               return null;
+>, <Line: +            else
+>, <Line: +                throw new RuntimeException("unexpected");
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}>]
+[]

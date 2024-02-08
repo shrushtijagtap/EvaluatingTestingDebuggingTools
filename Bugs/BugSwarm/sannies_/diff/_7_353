@@ -1,0 +1,19 @@
+[<Line: +package org.mp4parser.tools;
+>, <Line: + * A little helper for working with arrays as some functions now available in Java 7/8 are
+>, <Line: + * not available on all Android platforms.
+>, <Line: +    public static byte[] copyOfAndAppend(byte[] original, byte... toAppend) {
+>, <Line: +        if (original == null) {
+>, <Line: +            original = new byte[]{};
+>, <Line: +        }
+>, <Line: +        if (toAppend == null) {
+>, <Line: +            toAppend = new byte[]{};
+>, <Line: +        }
+>, <Line: +        byte[] copy = new byte[original.length + toAppend.length];
+>, <Line: +        System.arraycopy(original, 0, copy, 0, original.length);
+>, <Line: +        System.arraycopy(toAppend, 0, copy, original.length, toAppend.length);
+>, <Line: +        return copy;
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.util;
+>, <Line: - * Created by sannies on 02.05.2015.
+>]

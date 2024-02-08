@@ -1,0 +1,6 @@
+[<Line: +   t = Token.newToken(jjmatchedKind, curTokenImage);
+>]
+[<Line: -   t = Token.newToken(jjmatchedKind);
+>, <Line: -   t.kind = jjmatchedKind;
+>, <Line: -   t.image = curTokenImage;
+>]

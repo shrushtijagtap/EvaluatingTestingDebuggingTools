@@ -1,0 +1,19 @@
+[<Line: +    <test name="Manta Client Tests ApacheHttpTransport">
+>, <Line: +        <parameter name="manta.http_transport" value="ApacheHttpTransport"/>
+>, <Line: +        <classes>
+>, <Line: +            <class name="com.joyent.manta.client.TestSuiteSetup" />
+>, <Line: +            <class name="com.joyent.manta.client.MantaClientDirectoriesIT" />
+>, <Line: +            <class name="com.joyent.manta.client.MantaClientIT" />
+>, <Line: +            <class name="com.joyent.manta.client.MantaClientSeekableByteChannelIT" />
+>, <Line: +            <class name="com.joyent.manta.client.MantaClientMetadataIT" />
+>, <Line: +            <class name="com.joyent.manta.client.MantaClientJobIT" />
+>, <Line: +            <class name="com.joyent.manta.client.MantaHttpHeadersIT" />
+>, <Line: +            <class name="com.joyent.manta.client.MantaDirectoryListingIteratorIT" />
+>, <Line: +            <class name="com.joyent.manta.client.MantaJobBuilderIT" />
+>, <Line: +        </classes>
+>, <Line: +    </test>
+>, <Line: +    <test name="Manta Client Tests NetHttpTransport">
+>, <Line: +        <parameter name="manta.http_transport" value="NetHttpTransport"/>
+>]
+[<Line: -    <test name="Manta Client Tests">
+>]

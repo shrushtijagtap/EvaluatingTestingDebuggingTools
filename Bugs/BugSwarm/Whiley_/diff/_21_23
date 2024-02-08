@@ -1,0 +1,9 @@
+[]
+[<Line: -type nat is (int x) where x >= 0
+>, <Line: -method main(int arg) -> int:
+>, <Line: -    [int] xs = [1, 2, 3]
+>, <Line: -    int r = arg - 1
+>, <Line: -    for x in xs where r >= 0:
+>, <Line: -        r = r + x
+>, <Line: -    return r
+>]

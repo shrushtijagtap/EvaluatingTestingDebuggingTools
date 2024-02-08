@@ -1,0 +1,4 @@
+[<Line: +    private final boolean simple;
+>]
+[<Line: -    private boolean simple;
+>]

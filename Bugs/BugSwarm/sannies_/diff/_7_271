@@ -1,0 +1,97 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part15;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.BitReaderBuffer;
+>, <Line: +import org.mp4parser.boxes.iso14496.part1.objectdescriptors.BitWriterBuffer;
+>, <Line: +import org.mp4parser.tools.Hex;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: + *
+>, <Line: + */
+>, <Line: +    public List<ByteBuffer> sequenceParameterSets = new ArrayList<ByteBuffer>();
+>, <Line: +    public List<ByteBuffer> pictureParameterSets = new ArrayList<ByteBuffer>();
+>, <Line: +    public List<ByteBuffer> sequenceParameterSetExts = new ArrayList<ByteBuffer>();
+>, <Line: +            sequenceParameterSets.add(ByteBuffer.wrap(sequenceParameterSetNALUnit));
+>, <Line: +            pictureParameterSets.add(ByteBuffer.wrap(pictureParameterSetNALUnit));
+>, <Line: +                sequenceParameterSetExts.add(ByteBuffer.wrap(sequenceParameterSetExtNALUnit));
+>, <Line: +        for (ByteBuffer sequenceParameterSetNALUnit : sequenceParameterSets) {
+>, <Line: +            IsoTypeWriter.writeUInt16(byteBuffer, sequenceParameterSetNALUnit.limit());
+>, <Line: +            byteBuffer.put((ByteBuffer) sequenceParameterSetNALUnit.rewind());
+>, <Line: +        for (ByteBuffer pictureParameterSetNALUnit : pictureParameterSets) {
+>, <Line: +            IsoTypeWriter.writeUInt16(byteBuffer, pictureParameterSetNALUnit.limit());
+>, <Line: +            byteBuffer.put((ByteBuffer) pictureParameterSetNALUnit.rewind());
+>, <Line: +            for (ByteBuffer sequenceParameterSetExtNALUnit : sequenceParameterSetExts) {
+>, <Line: +                IsoTypeWriter.writeUInt16(byteBuffer, sequenceParameterSetExtNALUnit.limit());
+>, <Line: +                byteBuffer.put((ByteBuffer) sequenceParameterSetExtNALUnit.reset());
+>, <Line: +        for (ByteBuffer sequenceParameterSetNALUnit : sequenceParameterSets) {
+>, <Line: +            size += sequenceParameterSetNALUnit.limit();
+>, <Line: +        for (ByteBuffer pictureParameterSetNALUnit : pictureParameterSets) {
+>, <Line: +            size += pictureParameterSetNALUnit.limit();
+>, <Line: +            for (ByteBuffer sequenceParameterSetExtNALUnit : sequenceParameterSetExts) {
+>, <Line: +                size += sequenceParameterSetExtNALUnit.limit();
+>, <Line: +        for (ByteBuffer parameterSet : sequenceParameterSets) {
+>, <Line: +        for (ByteBuffer parameterSet : sequenceParameterSetExts) {
+>, <Line: +        for (ByteBuffer parameterSet : pictureParameterSets) {
+>]
+[<Line: -package com.mp4parser.iso14496.part15;
+>, <Line: -import com.coremedia.iso.Hex;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.CleanInputStream;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.BitReaderBuffer;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.objectdescriptors.BitWriterBuffer;
+>, <Line: -import com.googlecode.mp4parser.h264.model.PictureParameterSet;
+>, <Line: -import com.googlecode.mp4parser.h264.model.SeqParameterSet;
+>, <Line: -import java.io.ByteArrayInputStream;
+>, <Line: -import java.io.IOException;
+>, <Line: -*
+>, <Line: -*/
+>, <Line: -    public List<byte[]> sequenceParameterSets = new ArrayList<byte[]>();
+>, <Line: -    public List<byte[]> pictureParameterSets = new ArrayList<byte[]>();
+>, <Line: -    public List<byte[]> sequenceParameterSetExts = new ArrayList<byte[]>();
+>, <Line: -            sequenceParameterSets.add(sequenceParameterSetNALUnit);
+>, <Line: -            pictureParameterSets.add(pictureParameterSetNALUnit);
+>, <Line: -                sequenceParameterSetExts.add(sequenceParameterSetExtNALUnit);
+>, <Line: -        for (byte[] sequenceParameterSetNALUnit : sequenceParameterSets) {
+>, <Line: -            IsoTypeWriter.writeUInt16(byteBuffer, sequenceParameterSetNALUnit.length);
+>, <Line: -            byteBuffer.put(sequenceParameterSetNALUnit);
+>, <Line: -        for (byte[] pictureParameterSetNALUnit : pictureParameterSets) {
+>, <Line: -            IsoTypeWriter.writeUInt16(byteBuffer, pictureParameterSetNALUnit.length);
+>, <Line: -            byteBuffer.put(pictureParameterSetNALUnit);
+>, <Line: -            for (byte[] sequenceParameterSetExtNALUnit : sequenceParameterSetExts) {
+>, <Line: -                IsoTypeWriter.writeUInt16(byteBuffer, sequenceParameterSetExtNALUnit.length);
+>, <Line: -                byteBuffer.put(sequenceParameterSetExtNALUnit);
+>, <Line: -        for (byte[] sequenceParameterSetNALUnit : sequenceParameterSets) {
+>, <Line: -            size += sequenceParameterSetNALUnit.length;
+>, <Line: -        for (byte[] pictureParameterSetNALUnit : pictureParameterSets) {
+>, <Line: -            size += pictureParameterSetNALUnit.length;
+>, <Line: -            for (byte[] sequenceParameterSetExtNALUnit : sequenceParameterSetExts) {
+>, <Line: -                size += sequenceParameterSetExtNALUnit.length;
+>, <Line: -    public String[] getPPS() {
+>, <Line: -        ArrayList<String> l = new ArrayList<String>();
+>, <Line: -        for (byte[] pictureParameterSet : pictureParameterSets) {
+>, <Line: -            String details = "not parsable";
+>, <Line: -            try {
+>, <Line: -                // skip NalUnit Header (will not work 100% but at least most cases)
+>, <Line: -                details = PictureParameterSet.read(new ByteArrayInputStream(pictureParameterSet, 1, pictureParameterSet.length - 1)).toString();
+>, <Line: -            } catch (IOException e) {
+>, <Line: -                throw new RuntimeException(e);
+>, <Line: -            }
+>, <Line: -            l.add(details);
+>, <Line: -        }
+>, <Line: -        return l.toArray(new String[l.size()]);
+>, <Line: -    }
+>, <Line: -    public String[] getSPS() {
+>, <Line: -        ArrayList<String> l = new ArrayList<String>();
+>, <Line: -        for (byte[] sequenceParameterSet : sequenceParameterSets) {
+>, <Line: -            String detail = "not parsable";
+>, <Line: -            try {
+>, <Line: -                detail = SeqParameterSet.read(new CleanInputStream(new ByteArrayInputStream(sequenceParameterSet, 1, sequenceParameterSet.length - 1))).toString();
+>, <Line: -            } catch (IOException e) {
+>, <Line: -            }
+>, <Line: -            l.add(detail);
+>, <Line: -        }
+>, <Line: -        return l.toArray(new String[l.size()]);
+>, <Line: -    }
+>, <Line: -        for (byte[] parameterSet : sequenceParameterSets) {
+>, <Line: -        for (byte[] parameterSet : sequenceParameterSetExts) {
+>, <Line: -        for (byte[] parameterSet : pictureParameterSets) {
+>]

@@ -1,0 +1,114 @@
+[]
+[<Line: -package model;
+>, <Line: -import javafx.scene.image.Image;
+>, <Line: -import org.eclipse.egit.github.core.User;
+>, <Line: -import storage.DataManager;
+>, <Line: -public class TurboUser implements TurboResource {
+>, <Line: -	/*
+>, <Line: -	 * Attributes, Getters & Setters
+>, <Line: -	 */
+>, <Line: -	public String getAlias() {
+>, <Line: -		String name = DataManager.getInstance().getUserAlias(getGithubName());
+>, <Line: -		return name == null ? getGithubName() : name;
+>, <Line: -	}
+>, <Line: -	private String githubName = "";
+>, <Line: -	public String getGithubName() {
+>, <Line: -		return githubName;
+>, <Line: -	}
+>, <Line: -	public void setGithubName(String githubName) {
+>, <Line: -		this.githubName = githubName;
+>, <Line: -	}
+>, <Line: -	private String realName;
+>, <Line: -	public String getRealName() {
+>, <Line: -		return realName;
+>, <Line: -	}
+>, <Line: -	public void setRealName(String realName) {
+>, <Line: -		this.realName = realName;
+>, <Line: -	}
+>, <Line: -	private String avatarUrl = "";
+>, <Line: -	public String getAvatarUrl(){
+>, <Line: -		return avatarUrl;
+>, <Line: -	}
+>, <Line: -	public void setAvatarUrl(String url){
+>, <Line: -		if(url != null){
+>, <Line: -			this.avatarUrl = url;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private transient Image avatar;
+>, <Line: -	public Image getAvatar() {
+>, <Line: -		if(avatarUrl == ""){
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -		if(avatar == null){
+>, <Line: -			avatar = new Image(getAvatarUrl(), 12, 12, true, false);
+>, <Line: -		}
+>, <Line: -		return avatar;
+>, <Line: -	}
+>, <Line: -	/*
+>, <Line: -	 * Constructors and Public Methods
+>, <Line: -	 */
+>, <Line: -	public TurboUser() {
+>, <Line: -	}
+>, <Line: -	public TurboUser(User user) {
+>, <Line: -		assert user != null;
+>, <Line: -		this.githubName = user.getLogin();
+>, <Line: -		this.realName = user.getName();
+>, <Line: -		this.avatarUrl = user.getAvatarUrl();
+>, <Line: -	}
+>, <Line: -	public TurboUser(TurboUser other) {
+>, <Line: -		this(other.toGhResource());
+>, <Line: -	}
+>, <Line: -	public User toGhResource() {
+>, <Line: -		User ghUser = new User();
+>, <Line: -		ghUser.setLogin(githubName);
+>, <Line: -		return ghUser;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public void copyValuesFrom(TurboResource other) {
+>, <Line: -		assert other != null;
+>, <Line: -		assert other instanceof TurboUser;
+>, <Line: -		TurboUser obj = (TurboUser) other;
+>, <Line: -		setGithubName(obj.getGithubName());
+>, <Line: -		setRealName(obj.getRealName());
+>, <Line: -		setAvatarUrl(obj.getAvatarUrl());
+>, <Line: -	}
+>, <Line: -	/*
+>, <Line: -	 * Overriden Methods
+>, <Line: -	 */
+>, <Line: -	@Override
+>, <Line: -	public String toString() {
+>, <Line: -		return "TurboUser [githubName=" + githubName + "]";
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * A convenient string representation of this object, for purposes of readable logs.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public String logString() {
+>, <Line: -		return githubName;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public int hashCode() {
+>, <Line: -		final int prime = 31;
+>, <Line: -		int result = 1;
+>, <Line: -		result = prime * result
+>, <Line: -				+ ((githubName == null) ? 0 : githubName.hashCode());
+>, <Line: -		return result;
+>, <Line: -	}
+>, <Line: -	@Override
+>, <Line: -	public boolean equals(Object obj) {
+>, <Line: -		if (this == obj)
+>, <Line: -			return true;
+>, <Line: -		if (obj == null)
+>, <Line: -			return false;
+>, <Line: -		if (getClass() != obj.getClass())
+>, <Line: -			return false;
+>, <Line: -		TurboUser other = (TurboUser) obj;
+>, <Line: -		if (githubName == null) {
+>, <Line: -			if (other.githubName != null)
+>, <Line: -				return false;
+>, <Line: -		} else if (!githubName.equals(other.githubName))
+>, <Line: -			return false;
+>, <Line: -		return true;
+>, <Line: -	}
+>, <Line: -}
+>]

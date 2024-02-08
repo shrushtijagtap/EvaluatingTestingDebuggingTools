@@ -1,0 +1,18 @@
+[<Line: +    private final ElementMatcher<? super T> matcher;
+>, <Line: +     * @param matcher The element matcher to apply to each element of a iterable collection.
+>, <Line: +    public CollectionItemMatcher(ElementMatcher<? super T> matcher) {
+>, <Line: +        this.matcher = matcher;
+>, <Line: +            if (matcher.matches(value)) {
+>, <Line: +                && matcher.equals(((CollectionItemMatcher<?>) other).matcher);
+>, <Line: +        return matcher.hashCode();
+>, <Line: +        return "whereOne(" + matcher + ")";
+>]
+[<Line: -    private final ElementMatcher<? super T> elementMatcher;
+>, <Line: -     * @param elementMatcher The element matcher to apply to each element of a iterable collection.
+>, <Line: -    public CollectionItemMatcher(ElementMatcher<? super T> elementMatcher) {
+>, <Line: -        this.elementMatcher = elementMatcher;
+>, <Line: -            if (elementMatcher.matches(value)) {
+>, <Line: -                && elementMatcher.equals(((CollectionItemMatcher<?>) other).elementMatcher);
+>, <Line: -        return elementMatcher.hashCode();
+>, <Line: -        return "whereOne(" + elementMatcher + ")";
+>]

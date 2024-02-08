@@ -1,0 +1,17 @@
+[<Line: +function count(int n) -> (int r)
+>, <Line: +ensures r == n:
+>, <Line: +    //
+>, <Line: +    int i = 0
+>, <Line: +    //
+>, <Line: +    do:
+>, <Line: +        i = i + 1
+>, <Line: +    while i < n where i >= 0 && i <= n
+>, <Line: +    //
+>, <Line: +    return i
+>, <Line: +public export method test():
+>, <Line: +    assume count(-1) == 0
+>, <Line: +    assume count(0) == 0
+>, <Line: +    assume count(1) == 1
+>, <Line: +    assume count(2) == 2        
+>]
+[]

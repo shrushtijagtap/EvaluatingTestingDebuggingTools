@@ -1,0 +1,86 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'jquery'
+>, <Line: +	],
+>, <Line: +	function (angular, _, $) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('configModal', function ($modal, $q, $timeout) {
+>, <Line: +				return {
+>, <Line: +					restrict: 'A',
+>, <Line: +					link: function (scope, elem, attrs) {
+>, <Line: +						var partial = attrs.configModal;
+>, <Line: +						var id = '#' + partial.replace('.html', '').replace(/[\/|\.|:]/g, '-') + '-' + scope.$id;
+>, <Line: +						elem.bind('click', function () {
+>, <Line: +							if ($(id).length) {
+>, <Line: +								elem.attr('data-target', id).attr('data-toggle', 'modal');
+>, <Line: +								scope.$apply(function () {
+>, <Line: +									scope.$broadcast('modal-opened');
+>, <Line: +								});
+>, <Line: +								return;
+>, <Line: +							}
+>, <Line: +							var panelModal = $modal({
+>, <Line: +								template: partial,
+>, <Line: +								persist: true,
+>, <Line: +								show: false,
+>, <Line: +								scope: scope,
+>, <Line: +								keyboard: false
+>, <Line: +							});
+>, <Line: +							$q.when(panelModal).then(function (modalEl) {
+>, <Line: +								elem.attr('data-target', id).attr('data-toggle', 'modal');
+>, <Line: +								$timeout(function () {
+>, <Line: +									if (!modalEl.data('modal').isShown) {
+>, <Line: +										modalEl.modal('show');
+>, <Line: +									}
+>, <Line: +								}, 50);
+>, <Line: +							});
+>, <Line: +							scope.$apply();
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'jquery'
+>, <Line: -],
+>, <Line: -function (angular, _, $) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('configModal', function($modal, $q, $timeout) {
+>, <Line: -      return {
+>, <Line: -        restrict: 'A',
+>, <Line: -        link: function(scope, elem, attrs) {
+>, <Line: -          var partial = attrs.configModal;
+>, <Line: -          var id = '#' + partial.replace('.html', '').replace(/[\/|\.|:]/g, '-') + '-' + scope.$id;
+>, <Line: -          elem.bind('click',function() {
+>, <Line: -            if ($(id).length) {
+>, <Line: -              elem.attr('data-target', id).attr('data-toggle', 'modal');
+>, <Line: -              scope.$apply(function() { scope.$broadcast('modal-opened'); });
+>, <Line: -              return;
+>, <Line: -            }
+>, <Line: -            var panelModal = $modal({
+>, <Line: -              template: partial,
+>, <Line: -              persist: true,
+>, <Line: -              show: false,
+>, <Line: -              scope: scope,
+>, <Line: -              keyboard: false
+>, <Line: -            });
+>, <Line: -            $q.when(panelModal).then(function(modalEl) {
+>, <Line: -              elem.attr('data-target', id).attr('data-toggle', 'modal');
+>, <Line: -              $timeout(function () {
+>, <Line: -                if (!modalEl.data('modal').isShown) {
+>, <Line: -                  modalEl.modal('show');
+>, <Line: -                }
+>, <Line: -              }, 50);
+>, <Line: -            });
+>, <Line: -            scope.$apply();
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

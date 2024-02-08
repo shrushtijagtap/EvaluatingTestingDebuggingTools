@@ -1,0 +1,6 @@
+[<Line: +import java.util.UUID;
+>, <Line: +        lowLevelHttpResponse.addHeader("x-request-id", new UUID(0L, 0L).toString());
+>, <Line: +                "404 Not Found (request: 00000000-0000-0000-0000-000000000000) - [ResourceNotFound] "
+>]
+[<Line: -                "404 Not Found - [ResourceNotFound] "
+>]

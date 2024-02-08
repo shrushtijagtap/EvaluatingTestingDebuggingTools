@@ -1,0 +1,14 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +public class CompositionToDecodeBox extends AbstractFullBox {
+>, <Line: +    public CompositionToDecodeBox() {
+>, <Line: +        super(TYPE);
+>, <Line: +    }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -public class CompositionShiftLeastGreatestAtom extends AbstractFullBox {
+>, <Line: -    public CompositionShiftLeastGreatestAtom() {
+>, <Line: -        super(TYPE);
+>, <Line: -    }
+>]

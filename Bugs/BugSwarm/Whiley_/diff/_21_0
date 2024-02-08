@@ -1,0 +1,28 @@
+[<Line: +	private void generate(Iterator<Triple<String, Expr, Expr>> srcIterator,
+>, <Line: +			Triple<String, Expr, Expr> src = srcIterator.next();
+>, <Line: +			int varSlot = environment.allocate(Type.T_INT, src.first());		
+>, <Line: +			int startSlot = generate(src.second(), environment, codes, context);
+>, <Line: +			int endSlot = generate(src.third(), environment, codes, context);
+>, <Line: +			codes.add(Codes.Quantify(startSlot, endSlot, varSlot, new int[0],
+>, <Line: +					block.bytecodes()), attributes(e));
+>]
+[<Line: -	private void generate(Iterator<Pair<String, Expr>> srcIterator,
+>, <Line: -			Pair<String, Expr> src = srcIterator.next();
+>, <Line: -			Nominal.List srcType = (Nominal.List) src.second().result();
+>, <Line: -			Type.EffectiveList rawSrcType = (Type.EffectiveList) srcType.raw();
+>, <Line: -			int srcSlot;
+>, <Line: -			int varSlot = environment.allocate(rawSrcType.element(),
+>, <Line: -					src.first());
+>, <Line: -			if (src.second() instanceof Expr.LocalVariable) {
+>, <Line: -				// this is a little optimisation to produce slightly better
+>, <Line: -				// code.
+>, <Line: -				Expr.LocalVariable v = (Expr.LocalVariable) src.second();
+>, <Line: -				srcSlot = environment.get(v.var);
+>, <Line: -			} else {
+>, <Line: -				srcSlot = generate(src.second(), environment, codes, context);
+>, <Line: -			}
+>, <Line: -			codes.add(Codes.Quantify(rawSrcType, srcSlot, varSlot,
+>, <Line: -					new int[0], block.bytecodes()), attributes(e));
+>, <Line: -		case RANGE:
+>, <Line: -			return Codes.BinaryOperatorKind.RANGE;
+>]

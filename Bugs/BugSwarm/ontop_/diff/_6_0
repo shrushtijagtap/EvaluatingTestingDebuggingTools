@@ -1,0 +1,6 @@
+[<Line: +      - ./mvnw install --fail-at-end
+>, <Line: +      - cd test/docker-tests && ./mvnw install -Ddocker.url=tom.inf.unibz.it -DskipTests=false --fail-at-end
+>]
+[<Line: -      - mvn install --fail-at-end
+>, <Line: -      - cd test/docker-tests && mvn install -Ddocker.url=tom.inf.unibz.it -DskipTests=false --fail-at-end
+>]

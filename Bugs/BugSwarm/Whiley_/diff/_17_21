@@ -1,0 +1,26 @@
+[]
+[<Line: -			} else if (code instanceof Codes.ListOperator) {
+>, <Line: -				translate(index, (Codes.ListOperator) code, freeSlot, bytecodes);
+>, <Line: -	private void translate(CodeBlock.Index index, Codes.ListOperator c,
+>, <Line: -			int freeSlot, ArrayList<Bytecode> bytecodes) {
+>, <Line: -		JvmType leftType;
+>, <Line: -		JvmType rightType;
+>, <Line: -		switch (c.kind) {
+>, <Line: -		case APPEND:
+>, <Line: -			leftType = WHILEYLIST;
+>, <Line: -			rightType = WHILEYLIST;
+>, <Line: -			bytecodes.add(new Bytecode.Load(c.operand(0), leftType));
+>, <Line: -			bytecodes.add(new Bytecode.Load(c.operand(1), rightType));
+>, <Line: -			break;
+>, <Line: -		default:
+>, <Line: -			internalFailure("unknown list operation", filename,
+>, <Line: -					rootBlock.attribute(index, SourceLocation.class));
+>, <Line: -			return;
+>, <Line: -		}
+>, <Line: -		JvmType.Function ftype = new JvmType.Function(WHILEYLIST, leftType,
+>, <Line: -				rightType);
+>, <Line: -		bytecodes.add(new Bytecode.Invoke(WHILEYLIST, "append", ftype,
+>, <Line: -				Bytecode.InvokeMode.STATIC));
+>, <Line: -		bytecodes.add(new Bytecode.Store(c.target(), WHILEYLIST));
+>, <Line: -	}
+>]

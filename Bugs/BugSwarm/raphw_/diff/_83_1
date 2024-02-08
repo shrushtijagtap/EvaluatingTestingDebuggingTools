@@ -1,0 +1,10 @@
+[<Line: +package net.bytebuddy.test.packaging;
+>, <Line: +import net.bytebuddy.agent.builder.AgentBuilderDefaultApplicationTest;
+>, <Line: +@AgentBuilderDefaultApplicationTest.ShouldRebase
+>, <Line: +public class SimpleType {
+>, <Line: +    private static final String FOO = "foo";
+>, <Line: +    public String foo() {
+>, <Line: +        return FOO;
+>, <Line: +    }
+>, <Line: +}>]
+[]

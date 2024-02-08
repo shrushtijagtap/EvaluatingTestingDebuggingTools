@@ -1,0 +1,15 @@
+[<Line: +/**    `css` is a requirejs plugin
+>, <Line: + that loads a css file and inject it into a page.
+>, <Line: + note that this loader will return immediately,
+>, <Line: + regardless of whether the browser had finished parsing the stylesheet.
+>, <Line: + this css loader is implemented for file optimization and depedency managment
+>, <Line: +		function inject(filename) {
+>]
+[<Line: -/**	`css` is a requirejs plugin
+>, <Line: -	that loads a css file and inject it into a page.
+>, <Line: -	note that this loader will return immediately,
+>, <Line: -	regardless of whether the browser had finished parsing the stylesheet.
+>, <Line: -	this css loader is implemented for file optimization and depedency managment
+>, <Line: -		function inject(filename)
+>, <Line: -		{
+>]

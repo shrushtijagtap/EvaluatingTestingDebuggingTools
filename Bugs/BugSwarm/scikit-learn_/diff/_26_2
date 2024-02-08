@@ -1,0 +1,35 @@
+[<Line: +    SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+>, <Line: +        decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+>, <Line: +        max_iter=-1, probability=False, random_state=None, shrinking=True,
+>, <Line: +        tol=0.001, verbose=False)
+>, <Line: +classifiers are constructed and each one trains data from two classes.
+>, <Line: +To provide a consistent interface with other classifiers, the
+>, <Line: +``decision_function_shape`` option allows to aggregate the results of the
+>, <Line: +"one-against-one" classifiers to a decision function of shape ``(n_samples,
+>, <Line: +n_classes)``::
+>, <Line: +    >>> clf = svm.SVC(decision_function_shape='ovo')
+>, <Line: +    SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+>, <Line: +        decision_function_shape='ovo', degree=3, gamma='auto', kernel='rbf',
+>, <Line: +        max_iter=-1, probability=False, random_state=None, shrinking=True,
+>, <Line: +        tol=0.001, verbose=False)
+>, <Line: +    >>> clf.decision_function_shape = "ovr"
+>, <Line: +    >>> dec = clf.decision_function([[1]])
+>, <Line: +    >>> dec.shape[1] # 4 classes
+>, <Line: +    4
+>, <Line: +    SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+>, <Line: +        decision_function_shape=None, degree=3, gamma='auto',
+>, <Line: +        kernel='precomputed', max_iter=-1, probability=False,
+>, <Line: +        random_state=None, shrinking=True, tol=0.001, verbose=False)
+>]
+[<Line: -    SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+>, <Line: -    gamma='auto', kernel='rbf', max_iter=-1, probability=False, 
+>, <Line: -    random_state=None, shrinking=True, tol=0.001, verbose=False)
+>, <Line: -classifiers are constructed and each one trains data from two classes::
+>, <Line: -    >>> clf = svm.SVC()
+>, <Line: -    SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+>, <Line: -    gamma='auto', kernel='rbf', max_iter=-1, probability=False, 
+>, <Line: -    random_state=None, shrinking=True, tol=0.001, verbose=False)
+>, <Line: -    SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+>, <Line: -    gamma='auto', kernel='precomputed', max_iter=-1, probability=False,
+>, <Line: -    random_state=None, shrinking=True, tol=0.001, verbose=False)
+>]

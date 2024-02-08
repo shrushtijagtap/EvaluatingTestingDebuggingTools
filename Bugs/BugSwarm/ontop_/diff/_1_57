@@ -1,0 +1,7 @@
+[<Line: +	public void testAnalysis_25() throws Exception {
+>, <Line: +		runAnalysis(
+>, <Line: +				"select \"QINVESTIGACIONPUARTTMP0\".\"id\" \"t1_1\" from Student \"QINVESTIGACIONPUARTTMP0\"  where \"QINVESTIGACIONPUARTTMP0\".\"first_name\" IS NOT NULL ",
+>, <Line: +				":S_{t1_1} a :Student .");
+>, <Line: +	}
+>]
+[]

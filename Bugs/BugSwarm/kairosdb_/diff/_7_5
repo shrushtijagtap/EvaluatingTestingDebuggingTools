@@ -1,0 +1,22 @@
+[<Line: +	void close() throws InterruptedException, DatastoreException;
+>, <Line: +	Iterable<String> getMetricNames() throws DatastoreException;
+>, <Line: +	Iterable<String> getTagNames() throws DatastoreException;
+>, <Line: +	Iterable<String> getTagValues() throws DatastoreException;
+>, <Line: +	void queryDatabase(DatastoreMetricQuery query, QueryCallback queryCallback) throws DatastoreException;
+>, <Line: +	void deleteDataPoints(DatastoreMetricQuery deleteQuery) throws DatastoreException;
+>, <Line: +	TagSet queryMetricTags(DatastoreMetricQuery query) throws DatastoreException;
+>]
+[<Line: -import com.google.common.collect.ImmutableSortedMap;
+>, <Line: -import org.kairosdb.core.DataPoint;
+>, <Line: -	public void close() throws InterruptedException, DatastoreException;
+>, <Line: -	public Iterable<String> getMetricNames() throws DatastoreException;
+>, <Line: -	public Iterable<String> getTagNames() throws DatastoreException;
+>, <Line: -	public Iterable<String> getTagValues() throws DatastoreException;
+>, <Line: -	public void queryDatabase(DatastoreMetricQuery query, QueryCallback queryCallback) throws DatastoreException;
+>, <Line: -	public void deleteDataPoints(DatastoreMetricQuery deleteQuery) throws DatastoreException;
+>, <Line: -	public TagSet queryMetricTags(DatastoreMetricQuery query) throws DatastoreException;
+>, <Line: -	void setValue(String service, String serviceKey, String key, String value) throws DatastoreException;
+>, <Line: -	String getValue(String service, String serviceKey, String key) throws DatastoreException;
+>, <Line: -	Iterable<String> listKeys(String service, String serviceKey) throws DatastoreException;
+>, <Line: -	Iterable<String> listKeys(String service, String serviceKey, String keyStartsWith) throws DatastoreException;
+>]

@@ -1,0 +1,75 @@
+[<Line: +import com.fincatto.nfe310.parsers.NotaFiscalChaveParser;
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.AM };
+>, <Line: +    /**
+>, <Line: +     * Links NFC-e segundo site: https://ciranda.me/tsdn/blog-da-tecnospeed/post/como-emitir-nfc-e-na-bahia
+>, <Line: +     */
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.BA };
+>, <Line: +            return SVRS.getNfceAutorizacao(ambiente);
+>, <Line: +            return SVRS.getNfceRetAutorizacao(ambiente);
+>, <Line: +            return SVRS.getNfceConsultaProtocolo(ambiente);
+>, <Line: +            return SVRS.getNfceStatusServico(ambiente);
+>, <Line: +            return SVRS.getNfceRecepcaoEvento(ambiente);
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return SVRS.getNfceInutilizacao(ambiente);
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.CE };
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.GO };
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.MG };
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.MS };
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.MT };
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.PE };
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.PR };
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.RS };
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.SP };
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.AC, NFUnidadeFederativa.AL, NFUnidadeFederativa.AP, NFUnidadeFederativa.DF, NFUnidadeFederativa.ES, NFUnidadeFederativa.PB, NFUnidadeFederativa.RJ, NFUnidadeFederativa.RN, NFUnidadeFederativa.RO, NFUnidadeFederativa.RR, NFUnidadeFederativa.SC, NFUnidadeFederativa.SE, NFUnidadeFederativa.TO };
+>, <Line: +            return new NFUnidadeFederativa[] {};
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>, <Line: +            return new NFUnidadeFederativa[] { NFUnidadeFederativa.MA, NFUnidadeFederativa.PA, NFUnidadeFederativa.PI };
+>, <Line: +        public String getNfceInutilizacao(final NFAmbiente ambiente) {
+>]
+[<Line: -import com.fincatto.nfe310.parsers.NotaFiscalChaveParser;
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.AM};
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.BA};
+>, <Line: -            return null;
+>, <Line: -            return null;
+>, <Line: -            return null;
+>, <Line: -            return null;
+>, <Line: -            return null;
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return null;
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.CE};
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.GO};
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.MG};
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.MS};
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.MT};
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.PE};
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.PR};
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.RS};
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.SP};
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.AC, NFUnidadeFederativa.AL, NFUnidadeFederativa.AP, NFUnidadeFederativa.DF, NFUnidadeFederativa.ES, NFUnidadeFederativa.PB, NFUnidadeFederativa.RJ, NFUnidadeFederativa.RN, NFUnidadeFederativa.RO, NFUnidadeFederativa.RR, NFUnidadeFederativa.SC, NFUnidadeFederativa.SE, NFUnidadeFederativa.TO};
+>, <Line: -            return new NFUnidadeFederativa[]{};
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>, <Line: -            return new NFUnidadeFederativa[]{NFUnidadeFederativa.MA, NFUnidadeFederativa.PA, NFUnidadeFederativa.PI};
+>, <Line: -        public String getNfceInutilizacao(NFAmbiente ambiente) {
+>]

@@ -1,0 +1,11 @@
+[<Line: +### jped-cli
+>, <Line: +* this is gone, the functionality is now available as part of jannovar-cli
+>, <Line: +### jannovar-filter
+>, <Line: +* this module is done, everything here is merged into jannovar-htsjdk
+>, <Line: +* Refurbishing `Genotype`, `GenotypeList`, and `GenotypeListBuilder` in `de.charite.compbio.jannovar.mendel`.
+>, <Line: +* Moving `ModeOfInheritance` to `de.charite.compbio.jannovar.mendel`.
+>, <Line: +* Creating new package `de.charite.compbio.jannovar.mendel` with code for filtering for mendelian inheritance modes.
+>, <Line: +* Renaming of `ModeOfInheritance.UNINITIALIZED` to `ModeOfInheritance.ANY`.
+>, <Line: +* Adding better progress display with estimate of pending time.
+>]
+[]

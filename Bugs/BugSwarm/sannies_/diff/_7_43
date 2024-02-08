@@ -1,0 +1,23 @@
+[<Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.iso14496.part14.ESDescriptorBox;
+>, <Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import org.mp4parser.muxer.container.mp4.MovieCreator;
+>, <Line: +import org.mp4parser.muxer.tracks.mjpeg.OneJpegPerIframe;
+>, <Line: +import org.mp4parser.tools.Hex;
+>, <Line: +import org.mp4parser.tools.Path;
+>]
+[<Line: -import com.coremedia.iso.Hex;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+>, <Line: -import com.googlecode.mp4parser.authoring.tracks.mjpeg.OneJpegPerIframe;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.ESDescriptorBox;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -/**
+>, <Line: - * Created by sannies on 13.02.2015.
+>, <Line: - */
+>]

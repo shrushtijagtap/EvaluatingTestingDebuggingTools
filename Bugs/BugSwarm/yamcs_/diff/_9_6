@@ -1,0 +1,4 @@
+[<Line: +    private static String DEFAULT_STORAGE_ENGINE = RDB2_ENGINE_NAME;
+>]
+[<Line: -    private static String DEFAULT_STORAGE_ENGINE=RDB_ENGINE_NAME;
+>]

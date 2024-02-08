@@ -1,0 +1,7 @@
+[<Line: +            StringBuilder classPath = new StringBuilder().append('"').append(attachmentJar.getAbsolutePath()).append('"');
+>, <Line: +                classPath.append(File.pathSeparatorChar).append('"').append(jar.getAbsolutePath()).append('"');
+>, <Line: +            @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception should not be rethrown but trigger a fallback")
+>]
+[<Line: -            StringBuilder classPath = new StringBuilder(attachmentJar.getAbsolutePath());
+>, <Line: -                classPath.append(File.pathSeparatorChar).append(jar.getAbsolutePath());
+>]

@@ -1,0 +1,11 @@
+[]
+[<Line: -package org.kairosdb.core.processingstage;
+>, <Line: -import java.util.List;
+>, <Line: -public class TestKairosDBProcessingChain extends GenericQueryProcessingChain
+>, <Line: -{
+>, <Line: -    public TestKairosDBProcessingChain(List<QueryProcessingStageFactory<?>> processingChain)
+>, <Line: -    {
+>, <Line: -        super(processingChain);
+>, <Line: -    }
+>, <Line: -}
+>]

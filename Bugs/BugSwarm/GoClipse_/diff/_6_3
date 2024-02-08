@@ -1,0 +1,4 @@
+[<Line: +			if(Character.isSpaceChar(ch) || ch == '\t') {
+>]
+[<Line: -			if(Character.isSpaceChar(ch)) {
+>]

@@ -1,0 +1,26 @@
+[<Line: +<?xml version="1.0" encoding="UTF-8"?>
+>, <Line: +<projectDescription>
+>, <Line: +	<name>rinsim-experiment-base</name>
+>, <Line: +	<comment></comment>
+>, <Line: +	<projects>
+>, <Line: +	</projects>
+>, <Line: +	<buildSpec>
+>, <Line: +		<buildCommand>
+>, <Line: +			<name>org.eclipse.jdt.core.javabuilder</name>
+>, <Line: +			<arguments>
+>, <Line: +			</arguments>
+>, <Line: +		</buildCommand>
+>, <Line: +		<buildCommand>
+>, <Line: +			<name>org.eclipse.m2e.core.maven2Builder</name>
+>, <Line: +			<arguments>
+>, <Line: +			</arguments>
+>, <Line: +		</buildCommand>
+>, <Line: +	</buildSpec>
+>, <Line: +	<natures>
+>, <Line: +		<nature>org.sonar.ide.eclipse.core.sonarNature</nature>
+>, <Line: +		<nature>org.eclipse.jdt.core.javanature</nature>
+>, <Line: +		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+>, <Line: +	</natures>
+>, <Line: +</projectDescription>
+>]
+[]

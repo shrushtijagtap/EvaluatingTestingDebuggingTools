@@ -1,0 +1,87 @@
+[<Line: +package de.charite.compbio.jannovar.mendel.impl;
+>, <Line: +import java.util.Collection;
+>, <Line: +import java.util.stream.Collectors;
+>, <Line: +import java.util.stream.Stream;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import de.charite.compbio.jannovar.mendel.ChromosomeType;
+>, <Line: +import de.charite.compbio.jannovar.mendel.Genotype;
+>, <Line: +import de.charite.compbio.jannovar.mendel.GenotypeCalls;
+>, <Line: +import de.charite.compbio.jannovar.mendel.MendelianInheritanceChecker;
+>, <Line: +import de.charite.compbio.jannovar.pedigree.Disease;
+>, <Line: +import de.charite.compbio.jannovar.pedigree.Person;
+>, <Line: +import de.charite.compbio.jannovar.pedigree.Sex;
+>, <Line: +/**
+>, <Line: + * Implementation of Mendelian compatibility check for autosomal dominant case
+>, <Line: + * 
+>, <Line: + * <h2>Compatibility Check</h2>
+>, <Line: + * 
+>, <Line: + * For X-chromosomal dominant inheritance, there must be at least one {@link Genotype} that is shared by all affected
+>, <Line: + * individuals but no unaffected individuals in the pedigree.
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:max.schubach@charite.de">Max Schubach</a>
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class MendelianCheckerXD extends AbstractMendelianChecker {
+>, <Line: +	public MendelianCheckerXD(MendelianInheritanceChecker parent) {
+>, <Line: +		super(parent);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public ImmutableList<GenotypeCalls> filterCompatibleRecords(Collection<GenotypeCalls> calls) {
+>, <Line: +		// Filter to calls on X chromosomes
+>, <Line: +		Stream<GenotypeCalls> xCalls = calls.stream()
+>, <Line: +				.filter(call -> call.getChromType() == ChromosomeType.X_CHROMOSOMAL);
+>, <Line: +		// Filter to calls compatible with AD inheritance
+>, <Line: +		Stream<GenotypeCalls> compatibleCalls;
+>, <Line: +		if (this.pedigree.getNMembers() == 1)
+>, <Line: +			compatibleCalls = xCalls.filter(this::isCompatibleSingleton);
+>, <Line: +		else
+>, <Line: +			compatibleCalls = xCalls.filter(this::isCompatibleFamily);
+>, <Line: +		return ImmutableList.copyOf(compatibleCalls.collect(Collectors.toList()));
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * @return whether <code>calls</code> is compatible with AD inheritance in the case of a single individual in the
+>, <Line: +	 *         pedigree
+>, <Line: +	 */
+>, <Line: +	private boolean isCompatibleSingleton(GenotypeCalls calls) {
+>, <Line: +		if (calls.getNSamples() == 0)
+>, <Line: +			return false; // no calls!
+>, <Line: +		final Genotype gt = calls.getGenotypeBySampleNo(0);
+>, <Line: +		if (pedigree.getMembers().get(0).getSex() == Sex.FEMALE) {
+>, <Line: +			// Allow only heterozygous calls
+>, <Line: +			return calls.getGenotypeBySampleNo(0).isHet();
+>, <Line: +		} else {
+>, <Line: +			// We allow homozygous (actually hemizygous) and heterozygous (false call)
+>, <Line: +			return (gt.isHet() || gt.isHomAlt());
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * @return whether <code>calls</code> is compatible with AD inheritance in the case of multiple individuals in the
+>, <Line: +	 *         pedigree
+>, <Line: +	 */
+>, <Line: +	private boolean isCompatibleFamily(GenotypeCalls calls) {
+>, <Line: +		int numAffectedWithVar = 0;
+>, <Line: +		for (Person p : pedigree.getMembers()) {
+>, <Line: +			final Sex sex = p.getSex();
+>, <Line: +			final Genotype gt = calls.getGenotypeForSample(p.getName());
+>, <Line: +			final Disease d = p.getDisease();
+>, <Line: +			if (d == Disease.AFFECTED) {
+>, <Line: +				if (gt.isHomRef() || (sex == Sex.FEMALE && gt.isHomAlt())) {
+>, <Line: +					// We do not allow hom. alternative for females to have the same behaviour as AD for females
+>, <Line: +					return false;
+>, <Line: +				} else if (sex == Sex.FEMALE && gt.isHet()) {
+>, <Line: +					numAffectedWithVar++;
+>, <Line: +				} else if (sex != Sex.FEMALE && (gt.isHet() || gt.isHomAlt())) {
+>, <Line: +					// We allow heterozygous here as well in the case of mis-calls in the one X copy in the male or
+>, <Line: +					// unknown
+>, <Line: +					numAffectedWithVar++;
+>, <Line: +				}
+>, <Line: +			} else if (d == Disease.UNAFFECTED) {
+>, <Line: +				if (gt.isHet() || gt.isHomAlt())
+>, <Line: +					return false; // unaffected must not have it!
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return (numAffectedWithVar > 0);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

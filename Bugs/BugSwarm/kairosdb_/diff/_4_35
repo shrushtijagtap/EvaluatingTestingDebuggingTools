@@ -1,0 +1,74 @@
+[<Line: +package org.kairosdb.util;
+>, <Line: +import com.google.common.collect.ImmutableSortedMap;
+>, <Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import org.h2.store.Data;
+>, <Line: +import org.kairosdb.core.DataPoint;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +import org.mockito.ArgumentCaptor;
+>, <Line: +import org.mockito.ArgumentMatcher;
+>, <Line: +import static org.hamcrest.MatcherAssert.assertThat;
+>, <Line: +import static org.hamcrest.core.IsEqual.equalTo;
+>, <Line: +import static org.mockito.Matchers.anyObject;
+>, <Line: +import static org.mockito.Mockito.reset;
+>, <Line: +import static org.mockito.Mockito.timeout;
+>, <Line: +import static org.mockito.Mockito.verify;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 10/3/16.
+>, <Line: + */
+>, <Line: +public class DataPointEventUtil
+>, <Line: +{
+>, <Line: +	private static DataPointEvent verifyPost(EventBus eventBus)
+>, <Line: +	{
+>, <Line: +		ArgumentCaptor<DataPointEvent> event = ArgumentCaptor.forClass(DataPointEvent.class);
+>, <Line: +		verify(eventBus, timeout(5000).times(1)).post(event.capture());
+>, <Line: +		reset(eventBus);
+>, <Line: +		return event.getValue();
+>, <Line: +	}
+>, <Line: +	public static void verifyEvent(EventBus eventBus, String metricName,
+>, <Line: +			ImmutableSortedMap<String, String> tags, DataPoint dataPoint, int ttl)
+>, <Line: +	{
+>, <Line: +		DataPointEvent event = verifyPost(eventBus);
+>, <Line: +		assertThat(event.getMetricName(), equalTo(metricName));
+>, <Line: +		assertThat(event.getTags(), equalTo(tags));
+>, <Line: +		assertThat(event.getDataPoint(), equalTo(dataPoint));
+>, <Line: +		assertThat(event.getTtl(), equalTo(ttl));
+>, <Line: +	}
+>, <Line: +	public static void verifyEvent(EventBus eventBus, String metricName,
+>, <Line: +			ImmutableSortedMap<String, String> tags, DataPoint dataPoint)
+>, <Line: +	{
+>, <Line: +		DataPointEvent event = verifyPost(eventBus);
+>, <Line: +		assertThat(event.getMetricName(), equalTo(metricName));
+>, <Line: +		assertThat(event.getTags(), equalTo(tags));
+>, <Line: +		assertThat(event.getDataPoint(), equalTo(dataPoint));
+>, <Line: +	}
+>, <Line: +	public static void verifyEvent(EventBus eventBus,
+>, <Line: +			final String metricName,
+>, <Line: +			final DataPoint dataPoint,
+>, <Line: +			final int ttl)
+>, <Line: +	{
+>, <Line: +		DataPointEvent event = verifyPost(eventBus);
+>, <Line: +		assertThat(event.getMetricName(), equalTo(metricName));
+>, <Line: +		assertThat(event.getDataPoint(), equalTo(dataPoint));
+>, <Line: +		assertThat(event.getTtl(), equalTo(ttl));
+>, <Line: +	}
+>, <Line: +	public static void verifyEvent(EventBus eventBus, String metricName,
+>, <Line: +			DataPoint dataPoint)
+>, <Line: +	{
+>, <Line: +		DataPointEvent event = verifyPost(eventBus);
+>, <Line: +		assertThat(event.getMetricName(), equalTo(metricName));
+>, <Line: +		assertThat(event.getDataPoint(), equalTo(dataPoint));
+>, <Line: +	}
+>, <Line: +	private class DataPointEventMatcher extends ArgumentMatcher<DataPointEvent>
+>, <Line: +	{
+>, <Line: +		@Override
+>, <Line: +		public boolean matches(Object argument)
+>, <Line: +		{
+>, <Line: +			DataPointEvent event = (DataPointEvent)argument;
+>, <Line: +			return true;
+>, <Line: +			/*return metricName.equals(event.getMetricName()) &&
+>, <Line: +					dataPoint.equals(event.getDataPoint()) &&
+>, <Line: +					ttl == event.getTtl();*/
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +}>]
+[]

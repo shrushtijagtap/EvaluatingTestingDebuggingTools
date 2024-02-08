@@ -1,0 +1,4 @@
+[<Line: +        verifyPositions(decoder, false, binary(
+>, <Line: +                "0000000000000000080100000113fc208dff00209cca800f14f650006f00d60400040004030101150316030001460000015d000100000000")); // invalid length and checksum
+>]
+[]

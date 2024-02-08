@@ -1,0 +1,10 @@
+[<Line: +    <dependency>
+>, <Line: +      <groupId>com.fasterxml.jackson.core</groupId>
+>, <Line: +      <artifactId>jackson-databind</artifactId>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>com.hubspot</groupId>
+>, <Line: +      <artifactId>HorizonApache</artifactId>
+>, <Line: +    </dependency>
+>]
+[]

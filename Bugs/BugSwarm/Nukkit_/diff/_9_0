@@ -1,0 +1,8 @@
+[<Line: +                        if (!this.canInteract(blockVector.add(0.5, 0.5, 0.5), this.isCreative() ? 13 : 7)) {
+>, <Line: +                    if (this.canInteract(vector.add(0.5, 0.5, 0.5), this.isCreative() ? 13 : 7) && (item = this.level.useBreakOn(vector, item, this, true)) != null) {
+>, <Line: +                        if (!this.canInteract(targetEntity, isCreative() ? 8 : 5)) {
+>]
+[<Line: -                        if (!this.canInteract(blockVector.add(0.5, 0.5, 0.5), 13)) {
+>, <Line: -                    if (this.canInteract(vector.add(0.5, 0.5, 0.5), this.isCreative() ? 13 : 6) && (item = this.level.useBreakOn(vector, item, this, true)) != null) {
+>, <Line: -                        if (!this.canInteract(targetEntity, 8)) {
+>]

@@ -1,0 +1,18 @@
+[<Line: +                12,
+>, <Line: +                5,
+>, <Line: +                "NetHttpTransport");
+>, <Line: +        assertEquals((int)config.getRetries(), 5);
+>, <Line: +        assertEquals(config.getHttpTransport(), "NetHttpTransport");
+>, <Line: +                12,
+>, <Line: +                5,
+>, <Line: +                "NetHttpTransport");
+>, <Line: +        properties.setProperty(MANTA_RETRIES_KEY, "24");
+>, <Line: +        properties.setProperty(MANTA_HTTP_TRANSPORT_KEY, "MockHttpTransport");
+>, <Line: +        assertEquals(String.valueOf(config.getRetries()),
+>, <Line: +                properties.getProperty(MANTA_RETRIES_KEY));
+>, <Line: +        assertEquals(String.valueOf(config.getHttpTransport()),
+>, <Line: +                properties.getProperty(MANTA_HTTP_TRANSPORT_KEY));
+>]
+[<Line: -                12);
+>, <Line: -                12);
+>]

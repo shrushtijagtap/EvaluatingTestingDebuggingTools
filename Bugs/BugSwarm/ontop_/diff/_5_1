@@ -1,0 +1,9 @@
+[<Line: +                //Class.forName was added for MonetDB driver.
+>, <Line: +                // Because it does not work without it.
+>, <Line: +                try {
+>, <Line: +                    Class.forName(inputParamter);
+>, <Line: +                } catch (ClassNotFoundException e) {
+>, <Line: +                    e.printStackTrace();
+>, <Line: +                }
+>]
+[]

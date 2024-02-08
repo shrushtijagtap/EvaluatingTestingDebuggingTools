@@ -1,0 +1,25 @@
+[<Line: + * Copyright 2012 - 2015 Anton Tananaev (anton.tananaev@gmail.com)
+>, <Line: +public class Checksum {
+>, <Line: +    private static final int CRC16_CCITT_TABLE_REVERSE[] = {
+>, <Line: +    private static final int CRC16_CCITT_TABLE[] = {
+>, <Line: +    private static final int CRC16_CCITT_START = 0xFFFF;
+>, <Line: +    private static final int CRC16_CCITT_XOROUT = 0xFFFF;
+>, <Line: +        return crc16Reflected(buf, CRC16_CCITT_START, CRC16_CCITT_TABLE_REVERSE) ^ CRC16_CCITT_XOROUT;
+>, <Line: +        return crc16Unreflected(buf, CRC16_CCITT_START, CRC16_CCITT_TABLE);
+>, <Line: +    public static int crc16Ccitt(ByteBuffer buf, int seed, int xorout) {
+>, <Line: +        return crc16Reflected(buf, seed, CRC16_CCITT_TABLE_REVERSE) ^ xorout;
+>]
+[<Line: - * Copyright 2012 Anton Tananaev (anton.tananaev@gmail.com)
+>, <Line: -/**
+>, <Line: - * CRC functions
+>, <Line: - */
+>, <Line: -public class Crc {
+>, <Line: -    private static final int crc16CcittTableReverse[] = {
+>, <Line: -    private static final int crc16CcittTable[] = {
+>, <Line: -    private static final int crc16CcittStart = 0xFFFF;
+>, <Line: -    private static final int crc16CcittXorout = 0xFFFF;
+>, <Line: -        return crc16Reflected(buf, crc16CcittStart, crc16CcittTableReverse) ^ crc16CcittXorout;
+>, <Line: -        return crc16Unreflected(buf, crc16CcittStart, crc16CcittTable);
+>, <Line: -    public static int crc16CcittSeed(ByteBuffer buf, int seed) {
+>, <Line: -        return crc16Reflected(buf, seed, crc16CcittTableReverse) ^ crc16CcittXorout;
+>]

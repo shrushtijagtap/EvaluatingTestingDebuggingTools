@@ -1,0 +1,4 @@
+[<Line: +type natlist is nat[]
+>]
+[<Line: -type natlist is [nat]
+>]

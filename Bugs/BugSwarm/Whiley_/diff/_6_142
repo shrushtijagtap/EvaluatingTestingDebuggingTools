@@ -1,0 +1,5 @@
+[<Line: +ensures (r == a - b) || (r == b - a)
+>, <Line: +ensures ((a - b) <= r) && ((b - a) <= r):
+>]
+[<Line: -ensures r == max(a - b, b - a):
+>]

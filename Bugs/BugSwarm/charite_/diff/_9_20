@@ -1,0 +1,19 @@
+[<Line: +import de.charite.compbio.jannovar.filter.facade.GenotypeThresholdFilterAnnotator;
+>, <Line: +import de.charite.compbio.jannovar.filter.facade.ThresholdFilterOptions;
+>, <Line: +import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: +	GenotypeThresholdFilterAnnotator annotator;
+>, <Line: +		annotator =
+>, <Line: +				new GenotypeThresholdFilterAnnotator(ThresholdFilterOptions.buildDefaultOptions());
+>, <Line: +		Assert.assertEquals("[]", updatedVC.getFilters().toString());
+>]
+[<Line: -import java.util.ArrayList;
+>, <Line: -import com.google.common.collect.Lists;
+>, <Line: -import de.charite.compbio.jannovar.filter.facade.ThresholdFilterAnnotator;
+>, <Line: -import de.charite.compbio.jannovar.filter.facade.ThresholdFilterOptions;
+>, <Line: -import htsjdk.variant.variantcontext.VariantContext;
+>, <Line: -import htsjdk.variant.variantcontext.VariantContextBuilder;
+>, <Line: -	ThresholdFilterAnnotator annotator;
+>, <Line: -		ArrayList<String> affected = Lists.newArrayList("individual");
+>, <Line: -		annotator = new ThresholdFilterAnnotator(ThresholdFilterOptions.buildDefaultOptions(), affected);
+>, <Line: -		Assert.assertEquals("[AllAffGtFiltered]", updatedVC.getFilters().toString());
+>]

@@ -1,0 +1,5 @@
+[<Line: +import static de.is24.deadcode4j.Utils.isNotBlank;
+>, <Line: +        checkArgument(isNotBlank(endOfFileName), "[endOfFileName] must be set!");
+>]
+[<Line: -        checkArgument(endOfFileName.trim().length() > 0, "[endOfFileName] must be set!");
+>]

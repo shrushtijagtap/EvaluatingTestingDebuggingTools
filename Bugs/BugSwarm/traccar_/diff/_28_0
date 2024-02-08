@@ -1,0 +1,11 @@
+[<Line: +            case 1:
+>, <Line: +            case 2:
+>, <Line: +            case 3:
+>, <Line: +            case 4:
+>, <Line: +                position.set("di" + id, buf.readUnsignedByte());
+>, <Line: +                break;
+>, <Line: +            case 70:
+>, <Line: +                position.set("pcbTemp", (length == 4 ? buf.readInt() : buf.readShort()) * 0.1);
+>, <Line: +                break;
+>]
+[]

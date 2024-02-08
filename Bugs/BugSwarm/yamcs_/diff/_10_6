@@ -1,0 +1,131 @@
+[<Line: +public class ScriptAlgorithmExecutor extends AbstractAlgorithmExecutor {
+>, <Line: +    static final Logger log = LoggerFactory.getLogger(ScriptAlgorithmExecutor.class);
+>, <Line: +    private Map<InputParameter,ValueBinding> bindingsByInput = new HashMap<InputParameter,ValueBinding>();
+>, <Line: +    private Map<OutputParameter,OutputValueBinding> bindingsByOutput = new HashMap<OutputParameter,OutputValueBinding>();
+>, <Line: +    private static Map<String, Class<ValueBinding>> valueBindingClasses = Collections.synchronizedMap(new HashMap<String,Class<ValueBinding>>());
+>, <Line: +    public ScriptAlgorithmExecutor(Algorithm algorithmDef, ScriptEngine scriptEngine, AlgorithmExecutionContext execCtx) {
+>, <Line: +        super(algorithmDef, execCtx);
+>, <Line: +        for(InputParameter inputParameter:algorithmDef.getInputSet()) {
+>, <Line: +            String scriptName = inputParameter.getInputName();
+>, <Line: +                scriptName = inputParameter.getParameterInstance().getParameter().getName();
+>, <Line: +        scriptEngine.put(ScriptEngine.FILENAME, algorithmDef.getQualifiedName());
+>, <Line: +                compiledScript = ((Compilable)scriptEngine).compile(algorithmDef.getAlgorithmText());
+>, <Line: +    @Override
+>, <Line: +    protected void updateInput(InputParameter inputParameter, ParameterValue newValue) {
+>, <Line: +            for(InputParameter input:algorithmDef.getInputSet()) {
+>, <Line: +    /* (non-Javadoc)
+>, <Line: +     * @see org.yamcs.algorithms.AlgorithmEngineIf#runAlgorithm(long, long)
+>, <Line: +    @Override
+>, <Line: +        log.trace("Running algorithm '{}'",algorithmDef.getName());
+>, <Line: +                scriptEngine.eval(algorithmDef.getAlgorithmText());
+>, <Line: +        for(OutputParameter outputParameter:algorithmDef.getOutputSet()) {
+>, <Line: +                        algorithmDef.getQualifiedName(), scriptName, scriptName);
+>, <Line: +        propagateToListeners(returnValue, outputValues);
+>]
+[<Line: -import java.util.HashSet;
+>, <Line: -import java.util.Set;
+>, <Line: -import java.util.concurrent.CopyOnWriteArrayList;
+>, <Line: -import org.yamcs.xtce.OnParameterUpdateTrigger;
+>, <Line: -import org.yamcs.xtce.ParameterInstanceRef;
+>, <Line: -public class AlgorithmEngine {
+>, <Line: -    static final Logger log=LoggerFactory.getLogger(AlgorithmEngine.class);
+>, <Line: -    Algorithm def;
+>, <Line: -    // Keep only unique arguments (for subscription purposes)
+>, <Line: -    private Set<Parameter> requiredParameters=new HashSet<Parameter>();
+>, <Line: -    private Map<InputParameter,ValueBinding> bindingsByInput=new HashMap<InputParameter,ValueBinding>();
+>, <Line: -    private Map<OutputParameter,OutputValueBinding> bindingsByOutput=new HashMap<OutputParameter,OutputValueBinding>();
+>, <Line: -    private static Map<String, Class<ValueBinding>> valueBindingClasses=Collections.synchronizedMap(new HashMap<String,Class<ValueBinding>>());
+>, <Line: -    private Set<InputParameter>mandatoryToRun = new HashSet<InputParameter>();
+>, <Line: -    protected boolean updated=true;
+>, <Line: -    final AlgorithmExecutionContext execCtx;
+>, <Line: -    CopyOnWriteArrayList<AlgorithmExecListener> execListeners = new CopyOnWriteArrayList<AlgorithmExecListener>();
+>, <Line: -    public AlgorithmEngine(Algorithm algorithmDef, ScriptEngine scriptEngine, AlgorithmExecutionContext execCtx) {
+>, <Line: -        this.def=algorithmDef;
+>, <Line: -        this.execCtx = execCtx;
+>, <Line: -        for(InputParameter inputParameter:algorithmDef.getInputSet()) {
+>, <Line: -            requiredParameters.add(inputParameter.getParameterInstance().getParameter());
+>, <Line: -            String scriptName=inputParameter.getInputName();
+>, <Line: -                scriptName=inputParameter.getParameterInstance().getParameter().getName();
+>, <Line: -            if(inputParameter.isMandatory()) mandatoryToRun.add(inputParameter);
+>, <Line: -        scriptEngine.put(ScriptEngine.FILENAME, def.getQualifiedName());
+>, <Line: -                compiledScript = ((Compilable)scriptEngine).compile(def.getAlgorithmText());
+>, <Line: -    /**
+>, <Line: -     * update the parameters and return true if the algorithm should run
+>, <Line: -     * @param items
+>, <Line: -     * @return
+>, <Line: -     */
+>, <Line: -    synchronized boolean updateParameters(ArrayList<ParameterValue> items) {
+>, <Line: -        ArrayList<ParameterValue> allItems=new ArrayList<ParameterValue>(items);
+>, <Line: -        boolean skipRun=false;
+>, <Line: -        // Set algorithm arguments based on incoming values
+>, <Line: -        for(InputParameter inputParameter:def.getInputSet()) {
+>, <Line: -            ParameterInstanceRef pInstance = inputParameter.getParameterInstance();
+>, <Line: -            for(ParameterValue pval:allItems) {
+>, <Line: -                if(pInstance.getParameter().equals(pval.getParameter())) {
+>, <Line: -                    if(getLookbackSize(pInstance.getParameter())==0) {
+>, <Line: -                        updateInput(inputParameter, pval);
+>, <Line: -                    } else {
+>, <Line: -                        ParameterValue historicValue=execCtx.getHistoricValue(pInstance);
+>, <Line: -                        if(historicValue!=null) {
+>, <Line: -                            updateInput(inputParameter, historicValue);
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            if(!skipRun && inputParameter.isMandatory() && !bindingsByInput.containsKey(inputParameter)) {
+>, <Line: -                log.trace("Not running algorithm {} because mandatory input {} is not present", def.getName(), inputParameter.getInputName());
+>, <Line: -                skipRun = true;
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        // But run it only, if this satisfies an onParameterUpdate trigger
+>, <Line: -        boolean triggered=false;
+>, <Line: -        for(OnParameterUpdateTrigger trigger:def.getTriggerSet().getOnParameterUpdateTriggers()) {
+>, <Line: -            if(triggered) break;
+>, <Line: -            for(ParameterValue pval:allItems) {
+>, <Line: -                if(pval.getParameter().equals(trigger.getParameter())) {
+>, <Line: -                    triggered=true;
+>, <Line: -                    break;
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        boolean shouldRun =(!skipRun && triggered);
+>, <Line: -        return shouldRun;
+>, <Line: -    }
+>, <Line: -    public Algorithm getAlgorithm() {
+>, <Line: -        return def;
+>, <Line: -    }
+>, <Line: -    public Set<Parameter> getRequiredParameters() {
+>, <Line: -        return requiredParameters;
+>, <Line: -    }
+>, <Line: -    public int getLookbackSize(Parameter parameter) {
+>, <Line: -        // e.g. [ -3, -2, -1, 0 ]
+>, <Line: -        int min=0;
+>, <Line: -        for(InputParameter p:def.getInputSet()) {
+>, <Line: -            ParameterInstanceRef pInstance=p.getParameterInstance();
+>, <Line: -            if(pInstance.getParameter().equals(parameter) && pInstance.getInstance()<min) {
+>, <Line: -                min=p.getParameterInstance().getInstance();
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        return -min;
+>, <Line: -    }
+>, <Line: -    private void updateInput(InputParameter inputParameter, ParameterValue newValue) {
+>, <Line: -            for(InputParameter input:def.getInputSet()) {
+>, <Line: -    /**
+>, <Line: -     * Runs the associated algorithm with the latest InputParameters
+>, <Line: -     * @param acqTime 
+>, <Line: -     * @param genTime 
+>, <Line: -     * @return the outputted parameters, if any
+>, <Line: -        log.trace("Running algorithm '{}'",def.getName());
+>, <Line: -                scriptEngine.eval(def.getAlgorithmText());
+>, <Line: -        for(OutputParameter outputParameter:def.getOutputSet()) {
+>, <Line: -                        def.getQualifiedName(), scriptName, scriptName);
+>, <Line: -        for(AlgorithmExecListener listener: execListeners) {
+>, <Line: -            listener.algorithmRun(returnValue, outputValues);
+>, <Line: -        }
+>, <Line: -    public boolean isUpdated() {
+>, <Line: -        return updated;
+>, <Line: -    }
+>, <Line: -    public void addExecListener(AlgorithmExecListener listener) {
+>, <Line: -        execListeners.add(listener);
+>, <Line: -    }
+>]

@@ -1,0 +1,8 @@
+[<Line: +            if (origLogs == null || origLogs.size() - 1 < i){
+>, <Line: +                String formattedString = String.format("Log: %s: was expected but doesn't exist: address: %s",
+>, <Line: +                        i, Hex.toHexString(postLog.getAddress()));
+>, <Line: +                results.add(formattedString);
+>, <Line: +                continue;
+>, <Line: +            }
+>]
+[]

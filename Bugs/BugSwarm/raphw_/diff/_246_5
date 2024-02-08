@@ -1,0 +1,21 @@
+[<Line: + *
+>, <Line: + * @see net.bytebuddy.implementation.MethodDelegation
+>, <Line: + * @see net.bytebuddy.implementation.bind.annotation.TargetMethodAnnotationDrivenBinder
+>, <Line: +                    return implementationTarget.invokeDefault(source.asSignatureToken());
+>, <Line: +                    return implementationTarget.invokeDefault(source.asSignatureToken(), TargetType.resolve(typeDescription, implementationTarget.getInstrumentedType()));
+>]
+[<Line: -                    Implementation.SpecialMethodInvocation result = Implementation.SpecialMethodInvocation.Illegal.INSTANCE;
+>, <Line: -                    for (TypeDescription typeDescription : implementationTarget.getInstrumentedType().getInterfaces().asErasures()) {
+>, <Line: -                        if (source.isSpecializableFor(typeDescription)) {
+>, <Line: -                            Implementation.SpecialMethodInvocation invocation = implementationTarget.invokeDefault(typeDescription, source.asSignatureToken());
+>, <Line: -                            if (invocation.isValid()) {
+>, <Line: -                                if (result.isValid()) {
+>, <Line: -                                    return Implementation.SpecialMethodInvocation.Illegal.INSTANCE;
+>, <Line: -                                }
+>, <Line: -                                result = invocation;
+>, <Line: -                            }
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -                    return result;
+>, <Line: -                    return implementationTarget.invokeDefault(TargetType.resolve(typeDescription, implementationTarget.getInstrumentedType()), source.asSignatureToken());
+>]

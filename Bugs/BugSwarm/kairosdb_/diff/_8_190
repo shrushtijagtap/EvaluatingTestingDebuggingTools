@@ -1,0 +1,88 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'./linkSrv',
+>, <Line: +	],
+>, <Line: +	function (angular, _) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.directives')
+>, <Line: +			.directive('panelLinkEditor', function () {
+>, <Line: +				return {
+>, <Line: +					scope: {
+>, <Line: +						panel: "="
+>, <Line: +					},
+>, <Line: +					restrict: 'E',
+>, <Line: +					controller: 'PanelLinkEditorCtrl',
+>, <Line: +					templateUrl: 'app/features/panellinkeditor/module.html',
+>, <Line: +					link: function () {
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +			}).controller('PanelLinkEditorCtrl', function ($scope, datasourceSrv) {
+>, <Line: +				$scope.panel.links = $scope.panel.links || [];
+>, <Line: +				$scope.addLink = function () {
+>, <Line: +					$scope.panel.links.push({
+>, <Line: +						type: 'dashboard',
+>, <Line: +						name: 'Drilldown dashboard'
+>, <Line: +					});
+>, <Line: +				};
+>, <Line: +				$scope.searchDashboards = function (query, callback) {
+>, <Line: +					var ds = datasourceSrv.getGrafanaDB();
+>, <Line: +					if (ds === null) {
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					ds.searchDashboards(query).then(function (result) {
+>, <Line: +						var dashboards = _.map(result.dashboards, function (dash) {
+>, <Line: +							return dash.title;
+>, <Line: +						});
+>, <Line: +						callback(dashboards);
+>, <Line: +					});
+>, <Line: +				};
+>, <Line: +				$scope.deleteLink = function (link) {
+>, <Line: +					$scope.panel.links = _.without($scope.panel.links, link);
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  './linkSrv',
+>, <Line: -],
+>, <Line: -function (angular, _) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.directives')
+>, <Line: -    .directive('panelLinkEditor', function() {
+>, <Line: -      return {
+>, <Line: -        scope: {
+>, <Line: -          panel: "="
+>, <Line: -        },
+>, <Line: -        restrict: 'E',
+>, <Line: -        controller: 'PanelLinkEditorCtrl',
+>, <Line: -        templateUrl: 'app/features/panellinkeditor/module.html',
+>, <Line: -        link: function() {
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -    }).controller('PanelLinkEditorCtrl', function($scope, datasourceSrv) {
+>, <Line: -      $scope.panel.links = $scope.panel.links || [];
+>, <Line: -      $scope.addLink = function() {
+>, <Line: -        $scope.panel.links.push({
+>, <Line: -          type: 'dashboard',
+>, <Line: -          name: 'Drilldown dashboard'
+>, <Line: -        });
+>, <Line: -      };
+>, <Line: -      $scope.searchDashboards = function(query, callback) {
+>, <Line: -        var ds = datasourceSrv.getGrafanaDB();
+>, <Line: -        if (ds === null) { return; }
+>, <Line: -        ds.searchDashboards(query).then(function(result) {
+>, <Line: -          var dashboards = _.map(result.dashboards, function(dash) {
+>, <Line: -            return dash.title;
+>, <Line: -          });
+>, <Line: -          callback(dashboards);
+>, <Line: -        });
+>, <Line: -      };
+>, <Line: -      $scope.deleteLink = function(link) {
+>, <Line: -        $scope.panel.links = _.without($scope.panel.links, link);
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

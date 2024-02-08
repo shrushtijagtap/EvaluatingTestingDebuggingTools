@@ -1,0 +1,7 @@
+[<Line: +import de.charite.compbio.jannovar.mendel.ModeOfInheritance;
+>, <Line: +	 * @return A {@link Set} with {@link de.charite.compbio.jannovar.mendel.ModeOfInheritance} that matches with this
+>, <Line: +	 *         the {@link de.charite.compbio.jannovar.mendel.ModeOfInheritance}.
+>]
+[<Line: -	 * @return A {@link Set} with {@link de.charite.compbio.jannovar.pedigree.ModeOfInheritance} that matches with this
+>, <Line: -	 *         the {@link de.charite.compbio.jannovar.pedigree.ModeOfInheritance}.
+>]

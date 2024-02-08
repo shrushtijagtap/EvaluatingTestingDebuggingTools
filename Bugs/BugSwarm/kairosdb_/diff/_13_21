@@ -1,0 +1,12 @@
+[<Line: +package org.kairosdb.core.datastore;
+>, <Line: +import java.util.List;
+>, <Line: +/**
+>, <Line: + Created by bhawkins on 5/18/17.
+>, <Line: + */
+>, <Line: +public interface PluggableQuery
+>, <Line: +{
+>, <Line: +	List<QueryPlugin> getPlugins();
+>, <Line: +	void addPlugin(QueryPlugin plugin);
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,140 @@
+[<Line: +import java.io.*;
+>, <Line: +import java.util.zip.GZIPOutputStream;
+>, <Line: +                    String acceptEncoding = this.headers.get("accept-encoding");
+>, <Line: +                    r.setGzipEncoding(acceptEncoding != null && acceptEncoding.contains("gzip"));
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Output stream that will automatically send every write to the wrapped
+>, <Line: +         * OutputStream according to chunked transfer:
+>, <Line: +         * http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.6.1
+>, <Line: +         */
+>, <Line: +        private static class ChunkedOutputStream extends FilterOutputStream {
+>, <Line: +            public ChunkedOutputStream(OutputStream out) {
+>, <Line: +                super(out);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public void write(int b) throws IOException {
+>, <Line: +                byte[] data = {
+>, <Line: +                    (byte) b
+>, <Line: +                };
+>, <Line: +                write(data, 0, 1);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public void write(byte[] b) throws IOException {
+>, <Line: +                write(b, 0, b.length);
+>, <Line: +            }
+>, <Line: +            @Override
+>, <Line: +            public void write(byte[] b, int off, int len) throws IOException {
+>, <Line: +                if (len == 0)
+>, <Line: +                    return;
+>, <Line: +                out.write(String.format("%x\r\n", len).getBytes());
+>, <Line: +                out.write(b, off, len);
+>, <Line: +                out.write("\r\n".getBytes());
+>, <Line: +            }
+>, <Line: +            public void finish() throws IOException {
+>, <Line: +                out.write("0\r\n\r\n".getBytes());
+>, <Line: +            }
+>, <Line: +        private boolean encodeAsGzip;
+>, <Line: +        public void setGzipEncoding(boolean encodeAsGzip) {
+>, <Line: +            this.encodeAsGzip = encodeAsGzip;
+>, <Line: +        }
+>, <Line: +                if (headerAlreadySent(this.header, "content-length")) {
+>, <Line: +                    encodeAsGzip = false;
+>, <Line: +                }
+>, <Line: +                if (encodeAsGzip) {
+>, <Line: +                    pw.print("Content-Encoding: gzip\r\n");
+>, <Line: +                }
+>, <Line: +                long pending = this.data != null ? this.contentLength : 0;
+>, <Line: +                    pw.print("Transfer-Encoding: chunked\r\n");
+>, <Line: +                } else if (!encodeAsGzip) {
+>, <Line: +                pw.print("\r\n");
+>, <Line: +                pw.flush();
+>, <Line: +                sendBodyWithCorrectTransferAndEncoding(outputStream, pending);
+>, <Line: +        private void sendBodyWithCorrectTransferAndEncoding(OutputStream outputStream, long pending) throws IOException {
+>, <Line: +            if (this.requestMethod != Method.HEAD && this.chunkedTransfer) {
+>, <Line: +                ChunkedOutputStream chunkedOutputStream = new ChunkedOutputStream(outputStream);
+>, <Line: +                sendBodyWithCorrectEncoding(chunkedOutputStream, -1);
+>, <Line: +                chunkedOutputStream.finish();
+>, <Line: +            } else {
+>, <Line: +                sendBodyWithCorrectEncoding(outputStream, pending);
+>, <Line: +        private void sendBodyWithCorrectEncoding(OutputStream outputStream, long pending) throws IOException {
+>, <Line: +            if (encodeAsGzip) {
+>, <Line: +                GZIPOutputStream gzipOutputStream = new GZIPOutputStream(outputStream);
+>, <Line: +                sendBody(gzipOutputStream, -1);
+>, <Line: +                gzipOutputStream.finish();
+>, <Line: +            } else {
+>, <Line: +                sendBody(outputStream, pending);
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        /**
+>, <Line: +         * Sends the body to the specified OutputStream. The pending parameter
+>, <Line: +         * limits the maximum amounts of bytes sent unless it is -1, in which
+>, <Line: +         * case everything is sent.
+>, <Line: +         * 
+>, <Line: +         * @param outputStream
+>, <Line: +         *            the OutputStream to send data to
+>, <Line: +         * @param pending
+>, <Line: +         *            -1 to send everything, otherwise sets a max limit to the
+>, <Line: +         *            number of bytes sent
+>, <Line: +         * @throws IOException
+>, <Line: +         *             if something goes wrong while sending the data.
+>, <Line: +         */
+>, <Line: +        private void sendBody(OutputStream outputStream, long pending) throws IOException {
+>, <Line: +            long BUFFER_SIZE = 16 * 1024;
+>, <Line: +            byte[] buff = new byte[(int) BUFFER_SIZE];
+>, <Line: +            boolean sendEverything = pending == -1;
+>, <Line: +            while (pending > 0 || sendEverything) {
+>, <Line: +                long bytesToRead = sendEverything ? BUFFER_SIZE : Math.min(pending, BUFFER_SIZE);
+>, <Line: +                int read = this.data.read(buff, 0, (int) bytesToRead);
+>, <Line: +                if (read <= 0) {
+>, <Line: +                    break;
+>, <Line: +                }
+>, <Line: +                outputStream.write(buff, 0, read);
+>, <Line: +                if (!sendEverything) {
+>]
+[<Line: -import java.io.BufferedReader;
+>, <Line: -import java.io.BufferedWriter;
+>, <Line: -import java.io.ByteArrayInputStream;
+>, <Line: -import java.io.Closeable;
+>, <Line: -import java.io.File;
+>, <Line: -import java.io.FileInputStream;
+>, <Line: -import java.io.FileOutputStream;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.io.InputStream;
+>, <Line: -import java.io.InputStreamReader;
+>, <Line: -import java.io.OutputStream;
+>, <Line: -import java.io.OutputStreamWriter;
+>, <Line: -import java.io.PrintWriter;
+>, <Line: -import java.io.PushbackInputStream;
+>, <Line: -import java.io.RandomAccessFile;
+>, <Line: -import java.io.UnsupportedEncodingException;
+>, <Line: -                    sendAsChunked(outputStream, pw);
+>, <Line: -                } else {
+>, <Line: -                    long pending = this.data != null ? this.contentLength : 0;
+>, <Line: -                    pw.print("\r\n");
+>, <Line: -                    pw.flush();
+>, <Line: -                    sendAsFixedLength(outputStream, pending);
+>, <Line: -        private void sendAsChunked(OutputStream outputStream, PrintWriter pw) throws IOException {
+>, <Line: -            pw.print("Transfer-Encoding: chunked\r\n");
+>, <Line: -            pw.print("\r\n");
+>, <Line: -            pw.flush();
+>, <Line: -            int BUFFER_SIZE = 16 * 1024;
+>, <Line: -            byte[] CRLF = "\r\n".getBytes();
+>, <Line: -            byte[] buff = new byte[BUFFER_SIZE];
+>, <Line: -            int read;
+>, <Line: -            while ((read = this.data.read(buff)) > 0) {
+>, <Line: -                outputStream.write(String.format("%x\r\n", read).getBytes());
+>, <Line: -                outputStream.write(buff, 0, read);
+>, <Line: -                outputStream.write(CRLF);
+>, <Line: -            outputStream.write(String.format("0\r\n\r\n").getBytes());
+>, <Line: -        private void sendAsFixedLength(OutputStream outputStream, long pending) throws IOException {
+>, <Line: -            if (this.requestMethod != Method.HEAD && this.data != null) {
+>, <Line: -                long BUFFER_SIZE = 16 * 1024;
+>, <Line: -                byte[] buff = new byte[(int) BUFFER_SIZE];
+>, <Line: -                while (pending > 0) {
+>, <Line: -                    int read = this.data.read(buff, 0, (int) (pending > BUFFER_SIZE ? BUFFER_SIZE : pending));
+>, <Line: -                    if (read <= 0) {
+>, <Line: -                        break;
+>, <Line: -                    }
+>, <Line: -                    outputStream.write(buff, 0, read);
+>]

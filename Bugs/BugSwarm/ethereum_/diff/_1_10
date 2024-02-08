@@ -1,0 +1,4 @@
+[<Line: +log4j.logger.VM =    ERROR
+>]
+[<Line: -log4j.logger.VM =    TRACE
+>]

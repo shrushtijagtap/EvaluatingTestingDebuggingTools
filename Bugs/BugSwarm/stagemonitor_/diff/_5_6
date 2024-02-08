@@ -1,0 +1,26 @@
+[<Line: +package org.stagemonitor.core.metrics;
+>, <Line: +import com.codahale.metrics.Meter;
+>, <Line: +import com.codahale.metrics.Timer;
+>, <Line: +public class MetricUtils {
+>, <Line: +	private MetricUtils() {
+>, <Line: +	}
+>, <Line: +	public static boolean isFasterThanXPercentOfAllRequests(long executionTimeNanos, double percentileLimit, Timer timer) {
+>, <Line: +		boolean faster = true;
+>, <Line: +		if (percentileLimit > 0) {
+>, <Line: +			if (percentileLimit >= 1) {
+>, <Line: +				faster = false;
+>, <Line: +			} else {
+>, <Line: +				final double percentile = timer.getSnapshot().getValue(percentileLimit);
+>, <Line: +				if (executionTimeNanos < percentile) {
+>, <Line: +					faster = false;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return faster;
+>, <Line: +	}
+>, <Line: +	public static boolean isRateLimitExceeded(double maxRate, Meter meter) {
+>, <Line: +		return maxRate < 1000000 && (maxRate <= 0 || 60 * meter.getOneMinuteRate() > maxRate);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

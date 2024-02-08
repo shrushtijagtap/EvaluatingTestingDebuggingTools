@@ -1,0 +1,12 @@
+[<Line: +import static com.github.rinde.rinsim.core.model.road.GenericRoadModel.RoadEventType.MOVE;
+>, <Line: +import com.github.rinde.rinsim.core.model.road.GenericRoadModel.RoadEventType;
+>, <Line: +        increment((MovingRoadUser) me.roadUser, me.pathProgress.distance()
+>, <Line: +            .getValue()
+>, <Line: +            lastArrivalTimeAtDepot.put((MovingRoadUser) me.roadUser,
+>, <Line: +                simulator.getCurrentTime());
+>]
+[<Line: -import static com.github.rinde.rinsim.core.model.road.AbstractRoadModel.RoadEventType.MOVE;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.AbstractRoadModel.RoadEventType;
+>, <Line: -        increment(me.roadUser, me.pathProgress.distance().getValue()
+>, <Line: -            lastArrivalTimeAtDepot.put(me.roadUser, simulator.getCurrentTime());
+>]

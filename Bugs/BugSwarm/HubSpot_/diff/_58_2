@@ -1,0 +1,4 @@
+[<Line: +      return Response.status(Response.Status.CONFLICT).entity(String.format("Couldn't acquire agent lock for %s in %s ms. Lock Info: %s", requestId, agentLockTimeoutMs, e.getLockInfo())).build();
+>]
+[<Line: -      return Response.status(Response.Status.CONFLICT).build();
+>]

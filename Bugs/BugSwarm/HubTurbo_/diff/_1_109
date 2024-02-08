@@ -1,0 +1,212 @@
+[<Line: +import prefs.Preferences;
+>, <Line: +import util.HTLog;
+>, <Line: +import util.Utility;
+>, <Line: +import java.util.concurrent.CompletableFuture;
+>, <Line: +import java.util.concurrent.ExecutionException;
+>, <Line: +import java.util.concurrent.ExecutorService;
+>, <Line: +import java.util.concurrent.Executors;
+>, <Line: +public class LoginDialog extends Dialog<LoginDialog.Result> {
+>, <Line: +	private static final Logger logger = LogManager.getLogger(LoginDialog.class.getName());
+>, <Line: +	private final UI ui;
+>, <Line: +	private final Preferences prefs;
+>, <Line: +	private String owner;
+>, <Line: +	private String repo;
+>, <Line: +	private String username;
+>, <Line: +	private String password;
+>, <Line: +	private final ExecutorService executor = Executors.newSingleThreadExecutor();
+>, <Line: +	public LoginDialog(UI ui, Preferences prefs, Stage parentStage) {
+>, <Line: +		this.ui = ui;
+>, <Line: +		this.prefs = prefs;
+>, <Line: +	}
+>, <Line: +	private void login(Event unused) {
+>, <Line: +		resolveCredentials();
+>, <Line: +		enableUI(false);
+>, <Line: +		UI.status.displayMessage("Signing in to GitHub...");
+>, <Line: +		CompletableFuture.supplyAsync(this::attemptLogin, executor).thenAccept(success -> {
+>, <Line: +			if (success) {
+>, <Line: +				// Save login details only on successful login
+>, <Line: +				prefs.setLastLoginCredentials(username, password);
+>, <Line: +				Platform.runLater(() -> {
+>, <Line: +					completeResponse(new Result(owner, repo));
+>, <Line: +					close();
+>, <Line: +				});
+>, <Line: +			} else {
+>, <Line: +				handleError("Failed to sign in. Please try again.");
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +	}
+>, <Line: +	private boolean attemptLogin() {
+>, <Line: +		try {
+>, <Line: +			if (Utility.isWellFormedRepoId(owner, repo)) {
+>, <Line: +				return ui.logic.login(username, password).get();
+>, <Line: +			}
+>, <Line: +			return false;
+>, <Line: +		} catch (InterruptedException | ExecutionException e1) {
+>, <Line: +			HTLog.error(logger, e1);
+>, <Line: +		}
+>, <Line: +		return false;
+>, <Line: +	}
+>, <Line: +	private void resolveCredentials() {
+>, <Line: +		owner = repoOwnerField.getText();
+>, <Line: +		repo = repoNameField.getText();
+>, <Line: +		username = usernameField.getText();
+>, <Line: +		password = passwordField.getText();
+>, <Line: +		// If either field is empty, try to load credentials.txt
+>, <Line: +		if (username.isEmpty() || password.isEmpty()) {
+>, <Line: +			BufferedReader reader;
+>, <Line: +			try {
+>, <Line: +				reader = new BufferedReader(new FileReader("credentials.txt"));
+>, <Line: +				String line;
+>, <Line: +				while ((line = reader.readLine()) != null) {
+>, <Line: +					if (username.isEmpty()) {
+>, <Line: +						username = line;
+>, <Line: +					} else {
+>, <Line: +						password = line;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				logger.info("Logged in using credentials.txt");
+>, <Line: +			} catch (Exception ex) {
+>, <Line: +				logger.info("Failed to find or open credentials.txt");
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private void handleError(String message) {
+>, <Line: +		Platform.runLater(()->{
+>, <Line: +			enableUI(true);
+>, <Line: +			UI.status.displayMessage(message);
+>, <Line: +			DialogMessage.showWarningDialog("Error", message);
+>, <Line: +		});
+>, <Line: +		completeResponse(new Result());
+>, <Line: +		Optional<RepositoryId> lastViewed = prefs.getLastViewedRepository();
+>, <Line: +		String lastLoginName = prefs.getLastLoginUsername();
+>, <Line: +		String lastLoginPassword = prefs.getLastLoginPassword();
+>, <Line: +		for (int value : values) {
+>, <Line: +			sum += value;
+>, <Line: +		for (int value : values) {
+>, <Line: +			column.setPercentWidth(value);
+>, <Line: +	private void enableUI(boolean enable) {
+>, <Line: +	public static class Result {
+>, <Line: +		public final String repoId;
+>, <Line: +		public final boolean success;
+>, <Line: +		public Result() {
+>, <Line: +			this.success = false;
+>, <Line: +			this.repoId = "";
+>, <Line: +		}
+>, <Line: +		public Result(String owner, String repo) {
+>, <Line: +			this.success = true;
+>, <Line: +			this.repoId = RepositoryId.create(owner, repo).generateId();
+>]
+[<Line: -import javafx.concurrent.Task;
+>, <Line: -import org.eclipse.egit.github.core.IRepositoryIdProvider;
+>, <Line: -import service.ServiceManager;
+>, <Line: -import storage.DataManager;
+>, <Line: -import ui.components.HTStatusBar;
+>, <Line: -import ui.issuecolumn.ColumnControl;
+>, <Line: -import util.PlatformEx;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.util.function.BiConsumer;
+>, <Line: -public class LoginDialog extends Dialog<Boolean> {
+>, <Line: -	private static final Logger logger = LogManager.getLogger(LoginDialog.class.getName());
+>, <Line: -	private ColumnControl columns;
+>, <Line: -	public LoginDialog(Stage parentStage, ColumnControl columns) {
+>, <Line: -		this.columns = columns;
+>, <Line: -		completeResponse(false);
+>, <Line: -		Optional<RepositoryId> lastViewed = DataManager.getInstance().getLastViewedRepository();
+>, <Line: -		String lastLoginName = DataManager.getInstance().getLastLoginUsername();
+>, <Line: -		String lastLoginPassword = DataManager.getInstance().getLastLoginPassword();
+>, <Line: -	 * @param grid
+>, <Line: -		for (int i=0; i<values.length; i++) {
+>, <Line: -			sum += values[i];
+>, <Line: -		for (int i=0; i<values.length; i++) {
+>, <Line: -			column.setPercentWidth(values[i]);
+>, <Line: -	private void login(Event e) {
+>, <Line: -		// Resolve username and password
+>, <Line: -		String owner = repoOwnerField.getText();
+>, <Line: -		String repo = repoNameField.getText();
+>, <Line: -		String username = usernameField.getText();
+>, <Line: -		String password = passwordField.getText();
+>, <Line: -		// If either field is empty, try to load credentials.txt
+>, <Line: -		if (username.isEmpty() || password.isEmpty()) {
+>, <Line: -			BufferedReader reader;
+>, <Line: -			try {
+>, <Line: -				reader = new BufferedReader(new FileReader("credentials.txt"));
+>, <Line: -				String line = null;
+>, <Line: -				while ((line = reader.readLine()) != null) {
+>, <Line: -					if (username.isEmpty()) {
+>, <Line: -						username = line;
+>, <Line: -					} else {
+>, <Line: -						password = line;
+>, <Line: -					}
+>, <Line: -				}
+>, <Line: -				logger.info("Logged in using credentials.txt");
+>, <Line: -			} catch (Exception ex) {
+>, <Line: -				logger.info("Failed to find or open credentials.txt");
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		// Update UI
+>, <Line: -		enableElements(false);
+>, <Line: -		// Run blocking operations in the background
+>, <Line: -		HTStatusBar.displayMessage("Signing in at GitHub...");
+>, <Line: -    	boolean couldLogIn = ServiceManager.getInstance().login(username, password);
+>, <Line: -		Task<Boolean> task = new Task<Boolean>() {
+>, <Line: -		    @Override
+>, <Line: -		    protected Boolean call() throws Exception {
+>, <Line: -			    HTStatusBar.displayMessage("Signed in; loading data...");
+>, <Line: -			    updateProgress(0, 1);
+>, <Line: -			    updateMessage("Loading data from " + owner + "/" + repo + "...");
+>, <Line: -			    boolean loadSuccess = loadRepository(owner, repo, (message, progress) -> {
+>, <Line: -				    updateProgress(progress * 100, 100);
+>, <Line: -				    updateMessage(message);
+>, <Line: -			    });
+>, <Line: -                PlatformEx.runAndWait(columns::restoreColumns);
+>, <Line: -		    	return loadSuccess;
+>, <Line: -		    }
+>, <Line: -		};
+>, <Line: -		task.setOnSucceeded(wse -> {
+>, <Line: -			if (task.getValue()) {
+>, <Line: -				HTStatusBar.displayMessage(String.format("%s loaded successfully! (%s)",
+>, <Line: -					ServiceManager.getInstance().getRepoId().generateId(),
+>, <Line: -					ServiceManager.getInstance().getRemainingRequestsDesc()));
+>, <Line: -				logger.info("Remaining requests: " +
+>, <Line: -					ServiceManager.getInstance().getRemainingRequestsDesc());
+>, <Line: -				completeResponse(true);
+>, <Line: -				close();
+>, <Line: -			} else {
+>, <Line: -				handleError("Issues failed to load. Please try again.");
+>, <Line: -			}
+>, <Line: -		});
+>, <Line: -		task.setOnFailed(wse -> {
+>, <Line: -			Throwable thrown = task.getException();
+>, <Line: -			logger.error(thrown.getLocalizedMessage(), thrown);
+>, <Line: -			handleError("An error occurred: " + task.getException());
+>, <Line: -		});
+>, <Line: -		if (couldLogIn) {
+>, <Line: -			// Save login details only on successful login
+>, <Line: -			DataManager.getInstance().setLastLoginUsername(username);
+>, <Line: -			DataManager.getInstance().setLastLoginPassword(password);
+>, <Line: -			DialogMessage.showProgressDialog(task, "Loading issues from " + owner + "/" + repo + "...");
+>, <Line: -			Thread th = new Thread(task);
+>, <Line: -			th.setDaemon(true);
+>, <Line: -			th.start();
+>, <Line: -		} else {
+>, <Line: -			handleError("Failed to sign in. Please try again.");
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private void handleError(String message) {
+>, <Line: -		Platform.runLater(()->{
+>, <Line: -			enableElements(true);
+>, <Line: -			HTStatusBar.displayMessage(message);
+>, <Line: -			DialogMessage.showWarningDialog("Warning", message);
+>, <Line: -		});
+>, <Line: -	}
+>, <Line: -	private void enableElements(boolean enable) {
+>, <Line: -	private boolean loadRepository(String owner, String repoName,
+>, <Line: -	                               BiConsumer<String, Float> taskUpdate) throws IOException {
+>, <Line: -		boolean loaded = ServiceManager.getInstance().setupRepository(owner, repoName, taskUpdate);
+>, <Line: -		ServiceManager.getInstance().startModelUpdate();
+>, <Line: -		IRepositoryIdProvider currRepo = ServiceManager.getInstance().getRepoId();
+>, <Line: -		if (currRepo != null) {
+>, <Line: -			String repoId = currRepo.generateId();
+>, <Line: -			DataManager.getInstance().addToLastViewedRepositories(repoId);
+>, <Line: -		return loaded;
+>]

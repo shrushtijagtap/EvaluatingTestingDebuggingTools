@@ -1,0 +1,52 @@
+[]
+[<Line: -package com.hubspot.baragon.worker;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Collection;
+>, <Line: -import java.util.Date;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import java.util.concurrent.atomic.AtomicLong;
+>, <Line: -import com.amazonaws.AmazonClientException;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.AttachLoadBalancerToSubnetsRequest;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.DeregisterInstancesFromLoadBalancerRequest;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.DescribeInstanceHealthRequest;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.DescribeInstanceHealthResult;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.DescribeLoadBalancersRequest;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.EnableAvailabilityZonesForLoadBalancerRequest;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.Instance;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.InstanceState;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.LoadBalancerDescription;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.AmazonElasticLoadBalancingClient;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.RegisterInstancesWithLoadBalancerRequest;
+>, <Line: -import com.amazonaws.services.elasticloadbalancing.model.RegisterInstancesWithLoadBalancerResult;
+>, <Line: -import com.google.common.base.Optional;
+>, <Line: -import com.google.inject.name.Named;
+>, <Line: -import com.hubspot.baragon.config.ElbConfiguration;
+>, <Line: -import com.hubspot.baragon.data.BaragonKnownAgentsDatastore;
+>, <Line: -import com.hubspot.baragon.managers.ElbManager;
+>, <Line: -import com.hubspot.baragon.models.BaragonGroup;
+>, <Line: -import com.hubspot.baragon.models.BaragonKnownAgentMetadata;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -import com.google.inject.Inject;
+>, <Line: -import com.hubspot.baragon.BaragonDataModule;
+>, <Line: -import com.hubspot.baragon.data.BaragonLoadBalancerDatastore;
+>, <Line: -import com.hubspot.baragon.models.BaragonAgentMetadata;
+>, <Line: -public class BaragonElbSyncWorker implements Runnable {
+>, <Line: -  private static final Logger LOG = LoggerFactory.getLogger(BaragonElbSyncWorker.class);
+>, <Line: -  private final ElbManager elbManager;
+>, <Line: -  private final AtomicLong workerLastStartAt;
+>, <Line: -  @Inject
+>, <Line: -  public BaragonElbSyncWorker(ElbManager elbManager,
+>, <Line: -                              @Named(BaragonDataModule.BARAGON_ELB_WORKER_LAST_START) AtomicLong workerLastStartAt) {
+>, <Line: -    this.elbManager = elbManager;
+>, <Line: -    this.workerLastStartAt = workerLastStartAt;
+>, <Line: -  }
+>, <Line: -  @Override
+>, <Line: -  public void run() {
+>, <Line: -    workerLastStartAt.set(System.currentTimeMillis());
+>, <Line: -    elbManager.syncAll();
+>, <Line: -    LOG.info("Finished ELB Sync");
+>, <Line: -  }
+>, <Line: -}
+>]

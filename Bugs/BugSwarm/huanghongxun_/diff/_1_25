@@ -1,0 +1,14 @@
+[<Line: +import com.google.gson.annotations.SerializedName;
+>, <Line: +    @SerializedName("accessToken")
+>, <Line: +    public String accessToken;
+>, <Line: +    @SerializedName("clientToken")
+>, <Line: +    public String clientToken;
+>, <Line: +    @SerializedName("selectedProfile")
+>, <Line: +    @SerializedName("availableProfiles")
+>, <Line: +    @SerializedName("user")
+>, <Line: +    @SerializedName("error")
+>, <Line: +    @SerializedName("errorMessage")
+>, <Line: +    @SerializedName("cause")
+>]
+[<Line: -    public String accessToken, clientToken;
+>]

@@ -1,0 +1,140 @@
+[<Line: + Copyright (c) 2007-2013 IOLA and Ole Laursen.
+>, <Line: + Licensed under the MIT license.
+>, <Line: + The plugin assumes that each series has a single data value, and that each
+>, <Line: + value is a positive integer or zero.  Negative numbers don't make sense for a
+>, <Line: + pie chart, and have unpredictable results.  The values do NOT need to be
+>, <Line: + passed in as percentages; the plugin will calculate the total and per-slice
+>, <Line: + percentages internally.
+>, <Line: + * Created by Brian Medendorp
+>, <Line: + * Updated with contributions from btburnett3, Anthony Aragues and Xavi Ivars
+>, <Line: + The plugin supports these options:
+>, <Line: + series: {
+>, <Line: + pie: {
+>, <Line: + show: true/false
+>, <Line: + radius: 0-1 for percentage of fullsize, or a specified pixel length, or 'auto'
+>, <Line: + innerRadius: 0-1 for percentage of fullsize or a specified pixel length, for creating a donut effect
+>, <Line: + startAngle: 0-2 factor of PI used for starting angle (in radians) i.e 3/2 starts at the top, 0 and 2 have the same result
+>, <Line: + tilt: 0-1 for percentage to tilt the pie, where 1 is no tilt, and 0 is completely flat (nothing will show)
+>, <Line: + offset: {
+>, <Line: + top: integer value to move the pie up or down
+>, <Line: + left: integer value to move the pie left or right, or 'auto'
+>, <Line: + },
+>, <Line: + stroke: {
+>, <Line: + color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#FFF')
+>, <Line: + width: integer pixel width of the stroke
+>, <Line: + },
+>, <Line: + label: {
+>, <Line: + show: true/false, or 'auto'
+>, <Line: + formatter:  a user-defined function that modifies the text/style of the label text
+>, <Line: + radius: 0-1 for percentage of fullsize, or a specified pixel length
+>, <Line: + background: {
+>, <Line: + color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#000')
+>, <Line: + opacity: 0-1
+>, <Line: + },
+>, <Line: + threshold: 0-1 for the percentage value at which to hide labels (if they're too small)
+>, <Line: + },
+>, <Line: + combine: {
+>, <Line: + threshold: 0-1 for the percentage value at which to combine slices (if they're too small)
+>, <Line: + color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#CCC'), if null, the plugin will automatically use the color of the first slice to be combined
+>, <Line: + label: any text value of what the combined slice should be labeled
+>, <Line: + }
+>, <Line: + highlight: {
+>, <Line: + opacity: 0-1
+>, <Line: + }
+>, <Line: + }
+>, <Line: + }
+>, <Line: + More detail and specific examples can be found in the included HTML file.
+>, <Line: + */
+>, <Line: +(function ($) {
+>, <Line: +		plot.hooks.processOptions.push(function (plot, options) {
+>, <Line: +						options.series.pie.radius = 3 / 4;
+>, <Line: +		plot.hooks.bindEvents.push(function (plot, eventHolder) {
+>, <Line: +		plot.hooks.processDatapoints.push(function (plot, series, data, datapoints) {
+>, <Line: +		plot.hooks.drawOverlay.push(function (plot, octx) {
+>, <Line: +		plot.hooks.draw.push(function (plot, newCtx) {
+>, <Line: +			if (!processed) {
+>, <Line: +					value = value[0];
+>, <Line: +			maxRadius = Math.min(canvasWidth, canvasHeight / options.series.pie.tilt) / 2;
+>, <Line: +				ctx.translate(shadowLeft, shadowTop);
+>, <Line: +				ctx.translate(centerLeft, centerTop);
+>, <Line: +				ctx.translate(centerLeft, centerTop);
+>, <Line: +					ctx.arc(0, 0, radius, currentAngle, currentAngle + angle / 2, false);
+>, <Line: +					ctx.arc(0, 0, radius, currentAngle + angle / 2, currentAngle + angle, false);
+>, <Line: +			for (var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
+>, <Line: +				((poly[i][1] <= pt[1] && pt[1] < poly[j][1]) || (poly[j][1] <= pt[1] && pt[1] < poly[i][1]))
+>, <Line: +			var canvasY = parseInt(e.pageY - offset.top);
+>, <Line: +			var pos = {pageX: e.pageX, pageY: e.pageY};
+>, <Line: +				highlights.push({series: s, auto: auto});
+>, <Line: +				startAngle: 3 / 2,
+>, <Line: +					formatter: function (label, slice) {
+>]
+[<Line: -Copyright (c) 2007-2013 IOLA and Ole Laursen.
+>, <Line: -Licensed under the MIT license.
+>, <Line: -The plugin assumes that each series has a single data value, and that each
+>, <Line: -value is a positive integer or zero.  Negative numbers don't make sense for a
+>, <Line: -pie chart, and have unpredictable results.  The values do NOT need to be
+>, <Line: -passed in as percentages; the plugin will calculate the total and per-slice
+>, <Line: -percentages internally.
+>, <Line: -* Created by Brian Medendorp
+>, <Line: -* Updated with contributions from btburnett3, Anthony Aragues and Xavi Ivars
+>, <Line: -The plugin supports these options:
+>, <Line: -	series: {
+>, <Line: -		pie: {
+>, <Line: -			show: true/false
+>, <Line: -			radius: 0-1 for percentage of fullsize, or a specified pixel length, or 'auto'
+>, <Line: -			innerRadius: 0-1 for percentage of fullsize or a specified pixel length, for creating a donut effect
+>, <Line: -			startAngle: 0-2 factor of PI used for starting angle (in radians) i.e 3/2 starts at the top, 0 and 2 have the same result
+>, <Line: -			tilt: 0-1 for percentage to tilt the pie, where 1 is no tilt, and 0 is completely flat (nothing will show)
+>, <Line: -			offset: {
+>, <Line: -				top: integer value to move the pie up or down
+>, <Line: -				left: integer value to move the pie left or right, or 'auto'
+>, <Line: -			},
+>, <Line: -			stroke: {
+>, <Line: -				color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#FFF')
+>, <Line: -				width: integer pixel width of the stroke
+>, <Line: -			},
+>, <Line: -			label: {
+>, <Line: -				show: true/false, or 'auto'
+>, <Line: -				formatter:  a user-defined function that modifies the text/style of the label text
+>, <Line: -				radius: 0-1 for percentage of fullsize, or a specified pixel length
+>, <Line: -				background: {
+>, <Line: -					color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#000')
+>, <Line: -					opacity: 0-1
+>, <Line: -				},
+>, <Line: -				threshold: 0-1 for the percentage value at which to hide labels (if they're too small)
+>, <Line: -			},
+>, <Line: -			combine: {
+>, <Line: -				threshold: 0-1 for the percentage value at which to combine slices (if they're too small)
+>, <Line: -				color: any hexidecimal color value (other formats may or may not work, so best to stick with something like '#CCC'), if null, the plugin will automatically use the color of the first slice to be combined
+>, <Line: -				label: any text value of what the combined slice should be labeled
+>, <Line: -			}
+>, <Line: -			highlight: {
+>, <Line: -				opacity: 0-1
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -More detail and specific examples can be found in the included HTML file.
+>, <Line: -*/
+>, <Line: -(function($) {
+>, <Line: -		plot.hooks.processOptions.push(function(plot, options) {
+>, <Line: -						options.series.pie.radius = 3/4;
+>, <Line: -		plot.hooks.bindEvents.push(function(plot, eventHolder) {
+>, <Line: -		plot.hooks.processDatapoints.push(function(plot, series, data, datapoints) {
+>, <Line: -		plot.hooks.drawOverlay.push(function(plot, octx) {
+>, <Line: -		plot.hooks.draw.push(function(plot, newCtx) {
+>, <Line: -			if (!processed)	{
+>, <Line: -    				value = value[0];
+>, <Line: -			maxRadius =  Math.min(canvasWidth, canvasHeight / options.series.pie.tilt) / 2;
+>, <Line: -				ctx.translate(shadowLeft,shadowTop);
+>, <Line: -				ctx.translate(centerLeft,centerTop);
+>, <Line: -				ctx.translate(centerLeft,centerTop);
+>, <Line: -					ctx.arc(0, 0, radius,currentAngle, currentAngle + angle / 2, false);
+>, <Line: -					ctx.arc(0, 0, radius,currentAngle + angle / 2, currentAngle + angle, false);
+>, <Line: -			for(var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
+>, <Line: -				((poly[i][1] <= pt[1] && pt[1] < poly[j][1]) || (poly[j][1] <= pt[1] && pt[1]< poly[i][1]))
+>, <Line: -			var canvasY =  parseInt(e.pageY - offset.top);
+>, <Line: -			var pos = { pageX: e.pageX, pageY: e.pageY };
+>, <Line: -				highlights.push({ series: s, auto: auto });
+>, <Line: -				startAngle: 3/2,
+>, <Line: -					formatter: function(label, slice) {
+>]

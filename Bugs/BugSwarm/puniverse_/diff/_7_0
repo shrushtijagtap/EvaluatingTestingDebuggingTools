@@ -1,0 +1,3 @@
+[<Line: +        s.getKryo().register(ThreadLocalSerializer.DEFAULT.class);
+>]
+[]

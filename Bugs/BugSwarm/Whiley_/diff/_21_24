@@ -1,0 +1,8 @@
+[]
+[<Line: -function List([int] items, int item) -> bool:
+>, <Line: -    for i in items:
+>, <Line: -        if item == i:
+>, <Line: -            return true
+>, <Line: -        return false // error!
+>, <Line: -    return false
+>]

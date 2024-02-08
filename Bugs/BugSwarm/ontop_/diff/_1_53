@@ -1,0 +1,8 @@
+[<Line: +	private List<OBDAMappingAxiom> expand(List<OBDAMappingAxiom> mappings) throws SQLException, JSQLParserException {
+>, <Line: +			CQIE targetQuery = mapping.getTargetQuery();
+>, <Line: +			OBDASQLQuery sourceQuery = mapping.getSourceQuery();
+>]
+[<Line: -	private List<OBDAMappingAxiom> expand(ArrayList<OBDAMappingAxiom> mappings) throws SQLException, JSQLParserException {
+>, <Line: -			CQIE targetQuery = (CQIE) mapping.getTargetQuery();
+>, <Line: -			OBDASQLQuery sourceQuery = (OBDASQLQuery)mapping.getSourceQuery();
+>]

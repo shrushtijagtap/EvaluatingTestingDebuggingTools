@@ -1,0 +1,45 @@
+[<Line: +package backend.resource.serialization;
+>, <Line: +import backend.resource.TurboMilestone;
+>, <Line: +import java.time.LocalDate;
+>, <Line: +import java.util.Optional;
+>, <Line: +public class SerializableMilestone {
+>, <Line: +	private int id;
+>, <Line: +	private String title;
+>, <Line: +	private Optional<LocalDate> dueDate;
+>, <Line: +	private String description;
+>, <Line: +	private boolean isOpen;
+>, <Line: +	private int openIssues;
+>, <Line: +	private int closedIssues;
+>, <Line: +	public SerializableMilestone(TurboMilestone milestone) {
+>, <Line: +		this.id = milestone.getId();
+>, <Line: +		this.title = milestone.getTitle();
+>, <Line: +		this.dueDate = milestone.getDueDate();
+>, <Line: +		this.description = milestone.getDescription();
+>, <Line: +		this.isOpen = milestone.isOpen();
+>, <Line: +		this.openIssues = milestone.getOpenIssues();
+>, <Line: +		this.closedIssues = milestone.getClosedIssues();
+>, <Line: +	}
+>, <Line: +	public int getId() {
+>, <Line: +		return id;
+>, <Line: +	}
+>, <Line: +	public String getTitle() {
+>, <Line: +		return title;
+>, <Line: +	}
+>, <Line: +	public Optional<LocalDate> getDueDate() {
+>, <Line: +		return dueDate;
+>, <Line: +	}
+>, <Line: +	public String getDescription() {
+>, <Line: +		return description;
+>, <Line: +	}
+>, <Line: +	public boolean isOpen() {
+>, <Line: +		return isOpen;
+>, <Line: +	}
+>, <Line: +	public int getOpenIssues() {
+>, <Line: +		return openIssues;
+>, <Line: +	}
+>, <Line: +	public int getClosedIssues() {
+>, <Line: +		return closedIssues;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

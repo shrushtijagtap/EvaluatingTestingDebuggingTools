@@ -1,0 +1,84 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.support.Logger;
+>, <Line: +import org.mp4parser.support.Matrix;
+>, <Line: +import org.mp4parser.tools.DateHelper;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +    public static final String TYPE = "mvhd";
+>, <Line: +    public void setCreationTime(Date creationTime) {
+>, <Line: +        this.creationTime = creationTime;
+>, <Line: +        if (DateHelper.convert(creationTime) >= (1l << 32)) {
+>, <Line: +            setVersion(1);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public void setModificationTime(Date modificationTime) {
+>, <Line: +        this.modificationTime = modificationTime;
+>, <Line: +        if (DateHelper.convert(modificationTime) >= (1l << 32)) {
+>, <Line: +            setVersion(1);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public void setTimescale(long timescale) {
+>, <Line: +        this.timescale = timescale;
+>, <Line: +    }
+>, <Line: +    public void setDuration(long duration) {
+>, <Line: +        this.duration = duration;
+>, <Line: +        if (duration >= (1l << 32)) {
+>, <Line: +            setVersion(1);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public void setRate(double rate) {
+>, <Line: +        this.rate = rate;
+>, <Line: +    }
+>, <Line: +    public void setVolume(float volume) {
+>, <Line: +        this.volume = volume;
+>, <Line: +    }
+>, <Line: +    public void setMatrix(Matrix matrix) {
+>, <Line: +        this.matrix = matrix;
+>, <Line: +    }
+>, <Line: +    public void setNextTrackId(long nextTrackId) {
+>, <Line: +        this.nextTrackId = nextTrackId;
+>, <Line: +    }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -import com.googlecode.mp4parser.util.DateHelper;
+>, <Line: -import com.googlecode.mp4parser.util.Logger;
+>, <Line: -import com.googlecode.mp4parser.util.Matrix;
+>, <Line: -    public static final String TYPE = "mvhd";
+>, <Line: -    public void setCreationTime(Date creationTime) {
+>, <Line: -        this.creationTime = creationTime;
+>, <Line: -        if (DateHelper.convert(creationTime) >= (1l << 32)) {
+>, <Line: -            setVersion(1);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    public void setModificationTime(Date modificationTime) {
+>, <Line: -        this.modificationTime = modificationTime;
+>, <Line: -        if (DateHelper.convert(modificationTime) >= (1l << 32)) {
+>, <Line: -            setVersion(1);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    public void setTimescale(long timescale) {
+>, <Line: -        this.timescale = timescale;
+>, <Line: -    }
+>, <Line: -    public void setDuration(long duration) {
+>, <Line: -        this.duration = duration;
+>, <Line: -        if (duration >= (1l << 32)) {
+>, <Line: -            setVersion(1);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    public void setRate(double rate) {
+>, <Line: -        this.rate = rate;
+>, <Line: -    }
+>, <Line: -    public void setVolume(float volume) {
+>, <Line: -        this.volume = volume;
+>, <Line: -    }
+>, <Line: -    public void setMatrix(Matrix matrix) {
+>, <Line: -        this.matrix = matrix;
+>, <Line: -    }
+>, <Line: -    public void setNextTrackId(long nextTrackId) {
+>, <Line: -        this.nextTrackId = nextTrackId;
+>, <Line: -    }
+>]

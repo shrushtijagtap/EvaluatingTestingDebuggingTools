@@ -1,0 +1,18 @@
+[<Line: +    private final ElementMatcher<? super TypeList.Generic> matcher;
+>, <Line: +     * @param matcher The matcher to apply to the matched method's exceptions.
+>, <Line: +    public MethodExceptionTypeMatcher(ElementMatcher<? super TypeList.Generic> matcher) {
+>, <Line: +        this.matcher = matcher;
+>, <Line: +        return matcher.matches(target.getExceptionTypes());
+>, <Line: +                && matcher.equals(((MethodExceptionTypeMatcher<?>) other).matcher);
+>, <Line: +        return matcher.hashCode();
+>, <Line: +        return "exceptions(" + matcher + ")";
+>]
+[<Line: -    private final ElementMatcher<? super TypeList.Generic> exceptionMatcher;
+>, <Line: -     * @param exceptionMatcher The matcher to apply to the matched method's exceptions.
+>, <Line: -    public MethodExceptionTypeMatcher(ElementMatcher<? super TypeList.Generic> exceptionMatcher) {
+>, <Line: -        this.exceptionMatcher = exceptionMatcher;
+>, <Line: -        return exceptionMatcher.matches(target.getExceptionTypes());
+>, <Line: -                && exceptionMatcher.equals(((MethodExceptionTypeMatcher<?>) other).exceptionMatcher);
+>, <Line: -        return exceptionMatcher.hashCode();
+>, <Line: -        return "exceptions(" + exceptionMatcher + ")";
+>]

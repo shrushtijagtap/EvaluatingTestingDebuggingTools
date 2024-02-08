@@ -1,0 +1,46 @@
+[<Line: +package net.bytebuddy.agent.builder;
+>, <Line: +import net.bytebuddy.test.utility.ObjectPropertyAssertion;
+>, <Line: +import org.junit.Test;
+>, <Line: +import java.util.Collections;
+>, <Line: +import static org.hamcrest.MatcherAssert.assertThat;
+>, <Line: +import static org.hamcrest.core.Is.is;
+>, <Line: +public class AgentBuilderRedefinitionStrategyFailureHandlerTest {
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testFailFastBatch() throws Exception {
+>, <Line: +        AgentBuilder.RedefinitionStrategy.FailureHandler.Default.FAIL_FAST.onBatchFailure(Collections.<Class<?>>singletonList(Object.class), new Throwable());
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testFailFast() throws Exception {
+>, <Line: +        AgentBuilder.RedefinitionStrategy.FailureHandler.Default.FAIL_FAST.onFailure(Collections.singletonMap(Collections.<Class<?>>singletonList(Object.class), new Throwable()));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testFailLastBatch() throws Exception {
+>, <Line: +        assertThat(AgentBuilder.RedefinitionStrategy.FailureHandler.Default.FAIL_LAST.onBatchFailure(Collections.<Class<?>>singletonList(Object.class), new Throwable()), is(false));
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testFailLast() throws Exception {
+>, <Line: +        AgentBuilder.RedefinitionStrategy.FailureHandler.Default.FAIL_LAST.onFailure(Collections.singletonMap(Collections.<Class<?>>singletonList(Object.class), new Throwable()));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testIgnoringBatch() throws Exception {
+>, <Line: +        assertThat(AgentBuilder.RedefinitionStrategy.FailureHandler.Default.IGNORING.onBatchFailure(Collections.<Class<?>>singletonList(Object.class), new Throwable()), is(false));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testIgnoring() throws Exception {
+>, <Line: +        AgentBuilder.RedefinitionStrategy.FailureHandler.Default.IGNORING.onFailure(Collections.singletonMap(Collections.<Class<?>>singletonList(Object.class), new Throwable()));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testSuppressingBatch() throws Exception {
+>, <Line: +        assertThat(AgentBuilder.RedefinitionStrategy.FailureHandler.Default.SUPPRESSING.onBatchFailure(Collections.<Class<?>>singletonList(Object.class), new Throwable()), is(true));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testSuppressing() throws Exception {
+>, <Line: +        AgentBuilder.RedefinitionStrategy.FailureHandler.Default.SUPPRESSING.onFailure(Collections.singletonMap(Collections.<Class<?>>singletonList(Object.class), new Throwable()));
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testObjectProperties() throws Exception {
+>, <Line: +        ObjectPropertyAssertion.of(AgentBuilder.RedefinitionStrategy.FailureHandler.Default.class).apply();
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

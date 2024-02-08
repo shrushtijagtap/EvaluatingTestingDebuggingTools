@@ -1,0 +1,86 @@
+[<Line: +    /**
+>, <Line: +     * <p>
+>, <Line: +     * Deregisters this class file transformer and redefines any transformed class to its state without this
+>, <Line: +     * class file transformer applied, if the supplied redefinition strategy is enabled.
+>, <Line: +     * </p>
+>, <Line: +     * <p>
+>, <Line: +     * <b>Important</b>: Most JVMs do not support changes of a class's structure after a class was already
+>, <Line: +     * loaded. Therefore, it is typically required that this class file transformer was built while enabling
+>, <Line: +     * {@link AgentBuilder#disableClassFormatChanges()}.
+>, <Line: +     * </p>
+>, <Line: +     *
+>, <Line: +     * @param instrumentation            The instrumentation instance from which to deregister the transformer.
+>, <Line: +     * @param redefinitionStrategy       The redefinition to apply.
+>, <Line: +     * @param redefinitionBatchAllocator The batch allocator to use.
+>, <Line: +     * @return A representation of the result of resetting this transformer.
+>, <Line: +     */
+>, <Line: +    Reset reset(Instrumentation instrumentation,
+>, <Line: +                AgentBuilder.RedefinitionStrategy redefinitionStrategy,
+>, <Line: +                AgentBuilder.RedefinitionStrategy.BatchAllocator redefinitionBatchAllocator);
+>, <Line: +    /**
+>, <Line: +     * <p>
+>, <Line: +     * Deregisters this class file transformer and redefines any transformed class to its state without this
+>, <Line: +     * class file transformer applied, if the supplied redefinition strategy is enabled.
+>, <Line: +     * </p>
+>, <Line: +     * <p>
+>, <Line: +     * <b>Important</b>: Most JVMs do not support changes of a class's structure after a class was already
+>, <Line: +     * loaded. Therefore, it is typically required that this class file transformer was built while enabling
+>, <Line: +     * {@link AgentBuilder#disableClassFormatChanges()}.
+>, <Line: +     * </p>
+>, <Line: +     *
+>, <Line: +     * @param instrumentation            The instrumentation instance from which to deregister the transformer.
+>, <Line: +     * @param redefinitionStrategy       The redefinition to apply.
+>, <Line: +     * @param redefinitionBatchAllocator The batch allocator to use.
+>, <Line: +     * @param redefinitionListener       The redefinition listener to apply.
+>, <Line: +     * @return A representation of the result of resetting this transformer.
+>, <Line: +     */
+>, <Line: +    Reset reset(Instrumentation instrumentation,
+>, <Line: +                AgentBuilder.RedefinitionStrategy redefinitionStrategy,
+>, <Line: +                AgentBuilder.RedefinitionStrategy.BatchAllocator redefinitionBatchAllocator,
+>, <Line: +                AgentBuilder.RedefinitionStrategy.Listener redefinitionListener);
+>, <Line: +    /**
+>, <Line: +     * An abstract base implementation of a {@link ResettableClassFileTransformer}.
+>, <Line: +     */
+>, <Line: +    abstract class AbstractBase implements ResettableClassFileTransformer {
+>, <Line: +        @Override
+>, <Line: +        public Reset reset(Instrumentation instrumentation, AgentBuilder.RedefinitionStrategy redefinitionStrategy) {
+>, <Line: +            return reset(instrumentation,
+>, <Line: +                    redefinitionStrategy,
+>, <Line: +                    AgentBuilder.RedefinitionStrategy.BatchAllocator.ForTotal.INSTANCE);
+>, <Line: +        }
+>, <Line: +        @Override
+>, <Line: +        public Reset reset(Instrumentation instrumentation,
+>, <Line: +                           AgentBuilder.RedefinitionStrategy redefinitionStrategy,
+>, <Line: +                           AgentBuilder.RedefinitionStrategy.BatchAllocator redefinitionBatchAllocator) {
+>, <Line: +            return reset(instrumentation,
+>, <Line: +                    redefinitionStrategy,
+>, <Line: +                    redefinitionBatchAllocator,
+>, <Line: +                    AgentBuilder.RedefinitionStrategy.Listener.NoOp.INSTANCE);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +            private final Map<Class<?>, Throwable> failures;
+>, <Line: +             * @param failures A map of errors occurred during a class file transformer reset.
+>, <Line: +            protected WithErrors(Map<Class<?>, Throwable> failures) {
+>, <Line: +                this.failures = failures;
+>, <Line: +             * @param failures A map of errors that occurred during a reset.
+>, <Line: +            public static Reset ofPotentiallyErroneous(Map<Class<?>, Throwable> failures) {
+>, <Line: +                return failures.isEmpty()
+>, <Line: +                        : new WithErrors(failures);
+>, <Line: +                return failures;
+>, <Line: +                return failures.equals(that.failures);
+>, <Line: +                return failures.hashCode();
+>, <Line: +                        "failures=" + failures +
+>]
+[<Line: -            private final Map<Class<?>, Throwable> errors;
+>, <Line: -             * @param errors A map of errors occurred during a class file transformer reset.
+>, <Line: -            protected WithErrors(Map<Class<?>, Throwable> errors) {
+>, <Line: -                this.errors = errors;
+>, <Line: -             * @param errors A map of errors that occurred during a reset.
+>, <Line: -            public static Reset ofPotentiallyErroneous(Map<Class<?>, Throwable> errors) {
+>, <Line: -                return errors.isEmpty()
+>, <Line: -                        : new WithErrors(errors);
+>, <Line: -                return errors;
+>, <Line: -                return errors.equals(that.errors);
+>, <Line: -                return errors.hashCode();
+>, <Line: -                        "errors=" + errors +
+>]

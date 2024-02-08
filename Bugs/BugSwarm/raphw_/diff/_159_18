@@ -1,0 +1,8 @@
+[<Line: +        assertThat(type.getDeclaredMethod(FOO, this.type, this.type).invoke(type.getDeclaredConstructor().newInstance(), value, value), is((Object) value));
+>, <Line: +            assertThat(type.getDeclaredMethod(BAR, this.type, this.type).invoke(type.getDeclaredConstructor().newInstance(), value, value), is((Object) value));
+>, <Line: +        assertThat(type.getDeclaredMethod(FOO, this.type, this.type).invoke(type.getDeclaredConstructor().newInstance(), value, value), is((Object) value));
+>]
+[<Line: -        assertThat(type.getDeclaredMethod(FOO, this.type, this.type).invoke(type.newInstance(), value, value), is((Object) value));
+>, <Line: -            assertThat(type.getDeclaredMethod(BAR, this.type, this.type).invoke(type.newInstance(), value, value), is((Object) value));
+>, <Line: -        assertThat(type.getDeclaredMethod(FOO, this.type, this.type).invoke(type.newInstance(), value, value), is((Object) value));
+>]

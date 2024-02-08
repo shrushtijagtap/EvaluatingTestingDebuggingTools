@@ -1,0 +1,67 @@
+[<Line: +import static com.google.common.base.Preconditions.checkArgument;
+>, <Line: +import com.google.auto.value.AutoValue;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +import com.google.common.primitives.Doubles;
+>, <Line: + * Simple immutable implementation of {@link ConnectionData}, allowing to
+>, <Line: + * specify the length of a connection.
+>, <Line: +@AutoValue
+>, <Line: +public abstract class LengthData implements ConnectionData {
+>, <Line: +  private static final LengthData EMPTY_LENGTH_DATA = create(Optional
+>, <Line: +      .<Double> absent());
+>, <Line: +  LengthData() {}
+>, <Line: +  public abstract Optional<Double> getLength();
+>, <Line: +  /**
+>, <Line: +   * @return A {@link LengthData} instance that does not specify a length.
+>, <Line: +   */
+>, <Line: +  public static LengthData empty() {
+>, <Line: +    return EMPTY_LENGTH_DATA;
+>, <Line: +  /**
+>, <Line: +   * Create a new {@link LengthData} instance using the specified length.
+>, <Line: +   * @param length The length of the connection.
+>, <Line: +   * @return A new instance.
+>, <Line: +   */
+>, <Line: +  public static LengthData create(Optional<Double> length) {
+>, <Line: +    if (length.isPresent()) {
+>, <Line: +      checkArgument(length.get() >= 0d && Doubles.isFinite(length.get()),
+>, <Line: +          "Only positive values are allowed for length, it is: %s.",
+>, <Line: +          length.get());
+>, <Line: +    return new AutoValue_LengthData(length);
+>, <Line: +  /**
+>, <Line: +   * Create a new {@link LengthData} instance using the specified length.
+>, <Line: +   * @param length The length of the connection.
+>, <Line: +   * @return A new instance.
+>, <Line: +   */
+>, <Line: +  public static LengthData create(double length) {
+>, <Line: +    return create(Optional.of(length));
+>]
+[<Line: -import javax.annotation.Nullable;
+>, <Line: - * Simple implementation of {@link ConnectionData}, allowing to specify the
+>, <Line: - * length of a connection.
+>, <Line: -public class LengthData implements ConnectionData {
+>, <Line: -  /**
+>, <Line: -   * Represents an empty value for usage in a {@link TableGraph}.
+>, <Line: -   */
+>, <Line: -  public static final LengthData EMPTY = new LengthData(Double.NaN);
+>, <Line: -  private final double length;
+>, <Line: -  /**
+>, <Line: -   * Instantiate a new instance using the specified length.
+>, <Line: -   * @param pLength The length of the connection.
+>, <Line: -   */
+>, <Line: -  public LengthData(double pLength) {
+>, <Line: -    length = pLength;
+>, <Line: -  }
+>, <Line: -  public double getLength() {
+>, <Line: -    return length;
+>, <Line: -  }
+>, <Line: -  @Override
+>, <Line: -  public int hashCode() {
+>, <Line: -    return Double.valueOf(length).hashCode();
+>, <Line: -  @Override
+>, <Line: -  public boolean equals(@Nullable Object obj) {
+>, <Line: -    if (obj instanceof LengthData) {
+>, <Line: -      return Double.compare(length, ((LengthData) obj).length) == 0;
+>, <Line: -    return false;
+>, <Line: -  @Override
+>, <Line: -  public String toString() {
+>, <Line: -    return Double.toString(length);
+>]

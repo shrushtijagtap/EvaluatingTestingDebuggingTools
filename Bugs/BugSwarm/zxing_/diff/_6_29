@@ -1,0 +1,12 @@
+[<Line: +  DecodedInformation(int newPosition, String newString) {
+>, <Line: +  DecodedInformation(int newPosition, String newString, int remainingValue) {
+>, <Line: +  String getNewString() {
+>, <Line: +  boolean isRemaining() {
+>, <Line: +  int getRemainingValue() {
+>]
+[<Line: -  DecodedInformation(int newPosition, String newString){
+>, <Line: -  DecodedInformation(int newPosition, String newString, int remainingValue){
+>, <Line: -  String getNewString(){
+>, <Line: -  boolean isRemaining(){
+>, <Line: -  int getRemainingValue(){
+>]

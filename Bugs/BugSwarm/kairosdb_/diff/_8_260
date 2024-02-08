@@ -1,0 +1,99 @@
+[<Line: +define([],
+>, <Line: +	function () {
+>, <Line: +		'use strict';
+>, <Line: +		function InfluxQueryBuilder(target) {
+>, <Line: +			this.target = target;
+>, <Line: +		}
+>, <Line: +		var p = InfluxQueryBuilder.prototype;
+>, <Line: +		p.build = function () {
+>, <Line: +			return this.target.rawQuery ? this._modifyRawQuery() : this._buildQuery();
+>, <Line: +		};
+>, <Line: +		p._buildQuery = function () {
+>, <Line: +			var target = this.target;
+>, <Line: +			var query = 'select ';
+>, <Line: +			var seriesName = target.series;
+>, <Line: +			if (!seriesName.match('^/.*/') && !seriesName.match(/^merge\(.*\)/)) {
+>, <Line: +				seriesName = '"' + seriesName + '"';
+>, <Line: +			}
+>, <Line: +			if (target.groupby_field) {
+>, <Line: +				query += target.groupby_field + ', ';
+>, <Line: +			}
+>, <Line: +			query += target.function + '(' + target.column + ')';
+>, <Line: +			query += ' from ' + seriesName + ' where $timeFilter';
+>, <Line: +			if (target.condition) {
+>, <Line: +				query += ' and ' + target.condition;
+>, <Line: +			}
+>, <Line: +			query += ' group by time($interval)';
+>, <Line: +			if (target.groupby_field) {
+>, <Line: +				query += ', ' + target.groupby_field;
+>, <Line: +				this.groupByField = target.groupby_field;
+>, <Line: +			}
+>, <Line: +			if (target.fill) {
+>, <Line: +				query += ' fill(' + target.fill + ')';
+>, <Line: +			}
+>, <Line: +			query += " order asc";
+>, <Line: +			target.query = query;
+>, <Line: +			return query;
+>, <Line: +		};
+>, <Line: +		p._modifyRawQuery = function () {
+>, <Line: +			var query = this.target.query.replace(";", "");
+>, <Line: +			var queryElements = query.split(" ");
+>, <Line: +			var lowerCaseQueryElements = query.toLowerCase().split(" ");
+>, <Line: +			if (lowerCaseQueryElements[1].indexOf(',') !== -1) {
+>, <Line: +				this.groupByField = lowerCaseQueryElements[1].replace(',', '');
+>, <Line: +			}
+>, <Line: +			return queryElements.join(" ");
+>, <Line: +		};
+>, <Line: +		return InfluxQueryBuilder;
+>, <Line: +	});
+>]
+[<Line: -define([
+>, <Line: -],
+>, <Line: -function () {
+>, <Line: -  'use strict';
+>, <Line: -  function InfluxQueryBuilder(target) {
+>, <Line: -    this.target = target;
+>, <Line: -  }
+>, <Line: -  var p = InfluxQueryBuilder.prototype;
+>, <Line: -  p.build = function() {
+>, <Line: -    return this.target.rawQuery ? this._modifyRawQuery() : this._buildQuery();
+>, <Line: -  };
+>, <Line: -  p._buildQuery = function() {
+>, <Line: -    var target = this.target;
+>, <Line: -    var query = 'select ';
+>, <Line: -    var seriesName = target.series;
+>, <Line: -    if(!seriesName.match('^/.*/') && !seriesName.match(/^merge\(.*\)/)) {
+>, <Line: -      seriesName = '"' + seriesName+ '"';
+>, <Line: -    }
+>, <Line: -    if (target.groupby_field) {
+>, <Line: -      query += target.groupby_field + ', ';
+>, <Line: -    }
+>, <Line: -    query +=  target.function + '(' + target.column + ')';
+>, <Line: -    query += ' from ' + seriesName + ' where $timeFilter';
+>, <Line: -    if (target.condition) {
+>, <Line: -      query += ' and ' + target.condition;
+>, <Line: -    }
+>, <Line: -    query += ' group by time($interval)';
+>, <Line: -    if (target.groupby_field) {
+>, <Line: -      query += ', ' + target.groupby_field;
+>, <Line: -      this.groupByField = target.groupby_field;
+>, <Line: -    }
+>, <Line: -    if (target.fill) {
+>, <Line: -      query += ' fill(' + target.fill + ')';
+>, <Line: -    }
+>, <Line: -    query += " order asc";
+>, <Line: -    target.query = query;
+>, <Line: -    return query;
+>, <Line: -  };
+>, <Line: -  p._modifyRawQuery = function () {
+>, <Line: -    var query = this.target.query.replace(";", "");
+>, <Line: -    var queryElements = query.split(" ");
+>, <Line: -    var lowerCaseQueryElements = query.toLowerCase().split(" ");
+>, <Line: -    if (lowerCaseQueryElements[1].indexOf(',') !== -1) {
+>, <Line: -      this.groupByField = lowerCaseQueryElements[1].replace(',', '');
+>, <Line: -    }
+>, <Line: -    return queryElements.join(" ");
+>, <Line: -  };
+>, <Line: -  return InfluxQueryBuilder;
+>, <Line: -});
+>]

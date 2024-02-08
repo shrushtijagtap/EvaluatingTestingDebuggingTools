@@ -1,0 +1,26 @@
+[<Line: +  /**
+>, <Line: +   * @deprecated To ensure time consistency this method can not be used, use
+>, <Line: +   *             {@link #start()} instead.
+>, <Line: +   * @throws UnsupportedOperationException Always.
+>, <Line: +   */
+>, <Line: +  /**
+>, <Line: +   * Additional event types dispatched by {@link RealtimeClockController}. See
+>, <Line: +   * {@link Clock.ClockEventType} for more event types.
+>, <Line: +   * @author Rinde van Lon
+>, <Line: +   */
+>, <Line: +  public enum RtClockEventType {
+>, <Line: +    /**
+>, <Line: +     * Is dispatched right after clock mode has changed,
+>, <Line: +     * {@link RealtimeClockController#getClockMode()} will return
+>, <Line: +     * {@link ClockMode#REAL_TIME}.
+>, <Line: +     */
+>, <Line: +    SWITCH_TO_REAL_TIME,
+>, <Line: +    /**
+>, <Line: +     * Is dispatched right after clock mode has changed,
+>, <Line: +     * {@link RealtimeClockController#getClockMode()} will return
+>, <Line: +     * {@link ClockMode#SIMULATED}.
+>, <Line: +     */
+>, <Line: +    SWITCH_TO_SIM_TIME;
+>, <Line: +  }
+>]
+[]

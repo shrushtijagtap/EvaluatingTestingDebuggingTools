@@ -1,0 +1,6 @@
+[<Line: +        # Configuration
+>, <Line: +        self.comment_tokens = '!'
+>, <Line: +            f90lex.commenters = self.comment_tokens
+>]
+[<Line: -            f90lex.commenters = '!'
+>]

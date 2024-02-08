@@ -1,0 +1,57 @@
+[<Line: +import java.util.Collection;
+>, <Line: +import com.fasterxml.jackson.annotation.JsonCreator;
+>, <Line: +import com.fasterxml.jackson.annotation.JsonIgnore;
+>, <Line: +import com.fasterxml.jackson.annotation.JsonProperty;
+>, <Line: +	@JsonIgnore
+>, <Line: +	@JsonIgnore
+>, <Line: +	@JsonIgnore
+>, <Line: +	@JsonCreator
+>, <Line: +	private MetricName(@JsonProperty("name") String name, @JsonProperty("tags") Map<String, String> tags) {
+>, <Line: +		this.name = name;
+>, <Line: +		tagKeys = new ArrayList<String>(tags.size());
+>, <Line: +		tagValues = new ArrayList<String>(tags.size());
+>, <Line: +		for (Map.Entry<String, String> entry : tags.entrySet()) {
+>, <Line: +			tagKeys.add(entry.getKey());
+>, <Line: +			tagValues.add(entry.getValue());
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	@JsonProperty
+>, <Line: +		if (tagKeys.size() != that.tagKeys.size()) return false;
+>, <Line: +		return containsAllTags(that);
+>, <Line: +			result = 31 * result + hashCodeUnordered(tagKeys);
+>, <Line: +			result = 31 * result + hashCodeUnordered(tagValues);
+>, <Line: +	/**
+>, <Line: +	 * Calculates the hashcode of a collection.
+>, <Line: +	 * <p/>
+>, <Line: +	 * Returns the same hash code for two collections with the same elements but a different order.
+>, <Line: +	 * @param collection
+>, <Line: +	 * @param <T>
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	private static <T> int hashCodeUnordered(Collection<T> collection) {
+>, <Line: +		int hashCode = 1;
+>, <Line: +		for (T e : collection)
+>, <Line: +			hashCode = hashCode + (e==null ? 0 : e.hashCode());
+>, <Line: +		return hashCode;
+>, <Line: +	}
+>, <Line: +		return name.equals(other.name) && containsAllTags(other);
+>, <Line: +	private boolean containsAllTags(MetricName other) {
+>, <Line: +		List<String> otherTagKeys = other.getTagKeys();
+>, <Line: +		for (int i = 0; i < otherTagKeys.size(); i++) {
+>, <Line: +			String key = otherTagKeys.get(i);
+>, <Line: +			final int index = tagKeys.indexOf(key);
+>, <Line: +			if (index == -1 || !other.tagValues.get(i).equals(tagValues.get(index))) {
+>]
+[<Line: -		if (!tagKeys.equals(that.tagKeys)) return false;
+>, <Line: -		return tagValues.equals(that.tagValues);
+>, <Line: -			result = 31 * result + tagKeys.hashCode();
+>, <Line: -			result = 31 * result + tagValues.hashCode();
+>, <Line: -		if (name.equals(other.name)) {
+>, <Line: -			return containsAllTags(other.getTags());
+>, <Line: -		} else {
+>, <Line: -			return false;
+>, <Line: -		}
+>, <Line: -	private boolean containsAllTags(Map<String, String> tags) {
+>, <Line: -		for (Map.Entry<String, String> entry : tags.entrySet()) {
+>, <Line: -			if (!entry.getValue().equals(this.getTags().get(entry.getKey()))) {
+>]

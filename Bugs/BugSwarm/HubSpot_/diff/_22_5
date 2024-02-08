@@ -1,0 +1,68 @@
+[<Line: +package com.hubspot.baragon.agent.managed;
+>, <Line: +import java.net.InetSocketAddress;
+>, <Line: +import java.util.concurrent.TimeUnit;
+>, <Line: +import io.dropwizard.lifecycle.Managed;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +import com.codahale.metrics.Metric;
+>, <Line: +import com.codahale.metrics.MetricFilter;
+>, <Line: +import com.codahale.metrics.MetricRegistry;
+>, <Line: +import com.codahale.metrics.graphite.Graphite;
+>, <Line: +import com.codahale.metrics.graphite.GraphiteReporter;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +import com.google.common.base.Strings;
+>, <Line: +import com.google.inject.Inject;
+>, <Line: +import com.google.inject.Singleton;
+>, <Line: +import com.hubspot.baragon.agent.config.BaragonAgentConfiguration;
+>, <Line: +import com.hubspot.baragon.config.GraphiteConfiguration;
+>, <Line: +import com.hubspot.baragon.utils.JavaUtils;
+>, <Line: +@Singleton
+>, <Line: +public class BaragonAgentGraphiteReporterManaged implements Managed {
+>, <Line: +  private static final Logger LOG = LoggerFactory.getLogger(BaragonAgentGraphiteReporterManaged.class);
+>, <Line: +  private final GraphiteConfiguration graphiteConfiguration;
+>, <Line: +  private final MetricRegistry registry;
+>, <Line: +  private Optional<GraphiteReporter> reporter;
+>, <Line: +  @Inject
+>, <Line: +  public BaragonAgentGraphiteReporterManaged(BaragonAgentConfiguration configuration, MetricRegistry registry) {
+>, <Line: +    this.graphiteConfiguration = configuration.getGraphiteConfiguration();
+>, <Line: +    this.registry = registry;
+>, <Line: +    this.reporter = Optional.absent();
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void start() throws Exception {
+>, <Line: +    if (!graphiteConfiguration.isEnabled()) {
+>, <Line: +      LOG.info("Not reporting data points to graphite.");
+>, <Line: +      return;
+>, <Line: +    }
+>, <Line: +    LOG.info("Reporting data points to graphite server {}:{} every {} seconds with prefix '{}' and predicates '{}'.", graphiteConfiguration.getHostname(),
+>, <Line: +        graphiteConfiguration.getPort(), graphiteConfiguration.getPeriodSeconds(), graphiteConfiguration.getPrefix(), JavaUtils.COMMA_JOINER.join(graphiteConfiguration.getPredicates()));
+>, <Line: +    final Graphite graphite = new Graphite(new InetSocketAddress(graphiteConfiguration.getHostname(), graphiteConfiguration.getPort()));
+>, <Line: +    final GraphiteReporter.Builder reporterBuilder = GraphiteReporter.forRegistry(registry);
+>, <Line: +    if (!Strings.isNullOrEmpty(graphiteConfiguration.getPrefix())) {
+>, <Line: +      reporterBuilder.prefixedWith(graphiteConfiguration.getPrefix());
+>, <Line: +    }
+>, <Line: +    if (!graphiteConfiguration.getPredicates().isEmpty()) {
+>, <Line: +      reporterBuilder.filter(new MetricFilter() {
+>, <Line: +        @Override
+>, <Line: +        public boolean matches(String name, Metric metric) {
+>, <Line: +          for (String predicate : graphiteConfiguration.getPredicates()) {
+>, <Line: +            if (name.startsWith(predicate)) {
+>, <Line: +              return true;
+>, <Line: +            }
+>, <Line: +          }
+>, <Line: +          return false;
+>, <Line: +        }
+>, <Line: +      });
+>, <Line: +    }
+>, <Line: +    reporter = Optional.of(reporterBuilder.build(graphite));
+>, <Line: +    reporter.get().start(graphiteConfiguration.getPeriodSeconds(), TimeUnit.SECONDS);
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public void stop() throws Exception {
+>, <Line: +    if (reporter.isPresent()) {
+>, <Line: +      reporter.get().stop();
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

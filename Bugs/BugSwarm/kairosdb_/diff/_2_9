@@ -1,0 +1,12 @@
+[<Line: +import org.kairosdb.core.annotation.FeatureComponent;
+>, <Line: +import org.kairosdb.core.annotation.FeatureProperty;
+>, <Line: +@FeatureComponent(
+>, <Line: +	@FeatureProperty(
+>, <Line: +	@FeatureProperty(
+>]
+[<Line: -import org.kairosdb.core.annotation.QueryProcessor;
+>, <Line: -import org.kairosdb.core.annotation.QueryProperty;
+>, <Line: -@QueryProcessor(
+>, <Line: -	@QueryProperty(
+>, <Line: -	@QueryProperty(
+>]

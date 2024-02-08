@@ -1,0 +1,17 @@
+[<Line: +import backend.interfaces.IModel;
+>, <Line: +import backend.resource.TurboIssue;
+>, <Line: +import filter.MetaQualifierInfo;
+>, <Line: +import filter.QualifierApplicationException;
+>, <Line: +	@Override
+>, <Line: +	public boolean isSatisfiedBy(IModel model, TurboIssue issue, MetaQualifierInfo info) {
+>, <Line: +		return left.isSatisfiedBy(model, issue, info) || right.isSatisfiedBy(model, issue, info);
+>, <Line: +	public void applyTo(TurboIssue issue, IModel model) throws QualifierApplicationException {
+>]
+[<Line: -import model.Model;
+>, <Line: -import model.TurboIssue;
+>, <Line: -import filter.MetaQualifierInfo;
+>, <Line: -import filter.QualifierApplicationException;
+>, <Line: -	public boolean isSatisfiedBy(TurboIssue issue, MetaQualifierInfo info) {
+>, <Line: -		return left.isSatisfiedBy(issue, info) || right.isSatisfiedBy(issue, info);
+>, <Line: -	public void applyTo(TurboIssue issue, Model model) throws QualifierApplicationException {
+>]

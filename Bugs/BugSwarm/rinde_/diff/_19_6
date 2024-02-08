@@ -1,0 +1,40 @@
+[<Line: +import java.util.Collection;
+>, <Line: + * An observable decorator for {@link Graph} instances. This implementation
+>, <Line: + * dispatches events for every graph modifying operation. Any modifications made
+>, <Line: + * directly to the underlying graph are not observed, in order to get notified
+>, <Line: + * of all modifications ensure that all modifications go exclusively via the
+>, <Line: + * decorator instance. To help prevent unauthorized modifications this decorator
+>, <Line: + * returns only unmodifiable {@link Connection} instances, the data of a
+>, <Line: + * connection can be changed via
+>, <Line: + * {@link #setConnectionData(Point, Point, ConnectionData)}. The list of
+>, <Line: + * supported event types is {@link EventTypes} the event class is
+>, <Line: + * {@link GraphEvent}.
+>, <Line: +   * Decorates the specified graph such that all modifications are monitored.
+>, <Line: +   * @param delegate The graph to decorate.
+>, <Line: +  @Override
+>, <Line: +  public void addConnections(Iterable<? extends Connection<E>> connections) {
+>, <Line: +    for (Connection<E> c : connections) {
+>, <Line: +      addConnection(c);
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  @Deprecated
+>, <Line: +  @Override
+>, <Line: +  public void addConnections(Collection<? extends Connection<E>> connections) {
+>, <Line: +    addConnections((Iterable<? extends Connection<E>>) connections);
+>, <Line: +  }
+>, <Line: +    /**
+>, <Line: +     * @return The {@link Graph} that was changed.
+>, <Line: +     */
+>, <Line: +    public Graph<?> getGraph() {
+>, <Line: +      return (Graph<?>) getIssuer();
+>, <Line: +    }
+>]
+[<Line: - * A listenable decorator for {@link Graph} instances. This implementation
+>, <Line: - * dispatches events for every graph modifying operation. Note that any
+>, <Line: - * modifications made to the underlying graph are not observed, in order to get
+>, <Line: - * notified of all modifications ensure that all modifications go exclusively
+>, <Line: - * via the decorator instance. The list of supported event types is
+>, <Line: - * {@link EventTypes} the event class is {@link GraphEvent}.
+>, <Line: -   * Wraps the specified graph.
+>, <Line: -   * @param delegate
+>]

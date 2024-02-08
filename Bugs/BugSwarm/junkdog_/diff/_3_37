@@ -1,0 +1,17 @@
+[<Line: +	@Override
+>, <Line: +	public boolean equals(Object o) {
+>, <Line: +		if (this == o) {
+>, <Line: +			return true;
+>, <Line: +		}
+>, <Line: +		if (!(o instanceof Field)) {
+>, <Line: +			return false;
+>, <Line: +		}
+>, <Line: +		Field field1 = (Field) o;
+>, <Line: +		return !(field != null ? !field.equals(field1.field) : field1.field != null);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode() {
+>, <Line: +		return field != null ? field.hashCode() : 0;
+>, <Line: +	}
+>]
+[]

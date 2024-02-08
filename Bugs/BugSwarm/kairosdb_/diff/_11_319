@@ -1,0 +1,74 @@
+[<Line: +@-ms-viewport {
+>, <Line: +.visible-phone {
+>, <Line: +  display: none !important;
+>, <Line: +}
+>, <Line: +.visible-tablet {
+>, <Line: +  display: none !important;
+>, <Line: +}
+>, <Line: +.hidden-phone {
+>, <Line: +}
+>, <Line: +.hidden-tablet {
+>, <Line: +}
+>, <Line: +.hidden-desktop {
+>, <Line: +  display: none !important;
+>, <Line: +}
+>, <Line: +.visible-desktop {
+>, <Line: +  display: inherit !important;
+>, <Line: +}
+>, <Line: +  .hidden-desktop {
+>, <Line: +    display: inherit !important;
+>, <Line: +  }
+>, <Line: +  .visible-desktop {
+>, <Line: +    display: none !important;
+>, <Line: +  }
+>, <Line: +  .visible-tablet {
+>, <Line: +    display: inherit !important;
+>, <Line: +  }
+>, <Line: +  .hidden-tablet {
+>, <Line: +    display: none !important;
+>, <Line: +  }
+>, <Line: +  .hidden-desktop {
+>, <Line: +    display: inherit !important;
+>, <Line: +  }
+>, <Line: +  .visible-desktop {
+>, <Line: +    display: none !important;
+>, <Line: +  }
+>, <Line: +  .visible-phone {
+>, <Line: +    display: inherit !important;
+>, <Line: +  }
+>, <Line: +  // Use inherit to restore previous behavior
+>, <Line: +  .hidden-phone {
+>, <Line: +    display: none !important;
+>, <Line: +  }
+>, <Line: +.visible-print {
+>, <Line: +  display: none !important;
+>, <Line: +}
+>, <Line: +.hidden-print {
+>, <Line: +}
+>, <Line: +  .visible-print {
+>, <Line: +    display: inherit !important;
+>, <Line: +  }
+>, <Line: +  .hidden-print {
+>, <Line: +    display: none !important;
+>, <Line: +  }
+>]
+[<Line: -@-ms-viewport{
+>, <Line: -.visible-phone     { display: none !important; }
+>, <Line: -.visible-tablet    { display: none !important; }
+>, <Line: -.hidden-phone      { }
+>, <Line: -.hidden-tablet     { }
+>, <Line: -.hidden-desktop    { display: none !important; }
+>, <Line: -.visible-desktop   { display: inherit !important; }
+>, <Line: -  .hidden-desktop    { display: inherit !important; }
+>, <Line: -  .visible-desktop   { display: none !important ; }
+>, <Line: -  .visible-tablet    { display: inherit !important; }
+>, <Line: -  .hidden-tablet     { display: none !important; }
+>, <Line: -  .hidden-desktop    { display: inherit !important; }
+>, <Line: -  .visible-desktop   { display: none !important; }
+>, <Line: -  .visible-phone     { display: inherit !important; } // Use inherit to restore previous behavior
+>, <Line: -  .hidden-phone      { display: none !important; }
+>, <Line: -.visible-print    { display: none !important; }
+>, <Line: -.hidden-print     { }
+>, <Line: -  .visible-print  { display: inherit !important; }
+>, <Line: -  .hidden-print   { display: none !important; }
+>]

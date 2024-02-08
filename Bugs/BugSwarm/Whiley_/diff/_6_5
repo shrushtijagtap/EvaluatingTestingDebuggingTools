@@ -1,0 +1,29 @@
+[<Line: +import wyil.util.TypeSystem;
+>, <Line: +	private final TypeSystem expander;
+>, <Line: +		this.expander = new TypeSystem(builder.project());
+>, <Line: +				return propagate((Stmt.Debug) stmt, environment, context);
+>, <Line: +				return new Triple<NameID, Nominal.FunctionOrMethod,List<String>>(p.first(), p.second(), null);
+>, <Line: +			myData = new Type.FunctionOrMethod.Data(utParamTypes.size(), new HashSet<String>(utContextLifetimes), utLifetimeParameters);
+>, <Line: +				return new Pair<Constant, Nominal>(new Constant.FunctionOrMethod(f.nid, f.type.nominal()), f.type);
+>]
+[<Line: -import wyil.util.TypeExpander;
+>, <Line: -	private final TypeExpander expander;
+>, <Line: -		this.expander = new TypeExpander(builder.project());
+>, <Line: -				return propagate((Stmt.Debug) stmt, environment);
+>, <Line: -				return new Triple<>(p.first(), p.second(), null);
+>, <Line: -			myData = new Type.FunctionOrMethod.Data(utParamTypes.size(), new HashSet<>(utContextLifetimes), utLifetimeParameters);
+>, <Line: -	private static int append(Type type, ArrayList<Automaton.State> states) {
+>, <Line: -		int myIndex = states.size();
+>, <Line: -		Automaton automaton = Type.destruct(type);
+>, <Line: -		Automaton.State[] tStates = automaton.states;
+>, <Line: -		int[] rmap = new int[tStates.length];
+>, <Line: -		for (int i = 0, j = myIndex; i != rmap.length; ++i, ++j) {
+>, <Line: -			rmap[i] = j;
+>, <Line: -		}
+>, <Line: -		for (Automaton.State state : tStates) {
+>, <Line: -			states.add(Automata.remap(state, rmap));
+>, <Line: -		}
+>, <Line: -		return myIndex;
+>, <Line: -	}
+>, <Line: -				return new Pair<Constant, Nominal>(new Constant.Lambda(f.nid, f.type.nominal()), f.type);
+>]

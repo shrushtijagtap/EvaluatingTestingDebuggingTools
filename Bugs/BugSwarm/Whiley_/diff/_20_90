@@ -1,0 +1,4 @@
+[<Line: +../../tests/invalid/UnionType_Invalid_6.whiley:10: unable to resolve name (no match for f({int[] op})
+>]
+[<Line: -../../tests/invalid/UnionType_Invalid_6.whiley:10: unable to resolve name (no match for f({[int] op})
+>]

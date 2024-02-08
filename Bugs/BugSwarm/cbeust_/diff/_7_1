@@ -1,0 +1,50 @@
+[<Line: +  int SUCCESS = 1;
+>, <Line: +  int FAILURE = 2;
+>, <Line: +  int SKIP = 3;
+>, <Line: +  int SUCCESS_PERCENTAGE_FAILURE = 4;
+>, <Line: +  int STARTED= 16;
+>, <Line: +  int getStatus();
+>, <Line: +  void setStatus(int status);
+>, <Line: +  ITestNGMethod getMethod();
+>, <Line: +  Object[] getParameters();
+>, <Line: +  void setParameters(Object[] parameters);
+>, <Line: +  IClass getTestClass();
+>, <Line: +  Throwable getThrowable();
+>, <Line: +  void setThrowable(Throwable throwable);
+>, <Line: +  long getStartMillis();
+>, <Line: +  long getEndMillis();
+>, <Line: +  void setEndMillis(long millis);
+>, <Line: +  String getName();
+>, <Line: +  boolean isSuccess();
+>, <Line: +  String getHost();
+>, <Line: +  Object getInstance();
+>, <Line: +  String getTestName();
+>, <Line: +  String getInstanceName();
+>, <Line: +  ITestContext getTestContext();
+>]
+[<Line: -  //
+>, <Line: -  //
+>, <Line: -  public static final int SUCCESS = 1;
+>, <Line: -  public static final int FAILURE = 2;
+>, <Line: -  public static final int SKIP = 3;
+>, <Line: -  public static final int SUCCESS_PERCENTAGE_FAILURE = 4;
+>, <Line: -  public static final int STARTED= 16;
+>, <Line: -  public int getStatus();
+>, <Line: -  public void setStatus(int status);
+>, <Line: -  public ITestNGMethod getMethod();
+>, <Line: -  public Object[] getParameters();
+>, <Line: -  public void setParameters(Object[] parameters);
+>, <Line: -  public IClass getTestClass();
+>, <Line: -  public Throwable getThrowable();
+>, <Line: -  public void setThrowable(Throwable throwable);
+>, <Line: -  public long getStartMillis();
+>, <Line: -  public long getEndMillis();
+>, <Line: -  public void setEndMillis(long millis);
+>, <Line: -  public String getName();
+>, <Line: -  public boolean isSuccess();
+>, <Line: -  public String getHost();
+>, <Line: -  public Object getInstance();
+>, <Line: -  public String getTestName();
+>, <Line: -  public String getInstanceName();
+>, <Line: -  public ITestContext getTestContext();
+>]

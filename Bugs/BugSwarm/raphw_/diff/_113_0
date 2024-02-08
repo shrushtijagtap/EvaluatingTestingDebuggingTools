@@ -1,0 +1,14 @@
+[<Line: +            return new VersionLocator.ForJava9CapableVm(Runtime.class.getDeclaredMethod("version"),
+>, <Line: +                    Class.forName("java.lang.Runtime$Version").getDeclaredMethod("major"));
+>, <Line: +             * The {@code java java.lang.Runtime#current()} method.
+>, <Line: +             * @param current The {@code java.lang.Runtime#current()} method.
+>]
+[<Line: -            Class<?> version = Class.forName("java.lang.Runtime$Version");
+>, <Line: -            return new VersionLocator.ForJava9CapableVm(version.getDeclaredMethod("current"), version.getDeclaredMethod("major"));
+>, <Line: -             * The {@code java java.lang.Runtime.Version#current()} method.
+>, <Line: -             * @param current The {@code java.lang.Runtime.Version#current()} method.
+>, <Line: -                // To be removed once the implementation of Java 9 is finalized.
+>, <Line: -                if (versionString.startsWith("9")) {
+>, <Line: -                    return ClassFileVersion.JAVA_V9;
+>, <Line: -                }
+>]

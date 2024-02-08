@@ -1,0 +1,43 @@
+[<Line: +package de.charite.compbio.jannovar.mendel;
+>, <Line: +import java.util.TreeMap;
+>, <Line: +/**
+>, <Line: + * Helper class for building {@link GenotypeCalls} objects
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenotypeCallsBuilder {
+>, <Line: +	/** Type of the chromosome that the variant lies on */
+>, <Line: +	private ChromosomeType chromType;
+>, <Line: +	/** Mapping from sample name to {@link Genotype} */
+>, <Line: +	private TreeMap<String, Genotype> sampleToGenotype;
+>, <Line: +	/** A payload object for later easier reidentification */
+>, <Line: +	private Object payload;
+>, <Line: +	public GenotypeCallsBuilder() {
+>, <Line: +		this.chromType = null;
+>, <Line: +		this.sampleToGenotype = new TreeMap<>();
+>, <Line: +		this.payload = null;
+>, <Line: +	}
+>, <Line: +	public GenotypeCalls build() {
+>, <Line: +		return new GenotypeCalls(chromType, sampleToGenotype.entrySet(), payload);
+>, <Line: +	}
+>, <Line: +	public ChromosomeType getChromType() {
+>, <Line: +		return chromType;
+>, <Line: +	}
+>, <Line: +	public void setChromType(ChromosomeType chromType) {
+>, <Line: +		this.chromType = chromType;
+>, <Line: +	}
+>, <Line: +	public TreeMap<String, Genotype> getSampleToGenotype() {
+>, <Line: +		return sampleToGenotype;
+>, <Line: +	}
+>, <Line: +	public void setSampleToGenotype(TreeMap<String, Genotype> sampleToGenotype) {
+>, <Line: +		this.sampleToGenotype = sampleToGenotype;
+>, <Line: +	}
+>, <Line: +	public Object getPayload() {
+>, <Line: +		return payload;
+>, <Line: +	}
+>, <Line: +	public void setPayload(Object payload) {
+>, <Line: +		this.payload = payload;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

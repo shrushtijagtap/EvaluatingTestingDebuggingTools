@@ -1,0 +1,6 @@
+[<Line: +	public ParserError(ParserErrorTypes errorType, SourceRange sourceRange, 
+>, <Line: +			String msgErrorSource, Object msgData) {
+>, <Line: +		this(errorType, Severity.ERROR, sourceRange, msgErrorSource, msgData);
+>, <Line: +	}
+>]
+[]

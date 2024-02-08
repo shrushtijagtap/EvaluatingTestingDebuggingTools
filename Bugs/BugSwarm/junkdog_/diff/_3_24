@@ -1,0 +1,71 @@
+[<Line: +package com.artemis.injection;
+>, <Line: +import com.artemis.BaseSystem;
+>, <Line: +import com.artemis.Component;
+>, <Line: +import com.artemis.ComponentMapper;
+>, <Line: +import com.artemis.Manager;
+>, <Line: +import com.artemis.World;
+>, <Line: +import com.artemis.utils.reflect.Field;
+>, <Line: +import java.util.IdentityHashMap;
+>, <Line: +import java.util.Map;
+>, <Line: +/**
+>, <Line: + * Can resolve {@link com.artemis.ComponentMapper}, {@link com.artemis.BaseSystem} and
+>, <Line: + * {@link com.artemis.Manager} types registerd in the {@link World}
+>, <Line: + *
+>, <Line: + * @author Snorre E. Brekke
+>, <Line: + */
+>, <Line: +public class ArtemisFieldResolver implements FieldResolver, UseInjectionCache {
+>, <Line: +    private World world;
+>, <Line: +    private InjectionCache cache;
+>, <Line: +    private Map<Class<?>, Class<?>> systems;
+>, <Line: +    private Map<Class<?>, Class<?>> managers;
+>, <Line: +    public ArtemisFieldResolver() {
+>, <Line: +        systems = new IdentityHashMap<Class<?>, Class<?>>();
+>, <Line: +        managers = new IdentityHashMap<Class<?>, Class<?>>();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void initialize(World world) {
+>, <Line: +        this.world = world;
+>, <Line: +        for (BaseSystem es : world.getSystems()) {
+>, <Line: +            Class<?> origin = es.getClass();
+>, <Line: +            Class<?> clazz = origin;
+>, <Line: +            do {
+>, <Line: +                systems.put(clazz, origin);
+>, <Line: +            } while ((clazz = clazz.getSuperclass()) != Object.class);
+>, <Line: +        }
+>, <Line: +        for (Manager manager : world.getManagers()) {
+>, <Line: +            Class<?> origin = manager.getClass();
+>, <Line: +            Class<?> clazz = origin;
+>, <Line: +            do {
+>, <Line: +                managers.put(clazz, origin);
+>, <Line: +            } while ((clazz = clazz.getSuperclass()) != Object.class);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    @SuppressWarnings("unchecked")
+>, <Line: +    public Object resolve(Class<?> fieldType, Field field) {
+>, <Line: +        ClassType injectionType = cache.getFieldClassType(fieldType);
+>, <Line: +        switch (injectionType) {
+>, <Line: +            case MAPPER:
+>, <Line: +                return getComponentMapper(field);
+>, <Line: +            case SYSTEM:
+>, <Line: +                return world.getSystem((Class<BaseSystem>) systems.get(fieldType));
+>, <Line: +            case MANAGER:
+>, <Line: +                return world.getManager((Class<Manager>) managers.get(fieldType));
+>, <Line: +            case FACTORY:
+>, <Line: +                return world.createFactory(fieldType);
+>, <Line: +            default:
+>, <Line: +                return null;
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    @SuppressWarnings("unchecked")
+>, <Line: +    private ComponentMapper<?> getComponentMapper(Field field) {
+>, <Line: +        Class<?> mapperType = cache.getGenericType(field);
+>, <Line: +        return world.getMapper((Class<? extends Component>) mapperType);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void setCache(InjectionCache cache) {
+>, <Line: +        this.cache = cache;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,6 @@
+[<Line: +  @Select(value = "{ call GetOrderDetailsAndHeaders() }")
+>, <Line: +  @Options(statementType= StatementType.CALLABLE, resultSets="orderDetailResultSet,orderHeaderResultSet")
+>]
+[<Line: -  @Select(value = "{ call GetOrderDetailsAndHeaders() }", resultSets="orderDetailResultSet,orderHeaderResultSet")
+>, <Line: -  @Options(statementType= StatementType.CALLABLE)
+>]

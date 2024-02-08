@@ -1,0 +1,56 @@
+[]
+[<Line: -// Copyright (c) 2014, David J. Pearce (djp@ecs.vuw.ac.nz)
+>, <Line: -// All rights reserved.
+>, <Line: -//
+>, <Line: -// Redistribution and use in source and binary forms, with or without
+>, <Line: -// modification, are permitted provided that the following conditions are met:
+>, <Line: -//    * Redistributions of source code must retain the above copyright
+>, <Line: -//      notice, this list of conditions and the following disclaimer.
+>, <Line: -//    * Redistributions in binary form must reproduce the above copyright
+>, <Line: -//      notice, this list of conditions and the following disclaimer in the
+>, <Line: -//      documentation and/or other materials provided with the distribution.
+>, <Line: -//    * Neither the name of the <organization> nor the
+>, <Line: -//      names of its contributors may be used to endorse or promote products
+>, <Line: -//      derived from this software without specific prior written permission.
+>, <Line: -//
+>, <Line: -// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+>, <Line: -// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+>, <Line: -// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+>, <Line: -// DISCLAIMED. IN NO EVENT SHALL DAVID J. PEARCE BE LIABLE FOR ANY
+>, <Line: -// DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+>, <Line: -// (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+>, <Line: -// LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+>, <Line: -// ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+>, <Line: -// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+>, <Line: -// SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+>, <Line: -package wyil.attributes;
+>, <Line: -import wyil.lang.Attribute;
+>, <Line: -public class SourceLocation implements Attribute {
+>, <Line: -	private int sourceFile; // index of originating source file
+>, <Line: -	private int start; // starting character index
+>, <Line: -	private int end; // end character index
+>, <Line: -	public SourceLocation(int sourceFile, int start, int end) {
+>, <Line: -		this.setSourceFile(sourceFile);
+>, <Line: -		this.setStart(start);
+>, <Line: -		this.setEnd(end);
+>, <Line: -	}
+>, <Line: -	public int sourceFile() {
+>, <Line: -		return sourceFile;
+>, <Line: -	}
+>, <Line: -	public int start() {
+>, <Line: -		return start;
+>, <Line: -	}
+>, <Line: -	public int end() {
+>, <Line: -		return end;
+>, <Line: -	}
+>, <Line: -	public void setSourceFile(int sourceFile) {
+>, <Line: -		this.sourceFile = sourceFile;
+>, <Line: -	}
+>, <Line: -	public void setStart(int start) {
+>, <Line: -		this.start = start;
+>, <Line: -	}
+>, <Line: -	public void setEnd(int end) {
+>, <Line: -		this.end = end;
+>, <Line: -	}
+>, <Line: -}
+>]

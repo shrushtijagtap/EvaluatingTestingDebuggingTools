@@ -1,0 +1,16 @@
+[<Line: +    private static final Charset CHARSET = Charset.defaultCharset();
+>, <Line: +        response.writeBytes(ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, "*<T", CHARSET));
+>, <Line: +        response.writeBytes(ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, "*<A", CHARSET));
+>, <Line: +            sendReply(channel, ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, "*<S", CHARSET));
+>, <Line: +        header.writeBytes(ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, prefix, CHARSET));
+>, <Line: +        prefix = buf.toString(buf.readerIndex(), 4, CHARSET);
+>, <Line: +        String type = buf.toString(buf.readerIndex(), 3, CHARSET);
+>]
+[<Line: -    private static final Charset charset = Charset.defaultCharset();
+>, <Line: -        response.writeBytes(ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, "*<T", charset));
+>, <Line: -        response.writeBytes(ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, "*<A", charset));
+>, <Line: -            sendReply(channel, ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, "*<S", charset));
+>, <Line: -        header.writeBytes(ChannelBuffers.copiedBuffer(ByteOrder.LITTLE_ENDIAN, prefix, charset));
+>, <Line: -        prefix = buf.toString(buf.readerIndex(), 4, charset);
+>, <Line: -        String type = buf.toString(buf.readerIndex(), 3, charset);
+>]

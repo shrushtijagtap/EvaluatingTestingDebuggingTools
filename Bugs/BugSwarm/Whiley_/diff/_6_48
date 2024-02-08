@@ -1,0 +1,269 @@
+[]
+[<Line: -package wyil.lang;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import java.util.Collection;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.HashSet;
+>, <Line: -import java.util.Iterator;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Set;
+>, <Line: -import wycc.util.Pair;
+>, <Line: -/**
+>, <Line: - * A bytecode forest can be thought of in different ways. For example, it can be
+>, <Line: - * thought of as a forest of rooted trees; or, more simply, as an array of
+>, <Line: - * bytecode sequences. Some bytecodes can be thought of as compound structures
+>, <Line: - * containing nested blocks of bytecodes. In reality, such compound bytecodes
+>, <Line: - * are not truly nested, but contain block identifiers representing their
+>, <Line: - * contents.
+>, <Line: - *
+>, <Line: - * @author David J. Pearce
+>, <Line: - *
+>, <Line: - */
+>, <Line: -public class BytecodeForest {
+>, <Line: -	private final ArrayList<Register> registers;
+>, <Line: -	private final ArrayList<Integer> roots;
+>, <Line: -	private final ArrayList<Block> blocks;
+>, <Line: -	public BytecodeForest() {
+>, <Line: -		this(Collections.EMPTY_LIST);
+>, <Line: -	}
+>, <Line: -	public BytecodeForest(BytecodeForest forest) {
+>, <Line: -		this.registers = new ArrayList<Register>(forest.registers);
+>, <Line: -		this.roots = new ArrayList<Integer>(forest.roots);
+>, <Line: -		this.blocks = new ArrayList<Block>();
+>, <Line: -		for(int i=0;i!=forest.blocks.size();++i) {
+>, <Line: -			this.blocks.add(new Block(forest.blocks.get(i)));
+>, <Line: -		}		
+>, <Line: -	}
+>, <Line: -	public BytecodeForest(List<Register> registers) {
+>, <Line: -		this.registers = new ArrayList<Register>(registers);
+>, <Line: -		this.roots = new ArrayList<Integer>();
+>, <Line: -		this.blocks = new ArrayList<Block>();
+>, <Line: -	}
+>, <Line: -	// ===================================================================
+>, <Line: -	// Accessor Methods
+>, <Line: -	// ===================================================================
+>, <Line: -	/**
+>, <Line: -	 * Get the number of blocks within this code forest.
+>, <Line: -	 * 
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public int numBlocks() {
+>, <Line: -		return blocks.size();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Get the number of registered roots within this forest.
+>, <Line: -	 * 
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public int numRoots() {
+>, <Line: -		return roots.size();
+>, <Line: -	}
+>, <Line: -	public int numRegisters() {
+>, <Line: -		return registers.size();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Get the list of registers declared for this block. This list is mutable
+>, <Line: -	 * and may be read or written.
+>, <Line: -	 * 
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public List<Register> registers() {
+>, <Line: -		return registers;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Return a given root within the block. Roots are themselves indexed from
+>, <Line: -	 * 0.
+>, <Line: -	 * 
+>, <Line: -	 * @param i
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public int getRoot(int i) {
+>, <Line: -		return roots.get(i);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Get a specific block within this forest. The returned list is mutable and
+>, <Line: -	 * can be modified at will.
+>, <Line: -	 * 
+>, <Line: -	 * @param index
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Block get(int index) {
+>, <Line: -		return blocks.get(index);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Get a specific register declared in this forest.
+>, <Line: -	 * 
+>, <Line: -	 * @param index
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Register getRegister(int index) {
+>, <Line: -		return registers.get(index);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Get a specific bytecode withing this forest.
+>, <Line: -	 * @param index
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Entry get(Index index) {
+>, <Line: -		return blocks.get(index.block).get(index.offset);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Add a new block to the forest, whilst returning its identifier.
+>, <Line: -	 * 
+>, <Line: -	 * @param block
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public int add(Block block) {
+>, <Line: -		blocks.add(block);
+>, <Line: -		return blocks.size()-1;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Add a new block to the forest which is also a root block. Root blocks are
+>, <Line: -	 * not subject to garbage collection.
+>, <Line: -	 * 
+>, <Line: -	 * @param block
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public int addAsRoot(Block block) {
+>, <Line: -		int index = add(block);
+>, <Line: -		roots.add(index);
+>, <Line: -		return index;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Mark block identifier as a root
+>, <Line: -	 * 
+>, <Line: -	 * @param root
+>, <Line: -	 */
+>, <Line: -	public void addRoot(int root) {
+>, <Line: -		roots.add(root);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Garbage collection unused blocks.
+>, <Line: -	 */
+>, <Line: -	public void gc() {
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Represents a bytecode location within a code forest. This is simply a
+>, <Line: -	 * pair of the block identifier and the position within that block.
+>, <Line: -	 * 
+>, <Line: -	 * @author David J. Pearce
+>, <Line: -	 *
+>, <Line: -	 */
+>, <Line: -	public static final class Index {
+>, <Line: -		private int block;
+>, <Line: -		private int offset;
+>, <Line: -		public Index(int block, int offset) {
+>, <Line: -			this.block = block;
+>, <Line: -			this.offset = offset;
+>, <Line: -		}
+>, <Line: -		public int block() { return block; }
+>, <Line: -		public int offset() { return offset; }
+>, <Line: -		public boolean equals(Object o) {
+>, <Line: -			if(o instanceof Index) {
+>, <Line: -				Index i = (Index) o;
+>, <Line: -				return block == i.block && offset == i.offset;
+>, <Line: -			}
+>, <Line: -			return false;
+>, <Line: -		}
+>, <Line: -		public int hashCode() {
+>, <Line: -			return block ^ offset;
+>, <Line: -		}
+>, <Line: -		public Index next() {
+>, <Line: -			return new Index(block,offset+1);
+>, <Line: -		}
+>, <Line: -		public Index next(int i) {
+>, <Line: -			return new Index(block,offset+i);
+>, <Line: -		}
+>, <Line: -		public String toString() {
+>, <Line: -			return block + ":" + offset;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Represents a sequence of bytecodes within a code forest.
+>, <Line: -	 * 
+>, <Line: -	 * @author David J. Pearce
+>, <Line: -	 *
+>, <Line: -	 */
+>, <Line: -	public static class Block extends ArrayList<Entry> {
+>, <Line: -		public Block() {
+>, <Line: -			super();
+>, <Line: -		}
+>, <Line: -		public Block(Collection<Entry> entries) {
+>, <Line: -			super(entries);
+>, <Line: -		}		
+>, <Line: -		public void add(Bytecode code, Attribute...attributes) {
+>, <Line: -			super.add(new Entry(code,attributes));
+>, <Line: -		}
+>, <Line: -		public void add(Bytecode code, List<Attribute> attributes) {
+>, <Line: -			super.add(new Entry(code,attributes));
+>, <Line: -		}
+>, <Line: -		public void add(int start, Bytecode code, Attribute...attributes) {
+>, <Line: -			super.add(start, new Entry(code,attributes));
+>, <Line: -		}
+>, <Line: -		public void add(int start, Bytecode code, List<Attribute> attributes) {
+>, <Line: -			super.add(start, new Entry(code,attributes));
+>, <Line: -		}
+>, <Line: -		public void set(int i, Bytecode code, Attribute...attributes) {
+>, <Line: -			super.set(i,new Entry(code,attributes));
+>, <Line: -		}
+>, <Line: -		public void set(int i, Bytecode code, List<Attribute> attributes) {
+>, <Line: -			super.set(i,new Entry(code,attributes));
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Represents an entry within a code block. This is a pairing of a bytecode
+>, <Line: -	 * and a list of bytecodes.
+>, <Line: -	 * 
+>, <Line: -	 * @author David J. Pearce
+>, <Line: -	 *
+>, <Line: -	 */
+>, <Line: -	public static class Entry extends Pair<Bytecode,List<Attribute>> {
+>, <Line: -		public Entry(Bytecode code, List<Attribute> attributes) {
+>, <Line: -			super(code,attributes);
+>, <Line: -		}
+>, <Line: -		public Entry(Bytecode code, Attribute... attributes) {
+>, <Line: -			super(code,Arrays.asList(attributes));
+>, <Line: -		}
+>, <Line: -		public Bytecode code() {
+>, <Line: -			return first();
+>, <Line: -		}
+>, <Line: -		public <T extends Attribute> T attribute(Class<T> clazz) {
+>, <Line: -			List<Attribute> attributes = second();
+>, <Line: -			for(int i=0;i!=attributes.size();++i) {
+>, <Line: -				Attribute a = attributes.get(i);
+>, <Line: -				if(clazz.isInstance(a)) {
+>, <Line: -					return (T) a;
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -		public List<Attribute> attributes() {
+>, <Line: -			return second();
+>, <Line: -		}		
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Represents the declaration information associated with a given register.
+>, <Line: -	 *
+>, <Line: -	 * @author David J. Pearce
+>, <Line: -	 *
+>, <Line: -	 */
+>, <Line: -	public static class Register {
+>, <Line: -		private final Type type;
+>, <Line: -		private final String name;
+>, <Line: -		public Register(Type type, String name) {
+>, <Line: -			this.type = type;
+>, <Line: -			this.name = name;
+>, <Line: -		}
+>, <Line: -		public Type type() {
+>, <Line: -			return type;
+>, <Line: -		}
+>, <Line: -		public String name() {
+>, <Line: -			return name;
+>, <Line: -		}
+>, <Line: -		public String toString() {
+>, <Line: -			return type + " " + name;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -}
+>]

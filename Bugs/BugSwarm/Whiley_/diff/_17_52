@@ -1,0 +1,15 @@
+[]
+[<Line: -function test([real] xs, [int] ys) -> bool:
+>, <Line: -    [int|real] zs = xs ++ ys
+>, <Line: -    int i = 0
+>, <Line: -    while i < |zs|:
+>, <Line: -        if zs[i] is int:
+>, <Line: -            return true
+>, <Line: -        i = i + 1
+>, <Line: -    return false
+>, <Line: -public export method test() -> void:
+>, <Line: -    bool s = test([1.2, 2.3, 3.4], [1, 2, 3, 4, 5, 6, 7, 8])
+>, <Line: -    assume s == true    
+>, <Line: -    s = test([1.2, 2.3, 3.4], [])
+>, <Line: -    assume s == false
+>]

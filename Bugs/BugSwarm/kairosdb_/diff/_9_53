@@ -1,0 +1,32 @@
+[<Line: +	private final SimpleStats m_stats;
+>, <Line: +		m_stats = new SimpleStats();
+>, <Line: +	public SimpleStats.Data reportTaskTime(long time)
+>, <Line: +			if (m_stats.getCount() == m_taskPerBatch)
+>, <Line: +				SimpleStats.Data data = m_stats.getAndClear();
+>, <Line: +				return data;
+>]
+[<Line: -import com.google.common.collect.TreeMultiset;
+>, <Line: -import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+>, <Line: -	private final DescriptiveStatistics m_stats;
+>, <Line: -		m_stats = new DescriptiveStatistics();
+>, <Line: -	public TimerStat reportTaskTime(long time)
+>, <Line: -			if (m_stats.getN() == m_taskPerBatch)
+>, <Line: -				TimerStat ts = new TimerStat(m_stats.getMin(), m_stats.getMax(),
+>, <Line: -						m_stats.getMean(), m_stats.getPercentile(50));
+>, <Line: -				m_stats.clear();
+>, <Line: -				return ts;
+>, <Line: -	public static class TimerStat
+>, <Line: -	{
+>, <Line: -		public final double min;
+>, <Line: -		public final double max;
+>, <Line: -		public final double avg;
+>, <Line: -		public final double median;
+>, <Line: -		public TimerStat(double min, double max, double avg, double median)
+>, <Line: -		{
+>, <Line: -			this.min = min;
+>, <Line: -			this.max = max;
+>, <Line: -			this.avg = avg;
+>, <Line: -			this.median = median;
+>, <Line: -		}
+>, <Line: -	}
+>]

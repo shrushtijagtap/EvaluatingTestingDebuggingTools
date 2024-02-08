@@ -1,0 +1,7 @@
+[<Line: +import com.googlecode.mp4parser.DataSource;
+>, <Line: +        BoxComparator.check(c, isoFileReference, "/ftyp", "/moov[0]/mvhd[0]", "/moov[0]/trak[0]/tkhd[0]", "/moov[0]/trak[0]/mdia[0]/mdhd[0]", "/moov[0]/trak[0]/mdia[0]/minf[0]/stbl[0]/stco[0]");
+>]
+[<Line: -import java.io.FileOutputStream;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -        BoxComparator.check(c, isoFileReference, "/moov[0]/mvhd[0]", "/moov[0]/trak[0]/tkhd[0]", "/moov[0]/trak[0]/mdia[0]/mdhd[0]", "/moov[0]/trak[0]/mdia[0]/minf[0]/stbl[0]/stco[0]");
+>]

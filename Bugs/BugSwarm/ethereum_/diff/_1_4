@@ -1,0 +1,6 @@
+[<Line: +        List<LogInfo> origLogs = null;
+>, <Line: +        if (executor.getResult() != null)
+>, <Line: +            origLogs = executor.getResult().getLogInfoList();
+>]
+[<Line: -        List<LogInfo> origLogs = executor.getResult().getLogInfoList();
+>]

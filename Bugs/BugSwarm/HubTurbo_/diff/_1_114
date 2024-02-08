@@ -1,0 +1,12 @@
+[<Line: +import java.util.concurrent.CompletableFuture;
+>, <Line: +		this.response = new CompletableFuture<>();
+>, <Line: +		stage.setOnCloseRequest(this::onClose);
+>]
+[<Line: -import java.util.concurrent.CompletableFuture;
+>, <Line: -import javafx.scene.input.KeyCode;
+>, <Line: -import javafx.scene.input.KeyCodeCombination;
+>, <Line: -import javafx.scene.input.KeyCombination;
+>, <Line: -	protected static final KeyCombination BUTTON_TRIGGER_SHORTCUT = new KeyCodeCombination(KeyCode.ENTER, KeyCombination.CONTROL_DOWN);
+>, <Line: -		this.response = new CompletableFuture<T>();
+>, <Line: -		stage.setOnCloseRequest(e -> onClose(e));
+>]

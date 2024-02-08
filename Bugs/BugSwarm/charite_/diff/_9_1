@@ -1,0 +1,19 @@
+[<Line: +### overall
+>, <Line: +* Changing Guava version to 0.22
+>, <Line: +* Changing slf4j version to 1.7.24
+>, <Line: +* Changing log4j version to 2.8.2
+>, <Line: +* Adding experimental support for annotating with VCF files.
+>, <Line: +* Adding experimental support for annotating with tabix-indexed TSV files and dbNSFP.
+>, <Line: +* Making it possible to override database INI settings using user-specified INI files.
+>, <Line: +### jannovar-core
+>, <Line: +* Fixing stop loss annotation (#351).
+>, <Line: +* Finishing renaming of TranscriptInfo to TranscriptModel (#348).
+>, <Line: +* Upstream and downstream variant were considered "not off exome". They now are.
+>, <Line: +* Improving documentation of `MaxFreqAr` and `MaxFreqAd` in header.
+>, <Line: +### jannovar-vardbs
+>, <Line: +* Adding experimental support for annotating with VCF files
+>, <Line: +* Adding experimental support for annotating with tabix-indexed TSV files and dbNSFP
+>, <Line: +### jannovar-filter
+>, <Line: +* Fixing bug that ignored variant filters for recessive annotation
+>]
+[]

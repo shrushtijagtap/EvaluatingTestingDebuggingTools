@@ -1,0 +1,5 @@
+[<Line: +        when(instrumentedType.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotations(new Qux.Instance(), new Baz.Instance(), new QuxBaz.Instance()));
+>]
+[<Line: -        when(instrumentedType.getDeclaredAnnotations()).thenReturn(new AnnotationList
+>, <Line: -                .ForLoadedAnnotation(new Qux.Instance(), new Baz.Instance(), new QuxBaz.Instance()));
+>]

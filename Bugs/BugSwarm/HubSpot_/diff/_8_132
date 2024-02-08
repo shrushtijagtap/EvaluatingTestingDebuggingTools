@@ -1,0 +1,6 @@
+[<Line: +            elbEnabled: process.env.ELB_ENABLED ? false
+>]
+[<Line: -            authKey: process.env.BARAGON_AUTH_KEY ? ''
+>, <Line: -            elbEnabled: process.env.ELB_ENABLED ? true
+>, <Line: -            navColor: process.env.BARAGON_NAV_COLOR ? ''
+>]

@@ -1,0 +1,68 @@
+[<Line: +package org.mp4parser.boxes.dece;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +    public List<Entry> getEntries() {
+>, <Line: +        return entries;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected long getContentSize() {
+>, <Line: +        return 4 + entries.size();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void _parseDetails(ByteBuffer content) {
+>, <Line: +        parseVersionAndFlags(content);
+>, <Line: +        while (content.remaining() > 0) {
+>, <Line: +            entries.add(new Entry(IsoTypeReader.readUInt8(content)));
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected void getContent(ByteBuffer byteBuffer) {
+>, <Line: +        writeVersionAndFlags(byteBuffer);
+>, <Line: +        for (Entry entry : entries) {
+>, <Line: +            IsoTypeWriter.writeUInt8(byteBuffer, entry.value);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        final StringBuilder sb = new StringBuilder();
+>, <Line: +        sb.append("TrickPlayBox");
+>, <Line: +        sb.append("{entries=").append(entries);
+>, <Line: +        sb.append('}');
+>, <Line: +        return sb.toString();
+>, <Line: +        private int value;
+>]
+[<Line: -package com.coremedia.iso.boxes.dece;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -    public List<Entry> getEntries() {
+>, <Line: -        return entries;
+>, <Line: -        private int value;
+>, <Line: -    @Override
+>, <Line: -    protected long getContentSize() {
+>, <Line: -        return 4 + entries.size();
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public void _parseDetails(ByteBuffer content) {
+>, <Line: -        parseVersionAndFlags(content);
+>, <Line: -        while (content.remaining() > 0) {
+>, <Line: -            entries.add(new Entry(IsoTypeReader.readUInt8(content)));
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    protected void getContent(ByteBuffer byteBuffer) {
+>, <Line: -        writeVersionAndFlags(byteBuffer);
+>, <Line: -        for (Entry entry : entries) {
+>, <Line: -            IsoTypeWriter.writeUInt8(byteBuffer, entry.value);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    @Override
+>, <Line: -    public String toString() {
+>, <Line: -        final StringBuilder sb = new StringBuilder();
+>, <Line: -        sb.append("TrickPlayBox");
+>, <Line: -        sb.append("{entries=").append(entries);
+>, <Line: -        sb.append('}');
+>, <Line: -        return sb.toString();
+>, <Line: -    }
+>]

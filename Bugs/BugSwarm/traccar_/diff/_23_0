@@ -1,0 +1,5 @@
+[<Line: +[submodule "traccar-web"]
+>, <Line: +	path = traccar-web
+>, <Line: +	url = ../traccar-web.git
+>]
+[]

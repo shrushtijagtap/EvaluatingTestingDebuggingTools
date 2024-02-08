@@ -1,0 +1,13 @@
+[<Line: +  @Test
+>, <Line: +  public void testRelativeFileUrl() throws IOException, DbException {
+>, <Line: +    String binFilename = "file:./testdata/tipsyfilescan/tipsy3";
+>, <Line: +    String iOrderFilename = "file:./testdata/tipsyfilescan/iOrder3.iord";
+>, <Line: +    String grpFilename = "file:./testdata/tipsyfilescan/grp3.amiga.grp";
+>, <Line: +    TipsyFileScan fileScan = new TipsyFileScan(binFilename, iOrderFilename, grpFilename);
+>, <Line: +    ExpressionOperator expr =
+>, <Line: +            new EqualsExpression(new VariableExpression(16), new ConstantExpression(Type.STRING_TYPE, "gas"));
+>, <Line: +    Filter filter = new Filter(new Expression(null, expr), fileScan);
+>, <Line: +    assertEquals(4, getRowCount(filter));
+>, <Line: +  }
+>]
+[]

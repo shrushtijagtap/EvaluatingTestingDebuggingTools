@@ -1,0 +1,16 @@
+[<Line: +    ACABADO("1", "Acabado"),
+>, <Line: +    INACABADO("2", "Inacabado"),
+>, <Line: +    SEMI_ACABADO("3", "Semi-acabado");
+>, <Line: +    private final String descricao;
+>, <Line: +    NFNotaInfoItemProdutoVeiculoCondicao(final String codigo, final String descricao) {
+>, <Line: +        this.descricao = descricao;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    ACABADO("1"),
+>, <Line: -    INACABADO("2"),
+>, <Line: -    SEMI_ACABADO("3");
+>, <Line: -    NFNotaInfoItemProdutoVeiculoCondicao(final String codigo) {
+>]

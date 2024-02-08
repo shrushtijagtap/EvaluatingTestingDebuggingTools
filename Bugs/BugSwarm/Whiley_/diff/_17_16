@@ -1,0 +1,13 @@
+[]
+[<Line: -		case Code.OPCODE_append:
+>, <Line: -		case Code.OPCODE_appendl:
+>, <Line: -		case Code.OPCODE_appendr: {
+>, <Line: -			if (!(type instanceof Type.EffectiveList)) {
+>, <Line: -				throw new RuntimeException("expecting list type");
+>, <Line: -			}
+>, <Line: -			Codes.ListOperatorKind kind = Codes.ListOperatorKind.values()[opcode
+>, <Line: -					- Code.OPCODE_append];
+>, <Line: -			return Codes.ListOperator((Type.EffectiveList) type, target,
+>, <Line: -					leftOperand, rightOperand, kind);
+>, <Line: -		}
+>]

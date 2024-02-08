@@ -1,0 +1,22 @@
+[]
+[<Line: -import net.bytebuddy.dynamic.DynamicType;
+>, <Line: -import net.bytebuddy.implementation.FieldAccessor;
+>, <Line: -    @Test
+>, <Line: -    public void testNestingPerformance() throws Exception {
+>, <Line: -        DynamicType.Builder<Object> byteBuddy = new ByteBuddy().subclass(Object.class);
+>, <Line: -        long time = System.currentTimeMillis();
+>, <Line: -        byteBuddy.make();
+>, <Line: -        long baseline = System.currentTimeMillis() - time;
+>, <Line: -        time = System.currentTimeMillis();
+>, <Line: -        for (int index = 0; index < 300; index++) {
+>, <Line: -            byteBuddy = byteBuddy.defineField("field" + index, String.class, Modifier.PRIVATE)
+>, <Line: -                    .defineMethod("getField" + index, String.class, Modifier.PUBLIC)
+>, <Line: -                    .intercept(FieldAccessor.ofBeanProperty());
+>, <Line: -        }
+>, <Line: -        byteBuddy.make();
+>, <Line: -        long end = System.currentTimeMillis() - time;
+>, <Line: -        if (end > baseline * 200) {
+>, <Line: -            throw new AssertionError("Nested creation took too much time: " + end + " vs " + (baseline * 200));
+>, <Line: -        }
+>, <Line: -    }
+>]

@@ -1,0 +1,4 @@
+[<Line: +import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+>, <Line: +                @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Explicit delegation of the exception")
+>]
+[]

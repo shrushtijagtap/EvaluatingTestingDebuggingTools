@@ -1,0 +1,20 @@
+[<Line: +	public A getSafe(int entityId) {
+>, <Line: +		if(components.isIndexWithinBounds(entityId)) {
+>, <Line: +			return (A) components.get(entityId);
+>, <Line: +	public boolean has(int entityId) {
+>, <Line: +		return getSafe(entityId) != null;
+>, <Line: +	public A get(int entityId, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
+>, <Line: +		return get(entityId);
+>, <Line: +	public A getSafe(int entityId, boolean forceNewInstance) {
+>, <Line: +		return getSafe(entityId);
+>]
+[<Line: -	public A getSafe(Entity e) {
+>, <Line: -		if(components.isIndexWithinBounds(e.getId())) {
+>, <Line: -			return (A) components.get(e.getId());
+>, <Line: -	public boolean has(Entity e) {
+>, <Line: -		return getSafe(e) != null;		
+>, <Line: -	public A get(Entity e, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
+>, <Line: -		return get(e);
+>, <Line: -	public A getSafe(Entity e, boolean forceNewInstance) {
+>, <Line: -		return getSafe(e);
+>]

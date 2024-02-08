@@ -1,0 +1,4 @@
+[<Line: +	@java -version || (echo "Java is not installed, please install Java >= 7"; exit 1);
+>]
+[<Line: -	@java --version || (echo "Java is not installed, please install Java >= 7"; exit 1);
+>]

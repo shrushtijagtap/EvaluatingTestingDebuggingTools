@@ -1,0 +1,6 @@
+[<Line: +		case ARRAYGEN: {
+>, <Line: +			opcode = Code.Op.ARRAYGEN;
+>, <Line: +			break;
+>, <Line: +		}
+>]
+[]

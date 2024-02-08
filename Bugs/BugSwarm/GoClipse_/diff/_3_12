@@ -1,0 +1,11 @@
+[]
+[<Line: -		@Override
+>, <Line: -		public String getDefaultCheckArguments(BuildTarget bt) throws CommonException {
+>, <Line: -			return getDefaultBuildArguments(bt);
+>, <Line: -		}
+>, <Line: -		@Override
+>, <Line: -		public String getDefaultCheckArguments(BuildTarget bt) throws CommonException {
+>, <Line: -			ArrayList2<String> buildArgs = getPackageSpecCommand(bt, "build");
+>, <Line: -			return StringUtil.collToString(buildArgs, " ");
+>, <Line: -		}
+>]

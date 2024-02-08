@@ -1,0 +1,6 @@
+[<Line: +    <module name="CyclomaticComplexity">
+>, <Line: +      <property name="switchBlockAsSingleDecisionPoint" value="true"/>
+>, <Line: +    </module>
+>]
+[<Line: -    <module name="CyclomaticComplexity"/>
+>]

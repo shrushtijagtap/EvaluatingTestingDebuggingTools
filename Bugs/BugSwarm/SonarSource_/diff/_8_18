@@ -1,0 +1,18 @@
+[<Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import org.sonar.plugins.php.api.tests.PHPCheckTest;
+>, <Line: +import org.sonar.plugins.php.api.visitors.Issue;
+>, <Line: +    PHPCheckTest.check(check, TestUtils.getCheckFile(TEST_DIR + "ExtendsImplementsLineCheck.php"));
+>, <Line: +    PHPCheckTest.check(check, TestUtils.getCheckFile(TEST_DIR + "ExtendsImplementsLineCheck.php"), ImmutableList.<Issue>of());
+>]
+[<Line: -import org.sonar.php.PHPAstScanner;
+>, <Line: -import org.sonar.squidbridge.api.SourceFile;
+>, <Line: -import org.sonar.squidbridge.checks.CheckMessagesVerifier;
+>, <Line: -    SourceFile file = PHPAstScanner.scanSingleFile(TestUtils.getCheckFile(TEST_DIR + "ExtendsImplementsLineCheck.php"), check);
+>, <Line: -    CheckMessagesVerifier.verify(file.getCheckMessages())
+>, <Line: -      .next().atLine(3).withMessage("Move \"extends\" keyword to the same line as the declaration of its class name, \"KO\".")
+>, <Line: -      .next().atLine(9).withMessage("Move \"implements\" keyword to the same line as the declaration of its class name, \"KO\".")
+>, <Line: -      .next().atLine(15).withMessage("Move \"extends\" and \"implements\" keywords to the same line as the declaration of its class name, \"KO\".");
+>, <Line: -    SourceFile file = PHPAstScanner.scanSingleFile(TestUtils.getCheckFile(TEST_DIR + "ExtendsImplementsLineCheck.php"), check);
+>, <Line: -    checkMessagesVerifier.verify(file.getCheckMessages())
+>, <Line: -      .noMore();
+>]

@@ -1,0 +1,19 @@
+[<Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.muxer.FileRandomAccessSourceImpl;
+>, <Line: +import org.mp4parser.muxer.samples.FragmentedMp4SampleList;
+>, <Line: +import java.io.RandomAccessFile;
+>, <Line: +        IsoFile isoFile = new IsoFile("C:\\Users\\sannies\\Downloads\\gesamt.mp4");
+>, <Line: +        FragmentedMp4SampleList f = new FragmentedMp4SampleList(1, isoFile, new FileRandomAccessSourceImpl(new RandomAccessFile("C:\\Users\\sannies\\Downloads\\gesamt.mp4", "r")));
+>, <Line: +        System.err.println(f.get(0));
+>]
+[<Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.SampleSizeBox;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -        IsoFile isoFile = new IsoFile("C:\\Users\\sannies\\Downloads\\mergedvideo.mp4");
+>, <Line: -        SampleSizeBox stsz = Path.getPath(isoFile, "/moov[0]/trak[1]/mdia[0]/minf[0]/stbl[0]/stsz[0]");
+>, <Line: -        long s = 0;
+>, <Line: -        for (long l : stsz.getSampleSizes()) {
+>, <Line: -            s += l;
+>, <Line: -        }
+>, <Line: -        System.err.println(s);
+>]

@@ -1,0 +1,10 @@
+[]
+[<Line: -function f([int] xs) -> int
+>, <Line: -requires no { x in xs | x < 0 }:
+>, <Line: -    return |xs|
+>, <Line: -public export method test() -> void:
+>, <Line: -    [int] left = [1, 2, 3]
+>, <Line: -    [int] right = [5, 6, 7]
+>, <Line: -    int r = f(left ++ right)
+>, <Line: -    assume r == 6
+>]

@@ -1,0 +1,6 @@
+[<Line: +	private final OWLAPI3IndividualTranslator translator = new OWLAPI3IndividualTranslator();
+>, <Line: +	private final Iterator<Assertion> assertions;
+>]
+[<Line: -	private OWLAPI3IndividualTranslator translator = new OWLAPI3IndividualTranslator();
+>, <Line: -	private Iterator<Assertion> assertions = null;
+>]

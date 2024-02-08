@@ -1,0 +1,32 @@
+[<Line: +    TAXI("1", "T\u00e1xi"),
+>, <Line: +    PRODUTOR_AGROPECUARIO("3", "Produtor agropecu\u00e1rio"),
+>, <Line: +    FROTISTA_LOCADORA("4", "Frotista locadora"),
+>, <Line: +    DIPLOMATICO_CONSULAR("5", "Diplom\u00e1tico consular"),
+>, <Line: +    UTILITARIOS_MOTOCICLETAS_AMAZONIA_OCIDENTAL_AREAS_LIVRE_COMERCIO("6", "Utilit\u00e1rios motocicletas Amaz\u00f4nia Ocidental \u00e1reas livre com\u00e9rcio"),
+>, <Line: +    SUFRAMA("7", "Suframa"),
+>, <Line: +    VENDA_ORGAOS_PUBLICOS("8", "Venda \u00f3rg\u00e3os p\u00fablicos"),
+>, <Line: +    OUTROS("9", "Outros"),
+>, <Line: +    DEFICIENTE_CONDUTOR("10", "Deficiente condutor"),
+>, <Line: +    DEFICIENTE_NAO_CONDUTOR("11", "Deficiente n\u00e3o condutor"),
+>, <Line: +    ORGAO_DE_FOMENTO_DESENVOLVIMENTO_AGROPECUARIO("12", "\u00d5rg\u00e3o de fomento desenvolvimento agropecu\u00e1rio");
+>, <Line: +    private final String descricao;
+>, <Line: +    NFNotaMotivoDesoneracaoICMS(final String codigo, final String descricao) {
+>, <Line: +        this.descricao = descricao;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    TAXI("1"),
+>, <Line: -    PRODUTOR_AGROPECUARIO("3"),
+>, <Line: -    FROTISTA_LOCADORA("4"),
+>, <Line: -    DIPLOMATICO_CONSULAR("5"),
+>, <Line: -    UTILITARIOS_MOTOCICLETAS_AMAZONIA_OCIDENTAL_AREAS_LIVRE_COMERCIO("6"),
+>, <Line: -    SUFRAMA("7"),
+>, <Line: -    VENDA_ORGAOS_PUBLICOS("8"),
+>, <Line: -    OUTROS("9"),
+>, <Line: -    DEFICIENTE_CONDUTOR("10"),
+>, <Line: -    DEFICIENTE_NAO_CONDUTOR("11"),
+>, <Line: -    ORGAO_DE_FOMENTO_DESENVOLVIMENTO_AGROPECUARIO("12");
+>, <Line: -    NFNotaMotivoDesoneracaoICMS(final String codigo) {
+>]

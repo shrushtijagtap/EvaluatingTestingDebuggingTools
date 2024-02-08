@@ -1,0 +1,14 @@
+[<Line: +import com.joyent.manta.client.config.IntegrationTestConfigContext;
+>, <Line: +    @Parameters({"manta.url", "manta.user", "manta.key_path", "manta.key_id", "manta.timeout", "manta.http_transport"})
+>, <Line: +                            @Optional Integer mantaTimeout,
+>, <Line: +                            @Optional String mantaHttpTransport)
+>, <Line: +        ConfigContext config = new IntegrationTestConfigContext(
+>, <Line: +                mantaUrl, mantaUser, mantaKeyPath, mantaKeyId, mantaTimeout,
+>, <Line: +                mantaHttpTransport);
+>]
+[<Line: -import com.joyent.manta.client.config.TestConfigContext;
+>, <Line: -    @Parameters({"manta.url", "manta.user", "manta.key_path", "manta.key_id", "manta.timeout"})
+>, <Line: -                            @Optional Integer mantaTimeout)
+>, <Line: -        ConfigContext config = new TestConfigContext(
+>, <Line: -                mantaUrl, mantaUser, mantaKeyPath, mantaKeyId, mantaTimeout);
+>]

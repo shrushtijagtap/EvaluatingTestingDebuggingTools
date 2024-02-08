@@ -1,0 +1,16 @@
+[<Line: +import com.datastax.driver.core.policies.LoadBalancingPolicy;
+>, <Line: +	private LoadBalancingPolicy m_loadBalancingPolicy;
+>, <Line: +		m_loadBalancingPolicy = new TokenAwarePolicy(DCAwareRoundRobinPolicy.builder().build());
+>, <Line: +				.withPoolingOptions(new PoolingOptions().setConnectionsPerHost(HostDistance.LOCAL, 5, 100)
+>, <Line: +					.setMaxRequestsPerConnection(HostDistance.LOCAL, 1024*2)
+>, <Line: +					.setMaxQueueSize(500))
+>, <Line: +				.withLoadBalancingPolicy(m_loadBalancingPolicy)
+>, <Line: +	public LoadBalancingPolicy getLoadBalancingPolicy()
+>, <Line: +	{
+>, <Line: +		return m_loadBalancingPolicy;
+>, <Line: +	}
+>]
+[<Line: -				.withPoolingOptions(new PoolingOptions().setConnectionsPerHost(HostDistance.LOCAL, 3, 100)
+>, <Line: -					.setMaxRequestsPerConnection(HostDistance.LOCAL, 1024))
+>, <Line: -				.withLoadBalancingPolicy(new TokenAwarePolicy(DCAwareRoundRobinPolicy.builder().build()))
+>]

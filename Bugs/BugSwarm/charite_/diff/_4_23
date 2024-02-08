@@ -1,0 +1,77 @@
+[<Line: +package de.charite.compbio.jannovar.cmd.download;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.function.BiFunction;
+>, <Line: +import com.google.common.collect.Lists;
+>, <Line: +import de.charite.compbio.jannovar.UncheckedJannovarException;
+>, <Line: +import de.charite.compbio.jannovar.cmd.CommandLineParsingException;
+>, <Line: +import de.charite.compbio.jannovar.cmd.JannovarBaseOptions;
+>, <Line: +import de.charite.compbio.jannovar.cmd.JannovarDBOptions;
+>, <Line: +import net.sourceforge.argparse4j.impl.Arguments;
+>, <Line: +import net.sourceforge.argparse4j.inf.ArgumentGroup;
+>, <Line: +import net.sourceforge.argparse4j.inf.ArgumentParser;
+>, <Line: +import net.sourceforge.argparse4j.inf.Namespace;
+>, <Line: +import net.sourceforge.argparse4j.inf.Subparser;
+>, <Line: +import net.sourceforge.argparse4j.inf.Subparsers;
+>, <Line: +/**
+>, <Line: + * Configuration for the <tt>download</tt> command
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class JannovarDownloadOptions extends JannovarDBOptions {
+>, <Line: +	/** Path to download directory */
+>, <Line: +	private String downloadDir = null;
+>, <Line: +	/** Names of the databases to download */
+>, <Line: +	private List<String> databaseNames = new ArrayList<>();
+>, <Line: +	/**
+>, <Line: +	 * Setup {@link ArgumentParser}
+>, <Line: +	 * 
+>, <Line: +	 * @param subParsers
+>, <Line: +	 *            {@link Subparsers} to setup
+>, <Line: +	 */
+>, <Line: +	public static void setupParser(Subparsers subParsers) {
+>, <Line: +		BiFunction<String[], Namespace, DownloadCommand> handler = (argv, args) -> {
+>, <Line: +			try {
+>, <Line: +				return new DownloadCommand(argv, args);
+>, <Line: +			} catch (CommandLineParsingException e) {
+>, <Line: +				throw new UncheckedJannovarException("Could not parse command line", e);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		Subparser subParser = subParsers.addParser("download", true).help("download transcript databases")
+>, <Line: +				.setDefault("cmd", handler);
+>, <Line: +		subParser.description("Download transcript database");
+>, <Line: +		subParser.addArgument("-d", "--database").help("Name of database to download, can be given multiple times")
+>, <Line: +				.setDefault(new ArrayList<String>()).action(Arguments.append()).required(true);
+>, <Line: +		ArgumentGroup optionalGroup = subParser.addArgumentGroup("Optional Arguments");
+>, <Line: +		optionalGroup.addArgument("-s", "--data-source-list").help("INI file with data source list")
+>, <Line: +				.setDefault(Lists.newArrayList("bundle:///default_sources.ini")).action(Arguments.append());
+>, <Line: +		optionalGroup.addArgument("--download-dir").help("Path to download directory").setDefault("data");
+>, <Line: +		JannovarBaseOptions.setupParser(subParser);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void setFromArgs(Namespace args) throws CommandLineParsingException {
+>, <Line: +		super.setFromArgs(args);
+>, <Line: +		downloadDir = args.getString("download_dir");
+>, <Line: +		databaseNames = args.getList("database");
+>, <Line: +	}
+>, <Line: +	public String getDownloadDir() {
+>, <Line: +		return downloadDir;
+>, <Line: +	}
+>, <Line: +	public void setDownloadDir(String downloadDir) {
+>, <Line: +		this.downloadDir = downloadDir;
+>, <Line: +	}
+>, <Line: +	public List<String> getDatabaseNames() {
+>, <Line: +		return databaseNames;
+>, <Line: +	}
+>, <Line: +	public void setDatabaseNames(List<String> databaseNames) {
+>, <Line: +		this.databaseNames = databaseNames;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return "JannovarDownloadOptions [downloadDir=" + downloadDir + ", getDataSourceFiles()=" + getDataSourceFiles()
+>, <Line: +				+ ", isReportProgress()=" + isReportProgress() + ", getHttpProxy()=" + getHttpProxy()
+>, <Line: +				+ ", getHttpsProxy()=" + getHttpsProxy() + ", getFtpProxy()=" + getFtpProxy() + "]";
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

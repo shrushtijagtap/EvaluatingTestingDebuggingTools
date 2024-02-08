@@ -1,0 +1,92 @@
+[<Line: +package org.mp4parser.boxes.microsoft;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: + * <br>
+>, <Line: + * <br>
+>, <Line: +    //http://stackoverflow.com/questions/5398557/java-library-for-dealing-with-win32-filetime
+>, <Line: +    private static final long FILETIME_EPOCH_DIFF = 11644473600000L;
+>, <Line: +    private static final long FILETIME_ONE_MILLISECOND = 10 * 1000;
+>, <Line: +    private boolean successfulParse = false;
+>, <Line: +    private static long filetimeToMillis(final long filetime) {
+>, <Line: +        return (filetime / FILETIME_ONE_MILLISECOND) - FILETIME_EPOCH_DIFF;
+>, <Line: +    }
+>, <Line: +    private static long millisToFiletime(final long millis) {
+>, <Line: +        return (millis + FILETIME_EPOCH_DIFF) * FILETIME_ONE_MILLISECOND;
+>, <Line: +    }
+>, <Line: +    private static void writeAsciiString(ByteBuffer dest, String s) {
+>, <Line: +        try {
+>, <Line: +            dest.put(s.getBytes("US-ASCII"));
+>, <Line: +        } catch (UnsupportedEncodingException e) {
+>, <Line: +            throw new RuntimeException("Shouldn't happen", e);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private static String readAsciiString(ByteBuffer content, int length) {
+>, <Line: +        byte s[] = new byte[length];
+>, <Line: +        content.get(s);
+>, <Line: +        try {
+>, <Line: +            return new String(s, "US-ASCII");
+>, <Line: +        } catch (UnsupportedEncodingException e) {
+>, <Line: +            throw new RuntimeException("Shouldn't happen", e);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private static String readUtf16String(ByteBuffer content, int length) {
+>, <Line: +        char s[] = new char[(length / 2) - 1];
+>, <Line: +        for (int i = 0; i < (length / 2) - 1; i++) {
+>, <Line: +            s[i] = content.getChar();
+>, <Line: +        }
+>, <Line: +        content.getChar(); //Discard terminating null
+>, <Line: +        return new String(s);
+>, <Line: +    }
+>, <Line: +    private static void writeUtf16String(ByteBuffer dest, String s) {
+>, <Line: +        char ar[] = s.toCharArray();
+>, <Line: +        for (int i = 0; i < ar.length; i++) { //Probably not the best way to do this but it preserves the byte order
+>, <Line: +            dest.putChar(ar[i]);
+>, <Line: +        }
+>, <Line: +        dest.putChar((char) 0); //Terminating null
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.microsoft;
+>, <Line: -import com.googlecode.mp4parser.AbstractBox;
+>, <Line: - *
+>, <Line: - *
+>, <Line: -    private boolean successfulParse = false;
+>, <Line: -    //http://stackoverflow.com/questions/5398557/java-library-for-dealing-with-win32-filetime
+>, <Line: -    private static final long FILETIME_EPOCH_DIFF = 11644473600000L;
+>, <Line: -    private static final long FILETIME_ONE_MILLISECOND = 10 * 1000;
+>, <Line: -    private static long filetimeToMillis(final long filetime) {
+>, <Line: -        return (filetime / FILETIME_ONE_MILLISECOND) - FILETIME_EPOCH_DIFF;
+>, <Line: -    }
+>, <Line: -    private static long millisToFiletime(final long millis) {
+>, <Line: -        return (millis + FILETIME_EPOCH_DIFF) * FILETIME_ONE_MILLISECOND;
+>, <Line: -    }
+>, <Line: -    private static void writeAsciiString(ByteBuffer dest, String s) {
+>, <Line: -        try {
+>, <Line: -            dest.put(s.getBytes("US-ASCII"));
+>, <Line: -        } catch (UnsupportedEncodingException e) {
+>, <Line: -            throw new RuntimeException("Shouldn't happen", e);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    private static String readAsciiString(ByteBuffer content, int length) {
+>, <Line: -        byte s[] = new byte[length];
+>, <Line: -        content.get(s);
+>, <Line: -        try {
+>, <Line: -            return new String(s, "US-ASCII");
+>, <Line: -        } catch (UnsupportedEncodingException e) {
+>, <Line: -            throw new RuntimeException("Shouldn't happen", e);
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -    private static String readUtf16String(ByteBuffer content, int length) {
+>, <Line: -        char s[] = new char[(length / 2) - 1];
+>, <Line: -        for (int i = 0; i < (length / 2) - 1; i++) {
+>, <Line: -            s[i] = content.getChar();
+>, <Line: -        }
+>, <Line: -        content.getChar(); //Discard terminating null
+>, <Line: -        return new String(s);
+>, <Line: -    }
+>, <Line: -    private static void writeUtf16String(ByteBuffer dest, String s) {
+>, <Line: -        char ar[] = s.toCharArray();
+>, <Line: -        for (int i = 0; i < ar.length; i++) { //Probably not the best way to do this but it preserves the byte order
+>, <Line: -            dest.putChar(ar[i]);
+>, <Line: -        }
+>, <Line: -        dest.putChar((char) 0); //Terminating null
+>, <Line: -    }
+>]

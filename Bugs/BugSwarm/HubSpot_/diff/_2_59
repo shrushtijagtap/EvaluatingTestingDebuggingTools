@@ -1,0 +1,17 @@
+[<Line: +package com.hubspot.baragon.service.managers;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +import com.hubspot.baragon.models.RequestAction;
+>, <Line: +import com.hubspot.baragon.service.BaragonServiceModule;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +                      @Named(BaragonServiceModule.BARAGON_SERVICE_HTTP_CLIENT) AsyncHttpClient asyncHttpClient,
+>]
+[<Line: -package com.hubspot.baragon.managers;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import com.hubspot.baragon.models.RequestAction;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -                      @Named(BaragonDataModule.BARAGON_SERVICE_HTTP_CLIENT) AsyncHttpClient asyncHttpClient,
+>]

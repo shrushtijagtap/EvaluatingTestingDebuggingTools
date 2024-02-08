@@ -1,0 +1,16 @@
+[<Line: +        Foo instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        Bar instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        Qux instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        Foo instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        Foo instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        Object instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        Object instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>]
+[<Line: -        Foo instance = loaded.getLoaded().newInstance();
+>, <Line: -        Bar instance = loaded.getLoaded().newInstance();
+>, <Line: -        Qux instance = loaded.getLoaded().newInstance();
+>, <Line: -        Foo instance = loaded.getLoaded().newInstance();
+>, <Line: -        Foo instance = loaded.getLoaded().newInstance();
+>, <Line: -        Object instance = loaded.getLoaded().newInstance();
+>, <Line: -        Object instance = loaded.getLoaded().newInstance();
+>]

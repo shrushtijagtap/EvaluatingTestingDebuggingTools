@@ -1,0 +1,17 @@
+[<Line: +package org.mp4parser.muxer;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.CompositionTimeToSample;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDependencyTypeBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SampleDescriptionBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.SubSampleInformationBox;
+>, <Line: +import org.mp4parser.boxes.samplegrouping.GroupEntry;
+>, <Line: +     *
+>, <Line: +     *
+>]
+[<Line: -package com.googlecode.mp4parser.authoring;
+>, <Line: -import com.coremedia.iso.boxes.CompositionTimeToSample;
+>, <Line: -import com.coremedia.iso.boxes.SampleDependencyTypeBox;
+>, <Line: -import com.coremedia.iso.boxes.SampleDescriptionBox;
+>, <Line: -import com.coremedia.iso.boxes.SubSampleInformationBox;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.samplegrouping.GroupEntry;
+>, <Line: - *
+>]

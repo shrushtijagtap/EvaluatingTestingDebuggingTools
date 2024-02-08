@@ -1,0 +1,23 @@
+[<Line: +			@Named(SECONDS_TILL_CHECKPOINT) int secondsTillCheckpoint,
+>, <Line: +			@Named(MINIMUM_BATCH_SIZE) int minimumBatchSize)
+>, <Line: +		super(executor, batchSize, minimumBatchSize);
+>, <Line: +	@Override
+>, <Line: +	protected int getAvailableDataPointEvents()
+>, <Line: +	{
+>, <Line: +		return m_memoryQueue.size();
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void addReportedMetrics(ArrayList<DataPointSet> metrics, long now)
+>, <Line: +		metrics.add(dps);
+>, <Line: +		metrics.add(dps);
+>, <Line: +		metrics.add(dps);
+>]
+[<Line: -			@Named(SECONDS_TILL_CHECKPOINT) int secondsTillCheckpoint)
+>, <Line: -		super(executor, batchSize);
+>, <Line: -	public List<DataPointSet> getMetrics(long now)
+>, <Line: -		ArrayList<DataPointSet> ret = new ArrayList<>();
+>, <Line: -		ret.add(dps);
+>, <Line: -		ret.add(dps);
+>, <Line: -		ret.add(dps);
+>, <Line: -		return ret;
+>]

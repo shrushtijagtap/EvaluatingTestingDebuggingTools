@@ -1,0 +1,6 @@
+[<Line: +import org.kairosdb.core.scheduler.KairosDBSchedulerImpl;
+>, <Line: +		bind(KairosDBScheduler.class).to(KairosDBSchedulerImpl.class).in(Singleton.class);
+>, <Line: +		bind(KairosDBSchedulerImpl.class).in(Singleton.class);
+>]
+[<Line: -		bind(KairosDBScheduler.class).in(Singleton.class);
+>]

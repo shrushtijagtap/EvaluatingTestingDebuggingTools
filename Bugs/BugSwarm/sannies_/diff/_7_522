@@ -1,0 +1,40 @@
+[<Line: +package org.mp4parser.muxer.tracks.h264.parsing.model;
+>, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.read.CAVLCReader;
+>, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.write.CAVLCWriter;
+>, <Line: +                                    + i + "]f");
+>, <Line: +    public static class PPSExt {
+>, <Line: +        public boolean transform_8x8_mode_flag;
+>, <Line: +        public ScalingMatrix scalindMatrix = new ScalingMatrix();
+>, <Line: +        public int second_chroma_qp_index_offset;
+>, <Line: +        public boolean[] pic_scaling_list_present_flag;
+>, <Line: +        @Override
+>, <Line: +        public String toString() {
+>, <Line: +            return "PPSExt{" +
+>, <Line: +                    "transform_8x8_mode_flag=" + transform_8x8_mode_flag +
+>, <Line: +                    ", scalindMatrix=" + scalindMatrix +
+>, <Line: +                    ", second_chroma_qp_index_offset=" + second_chroma_qp_index_offset +
+>, <Line: +                    ", pic_scaling_list_present_flag=" + pic_scaling_list_present_flag +
+>, <Line: +                    '}';
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.h264.model;
+>, <Line: -import com.googlecode.mp4parser.h264.read.CAVLCReader;
+>, <Line: -import com.googlecode.mp4parser.h264.write.CAVLCWriter;
+>, <Line: -    public static class PPSExt {
+>, <Line: -        public boolean transform_8x8_mode_flag;
+>, <Line: -        public ScalingMatrix scalindMatrix = new ScalingMatrix();
+>, <Line: -        public int second_chroma_qp_index_offset;
+>, <Line: -        public boolean[] pic_scaling_list_present_flag;
+>, <Line: -        @Override
+>, <Line: -        public String toString() {
+>, <Line: -            return "PPSExt{" +
+>, <Line: -                    "transform_8x8_mode_flag=" + transform_8x8_mode_flag +
+>, <Line: -                    ", scalindMatrix=" + scalindMatrix +
+>, <Line: -                    ", second_chroma_qp_index_offset=" + second_chroma_qp_index_offset +
+>, <Line: -                    ", pic_scaling_list_present_flag=" + pic_scaling_list_present_flag +
+>, <Line: -                    '}';
+>, <Line: -        }
+>, <Line: -    }
+>, <Line: -                            + i + "]f");
+>]

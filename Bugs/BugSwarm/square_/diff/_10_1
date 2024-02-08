@@ -1,0 +1,38 @@
+[<Line: +import static okio.Util.arrayRangeEquals;
+>, <Line: +public class ByteString implements Serializable {
+>, <Line: +  static final char[] HEX_DIGITS =
+>, <Line: +  transient int hashCode; // Lazily computed; 0 if unknown.
+>, <Line: +  transient String utf8; // Lazily computed.
+>, <Line: +  /** Writes the contents of this byte string to {@code buffer}. */
+>, <Line: +  void write(Buffer buffer) {
+>, <Line: +    buffer.write(data, 0, data.length);
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * Returns true if the bytes of this in {@code [offset..offset+byteCount)} equal the bytes of
+>, <Line: +   * {@code other} in {@code [otherOffset..otherOffset+byteCount)}. Returns false if either range is
+>, <Line: +   * out of bounds.
+>, <Line: +   */
+>, <Line: +  public boolean rangeEquals(int offset, ByteString other, int otherOffset, int byteCount) {
+>, <Line: +    return other.rangeEquals(otherOffset, this.data, offset, byteCount);
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * Returns true if the bytes of this in {@code [offset..offset+byteCount)} equal the bytes of
+>, <Line: +   * {@code other} in {@code [otherOffset..otherOffset+byteCount)}. Returns false if either range is
+>, <Line: +   * out of bounds.
+>, <Line: +   */
+>, <Line: +  public boolean rangeEquals(int offset, byte[] other, int otherOffset, int byteCount) {
+>, <Line: +    return offset <= data.length - byteCount
+>, <Line: +        && otherOffset <= other.length - byteCount
+>, <Line: +        && arrayRangeEquals(data, offset, other, otherOffset, byteCount);
+>, <Line: +  }
+>, <Line: +    if (o == this) return true;
+>, <Line: +    return o instanceof ByteString
+>, <Line: +        && ((ByteString) o).size() == data.length
+>, <Line: +        && ((ByteString) o).rangeEquals(0, data, 0, data.length);
+>]
+[<Line: -public final class ByteString implements Serializable {
+>, <Line: -  private static final char[] HEX_DIGITS =
+>, <Line: -  private transient int hashCode; // Lazily computed; 0 if unknown.
+>, <Line: -  private transient String utf8; // Lazily computed.
+>, <Line: -    return o == this || o instanceof ByteString && Arrays.equals(((ByteString) o).data, data);
+>]

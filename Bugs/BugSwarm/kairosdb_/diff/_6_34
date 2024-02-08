@@ -1,0 +1,94 @@
+[<Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import org.kairosdb.datastore.cassandra.DataPointsRowKey;
+>, <Line: +import org.kairosdb.events.RowKeyEvent;
+>, <Line: +	private final KairosDataPointFactory m_dataPointFactory;
+>, <Line: +	private final EventBus m_eventBus;
+>, <Line: +			KairosDataPointFactory dataPointFactory,
+>, <Line: +			EventBus eventBus) throws DatastoreException
+>, <Line: +		m_eventBus = eventBus;
+>, <Line: +				DataPointsRowKey dataPointsRowKey = new DataPointsRowKey(metricName,
+>, <Line: +						0, dataPoint.getDataStoreDataType(), tags);
+>, <Line: +				m_eventBus.post(new RowKeyEvent(metricName, dataPointsRowKey, 0));
+>, <Line: +	@Override
+>, <Line: +	public void setValue(String service, String serviceKey, String key, String value) throws DatastoreException
+>, <Line: +	{
+>, <Line: +		GenOrmDataSource.attachAndBegin();
+>, <Line: +		try
+>, <Line: +		{
+>, <Line: +			ServiceIndex serviceIndex = ServiceIndex.factory.create(service, serviceKey, key);
+>, <Line: +			if (value != null)
+>, <Line: +				serviceIndex.setValue(value);
+>, <Line: +			GenOrmDataSource.commit();
+>, <Line: +		}
+>, <Line: +		finally
+>, <Line: +		{
+>, <Line: +			GenOrmDataSource.close();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String getValue(String service, String serviceKey, String key) throws DatastoreException
+>, <Line: +	{
+>, <Line: +		ServiceIndex serviceIndex = ServiceIndex.factory.find(service, serviceKey, key);
+>, <Line: +		if (serviceIndex != null)
+>, <Line: +			return serviceIndex.getValue();
+>, <Line: +		else
+>, <Line: +			return null;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public Iterable<String> listKeys(String service, String serviceKey) throws DatastoreException
+>, <Line: +	{
+>, <Line: +		final ServiceIndex_base.ResultSet keys = ServiceIndex.factory.getKeys(service, serviceKey);
+>, <Line: +		return new Iterable<String>()
+>, <Line: +		{
+>, <Line: +			@Override
+>, <Line: +			public Iterator<String> iterator()
+>, <Line: +			{
+>, <Line: +				return new Iterator<String>()
+>, <Line: +				{
+>, <Line: +					@Override
+>, <Line: +					public boolean hasNext()
+>, <Line: +					{
+>, <Line: +						return keys.next();
+>, <Line: +					}
+>, <Line: +					@Override
+>, <Line: +					public String next()
+>, <Line: +					{
+>, <Line: +						return keys.getRecord().getKey();
+>, <Line: +					}
+>, <Line: +					@Override
+>, <Line: +					public void remove() { }
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public Iterable<String> listKeys(String service, String serviceKey, String keyStartsWith) throws DatastoreException
+>, <Line: +	{
+>, <Line: +		final ServiceIndex_base.ResultSet keys = ServiceIndex.factory.getKeysLike(service, serviceKey, keyStartsWith+"%");
+>, <Line: +		return new Iterable<String>()
+>, <Line: +		{
+>, <Line: +			@Override
+>, <Line: +			public Iterator<String> iterator()
+>, <Line: +			{
+>, <Line: +				return new Iterator<String>()
+>, <Line: +				{
+>, <Line: +					@Override
+>, <Line: +					public boolean hasNext()
+>, <Line: +					{
+>, <Line: +						return keys.next();
+>, <Line: +					}
+>, <Line: +					@Override
+>, <Line: +					public String next()
+>, <Line: +					{
+>, <Line: +						return keys.getRecord().getKey();
+>, <Line: +					}
+>, <Line: +					@Override
+>, <Line: +					public void remove() { }
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +	}
+>]
+[<Line: -	private KairosDataPointFactory m_dataPointFactory;
+>, <Line: -			KairosDataPointFactory dataPointFactory) throws DatastoreException
+>]

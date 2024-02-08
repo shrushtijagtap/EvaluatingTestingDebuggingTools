@@ -1,0 +1,7 @@
+[<Line: +        logger.info("executed {} adds", size);
+>, <Line: +                logger.info("executing {}", sql);
+>, <Line: +            } catch (Exception e) {
+>]
+[<Line: -                logger.trace("executing {}", sql);
+>, <Line: -            } catch (SQLException e) {
+>]

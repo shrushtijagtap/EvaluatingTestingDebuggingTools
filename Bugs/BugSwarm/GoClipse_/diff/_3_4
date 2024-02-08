@@ -1,0 +1,6 @@
+[<Line: +import melnorme.lang.ide.core.operations.build.ProjectBuildInfo;
+>, <Line: +		this(projectName, new BuildTargetData(targetName, true, true, buildArguments, executablePath));
+>]
+[<Line: -import melnorme.lang.ide.core.project_model.ProjectBuildInfo;
+>, <Line: -		this(projectName, new BuildTargetData(targetName, true, buildArguments, null, executablePath));
+>]

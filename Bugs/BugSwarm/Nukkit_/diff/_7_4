@@ -1,0 +1,44 @@
+[<Line: +public class EventException extends RuntimeException {
+>, <Line: +    private final Throwable cause;
+>, <Line: +    /**
+>, <Line: +     * Constructs a new EventException based on the given Exception
+>, <Line: +     *
+>, <Line: +     * @param throwable Exception that triggered this Exception
+>, <Line: +     */
+>, <Line: +    public EventException(Throwable throwable) {
+>, <Line: +        cause = throwable;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Constructs a new EventException
+>, <Line: +     */
+>, <Line: +    public EventException() {
+>, <Line: +        cause = null;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Constructs a new EventException with the given message
+>, <Line: +     *
+>, <Line: +     * @param cause The exception that caused this
+>, <Line: +     * @param message The message
+>, <Line: +     */
+>, <Line: +    public EventException(Throwable cause, String message) {
+>, <Line: +        super(message);
+>, <Line: +        this.cause = cause;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Constructs a new EventException with the given message
+>, <Line: +     *
+>, <Line: +     * @param message The message
+>, <Line: +     */
+>, <Line: +        cause = null;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * If applicable, returns the Exception that triggered this Exception
+>, <Line: +     *
+>, <Line: +     * @return Inner exception, or null if one does not exist
+>, <Line: +     */
+>, <Line: +    @Override
+>, <Line: +    public Throwable getCause() {
+>, <Line: +        return cause;
+>]
+[<Line: -public class EventException extends ServerException {
+>]

@@ -1,0 +1,4 @@
+[<Line: +        if (lineVertexData == null || highlightedLines == null || highlightedLines.isEmpty()) {
+>]
+[<Line: -        if (lineVertexData == null || highlightedLines == null || highlightedLines.size() == 0) {
+>]

@@ -1,0 +1,32 @@
+[<Line: +Model = require './model'
+>, <Line: +class TargetCount extends Model
+>, <Line: +    url: => "#{ config.apiRoot }/load-balancer/#{@groupId}/count"
+>, <Line: +    updateCountTemplate: require '../templates/vex/updateTargetCount'
+>, <Line: +    initialize: ({ @groupId }) ->
+>, <Line: +    parse: (data) =>
+>, <Line: +        newData = {}
+>, <Line: +        newData.count = data
+>, <Line: +        return newData
+>, <Line: +    updateCount: (newCount) =>
+>, <Line: +        $.ajax
+>, <Line: +            url: "#{ config.apiRoot }/load-balancer/#{@groupId}/count?authkey=#{ localStorage.getItem 'baragonAuthKey' }&count=#{ newCount }"
+>, <Line: +            type: "POST"
+>, <Line: +    promptUpdateTargetCount: (callback) =>
+>, <Line: +        input = """
+>, <Line: +                <input name="targetCount" type="text" placeholder="#{this.attributes.count}" required />
+>, <Line: +            """
+>, <Line: +        vex.dialog.confirm
+>, <Line: +            message: @updateCountTemplate
+>, <Line: +            input: input
+>, <Line: +            buttons: [
+>, <Line: +                $.extend {}, vex.dialog.buttons.YES,
+>, <Line: +                    text: 'UPDATE',
+>, <Line: +                    className: 'vex-dialog-button-primary vex-dialog-button-primary-remove'
+>, <Line: +                vex.dialog.buttons.NO
+>, <Line: +            ]
+>, <Line: +            callback: (data) =>
+>, <Line: +                return if data is false
+>, <Line: +                @updateCount(data.targetCount).done callback
+>, <Line: +module.exports = TargetCount
+>]
+[]

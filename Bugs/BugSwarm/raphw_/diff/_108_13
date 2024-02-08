@@ -1,0 +1,18 @@
+[<Line: +    private final ElementMatcher<? super T> matcher;
+>, <Line: +     * @param matcher The matcher for the given element, if it exists.
+>, <Line: +    public CollectionElementMatcher(int index, ElementMatcher<? super T> matcher) {
+>, <Line: +        this.matcher = matcher;
+>, <Line: +        return iterator.hasNext() && matcher.matches(iterator.next());
+>, <Line: +                && matcher.equals(((CollectionElementMatcher<?>) other).matcher);
+>, <Line: +        return matcher.hashCode() + 31 * index;
+>, <Line: +        return "with(" + index + " matches " + matcher + ")";
+>]
+[<Line: -    private final ElementMatcher<? super T> elementMatcher;
+>, <Line: -     * @param elementMatcher The matcher for the given element, if it exists.
+>, <Line: -    public CollectionElementMatcher(int index, ElementMatcher<? super T> elementMatcher) {
+>, <Line: -        this.elementMatcher = elementMatcher;
+>, <Line: -        return iterator.hasNext() && elementMatcher.matches(iterator.next());
+>, <Line: -                && elementMatcher.equals(((CollectionElementMatcher<?>) other).elementMatcher);
+>, <Line: -        return elementMatcher.hashCode() + 31 * index;
+>, <Line: -        return "with(" + index + " matches " + elementMatcher + ")";
+>]

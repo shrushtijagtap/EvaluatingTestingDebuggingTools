@@ -1,0 +1,36 @@
+[<Line: +import it.unibz.krdb.obda.ontology.OntologyVocabulary;
+>, <Line: +			OntologyVocabulary vb = ofac.createVocabulary();
+>, <Line: +			for (OClass pred : model.getOntologyVocabulary().getClasses()) 
+>, <Line: +				vb.createClass(pred.getName());				
+>, <Line: +			for (ObjectPropertyExpression prop : model.getOntologyVocabulary().getObjectProperties()) 
+>, <Line: +				vb.createObjectProperty(prop.getName());
+>, <Line: +			for (DataPropertyExpression prop : model.getOntologyVocabulary().getDataProperties()) 
+>, <Line: +				vb.createDataProperty(prop.getName());
+>, <Line: +			ontology = ofac.createOntology(vb);			
+>, <Line: +        for (OClass cl : model.getOntologyVocabulary().getClasses()) {
+>, <Line: +        for (ObjectPropertyExpression prop : model.getOntologyVocabulary().getObjectProperties()) {
+>, <Line: +        for (DataPropertyExpression prop : model.getOntologyVocabulary().getDataProperties()) {
+>, <Line: +                    CQIE rule = axiom.getTargetQuery();
+>, <Line: +                    for (Function f: rule.getBody())
+>, <Line: +                        vocabulary.add(f.getFunctionSymbol());
+>]
+[<Line: -			ontology = ofac.createOntology();
+>, <Line: -			for (OClass pred : model.getDeclaredClasses()) 
+>, <Line: -				ontology.getVocabulary().createClass(pred.getPredicate().getName());				
+>, <Line: -			for (ObjectPropertyExpression prop : model.getDeclaredObjectProperties()) 
+>, <Line: -				ontology.getVocabulary().createObjectProperty(prop.getPredicate().getName());
+>, <Line: -			for (DataPropertyExpression prop : model.getDeclaredDataProperties()) 
+>, <Line: -				ontology.getVocabulary().createDataProperty(prop.getPredicate().getName());
+>, <Line: -        for (OClass cl : model.getDeclaredClasses()) {
+>, <Line: -        for (ObjectPropertyExpression prop : model.getDeclaredObjectProperties()) {
+>, <Line: -        for (DataPropertyExpression prop : model.getDeclaredDataProperties()) {
+>, <Line: -                    if (axiom.getTargetQuery() instanceof CQIE)
+>, <Line: -                    {
+>, <Line: -                        CQIE rule = (CQIE)axiom.getTargetQuery();
+>, <Line: -                        for (Function f: rule.getBody())
+>, <Line: -                        {
+>, <Line: -                            vocabulary.add(f.getFunctionSymbol());
+>, <Line: -                        }
+>, <Line: -                    }
+>, <Line: -		p.setCurrentValueOf(QuestPreferences.OPTIMIZE_TBOX_SIGMA, "true");
+>]

@@ -1,0 +1,13 @@
+[<Line: +import com.google.common.collect.ImmutableSet;
+>, <Line: +	final private ImmutableSet<T> members;
+>, <Line: +	public Equivalences(ImmutableSet<T> members) {
+>, <Line: +		this(members, null, false);
+>, <Line: +	public Equivalences(ImmutableSet<T> members, T representative, boolean isIndexed) {
+>, <Line: +		this.isIndexed = isIndexed;
+>]
+[<Line: -	final private Set<T> members;
+>, <Line: -	public Equivalences(Set<T> members) {
+>, <Line: -		this(members, null);
+>, <Line: -	public Equivalences(Set<T> members, T representative) {
+>, <Line: -		this.isIndexed = false;
+>]

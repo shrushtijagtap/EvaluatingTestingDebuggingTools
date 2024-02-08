@@ -1,0 +1,124 @@
+[<Line: +/* This file is part of the OWL API.
+>, <Line: + * The contents of this file are subject to the LGPL License, Version 3.0.
+>, <Line: + * Copyright 2014, The University of Manchester
+>, <Line: + * 
+>, <Line: + * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+>, <Line: + * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+>, <Line: + * You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
+>, <Line: + *
+>, <Line: + * Alternatively, the contents of this file may be used under the terms of the Apache License, Version 2.0 in which case, the provisions of the Apache License Version 2.0 are applicable instead of those above.
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+>, <Line: + * http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. */
+>, <Line: +package org.semanticweb.owlapi.api.test;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Collection;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.junit.runner.RunWith;
+>, <Line: +import org.junit.runners.Parameterized;
+>, <Line: +import org.semanticweb.owlapi.api.test.baseclasses.TestBase;
+>, <Line: +import org.semanticweb.owlapi.formats.ManchesterSyntaxDocumentFormat;
+>, <Line: +import org.semanticweb.owlapi.io.StringDocumentTarget;
+>, <Line: +import org.semanticweb.owlapi.model.IRI;
+>, <Line: +import org.semanticweb.owlapi.model.OWLAxiom;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+>, <Line: +import org.semanticweb.owlapi.model.OWLSubDataPropertyOfAxiom;
+>, <Line: +@SuppressWarnings({ "javadoc" })
+>, <Line: +@RunWith(Parameterized.class)
+>, <Line: +public class ManSyntaxTestCase extends TestBase {
+>, <Line: +    private final OWLAxiom object;
+>, <Line: +    public ManSyntaxTestCase(OWLAxiom object) {
+>, <Line: +        this.object = object;
+>, <Line: +    }
+>, <Line: +    @Parameterized.Parameters
+>, <Line: +    public static Collection<Object[]> getData() {
+>, <Line: +        Collection<Object[]> toReturn = new ArrayList<>();
+>, <Line: +        Builder b = new Builder();
+>, <Line: +        toReturn.add(new Object[] {b.ann()});
+>, <Line: +        toReturn.add(new Object[] {b.asymm()});
+>, <Line: +        toReturn.add(new Object[] {b.annDom()});
+>, <Line: +        toReturn.add(new Object[] {b.annRange()});
+>, <Line: +        toReturn.add(new Object[] {b.ass()});
+>, <Line: +        toReturn.add(new Object[] {b.assAnd()});
+>, <Line: +        toReturn.add(new Object[] {b.assOr()});
+>, <Line: +        toReturn.add(new Object[] {b.dRangeAnd()});
+>, <Line: +        toReturn.add(new Object[] {b.dRangeOr()});
+>, <Line: +        toReturn.add(new Object[] {b.assNot()});
+>, <Line: +        toReturn.add(new Object[] {b.assNotAnon()});
+>, <Line: +        toReturn.add(new Object[] {b.assSome()});
+>, <Line: +        toReturn.add(new Object[] {b.assAll()});
+>, <Line: +        toReturn.add(new Object[] {b.assHas()});
+>, <Line: +        toReturn.add(new Object[] {b.assMin()});
+>, <Line: +        toReturn.add(new Object[] {b.assMax()});
+>, <Line: +        toReturn.add(new Object[] {b.assEq()});
+>, <Line: +        toReturn.add(new Object[] {b.assHasSelf()});
+>, <Line: +        toReturn.add(new Object[] {b.assOneOf()});
+>, <Line: +        toReturn.add(new Object[] {b.assDSome()});
+>, <Line: +        toReturn.add(new Object[] {b.assDAll()});
+>, <Line: +        toReturn.add(new Object[] {b.assDHas()});
+>, <Line: +        toReturn.add(new Object[] {b.assDMin()});
+>, <Line: +        toReturn.add(new Object[] {b.assDMax()});
+>, <Line: +        toReturn.add(new Object[] {b.assDEq()});
+>, <Line: +        toReturn.add(new Object[] {b.dOneOf()});
+>, <Line: +        toReturn.add(new Object[] {b.dNot()});
+>, <Line: +        toReturn.add(new Object[] {b.dRangeRestrict()});
+>, <Line: +        toReturn.add(new Object[] {b.assD()});
+>, <Line: +        toReturn.add(new Object[] {b.assDPlain()});
+>, <Line: +        toReturn.add(new Object[] {b.dDom()});
+>, <Line: +        toReturn.add(new Object[] {b.dRange()});
+>, <Line: +        toReturn.add(new Object[] {b.dDef()});
+>, <Line: +        toReturn.add(new Object[] {b.decC()});
+>, <Line: +        toReturn.add(new Object[] {b.decOp()});
+>, <Line: +        toReturn.add(new Object[] {b.decDp()});
+>, <Line: +        toReturn.add(new Object[] {b.decDt()});
+>, <Line: +        toReturn.add(new Object[] {b.decAp()});
+>, <Line: +        toReturn.add(new Object[] {b.decI()});
+>, <Line: +        toReturn.add(new Object[] {b.assDi()});
+>, <Line: +        toReturn.add(new Object[] {b.dc()});
+>, <Line: +        toReturn.add(new Object[] {b.dDp()});
+>, <Line: +        toReturn.add(new Object[] {b.dOp()});
+>, <Line: +        toReturn.add(new Object[] {b.du()});
+>, <Line: +        toReturn.add(new Object[] {b.ec()});
+>, <Line: +        toReturn.add(new Object[] {b.eDp()});
+>, <Line: +        toReturn.add(new Object[] {b.eOp()});
+>, <Line: +        toReturn.add(new Object[] {b.fdp()});
+>, <Line: +        toReturn.add(new Object[] {b.fop()});
+>, <Line: +        toReturn.add(new Object[] {b.ifp()});
+>, <Line: +        toReturn.add(new Object[] {b.iop()});
+>, <Line: +        toReturn.add(new Object[] {b.irr()});
+>, <Line: +        toReturn.add(new Object[] {b.ndp()});
+>, <Line: +        toReturn.add(new Object[] {b.nop()});
+>, <Line: +        toReturn.add(new Object[] {b.opa()});
+>, <Line: +        toReturn.add(new Object[] {b.opaInv()});
+>, <Line: +        toReturn.add(new Object[] {b.opaInvj()});
+>, <Line: +        toReturn.add(new Object[] {b.oDom()});
+>, <Line: +        toReturn.add(new Object[] {b.oRange()});
+>, <Line: +        toReturn.add(new Object[] {b.chain()});
+>, <Line: +        toReturn.add(new Object[] {b.ref()});
+>, <Line: +        toReturn.add(new Object[] {b.same()});
+>, <Line: +        toReturn.add(new Object[] {b.subAnn()});
+>, <Line: +        toReturn.add(new Object[] {b.subClass()});
+>, <Line: +        toReturn.add(new Object[] {b.subData()});
+>, <Line: +        toReturn.add(new Object[] {b.subObject()});
+>, <Line: +        toReturn.add(new Object[] {b.rule()});
+>, <Line: +        toReturn.add(new Object[] {b.symm()});
+>, <Line: +        toReturn.add(new Object[] {b.trans()});
+>, <Line: +        toReturn.add(new Object[] {b.hasKey()});
+>, <Line: +        toReturn.add(new Object[] {b.bigRule()});
+>, <Line: +        return toReturn;
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void testAssertion() throws OWLOntologyCreationException, OWLOntologyStorageException {
+>, <Line: +        OWLOntology o=setupManager().createOntology(IRI.create("urn:test:manchester"));
+>, <Line: +        o.getOWLOntologyManager().addAxiom(o, object);
+>, <Line: +        StringDocumentTarget s = saveOntology(o, new ManchesterSyntaxDocumentFormat());
+>, <Line: +        if(object instanceof OWLSubDataPropertyOfAxiom) {
+>, <Line: +        System.out.println("ManSyntaxTestCase.testAssertion() "+saveOntology(o, new ManchesterSyntaxDocumentFormat()));
+>, <Line: +        }
+>, <Line: +        loadOntologyFromString(s);
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

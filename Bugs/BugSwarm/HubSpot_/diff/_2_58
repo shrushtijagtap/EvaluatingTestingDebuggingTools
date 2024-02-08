@@ -1,0 +1,33 @@
+[<Line: +import java.util.Map;
+>, <Line: +import java.util.concurrent.ScheduledExecutorService;
+>, <Line: +import java.util.concurrent.atomic.AtomicReference;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +import com.hubspot.baragon.data.BaragonAuthDatastore;
+>, <Line: +import com.hubspot.baragon.models.BaragonAuthKey;
+>, <Line: +import com.hubspot.baragon.service.listeners.AbstractLatchListener;
+>, <Line: +import io.dropwizard.lifecycle.Managed;
+>, <Line: +import org.apache.curator.framework.recipes.leader.LeaderLatch;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +  private final BaragonAuthDatastore authDatastore;
+>, <Line: +  private final AtomicReference<Map<String, BaragonAuthKey>> authKeys;
+>, <Line: +                        @Named(BaragonDataModule.BARAGON_AUTH_KEY_MAP) AtomicReference<Map<String, BaragonAuthKey>> authKeys,
+>, <Line: +                        BaragonConfiguration config,
+>, <Line: +                        BaragonAuthDatastore authDatastore) {
+>, <Line: +    this.authDatastore = authDatastore;
+>, <Line: +    this.authKeys = authKeys;
+>, <Line: +    if (config.getAuthConfiguration().getKey().isPresent() && config.getAuthConfiguration().isEnabled()) {
+>, <Line: +      if (!authDatastore.getAuthKeyInfo(config.getAuthConfiguration().getKey().get()).isPresent()) {
+>, <Line: +        authDatastore.addAuthKey(new BaragonAuthKey(config.getAuthConfiguration().getKey().get(), "baragon", System.currentTimeMillis(), Optional.<Long>absent()));
+>, <Line: +      }
+>, <Line: +      authKeys.set(authDatastore.getAuthKeyMap());
+>, <Line: +    }
+>]
+[<Line: -import com.hubspot.baragon.service.listeners.AbstractLatchListener;
+>, <Line: -import io.dropwizard.lifecycle.Managed;
+>, <Line: -import java.util.concurrent.ScheduledExecutorService;
+>, <Line: -import org.apache.curator.framework.recipes.leader.LeaderLatch;
+>, <Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -                        BaragonConfiguration config) {
+>]

@@ -1,0 +1,5 @@
+[<Line: +requires all { i in 0..|list| | list[i] >= 0 }
+>, <Line: +requires index >= 0 && index < |list|:
+>]
+[<Line: -requires all { l in list | l >= 0 } && ((index >= 0) && (index < |list|)):
+>]

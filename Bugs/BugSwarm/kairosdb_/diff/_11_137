@@ -1,0 +1,162 @@
+[<Line: +	baseUrl: 'app',
+>, <Line: +	urlArgs: 'bust=' + (new Date().getTime()),
+>, <Line: +	paths: {
+>, <Line: +		config: ['../config', '../config.sample'],
+>, <Line: +		settings: 'components/settings',
+>, <Line: +		kbn: 'components/kbn',
+>, <Line: +		store: 'components/store',
+>, <Line: +		css: '../vendor/require/css',
+>, <Line: +		text: '../vendor/require/text',
+>, <Line: +		moment: '../vendor/moment',
+>, <Line: +		filesaver: '../vendor/filesaver',
+>, <Line: +		angular: '../vendor/angular/angular',
+>, <Line: +		'angular-route': '../vendor/angular/angular-route',
+>, <Line: +		'angular-sanitize': '../vendor/angular/angular-sanitize',
+>, <Line: +		'angular-dragdrop': '../vendor/angular/angular-dragdrop',
+>, <Line: +		'angular-strap': '../vendor/angular/angular-strap',
+>, <Line: +		timepicker: '../vendor/angular/timepicker',
+>, <Line: +		datepicker: '../vendor/angular/datepicker',
+>, <Line: +		bindonce: '../vendor/angular/bindonce',
+>, <Line: +		crypto: '../vendor/crypto.min',
+>, <Line: +		spectrum: '../vendor/spectrum',
+>, <Line: +		lodash: 'components/lodash.extended',
+>, <Line: +		'lodash-src': '../vendor/lodash',
+>, <Line: +		bootstrap: '../vendor/bootstrap/bootstrap',
+>, <Line: +		jquery: '../vendor/jquery/jquery-2.1.1.min',
+>, <Line: +		'extend-jquery': 'components/extend-jquery',
+>, <Line: +		'jquery.flot': '../vendor/jquery/jquery.flot',
+>, <Line: +		'jquery.flot.pie': '../vendor/jquery/jquery.flot.pie',
+>, <Line: +		'jquery.flot.events': '../vendor/jquery/jquery.flot.events',
+>, <Line: +		'jquery.flot.selection': '../vendor/jquery/jquery.flot.selection',
+>, <Line: +		'jquery.flot.stack': '../vendor/jquery/jquery.flot.stack',
+>, <Line: +		'jquery.flot.stackpercent': '../vendor/jquery/jquery.flot.stackpercent',
+>, <Line: +		'jquery.flot.time': '../vendor/jquery/jquery.flot.time',
+>, <Line: +		'jquery.flot.crosshair': '../vendor/jquery/jquery.flot.crosshair',
+>, <Line: +		'jquery.flot.fillbelow': '../vendor/jquery/jquery.flot.fillbelow',
+>, <Line: +		modernizr: '../vendor/modernizr-2.6.1',
+>, <Line: +		'bootstrap-tagsinput': '../vendor/tagsinput/bootstrap-tagsinput',
+>, <Line: +	},
+>, <Line: +	shim: {
+>, <Line: +		spectrum: {
+>, <Line: +			deps: ['jquery']
+>, <Line: +		},
+>, <Line: +		crypto: {
+>, <Line: +			exports: 'Crypto'
+>, <Line: +		},
+>, <Line: +		angular: {
+>, <Line: +			deps: ['jquery', 'config'],
+>, <Line: +			exports: 'angular'
+>, <Line: +		},
+>, <Line: +		bootstrap: {
+>, <Line: +			deps: ['jquery']
+>, <Line: +		},
+>, <Line: +		modernizr: {
+>, <Line: +			exports: 'Modernizr'
+>, <Line: +		},
+>, <Line: +		jquery: {
+>, <Line: +			exports: 'jQuery'
+>, <Line: +		},
+>, <Line: +		// simple dependency declaration
+>, <Line: +		//
+>, <Line: +		'jquery.flot': ['jquery'],
+>, <Line: +		'jquery.flot.pie': ['jquery', 'jquery.flot'],
+>, <Line: +		'jquery.flot.events': ['jquery', 'jquery.flot'],
+>, <Line: +		'jquery.flot.selection': ['jquery', 'jquery.flot'],
+>, <Line: +		'jquery.flot.stack': ['jquery', 'jquery.flot'],
+>, <Line: +		'jquery.flot.stackpercent': ['jquery', 'jquery.flot'],
+>, <Line: +		'jquery.flot.time': ['jquery', 'jquery.flot'],
+>, <Line: +		'jquery.flot.crosshair': ['jquery', 'jquery.flot'],
+>, <Line: +		'jquery.flot.fillbelow': ['jquery', 'jquery.flot'],
+>, <Line: +		'angular-dragdrop': ['jquery', 'angular'],
+>, <Line: +		'angular-mocks': ['angular'],
+>, <Line: +		'angular-sanitize': ['angular'],
+>, <Line: +		'angular-route': ['angular'],
+>, <Line: +		'angular-strap': ['angular', 'bootstrap', 'timepicker', 'datepicker'],
+>, <Line: +		'bindonce': ['angular'],
+>, <Line: +		timepicker: ['jquery', 'bootstrap'],
+>, <Line: +		datepicker: ['jquery', 'bootstrap'],
+>, <Line: +		'bootstrap-tagsinput': ['jquery'],
+>, <Line: +	},
+>, <Line: +	waitSeconds: 60,
+>]
+[<Line: -  baseUrl: 'app',
+>, <Line: -  urlArgs: 'bust=' + (new Date().getTime()),
+>, <Line: -  paths: {
+>, <Line: -    config:                   ['../config', '../config.sample'],
+>, <Line: -    settings:                 'components/settings',
+>, <Line: -    kbn:                      'components/kbn',
+>, <Line: -    store:                    'components/store',
+>, <Line: -    css:                      '../vendor/require/css',
+>, <Line: -    text:                     '../vendor/require/text',
+>, <Line: -    moment:                   '../vendor/moment',
+>, <Line: -    filesaver:                '../vendor/filesaver',
+>, <Line: -    angular:                  '../vendor/angular/angular',
+>, <Line: -    'angular-route':          '../vendor/angular/angular-route',
+>, <Line: -    'angular-sanitize':       '../vendor/angular/angular-sanitize',
+>, <Line: -    'angular-dragdrop':       '../vendor/angular/angular-dragdrop',
+>, <Line: -    'angular-strap':          '../vendor/angular/angular-strap',
+>, <Line: -    timepicker:               '../vendor/angular/timepicker',
+>, <Line: -    datepicker:               '../vendor/angular/datepicker',
+>, <Line: -    bindonce:                 '../vendor/angular/bindonce',
+>, <Line: -    crypto:                   '../vendor/crypto.min',
+>, <Line: -    spectrum:                 '../vendor/spectrum',
+>, <Line: -    lodash:                   'components/lodash.extended',
+>, <Line: -    'lodash-src':             '../vendor/lodash',
+>, <Line: -    bootstrap:                '../vendor/bootstrap/bootstrap',
+>, <Line: -    jquery:                   '../vendor/jquery/jquery-2.1.1.min',
+>, <Line: -    'extend-jquery':          'components/extend-jquery',
+>, <Line: -    'jquery.flot':            '../vendor/jquery/jquery.flot',
+>, <Line: -    'jquery.flot.pie':        '../vendor/jquery/jquery.flot.pie',
+>, <Line: -    'jquery.flot.events':     '../vendor/jquery/jquery.flot.events',
+>, <Line: -    'jquery.flot.selection':  '../vendor/jquery/jquery.flot.selection',
+>, <Line: -    'jquery.flot.stack':      '../vendor/jquery/jquery.flot.stack',
+>, <Line: -    'jquery.flot.stackpercent':'../vendor/jquery/jquery.flot.stackpercent',
+>, <Line: -    'jquery.flot.time':       '../vendor/jquery/jquery.flot.time',
+>, <Line: -    'jquery.flot.crosshair':  '../vendor/jquery/jquery.flot.crosshair',
+>, <Line: -    'jquery.flot.fillbelow':  '../vendor/jquery/jquery.flot.fillbelow',
+>, <Line: -    modernizr:                '../vendor/modernizr-2.6.1',
+>, <Line: -    'bootstrap-tagsinput':    '../vendor/tagsinput/bootstrap-tagsinput',
+>, <Line: -  },
+>, <Line: -  shim: {
+>, <Line: -    spectrum: {
+>, <Line: -      deps: ['jquery']
+>, <Line: -    },
+>, <Line: -    crypto: {
+>, <Line: -      exports: 'Crypto'
+>, <Line: -    },
+>, <Line: -    angular: {
+>, <Line: -      deps: ['jquery','config'],
+>, <Line: -      exports: 'angular'
+>, <Line: -    },
+>, <Line: -    bootstrap: {
+>, <Line: -      deps: ['jquery']
+>, <Line: -    },
+>, <Line: -    modernizr: {
+>, <Line: -      exports: 'Modernizr'
+>, <Line: -    },
+>, <Line: -    jquery: {
+>, <Line: -      exports: 'jQuery'
+>, <Line: -    },
+>, <Line: -    // simple dependency declaration
+>, <Line: -    //
+>, <Line: -    'jquery.flot':          ['jquery'],
+>, <Line: -    'jquery.flot.pie':      ['jquery', 'jquery.flot'],
+>, <Line: -    'jquery.flot.events':   ['jquery', 'jquery.flot'],
+>, <Line: -    'jquery.flot.selection':['jquery', 'jquery.flot'],
+>, <Line: -    'jquery.flot.stack':    ['jquery', 'jquery.flot'],
+>, <Line: -    'jquery.flot.stackpercent':['jquery', 'jquery.flot'],
+>, <Line: -    'jquery.flot.time':     ['jquery', 'jquery.flot'],
+>, <Line: -    'jquery.flot.crosshair':['jquery', 'jquery.flot'],
+>, <Line: -    'jquery.flot.fillbelow':['jquery', 'jquery.flot'],
+>, <Line: -    'angular-dragdrop':     ['jquery', 'angular'],
+>, <Line: -    'angular-mocks':        ['angular'],
+>, <Line: -    'angular-sanitize':     ['angular'],
+>, <Line: -    'angular-route':        ['angular'],
+>, <Line: -    'angular-strap':        ['angular', 'bootstrap','timepicker', 'datepicker'],
+>, <Line: -    'bindonce':             ['angular'],
+>, <Line: -    timepicker:             ['jquery', 'bootstrap'],
+>, <Line: -    datepicker:             ['jquery', 'bootstrap'],
+>, <Line: -    'bootstrap-tagsinput':          ['jquery'],
+>, <Line: -  },
+>, <Line: -  waitSeconds: 60,
+>]

@@ -1,0 +1,10 @@
+[<Line: +                mantaKeyId, mantaTimeout, 6));
+>, <Line: +                                          Integer mantaTimeout,
+>, <Line: +                                          Integer retries) {
+>, <Line: +                .setTimeout(mantaTimeout)
+>, <Line: +                .setRetries(retries);
+>]
+[<Line: -                mantaKeyId, mantaTimeout));
+>, <Line: -                                          Integer mantaTimeout) {
+>, <Line: -                .setTimeout(mantaTimeout);
+>]

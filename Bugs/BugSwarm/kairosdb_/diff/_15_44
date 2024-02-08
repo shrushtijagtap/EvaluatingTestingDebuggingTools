@@ -1,0 +1,8 @@
+[<Line: +/**
+>, <Line: + This package contains interfaces that can be used as plugin entry points to
+>, <Line: + KairosDB.  In most cases you simply implement the appropriate interface and then
+>, <Line: + bind your class in a module.
+>, <Line: + */
+>, <Line: +package org.kairosdb.plugin;
+>]
+[]

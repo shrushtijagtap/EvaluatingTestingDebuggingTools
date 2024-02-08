@@ -1,0 +1,18 @@
+[<Line: +            availableTypes.put(TypeDescription.ForLoadedType.getName(type), type);
+>, <Line: +            preregisteredTypes.put(TypeDescription.ForLoadedType.getName(aType), aType);
+>, <Line: +                    classDefinitions.put(type, new ClassDefinition(type, classFileLocator.locate(TypeDescription.ForLoadedType.getName(type)).resolve()));
+>]
+[<Line: -            int anonymousLoaderIndex = type.getName().indexOf('/');
+>, <Line: -            availableTypes.put(anonymousLoaderIndex == -1
+>, <Line: -                    ? type.getName()
+>, <Line: -                    : type.getName().substring(0, anonymousLoaderIndex), type);
+>, <Line: -            String typeName = aType.getName();
+>, <Line: -            int anonymousLoaderIndex = typeName.indexOf('/');
+>, <Line: -            preregisteredTypes.put(anonymousLoaderIndex == -1
+>, <Line: -                    ? typeName
+>, <Line: -                    : typeName.substring(0, anonymousLoaderIndex), aType);
+>, <Line: -                    int anonymousLoaderIndex = type.getName().indexOf('/');
+>, <Line: -                    classDefinitions.put(type, new ClassDefinition(type, classFileLocator.locate(anonymousLoaderIndex == -1
+>, <Line: -                            ? type.getName()
+>, <Line: -                            : type.getName().substring(0, anonymousLoaderIndex)).resolve()));
+>]

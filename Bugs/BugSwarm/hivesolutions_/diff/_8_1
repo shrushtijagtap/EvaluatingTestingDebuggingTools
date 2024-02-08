@@ -1,0 +1,38 @@
+[<Line: +        if map: model = cls._resolve_all(model)
+>, <Line: +        if map: models = [cls._resolve_all(model) for model in models]
+>, <Line: +    @classmethod
+>, <Line: +    def _resolve_all(cls, model):
+>, <Line: +        definition = cls.definition()
+>, <Line: +        for name, value in legacy.eager(model.items()):
+>, <Line: +            if not name in definition: continue
+>, <Line: +            model[name] = cls._resolve(name, value)
+>, <Line: +        return model
+>, <Line: +    @classmethod
+>, <Line: +    def _resolve(cls, name, value, all = False):
+>, <Line: +        # verifies if the current value is an iterable one in case
+>, <Line: +        # it is runs the evaluate method for each of the values to
+>, <Line: +        # try to resolve them into the proper representation
+>, <Line: +        is_iterable = hasattr(value, "__iter__")
+>, <Line: +        is_iterable = is_iterable and not type(value) in ITERABLES
+>, <Line: +        if is_iterable: return [cls._resolve(name, value) for value in value]
+>, <Line: +        # verifies if the map value recursive approach should be used
+>, <Line: +        # for the element and if that's the case calls the proper method
+>, <Line: +        # otherwise uses the provided (raw value)
+>, <Line: +        if not hasattr(value, "map_v"): return value
+>, <Line: +        return value.map_v(resolve = True, all = all)
+>, <Line: +                model[name] = cls._resolve(name, value)
+>]
+[<Line: -                model[name] = self._resolve(name, value)
+>, <Line: -    def _resolve(self, name, value, all = False):
+>, <Line: -        # verifies if the current value is an iterable one in case
+>, <Line: -        # it is runs the evaluate method for each of the values to
+>, <Line: -        # try to resolve them into the proper representation
+>, <Line: -        is_iterable = hasattr(value, "__iter__")
+>, <Line: -        is_iterable = is_iterable and not type(value) in ITERABLES
+>, <Line: -        if is_iterable: return [self._resolve(name, value) for value in value]
+>, <Line: -        # verifies if the map value recursive approach should be used
+>, <Line: -        # for the element and if that's the case calls the proper method
+>, <Line: -        # otherwise uses the provided (raw value)
+>, <Line: -        if not hasattr(value, "map_v"): return value
+>, <Line: -        return value.map_v(resolve = True, all = all)
+>]

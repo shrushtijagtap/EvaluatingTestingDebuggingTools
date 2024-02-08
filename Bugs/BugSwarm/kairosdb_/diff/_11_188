@@ -1,0 +1,64 @@
+[<Line: +		'angular',
+>, <Line: +		'kbn',
+>, <Line: +	],
+>, <Line: +	function (angular, kbn) {
+>, <Line: +		'use strict';
+>, <Line: +		angular
+>, <Line: +			.module('grafana.services')
+>, <Line: +			.service('linkSrv', function (templateSrv, timeSrv) {
+>, <Line: +				this.getPanelLinkAnchorInfo = function (link) {
+>, <Line: +					var info = {};
+>, <Line: +					if (link.type === 'absolute') {
+>, <Line: +						info.target = '_blank';
+>, <Line: +						info.href = templateSrv.replace(link.url || '');
+>, <Line: +						info.title = templateSrv.replace(link.title || '');
+>, <Line: +						info.href += '?';
+>, <Line: +					}
+>, <Line: +					else {
+>, <Line: +						info.title = templateSrv.replace(link.title || '');
+>, <Line: +						var slug = kbn.slugifyForUrl(link.dashboard || '');
+>, <Line: +						info.href = '#dashboard/db/' + slug + '?';
+>, <Line: +					}
+>, <Line: +					var range = timeSrv.timeRangeForUrl();
+>, <Line: +					info.href += 'from=' + range.from;
+>, <Line: +					info.href += '&to=' + range.to;
+>, <Line: +					if (link.params) {
+>, <Line: +						info.href += "&" + templateSrv.replace(link.params);
+>, <Line: +					}
+>, <Line: +					return info;
+>, <Line: +				};
+>, <Line: +			});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'kbn',
+>, <Line: -],
+>, <Line: -function (angular, kbn) {
+>, <Line: -  'use strict';
+>, <Line: -  angular
+>, <Line: -    .module('grafana.services')
+>, <Line: -    .service('linkSrv', function(templateSrv, timeSrv) {
+>, <Line: -      this.getPanelLinkAnchorInfo = function(link) {
+>, <Line: -        var info = {};
+>, <Line: -        if (link.type === 'absolute') {
+>, <Line: -          info.target = '_blank';
+>, <Line: -          info.href = templateSrv.replace(link.url || '');
+>, <Line: -          info.title = templateSrv.replace(link.title || '');
+>, <Line: -          info.href += '?';
+>, <Line: -        }
+>, <Line: -        else {
+>, <Line: -          info.title = templateSrv.replace(link.title || '');
+>, <Line: -          var slug = kbn.slugifyForUrl(link.dashboard || '');
+>, <Line: -          info.href = '#dashboard/db/' + slug + '?';
+>, <Line: -        }
+>, <Line: -        var range = timeSrv.timeRangeForUrl();
+>, <Line: -        info.href += 'from=' + range.from;
+>, <Line: -        info.href += '&to=' + range.to;
+>, <Line: -        if (link.params) {
+>, <Line: -          info.href += "&" + templateSrv.replace(link.params);
+>, <Line: -        }
+>, <Line: -        return info;
+>, <Line: -      };
+>, <Line: -    });
+>, <Line: -});
+>]

@@ -1,0 +1,8 @@
+[]
+[<Line: -    parameterProviders:
+>, <Line: -       # manages legacy derived values
+>, <Line: -       - class: org.yamcs.derivedvalues.DerivedValuesManager
+>, <Line: -    parameterProviders:
+>, <Line: -       # manages legacy derived values
+>, <Line: -       - class: org.yamcs.derivedvalues.DerivedValuesManager
+>]

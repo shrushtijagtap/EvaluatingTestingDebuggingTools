@@ -1,0 +1,51 @@
+[<Line: +	 *            {@link Collection} of {@link GenotypeCalls} objects to perform the mode of inheritance check for in
+>, <Line: +	 *            case of non-recessive mode of inheritance
+>, <Line: +	 * @param recessiveCalls
+>, <Line: +	 * 			  {@link Collection} of {@link GenotypeCalls} objects to perform the mode of
+>, <Line: +	 *            inheritance check for in case of recessive mode of inheritance
+>, <Line: +			Collection<GenotypeCalls> calls, Collection<GenotypeCalls> recessiveCalls) throws IncompatiblePedigreeException {
+>, <Line: +		for (ModeOfInheritance mode : ModeOfInheritance.values()) {
+>, <Line: +			if (mode == ModeOfInheritance.ANY) {
+>, <Line: +			} else {
+>, <Line: +				if (mode == ModeOfInheritance.AUTOSOMAL_RECESSIVE || mode == ModeOfInheritance.X_RECESSIVE) {
+>, <Line: +					builder.put(mode, filterCompatibleRecords(recessiveCalls, mode));
+>, <Line: +				} else {
+>, <Line: +					builder.put(mode, filterCompatibleRecords(calls, mode));
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	public ImmutableMap<ModeOfInheritance, ImmutableList<GenotypeCalls>> checkMendelianInheritance(
+>, <Line: +			Collection<GenotypeCalls> calls) throws IncompatiblePedigreeException {
+>, <Line: +		return checkMendelianInheritance(calls, calls);
+>, <Line: +	}
+>, <Line: +	 * @param compHetRecessiveCalls
+>, <Line: +	 * 			  {@link Collection} of {@link GenotypeCalls} objects to perform the mode of
+>, <Line: +	 *            inheritance check for in case of compound het. recessive mode of inheritance
+>, <Line: +			Collection<GenotypeCalls> calls, Collection<GenotypeCalls> compHetRecessiveCalls) throws IncompatiblePedigreeException {
+>, <Line: +		for (SubModeOfInheritance mode : SubModeOfInheritance.values()) {
+>, <Line: +			if (mode == SubModeOfInheritance.ANY) {
+>, <Line: +			} else {
+>, <Line: +				if (mode == SubModeOfInheritance.AUTOSOMAL_RECESSIVE_COMP_HET || mode == SubModeOfInheritance.X_RECESSIVE_COMP_HET) {
+>, <Line: +					builder.put(mode, filterCompatibleRecordsSub(compHetRecessiveCalls, mode));
+>, <Line: +				} else {
+>, <Line: +					builder.put(mode, filterCompatibleRecordsSub(calls, mode));
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +	public ImmutableMap<SubModeOfInheritance, ImmutableList<GenotypeCalls>> checkMendelianInheritanceSub(
+>, <Line: +			Collection<GenotypeCalls> calls) throws IncompatiblePedigreeException {
+>, <Line: +		return checkMendelianInheritanceSub(calls, calls);
+>, <Line: +	}
+>]
+[<Line: -	 *            {@link Collection} of {@link GenotypeCalls} objects to perform the mode of inheritance check for
+>, <Line: -			Collection<GenotypeCalls> calls) throws IncompatiblePedigreeException {
+>, <Line: -		for (ModeOfInheritance mode : ModeOfInheritance.values())
+>, <Line: -			if (mode != ModeOfInheritance.ANY)
+>, <Line: -				builder.put(mode, filterCompatibleRecords(calls, mode));
+>, <Line: -			else
+>, <Line: -			Collection<GenotypeCalls> calls) throws IncompatiblePedigreeException {
+>, <Line: -		for (SubModeOfInheritance mode : SubModeOfInheritance.values())
+>, <Line: -			if (mode != SubModeOfInheritance.ANY)
+>, <Line: -				builder.put(mode, filterCompatibleRecordsSub(calls, mode));
+>, <Line: -			else
+>]

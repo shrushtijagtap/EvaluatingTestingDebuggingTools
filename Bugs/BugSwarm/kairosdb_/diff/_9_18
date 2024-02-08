@@ -1,0 +1,6 @@
+[<Line: +		//if (metricName.startsWith("kairosdb"))
+>, <Line: +		//	return; //Skip our own metrics.
+>]
+[<Line: -		if (metricName.startsWith("kairosdb"))
+>, <Line: -			return; //Skip our own metrics.
+>]

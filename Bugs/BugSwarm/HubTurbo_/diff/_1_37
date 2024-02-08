@@ -1,0 +1,67 @@
+[<Line: +package backend.resource;
+>, <Line: +import backend.resource.serialization.SerializableUser;
+>, <Line: +import javafx.scene.image.Image;
+>, <Line: +import org.eclipse.egit.github.core.User;
+>, <Line: +@SuppressWarnings("unused")
+>, <Line: +public class TurboUser {
+>, <Line: +	private void ______SERIALIZED_FIELDS______() {
+>, <Line: +	}
+>, <Line: +	private final String loginName;
+>, <Line: +	private final String realName;
+>, <Line: +	private final String avatarURL;
+>, <Line: +	private void ______TRANSIENT_FIELDS______() {
+>, <Line: +	}
+>, <Line: +	private final String repoId;
+>, <Line: +	private transient Image avatar = null;
+>, <Line: +	private void ______CONSTRUCTORS______() {
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Default constructor
+>, <Line: +	 */
+>, <Line: +	public TurboUser(String repoId, String loginName) {
+>, <Line: +		this.loginName = loginName;
+>, <Line: +		this.realName = "";
+>, <Line: +		this.avatarURL = "";
+>, <Line: +		this.repoId = repoId;
+>, <Line: +	}
+>, <Line: +	public TurboUser(String repoId, User user) {
+>, <Line: +		this.loginName = user.getLogin();
+>, <Line: +		this.realName = user.getName();
+>, <Line: +		this.avatarURL = user.getAvatarUrl();
+>, <Line: +		this.repoId = repoId;
+>, <Line: +	}
+>, <Line: +	public TurboUser(String repoId, SerializableUser user) {
+>, <Line: +		this.loginName = user.getLoginName();
+>, <Line: +		this.realName = user.getRealName();
+>, <Line: +		this.avatarURL = user.getAvatarURL();
+>, <Line: +		this.repoId = repoId;
+>, <Line: +	}
+>, <Line: +	private void ______METHODS______() {
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return loginName;
+>, <Line: +	}
+>, <Line: +	public Image getAvatar() {
+>, <Line: +		if (avatar == null) {
+>, <Line: +			avatar = new Image(avatarURL, 12, 12, true, true, true);
+>, <Line: +		}
+>, <Line: +		return avatar;
+>, <Line: +	}
+>, <Line: +	private void ______BOILERPLATE______() {
+>, <Line: +	}
+>, <Line: +	public String getRepoId() {
+>, <Line: +		return repoId;
+>, <Line: +	}
+>, <Line: +	public String getRealName() {
+>, <Line: +		return realName;
+>, <Line: +	}
+>, <Line: +	public String getLoginName() {
+>, <Line: +		return loginName;
+>, <Line: +	}
+>, <Line: +	public String getAvatarURL() {
+>, <Line: +		return avatarURL;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

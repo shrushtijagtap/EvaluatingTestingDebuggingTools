@@ -1,0 +1,6 @@
+[<Line: +        SegmentPool.recycle(head);
+>, <Line: +        return; // TODO(jwilson): do we have a dangling empty tail segment here?
+>]
+[<Line: -        SegmentPool.INSTANCE.recycle(head);
+>, <Line: -        return;
+>]

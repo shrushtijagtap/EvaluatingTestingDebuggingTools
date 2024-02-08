@@ -1,0 +1,17 @@
+[<Line: +                ids[i] = DefinedPacket.readVarInt( packet );
+>, <Line: +                int changedId = readId;
+>, <Line: +                    packet.setInt( position, changedId = newId );
+>, <Line: +                    packet.setInt( position, changedId = oldId );
+>, <Line: +                }
+>, <Line: +                if ( readId > 0 && changedId <= 0 )
+>, <Line: +                {
+>, <Line: +                    packet.writerIndex( packet.writerIndex() - 6 );
+>, <Line: +                } else if ( changedId > 0 && readId <= 0 )
+>, <Line: +                {
+>, <Line: +                    packet.ensureWritable( 6 );
+>, <Line: +                    packet.writerIndex( packet.writerIndex() + 6 );
+>]
+[<Line: -                ids[ i ] = DefinedPacket.readVarInt( packet );
+>, <Line: -                    packet.setInt( position, newId );
+>, <Line: -                    packet.setInt( position, oldId );
+>]

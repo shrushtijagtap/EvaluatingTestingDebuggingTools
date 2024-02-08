@@ -1,0 +1,505 @@
+[<Line: +var metricList = null;
+>, <Line: +module.controller('CreateController', ['$scope', '$modalInstance', 'KairosDBDatasource', 'rollup', CreateController]);
+>, <Line: +function CreateController($scope, $modalInstance, KairosDBDatasource, rollup) {
+>, <Line: +	$scope.DEFAULT_SAVE_AS = "Save As";
+>, <Line: +	$scope.DEFAULT_METRIC = "metric name";
+>, <Line: +	$scope.METRIC_NAME_LIST_MAX_LENGTH = 20;
+>, <Line: +	$scope.target = {};
+>, <Line: +	$scope.target.metric = "";
+>, <Line: +	$scope.target.downsampling = '(NONE)';
+>, <Line: +	$scope.errors = {};
+>, <Line: +	$scope.target.start_relative = {};
+>, <Line: +	$scope.target.save_as = $scope.DEFAULT_SAVE_AS;
+>, <Line: +	$scope.init = function () {
+>, <Line: +		$scope.target.start_relative_label = "1 hour";
+>, <Line: +		$scope.changeStartTime();
+>, <Line: +		if (rollup) {
+>, <Line: +			convertFromQueryToTarget(rollup);
+>, <Line: +		}
+>, <Line: +		if (!$scope.target.downsampling) {
+>, <Line: +			$scope.target.downsampling = 'avg';
+>, <Line: +		}
+>, <Line: +		$scope.errors = validateTarget($scope.target);
+>, <Line: +		$scope.updateMetricList(function () {
+>, <Line: +			$scope.suggestMetrics()
+>, <Line: +		});
+>, <Line: +	};
+>, <Line: +	$scope.targetBlur = function () {
+>, <Line: +		$scope.errors = validateTarget($scope.target);
+>, <Line: +		if (!_.isEqual($scope.oldTarget, $scope.target) && _.isEmpty($scope.errors)) {
+>, <Line: +			$scope.oldTarget = angular.copy($scope.target);
+>, <Line: +			$scope.suggestTagKeys();
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	$scope.relativeStartTimes = [
+>, <Line: +		"1 minute",
+>, <Line: +		"5 minutes",
+>, <Line: +		"10 minutes",
+>, <Line: +		"15 minutes",
+>, <Line: +		"20 minutes",
+>, <Line: +		"30 minutes",
+>, <Line: +		"1 hour",
+>, <Line: +		"6 hours",
+>, <Line: +		"1 day",
+>, <Line: +		"1 week"
+>, <Line: +	];
+>, <Line: +	$scope.changeStartTime = function () {
+>, <Line: +		$scope.target.start_relative = KairosDBDatasource.convertLongFormatToKairosUnit($scope.target.start_relative_label);
+>, <Line: +	};
+>, <Line: +	function convertFromQueryToTarget(rollup) {
+>, <Line: +		// Save As
+>, <Line: +		$scope.target.save_as = rollup.save_as;
+>, <Line: +		// Start Relative Time
+>, <Line: +		$scope.target.start_relative = rollup.query.start_relative;
+>, <Line: +		$scope.target.start_relative_label = KairosDBDatasource.convertKairosUnitToLongFormat($scope.target.start_relative);
+>, <Line: +		// Metric Name
+>, <Line: +		$scope.target.metric = rollup.query.metrics[0].name;
+>, <Line: +		// Aggregators
+>, <Line: +		var aggregators = rollup.query.metrics[0].aggregators;
+>, <Line: +		if (aggregators) {
+>, <Line: +			$scope.target.horizontalAggregators = [];
+>, <Line: +			_.each(aggregators, function (aggregator) {
+>, <Line: +				$scope.addHorizontalAggregatorMode = true;
+>, <Line: +				$scope.target.currentHorizontalAggregatorName = aggregator.name;
+>, <Line: +				$scope.setHorizontalAggregationInput();
+>, <Line: +				$scope.target.horAggregator = {};
+>, <Line: +				if (aggregator.hasOwnProperty('sampling')) {
+>, <Line: +					$scope.target.horAggregator.samplingRate = KairosDBDatasource.convertToShortTimeUnit(aggregator.sampling);
+>, <Line: +					$scope.target.horAggregator.alignStartTime = aggregator.align_start_time ? aggregator.align_start_time : false;
+>, <Line: +					$scope.target.horAggregator.alignSampling = aggregator.align_sampling ? aggregator.align_sampling : false;
+>, <Line: +				}
+>, <Line: +				if ($scope.hasUnit) {
+>, <Line: +					$scope.target.horAggregator.unit = aggregator.unit;
+>, <Line: +				}
+>, <Line: +				if ($scope.hasFactor) {
+>, <Line: +					if (aggregator.name == 'div')
+>, <Line: +						$scope.target.horAggregator.factor = aggregator.divisor;
+>, <Line: +					if (aggregator.name == 'scale')
+>, <Line: +						$scope.target.horAggregator.factor = aggregator.factor;
+>, <Line: +				}
+>, <Line: +				if ($scope.hasPercentile) {
+>, <Line: +					$scope.target.horAggregator.percentile = aggregator.percentile;
+>, <Line: +				}
+>, <Line: +				$scope.addHorizontalAggregator();
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +		// Tags
+>, <Line: +		var tags = rollup.query.metrics[0].tags;
+>, <Line: +		if (tags) {
+>, <Line: +			_.each(tags, function (value, key) {
+>, <Line: +				_.each(value, function (tagValue) {
+>, <Line: +					$scope.addFilterTagMode = true;
+>, <Line: +					$scope.target.currentTagKey = key;
+>, <Line: +					$scope.target.currentTagValue = tagValue;
+>, <Line: +					$scope.addFilterTag();
+>, <Line: +				});
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +		// Group By
+>, <Line: +		var groupBy = rollup.query.metrics[0].group_by;
+>, <Line: +		if (groupBy) {
+>, <Line: +			_.each(groupBy, function (group) {
+>, <Line: +				$scope.target.groupBy = {};
+>, <Line: +				$scope.target.currentGroupByType = group.name;
+>, <Line: +				if (group.name == "tag") {
+>, <Line: +					_.each(group.tags, function (tag) {
+>, <Line: +						$scope.addGroupByMode = true;
+>, <Line: +						$scope.isTagGroupBy = true;
+>, <Line: +						$scope.isTimeGroupBy = false;
+>, <Line: +						$scope.isValueGroupBy = false;
+>, <Line: +						$scope.target.groupBy.tagKey = tag;
+>, <Line: +						$scope.addGroupBy();
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					$scope.target.groupBy.name = group.name;
+>, <Line: +					if (group.name == "time") {
+>, <Line: +						$scope.addGroupByMode = true;
+>, <Line: +						$scope.isTagGroupBy = false;
+>, <Line: +						$scope.isTimeGroupBy = true;
+>, <Line: +						$scope.isValueGroupBy = false;
+>, <Line: +						$scope.target.groupBy.timeInterval = KairosDBDatasource.convertToShortTimeUnit(group.range_size);
+>, <Line: +						$scope.target.groupBy.groupCount = group.group_count;
+>, <Line: +					}
+>, <Line: +					if (group.name == "value") {
+>, <Line: +						$scope.addGroupByMode = true;
+>, <Line: +						$scope.isTagGroupBy = false;
+>, <Line: +						$scope.isTimeGroupBy = false;
+>, <Line: +						$scope.isValueGroupBy = true;
+>, <Line: +						$scope.target.groupBy.valueRange = group.range_size;
+>, <Line: +					}
+>, <Line: +					$scope.addGroupBy();
+>, <Line: +				}
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	$scope.getValues = function (object) {
+>, <Line: +		return _.values(object);
+>, <Line: +	};
+>, <Line: +	$scope.clearSaveAs = function () {
+>, <Line: +		if ($scope.isSaveAsEmptyOrDefault()) {
+>, <Line: +			$scope.target.save_as = ""
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	$scope.ok = function () {
+>, <Line: +		var result = {};
+>, <Line: +		result.save_as = $scope.target.save_as;
+>, <Line: +		result.query = {};
+>, <Line: +		result.query.start_relative = $scope.target.start_relative;
+>, <Line: +		result.query.metrics = [];
+>, <Line: +		var metric = KairosDBDatasource.convertTargetToQuery({}, $scope.target);
+>, <Line: +		result.query.metrics.push(metric);
+>, <Line: +		$modalInstance.close(result);
+>, <Line: +	};
+>, <Line: +	$scope.cancel = function () {
+>, <Line: +		$modalInstance.dismiss('cancel');
+>, <Line: +	};
+>, <Line: +	$scope.suggestSaveAs = function () {
+>, <Line: +		if (!$scope.isMetricOrDefault() && $scope.isSaveAsEmptyOrDefault()) {
+>, <Line: +			$scope.target.save_as = $scope.target.metric + "_rollup";
+>, <Line: +		}
+>, <Line: +		$scope.targetBlur();
+>, <Line: +	};
+>, <Line: +	$scope.hasErrors = function () {
+>, <Line: +		return !_.isEmpty($scope.errors);
+>, <Line: +	};
+>, <Line: +	$scope.isSaveAsEmptyOrDefault = function () {
+>, <Line: +		return !$scope.target.save_as || $scope.target.save_as == $scope.DEFAULT_SAVE_AS;
+>, <Line: +	};
+>, <Line: +	$scope.isMetricOrDefault = function () {
+>, <Line: +		return !$scope.target.metric || $scope.target.metric == $scope.DEFAULT_METRIC;
+>, <Line: +	};
+>, <Line: +	/**
+>, <Line: +	 * Set focus for dynamically create element
+>, <Line: +	 */
+>, <Line: +	module.directive('focus', function () {
+>, <Line: +		return function (scope, element, attr) {
+>, <Line: +			element[0].focus();
+>, <Line: +		};
+>, <Line: +	});
+>, <Line: +	//////////////////////////////
+>, <Line: +	// SUGGESTION QUERIES
+>, <Line: +	//////////////////////////////
+>, <Line: +	var escapeRegex = function (e) {
+>, <Line: +		return e.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
+>, <Line: +	};
+>, <Line: +	var semaphore = false;
+>, <Line: +	$scope.suggestMetrics = function () {
+>, <Line: +		if (semaphore) {
+>, <Line: +			return;
+>, <Line: +		}
+>, <Line: +		var matcher = new RegExp(escapeRegex($scope.target.metric), 'i');
+>, <Line: +		if (!metricList) {
+>, <Line: +			$scope.updateMetricList();
+>, <Line: +		}
+>, <Line: +		if (_.isEmpty($scope.target.metric)) {
+>, <Line: +			return metricList;
+>, <Line: +		}
+>, <Line: +		var sublist = new Array($scope.METRIC_NAME_LIST_MAX_LENGTH);
+>, <Line: +		var j = 0;
+>, <Line: +		for (var i = 0; i < metricList.length; i++) {
+>, <Line: +			if (matcher.test(metricList[i])) {
+>, <Line: +				sublist[j] = metricList[i];
+>, <Line: +				j++;
+>, <Line: +				if (j === $scope.METRIC_NAME_LIST_MAX_LENGTH - 1) {
+>, <Line: +					break;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return sublist.slice(0, j);
+>, <Line: +	};
+>, <Line: +	$scope.updateMetricList = function (callback) {
+>, <Line: +		$scope.metricListLoading = true;
+>, <Line: +		semaphore = true;
+>, <Line: +		metricList = [];
+>, <Line: +		KairosDBDatasource.performMetricSuggestQuery().then(function (series) {
+>, <Line: +			metricList = series;
+>, <Line: +			$scope.metricListLoading = false;
+>, <Line: +			semaphore = false;
+>, <Line: +			if (callback) {
+>, <Line: +				callback();
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +	};
+>, <Line: +	$scope.suggestTagKeys = function () {
+>, <Line: +		return KairosDBDatasource.performTagSuggestQuery($scope.target.metric, 'key', '');
+>, <Line: +	};
+>, <Line: +	$scope.suggestTagValues = function () {
+>, <Line: +		return KairosDBDatasource.performTagSuggestQuery($scope.target.metric, 'value', $scope.target.currentTagKey);
+>, <Line: +	};
+>, <Line: +	//////////////////////////////
+>, <Line: +	// FILTER by TAG
+>, <Line: +	//////////////////////////////
+>, <Line: +	$scope.addFilterTag = function () {
+>, <Line: +		if ($scope.addFilterTagMode) {
+>, <Line: +			if ($scope.target.tags) {
+>, <Line: +				$scope.validateFilterTag();
+>, <Line: +				if (!$scope.errors.tags) {
+>, <Line: +					if (!_.has($scope.target.tags, $scope.target.currentTagKey)) {
+>, <Line: +						$scope.target.tags[$scope.target.currentTagKey] = [];
+>, <Line: +					}
+>, <Line: +					if (!_.contains($scope.target.tags[$scope.target.currentTagKey], $scope.target.currentTagValue)) {
+>, <Line: +						$scope.target.tags[$scope.target.currentTagKey].push($scope.target.currentTagValue);
+>, <Line: +						$scope.targetBlur();
+>, <Line: +					}
+>, <Line: +					$scope.target.currentTagKey = '';
+>, <Line: +					$scope.target.currentTagValue = '';
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				$scope.target.tags = {};
+>, <Line: +				$scope.errors.tags = null;
+>, <Line: +			}
+>, <Line: +			$scope.addFilterTagMode = false;
+>, <Line: +		}
+>, <Line: +		else {
+>, <Line: +			$scope.addFilterTagMode = true;
+>, <Line: +			$scope.validateFilterTag();
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	$scope.removeFilterTag = function (key) {
+>, <Line: +		delete $scope.target.tags[key];
+>, <Line: +		if (_.size($scope.target.tags) === 0) {
+>, <Line: +			$scope.target.tags = null;
+>, <Line: +		}
+>, <Line: +		$scope.targetBlur();
+>, <Line: +	};
+>, <Line: +	$scope.validateFilterTag = function () {
+>, <Line: +		$scope.errors.tags = null;
+>, <Line: +		if (!$scope.target.currentTagKey || !$scope.target.currentTagValue) {
+>, <Line: +			$scope.errors.tags = "You must specify a tag name and value.";
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	//////////////////////////////
+>, <Line: +	// GROUP BY
+>, <Line: +	//////////////////////////////
+>, <Line: +	$scope.addGroupBy = function () {
+>, <Line: +		if (!$scope.addGroupByMode) {
+>, <Line: +			$scope.addGroupByMode = true;
+>, <Line: +			$scope.target.currentGroupByType = 'tag';
+>, <Line: +			$scope.isTagGroupBy = true;
+>, <Line: +			$scope.validateGroupBy();
+>, <Line: +			return;
+>, <Line: +		}
+>, <Line: +		$scope.validateGroupBy();
+>, <Line: +		// nb: if error is found, means that user clicked on cross : cancels input
+>, <Line: +		if (_.isEmpty($scope.errors.groupBy)) {
+>, <Line: +			if ($scope.isTagGroupBy) {
+>, <Line: +				if (!$scope.target.groupByTags) {
+>, <Line: +					$scope.target.groupByTags = [];
+>, <Line: +				}
+>, <Line: +				//console.log($scope.target.groupBy.tagKey);
+>, <Line: +				if (!_.contains($scope.target.groupByTags, $scope.target.groupBy.tagKey)) {
+>, <Line: +					$scope.target.groupByTags.push($scope.target.groupBy.tagKey);
+>, <Line: +					$scope.targetBlur();
+>, <Line: +				}
+>, <Line: +				$scope.target.groupBy.tagKey = '';
+>, <Line: +			}
+>, <Line: +			else {
+>, <Line: +				if (!$scope.target.nonTagGroupBys) {
+>, <Line: +					$scope.target.nonTagGroupBys = [];
+>, <Line: +				}
+>, <Line: +				var groupBy = {
+>, <Line: +					name: $scope.target.currentGroupByType
+>, <Line: +				};
+>, <Line: +				if ($scope.isValueGroupBy) {
+>, <Line: +					groupBy.range_size = $scope.target.groupBy.valueRange;
+>, <Line: +				}
+>, <Line: +				else if ($scope.isTimeGroupBy) {
+>, <Line: +					groupBy.range_size = $scope.target.groupBy.timeInterval;
+>, <Line: +					groupBy.group_count = $scope.target.groupBy.groupCount;
+>, <Line: +				}
+>, <Line: +				$scope.target.nonTagGroupBys.push(groupBy);
+>, <Line: +			}
+>, <Line: +			$scope.targetBlur();
+>, <Line: +		}
+>, <Line: +		$scope.isTagGroupBy = false;
+>, <Line: +		$scope.isValueGroupBy = false;
+>, <Line: +		$scope.isTimeGroupBy = false;
+>, <Line: +		$scope.addGroupByMode = false;
+>, <Line: +	};
+>, <Line: +	$scope.removeGroupByTag = function (index) {
+>, <Line: +		$scope.target.groupByTags.splice(index, 1);
+>, <Line: +		if (_.size($scope.target.groupByTags) === 0) {
+>, <Line: +			$scope.target.groupByTags = null;
+>, <Line: +		}
+>, <Line: +		$scope.targetBlur();
+>, <Line: +	};
+>, <Line: +	$scope.removeNonTagGroupBy = function (index) {
+>, <Line: +		$scope.target.nonTagGroupBys.splice(index, 1);
+>, <Line: +		if (_.size($scope.target.nonTagGroupBys) === 0) {
+>, <Line: +			$scope.target.nonTagGroupBys = null;
+>, <Line: +		}
+>, <Line: +		$scope.targetBlur();
+>, <Line: +	};
+>, <Line: +	$scope.changeGroupByInput = function () {
+>, <Line: +		$scope.isTagGroupBy = $scope.target.currentGroupByType === 'tag';
+>, <Line: +		$scope.isValueGroupBy = $scope.target.currentGroupByType === 'value';
+>, <Line: +		$scope.isTimeGroupBy = $scope.target.currentGroupByType === 'time';
+>, <Line: +		$scope.validateGroupBy();
+>, <Line: +	};
+>, <Line: +	$scope.validateGroupBy = function () {
+>, <Line: +		delete $scope.errors.groupBy;
+>, <Line: +		var errors = {};
+>, <Line: +		$scope.isGroupByValid = true;
+>, <Line: +		if ($scope.isTagGroupBy) {
+>, <Line: +			if (!$scope.target.groupBy.tagKey) {
+>, <Line: +				$scope.isGroupByValid = false;
+>, <Line: +				errors.tagKey = 'You must supply a tag name';
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		if ($scope.isValueGroupBy) {
+>, <Line: +			if (!$scope.target.groupBy.valueRange || !isInt($scope.target.groupBy.valueRange)) {
+>, <Line: +				errors.valueRange = "Range must be an integer";
+>, <Line: +				$scope.isGroupByValid = false;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		if ($scope.isTimeGroupBy) {
+>, <Line: +			try {
+>, <Line: +				KairosDBDatasource.convertToKairosInterval($scope.target.groupBy.timeInterval);
+>, <Line: +			} catch (err) {
+>, <Line: +				errors.timeInterval = err.message;
+>, <Line: +				$scope.isGroupByValid = false;
+>, <Line: +			}
+>, <Line: +			if (!$scope.target.groupBy.groupCount || !isInt($scope.target.groupBy.groupCount)) {
+>, <Line: +				errors.groupCount = "Group count must be an integer";
+>, <Line: +				$scope.isGroupByValid = false;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		if (!_.isEmpty(errors)) {
+>, <Line: +			$scope.errors.groupBy = errors;
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	function isInt(n) {
+>, <Line: +		return parseInt(n) % 1 === 0;
+>, <Line: +	}
+>, <Line: +	//////////////////////////////
+>, <Line: +	// AGGREGATION
+>, <Line: +	//////////////////////////////
+>, <Line: +	$scope.getAggregatorKeys = function (object) {
+>, <Line: +		return _.keys(_.omit(object, 'name'));
+>, <Line: +	};
+>, <Line: +	$scope.addHorizontalAggregator = function () {
+>, <Line: +		if (!$scope.addHorizontalAggregatorMode) {
+>, <Line: +			$scope.addHorizontalAggregatorMode = true;
+>, <Line: +			$scope.target.currentHorizontalAggregatorName = 'avg';
+>, <Line: +			$scope.hasSamplingRate = true;
+>, <Line: +			$scope.validateHorizontalAggregator();
+>, <Line: +			return;
+>, <Line: +		}
+>, <Line: +		$scope.validateHorizontalAggregator();
+>, <Line: +		// nb: if error is found, means that user clicked on cross : cancels input
+>, <Line: +		if (_.isEmpty($scope.errors.horAggregator)) {
+>, <Line: +			if (!$scope.target.horizontalAggregators) {
+>, <Line: +				$scope.target.horizontalAggregators = [];
+>, <Line: +			}
+>, <Line: +			var aggregator = {
+>, <Line: +				name: $scope.target.currentHorizontalAggregatorName
+>, <Line: +			};
+>, <Line: +			if ($scope.hasSamplingRate) {
+>, <Line: +				aggregator.sampling_rate = $scope.target.horAggregator.samplingRate;
+>, <Line: +				aggregator.align_start_time = $scope.target.horAggregator.alignStartTime;
+>, <Line: +				aggregator.align_sampling = $scope.target.horAggregator.alignSampling;
+>, <Line: +			}
+>, <Line: +			if ($scope.hasUnit) {
+>, <Line: +				aggregator.unit = $scope.target.horAggregator.unit;
+>, <Line: +			}
+>, <Line: +			if ($scope.hasFactor) {
+>, <Line: +				aggregator.factor = $scope.target.horAggregator.factor;
+>, <Line: +			}
+>, <Line: +			if ($scope.hasPercentile) {
+>, <Line: +				aggregator.percentile = $scope.target.horAggregator.percentile;
+>, <Line: +			}
+>, <Line: +			$scope.target.horizontalAggregators.push(aggregator);
+>, <Line: +			$scope.targetBlur();
+>, <Line: +		}
+>, <Line: +		$scope.addHorizontalAggregatorMode = false;
+>, <Line: +		$scope.hasSamplingRate = false;
+>, <Line: +		$scope.hasUnit = false;
+>, <Line: +		$scope.hasFactor = false;
+>, <Line: +		$scope.hasPercentile = false;
+>, <Line: +	};
+>, <Line: +	$scope.removeHorizontalAggregator = function (index) {
+>, <Line: +		$scope.target.horizontalAggregators.splice(index, 1);
+>, <Line: +		if (_.size($scope.target.horizontalAggregators) === 0) {
+>, <Line: +			$scope.target.horizontalAggregators = null;
+>, <Line: +		}
+>, <Line: +		$scope.targetBlur();
+>, <Line: +	};
+>, <Line: +	$scope.setHorizontalAggregationInput = function () {
+>, <Line: +		$scope.hasSamplingRate = _.contains(['avg', 'dev', 'max', 'min', 'sum', 'least_squares', 'count', 'percentile'],
+>, <Line: +			$scope.target.currentHorizontalAggregatorName);
+>, <Line: +		$scope.hasUnit = _.contains(['sampler', 'rate'], $scope.target.currentHorizontalAggregatorName);
+>, <Line: +		$scope.hasFactor = _.contains(['div', 'scale'], $scope.target.currentHorizontalAggregatorName);
+>, <Line: +		$scope.hasPercentile = 'percentile' === $scope.target.currentHorizontalAggregatorName;
+>, <Line: +	};
+>, <Line: +	$scope.changeHorAggregationInput = function () {
+>, <Line: +		$scope.setHorizontalAggregationInput();
+>, <Line: +		$scope.validateHorizontalAggregator();
+>, <Line: +	};
+>, <Line: +	$scope.validateHorizontalAggregator = function () {
+>, <Line: +		delete $scope.errors.horAggregator;
+>, <Line: +		var errors = {};
+>, <Line: +		$scope.isAggregatorValid = true;
+>, <Line: +		if ($scope.hasSamplingRate) {
+>, <Line: +			try {
+>, <Line: +				KairosDBDatasource.convertToKairosInterval($scope.target.horAggregator.samplingRate);
+>, <Line: +			} catch (err) {
+>, <Line: +				errors.samplingRate = err.message;
+>, <Line: +				$scope.isAggregatorValid = false;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		if ($scope.hasFactor) {
+>, <Line: +			if (!$scope.target.horAggregator.factor) {
+>, <Line: +				errors.factor = 'You must supply a numeric value for this aggregator';
+>, <Line: +				$scope.isAggregatorValid = false;
+>, <Line: +			}
+>, <Line: +			else if (parseInt($scope.target.horAggregator.factor) === 0 && $scope.target.currentHorizontalAggregatorName === 'div') {
+>, <Line: +				errors.factor = 'Cannot divide by 0';
+>, <Line: +				$scope.isAggregatorValid = false;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		if ($scope.hasPercentile) {
+>, <Line: +			if (!$scope.target.horAggregator.percentile ||
+>, <Line: +				$scope.target.horAggregator.percentile <= 0 ||
+>, <Line: +				$scope.target.horAggregator.percentile > 1) {
+>, <Line: +				errors.percentile = 'Percentile must be between 0 and 1';
+>, <Line: +				$scope.isAggregatorValid = false;
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		if (!_.isEmpty(errors)) {
+>, <Line: +			$scope.errors.horAggregator = errors;
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	//////////////////////////////
+>, <Line: +	// VALIDATION
+>, <Line: +	//////////////////////////////
+>, <Line: +	function validateTarget(target) {
+>, <Line: +		var errs = {};
+>, <Line: +		if (!target.metric) {
+>, <Line: +			errs.metric = "You must supply a metric name.";
+>, <Line: +		}
+>, <Line: +		if ($scope.isSaveAsEmptyOrDefault()) {
+>, <Line: +			errs.save_as = "You must supply a new metric name.";
+>, <Line: +		}
+>, <Line: +		try {
+>, <Line: +			if (target.sampling) {
+>, <Line: +				KairosDBDatasource.convertToKairosInterval(target.sampling);
+>, <Line: +			}
+>, <Line: +		} catch (err) {
+>, <Line: +			errs.sampling = err.message;
+>, <Line: +		}
+>, <Line: +		// verify that at least one aggregator is a sampling aggregator
+>, <Line: +		errs.aggregators = "At least one aggregator must be a sampling aggregator.";
+>, <Line: +		if (target.horizontalAggregators) {
+>, <Line: +			target.horizontalAggregators.forEach(function (aggregator) {
+>, <Line: +				if (aggregator.sampling_rate) {
+>, <Line: +					delete errs.aggregators;
+>, <Line: +				}
+>, <Line: +			});
+>, <Line: +		}
+>, <Line: +		return errs;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

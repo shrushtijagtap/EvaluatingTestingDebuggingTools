@@ -1,0 +1,9 @@
+[<Line: +		H2Datastore h2Datastore = new H2Datastore(DB_PATH, dataPointFactory);
+>, <Line: +		s_datastore = new KairosDatastore(h2Datastore,
+>, <Line: +				dataPointFactory, false);
+>, <Line: +		s_eventBus.register(h2Datastore);
+>]
+[<Line: -import org.kairosdb.core.DataPointListener;
+>, <Line: -		s_datastore = new KairosDatastore(new H2Datastore(DB_PATH, dataPointFactory),
+>, <Line: -				Collections.<DataPointListener>emptyList(), dataPointFactory, false);
+>]

@@ -1,0 +1,753 @@
+[<Line: +/*
+>, <Line: + * Copyright 2012 - 2017 Anton Tananaev (anton@traccar.org)
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *     http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package org.traccar.protocol;
+>, <Line: +import org.jboss.netty.buffer.ChannelBuffer;
+>, <Line: +import org.jboss.netty.channel.Channel;
+>, <Line: +import org.traccar.BaseProtocolDecoder;
+>, <Line: +import org.traccar.Context;
+>, <Line: +import org.traccar.DeviceSession;
+>, <Line: +import org.traccar.helper.BitUtil;
+>, <Line: +import org.traccar.helper.Parser;
+>, <Line: +import org.traccar.helper.PatternBuilder;
+>, <Line: +import org.traccar.helper.UnitsConverter;
+>, <Line: +import org.traccar.model.CellTower;
+>, <Line: +import org.traccar.model.Network;
+>, <Line: +import org.traccar.model.Position;
+>, <Line: +import org.traccar.model.WifiAccessPoint;
+>, <Line: +import java.net.SocketAddress;
+>, <Line: +import java.nio.charset.StandardCharsets;
+>, <Line: +import java.util.LinkedList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.regex.Matcher;
+>, <Line: +import java.util.regex.Pattern;
+>, <Line: +public class Gl200TextProtocolDecoder extends BaseProtocolDecoder {
+>, <Line: +    private boolean ignoreFixTime;
+>, <Line: +    public Gl200TextProtocolDecoder(Gl200Protocol protocol) {
+>, <Line: +        super(protocol);
+>, <Line: +        ignoreFixTime = Context.getConfig().getBoolean(getProtocolName() + ".ignoreFixTime");
+>, <Line: +    }
+>, <Line: +    private static final Pattern PATTERN_ACK = new PatternBuilder()
+>, <Line: +            .text("+ACK:GT")
+>, <Line: +            .expression("...,")                  // type
+>, <Line: +            .number("([0-9A-Z]{2}xxxx),")        // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .any().text(",")
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd),")             // time (hhmmss)
+>, <Line: +            .number("(xxxx)")                    // counter
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_INF = new PatternBuilder()
+>, <Line: +            .text("+").expression("(?:RESP|BUFF):GTINF,")
+>, <Line: +            .number("[0-9A-Z]{2}xxxx,")          // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .expression("(?:[0-9A-Z]{17},)?")    // vin
+>, <Line: +            .expression("(?:[^,]+)?,")           // device name
+>, <Line: +            .number("(xx),")                     // state
+>, <Line: +            .expression("(?:[0-9F]{20})?,")      // iccid
+>, <Line: +            .number("d{1,2},")
+>, <Line: +            .number("d{1,2},")
+>, <Line: +            .expression("[01],")                 // external power
+>, <Line: +            .number("([d.]+)?,")                 // odometer or external power
+>, <Line: +            .number("d*,")                       // backup battery or lightness
+>, <Line: +            .number("(d+.d+),")                  // battery
+>, <Line: +            .expression("([01]),")               // charging
+>, <Line: +            .number("(?:d),")                    // led
+>, <Line: +            .number("(?:d)?,")                   // gps on need
+>, <Line: +            .number("(?:d)?,")                   // gps antenna type
+>, <Line: +            .number("(?:d),").optional()         // gps antenna state
+>, <Line: +            .number("d{14},")                    // last fix time
+>, <Line: +            .groupBegin()
+>, <Line: +            .number("(d+),")                     // battery percentage
+>, <Line: +            .expression("[01]?,")                // flash type
+>, <Line: +            .number("(-?[d.]+)?,,,")             // temperature
+>, <Line: +            .or()
+>, <Line: +            .expression("(?:[01])?,").optional() // pin15 mode
+>, <Line: +            .number("(d+)?,")                    // adc1
+>, <Line: +            .number("(d+)?,").optional()         // adc2
+>, <Line: +            .number("(xx)?,")                    // digital input
+>, <Line: +            .number("(xx)?,")                    // digital output
+>, <Line: +            .number("[-+]dddd,")                 // timezone
+>, <Line: +            .expression("[01],")                 // daylight saving
+>, <Line: +            .groupEnd()
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd),")             // time (hhmmss)
+>, <Line: +            .number("(xxxx)")                    // counter
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_VER = new PatternBuilder()
+>, <Line: +            .text("+").expression("(?:RESP|BUFF):GTVER,")
+>, <Line: +            .number("[0-9A-Z]{2}xxxx,")          // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .expression("[^,]*,")                // device name
+>, <Line: +            .expression("([^,]*),")              // device type
+>, <Line: +            .number("(xxxx),")                   // firmware version
+>, <Line: +            .number("(xxxx),")                   // hardware version
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd),")             // time (hhmmss)
+>, <Line: +            .number("(xxxx)")                    // counter
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_LOCATION = new PatternBuilder()
+>, <Line: +            .number("(d{1,2})?,")                // hdop
+>, <Line: +            .number("(d{1,3}.d)?,")              // speed
+>, <Line: +            .number("(d{1,3})?,")                // course
+>, <Line: +            .number("(-?d{1,5}.d)?,")            // altitude
+>, <Line: +            .number("(-?d{1,3}.d{6})?,")         // longitude
+>, <Line: +            .number("(-?d{1,2}.d{6})?,")         // latitude
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)").optional(2)  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(d+)?,")                    // mcc
+>, <Line: +            .number("(d+)?,")                    // mnc
+>, <Line: +            .groupBegin()
+>, <Line: +            .number("(d+),")                     // lac
+>, <Line: +            .number("(d+),")                     // cid
+>, <Line: +            .or()
+>, <Line: +            .number("(x+)?,")                    // lac
+>, <Line: +            .number("(x+)?,")                    // cid
+>, <Line: +            .groupEnd()
+>, <Line: +            .number("(?:d+|(d+.d))?,")           // odometer
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_OBD = new PatternBuilder()
+>, <Line: +            .text("+RESP:GTOBD,")
+>, <Line: +            .number("[0-9A-Z]{2}xxxx,")          // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .expression("(?:[0-9A-Z]{17})?,")    // vin
+>, <Line: +            .expression("[^,]{0,20},")           // device name
+>, <Line: +            .expression("[01],")                 // report type
+>, <Line: +            .number("x{1,8},")                   // report mask
+>, <Line: +            .expression("(?:[0-9A-Z]{17})?,")    // vin
+>, <Line: +            .number("[01],")                     // obd connect
+>, <Line: +            .number("(?:d{1,5})?,")              // obd voltage
+>, <Line: +            .number("(?:x{8})?,")                // support pids
+>, <Line: +            .number("(d{1,5})?,")                // engine rpm
+>, <Line: +            .number("(d{1,3})?,")                // speed
+>, <Line: +            .number("(-?d{1,3})?,")              // coolant temp
+>, <Line: +            .number("(d+.?d*|Inf|NaN)?,")        // fuel consumption
+>, <Line: +            .number("(d{1,5})?,")                // dtcs cleared distance
+>, <Line: +            .number("(?:d{1,5})?,")
+>, <Line: +            .expression("([01])?,")              // obd connect
+>, <Line: +            .number("(d{1,3})?,")                // number of dtcs
+>, <Line: +            .number("(x*),")                     // dtcs
+>, <Line: +            .number("(d{1,3})?,")                // throttle
+>, <Line: +            .number("(?:d{1,3})?,")              // engine load
+>, <Line: +            .number("(d{1,3})?,")                // fuel level
+>, <Line: +            .expression("(?:[0-9A],)?")          // obd protocol
+>, <Line: +            .number("(d+),")                     // odometer
+>, <Line: +            .expression(PATTERN_LOCATION.pattern())
+>, <Line: +            .number("(d{1,7}.d)?,")              // odometer
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)").optional(2)  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(xxxx)")                    // count number
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_FRI = new PatternBuilder()
+>, <Line: +            .text("+").expression("(?:RESP|BUFF):GTFRI,")
+>, <Line: +            .number("(?:[0-9A-Z]{2}xxxx)?,")     // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .expression("(?:([0-9A-Z]{17}),)?")  // vin
+>, <Line: +            .expression("[^,]*,")                // device name
+>, <Line: +            .number("(d+)?,")                    // power
+>, <Line: +            .number("d{1,2},")                   // report type
+>, <Line: +            .number("d{1,2},")                   // count
+>, <Line: +            .expression("((?:")
+>, <Line: +            .expression(PATTERN_LOCATION.pattern())
+>, <Line: +            .expression(")+)")
+>, <Line: +            .groupBegin()
+>, <Line: +            .number("(d{1,7}.d)?,").optional()   // odometer
+>, <Line: +            .number("(d{1,3})?,")                // battery
+>, <Line: +            .or()
+>, <Line: +            .number("(d{1,7}.d)?,")              // odometer
+>, <Line: +            .number("(d{5}:dd:dd)?,")            // hour meter
+>, <Line: +            .number("(x+)?,")                    // adc 1
+>, <Line: +            .number("(x+)?,")                    // adc 2
+>, <Line: +            .number("(d{1,3})?,")                // battery
+>, <Line: +            .number("(?:(xx)(xx)(xx))?,")        // device status
+>, <Line: +            .number("(d+)?,")                    // rpm
+>, <Line: +            .number("(?:d+.?d*|Inf|NaN)?,")      // fuel consumption
+>, <Line: +            .number("(d+)?,")                    // fuel level
+>, <Line: +            .groupEnd()
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)").optional(2)  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(xxxx)")                    // count number
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_ERI = new PatternBuilder()
+>, <Line: +            .text("+").expression("(?:RESP|BUFF):GTERI,")
+>, <Line: +            .number("(?:[0-9A-Z]{2}xxxx)?,")     // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .expression("[^,]*,")                // device name
+>, <Line: +            .number("x{8},")                     // mask
+>, <Line: +            .number("(d+)?,")                    // power
+>, <Line: +            .number("d{1,2},")                   // report type
+>, <Line: +            .number("d{1,2},")                   // count
+>, <Line: +            .expression("((?:")
+>, <Line: +            .expression(PATTERN_LOCATION.pattern())
+>, <Line: +            .expression(")+)")
+>, <Line: +            .number("(d{1,7}.d)?,")              // odometer
+>, <Line: +            .number("(d{5}:dd:dd)?,")            // hour meter
+>, <Line: +            .number("(x+)?,")                    // adc 1
+>, <Line: +            .number("(x+)?,")                    // adc 2
+>, <Line: +            .number("(d{1,3})?,")                // battery
+>, <Line: +            .number("(?:(xx)(xx)(xx))?,")        // device status
+>, <Line: +            .expression("(.*)")                  // additional data
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)").optional(2)  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(xxxx)")                    // count number
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_IGN = new PatternBuilder()
+>, <Line: +            .text("+").expression("(?:RESP|BUFF):GTIG[NF],")
+>, <Line: +            .number("(?:[0-9A-Z]{2}xxxx)?,")     // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .expression("[^,]*,")                // device name
+>, <Line: +            .number("d+,")                       // ignition off duration
+>, <Line: +            .expression(PATTERN_LOCATION.pattern())
+>, <Line: +            .number("(d{5}:dd:dd)?,")            // hour meter
+>, <Line: +            .number("(d{1,7}.d)?,")              // odometer
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)").optional(2)  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(xxxx)")                    // count number
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_IDA = new PatternBuilder()
+>, <Line: +            .text("+RESP:GTIDA,")
+>, <Line: +            .number("(?:[0-9A-Z]{2}xxxx)?,")     // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .expression("[^,]*,,")               // device name
+>, <Line: +            .number("([^,]+),")                  // rfid
+>, <Line: +            .expression("[01],")                 // report type
+>, <Line: +            .number("1,")                        // count
+>, <Line: +            .expression(PATTERN_LOCATION.pattern())
+>, <Line: +            .number("(d+.d),")                   // odometer
+>, <Line: +            .text(",,,,")
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)").optional(2)  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(xxxx)")                    // count number
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_WIF = new PatternBuilder()
+>, <Line: +            .text("+RESP:GTWIF,")
+>, <Line: +            .number("(?:[0-9A-Z]{2}xxxx)?,")     // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .expression("[^,]*,")                // device name
+>, <Line: +            .number("(d+),")                     // count
+>, <Line: +            .number("((?:x{12},-?d+,,,,)+),,,,") // wifi
+>, <Line: +            .number("(d{1,3}),")                 // battery
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)").optional(2)  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(xxxx)")                    // count number
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_GSM = new PatternBuilder()
+>, <Line: +            .text("+RESP:GTGSM,")
+>, <Line: +            .number("(?:[0-9A-Z]{2}xxxx)?,")     // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .expression("(?:STR|CTN|NMR|RTL),")  // fix type
+>, <Line: +            .expression("(.*)")                  // cells
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)").optional(2)  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(xxxx)")                    // count number
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN = new PatternBuilder()
+>, <Line: +            .text("+").expression("(?:RESP|BUFF):GT...,")
+>, <Line: +            .number("(?:[0-9A-Z]{2}xxxx)?,")     // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .expression("[^,]*,")                // device name
+>, <Line: +            .number("d*,")
+>, <Line: +            .number("(d{1,2}),")                 // report type
+>, <Line: +            .number("d{1,2},")                   // count
+>, <Line: +            .expression(PATTERN_LOCATION.pattern())
+>, <Line: +            .groupBegin()
+>, <Line: +            .number("(d{1,7}.d)?,").optional()   // odometer
+>, <Line: +            .number("(d{1,3})?,")                // battery
+>, <Line: +            .or()
+>, <Line: +            .number("(d{1,7}.d)?,")              // odometer
+>, <Line: +            .groupEnd()
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)")  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(xxxx)")                    // count number
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private static final Pattern PATTERN_BASIC = new PatternBuilder()
+>, <Line: +            .text("+").expression("(?:RESP|BUFF)").text(":")
+>, <Line: +            .expression("GT...,")
+>, <Line: +            .number("(?:[0-9A-Z]{2}xxxx)?,").optional() // protocol version
+>, <Line: +            .number("(d{15}|x{14}),")            // imei
+>, <Line: +            .any()
+>, <Line: +            .number("(d{1,2})?,")                // hdop
+>, <Line: +            .number("(d{1,3}.d)?,")              // speed
+>, <Line: +            .number("(d{1,3})?,")                // course
+>, <Line: +            .number("(-?d{1,5}.d)?,")            // altitude
+>, <Line: +            .number("(-?d{1,3}.d{6})?,")         // longitude
+>, <Line: +            .number("(-?d{1,2}.d{6})?,")         // latitude
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)").optional(2)  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(d+),")                     // mcc
+>, <Line: +            .number("(d+),")                     // mnc
+>, <Line: +            .number("(x+),")                     // lac
+>, <Line: +            .number("(x+),").optional(4)         // cell
+>, <Line: +            .any()
+>, <Line: +            .number("(dddd)(dd)(dd)")            // date (yyyymmdd)
+>, <Line: +            .number("(dd)(dd)(dd)").optional(2)  // time (hhmmss)
+>, <Line: +            .text(",")
+>, <Line: +            .number("(xxxx)")                    // count number
+>, <Line: +            .text("$").optional()
+>, <Line: +            .compile();
+>, <Line: +    private Object decodeAck(Channel channel, SocketAddress remoteAddress, String sentence, String type) {
+>, <Line: +        Parser parser = new Parser(PATTERN_ACK, sentence);
+>, <Line: +        if (parser.matches()) {
+>, <Line: +            String protocolVersion = parser.next();
+>, <Line: +            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());
+>, <Line: +            if (deviceSession == null) {
+>, <Line: +                return null;
+>, <Line: +            }
+>, <Line: +            if (type.equals("HBD")) {
+>, <Line: +                if (channel != null) {
+>, <Line: +                    parser.skip(6);
+>, <Line: +                    channel.write("+SACK:GTHBD," + protocolVersion + "," + parser.next() + "$", remoteAddress);
+>, <Line: +                }
+>, <Line: +            } else {
+>, <Line: +                Position position = new Position();
+>, <Line: +                position.setProtocol(getProtocolName());
+>, <Line: +                position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: +                getLastLocation(position, parser.nextDateTime());
+>, <Line: +                position.setValid(false);
+>, <Line: +                position.set(Position.KEY_RESULT, "Command " + type + " accepted");
+>, <Line: +                return position;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +    private Position initPosition(Parser parser, Channel channel, SocketAddress remoteAddress) {
+>, <Line: +        if (parser.matches()) {
+>, <Line: +            DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());
+>, <Line: +            if (deviceSession != null) {
+>, <Line: +                Position position = new Position();
+>, <Line: +                position.setProtocol(getProtocolName());
+>, <Line: +                position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: +                return position;
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +    private void decodeDeviceTime(Position position, Parser parser) {
+>, <Line: +        if (parser.hasNext(6)) {
+>, <Line: +            if (ignoreFixTime) {
+>, <Line: +                position.setTime(parser.nextDateTime());
+>, <Line: +            } else {
+>, <Line: +                position.setDeviceTime(parser.nextDateTime());
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private Object decodeInf(Channel channel, SocketAddress remoteAddress, String sentence) {
+>, <Line: +        Parser parser = new Parser(PATTERN_INF, sentence);
+>, <Line: +        Position position = initPosition(parser, channel, remoteAddress);
+>, <Line: +        if (position == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        position.set(Position.KEY_STATUS, parser.next());
+>, <Line: +        parser.next(); // odometer or external power
+>, <Line: +        position.set(Position.KEY_BATTERY, parser.nextDouble(0));
+>, <Line: +        position.set(Position.KEY_CHARGE, parser.nextInt(0) == 1);
+>, <Line: +        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt());
+>, <Line: +        position.set(Position.PREFIX_TEMP + 1, parser.next());
+>, <Line: +        position.set(Position.PREFIX_ADC + 1, parser.next());
+>, <Line: +        position.set(Position.PREFIX_ADC + 2, parser.next());
+>, <Line: +        position.set(Position.KEY_INPUT, parser.next());
+>, <Line: +        position.set(Position.KEY_OUTPUT, parser.next());
+>, <Line: +        getLastLocation(position, parser.nextDateTime());
+>, <Line: +        position.set(Position.KEY_INDEX, parser.nextHexInt(0));
+>, <Line: +        return position;
+>, <Line: +    }
+>, <Line: +    private Object decodeVer(Channel channel, SocketAddress remoteAddress, String sentence) {
+>, <Line: +        Parser parser = new Parser(PATTERN_VER, sentence);
+>, <Line: +        Position position = initPosition(parser, channel, remoteAddress);
+>, <Line: +        if (position == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        position.set("deviceType", parser.next());
+>, <Line: +        position.set(Position.KEY_VERSION_FW, parser.nextHexInt(0));
+>, <Line: +        position.set(Position.KEY_VERSION_HW, parser.nextHexInt(0));
+>, <Line: +        getLastLocation(position, parser.nextDateTime());
+>, <Line: +        return position;
+>, <Line: +    }
+>, <Line: +    private void decodeLocation(Position position, Parser parser) {
+>, <Line: +        int hdop = parser.nextInt(0);
+>, <Line: +        position.setValid(hdop > 0);
+>, <Line: +        position.set(Position.KEY_HDOP, hdop);
+>, <Line: +        position.setSpeed(UnitsConverter.knotsFromKph(parser.nextDouble(0)));
+>, <Line: +        position.setCourse(parser.nextDouble(0));
+>, <Line: +        position.setAltitude(parser.nextDouble(0));
+>, <Line: +        if (parser.hasNext(8)) {
+>, <Line: +            position.setValid(true);
+>, <Line: +            position.setLongitude(parser.nextDouble(0));
+>, <Line: +            position.setLatitude(parser.nextDouble(0));
+>, <Line: +            position.setTime(parser.nextDateTime());
+>, <Line: +        } else {
+>, <Line: +            getLastLocation(position, null);
+>, <Line: +        }
+>, <Line: +        if (parser.hasNext(6)) {
+>, <Line: +            int mcc = parser.nextInt(0);
+>, <Line: +            int mnc = parser.nextInt(0);
+>, <Line: +            if (parser.hasNext(2)) {
+>, <Line: +                position.setNetwork(new Network(CellTower.from(mcc, mnc, parser.nextInt(0), parser.nextInt(0))));
+>, <Line: +            }
+>, <Line: +            if (parser.hasNext(2)) {
+>, <Line: +                position.setNetwork(new Network(CellTower.from(mcc, mnc, parser.nextHexInt(0), parser.nextHexInt(0))));
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        position.set(Position.KEY_ODOMETER, parser.nextDouble(0) * 1000);
+>, <Line: +    }
+>, <Line: +    private Object decodeObd(Channel channel, SocketAddress remoteAddress, String sentence) {
+>, <Line: +        Parser parser = new Parser(PATTERN_OBD, sentence);
+>, <Line: +        Position position = initPosition(parser, channel, remoteAddress);
+>, <Line: +        if (position == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        position.set(Position.KEY_RPM, parser.nextInt());
+>, <Line: +        position.set(Position.KEY_OBD_SPEED, parser.nextInt());
+>, <Line: +        position.set(Position.PREFIX_TEMP + 1, parser.nextInt());
+>, <Line: +        position.set(Position.KEY_FUEL_CONSUMPTION, parser.next());
+>, <Line: +        position.set("dtcsClearedDistance", parser.nextInt());
+>, <Line: +        position.set("odbConnect", parser.nextInt(0) == 1);
+>, <Line: +        position.set("dtcsNumber", parser.nextInt());
+>, <Line: +        position.set("dtcsCodes", parser.next());
+>, <Line: +        position.set(Position.KEY_THROTTLE, parser.nextInt());
+>, <Line: +        position.set(Position.KEY_FUEL_LEVEL, parser.nextInt());
+>, <Line: +        position.set(Position.KEY_OBD_ODOMETER, parser.nextInt(0) * 1000);
+>, <Line: +        decodeLocation(position, parser);
+>, <Line: +        position.set(Position.KEY_ODOMETER, parser.nextDouble(0) * 1000);
+>, <Line: +        decodeDeviceTime(position, parser);
+>, <Line: +        return position;
+>, <Line: +    }
+>, <Line: +    private void decodeStatus(Position position, Parser parser) {
+>, <Line: +        if (parser.hasNext(3)) {
+>, <Line: +            int ignition = parser.nextHexInt(0);
+>, <Line: +            if (BitUtil.check(ignition, 4)) {
+>, <Line: +                position.set(Position.KEY_IGNITION, false);
+>, <Line: +            } else if (BitUtil.check(ignition, 5)) {
+>, <Line: +                position.set(Position.KEY_IGNITION, true);
+>, <Line: +            }
+>, <Line: +            position.set(Position.KEY_INPUT, parser.nextHexInt(0));
+>, <Line: +            position.set(Position.KEY_OUTPUT, parser.nextHexInt(0));
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private Object decodeFri(Channel channel, SocketAddress remoteAddress, String sentence) {
+>, <Line: +        Parser parser = new Parser(PATTERN_FRI, sentence);
+>, <Line: +        if (!parser.matches()) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());
+>, <Line: +        if (deviceSession == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        LinkedList<Position> positions = new LinkedList<>();
+>, <Line: +        String vin = parser.next();
+>, <Line: +        int power = parser.nextInt(0);
+>, <Line: +        Parser itemParser = new Parser(PATTERN_LOCATION, parser.next());
+>, <Line: +        while (itemParser.find()) {
+>, <Line: +            Position position = new Position();
+>, <Line: +            position.setProtocol(getProtocolName());
+>, <Line: +            position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: +            position.set(Position.KEY_VIN, vin);
+>, <Line: +            decodeLocation(position, itemParser);
+>, <Line: +            positions.add(position);
+>, <Line: +        }
+>, <Line: +        Position position = positions.getLast();
+>, <Line: +        decodeLocation(position, parser);
+>, <Line: +        // power value only on some devices
+>, <Line: +        if (power > 10) {
+>, <Line: +            position.set(Position.KEY_POWER, power);
+>, <Line: +        }
+>, <Line: +        position.set(Position.KEY_ODOMETER, parser.nextDouble(0) * 1000);
+>, <Line: +        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt());
+>, <Line: +        position.set(Position.KEY_ODOMETER, parser.nextDouble(0) * 1000);
+>, <Line: +        position.set(Position.KEY_HOURS, parser.next());
+>, <Line: +        position.set(Position.PREFIX_ADC + 1, parser.next());
+>, <Line: +        position.set(Position.PREFIX_ADC + 2, parser.next());
+>, <Line: +        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt());
+>, <Line: +        decodeStatus(position, parser);
+>, <Line: +        position.set(Position.KEY_RPM, parser.nextInt());
+>, <Line: +        position.set(Position.KEY_FUEL_LEVEL, parser.nextInt());
+>, <Line: +        decodeDeviceTime(position, parser);
+>, <Line: +        return positions;
+>, <Line: +    }
+>, <Line: +    private Object decodeEri(Channel channel, SocketAddress remoteAddress, String sentence) {
+>, <Line: +        Parser parser = new Parser(PATTERN_ERI, sentence);
+>, <Line: +        if (!parser.matches()) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());
+>, <Line: +        if (deviceSession == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        LinkedList<Position> positions = new LinkedList<>();
+>, <Line: +        int power = parser.nextInt(0);
+>, <Line: +        Parser itemParser = new Parser(PATTERN_LOCATION, parser.next());
+>, <Line: +        while (itemParser.find()) {
+>, <Line: +            Position position = new Position();
+>, <Line: +            position.setProtocol(getProtocolName());
+>, <Line: +            position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: +            decodeLocation(position, itemParser);
+>, <Line: +            positions.add(position);
+>, <Line: +        }
+>, <Line: +        Position position = positions.getLast();
+>, <Line: +        decodeLocation(position, parser);
+>, <Line: +        position.set(Position.KEY_POWER, power);
+>, <Line: +        position.set(Position.KEY_ODOMETER, parser.nextDouble(0) * 1000);
+>, <Line: +        position.set(Position.KEY_HOURS, parser.next());
+>, <Line: +        position.set(Position.PREFIX_ADC + 1, parser.next());
+>, <Line: +        position.set(Position.PREFIX_ADC + 2, parser.next());
+>, <Line: +        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt());
+>, <Line: +        decodeStatus(position, parser);
+>, <Line: +        int index = 0;
+>, <Line: +        String[] data = parser.next().split(",");
+>, <Line: +        if (data.length > 1) {
+>, <Line: +            int deviceType = Integer.parseInt(data[index++]);
+>, <Line: +            if (deviceType == 2) {
+>, <Line: +                int deviceCount = Integer.parseInt(data[index++]);
+>, <Line: +                for (int i = 1; i <= deviceCount; i++) {
+>, <Line: +                    index++; // id
+>, <Line: +                    index++; // type
+>, <Line: +                    position.set(Position.PREFIX_TEMP + i, Short.parseShort(data[index++], 16) * 0.0625);
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        decodeDeviceTime(position, parser);
+>, <Line: +        return positions;
+>, <Line: +    }
+>, <Line: +    private Object decodeIgn(Channel channel, SocketAddress remoteAddress, String sentence) {
+>, <Line: +        Parser parser = new Parser(PATTERN_IGN, sentence);
+>, <Line: +        Position position = initPosition(parser, channel, remoteAddress);
+>, <Line: +        if (position == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        decodeLocation(position, parser);
+>, <Line: +        position.set(Position.KEY_HOURS, parser.next());
+>, <Line: +        position.set(Position.KEY_ODOMETER, parser.nextDouble(0) * 1000);
+>, <Line: +        decodeDeviceTime(position, parser);
+>, <Line: +        return position;
+>, <Line: +    }
+>, <Line: +    private Object decodeIda(Channel channel, SocketAddress remoteAddress, String sentence) {
+>, <Line: +        Parser parser = new Parser(PATTERN_IDA, sentence);
+>, <Line: +        Position position = initPosition(parser, channel, remoteAddress);
+>, <Line: +        if (position == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        position.set(Position.KEY_DRIVER_UNIQUE_ID, parser.next());
+>, <Line: +        decodeLocation(position, parser);
+>, <Line: +        position.set(Position.KEY_ODOMETER, parser.nextDouble(0) * 1000);
+>, <Line: +        decodeDeviceTime(position, parser);
+>, <Line: +        return position;
+>, <Line: +    }
+>, <Line: +    private Object decodeWif(Channel channel, SocketAddress remoteAddress, String sentence) {
+>, <Line: +        Parser parser = new Parser(PATTERN_WIF, sentence);
+>, <Line: +        Position position = initPosition(parser, channel, remoteAddress);
+>, <Line: +        if (position == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        getLastLocation(position, null);
+>, <Line: +        Network network = new Network();
+>, <Line: +        parser.nextInt(0); // count
+>, <Line: +        Matcher matcher = Pattern.compile("([0-9a-fA-F]{12}),(-?\\d+),,,,").matcher(parser.next());
+>, <Line: +        while (matcher.find()) {
+>, <Line: +            String mac = matcher.group(1).replaceAll("(..)", "$1:");
+>, <Line: +            network.addWifiAccessPoint(WifiAccessPoint.from(
+>, <Line: +                    mac.substring(0, mac.length() - 1), Integer.parseInt(matcher.group(2))));
+>, <Line: +        }
+>, <Line: +        position.setNetwork(network);
+>, <Line: +        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt(0));
+>, <Line: +        return position;
+>, <Line: +    }
+>, <Line: +    private Object decodeGsm(Channel channel, SocketAddress remoteAddress, String sentence) {
+>, <Line: +        Parser parser = new Parser(PATTERN_GSM, sentence);
+>, <Line: +        Position position = initPosition(parser, channel, remoteAddress);
+>, <Line: +        if (position == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        getLastLocation(position, null);
+>, <Line: +        Network network = new Network();
+>, <Line: +        String[] data = parser.next().split(",");
+>, <Line: +        for (int i = 0; i < 6; i++) {
+>, <Line: +            if (!data[i * 6].isEmpty()) {
+>, <Line: +                network.addCellTower(CellTower.from(
+>, <Line: +                        Integer.parseInt(data[i * 6]), Integer.parseInt(data[i * 6 + 1]),
+>, <Line: +                        Integer.parseInt(data[i * 6 + 2], 16), Integer.parseInt(data[i * 6 + 3], 16),
+>, <Line: +                        Integer.parseInt(data[i * 6 + 4])));
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        position.setNetwork(network);
+>, <Line: +        return position;
+>, <Line: +    }
+>, <Line: +    private Object decodeOther(Channel channel, SocketAddress remoteAddress, String sentence, String type) {
+>, <Line: +        Parser parser = new Parser(PATTERN, sentence);
+>, <Line: +        Position position = initPosition(parser, channel, remoteAddress);
+>, <Line: +        if (position == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        int reportType = parser.nextInt(0);
+>, <Line: +        if (type.equals("NMR")) {
+>, <Line: +            position.set(Position.KEY_MOTION, reportType == 1);
+>, <Line: +        } else if (type.equals("SOS")) {
+>, <Line: +            position.set(Position.KEY_ALARM, Position.ALARM_SOS);
+>, <Line: +        }
+>, <Line: +        decodeLocation(position, parser);
+>, <Line: +        position.set(Position.KEY_ODOMETER, parser.nextDouble(0) * 1000);
+>, <Line: +        position.set(Position.KEY_BATTERY_LEVEL, parser.nextInt(0));
+>, <Line: +        position.set(Position.KEY_ODOMETER, parser.nextDouble(0) * 1000);
+>, <Line: +        decodeDeviceTime(position, parser);
+>, <Line: +        if (Context.getConfig().getBoolean(getProtocolName() + ".ack") && channel != null) {
+>, <Line: +            channel.write("+SACK:" + parser.next() + "$", remoteAddress);
+>, <Line: +        }
+>, <Line: +        return position;
+>, <Line: +    }
+>, <Line: +    private Object decodeBasic(Channel channel, SocketAddress remoteAddress, String sentence, String type) {
+>, <Line: +        Parser parser = new Parser(PATTERN_BASIC, sentence);
+>, <Line: +        Position position = initPosition(parser, channel, remoteAddress);
+>, <Line: +        if (position == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        int hdop = parser.nextInt(0);
+>, <Line: +        position.setValid(hdop > 0);
+>, <Line: +        position.set(Position.KEY_HDOP, hdop);
+>, <Line: +        position.setSpeed(UnitsConverter.knotsFromKph(parser.nextDouble(0)));
+>, <Line: +        position.setCourse(parser.nextDouble(0));
+>, <Line: +        position.setAltitude(parser.nextDouble(0));
+>, <Line: +        if (parser.hasNext(2)) {
+>, <Line: +            position.setLongitude(parser.nextDouble(0));
+>, <Line: +            position.setLatitude(parser.nextDouble(0));
+>, <Line: +        } else {
+>, <Line: +            getLastLocation(position, null);
+>, <Line: +        }
+>, <Line: +        if (parser.hasNext(6)) {
+>, <Line: +            position.setTime(parser.nextDateTime());
+>, <Line: +        }
+>, <Line: +        if (parser.hasNext(4)) {
+>, <Line: +            position.setNetwork(new Network(CellTower.from(
+>, <Line: +                    parser.nextInt(0), parser.nextInt(0), parser.nextHexInt(0), parser.nextHexInt(0))));
+>, <Line: +        }
+>, <Line: +        decodeDeviceTime(position, parser);
+>, <Line: +        switch (type) {
+>, <Line: +            case "PNA":
+>, <Line: +                position.set(Position.KEY_ALARM, Position.ALARM_POWER_ON);
+>, <Line: +                break;
+>, <Line: +            case "PFA":
+>, <Line: +                position.set(Position.KEY_ALARM, Position.ALARM_POWER_OFF);
+>, <Line: +                break;
+>, <Line: +            case "EPN":
+>, <Line: +                position.set(Position.KEY_ALARM, Position.ALARM_POWER_RESTORED);
+>, <Line: +                break;
+>, <Line: +            case "EPF":
+>, <Line: +                position.set(Position.KEY_ALARM, Position.ALARM_POWER_CUT);
+>, <Line: +                break;
+>, <Line: +            case "BPL":
+>, <Line: +                position.set(Position.KEY_ALARM, Position.ALARM_LOW_BATTERY);
+>, <Line: +                break;
+>, <Line: +            case "STT":
+>, <Line: +                position.set(Position.KEY_ALARM, Position.ALARM_MOVEMENT);
+>, <Line: +                break;
+>, <Line: +            case "SWG":
+>, <Line: +                position.set(Position.KEY_ALARM, Position.ALARM_GEOFENCE);
+>, <Line: +                break;
+>, <Line: +            case "TMP":
+>, <Line: +            case "TEM":
+>, <Line: +                position.set(Position.KEY_ALARM, Position.ALARM_TEMPERATURE);
+>, <Line: +                break;
+>, <Line: +            case "JDR":
+>, <Line: +            case "JDS":
+>, <Line: +                position.set(Position.KEY_ALARM, Position.ALARM_JAMMING);
+>, <Line: +                break;
+>, <Line: +            default:
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        return position;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected Object decode(
+>, <Line: +            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+>, <Line: +        String sentence = ((ChannelBuffer) msg).toString(StandardCharsets.US_ASCII);
+>, <Line: +        int typeIndex = sentence.indexOf(":GT");
+>, <Line: +        if (typeIndex < 0) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        Object result;
+>, <Line: +        String type = sentence.substring(typeIndex + 3, typeIndex + 6);
+>, <Line: +        if (sentence.startsWith("+ACK")) {
+>, <Line: +            result = decodeAck(channel, remoteAddress, sentence, type);
+>, <Line: +        } else {
+>, <Line: +            switch (type) {
+>, <Line: +                case "INF":
+>, <Line: +                    result = decodeInf(channel, remoteAddress, sentence);
+>, <Line: +                    break;
+>, <Line: +                case "OBD":
+>, <Line: +                    result = decodeObd(channel, remoteAddress, sentence);
+>, <Line: +                    break;
+>, <Line: +                case "FRI":
+>, <Line: +                    result = decodeFri(channel, remoteAddress, sentence);
+>, <Line: +                    break;
+>, <Line: +                case "ERI":
+>, <Line: +                    result = decodeEri(channel, remoteAddress, sentence);
+>, <Line: +                    break;
+>, <Line: +                case "IGN":
+>, <Line: +                case "IGF":
+>, <Line: +                    result = decodeIgn(channel, remoteAddress, sentence);
+>, <Line: +                    break;
+>, <Line: +                case "IDA":
+>, <Line: +                    result = decodeIda(channel, remoteAddress, sentence);
+>, <Line: +                    break;
+>, <Line: +                case "WIF":
+>, <Line: +                    result = decodeWif(channel, remoteAddress, sentence);
+>, <Line: +                    break;
+>, <Line: +                case "GSM":
+>, <Line: +                    result = decodeGsm(channel, remoteAddress, sentence);
+>, <Line: +                    break;
+>, <Line: +                case "VER":
+>, <Line: +                    result = decodeVer(channel, remoteAddress, sentence);
+>, <Line: +                    break;
+>, <Line: +                default:
+>, <Line: +                    result = decodeOther(channel, remoteAddress, sentence, type);
+>, <Line: +                    break;
+>, <Line: +            }
+>, <Line: +            if (result == null) {
+>, <Line: +                result = decodeBasic(channel, remoteAddress, sentence, type);
+>, <Line: +            }
+>, <Line: +            if (result != null) {
+>, <Line: +                if (result instanceof Position) {
+>, <Line: +                    ((Position) result).set(Position.KEY_TYPE, type);
+>, <Line: +                } else {
+>, <Line: +                    for (Position p : (List<Position>) result) {
+>, <Line: +                        p.set(Position.KEY_TYPE, type);
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return result;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

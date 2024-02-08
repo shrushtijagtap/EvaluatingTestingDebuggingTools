@@ -1,0 +1,19 @@
+[<Line: +package org.kairosdb.rollup;
+>, <Line: +import org.kairosdb.core.exception.KairosDBException;
+>, <Line: +public class RollUpException extends KairosDBException
+>, <Line: +{
+>, <Line: +	public RollUpException(String message)
+>, <Line: +	{
+>, <Line: +		super(message);
+>, <Line: +	}
+>, <Line: +	public RollUpException(String message, Throwable cause)
+>, <Line: +	{
+>, <Line: +		super(message, cause);
+>, <Line: +	}
+>, <Line: +	public RollUpException(Throwable cause)
+>, <Line: +	{
+>, <Line: +		super(cause);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

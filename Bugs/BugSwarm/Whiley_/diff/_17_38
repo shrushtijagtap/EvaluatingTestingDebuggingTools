@@ -1,0 +1,13 @@
+[<Line: +    [fr6nat] ys = [0; |xs|]
+>, <Line: +    while i < |xs|
+>, <Line: +        where i >= 0
+>, <Line: +        where |xs| == |ys|:
+>, <Line: +        //
+>, <Line: +            ys[i] = xs[i]
+>, <Line: +    assume f(g(ys)) == [0, 0, 2, 2987, 2349872, 234987234987, 234987234987234]
+>]
+[<Line: -    [fr6nat] ys = []
+>, <Line: -    while i < |xs| where i >= 0:
+>, <Line: -            ys = ys ++ [xs[i]]
+>, <Line: -    assume f(g(ys)) == [2, 2987, 2349872, 234987234987, 234987234987234]
+>]

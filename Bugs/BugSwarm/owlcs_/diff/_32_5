@@ -1,0 +1,38 @@
+[<Line: +    protected static final Set<IRI> ALLOWED_DATATYPES = asUnorderedSet(
+>, <Line: +        OWL2Datatype.RL_DATATYPES.stream().map(i -> i.getIRI()));
+>, <Line: +            axiom.classExpressions().filter(ce -> !isOWL2RLEquivalentClassExpression(ce))
+>, <Line: +                .forEach(ce -> violations.add(new UseOfNonSubClassExpression(getCurrentOntology(), axiom, ce)));
+>, <Line: +            axiom.classExpressions().filter(ce -> !isOWL2RLEquivalentClassExpression(ce))
+>, <Line: +                .forEach(ce -> violations.add(new UseOfNonEquivalentClassExpression(getCurrentOntology(), axiom, ce)));
+>, <Line: +            return Boolean.valueOf(!ce.isOWLThing());
+>, <Line: +            return Boolean.valueOf(!ce.operands().anyMatch(op -> !isOWL2RLSubClassExpression(op)));
+>, <Line: +            return Boolean.valueOf(!ce.operands().anyMatch(op -> !isOWL2RLSubClassExpression(op)));
+>, <Line: +            return Boolean.valueOf(ce.getFiller().isOWLThing() || isOWL2RLSubClassExpression(ce.getFiller()));
+>, <Line: +            return Boolean.valueOf(!ce.isOWLThing());
+>, <Line: +            return Boolean.valueOf(!ce.operands().anyMatch(e -> !e.accept(this).booleanValue()));
+>, <Line: +            return Boolean.valueOf(isOWL2RLSubClassExpression(ce.getOperand()));
+>, <Line: +            return Boolean.valueOf((ce.getCardinality() == 0 || ce.getCardinality() == 1)
+>, <Line: +                && (ce.getFiller().isOWLThing() || isOWL2RLSubClassExpression(ce.getFiller())));
+>, <Line: +            return Boolean.valueOf(ce.getCardinality() == 0 || ce.getCardinality() == 1);
+>, <Line: +            return Boolean.valueOf(!ce.isOWLThing());
+>, <Line: +            return Boolean.valueOf(!ce.operands().anyMatch(e -> !e.accept(this).booleanValue()));
+>]
+[<Line: -    protected static final Set<IRI> ALLOWED_DATATYPES = asUnorderedSet(OWL2Datatype.RL_DATATYPES.stream().map(i -> i
+>, <Line: -        .getIRI()));
+>, <Line: -            axiom.classExpressions().filter(ce -> !isOWL2RLEquivalentClassExpression(ce)).forEach(ce -> violations.add(
+>, <Line: -                new UseOfNonSubClassExpression(getCurrentOntology(), axiom, ce)));
+>, <Line: -            axiom.classExpressions().filter(ce -> !isOWL2RLEquivalentClassExpression(ce)).forEach(
+>, <Line: -                ce -> violations.add(new UseOfNonEquivalentClassExpression(getCurrentOntology(), axiom, ce)));
+>, <Line: -            return !ce.isOWLThing();
+>, <Line: -            return !ce.operands().anyMatch(op -> !isOWL2RLSubClassExpression(op));
+>, <Line: -            return !ce.operands().anyMatch(op -> !isOWL2RLSubClassExpression(op));
+>, <Line: -            return ce.getFiller().isOWLThing() || isOWL2RLSubClassExpression(ce.getFiller());
+>, <Line: -            return !ce.isOWLThing();
+>, <Line: -            return !ce.operands().anyMatch(e -> !e.accept(this).booleanValue());
+>, <Line: -            return isOWL2RLSubClassExpression(ce.getOperand());
+>, <Line: -            return (ce.getCardinality() == 0 || ce.getCardinality() == 1)
+>, <Line: -                && (ce.getFiller().isOWLThing() || isOWL2RLSubClassExpression(ce.getFiller()));
+>, <Line: -            return ce.getCardinality() == 0 || ce.getCardinality() == 1;
+>, <Line: -            return !ce.isOWLThing();
+>, <Line: -            return !ce.operands().anyMatch(e -> !e.accept(this).booleanValue());
+>]

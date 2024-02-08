@@ -1,0 +1,335 @@
+[<Line: +/*
+>, <Line: +Copyright (c) 2011 Stanislav Vitvitskiy
+>, <Line: +Permission is hereby granted, free of charge, to any person obtaining a copy of this
+>, <Line: +software and associated documentation files (the "Software"), to deal in the Software
+>, <Line: +without restriction, including without limitation the rights to use, copy, modify,
+>, <Line: +merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+>, <Line: +permit persons to whom the Software is furnished to do so, subject to the following
+>, <Line: +conditions:
+>, <Line: +The above copyright notice and this permission notice shall be included in all copies or
+>, <Line: +substantial portions of the Software.
+>, <Line: +THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+>, <Line: +INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+>, <Line: +PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+>, <Line: +FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+>, <Line: +TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+>, <Line: +OR OTHER DEALINGS IN THE SOFTWARE.
+>, <Line: +*/
+>, <Line: +package org.mp4parser.streaming.input.h264.spspps;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.nio.ByteBuffer;
+>, <Line: +/**
+>, <Line: + * Sequence Parameter Set structure of h264 bitstream
+>, <Line: + * <p>
+>, <Line: + * capable to serialize and deserialize with CAVLC bitstream</p>
+>, <Line: + *
+>, <Line: + * @author Stanislav Vitvitskiy
+>, <Line: + */
+>, <Line: +public class SeqParameterSet {
+>, <Line: +    public int pic_order_cnt_type;
+>, <Line: +    public boolean field_pic_flag;
+>, <Line: +    public boolean delta_pic_order_always_zero_flag;
+>, <Line: +    public boolean weighted_pred_flag;
+>, <Line: +    public int weighted_bipred_idc;
+>, <Line: +    public boolean entropy_coding_mode_flag;
+>, <Line: +    public boolean mb_adaptive_frame_field_flag;
+>, <Line: +    public boolean direct_8x8_inference_flag;
+>, <Line: +    public ChromaFormat chroma_format_idc;
+>, <Line: +    public int log2_max_frame_num_minus4;
+>, <Line: +    public int log2_max_pic_order_cnt_lsb_minus4;
+>, <Line: +    public int pic_height_in_map_units_minus1;
+>, <Line: +    public int pic_width_in_mbs_minus1;
+>, <Line: +    public int bit_depth_luma_minus8;
+>, <Line: +    public int bit_depth_chroma_minus8;
+>, <Line: +    public boolean qpprime_y_zero_transform_bypass_flag;
+>, <Line: +    public int profile_idc;
+>, <Line: +    public long reserved_zero_2bits;
+>, <Line: +    public boolean constraint_set_0_flag;
+>, <Line: +    public boolean constraint_set_1_flag;
+>, <Line: +    public boolean constraint_set_2_flag;
+>, <Line: +    public boolean constraint_set_3_flag;
+>, <Line: +    public boolean constraint_set_4_flag;
+>, <Line: +    public boolean constraint_set_5_flag;
+>, <Line: +    public int level_idc;
+>, <Line: +    public int seq_parameter_set_id;
+>, <Line: +    public boolean residual_color_transform_flag;
+>, <Line: +    public int offset_for_non_ref_pic;
+>, <Line: +    public int offset_for_top_to_bottom_field;
+>, <Line: +    public int num_ref_frames;
+>, <Line: +    public boolean gaps_in_frame_num_value_allowed_flag;
+>, <Line: +    public boolean frame_mbs_only_flag;
+>, <Line: +    public boolean frame_cropping_flag;
+>, <Line: +    public int frame_crop_left_offset;
+>, <Line: +    public int frame_crop_right_offset;
+>, <Line: +    public int frame_crop_top_offset;
+>, <Line: +    public int frame_crop_bottom_offset;
+>, <Line: +    public int[] offsetForRefFrame;
+>, <Line: +    public VUIParameters vuiParams;
+>, <Line: +    public ScalingMatrix scalingMatrix;
+>, <Line: +    public int num_ref_frames_in_pic_order_cnt_cycle;
+>, <Line: +    public static SeqParameterSet read(ByteBuffer b) throws IOException {
+>, <Line: +        ByteBufferBitreader reader = new ByteBufferBitreader(b);
+>, <Line: +        SeqParameterSet sps = new SeqParameterSet();
+>, <Line: +        sps.profile_idc = (int) reader.readNBit(8);
+>, <Line: +        sps.constraint_set_0_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        sps.constraint_set_1_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        sps.constraint_set_2_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        sps.constraint_set_3_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        sps.constraint_set_4_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        sps.constraint_set_5_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        sps.reserved_zero_2bits = reader.readNBit(2);
+>, <Line: +        sps.level_idc = (int) reader.readNBit(8);
+>, <Line: +        sps.seq_parameter_set_id = reader.readUE();
+>, <Line: +        if (sps.profile_idc == 100 || sps.profile_idc == 110
+>, <Line: +                || sps.profile_idc == 122 || sps.profile_idc == 144) {
+>, <Line: +            sps.chroma_format_idc = ChromaFormat.fromId(reader
+>, <Line: +                    .readUE());
+>, <Line: +            if (sps.chroma_format_idc == ChromaFormat.YUV_444) {
+>, <Line: +                sps.residual_color_transform_flag = reader
+>, <Line: +                        .readBool();
+>, <Line: +            }
+>, <Line: +            sps.bit_depth_luma_minus8 = reader
+>, <Line: +                    .readUE();
+>, <Line: +            sps.bit_depth_chroma_minus8 = reader
+>, <Line: +                    .readUE();
+>, <Line: +            sps.qpprime_y_zero_transform_bypass_flag = reader
+>, <Line: +                    .readBool();
+>, <Line: +            boolean seqScalingMatrixPresent = reader
+>, <Line: +                    .readBool();
+>, <Line: +            if (seqScalingMatrixPresent) {
+>, <Line: +                readScalingListMatrix(reader, sps);
+>, <Line: +            }
+>, <Line: +        } else {
+>, <Line: +            sps.chroma_format_idc = ChromaFormat.YUV_420;
+>, <Line: +        }
+>, <Line: +        sps.log2_max_frame_num_minus4 = reader
+>, <Line: +                .readUE();
+>, <Line: +        sps.pic_order_cnt_type = reader.readUE();
+>, <Line: +        if (sps.pic_order_cnt_type == 0) {
+>, <Line: +            sps.log2_max_pic_order_cnt_lsb_minus4 = reader
+>, <Line: +                    .readUE();
+>, <Line: +        } else if (sps.pic_order_cnt_type == 1) {
+>, <Line: +            sps.delta_pic_order_always_zero_flag = reader
+>, <Line: +                    .readBool();
+>, <Line: +            sps.offset_for_non_ref_pic = reader
+>, <Line: +                    .readSE();
+>, <Line: +            sps.offset_for_top_to_bottom_field = reader
+>, <Line: +                    .readSE();
+>, <Line: +            sps.num_ref_frames_in_pic_order_cnt_cycle = reader
+>, <Line: +                    .readUE();
+>, <Line: +            sps.offsetForRefFrame = new int[sps.num_ref_frames_in_pic_order_cnt_cycle];
+>, <Line: +            for (int i = 0; i < sps.num_ref_frames_in_pic_order_cnt_cycle; i++) {
+>, <Line: +                sps.offsetForRefFrame[i] = reader
+>, <Line: +                        .readSE();
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        sps.num_ref_frames = reader.readUE();
+>, <Line: +        sps.gaps_in_frame_num_value_allowed_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        sps.pic_width_in_mbs_minus1 = reader
+>, <Line: +                .readUE();
+>, <Line: +        sps.pic_height_in_map_units_minus1 = reader
+>, <Line: +                .readUE();
+>, <Line: +        sps.frame_mbs_only_flag = reader.readBool();
+>, <Line: +        if (!sps.frame_mbs_only_flag) {
+>, <Line: +            sps.mb_adaptive_frame_field_flag = reader
+>, <Line: +                    .readBool();
+>, <Line: +        }
+>, <Line: +        sps.direct_8x8_inference_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        sps.frame_cropping_flag = reader.readBool();
+>, <Line: +        if (sps.frame_cropping_flag) {
+>, <Line: +            sps.frame_crop_left_offset = reader
+>, <Line: +                    .readUE();
+>, <Line: +            sps.frame_crop_right_offset = reader
+>, <Line: +                    .readUE();
+>, <Line: +            sps.frame_crop_top_offset = reader
+>, <Line: +                    .readUE();
+>, <Line: +            sps.frame_crop_bottom_offset = reader
+>, <Line: +                    .readUE();
+>, <Line: +        }
+>, <Line: +        boolean vui_parameters_present_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        if (vui_parameters_present_flag)
+>, <Line: +            sps.vuiParams = ReadVUIParameters(reader);
+>, <Line: +        // reader.readTrailingBits();
+>, <Line: +        return sps;
+>, <Line: +    }
+>, <Line: +    private static void readScalingListMatrix(ByteBufferBitreader reader,
+>, <Line: +                                              SeqParameterSet sps) throws IOException {
+>, <Line: +        sps.scalingMatrix = new ScalingMatrix();
+>, <Line: +        for (int i = 0; i < 8; i++) {
+>, <Line: +            boolean seqScalingListPresentFlag = reader
+>, <Line: +                    .readBool();
+>, <Line: +            if (seqScalingListPresentFlag) {
+>, <Line: +                sps.scalingMatrix.ScalingList4x4 = new ScalingList[8];
+>, <Line: +                sps.scalingMatrix.ScalingList8x8 = new ScalingList[8];
+>, <Line: +                if (i < 6) {
+>, <Line: +                    sps.scalingMatrix.ScalingList4x4[i] = ScalingList.read(
+>, <Line: +                            reader, 16);
+>, <Line: +                } else {
+>, <Line: +                    sps.scalingMatrix.ScalingList8x8[i - 6] = ScalingList.read(
+>, <Line: +                            reader, 64);
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    private static VUIParameters ReadVUIParameters(ByteBufferBitreader reader)
+>, <Line: +            throws IOException {
+>, <Line: +        VUIParameters vuip = new VUIParameters();
+>, <Line: +        vuip.aspect_ratio_info_present_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        if (vuip.aspect_ratio_info_present_flag) {
+>, <Line: +            vuip.aspect_ratio = AspectRatio.fromValue((int) reader.readNBit(8));
+>, <Line: +            if (vuip.aspect_ratio == AspectRatio.Extended_SAR) {
+>, <Line: +                vuip.sar_width = (int) reader.readNBit(16);
+>, <Line: +                vuip.sar_height = (int) reader.readNBit(16);
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        vuip.overscan_info_present_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        if (vuip.overscan_info_present_flag) {
+>, <Line: +            vuip.overscan_appropriate_flag = reader
+>, <Line: +                    .readBool();
+>, <Line: +        }
+>, <Line: +        vuip.video_signal_type_present_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        if (vuip.video_signal_type_present_flag) {
+>, <Line: +            vuip.video_format = (int) reader.readNBit(3);
+>, <Line: +            vuip.video_full_range_flag = reader
+>, <Line: +                    .readBool();
+>, <Line: +            vuip.colour_description_present_flag = reader
+>, <Line: +                    .readBool();
+>, <Line: +            if (vuip.colour_description_present_flag) {
+>, <Line: +                vuip.colour_primaries = (int) reader.readNBit(8);
+>, <Line: +                vuip.transfer_characteristics = (int) reader.readNBit(8);
+>, <Line: +                vuip.matrix_coefficients = (int) reader.readNBit(8);
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        vuip.chroma_loc_info_present_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        if (vuip.chroma_loc_info_present_flag) {
+>, <Line: +            vuip.chroma_sample_loc_type_top_field = reader
+>, <Line: +                    .readUE();
+>, <Line: +            vuip.chroma_sample_loc_type_bottom_field = reader
+>, <Line: +                    .readUE();
+>, <Line: +        }
+>, <Line: +        vuip.timing_info_present_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        if (vuip.timing_info_present_flag) {
+>, <Line: +            vuip.num_units_in_tick = (int) reader.readNBit(32);
+>, <Line: +            vuip.time_scale = (int) reader.readNBit(32);
+>, <Line: +            vuip.fixed_frame_rate_flag = reader
+>, <Line: +                    .readBool();
+>, <Line: +        }
+>, <Line: +        boolean nal_hrd_parameters_present_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        if (nal_hrd_parameters_present_flag)
+>, <Line: +            vuip.nalHRDParams = readHRDParameters(reader);
+>, <Line: +        boolean vcl_hrd_parameters_present_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        if (vcl_hrd_parameters_present_flag)
+>, <Line: +            vuip.vclHRDParams = readHRDParameters(reader);
+>, <Line: +        if (nal_hrd_parameters_present_flag || vcl_hrd_parameters_present_flag) {
+>, <Line: +            vuip.low_delay_hrd_flag = reader
+>, <Line: +                    .readBool();
+>, <Line: +        }
+>, <Line: +        vuip.pic_struct_present_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        boolean bitstream_restriction_flag = reader
+>, <Line: +                .readBool();
+>, <Line: +        if (bitstream_restriction_flag) {
+>, <Line: +            vuip.bitstreamRestriction = new VUIParameters.BitstreamRestriction();
+>, <Line: +            vuip.bitstreamRestriction.motion_vectors_over_pic_boundaries_flag = reader
+>, <Line: +                    .readBool();
+>, <Line: +            vuip.bitstreamRestriction.max_bytes_per_pic_denom = reader
+>, <Line: +                    .readUE();
+>, <Line: +            vuip.bitstreamRestriction.max_bits_per_mb_denom = reader
+>, <Line: +                    .readUE();
+>, <Line: +            vuip.bitstreamRestriction.log2_max_mv_length_horizontal = reader
+>, <Line: +                    .readUE();
+>, <Line: +            vuip.bitstreamRestriction.log2_max_mv_length_vertical = reader
+>, <Line: +                    .readUE();
+>, <Line: +            vuip.bitstreamRestriction.num_reorder_frames = reader
+>, <Line: +                    .readUE();
+>, <Line: +            vuip.bitstreamRestriction.max_dec_frame_buffering = reader
+>, <Line: +                    .readUE();
+>, <Line: +        }
+>, <Line: +        return vuip;
+>, <Line: +    }
+>, <Line: +    private static HRDParameters readHRDParameters(ByteBufferBitreader reader)
+>, <Line: +            throws IOException {
+>, <Line: +        HRDParameters hrd = new HRDParameters();
+>, <Line: +        hrd.cpb_cnt_minus1 = reader.readUE();
+>, <Line: +        hrd.bit_rate_scale = (int) reader.readNBit(4);
+>, <Line: +        hrd.cpb_size_scale = (int) reader.readNBit(4);
+>, <Line: +        hrd.bit_rate_value_minus1 = new int[hrd.cpb_cnt_minus1 + 1];
+>, <Line: +        hrd.cpb_size_value_minus1 = new int[hrd.cpb_cnt_minus1 + 1];
+>, <Line: +        hrd.cbr_flag = new boolean[hrd.cpb_cnt_minus1 + 1];
+>, <Line: +        for (int SchedSelIdx = 0; SchedSelIdx <= hrd.cpb_cnt_minus1; SchedSelIdx++) {
+>, <Line: +            hrd.bit_rate_value_minus1[SchedSelIdx] = reader
+>, <Line: +                    .readUE();
+>, <Line: +            hrd.cpb_size_value_minus1[SchedSelIdx] = reader
+>, <Line: +                    .readUE();
+>, <Line: +            hrd.cbr_flag[SchedSelIdx] = reader.readBool();
+>, <Line: +        }
+>, <Line: +        hrd.initial_cpb_removal_delay_length_minus1 = (int) reader.readNBit(5);
+>, <Line: +        hrd.cpb_removal_delay_length_minus1 = (int) reader.readNBit(5);
+>, <Line: +        hrd.dpb_output_delay_length_minus1 = (int) reader.readNBit(5);
+>, <Line: +        hrd.time_offset_length = (int) reader.readNBit(5);
+>, <Line: +        return hrd;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "SeqParameterSet{ " +
+>, <Line: +                "\n        pic_order_cnt_type=" + pic_order_cnt_type +
+>, <Line: +                ", \n        field_pic_flag=" + field_pic_flag +
+>, <Line: +                ", \n        delta_pic_order_always_zero_flag=" + delta_pic_order_always_zero_flag +
+>, <Line: +                ", \n        weighted_pred_flag=" + weighted_pred_flag +
+>, <Line: +                ", \n        weighted_bipred_idc=" + weighted_bipred_idc +
+>, <Line: +                ", \n        entropy_coding_mode_flag=" + entropy_coding_mode_flag +
+>, <Line: +                ", \n        mb_adaptive_frame_field_flag=" + mb_adaptive_frame_field_flag +
+>, <Line: +                ", \n        direct_8x8_inference_flag=" + direct_8x8_inference_flag +
+>, <Line: +                ", \n        chroma_format_idc=" + chroma_format_idc +
+>, <Line: +                ", \n        log2_max_frame_num_minus4=" + log2_max_frame_num_minus4 +
+>, <Line: +                ", \n        log2_max_pic_order_cnt_lsb_minus4=" + log2_max_pic_order_cnt_lsb_minus4 +
+>, <Line: +                ", \n        pic_height_in_map_units_minus1=" + pic_height_in_map_units_minus1 +
+>, <Line: +                ", \n        pic_width_in_mbs_minus1=" + pic_width_in_mbs_minus1 +
+>, <Line: +                ", \n        bit_depth_luma_minus8=" + bit_depth_luma_minus8 +
+>, <Line: +                ", \n        bit_depth_chroma_minus8=" + bit_depth_chroma_minus8 +
+>, <Line: +                ", \n        qpprime_y_zero_transform_bypass_flag=" + qpprime_y_zero_transform_bypass_flag +
+>, <Line: +                ", \n        profile_idc=" + profile_idc +
+>, <Line: +                ", \n        constraint_set_0_flag=" + constraint_set_0_flag +
+>, <Line: +                ", \n        constraint_set_1_flag=" + constraint_set_1_flag +
+>, <Line: +                ", \n        constraint_set_2_flag=" + constraint_set_2_flag +
+>, <Line: +                ", \n        constraint_set_3_flag=" + constraint_set_3_flag +
+>, <Line: +                ", \n        constraint_set_4_flag=" + constraint_set_4_flag +
+>, <Line: +                ", \n        constraint_set_5_flag=" + constraint_set_5_flag +
+>, <Line: +                ", \n        level_idc=" + level_idc +
+>, <Line: +                ", \n        seq_parameter_set_id=" + seq_parameter_set_id +
+>, <Line: +                ", \n        residual_color_transform_flag=" + residual_color_transform_flag +
+>, <Line: +                ", \n        offset_for_non_ref_pic=" + offset_for_non_ref_pic +
+>, <Line: +                ", \n        offset_for_top_to_bottom_field=" + offset_for_top_to_bottom_field +
+>, <Line: +                ", \n        num_ref_frames=" + num_ref_frames +
+>, <Line: +                ", \n        gaps_in_frame_num_value_allowed_flag=" + gaps_in_frame_num_value_allowed_flag +
+>, <Line: +                ", \n        frame_mbs_only_flag=" + frame_mbs_only_flag +
+>, <Line: +                ", \n        frame_cropping_flag=" + frame_cropping_flag +
+>, <Line: +                ", \n        frame_crop_left_offset=" + frame_crop_left_offset +
+>, <Line: +                ", \n        frame_crop_right_offset=" + frame_crop_right_offset +
+>, <Line: +                ", \n        frame_crop_top_offset=" + frame_crop_top_offset +
+>, <Line: +                ", \n        frame_crop_bottom_offset=" + frame_crop_bottom_offset +
+>, <Line: +                ", \n        offsetForRefFrame=" + offsetForRefFrame +
+>, <Line: +                ", \n        vuiParams=" + vuiParams +
+>, <Line: +                ", \n        scalingMatrix=" + scalingMatrix +
+>, <Line: +                ", \n        num_ref_frames_in_pic_order_cnt_cycle=" + num_ref_frames_in_pic_order_cnt_cycle +
+>, <Line: +                '}';
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

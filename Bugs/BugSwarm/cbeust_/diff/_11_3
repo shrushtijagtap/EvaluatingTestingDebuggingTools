@@ -1,0 +1,4 @@
+[<Line: +  transient private Map<Class<?>, ITestClass> m_classMap = Maps.newHashMap();
+>]
+[<Line: -  transient private Map<Class<?>, ITestClass> m_classMap = Maps.newLinkedHashMap(); // Changed to reproduce issue #87 (order is important)
+>]

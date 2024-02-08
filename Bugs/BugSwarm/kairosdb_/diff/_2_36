@@ -1,0 +1,6 @@
+[<Line: +import org.kairosdb.core.http.rest.FeaturesResource;
+>, <Line: +		bind(FeaturesResource.class).in(Scopes.SINGLETON);
+>]
+[<Line: -import org.kairosdb.core.http.rest.QueryProcessingChainResource;
+>, <Line: -		bind(QueryProcessingChainResource.class).in(Scopes.SINGLETON);
+>]

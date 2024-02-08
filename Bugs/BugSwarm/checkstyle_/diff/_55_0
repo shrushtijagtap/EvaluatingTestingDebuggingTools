@@ -1,0 +1,6 @@
+[<Line: +        assertThat(captor.getValue().first().getMessage(), endsWith("- test exception"));
+>]
+[<Line: -import static org.junit.Assert.assertEquals;
+>, <Line: -        assertEquals("Invalid exception message", "Got an exception - test exception",
+>, <Line: -            captor.getValue().first().getMessage());
+>]

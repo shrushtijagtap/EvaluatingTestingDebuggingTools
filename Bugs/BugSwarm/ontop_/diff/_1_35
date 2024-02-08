@@ -1,0 +1,50 @@
+[<Line: +	private final String name;
+>, <Line: +	static final String owlThingIRI = "http://www.w3.org/2002/07/owl#Thing";
+>, <Line: +	static final String owlNothingIRI  = "http://www.w3.org/2002/07/owl#Nothing";
+>, <Line: +   	private static final OBDADataFactory ofac = OBDADataFactoryImpl.getInstance();
+>, <Line: +    public static final OClass owlThing = new ClassImpl(owlThingIRI); 
+>, <Line: +    public static final OClass owlNothing = new ClassImpl(owlNothingIRI); 
+>, <Line: +	ClassImpl(String name) {
+>, <Line: +		this.predicate = ofac.getClassPredicate(name);
+>, <Line: +		this.name = name;
+>, <Line: +		this.isNothing = name.equals(owlNothingIRI);
+>, <Line: +		this.isThing = name.equals(owlThingIRI);
+>, <Line: +	@Override
+>, <Line: +	public String getName() {
+>, <Line: +		return name;
+>, <Line: +	}
+>, <Line: +		if (obj == this)
+>, <Line: +			return true;
+>, <Line: +		if (obj instanceof ClassImpl) {
+>, <Line: +			ClassImpl other = (ClassImpl) obj;
+>, <Line: +			return name.equals(other.name);
+>, <Line: +		return false;
+>, <Line: +		return name.hashCode();
+>, <Line: +		return name;
+>, <Line: +	public boolean isBottom() {
+>, <Line: +	public boolean isTop() {
+>]
+[<Line: -	private final String string;
+>, <Line: -	public static final String owlThingIRI = "http://www.w3.org/2002/07/owl#Thing";
+>, <Line: -	public static final String owlNothingIRI  = "http://www.w3.org/2002/07/owl#Nothing";
+>, <Line: -    static final OClass owlThing = initialize(owlThingIRI); 
+>, <Line: -    static final OClass owlNothing = initialize(owlNothingIRI); 
+>, <Line: -    private static OClass initialize(String uri) {
+>, <Line: -    	final OBDADataFactory ofac = OBDADataFactoryImpl.getInstance();
+>, <Line: -		Predicate prop = ofac.getClassPredicate(uri);
+>, <Line: -		return new ClassImpl(prop);  	
+>, <Line: -    }
+>, <Line: -	ClassImpl(Predicate p) {
+>, <Line: -		this.predicate = p;
+>, <Line: -		string = predicate.toString();
+>, <Line: -		isNothing = predicate.getName().equals(owlNothingIRI);
+>, <Line: -		isThing = predicate.getName().equals(owlThingIRI);
+>, <Line: -		if (!(obj instanceof ClassImpl)) {
+>, <Line: -			return false;
+>, <Line: -		ClassImpl concept2 = (ClassImpl) obj;
+>, <Line: -		return (predicate.equals(concept2.getPredicate()));
+>, <Line: -		return string.hashCode();
+>, <Line: -		return string;
+>, <Line: -	public boolean isNothing() {
+>, <Line: -	public boolean isThing() {
+>]

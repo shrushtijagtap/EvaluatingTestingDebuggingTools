@@ -1,0 +1,10 @@
+[]
+[<Line: -	public static final String WRITE_BUFFER_JOB_QUEUE_SIZE = "kairosdb.datastore.cassandra.write_buffer_job_queue_size";
+>, <Line: -	@Inject
+>, <Line: -	@Named(WRITE_BUFFER_JOB_QUEUE_SIZE)
+>, <Line: -	private int m_writeBufferJobQueueSize = 300;
+>, <Line: -	public int getWriteBufferJobQueueSize()
+>, <Line: -	{
+>, <Line: -		return m_writeBufferJobQueueSize;
+>, <Line: -	}
+>]

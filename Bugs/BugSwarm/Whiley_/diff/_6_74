@@ -1,0 +1,4 @@
+[<Line: +    <wyc verbose="false" verificationConditions="false" bootpath="../wycs/stdlib/" whileydir="src" wycsdir="src" includes="whiley/**/*.whiley"/>
+>]
+[<Line: -    <wyc verbose="false" verificationConditions="true" bootpath="../wycs/stdlib/" whileydir="src" wycsdir="src" includes="whiley/**/*.whiley"/>
+>]

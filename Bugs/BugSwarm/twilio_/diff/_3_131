@@ -1,0 +1,205 @@
+[<Line: +    /**
+>, <Line: +     *  Constants compatible with '<Say>' when `voice`
+>, <Line: +     *  is not set or is set to 'man' or 'woman':
+>, <Line: +     */
+>, <Line: +    // German
+>, <Line: +    DE("de"),
+>, <Line: +    // English (default)
+>, <Line: +    // Spanish
+>, <Line: +    ES("es"),
+>, <Line: +    // French
+>, <Line: +    FR("fr"),
+>, <Line: +    // English (United Kingdom)
+>, <Line: +    GB("en-gb"),
+>, <Line: +    /**
+>, <Line: +     * Constants compatible with '<Say>' when `voice`
+>, <Line: +     * is 'alice'.
+>, <Line: +     */
+>, <Line: +    // Chinese (Mandarin)
+>, <Line: +    ZH_CN("zh-CN"),
+>, <Line: +    // Chinese (Cantonese)
+>, <Line: +    ZH_HK("zh-HK"),
+>, <Line: +    // Chinese (Taiwanese Mandarin)
+>, <Line: +    ZH_TW("zh-TW"),
+>, <Line: +    /**
+>, <Line: +     * Constants compatible with '<Say>' when `voice`
+>, <Line: +     * is 'alice' and with '<Gather>'.
+>, <Line: +     */
+>, <Line: +    // Catalan (Spain)
+>, <Line: +    CA_ES("ca-ES"),
+>, <Line: +    // Danish (Denmark)
+>, <Line: +    DA_DK("da-DK"),
+>, <Line: +    // German (Germany)
+>, <Line: +    DE_DE("de-DE"),
+>, <Line: +    // English (Australia)
+>, <Line: +    // English (Canada)
+>, <Line: +    EN_CA("en-CA"),
+>, <Line: +    // English (United Kingdom)
+>, <Line: +    EN_GB("en-GB"),
+>, <Line: +    // English (India)
+>, <Line: +    // English (United States)
+>, <Line: +    // Spanish (Spain)
+>, <Line: +    // Spanish (Mexico)
+>, <Line: +    // Finnish (Finland)
+>, <Line: +    FI_FI("fi-FI"),
+>, <Line: +    // French (Canada)
+>, <Line: +    // French (France)
+>, <Line: +    // Italian (Italy)
+>, <Line: +    // Japanese (Japan)
+>, <Line: +    // Korean (South Korea)
+>, <Line: +    // Norwegian (Norway)
+>, <Line: +    // Dutch (Netherlands)
+>, <Line: +    // Polish (Poland)
+>, <Line: +    // Portuguese (Brazil)
+>, <Line: +    // Portuguese (Portugal)
+>, <Line: +    // Russian (Russia)
+>, <Line: +    // Swedish (Sweden)
+>, <Line: +    /**
+>, <Line: +     * Constants compatible with '<Gather>'.
+>, <Line: +     */
+>, <Line: +    // Afrikaans (South Africa)
+>, <Line: +    AF_ZA("af-ZA"),
+>, <Line: +    // Arabic (United Arab Emirates)
+>, <Line: +    AR_AE("ar-AE"),
+>, <Line: +    // Arabic (Bahrain)
+>, <Line: +    AR_BH("ar-BH"),
+>, <Line: +    // Arabic (Algeria)
+>, <Line: +    AR_DZ("ar-DZ"),
+>, <Line: +    // Arabic (Egypt)
+>, <Line: +    AR_EG("ar-EG"),
+>, <Line: +    // Arabic (Israel)
+>, <Line: +    AR_IL("ar-IL"),
+>, <Line: +    // Arabic (Iraq)
+>, <Line: +    AR_IQ("ar-IQ"),
+>, <Line: +    // Arabic (Jordan)
+>, <Line: +    AR_JO("ar-JO"),
+>, <Line: +    // Arabic (Kuwait)
+>, <Line: +    AR_KW("ar-KW"),
+>, <Line: +    // Arabic (Lebanon)
+>, <Line: +    AR_LB("ar-LB"),
+>, <Line: +    // Arabic (Morocco)
+>, <Line: +    AR_MA("ar-MA"),
+>, <Line: +    // Arabic (Oman)
+>, <Line: +    AR_OM("ar-OM"),
+>, <Line: +    // Arabic (State of Palestine)
+>, <Line: +    AR_PS("ar-PS"),
+>, <Line: +    // Arabic (Qatar)
+>, <Line: +    AR_QA("ar-QA"),
+>, <Line: +    // Arabic (Saudi Arabia)
+>, <Line: +    AR_SA("ar-SA"),
+>, <Line: +    // Arabic (Tunisia)
+>, <Line: +    AR_TN("ar-TN"),
+>, <Line: +    // Bulgarian (Bulgaria)
+>, <Line: +    BG_BG("bg-BG"),
+>, <Line: +    // Czech (Czech Republic)
+>, <Line: +    CS_CZ("cs-CZ"),
+>, <Line: +    // Greek (Greece)
+>, <Line: +    EL_GR("el-GR"),
+>, <Line: +    // English (Ireland)
+>, <Line: +    EN_IE("en-IE"),
+>, <Line: +    // English (New Zealand)
+>, <Line: +    EN_NZ("en-NZ"),
+>, <Line: +    // English (Philippines)
+>, <Line: +    EN_PH("en-PH"),
+>, <Line: +    // English (South Africa)
+>, <Line: +    EN_ZA("en-ZA"),
+>, <Line: +    // Spanish (Argentina)
+>, <Line: +    ES_AR("es-AR"),
+>, <Line: +    // Spanish (Bolivia)
+>, <Line: +    ES_BO("es-BO"),
+>, <Line: +    // Spanish (Chile)
+>, <Line: +    ES_CL("es-CL"),
+>, <Line: +    // Spanish (Colombia)
+>, <Line: +    ES_CO("es-CO"),
+>, <Line: +    // Spanish (Costa Rica)
+>, <Line: +    ES_CR("es-CR"),
+>, <Line: +    // Spanish (Dominican Republic)
+>, <Line: +    ES_DO("es-DO"),
+>, <Line: +    // Spanish (Ecuador)
+>, <Line: +    ES_EC("es-EC"),
+>, <Line: +    // Spanish (Guatemala)
+>, <Line: +    ES_GT("es-GT"),
+>, <Line: +    // Spanish (Honduras)
+>, <Line: +    ES_HN("es-HN"),
+>, <Line: +    // Spanish (Nicaragua)
+>, <Line: +    ES_NI("es-NI"),
+>, <Line: +    // Spanish (Panama)
+>, <Line: +    ES_PA("es-PA"),
+>, <Line: +    // Spanish (Peru)
+>, <Line: +    ES_PE("es-PE"),
+>, <Line: +    // Spanish (Puerto Rico)
+>, <Line: +    ES_PR("es-PR"),
+>, <Line: +    // Spanish (Paraguay)
+>, <Line: +    ES_PY("es-PY"),
+>, <Line: +    // Spanish (El Salvador)
+>, <Line: +    ES_SV("es-SV"),
+>, <Line: +    // Spanish (United States)
+>, <Line: +    ES_US("es-US"),
+>, <Line: +    // Spanish (Uruguay)
+>, <Line: +    ES_UY("es-UY"),
+>, <Line: +    // Spanish (Venezuela)
+>, <Line: +    ES_VE("es-VE"),
+>, <Line: +    // Basque (Spain)
+>, <Line: +    EU_ES("eu-ES"),
+>, <Line: +    // Persian (Iran)
+>, <Line: +    FA_IR("fa-IR"),
+>, <Line: +    // Galician (Spain)
+>, <Line: +    GL_ES("gl-ES"),
+>, <Line: +    // Hebrew (Israel)
+>, <Line: +    HE_IL("he-IL"),
+>, <Line: +    // Hindi (India)
+>, <Line: +    HI_IN("hi-IN"),
+>, <Line: +    // Croatian (Croatia)
+>, <Line: +    HR_HR("hr-HR"),
+>, <Line: +    // Hungarian (Hungary)
+>, <Line: +    HU_HU("hu-HU"),
+>, <Line: +    // Indonesian (Indonesia)
+>, <Line: +    ID_ID("id-ID"),
+>, <Line: +    // Filipino (Philippines)
+>, <Line: +    IL_PH("il-PH"),
+>, <Line: +    // Icelandic (Iceland)
+>, <Line: +    IS_IS("is-IS"),
+>, <Line: +    // Lithuanian (Lithuania)
+>, <Line: +    LT_LT("lt-LT"),
+>, <Line: +    // Malay (Malaysia)
+>, <Line: +    MS_MY("ms-MY"),
+>, <Line: +    // Romanian (Romania)
+>, <Line: +    RO_RO("ro-RO"),
+>, <Line: +    // Slovak (Slovakia)
+>, <Line: +    SK_SK("sk-SK"),
+>, <Line: +    // Slovenian (Slovenia)
+>, <Line: +    SL_SI("sl-SI"),
+>, <Line: +    // Serbian (Serbia)
+>, <Line: +    SR_RS("sr-RS"),
+>, <Line: +    // Thai (Thailand)
+>, <Line: +    TH_TH("th-TH"),
+>, <Line: +    // Turkish (Turkey)
+>, <Line: +    TR_TR("tr-TR"),
+>, <Line: +    // Ukrainian (Ukraine)
+>, <Line: +    UK_UA("uk-UA"),
+>, <Line: +    // Vietnamese (Vietnam)
+>, <Line: +    VI_VN("vi-VN"),
+>, <Line: +    // Zulu (South Africa)
+>, <Line: +    ZU_ZA("zu-ZA"),
+>, <Line: +    // Chinese, Mandarin (Traditional, Taiwan)
+>, <Line: +    CMN_HANT_TW("cmn-Hant-TW"),
+>, <Line: +    // Chinese, Cantonese (Traditional, Hong Kong)
+>, <Line: +    YUE_HANT_HK("yue-Hant-HK"),
+>, <Line: +    // Chinese, Mandarin (Simplified, Hong Kong)
+>, <Line: +    CMN_HANS_HK("cmn-Hans-HK"),
+>, <Line: +    // Chinese, Mandarin (Simplified, China)
+>, <Line: +    CMN_HANS_CN("cmn-Hans-CN");
+>]
+[<Line: -    EN_GB("en-gb"),
+>, <Line: -    EN_CA("en-GB"),
+>, <Line: -    ES("es"),
+>, <Line: -    FR("fr"),
+>, <Line: -    DE("de"),
+>, <Line: -    DE_DE("de-DE"),
+>, <Line: -    DA_DK("da-DK"),
+>, <Line: -    CA_ES("ca-ES"),
+>, <Line: -    FI_FI("fi-FI"),
+>, <Line: -    ZH_CN("zh-CN"),
+>, <Line: -    ZH_HK("zh-HK"),
+>, <Line: -    ZH_TW("zh-TW");
+>]

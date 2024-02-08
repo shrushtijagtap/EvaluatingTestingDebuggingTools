@@ -1,0 +1,13 @@
+[<Line: +    /**
+>, <Line: +     * Property key for setting HttpTransport implementation.
+>, <Line: +     */
+>, <Line: +    public static final String MANTA_HTTP_TRANSPORT_KEY = "manta.http_transport";
+>, <Line: +            MANTA_PASSWORD_KEY, MANTA_HTTP_TRANSPORT_KEY
+>, <Line: +    @Override
+>, <Line: +    public String getHttpTransport() {
+>, <Line: +        return normalizeEmptyAndNullAndDefaultToStringValue(
+>, <Line: +                MANTA_HTTP_TRANSPORT_KEY, MANTA_HTTP_TRANSPORT_ENV_KEY);
+>, <Line: +    }
+>]
+[<Line: -            MANTA_PASSWORD_KEY
+>]

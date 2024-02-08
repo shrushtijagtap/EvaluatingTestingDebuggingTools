@@ -1,0 +1,669 @@
+[<Line: + define, window, process, Packages,
+>, <Line: + java, location, Components, FileUtils */
+>, <Line: +	'use strict';
+>, <Line: +	var text, fs, Cc, Ci, xpcIsWindows,
+>, <Line: +		progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'],
+>, <Line: +		xmlRegExp = /^\s*<\?xml(\s)+version=[\'\"](\d)*.(\d)*[\'\"](\s)*\?>/im,
+>, <Line: +		bodyRegExp = /<body[^>]*>\s*([\s\S]+)\s*<\/body>/im,
+>, <Line: +		hasLocation = typeof location !== 'undefined' && location.href,
+>, <Line: +		defaultProtocol = hasLocation && location.protocol && location.protocol.replace(/\:/, ''),
+>, <Line: +		defaultHostName = hasLocation && location.hostname,
+>, <Line: +		defaultPort = hasLocation && (location.port || undefined),
+>, <Line: +		buildMap = {},
+>, <Line: +		masterConfig = (module.config && module.config()) || {};
+>, <Line: +	text = {
+>, <Line: +		version: '2.0.10',
+>, <Line: +		strip: function (content) {
+>, <Line: +			//Strips <?xml ...?> declarations so that external SVG and XML
+>, <Line: +			//documents can be added to a document without worry. Also, if the string
+>, <Line: +			//is an HTML document, only the part inside the body tag is returned.
+>, <Line: +			if (content) {
+>, <Line: +				content = content.replace(xmlRegExp, "");
+>, <Line: +				var matches = content.match(bodyRegExp);
+>, <Line: +				if (matches) {
+>, <Line: +					content = matches[1];
+>, <Line: +				}
+>, <Line: +			} else {
+>, <Line: +				content = "";
+>, <Line: +			}
+>, <Line: +			return content;
+>, <Line: +		},
+>, <Line: +		jsEscape: function (content) {
+>, <Line: +			return content.replace(/(['\\])/g, '\\$1')
+>, <Line: +				.replace(/[\f]/g, "\\f")
+>, <Line: +				.replace(/[\b]/g, "\\b")
+>, <Line: +				.replace(/[\n]/g, "\\n")
+>, <Line: +				.replace(/[\t]/g, "\\t")
+>, <Line: +				.replace(/[\r]/g, "\\r")
+>, <Line: +				.replace(/[\u2028]/g, "\\u2028")
+>, <Line: +				.replace(/[\u2029]/g, "\\u2029");
+>, <Line: +		},
+>, <Line: +		createXhr: masterConfig.createXhr || function () {
+>, <Line: +			//Would love to dump the ActiveX crap in here. Need IE 6 to die first.
+>, <Line: +			var xhr, i, progId;
+>, <Line: +			if (typeof XMLHttpRequest !== "undefined") {
+>, <Line: +				return new XMLHttpRequest();
+>, <Line: +			} else if (typeof ActiveXObject !== "undefined") {
+>, <Line: +				for (i = 0; i < 3; i += 1) {
+>, <Line: +					progId = progIds[i];
+>, <Line: +					try {
+>, <Line: +						xhr = new ActiveXObject(progId);
+>, <Line: +					} catch (e) {
+>, <Line: +					}
+>, <Line: +					if (xhr) {
+>, <Line: +						progIds = [progId];  // so faster next time
+>, <Line: +						break;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			return xhr;
+>, <Line: +		},
+>, <Line: +		/**
+>, <Line: +		 * Parses a resource name into its component parts. Resource names
+>, <Line: +		 * look like: module/name.ext!strip, where the !strip part is
+>, <Line: +		 * optional.
+>, <Line: +		 * @param {String} name the resource name
+>, <Line: +		 * @returns {Object} with properties "moduleName", "ext" and "strip"
+>, <Line: +		 * where strip is a boolean.
+>, <Line: +		 */
+>, <Line: +		parseName: function (name) {
+>, <Line: +			var modName, ext, temp,
+>, <Line: +				strip = false,
+>, <Line: +				index = name.indexOf("."),
+>, <Line: +				isRelative = name.indexOf('./') === 0 ||
+>, <Line: +					name.indexOf('../') === 0;
+>, <Line: +			if (index !== -1 && (!isRelative || index > 1)) {
+>, <Line: +				modName = name.substring(0, index);
+>, <Line: +				ext = name.substring(index + 1, name.length);
+>, <Line: +			} else {
+>, <Line: +				modName = name;
+>, <Line: +			}
+>, <Line: +			temp = ext || modName;
+>, <Line: +			index = temp.indexOf("!");
+>, <Line: +			if (index !== -1) {
+>, <Line: +				//Pull off the strip arg.
+>, <Line: +				strip = temp.substring(index + 1) === "strip";
+>, <Line: +				temp = temp.substring(0, index);
+>, <Line: +				if (ext) {
+>, <Line: +					ext = temp;
+>, <Line: +				} else {
+>, <Line: +					modName = temp;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			return {
+>, <Line: +				moduleName: modName,
+>, <Line: +				ext: ext,
+>, <Line: +				strip: strip
+>, <Line: +			};
+>, <Line: +		},
+>, <Line: +		xdRegExp: /^((\w+)\:)?\/\/([^\/\\]+)/,
+>, <Line: +		/**
+>, <Line: +		 * Is an URL on another domain. Only works for browser use, returns
+>, <Line: +		 * false in non-browser environments. Only used to know if an
+>, <Line: +		 * optimized .js version of a text resource should be loaded
+>, <Line: +		 * instead.
+>, <Line: +		 * @param {String} url
+>, <Line: +		 * @returns Boolean
+>, <Line: +		 */
+>, <Line: +		useXhr: function (url, protocol, hostname, port) {
+>, <Line: +			var uProtocol, uHostName, uPort,
+>, <Line: +				match = text.xdRegExp.exec(url);
+>, <Line: +			if (!match) {
+>, <Line: +				return true;
+>, <Line: +			}
+>, <Line: +			uProtocol = match[2];
+>, <Line: +			uHostName = match[3];
+>, <Line: +			uHostName = uHostName.split(':');
+>, <Line: +			uPort = uHostName[1];
+>, <Line: +			uHostName = uHostName[0];
+>, <Line: +			return (!uProtocol || uProtocol === protocol) &&
+>, <Line: +				(!uHostName || uHostName.toLowerCase() === hostname.toLowerCase()) &&
+>, <Line: +				((!uPort && !uHostName) || uPort === port);
+>, <Line: +		},
+>, <Line: +		finishLoad: function (name, strip, content, onLoad) {
+>, <Line: +			content = strip ? text.strip(content) : content;
+>, <Line: +			if (masterConfig.isBuild) {
+>, <Line: +				buildMap[name] = content;
+>, <Line: +			}
+>, <Line: +			onLoad(content);
+>, <Line: +		},
+>, <Line: +		load: function (name, req, onLoad, config) {
+>, <Line: +			//Name has format: some.module.filext!strip
+>, <Line: +			//The strip part is optional.
+>, <Line: +			//if strip is present, then that means only get the string contents
+>, <Line: +			//inside a body tag in an HTML string. For XML/SVG content it means
+>, <Line: +			//removing the <?xml ...?> declarations so the content can be inserted
+>, <Line: +			//into the current doc without problems.
+>, <Line: +			// Do not bother with the work if a build and text will
+>, <Line: +			// not be inlined.
+>, <Line: +			if (config.isBuild && !config.inlineText) {
+>, <Line: +				onLoad();
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			masterConfig.isBuild = config.isBuild;
+>, <Line: +			var parsed = text.parseName(name),
+>, <Line: +				nonStripName = parsed.moduleName +
+>, <Line: +					(parsed.ext ? '.' + parsed.ext : ''),
+>, <Line: +				url = req.toUrl(nonStripName),
+>, <Line: +				useXhr = (masterConfig.useXhr) ||
+>, <Line: +					text.useXhr;
+>, <Line: +			// Do not load if it is an empty: url
+>, <Line: +			if (url.indexOf('empty:') === 0) {
+>, <Line: +				onLoad();
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			//Load the text. Use XHR if possible and in a browser.
+>, <Line: +			if (!hasLocation || useXhr(url, defaultProtocol, defaultHostName, defaultPort)) {
+>, <Line: +				text.get(url, function (content) {
+>, <Line: +					text.finishLoad(name, parsed.strip, content, onLoad);
+>, <Line: +				}, function (err) {
+>, <Line: +					if (onLoad.error) {
+>, <Line: +						onLoad.error(err);
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +			} else {
+>, <Line: +				//Need to fetch the resource across domains. Assume
+>, <Line: +				//the resource has been optimized into a JS module. Fetch
+>, <Line: +				//by the module name + extension, but do not include the
+>, <Line: +				//!strip part to avoid file system issues.
+>, <Line: +				req([nonStripName], function (content) {
+>, <Line: +					text.finishLoad(parsed.moduleName + '.' + parsed.ext,
+>, <Line: +						parsed.strip, content, onLoad);
+>, <Line: +				});
+>, <Line: +			}
+>, <Line: +		},
+>, <Line: +		write: function (pluginName, moduleName, write, config) {
+>, <Line: +			if (buildMap.hasOwnProperty(moduleName)) {
+>, <Line: +				var content = text.jsEscape(buildMap[moduleName]);
+>, <Line: +				write.asModule(pluginName + "!" + moduleName,
+>, <Line: +					"define(function () { return '" +
+>, <Line: +					content +
+>, <Line: +					"';});\n");
+>, <Line: +			}
+>, <Line: +		},
+>, <Line: +		writeFile: function (pluginName, moduleName, req, write, config) {
+>, <Line: +			var parsed = text.parseName(moduleName),
+>, <Line: +				extPart = parsed.ext ? '.' + parsed.ext : '',
+>, <Line: +				nonStripName = parsed.moduleName + extPart,
+>, <Line: +			//Use a '.js' file name so that it indicates it is a
+>, <Line: +			//script that can be loaded across domains.
+>, <Line: +				fileName = req.toUrl(parsed.moduleName + extPart) + '.js';
+>, <Line: +			//Leverage own load() method to load plugin value, but only
+>, <Line: +			//write out values that do not have the strip argument,
+>, <Line: +			//to avoid any potential issues with ! in file names.
+>, <Line: +			text.load(nonStripName, req, function (value) {
+>, <Line: +				//Use own write() method to construct full module value.
+>, <Line: +				//But need to create shell that translates writeFile's
+>, <Line: +				//write() to the right interface.
+>, <Line: +				var textWrite = function (contents) {
+>, <Line: +					return write(fileName, contents);
+>, <Line: +				};
+>, <Line: +				textWrite.asModule = function (moduleName, contents) {
+>, <Line: +					return write.asModule(moduleName, fileName, contents);
+>, <Line: +				};
+>, <Line: +				text.write(pluginName, nonStripName, textWrite, config);
+>, <Line: +			}, config);
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	if (masterConfig.env === 'node' || (!masterConfig.env &&
+>, <Line: +		typeof process !== "undefined" &&
+>, <Line: +		process.versions && !!process.versions.node && !process.versions['node-webkit'])) {
+>, <Line: +		//Using special require.nodeRequire, something added by r.js.
+>, <Line: +		fs = require.nodeRequire('fs');
+>, <Line: +		text.get = function (url, callback, errback) {
+>, <Line: +			try {
+>, <Line: +				var file = fs.readFileSync(url, 'utf8');
+>, <Line: +				//Remove BOM (Byte Mark Order) from utf8 files if it is there.
+>, <Line: +				if (file.indexOf('\uFEFF') === 0) {
+>, <Line: +					file = file.substring(1);
+>, <Line: +				}
+>, <Line: +				callback(file);
+>, <Line: +			} catch (e) {
+>, <Line: +				errback(e);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +	} else if (masterConfig.env === 'xhr' || (!masterConfig.env &&
+>, <Line: +		text.createXhr())) {
+>, <Line: +		text.get = function (url, callback, errback, headers) {
+>, <Line: +			var xhr = text.createXhr(), header;
+>, <Line: +			xhr.open('GET', url, true);
+>, <Line: +			//Allow plugins direct access to xhr headers
+>, <Line: +			if (headers) {
+>, <Line: +				for (header in headers) {
+>, <Line: +					if (headers.hasOwnProperty(header)) {
+>, <Line: +						xhr.setRequestHeader(header.toLowerCase(), headers[header]);
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			//Allow overrides specified in config
+>, <Line: +			if (masterConfig.onXhr) {
+>, <Line: +				masterConfig.onXhr(xhr, url);
+>, <Line: +			}
+>, <Line: +			xhr.onreadystatechange = function (evt) {
+>, <Line: +				var status, err;
+>, <Line: +				//Do not explicitly handle errors, those should be
+>, <Line: +				//visible via console output in the browser.
+>, <Line: +				if (xhr.readyState === 4) {
+>, <Line: +					status = xhr.status;
+>, <Line: +					if (status > 399 && status < 600) {
+>, <Line: +						//An http 4xx or 5xx error. Signal an error.
+>, <Line: +						err = new Error(url + ' HTTP status: ' + status);
+>, <Line: +						err.xhr = xhr;
+>, <Line: +						errback(err);
+>, <Line: +					} else {
+>, <Line: +						callback(xhr.responseText);
+>, <Line: +					}
+>, <Line: +					if (masterConfig.onXhrComplete) {
+>, <Line: +						masterConfig.onXhrComplete(xhr, url);
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			xhr.send(null);
+>, <Line: +		};
+>, <Line: +	} else if (masterConfig.env === 'rhino' || (!masterConfig.env &&
+>, <Line: +		typeof Packages !== 'undefined' && typeof java !== 'undefined')) {
+>, <Line: +		//Why Java, why is this so awkward?
+>, <Line: +		text.get = function (url, callback) {
+>, <Line: +			var stringBuffer, line,
+>, <Line: +				encoding = "utf-8",
+>, <Line: +				file = new java.io.File(url),
+>, <Line: +				lineSeparator = java.lang.System.getProperty("line.separator"),
+>, <Line: +				input = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(file), encoding)),
+>, <Line: +				content = '';
+>, <Line: +			try {
+>, <Line: +				stringBuffer = new java.lang.StringBuffer();
+>, <Line: +				line = input.readLine();
+>, <Line: +				// Byte Order Mark (BOM) - The Unicode Standard, version 3.0, page 324
+>, <Line: +				// http://www.unicode.org/faq/utf_bom.html
+>, <Line: +				// Note that when we use utf-8, the BOM should appear as "EF BB BF", but it doesn't due to this bug in the JDK:
+>, <Line: +				// http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4508058
+>, <Line: +				if (line && line.length() && line.charAt(0) === 0xfeff) {
+>, <Line: +					// Eat the BOM, since we've already found the encoding on this file,
+>, <Line: +					// and we plan to concatenating this buffer with others; the BOM should
+>, <Line: +					// only appear at the top of a file.
+>, <Line: +					line = line.substring(1);
+>, <Line: +				}
+>, <Line: +				if (line !== null) {
+>, <Line: +					stringBuffer.append(line);
+>, <Line: +				}
+>, <Line: +				while ((line = input.readLine()) !== null) {
+>, <Line: +					stringBuffer.append(lineSeparator);
+>, <Line: +					stringBuffer.append(line);
+>, <Line: +				}
+>, <Line: +				//Make sure we return a JavaScript string and not a Java string.
+>, <Line: +				content = String(stringBuffer.toString()); //String
+>, <Line: +			} finally {
+>, <Line: +				input.close();
+>, <Line: +			}
+>, <Line: +			callback(content);
+>, <Line: +		};
+>, <Line: +	} else if (masterConfig.env === 'xpconnect' || (!masterConfig.env &&
+>, <Line: +		typeof Components !== 'undefined' && Components.classes &&
+>, <Line: +		Components.interfaces)) {
+>, <Line: +		//Avert your gaze!
+>, <Line: +		Cc = Components.classes,
+>, <Line: +			Ci = Components.interfaces;
+>, <Line: +		Components.utils['import']('resource://gre/modules/FileUtils.jsm');
+>, <Line: +		xpcIsWindows = ('@mozilla.org/windows-registry-key;1' in Cc);
+>, <Line: +		text.get = function (url, callback) {
+>, <Line: +			var inStream, convertStream, fileObj,
+>, <Line: +				readData = {};
+>, <Line: +			if (xpcIsWindows) {
+>, <Line: +				url = url.replace(/\//g, '\\');
+>, <Line: +			}
+>, <Line: +			fileObj = new FileUtils.File(url);
+>, <Line: +			//XPCOM, you so crazy
+>, <Line: +			try {
+>, <Line: +				inStream = Cc['@mozilla.org/network/file-input-stream;1']
+>, <Line: +					.createInstance(Ci.nsIFileInputStream);
+>, <Line: +				inStream.init(fileObj, 1, 0, false);
+>, <Line: +				convertStream = Cc['@mozilla.org/intl/converter-input-stream;1']
+>, <Line: +					.createInstance(Ci.nsIConverterInputStream);
+>, <Line: +				convertStream.init(inStream, "utf-8", inStream.available(),
+>, <Line: +					Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
+>, <Line: +				convertStream.readString(inStream.available(), readData);
+>, <Line: +				convertStream.close();
+>, <Line: +				inStream.close();
+>, <Line: +				callback(readData.value);
+>, <Line: +			} catch (e) {
+>, <Line: +				throw new Error((fileObj && fileObj.path || '') + ': ' + e);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +	}
+>, <Line: +	return text;
+>]
+[<Line: -  define, window, process, Packages,
+>, <Line: -  java, location, Components, FileUtils */
+>, <Line: -    'use strict';
+>, <Line: -    var text, fs, Cc, Ci, xpcIsWindows,
+>, <Line: -        progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0'],
+>, <Line: -        xmlRegExp = /^\s*<\?xml(\s)+version=[\'\"](\d)*.(\d)*[\'\"](\s)*\?>/im,
+>, <Line: -        bodyRegExp = /<body[^>]*>\s*([\s\S]+)\s*<\/body>/im,
+>, <Line: -        hasLocation = typeof location !== 'undefined' && location.href,
+>, <Line: -        defaultProtocol = hasLocation && location.protocol && location.protocol.replace(/\:/, ''),
+>, <Line: -        defaultHostName = hasLocation && location.hostname,
+>, <Line: -        defaultPort = hasLocation && (location.port || undefined),
+>, <Line: -        buildMap = {},
+>, <Line: -        masterConfig = (module.config && module.config()) || {};
+>, <Line: -    text = {
+>, <Line: -        version: '2.0.10',
+>, <Line: -        strip: function (content) {
+>, <Line: -            //Strips <?xml ...?> declarations so that external SVG and XML
+>, <Line: -            //documents can be added to a document without worry. Also, if the string
+>, <Line: -            //is an HTML document, only the part inside the body tag is returned.
+>, <Line: -            if (content) {
+>, <Line: -                content = content.replace(xmlRegExp, "");
+>, <Line: -                var matches = content.match(bodyRegExp);
+>, <Line: -                if (matches) {
+>, <Line: -                    content = matches[1];
+>, <Line: -                }
+>, <Line: -            } else {
+>, <Line: -                content = "";
+>, <Line: -            }
+>, <Line: -            return content;
+>, <Line: -        },
+>, <Line: -        jsEscape: function (content) {
+>, <Line: -            return content.replace(/(['\\])/g, '\\$1')
+>, <Line: -                .replace(/[\f]/g, "\\f")
+>, <Line: -                .replace(/[\b]/g, "\\b")
+>, <Line: -                .replace(/[\n]/g, "\\n")
+>, <Line: -                .replace(/[\t]/g, "\\t")
+>, <Line: -                .replace(/[\r]/g, "\\r")
+>, <Line: -                .replace(/[\u2028]/g, "\\u2028")
+>, <Line: -                .replace(/[\u2029]/g, "\\u2029");
+>, <Line: -        },
+>, <Line: -        createXhr: masterConfig.createXhr || function () {
+>, <Line: -            //Would love to dump the ActiveX crap in here. Need IE 6 to die first.
+>, <Line: -            var xhr, i, progId;
+>, <Line: -            if (typeof XMLHttpRequest !== "undefined") {
+>, <Line: -                return new XMLHttpRequest();
+>, <Line: -            } else if (typeof ActiveXObject !== "undefined") {
+>, <Line: -                for (i = 0; i < 3; i += 1) {
+>, <Line: -                    progId = progIds[i];
+>, <Line: -                    try {
+>, <Line: -                        xhr = new ActiveXObject(progId);
+>, <Line: -                    } catch (e) {}
+>, <Line: -                    if (xhr) {
+>, <Line: -                        progIds = [progId];  // so faster next time
+>, <Line: -                        break;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            return xhr;
+>, <Line: -        },
+>, <Line: -        /**
+>, <Line: -         * Parses a resource name into its component parts. Resource names
+>, <Line: -         * look like: module/name.ext!strip, where the !strip part is
+>, <Line: -         * optional.
+>, <Line: -         * @param {String} name the resource name
+>, <Line: -         * @returns {Object} with properties "moduleName", "ext" and "strip"
+>, <Line: -         * where strip is a boolean.
+>, <Line: -         */
+>, <Line: -        parseName: function (name) {
+>, <Line: -            var modName, ext, temp,
+>, <Line: -                strip = false,
+>, <Line: -                index = name.indexOf("."),
+>, <Line: -                isRelative = name.indexOf('./') === 0 ||
+>, <Line: -                             name.indexOf('../') === 0;
+>, <Line: -            if (index !== -1 && (!isRelative || index > 1)) {
+>, <Line: -                modName = name.substring(0, index);
+>, <Line: -                ext = name.substring(index + 1, name.length);
+>, <Line: -            } else {
+>, <Line: -                modName = name;
+>, <Line: -            }
+>, <Line: -            temp = ext || modName;
+>, <Line: -            index = temp.indexOf("!");
+>, <Line: -            if (index !== -1) {
+>, <Line: -                //Pull off the strip arg.
+>, <Line: -                strip = temp.substring(index + 1) === "strip";
+>, <Line: -                temp = temp.substring(0, index);
+>, <Line: -                if (ext) {
+>, <Line: -                    ext = temp;
+>, <Line: -                } else {
+>, <Line: -                    modName = temp;
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            return {
+>, <Line: -                moduleName: modName,
+>, <Line: -                ext: ext,
+>, <Line: -                strip: strip
+>, <Line: -            };
+>, <Line: -        },
+>, <Line: -        xdRegExp: /^((\w+)\:)?\/\/([^\/\\]+)/,
+>, <Line: -        /**
+>, <Line: -         * Is an URL on another domain. Only works for browser use, returns
+>, <Line: -         * false in non-browser environments. Only used to know if an
+>, <Line: -         * optimized .js version of a text resource should be loaded
+>, <Line: -         * instead.
+>, <Line: -         * @param {String} url
+>, <Line: -         * @returns Boolean
+>, <Line: -         */
+>, <Line: -        useXhr: function (url, protocol, hostname, port) {
+>, <Line: -            var uProtocol, uHostName, uPort,
+>, <Line: -                match = text.xdRegExp.exec(url);
+>, <Line: -            if (!match) {
+>, <Line: -                return true;
+>, <Line: -            }
+>, <Line: -            uProtocol = match[2];
+>, <Line: -            uHostName = match[3];
+>, <Line: -            uHostName = uHostName.split(':');
+>, <Line: -            uPort = uHostName[1];
+>, <Line: -            uHostName = uHostName[0];
+>, <Line: -            return (!uProtocol || uProtocol === protocol) &&
+>, <Line: -                   (!uHostName || uHostName.toLowerCase() === hostname.toLowerCase()) &&
+>, <Line: -                   ((!uPort && !uHostName) || uPort === port);
+>, <Line: -        },
+>, <Line: -        finishLoad: function (name, strip, content, onLoad) {
+>, <Line: -            content = strip ? text.strip(content) : content;
+>, <Line: -            if (masterConfig.isBuild) {
+>, <Line: -                buildMap[name] = content;
+>, <Line: -            }
+>, <Line: -            onLoad(content);
+>, <Line: -        },
+>, <Line: -        load: function (name, req, onLoad, config) {
+>, <Line: -            //Name has format: some.module.filext!strip
+>, <Line: -            //The strip part is optional.
+>, <Line: -            //if strip is present, then that means only get the string contents
+>, <Line: -            //inside a body tag in an HTML string. For XML/SVG content it means
+>, <Line: -            //removing the <?xml ...?> declarations so the content can be inserted
+>, <Line: -            //into the current doc without problems.
+>, <Line: -            // Do not bother with the work if a build and text will
+>, <Line: -            // not be inlined.
+>, <Line: -            if (config.isBuild && !config.inlineText) {
+>, <Line: -                onLoad();
+>, <Line: -                return;
+>, <Line: -            }
+>, <Line: -            masterConfig.isBuild = config.isBuild;
+>, <Line: -            var parsed = text.parseName(name),
+>, <Line: -                nonStripName = parsed.moduleName +
+>, <Line: -                    (parsed.ext ? '.' + parsed.ext : ''),
+>, <Line: -                url = req.toUrl(nonStripName),
+>, <Line: -                useXhr = (masterConfig.useXhr) ||
+>, <Line: -                         text.useXhr;
+>, <Line: -            // Do not load if it is an empty: url
+>, <Line: -            if (url.indexOf('empty:') === 0) {
+>, <Line: -                onLoad();
+>, <Line: -                return;
+>, <Line: -            }
+>, <Line: -            //Load the text. Use XHR if possible and in a browser.
+>, <Line: -            if (!hasLocation || useXhr(url, defaultProtocol, defaultHostName, defaultPort)) {
+>, <Line: -                text.get(url, function (content) {
+>, <Line: -                    text.finishLoad(name, parsed.strip, content, onLoad);
+>, <Line: -                }, function (err) {
+>, <Line: -                    if (onLoad.error) {
+>, <Line: -                        onLoad.error(err);
+>, <Line: -                    }
+>, <Line: -                });
+>, <Line: -            } else {
+>, <Line: -                //Need to fetch the resource across domains. Assume
+>, <Line: -                //the resource has been optimized into a JS module. Fetch
+>, <Line: -                //by the module name + extension, but do not include the
+>, <Line: -                //!strip part to avoid file system issues.
+>, <Line: -                req([nonStripName], function (content) {
+>, <Line: -                    text.finishLoad(parsed.moduleName + '.' + parsed.ext,
+>, <Line: -                                    parsed.strip, content, onLoad);
+>, <Line: -                });
+>, <Line: -            }
+>, <Line: -        },
+>, <Line: -        write: function (pluginName, moduleName, write, config) {
+>, <Line: -            if (buildMap.hasOwnProperty(moduleName)) {
+>, <Line: -                var content = text.jsEscape(buildMap[moduleName]);
+>, <Line: -                write.asModule(pluginName + "!" + moduleName,
+>, <Line: -                               "define(function () { return '" +
+>, <Line: -                                   content +
+>, <Line: -                               "';});\n");
+>, <Line: -            }
+>, <Line: -        },
+>, <Line: -        writeFile: function (pluginName, moduleName, req, write, config) {
+>, <Line: -            var parsed = text.parseName(moduleName),
+>, <Line: -                extPart = parsed.ext ? '.' + parsed.ext : '',
+>, <Line: -                nonStripName = parsed.moduleName + extPart,
+>, <Line: -                //Use a '.js' file name so that it indicates it is a
+>, <Line: -                //script that can be loaded across domains.
+>, <Line: -                fileName = req.toUrl(parsed.moduleName + extPart) + '.js';
+>, <Line: -            //Leverage own load() method to load plugin value, but only
+>, <Line: -            //write out values that do not have the strip argument,
+>, <Line: -            //to avoid any potential issues with ! in file names.
+>, <Line: -            text.load(nonStripName, req, function (value) {
+>, <Line: -                //Use own write() method to construct full module value.
+>, <Line: -                //But need to create shell that translates writeFile's
+>, <Line: -                //write() to the right interface.
+>, <Line: -                var textWrite = function (contents) {
+>, <Line: -                    return write(fileName, contents);
+>, <Line: -                };
+>, <Line: -                textWrite.asModule = function (moduleName, contents) {
+>, <Line: -                    return write.asModule(moduleName, fileName, contents);
+>, <Line: -                };
+>, <Line: -                text.write(pluginName, nonStripName, textWrite, config);
+>, <Line: -            }, config);
+>, <Line: -        }
+>, <Line: -    };
+>, <Line: -    if (masterConfig.env === 'node' || (!masterConfig.env &&
+>, <Line: -            typeof process !== "undefined" &&
+>, <Line: -            process.versions &&
+>, <Line: -            !!process.versions.node &&
+>, <Line: -            !process.versions['node-webkit'])) {
+>, <Line: -        //Using special require.nodeRequire, something added by r.js.
+>, <Line: -        fs = require.nodeRequire('fs');
+>, <Line: -        text.get = function (url, callback, errback) {
+>, <Line: -            try {
+>, <Line: -                var file = fs.readFileSync(url, 'utf8');
+>, <Line: -                //Remove BOM (Byte Mark Order) from utf8 files if it is there.
+>, <Line: -                if (file.indexOf('\uFEFF') === 0) {
+>, <Line: -                    file = file.substring(1);
+>, <Line: -                }
+>, <Line: -                callback(file);
+>, <Line: -            } catch (e) {
+>, <Line: -                errback(e);
+>, <Line: -            }
+>, <Line: -        };
+>, <Line: -    } else if (masterConfig.env === 'xhr' || (!masterConfig.env &&
+>, <Line: -            text.createXhr())) {
+>, <Line: -        text.get = function (url, callback, errback, headers) {
+>, <Line: -            var xhr = text.createXhr(), header;
+>, <Line: -            xhr.open('GET', url, true);
+>, <Line: -            //Allow plugins direct access to xhr headers
+>, <Line: -            if (headers) {
+>, <Line: -                for (header in headers) {
+>, <Line: -                    if (headers.hasOwnProperty(header)) {
+>, <Line: -                        xhr.setRequestHeader(header.toLowerCase(), headers[header]);
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            //Allow overrides specified in config
+>, <Line: -            if (masterConfig.onXhr) {
+>, <Line: -                masterConfig.onXhr(xhr, url);
+>, <Line: -            }
+>, <Line: -            xhr.onreadystatechange = function (evt) {
+>, <Line: -                var status, err;
+>, <Line: -                //Do not explicitly handle errors, those should be
+>, <Line: -                //visible via console output in the browser.
+>, <Line: -                if (xhr.readyState === 4) {
+>, <Line: -                    status = xhr.status;
+>, <Line: -                    if (status > 399 && status < 600) {
+>, <Line: -                        //An http 4xx or 5xx error. Signal an error.
+>, <Line: -                        err = new Error(url + ' HTTP status: ' + status);
+>, <Line: -                        err.xhr = xhr;
+>, <Line: -                        errback(err);
+>, <Line: -                    } else {
+>, <Line: -                        callback(xhr.responseText);
+>, <Line: -                    }
+>, <Line: -                    if (masterConfig.onXhrComplete) {
+>, <Line: -                        masterConfig.onXhrComplete(xhr, url);
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            };
+>, <Line: -            xhr.send(null);
+>, <Line: -        };
+>, <Line: -    } else if (masterConfig.env === 'rhino' || (!masterConfig.env &&
+>, <Line: -            typeof Packages !== 'undefined' && typeof java !== 'undefined')) {
+>, <Line: -        //Why Java, why is this so awkward?
+>, <Line: -        text.get = function (url, callback) {
+>, <Line: -            var stringBuffer, line,
+>, <Line: -                encoding = "utf-8",
+>, <Line: -                file = new java.io.File(url),
+>, <Line: -                lineSeparator = java.lang.System.getProperty("line.separator"),
+>, <Line: -                input = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(file), encoding)),
+>, <Line: -                content = '';
+>, <Line: -            try {
+>, <Line: -                stringBuffer = new java.lang.StringBuffer();
+>, <Line: -                line = input.readLine();
+>, <Line: -                // Byte Order Mark (BOM) - The Unicode Standard, version 3.0, page 324
+>, <Line: -                // http://www.unicode.org/faq/utf_bom.html
+>, <Line: -                // Note that when we use utf-8, the BOM should appear as "EF BB BF", but it doesn't due to this bug in the JDK:
+>, <Line: -                // http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4508058
+>, <Line: -                if (line && line.length() && line.charAt(0) === 0xfeff) {
+>, <Line: -                    // Eat the BOM, since we've already found the encoding on this file,
+>, <Line: -                    // and we plan to concatenating this buffer with others; the BOM should
+>, <Line: -                    // only appear at the top of a file.
+>, <Line: -                    line = line.substring(1);
+>, <Line: -                }
+>, <Line: -                if (line !== null) {
+>, <Line: -                    stringBuffer.append(line);
+>, <Line: -                }
+>, <Line: -                while ((line = input.readLine()) !== null) {
+>, <Line: -                    stringBuffer.append(lineSeparator);
+>, <Line: -                    stringBuffer.append(line);
+>, <Line: -                }
+>, <Line: -                //Make sure we return a JavaScript string and not a Java string.
+>, <Line: -                content = String(stringBuffer.toString()); //String
+>, <Line: -            } finally {
+>, <Line: -                input.close();
+>, <Line: -            }
+>, <Line: -            callback(content);
+>, <Line: -        };
+>, <Line: -    } else if (masterConfig.env === 'xpconnect' || (!masterConfig.env &&
+>, <Line: -            typeof Components !== 'undefined' && Components.classes &&
+>, <Line: -            Components.interfaces)) {
+>, <Line: -        //Avert your gaze!
+>, <Line: -        Cc = Components.classes,
+>, <Line: -        Ci = Components.interfaces;
+>, <Line: -        Components.utils['import']('resource://gre/modules/FileUtils.jsm');
+>, <Line: -        xpcIsWindows = ('@mozilla.org/windows-registry-key;1' in Cc);
+>, <Line: -        text.get = function (url, callback) {
+>, <Line: -            var inStream, convertStream, fileObj,
+>, <Line: -                readData = {};
+>, <Line: -            if (xpcIsWindows) {
+>, <Line: -                url = url.replace(/\//g, '\\');
+>, <Line: -            }
+>, <Line: -            fileObj = new FileUtils.File(url);
+>, <Line: -            //XPCOM, you so crazy
+>, <Line: -            try {
+>, <Line: -                inStream = Cc['@mozilla.org/network/file-input-stream;1']
+>, <Line: -                           .createInstance(Ci.nsIFileInputStream);
+>, <Line: -                inStream.init(fileObj, 1, 0, false);
+>, <Line: -                convertStream = Cc['@mozilla.org/intl/converter-input-stream;1']
+>, <Line: -                                .createInstance(Ci.nsIConverterInputStream);
+>, <Line: -                convertStream.init(inStream, "utf-8", inStream.available(),
+>, <Line: -                Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
+>, <Line: -                convertStream.readString(inStream.available(), readData);
+>, <Line: -                convertStream.close();
+>, <Line: -                inStream.close();
+>, <Line: -                callback(readData.value);
+>, <Line: -            } catch (e) {
+>, <Line: -                throw new Error((fileObj && fileObj.path || '') + ': ' + e);
+>, <Line: -            }
+>, <Line: -        };
+>, <Line: -    }
+>, <Line: -    return text;
+>]

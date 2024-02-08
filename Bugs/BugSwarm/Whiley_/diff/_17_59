@@ -1,0 +1,7 @@
+[<Line: +    [int] slots = [0; capacity]
+>]
+[<Line: -    [int] slots = []
+>, <Line: -    //
+>, <Line: -    while |slots| < capacity:
+>, <Line: -        slots = slots ++ [0]
+>]

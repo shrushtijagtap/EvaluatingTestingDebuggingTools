@@ -1,0 +1,35 @@
+[<Line: +package de.charite.compbio.jannovar.vardbs.generic_tsv;
+>, <Line: +import de.charite.compbio.jannovar.vardbs.base.JannovarVarDBException;
+>, <Line: +import htsjdk.variant.vcf.VCFHeader;
+>, <Line: +import org.junit.Assert;
+>, <Line: +import org.junit.Test;
+>, <Line: +/**
+>, <Line: + * Test header extension code for generic TSV processing
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class GenericTSVHeaderExtenderDbnsfpTest extends GenericTSVAnnotationDriverWithDbnsfpBaseTest {
+>, <Line: +	@Test
+>, <Line: +	public void test() throws JannovarVarDBException {
+>, <Line: +		VCFHeader header = new VCFHeader();
+>, <Line: +		// Check header before extension
+>, <Line: +		Assert.assertEquals(0, header.getFilterLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getInfoHeaderLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getFormatHeaderLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getIDHeaderLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getOtherHeaderLines().size());
+>, <Line: +		new GenericTSVHeaderExtender(options).addHeaders(header);
+>, <Line: +		// Check header after extension
+>, <Line: +		Assert.assertEquals(0, header.getFilterLines().size());
+>, <Line: +		Assert.assertEquals(8, header.getInfoHeaderLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getFormatHeaderLines().size());
+>, <Line: +		Assert.assertEquals(8, header.getIDHeaderLines().size());
+>, <Line: +		Assert.assertEquals(0, header.getOtherHeaderLines().size());
+>, <Line: +		Assert.assertNotNull(header.getInfoHeaderLine("DBNSFP_AAREF"));
+>, <Line: +		Assert.assertNotNull(header.getInfoHeaderLine("DBNSFP_RS_DBSNP147"));
+>, <Line: +		Assert.assertNotNull(header.getInfoHeaderLine("DBNSFP_HG19POS"));
+>, <Line: +		Assert.assertNotNull(header.getInfoHeaderLine("DBNSFP_SIFT_SCORE"));
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

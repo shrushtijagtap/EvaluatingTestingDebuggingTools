@@ -1,0 +1,6 @@
+[<Line: +import javax.annotation.Nullable;
+>, <Line: +    @Nullable
+>, <Line: +    OWLRDFVocabulary(Namespaces namespace, String shortName, @Nullable String damlName) {
+>]
+[<Line: -    OWLRDFVocabulary(Namespaces namespace, String shortName, String damlName) {
+>]

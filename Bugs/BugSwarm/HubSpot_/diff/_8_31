@@ -1,0 +1,10 @@
+[]
+[<Line: -  @JsonProperty("uiWriteEnabled")
+>, <Line: -  private boolean uiWriteEnabled = false;
+>, <Line: -  public boolean isUiWriteEnabled() {
+>, <Line: -    return uiWriteEnabled;
+>, <Line: -  }
+>, <Line: -  public void setUiWriteEnabled(boolean uiWriteEnabled) {
+>, <Line: -    this.uiWriteEnabled = uiWriteEnabled;
+>, <Line: -  }
+>]

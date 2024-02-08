@@ -1,0 +1,16 @@
+[<Line: +package org.mp4parser.boxes.samplegrouping;
+>, <Line: +import org.mp4parser.tools.CastUtils;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +                entries.add(new Entry(CastUtils.l2i(IsoTypeReader.readUInt32(byteBuffer)), byteBuffer.getShort()));
+>, <Line: +        maximumBitrate = CastUtils.l2i(IsoTypeReader.readUInt32(byteBuffer));
+>, <Line: +        minimumBitrate = CastUtils.l2i(IsoTypeReader.readUInt32(byteBuffer));
+>]
+[<Line: -package com.googlecode.mp4parser.boxes.mp4.samplegrouping;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import static com.googlecode.mp4parser.util.CastUtils.l2i;
+>, <Line: -                entries.add(new Entry(l2i(IsoTypeReader.readUInt32(byteBuffer)), byteBuffer.getShort()));
+>, <Line: -        maximumBitrate = l2i(IsoTypeReader.readUInt32(byteBuffer));
+>, <Line: -        minimumBitrate = l2i(IsoTypeReader.readUInt32(byteBuffer));
+>]

@@ -1,0 +1,5 @@
+[<Line: +- **Fix**: `Entity#edit` used together with EntityTransmuters or Archetypes
+>, <Line: +  caused the wrong compositionId to be reported, if all changes took place
+>, <Line: +  during the same frame.
+>]
+[]

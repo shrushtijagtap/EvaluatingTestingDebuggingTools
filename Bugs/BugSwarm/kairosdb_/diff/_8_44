@@ -1,0 +1,27 @@
+[<Line: +package org.kairosdb.core.http.rest.json;
+>, <Line: +import com.google.common.collect.HashMultimap;
+>, <Line: +import com.google.common.collect.SetMultimap;
+>, <Line: +import com.google.gson.*;
+>, <Line: +import java.lang.reflect.Type;
+>, <Line: +import java.util.Map;
+>, <Line: +public class SetMultimapDeserializer implements JsonDeserializer<SetMultimap<String, String>>
+>, <Line: +{
+>, <Line: +	@Override
+>, <Line: +	public SetMultimap<String, String> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+>, <Line: +	{
+>, <Line: +		SetMultimap<String, String> map = HashMultimap.create();
+>, <Line: +		JsonObject filters = json.getAsJsonObject();
+>, <Line: +		for (Map.Entry<String, JsonElement> filter : filters.entrySet())
+>, <Line: +		{
+>, <Line: +			String name = filter.getKey();
+>, <Line: +			JsonArray values = ((JsonArray)filter.getValue());
+>, <Line: +			for (JsonElement value : values)
+>, <Line: +			{
+>, <Line: +				map.put(name, value.getAsString());
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return map;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

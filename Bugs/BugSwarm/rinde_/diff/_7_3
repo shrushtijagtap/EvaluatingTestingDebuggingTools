@@ -1,0 +1,4 @@
+[<Line: +    return other instanceof Graph ? Graphs.equal(this, (Graph<E>) other)
+>]
+[<Line: -    return other instanceof Graph ? Graphs.equals(this, (Graph<E>) other)
+>]

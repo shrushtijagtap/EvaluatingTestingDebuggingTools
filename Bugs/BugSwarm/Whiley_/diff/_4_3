@@ -1,0 +1,17 @@
+[<Line: +		} else if(code instanceof Code.AbstractMultiNaryAssignable) {
+>, <Line: +			Code.AbstractMultiNaryAssignable a = (Code.AbstractMultiNaryAssignable) code;
+>, <Line: +			if(code instanceof Codes.Update && !in.contains(a.target(0))) {
+>]
+[<Line: -		} else if(code instanceof Code.AbstractNaryAssignable) {
+>, <Line: -			Code.AbstractNaryAssignable a = (Code.AbstractNaryAssignable) code;
+>, <Line: -			if(code instanceof Codes.Update && !in.contains(a.target())) {
+>, <Line: -		} else if(code instanceof Code.AbstractMultiNaryAssignable) {
+>, <Line: -			Code.AbstractMultiNaryAssignable a = (Code.AbstractMultiNaryAssignable) code;
+>, <Line: -			for(int operand : a.operands()) {
+>, <Line: -				if(operand != Codes.NULL_REG && !in.contains(operand)) {
+>, <Line: -					syntaxError(errorMessage(VARIABLE_POSSIBLY_UNITIALISED),
+>, <Line: -	                        filename, rootBlock.attribute(index,SourceLocation.class));
+>, <Line: -				}
+>, <Line: -			}			
+>, <Line: -			return;
+>]

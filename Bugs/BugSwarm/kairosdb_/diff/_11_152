@@ -1,0 +1,327 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'config'
+>, <Line: +	],
+>, <Line: +	function (angular, _, config) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		module.controller('MetricKeysCtrl', function ($scope, $http, $q) {
+>, <Line: +			var elasticSearchUrlForMetricIndex = config.elasticsearch + '/' + config.grafana_metrics_index + '/';
+>, <Line: +			var httpOptions = {};
+>, <Line: +			if (config.elasticsearchBasicAuth) {
+>, <Line: +				httpOptions.withCredentials = true;
+>, <Line: +				httpOptions.headers = {
+>, <Line: +					"Authorization": "Basic " + config.elasticsearchBasicAuth
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +			$scope.init = function () {
+>, <Line: +				$scope.metricPath = "prod.apps.api.boobarella.*";
+>, <Line: +				$scope.metricCounter = 0;
+>, <Line: +			};
+>, <Line: +			$scope.createIndex = function () {
+>, <Line: +				$scope.errorText = null;
+>, <Line: +				$scope.infoText = null;
+>, <Line: +				deleteIndex()
+>, <Line: +					.then(createIndex)
+>, <Line: +					.then(function () {
+>, <Line: +						$scope.infoText = "Index created!";
+>, <Line: +					})
+>, <Line: +					.then(null, function (err) {
+>, <Line: +						$scope.errorText = angular.toJson(err);
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			$scope.loadMetricsFromPath = function () {
+>, <Line: +				$scope.errorText = null;
+>, <Line: +				$scope.infoText = null;
+>, <Line: +				$scope.metricCounter = 0;
+>, <Line: +				return loadMetricsRecursive($scope.metricPath)
+>, <Line: +					.then(function () {
+>, <Line: +						$scope.infoText = "Indexing completed!";
+>, <Line: +					}, function (err) {
+>, <Line: +						$scope.errorText = "Error: " + err;
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			$scope.loadAll = function () {
+>, <Line: +				$scope.infoText = "Fetching all metrics from graphite...";
+>, <Line: +				getFromEachGraphite('/metrics/index.json', saveMetricsArray)
+>, <Line: +					.then(function () {
+>, <Line: +						$scope.infoText = "Indexing complete!";
+>, <Line: +					}).then(null, function (err) {
+>, <Line: +						$scope.errorText = err;
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			function getFromEachGraphite(request, data_callback, error_callback) {
+>, <Line: +				return $q.all(_.map(config.datasources, function (datasource) {
+>, <Line: +					if (datasource.type = 'graphite') {
+>, <Line: +						return $http.get(datasource.url + request)
+>, <Line: +							.then(data_callback, error_callback);
+>, <Line: +					}
+>, <Line: +				}));
+>, <Line: +			}
+>, <Line: +			function saveMetricsArray(data, currentIndex) {
+>, <Line: +				if (!data && !data.data && data.data.length === 0) {
+>, <Line: +					return $q.reject('No metrics from graphite');
+>, <Line: +				}
+>, <Line: +				if (data.data.length === currentIndex) {
+>, <Line: +					return $q.when('done');
+>, <Line: +				}
+>, <Line: +				currentIndex = currentIndex || 0;
+>, <Line: +				return saveMetricKey(data.data[currentIndex])
+>, <Line: +					.then(function () {
+>, <Line: +						return saveMetricsArray(data, currentIndex + 1);
+>, <Line: +					});
+>, <Line: +			}
+>, <Line: +			function deleteIndex() {
+>, <Line: +				var deferred = $q.defer();
+>, <Line: +				$http.delete(elasticSearchUrlForMetricIndex, httpOptions)
+>, <Line: +					.success(function () {
+>, <Line: +						deferred.resolve('ok');
+>, <Line: +					})
+>, <Line: +					.error(function (data, status) {
+>, <Line: +						if (status === 404) {
+>, <Line: +							deferred.resolve('ok');
+>, <Line: +						}
+>, <Line: +						else {
+>, <Line: +							deferred.reject('elastic search returned unexpected error');
+>, <Line: +						}
+>, <Line: +					});
+>, <Line: +				return deferred.promise;
+>, <Line: +			}
+>, <Line: +			function createIndex() {
+>, <Line: +				return $http.put(elasticSearchUrlForMetricIndex, {
+>, <Line: +					settings: {
+>, <Line: +						analysis: {
+>, <Line: +							analyzer: {
+>, <Line: +								metric_path_ngram: {tokenizer: "my_ngram_tokenizer"}
+>, <Line: +							},
+>, <Line: +							tokenizer: {
+>, <Line: +								my_ngram_tokenizer: {
+>, <Line: +									type: "nGram",
+>, <Line: +									min_gram: "3",
+>, <Line: +									max_gram: "8",
+>, <Line: +									token_chars: ["letter", "digit", "punctuation", "symbol"]
+>, <Line: +								}
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +					},
+>, <Line: +					mappings: {
+>, <Line: +						metricKey: {
+>, <Line: +							properties: {
+>, <Line: +								metricPath: {
+>, <Line: +									type: "multi_field",
+>, <Line: +									fields: {
+>, <Line: +										"metricPath": {
+>, <Line: +											type: "string",
+>, <Line: +											index: "analyzed",
+>, <Line: +											index_analyzer: "standard"
+>, <Line: +										},
+>, <Line: +										"metricPath_ng": {
+>, <Line: +											type: "string",
+>, <Line: +											index: "analyzed",
+>, <Line: +											index_analyzer: "metric_path_ngram"
+>, <Line: +										}
+>, <Line: +									}
+>, <Line: +								}
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +				}, httpOptions);
+>, <Line: +			}
+>, <Line: +			function receiveMetric(result) {
+>, <Line: +				var data = result.data;
+>, <Line: +				if (!data || data.length === 0) {
+>, <Line: +					console.log('no data');
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				var funcs = _.map(data, function (metric) {
+>, <Line: +					if (metric.expandable) {
+>, <Line: +						return loadMetricsRecursive(metric.id + ".*");
+>, <Line: +					}
+>, <Line: +					if (metric.leaf) {
+>, <Line: +						return saveMetricKey(metric.id);
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +				return $q.all(funcs);
+>, <Line: +			}
+>, <Line: +			function saveMetricKey(metricId) {
+>, <Line: +				// Create request with id as title. Rethink this.
+>, <Line: +				var request = $scope.ejs.Document(config.grafana_metrics_index, 'metricKey', metricId).source({
+>, <Line: +					metricPath: metricId
+>, <Line: +				});
+>, <Line: +				return request.doIndex(
+>, <Line: +					function () {
+>, <Line: +						$scope.infoText = "Indexing " + metricId;
+>, <Line: +						$scope.metricCounter = $scope.metricCounter + 1;
+>, <Line: +					},
+>, <Line: +					function () {
+>, <Line: +						$scope.errorText = "failed to save metric " + metricId;
+>, <Line: +					}
+>, <Line: +				);
+>, <Line: +			}
+>, <Line: +			function loadMetricsRecursive(metricPath) {
+>, <Line: +				return getFromEachGraphite('/metrics/find/?query=' + metricPath, receiveMetric);
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'config'
+>, <Line: -],
+>, <Line: -function (angular, _, config) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  module.controller('MetricKeysCtrl', function($scope, $http, $q) {
+>, <Line: -    var elasticSearchUrlForMetricIndex = config.elasticsearch + '/' + config.grafana_metrics_index + '/';
+>, <Line: -    var httpOptions = {};
+>, <Line: -    if (config.elasticsearchBasicAuth) {
+>, <Line: -      httpOptions.withCredentials = true;
+>, <Line: -      httpOptions.headers = {
+>, <Line: -        "Authorization": "Basic " + config.elasticsearchBasicAuth
+>, <Line: -      };
+>, <Line: -    }
+>, <Line: -    $scope.init = function () {
+>, <Line: -      $scope.metricPath = "prod.apps.api.boobarella.*";
+>, <Line: -      $scope.metricCounter = 0;
+>, <Line: -    };
+>, <Line: -    $scope.createIndex = function () {
+>, <Line: -      $scope.errorText = null;
+>, <Line: -      $scope.infoText = null;
+>, <Line: -      deleteIndex()
+>, <Line: -        .then(createIndex)
+>, <Line: -        .then(function () {
+>, <Line: -          $scope.infoText = "Index created!";
+>, <Line: -        })
+>, <Line: -        .then(null, function (err) {
+>, <Line: -          $scope.errorText = angular.toJson(err);
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    $scope.loadMetricsFromPath = function() {
+>, <Line: -      $scope.errorText = null;
+>, <Line: -      $scope.infoText = null;
+>, <Line: -      $scope.metricCounter = 0;
+>, <Line: -      return loadMetricsRecursive($scope.metricPath)
+>, <Line: -        .then(function() {
+>, <Line: -          $scope.infoText = "Indexing completed!";
+>, <Line: -        }, function(err) {
+>, <Line: -          $scope.errorText = "Error: " + err;
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    $scope.loadAll = function() {
+>, <Line: -      $scope.infoText = "Fetching all metrics from graphite...";
+>, <Line: -      getFromEachGraphite('/metrics/index.json', saveMetricsArray)
+>, <Line: -        .then(function() {
+>, <Line: -          $scope.infoText = "Indexing complete!";
+>, <Line: -        }).then(null, function(err) {
+>, <Line: -          $scope.errorText = err;
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    function getFromEachGraphite(request, data_callback, error_callback) {
+>, <Line: -      return $q.all(_.map(config.datasources, function(datasource) {
+>, <Line: -        if (datasource.type = 'graphite') {
+>, <Line: -          return $http.get(datasource.url + request)
+>, <Line: -            .then(data_callback, error_callback);
+>, <Line: -        }
+>, <Line: -      }));
+>, <Line: -    }
+>, <Line: -    function saveMetricsArray(data, currentIndex) {
+>, <Line: -      if (!data && !data.data && data.data.length === 0) {
+>, <Line: -        return $q.reject('No metrics from graphite');
+>, <Line: -      }
+>, <Line: -      if (data.data.length === currentIndex) {
+>, <Line: -        return $q.when('done');
+>, <Line: -      }
+>, <Line: -      currentIndex = currentIndex || 0;
+>, <Line: -      return saveMetricKey(data.data[currentIndex])
+>, <Line: -        .then(function() {
+>, <Line: -          return saveMetricsArray(data, currentIndex + 1);
+>, <Line: -        });
+>, <Line: -    }
+>, <Line: -    function deleteIndex()
+>, <Line: -    {
+>, <Line: -      var deferred = $q.defer();
+>, <Line: -      $http.delete(elasticSearchUrlForMetricIndex, httpOptions)
+>, <Line: -        .success(function() {
+>, <Line: -          deferred.resolve('ok');
+>, <Line: -        })
+>, <Line: -        .error(function(data, status) {
+>, <Line: -          if (status === 404) {
+>, <Line: -            deferred.resolve('ok');
+>, <Line: -          }
+>, <Line: -          else {
+>, <Line: -            deferred.reject('elastic search returned unexpected error');
+>, <Line: -          }
+>, <Line: -        });
+>, <Line: -      return deferred.promise;
+>, <Line: -    }
+>, <Line: -    function createIndex()
+>, <Line: -    {
+>, <Line: -      return $http.put(elasticSearchUrlForMetricIndex, {
+>, <Line: -        settings: {
+>, <Line: -          analysis: {
+>, <Line: -            analyzer: {
+>, <Line: -              metric_path_ngram : { tokenizer : "my_ngram_tokenizer" }
+>, <Line: -            },
+>, <Line: -            tokenizer: {
+>, <Line: -              my_ngram_tokenizer : {
+>, <Line: -                type : "nGram",
+>, <Line: -                min_gram : "3",
+>, <Line: -                max_gram : "8",
+>, <Line: -                token_chars: ["letter", "digit", "punctuation", "symbol"]
+>, <Line: -              }
+>, <Line: -            }
+>, <Line: -          }
+>, <Line: -        },
+>, <Line: -        mappings: {
+>, <Line: -          metricKey: {
+>, <Line: -            properties: {
+>, <Line: -              metricPath: {
+>, <Line: -                type: "multi_field",
+>, <Line: -                fields: {
+>, <Line: -                  "metricPath": { type: "string", index: "analyzed", index_analyzer: "standard" },
+>, <Line: -                  "metricPath_ng": { type: "string", index: "analyzed", index_analyzer: "metric_path_ngram" }
+>, <Line: -                }
+>, <Line: -              }
+>, <Line: -            }
+>, <Line: -          }
+>, <Line: -        }
+>, <Line: -      }, httpOptions);
+>, <Line: -    }
+>, <Line: -    function receiveMetric(result) {
+>, <Line: -      var data = result.data;
+>, <Line: -      if (!data || data.length === 0) {
+>, <Line: -        console.log('no data');
+>, <Line: -        return;
+>, <Line: -      }
+>, <Line: -      var funcs = _.map(data, function(metric) {
+>, <Line: -        if (metric.expandable) {
+>, <Line: -          return loadMetricsRecursive(metric.id + ".*");
+>, <Line: -        }
+>, <Line: -        if (metric.leaf) {
+>, <Line: -          return saveMetricKey(metric.id);
+>, <Line: -        }
+>, <Line: -      });
+>, <Line: -      return $q.all(funcs);
+>, <Line: -    }
+>, <Line: -    function saveMetricKey(metricId) {
+>, <Line: -      // Create request with id as title. Rethink this.
+>, <Line: -      var request = $scope.ejs.Document(config.grafana_metrics_index, 'metricKey', metricId).source({
+>, <Line: -        metricPath: metricId
+>, <Line: -      });
+>, <Line: -      return request.doIndex(
+>, <Line: -        function() {
+>, <Line: -          $scope.infoText = "Indexing " + metricId;
+>, <Line: -          $scope.metricCounter = $scope.metricCounter + 1;
+>, <Line: -        },
+>, <Line: -        function() {
+>, <Line: -          $scope.errorText = "failed to save metric " + metricId;
+>, <Line: -        }
+>, <Line: -      );
+>, <Line: -    }
+>, <Line: -    function loadMetricsRecursive(metricPath)
+>, <Line: -    {
+>, <Line: -      return getFromEachGraphite('/metrics/find/?query=' + metricPath, receiveMetric);
+>, <Line: -    }
+>, <Line: -  });
+>, <Line: -});
+>]

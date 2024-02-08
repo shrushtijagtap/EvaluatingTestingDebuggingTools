@@ -1,0 +1,18 @@
+[<Line: +package backend.resource.serialization;
+>, <Line: +import backend.resource.TurboLabel;
+>, <Line: +public class SerializableLabel {
+>, <Line: +	private String actualName = "";
+>, <Line: +	private String colour = "";
+>, <Line: +	public SerializableLabel(TurboLabel label) {
+>, <Line: +		this.actualName = label.getActualName();
+>, <Line: +		this.colour = label.getColour();
+>, <Line: +	}
+>, <Line: +	public String getActualName() {
+>, <Line: +		return actualName;
+>, <Line: +	}
+>, <Line: +	public String getColour() {
+>, <Line: +		return colour;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,52 @@
+[<Line: +package backend;
+>, <Line: +import backend.github.GitHubSource;
+>, <Line: +import backend.interfaces.RepoSource;
+>, <Line: +import backend.interfaces.RepoStore;
+>, <Line: +import backend.json.JSONStore;
+>, <Line: +import backend.resource.Model;
+>, <Line: +import backend.resource.serialization.SerializableModel;
+>, <Line: +import org.apache.logging.log4j.Logger;
+>, <Line: +import ui.UI;
+>, <Line: +import util.HTLog;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +import java.util.concurrent.CompletableFuture;
+>, <Line: +public class RepoIO {
+>, <Line: +	private static final Logger logger = HTLog.get(RepoIO.class);
+>, <Line: +	private final RepoSource repoSource = new GitHubSource();
+>, <Line: +	private final RepoStore repoStore = new JSONStore();
+>, <Line: +	public CompletableFuture<Boolean> login(UserCredentials credentials) {
+>, <Line: +		return repoSource.login(credentials);
+>, <Line: +	}
+>, <Line: +	public CompletableFuture<Boolean> isRepositoryValid(String repoId) {
+>, <Line: +		return repoSource.isRepositoryValid(repoId);
+>, <Line: +	}
+>, <Line: +	public CompletableFuture<Model> openRepository(String repoId) {
+>, <Line: +		if (repoStore.isRepoStored(repoId)) {
+>, <Line: +			return repoStore.loadRepository(repoId)
+>, <Line: +				.thenCompose(this::updateModel)
+>, <Line: +				.exceptionally(HTLog.withResult(new Model(repoId)));
+>, <Line: +		} else {
+>, <Line: +			return repoSource.downloadRepository(repoId)
+>, <Line: +				.thenCompose(this::updateModel)
+>, <Line: +				.exceptionally(HTLog.withResult(new Model(repoId)));
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public CompletableFuture<Model> updateModel(Model model) {
+>, <Line: +		return repoSource.updateModel(model)
+>, <Line: +			.thenApply(newModel -> {
+>, <Line: +				UI.status.displayMessage(model.getRepoId() + " is up to date!");
+>, <Line: +				if (!model.equals(newModel)) {
+>, <Line: +					repoStore.saveRepository(newModel.getRepoId(), new SerializableModel(newModel));
+>, <Line: +				} else {
+>, <Line: +					logger.info(HTLog.format(model.getRepoId(), "Nothing changed; not writing to store"));
+>, <Line: +				}
+>, <Line: +				return newModel;
+>, <Line: +			}).exceptionally(HTLog.withResult(new Model(model.getRepoId())));
+>, <Line: +	}
+>, <Line: +	public CompletableFuture<Map<Integer, IssueMetadata>> getIssueMetadata(String repoId, List<Integer> issues) {
+>, <Line: +		return repoSource.downloadMetadata(repoId, issues);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

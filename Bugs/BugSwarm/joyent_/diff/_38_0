@@ -1,0 +1,4 @@
+[<Line: +     * @return Manta job state (queued, running, done)
+>]
+[<Line: -     * @return Manta job state (running, done, etc)
+>]

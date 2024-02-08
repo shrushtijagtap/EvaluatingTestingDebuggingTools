@@ -1,0 +1,66 @@
+[<Line: +		'lodash-src'
+>, <Line: +	],
+>, <Line: +	function () {
+>, <Line: +		'use strict';
+>, <Line: +		var _ = window._;
+>, <Line: +		/*
+>, <Line: +		 Mixins :)
+>, <Line: +		 */
+>, <Line: +		_.mixin({
+>, <Line: +			move: function (array, fromIndex, toIndex) {
+>, <Line: +				array.splice(toIndex, 0, array.splice(fromIndex, 1)[0]);
+>, <Line: +				return array;
+>, <Line: +			},
+>, <Line: +			remove: function (array, index) {
+>, <Line: +				array.splice(index, 1);
+>, <Line: +				return array;
+>, <Line: +			},
+>, <Line: +			// If variable is value, then return alt. If variable is anything else, return value;
+>, <Line: +			toggle: function (variable, value, alt) {
+>, <Line: +				return variable === value ? alt : value;
+>, <Line: +			},
+>, <Line: +			toggleInOut: function (array, value) {
+>, <Line: +				if (_.contains(array, value)) {
+>, <Line: +					array = _.without(array, value);
+>, <Line: +				} else {
+>, <Line: +					array.push(value);
+>, <Line: +				}
+>, <Line: +				return array;
+>, <Line: +			}
+>, <Line: +		});
+>, <Line: +		return _;
+>, <Line: +	});
+>]
+[<Line: -  'lodash-src'
+>, <Line: -],
+>, <Line: -function () {
+>, <Line: -  'use strict';
+>, <Line: -  var _ = window._;
+>, <Line: -  /*
+>, <Line: -    Mixins :)
+>, <Line: -  */
+>, <Line: -  _.mixin({
+>, <Line: -    move: function (array, fromIndex, toIndex) {
+>, <Line: -      array.splice(toIndex, 0, array.splice(fromIndex, 1)[0]);
+>, <Line: -      return array;
+>, <Line: -    },
+>, <Line: -    remove: function (array, index) {
+>, <Line: -      array.splice(index, 1);
+>, <Line: -      return array;
+>, <Line: -    },
+>, <Line: -    // If variable is value, then return alt. If variable is anything else, return value;
+>, <Line: -    toggle: function (variable, value, alt) {
+>, <Line: -      return variable === value ? alt : value;
+>, <Line: -    },
+>, <Line: -    toggleInOut: function(array,value) {
+>, <Line: -      if(_.contains(array,value)) {
+>, <Line: -        array = _.without(array,value);
+>, <Line: -      } else {
+>, <Line: -        array.push(value);
+>, <Line: -      }
+>, <Line: -      return array;
+>, <Line: -    }
+>, <Line: -  });
+>, <Line: -  return _;
+>, <Line: -});
+>]

@@ -1,0 +1,4 @@
+[<Line: +        return hash(object.hashIndex(), Stream.of(getDatatype(), Integer.valueOf(literal * 65536), getLang()));
+>]
+[<Line: -        return hash(object.hashIndex(), Stream.of(getDatatype(), literal * 65536, getLang()));
+>]

@@ -1,0 +1,11 @@
+[<Line: +import static de.is24.deadcode4j.Utils.isNotBlank;
+>, <Line: +            checkArgument(isNotBlank(name), "The element's [name] must be set!");
+>, <Line: +            checkArgument(isNotBlank(attributeName), "[attributeName] must be given!");
+>, <Line: +            checkArgument(isNotBlank(requiredValue), "[requiredValue] must be given!");
+>, <Line: +            checkArgument(isNotBlank(attributeName), "[attributeName] must be given!");
+>]
+[<Line: -            checkArgument(name.trim().length() > 0, "The element's [name] must be set!");
+>, <Line: -            checkArgument(attributeName.trim().length() > 0, "[attributeName] must be given!");
+>, <Line: -            checkArgument(requiredValue.trim().length() > 0, "[requiredValue] must be given!");
+>, <Line: -            checkArgument(attributeName.trim().length() > 0, "[attributeName] must be given!");
+>]

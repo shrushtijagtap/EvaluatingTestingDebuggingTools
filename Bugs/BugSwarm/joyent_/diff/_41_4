@@ -1,0 +1,39 @@
+[<Line: +public class MantaMultipartManagerIT {
+>, <Line: +        final ArrayList<MantaMultipartUploadTuple> uploadedParts =
+>, <Line: +                new ArrayList<>();
+>, <Line: +            MantaMultipartUploadTuple uploaded = multipart.uploadPart(uploadId, partNumber, part);
+>, <Line: +            uploadedParts.add(uploaded);
+>, <Line: +        multipart.complete(uploadId, uploadedParts.stream());
+>, <Line: +        final ArrayList<MantaMultipartUploadTuple> uploadedParts =
+>, <Line: +                new ArrayList<>();
+>, <Line: +            MantaMultipartUploadTuple uploaded = multipart.uploadPart(uploadId, partNumber, part);
+>, <Line: +            uploadedParts.add(uploaded);
+>, <Line: +        multipart.complete(uploadId, uploadedParts.stream());
+>, <Line: +        final ArrayList<MantaMultipartUploadPart> uploadedParts =
+>, <Line: +                new ArrayList<>();
+>, <Line: +            MantaMultipartUploadPart uploaded = multipart.uploadPart(uploadId, partNumber, part);
+>, <Line: +            uploadedParts.add(uploaded);
+>, <Line: +        multipart.complete(uploadId, uploadedParts.stream());
+>, <Line: +        final ArrayList<MantaMultipartUploadTuple> uploadedParts =
+>, <Line: +                new ArrayList<>();
+>, <Line: +            MantaMultipartUploadTuple uploaded = multipart.uploadPart(upload, partNumber, part);
+>, <Line: +            uploadedParts.add(uploaded);
+>, <Line: +        multipart.complete(upload, uploadedParts.stream());
+>, <Line: +        final ArrayList<MantaMultipartUploadTuple> uploadedParts =
+>, <Line: +                new ArrayList<>();
+>, <Line: +            MantaMultipartUploadTuple uploaded = multipart.uploadPart(uploadId, partNumber, part);
+>, <Line: +            uploadedParts.add(uploaded);
+>, <Line: +        multipart.complete(uploadId, uploadedParts.stream());
+>]
+[<Line: -public class MantaMultipartIT {
+>, <Line: -            multipart.uploadPart(uploadId, partNumber, part);
+>, <Line: -        multipart.complete(uploadId);
+>, <Line: -            multipart.uploadPart(uploadId, partNumber, part);
+>, <Line: -        multipart.complete(uploadId);
+>, <Line: -            multipart.uploadPart(uploadId, partNumber, part);
+>, <Line: -        multipart.complete(uploadId);
+>, <Line: -            multipart.uploadPart(upload, partNumber, part);
+>, <Line: -        multipart.complete(upload);
+>, <Line: -            multipart.uploadPart(uploadId, partNumber, part);
+>, <Line: -        multipart.complete(uploadId);
+>]

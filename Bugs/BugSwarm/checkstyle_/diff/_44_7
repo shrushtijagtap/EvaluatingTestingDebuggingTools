@@ -1,0 +1,61 @@
+[<Line: +          The check demands a comma at the end if neither left nor right curly braces
+>, <Line: +          are on the same line as the last element of the array.
+>, <Line: +return new int[] { 0
+>, <Line: +    };
+>, <Line: +return new int[] {
+>, <Line: +    0 };
+>, <Line: +          of the elements or add new elements on the end. Main benefit of a trailing
+>, <Line: +          comma is that when you add new entry to an array, no surrounding lines are changed.
+>, <Line: +        <source>
+>, <Line: +{
+>, <Line: +    100000000000000000000,
+>, <Line: +    200000000000000000000, // OK
+>, <Line: +}
+>, <Line: +{
+>, <Line: +    100000000000000000000,
+>, <Line: +    200000000000000000000,
+>, <Line: +    300000000000000000000,  // Just this line added, no other changes
+>, <Line: +}
+>, <Line: +        </source>
+>, <Line: +        <p>
+>, <Line: +          If closing brace is on the same line as training comma, this benefit is gone
+>, <Line: +          (as the Check does not demand a certain location of curly braces the following
+>, <Line: +          two cases will not produce a violation):
+>, <Line: +        </p>
+>, <Line: +        <source>
+>, <Line: +{100000000000000000000,
+>, <Line: +    200000000000000000000,} // Trailing comma not needed, line needs to be modified anyway
+>, <Line: +{100000000000000000000,
+>, <Line: +    200000000000000000000, // Modified line
+>, <Line: +    300000000000000000000,} // Added line
+>, <Line: +        </source>
+>, <Line: +        <p>
+>, <Line: +          If opening brace is on the same line as training comma there's also (more arguable) problem:
+>, <Line: +        </p>
+>, <Line: +        <source>
+>, <Line: +{100000000000000000000, // Line cannot be just duplicated to slightly modify entry
+>, <Line: +}
+>, <Line: +{100000000000000000000,
+>, <Line: +    100000000000000000001, // More work needed to duplicate
+>, <Line: +}
+>, <Line: +        </source>
+>, <Line: +            };        // violation as previous line misses a comma
+>, <Line: +            char[] chars = {'a', 'b', 'c'
+>, <Line: +                };        / /no violation
+>, <Line: +            String[] letters = {
+>, <Line: +                "a", "b", "c"};        // no violation
+>, <Line: +            int[] a1 = new int[]{
+>, <Line: +                1,
+>, <Line: +                2
+>, <Line: +                ,
+>, <Line: +            };        // no violation
+>, <Line: +            int[] a2 = new int[]{
+>, <Line: +                1,
+>, <Line: +                2
+>, <Line: +                ,};        // no violation
+>]
+[<Line: -          The check allows leaving out the comma at the end if both the left and right curly brackets
+>, <Line: -          are on the same line.
+>, <Line: -          of the elements or add new elements on the end.
+>, <Line: -            };        //violation
+>]

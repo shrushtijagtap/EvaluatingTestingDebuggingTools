@@ -1,0 +1,4 @@
+[<Line: +type Board is {bool flag, Piece[] rows}
+>]
+[<Line: -type Board is {bool flag, [Piece] rows}
+>]

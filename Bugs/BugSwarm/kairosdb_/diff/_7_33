@@ -1,0 +1,29 @@
+[<Line: +			<!--<cleanHistoryOnStart>true</cleanHistoryOnStart>-->
+>, <Line: +	<appender name="failed_data" class="ch.qos.logback.core.rolling.RollingFileAppender">
+>, <Line: +		<file>log/failed.log</file>
+>, <Line: +		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+>, <Line: +			<level>TRACE</level>
+>, <Line: +			<onMatch>ACCEPT</onMatch>
+>, <Line: +			<onMismatch>DENY</onMismatch>
+>, <Line: +		</filter>
+>, <Line: +		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+>, <Line: +			<!-- daily rollover -->
+>, <Line: +			<fileNamePattern>log/failed.%d.%i.log.gz</fileNamePattern>
+>, <Line: +			<!-- keep 30 days' worth of history -->
+>, <Line: +			<maxHistory>30</maxHistory>
+>, <Line: +			<!-- or whenever the file size reaches 100MB -->
+>, <Line: +			<timeBasedFileNamingAndTriggeringPolicy
+>, <Line: +					class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+>, <Line: +				<maxFileSize>100MB</maxFileSize>
+>, <Line: +			</timeBasedFileNamingAndTriggeringPolicy>
+>, <Line: +		</rollingPolicy>
+>, <Line: +		<encoder>
+>, <Line: +			<pattern>%d{MM-dd|HH:mm:ss.SSS} - %msg%n</pattern>
+>, <Line: +		</encoder>
+>, <Line: +	</appender>
+>, <Line: +	<logger name="failed_logger" level="TRACE" additivity="true">
+>, <Line: +		<appender-ref ref="failed_data"/>
+>, <Line: +	</logger>
+>]
+[<Line: -			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+>]

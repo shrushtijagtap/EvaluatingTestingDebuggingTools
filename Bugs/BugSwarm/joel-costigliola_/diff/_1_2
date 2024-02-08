@@ -1,0 +1,16 @@
+[<Line: +import org.assertj.core.util.Strings;
+>, <Line: +    AnotherMethodsClass m = new AnotherMethodsClass();
+>, <Line: +    Strings.isNullOrEmpty(m.string); // causes a synthetic method in AnotherMethodsClass
+>, <Line: +    actual = AnotherMethodsClass.class;
+>, <Line: +  }
+>, <Line: +  private static final class AnotherMethodsClass {
+>, <Line: +    private String string;
+>, <Line: +    public void publicMethod() {}
+>, <Line: +    protected void protectedMethod() {}
+>, <Line: +    @SuppressWarnings("unused")
+>, <Line: +    private void privateMethod() {}
+>, <Line: +    classes.assertHasDeclaredMethods(someInfo(), actual);
+>]
+[<Line: -    actual = MethodsClass.class;
+>, <Line: -    classes.assertHasDeclaredPublicMethods(someInfo(), actual);
+>]

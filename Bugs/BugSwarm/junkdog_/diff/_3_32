@@ -1,0 +1,45 @@
+[<Line: +package com.artemis.injection;
+>, <Line: +import com.artemis.World;
+>, <Line: +import java.util.Map;
+>, <Line: +/**
+>, <Line: + * <p>API used by {@link com.artemis.World} to inject objects annotated with {@link com.artemis.annotations.Wire} with
+>, <Line: + * dependencies. An injector injects {@link com.artemis.ComponentMapper}, {@link com.artemis.BaseSystem} and {@link com.artemis
+>, <Line: + * .Manager} types into systems and managers.
+>, <Line: + * </p>
+>, <Line: + * <p>To inject arbitrary types, use registered through {@link com.artemis.WorldConfiguration#register}.</p>
+>, <Line: + * <p>To customize the injection-strategy for arbitrary types further, registered a custom {@link com.artemis.injection.FieldHandler}
+>, <Line: + *  with custom one or more {@link com.artemis.injection.FieldResolver}.</p>
+>, <Line: + *
+>, <Line: + * @author Snorre E. Brekke
+>, <Line: + * @see FieldHandler
+>, <Line: + */
+>, <Line: +public interface Injector {
+>, <Line: +    /**
+>, <Line: +     * @param world this Injector will be used for
+>, <Line: +     * @param injectables registered via {@link com.artemis.WorldConfiguration#register}
+>, <Line: +     */
+>, <Line: +    void initialize(World world, Map<String, Object> injectables);
+>, <Line: +    /**
+>, <Line: +     * Inject dependencies on object. The injector delegates to {@link com.artemis.injection.FieldHandler} to resolve
+>, <Line: +     * feiled values.
+>, <Line: +     * @param target object which should have dependencies injected.
+>, <Line: +     * @throws RuntimeException
+>, <Line: +     * @see FieldHandler
+>, <Line: +     */
+>, <Line: +    void inject(Object target) throws RuntimeException;
+>, <Line: +    /**
+>, <Line: +     * Determins if a target object can be injected by this injector.
+>, <Line: +     * @param target eligable for injection
+>, <Line: +     * @return true if the Injector is capable of injecting the target object.
+>, <Line: +     */
+>, <Line: +    boolean isInjectable(Object target);
+>, <Line: +    /**
+>, <Line: +     * Enables the injector to be configured with a custom {@link com.artemis.injection.FieldHandler} which will
+>, <Line: +     * be used to resolve instance values for target-fields.
+>, <Line: +     * @param fieldHandler to use for resolving dependency values
+>, <Line: +     * @return this Injector for chaining
+>, <Line: +     */
+>, <Line: +    Injector setFieldHandler(FieldHandler fieldHandler);
+>, <Line: +}
+>]
+[]

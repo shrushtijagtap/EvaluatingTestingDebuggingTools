@@ -1,0 +1,142 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash'
+>, <Line: +	],
+>, <Line: +	function (angular, _) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		module.service('alertSrv', function ($timeout, $sce, $rootScope, $modal, $q) {
+>, <Line: +			var self = this;
+>, <Line: +			this.init = function () {
+>, <Line: +				$rootScope.onAppEvent('alert-error', function (e, alert) {
+>, <Line: +					self.set(alert[0], alert[1], 'error');
+>, <Line: +				});
+>, <Line: +				$rootScope.onAppEvent('alert-warning', function (e, alert) {
+>, <Line: +					self.set(alert[0], alert[1], 'warning', 5000);
+>, <Line: +				});
+>, <Line: +				$rootScope.onAppEvent('alert-success', function (e, alert) {
+>, <Line: +					self.set(alert[0], alert[1], 'success', 3000);
+>, <Line: +				});
+>, <Line: +				$rootScope.onAppEvent('confirm-modal', this.showConfirmModal);
+>, <Line: +			};
+>, <Line: +			// List of all alert objects
+>, <Line: +			this.list = [];
+>, <Line: +			this.set = function (title, text, severity, timeout) {
+>, <Line: +				var
+>, <Line: +					_a = {
+>, <Line: +						title: title || '',
+>, <Line: +						text: $sce.trustAsHtml(text || ''),
+>, <Line: +						severity: severity || 'info',
+>, <Line: +					},
+>, <Line: +					_ca = angular.toJson(_a),
+>, <Line: +					_clist = _.map(self.list, function (alert) {
+>, <Line: +						return angular.toJson(alert);
+>, <Line: +					});
+>, <Line: +				// If we already have this alert, remove it and add a new one
+>, <Line: +				// Why do this instead of skipping the add because it resets the timer
+>, <Line: +				if (_.contains(_clist, _ca)) {
+>, <Line: +					_.remove(self.list, _.indexOf(_clist, _ca));
+>, <Line: +				}
+>, <Line: +				self.list.push(_a);
+>, <Line: +				if (timeout > 0) {
+>, <Line: +					$timeout(function () {
+>, <Line: +						self.list = _.without(self.list, _a);
+>, <Line: +					}, timeout);
+>, <Line: +				}
+>, <Line: +				return (_a);
+>, <Line: +			};
+>, <Line: +			this.clear = function (alert) {
+>, <Line: +				self.list = _.without(self.list, alert);
+>, <Line: +			};
+>, <Line: +			this.clearAll = function () {
+>, <Line: +				self.list = [];
+>, <Line: +			};
+>, <Line: +			this.showConfirmModal = function (e, payload) {
+>, <Line: +				var scope = $rootScope.$new();
+>, <Line: +				scope.title = payload.title;
+>, <Line: +				scope.text = payload.text;
+>, <Line: +				scope.onConfirm = payload.onConfirm;
+>, <Line: +				var confirmModal = $modal({
+>, <Line: +					template: './app/partials/confirm_modal.html',
+>, <Line: +					persist: true,
+>, <Line: +					modalClass: 'confirm-modal',
+>, <Line: +					show: false,
+>, <Line: +					scope: scope,
+>, <Line: +					keyboard: false
+>, <Line: +				});
+>, <Line: +				$q.when(confirmModal).then(function (modalEl) {
+>, <Line: +					modalEl.modal('show');
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash'
+>, <Line: -],
+>, <Line: -function (angular, _) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.service('alertSrv', function($timeout, $sce, $rootScope, $modal, $q) {
+>, <Line: -    var self = this;
+>, <Line: -    this.init = function() {
+>, <Line: -      $rootScope.onAppEvent('alert-error', function(e, alert) {
+>, <Line: -        self.set(alert[0], alert[1], 'error');
+>, <Line: -      });
+>, <Line: -      $rootScope.onAppEvent('alert-warning', function(e, alert) {
+>, <Line: -        self.set(alert[0], alert[1], 'warning', 5000);
+>, <Line: -      });
+>, <Line: -      $rootScope.onAppEvent('alert-success', function(e, alert) {
+>, <Line: -        self.set(alert[0], alert[1], 'success', 3000);
+>, <Line: -      });
+>, <Line: -      $rootScope.onAppEvent('confirm-modal', this.showConfirmModal);
+>, <Line: -    };
+>, <Line: -    // List of all alert objects
+>, <Line: -    this.list = [];
+>, <Line: -    this.set = function(title,text,severity,timeout) {
+>, <Line: -      var
+>, <Line: -        _a = {
+>, <Line: -          title: title || '',
+>, <Line: -          text: $sce.trustAsHtml(text || ''),
+>, <Line: -          severity: severity || 'info',
+>, <Line: -        },
+>, <Line: -        _ca = angular.toJson(_a),
+>, <Line: -        _clist = _.map(self.list,function(alert) {return angular.toJson(alert);});
+>, <Line: -      // If we already have this alert, remove it and add a new one
+>, <Line: -      // Why do this instead of skipping the add because it resets the timer
+>, <Line: -      if(_.contains(_clist,_ca)) {
+>, <Line: -        _.remove(self.list,_.indexOf(_clist,_ca));
+>, <Line: -      }
+>, <Line: -      self.list.push(_a);
+>, <Line: -      if (timeout > 0) {
+>, <Line: -        $timeout(function() {
+>, <Line: -          self.list = _.without(self.list,_a);
+>, <Line: -        }, timeout);
+>, <Line: -      }
+>, <Line: -      return(_a);
+>, <Line: -    };
+>, <Line: -    this.clear = function(alert) {
+>, <Line: -      self.list = _.without(self.list,alert);
+>, <Line: -    };
+>, <Line: -    this.clearAll = function() {
+>, <Line: -      self.list = [];
+>, <Line: -    };
+>, <Line: -    this.showConfirmModal = function(e, payload) {
+>, <Line: -      var scope = $rootScope.$new();
+>, <Line: -      scope.title = payload.title;
+>, <Line: -      scope.text = payload.text;
+>, <Line: -      scope.onConfirm = payload.onConfirm;
+>, <Line: -      var confirmModal = $modal({
+>, <Line: -        template: './app/partials/confirm_modal.html',
+>, <Line: -        persist: true,
+>, <Line: -        modalClass: 'confirm-modal',
+>, <Line: -        show: false,
+>, <Line: -        scope: scope,
+>, <Line: -        keyboard: false
+>, <Line: -      });
+>, <Line: -      $q.when(confirmModal).then(function(modalEl) {
+>, <Line: -        modalEl.modal('show');
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

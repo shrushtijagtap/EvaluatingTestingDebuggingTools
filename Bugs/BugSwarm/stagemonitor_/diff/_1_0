@@ -1,0 +1,6 @@
+[<Line: +  - oraclejdk8
+>, <Line: +    build_command: "./gradlew compileJava"
+>]
+[<Line: -  - oraclejdk7
+>, <Line: -    build_command:   "./gradlew compileJava"
+>]

@@ -1,0 +1,101 @@
+[<Line: +/*
+>, <Line: + * Copyright (C) 2011-2014 Rinde van Lon, iMinds DistriNet, KU Leuven
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *         http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package com.github.rinde.rinsim.ui.renderers;
+>, <Line: +import com.github.rinde.rinsim.geom.Connection;
+>, <Line: +import com.github.rinde.rinsim.geom.Point;
+>, <Line: +import com.google.common.base.Optional;
+>, <Line: +final class PointUtil {
+>, <Line: +  private PointUtil() {}
+>, <Line: +  private static final double TOLERANCE = 0.0000001;
+>, <Line: +  static Optional<Point> intersectionPoint(Point own1, Point own2,
+>, <Line: +      Point oth1, Point oth2) {
+>, <Line: +    final double dx1 = own2.x - own1.x;
+>, <Line: +    final double dy1 = own2.y - own1.y;
+>, <Line: +    final double dx2 = oth2.x - oth1.x;
+>, <Line: +    final double dy2 = oth2.y - oth1.y;
+>, <Line: +    final double angle1 = Math.PI + Math.atan2(-dy1, -dx1);
+>, <Line: +    final double angle2 = Math.PI + Math.atan2(-dy2, -dx2);
+>, <Line: +    final double sin1 = Math.sin(angle1);
+>, <Line: +    final double sin2 = Math.sin(angle2);
+>, <Line: +    final double cos1 = Math.cos(angle1);
+>, <Line: +    final double cos2 = Math.cos(angle2);
+>, <Line: +    final double d = sin1 * cos2 - sin2 * cos1;
+>, <Line: +    if (Math.abs(d) < TOLERANCE) {
+>, <Line: +      return Optional.absent();
+>, <Line: +    }
+>, <Line: +    final double d1 = Math.hypot(dx1, dy1);
+>, <Line: +    final double d2 = Math.hypot(dx2, dy2);
+>, <Line: +    final double offset1 = own2.x * own1.y - own1.x * own2.y / d1;
+>, <Line: +    final double offset2 = oth2.x * oth1.y - oth1.x * oth2.y / d2;
+>, <Line: +    return Optional.of(new Point(
+>, <Line: +        (cos1 * offset2 - cos2 * offset1) / d,
+>, <Line: +        (sin1 * offset2 - sin2 * offset1) / d));
+>, <Line: +  }
+>, <Line: +  static double angle(Point p1, Point p2) {
+>, <Line: +    final double dx = p2.x - p1.x;
+>, <Line: +    final double dy = p2.y - p1.y;
+>, <Line: +    return Math.PI + Math.atan2(-dy, -dx);
+>, <Line: +  }
+>, <Line: +  static double angle(Connection<?> connection) {
+>, <Line: +    return angle(connection.from(), connection.to());
+>, <Line: +  }
+>, <Line: +  static Point perp(Connection<?> conn, double distOnLine, double distFromLine) {
+>, <Line: +    return PointUtil.perp(conn.from(), conn.to(), distOnLine, distFromLine);
+>, <Line: +  }
+>, <Line: +  static Point perp(Point from, Point to, double distOnLine, double distFromLine) {
+>, <Line: +    final Point on = PointUtil.on(from, to, distOnLine);
+>, <Line: +    final Point unit = PointUtil.unit(from, to);
+>, <Line: +    return new Point(
+>, <Line: +        on.x + -unit.y * distFromLine,
+>, <Line: +        on.y + unit.x * distFromLine);
+>, <Line: +  }
+>, <Line: +  static Point on(Connection<?> conn, double dist) {
+>, <Line: +    return PointUtil.on(conn.from(), conn.to(), dist);
+>, <Line: +  }
+>, <Line: +  static Point on(Point from, Point to, double dist) {
+>, <Line: +    final double length = PointUtil.length(from, to);
+>, <Line: +    final double ratio = dist / length;
+>, <Line: +    final double invRatio = 1 - ratio;
+>, <Line: +    final double x = to.x * ratio + invRatio * from.x;
+>, <Line: +    final double y = to.y * ratio + invRatio * from.y;
+>, <Line: +    return new Point(x, y);
+>, <Line: +  }
+>, <Line: +  static Point normalize(Point p) {
+>, <Line: +    return Point.divide(p, PointUtil.length(p));
+>, <Line: +  }
+>, <Line: +  static double length(Point p) {
+>, <Line: +    return Math.sqrt(Math.pow(p.x, 2) + Math.pow(p.y, 2));
+>, <Line: +  }
+>, <Line: +  static Point unit(Point from, Point to) {
+>, <Line: +    return normalize(Point.diff(from, to));
+>, <Line: +  }
+>, <Line: +  static Point unit(Connection<?> conn) {
+>, <Line: +    return unit(conn.from(), conn.to());
+>, <Line: +  }
+>, <Line: +  static double length(Point from, Point to) {
+>, <Line: +    return Point.distance(from, to);
+>, <Line: +  }
+>, <Line: +  static double length(Connection<?> conn) {
+>, <Line: +    return length(conn.from(), conn.to());
+>, <Line: +  }
+>, <Line: +  public static Point pointInDir(Point value, double angle, double distance) {
+>, <Line: +    final double x = Math.cos(angle) * distance;
+>, <Line: +    final double y = Math.sin(angle) * distance;
+>, <Line: +    return new Point(value.x + x, value.y + y);
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

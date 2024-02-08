@@ -1,0 +1,46 @@
+[<Line: +package org.mp4parser.boxes.apple;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: +import org.mp4parser.tools.Utf8;
+>, <Line: +import java.nio.ByteBuffer;
+>, <Line: +/**
+>, <Line: + * Created by marwatk on 02/27/15
+>, <Line: + */
+>, <Line: +public class AppleGPSCoordinatesBox extends AbstractBox {
+>, <Line: +    public static final String TYPE = "©xyz";
+>, <Line: +    private static final int DEFAULT_LANG = 5575; //Empirical
+>, <Line: +    String coords;
+>, <Line: +    int lang = DEFAULT_LANG; //? Docs says lang, but it doesn't match anything in the traditional language map
+>, <Line: +    public AppleGPSCoordinatesBox() {
+>, <Line: +        super(TYPE);
+>, <Line: +    }
+>, <Line: +    public String getValue() {
+>, <Line: +        return coords;
+>, <Line: +    }
+>, <Line: +    public void setValue(String iso6709String) {
+>, <Line: +        lang = DEFAULT_LANG;
+>, <Line: +        coords = iso6709String;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected long getContentSize() {
+>, <Line: +        return 4 + Utf8.utf8StringLengthInBytes(coords);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected void getContent(ByteBuffer byteBuffer) {
+>, <Line: +        byteBuffer.putShort((short) coords.length());
+>, <Line: +        byteBuffer.putShort((short) lang);
+>, <Line: +        byteBuffer.put(Utf8.convert(coords));
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected void _parseDetails(ByteBuffer content) {
+>, <Line: +        int length = content.getShort();
+>, <Line: +        lang = content.getShort(); //Not sure if this is accurate. It always seems to be 15 c7
+>, <Line: +        byte bytes[] = new byte[length];
+>, <Line: +        content.get(bytes);
+>, <Line: +        coords = Utf8.convert(bytes);
+>, <Line: +    }
+>, <Line: +    public String toString() {
+>, <Line: +        return "AppleGPSCoordinatesBox[" + coords + "]";
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

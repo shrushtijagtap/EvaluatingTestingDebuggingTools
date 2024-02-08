@@ -1,0 +1,450 @@
+[<Line: +(function ($) {
+>, <Line: +	"use strict";
+>, <Line: +	var options = {
+>, <Line: +		series: {
+>, <Line: +			fillBelowTo: null
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +	function init(plot) {
+>, <Line: +		function findBelowSeries(series, allseries) {
+>, <Line: +			var i;
+>, <Line: +			for (i = 0; i < allseries.length; ++i) {
+>, <Line: +				if (allseries[i].id === series.fillBelowTo) {
+>, <Line: +					return allseries[i];
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			return null;
+>, <Line: +		}
+>, <Line: +		/* top and bottom doesn't actually matter for this, we're just using it to help make this easier to think about */
+>, <Line: +		/* this is a vector cross product operation */
+>, <Line: +		function segmentIntersection(top_left_x, top_left_y, top_right_x, top_right_y, bottom_left_x, bottom_left_y, bottom_right_x, bottom_right_y) {
+>, <Line: +			var top_delta_x, top_delta_y, bottom_delta_x, bottom_delta_y,
+>, <Line: +				s, t;
+>, <Line: +			top_delta_x = top_right_x - top_left_x;
+>, <Line: +			top_delta_y = top_right_y - top_left_y;
+>, <Line: +			bottom_delta_x = bottom_right_x - bottom_left_x;
+>, <Line: +			bottom_delta_y = bottom_right_y - bottom_left_y;
+>, <Line: +			s = (
+>, <Line: +					(-top_delta_y * (top_left_x - bottom_left_x)) + (top_delta_x * (top_left_y - bottom_left_y))
+>, <Line: +				) / (
+>, <Line: +					-bottom_delta_x * top_delta_y + top_delta_x * bottom_delta_y
+>, <Line: +				);
+>, <Line: +			t = (
+>, <Line: +					(bottom_delta_x * (top_left_y - bottom_left_y)) - (bottom_delta_y * (top_left_x - bottom_left_x))
+>, <Line: +				) / (
+>, <Line: +					-bottom_delta_x * top_delta_y + top_delta_x * bottom_delta_y
+>, <Line: +				);
+>, <Line: +			// Collision detected
+>, <Line: +			if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
+>, <Line: +				return [
+>, <Line: +					top_left_x + (t * top_delta_x), // X
+>, <Line: +					top_left_y + (t * top_delta_y) // Y
+>, <Line: +				];
+>, <Line: +			}
+>, <Line: +			// No collision
+>, <Line: +			return null;
+>, <Line: +		}
+>, <Line: +		function plotDifferenceArea(plot, ctx, series) {
+>, <Line: +			if (series.fillBelowTo === null) {
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			var otherseries,
+>, <Line: +				ps,
+>, <Line: +				points,
+>, <Line: +				otherps,
+>, <Line: +				otherpoints,
+>, <Line: +				plotOffset,
+>, <Line: +				fillStyle;
+>, <Line: +			function openPolygon(x, y) {
+>, <Line: +				ctx.beginPath();
+>, <Line: +				ctx.moveTo(
+>, <Line: +					series.xaxis.p2c(x) + plotOffset.left,
+>, <Line: +					series.yaxis.p2c(y) + plotOffset.top
+>, <Line: +				);
+>, <Line: +			}
+>, <Line: +			function closePolygon() {
+>, <Line: +				ctx.closePath();
+>, <Line: +				ctx.fill();
+>, <Line: +			}
+>, <Line: +			function validateInput() {
+>, <Line: +				if (points.length / ps !== otherpoints.length / otherps) {
+>, <Line: +					console.error("Refusing to graph inconsistent number of points");
+>, <Line: +					return false;
+>, <Line: +				}
+>, <Line: +				var i;
+>, <Line: +				for (i = 0; i < (points.length / ps); i++) {
+>, <Line: +					if (
+>, <Line: +						points[i * ps] !== null &&
+>, <Line: +						otherpoints[i * otherps] !== null &&
+>, <Line: +						points[i * ps] !== otherpoints[i * otherps]
+>, <Line: +					) {
+>, <Line: +						console.error("Refusing to graph points without matching value");
+>, <Line: +						return false;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				return true;
+>, <Line: +			}
+>, <Line: +			function findNextStart(start_i, end_i) {
+>, <Line: +				console.assert(end_i > start_i, "expects the end index to be greater than the start index");
+>, <Line: +				var start = (
+>, <Line: +						start_i === 0 ||
+>, <Line: +						points[start_i - 1] === null ||
+>, <Line: +						otherpoints[start_i - 1] === null
+>, <Line: +					),
+>, <Line: +					equal = false,
+>, <Line: +					i,
+>, <Line: +					intersect;
+>, <Line: +				for (i = start_i; i < end_i; i++) {
+>, <Line: +					// Take note of null points
+>, <Line: +					if (
+>, <Line: +						points[(i * ps) + 1] === null ||
+>, <Line: +						otherpoints[(i * ps) + 1] === null
+>, <Line: +					) {
+>, <Line: +						equal = false;
+>, <Line: +						start = true;
+>, <Line: +					}
+>, <Line: +					// Take note of equal points
+>, <Line: +					else if (points[(i * ps) + 1] === otherpoints[(i * otherps) + 1]) {
+>, <Line: +						equal = true;
+>, <Line: +						start = false;
+>, <Line: +					}
+>, <Line: +					else if (points[(i * ps) + 1] > otherpoints[(i * otherps) + 1]) {
+>, <Line: +						// If we begin above the desired point
+>, <Line: +						if (start) {
+>, <Line: +							openPolygon(points[i * ps], points[(i * ps) + 1]);
+>, <Line: +						}
+>, <Line: +						// If an equal point preceeds this, start the polygon at that equal point
+>, <Line: +						else if (equal) {
+>, <Line: +							openPolygon(points[(i - 1) * ps], points[((i - 1) * ps) + 1]);
+>, <Line: +						}
+>, <Line: +						// Otherwise, find the intersection point, and start it there
+>, <Line: +						else {
+>, <Line: +							intersect = intersectionPoint(i);
+>, <Line: +							openPolygon(intersect[0], intersect[1]);
+>, <Line: +						}
+>, <Line: +						topTraversal(i, end_i);
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					// If we go below equal, equal at any preceeding point is irrelevant
+>, <Line: +					else {
+>, <Line: +						start = false;
+>, <Line: +						equal = false;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			function intersectionPoint(right_i) {
+>, <Line: +				console.assert(right_i > 0, "expects the second point in the series line segment");
+>, <Line: +				var i, intersect;
+>, <Line: +				for (i = 1; i < (otherpoints.length / otherps); i++) {
+>, <Line: +					intersect = segmentIntersection(
+>, <Line: +						points[(right_i - 1) * ps], points[((right_i - 1) * ps) + 1],
+>, <Line: +						points[right_i * ps], points[(right_i * ps) + 1],
+>, <Line: +						otherpoints[(i - 1) * otherps], otherpoints[((i - 1) * otherps) + 1],
+>, <Line: +						otherpoints[i * otherps], otherpoints[(i * otherps) + 1]
+>, <Line: +					);
+>, <Line: +					if (intersect !== null) {
+>, <Line: +						return intersect;
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				console.error("intersectionPoint() should only be called when an intersection happens");
+>, <Line: +			}
+>, <Line: +			function bottomTraversal(start_i, end_i) {
+>, <Line: +				console.assert(start_i >= end_i, "the start should be the rightmost point, and the end should be the leftmost (excluding the equal or intersecting point)");
+>, <Line: +				var i;
+>, <Line: +				for (i = start_i; i >= end_i; i--) {
+>, <Line: +					ctx.lineTo(
+>, <Line: +						otherseries.xaxis.p2c(otherpoints[i * otherps]) + plotOffset.left,
+>, <Line: +						otherseries.yaxis.p2c(otherpoints[(i * otherps) + 1]) + plotOffset.top
+>, <Line: +					);
+>, <Line: +				}
+>, <Line: +				closePolygon();
+>, <Line: +			}
+>, <Line: +			function topTraversal(start_i, end_i) {
+>, <Line: +				console.assert(start_i <= end_i, "the start should be the rightmost point, and the end should be the leftmost (excluding the equal or intersecting point)");
+>, <Line: +				var i,
+>, <Line: +					intersect;
+>, <Line: +				for (i = start_i; i < end_i; i++) {
+>, <Line: +					if (points[(i * ps) + 1] === null && i > start_i) {
+>, <Line: +						bottomTraversal(i - 1, start_i);
+>, <Line: +						findNextStart(i, end_i);
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					else if (points[(i * ps) + 1] === otherpoints[(i * otherps) + 1]) {
+>, <Line: +						bottomTraversal(i, start_i);
+>, <Line: +						findNextStart(i, end_i);
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					else if (points[(i * ps) + 1] < otherpoints[(i * otherps) + 1]) {
+>, <Line: +						intersect = intersectionPoint(i);
+>, <Line: +						ctx.lineTo(
+>, <Line: +							series.xaxis.p2c(intersect[0]) + plotOffset.left,
+>, <Line: +							series.yaxis.p2c(intersect[1]) + plotOffset.top
+>, <Line: +						);
+>, <Line: +						bottomTraversal(i, start_i);
+>, <Line: +						findNextStart(i, end_i);
+>, <Line: +						return;
+>, <Line: +					}
+>, <Line: +					else {
+>, <Line: +						ctx.lineTo(
+>, <Line: +							series.xaxis.p2c(points[i * ps]) + plotOffset.left,
+>, <Line: +							series.yaxis.p2c(points[(i * ps) + 1]) + plotOffset.top
+>, <Line: +						);
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				bottomTraversal(end_i, start_i);
+>, <Line: +			}
+>, <Line: +			// Begin processing
+>, <Line: +			otherseries = findBelowSeries(series, plot.getData());
+>, <Line: +			if (!otherseries) {
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			ps = series.datapoints.pointsize;
+>, <Line: +			points = series.datapoints.points;
+>, <Line: +			otherps = otherseries.datapoints.pointsize;
+>, <Line: +			otherpoints = otherseries.datapoints.points;
+>, <Line: +			plotOffset = plot.getPlotOffset();
+>, <Line: +			if (!validateInput()) {
+>, <Line: +				return;
+>, <Line: +			}
+>, <Line: +			// Flot's getFillStyle() should probably be exposed somewhere
+>, <Line: +			fillStyle = $.color.parse(series.color);
+>, <Line: +			fillStyle.a = 0.4;
+>, <Line: +			fillStyle.normalize();
+>, <Line: +			ctx.fillStyle = fillStyle.toString();
+>, <Line: +			// Begin recursive bi-directional traversal
+>, <Line: +			findNextStart(0, points.length / ps);
+>, <Line: +		}
+>, <Line: +		plot.hooks.drawSeries.push(plotDifferenceArea);
+>, <Line: +	}
+>, <Line: +	$.plot.plugins.push({
+>, <Line: +		init: init,
+>, <Line: +		options: options,
+>, <Line: +		name: "fillbelow",
+>, <Line: +		version: "0.1.0"
+>, <Line: +	});
+>]
+[<Line: -(function($) {
+>, <Line: -    "use strict";
+>, <Line: -    var options = {
+>, <Line: -        series: {
+>, <Line: -            fillBelowTo: null
+>, <Line: -        }
+>, <Line: -    };
+>, <Line: -    function init(plot) {
+>, <Line: -        function findBelowSeries( series, allseries ) {
+>, <Line: -            var i;
+>, <Line: -            for ( i = 0; i < allseries.length; ++i ) {
+>, <Line: -                if ( allseries[ i ].id === series.fillBelowTo ) {
+>, <Line: -                    return allseries[ i ];
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            return null;
+>, <Line: -        }
+>, <Line: -        /* top and bottom doesn't actually matter for this, we're just using it to help make this easier to think about */
+>, <Line: -        /* this is a vector cross product operation */
+>, <Line: -        function segmentIntersection(top_left_x, top_left_y, top_right_x, top_right_y, bottom_left_x, bottom_left_y, bottom_right_x, bottom_right_y) {
+>, <Line: -            var top_delta_x, top_delta_y, bottom_delta_x, bottom_delta_y,
+>, <Line: -                s, t;
+>, <Line: -            top_delta_x = top_right_x - top_left_x;
+>, <Line: -            top_delta_y = top_right_y - top_left_y;
+>, <Line: -            bottom_delta_x = bottom_right_x - bottom_left_x;
+>, <Line: -            bottom_delta_y = bottom_right_y - bottom_left_y;
+>, <Line: -            s = (
+>, <Line: -                (-top_delta_y * (top_left_x - bottom_left_x)) + (top_delta_x * (top_left_y - bottom_left_y))
+>, <Line: -            ) / (
+>, <Line: -                -bottom_delta_x * top_delta_y + top_delta_x * bottom_delta_y
+>, <Line: -            );
+>, <Line: -            t = (
+>, <Line: -                (bottom_delta_x * (top_left_y - bottom_left_y)) - (bottom_delta_y * (top_left_x - bottom_left_x))
+>, <Line: -            ) / (
+>, <Line: -                -bottom_delta_x * top_delta_y + top_delta_x * bottom_delta_y
+>, <Line: -            );
+>, <Line: -            // Collision detected
+>, <Line: -            if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
+>, <Line: -                return [
+>, <Line: -                    top_left_x + (t * top_delta_x), // X
+>, <Line: -                    top_left_y + (t * top_delta_y) // Y
+>, <Line: -                ];
+>, <Line: -            }
+>, <Line: -            // No collision
+>, <Line: -            return null;
+>, <Line: -        }
+>, <Line: -        function plotDifferenceArea(plot, ctx, series) {
+>, <Line: -            if ( series.fillBelowTo === null ) {
+>, <Line: -                return;
+>, <Line: -            }
+>, <Line: -            var otherseries,
+>, <Line: -                ps,
+>, <Line: -                points,
+>, <Line: -                otherps,
+>, <Line: -                otherpoints,
+>, <Line: -                plotOffset,
+>, <Line: -                fillStyle;
+>, <Line: -            function openPolygon(x, y) {
+>, <Line: -                ctx.beginPath();
+>, <Line: -                ctx.moveTo(
+>, <Line: -                    series.xaxis.p2c(x) + plotOffset.left,
+>, <Line: -                    series.yaxis.p2c(y) + plotOffset.top
+>, <Line: -                );
+>, <Line: -            }
+>, <Line: -            function closePolygon() {
+>, <Line: -                ctx.closePath();
+>, <Line: -                ctx.fill();
+>, <Line: -            }
+>, <Line: -            function validateInput() {
+>, <Line: -                if (points.length/ps !== otherpoints.length/otherps) {
+>, <Line: -                    console.error("Refusing to graph inconsistent number of points");
+>, <Line: -                    return false;
+>, <Line: -                }
+>, <Line: -                var i;
+>, <Line: -                for (i = 0; i < (points.length / ps); i++) {
+>, <Line: -                    if (
+>, <Line: -                        points[i * ps] !== null &&
+>, <Line: -                        otherpoints[i * otherps] !== null &&
+>, <Line: -                        points[i * ps] !== otherpoints[i * otherps]
+>, <Line: -                    ) {
+>, <Line: -                        console.error("Refusing to graph points without matching value");
+>, <Line: -                        return false;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -                return true;
+>, <Line: -            }
+>, <Line: -            function findNextStart(start_i, end_i) {
+>, <Line: -                console.assert(end_i > start_i, "expects the end index to be greater than the start index");
+>, <Line: -                var start = (
+>, <Line: -                        start_i === 0 ||
+>, <Line: -                        points[start_i - 1] === null ||
+>, <Line: -                        otherpoints[start_i - 1] === null
+>, <Line: -                    ),
+>, <Line: -                    equal = false,
+>, <Line: -                    i,
+>, <Line: -                    intersect;
+>, <Line: -                for (i = start_i; i < end_i; i++) {
+>, <Line: -                    // Take note of null points
+>, <Line: -                    if (
+>, <Line: -                        points[(i * ps) + 1] === null ||
+>, <Line: -                        otherpoints[(i * ps) + 1] === null
+>, <Line: -                    ) {
+>, <Line: -                        equal = false;
+>, <Line: -                        start = true;
+>, <Line: -                    }
+>, <Line: -                    // Take note of equal points
+>, <Line: -                    else if (points[(i * ps) + 1] === otherpoints[(i * otherps) + 1]) {
+>, <Line: -                        equal = true;
+>, <Line: -                        start = false;
+>, <Line: -                    }
+>, <Line: -                    else if (points[(i * ps) + 1] > otherpoints[(i * otherps) + 1]) {
+>, <Line: -                        // If we begin above the desired point
+>, <Line: -                        if (start) {
+>, <Line: -                            openPolygon(points[i * ps], points[(i * ps) + 1]);
+>, <Line: -                        }
+>, <Line: -                        // If an equal point preceeds this, start the polygon at that equal point
+>, <Line: -                        else if (equal) {
+>, <Line: -                            openPolygon(points[(i - 1) * ps], points[((i - 1) * ps) + 1]);
+>, <Line: -                        }
+>, <Line: -                        // Otherwise, find the intersection point, and start it there
+>, <Line: -                        else {
+>, <Line: -                            intersect = intersectionPoint(i);
+>, <Line: -                            openPolygon(intersect[0], intersect[1]);
+>, <Line: -                        }
+>, <Line: -                        topTraversal(i, end_i);
+>, <Line: -                        return;
+>, <Line: -                    }
+>, <Line: -                    // If we go below equal, equal at any preceeding point is irrelevant
+>, <Line: -                    else {
+>, <Line: -                        start = false;
+>, <Line: -                        equal = false;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -            }
+>, <Line: -            function intersectionPoint(right_i) {
+>, <Line: -                console.assert(right_i > 0, "expects the second point in the series line segment");
+>, <Line: -                var i, intersect;
+>, <Line: -                for (i = 1; i < (otherpoints.length/otherps); i++) {
+>, <Line: -                    intersect = segmentIntersection(
+>, <Line: -                        points[(right_i - 1) * ps], points[((right_i - 1) * ps) + 1],
+>, <Line: -                        points[right_i * ps], points[(right_i * ps) + 1],
+>, <Line: -                        otherpoints[(i - 1) * otherps], otherpoints[((i - 1) * otherps) + 1],
+>, <Line: -                        otherpoints[i * otherps], otherpoints[(i * otherps) + 1]
+>, <Line: -                    );
+>, <Line: -                    if (intersect !== null) {
+>, <Line: -                        return intersect;
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -                console.error("intersectionPoint() should only be called when an intersection happens");
+>, <Line: -            }
+>, <Line: -            function bottomTraversal(start_i, end_i) {
+>, <Line: -                console.assert(start_i >= end_i, "the start should be the rightmost point, and the end should be the leftmost (excluding the equal or intersecting point)");
+>, <Line: -                var i;
+>, <Line: -                for (i = start_i; i >= end_i; i--) {
+>, <Line: -                    ctx.lineTo(
+>, <Line: -                        otherseries.xaxis.p2c(otherpoints[i * otherps]) + plotOffset.left,
+>, <Line: -                        otherseries.yaxis.p2c(otherpoints[(i * otherps) + 1]) + plotOffset.top
+>, <Line: -                    );
+>, <Line: -                }
+>, <Line: -                closePolygon();
+>, <Line: -            }
+>, <Line: -            function topTraversal(start_i, end_i) {
+>, <Line: -                console.assert(start_i <= end_i, "the start should be the rightmost point, and the end should be the leftmost (excluding the equal or intersecting point)");
+>, <Line: -                var i,
+>, <Line: -                    intersect;
+>, <Line: -                for (i = start_i; i < end_i; i++) {
+>, <Line: -                    if (points[(i * ps) + 1] === null && i > start_i) {
+>, <Line: -                        bottomTraversal(i - 1, start_i);
+>, <Line: -                        findNextStart(i, end_i);
+>, <Line: -                        return;
+>, <Line: -                    }
+>, <Line: -                    else if (points[(i * ps) + 1] === otherpoints[(i * otherps) + 1]) {
+>, <Line: -                        bottomTraversal(i, start_i);
+>, <Line: -                        findNextStart(i, end_i);
+>, <Line: -                        return;
+>, <Line: -                    }
+>, <Line: -                    else if (points[(i * ps) + 1] < otherpoints[(i * otherps) + 1]) {
+>, <Line: -                        intersect = intersectionPoint(i);
+>, <Line: -                        ctx.lineTo(
+>, <Line: -                            series.xaxis.p2c(intersect[0]) + plotOffset.left,
+>, <Line: -                            series.yaxis.p2c(intersect[1]) + plotOffset.top
+>, <Line: -                        );
+>, <Line: -                        bottomTraversal(i, start_i);
+>, <Line: -                        findNextStart(i, end_i);
+>, <Line: -                        return;
+>, <Line: -                    }
+>, <Line: -                    else {
+>, <Line: -                        ctx.lineTo(
+>, <Line: -                            series.xaxis.p2c(points[i * ps]) + plotOffset.left,
+>, <Line: -                            series.yaxis.p2c(points[(i * ps) + 1]) + plotOffset.top
+>, <Line: -                        );
+>, <Line: -                    }
+>, <Line: -                }
+>, <Line: -                bottomTraversal(end_i, start_i);
+>, <Line: -            }
+>, <Line: -            // Begin processing
+>, <Line: -            otherseries = findBelowSeries( series, plot.getData() );
+>, <Line: -            if ( !otherseries ) {
+>, <Line: -                return;
+>, <Line: -            }
+>, <Line: -            ps = series.datapoints.pointsize;
+>, <Line: -            points = series.datapoints.points;
+>, <Line: -            otherps = otherseries.datapoints.pointsize;
+>, <Line: -            otherpoints = otherseries.datapoints.points;
+>, <Line: -            plotOffset = plot.getPlotOffset();
+>, <Line: -            if (!validateInput()) {
+>, <Line: -                return;
+>, <Line: -            }
+>, <Line: -            // Flot's getFillStyle() should probably be exposed somewhere
+>, <Line: -            fillStyle = $.color.parse(series.color);
+>, <Line: -            fillStyle.a = 0.4;
+>, <Line: -            fillStyle.normalize();
+>, <Line: -            ctx.fillStyle = fillStyle.toString();
+>, <Line: -            // Begin recursive bi-directional traversal
+>, <Line: -            findNextStart(0, points.length/ps);
+>, <Line: -        }
+>, <Line: -        plot.hooks.drawSeries.push(plotDifferenceArea);
+>, <Line: -    }
+>, <Line: -    $.plot.plugins.push({
+>, <Line: -        init: init,
+>, <Line: -        options: options,
+>, <Line: -        name: "fillbelow",
+>, <Line: -        version: "0.1.0"
+>, <Line: -    });
+>]

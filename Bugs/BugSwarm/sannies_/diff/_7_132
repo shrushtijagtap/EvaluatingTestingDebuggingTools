@@ -1,0 +1,11 @@
+[<Line: +package org.mp4parser.boxes.apple;
+>, <Line: +/**
+>, <Line: + * Created by Tobias Bley / UltraMixer on 04/25/2014.
+>, <Line: + */
+>, <Line: +public class AppleGroupingBox extends Utf8AppleDataBox {
+>, <Line: +    public AppleGroupingBox() {
+>, <Line: +        super("©grp");
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,12 @@
+[<Line: +			int maxCommandLength,
+>, <Line: +			CommandProvider commandProvider)
+>, <Line: +			@Named("kairosdb.telnetserver.port") int port,
+>, <Line: +			@Named("kairosdb.telnetserver.max_command_size") int maxCommandLength,
+>, <Line: +			CommandProvider commandProvider)
+>]
+[<Line: -	                    int maxCommandLength,
+>, <Line: -	                    CommandProvider commandProvider)
+>, <Line: -	                    @Named("kairosdb.telnetserver.port") int port,
+>, <Line: -	                    @Named("kairosdb.telnetserver.max_command_size") int maxCommandLength,
+>, <Line: -	                    CommandProvider commandProvider)
+>]

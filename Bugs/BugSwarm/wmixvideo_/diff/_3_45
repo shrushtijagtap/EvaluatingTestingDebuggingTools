@@ -1,0 +1,16 @@
+[<Line: +    SIM("1", "Sim"),
+>, <Line: +    NAO("2", "N\u00e3o");
+>, <Line: +    private final String codigo;
+>, <Line: +    private final String descricao;
+>, <Line: +    NFNotaInfoItemIndicadorIncentivoFiscal(final String codigo, final String descricao) {
+>, <Line: +        this.descricao = descricao;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    SIM("1"),
+>, <Line: -    NAO("2");
+>, <Line: -    private String codigo;
+>, <Line: -    NFNotaInfoItemIndicadorIncentivoFiscal(final String codigo) {
+>]

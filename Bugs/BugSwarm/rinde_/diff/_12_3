@@ -1,0 +1,19 @@
+[<Line: + * @param <E> The type of {@link ConnectionData} that is used in the
+>, <Line: + *          {@link Connection}s.
+>, <Line: +  /**
+>, <Line: +   * The decorated graph.
+>, <Line: +   */
+>, <Line: +  /**
+>, <Line: +   * Instantiates a new instance.
+>, <Line: +   * @param delegate The graph instance to decorate.
+>, <Line: +   */
+>, <Line: +  public void addConnections(Iterable<? extends Connection<E>> connections) {
+>, <Line: +    delegate.addConnections(connections);
+>, <Line: +  }
+>, <Line: +  @Deprecated
+>, <Line: +  @Override
+>, <Line: +  public void addConnections(Collection<? extends Connection<E>> connections) {
+>]
+[<Line: - * @param <E>
+>, <Line: -  public void addConnections(Collection<Connection<E>> connections) {
+>]

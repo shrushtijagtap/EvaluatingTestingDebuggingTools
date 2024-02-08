@@ -1,0 +1,6 @@
+[<Line: +    boolean lookupAttributeBoolean(long deviceId, String attributeName, boolean defaultValue, boolean lookupConfig);
+>, <Line: +    String lookupAttributeString(long deviceId, String attributeName, String defaultValue, boolean lookupConfig);
+>, <Line: +    int lookupAttributeInteger(long deviceId, String attributeName, int defaultValue, boolean lookupConfig);
+>, <Line: +    long lookupAttributeLong(long deviceId, String attributeName, long defaultValue, boolean lookupConfig);
+>]
+[]

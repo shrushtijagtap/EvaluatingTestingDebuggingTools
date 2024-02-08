@@ -1,0 +1,44 @@
+[<Line: +package de.charite.compbio.jannovar.cmd.db_list;
+>, <Line: +import java.util.function.BiFunction;
+>, <Line: +import com.google.common.collect.Lists;
+>, <Line: +import de.charite.compbio.jannovar.UncheckedJannovarException;
+>, <Line: +import de.charite.compbio.jannovar.cmd.CommandLineParsingException;
+>, <Line: +import de.charite.compbio.jannovar.cmd.JannovarBaseOptions;
+>, <Line: +import de.charite.compbio.jannovar.cmd.JannovarDBOptions;
+>, <Line: +import net.sourceforge.argparse4j.impl.Arguments;
+>, <Line: +import net.sourceforge.argparse4j.inf.ArgumentGroup;
+>, <Line: +import net.sourceforge.argparse4j.inf.ArgumentParser;
+>, <Line: +import net.sourceforge.argparse4j.inf.Namespace;
+>, <Line: +import net.sourceforge.argparse4j.inf.Subparser;
+>, <Line: +import net.sourceforge.argparse4j.inf.Subparsers;
+>, <Line: +/**
+>, <Line: + * Configuration for the <tt>db-list</tt> command
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class JannovarDBListOptions extends JannovarDBOptions {
+>, <Line: +	/**
+>, <Line: +	 * Setup {@link ArgumentParser}
+>, <Line: +	 * 
+>, <Line: +	 * @param subParsers
+>, <Line: +	 *            {@link Subparsers} to setup
+>, <Line: +	 */
+>, <Line: +	public static void setupParser(Subparsers subParsers) {
+>, <Line: +		BiFunction<String[], Namespace, DatabaseListCommand> handler = (argv, args) -> {
+>, <Line: +			try {
+>, <Line: +				return new DatabaseListCommand(argv, args);
+>, <Line: +			} catch (CommandLineParsingException e) {
+>, <Line: +				throw new UncheckedJannovarException("Could not parse command line", e);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		Subparser subParser = subParsers.addParser("db-list", true).help("list databases available for download")
+>, <Line: +				.setDefault("cmd", handler);
+>, <Line: +		subParser.description("List databases available for download");
+>, <Line: +		ArgumentGroup optionalGroup = subParser.addArgumentGroup("Optional Arguments");
+>, <Line: +		optionalGroup.addArgument("-s", "--data-source-list").help("INI file with data source list")
+>, <Line: +				.setDefault(Lists.newArrayList("bundle:///default_sources.ini")).action(Arguments.append());
+>, <Line: +		JannovarBaseOptions.setupParser(subParser);
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

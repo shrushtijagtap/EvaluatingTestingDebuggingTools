@@ -1,0 +1,22 @@
+[<Line: +package org.mp4parser.boxes.oma;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +    protected long getContentSize() {
+>, <Line: +        return 7;
+>, <Line: +    }
+>, <Line: +    public void setKeyIndicatorLength(int keyIndicatorLength) {
+>, <Line: +        this.keyIndicatorLength = keyIndicatorLength;
+>, <Line: +    }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -    protected long getContentSize() {
+>, <Line: -        return 7;
+>, <Line: -    }
+>, <Line: -    public void setKeyIndicatorLength(int keyIndicatorLength) {
+>, <Line: -        this.keyIndicatorLength = keyIndicatorLength;
+>, <Line: -    }
+>]

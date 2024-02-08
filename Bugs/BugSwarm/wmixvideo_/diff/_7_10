@@ -1,0 +1,110 @@
+[<Line: +package com.fincatto.nfe310.classes.inutilizacao;
+>, <Line: +import org.joda.time.LocalDateTime;
+>, <Line: +import org.joda.time.format.DateTimeFormat;
+>, <Line: +import org.junit.Assert;
+>, <Line: +import org.junit.Test;
+>, <Line: +import com.fincatto.nfe310.classes.NFAmbiente;
+>, <Line: +import com.fincatto.nfe310.classes.NFUnidadeFederativa;
+>, <Line: +import com.fincatto.nfe310.classes.evento.inutilizacao.NFRetornoEventoInutilizacaoDados;
+>, <Line: +public class NFRetornoEventoInutilizacaoDadosTest {
+>, <Line: +    @Test
+>, <Line: +    public void deveObterAmbienteComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final NFAmbiente ambiente = NFAmbiente.HOMOLOGACAO;
+>, <Line: +        dados.setAmbiente(ambiente);
+>, <Line: +        Assert.assertEquals(ambiente, dados.getAmbiente());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterAnoComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final int ano = 2015;
+>, <Line: +        dados.setAno(ano);
+>, <Line: +        Assert.assertEquals(ano, dados.getAno(), 0);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterCnpjComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final String cnpj = "44806226000150";
+>, <Line: +        dados.setCnpj(cnpj);
+>, <Line: +        Assert.assertEquals(cnpj, dados.getCnpj());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterDataHoraRecebimentoComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final LocalDateTime datahoraRecebimento = LocalDateTime.parse("2010-10-10 10:10:10", DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss"));
+>, <Line: +        dados.setDatahoraRecebimento(datahoraRecebimento);
+>, <Line: +        Assert.assertEquals(datahoraRecebimento, dados.getDatahoraRecebimento());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterIdentificadorComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final String identificador = "NFe132465789123456789";
+>, <Line: +        dados.setIdentificador(identificador);
+>, <Line: +        Assert.assertEquals(identificador, dados.getIdentificador());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterModeloNotaFiscalComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final String modeloNotaFiscal = "55";
+>, <Line: +        dados.setModeloNotaFiscal(modeloNotaFiscal);
+>, <Line: +        Assert.assertEquals(modeloNotaFiscal, dados.getModeloNotaFiscal());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterMotivoComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final String motivo = "motivo de teste";
+>, <Line: +        dados.setMotivo(motivo);
+>, <Line: +        Assert.assertEquals(motivo, dados.getMotivo());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterNumeroNFFinalComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final String numeroNFFinal = "654231";
+>, <Line: +        dados.setNumeroNFFinal(numeroNFFinal);
+>, <Line: +        Assert.assertEquals(numeroNFFinal, dados.getNumeroNFFinal());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterNumeroNFInicialComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final String numeroNFInicial = "132456";
+>, <Line: +        dados.setNumeroNFInicial(numeroNFInicial);
+>, <Line: +        Assert.assertEquals(numeroNFInicial, dados.getNumeroNFInicial());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterNumeroProtocoloComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final String numeroProtocolo = "123465789";
+>, <Line: +        dados.setNumeroProtocolo(numeroProtocolo);
+>, <Line: +        Assert.assertEquals(numeroProtocolo, dados.getNumeroProtocolo());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterSerieComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final String serie = "088";
+>, <Line: +        dados.setSerie(serie);
+>, <Line: +        Assert.assertEquals(serie, dados.getSerie());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterStatusComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final String status = "Em andamento";
+>, <Line: +        dados.setStatus(status);
+>, <Line: +        Assert.assertEquals(status, dados.getStatus());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterUnidadeFederativaComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final NFUnidadeFederativa unidadeFederativa = NFUnidadeFederativa.SC;
+>, <Line: +        dados.setUf(unidadeFederativa);
+>, <Line: +        Assert.assertEquals(unidadeFederativa, dados.getUf());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterVersaoAplicacaoComoFoiSetado() {
+>, <Line: +        final NFRetornoEventoInutilizacaoDados dados = new NFRetornoEventoInutilizacaoDados();
+>, <Line: +        final String versaoAplicacao = "v10.0";
+>, <Line: +        dados.setVersaoAplicacao(versaoAplicacao);
+>, <Line: +        Assert.assertEquals(versaoAplicacao, dados.getVersaoAplicacao());
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

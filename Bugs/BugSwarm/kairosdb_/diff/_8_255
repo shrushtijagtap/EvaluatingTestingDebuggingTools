@@ -1,0 +1,522 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'config',
+>, <Line: +		'kbn',
+>, <Line: +		'moment'
+>, <Line: +	],
+>, <Line: +	function (angular, _, config, kbn, moment) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		module.factory('ElasticDatasource', function ($q, $http, templateSrv) {
+>, <Line: +			function ElasticDatasource(datasource) {
+>, <Line: +				this.type = 'elastic';
+>, <Line: +				this.basicAuth = datasource.basicAuth;
+>, <Line: +				this.url = datasource.url;
+>, <Line: +				this.name = datasource.name;
+>, <Line: +				this.index = datasource.index;
+>, <Line: +				this.grafanaDB = datasource.grafanaDB;
+>, <Line: +				this.searchMaxResults = config.search.max_results || 20;
+>, <Line: +				this.saveTemp = _.isUndefined(datasource.save_temp) ? true : datasource.save_temp;
+>, <Line: +				this.saveTempTTL = _.isUndefined(datasource.save_temp_ttl) ? '30d' : datasource.save_temp_ttl;
+>, <Line: +				this.annotationEditorSrc = 'app/partials/elasticsearch/annotation_editor.html';
+>, <Line: +				this.supportAnnotations = true;
+>, <Line: +				this.supportMetrics = false;
+>, <Line: +			}
+>, <Line: +			ElasticDatasource.prototype._request = function (method, url, index, data) {
+>, <Line: +				var options = {
+>, <Line: +					url: this.url + "/" + index + url,
+>, <Line: +					method: method,
+>, <Line: +					data: data
+>, <Line: +				};
+>, <Line: +				if (this.basicAuth) {
+>, <Line: +					options.withCredentials = true;
+>, <Line: +					options.headers = {
+>, <Line: +						"Authorization": "Basic " + this.basicAuth
+>, <Line: +					};
+>, <Line: +				}
+>, <Line: +				return $http(options);
+>, <Line: +			};
+>, <Line: +			ElasticDatasource.prototype._get = function (url) {
+>, <Line: +				return this._request('GET', url, this.index)
+>, <Line: +					.then(function (results) {
+>, <Line: +						return results.data;
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			ElasticDatasource.prototype._post = function (url, data) {
+>, <Line: +				return this._request('POST', url, this.index, data)
+>, <Line: +					.then(function (results) {
+>, <Line: +						return results.data;
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			ElasticDatasource.prototype.annotationQuery = function (annotation, rangeUnparsed) {
+>, <Line: +				var range = {};
+>, <Line: +				var timeField = annotation.timeField || '@timestamp';
+>, <Line: +				var queryString = annotation.query || '*';
+>, <Line: +				var tagsField = annotation.tagsField || 'tags';
+>, <Line: +				var titleField = annotation.titleField || 'desc';
+>, <Line: +				var textField = annotation.textField || null;
+>, <Line: +				range[annotation.timeField] = {
+>, <Line: +					from: rangeUnparsed.from,
+>, <Line: +					to: rangeUnparsed.to,
+>, <Line: +				};
+>, <Line: +				var queryInterpolated = templateSrv.replace(queryString);
+>, <Line: +				var filter = {"bool": {"must": [{"range": range}]}};
+>, <Line: +				var query = {"bool": {"should": [{"query_string": {"query": queryInterpolated}}]}};
+>, <Line: +				var data = {
+>, <Line: +					"fields": [timeField, "_source"],
+>, <Line: +					"query": {"filtered": {"query": query, "filter": filter}},
+>, <Line: +					"size": 100
+>, <Line: +				};
+>, <Line: +				return this._request('POST', '/_search', annotation.index, data).then(function (results) {
+>, <Line: +					var list = [];
+>, <Line: +					var hits = results.data.hits.hits;
+>, <Line: +					var getFieldFromSource = function (source, fieldName) {
+>, <Line: +						if (!fieldName) {
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +						var fieldNames = fieldName.split('.');
+>, <Line: +						var fieldValue = source;
+>, <Line: +						for (var i = 0; i < fieldNames.length; i++) {
+>, <Line: +							fieldValue = fieldValue[fieldNames[i]];
+>, <Line: +							if (!fieldValue) {
+>, <Line: +								console.log('could not find field in annotatation: ', fieldName);
+>, <Line: +								return '';
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +						if (_.isArray(fieldValue)) {
+>, <Line: +							fieldValue = fieldValue.join(', ');
+>, <Line: +						}
+>, <Line: +						return fieldValue;
+>, <Line: +					};
+>, <Line: +					for (var i = 0; i < hits.length; i++) {
+>, <Line: +						var source = hits[i]._source;
+>, <Line: +						var fields = hits[i].fields;
+>, <Line: +						var time = source[timeField];
+>, <Line: +						if (_.isString(fields[timeField]) || _.isNumber(fields[timeField])) {
+>, <Line: +							time = fields[timeField];
+>, <Line: +						}
+>, <Line: +						var event = {
+>, <Line: +							annotation: annotation,
+>, <Line: +							time: moment.utc(time).valueOf(),
+>, <Line: +							title: getFieldFromSource(source, titleField),
+>, <Line: +							tags: getFieldFromSource(source, tagsField),
+>, <Line: +							text: getFieldFromSource(source, textField)
+>, <Line: +						};
+>, <Line: +						list.push(event);
+>, <Line: +					}
+>, <Line: +					return list;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			ElasticDatasource.prototype._getDashboardWithSlug = function (id) {
+>, <Line: +				return this._get('/dashboard/' + kbn.slugifyForUrl(id))
+>, <Line: +					.then(function (result) {
+>, <Line: +						return angular.fromJson(result._source.dashboard);
+>, <Line: +					}, function () {
+>, <Line: +						throw "Dashboard not found";
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			ElasticDatasource.prototype.getDashboard = function (id, isTemp) {
+>, <Line: +				var url = '/dashboard/' + id;
+>, <Line: +				if (isTemp) {
+>, <Line: +					url = '/temp/' + id;
+>, <Line: +				}
+>, <Line: +				var self = this;
+>, <Line: +				return this._get(url)
+>, <Line: +					.then(function (result) {
+>, <Line: +						return angular.fromJson(result._source.dashboard);
+>, <Line: +					}, function (data) {
+>, <Line: +						if (data.status === 0) {
+>, <Line: +							throw "Could not contact Elasticsearch. Please ensure that Elasticsearch is reachable from your browser.";
+>, <Line: +						} else {
+>, <Line: +							// backward compatible fallback
+>, <Line: +							return self._getDashboardWithSlug(id);
+>, <Line: +						}
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			ElasticDatasource.prototype.saveDashboard = function (dashboard) {
+>, <Line: +				var title = dashboard.title;
+>, <Line: +				var temp = dashboard.temp;
+>, <Line: +				if (temp) {
+>, <Line: +					delete dashboard.temp;
+>, <Line: +				}
+>, <Line: +				var data = {
+>, <Line: +					user: 'guest',
+>, <Line: +					group: 'guest',
+>, <Line: +					title: title,
+>, <Line: +					tags: dashboard.tags,
+>, <Line: +					dashboard: angular.toJson(dashboard)
+>, <Line: +				};
+>, <Line: +				if (temp) {
+>, <Line: +					return this._saveTempDashboard(data);
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					var id = encodeURIComponent(kbn.slugifyForUrl(title));
+>, <Line: +					var self = this;
+>, <Line: +					return this._request('PUT', '/dashboard/' + id, this.index, data)
+>, <Line: +						.then(function (results) {
+>, <Line: +							self._removeUnslugifiedDashboard(results, title, id);
+>, <Line: +							return {title: title, url: '/dashboard/db/' + id};
+>, <Line: +						}, function () {
+>, <Line: +							throw 'Failed to save to elasticsearch';
+>, <Line: +						});
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			ElasticDatasource.prototype._removeUnslugifiedDashboard = function (saveResult, title, id) {
+>, <Line: +				if (saveResult.statusText !== 'Created') {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				if (title === id) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				var self = this;
+>, <Line: +				this._get('/dashboard/' + title).then(function () {
+>, <Line: +					self.deleteDashboard(title);
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			ElasticDatasource.prototype._saveTempDashboard = function (data) {
+>, <Line: +				return this._request('POST', '/temp/?ttl=' + this.saveTempTTL, this.index, data)
+>, <Line: +					.then(function (result) {
+>, <Line: +						var baseUrl = window.location.href.replace(window.location.hash, '');
+>, <Line: +						var url = baseUrl + "#dashboard/temp/" + result.data._id;
+>, <Line: +						return {title: data.title, url: url};
+>, <Line: +					}, function (err) {
+>, <Line: +						throw "Failed to save to temp dashboard to elasticsearch " + err.data;
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			ElasticDatasource.prototype.deleteDashboard = function (id) {
+>, <Line: +				return this._request('DELETE', '/dashboard/' + id, this.index)
+>, <Line: +					.then(function (result) {
+>, <Line: +						return result.data._id;
+>, <Line: +					}, function (err) {
+>, <Line: +						throw err.data;
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			ElasticDatasource.prototype.searchDashboards = function (queryString) {
+>, <Line: +				var endsInOpen = function (string, opener, closer) {
+>, <Line: +					var character;
+>, <Line: +					var count = 0;
+>, <Line: +					for (var i = 0, len = string.length; i < len; i++) {
+>, <Line: +						character = string[i];
+>, <Line: +						if (character === opener) {
+>, <Line: +							count++;
+>, <Line: +						} else if (character === closer) {
+>, <Line: +							count--;
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					return count > 0;
+>, <Line: +				};
+>, <Line: +				var tagsOnly = queryString.indexOf('tags!:') === 0;
+>, <Line: +				if (tagsOnly) {
+>, <Line: +					var tagsQuery = queryString.substring(6, queryString.length);
+>, <Line: +					queryString = 'tags:' + tagsQuery + '*';
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					if (queryString.length === 0) {
+>, <Line: +						queryString = 'title:';
+>, <Line: +					}
+>, <Line: +					// make this a partial search if we're not in some reserved portion of the language,  comments on conditionals, in order:
+>, <Line: +					// 1. ends in reserved character, boosting, boolean operator ( -foo)
+>, <Line: +					// 2. typing a reserved word like AND, OR, NOT
+>, <Line: +					// 3. open parens (groupiing)
+>, <Line: +					// 4. open " (term phrase)
+>, <Line: +					// 5. open [ (range)
+>, <Line: +					// 6. open { (range)
+>, <Line: +					// see http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
+>, <Line: +					if (!queryString.match(/(\*|\]|}|~|\)|"|^\d+|\s[\-+]\w+)$/) && !queryString.match(/[A-Z]$/) && !endsInOpen(queryString, '(', ')') && !endsInOpen(queryString, '"', '"') && !endsInOpen(queryString, '[', ']') && !endsInOpen(queryString, '[', '}') && !endsInOpen(queryString, '{', ']') && !endsInOpen(queryString, '{', '}')
+>, <Line: +					) {
+>, <Line: +						queryString += '*';
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				var query = {
+>, <Line: +					query: {query_string: {query: queryString}},
+>, <Line: +					facets: {
+>, <Line: +						tags: {
+>, <Line: +							terms: {
+>, <Line: +								field: "tags",
+>, <Line: +								order: "term",
+>, <Line: +								size: 50
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +					},
+>, <Line: +					size: this.searchMaxResults,
+>, <Line: +					sort: ["_uid"]
+>, <Line: +				};
+>, <Line: +				return this._post('/dashboard/_search', query)
+>, <Line: +					.then(function (results) {
+>, <Line: +						if (_.isUndefined(results.hits)) {
+>, <Line: +							return {dashboards: [], tags: []};
+>, <Line: +						}
+>, <Line: +						var resultsHits = results.hits.hits;
+>, <Line: +						var displayHits = {
+>, <Line: +							dashboards: [],
+>, <Line: +							tags: results.facets.tags.terms || []
+>, <Line: +						};
+>, <Line: +						for (var i = 0, len = resultsHits.length; i < len; i++) {
+>, <Line: +							var hit = resultsHits[i];
+>, <Line: +							displayHits.dashboards.push({
+>, <Line: +								id: hit._id,
+>, <Line: +								title: hit._source.title,
+>, <Line: +								tags: hit._source.tags
+>, <Line: +							});
+>, <Line: +						}
+>, <Line: +						displayHits.tagsOnly = tagsOnly;
+>, <Line: +						return displayHits;
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			return ElasticDatasource;
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'config',
+>, <Line: -  'kbn',
+>, <Line: -  'moment'
+>, <Line: -],
+>, <Line: -function (angular, _, config, kbn, moment) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.factory('ElasticDatasource', function($q, $http, templateSrv) {
+>, <Line: -    function ElasticDatasource(datasource) {
+>, <Line: -      this.type = 'elastic';
+>, <Line: -      this.basicAuth = datasource.basicAuth;
+>, <Line: -      this.url = datasource.url;
+>, <Line: -      this.name = datasource.name;
+>, <Line: -      this.index = datasource.index;
+>, <Line: -      this.grafanaDB = datasource.grafanaDB;
+>, <Line: -      this.searchMaxResults = config.search.max_results || 20;
+>, <Line: -      this.saveTemp = _.isUndefined(datasource.save_temp) ? true : datasource.save_temp;
+>, <Line: -      this.saveTempTTL = _.isUndefined(datasource.save_temp_ttl) ? '30d' : datasource.save_temp_ttl;
+>, <Line: -      this.annotationEditorSrc = 'app/partials/elasticsearch/annotation_editor.html';
+>, <Line: -      this.supportAnnotations = true;
+>, <Line: -      this.supportMetrics = false;
+>, <Line: -    }
+>, <Line: -    ElasticDatasource.prototype._request = function(method, url, index, data) {
+>, <Line: -      var options = {
+>, <Line: -        url: this.url + "/" + index + url,
+>, <Line: -        method: method,
+>, <Line: -        data: data
+>, <Line: -      };
+>, <Line: -      if (this.basicAuth) {
+>, <Line: -        options.withCredentials = true;
+>, <Line: -        options.headers = {
+>, <Line: -          "Authorization": "Basic " + this.basicAuth
+>, <Line: -        };
+>, <Line: -      }
+>, <Line: -      return $http(options);
+>, <Line: -    };
+>, <Line: -    ElasticDatasource.prototype._get = function(url) {
+>, <Line: -      return this._request('GET', url, this.index)
+>, <Line: -        .then(function(results) {
+>, <Line: -          return results.data;
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    ElasticDatasource.prototype._post = function(url, data) {
+>, <Line: -      return this._request('POST', url, this.index, data)
+>, <Line: -        .then(function(results) {
+>, <Line: -          return results.data;
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    ElasticDatasource.prototype.annotationQuery = function(annotation, rangeUnparsed) {
+>, <Line: -      var range = {};
+>, <Line: -      var timeField = annotation.timeField || '@timestamp';
+>, <Line: -      var queryString = annotation.query || '*';
+>, <Line: -      var tagsField = annotation.tagsField || 'tags';
+>, <Line: -      var titleField = annotation.titleField || 'desc';
+>, <Line: -      var textField = annotation.textField || null;
+>, <Line: -      range[annotation.timeField]= {
+>, <Line: -        from: rangeUnparsed.from,
+>, <Line: -        to: rangeUnparsed.to,
+>, <Line: -      };
+>, <Line: -      var queryInterpolated = templateSrv.replace(queryString);
+>, <Line: -      var filter = { "bool": { "must": [{ "range": range }] } };
+>, <Line: -      var query = { "bool": { "should": [{ "query_string": { "query": queryInterpolated } }] } };
+>, <Line: -      var data = {
+>, <Line: -        "fields": [timeField, "_source"],
+>, <Line: -        "query" : { "filtered": { "query" : query, "filter": filter } },
+>, <Line: -        "size": 100
+>, <Line: -      };
+>, <Line: -      return this._request('POST', '/_search', annotation.index, data).then(function(results) {
+>, <Line: -        var list = [];
+>, <Line: -        var hits = results.data.hits.hits;
+>, <Line: -        var getFieldFromSource = function(source, fieldName) {
+>, <Line: -          if (!fieldName) { return; }
+>, <Line: -          var fieldNames = fieldName.split('.');
+>, <Line: -          var fieldValue = source;
+>, <Line: -          for (var i = 0; i < fieldNames.length; i++) {
+>, <Line: -            fieldValue = fieldValue[fieldNames[i]];
+>, <Line: -            if (!fieldValue) {
+>, <Line: -              console.log('could not find field in annotatation: ', fieldName);
+>, <Line: -              return '';
+>, <Line: -            }
+>, <Line: -          }
+>, <Line: -          if (_.isArray(fieldValue)) {
+>, <Line: -            fieldValue = fieldValue.join(', ');
+>, <Line: -          }
+>, <Line: -          return fieldValue;
+>, <Line: -        };
+>, <Line: -        for (var i = 0; i < hits.length; i++) {
+>, <Line: -          var source = hits[i]._source;
+>, <Line: -          var fields = hits[i].fields;
+>, <Line: -          var time = source[timeField];
+>, <Line: -          if (_.isString(fields[timeField]) || _.isNumber(fields[timeField])) {
+>, <Line: -            time = fields[timeField];
+>, <Line: -          }
+>, <Line: -          var event = {
+>, <Line: -            annotation: annotation,
+>, <Line: -            time: moment.utc(time).valueOf(),
+>, <Line: -            title: getFieldFromSource(source, titleField),
+>, <Line: -            tags: getFieldFromSource(source, tagsField),
+>, <Line: -            text: getFieldFromSource(source, textField)
+>, <Line: -          };
+>, <Line: -          list.push(event);
+>, <Line: -        }
+>, <Line: -        return list;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    ElasticDatasource.prototype._getDashboardWithSlug = function(id) {
+>, <Line: -      return this._get('/dashboard/' + kbn.slugifyForUrl(id))
+>, <Line: -        .then(function(result) {
+>, <Line: -          return angular.fromJson(result._source.dashboard);
+>, <Line: -        }, function() {
+>, <Line: -          throw "Dashboard not found";
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    ElasticDatasource.prototype.getDashboard = function(id, isTemp) {
+>, <Line: -      var url = '/dashboard/' + id;
+>, <Line: -      if (isTemp) { url = '/temp/' + id; }
+>, <Line: -      var self = this;
+>, <Line: -      return this._get(url)
+>, <Line: -        .then(function(result) {
+>, <Line: -          return angular.fromJson(result._source.dashboard);
+>, <Line: -        }, function(data) {
+>, <Line: -          if(data.status === 0) {
+>, <Line: -            throw "Could not contact Elasticsearch. Please ensure that Elasticsearch is reachable from your browser.";
+>, <Line: -          } else {
+>, <Line: -            // backward compatible fallback
+>, <Line: -            return self._getDashboardWithSlug(id);
+>, <Line: -          }
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    ElasticDatasource.prototype.saveDashboard = function(dashboard) {
+>, <Line: -      var title = dashboard.title;
+>, <Line: -      var temp = dashboard.temp;
+>, <Line: -      if (temp) { delete dashboard.temp; }
+>, <Line: -      var data = {
+>, <Line: -        user: 'guest',
+>, <Line: -        group: 'guest',
+>, <Line: -        title: title,
+>, <Line: -        tags: dashboard.tags,
+>, <Line: -        dashboard: angular.toJson(dashboard)
+>, <Line: -      };
+>, <Line: -      if (temp) {
+>, <Line: -        return this._saveTempDashboard(data);
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        var id = encodeURIComponent(kbn.slugifyForUrl(title));
+>, <Line: -        var self = this;
+>, <Line: -        return this._request('PUT', '/dashboard/' + id, this.index, data)
+>, <Line: -          .then(function(results) {
+>, <Line: -            self._removeUnslugifiedDashboard(results, title, id);
+>, <Line: -            return { title: title, url: '/dashboard/db/' + id };
+>, <Line: -          }, function() {
+>, <Line: -            throw 'Failed to save to elasticsearch';
+>, <Line: -          });
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    ElasticDatasource.prototype._removeUnslugifiedDashboard = function(saveResult, title, id) {
+>, <Line: -      if (saveResult.statusText !== 'Created') { return; }
+>, <Line: -      if (title === id) { return; }
+>, <Line: -      var self = this;
+>, <Line: -      this._get('/dashboard/' + title).then(function() {
+>, <Line: -        self.deleteDashboard(title);
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    ElasticDatasource.prototype._saveTempDashboard = function(data) {
+>, <Line: -      return this._request('POST', '/temp/?ttl=' + this.saveTempTTL, this.index, data)
+>, <Line: -        .then(function(result) {
+>, <Line: -          var baseUrl = window.location.href.replace(window.location.hash,'');
+>, <Line: -          var url = baseUrl + "#dashboard/temp/" + result.data._id;
+>, <Line: -          return { title: data.title, url: url };
+>, <Line: -        }, function(err) {
+>, <Line: -          throw "Failed to save to temp dashboard to elasticsearch " + err.data;
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    ElasticDatasource.prototype.deleteDashboard = function(id) {
+>, <Line: -      return this._request('DELETE', '/dashboard/' + id, this.index)
+>, <Line: -        .then(function(result) {
+>, <Line: -          return result.data._id;
+>, <Line: -        }, function(err) {
+>, <Line: -          throw err.data;
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    ElasticDatasource.prototype.searchDashboards = function(queryString) {
+>, <Line: -      var endsInOpen = function(string, opener, closer) {
+>, <Line: -        var character;
+>, <Line: -        var count = 0;
+>, <Line: -        for (var i = 0, len = string.length; i < len; i++) {
+>, <Line: -          character = string[i];
+>, <Line: -          if (character === opener) {
+>, <Line: -            count++;
+>, <Line: -          } else if (character === closer) {
+>, <Line: -            count--;
+>, <Line: -          }
+>, <Line: -        }
+>, <Line: -        return count > 0;
+>, <Line: -      };
+>, <Line: -      var tagsOnly = queryString.indexOf('tags!:') === 0;
+>, <Line: -      if (tagsOnly) {
+>, <Line: -        var tagsQuery = queryString.substring(6, queryString.length);
+>, <Line: -        queryString = 'tags:' + tagsQuery + '*';
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        if (queryString.length === 0) {
+>, <Line: -          queryString = 'title:';
+>, <Line: -        }
+>, <Line: -        // make this a partial search if we're not in some reserved portion of the language,  comments on conditionals, in order:
+>, <Line: -        // 1. ends in reserved character, boosting, boolean operator ( -foo)
+>, <Line: -        // 2. typing a reserved word like AND, OR, NOT
+>, <Line: -        // 3. open parens (groupiing)
+>, <Line: -        // 4. open " (term phrase)
+>, <Line: -        // 5. open [ (range)
+>, <Line: -        // 6. open { (range)
+>, <Line: -        // see http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
+>, <Line: -        if (!queryString.match(/(\*|\]|}|~|\)|"|^\d+|\s[\-+]\w+)$/) &&
+>, <Line: -            !queryString.match(/[A-Z]$/) &&
+>, <Line: -            !endsInOpen(queryString, '(', ')') &&
+>, <Line: -            !endsInOpen(queryString, '"', '"') &&
+>, <Line: -            !endsInOpen(queryString, '[', ']') && !endsInOpen(queryString, '[', '}') &&
+>, <Line: -            !endsInOpen(queryString, '{', ']') && !endsInOpen(queryString, '{', '}')
+>, <Line: -        ){
+>, <Line: -          queryString += '*';
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -      var query = {
+>, <Line: -        query: { query_string: { query: queryString } },
+>, <Line: -        facets: { tags: { terms: { field: "tags", order: "term", size: 50 } } },
+>, <Line: -        size: this.searchMaxResults,
+>, <Line: -        sort: ["_uid"]
+>, <Line: -      };
+>, <Line: -      return this._post('/dashboard/_search', query)
+>, <Line: -        .then(function(results) {
+>, <Line: -          if(_.isUndefined(results.hits)) {
+>, <Line: -            return { dashboards: [], tags: [] };
+>, <Line: -          }
+>, <Line: -          var resultsHits = results.hits.hits;
+>, <Line: -          var displayHits = { dashboards: [], tags: results.facets.tags.terms || [] };
+>, <Line: -          for (var i = 0, len = resultsHits.length; i < len; i++) {
+>, <Line: -            var hit = resultsHits[i];
+>, <Line: -            displayHits.dashboards.push({
+>, <Line: -              id: hit._id,
+>, <Line: -              title: hit._source.title,
+>, <Line: -              tags: hit._source.tags
+>, <Line: -            });
+>, <Line: -          }
+>, <Line: -          displayHits.tagsOnly = tagsOnly;
+>, <Line: -          return displayHits;
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    return ElasticDatasource;
+>, <Line: -  });
+>, <Line: -});
+>]

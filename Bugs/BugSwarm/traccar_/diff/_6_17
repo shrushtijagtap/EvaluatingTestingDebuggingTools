@@ -1,0 +1,12 @@
+[<Line: +package org.traccar.helper;
+>, <Line: +import org.junit.Assert;
+>, <Line: +import org.junit.Test;
+>, <Line: +public class ChecksumTest {
+>, <Line: +    @Test
+>, <Line: +    public void testLuhnChecksum() {
+>, <Line: +        Assert.assertEquals(7, Checksum.luhnChecksum(12345678901234L));
+>, <Line: +        Assert.assertEquals(0, Checksum.luhnChecksum(63070019470771L));
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

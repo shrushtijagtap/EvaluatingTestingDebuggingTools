@@ -1,0 +1,34 @@
+[<Line: +        final String cpstr;
+>, <Line: +        if ((cpstr = compileClassPath(handleLongClasspath(classPath, mainClass.length(), command, oc.args_))) != null) {
+>, <Line: +            command.add("-classpath");
+>, <Line: +            command.add(cpstr);
+>, <Line: +        }
+>, <Line: +        if (!isWrapperOfNonCapsule() && getAttribute(ATTR_CAPSULE_IN_CLASS_PATH))
+>, <Line: +            classPath.add(getJarFile());
+>, <Line: +        // the capsule jar
+>, <Line: +        if (!isWrapperOfNonCapsule() && isDeepEmpty(classPath))
+>, <Line: +            classPath.add(getJarFile());
+>, <Line: +    private static boolean isDeepEmpty(Object o) {
+>, <Line: +        if (o == null)
+>, <Line: +            return true;
+>, <Line: +        else if ("".equals(o))
+>, <Line: +            return true;
+>, <Line: +        else if (o instanceof Path)
+>, <Line: +            return false; // special case: a path is an iterable that may contain itself
+>, <Line: +        else if (o instanceof Iterable) {
+>, <Line: +            for (Object x : (Iterable<?>) o) {
+>, <Line: +                if(!isDeepEmpty(x))
+>, <Line: +                    return false;
+>, <Line: +            }
+>, <Line: +            return true;
+>, <Line: +        } else
+>, <Line: +            return false;
+>, <Line: +    }
+>]
+[<Line: -        command.add("-classpath");
+>, <Line: -        command.add(compileClassPath(handleLongClasspath(classPath, mainClass.length(), command, oc.args_)));
+>, <Line: -        if (!isWrapperOfNonCapsule()) {
+>, <Line: -            if (getAttribute(ATTR_CAPSULE_IN_CLASS_PATH))
+>, <Line: -                classPath.add(getJarFile());
+>, <Line: -        }
+>]

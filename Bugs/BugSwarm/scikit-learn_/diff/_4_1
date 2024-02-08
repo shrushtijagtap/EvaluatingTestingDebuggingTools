@@ -1,0 +1,8 @@
+[<Line: +        if self.n_neighbors is not None:
+>, <Line: +            if self.n_neighbors <= 0:
+>, <Line: +                raise ValueError(
+>, <Line: +                    "Expected n_neighbors > 0. Got %d" %
+>, <Line: +                    self.n_neighbors
+>, <Line: +                )
+>]
+[]

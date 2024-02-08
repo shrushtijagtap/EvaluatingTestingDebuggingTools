@@ -1,0 +1,30 @@
+[<Line: +    TRIBUTADA_COM_PERMISSAO_CREDITO("101", "Tributada com permiss\u00e3o de cr\u00e9dito"),
+>, <Line: +    TRIBUTADA_SEM_PERMISSAO_CREDITO("102", "Tributada sem permiss\u00e3o de cr\u00e9dito"),
+>, <Line: +    ISENCAO_ICMS_FAIXA_RECEITA_BRUTA("103", "Isen\u00e7\u00e3o ICMS faixa receita bruta"),
+>, <Line: +    TRIBUTADA_SIMPLES_NACIONAL_COM_PERMISSAO_DE_CREDITO_E_COBRANCA_ICMS_SUBSTITUICAO_TRIBUTARIA("201", "Tributada Simples Nacional com permiss\u00e3o de cr\u00e9dito e cobran\u00e7a ICMS ST"),
+>, <Line: +    TRIBUTADA_SIMPLES_NACIONAL_SEM_PERMISSAO_DE_CREDITO_E_COBRANCA_ICMS_SUBSTITUICAO_TRIBUTARIA("202", "Tributada Simples Nacional sem permiss\u00e3o de cr\u00e9dito e cobran\u00e7a ICMS ST"),
+>, <Line: +    TRIBUTADA_SIMPLES_NACIONAL_PARA_FAIXA_RECEITA_BRUTA_E_COBRANCA_ICMS_SUBSTITUICAO_TRIBUTARIA("203", "Tributada Simples Nacional para faixa receita bruta e cobran\u00e7a ICMS ST"),
+>, <Line: +    IMUNE("300", "Imune"),
+>, <Line: +    NAO_TRIBUTADA("400", "N\u00e3o tributada"),
+>, <Line: +    ICMS_COBRADO_ANTERIORMENTE_POR_SUBSTITUICAO_TRIBUTARIA_SUBSIDIO_OU_POR_ANTECIPACAO("500", "ICMS cobrado anteriormente por ST subs\u00eddio ou por antecipa\u00e7\u00e3o"),
+>, <Line: +    OUTROS("900", "Outros");
+>, <Line: +    private final String descricao;
+>, <Line: +    NFNotaSituacaoOperacionalSimplesNacional(final String codigo, final String descricao) {
+>, <Line: +        this.descricao = descricao;
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return codigo + " - " + descricao;
+>, <Line: +    }
+>]
+[<Line: -    TRIBUTADA_COM_PERMISSAO_CREDITO("101"),
+>, <Line: -    TRIBUTADA_SEM_PERMISSAO_CREDITO("102"),
+>, <Line: -    ISENCAO_ICMS_FAIXA_RECEITA_BRUTA("103"),
+>, <Line: -    TRIBUTADA_SIMPLES_NACIONAL_COM_PERMISSAO_DE_CREDITO_E_COBRANCA_ICMS_SUBSTITUICAO_TRIBUTARIA("201"),
+>, <Line: -    TRIBUTADA_SIMPLES_NACIONAL_SEM_PERMISSAO_DE_CREDITO_E_COBRANCA_ICMS_SUBSTITUICAO_TRIBUTARIA("202"),
+>, <Line: -    TRIBUTADA_SIMPLES_NACIONAL_PARA_FAIXA_RECEITA_BRUTA_E_COBRANCA_ICMS_SUBSTITUICAO_TRIBUTARIA("203"),
+>, <Line: -    IMUNE("300"),
+>, <Line: -    NAO_TRIBUTADA("400"),
+>, <Line: -    ICMS_COBRADO_ANTERIORMENTE_POR_SUBSTITUICAO_TRIBUTARIA_SUBSIDIO_OU_POR_ANTECIPACAO("500"),
+>, <Line: -    OUTROS("900");
+>, <Line: -    NFNotaSituacaoOperacionalSimplesNacional(final String codigo) {
+>]

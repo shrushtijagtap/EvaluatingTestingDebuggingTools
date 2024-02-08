@@ -1,0 +1,28 @@
+[<Line: +    @Test(dependsOnMethods = { "createJob", "getJob" })
+>, <Line: +    public void canListAllJobs() throws IOException, InterruptedException {
+>, <Line: +        final MantaJob job1 = buildJob();
+>, <Line: +        final UUID job1id = mantaClient.createJob(job1);
+>, <Line: +        final MantaJob job2 = buildJob();
+>, <Line: +        final UUID job2id = mantaClient.createJob(job2);
+>, <Line: +        mantaClient.endJobInput(job1id);
+>, <Line: +        mantaClient.endJobInput(job2id);
+>, <Line: +        while (!mantaClient.getJob(job1id).getState().equals("done")) {
+>, <Line: +            Thread.sleep(1000);
+>, <Line: +        }
+>, <Line: +        while (!mantaClient.getJob(job2id).getState().equals("done")) {
+>, <Line: +            Thread.sleep(1000);
+>, <Line: +        }
+>, <Line: +        try (Stream<MantaJob> jobs = mantaClient.getAllJobs()) {
+>, <Line: +            List<MantaJob> found = jobs.filter(job -> job.getId().equals(job1id) || job.getId().equals(job2id))
+>, <Line: +                    .collect(Collectors.toList());
+>, <Line: +            Assert.assertEquals(found.size(), 2, "We should have found both jobs");
+>, <Line: +        }  catch (AssertionError e) {
+>, <Line: +            String msg = "Couldn't find job in job list, retry test a few times to verify";
+>, <Line: +            LOG.error(msg, e);
+>, <Line: +            throw new SkipException(msg, e);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public void canListJobIdsByName() throws IOException {
+>]
+[<Line: -    public void canListJobsByName() throws IOException {
+>]

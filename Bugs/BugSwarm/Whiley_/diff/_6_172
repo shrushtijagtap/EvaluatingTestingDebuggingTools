@@ -1,0 +1,6 @@
+[<Line: +ensures all { x in 0 .. |src| | result[x] > 0 }:
+>, <Line: +        where all { x in 0 .. i | src[x] > 0 }:
+>]
+[<Line: -ensures no { x in 0 .. |src| | result[x] <= 0 }:
+>, <Line: -        where no { x in 0 .. i | src[x] <= 0 }:
+>]

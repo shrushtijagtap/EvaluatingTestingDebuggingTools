@@ -1,0 +1,158 @@
+[<Line: +package it.unibz.krdb.obda.reformulation.tests;
+>, <Line: +import static org.junit.Assert.*;
+>, <Line: +import java.io.BufferedReader;
+>, <Line: +import java.io.File;
+>, <Line: +import java.io.FileNotFoundException;
+>, <Line: +import java.io.FileReader;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.sql.Connection;
+>, <Line: +import java.sql.DatabaseMetaData;
+>, <Line: +import java.sql.DriverManager;
+>, <Line: +import java.sql.ResultSet;
+>, <Line: +import java.sql.SQLException;
+>, <Line: +import java.sql.Statement;
+>, <Line: +import java.util.HashSet;
+>, <Line: +import java.util.LinkedList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Set;
+>, <Line: +import it.unibz.krdb.obda.io.ModelIOManager;
+>, <Line: +import it.unibz.krdb.obda.model.OBDADataFactory;
+>, <Line: +import it.unibz.krdb.obda.model.OBDAModel;
+>, <Line: +import it.unibz.krdb.obda.model.impl.OBDADataFactoryImpl;
+>, <Line: +import it.unibz.krdb.obda.ontology.Ontology;
+>, <Line: +import it.unibz.krdb.obda.owlapi3.OWLAPI3TranslatorUtility;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.core.QuestConstants;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.core.QuestPreferences;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.owlapi3.QuestOWL;
+>, <Line: +import it.unibz.krdb.obda.owlrefplatform.owlapi3.QuestOWLFactory;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.semanticweb.owlapi.apibinding.OWLManager;
+>, <Line: +import org.semanticweb.owlapi.model.IRI;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntology;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntologyManager;
+>, <Line: +import org.semanticweb.owlapi.reasoner.SimpleConfiguration;
+>, <Line: +import org.semanticweb.owlapi.util.SimpleIRIMapper;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +public class NPDTest {
+>, <Line: +	Logger log = LoggerFactory.getLogger(this.getClass());
+>, <Line: +	@Test
+>, <Line: +	public void test_load_NPD() throws Exception {
+>, <Line: +		File ontDir = new File("src/test/resources/npd-v2");
+>, <Line: +		String path = ontDir.getAbsolutePath() + "/";
+>, <Line: +		String prfx = "file://" + path;
+>, <Line: +		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd-bfo"), IRI.create(prfx + "npd-bfo.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd-db"), IRI.create(prfx + "npd-db")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd-facility"), IRI.create(prfx + "npd-facility.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd-geology"), IRI.create(prfx + "npd-geology.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd-geometry"), IRI.create(prfx + "npd-geometry.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd-org"), IRI.create(prfx + "npd-org.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd-prod"), IRI.create(prfx + "npd-prod.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd-seismic"), IRI.create(prfx + "npd-seismic.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd-well"), IRI.create(prfx + "npd-well.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd"), IRI.create(prfx + "npd.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/sql"), IRI.create(prfx + "sql.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://sws.ifi.uio.no/vocab/version/20130919/npd-isc-2012"), IRI.create(prfx + "npd-isc-2012.owl")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://www.opengis.net/ont/geosparql"), IRI.create(prfx + "geosparql_vocab_all.xml")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://www.opengis.net/ont/gml"), IRI.create(prfx + "gml_32_geometries.xml")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://www.opengis.net/ont/sf"), IRI.create(prfx + "gml_32_geometries.xml")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://purl.org/dc/elements/1.1/"), IRI.create(prfx + "dc.xml")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://www.w3.org/2004/02/skos/core"), IRI.create(prfx + "skos.xml")));
+>, <Line: +		manager.addIRIMapper(new SimpleIRIMapper(
+>, <Line: +				IRI.create("http://www.ifomis.org/bfo/owl"), IRI.create(prfx + "bfo-1.1.owl")));
+>, <Line: +		OWLOntology owlOnto = manager.loadOntologyFromOntologyDocument(new File(path + "npd-v2.owl")); 
+>, <Line: +/*		
+>, <Line: +		Ontology onto = OWLAPI3TranslatorUtility.translateImportsClosure(owlOnto);
+>, <Line: +		// - 2 to account for top and bot
+>, <Line: +		System.out.println("Class names: " + (onto.getVocabulary().getClasses().size() - 2));
+>, <Line: +		System.out.println("Object Property names: " + (onto.getVocabulary().getObjectProperties().size() - 2));
+>, <Line: +		System.out.println("Data Property names: " + (onto.getVocabulary().getDataProperties().size() - 2));
+>, <Line: +*/		
+>, <Line: +		OBDADataFactory fac = OBDADataFactoryImpl.getInstance();
+>, <Line: +		OBDAModel obdaModel = fac.getOBDAModel();
+>, <Line: +		ModelIOManager ioManager = new ModelIOManager(obdaModel);
+>, <Line: +		ioManager.load(path + "npd.obda");
+>, <Line: +		QuestPreferences pref = new QuestPreferences();
+>, <Line: +		//pref.setCurrentValueOf(QuestPreferences.DBTYPE, QuestConstants.SEMANTIC_INDEX);
+>, <Line: +		pref.setCurrentValueOf(QuestPreferences.ABOX_MODE, QuestConstants.VIRTUAL);
+>, <Line: +		pref.setCurrentValueOf(QuestPreferences.REFORMULATION_TECHNIQUE, QuestConstants.TW);
+>, <Line: +		pref.setCurrentValueOf(QuestPreferences.REWRITE, QuestConstants.TRUE);
+>, <Line: +		pref.setCurrentValueOf(QuestPreferences.PRINT_KEYS, QuestConstants.TRUE);
+>, <Line: +		QuestOWLFactory factory = new QuestOWLFactory();
+>, <Line: +		factory.setOBDAController(obdaModel);
+>, <Line: +		factory.setPreferenceHolder(pref);
+>, <Line: +		setupDatabase();
+>, <Line: +		QuestOWL reasoner = factory.createReasoner(owlOnto, new SimpleConfiguration());
+>, <Line: +	}
+>, <Line: +	public void setupDatabase() throws SQLException, IOException {
+>, <Line: +		// String driver = "org.h2.Driver";
+>, <Line: +		String url = "jdbc:h2:mem:npdv";
+>, <Line: +		String username = "sa";
+>, <Line: +		String password = "";
+>, <Line: +		Connection conn = DriverManager.getConnection(url, username, password);
+>, <Line: +		Statement st = conn.createStatement();
+>, <Line: +		int i = 0;
+>, <Line: +		FileReader reader = new FileReader("src/test/resources/npd-v2/npd-schema.sql");
+>, <Line: +		StringBuilder bf = new StringBuilder();
+>, <Line: +		try (BufferedReader in = new BufferedReader(reader)) {
+>, <Line: +			for (String line = in.readLine(); line != null; line = in.readLine()) {
+>, <Line: +				bf.append(line + "\n");
+>, <Line: +				if (line.startsWith("--")) {
+>, <Line: +					System.out.println("EXECUTING " + i++ + ":\n" + bf.toString());
+>, <Line: +					st.executeUpdate(bf.toString());
+>, <Line: +					conn.commit();
+>, <Line: +					bf = new StringBuilder();
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		DatabaseMetaData md = conn.getMetaData();
+>, <Line: +		try (ResultSet rsTables = md.getTables(null, null, null, new String[] { "TABLE", "VIEW" })) {
+>, <Line: +			int tbl = 0;
+>, <Line: +			while (rsTables.next()) {
+>, <Line: +				final String tblName = rsTables.getString("TABLE_NAME");
+>, <Line: +				System.out.println("Table " + ++tbl + ": " + tblName);
+>, <Line: +			}
+>, <Line: +			assertEquals(tbl, 70);
+>, <Line: +		}
+>, <Line: +		List<String> pk = new LinkedList<String>();	
+>, <Line: +		try (ResultSet rsPrimaryKeys = md.getPrimaryKeys(null, null, "FIELD_DESCRIPTION")) {
+>, <Line: +			while (rsPrimaryKeys.next()) {
+>, <Line: +				String colName = rsPrimaryKeys.getString("COLUMN_NAME");
+>, <Line: +				String pkName = rsPrimaryKeys.getString("PK_NAME");
+>, <Line: +				if (pkName != null) {
+>, <Line: +					pk.add(colName);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		} 
+>, <Line: +		System.out.println(pk);
+>, <Line: +		try (ResultSet rsIndexes = md.getIndexInfo(null, null, "WELLBORE_CORE", true, true)) {
+>, <Line: +			while (rsIndexes.next()) {
+>, <Line: +				String colName = rsIndexes.getString("COLUMN_NAME");
+>, <Line: +				String indName = rsIndexes.getString("INDEX_NAME");
+>, <Line: +				boolean nonUnique = rsIndexes.getBoolean("NON_UNIQUE");
+>, <Line: +				System.out.println(indName + " " +colName + " " + nonUnique);
+>, <Line: +			}
+>, <Line: +		} 
+>, <Line: +		System.out.println("Database schema created successfully");
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

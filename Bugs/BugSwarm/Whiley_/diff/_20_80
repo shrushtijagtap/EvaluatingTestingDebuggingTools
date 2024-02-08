@@ -1,0 +1,4 @@
+[<Line: +function f(byte[] data, int pos) -> int:
+>]
+[<Line: -function f([byte] data, int pos) -> int:
+>]

@@ -1,0 +1,6 @@
+[<Line: +        assertThat(adviced.getDeclaredMethod(FOO).invoke(adviced.getDeclaredConstructor().newInstance()), is((Object) replaced));
+>, <Line: +        assertThat(redefined.getDeclaredMethod(FOO).invoke(redefined.getDeclaredConstructor().newInstance()), is((Object) FOO));
+>]
+[<Line: -        assertThat(adviced.getDeclaredMethod(FOO).invoke(adviced.newInstance()), is((Object) replaced));
+>, <Line: -        assertThat(redefined.getDeclaredMethod(FOO).invoke(redefined.newInstance()), is((Object) FOO));
+>]

@@ -1,0 +1,14 @@
+[<Line: +import org.eclipse.rdf4j.OpenRDFException;
+>, <Line: +import org.eclipse.rdf4j.model.Model;
+>, <Line: +import org.eclipse.rdf4j.model.Namespace;
+>, <Line: +import org.eclipse.rdf4j.model.Statement;
+>, <Line: +import org.eclipse.rdf4j.model.util.Namespaces;
+>, <Line: +import org.eclipse.rdf4j.common.iteration.CloseableIteration;
+>]
+[<Line: -import org.openrdf.OpenRDFException;
+>, <Line: -import org.openrdf.model.Model;
+>, <Line: -import org.openrdf.model.Namespace;
+>, <Line: -import org.openrdf.model.Statement;
+>, <Line: -import org.openrdf.model.util.Namespaces;
+>, <Line: -import info.aduna.iteration.CloseableIteration;
+>]

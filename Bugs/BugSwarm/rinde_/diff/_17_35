@@ -1,0 +1,95 @@
+[<Line: +import com.google.common.base.Optional;
+>, <Line: +import com.google.common.collect.ImmutableList;
+>, <Line: +import com.google.common.collect.ImmutableSet;
+>, <Line: +  private final Table<Point, Point, Connection<E>> data;
+>, <Line: +  public TableGraph() {
+>, <Line: +    data = Tables.newCustomTable(
+>, <Line: +        new LinkedHashMap<Point, Map<Point, Connection<E>>>(),
+>, <Line: +        new LinkedHashMapFactory<Connection<E>>());
+>, <Line: +    return ImmutableSet.<Point> builder()
+>, <Line: +        .addAll(data.rowKeySet())
+>, <Line: +        .addAll(data.columnKeySet())
+>, <Line: +        .build();
+>, <Line: +    return ImmutableList.copyOf(data.values());
+>, <Line: +    return data.get(from, to);
+>, <Line: +  public Optional<E> connectionData(Point from, Point to) {
+>, <Line: +    if (data.contains(from, to)) {
+>, <Line: +      return data.get(from, to).data();
+>, <Line: +    return Optional.absent();
+>, <Line: +  protected void doAddConnection(Point from, Point to, Optional<E> edgeData) {
+>, <Line: +    data.put(from, to, Connection.create(from, to, edgeData));
+>, <Line: +  protected Optional<E> doChangeConnectionData(Point from, Point to,
+>, <Line: +      Optional<E> edgeData) {
+>, <Line: +    return data.put(from, to, Connection.create(from, to, edgeData)).data();
+>, <Line: +    return Objects.hashCode(data);
+>]
+[<Line: -import static com.google.common.collect.Maps.newLinkedHashMap;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.LinkedHashSet;
+>, <Line: -import com.google.common.base.Supplier;
+>, <Line: -import com.google.common.collect.Table.Cell;
+>, <Line: -  private final Table<Point, Point, E> data;
+>, <Line: -  private final E empty;
+>, <Line: -   * @param emptyValue A special connection data instance that is used as the
+>, <Line: -   *          'empty' instance.
+>, <Line: -  public TableGraph(E emptyValue) {
+>, <Line: -    data = Tables.newCustomTable(new LinkedHashMap<Point, Map<Point, E>>(),
+>, <Line: -        new Factory<E>());
+>, <Line: -    empty = emptyValue;
+>, <Line: -    final Set<Point> nodes = new LinkedHashSet<>(data.rowKeySet());
+>, <Line: -    nodes.addAll(data.columnKeySet());
+>, <Line: -    return Collections.unmodifiableSet(nodes);
+>, <Line: -    final List<Connection<E>> connections = new ArrayList<>();
+>, <Line: -    for (final Cell<Point, Point, E> cell : data.cellSet()) {
+>, <Line: -      if (empty.equals(cell.getValue())) {
+>, <Line: -        connections.add(new Connection<E>(cell.getRowKey(),
+>, <Line: -            cell.getColumnKey(), null));
+>, <Line: -      } else {
+>, <Line: -        connections.add(new Connection<>(cell.getRowKey(),
+>, <Line: -            cell.getColumnKey(), cell.getValue()));
+>, <Line: -      }
+>, <Line: -    }
+>, <Line: -    return connections;
+>, <Line: -  @Override
+>, <Line: -  protected boolean isEmptyConnectionData(@Nullable E connData) {
+>, <Line: -    return super.isEmptyConnectionData(connData) || empty.equals(connData);
+>, <Line: -  }
+>, <Line: -    return new Connection<>(from, to, connectionData(from, to));
+>, <Line: -  @Nullable
+>, <Line: -  public E connectionData(Point from, Point to) {
+>, <Line: -    final E e = data.get(from, to);
+>, <Line: -    if (empty.equals(e)) {
+>, <Line: -      return null;
+>, <Line: -    return e;
+>, <Line: -  protected void doAddConnection(Point from, Point to, @Nullable E edgeData) {
+>, <Line: -    if (edgeData == null) {
+>, <Line: -      data.put(from, to, empty);
+>, <Line: -    } else {
+>, <Line: -      data.put(from, to, edgeData);
+>, <Line: -    }
+>, <Line: -  @Nullable
+>, <Line: -  public E setConnectionData(Point from, Point to, @Nullable E edgeData) {
+>, <Line: -    if (hasConnection(from, to)) {
+>, <Line: -      E e;
+>, <Line: -      if (edgeData == null) {
+>, <Line: -        e = data.put(from, to, empty);
+>, <Line: -      } else {
+>, <Line: -        e = data.put(from, to, edgeData);
+>, <Line: -      }
+>, <Line: -      if (empty.equals(e)) {
+>, <Line: -        return null;
+>, <Line: -      }
+>, <Line: -      return e;
+>, <Line: -    }
+>, <Line: -    throw new IllegalArgumentException(
+>, <Line: -        "Can not get connection length from a non-existing connection.");
+>, <Line: -    return Objects.hashCode(data, empty);
+>, <Line: -  private static final class Factory<E> implements Supplier<Map<Point, E>> {
+>, <Line: -    Factory() {}
+>, <Line: -    @Override
+>, <Line: -    public Map<Point, E> get() {
+>, <Line: -      return newLinkedHashMap();
+>, <Line: -    }
+>, <Line: -  }
+>]

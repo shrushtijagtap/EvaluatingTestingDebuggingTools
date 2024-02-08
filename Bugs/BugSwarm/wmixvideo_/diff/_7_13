@@ -1,0 +1,96 @@
+[<Line: +    @Test
+>, <Line: +    public void deveObterNFNotaInfoItemImpostoCOFINSComoFoiSetado() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        final NFNotaInfoItemImpostoCOFINS notaInfoItemImpostoCOFINS = FabricaDeObjetosFake.getNFNotaInfoItemImpostoCOFINS();
+>, <Line: +        imposto.setCofins(notaInfoItemImpostoCOFINS);
+>, <Line: +        Assert.assertEquals(notaInfoItemImpostoCOFINS, imposto.getCofins());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterIssqnComoFoiSetado() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        final NFNotaInfoItemImpostoISSQN issqn = FabricaDeObjetosFake.getNFNotaInfoItemImpostoISSQN();
+>, <Line: +        imposto.setIssqn(issqn);
+>, <Line: +        Assert.assertEquals(issqn, imposto.getIssqn());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterCofinsstComoFoiSetado() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        final NFNotaInfoItemImpostoCOFINSST notaInfoItemImpostoCOFINSST = FabricaDeObjetosFake.getNFNotaInfoItemImpostoCOFINSST();
+>, <Line: +        imposto.setCofinsst(notaInfoItemImpostoCOFINSST);
+>, <Line: +        Assert.assertEquals(notaInfoItemImpostoCOFINSST, imposto.getCofinsst());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterIcmsComoFoiSetado() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        final NFNotaInfoItemImpostoICMS notaInfoItemImpostoICMS = FabricaDeObjetosFake.getNFNotaInfoItemImpostoICMS();
+>, <Line: +        imposto.setIcms(notaInfoItemImpostoICMS);
+>, <Line: +        Assert.assertEquals(notaInfoItemImpostoICMS, imposto.getIcms());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterImpostoImportacaoComoFoiSetado() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        final NFNotaInfoItemImpostoImportacao notaInfoItemImpostoImportacao = FabricaDeObjetosFake.getNFNotaInfoItemImpostoImportacao();
+>, <Line: +        imposto.setImpostoImportacao(notaInfoItemImpostoImportacao);
+>, <Line: +        Assert.assertEquals(notaInfoItemImpostoImportacao, imposto.getImpostoImportacao());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterIpiComoFoiSetado() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        final NFNotaInfoItemImpostoIPI impostoIPI = FabricaDeObjetosFake.getNFNotaInfoItemImpostoIPI();
+>, <Line: +        imposto.setIpi(impostoIPI);
+>, <Line: +        Assert.assertEquals(impostoIPI, imposto.getIpi());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterPisComoFoiSetado() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        final NFNotaInfoItemImpostoPIS pis = FabricaDeObjetosFake.getNFNotaInfoItemImpostoPIS();
+>, <Line: +        imposto.setPis(pis);
+>, <Line: +        Assert.assertEquals(pis, imposto.getPis());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterPisstComoFoiSetado() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        final NFNotaInfoItemImpostoPISST pisst = FabricaDeObjetosFake.getNFNotaInfoItemImpostoPISST();
+>, <Line: +        imposto.setPisst(pisst);
+>, <Line: +        Assert.assertEquals(pisst, imposto.getPisst());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterIcmsUfDestinoComoFoiSetado() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        final NFNotaaInfoItemImpostoICMSUFDestino icmsUfDestino = FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino();
+>, <Line: +        imposto.setIcmsUfDestino(icmsUfDestino);
+>, <Line: +        Assert.assertEquals(icmsUfDestino, imposto.getIcmsUfDestino());
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void deveObterValorTotalTributosComoSetado() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        final String valorTotalTributos = "999999999999.99";
+>, <Line: +        imposto.setValorTotalTributos(new BigDecimal(valorTotalTributos));
+>, <Line: +        Assert.assertEquals(valorTotalTributos, imposto.getValorTotalTributos());
+>, <Line: +    }
+>, <Line: +        imposto.setIcmsUfDestino(FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino());
+>, <Line: +        imposto.setIcmsUfDestino(FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino());
+>, <Line: +        imposto.setIcmsUfDestino(FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino());
+>, <Line: +        imposto.setIcmsUfDestino(FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino());
+>, <Line: +        imposto.setIcmsUfDestino(FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino());
+>, <Line: +        imposto.setIcmsUfDestino(FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino());
+>, <Line: +        imposto.setIcmsUfDestino(FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino());
+>, <Line: +        imposto.setIcmsUfDestino(FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino());
+>, <Line: +        imposto.setIcmsUfDestino(FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino());
+>, <Line: +        imposto.toString();
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void devePermitirICmsUfDestinoNulo() {
+>, <Line: +        final NFNotaInfoItemImposto imposto = new NFNotaInfoItemImposto();
+>, <Line: +        imposto.setCofins(FabricaDeObjetosFake.getNFNotaInfoItemImpostoCOFINS());
+>, <Line: +        imposto.setCofinsst(FabricaDeObjetosFake.getNFNotaInfoItemImpostoCOFINSST());
+>, <Line: +        imposto.setIcms(FabricaDeObjetosFake.getNFNotaInfoItemImpostoICMS());
+>, <Line: +        imposto.setImpostoImportacao(FabricaDeObjetosFake.getNFNotaInfoItemImpostoImportacao());
+>, <Line: +        imposto.setIpi(FabricaDeObjetosFake.getNFNotaInfoItemImpostoIPI());
+>, <Line: +        imposto.setPis(FabricaDeObjetosFake.getNFNotaInfoItemImpostoPIS());
+>, <Line: +        imposto.setValorTotalTributos(new BigDecimal("999999999999.99"));
+>, <Line: +        imposto.setPisst(FabricaDeObjetosFake.getNFNotaInfoItemImpostoPISST());
+>, <Line: +        final String xmlEsperado = "<NFNotaInfoItemImposto><vTotTrib>999999999999.99</vTotTrib><ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>1</modBC><vBC>999999999999.99</vBC><pICMS>99.99</pICMS><vICMS>999999999999.99</vICMS></ICMS00></ICMS><IPI><clEnq>157br</clEnq><CNPJProd>12345678901234</CNPJProd><cSelo>iNEFifS1jexTxcCvgjlQ186nR6JAwM2koyjbWKA1DJSLmZy432GoSwoygXc5</cSelo><qSelo>999999999999</qSelo><cEnq>aT2</cEnq><IPITrib><CST>49</CST><vBC>999999999999.99</vBC><pIPI>99.99</pIPI><vIPI>999999999999.99</vIPI></IPITrib></IPI><II><vBC>999999999999.99</vBC><vDespAdu>999999999999.99</vDespAdu><vII>999999999999.99</vII><vIOF>999999999999.99</vIOF></II><PIS><PISAliq><CST>01</CST><vBC>999999999999.99</vBC><pPIS>99.99</pPIS><vPIS>999999999999.99</vPIS></PISAliq></PIS><PISST><qBCProd>99999999999.9999</qBCProd><vAliqProd>9999999999.9999</vAliqProd><vPIS>999999999999.99</vPIS></PISST><COFINS><COFINSAliq><CST>01</CST><vBC>999999999999.99</vBC><pCOFINS>99.99</pCOFINS><vCOFINS>999999999999.99</vCOFINS></COFINSAliq></COFINS><COFINSST><vBC>999999999999.99</vBC><pCOFINS>99.99</pCOFINS><vCOFINS>999999999999.00</vCOFINS></COFINSST><ICMSUFDest><vBCUFDest>9999999999999.99</vBCUFDest><pFCPUFDest>999.9999</pFCPUFDest><pICMSUFDest>999.9999</pICMSUFDest><pICMSInter>999.9999</pICMSInter><pICMSInterPart>999.9999</pICMSInterPart><vFCPUFDest>9999999999999.99</vFCPUFDest><vICMSUFDest>9999999999999.99</vICMSUFDest><vICMSUFRemet>9999999999999.99</vICMSUFRemet></ICMSUFDest></NFNotaInfoItemImposto>";
+>]
+[<Line: -        final String xmlEsperado = "<NFNotaInfoItemImposto><vTotTrib>999999999999.99</vTotTrib><ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>1</modBC><vBC>999999999999.99</vBC><pICMS>99.99</pICMS><vICMS>999999999999.99</vICMS></ICMS00></ICMS><IPI><clEnq>157br</clEnq><CNPJProd>12345678901234</CNPJProd><cSelo>iNEFifS1jexTxcCvgjlQ186nR6JAwM2koyjbWKA1DJSLmZy432GoSwoygXc5</cSelo><qSelo>999999999999</qSelo><cEnq>aT2</cEnq><IPITrib><CST>49</CST><vBC>999999999999.99</vBC><pIPI>99.99</pIPI><vIPI>999999999999.99</vIPI></IPITrib></IPI><II><vBC>999999999999.99</vBC><vDespAdu>999999999999.99</vDespAdu><vII>999999999999.99</vII><vIOF>999999999999.99</vIOF></II><PIS><PISAliq><CST>01</CST><vBC>999999999999.99</vBC><pPIS>99.99</pPIS><vPIS>999999999999.99</vPIS></PISAliq></PIS><PISST><qBCProd>99999999999.9999</qBCProd><vAliqProd>9999999999.9999</vAliqProd><vPIS>999999999999.99</vPIS></PISST><COFINS><COFINSAliq><CST>01</CST><vBC>999999999999.99</vBC><pCOFINS>99.99</pCOFINS><vCOFINS>999999999999.99</vCOFINS></COFINSAliq></COFINS><COFINSST><vBC>999999999999.99</vBC><pCOFINS>99.99</pCOFINS><vCOFINS>999999999999.00</vCOFINS></COFINSST></NFNotaInfoItemImposto>";
+>]

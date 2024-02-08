@@ -1,0 +1,64 @@
+[<Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @Test
+>, <Line: +    @JavaVersionRule.Enforce(8)
+>, <Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @IntegrationRule.Enforce
+>, <Line: +    public void testReturnTypeTransformingLambda() throws Exception {
+>, <Line: +        assertThat(ByteBuddyAgent.install(), instanceOf(Instrumentation.class));
+>, <Line: +        ClassLoader classLoader = lambdaSamples();
+>, <Line: +        ClassFileTransformer classFileTransformer = new AgentBuilder.Default()
+>, <Line: +                .with(poolStrategy)
+>, <Line: +                .ignore(none())
+>, <Line: +                .with(AgentBuilder.LambdaInstrumentationStrategy.ENABLED)
+>, <Line: +                .type(isSubTypeOf(Callable.class)).transform(new SingleMethodReplacer("call"))
+>, <Line: +                .installOn(ByteBuddyAgent.getInstrumentation());
+>, <Line: +        try {
+>, <Line: +            Class<?> sampleFactory = classLoader.loadClass(LAMBDA_SAMPLE_FACTORY);
+>, <Line: +            Runnable instance = (Runnable) sampleFactory.getDeclaredMethod("returnTypeTransforming").invoke(sampleFactory.getDeclaredConstructor().newInstance());
+>, <Line: +            instance.run();
+>, <Line: +        } finally {
+>, <Line: +            ByteBuddyAgent.getInstrumentation().removeTransformer(classFileTransformer);
+>, <Line: +            AgentBuilder.LambdaInstrumentationStrategy.release(classFileTransformer, ByteBuddyAgent.getInstrumentation());
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    @JavaVersionRule.Enforce(8)
+>, <Line: +    @AgentAttachmentRule.Enforce
+>, <Line: +    @IntegrationRule.Enforce
+>, <Line: +    public void testInstanceReturningLambda() throws Exception {
+>, <Line: +        assertThat(ByteBuddyAgent.install(), instanceOf(Instrumentation.class));
+>, <Line: +        ClassLoader classLoader = lambdaSamples();
+>, <Line: +        ClassFileTransformer classFileTransformer = new AgentBuilder.Default()
+>, <Line: +                .with(poolStrategy)
+>, <Line: +                .ignore(none())
+>, <Line: +                .with(AgentBuilder.LambdaInstrumentationStrategy.ENABLED)
+>, <Line: +                .type(isSubTypeOf(Callable.class)).transform(new SingleMethodReplacer("call"))
+>, <Line: +                .installOn(ByteBuddyAgent.getInstrumentation());
+>, <Line: +        try {
+>, <Line: +            Class<?> sampleFactory = classLoader.loadClass(LAMBDA_SAMPLE_FACTORY);
+>, <Line: +            Callable<?> instance = (Callable<?>) sampleFactory.getDeclaredMethod("instanceReturning").invoke(sampleFactory.getDeclaredConstructor().newInstance());
+>, <Line: +            assertThat(instance.call(), notNullValue(Object.class));
+>, <Line: +        } finally {
+>, <Line: +            ByteBuddyAgent.getInstrumentation().removeTransformer(classFileTransformer);
+>, <Line: +            AgentBuilder.LambdaInstrumentationStrategy.release(classFileTransformer, ByteBuddyAgent.getInstrumentation());
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -    @AgentAttachmentRule.Enforce(redefinesClasses = true)
+>, <Line: -    @AgentAttachmentRule.Enforce(redefinesClasses = true)
+>, <Line: -    @AgentAttachmentRule.Enforce(redefinesClasses = true)
+>, <Line: -    @AgentAttachmentRule.Enforce(redefinesClasses = true)
+>, <Line: -    @AgentAttachmentRule.Enforce(redefinesClasses = true)
+>, <Line: -    @AgentAttachmentRule.Enforce(redefinesClasses = true)
+>, <Line: -    @AgentAttachmentRule.Enforce(redefinesClasses = true)
+>, <Line: -    @AgentAttachmentRule.Enforce(redefinesClasses = true)
+>, <Line: -    @AgentAttachmentRule.Enforce(redefinesClasses = true)
+>]

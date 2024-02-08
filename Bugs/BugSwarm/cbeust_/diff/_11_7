@@ -1,0 +1,17 @@
+[]
+[<Line: -    ppp("Should be invoked 2 times");
+>, <Line: -    ppp("Should be invoked 4 times");
+>, <Line: -    ppp("Should be invoked 3 times");
+>, <Line: -    ppp("Should be invoked 5 times");
+>, <Line: -  }
+>, <Line: -  public static void main(String[] argv) {
+>, <Line: -    TestNG tng = new TestNG();
+>, <Line: -    tng.setAnnotationTransformer(new MyTransformer());
+>, <Line: -    tng.setTestClasses(new Class[] { AnnotationTransformerSampleTest.class});
+>, <Line: -    tng.run();
+>, <Line: -  }
+>, <Line: -  private void ppp(String string) {
+>, <Line: -    if (false) {
+>, <Line: -      System.out.println("[AnnotationTransformerSampleTest] " + string);
+>, <Line: -    }
+>]

@@ -1,0 +1,12 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.Utf8;
+>, <Line: +    String xml = "";
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.Utf8;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -    String xml = "";
+>]

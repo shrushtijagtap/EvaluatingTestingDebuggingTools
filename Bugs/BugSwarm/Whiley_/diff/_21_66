@@ -1,0 +1,4 @@
+[<Line: +type sr9arr is ([sr9tup] xs) where some { i in 0..|xs| | xs[i].f == 1 }
+>]
+[<Line: -type sr9arr is ([sr9tup] xs) where some { z in xs | z.f == 1 }
+>]

@@ -1,0 +1,636 @@
+[]
+[<Line: -package wyil.builders;
+>, <Line: -import static wyil.util.ErrorMessages.errorMessage;
+>, <Line: -import static wyil.util.ErrorMessages.internalFailure;
+>, <Line: -import static wyil.util.ErrorMessages.syntaxError;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.math.BigDecimal;
+>, <Line: -import java.math.BigInteger;
+>, <Line: -import java.util.ArrayList;
+>, <Line: -import java.util.Collection;
+>, <Line: -import java.util.Collections;
+>, <Line: -import java.util.HashMap;
+>, <Line: -import java.util.HashSet;
+>, <Line: -import java.util.List;
+>, <Line: -import wybs.lang.Builder;
+>, <Line: -import wycc.lang.NameID;
+>, <Line: -import wycc.util.Pair;
+>, <Line: -import wycc.util.ResolveError;
+>, <Line: -import wycs.core.Value;
+>, <Line: -import wycs.syntax.Expr;
+>, <Line: -import wycs.syntax.SyntacticType;
+>, <Line: -import wycs.syntax.TypePattern;
+>, <Line: -import wycs.syntax.WyalFile;
+>, <Line: -import wycs.syntax.WyalFile.Function;
+>, <Line: -import wyfs.lang.Path;
+>, <Line: -import wyil.attributes.VariableDeclarations;
+>, <Line: -import wyil.lang.Bytecode;
+>, <Line: -import wyil.lang.BytecodeForest;
+>, <Line: -import wyil.lang.Constant;
+>, <Line: -import wyil.lang.Type;
+>, <Line: -import wyil.lang.WyilFile;
+>, <Line: -import wyil.util.ErrorMessages;
+>, <Line: -import wyil.util.TypeExpander;
+>, <Line: -public class VcUtils {
+>, <Line: -	private final String filename;
+>, <Line: -	private final Builder builder;
+>, <Line: -	private final TypeExpander expander;
+>, <Line: -	public VcUtils(String filename, Builder builder, TypeExpander expander) {
+>, <Line: -		this.filename = filename;
+>, <Line: -		this.builder = builder;
+>, <Line: -		this.expander = expander;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Convert a WyIL constant into its equivalent WyCS constant. In some cases,
+>, <Line: -	 * this is a direct translation. In other cases, WyIL constants are encoded
+>, <Line: -	 * using more primitive WyCS values.
+>, <Line: -	 * 
+>, <Line: -	 * @param c
+>, <Line: -	 *            --- The WyIL constant to be converted.
+>, <Line: -	 * @param block
+>, <Line: -	 *            --- The block within which this conversion is taking place
+>, <Line: -	 *            (for debugging purposes)
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- The branch within which this conversion is taking place
+>, <Line: -	 *            (for debugging purposes)
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Value convert(Constant c, BytecodeForest forest, VcBranch branch) {
+>, <Line: -		if (c instanceof Constant.Null) {
+>, <Line: -			return wycs.core.Value.Null;
+>, <Line: -		} else if (c instanceof Constant.Bool) {
+>, <Line: -			Constant.Bool cb = (Constant.Bool) c;
+>, <Line: -			return wycs.core.Value.Bool(cb.value());
+>, <Line: -		} else if (c instanceof Constant.Byte) {
+>, <Line: -			Constant.Byte cb = (Constant.Byte) c;
+>, <Line: -			return wycs.core.Value.Integer(BigInteger.valueOf(cb.value()));
+>, <Line: -		} else if (c instanceof Constant.Integer) {
+>, <Line: -			Constant.Integer cb = (Constant.Integer) c;
+>, <Line: -			return wycs.core.Value.Integer(cb.value());
+>, <Line: -		} else if (c instanceof Constant.Array) {
+>, <Line: -			Constant.Array cb = (Constant.Array) c;
+>, <Line: -			List<Constant> cb_values = cb.values();
+>, <Line: -			ArrayList<Value> items = new ArrayList<Value>();
+>, <Line: -			for (int i = 0; i != cb_values.size(); ++i) {
+>, <Line: -				items.add(convert(cb_values.get(i), forest, branch));				
+>, <Line: -			}
+>, <Line: -			return Value.Array(items);
+>, <Line: -		} else if (c instanceof Constant.Record) {
+>, <Line: -			Constant.Record rb = (Constant.Record) c;
+>, <Line: -			// NOTE:: records are currently translated into WyCS as tuples,
+>, <Line: -			// where
+>, <Line: -			// each field is allocated a slot based on an alphabetical sorting
+>, <Line: -			// of field names. It's unclear at this stage whether or not that is
+>, <Line: -			// a general solution. In particular, it would seem to be brokwn for
+>, <Line: -			// type testing.
+>, <Line: -			ArrayList<String> fields = new ArrayList<String>(rb.values().keySet());
+>, <Line: -			Collections.sort(fields);
+>, <Line: -			ArrayList<Value> values = new ArrayList<Value>();
+>, <Line: -			for (String field : fields) {
+>, <Line: -				values.add(convert(rb.values().get(field), forest, branch));
+>, <Line: -			}
+>, <Line: -			return wycs.core.Value.Tuple(values);
+>, <Line: -		} else {
+>, <Line: -			internalFailure("unknown constant encountered (" + c + ")",
+>, <Line: -					filename, forest.get(branch.pc()).attributes());
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Construct a function prototype with a given name and type. The function
+>, <Line: -	 * can then be called elsewhere as an uninterpreted function. The function
+>, <Line: -	 * doesn't have a body but is used as a name to be referred to from
+>, <Line: -	 * assertions.
+>, <Line: -	 *
+>, <Line: -	 * @param wyalFile
+>, <Line: -	 *            --- the file onto which this function is created.
+>, <Line: -	 * @param name
+>, <Line: -	 *            --- the nameto give to the generated macro.
+>, <Line: -	 * @param params
+>, <Line: -	 *            --- parameter types to use.
+>, <Line: -	 * @param returns
+>, <Line: -	 *            --- return types to use
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public void createFunctionPrototype(WyalFile wyalFile, String name, List<Type> params, List<Type> returns) {
+>, <Line: -		TypePattern.Leaf[] parameterPatterns = new TypePattern.Leaf[params.size()];
+>, <Line: -		// second, set initial environment
+>, <Line: -		for (int i = 0; i != params.size(); ++i) {
+>, <Line: -			Expr.Variable v = new Expr.Variable("r" + i);
+>, <Line: -			// FIXME: what attributes to pass into convert?
+>, <Line: -			parameterPatterns[i] = new TypePattern.Leaf(convert(params.get(i),
+>, <Line: -					Collections.EMPTY_LIST), v);
+>, <Line: -		}
+>, <Line: -		TypePattern.Leaf[] returnPatterns = new TypePattern.Leaf[returns.size()];
+>, <Line: -		// second, set initial environment
+>, <Line: -		for (int i = 0; i != returns.size(); ++i) {
+>, <Line: -			Expr.Variable v = new Expr.Variable("r" + i);
+>, <Line: -			returnPatterns[i] = new TypePattern.Leaf(convert(returns.get(i),
+>, <Line: -					Collections.EMPTY_LIST), v);
+>, <Line: -		}
+>, <Line: -		// Construct the type declaration for the new block macro
+>, <Line: -		TypePattern from = new TypePattern.Tuple(parameterPatterns);
+>, <Line: -		TypePattern to = new TypePattern.Tuple(returnPatterns);
+>, <Line: -		wyalFile.add(wyalFile.new Function(name, Collections.EMPTY_LIST, from, to, null));
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Convert a WyIL type into its equivalent WyCS type. In some cases, this is
+>, <Line: -	 * a direct translation. In other cases, WyIL constants are encoded using
+>, <Line: -	 * more primitive WyCS types.
+>, <Line: -	 * 
+>, <Line: -	 * @param t
+>, <Line: -	 *            --- The WyIL type to be converted.
+>, <Line: -	 * @param attributes
+>, <Line: -	 *            --- The attributes associated with the point of this
+>, <Line: -	 *            conversion. These are used for debugging purposes to associate
+>, <Line: -	 *            any errors generated with a source line.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public SyntacticType convert(Type t, Collection<wyil.lang.Attribute> attributes) {
+>, <Line: -		// FIXME: this is fundamentally broken in the case of recursive types.
+>, <Line: -		// See Issue #298.
+>, <Line: -		if (t instanceof Type.Any) {
+>, <Line: -			return new SyntacticType.Any(toWycsAttributes(attributes));
+>, <Line: -		} else if (t instanceof Type.Void) {
+>, <Line: -			return new SyntacticType.Void(toWycsAttributes(attributes));
+>, <Line: -		} else if (t instanceof Type.Null) {
+>, <Line: -			return new SyntacticType.Null(toWycsAttributes(attributes));
+>, <Line: -		} else if (t instanceof Type.Bool) {
+>, <Line: -			return new SyntacticType.Bool(toWycsAttributes(attributes));
+>, <Line: -		} else if (t instanceof Type.Byte) {
+>, <Line: -			// FIXME: implement SyntacticType.Byte
+>, <Line: -			// return new SyntacticType.Byte(attributes(branch));
+>, <Line: -			return new SyntacticType.Int(toWycsAttributes(attributes));
+>, <Line: -		} else if (t instanceof Type.Int) {
+>, <Line: -			return new SyntacticType.Int(toWycsAttributes(attributes));
+>, <Line: -		} else if (t instanceof Type.Array) {
+>, <Line: -			Type.Array lt = (Type.Array) t;
+>, <Line: -			SyntacticType element = convert(lt.element(), attributes);
+>, <Line: -			// ugly.
+>, <Line: -			return new SyntacticType.List(element);
+>, <Line: -		} else if (t instanceof Type.Record) {
+>, <Line: -			Type.Record rt = (Type.Record) t;
+>, <Line: -			HashMap<String, Type> fields = rt.fields();
+>, <Line: -			ArrayList<String> names = new ArrayList<String>(fields.keySet());
+>, <Line: -			ArrayList<SyntacticType> elements = new ArrayList<SyntacticType>();
+>, <Line: -			Collections.sort(names);
+>, <Line: -			for (int i = 0; i != names.size(); ++i) {
+>, <Line: -				String field = names.get(i);
+>, <Line: -				elements.add(convert(fields.get(field), attributes));
+>, <Line: -			}
+>, <Line: -			return new SyntacticType.Tuple(elements);
+>, <Line: -		} else if (t instanceof Type.Reference) {
+>, <Line: -			// FIXME: how to translate this??
+>, <Line: -			return new SyntacticType.Any();
+>, <Line: -		} else if (t instanceof Type.Union) {
+>, <Line: -			Type.Union tu = (Type.Union) t;
+>, <Line: -			HashSet<Type> tu_elements = tu.bounds();
+>, <Line: -			ArrayList<SyntacticType> elements = new ArrayList<SyntacticType>();
+>, <Line: -			for (Type te : tu_elements) {
+>, <Line: -				elements.add(convert(te, attributes));
+>, <Line: -			}
+>, <Line: -			return new SyntacticType.Union(elements);
+>, <Line: -		} else if (t instanceof Type.Negation) {
+>, <Line: -			Type.Negation nt = (Type.Negation) t;
+>, <Line: -			SyntacticType element = convert(nt.element(), attributes);
+>, <Line: -			return new SyntacticType.Negation(element);
+>, <Line: -		} else if (t instanceof Type.FunctionOrMethod) {
+>, <Line: -			Type.FunctionOrMethod ft = (Type.FunctionOrMethod) t;
+>, <Line: -			return new SyntacticType.Any();
+>, <Line: -		} else if (t instanceof Type.Nominal) {
+>, <Line: -			Type.Nominal nt = (Type.Nominal) t;
+>, <Line: -			NameID nid = nt.name();
+>, <Line: -			ArrayList<String> names = new ArrayList<String>();
+>, <Line: -			for (String pc : nid.module()) {
+>, <Line: -				names.add(pc);
+>, <Line: -			}
+>, <Line: -			names.add(nid.name());
+>, <Line: -			return new SyntacticType.Nominal(names,
+>, <Line: -					toWycsAttributes(attributes));
+>, <Line: -		} else {
+>, <Line: -			internalFailure("unknown type encountered (" + t.getClass().getName() + ")", filename, attributes);
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Convert a list of WyIL attributes into a corresponding list of
+>, <Line: -	 * WycsAttributes. Note that, in some cases, no conversion is possible and
+>, <Line: -	 * such attributes are silently dropped.
+>, <Line: -	 * 
+>, <Line: -	 * @param branch
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public static Collection<wycc.lang.Attribute> toWycsAttributes(Collection<wyil.lang.Attribute> wyilAttributes) {
+>, <Line: -		ArrayList<wycc.lang.Attribute> wycsAttributes = new ArrayList<wycc.lang.Attribute>();
+>, <Line: -		// iterate each attribute and convert those which can be convered.
+>, <Line: -		for (wyil.lang.Attribute attr : wyilAttributes) {
+>, <Line: -			if (attr instanceof wyil.attributes.SourceLocation) {
+>, <Line: -				wyil.attributes.SourceLocation l = (wyil.attributes.SourceLocation) attr;
+>, <Line: -				wycsAttributes.add(new wycc.lang.Attribute.Source(l.start(), l.end(), 0));
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return wycsAttributes;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Generate the logically inverted expression corresponding to a given
+>, <Line: -	 * comparator. For example, inverting "<=" gives ">", inverting "==" gives
+>, <Line: -	 * "!=", etc.
+>, <Line: -	 *
+>, <Line: -	 * @param test
+>, <Line: -	 *            --- the binary comparator being inverted.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Expr invert(Expr.Binary test) {
+>, <Line: -		Expr.Binary.Op op;
+>, <Line: -		switch (test.op) {
+>, <Line: -		case EQ:
+>, <Line: -			op = Expr.Binary.Op.NEQ;
+>, <Line: -			break;
+>, <Line: -		case NEQ:
+>, <Line: -			op = Expr.Binary.Op.EQ;
+>, <Line: -			break;
+>, <Line: -		case GTEQ:
+>, <Line: -			op = Expr.Binary.Op.LT;
+>, <Line: -			break;
+>, <Line: -		case GT:
+>, <Line: -			op = Expr.Binary.Op.LTEQ;
+>, <Line: -			break;
+>, <Line: -		case LTEQ:
+>, <Line: -			op = Expr.Binary.Op.GT;
+>, <Line: -			break;
+>, <Line: -		case LT:
+>, <Line: -			op = Expr.Binary.Op.GTEQ;
+>, <Line: -			break;
+>, <Line: -		default:
+>, <Line: -			wycc.lang.SyntaxError.internalFailure("unknown comparator ("
+>, <Line: -					+ test.op + ")", filename, test);
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -		return new Expr.Binary(op, test.leftOperand, test.rightOperand,
+>, <Line: -				test.attributes());
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Make an objective assessment as to whether a type may include an
+>, <Line: -	 * invariant or not. The purpose here is reduce the number of verification
+>, <Line: -	 * conditions generated with respect to constrained types. The algorithm is
+>, <Line: -	 * currently very simple. It essentially looks to see whether or not the
+>, <Line: -	 * type contains a nominal component. If so, the answer is "yes", otherwise
+>, <Line: -	 * the answer is "no".
+>, <Line: -	 * 
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public boolean containsNominal(Type t,
+>, <Line: -			Collection<wyil.lang.Attribute> attributes) {
+>, <Line: -		// FIXME: this is fundamentally broken in the case of recursive types.
+>, <Line: -		// See Issue #298.
+>, <Line: -		if (t instanceof Type.Any || t instanceof Type.Void
+>, <Line: -				|| t instanceof Type.Null || t instanceof Type.Bool
+>, <Line: -				|| t instanceof Type.Byte || t instanceof Type.Int) {
+>, <Line: -			return false;
+>, <Line: -		} else if (t instanceof Type.Array) {
+>, <Line: -			Type.Array lt = (Type.Array) t;
+>, <Line: -			return containsNominal(lt.element(), attributes);
+>, <Line: -		} else if (t instanceof Type.Record) {
+>, <Line: -			Type.Record rt = (Type.Record) t;
+>, <Line: -			for (Type field : rt.fields().values()) {
+>, <Line: -				if (containsNominal(field, attributes)) {
+>, <Line: -					return true;
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			return false;
+>, <Line: -		} else if (t instanceof Type.Reference) {
+>, <Line: -			Type.Reference lt = (Type.Reference) t;
+>, <Line: -			return containsNominal(lt.element(), attributes);
+>, <Line: -		} else if (t instanceof Type.Union) {
+>, <Line: -			Type.Union tu = (Type.Union) t;
+>, <Line: -			for (Type te : tu.bounds()) {
+>, <Line: -				if (containsNominal(te, attributes)) {
+>, <Line: -					return true;
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			return false;
+>, <Line: -		} else if (t instanceof Type.Negation) {
+>, <Line: -			Type.Negation nt = (Type.Negation) t;
+>, <Line: -			return containsNominal(nt.element(), attributes);
+>, <Line: -		} else if (t instanceof Type.FunctionOrMethod) {
+>, <Line: -			Type.FunctionOrMethod ft = (Type.FunctionOrMethod) t;
+>, <Line: -			for (Type pt : ft.params()) {
+>, <Line: -				if (containsNominal(pt, attributes)) {
+>, <Line: -					return true;
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			for (Type pt : ft.returns()) {
+>, <Line: -				if (containsNominal(pt, attributes)) {
+>, <Line: -					return true;
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			return false;
+>, <Line: -		} else if (t instanceof Type.Nominal) {
+>, <Line: -			return true;
+>, <Line: -		} else {
+>, <Line: -			internalFailure("unknown type encountered ("
+>, <Line: -					+ t.getClass().getName() + ")", filename, attributes);
+>, <Line: -			return false;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Generate verification conditions to enforce the necessary preconditions
+>, <Line: -	 * for a given bytecode. For example, to protect against division by zero or
+>, <Line: -	 * an out-of-bounds access.
+>, <Line: -	 * 
+>, <Line: -	 * @param code
+>, <Line: -	 * @param branch
+>, <Line: -	 * @param branches
+>, <Line: -	 * @param block
+>, <Line: -	 */
+>, <Line: -	public Pair<String,Expr>[] getPreconditions(Bytecode code, VcBranch branch,
+>, <Line: -			Type[] environment, BytecodeForest forest) {
+>, <Line: -		//
+>, <Line: -		try {
+>, <Line: -			switch (code.opcode()) {
+>, <Line: -			case Bytecode.OPCODE_div:
+>, <Line: -			case Bytecode.OPCODE_rem:
+>, <Line: -				return divideByZeroCheck((Bytecode.Operator) code, branch);
+>, <Line: -			case Bytecode.OPCODE_arrayindex:
+>, <Line: -				return indexOutOfBoundsChecks((Bytecode.Operator) code, branch);
+>, <Line: -			case Bytecode.OPCODE_arrygen:
+>, <Line: -				return arrayGeneratorChecks((Bytecode.Operator) code, branch);
+>, <Line: -			case Bytecode.OPCODE_update:
+>, <Line: -				return updateChecks((Bytecode.Update) code, branch);
+>, <Line: -			case Bytecode.OPCODE_invoke:
+>, <Line: -				return preconditionCheck((Bytecode.Invoke) code, branch, environment, forest);
+>, <Line: -			}
+>, <Line: -			return new Pair[0];
+>, <Line: -		} catch (Exception e) {
+>, <Line: -			internalFailure(e.getMessage(), filename, e);
+>, <Line: -			return null; // deadcode
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Generate preconditions to protected against a possible divide by zero.
+>, <Line: -	 * This essentially boils down to ensureing the divisor is non-zero.
+>, <Line: -	 * 
+>, <Line: -	 * @param binOp
+>, <Line: -	 *            --- The division or remainder bytecode
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- The branch the division is on.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Pair<String, Expr>[] divideByZeroCheck(Bytecode.Operator binOp, VcBranch branch) {
+>, <Line: -		Expr rhs = branch.read(binOp.operand(1));
+>, <Line: -		Value zero;
+>, <Line: -		if (binOp.type(0) instanceof Type.Int) {
+>, <Line: -			zero = Value.Integer(BigInteger.ZERO);
+>, <Line: -		} else {
+>, <Line: -			zero = Value.Decimal(BigDecimal.ZERO);
+>, <Line: -		}
+>, <Line: -		Expr.Constant constant = new Expr.Constant(zero, rhs.attributes());
+>, <Line: -		return new Pair[] {
+>, <Line: -				new Pair("division by zero", new Expr.Binary(Expr.Binary.Op.NEQ, rhs, constant, rhs.attributes())) };
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Generate preconditions necessary to protect against an out-of-bounds
+>, <Line: -	 * access. For lists, this means ensuring the index is non-negative and less
+>, <Line: -	 * than the list length.
+>, <Line: -	 * 
+>, <Line: -	 * @param code
+>, <Line: -	 *            --- The indexOf bytecode
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- The branch the bytecode is on.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Pair<String,Expr>[] indexOutOfBoundsChecks(Bytecode.Operator code, VcBranch branch) {
+>, <Line: -		if (code.type(0) instanceof Type.EffectiveArray) {
+>, <Line: -			Expr src = branch.read(code.operand(0));
+>, <Line: -			Expr idx = branch.read(code.operand(1));
+>, <Line: -			Expr zero = new Expr.Constant(Value.Integer(BigInteger.ZERO),
+>, <Line: -					idx.attributes());
+>, <Line: -			Expr length = new Expr.Unary(Expr.Unary.Op.LENGTHOF, src,
+>, <Line: -					idx.attributes());
+>, <Line: -			return new Pair[] {
+>, <Line: -					new Pair("index out of bounds (negative)", new Expr.Binary(
+>, <Line: -							Expr.Binary.Op.GTEQ, idx, zero, idx.attributes())),
+>, <Line: -					new Pair("index out of bounds (not less than length)",
+>, <Line: -							new Expr.Binary(Expr.Binary.Op.LT, idx, length,
+>, <Line: -									idx.attributes())), };			
+>, <Line: -		} else {
+>, <Line: -			// FIXME: should do something here! At a minimum, generate a warning
+>, <Line: -			// that this has not been implemented yet.
+>, <Line: -			return new Pair[0];
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Generate preconditions necessary to protect against a negative array
+>, <Line: -	 * size.
+>, <Line: -	 * 
+>, <Line: -	 * @param code
+>, <Line: -	 *            --- The array generator bytecode
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- The branch the bytecode is on.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Pair<String,Expr>[] arrayGeneratorChecks(Bytecode.Operator code, VcBranch branch) {
+>, <Line: -		Expr idx = branch.read(code.operand(1));
+>, <Line: -		Expr zero = new Expr.Constant(Value.Integer(BigInteger.ZERO),
+>, <Line: -				idx.attributes());
+>, <Line: -		return new Pair[] {
+>, <Line: -				new Pair("negative length possible", new Expr.Binary(
+>, <Line: -						Expr.Binary.Op.GTEQ, idx, zero, idx.attributes()))
+>, <Line: -		};
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Generate preconditions necessary to ensure the preconditions for a method
+>, <Line: -	 * or method invocation are met.
+>, <Line: -	 * 
+>, <Line: -	 * @param code
+>, <Line: -	 *            --- The invoke bytecode
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- The branch on which the invocation is on.
+>, <Line: -	 * @param block
+>, <Line: -	 *            --- The containing block of code.
+>, <Line: -	 * @return
+>, <Line: -	 * @throws Exception
+>, <Line: -	 */
+>, <Line: -	public Pair<String,Expr>[] preconditionCheck(Bytecode.Invoke code, VcBranch branch,
+>, <Line: -			Type[] environment, BytecodeForest forest) throws Exception {
+>, <Line: -		ArrayList<Pair<String,Expr>> preconditions = new ArrayList<>();
+>, <Line: -		//
+>, <Line: -		// First, check for any potentially constrained types.    
+>, <Line: -		//
+>, <Line: -		List<wyil.lang.Attribute> attributes = forest.get(branch.pc()).attributes();
+>, <Line: -		List<Type> code_type_params = code.type(0).params();		
+>, <Line: -		int[] code_operands = code.operands();
+>, <Line: -		for (int i = 0; i != code_operands.length; ++i) {
+>, <Line: -			Type t = code_type_params.get(i);
+>, <Line: -			if (containsNominal(t, attributes)) {
+>, <Line: -				int operand = code_operands[i];
+>, <Line: -				Type rawType = expand(environment[operand], attributes);
+>, <Line: -				Expr rawTest = new Expr.Is(branch.read(operand), convert(rawType, attributes));
+>, <Line: -				Expr nominalTest = new Expr.Is(branch.read(operand), convert(t, attributes));
+>, <Line: -				preconditions.add(new Pair("type invariant not satisfied (argument " + i + ")",
+>, <Line: -						new Expr.Binary(Expr.Binary.Op.IMPLIES, rawTest, nominalTest)));
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		//
+>, <Line: -		int numPreconditions = countPreconditions(code.name(), code.type(0), forest, branch);
+>, <Line: -		//
+>, <Line: -		if (numPreconditions > 0) {
+>, <Line: -			// First, read out the operands from the branch
+>, <Line: -			Expr[] operands = new Expr[code_operands.length];
+>, <Line: -			for (int i = 0; i != code_operands.length; ++i) {
+>, <Line: -				operands[i] = branch.read(code_operands[i]);
+>, <Line: -			}
+>, <Line: -			// To check the pre-condition holds after the method, we
+>, <Line: -			// simply called the corresponding pre-condition macros.
+>, <Line: -			String prefix = code.name().name() + "_requires_";
+>, <Line: -			Expr argument = operands.length == 1 ? operands[0] : new Expr.Nary(Expr.Nary.Op.TUPLE, operands);
+>, <Line: -			for (int i = 0; i < numPreconditions; ++i) {
+>, <Line: -				Expr precondition = new Expr.Invoke(prefix + i, code.name().module(), Collections.EMPTY_LIST, argument);
+>, <Line: -				preconditions.add(new Pair<String, Expr>("precondition not satisfied", precondition));
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return preconditions.toArray(new Pair[preconditions.size()]);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Ensure all preconditions for an update bytecode are met. For example,
+>, <Line: -	 * that any array updates are within bounds, etc.
+>, <Line: -	 * 
+>, <Line: -	 * @param code
+>, <Line: -	 *            --- The update bytecode.
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- The branch containing the update bytecode.
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Pair<String,Expr>[] updateChecks(Bytecode.Update code, VcBranch branch) {
+>, <Line: -		ArrayList<Pair<String,Expr>> preconditions = new ArrayList<Pair<String,Expr>>();
+>, <Line: -		Expr src = branch.read(code.target(0));
+>, <Line: -		for (Bytecode.LVal lval : code) {
+>, <Line: -			if (lval instanceof Bytecode.ArrayLVal) {
+>, <Line: -				Bytecode.ArrayLVal lv = (Bytecode.ArrayLVal) lval;
+>, <Line: -				Expr idx = branch.read(lv.indexOperand);
+>, <Line: -				Expr zero = new Expr.Constant(Value.Integer(BigInteger.ZERO),
+>, <Line: -						idx.attributes());
+>, <Line: -				Expr length = new Expr.Unary(Expr.Unary.Op.LENGTHOF, src,
+>, <Line: -						idx.attributes());
+>, <Line: -				preconditions.add(new Pair("index out of bounds (negative)",
+>, <Line: -						new Expr.Binary(Expr.Binary.Op.GTEQ, idx, zero, idx
+>, <Line: -								.attributes())));
+>, <Line: -				preconditions.add(new Pair(
+>, <Line: -						"index out of bounds (not less than length)",
+>, <Line: -						new Expr.Binary(Expr.Binary.Op.LT, idx, length, idx
+>, <Line: -								.attributes())));
+>, <Line: -				src = new Expr.IndexOf(src, idx);
+>, <Line: -			} else if (lval instanceof Bytecode.RecordLVal) {
+>, <Line: -				Bytecode.RecordLVal lv = (Bytecode.RecordLVal) lval;
+>, <Line: -				ArrayList<String> fields = new ArrayList<String>(lv.rawType()
+>, <Line: -						.fields().keySet());
+>, <Line: -				Collections.sort(fields);
+>, <Line: -				Expr index = new Expr.Constant(Value.Integer(BigInteger
+>, <Line: -						.valueOf(fields.indexOf(lv.field))));
+>, <Line: -				src = new Expr.IndexOf(src, index);
+>, <Line: -			} else {
+>, <Line: -				// FIXME: need to implement dereference operations.
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -		return preconditions.toArray(new Pair[preconditions.size()]);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Find the precondition associated with a given function or method. This
+>, <Line: -	 * maybe contained in the same file, or in a different file. This may
+>, <Line: -	 * require loading that file in memory to access this information.
+>, <Line: -	 * 
+>, <Line: -	 * @param name
+>, <Line: -	 *            --- Fully qualified name of function
+>, <Line: -	 * @param fun
+>, <Line: -	 *            --- Type of fucntion.
+>, <Line: -	 * @param block
+>, <Line: -	 *            --- Enclosing block (for debugging purposes).
+>, <Line: -	 * @param branch
+>, <Line: -	 *            --- Enclosing branch (for debugging purposes).
+>, <Line: -	 * @return
+>, <Line: -	 * @throws Exception
+>, <Line: -	 */
+>, <Line: -	public int countPreconditions(NameID name, Type.FunctionOrMethod fun,
+>, <Line: -			BytecodeForest forest, VcBranch branch) throws Exception {
+>, <Line: -		Path.Entry<WyilFile> e = builder.project().get(name.module(), WyilFile.ContentType);
+>, <Line: -		if (e == null) {
+>, <Line: -			syntaxError(errorMessage(ErrorMessages.RESOLUTION_ERROR, name.module().toString()), filename,
+>, <Line: -					forest.get(branch.pc()).attributes());
+>, <Line: -		}
+>, <Line: -		WyilFile m = e.read();
+>, <Line: -		WyilFile.FunctionOrMethod method = m.functionOrMethod(name.name(), fun);
+>, <Line: -		return method.preconditions().length;
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Determine the originating register number for this variable. This is made
+>, <Line: -	 * difficult because of variable versioning. All variable names and versions
+>, <Line: -	 * are encoded into a string of the form "n$v", where n is the variable name
+>, <Line: -	 * (A.K.A. the prefix) and "v" is the version.
+>, <Line: -	 * 
+>, <Line: -	 * @param variable
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public static int determineRegister(String variable, String[] prefixes) {
+>, <Line: -		// First determine the variable name (i.e. the prefix).
+>, <Line: -		int dollarIndex = variable.indexOf('$');
+>, <Line: -		String prefix;
+>, <Line: -		if (dollarIndex != -1) {
+>, <Line: -			// In this case, the variable name was of the form "n$v" where n is
+>, <Line: -			// the name, and v is the version. We don't need the version here,
+>, <Line: -			// so strip it off.
+>, <Line: -			prefix = variable.substring(0, dollarIndex);
+>, <Line: -		} else {
+>, <Line: -			// In this case, no version is given and, hence, there is nothing to
+>, <Line: -			// strip off.
+>, <Line: -			prefix = variable;
+>, <Line: -		}
+>, <Line: -		// Now, check whether this is a raw register identifier, or a named
+>, <Line: -		// variable identifier.
+>, <Line: -		if(prefix.startsWith("r%")) {
+>, <Line: -			// This is a raw register identifier. Therefore, we can extract the
+>, <Line: -			// register number directly.
+>, <Line: -			return Integer.parseInt(prefix.substring(2));
+>, <Line: -		} else {
+>, <Line: -			// This is a named varaible identifier. Therefore, we need to look
+>, <Line: -			// through the known list of named variable prefixes to see whether
+>, <Line: -			// or not we can find it (which we should be able to do).
+>, <Line: -			for (int i = 0; i != prefixes.length; ++i) {
+>, <Line: -				if (prefix.equals(prefixes[i])) {
+>, <Line: -					return i;
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			// Should be impossible to get here.
+>, <Line: -			throw new RuntimeException(
+>, <Line: -					"Unreachable code reached whilst looking for: " + variable);
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	private Type expand(Type t, Collection<wyil.lang.Attribute> attributes) {
+>, <Line: -		try {
+>, <Line: -			return expander.getUnderlyingType(t);
+>, <Line: -		} catch (ResolveError re) {
+>, <Line: -			internalFailure(re.getMessage(), filename, attributes);
+>, <Line: -		} catch (IOException re) {
+>, <Line: -			internalFailure(re.getMessage(), filename, attributes);
+>, <Line: -		}
+>, <Line: -		return null; // dead-code
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Returns the prefix array which gives the names of all registers declared
+>, <Line: -	 * in a given block.
+>, <Line: -	 * 
+>, <Line: -	 * @param d
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public static Pair<String[], Type[]> parseRegisterDeclarations(BytecodeForest forest) {
+>, <Line: -		List<BytecodeForest.Register> regs = forest.registers();
+>, <Line: -		String[] prefixes = new String[regs.size()];
+>, <Line: -		Type[] types = new Type[regs.size()];
+>, <Line: -		for (int i = 0; i != prefixes.length; ++i) {
+>, <Line: -			BytecodeForest.Register d = regs.get(i);			
+>, <Line: -			prefixes[i] = d.name();
+>, <Line: -			types[i] = d.type();
+>, <Line: -		}
+>, <Line: -		return new Pair<>(prefixes, types);		
+>, <Line: -	}
+>, <Line: -}
+>]

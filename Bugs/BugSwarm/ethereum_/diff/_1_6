@@ -1,0 +1,6 @@
+[<Line: +        throw new UnsupportedOperationException("Fat trie doesn't support root rollbacks");
+>]
+[<Line: -        // todo : in fat trie it will not  sync the orig trie
+>, <Line: -        // todo : in fat trie it will not  sync the orig trie
+>, <Line: -        // todo : in fat trie it will not  sync the orig trie
+>]

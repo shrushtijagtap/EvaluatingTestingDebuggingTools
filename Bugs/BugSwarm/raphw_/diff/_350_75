@@ -1,0 +1,6 @@
+[]
+[<Line: -package net.bytebuddy.test.packaging;
+>, <Line: -interface PackagePrivateInterfaceType {
+>, <Line: -    /* empty */
+>, <Line: -}
+>]

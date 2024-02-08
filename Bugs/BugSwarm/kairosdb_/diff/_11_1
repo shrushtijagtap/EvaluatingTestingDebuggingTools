@@ -1,0 +1,8 @@
+[<Line: +<definitions xmlns="http://www.cpmake.org">
+>, <Line: +		<option name="debug" pattern="(.+)">-Xdebug
+>, <Line: +			-Xrunjdwp:transport=dt_socket,server=y,address=$1
+>, <Line: +		</option>
+>]
+[<Line: -<definitions xmlns="http://www.cpmake.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+>, <Line: -		<option name="debug" pattern="(.+)">-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=$1</option>
+>]

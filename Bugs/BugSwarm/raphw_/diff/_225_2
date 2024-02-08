@@ -1,0 +1,44 @@
+[<Line: +    @SuppressWarnings("unchecked")
+>, <Line: +        when(first.loadClass(FOO)).thenReturn((Class) Foo.class);
+>, <Line: +        when(first.loadClass(BAR)).thenReturn((Class) BarFirst.class);
+>, <Line: +        when(first.loadClass(QUX)).thenThrow(new ClassNotFoundException());
+>, <Line: +        when(first.loadClass(BAZ)).thenThrow(new ClassNotFoundException());
+>, <Line: +        when(second.loadClass(BAR)).thenReturn((Class) BarSecond.class);
+>, <Line: +        when(second.loadClass(QUX)).thenReturn((Class) Qux.class);
+>, <Line: +        when(second.loadClass(BAZ)).thenThrow(new ClassNotFoundException());
+>, <Line: +        verify(first).loadClass(FOO);
+>, <Line: +        verify(first).loadClass(BAR);
+>, <Line: +        verify(first).loadClass(QUX);
+>, <Line: +        verify(second).loadClass(QUX);
+>]
+[<Line: -import java.util.Arrays;
+>, <Line: -import java.util.Iterator;
+>, <Line: -        Method loadClass = ClassLoader.class.getDeclaredMethod("loadClass", String.class, boolean.class);
+>, <Line: -        loadClass.setAccessible(true);
+>, <Line: -        when(loadClass.invoke(first, FOO, false)).thenReturn(Foo.class);
+>, <Line: -        when(loadClass.invoke(first, BAR, false)).thenReturn(BarFirst.class);
+>, <Line: -        when(loadClass.invoke(first, QUX, false)).thenThrow(new ClassNotFoundException());
+>, <Line: -        when(loadClass.invoke(first, BAZ, false)).thenThrow(new ClassNotFoundException());
+>, <Line: -        when(loadClass.invoke(second, BAR, false)).thenReturn(BarSecond.class);
+>, <Line: -        when(loadClass.invoke(second, QUX, false)).thenReturn(Qux.class);
+>, <Line: -        when(loadClass.invoke(second, BAZ, false)).thenThrow(new ClassNotFoundException());
+>, <Line: -        Method loadClass = ClassLoader.class.getDeclaredMethod("loadClass", String.class, boolean.class);
+>, <Line: -        loadClass.setAccessible(true);
+>, <Line: -        loadClass.invoke(verify(first), FOO, false);
+>, <Line: -        loadClass.invoke(verify(first), BAR, false);
+>, <Line: -        loadClass.invoke(verify(first), QUX, false);
+>, <Line: -        loadClass.invoke(verify(second), QUX, false);
+>, <Line: -    @Test(expected = IllegalStateException.class)
+>, <Line: -    public void testInactiveDispatcher() throws Exception {
+>, <Line: -        MultipleParentClassLoader.Dispatcher dispatcher = new MultipleParentClassLoader.Dispatcher.Erroneous(new Exception());
+>, <Line: -        dispatcher.loadClass(mock(ClassLoader.class), FOO, true);
+>, <Line: -    }
+>, <Line: -        final Iterator<Method> iterator = Arrays.asList(Object.class.getDeclaredMethods()).iterator();
+>, <Line: -        ObjectPropertyAssertion.of(MultipleParentClassLoader.Dispatcher.Active.class).create(new ObjectPropertyAssertion.Creator<Method>() {
+>, <Line: -            @Override
+>, <Line: -            public Method create() {
+>, <Line: -                return iterator.next();
+>, <Line: -            }
+>, <Line: -        }).apply();
+>, <Line: -        ObjectPropertyAssertion.of(MultipleParentClassLoader.Dispatcher.Erroneous.class).apply();
+>]

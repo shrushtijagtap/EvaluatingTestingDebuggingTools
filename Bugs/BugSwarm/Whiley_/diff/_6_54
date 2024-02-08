@@ -1,0 +1,492 @@
+[<Line: +package wyil.util;
+>, <Line: +import java.util.Arrays;
+>, <Line: +import wycc.lang.NameID;
+>, <Line: +import wyil.lang.Bytecode;
+>, <Line: +import wyil.lang.Constant;
+>, <Line: +import wyil.lang.Type;
+>, <Line: +import wyil.lang.Bytecode.Blocks;
+>, <Line: +import wyil.lang.Bytecode.Extras;
+>, <Line: +import wyil.lang.Bytecode.OperandGroups;
+>, <Line: +import wyil.lang.Bytecode.Operands;
+>, <Line: +import wyil.lang.Bytecode.Schema;
+>, <Line: +public abstract class AbstractBytecode {
+>, <Line: +	private final int[] operands;
+>, <Line: +	private final int[][] operandGroups;
+>, <Line: +	private final int[] blocks;
+>, <Line: +	public AbstractBytecode() {
+>, <Line: +		this.operands = null;
+>, <Line: +		this.operandGroups = null;
+>, <Line: +		this.blocks = null;
+>, <Line: +	}
+>, <Line: +	public AbstractBytecode(int operand) {
+>, <Line: +		this.operands = new int[] { operand };
+>, <Line: +		this.operandGroups = null;
+>, <Line: +		this.blocks = null;
+>, <Line: +	}
+>, <Line: +	public AbstractBytecode(int[] operands) {
+>, <Line: +		this.operands = operands;
+>, <Line: +		this.operandGroups = null;
+>, <Line: +		this.blocks = null;
+>, <Line: +	}
+>, <Line: +	public AbstractBytecode(int[][] operandGroups) {
+>, <Line: +		this.operands = null;
+>, <Line: +		this.operandGroups = operandGroups;
+>, <Line: +		this.blocks = null;
+>, <Line: +	}
+>, <Line: +	public AbstractBytecode(int operand, int[][] operandGroups) {
+>, <Line: +		this.operands = new int[] { operand };
+>, <Line: +		this.operandGroups = operandGroups;
+>, <Line: +		this.blocks = null;
+>, <Line: +	}
+>, <Line: +	public AbstractBytecode(int[] operands, int[][] operandGroups) {
+>, <Line: +		this.operands = operands;
+>, <Line: +		this.operandGroups = operandGroups;
+>, <Line: +		this.blocks = null;
+>, <Line: +	}
+>, <Line: +	public AbstractBytecode(int operand, int[][] operandGroups, int[] blocks) {
+>, <Line: +		this.operands = new int[] {operand};
+>, <Line: +		this.operandGroups = operandGroups;
+>, <Line: +		this.blocks = blocks;
+>, <Line: +	}
+>, <Line: +	public AbstractBytecode(int[] operands, int[][] operandGroups, int[] blocks) {
+>, <Line: +		this.operands = operands;
+>, <Line: +		this.operandGroups = operandGroups;
+>, <Line: +		this.blocks = blocks;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public int hashCode() {
+>, <Line: +		return getOpcode() ^ Arrays.hashCode(getOperands()) & Arrays.deepHashCode(operandGroups);
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public boolean equals(Object o) {
+>, <Line: +		if (o instanceof AbstractBytecode) {
+>, <Line: +			AbstractBytecode bo = (AbstractBytecode) o;
+>, <Line: +			return getOpcode() == bo.getOpcode() && Arrays.equals(getOperands(), bo.getOperands())
+>, <Line: +					&& Arrays.deepEquals(operandGroups, operandGroups) && Arrays.equals(blocks, bo.blocks);
+>, <Line: +		}
+>, <Line: +		return false;
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Return the opcode value of this bytecode.
+>, <Line: +	 * 
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public abstract int getOpcode();
+>, <Line: +	/**
+>, <Line: +	 * Return the top-level operands in this bytecode.
+>, <Line: +	 *
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public int[] getOperands() {
+>, <Line: +		if(operands == null) {
+>, <Line: +			return new int[0];
+>, <Line: +		} else {
+>, <Line: +			return operands;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Return the number of top-level operands in this bytecode
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public int numberOfOperands() {
+>, <Line: +		if(operands == null) {
+>, <Line: +			return 0;
+>, <Line: +		} else {
+>, <Line: +			return operands.length;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Return the ith top-level operand in this bytecode.
+>, <Line: +	 * 
+>, <Line: +	 * @param i
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public int getOperand(int i) {
+>, <Line: +		return operands[i];
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Get the number of operand groups in this bytecode
+>, <Line: +	 * 
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public int numberOfOperandGroups() {
+>, <Line: +		if(operandGroups == null) {
+>, <Line: +			return 0;
+>, <Line: +		} else {
+>, <Line: +			return operandGroups.length;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Get the ith operand group in this bytecode
+>, <Line: +	 * 
+>, <Line: +	 * @param i
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public int[] getOperandGroup(int i) {
+>, <Line: +		return operandGroups[i];
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Determine the number of blocks contained in this bytecode.
+>, <Line: +	 * 
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public int numberOfBlocks() {
+>, <Line: +		if(blocks == null) {
+>, <Line: +			return 0;
+>, <Line: +		} else {
+>, <Line: +			return blocks.length;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Get the ith block contained in this statement
+>, <Line: +	 * 
+>, <Line: +	 * @param i
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public int getBlock(int i) {
+>, <Line: +		return blocks[i];
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Get the blocks contained in this statement
+>, <Line: +	 * 
+>, <Line: +	 * @param i
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public int[] getBlocks() {
+>, <Line: +		if(blocks == null) {
+>, <Line: +			return new int[0];
+>, <Line: +		} else {
+>, <Line: +			return blocks;
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * ==================================================================
+>, <Line: +	 * Individual Bytecode Schemas
+>, <Line: +	 * ==================================================================
+>, <Line: +	 */
+>, <Line: +	public static final Schema[] schemas = new Schema[255];
+>, <Line: +	static {
+>, <Line: +		//		
+>, <Line: +		schemas[Bytecode.OPCODE_add] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.ADD);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_aliasdecl] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.AliasDeclaration(operands[0]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_array] = new Schema(Operands.MANY){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.ARRAYCONSTRUCTOR);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_arrayindex] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands,Bytecode.OperatorKind.ARRAYINDEX);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_arraygen] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands,Bytecode.OperatorKind.ARRAYGENERATOR);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_arraylength] = new Schema(Operands.ONE) {
+>, <Line: +			public Bytecode construct(int opcode, int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.ARRAYLENGTH);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_assert] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Assert(operands[0]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_assign] = new Schema(Operands.ZERO, OperandGroups.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {				
+>, <Line: +				return new Bytecode.Assign(groups[0],groups[1]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_assume] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Assume(operands[0]);
+>, <Line: +			}
+>, <Line: +		};	
+>, <Line: +		schemas[Bytecode.OPCODE_bitwiseinvert] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.BITWISEINVERT);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_bitwiseor] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.BITWISEOR);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_bitwisexor] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.BITWISEXOR);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_bitwiseand] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.BITWISEAND);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_block] = new Schema(Operands.MANY){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Block(operands);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_break] = new Schema(Operands.ZERO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Break();
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_const] = new Schema(Operands.ZERO, Extras.CONSTANT){
+>, <Line: +			public Bytecode construct(int opcode, int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Const((Constant) extras[0]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_continue] = new Schema(Operands.ZERO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Continue();
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_convert] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {				
+>, <Line: +				return new Bytecode.Convert(operands[0]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_debug] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Debug(operands[0]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_dereference] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.DEREFERENCE);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_div] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.DIV);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_dowhile] = new Schema(Operands.ONE, OperandGroups.TWO, Blocks.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				int body = blocks[0];
+>, <Line: +				int condition = operands[0];
+>, <Line: +				int[] invariants = groups[0];
+>, <Line: +				int[] modified = groups[1];
+>, <Line: +				return new Bytecode.DoWhile(body,condition,invariants,modified);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_eq] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.EQ);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_if] = new Schema(Operands.ONE, OperandGroups.ZERO, Blocks.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				int trueBranch = blocks[0];
+>, <Line: +				return new Bytecode.If(operands[0], trueBranch);					
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_ifelse] = new Schema(Operands.ONE, OperandGroups.ZERO, Blocks.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				int trueBranch = blocks[0];
+>, <Line: +				int falseBranch = blocks[1];
+>, <Line: +				return new Bytecode.If(operands[0], trueBranch, falseBranch);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_fail] = new Schema(Operands.ZERO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Fail();
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_fieldload] = new Schema(Operands.ONE, Extras.STRING){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.FieldLoad(operands[0], (String) extras[0]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_gt] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.GT);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_ge] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.GTEQ);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_invoke] = new Schema(Operands.MANY, Extras.TYPE, Extras.NAME) {
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Invoke((Type.FunctionOrMethod) extras[0], operands, (NameID) extras[1]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_indirectinvoke] = new Schema(Operands.ONE, OperandGroups.ONE, Extras.TYPE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.IndirectInvoke((Type.FunctionOrMethod) extras[0], operands[0], groups[0]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_is] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.IS);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_lambda] = new Schema(Operands.ONE, OperandGroups.TWO, Extras.TYPE) {
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				Type.FunctionOrMethod type = (Type.FunctionOrMethod) extras[0];
+>, <Line: +				int body = operands[0];
+>, <Line: +				int[] parameters = groups[0];
+>, <Line: +				int[] environment = groups[1];
+>, <Line: +				return new Bytecode.Lambda(type,body,parameters,environment);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_lt] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.LT);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_le] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.LTEQ);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_logicalor] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.OR);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_logicaland] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.AND);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_logicalnot] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.NOT);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_mul] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.MUL);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_namedblock] = new Schema(Operands.ZERO, OperandGroups.ZERO, Blocks.ONE, Extras.STRING) {
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				String name = (String) extras[0];
+>, <Line: +				return new Bytecode.NamedBlock(blocks[0],name);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_ne] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.NEQ);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_neg] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.NEG);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_newobject] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands,Bytecode.OperatorKind.NEW);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_record] = new Schema(Operands.MANY){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.RECORDCONSTRUCTOR);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_rem] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.REM);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_return] = new Schema(Operands.MANY){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Return(operands);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_shl] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.LEFTSHIFT);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_shr] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.RIGHTSHIFT);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_skip] = new Schema(Operands.ZERO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Skip();
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_sub] = new Schema(Operands.TWO){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.Operator(operands, Bytecode.OperatorKind.SUB);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_switch] = new Schema(Operands.ONE, OperandGroups.ZERO, Extras.SWITCH_ARRAY) {
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				Bytecode.Case[] cases = (Bytecode.Case[]) extras[0];
+>, <Line: +				return new Bytecode.Switch(operands[0], cases);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_vardecl] = new Schema(Operands.ZERO,Extras.STRING){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				String name = (String) extras[0];
+>, <Line: +				return new Bytecode.VariableDeclaration(name);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_vardeclinit] = new Schema(Operands.ONE,Extras.STRING){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				String name = (String) extras[0];
+>, <Line: +				return new Bytecode.VariableDeclaration(name,operands[0]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_varaccess] = new Schema(Operands.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				return new Bytecode.VariableAccess(operands[0]);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		schemas[Bytecode.OPCODE_while] = new Schema(Operands.ONE, OperandGroups.TWO, Blocks.ONE){
+>, <Line: +			public Bytecode construct(int opcode,int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				int body = blocks[0];
+>, <Line: +				int condition = operands[0];
+>, <Line: +				int[] invariants = groups[0];
+>, <Line: +				int[] modified = groups[1];
+>, <Line: +				return new Bytecode.While(body,condition,invariants,modified);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		// Quantifiers
+>, <Line: +		schemas[Bytecode.OPCODE_some] = schemas[Bytecode.OPCODE_all] = new Schema(
+>, <Line: +				Operands.ONE, OperandGroups.MANY) {
+>, <Line: +			public Bytecode construct(int opcode, int[] operands, int[][] groups, int[] blocks, Object[] extras) {
+>, <Line: +				int body = operands[0];
+>, <Line: +				Bytecode.Range[] ranges = new Bytecode.Range[groups.length];
+>, <Line: +				for (int i = 0; i != ranges.length; i = i + 1) {
+>, <Line: +					int[] group = groups[i];
+>, <Line: +					ranges[i] = new Bytecode.Range(group[0],group[1],group[2]);
+>, <Line: +				}
+>, <Line: +				Bytecode.QuantifierKind kind;
+>, <Line: +				switch(opcode) {
+>, <Line: +				case Bytecode.OPCODE_some:
+>, <Line: +					kind = Bytecode.QuantifierKind.SOME;
+>, <Line: +					break;
+>, <Line: +				case Bytecode.OPCODE_all:
+>, <Line: +					kind = Bytecode.QuantifierKind.ALL;
+>, <Line: +					break;
+>, <Line: +				default:
+>, <Line: +					// deadcpde
+>, <Line: +					throw new IllegalArgumentException();
+>, <Line: +				}
+>, <Line: +				return new Bytecode.Quantifier(kind, body, ranges);
+>, <Line: +			}
+>, <Line: +		};		
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

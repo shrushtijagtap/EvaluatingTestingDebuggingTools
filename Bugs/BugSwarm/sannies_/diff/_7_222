@@ -1,0 +1,46 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractFullBox;
+>, <Line: +import org.mp4parser.support.Logger;
+>, <Line: +import org.mp4parser.tools.DateHelper;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>, <Line: +    private static Logger LOG = Logger.getLogger(MediaHeaderBox.class);
+>, <Line: +    public void setCreationTime(Date creationTime) {
+>, <Line: +        this.creationTime = creationTime;
+>, <Line: +    }
+>, <Line: +    public void setModificationTime(Date modificationTime) {
+>, <Line: +        this.modificationTime = modificationTime;
+>, <Line: +    }
+>, <Line: +    public void setTimescale(long timescale) {
+>, <Line: +        this.timescale = timescale;
+>, <Line: +    }
+>, <Line: +    public void setDuration(long duration) {
+>, <Line: +        this.duration = duration;
+>, <Line: +    }
+>, <Line: +    public void setLanguage(String language) {
+>, <Line: +        this.language = language;
+>, <Line: +    }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.googlecode.mp4parser.AbstractFullBox;
+>, <Line: -import com.googlecode.mp4parser.util.DateHelper;
+>, <Line: -import com.googlecode.mp4parser.util.Logger;
+>, <Line: -    private static Logger LOG = Logger.getLogger(MediaHeaderBox.class);
+>, <Line: -    public void setCreationTime(Date creationTime) {
+>, <Line: -        this.creationTime = creationTime;
+>, <Line: -    }
+>, <Line: -    public void setModificationTime(Date modificationTime) {
+>, <Line: -        this.modificationTime = modificationTime;
+>, <Line: -    }
+>, <Line: -    public void setTimescale(long timescale) {
+>, <Line: -        this.timescale = timescale;
+>, <Line: -    }
+>, <Line: -    public void setDuration(long duration) {
+>, <Line: -        this.duration = duration;
+>, <Line: -    }
+>, <Line: -    public void setLanguage(String language) {
+>, <Line: -        this.language = language;
+>, <Line: -    }
+>]

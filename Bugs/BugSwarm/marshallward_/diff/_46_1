@@ -1,0 +1,11 @@
+[<Line: +types_nml:
+>, <Line: +  v_integer: 1
+>, <Line: +  v_float: 1.0
+>, <Line: +  v_complex:
+>, <Line: +  - 1.0
+>, <Line: +  - 2.0
+>, <Line: +  v_logical: true
+>, <Line: +  v_string: Hello
+>, <Line: +  _complex:
+>, <Line: +  - v_complex>]
+[]

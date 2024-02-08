@@ -1,0 +1,37 @@
+# Ignore releases
+*/0.*
+
+# Maven stuff
+target
+dependency-reduced-pom.xml
+# Vim swap files
+*.sw?
+# gedit swap files
+*~
+# Eclipse stuff
+.classpath
+.project
+.settings
+# Coverity stuff
+cov-int*
+# IDEA stuff
+/.idea/
+*.iml
+*.versionsBackup
+# download directory
+.venv
+/data*
+# any inline-generated VCF/Jannovar files
+*.jannovar
+/*.vcf
+/*.vcf.idx
+/*.ped
+log.txt
+data
+!/jannovar-core/src/main/java/de/charite/compbio/jannovar/data/
+# built manual
+manual/_build
+# Java Mission Control flight recorder files
+*.jfr
+.attach_pid*
+.idea

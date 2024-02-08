@@ -1,0 +1,174 @@
+[<Line: +/*
+>, <Line: + * Copyright (C) 2015 Square, Inc.
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *      http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package okio;
+>, <Line: +import org.junit.Test;
+>, <Line: +import static okio.TestUtil.assertEquivalent;
+>, <Line: +import static org.junit.Assert.assertEquals;
+>, <Line: +import static org.junit.Assert.fail;
+>, <Line: +/** Tests behavior optimized by sharing segments between buffers and byte strings. */
+>, <Line: +public final class SegmentSharingTest {
+>, <Line: +  private static final String us = TestUtil.repeat('u', Segment.SIZE / 2 - 2);
+>, <Line: +  private static final String vs = TestUtil.repeat('v', Segment.SIZE / 2 - 1);
+>, <Line: +  private static final String ws = TestUtil.repeat('w', Segment.SIZE / 2);
+>, <Line: +  private static final String xs = TestUtil.repeat('x', Segment.SIZE / 2 + 1);
+>, <Line: +  private static final String ys = TestUtil.repeat('y', Segment.SIZE / 2 + 2);
+>, <Line: +  private static final String zs = TestUtil.repeat('z', Segment.SIZE / 2 + 3);
+>, <Line: +  @Test public void snapshotOfEmptyBuffer() throws Exception {
+>, <Line: +    ByteString snapshot = new Buffer().snapshot();
+>, <Line: +    assertEquivalent(snapshot, ByteString.EMPTY);
+>, <Line: +  }
+>, <Line: +  @Test public void snapshotsAreEquivalent() throws Exception {
+>, <Line: +    ByteString byteString = concatenateBuffers(xs, ys, zs).snapshot();
+>, <Line: +    assertEquivalent(byteString, concatenateBuffers(xs, ys + zs).snapshot());
+>, <Line: +    assertEquivalent(byteString, concatenateBuffers(xs + ys + zs).snapshot());
+>, <Line: +    assertEquivalent(byteString, ByteString.encodeUtf8(xs + ys + zs));
+>, <Line: +  }
+>, <Line: +  @Test public void snapshotGetByte() throws Exception {
+>, <Line: +    ByteString byteString = concatenateBuffers(xs, ys, zs).snapshot();
+>, <Line: +    assertEquals('x', byteString.getByte(0));
+>, <Line: +    assertEquals('x', byteString.getByte(xs.length() - 1));
+>, <Line: +    assertEquals('y', byteString.getByte(xs.length()));
+>, <Line: +    assertEquals('y', byteString.getByte(xs.length() + ys.length() - 1));
+>, <Line: +    assertEquals('z', byteString.getByte(xs.length() + ys.length()));
+>, <Line: +    assertEquals('z', byteString.getByte(xs.length() + ys.length() + zs.length() - 1));
+>, <Line: +    try {
+>, <Line: +      byteString.getByte(-1);
+>, <Line: +      fail();
+>, <Line: +    } catch (IndexOutOfBoundsException expected) {
+>, <Line: +    }
+>, <Line: +    try {
+>, <Line: +      byteString.getByte(xs.length() + ys.length() + zs.length());
+>, <Line: +      fail();
+>, <Line: +    } catch (IndexOutOfBoundsException expected) {
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  @Test public void snapshotWriteToOutputStream() throws Exception {
+>, <Line: +    ByteString byteString = concatenateBuffers(xs, ys, zs).snapshot();
+>, <Line: +    Buffer out = new Buffer();
+>, <Line: +    byteString.write(out.outputStream());
+>, <Line: +    assertEquals(xs + ys + zs, out.readUtf8());
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * Snapshots share their backing byte arrays with the source buffers. Those byte arrays must not
+>, <Line: +   * be recycled, otherwise the new writer could corrupt the segment.
+>, <Line: +   */
+>, <Line: +  @Test public void snapshotSegmentsAreNotRecycled() throws Exception {
+>, <Line: +    Buffer buffer = concatenateBuffers(xs, ys, zs);
+>, <Line: +    ByteString snapshot = buffer.snapshot();
+>, <Line: +    assertEquals(xs + ys + zs, snapshot.utf8());
+>, <Line: +    // While locking the pool, confirm that clearing the buffer doesn't release its segments.
+>, <Line: +    synchronized (SegmentPool.class) {
+>, <Line: +      SegmentPool.next = null;
+>, <Line: +      SegmentPool.byteCount = 0L;
+>, <Line: +      buffer.clear();
+>, <Line: +      assertEquals(null, SegmentPool.next);
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * Clones share their backing byte arrays with the source buffers. Those byte arrays must not
+>, <Line: +   * be recycled, otherwise the new writer could corrupt the segment.
+>, <Line: +   */
+>, <Line: +  @Test public void cloneSegmentsAreNotRecycled() throws Exception {
+>, <Line: +    Buffer buffer = concatenateBuffers(xs, ys, zs);
+>, <Line: +    Buffer clone = buffer.clone();
+>, <Line: +    // While locking the pool, confirm that clearing the buffer doesn't release its segments.
+>, <Line: +    synchronized (SegmentPool.class) {
+>, <Line: +      SegmentPool.next = null;
+>, <Line: +      SegmentPool.byteCount = 0L;
+>, <Line: +      buffer.clear();
+>, <Line: +      assertEquals(null, SegmentPool.next);
+>, <Line: +      clone.clear();
+>, <Line: +      assertEquals(null, SegmentPool.next);
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  @Test public void snapshotJavaSerialization() throws Exception {
+>, <Line: +    ByteString byteString = concatenateBuffers(xs, ys, zs).snapshot();
+>, <Line: +    assertEquivalent(byteString, TestUtil.reserialize(byteString));
+>, <Line: +  }
+>, <Line: +  @Test public void clonesAreEquivalent() throws Exception {
+>, <Line: +    Buffer bufferA = concatenateBuffers(xs, ys, zs);
+>, <Line: +    Buffer bufferB = bufferA.clone();
+>, <Line: +    assertEquivalent(bufferA, bufferB);
+>, <Line: +    assertEquivalent(bufferA, concatenateBuffers(xs + ys, zs));
+>, <Line: +  }
+>, <Line: +  /** Even though some segments are shared, clones can be mutated independently. */
+>, <Line: +  @Test public void mutateAfterClone() throws Exception {
+>, <Line: +    Buffer bufferA = new Buffer();
+>, <Line: +    bufferA.writeUtf8("abc");
+>, <Line: +    Buffer bufferB = bufferA.clone();
+>, <Line: +    bufferA.writeUtf8("def");
+>, <Line: +    bufferB.writeUtf8("DEF");
+>, <Line: +    assertEquals("abcdef", bufferA.readUtf8());
+>, <Line: +    assertEquals("abcDEF", bufferB.readUtf8());
+>, <Line: +  }
+>, <Line: +  @Test public void concatenateSegmentsCanCombine() throws Exception {
+>, <Line: +    Buffer bufferA = new Buffer().writeUtf8(ys).writeUtf8(us);
+>, <Line: +    assertEquals(ys, bufferA.readUtf8(ys.length()));
+>, <Line: +    Buffer bufferB = new Buffer().writeUtf8(vs).writeUtf8(ws);
+>, <Line: +    Buffer bufferC = bufferA.clone();
+>, <Line: +    bufferA.write(bufferB, vs.length());
+>, <Line: +    bufferC.writeUtf8(xs);
+>, <Line: +    assertEquals(us + vs, bufferA.readUtf8());
+>, <Line: +    assertEquals(ws, bufferB.readUtf8());
+>, <Line: +    assertEquals(us + xs, bufferC.readUtf8());
+>, <Line: +  }
+>, <Line: +  @Test public void shareAndSplit() throws Exception {
+>, <Line: +    Buffer bufferA = new Buffer().writeUtf8("xxxx");
+>, <Line: +    ByteString snapshot = bufferA.snapshot(); // Share the segment.
+>, <Line: +    Buffer bufferB = new Buffer();
+>, <Line: +    bufferB.write(bufferA, 2); // Split the shared segment in two.
+>, <Line: +    bufferB.writeUtf8("yy"); // Append to the first half of the shared segment.
+>, <Line: +    assertEquals("xxxx", snapshot.utf8());
+>, <Line: +  }
+>, <Line: +  @Test public void appendSnapshotToEmptyBuffer() throws Exception {
+>, <Line: +    Buffer bufferA = concatenateBuffers(xs, ys);
+>, <Line: +    ByteString snapshot = bufferA.snapshot();
+>, <Line: +    Buffer bufferB = new Buffer();
+>, <Line: +    bufferB.write(snapshot);
+>, <Line: +    assertEquivalent(bufferB, bufferA);
+>, <Line: +  }
+>, <Line: +  @Test public void appendSnapshotToNonEmptyBuffer() throws Exception {
+>, <Line: +    Buffer bufferA = concatenateBuffers(xs, ys);
+>, <Line: +    ByteString snapshot = bufferA.snapshot();
+>, <Line: +    Buffer bufferB = new Buffer().writeUtf8(us);
+>, <Line: +    bufferB.write(snapshot);
+>, <Line: +    assertEquivalent(bufferB, new Buffer().writeUtf8(us + xs + ys));
+>, <Line: +  }
+>, <Line: +  @Test public void copyToSegmentSharing() throws Exception {
+>, <Line: +    Buffer bufferA = concatenateBuffers(ws, xs + "aaaa", ys, "bbbb" + zs);
+>, <Line: +    Buffer bufferB = concatenateBuffers(us);
+>, <Line: +    bufferA.copyTo(bufferB, ws.length() + xs.length(), 4 + ys.length() + 4);
+>, <Line: +    assertEquivalent(bufferB, new Buffer().writeUtf8(us + "aaaa" + ys + "bbbb"));
+>, <Line: +  }
+>, <Line: +  /**
+>, <Line: +   * Returns a new buffer containing the contents of {@code segments}, attempting to isolate each
+>, <Line: +   * string to its own segment in the returned buffer.
+>, <Line: +   */
+>, <Line: +  public Buffer concatenateBuffers(String... segments) throws Exception {
+>, <Line: +    Buffer result = new Buffer();
+>, <Line: +    for (String s : segments) {
+>, <Line: +      int offsetInSegment = s.length() < Segment.SIZE ? (Segment.SIZE - s.length()) / 2 : 0;
+>, <Line: +      Buffer buffer = new Buffer();
+>, <Line: +      buffer.writeUtf8(TestUtil.repeat('_', offsetInSegment));
+>, <Line: +      buffer.writeUtf8(s);
+>, <Line: +      buffer.skip(offsetInSegment);
+>, <Line: +      result.write(buffer, buffer.size);
+>, <Line: +    }
+>, <Line: +    return result;
+>, <Line: +  }
+>, <Line: +}
+>]
+[]

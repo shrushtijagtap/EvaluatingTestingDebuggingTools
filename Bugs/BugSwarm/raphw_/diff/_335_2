@@ -1,0 +1,12 @@
+[<Line: +        public String getActualName() {
+>, <Line: +            stringBuilder.append(getType().getActualName()).append(" ");
+>, <Line: +            stringBuilder.append(getDeclaringType().asErasure().getActualName()).append(".");
+>, <Line: +            stringBuilder.append(getType().asErasure().getActualName()).append(" ");
+>, <Line: +            stringBuilder.append(getDeclaringType().asErasure().getActualName()).append(".");
+>]
+[<Line: -        public String getSourceCodeName() {
+>, <Line: -            stringBuilder.append(getType().getSourceCodeName()).append(" ");
+>, <Line: -            stringBuilder.append(getDeclaringType().asErasure().getSourceCodeName()).append(".");
+>, <Line: -            stringBuilder.append(getType().asErasure().getSourceCodeName()).append(" ");
+>, <Line: -            stringBuilder.append(getDeclaringType().asErasure().getSourceCodeName()).append(".");
+>]

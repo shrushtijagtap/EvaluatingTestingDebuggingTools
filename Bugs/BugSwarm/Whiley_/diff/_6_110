@@ -1,0 +1,4 @@
+[<Line: +requires all { i in -1..4 | (i < 0) || (i >= |ls|) || (ls[i] >= 0) }:
+>]
+[<Line: -requires no { i in -1..4 | (i >= 0) && (i < |ls|) && (ls[i] < 0) }:
+>]

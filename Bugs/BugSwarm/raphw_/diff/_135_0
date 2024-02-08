@@ -1,0 +1,5 @@
+[<Line: +             * Resolves a listener that adds module edges from and to the instrumented type's module.
+>, <Line: +        @SuppressFBWarnings(value = "DMI_RANDOM_USED_ONLY_ONCE", justification = "Avoiding synchronization without security concerns")
+>]
+[<Line: -             * Resolves a listener that adds module edges from and to the instrumented type's module
+>]

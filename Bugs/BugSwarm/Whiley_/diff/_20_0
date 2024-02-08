@@ -1,0 +1,10 @@
+[<Line: +		codes.add(Codes.LengthOf((Type.EffectiveArray) expr.srcType.raw(),
+>, <Line: +		codes.add(Codes.IndexOf((Type.Array) expr.srcType.raw(), target, srcOperand,
+>, <Line: +		codes.add(Codes.NewList((Type.Array) expr.type.raw(), target, operands),
+>, <Line: +		codes.add(Codes.ListGenerator((Type.Array) expr.type.raw(), target, element, count), attributes(expr));
+>]
+[<Line: -		codes.add(Codes.LengthOf((Type.EffectiveList) expr.srcType.raw(),
+>, <Line: -		codes.add(Codes.IndexOf((Type.List) expr.srcType.raw(), target, srcOperand,
+>, <Line: -		codes.add(Codes.NewList((Type.List) expr.type.raw(), target, operands),
+>, <Line: -		codes.add(Codes.ListGenerator((Type.List) expr.type.raw(), target, element, count), attributes(expr));
+>]

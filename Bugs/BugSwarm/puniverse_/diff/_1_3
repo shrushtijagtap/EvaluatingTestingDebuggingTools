@@ -1,0 +1,10 @@
+[<Line: +    static final String EXCEPTION_NAME = "java/lang/Exception";
+>, <Line: +    static final String THROWABLE_NAME = "java/lang/Throwable";
+>, <Line: +    static final String SUSPEND_EXECUTION_NAME = "co/paralleluniverse/fibers/SuspendExecution";
+>, <Line: +    static final String EXCEPTION_DESC = "L" + SUSPEND_EXECUTION_NAME + ";";
+>, <Line: +    public static int blockingCallIdx(MethodInsnNode ins) {
+>]
+[<Line: -    static final String EXCEPTION_NAME = "co/paralleluniverse/fibers/SuspendExecution";
+>, <Line: -    static final String EXCEPTION_DESC = "L" + EXCEPTION_NAME + ";";
+>, <Line: -    public static int isBlockingCall(MethodInsnNode ins) {
+>]

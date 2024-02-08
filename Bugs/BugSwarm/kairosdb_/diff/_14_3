@@ -1,0 +1,17 @@
+[]
+[<Line: -	public static void validateCharacterSet(String name, String value) throws ValidationException
+>, <Line: -	{
+>, <Line: -		ValidationErrors errors = new ValidationErrors();
+>, <Line: -		if (!isValidateCharacterSet(errors, name, value))
+>, <Line: -			throw new ValidationException(errors.getFirstError());
+>, <Line: -	}
+>, <Line: -	public static boolean isValidateCharacterSet(ValidationErrors validationErrors, Object name, String value)
+>, <Line: -	{
+>, <Line: -		if (value == null || value.isEmpty() || !CharacterSet.isValidTagNameValue(value))
+>, <Line: -		{
+>, <Line: -			validationErrors.addErrorMessage(name + " may contain any character except colon ':', and equals '='.");
+>, <Line: -			return false;
+>, <Line: -		}
+>, <Line: -		return true;
+>, <Line: -	}
+>]

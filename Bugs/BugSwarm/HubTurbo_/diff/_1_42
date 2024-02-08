@@ -1,0 +1,23 @@
+[<Line: +package backend.resource.serialization;
+>, <Line: +import backend.resource.TurboUser;
+>, <Line: +public class SerializableUser {
+>, <Line: +	private String loginName = "";
+>, <Line: +	private String realName = "";
+>, <Line: +	private String avatarURL = "";
+>, <Line: +	public SerializableUser(TurboUser user) {
+>, <Line: +		this.loginName = user.getLoginName();
+>, <Line: +		this.realName = user.getRealName();
+>, <Line: +		this.avatarURL = user.getAvatarURL();
+>, <Line: +	}
+>, <Line: +	public String getLoginName() {
+>, <Line: +		return loginName;
+>, <Line: +	}
+>, <Line: +	public String getRealName() {
+>, <Line: +		return realName;
+>, <Line: +	}
+>, <Line: +	public String getAvatarURL() {
+>, <Line: +		return avatarURL;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

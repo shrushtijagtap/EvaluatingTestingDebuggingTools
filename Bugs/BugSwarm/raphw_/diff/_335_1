@@ -1,0 +1,15 @@
+[<Line: +    String getActualName();
+>, <Line: +    /**
+>, <Line: +     * Describes a named element where naming the element is optional and an alternative default name is provided if no explicit name is given.
+>, <Line: +     */
+>, <Line: +    interface WithOptionalName extends NamedElement {
+>, <Line: +        /**
+>, <Line: +         * Returns {@code true} if this element has an explicit name.
+>, <Line: +         *
+>, <Line: +         * @return {@code true} if this element has an explicit name.
+>, <Line: +         */
+>, <Line: +        boolean isNamed();
+>, <Line: +    }
+>]
+[<Line: -    String getSourceCodeName();
+>]

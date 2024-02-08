@@ -1,0 +1,39 @@
+[<Line: +import edu.washington.escience.myria.operator.CacheLeaf;
+>, <Line: +import edu.washington.escience.myria.operator.CacheRoot;
+>, <Line: +    openCacheOperators();
+>, <Line: +  /**
+>, <Line: +   * Starting to open the necessary cache operators. (probably re-think this over)
+>, <Line: +   * */
+>, <Line: +  public void openCacheOperators() {
+>, <Line: +    // open a new root and make this it's child... now CSC has two parents
+>, <Line: +    CacheRoot cacheRootOperator = new CacheRoot(this);
+>, <Line: +    CacheLeaf cacheLeafOperator = new CacheLeaf();
+>, <Line: +    try {
+>, <Line: +      /* problem is that "this" is already open */
+>, <Line: +      cacheRootOperator.open(getExecEnvVars());
+>, <Line: +      cacheLeafOperator.open(getExecEnvVars());
+>, <Line: +    } catch (DbException e) {
+>, <Line: +      e.printStackTrace();
+>, <Line: +    }
+>, <Line: +  }
+>, <Line: +  /* this is what the CacheShuffleConsumer receives and sends to the parent */
+>, <Line: +      /* adding the tuple batch to the worker cache */
+>, <Line: +      // CacheController workerCacheController = getWorker().getCacheController();
+>, <Line: +      // workerCacheController.addTupleBatch(getTuplesNormal(!nonBlockingExecution));
+>, <Line: +      /* here, it would also be receiving tuples from the cache as well */
+>, <Line: +      /* returning the tuples as usual */
+>]
+[<Line: -import edu.washington.escience.myria.parallel.CacheController;
+>, <Line: -    // TODO Auto-generated constructor stub
+>, <Line: -  // NOTE EITHER we push the batch to the cacheController of the worker or we open the cacheRoot operator, making
+>, <Line: -  // sure that the cacheRoot sees this as a child
+>, <Line: -      CacheController localCacheController = getWorker().getCacheController();
+>, <Line: -      getWorker().LOGGER.info("Worker " + getWorker().getID() + " adding to cache");
+>, <Line: -      getWorker().LOGGER.info("First CacheController Status " + localCacheController.getCurrentNumberOfTuples());
+>, <Line: -      // @JORTIZ: this tuple batch is different because it needs to be added to the cacheController
+>, <Line: -      localCacheController.addTupleBatch(getTuplesNormal(!nonBlockingExecution));
+>, <Line: -      getWorker().LOGGER.info("Second CacheController Status " + localCacheController.getCurrentNumberOfTuples());
+>, <Line: -      getWorker().LOGGER.info("Final Size " + localCacheController.getCache().values());
+>, <Line: -      // finally, return tuples as usual
+>, <Line: -  // This class needs to open the CacheRoot operator and make this operator it's child
+>]

@@ -1,0 +1,4 @@
+[<Line: +                Context.getConnectionManager().update(lastPostition);
+>]
+[<Line: -                Context.getDataCache().update(lastPostition);
+>]

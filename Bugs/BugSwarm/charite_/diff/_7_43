@@ -1,0 +1,103 @@
+[]
+[<Line: -package de.charite.compbio.jannovar.pedigree.compatibilitychecker.xd;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Disease;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Genotype;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.GenotypeList;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Pedigree;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.Sex;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerBase;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.CompatibilityCheckerException;
+>, <Line: -import de.charite.compbio.jannovar.pedigree.compatibilitychecker.ad.CompatibilityCheckerAutosomalDominant;
+>, <Line: -/**
+>, <Line: - * Helper class for checking a {@link GenotypeList} for compatibility with a {@link Pedigree} and X dominant mode of
+>, <Line: - * inheritance.
+>, <Line: - *
+>, <Line: - * <h2>Compatibility Check</h2>
+>, <Line: - *
+>, <Line: - * For X-chromosomal dominant inheritance, there must be at least one {@link Genotype} that is shared by all affected
+>, <Line: - * individuals but no unaffected individuals in the pedigree.
+>, <Line: - *
+>, <Line: - * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+>, <Line: - * @author <a href="mailto:max.schubach@charite.de">Max Schubach</a>
+>, <Line: - * @author <a href="mailto:peter.robinson@charite.de">Peter N Robinson</a>
+>, <Line: - * 
+>, <Line: - * @deprecated use {@link VariantContextCompatibilityCheckerXDominant} instead.
+>, <Line: - */
+>, <Line: -@Deprecated
+>, <Line: -public class CompatibilityCheckerXDominant extends CompatibilityCheckerBase {
+>, <Line: -	/**
+>, <Line: -	 * Initialize compatibility checker and perform some sanity checks.
+>, <Line: -	 *
+>, <Line: -	 * The {@link GenotypeList} object passed to the constructor is expected to represent all of the variants found in a
+>, <Line: -	 * certain gene (possibly after filtering for rarity or predicted pathogenicity). The samples represented by the
+>, <Line: -	 * {@link GenotypeList} must be in the same order as the list of individuals contained in this pedigree.
+>, <Line: -	 *
+>, <Line: -	 * @param pedigree
+>, <Line: -	 *            the {@link Pedigree} to use for the initialize
+>, <Line: -	 * @param list
+>, <Line: -	 *            the {@link GenotypeList} to use for the initialization
+>, <Line: -	 * @throws CompatibilityCheckerException
+>, <Line: -	 *             if the pedigree or variant list is invalid
+>, <Line: -	 */
+>, <Line: -	public CompatibilityCheckerXDominant(Pedigree pedigree, GenotypeList list) throws CompatibilityCheckerException {
+>, <Line: -		super(pedigree, list);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * @return <code>true</code> if {@link #list} is compatible with {@link #pedigree} and the X-chromosomal dominant
+>, <Line: -	 *         mode of inheritances.
+>, <Line: -	 * @throws CompatibilityCheckerException
+>, <Line: -	 *             if the pedigree or variant list is invalid
+>, <Line: -	 */
+>, <Line: -	public boolean run() throws CompatibilityCheckerException {
+>, <Line: -		if (!list.isXChromosomal())
+>, <Line: -			return false;
+>, <Line: -		return super.run();
+>, <Line: -	}
+>, <Line: -	public boolean runSingleSampleCase() throws CompatibilityCheckerException {
+>, <Line: -		if (pedigree.getMembers().get(0).getSex() == Sex.FEMALE)
+>, <Line: -			return new CompatibilityCheckerAutosomalDominant(pedigree, list).run();
+>, <Line: -		else {
+>, <Line: -			// We allow homozygous and heterozygous (false call).
+>, <Line: -			for (ImmutableList<Genotype> gtList : list.getCalls())
+>, <Line: -				if (gtList.get(0) == Genotype.HETEROZYGOUS || gtList.get(0) == Genotype.HOMOZYGOUS_ALT)
+>, <Line: -					return true;
+>, <Line: -			return false;
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public boolean runMultiSampleCase() {
+>, <Line: -		for (ImmutableList<Genotype> gtList : list.getCalls()) {
+>, <Line: -			boolean currentVariantCompatible = true; // current variant compatible with XD?
+>, <Line: -			int numAffectedWithMut = 0;
+>, <Line: -			for (int i = 0; i < pedigree.getMembers().size(); ++i) {
+>, <Line: -				final Sex sex = pedigree.getMembers().get(i).getSex();
+>, <Line: -				final Genotype gt = gtList.get(i);
+>, <Line: -				final Disease d = pedigree.getMembers().get(i).getDisease();
+>, <Line: -				if (d == Disease.AFFECTED) {
+>, <Line: -					if (gt == Genotype.HOMOZYGOUS_REF || (sex == Sex.FEMALE && gt == Genotype.HOMOZYGOUS_ALT)) {
+>, <Line: -						// we do not allow HOM_ALT for females to have the same behaviour as AD for females
+>, <Line: -						currentVariantCompatible = false;
+>, <Line: -						break;
+>, <Line: -					} else if (sex != Sex.FEMALE && (gt == Genotype.HETEROZYGOUS || gt == Genotype.HOMOZYGOUS_ALT)) {
+>, <Line: -						// we allow heterozygous here as well in case of mis-calls in the one X copy in the male or unknown
+>, <Line: -						numAffectedWithMut++;
+>, <Line: -					} else if (sex == Sex.FEMALE && gt == Genotype.HETEROZYGOUS) {
+>, <Line: -						numAffectedWithMut++;
+>, <Line: -					}
+>, <Line: -				} else if (d == Disease.UNAFFECTED) {
+>, <Line: -					if (gt == Genotype.HETEROZYGOUS || gt == Genotype.HOMOZYGOUS_ALT) {
+>, <Line: -						currentVariantCompatible = false; // current variant not compatible with AD
+>, <Line: -						break;
+>, <Line: -					}
+>, <Line: -				}
+>, <Line: -			}
+>, <Line: -			// If we reach here, we have either examined all members of the pedigree or have decided that the
+>, <Line: -			// variant is incompatible in one person. If any one variant is compatible with AD inheritance, than the
+>, <Line: -			// Gene is compatible and we can return true without examining the other variants.
+>, <Line: -			if (currentVariantCompatible && numAffectedWithMut > 0)
+>, <Line: -				return true;
+>, <Line: -		}
+>, <Line: -		return false;
+>, <Line: -	}
+>, <Line: -}
+>]

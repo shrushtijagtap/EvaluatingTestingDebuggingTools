@@ -1,0 +1,7 @@
+[]
+[<Line: -import net.bytebuddy.test.utility.ObjectPropertyAssertion;
+>, <Line: -    @Test
+>, <Line: -    public void testObjectProperties() throws Exception {
+>, <Line: -        ObjectPropertyAssertion.of(ByteBuddyLogHandler.class).apply();
+>, <Line: -    }
+>]

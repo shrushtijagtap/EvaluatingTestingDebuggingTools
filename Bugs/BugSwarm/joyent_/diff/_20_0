@@ -1,0 +1,7 @@
+[<Line: +import com.joyent.manta.config.MapConfigContext;
+>, <Line: +        if (config.disableNativeSignatures() && System.getProperty(MANTA_NO_NATIVE_SIGS_KEY) == null) {
+>, <Line: +            System.setProperty(MapConfigContext.MANTA_NO_NATIVE_SIGS_KEY, "false");
+>]
+[<Line: -        if (config.disableNativeSignatures() &&
+>, <Line: -            System.getProperty(MANTA_NO_NATIVE_SIGS_KEY) == null) {
+>]

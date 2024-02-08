@@ -1,0 +1,21 @@
+[<Line: +    /**
+>, <Line: +     * Manta request id.
+>, <Line: +     */
+>, <Line: +    private final String requestId;
+>, <Line: +        this.requestId = innerException.getHeaders().getFirstHeaderStringValue("x-request-id");
+>, <Line: +            return String.format("%d %s (request: %s) - Unknown error content: %s",
+>, <Line: +                    this.getRequestId(),
+>, <Line: +            return String.format("%d %s (request: %s) - [%s] %s",
+>, <Line: +                    this.getRequestId(),
+>, <Line: +    /**
+>, <Line: +     * The request id for the request as automatically assigned.
+>, <Line: +     *
+>, <Line: +     * @return uuid as string
+>, <Line: +     */
+>, <Line: +    public String getRequestId() {
+>, <Line: +        return requestId;
+>, <Line: +    }
+>]
+[<Line: -            return String.format("%d %s - Unknown error content: %s",
+>, <Line: -            return String.format("%d %s - [%s] %s",
+>]

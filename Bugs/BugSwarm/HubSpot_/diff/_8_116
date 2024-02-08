@@ -1,0 +1,14 @@
+[<Line: +            {{#if config.allowEdit}}
+>, <Line: +                {{#if config.authEnabled}}
+>, <Line: +                    <ul class="nav navbar-nav navbar-right">
+>, <Line: +                        <li>
+>, <Line: +                            <a data-action="disableEdit">Disable Edit</a>
+>, <Line: +                        </li>
+>, <Line: +                    </ul>
+>, <Line: +                {{/if}}
+>, <Line: +            {{else}}
+>, <Line: +            {{/if}}
+>]
+[<Line: -            {{#unless config.allowEdit}}
+>, <Line: -            {{/unless}}
+>]

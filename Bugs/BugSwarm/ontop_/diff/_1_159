@@ -1,0 +1,1437 @@
+[<Line: +-- Table structure for table `apaAreaGross`
+>, <Line: +DROP TABLE IF EXISTS `apaAreaGross`;
+>, <Line: +CREATE TABLE `apaAreaGross` (
+>, <Line: +  `apaMap_no` int(11) NOT NULL,
+>, <Line: +  `apaAreaGeometryEWKT` geometry NOT NULL,
+>, <Line: +  `apaAreaGeometry_KML_WGS84` text NOT NULL,
+>, <Line: +  `apaAreaGross_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`apaAreaGross_id`),
+>, <Line: +  UNIQUE KEY `apaAreaGross_id` (`apaAreaGross_id`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `apaAreaNet`
+>, <Line: +DROP TABLE IF EXISTS `apaAreaNet`;
+>, <Line: +CREATE TABLE `apaAreaNet` (
+>, <Line: +  `blkId` int(11) NOT NULL,
+>, <Line: +  `blkLabel` varchar(40) NOT NULL,
+>, <Line: +  `qdrName` varchar(40) NOT NULL,
+>, <Line: +  `blkName` varchar(40) NOT NULL,
+>, <Line: +  `prvName` varchar(2) NOT NULL,
+>, <Line: +  `apaAreaType` varchar(40) DEFAULT NULL,
+>, <Line: +  `urlNPD` varchar(200) NOT NULL,
+>, <Line: +  `apaAreaNetGeometryWKT` geometry NOT NULL,
+>, <Line: +  `apaAreaNet_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`apaAreaNet_id`,`qdrName`,`blkName`,`prvName`,`blkId`),
+>, <Line: +  UNIQUE KEY `apaAreaNet_id` (`apaAreaNet_id`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `bsns_arr_area`
+>, <Line: +DROP TABLE IF EXISTS `bsns_arr_area`;
+>, <Line: +CREATE TABLE `bsns_arr_area` (
+>, <Line: +  `baaName` varchar(40) NOT NULL COMMENT 'Name',
+>, <Line: +  `baaKind` varchar(40) NOT NULL COMMENT 'Kind',
+>, <Line: +  `baaDateApproved` date NOT NULL COMMENT 'Date approved',
+>, <Line: +  `baaDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `baaDateValidTo` date DEFAULT NULL COMMENT 'Date valid to',
+>, <Line: +  `baaFactPageUrl` varchar(200) NOT NULL COMMENT 'Fact page',
+>, <Line: +  `baaFactMapUrl` varchar(200) DEFAULT NULL COMMENT 'Fact map',
+>, <Line: +  `baaNpdidBsnsArrArea` int(11) NOT NULL COMMENT 'NPDID Bsns. Arr. Area',
+>, <Line: +  `baaDateUpdated` date DEFAULT NULL COMMENT 'Date main level updated',
+>, <Line: +  `baaDateUpdatedMax` date DEFAULT NULL COMMENT 'Date all updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`baaNpdidBsnsArrArea`),
+>, <Line: +  UNIQUE KEY `index__bsns_arr_area__baaName` (`baaName`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `baaArea`
+>, <Line: +DROP TABLE IF EXISTS `baaArea`;
+>, <Line: +CREATE TABLE `baaArea` (
+>, <Line: +  `baaNpdidBsnsArrArea` int(11) NOT NULL COMMENT 'NPDID Bsns. Arr. Area',
+>, <Line: +  `baaNpdidBsnsArrAreaPoly` int(11) NOT NULL,
+>, <Line: +  `baaName` varchar(40) NOT NULL COMMENT 'Name',
+>, <Line: +  `baaKind` varchar(40) NOT NULL COMMENT 'Kind',
+>, <Line: +  `baaAreaPolyDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `baaAreaPolyDateValidTo` date DEFAULT NULL COMMENT 'Date valid to',
+>, <Line: +  `baaAreaPolyActive` varchar(40) NOT NULL,
+>, <Line: +  `baaDateApproved` date NOT NULL COMMENT 'Date approved',
+>, <Line: +  `baaDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `baaDateValidTo` date DEFAULT NULL COMMENT 'Date valid to',
+>, <Line: +  `baaActive` varchar(20) NOT NULL COMMENT 'Active',
+>, <Line: +  `baaFactPageUrl` varchar(200) NOT NULL COMMENT 'Fact page',
+>, <Line: +  `baaFactMapUrl` varchar(200) DEFAULT NULL COMMENT 'Fact map',
+>, <Line: +  `baaAreaGeometryWKT` geometry NOT NULL,
+>, <Line: +  PRIMARY KEY (`baaNpdidBsnsArrArea`,`baaNpdidBsnsArrAreaPoly`),
+>, <Line: +  CONSTRAINT `baaArea_ibfk_1` FOREIGN KEY (`baaNpdidBsnsArrArea`) REFERENCES `bsns_arr_area` (`baaNpdidBsnsArrArea`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `bsns_arr_area_area_poly_hst`
+>, <Line: +DROP TABLE IF EXISTS `bsns_arr_area_area_poly_hst`;
+>, <Line: +CREATE TABLE `bsns_arr_area_area_poly_hst` (
+>, <Line: +  `baaName` varchar(40) NOT NULL COMMENT 'Name',
+>, <Line: +  `baaAreaPolyDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `baaAreaPolyDateValidTo` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date valid to',
+>, <Line: +  `baaAreaPolyNationCode2` varchar(2) NOT NULL COMMENT 'Nation code',
+>, <Line: +  `baaAreaPolyBlockName` varchar(40) NOT NULL DEFAULT '' COMMENT 'Block name',
+>, <Line: +  `baaAreaPolyNo` int(11) NOT NULL,
+>, <Line: +  `baaAreaPolyArea` decimal(13,6) NOT NULL COMMENT 'Polygon area [km2]',
+>, <Line: +  `baaNpdidBsnsArrArea` int(11) NOT NULL COMMENT 'NPDID Bsns. Arr. Area',
+>, <Line: +  `baaAreaPolyDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`baaNpdidBsnsArrArea`,`baaAreaPolyBlockName`,`baaAreaPolyNo`,`baaAreaPolyDateValidFrom`,`baaAreaPolyDateValidTo`),
+>, <Line: +  CONSTRAINT `bsns_arr_area_area_poly_hst_ibfk_1` FOREIGN KEY (`baaNpdidBsnsArrArea`) REFERENCES `bsns_arr_area` (`baaNpdidBsnsArrArea`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `company`
+>, <Line: +DROP TABLE IF EXISTS `company`;
+>, <Line: +CREATE TABLE `company` (
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `cmpOrgNumberBrReg` varchar(100) DEFAULT NULL COMMENT 'Organisation number',
+>, <Line: +  `cmpGroup` varchar(100) DEFAULT NULL COMMENT 'Group',
+>, <Line: +  `cmpShortName` varchar(40) NOT NULL COMMENT 'Company shortname',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `cmpLicenceOperCurrent` varchar(1) NOT NULL COMMENT 'Currently licence operator',
+>, <Line: +  `cmpLicenceOperFormer` varchar(1) NOT NULL COMMENT 'Former licence operator',
+>, <Line: +  `cmpLicenceLicenseeCurrent` varchar(1) NOT NULL COMMENT 'Currently licence licensee',
+>, <Line: +  `cmpLicenceLicenseeFormer` varchar(1) NOT NULL COMMENT 'Former licence licensee',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`cmpNpdidCompany`),
+>, <Line: +);
+>, <Line: +-- Table structure for table `bsns_arr_area_licensee_hst`
+>, <Line: +DROP TABLE IF EXISTS `bsns_arr_area_licensee_hst`;
+>, <Line: +CREATE TABLE `bsns_arr_area_licensee_hst` (
+>, <Line: +  `baaName` varchar(40) NOT NULL COMMENT 'Name',
+>, <Line: +  `baaLicenseeDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `baaLicenseeDateValidTo` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date valid to',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `baaLicenseeInterest` decimal(13,6) NOT NULL COMMENT 'Interest [%]',
+>, <Line: +  `baaLicenseeSdfi` decimal(13,6) DEFAULT NULL COMMENT 'SDFI [%]',
+>, <Line: +  `baaNpdidBsnsArrArea` int(11) NOT NULL COMMENT 'NPDID Bsns. Arr. Area',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `baaLicenseeDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`baaNpdidBsnsArrArea`,`cmpNpdidCompany`,`baaLicenseeDateValidFrom`,`baaLicenseeDateValidTo`),
+>, <Line: +  CONSTRAINT `bsns_arr_area_licensee_hst_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `bsns_arr_area_licensee_hst_ibfk_1` FOREIGN KEY (`baaNpdidBsnsArrArea`) REFERENCES `bsns_arr_area` (`baaNpdidBsnsArrArea`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `bsns_arr_area_operator`
+>, <Line: +DROP TABLE IF EXISTS `bsns_arr_area_operator`;
+>, <Line: +CREATE TABLE `bsns_arr_area_operator` (
+>, <Line: +  `baaName` varchar(40) NOT NULL COMMENT 'Name',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `baaNpdidBsnsArrArea` int(11) NOT NULL COMMENT 'NPDID Bsns. Arr. Area',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `baaOperatorDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`baaNpdidBsnsArrArea`),
+>, <Line: +  CONSTRAINT `bsns_arr_area_operator_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `bsns_arr_area_operator_ibfk_1` FOREIGN KEY (`baaNpdidBsnsArrArea`) REFERENCES `bsns_arr_area` (`baaNpdidBsnsArrArea`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `bsns_arr_area_transfer_hst`
+>, <Line: +DROP TABLE IF EXISTS `bsns_arr_area_transfer_hst`;
+>, <Line: +CREATE TABLE `bsns_arr_area_transfer_hst` (
+>, <Line: +  `baaName` varchar(40) NOT NULL COMMENT 'Name',
+>, <Line: +  `baaTransferDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `baaTransferDirection` varchar(4) NOT NULL COMMENT 'Transfer direction',
+>, <Line: +  `baaTransferKind` varchar(40) DEFAULT NULL COMMENT 'Transfer kind',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `baaTransferredInterest` decimal(13,6) NOT NULL COMMENT 'Transferred interest [%]',
+>, <Line: +  `baaTransferSdfi` decimal(13,6) DEFAULT NULL COMMENT 'SDFI [%]',
+>, <Line: +  `baaNpdidBsnsArrArea` int(11) NOT NULL COMMENT 'NPDID Bsns. Arr. Area',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `baaTransferDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`baaNpdidBsnsArrArea`,`baaTransferDirection`,`cmpNpdidCompany`,`baaTransferDateValidFrom`),
+>, <Line: +  CONSTRAINT `bsns_arr_area_transfer_hst_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `bsns_arr_area_transfer_hst_ibfk_1` FOREIGN KEY (`baaNpdidBsnsArrArea`) REFERENCES `bsns_arr_area` (`baaNpdidBsnsArrArea`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence`
+>, <Line: +DROP TABLE IF EXISTS `licence`;
+>, <Line: +CREATE TABLE `licence` (
+>, <Line: +  `prlName` varchar(50) NOT NULL COMMENT 'Production licence',
+>, <Line: +  `prlLicensingActivityName` varchar(40) NOT NULL COMMENT 'Licensing activity',
+>, <Line: +  `prlMainArea` varchar(40) DEFAULT NULL COMMENT 'Main area',
+>, <Line: +  `prlStatus` varchar(40) NOT NULL COMMENT 'Status',
+>, <Line: +  `prlDateGranted` date NOT NULL COMMENT 'Date granted',
+>, <Line: +  `prlDateValidTo` date NOT NULL COMMENT 'Date valid to',
+>, <Line: +  `prlOriginalArea` decimal(13,6) NOT NULL COMMENT 'Original area [km2]',
+>, <Line: +  `prlCurrentArea` varchar(20) NOT NULL COMMENT 'Current area',
+>, <Line: +  `prlPhaseCurrent` varchar(40) DEFAULT NULL COMMENT 'Phase - current',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `prlFactPageUrl` varchar(200) NOT NULL COMMENT 'Fact page',
+>, <Line: +  `prlFactMapUrl` varchar(200) DEFAULT NULL COMMENT 'Fact map',
+>, <Line: +  `prlDateUpdated` date DEFAULT NULL COMMENT 'Date main level updated',
+>, <Line: +  `prlDateUpdatedMax` date DEFAULT NULL COMMENT 'Date all updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`),
+>, <Line: +  UNIQUE KEY `index__licence__prlName` (`prlName`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_npdid_overview`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_npdid_overview`;
+>, <Line: +CREATE TABLE `wellbore_npdid_overview` (
+>, <Line: +  `wlbWellboreName` varchar(40) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `wlbWell` varchar(40) NOT NULL COMMENT 'Well name',
+>, <Line: +  `wlbWellType` varchar(20) DEFAULT NULL COMMENT 'Type',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field`
+>, <Line: +DROP TABLE IF EXISTS `field`;
+>, <Line: +CREATE TABLE `field` (
+>, <Line: +  `fldName` varchar(40) NOT NULL COMMENT 'Field name',
+>, <Line: +  `cmpLongName` varchar(200) DEFAULT NULL COMMENT 'Company name',
+>, <Line: +  `fldCurrentActivitySatus` varchar(40) NOT NULL COMMENT 'Current activity status',
+>, <Line: +  `wlbName` varchar(60) DEFAULT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbCompletionDate` date DEFAULT NULL COMMENT 'Completion date',
+>, <Line: +  `fldOwnerKind` varchar(40) DEFAULT NULL COMMENT 'Owner kind',
+>, <Line: +  `fldOwnerName` varchar(40) DEFAULT NULL COMMENT 'Owner name',
+>, <Line: +  `fldNpdidOwner` int(11) DEFAULT NULL COMMENT 'NPDID owner',
+>, <Line: +  `fldNpdidField` int(11) NOT NULL COMMENT 'NPDID field',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `cmpNpdidCompany` int(11) DEFAULT NULL COMMENT 'NPDID company',
+>, <Line: +  `fldFactPageUrl` varchar(200) NOT NULL COMMENT 'Field fact page',
+>, <Line: +  `fldFactMapUrl` varchar(200) NOT NULL,
+>, <Line: +  `fldDateUpdated` date DEFAULT NULL COMMENT 'Date main level updated',
+>, <Line: +  `fldDateUpdatedMax` date DEFAULT NULL COMMENT 'Date all updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`fldNpdidField`),
+>, <Line: +  CONSTRAINT `field_ibfk_3` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `field_ibfk_1` FOREIGN KEY (`fldNpdidOwner`) REFERENCES `licence` (`prlNpdidLicence`),
+>, <Line: +  CONSTRAINT `field_ibfk_2` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `company_reserves`
+>, <Line: +DROP TABLE IF EXISTS `company_reserves`;
+>, <Line: +CREATE TABLE `company_reserves` (
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `fldName` varchar(40) NOT NULL COMMENT 'Field name',
+>, <Line: +  `cmpRecoverableOil` decimal(13,6) NOT NULL,
+>, <Line: +  `cmpRecoverableGas` decimal(13,6) NOT NULL,
+>, <Line: +  `cmpRecoverableNGL` decimal(13,6) NOT NULL,
+>, <Line: +  `cmpRecoverableCondensate` decimal(13,6) NOT NULL,
+>, <Line: +  `cmpRecoverableOE` decimal(13,6) NOT NULL,
+>, <Line: +  `cmpRemainingOil` decimal(13,6) NOT NULL,
+>, <Line: +  `cmpRemainingGas` decimal(13,6) NOT NULL,
+>, <Line: +  `cmpRemainingNGL` decimal(13,6) NOT NULL,
+>, <Line: +  `cmpRemainingCondensate` decimal(13,6) NOT NULL,
+>, <Line: +  `cmpRemainingOE` decimal(13,6) NOT NULL,
+>, <Line: +  `cmpDateOffResEstDisplay` date NOT NULL,
+>, <Line: +  `cmpShare` decimal(13,6) NOT NULL,
+>, <Line: +  `fldNpdidField` int(11) NOT NULL COMMENT 'NPDID field',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`cmpNpdidCompany`,`fldNpdidField`),
+>, <Line: +  CONSTRAINT `company_reserves_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `company_reserves_ibfk_1` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `discovery`
+>, <Line: +DROP TABLE IF EXISTS `discovery`;
+>, <Line: +CREATE TABLE `discovery` (
+>, <Line: +  `dscName` varchar(40) NOT NULL COMMENT 'Discovery name',
+>, <Line: +  `cmpLongName` varchar(200) DEFAULT NULL COMMENT 'Company name',
+>, <Line: +  `dscCurrentActivityStatus` varchar(40) NOT NULL COMMENT 'Current activity status',
+>, <Line: +  `dscHcType` varchar(40) DEFAULT NULL COMMENT 'HC type',
+>, <Line: +  `wlbName` varchar(60) DEFAULT NULL COMMENT 'Wellbore name',
+>, <Line: +  `nmaName` varchar(40) DEFAULT NULL COMMENT 'Main NCS area',
+>, <Line: +  `fldName` varchar(40) DEFAULT NULL COMMENT 'Field name',
+>, <Line: +  `dscDateFromInclInField` date DEFAULT NULL COMMENT 'Included in field from date',
+>, <Line: +  `dscDiscoveryYear` int(11) NOT NULL COMMENT 'Discovery year',
+>, <Line: +  `dscResInclInDiscoveryName` varchar(40) DEFAULT NULL COMMENT 'Resources incl. in',
+>, <Line: +  `dscOwnerKind` varchar(40) DEFAULT NULL COMMENT 'Owner kind',
+>, <Line: +  `dscOwnerName` varchar(40) DEFAULT NULL COMMENT 'Owner name',
+>, <Line: +  `dscNpdidDiscovery` int(11) NOT NULL COMMENT 'NPDID discovery',
+>, <Line: +  `fldNpdidField` int(11) DEFAULT NULL COMMENT 'NPDID field',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `dscFactPageUrl` varchar(200) NOT NULL COMMENT 'Fact page',
+>, <Line: +  `dscFactMapUrl` varchar(200) NOT NULL COMMENT 'Fact map',
+>, <Line: +  `dscDateUpdated` date DEFAULT NULL COMMENT 'Date main level updated',
+>, <Line: +  `dscDateUpdatedMax` date DEFAULT NULL COMMENT 'Date all updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`dscNpdidDiscovery`),
+>, <Line: +  CONSTRAINT `discovery_ibfk_2` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`),
+>, <Line: +  CONSTRAINT `discovery_ibfk_1` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `discovery_reserves`
+>, <Line: +DROP TABLE IF EXISTS `discovery_reserves`;
+>, <Line: +CREATE TABLE `discovery_reserves` (
+>, <Line: +  `dscName` varchar(40) NOT NULL COMMENT 'Discovery name',
+>, <Line: +  `dscReservesRC` varchar(40) NOT NULL COMMENT 'Resource class',
+>, <Line: +  `dscRecoverableOil` decimal(13,6) NOT NULL COMMENT 'Rec. oil [mill Sm3]',
+>, <Line: +  `dscRecoverableGas` decimal(13,6) NOT NULL COMMENT 'Rec. gas [bill Sm3]',
+>, <Line: +  `dscRecoverableNGL` decimal(13,6) NOT NULL COMMENT 'Rec. NGL [mill tonn]',
+>, <Line: +  `dscRecoverableCondensate` decimal(13,6) NOT NULL COMMENT 'Rec. cond. [mill Sm3]',
+>, <Line: +  `dscDateOffResEstDisplay` date NOT NULL COMMENT 'Resource updated date',
+>, <Line: +  `dscNpdidDiscovery` int(11) NOT NULL COMMENT 'NPDID discovery',
+>, <Line: +  `dscReservesDateUpdated` date NOT NULL,
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`dscNpdidDiscovery`,`dscReservesRC`),
+>, <Line: +  CONSTRAINT `discovery_reserves_ibfk_1` FOREIGN KEY (`dscNpdidDiscovery`) REFERENCES `discovery` (`dscNpdidDiscovery`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `dscArea`
+>, <Line: +DROP TABLE IF EXISTS `dscArea`;
+>, <Line: +CREATE TABLE `dscArea` (
+>, <Line: +  `fldNpdidField` int(11) DEFAULT NULL COMMENT 'NPDID field',
+>, <Line: +  `fldName` varchar(40) DEFAULT NULL COMMENT 'Field name',
+>, <Line: +  `dscNpdidDiscovery` int(11) NOT NULL COMMENT 'NPDID discovery',
+>, <Line: +  `dscName` varchar(40) NOT NULL COMMENT 'Discovery name',
+>, <Line: +  `dscResInclInDiscoveryName` varchar(40) DEFAULT NULL COMMENT 'Resources incl. in',
+>, <Line: +  `dscNpdidResInclInDiscovery` int(11) DEFAULT NULL,
+>, <Line: +  `dscIncludedInFld` varchar(3) NOT NULL,
+>, <Line: +  `dscHcType` varchar(40) NOT NULL COMMENT 'HC type',
+>, <Line: +  `fldHcType` varchar(40) DEFAULT NULL,
+>, <Line: +  `dscCurrentActivityStatus` varchar(40) NOT NULL COMMENT 'Current activity status',
+>, <Line: +  `fldCurrentActivityStatus` varchar(40) DEFAULT NULL,
+>, <Line: +  `flddscLabel` varchar(40) NOT NULL,
+>, <Line: +  `dscFactUrl` varchar(200) NOT NULL,
+>, <Line: +  `fldFactUrl` varchar(200) DEFAULT NULL,
+>, <Line: +  `flddscAreaGeometryWKT_ED50` geometry NOT NULL,
+>, <Line: +  PRIMARY KEY (`dscNpdidDiscovery`,`dscHcType`),
+>, <Line: +  CONSTRAINT `dscArea_ibfk_3` FOREIGN KEY (`dscNpdidResInclInDiscovery`) REFERENCES `discovery` (`dscNpdidDiscovery`),
+>, <Line: +  CONSTRAINT `dscArea_ibfk_1` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`),
+>, <Line: +  CONSTRAINT `dscArea_ibfk_2` FOREIGN KEY (`dscNpdidDiscovery`) REFERENCES `discovery` (`dscNpdidDiscovery`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `facility_fixed`
+>, <Line: +DROP TABLE IF EXISTS `facility_fixed`;
+>, <Line: +CREATE TABLE `facility_fixed` (
+>, <Line: +  `fclName` varchar(40) NOT NULL COMMENT 'Name',
+>, <Line: +  `fclPhase` varchar(40) NOT NULL COMMENT 'Phase',
+>, <Line: +  `fclSurface` varchar(1) NOT NULL COMMENT 'Surface facility',
+>, <Line: +  `fclCurrentOperatorName` varchar(100) DEFAULT NULL COMMENT 'Current operator',
+>, <Line: +  `fclKind` varchar(40) NOT NULL COMMENT 'Kind',
+>, <Line: +  `fclBelongsToName` varchar(41) DEFAULT NULL COMMENT 'Belongs to, name',
+>, <Line: +  `fclBelongsToKind` varchar(40) DEFAULT NULL COMMENT 'Belongs to, kind',
+>, <Line: +  `fclBelongsToS` int(11) DEFAULT NULL,
+>, <Line: +  `fclStartupDate` date DEFAULT NULL COMMENT 'Startup date',
+>, <Line: +  `fclGeodeticDatum` varchar(10) DEFAULT NULL COMMENT 'Geodetic datum',
+>, <Line: +  `fclNsDeg` int(11) DEFAULT NULL COMMENT 'NS degrees',
+>, <Line: +  `fclNsMin` int(11) DEFAULT NULL COMMENT 'NS minutes',
+>, <Line: +  `fclNsSec` decimal(13,6) DEFAULT NULL COMMENT 'NS seconds',
+>, <Line: +  `fclNsCode` varchar(1) NOT NULL COMMENT 'NS code',
+>, <Line: +  `fclEwDeg` int(11) DEFAULT NULL COMMENT 'EW degrees',
+>, <Line: +  `fclEwMin` int(11) DEFAULT NULL COMMENT 'EW minutes',
+>, <Line: +  `fclEwSec` decimal(13,6) DEFAULT NULL COMMENT 'EW seconds',
+>, <Line: +  `fclEwCode` varchar(1) NOT NULL COMMENT 'EW code',
+>, <Line: +  `fclWaterDepth` decimal(13,6) NOT NULL COMMENT 'Water depth [m]',
+>, <Line: +  `fclFunctions` varchar(400) DEFAULT NULL COMMENT 'Functions',
+>, <Line: +  `fclDesignLifetime` int(11) DEFAULT NULL COMMENT 'Design lifetime [year]',
+>, <Line: +  `fclFactPageUrl` varchar(200) NOT NULL COMMENT 'Fact page',
+>, <Line: +  `fclFactMapUrl` varchar(200) NOT NULL COMMENT 'Fact map',
+>, <Line: +  `fclNpdidFacility` int(11) NOT NULL COMMENT 'NPDID facility',
+>, <Line: +  `fclDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`fclNpdidFacility`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `facility_moveable`
+>, <Line: +DROP TABLE IF EXISTS `facility_moveable`;
+>, <Line: +CREATE TABLE `facility_moveable` (
+>, <Line: +  `fclName` varchar(40) NOT NULL COMMENT 'Name',
+>, <Line: +  `fclCurrentRespCompanyName` varchar(100) DEFAULT NULL COMMENT 'Current responsible company',
+>, <Line: +  `fclKind` varchar(40) NOT NULL COMMENT 'Kind',
+>, <Line: +  `fclFunctions` varchar(400) DEFAULT NULL COMMENT 'Functions',
+>, <Line: +  `fclNationName` varchar(40) NOT NULL COMMENT 'Nation',
+>, <Line: +  `fclFactPageUrl` varchar(200) NOT NULL COMMENT 'Fact page',
+>, <Line: +  `fclNpdidFacility` int(11) NOT NULL COMMENT 'NPDID facility',
+>, <Line: +  `fclNpdidCurrentRespCompany` int(11) DEFAULT NULL COMMENT 'NPDID responsible company',
+>, <Line: +  `fclDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`fclNpdidFacility`),
+>, <Line: +  CONSTRAINT `facility_moveable_ibfk_1` FOREIGN KEY (`fclNpdidCurrentRespCompany`) REFERENCES `company` (`cmpNpdidCompany`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `tuf_petreg_licence`
+>, <Line: +DROP TABLE IF EXISTS `tuf_petreg_licence`;
+>, <Line: +CREATE TABLE `tuf_petreg_licence` (
+>, <Line: +  `ptlName` varchar(40) NOT NULL COMMENT 'Tillatelse',
+>, <Line: +  `tufName` varchar(40) NOT NULL COMMENT 'TUF',
+>, <Line: +  `ptlDateValidFrom` date NOT NULL COMMENT 'Gyldig fra dato',
+>, <Line: +  `ptlDateValidTo` date NOT NULL COMMENT 'Gyldig til dato',
+>, <Line: +  `tufNpdidTuf` int(11) NOT NULL COMMENT 'NPDID tuf',
+>, <Line: +  `ptlDateUpdated` date DEFAULT NULL COMMENT 'Dato hovednivå oppdatert',
+>, <Line: +  `ptlDateUpdatedMax` date NOT NULL COMMENT 'Dato alle oppdatert',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`tufNpdidTuf`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `fclPoint`
+>, <Line: +DROP TABLE IF EXISTS `fclPoint`;
+>, <Line: +CREATE TABLE `fclPoint` (
+>, <Line: +  `fclNpdidFacility` int(11) NOT NULL COMMENT 'NPDID facility',
+>, <Line: +  `fclSurface` varchar(1) NOT NULL COMMENT 'Surface facility',
+>, <Line: +  `fclCurrentOperatorName` varchar(100) DEFAULT NULL COMMENT 'Current operator',
+>, <Line: +  `fclName` varchar(40) NOT NULL COMMENT 'Name',
+>, <Line: +  `fclKind` varchar(40) NOT NULL COMMENT 'Kind',
+>, <Line: +  `fclBelongsToName` varchar(41) DEFAULT NULL COMMENT 'Belongs to, name',
+>, <Line: +  `fclBelongsToKind` varchar(40) DEFAULT NULL COMMENT 'Belongs to, kind',
+>, <Line: +  `fclBelongsToS` int(11) DEFAULT NULL,
+>, <Line: +  `fclStartupDate` date NOT NULL COMMENT 'Startup date',
+>, <Line: +  `fclWaterDepth` decimal(13,6) NOT NULL COMMENT 'Water depth [m]',
+>, <Line: +  `fclFunctions` varchar(400) DEFAULT NULL COMMENT 'Functions',
+>, <Line: +  `fclDesignLifetime` int(11) NOT NULL COMMENT 'Design lifetime [year]',
+>, <Line: +  `fclFactPageUrl` varchar(200) NOT NULL COMMENT 'Fact page',
+>, <Line: +  `fclFactMapUrl` varchar(200) NOT NULL COMMENT 'Fact map',
+>, <Line: +  `fclPointGeometryWKT` geometry NOT NULL,
+>, <Line: +  PRIMARY KEY (`fclNpdidFacility`),
+>, <Line: +  CONSTRAINT `fclPoint_ibfk_2` FOREIGN KEY (`fclBelongsToS`) REFERENCES `tuf_petreg_licence` (`tufNpdidTuf`),
+>, <Line: +  CONSTRAINT `fclPoint_ibfk_1` FOREIGN KEY (`fclNpdidFacility`) REFERENCES `facility_fixed` (`fclNpdidFacility`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_activity_status_hst`
+>, <Line: +DROP TABLE IF EXISTS `field_activity_status_hst`;
+>, <Line: +CREATE TABLE `field_activity_status_hst` (
+>, <Line: +  `fldName` varchar(40) NOT NULL COMMENT 'Field name',
+>, <Line: +  `fldStatusFromDate` date NOT NULL COMMENT 'Status from',
+>, <Line: +  `fldStatusToDate` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Status to',
+>, <Line: +  `fldStatus` varchar(40) NOT NULL COMMENT 'Status',
+>, <Line: +  `fldNpdidField` int(11) NOT NULL COMMENT 'NPDID field',
+>, <Line: +  `fldStatusDateUpdated` date DEFAULT NULL,
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`fldNpdidField`,`fldStatus`,`fldStatusFromDate`,`fldStatusToDate`),
+>, <Line: +  CONSTRAINT `field_activity_status_hst_ibfk_1` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_description`
+>, <Line: +DROP TABLE IF EXISTS `field_description`;
+>, <Line: +CREATE TABLE `field_description` (
+>, <Line: +  `fldName` varchar(40) NOT NULL COMMENT 'Field name',
+>, <Line: +  `fldDescriptionHeading` varchar(255) NOT NULL COMMENT 'Heading',
+>, <Line: +  `fldDescriptionText` longtext NOT NULL COMMENT 'Text',
+>, <Line: +  `fldNpdidField` int(11) NOT NULL COMMENT 'NPDID field',
+>, <Line: +  `fldDescriptionDateUpdated` date NOT NULL COMMENT 'Date updated',
+>, <Line: +  PRIMARY KEY (`fldNpdidField`,`fldDescriptionHeading`),
+>, <Line: +  CONSTRAINT `field_description_ibfk_1` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_investment_yearly`
+>, <Line: +DROP TABLE IF EXISTS `field_investment_yearly`;
+>, <Line: +CREATE TABLE `field_investment_yearly` (
+>, <Line: +  `prfInformationCarrier` varchar(40) NOT NULL COMMENT 'Field (Discovery)',
+>, <Line: +  `prfYear` int(11) NOT NULL COMMENT 'Year',
+>, <Line: +  `prfInvestmentsMillNOK` decimal(13,6) NOT NULL COMMENT 'Investments [mill NOK norminal values]',
+>, <Line: +  `prfNpdidInformationCarrier` int(11) NOT NULL COMMENT 'NPDID information carrier',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prfNpdidInformationCarrier`,`prfYear`),
+>, <Line: +  CONSTRAINT `field_investment_yearly_ibfk_1` FOREIGN KEY (`prfNpdidInformationCarrier`) REFERENCES `field` (`fldNpdidField`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_licensee_hst`
+>, <Line: +DROP TABLE IF EXISTS `field_licensee_hst`;
+>, <Line: +CREATE TABLE `field_licensee_hst` (
+>, <Line: +  `fldName` varchar(40) NOT NULL COMMENT 'Field name',
+>, <Line: +  `fldOwnerName` varchar(40) NOT NULL COMMENT 'Owner name',
+>, <Line: +  `fldOwnerKind` varchar(40) NOT NULL COMMENT 'Owner kind',
+>, <Line: +  `fldOwnerFrom` date NOT NULL,
+>, <Line: +  `fldOwnerTo` date DEFAULT NULL,
+>, <Line: +  `fldLicenseeFrom` date NOT NULL,
+>, <Line: +  `fldLicenseeTo` date NOT NULL DEFAULT '0000-00-00',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `fldCompanyShare` decimal(13,6) NOT NULL COMMENT 'Company share [%]',
+>, <Line: +  `fldSdfiShare` decimal(13,6) DEFAULT NULL COMMENT 'SDFI [%]',
+>, <Line: +  `fldNpdidField` int(11) NOT NULL COMMENT 'NPDID field',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `fldLicenseeDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`fldNpdidField`,`cmpNpdidCompany`,`fldLicenseeFrom`,`fldLicenseeTo`),
+>, <Line: +  CONSTRAINT `field_licensee_hst_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `field_licensee_hst_ibfk_1` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_operator_hst`
+>, <Line: +DROP TABLE IF EXISTS `field_operator_hst`;
+>, <Line: +CREATE TABLE `field_operator_hst` (
+>, <Line: +  `fldName` varchar(40) NOT NULL COMMENT 'Field name',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `fldOperatorFrom` date NOT NULL,
+>, <Line: +  `fldOperatorTo` date NOT NULL DEFAULT '0000-00-00',
+>, <Line: +  `fldNpdidField` int(11) NOT NULL COMMENT 'NPDID field',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `fldOperatorDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`fldNpdidField`,`cmpNpdidCompany`,`fldOperatorFrom`,`fldOperatorTo`),
+>, <Line: +  CONSTRAINT `field_operator_hst_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `field_operator_hst_ibfk_1` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_owner_hst`
+>, <Line: +DROP TABLE IF EXISTS `field_owner_hst`;
+>, <Line: +CREATE TABLE `field_owner_hst` (
+>, <Line: +  `fldName` varchar(40) NOT NULL COMMENT 'Field name',
+>, <Line: +  `fldOwnerKind` varchar(40) NOT NULL COMMENT 'Owner kind',
+>, <Line: +  `fldOwnerName` varchar(40) NOT NULL COMMENT 'Owner name',
+>, <Line: +  `fldOwnershipFromDate` date NOT NULL,
+>, <Line: +  `fldOwnershipToDate` date NOT NULL DEFAULT '0000-00-00',
+>, <Line: +  `fldNpdidField` int(11) NOT NULL COMMENT 'NPDID field',
+>, <Line: +  `fldNpdidOwner` int(11) NOT NULL COMMENT 'NPDID owner',
+>, <Line: +  `fldOwnerDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`fldNpdidField`,`fldNpdidOwner`,`fldOwnershipFromDate`,`fldOwnershipToDate`),
+>, <Line: +  CONSTRAINT `field_owner_hst_ibfk_1` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_production_monthly`
+>, <Line: +DROP TABLE IF EXISTS `field_production_monthly`;
+>, <Line: +CREATE TABLE `field_production_monthly` (
+>, <Line: +  `prfInformationCarrier` varchar(40) NOT NULL COMMENT 'Field (Discovery)',
+>, <Line: +  `prfYear` int(11) NOT NULL COMMENT 'Year',
+>, <Line: +  `prfMonth` int(11) NOT NULL COMMENT 'Month',
+>, <Line: +  `prfPrdOilNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - oil [mill Sm3]',
+>, <Line: +  `prfPrdGasNetBillSm3` decimal(13,6) NOT NULL COMMENT 'Net - gas [bill Sm3]',
+>, <Line: +  `prfPrdNGLNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - NGL [mill Sm3]',
+>, <Line: +  `prfPrdCondensateNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - condensate [mill Sm3]',
+>, <Line: +  `prfPrdOeNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - oil equivalents [mill Sm3]',
+>, <Line: +  `prfPrdProducedWaterInFieldMillSm3` decimal(13,6) NOT NULL COMMENT 'Produced water in field [mill Sm3]',
+>, <Line: +  `prfNpdidInformationCarrier` int(11) NOT NULL COMMENT 'NPDID information carrier',
+>, <Line: +  PRIMARY KEY (`prfNpdidInformationCarrier`,`prfYear`,`prfMonth`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_production_totalt_NCS_month`
+>, <Line: +DROP TABLE IF EXISTS `field_production_totalt_NCS_month`;
+>, <Line: +CREATE TABLE `field_production_totalt_NCS_month` (
+>, <Line: +  `prfYear` int(11) NOT NULL COMMENT 'Year',
+>, <Line: +  `prfMonth` int(11) NOT NULL COMMENT 'Month',
+>, <Line: +  `prfPrdOilNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - oil [mill Sm3]',
+>, <Line: +  `prfPrdGasNetBillSm3` decimal(13,6) NOT NULL COMMENT 'Net - gas [bill Sm3]',
+>, <Line: +  `prfPrdNGLNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - NGL [mill Sm3]',
+>, <Line: +  `prfPrdCondensateNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - condensate [mill Sm3]',
+>, <Line: +  `prfPrdOeNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - oil equivalents [mill Sm3]',
+>, <Line: +  `prfPrdProducedWaterInFieldMillSm3` decimal(13,6) NOT NULL COMMENT 'Produced water in field [mill Sm3]',
+>, <Line: +  PRIMARY KEY (`prfYear`,`prfMonth`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_production_totalt_NCS_year`
+>, <Line: +DROP TABLE IF EXISTS `field_production_totalt_NCS_year`;
+>, <Line: +CREATE TABLE `field_production_totalt_NCS_year` (
+>, <Line: +  `prfYear` int(11) NOT NULL COMMENT 'Year',
+>, <Line: +  `prfPrdOilNetMillSm` decimal(13,6) NOT NULL,
+>, <Line: +  `prfPrdGasNetBillSm` decimal(13,6) NOT NULL,
+>, <Line: +  `prfPrdCondensateNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - condensate [mill Sm3]',
+>, <Line: +  `prfPrdNGLNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - NGL [mill Sm3]',
+>, <Line: +  `prfPrdOeNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - oil equivalents [mill Sm3]',
+>, <Line: +  `prfPrdProducedWaterInFieldMillSm3` decimal(13,6) NOT NULL COMMENT 'Produced water in field [mill Sm3]',
+>, <Line: +  PRIMARY KEY (`prfYear`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_production_yearly`
+>, <Line: +DROP TABLE IF EXISTS `field_production_yearly`;
+>, <Line: +CREATE TABLE `field_production_yearly` (
+>, <Line: +  `prfInformationCarrier` varchar(40) NOT NULL COMMENT 'Field (Discovery)',
+>, <Line: +  `prfYear` int(11) NOT NULL COMMENT 'Year',
+>, <Line: +  `prfPrdOilNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - oil [mill Sm3]',
+>, <Line: +  `prfPrdGasNetBillSm3` decimal(13,6) NOT NULL COMMENT 'Net - gas [bill Sm3]',
+>, <Line: +  `prfPrdNGLNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - NGL [mill Sm3]',
+>, <Line: +  `prfPrdCondensateNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - condensate [mill Sm3]',
+>, <Line: +  `prfPrdOeNetMillSm3` decimal(13,6) NOT NULL COMMENT 'Net - oil equivalents [mill Sm3]',
+>, <Line: +  `prfPrdProducedWaterInFieldMillSm3` decimal(13,6) NOT NULL COMMENT 'Produced water in field [mill Sm3]',
+>, <Line: +  `prfNpdidInformationCarrier` int(11) NOT NULL COMMENT 'NPDID information carrier',
+>, <Line: +  PRIMARY KEY (`prfNpdidInformationCarrier`,`prfYear`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `field_reserves`
+>, <Line: +DROP TABLE IF EXISTS `field_reserves`;
+>, <Line: +CREATE TABLE `field_reserves` (
+>, <Line: +  `fldName` varchar(40) NOT NULL COMMENT 'Field name',
+>, <Line: +  `fldRecoverableOil` decimal(13,6) NOT NULL COMMENT 'Orig. recoverable oil [mill Sm3]',
+>, <Line: +  `fldRecoverableGas` decimal(13,6) NOT NULL COMMENT 'Orig. recoverable gas [bill Sm3]',
+>, <Line: +  `fldRecoverableNGL` decimal(13,6) NOT NULL COMMENT 'Orig. recoverable NGL [mill tonn]',
+>, <Line: +  `fldRecoverableCondensate` decimal(13,6) NOT NULL COMMENT 'Orig. recoverable cond. [mill Sm3]',
+>, <Line: +  `fldRecoverableOE` decimal(13,6) NOT NULL COMMENT 'Orig. recoverable oil eq. [mill Sm3 o.e]',
+>, <Line: +  `fldRemainingOil` decimal(13,6) NOT NULL COMMENT 'Remaining oil [mill Sm3]',
+>, <Line: +  `fldRemainingGas` decimal(13,6) NOT NULL COMMENT 'Remaining gas [bill Sm3]',
+>, <Line: +  `fldRemainingNGL` decimal(13,6) NOT NULL COMMENT 'Remaining NGL [mill tonn]',
+>, <Line: +  `fldRemainingCondensate` decimal(13,6) NOT NULL COMMENT 'Remaining cond. [mill Sm3]',
+>, <Line: +  `fldRemainingOE` decimal(13,6) NOT NULL COMMENT 'Remaining oil eq. [mill Sm3 o.e]',
+>, <Line: +  `fldDateOffResEstDisplay` date NOT NULL COMMENT 'Reserves updated date',
+>, <Line: +  `fldNpdidField` int(11) NOT NULL COMMENT 'NPDID field',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`fldNpdidField`),
+>, <Line: +  CONSTRAINT `field_reserves_ibfk_1` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `fldArea`
+>, <Line: +DROP TABLE IF EXISTS `fldArea`;
+>, <Line: +CREATE TABLE `fldArea` (
+>, <Line: +  `fldNpdidField` int(11) NOT NULL COMMENT 'NPDID field',
+>, <Line: +  `fldName` varchar(40) NOT NULL COMMENT 'Field name',
+>, <Line: +  `dscNpdidDiscovery` int(11) NOT NULL COMMENT 'NPDID discovery',
+>, <Line: +  `dscName` varchar(40) NOT NULL COMMENT 'Discovery name',
+>, <Line: +  `dscResInclInDiscoveryName` varchar(40) DEFAULT NULL COMMENT 'Resources incl. in',
+>, <Line: +  `dscNpdidResInclInDiscovery` int(11) DEFAULT NULL,
+>, <Line: +  `dscIncludedInFld` varchar(3) NOT NULL,
+>, <Line: +  `dscHcType` varchar(40) NOT NULL COMMENT 'HC type',
+>, <Line: +  `fldHcType` varchar(40) NOT NULL,
+>, <Line: +  `dscCurrentActivityStatus` varchar(40) NOT NULL COMMENT 'Current activity status',
+>, <Line: +  `fldCurrentActivityStatus` varchar(40) NOT NULL,
+>, <Line: +  `flddscLabel` varchar(40) NOT NULL,
+>, <Line: +  `dscFactUrl` varchar(200) NOT NULL,
+>, <Line: +  `fldFactUrl` varchar(200) NOT NULL,
+>, <Line: +  `flddscAreaGeometryWKT_ED50` geometry NOT NULL,
+>, <Line: +  PRIMARY KEY (`dscNpdidDiscovery`,`dscHcType`),
+>, <Line: +  CONSTRAINT `fldArea_ibfk_3` FOREIGN KEY (`dscNpdidResInclInDiscovery`) REFERENCES `discovery` (`dscNpdidDiscovery`),
+>, <Line: +  CONSTRAINT `fldArea_ibfk_1` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`),
+>, <Line: +  CONSTRAINT `fldArea_ibfk_2` FOREIGN KEY (`dscNpdidDiscovery`) REFERENCES `discovery` (`dscNpdidDiscovery`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence_area_poly_hst`
+>, <Line: +DROP TABLE IF EXISTS `licence_area_poly_hst`;
+>, <Line: +CREATE TABLE `licence_area_poly_hst` (
+>, <Line: +  `prlName` varchar(50) NOT NULL COMMENT 'Production licence',
+>, <Line: +  `prlAreaPolyDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `prlAreaPolyDateValidTo` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date valid to',
+>, <Line: +  `prlAreaPolyNationCode` varchar(2) NOT NULL,
+>, <Line: +  `prlAreaPolyBlockName` varchar(40) NOT NULL COMMENT 'Block name',
+>, <Line: +  `prlAreaPolyStratigraphical` varchar(4) NOT NULL COMMENT 'Stratigraphcal',
+>, <Line: +  `prlAreaPolyPolyNo` int(11) NOT NULL,
+>, <Line: +  `prlAreaPolyPolyArea` decimal(13,6) NOT NULL COMMENT 'Polygon area [km2]',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `prlAreaDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`,`prlAreaPolyBlockName`,`prlAreaPolyPolyNo`,`prlAreaPolyDateValidFrom`,`prlAreaPolyDateValidTo`),
+>, <Line: +  CONSTRAINT `licence_area_poly_hst_ibfk_1` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence_licensee_hst`
+>, <Line: +DROP TABLE IF EXISTS `licence_licensee_hst`;
+>, <Line: +CREATE TABLE `licence_licensee_hst` (
+>, <Line: +  `prlName` varchar(50) NOT NULL COMMENT 'Production licence',
+>, <Line: +  `prlLicenseeDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `prlLicenseeDateValidTo` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date valid to',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `prlLicenseeInterest` decimal(13,6) NOT NULL COMMENT 'Interest [%]',
+>, <Line: +  `prlLicenseeSdfi` decimal(13,6) DEFAULT NULL COMMENT 'SDFI [%]',
+>, <Line: +  `prlOperDateValidFrom` date DEFAULT NULL COMMENT 'Date valid from',
+>, <Line: +  `prlOperDateValidTo` date DEFAULT NULL COMMENT 'Date valid to',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `prlLicenseeDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`,`cmpNpdidCompany`,`prlLicenseeDateValidFrom`,`prlLicenseeDateValidTo`),
+>, <Line: +  CONSTRAINT `licence_licensee_hst_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `licence_licensee_hst_ibfk_1` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence_oper_hst`
+>, <Line: +DROP TABLE IF EXISTS `licence_oper_hst`;
+>, <Line: +CREATE TABLE `licence_oper_hst` (
+>, <Line: +  `prlName` varchar(50) NOT NULL COMMENT 'Production licence',
+>, <Line: +  `prlOperDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `prlOperDateValidTo` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date valid to',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `prlOperDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`,`cmpNpdidCompany`,`prlOperDateValidFrom`,`prlOperDateValidTo`),
+>, <Line: +  CONSTRAINT `licence_oper_hst_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `licence_oper_hst_ibfk_1` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence_petreg_licence`
+>, <Line: +DROP TABLE IF EXISTS `licence_petreg_licence`;
+>, <Line: +CREATE TABLE `licence_petreg_licence` (
+>, <Line: +  `ptlName` varchar(40) NOT NULL COMMENT 'Tillatelse',
+>, <Line: +  `ptlDateAwarded` date NOT NULL,
+>, <Line: +  `ptlDateValidFrom` date NOT NULL COMMENT 'Gyldig fra dato',
+>, <Line: +  `ptlDateValidTo` date NOT NULL COMMENT 'Gyldig til dato',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `ptlDateUpdated` date DEFAULT NULL COMMENT 'Dato hovednivå oppdatert',
+>, <Line: +  `ptlDateUpdatedMax` date NOT NULL COMMENT 'Dato alle oppdatert',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`),
+>, <Line: +  CONSTRAINT `licence_petreg_licence_ibfk_1` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence_petreg_licence_licencee`
+>, <Line: +DROP TABLE IF EXISTS `licence_petreg_licence_licencee`;
+>, <Line: +CREATE TABLE `licence_petreg_licence_licencee` (
+>, <Line: +  `ptlName` varchar(40) NOT NULL COMMENT 'Tillatelse',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `ptlLicenseeInterest` decimal(13,6) NOT NULL COMMENT 'Andel [%]',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `ptlLicenseeDateUpdated` date DEFAULT NULL COMMENT 'Dato oppdatert',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`,`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `licence_petreg_licence_licencee_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `licence_petreg_licence_licencee_ibfk_1` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence_petreg_licence_oper`
+>, <Line: +DROP TABLE IF EXISTS `licence_petreg_licence_oper`;
+>, <Line: +CREATE TABLE `licence_petreg_licence_oper` (
+>, <Line: +  `ptlName` varchar(40) NOT NULL COMMENT 'Tillatelse',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `ptlOperDateUpdated` date DEFAULT NULL COMMENT 'Dato oppdatert',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`),
+>, <Line: +  CONSTRAINT `licence_petreg_licence_oper_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `licence_petreg_licence_oper_ibfk_1` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence_petreg_message`
+>, <Line: +DROP TABLE IF EXISTS `licence_petreg_message`;
+>, <Line: +CREATE TABLE `licence_petreg_message` (
+>, <Line: +  `prlName` varchar(50) NOT NULL COMMENT 'Production licence',
+>, <Line: +  `ptlMessageDocumentNo` int(11) NOT NULL,
+>, <Line: +  `ptlMessage` text NOT NULL COMMENT 'Utdrag av dokument',
+>, <Line: +  `ptlMessageRegisteredDate` date NOT NULL COMMENT 'Registreringsdato',
+>, <Line: +  `ptlMessageKindDesc` varchar(100) NOT NULL COMMENT 'Type',
+>, <Line: +  `ptlMessageDateUpdated` date DEFAULT NULL COMMENT 'Dato oppdatert',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`,`ptlMessageDocumentNo`),
+>, <Line: +  CONSTRAINT `licence_petreg_message_ibfk_1` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence_phase_hst`
+>, <Line: +DROP TABLE IF EXISTS `licence_phase_hst`;
+>, <Line: +CREATE TABLE `licence_phase_hst` (
+>, <Line: +  `prlName` varchar(50) NOT NULL COMMENT 'Production licence',
+>, <Line: +  `prlDatePhaseValidFrom` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date phase valid from',
+>, <Line: +  `prlDatePhaseValidTo` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date phase valid to',
+>, <Line: +  `prlPhase` varchar(40) NOT NULL COMMENT 'Phase',
+>, <Line: +  `prlDateGranted` date NOT NULL COMMENT 'Date granted',
+>, <Line: +  `prlDateValidTo` date NOT NULL COMMENT 'Date valid to',
+>, <Line: +  `prlDateInitialPeriodExpires` date NOT NULL COMMENT 'Expiry date, initial period',
+>, <Line: +  `prlActiveStatusIndicator` varchar(40) NOT NULL COMMENT 'Active',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `prlPhaseDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`,`prlPhase`,`prlDatePhaseValidFrom`,`prlDatePhaseValidTo`),
+>, <Line: +  CONSTRAINT `licence_phase_hst_ibfk_1` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence_task`
+>, <Line: +DROP TABLE IF EXISTS `licence_task`;
+>, <Line: +CREATE TABLE `licence_task` (
+>, <Line: +  `prlName` varchar(50) NOT NULL COMMENT 'Production licence',
+>, <Line: +  `prlTaskName` varchar(40) NOT NULL COMMENT 'Task name (norwegian)',
+>, <Line: +  `prlTaskTypeNo` varchar(100) NOT NULL,
+>, <Line: +  `prlTaskTypeEn` varchar(200) NOT NULL COMMENT 'Type of task',
+>, <Line: +  `prlTaskStatusNo` varchar(100) NOT NULL,
+>, <Line: +  `prlTaskStatusEn` varchar(40) NOT NULL COMMENT 'Task status',
+>, <Line: +  `prlTaskExpiryDate` date NOT NULL COMMENT 'Expiry date',
+>, <Line: +  `wlbName` varchar(60) DEFAULT NULL COMMENT 'Wellbore name',
+>, <Line: +  `prlDateValidTo` date NOT NULL COMMENT 'Date valid to',
+>, <Line: +  `prlLicensingActivityName` varchar(40) NOT NULL COMMENT 'Licensing activity',
+>, <Line: +  `cmpLongName` varchar(200) DEFAULT NULL COMMENT 'Company name',
+>, <Line: +  `cmpNpdidCompany` int(11) DEFAULT NULL COMMENT 'NPDID company',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `prlTaskID` int(11) NOT NULL COMMENT 'Task ID',
+>, <Line: +  `prlTaskRefID` int(11) DEFAULT NULL COMMENT 'Referred task ID',
+>, <Line: +  `prlTaskDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`,`prlTaskID`),
+>, <Line: +  CONSTRAINT `licence_task_ibfk_3` FOREIGN KEY (`prlTaskRefID`) REFERENCES `licence_task` (`prlTaskID`),
+>, <Line: +  CONSTRAINT `licence_task_ibfk_1` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `licence_task_ibfk_2` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `licence_transfer_hst`
+>, <Line: +DROP TABLE IF EXISTS `licence_transfer_hst`;
+>, <Line: +CREATE TABLE `licence_transfer_hst` (
+>, <Line: +  `prlName` varchar(50) NOT NULL COMMENT 'Production licence',
+>, <Line: +  `prlTransferDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `prlTransferDirection` varchar(4) NOT NULL COMMENT 'Transfer direction',
+>, <Line: +  `prlTransferKind` varchar(40) DEFAULT NULL COMMENT 'Transfer kind',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `prlTransferredInterest` decimal(13,6) NOT NULL COMMENT 'Transferred interest [%]',
+>, <Line: +  `prlTransferSdfi` decimal(13,6) DEFAULT NULL COMMENT 'SDFI [%]',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `prlTransferDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`,`prlTransferDirection`,`cmpNpdidCompany`,`prlTransferDateValidFrom`),
+>, <Line: +  CONSTRAINT `licence_transfer_hst_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `licence_transfer_hst_ibfk_1` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `pipLine`
+>, <Line: +DROP TABLE IF EXISTS `pipLine`;
+>, <Line: +CREATE TABLE `pipLine` (
+>, <Line: +  `pipNpdidPipe` int(11) NOT NULL,
+>, <Line: +  `pipNpdidFromFacility` int(11) NOT NULL,
+>, <Line: +  `pipNpdidToFacility` int(11) NOT NULL,
+>, <Line: +  `pipNpdidOperator` int(11) DEFAULT NULL,
+>, <Line: +  `pipName` varchar(50) NOT NULL,
+>, <Line: +  `pipNameFromFacility` varchar(50) NOT NULL,
+>, <Line: +  `pipNameToFacility` varchar(50) NOT NULL,
+>, <Line: +  `pipNameCurrentOperator` varchar(100) DEFAULT NULL,
+>, <Line: +  `pipCurrentPhase` varchar(40) NOT NULL,
+>, <Line: +  `pipMedium` varchar(20) NOT NULL,
+>, <Line: +  `pipMainGrouping` varchar(20) NOT NULL,
+>, <Line: +  `pipDimension` decimal(13,6) NOT NULL,
+>, <Line: +  `pipLineGeometryWKT` geometry NOT NULL,
+>, <Line: +  PRIMARY KEY (`pipNpdidPipe`),
+>, <Line: +  CONSTRAINT `pipLine_ibfk_1` FOREIGN KEY (`pipNpdidOperator`) REFERENCES `company` (`cmpNpdidCompany`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `prlArea`
+>, <Line: +DROP TABLE IF EXISTS `prlArea`;
+>, <Line: +CREATE TABLE `prlArea` (
+>, <Line: +  `prlName` varchar(50) NOT NULL COMMENT 'Production licence',
+>, <Line: +  `prlActive` varchar(20) NOT NULL COMMENT 'Active',
+>, <Line: +  `prlCurrentArea` varchar(20) NOT NULL COMMENT 'Current area',
+>, <Line: +  `prlDateGranted` date NOT NULL COMMENT 'Date granted',
+>, <Line: +  `prlDateValidTo` date NOT NULL COMMENT 'Date valid to',
+>, <Line: +  `prlAreaPolyDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `prlAreaPolyDateValidTo` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date valid to',
+>, <Line: +  `prlAreaPolyFromZvalue` int(11) NOT NULL,
+>, <Line: +  `prlAreaPolyToZvalue` int(11) NOT NULL,
+>, <Line: +  `prlAreaPolyVertLimEn` text,
+>, <Line: +  `prlAreaPolyVertLimNo` text,
+>, <Line: +  `prlStratigraphical` varchar(3) NOT NULL,
+>, <Line: +  `prlAreaPolyStratigraphical` varchar(4) NOT NULL COMMENT 'Stratigraphcal',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `prlLastOperatorNameShort` varchar(40) NOT NULL,
+>, <Line: +  `prlLastOperatorNameLong` varchar(200) NOT NULL,
+>, <Line: +  `prlLicensingActivityName` varchar(40) NOT NULL COMMENT 'Licensing activity',
+>, <Line: +  `prlLastOperatorNpdidCompany` int(11) NOT NULL,
+>, <Line: +  `prlFactUrl` varchar(200) NOT NULL,
+>, <Line: +  `prlAreaGeometryWKT` geometry NOT NULL,
+>, <Line: +  `prlArea_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`prlArea_id`,`prlNpdidLicence`,`prlAreaPolyDateValidFrom`,`prlAreaPolyDateValidTo`),
+>, <Line: +  UNIQUE KEY `prlArea_id` (`prlArea_id`),
+>, <Line: +  CONSTRAINT `prlArea_ibfk_2` FOREIGN KEY (`prlLastOperatorNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `prlArea_ibfk_1` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `prlAreaSplitByBlock`
+>, <Line: +DROP TABLE IF EXISTS `prlAreaSplitByBlock`;
+>, <Line: +CREATE TABLE `prlAreaSplitByBlock` (
+>, <Line: +  `prlName` varchar(50) NOT NULL COMMENT 'Production licence',
+>, <Line: +  `prlActive` varchar(20) NOT NULL COMMENT 'Active',
+>, <Line: +  `prlCurrentArea` varchar(20) NOT NULL COMMENT 'Current area',
+>, <Line: +  `prlDateGranted` date NOT NULL COMMENT 'Date granted',
+>, <Line: +  `prlDateValidTo` date NOT NULL COMMENT 'Date valid to',
+>, <Line: +  `prlAreaPolyDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `prlAreaPolyDateValidTo` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date valid to',
+>, <Line: +  `prlAreaPolyPolyNo` int(11) NOT NULL,
+>, <Line: +  `prlAreaPolyPolyArea` decimal(13,6) NOT NULL COMMENT 'Polygon area [km2]',
+>, <Line: +  `blcName` varchar(40) NOT NULL COMMENT 'Block name',
+>, <Line: +  `prlAreaPolyFromZvalue` int(11) NOT NULL,
+>, <Line: +  `prlAreaPolyToZvalue` int(11) NOT NULL,
+>, <Line: +  `prlAreaPolyVertLimEn` text,
+>, <Line: +  `prlAreaPolyVertLimNo` text,
+>, <Line: +  `prlStratigraphical` varchar(3) NOT NULL,
+>, <Line: +  `prlLastOperatorNpdidCompany` int(11) NOT NULL,
+>, <Line: +  `prlLastOperatorNameShort` varchar(40) NOT NULL,
+>, <Line: +  `prlLastOperatorNameLong` varchar(200) NOT NULL,
+>, <Line: +  `prlLicensingActivityName` varchar(40) NOT NULL COMMENT 'Licensing activity',
+>, <Line: +  `prlFactUrl` varchar(200) NOT NULL,
+>, <Line: +  `prlAreaPolyStratigraphical` varchar(4) NOT NULL COMMENT 'Stratigraphcal',
+>, <Line: +  `prlNpdidLicence` int(11) NOT NULL COMMENT 'NPDID production licence',
+>, <Line: +  `prlAreaGeometryWKT` geometry NOT NULL,
+>, <Line: +  PRIMARY KEY (`prlNpdidLicence`,`blcName`,`prlAreaPolyPolyNo`,`prlAreaPolyDateValidFrom`,`prlAreaPolyDateValidTo`),
+>, <Line: +  CONSTRAINT `prlAreaSplitByBlock_ibfk_2` FOREIGN KEY (`prlNpdidLicence`) REFERENCES `licence` (`prlNpdidLicence`),
+>, <Line: +  CONSTRAINT `prlAreaSplitByBlock_ibfk_1` FOREIGN KEY (`prlLastOperatorNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `seis_acquisition`
+>, <Line: +DROP TABLE IF EXISTS `seis_acquisition`;
+>, <Line: +CREATE TABLE `seis_acquisition` (
+>, <Line: +  `seaName` varchar(100) NOT NULL COMMENT 'Survey name',
+>, <Line: +  `seaPlanFromDate` date NOT NULL COMMENT 'Start date - planned',
+>, <Line: +  `seaNpdidSurvey` int(11) NOT NULL COMMENT 'NPDID for survey',
+>, <Line: +  `seaStatus` varchar(100) NOT NULL COMMENT 'Status',
+>, <Line: +  `seaGeographicalArea` varchar(100) NOT NULL,
+>, <Line: +  `seaSurveyTypeMain` varchar(100) NOT NULL COMMENT 'Main type',
+>, <Line: +  `seaSurveyTypePart` varchar(100) DEFAULT NULL COMMENT 'Sub type',
+>, <Line: +  `seaCompanyReported` varchar(100) NOT NULL COMMENT 'Company - responsible',
+>, <Line: +  `seaPlanToDate` date NOT NULL COMMENT 'Completed date - planned',
+>, <Line: +  `seaDateStarting` date DEFAULT NULL COMMENT 'Start date - actual',
+>, <Line: +  `seaDateFinalized` date DEFAULT NULL COMMENT 'Completed date - actual',
+>, <Line: +  `seaCdpTotalKm` int(11) DEFAULT NULL COMMENT 'Total length - actual [cdp km]',
+>, <Line: +  `seaBoatTotalKm` int(11) DEFAULT NULL COMMENT 'Total length - actual [boat km]',
+>, <Line: +  `sea3DKm2` decimal(13,6) DEFAULT NULL COMMENT 'Total net area - planned 3D/4D [km2]',
+>, <Line: +  `seaSampling` varchar(20) DEFAULT NULL COMMENT 'Sampling',
+>, <Line: +  `seaShallowDrilling` varchar(20) DEFAULT NULL COMMENT 'Shallow drilling',
+>, <Line: +  `seaGeotechnical` varchar(20) DEFAULT NULL COMMENT 'Geotechnical measurement',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`seaNpdidSurvey`,`seaName`),
+>, <Line: +  UNIQUE KEY `index__seis_acquisition__seaName` (`seaName`),
+>, <Line: +  CONSTRAINT `seis_acquisition_ibfk_1` FOREIGN KEY (`seaCompanyReported`) REFERENCES `company` (`cmpLongName`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `seaArea`
+>, <Line: +DROP TABLE IF EXISTS `seaArea`;
+>, <Line: +CREATE TABLE `seaArea` (
+>, <Line: +  `seaSurveyName` varchar(100) NOT NULL COMMENT 'Survey name',
+>, <Line: +  `seaNpdidSurvey` int(11) NOT NULL COMMENT 'NPDID for survey',
+>, <Line: +  `seaFactMapUrl` varchar(260) DEFAULT NULL COMMENT 'Fact Map',
+>, <Line: +  `seaFactPageUrl` varchar(200) DEFAULT NULL,
+>, <Line: +  `seaStatus` varchar(100) NOT NULL COMMENT 'Status',
+>, <Line: +  `seaGeographicalArea` varchar(100) NOT NULL,
+>, <Line: +  `seaMarketAvailable` varchar(20) NOT NULL COMMENT 'Marked available',
+>, <Line: +  `seaSurveyTypeMain` varchar(100) NOT NULL COMMENT 'Main type',
+>, <Line: +  `seaSurveyTypePart` varchar(100) DEFAULT NULL COMMENT 'Sub type',
+>, <Line: +  `seaCompanyReported` varchar(100) NOT NULL COMMENT 'Company - responsible',
+>, <Line: +  `seaSourceType` varchar(100) DEFAULT NULL COMMENT 'Source type',
+>, <Line: +  `seaSourceNumber` varchar(100) DEFAULT NULL COMMENT 'Number of sources',
+>, <Line: +  `seaSourceSize` varchar(100) DEFAULT NULL COMMENT 'Source size',
+>, <Line: +  `seaSourcePressure` varchar(100) DEFAULT NULL COMMENT 'Source pressure',
+>, <Line: +  `seaSensorType` varchar(100) DEFAULT NULL COMMENT 'Sensor type',
+>, <Line: +  `seaSensorNumbers` varchar(40) DEFAULT NULL COMMENT 'Numbers of sensors',
+>, <Line: +  `seaSensorLength` varchar(100) DEFAULT NULL COMMENT 'Sensor length [m]',
+>, <Line: +  `seaPlanFromDate` date NOT NULL COMMENT 'Start date - planned',
+>, <Line: +  `seaDateStarting` date DEFAULT NULL COMMENT 'Start date - actual',
+>, <Line: +  `seaPlanToDate` date NOT NULL COMMENT 'Completed date - planned',
+>, <Line: +  `seaDateFinalized` date DEFAULT NULL COMMENT 'Completed date - actual',
+>, <Line: +  `seaPlanCdpKm` int(11) DEFAULT NULL COMMENT 'Total length - planned [cdp km]',
+>, <Line: +  `seaCdpTotalKm` int(11) DEFAULT NULL COMMENT 'Total length - actual [cdp km]',
+>, <Line: +  `seaPlanBoatKm` int(11) DEFAULT NULL COMMENT 'Total length - planned [boat km]',
+>, <Line: +  `seaBoatTotalKm` int(11) DEFAULT NULL COMMENT 'Total length - actual [boat km]',
+>, <Line: +  `sea3DKm2` decimal(13,6) DEFAULT NULL COMMENT 'Total net area - planned 3D/4D [km2]',
+>, <Line: +  `seaPolygonKind` varchar(100) NOT NULL COMMENT 'Kind of polygon',
+>, <Line: +  `seaPolyGeometryWKT` geometry NOT NULL,
+>, <Line: +  `seaArea_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`seaArea_id`,`seaSurveyName`),
+>, <Line: +  UNIQUE KEY `seaArea_id` (`seaArea_id`),
+>, <Line: +  CONSTRAINT `seaArea_ibfk_1` FOREIGN KEY (`seaNpdidSurvey`) REFERENCES `seis_acquisition` (`seaNpdidSurvey`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `seaMultiline`
+>, <Line: +DROP TABLE IF EXISTS `seaMultiline`;
+>, <Line: +CREATE TABLE `seaMultiline` (
+>, <Line: +  `seaSurveyName` varchar(100) NOT NULL COMMENT 'Survey name',
+>, <Line: +  `seaFactMapUrl` varchar(260) DEFAULT NULL COMMENT 'Fact Map',
+>, <Line: +  `seaFactPageUrl` varchar(200) DEFAULT NULL,
+>, <Line: +  `seaStatus` varchar(100) NOT NULL COMMENT 'Status',
+>, <Line: +  `seaMarketAvailable` varchar(20) NOT NULL COMMENT 'Marked available',
+>, <Line: +  `seaSurveyTypeMain` varchar(100) NOT NULL COMMENT 'Main type',
+>, <Line: +  `seaSurveyTypePart` varchar(100) NOT NULL COMMENT 'Sub type',
+>, <Line: +  `seaCompanyReported` varchar(100) NOT NULL COMMENT 'Company - responsible',
+>, <Line: +  `seaSourceType` varchar(100) NOT NULL COMMENT 'Source type',
+>, <Line: +  `seaSourceNumber` varchar(100) DEFAULT NULL COMMENT 'Number of sources',
+>, <Line: +  `seaSourceSize` varchar(100) DEFAULT NULL COMMENT 'Source size',
+>, <Line: +  `seaSourcePressure` varchar(100) DEFAULT NULL COMMENT 'Source pressure',
+>, <Line: +  `seaSensorType` varchar(100) NOT NULL COMMENT 'Sensor type',
+>, <Line: +  `seaSensorNumbers` varchar(40) NOT NULL COMMENT 'Numbers of sensors',
+>, <Line: +  `seaSensorLength` varchar(100) NOT NULL COMMENT 'Sensor length [m]',
+>, <Line: +  `seaPlanFromDate` date NOT NULL COMMENT 'Start date - planned',
+>, <Line: +  `seaDateStarting` date DEFAULT NULL COMMENT 'Start date - actual',
+>, <Line: +  `seaPlanToDate` date NOT NULL COMMENT 'Completed date - planned',
+>, <Line: +  `seaDateFinalized` date DEFAULT NULL COMMENT 'Completed date - actual',
+>, <Line: +  `seaPlanCdpKm` int(11) NOT NULL COMMENT 'Total length - planned [cdp km]',
+>, <Line: +  `seaCdpTotalKm` int(11) DEFAULT NULL COMMENT 'Total length - actual [cdp km]',
+>, <Line: +  `seaPlanBoatKm` int(11) NOT NULL COMMENT 'Total length - planned [boat km]',
+>, <Line: +  `seaBoatTotalKm` int(11) DEFAULT NULL COMMENT 'Total length - actual [boat km]',
+>, <Line: +  `seaMultilineGeometryWKT` geometry NOT NULL,
+>, <Line: +  PRIMARY KEY (`seaSurveyName`),
+>, <Line: +  CONSTRAINT `seaMultiline_ibfk_1` FOREIGN KEY (`seaSurveyName`) REFERENCES `seis_acquisition` (`seaName`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `seis_acquisition_coordinates_inc_turnarea`
+>, <Line: +DROP TABLE IF EXISTS `seis_acquisition_coordinates_inc_turnarea`;
+>, <Line: +CREATE TABLE `seis_acquisition_coordinates_inc_turnarea` (
+>, <Line: +  `seaSurveyName` varchar(100) NOT NULL COMMENT 'Survey name',
+>, <Line: +  `seaNpdidSurvey` int(11) NOT NULL COMMENT 'NPDID for survey',
+>, <Line: +  `seaPolygonPointNumber` int(11) NOT NULL COMMENT 'Point number',
+>, <Line: +  `seaPolygonNSDeg` int(11) NOT NULL COMMENT 'NS degrees',
+>, <Line: +  `seaPolygonNSMin` int(11) NOT NULL COMMENT 'NS minutes',
+>, <Line: +  `seaPolygonNSSec` decimal(13,6) NOT NULL COMMENT 'NS seconds',
+>, <Line: +  `seaPolygonEWDeg` int(11) NOT NULL COMMENT 'EW degrees',
+>, <Line: +  `seaPolygonEWMin` int(11) NOT NULL COMMENT 'EW minutes',
+>, <Line: +  `seaPolygonEWSec` decimal(13,6) NOT NULL COMMENT 'EW seconds',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`seaSurveyName`,`seaPolygonPointNumber`),
+>, <Line: +  CONSTRAINT `seis_acquisition_coordinates_inc_turnarea_ibfk_1` FOREIGN KEY (`seaNpdidSurvey`) REFERENCES `seis_acquisition` (`seaNpdidSurvey`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `seis_acquisition_progress`
+>, <Line: +DROP TABLE IF EXISTS `seis_acquisition_progress`;
+>, <Line: +CREATE TABLE `seis_acquisition_progress` (
+>, <Line: +  `seaProgressDate` date NOT NULL,
+>, <Line: +  `seaProgressText2` varchar(40) NOT NULL,
+>, <Line: +  `seaProgressText` text NOT NULL,
+>, <Line: +  `seaProgressDescription` text,
+>, <Line: +  `seaNpdidSurvey` int(11) NOT NULL COMMENT 'NPDID for survey',
+>, <Line: +  `seis_acquisition_progress_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`seis_acquisition_progress_id`,`seaProgressText2`),
+>, <Line: +  UNIQUE KEY `seis_acquisition_progress_id` (`seis_acquisition_progress_id`),
+>, <Line: +  CONSTRAINT `seis_acquisition_progress_ibfk_1` FOREIGN KEY (`seaNpdidSurvey`) REFERENCES `seis_acquisition` (`seaNpdidSurvey`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `strat_litho_wellbore`
+>, <Line: +DROP TABLE IF EXISTS `strat_litho_wellbore`;
+>, <Line: +CREATE TABLE `strat_litho_wellbore` (
+>, <Line: +  `wlbName` varchar(60) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `lsuTopDepth` decimal(13,6) NOT NULL COMMENT 'Top depth [m]',
+>, <Line: +  `lsuBottomDepth` decimal(13,6) NOT NULL COMMENT 'Bottom depth [m]',
+>, <Line: +  `lsuName` varchar(20) NOT NULL COMMENT 'Lithostrat. unit',
+>, <Line: +  `lsuLevel` varchar(9) NOT NULL COMMENT 'Level',
+>, <Line: +  `lsuNpdidLithoStrat` int(11) NOT NULL COMMENT 'NPDID lithostrat. unit',
+>, <Line: +  `wlbCompletionDate` date NOT NULL COMMENT 'Completion date',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `lsuWellboreUpdatedDate` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`wlbNpdidWellbore`,`lsuNpdidLithoStrat`,`lsuTopDepth`,`lsuBottomDepth`),
+>, <Line: +  CONSTRAINT `strat_litho_wellbore_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `strat_litho_wellbore_core`
+>, <Line: +DROP TABLE IF EXISTS `strat_litho_wellbore_core`;
+>, <Line: +CREATE TABLE `strat_litho_wellbore_core` (
+>, <Line: +  `wlbName` varchar(60) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `lsuCoreLenght` decimal(13,6) NOT NULL COMMENT 'Core length [m]',
+>, <Line: +  `lsuName` varchar(20) NOT NULL COMMENT 'Lithostrat. unit',
+>, <Line: +  `lsuLevel` varchar(9) NOT NULL COMMENT 'Level',
+>, <Line: +  `wlbCompletionDate` date NOT NULL COMMENT 'Completion date',
+>, <Line: +  `lsuNpdidLithoStrat` int(11) NOT NULL COMMENT 'NPDID lithostrat. unit',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`wlbNpdidWellbore`,`lsuNpdidLithoStrat`),
+>, <Line: +  CONSTRAINT `strat_litho_wellbore_core_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `tuf_operator_hst`
+>, <Line: +DROP TABLE IF EXISTS `tuf_operator_hst`;
+>, <Line: +CREATE TABLE `tuf_operator_hst` (
+>, <Line: +  `tufName` varchar(40) NOT NULL COMMENT 'TUF',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `tufOperDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `tufOperDateValidTo` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date valid to',
+>, <Line: +  `tufNpdidTuf` int(11) NOT NULL COMMENT 'NPDID tuf',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`tufNpdidTuf`,`cmpNpdidCompany`,`tufOperDateValidFrom`,`tufOperDateValidTo`),
+>, <Line: +  CONSTRAINT `tuf_operator_hst_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `tuf_operator_hst_ibfk_1` FOREIGN KEY (`tufNpdidTuf`) REFERENCES `tuf_petreg_licence` (`tufNpdidTuf`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `tuf_owner_hst`
+>, <Line: +DROP TABLE IF EXISTS `tuf_owner_hst`;
+>, <Line: +CREATE TABLE `tuf_owner_hst` (
+>, <Line: +  `tufName` varchar(40) NOT NULL COMMENT 'TUF',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `tufOwnerDateValidFrom` date NOT NULL COMMENT 'Date valid from',
+>, <Line: +  `tufOwnerDateValidTo` date NOT NULL DEFAULT '0000-00-00' COMMENT 'Date valid to',
+>, <Line: +  `tufOwnerShare` decimal(13,6) NOT NULL COMMENT 'Share [%]',
+>, <Line: +  `tufNpdidTuf` int(11) NOT NULL COMMENT 'NPDID tuf',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`tufNpdidTuf`,`cmpNpdidCompany`,`tufOwnerDateValidFrom`,`tufOwnerDateValidTo`),
+>, <Line: +  CONSTRAINT `tuf_owner_hst_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `tuf_owner_hst_ibfk_1` FOREIGN KEY (`tufNpdidTuf`) REFERENCES `tuf_petreg_licence` (`tufNpdidTuf`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `tuf_petreg_licence_licencee`
+>, <Line: +DROP TABLE IF EXISTS `tuf_petreg_licence_licencee`;
+>, <Line: +CREATE TABLE `tuf_petreg_licence_licencee` (
+>, <Line: +  `ptlName` varchar(40) NOT NULL COMMENT 'Tillatelse',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `ptlLicenseeInterest` decimal(13,6) NOT NULL COMMENT 'Andel [%]',
+>, <Line: +  `tufName` varchar(40) NOT NULL COMMENT 'TUF',
+>, <Line: +  `tufNpdidTuf` int(11) NOT NULL COMMENT 'NPDID tuf',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `ptlLicenseeDateUpdated` date DEFAULT NULL COMMENT 'Dato oppdatert',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`tufNpdidTuf`,`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `tuf_petreg_licence_licencee_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `tuf_petreg_licence_licencee_ibfk_1` FOREIGN KEY (`tufNpdidTuf`) REFERENCES `tuf_petreg_licence` (`tufNpdidTuf`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `tuf_petreg_licence_oper`
+>, <Line: +DROP TABLE IF EXISTS `tuf_petreg_licence_oper`;
+>, <Line: +CREATE TABLE `tuf_petreg_licence_oper` (
+>, <Line: +  `Textbox42` varchar(20) NOT NULL,
+>, <Line: +  `Textbox2` varchar(20) NOT NULL,
+>, <Line: +  `ptlName` varchar(40) NOT NULL COMMENT 'Tillatelse',
+>, <Line: +  `cmpLongName` varchar(200) NOT NULL COMMENT 'Company name',
+>, <Line: +  `tufName` varchar(40) NOT NULL COMMENT 'TUF',
+>, <Line: +  `tufNpdidTuf` int(11) NOT NULL COMMENT 'NPDID tuf',
+>, <Line: +  `cmpNpdidCompany` int(11) NOT NULL COMMENT 'NPDID company',
+>, <Line: +  `ptlOperDateUpdated` date DEFAULT NULL COMMENT 'Dato oppdatert',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`tufNpdidTuf`),
+>, <Line: +  CONSTRAINT `tuf_petreg_licence_oper_ibfk_2` FOREIGN KEY (`cmpNpdidCompany`) REFERENCES `company` (`cmpNpdidCompany`),
+>, <Line: +  CONSTRAINT `tuf_petreg_licence_oper_ibfk_1` FOREIGN KEY (`tufNpdidTuf`) REFERENCES `tuf_petreg_licence` (`tufNpdidTuf`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `tuf_petreg_message`
+>, <Line: +DROP TABLE IF EXISTS `tuf_petreg_message`;
+>, <Line: +CREATE TABLE `tuf_petreg_message` (
+>, <Line: +  `ptlName` varchar(40) NOT NULL COMMENT 'Tillatelse',
+>, <Line: +  `ptlMessageDocumentNo` int(11) NOT NULL,
+>, <Line: +  `ptlMessage` text NOT NULL COMMENT 'Utdrag av dokument',
+>, <Line: +  `ptlMessageRegisteredDate` date NOT NULL COMMENT 'Registreringsdato',
+>, <Line: +  `ptlMessageKindDesc` varchar(100) NOT NULL COMMENT 'Type',
+>, <Line: +  `tufName` varchar(40) NOT NULL COMMENT 'TUF',
+>, <Line: +  `ptlMessageDateUpdated` date DEFAULT NULL COMMENT 'Dato oppdatert',
+>, <Line: +  `tufNpdidTuf` int(11) NOT NULL COMMENT 'NPDID tuf',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`tufNpdidTuf`,`ptlMessageDocumentNo`),
+>, <Line: +  CONSTRAINT `tuf_petreg_message_ibfk_1` FOREIGN KEY (`tufNpdidTuf`) REFERENCES `tuf_petreg_licence` (`tufNpdidTuf`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_casing_and_lot`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_casing_and_lot`;
+>, <Line: +CREATE TABLE `wellbore_casing_and_lot` (
+>, <Line: +  `wlbName` varchar(60) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbCasingType` varchar(10) DEFAULT NULL COMMENT 'Casing type',
+>, <Line: +  `wlbCasingDiameter` varchar(6) DEFAULT NULL COMMENT 'Casing diam. [inch]',
+>, <Line: +  `wlbCasingDepth` decimal(13,6) NOT NULL COMMENT 'Casing depth [m]',
+>, <Line: +  `wlbHoleDiameter` varchar(6) DEFAULT NULL COMMENT 'Hole diam. [inch]',
+>, <Line: +  `wlbHoleDepth` decimal(13,6) NOT NULL COMMENT 'Hole depth[m]',
+>, <Line: +  `wlbLotMudDencity` decimal(13,6) NOT NULL COMMENT 'LOT mud eqv. [g/cm3]',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `wlbCasingDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  `wellbore_casing_and_lot_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`wellbore_casing_and_lot_id`,`wlbNpdidWellbore`),
+>, <Line: +  UNIQUE KEY `wellbore_casing_and_lot_id` (`wellbore_casing_and_lot_id`),
+>, <Line: +  CONSTRAINT `wellbore_casing_and_lot_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_coordinates`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_coordinates`;
+>, <Line: +CREATE TABLE `wellbore_coordinates` (
+>, <Line: +  `wlbWellboreName` varchar(40) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbDrillingOperator` varchar(60) NOT NULL COMMENT 'Drilling operator',
+>, <Line: +  `wlbProductionLicence` varchar(40) DEFAULT NULL COMMENT 'Drilled in production licence',
+>, <Line: +  `wlbWellType` varchar(20) DEFAULT NULL COMMENT 'Type',
+>, <Line: +  `wlbPurposePlanned` varchar(40) DEFAULT NULL COMMENT 'Purpose - planned',
+>, <Line: +  `wlbContent` varchar(40) DEFAULT NULL COMMENT 'Content',
+>, <Line: +  `wlbEntryDate` date DEFAULT NULL COMMENT 'Entry date',
+>, <Line: +  `wlbCompletionDate` date DEFAULT NULL COMMENT 'Completion date',
+>, <Line: +  `wlbField` varchar(40) DEFAULT NULL COMMENT 'Field',
+>, <Line: +  `wlbMainArea` varchar(40) NOT NULL COMMENT 'Main area',
+>, <Line: +  `wlbGeodeticDatum` varchar(6) DEFAULT NULL COMMENT 'Geodetic datum',
+>, <Line: +  `wlbNsDeg` int(11) NOT NULL COMMENT 'NS degrees',
+>, <Line: +  `wlbNsMin` int(11) NOT NULL COMMENT 'NS minutes',
+>, <Line: +  `wlbNsSec` decimal(6,2) NOT NULL COMMENT 'NS seconds',
+>, <Line: +  `wlbNsCode` varchar(1) DEFAULT NULL COMMENT 'NS code',
+>, <Line: +  `wlbEwDeg` int(11) NOT NULL COMMENT 'EW degrees',
+>, <Line: +  `wlbEwMin` int(11) NOT NULL COMMENT 'EW minutes',
+>, <Line: +  `wlbEwSec` decimal(6,2) NOT NULL COMMENT 'EW seconds',
+>, <Line: +  `wlbEwCode` varchar(1) DEFAULT NULL COMMENT 'EW code',
+>, <Line: +  `wlbNsDecDeg` decimal(13,6) NOT NULL COMMENT 'NS decimal degrees',
+>, <Line: +  `wlbEwDesDeg` decimal(13,6) NOT NULL COMMENT 'EW decimal degrees',
+>, <Line: +  `wlbNsUtm` decimal(13,6) NOT NULL COMMENT 'NS UTM [m]',
+>, <Line: +  `wlbEwUtm` decimal(13,6) NOT NULL COMMENT 'EW UTM [m]',
+>, <Line: +  `wlbUtmZone` int(11) NOT NULL COMMENT 'UTM zone',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`wlbNpdidWellbore`),
+>, <Line: +  CONSTRAINT `wellbore_coordinates_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_core`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_core`;
+>, <Line: +CREATE TABLE `wellbore_core` (
+>, <Line: +  `wlbName` varchar(60) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbCoreNumber` int(11) NOT NULL COMMENT 'Core sample number',
+>, <Line: +  `wlbCoreIntervalTop` decimal(13,6) DEFAULT NULL COMMENT 'Core sample - top depth',
+>, <Line: +  `wlbCoreIntervalBottom` decimal(13,6) DEFAULT NULL COMMENT 'Core sample - bottom depth',
+>, <Line: +  `wlbCoreIntervalUom` varchar(6) DEFAULT NULL COMMENT 'Core sample depth - uom',
+>, <Line: +  `wlbTotalCoreLength` decimal(13,6) NOT NULL COMMENT 'Total core sample length [m]',
+>, <Line: +  `wlbNumberOfCores` int(11) NOT NULL COMMENT 'Number of cores samples',
+>, <Line: +  `wlbCoreSampleAvailable` varchar(3) NOT NULL COMMENT 'Core samples available',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `wlbCoreDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  `wellbore_core_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`wellbore_core_id`,`wlbNpdidWellbore`,`wlbCoreNumber`),
+>, <Line: +  UNIQUE KEY `wellbore_core_id` (`wellbore_core_id`),
+>, <Line: +  CONSTRAINT `wellbore_core_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_core_photo`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_core_photo`;
+>, <Line: +CREATE TABLE `wellbore_core_photo` (
+>, <Line: +  `wlbName` varchar(60) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbCoreNumber` int(11) NOT NULL COMMENT 'Core sample number',
+>, <Line: +  `wlbCorePhotoTitle` varchar(200) NOT NULL COMMENT 'Core photo title',
+>, <Line: +  `wlbCorePhotoImgUrl` varchar(200) NOT NULL COMMENT 'Core photo URL',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `wlbCorePhotoDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `wellbore_core_photo_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`wellbore_core_photo_id`,`wlbNpdidWellbore`,`wlbCoreNumber`,`wlbCorePhotoTitle`),
+>, <Line: +  UNIQUE KEY `wellbore_core_photo_id` (`wellbore_core_photo_id`),
+>, <Line: +  CONSTRAINT `wellbore_core_photo_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_development_all`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_development_all`;
+>, <Line: +CREATE TABLE `wellbore_development_all` (
+>, <Line: +  `wlbWellboreName` varchar(40) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbWell` varchar(40) NOT NULL COMMENT 'Well name',
+>, <Line: +  `wlbDrillingOperator` varchar(60) NOT NULL COMMENT 'Drilling operator',
+>, <Line: +  `wlbDrillingOperatorGroup` varchar(20) NOT NULL COMMENT 'Drilling operator group',
+>, <Line: +  `wlbProductionLicence` varchar(40) NOT NULL COMMENT 'Drilled in production licence',
+>, <Line: +  `wlbPurposePlanned` varchar(40) DEFAULT NULL COMMENT 'Purpose - planned',
+>, <Line: +  `wlbContent` varchar(40) DEFAULT NULL COMMENT 'Content',
+>, <Line: +  `wlbWellType` varchar(20) NOT NULL COMMENT 'Type',
+>, <Line: +  `wlbEntryDate` date DEFAULT NULL COMMENT 'Entry date',
+>, <Line: +  `wlbCompletionDate` date DEFAULT NULL COMMENT 'Completion date',
+>, <Line: +  `wlbField` varchar(40) NOT NULL COMMENT 'Field',
+>, <Line: +  `wlbDrillPermit` varchar(10) NOT NULL COMMENT 'Drill permit',
+>, <Line: +  `wlbDiscovery` varchar(40) NOT NULL COMMENT 'Discovery',
+>, <Line: +  `wlbDiscoveryWellbore` varchar(3) NOT NULL COMMENT 'Discovery wellbore',
+>, <Line: +  `wlbKellyBushElevation` decimal(13,6) NOT NULL COMMENT 'Kelly bushing elevation [m]',
+>, <Line: +  `wlbFinalVerticalDepth` decimal(6,2) DEFAULT NULL COMMENT 'Final vertical depth (TVD) [m RKB]',
+>, <Line: +  `wlbTotalDepth` decimal(13,6) NOT NULL COMMENT 'Total depth (MD) [m RKB]',
+>, <Line: +  `wlbWaterDepth` decimal(13,6) NOT NULL COMMENT 'Water depth [m]',
+>, <Line: +  `wlbMainArea` varchar(40) NOT NULL COMMENT 'Main area',
+>, <Line: +  `wlbDrillingFacility` varchar(50) DEFAULT NULL COMMENT 'Drilling facility',
+>, <Line: +  `wlbFacilityTypeDrilling` varchar(40) DEFAULT NULL COMMENT 'Facility type, drilling',
+>, <Line: +  `wlbProductionFacility` varchar(50) DEFAULT NULL COMMENT 'Production facility',
+>, <Line: +  `wlbLicensingActivity` varchar(40) NOT NULL COMMENT 'Licensing activity awarded in',
+>, <Line: +  `wlbMultilateral` varchar(3) NOT NULL COMMENT 'Multilateral',
+>, <Line: +  `wlbContentPlanned` varchar(40) DEFAULT NULL COMMENT 'Content - planned',
+>, <Line: +  `wlbEntryYear` int(11) NOT NULL COMMENT 'Entry year',
+>, <Line: +  `wlbCompletionYear` int(11) NOT NULL COMMENT 'Completion year',
+>, <Line: +  `wlbReclassFromWellbore` varchar(40) DEFAULT NULL COMMENT 'Reclassified from wellbore',
+>, <Line: +  `wlbPlotSymbol` int(11) NOT NULL COMMENT 'Plot symbol',
+>, <Line: +  `wlbGeodeticDatum` varchar(6) DEFAULT NULL COMMENT 'Geodetic datum',
+>, <Line: +  `wlbNsDeg` int(11) NOT NULL COMMENT 'NS degrees',
+>, <Line: +  `wlbNsMin` int(11) NOT NULL COMMENT 'NS minutes',
+>, <Line: +  `wlbNsSec` decimal(6,2) NOT NULL COMMENT 'NS seconds',
+>, <Line: +  `wlbNsCode` varchar(1) NOT NULL COMMENT 'NS code',
+>, <Line: +  `wlbEwDeg` int(11) NOT NULL COMMENT 'EW degrees',
+>, <Line: +  `wlbEwMin` int(11) NOT NULL COMMENT 'EW minutes',
+>, <Line: +  `wlbEwSec` decimal(6,2) NOT NULL COMMENT 'EW seconds',
+>, <Line: +  `wlbEwCode` varchar(1) DEFAULT NULL COMMENT 'EW code',
+>, <Line: +  `wlbNsDecDeg` decimal(13,6) NOT NULL COMMENT 'NS decimal degrees',
+>, <Line: +  `wlbEwDesDeg` decimal(13,6) NOT NULL COMMENT 'EW decimal degrees',
+>, <Line: +  `wlbNsUtm` decimal(13,6) NOT NULL COMMENT 'NS UTM [m]',
+>, <Line: +  `wlbEwUtm` decimal(13,6) NOT NULL COMMENT 'EW UTM [m]',
+>, <Line: +  `wlbUtmZone` int(11) NOT NULL COMMENT 'UTM zone',
+>, <Line: +  `wlbNamePart1` int(11) NOT NULL COMMENT 'Wellbore name, part 1',
+>, <Line: +  `wlbNamePart2` int(11) NOT NULL COMMENT 'Wellbore name, part 2',
+>, <Line: +  `wlbNamePart3` varchar(1) NOT NULL COMMENT 'Wellbore name, part 3',
+>, <Line: +  `wlbNamePart4` int(11) NOT NULL COMMENT 'Wellbore name, part 4',
+>, <Line: +  `wlbNamePart5` varchar(2) DEFAULT NULL COMMENT 'Wellbore name, part 5',
+>, <Line: +  `wlbNamePart6` varchar(2) DEFAULT NULL COMMENT 'Wellbore name, part 6',
+>, <Line: +  `wlbFactPageUrl` varchar(200) NOT NULL COMMENT 'FactPage url',
+>, <Line: +  `wlbFactMapUrl` varchar(200) NOT NULL COMMENT 'FactMap url',
+>, <Line: +  `wlbDiskosWellboreType` varchar(20) NOT NULL COMMENT 'DISKOS Well Type',
+>, <Line: +  `wlbDiskosWellboreParent` varchar(40) DEFAULT NULL COMMENT 'DISKOS Wellbore Parent',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `dscNpdidDiscovery` int(11) NOT NULL COMMENT 'NPDID discovery',
+>, <Line: +  `fldNpdidField` int(11) NOT NULL COMMENT 'NPDID field',
+>, <Line: +  `wlbWdssQcdate` date DEFAULT NULL,
+>, <Line: +  `prlNpdidProductionLicence` int(11) NOT NULL COMMENT 'NPDID production licence drilled in',
+>, <Line: +  `fclNpdidFacilityDrilling` int(11) DEFAULT NULL COMMENT 'NPDID drilling facility',
+>, <Line: +  `fclNpdidFacilityProducing` int(11) DEFAULT NULL COMMENT 'NPDID production facility',
+>, <Line: +  `wlbNpdidWellboreReclass` int(11) NOT NULL COMMENT 'NPDID wellbore reclassified from',
+>, <Line: +  `wlbDiskosWellOperator` varchar(40) NOT NULL COMMENT 'DISKOS well operator',
+>, <Line: +  `wlbDateUpdated` date NOT NULL COMMENT 'Date main level updated',
+>, <Line: +  `wlbDateUpdatedMax` date NOT NULL COMMENT 'Date all updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`wlbNpdidWellbore`),
+>, <Line: +  CONSTRAINT `wellbore_development_all_ibfk_7` FOREIGN KEY (`wlbDiskosWellOperator`) REFERENCES `company` (`cmpShortName`),
+>, <Line: +  CONSTRAINT `wellbore_development_all_ibfk_1` FOREIGN KEY (`wlbDrillingOperator`) REFERENCES `company` (`cmpLongName`),
+>, <Line: +  CONSTRAINT `wellbore_development_all_ibfk_2` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`),
+>, <Line: +  CONSTRAINT `wellbore_development_all_ibfk_3` FOREIGN KEY (`dscNpdidDiscovery`) REFERENCES `discovery` (`dscNpdidDiscovery`),
+>, <Line: +  CONSTRAINT `wellbore_development_all_ibfk_4` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`),
+>, <Line: +  CONSTRAINT `wellbore_development_all_ibfk_5` FOREIGN KEY (`prlNpdidProductionLicence`) REFERENCES `licence` (`prlNpdidLicence`),
+>, <Line: +  CONSTRAINT `wellbore_development_all_ibfk_6` FOREIGN KEY (`wlbNpdidWellboreReclass`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_document`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_document`;
+>, <Line: +CREATE TABLE `wellbore_document` (
+>, <Line: +  `wlbName` varchar(60) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbDocumentType` varchar(40) NOT NULL COMMENT 'Document type',
+>, <Line: +  `wlbDocumentName` varchar(200) NOT NULL COMMENT 'Document name',
+>, <Line: +  `wlbDocumentUrl` varchar(200) NOT NULL COMMENT 'Document URL',
+>, <Line: +  `wlbDocumentFormat` varchar(40) NOT NULL COMMENT 'Document format',
+>, <Line: +  `wlbDocumentSize` decimal(13,6) NOT NULL COMMENT 'Document size [MB]',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `wlbDocumentDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  `wellbore_document_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`wellbore_document_id`,`wlbNpdidWellbore`,`wlbDocumentName`),
+>, <Line: +  UNIQUE KEY `wellbore_document_id` (`wellbore_document_id`),
+>, <Line: +  CONSTRAINT `wellbore_document_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_dst`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_dst`;
+>, <Line: +CREATE TABLE `wellbore_dst` (
+>, <Line: +  `wlbName` varchar(60) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbDstTestNumber` decimal(13,6) NOT NULL COMMENT 'Test number',
+>, <Line: +  `wlbDstFromDepth` decimal(13,6) NOT NULL COMMENT 'From depth MD [m]',
+>, <Line: +  `wlbDstToDepth` decimal(13,6) NOT NULL COMMENT 'To depth MD [m]',
+>, <Line: +  `wlbDstChokeSize` decimal(13,6) NOT NULL COMMENT 'Choke size [mm]',
+>, <Line: +  `wlbDstFinShutInPress` decimal(13,6) NOT NULL COMMENT 'Final shut-in pressure [MPa]',
+>, <Line: +  `wlbDstFinFlowPress` decimal(13,6) NOT NULL COMMENT 'Final flow pressure [MPa]',
+>, <Line: +  `wlbDstBottomHolePress` decimal(13,6) NOT NULL COMMENT 'Bottom hole pressure [MPa]',
+>, <Line: +  `wlbDstOilProd` int(11) NOT NULL COMMENT 'Oil [Sm3/day]',
+>, <Line: +  `wlbDstGasProd` int(11) NOT NULL COMMENT 'Gas [Sm3/day]',
+>, <Line: +  `wlbDstOilDensity` decimal(13,6) NOT NULL COMMENT 'Oil density [g/cm3]',
+>, <Line: +  `wlbDstGasDensity` decimal(13,6) NOT NULL COMMENT 'Gas grav. rel.air',
+>, <Line: +  `wlbDstGasOilRelation` int(11) NOT NULL COMMENT 'GOR [m3/m3]',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `wlbDstDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`wlbNpdidWellbore`,`wlbDstTestNumber`),
+>, <Line: +  CONSTRAINT `wellbore_dst_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_exploration_all`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_exploration_all`;
+>, <Line: +CREATE TABLE `wellbore_exploration_all` (
+>, <Line: +  `wlbWellboreName` varchar(40) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbWell` varchar(40) NOT NULL COMMENT 'Well name',
+>, <Line: +  `wlbDrillingOperator` varchar(60) NOT NULL COMMENT 'Drilling operator',
+>, <Line: +  `wlbDrillingOperatorGroup` varchar(20) NOT NULL COMMENT 'Drilling operator group',
+>, <Line: +  `wlbProductionLicence` varchar(40) NOT NULL COMMENT 'Drilled in production licence',
+>, <Line: +  `wlbPurpose` varchar(40) NOT NULL COMMENT 'Purpose',
+>, <Line: +  `wlbStatus` varchar(40) DEFAULT NULL COMMENT 'Status',
+>, <Line: +  `wlbContent` varchar(40) DEFAULT NULL COMMENT 'Content',
+>, <Line: +  `wlbWellType` varchar(20) NOT NULL COMMENT 'Type',
+>, <Line: +  `wlbEntryDate` date DEFAULT NULL COMMENT 'Entry date',
+>, <Line: +  `wlbCompletionDate` date DEFAULT NULL COMMENT 'Completion date',
+>, <Line: +  `wlbField` varchar(40) DEFAULT NULL COMMENT 'Field',
+>, <Line: +  `wlbDrillPermit` varchar(10) NOT NULL COMMENT 'Drill permit',
+>, <Line: +  `wlbDiscovery` varchar(40) DEFAULT NULL COMMENT 'Discovery',
+>, <Line: +  `wlbDiscoveryWellbore` varchar(3) NOT NULL COMMENT 'Discovery wellbore',
+>, <Line: +  `wlbBottomHoleTemperature` int(11) DEFAULT NULL COMMENT 'Bottom hole temperature [°C]',
+>, <Line: +  `wlbSeismicLocation` varchar(200) DEFAULT NULL COMMENT 'Seismic location',
+>, <Line: +  `wlbMaxInclation` decimal(6,2) DEFAULT NULL COMMENT 'Maximum inclination [°]',
+>, <Line: +  `wlbKellyBushElevation` decimal(13,6) NOT NULL COMMENT 'Kelly bushing elevation [m]',
+>, <Line: +  `wlbFinalVerticalDepth` decimal(6,2) DEFAULT NULL COMMENT 'Final vertical depth (TVD) [m RKB]',
+>, <Line: +  `wlbTotalDepth` decimal(13,6) NOT NULL COMMENT 'Total depth (MD) [m RKB]',
+>, <Line: +  `wlbWaterDepth` decimal(13,6) NOT NULL COMMENT 'Water depth [m]',
+>, <Line: +  `wlbAgeAtTd` varchar(40) DEFAULT NULL COMMENT 'Oldest penetrated age',
+>, <Line: +  `wlbFormationAtTd` varchar(40) DEFAULT NULL COMMENT 'Oldest penetrated formation',
+>, <Line: +  `wlbMainArea` varchar(40) NOT NULL COMMENT 'Main area',
+>, <Line: +  `wlbDrillingFacility` varchar(50) NOT NULL COMMENT 'Drilling facility',
+>, <Line: +  `wlbFacilityTypeDrilling` varchar(40) NOT NULL COMMENT 'Facility type, drilling',
+>, <Line: +  `wlbLicensingActivity` varchar(40) NOT NULL COMMENT 'Licensing activity awarded in',
+>, <Line: +  `wlbMultilateral` varchar(3) NOT NULL COMMENT 'Multilateral',
+>, <Line: +  `wlbPurposePlanned` varchar(40) NOT NULL COMMENT 'Purpose - planned',
+>, <Line: +  `wlbEntryYear` int(11) NOT NULL COMMENT 'Entry year',
+>, <Line: +  `wlbCompletionYear` int(11) NOT NULL COMMENT 'Completion year',
+>, <Line: +  `wlbReclassFromWellbore` varchar(40) DEFAULT NULL COMMENT 'Reclassified from wellbore',
+>, <Line: +  `wlbReentryExplorationActivity` varchar(40) DEFAULT NULL COMMENT 'Reentry activity',
+>, <Line: +  `wlbPlotSymbol` int(11) NOT NULL COMMENT 'Plot symbol',
+>, <Line: +  `wlbFormationWithHc1` varchar(20) DEFAULT NULL COMMENT '1st level with HC, formation',
+>, <Line: +  `wlbAgeWithHc1` varchar(20) DEFAULT NULL COMMENT '1st level with HC, age',
+>, <Line: +  `wlbFormationWithHc2` varchar(20) DEFAULT NULL COMMENT '2nd level with HC, formation',
+>, <Line: +  `wlbAgeWithHc2` varchar(20) DEFAULT NULL COMMENT '2nd level with HC, age',
+>, <Line: +  `wlbFormationWithHc3` varchar(20) DEFAULT NULL COMMENT '3rd level with HC, formation',
+>, <Line: +  `wlbAgeWithHc3` char(20) DEFAULT NULL COMMENT '3rd level with HC, age',
+>, <Line: +  `wlbDrillingDays` int(11) NOT NULL COMMENT 'Drilling days',
+>, <Line: +  `wlbReentry` varchar(3) NOT NULL COMMENT 'Reentry',
+>, <Line: +  `wlbGeodeticDatum` varchar(6) DEFAULT NULL COMMENT 'Geodetic datum',
+>, <Line: +  `wlbNsDeg` int(11) NOT NULL COMMENT 'NS degrees',
+>, <Line: +  `wlbNsMin` int(11) NOT NULL COMMENT 'NS minutes',
+>, <Line: +  `wlbNsSec` decimal(6,2) NOT NULL COMMENT 'NS seconds',
+>, <Line: +  `wlbNsCode` varchar(1) NOT NULL COMMENT 'NS code',
+>, <Line: +  `wlbEwDeg` int(11) NOT NULL COMMENT 'EW degrees',
+>, <Line: +  `wlbEwMin` int(11) NOT NULL COMMENT 'EW minutes',
+>, <Line: +  `wlbEwSec` decimal(6,2) NOT NULL COMMENT 'EW seconds',
+>, <Line: +  `wlbEwCode` varchar(1) NOT NULL COMMENT 'EW code',
+>, <Line: +  `wlbNsDecDeg` decimal(13,6) NOT NULL COMMENT 'NS decimal degrees',
+>, <Line: +  `wlbEwDesDeg` decimal(13,6) NOT NULL COMMENT 'EW decimal degrees',
+>, <Line: +  `wlbNsUtm` decimal(13,6) NOT NULL COMMENT 'NS UTM [m]',
+>, <Line: +  `wlbEwUtm` decimal(13,6) NOT NULL COMMENT 'EW UTM [m]',
+>, <Line: +  `wlbUtmZone` int(11) NOT NULL COMMENT 'UTM zone',
+>, <Line: +  `wlbNamePart1` int(11) NOT NULL COMMENT 'Wellbore name, part 1',
+>, <Line: +  `wlbNamePart2` int(11) NOT NULL COMMENT 'Wellbore name, part 2',
+>, <Line: +  `wlbNamePart3` varchar(1) DEFAULT NULL COMMENT 'Wellbore name, part 3',
+>, <Line: +  `wlbNamePart4` int(11) NOT NULL COMMENT 'Wellbore name, part 4',
+>, <Line: +  `wlbNamePart5` varchar(2) DEFAULT NULL COMMENT 'Wellbore name, part 5',
+>, <Line: +  `wlbNamePart6` varchar(2) DEFAULT NULL COMMENT 'Wellbore name, part 6',
+>, <Line: +  `wlbPressReleaseUrl` varchar(200) DEFAULT NULL,
+>, <Line: +  `wlbFactPageUrl` varchar(200) NOT NULL COMMENT 'FactPage url',
+>, <Line: +  `wlbFactMapUrl` varchar(200) NOT NULL COMMENT 'FactMap url',
+>, <Line: +  `wlbDiskosWellboreType` varchar(20) NOT NULL COMMENT 'DISKOS Well Type',
+>, <Line: +  `wlbDiskosWellboreParent` varchar(40) DEFAULT NULL COMMENT 'DISKOS Wellbore Parent',
+>, <Line: +  `wlbWdssQcDate` date DEFAULT NULL COMMENT 'WDSS QC date',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `dscNpdidDiscovery` int(11) DEFAULT NULL COMMENT 'NPDID discovery',
+>, <Line: +  `fldNpdidField` int(11) DEFAULT NULL COMMENT 'NPDID field',
+>, <Line: +  `fclNpdidFacilityDrilling` int(11) NOT NULL COMMENT 'NPDID drilling facility',
+>, <Line: +  `wlbNpdidWellboreReclass` int(11) NOT NULL COMMENT 'NPDID wellbore reclassified from',
+>, <Line: +  `prlNpdidProductionLicence` int(11) NOT NULL COMMENT 'NPDID production licence drilled in',
+>, <Line: +  `wlbDiskosWellOperator` varchar(40) NOT NULL COMMENT 'DISKOS well operator',
+>, <Line: +  `wlbDateUpdated` date NOT NULL COMMENT 'Date main level updated',
+>, <Line: +  `wlbDateUpdatedMax` date NOT NULL COMMENT 'Date all updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`wlbNpdidWellbore`),
+>, <Line: +  CONSTRAINT `wellbore_exploration_all_ibfk_6` FOREIGN KEY (`prlNpdidProductionLicence`) REFERENCES `licence` (`prlNpdidLicence`),
+>, <Line: +  CONSTRAINT `wellbore_exploration_all_ibfk_1` FOREIGN KEY (`wlbDrillingOperator`) REFERENCES `company` (`cmpLongName`),
+>, <Line: +  CONSTRAINT `wellbore_exploration_all_ibfk_2` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`),
+>, <Line: +  CONSTRAINT `wellbore_exploration_all_ibfk_3` FOREIGN KEY (`dscNpdidDiscovery`) REFERENCES `discovery` (`dscNpdidDiscovery`),
+>, <Line: +  CONSTRAINT `wellbore_exploration_all_ibfk_4` FOREIGN KEY (`fldNpdidField`) REFERENCES `field` (`fldNpdidField`),
+>, <Line: +  CONSTRAINT `wellbore_exploration_all_ibfk_5` FOREIGN KEY (`wlbNpdidWellboreReclass`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_formation_top`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_formation_top`;
+>, <Line: +CREATE TABLE `wellbore_formation_top` (
+>, <Line: +  `wlbName` varchar(60) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `lsuTopDepth` decimal(13,6) NOT NULL COMMENT 'Top depth [m]',
+>, <Line: +  `lsuBottomDepth` decimal(13,6) NOT NULL COMMENT 'Bottom depth [m]',
+>, <Line: +  `lsuName` varchar(20) NOT NULL COMMENT 'Lithostrat. unit',
+>, <Line: +  `lsuLevel` varchar(9) NOT NULL COMMENT 'Level',
+>, <Line: +  `lsuNameParent` varchar(20) DEFAULT NULL COMMENT 'Lithostrat. unit, parent',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `lsuNpdidLithoStrat` int(11) NOT NULL COMMENT 'NPDID lithostrat. unit',
+>, <Line: +  `lsuNpdidLithoStratParent` int(11) DEFAULT NULL COMMENT 'NPDID parent lithostrat. unit',
+>, <Line: +  `lsuWellboreUpdatedDate` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`wlbNpdidWellbore`,`lsuNpdidLithoStrat`,`lsuTopDepth`,`lsuBottomDepth`),
+>, <Line: +  CONSTRAINT `wellbore_formation_top_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_mud`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_mud`;
+>, <Line: +CREATE TABLE `wellbore_mud` (
+>, <Line: +  `wlbName` varchar(60) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbMD` decimal(13,6) NOT NULL COMMENT 'Depth MD [m]',
+>, <Line: +  `wlbMudWeightAtMD` decimal(13,6) NOT NULL COMMENT 'Mud weight [g/cm3]',
+>, <Line: +  `wlbMudViscosityAtMD` decimal(13,6) NOT NULL COMMENT 'Visc. [mPa.s]',
+>, <Line: +  `wlbYieldPointAtMD` decimal(13,6) NOT NULL COMMENT 'Yield point [Pa]',
+>, <Line: +  `wlbMudType` varchar(40) DEFAULT NULL COMMENT 'Mud type',
+>, <Line: +  `wlbMudDateMeasured` date DEFAULT NULL COMMENT 'Date measured',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `wlbMudDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  `wellbore_mud_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`wellbore_mud_id`,`wlbNpdidWellbore`),
+>, <Line: +  UNIQUE KEY `wellbore_mud_id` (`wellbore_mud_id`),
+>, <Line: +  CONSTRAINT `wellbore_mud_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_oil_sample`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_oil_sample`;
+>, <Line: +CREATE TABLE `wellbore_oil_sample` (
+>, <Line: +  `wlbName` varchar(60) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbOilSampleTestType` varchar(4) DEFAULT NULL COMMENT 'Test type',
+>, <Line: +  `wlbOilSampleTestNumber` varchar(10) DEFAULT NULL COMMENT 'Bottle test number',
+>, <Line: +  `wlbOilSampleTopDepth` decimal(13,6) NOT NULL COMMENT 'Top depth MD [m]',
+>, <Line: +  `wlbOilSampleBottomDepth` decimal(13,6) NOT NULL COMMENT 'Bottom depth MD [m]',
+>, <Line: +  `wlbOilSampleFluidType` varchar(20) DEFAULT NULL COMMENT 'Fluid type',
+>, <Line: +  `wlbOilSampleTestDate` date DEFAULT NULL COMMENT 'Test date and time of day',
+>, <Line: +  `wlbOilSampledateReceivedDate` date DEFAULT NULL COMMENT 'Received date',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `wlbOilSampleDateUpdated` date DEFAULT NULL COMMENT 'Date updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  `wellbore_oil_sample_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+>, <Line: +  PRIMARY KEY (`wellbore_oil_sample_id`,`wlbNpdidWellbore`),
+>, <Line: +  UNIQUE KEY `wellbore_oil_sample_id` (`wellbore_oil_sample_id`),
+>, <Line: +  CONSTRAINT `wellbore_oil_sample_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wellbore_shallow_all`
+>, <Line: +DROP TABLE IF EXISTS `wellbore_shallow_all`;
+>, <Line: +CREATE TABLE `wellbore_shallow_all` (
+>, <Line: +  `wlbWellboreName` varchar(40) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `wlbWell` varchar(40) NOT NULL COMMENT 'Well name',
+>, <Line: +  `wlbDrillingOperator` varchar(60) NOT NULL COMMENT 'Drilling operator',
+>, <Line: +  `wlbProductionLicence` varchar(40) DEFAULT NULL COMMENT 'Drilled in production licence',
+>, <Line: +  `wlbDrillingFacility` varchar(50) DEFAULT NULL COMMENT 'Drilling facility',
+>, <Line: +  `wlbEntryDate` date DEFAULT NULL COMMENT 'Entry date',
+>, <Line: +  `wlbCompletionDate` date DEFAULT NULL COMMENT 'Completion date',
+>, <Line: +  `wlbDrillPermit` varchar(10) NOT NULL COMMENT 'Drill permit',
+>, <Line: +  `wlbTotalDepth` decimal(13,6) NOT NULL COMMENT 'Total depth (MD) [m RKB]',
+>, <Line: +  `wlbWaterDepth` decimal(13,6) NOT NULL COMMENT 'Water depth [m]',
+>, <Line: +  `wlbMainArea` varchar(40) NOT NULL COMMENT 'Main area',
+>, <Line: +  `wlbEntryYear` int(11) NOT NULL COMMENT 'Entry year',
+>, <Line: +  `wlbCompletionYear` int(11) NOT NULL COMMENT 'Completion year',
+>, <Line: +  `wlbSeismicLocation` varchar(200) DEFAULT NULL COMMENT 'Seismic location',
+>, <Line: +  `wlbGeodeticDatum` varchar(6) DEFAULT NULL COMMENT 'Geodetic datum',
+>, <Line: +  `wlbNsDeg` int(11) NOT NULL COMMENT 'NS degrees',
+>, <Line: +  `wlbNsMin` int(11) NOT NULL COMMENT 'NS minutes',
+>, <Line: +  `wlbNsSec` decimal(6,2) NOT NULL COMMENT 'NS seconds',
+>, <Line: +  `wlbNsCode` varchar(1) DEFAULT NULL COMMENT 'NS code',
+>, <Line: +  `wlbEwDeg` int(11) NOT NULL COMMENT 'EW degrees',
+>, <Line: +  `wlbEwMin` int(11) NOT NULL COMMENT 'EW minutes',
+>, <Line: +  `wlbEwSec` decimal(6,2) NOT NULL COMMENT 'EW seconds',
+>, <Line: +  `wlbEwCode` varchar(1) DEFAULT NULL COMMENT 'EW code',
+>, <Line: +  `wlbNsDecDeg` decimal(13,6) NOT NULL COMMENT 'NS decimal degrees',
+>, <Line: +  `wlbEwDesDeg` decimal(13,6) NOT NULL COMMENT 'EW decimal degrees',
+>, <Line: +  `wlbNsUtm` decimal(13,6) NOT NULL COMMENT 'NS UTM [m]',
+>, <Line: +  `wlbEwUtm` decimal(13,6) NOT NULL COMMENT 'EW UTM [m]',
+>, <Line: +  `wlbUtmZone` int(11) NOT NULL COMMENT 'UTM zone',
+>, <Line: +  `wlbNamePart1` int(11) NOT NULL COMMENT 'Wellbore name, part 1',
+>, <Line: +  `wlbNamePart2` int(11) NOT NULL COMMENT 'Wellbore name, part 2',
+>, <Line: +  `wlbNamePart3` varchar(1) NOT NULL COMMENT 'Wellbore name, part 3',
+>, <Line: +  `wlbNamePart4` int(11) NOT NULL COMMENT 'Wellbore name, part 4',
+>, <Line: +  `wlbNamePart5` varchar(2) DEFAULT NULL COMMENT 'Wellbore name, part 5',
+>, <Line: +  `wlbNamePart6` varchar(2) DEFAULT NULL COMMENT 'Wellbore name, part 6',
+>, <Line: +  `wlbDateUpdated` date NOT NULL COMMENT 'Date main level updated',
+>, <Line: +  `wlbDateUpdatedMax` date NOT NULL COMMENT 'Date all updated',
+>, <Line: +  `dateSyncNPD` date NOT NULL,
+>, <Line: +  PRIMARY KEY (`wlbNpdidWellbore`),
+>, <Line: +  CONSTRAINT `wellbore_shallow_all_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Table structure for table `wlbPoint`
+>, <Line: +DROP TABLE IF EXISTS `wlbPoint`;
+>, <Line: +CREATE TABLE `wlbPoint` (
+>, <Line: +  `wlbNpdidWellbore` int(11) NOT NULL COMMENT 'NPDID wellbore',
+>, <Line: +  `wlbWellName` varchar(40) NOT NULL,
+>, <Line: +  `wlbWellboreName` varchar(40) NOT NULL COMMENT 'Wellbore name',
+>, <Line: +  `wlbField` varchar(40) DEFAULT NULL COMMENT 'Field',
+>, <Line: +  `wlbProductionLicence` varchar(40) DEFAULT NULL COMMENT 'Drilled in production licence',
+>, <Line: +  `wlbWellType` varchar(20) DEFAULT NULL COMMENT 'Type',
+>, <Line: +  `wlbDrillingOperator` varchar(60) NOT NULL COMMENT 'Drilling operator',
+>, <Line: +  `wlbMultilateral` varchar(3) NOT NULL COMMENT 'Multilateral',
+>, <Line: +  `wlbDrillingFacility` varchar(50) DEFAULT NULL COMMENT 'Drilling facility',
+>, <Line: +  `wlbProductionFacility` varchar(50) DEFAULT NULL COMMENT 'Production facility',
+>, <Line: +  `wlbEntryDate` date DEFAULT NULL COMMENT 'Entry date',
+>, <Line: +  `wlbCompletionDate` date DEFAULT NULL COMMENT 'Completion date',
+>, <Line: +  `wlbContent` varchar(40) DEFAULT NULL COMMENT 'Content',
+>, <Line: +  `wlbStatus` varchar(40) DEFAULT NULL COMMENT 'Status',
+>, <Line: +  `wlbSymbol` int(11) NOT NULL,
+>, <Line: +  `wlbPurpose` varchar(40) DEFAULT NULL COMMENT 'Purpose',
+>, <Line: +  `wlbWaterDepth` decimal(13,6) NOT NULL COMMENT 'Water depth [m]',
+>, <Line: +  `wlbFactPageUrl` varchar(200) DEFAULT NULL COMMENT 'FactPage url',
+>, <Line: +  `wlbFactMapUrl` varchar(200) DEFAULT NULL COMMENT 'FactMap url',
+>, <Line: +  `wlbDiscoveryWellbore` varchar(3) NOT NULL COMMENT 'Discovery wellbore',
+>, <Line: +  `wlbPointGeometryWKT` geometry NOT NULL,
+>, <Line: +  PRIMARY KEY (`wlbNpdidWellbore`),
+>, <Line: +  CONSTRAINT `wlbPoint_ibfk_1` FOREIGN KEY (`wlbNpdidWellbore`) REFERENCES `wellbore_npdid_overview` (`wlbNpdidWellbore`)
+>, <Line: +);
+>, <Line: +-- Dump completed on 2013-05-14 23:53:58
+>]
+[]

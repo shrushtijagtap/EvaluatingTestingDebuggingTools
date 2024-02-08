@@ -1,0 +1,30 @@
+[<Line: +package org.mp4parser.streaming.output.mp4;
+>, <Line: +import org.junit.Test;
+>, <Line: +import org.mp4parser.streaming.StreamingTrack;
+>, <Line: +import org.mp4parser.streaming.input.h264.H264AnnexBTrack;
+>, <Line: +import java.io.FileOutputStream;
+>, <Line: +import java.io.OutputStream;
+>, <Line: +import java.nio.channels.Channels;
+>, <Line: +import java.util.Collections;
+>, <Line: +/**
+>, <Line: + * Created by sannies on 20.10.2015.
+>, <Line: + */
+>, <Line: +public class StandardMp4WriterTest {
+>, <Line: +    @Test
+>, <Line: +    public void testMuxing() throws Exception {
+>, <Line: +        H264AnnexBTrack b = new H264AnnexBTrack(StandardMp4WriterTest.class.getResourceAsStream("/org/mp4parser/streaming/input/h264/tos.h264"));
+>, <Line: +        OutputStream baos = new FileOutputStream("output.mp4");
+>, <Line: +        StandardMp4Writer writer = new StandardMp4Writer(Collections.<StreamingTrack>singletonList(b), Channels.newChannel(baos));
+>, <Line: +        //MultiTrackFragmentedMp4Writer writer = new MultiTrackFragmentedMp4Writer(new StreamingTrack[]{b}, new ByteArrayOutputStream());
+>, <Line: +        b.call();
+>, <Line: +        writer.close();
+>, <Line: +        //Walk.through(isoFile);
+>, <Line: +        //List<Sample> s = new SampleList(1, isoFile, new InMemRandomAccessSourceImpl(baos.toByteArray()));
+>, <Line: +        //for (Sample sample : s) {
+>, <Line: +//            System.err.println("s: " + sample.getSize());
+>, <Line: +        //          sample.asByteBuffer();
+>, <Line: +        //    }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

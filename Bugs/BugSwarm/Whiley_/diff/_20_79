@@ -1,0 +1,6 @@
+[<Line: +type scf4list is (int[] list) where |list| > 0
+>, <Line: +    int[] x = [0;0]
+>]
+[<Line: -type scf4list is ([int] list) where |list| > 0
+>, <Line: -    [int] x = [0;0]
+>]

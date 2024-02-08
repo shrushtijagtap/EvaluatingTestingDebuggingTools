@@ -1,0 +1,11 @@
+[<Line: +package org.mp4parser.support;
+>, <Line: +import org.mp4parser.FullBox;
+>, <Line: +import org.mp4parser.tools.IsoTypeReader;
+>, <Line: +import org.mp4parser.tools.IsoTypeWriter;
+>]
+[<Line: -package com.googlecode.mp4parser;
+>, <Line: -import com.coremedia.iso.IsoTypeReader;
+>, <Line: -import com.coremedia.iso.IsoTypeWriter;
+>, <Line: -import com.coremedia.iso.boxes.FullBox;
+>, <Line: -import com.googlecode.mp4parser.annotations.DoNotParseDetail;
+>]

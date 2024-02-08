@@ -1,0 +1,34 @@
+[<Line: +	/** One parent was filtered out. */
+>, <Line: +	public static String FILTER_GT_ONE_PARENT_FILTERED = "OneParentGtFiltered";
+>, <Line: +	/** Both parents were filtered out. */
+>, <Line: +	public static String FILTER_GT_BOTH_PARENTS_FILTERED = "BothParentsGtFiltered";
+>, <Line: +	 * @param header The {@link VCFHeader} to extend.
+>, <Line: +		if (!header.hasFormatLine("FT")) header.addMetaDataLine(new VCFFormatHeaderLine("FT", 1,
+>, <Line: +				VCFHeaderLineType.String, "Filters applied to genotype call"));
+>, <Line: +		header.addMetaDataLine(new VCFFilterHeaderLine(FILTER_GT_MAX_COV,
+>, <Line: +				"Genotype has coverage >" + options.getMaxCov()));
+>, <Line: +		header.addMetaDataLine(new VCFFilterHeaderLine(FILTER_GT_MIN_GQ,
+>, <Line: +				"Genotype has quality (GQ) <" + options.getMinGtGq()));
+>, <Line: +				"Hom. alt genotype has alternative allele fraction <"
+>, <Line: +						+ options.getMinGtAafHomAlt()));
+>, <Line: +				"Variant frequency >" + options.getMaxAlleleFrequencyAd()
+>, <Line: +						+ " (threshold for AD inheritance), variant will be annotated with "
+>, <Line: +						+ "compatibility with dominant inheritance regardlessly"));
+>, <Line: +				"Variant frequency >" + options.getMaxAlleleFrequencyAd()
+>, <Line: +						+ " (threshold for AR inheritance), variant will not be considered for "
+>, <Line: +						+ "composite recessive inheritance but for homozygous recessive inheritance "
+>, <Line: +						+ "regardlessly"));
+>]
+[<Line: -	 * @param header
+>, <Line: -	 *            The {@link VCFHeader} to extend.
+>, <Line: -		if (!header.hasFormatLine("FT"))
+>, <Line: -			header.addMetaDataLine(
+>, <Line: -					new VCFFormatHeaderLine("FT", 1, VCFHeaderLineType.String, "Filters applied to genotype call"));
+>, <Line: -		header.addMetaDataLine(
+>, <Line: -				new VCFFilterHeaderLine(FILTER_GT_MAX_COV, "Genotype has coverage >" + options.getMaxCov()));
+>, <Line: -		header.addMetaDataLine(
+>, <Line: -				new VCFFilterHeaderLine(FILTER_GT_MIN_GQ, "Genotype has quality (GQ) <" + options.getMinGtGq()));
+>, <Line: -				"Hom. alt genotype has alternative allele fraction <" + options.getMinGtAafHomAlt()));
+>, <Line: -				"Variant frequency >" + options.getMaxAlleleFrequencyAd() + " (threshold for AD inheritance)"));
+>, <Line: -				"Variant frequency >" + options.getMaxAlleleFrequencyAd() + " (threshold for AR inheritance)"));
+>]

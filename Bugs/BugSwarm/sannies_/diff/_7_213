@@ -1,0 +1,16 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.support.AbstractBox;
+>, <Line: +    protected long getContentSize() {
+>, <Line: +        return data.length;
+>, <Line: +    public void setData(byte[] data) {
+>, <Line: +        this.data = data;
+>, <Line: +    }
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.googlecode.mp4parser.AbstractBox;
+>, <Line: -    protected long getContentSize() {
+>, <Line: -        return data.length;
+>, <Line: -    }
+>, <Line: -    public void setData(byte[] data) {
+>, <Line: -        this.data = data;
+>]

@@ -1,0 +1,8 @@
+[<Line: +package org.mp4parser.tools;
+>, <Line: +    public ByteBufferByteChannel(byte[] byteArray) {
+>, <Line: +        this(ByteBuffer.wrap(byteArray));
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.util;
+>, <Line: -import java.io.EOFException;
+>]

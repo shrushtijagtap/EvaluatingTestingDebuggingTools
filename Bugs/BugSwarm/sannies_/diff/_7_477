@@ -1,0 +1,9 @@
+[<Line: +package org.mp4parser.muxer.builder;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +    long[] sampleNumbers(Track track);
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -    public long[] sampleNumbers(Track track);
+>]

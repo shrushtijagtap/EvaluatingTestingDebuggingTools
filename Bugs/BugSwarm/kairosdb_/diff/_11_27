@@ -1,0 +1,10 @@
+[<Line: +				PluginName ann = (PluginName) bindingClass.getAnnotation(PluginName.class);
+>, <Line: +					throw new IllegalStateException("Aggregator class " + bindingClass.getName() +
+>, <Line: +							" does not have required annotation " + PluginName.class.getName());
+>]
+[<Line: -import org.kairosdb.core.aggregator.Aggregator;
+>, <Line: -import org.kairosdb.core.aggregator.annotation.AggregatorName;
+>, <Line: -				PluginName ann = (PluginName)bindingClass.getAnnotation(PluginName.class);
+>, <Line: -					throw new IllegalStateException("Aggregator class "+bindingClass.getName()+
+>, <Line: -							" does not have required annotation "+PluginName.class.getName());
+>]

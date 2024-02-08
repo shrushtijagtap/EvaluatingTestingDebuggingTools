@@ -1,0 +1,40 @@
+[<Line: +                        return new Dispatcher.ForJava7CapableVm(methodType.getMethod("returnType"), methodType.getMethod("parameterArray"));
+>, <Line: +                            return new Dispatcher.ForJava8CapableVm(Class.forName("java.lang.invoke.MethodHandles").getMethod("publicLookup"),
+>, <Line: +                                    Class.forName("java.lang.invoke.MethodHandleInfo").getMethod("getName"),
+>, <Line: +                                    Class.forName("java.lang.invoke.MethodHandleInfo").getMethod("getDeclaringClass"),
+>, <Line: +                                    Class.forName("java.lang.invoke.MethodHandleInfo").getMethod("getReferenceKind"),
+>, <Line: +                                    Class.forName("java.lang.invoke.MethodHandleInfo").getMethod("getMethodType"),
+>, <Line: +                                    JavaType.METHOD_TYPE.load().getMethod("returnType"),
+>, <Line: +                                    JavaType.METHOD_TYPE.load().getMethod("parameterArray"),
+>, <Line: +                                    JavaType.METHOD_HANDLES_LOOKUP.load().getMethod("lookupClass"),
+>, <Line: +                                    JavaType.METHOD_HANDLES_LOOKUP.load().getMethod("revealDirect", JavaType.METHOD_HANDLE.load()));
+>, <Line: +                            return new Dispatcher.ForJava7CapableVm(Class.forName("java.lang.invoke.MethodHandles").getMethod("publicLookup"),
+>, <Line: +                                    Class.forName("java.lang.invoke.MethodHandleInfo").getMethod("getName"),
+>, <Line: +                                    Class.forName("java.lang.invoke.MethodHandleInfo").getMethod("getDeclaringClass"),
+>, <Line: +                                    Class.forName("java.lang.invoke.MethodHandleInfo").getMethod("getReferenceKind"),
+>, <Line: +                                    Class.forName("java.lang.invoke.MethodHandleInfo").getMethod("getMethodType"),
+>, <Line: +                                    JavaType.METHOD_TYPE.load().getMethod("returnType"),
+>, <Line: +                                    JavaType.METHOD_TYPE.load().getMethod("parameterArray"),
+>, <Line: +                                    JavaType.METHOD_HANDLES_LOOKUP.load().getMethod("lookupClass"),
+>, <Line: +                                    Class.forName("java.lang.invoke.MethodHandleInfo").getConstructor(JavaType.METHOD_HANDLE.load()));
+>]
+[<Line: -                        return new Dispatcher.ForJava7CapableVm(methodType.getDeclaredMethod("returnType"), methodType.getDeclaredMethod("parameterArray"));
+>, <Line: -                            return new Dispatcher.ForJava8CapableVm(Class.forName("java.lang.invoke.MethodHandles").getDeclaredMethod("publicLookup"),
+>, <Line: -                                    Class.forName("java.lang.invoke.MethodHandleInfo").getDeclaredMethod("getName"),
+>, <Line: -                                    Class.forName("java.lang.invoke.MethodHandleInfo").getDeclaredMethod("getDeclaringClass"),
+>, <Line: -                                    Class.forName("java.lang.invoke.MethodHandleInfo").getDeclaredMethod("getReferenceKind"),
+>, <Line: -                                    Class.forName("java.lang.invoke.MethodHandleInfo").getDeclaredMethod("getMethodType"),
+>, <Line: -                                    JavaType.METHOD_TYPE.load().getDeclaredMethod("returnType"),
+>, <Line: -                                    JavaType.METHOD_TYPE.load().getDeclaredMethod("parameterArray"),
+>, <Line: -                                    JavaType.METHOD_HANDLES_LOOKUP.load().getDeclaredMethod("lookupClass"),
+>, <Line: -                                    JavaType.METHOD_HANDLES_LOOKUP.load().getDeclaredMethod("revealDirect", JavaType.METHOD_HANDLE.load()));
+>, <Line: -                            return new Dispatcher.ForJava7CapableVm(Class.forName("java.lang.invoke.MethodHandles").getDeclaredMethod("publicLookup"),
+>, <Line: -                                    Class.forName("java.lang.invoke.MethodHandleInfo").getDeclaredMethod("getName"),
+>, <Line: -                                    Class.forName("java.lang.invoke.MethodHandleInfo").getDeclaredMethod("getDeclaringClass"),
+>, <Line: -                                    Class.forName("java.lang.invoke.MethodHandleInfo").getDeclaredMethod("getReferenceKind"),
+>, <Line: -                                    Class.forName("java.lang.invoke.MethodHandleInfo").getDeclaredMethod("getMethodType"),
+>, <Line: -                                    JavaType.METHOD_TYPE.load().getDeclaredMethod("returnType"),
+>, <Line: -                                    JavaType.METHOD_TYPE.load().getDeclaredMethod("parameterArray"),
+>, <Line: -                                    JavaType.METHOD_HANDLES_LOOKUP.load().getDeclaredMethod("lookupClass"),
+>, <Line: -                                    Class.forName("java.lang.invoke.MethodHandleInfo").getDeclaredConstructor(JavaType.METHOD_HANDLE.load()));
+>]

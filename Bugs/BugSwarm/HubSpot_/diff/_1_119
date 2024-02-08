@@ -1,0 +1,5 @@
+[]
+[<Line: -        <div class="col-md-12">
+>, <Line: -            <input type="search" class="big-search-box" placeholder="Filter services" value="{{ searchFilter }}" required />
+>, <Line: -        </div>
+>]

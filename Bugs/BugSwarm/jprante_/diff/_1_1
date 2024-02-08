@@ -1,0 +1,195 @@
+[<Line: +def xbibGroup = 'org.xbib.elasticsearch.importer'
+>, <Line: +def xbibVersion = '2.2.0.0'
+>, <Line: +group = xbibGroup
+>, <Line: +version = xbibVersion
+>, <Line: +ext {
+>, <Line: +    pluginName = 'elasticsearch-jdbc'
+>, <Line: +    pluginClassname  = 'org.xbib.elasticsearch.plugin.jdbc.JDBCPlugin'
+>, <Line: +    pluginDescription = 'JDBC importer service for Elasticsearch'
+>, <Line: +    versions = [
+>, <Line: +      'elasticsearch' : '2.2.0',
+>, <Line: +      'elasticsearch-helper' : '2.2.0.0',
+>, <Line: +      'log4j': '2.5',
+>, <Line: +      'wagon' : '2.10',
+>, <Line: +      'jsr166e': '1.1.0',
+>, <Line: +      'jna' : '4.1.0',
+>, <Line: +      'spatial4j': '0.5',
+>, <Line: +      'jts' : '1.13',
+>, <Line: +      'jdbc-driver-csv': '1.0.0',
+>, <Line: +      'junit' : '4.12',
+>, <Line: +      'testng':  '6.9.10',
+>, <Line: +      'mysql' : '5.1.33',
+>, <Line: +      'postgresql' : '9.3-1102-jdcb41'
+>, <Line: +    ]
+>, <Line: +    databases = ['derby', 'h2', 'hsqldb']
+>, <Line: +}
+>, <Line: +buildscript {
+>, <Line: +    repositories {
+>, <Line: +        mavenLocal()
+>, <Line: +        mavenCentral()
+>, <Line: +        jcenter()
+>, <Line: +        maven {
+>, <Line: +            url "http://xbib.org/repository"
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>, <Line: +apply plugin: 'java'
+>, <Line: +apply plugin: 'maven'
+>, <Line: +repositories {
+>, <Line: +    mavenLocal()
+>, <Line: +    mavenCentral()
+>, <Line: +    jcenter()
+>, <Line: +    maven {
+>, <Line: +        url "http://xbib.org/repository"
+>, <Line: +    }
+>, <Line: +}
+>, <Line: +sourceSets {
+>, <Line: +    integrationTest {
+>, <Line: +        java {
+>, <Line: +            compileClasspath += main.output + test.output
+>, <Line: +            runtimeClasspath += main.output + test.output
+>, <Line: +            srcDir file('src/integration-test/java')
+>, <Line: +        }
+>, <Line: +        resources {
+>, <Line: +            srcDir file('src/integration-test/resources')
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>, <Line: +configurations.all {
+>, <Line: +    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+>, <Line: +    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+>, <Line: +}
+>, <Line: +configurations {
+>, <Line: +    provided
+>, <Line: +    releaseJars
+>, <Line: +    wagon
+>, <Line: +    integrationTestCompile.extendsFrom testCompile
+>, <Line: +    integrationTestRuntime.extendsFrom testRuntime
+>, <Line: +}
+>, <Line: +dependencies {
+>, <Line: +    compile 'org.elasticsearch:elasticsearch:' + versions.elasticsearch
+>, <Line: +    compile 'org.xbib.elasticsearch.plugin:elasticsearch-helper:' + versions.'elasticsearch-helper'
+>, <Line: +    compile 'org.apache.logging.log4j:log4j-slf4j-impl:' + versions.log4j
+>, <Line: +    compile 'org.apache.logging.log4j:log4j-core:'+ versions.log4j
+>, <Line: +    compile('com.vividsolutions:jts:1.13') {
+>, <Line: +        exclude group: 'xerces'
+>, <Line: +    }
+>, <Line: +    releaseJars 'org.elasticsearch:elasticsearch:' + versions.elasticsearch
+>, <Line: +    releaseJars 'org.apache.logging.log4j:log4j-slf4j-impl:' + versions.log4j
+>, <Line: +    releaseJars 'org.apache.logging.log4j:log4j-core:'+ versions.log4j
+>, <Line: +    // download from Oracle JDBC download site (needs registration)
+>, <Line: +    // http://www.oracle.com/technetwork/database/features/jdbc/jdbc-drivers-12c-download-1958347.html
+>, <Line: +    // releaseJars 'com.oracle:ojdbc7:12.1.0.1'
+>, <Line: +    testCompile 'org.testng:testng:' + versions.testng
+>, <Line: +    testCompile 'net.java.dev.jna:jna:' + versions.jna
+>, <Line: +    // Workaround for a known issue with TestNG 6.x: explicitly add Guice (Gradle will fail to run tests otherwise)
+>, <Line: +    testCompile 'com.google.inject:guice:3.0'
+>, <Line: +    testCompile 'org.uncommons:reportng:1.1.4'
+>, <Line: +    testCompile 'org.apache.logging.log4j:log4j-slf4j-impl:' + versions.log4j
+>, <Line: +    testCompile 'org.apache.logging.log4j:log4j-core:'+ versions.log4j
+>, <Line: +    integrationTestCompile 'org.testng:testng:' + versions.testng
+>, <Line: +    integrationTestCompile 'org.elasticsearch:elasticsearch:' + versions.elasticsearch
+>, <Line: +    integrationTestCompile 'net.java.dev.jna:jna:' + versions.jna
+>, <Line: +    wagon 'org.apache.maven.wagon:wagon-ssh-external:' + versions.wagon
+>, <Line: +}
+>, <Line: +task makePluginDescriptor(type: Copy) {
+>, <Line: +    from 'src/main/templates'
+>, <Line: +    into 'build/tmp/plugin'
+>, <Line: +    expand([
+>, <Line: +            'descriptor' : [
+>, <Line: +                    'name': pluginName,
+>, <Line: +                    'classname': pluginClassname,
+>, <Line: +                    'description': pluginDescription,
+>, <Line: +                    'jvm': true,
+>, <Line: +                    'site': false,
+>, <Line: +                    'isolated': true,
+>, <Line: +                    'version': project.property('version'),
+>, <Line: +                    'javaVersion': project.property('targetCompatibility'),
+>, <Line: +                    'elasticsearchVersion' : versions.elasticsearch
+>, <Line: +            ]
+>, <Line: +    ])
+>, <Line: +}
+>, <Line: +task buildPluginZip(type: Zip, dependsOn: [':jar',':makePluginDescriptor']) {
+>, <Line: +    from 'build/libs/' + project.property('name') + '-' + project.property('version') + '.jar'
+>, <Line: +    from configurations.releaseJars
+>, <Line: +    from 'src/main/webapp'
+>, <Line: +    from 'build/tmp/plugin'
+>, <Line: +    classifier = 'plugin'
+>, <Line: +}
+>, <Line: +task unpackPlugin(type: Copy, dependsOn: [':buildPluginZip']) {
+>, <Line: +    from 'build/libs/' + project.property('name') + '-' + project.property('version') + '.jar'
+>, <Line: +    from configurations.releaseJars
+>, <Line: +    from 'src/main/webapp'
+>, <Line: +    from 'build/tmp/plugin'
+>, <Line: +    into 'plugins/' + pluginName
+>, <Line: +}
+>, <Line: +task integrationTest(type: Test, dependsOn: [':unpackPlugin']) {
+>, <Line: +    testClassesDir = sourceSets.integrationTest.output.classesDir
+>, <Line: +    classpath = configurations.integrationTestCompile
+>, <Line: +    classpath += fileTree('plugins/' + pluginName).include('*.jar')
+>, <Line: +    classpath += sourceSets.integrationTest.output
+>, <Line: +    // remove identical jars from classpath, otherwise Elasticsearch will complain a "jar hell"
+>, <Line: +    classpath -= configurations.releaseJars
+>, <Line: +    outputs.upToDateWhen { false }
+>, <Line: +    systemProperty 'log4j.configurationFile', projectDir.absolutePath + '/src/test/resources/log4j2.xml'
+>, <Line: +    systemProperty 'path.home', projectDir.absolutePath
+>, <Line: +}
+>, <Line: +tasks.withType(Test) {
+>, <Line: +    reports.html.destination = file("${reporting.baseDir}/${name}")
+>, <Line: +}
+>, <Line: +/*
+>, <Line: +test {
+>, <Line: +    useTestNG() {
+>, <Line: +        testLogging.showStandardStreams = false
+>, <Line: +        suiteXmlBuilder().suite(name: 'gradle-testng-jdbc', verbose: '1') {
+>, <Line: +            test(name : 'Support Tests') {
+>, <Line: +                classes([:]) {
+>, <Line: +                    'class'(name: 'org.xbib.elasticsearch.common.util.ValuesTests')
+>, <Line: +                    'class'(name: 'org.xbib.elasticsearch.common.util.ValueListenerTests')
+>, <Line: +                    'class'(name: 'org.xbib.elasticsearch.common.util.SQLCommandTests')
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    options {
+>, <Line: +        listeners << 'org.xbib.elasticsearch.util.TestListener'
+>, <Line: +        listeners << 'org.uncommons.reportng.HTMLReporter'
+>, <Line: +        listeners << 'org.uncommons.reportng.JUnitXMLReporter'
+>, <Line: +    }
+>, <Line: +    ext.useDefaultListeners = true
+>, <Line: +    ext.workingDirectory = 'build/'
+>, <Line: +}
+>, <Line: +*/
+>, <Line: +databases.each { database ->
+>, <Line: +    apply from: rootProject.file("gradle/${database}.gradle")
+>, <Line: +}
+>, <Line: +check {
+>, <Line: +    databases.each { database ->
+>, <Line: +        dependsOn "${database}IntegrationTest"
+>, <Line: +    }
+>, <Line: +}
+>, <Line: +task sourcesJar(type: Jar, dependsOn: classes) {
+>, <Line: +    from sourceSets.main.allSource
+>, <Line: +    into 'build/tmp/sources'
+>, <Line: +    classifier 'sources'
+>, <Line: +}
+>, <Line: +artifacts {
+>, <Line: +    archives sourcesJar
+>, <Line: +    archives buildPluginZip
+>, <Line: +}
+>, <Line: +uploadArchives {
+>, <Line: +    repositories {
+>, <Line: +        if (project.hasProperty("xbibUsername")) {
+>, <Line: +            mavenDeployer {
+>, <Line: +                configuration = configurations.wagon
+>, <Line: +                repository(
+>, <Line: +                        id: 'xbib.org',
+>, <Line: +                        url: uri('scpexe://xbib.org/repository'),
+>, <Line: +                        authentication: [userName: xbibUsername, privateKey: xbibPrivateKey]
+>, <Line: +                )
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,4 @@
+[<Line: +import com.github.rinde.rinsim.core.model.road.GenericRoadModel.RoadEventType;
+>]
+[<Line: -import com.github.rinde.rinsim.core.model.road.AbstractRoadModel.RoadEventType;
+>]

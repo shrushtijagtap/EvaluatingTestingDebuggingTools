@@ -1,0 +1,10 @@
+[<Line: + 	private static final String WYRL_CLASS_DIR="../../lib/wyrl-v0.4.4.jar";
+>, <Line: +	@Ignore("#339") @Test
+>, <Line: +	@Ignore("#339") @Test
+>, <Line: +	@Ignore("#339") @Test
+>]
+[<Line: - 	private static final String WYRL_CLASS_DIR="../../lib/wyrl-v0.4.3.jar";
+>, <Line: -	@Ignore("Issue ???") @Test
+>, <Line: -	@Test
+>, <Line: -	@Test
+>]

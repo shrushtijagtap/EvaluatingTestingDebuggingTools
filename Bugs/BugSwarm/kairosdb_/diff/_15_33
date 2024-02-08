@@ -1,0 +1,68 @@
+[<Line: +import org.kairosdb.core.datastore.*;
+>, <Line: +	private StringDataPointFactory m_stringDataPointFactory = new StringDataPointFactory();
+>, <Line: +	private QueryPreProcessorContainer m_queryPreProcessor = new QueryPreProcessorContainer()
+>, <Line: +	{
+>, <Line: +		@Override
+>, <Line: +		public Query preProcess(Query query)
+>, <Line: +		{
+>, <Line: +			return query;
+>, <Line: +		}
+>, <Line: +	};
+>, <Line: +		catch (JsonIOException | MalformedJsonException | JsonSyntaxException e)
+>, <Line: +			List<QueryMetric> queries = queryParser.parseQueryMetric(json).getQueryMetrics();
+>, <Line: +		catch (JsonSyntaxException | QueryException e)
+>, <Line: +			Query mainQuery = queryParser.parseQueryMetric(json);
+>, <Line: +			mainQuery = m_queryPreProcessor.preProcess(mainQuery);
+>, <Line: +			List<QueryMetric> queries = mainQuery.getQueryMetrics();
+>, <Line: +			//System.out.println("About to process plugins");
+>, <Line: +			List<QueryPlugin> plugins = mainQuery.getPlugins();
+>, <Line: +			for (QueryPlugin plugin : plugins)
+>, <Line: +			{
+>, <Line: +				if (plugin instanceof QueryPostProcessingPlugin)
+>, <Line: +				{
+>, <Line: +					respFile = ((QueryPostProcessingPlugin)plugin).processQueryResults(respFile);
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		catch (JsonSyntaxException | QueryException e )
+>, <Line: +			List<QueryMetric> queries = queryParser.parseQueryMetric(json).getQueryMetrics();
+>, <Line: +		catch (JsonSyntaxException | QueryException e)
+>]
+[<Line: -import org.kairosdb.core.datastore.DataPointGroup;
+>, <Line: -import org.kairosdb.core.datastore.DatastoreQuery;
+>, <Line: -import org.kairosdb.core.datastore.KairosDatastore;
+>, <Line: -import org.kairosdb.core.datastore.QueryMetric;
+>, <Line: -	private DoubleDataPointFactory m_doubleDataPointFactory = new DoubleDataPointFactoryImpl();
+>, <Line: -	private StringDataPointFactory m_stringDataPointFactory = new StringDataPointFactory();
+>, <Line: -		catch (JsonIOException e)
+>, <Line: -		{
+>, <Line: -			JsonResponseBuilder builder = new JsonResponseBuilder(Response.Status.BAD_REQUEST);
+>, <Line: -			return builder.addError(e.getMessage()).build();
+>, <Line: -		}
+>, <Line: -		catch (JsonSyntaxException e)
+>, <Line: -		{
+>, <Line: -			JsonResponseBuilder builder = new JsonResponseBuilder(Response.Status.BAD_REQUEST);
+>, <Line: -			return builder.addError(e.getMessage()).build();
+>, <Line: -		}
+>, <Line: -		catch (MalformedJsonException e)
+>, <Line: -			List<QueryMetric> queries = queryParser.parseQueryMetric(json);
+>, <Line: -		catch (JsonSyntaxException e)
+>, <Line: -		{
+>, <Line: -			JsonResponseBuilder builder = new JsonResponseBuilder(Response.Status.BAD_REQUEST);
+>, <Line: -			return builder.addError(e.getMessage()).build();
+>, <Line: -		}
+>, <Line: -		catch (QueryException e)
+>, <Line: -			List<QueryMetric> queries = queryParser.parseQueryMetric(json);
+>, <Line: -		catch (JsonSyntaxException e)
+>, <Line: -		{
+>, <Line: -			JsonResponseBuilder builder = new JsonResponseBuilder(Response.Status.BAD_REQUEST);
+>, <Line: -			return builder.addError(e.getMessage()).build();
+>, <Line: -		}
+>, <Line: -		catch (QueryException e)
+>, <Line: -			List<QueryMetric> queries = queryParser.parseQueryMetric(json);
+>, <Line: -		catch (JsonSyntaxException e)
+>, <Line: -		{
+>, <Line: -			JsonResponseBuilder builder = new JsonResponseBuilder(Response.Status.BAD_REQUEST);
+>, <Line: -			return builder.addError(e.getMessage()).build();
+>, <Line: -		}
+>, <Line: -		catch (QueryException e)
+>]

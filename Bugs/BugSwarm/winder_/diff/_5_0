@@ -1,0 +1,16 @@
+[<Line: +    public Boolean isStreaming() {
+>, <Line: +        if (this.isStreaming() == false) {
+>, <Line: +        if (this.isStreaming()) {
+>, <Line: +        if (this.isStreaming()) {
+>, <Line: +        if (this.isStreaming() && !this.comm.areActiveCommands() && (this.activeCommands.size() == 0)) {
+>, <Line: +        if (this.isStreaming()) {
+>, <Line: +        if (!isStreaming() && !isPaused() && comm.isPaused()) {
+>]
+[<Line: -    public Boolean isStreamingFile() {
+>, <Line: -        if (this.isStreaming == false) {
+>, <Line: -        if (this.isStreaming) {
+>, <Line: -        if (this.isStreamingFile()) {
+>, <Line: -        if (this.isStreamingFile() && !this.comm.areActiveCommands() && (this.activeCommands.size() == 0)) {
+>, <Line: -        if (this.isStreamingFile()) {
+>, <Line: -        if (!isStreamingFile() && !isPaused() && comm.isPaused()) {
+>]

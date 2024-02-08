@@ -1,0 +1,121 @@
+[]
+[<Line: -package storage;
+>, <Line: -import java.util.List;
+>, <Line: -import java.util.Map;
+>, <Line: -import java.util.Optional;
+>, <Line: -import org.eclipse.egit.github.core.IRepositoryIdProvider;
+>, <Line: -import org.eclipse.egit.github.core.RepositoryId;
+>, <Line: -import service.ServiceManager;
+>, <Line: -/**
+>, <Line: - * A singleton for managing all local files used by HubTurbo. It provides
+>, <Line: - * facilities for saving and loading all files and methods for accessing them.
+>, <Line: - */
+>, <Line: -public class DataManager {
+>, <Line: -	private static DataManager instance = null;
+>, <Line: -	public static DataManager getInstance() {
+>, <Line: -		if (instance == null) {
+>, <Line: -			instance = new DataManager();
+>, <Line: -		}
+>, <Line: -		return instance;
+>, <Line: -	}
+>, <Line: -	private static final String FILE_CONFIG_SESSION = "session-config.json";
+>, <Line: -	private static final String FILE_CONFIG_LOCAL = "local-config.json";
+>, <Line: -	private ConfigFileHandler fileHandler;
+>, <Line: -	private SessionConfiguration sessionConfiguration;
+>, <Line: -	private LocalConfiguration localConfiguration;
+>, <Line: -	public DataManager() {
+>, <Line: -		fileHandler = new ConfigFileHandler(FILE_CONFIG_SESSION, FILE_CONFIG_LOCAL);
+>, <Line: -		initialiseConfigFiles();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Initialises and/or loads all configuration files, except project configuration,
+>, <Line: -	 * which will be loaded later.
+>, <Line: -	 */
+>, <Line: -	private void initialiseConfigFiles() {
+>, <Line: -		sessionConfiguration = fileHandler.loadSessionConfig();
+>, <Line: -		localConfiguration = fileHandler.loadLocalConfig();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Operations
+>, <Line: -	 */
+>, <Line: -	public void saveLocalConfig() {
+>, <Line: -		fileHandler.saveLocalConfig(localConfiguration);
+>, <Line: -	}
+>, <Line: -	public void saveSessionConfig() {
+>, <Line: -		fileHandler.saveSessionConfig(sessionConfiguration);
+>, <Line: -	}
+>, <Line: -	public void setFiltersForNextSession(IRepositoryIdProvider project, List<String> filter) {
+>, <Line: -		sessionConfiguration.setFiltersForNextSession(project, filter);
+>, <Line: -	}
+>, <Line: -	public void setLastLoginUsername(String name) {
+>, <Line: -		sessionConfiguration.setLastLoginUsername(name);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Interface to configuration files
+>, <Line: -	 */
+>, <Line: -	/**
+>, <Line: -	 * Local configuration
+>, <Line: -	 */
+>, <Line: -	public String getUserAlias(String user) {
+>, <Line: -		return localConfiguration.getAlias(user);
+>, <Line: -	}
+>, <Line: -	private String getCurrentRepoId() {
+>, <Line: -		return ServiceManager.getInstance().getRepoId().generateId();
+>, <Line: -	}
+>, <Line: -	public void addBoard(String name, List<String> filterExprs) {
+>, <Line: -		assert name != null && filterExprs != null;
+>, <Line: -		localConfiguration.addBoard(getCurrentRepoId(), name, filterExprs);
+>, <Line: -	}
+>, <Line: -	public List<String> getBoardPanels(String name) {
+>, <Line: -		return localConfiguration.getBoardPanels(getCurrentRepoId(), name);
+>, <Line: -	}
+>, <Line: -	public Map<String, List<String>> getAllBoards() {
+>, <Line: -		return localConfiguration.getAllBoards(getCurrentRepoId());
+>, <Line: -	}
+>, <Line: -	public void removeBoard(String name) {
+>, <Line: -		localConfiguration.removeBoard(getCurrentRepoId(), name);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Session configuration
+>, <Line: -	 */
+>, <Line: -	public List<String> getFiltersFromPreviousSession(IRepositoryIdProvider project) {
+>, <Line: -		return sessionConfiguration.getFiltersFromPreviousSession(project);
+>, <Line: -	}
+>, <Line: -	public void addToLastViewedRepositories(String repository) {
+>, <Line: -		sessionConfiguration.addToLastViewedRepositories(repository);
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Helper method to get the most recently viewed repository,
+>, <Line: -	 * allowing for failure if there are none (on first run)
+>, <Line: -	 * @return
+>, <Line: -	 */
+>, <Line: -	public Optional<RepositoryId> getLastViewedRepository() {
+>, <Line: -		List<String> lastViewed = sessionConfiguration.getLastViewedRepositories();
+>, <Line: -		if (lastViewed.isEmpty()) {
+>, <Line: -			return Optional.empty();
+>, <Line: -		} else {
+>, <Line: -			String id = lastViewed.get(lastViewed.size()-1);
+>, <Line: -			return Optional.of(RepositoryId.createFromId(id));
+>, <Line: -		}
+>, <Line: -	}
+>, <Line: -	public List<String> getLastViewedRepositories() {
+>, <Line: -		return sessionConfiguration.getLastViewedRepositories();
+>, <Line: -	}
+>, <Line: -	public String getLastLoginUsername() {
+>, <Line: -		return sessionConfiguration.getLastLoginUsername();
+>, <Line: -	}
+>, <Line: -	public void setLastLoginPassword(String password) {
+>, <Line: -		sessionConfiguration.setLastLoginPassword(password);
+>, <Line: -	}
+>, <Line: -	public String getLastLoginPassword() {
+>, <Line: -		return sessionConfiguration.getLastLoginPassword();
+>, <Line: -	}
+>, <Line: -	/**
+>, <Line: -	 * Testing
+>, <Line: -	 */
+>, <Line: -	public void setConfigFileHandler(ConfigFileHandler handler) {
+>, <Line: -		this.fileHandler = handler;
+>, <Line: -		initialiseConfigFiles();
+>, <Line: -	}
+>, <Line: -}
+>]

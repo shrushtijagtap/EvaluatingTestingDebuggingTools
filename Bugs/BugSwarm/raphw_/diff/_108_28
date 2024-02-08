@@ -1,0 +1,18 @@
+[<Line: +    private final ElementMatcher<? super ParameterList<?>> matcher;
+>, <Line: +     * @param matcher The matcher to apply to the parameters.
+>, <Line: +    public MethodParametersMatcher(ElementMatcher<? super ParameterList<? extends ParameterDescription>> matcher) {
+>, <Line: +        this.matcher = matcher;
+>, <Line: +        return matcher.matches(target.getParameters());
+>, <Line: +                && matcher.equals(((MethodParametersMatcher<?>) other).matcher);
+>, <Line: +        return matcher.hashCode();
+>, <Line: +        return "hasParameter(" + matcher + ")";
+>]
+[<Line: -    private final ElementMatcher<? super ParameterList<?>> parameterMatcher;
+>, <Line: -     * @param parameterMatcher The matcher to apply to the parameters.
+>, <Line: -    public MethodParametersMatcher(ElementMatcher<? super ParameterList<? extends ParameterDescription>> parameterMatcher) {
+>, <Line: -        this.parameterMatcher = parameterMatcher;
+>, <Line: -        return parameterMatcher.matches(target.getParameters());
+>, <Line: -                && parameterMatcher.equals(((MethodParametersMatcher<?>) other).parameterMatcher);
+>, <Line: -        return parameterMatcher.hashCode();
+>, <Line: -        return "hasParameter(" + parameterMatcher + ")";
+>]

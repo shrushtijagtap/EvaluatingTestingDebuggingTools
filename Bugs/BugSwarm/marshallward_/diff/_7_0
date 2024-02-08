@@ -1,0 +1,49 @@
+[<Line: +import numbers
+>, <Line: +        if isinstance(value, bool):
+>, <Line: +            return self.f90bool(value)
+>, <Line: +        elif isinstance(value, numbers.Integral):
+>, <Line: +            return self.f90int(value)
+>, <Line: +        elif isinstance(value, numbers.Real):
+>, <Line: +            return self.f90float(value)
+>, <Line: +        elif isinstance(value, numbers.Complex):
+>, <Line: +            return self.f90complex(value)
+>, <Line: +        elif isinstance(value, str):
+>, <Line: +            return self.f90str(value)
+>, <Line: +        elif value is None:
+>, <Line: +            return ''
+>, <Line: +        else:
+>, <Line: +            raise ValueError('Type {0} of {1} cannot be converted to a Fortran'
+>, <Line: +                             ' type.'.format(type(value), value))
+>, <Line: +    def f90bool(self, v):
+>, <Line: +        return self.logical_repr[v]
+>, <Line: +    def f90int(self, v):
+>, <Line: +        return str(v)
+>, <Line: +    def f90float(self, v):
+>, <Line: +        return '{0:{fmt}}'.format(v, fmt=self.floatformat)
+>, <Line: +    def f90complex(self, v):
+>, <Line: +        return '({0:{fmt}}, {1:{fmt}})'.format(v.real, v.imag,
+>, <Line: +                                               fmt=self.floatformat)
+>, <Line: +    def f90str(self, v):
+>, <Line: +        return repr(v).replace("\\'", "''").replace('\\"', '""').replace('\\\\', '\\')
+>]
+[<Line: -        # Representatation functions
+>, <Line: -        self.f90str = {
+>, <Line: -            bool:
+>, <Line: -                lambda x: self.logical_repr[x],
+>, <Line: -            int:
+>, <Line: -                lambda x: str(x),
+>, <Line: -            float:
+>, <Line: -                lambda x: '{0:{fmt}}'.format(x, fmt=self.floatformat),
+>, <Line: -            complex:
+>, <Line: -                lambda x: '({0}, {1})'.format(x.real, x.imag),
+>, <Line: -            str:
+>, <Line: -                lambda x: repr(x).replace("\\'", "''").replace('\\"', '""').replace('\\\\', '\\'),
+>, <Line: -            type(None):
+>, <Line: -                lambda x: ''
+>, <Line: -        }
+>, <Line: -        try:
+>, <Line: -            return self.f90str[type(value)](value)
+>, <Line: -        except KeyError:
+>, <Line: -            raise ValueError('Type {0} of {1} cannot be converted to a '
+>, <Line: -                             'Fortran type.'.format(type(value), value))
+>]

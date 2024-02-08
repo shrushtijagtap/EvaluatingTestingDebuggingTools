@@ -1,0 +1,57 @@
+[<Line: +package org.mp4parser.muxer.tracks;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.*;
+>, <Line: +import org.mp4parser.muxer.AbstractTrack;
+>, <Line: +import org.mp4parser.muxer.Sample;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.TrackMetaData;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.LinkedList;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.ListIterator;
+>, <Line: +public class ClippedTrack extends AbstractTrack {
+>, <Line: +    public ClippedTrack(Track origTrack, long fromSample, long toSample) {
+>, <Line: +    public void close() throws IOException {
+>, <Line: +        origTrack.close();
+>, <Line: +    }
+>, <Line: +    public List<Sample> getSamples() {
+>, <Line: +        return origTrack.getSamples().subList(fromSample, toSample);
+>, <Line: +    }
+>, <Line: +    public SampleDescriptionBox getSampleDescriptionBox() {
+>, <Line: +        return origTrack.getSampleDescriptionBox();
+>, <Line: +    }
+>, <Line: +    public synchronized long[] getSampleDurations() {
+>, <Line: +        long[] decodingTimes = new long[toSample - fromSample];
+>, <Line: +        System.arraycopy(origTrack.getSampleDurations(), fromSample, decodingTimes, 0, decodingTimes.length);
+>, <Line: +        return decodingTimes;
+>, <Line: +    }
+>, <Line: +    public List<CompositionTimeToSample.Entry> getCompositionTimeEntries() {
+>, <Line: +        return getCompositionTimeEntries(origTrack.getCompositionTimeEntries(), fromSample, toSample);
+>, <Line: +    }
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks;
+>, <Line: -import com.coremedia.iso.boxes.*;
+>, <Line: -import com.googlecode.mp4parser.authoring.AbstractTrack;
+>, <Line: -import com.googlecode.mp4parser.authoring.Sample;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.TrackMetaData;
+>, <Line: -import java.util.*;
+>, <Line: -public class CroppedTrack extends AbstractTrack {
+>, <Line: -    public CroppedTrack(Track origTrack, long fromSample, long toSample) {
+>, <Line: -    public void close() throws IOException {
+>, <Line: -        origTrack.close();
+>, <Line: -    }
+>, <Line: -    public List<Sample> getSamples() {
+>, <Line: -        return origTrack.getSamples().subList(fromSample, toSample);
+>, <Line: -    }
+>, <Line: -    public SampleDescriptionBox getSampleDescriptionBox() {
+>, <Line: -        return origTrack.getSampleDescriptionBox();
+>, <Line: -    }
+>, <Line: -    public synchronized long[] getSampleDurations() {
+>, <Line: -        long[] decodingTimes = new long[toSample - fromSample];
+>, <Line: -        System.arraycopy(origTrack.getSampleDurations(), fromSample, decodingTimes, 0, decodingTimes.length);
+>, <Line: -        return decodingTimes;
+>, <Line: -    }
+>, <Line: -    public List<CompositionTimeToSample.Entry> getCompositionTimeEntries() {
+>, <Line: -        return getCompositionTimeEntries(origTrack.getCompositionTimeEntries(), fromSample, toSample);
+>, <Line: -    }
+>]

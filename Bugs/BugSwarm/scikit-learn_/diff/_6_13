@@ -1,0 +1,186 @@
+[<Line: +from .sag import sag_solver
+>, <Line: +from .sag_fast import get_max_squared_sum
+>, <Line: +from ..utils import check_array
+>, <Line: +from ..utils import check_consistent_length
+>, <Line: +    n_iter = np.empty(y.shape[1], dtype=np.int32)
+>, <Line: +        info = sp_linalg.lsqr(X, y_column, damp=sqrt_alpha[i],
+>, <Line: +                              atol=tol, btol=tol, iter_lim=max_iter)
+>, <Line: +        coefs[i] = info[0]
+>, <Line: +        n_iter[i] = info[2]
+>, <Line: +    return coefs, n_iter
+>, <Line: +                     max_iter=None, tol=1e-3, verbose=0, random_state=None,
+>, <Line: +                     return_n_iter=False):
+>, <Line: +        For 'sparse_cg' and 'lsqr' solvers, the default value is determined
+>, <Line: +        by scipy.sparse.linalg. For 'sag' solver, the default value is 1000.
+>, <Line: +        Individual weights for each sample. If sample_weight is not None and
+>, <Line: +        solver='auto', the solver will be set to 'cholesky'.
+>, <Line: +        - 'sag' uses a Stochastic Average Gradient descent. It also uses an
+>, <Line: +          iterative procedure, and is often faster than other solvers when
+>, <Line: +          both n_samples and n_features are large. Note that 'sag' fast
+>, <Line: +          convergence is only guaranteed on features with approximately the
+>, <Line: +          same scale. You can preprocess the data with a scaler from
+>, <Line: +          sklearn.preprocessing.
+>, <Line: +        All last four solvers support both dense and sparse data.
+>, <Line: +        Verbosity level. Setting verbose > 0 will display additional
+>, <Line: +        information depending on the solver used.
+>, <Line: +    random_state : int seed, RandomState instance, or None (default)
+>, <Line: +        The seed of the pseudo random number generator to use when
+>, <Line: +        shuffling the data. Used in 'sag' solver.
+>, <Line: +    return_n_iter : boolean, default False
+>, <Line: +        If True, the method also returns `n_iter`, the actual number of
+>, <Line: +        iteration performed by the solver.
+>, <Line: +    n_iter : int, optional
+>, <Line: +        The actual number of iteration performed by the solver.
+>, <Line: +        Only returned if `return_n_iter` is True.
+>, <Line: +    # SAG needs X and y columns to be C-contiguous and np.float64
+>, <Line: +    if solver == 'sag':
+>, <Line: +        X = check_array(X, accept_sparse=['csr'],
+>, <Line: +                        dtype=np.float64, order='C')
+>, <Line: +        y = check_array(y, dtype=np.float64, ensure_2d=False, order='F')
+>, <Line: +    else:
+>, <Line: +        X = check_array(X, accept_sparse=['csr', 'csc', 'coo'],
+>, <Line: +                        dtype=np.float64)
+>, <Line: +        y = check_array(y, dtype='numeric', ensure_2d=False)
+>, <Line: +    check_consistent_length(X, y)
+>, <Line: +        # cholesky if it's a dense array and cg in any other case
+>, <Line: +        if solver != 'sag':
+>, <Line: +            # SAG supports sample_weight directly. For other solvers,
+>, <Line: +            # we implement sample_weight via a simple rescaling.
+>, <Line: +            X, y = _rescale_data(X, y, sample_weight)
+>, <Line: +    if solver not in ('sparse_cg', 'cholesky', 'svd', 'lsqr', 'sag'):
+>, <Line: +    n_iter = None
+>, <Line: +    elif solver == 'lsqr':
+>, <Line: +        coef, n_iter = _solve_lsqr(X, y, alpha, max_iter, tol)
+>, <Line: +    elif solver == 'sag':
+>, <Line: +        # precompute max_squared_sum for all targets
+>, <Line: +        max_squared_sum = get_max_squared_sum(X)
+>, <Line: +        coef = np.empty((y.shape[1], n_features))
+>, <Line: +        n_iter = np.empty(y.shape[1], dtype=np.int32)
+>, <Line: +        for i, (alpha_i, target) in enumerate(zip(alpha, y.T)):
+>, <Line: +            coef_, n_iter_, _ = sag_solver(
+>, <Line: +                X, target.ravel(), sample_weight, 'squared', alpha_i,
+>, <Line: +                max_iter, tol, verbose, random_state, False, max_squared_sum,
+>, <Line: +                dict())
+>, <Line: +            coef[i] = coef_
+>, <Line: +            n_iter[i] = n_iter_
+>, <Line: +        coef = np.asarray(coef)
+>, <Line: +    if return_n_iter:
+>, <Line: +        return coef, n_iter
+>, <Line: +    else:
+>, <Line: +        return coef
+>, <Line: +                 copy_X=True, max_iter=None, tol=1e-3, solver="auto",
+>, <Line: +                 random_state=None):
+>, <Line: +        self.random_state = random_state
+>, <Line: +        X, y = check_X_y(X, y, ['csr', 'csc', 'coo'], dtype=np.float64,
+>, <Line: +        self.coef_, self.n_iter_ = ridge_regression(
+>, <Line: +            X, y, alpha=self.alpha, sample_weight=sample_weight,
+>, <Line: +            max_iter=self.max_iter, tol=self.tol, solver=self.solver,
+>, <Line: +            random_state=self.random_state, return_n_iter=True)
+>, <Line: +    alpha : {float, array-like}, shape (n_targets)
+>, <Line: +        ``C^-1`` in other linear models such as LogisticRegression or
+>, <Line: +        For 'sparse_cg' and 'lsqr' solvers, the default value is determined
+>, <Line: +        by scipy.sparse.linalg. For 'sag' solver, the default value is 1000.
+>, <Line: +    solver : {'auto', 'svd', 'cholesky', 'lsqr', 'sparse_cg', 'sag'}
+>, <Line: +        - 'sag' uses a Stochastic Average Gradient descent. It also uses an
+>, <Line: +          iterative procedure, and is often faster than other solvers when
+>, <Line: +          both n_samples and n_features are large. Note that 'sag' fast
+>, <Line: +          convergence is only guaranteed on features with approximately the
+>, <Line: +          same scale. You can preprocess the data with a scaler from
+>, <Line: +          sklearn.preprocessing.
+>, <Line: +        All last four solvers support both dense and sparse data.
+>, <Line: +    random_state : int seed, RandomState instance, or None (default)
+>, <Line: +        The seed of the pseudo random number generator to use when
+>, <Line: +        shuffling the data. Used in 'sag' solver.
+>, <Line: +    coef_ : array, shape (n_features,) or (n_targets, n_features)
+>, <Line: +    n_iter_ : array or None, shape (n_targets,)
+>, <Line: +        Actual number of iterations for each target. Available only for
+>, <Line: +        sag and lsqr solvers. Other solvers will return None.
+>, <Line: +          normalize=False, random_state=None, solver='auto', tol=0.001)
+>, <Line: +                 copy_X=True, max_iter=None, tol=1e-3, solver="auto",
+>, <Line: +                 random_state=None):
+>, <Line: +                                    max_iter=max_iter, tol=tol, solver=solver,
+>, <Line: +                                    random_state=random_state)
+>, <Line: +        ``C^-1`` in other linear models such as LogisticRegression or
+>, <Line: +    solver : {'auto', 'svd', 'cholesky', 'lsqr', 'sparse_cg', 'sag'}
+>, <Line: +        Solver to use in the computational routines:
+>, <Line: +        - 'auto' chooses the solver automatically based on the type of data.
+>, <Line: +        - 'svd' uses a Singular Value Decomposition of X to compute the Ridge
+>, <Line: +          coefficients. More stable for singular matrices than
+>, <Line: +          'cholesky'.
+>, <Line: +        - 'cholesky' uses the standard scipy.linalg.solve function to
+>, <Line: +          obtain a closed-form solution.
+>, <Line: +        - 'sparse_cg' uses the conjugate gradient solver as found in
+>, <Line: +          scipy.sparse.linalg.cg. As an iterative algorithm, this solver is
+>, <Line: +          more appropriate than 'cholesky' for large-scale data
+>, <Line: +          (possibility to set `tol` and `max_iter`).
+>, <Line: +        - 'lsqr' uses the dedicated regularized least-squares routine
+>, <Line: +          scipy.sparse.linalg.lsqr. It is the fatest but may not be available
+>, <Line: +          in old scipy versions. It also uses an iterative procedure.
+>, <Line: +        - 'sag' uses a Stochastic Average Gradient descent. It also uses an
+>, <Line: +          iterative procedure, and is faster than other solvers when both
+>, <Line: +          n_samples and n_features are large.
+>, <Line: +    random_state : int seed, RandomState instance, or None (default)
+>, <Line: +        The seed of the pseudo random number generator to use when
+>, <Line: +        shuffling the data. Used in 'sag' solver.
+>, <Line: +    coef_ : array, shape (n_features,) or (n_classes, n_features)
+>, <Line: +    n_iter_ : array or None, shape (n_targets,)
+>, <Line: +        Actual number of iterations for each target. Available only for
+>, <Line: +        sag and lsqr solvers. Other solvers will return None.
+>, <Line: +                 solver="auto", random_state=None):
+>, <Line: +            copy_X=copy_X, max_iter=max_iter, tol=tol, solver=solver,
+>, <Line: +            random_state=random_state)
+>, <Line: +        Alpha corresponds to ``C^-1`` in other linear models such as
+>, <Line: +        Alpha corresponds to ``C^-1`` in other linear models such as
+>]
+[<Line: -        coefs[i] = sp_linalg.lsqr(X, y_column, damp=sqrt_alpha[i],
+>, <Line: -                                  atol=tol, btol=tol, iter_lim=max_iter)[0]
+>, <Line: -    return coefs
+>, <Line: -                     max_iter=None, tol=1e-3, verbose=0):
+>, <Line: -        The default value is determined by scipy.sparse.linalg.
+>, <Line: -        Individual weights for each sample. If sample_weight is set, then
+>, <Line: -        the solver will automatically be set to 'cholesky'
+>, <Line: -        All three solvers support both dense and sparse data.
+>, <Line: -        Verbosity level. Setting verbose > 0 will display additional information
+>, <Line: -        depending on the solver used.
+>, <Line: -        # cholesky if it's a dense array and cg in
+>, <Line: -        # any other case
+>, <Line: -        # Sample weight can be implemented via a simple rescaling.
+>, <Line: -        X, y = _rescale_data(X, y, sample_weight)
+>, <Line: -    if solver not in ('sparse_cg', 'cholesky', 'svd', 'lsqr'):
+>, <Line: -    elif solver == "lsqr":
+>, <Line: -        coef = _solve_lsqr(X, y, alpha, max_iter, tol)
+>, <Line: -    return coef
+>, <Line: -                 copy_X=True, max_iter=None, tol=1e-3, solver="auto"):
+>, <Line: -        X, y = check_X_y(X, y, ['csr', 'csc', 'coo'], dtype=np.float,
+>, <Line: -        self.coef_ = ridge_regression(X, y,
+>, <Line: -                                      alpha=self.alpha,
+>, <Line: -                                      sample_weight=sample_weight,
+>, <Line: -                                      max_iter=self.max_iter,
+>, <Line: -                                      tol=self.tol,
+>, <Line: -                                      solver=self.solver)
+>, <Line: -    alpha : {float, array-like}
+>, <Line: -        shape = [n_targets]
+>, <Line: -        ``(2*C)^-1`` in other linear models such as LogisticRegression or
+>, <Line: -        The default value is determined by scipy.sparse.linalg.
+>, <Line: -    solver : {'auto', 'svd', 'cholesky', 'lsqr', 'sparse_cg'}
+>, <Line: -        All three solvers support both dense and sparse data.
+>, <Line: -    coef_ : array, shape = [n_features] or [n_targets, n_features]
+>, <Line: -          normalize=False, solver='auto', tol=0.001)
+>, <Line: -                 copy_X=True, max_iter=None, tol=1e-3, solver="auto"):
+>, <Line: -                                    max_iter=max_iter, tol=tol, solver=solver)
+>, <Line: -        ``(2*C)^-1`` in other linear models such as LogisticRegression or
+>, <Line: -    solver : {'auto', 'svd', 'cholesky', 'lsqr', 'sparse_cg'}
+>, <Line: -        Solver to use in the computational
+>, <Line: -        routines. 'svd' will use a Singular value decomposition to obtain
+>, <Line: -        the solution, 'cholesky' will use the standard
+>, <Line: -        scipy.linalg.solve function, 'sparse_cg' will use the
+>, <Line: -        conjugate gradient solver as found in
+>, <Line: -        scipy.sparse.linalg.cg while 'auto' will chose the most
+>, <Line: -        appropriate depending on the matrix X. 'lsqr' uses
+>, <Line: -        a direct regularized least-squares routine provided by scipy.
+>, <Line: -    coef_ : array, shape = [n_features] or [n_classes, n_features]
+>, <Line: -                 solver="auto"):
+>, <Line: -            copy_X=copy_X, max_iter=max_iter, tol=tol, solver=solver)
+>, <Line: -        Alpha corresponds to ``(2*C)^-1`` in other linear models such as
+>, <Line: -        Alpha corresponds to ``(2*C)^-1`` in other linear models such as
+>]

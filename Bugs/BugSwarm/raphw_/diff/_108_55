@@ -1,0 +1,9 @@
+[<Line: +    @Test
+>, <Line: +    public void testModule() throws Exception {
+>, <Line: +        assertThat(JavaType.MODULE.getTypeStub().getName(), is("java.lang.reflect.Module"));
+>, <Line: +        assertThat(JavaType.MODULE.getTypeStub().getModifiers(), is(Opcodes.ACC_PUBLIC | Opcodes.ACC_FINAL));
+>, <Line: +        assertThat(JavaType.MODULE.getTypeStub().getSuperClass(), is(TypeDescription.Generic.OBJECT));
+>, <Line: +        assertThat(JavaType.MODULE.getTypeStub().getInterfaces().size(), is(0));
+>, <Line: +    }
+>]
+[]

@@ -1,0 +1,6 @@
+[<Line: +function f(int[] ls) -> int[]:
+>, <Line: +    int[] xs = [1, 2]
+>]
+[<Line: -function f([int] ls) -> [int]:
+>, <Line: -    [int] xs = [1, 2]
+>]

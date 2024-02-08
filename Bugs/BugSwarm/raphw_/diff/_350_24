@@ -1,0 +1,7 @@
+[<Line: +    @SuppressWarnings("unchecked")
+>, <Line: +        when(returnType.accept((TypeDescription.Generic.Visitor) visitor)).thenReturn(visitedReturnType);
+>, <Line: +        when(exceptionType.accept((TypeDescription.Generic.Visitor) visitor)).thenReturn(visitedExceptionType);
+>]
+[<Line: -        when(returnType.accept(visitor)).thenReturn(visitedReturnType);
+>, <Line: -        when(exceptionType.accept(visitor)).thenReturn(visitedExceptionType);
+>]

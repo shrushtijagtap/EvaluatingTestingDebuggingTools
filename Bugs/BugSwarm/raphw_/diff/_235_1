@@ -1,0 +1,6 @@
+[<Line: +        assertThat(size.getMaximalSize(), is(0));
+>, <Line: +        assertThat(size.getMaximalSize(), is(0));
+>]
+[<Line: -        assertThat(size.getSizeImpact(), is(0));
+>, <Line: -        assertThat(size.getSizeImpact(), is(0));
+>]

@@ -1,0 +1,14 @@
+[<Line: +                is((AnnotationList) new AnnotationList.ForLoadedAnnotations(thirdMethod.getDeclaredAnnotations())));
+>, <Line: +                is((AnnotationList) new AnnotationList.ForLoadedAnnotations(secondConstructor.getDeclaredAnnotations())));
+>, <Line: +                is((AnnotationList) new AnnotationList.ForLoadedAnnotations(thirdMethod.getParameterAnnotations()[0])));
+>, <Line: +                is((AnnotationList) new AnnotationList.ForLoadedAnnotations(thirdMethod.getParameterAnnotations()[1])));
+>, <Line: +                is((AnnotationList) new AnnotationList.ForLoadedAnnotations(secondConstructor.getParameterAnnotations()[0])));
+>, <Line: +                is((AnnotationList) new AnnotationList.ForLoadedAnnotations(secondConstructor.getParameterAnnotations()[1])));
+>]
+[<Line: -                is((AnnotationList) new AnnotationList.ForLoadedAnnotation(thirdMethod.getDeclaredAnnotations())));
+>, <Line: -                is((AnnotationList) new AnnotationList.ForLoadedAnnotation(secondConstructor.getDeclaredAnnotations())));
+>, <Line: -                is((AnnotationList) new AnnotationList.ForLoadedAnnotation(thirdMethod.getParameterAnnotations()[0])));
+>, <Line: -                is((AnnotationList) new AnnotationList.ForLoadedAnnotation(thirdMethod.getParameterAnnotations()[1])));
+>, <Line: -                is((AnnotationList) new AnnotationList.ForLoadedAnnotation(secondConstructor.getParameterAnnotations()[0])));
+>, <Line: -                is((AnnotationList) new AnnotationList.ForLoadedAnnotation(secondConstructor.getParameterAnnotations()[1])));
+>]

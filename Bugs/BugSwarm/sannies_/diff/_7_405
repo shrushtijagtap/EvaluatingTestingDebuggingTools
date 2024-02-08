@@ -1,0 +1,17 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.ParsableBox;
+>, <Line: +    public HintSampleEntryTest(ParsableBox parsableBoxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: +        super(parsableBoxUnderTest, properties);
+>, <Line: +    }
+>, <Line: +                                new E("data", new byte[]{1, 2, 3, 4})}
+>]
+[<Line: -package com.mp4parser.iso14496.part12;
+>, <Line: -import com.coremedia.iso.boxes.Box;
+>, <Line: -import com.coremedia.iso.boxes.FileTypeBox;
+>, <Line: -import java.util.Arrays;
+>, <Line: -import static org.junit.Assert.*;
+>, <Line: -                                new E("data", new byte[]{1,2,3,4})}
+>, <Line: -    public HintSampleEntryTest(Box boxUnderTest, Map.Entry<String, Object>... properties) {
+>, <Line: -        super(boxUnderTest, properties);
+>, <Line: -    }
+>]

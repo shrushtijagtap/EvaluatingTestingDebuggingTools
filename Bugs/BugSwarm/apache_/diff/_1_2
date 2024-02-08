@@ -1,0 +1,12 @@
+[<Line: +            <groupId>org.jfree</groupId>
+>, <Line: +            <version>1.0.23</version>
+>, <Line: +            <groupId>org.jfree</groupId>
+>, <Line: +            <version>1.0.19</version>
+>, <Line: +        <dependency>
+>]
+[<Line: -            <groupId>jfree</groupId>
+>, <Line: -            <version>1.0.12</version>
+>, <Line: -            <groupId>jfree</groupId>
+>, <Line: -            <version>1.0.9</version>
+>, <Line: - 		<dependency>
+>]

@@ -1,0 +1,5 @@
+[<Line: +				RowKeyListener listener = (RowKeyListener) injector.getInstance(bindingClass);
+>]
+[<Line: -import org.kairosdb.core.DataPointListener;
+>, <Line: -				RowKeyListener listener = (RowKeyListener)injector.getInstance(bindingClass);
+>]

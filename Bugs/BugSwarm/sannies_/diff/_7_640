@@ -1,0 +1,114 @@
+[<Line: +package org.mp4parser.streaming.input.h264.spspps;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.nio.ByteBuffer;
+>, <Line: +import java.util.Map;
+>, <Line: +public class SliceHeader {
+>, <Line: +    public int first_mb_in_slice;
+>, <Line: +    public SliceType slice_type;
+>, <Line: +    public int pic_parameter_set_id;
+>, <Line: +    public int colour_plane_id;
+>, <Line: +    public int frame_num;
+>, <Line: +    public boolean field_pic_flag = false;
+>, <Line: +    public boolean bottom_field_flag = false;
+>, <Line: +    public int idr_pic_id = -1;
+>, <Line: +    public int pic_order_cnt_lsb;
+>, <Line: +    public int delta_pic_order_cnt_bottom;
+>, <Line: +    public int delta_pic_order_cnt_0;
+>, <Line: +    public int delta_pic_order_cnt_1;
+>, <Line: +    public PictureParameterSet pps;
+>, <Line: +    public SeqParameterSet sps;
+>, <Line: +    public SliceHeader(ByteBuffer in, Map<Integer, SeqParameterSet> spss, Map<Integer, PictureParameterSet> ppss, boolean IdrPicFlag) {
+>, <Line: +        try {
+>, <Line: +            in.position(1);
+>, <Line: +            ByteBufferBitreader reader = new ByteBufferBitreader(in);
+>, <Line: +            first_mb_in_slice = reader.readUE();
+>, <Line: +            int sliceTypeInt = reader.readUE();
+>, <Line: +            switch (sliceTypeInt) {
+>, <Line: +                case 0:
+>, <Line: +                case 5:
+>, <Line: +                    slice_type = SliceType.P;
+>, <Line: +                    break;
+>, <Line: +                case 1:
+>, <Line: +                case 6:
+>, <Line: +                    slice_type = SliceType.B;
+>, <Line: +                    break;
+>, <Line: +                case 2:
+>, <Line: +                case 7:
+>, <Line: +                    slice_type = SliceType.I;
+>, <Line: +                    break;
+>, <Line: +                case 3:
+>, <Line: +                case 8:
+>, <Line: +                    slice_type = SliceType.SP;
+>, <Line: +                    break;
+>, <Line: +                case 4:
+>, <Line: +                case 9:
+>, <Line: +                    slice_type = SliceType.SI;
+>, <Line: +                    break;
+>, <Line: +            }
+>, <Line: +            pic_parameter_set_id = reader.readUE();
+>, <Line: +            pps = ppss.get(pic_parameter_set_id);
+>, <Line: +            if (pps == null) {
+>, <Line: +                String ids = "";
+>, <Line: +                for (Integer integer : ppss.keySet()) {
+>, <Line: +                    ids += integer + ", ";
+>, <Line: +                }
+>, <Line: +                throw new RuntimeException("PPS with ids " + ids + " available but not " + pic_parameter_set_id);
+>, <Line: +            }
+>, <Line: +            sps = spss.get(pps.seq_parameter_set_id);
+>, <Line: +            if (sps == null) {
+>, <Line: +                String ids = "";
+>, <Line: +                for (Integer integer : spss.keySet()) {
+>, <Line: +                    ids += integer + ", ";
+>, <Line: +                }
+>, <Line: +                throw new RuntimeException("SPS with ids " + ids + " available but not " + pps.seq_parameter_set_id);
+>, <Line: +            }
+>, <Line: +            if (sps.residual_color_transform_flag) {
+>, <Line: +                colour_plane_id = (int) reader.readNBit(2);
+>, <Line: +            }
+>, <Line: +            frame_num = (int) reader.readNBit(sps.log2_max_frame_num_minus4 + 4);
+>, <Line: +            if (!sps.frame_mbs_only_flag) {
+>, <Line: +                field_pic_flag = reader.readBool();
+>, <Line: +                if (field_pic_flag) {
+>, <Line: +                    bottom_field_flag = reader.readBool();
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            if (IdrPicFlag) {
+>, <Line: +                idr_pic_id = reader.readUE();
+>, <Line: +            }
+>, <Line: +            if (sps.pic_order_cnt_type == 0) {
+>, <Line: +                pic_order_cnt_lsb = (int) reader.readNBit(sps.log2_max_pic_order_cnt_lsb_minus4 + 4);
+>, <Line: +                if (pps.bottom_field_pic_order_in_frame_present_flag && !field_pic_flag) {
+>, <Line: +                    delta_pic_order_cnt_bottom = reader.readSE();
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            if (sps.pic_order_cnt_type == 1 && !sps.delta_pic_order_always_zero_flag) {
+>, <Line: +                delta_pic_order_cnt_0 = reader.readSE();
+>, <Line: +                if (pps.bottom_field_pic_order_in_frame_present_flag && !field_pic_flag) {
+>, <Line: +                    delta_pic_order_cnt_1 = reader.readSE();
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        } catch (IOException e) {
+>, <Line: +            throw new RuntimeException(e);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public String toString() {
+>, <Line: +        return "SliceHeader{" +
+>, <Line: +                "first_mb_in_slice=" + first_mb_in_slice +
+>, <Line: +                ", slice_type=" + slice_type +
+>, <Line: +                ", pic_parameter_set_id=" + pic_parameter_set_id +
+>, <Line: +                ", colour_plane_id=" + colour_plane_id +
+>, <Line: +                ", frame_num=" + frame_num +
+>, <Line: +                ", field_pic_flag=" + field_pic_flag +
+>, <Line: +                ", bottom_field_flag=" + bottom_field_flag +
+>, <Line: +                ", idr_pic_id=" + idr_pic_id +
+>, <Line: +                ", pic_order_cnt_lsb=" + pic_order_cnt_lsb +
+>, <Line: +                ", delta_pic_order_cnt_bottom=" + delta_pic_order_cnt_bottom +
+>, <Line: +                '}';
+>, <Line: +    }
+>, <Line: +    public enum SliceType {
+>, <Line: +        P, B, I, SP, SI
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

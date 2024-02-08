@@ -1,0 +1,13 @@
+diff --git a/JacksonXml_5/buggy/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java b/JacksonXml_5/fixed/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java
+index b139d09..a50e1a8 100644
+--- a/JacksonXml_5/buggy/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java
++++ b/JacksonXml_5/fixed/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java
+@@ -56,7 +56,7 @@ public class XmlSerializerProvider extends DefaultSerializerProvider
+         super(src);
+         // 21-May-2018, tatu: As per [dataformat-xml#282], should NOT really copy
+         //    root name lookup as that may link back to diff version, configuration
+-        _rootNameLookup = src._rootNameLookup;
++        _rootNameLookup = new XmlRootNameLookup();
+     }
+ 
+     /*

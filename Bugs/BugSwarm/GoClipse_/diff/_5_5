@@ -1,0 +1,4 @@
+[<Line: +import melnorme.lang.ide.ui.build.BuildTargetEditor;
+>]
+[<Line: -import melnorme.lang.ide.ui.preferences.BuildTargetEditor;
+>]

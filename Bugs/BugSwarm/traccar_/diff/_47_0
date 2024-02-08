@@ -1,0 +1,6 @@
+[<Line: +import org.jboss.netty.handler.codec.http.HttpRequestDecoder;
+>, <Line: +        if (channel != null && channel.getPipeline().get(HttpRequestDecoder.class) != null
+>, <Line: +                || Context.getConfig().getBoolean("decoder.ignoreSessionCache")) {
+>]
+[<Line: -        if (Context.getConfig().getBoolean("decoder.ignoreSessionCache")) {
+>]

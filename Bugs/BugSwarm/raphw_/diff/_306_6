@@ -1,0 +1,22 @@
+[<Line: +        assertThat(describe(Sample.FIRST).getEnumerationType(), is((TypeDescription) new TypeDescription.ForLoadedType(Sample.class)));
+>, <Line: +        assertThat(describe(Sample.SECOND).getEnumerationType(), is((TypeDescription) new TypeDescription.ForLoadedType(Sample.class)));
+>, <Line: +        assertThat(describe(Sample.FIRST).hashCode(), not(describe(Sample.SECOND).hashCode()));
+>, <Line: +        assertThat(identical, is(identical));
+>, <Line: +        assertThat(describe(Sample.FIRST), is(equalFirst));
+>, <Line: +        assertThat(describe(Sample.SECOND), is(equalSecond));
+>, <Line: +        assertThat(describe(Sample.FIRST), not(equalFirstTypeOnly));
+>, <Line: +        assertThat(describe(Sample.FIRST), not(equalFirstNameOnly));
+>, <Line: +        assertThat(describe(Sample.FIRST), not(equalSecond));
+>, <Line: +        assertThat(describe(Sample.FIRST), not(new Object()));
+>]
+[<Line: -        assertThat(describe(Sample.FIRST).getEnumerationType(), equalTo((TypeDescription) new TypeDescription.ForLoadedType(Sample.class)));
+>, <Line: -        assertThat(describe(Sample.SECOND).getEnumerationType(), equalTo((TypeDescription) new TypeDescription.ForLoadedType(Sample.class)));
+>, <Line: -        assertThat(describe(Sample.FIRST).hashCode(), not(is(describe(Sample.SECOND).hashCode())));
+>, <Line: -        assertThat(identical, equalTo(identical));
+>, <Line: -        assertThat(describe(Sample.FIRST), equalTo(equalFirst));
+>, <Line: -        assertThat(describe(Sample.SECOND), equalTo(equalSecond));
+>, <Line: -        assertThat(describe(Sample.FIRST), not(equalTo(equalFirstTypeOnly)));
+>, <Line: -        assertThat(describe(Sample.FIRST), not(equalTo(equalFirstNameOnly)));
+>, <Line: -        assertThat(describe(Sample.FIRST), not(equalTo(equalSecond)));
+>, <Line: -        assertThat(describe(Sample.FIRST), not(equalTo(new Object())));
+>]

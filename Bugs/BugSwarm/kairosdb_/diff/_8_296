@@ -1,0 +1,405 @@
+[<Line: +!function ($) {
+>, <Line: +	function UTCDate() {
+>, <Line: +	function UTCToday() {
+>, <Line: +	var Datepicker = function (element, options) {
+>, <Line: +		this.language = options.language || this.element.data('date-language') || "en";
+>, <Line: +		this.isRTL = dates[this.language].rtl || false;
+>, <Line: +		this.format = DPGlobal.parseFormat(options.format || this.element.data('date-format') || dates[this.language].format || 'mm/dd/yyyy');
+>, <Line: +		if (this.component && this.component.length === 0)
+>, <Line: +		if (this.isInline) {
+>, <Line: +		if (this.isRTL) {
+>, <Line: +				.toggleClass('icon-arrow-left icon-arrow-right');
+>, <Line: +		switch (options.startView || this.element.data('date-start-view')) {
+>, <Line: +		this.minViewMode = options.minViewMode || this.element.data('date-min-view-mode') || 0;
+>, <Line: +		this.todayBtn = (options.todayBtn || this.element.data('date-today-btn') || false);
+>, <Line: +		this.todayHighlight = (options.todayHighlight || this.element.data('date-today-highlight') || false);
+>, <Line: +				.attr('colspan', function (i, val) {
+>, <Line: +					return parseInt(val) + 1;
+>, <Line: +				});
+>, <Line: +		this.weekStart = ((options.weekStart || this.element.data('date-weekstart') || dates[this.language].weekStart || 0) % 7);
+>, <Line: +		this.setStartDate(options.startDate || this.element.data('date-startdate'));
+>, <Line: +		this.setEndDate(options.endDate || this.element.data('date-enddate'));
+>, <Line: +		this.setDaysOfWeekDisabled(options.daysOfWeekDisabled || this.element.data('date-days-of-week-disabled'));
+>, <Line: +		if (this.isInline) {
+>, <Line: +		_applyEvents: function (evs) {
+>, <Line: +			for (var i = 0, el, ev; i < evs.length; i++) {
+>, <Line: +		_unapplyEvents: function (evs) {
+>, <Line: +			for (var i = 0, el, ev; i < evs.length; i++) {
+>, <Line: +		_buildEvents: function () {
+>, <Line: +			else if (this.component && this.hasInput) { // component: input + button
+>, <Line: +		_attachEvents: function () {
+>, <Line: +		_detachEvents: function () {
+>, <Line: +		_attachSecondaryEvents: function () {
+>, <Line: +		_detachSecondaryEvents: function () {
+>, <Line: +		show: function (e) {
+>, <Line: +		hide: function (e) {
+>, <Line: +			if (this.isInline) return;
+>, <Line: +		remove: function () {
+>, <Line: +		getDate: function () {
+>, <Line: +			return new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+>, <Line: +		getUTCDate: function () {
+>, <Line: +		setDate: function (d) {
+>, <Line: +			this.setUTCDate(new Date(d.getTime() - (d.getTimezoneOffset() * 60000)));
+>, <Line: +		setUTCDate: function (d) {
+>, <Line: +		setValue: function () {
+>, <Line: +				if (this.component) {
+>, <Line: +		getFormattedDate: function (format) {
+>, <Line: +		setStartDate: function (startDate) {
+>, <Line: +			this.startDate = startDate || -Infinity;
+>, <Line: +		setEndDate: function (endDate) {
+>, <Line: +			this.endDate = endDate || Infinity;
+>, <Line: +		setDaysOfWeekDisabled: function (daysOfWeekDisabled) {
+>, <Line: +			this.daysOfWeekDisabled = daysOfWeekDisabled || [];
+>, <Line: +		place: function () {
+>, <Line: +			if (this.isInline) return;
+>, <Line: +			var zIndex = parseInt(this.element.parents().filter(function () {
+>, <Line: +					return $(this).css('z-index') != 'auto';
+>, <Line: +				}).first().css('z-index')) + 10;
+>, <Line: +		update: function () {
+>, <Line: +			if (arguments && arguments.length && (typeof arguments[0] === 'string' || arguments[0] instanceof Date)) {
+>, <Line: +			if (fromArgs) this.setValue();
+>, <Line: +		fillDow: function () {
+>, <Line: +				html = '<tr>';
+>, <Line: +			if (this.calendarWeeks) {
+>, <Line: +				html += '<th class="dow">' + dates[this.language].daysMin[(dowCnt++) % 7] + '</th>';
+>, <Line: +		fillMonths: function () {
+>, <Line: +				i = 0;
+>, <Line: +				html += '<span class="month">' + dates[this.language].monthsShort[i++] + '</span>';
+>, <Line: +		fill: function () {
+>, <Line: +				.text(dates[this.language].months[month] + ' ' + year);
+>, <Line: +				.text(dates[this.language].today)
+>, <Line: +				.toggle(this.todayBtn !== false);
+>, <Line: +			var prevMonth = UTCDate(year, month - 1, 28, 0, 0, 0, 0),
+>, <Line: +			prevMonth.setUTCDate(day - (prevMonth.getUTCDay() - this.weekStart + 7) % 7);
+>, <Line: +			while (prevMonth.valueOf() < nextMonth) {
+>, <Line: +					if (this.calendarWeeks) {
+>, <Line: +						// Start of current week: based on weekstart/current date
+>, <Line: +						// Thursday of this week
+>, <Line: +						// First Thursday of year, year from thursday
+>, <Line: +							yth = new Date(+(yth = UTCDate(th.getUTCFullYear(), 0, 1)) + (7 + 4 - yth.getUTCDay()) % 7 * 864e5),
+>, <Line: +						// Calendar week: ms between thursdays, div ms per day, div 7 days
+>, <Line: +							calWeek = (th - yth) / 864e5 / 7 + 1;
+>, <Line: +						html.push('<td class="cw">' + calWeek + '</td>');
+>, <Line: +				html.push('<td class="day' + clsName + '">' + prevMonth.getUTCDate() + '</td>');
+>, <Line: +				prevMonth.setUTCDate(prevMonth.getUTCDate() + 1);
+>, <Line: +				.find('th:eq(1)')
+>, <Line: +				.text(year)
+>, <Line: +				.end()
+>, <Line: +				.find('span').removeClass('active');
+>, <Line: +				months.slice(endMonth + 1).addClass('disabled');
+>, <Line: +			year = parseInt(year / 10, 10) * 10;
+>, <Line: +				.find('th:eq(1)')
+>, <Line: +				.text(year + '-' + (year + 9))
+>, <Line: +				.end()
+>, <Line: +				.find('td');
+>, <Line: +				html += '<span class="year' + (i == -1 || i == 10 ? ' old' : '') + (currentYear == year ? ' active' : '') + (year < startYear || year > endYear ? ' disabled' : '') + '">' + year + '</span>';
+>, <Line: +		updateNavArrows: function () {
+>, <Line: +		click: function (e) {
+>, <Line: +				switch (target[0].nodeName.toLowerCase()) {
+>, <Line: +						switch (target[0].className) {
+>, <Line: +								switch (this.viewMode) {
+>, <Line: +								if (this.minViewMode == 1) {
+>, <Line: +									this._setDate(UTCDate(year, month, day, 0, 0, 0, 0));
+>, <Line: +								var year = parseInt(target.text(), 10) || 0;
+>, <Line: +								if (this.minViewMode == 2) {
+>, <Line: +									this._setDate(UTCDate(year, month, day, 0, 0, 0, 0));
+>, <Line: +						if (target.is('.day') && !target.is('.disabled')) {
+>, <Line: +							var day = parseInt(target.text(), 10) || 1;
+>, <Line: +							this._setDate(UTCDate(year, month, day, 0, 0, 0, 0));
+>, <Line: +		_setDate: function (date, which) {
+>, <Line: +			if (!which || which == 'view')
+>, <Line: +			} else if (this.component) {
+>, <Line: +		moveMonth: function (date, dir) {
+>, <Line: +			if (mag == 1) {
+>, <Line: +					? function () {
+>, <Line: +					return new_date.getUTCMonth() == month;
+>, <Line: +				}
+>, <Line: +					: function () {
+>, <Line: +					return new_date.getUTCMonth() != new_month;
+>, <Line: +				};
+>, <Line: +				for (var i = 0; i < mag; i++)
+>, <Line: +				test = function () {
+>, <Line: +					return new_month != new_date.getUTCMonth();
+>, <Line: +				};
+>, <Line: +			while (test()) {
+>, <Line: +		moveYear: function (date, dir) {
+>, <Line: +			return this.moveMonth(date, dir * 12);
+>, <Line: +		dateWithinRange: function (date) {
+>, <Line: +		keydown: function (e) {
+>, <Line: +			if (this.picker.is(':not(:visible)')) {
+>, <Line: +			switch (e.keyCode) {
+>, <Line: +					if (e.ctrlKey) {
+>, <Line: +					} else if (e.shiftKey) {
+>, <Line: +					if (this.dateWithinRange(newDate)) {
+>, <Line: +					if (e.ctrlKey) {
+>, <Line: +					} else if (e.shiftKey) {
+>, <Line: +					if (this.dateWithinRange(newDate)) {
+>, <Line: +			if (dateChanged) {
+>, <Line: +				} else if (this.component) {
+>, <Line: +		showMode: function (dir) {
+>, <Line: +			 vitalets: fixing bug of very special conditions:
+>, <Line: +			 jquery 1.7.1 + webkit + show inline datepicker in bootstrap popover.
+>, <Line: +			 Method show() does not set display css correctly and datepicker is not shown.
+>, <Line: +			 Changed to .css('display', 'block') solve the problem.
+>, <Line: +			 See https://github.com/vitalets/x-editable/issues/37
+>, <Line: +			 In jquery 1.7.2+ everything works fine.
+>, <Line: +			 */
+>, <Line: +			this.picker.find('>div').hide().filter('.datepicker-' + DPGlobal.modes[this.viewMode].clsName).css('display', 'block');
+>, <Line: +	$.fn.datepicker = function (option) {
+>, <Line: +				$this.data('datepicker', (data = new Datepicker(this, $.extend({}, $.fn.datepicker.defaults, options))));
+>, <Line: +	$.fn.datepicker.defaults = {};
+>, <Line: +			}],
+>, <Line: +		parseFormat: function (format) {
+>, <Line: +			if (!separators || !separators.length || !parts || parts.length === 0) {
+>, <Line: +		parseDate: function (date, format, language) {
+>, <Line: +				for (var i = 0; i < parts.length; i++) {
+>, <Line: +					switch (part[2]) {
+>, <Line: +					yyyy: function (d, v) {
+>, <Line: +						return d.setUTCFullYear(v);
+>, <Line: +					},
+>, <Line: +					yy: function (d, v) {
+>, <Line: +						return d.setUTCFullYear(2000 + v);
+>, <Line: +					},
+>, <Line: +					m: function (d, v) {
+>, <Line: +						while (v < 0) v += 12;
+>, <Line: +							d.setUTCDate(d.getUTCDate() - 1);
+>, <Line: +					d: function (d, v) {
+>, <Line: +						return d.setUTCDate(v);
+>, <Line: +					}
+>, <Line: +				fparts = $(fparts).filter(function (i, p) {
+>, <Line: +				for (var i = 0, cnt = fparts.length; i < cnt; i++) {
+>, <Line: +						switch (part) {
+>, <Line: +								filtered = $(dates[language].months).filter(function () {
+>, <Line: +								filtered = $(dates[language].monthsShort).filter(function () {
+>, <Line: +				for (var i = 0, s; i < setters_order.length; i++) {
+>, <Line: +		formatDate: function (date, format, language) {
+>, <Line: +			for (var i = 0, cnt = format.parts.length; i < cnt; i++) {
+>, <Line: +		headTemplate: '<thead>' +
+>, <Line: +		'<tr>' +
+>, <Line: +		'<th class="prev"><i class="icon-arrow-left"/></th>' +
+>, <Line: +		'<th colspan="5" class="switch"></th>' +
+>, <Line: +		'<th class="next"><i class="icon-arrow-right"/></th>' +
+>, <Line: +		'</tr>' +
+>, <Line: +		'</thead>',
+>, <Line: +	DPGlobal.template = '<div class="datepicker">' +
+>, <Line: +		'<div class="datepicker-days">' +
+>, <Line: +		'<table class=" table-condensed">' +
+>, <Line: +		DPGlobal.headTemplate +
+>, <Line: +		'<tbody></tbody>' +
+>, <Line: +		DPGlobal.footTemplate +
+>, <Line: +		'</table>' +
+>, <Line: +		'</div>' +
+>, <Line: +		'<div class="datepicker-months">' +
+>, <Line: +		'<table class="table-condensed">' +
+>, <Line: +		DPGlobal.headTemplate +
+>, <Line: +		DPGlobal.contTemplate +
+>, <Line: +		DPGlobal.footTemplate +
+>, <Line: +		'</table>' +
+>, <Line: +		'</div>' +
+>, <Line: +		'<div class="datepicker-years">' +
+>, <Line: +		'<table class="table-condensed">' +
+>, <Line: +		DPGlobal.headTemplate +
+>, <Line: +		DPGlobal.contTemplate +
+>, <Line: +		DPGlobal.footTemplate +
+>, <Line: +		'</table>' +
+>, <Line: +		'</div>' +
+>, <Line: +		'</div>';
+>, <Line: +}(window.jQuery);
+>]
+[<Line: -!function( $ ) {
+>, <Line: -	function UTCDate(){
+>, <Line: -	function UTCToday(){
+>, <Line: -	var Datepicker = function(element, options) {
+>, <Line: -		this.language = options.language||this.element.data('date-language')||"en";
+>, <Line: -		this.isRTL = dates[this.language].rtl||false;
+>, <Line: -		this.format = DPGlobal.parseFormat(options.format||this.element.data('date-format')||dates[this.language].format||'mm/dd/yyyy');
+>, <Line: -		if(this.component && this.component.length === 0)
+>, <Line: -		if(this.isInline) {
+>, <Line: -		if (this.isRTL){
+>, <Line: -						.toggleClass('icon-arrow-left icon-arrow-right');
+>, <Line: -		switch(options.startView || this.element.data('date-start-view')){
+>, <Line: -		this.minViewMode = options.minViewMode||this.element.data('date-min-view-mode')||0;
+>, <Line: -		this.todayBtn = (options.todayBtn||this.element.data('date-today-btn')||false);
+>, <Line: -		this.todayHighlight = (options.todayHighlight||this.element.data('date-today-highlight')||false);
+>, <Line: -						.attr('colspan', function(i, val){
+>, <Line: -							return parseInt(val) + 1;
+>, <Line: -						});
+>, <Line: -		this.weekStart = ((options.weekStart||this.element.data('date-weekstart')||dates[this.language].weekStart||0) % 7);
+>, <Line: -		this.setStartDate(options.startDate||this.element.data('date-startdate'));
+>, <Line: -		this.setEndDate(options.endDate||this.element.data('date-enddate'));
+>, <Line: -		this.setDaysOfWeekDisabled(options.daysOfWeekDisabled||this.element.data('date-days-of-week-disabled'));
+>, <Line: -		if(this.isInline) {
+>, <Line: -		_applyEvents: function(evs){
+>, <Line: -			for (var i=0, el, ev; i<evs.length; i++){
+>, <Line: -		_unapplyEvents: function(evs){
+>, <Line: -			for (var i=0, el, ev; i<evs.length; i++){
+>, <Line: -		_buildEvents: function(){
+>, <Line: -			else if (this.component && this.hasInput){ // component: input + button
+>, <Line: -		_attachEvents: function(){
+>, <Line: -		_detachEvents: function(){
+>, <Line: -		_attachSecondaryEvents: function(){
+>, <Line: -		_detachSecondaryEvents: function(){
+>, <Line: -		show: function(e) {
+>, <Line: -		hide: function(e){
+>, <Line: -			if(this.isInline) return;
+>, <Line: -		remove: function() {
+>, <Line: -		getDate: function() {
+>, <Line: -			return new Date(d.getTime() + (d.getTimezoneOffset()*60000));
+>, <Line: -		getUTCDate: function() {
+>, <Line: -		setDate: function(d) {
+>, <Line: -			this.setUTCDate(new Date(d.getTime() - (d.getTimezoneOffset()*60000)));
+>, <Line: -		setUTCDate: function(d) {
+>, <Line: -		setValue: function() {
+>, <Line: -				if (this.component){
+>, <Line: -		getFormattedDate: function(format) {
+>, <Line: -		setStartDate: function(startDate){
+>, <Line: -			this.startDate = startDate||-Infinity;
+>, <Line: -		setEndDate: function(endDate){
+>, <Line: -			this.endDate = endDate||Infinity;
+>, <Line: -		setDaysOfWeekDisabled: function(daysOfWeekDisabled){
+>, <Line: -			this.daysOfWeekDisabled = daysOfWeekDisabled||[];
+>, <Line: -		place: function(){
+>, <Line: -						if(this.isInline) return;
+>, <Line: -			var zIndex = parseInt(this.element.parents().filter(function() {
+>, <Line: -							return $(this).css('z-index') != 'auto';
+>, <Line: -						}).first().css('z-index'))+10;
+>, <Line: -		update: function(){
+>, <Line: -			if(arguments && arguments.length && (typeof arguments[0] === 'string' || arguments[0] instanceof Date)) {
+>, <Line: -			if(fromArgs) this.setValue();
+>, <Line: -		fillDow: function(){
+>, <Line: -			html = '<tr>';
+>, <Line: -			if(this.calendarWeeks){
+>, <Line: -				html += '<th class="dow">'+dates[this.language].daysMin[(dowCnt++)%7]+'</th>';
+>, <Line: -		fillMonths: function(){
+>, <Line: -			i = 0;
+>, <Line: -				html += '<span class="month">'+dates[this.language].monthsShort[i++]+'</span>';
+>, <Line: -		fill: function() {
+>, <Line: -						.text(dates[this.language].months[month]+' '+year);
+>, <Line: -						.text(dates[this.language].today)
+>, <Line: -						.toggle(this.todayBtn !== false);
+>, <Line: -			var prevMonth = UTCDate(year, month-1, 28,0,0,0,0),
+>, <Line: -			prevMonth.setUTCDate(day - (prevMonth.getUTCDay() - this.weekStart + 7)%7);
+>, <Line: -			while(prevMonth.valueOf() < nextMonth) {
+>, <Line: -					if(this.calendarWeeks){
+>, <Line: -							// Start of current week: based on weekstart/current date
+>, <Line: -							// Thursday of this week
+>, <Line: -							// First Thursday of year, year from thursday
+>, <Line: -							yth = new Date(+(yth = UTCDate(th.getUTCFullYear(), 0, 1)) + (7 + 4 - yth.getUTCDay())%7*864e5),
+>, <Line: -							// Calendar week: ms between thursdays, div ms per day, div 7 days
+>, <Line: -							calWeek =  (th - yth) / 864e5 / 7 + 1;
+>, <Line: -						html.push('<td class="cw">'+ calWeek +'</td>');
+>, <Line: -				html.push('<td class="day'+clsName+'">'+prevMonth.getUTCDate() + '</td>');
+>, <Line: -				prevMonth.setUTCDate(prevMonth.getUTCDate()+1);
+>, <Line: -						.find('th:eq(1)')
+>, <Line: -							.text(year)
+>, <Line: -							.end()
+>, <Line: -						.find('span').removeClass('active');
+>, <Line: -				months.slice(endMonth+1).addClass('disabled');
+>, <Line: -			year = parseInt(year/10, 10) * 10;
+>, <Line: -								.find('th:eq(1)')
+>, <Line: -									.text(year + '-' + (year + 9))
+>, <Line: -									.end()
+>, <Line: -								.find('td');
+>, <Line: -				html += '<span class="year'+(i == -1 || i == 10 ? ' old' : '')+(currentYear == year ? ' active' : '')+(year < startYear || year > endYear ? ' disabled' : '')+'">'+year+'</span>';
+>, <Line: -		updateNavArrows: function() {
+>, <Line: -		click: function(e) {
+>, <Line: -				switch(target[0].nodeName.toLowerCase()) {
+>, <Line: -						switch(target[0].className) {
+>, <Line: -								switch(this.viewMode){
+>, <Line: -								if ( this.minViewMode == 1 ) {
+>, <Line: -									this._setDate(UTCDate(year, month, day,0,0,0,0));
+>, <Line: -								var year = parseInt(target.text(), 10)||0;
+>, <Line: -								if ( this.minViewMode == 2 ) {
+>, <Line: -									this._setDate(UTCDate(year, month, day,0,0,0,0));
+>, <Line: -						if (target.is('.day') && !target.is('.disabled')){
+>, <Line: -							var day = parseInt(target.text(), 10)||1;
+>, <Line: -							this._setDate(UTCDate(year, month, day,0,0,0,0));
+>, <Line: -		_setDate: function(date, which){
+>, <Line: -			if (!which || which  == 'view')
+>, <Line: -			} else if (this.component){
+>, <Line: -		moveMonth: function(date, dir){
+>, <Line: -			if (mag == 1){
+>, <Line: -					? function(){ return new_date.getUTCMonth() == month; }
+>, <Line: -					: function(){ return new_date.getUTCMonth() != new_month; };
+>, <Line: -				for (var i=0; i<mag; i++)
+>, <Line: -				test = function(){ return new_month != new_date.getUTCMonth(); };
+>, <Line: -			while (test()){
+>, <Line: -		moveYear: function(date, dir){
+>, <Line: -			return this.moveMonth(date, dir*12);
+>, <Line: -		dateWithinRange: function(date){
+>, <Line: -		keydown: function(e){
+>, <Line: -			if (this.picker.is(':not(:visible)')){
+>, <Line: -			switch(e.keyCode){
+>, <Line: -					if (e.ctrlKey){
+>, <Line: -					} else if (e.shiftKey){
+>, <Line: -					if (this.dateWithinRange(newDate)){
+>, <Line: -					if (e.ctrlKey){
+>, <Line: -					} else if (e.shiftKey){
+>, <Line: -					if (this.dateWithinRange(newDate)){
+>, <Line: -			if (dateChanged){
+>, <Line: -				} else if (this.component){
+>, <Line: -		showMode: function(dir) {
+>, <Line: -				vitalets: fixing bug of very special conditions:
+>, <Line: -				jquery 1.7.1 + webkit + show inline datepicker in bootstrap popover.
+>, <Line: -				Method show() does not set display css correctly and datepicker is not shown.
+>, <Line: -				Changed to .css('display', 'block') solve the problem.
+>, <Line: -				See https://github.com/vitalets/x-editable/issues/37
+>, <Line: -				In jquery 1.7.2+ everything works fine.
+>, <Line: -			*/
+>, <Line: -			this.picker.find('>div').hide().filter('.datepicker-'+DPGlobal.modes[this.viewMode].clsName).css('display', 'block');
+>, <Line: -	$.fn.datepicker = function ( option ) {
+>, <Line: -				$this.data('datepicker', (data = new Datepicker(this, $.extend({}, $.fn.datepicker.defaults,options))));
+>, <Line: -	$.fn.datepicker.defaults = {
+>, <Line: -	};
+>, <Line: -		}],
+>, <Line: -		parseFormat: function(format){
+>, <Line: -			if (!separators || !separators.length || !parts || parts.length === 0){
+>, <Line: -		parseDate: function(date, format, language) {
+>, <Line: -				for (var i=0; i<parts.length; i++) {
+>, <Line: -					switch(part[2]){
+>, <Line: -					yyyy: function(d,v){ return d.setUTCFullYear(v); },
+>, <Line: -					yy: function(d,v){ return d.setUTCFullYear(2000+v); },
+>, <Line: -					m: function(d,v){
+>, <Line: -						while (v<0) v += 12;
+>, <Line: -							d.setUTCDate(d.getUTCDate()-1);
+>, <Line: -					d: function(d,v){ return d.setUTCDate(v); }
+>, <Line: -				fparts = $(fparts).filter(function(i,p){
+>, <Line: -				for (var i=0, cnt = fparts.length; i < cnt; i++) {
+>, <Line: -						switch(part) {
+>, <Line: -								filtered = $(dates[language].months).filter(function(){
+>, <Line: -								filtered = $(dates[language].monthsShort).filter(function(){
+>, <Line: -				for (var i=0, s; i<setters_order.length; i++){
+>, <Line: -		formatDate: function(date, format, language){
+>, <Line: -			for (var i=0, cnt = format.parts.length; i < cnt; i++) {
+>, <Line: -		headTemplate: '<thead>'+
+>, <Line: -							'<tr>'+
+>, <Line: -								'<th class="prev"><i class="icon-arrow-left"/></th>'+
+>, <Line: -								'<th colspan="5" class="switch"></th>'+
+>, <Line: -								'<th class="next"><i class="icon-arrow-right"/></th>'+
+>, <Line: -							'</tr>'+
+>, <Line: -						'</thead>',
+>, <Line: -	DPGlobal.template = '<div class="datepicker">'+
+>, <Line: -							'<div class="datepicker-days">'+
+>, <Line: -								'<table class=" table-condensed">'+
+>, <Line: -									DPGlobal.headTemplate+
+>, <Line: -									'<tbody></tbody>'+
+>, <Line: -									DPGlobal.footTemplate+
+>, <Line: -								'</table>'+
+>, <Line: -							'</div>'+
+>, <Line: -							'<div class="datepicker-months">'+
+>, <Line: -								'<table class="table-condensed">'+
+>, <Line: -									DPGlobal.headTemplate+
+>, <Line: -									DPGlobal.contTemplate+
+>, <Line: -									DPGlobal.footTemplate+
+>, <Line: -								'</table>'+
+>, <Line: -							'</div>'+
+>, <Line: -							'<div class="datepicker-years">'+
+>, <Line: -								'<table class="table-condensed">'+
+>, <Line: -									DPGlobal.headTemplate+
+>, <Line: -									DPGlobal.contTemplate+
+>, <Line: -									DPGlobal.footTemplate+
+>, <Line: -								'</table>'+
+>, <Line: -							'</div>'+
+>, <Line: -						'</div>';
+>, <Line: -}( window.jQuery );
+>]

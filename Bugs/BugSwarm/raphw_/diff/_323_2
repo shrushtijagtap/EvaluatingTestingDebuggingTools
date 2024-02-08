@@ -1,0 +1,5 @@
+[<Line: +import static org.hamcrest.CoreMatchers.nullValue;
+>, <Line: +        assertThat(TypeDescription.Generic.AnnotationReader.Dispatcher.ForLegacyVm.INSTANCE.resolveReceiverType(null),
+>, <Line: +                nullValue(TypeDescription.Generic.class));
+>]
+[]

@@ -1,0 +1,4 @@
+[<Line: +    private WasmBinaryVersion wasmVersion = WasmBinaryVersion.V_0xC;
+>]
+[<Line: -    private WasmBinaryVersion wasmVersion;
+>]

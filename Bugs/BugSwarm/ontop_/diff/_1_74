@@ -1,0 +1,4 @@
+[<Line: +		final CQIE headquery = object.getTargetQuery();
+>]
+[<Line: -		final CQIE headquery = (CQIEImpl) object.getTargetQuery();
+>]

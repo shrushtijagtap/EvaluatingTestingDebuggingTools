@@ -1,0 +1,5 @@
+[<Line: +../../tests/invalid/MethodRef_Invalid_2.whiley:7: expected type int, found bool
+>, <Line: +    return m(false)
+>, <Line: +             ^^^^^
+>]
+[]

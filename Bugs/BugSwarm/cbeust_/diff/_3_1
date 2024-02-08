@@ -1,0 +1,18 @@
+[<Line: +    if(expected == null ^ actual == null) {
+>, <Line: +      failNotEquals(actual, expected, message);
+>, <Line: +    }
+>, <Line: +    if (expected.getClass().isArray()) {
+>, <Line: +       assertArrayEquals(actual, expected, message);
+>, <Line: +       return;
+>, <Line: +    }
+>, <Line: +    if (expected.equals(actual) && actual.equals(expected)) {
+>, <Line: +       return;
+>]
+[<Line: -    if(expected != null) {
+>, <Line: -      if (expected.getClass().isArray()) {
+>, <Line: -        assertArrayEquals(actual, expected, message);
+>, <Line: -        return;
+>, <Line: -      } else if (expected.equals(actual)) {
+>, <Line: -        return;
+>, <Line: -      }
+>]

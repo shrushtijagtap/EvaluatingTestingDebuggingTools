@@ -1,0 +1,228 @@
+[<Line: +package org.kairosdb.rollup;
+>, <Line: +import org.kairosdb.core.DataPoint;
+>, <Line: +import org.kairosdb.core.aggregator.Aggregator;
+>, <Line: +import org.kairosdb.core.aggregator.RangeAggregator;
+>, <Line: +import org.kairosdb.core.datapoints.LongDataPointFactory;
+>, <Line: +import org.kairosdb.core.datapoints.LongDataPointFactoryImpl;
+>, <Line: +import org.kairosdb.core.datapoints.StringDataPointFactory;
+>, <Line: +import org.kairosdb.core.datastore.*;
+>, <Line: +import org.kairosdb.core.exception.DatastoreException;
+>, <Line: +import org.kairosdb.core.http.rest.json.RelativeTime;
+>, <Line: +import org.kairosdb.core.reporting.ThreadReporter;
+>, <Line: +import org.kairosdb.core.scheduler.KairosDBSchedulerImpl;
+>, <Line: +import org.quartz.InterruptableJob;
+>, <Line: +import org.quartz.JobDataMap;
+>, <Line: +import org.quartz.JobExecutionContext;
+>, <Line: +import org.quartz.JobExecutionException;
+>, <Line: +import org.slf4j.Logger;
+>, <Line: +import org.slf4j.LoggerFactory;
+>, <Line: +import java.util.Date;
+>, <Line: +import java.util.List;
+>, <Line: +import static com.google.common.base.Preconditions.checkNotNull;
+>, <Line: +import static com.google.inject.internal.util.$Preconditions.checkState;
+>, <Line: +public class RollUpJob implements InterruptableJob
+>, <Line: +{
+>, <Line: +	private static final Logger log = LoggerFactory.getLogger(KairosDBSchedulerImpl.class);
+>, <Line: +	private static final String ROLLUP_TIME = "kairosdb.rollup.execution-time";
+>, <Line: +	protected static final int TOO_OLD_MULTIPLIER = 4;
+>, <Line: +	private boolean interrupted;
+>, <Line: +	private LongDataPointFactory longDataPointFactory = new LongDataPointFactoryImpl();
+>, <Line: +	private StringDataPointFactory stringDataPointFactory = new StringDataPointFactory();
+>, <Line: +	public RollUpJob()
+>, <Line: +	{
+>, <Line: +	}
+>, <Line: +	@SuppressWarnings("ConstantConditions")
+>, <Line: +	@Override
+>, <Line: +	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException
+>, <Line: +	{
+>, <Line: +		try
+>, <Line: +		{
+>, <Line: +			JobDataMap dataMap = jobExecutionContext.getMergedJobDataMap();
+>, <Line: +			RollupTask task = (RollupTask) dataMap.get("task");
+>, <Line: +			KairosDatastore datastore = (KairosDatastore) dataMap.get("datastore");
+>, <Line: +			String hostName = (String) dataMap.get("hostName");
+>, <Line: +			checkState(task != null, "Task was null");
+>, <Line: +			checkState(datastore != null, "Datastore was null");
+>, <Line: +			checkState(hostName != null, "hostname was null");
+>, <Line: +			for (Rollup rollup : task.getRollups())
+>, <Line: +			{
+>, <Line: +				log.info("Executing Rollup Task: " + task.getName() + " for Rollup  " + rollup.getSaveAs());
+>, <Line: +				if (interrupted)
+>, <Line: +					break;
+>, <Line: +				for (QueryMetric queryMetric : rollup.getQueryMetrics())
+>, <Line: +				{
+>, <Line: +					boolean success = true;
+>, <Line: +					long startQueryTime = System.currentTimeMillis();
+>, <Line: +					try
+>, <Line: +					{
+>, <Line: +						if (interrupted)
+>, <Line: +							break;
+>, <Line: +						DataPoint rollupDataPoint = getLastRollupDataPoint(datastore, rollup.getSaveAs(), startQueryTime);
+>, <Line: +						queryMetric.setStartTime(calculateStartTime(rollupDataPoint, getLastSampling(queryMetric.getAggregators()), startQueryTime));
+>, <Line: +						queryMetric.setEndTime(calculateEndTime(rollupDataPoint, task.getExecutionInterval(), startQueryTime));
+>, <Line: +						long dpCount = executeRollup(datastore, queryMetric);
+>, <Line: +						log.info("Rollup Task: " + task.getName() + " for Rollup " + rollup.getSaveAs() + " data point count of " + dpCount);
+>, <Line: +						if (dpCount == 0 && rollupDataPoint != null)
+>, <Line: +						{
+>, <Line: +							// Advance forward if a data point exists for the query metric
+>, <Line: +							DataPoint dataPoint = getFutureDataPoint(datastore, queryMetric.getName(), startQueryTime, rollupDataPoint);
+>, <Line: +							queryMetric.setStartTime(calculateStartTime(dataPoint, getLastSampling(queryMetric.getAggregators()), startQueryTime));
+>, <Line: +							queryMetric.setEndTime(calculateEndTime(dataPoint, task.getExecutionInterval(), startQueryTime));
+>, <Line: +							dpCount = executeRollup(datastore, queryMetric);
+>, <Line: +							log.info("Tried again Rollup Task: " + task.getName() + " for Rollup " + rollup.getSaveAs() + " data point count of " + dpCount);
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					catch (DatastoreException e)
+>, <Line: +					{
+>, <Line: +						success = false;
+>, <Line: +						log.error("Failed to execute query for roll-up task: " + task.getName() + " roll-up: " + rollup.getSaveAs(), e);
+>, <Line: +					}
+>, <Line: +					catch (Exception e)
+>, <Line: +					{
+>, <Line: +						success = false;
+>, <Line: +						log.error("Failed to roll-up task: " + task.getName() + " roll-up: " + rollup.getSaveAs(), e);
+>, <Line: +					}
+>, <Line: +					finally
+>, <Line: +					{
+>, <Line: +						ThreadReporter.setReportTime(System.currentTimeMillis());
+>, <Line: +						ThreadReporter.clearTags();
+>, <Line: +						ThreadReporter.addTag("host", hostName);
+>, <Line: +						ThreadReporter.addTag("rollup", rollup.getSaveAs());
+>, <Line: +						ThreadReporter.addTag("rollup-task", task.getName());
+>, <Line: +						ThreadReporter.addTag("status", success ? "success" : "failure");
+>, <Line: +						ThreadReporter.addDataPoint(ROLLUP_TIME, System.currentTimeMillis() - ThreadReporter.getReportTime());
+>, <Line: +						ThreadReporter.submitData(longDataPointFactory, stringDataPointFactory, datastore);
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		catch (Throwable t)
+>, <Line: +		{
+>, <Line: +			log.error("Failed to execute job " + jobExecutionContext.toString(), t);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	private long executeRollup(KairosDatastore datastore, QueryMetric query) throws DatastoreException
+>, <Line: +	{
+>, <Line: +		log.info("Execute Rollup: Start time: " + new Date(query.getStartTime()) + " End time: " + new Date(query.getEndTime()));
+>, <Line: +		int dpCount = 0;
+>, <Line: +		DatastoreQuery dq = datastore.createQuery(query);
+>, <Line: +		try
+>, <Line: +		{
+>, <Line: +			List<DataPointGroup> result = dq.execute();
+>, <Line: +			for (DataPointGroup dataPointGroup : result)
+>, <Line: +			{
+>, <Line: +				while (dataPointGroup.hasNext())
+>, <Line: +				{
+>, <Line: +					dataPointGroup.next();
+>, <Line: +					dpCount++;
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		finally
+>, <Line: +		{
+>, <Line: +			if (dq != null)
+>, <Line: +				dq.close();
+>, <Line: +		}
+>, <Line: +		return dpCount;
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 Returns the last data point the rollup created
+>, <Line: +	 */
+>, <Line: +	protected static DataPoint getLastRollupDataPoint(KairosDatastore datastore, String rollupName, long now) throws DatastoreException
+>, <Line: +	{
+>, <Line: +		QueryMetric rollupQuery = new QueryMetric(0, now, 0, rollupName);
+>, <Line: +		rollupQuery.setLimit(1);
+>, <Line: +		rollupQuery.setOrder(Order.DESC);
+>, <Line: +		return performQuery(datastore, rollupQuery);
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 Returns the next data point for the metric given a starting data point
+>, <Line: +	 */
+>, <Line: +	protected static DataPoint getFutureDataPoint(KairosDatastore datastore, String metricName, long now, DataPoint startPoint) throws DatastoreException
+>, <Line: +	{
+>, <Line: +		QueryMetric rollupQuery = new QueryMetric(startPoint.getTimestamp() + 1, now, 0, metricName);
+>, <Line: +		rollupQuery.setLimit(1);
+>, <Line: +		rollupQuery.setOrder(Order.ASC);
+>, <Line: +		return performQuery(datastore, rollupQuery);
+>, <Line: +	}
+>, <Line: +	private static DataPoint performQuery(KairosDatastore datastore, QueryMetric rollupQuery) throws DatastoreException
+>, <Line: +	{
+>, <Line: +		DatastoreQuery query = null;
+>, <Line: +		try
+>, <Line: +		{
+>, <Line: +			query = datastore.createQuery(rollupQuery);
+>, <Line: +			List<DataPointGroup> rollupResult = query.execute();
+>, <Line: +			DataPoint dataPoint = null;
+>, <Line: +			for (DataPointGroup dataPointGroup : rollupResult)
+>, <Line: +			{
+>, <Line: +				while (dataPointGroup.hasNext())
+>, <Line: +				{
+>, <Line: +					dataPoint = dataPointGroup.next();
+>, <Line: +				}
+>, <Line: +			}
+>, <Line: +			return dataPoint;
+>, <Line: +		}
+>, <Line: +		finally
+>, <Line: +		{
+>, <Line: +			if (query != null)
+>, <Line: +				query.close();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 Returns the time stamp of the specified data point. If the data point is
+>, <Line: +	 null then it returns the start time for one sampling period before now.
+>, <Line: +	 */
+>, <Line: +	protected static long calculateStartTime(DataPoint dataPoint, Sampling lastSampling, long now)
+>, <Line: +	{
+>, <Line: +		checkNotNull(lastSampling, "At least one aggregators in the query must be a RangeAggregator.");
+>, <Line: +		if (dataPoint == null)
+>, <Line: +		{
+>, <Line: +			// go back one unit of time
+>, <Line: +			RelativeTime samplingTime = new RelativeTime((int) lastSampling.getValue(), lastSampling.getUnit());
+>, <Line: +			return samplingTime.getTimeRelativeTo(now);
+>, <Line: +		}
+>, <Line: +		else
+>, <Line: +		{
+>, <Line: +			return dataPoint.getTimestamp();
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 Returns now if the data point is null. If the data point is not null
+>, <Line: +	 and its time stamp is too old, return a time that is 4 intervals from
+>, <Line: +	 the data point time.
+>, <Line: +	 */
+>, <Line: +	protected static long calculateEndTime(DataPoint datapoint, Duration executionInterval, long now)
+>, <Line: +	{
+>, <Line: +		long endTime = now;
+>, <Line: +		RelativeTime relativeTime = new RelativeTime((int) (TOO_OLD_MULTIPLIER * executionInterval.getValue()), executionInterval.getUnit());
+>, <Line: +		if (datapoint != null && datapoint.getTimestamp() < relativeTime.getTimeRelativeTo(now))
+>, <Line: +		{
+>, <Line: +			// last time was too old. Only do part of the rollup
+>, <Line: +			endTime = relativeTime.getFutureTimeRelativeTo(datapoint.getTimestamp());
+>, <Line: +		}
+>, <Line: +		return endTime;
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 Returns the sampling from the last RangeAggregator in the aggregators list
+>, <Line: +	 or null if no sampling is found
+>, <Line: +	 */
+>, <Line: +	protected static Sampling getLastSampling(List<Aggregator> aggregators)
+>, <Line: +	{
+>, <Line: +		for (int i = aggregators.size() - 1; i >= 0; i--)
+>, <Line: +		{
+>, <Line: +			Aggregator aggregator = aggregators.get(i);
+>, <Line: +			if (aggregator instanceof RangeAggregator)
+>, <Line: +			{
+>, <Line: +				return ((RangeAggregator) aggregator).getSampling();
+>, <Line: +			}
+>, <Line: +		}
+>, <Line: +		return null;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public void interrupt()
+>, <Line: +	{
+>, <Line: +		interrupted = true;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

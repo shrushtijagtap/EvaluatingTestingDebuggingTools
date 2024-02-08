@@ -1,0 +1,5 @@
+[<Line: +    @Deprecated
+>, <Line: +    public FileContents(String filename, String... lines) {
+>]
+[<Line: -    @Deprecated public FileContents(String filename, String... lines) {
+>]

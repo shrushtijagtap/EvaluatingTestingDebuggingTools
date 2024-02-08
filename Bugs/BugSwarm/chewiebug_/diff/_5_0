@@ -1,0 +1,4 @@
+[<Line: +        return "GCResource [resourceNameAsUrlString=" + getResourceNameAsUrlString() + ", isReload=" + isReload
+>]
+[<Line: -        return "GCResource [resourceName=" + resourceName + ", isReload=" + isReload
+>]

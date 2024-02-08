@@ -1,0 +1,26 @@
+[<Line: +  -moz-background-clip: padding;
+>, <Line: +  background-clip: padding-box;
+>, <Line: +  border: 1px solid rgba(0, 0, 0, .2);
+>, <Line: +  .box-shadow(0 5px 10px rgba(0, 0, 0, .2));
+>, <Line: +  &.top {
+>, <Line: +    margin-top: -10px;
+>, <Line: +  }
+>, <Line: +  &.right {
+>, <Line: +    margin-left: 10px;
+>, <Line: +  }
+>, <Line: +  &.bottom {
+>, <Line: +    margin-top: 10px;
+>, <Line: +  }
+>, <Line: +  &.left {
+>, <Line: +    margin-left: -10px;
+>, <Line: +  }
+>]
+[<Line: -     -moz-background-clip: padding;
+>, <Line: -          background-clip: padding-box;
+>, <Line: -  border: 1px solid rgba(0,0,0,.2);
+>, <Line: -  .box-shadow(0 5px 10px rgba(0,0,0,.2));
+>, <Line: -  &.top     { margin-top: -10px; }
+>, <Line: -  &.right   { margin-left: 10px; }
+>, <Line: -  &.bottom  { margin-top: 10px; }
+>, <Line: -  &.left    { margin-left: -10px; }
+>]

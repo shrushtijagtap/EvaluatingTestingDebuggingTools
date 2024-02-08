@@ -1,0 +1,23 @@
+[<Line: +        assertThat(method.invoke(type.getDeclaredConstructor().newInstance()), is((Object) FOO));
+>, <Line: +                .getDeclaredConstructor()
+>, <Line: +        assertThat(type.getDeclaredConstructor().newInstance(), notNullValue(Object.class));
+>, <Line: +        assertThat(method.invoke(type.getDeclaredConstructor().newInstance()), is((Object) FOO));
+>, <Line: +        assertThat(type.getDeclaredConstructor().newInstance().toString(), is(FOO));
+>, <Line: +        assertThat(type.getDeclaredConstructor().newInstance().toString(), CoreMatchers.not(FOO));
+>, <Line: +        assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) FOO));
+>, <Line: +        assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) FOO));
+>, <Line: +                assertThat(method.invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +                assertThat(method.invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +                assertThat(method.invoke(type.getDeclaredConstructor().newInstance()), is((Object) FOO));
+>]
+[<Line: -        assertThat(method.invoke(type.newInstance()), is((Object) FOO));
+>, <Line: -        assertThat(type.newInstance(), notNullValue(Object.class));
+>, <Line: -        assertThat(method.invoke(type.newInstance()), is((Object) FOO));
+>, <Line: -        assertThat(type.newInstance().toString(), is(FOO));
+>, <Line: -        assertThat(type.newInstance().toString(), CoreMatchers.not(FOO));
+>, <Line: -        assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) FOO));
+>, <Line: -        assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) FOO));
+>, <Line: -                assertThat(method.invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -                assertThat(method.invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -                assertThat(method.invoke(type.newInstance()), is((Object) FOO));
+>]

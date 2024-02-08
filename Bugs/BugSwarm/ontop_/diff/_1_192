@@ -1,0 +1,39 @@
+[<Line: +			String concept = cl.getName();
+>, <Line: +			int conceptR2rml = runSPARQLConceptsQuery("<" + concept + ">", reasonerR2rml.getConnection());
+>, <Line: +            String role = prop.getName();
+>, <Line: +            log.debug("description " + role);
+>, <Line: +            int roleOBDA = runSPARQLRolesQuery("<" + role + ">", reasonerOBDA.getConnection());
+>, <Line: +            int roleR2rml = runSPARQLRolesQuery("<" + role + ">", reasonerR2rml.getConnection());
+>, <Line: +            assertEquals(roleOBDA, roleR2rml);
+>, <Line: +            String role = prop.getName();
+>, <Line: +            log.debug("description " + role);
+>, <Line: +            int roleOBDA = runSPARQLRolesQuery("<" + role + ">", reasonerOBDA.getConnection());
+>, <Line: +            int roleR2rml = runSPARQLRolesQuery("<" + role + ">", reasonerR2rml.getConnection());
+>, <Line: +            assertEquals(roleOBDA, roleR2rml);
+>]
+[<Line: -			Predicate concept = cl.getPredicate();
+>, <Line: -			int conceptR2rml = runSPARQLConceptsQuery("<" + concept.getName()
+>, <Line: -					+ ">", reasonerR2rml.getConnection());
+>, <Line: -            // We need to make sure we make no mappings for Auxiliary roles
+>, <Line: -            // introduced by the Ontology translation process.
+>, <Line: -            //if (!OntologyVocabularyImpl.isAuxiliaryProperty(prop)) {
+>, <Line: -                Predicate role = prop.getPredicate();
+>, <Line: -                log.debug("description " + role);
+>, <Line: -                int roleOBDA = runSPARQLRolesQuery("<" + role.getName() + ">",
+>, <Line: -                        reasonerOBDA.getConnection());
+>, <Line: -                int roleR2rml = runSPARQLRolesQuery("<" + role.getName() + ">",
+>, <Line: -                        reasonerR2rml.getConnection());
+>, <Line: -                assertEquals(roleOBDA, roleR2rml);
+>, <Line: -            //}
+>, <Line: -            // We need to make sure we make no mappings for Auxiliary roles
+>, <Line: -            // introduced by the Ontology translation process.
+>, <Line: -            //if (!OntologyVocabularyImpl.isAuxiliaryProperty(prop)) {
+>, <Line: -                Predicate role = prop.getPredicate();
+>, <Line: -                log.debug("description " + role);
+>, <Line: -                int roleOBDA = runSPARQLRolesQuery("<" + role.getName() + ">",
+>, <Line: -                        reasonerOBDA.getConnection());
+>, <Line: -                int roleR2rml = runSPARQLRolesQuery("<" + role.getName() + ">",
+>, <Line: -                        reasonerR2rml.getConnection());
+>, <Line: -                assertEquals(roleOBDA, roleR2rml);
+>, <Line: -            //}
+>]

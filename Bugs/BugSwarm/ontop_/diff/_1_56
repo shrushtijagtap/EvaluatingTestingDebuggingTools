@@ -1,0 +1,11 @@
+[<Line: +import it.unibz.krdb.obda.model.CQIE;
+>, <Line: +			List<OBDAMappingAxiom> mappingList = model.getMappings(sourceUri);
+>, <Line: +					OBDASQLQuery sourceQuery = mapping.getSourceQuery();
+>, <Line: +					CQIE targetQuery = mapping.getTargetQuery();
+>, <Line: +	private int getAtomCount(CQIE query) {
+>]
+[<Line: -			ArrayList<OBDAMappingAxiom> mappingList = model.getMappings(sourceUri);
+>, <Line: -					OBDASQLQuery sourceQuery = (OBDASQLQuery) mapping.getSourceQuery();
+>, <Line: -					CQIEImpl targetQuery = (CQIEImpl) mapping.getTargetQuery();
+>, <Line: -	private int getAtomCount(CQIEImpl query) {
+>]

@@ -1,0 +1,11 @@
+[<Line: + - :ref:`example_linear_model_plot_sgd_comparison.py`
+>, <Line: +For classification with a logistic loss, another variant of SGD with an
+>, <Line: +averaging strategy is available with Stochastic Average Gradient (SAG)
+>, <Line: +algorithm, available as a solver in :class:`LogisticRegression`.
+>, <Line: +Averaging can be enabled by setting ```average=True```.
+>, <Line: +For regression with a squared loss and a l2 penalty, another variant of
+>, <Line: +SGD with an averaging strategy is available with Stochastic Average
+>, <Line: +Gradient (SAG) algorithm, available as a solver in :class:`Ridge`.
+>]
+[<Line: -Averaging can be enabled by setting ```average=True```
+>]

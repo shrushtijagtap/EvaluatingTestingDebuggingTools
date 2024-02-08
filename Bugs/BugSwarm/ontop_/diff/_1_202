@@ -1,0 +1,108 @@
+[<Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.Deque;
+>, <Line: +import java.util.Iterator;
+>, <Line: +import it.unibz.krdb.obda.model.BuiltinPredicate;
+>, <Line: +import it.unibz.krdb.obda.model.Constant;
+>, <Line: +import it.unibz.krdb.obda.model.Term;
+>, <Line: +import it.unibz.krdb.obda.model.URITemplatePredicate;
+>, <Line: +import it.unibz.krdb.obda.model.Variable;
+>, <Line: +	static int redundantCounter = 0;
+>, <Line: +	public static int twoAtomQs = 0;
+>, <Line: +	public static int oneAtomQs = 0;
+>, <Line: +		List<Function> databaseAtoms = new ArrayList<>(query.getBody().size());
+>, <Line: +		Set<Term> groundTerms = new HashSet<>();
+>, <Line: +			// non-database atom
+>, <Line: +			if (atom.getFunctionSymbol() instanceof BuiltinPredicate) {
+>, <Line: +				collectVariables(groundTerms, atom);
+>, <Line: +			else {
+>, <Line: +				databaseAtoms.add(atom);
+>, <Line: +			}
+>, <Line: +		if (databaseAtoms.size() != 2) {
+>, <Line: +			oneAtomQs++;
+>, <Line: +			return query;
+>, <Line: +		}
+>, <Line: +		collectVariables(groundTerms, query.getHead());
+>, <Line: +		// ONE PARTICUALR CASE ONLY
+>, <Line: +		CQIE db = fac.getCQIE(query.getHead(), databaseAtoms);
+>, <Line: +		if (checkRedundant(db, groundTerms, Collections.singletonList(databaseAtoms.get(0)), databaseAtoms.get(1))) {
+>, <Line: +			System.out.println("  REDUNDANT " + ++redundantCounter + ": " + databaseAtoms.get(1) + " IN " + query);
+>, <Line: +			query.getBody().remove(databaseAtoms.get(1));
+>, <Line: +			return query;
+>, <Line: +		}
+>, <Line: +		if (checkRedundant(db, groundTerms, Collections.singletonList(databaseAtoms.get(1)), databaseAtoms.get(0))) {
+>, <Line: +			System.out.println("  REDUNDANT " + ++redundantCounter + ": " + databaseAtoms.get(0) + " IN " + query);
+>, <Line: +			query.getBody().remove(databaseAtoms.get(0));
+>, <Line: +			return query;
+>, <Line: +		}
+>, <Line: +		twoAtomQs++;
+>, <Line: +		return query;
+>, <Line: +	}
+>, <Line: +	private boolean checkRedundant(CQIE db, Set<Term> groundTerms, List<Function> atomsToLeave, Function atomToRemove) {
+>, <Line: +		if (containsConstants(atomToRemove)) {
+>, <Line: +			//System.err.println("CONSTANTS: " + databaseAtoms.get(0) + " IN " + query);
+>, <Line: +			return false;
+>, <Line: +		}
+>, <Line: +		// other atoms' variables
+>, <Line: +		Set<Term> v1 = new HashSet<>();
+>, <Line: +		for (Function a : atomsToLeave)
+>, <Line: +			collectVariables(v1, a);
+>, <Line: +		if (!v1.containsAll(groundTerms)) {
+>, <Line: +			return false;
+>, <Line: +		CQIE q0 = fac.getCQIE(db.getHead(), atomsToLeave);
+>, <Line: +		// if db is homomorphically embeddable into q0
+>, <Line: +		if (computeHomomorphsim(q0, db) != null) {
+>, <Line: +			oneAtomQs++;
+>, <Line: +			return true;
+>, <Line: +		}
+>, <Line: +		return false;
+>, <Line: +	}
+>, <Line: +	private static void collectVariables(Set<Term> vars, Function atom) {
+>, <Line: +		Deque<Term> terms = new LinkedList<>(atom.getTerms());
+>, <Line: +		while (!terms.isEmpty()) {
+>, <Line: +			Term t = terms.pollFirst();
+>, <Line: +			if (t instanceof Variable) 
+>, <Line: +				vars.add(t);
+>, <Line: +			else if (!(t instanceof Constant))
+>, <Line: +				terms.addAll(((Function)t).getTerms());
+>, <Line: +		}		
+>, <Line: +	}
+>, <Line: +	private static boolean containsConstants(Function atom) {
+>, <Line: +		Deque<Term> terms = new LinkedList<>(atom.getTerms());
+>, <Line: +		while (!terms.isEmpty()) {
+>, <Line: +			Term t = terms.pollFirst();
+>, <Line: +			if (t instanceof Constant)  
+>, <Line: +				return true;
+>, <Line: +			else if (!(t instanceof Variable))
+>, <Line: +				terms.addAll(((Function)t).getTerms());
+>, <Line: +		}		
+>, <Line: +		return false;
+>]
+[<Line: -/*	
+>, <Line: -		List<Function> nonRedundantAtoms = new ArrayList<>(query.getBody().size());
+>, <Line: -		Set<Variable> filterVariables = new HashSet<>();
+>, <Line: -			if (!atom.isDataFunction())
+>, <Line: -				filterVariables.addAll(atom.getVariables());
+>, <Line: -		for (Function atom : query.getBody()) {
+>, <Line: -			if (atom.isDataFunction()) {
+>, <Line: -				boolean variableOccurrence = false;
+>, <Line: -				for (Variable term : atom.getVariables()) 
+>, <Line: -					if (filterVariables.contains(term)) {
+>, <Line: -						variableOccurrence = true;
+>, <Line: -						break;
+>, <Line: -					}
+>, <Line: -				if (variableOccurrence) {
+>, <Line: -					nonRedundantAtoms.add(atom);
+>, <Line: -					continue;
+>, <Line: -				}
+>, <Line: -				CQIE clone = query.clone();
+>, <Line: -				clone.getBody().remove(atom);
+>, <Line: -				if (!isContainedIn(clone, query))
+>, <Line: -					nonRedundantAtoms.add(atom);
+>, <Line: -				else
+>, <Line: -					System.err.println("CQC REMOVED ATOM: " + atom + " FROM " + query);
+>, <Line: -			else
+>, <Line: -				nonRedundantAtoms.add(atom);
+>, <Line: -		return fac.getCQIE(query.getHead(), nonRedundantAtoms);
+>, <Line: -*/
+>]

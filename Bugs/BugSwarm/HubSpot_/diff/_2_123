@@ -1,0 +1,12 @@
+[]
+[<Line: -<div id="api-root-prompt-message">
+>, <Line: -    <p>
+>, <Line: -        This Baragon API has auth enabled. You need to specify an <strong>Auth Key</strong> so BaragonUI can access data.
+>, <Line: -        e.g. <code>test-key</code>.
+>, <Line: -    </p>
+>, <Line: -    <p>
+>, <Line: -        This can be changed at any time in the JS console with
+>, <Line: -        <code>localStorage.setItem(&quot;authKeyOverride&quot;, &quot;test-key&quot;)</code>
+>, <Line: -    </p>
+>, <Line: -</div>
+>]

@@ -1,0 +1,74 @@
+[<Line: +import org.testng.SkipException;
+>, <Line: +import static org.testng.Assert.fail;
+>, <Line: +        Instant start = Instant.now();
+>, <Line: +        Instant end = Instant.now();
+>, <Line: +                "Manta combined string doesn't match expectation: "
+>, <Line: +                        + multipart.findJob(uploadId));
+>, <Line: +        Duration totalCompletionTime = Duration.between(start, end);
+>, <Line: +        LOG.info("Concatenating {} parts took {} seconds",
+>, <Line: +                parts.length, totalCompletionTime.toMillis() / 1000);
+>, <Line: +    }
+>, <Line: +    public void canStoreContentType() throws IOException {
+>, <Line: +        String[] parts = new String[] {
+>, <Line: +                "Hello ",
+>, <Line: +                "world ",
+>, <Line: +                "Joyent",
+>, <Line: +                "!"
+>, <Line: +        };
+>, <Line: +        final String name = UUID.randomUUID().toString();
+>, <Line: +        final String path = testPathPrefix + name;
+>, <Line: +        final MantaHttpHeaders headers = new MantaHttpHeaders()
+>, <Line: +                .setContentType("text/plain");
+>, <Line: +        final UUID uploadId = multipart.initiateUpload(path, null, headers);
+>, <Line: +        for (int i = 0; i < parts.length; i++) {
+>, <Line: +            String part = parts[i];
+>, <Line: +            int partNumber = i + 1;
+>, <Line: +            multipart.putPart(uploadId, partNumber, part);
+>, <Line: +        }
+>, <Line: +        multipart.validateThereAreNoMissingParts(uploadId);
+>, <Line: +        multipart.complete(uploadId);
+>, <Line: +        multipart.waitForCompletion(uploadId);
+>, <Line: +        MantaObjectResponse head = mantaClient.head(path);
+>, <Line: +        assertEquals(head.getContentType(), "text/plain",
+>, <Line: +                "Content type header wasn't set correctly");
+>, <Line: +    }
+>, <Line: +    public void canStoreMetadata() throws IOException {
+>, <Line: +        String[] parts = new String[] {
+>, <Line: +                "Hello ",
+>, <Line: +                "world ",
+>, <Line: +                "Joyent",
+>, <Line: +                "!"
+>, <Line: +        };
+>, <Line: +        final String name = UUID.randomUUID().toString();
+>, <Line: +        final String path = testPathPrefix + name;
+>, <Line: +        final MantaMetadata metadata = new MantaMetadata();
+>, <Line: +        metadata.put("m-hello", "world");
+>, <Line: +        metadata.put("m-foo", "bar");
+>, <Line: +        final UUID uploadId = multipart.initiateUpload(path, metadata);
+>, <Line: +        for (int i = 0; i < parts.length; i++) {
+>, <Line: +            String part = parts[i];
+>, <Line: +            int partNumber = i + 1;
+>, <Line: +            multipart.putPart(uploadId, partNumber, part);
+>, <Line: +        }
+>, <Line: +        multipart.validateThereAreNoMissingParts(uploadId);
+>, <Line: +        multipart.complete(uploadId);
+>, <Line: +        multipart.waitForCompletion(uploadId);
+>, <Line: +        MantaMetadata remoteMetadata = mantaClient.head(path).getMetadata();
+>, <Line: +        assertEquals(remoteMetadata.size(), 2, "Unexpected metadata size");
+>, <Line: +        assertEquals(remoteMetadata.get("m-hello"), "world");
+>, <Line: +        assertEquals(remoteMetadata.get("m-foo"), "bar");
+>, <Line: +                "MD5 values do not match - job id: " + multipart.findJob(uploadId));
+>, <Line: +        MantaJob job = multipart.findJob(uploadId);
+>, <Line: +        if (job.getCancelled()) {
+>, <Line: +            if (!mantaClient.existsAndIsAccessible(path)) {
+>, <Line: +                throw new SkipException("File was actually created. Actual job state is: "
+>, <Line: +                        + job.toString());
+>, <Line: +            }
+>, <Line: +        } else {
+>, <Line: +            fail("Job wasn't cancelled:" + job.toString());
+>, <Line: +        }
+>]
+[<Line: -                "Manta combined string doesn't match expectation");
+>, <Line: -                "MD5 values do not match");
+>, <Line: -        assertFalse(mantaClient.existsAndIsAccessible(path));
+>]

@@ -1,0 +1,14 @@
+[<Line: +            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by Findbugs")
+>, <Line: +            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by Findbugs")
+>, <Line: +            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by Findbugs")
+>, <Line: +            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by Findbugs")
+>, <Line: +            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by Findbugs")
+>, <Line: +            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by Findbugs")
+>]
+[<Line: -            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by findbugs")
+>, <Line: -            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by findbugs")
+>, <Line: -            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by findbugs")
+>, <Line: -            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by findbugs")
+>, <Line: -            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by findbugs")
+>, <Line: -            @SuppressFBWarnings(value = "BC_UNCONFIRMED_CAST", justification = "The implicit field type casting is not understood by findbugs")
+>]

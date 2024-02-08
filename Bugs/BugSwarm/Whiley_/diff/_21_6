@@ -1,0 +1,10 @@
+[]
+[<Line: -	@Test
+>, <Line: -	public void ListRange_Valid_1() {
+>, <Line: -		runTest("ListRange_Valid_1");
+>, <Line: -	}
+>, <Line: -	@Ignore("#308") @Test
+>, <Line: -	public void Range_Valid_1() {
+>, <Line: -		runTest("Range_Valid_1");
+>, <Line: -	}
+>]

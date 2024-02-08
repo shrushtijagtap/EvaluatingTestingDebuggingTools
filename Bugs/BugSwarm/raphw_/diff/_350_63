@@ -1,0 +1,35 @@
+[<Line: +public class TypePoolDefaultLazyDeclarationContextTest {
+>, <Line: +        assertThat(TypePool.Default.LazyTypeDescription.DeclarationContext.SelfDeclared.INSTANCE
+>, <Line: +        assertThat(TypePool.Default.LazyTypeDescription.DeclarationContext.SelfDeclared.INSTANCE
+>, <Line: +        assertThat(TypePool.Default.LazyTypeDescription.DeclarationContext.SelfDeclared.INSTANCE
+>, <Line: +        assertThat(TypePool.Default.LazyTypeDescription.DeclarationContext.SelfDeclared.INSTANCE
+>, <Line: +        assertThat(TypePool.Default.LazyTypeDescription.DeclarationContext.SelfDeclared.INSTANCE
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInType(FOO_INTERNAL)
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInType(FOO_INTERNAL)
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInType(FOO_INTERNAL)
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInType(FOO_INTERNAL)
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInType(FOO_INTERNAL)
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInMethod(FOO_INTERNAL, BAR, QUX)
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInMethod(FOO_INTERNAL, BAR, QUX)
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInMethod(FOO_INTERNAL, BAR, QUX)
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInMethod(FOO_INTERNAL, BAR, QUX)
+>, <Line: +        assertThat(new TypePool.Default.LazyTypeDescription.DeclarationContext.DeclaredInMethod(FOO_INTERNAL, BAR, QUX).getEnclosingMethod(typePool),
+>]
+[<Line: -import java.util.Collections;
+>, <Line: -public class TypePoolLazyDeclarationContextTest {
+>, <Line: -        assertThat(TypePool.LazyTypeDescription.DeclarationContext.SelfDeclared.INSTANCE
+>, <Line: -        assertThat(TypePool.LazyTypeDescription.DeclarationContext.SelfDeclared.INSTANCE
+>, <Line: -        assertThat(TypePool.LazyTypeDescription.DeclarationContext.SelfDeclared.INSTANCE
+>, <Line: -        assertThat(TypePool.LazyTypeDescription.DeclarationContext.SelfDeclared.INSTANCE
+>, <Line: -        assertThat(TypePool.LazyTypeDescription.DeclarationContext.SelfDeclared.INSTANCE
+>, <Line: -        assertThat(new TypePool.LazyTypeDescription.DeclarationContext.DeclaredInType(FOO_INTERNAL)
+>, <Line: -        assertThat(new TypePool.LazyTypeDescription.DeclarationContext.DeclaredInType(FOO_INTERNAL)
+>, <Line: -        assertThat(new TypePool.LazyTypeDescription.DeclarationContext.DeclaredInType(FOO_INTERNAL)
+>, <Line: -        assertThat(new TypePool.LazyTypeDescription.DeclarationContext.DeclaredInType(FOO_INTERNAL)
+>, <Line: -        assertThat(new TypePool.LazyTypeDescription.DeclarationContext.DeclaredInType(FOO_INTERNAL)
+>, <Line: -        assertThat(new TypePool.LazyTypeDescription.DeclarationContext.DeclaredInMethod(FOO_INTERNAL, BAR, QUX)
+>, <Line: -        assertThat(new TypePool.LazyTypeDescription.DeclarationContext.DeclaredInMethod(FOO_INTERNAL, BAR, QUX)
+>, <Line: -        assertThat(new TypePool.LazyTypeDescription.DeclarationContext.DeclaredInMethod(FOO_INTERNAL, BAR, QUX)
+>, <Line: -        assertThat(new TypePool.LazyTypeDescription.DeclarationContext.DeclaredInMethod(FOO_INTERNAL, BAR, QUX)
+>, <Line: -        assertThat(new TypePool.LazyTypeDescription.DeclarationContext.DeclaredInMethod(FOO_INTERNAL, BAR, QUX).getEnclosingMethod(typePool),
+>]

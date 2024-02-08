@@ -1,0 +1,18 @@
+[<Line: +    <dependency>
+>, <Line: +      <groupId>javax.validation</groupId>
+>, <Line: +      <artifactId>validation-api</artifactId>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>org.apache.commons</groupId>
+>, <Line: +      <artifactId>commons-lang3</artifactId>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>com.codahale.metrics</groupId>
+>, <Line: +      <artifactId>metrics-core</artifactId>
+>, <Line: +    </dependency>
+>, <Line: +    <dependency>
+>, <Line: +      <groupId>com.codahale.metrics</groupId>
+>, <Line: +      <artifactId>metrics-annotation</artifactId>
+>, <Line: +    </dependency>
+>]
+[]

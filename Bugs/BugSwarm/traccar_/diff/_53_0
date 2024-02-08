@@ -1,0 +1,21 @@
+[<Line: +import org.traccar.helper.BitUtil;
+>, <Line: +            .number("(d+.?d*)[^,]*,")            // adc1
+>, <Line: +            .number("(d+.?d*)[^,]*,")            // adc2
+>, <Line: +            .number("d+.?d*,")                   // trip meter
+>, <Line: +            .expression("([^,]*),")              // software version
+>, <Line: +            .expression("([^,]*),").optional()   // rfid
+>, <Line: +        int input = parser.nextInt(2);
+>, <Line: +        int output = parser.nextInt(2);
+>, <Line: +        if (!BitUtil.check(input, 0)) {
+>, <Line: +            position.set(Position.KEY_ALARM, Position.ALARM_SOS);
+>, <Line: +        }
+>, <Line: +        position.set(Position.KEY_INPUT, input);
+>, <Line: +        position.set(Position.KEY_OUTPUT, output);
+>, <Line: +        position.set(Position.PREFIX_ADC + 1, parser.nextDouble());
+>, <Line: +        position.set(Position.PREFIX_ADC + 2, parser.nextDouble());
+>, <Line: +        position.set(Position.KEY_VERSION_FW, parser.next());
+>, <Line: +        position.set(Position.KEY_RFID, parser.next());
+>]
+[<Line: -        position.set(Position.KEY_INPUT, parser.nextInt(2));
+>, <Line: -        position.set(Position.KEY_OUTPUT, parser.nextInt(2));
+>]

@@ -1,0 +1,19 @@
+[<Line: +import com.google.common.eventbus.EventBus;
+>, <Line: +import org.kairosdb.events.DataPointEvent;
+>, <Line: +	private final EventBus m_eventBus;
+>, <Line: +	public DataPointsParser(EventBus eventBus, Reader stream, Gson gson,
+>, <Line: +		m_eventBus = checkNotNull(eventBus);
+>, <Line: +					m_eventBus.post(new DataPointEvent(metric.getName(), tags, dataPointFactory.createDataPoint(
+>, <Line: +							type, metric.getTimestamp(), metric.getValue()), metric.getTtl()));
+>, <Line: +						m_eventBus.post(new DataPointEvent(metric.getName(), tags,
+>, <Line: +								dataPointFactory.createDataPoint(type, timestamp, dataPoint[1]), metric.getTtl()));
+>]
+[<Line: -import org.kairosdb.core.datastore.KairosDatastore;
+>, <Line: -	private final KairosDatastore datastore;
+>, <Line: -	public DataPointsParser(KairosDatastore datastore, Reader stream, Gson gson,
+>, <Line: -		this.datastore = checkNotNull(datastore);
+>, <Line: -					datastore.putDataPoint(metric.getName(), tags, dataPointFactory.createDataPoint(
+>, <Line: -							type, metric.getTimestamp(), metric.getValue()), metric.getTtl());
+>, <Line: -						datastore.putDataPoint(metric.getName(), tags,
+>, <Line: -								dataPointFactory.createDataPoint(type, timestamp, dataPoint[1]), metric.getTtl());
+>]

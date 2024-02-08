@@ -1,0 +1,24 @@
+[<Line: +		IGNORED.put("Complex_Valid_4", "#663");
+>, <Line: +		IGNORED.put("FunctionRef_Valid_10", "#663");
+>, <Line: +		IGNORED.put("FunctionRef_Valid_11", "#663");
+>, <Line: +		IGNORED.put("IfElse_Valid_4", "#663");
+>, <Line: +		IGNORED.put("OpenRecord_Valid_5", "#663");
+>, <Line: +		IGNORED.put("OpenRecord_Valid_6", "#664");
+>, <Line: +		IGNORED.put("RecursiveType_Valid_2", "#663");		
+>, <Line: +		IGNORED.put("RecursiveType_Valid_21", "#663");
+>, <Line: +		IGNORED.put("RecursiveType_Valid_26", "unknown");
+>, <Line: +		IGNORED.put("While_Valid_20", "unknown");
+>]
+[<Line: -		IGNORED.put("Contractive_Valid_1", "Issue ???");
+>, <Line: -		IGNORED.put("DoWhile_Valid_4", "unknown");
+>, <Line: -		IGNORED.put("FunctionRef_Valid_2", "Issue ???");
+>, <Line: -		IGNORED.put("Intersection_Valid_1", "Issue ???");
+>, <Line: -		IGNORED.put("ListAccess_Valid_7", "Issue ???");
+>, <Line: -		IGNORED.put("NegationType_Valid_3", "Issue ???");
+>, <Line: -		IGNORED.put("RecordCoercion_Valid_1", "#564");
+>, <Line: -		IGNORED.put("Reference_Valid_6", "#553");
+>, <Line: -		IGNORED.put("DoWhile_Valid_7", "unknown");
+>, <Line: -		IGNORED.put("While_Valid_48", "unknown");
+>, <Line: -		// Fails and was not annotated with @Test before parameterizing
+>, <Line: -		IGNORED.put("While_Valid_7", "unknown");
+>]

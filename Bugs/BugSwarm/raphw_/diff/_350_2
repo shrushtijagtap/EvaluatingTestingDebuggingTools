@@ -1,0 +1,10 @@
+[<Line: +    class ForLoadedAnnotations extends AbstractBase {
+>, <Line: +        public ForLoadedAnnotations(Annotation... annotation) {
+>, <Line: +        public ForLoadedAnnotations(List<? extends Annotation> annotations) {
+>, <Line: +                result.add(new ForLoadedAnnotations(annotation));
+>]
+[<Line: -    class ForLoadedAnnotation extends AbstractBase {
+>, <Line: -        public ForLoadedAnnotation(Annotation... annotation) {
+>, <Line: -        public ForLoadedAnnotation(List<? extends Annotation> annotations) {
+>, <Line: -                result.add(new ForLoadedAnnotation(annotation));
+>]

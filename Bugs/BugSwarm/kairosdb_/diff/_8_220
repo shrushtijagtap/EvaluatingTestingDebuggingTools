@@ -1,0 +1,154 @@
+[<Line: +		<div ng-repeat="tab in ['General', 'Rows', 'Features', 'Import']"
+>, <Line: +			 data-title="{{tab}}">
+>, <Line: +	<div ng-if="editor.index == 0">
+>, <Line: +		<div class="editor-row">
+>, <Line: +			<div class="section">
+>, <Line: +				<div class="editor-option">
+>, <Line: +					<label class="small">Title</label><input type="text"
+>, <Line: +															 class="input-large"
+>, <Line: +															 ng-model='dashboard.title'></input>
+>, <Line: +				<div class="editor-option">
+>, <Line: +					<label class="small">Theme</label><select
+>, <Line: +						class="input-small" ng-model="dashboard.style"
+>, <Line: +						ng-options="f for f in ['dark','light']"
+>, <Line: +						ng-change="styleUpdated()"></select>
+>, <Line: +				</div>
+>, <Line: +				<div class="editor-option">
+>, <Line: +					<label class="small">Time correction</label>
+>, <Line: +					<select ng-model="dashboard.timezone" class='input-small'
+>, <Line: +							ng-options="f for f in ['browser','utc']"></select>
+>, <Line: +				<editor-opt-bool text="Hide controls (CTRL+H)"
+>, <Line: +								 model="dashboard.hideControls"></editor-opt-bool>
+>, <Line: +		<div class="editor-row">
+>, <Line: +			<div class="section">
+>, <Line: +				<div class="editor-option">
+>, <Line: +					<label class="small">Tags</label>
+>, <Line: +					<bootstrap-tagsinput ng-model="dashboard.tags"
+>, <Line: +										 tagclass="label label-tag"
+>, <Line: +										 placeholder="add tags">
+>, <Line: +					</bootstrap-tagsinput>
+>, <Line: +					<tip>Press enter to a add tag</tip>
+>, <Line: +	</div>
+>, <Line: +	<div ng-if="editor.index == 1">
+>, <Line: +		<div class="editor-row">
+>, <Line: +			<div class="span6">
+>, <Line: +				<table class="grafana-options-table">
+>, <Line: +					<tr ng-repeat="row in dashboard.rows">
+>, <Line: +						<td style="width: 97%">
+>, <Line: +							{{row.title}}
+>, <Line: +						</td>
+>, <Line: +						<td><i ng-click="_.move(dashboard.rows,$index,$index-1)"
+>, <Line: +							   ng-hide="$first"
+>, <Line: +							   class="pointer icon-arrow-up"></i></td>
+>, <Line: +						<td><i ng-click="_.move(dashboard.rows,$index,$index+1)"
+>, <Line: +							   ng-hide="$last"
+>, <Line: +							   class="pointer icon-arrow-down"></i></td>
+>, <Line: +						<td>
+>, <Line: +							<a ng-click="dashboard.rows = _.without(dashboard.rows,row)"
+>, <Line: +							   class="btn btn-danger btn-mini">
+>, <Line: +								<i class="icon-remove"></i>
+>, <Line: +							</a>
+>, <Line: +						</td>
+>, <Line: +					</tr>
+>, <Line: +				</table>
+>, <Line: +	</div>
+>, <Line: +	<div ng-if="editor.index == 2">
+>, <Line: +		<div class="editor-row">
+>, <Line: +			<div class="section">
+>, <Line: +				<editor-opt-bool text="Templating"
+>, <Line: +								 model="dashboard.templating.enable"
+>, <Line: +								 change="checkFeatureToggles()"></editor-opt-bool>
+>, <Line: +				<editor-opt-bool text="Annotations"
+>, <Line: +								 model="dashboard.annotations.enable"
+>, <Line: +								 change="checkFeatureToggles()"></editor-opt-bool>
+>, <Line: +				<div class="editor-option text-center"
+>, <Line: +					 ng-repeat="pulldown in dashboard.nav">
+>, <Line: +					<label class="small" style="text-transform:capitalize;">{{pulldown.type}}</label>
+>, <Line: +					<input class="cr1" id="pulldown{{pulldown.type}}"
+>, <Line: +						   type="checkbox" ng-model="pulldown.enable"
+>, <Line: +						   ng-checked="pulldown.enable">
+>, <Line: +					<label for="pulldown{{pulldown.type}}" class="cr1"></label>
+>, <Line: +				</div>
+>, <Line: +				<editor-opt-bool text="Shared Crosshair (CTRL+O)"
+>, <Line: +								 model="dashboard.sharedCrosshair"></editor-opt-bool>
+>, <Line: +			</div>
+>, <Line: +	</div>
+>, <Line: +	<div ng-if="editor.index == 3">
+>, <Line: +		<ng-include src="'app/partials/import.html'"></ng-include>
+>, <Line: +	</div>
+>, <Line: +	<div ng-repeat="pulldown in dashboard.nav" ng-controller="SubmenuCtrl"
+>, <Line: +		 ng-show="editor.index == 4+$index">
+>, <Line: +		<ng-include ng-show="pulldown.enable"
+>, <Line: +					src="pulldownEditorPath(pulldown.type)"></ng-include>
+>, <Line: +		<button ng-hide="pulldown.enable" class="btn"
+>, <Line: +				ng-click="pulldown.enable = true">Enable the {{pulldown.type}}
+>, <Line: +		</button>
+>, <Line: +</div>
+>, <Line: +<div class="clearfix"></div>
+>, <Line: +	<button type="button" class="btn btn-success pull-right"
+>, <Line: +			ng-click="editor.index=0;dismiss();reset_panel();dashboard.emit_refresh()">
+>, <Line: +		Close
+>, <Line: +	</button>
+>]
+[<Line: -		<div ng-repeat="tab in ['General', 'Rows', 'Features', 'Import']" data-title="{{tab}}">
+>, <Line: -		<div ng-if="editor.index == 0">
+>, <Line: -			<div class="editor-row">
+>, <Line: -				<div class="section">
+>, <Line: -					<div class="editor-option">
+>, <Line: -						<label class="small">Title</label><input type="text" class="input-large" ng-model='dashboard.title'></input>
+>, <Line: -					</div>
+>, <Line: -					<div class="editor-option">
+>, <Line: -						<label class="small">Theme</label><select class="input-small" ng-model="dashboard.style" ng-options="f for f in ['dark','light']" ng-change="styleUpdated()"></select>
+>, <Line: -					</div>
+>, <Line: -					<div class="editor-option">
+>, <Line: -						<label class="small">Time correction</label>
+>, <Line: -						<select ng-model="dashboard.timezone" class='input-small' ng-options="f for f in ['browser','utc']"></select>
+>, <Line: -					</div>
+>, <Line: -					<editor-opt-bool text="Hide controls (CTRL+H)" model="dashboard.hideControls"></editor-opt-bool>
+>, <Line: -			</div>
+>, <Line: -			<div class="editor-row">
+>, <Line: -				<div class="section">
+>, <Line: -					<div class="editor-option">
+>, <Line: -						<label class="small">Tags</label>
+>, <Line: -						<bootstrap-tagsinput ng-model="dashboard.tags" tagclass="label label-tag" placeholder="add tags">
+>, <Line: -						</bootstrap-tagsinput>
+>, <Line: -						<tip>Press enter to a add tag</tip>
+>, <Line: -					</div>
+>, <Line: -		<div ng-if="editor.index == 1">
+>, <Line: -			<div class="editor-row">
+>, <Line: -				<div class="span6">
+>, <Line: -					<table class="grafana-options-table">
+>, <Line: -						<tr ng-repeat="row in dashboard.rows">
+>, <Line: -							<td style="width: 97%">
+>, <Line: -								{{row.title}}
+>, <Line: -							</td>
+>, <Line: -							<td><i ng-click="_.move(dashboard.rows,$index,$index-1)" ng-hide="$first" class="pointer icon-arrow-up"></i></td>
+>, <Line: -							<td><i ng-click="_.move(dashboard.rows,$index,$index+1)" ng-hide="$last" class="pointer icon-arrow-down"></i></td>
+>, <Line: -							<td>
+>, <Line: -								<a ng-click="dashboard.rows = _.without(dashboard.rows,row)" class="btn btn-danger btn-mini">
+>, <Line: -									<i class="icon-remove"></i>
+>, <Line: -								</a>
+>, <Line: -							</td>
+>, <Line: -						</tr>
+>, <Line: -					</table>
+>, <Line: -		<div ng-if="editor.index == 2">
+>, <Line: -			<div class="editor-row">
+>, <Line: -				<div class="section">
+>, <Line: -					<editor-opt-bool text="Templating" model="dashboard.templating.enable" change="checkFeatureToggles()"></editor-opt-bool>
+>, <Line: -					<editor-opt-bool text="Annotations" model="dashboard.annotations.enable" change="checkFeatureToggles()"></editor-opt-bool>
+>, <Line: -					<div class="editor-option text-center" ng-repeat="pulldown in dashboard.nav">
+>, <Line: -						<label class="small" style="text-transform:capitalize;">{{pulldown.type}}</label>
+>, <Line: -						<input class="cr1" id="pulldown{{pulldown.type}}" type="checkbox" ng-model="pulldown.enable" ng-checked="pulldown.enable">
+>, <Line: -						<label for="pulldown{{pulldown.type}}" class="cr1"></label>
+>, <Line: -					</div>
+>, <Line: -          <editor-opt-bool text="Shared Crosshair (CTRL+O)" model="dashboard.sharedCrosshair"></editor-opt-bool>
+>, <Line: -				</div>
+>, <Line: -		<div ng-if="editor.index == 3">
+>, <Line: -			<ng-include src="'app/partials/import.html'"></ng-include>
+>, <Line: -		<div ng-repeat="pulldown in dashboard.nav" ng-controller="SubmenuCtrl" ng-show="editor.index == 4+$index">
+>, <Line: -			<ng-include ng-show="pulldown.enable" src="pulldownEditorPath(pulldown.type)"></ng-include>
+>, <Line: -			<button ng-hide="pulldown.enable" class="btn" ng-click="pulldown.enable = true">Enable the {{pulldown.type}}</button>
+>, <Line: -		</div>
+>, <Line: -	<div class="clearfix"></div>
+>, <Line: -	<button type="button" class="btn btn-success pull-right" ng-click="editor.index=0;dismiss();reset_panel();dashboard.emit_refresh()">Close</button>
+>]

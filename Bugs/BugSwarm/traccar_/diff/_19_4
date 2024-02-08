@@ -1,0 +1,62 @@
+[<Line: +/*
+>, <Line: + * Copyright 2016 Anton Tananaev (anton.tananaev@gmail.com)
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *     http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package org.traccar.protocol;
+>, <Line: +import org.jboss.netty.buffer.ChannelBuffer;
+>, <Line: +import org.jboss.netty.buffer.ChannelBuffers;
+>, <Line: +import org.jboss.netty.channel.Channel;
+>, <Line: +import org.traccar.BaseProtocolDecoder;
+>, <Line: +import org.traccar.DeviceSession;
+>, <Line: +import org.traccar.helper.DateBuilder;
+>, <Line: +import org.traccar.model.Position;
+>, <Line: +import java.net.SocketAddress;
+>, <Line: +public class SmokeyProtocolDecoder extends BaseProtocolDecoder {
+>, <Line: +    public SmokeyProtocolDecoder(SmokeyProtocol protocol) {
+>, <Line: +        super(protocol);
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected Object decode(
+>, <Line: +            Channel channel, SocketAddress remoteAddress, Object msg) throws Exception {
+>, <Line: +        ChannelBuffer buf = (ChannelBuffer) msg;
+>, <Line: +        buf.skipBytes(2); // header
+>, <Line: +        buf.readUnsignedByte(); // protocol version
+>, <Line: +        String id = ChannelBuffers.hexDump(buf.readBytes(8));
+>, <Line: +        DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, id);
+>, <Line: +        if (deviceSession == null) {
+>, <Line: +            return null;
+>, <Line: +        }
+>, <Line: +        int type = buf.readUnsignedByte();
+>, <Line: +        if (type == 0) {
+>, <Line: +            /*if (channel != null) {
+>, <Line: +                // TODO send ack
+>, <Line: +            }*/
+>, <Line: +            Position position = new Position();
+>, <Line: +            position.setProtocol(getProtocolName());
+>, <Line: +            position.setDeviceId(deviceSession.getDeviceId());
+>, <Line: +            position.set(Position.KEY_STATUS, buf.readUnsignedByte());
+>, <Line: +            DateBuilder dateBuilder = new DateBuilder()
+>, <Line: +                    .setDate(2000, 1, 1).addSeconds(buf.readUnsignedInt());
+>, <Line: +            getLastLocation(position, dateBuilder.getDate());
+>, <Line: +            position.set(Position.KEY_INDEX, buf.readUnsignedByte());
+>, <Line: +            buf.readUnsignedShort(); // task / parameter number
+>, <Line: +            buf.readUnsignedShort(); // length
+>, <Line: +            // data
+>, <Line: +            return position;
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

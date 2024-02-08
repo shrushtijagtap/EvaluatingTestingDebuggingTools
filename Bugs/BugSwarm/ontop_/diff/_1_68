@@ -1,0 +1,24 @@
+[<Line: +import it.unibz.krdb.obda.ontology.ImmutableOntologyVocabulary;
+>, <Line: +// TODO: move to a more appropriate package
+>, <Line: +	// the ontology vocabulary of the OBDA model
+>, <Line: +	private final ImmutableOntologyVocabulary voc;
+>, <Line: +	private final OBDADataFactory dataFactory = OBDADataFactoryImpl.getInstance();
+>, <Line: +	public TargetQueryValidator(ImmutableOntologyVocabulary voc) {
+>, <Line: +		this.voc = voc;
+>, <Line: +		return voc.containsClass(predicate.getName());
+>, <Line: +		return voc.containsObjectProperty(predicate.getName());
+>, <Line: +		return voc.containsDataProperty(predicate.getName());
+>]
+[<Line: -import it.unibz.krdb.obda.model.OBDAModel;
+>, <Line: -import it.unibz.krdb.obda.ontology.OntologyFactory;
+>, <Line: -import it.unibz.krdb.obda.ontology.impl.OntologyFactoryImpl;
+>, <Line: -	/** The OBDA model for validating the target query */
+>, <Line: -	private OBDAModel obdaModel;
+>, <Line: -	private OBDADataFactory dataFactory = OBDADataFactoryImpl.getInstance();
+>, <Line: -	private OntologyFactory ofac = OntologyFactoryImpl.getInstance();
+>, <Line: -	public TargetQueryValidator(OBDAModel obdaModel) {
+>, <Line: -		this.obdaModel = obdaModel;
+>, <Line: -		return obdaModel.isDeclaredClass(ofac.createClass(predicate.getName()));
+>, <Line: -		return obdaModel.isDeclaredObjectProperty(ofac.createObjectProperty(predicate.getName()));
+>, <Line: -		return obdaModel.isDeclaredDataProperty(ofac.createDataProperty(predicate.getName()));
+>]

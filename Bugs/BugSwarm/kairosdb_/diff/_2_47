@@ -1,0 +1,28 @@
+[]
+[<Line: -package org.kairosdb.core.processingstage;
+>, <Line: -import com.google.common.collect.ImmutableList;
+>, <Line: -import org.kairosdb.core.processingstage.metadata.QueryProcessorMetadata;
+>, <Line: -public interface QueryProcessingStageFactory<QueryProcessorFamily>
+>, <Line: -{
+>, <Line: -    /**
+>, <Line: -     * Create new instance of a query processor.
+>, <Line: -     *
+>, <Line: -     * @param   name    name of the query processor
+>, <Line: -     * @return          created instance of the query processor
+>, <Line: -     */
+>, <Line: -    QueryProcessorFamily createQueryProcessor(String name);
+>, <Line: -    /**
+>, <Line: -     * Returns the query processor family class.
+>, <Line: -     *
+>, <Line: -     * @return          query processor family class
+>, <Line: -     */
+>, <Line: -    Class<QueryProcessorFamily> getQueryProcessorFamily();
+>, <Line: -    /**
+>, <Line: -     * Returns an {@link ImmutableList} of {@link QueryProcessorMetadata}
+>, <Line: -     * describing the query processing stage.
+>, <Line: -     *
+>, <Line: -     * @return the {@link ImmutableList} describing the processing chain
+>, <Line: -     */
+>, <Line: -    ImmutableList<QueryProcessorMetadata> getQueryProcessorMetadata();
+>, <Line: -}
+>]

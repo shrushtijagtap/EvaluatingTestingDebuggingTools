@@ -1,0 +1,8 @@
+[<Line: +                    /**
+>, <Line: +                     * Creates a target for an offset mapping that references a serialized value.
+>, <Line: +                     *
+>, <Line: +                     * @param target     The target type.
+>, <Line: +                     * @param serialized The serialized form of the supplied form encoded as a string to be stored in the constant pool.
+>, <Line: +                     */
+>]
+[]

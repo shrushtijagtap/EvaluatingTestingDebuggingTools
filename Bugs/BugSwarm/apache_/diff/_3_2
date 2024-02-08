@@ -1,0 +1,26 @@
+[]
+[<Line: -    @Test
+>, <Line: -    public void testIsAnyNotEmpty() {
+>, <Line: -        assertFalse(StringUtils.isAnyNotEmpty((String) null));
+>, <Line: -        assertFalse(StringUtils.isAnyNotEmpty((String[]) null));
+>, <Line: -        assertTrue(StringUtils.isAnyNotEmpty(null, "foo"));
+>, <Line: -        assertTrue(StringUtils.isAnyNotEmpty("", "bar"));
+>, <Line: -        assertTrue(StringUtils.isAnyNotEmpty("bob", ""));
+>, <Line: -        assertTrue(StringUtils.isAnyNotEmpty("  bob  ", null));
+>, <Line: -        assertTrue(StringUtils.isAnyNotEmpty(" ", "bar"));
+>, <Line: -        assertTrue(StringUtils.isAnyNotEmpty("foo", "bar"));
+>, <Line: -        assertFalse(StringUtils.isAnyNotEmpty("", null));
+>, <Line: -    }
+>, <Line: -    @Test
+>, <Line: -    public void testIsAnyNotBlank() {
+>, <Line: -        assertFalse(StringUtils.isAnyNotBlank((String) null));
+>, <Line: -        assertFalse(StringUtils.isAnyNotBlank((String[]) null));
+>, <Line: -        assertTrue(StringUtils.isAnyNotBlank(null, "foo"));
+>, <Line: -        assertFalse(StringUtils.isAnyNotBlank(null, null));
+>, <Line: -        assertTrue(StringUtils.isAnyNotBlank("", "bar"));
+>, <Line: -        assertTrue(StringUtils.isAnyNotBlank("bob", ""));
+>, <Line: -        assertTrue(StringUtils.isAnyNotBlank("  bob  ", null));
+>, <Line: -        assertTrue(StringUtils.isAnyNotBlank(" ", "bar"));
+>, <Line: -        assertTrue(StringUtils.isAnyNotBlank("foo", "bar"));
+>, <Line: -    }
+>]

@@ -1,0 +1,6 @@
+[<Line: +        checkConfig.addAttribute("folderPattern", ".*[\\\\/]javastrangefolder[\\\\/].*");
+>, <Line: +        checkConfig.addAttribute("folderPattern", ".*[\\\\/]govstrangefolder[\\\\/].*");
+>]
+[<Line: -        checkConfig.addAttribute("folderPattern", ".*[\\\\/]java[\\\\/].*");
+>, <Line: -        checkConfig.addAttribute("folderPattern", ".*[\\\\/]gov[\\\\/].*");
+>]

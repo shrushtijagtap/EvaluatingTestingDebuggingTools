@@ -1,0 +1,14 @@
+[<Line: +        return computeIllegals(punnings);
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * @param punnings
+>, <Line: +     *        input punnings
+>, <Line: +     * @return illegal punnings
+>, <Line: +     */
+>, <Line: +    static Collection<IRI> computeIllegals(Multimap<IRI, EntityType<?>> punnings) {
+>, <Line: +     * @param <T>
+>, <Line: +     *        type
+>, <Line: +    <T> T getParameter(Serializable key, T defaultValue);
+>]
+[<Line: -    Serializable getParameter(Serializable key, Serializable defaultValue);
+>]

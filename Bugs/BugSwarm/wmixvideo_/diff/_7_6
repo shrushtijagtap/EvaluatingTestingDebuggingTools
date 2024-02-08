@@ -1,0 +1,19 @@
+[<Line: +import com.fincatto.nfe310.classes.nota.NFNotaaInfoItemImpostoICMSUFDestino;
+>, <Line: +    public static NFNotaaInfoItemImpostoICMSUFDestino getNFNotaaInfoItemImpostoICMSUFDestino() {
+>, <Line: +        final NFNotaaInfoItemImpostoICMSUFDestino icmsUFDestino = new NFNotaaInfoItemImpostoICMSUFDestino();
+>, <Line: +        icmsUFDestino.setPercentualAliquotaInternaDestino(new BigDecimal("999.9999"));
+>, <Line: +        icmsUFDestino.setPercentualInterestadual(new BigDecimal("999.9999"));
+>, <Line: +        icmsUFDestino.setPercentualProvisorioPartilha(new BigDecimal("999.9999"));
+>, <Line: +        icmsUFDestino.setPercentualRelativoFundoCombatePobrezaDestino(new BigDecimal("999.9999"));
+>, <Line: +        icmsUFDestino.setValorBaseCalculoDestino(new BigDecimal("9999999999999.99"));
+>, <Line: +        icmsUFDestino.setValorICMSInterestadualDestino(new BigDecimal("9999999999999.99"));
+>, <Line: +        icmsUFDestino.setValorICMSInterestadualRemetente(new BigDecimal("9999999999999.99"));
+>, <Line: +        icmsUFDestino.setValorRelativoFundoCombatePobrezaDestino(new BigDecimal("9999999999999.99"));
+>, <Line: +        return icmsUFDestino;
+>, <Line: +    }
+>, <Line: +        imposto.setIcmsUfDestino(FabricaDeObjetosFake.getNFNotaaInfoItemImpostoICMSUFDestino());
+>, <Line: +        icmsTotal.setValorICMSFundoCombatePobreza(new BigDecimal("999999999999.99"));
+>, <Line: +        icmsTotal.setValorICMSPartilhaDestinatario(new BigDecimal("999999999999.99"));
+>, <Line: +        icmsTotal.setValorICMSPartilhaRementente(new BigDecimal("999999999999.99"));
+>]
+[]

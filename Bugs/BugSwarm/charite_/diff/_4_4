@@ -1,0 +1,19 @@
+[<Line: +	 * Deserialize the transcript definition file from {@link pathToDataFile}.
+>, <Line: +	 * @param pathToDataFile
+>, <Line: +	 *            String with the path to the data file to deserialize
+>, <Line: +	protected void deserializeTranscriptDefinitionFile(String pathToDataFile)
+>, <Line: +			throws JannovarException, HelpRequestedException {
+>, <Line: +		this.jannovarData = new JannovarDataSerializer(pathToDataFile).load();
+>]
+[<Line: -	public JannovarAnnotationCommand(String[] argv) throws CommandLineParsingException, HelpRequestedException {
+>, <Line: -		super(argv);
+>, <Line: -	}
+>, <Line: -	 * Deserialize the transcript definition file, as configured in {@link #options}.
+>, <Line: -	 *
+>, <Line: -	 * To run Jannovar, the user must pass a transcript definition file with the -D flag. This can be one of the files
+>, <Line: -	 * ucsc.ser, ensembl.ser, or refseq.ser (or a comparable file) containing a serialized version of the
+>, <Line: -	 * TranscriptModel objects created to contain info about the transcript definitions (exon positions etc.) extracted
+>, <Line: -	 * from UCSC, Ensembl, or Refseq and necessary for annotation.
+>, <Line: -	protected void deserializeTranscriptDefinitionFile() throws JannovarException, HelpRequestedException {
+>, <Line: -		this.jannovarData = new JannovarDataSerializer(this.options.dataFile).load();
+>]

@@ -1,0 +1,5 @@
+[]
+[<Line: -      if (scope.isFunctionBlockScope()) {
+>, <Line: -        scope = scope.getParent();
+>, <Line: -      }
+>]

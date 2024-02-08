@@ -1,0 +1,48 @@
+[<Line: +/**
+>, <Line: + * Copyright (c) 2015, Joyent, Inc. All rights reserved.
+>, <Line: + */
+>, <Line: +package com.joyent.manta.client;
+>, <Line: +import org.testng.Assert;
+>, <Line: +import org.testng.annotations.Test;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.List;
+>, <Line: +/**
+>, <Line: + * Tests the behavior of the validations and accessors of {@link MantaJob}
+>, <Line: + * instance.
+>, <Line: + *
+>, <Line: + * @author <a href="https://github.com/dekobon">Elijah Zupancic</a>
+>, <Line: + */
+>, <Line: +public class MantaJobTest {
+>, <Line: +    @Test
+>, <Line: +    public void canGetMapPhases() {
+>, <Line: +        MantaJobPhase phase1 = new MantaJobPhase().setType("map").setExec("echo 1");
+>, <Line: +        MantaJobPhase phase2 = new MantaJobPhase().setType("map").setExec("echo 2");
+>, <Line: +        MantaJobPhase phase3 = new MantaJobPhase().setType("reduce").setExec("echo 3");
+>, <Line: +        List<MantaJobPhase> phases = new ArrayList<>();
+>, <Line: +        phases.add(phase1);
+>, <Line: +        phases.add(phase2);
+>, <Line: +        phases.add(phase3);
+>, <Line: +        MantaJob job = new MantaJob("test job", phases);
+>, <Line: +        List<MantaJobPhase> mapPhases = job.getMapPhases();
+>, <Line: +        Assert.assertEquals(mapPhases.get(0), phase1);
+>, <Line: +        Assert.assertEquals(mapPhases.get(1), phase2);
+>, <Line: +    }
+>, <Line: +    @Test
+>, <Line: +    public void canGetReducePhases() {
+>, <Line: +        MantaJobPhase phase1 = new MantaJobPhase().setType("map").setExec("echo 1");
+>, <Line: +        MantaJobPhase phase2 = new MantaJobPhase().setType("map").setExec("echo 2");
+>, <Line: +        MantaJobPhase phase3 = new MantaJobPhase().setType("reduce").setExec("echo 3");
+>, <Line: +        MantaJobPhase phase4 = new MantaJobPhase().setType("reduce").setExec("echo 4");
+>, <Line: +        List<MantaJobPhase> phases = new ArrayList<>();
+>, <Line: +        phases.add(phase1);
+>, <Line: +        phases.add(phase2);
+>, <Line: +        phases.add(phase3);
+>, <Line: +        phases.add(phase4);
+>, <Line: +        MantaJob job = new MantaJob("test job", phases);
+>, <Line: +        List<MantaJobPhase> reducePhases = job.getReducePhases();
+>, <Line: +        Assert.assertEquals(reducePhases.get(0), phase3);
+>, <Line: +        Assert.assertEquals(reducePhases.get(1), phase4);
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

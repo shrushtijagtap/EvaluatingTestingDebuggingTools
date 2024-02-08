@@ -1,0 +1,7 @@
+[<Line: +import org.testng.internal.ConstructorOrMethod;
+>, <Line: +    private static ConstructorOrMethod getMethod(Test t) {
+>, <Line: +            return new ConstructorOrMethod(t.getClass().getMethod(name));
+>]
+[<Line: -    private static Method getMethod(Test t) {
+>, <Line: -            return t.getClass().getMethod(name);
+>]

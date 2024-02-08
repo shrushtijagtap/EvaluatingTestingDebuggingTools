@@ -1,0 +1,4 @@
+[<Line: +    url: => "#{ config.apiRoot }/request"
+>]
+[<Line: -    url: => "#{ config.apiRoot }/request?authkey=#{ config.authKey }"
+>]

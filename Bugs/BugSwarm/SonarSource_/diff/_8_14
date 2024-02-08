@@ -1,0 +1,5 @@
+[<Line: +abstract public class FormattingStandardCheckTest {
+>]
+[<Line: -import org.sonar.plugins.php.CheckTest;
+>, <Line: -abstract public class FormattingStandardCheckTest extends CheckTest {
+>]

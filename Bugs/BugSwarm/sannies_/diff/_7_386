@@ -1,0 +1,6 @@
+[]
+[<Line: -package com.mp4parser.streaming.rawformats;
+>, <Line: -import static org.junit.Assert.*;
+>, <Line: -public class H264TrackAdapterTest {
+>, <Line: -}
+>]

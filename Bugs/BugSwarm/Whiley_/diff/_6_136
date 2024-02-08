@@ -1,0 +1,6 @@
+[<Line: +type poslist is pos[]
+>, <Line: +type natlist is nat[]
+>]
+[<Line: -type poslist is [pos]
+>, <Line: -type natlist is [nat]
+>]

@@ -1,0 +1,16 @@
+[<Line: +public abstract class RawTuple implements Comparable<RawTuple>{
+>, <Line: +    int index; //used for sorting tuples with equals keys
+>, <Line: +    protected abstract byte[] getKey();
+>, <Line: +    protected abstract byte[] getValue();
+>, <Line: +    public RawTuple(int index) {
+>, <Line: +        int c = bytesComparator.compare(getKey(), o.getKey());
+>]
+[<Line: -public class RawTuple implements Comparable<RawTuple>{
+>, <Line: -	int index;//used for sorting tuples with equals keys
+>, <Line: -    public byte[] key;
+>, <Line: -	public byte[] value;
+>, <Line: -    public RawTuple(byte[] key, byte[] value, int index) {
+>, <Line: -		this.key = key;
+>, <Line: -        this.value = value;
+>, <Line: -        int c = bytesComparator.compare(key, o.key);
+>]

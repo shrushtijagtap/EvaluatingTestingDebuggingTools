@@ -1,0 +1,5 @@
+[<Line: +package org.mp4parser.tools;
+>]
+[<Line: -package com.coremedia.iso;
+>, <Line: -import com.googlecode.mp4parser.util.IntHashMap;
+>]

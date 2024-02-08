@@ -1,0 +1,16 @@
+[<Line: +            case Opcodes.D2I:
+>, <Line: +            case Opcodes.D2F:
+>, <Line: +            case Opcodes.L2F:
+>, <Line: +            case Opcodes.L2I:
+>, <Line: +                adjustStack(-2);
+>, <Line: +                adjustStack(1);
+>, <Line: +                break;
+>, <Line: +            case Opcodes.I2D:
+>, <Line: +            case Opcodes.I2L:
+>, <Line: +            case Opcodes.F2D:
+>, <Line: +            case Opcodes.F2L:
+>, <Line: +                adjustStack(-1);
+>, <Line: +                adjustStack(2);
+>, <Line: +                break;
+>]
+[]

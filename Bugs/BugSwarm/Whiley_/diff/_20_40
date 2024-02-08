@@ -1,0 +1,6 @@
+[<Line: +    int[] arr1 = [1, 2, 4]
+>, <Line: +    int[] arr2 = arr1
+>]
+[<Line: -    [int] arr1 = [1, 2, 4]
+>, <Line: -    [int] arr2 = arr1
+>]

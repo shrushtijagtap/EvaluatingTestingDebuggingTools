@@ -1,0 +1,21 @@
+[<Line: +import java.util.Set;
+>, <Line: +import org.semanticweb.owlapi.model.OWLDataFactory;
+>, <Line: +import org.semanticweb.owlapi.model.OWLObject;
+>, <Line: +import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
+>, <Line: +import org.semanticweb.owlapi.reasoner.OWLReasoner;
+>, <Line: +    @Override
+>, <Line: +    protected final void addAxioms(OWLObjectProperty entity, OWLReasoner reasoner,
+>, <Line: +        OWLDataFactory dataFactory, Set<A> result) {
+>, <Line: +        OWLOntology current = reasoner.getRootOntology();
+>, <Line: +        OWLObjectPropertyManager objectPropertyManager = new OWLObjectPropertyManager(current);
+>, <Line: +        addAxioms(entity, reasoner, dataFactory, result,
+>, <Line: +            objectPropertyManager.getNonSimpleProperties());
+>, <Line: +    }
+>, <Line: +    protected abstract void addAxioms(OWLObjectProperty entity, OWLReasoner reasoner,
+>, <Line: +        OWLDataFactory dataFactory, Set<A> result,
+>, <Line: +        Set<OWLObjectPropertyExpression> nonSimpleProperties);
+>, <Line: +    protected boolean simple(Set<OWLObjectPropertyExpression> nonSimpleProperties, OWLObject e) {
+>, <Line: +        return nonSimpleProperties.contains(e);
+>, <Line: +    }
+>]
+[]

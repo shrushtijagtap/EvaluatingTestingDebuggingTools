@@ -1,0 +1,6 @@
+[<Line: +                        : new LazyProjection.WithLazyNavigation.Detached(superClass, Visitor.TypeVariableErasing.INSTANCE);
+>, <Line: +                return new TypeList.Generic.ForDetachedTypes.WithLazyResolution(asErasure().getInterfaces(), Visitor.TypeVariableErasing.INSTANCE);
+>]
+[<Line: -                        : new LazyProjection.WithLazyNavigation.Detached(superClass, Visitor.TypeVariableErasing.INSTANCE); // TODO: Do not erase parameterized type.
+>, <Line: -                return new TypeList.Generic.ForDetachedTypes.WithLazyResolution(asErasure().getInterfaces(), Visitor.TypeVariableErasing.INSTANCE); // TODO: Do not erase parameterized type.
+>]

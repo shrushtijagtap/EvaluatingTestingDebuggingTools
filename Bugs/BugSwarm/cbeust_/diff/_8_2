@@ -1,0 +1,20 @@
+[<Line: +import java.util.ArrayList;
+>, <Line: +  transient private List<IMethodInterceptor> m_methodInterceptors;
+>, <Line: +        new ArrayList<IMethodInterceptor>() /* method interceptor */,
+>, <Line: +      List<IMethodInterceptor> methodInterceptors,
+>, <Line: +    init(configuration, suite, outputDir, runnerFactory, useDefaultListeners, methodInterceptors, invokedMethodListeners, testListeners);
+>, <Line: +    List<IMethodInterceptor> methodInterceptors,
+>, <Line: +    m_methodInterceptors = methodInterceptors != null ? methodInterceptors : new ArrayList<IMethodInterceptor>();
+>, <Line: +      for (IMethodInterceptor methodInterceptor : methodInterceptors) {
+>, <Line: +        tr.addMethodInterceptor(methodInterceptor);
+>]
+[<Line: -  transient private IMethodInterceptor m_methodInterceptor;
+>, <Line: -        null /* method interceptor */,
+>, <Line: -      IMethodInterceptor methodInterceptor,
+>, <Line: -    init(configuration, suite, outputDir, runnerFactory, useDefaultListeners,
+>, <Line: -      methodInterceptor, invokedMethodListeners, testListeners);
+>, <Line: -    IMethodInterceptor methodInterceptor,
+>, <Line: -    m_methodInterceptor = methodInterceptor;
+>, <Line: -      if (m_methodInterceptor != null) {
+>, <Line: -        tr.setMethodInterceptor(m_methodInterceptor);
+>]

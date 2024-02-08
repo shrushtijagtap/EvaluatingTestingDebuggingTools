@@ -1,0 +1,32 @@
+[<Line: +import org.jboss.netty.channel.Channel;
+>, <Line: +import org.jboss.netty.channel.ChannelConfig;
+>, <Line: +import org.jboss.netty.channel.ChannelFactory;
+>, <Line: +import org.jboss.netty.channel.ChannelFuture;
+>, <Line: +import org.jboss.netty.channel.ChannelPipeline;
+>, <Line: +import org.kairosdb.core.datastore.Datastore;
+>, <Line: +import org.kairosdb.core.datastore.DatastoreMetricQuery;
+>, <Line: +import org.kairosdb.core.datastore.QueryCallback;
+>, <Line: +import org.kairosdb.core.datastore.TagSet;
+>]
+[<Line: -import org.jboss.netty.channel.*;
+>, <Line: -import org.kairosdb.core.datastore.*;
+>, <Line: -		@Override
+>, <Line: -		public void setValue(String service, String serviceKey, String key, String value) throws DatastoreException
+>, <Line: -		{
+>, <Line: -		}
+>, <Line: -		@Override
+>, <Line: -		public String getValue(String service, String serviceKey, String key) throws DatastoreException
+>, <Line: -		{
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -		@Override
+>, <Line: -		public Iterable<String> listKeys(String service, String serviceKey) throws DatastoreException
+>, <Line: -		{
+>, <Line: -			return null;
+>, <Line: -		}
+>, <Line: -		@Override
+>, <Line: -		public Iterable<String> listKeys(String service, String serviceKey, String keyStartsWith) throws DatastoreException
+>, <Line: -		{
+>, <Line: -			return null;
+>, <Line: -		}
+>]

@@ -1,0 +1,18 @@
+[<Line: +    private final ElementMatcher<? super MethodList<?>> matcher;
+>, <Line: +     * @param matcher The method matcher to apply to the declared methods of the matched type description.
+>, <Line: +    public DeclaringMethodMatcher(ElementMatcher<? super MethodList<? extends MethodDescription>> matcher) {
+>, <Line: +        this.matcher = matcher;
+>, <Line: +        return matcher.matches(target.getDeclaredMethods());
+>, <Line: +                && matcher.equals(((DeclaringMethodMatcher<?>) other).matcher);
+>, <Line: +        return matcher.hashCode();
+>, <Line: +        return "declaresMethods(" + matcher + ")";
+>]
+[<Line: -    private final ElementMatcher<? super MethodList<?>> methodMatcher;
+>, <Line: -     * @param methodMatcher The method matcher to apply to the declared methods of the matched type description.
+>, <Line: -    public DeclaringMethodMatcher(ElementMatcher<? super MethodList<? extends MethodDescription>> methodMatcher) {
+>, <Line: -        this.methodMatcher = methodMatcher;
+>, <Line: -        return methodMatcher.matches(target.getDeclaredMethods());
+>, <Line: -                && methodMatcher.equals(((DeclaringMethodMatcher<?>) other).methodMatcher);
+>, <Line: -        return methodMatcher.hashCode();
+>, <Line: -        return "declaresMethods(" + methodMatcher + ")";
+>]

@@ -1,0 +1,220 @@
+[<Line: +	'angular',
+>, <Line: +	'lodash',
+>, <Line: +	'config',
+>, <Line: +	'kbn',
+>, <Line: +	'moment'
+>, <Line: +	'use strict';
+>, <Line: +	var module = angular.module('grafana.services');
+>, <Line: +	module.service('timeSrv', function ($rootScope, $timeout, $routeParams, timer) {
+>, <Line: +		var self = this;
+>, <Line: +		this.init = function (dashboard) {
+>, <Line: +			timer.cancel_all();
+>, <Line: +			this.dashboard = dashboard;
+>, <Line: +			this.time = dashboard.time;
+>, <Line: +			this._initTimeFromUrl();
+>, <Line: +			if (this.dashboard.refresh) {
+>, <Line: +				this.set_interval(this.dashboard.refresh);
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		this._parseUrlParam = function (value) {
+>, <Line: +			if (value.indexOf('now') !== -1) {
+>, <Line: +				return value;
+>, <Line: +			}
+>, <Line: +			if (value.length === 8) {
+>, <Line: +				return moment.utc(value, 'YYYYMMDD').toDate();
+>, <Line: +			}
+>, <Line: +			if (value.length === 15) {
+>, <Line: +				return moment.utc(value, 'YYYYMMDDTHHmmss').toDate();
+>, <Line: +			}
+>, <Line: +			var epoch = parseInt(value);
+>, <Line: +			if (!_.isNaN(epoch)) {
+>, <Line: +				return new Date(epoch);
+>, <Line: +			}
+>, <Line: +			return null;
+>, <Line: +		};
+>, <Line: +		this._initTimeFromUrl = function () {
+>, <Line: +			if ($routeParams.from) {
+>, <Line: +				this.time.from = this._parseUrlParam($routeParams.from) || this.time.from;
+>, <Line: +			}
+>, <Line: +			if ($routeParams.to) {
+>, <Line: +				this.time.to = this._parseUrlParam($routeParams.to) || this.time.to;
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		this.set_interval = function (interval) {
+>, <Line: +			this.dashboard.refresh = interval;
+>, <Line: +			if (interval) {
+>, <Line: +				var _i = kbn.interval_to_ms(interval);
+>, <Line: +				this.start_scheduled_refresh(_i);
+>, <Line: +			} else {
+>, <Line: +				this.cancel_scheduled_refresh();
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +		this.refreshDashboard = function () {
+>, <Line: +			$rootScope.$broadcast('refresh');
+>, <Line: +		};
+>, <Line: +		this.start_scheduled_refresh = function (after_ms) {
+>, <Line: +			self.cancel_scheduled_refresh();
+>, <Line: +			self.refresh_timer = timer.register($timeout(function () {
+>, <Line: +				self.start_scheduled_refresh(after_ms);
+>, <Line: +				self.refreshDashboard();
+>, <Line: +			}, after_ms));
+>, <Line: +		};
+>, <Line: +		this.cancel_scheduled_refresh = function () {
+>, <Line: +			timer.cancel(this.refresh_timer);
+>, <Line: +		};
+>, <Line: +		this.setTime = function (time) {
+>, <Line: +			_.extend(this.time, time);
+>, <Line: +			// disable refresh if we have an absolute time
+>, <Line: +			if (time.to !== 'now') {
+>, <Line: +				this.old_refresh = this.dashboard.refresh;
+>, <Line: +				this.set_interval(false);
+>, <Line: +			}
+>, <Line: +			else if (this.old_refresh && this.old_refresh !== this.dashboard.refresh) {
+>, <Line: +				this.set_interval(this.old_refresh);
+>, <Line: +				this.old_refresh = null;
+>, <Line: +			}
+>, <Line: +			$rootScope.appEvent('time-range-changed', this.time);
+>, <Line: +			$timeout(this.refreshDashboard, 0);
+>, <Line: +		};
+>, <Line: +		this.timeRangeForUrl = function () {
+>, <Line: +			var range = this.timeRange(false);
+>, <Line: +			if (_.isString(range.to) && range.to.indexOf('now')) {
+>, <Line: +				range = this.timeRange();
+>, <Line: +			}
+>, <Line: +			if (_.isDate(range.from)) {
+>, <Line: +				range.from = range.from.getTime();
+>, <Line: +			}
+>, <Line: +			if (_.isDate(range.to)) {
+>, <Line: +				range.to = range.to.getTime();
+>, <Line: +			}
+>, <Line: +			return range;
+>, <Line: +		};
+>, <Line: +		this.timeRange = function (parse) {
+>, <Line: +			var _t = this.time;
+>, <Line: +			if (_.isUndefined(_t) || _.isUndefined(_t.from)) {
+>, <Line: +				return false;
+>, <Line: +			}
+>, <Line: +			if (parse === false) {
+>, <Line: +				return {
+>, <Line: +					from: _t.from,
+>, <Line: +					to: _t.to
+>, <Line: +				};
+>, <Line: +			} else {
+>, <Line: +				var _from = _t.from;
+>, <Line: +				var _to = _t.to || new Date();
+>, <Line: +				return {
+>, <Line: +					from: kbn.parseDate(_from),
+>, <Line: +					to: kbn.parseDate(_to)
+>, <Line: +				};
+>, <Line: +			}
+>, <Line: +		};
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'config',
+>, <Line: -  'kbn',
+>, <Line: -  'moment'
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.service('timeSrv', function($rootScope, $timeout, $routeParams, timer) {
+>, <Line: -    var self = this;
+>, <Line: -    this.init = function(dashboard) {
+>, <Line: -      timer.cancel_all();
+>, <Line: -      this.dashboard = dashboard;
+>, <Line: -      this.time = dashboard.time;
+>, <Line: -      this._initTimeFromUrl();
+>, <Line: -      if(this.dashboard.refresh) {
+>, <Line: -        this.set_interval(this.dashboard.refresh);
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    this._parseUrlParam = function(value) {
+>, <Line: -      if (value.indexOf('now') !== -1) {
+>, <Line: -        return value;
+>, <Line: -      }
+>, <Line: -      if (value.length === 8) {
+>, <Line: -        return moment.utc(value, 'YYYYMMDD').toDate();
+>, <Line: -      }
+>, <Line: -      if (value.length === 15) {
+>, <Line: -        return moment.utc(value, 'YYYYMMDDTHHmmss').toDate();
+>, <Line: -      }
+>, <Line: -      var epoch = parseInt(value);
+>, <Line: -      if (!_.isNaN(epoch)) {
+>, <Line: -        return new Date(epoch);
+>, <Line: -      }
+>, <Line: -      return null;
+>, <Line: -    };
+>, <Line: -    this._initTimeFromUrl = function() {
+>, <Line: -      if ($routeParams.from) {
+>, <Line: -        this.time.from = this._parseUrlParam($routeParams.from) || this.time.from;
+>, <Line: -      }
+>, <Line: -      if ($routeParams.to) {
+>, <Line: -        this.time.to = this._parseUrlParam($routeParams.to) || this.time.to;
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    this.set_interval = function (interval) {
+>, <Line: -      this.dashboard.refresh = interval;
+>, <Line: -      if (interval) {
+>, <Line: -        var _i = kbn.interval_to_ms(interval);
+>, <Line: -        this.start_scheduled_refresh(_i);
+>, <Line: -      } else {
+>, <Line: -        this.cancel_scheduled_refresh();
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    this.refreshDashboard = function() {
+>, <Line: -      $rootScope.$broadcast('refresh');
+>, <Line: -    };
+>, <Line: -    this.start_scheduled_refresh = function (after_ms) {
+>, <Line: -      self.cancel_scheduled_refresh();
+>, <Line: -      self.refresh_timer = timer.register($timeout(function () {
+>, <Line: -        self.start_scheduled_refresh(after_ms);
+>, <Line: -        self.refreshDashboard();
+>, <Line: -      }, after_ms));
+>, <Line: -    };
+>, <Line: -    this.cancel_scheduled_refresh = function () {
+>, <Line: -      timer.cancel(this.refresh_timer);
+>, <Line: -    };
+>, <Line: -    this.setTime = function(time) {
+>, <Line: -      _.extend(this.time, time);
+>, <Line: -      // disable refresh if we have an absolute time
+>, <Line: -      if (time.to !== 'now') {
+>, <Line: -        this.old_refresh = this.dashboard.refresh;
+>, <Line: -        this.set_interval(false);
+>, <Line: -      }
+>, <Line: -      else if (this.old_refresh && this.old_refresh !== this.dashboard.refresh) {
+>, <Line: -        this.set_interval(this.old_refresh);
+>, <Line: -        this.old_refresh = null;
+>, <Line: -      }
+>, <Line: -      $rootScope.appEvent('time-range-changed', this.time);
+>, <Line: -      $timeout(this.refreshDashboard, 0);
+>, <Line: -    };
+>, <Line: -    this.timeRangeForUrl = function() {
+>, <Line: -      var range = this.timeRange(false);
+>, <Line: -      if (_.isString(range.to) && range.to.indexOf('now')) {
+>, <Line: -        range = this.timeRange();
+>, <Line: -      }
+>, <Line: -      if (_.isDate(range.from)) { range.from = range.from.getTime(); }
+>, <Line: -      if (_.isDate(range.to)) { range.to = range.to.getTime(); }
+>, <Line: -      return range;
+>, <Line: -    };
+>, <Line: -    this.timeRange = function(parse) {
+>, <Line: -      var _t = this.time;
+>, <Line: -      if(_.isUndefined(_t) || _.isUndefined(_t.from)) {
+>, <Line: -        return false;
+>, <Line: -      }
+>, <Line: -      if(parse === false) {
+>, <Line: -        return {
+>, <Line: -          from: _t.from,
+>, <Line: -          to: _t.to
+>, <Line: -        };
+>, <Line: -      } else {
+>, <Line: -        var _from = _t.from;
+>, <Line: -        var _to = _t.to || new Date();
+>, <Line: -        return {
+>, <Line: -          from: kbn.parseDate(_from),
+>, <Line: -          to: kbn.parseDate(_to)
+>, <Line: -        };
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -  });
+>]

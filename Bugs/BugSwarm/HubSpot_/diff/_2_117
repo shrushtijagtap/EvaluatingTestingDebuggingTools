@@ -1,0 +1,30 @@
+[<Line: +            <h3>Request: {{ request.loadBalancerRequestId }}</h3>
+>, <Line: +                <div class="panel-heading">
+>, <Line: +                    <h4>Summary</h4>
+>, <Line: +                </div>
+>, <Line: +                    <div class="col-md-3">
+>, <Line: +                        <h4>Service Id: </h4><h4><a href="{{ appRoot }}/services/{{ request.request.loadBalancerService.serviceId }}">{{ request.request.loadBalancerService.serviceId }}</a></h4>
+>, <Line: +                    </div>
+>, <Line: +                    <div class="col-md-9 list-group-item">
+>, <Line: +                        <h4>Message: </h4><p>{{ request.message }}</p>
+>, <Line: +                    </div>
+>, <Line: +            </div>
+>, <Line: +    <div class="row">
+>, <Line: +        <div class="col-md-12">
+>, <Line: +            <div class="panel panel-default">
+>, <Line: +                <div class="panel-heading"><h4>Original Request</h4></div>
+>, <Line: +                <div class="panel-body">
+>, <Line: +                    <pre>
+>, <Line: +{{jsonStringify request.request}}
+>, <Line: +                    </pre>
+>, <Line: +                </div>
+>, <Line: +            </div>
+>, <Line: +        </div>
+>, <Line: +    </div>
+>]
+[<Line: -            <h3>{{ request.loadBalancerRequestId }}</h3>
+>, <Line: -                <div class="panel-heading"><h4>Load Balancer State: {{ request.loadBalancerState }}</h4></div>
+>, <Line: -                    <strong>Message:</strong>
+>, <Line: -                    <p>{{ request.message }}</p>
+>, <Line: -            <div>
+>]

@@ -1,0 +1,76 @@
+[<Line: +#!/bin/bash
+>, <Line: +curl -s http://localhost:8080/api/v1/rollups -XPOST -H'Content-type:application/json' -d '
+>, <Line: +	 {
+>, <Line: + 	"name": "MyRollup",
+>, <Line: + 	"execution_interval": {
+>, <Line: + 		"value": 1,
+>, <Line: + 		"unit": "hours"
+>, <Line: + 	},
+>, <Line: + 	"rollups": [
+>, <Line: + 	{
+>, <Line: + 		"save_as": "kairosdb.http.query_time_rollup",
+>, <Line: + 		"query": {
+>, <Line: + 			"cache_time": 0,
+>, <Line: + 			"start_relative": {
+>, <Line: + 				"value": "1",
+>, <Line: + 				"unit": "hours"
+>, <Line: + 			},
+>, <Line: + 			"metrics": [{
+>, <Line: + 				"name": "kairosdb.http.query_time",
+>, <Line: + 				"limit": 10000,
+>, <Line: + 				"tags": {
+>, <Line: + 					"host": ["foo", "bar"],
+>, <Line: + 					"customer": ["foobar"]
+>, <Line: + 				},
+>, <Line: + 				"aggregators": [{
+>, <Line: + 					"name": "sum",
+>, <Line: + 					"sampling": {
+>, <Line: + 						"value": 1,
+>, <Line: + 						"unit": "minutes"
+>, <Line: + 					}
+>, <Line: + 				}, {
+>, <Line: + 					"name": "avg",
+>, <Line: + 					"sampling": {
+>, <Line: + 						"value": 10,
+>, <Line: + 						"unit": "minutes"
+>, <Line: + 					}
+>, <Line: + 				}]
+>, <Line: + 			}]
+>, <Line: + 		}
+>, <Line: + 	},
+>, <Line: + 	 	{
+>, <Line: + 		"save_as": "kairosdb.datastore.query_collisions_rollup",
+>, <Line: + 		"query": {
+>, <Line: + 			"cache_time": 0,
+>, <Line: + 			"start_relative": {
+>, <Line: + 				"value": "1",
+>, <Line: + 				"unit": "hours"
+>, <Line: + 			},
+>, <Line: + 			"metrics": [{
+>, <Line: + 				"name": "kairosdb.datastore.query_collisions",
+>, <Line: + 				"limit": 10000,
+>, <Line: + 				"tags": {
+>, <Line: + 					"host": ["foo", "bar"],
+>, <Line: + 					"customer": ["foobar"]
+>, <Line: + 				},
+>, <Line: + 				"aggregators": [{
+>, <Line: + 					"name": "sum",
+>, <Line: + 					"sampling": {
+>, <Line: + 						"value": 1,
+>, <Line: + 						"unit": "minutes"
+>, <Line: + 					}
+>, <Line: + 				}, {
+>, <Line: + 					"name": "avg",
+>, <Line: + 					"sampling": {
+>, <Line: + 						"value": 10,
+>, <Line: + 						"unit": "minutes"
+>, <Line: + 					}
+>, <Line: + 				}]
+>, <Line: + 			}]
+>, <Line: + 		}
+>, <Line: + 	}
+>, <Line: + 	]
+>, <Line: + }
+>, <Line: +'
+>]
+[]

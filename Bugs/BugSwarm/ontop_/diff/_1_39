@@ -1,0 +1,10 @@
+[<Line: +import it.unibz.krdb.obda.model.OBDADataFactory;
+>, <Line: +import it.unibz.krdb.obda.model.Predicate.COL_TYPE;
+>, <Line: +import it.unibz.krdb.obda.model.impl.OBDADataFactoryImpl;
+>, <Line: +	public static final  Datatype rdfsLiteral; 
+>, <Line: +	static {
+>, <Line: +		OBDADataFactory ofac = OBDADataFactoryImpl.getInstance();
+>, <Line: +	    rdfsLiteral = new DatatypeImpl(ofac.getDatatypeFactory().getTypePredicate(COL_TYPE.LITERAL));   	
+>, <Line: +	}
+>]
+[]

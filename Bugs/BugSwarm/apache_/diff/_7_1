@@ -1,0 +1,4 @@
+[<Line: +        super.reflectionAppendArrayDetail(buffer, fieldName, array);
+>]
+[<Line: -        super.appendDetail(buffer, fieldName, array);
+>]

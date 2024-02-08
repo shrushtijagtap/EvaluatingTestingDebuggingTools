@@ -1,0 +1,6 @@
+[<Line: +			<comment>Check for at least a single data point for a given metric
+>, <Line: +				id
+>, <Line: +			</comment>
+>]
+[<Line: -			<comment>Check for at least a single data point for a given metric id</comment>
+>]

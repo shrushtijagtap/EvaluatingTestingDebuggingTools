@@ -1,0 +1,123 @@
+[<Line: +package org.mp4parser;
+>, <Line: +import java.io.EOFException;
+>, <Line: +import java.io.IOException;
+>, <Line: +import java.nio.channels.ReadableByteChannel;
+>, <Line: +import java.nio.channels.WritableByteChannel;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.Collections;
+>, <Line: +import java.util.List;
+>, <Line: +public class BasicContainer implements Container {
+>, <Line: +    private List<Box> boxes = new ArrayList<Box>();
+>, <Line: +    public BasicContainer() {
+>, <Line: +    }
+>, <Line: +    public BasicContainer(List<Box> boxes) {
+>, <Line: +        this.boxes = boxes;
+>, <Line: +    }
+>, <Line: +    public List<Box> getBoxes() {
+>, <Line: +        return boxes;
+>, <Line: +    }
+>, <Line: +    public void setBoxes(List<? extends Box> boxes) {
+>, <Line: +        this.boxes = new ArrayList<Box>(boxes);
+>, <Line: +    }
+>, <Line: +    protected long getContainerSize() {
+>, <Line: +        long contentSize = 0;
+>, <Line: +        for (int i = 0; i < getBoxes().size(); i++) {
+>, <Line: +            // it's quicker to iterate an array list like that since no iterator
+>, <Line: +            // needs to be instantiated
+>, <Line: +            contentSize += boxes.get(i).getSize();
+>, <Line: +        }
+>, <Line: +        return contentSize;
+>, <Line: +    }
+>, <Line: +    @SuppressWarnings("unchecked")
+>, <Line: +    public <T extends Box> List<T> getBoxes(Class<T> clazz) {
+>, <Line: +        List<T> boxesToBeReturned = null;
+>, <Line: +        T oneBox = null;
+>, <Line: +        List<Box> boxes = getBoxes();
+>, <Line: +        for (Box boxe : boxes) {
+>, <Line: +            //clazz.isInstance(boxe) / clazz == boxe.getClass()?
+>, <Line: +            // I hereby finally decide to use isInstance
+>, <Line: +            if (clazz.isInstance(boxe)) {
+>, <Line: +                if (oneBox == null) {
+>, <Line: +                    oneBox = (T) boxe;
+>, <Line: +                } else {
+>, <Line: +                    if (boxesToBeReturned == null) {
+>, <Line: +                        boxesToBeReturned = new ArrayList<T>(2);
+>, <Line: +                        boxesToBeReturned.add(oneBox);
+>, <Line: +                    }
+>, <Line: +                    boxesToBeReturned.add((T) boxe);
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        if (boxesToBeReturned != null) {
+>, <Line: +            return boxesToBeReturned;
+>, <Line: +        } else if (oneBox != null) {
+>, <Line: +            return Collections.singletonList(oneBox);
+>, <Line: +        } else {
+>, <Line: +            return Collections.emptyList();
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    @SuppressWarnings("unchecked")
+>, <Line: +    public <T extends Box> List<T> getBoxes(Class<T> clazz, boolean recursive) {
+>, <Line: +        List<T> boxesToBeReturned = new ArrayList<T>(2);
+>, <Line: +        List<Box> boxes = getBoxes();
+>, <Line: +        for (int i = 0; i < boxes.size(); i++) {
+>, <Line: +            Box boxe = boxes.get(i);
+>, <Line: +            //clazz.isInstance(boxe) / clazz == boxe.getClass()?
+>, <Line: +            // I hereby finally decide to use isInstance
+>, <Line: +            if (clazz.isInstance(boxe)) {
+>, <Line: +                boxesToBeReturned.add((T) boxe);
+>, <Line: +            }
+>, <Line: +            if (recursive && boxe instanceof Container) {
+>, <Line: +                boxesToBeReturned.addAll(((Container) boxe).getBoxes(clazz, recursive));
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return boxesToBeReturned;
+>, <Line: +    }
+>, <Line: +    /**
+>, <Line: +     * Add <code>box</code> to the container and sets the parent correctly. If <code>box</code> is <code>null</code>
+>, <Line: +     * nochange will be performed and no error thrown.
+>, <Line: +     *
+>, <Line: +     * @param box will be added to the container
+>, <Line: +     */
+>, <Line: +    public void addBox(Box box) {
+>, <Line: +        if (box != null) {
+>, <Line: +            boxes = new ArrayList<Box>(getBoxes());
+>, <Line: +            boxes.add(box);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public void initContainer(ReadableByteChannel readableByteChannel, long containerSize, BoxParser boxParser) throws IOException {
+>, <Line: +        long contentProcessed = 0;
+>, <Line: +        while (containerSize < 0 || contentProcessed < containerSize) {
+>, <Line: +            try {
+>, <Line: +                ParsableBox b = boxParser.parseBox(readableByteChannel, (this instanceof ParsableBox) ? ((ParsableBox) this).getType() : null);
+>, <Line: +                boxes.add(b);
+>, <Line: +                contentProcessed += b.getSize();
+>, <Line: +            } catch (EOFException e) {
+>, <Line: +                if (containerSize < 0) {
+>, <Line: +                    return;
+>, <Line: +                } else {
+>, <Line: +                    throw e;
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +    public String toString() {
+>, <Line: +        StringBuilder buffer = new StringBuilder();
+>, <Line: +        buffer.append(this.getClass().getSimpleName()).append("[");
+>, <Line: +        for (int i = 0; i < boxes.size(); i++) {
+>, <Line: +            if (i > 0) {
+>, <Line: +                buffer.append(";");
+>, <Line: +            }
+>, <Line: +            buffer.append(boxes.get(i).toString());
+>, <Line: +        }
+>, <Line: +        buffer.append("]");
+>, <Line: +        return buffer.toString();
+>, <Line: +    }
+>, <Line: +    public final void writeContainer(WritableByteChannel bb) throws IOException {
+>, <Line: +        for (Box box : getBoxes()) {
+>, <Line: +            box.getBox(bb);
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

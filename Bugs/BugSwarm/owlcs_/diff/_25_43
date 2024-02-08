@@ -1,0 +1,14 @@
+[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
+>, <Line: +        return parseParameters.getConfig().shouldParseWithStrictConfiguration();
+>, <Line: +            if (getConfiguration().shouldLoadAnnotations()) {
+>, <Line: +        if (!getConfiguration().isImportIgnored(o)) {
+>, <Line: +    public OntologyConfigurator getConfiguration() {
+>, <Line: +        return getConfiguration().shouldParseWithStrictConfiguration();
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
+>, <Line: -        return parseParameters.getConfig().isStrict();
+>, <Line: -            if (getConfiguration().isLoadAnnotationAxioms()) {
+>, <Line: -        if (!getConfiguration().isIgnoredImport(o)) {
+>, <Line: -    public OWLOntologyLoaderConfiguration getConfiguration() {
+>, <Line: -        return getConfiguration().isStrict();
+>]

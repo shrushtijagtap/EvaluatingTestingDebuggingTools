@@ -1,0 +1,4 @@
+[<Line: +                    MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(Class.class.getMethod("getDeclaredField", String.class)))
+>]
+[<Line: -                    MethodInvocation.invoke(new MethodDescription.ForLoadedMethod(Class.class.getDeclaredMethod("getDeclaredField", String.class)))
+>]

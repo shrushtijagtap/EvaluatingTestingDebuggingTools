@@ -1,0 +1,6 @@
+[<Line: +import static org.junit.Assert.assertTrue;
+>, <Line: +        assertTrue(shouldBeInProfile == report.isInProfile());
+>]
+[<Line: -import static org.junit.Assert.assertEquals;
+>, <Line: -        assertEquals(shouldBeInProfile, report.isInProfile());
+>]

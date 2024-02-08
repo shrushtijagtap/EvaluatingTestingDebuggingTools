@@ -1,0 +1,4 @@
+[<Line: +        assertThat(dynamicClassType.getMethod(FOO).invoke(dynamicClassType.getDeclaredConstructor().newInstance()), is((Object) (FOO + BAR)));
+>]
+[<Line: -        assertThat(dynamicClassType.getMethod(FOO).invoke(dynamicClassType.newInstance()), is((Object) (FOO + BAR)));
+>]

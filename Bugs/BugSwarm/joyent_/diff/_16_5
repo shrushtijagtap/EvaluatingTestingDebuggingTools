@@ -1,0 +1,30 @@
+[<Line: +    /**
+>, <Line: +     * Number of times to retry failed requests.
+>, <Line: +     */
+>, <Line: +    private Integer retries;
+>, <Line: +     * Constructor that pre-populates configuration context with the default
+>, <Line: +    @Override
+>, <Line: +    public Integer getRetries() {
+>, <Line: +        return this.retries;
+>, <Line: +    }
+>, <Line: +        if (context.getRetries() != null) {
+>, <Line: +            this.retries = context.getRetries();
+>, <Line: +        }
+>, <Line: +    /**
+>, <Line: +     * Sets the number of times to retry failed HTTP requests.
+>, <Line: +     * @param retries number of times to retry
+>, <Line: +     * @return the current instance of {@link BaseChainedConfigContext}
+>, <Line: +     */
+>, <Line: +    public BaseChainedConfigContext setRetries(final Integer retries) {
+>, <Line: +        if (retries < 0) {
+>, <Line: +            throw new IllegalArgumentException("Retries must be zero or greater");
+>, <Line: +        }
+>, <Line: +        this.retries = retries;
+>, <Line: +        return this;
+>, <Line: +    }
+>, <Line: +                && Objects.equals(retries, that.retries)
+>, <Line: +        return Objects.hash(mantaURL, account, mantaKeyId, mantaKeyPath, timeout, retries,
+>]
+[<Line: -     * Constructor that prepopulates configuration context with the default
+>, <Line: -        return Objects.hash(mantaURL, account, mantaKeyId, mantaKeyPath, timeout,
+>]

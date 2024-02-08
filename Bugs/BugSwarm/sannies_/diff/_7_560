@@ -1,0 +1,32 @@
+[<Line: +package org.mp4parser.muxer.tracks;
+>, <Line: +import org.mp4parser.Container;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.iso14496.part14.ESDescriptorBox;
+>, <Line: +import org.mp4parser.muxer.FileDataSourceImpl;
+>, <Line: +import org.mp4parser.muxer.Movie;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.builder.DefaultMp4Builder;
+>, <Line: +import org.mp4parser.support.BoxComparator;
+>, <Line: +import org.mp4parser.tools.Hex;
+>, <Line: +import org.mp4parser.tools.Path;
+>, <Line: +        Track t = new AACTrackImpl(new FileDataSourceImpl(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile() + "/org/mp4parser/muxer/tracks/aac-sample.aac"));
+>, <Line: +        //c.writeContainer(new FileOutputStream("C:\\dev\\mp4parser\\isoparser\\src\\test\\resources\\com\\googlecode\\mp4parser\\authoring\\tracks\\aac-sample.mp4").getChannel());
+>, <Line: +        IsoFile isoFileReference = new IsoFile(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile() + "/org/mp4parser/muxer/tracks/aac-sample.mp4");
+>, <Line: +        BoxComparator.check(c, isoFileReference, "moov[0]/mvhd[0]", "moov[0]/trak[0]/tkhd[0]", "moov[0]/trak[0]/mdia[0]/mdhd[0]", "moov[0]/trak[0]/mdia[0]/minf[0]/stbl[0]/stco[0]");
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks;
+>, <Line: -import com.coremedia.iso.Hex;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.googlecode.mp4parser.FileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.boxes.mp4.ESDescriptorBox;
+>, <Line: -import com.googlecode.mp4parser.util.Path;
+>, <Line: -import java.io.FileOutputStream;
+>, <Line: -        Track t = new AACTrackImpl(new FileDataSourceImpl(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile() + "/com/googlecode/mp4parser/authoring/tracks/aac-sample.aac"));
+>, <Line: -        c.writeContainer(new FileOutputStream("C:\\dev\\mp4parser\\isoparser\\src\\test\\resources\\com\\googlecode\\mp4parser\\authoring\\tracks\\aac-sample.mp4").getChannel());
+>, <Line: -        IsoFile isoFileReference = new IsoFile(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile() + "/com/googlecode/mp4parser/authoring/tracks/aac-sample.mp4");
+>, <Line: -        BoxComparator.check(c, isoFileReference, "/ftyp", "/moov[0]/mvhd[0]", "/moov[0]/trak[0]/tkhd[0]", "/moov[0]/trak[0]/mdia[0]/mdhd[0]", "/moov[0]/trak[0]/mdia[0]/minf[0]/stbl[0]/stco[0]");
+>]

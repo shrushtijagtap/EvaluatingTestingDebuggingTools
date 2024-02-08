@@ -1,0 +1,6 @@
+[<Line: +    public DateBuilder setCurrentDate() {
+>, <Line: +        Calendar now = Calendar.getInstance(calendar.getTimeZone());
+>, <Line: +        return setYear(now.get(Calendar.YEAR)).setMonth(now.get(Calendar.MONTH)).setDay(now.get(Calendar.DAY_OF_MONTH));
+>, <Line: +    }
+>]
+[]

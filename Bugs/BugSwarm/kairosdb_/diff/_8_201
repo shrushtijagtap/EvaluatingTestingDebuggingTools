@@ -1,0 +1,114 @@
+[<Line: +		<h5>Big value</h5>
+>, <Line: +			<input type="text" class="input-small" ng-model="panel.prefix"
+>, <Line: +				   ng-blur="render()"></input>
+>, <Line: +			<select class="input-small" ng-model="panel.valueName"
+>, <Line: +					ng-options="f for f in ['min','max','avg', 'current', 'total']"
+>, <Line: +					ng-change="render()"></select>
+>, <Line: +			<input type="text" class="input-small" ng-model="panel.postfix"
+>, <Line: +				   ng-blur="render()" ng-trim="false"></input>
+>, <Line: +		</div>
+>, <Line: +		<div class="editor-option">
+>, <Line: +			<label class="small">Null point mode
+>, <Line: +				<tip>Define how null values should handled, connected =
+>, <Line: +					ignored
+>, <Line: +				</tip>
+>, <Line: +			</label>
+>, <Line: +			<select class="input-medium" ng-model="panel.nullPointMode"
+>, <Line: +					ng-options="f for f in ['connected', 'null', 'null as zero']"
+>, <Line: +					ng-change="get_data()"></select>
+>, <Line: +		<h5>Big value font size</h5>
+>, <Line: +			<select class="input-mini" style="width: 75px;"
+>, <Line: +					ng-model="panel.prefixFontSize"
+>, <Line: +					ng-options="f for f in fontSizes"
+>, <Line: +					ng-change="render()"></select>
+>, <Line: +			<select class="input-mini" style="width: 75px;"
+>, <Line: +					ng-model="panel.valueFontSize"
+>, <Line: +					ng-options="f for f in fontSizes"
+>, <Line: +					ng-change="render()"></select>
+>, <Line: +			<select class="input-mini" style="width: 75px;"
+>, <Line: +					ng-model="panel.postfixFontSize"
+>, <Line: +					ng-options="f for f in fontSizes"
+>, <Line: +					ng-change="render()"></select>
+>, <Line: +		<h5>Formats</h5>
+>, <Line: +			<select class="input-small" ng-model="panel.format"
+>, <Line: +					ng-options="f for f in ['none','short','bytes', 'bits', 'bps', 's', 'ms', 'µs', 'ns', 'percent']"
+>, <Line: +					ng-change="render()"></select>
+>, <Line: +		<h5>Coloring</h5>
+>, <Line: +		<editor-opt-bool text="Background" model="panel.colorBackground"
+>, <Line: +						 change="setColoring({background: true})"></editor-opt-bool>
+>, <Line: +		<editor-opt-bool text="Value" model="panel.colorValue"
+>, <Line: +						 change="setColoring({value: true})"></editor-opt-bool>
+>, <Line: +		<div class="editor-option"
+>, <Line: +			 ng-show="panel.colorBackground || panel.colorValue">
+>, <Line: +			<label class="small">Thresholds
+>, <Line: +				<tip>Comma seperated values</tip>
+>, <Line: +			</label>
+>, <Line: +			<input type="text" class="input-large" ng-model="panel.thresholds"
+>, <Line: +				   ng-blur="render()" placeholder="0,50,80"></input>
+>, <Line: +		<div class="editor-option"
+>, <Line: +			 ng-show="panel.colorBackground || panel.colorValue">
+>, <Line: +			<label class="small">Colors</label>
+>, <Line: +			<spectrum-picker ng-model="panel.colors[0]"
+>, <Line: +							 ng-change="render()"></spectrum-picker>
+>, <Line: +			<spectrum-picker ng-model="panel.colors[1]"
+>, <Line: +							 ng-change="render()"></spectrum-picker>
+>, <Line: +			<spectrum-picker ng-model="panel.colors[2]"
+>, <Line: +							 ng-change="render()"></spectrum-picker>
+>, <Line: +		<editor-opt-bool text="Spark line" model="panel.sparkline.show"
+>, <Line: +						 change="render()"></editor-opt-bool>
+>, <Line: +		<editor-opt-bool text="Background mode" model="panel.sparkline.full"
+>, <Line: +						 change="render()"></editor-opt-bool>
+>, <Line: +			<spectrum-picker ng-model="panel.sparkline.lineColor"
+>, <Line: +							 ng-change="render()"></spectrum-picker>
+>, <Line: +			<spectrum-picker ng-model="panel.sparkline.fillColor"
+>, <Line: +							 ng-change="render()"></spectrum-picker>
+>, <Line: +						<li class="grafana-target-segment"
+>, <Line: +							ng-repeat-start="map in panel.valueMaps">
+>, <Line: +							<i class="icon-remove pointer"
+>, <Line: +							   ng-click="removeValueMap(map)"></i>
+>, <Line: +							<input type="text" ng-model="map.value"
+>, <Line: +								   placeholder="value"
+>, <Line: +								   class="input-mini grafana-target-segment-input"
+>, <Line: +								   ng-blur="render()">
+>, <Line: +							<input type="text" placeholder="text"
+>, <Line: +								   ng-model="map.text"
+>, <Line: +								   class="input-mini grafana-target-segment-input"
+>, <Line: +								   ng-blur="render()">
+>, <Line: +							<a class="pointer grafana-target-segment"
+>, <Line: +							   ng-click="addValueMap();">
+>]
+[<Line: -    <h5>Big value</h5>
+>, <Line: -			<input type="text" class="input-small" ng-model="panel.prefix" ng-blur="render()"></input>
+>, <Line: -			<select class="input-small" ng-model="panel.valueName" ng-options="f for f in ['min','max','avg', 'current', 'total']" ng-change="render()"></select>
+>, <Line: -			<input type="text" class="input-small" ng-model="panel.postfix" ng-blur="render()" ng-trim="false"></input>
+>, <Line: -    <div class="editor-option">
+>, <Line: -      <label class="small">Null point mode<tip>Define how null values should handled, connected = ignored</tip></label>
+>, <Line: -      <select class="input-medium" ng-model="panel.nullPointMode" ng-options="f for f in ['connected', 'null', 'null as zero']" ng-change="get_data()"></select>
+>, <Line: -    </div>
+>, <Line: -    <h5>Big value font size</h5>
+>, <Line: -			<select class="input-mini" style="width: 75px;" ng-model="panel.prefixFontSize" ng-options="f for f in fontSizes" ng-change="render()"></select>
+>, <Line: -			<select class="input-mini" style="width: 75px;" ng-model="panel.valueFontSize" ng-options="f for f in fontSizes" ng-change="render()"></select>
+>, <Line: -			<select class="input-mini" style="width: 75px;" ng-model="panel.postfixFontSize" ng-options="f for f in fontSizes" ng-change="render()"></select>
+>, <Line: -    <h5>Formats</h5>
+>, <Line: -			<select class="input-small" ng-model="panel.format" ng-options="f for f in ['none','short','bytes', 'bits', 'bps', 's', 'ms', 'µs', 'ns', 'percent']" ng-change="render()"></select>
+>, <Line: -    <h5>Coloring</h5>
+>, <Line: -		<editor-opt-bool text="Background" model="panel.colorBackground" change="setColoring({background: true})"></editor-opt-bool>
+>, <Line: -		<editor-opt-bool text="Value" model="panel.colorValue" change="setColoring({value: true})"></editor-opt-bool>
+>, <Line: -		<div class="editor-option" ng-show="panel.colorBackground || panel.colorValue">
+>, <Line: -			<label class="small">Thresholds<tip>Comma seperated values</tip></label>
+>, <Line: -			<input type="text" class="input-large" ng-model="panel.thresholds" ng-blur="render()" placeholder="0,50,80"></input>
+>, <Line: -		<div class="editor-option" ng-show="panel.colorBackground || panel.colorValue">
+>, <Line: -      <label class="small">Colors</label>
+>, <Line: -      <spectrum-picker ng-model="panel.colors[0]" ng-change="render()" ></spectrum-picker>
+>, <Line: -      <spectrum-picker ng-model="panel.colors[1]" ng-change="render()" ></spectrum-picker>
+>, <Line: -			<spectrum-picker ng-model="panel.colors[2]" ng-change="render()" ></spectrum-picker>
+>, <Line: -		<editor-opt-bool text="Spark line" model="panel.sparkline.show" change="render()"></editor-opt-bool>
+>, <Line: -		<editor-opt-bool text="Background mode" model="panel.sparkline.full" change="render()"></editor-opt-bool>
+>, <Line: -			<spectrum-picker ng-model="panel.sparkline.lineColor" ng-change="render()" ></spectrum-picker>
+>, <Line: -			<spectrum-picker ng-model="panel.sparkline.fillColor" ng-change="render()" ></spectrum-picker>
+>, <Line: -						<li class="grafana-target-segment"  ng-repeat-start="map in panel.valueMaps">
+>, <Line: -							<i class="icon-remove pointer" ng-click="removeValueMap(map)"></i>
+>, <Line: -							<input type="text" ng-model="map.value" placeholder="value" class="input-mini grafana-target-segment-input" ng-blur="render()">
+>, <Line: -							<input type="text" placeholder="text" ng-model="map.text" class="input-mini grafana-target-segment-input" ng-blur="render()">
+>, <Line: -							<a class="pointer grafana-target-segment" ng-click="addValueMap();">
+>]

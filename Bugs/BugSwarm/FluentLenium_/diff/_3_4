@@ -1,0 +1,7 @@
+[<Line: +import org.openqa.selenium.Keys;
+>, <Line: +    @FindBy(css = "input[name=\"btnK\"]")
+>, <Line: +        keyboard().basic().sendKeys(Keys.TAB);
+>, <Line: +        await().until(searchButton).clickable();
+>]
+[<Line: -    @FindBy(css = "button[name=\"btnG\"]")
+>]

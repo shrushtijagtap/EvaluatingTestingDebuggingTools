@@ -1,0 +1,22 @@
+[]
+[<Line: -// ====================================================================
+>, <Line: -// Inhabited
+>, <Line: -// ====================================================================
+>, <Line: -// The inhabited constructor is essentially a function which returns
+>, <Line: -// true or false as to whether ot not a given type reduces to Void.  In
+>, <Line: -// essence, this is about controlling the reduction process more precisely.
+>, <Line: -term Inhabited(Type)
+>, <Line: -@name("Inhabited_1")
+>, <Line: -reduce Inhabited(Atom t):
+>, <Line: -    => False, if (t == VoidT) || (t == NotT(AnyT))
+>, <Line: -    => True
+>, <Line: -// A conjunct in this normal form can be reduced to true in the
+>, <Line: -// general case
+>, <Line: -@name("Inhabited_2")
+>, <Line: -reduce Inhabited(AndT{NotT(Proton)... ts})
+>, <Line: -requires no { t in ts | t == AnyT }:
+>, <Line: -    => True
+>, <Line: -@name("Inhabited_3")
+>, <Line: -reduce Inhabited(ArrayT(Type t)):
+>, <Line: -    => Inhabited(t)
+>]

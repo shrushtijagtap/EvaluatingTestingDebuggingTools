@@ -1,0 +1,8 @@
+[<Line: +    [fr6nat] ys = [0; |xs|]
+>, <Line: +            ys[i] = xs[i]
+>, <Line: +    assume f(g(ys)) == [0, 2, 3]
+>]
+[<Line: -    [fr6nat] ys = []
+>, <Line: -            ys = ys ++ [xs[i]]
+>, <Line: -    assume f(g(ys)) == [2, 3]
+>]

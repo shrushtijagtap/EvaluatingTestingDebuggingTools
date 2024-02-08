@@ -1,0 +1,11 @@
+[<Line: +        assertUtilsClassHasPrivateConstructor(CheckUtils.class);
+>]
+[<Line: -import java.lang.reflect.InvocationTargetException;
+>, <Line: -        try {
+>, <Line: -            assertUtilsClassHasPrivateConstructor(CheckUtils.class);
+>, <Line: -            Assert.fail();
+>, <Line: -        }
+>, <Line: -        catch (InvocationTargetException ex) {
+>, <Line: -            Assert.assertTrue(ex.getCause() instanceof UnsupportedOperationException);
+>, <Line: -        }
+>]

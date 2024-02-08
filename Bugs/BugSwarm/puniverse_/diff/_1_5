@@ -1,0 +1,8 @@
+[<Line: +                        if (im.callsSuspendables()) {
+>, <Line: +                            im.accept(outMV, hasAnnotation(mn));
+>]
+[<Line: -                        final int[] suspCallsIndexes = im.getSuspCallsIndexes();
+>, <Line: -                        if (suspCallsIndexes.length > 0) {
+>, <Line: -                            // There are suspendable calls => adding @Instrumented at the very least
+>, <Line: -                            im.accept(outMV, hasAnnotation(mn), suspCallsIndexes);
+>]

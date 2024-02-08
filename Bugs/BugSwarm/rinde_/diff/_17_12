@@ -1,0 +1,16 @@
+[<Line: +import com.github.rinde.rinsim.geom.MultimapGraph;
+>, <Line: +import com.github.rinde.rinsim.geom.TableGraph;
+>, <Line: +    return Arrays.asList(new Object[][] { { MultimapGraph.class },
+>, <Line: +        { TableGraph.class } });
+>]
+[<Line: -import com.github.rinde.rinsim.core.model.road.GraphRoadModel;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.MoveProgress;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.MovingRoadUser;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.RoadModel;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.RoadModels;
+>, <Line: -import com.github.rinde.rinsim.core.model.road.RoadUser;
+>, <Line: -import com.github.rinde.rinsim.geom.TestMultimapGraph;
+>, <Line: -import com.github.rinde.rinsim.geom.TestTableGraph;
+>, <Line: -    return Arrays.asList(new Object[][] { { TestMultimapGraph.class },
+>, <Line: -        { TestTableGraph.class } });
+>]

@@ -1,0 +1,166 @@
+[<Line: +import cn.nukkit.level.generator.biome.CaveBiome;
+>, <Line: +    public ChunkManager chunk;
+>, <Line: +        int size = this.checkAreaSize;
+>, <Line: +        for (int x = chunkX - size; x <= chunkX + size; x++)
+>, <Line: +            for (int z = chunkZ - size; z <= chunkZ + size; z++) {
+>, <Line: +                long randomX = x * worldLong1;
+>, <Line: +                long randomZ = z * worldLong2;
+>, <Line: +                this.random.setSeed(randomX ^ randomZ ^ level.getSeed());
+>, <Line: +    protected void generateLargeCaveNode(long seed, FullChunk chunk, double x, double y, double z) {
+>, <Line: +        generateCaveNode(seed, chunk, x, y, z, 1.0F + this.random.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
+>, <Line: +    protected void generateCaveNode(long seed, FullChunk chunk, double x, double y, double z, float paramFloat1, float paramFloat2, float paramFloat3, int angle, int maxAngle, double paramDouble4) {
+>, <Line: +        int chunkX = chunk.getX();
+>, <Line: +        int chunkZ = chunk.getZ();
+>, <Line: +        double realX = chunkX * 16 + 8;
+>, <Line: +        double realZ = chunkZ * 16 + 8;
+>, <Line: +        if (maxAngle <= 0) {
+>, <Line: +        if (angle == -1) {
+>, <Line: +        for (; angle < maxAngle; angle++) {
+>, <Line: +            if (k != 0)
+>, <Line: +            if ((!isLargeCave) && (angle == j) && (paramFloat1 > 1.0F) && (maxAngle > 0)) {
+>, <Line: +                generateCaveNode(localRandom.nextLong(), chunk, x, y, z, localRandom.nextFloat() * 0.5F + 0.5F,
+>, <Line: +                generateCaveNode(localRandom.nextLong(), chunk, x, y, z, localRandom.nextFloat() * 0.5F + 0.5F,
+>, <Line: +            if ((!isLargeCave) && (localRandom.nextInt(4) == 0)) {
+>, <Line: +            double d5 = x - realX;
+>, <Line: +            double d6 = z - realZ;
+>, <Line: +            if (d5 * d5 + d6 * d6 - d7 * d7 > d8 * d8) {
+>, <Line: +            if ((x < realX - 16.0D - d3 * 2.0D) || (z < realZ - 16.0D - d3 * 2.0D) || (x > realX + 16.0D + d3 * 2.0D) || (z > realZ + 16.0D + d3 * 2.0D))
+>, <Line: +            if (m < 0)
+>, <Line: +            if (n > 16)
+>, <Line: +            if (i1 < 1)
+>, <Line: +            if (i2 > this.worldHeightCap - 8) {
+>, <Line: +            if (i3 < 0)
+>, <Line: +            if (i4 > 16)
+>, <Line: +            for (int local_x = m; (!waterFound) && (local_x < n); local_x++) {
+>, <Line: +                for (int local_z = i3; (!waterFound) && (local_z < i4); local_z++) {
+>, <Line: +                    for (int local_y = i2 + 1; (!waterFound) && (local_y >= i1 - 1); local_y--) {
+>, <Line: +                        if (local_y >= 0 && local_y < this.worldHeightCap) {
+>, <Line: +                            int material = chunk.getBlockId(local_x, local_y, local_z);
+>, <Line: +                            if (material == Block.WATER
+>, <Line: +                            if ((local_y != i1 - 1) && (local_x != m) && (local_x != n - 1) && (local_z != i3) && (local_z != i4 - 1))
+>, <Line: +            if (waterFound)
+>, <Line: +            for (int local_x = m; local_x < n; local_x++) {
+>, <Line: +                for (int local_z = i3; local_z < i4; local_z++) {
+>, <Line: +                    if (d9 * d9 + d10 * d10 < 1.0D) {
+>, <Line: +                        for (int local_y = i2; local_y > i1; local_y--) {
+>, <Line: +                            if ((d11 > -0.7D) && (d9 * d9 + d11 * d11 + d10 * d10 < 1.0D)) {
+>, <Line: +                                Biome biome = Biome.getBiome(chunk.getBiomeId(local_x, local_z));
+>, <Line: +                                if (!(biome instanceof CaveBiome)) {
+>, <Line: +                                    continue;
+>, <Line: +                                }
+>, <Line: +                                int material = chunk.getBlockId(local_x, local_y, local_z);
+>, <Line: +                                int materialAbove = chunk.getBlockId(local_x, local_y + 1, local_z);
+>, <Line: +                                if (material == Block.GRASS || material == Block.MYCELIUM) {
+>, <Line: +                                }
+>, <Line: +                                    if (local_y - 1 < 10) {
+>, <Line: +                                        chunk.setBlock(local_x, local_y, local_z, Block.LAVA);
+>, <Line: +                                        chunk.setBlock(local_x, local_y, local_z, Block.AIR);
+>, <Line: +                                        if (grassFound && (chunk.getBlockId(local_x, local_y - 1, local_z) == Block.DIRT)) {
+>, <Line: +                                            chunk.setBlock(local_x, local_y - 1, local_z, ((CaveBiome) biome).getSurfaceBlock());
+>, <Line: +            if (isLargeCave)
+>, <Line: +    protected boolean isSuitableBlock(int material, int materialAbove, CaveBiome biome) {
+>, <Line: +        if (material == biome.getStoneBlock()) {
+>, <Line: +        if (material == Block.SAND || material == Block.GRAVEL) {
+>, <Line: +        if (material == biome.getGroundBlock()) {
+>, <Line: +        if (material == biome.getSurfaceBlock()) {
+>, <Line: +        if (material == Block.HARDENED_CLAY) {
+>, <Line: +        if (material == Block.SANDSTONE) {
+>, <Line: +        return material == Block.SNOW;
+>, <Line: +        int i = this.random.nextInt(this.random.nextInt(this.random.nextInt(caveFrequency) + 1) + 1);
+>, <Line: +        if (evenCaveDistribution)
+>, <Line: +            i = caveFrequency;
+>, <Line: +        if (this.random.nextInt(100) >= caveRarity)
+>, <Line: +        for (int j = 0; j < i; j++) {
+>, <Line: +            if (evenCaveDistribution)
+>, <Line: +                y = numberInRange(random, caveMinAltitude, caveMaxAltitude);
+>, <Line: +                y = this.random.nextInt(this.random.nextInt(caveMaxAltitude - caveMinAltitude + 1) + 1) + caveMinAltitude;
+>, <Line: +            int count = caveSystemFrequency;
+>, <Line: +            if (this.random.nextInt(100) <= individualCaveRarity) {
+>, <Line: +            if ((largeCaveSpawned) || (this.random.nextInt(100) <= caveSystemPocketChance - 1)) {
+>, <Line: +                count += numberInRange(random, caveSystemPocketMinSize, caveSystemPocketMaxSize);
+>, <Line: +            while (count > 0) {
+>]
+[<Line: -    public ChunkManager world;
+>, <Line: -        int i = this.checkAreaSize;
+>, <Line: -        for(int x = chunkX - i; x <= chunkX + i; x++)
+>, <Line: -            for(int z = chunkZ - i; z <= chunkZ + i; z++) {
+>, <Line: -                long l3 = x * worldLong1;
+>, <Line: -                long l4 = z * worldLong2;
+>, <Line: -                this.random.setSeed(l3 ^ l4 ^ level.getSeed());
+>, <Line: -    protected void generateLargeCaveNode(long seed, FullChunk generatingChunkBuffer, double x, double y, double z) {
+>, <Line: -        generateCaveNode(seed, generatingChunkBuffer, x, y, z, 1.0F + this.random.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
+>, <Line: -    protected void generateCaveNode(long seed, FullChunk generatingChunkBuffer, double x, double y, double z, float paramFloat1,
+>, <Line: -                                    float paramFloat2, float paramFloat3, int angle, int maxAngle, double paramDouble4) {
+>, <Line: -        int chunkX = generatingChunkBuffer.getX();
+>, <Line: -        int chunkZ = generatingChunkBuffer.getZ();
+>, <Line: -        double real_x = chunkX * 16 + 8;
+>, <Line: -        double real_z = chunkZ * 16 + 8;
+>, <Line: -        if(maxAngle <= 0) {
+>, <Line: -        if(angle == -1) {
+>, <Line: -        for(; angle < maxAngle; angle++) {
+>, <Line: -            if(k != 0)
+>, <Line: -            if((!isLargeCave) && (angle == j) && (paramFloat1 > 1.0F) && (maxAngle > 0)) {
+>, <Line: -                generateCaveNode(localRandom.nextLong(), generatingChunkBuffer, x, y, z, localRandom.nextFloat() * 0.5F + 0.5F,
+>, <Line: -                generateCaveNode(localRandom.nextLong(), generatingChunkBuffer, x, y, z, localRandom.nextFloat() * 0.5F + 0.5F,
+>, <Line: -            if((!isLargeCave) && (localRandom.nextInt(4) == 0)) {
+>, <Line: -            double d5 = x - real_x;
+>, <Line: -            double d6 = z - real_z;
+>, <Line: -            if(d5 * d5 + d6 * d6 - d7 * d7 > d8 * d8) {
+>, <Line: -            if((x < real_x - 16.0D - d3 * 2.0D) || (z < real_z - 16.0D - d3 * 2.0D) || (x > real_x + 16.0D + d3 * 2.0D) || (z > real_z + 16.0D + d3 * 2.0D))
+>, <Line: -            if(m < 0)
+>, <Line: -            if(n > 16)
+>, <Line: -            if(i1 < 1)
+>, <Line: -            if(i2 > this.worldHeightCap - 8) {
+>, <Line: -            if(i3 < 0)
+>, <Line: -            if(i4 > 16)
+>, <Line: -            for(int local_x = m; (!waterFound) && (local_x < n); local_x++) {
+>, <Line: -                for(int local_z = i3; (!waterFound) && (local_z < i4); local_z++) {
+>, <Line: -                    for(int local_y = i2 + 1; (!waterFound) && (local_y >= i1 - 1); local_y--) {
+>, <Line: -                        if(local_y >= 0 && local_y < this.worldHeightCap) {
+>, <Line: -                            int material = generatingChunkBuffer.getBlockId(local_x, local_y, local_z);
+>, <Line: -                            if(material == Block.WATER
+>, <Line: -                            if((local_y != i1 - 1) && (local_x != m) && (local_x != n - 1) && (local_z != i3) && (local_z != i4 - 1))
+>, <Line: -            if(waterFound)
+>, <Line: -            for(int local_x = m; local_x < n; local_x++) {
+>, <Line: -                for(int local_z = i3; local_z < i4; local_z++) {
+>, <Line: -                    if(d9 * d9 + d10 * d10 < 1.0D) {
+>, <Line: -                        for(int local_y = i2; local_y > i1; local_y--) {
+>, <Line: -                            if((d11 > -0.7D) && (d9 * d9 + d11 * d11 + d10 * d10 < 1.0D)) {
+>, <Line: -                                Biome biome = Biome.getBiome(generatingChunkBuffer.getBiomeId(local_x, local_z)); //this.world.getBiomeAt(local_x, local_z));
+>, <Line: -                                int material = generatingChunkBuffer.getBlockId(local_x, local_y, local_z);
+>, <Line: -                                int materialAbove = generatingChunkBuffer.getBlockId(local_x, local_y + 1, local_z);
+>, <Line: -                                if(material == Block.GRASS || material == Block.MYCELIUM)
+>, <Line: -                                    if(local_y - 1 < 10) {
+>, <Line: -                                        generatingChunkBuffer.setBlock(local_x, local_y, local_z, Block.LAVA);
+>, <Line: -                                        generatingChunkBuffer.setBlock(local_x, local_y, local_z, Block.AIR);
+>, <Line: -                                        if(grassFound
+>, <Line: -                                                && (generatingChunkBuffer.getBlockId(local_x, local_y - 1, local_z)
+>, <Line: -                                                == Block.DIRT)) {
+>, <Line: -                                            generatingChunkBuffer.setBlock(local_x, local_y - 1, local_z,
+>, <Line: -                                                    biome.getSurfaceBlock());
+>, <Line: -            if(isLargeCave)
+>, <Line: -    protected boolean isSuitableBlock(int material, int materialAbove, Biome biome) {
+>, <Line: -        if(material == biome.getStoneBlock()) {
+>, <Line: -        if(material == Block.SAND || material == Block.GRAVEL) {
+>, <Line: -        if(material == biome.getGroundBlock()) {
+>, <Line: -        if(material == biome.getSurfaceBlock()) {
+>, <Line: -        if(material == Block.HARDENED_CLAY) {
+>, <Line: -        if(material == Block.SANDSTONE) {
+>, <Line: -        if(material == Block.SNOW) {
+>, <Line: -            return true;
+>, <Line: -        }
+>, <Line: -        return false;
+>, <Line: -        int i = this.random.nextInt(this.random.nextInt(this.random.nextInt(this.caveFrequency) + 1) + 1);
+>, <Line: -        if(this.evenCaveDistribution)
+>, <Line: -            i = this.caveFrequency;
+>, <Line: -        if(this.random.nextInt(100) >= this.caveRarity)
+>, <Line: -        for(int j = 0; j < i; j++) {
+>, <Line: -            if(this.evenCaveDistribution)
+>, <Line: -                y = numberInRange(random, this.caveMinAltitude, this.caveMaxAltitude);
+>, <Line: -                y = this.random.nextInt(this.random.nextInt(this.caveMaxAltitude - this.caveMinAltitude + 1) + 1) + this.caveMinAltitude;
+>, <Line: -            int count = this.caveSystemFrequency;
+>, <Line: -            if(this.random.nextInt(100) <= this.individualCaveRarity) {
+>, <Line: -            if((largeCaveSpawned) || (this.random.nextInt(100) <= this.caveSystemPocketChance - 1)) {
+>, <Line: -                count += numberInRange(random, this.caveSystemPocketMinSize, this.caveSystemPocketMaxSize);
+>, <Line: -            while(count > 0) {
+>]

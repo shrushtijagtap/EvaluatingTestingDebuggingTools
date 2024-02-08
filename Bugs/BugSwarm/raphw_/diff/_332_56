@@ -1,0 +1,10 @@
+[<Line: +        when(firstTargetParameter.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotations(indexZeroArgument));
+>, <Line: +        when(firstTargetParameter.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotations(indexOneArgument));
+>, <Line: +        when(firstTargetParameter.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotations(indexOneArgument));
+>, <Line: +        when(secondTargetParameter.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotations(indexZeroArgument));
+>]
+[<Line: -        when(firstTargetParameter.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotation(indexZeroArgument));
+>, <Line: -        when(firstTargetParameter.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotation(indexOneArgument));
+>, <Line: -        when(firstTargetParameter.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotation(indexOneArgument));
+>, <Line: -        when(secondTargetParameter.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotation(indexZeroArgument));
+>]

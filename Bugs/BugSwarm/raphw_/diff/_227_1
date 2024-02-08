@@ -1,0 +1,8 @@
+[<Line: +                        ElementMatcher.Junction<TypeDescription> elementMatcher = none();
+>, <Line: +                            elementMatcher = elementMatcher.or(isSuperTypeOf(typeDescription));
+>, <Line: +                        return materialize().invokable(isDeclaredBy(isInterface().and(elementMatcher)));
+>]
+[<Line: -                        ElementMatcher.Junction<MethodDescription> elementMatcher = none();
+>, <Line: -                            elementMatcher = elementMatcher.or(isDeclaredBy(isSuperTypeOf(typeDescription)));
+>, <Line: -                        return materialize().invokable(isDeclaredBy(isInterface()).and(elementMatcher));
+>]

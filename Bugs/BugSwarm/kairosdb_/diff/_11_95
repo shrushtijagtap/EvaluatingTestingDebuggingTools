@@ -1,0 +1,44 @@
+[<Line: +	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss.SS");
+>, <Line: +		timeRelativeTo = dateFormat.parse("2013-JAN-18 4:55:12.22").getTime();
+>, <Line: +	@Test
+>, <Line: +	public void test_getTimeRelativeTo_milliseconds() throws ParseException
+>, <Line: +	{
+>, <Line: +		RelativeTime time = new RelativeTime(5, "MILLISECONDS");
+>, <Line: +		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-18 4:55:12.17").getTime()));
+>, <Line: +	}
+>, <Line: +		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-18 4:55:07.22").getTime()));
+>, <Line: +		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-18 4:50:12.22").getTime()));
+>, <Line: +		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-18 1:55:12.22").getTime()));
+>, <Line: +		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-15 4:55:12.22").getTime()));
+>, <Line: +		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2012-Dec-28 4:55:12.22").getTime()));
+>, <Line: +		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2012-Nov-18 4:55:12.22").getTime()));
+>, <Line: +		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2010-JAN-18 4:55:12.22").getTime()));
+>, <Line: +	@Test
+>, <Line: +	public void test_getFutureTimeRelativeTo_milliseconds() throws ParseException
+>, <Line: +	{
+>, <Line: +		RelativeTime time = new RelativeTime(5, "MILLISECONDS");
+>, <Line: +		assertThat(time.getFutureTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-18 4:55:12.27").getTime()));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getFutureTimeRelativeTo_seconds() throws ParseException
+>, <Line: +	{
+>, <Line: +		RelativeTime time = new RelativeTime(5, "SECONDS");
+>, <Line: +		assertThat(time.getFutureTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-18 4:55:17.22").getTime()));
+>, <Line: +	}
+>, <Line: +	@Test
+>, <Line: +	public void test_getFutureTimeRelativeTo_minutes() throws ParseException
+>, <Line: +	{
+>, <Line: +		RelativeTime time = new RelativeTime(5, "MINUTES");
+>, <Line: +		assertThat(time.getFutureTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-18 5:00:12.22").getTime()));
+>, <Line: +	}
+>]
+[<Line: -	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss");
+>, <Line: -		timeRelativeTo = dateFormat.parse("2013-JAN-18 4:55:12").getTime();
+>, <Line: -		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-18 4:55:07").getTime()));
+>, <Line: -		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-18 4:50:12").getTime()));
+>, <Line: -		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-18 1:55:12").getTime()));
+>, <Line: -		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2013-Jan-15 4:55:12").getTime()));
+>, <Line: -		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2012-Dec-28 4:55:12").getTime()));
+>, <Line: -		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2012-Nov-18 4:55:12").getTime()));
+>, <Line: -		assertThat(time.getTimeRelativeTo(timeRelativeTo), equalTo(dateFormat.parse("2010-JAN-18 4:55:12").getTime()));
+>]

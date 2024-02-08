@@ -1,0 +1,43 @@
+[]
+[<Line: -/*
+>, <Line: - * Copyright 2012 Sebastian Annies, Hamburg
+>, <Line: - *
+>, <Line: - * Licensed under the Apache License, Version 2.0 (the License);
+>, <Line: - * you may not use this file except in compliance with the License.
+>, <Line: - * You may obtain a copy of the License at
+>, <Line: - *
+>, <Line: - *     http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: - *
+>, <Line: - * Unless required by applicable law or agreed to in writing, software
+>, <Line: - * distributed under the License is distributed on an AS IS BASIS,
+>, <Line: - * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: - * See the License for the specific language governing permissions and
+>, <Line: - * limitations under the License.
+>, <Line: - */
+>, <Line: -package com.googlecode.mp4parser.util;
+>, <Line: -import java.io.EOFException;
+>, <Line: -import java.io.IOException;
+>, <Line: -import java.nio.ByteBuffer;
+>, <Line: -import java.nio.channels.ReadableByteChannel;
+>, <Line: -public class ChannelHelper {
+>, <Line: -    private static ByteBuffer empty = ByteBuffer.allocate(0).asReadOnlyBuffer();
+>, <Line: -    public static void readFully(final ReadableByteChannel channel, final ByteBuffer buf)
+>, <Line: -            throws IOException {
+>, <Line: -        readFully(channel, buf, buf.remaining());
+>, <Line: -    }
+>, <Line: -    public static int readFully(final ReadableByteChannel channel, final ByteBuffer buf, final int length)
+>, <Line: -            throws IOException {
+>, <Line: -        int n, count = 0;
+>, <Line: -        while (-1 != (n = channel.read(buf))) {
+>, <Line: -            count += n;
+>, <Line: -            if (count == length) {
+>, <Line: -                break;
+>, <Line: -            }
+>, <Line: -        }
+>, <Line: -        if (n == -1) {
+>, <Line: -            throw new EOFException("End of file. No more boxes.");
+>, <Line: -        }
+>, <Line: -        return count;
+>, <Line: -    }
+>, <Line: -}
+>]

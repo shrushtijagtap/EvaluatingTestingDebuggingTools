@@ -1,0 +1,9 @@
+[<Line: +package org.mp4parser.tools.boxes;
+>, <Line: +import org.mp4parser.ParsableBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.FreeBox;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.UserDataBox;
+>, <Line: +        addPropsHere.put("boxes", Arrays.asList((ParsableBox) new FreeBox(100), new FreeBox(200)));
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -        addPropsHere.put("boxes", Arrays.asList((Box) new FreeBox(100), new FreeBox(200)));
+>]

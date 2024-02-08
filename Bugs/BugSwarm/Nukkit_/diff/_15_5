@@ -1,0 +1,45 @@
+[<Line: +package cn.nukkit.inventory;
+>, <Line: +import cn.nukkit.item.Item;
+>, <Line: +import cn.nukkit.Server;
+>, <Line: +import java.util.UUID;
+>, <Line: +public class BrewingRecipe implements Recipe{
+>, <Line: +    private UUID id;
+>, <Line: +    private Item output;
+>, <Line: +    private Item potion;
+>, <Line: +    private Item ingredient;
+>, <Line: +    public BrewingRecipe(Item result, Item ingredient, Item potion){
+>, <Line: +        this.output = result.clone();
+>, <Line: +        this.ingredient = ingredient.clone();
+>, <Line: +        this.potion = potion.clone();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public UUID getId(){
+>, <Line: +        return id;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void setId(UUID uuid){
+>, <Line: +        if(id != null){
+>, <Line: +            throw new IllegalStateException("Id is already set");
+>, <Line: +        }
+>, <Line: +        this.id = uuid;
+>, <Line: +    }
+>, <Line: +    public void setInput(Item item){
+>, <Line: +        ingredient = item.clone();
+>, <Line: +    }
+>, <Line: +    public Item getInput(){
+>, <Line: +        return ingredient.clone();
+>, <Line: +    }
+>, <Line: +    public Item getPotion(){
+>, <Line: +        return potion.clone();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public Item getResult(){
+>, <Line: +        return output.clone();
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    public void registerToCraftingManager(){
+>, <Line: +        Server.getInstance().getCraftingManager().registerBrewingRecipe(this);
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

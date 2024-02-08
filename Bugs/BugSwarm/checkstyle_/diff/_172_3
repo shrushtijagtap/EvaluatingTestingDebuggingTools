@@ -1,0 +1,19 @@
+[<Line: +////////////////////////////////////////////////////////////////////////////////
+>, <Line: +// Test case file for checkstyle.
+>, <Line: +// Created: 2015
+>, <Line: +////////////////////////////////////////////////////////////////////////////////
+>, <Line: +package com.puppycrawl.tools.checkstyle;
+>, <Line: +public class InputRedundantPublicModifierInNotPublicClass {
+>, <Line: +    public InputRedundantPublicModifierInNotPublicClass() { }
+>, <Line: +    protected class ProtectedClass {
+>, <Line: +        public ProtectedClass() {}
+>, <Line: +    }
+>, <Line: +}
+>, <Line: +class PackagePrivateClass {
+>, <Line: +    public PackagePrivateClass() {} // violation expected
+>, <Line: +}
+>, <Line: +class PackagePrivateClassWithNotRedundantConstructor {
+>, <Line: +    PackagePrivateClassWithNotRedundantConstructor() {}
+>, <Line: +}
+>]
+[]

@@ -1,0 +1,683 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash',
+>, <Line: +		'kbn',
+>, <Line: +		'./influxSeries',
+>, <Line: +		'./influxQueryBuilder'
+>, <Line: +	],
+>, <Line: +	function (angular, _, kbn, InfluxSeries, InfluxQueryBuilder) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		module.factory('InfluxDatasource', function ($q, $http, templateSrv) {
+>, <Line: +			function InfluxDatasource(datasource) {
+>, <Line: +				this.type = 'influxDB';
+>, <Line: +				this.editorSrc = 'app/partials/influxdb/editor.html';
+>, <Line: +				this.urls = datasource.urls;
+>, <Line: +				this.username = datasource.username;
+>, <Line: +				this.password = datasource.password;
+>, <Line: +				this.name = datasource.name;
+>, <Line: +				this.basicAuth = datasource.basicAuth;
+>, <Line: +				this.saveTemp = _.isUndefined(datasource.save_temp) ? true : datasource.save_temp;
+>, <Line: +				this.saveTempTTL = _.isUndefined(datasource.save_temp_ttl) ? '30d' : datasource.save_temp_ttl;
+>, <Line: +				this.grafanaDB = datasource.grafanaDB;
+>, <Line: +				this.supportAnnotations = true;
+>, <Line: +				this.supportMetrics = true;
+>, <Line: +				this.annotationEditorSrc = 'app/partials/influxdb/annotation_editor.html';
+>, <Line: +			}
+>, <Line: +			InfluxDatasource.prototype.query = function (options) {
+>, <Line: +				var timeFilter = getTimeFilter(options);
+>, <Line: +				var promises = _.map(options.targets, function (target) {
+>, <Line: +					if (target.hide || !((target.series && target.column) || target.query)) {
+>, <Line: +						return [];
+>, <Line: +					}
+>, <Line: +					// build query
+>, <Line: +					var queryBuilder = new InfluxQueryBuilder(target);
+>, <Line: +					var query = queryBuilder.build();
+>, <Line: +					// replace grafana variables
+>, <Line: +					query = query.replace('$timeFilter', timeFilter);
+>, <Line: +					query = query.replace(/\$interval/g, (target.interval || options.interval));
+>, <Line: +					// replace templated variables
+>, <Line: +					query = templateSrv.replace(query);
+>, <Line: +					var alias = target.alias ? templateSrv.replace(target.alias) : '';
+>, <Line: +					var handleResponse = _.partial(handleInfluxQueryResponse, alias, queryBuilder.groupByField);
+>, <Line: +					return this._seriesQuery(query).then(handleResponse);
+>, <Line: +				}, this);
+>, <Line: +				return $q.all(promises).then(function (results) {
+>, <Line: +					return {data: _.flatten(results)};
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype.annotationQuery = function (annotation, rangeUnparsed) {
+>, <Line: +				var timeFilter = getTimeFilter({range: rangeUnparsed});
+>, <Line: +				var query = annotation.query.replace('$timeFilter', timeFilter);
+>, <Line: +				query = templateSrv.replace(query);
+>, <Line: +				return this._seriesQuery(query).then(function (results) {
+>, <Line: +					return new InfluxSeries({
+>, <Line: +						seriesList: results,
+>, <Line: +						annotation: annotation
+>, <Line: +					}).getAnnotations();
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype.listColumns = function (seriesName) {
+>, <Line: +				var interpolated = templateSrv.replace(seriesName);
+>, <Line: +				if (interpolated[0] !== '/') {
+>, <Line: +					interpolated = '/' + interpolated + '/';
+>, <Line: +				}
+>, <Line: +				return this._seriesQuery('select * from ' + interpolated + ' limit 1').then(function (data) {
+>, <Line: +					if (!data) {
+>, <Line: +						return [];
+>, <Line: +					}
+>, <Line: +					return data[0].columns;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype.listSeries = function (query) {
+>, <Line: +				// wrap in regex
+>, <Line: +				if (query && query.length > 0 && query[0] !== '/') {
+>, <Line: +					query = '/' + query + '/';
+>, <Line: +				}
+>, <Line: +				return this._seriesQuery('list series ' + query).then(function (data) {
+>, <Line: +					if (!data || data.length === 0) {
+>, <Line: +						return [];
+>, <Line: +					}
+>, <Line: +					// influxdb >= 1.8
+>, <Line: +					if (data[0].points.length > 0) {
+>, <Line: +						return _.map(data[0].points, function (point) {
+>, <Line: +							return point[1];
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +					else { // influxdb <= 1.7
+>, <Line: +						return _.map(data, function (series) {
+>, <Line: +							return series.name; // influxdb < 1.7
+>, <Line: +						});
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype.metricFindQuery = function (query) {
+>, <Line: +				var interpolated;
+>, <Line: +				try {
+>, <Line: +					interpolated = templateSrv.replace(query);
+>, <Line: +				}
+>, <Line: +				catch (err) {
+>, <Line: +					return $q.reject(err);
+>, <Line: +				}
+>, <Line: +				return this._seriesQuery(interpolated)
+>, <Line: +					.then(function (results) {
+>, <Line: +						return _.map(results[0].points, function (metric) {
+>, <Line: +							return {
+>, <Line: +								text: metric[1],
+>, <Line: +								expandable: false
+>, <Line: +							};
+>, <Line: +						});
+>, <Line: +					});
+>, <Line: +			};
+>, <Line: +			function retry(deferred, callback, delay) {
+>, <Line: +				return callback().then(undefined, function (reason) {
+>, <Line: +					if (reason.status !== 0 || reason.status >= 300) {
+>, <Line: +						reason.message = 'InfluxDB Error: <br/>' + reason.data;
+>, <Line: +						deferred.reject(reason);
+>, <Line: +					}
+>, <Line: +					else {
+>, <Line: +						setTimeout(function () {
+>, <Line: +							return retry(deferred, callback, Math.min(delay * 2, 30000));
+>, <Line: +						}, delay);
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +			}
+>, <Line: +			InfluxDatasource.prototype._seriesQuery = function (query) {
+>, <Line: +				return this._influxRequest('GET', '/series', {
+>, <Line: +					q: query,
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype._influxRequest = function (method, url, data) {
+>, <Line: +				var _this = this;
+>, <Line: +				var deferred = $q.defer();
+>, <Line: +				retry(deferred, function () {
+>, <Line: +					var currentUrl = _this.urls.shift();
+>, <Line: +					_this.urls.push(currentUrl);
+>, <Line: +					var params = {
+>, <Line: +						u: _this.username,
+>, <Line: +						p: _this.password,
+>, <Line: +					};
+>, <Line: +					if (method === 'GET') {
+>, <Line: +						_.extend(params, data);
+>, <Line: +						data = null;
+>, <Line: +					}
+>, <Line: +					var options = {
+>, <Line: +						method: method,
+>, <Line: +						url: currentUrl + url,
+>, <Line: +						params: params,
+>, <Line: +						data: data,
+>, <Line: +						inspect: {type: 'influxdb'},
+>, <Line: +					};
+>, <Line: +					options.headers = options.headers || {};
+>, <Line: +					if (_this.basicAuth) {
+>, <Line: +						options.headers.Authorization = 'Basic ' + _this.basicAuth;
+>, <Line: +					}
+>, <Line: +					return $http(options).success(function (data) {
+>, <Line: +						deferred.resolve(data);
+>, <Line: +					});
+>, <Line: +				}, 10);
+>, <Line: +				return deferred.promise;
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype.saveDashboard = function (dashboard) {
+>, <Line: +				var tags = dashboard.tags.join(',');
+>, <Line: +				var title = dashboard.title;
+>, <Line: +				var temp = dashboard.temp;
+>, <Line: +				var id = kbn.slugifyForUrl(title);
+>, <Line: +				if (temp) {
+>, <Line: +					delete dashboard.temp;
+>, <Line: +				}
+>, <Line: +				var data = [{
+>, <Line: +					name: 'grafana.dashboard_' + btoa(id),
+>, <Line: +					columns: ['time', 'sequence_number', 'title', 'tags', 'dashboard', 'id'],
+>, <Line: +					points: [[1000000000000, 1, title, tags, angular.toJson(dashboard), id]]
+>, <Line: +				}];
+>, <Line: +				if (temp) {
+>, <Line: +					return this._saveDashboardTemp(data, title, id);
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					var self = this;
+>, <Line: +					return this._influxRequest('POST', '/series', data).then(function () {
+>, <Line: +						self._removeUnslugifiedDashboard(id, title, false);
+>, <Line: +						return {title: title, url: '/dashboard/db/' + id};
+>, <Line: +					}, function (err) {
+>, <Line: +						throw 'Failed to save dashboard to InfluxDB: ' + err.data;
+>, <Line: +					});
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype._removeUnslugifiedDashboard = function (id, title, isTemp) {
+>, <Line: +				if (id === title) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				var self = this;
+>, <Line: +				self._getDashboardInternal(title, isTemp).then(function (dashboard) {
+>, <Line: +					if (dashboard !== null) {
+>, <Line: +						self.deleteDashboard(title);
+>, <Line: +					}
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype._saveDashboardTemp = function (data, title, id) {
+>, <Line: +				data[0].name = 'grafana.temp_dashboard_' + btoa(id);
+>, <Line: +				data[0].columns.push('expires');
+>, <Line: +				data[0].points[0].push(this._getTempDashboardExpiresDate());
+>, <Line: +				return this._influxRequest('POST', '/series', data).then(function () {
+>, <Line: +					var baseUrl = window.location.href.replace(window.location.hash, '');
+>, <Line: +					var url = baseUrl + "#dashboard/temp/" + id;
+>, <Line: +					return {title: title, url: url};
+>, <Line: +				}, function (err) {
+>, <Line: +					throw 'Failed to save shared dashboard to InfluxDB: ' + err.data;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype._getTempDashboardExpiresDate = function () {
+>, <Line: +				var ttlLength = this.saveTempTTL.substring(0, this.saveTempTTL.length - 1);
+>, <Line: +				var ttlTerm = this.saveTempTTL.substring(this.saveTempTTL.length - 1, this.saveTempTTL.length).toLowerCase();
+>, <Line: +				var expires = Date.now();
+>, <Line: +				switch (ttlTerm) {
+>, <Line: +					case "m":
+>, <Line: +						expires += ttlLength * 60000;
+>, <Line: +						break;
+>, <Line: +					case "d":
+>, <Line: +						expires += ttlLength * 86400000;
+>, <Line: +						break;
+>, <Line: +					case "w":
+>, <Line: +						expires += ttlLength * 604800000;
+>, <Line: +						break;
+>, <Line: +					default:
+>, <Line: +						throw "Unknown ttl duration format";
+>, <Line: +				}
+>, <Line: +				return expires;
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype._getDashboardInternal = function (id, isTemp) {
+>, <Line: +				var queryString = 'select dashboard from "grafana.dashboard_' + btoa(id) + '"';
+>, <Line: +				if (isTemp) {
+>, <Line: +					queryString = 'select dashboard from "grafana.temp_dashboard_' + btoa(id) + '"';
+>, <Line: +				}
+>, <Line: +				return this._seriesQuery(queryString).then(function (results) {
+>, <Line: +					if (!results || !results.length) {
+>, <Line: +						return null;
+>, <Line: +					}
+>, <Line: +					var dashCol = _.indexOf(results[0].columns, 'dashboard');
+>, <Line: +					var dashJson = results[0].points[0][dashCol];
+>, <Line: +					return angular.fromJson(dashJson);
+>, <Line: +				}, function () {
+>, <Line: +					return null;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype.getDashboard = function (id, isTemp) {
+>, <Line: +				var self = this;
+>, <Line: +				return this._getDashboardInternal(id, isTemp).then(function (dashboard) {
+>, <Line: +					if (dashboard !== null) {
+>, <Line: +						return dashboard;
+>, <Line: +					}
+>, <Line: +					// backward compatible load for unslugified ids
+>, <Line: +					var slug = kbn.slugifyForUrl(id);
+>, <Line: +					if (slug !== id) {
+>, <Line: +						return self.getDashboard(slug, isTemp);
+>, <Line: +					}
+>, <Line: +					throw "Dashboard not found";
+>, <Line: +				}, function (err) {
+>, <Line: +					throw  "Could not load dashboard, " + err.data;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype.deleteDashboard = function (id) {
+>, <Line: +				return this._seriesQuery('drop series "grafana.dashboard_' + btoa(id) + '"').then(function (results) {
+>, <Line: +					if (!results) {
+>, <Line: +						throw "Could not delete dashboard";
+>, <Line: +					}
+>, <Line: +					return id;
+>, <Line: +				}, function (err) {
+>, <Line: +					throw "Could not delete dashboard, " + err.data;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			InfluxDatasource.prototype.searchDashboards = function (queryString) {
+>, <Line: +				var influxQuery = 'select * from /grafana.dashboard_.*/ where ';
+>, <Line: +				var tagsOnly = queryString.indexOf('tags!:') === 0;
+>, <Line: +				if (tagsOnly) {
+>, <Line: +					var tagsQuery = queryString.substring(6, queryString.length);
+>, <Line: +					influxQuery = influxQuery + 'tags =~ /.*' + tagsQuery + '.*/i';
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					var titleOnly = queryString.indexOf('title:') === 0;
+>, <Line: +					if (titleOnly) {
+>, <Line: +						var titleQuery = queryString.substring(6, queryString.length);
+>, <Line: +						influxQuery = influxQuery + ' title =~ /.*' + titleQuery + '.*/i';
+>, <Line: +					}
+>, <Line: +					else {
+>, <Line: +						influxQuery = influxQuery + '(tags =~ /.*' + queryString + '.*/i or title =~ /.*' + queryString + '.*/i)';
+>, <Line: +					}
+>, <Line: +				}
+>, <Line: +				return this._seriesQuery(influxQuery).then(function (results) {
+>, <Line: +					var hits = {dashboards: [], tags: [], tagsOnly: false};
+>, <Line: +					if (!results || !results.length) {
+>, <Line: +						return hits;
+>, <Line: +					}
+>, <Line: +					for (var i = 0; i < results.length; i++) {
+>, <Line: +						var dashCol = _.indexOf(results[i].columns, 'title');
+>, <Line: +						var tagsCol = _.indexOf(results[i].columns, 'tags');
+>, <Line: +						var idCol = _.indexOf(results[i].columns, 'id');
+>, <Line: +						var hit = {
+>, <Line: +							id: results[i].points[0][dashCol],
+>, <Line: +							title: results[i].points[0][dashCol],
+>, <Line: +							tags: results[i].points[0][tagsCol].split(",")
+>, <Line: +						};
+>, <Line: +						if (idCol !== -1) {
+>, <Line: +							hit.id = results[i].points[0][idCol];
+>, <Line: +						}
+>, <Line: +						hit.tags = hit.tags[0] ? hit.tags : [];
+>, <Line: +						hits.dashboards.push(hit);
+>, <Line: +					}
+>, <Line: +					return hits;
+>, <Line: +				});
+>, <Line: +			};
+>, <Line: +			function handleInfluxQueryResponse(alias, groupByField, seriesList) {
+>, <Line: +				var influxSeries = new InfluxSeries({
+>, <Line: +					seriesList: seriesList,
+>, <Line: +					alias: alias,
+>, <Line: +					groupByField: groupByField
+>, <Line: +				});
+>, <Line: +				return influxSeries.getTimeSeries();
+>, <Line: +			}
+>, <Line: +			function getTimeFilter(options) {
+>, <Line: +				var from = getInfluxTime(options.range.from);
+>, <Line: +				var until = getInfluxTime(options.range.to);
+>, <Line: +				var fromIsAbsolute = from[from.length - 1] === 's';
+>, <Line: +				if (until === 'now()' && !fromIsAbsolute) {
+>, <Line: +					return 'time > now() - ' + from;
+>, <Line: +				}
+>, <Line: +				return 'time > ' + from + ' and time < ' + until;
+>, <Line: +			}
+>, <Line: +			function getInfluxTime(date) {
+>, <Line: +				if (_.isString(date)) {
+>, <Line: +					if (date === 'now') {
+>, <Line: +						return 'now()';
+>, <Line: +					}
+>, <Line: +					else if (date.indexOf('now') >= 0) {
+>, <Line: +						return date.substring(4);
+>, <Line: +					}
+>, <Line: +					date = kbn.parseDate(date);
+>, <Line: +				}
+>, <Line: +				return to_utc_epoch_seconds(date);
+>, <Line: +			}
+>, <Line: +			function to_utc_epoch_seconds(date) {
+>, <Line: +				return (date.getTime() / 1000).toFixed(0) + 's';
+>, <Line: +			}
+>, <Line: +			return InfluxDatasource;
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash',
+>, <Line: -  'kbn',
+>, <Line: -  './influxSeries',
+>, <Line: -  './influxQueryBuilder'
+>, <Line: -],
+>, <Line: -function (angular, _, kbn, InfluxSeries, InfluxQueryBuilder) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  module.factory('InfluxDatasource', function($q, $http, templateSrv) {
+>, <Line: -    function InfluxDatasource(datasource) {
+>, <Line: -      this.type = 'influxDB';
+>, <Line: -      this.editorSrc = 'app/partials/influxdb/editor.html';
+>, <Line: -      this.urls = datasource.urls;
+>, <Line: -      this.username = datasource.username;
+>, <Line: -      this.password = datasource.password;
+>, <Line: -      this.name = datasource.name;
+>, <Line: -      this.basicAuth = datasource.basicAuth;
+>, <Line: -      this.saveTemp = _.isUndefined(datasource.save_temp) ? true : datasource.save_temp;
+>, <Line: -      this.saveTempTTL = _.isUndefined(datasource.save_temp_ttl) ? '30d' : datasource.save_temp_ttl;
+>, <Line: -      this.grafanaDB = datasource.grafanaDB;
+>, <Line: -      this.supportAnnotations = true;
+>, <Line: -      this.supportMetrics = true;
+>, <Line: -      this.annotationEditorSrc = 'app/partials/influxdb/annotation_editor.html';
+>, <Line: -    }
+>, <Line: -    InfluxDatasource.prototype.query = function(options) {
+>, <Line: -      var timeFilter = getTimeFilter(options);
+>, <Line: -      var promises = _.map(options.targets, function(target) {
+>, <Line: -        if (target.hide || !((target.series && target.column) || target.query)) {
+>, <Line: -          return [];
+>, <Line: -        }
+>, <Line: -        // build query
+>, <Line: -        var queryBuilder = new InfluxQueryBuilder(target);
+>, <Line: -        var query = queryBuilder.build();
+>, <Line: -        // replace grafana variables
+>, <Line: -        query = query.replace('$timeFilter', timeFilter);
+>, <Line: -        query = query.replace(/\$interval/g, (target.interval || options.interval));
+>, <Line: -        // replace templated variables
+>, <Line: -        query = templateSrv.replace(query);
+>, <Line: -        var alias = target.alias ? templateSrv.replace(target.alias) : '';
+>, <Line: -        var handleResponse = _.partial(handleInfluxQueryResponse, alias, queryBuilder.groupByField);
+>, <Line: -        return this._seriesQuery(query).then(handleResponse);
+>, <Line: -      }, this);
+>, <Line: -      return $q.all(promises).then(function(results) {
+>, <Line: -        return { data: _.flatten(results) };
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype.annotationQuery = function(annotation, rangeUnparsed) {
+>, <Line: -      var timeFilter = getTimeFilter({ range: rangeUnparsed });
+>, <Line: -      var query = annotation.query.replace('$timeFilter', timeFilter);
+>, <Line: -      query = templateSrv.replace(query);
+>, <Line: -      return this._seriesQuery(query).then(function(results) {
+>, <Line: -        return new InfluxSeries({ seriesList: results, annotation: annotation }).getAnnotations();
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype.listColumns = function(seriesName) {
+>, <Line: -      var interpolated = templateSrv.replace(seriesName);
+>, <Line: -      if (interpolated[0] !== '/') {
+>, <Line: -        interpolated = '/' + interpolated + '/';
+>, <Line: -      }
+>, <Line: -      return this._seriesQuery('select * from ' + interpolated + ' limit 1').then(function(data) {
+>, <Line: -        if (!data) {
+>, <Line: -          return [];
+>, <Line: -        }
+>, <Line: -        return data[0].columns;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype.listSeries = function(query) {
+>, <Line: -      // wrap in regex
+>, <Line: -      if (query && query.length > 0 && query[0] !== '/')  {
+>, <Line: -        query = '/' + query + '/';
+>, <Line: -      }
+>, <Line: -      return this._seriesQuery('list series ' + query).then(function(data) {
+>, <Line: -        if (!data || data.length === 0) {
+>, <Line: -          return [];
+>, <Line: -        }
+>, <Line: -        // influxdb >= 1.8
+>, <Line: -        if (data[0].points.length > 0) {
+>, <Line: -          return _.map(data[0].points, function(point) {
+>, <Line: -            return point[1];
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -        else { // influxdb <= 1.7
+>, <Line: -          return _.map(data, function(series) {
+>, <Line: -            return series.name; // influxdb < 1.7
+>, <Line: -          });
+>, <Line: -        }
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype.metricFindQuery = function (query) {
+>, <Line: -      var interpolated;
+>, <Line: -      try {
+>, <Line: -        interpolated = templateSrv.replace(query);
+>, <Line: -      }
+>, <Line: -      catch (err) {
+>, <Line: -        return $q.reject(err);
+>, <Line: -      }
+>, <Line: -      return this._seriesQuery(interpolated)
+>, <Line: -        .then(function (results) {
+>, <Line: -          return _.map(results[0].points, function (metric) {
+>, <Line: -            return {
+>, <Line: -              text: metric[1],
+>, <Line: -              expandable: false
+>, <Line: -            };
+>, <Line: -          });
+>, <Line: -        });
+>, <Line: -    };
+>, <Line: -    function retry(deferred, callback, delay) {
+>, <Line: -      return callback().then(undefined, function(reason) {
+>, <Line: -        if (reason.status !== 0 || reason.status >= 300) {
+>, <Line: -          reason.message = 'InfluxDB Error: <br/>' + reason.data;
+>, <Line: -          deferred.reject(reason);
+>, <Line: -        }
+>, <Line: -        else {
+>, <Line: -          setTimeout(function() {
+>, <Line: -            return retry(deferred, callback, Math.min(delay * 2, 30000));
+>, <Line: -          }, delay);
+>, <Line: -        }
+>, <Line: -      });
+>, <Line: -    }
+>, <Line: -    InfluxDatasource.prototype._seriesQuery = function(query) {
+>, <Line: -      return this._influxRequest('GET', '/series', {
+>, <Line: -        q: query,
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype._influxRequest = function(method, url, data) {
+>, <Line: -      var _this = this;
+>, <Line: -      var deferred = $q.defer();
+>, <Line: -      retry(deferred, function() {
+>, <Line: -        var currentUrl = _this.urls.shift();
+>, <Line: -        _this.urls.push(currentUrl);
+>, <Line: -        var params = {
+>, <Line: -          u: _this.username,
+>, <Line: -          p: _this.password,
+>, <Line: -        };
+>, <Line: -        if (method === 'GET') {
+>, <Line: -          _.extend(params, data);
+>, <Line: -          data = null;
+>, <Line: -        }
+>, <Line: -        var options = {
+>, <Line: -          method: method,
+>, <Line: -          url:    currentUrl + url,
+>, <Line: -          params: params,
+>, <Line: -          data:   data,
+>, <Line: -          inspect: { type: 'influxdb' },
+>, <Line: -        };
+>, <Line: -        options.headers = options.headers || {};
+>, <Line: -        if (_this.basicAuth) {
+>, <Line: -          options.headers.Authorization = 'Basic ' + _this.basicAuth;
+>, <Line: -        }
+>, <Line: -        return $http(options).success(function (data) {
+>, <Line: -          deferred.resolve(data);
+>, <Line: -        });
+>, <Line: -      }, 10);
+>, <Line: -      return deferred.promise;
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype.saveDashboard = function(dashboard) {
+>, <Line: -      var tags = dashboard.tags.join(',');
+>, <Line: -      var title = dashboard.title;
+>, <Line: -      var temp = dashboard.temp;
+>, <Line: -      var id = kbn.slugifyForUrl(title);
+>, <Line: -      if (temp) { delete dashboard.temp; }
+>, <Line: -      var data = [{
+>, <Line: -        name: 'grafana.dashboard_' + btoa(id),
+>, <Line: -        columns: ['time', 'sequence_number', 'title', 'tags', 'dashboard', 'id'],
+>, <Line: -        points: [[1000000000000, 1, title, tags, angular.toJson(dashboard), id]]
+>, <Line: -      }];
+>, <Line: -      if (temp) {
+>, <Line: -        return this._saveDashboardTemp(data, title, id);
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        var self = this;
+>, <Line: -        return this._influxRequest('POST', '/series', data).then(function() {
+>, <Line: -          self._removeUnslugifiedDashboard(id, title, false);
+>, <Line: -          return { title: title, url: '/dashboard/db/' + id };
+>, <Line: -        }, function(err) {
+>, <Line: -          throw 'Failed to save dashboard to InfluxDB: ' + err.data;
+>, <Line: -        });
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype._removeUnslugifiedDashboard = function(id, title, isTemp) {
+>, <Line: -      if (id === title) { return; }
+>, <Line: -      var self = this;
+>, <Line: -      self._getDashboardInternal(title, isTemp).then(function(dashboard) {
+>, <Line: -        if (dashboard !== null) {
+>, <Line: -          self.deleteDashboard(title);
+>, <Line: -        }
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype._saveDashboardTemp = function(data, title, id) {
+>, <Line: -      data[0].name = 'grafana.temp_dashboard_' + btoa(id);
+>, <Line: -      data[0].columns.push('expires');
+>, <Line: -      data[0].points[0].push(this._getTempDashboardExpiresDate());
+>, <Line: -      return this._influxRequest('POST', '/series', data).then(function() {
+>, <Line: -        var baseUrl = window.location.href.replace(window.location.hash,'');
+>, <Line: -        var url = baseUrl + "#dashboard/temp/" + id;
+>, <Line: -        return { title: title, url: url };
+>, <Line: -      }, function(err) {
+>, <Line: -        throw 'Failed to save shared dashboard to InfluxDB: ' + err.data;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype._getTempDashboardExpiresDate = function() {
+>, <Line: -      var ttlLength = this.saveTempTTL.substring(0, this.saveTempTTL.length - 1);
+>, <Line: -      var ttlTerm = this.saveTempTTL.substring(this.saveTempTTL.length - 1, this.saveTempTTL.length).toLowerCase();
+>, <Line: -      var expires = Date.now();
+>, <Line: -      switch(ttlTerm) {
+>, <Line: -        case "m":
+>, <Line: -          expires += ttlLength * 60000;
+>, <Line: -          break;
+>, <Line: -        case "d":
+>, <Line: -          expires += ttlLength * 86400000;
+>, <Line: -          break;
+>, <Line: -        case "w":
+>, <Line: -          expires += ttlLength * 604800000;
+>, <Line: -          break;
+>, <Line: -        default:
+>, <Line: -          throw "Unknown ttl duration format";
+>, <Line: -      }
+>, <Line: -      return expires;
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype._getDashboardInternal = function(id, isTemp) {
+>, <Line: -      var queryString = 'select dashboard from "grafana.dashboard_' + btoa(id) + '"';
+>, <Line: -      if (isTemp) {
+>, <Line: -        queryString = 'select dashboard from "grafana.temp_dashboard_' + btoa(id) + '"';
+>, <Line: -      }
+>, <Line: -      return this._seriesQuery(queryString).then(function(results) {
+>, <Line: -        if (!results || !results.length) {
+>, <Line: -          return null;
+>, <Line: -        }
+>, <Line: -        var dashCol = _.indexOf(results[0].columns, 'dashboard');
+>, <Line: -        var dashJson = results[0].points[0][dashCol];
+>, <Line: -        return angular.fromJson(dashJson);
+>, <Line: -      }, function() {
+>, <Line: -        return null;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype.getDashboard = function(id, isTemp) {
+>, <Line: -      var self = this;
+>, <Line: -      return this._getDashboardInternal(id, isTemp).then(function(dashboard) {
+>, <Line: -        if (dashboard !== null)  {
+>, <Line: -          return dashboard;
+>, <Line: -        }
+>, <Line: -        // backward compatible load for unslugified ids
+>, <Line: -        var slug = kbn.slugifyForUrl(id);
+>, <Line: -        if (slug !== id) {
+>, <Line: -          return self.getDashboard(slug, isTemp);
+>, <Line: -        }
+>, <Line: -        throw "Dashboard not found";
+>, <Line: -      }, function(err) {
+>, <Line: -        throw  "Could not load dashboard, " + err.data;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype.deleteDashboard = function(id) {
+>, <Line: -      return this._seriesQuery('drop series "grafana.dashboard_' + btoa(id) + '"').then(function(results) {
+>, <Line: -        if (!results) {
+>, <Line: -          throw "Could not delete dashboard";
+>, <Line: -        }
+>, <Line: -        return id;
+>, <Line: -      }, function(err) {
+>, <Line: -        throw "Could not delete dashboard, " + err.data;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    InfluxDatasource.prototype.searchDashboards = function(queryString) {
+>, <Line: -      var influxQuery = 'select * from /grafana.dashboard_.*/ where ';
+>, <Line: -      var tagsOnly = queryString.indexOf('tags!:') === 0;
+>, <Line: -      if (tagsOnly) {
+>, <Line: -        var tagsQuery = queryString.substring(6, queryString.length);
+>, <Line: -        influxQuery = influxQuery + 'tags =~ /.*' + tagsQuery + '.*/i';
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        var titleOnly = queryString.indexOf('title:') === 0;
+>, <Line: -        if (titleOnly) {
+>, <Line: -          var titleQuery = queryString.substring(6, queryString.length);
+>, <Line: -          influxQuery = influxQuery + ' title =~ /.*' + titleQuery + '.*/i';
+>, <Line: -        }
+>, <Line: -        else {
+>, <Line: -          influxQuery = influxQuery + '(tags =~ /.*' + queryString + '.*/i or title =~ /.*' + queryString + '.*/i)';
+>, <Line: -        }
+>, <Line: -      }
+>, <Line: -      return this._seriesQuery(influxQuery).then(function(results) {
+>, <Line: -        var hits = { dashboards: [], tags: [], tagsOnly: false };
+>, <Line: -        if (!results || !results.length) {
+>, <Line: -          return hits;
+>, <Line: -        }
+>, <Line: -        for (var i = 0; i < results.length; i++) {
+>, <Line: -          var dashCol = _.indexOf(results[i].columns, 'title');
+>, <Line: -          var tagsCol = _.indexOf(results[i].columns, 'tags');
+>, <Line: -          var idCol = _.indexOf(results[i].columns, 'id');
+>, <Line: -          var hit =  {
+>, <Line: -            id: results[i].points[0][dashCol],
+>, <Line: -            title: results[i].points[0][dashCol],
+>, <Line: -            tags: results[i].points[0][tagsCol].split(",")
+>, <Line: -          };
+>, <Line: -          if (idCol !== -1) {
+>, <Line: -            hit.id = results[i].points[0][idCol];
+>, <Line: -          }
+>, <Line: -          hit.tags = hit.tags[0] ? hit.tags : [];
+>, <Line: -          hits.dashboards.push(hit);
+>, <Line: -        }
+>, <Line: -        return hits;
+>, <Line: -      });
+>, <Line: -    };
+>, <Line: -    function handleInfluxQueryResponse(alias, groupByField, seriesList) {
+>, <Line: -      var influxSeries = new InfluxSeries({
+>, <Line: -        seriesList: seriesList,
+>, <Line: -        alias: alias,
+>, <Line: -        groupByField: groupByField
+>, <Line: -      });
+>, <Line: -      return influxSeries.getTimeSeries();
+>, <Line: -    }
+>, <Line: -    function getTimeFilter(options) {
+>, <Line: -      var from = getInfluxTime(options.range.from);
+>, <Line: -      var until = getInfluxTime(options.range.to);
+>, <Line: -      var fromIsAbsolute = from[from.length-1] === 's';
+>, <Line: -      if (until === 'now()' && !fromIsAbsolute) {
+>, <Line: -        return 'time > now() - ' + from;
+>, <Line: -      }
+>, <Line: -      return 'time > ' + from + ' and time < ' + until;
+>, <Line: -    }
+>, <Line: -    function getInfluxTime(date) {
+>, <Line: -      if (_.isString(date)) {
+>, <Line: -        if (date === 'now') {
+>, <Line: -          return 'now()';
+>, <Line: -        }
+>, <Line: -        else if (date.indexOf('now') >= 0) {
+>, <Line: -          return date.substring(4);
+>, <Line: -        }
+>, <Line: -        date = kbn.parseDate(date);
+>, <Line: -      }
+>, <Line: -      return to_utc_epoch_seconds(date);
+>, <Line: -    }
+>, <Line: -    function to_utc_epoch_seconds(date) {
+>, <Line: -      return (date.getTime() / 1000).toFixed(0) + 's';
+>, <Line: -    }
+>, <Line: -    return InfluxDatasource;
+>, <Line: -  });
+>, <Line: -});
+>]

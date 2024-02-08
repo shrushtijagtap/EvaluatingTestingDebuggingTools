@@ -1,0 +1,70 @@
+[<Line: +/**
+>, <Line: + * 
+>, <Line: + * @author Roman Kontchakov
+>, <Line: + *
+>, <Line: + */
+>, <Line: +public interface OntologyFactory {
+>, <Line: +	/**
+>, <Line: +	 * creates a modifiable ontology vocabulary 
+>, <Line: +	 * 
+>, <Line: +	 * @return created vocabulary
+>, <Line: +	 */
+>, <Line: +	public OntologyVocabulary createVocabulary();
+>, <Line: +	/**
+>, <Line: +	 * creates an ontology using a given vocabulary
+>, <Line: +	 * (the vocabulary is copied and fixes it)
+>, <Line: +	 * 
+>, <Line: +	 * @param voc
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public Ontology createOntology(ImmutableOntologyVocabulary voc);
+>, <Line: +	 * Creates a class assertion 
+>, <Line: +	 *    (implements rule [C4])
+>, <Line: +	 * @param ce 
+>, <Line: +	 * @param o
+>, <Line: +	 * @return null if ce is the top class ([C4])
+>, <Line: +	 * @throws InconsistentOntologyException if ce is the bottom class ([C4])
+>, <Line: +	public ClassAssertion createClassAssertion(OClass ce, ObjectConstant o) throws InconsistentOntologyException;
+>, <Line: +	 * Creates an object property assertion 
+>, <Line: +	 * (ensures that the property is not inverse by swapping arguments if necessary)
+>, <Line: +	 *    (implements rule [O4])
+>, <Line: +	 * @param ope
+>, <Line: +	 * @return null if ope is the top property ([O4])
+>, <Line: +	 * @throws InconsistentOntologyException if ope is the bottom property ([O4])
+>, <Line: +	public ObjectPropertyAssertion createObjectPropertyAssertion(ObjectPropertyExpression ope, ObjectConstant o1, ObjectConstant o2) throws InconsistentOntologyException;
+>, <Line: +	 * Creates a data property assertion 
+>, <Line: +	 *    (implements rule [D4])
+>, <Line: +	 * @param dpe
+>, <Line: +	 * @param v
+>, <Line: +	 * @return null if dpe is the top property ([D4])
+>, <Line: +	 * @throws InconsistentOntologyException if dpe is the bottom property ([D4])
+>, <Line: +	public DataPropertyAssertion createDataPropertyAssertion(DataPropertyExpression dpe, ObjectConstant o, ValueConstant v) throws InconsistentOntologyException;
+>]
+[<Line: -import it.unibz.krdb.obda.model.Predicate;
+>, <Line: -public interface OntologyFactory {
+>, <Line: -	public Ontology createOntology();
+>, <Line: -	public OClass createClass(String uri);
+>, <Line: -	public OClass getThing();
+>, <Line: -	public OClass getNothing();
+>, <Line: -	public Datatype createDataType(Predicate.COL_TYPE type);
+>, <Line: -	public ObjectPropertyExpression createObjectProperty(String uri);
+>, <Line: -	public ObjectPropertyExpression getTopObjectProperty();
+>, <Line: -	public ObjectPropertyExpression getBottomObjectProperty();
+>, <Line: -	public DataPropertyExpression createDataProperty(String uri);
+>, <Line: -	public DataPropertyExpression getTopDataProperty();
+>, <Line: -	public DataPropertyExpression getBottomDataProperty();
+>, <Line: -	 * creates an object property assertion 
+>, <Line: -	 * (ensures that the property is not inverse by swapping arguments if necessary)
+>, <Line: -	 * @param prop
+>, <Line: -	 * @param o1
+>, <Line: -	 * @param o2
+>, <Line: -	public ObjectPropertyAssertion createObjectPropertyAssertion(ObjectPropertyExpression prop, ObjectConstant o1, ObjectConstant o2);
+>, <Line: -	 * creates a data property assertion 
+>, <Line: -	 * @param prop
+>, <Line: -	 * @return
+>, <Line: -	public DataPropertyAssertion createDataPropertyAssertion(DataPropertyExpression prop, ObjectConstant o1, ValueConstant o2);
+>, <Line: -	 * creates a class assertion 
+>, <Line: -	 * @param concept
+>, <Line: -	 * @return
+>, <Line: -	public ClassAssertion createClassAssertion(OClass concept, ObjectConstant o);
+>]

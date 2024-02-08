@@ -1,0 +1,32 @@
+[<Line: +		'angular',
+>, <Line: +		'lodash'
+>, <Line: +	],
+>, <Line: +	function (angular) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.controllers');
+>, <Line: +		module.controller('JsonEditorCtrl', function ($scope) {
+>, <Line: +			$scope.json = angular.toJson($scope.object, true);
+>, <Line: +			$scope.canUpdate = $scope.updateHandler !== void 0;
+>, <Line: +			$scope.update = function () {
+>, <Line: +				var newObject = angular.fromJson($scope.json);
+>, <Line: +				$scope.updateHandler(newObject, $scope.object);
+>, <Line: +			};
+>, <Line: +		});
+>, <Line: +	});
+>]
+[<Line: -  'angular',
+>, <Line: -  'lodash'
+>, <Line: -],
+>, <Line: -function (angular) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.controllers');
+>, <Line: -  module.controller('JsonEditorCtrl', function($scope) {
+>, <Line: -    $scope.json = angular.toJson($scope.object, true);
+>, <Line: -    $scope.canUpdate = $scope.updateHandler !== void 0;
+>, <Line: -    $scope.update = function () {
+>, <Line: -      var newObject = angular.fromJson($scope.json);
+>, <Line: -      $scope.updateHandler(newObject, $scope.object);
+>, <Line: -    };
+>, <Line: -  });
+>, <Line: -});
+>]

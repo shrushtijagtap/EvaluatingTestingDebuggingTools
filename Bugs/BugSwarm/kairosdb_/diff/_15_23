@@ -1,0 +1,5 @@
+[<Line: + When a query plugin is specified the instance is instantiated from Guice
+>, <Line: + and properties specified in the query are injected into the object using
+>, <Line: + bean setters.  If returning a singleton it must be thread safe.
+>]
+[]

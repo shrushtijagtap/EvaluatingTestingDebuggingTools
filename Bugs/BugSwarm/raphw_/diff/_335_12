@@ -1,0 +1,4 @@
+[<Line: +public class ClassLoaderParentMatcher<T extends ClassLoader> extends ElementMatcher.Junction.AbstractBase<T> {
+>]
+[<Line: -public class ClassLoaderParentMatcher<T extends ClassLoader> implements ElementMatcher<T> {
+>]

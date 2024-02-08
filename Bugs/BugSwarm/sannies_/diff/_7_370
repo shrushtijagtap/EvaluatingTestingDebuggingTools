@@ -1,0 +1,32 @@
+[]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.coremedia.iso.boxes.Container;
+>, <Line: -import com.googlecode.mp4parser.FileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.authoring.Movie;
+>, <Line: -import com.googlecode.mp4parser.authoring.Track;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.Fragmenter;
+>, <Line: -import com.googlecode.mp4parser.authoring.builder.StaticFragmentIntersectionFinderImpl;
+>, <Line: -import org.junit.Test;
+>, <Line: -import java.io.ByteArrayOutputStream;
+>, <Line: -import java.nio.channels.Channels;
+>, <Line: -import java.util.Collections;
+>, <Line: -public class DTSTrackImplTest {
+>, <Line: -    @Test
+>, <Line: -    public void checkOutputIsStable() throws Exception {
+>, <Line: -        Movie m = new Movie();
+>, <Line: -        DTSTrackImpl dts = new DTSTrackImpl(new FileDataSourceImpl(DTSTrackImplTest.class.getProtectionDomain().getCodeSource().getLocation().getFile() + "/com/googlecode/mp4parser/authoring/tracks/dts-sample.dtshd"));
+>, <Line: -        m.addTrack(dts);
+>, <Line: -        Fragmenter fif = new StaticFragmentIntersectionFinderImpl(Collections.singletonMap((Track)dts, new long[]{1}));
+>, <Line: -        DefaultMp4Builder mp4Builder = new DefaultMp4Builder();
+>, <Line: -        mp4Builder.setFragmenter(fif);
+>, <Line: -        Container c = mp4Builder.build(m);
+>, <Line: -        //  c.writeContainer(new FileOutputStream("C:\\dev\\mp4parser\\isoparser\\src\\test\\resources\\com\\googlecode\\mp4parser\\authoring\\tracks\\dts-sample.mp4").getChannel());
+>, <Line: -        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+>, <Line: -        c.writeContainer(Channels.newChannel(baos));
+>, <Line: -        IsoFile ref = new IsoFile(DTSTrackImplTest.class.getProtectionDomain().getCodeSource().getLocation().getFile() + "/com/googlecode/mp4parser/authoring/tracks/dts-sample.mp4");
+>, <Line: -        BoxComparator.check(ref, c, "/moov[0]/mvhd[0]", "/moov[0]/trak[0]/tkhd[0]", "/moov[0]/trak[0]/mdia[0]/mdhd[0]");
+>, <Line: -    }
+>, <Line: -}
+>]

@@ -1,0 +1,18 @@
+[<Line: +type Expr is int | Expr[] | ListAccess
+>, <Line: +type Value is int | Value[]
+>, <Line: +    if (e is int):
+>, <Line: +            Value[] r = [0;|e|]
+>, <Line: +            int i = 0
+>, <Line: +            while i < |e|:
+>, <Line: +                null|Value v = evaluate(e[i])
+>, <Line: +                    r[i] = v
+>, <Line: +                i = i + 1
+>]
+[<Line: -type Expr is int | real | Expr[] | ListAccess
+>, <Line: -type Value is int | real | Value[]
+>, <Line: -    if (e is real) || (e is int):
+>, <Line: -            Value[] r = []
+>, <Line: -            for i in e:
+>, <Line: -                null|Value v = evaluate(i)
+>, <Line: -                    r = r ++ [v]
+>]

@@ -1,0 +1,15 @@
+[<Line: +function f(bool|int|null x) -> (int r):
+>, <Line: +    //
+>, <Line: +    if x is null || x is bool:
+>, <Line: +        return 0
+>, <Line: +    else:
+>, <Line: +        return x
+>, <Line: +public export method test():
+>, <Line: +    assume f(0) == 0
+>, <Line: +    assume f(1) == 1
+>, <Line: +    assume f(2) == 2
+>, <Line: +    assume f(false) == 0
+>, <Line: +    assume f(true) == 0    
+>, <Line: +    assume f(null) == 0
+>]
+[]

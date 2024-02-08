@@ -1,0 +1,52 @@
+[<Line: +import com.google.common.base.Optional;
+>, <Line: +    return Collections.unmodifiableList(delegate.getConnections());
+>, <Line: +  public void addConnection(Point from, Point to, E connData) {
+>, <Line: +    delegate.addConnection(from, to, connData);
+>, <Line: +        this, from, to, Optional.fromNullable(connData)));
+>, <Line: +        this, from, to, Optional.<ConnectionData> absent()));
+>, <Line: +        this, connection.from(), connection.to(), connection.data()));
+>, <Line: +  public Optional<E> setConnectionData(Point from, Point to, E connectionData) {
+>, <Line: +    Optional<E> val = delegate.setConnectionData(from, to, connectionData);
+>, <Line: +    eventDispatcher.dispatchEvent(new GraphEvent(
+>, <Line: +        EventTypes.CHANGE_CONNECTION_DATA, this, from, to, Optional
+>, <Line: +            .of(connectionData)));
+>, <Line: +    return val;
+>, <Line: +  }
+>, <Line: +  @Override
+>, <Line: +  public Optional<E> removeConnectionData(Point from, Point to) {
+>, <Line: +    Optional<E> val = delegate.removeConnectionData(from, to);
+>, <Line: +        EventTypes.CHANGE_CONNECTION_DATA, this, from, to, Optional
+>, <Line: +            .<ConnectionData> absent()));
+>, <Line: +          EventTypes.REMOVE_CONNECTION, this, c.from(), c.to(), c.data()));
+>, <Line: +            EventTypes.REMOVE_CONNECTION, this, conn.from(), conn.to(), conn
+>, <Line: +                .data()));
+>, <Line: +    private final Optional<? extends ConnectionData> connData;
+>, <Line: +        Point to, Optional<? extends ConnectionData> connData) {
+>, <Line: +    public Optional<? extends ConnectionData> getConnData() {
+>]
+[<Line: -import java.util.ArrayList;
+>, <Line: -  @Override
+>, <Line: -  public Connection<E> getConnection(Point from, Point to) {
+>, <Line: -    return Graphs.unmodifiableConnection(delegate.getConnection(from, to));
+>, <Line: -  }
+>, <Line: -    List<Connection<E>> unmod = new ArrayList<>();
+>, <Line: -    for (Connection<E> c : delegate.getConnections()) {
+>, <Line: -      unmod.add(Graphs.unmodifiableConnection(c));
+>, <Line: -    }
+>, <Line: -    return Collections.unmodifiableList(unmod);
+>, <Line: -  public void addConnection(Point from, Point to, @Nullable E edgeData) {
+>, <Line: -    delegate.addConnection(from, to, edgeData);
+>, <Line: -        this, from, to, edgeData));
+>, <Line: -        this, from, to, null));
+>, <Line: -        this, connection.from, connection.to, connection.getData()));
+>, <Line: -  @Nullable
+>, <Line: -  public E setConnectionData(Point from, Point to, @Nullable E connectionData) {
+>, <Line: -    E val = delegate.setConnectionData(from, to, connectionData);
+>, <Line: -        EventTypes.CHANGE_CONNECTION_DATA, this, from, to, connectionData));
+>, <Line: -          EventTypes.REMOVE_CONNECTION, this, c.from, c.to, c.getData()));
+>, <Line: -            EventTypes.REMOVE_CONNECTION, this, conn.from, conn.to, conn
+>, <Line: -                .getData()));
+>, <Line: -    private final @Nullable Object connData;
+>, <Line: -        Point to, @Nullable Object connData) {
+>, <Line: -    public @Nullable Object getConnData() {
+>]

@@ -1,0 +1,64 @@
+[<Line: +import net.bytebuddy.ClassFileVersion;
+>, <Line: +                    RenderingDelegate.CURRENT.apply(stringBuilder.append(ownerType.getTypeName()), asErasure(), ownerType);
+>, <Line: +                    stringBuilder.append('<');
+>, <Line: +                    stringBuilder.append('>');
+>, <Line: +            /**
+>, <Line: +             * A rendering delegate for resolving a parameterized type's {@link Object#toString()} representation.
+>, <Line: +             */
+>, <Line: +            protected enum RenderingDelegate {
+>, <Line: +                /**
+>, <Line: +                 * A rendering delegate for any VM prior to Java 9 where types are concatenated using a {@code .} character
+>, <Line: +                 * and where the fully qualified names are appended to non-parameterized types.
+>, <Line: +                 */
+>, <Line: +                LEGACY_VM {
+>, <Line: +                    @Override
+>, <Line: +                    protected void apply(StringBuilder stringBuilder, TypeDescription typeDescription, Generic ownerType) {
+>, <Line: +                        stringBuilder.append('.');
+>, <Line: +                        stringBuilder.append(ownerType.getSort().isParameterized()
+>, <Line: +                                ? typeDescription.getName().substring(ownerType.asErasure().getName().length() + 1)
+>, <Line: +                                : typeDescription.getName());
+>, <Line: +                    }
+>, <Line: +                },
+>, <Line: +                /**
+>, <Line: +                 * A rendering delegate for any VM supporting Java 9 or newer where a type's simple name is appended.
+>, <Line: +                 */
+>, <Line: +                JAVA_9_CAPABLE_VM {
+>, <Line: +                    @Override
+>, <Line: +                    protected void apply(StringBuilder stringBuilder, TypeDescription typeDescription, Generic ownerType) {
+>, <Line: +                        stringBuilder.append('$').append(typeDescription.getSimpleName());
+>, <Line: +                    }
+>, <Line: +                };
+>, <Line: +                /**
+>, <Line: +                 * A rendering delegate for the current VM.
+>, <Line: +                 */
+>, <Line: +                protected static final RenderingDelegate CURRENT;
+>, <Line: +                /*
+>, <Line: +                 * Resolves the current VM's rendering delegate.
+>, <Line: +                 */
+>, <Line: +                static {
+>, <Line: +                    CURRENT = ClassFileVersion.ofThisVm(ClassFileVersion.JAVA_V6).isAtLeast(ClassFileVersion.JAVA_V9)
+>, <Line: +                            ? RenderingDelegate.JAVA_9_CAPABLE_VM
+>, <Line: +                            : RenderingDelegate.LEGACY_VM;
+>, <Line: +                }
+>, <Line: +                /**
+>, <Line: +                 * Applies this rendering delegate.
+>, <Line: +                 *
+>, <Line: +                 * @param stringBuilder   The string builder which is used for creating a parameterized type's string representation.
+>, <Line: +                 * @param typeDescription The rendered type's erasure.
+>, <Line: +                 * @param ownerType       The rendered type's owner type.
+>, <Line: +                 */
+>, <Line: +                protected abstract void apply(StringBuilder stringBuilder, TypeDescription typeDescription, Generic ownerType);
+>, <Line: +                @Override
+>, <Line: +                public String toString() {
+>, <Line: +                    return "TypeDescription.Generic.OfParameterizedType.RenderingDelegate." + name();
+>, <Line: +                }
+>, <Line: +            }
+>]
+[<Line: -                    stringBuilder.append(ownerType.getTypeName());
+>, <Line: -                    stringBuilder.append(".");
+>, <Line: -                    stringBuilder.append(ownerType.getSort().isParameterized()
+>, <Line: -                            ? asErasure().getName().replace(ownerType.asErasure().getName() + "$", "")
+>, <Line: -                            : asErasure().getName());
+>, <Line: -                    stringBuilder.append("<");
+>, <Line: -                    stringBuilder.append(">");
+>]

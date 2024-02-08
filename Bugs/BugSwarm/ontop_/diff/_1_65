@@ -1,0 +1,115 @@
+[<Line: +import java.io.File;
+>, <Line: +import java.util.Collection;
+>, <Line: +import java.util.Collections;
+>, <Line: +import org.semanticweb.owlapi.apibinding.OWLManager;
+>, <Line: +import org.semanticweb.owlapi.model.OWLDeclarationAxiom;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntologyCreationException;
+>, <Line: +import org.semanticweb.owlapi.model.OWLOntologyManager;
+>, <Line: + * Translates an OWLOntology into ontop's internal ontology representation. 
+>, <Line: + * It performs a check whether the ontology belongs to OWL 2 QL and reports 
+>, <Line: + * all axioms that do not belong to the profile.
+>, <Line: + * 
+>, <Line: + * @author Roman Kontchakov
+>, <Line: +	/***
+>, <Line: +	 * Load all the imports of the ontology and merges into a single ontop internal representation
+>, <Line: +	 * 
+>, <Line: +	 * @param ontologies
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public static Ontology translateImportsClosure(OWLOntology ontology) {
+>, <Line: +		Set<OWLOntology> clousure = ontology.getOWLOntologyManager().getImportsClosure(ontology);
+>, <Line: +		return mergeTranslateOntologies(clousure);		
+>, <Line: +	@Deprecated
+>, <Line: +	public static Ontology mergeTranslateOntologies(Collection<OWLOntology> ontologies)   {
+>, <Line: +		log.debug("Load ontologies called. Translating {} ontologies.", ontologies.size());
+>, <Line: +		OWLAPI3TranslatorOWL2QL translator = new OWLAPI3TranslatorOWL2QL(ontologies);
+>, <Line: +		for (OWLOntology owl : ontologies) {
+>, <Line: +			translator.setCurrentOWLOntology(owl);
+>, <Line: +			for (OWLAxiom axiom : owl.getAxioms())  {
+>, <Line: +				//if (!(axiom.isAnnotationAxiom()) && !(axiom instanceof OWLDeclarationAxiom))
+>, <Line: +				//	System.out.println(axiom);
+>, <Line: +				axiom.accept(translator);
+>, <Line: +			}
+>, <Line: +		log.debug("Ontology loaded: {}", translator.getOntology());
+>, <Line: +		return translator.getOntology();
+>, <Line: +	/**
+>, <Line: +	 * USE FOR TESTS ONLY
+>, <Line: +	 * 
+>, <Line: +	 * @param owl
+>, <Line: +	 * @return
+>, <Line: +	 */
+>, <Line: +	public static Ontology translate(OWLOntology owl) {
+>, <Line: +		OWLAPI3TranslatorOWL2QL translator = new OWLAPI3TranslatorOWL2QL(Collections.singleton(owl));
+>, <Line: +		translator.setCurrentOWLOntology(owl);
+>, <Line: +		for (OWLAxiom axiom : owl.getAxioms()) 
+>, <Line: +			axiom.accept(translator);
+>, <Line: +		return translator.getOntology();	
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * USE FOR TESTS ONLY
+>, <Line: +	 * 
+>, <Line: +	 * @param filename
+>, <Line: +	 * @return
+>, <Line: +	 * @throws OWLOntologyCreationException
+>, <Line: +	 */
+>, <Line: +	public static Ontology loadOntologyFromFile(String filename) throws OWLOntologyCreationException {
+>, <Line: +		OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+>, <Line: +		OWLOntology owl = man.loadOntologyFromOntologyDocument(new File(filename));
+>, <Line: +		OWLAPI3TranslatorOWL2QL translator = new OWLAPI3TranslatorOWL2QL(Collections.singleton(owl));
+>, <Line: +		translator.setCurrentOWLOntology(owl);
+>, <Line: +		for (OWLAxiom axiom : owl.getAxioms()) 
+>, <Line: +		return translator.getOntology();	
+>]
+[<Line: -import org.semanticweb.owlapi.model.OWLClass;
+>, <Line: -import org.semanticweb.owlapi.model.OWLDataProperty;
+>, <Line: -import org.semanticweb.owlapi.model.OWLObjectProperty;
+>, <Line: - * Translates an OWLOntology into ontop's internal ontology representation. It
+>, <Line: - * does a syntactic approximation of the ontology, dropping anything not supported 
+>, <Line: - * by Quest during inference.
+>, <Line: -	private static Class<?extends OWLAPI3TranslatorBase> factory = OWLAPI3TranslatorDLLiteA.class;
+>, <Line: -	public static void setTranslator(Class<?extends OWLAPI3TranslatorBase> factory) {
+>, <Line: -		OWLAPI3TranslatorUtility.factory = factory;
+>, <Line: -	public static Ontology mergeTranslateOntologies(Set<OWLOntology> ontologies)   {
+>, <Line: -		// We will keep track of the loaded ontologies and translate the TBox
+>, <Line: -		// part of them into our internal representation
+>, <Line: -		log.debug("Load ontologies called. Translating ontologies.");
+>, <Line: -		try {
+>, <Line: -			OWLAPI3TranslatorBase translator = factory.newInstance();
+>, <Line: -			for (OWLOntology onto : ontologies) 
+>, <Line: -				translateInto(translator, onto);
+>, <Line: -			log.debug("Ontology loaded: {}", translator.getOntology());
+>, <Line: -			return translator.getOntology();
+>, <Line: -		} catch (InstantiationException e) {
+>, <Line: -			log.debug("Failed to instantiate the factory {}.", e.getMessage());
+>, <Line: -			throw new RuntimeException(e.getMessage());
+>, <Line: -		} catch (IllegalAccessException e) {
+>, <Line: -			log.debug("Failed to instantiate the factory {}.", e.getMessage());
+>, <Line: -			throw new RuntimeException(e.getMessage());
+>, <Line: -	}
+>, <Line: -	public static Ontology translate(OWLOntology owl) {
+>, <Line: -		try {
+>, <Line: -			OWLAPI3TranslatorBase translator = factory.newInstance();
+>, <Line: -			translateInto(translator, owl);
+>, <Line: -			return translator.getOntology();	
+>, <Line: -		} 
+>, <Line: -		catch (InstantiationException e) {
+>, <Line: -			log.debug("Failed to instantiate the factory {}.", e.getMessage());
+>, <Line: -			throw new RuntimeException(e.getMessage());
+>, <Line: -		} 
+>, <Line: -		catch (IllegalAccessException e) {
+>, <Line: -			log.debug("Failed to instantiate the factory {}.", e.getMessage());
+>, <Line: -			throw new RuntimeException(e.getMessage());
+>, <Line: -		}
+>, <Line: -	private static void translateInto(OWLAPI3TranslatorBase translator, OWLOntology owl) {
+>, <Line: -		// add all definitions for classes and roles
+>, <Line: -		for (OWLClass entity : owl.getClassesInSignature()) 
+>, <Line: -			translator.declare(entity);
+>, <Line: -		for (OWLObjectProperty prop : owl.getObjectPropertiesInSignature()) 
+>, <Line: -			translator.declare(prop);
+>, <Line: -		for (OWLDataProperty prop : owl.getDataPropertiesInSignature()) 
+>, <Line: -			translator.declare(prop);
+>, <Line: -		// process all axioms
+>, <Line: -		for (OWLAxiom axiom : owl.getAxioms()) {
+>, <Line: -			//System.out.println(axiom);
+>, <Line: -		}
+>]

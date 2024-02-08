@@ -1,0 +1,52 @@
+[<Line: +package org.kairosdb.rollup;
+>, <Line: +import org.kairosdb.core.aggregator.Aggregator;
+>, <Line: +import java.util.ArrayList;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.Map;
+>, <Line: +import static com.google.common.base.Preconditions.checkNotNull;
+>, <Line: +import static org.kairosdb.util.Preconditions.checkNotNullOrEmpty;
+>, <Line: +// todo Delete this class
+>, <Line: +/**
+>, <Line: + Target for a roll up task. The target identifies a new metric that will be
+>, <Line: + created for the roll up, additional tags that will be added to each data point,
+>, <Line: + and the aggregations that will be performed.
+>, <Line: + */
+>, <Line: +public class RollupTaskTarget
+>, <Line: +{
+>, <Line: +	private final String name;
+>, <Line: +	private final Map<String, String> tags = new HashMap<String, String>();
+>, <Line: +	private final transient List<Aggregator> aggregators = new ArrayList<Aggregator>();
+>, <Line: +	public RollupTaskTarget(String name)
+>, <Line: +	{
+>, <Line: +		checkNotNullOrEmpty(name);
+>, <Line: +		this.name = name;
+>, <Line: +	}
+>, <Line: +	public RollupTaskTarget addTag(String name, String value)
+>, <Line: +	{
+>, <Line: +		checkNotNullOrEmpty(name);
+>, <Line: +		checkNotNullOrEmpty(value);
+>, <Line: +		tags.put(name, value);
+>, <Line: +		return this;
+>, <Line: +	}
+>, <Line: +	public RollupTaskTarget addAggregator(Aggregator aggregator)
+>, <Line: +	{
+>, <Line: +		checkNotNull(aggregator);
+>, <Line: +		aggregators.add(aggregator);
+>, <Line: +		return this;
+>, <Line: +	}
+>, <Line: +	public String getName()
+>, <Line: +	{
+>, <Line: +		return name;
+>, <Line: +	}
+>, <Line: +	public Map<String, String> getTags()
+>, <Line: +	{
+>, <Line: +		return tags;
+>, <Line: +	}
+>, <Line: +	public List<Aggregator> getAggregators()
+>, <Line: +	{
+>, <Line: +		return aggregators;
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

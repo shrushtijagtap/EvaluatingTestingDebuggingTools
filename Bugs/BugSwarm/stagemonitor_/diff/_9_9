@@ -1,0 +1,25 @@
+[<Line: +import static org.stagemonitor.core.metrics.metrics2.MetricName.name;
+>, <Line: +import org.stagemonitor.alerting.check.ValueType;
+>, <Line: +		assertEquals(0, check.check(name("test").build(), singletonMap("value", 0d)).size());
+>, <Line: +		CheckResult result = check.check(name("test").build(), singletonMap("value", 1.5)).iterator().next();
+>, <Line: +		assertEquals("test value > 1.0", result.getFailingExpression());
+>, <Line: +		CheckResult result = check.check(name("test").build(), singletonMap("value", 2.5)).iterator().next();
+>, <Line: +		assertEquals("test value > 2.0", result.getFailingExpression());
+>, <Line: +		CheckResult result = check.check(name("test").build(), singletonMap("value", 3.5)).iterator().next();
+>, <Line: +		assertEquals("test value > 3.0", result.getFailingExpression());
+>, <Line: +		check.setTarget(name("timer").tag("foo", "bar").tag("qux", "quux").build());
+>, <Line: +		assertEquals(name("timer").tag("foo", "bar").tag("qux", "quux").build(), checkFromJson.getTarget());
+>, <Line: +		assertEquals(ValueType.MEAN, checkFromJson.getWarn().get(0).getValueType());
+>]
+[<Line: -import java.util.regex.Pattern;
+>, <Line: -		assertEquals(0, check.check("test", singletonMap("value", 0d)).size());
+>, <Line: -		CheckResult result = check.check("test", singletonMap("value", 1.5)).iterator().next();
+>, <Line: -		assertEquals("test.value > 1.0", result.getFailingExpression());
+>, <Line: -		CheckResult result = check.check("test", singletonMap("value", 2.5)).iterator().next();
+>, <Line: -		assertEquals("test.value > 2.0", result.getFailingExpression());
+>, <Line: -		CheckResult result = check.check("test", singletonMap("value", 3.5)).iterator().next();
+>, <Line: -		assertEquals("test.value > 3.0", result.getFailingExpression());
+>, <Line: -		check.setTarget(Pattern.compile("test.timer.*"));
+>, <Line: -		assertEquals("test.timer.*", checkFromJson.getTarget().toString());
+>, <Line: -		assertEquals("mean", checkFromJson.getWarn().get(0).getMetric());
+>]

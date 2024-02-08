@@ -1,0 +1,7 @@
+[<Line: +### 2. June 2016: version 1.4.0
+>, <Line: +- Added initial support for Jigsaw modules.
+>, <Line: +- Adjusted agent builder API to expose modules of instrumented classes.
+>, <Line: +- Added additional matchers.
+>, <Line: +- Simplified `BinaryLocator` and changed its name to `TypeLocator`.
+>]
+[]

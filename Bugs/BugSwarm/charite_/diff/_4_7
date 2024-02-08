@@ -1,0 +1,106 @@
+[<Line: +package de.charite.compbio.jannovar.cmd;
+>, <Line: +import java.net.MalformedURLException;
+>, <Line: +import java.net.URL;
+>, <Line: +import net.sourceforge.argparse4j.impl.Arguments;
+>, <Line: +import net.sourceforge.argparse4j.inf.ArgumentGroup;
+>, <Line: +import net.sourceforge.argparse4j.inf.ArgumentParser;
+>, <Line: +import net.sourceforge.argparse4j.inf.Namespace;
+>, <Line: +/**
+>, <Line: + * Base option class for global Jannovar options
+>, <Line: + * 
+>, <Line: + * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
+>, <Line: + */
+>, <Line: +public class JannovarBaseOptions {
+>, <Line: +	/** Whether or not to print progress */
+>, <Line: +	private boolean reportProgress = true;
+>, <Line: +	/** proxy for HTTP */
+>, <Line: +	private URL httpProxy = null;
+>, <Line: +	/** proxy for HTTPS */
+>, <Line: +	private URL httpsProxy = null;
+>, <Line: +	/** proxy for FTP */
+>, <Line: +	private URL ftpProxy = null;
+>, <Line: +	/** Verbosity */
+>, <Line: +	private int verbosity = 1;
+>, <Line: +	/**
+>, <Line: +	 * Setup global {@link ArgumentParser}
+>, <Line: +	 * 
+>, <Line: +	 * @param parser
+>, <Line: +	 *            {@link ArgumentParser} to setup
+>, <Line: +	 */
+>, <Line: +	public static void setupParser(ArgumentParser parser) {
+>, <Line: +		ArgumentGroup verboseGroup = parser.addArgumentGroup("Verbosity Options");
+>, <Line: +		verboseGroup.addArgument("--report-no-progress").help("Disable progress report, more quiet mode")
+>, <Line: +				.dest("report_progress").setDefault(true).action(Arguments.storeFalse());
+>, <Line: +		verboseGroup.addArgument("-v", "--verbose").help("Enable verbose mode").dest("verbose").setDefault(false)
+>, <Line: +				.action(Arguments.storeTrue());
+>, <Line: +		verboseGroup.addArgument("-vv", "--very-verbose").help("Enable very verbose mode").dest("very_verbose")
+>, <Line: +				.setDefault(false).action(Arguments.storeTrue());
+>, <Line: +		ArgumentGroup proxyGroup = parser.addArgumentGroup("Proxy Options");
+>, <Line: +		proxyGroup.description("Configuration related to Proxy, note that environment variables *_proxy "
+>, <Line: +				+ "and *_PROXY are also interpreted");
+>, <Line: +		proxyGroup.addArgument("--http-proxy").help("Set HTTP proxy to use, if any");
+>, <Line: +		proxyGroup.addArgument("--https-proxy").help("Set HTTPS proxy to use, if any");
+>, <Line: +		proxyGroup.addArgument("--ftp-proxy").help("Set FTP proxy to use, if any");
+>, <Line: +	}
+>, <Line: +	/**
+>, <Line: +	 * Get values from {@link Namespace} object
+>, <Line: +	 * 
+>, <Line: +	 * @param args
+>, <Line: +	 *            {@link Namespace} to get the option values from
+>, <Line: +	 * @throws CommandLineParsingException
+>, <Line: +	 *             on problems parsing a given URL
+>, <Line: +	 */
+>, <Line: +	public void setFromArgs(Namespace args) throws CommandLineParsingException {
+>, <Line: +		if (args.getBoolean("verbose"))
+>, <Line: +			this.verbosity = 2;
+>, <Line: +		if (args.getBoolean("very_verbose"))
+>, <Line: +			this.verbosity = 3;
+>, <Line: +		try {
+>, <Line: +			if (args.getString("http_proxy") != null)
+>, <Line: +				this.httpProxy = new URL(args.getString("http_proxy"));
+>, <Line: +			if (args.getString("https_proxy") != null)
+>, <Line: +				this.httpsProxy = new URL(args.getString("https_proxy"));
+>, <Line: +			if (args.getString("ftp_proxy") != null)
+>, <Line: +				this.ftpProxy = new URL(args.getString("ftp_proxy"));
+>, <Line: +		} catch (MalformedURLException e) {
+>, <Line: +			throw new CommandLineParsingException("Problem parsing URL", e);
+>, <Line: +		}
+>, <Line: +	}
+>, <Line: +	public boolean isReportProgress() {
+>, <Line: +		return reportProgress;
+>, <Line: +	}
+>, <Line: +	public void setReportProgress(boolean reportProgress) {
+>, <Line: +		this.reportProgress = reportProgress;
+>, <Line: +	}
+>, <Line: +	public URL getHttpProxy() {
+>, <Line: +		return httpProxy;
+>, <Line: +	}
+>, <Line: +	public void setHttpProxy(URL httpProxy) {
+>, <Line: +		this.httpProxy = httpProxy;
+>, <Line: +	}
+>, <Line: +	public URL getHttpsProxy() {
+>, <Line: +		return httpsProxy;
+>, <Line: +	}
+>, <Line: +	public void setHttpsProxy(URL httpsProxy) {
+>, <Line: +		this.httpsProxy = httpsProxy;
+>, <Line: +	}
+>, <Line: +	public URL getFtpProxy() {
+>, <Line: +		return ftpProxy;
+>, <Line: +	}
+>, <Line: +	public void setFtpProxy(URL ftpProxy) {
+>, <Line: +		this.ftpProxy = ftpProxy;
+>, <Line: +	}
+>, <Line: +	public int getVerbosity() {
+>, <Line: +		return verbosity;
+>, <Line: +	}
+>, <Line: +	public void setVerbosity(int verbosity) {
+>, <Line: +		this.verbosity = verbosity;
+>, <Line: +	}
+>, <Line: +	@Override
+>, <Line: +	public String toString() {
+>, <Line: +		return "JannovarBaseOptions [reportProgress=" + reportProgress + ", httpProxy=" + httpProxy + ", httpsProxy="
+>, <Line: +				+ httpsProxy + ", ftpProxy=" + ftpProxy + ", verbosity=" + verbosity + "]";
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

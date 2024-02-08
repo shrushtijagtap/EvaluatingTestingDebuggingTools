@@ -1,0 +1,35 @@
+[<Line: +  "title": "External Requests",
+>, <Line: +  "originalTitle": "External Requests",
+>, <Line: +              "query": "name: external_request_response_time AND type: $Type AND signature: $Signature AND application: $Application AND host: $Host AND instance: $Instance",
+>, <Line: +          "title": "Response Time",
+>, <Line: +              "query": "name: external_request_response_time AND type: $Type AND signature: $Signature AND application: $Application AND host: $Host AND instance: $Instance"
+>, <Line: +              "query": "name: external_request_response_time AND type: $Type AND !signature: All AND application: $Application AND host: $Host AND instance: $Instance"
+>, <Line: +              "query": "name: external_requests_rate AND !request_name: All AND application: $Application AND host: $Host AND instance: $Instance"
+>, <Line: +          "title": "Time to get JDBC Connection (p95)",
+>, <Line: +              "query": "name: external_request_response_time AND type: $Type AND !signature: All AND application: $Application AND host: $Host AND instance: $Instance"
+>, <Line: +        "query": "{\"find\": \"terms\", \"field\": \"signature\", \"query\": \"name: external_request_response_time\"}",
+>, <Line: +      },
+>, <Line: +      {
+>, <Line: +        "type": "query",
+>, <Line: +        "datasource": "ES stagemonitor",
+>, <Line: +        "refresh_on_load": false,
+>, <Line: +        "name": "Type",
+>, <Line: +        "includeAll": false,
+>, <Line: +        "allFormat": "lucene",
+>, <Line: +        "multi": false,
+>, <Line: +        "multiFormat": "lucene",
+>, <Line: +        "query": "{\"find\": \"terms\", \"field\": \"type\", \"query\": \"name: external_request_response_time\"}",
+>, <Line: +        "refresh": true,
+>, <Line: +        "label": "Request Type"
+>]
+[<Line: -  "title": "JDBC",
+>, <Line: -  "originalTitle": "JDBC",
+>, <Line: -              "query": "name: jdbc_statement AND signature: $Signature AND application: $Application AND host: $Host AND instance: $Instance",
+>, <Line: -          "title": "JDBC Response Time",
+>, <Line: -              "query": "name: jdbc_statement AND signature: $Signature AND application: $Application AND host: $Host AND instance: $Instance"
+>, <Line: -              "query": "name: jdbc_statement AND !signature: All AND application: $Application AND host: $Host AND instance: $Instance"
+>, <Line: -              "query": "name: jdbc_query_rate AND !request_name: All AND application: $Application AND host: $Host AND instance: $Instance"
+>, <Line: -          "title": "Time to get Connection (p95)",
+>, <Line: -              "query": "name: jdbc_statement AND !signature: All AND application: $Application AND host: $Host AND instance: $Instance"
+>, <Line: -        "query": "{\"find\": \"terms\", \"field\": \"signature\", \"query\": \"name: jdbc_statement\"}",
+>]

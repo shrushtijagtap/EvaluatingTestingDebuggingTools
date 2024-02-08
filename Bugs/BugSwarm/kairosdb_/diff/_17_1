@@ -1,0 +1,4 @@
+[<Line: +release = saw.getProperty("KAIROS_RELEASE_NUMBER", "0.2beta") //package release number
+>]
+[<Line: -release = saw.getProperty("KAIROS_RELEASE_NUMBER", "0.1beta") //package release number
+>]

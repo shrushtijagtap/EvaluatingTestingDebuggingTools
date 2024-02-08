@@ -1,0 +1,85 @@
+[<Line: +package com.artemis.injection;
+>, <Line: +import com.artemis.BaseSystem;
+>, <Line: +import com.artemis.ComponentMapper;
+>, <Line: +import com.artemis.EntityFactory;
+>, <Line: +import com.artemis.Manager;
+>, <Line: +import com.artemis.annotations.Mapper;
+>, <Line: +import com.artemis.annotations.Wire;
+>, <Line: +import com.artemis.utils.reflect.ClassReflection;
+>, <Line: +import com.artemis.utils.reflect.Field;
+>, <Line: +import com.artemis.utils.reflect.ReflectionException;
+>, <Line: +import java.util.HashMap;
+>, <Line: +import java.util.Map;
+>, <Line: +/**
+>, <Line: + * Date: 31/7/2015
+>, <Line: + * Time: 17:13 PM
+>, <Line: + *
+>, <Line: + * @author Snorre E. Brekke
+>, <Line: + */
+>, <Line: +public class InjectionCache {
+>, <Line: +    private static final Map<Class<?>, CachedClass> classCache = new HashMap<Class<?>, CachedClass>();
+>, <Line: +    private static final Map<Class<?>, ClassType> fieldClassTypeCache = new HashMap<Class<?>, ClassType>();
+>, <Line: +    private static final Map<Field, CachedField> namedWireCache = new HashMap<Field, CachedField>();
+>, <Line: +    private static final Map<Field, Class<?>> genericsCache = new HashMap<Field, Class<?>>();
+>, <Line: +    public CachedClass getCachedClass(Class<?> clazz) throws ReflectionException {
+>, <Line: +        CachedClass cachedClass = classCache.get(clazz);
+>, <Line: +        if (cachedClass == null) {
+>, <Line: +            cachedClass = new CachedClass(clazz);
+>, <Line: +            cachedClass.wireType = ClassReflection.isAnnotationPresent(clazz, Wire.class) ?
+>, <Line: +                                   WireType.WIRE :
+>, <Line: +                                   WireType.IGNORED;
+>, <Line: +            if (cachedClass.wireType == WireType.WIRE) {
+>, <Line: +                Wire wireAnnotation = ClassReflection.getAnnotation(clazz, Wire.class);
+>, <Line: +                cachedClass.wireAnnotation = wireAnnotation;
+>, <Line: +                cachedClass.failOnNull = wireAnnotation.failOnNull();
+>, <Line: +                cachedClass.injectInherited = wireAnnotation.injectInherited();
+>, <Line: +            }
+>, <Line: +            classCache.put(clazz, cachedClass);
+>, <Line: +        }
+>, <Line: +        return cachedClass;
+>, <Line: +    }
+>, <Line: +    public CachedField getCachedField(Field field) {
+>, <Line: +        CachedField cachedField = namedWireCache.get(field);
+>, <Line: +        if (cachedField == null) {
+>, <Line: +            if (field.isAnnotationPresent(Wire.class)) {
+>, <Line: +                final Wire wire = field.getAnnotation(Wire.class);
+>, <Line: +                cachedField = new CachedField(field, WireType.WIRE, wire.name());
+>, <Line: +            }
+>, <Line: +            else if(field.isAnnotationPresent(Mapper.class)) {
+>, <Line: +                cachedField = new CachedField(field, WireType.MAPPER, null);
+>, <Line: +            }else {
+>, <Line: +                cachedField = new CachedField(field, WireType.IGNORED, null);
+>, <Line: +            }
+>, <Line: +            namedWireCache.put(field, cachedField);
+>, <Line: +        }
+>, <Line: +        return cachedField;
+>, <Line: +    }
+>, <Line: +    public ClassType getFieldClassType(Class<?> fieldType) {
+>, <Line: +        ClassType injectionType = fieldClassTypeCache.get(fieldType);
+>, <Line: +        if (injectionType == null) {
+>, <Line: +            if (ClassReflection.isAssignableFrom(ComponentMapper.class, fieldType)) {
+>, <Line: +                injectionType = ClassType.MAPPER;
+>, <Line: +            } else if(ClassReflection.isAssignableFrom(BaseSystem.class, fieldType)) {
+>, <Line: +                injectionType = ClassType.SYSTEM;
+>, <Line: +            } else if(ClassReflection.isAssignableFrom(Manager.class, fieldType)) {
+>, <Line: +                injectionType = ClassType.MANAGER;
+>, <Line: +            } else if(ClassReflection.isAssignableFrom(EntityFactory.class, fieldType)){
+>, <Line: +                injectionType = ClassType.FACTORY;
+>, <Line: +            } else {
+>, <Line: +                injectionType = ClassType.CUSTOM;
+>, <Line: +            }
+>, <Line: +            fieldClassTypeCache.put(fieldType, injectionType);
+>, <Line: +        }
+>, <Line: +        return injectionType;
+>, <Line: +    }
+>, <Line: +    public Class<?> getGenericType(Field field){
+>, <Line: +        Class<?> genericsType = genericsCache.get(field);
+>, <Line: +        if (genericsType == null) {
+>, <Line: +            genericsType = field.getElementType(0);
+>, <Line: +            genericsCache.put(field, genericsType);
+>, <Line: +        }
+>, <Line: +        return genericsType;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

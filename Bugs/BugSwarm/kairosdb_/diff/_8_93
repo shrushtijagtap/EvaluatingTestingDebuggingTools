@@ -1,0 +1,10 @@
+[<Line: +		assertThat(((StringDataPoint) dataPoint).getValue(), equalTo("string_data"));
+>, <Line: +		assertThat(((StringDataPoint) stringData).getValue(), equalTo("sweet"));
+>, <Line: +		assertThat(((StringDataPoint) dataPointSetList.get(0).getDataPoints().get(0)).getValue(), equalTo("The Value"));
+>, <Line: +		assertThat(((StringDataPoint) dataPointSetList.get(0).getDataPoints().get(0)).getValue(), equalTo("The Value"));
+>]
+[<Line: -		assertThat(((StringDataPoint)dataPoint).getValue(), equalTo("string_data"));
+>, <Line: -		assertThat(((StringDataPoint)stringData).getValue(), equalTo("sweet"));
+>, <Line: -		assertThat(((StringDataPoint)dataPointSetList.get(0).getDataPoints().get(0)).getValue(), equalTo("The Value"));
+>, <Line: -        assertThat(((StringDataPoint)dataPointSetList.get(0).getDataPoints().get(0)).getValue(), equalTo("The Value"));
+>]

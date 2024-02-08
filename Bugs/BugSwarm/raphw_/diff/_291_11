@@ -1,0 +1,6 @@
+[<Line: +public class LambdaSampleFactory {
+>, <Line: +    public Runnable returnTypeTransforming() { return this::nonCapturing; }
+>, <Line: +    public Callable<Object> instanceReturning() { return Object::new; }
+>]
+[<Line: -public class LambdaSampleFactory{
+>]

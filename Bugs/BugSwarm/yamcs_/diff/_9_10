@@ -1,0 +1,100 @@
+[<Line: +import org.yamcs.utils.ByteArrayUtils;
+>, <Line: +import com.google.common.primitives.Bytes;
+>, <Line: +    public IteratorWithSnapshot newAscendingIterators(List<byte[]> partitions, byte[] rangeStart, boolean startInclusive, boolean tailing) throws RocksDBException {
+>, <Line: +            boolean found = false;
+>, <Line: +            if(rangeStart==null) {
+>, <Line: +                it.seek(p);
+>, <Line: +                if(it.isValid() && ByteArrayUtils.startsWith(it.key(), p)) {
+>, <Line: +                    found = true;
+>, <Line: +                }
+>, <Line: +            } else {
+>, <Line: +                byte[] rdbRangeStart = Bytes.concat(p, rangeStart); 
+>, <Line: +                it.seek(rdbRangeStart);
+>, <Line: +                if(it.isValid() && ByteArrayUtils.startsWith(it.key(), p)) {
+>, <Line: +                    if(startInclusive) {
+>, <Line: +                        found = true;
+>, <Line: +                    } else {
+>, <Line: +                        if(ByteArrayUtils.startsWith(it.key(), rdbRangeStart)) {
+>, <Line: +                            it.next();
+>, <Line: +                            found = it.isValid() && ByteArrayUtils.startsWith(it.key(), p);
+>, <Line: +                        } else {
+>, <Line: +                            found = true;
+>, <Line: +                        }
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            if(found) {
+>, <Line: +                iws.itList.add(it);
+>, <Line: +            } else {
+>, <Line: +                it.close();
+>, <Line: +            }
+>, <Line: +    public IteratorWithSnapshot newDescendingIterators(List<byte[]> partitions, byte[] rangeEnd, boolean endIncluded) throws RocksDBException {
+>, <Line: +        IteratorWithSnapshot iws = new IteratorWithSnapshot();
+>, <Line: +        iws.itList = new ArrayList<RocksIterator>(partitions.size());
+>, <Line: +        ReadOptions ro = new ReadOptions();
+>, <Line: +        iws.snapshot = db.getSnapshot();
+>, <Line: +        ro.setSnapshot(iws.snapshot);
+>, <Line: +        for(byte[] p: partitions) {
+>, <Line: +            RocksIterator it = db.newIterator(ro);
+>, <Line: +            boolean found = false;
+>, <Line: +            if(rangeEnd!=null) {
+>, <Line: +                byte[] rdbRangeEnd = Bytes.concat(p, rangeEnd); 
+>, <Line: +                it.seek(rdbRangeEnd);    //seek moves cursor beyond the match
+>, <Line: +                if(it.isValid()) {
+>, <Line: +                    if(endIncluded  && Arrays.equals(it.key(), rdbRangeEnd)) {
+>, <Line: +                        found = true;
+>, <Line: +                    } else {
+>, <Line: +                        it.prev();
+>, <Line: +                    }
+>, <Line: +                } else { //at end of the table, check last entry
+>, <Line: +                    it.seekToLast();
+>, <Line: +                }
+>, <Line: +                if(!found && it.isValid()) {
+>, <Line: +                    if(ByteArrayUtils.startsWith(it.key(), p)) {
+>, <Line: +                        found = true;
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +            } else {
+>, <Line: +                byte[] p1 = ByteArrayUtils.plusOne(p);
+>, <Line: +                it.seek(p1);
+>, <Line: +                if(it.isValid()) {
+>, <Line: +                    it.prev();
+>, <Line: +                } else {
+>, <Line: +                    it.seekToLast();
+>, <Line: +                }
+>, <Line: +                if(it.isValid()) {                    
+>, <Line: +                    if(it.isValid() && ByteArrayUtils.startsWith(it.key(), p)) {
+>, <Line: +                        found = true;
+>, <Line: +                    }
+>, <Line: +                }
+>, <Line: +            }
+>, <Line: +            if(found) {
+>, <Line: +                iws.itList.add(it);
+>, <Line: +            } else {
+>, <Line: +                it.close();
+>, <Line: +            }
+>, <Line: +        }
+>, <Line: +        return iws;
+>]
+[<Line: -    public IteratorWithSnapshot newIterators(List<byte[]> partitions, boolean tailing) throws RocksDBException {
+>, <Line: -            it.seek(p);
+>, <Line: -            iws.itList.add(it);
+>, <Line: -    public RocksIterator newIterator(ColumnFamilyHandle cfh) throws RocksDBException {
+>, <Line: -        return db.newIterator(cfh);
+>, <Line: -    }
+>, <Line: -    public synchronized ColumnFamilyHandle getColumnFamilyHandle(Object value) {
+>, <Line: -        ColumnFamilyHandle cfh = columnFamilies.get(value);
+>, <Line: -        //in yamcs 0.29.3 and older we used to create a column family for null values (i.e. when not partitioning on a value)
+>, <Line: -        //starting with yamcs 0.29.4 we use the default column family for this
+>, <Line: -        // the old tables are still supported because at startup the columnFamilies map will be populated with the null key
+>, <Line: -        if((value==null) && (cfh==null)) { 
+>, <Line: -            return db.getDefaultColumnFamily(); 
+>, <Line: -        }
+>, <Line: -        return cfh;
+>, <Line: -    }
+>, <Line: -    public byte[] get(ColumnFamilyHandle cfh, byte[] key) throws RocksDBException {
+>, <Line: -        return db.get(cfh, key);
+>, <Line: -    }
+>, <Line: -    public void put(ColumnFamilyHandle cfh, byte[] k, byte[] v) throws RocksDBException {		
+>, <Line: -        db.put(cfh, k, v);
+>]

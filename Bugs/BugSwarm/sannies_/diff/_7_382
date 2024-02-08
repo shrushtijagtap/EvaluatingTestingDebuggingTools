@@ -1,0 +1,10 @@
+[<Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.tools.ByteBufferByteChannel;
+>, <Line: +import org.mp4parser.tools.Hex;
+>, <Line: +        IsoFile isoFile = new IsoFile(new ByteBufferByteChannel(Hex.decodeHex(eInitData)));
+>]
+[<Line: -import com.coremedia.iso.Hex;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.googlecode.mp4parser.MemoryDataSourceImpl;
+>, <Line: -        IsoFile isoFile = new IsoFile(new MemoryDataSourceImpl(Hex.decodeHex(eInitData)));
+>]

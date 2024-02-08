@@ -1,0 +1,12 @@
+[<Line: +                 * @param getParameters A reference to {@code java.lang.reflect.Executable#getTypeArguments}.
+>, <Line: +                return new AnnotationList.ForLoadedAnnotations(executable.getParameterAnnotations()[index]);
+>, <Line: +                return new AnnotationList.ForLoadedAnnotations(executable.getParameterAnnotations()[index]);
+>, <Line: +                return new AnnotationList.ForLoadedAnnotations(parameterAnnotation);
+>, <Line: +                return new AnnotationList.ForLoadedAnnotations(parameterAnnotation);
+>]
+[<Line: -                 * @param getParameters A reference to {@code java.lang.reflect.Executable#getParameters}.
+>, <Line: -                return new AnnotationList.ForLoadedAnnotation(executable.getParameterAnnotations()[index]);
+>, <Line: -                return new AnnotationList.ForLoadedAnnotation(executable.getParameterAnnotations()[index]);
+>, <Line: -                return new AnnotationList.ForLoadedAnnotation(parameterAnnotation);
+>, <Line: -                return new AnnotationList.ForLoadedAnnotation(parameterAnnotation);
+>]

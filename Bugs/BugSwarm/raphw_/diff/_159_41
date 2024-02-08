@@ -1,0 +1,6 @@
+[<Line: +        assertThat(dynamicType.getLoaded().getDeclaredConstructor().newInstance().foo(), is(FOO));
+>, <Line: +        assertThat(dynamicType.getLoaded().getDeclaredConstructor().newInstance().foo(), is(FOO));
+>]
+[<Line: -        assertThat(dynamicType.getLoaded().newInstance().foo(), is(FOO));
+>, <Line: -        assertThat(dynamicType.getLoaded().newInstance().foo(), is(FOO));
+>]

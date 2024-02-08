@@ -1,0 +1,28 @@
+[]
+[<Line: -"""
+>, <Line: -    verktyg.jinja2
+>, <Line: -    ~~~~~~~~~~~~~~
+>, <Line: -    :copyright: (c) 2014 by Ben Mather.
+>, <Line: -    :license: BSD, see LICENSE for more details.
+>, <Line: -"""
+>, <Line: -def add_templates(self, *loaders):
+>, <Line: -    for loader in loaders:
+>, <Line: -        self.jinja_env.loader.loaders.append(loader)
+>, <Line: -def get_renderer(self, name):
+>, <Line: -    if isinstance(name, str):
+>, <Line: -        return self.jinja_env.get_template(name).render
+>, <Line: -    else:
+>, <Line: -        # assume callable
+>, <Line: -        return name
+>, <Line: -def bind(app, *loaders, **kwargs):
+>, <Line: -    """ Add a jinja2 environment to an application
+>, <Line: -    """
+>, <Line: -    # imported here as jinja is not required in setup.py.
+>, <Line: -    import jinja2
+>, <Line: -    app.jinja_env = jinja2.Environment(
+>, <Line: -        loader=jinja2.ChoiceLoader([]), **kwargs
+>, <Line: -    )
+>, <Line: -    app.add_method('add_templates', add_templates)
+>, <Line: -    app.add_method('get_renderer', get_renderer)
+>, <Line: -    app.add_templates(*loaders)
+>]

@@ -1,0 +1,26 @@
+[<Line: +    public StreamingSampleImpl(List<ByteBuffer> nals, long duration) {
+>, <Line: +        for (ByteBuffer nal : nals) {
+>, <Line: +            size += nal.limit();
+>, <Line: +        s = ByteBuffer.allocate(size);
+>, <Line: +        for (ByteBuffer nal : nals) {
+>, <Line: +            s.put((byte) ((nal.limit() & 0xff000000) >> 24));
+>, <Line: +            s.put((byte) ((nal.limit() & 0xff0000) >> 16));
+>, <Line: +            s.put((byte) ((nal.limit() & 0xff00) >> 8));
+>, <Line: +            s.put((byte) ((nal.limit() & 0xff)));
+>, <Line: +            s.put((ByteBuffer) nal.rewind());
+>]
+[<Line: -    public StreamingSampleImpl(List<byte[]> nals, long duration) {
+>, <Line: -        for (byte[] nal : nals) {
+>, <Line: -            size += nal.length;
+>, <Line: -        byte sample[] = new byte[size];
+>, <Line: -        int pos = 0;
+>, <Line: -        for (byte[] nal : nals) {
+>, <Line: -            sample[pos] = (byte) ((nal.length & 0xff000000) >> 24);
+>, <Line: -            sample[pos + 1] = (byte) ((nal.length & 0xff0000) >> 16);
+>, <Line: -            sample[pos + 2] = (byte) ((nal.length & 0xff00) >> 8);
+>, <Line: -            sample[pos + 3] = (byte) ((nal.length & 0xff));
+>, <Line: -            pos += 4;
+>, <Line: -            System.arraycopy(nal, 0, sample, pos, nal.length);
+>, <Line: -            pos += nal.length;
+>, <Line: -        s = ByteBuffer.wrap(sample);
+>]

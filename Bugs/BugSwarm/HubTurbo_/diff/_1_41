@@ -1,0 +1,30 @@
+[<Line: +package backend.resource.serialization;
+>, <Line: +import backend.UpdateSignature;
+>, <Line: +import backend.resource.Model;
+>, <Line: +import java.util.List;
+>, <Line: +import java.util.stream.Collectors;
+>, <Line: +/**
+>, <Line: + * 100% immutable
+>, <Line: + */
+>, <Line: +public class SerializableModel {
+>, <Line: +	public final String repoId;
+>, <Line: +	public final UpdateSignature updateSignature;
+>, <Line: +	public final List<SerializableIssue> issues;
+>, <Line: +	public final List<SerializableLabel> labels;
+>, <Line: +	public final List<SerializableMilestone> milestones;
+>, <Line: +	public final List<SerializableUser> users;
+>, <Line: +	public SerializableModel(Model model) {
+>, <Line: +		this.repoId = model.getRepoId();
+>, <Line: +		this.updateSignature = model.getUpdateSignature();
+>, <Line: +		this.issues = model.getIssues().stream()
+>, <Line: +			.map(SerializableIssue::new).collect(Collectors.toList());
+>, <Line: +		this.labels = model.getLabels().stream()
+>, <Line: +			.map(SerializableLabel::new).collect(Collectors.toList());
+>, <Line: +		this.milestones = model.getMilestones().stream()
+>, <Line: +			.map(SerializableMilestone::new).collect(Collectors.toList());
+>, <Line: +		this.users = model.getUsers().stream()
+>, <Line: +			.map(SerializableUser::new).collect(Collectors.toList());
+>, <Line: +	}
+>, <Line: +}
+>]
+[]

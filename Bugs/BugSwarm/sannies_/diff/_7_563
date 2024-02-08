@@ -1,0 +1,44 @@
+[<Line: +package org.mp4parser.muxer.tracks;
+>, <Line: +import org.junit.Assert;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.CompositionTimeToSample;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.TimeToSampleBox;
+>, <Line: +public class ClippedTrackTest {
+>, <Line: +        List<TimeToSampleBox.Entry> r = ClippedTrack.getDecodingTimeEntries(e, 0, 1);
+>, <Line: +        r = ClippedTrack.getDecodingTimeEntries(e, 0, 2);
+>, <Line: +        r = ClippedTrack.getDecodingTimeEntries(e, 1, 2);
+>, <Line: +        r = ClippedTrack.getDecodingTimeEntries(e, 1, 3);
+>, <Line: +        r = ClippedTrack.getDecodingTimeEntries(e, 3, 4);
+>, <Line: +        r = ClippedTrack.getDecodingTimeEntries(e, 1, 6);
+>, <Line: +        r = ClippedTrack.getDecodingTimeEntries(e, 2, 6);
+>, <Line: +        r = ClippedTrack.getDecodingTimeEntries(e, 2, 8);
+>, <Line: +        List<CompositionTimeToSample.Entry> r = ClippedTrack.getCompositionTimeEntries(e, 0, 1);
+>, <Line: +        r = ClippedTrack.getCompositionTimeEntries(e, 0, 2);
+>, <Line: +        r = ClippedTrack.getCompositionTimeEntries(e, 1, 2);
+>, <Line: +        r = ClippedTrack.getCompositionTimeEntries(e, 1, 3);
+>, <Line: +        r = ClippedTrack.getCompositionTimeEntries(e, 3, 4);
+>, <Line: +        r = ClippedTrack.getCompositionTimeEntries(e, 1, 6);
+>, <Line: +        r = ClippedTrack.getCompositionTimeEntries(e, 2, 6);
+>, <Line: +        r = ClippedTrack.getCompositionTimeEntries(e, 2, 8);
+>]
+[<Line: -package com.googlecode.mp4parser.authoring.tracks;
+>, <Line: -import com.coremedia.iso.boxes.CompositionTimeToSample;
+>, <Line: -import com.coremedia.iso.boxes.TimeToSampleBox;
+>, <Line: -import junit.framework.Assert;
+>, <Line: -public class CroppedTrackTest {
+>, <Line: -        List<TimeToSampleBox.Entry> r = CroppedTrack.getDecodingTimeEntries(e, 0, 1);
+>, <Line: -        r = CroppedTrack.getDecodingTimeEntries(e, 0, 2);
+>, <Line: -        r = CroppedTrack.getDecodingTimeEntries(e, 1, 2);
+>, <Line: -        r = CroppedTrack.getDecodingTimeEntries(e, 1, 3);
+>, <Line: -        r = CroppedTrack.getDecodingTimeEntries(e, 3, 4);
+>, <Line: -        r = CroppedTrack.getDecodingTimeEntries(e, 1, 6);
+>, <Line: -        r = CroppedTrack.getDecodingTimeEntries(e, 2, 6);
+>, <Line: -        r = CroppedTrack.getDecodingTimeEntries(e, 2, 8);
+>, <Line: -        List<CompositionTimeToSample.Entry> r = CroppedTrack.getCompositionTimeEntries(e, 0, 1);
+>, <Line: -        r = CroppedTrack.getCompositionTimeEntries(e, 0, 2);
+>, <Line: -        r = CroppedTrack.getCompositionTimeEntries(e, 1, 2);
+>, <Line: -        r = CroppedTrack.getCompositionTimeEntries(e, 1, 3);
+>, <Line: -        r = CroppedTrack.getCompositionTimeEntries(e, 3, 4);
+>, <Line: -        r = CroppedTrack.getCompositionTimeEntries(e, 1, 6);
+>, <Line: -        r = CroppedTrack.getCompositionTimeEntries(e, 2, 6);
+>, <Line: -        r = CroppedTrack.getCompositionTimeEntries(e, 2, 8);
+>]

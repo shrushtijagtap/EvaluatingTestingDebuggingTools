@@ -1,0 +1,105 @@
+[<Line: +package com.puppycrawl.tools.checkstyle.checks.coding.defaultcomeslast;
+>, <Line: +public class InputSkipIfLastAndSharedWithCase
+>, <Line: +{
+>, <Line: +    void method(int i) {
+>, <Line: +        switch (i) {
+>, <Line: +            case 1:
+>, <Line: +            default: // No violation with the new option is expected
+>, <Line: +                break;
+>, <Line: +            case 2:
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            case 1:
+>, <Line: +            default: // violation Default should be last label in the case group.
+>, <Line: +            case 2:
+>, <Line: +                break;
+>, <Line: +            case 3:
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            default: // violation Default should be last label in the case group.
+>, <Line: +            case 1:
+>, <Line: +                break;
+>, <Line: +            case 2:
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            case 0: default: case 1: break; case 2: break;  // violation Default should be last label in the case group.
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            default: case 1: break; case 2: break;  // violation Default should be last label in the case group.
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            case 1: default: break; case 2: break;  // No violation with the new option is expected
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            case 1:
+>, <Line: +            default: // No violation with the new option is expected
+>, <Line: +                break;
+>, <Line: +            case 2:
+>, <Line: +                break;
+>, <Line: +            case 3:
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            case 1:
+>, <Line: +                break;
+>, <Line: +            default:  // violation Default should be last label in the case group.
+>, <Line: +            case 2:
+>, <Line: +                break;
+>, <Line: +            case 3:
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            case 1:
+>, <Line: +                break;
+>, <Line: +            case 2:
+>, <Line: +            default: // No violation with the new option is expected
+>, <Line: +                break;
+>, <Line: +            case 3:
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            case 1:
+>, <Line: +                break;
+>, <Line: +            default: // violation Default should be last label in the case group.
+>, <Line: +            case 3:
+>, <Line: +                break;
+>, <Line: +            case 4:
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            case 1:
+>, <Line: +                break;
+>, <Line: +            case 2:
+>, <Line: +                break;
+>, <Line: +            default: // violation Default should be last label in the group.
+>, <Line: +            case 5:
+>, <Line: +            case 6:
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            case 1:
+>, <Line: +                break;
+>, <Line: +            default: // violation Default should be last label in the case group.
+>, <Line: +                break;
+>, <Line: +            case 2:
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        switch (i) {
+>, <Line: +            case 1:
+>, <Line: +                break;
+>, <Line: +            case 2:
+>, <Line: +                break;
+>, <Line: +            default: // No violation.
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +    }
+>, <Line: +}
+>, <Line: +@interface InputSkipIfLastAndSharedWithCaseAnnotation
+>, <Line: +{
+>, <Line: +    int blag() default 1;
+>, <Line: +}
+>]
+[]

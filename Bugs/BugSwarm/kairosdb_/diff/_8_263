@@ -1,0 +1,510 @@
+[<Line: +		'angular'
+>, <Line: +	],
+>, <Line: +	function (angular) {
+>, <Line: +		'use strict';
+>, <Line: +		var module = angular.module('grafana.services');
+>, <Line: +		// This service was based on OpenJS library available in BSD License
+>, <Line: +		// http://www.openjs.com/scripts/events/keyboard_shortcuts/index.php
+>, <Line: +		module.factory('keyboardManager', ['$window', '$timeout', function ($window, $timeout) {
+>, <Line: +			var keyboardManagerService = {};
+>, <Line: +			var defaultOpt = {
+>, <Line: +				'type': 'keydown',
+>, <Line: +				'propagate': false,
+>, <Line: +				'inputDisabled': false,
+>, <Line: +				'target': $window.document,
+>, <Line: +				'keyCode': false
+>, <Line: +			};
+>, <Line: +			// Store all keyboard combination shortcuts
+>, <Line: +			keyboardManagerService.keyboardEvent = {};
+>, <Line: +			// Add a new keyboard combination shortcut
+>, <Line: +			keyboardManagerService.bind = function (label, callback, opt) {
+>, <Line: +				var fct, elt, code, k;
+>, <Line: +				// Initialize opt object
+>, <Line: +				opt = angular.extend({}, defaultOpt, opt);
+>, <Line: +				label = label.toLowerCase();
+>, <Line: +				elt = opt.target;
+>, <Line: +				if (typeof opt.target === 'string') {
+>, <Line: +					elt = document.getElementById(opt.target);
+>, <Line: +				}
+>, <Line: +				fct = function (e) {
+>, <Line: +					e = e || $window.event;
+>, <Line: +					// Disable event handler when focus input and textarea
+>, <Line: +					if (opt['inputDisabled']) {
+>, <Line: +						var elt;
+>, <Line: +						if (e.target) {
+>, <Line: +							elt = e.target;
+>, <Line: +						}
+>, <Line: +						else if (e.srcElement) {
+>, <Line: +							elt = e.srcElement;
+>, <Line: +						}
+>, <Line: +						if (elt.nodeType === 3) {
+>, <Line: +							elt = elt.parentNode;
+>, <Line: +						}
+>, <Line: +						if (elt.tagName === 'INPUT' || elt.tagName === 'TEXTAREA') {
+>, <Line: +							return;
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					// Find out which key is pressed
+>, <Line: +					if (e.keyCode) {
+>, <Line: +						code = e.keyCode;
+>, <Line: +					}
+>, <Line: +					else if (e.which) {
+>, <Line: +						code = e.which;
+>, <Line: +					}
+>, <Line: +					var character = String.fromCharCode(code).toLowerCase();
+>, <Line: +					if (code === 188) {
+>, <Line: +						character = ","; // If the user presses , when the type is onkeydown
+>, <Line: +					}
+>, <Line: +					if (code === 190) {
+>, <Line: +						character = "."; // If the user presses , when the type is onkeydown
+>, <Line: +					}
+>, <Line: +					var keys = label.split("+");
+>, <Line: +					// Key Pressed - counts the number of valid keypresses - if it is same as the number of keys, the shortcut function is invoked
+>, <Line: +					var kp = 0;
+>, <Line: +					// Work around for stupid Shift key bug created by using lowercase - as a result the shift+num combination was broken
+>, <Line: +					var shift_nums = {
+>, <Line: +						"`": "~",
+>, <Line: +						"1": "!",
+>, <Line: +						"2": "@",
+>, <Line: +						"3": "#",
+>, <Line: +						"4": "$",
+>, <Line: +						"5": "%",
+>, <Line: +						"6": "^",
+>, <Line: +						"7": "&",
+>, <Line: +						"8": "*",
+>, <Line: +						"9": "(",
+>, <Line: +						"0": ")",
+>, <Line: +						"-": "_",
+>, <Line: +						"=": "+",
+>, <Line: +						";": ":",
+>, <Line: +						"'": "\"",
+>, <Line: +						",": "<",
+>, <Line: +						".": ">",
+>, <Line: +						"/": "?",
+>, <Line: +						"»": "?",
+>, <Line: +						"«": "?",
+>, <Line: +						"¿": "?",
+>, <Line: +						"\\": "|"
+>, <Line: +					};
+>, <Line: +					// Special Keys - and their codes
+>, <Line: +					var special_keys = {
+>, <Line: +						'esc': 27,
+>, <Line: +						'escape': 27,
+>, <Line: +						'tab': 9,
+>, <Line: +						'space': 32,
+>, <Line: +						'return': 13,
+>, <Line: +						'enter': 13,
+>, <Line: +						'backspace': 8,
+>, <Line: +						'scrolllock': 145,
+>, <Line: +						'scroll_lock': 145,
+>, <Line: +						'scroll': 145,
+>, <Line: +						'capslock': 20,
+>, <Line: +						'caps_lock': 20,
+>, <Line: +						'caps': 20,
+>, <Line: +						'numlock': 144,
+>, <Line: +						'num_lock': 144,
+>, <Line: +						'num': 144,
+>, <Line: +						'pause': 19,
+>, <Line: +						'break': 19,
+>, <Line: +						'insert': 45,
+>, <Line: +						'home': 36,
+>, <Line: +						'delete': 46,
+>, <Line: +						'end': 35,
+>, <Line: +						'pageup': 33,
+>, <Line: +						'page_up': 33,
+>, <Line: +						'pu': 33,
+>, <Line: +						'pagedown': 34,
+>, <Line: +						'page_down': 34,
+>, <Line: +						'pd': 34,
+>, <Line: +						'left': 37,
+>, <Line: +						'up': 38,
+>, <Line: +						'right': 39,
+>, <Line: +						'down': 40,
+>, <Line: +						'f1': 112,
+>, <Line: +						'f2': 113,
+>, <Line: +						'f3': 114,
+>, <Line: +						'f4': 115,
+>, <Line: +						'f5': 116,
+>, <Line: +						'f6': 117,
+>, <Line: +						'f7': 118,
+>, <Line: +						'f8': 119,
+>, <Line: +						'f9': 120,
+>, <Line: +						'f10': 121,
+>, <Line: +						'f11': 122,
+>, <Line: +						'f12': 123
+>, <Line: +					};
+>, <Line: +					// Some modifiers key
+>, <Line: +					var modifiers = {
+>, <Line: +						shift: {
+>, <Line: +							wanted: false,
+>, <Line: +							pressed: e.shiftKey ? true : false
+>, <Line: +						},
+>, <Line: +						ctrl: {
+>, <Line: +							wanted: false,
+>, <Line: +							pressed: e.ctrlKey ? true : false
+>, <Line: +						},
+>, <Line: +						alt: {
+>, <Line: +							wanted: false,
+>, <Line: +							pressed: e.altKey ? true : false
+>, <Line: +						},
+>, <Line: +						meta: { //Meta is Mac specific
+>, <Line: +							wanted: false,
+>, <Line: +							pressed: e.metaKey ? true : false
+>, <Line: +						}
+>, <Line: +					};
+>, <Line: +					// Foreach keys in label (split on +)
+>, <Line: +					for (var i = 0, l = keys.length; k = keys[i], i < l; i++) {
+>, <Line: +						switch (k) {
+>, <Line: +							case 'ctrl':
+>, <Line: +							case 'control':
+>, <Line: +								kp++;
+>, <Line: +								modifiers.ctrl.wanted = true;
+>, <Line: +								break;
+>, <Line: +							case 'shift':
+>, <Line: +							case 'alt':
+>, <Line: +							case 'meta':
+>, <Line: +								kp++;
+>, <Line: +								modifiers[k].wanted = true;
+>, <Line: +								break;
+>, <Line: +						}
+>, <Line: +						if (k.length > 1) { // If it is a special key
+>, <Line: +							if (special_keys[k] === code) {
+>, <Line: +								kp++;
+>, <Line: +							}
+>, <Line: +						} else if (opt['keyCode']) { // If a specific key is set into the config
+>, <Line: +							if (opt['keyCode'] === code) {
+>, <Line: +								kp++;
+>, <Line: +							}
+>, <Line: +						} else { // The special keys did not match
+>, <Line: +							if (character === k) {
+>, <Line: +								kp++;
+>, <Line: +							}
+>, <Line: +							else {
+>, <Line: +								if (shift_nums[character] && e.shiftKey) { // Stupid Shift key bug created by using lowercase
+>, <Line: +									character = shift_nums[character];
+>, <Line: +									if (character === k) {
+>, <Line: +										kp++;
+>, <Line: +									}
+>, <Line: +								}
+>, <Line: +							}
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +					if (kp === keys.length &&
+>, <Line: +						modifiers.ctrl.pressed === modifiers.ctrl.wanted &&
+>, <Line: +						modifiers.shift.pressed === modifiers.shift.wanted &&
+>, <Line: +						modifiers.alt.pressed === modifiers.alt.wanted &&
+>, <Line: +						modifiers.meta.pressed === modifiers.meta.wanted) {
+>, <Line: +						$timeout(function () {
+>, <Line: +							callback(e);
+>, <Line: +						}, 1);
+>, <Line: +						if (!opt['propagate']) { // Stop the event
+>, <Line: +							// e.cancelBubble is supported by IE - this will kill the bubbling process.
+>, <Line: +							e.cancelBubble = true;
+>, <Line: +							e.returnValue = false;
+>, <Line: +							// e.stopPropagation works in Firefox.
+>, <Line: +							if (e.stopPropagation) {
+>, <Line: +								e.stopPropagation();
+>, <Line: +								e.preventDefault();
+>, <Line: +							}
+>, <Line: +							return false;
+>, <Line: +						}
+>, <Line: +					}
+>, <Line: +				};
+>, <Line: +				// Store shortcut
+>, <Line: +				keyboardManagerService.keyboardEvent[label] = {
+>, <Line: +					'callback': fct,
+>, <Line: +					'target': elt,
+>, <Line: +					'event': opt['type']
+>, <Line: +				};
+>, <Line: +				//Attach the function with the event
+>, <Line: +				if (elt.addEventListener) {
+>, <Line: +					elt.addEventListener(opt['type'], fct, false);
+>, <Line: +				}
+>, <Line: +				else if (elt.attachEvent) {
+>, <Line: +					elt.attachEvent('on' + opt['type'], fct);
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					elt['on' + opt['type']] = fct;
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			// Remove the shortcut - just specify the shortcut and I will remove the binding
+>, <Line: +			keyboardManagerService.unbind = function (label) {
+>, <Line: +				label = label.toLowerCase();
+>, <Line: +				var binding = keyboardManagerService.keyboardEvent[label];
+>, <Line: +				delete(keyboardManagerService.keyboardEvent[label]);
+>, <Line: +				if (!binding) {
+>, <Line: +					return;
+>, <Line: +				}
+>, <Line: +				var type = binding['event'],
+>, <Line: +					elt = binding['target'],
+>, <Line: +					callback = binding['callback'];
+>, <Line: +				if (elt.detachEvent) {
+>, <Line: +					elt.detachEvent('on' + type, callback);
+>, <Line: +				}
+>, <Line: +				else if (elt.removeEventListener) {
+>, <Line: +					elt.removeEventListener(type, callback, false);
+>, <Line: +				}
+>, <Line: +				else {
+>, <Line: +					elt['on' + type] = false;
+>, <Line: +				}
+>, <Line: +			};
+>, <Line: +			//
+>, <Line: +			return keyboardManagerService;
+>, <Line: +		}]);
+>, <Line: +	});
+>]
+[<Line: -  'angular'
+>, <Line: -],
+>, <Line: -function (angular) {
+>, <Line: -  'use strict';
+>, <Line: -  var module = angular.module('grafana.services');
+>, <Line: -  // This service was based on OpenJS library available in BSD License
+>, <Line: -  // http://www.openjs.com/scripts/events/keyboard_shortcuts/index.php
+>, <Line: -  module.factory('keyboardManager', ['$window', '$timeout', function ($window, $timeout) {
+>, <Line: -    var keyboardManagerService = {};
+>, <Line: -    var defaultOpt = {
+>, <Line: -      'type':             'keydown',
+>, <Line: -      'propagate':        false,
+>, <Line: -      'inputDisabled':    false,
+>, <Line: -      'target':           $window.document,
+>, <Line: -      'keyCode':          false
+>, <Line: -    };
+>, <Line: -    // Store all keyboard combination shortcuts
+>, <Line: -    keyboardManagerService.keyboardEvent = {};
+>, <Line: -    // Add a new keyboard combination shortcut
+>, <Line: -    keyboardManagerService.bind = function (label, callback, opt) {
+>, <Line: -      var fct, elt, code, k;
+>, <Line: -      // Initialize opt object
+>, <Line: -      opt   = angular.extend({}, defaultOpt, opt);
+>, <Line: -      label = label.toLowerCase();
+>, <Line: -      elt   = opt.target;
+>, <Line: -      if (typeof opt.target === 'string') {
+>, <Line: -        elt = document.getElementById(opt.target);
+>, <Line: -      }
+>, <Line: -      fct = function (e) {
+>, <Line: -        e = e || $window.event;
+>, <Line: -        // Disable event handler when focus input and textarea
+>, <Line: -        if (opt['inputDisabled']) {
+>, <Line: -          var elt;
+>, <Line: -          if (e.target) {
+>, <Line: -            elt = e.target;
+>, <Line: -          }
+>, <Line: -          else if (e.srcElement) {
+>, <Line: -            elt = e.srcElement;
+>, <Line: -          }
+>, <Line: -          if (elt.nodeType === 3) {
+>, <Line: -            elt = elt.parentNode;
+>, <Line: -          }
+>, <Line: -          if (elt.tagName === 'INPUT' || elt.tagName === 'TEXTAREA') {
+>, <Line: -            return;
+>, <Line: -          }
+>, <Line: -        }
+>, <Line: -        // Find out which key is pressed
+>, <Line: -        if (e.keyCode) {
+>, <Line: -          code = e.keyCode;
+>, <Line: -        }
+>, <Line: -        else if (e.which) {
+>, <Line: -          code = e.which;
+>, <Line: -        }
+>, <Line: -        var character = String.fromCharCode(code).toLowerCase();
+>, <Line: -        if (code === 188) {
+>, <Line: -          character = ","; // If the user presses , when the type is onkeydown
+>, <Line: -        }
+>, <Line: -        if (code === 190) {
+>, <Line: -          character = "."; // If the user presses , when the type is onkeydown
+>, <Line: -        }
+>, <Line: -        var keys = label.split("+");
+>, <Line: -        // Key Pressed - counts the number of valid keypresses - if it is same as the number of keys, the shortcut function is invoked
+>, <Line: -        var kp = 0;
+>, <Line: -        // Work around for stupid Shift key bug created by using lowercase - as a result the shift+num combination was broken
+>, <Line: -        var shift_nums = {
+>, <Line: -          "`": "~",
+>, <Line: -          "1": "!",
+>, <Line: -          "2": "@",
+>, <Line: -          "3": "#",
+>, <Line: -          "4": "$",
+>, <Line: -          "5": "%",
+>, <Line: -          "6": "^",
+>, <Line: -          "7": "&",
+>, <Line: -          "8": "*",
+>, <Line: -          "9": "(",
+>, <Line: -          "0": ")",
+>, <Line: -          "-": "_",
+>, <Line: -          "=": "+",
+>, <Line: -          ";": ":",
+>, <Line: -          "'": "\"",
+>, <Line: -          ",": "<",
+>, <Line: -          ".": ">",
+>, <Line: -          "/": "?",
+>, <Line: -          "»": "?",
+>, <Line: -          "«": "?",
+>, <Line: -          "¿": "?",
+>, <Line: -          "\\": "|"
+>, <Line: -        };
+>, <Line: -        // Special Keys - and their codes
+>, <Line: -        var special_keys = {
+>, <Line: -          'esc': 27,
+>, <Line: -          'escape': 27,
+>, <Line: -          'tab': 9,
+>, <Line: -          'space': 32,
+>, <Line: -          'return': 13,
+>, <Line: -          'enter': 13,
+>, <Line: -          'backspace': 8,
+>, <Line: -          'scrolllock': 145,
+>, <Line: -          'scroll_lock': 145,
+>, <Line: -          'scroll': 145,
+>, <Line: -          'capslock': 20,
+>, <Line: -          'caps_lock': 20,
+>, <Line: -          'caps': 20,
+>, <Line: -          'numlock': 144,
+>, <Line: -          'num_lock': 144,
+>, <Line: -          'num': 144,
+>, <Line: -          'pause': 19,
+>, <Line: -          'break': 19,
+>, <Line: -          'insert': 45,
+>, <Line: -          'home': 36,
+>, <Line: -          'delete': 46,
+>, <Line: -          'end': 35,
+>, <Line: -          'pageup': 33,
+>, <Line: -          'page_up': 33,
+>, <Line: -          'pu': 33,
+>, <Line: -          'pagedown': 34,
+>, <Line: -          'page_down': 34,
+>, <Line: -          'pd': 34,
+>, <Line: -          'left': 37,
+>, <Line: -          'up': 38,
+>, <Line: -          'right': 39,
+>, <Line: -          'down': 40,
+>, <Line: -          'f1': 112,
+>, <Line: -          'f2': 113,
+>, <Line: -          'f3': 114,
+>, <Line: -          'f4': 115,
+>, <Line: -          'f5': 116,
+>, <Line: -          'f6': 117,
+>, <Line: -          'f7': 118,
+>, <Line: -          'f8': 119,
+>, <Line: -          'f9': 120,
+>, <Line: -          'f10': 121,
+>, <Line: -          'f11': 122,
+>, <Line: -          'f12': 123
+>, <Line: -        };
+>, <Line: -        // Some modifiers key
+>, <Line: -        var modifiers = {
+>, <Line: -          shift: {
+>, <Line: -            wanted:   false,
+>, <Line: -            pressed:  e.shiftKey ? true : false
+>, <Line: -          },
+>, <Line: -          ctrl : {
+>, <Line: -            wanted:   false,
+>, <Line: -            pressed:  e.ctrlKey ? true : false
+>, <Line: -          },
+>, <Line: -          alt  : {
+>, <Line: -            wanted:   false,
+>, <Line: -            pressed:  e.altKey ? true : false
+>, <Line: -          },
+>, <Line: -          meta : { //Meta is Mac specific
+>, <Line: -            wanted:   false,
+>, <Line: -            pressed:  e.metaKey ? true : false
+>, <Line: -          }
+>, <Line: -        };
+>, <Line: -        // Foreach keys in label (split on +)
+>, <Line: -        for (var i = 0, l = keys.length; k = keys[i], i < l; i++) {
+>, <Line: -          switch (k) {
+>, <Line: -          case 'ctrl':
+>, <Line: -          case 'control':
+>, <Line: -            kp++;
+>, <Line: -            modifiers.ctrl.wanted = true;
+>, <Line: -            break;
+>, <Line: -          case 'shift':
+>, <Line: -          case 'alt':
+>, <Line: -          case 'meta':
+>, <Line: -            kp++;
+>, <Line: -            modifiers[k].wanted = true;
+>, <Line: -            break;
+>, <Line: -          }
+>, <Line: -          if (k.length > 1) { // If it is a special key
+>, <Line: -            if (special_keys[k] === code) {
+>, <Line: -              kp++;
+>, <Line: -            }
+>, <Line: -          } else if (opt['keyCode']) { // If a specific key is set into the config
+>, <Line: -            if (opt['keyCode'] === code) {
+>, <Line: -              kp++;
+>, <Line: -            }
+>, <Line: -          } else { // The special keys did not match
+>, <Line: -            if (character === k) {
+>, <Line: -              kp++;
+>, <Line: -            }
+>, <Line: -            else {
+>, <Line: -              if (shift_nums[character] && e.shiftKey) { // Stupid Shift key bug created by using lowercase
+>, <Line: -                character = shift_nums[character];
+>, <Line: -                if (character === k) {
+>, <Line: -                  kp++;
+>, <Line: -                }
+>, <Line: -              }
+>, <Line: -            }
+>, <Line: -          }
+>, <Line: -        }
+>, <Line: -        if (kp === keys.length &&
+>, <Line: -          modifiers.ctrl.pressed === modifiers.ctrl.wanted &&
+>, <Line: -          modifiers.shift.pressed === modifiers.shift.wanted &&
+>, <Line: -          modifiers.alt.pressed === modifiers.alt.wanted &&
+>, <Line: -          modifiers.meta.pressed === modifiers.meta.wanted) {
+>, <Line: -          $timeout(function() {
+>, <Line: -            callback(e);
+>, <Line: -          }, 1);
+>, <Line: -          if (!opt['propagate']) { // Stop the event
+>, <Line: -            // e.cancelBubble is supported by IE - this will kill the bubbling process.
+>, <Line: -            e.cancelBubble = true;
+>, <Line: -            e.returnValue = false;
+>, <Line: -            // e.stopPropagation works in Firefox.
+>, <Line: -            if (e.stopPropagation) {
+>, <Line: -              e.stopPropagation();
+>, <Line: -              e.preventDefault();
+>, <Line: -            }
+>, <Line: -            return false;
+>, <Line: -          }
+>, <Line: -        }
+>, <Line: -      };
+>, <Line: -      // Store shortcut
+>, <Line: -      keyboardManagerService.keyboardEvent[label] = {
+>, <Line: -        'callback': fct,
+>, <Line: -        'target':   elt,
+>, <Line: -        'event':    opt['type']
+>, <Line: -      };
+>, <Line: -      //Attach the function with the event
+>, <Line: -      if (elt.addEventListener) {
+>, <Line: -        elt.addEventListener(opt['type'], fct, false);
+>, <Line: -      }
+>, <Line: -      else if (elt.attachEvent) {
+>, <Line: -        elt.attachEvent('on' + opt['type'], fct);
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        elt['on' + opt['type']] = fct;
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    // Remove the shortcut - just specify the shortcut and I will remove the binding
+>, <Line: -    keyboardManagerService.unbind = function (label) {
+>, <Line: -      label = label.toLowerCase();
+>, <Line: -      var binding = keyboardManagerService.keyboardEvent[label];
+>, <Line: -      delete(keyboardManagerService.keyboardEvent[label]);
+>, <Line: -      if (!binding) {
+>, <Line: -        return;
+>, <Line: -      }
+>, <Line: -      var type    = binding['event'],
+>, <Line: -      elt     = binding['target'],
+>, <Line: -      callback  = binding['callback'];
+>, <Line: -      if (elt.detachEvent) {
+>, <Line: -        elt.detachEvent('on' + type, callback);
+>, <Line: -      }
+>, <Line: -      else if (elt.removeEventListener) {
+>, <Line: -        elt.removeEventListener(type, callback, false);
+>, <Line: -      }
+>, <Line: -      else {
+>, <Line: -        elt['on' + type] = false;
+>, <Line: -      }
+>, <Line: -    };
+>, <Line: -    //
+>, <Line: -    return keyboardManagerService;
+>, <Line: -  }]);
+>, <Line: -});
+>]

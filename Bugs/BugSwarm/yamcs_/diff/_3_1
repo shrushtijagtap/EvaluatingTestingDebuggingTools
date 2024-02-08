@@ -1,0 +1,14 @@
+[<Line: +    - org.yamcs.tctm.DataLinkInitialiser
+>, <Line: +tmDataLinks:
+>, <Line: +ppDataLinks: []
+>, <Line: +tcDataLinks:
+>, <Line: +    - class: org.yamcs.IntegrationTestComVerif$MyTcDataLink
+>]
+[<Line: -    - org.yamcs.tctm.TmProviderAdapter
+>, <Line: -    - org.yamcs.tctm.PpProviderAdapter
+>, <Line: -    - org.yamcs.tctm.TcUplinkerAdapter
+>, <Line: -tmProviders:
+>, <Line: -ppProviders: []
+>, <Line: -tcUplinkers:
+>, <Line: -    - class: org.yamcs.IntegrationTestComVerif$MyTcUplinliker
+>]

@@ -1,0 +1,50 @@
+[<Line: +  static final String SPACE = " ";
+>, <Line: +    new org.eclipse.swt.graphics.Point(800, 500);
+>, <Line: +    new org.eclipse.swt.graphics.Point(50, 10);
+>, <Line: +      .appendSeparator(SPACE)
+>, <Line: +  final boolean isRealtime;
+>, <Line: +    isRealtime = clock instanceof RealtimeClockController;
+>, <Line: +        panels.removeAll(SWT.TOP));
+>, <Line: +        panels.removeAll(SWT.LEFT));
+>, <Line: +        panels.removeAll(SWT.RIGHT));
+>, <Line: +        panels.removeAll(SWT.BOTTOM));
+>, <Line: +        "Invalid preferred position set for panels: %s", panels.values());
+>, <Line: +          viewRect, m),
+>, <Line: +        clock.getCurrentTime());
+>, <Line: +      isDefined,
+>, <Line: +      "none of the available renderers implements getViewRect(), known "
+>, <Line: +          + "renderers: %s",
+>, <Line: +      canvasRenderers);
+>, <Line: +        content.height, false);
+>, <Line: +        content.height, false);
+>, <Line: +            final StringBuilder sb = new StringBuilder();
+>, <Line: +            sb.append(FORMATTER.print(new Period(0, clock.getCurrentTime())));
+>, <Line: +            if (isRealtime) {
+>, <Line: +              sb.append(SPACE);
+>, <Line: +              sb.append(
+>, <Line: +                ((RealtimeClockController) clock).getClockMode().name());
+>, <Line: +            }
+>, <Line: +            timeLabel.setText(sb.toString());
+>, <Line: +        MainView.class);
+>]
+[<Line: -      new org.eclipse.swt.graphics.Point(800, 500);
+>, <Line: -      new org.eclipse.swt.graphics.Point(50, 10);
+>, <Line: -      .appendSeparator(" ")
+>, <Line: -          panels.removeAll(SWT.TOP));
+>, <Line: -          panels.removeAll(SWT.LEFT));
+>, <Line: -          panels.removeAll(SWT.RIGHT));
+>, <Line: -          panels.removeAll(SWT.BOTTOM));
+>, <Line: -          "Invalid preferred position set for panels: %s", panels.values());
+>, <Line: -          viewRect, m), clock.getCurrentTime());
+>, <Line: -        isDefined,
+>, <Line: -        "none of the available renderers implements getViewRect(), known "
+>, <Line: -            + "renderers: %s",
+>, <Line: -        canvasRenderers);
+>, <Line: -          content.height, false);
+>, <Line: -          content.height, false);
+>, <Line: -            final String formatted = FORMATTER
+>, <Line: -                .print(
+>, <Line: -                    new Period(0, clock.getCurrentTime()));
+>, <Line: -            timeLabel.setText(formatted);
+>, <Line: -          MainView.class);
+>]

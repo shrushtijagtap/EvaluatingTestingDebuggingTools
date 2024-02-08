@@ -1,0 +1,14 @@
+[<Line: +    int mergeWriter(int hint);
+>, <Line: +    int mergeReader(int hint);
+>, <Line: +        public int mergeWriter(int hint) {
+>, <Line: +                hint = classVisitorWrapper.mergeWriter(hint);
+>, <Line: +        public int mergeReader(int hint) {
+>, <Line: +                hint = classVisitorWrapper.mergeReader(hint);
+>]
+[<Line: -    int wrapWriter(int hint);
+>, <Line: -    int wrapReader(int hint);
+>, <Line: -        public int wrapWriter(int hint) {
+>, <Line: -                hint = classVisitorWrapper.wrapWriter(hint);
+>, <Line: -        public int wrapReader(int hint) {
+>, <Line: -                hint = classVisitorWrapper.wrapReader(hint);
+>]

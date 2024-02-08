@@ -1,0 +1,201 @@
+[<Line: +import wycc.lang.Attribute;
+>, <Line: +import wycc.lang.SyntacticElement;
+>, <Line: +import wyil.lang.Bytecode.Expr;
+>, <Line: +import wyil.lang.SyntaxTree.Location;
+>, <Line: +	public WyilFile(Path.ID mid, String filename) {
+>, <Line: +		this.blocks = new ArrayList<Block>();
+>, <Line: +	public static abstract class Block implements SyntacticElement {
+>, <Line: +		private final WyilFile parent;
+>, <Line: +		public Block(WyilFile parent, Collection<Attribute> attributes) {
+>, <Line: +			this.parent = parent;
+>, <Line: +		public Block(WyilFile parent, Attribute[] attributes) {
+>, <Line: +			this.parent = parent;
+>, <Line: +		/**
+>, <Line: +		 * Get the WyIL file enclosing this block
+>, <Line: +		 * 
+>, <Line: +		 * @return
+>, <Line: +		 */
+>, <Line: +		public WyilFile parent() {
+>, <Line: +			return parent;
+>, <Line: +		}
+>, <Line: +		private SyntaxTree tree;
+>, <Line: +		public Declaration(WyilFile parent, String name, Collection<Modifier> modifiers, Attribute... attributes) {
+>, <Line: +			super(parent, attributes);
+>, <Line: +			this.tree = new SyntaxTree(this);
+>, <Line: +		public Declaration(WyilFile parent, String name, Collection<Modifier> modifiers,
+>, <Line: +			super(parent, attributes);
+>, <Line: +			this.tree = new SyntaxTree(this);
+>, <Line: +		public SyntaxTree getTree() {
+>, <Line: +			return tree;			
+>, <Line: +		}
+>, <Line: +		private final wyil.lang.Type type;
+>, <Line: +		private final List<Location<Expr>> invariant;
+>, <Line: +		public Type(WyilFile parent, Collection<Modifier> modifiers, String name, wyil.lang.Type type,
+>, <Line: +			super(parent, name, modifiers, attributes);
+>, <Line: +			this.invariant = new ArrayList<Location<Expr>>();
+>, <Line: +		public Type(WyilFile parent, Collection<Modifier> modifiers, String name, wyil.lang.Type type,
+>, <Line: +			super(parent, name, modifiers, attributes);
+>, <Line: +			this.invariant = new ArrayList<Location<Expr>>();
+>, <Line: +		/**
+>, <Line: +		 * Get the list of expressions that make up the invariant of this
+>, <Line: +		 * type.  This list maybe empty, but it cannot be null.
+>, <Line: +		 * 
+>, <Line: +		 * @return
+>, <Line: +		 */
+>, <Line: +		public List<Location<Expr>> getInvariant() {
+>, <Line: +		private final wyil.lang.Constant constant;
+>, <Line: +		public Constant(WyilFile parent, Collection<Modifier> modifiers, String name,
+>, <Line: +			super(parent, name, modifiers, attributes);
+>, <Line: +		public Constant(WyilFile parent, Collection<Modifier> modifiers, String name,
+>, <Line: +			super(parent, name, modifiers, attributes);
+>, <Line: +	public static final class FunctionOrMethod extends Declaration {
+>, <Line: +		private final wyil.lang.Type.FunctionOrMethod type;
+>, <Line: +		/**
+>, <Line: +		 * Expressions making up clauses of precondition 
+>, <Line: +		 */
+>, <Line: +		private final List<SyntaxTree.Location<Bytecode.Expr>> precondition;
+>, <Line: +		/**
+>, <Line: +		 * Expressions making up clauses of postcondition 
+>, <Line: +		 */
+>, <Line: +		private final List<SyntaxTree.Location<Bytecode.Expr>> postcondition;
+>, <Line: +		/**
+>, <Line: +		 * The function or method body (which can be null)
+>, <Line: +		 */
+>, <Line: +		private SyntaxTree.Location<Bytecode.Block> body;
+>, <Line: +		public FunctionOrMethod(WyilFile parent, Collection<Modifier> modifiers, String name,
+>, <Line: +				wyil.lang.Type.FunctionOrMethod type, Attribute... attributes) {
+>, <Line: +			super(parent, name, modifiers, attributes);
+>, <Line: +			this.precondition = new ArrayList<SyntaxTree.Location<Bytecode.Expr>>();
+>, <Line: +			this.postcondition = new ArrayList<SyntaxTree.Location<Bytecode.Expr>>();
+>, <Line: +		public FunctionOrMethod(WyilFile parent, Collection<Modifier> modifiers, String name,
+>, <Line: +				wyil.lang.Type.FunctionOrMethod type, Collection<Attribute> attributes) {
+>, <Line: +			super(parent, name, modifiers, attributes);
+>, <Line: +			this.precondition = new ArrayList<SyntaxTree.Location<Bytecode.Expr>>();
+>, <Line: +			this.postcondition = new ArrayList<SyntaxTree.Location<Bytecode.Expr>>();
+>, <Line: +		/**
+>, <Line: +		 * Check whether this represents a function declaration or not.
+>, <Line: +		 * 
+>, <Line: +		 * @return
+>, <Line: +		 */
+>, <Line: +		/**
+>, <Line: +		 * Check whether this represents a method declaration or not.
+>, <Line: +		 * 
+>, <Line: +		 * @return
+>, <Line: +		 */
+>, <Line: +		 * Get the list of expressions that make up the precondition of this
+>, <Line: +		 * function/method.  This list maybe empty, but it cannot be null.
+>, <Line: +		public List<SyntaxTree.Location<Bytecode.Expr>> getPrecondition() {
+>, <Line: +			return precondition;
+>, <Line: +		 * Get the list of expressions that make up the postcondition of this
+>, <Line: +		 * function/method.  This list maybe empty, but it cannot be null.
+>, <Line: +		public List<SyntaxTree.Location<Bytecode.Expr>> getPostcondition() {
+>, <Line: +			return postcondition;
+>, <Line: +		 * Get the body of this function or method
+>, <Line: +		public SyntaxTree.Location<Bytecode.Block> getBody() {
+>, <Line: +			return body;
+>, <Line: +		}
+>, <Line: +		public void setBody(SyntaxTree.Location<Bytecode.Block> body) {
+>, <Line: +			this.body = body;			
+>]
+[<Line: -	public WyilFile(Path.ID mid,
+>, <Line: -			String filename,
+>, <Line: -			List<Block> declarations) {
+>, <Line: -		this.blocks = new ArrayList<Block>(declarations);
+>, <Line: -		// second, validate methods and/or functions
+>, <Line: -		HashSet<Pair<String,wyil.lang.Type.FunctionOrMethod>> methods = new HashSet<Pair<String,wyil.lang.Type.FunctionOrMethod>>();
+>, <Line: -		HashSet<String> types = new HashSet<String>();
+>, <Line: -		HashSet<String> constants = new HashSet<String>();
+>, <Line: -		for (Block d : declarations) {
+>, <Line: -			if(d instanceof FunctionOrMethod) {
+>, <Line: -				FunctionOrMethod m = (FunctionOrMethod) d;
+>, <Line: -				Pair<String,wyil.lang.Type.FunctionOrMethod> p = new Pair<String,wyil.lang.Type.FunctionOrMethod>(m.name(),m.type());
+>, <Line: -				if (methods.contains(p)) {
+>, <Line: -					throw new IllegalArgumentException(
+>, <Line: -							"Multiple function or method definitions (" + p.first() + ") with the same name and type not permitted");
+>, <Line: -				}
+>, <Line: -				methods.add(p);
+>, <Line: -			} else if(d instanceof Type) {
+>, <Line: -				Type t = (Type) d;
+>, <Line: -				if (types.contains(t.name())) {
+>, <Line: -					throw new IllegalArgumentException(
+>, <Line: -							"Multiple type definitions with the same name not permitted");
+>, <Line: -				}
+>, <Line: -				types.add(t.name());
+>, <Line: -			} else if (d instanceof Constant) {
+>, <Line: -				Constant c = (Constant) d;
+>, <Line: -				if (constants.contains(c.name())) {
+>, <Line: -					throw new IllegalArgumentException(
+>, <Line: -							"Multiple constant definitions with the same name not permitted");
+>, <Line: -				}
+>, <Line: -				constants.add(c.name());
+>, <Line: -			}
+>, <Line: -		}
+>, <Line: -	public static abstract class Block {
+>, <Line: -		public Block(Collection<Attribute> attributes) {
+>, <Line: -		public Block(Attribute[] attributes) {
+>, <Line: -		public Declaration(String name, Collection<Modifier> modifiers,
+>, <Line: -				Attribute... attributes) {
+>, <Line: -			super(attributes);
+>, <Line: -		public Declaration(String name, Collection<Modifier> modifiers,
+>, <Line: -			super(attributes);
+>, <Line: -		private wyil.lang.Type type;
+>, <Line: -		private BytecodeForest invariant;
+>, <Line: -		public Type(Collection<Modifier> modifiers, String name, wyil.lang.Type type, BytecodeForest invariant,
+>, <Line: -			super(name, modifiers, attributes);
+>, <Line: -			this.invariant = invariant;
+>, <Line: -		public Type(Collection<Modifier> modifiers, String name, wyil.lang.Type type, BytecodeForest invariant,
+>, <Line: -			super(name, modifiers, attributes);
+>, <Line: -			this.invariant = invariant;
+>, <Line: -		public BytecodeForest invariant() {
+>, <Line: -		private wyil.lang.Constant constant;
+>, <Line: -		public Constant(Collection<Modifier> modifiers, String name,
+>, <Line: -			super(name, modifiers, attributes);
+>, <Line: -		public Constant(Collection<Modifier> modifiers, String name,
+>, <Line: -			super(name, modifiers, attributes);
+>, <Line: -	public static final class FunctionOrMethod extends
+>, <Line: -			Declaration {
+>, <Line: -		private wyil.lang.Type.FunctionOrMethod type;
+>, <Line: -		private int numPreconditions;
+>, <Line: -		private int numPostconditions;
+>, <Line: -		private final BytecodeForest forest;
+>, <Line: -		public FunctionOrMethod(Collection<Modifier> modifiers, String name, wyil.lang.Type.FunctionOrMethod type,
+>, <Line: -				BytecodeForest forest, int numPreconditions, int numPostconditions, Attribute... attributes) {
+>, <Line: -			super(name, modifiers, attributes);
+>, <Line: -			this.forest = forest;
+>, <Line: -			this.numPreconditions = numPreconditions;
+>, <Line: -			this.numPostconditions = numPostconditions;			
+>, <Line: -		public FunctionOrMethod(Collection<Modifier> modifiers, String name, wyil.lang.Type.FunctionOrMethod type,
+>, <Line: -				BytecodeForest forest, int numPreconditions, int numPostconditions, Collection<Attribute> attributes) {
+>, <Line: -			super(name, modifiers, attributes);
+>, <Line: -			this.forest = forest;
+>, <Line: -			this.numPreconditions = numPreconditions;
+>, <Line: -			this.numPostconditions = numPostconditions;	
+>, <Line: -		public BytecodeForest code() {
+>, <Line: -			return forest;
+>, <Line: -		}
+>, <Line: -		 * Get the list of blocks within the code forest that represent the
+>, <Line: -		 * preconditions of this function/method.
+>, <Line: -		public int[] preconditions() {
+>, <Line: -			int[] ids = new int[numPreconditions];
+>, <Line: -			for(int i=0;i!=numPreconditions;++i) {
+>, <Line: -				ids[i] = forest.getRoot(i);
+>, <Line: -			}
+>, <Line: -			return ids;
+>, <Line: -		 * Get the list of blocks within the code forest that represent the
+>, <Line: -		 * postconditions of this function/method.
+>, <Line: -		public int[] postconditions() {
+>, <Line: -			int[] ids = new int[numPostconditions];
+>, <Line: -			for(int i=0;i!=numPostconditions;++i) {
+>, <Line: -				ids[i] = forest.getRoot(i+numPreconditions);
+>, <Line: -			}
+>, <Line: -			return ids;
+>, <Line: -		 * Get the block corresponding to the body of this function, or null if
+>, <Line: -		 * no such body exists.
+>, <Line: -		public Integer body() {
+>, <Line: -			int r = numPreconditions + numPostconditions;
+>, <Line: -			if(r == forest.numRoots()) {
+>, <Line: -				return null;
+>, <Line: -			} else {
+>, <Line: -				return forest.getRoot(r);
+>, <Line: -			}
+>]

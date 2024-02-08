@@ -1,0 +1,13 @@
+[<Line: +import com.projectkorra.rpg.event.EventManager;
+>, <Line: +				if (EventManager.marker.get(world).equalsIgnoreCase("LunarEclipse")) {
+>, <Line: +						whipLength = 0;
+>, <Line: +						whipLength = 0;
+>, <Line: +				} else if (EventManager.marker.get(world).equalsIgnoreCase("FullMoon")) {
+>]
+[<Line: -import com.projectkorra.projectkorra.BendingManager;
+>, <Line: -import com.projectkorra.rpg.WorldEvents;
+>, <Line: -				if (BendingManager.events.get(world).equalsIgnoreCase(WorldEvents.LunarEclipse.toString())) {
+>, <Line: -						whipLength = punchLengthFullMoon;
+>, <Line: -						whipLength = whipLengthFullMoon;
+>, <Line: -				} else if (BendingManager.events.get(world).equalsIgnoreCase("FullMoon")) {
+>]

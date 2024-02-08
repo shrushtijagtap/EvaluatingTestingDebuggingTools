@@ -1,0 +1,16 @@
+[<Line: +		IRI conceptIRI = IRI.create(ca.getConcept().getName());
+>, <Line: +		IRI roleIRI = IRI.create(opa.getProperty().getName());
+>, <Line: +		IRI roleIRI = IRI.create(opa.getProperty().getName());
+>, <Line: +			return null;
+>, <Line: +			return dataFactory.getOWLLiteral(value, v.getLanguage());
+>, <Line: +				return dataFactory.getOWLLiteral(value, datatype);
+>]
+[<Line: -		IRI conceptIRI = IRI.create(ca.getConcept().getPredicate().getName().toString());
+>, <Line: -		IRI roleIRI = IRI.create(opa.getProperty().getPredicate().getName().toString());
+>, <Line: -		IRI roleIRI = IRI.create(opa.getProperty().getPredicate().getName().toString());
+>, <Line: -		OWLLiteral result = null;
+>, <Line: -			result = null;
+>, <Line: -			result = dataFactory.getOWLLiteral(value, v.getLanguage());
+>, <Line: -				result = dataFactory.getOWLLiteral(value, datatype);
+>, <Line: -		return result;
+>]

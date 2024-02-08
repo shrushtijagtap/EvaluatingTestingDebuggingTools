@@ -1,0 +1,10 @@
+[<Line: +		assertEquals("jdbc", requestTraceJson.get("request_type").asText());
+>, <Line: +		assertEquals("SELECT", requestTraceJson.get("request_method").asText());
+>, <Line: +		assertEquals(1.0d, requestTraceJson.get("execution_time").asDouble(), 0.0000001);
+>, <Line: +		assertEquals("ElasticsearchExternalRequestTraceReporterIntegrationTest#test", requestTraceJson.get("executed_by").asText());
+>]
+[<Line: -		assertEquals("jdbc", requestTraceJson.get("requestType").asText());
+>, <Line: -		assertEquals("SELECT", requestTraceJson.get("requestMethod").asText());
+>, <Line: -		assertEquals(1.0d, requestTraceJson.get("executionTime").asDouble(), 0.0000001);
+>, <Line: -		assertEquals("ElasticsearchExternalRequestTraceReporterIntegrationTest#test", requestTraceJson.get("executedBy").asText());
+>]

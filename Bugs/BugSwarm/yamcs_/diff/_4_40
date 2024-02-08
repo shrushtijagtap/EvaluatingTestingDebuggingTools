@@ -1,0 +1,16 @@
+[<Line: +    @Test
+>, <Line: +    public void testParameterHistory() throws Exception {        
+>, <Line: +        generateData("2015-02-02T10:00:00", 3600);
+>, <Line: +        String respDl = restClient.doRequest("/archive/IntegrationTest/parameters/REFMDB/ccsds-apid?start=2015-02-02T10:10:00&norepeat=true&limit=3", HttpMethod.GET, "").get();
+>, <Line: +        ParameterData pdata = fromJson(respDl, org.yamcs.protobuf.SchemaPvalue.ParameterData.MERGE).build();
+>, <Line: +        assertEquals(1, pdata.getParameterCount());
+>, <Line: +        ParameterValue pv = pdata.getParameter(0);
+>, <Line: +        assertEquals(995, pv.getEngValue().getUint32Value());
+>, <Line: +        respDl = restClient.doRequest("/archive/IntegrationTest/parameters/REFMDB/ccsds-apid?start=2015-02-02T10:10:00&norepeat=false&limit=3", HttpMethod.GET, "").get();        
+>, <Line: +        pdata = fromJson(respDl, org.yamcs.protobuf.SchemaPvalue.ParameterData.MERGE).build();
+>, <Line: +        assertEquals(3, pdata.getParameterCount());
+>, <Line: +    }
+>]
+[<Line: -import org.yamcs.api.YamcsConnectionProperties;
+>, <Line: -import org.yamcs.api.rest.RestClient;
+>]

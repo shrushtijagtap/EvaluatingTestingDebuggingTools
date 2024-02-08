@@ -1,0 +1,8 @@
+[<Line: +package test.methodinterceptors.multipleinterceptors;
+>, <Line: +public class FirstInterceptor extends MethodNameFilterInterceptor {
+>, <Line: +    public FirstInterceptor() {
+>, <Line: +        super("a");
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

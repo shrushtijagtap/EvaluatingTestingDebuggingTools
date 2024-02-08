@@ -1,0 +1,12 @@
+[<Line: +package org.mp4parser.boxes.iso14496.part12;
+>, <Line: +import org.mp4parser.boxes.sampleentry.AudioSampleEntry;
+>, <Line: +import org.mp4parser.boxes.sampleentry.VisualSampleEntry;
+>, <Line: +import org.mp4parser.support.AbstractContainerBox;
+>, <Line: + * @see AudioSampleEntry#TYPE_ENCRYPTED
+>, <Line: + * @see VisualSampleEntry#TYPE_ENCRYPTED
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.googlecode.mp4parser.AbstractContainerBox;
+>, <Line: - * @see com.coremedia.iso.boxes.sampleentry.AudioSampleEntry#TYPE_ENCRYPTED
+>, <Line: - * @see com.coremedia.iso.boxes.sampleentry.VisualSampleEntry#TYPE_ENCRYPTED
+>]

@@ -1,0 +1,21 @@
+[<Line: +package org.mp4parser.tools.boxes;
+>, <Line: +import org.mp4parser.IsoFile;
+>, <Line: +import org.mp4parser.boxes.iso14496.part12.CompositionToDecodeBox;
+>, <Line: +import org.mp4parser.tools.ByteBufferByteChannel;
+>, <Line: +        CompositionToDecodeBox clsg = new CompositionToDecodeBox();
+>, <Line: +        IsoFile isoFile = new IsoFile(new ByteBufferByteChannel(baos.toByteArray()));
+>, <Line: +        CompositionToDecodeBox clsg2 = isoFile.getBoxes(CompositionToDecodeBox.class).get(0);
+>]
+[<Line: -package com.coremedia.iso.boxes;
+>, <Line: -import com.coremedia.iso.IsoFile;
+>, <Line: -import com.googlecode.mp4parser.DataSource;
+>, <Line: -import com.googlecode.mp4parser.FileDataSourceImpl;
+>, <Line: -import com.googlecode.mp4parser.MemoryDataSourceImpl;
+>, <Line: -import java.io.File;
+>, <Line: -import java.io.FileInputStream;
+>, <Line: -import java.io.FileOutputStream;
+>, <Line: -import java.nio.channels.FileChannel;
+>, <Line: -        CompositionShiftLeastGreatestAtom clsg = new CompositionShiftLeastGreatestAtom();
+>, <Line: -        IsoFile isoFile = new IsoFile(new MemoryDataSourceImpl(baos.toByteArray()));
+>, <Line: -        CompositionShiftLeastGreatestAtom clsg2 = isoFile.getBoxes(CompositionShiftLeastGreatestAtom.class).get(0);
+>]

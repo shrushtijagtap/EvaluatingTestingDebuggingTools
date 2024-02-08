@@ -1,0 +1,21 @@
+[<Line: +import melnorme.lang.ide.core.ISourceFile;
+>, <Line: +import melnorme.lang.ide.core.text.DocumentModification;
+>, <Line: +import melnorme.lang.ide.core.text.TextSourceUtils;
+>, <Line: +import melnorme.lang.utils.parse.StringParseSource;
+>, <Line: +import melnorme.utilbox.collections.ArrayList2;
+>, <Line: +	protected String fixIndentation(String docString) {
+>, <Line: +		final String indent = TextSourceUtils.getLineIndentForOffset(docString, getStart());
+>, <Line: +		String docContents = getDocument().get();
+>, <Line: +		final String indent = TextSourceUtils.getLineIndentForOffset(docContents, getStart());
+>, <Line: +			changes.add(new DocumentModification(parser.getReadPosition(), 0, indent));
+>]
+[<Line: -import melnorme.lang.ide.core.ISourceFile;
+>, <Line: -import melnorme.lang.ide.core.text.DocumentModification;
+>, <Line: -import melnorme.lang.ide.core.text.format.AutoEditUtils;
+>, <Line: -import melnorme.lang.utils.parse.StringParseSource;
+>, <Line: -import melnorme.utilbox.collections.ArrayList2;
+>, <Line: -	protected String fixIndentation(String docString) throws BadLocationException {
+>, <Line: -		final String indent = AutoEditUtils.getLineIndentOfOffset(getDocument(), getStart());
+>, <Line: -		final String indent = AutoEditUtils.getLineIndentOfOffset(getDocument(), getStart());
+>, <Line: -			changes.add(new DocumentModification(parser.getReadOffset(), 0, indent));
+>]

@@ -1,0 +1,50 @@
+[<Line: +abstract class AbstractDecoderTest extends Assert {
+>, <Line: +  static final String numeric_10                     = "..X..XX";
+>, <Line: +  static final String numeric_12                     = "..X.X.X";
+>, <Line: +  static final String numeric_1FNC1                  = "..XXX.X";
+>, <Line: +  // static final String numeric_FNC11                  = "XXX.XXX";
+>, <Line: +  static final String numeric2alpha                  = "....";
+>, <Line: +  static final String alpha_A                        = "X.....";
+>, <Line: +  static final String alpha_FNC1                      = ".XXXX";
+>, <Line: +  static final String alpha2numeric                  = "...";
+>, <Line: +  static final String alpha2isoiec646                = "..X..";
+>, <Line: +  static final String i646_B                         = "X.....X";
+>, <Line: +  static final String i646_C                         = "X....X.";
+>, <Line: +  static final String i646_FNC1                      = ".XXXX";
+>, <Line: +  static final String isoiec646_2alpha               = "..X..";
+>, <Line: +  static final String compressedGtin_900123456798908 = ".........X..XXX.X.X.X...XX.XXXXX.XXXX.X.";
+>, <Line: +  static final String compressedGtin_900000000000008 = "........................................";
+>, <Line: +  static final String compressed15bitWeight_1750     = "....XX.XX.X.XX.";
+>, <Line: +  static final String compressed15bitWeight_11750    = ".X.XX.XXXX..XX.";
+>, <Line: +  static final String compressed15bitWeight_0        = "...............";
+>, <Line: +  static final String compressed20bitWeight_1750     = ".........XX.XX.X.XX.";
+>, <Line: +  static final String compressedDate_March_12th_2010 = "....XXXX.X..XX..";
+>, <Line: +  static final String compressedDate_End             = "X..X.XX.........";
+>, <Line: +  static void assertCorrectBinaryString(CharSequence binaryString,
+>, <Line: +                                        String expectedNumber) throws NotFoundException, FormatException {
+>]
+[<Line: -public abstract class AbstractDecoderTest extends Assert {
+>, <Line: -  protected static final String numeric_10                     = "..X..XX";
+>, <Line: -  protected static final String numeric_12                     = "..X.X.X";
+>, <Line: -  protected static final String numeric_1FNC1                  = "..XXX.X";
+>, <Line: -  //protected static final String numeric_FNC11                  = "XXX.XXX";
+>, <Line: -  protected static final String numeric2alpha                  = "....";
+>, <Line: -  protected static final String alpha_A                        = "X.....";
+>, <Line: -  protected static final String alpha_FNC1                      = ".XXXX";
+>, <Line: -  protected static final String alpha2numeric                  = "...";
+>, <Line: -  protected static final String alpha2isoiec646                = "..X..";
+>, <Line: -  protected static final String i646_B                         = "X.....X";
+>, <Line: -  protected static final String i646_C                         = "X....X.";
+>, <Line: -  protected static final String i646_FNC1                      = ".XXXX";
+>, <Line: -  protected static final String isoiec646_2alpha               = "..X..";
+>, <Line: -  protected static final String compressedGtin_900123456798908 = ".........X..XXX.X.X.X...XX.XXXXX.XXXX.X.";
+>, <Line: -  protected static final String compressedGtin_900000000000008 = "........................................";
+>, <Line: -  protected static final String compressed15bitWeight_1750     = "....XX.XX.X.XX.";
+>, <Line: -  protected static final String compressed15bitWeight_11750    = ".X.XX.XXXX..XX.";
+>, <Line: -  protected static final String compressed15bitWeight_0        = "...............";
+>, <Line: -  protected static final String compressed20bitWeight_1750     = ".........XX.XX.X.XX.";
+>, <Line: -  protected static final String compressedDate_March_12th_2010 = "....XXXX.X..XX..";
+>, <Line: -  protected static final String compressedDate_End             = "X..X.XX.........";
+>, <Line: -  protected static void assertCorrectBinaryString(CharSequence binaryString,
+>, <Line: -                                                  String expectedNumber) throws NotFoundException, FormatException {
+>]

@@ -1,0 +1,9 @@
+[<Line: +import static org.apache.commons.io.IOUtils.toByteArray;
+>, <Line: +        super(documentIRI, () -> new XZInputStream(new ByteArrayInputStream(toByteArray(stream))),
+>, <Line: +            format, mime);
+>]
+[<Line: -import org.apache.commons.io.IOUtils;
+>, <Line: -        super(documentIRI, format, mime);
+>, <Line: -        inputStream = () -> new XZInputStream(
+>, <Line: -            new ByteArrayInputStream(IOUtils.toByteArray(stream)));
+>]

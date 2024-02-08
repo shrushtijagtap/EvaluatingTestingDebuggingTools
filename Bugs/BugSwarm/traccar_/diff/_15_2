@@ -1,0 +1,55 @@
+[<Line: +/*
+>, <Line: + * Copyright 2016 Anton Tananaev (anton.tananaev@gmail.com)
+>, <Line: + *
+>, <Line: + * Licensed under the Apache License, Version 2.0 (the "License");
+>, <Line: + * you may not use this file except in compliance with the License.
+>, <Line: + * You may obtain a copy of the License at
+>, <Line: + *
+>, <Line: + *     http://www.apache.org/licenses/LICENSE-2.0
+>, <Line: + *
+>, <Line: + * Unless required by applicable law or agreed to in writing, software
+>, <Line: + * distributed under the License is distributed on an "AS IS" BASIS,
+>, <Line: + * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>, <Line: + * See the License for the specific language governing permissions and
+>, <Line: + * limitations under the License.
+>, <Line: + */
+>, <Line: +package org.traccar.protocol;
+>, <Line: +import org.jboss.netty.buffer.ChannelBuffer;
+>, <Line: +import org.jboss.netty.buffer.ChannelBuffers;
+>, <Line: +import org.traccar.BaseProtocolEncoder;
+>, <Line: +import org.traccar.helper.Log;
+>, <Line: +import org.traccar.model.Command;
+>, <Line: +import java.nio.charset.StandardCharsets;
+>, <Line: +public class EelinkProtocolEncoder extends BaseProtocolEncoder {
+>, <Line: +    private ChannelBuffer encodeContent(String content) {
+>, <Line: +        ChannelBuffer buf = ChannelBuffers.dynamicBuffer();
+>, <Line: +        buf.writeByte(0x67);
+>, <Line: +        buf.writeByte(0x67);
+>, <Line: +        buf.writeByte(EelinkProtocolDecoder.MSG_DOWNLINK);
+>, <Line: +        buf.writeShort(2 + 1 + 4 + content.length()); // length
+>, <Line: +        buf.writeShort(0); // index
+>, <Line: +        buf.writeByte(0x01); // command
+>, <Line: +        buf.writeInt(0); // server id
+>, <Line: +        buf.writeBytes(content.getBytes(StandardCharsets.UTF_8));
+>, <Line: +        return buf;
+>, <Line: +    }
+>, <Line: +    @Override
+>, <Line: +    protected Object encodeCommand(Command command) {
+>, <Line: +        switch (command.getType()) {
+>, <Line: +            case Command.TYPE_CUSTOM:
+>, <Line: +                return encodeContent((String) command.getAttributes().get(Command.KEY_DATA));
+>, <Line: +            case Command.TYPE_ENGINE_STOP:
+>, <Line: +                return encodeContent("RELAY,1#");
+>, <Line: +            case Command.TYPE_ENGINE_RESUME:
+>, <Line: +                return encodeContent("RELAY,0#");
+>, <Line: +            case Command.TYPE_REBOOT_DEVICE:
+>, <Line: +                return encodeContent("RESET#");
+>, <Line: +            default:
+>, <Line: +                Log.warning(new UnsupportedOperationException(command.getType()));
+>, <Line: +                break;
+>, <Line: +        }
+>, <Line: +        return null;
+>, <Line: +    }
+>, <Line: +}
+>]
+[]

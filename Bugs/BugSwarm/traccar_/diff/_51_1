@@ -1,0 +1,4 @@
+[<Line: +        Assert.assertEquals("**,imei:123456789012345,C,05m", encoder.encodeCommand(command));
+>]
+[<Line: -        Assert.assertEquals("**,imei:123456789012345,C,05m;", encoder.encodeCommand(command));
+>]

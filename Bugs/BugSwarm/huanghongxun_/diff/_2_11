@@ -1,0 +1,9 @@
+[<Line: +            return dt.getProvider().getParsedDownloadURL(url);
+>, <Line: +            return getCustomizedURL(dt);
+>, <Line: +    }
+>, <Line: +    protected String getCustomizedURL(DownloadType dt) {
+>, <Line: +        return dt.getProvider().getVersionsDownloadURL() + id + "/" + id + ".jar";
+>]
+[<Line: -            return url;
+>, <Line: -            return dt.getProvider().getVersionsDownloadURL() + id + "/" + id + ".jar";
+>]

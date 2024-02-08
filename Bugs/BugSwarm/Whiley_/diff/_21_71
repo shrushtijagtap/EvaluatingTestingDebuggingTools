@@ -1,0 +1,4 @@
+[<Line: +ensures no { i in 0..|xs| | xs[i] > result }:
+>]
+[<Line: -ensures no { x in xs | x > result }:
+>]

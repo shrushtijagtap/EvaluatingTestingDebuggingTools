@@ -1,0 +1,8 @@
+[<Line: +          return reload(request);
+>, <Line: +  private Response reload(BaragonRequest request) throws Exception {
+>, <Line: +    mostRecentRequestId.set(request.getLoadBalancerRequestId());
+>, <Line: +      mostRecentRequestId.set(request.getLoadBalancerRequestId());
+>]
+[<Line: -          return reload();
+>, <Line: -  private Response reload() throws Exception {
+>]

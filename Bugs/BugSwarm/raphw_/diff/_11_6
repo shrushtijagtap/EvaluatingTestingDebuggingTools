@@ -1,0 +1,13 @@
+[<Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()),
+>, <Line: +                    is((Object) (descriptionStrategy == AgentBuilder.DescriptionStrategy.Default.HYBRID ? FOO : BAR)));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) BAR));
+>, <Line: +            assertThat(type.getDeclaredMethod(FOO).invoke(type.getDeclaredConstructor().newInstance()), is((Object) (descriptionStrategy == AgentBuilder.DescriptionStrategy.Default.HYBRID
+>]
+[<Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) (descriptionStrategy == AgentBuilder.DescriptionStrategy.Default.HYBRID
+>, <Line: -                    ? FOO
+>, <Line: -                    : BAR)));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) BAR));
+>, <Line: -            assertThat(type.getDeclaredMethod(FOO).invoke(type.newInstance()), is((Object) (descriptionStrategy == AgentBuilder.DescriptionStrategy.Default.HYBRID
+>]

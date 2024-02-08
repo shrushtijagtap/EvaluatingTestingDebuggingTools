@@ -1,0 +1,31 @@
+[<Line: +        request = appier.Request(
+>, <Line: +            "GET",
+>, <Line: +            "/",
+>, <Line: +            address = "127.0.0.1",
+>, <Line: +            environ = dict(
+>, <Line: +                SERVER_NAME = "local.com",
+>, <Line: +                SERVER_PORT = "80"
+>, <Line: +            )
+>, <Line: +        )
+>, <Line: +        self.assertEqual(request.get_host(), "local.com:80")
+>, <Line: +                SERVER_NAME = "local.com",
+>, <Line: +                SERVER_PORT = "80",
+>, <Line: +        request = appier.Request(
+>, <Line: +            "GET",
+>, <Line: +            "/",
+>, <Line: +            scheme = "http",
+>, <Line: +            address = "127.0.0.1",
+>, <Line: +            environ = dict(
+>, <Line: +                SERVER_NAME = "local.com",
+>, <Line: +                SERVER_PORT = "80"
+>, <Line: +            )
+>, <Line: +        )
+>, <Line: +        self.assertEqual(request.get_url(), "http://local.com:80/")
+>, <Line: +                SERVER_NAME = "local.com",
+>, <Line: +                SERVER_PORT = "80",
+>]
+[<Line: -        request = appier.Request("GET", "/", address = "127.0.0.1")
+>, <Line: -        self.assertEqual(request.get_host(), "127.0.0.1")
+>, <Line: -        request = appier.Request("GET", "/", scheme = "http", address = "127.0.0.1")
+>, <Line: -        self.assertEqual(request.get_url(), "http://127.0.0.1/")
+>]

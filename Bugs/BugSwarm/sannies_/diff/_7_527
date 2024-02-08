@@ -1,0 +1,12 @@
+[<Line: +package org.mp4parser.muxer.tracks.h264.parsing.read;
+>, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.CharCache;
+>, <Line: +    protected static int bitsRead;
+>, <Line: +    protected CharCache debugBits = new CharCache(50);
+>, <Line: +    int nBit;
+>]
+[<Line: -package com.googlecode.mp4parser.h264.read;
+>, <Line: -import com.googlecode.mp4parser.h264.CharCache;
+>, <Line: -    int nBit;
+>, <Line: -    protected static int bitsRead;
+>, <Line: -    protected CharCache debugBits = new CharCache(50);
+>]

@@ -1,0 +1,15 @@
+[<Line: +             * @param superClassInternalName             The internal name of this type's super type or {@code null} if no such super type is defined.
+>, <Line: +                         * @param typePool             The type pool to be used for locating non-generic type descriptions.
+>, <Line: +                         * @param annotationTokens     A mapping of the super type's type annotation tokens.
+>, <Line: +                         * @param definingType         The type that defines this super type.
+>, <Line: +                             * @param superClassToken     The super class's generic type token.
+>, <Line: +                 * @param receiverTypeAnnotationTokens      A mapping of the receiver type's annotation tokens.
+>, <Line: +                 * @param receiverTypeAnnotationTokens      A mapping of the receiver type's type annotation tokens.
+>, <Line: +                @SuppressFBWarnings(value = "URF_UNREAD_FIELD", justification = "To be removed once type annotations are in place")
+>]
+[<Line: -             * @param superClassInternalName              The internal name of this type's super type or {@code null} if no such super type is defined.
+>, <Line: -                         * @param typePool            The type pool to be used for locating non-generic type descriptions.
+>, <Line: -                         * @param annotationTokens    A mapping of the super type's type annotation tokens.
+>, <Line: -                         * @param definingType        The type that defines this super type.
+>, <Line: -                             * @param superClassToken      The super class's generic type token.
+>]

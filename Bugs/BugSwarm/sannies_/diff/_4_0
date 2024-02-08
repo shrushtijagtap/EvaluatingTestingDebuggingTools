@@ -1,0 +1,24 @@
+[<Line: +import org.mp4parser.muxer.FileDataSourceImpl;
+>, <Line: +import org.mp4parser.muxer.Track;
+>, <Line: +import org.mp4parser.muxer.tracks.MP3TrackImpl;
+>, <Line: +        Track audio = new MP3TrackImpl(new FileDataSourceImpl("C:\\Users\\sannies\\Downloads\\Allegro from Duet in C Major.mp3"));
+>, <Line: +        v.addTrack(audio);
+>]
+[<Line: -import org.mp4parser.muxer.tracks.ttml.TtmlTrackImpl;
+>, <Line: -import org.w3c.dom.Document;
+>, <Line: -import javax.xml.parsers.DocumentBuilder;
+>, <Line: -import javax.xml.parsers.DocumentBuilderFactory;
+>, <Line: -import java.util.Collections;
+>, <Line: -        Movie a1 = MovieCreator.build("C:\\dev\\DRMTODAY-872\\31245689abb7c52a3d0721447bddd6cd_Tears_Of_Steel_128000_eng.mp4");
+>, <Line: -        /*for (Track track : a1.getTracks()) {
+>, <Line: -            v.addTrack(track);
+>, <Line: -        }
+>, <Line: -        for (Track track : a2.getTracks()) {
+>, <Line: -            v.addTrack(track);
+>, <Line: -        }*/
+>, <Line: -        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+>, <Line: -        dbf.setNamespaceAware(true);
+>, <Line: -        DocumentBuilder db = dbf.newDocumentBuilder();
+>, <Line: -        Document d = db.parse("C:\\dev\\dashencrypt\\a.xml");
+>, <Line: -        v.addTrack(new TtmlTrackImpl("a.xml", Collections.singletonList(d)));
+>]

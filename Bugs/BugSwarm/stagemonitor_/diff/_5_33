@@ -1,0 +1,7 @@
+[<Line: +import org.stagemonitor.core.metrics.MetricUtils;
+>, <Line: +		if (MetricUtils.isRateLimitExceeded(maxReportingRate, context.getReportingRate())) {
+>]
+[<Line: -		if (maxReportingRate <= 0) {
+>, <Line: -			context.shouldNotReport(getClass());
+>, <Line: -		} else if (60 * context.getReportingRate().getOneMinuteRate() > maxReportingRate) {
+>]

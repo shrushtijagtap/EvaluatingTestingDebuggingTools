@@ -1,0 +1,56 @@
+[<Line: +    public void startBundle() throws BundleException, ClassNotFoundException, IllegalAccessException,
+>, <Line: +        InstantiationException {
+>, <Line: +        // Stream.of(System.getProperty("java.class.path").split(":")).filter(x
+>, <Line: +        // -> x.contains(".jar")).forEach(
+>, <Line: +        // System.out::println);
+>, <Line: +            if (fileName.endsWith("jar") && !fileName.contains("sources") && !fileName.contains("javadoc")) {
+>, <Line: +        List<String> bundles = Arrays.asList("org.apache.servicemix.bundles.javax-inject",
+>, <Line: +            "org.apache.servicemix.bundles.aopalliance", "slf4j-simple", "slf4j-api", "caffeine", "guava", "jsr305",
+>, <Line: +            "guice-multibindings", "guice-assistedinject", "guice-4", "commons-io", "commons-codec", "jcl-over-slf4j");
+>, <Line: +                    System.out.println("Can't install " + bundleName + ";");
+>, <Line: +                // System.out.println("BundleIsLoadableIntegrationTestCase.startBundle()
+>, <Line: +                // " + simple);
+>, <Line: +                    if (!"Fragment bundles can not be started.".equals(e.getMessage())) {
+>, <Line: +                        System.out.println("ERROR " + simple + " " + e.getMessage());
+>, <Line: +                    }
+>, <Line: +                System.out.println("ERROR " + e.getMessage());
+>, <Line: +        try {
+>, <Line: +            bundle.start();
+>, <Line: +            assertEquals("bundle state", bundle.getState(), Bundle.ACTIVE);
+>, <Line: +            Class<?> owlManagerClass = bundle.loadClass("org.semanticweb.owlapi.apibinding.OWLManager");
+>, <Line: +            assertNotNull("no class owlmanager", owlManagerClass);
+>, <Line: +            owlManagerClass.newInstance();
+>, <Line: +            assertNotEquals("OWLManager class from bundle class loader  equals OWLManager class from system class path",
+>, <Line: +                OWLManager.class, owlManagerClass);
+>, <Line: +        } catch (Exception e) {
+>, <Line: +            e.printStackTrace(System.out);
+>, <Line: +            throw e;
+>, <Line: +        }
+>, <Line: +                    // System.out.println("BundleIsLoadableIntegrationTestCase.getJarURL()
+>, <Line: +                    // " + string);
+>]
+[<Line: -import org.slf4j.Logger;
+>, <Line: -import org.slf4j.LoggerFactory;
+>, <Line: -    private static Logger logger = LoggerFactory
+>, <Line: -        .getLogger(BundleIsLoadableIntegrationTestCase.class);
+>, <Line: -    public void startBundle() throws BundleException, ClassNotFoundException,
+>, <Line: -        IllegalAccessException, InstantiationException {
+>, <Line: -            if (fileName.endsWith("jar") && !fileName.contains("sources")
+>, <Line: -                && !fileName.contains("javadoc")) {
+>, <Line: -        List<String> bundles = Arrays.asList("javax-inject", "aopalliance","caffeine",
+>, <Line: -            "guava", "guice-multibindings", "guice-assistedinject", "guice-4",
+>, <Line: -            "aopalliance", "commons-io", "commons-codec", "slf4j-simple", "jcl-over-slf4j", "slf4j-api");
+>, <Line: -                    logger.info("Can't install " + bundleName + ";");
+>, <Line: -                    e.printStackTrace();
+>, <Line: -                logger.info("Can't install: " + bundleName, e);
+>, <Line: -        bundle.start();
+>, <Line: -        assertEquals("bundle state", bundle.getState(), Bundle.ACTIVE);
+>, <Line: -        Class<?> owlManagerClass = bundle
+>, <Line: -            .loadClass("org.semanticweb.owlapi.apibinding.OWLManager");
+>, <Line: -        assertNotNull("no class owlmanager", owlManagerClass);
+>, <Line: -        owlManagerClass.newInstance();
+>, <Line: -        assertNotEquals(
+>, <Line: -            "OWLManager class from bundle class loader  equals OWLManager class from system class path",
+>, <Line: -            OWLManager.class, owlManagerClass);
+>, <Line: -                    System.out.println("BundleIsLoadableIntegrationTestCase.getJarURL() " + string);
+>]

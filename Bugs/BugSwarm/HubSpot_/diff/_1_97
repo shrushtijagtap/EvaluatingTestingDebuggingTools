@@ -1,0 +1,8 @@
+[<Line: +    url: -> "#{ config.apiRoot }/load-balancer/#{ @groupId }"
+>, <Line: +            url: "#{ @url() }/sources?authkey=#{ localStorage.getItem 'baragonAuthKey' }&source=#{source}"
+>, <Line: +            url: "#{ @url() }/sources?authkey=#{ localStorage.getItem 'baragonAuthKey' }&source=#{source}"
+>]
+[<Line: -    url: -> "#{ config.apiRoot }/load-balancer/#{ @groupId }?authkey=#{ config.authKey }"
+>, <Line: -            url: "#{ config.apiRoot }/load-balancer/#{ @groupId }/sources?authkey=#{ config.authKey }&source=#{source}"
+>, <Line: -            url: "#{ config.apiRoot }/load-balancer/#{ @groupId }/sources?authkey=#{ config.authKey }&source=#{source}"
+>]

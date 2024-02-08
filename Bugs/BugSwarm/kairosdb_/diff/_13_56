@@ -1,0 +1,19 @@
+[<Line: +			$(".aggregatorDev").hide();
+>, <Line: +<p>
+>, <Line: +	Post Processing Script: <input id="post_script" class="ui_widget" type="text" style="width: 150px;"/>
+>, <Line: +</p>
+>, <Line: +				<option value="filter">FILTER</option>
+>, <Line: +		<div style="float: left" class="aggregatorDev">
+>, <Line: +			<span class="header"
+>, <Line: +				  style="margin-left: 10px; vertical-align: top;">Dev Value</span>
+>, <Line: +			<select class="ui-widget aggregatorDevValue"
+>, <Line: +					style="margin-left: 10px;">
+>, <Line: +				<option value="value" selected="selected">Value</option>
+>, <Line: +				<option value="pos_sd">+SD</option>
+>, <Line: +				<option value="neg_sd">-SD</option>
+>, <Line: +			</select>
+>, <Line: +		</div>
+>]
+[<Line: -<p></p>
+>, <Line: -				<option value="filter">FILTER</option>
+>]

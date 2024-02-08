@@ -1,0 +1,7 @@
+[<Line: +    /**
+>, <Line: +     * Reset any internal buffers. In case a controller reset was detected call
+>, <Line: +     * this.
+>, <Line: +     */
+>, <Line: +    abstract public void resetBuffers();
+>]
+[]

@@ -1,0 +1,61 @@
+[<Line: +import net.bytebuddy.description.modifier.Ownership;
+>, <Line: +import net.bytebuddy.description.modifier.Visibility;
+>, <Line: +                .defineField(FOO, Foo.class, Visibility.PUBLIC)
+>, <Line: +                .intercept(Forwarding.toField(FOO))
+>, <Line: +                .defineField(FOO, Foo.class, Visibility.PUBLIC, Ownership.STATIC)
+>, <Line: +                .intercept(Forwarding.toField(FOO))
+>, <Line: +    @Test
+>, <Line: +    public void testForwardingComposition() throws Exception {
+>, <Line: +        Counter first = new Counter(), second = new Counter();
+>, <Line: +        DynamicType.Loaded<Counter> loaded = new ByteBuddy()
+>, <Line: +                .subclass(Counter.class)
+>, <Line: +                .method(isDeclaredBy(Counter.class))
+>, <Line: +                .intercept(Forwarding.to(first).andThen(Forwarding.to(second)))
+>, <Line: +                .make()
+>, <Line: +                .load(Counter.class.getClassLoader(), ClassLoadingStrategy.Default.WRAPPER);
+>, <Line: +        Counter counter = loaded.getLoaded().getDeclaredConstructor().newInstance();
+>, <Line: +        counter.count();
+>, <Line: +        assertThat(counter.value, is(0));
+>, <Line: +        assertThat(first.value, is(1));
+>, <Line: +        assertThat(second.value, is(1));
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +                .defineField(FOO, Qux.class)
+>, <Line: +                .intercept(Forwarding.toField(FOO))
+>, <Line: +                .make();
+>, <Line: +    }
+>, <Line: +    @Test(expected = IllegalStateException.class)
+>, <Line: +    public void testStaticForwardingThrowsException() throws Exception {
+>, <Line: +        new ByteBuddy()
+>, <Line: +                .subclass(Object.class)
+>, <Line: +                .defineMethod(FOO, void.class, Ownership.STATIC)
+>, <Line: +                .intercept(Forwarding.to(new Object()))
+>, <Line: +    @Test(expected = IllegalArgumentException.class)
+>, <Line: +    public void testIllegalTypeThrowsException() throws Exception {
+>, <Line: +        Forwarding.to("foo", Integer.class);
+>, <Line: +    }
+>, <Line: +        ObjectPropertyAssertion.of(Forwarding.PreparationHandler.ForField.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(Forwarding.PreparationHandler.ForInstance.class).apply();
+>, <Line: +        ObjectPropertyAssertion.of(Forwarding.TerminationHandler.class).apply();
+>, <Line: +    public static class Counter {
+>, <Line: +        public int value;
+>, <Line: +        public void count() {
+>, <Line: +            value++;
+>, <Line: +        }
+>, <Line: +    }
+>]
+[<Line: -import net.bytebuddy.dynamic.scaffold.InstrumentedType;
+>, <Line: -import static org.mockito.Mockito.mock;
+>, <Line: -import static org.mockito.Mockito.when;
+>, <Line: -                .intercept(Forwarding.toInstanceField(FOO, Foo.class))
+>, <Line: -                .intercept(Forwarding.toStaticField(FOO, Foo.class))
+>, <Line: -    @Test(expected = IllegalStateException.class)
+>, <Line: -    public void testInstanceFieldForwardingForInterfaceThrowsException() throws Exception {
+>, <Line: -        InstrumentedType instrumentedType = mock(InstrumentedType.class);
+>, <Line: -        when(instrumentedType.isInterface()).thenReturn(true);
+>, <Line: -        Forwarding.toInstanceField(FOO, Foo.class).prepare(instrumentedType);
+>, <Line: -    @Test(expected = IllegalArgumentException.class)
+>, <Line: -                .intercept(Forwarding.toStaticField(FOO, Qux.class))
+>, <Line: -        ObjectPropertyAssertion.of(Forwarding.PreparationHandler.ForInstanceField.class).apply();
+>, <Line: -        ObjectPropertyAssertion.of(Forwarding.PreparationHandler.ForStaticField.class).apply();
+>, <Line: -        ObjectPropertyAssertion.of(Forwarding.PreparationHandler.ForStaticInstance.class).apply();
+>]
