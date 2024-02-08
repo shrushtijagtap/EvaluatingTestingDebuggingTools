@@ -22,10 +22,15 @@ Number of buggy commits in Project 100 Java Maven: 12598  <br>
 Number of buggy commits in Project 1000 Java: 86771 <br>
 
 
-The table below provides information about the number of mined single statement bugs 
-
-
 ## Tests per Bug
+We cloned a subset of projects and ran mvn clean install, mvn test for each of them to get the number of tests present in every project suite which is as follows-
+
+| Activiti | Tests run: 107, Failures: 1, Errors: 0, Skipped: 0 |
+| Bukkit | Tests run: 906, Failures: 0, Errors: 0, Skipped: 3 |
+| hazelcast | Tests run: 61820, Failures: 76, Errors: 67, Skipped: 223 |
+| openmrs-core | Tests run: 4577, Failures: 2, Errors: 16, Skipped: 55 |
+| jsoup | Tests run: 1335, Failures: 0, Errors: 0, Skipped: 45 |
+| antlr4 | Tests run: 4, Failures: 0, Errors: 4, Skipped: 0 |
 
 Bug 1 from 100 Java Maven: 
 
@@ -46,7 +51,6 @@ Bug 3 from 100 Java Maven:
 Bug 4 from 1000 Java Maven: 
 
 ![alt text](https://github.com/ShreyaChaudhary1211/CS527-Project/blob/main/images/ManySStuBs4J_Bug4.png)
-
 
 
 
