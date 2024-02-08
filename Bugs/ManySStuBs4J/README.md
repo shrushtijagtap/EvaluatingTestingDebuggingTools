@@ -13,6 +13,7 @@ Every json contains the following fields about the bugs-
    
 We also can find statistics relate to the stubs in the dataset i.e For every stub, **which pattern the stub was** (i.e change modifier, less/ more specific if, missing throws exception, wrong function name, etc) and **how many times they occured in both the repositories** - 100 Java Maven Projects and top 1000 Java Projects repositories
 
+To fetch the bug files, bug fixed files and the diff we wrote a python script. The script goes to every bug and fix sha, downloads the files from there and also gets the difference between those sha. Because there are 1000+ projects with each project containing around 50-500 bugs, we have uploaded the files for the first 10 projects. But, our script does return every single bug from all the projects. Due to time constraint we were not able to keep it running for longer hours. But, we have uploaded data related to each and every bug of the 10 selected projects, which are uploaded in the repository above.
 
 ## Number of Bugs Collected
 
