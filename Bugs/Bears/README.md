@@ -2,6 +2,29 @@
 
 ## Explanation
 
+Bears provides a collection of bugs aimed to serve as a resource for 
+researchers to evaluate and develop program repair tools. 
+
+The dataset itself contains 118 bugs, collected from open source java projects found
+on GitHub. While manual verification is still needed, automation is leveraged to identify bugs
+through various methods such as scanning commit messages and issues.
+
+Once bugs are identified, Travis CI builds are gathered for the pre and post bug fix code states.
+When all data for a bug is gathered, a branch is created for it and each commit is mapped to the different
+states of the bug (pre-fix, failed-tests, post-fix, post-fix-eith-metadad).
+
+Users can checkout the branch for a bug, navigate hrough the commits and run the tests.
+
+## Commands to test the programs:
+
+```sh
+
+python3 scripts/checkout_bug.py --bugId <bug ID>
+python scripts/run_tests_bug.py --bugId <bug ID>
+
+```
+
+
 ## Number of Bugs Collected
 
 118 bugs collected
