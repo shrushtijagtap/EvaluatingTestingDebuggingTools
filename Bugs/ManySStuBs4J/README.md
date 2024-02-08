@@ -26,7 +26,7 @@ Number of buggy commits in Project 1000 Java: 86771 <br>
 We cloned a subset of projects and ran mvn clean install, mvn test for each of them to get the number of tests present in every project suite which is as follows-
 
 | Program | Tests run | Failures | Error | Skipped |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | Activiti | 107 | 1 | 0 | 0 |
 | Bukkit | 906 | 0 |0 | 3 |
 | hazelcast | 61820 | 76 | 67 | 223 |
