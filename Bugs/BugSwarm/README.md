@@ -1,9 +1,7 @@
 # BugSwarm Dataset
 ## Explanation
-This dataset conists of a collection of **software bugs and information about them from different open source software projects**. <br>
-It consisits of bugs, code lines changed, commits made and more github related information like commit id etc. It is usually collected using a tool <br>
-that crawls the repositories of the project and extract bugs and information like the time, what the bug is about, how the code was changed and <br>
-fixed, details about what ither files were affected etc. Automated scripts are used to extract data about bugs from the repositories.
+This dataset consits of a collection of **software bugs and information about them from different open source software projects**. <br>
+It consisits of bugs, code lines changed, commits made and more github related information like commit id etc. It is usually collected using a tool that crawls the repositories of the project and extract bugs and information like the time, what the bug is about, how the code was changed and fixed, details about what ither files were affected etc. Automated scripts are used to extract data about bugs from the repositories.
 **There are a total of 223 projects, 70 are in python whereas, 150 are in Java**.<br>
 The whole dataset is available on bugswarm.org<br> We explored the website and the dataset given on the website.The website describes the bug data like which repo it belongs to , job id, build id, no. of tests passed, no. of tests failed and a link to the difference between the buggy and correct code etc.<br>
 The website provides us with a .json file that has all the bugs listed with all the details.<br>
