@@ -11,11 +11,11 @@ for file in "$java_programs_dir"/*; do
         dirname="${filename%.*}"
         
         # Create necessary directories if not exist
-        mkdir -p "$dirname/Java/buggy"
-        mkdir -p "$dirname/Java/fixed"
+        mkdir -p "$dirname/Buggy-Version"
+        mkdir -p "$dirname/Patched-Version"
 
         # Copy file from java_programs to buggy folder
-        cp "$file" "$dirname/Java/buggy/$filename"
+        cp "$file" "$dirname/Buggy-Version/$filename"
     fi
 done
 
@@ -26,6 +26,6 @@ for file in "$correct_java_programs_dir"/*; do
         dirname="${filename%.*}"
         
         # Copy file from correct_java_programs to fixed folder
-        cp "$file" "$dirname/Java/fixed/$filename"
+        cp "$file" "$dirname/Patched-Version/$filename"
     fi
 done

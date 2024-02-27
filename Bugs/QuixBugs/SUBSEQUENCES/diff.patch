@@ -1,0 +1,19 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/SUBSEQUENCES//Buggy-Version/subsequences.java	2024-02-27 11:51:45
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/SUBSEQUENCES//Patched-Version/subsequences.java	2024-02-27 11:51:45
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -13,7 +13,9 @@
+ public class SUBSEQUENCES {
+     public static ArrayList<ArrayList> subsequences(int a, int b, int k) {
+         if (k == 0) {
+-            return new ArrayList();
++            ArrayList empty_set = new ArrayList<ArrayList>();
++            empty_set.add(new ArrayList());
++            return empty_set;
+         }
+ 
+         ArrayList ret = new ArrayList(50);

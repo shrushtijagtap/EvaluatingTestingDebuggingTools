@@ -1,0 +1,25 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/FLATTEN//Buggy-Version/flatten.java	2024-02-27 11:51:45
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/FLATTEN//Patched-Version/flatten.java	2024-02-27 11:51:45
+@@ -1,5 +1,6 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
++
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+@@ -18,12 +19,12 @@
+                 if (x instanceof ArrayList) {
+                     result.addAll((ArrayList) flatten(x));
+                 } else {
+-                    result.add(flatten(x));
++                    result.add((x));
+                 }
+             }
+             return result;
+         } else {
+-            return flatten(arr);
++            return arr;
+         }
+     }
+ }

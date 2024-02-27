@@ -1,0 +1,17 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/POSSIBLE_CHANGE//Buggy-Version/possible_change.java	2024-02-27 11:51:45
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/POSSIBLE_CHANGE//Patched-Version/possible_change.java	2024-02-27 11:51:45
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ /*
+  * To change this template, choose Tools | Templates
+@@ -14,7 +14,7 @@
+         if (total == 0) {
+             return 1;
+         }
+-        if (total < 0) {
++        if (total < 0 ||coins.length==0) {
+             return 0;
+         }
+ 

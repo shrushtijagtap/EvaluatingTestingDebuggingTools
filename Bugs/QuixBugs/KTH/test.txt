@@ -1,0 +1,4 @@
+java_testcases.junit.KTH_TEST.test_0
+java_testcases.junit.KTH_TEST.test_1
+java_testcases.junit.KTH_TEST.test_5
+java_testcases.junit.KTH_TEST.test_6

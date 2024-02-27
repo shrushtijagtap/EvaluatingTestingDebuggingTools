@@ -1,0 +1,2 @@
+java_testcases.junit.SHORTEST_PATH_LENGTH_TEST.test1
+java_testcases.junit.SHORTEST_PATH_LENGTH_TEST.test2

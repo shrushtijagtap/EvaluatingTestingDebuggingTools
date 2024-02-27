@@ -1,0 +1,23 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/SHORTEST_PATH_LENGTH//Buggy-Version/shortest_path_length.java	2024-02-27 11:51:45
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/SHORTEST_PATH_LENGTH//Patched-Version/shortest_path_length.java	2024-02-27 11:51:45
+@@ -1,6 +1,8 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
++import java_programs.Node;
++
+ /**
+  *
+  * @author Angela Chen
+\ No newline at end of file
+@@ -35,7 +37,7 @@
+                 }
+ 
+                 unvisitedNodes.put(nextnode, Math.min(unvisitedNodes.get(nextnode),
+-                        unvisitedNodes.get(nextnode) + length_by_edge.get(Arrays.asList(node, nextnode))));
++                        distance + length_by_edge.get(Arrays.asList(node, nextnode))));
+             }
+         }
+ 
+\ No newline at end of file

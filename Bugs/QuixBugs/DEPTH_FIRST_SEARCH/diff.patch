@@ -1,0 +1,24 @@
+--- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/DEPTH_FIRST_SEARCH//Buggy-Version/depth_first_search.java	2024-02-27 11:51:45
++++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/DEPTH_FIRST_SEARCH//Patched-Version/depth_first_search.java	2024-02-27 11:51:45
+@@ -1,10 +1,12 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+  */
+ 
++import java_programs.Node;
++
+ /**
+  *
+  * @author derricklin
+@@ -19,6 +21,7 @@
+                 } else if (node == goalnode) {
+                     return true;
+                 } else {
++                        nodesvisited.add(node);
+                     for (Node successornodes : node.getSuccessors()) {
+                         if (search(successornodes)) { return true; }
+                     }
