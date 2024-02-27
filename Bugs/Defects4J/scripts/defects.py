@@ -2,9 +2,12 @@ import csv
 import shutil
 import subprocess
 import os
+# import git
+from distutils.dir_util import copy_tree
+
 
 project_bugs = {}
-
+failingTests = []
 field_list = [
     'bug.id',
     'project.id',
@@ -30,59 +33,78 @@ field_list = [
 ]
 field_list_string = ','.join(field_list)
 
-csv_file_path = 'defects4j/output.csv'
+csv_file_path = '/Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/output.csv'
 
 
 def checkout_and_copy(bug_id, project_id, modified_classes, work_dir, repo_path):
-
+    # Create a folder for both buggy and fixed versions
     buggy_dir = os.path.join(f'{project_id}_{bug_id}', 'buggy')
     fixed_dir = os.path.join(f'{project_id}_{bug_id}', 'fixed')
     os.makedirs(buggy_dir, exist_ok=True)
     os.makedirs(fixed_dir, exist_ok=True)
 
-    # Checkout Buggy
-    subprocess.run(['defects4j', 'checkout', '-p', project_id, '-v', f"{bug_id}b", '-w', work_dir], check=True, cwd=repo_path)
+    # print(project_id)
 
-    # Modified class struct
-    # org.apache.commons.math3.fraction.BigFraction;org.apache.commons.math3.fraction.Fraction
-    for cls in modified_classes.split(';'):
-        src_file_path = os.path.join(work_dir, 'src', cls.replace('.', '/') + '.java')
-        dest_file_path = os.path.join(buggy_dir, cls.replace('.', '/') + '.java')
-        os.makedirs(os.path.dirname(dest_file_path), exist_ok=True)
-        shutil.copy(src_file_path, dest_file_path)
+    # Checkout Buggy
+    subprocess.run(['defects4j', 'checkout', '-p', project_id, '-v', f"{bug_id}b", '-w', work_dir], check=True,
+                   cwd=repo_path)
+
+    # For each class, the file is copied to the buggy folder
+    # This part can be cleaned up since its basically the same for both buggy and fixed
+    # print(work_dir, 'ttttt', repo_path + project_id + bug_id)
+    copy_tree(work_dir, buggy_dir)
+    # for cls in modified_classes.split(';'):
+    #     src_file_path = os.path.join(work_dir, 'source', cls.replace('.', '/') + '.java')
+    #     dest_file_path = os.path.join(buggy_dir, cls.replace('.', '/') + '.java')
+    #     os.makedirs(os.path.dirname(dest_file_path), exist_ok=True)
+    #     shutil.copy(src_file_path, dest_file_path)
 
     # Checkout Fix
     subprocess.run(['defects4j', 'checkout', '-p', project_id, '-v', f"{bug_id}f", '-w', work_dir], check=True,
                    cwd=repo_path)
-
-    for cls in modified_classes.split(';'):
-        src_file_path = os.path.join(work_dir, 'src', cls.replace('.', '/') + '.java')
-        dest_file_path = os.path.join(fixed_dir, cls.replace('.', '/') + '.java')
-        os.makedirs(os.path.dirname(dest_file_path), exist_ok=True)
-        shutil.copy(src_file_path, dest_file_path)
+    copy_tree(work_dir, fixed_dir)
+    # for cls in modified_classes.split(';'):
+    #     src_file_path = os.path.join(work_dir, 'source', cls.replace('.', '/') + '.java')
+    #     dest_file_path = os.path.join(fixed_dir, cls.replace('.', '/') + '.java')
+    #     os.makedirs(os.path.dirname(dest_file_path), exist_ok=True)
+    #     shutil.copy(src_file_path, dest_file_path)
 
     patch_file = os.path.join(f'{project_id}_{bug_id}', 'src.patch')
     with open(patch_file, 'w') as patch_out:
         subprocess.run(['git', 'diff', '--no-index', f'{buggy_dir}', f'{fixed_dir}'],
                        stdout=patch_out)
+        
+    failedTests_file = os.path.join(f'{project_id}_{bug_id}', 'test.txt')
+    with open(failedTests_file, 'w') as test_out:
+        for test in failingTests:
+            test_out.write(test+"\n")
 
 
-def process_bug(project_id, repo_path):
+def get_buffy_and_fixed_versions(repo_path):
+    # Each line in the csv file is a bug for the project
+    with open(csv_file_path, newline='') as csvfile:
+        reader = csv.DictReader(csvfile, fieldnames=field_list)
+        for row in reader:
+            bug_id = row['bug.id']
+            project_id = row['project.id']
+            modified_classes = row['classes.modified']
 
-    subprocess.run(['git', 'checkout', 'master'], cwd=repo_path)
+            # This is where the repo will be cloned
+            work_dir = os.path.join('/tmp/temp_storage', f"{project_id}_{bug_id}")
+            # print(work_dir)
+            checkout_and_copy(bug_id, project_id, modified_classes, work_dir, repo_path)
+            #row['revision.id.buggy'], row['revision.id.fixed']
 
-    # Temp output file cleanup
-    if os.path.exists(csv_file_path):
-        os.remove(csv_file_path)
 
-    # Generate temp output file for the project
-    subprocess.run(['defects4j', 'query', '-p', project_id, '-q', field_list_string, '-o', 'output.csv'], cwd=repo_path)
-
+def fill_project_bug_dict():
     with open(csv_file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile, fieldnames=field_list)
         for row in reader:
             test = len(row['tests.relevant'].split(';'))
             test_failed = len(row['tests.trigger'].split(';'))
+
+            for t in row['tests.trigger'].split(';'):
+                failingTests.append(t)
 
             if project_bugs.get(row['project.id']) is None:
                 project_bugs[row['project.id']] = {"passed": test - test_failed, "failed": test_failed}
@@ -90,27 +112,35 @@ def process_bug(project_id, repo_path):
                 project_bugs[row['project.id']]["passed"] += (test - test_failed)
                 project_bugs[row['project.id']]["failed"] += test_failed
 
-    # with open(csv_file_path, newline='') as csvfile:
-    #     reader = csv.DictReader(csvfile, fieldnames=field_list)
-    #     for row in reader:
-    #         bug_id = row['bug.id']
-    #         project_id = row['project.id']
-    #         modified_classes = row['classes.modified']
-    #
-    #         work_dir = os.path.join('/tmp/temp_storage', f"{project_id}_{bug_id}")
-    #
-    #         if int(bug_id) > 169:
-    #             checkout_and_copy(bug_id, project_id, row['revision.id.buggy'], row['revision.id.fixed'], modified_classes,
-    #                           work_dir, repo_path)
+
+def process_bug(project_id, repo_path):
+    subprocess.run(['git', 'checkout', 'master'], cwd=repo_path)
+
+    # Temp output file cleanup
+    if os.path.exists(csv_file_path):
+        os.remove(csv_file_path)
+
+    # Generate temp output file for the project
+    # This file has all the metadata for the bugs of a single project
+    subprocess.run(['defects4j', 'query', '-p', project_id, '-q', field_list_string, '-o', 'output.csv'], cwd=repo_path)
+
+    # fill_project_bug_dict was used to count the number of bugs that passed and failed
+    fill_project_bug_dict()
+
+    get_buffy_and_fixed_versions(repo_path)
 
 
 def main(repo_path):
     # Load bug IDs
-    project_ids = ['Chart', 'Cli', 'Closure', 'Codec', 'Collections', 'Compress', 'Csv', 'Gson', 'JacksonCore',
-                   'JacksonDatabind', 'JacksonXml', 'Jsoup', 'JxPath', 'Lang', 'Math', 'Mockito', 'Time']
+    project_ids = ['Jsoup', 'Chart', 'Cli', 'Closure', 'Codec', 'Collections', 'Compress', 'Csv', 'Gson', 'JacksonCore',
+                   'JacksonDatabind', 'JacksonXml', 'JxPath', 'Lang', 'Math', 'Mockito', 'Time']
 
     for project_id in project_ids:
         process_bug(project_id, repo_path)
 
     for project_name, bug_count in project_bugs.items():
         print(f'| {project_name} | {bug_count["passed"]} | {bug_count["failed"]} |')
+
+
+main("/Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/")
+#main("https://github.com/rjust/defects4j.git")
