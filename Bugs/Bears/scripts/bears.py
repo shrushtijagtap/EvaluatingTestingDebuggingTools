@@ -1,26 +1,36 @@
 import json
+import random
 import subprocess
 import os
+import shutil
 
-project_bugs = {}
+# Target repository is in the parent directory/bears-benchmark
+repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'bears-benchmark'))
+bug_entry = {}
+
+selected_bug_ids = ['Bears-106', 'Bears-108', 'Bears-115', 'Bears-118', 'Bears-123', 'Bears-127', 'Bears-128',
+                    'Bears-129', 'Bears-130', 'Bears-137', 'Bears-141', 'Bears-143', 'Bears-197', 'Bears-198',
+                    'Bears-21', 'Bears-222', 'Bears-226', 'Bears-245', 'Bears-246', 'Bears-99']
 
 
-# Load the JSON data
 def load_json_data(filepath):
     with open(filepath, 'r') as file:
         return json.load(file)
 
 
-def get_failing_classes_info(bug_id, data):
+def print_random_bug_ids():
+    all_bug_ids = [bug['bugId'] for bug in load_json_data(f'{repo_path}/scripts/data/bug_id_and_branch.json')]
+    print(sorted(random.sample(all_bug_ids, 20)))
+
+
+def get_failed_test_list(bug_id, data):
     for project in data:
         if project['bugId'] == bug_id:
-            class_name = project['diff'].split(' ')[2]
-            class_name = class_name[2:]
-            return class_name
-    return ""
+            return [failure['testClass'] for failure in project['tests']['failureDetails']]
+    return []
 
 
-def get_branch(bug_id, data):
+def get_branch_name(bug_id, data):
     for project in data:
         if project['bugId'] == bug_id:
             repo_name = project['bugName']
@@ -28,52 +38,48 @@ def get_branch(bug_id, data):
     return ""
 
 
-def process_test_per_bug(bug_id, repo_path, data):
-    for entry in data:
-        if entry['bugId'] == bug_id:
-            if project_bugs.get(entry['repository']['name']) is None:
-                project_bugs[entry['repository']['name']] = 1
-            else:
-                project_bugs[entry['repository']['name']] += 1
+def process_bug(bug_id, data):
+    # Add dictionary entry for the bug id
+    bug_entry[bug_id] = {}
 
+    # Add list of failed tests for the bug id
+    bug_entry[bug_id]['failed_tests'] = get_failed_test_list(bug_id, data)
 
-def process_bug(bug_id, repo_path, data):
-    failing_class_name = get_failing_classes_info(bug_id, data)
+    # Create a directory for the bug id
+    buggy_dir = os.path.join(bug_id, 'Buggy-Version')
+    fixed_dir = os.path.join(bug_id, 'Fixed-Version')
 
-    # Checkout bug branch
-    branch_name = get_branch(bug_id, data)
+    # Checkout the bug branch
+    branch_name = get_branch_name(bug_id, data)
     subprocess.run(['git', 'checkout', branch_name], cwd=repo_path)
 
-    # Remove the class name from the path
-    failing_class_path_no_name = "/".join(failing_class_name.split("/")[:-1])
-    buggy_dir = os.path.join(bug_id, 'buggy', failing_class_path_no_name)
-    fixed_dir = os.path.join(bug_id, 'fixed', failing_class_path_no_name)
-    os.makedirs(buggy_dir, exist_ok=True)
-    os.makedirs(fixed_dir, exist_ok=True)
-
-    # Commit - Buggy version
+    # Checkout the buggy commit
     subprocess.run(['git', 'checkout', 'HEAD^1'], cwd=repo_path)
-    subprocess.run(['cp', f'{repo_path}/{failing_class_name}', fixed_dir])
+    ## Copy the entire directory to the target directory
+    shutil.copytree(repo_path, buggy_dir)
 
-    # Commit - Fix version
+    # Checkout the fix commit
     subprocess.run(['git', 'checkout', 'HEAD^1'], cwd=repo_path)
-    subprocess.run(['cp', f'{repo_path}/{failing_class_name}', buggy_dir])
+    ## Copy the entire directory to the target directory
+    shutil.copytree(repo_path, fixed_dir)
 
-    a = f'{buggy_dir}/{failing_class_name.split("/")[-1]}'
-    b = f'{fixed_dir}/{failing_class_name.split("/")[-1]}'
-
-    patch = os.path.join(bug_id, 'src.patch')
-    with open(patch, 'w') as patch_out:
-        subprocess.run(['git', 'diff', '--no-index', f'{a}', f'{b}'],
-                       stdout=patch_out)
+    # Generate the diff file
+    diff_file = os.path.join(bug_id, 'Diff')
+    with open(diff_file, 'w') as diff:
+        subprocess.run(['git', 'diff', '--no-index', buggy_dir, fixed_dir], stdout=diff)
 
 
-def main(repo_path):
-    bug_ids = [bug['bugId'] for bug in load_json_data(f'{repo_path}/scripts/data/bug_id_and_branch.json')]
+if __name__ == '__main__':
     data = load_json_data(f'{repo_path}/docs/data/bears-bugs.json')
 
-    for bug_id in bug_ids:
-        process_test_per_bug(bug_id, repo_path, data)
+    # For each selected bug, run the function to extract buggy/fixed versions and generate the diff file
+    for bug_id in selected_bug_ids:
+        process_bug(bug_id, data)
+        # Add a file with the failed test list
+        with open(f'{bug_id}/test.txt', 'w') as file:
+            file.write('\n'.join(bug_entry[bug_id]['failed_tests']))
 
-    for project_name, bug_count in project_bugs.items():
-        print(f'| {project_name} | {bug_count} |')
+        # Remove the repo
+        subprocess.run(['rm', '-rf', repo_path])
+        # Copy the repo again
+        shutil.copytree(f"{repo_path}_copy", repo_path)
