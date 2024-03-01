@@ -1,0 +1,53 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for edu.harvard:h2ms:jar:0.0.1-SNAPSHOT
+[WARNING] 'dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: org.postgresql:postgresql:jar -> version (?) vs 9.4-1206-jdbc42 @ line 139, column 21
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building h2ms 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ h2ms ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] Copying 9 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ h2ms ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 50 source files to /root/workspace/2018swecapstone/h2ms/363210218/target/classes
+[WARNING] /root/workspace/2018swecapstone/h2ms/363210218/src/main/java/edu/harvard/h2ms/service/RfidScannerServiceImpl.java: /root/workspace/2018swecapstone/h2ms/363210218/src/main/java/edu/harvard/h2ms/service/RfidScannerServiceImpl.java uses unchecked or unsafe operations.
+[WARNING] /root/workspace/2018swecapstone/h2ms/363210218/src/main/java/edu/harvard/h2ms/service/RfidScannerServiceImpl.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ h2ms ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/2018swecapstone/h2ms/363210218/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ h2ms ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 10 source files to /root/workspace/2018swecapstone/h2ms/363210218/target/test-classes
+[WARNING] /root/workspace/2018swecapstone/h2ms/363210218/src/test/java/edu/harvard/h2ms/controllers/EventControllerTests.java: Some input files use or override a deprecated API.
+[WARNING] /root/workspace/2018swecapstone/h2ms/363210218/src/test/java/edu/harvard/h2ms/controllers/EventControllerTests.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.18.1:test (default-test) @ h2ms ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.6:jar (default-jar) @ h2ms ---
+[INFO] Building jar: /root/workspace/2018swecapstone/h2ms/363210218/target/h2ms-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:1.5.10.RELEASE:repackage (default) @ h2ms ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ h2ms ---
+[INFO] Installing /root/workspace/2018swecapstone/h2ms/363210218/target/h2ms-0.0.1-SNAPSHOT.jar to /root/./workspace/2018swecapstone/h2ms/363210218/.m2/edu/harvard/h2ms/0.0.1-SNAPSHOT/h2ms-0.0.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/2018swecapstone/h2ms/363210218/pom.xml to /root/./workspace/2018swecapstone/h2ms/363210218/.m2/edu/harvard/h2ms/0.0.1-SNAPSHOT/h2ms-0.0.1-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 7.785 s
+[INFO] Finished at: 2018-09-03T13:51:07+02:00
+[INFO] Final Memory: 47M/630M
+[INFO] ------------------------------------------------------------------------

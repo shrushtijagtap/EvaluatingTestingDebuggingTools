@@ -1,0 +1,74 @@
+[INFO] Scanning for projects...
+[INFO] Inspecting build with total of 1 modules...
+[INFO] Installing Nexus Staging features:
+[INFO]   ... total of 1 executions of maven-deploy-plugin replaced with nexus-staging-maven-plugin
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building MiLib 1.9-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (enforce-maven) @ milib ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.8:run (default) @ milib ---
+[INFO] Executing tasks
+
+main:
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- buildnumber-maven-plugin:1.4:create (create-buildnumber) @ milib ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/root/workspace/milaboratory/milib/444855015' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /root/workspace/milaboratory/milib/444855015
+[INFO] Storing buildNumber: 039ae34 at timestamp: 1540253738654
+[WARNING] Cannot get the branch information from the git repository: 
+Detecting the current branch failed: fatal: ref HEAD is not a symbolic ref
+
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/root/workspace/milaboratory/milib/444855015' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /root/workspace/milaboratory/milib/444855015
+[INFO] Storing buildScmBranch: UNKNOWN
+[INFO] 
+[INFO] --- buildnumber-maven-plugin:1.4:create-metadata (create-metadata) @ milib ---
+[INFO] ShortRevision tag detected. The value is '7'.
+[INFO] Executing: /bin/sh -c cd '/root/workspace/milaboratory/milib/444855015' && 'git' 'rev-parse' '--verify' '--short=7' 'HEAD'
+[INFO] Working directory: /root/workspace/milaboratory/milib/444855015
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ milib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 9 resources
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ milib ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 288 source files to /root/workspace/milaboratory/milib/444855015/target/classes
+[INFO] /root/workspace/milaboratory/milib/444855015/src/main/java/com/milaboratory/primitivio/PrimitivO.java: Some input files use unchecked or unsafe operations.
+[INFO] /root/workspace/milaboratory/milib/444855015/src/main/java/com/milaboratory/primitivio/PrimitivO.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ milib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 10 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ milib ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.0:test (default-test) @ milib ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:3.1.0:jar (default-jar) @ milib ---
+[INFO] Building jar: /root/workspace/milaboratory/milib/444855015/target/milib-1.9-SNAPSHOT.jar
+[INFO] 
+[INFO] --- maven-jar-plugin:3.1.0:test-jar (default) @ milib ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ milib ---
+[INFO] Installing /root/workspace/milaboratory/milib/444855015/target/milib-1.9-SNAPSHOT.jar to /root/./workspace/milaboratory/milib/444855015/.m2/com/milaboratory/milib/1.9-SNAPSHOT/milib-1.9-SNAPSHOT.jar
+[INFO] Installing /root/workspace/milaboratory/milib/444855015/pom.xml to /root/./workspace/milaboratory/milib/444855015/.m2/com/milaboratory/milib/1.9-SNAPSHOT/milib-1.9-SNAPSHOT.pom
+[INFO] Installing /root/workspace/milaboratory/milib/444855015/target/generated/build-metadata/milib-build.properties to /root/./workspace/milaboratory/milib/444855015/.m2/com/milaboratory/milib/1.9-SNAPSHOT/milib-1.9-SNAPSHOT-build.properties
+[INFO] Installing /root/workspace/milaboratory/milib/444855015/target/milib-1.9-SNAPSHOT-tests.jar to /root/./workspace/milaboratory/milib/444855015/.m2/com/milaboratory/milib/1.9-SNAPSHOT/milib-1.9-SNAPSHOT-tests.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 9.913 s
+[INFO] Finished at: 2018-10-23T02:15:45+02:00
+[INFO] Final Memory: 30M/596M
+[INFO] ------------------------------------------------------------------------

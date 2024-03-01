@@ -1,0 +1,1 @@
+com.milaboratory.core.alignment.kaligner2.KAligner2Test

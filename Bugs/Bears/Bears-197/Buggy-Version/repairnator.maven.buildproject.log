@@ -1,0 +1,688 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Jasig CAS Client for Java
+[INFO] Jasig CAS Client for Java - Core
+[INFO] Jasig CAS Client for Java - Atlassian Integration
+[INFO] Jasig CAS Client for Java - JBoss Integration
+[INFO] Jasig CAS Client for Java - Distributed Proxy Storage Support: EhCache
+[INFO] Jasig CAS Client for Java - Distributed Proxy Storage Support:
+        Memcached
+[INFO] Jasig CAS Client for Java - SAML Protocol Support
+[INFO] Jasig CAS Client for Java - Common Tomcat Integration Support
+[INFO] Jasig CAS Client for Java - Tomcat 6.x Integration
+[INFO] Jasig CAS Client for Java - Tomcat 7.x Integration
+[INFO] Jasig CAS Client for Java - Tomcat 8.x Integration
+[INFO] Jasig CAS Client for Java - Tomcat 8.5.x Integration
+[INFO] Jasig CAS Client for Java - Jetty Container Integration
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client/3.5.1-SNAPSHOT/cas-client-3.5.1-SNAPSHOT.pom
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - Core 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-core ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-core ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-core ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-core ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 83 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-core/target/classes
+[WARNING] /root/workspace/apereo/java-cas-client/408206584/cas-client-core/src/main/java/org/jasig/cas/client/proxy/Cas20ProxyRetriever.java: /root/workspace/apereo/java-cas-client/408206584/cas-client-core/src/main/java/org/jasig/cas/client/proxy/Cas20ProxyRetriever.java uses or overrides a deprecated API.
+[WARNING] /root/workspace/apereo/java-cas-client/408206584/cas-client-core/src/main/java/org/jasig/cas/client/proxy/Cas20ProxyRetriever.java: Recompile with -Xlint:deprecation for details.
+[WARNING] /root/workspace/apereo/java-cas-client/408206584/cas-client-core/src/main/java/org/jasig/cas/client/configuration/ConfigurationStrategyName.java: Some input files use unchecked or unsafe operations.
+[WARNING] /root/workspace/apereo/java-cas-client/408206584/cas-client-core/src/main/java/org/jasig/cas/client/configuration/ConfigurationStrategyName.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-core ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-core ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 34 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-core/target/test-classes
+[WARNING] /root/workspace/apereo/java-cas-client/408206584/cas-client-core/src/test/java/org/jasig/cas/client/util/CommonUtilsTests.java: /root/workspace/apereo/java-cas-client/408206584/cas-client-core/src/test/java/org/jasig/cas/client/util/CommonUtilsTests.java uses or overrides a deprecated API.
+[WARNING] /root/workspace/apereo/java-cas-client/408206584/cas-client-core/src/test/java/org/jasig/cas/client/util/CommonUtilsTests.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-core ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.6:jar (default-jar) @ cas-client-core ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-core/target/cas-client-core-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-core >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-core ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-core ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-core <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-core ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-core/target/cas-client-core-3.5.1-SNAPSHOT-sources.jar
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-core ---
+[INFO] 
+[INFO] --- maven-jar-plugin:2.6:test-jar (default) @ cas-client-core ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-core/target/cas-client-core-3.5.1-SNAPSHOT-tests.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-core ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-core/target/cas-client-core-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-core/3.5.1-SNAPSHOT/cas-client-core-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-core/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-core/3.5.1-SNAPSHOT/cas-client-core-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-core/target/cas-client-core-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-core/3.5.1-SNAPSHOT/cas-client-core-3.5.1-SNAPSHOT-sources.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-core/target/cas-client-core-3.5.1-SNAPSHOT-tests.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-core/3.5.1-SNAPSHOT/cas-client-core-3.5.1-SNAPSHOT-tests.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - Atlassian Integration 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-atlassian ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-atlassian ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-integration-atlassian ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-atlassian/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-integration-atlassian ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 4 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-atlassian/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-integration-atlassian ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-atlassian/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-integration-atlassian ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-integration-atlassian ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-integration-atlassian ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-atlassian/target/cas-client-integration-atlassian-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-integration-atlassian >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-atlassian ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-atlassian ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-integration-atlassian <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-integration-atlassian ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-integration-atlassian ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-integration-atlassian ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-atlassian/target/cas-client-integration-atlassian-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-atlassian/3.5.1-SNAPSHOT/cas-client-integration-atlassian-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-atlassian/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-atlassian/3.5.1-SNAPSHOT/cas-client-integration-atlassian-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-atlassian/target/cas-client-integration-atlassian-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-atlassian/3.5.1-SNAPSHOT/cas-client-integration-atlassian-3.5.1-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - JBoss Integration 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-jboss ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-jboss ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-integration-jboss ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jboss/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-integration-jboss ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jboss/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-integration-jboss ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jboss/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-integration-jboss ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-integration-jboss ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-integration-jboss ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jboss/target/cas-client-integration-jboss-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-integration-jboss >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-jboss ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-jboss ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-integration-jboss <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-integration-jboss ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-integration-jboss ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-integration-jboss ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jboss/target/cas-client-integration-jboss-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-jboss/3.5.1-SNAPSHOT/cas-client-integration-jboss-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jboss/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-jboss/3.5.1-SNAPSHOT/cas-client-integration-jboss-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jboss/target/cas-client-integration-jboss-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-jboss/3.5.1-SNAPSHOT/cas-client-integration-jboss-3.5.1-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - Distributed Proxy Storage Support: EhCache 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-support-distributed-ehcache ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-support-distributed-ehcache ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-support-distributed-ehcache ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-ehcache/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-support-distributed-ehcache ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-ehcache/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-support-distributed-ehcache ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-ehcache/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-support-distributed-ehcache ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-ehcache/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-support-distributed-ehcache ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-support-distributed-ehcache ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-ehcache/target/cas-client-support-distributed-ehcache-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-support-distributed-ehcache >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-support-distributed-ehcache ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-support-distributed-ehcache ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-support-distributed-ehcache <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-support-distributed-ehcache ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-support-distributed-ehcache ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-support-distributed-ehcache ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-ehcache/target/cas-client-support-distributed-ehcache-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-support-distributed-ehcache/3.5.1-SNAPSHOT/cas-client-support-distributed-ehcache-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-ehcache/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-support-distributed-ehcache/3.5.1-SNAPSHOT/cas-client-support-distributed-ehcache-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-ehcache/target/cas-client-support-distributed-ehcache-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-support-distributed-ehcache/3.5.1-SNAPSHOT/cas-client-support-distributed-ehcache-3.5.1-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - Distributed Proxy Storage Support:
+        Memcached 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-support-distributed-memcached ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-support-distributed-memcached ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-support-distributed-memcached ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-memcached/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-support-distributed-memcached ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-memcached/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-support-distributed-memcached ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-memcached/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-support-distributed-memcached ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-support-distributed-memcached ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-support-distributed-memcached ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-memcached/target/cas-client-support-distributed-memcached-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-support-distributed-memcached >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-support-distributed-memcached ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-support-distributed-memcached ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-support-distributed-memcached <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-support-distributed-memcached ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-support-distributed-memcached ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-support-distributed-memcached ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-memcached/target/cas-client-support-distributed-memcached-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-support-distributed-memcached/3.5.1-SNAPSHOT/cas-client-support-distributed-memcached-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-memcached/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-support-distributed-memcached/3.5.1-SNAPSHOT/cas-client-support-distributed-memcached-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-support-distributed-memcached/target/cas-client-support-distributed-memcached-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-support-distributed-memcached/3.5.1-SNAPSHOT/cas-client-support-distributed-memcached-3.5.1-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - SAML Protocol Support 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-support-saml ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-support-saml ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-support-saml ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-support-saml/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-support-saml ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 4 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-support-saml/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-support-saml ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-support-saml/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-support-saml ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-support-saml/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-support-saml ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-support-saml ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-support-saml/target/cas-client-support-saml-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-support-saml >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-support-saml ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-support-saml ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-support-saml <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-support-saml ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-support-saml ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-support-saml ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-support-saml/target/cas-client-support-saml-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-support-saml/3.5.1-SNAPSHOT/cas-client-support-saml-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-support-saml/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-support-saml/3.5.1-SNAPSHOT/cas-client-support-saml-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-support-saml/target/cas-client-support-saml-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-support-saml/3.5.1-SNAPSHOT/cas-client-support-saml-3.5.1-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - Common Tomcat Integration Support 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-tomcat-common ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-tomcat-common ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-integration-tomcat-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-common/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-integration-tomcat-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 8 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-common/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-integration-tomcat-common ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-integration-tomcat-common ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-common/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-integration-tomcat-common ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-integration-tomcat-common ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-common/target/cas-client-integration-tomcat-common-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-integration-tomcat-common >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-tomcat-common ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-tomcat-common ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-integration-tomcat-common <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-integration-tomcat-common ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-integration-tomcat-common ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-integration-tomcat-common ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-common/target/cas-client-integration-tomcat-common-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-common/3.5.1-SNAPSHOT/cas-client-integration-tomcat-common-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-common/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-common/3.5.1-SNAPSHOT/cas-client-integration-tomcat-common-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-common/target/cas-client-integration-tomcat-common-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-common/3.5.1-SNAPSHOT/cas-client-integration-tomcat-common-3.5.1-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - Tomcat 6.x Integration 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-tomcat-v6 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-tomcat-v6 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-integration-tomcat-v6 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v6/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-integration-tomcat-v6 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 15 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v6/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-integration-tomcat-v6 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v6/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-integration-tomcat-v6 ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-integration-tomcat-v6 ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-integration-tomcat-v6 ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v6/target/cas-client-integration-tomcat-v6-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-integration-tomcat-v6 >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-tomcat-v6 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-tomcat-v6 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-integration-tomcat-v6 <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-integration-tomcat-v6 ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-integration-tomcat-v6 ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-integration-tomcat-v6 ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v6/target/cas-client-integration-tomcat-v6-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v6/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v6-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v6/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v6/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v6-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v6/target/cas-client-integration-tomcat-v6-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v6/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v6-3.5.1-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - Tomcat 7.x Integration 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-tomcat-v7 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-tomcat-v7 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-integration-tomcat-v7 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v7/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-integration-tomcat-v7 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 14 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v7/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-integration-tomcat-v7 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v7/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-integration-tomcat-v7 ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-integration-tomcat-v7 ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-integration-tomcat-v7 ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v7/target/cas-client-integration-tomcat-v7-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-integration-tomcat-v7 >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-tomcat-v7 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-tomcat-v7 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-integration-tomcat-v7 <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-integration-tomcat-v7 ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-integration-tomcat-v7 ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-integration-tomcat-v7 ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v7/target/cas-client-integration-tomcat-v7-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v7/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v7-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v7/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v7/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v7-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v7/target/cas-client-integration-tomcat-v7-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v7/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v7-3.5.1-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - Tomcat 8.x Integration 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-tomcat-v8 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-tomcat-v8 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-integration-tomcat-v8 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v8/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-integration-tomcat-v8 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 14 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v8/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-integration-tomcat-v8 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v8/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-integration-tomcat-v8 ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-integration-tomcat-v8 ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-integration-tomcat-v8 ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v8/target/cas-client-integration-tomcat-v8-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-integration-tomcat-v8 >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-tomcat-v8 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-tomcat-v8 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-integration-tomcat-v8 <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-integration-tomcat-v8 ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-integration-tomcat-v8 ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-integration-tomcat-v8 ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v8/target/cas-client-integration-tomcat-v8-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v8/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v8-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v8/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v8/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v8-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v8/target/cas-client-integration-tomcat-v8-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v8/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v8-3.5.1-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - Tomcat 8.5.x Integration 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-tomcat-v85 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-tomcat-v85 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-integration-tomcat-v85 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v85/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-integration-tomcat-v85 ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 14 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v85/target/classes
+[WARNING] /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v85/src/main/java/org/jasig/cas/client/tomcat/v85/AbstractCasRealm.java: /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v85/src/main/java/org/jasig/cas/client/tomcat/v85/AbstractCasRealm.java uses or overrides a deprecated API.
+[WARNING] /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v85/src/main/java/org/jasig/cas/client/tomcat/v85/AbstractCasRealm.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-integration-tomcat-v85 ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v85/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-integration-tomcat-v85 ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-integration-tomcat-v85 ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-integration-tomcat-v85 ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v85/target/cas-client-integration-tomcat-v85-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-integration-tomcat-v85 >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-tomcat-v85 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-tomcat-v85 ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-integration-tomcat-v85 <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-integration-tomcat-v85 ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-integration-tomcat-v85 ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-integration-tomcat-v85 ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v85/target/cas-client-integration-tomcat-v85-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v85/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v85-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v85/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v85/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v85-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-tomcat-v85/target/cas-client-integration-tomcat-v85-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-tomcat-v85/3.5.1-SNAPSHOT/cas-client-integration-tomcat-v85-3.5.1-SNAPSHOT-sources.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Jasig CAS Client for Java - Jetty Container Integration 3.5.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-jetty ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-jetty ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ cas-client-integration-jetty ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jetty/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ cas-client-integration-jetty ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jetty/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ cas-client-integration-jetty ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ cas-client-integration-jetty ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jetty/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.6:test (default-test) @ cas-client-integration-jetty ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ cas-client-integration-jetty ---
+[INFO] Building jar: /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jetty/target/cas-client-integration-jetty-3.5.1-SNAPSHOT.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:2.2.1:jar (attach-sources) > generate-sources @ cas-client-integration-jetty >>>
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ cas-client-integration-jetty ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-banned-dependencies) @ cas-client-integration-jetty ---
+[INFO] Skipping Rule Enforcement.
+[INFO] 
+[INFO] <<< maven-source-plugin:2.2.1:jar (attach-sources) < generate-sources @ cas-client-integration-jetty <<<
+[INFO] 
+[INFO] --- maven-source-plugin:2.2.1:jar (attach-sources) @ cas-client-integration-jetty ---
+[INFO] 
+[INFO] --- maven-site-plugin:3.1.r1174614:attach-descriptor (attach-descriptor) @ cas-client-integration-jetty ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ cas-client-integration-jetty ---
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jetty/target/cas-client-integration-jetty-3.5.1-SNAPSHOT.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-jetty/3.5.1-SNAPSHOT/cas-client-integration-jetty-3.5.1-SNAPSHOT.jar
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jetty/pom.xml to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-jetty/3.5.1-SNAPSHOT/cas-client-integration-jetty-3.5.1-SNAPSHOT.pom
+[INFO] Installing /root/workspace/apereo/java-cas-client/408206584/cas-client-integration-jetty/target/cas-client-integration-jetty-3.5.1-SNAPSHOT-sources.jar to /root/./workspace/apereo/java-cas-client/408206584/.m2/org/jasig/cas/client/cas-client-integration-jetty/3.5.1-SNAPSHOT/cas-client-integration-jetty-3.5.1-SNAPSHOT-sources.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] Jasig CAS Client for Java .......................... SUCCESS [  2.093 s]
+[INFO] Jasig CAS Client for Java - Core ................... SUCCESS [  3.696 s]
+[INFO] Jasig CAS Client for Java - Atlassian Integration .. SUCCESS [  1.045 s]
+[INFO] Jasig CAS Client for Java - JBoss Integration ...... SUCCESS [  0.203 s]
+[INFO] Jasig CAS Client for Java - Distributed Proxy Storage Support: EhCache SUCCESS [  0.235 s]
+[INFO] Jasig CAS Client for Java - Distributed Proxy Storage Support:
+        Memcached SUCCESS [  0.108 s]
+[INFO] Jasig CAS Client for Java - SAML Protocol Support .. SUCCESS [  0.262 s]
+[INFO] Jasig CAS Client for Java - Common Tomcat Integration Support SUCCESS [  0.185 s]
+[INFO] Jasig CAS Client for Java - Tomcat 6.x Integration . SUCCESS [  0.198 s]
+[INFO] Jasig CAS Client for Java - Tomcat 7.x Integration . SUCCESS [  0.184 s]
+[INFO] Jasig CAS Client for Java - Tomcat 8.x Integration . SUCCESS [  0.162 s]
+[INFO] Jasig CAS Client for Java - Tomcat 8.5.x Integration SUCCESS [  0.153 s]
+[INFO] Jasig CAS Client for Java - Jetty Container Integration SUCCESS [  0.222 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 9.481 s
+[INFO] Finished at: 2018-10-10T09:02:37+02:00
+[INFO] Final Memory: 47M/623M
+[INFO] ------------------------------------------------------------------------
