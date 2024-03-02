@@ -4,6 +4,8 @@ import re
 import fnmatch
 import os
 import subprocess
+import lizard
+
 
 def codebleu(buggy_path, patched_path):
     buggy_code = ""
@@ -73,12 +75,18 @@ def calculateNoOfMethodsChanged(lines):
     return noOfMethodsChanged
 
 
+def find_cyclomatic_complexity(path):
+    file_res_lizard = lizard.analyze_file(path)
+    return file_res_lizard.function_list[0]._dict_['cyclomatic_complexity']
+
+
 def get_subdirectories(folder_path):
     entries = os.listdir(folder_path)
     subdirectories = [entry for entry in entries if os.path.isdir(os.path.join(folder_path, entry))]
     return subdirectories
 
 
+#next 2 methods dont work
 def find_file_by_partial_path(folder_path, partial_file_path):
     for root, dirs, files in os.walk(folder_path):
         for file in files:
@@ -151,14 +159,20 @@ for dir in dir_paths:
         file_loc_buggy = find_full_path(path+"/Buggy-Version", mc)
         file_loc_fixed = find_full_path(path+"/Patched-Version", mc)
 
-        # if result1 == 0 and result2 == 0:
         print(file_loc_buggy, " ", file_loc_fixed)
 
         if file_loc_buggy and file_loc_fixed:
-            levenshteinDistance = find_levenshtein(result1.stdout, result2.stdout)
-            codebleu_dis = codebleu(result1.stdout, result2.stdout)
+            levenshteinDistance = find_levenshtein(file_loc_buggy, file_loc_fixed)
+            codebleu_dis = codebleu(file_loc_buggy, file_loc_fixed)
+            buggy_cyclomatic_complexity = find_cyclomatic_complexity(file_loc_buggy)
+            fixed_cyclomatic_complexity = find_cyclomatic_complexity(file_loc_fixed)
+            diff_cyclomatic_complexity = abs(buggy_cyclomatic_complexity - fixed_cyclomatic_complexity)
 
             print("levenshteinDistance :", levenshteinDistance)
             print("codebleu_dis :", codebleu_dis)
+            print("buggy_cyclomatic_complexity :", buggy_cyclomatic_complexity)
+            print("fixed_cyclomatic_complexity :", fixed_cyclomatic_complexity)
+            print("diff_cyclomatic_complexity :", diff_cyclomatic_complexity)
+            
         else:
             print("Couldn't fetch modified file")
