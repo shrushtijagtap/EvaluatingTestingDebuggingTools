@@ -7,25 +7,6 @@ index 6dbab43..b6f27d8 100644
  pid=JacksonXml
 -vid=4b
 +vid=4f
-diff --git a/JacksonXml_4/buggy/.git/HEAD b/JacksonXml_4/fixed/.git/HEAD
-index a08fc57..3eea483 100644
---- a/JacksonXml_4/buggy/.git/HEAD
-+++ b/JacksonXml_4/fixed/.git/HEAD
-@@ -1 +1 @@
--3538a55fcf7bbee296b010bdfcde3dc334f52353
-+1427cda0e0cc05820ec7dd4d435754b6cb96392d
-diff --git a/JacksonXml_4/buggy/.git/index b/JacksonXml_4/fixed/.git/index
-index 70005e2..824e31f 100644
-Binary files a/JacksonXml_4/buggy/.git/index and b/JacksonXml_4/fixed/.git/index differ
-diff --git a/JacksonXml_4/buggy/.git/logs/HEAD b/JacksonXml_4/fixed/.git/logs/HEAD
-index fe7c9dd..0e008e5 100644
---- a/JacksonXml_4/buggy/.git/logs/HEAD
-+++ b/JacksonXml_4/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@ ff8ce24281b4ce1e67865d74b2b64cde9939dc9c 2c5f6f4e0f7bbcfa566fbc91ee57baf8dd7a371
- 3538a55fcf7bbee296b010bdfcde3dc334f52353 94e7676ef19a212c042b75d29420a977ad9d4942 defects4j <defects4j@localhost> 1709004529 -0800	checkout: moving from 3538a55fcf7bbee296b010bdfcde3dc334f52353 to D4J_JacksonXml_4_POST_FIX_REVISION
- 94e7676ef19a212c042b75d29420a977ad9d4942 4945a8b73e81dda7827cae4e09a9e4b7fd91f494 defects4j <defects4j@localhost> 1709004529 -0800	commit: D4J_JacksonXml_4_PRE_FIX_REVISION
- 4945a8b73e81dda7827cae4e09a9e4b7fd91f494 3538a55fcf7bbee296b010bdfcde3dc334f52353 defects4j <defects4j@localhost> 1709004529 -0800	checkout: moving from 4945a8b73e81dda7827cae4e09a9e4b7fd91f494 to D4J_JacksonXml_4_BUGGY_VERSION
-+3538a55fcf7bbee296b010bdfcde3dc334f52353 1427cda0e0cc05820ec7dd4d435754b6cb96392d defects4j <defects4j@localhost> 1709004529 -0800	checkout: moving from 3538a55fcf7bbee296b010bdfcde3dc334f52353 to D4J_JacksonXml_4_FIXED_VERSION
 diff --git a/JacksonXml_4/buggy/src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java b/JacksonXml_4/fixed/src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java
 index 327d149..40dd64d 100644
 --- a/JacksonXml_4/buggy/src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java

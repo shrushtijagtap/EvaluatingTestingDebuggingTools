@@ -1,0 +1,2 @@
+com/fasterxml/jackson/core/io/NumberInput.java
+com/fasterxml/jackson/core/util/TextBuffer.java

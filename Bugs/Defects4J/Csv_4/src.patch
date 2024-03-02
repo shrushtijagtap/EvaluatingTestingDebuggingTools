@@ -7,25 +7,6 @@ index c8bf0ef..b3e3152 100644
  pid=Csv
 -vid=4b
 +vid=4f
-diff --git a/Csv_4/buggy/.git/HEAD b/Csv_4/fixed/.git/HEAD
-index 2feafc2..0389360 100644
---- a/Csv_4/buggy/.git/HEAD
-+++ b/Csv_4/fixed/.git/HEAD
-@@ -1 +1 @@
--d1fb567faea77fb1d9a33f0d4be17b1a250b0503
-+0dc956f14fae3feb5bdb29ccb6954745d44da8c9
-diff --git a/Csv_4/buggy/.git/index b/Csv_4/fixed/.git/index
-index 5c00b5e..d3c7900 100644
-Binary files a/Csv_4/buggy/.git/index and b/Csv_4/fixed/.git/index differ
-diff --git a/Csv_4/buggy/.git/logs/HEAD b/Csv_4/fixed/.git/logs/HEAD
-index 90ccb1b..5532721 100644
---- a/Csv_4/buggy/.git/logs/HEAD
-+++ b/Csv_4/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@ b2143fe513dba767a0fc0e9e821a2f19ee84345e 0dc956f14fae3feb5bdb29ccb6954745d44da8c
- d1fb567faea77fb1d9a33f0d4be17b1a250b0503 914d8bd06786aff214a23adafe1bb68d8d0c44ac defects4j <defects4j@localhost> 1709004154 -0800	checkout: moving from d1fb567faea77fb1d9a33f0d4be17b1a250b0503 to D4J_Csv_4_POST_FIX_REVISION
- 914d8bd06786aff214a23adafe1bb68d8d0c44ac 898b19416f686bf1565b283c9f48cffeadf52472 defects4j <defects4j@localhost> 1709004154 -0800	commit: D4J_Csv_4_PRE_FIX_REVISION
- 898b19416f686bf1565b283c9f48cffeadf52472 d1fb567faea77fb1d9a33f0d4be17b1a250b0503 defects4j <defects4j@localhost> 1709004154 -0800	checkout: moving from 898b19416f686bf1565b283c9f48cffeadf52472 to D4J_Csv_4_BUGGY_VERSION
-+d1fb567faea77fb1d9a33f0d4be17b1a250b0503 0dc956f14fae3feb5bdb29ccb6954745d44da8c9 defects4j <defects4j@localhost> 1709004154 -0800	checkout: moving from d1fb567faea77fb1d9a33f0d4be17b1a250b0503 to D4J_Csv_4_FIXED_VERSION
 diff --git a/Csv_4/buggy/src/main/java/org/apache/commons/csv/CSVParser.java b/Csv_4/fixed/src/main/java/org/apache/commons/csv/CSVParser.java
 index 9d56f1a..e97a364 100644
 --- a/Csv_4/buggy/src/main/java/org/apache/commons/csv/CSVParser.java

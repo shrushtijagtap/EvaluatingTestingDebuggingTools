@@ -7,25 +7,6 @@ index 0b95ee4..39761f8 100644
  pid=Collections
 -vid=27b
 +vid=27f
-diff --git a/Collections_27/buggy/.git/HEAD b/Collections_27/fixed/.git/HEAD
-index cb39eab..8d004cc 100644
---- a/Collections_27/buggy/.git/HEAD
-+++ b/Collections_27/fixed/.git/HEAD
-@@ -1 +1 @@
--134852e78f1f02e9118b9ef5a6104d10e9ec1324
-+660e19c6e0d093f6cdcebd58eccab3d1ff5b0071
-diff --git a/Collections_27/buggy/.git/index b/Collections_27/fixed/.git/index
-index 962b861..0be4acb 100644
-Binary files a/Collections_27/buggy/.git/index and b/Collections_27/fixed/.git/index differ
-diff --git a/Collections_27/buggy/.git/logs/HEAD b/Collections_27/fixed/.git/logs/HEAD
-index 8483592..674c493 100644
---- a/Collections_27/buggy/.git/logs/HEAD
-+++ b/Collections_27/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@
- 134852e78f1f02e9118b9ef5a6104d10e9ec1324 709cd424f8b664b9058e334a93d90d050db3e54e defects4j <defects4j@localhost> 1709004007 -0800	checkout: moving from 134852e78f1f02e9118b9ef5a6104d10e9ec1324 to D4J_Collections_27_POST_FIX_REVISION
- 709cd424f8b664b9058e334a93d90d050db3e54e 3114936f4ec48e866b9ca7ea5e445acbe200dd5e defects4j <defects4j@localhost> 1709004007 -0800	commit: D4J_Collections_27_PRE_FIX_REVISION
- 3114936f4ec48e866b9ca7ea5e445acbe200dd5e 134852e78f1f02e9118b9ef5a6104d10e9ec1324 defects4j <defects4j@localhost> 1709004007 -0800	checkout: moving from 3114936f4ec48e866b9ca7ea5e445acbe200dd5e to D4J_Collections_27_BUGGY_VERSION
-+134852e78f1f02e9118b9ef5a6104d10e9ec1324 660e19c6e0d093f6cdcebd58eccab3d1ff5b0071 defects4j <defects4j@localhost> 1709004007 -0800	checkout: moving from 134852e78f1f02e9118b9ef5a6104d10e9ec1324 to D4J_Collections_27_FIXED_VERSION
 diff --git a/Collections_27/buggy/src/main/java/org/apache/commons/collections4/map/MultiValueMap.java b/Collections_27/fixed/src/main/java/org/apache/commons/collections4/map/MultiValueMap.java
 index d131af2..3c690ab 100644
 --- a/Collections_27/buggy/src/main/java/org/apache/commons/collections4/map/MultiValueMap.java

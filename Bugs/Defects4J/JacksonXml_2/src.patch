@@ -7,25 +7,6 @@ index e06a579..0ac3f9c 100644
  pid=JacksonXml
 -vid=2b
 +vid=2f
-diff --git a/JacksonXml_2/buggy/.git/HEAD b/JacksonXml_2/fixed/.git/HEAD
-index 178c082..a8e609e 100644
---- a/JacksonXml_2/buggy/.git/HEAD
-+++ b/JacksonXml_2/fixed/.git/HEAD
-@@ -1 +1 @@
--948ade06b3b7ece2ff5999fbfa77de2229cedd2e
-+1c28aa53ce70789be02fa67ea6c86baf5f4a7bab
-diff --git a/JacksonXml_2/buggy/.git/index b/JacksonXml_2/fixed/.git/index
-index 9f414ae..1769525 100644
-Binary files a/JacksonXml_2/buggy/.git/index and b/JacksonXml_2/fixed/.git/index differ
-diff --git a/JacksonXml_2/buggy/.git/logs/HEAD b/JacksonXml_2/fixed/.git/logs/HEAD
-index a3eb041..1781ad6 100644
---- a/JacksonXml_2/buggy/.git/logs/HEAD
-+++ b/JacksonXml_2/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@ fc83f35463564c925e020246eb32fe5873241044 6c1be44429ec09051ab655514e1f1fa83dc4460
- 948ade06b3b7ece2ff5999fbfa77de2229cedd2e fc83f35463564c925e020246eb32fe5873241044 defects4j <defects4j@localhost> 1709004527 -0800	checkout: moving from 948ade06b3b7ece2ff5999fbfa77de2229cedd2e to D4J_JacksonXml_2_POST_FIX_REVISION
- fc83f35463564c925e020246eb32fe5873241044 51c1d45cc9ccb210894a529e01880b12d5fa4849 defects4j <defects4j@localhost> 1709004527 -0800	commit: D4J_JacksonXml_2_PRE_FIX_REVISION
- 51c1d45cc9ccb210894a529e01880b12d5fa4849 948ade06b3b7ece2ff5999fbfa77de2229cedd2e defects4j <defects4j@localhost> 1709004527 -0800	checkout: moving from 51c1d45cc9ccb210894a529e01880b12d5fa4849 to D4J_JacksonXml_2_BUGGY_VERSION
-+948ade06b3b7ece2ff5999fbfa77de2229cedd2e 1c28aa53ce70789be02fa67ea6c86baf5f4a7bab defects4j <defects4j@localhost> 1709004527 -0800	checkout: moving from 948ade06b3b7ece2ff5999fbfa77de2229cedd2e to D4J_JacksonXml_2_FIXED_VERSION
 diff --git a/JacksonXml_2/buggy/src/main/java/com/fasterxml/jackson/dataformat/xml/deser/XmlTokenStream.java b/JacksonXml_2/fixed/src/main/java/com/fasterxml/jackson/dataformat/xml/deser/XmlTokenStream.java
 index fe37ee9..5e03896 100644
 --- a/JacksonXml_2/buggy/src/main/java/com/fasterxml/jackson/dataformat/xml/deser/XmlTokenStream.java

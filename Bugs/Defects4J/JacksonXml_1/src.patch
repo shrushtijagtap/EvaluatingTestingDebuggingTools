@@ -7,25 +7,6 @@ index f2b8794..c39576a 100644
  pid=JacksonXml
 -vid=1b
 +vid=1f
-diff --git a/JacksonXml_1/buggy/.git/HEAD b/JacksonXml_1/fixed/.git/HEAD
-index 5bde47c..9d2df61 100644
---- a/JacksonXml_1/buggy/.git/HEAD
-+++ b/JacksonXml_1/fixed/.git/HEAD
-@@ -1 +1 @@
--ccec799bb129af35d765affb614654998f0e2735
-+79d4bc6577ebafe52bac76a3bed36feaf83a3ffd
-diff --git a/JacksonXml_1/buggy/.git/index b/JacksonXml_1/fixed/.git/index
-index 2145508..72d641e 100644
-Binary files a/JacksonXml_1/buggy/.git/index and b/JacksonXml_1/fixed/.git/index differ
-diff --git a/JacksonXml_1/buggy/.git/logs/HEAD b/JacksonXml_1/fixed/.git/logs/HEAD
-index a01d5d1..138f8cf 100644
---- a/JacksonXml_1/buggy/.git/logs/HEAD
-+++ b/JacksonXml_1/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@ ff8ce24281b4ce1e67865d74b2b64cde9939dc9c 2d7683ed820116b77cba9b4b290cd7ce7dfa5cf
- ccec799bb129af35d765affb614654998f0e2735 74bb1979201442e65776cab35153994ab05d8be0 defects4j <defects4j@localhost> 1709004526 -0800	checkout: moving from ccec799bb129af35d765affb614654998f0e2735 to D4J_JacksonXml_1_POST_FIX_REVISION
- 74bb1979201442e65776cab35153994ab05d8be0 391cb8e2b2997b5ca17765bd38a5654595816257 defects4j <defects4j@localhost> 1709004526 -0800	commit: D4J_JacksonXml_1_PRE_FIX_REVISION
- 391cb8e2b2997b5ca17765bd38a5654595816257 ccec799bb129af35d765affb614654998f0e2735 defects4j <defects4j@localhost> 1709004526 -0800	checkout: moving from 391cb8e2b2997b5ca17765bd38a5654595816257 to D4J_JacksonXml_1_BUGGY_VERSION
-+ccec799bb129af35d765affb614654998f0e2735 79d4bc6577ebafe52bac76a3bed36feaf83a3ffd defects4j <defects4j@localhost> 1709004526 -0800	checkout: moving from ccec799bb129af35d765affb614654998f0e2735 to D4J_JacksonXml_1_FIXED_VERSION
 diff --git a/JacksonXml_1/buggy/src/main/java/com/fasterxml/jackson/dataformat/xml/deser/FromXmlParser.java b/JacksonXml_1/fixed/src/main/java/com/fasterxml/jackson/dataformat/xml/deser/FromXmlParser.java
 index 91b14dd..58618b4 100644
 --- a/JacksonXml_1/buggy/src/main/java/com/fasterxml/jackson/dataformat/xml/deser/FromXmlParser.java

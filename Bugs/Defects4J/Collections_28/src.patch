@@ -7,25 +7,6 @@ index 99576ed..2267c36 100644
  pid=Collections
 -vid=28b
 +vid=28f
-diff --git a/Collections_28/buggy/.git/HEAD b/Collections_28/fixed/.git/HEAD
-index 2c6f6ab..7ac2418 100644
---- a/Collections_28/buggy/.git/HEAD
-+++ b/Collections_28/fixed/.git/HEAD
-@@ -1 +1 @@
--f34a0999f54e7045cccb4fff3332d2539f2950ae
-+4a0acc6d20b161b46b9bcf9220c60ccaf54a89aa
-diff --git a/Collections_28/buggy/.git/index b/Collections_28/fixed/.git/index
-index 7a447d0..2fa8fe4 100644
-Binary files a/Collections_28/buggy/.git/index and b/Collections_28/fixed/.git/index differ
-diff --git a/Collections_28/buggy/.git/logs/HEAD b/Collections_28/fixed/.git/logs/HEAD
-index a4a7678..b6b2b82 100644
---- a/Collections_28/buggy/.git/logs/HEAD
-+++ b/Collections_28/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@ c3efdf844a0a217e6df14fe0378024c9388b6af9 4a0acc6d20b161b46b9bcf9220c60ccaf54a89a
- f34a0999f54e7045cccb4fff3332d2539f2950ae 972932e65be3a3c9d703f6e2b52b2849ab344784 defects4j <defects4j@localhost> 1709004008 -0800	checkout: moving from f34a0999f54e7045cccb4fff3332d2539f2950ae to D4J_Collections_28_POST_FIX_REVISION
- 972932e65be3a3c9d703f6e2b52b2849ab344784 5ca6e2d21e3cc014e555bf3172b9311e09a41fc1 defects4j <defects4j@localhost> 1709004008 -0800	commit: D4J_Collections_28_PRE_FIX_REVISION
- 5ca6e2d21e3cc014e555bf3172b9311e09a41fc1 f34a0999f54e7045cccb4fff3332d2539f2950ae defects4j <defects4j@localhost> 1709004009 -0800	checkout: moving from 5ca6e2d21e3cc014e555bf3172b9311e09a41fc1 to D4J_Collections_28_BUGGY_VERSION
-+f34a0999f54e7045cccb4fff3332d2539f2950ae 4a0acc6d20b161b46b9bcf9220c60ccaf54a89aa defects4j <defects4j@localhost> 1709004009 -0800	checkout: moving from f34a0999f54e7045cccb4fff3332d2539f2950ae to D4J_Collections_28_FIXED_VERSION
 diff --git a/Collections_28/buggy/src/main/java/org/apache/commons/collections4/trie/AbstractPatriciaTrie.java b/Collections_28/fixed/src/main/java/org/apache/commons/collections4/trie/AbstractPatriciaTrie.java
 index 41f8535..bd11f75 100644
 --- a/Collections_28/buggy/src/main/java/org/apache/commons/collections4/trie/AbstractPatriciaTrie.java

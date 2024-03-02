@@ -7,25 +7,6 @@ index 42ba87a..83428f4 100644
  pid=JacksonCore
 -vid=1b
 +vid=1f
-diff --git a/JacksonCore_1/buggy/.git/HEAD b/JacksonCore_1/fixed/.git/HEAD
-index 8dc198e..5499e21 100644
---- a/JacksonCore_1/buggy/.git/HEAD
-+++ b/JacksonCore_1/fixed/.git/HEAD
-@@ -1 +1 @@
--b5b5ab2371833ff80902ff420ad94b78a942ce76
-+a376d5ca832049c3ab293a5dbc858a94756212ef
-diff --git a/JacksonCore_1/buggy/.git/index b/JacksonCore_1/fixed/.git/index
-index 4197000..96b7eca 100644
-Binary files a/JacksonCore_1/buggy/.git/index and b/JacksonCore_1/fixed/.git/index differ
-diff --git a/JacksonCore_1/buggy/.git/logs/HEAD b/JacksonCore_1/fixed/.git/logs/HEAD
-index 68d636b..b1a5703 100644
---- a/JacksonCore_1/buggy/.git/logs/HEAD
-+++ b/JacksonCore_1/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@ a376d5ca832049c3ab293a5dbc858a94756212ef b5b5ab2371833ff80902ff420ad94b78a942ce7
- b5b5ab2371833ff80902ff420ad94b78a942ce76 11ae003efb0f0cc200cdfae28122d0c7653e0b14 defects4j <defects4j@localhost> 1709004210 -0800	checkout: moving from b5b5ab2371833ff80902ff420ad94b78a942ce76 to D4J_JacksonCore_1_POST_FIX_REVISION
- 11ae003efb0f0cc200cdfae28122d0c7653e0b14 e6dada1c362cea0d6179cad27d76dc51e28bb1a3 defects4j <defects4j@localhost> 1709004210 -0800	commit: D4J_JacksonCore_1_PRE_FIX_REVISION
- e6dada1c362cea0d6179cad27d76dc51e28bb1a3 b5b5ab2371833ff80902ff420ad94b78a942ce76 defects4j <defects4j@localhost> 1709004210 -0800	checkout: moving from e6dada1c362cea0d6179cad27d76dc51e28bb1a3 to D4J_JacksonCore_1_BUGGY_VERSION
-+b5b5ab2371833ff80902ff420ad94b78a942ce76 a376d5ca832049c3ab293a5dbc858a94756212ef defects4j <defects4j@localhost> 1709004210 -0800	checkout: moving from b5b5ab2371833ff80902ff420ad94b78a942ce76 to D4J_JacksonCore_1_FIXED_VERSION
 diff --git a/JacksonCore_1/buggy/src/main/java/com/fasterxml/jackson/core/io/NumberInput.java b/JacksonCore_1/fixed/src/main/java/com/fasterxml/jackson/core/io/NumberInput.java
 index 01c18d9..eb463b9 100644
 --- a/JacksonCore_1/buggy/src/main/java/com/fasterxml/jackson/core/io/NumberInput.java

@@ -7,25 +7,6 @@ index e4ad714..d5b59b8 100644
  pid=Math
 -vid=2b
 +vid=2f
-diff --git a/Math_2/buggy/.git/HEAD b/Math_2/fixed/.git/HEAD
-index 86ae059..2c7a2bf 100644
---- a/Math_2/buggy/.git/HEAD
-+++ b/Math_2/fixed/.git/HEAD
-@@ -1 +1 @@
--7b63015760f20ea3a2ff7787397ed73ca3941432
-+86c2c5e641f619770ce2dff5617740504bbec309
-diff --git a/Math_2/buggy/.git/index b/Math_2/fixed/.git/index
-index 4b935ba..b30833a 100644
-Binary files a/Math_2/buggy/.git/index and b/Math_2/fixed/.git/index differ
-diff --git a/Math_2/buggy/.git/logs/HEAD b/Math_2/fixed/.git/logs/HEAD
-index f290ae1..d8860df 100644
---- a/Math_2/buggy/.git/logs/HEAD
-+++ b/Math_2/fixed/.git/logs/HEAD
-@@ -6,3 +6,4 @@ c0b655ace5665c0cd32e3f5e5b46edad4d223125 68a27fb37cfecbf96e22e5dcbbada261c335d12
- 7b63015760f20ea3a2ff7787397ed73ca3941432 68a27fb37cfecbf96e22e5dcbbada261c335d121 defects4j <defects4j@localhost> 1709005017 -0800	checkout: moving from 7b63015760f20ea3a2ff7787397ed73ca3941432 to D4J_Math_2_POST_FIX_REVISION
- 68a27fb37cfecbf96e22e5dcbbada261c335d121 7a680cdc0cc61527bc139a613b588082ebcd0b50 defects4j <defects4j@localhost> 1709005017 -0800	commit: D4J_Math_2_PRE_FIX_REVISION
- 7a680cdc0cc61527bc139a613b588082ebcd0b50 7b63015760f20ea3a2ff7787397ed73ca3941432 defects4j <defects4j@localhost> 1709005017 -0800	checkout: moving from 7a680cdc0cc61527bc139a613b588082ebcd0b50 to D4J_Math_2_BUGGY_VERSION
-+7b63015760f20ea3a2ff7787397ed73ca3941432 86c2c5e641f619770ce2dff5617740504bbec309 defects4j <defects4j@localhost> 1709005017 -0800	checkout: moving from 7b63015760f20ea3a2ff7787397ed73ca3941432 to D4J_Math_2_FIXED_VERSION
 diff --git a/Math_2/buggy/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java b/Math_2/fixed/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
 index 2769127..81e180c 100644
 --- a/Math_2/buggy/src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java

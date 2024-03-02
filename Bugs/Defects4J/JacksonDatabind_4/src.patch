@@ -7,25 +7,6 @@ index 68f059b..0b0298c 100644
  pid=JacksonDatabind
 -vid=4b
 +vid=4f
-diff --git a/JacksonDatabind_4/buggy/.git/HEAD b/JacksonDatabind_4/fixed/.git/HEAD
-index 4fdb065..22168cf 100644
---- a/JacksonDatabind_4/buggy/.git/HEAD
-+++ b/JacksonDatabind_4/fixed/.git/HEAD
-@@ -1 +1 @@
--598f8e8e20db78c598840c8a15a5f44532e2a1ff
-+a7a0232a382616d1485fc8601ddf9902fac317a8
-diff --git a/JacksonDatabind_4/buggy/.git/index b/JacksonDatabind_4/fixed/.git/index
-index 9f4b3f0..2a8a50f 100644
-Binary files a/JacksonDatabind_4/buggy/.git/index and b/JacksonDatabind_4/fixed/.git/index differ
-diff --git a/JacksonDatabind_4/buggy/.git/logs/HEAD b/JacksonDatabind_4/fixed/.git/logs/HEAD
-index 8041c21..b0331f3 100644
---- a/JacksonDatabind_4/buggy/.git/logs/HEAD
-+++ b/JacksonDatabind_4/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@ a7a0232a382616d1485fc8601ddf9902fac317a8 598f8e8e20db78c598840c8a15a5f44532e2a1f
- 598f8e8e20db78c598840c8a15a5f44532e2a1ff 6adcb8a43a2b5250b29f2e8cc378965e849c9a5f defects4j <defects4j@localhost> 1709004261 -0800	checkout: moving from 598f8e8e20db78c598840c8a15a5f44532e2a1ff to D4J_JacksonDatabind_4_POST_FIX_REVISION
- 6adcb8a43a2b5250b29f2e8cc378965e849c9a5f 5bcbedeacf97d0aa7f7be0c94999ba98434f7560 defects4j <defects4j@localhost> 1709004261 -0800	commit: D4J_JacksonDatabind_4_PRE_FIX_REVISION
- 5bcbedeacf97d0aa7f7be0c94999ba98434f7560 598f8e8e20db78c598840c8a15a5f44532e2a1ff defects4j <defects4j@localhost> 1709004261 -0800	checkout: moving from 5bcbedeacf97d0aa7f7be0c94999ba98434f7560 to D4J_JacksonDatabind_4_BUGGY_VERSION
-+598f8e8e20db78c598840c8a15a5f44532e2a1ff a7a0232a382616d1485fc8601ddf9902fac317a8 defects4j <defects4j@localhost> 1709004261 -0800	checkout: moving from 598f8e8e20db78c598840c8a15a5f44532e2a1ff to D4J_JacksonDatabind_4_FIXED_VERSION
 diff --git a/JacksonDatabind_4/buggy/src/main/java/com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java b/JacksonDatabind_4/fixed/src/main/java/com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java
 index d4a0b05..be9bf44 100644
 --- a/JacksonDatabind_4/buggy/src/main/java/com/fasterxml/jackson/databind/deser/std/StringArrayDeserializer.java

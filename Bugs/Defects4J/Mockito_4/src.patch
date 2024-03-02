@@ -7,25 +7,6 @@ index 10157d8..7072c11 100644
  pid=Mockito
 -vid=4b
 +vid=4f
-diff --git a/Mockito_4/buggy/.git/HEAD b/Mockito_4/fixed/.git/HEAD
-index 0603641..c09482e 100644
---- a/Mockito_4/buggy/.git/HEAD
-+++ b/Mockito_4/fixed/.git/HEAD
-@@ -1 +1 @@
--62a8dbd5442a757e511eefa34bb14261b878afeb
-+d4401349b7558c3b5c34eba497f27198cff16cf3
-diff --git a/Mockito_4/buggy/.git/index b/Mockito_4/fixed/.git/index
-index c4902d6..e181269 100644
-Binary files a/Mockito_4/buggy/.git/index and b/Mockito_4/fixed/.git/index differ
-diff --git a/Mockito_4/buggy/.git/logs/HEAD b/Mockito_4/fixed/.git/logs/HEAD
-index 9757fe1..3e7ffbb 100644
---- a/Mockito_4/buggy/.git/logs/HEAD
-+++ b/Mockito_4/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@ d4401349b7558c3b5c34eba497f27198cff16cf3 62a8dbd5442a757e511eefa34bb14261b878afe
- 62a8dbd5442a757e511eefa34bb14261b878afeb 2790c015b3ef7f9622e23fc41e189158175ebf98 defects4j <defects4j@localhost> 1709005470 -0800	checkout: moving from 62a8dbd5442a757e511eefa34bb14261b878afeb to D4J_Mockito_4_POST_FIX_REVISION
- 2790c015b3ef7f9622e23fc41e189158175ebf98 0b764ed8319fdc0b769fb8ef33bdfb028616a753 defects4j <defects4j@localhost> 1709005470 -0800	commit: D4J_Mockito_4_PRE_FIX_REVISION
- 0b764ed8319fdc0b769fb8ef33bdfb028616a753 62a8dbd5442a757e511eefa34bb14261b878afeb defects4j <defects4j@localhost> 1709005470 -0800	checkout: moving from 0b764ed8319fdc0b769fb8ef33bdfb028616a753 to D4J_Mockito_4_BUGGY_VERSION
-+62a8dbd5442a757e511eefa34bb14261b878afeb d4401349b7558c3b5c34eba497f27198cff16cf3 defects4j <defects4j@localhost> 1709005470 -0800	checkout: moving from 62a8dbd5442a757e511eefa34bb14261b878afeb to D4J_Mockito_4_FIXED_VERSION
 diff --git a/Mockito_4/buggy/src/org/mockito/exceptions/Reporter.java b/Mockito_4/fixed/src/org/mockito/exceptions/Reporter.java
 index 9581a54..d57e33d 100644
 --- a/Mockito_4/buggy/src/org/mockito/exceptions/Reporter.java

@@ -7,25 +7,6 @@ index 9d639a8..5d139cc 100644
  pid=Gson
 -vid=2b
 +vid=2f
-diff --git a/Gson_2/buggy/.git/HEAD b/Gson_2/fixed/.git/HEAD
-index 4323a7c..734d583 100644
---- a/Gson_2/buggy/.git/HEAD
-+++ b/Gson_2/fixed/.git/HEAD
-@@ -1 +1 @@
--1f5bcf215c86a8938aaa698e4079f9ff9064cdfa
-+c18a54f2e83db5f54395427bc230b887d8737365
-diff --git a/Gson_2/buggy/.git/index b/Gson_2/fixed/.git/index
-index 0b50dcb..c1bca70 100644
-Binary files a/Gson_2/buggy/.git/index and b/Gson_2/fixed/.git/index differ
-diff --git a/Gson_2/buggy/.git/logs/HEAD b/Gson_2/fixed/.git/logs/HEAD
-index 88c28db..1d11384 100644
---- a/Gson_2/buggy/.git/logs/HEAD
-+++ b/Gson_2/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@ c18a54f2e83db5f54395427bc230b887d8737365 1f5bcf215c86a8938aaa698e4079f9ff9064cdf
- 1f5bcf215c86a8938aaa698e4079f9ff9064cdfa 7be60198f4fe1856de8cb5bc2e299c7e24bff138 defects4j <defects4j@localhost> 1709004182 -0800	checkout: moving from 1f5bcf215c86a8938aaa698e4079f9ff9064cdfa to D4J_Gson_2_POST_FIX_REVISION
- 7be60198f4fe1856de8cb5bc2e299c7e24bff138 24c6977aa4e25cd44c43ed4d97448926707c06fc defects4j <defects4j@localhost> 1709004182 -0800	commit: D4J_Gson_2_PRE_FIX_REVISION
- 24c6977aa4e25cd44c43ed4d97448926707c06fc 1f5bcf215c86a8938aaa698e4079f9ff9064cdfa defects4j <defects4j@localhost> 1709004182 -0800	checkout: moving from 24c6977aa4e25cd44c43ed4d97448926707c06fc to D4J_Gson_2_BUGGY_VERSION
-+1f5bcf215c86a8938aaa698e4079f9ff9064cdfa c18a54f2e83db5f54395427bc230b887d8737365 defects4j <defects4j@localhost> 1709004182 -0800	checkout: moving from 1f5bcf215c86a8938aaa698e4079f9ff9064cdfa to D4J_Gson_2_FIXED_VERSION
 diff --git a/Gson_2/buggy/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java b/Gson_2/fixed/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
 index dea7af7..0268aa8 100644
 --- a/Gson_2/buggy/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java

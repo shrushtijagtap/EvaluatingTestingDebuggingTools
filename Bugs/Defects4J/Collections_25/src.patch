@@ -7,25 +7,6 @@ index a349a4b..d8913d5 100644
  pid=Collections
 -vid=25b
 +vid=25f
-diff --git a/Collections_25/buggy/.git/HEAD b/Collections_25/fixed/.git/HEAD
-index edcd44d..3c114e9 100644
---- a/Collections_25/buggy/.git/HEAD
-+++ b/Collections_25/fixed/.git/HEAD
-@@ -1 +1 @@
--63173f80507b63f78e076c4ac063f316051bb773
-+69fcc8158b41fd1af51052d839611cd29fb444ef
-diff --git a/Collections_25/buggy/.git/index b/Collections_25/fixed/.git/index
-index 5ce8fd2..7e0c88b 100644
-Binary files a/Collections_25/buggy/.git/index and b/Collections_25/fixed/.git/index differ
-diff --git a/Collections_25/buggy/.git/logs/HEAD b/Collections_25/fixed/.git/logs/HEAD
-index 3b53fca..5afdb8c 100644
---- a/Collections_25/buggy/.git/logs/HEAD
-+++ b/Collections_25/fixed/.git/logs/HEAD
-@@ -7,3 +7,4 @@ e88d5e7922df230c93e647b6120760f12a30bec4 69fcc8158b41fd1af51052d839611cd29fb444e
- 63173f80507b63f78e076c4ac063f316051bb773 ed6a3f224e03de718c947d0b4f625721e981031f defects4j <defects4j@localhost> 1709004002 -0800	checkout: moving from 63173f80507b63f78e076c4ac063f316051bb773 to D4J_Collections_25_POST_FIX_REVISION
- ed6a3f224e03de718c947d0b4f625721e981031f 0ac379d331135f50cbe691a10008c3ae7c3c4153 defects4j <defects4j@localhost> 1709004002 -0800	commit: D4J_Collections_25_PRE_FIX_REVISION
- 0ac379d331135f50cbe691a10008c3ae7c3c4153 63173f80507b63f78e076c4ac063f316051bb773 defects4j <defects4j@localhost> 1709004002 -0800	checkout: moving from 0ac379d331135f50cbe691a10008c3ae7c3c4153 to D4J_Collections_25_BUGGY_VERSION
-+63173f80507b63f78e076c4ac063f316051bb773 69fcc8158b41fd1af51052d839611cd29fb444ef defects4j <defects4j@localhost> 1709004002 -0800	checkout: moving from 63173f80507b63f78e076c4ac063f316051bb773 to D4J_Collections_25_FIXED_VERSION
 diff --git a/Collections_25/buggy/src/main/java/org/apache/commons/collections4/IteratorUtils.java b/Collections_25/fixed/src/main/java/org/apache/commons/collections4/IteratorUtils.java
 index 40f9989..b3b1be0 100644
 --- a/Collections_25/buggy/src/main/java/org/apache/commons/collections4/IteratorUtils.java
