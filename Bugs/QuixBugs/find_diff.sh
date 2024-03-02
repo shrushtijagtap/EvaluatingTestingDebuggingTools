@@ -23,7 +23,7 @@ for program_dir in "$quixbugs_dir"/*/; do
         # Check if both buggy and fixed files exist
         if [ -f "$buggy_file" ] && [ -f "$fixed_file" ]; then
             # Generate diff file
-            diff_file="$program_dir/diff.patch"
+            diff_file="$program_dir/Diff"
             generate_diff "$buggy_file" "$fixed_file" "$diff_file"
         else
             echo "Error: Buggy or fixed file missing for program $program_name"
