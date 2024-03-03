@@ -1,8 +1,0 @@
-[<Line: +	public void setSourceQuery(OBDASQLQuery query);
->, <Line: +	public OBDASQLQuery getSourceQuery();
->, <Line: +	public void setTargetQuery(CQIE query);
->]
-[<Line: -	public void setSourceQuery(OBDAQuery query);
->, <Line: -	public void setTargetQuery(OBDAQuery query);
->, <Line: -	public OBDASQLQuery getSourceQuery();
->]

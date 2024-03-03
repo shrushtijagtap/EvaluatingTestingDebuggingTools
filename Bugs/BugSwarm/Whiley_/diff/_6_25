@@ -1,9 +1,0 @@
-[<Line: +		if (e.op != Expr.Binary.Op.ARRAYGEN && SemanticType.And(lhs_type, rhs_type) instanceof SemanticType.Void) {
->, <Line: +		case ARRAYGEN:
->, <Line: +			checkIsSubtype(SemanticType.Int, rhs_type, e.rightOperand, context);
->, <Line: +			return SemanticType.Array(lhs_type);
->, <Line: +			case ARRAYGEN:
->, <Line: +				return type;
->]
-[<Line: -		if (SemanticType.And(lhs_type, rhs_type) instanceof SemanticType.Void) {
->]

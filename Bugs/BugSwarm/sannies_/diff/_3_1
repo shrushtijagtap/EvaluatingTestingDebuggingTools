@@ -1,4 +1,0 @@
-[<Line: +        if (time > 0 && time < fragmentLength && segmentStartSamples.length > 1) {
->]
-[<Line: -        if (time > 0 && segmentStartSamples.length > 1) {
->]

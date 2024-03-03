@@ -1,4 +1,0 @@
-[<Line: +                                    .intercept(MethodCall.invoke(ExecutingTransformer.class.getMethod("transform",
->]
-[<Line: -                                    .intercept(MethodCall.invoke(ExecutingTransformer.class.getDeclaredMethod("transform",
->]

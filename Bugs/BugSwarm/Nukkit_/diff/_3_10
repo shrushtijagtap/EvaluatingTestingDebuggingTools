@@ -1,8 +1,0 @@
-[<Line: +            double deltaX = this.x - e.x;
->, <Line: +            double deltaZ = this.z = e.z;
->, <Line: +                this.attack(ev);
->]
-[<Line: -            double deltaX = this.x - e.getX();
->, <Line: -            double deltaZ = this.z = e.getZ();
->, <Line: -                this.attack( ev);
->]

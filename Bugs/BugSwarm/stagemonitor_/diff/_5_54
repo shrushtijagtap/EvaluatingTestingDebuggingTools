@@ -1,7 +1,0 @@
-[<Line: +Handlebars.registerHelper('breaklines', function(text) {
->, <Line: +	text = Handlebars.Utils.escapeExpression(text);
->, <Line: +	text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
->, <Line: +	return new Handlebars.SafeString(text);
->, <Line: +});
->]
-[]

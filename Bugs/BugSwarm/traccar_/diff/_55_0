@@ -1,7 +1,0 @@
-[<Line: +        if (ctx.getPipeline().get("httpDecoder") == null
->, <Line: +                && !connectionlessProtocols.contains(protocolDecoder.getProtocolName())) {
->]
-[<Line: -import org.traccar.protocol.TeltonikaProtocolDecoder;
->, <Line: -        if (ctx.getPipeline().get("httpDecoder") == null &&
->, <Line: -                !connectionlessProtocols.contains(protocolDecoder.getProtocolName())) {
->]

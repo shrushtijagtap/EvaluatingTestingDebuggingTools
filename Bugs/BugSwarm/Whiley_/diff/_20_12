@@ -1,4 +1,0 @@
-[<Line: +			return Array(elem, false);
->]
-[<Line: -			return List(elem, false);
->]

@@ -1,6 +1,0 @@
-[<Line: +script:
->, <Line: +  - ./gradlew clean test
->, <Line: +  - ./travis.sh
->]
-[<Line: -script: ./travis.sh
->]

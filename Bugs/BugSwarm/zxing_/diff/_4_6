@@ -1,6 +1,0 @@
-[<Line: +  private static final String QUIET_SPACE = "00000";
->, <Line: +  private static final String STOP = "1100011101011";
->]
-[<Line: -  public static final String QUIET_SPACE = "00000";
->, <Line: -  public static final String STOP = "1100011101011";
->]

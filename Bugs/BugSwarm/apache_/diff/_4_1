@@ -1,6 +1,0 @@
-[<Line: +          <suppressionsLocation>${basedir}/checkstyle-suppressions.xml</suppressionsLocation>
->, <Line: +          <includeTestSourceDirectory>true</includeTestSourceDirectory>
->, <Line: +          <suppressionsLocation>${basedir}/checkstyle-suppressions.xml</suppressionsLocation>
->, <Line: +          <includeTestSourceDirectory>true</includeTestSourceDirectory>
->]
-[]

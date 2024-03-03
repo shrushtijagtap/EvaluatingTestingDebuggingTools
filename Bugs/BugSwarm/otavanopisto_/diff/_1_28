@@ -1,4 +1,0 @@
-[<Line: +      <property name="hibernate.show_sql" value="true" />
->]
-[<Line: -      <property name="hibernate.show_sql" value="false" />
->]

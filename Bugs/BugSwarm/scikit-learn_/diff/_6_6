@@ -1,6 +1,0 @@
-[<Line: +              multi_class='ovr', n_jobs=1, penalty='l2', random_state=None,
->, <Line: +              solver='liblinear', tol=0.0001, verbose=0, warm_start=False)
->]
-[<Line: -              multi_class='ovr', penalty='l2', random_state=None,
->, <Line: -              solver='liblinear', tol=0.0001, verbose=0)
->]

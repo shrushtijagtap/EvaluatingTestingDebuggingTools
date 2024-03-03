@@ -1,8 +1,0 @@
-[<Line: +    TypeDescription getType();
->, <Line: +        public TypeDescription getType() {
->, <Line: +        public TypeDescription getType() {
->]
-[<Line: -    TypeDescription getInstanceType();
->, <Line: -        public TypeDescription getInstanceType() {
->, <Line: -        public TypeDescription getInstanceType() {
->]

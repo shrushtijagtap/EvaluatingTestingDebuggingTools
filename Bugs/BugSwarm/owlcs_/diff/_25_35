@@ -1,6 +1,0 @@
-[<Line: +        addMissingDeclarations =
->, <Line: +            ontology.getOWLOntologyManager().getOntologyConfigurator().shouldAddMissingTypes();
->]
-[<Line: -        addMissingDeclarations = ontology.getOWLOntologyManager().getOntologyWriterConfiguration()
->, <Line: -            .shouldAddMissingTypes();
->]

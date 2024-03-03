@@ -1,4 +1,0 @@
-[<Line: +import static org.junit.Assert.assertTrue;
->]
-[<Line: -import static junit.framework.Assert.assertTrue;
->]

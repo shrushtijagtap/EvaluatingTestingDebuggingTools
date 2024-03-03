@@ -1,7 +1,0 @@
-&null_nml
-    null_value = ,
-/
-
-&null_comma_nml
-    null_comma = ,
-/

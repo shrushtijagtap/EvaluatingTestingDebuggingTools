@@ -1,4 +1,0 @@
-[<Line: +                    if(p.endsWith("meta")) {
->]
-[<Line: -                    if(p.endsWith("LATEST_BACKUP")) {
->]

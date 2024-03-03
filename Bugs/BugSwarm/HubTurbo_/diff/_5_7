@@ -1,7 +1,0 @@
-[<Line: +import util.events.UILogicRefreshEvent;
->, <Line: +            UI.events.triggerEvent(new UILogicRefreshEvent());
->]
-[<Line: -import util.events.DummyRepoUpdatedEvent;
->, <Line: -import util.events.ModelUpdatedEvent;
->, <Line: -            UI.events.triggerEvent(new DummyRepoUpdatedEvent());
->]

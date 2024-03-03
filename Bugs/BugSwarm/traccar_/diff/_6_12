@@ -1,6 +1,0 @@
-[<Line: +import org.traccar.helper.Checksum;
->, <Line: +            response.writeByte(Checksum.xorChecksum(response.toByteBuffer()));
->]
-[<Line: -import org.traccar.helper.Crc;
->, <Line: -            response.writeByte(Crc.xorChecksum(response.toByteBuffer()));
->]

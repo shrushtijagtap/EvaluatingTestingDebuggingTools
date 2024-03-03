@@ -1,5 +1,0 @@
-[]
-[<Line: -import org.elasticsearch.action.admin.cluster.health.ClusterHealthStatus;
->, <Line: -import org.xbib.elasticsearch.helper.client.ClientHelper;
->, <Line: -            ClientHelper.waitForCluster(client("1"), ClusterHealthStatus.GREEN, TimeValue.timeValueSeconds(30));
->]

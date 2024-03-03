@@ -1,7 +1,0 @@
-[<Line: +    [int] items = this->items
->, <Line: +    while i < |items| where i >= 0:
->, <Line: +        sum = sum + items[i]
->]
-[<Line: -    while i < |this->items| where i >= 0:
->, <Line: -        sum = sum + this->items[i]
->]

@@ -1,4 +1,0 @@
-[<Line: +		assertTrue(subReader.readPosition == subReaderAlt2.readPosition);
->]
-[<Line: -		assertTrue(subReader.readOffset == subReaderAlt2.readOffset);
->]

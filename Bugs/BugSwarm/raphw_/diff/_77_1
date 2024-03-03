@@ -1,9 +1,0 @@
-[<Line: +                ClassWriter classWriter = new ClassWriter(classReader, classVisitorWrapper.wrapWriter(ASM_MANUAL_FLAG));
->, <Line: +                classReader.accept(writeTo(classVisitorWrapper.wrap(new ValidatingClassVisitor(classWriter)), implementationContext),
->, <Line: +                        classVisitorWrapper.wrapReader(ASM_MANUAL_FLAG));
->, <Line: +                ClassWriter classWriter = new ClassWriter(classVisitorWrapper.wrapWriter(ASM_MANUAL_FLAG));
->]
-[<Line: -                ClassWriter classWriter = new ClassWriter(classReader, ASM_MANUAL_FLAG);
->, <Line: -                classReader.accept(writeTo(classVisitorWrapper.wrap(new ValidatingClassVisitor(classWriter)), implementationContext), ASM_MANUAL_FLAG);
->, <Line: -                ClassWriter classWriter = new ClassWriter(ASM_MANUAL_FLAG);
->]

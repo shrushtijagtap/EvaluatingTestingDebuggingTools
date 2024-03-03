@@ -1,4 +1,0 @@
-[<Line: +                    compositeSpecBuilder.add(new SpecBuilderAbove(pin.getPageItem(), closestBottomEdge));
->]
-[<Line: -                    compositeSpecBuilder.add(new SpecBuilderAbove(pin.getPageItem().getName(), points, closestBottomEdge));
->]

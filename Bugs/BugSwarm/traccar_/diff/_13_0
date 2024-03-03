@@ -1,5 +1,0 @@
-[<Line: +        int type = buf.readUnsignedByte();
->, <Line: +            buf.readUnsignedShort(); // firmware version
->]
-[<Line: -        int type = buf.readUnsignedByte();
->]

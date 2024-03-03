@@ -1,6 +1,0 @@
-[]
-[<Line: -def suite():
->, <Line: -    suite = unittest.TestSuite()
->, <Line: -    suite.addTest(unittest.makeSuite(RequestsTestCase))
->, <Line: -    return suite
->]

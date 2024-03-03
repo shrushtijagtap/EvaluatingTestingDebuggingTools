@@ -1,4 +1,0 @@
-[<Line: +                if GoogleDatastoreAdapter is not None and isinstance(self.dbset.db._adapter, GoogleDatastoreAdapter):
->]
-[<Line: -                if isinstance(self.dbset.db._adapter, GoogleDatastoreAdapter):
->]

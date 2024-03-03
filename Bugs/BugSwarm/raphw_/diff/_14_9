@@ -1,3 +1,0 @@
-[<Line: +        @SuppressFBWarnings(value = "DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED", justification = "Privilege is explicit user responsibility")
->]
-[]

@@ -1,8 +1,0 @@
-[<Line: +//	public static final int OPCODE_append      = 20 + FMT_BINARYASSIGN;
->, <Line: +//	public static final int OPCODE_appendl     = 21 + FMT_BINARYASSIGN;
->, <Line: +//	public static final int OPCODE_appendr     = 22 + FMT_BINARYASSIGN;
->]
-[<Line: -	public static final int OPCODE_append      = 20 + FMT_BINARYASSIGN;
->, <Line: -	public static final int OPCODE_appendl     = 21 + FMT_BINARYASSIGN;
->, <Line: -	public static final int OPCODE_appendr     = 22 + FMT_BINARYASSIGN;
->]

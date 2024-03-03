@@ -1,7 +1,0 @@
-[<Line: +                    this.server.getLogger().logException(e);
->]
-[<Line: -                    MainLogger logger = this.server.getLogger();
->, <Line: -                    if (logger != null) {
->, <Line: -                        logger.logException(e);
->, <Line: -                    }
->]

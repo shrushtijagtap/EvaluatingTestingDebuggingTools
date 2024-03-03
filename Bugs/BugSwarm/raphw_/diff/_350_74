@@ -1,6 +1,0 @@
-[]
-[<Line: -package net.bytebuddy.test.packaging;
->, <Line: -public class PackagePrivateExceptionType extends Exception {
->, <Line: -    /* empty */
->, <Line: -}
->]

@@ -1,4 +1,0 @@
-[<Line: +import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
->, <Line: +    @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception should not be rethrown but trigger a fallback")
->]
-[]

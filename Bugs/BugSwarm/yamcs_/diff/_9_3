@@ -1,6 +1,0 @@
-[<Line: +	public Comparable<?> keyStart=null;
->, <Line: +	public Comparable<?> keyEnd=null;
->]
-[<Line: -	public Comparable keyStart=null;
->, <Line: -	public Comparable keyEnd=null;
->]

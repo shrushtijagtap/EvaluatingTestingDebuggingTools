@@ -1,4 +1,0 @@
-[<Line: +        TaipProtocolDecoder decoder = new TaipProtocolDecoder(new TaipProtocol());
->]
-[<Line: -        TaipProtocolDecoder decoder = new TaipProtocolDecoder(new TaipProtocol(), false);
->]

@@ -1,4 +1,0 @@
-[<Line: +../../tests/invalid/Assign_Invalid_9.whiley:5: expected type int[], found int|real[]
->]
-[<Line: -../../tests/invalid/Assign_Invalid_9.whiley:5: expected type [int], found [int|real]
->]

@@ -1,7 +1,0 @@
-[<Line: +				if (!matches) {
->, <Line: +				beforeTransformation(typeDescription, classLoader);
->]
-[<Line: -				if (matches) {
->, <Line: -					beforeTransformation(typeDescription, classLoader);
->, <Line: -				} else {
->]

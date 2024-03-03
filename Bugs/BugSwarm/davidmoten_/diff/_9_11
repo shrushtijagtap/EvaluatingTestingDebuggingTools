@@ -1,9 +1,0 @@
-[<Line: +import com.github.davidmoten.rx.jdbc.exceptions.SQLRuntimeException;
->, <Line: +            throw new SQLRuntimeException(e);
->, <Line: +            throw new SQLRuntimeException(e);
->, <Line: +            throw new SQLRuntimeException(e);
->]
-[<Line: -            throw new RuntimeException(e);
->, <Line: -            throw new RuntimeException(e);
->, <Line: -            throw new RuntimeException(e);
->]

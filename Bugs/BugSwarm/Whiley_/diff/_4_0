@@ -1,9 +1,0 @@
-[<Line: +		List<Type> returnTypes = ((WhileyFile.FunctionOrMethod) context).resolvedType().raw().returns(); 
->, <Line: +		Type[] types = returnTypes.toArray(new Type[returnTypes.size()]); 
->, <Line: +		int[] operands = new int[types.length];
->, <Line: +			body.add(Codes.Return(tfm.returns().toArray(new Type[tfm.returns().size()]), target), attributes(expr));
->]
-[<Line: -		List<Type> types = ((WhileyFile.FunctionOrMethod) context).resolvedType().raw().returns(); 
->, <Line: -		int[] operands = new int[types.size()];
->, <Line: -			body.add(Codes.Return(tfm.returns(), target), attributes(expr));
->]

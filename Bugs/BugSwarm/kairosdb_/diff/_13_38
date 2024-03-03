@@ -1,6 +1,0 @@
-[<Line: +			callbackToReturn.setFinalized();
->, <Line: +		public void setFinalized()
->]
-[<Line: -			callbackToReturn.finalize();
->, <Line: -		public void finalize()
->]

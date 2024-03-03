@@ -1,4 +1,0 @@
-[<Line: +        return Integer.valueOf(clses.size());
->]
-[<Line: -        return clses.size();
->]

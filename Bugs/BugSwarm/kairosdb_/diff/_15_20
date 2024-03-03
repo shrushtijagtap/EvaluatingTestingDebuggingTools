@@ -1,6 +1,0 @@
-[<Line: +import org.kairosdb.plugin.Aggregator;
->, <Line: +import org.kairosdb.plugin.GroupBy;
->]
-[<Line: -import com.google.common.collect.ImmutableSortedMap;
->, <Line: -import org.kairosdb.core.aggregator.Aggregator;
->]

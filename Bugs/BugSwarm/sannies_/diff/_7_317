@@ -1,6 +1,0 @@
-[<Line: +package org.mp4parser.boxes.samplegrouping;
->, <Line: +import org.mp4parser.tools.Hex;
->]
-[<Line: -package com.googlecode.mp4parser.boxes.mp4.samplegrouping;
->, <Line: -import com.coremedia.iso.Hex;
->]

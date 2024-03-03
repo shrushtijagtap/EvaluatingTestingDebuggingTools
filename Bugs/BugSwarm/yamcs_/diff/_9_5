@@ -1,4 +1,0 @@
-[<Line: +                int cidx = badi.readInt(); //column index
->]
-[<Line: -                int cidx=badi.readInt(); //column index
->]

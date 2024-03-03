@@ -1,4 +1,0 @@
-[<Line: +			elasticsearchClient.sendClassPathRessourceBulkAsync("kibana/Logging.bulk");
->]
-[<Line: -			elasticsearchClient.sendBulkAsync(IOUtils.getResourceAsStream("kibana/Logging.bulk"));
->]

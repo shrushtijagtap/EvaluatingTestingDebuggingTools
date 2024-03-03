@@ -1,5 +1,0 @@
-[<Line: +        #check alarms and also enable the alarm server (that keeps track of unacknowledged alarms)
->, <Line: +            duration: 7200
->]
-[<Line: -        #check alarms and also enable the alarm server (that keeps track of unacknoledged alarms)
->]

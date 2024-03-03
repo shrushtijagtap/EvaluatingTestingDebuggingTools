@@ -1,9 +1,0 @@
-[<Line: +import org.traccar.model.Command;
->, <Line: +        setSupportedCommands(
->, <Line: +                Command.TYPE_POSITION_SINGLE,
->, <Line: +                Command.TYPE_POSITION_PERIODIC,
->, <Line: +                Command.TYPE_POSITION_STOP,
->, <Line: +                Command.TYPE_SET_TIMEZONE);
->, <Line: +                pipeline.addLast("objectEncoder", new CityeasyProtocolEncoder());
->]
-[]

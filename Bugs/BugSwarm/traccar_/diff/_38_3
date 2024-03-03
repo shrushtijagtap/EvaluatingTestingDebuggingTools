@@ -1,9 +1,0 @@
-[<Line: +    private String spentFuel;
->, <Line: +    public String getSpentFuel() {
->, <Line: +        return spentFuel;
->, <Line: +    }
->, <Line: +    public void setSpentFuel(String spentFuel) {
->, <Line: +        this.spentFuel = spentFuel;
->, <Line: +    }
->]
-[]

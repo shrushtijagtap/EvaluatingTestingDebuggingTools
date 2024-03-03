@@ -1,4 +1,0 @@
-[<Line: +		int result = open();
->]
-[<Line: -		int result = open();
->]

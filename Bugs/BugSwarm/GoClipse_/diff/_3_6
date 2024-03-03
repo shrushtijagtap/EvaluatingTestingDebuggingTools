@@ -1,5 +1,0 @@
-[<Line: +	public String LABEL_EnableForNormalBuild = "Enable for workspace build";
->, <Line: +	public String LABEL_EnableForAutoBuild = "Enable for automatic build (on editor save)";
->]
-[<Line: -	public String NAME_ToggleEnabledAction = "Enable for workspace build";
->]

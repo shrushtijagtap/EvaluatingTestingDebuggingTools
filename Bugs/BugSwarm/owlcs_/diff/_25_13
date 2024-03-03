@@ -1,9 +1,0 @@
-[<Line: +public interface ManchesterOWLSyntaxParser {
->, <Line: +     *             OWLClassAxiom.
->, <Line: +     *        decided by the literal itself.
->]
-[<Line: -import org.semanticweb.owlapi.model.HasOntologyLoaderConfiguration;
->, <Line: -public interface ManchesterOWLSyntaxParser extends HasOntologyLoaderConfiguration {
->, <Line: -     * OWLClassAxiom.
->, <Line: -     * decided by the literal itself.
->]

@@ -1,7 +1,0 @@
-[<Line: +from sklearn.linear_model import SGDClassifier, Perceptron
->, <Line: +from sklearn.linear_model import LogisticRegression
->, <Line: +    ("SAG", LogisticRegression(solver='sag', tol=1e-1, C=1.e4 / X.shape[0]))
->]
-[<Line: -from sklearn.linear_model import SGDClassifier, Perceptron, SAGClassifier
->, <Line: -    ("SAGClassifier", SAGClassifier(random_state=77, tol=.1))
->]

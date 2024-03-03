@@ -1,4 +1,0 @@
-[<Line: +		H2Datastore h2Datastore = new H2Datastore(DB_PATH, dataPointFactory, s_eventBus);
->]
-[<Line: -		H2Datastore h2Datastore = new H2Datastore(DB_PATH, dataPointFactory);
->]

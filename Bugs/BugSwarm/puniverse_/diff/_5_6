@@ -1,4 +1,0 @@
-[<Line: +import co.paralleluniverse.fibers.Suspendable;
->, <Line: +    @Suspendable
->]
-[]

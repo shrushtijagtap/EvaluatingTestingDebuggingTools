@@ -1,7 +1,0 @@
-[<Line: +			Ontology onto =  OWLAPI3TranslatorUtility.loadOntologyFromFile("src/test/resources/test/materializer/MaterializeTest.owl");
->]
-[<Line: -			File fo = new File("src/test/resources/test/materializer/MaterializeTest.owl");
->, <Line: -			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
->, <Line: -			OWLOntology owl_onto = manager.loadOntologyFromOntologyDocument(fo);
->, <Line: -			Ontology onto =  OWLAPI3TranslatorUtility.translate(owl_onto);
->]

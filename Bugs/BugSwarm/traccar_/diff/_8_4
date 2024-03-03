@@ -1,4 +1,0 @@
-[<Line: +    private static final SecureRandom random = new SecureRandom();
->]
-[<Line: -    private static SecureRandom random = new SecureRandom();
->]

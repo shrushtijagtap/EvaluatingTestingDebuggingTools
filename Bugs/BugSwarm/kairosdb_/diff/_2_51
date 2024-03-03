@@ -1,6 +1,0 @@
-[<Line: +public class FeatureValidationMetadata
->, <Line: +    public FeatureValidationMetadata(String expression, String type, String message)
->]
-[<Line: -public class QueryValidationMetadata
->, <Line: -    public QueryValidationMetadata(String expression, String type, String message)
->]

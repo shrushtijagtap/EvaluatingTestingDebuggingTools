@@ -1,6 +1,0 @@
-[<Line: +    <dependency>
->, <Line: +      <groupId>io.dropwizard</groupId>
->, <Line: +      <artifactId>dropwizard-jersey</artifactId>
->, <Line: +    </dependency>
->]
-[]

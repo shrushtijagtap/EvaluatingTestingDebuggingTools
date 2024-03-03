@@ -1,7 +1,0 @@
-[<Line: +import org.apache.commons.lang3.time.DurationFormatUtils;
->, <Line: +  private static final String DURATION_FORMAT = "mm:ss.S";
->, <Line: +  public static String duration(final long start) {
->, <Line: +    return DurationFormatUtils.formatDuration(System.currentTimeMillis() - start, DURATION_FORMAT);
->, <Line: +  }
->]
-[]

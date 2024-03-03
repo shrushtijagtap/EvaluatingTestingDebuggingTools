@@ -1,8 +1,0 @@
-[<Line: +import com.github.rinde.rinsim.experiment.base.ExperimentBuilder.Computers;
->, <Line: +  public ExperimentResults compute(ExperimentBuilder<?> builder,
->, <Line: +        ImmutableSet.<SimResult> of());
->]
-[<Line: -import com.github.rinde.rinsim.experiment.base.AbstractExperimentBuilder.Computers;
->, <Line: -  public ExperimentResults compute(AbstractExperimentBuilder<?> builder,
->, <Line: -        ImmutableSet.<SimulationResult> of());
->]

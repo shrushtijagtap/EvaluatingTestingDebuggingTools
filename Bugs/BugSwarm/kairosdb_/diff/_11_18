@@ -1,5 +1,0 @@
-[]
-[<Line: -import org.joda.time.DateTime;
->, <Line: -import org.kairosdb.core.datastore.Sampling;
->, <Line: -import org.kairosdb.core.datastore.TimeUnit;
->]

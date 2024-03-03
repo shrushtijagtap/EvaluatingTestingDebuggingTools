@@ -1,7 +1,0 @@
-[<Line: +import com.hubspot.baragon.auth.NoAuth;
->, <Line: +import com.hubspot.baragon.service.managers.ElbManager;
->, <Line: +  @NoAuth
->]
-[<Line: -import java.util.Collection;
->, <Line: -import com.hubspot.baragon.managers.ElbManager;
->]

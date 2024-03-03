@@ -1,4 +1,0 @@
-[<Line: +    assert all { k in 0..|xs| | xs[k] >= 0 }
->]
-[<Line: -    assert no { k in 0..|xs| | xs[k] < 0 }
->]

@@ -1,6 +1,0 @@
-[<Line: +import org.traccar.helper.Checksum;
->, <Line: +        s.append(Checksum.nmeaChecksum(s.toString()));
->]
-[<Line: -import org.traccar.helper.Crc;
->, <Line: -        s.append(Crc.nmeaChecksum(s.toString()));
->]

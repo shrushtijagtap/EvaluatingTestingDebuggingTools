@@ -1,4 +1,0 @@
-[]
-[<Line: -		Validator.validateCharacterSet(String.format("tag[%d].name", tagCount), tag[0]);
->, <Line: -		Validator.validateCharacterSet(String.format("tag[%d].value", tagCount), tag[1]);
->]

@@ -1,4 +1,0 @@
-[<Line: + * class obeys the preferences set in {@link OWLOntologyManager#getOntologyConfigurator()}.
->]
-[<Line: - * class obeys the preferences set in {@link OWLOntologyManager#getOntologyWriterConfiguration()}.
->]

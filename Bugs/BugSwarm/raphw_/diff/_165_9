@@ -1,6 +1,0 @@
-[<Line: +        assertThat(redefined.getDeclaredMethod(FOO).invoke(redefined.getDeclaredConstructor().newInstance()), is((Object) FOO));
->, <Line: +        assertThat(redefined.getDeclaredMethod(FOO).invoke(redefined.getDeclaredConstructor().newInstance()), is((Object) FOO));
->]
-[<Line: -        assertThat(redefined.getDeclaredMethod(FOO).invoke(redefined.newInstance()), is((Object) FOO));
->, <Line: -        assertThat(redefined.getDeclaredMethod(FOO).invoke(redefined.newInstance()), is((Object) FOO));
->]

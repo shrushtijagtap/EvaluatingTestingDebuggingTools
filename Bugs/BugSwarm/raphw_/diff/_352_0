@@ -1,7 +1,0 @@
-[<Line: +        ClassFileVersion classFileVersion = new ClassFileVersion(versionNumber);
->, <Line: +        if (classFileVersion.getMajorVersion() <= BASE_VERSION) {
->, <Line: +        return classFileVersion;
->]
-[<Line: -        if (versionNumber <= BASE_VERSION) {
->, <Line: -        return new ClassFileVersion(versionNumber);
->]

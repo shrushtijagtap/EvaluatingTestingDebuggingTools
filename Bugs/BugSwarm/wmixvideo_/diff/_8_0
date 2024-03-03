@@ -1,8 +1,0 @@
-[<Line: +import java.util.Random;
->, <Line: +        final int[] valoresInt = {2, 3, 4, 5, 6, 7, 8, 9};
->, <Line: +        final String chaveRandomica = String.valueOf(new Random(this.nota.getInfo().getIdentificacao().getDataHoraEmissao().getMillis()).nextInt(100000000));
->, <Line: +                StringUtils.leftPad(StringUtils.defaultIfBlank(this.nota.getInfo().getIdentificacao().getCodigoRandomico(), chaveRandomica), 8, "0");
->]
-[<Line: -        final int[] valoresInt = { 2, 3, 4, 5, 6, 7, 8, 9 };
->, <Line: -                StringUtils.leftPad(this.nota.getInfo().getIdentificacao().getCodigoRandomico(), 8, "0");
->]

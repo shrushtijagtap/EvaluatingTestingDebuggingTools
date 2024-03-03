@@ -1,4 +1,0 @@
-[<Line: +* `ADAPTER` - (`str`) - The (database) adapter that is going to be used for data storage (`mongo`, `tiny`, etc) (default: `mongo`)
->, <Line: +* `MANAGER` - (`str`) - The async manager to be used for the scheduling operations (async calls) (default: `queue`)
->]
-[]

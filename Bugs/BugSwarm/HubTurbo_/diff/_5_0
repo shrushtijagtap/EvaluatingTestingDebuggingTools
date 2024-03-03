@@ -1,6 +1,0 @@
-[<Line: +		registerEvent((UILogicRefreshEventHandler) e -> {
->]
-[<Line: -import util.HTLog;
->, <Line: -import static util.Futures.withResult;
->, <Line: -		registerEvent((DummyRepoUpdatedEventHandler) e -> {
->]

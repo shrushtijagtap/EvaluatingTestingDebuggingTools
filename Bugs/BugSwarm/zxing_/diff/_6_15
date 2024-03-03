@@ -1,4 +1,0 @@
-[<Line: +    if (!(o instanceof DataCharacter)) {
->]
-[<Line: -    if(!(o instanceof DataCharacter)) {
->]

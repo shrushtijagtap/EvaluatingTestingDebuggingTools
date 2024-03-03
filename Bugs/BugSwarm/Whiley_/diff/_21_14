@@ -1,7 +1,0 @@
-[<Line: +			environment.add(fall.startOperand);
->, <Line: +			environment.add(fall.endOperand);
->, <Line: +				code = Codes.Quantify(fall.startOperand, fall.endOperand,
->]
-[<Line: -			environment.add(fall.sourceOperand);
->, <Line: -				code = Codes.Quantify(fall.type, fall.sourceOperand,
->]

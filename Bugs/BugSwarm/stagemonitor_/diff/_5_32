@@ -1,6 +1,0 @@
-[<Line: +	 * @return the timer for the current request
->, <Line: +		return getMetricRegistry().timer(getTimerMetricName(getRequestTrace().getName()));
->]
-[<Line: -	 * @return the timer for the current request (may be <code>null</code>)
->, <Line: -		return getMetricRegistry().getTimers().get(getTimerMetricName(getRequestTrace().getName()));
->]

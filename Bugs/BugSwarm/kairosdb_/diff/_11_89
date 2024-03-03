@@ -1,8 +1,0 @@
-[<Line: +				return ((TagGroupByResult) groupByResult).getTagResults();
->, <Line: +				List<DataPointListener> dataPointListeners,
->, <Line: +				KairosDataPointFactory dataPointFactory) throws DatastoreException
->]
-[<Line: -				return ((TagGroupByResult)groupByResult).getTagResults();
->, <Line: -		                           List<DataPointListener> dataPointListeners,
->, <Line: -		                           KairosDataPointFactory dataPointFactory) throws DatastoreException
->]

@@ -1,6 +1,0 @@
-[<Line: +package util.events;
->, <Line: +public class UILogicRefreshEvent extends Event {
->, <Line: +    public UILogicRefreshEvent() {}
->, <Line: +}
->]
-[]

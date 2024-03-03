@@ -1,4 +1,0 @@
-[<Line: +auth.define_tables(username=False, signature=False, enable_tokens=False)
->]
-[<Line: -auth.define_tables(username=False, signature=False, api_tokens=False)
->]

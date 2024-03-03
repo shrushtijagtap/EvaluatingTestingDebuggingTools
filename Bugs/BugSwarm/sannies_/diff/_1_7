@@ -1,4 +1,0 @@
-[<Line: +            descriptor = ObjectDescriptorFactory.createFrom(-1, data.duplicate());
->]
-[<Line: -            descriptor = ObjectDescriptorFactory.createFrom(-1, data);
->]

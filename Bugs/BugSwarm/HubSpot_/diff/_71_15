@@ -1,9 +1,0 @@
-[<Line: +            <div class="col-md-5">
->, <Line: +            {{#if targetCount.count}}
->, <Line: +                <div class="col-md-3">
->, <Line: +                    <h3>Target Count: {{ targetCount.count }} {{#if config.allowEdit }} <a data-action="updateTargetCount"><span class="glyphicon glyphicon-edit"></span></a>{{/if}}</h3>
->, <Line: +                </div>
->, <Line: +            {{/if}}
->]
-[<Line: -            <div class="col-md-4">
->]

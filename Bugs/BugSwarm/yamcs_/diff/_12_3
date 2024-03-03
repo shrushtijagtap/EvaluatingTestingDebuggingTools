@@ -1,6 +1,0 @@
-[<Line: +    public Collection<ParameterValue> getSystemParameters() {
->, <Line: +        List<ParameterValue> pvlist = new ArrayList<>();
->]
-[<Line: -    public Collection<Pvalue.ParameterValue> getSystemParameters() {
->, <Line: -        List<Pvalue.ParameterValue> pvlist = new ArrayList<>();
->]

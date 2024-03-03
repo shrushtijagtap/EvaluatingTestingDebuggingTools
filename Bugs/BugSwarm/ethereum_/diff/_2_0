@@ -1,7 +1,0 @@
-[<Line: +    (!pullRequest || pullRequest == 'false') &&
->, <Line: +            project.version.endsWith('-SNAPSHOT') && (branchName.startsWith('master'))
->]
-[<Line: -//    (!pullRequest || pullRequest == 'false') &&
->, <Line: -//            project.version.endsWith('-SNAPSHOT') && (branchName == 'master')
->, <Line: -    false
->]

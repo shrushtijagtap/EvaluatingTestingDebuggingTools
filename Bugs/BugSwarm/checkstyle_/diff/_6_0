@@ -1,4 +1,0 @@
-[<Line: +    <suppress checks="CyclomaticComplexity" files="[\\/]XDocsPagesTest\.java"/>
->]
-[<Line: -    <suppress checks="CyclomaticComplexity" files="[\\/]XDocsPagesTest\.java" lines="299"/>
->]

@@ -1,9 +1,0 @@
-[<Line: +        if(!rawDataRequest.hasPacketRequest() && !rawDataRequest.hasParameterRequest()) {
->, <Line: +            if(originalReplayRequest.hasParameterRequest()) {
->, <Line: +                throw new YamcsException("Cannot find a replay source for any parmeters from request: "+originalReplayRequest.getParameterRequest().toString());
->, <Line: +            } else {
->, <Line: +                throw new YamcsException("Refusing to create an empty replay request");
->, <Line: +            }
->, <Line: +        }
->]
-[]

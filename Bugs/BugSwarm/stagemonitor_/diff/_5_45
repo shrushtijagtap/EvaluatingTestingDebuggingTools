@@ -1,4 +1,0 @@
-[<Line: +						metricPathRegex: /external_requests_rate.([^\.]+).jdbc/,
->]
-[<Line: -						metricPathRegex: /jdbc_query_rate.([^\.]+)/,
->]

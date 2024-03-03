@@ -1,8 +1,0 @@
-[<Line: +    private static final int[] CRC16_CCITT_TABLE_REVERSE = {
->, <Line: +    private static final int[] CRC16_CCITT_TABLE = {
->, <Line: +        byte[] bytes = msg.getBytes(Charset.defaultCharset());
->]
-[<Line: -    private static final int CRC16_CCITT_TABLE_REVERSE[] = {
->, <Line: -    private static final int CRC16_CCITT_TABLE[] = {
->, <Line: -        byte bytes[] = msg.getBytes(Charset.defaultCharset());
->]

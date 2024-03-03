@@ -1,7 +1,0 @@
-[]
-[<Line: -function sum([int] xs) -> [int]:
->, <Line: -    [int] rs = []
->, <Line: -    for x in xs where |rs| <= 2:
->, <Line: -        rs = rs ++ [x]
->, <Line: -    return rs
->]

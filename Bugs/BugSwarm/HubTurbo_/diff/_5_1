@@ -1,6 +1,0 @@
-[]
-[<Line: -package util.events;
->, <Line: -public class DummyRepoUpdatedEvent extends Event {
->, <Line: -    public DummyRepoUpdatedEvent() {}
->, <Line: -}
->]

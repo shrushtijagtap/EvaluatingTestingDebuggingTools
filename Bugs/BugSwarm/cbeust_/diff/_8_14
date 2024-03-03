@@ -1,8 +1,0 @@
-[<Line: +package test.methodinterceptors.multipleinterceptors;
->, <Line: +public class ThirdInterceptor extends MethodNameFilterInterceptor {
->, <Line: +    public ThirdInterceptor() {
->, <Line: +        super("c");
->, <Line: +    }
->, <Line: +}
->]
-[]

@@ -1,8 +1,0 @@
-[<Line: +import static org.junit.Assert.assertTrue;
->, <Line: +        assertTrue(message, expected == output.contains(text));
->, <Line: +            df.getOWLNamedIndividual("urn:test"), df.getOWLNamedIndividual("urn:other:test")));
->]
-[<Line: -import static org.junit.Assert.*;
->, <Line: -        assertEquals(message, expected, output.contains(text));
->, <Line: -                df.getOWLNamedIndividual("urn:test"), df.getOWLNamedIndividual("urn:other:test")));
->]

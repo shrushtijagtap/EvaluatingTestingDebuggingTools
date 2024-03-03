@@ -1,8 +1,0 @@
-[<Line: +<p>
->, <Line: +    Please specify the new target agent count
->, <Line: +</p>
->, <Line: +<p>
->, <Line: +    If <code>enforceTargetAgentCount</code> is specified in your Baragon Service config, requests will not be allowed to process if there are less agents than the target amount.
->, <Line: +</p>
->]
-[]

@@ -1,6 +1,0 @@
-[<Line: +import org.traccar.api.CorsResponseFilter;
->, <Line: +        resourceConfig.register(CorsResponseFilter.class);
->]
-[<Line: -import org.traccar.api.CORSResponseFilter;
->, <Line: -        resourceConfig.register(CORSResponseFilter.class);
->]

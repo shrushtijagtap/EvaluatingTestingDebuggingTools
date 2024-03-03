@@ -1,7 +1,0 @@
-[<Line: +	private String databaseVersion;
->, <Line: +			databaseVersion = md.getDatabaseProductVersion();
->, <Line: +	public String getDatabaseVersion() {
->, <Line: +		return databaseVersion;
->, <Line: +	}
->]
-[]

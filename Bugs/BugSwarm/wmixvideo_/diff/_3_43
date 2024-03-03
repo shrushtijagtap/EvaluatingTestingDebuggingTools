@@ -1,4 +1,0 @@
-[<Line: +    @Element(name = "PIS", required = false)
->]
-[<Line: -    @Element(name = "PIS", required = true)
->]

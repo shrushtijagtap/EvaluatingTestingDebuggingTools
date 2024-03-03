@@ -1,8 +1,0 @@
-[<Line: +                        s.append("*");
->, <Line: +                        s.append(file.substring(0, file.length() - 5)); // remove ".java"
->, <Line: +                    s.append(":").append(element.getLineNumber());
->]
-[<Line: -                        s.append("*:");
->, <Line: -                        s.append(file).append(":");
->, <Line: -                    s.append(element.getLineNumber());
->]

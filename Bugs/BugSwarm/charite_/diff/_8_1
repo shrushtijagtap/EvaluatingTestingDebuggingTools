@@ -1,6 +1,0 @@
-[<Line: +# java -jar jannovar-cli-0.17.jar download -d hg19/ucsc
->, <Line: +# java -jar jannovar-cli-0.17.jar annotate -d data/hg19_ucsc.ser -i examples/small.vcf
->]
-[<Line: -# java -jar jannovar-cli-0.16.jar download -d hg19/ucsc
->, <Line: -# java -jar jannovar-cli-0.16.jar annotate -d data/hg19_ucsc.ser -i examples/small.vcf
->]

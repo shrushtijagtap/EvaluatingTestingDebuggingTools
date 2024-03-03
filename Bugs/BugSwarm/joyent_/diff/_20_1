@@ -1,7 +1,0 @@
-[<Line: +    /**
->, <Line: +     * Cache TTL.
->, <Line: +     */
->, <Line: +    public void intercept(final HttpRequest request) throws IOException {
->]
-[<Line: -    public void intercept(HttpRequest request) throws IOException {
->]

@@ -1,4 +1,0 @@
-[<Line: +        final FluentList fluentList = instantiator.asFluentList(select);
->]
-[<Line: -        FluentList fluentList = instantiator.asFluentList(select);
->]

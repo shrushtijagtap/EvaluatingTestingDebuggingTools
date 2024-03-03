@@ -1,8 +1,0 @@
-[<Line: +   nat x = 0
->, <Line: +       x = x + xs[i]
->, <Line: +   return x
->]
-[<Line: -   nat r = 0
->, <Line: -       r = r + xs[i]
->, <Line: -   return r
->]

@@ -1,6 +1,0 @@
-[<Line: +public function toUnsignedInt(byte[] bytes) -> uint:
->, <Line: +public function toInt(byte[] bytes) -> int:
->]
-[<Line: -public function toUnsignedInt([byte] bytes) -> uint:
->, <Line: -public function toInt([byte] bytes) -> int:
->]

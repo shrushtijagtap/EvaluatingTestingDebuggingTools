@@ -1,4 +1,0 @@
-[<Line: +- Notify BaragonService
->, <Line: +  - Once the agent is ready to process updates, it will notify BaragonService via an http call. This is mostly important when ELB sync is used, because BaragonService will use this to trigger the initial addition of that instance to the ELB
->]
-[]

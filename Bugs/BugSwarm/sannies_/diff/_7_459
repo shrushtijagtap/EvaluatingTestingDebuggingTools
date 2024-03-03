@@ -1,8 +1,0 @@
-[<Line: +package org.mp4parser.muxer;
->, <Line: +import org.mp4parser.support.Logger;
->, <Line: +        this.filename = file.getName();
->]
-[<Line: -package com.googlecode.mp4parser;
->, <Line: -import com.googlecode.mp4parser.util.Logger;
->, <Line: -        this.filename =  file.getName();
->]

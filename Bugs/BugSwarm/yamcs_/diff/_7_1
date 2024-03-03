@@ -1,7 +1,0 @@
-[<Line: +        restClient1.close();
->, <Line: +        restClient1.close();
->, <Line: +        restClient1.close();
->, <Line: +        restClient1.close();
->, <Line: +        restClient1.setAutoclose(false);
->]
-[]

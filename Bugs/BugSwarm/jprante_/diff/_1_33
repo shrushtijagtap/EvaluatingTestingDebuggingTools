@@ -1,4 +1,0 @@
-[<Line: +        "url" : "jdbc:h2:./build/test",
->]
-[<Line: -        "url" : "jdbc:h2:./target/test",
->]

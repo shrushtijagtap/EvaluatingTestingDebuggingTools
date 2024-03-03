@@ -1,6 +1,0 @@
-[]
-[<Line: -    <dependency>
->, <Line: -      <groupId>com.palominolabs.metrics</groupId>
->, <Line: -      <artifactId>metrics-guice</artifactId>
->, <Line: -    </dependency>
->]

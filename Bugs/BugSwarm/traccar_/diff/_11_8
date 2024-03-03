@@ -1,6 +1,0 @@
-[<Line: +        long seconds = buf.readUnsignedInt() & 0x7fffffffL;
->, <Line: +        seconds += 946684800L; // 2000-01-01 00:00
->]
-[<Line: -        long seconds = buf.readUnsignedInt() & 0x7fffffffl;
->, <Line: -        seconds += 946684800l; // 2000-01-01 00:00
->]

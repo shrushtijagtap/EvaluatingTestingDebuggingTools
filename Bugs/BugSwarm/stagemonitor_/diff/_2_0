@@ -1,9 +1,0 @@
-[<Line: +	private String referringSite;
->, <Line: +	public void setReferringSite(String referringSite) {
->, <Line: +		this.referringSite = referringSite;
->, <Line: +	}
->, <Line: +	public String getReferringSite() {
->, <Line: +		return referringSite;
->, <Line: +	}
->]
-[]

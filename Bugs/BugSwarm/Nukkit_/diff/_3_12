@@ -1,9 +1,0 @@
-[<Line: +    public void attack(EntityDamageEvent source) {
->, <Line: +            super.attack(source);
->, <Line: +                    movingObjectPosition.entityHit.attack(ev);
->]
-[<Line: -    @Override
->, <Line: -    public void attack(float damage, EntityDamageEvent source) {
->, <Line: -            super.attack(damage, source);
->, <Line: -                    movingObjectPosition.entityHit.attack(ev.getFinalDamage(), ev);
->]

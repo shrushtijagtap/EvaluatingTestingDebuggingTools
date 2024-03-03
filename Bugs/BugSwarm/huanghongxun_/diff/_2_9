@@ -1,9 +1,0 @@
-[<Line: +    public abstract Task downloadMinecraftJar(MinecraftVersion mv, File f);
->, <Line: +    public abstract Task downloadMinecraftVersionJson(String id);
->]
-[<Line: -import org.jackhuang.hellominecraft.util.OverridableSwingWorker;
->, <Line: -import org.jackhuang.hellominecraft.launcher.core.download.MinecraftRemoteVersion;
->, <Line: -    public abstract boolean downloadMinecraftJar(String id);
->, <Line: -    public abstract Task downloadMinecraftJarTo(MinecraftVersion mv, File f);
->, <Line: -    public abstract boolean downloadMinecraftVersionJson(String id);
->]

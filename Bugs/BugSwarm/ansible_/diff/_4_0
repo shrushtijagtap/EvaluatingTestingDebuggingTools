@@ -1,4 +1,0 @@
-[<Line: +                            if result._task.action == 'include_vars':
->]
-[<Line: -                            if result._task.action in ('set_fact', 'include_vars'):
->]

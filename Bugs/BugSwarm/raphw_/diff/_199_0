@@ -1,6 +1,0 @@
-[<Line: +        logger.info('javadoc is only generated if net.bytebuddy.test.extras is set to true')
->]
-[<Line: -        println 'Bar!'
->, <Line: -        println 'Foo!'
->, <Line: -        /* extras are not requested*/
->]

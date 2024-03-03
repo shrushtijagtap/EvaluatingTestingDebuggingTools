@@ -1,6 +1,0 @@
-[<Line: +	/** the {@link GenotypeCalls} under test */
->, <Line: +		// create GenotypeCalls
->]
-[<Line: -	/** the {@link GenotypeList} under test */
->, <Line: -		// create GenotypeList
->]

@@ -1,4 +1,0 @@
-[<Line: +        return Integer.valueOf((int) getOntology().importsClosure().count());
->]
-[<Line: -        return (int) getOntology().importsClosure().count();
->]

@@ -1,7 +1,0 @@
-[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
->, <Line: +        OntologyConfigurator config = new OntologyConfigurator().setStrict(false);
->]
-[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
->, <Line: -        OWLOntologyLoaderConfiguration config =
->, <Line: -            new OWLOntologyLoaderConfiguration().setStrict(false);
->]

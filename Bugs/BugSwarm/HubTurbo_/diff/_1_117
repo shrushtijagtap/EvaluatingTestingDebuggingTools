@@ -1,6 +1,0 @@
-[<Line: +import java.util.Optional;
->, <Line: +import java.util.function.IntConsumer;
->]
-[<Line: -import java.util.Optional;
->, <Line: -import java.util.function.IntConsumer;
->]

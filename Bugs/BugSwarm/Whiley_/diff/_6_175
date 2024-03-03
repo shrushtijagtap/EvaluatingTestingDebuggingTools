@@ -1,4 +1,0 @@
-[<Line: +        where i >= 1 && i <= |xs|
->]
-[<Line: -        where i >= 1 
->]

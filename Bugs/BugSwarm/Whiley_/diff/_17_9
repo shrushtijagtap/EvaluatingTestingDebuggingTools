@@ -1,4 +1,0 @@
-[<Line: +		return new Expr.Nary(Expr.Nary.Op.ARRAY, exprs, sourceAttr(start,
->]
-[<Line: -		return new Expr.Nary(Expr.Nary.Op.LIST, exprs, sourceAttr(start,
->]

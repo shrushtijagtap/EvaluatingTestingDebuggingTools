@@ -1,6 +1,0 @@
-[<Line: +                for (Object rawModule : (Set<?>) layerType.getMethod("modules").invoke(layerType.getMethod("boot").invoke(null))) {
->, <Line: +                    for (String packageName : (String[]) JavaType.MODULE.load().getMethod("getPackages").invoke(rawModule)) {
->]
-[<Line: -                for (Object rawModule : (Set<?>) layerType.getDeclaredMethod("modules").invoke(layerType.getDeclaredMethod("boot").invoke(null))) {
->, <Line: -                    for (String packageName : (String[]) JavaType.MODULE.load().getDeclaredMethod("getPackages").invoke(rawModule)) {
->]

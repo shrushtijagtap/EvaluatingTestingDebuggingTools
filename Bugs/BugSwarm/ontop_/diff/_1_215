@@ -1,8 +1,0 @@
-[<Line: +        return classes.contains(cls.getName());
->, <Line: +        return !propertyExpression.isInverse() && properties.contains(propertyExpression.getName());
->, <Line: +        return  properties.contains(propertyExpression.getName());
->]
-[<Line: -        return classes.contains(cls.getPredicate().getName());
->, <Line: -        return !propertyExpression.isInverse() && properties.contains(propertyExpression.getPredicate().getName());
->, <Line: -        return  properties.contains(propertyExpression.getPredicate().getName());
->]

@@ -1,4 +1,0 @@
-[<Line: +    int TYPE_INITIALIZER_MODIFIER = Opcodes.ACC_STATIC;
->]
-[<Line: -    int TYPE_INITIALIZER_MODIFIER = Opcodes.ACC_STATIC | Opcodes.ACC_PRIVATE | Opcodes.ACC_SYNTHETIC;
->]

@@ -1,6 +1,0 @@
-[<Line: +        "<span id=\"errorMessageID\" class=\"" + StylesDefs.ERROR_MESSAGE + "\"></span>");
->, <Line: +    for (GeneratorSource generator: generators) {
->]
-[<Line: -        "<span id=\"errorMessageID\" class=\""+StylesDefs.ERROR_MESSAGE+"\"></span>");
->, <Line: -    for(GeneratorSource generator: generators) {
->]

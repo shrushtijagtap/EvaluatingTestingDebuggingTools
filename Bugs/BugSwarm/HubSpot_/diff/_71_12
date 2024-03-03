@@ -1,8 +1,0 @@
-[<Line: +package com.hubspot.baragon;
->, <Line: +public class BaragonServiceIntegrationTests {
->, <Line: +  // No-op main class to appease the Maven gods.
->, <Line: +  public static void main(String[] args) {
->, <Line: +  }
->, <Line: +}
->]
-[]

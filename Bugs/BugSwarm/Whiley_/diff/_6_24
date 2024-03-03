@@ -1,5 +1,0 @@
-[<Line: +	@Test public void Test_Type_23() { verifyPassTest("test_type_23"); }
->, <Line: +	@Test public void Test_Type_24() { verifyPassTest("test_type_24"); }
->, <Line: +	@Test public void Test_Type_25() { verifyPassTest("test_type_25"); }
->]
-[]

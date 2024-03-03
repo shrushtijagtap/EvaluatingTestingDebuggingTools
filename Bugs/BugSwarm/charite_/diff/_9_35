@@ -1,5 +1,0 @@
-[<Line: +import de.charite.compbio.jannovar.vardbs.base.VCFReaderVariantProvider;
->, <Line: +		super(new VCFReaderVariantProvider(vcfPath), fastaPath, options, new ExacVariantContextToRecordConverter());
->]
-[<Line: -		super(vcfPath, fastaPath, options, new ExacVariantContextToRecordConverter());
->]

@@ -1,6 +1,0 @@
-[<Line: +package com.puppycrawl.tools.checkstyle.checks.blocks;
->, <Line: +class InputSemantic
->]
-[<Line: -package com.puppycrawl.tools.checkstyle.checks.blocks.emptyblock;
->, <Line: -class InputEmptyBlockDefault
->]

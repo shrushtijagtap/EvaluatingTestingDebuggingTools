@@ -1,4 +1,0 @@
-[<Line: +			if (!isReportExternalRequest(externalRequest)) {
->]
-[<Line: -			if (false && !isReportExternalRequest(externalRequest)) {
->]

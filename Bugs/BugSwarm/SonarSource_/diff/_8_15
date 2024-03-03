@@ -1,5 +1,0 @@
-[<Line: +public class LocalVariableShadowsClassFieldCheckTest {
->]
-[<Line: -import org.sonar.plugins.php.CheckTest;
->, <Line: -public class LocalVariableShadowsClassFieldCheckTest extends CheckTest {
->]

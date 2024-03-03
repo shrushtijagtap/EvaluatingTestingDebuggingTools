@@ -1,9 +1,0 @@
-[]
-[<Line: -package com.mp4parser.streaming.extensions;
->, <Line: -import com.mp4parser.streaming.TrackExtension;
->, <Line: -/**
->, <Line: - * Created by sannies on 22.05.2015.
->, <Line: - */
->, <Line: -public class SampleFlagsTrackExtension implements TrackExtension {
->, <Line: -}
->]

@@ -1,6 +1,0 @@
-[<Line: +    while i < |xs| where i >= 0 && i <= |xs| && |rs| == count:
->, <Line: +    while j < |ys| where j >= 0 && |rs| == count:
->]
-[<Line: -    while i < |xs| where i >= 0:
->, <Line: -    while j < |ys| where j >= 0:
->]

@@ -1,9 +1,0 @@
-[<Line: + * Copyright 2012 - 2016 Anton Tananaev (anton.tananaev@gmail.com)
->, <Line: +import org.traccar.helper.PatternUtil;
->, <Line: +            .expression("[01]")                  // ack
->, <Line: +            .expression(".+&A")
->, <Line: +        PatternUtil.MatchResult r = PatternUtil.checkPattern(PATTERN.pattern(), (String) msg);
->]
-[<Line: - * Copyright 2012 - 2015 Anton Tananaev (anton.tananaev@gmail.com)
->, <Line: -            .expression("A.+&A")
->]

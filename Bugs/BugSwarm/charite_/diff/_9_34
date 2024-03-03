@@ -1,8 +1,0 @@
-[<Line: +import de.charite.compbio.jannovar.vardbs.base.VCFReaderVariantProvider;
->, <Line: +		super(new VCFReaderVariantProvider(vcfPath), fastaPath, options, new DBSNPVariantContextToRecordConverter());
->, <Line: +		VCFReaderVariantProvider vcfProvider = (VCFReaderVariantProvider) this.variantProvider;
->, <Line: +		this.dbSNPInfo = new DBSNPInfoFactory().build(vcfProvider.getVcfReader().getFileHeader());
->]
-[<Line: -		super(vcfPath, fastaPath, options, new DBSNPVariantContextToRecordConverter());
->, <Line: -		this.dbSNPInfo = new DBSNPInfoFactory().build(vcfReader.getFileHeader());
->]

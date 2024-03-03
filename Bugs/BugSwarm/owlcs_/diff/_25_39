@@ -1,4 +1,0 @@
-[<Line: +        if (!axiom.isAnnotationAxiom() || handler.getConfiguration().shouldLoadAnnotations()) {
->]
-[<Line: -        if (!axiom.isAnnotationAxiom() || handler.getConfiguration().isLoadAnnotationAxioms()) {
->]

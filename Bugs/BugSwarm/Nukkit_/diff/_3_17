@@ -1,8 +1,0 @@
-[<Line: +                .putInt("x", (int) this.x)
->, <Line: +                .putInt("y", (int) this.y)
->, <Line: +                .putInt("z", (int) this.z);
->]
-[<Line: -                .putInt("x", this.x)
->, <Line: -                .putInt("y", this.y)
->, <Line: -                .putInt("z", this.z);
->]

@@ -1,6 +1,0 @@
-[<Line: +import java.util.function.Supplier;
->, <Line: +public interface IGlobalPreference<T> extends Supplier<T> {
->, <Line: +	@Override
->]
-[<Line: -public interface IGlobalPreference<T> {
->]

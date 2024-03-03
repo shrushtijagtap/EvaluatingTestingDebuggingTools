@@ -1,6 +1,0 @@
-[<Line: +        if (this.values.length > 1 || params.paramAsBoolean("force_array", false)) {
->, <Line: +        if (this.values.length > 1 || params.paramAsBoolean("force_array", false)) {
->]
-[<Line: -        if (this.values.length > 1) {
->, <Line: -        if (this.values.length > 1) {
->]

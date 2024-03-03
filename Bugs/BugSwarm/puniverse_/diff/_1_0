@@ -1,4 +1,0 @@
-[<Line: +                jvmArgs "-javaagent:${shadowJarTask.archivePath}" // =vdc
->]
-[<Line: -                jvmArgs "-javaagent:${shadowJarTask.archivePath}"
->]

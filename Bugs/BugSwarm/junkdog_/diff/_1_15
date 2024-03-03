@@ -1,4 +1,0 @@
-[<Line: +		mv.visitMethodInsn(INVOKEVIRTUAL, profiler, "stop", "()V", false);
->]
-[<Line: -		mv.visitMethodInsn(INVOKEVIRTUAL, profiler, "stop", "()V");
->]

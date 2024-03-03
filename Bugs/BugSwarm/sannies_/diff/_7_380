@@ -1,4 +1,0 @@
-[<Line: +import org.mp4parser.boxes.dece.BaseLocationBox;
->]
-[<Line: -import com.googlecode.mp4parser.boxes.dece.BaseLocationBox;
->]

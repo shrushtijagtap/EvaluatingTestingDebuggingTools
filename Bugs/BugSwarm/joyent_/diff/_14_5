@@ -1,4 +1,0 @@
-[<Line: +            <class name="com.joyent.manta.client.MantaHttpHeadersIT" />
->, <Line: +            <class name="com.joyent.manta.client.MantaDirectoryListingIteratorIT" />
->]
-[]

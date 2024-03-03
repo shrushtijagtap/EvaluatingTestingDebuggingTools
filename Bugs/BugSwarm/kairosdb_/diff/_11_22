@@ -1,7 +1,0 @@
-[]
-[<Line: -import org.kairosdb.core.DataPoint;
->, <Line: -import org.kairosdb.core.datapoints.DataPointHelper;
->, <Line: -import org.kairosdb.core.datapoints.LongDataPoint;
->, <Line: -import java.nio.ByteBuffer;
->, <Line: -import org.kairosdb.core.exception.KairosDBException;
->]

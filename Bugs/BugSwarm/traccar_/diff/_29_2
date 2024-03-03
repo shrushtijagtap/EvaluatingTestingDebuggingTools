@@ -1,4 +1,0 @@
-[<Line: +                Assert.assertTrue("longitude >= -180", position.getLongitude() >= -180);
->, <Line: +                Assert.assertTrue("longitude <= 180", position.getLongitude() <= 180);
->]
-[]

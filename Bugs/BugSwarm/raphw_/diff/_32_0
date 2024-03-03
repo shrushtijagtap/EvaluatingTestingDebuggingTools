@@ -1,9 +1,0 @@
-[<Line: +import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
->, <Line: +        @SuppressFBWarnings(value = "EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS", justification = "Cross-comparison is intended")
->, <Line: +                    || (other instanceof StorageKey && ((StorageKey) other).hashCode == hashCode && ((StorageKey) other).get() == classLoader);
->, <Line: +        @SuppressFBWarnings(value = "EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS", justification = "Cross-comparison is intended")
->, <Line: +            return (other instanceof LookupKey && ((LookupKey) other).hashCode == hashCode && ((LookupKey) other).classLoader == get())
->]
-[<Line: -                    || (other instanceof StorageKey && ((StorageKey) other).get() == classLoader && ((StorageKey) other).hashCode == hashCode);
->, <Line: -            return (other instanceof LookupKey && ((LookupKey) other).classLoader == get() && ((LookupKey) other).hashCode == hashCode)
->]

@@ -1,4 +1,0 @@
-[<Line: +import org.yamcs.cli.Backup;
->, <Line: +                Backup.verifyBackupDirectory(backupDir, false);
->]
-[]

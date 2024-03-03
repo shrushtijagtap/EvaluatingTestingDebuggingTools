@@ -1,8 +1,0 @@
-[<Line: +                    if (now > 10) this.getPlayer().attack(ev);
->, <Line: +                    if (now > 1) this.getPlayer().attack(ev);
->, <Line: +                    this.getPlayer().attack(ev);
->]
-[<Line: -                    if (now > 10) this.getPlayer().attack(1, ev);
->, <Line: -                    if (now > 1) this.getPlayer().attack(1, ev);
->, <Line: -                    this.getPlayer().attack(1, ev);
->]

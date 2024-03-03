@@ -1,4 +1,0 @@
-[<Line: +					throw new IllegalStateException("QueryPlugin class " + bindingClass.getName() +
->]
-[<Line: -					throw new IllegalStateException("Aggregator class " + bindingClass.getName() +
->]

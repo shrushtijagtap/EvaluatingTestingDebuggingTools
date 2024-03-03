@@ -1,7 +1,0 @@
-[<Line: +import io.swagger.oas.models.ExternalDocumentation;
->, <Line: +import java.math.BigDecimal;
->, <Line: +import java.util.Map;
->, <Line: +   * @return List&lt;Schema&gt; allOf
->]
-[<Line: -   * @return List<Schema> allOf
->]

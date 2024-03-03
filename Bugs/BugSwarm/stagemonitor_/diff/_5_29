@@ -1,5 +1,0 @@
-[<Line: +	public void incrementExecutionTime(long additionalExecutionTime) {
->, <Line: +		executionTime += additionalExecutionTime;
->, <Line: +	}
->]
-[]

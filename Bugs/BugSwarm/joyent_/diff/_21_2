@@ -1,6 +1,0 @@
-[<Line: +        <module name="NeedBraces">
->, <Line: +            <property name="allowEmptyLoopBody" value="true" />
->, <Line: +        </module>
->]
-[<Line: -        <module name="NeedBraces"/>
->]

@@ -1,9 +1,0 @@
-[<Line: +                                        <scp  todir="${env.SCP_USERNAME}@frs.sourceforge.net:/home/frs/project/gcviewer/"
->, <Line: +                                              password="${env.SCP_PASSWORD}"
->, <Line: +                                              trust="true"
->, <Line: +                                              failonerror="true">
->]
-[<Line: -                                        <scp todir="${scp.username}:${scp.password}@frs.sourceforge.net:/home/frs/project/gcviewer/" trust="true" failonerror="true">
->, <Line: -                                                <include name="${project.build.finalName}.${project.packaging}" />
->, <Line: -                                                <include name="${project.build.finalName}-dist-mac.zip" />
->]

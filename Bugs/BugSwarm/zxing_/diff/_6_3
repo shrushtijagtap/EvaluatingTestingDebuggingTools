@@ -1,8 +1,0 @@
-[<Line: +  public boolean equals(Object o) {
->, <Line: +    ExpandedProductParsedResult other = (ExpandedProductParsedResult) o;
->, <Line: +  public int hashCode() {
->]
-[<Line: -  public boolean equals(Object o){
->, <Line: -    ExpandedProductParsedResult other = (ExpandedProductParsedResult)o;
->, <Line: -  public int hashCode(){
->]

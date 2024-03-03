@@ -1,4 +1,0 @@
-[<Line: +../../tests/invalid/RecursiveType_Invalid_3.whiley:7: expected type RecursiveType_Invalid_3:expr, found {int[] left,int op,int right}
->]
-[<Line: -../../tests/invalid/RecursiveType_Invalid_3.whiley:7: expected type RecursiveType_Invalid_3:expr, found {[int+] left,int op,int right}
->]

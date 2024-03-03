@@ -1,7 +1,0 @@
-[]
-[<Line: -method f([int] args) -> int:
->, <Line: -    int i = 1
->, <Line: -    for i in args:
->, <Line: -        r = r + i
->, <Line: -    return i
->]

@@ -1,6 +1,0 @@
-[<Line: +import org.traccar.helper.Checksum;
->, <Line: +        return Checksum.luhnChecksum(imei / 10) == imei % 10;
->]
-[<Line: -import org.traccar.helper.Crc;
->, <Line: -        return Crc.luhnChecksum(imei / 10) == imei % 10;
->]

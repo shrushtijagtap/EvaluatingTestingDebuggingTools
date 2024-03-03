@@ -1,6 +1,0 @@
-[<Line: +		if (RequestMonitor.get().getRequestTrace() != null) {
->, <Line: +				RequestMonitor.get().getRequestTrace().setName(requestNameFromHandler);
->]
-[<Line: -		if (RequestMonitor.getRequest() != null) {
->, <Line: -				RequestMonitor.getRequest().setName(requestNameFromHandler);
->]

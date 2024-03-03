@@ -1,4 +1,0 @@
-[<Line: +  protected boolean isEmptyConnectionData(@Nullable E connData) {
->]
-[<Line: -  protected boolean isEmptyConnectionData(E connData) {
->]

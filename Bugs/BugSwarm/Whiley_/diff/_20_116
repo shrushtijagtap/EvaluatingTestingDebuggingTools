@@ -1,4 +1,0 @@
-[<Line: +type CodeAttribute is {string name, Bytecode[] data}
->]
-[<Line: -type CodeAttribute is {string name, [Bytecode] data}
->]

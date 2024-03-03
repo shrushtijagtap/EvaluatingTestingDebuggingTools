@@ -1,4 +1,0 @@
-[<Line: +        where all { r in 0..|rs| | rs[r] >= 0 }:
->]
-[<Line: -        where all { r in rs | r >= 0 }:
->]

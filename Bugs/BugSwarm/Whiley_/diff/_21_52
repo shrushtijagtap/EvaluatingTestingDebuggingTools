@@ -1,5 +1,0 @@
-[<Line: +function f([int] x) -> int
->, <Line: +requires |x| > 0:
->]
-[<Line: -function f([int] x) -> int:
->]

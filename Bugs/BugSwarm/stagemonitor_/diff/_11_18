@@ -1,5 +1,0 @@
-[<Line: +      "refresh_interval" : "5s",
->, <Line: +      "query.default_field": "name"
->]
-[<Line: -      "refresh_interval" : "5s"
->]

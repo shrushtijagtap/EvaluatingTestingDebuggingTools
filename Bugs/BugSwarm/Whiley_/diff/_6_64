@@ -1,4 +1,0 @@
-[<Line: +    <!--<wyjc verbose="false" wyildir="../wyrt/src" classdir="src" includes="whiley/**/*.wyil"/>-->
->]
-[<Line: -    <wyjc verbose="false" wyildir="../wyrt/src" classdir="src" includes="whiley/**/*.wyil"/>
->]

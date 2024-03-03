@@ -1,4 +1,0 @@
-[<Line: +    compile project(":HMCUtils")
->]
-[<Line: -    compile project(":HMCLAPI")
->]

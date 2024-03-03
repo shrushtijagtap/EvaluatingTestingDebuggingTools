@@ -1,4 +1,0 @@
-[<Line: +    method read(uint) -> byte[],
->]
-[<Line: -    method read(uint) -> [byte],
->]

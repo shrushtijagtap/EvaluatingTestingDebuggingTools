@@ -1,7 +1,0 @@
-[<Line: +      NodeTraversal.traverse(compiler, externsRoot, new BuildGlobalNamespace());
->, <Line: +    NodeTraversal.traverse(compiler, root, new BuildGlobalNamespace());
->]
-[<Line: -      NodeTraversal.traverseEs6(compiler, externsRoot, new BuildGlobalNamespace());
->, <Line: -    NodeTraversal.traverseEs6(compiler, root, new BuildGlobalNamespace());
->, <Line: -      scope = scope.getClosestHoistScope();
->]

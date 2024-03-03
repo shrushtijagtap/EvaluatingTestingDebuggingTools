@@ -1,6 +1,0 @@
-[<Line: +function extract(int[] ls) -> int[]:
->, <Line: +    int[] r = [0; |ls|]
->]
-[<Line: -function extract([int] ls) -> [int]:
->, <Line: -    [int] r = [0; |ls|]
->]

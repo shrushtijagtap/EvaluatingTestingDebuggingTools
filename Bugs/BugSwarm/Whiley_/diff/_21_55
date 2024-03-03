@@ -1,4 +1,0 @@
-[<Line: +    while i < |input| where i >= 0:
->]
-[<Line: -    while i < |input|:
->]

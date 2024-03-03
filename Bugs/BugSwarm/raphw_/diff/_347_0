@@ -1,6 +1,0 @@
-[<Line: +    @Rule
->, <Line: +        ((Runnable) Class.forName("net.bytebuddy.test.precompiled.AnonymousClassLoader").newInstance()).run();
->]
-[<Line: -import org.mockito.Mockito;
->, <Line: -        ((Runnable) Class.forName("net.bytebuddy.test.precompiled.AnonymousClassLoaderTest").newInstance()).run();
->]

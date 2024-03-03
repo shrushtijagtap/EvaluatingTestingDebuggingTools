@@ -1,8 +1,0 @@
-[<Line: +    private Integer getIndent() {
->, <Line: +        return Integer.valueOf(getCurrentPos() - lastNewLineIndex);
->, <Line: +            tabIndent = tabs.peek().intValue();
->]
-[<Line: -    private int getIndent() {
->, <Line: -        return getCurrentPos() - lastNewLineIndex;
->, <Line: -            tabIndent = tabs.peek();
->]

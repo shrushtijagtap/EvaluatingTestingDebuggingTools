@@ -1,4 +1,0 @@
-[<Line: +        return Opcodes.ACC_FINAL | Opcodes.ACC_VOLATILE | Opcodes.ACC_TRANSIENT;
->]
-[<Line: -        return Opcodes.ACC_FINAL | Opcodes.ACC_VOLATILE;
->]

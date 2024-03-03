@@ -1,8 +1,0 @@
-[<Line: +import org.traccar.helper.Checksum;
->, <Line: +        request.writeInt(Checksum.crc32(request.toByteBuffer(0, 4)));
->, <Line: +            request.writeInt(Checksum.crc32(request.toByteBuffer(0, 10)));
->]
-[<Line: -import org.traccar.helper.Crc;
->, <Line: -        request.writeInt(Crc.crc32(request.toByteBuffer(0, 4)));
->, <Line: -            request.writeInt(Crc.crc32(request.toByteBuffer(0, 10)));
->]

@@ -1,7 +1,0 @@
-[<Line: +import org.mp4parser.streaming.input.h264.spspps.SliceHeader;
->]
-[<Line: -import org.mp4parser.muxer.tracks.h264.SliceHeader;
->, <Line: -/**
->, <Line: - * Created by sannies on 17.08.2015.
->, <Line: - */
->]

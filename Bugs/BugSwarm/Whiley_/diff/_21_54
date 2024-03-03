@@ -1,4 +1,0 @@
-[<Line: +    while i < |bytes| where i >= 0:
->]
-[<Line: -    while i < |bytes|:
->]

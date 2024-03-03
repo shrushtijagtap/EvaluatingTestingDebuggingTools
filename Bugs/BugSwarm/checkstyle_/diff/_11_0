@@ -1,8 +1,0 @@
-[<Line: +        <!-- till https://github.com/sevntu-checkstyle/sevntu.checkstyle/issues/429
->, <Line: +          <module name="StaticMethodCandidate"/>-->
->, <Line: +        <!-- till https://github.com/sevntu-checkstyle/sevntu.checkstyle/issues/429
->, <Line: +        </module>-->
->]
-[<Line: -        <module name="StaticMethodCandidate"/>
->, <Line: -        </module>
->]

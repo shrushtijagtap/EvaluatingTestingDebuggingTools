@@ -1,4 +1,0 @@
-[<Line: +        return ReactiveStreams.toProcessor(null, bufferSize, overflowPolicy, new SuspendableAction2<ReceivePort<Integer>, SendPort<Integer>>() {
->]
-[<Line: -        return ReactiveStreams.toProcessor(null, bufferSize, overflowPolicy, batch, new SuspendableAction2<ReceivePort<Integer>, SendPort<Integer>>() {
->]

@@ -1,5 +1,0 @@
-[<Line: +import it.unibz.krdb.obda.ontology.ImmutableOntologyVocabulary;
->, <Line: +	public void setTBox(TBoxReasoner ontology, ImmutableOntologyVocabulary voc, LinearInclusionDependencies sigma);
->]
-[<Line: -	public void setTBox(TBoxReasoner ontology, LinearInclusionDependencies sigma);
->]

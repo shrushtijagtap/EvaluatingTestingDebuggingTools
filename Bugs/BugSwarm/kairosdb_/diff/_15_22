@@ -1,9 +1,0 @@
-[<Line: +import org.kairosdb.plugin.Aggregator;
->, <Line: +import org.kairosdb.plugin.GroupBy;
->, <Line: +	public void addPlugin(QueryPlugin plugin)
->]
-[<Line: -import org.kairosdb.core.aggregator.Aggregator;
->, <Line: -import org.kairosdb.core.groupby.GroupBy;
->, <Line: -	public QueryMetric addPlugin(QueryPlugin plugin)
->, <Line: -		return this;
->]

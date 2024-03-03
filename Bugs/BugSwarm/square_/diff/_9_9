@@ -1,9 +1,0 @@
-[<Line: +  public static boolean arrayRangeEquals(
->, <Line: +      byte[] a, int aOffset, byte[] b, int bOffset, int byteCount) {
->, <Line: +    for (int i = 0; i < byteCount; i++) {
->, <Line: +      if (a[i + aOffset] != b[i + bOffset]) return false;
->, <Line: +    }
->, <Line: +    return true;
->, <Line: +  }
->]
-[]

@@ -1,4 +1,0 @@
-[<Line: +    if (!(o instanceof FinderPattern)) {
->]
-[<Line: -    if(!(o instanceof FinderPattern)) {
->]

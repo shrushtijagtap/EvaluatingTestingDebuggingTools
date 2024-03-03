@@ -1,4 +1,0 @@
-[<Line: +                    : new Generic.LazyProjection.WithLazyNavigation.Detached(superClass, Generic.Visitor.Substitutor.ForAttachment.of(this));
->]
-[<Line: -                    : superClass.accept(Generic.Visitor.Substitutor.ForAttachment.of(this));
->]

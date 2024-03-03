@@ -1,6 +1,0 @@
-[<Line: +test48:
->, <Line: +    minimumTcPacketLength: 48
->]
-[<Line: -test0:
->, <Line: -    minimumTcPacketLength: 0
->]

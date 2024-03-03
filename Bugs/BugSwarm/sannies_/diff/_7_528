@@ -1,8 +1,0 @@
-[<Line: +package org.mp4parser.muxer.tracks.h264.parsing.read;
->, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.BTree;
->, <Line: +import static org.mp4parser.muxer.tracks.h264.parsing.Debug.println;
->]
-[<Line: -package com.googlecode.mp4parser.h264.read;
->, <Line: -import com.googlecode.mp4parser.h264.BTree;
->, <Line: -import static com.googlecode.mp4parser.h264.Debug.println;
->]

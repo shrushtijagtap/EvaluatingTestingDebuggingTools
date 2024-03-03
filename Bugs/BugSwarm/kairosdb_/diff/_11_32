@@ -1,8 +1,0 @@
-[<Line: +import static org.kairosdb.util.Util.packLong;
->, <Line: +import static org.kairosdb.util.Util.unpackLong;
->]
-[<Line: -import org.kairosdb.util.BufferedDataOutputStream;
->, <Line: -import java.nio.ByteBuffer;
->, <Line: -import java.nio.channels.FileChannel;
->, <Line: -import static org.kairosdb.util.Util.*;
->]

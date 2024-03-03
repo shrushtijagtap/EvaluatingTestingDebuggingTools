@@ -1,4 +1,0 @@
-[<Line: +            ontology = checkNotNull(man.createOntology(collect));
->]
-[<Line: -            ontology = checkNotNull(man.createOntology(axs));
->]

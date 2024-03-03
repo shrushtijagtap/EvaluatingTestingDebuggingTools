@@ -1,6 +1,0 @@
-[<Line: +package org.mp4parser.boxes.iso14496.part1.objectdescriptors;
->, <Line: +import org.mp4parser.tools.IsoTypeReader;
->]
-[<Line: -package com.googlecode.mp4parser.boxes.mp4.objectdescriptors;
->, <Line: -import com.coremedia.iso.IsoTypeReader;
->]

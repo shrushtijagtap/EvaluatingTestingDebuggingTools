@@ -1,9 +1,0 @@
-[<Line: +import org.testng.annotations.ITestAnnotation;
->, <Line: +    if (m_testName == null) {
->, <Line: +      ITestAnnotation annotation = m_annotationFinder.findAnnotation(cls, ITestAnnotation.class);
->, <Line: +      if (annotation != null) {
->, <Line: +        m_testName = annotation.getTestName();
->, <Line: +      }
->, <Line: +    }
->]
-[]

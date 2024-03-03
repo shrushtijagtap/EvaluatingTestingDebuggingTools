@@ -1,4 +1,0 @@
-[<Line: +        when(annotationType.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotations(retention));
->]
-[<Line: -        when(annotationType.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotation(retention));
->]

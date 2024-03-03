@@ -1,9 +1,0 @@
-[<Line: +            ManchesterOWLSyntaxParser parser = new ManchesterOWLSyntaxParserImpl(p.getConfig(),
->, <Line: +                p.getOntology().getOWLOntologyManager().getOWLDataFactory());
->]
-[<Line: -import org.semanticweb.owlapi.model.OntologyConfigurator;
->, <Line: -            ManchesterOWLSyntaxParser parser =
->, <Line: -                new ManchesterOWLSyntaxParserImpl(new OntologyConfigurator(),
->, <Line: -                    p.getOntology().getOWLOntologyManager().getOWLDataFactory());
->, <Line: -            parser.setOntologyLoaderConfiguration(p.getConfig());
->]

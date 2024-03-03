@@ -1,4 +1,0 @@
-[<Line: +                {FieldManifestation.TRANSIENT, Opcodes.ACC_TRANSIENT, false, false, false, true, false},
->]
-[<Line: -                {FieldManifestation.TRANSIENT, Opcodes.ACC_TRANSIENT, false, false, true, true, false},
->]

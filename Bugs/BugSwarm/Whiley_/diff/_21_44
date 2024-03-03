@@ -1,4 +1,0 @@
-[<Line: +type posintlist is ([int] list) where no { i in 0 .. |list| | list[i] < 0 }
->]
-[<Line: -type posintlist is ([int] list) where no { x in list | x < 0 }
->]

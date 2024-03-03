@@ -1,6 +1,0 @@
-[<Line: +	public void test_getKeysForQuery() throws DatastoreException
->, <Line: +	public void test_getKeysForQuery_withFilter() throws DatastoreException
->]
-[<Line: -	public void test_getKeysForQuery()
->, <Line: -	public void test_getKeysForQuery_withFilter()
->]

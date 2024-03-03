@@ -1,4 +1,0 @@
-[<Line: +        return this.generateLevel(name, new java.util.Random().nextLong());
->]
-[<Line: -        return this.generateLevel(name, (int) new java.util.Random().nextLong());
->]

@@ -1,6 +1,0 @@
-[<Line: +public class FactualGeocoder extends JsonGeocoder {
->, <Line: +    public FactualGeocoder(String url, String key, int cacheSize) {
->]
-[<Line: -public class FactualReverseGeocoder extends JsonReverseGeocoder {
->, <Line: -    public FactualReverseGeocoder(String url, String key, int cacheSize) {
->]

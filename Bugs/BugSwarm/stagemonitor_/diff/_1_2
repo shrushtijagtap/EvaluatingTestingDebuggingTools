@@ -1,4 +1,0 @@
-[<Line: +		when(corePlugin.isReportToJMX()).thenReturn(true);
->]
-[<Line: -		when(corePlugin.reportToJMX()).thenReturn(true);
->]

@@ -1,6 +1,0 @@
-[<Line: +package org.mp4parser.muxer.tracks.h264.parsing.write;
->, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.Debug;
->]
-[<Line: -package com.googlecode.mp4parser.h264.write;
->, <Line: -import com.googlecode.mp4parser.h264.Debug;
->]

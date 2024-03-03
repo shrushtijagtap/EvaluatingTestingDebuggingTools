@@ -1,5 +1,0 @@
-[<Line: +            this(String.format("%s$%d", PREFIX, Math.abs(fixedValue.hashCode() % Integer.MAX_VALUE)), fixedValue, assigner, typing);
->]
-[<Line: -import net.bytebuddy.utility.RandomString;
->, <Line: -            this(String.format("%s$%s", PREFIX, RandomString.make()), fixedValue, assigner, typing);
->]

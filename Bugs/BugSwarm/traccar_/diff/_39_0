@@ -1,4 +1,0 @@
-[<Line: +                    geocoder = new GeocodeFarmGeocoder(key, language, cacheSize);
->]
-[<Line: -                    geocoder = new GeocodeFarmGeocoder(key, cacheSize);
->]

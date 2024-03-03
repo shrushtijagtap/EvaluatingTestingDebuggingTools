@@ -1,6 +1,0 @@
-[<Line: +function f(int[] ls) -> bool
->, <Line: +function g(int[] ls) -> void:
->]
-[<Line: -function f([int] ls) -> bool
->, <Line: -function g([int] ls) -> void:
->]

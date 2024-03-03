@@ -1,6 +1,0 @@
-[<Line: +            LOGGER.info("DONE Calling the Reasoner. isLocal = {}", Boolean.valueOf(isLocal));
->, <Line: +            LOGGER.info("DONE Calling the Reasoner. isLocal = {}", Boolean.valueOf(isLocal));
->]
-[<Line: -            LOGGER.info("DONE Calling the Reasoner. isLocal = {}", isLocal);
->, <Line: -            LOGGER.info("DONE Calling the Reasoner. isLocal = {}", isLocal);
->]

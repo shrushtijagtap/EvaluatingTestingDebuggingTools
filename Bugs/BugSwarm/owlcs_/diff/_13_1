@@ -1,5 +1,0 @@
-[<Line: +        super(documentIRI, () -> new GZIPInputStream(new FileInputStream(input)), format, mime);
->]
-[<Line: -        super(documentIRI, format, mime);
->, <Line: -        inputStream = () -> new GZIPInputStream(new FileInputStream(input));
->]

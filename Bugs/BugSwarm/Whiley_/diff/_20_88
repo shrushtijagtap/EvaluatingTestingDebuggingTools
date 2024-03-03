@@ -1,4 +1,0 @@
-[<Line: +../../tests/invalid/UnionType_Invalid_5.whiley:8: expected type UnionType_Invalid_5:IntList, found {int[] op,real[] rest}
->]
-[<Line: -../../tests/invalid/UnionType_Invalid_5.whiley:8: expected type UnionType_Invalid_5:IntList, found {[int] op,[real] rest}
->]

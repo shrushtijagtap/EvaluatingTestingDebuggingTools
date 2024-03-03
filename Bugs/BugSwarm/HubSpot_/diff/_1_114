@@ -1,5 +1,0 @@
-[]
-[<Line: -        <div class="col-md-12">
->, <Line: -            <input type="search" class="big-search-box" placeholder="Filter Elbs" value="{{ searchFilter }}" required />
->, <Line: -        </div>
->]

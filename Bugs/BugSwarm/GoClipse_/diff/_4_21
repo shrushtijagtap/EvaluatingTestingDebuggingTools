@@ -1,4 +1,0 @@
-[<Line: +			lineStartOffset = parser.getReadPosition();
->]
-[<Line: -			lineStartOffset = parser.getReadOffset();
->]

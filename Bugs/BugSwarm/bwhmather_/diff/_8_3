@@ -1,7 +1,0 @@
-[<Line: +                requests.BaseRequest,
->, <Line: +                requests.ETagRequestMixin,
->, <Line: +                requests.UserAgentMixin,
->]
-[<Line: -                requests.BaseRequest, requests.AcceptMixin,
->, <Line: -                requests.ETagRequestMixin, requests.UserAgentMixin,
->]

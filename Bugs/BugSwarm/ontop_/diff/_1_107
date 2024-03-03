@@ -1,5 +1,0 @@
-[<Line: +import it.unibz.krdb.obda.owlapi3.OWLAPI3TranslatorUtility;
->, <Line: +			TBoxReasoner reasoner = TBoxReasonerImpl.create(OWLAPI3TranslatorUtility.loadOntologyFromFile(fileInput));
->]
-[<Line: -			TBoxReasoner reasoner = new TBoxReasonerImpl(S_InputOWL.createOWL(fileInput));
->]

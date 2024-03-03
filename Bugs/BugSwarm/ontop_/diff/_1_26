@@ -1,8 +1,0 @@
-[<Line: +import com.google.common.collect.ImmutableList;
->, <Line: + * @author Roman Kontchakov
->, <Line: +	public ImmutableList<T> getComponents();
->]
-[<Line: -import java.util.Set;
->, <Line: - * @author roman
->, <Line: -	public Set<T> getComponents();
->]

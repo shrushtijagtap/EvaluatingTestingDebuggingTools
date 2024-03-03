@@ -1,4 +1,0 @@
-[<Line: +  private Map<Class, IClass> m_classes = Maps.newHashMap();
->]
-[<Line: -  private Map<Class, IClass> m_classes = Maps.newLinkedHashMap(); // Changed to reproduce issue #87 (order is important)
->]

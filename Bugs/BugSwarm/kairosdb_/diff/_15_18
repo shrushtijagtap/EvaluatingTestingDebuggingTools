@@ -1,5 +1,0 @@
-[<Line: +public interface DatastoreMetricQuery extends PluggableQuery
->]
-[<Line: -public interface DatastoreMetricQuery
->, <Line: -	List<QueryPlugin> getPlugins();
->]

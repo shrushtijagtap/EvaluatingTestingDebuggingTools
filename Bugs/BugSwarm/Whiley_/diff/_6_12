@@ -1,9 +1,0 @@
-[]
-[<Line: -import wyil.transforms.*;
->, <Line: -					add(new Pipeline.Template(DefiniteAssignmentCheck.class,
->, <Line: -							Collections.EMPTY_MAP));
->, <Line: -					add(new Pipeline.Template(LoopVariants.class,
->, <Line: -							Collections.EMPTY_MAP));
->, <Line: -		Pipeline.register(DefiniteAssignmentCheck.class);
->, <Line: -		Pipeline.register(LoopVariants.class);		
->]

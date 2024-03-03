@@ -1,5 +1,0 @@
-[<Line: +     {'regex': u"(?i)(orabank|cfpchampionship2015playofflive|optimalstackfacts\.org|maletestosteronebooster\.org|x4facts\.com|tripleeffectseyeserum\.org|healthcaresup\.com|garciniacambogiaprofacts\.com|filerepairforum\.com)", 'sites': [], 'all': True, 'reason': "Blacklisted website", 'title': True, 'body': True, 'username': True},
->, <Line: +     {'regex': u"([a-zA-Z0-9])\1{10,}", 'all': True, 'sites': [], 'reason': "Repeating characters in {}", 'title': True, 'body': True, 'username': False}
->]
-[<Line: -     {'regex': u"(?i)(orabank|cfpchampionship2015playofflive|optimalstackfacts\.org|maletestosteronebooster\.org|x4facts\.com|tripleeffectseyeserum\.org|healthcaresup\.com|garciniacambogiaprofacts\.com|filerepairforum\.com)", 'sites': [], 'all': True, 'reason': "Blacklisted website", 'title': True, 'body': True, 'username': True}
->]

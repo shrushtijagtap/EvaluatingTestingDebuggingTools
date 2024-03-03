@@ -1,6 +1,0 @@
-[<Line: +                                .putByte("Id", (byte) effect.getId())
->, <Line: +                                .putByte("Amplifier", (byte) effect.getAmplifier())
->]
-[<Line: -                                .putByte("Id", effect.getId())
->, <Line: -                                .putByte("Amplifier", effect.getAmplifier())
->]

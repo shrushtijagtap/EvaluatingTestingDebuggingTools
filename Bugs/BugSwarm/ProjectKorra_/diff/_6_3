@@ -1,5 +1,0 @@
-[<Line: +import com.bekvon.bukkit.residence.protection.FlagPermissions;
->, <Line: +		if (Bukkit.getPluginManager().getPlugin("Residence") != null)
->, <Line: +			FlagPermissions.addFlag(ConfigManager.defaultConfig.get().getString("Properties.RegionProtection.Residence.Flag"));
->]
-[]

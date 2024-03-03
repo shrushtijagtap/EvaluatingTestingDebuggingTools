@@ -1,4 +1,0 @@
-[<Line: +function f(int[] x) -> void:
->]
-[<Line: -function f([int] x) -> void:
->]

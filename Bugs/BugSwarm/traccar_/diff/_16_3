@@ -1,6 +1,0 @@
-[<Line: +import org.traccar.api.resource.StatisticsResource;
->, <Line: +                NotificationResource.class, ReportResource.class, AttributeAliasResource.class,
->, <Line: +                StatisticsResource.class);
->]
-[<Line: -                NotificationResource.class, ReportResource.class, AttributeAliasResource.class);
->]

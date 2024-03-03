@@ -1,5 +1,0 @@
-[<Line: +            ontology.getOWLOntologyManager().getOntologyConfigurator());
->]
-[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
->, <Line: -            ontology.getOWLOntologyManager().getOntologyLoaderConfiguration());
->]

@@ -1,6 +1,0 @@
-[<Line: +		m_ttl = ttl;
->]
-[<Line: -import java.util.SortedMap;
->, <Line: -import java.util.TreeMap;
->, <Line: -		m_ttl  = ttl;
->]

@@ -1,6 +1,0 @@
-[]
-[<Line: -import org.traccar.database.DataCache;
->, <Line: -import org.traccar.database.DataManager;
->, <Line: -import org.traccar.geocode.ReverseGeocoder;
->, <Line: -import javax.crypto.Cipher;
->]

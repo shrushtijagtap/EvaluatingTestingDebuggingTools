@@ -1,4 +1,0 @@
-[<Line: +        newton_cg(grad_hess, func, grad, x0, tol=1e-10)[0],
->]
-[<Line: -        newton_cg(grad_hess, func, grad, x0, tol=1e-10),
->]

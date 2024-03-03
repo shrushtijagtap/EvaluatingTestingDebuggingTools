@@ -1,8 +1,0 @@
-[<Line: +function invertByte(bool[] bits) -> (bool[] r)
->, <Line: +ensures |r| == 8
->, <Line: +ensures all { i in 0 .. 8 | r[i] == !bits[i] }:
->]
-[<Line: -function invertByte(bool[] bits) -> (bool[] ret)
->, <Line: -ensures |ret| == 8
->, <Line: -ensures all { i in 0 .. 8 | ret[i] == !bits[i] }:
->]

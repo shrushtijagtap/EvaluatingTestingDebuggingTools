@@ -1,6 +1,0 @@
-[<Line: +        ObjectPropertyAssertion.of(Advice.Dispatcher.OffsetMapping.Target.ForType.class).apply();
->]
-[<Line: -import net.bytebuddy.matcher.ElementMatchers;
->, <Line: -import net.bytebuddy.test.utility.DebuggingWrapper;
->, <Line: -import static javafx.scene.input.KeyCode.M;
->]

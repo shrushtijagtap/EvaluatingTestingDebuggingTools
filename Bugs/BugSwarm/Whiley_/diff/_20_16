@@ -1,4 +1,0 @@
-[<Line: +    method write(byte[]) -> uint,
->]
-[<Line: -    method write([byte]) -> uint,
->]

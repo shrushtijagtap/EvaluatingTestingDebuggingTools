@@ -1,5 +1,0 @@
-[<Line: +                new TestData(getClassLoaderResource("/wmf/test.wmf"), new Dimension(133, 106))
->]
-[<Line: -                // TODO: Dimensions does not look right...
->, <Line: -                new TestData(getClassLoaderResource("/wmf/test.wmf"), new Dimension(841, 673))
->]

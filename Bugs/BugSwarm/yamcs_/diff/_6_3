@@ -1,7 +1,0 @@
-[<Line: +import java.util.Random;
->, <Line: +    static final public String UNIQUEID_HDR_NAME="_y_uniqueid";
->, <Line: +    static final public int UNIQUEID = new Random().nextInt();
->, <Line: +                        msg.putIntProperty(UNIQUEID_HDR_NAME, UNIQUEID);
->]
-[<Line: -                        msg.putIntProperty(StreamAdapter.UNIQUEID_HDR_NAME, StreamAdapter.UNIQUEID);
->]

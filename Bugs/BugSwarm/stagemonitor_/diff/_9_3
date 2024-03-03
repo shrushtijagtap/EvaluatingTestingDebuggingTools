@@ -1,6 +1,0 @@
-[<Line: +import static org.stagemonitor.core.metrics.metrics2.MetricName.name;
->, <Line: +		check.setTarget(name("test").build());
->]
-[<Line: -import java.util.regex.Pattern;
->, <Line: -		check.setTarget(Pattern.compile("test"));
->]

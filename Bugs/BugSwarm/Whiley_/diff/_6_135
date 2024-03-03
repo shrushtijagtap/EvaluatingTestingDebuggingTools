@@ -1,9 +1,0 @@
-[<Line: +type List is null | { int data, List next }
->, <Line: +function f(bool|int|null x) -> (bool r):
->, <Line: +    //
->, <Line: +    if !(x is null || x is int):
->, <Line: +        return false
->, <Line: +    else:
->, <Line: +        return x
->]
-[]

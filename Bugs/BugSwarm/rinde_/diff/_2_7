@@ -1,7 +1,0 @@
-[<Line: +import javax.annotation.Nullable;
->, <Line: +    public FileVisitResult visitFile(@Nullable Path file, @Nullable BasicFileAttributes attrs)
->, <Line: +    public boolean apply(@Nullable Path input) {
->]
-[<Line: -    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
->, <Line: -    public boolean apply(Path input) {
->]

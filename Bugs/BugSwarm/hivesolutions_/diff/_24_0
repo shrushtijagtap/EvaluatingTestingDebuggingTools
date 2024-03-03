@@ -1,4 +1,0 @@
-[<Line: +from .http import get_f, get, post, put, delete
->]
-[<Line: -from .http import get_file, get, post, put, delete
->]

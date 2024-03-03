@@ -1,6 +1,0 @@
-[<Line: +        registerRouteHandler(null, new ArchiveParameterRestHandler());
->]
-[<Line: -import org.yamcs.web.rest.archive.ArchiveParameter2RestHandler;
->, <Line: -        registerRouteHandler(null, new ArchiveParameterRestHandler());
->, <Line: -        registerRouteHandler(null, new ArchiveParameter2RestHandler());
->]

@@ -1,8 +1,0 @@
-[<Line: +import org.apache.logging.log4j.LogManager;
->, <Line: +import org.apache.logging.log4j.Logger;
->, <Line: +import java.awt.*;
->]
-[<Line: -import java.awt.Desktop;
->, <Line: -import org.apache.logging.log4j.LogManager;
->, <Line: -import org.apache.logging.log4j.Logger;
->]

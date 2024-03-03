@@ -1,5 +1,0 @@
-[<Line: +                String.format("%s$%d", ImplementationDelegate.FIELD_NAME_PREFIX, Math.abs(delegate.hashCode() % Integer.MAX_VALUE)),
->]
-[<Line: -import net.bytebuddy.utility.RandomString;
->, <Line: -                String.format("%s$%s", ImplementationDelegate.FIELD_NAME_PREFIX, RandomString.make()),
->]

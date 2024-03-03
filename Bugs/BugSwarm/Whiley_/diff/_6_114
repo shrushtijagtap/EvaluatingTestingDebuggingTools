@@ -1,8 +1,0 @@
-[<Line: +type scf8tup is ({scf8nat f, int g} r) where r.g > r.f
->, <Line: +function f(scf8tup[] xs) -> int:
->, <Line: +    {int f, int g}[] x = [{f: 1, g: 2}, {f: 4, g: 8}]
->]
-[<Line: -type scf8tup is {scf8nat f, int g} where g > f
->, <Line: -function f([scf8tup] xs) -> int:
->, <Line: -    [{int f, int g}] x = [{f: 1, g: 2}, {f: 4, g: 8}]
->]

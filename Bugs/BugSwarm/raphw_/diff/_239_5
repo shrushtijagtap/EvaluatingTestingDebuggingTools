@@ -1,4 +1,0 @@
-[<Line: +### 27. October 2016: version 1.5.1
->, <Line: +- Fixed stack size computation when using `@Advice.Origin`.
->]
-[]

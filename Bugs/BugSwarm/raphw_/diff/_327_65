@@ -1,4 +1,0 @@
-[<Line: +public class TypePoolDefaultLazyMethodListTest extends AbstractMethodListTest<Method, MethodDescription.InDefinedShape> {
->]
-[<Line: -public class TypePoolLazyMethodListTest extends AbstractMethodListTest<Method, MethodDescription.InDefinedShape> {
->]

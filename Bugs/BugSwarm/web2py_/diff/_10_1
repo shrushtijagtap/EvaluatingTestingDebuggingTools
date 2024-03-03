@@ -1,7 +1,0 @@
-[<Line: +        from gluon.serializers import custom_json, xml
->, <Line: +        self.assertEqual(db.serializers['json'], custom_json)
->, <Line: +        self.assertEqual(db.serializers['xml'], xml)
->]
-[<Line: -        import gluon.serializers as mserializers
->, <Line: -        self.assertEqual(db.serializers, mserializers)
->]

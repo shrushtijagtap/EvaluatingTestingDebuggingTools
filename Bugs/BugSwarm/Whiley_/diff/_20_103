@@ -1,4 +1,0 @@
-[<Line: +function extract(int[] ls, int[] r) -> int[] requires |ls| == |r|:
->]
-[<Line: -function extract([int] ls, [int] r) -> [int] requires |ls| == |r|:
->]

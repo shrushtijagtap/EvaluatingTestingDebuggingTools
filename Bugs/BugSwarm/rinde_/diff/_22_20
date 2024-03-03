@@ -1,6 +1,0 @@
-[<Line: +org.eclipse.jdt.apt.aptEnabled=true
->, <Line: +org.eclipse.jdt.apt.genSrcDir=target/generated-sources/annotations
->, <Line: +org.eclipse.jdt.apt.reconcileEnabled=true
->]
-[<Line: -org.eclipse.jdt.apt.aptEnabled=false
->]

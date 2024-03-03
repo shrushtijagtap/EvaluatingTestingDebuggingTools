@@ -1,8 +1,0 @@
-[<Line: +type nat is (int x) where x >= 0
->, <Line: +function g(nat[] xs) -> nat[]:
->, <Line: +    nat[] ys = [0; |xs|]
->]
-[<Line: -type fr6nat is (int x) where x >= 0
->, <Line: -function g([fr6nat] xs) -> [fr6nat]:
->, <Line: -    [fr6nat] ys = [0; |xs|]
->]

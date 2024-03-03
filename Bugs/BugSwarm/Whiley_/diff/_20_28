@@ -1,4 +1,0 @@
-[<Line: +export function f(int[] x) -> int:
->]
-[<Line: -export function f([int] x) -> int:
->]

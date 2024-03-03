@@ -1,6 +1,0 @@
-[<Line: +    return server.url("/").url();
->, <Line: +    return server.url("/").url();
->]
-[<Line: -    return server.getUrl("/");
->, <Line: -    return server.getUrl("/");
->]

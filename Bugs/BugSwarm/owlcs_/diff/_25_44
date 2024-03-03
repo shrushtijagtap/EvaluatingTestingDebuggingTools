@@ -1,6 +1,0 @@
-[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
->, <Line: +    OntologyConfigurator getConfiguration();
->]
-[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
->, <Line: -    OWLOntologyLoaderConfiguration getConfiguration();
->]

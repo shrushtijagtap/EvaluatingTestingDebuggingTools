@@ -1,9 +1,0 @@
-[<Line: +public class OntologyTypesTest {
->]
-[<Line: -import java.sql.Connection;
->, <Line: -public class OntologyTypesTest{
->, <Line: -	private Connection conn;
->, <Line: -		p.setCurrentValueOf(QuestPreferences.OPTIMIZE_TBOX_SIGMA, "true");
->, <Line: -        p.setCurrentValueOf(QuestPreferences.OPTIMIZE_TBOX_SIGMA, "true");
->, <Line: -		p.setCurrentValueOf(QuestPreferences.OPTIMIZE_TBOX_SIGMA, "true");
->]

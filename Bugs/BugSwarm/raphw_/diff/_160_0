@@ -1,6 +1,0 @@
-[<Line: +                ? (T) left.get(index)
->, <Line: +                : (T) right.get(index - leftSize);
->]
-[<Line: -                ? left.get(index)
->, <Line: -                : right.get(index - leftSize);
->]

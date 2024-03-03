@@ -1,8 +1,0 @@
-[<Line: +import com.google.gson.annotations.SerializedName;
->, <Line: +    @SerializedName("version")
->, <Line: +    private String version;
->, <Line: +    @SerializedName("name")
->, <Line: +    public String name;
->]
-[<Line: -    private String version, name;
->]

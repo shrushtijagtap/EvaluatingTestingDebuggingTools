@@ -1,8 +1,0 @@
-[]
-[<Line: -package command;
->, <Line: -public enum CommandType {
->, <Line: -	ADD_ISSUE, EDIT_ISSUE, ADD_LABELS, SET_LABELS, REMOVE_LABELS, 
->, <Line: -	SET_ASSIGNEE, SET_MILESTONE, SET_PARENT, EDIT_DESCRIPTION,
->, <Line: -	EDIT_TITLE
->, <Line: -}
->]

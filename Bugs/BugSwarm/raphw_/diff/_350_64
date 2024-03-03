@@ -1,4 +1,0 @@
-[<Line: +public class TypePoolDefaultLazyFieldListTest extends AbstractFieldListTest<Field, FieldDescription.InDefinedShape> {
->]
-[<Line: -public class TypePoolLazyFieldListTest extends AbstractFieldListTest<Field, FieldDescription.InDefinedShape> {
->]

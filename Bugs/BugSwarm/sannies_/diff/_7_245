@@ -1,8 +1,0 @@
-[<Line: +package org.mp4parser.boxes.iso14496.part12;
->, <Line: +import org.mp4parser.support.AbstractContainerBox;
->, <Line: + * boxexes whose type annd format are defined by the scheme declared in the {@link SchemeTypeBox}.
->]
-[<Line: -package com.coremedia.iso.boxes;
->, <Line: -import com.googlecode.mp4parser.AbstractContainerBox;
->, <Line: - * boxexes whose type annd format are defined by the scheme declared in the {@link com.coremedia.iso.boxes.SchemeTypeBox}.
->]

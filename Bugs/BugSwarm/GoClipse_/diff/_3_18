@@ -1,9 +1,0 @@
-[<Line: +import melnorme.lang.ide.core.operations.build.ProjectBuildInfo;
->, <Line: +		) {
->, <Line: +			{ createEnablementFields = false; }
->, <Line: +		};
->]
-[<Line: -import melnorme.lang.ide.core.project_model.ProjectBuildInfo;
->, <Line: -			null,
->, <Line: -		);
->]

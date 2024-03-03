@@ -1,6 +1,0 @@
-[<Line: +package org.mp4parser.support;
->, <Line: +    String name;
->]
-[<Line: -package com.googlecode.mp4parser.util;
->, <Line: -    String name;
->]

@@ -1,8 +1,0 @@
-[<Line: +# (Optional) Configuration to purge old requests from zookeeper, defaults shown
->, <Line: +history:
->, <Line: +  purgeOldRequests: false # Should we purge old requests
->, <Line: +  purgeOldRequestsAfterDays: 7 # delete requests older than this many days
->, <Line: +  purgeWhenDateNotFound: false # if we can't determine when a request was last updated, should we delete it
->, <Line: +  purgeEveryHours: 24 # how often to run the purger
->]
-[]

@@ -1,7 +1,0 @@
-[<Line: +import org.kairosdb.core.datastore.KairosDatastore;
->, <Line: +	private KairosDatastore datastore;
->, <Line: +		datastore = mock(KairosDatastore.class);
->]
-[<Line: -	private Datastore datastore;
->, <Line: -		datastore = mock(Datastore.class);
->]

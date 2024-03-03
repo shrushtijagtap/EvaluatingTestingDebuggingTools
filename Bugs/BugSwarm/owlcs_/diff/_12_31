@@ -1,6 +1,0 @@
-[<Line: +    public void storeOntology(OWLOntology ontology, PrintWriter writer, OWLDocumentFormat format)
->, <Line: +    public void storeOntology(OWLOntology ontology, OutputStream outputStream, OWLDocumentFormat format)
->]
-[<Line: -    protected void storeOntology(OWLOntology ontology, PrintWriter writer, OWLDocumentFormat format)
->, <Line: -    protected void storeOntology(OWLOntology ontology, OutputStream outputStream, OWLDocumentFormat format)
->]

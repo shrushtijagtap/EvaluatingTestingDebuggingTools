@@ -1,7 +1,0 @@
-[<Line: +package org.mp4parser.muxer.tracks.h265;
->, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.read.CAVLCReader;
->]
-[<Line: -package com.googlecode.mp4parser.authoring.tracks.h265;
->, <Line: -import com.googlecode.mp4parser.h264.read.BitstreamReader;
->, <Line: -import com.googlecode.mp4parser.h264.read.CAVLCReader;
->]

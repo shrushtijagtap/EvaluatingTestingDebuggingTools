@@ -1,3 +1,0 @@
-[]
-[<Line: -			grafanaClient.sendGrafanaDashboardAsync("grafana/ElasticsearchJdbcDashboard.json");
->]

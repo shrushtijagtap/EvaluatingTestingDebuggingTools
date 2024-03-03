@@ -1,6 +1,0 @@
-[<Line: +public class OpenCageGeocoder extends JsonGeocoder {
->, <Line: +    public OpenCageGeocoder(String url, String key, int cacheSize) {
->]
-[<Line: -public class OpenCageReverseGeocoder extends JsonReverseGeocoder {
->, <Line: -    public OpenCageReverseGeocoder(String url, String key, int cacheSize) {
->]

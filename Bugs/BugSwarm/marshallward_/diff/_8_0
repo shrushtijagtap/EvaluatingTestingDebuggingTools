@@ -1,4 +1,0 @@
-[<Line: +   f90nml.patch('sample.nml', patch_nml, 'new_sample.nml')
->]
-[<Line: -   nml.patch('sample.nml', 'new_sample.nml', patch_nml)
->]

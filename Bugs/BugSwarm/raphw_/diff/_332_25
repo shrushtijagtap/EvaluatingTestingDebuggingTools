@@ -1,5 +1,0 @@
-[<Line: +    @SuppressWarnings("unchecked")
->, <Line: +        when(type.accept((TypeDescription.Generic.Visitor) visitor)).thenReturn(visitedType);
->]
-[<Line: -        when(type.accept(visitor)).thenReturn(visitedType);
->]

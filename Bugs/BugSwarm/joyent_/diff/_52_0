@@ -1,6 +1,0 @@
-[<Line: +      * Method that returns the configuration context used to
->, <Line: +    public ConfigContext getContext() {
->]
-[<Line: -      * Package private method that returns the configuration context used to
->, <Line: -    ConfigContext getContext() {
->]

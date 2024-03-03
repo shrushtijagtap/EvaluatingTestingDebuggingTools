@@ -1,8 +1,0 @@
-[<Line: +    private static final String INVERSE = "ObjectInverseOf(<urn:test#op>)";
->, <Line: +                    "ObjectPropertyAssertion(Annotation(<urn:test#ann> \"test\"^^xsd:string) ObjectInverseOf(<urn:test#op>) <urn:test#i> <urn:test#i>)";
->, <Line: +                    "ObjectPropertyAssertion(Annotation(<urn:test#ann> \"test\"^^xsd:string) ObjectInverseOf(<urn:test#op>) <urn:test#i> <urn:test#j>)";
->]
-[<Line: -    private static final String INVERSE = "InverseOf(<urn:test#op>)";
->, <Line: -                    "ObjectPropertyAssertion(Annotation(<urn:test#ann> \"test\"^^xsd:string) InverseOf(<urn:test#op>) <urn:test#i> <urn:test#i>)";
->, <Line: -                    "ObjectPropertyAssertion(Annotation(<urn:test#ann> \"test\"^^xsd:string) InverseOf(<urn:test#op>) <urn:test#i> <urn:test#j>)";
->]

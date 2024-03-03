@@ -1,4 +1,0 @@
-[<Line: +        Geocoder geocoder = new GeocodeFarmGeocoder(null, null, 0);
->]
-[<Line: -        Geocoder geocoder = new GeocodeFarmGeocoder(null, 0);
->]

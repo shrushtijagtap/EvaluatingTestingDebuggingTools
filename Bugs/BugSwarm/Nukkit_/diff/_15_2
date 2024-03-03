@@ -1,5 +1,0 @@
-[<Line: +    public static final int BREWING_STAND_BLOCK = 117;
->, <Line: +    public static final int BREWING_BLOCK = 117;
->, <Line: +            list[BREWING_STAND_BLOCK] = BrewingStand.class;
->]
-[]

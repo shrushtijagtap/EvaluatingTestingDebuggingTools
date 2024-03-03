@@ -1,8 +1,0 @@
-[<Line: +package com.hubspot.baragon.service.config;
->, <Line: +import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
->, <Line: +import com.fasterxml.jackson.annotation.JsonProperty;
->]
-[<Line: -package com.hubspot.baragon.config;
->, <Line: -import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
->, <Line: -import com.fasterxml.jackson.annotation.JsonProperty;
->]

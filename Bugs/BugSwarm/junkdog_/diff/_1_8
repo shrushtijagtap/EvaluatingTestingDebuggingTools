@@ -1,5 +1,0 @@
-[<Line: +		MethodVisitor method = cv.visitMethod(access, name, desc, signature, exceptions);
->]
-[<Line: -		MethodVisitor method = null;
->, <Line: -		method = cv.visitMethod(access, name, desc, signature, exceptions);
->]

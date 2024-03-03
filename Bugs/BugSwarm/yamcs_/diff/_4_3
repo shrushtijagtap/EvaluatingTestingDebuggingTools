@@ -1,6 +1,0 @@
-[<Line: +        public void setSimTime(RestRequest req) throws HttpException {
->, <Line: +            sendOK(req);
->]
-[<Line: -        public ChannelFuture setSimTime(RestRequest req) throws HttpException {
->, <Line: -            return sendOK(req);
->]

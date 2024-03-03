@@ -1,5 +1,0 @@
-[<Line: +public class DirectlyAccessingSuperGlobalCheckTest {
->]
-[<Line: -import org.sonar.plugins.php.CheckTest;
->, <Line: -public class DirectlyAccessingSuperGlobalCheckTest extends CheckTest {
->]

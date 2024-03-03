@@ -1,5 +1,0 @@
-[<Line: +import com.google.gson.annotations.SerializedName;
->, <Line: +    @SerializedName("classifiers")
->, <Line: +    @SerializedName("artifact")
->]
-[]

@@ -1,4 +1,0 @@
-[<Line: +         * A termination handler that drops the delegate method's return value.
->]
-[<Line: -         * A termination handler that drops the delegate method's return value,
->]

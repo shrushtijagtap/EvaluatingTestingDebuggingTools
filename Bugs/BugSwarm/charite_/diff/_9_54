@@ -1,8 +1,0 @@
-[<Line: +import org.junit.Assert;
->, <Line: +import org.junit.Test;
->, <Line: +		options.setIdentifierPrefix("CLINVAR_");
->]
-[<Line: -import org.junit.Assert;
->, <Line: -import org.junit.Before;
->, <Line: -import org.junit.Test;
->]

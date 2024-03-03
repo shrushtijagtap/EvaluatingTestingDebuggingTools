@@ -1,9 +1,0 @@
-[<Line: +		OBDASQLQuery sourceQuery = axiom.getSourceQuery();
->, <Line: +	public OBDASQLQuery getSourceQuery(){
->, <Line: +		return axiom.getTargetQuery();
->]
-[<Line: -import it.unibz.krdb.obda.model.OBDAQuery;
->, <Line: -		OBDASQLQuery sourceQuery = (OBDASQLQuery) axiom.getSourceQuery();
->, <Line: -	public OBDAQuery getSourceQuery(){
->, <Line: -		return (CQIE) axiom.getTargetQuery();
->]

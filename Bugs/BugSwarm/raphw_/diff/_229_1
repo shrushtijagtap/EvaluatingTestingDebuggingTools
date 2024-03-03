@@ -1,4 +1,0 @@
-[<Line: +                    // By always setting accessibility, the security manager is always triggered if this operation was illegal.
->]
-[<Line: -                    // By always setting accessability, the security manager is always triggered if this operation was illegal.
->]

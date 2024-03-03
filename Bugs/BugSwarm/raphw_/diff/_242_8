@@ -1,8 +1,0 @@
-[<Line: +        Implementation.SpecialMethodInvocation specialMethodInvocation = makeImplementationTarget().invokeDefault(defaultToken, defaultMethodDeclaringType);
->, <Line: +        Implementation.SpecialMethodInvocation specialMethodInvocation = makeImplementationTarget().invokeDefault(defaultToken, defaultMethodDeclaringType);
->, <Line: +        assertThat(makeImplementationTarget().invokeDefault(mock(MethodDescription.SignatureToken.class), defaultMethodDeclaringType).isValid(), is(false));
->]
-[<Line: -        Implementation.SpecialMethodInvocation specialMethodInvocation = makeImplementationTarget().invokeDefault(defaultMethodDeclaringType, defaultToken);
->, <Line: -        Implementation.SpecialMethodInvocation specialMethodInvocation = makeImplementationTarget().invokeDefault(defaultMethodDeclaringType, defaultToken);
->, <Line: -        assertThat(makeImplementationTarget().invokeDefault(defaultMethodDeclaringType, mock(MethodDescription.SignatureToken.class)).isValid(), is(false));
->]

@@ -1,6 +1,0 @@
-[<Line: +				<spring.version>4.2.1.RELEASE</spring.version>
->, <Line: +				<spring.version>4.2.2.BUILD-SNAPSHOT</spring.version>
->]
-[<Line: -				<spring.version>4.2.0.RELEASE</spring.version>
->, <Line: -				<spring.version>4.2.1.BUILD-SNAPSHOT</spring.version>
->]

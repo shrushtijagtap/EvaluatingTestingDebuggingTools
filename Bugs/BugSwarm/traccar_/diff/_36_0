@@ -1,6 +1,0 @@
-[<Line: +                pipeline.addLast("objectDecoder", new TaipProtocolDecoder(TaipProtocol.this));
->, <Line: +                pipeline.addLast("objectDecoder", new TaipProtocolDecoder(TaipProtocol.this));
->]
-[<Line: -                pipeline.addLast("objectDecoder", new TaipProtocolDecoder(TaipProtocol.this, true));
->, <Line: -                pipeline.addLast("objectDecoder", new TaipProtocolDecoder(TaipProtocol.this, false));
->]

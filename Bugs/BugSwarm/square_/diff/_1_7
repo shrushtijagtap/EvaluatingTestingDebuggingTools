@@ -1,6 +1,0 @@
-[<Line: +        String sameHost = address.url().host();
->, <Line: +        int differentPort = address.url().port() + 1;
->]
-[<Line: -        String sameHost = address.getUriHost();
->, <Line: -        int differentPort = address.getUriPort() + 1;
->]

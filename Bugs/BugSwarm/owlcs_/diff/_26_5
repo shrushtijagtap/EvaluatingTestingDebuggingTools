@@ -1,8 +1,0 @@
-[<Line: +import static org.semanticweb.owlapi.model.parameters.AxiomAnnotations.IGNORE_AXIOM_ANNOTATIONS;
->, <Line: +import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
->, <Line: +        axiomGenerators.stream().flatMap(g -> generate(df, g))
->, <Line: +            .filter(ax -> !ontology.containsAxiom(ax, INCLUDED, IGNORE_AXIOM_ANNOTATIONS))
->, <Line: +            .forEach(ontology::add);
->]
-[<Line: -        axiomGenerators.stream().flatMap(g -> generate(df, g)).forEach(ontology::add);
->]

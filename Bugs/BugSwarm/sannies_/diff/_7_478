@@ -1,8 +1,0 @@
-[<Line: +package org.mp4parser.muxer.builder;
->, <Line: +import org.mp4parser.Container;
->, <Line: +import org.mp4parser.muxer.Movie;
->]
-[<Line: -package com.googlecode.mp4parser.authoring.builder;
->, <Line: -import com.coremedia.iso.boxes.Container;
->, <Line: -import com.googlecode.mp4parser.authoring.Movie;
->]

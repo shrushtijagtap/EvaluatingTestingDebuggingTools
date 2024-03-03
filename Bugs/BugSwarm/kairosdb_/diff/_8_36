@@ -1,8 +1,0 @@
-[]
-[<Line: -import com.google.inject.servlet.ServletModule;
->, <Line: -import com.google.inject.multibindings.Multibinder;
->, <Line: -import com.sun.jersey.api.container.filter.GZIPContentEncodingFilter;
->, <Line: -import com.sun.jersey.spi.container.ContainerRequestFilter;
->, <Line: -import com.sun.jersey.spi.container.ContainerResponseFilter;
->, <Line: -import org.eclipse.jetty.server.handler.GzipHandler;
->]

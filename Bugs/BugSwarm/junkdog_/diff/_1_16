@@ -1,6 +1,0 @@
-[<Line: +		mv.visitMethodInsn(INVOKESPECIAL, profiler, "<init>", "()V", false);
->, <Line: +		mv.visitMethodInsn(INVOKEVIRTUAL, profiler, "initialize", "(Lcom/artemis/BaseSystem;Lcom/artemis/World;)V", false);
->]
-[<Line: -		mv.visitMethodInsn(INVOKESPECIAL, profiler, "<init>", "()V");
->, <Line: -		mv.visitMethodInsn(INVOKEVIRTUAL, profiler, "initialize", "(Lcom/artemis/BaseSystem;Lcom/artemis/World;)V");
->]

@@ -1,6 +1,0 @@
-[<Line: +        }); //indent:8 exp:10,14 warn
->, <Line: +      }); //indent:6 exp:8,12 warn
->]
-[<Line: -        }); //indent:8 exp:10 warn
->, <Line: -      }); //indent:6 exp:8 warn
->]

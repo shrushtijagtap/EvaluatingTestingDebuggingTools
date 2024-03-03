@@ -1,7 +1,0 @@
-[<Line: +import com.google.common.eventbus.EventBus;
->, <Line: +	public PutCommand(EventBus eventBus, @Named("HOSTNAME") String hostname,
->, <Line: +		super(eventBus, hostname, longFactory, doubleFactory);
->]
-[<Line: -	public PutCommand(KairosDatastore datastore, @Named("HOSTNAME") String hostname,
->, <Line: -		super(datastore, hostname, longFactory, doubleFactory);
->]

@@ -1,4 +1,0 @@
-[<Line: +        final Iterator<Method> iterator = Arrays.asList(String.class.getDeclaredMethods()).iterator();
->]
-[<Line: -        final Iterator<Method> iterator = Arrays.asList(Object.class.getDeclaredMethods()).iterator();
->]

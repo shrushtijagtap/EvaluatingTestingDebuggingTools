@@ -1,4 +1,0 @@
-[<Line: +	 * Getter for all {@link htsjdk.variant.variantcontext.VariantContext} that matched the {@link de.charite.compbio.jannovar.mendel.ModeOfInheritance}.
->]
-[<Line: -	 * Getter for all {@link htsjdk.variant.variantcontext.VariantContext} that matched the {@link de.charite.compbio.jannovar.pedigree.ModeOfInheritance}.
->]

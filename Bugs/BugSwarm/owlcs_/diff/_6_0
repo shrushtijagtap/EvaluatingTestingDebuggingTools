@@ -1,4 +1,0 @@
-[<Line: +    public List<OWLOntologyChange> changeLiterals(@Nonnull Map<OWLLiteral, OWLLiteral> literalToLiteralMap) {
->]
-[<Line: -    public List<OWLOntologyChange> changeIRI(@Nonnull Map<OWLLiteral, OWLLiteral> literalToLiteralMap) {
->]

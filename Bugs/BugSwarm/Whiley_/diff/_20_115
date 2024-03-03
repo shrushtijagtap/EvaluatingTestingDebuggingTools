@@ -1,6 +1,0 @@
-[<Line: +function move(int from, int to, nint[][] list) -> nint[][]
->, <Line: +    nint[][] ls = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
->]
-[<Line: -function move(int from, int to, [[nint]] list) -> [[nint]]
->, <Line: -    [[nint]] ls = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
->]

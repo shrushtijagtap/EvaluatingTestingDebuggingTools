@@ -1,4 +1,0 @@
-[<Line: +        T instance = loaded.getLoaded().getDeclaredConstructor().newInstance();
->]
-[<Line: -        T instance = loaded.getLoaded().newInstance();
->]

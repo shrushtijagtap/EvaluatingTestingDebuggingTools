@@ -1,8 +1,0 @@
-[<Line: +    <dependency>
->, <Line: +      <groupId>org.assertj</groupId>
->, <Line: +      <artifactId>assertj-core</artifactId>
->, <Line: +      <version>2.0.0</version>
->, <Line: +      <scope>test</scope>
->, <Line: +    </dependency>
->]
-[]

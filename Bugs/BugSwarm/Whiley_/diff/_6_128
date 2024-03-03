@@ -1,5 +1,0 @@
-[<Line: +../../tests/invalid/TypeEquals_Invalid_12.whiley:7: postcondition not satisfied
->, <Line: +        return x
->, <Line: +        ^^^^^^^^
->]
-[]

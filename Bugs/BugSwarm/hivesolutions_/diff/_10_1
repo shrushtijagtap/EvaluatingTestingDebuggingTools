@@ -1,6 +1,0 @@
-[<Line: +        person = mock.Person.get(identifier = 1, map = True)
->, <Line: +        self.assertEqual(type(person["cats"]), list)
->, <Line: +        self.assertEqual(len(person["cats"]), 1)
->, <Line: +        self.assertEqual(type(person["cats"][0]), int)
->]
-[]

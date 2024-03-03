@@ -1,6 +1,0 @@
-[<Line: +	public static SQLDialectAdapter getSQLDialectAdapter(String className, String databaseName) {
->, <Line: +				return new OracleSQLDialectAdapter(databaseName);
->]
-[<Line: -	public static SQLDialectAdapter getSQLDialectAdapter(String className) {
->, <Line: -				return new OracleSQLDialectAdapter();
->]

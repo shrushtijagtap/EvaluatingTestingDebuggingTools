@@ -1,6 +1,0 @@
-[<Line: +        assertThat(methodBinding.hashCode(), not(unequalMethodBinding.hashCode()));
->, <Line: +        assertThat(methodBinding, not(unequalMethodBinding));
->]
-[<Line: -        assertThat(methodBinding.hashCode(), not(is(unequalMethodBinding.hashCode())));
->, <Line: -        assertThat(methodBinding, not(is(unequalMethodBinding)));
->]

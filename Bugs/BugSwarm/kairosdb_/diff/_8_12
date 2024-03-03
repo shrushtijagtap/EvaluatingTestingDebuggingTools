@@ -1,4 +1,0 @@
-[<Line: +import org.kairosdb.core.datapoints.NullDataPoint;
->]
-[<Line: -import org.kairosdb.core.datapoints.NullDataPoint;
->]

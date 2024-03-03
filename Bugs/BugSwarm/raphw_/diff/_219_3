@@ -1,5 +1,0 @@
-[<Line: +        return of(invocationHandler, String.format("%s$%d", ForInstance.PREFIX, Math.abs(invocationHandler.hashCode() % Integer.MAX_VALUE)));
->]
-[<Line: -import net.bytebuddy.utility.RandomString;
->, <Line: -        return of(invocationHandler, String.format("%s$%s", ForInstance.PREFIX, RandomString.make()));
->]

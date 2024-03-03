@@ -1,4 +1,0 @@
-[<Line: +			ArrayList<Pair<SyntacticType, Expr.Variable>> nElements = new ArrayList<Pair<SyntacticType,Expr.Variable>>();
->]
-[<Line: -			ArrayList<Pair<SyntacticType, Expr.Variable>> nElements = new ArrayList<>();
->]

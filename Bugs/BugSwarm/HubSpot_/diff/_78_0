@@ -1,6 +1,0 @@
-[<Line: +    <dependency>
->, <Line: +      <groupId>org.apache.zookeeper</groupId>
->, <Line: +      <artifactId>zookeeper</artifactId>
->, <Line: +    </dependency>
->]
-[]

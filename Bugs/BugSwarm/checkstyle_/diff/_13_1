@@ -1,8 +1,0 @@
-[<Line: +            if (currentType == TokenTypes.RPAREN) {
->, <Line: +            else if (currentType != TokenTypes.RCURLY && currentType != TokenTypes.ARRAY_INIT) {
->]
-[<Line: -            if (currentType == TokenTypes.RCURLY
->, <Line: -                    || currentType == TokenTypes.RPAREN
->, <Line: -                    || currentType == TokenTypes.ARRAY_INIT) {
->, <Line: -            else {
->]

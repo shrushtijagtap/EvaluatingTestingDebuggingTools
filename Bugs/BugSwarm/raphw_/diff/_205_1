@@ -1,9 +1,0 @@
-[<Line: +import net.bytebuddy.matcher.LatentMatcher;
->, <Line: +        when(dynamicTypeBuilder.ignoreAlso(LatentMatcher.ForSelfDeclaredMethod.NOT_DECLARED)).thenReturn((DynamicType.Builder) dynamicTypeBuilder);
->, <Line: +        verify(dynamicTypeBuilder).ignoreAlso(LatentMatcher.ForSelfDeclaredMethod.NOT_DECLARED);
->]
-[<Line: -import net.bytebuddy.matcher.ElementMatchers;
->, <Line: -import static net.bytebuddy.matcher.ElementMatchers.isDeclaredBy;
->, <Line: -        when(dynamicTypeBuilder.ignoreAlso(ElementMatchers.not(isDeclaredBy(typeDescription)))).thenReturn((DynamicType.Builder) dynamicTypeBuilder);
->, <Line: -        verify(dynamicTypeBuilder).ignoreAlso(ElementMatchers.not(isDeclaredBy(typeDescription)));
->]

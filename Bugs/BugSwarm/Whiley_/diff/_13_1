@@ -1,5 +1,0 @@
-[<Line: +			int root = wyrw.core.Inference.USE_SUBSTITUTION ? i : 0;
->, <Line: +			if (automaton.get(automaton.getRoot(root)).equals(Solver.False)) {
->]
-[<Line: -			if (automaton.get(automaton.getRoot(i)).equals(Solver.False)) {
->]

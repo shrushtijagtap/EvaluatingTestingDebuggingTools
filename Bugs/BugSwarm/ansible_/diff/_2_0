@@ -1,4 +1,0 @@
-[<Line: +            for group in self.groups.values():
->]
-[<Line: -            for group in self.groups:
->]

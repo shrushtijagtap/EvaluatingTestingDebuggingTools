@@ -1,4 +1,0 @@
-[<Line: +        return hash(object.hashIndex(), Stream.of(getDatatype(), Integer.valueOf(specificHash()), getLang()));
->]
-[<Line: -        return hash(object.hashIndex(), Stream.of(getDatatype(), specificHash(), getLang()));
->]

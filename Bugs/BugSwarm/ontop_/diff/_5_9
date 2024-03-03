@@ -1,4 +1,0 @@
-[<Line: +            case "nl.cwi.monetdb.jdbc.MonetDriver":
->, <Line: +                return new MonetDBSQLDialectAdapter();
->]
-[]

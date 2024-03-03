@@ -1,7 +1,0 @@
-[<Line: +        // TODO a synchronizedMap will break MultiThreadedDependentSampleTest
->, <Line: +        // a not synchronizedMap will __sometimes__ break ParallelITestTest
->, <Line: +        //result = Collections.synchronizedMap(new HashMap<Long, Long>());
->, <Line: +        result = new HashMap<>();
->]
-[<Line: -        result = new HashMap();
->]

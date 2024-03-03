@@ -1,7 +1,0 @@
-[<Line: +        TYPE_INITIALIZERS.put(new Nexus(name, classLoader, referenceQueue, identification), typeInitializer);
->]
-[<Line: -import java.util.logging.Logger;
->, <Line: -        if (TYPE_INITIALIZERS.put(new Nexus(name, classLoader, referenceQueue, identification), typeInitializer) != null) {
->, <Line: -            Logger.getLogger("net.bytebuddy").warning("Initializer with id " + identification + " is already registered for " + name);
->, <Line: -        }
->]

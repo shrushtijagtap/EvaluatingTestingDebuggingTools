@@ -1,6 +1,0 @@
-[<Line: +import com.google.common.eventbus.EventBus;
->, <Line: +		EventBus eventBus = m_injector.getInstance(EventBus.class);
->, <Line: +			DataPointsParser dataPointsParser = new DataPointsParser(eventBus, new StringReader(line),
->]
-[<Line: -			DataPointsParser dataPointsParser = new DataPointsParser(ds, new StringReader(line),
->]

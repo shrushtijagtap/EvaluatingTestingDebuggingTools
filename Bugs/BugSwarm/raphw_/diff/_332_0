@@ -1,7 +1,0 @@
-[<Line: +import net.bytebuddy.description.annotation.AnnotationDescription;
->, <Line: +        TypeDescription.Generic enumType = TypeDescription.Generic.Builder.parameterizedType(Enum.class, TargetType.class).build();
->, <Line: +                            new TypeDescription.Generic.OfGenericArray.Latent(TargetType.GENERIC_DESCRIPTION, Collections.<AnnotationDescription>emptyList())))
->]
-[<Line: -        TypeDescription.Generic enumType = TypeDescription.Generic.Builder.parameterizedType(Enum.class, TargetType.class).asType();
->, <Line: -                            TypeDescription.Generic.OfGenericArray.Latent.of(TargetType.GENERIC_DESCRIPTION, 1)))
->]

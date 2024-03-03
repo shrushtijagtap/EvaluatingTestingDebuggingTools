@@ -1,6 +1,0 @@
-[<Line: +package org.mp4parser.boxes.apple;
->, <Line: +import org.mp4parser.support.AbstractBox;
->]
-[<Line: -package com.googlecode.mp4parser.boxes.apple;
->, <Line: -import com.googlecode.mp4parser.AbstractBox;
->]

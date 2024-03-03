@@ -1,6 +1,0 @@
-[<Line: +    [int] data = [0; length]
->, <Line: +        data[i] = value
->]
-[<Line: -    [int] data = []
->, <Line: -        data = data ++ [value]
->]

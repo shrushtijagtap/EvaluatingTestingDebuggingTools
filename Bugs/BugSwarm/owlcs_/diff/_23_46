@@ -1,4 +1,0 @@
-[<Line: +import org.eclipse.rdf4j.rio.RDFParserFactory;
->]
-[<Line: -import org.openrdf.rio.RDFParserFactory;
->]

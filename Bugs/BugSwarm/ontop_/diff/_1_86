@@ -1,4 +1,0 @@
-[<Line: +    @Option(type = OptionType.COMMAND, name = {"-d", "--driver-class"}, title = "jdbcDriver",
->]
-[<Line: -    @Option(type = OptionType.COMMAND, name = {"-d", "--driver-class"}, title = "jdbcUrl",
->]

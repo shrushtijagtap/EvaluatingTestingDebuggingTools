@@ -1,4 +1,0 @@
-[<Line: +		final OBDASQLQuery bodyquery = object.getSourceQuery();
->]
-[<Line: -		final OBDASQLQuery bodyquery = (OBDASQLQuery) object.getSourceQuery();
->]

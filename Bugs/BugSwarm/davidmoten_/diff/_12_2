@@ -1,5 +1,0 @@
-[<Line: +import com.github.davidmoten.junit.Asserts;
->, <Line: +       Asserts.assertIsUtilityClass(Queries.class);
->]
-[<Line: -        TestingUtil.instantiateUsingPrivateConstructor(Queries.class);
->]

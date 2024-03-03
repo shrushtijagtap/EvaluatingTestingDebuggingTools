@@ -1,4 +1,0 @@
-[<Line: +    private final List<TrackerServer> serverList;
->]
-[<Line: -    private List<TrackerServer> serverList;
->]

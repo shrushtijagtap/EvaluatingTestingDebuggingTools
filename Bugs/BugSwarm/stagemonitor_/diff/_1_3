@@ -1,4 +1,0 @@
-[<Line: +		assertEquals(false, corePlugin.isReportToJMX());
->]
-[<Line: -		assertEquals(true, corePlugin.reportToJMX());
->]

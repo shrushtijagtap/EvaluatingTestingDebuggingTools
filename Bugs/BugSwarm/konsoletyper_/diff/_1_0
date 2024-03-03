@@ -1,7 +1,0 @@
-[<Line: +            section.writeByte(0);
->, <Line: +            section.writeByte(1);
->]
-[<Line: -            section.writeByte(3);
->, <Line: -            section.writeLEB(functionIndexes.size());
->, <Line: -            section.writeByte(3);
->]

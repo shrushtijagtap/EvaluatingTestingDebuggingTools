@@ -1,4 +1,0 @@
-[<Line: +		when(httpClient.send(any(), any(), any(), any(), any())).thenAnswer(new Answer<Integer>() {
->]
-[<Line: -		when(httpClient.send(any(), any(), any(), any())).thenAnswer(new Answer<Integer>() {
->]

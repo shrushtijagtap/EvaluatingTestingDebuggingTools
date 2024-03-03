@@ -1,9 +1,0 @@
-[<Line: +## [2.5.0] - 2016-10-10
->, <Line: +### Added
->, <Line: + - Setting HTTP Headers is now supported when making GET requests.
->, <Line: +### Changed
->, <Line: + - Upgraded HTTP Signatures dependency.
->, <Line: + - Upgraded Apache HTTP Client.
->, <Line: + - Upgraded Google HTTP Client.
->]
-[]

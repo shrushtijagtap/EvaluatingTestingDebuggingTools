@@ -1,5 +1,0 @@
-[<Line: +		QuestOWL reasoner = factory.createReasoner(ontology, new SimpleConfiguration());
->]
-[<Line: -		QuestOWL reasoner = (QuestOWL) factory.createReasoner(ontology, new SimpleConfiguration());
->, <Line: -		p.setCurrentValueOf(QuestPreferences.OPTIMIZE_TBOX_SIGMA, "true");
->]

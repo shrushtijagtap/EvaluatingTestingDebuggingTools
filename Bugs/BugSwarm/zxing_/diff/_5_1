@@ -1,7 +1,0 @@
-[<Line: +      for (ExpandedRow collectedRow : collectedRows) {
->, <Line: +        this.pairs.addAll(collectedRow.getPairs());
->]
-[<Line: -      int size = collectedRows.size();
->, <Line: -      for (int j = 0; j < size; j++) {
->, <Line: -        this.pairs.addAll(collectedRows.get(j).getPairs());
->]

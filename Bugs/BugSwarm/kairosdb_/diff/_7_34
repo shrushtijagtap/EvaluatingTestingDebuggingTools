@@ -1,8 +1,0 @@
-[<Line: +			os.println("putm "+METRIC_NAME+" "+String.valueOf(i+start)+ " 42 host=A");
->, <Line: +			os.println("putm "+METRIC_NAME+" "+String.valueOf(i+start)+ " 42 host=B");
->, <Line: +			os.println("putm "+METRIC_NAME+" "+String.valueOf(i+start)+ " 42.5 host=C");
->]
-[<Line: -			os.println("put "+METRIC_NAME+" "+String.valueOf(i+start)+ " 42 host=A");
->, <Line: -			os.println("put "+METRIC_NAME+" "+String.valueOf(i+start)+ " 42 host=B");
->, <Line: -			os.println("put "+METRIC_NAME+" "+String.valueOf(i+start)+ " 42.5 host=C");
->]

@@ -1,8 +1,0 @@
-[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
->, <Line: +    private static Response getResponse(IRI documentIRI, OntologyConfigurator config)
->, <Line: +        OntologyConfigurator config) {
->]
-[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
->, <Line: -    private static Response getResponse(IRI documentIRI, OWLOntologyLoaderConfiguration config)
->, <Line: -        OWLOntologyLoaderConfiguration config) {
->]

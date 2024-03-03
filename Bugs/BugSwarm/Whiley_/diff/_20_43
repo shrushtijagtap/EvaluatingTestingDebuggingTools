@@ -1,4 +1,0 @@
-[<Line: +../../tests/invalid/ListEmpty_Invalid_1.whiley:5: unable to resolve name (no match for f(int[])
->]
-[<Line: -../../tests/invalid/ListEmpty_Invalid_1.whiley:5: unable to resolve name (no match for f([int+])
->]

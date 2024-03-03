@@ -1,8 +1,0 @@
-[<Line: + * Aggregators cannot be recursive meaning that FeatureProperty cannot contain a FeatureProperty.
->, <Line: +public @interface FeatureCompoundProperty
->, <Line: +	FeatureProperty[] properties() default {};
->]
-[<Line: - * Aggregators cannot be recursive meaning that QueryProperty cannot contain an QueryProperty.
->, <Line: -public @interface QueryCompoundProperty
->, <Line: -	QueryProperty[] properties() default {};
->]

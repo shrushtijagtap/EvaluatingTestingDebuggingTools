@@ -1,8 +1,0 @@
-[<Line: +assert:
->, <Line: +    forall (null | int x):
->, <Line: +        if:
->, <Line: +            x is !(int)
->, <Line: +        then:
->, <Line: +            x is null
->]
-[]

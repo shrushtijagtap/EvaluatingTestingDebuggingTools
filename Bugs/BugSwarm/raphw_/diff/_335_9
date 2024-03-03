@@ -1,4 +1,0 @@
-[<Line: +                        assigner.assign(javaConstant.getType().asGenericType(), target.getType(), typing));
->]
-[<Line: -                        assigner.assign(javaConstant.getInstanceType().asGenericType(), target.getType(), typing));
->]

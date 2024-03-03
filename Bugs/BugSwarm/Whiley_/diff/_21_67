@@ -1,5 +1,0 @@
-[<Line: +    [int] x = [1,2]
->]
-[<Line: -type sr3nat is int
->, <Line: -    [sr3nat] x = [1,2]
->]

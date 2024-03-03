@@ -1,6 +1,0 @@
-[<Line: +    public DateBuilder addSeconds(long seconds) {
->, <Line: +        calendar.setTimeInMillis(calendar.getTimeInMillis() + seconds * 1000);
->, <Line: +        return this;
->, <Line: +    }
->]
-[]

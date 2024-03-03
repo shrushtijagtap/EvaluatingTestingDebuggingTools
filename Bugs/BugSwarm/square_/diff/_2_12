@@ -1,6 +1,0 @@
-[<Line: +    HttpURLConnection connection = new OkUrlFactory(client).open(server.url("/").url());
->, <Line: +    HttpURLConnection connection = new OkUrlFactory(client).open(server.url("/").url());
->]
-[<Line: -    HttpURLConnection connection = new OkUrlFactory(client).open(server.getUrl("/"));
->, <Line: -    HttpURLConnection connection = new OkUrlFactory(client).open(server.getUrl("/"));
->]

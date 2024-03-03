@@ -1,6 +1,0 @@
-[<Line: +  @Override
->, <Line: +  public void setDescription(String description) {
->, <Line: +    m_method.setDescription(description);
->, <Line: +  }
->]
-[]

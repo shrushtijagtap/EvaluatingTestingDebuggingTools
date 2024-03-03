@@ -1,9 +1,0 @@
-[<Line: +import net.bytebuddy.description.method.MethodList;
->, <Line: +import java.lang.annotation.RetentionPolicy;
->, <Line: +        when(annotationType.getDeclaredMethods()).thenReturn(new MethodList.Empty<MethodDescription.InDefinedShape>());
->, <Line: +        when(annotationDescription.getRetention()).thenReturn(RetentionPolicy.RUNTIME);
->, <Line: +        when(annotationType.getActualName()).thenReturn("jdk.internal.Sample");
->]
-[<Line: -        when(annotationType.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotations(Baz.class.getDeclaredAnnotations()));
->, <Line: -        when(annotationType.getActualName()).thenReturn("jdk.Sample");
->]

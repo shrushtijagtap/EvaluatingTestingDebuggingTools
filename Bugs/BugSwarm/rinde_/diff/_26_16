@@ -1,9 +1,0 @@
-[<Line: +    return (int) (origin.x + (x - rect.min.x) * scale);
->, <Line: +    return (int) (origin.y + (y - rect.min.y) * scale);
->, <Line: +  }
->, <Line: +  public int scale(double i) {
->, <Line: +    return (int) (scale * i);
->]
-[<Line: -    return (int) (origin.x + ((x - rect.min.x) * scale));
->, <Line: -    return (int) (origin.y + ((y - rect.min.y) * scale));
->]

@@ -1,5 +1,0 @@
-[<Line: +			elasticsearchClient.sendClassPathRessourceBulkAsync("kibana/JdbcDashboard.bulk");
->]
-[<Line: -			elasticsearchClient.sendBulkAsync("kibana/JdbcDashboard.bulk");
->, <Line: -			grafanaClient.sendGrafanaDashboardAsync("grafana/ElasticsearchJdbcDashboard.json");
->]

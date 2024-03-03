@@ -1,5 +1,0 @@
-[<Line: +                            callback.onFailure(
->, <Line: +                                    new GeolocationException(json.getJsonObject("error").getString("message")));
->]
-[<Line: -                            callback.onFailure(new RuntimeException(json.getJsonObject("error").getString("message")));
->]

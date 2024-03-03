@@ -1,8 +1,0 @@
-[<Line: +## Update the CHANGELOG file
->, <Line: +- Update the CHANGELOG file to reflect the new version.
->, <Line: +- Create a new commit with this version.
->, <Line: +- Do not create a git tag as this will be done by Maven below.
->, <Line: +## Update README and JannovarOptions.java
->, <Line: +Open README.md and JannovarOptions.java and update the version there.
->]
-[]

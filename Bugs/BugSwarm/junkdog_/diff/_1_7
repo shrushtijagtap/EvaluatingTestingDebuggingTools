@@ -1,6 +1,0 @@
-[<Line: +	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
->, <Line: +		mv.visitMethodInsn(opcode, owner, name, desc, itf);
->]
-[<Line: -	public void visitMethodInsn(int opcode, String owner, String name, String desc) {
->, <Line: -		mv.visitMethodInsn(opcode, owner, name, desc);
->]

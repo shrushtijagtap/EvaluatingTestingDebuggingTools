@@ -1,4 +1,0 @@
-[<Line: +        assertThat(TypePool.Default.ArrayTypeResolution.of(resolution, 1), not(resolution));
->]
-[<Line: -        assertThat(TypePool.Default.ArrayTypeResolution.of(resolution, 1), not(is(resolution)));
->]

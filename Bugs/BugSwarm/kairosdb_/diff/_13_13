@@ -1,5 +1,0 @@
-[<Line: +import org.kairosdb.plugin.Aggregator;
->, <Line: +import org.kairosdb.plugin.GroupBy;
->]
-[<Line: -import org.kairosdb.core.groupby.GroupBy;
->]

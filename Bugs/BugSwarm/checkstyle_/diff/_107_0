@@ -1,6 +1,0 @@
-[<Line: +echo "Checking for ERROR|WARNING|INFO  in $RESULT_FILE ..."
->, <Line: +if [[ $(grep -E "ERROR|WARNING|INFO" $RESULT_FILE | cat | wc -l) > 0 ]]; then
->]
-[<Line: -echo "Checking for ERRORs in $RESULT_FILE ..."
->, <Line: -if [[ $(grep ERROR $RESULT_FILE | cat | wc -l) > 0 ]]; then
->]

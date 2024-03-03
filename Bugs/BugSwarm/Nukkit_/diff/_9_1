@@ -1,5 +1,0 @@
-[]
-[<Line: -    abstract public int getStoneBlock();
->, <Line: -    abstract public int getSurfaceBlock();
->, <Line: -    abstract public int getGroundBlock();
->]

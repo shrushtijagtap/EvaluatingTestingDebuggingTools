@@ -1,4 +1,0 @@
-[<Line: +        person = mock.Person(fill = False)
->]
-[<Line: -        person = mock.Person()
->]

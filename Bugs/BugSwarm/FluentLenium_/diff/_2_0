@@ -1,5 +1,0 @@
-[<Line: +import java.util.Locale;
->, <Line: +        return Enum.valueOf(enumClass, property.toUpperCase(Locale.ENGLISH));
->]
-[<Line: -        return Enum.valueOf(enumClass, property.toUpperCase());
->]

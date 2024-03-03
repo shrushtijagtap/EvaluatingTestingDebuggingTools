@@ -1,6 +1,0 @@
-[<Line: +		return new MethodInsnNode(FieldToStructMethodTransformer.INVOKEVIRTUAL, "java/nio/ByteBuffer", getter(name), "(I)" + castedDesc(fd), false);
->, <Line: +		return new MethodInsnNode(FieldToStructMethodTransformer.INVOKEVIRTUAL, "java/nio/ByteBuffer", putter(name), desc, false);
->]
-[<Line: -		return new MethodInsnNode(FieldToStructMethodTransformer.INVOKEVIRTUAL, "java/nio/ByteBuffer", getter(name), "(I)" + castedDesc(fd));
->, <Line: -		return new MethodInsnNode(FieldToStructMethodTransformer.INVOKEVIRTUAL, "java/nio/ByteBuffer", putter(name), desc);
->]

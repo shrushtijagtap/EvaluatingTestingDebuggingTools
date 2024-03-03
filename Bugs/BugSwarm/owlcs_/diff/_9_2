@@ -1,8 +1,0 @@
-[<Line: +        writeSectionKeyword(SUB_PROPERTY_OF);
->, <Line: +        writeSectionKeyword(SUB_PROPERTY_OF);
->, <Line: +        writeSectionKeyword(SUB_PROPERTY_OF);
->]
-[<Line: -        write(SUB_PROPERTY_OF);
->, <Line: -        write(SUB_PROPERTY_OF);
->, <Line: -        write(SUB_PROPERTY_OF);
->]

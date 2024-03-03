@@ -1,8 +1,0 @@
-[<Line: +      if (rowLength == -1) {
->, <Line: +    for (int i = 0; i < (height + 1) / 2; i++) {
->, <Line: +    while ((theBits << (31 - bit)) == 0) {
->]
-[<Line: -      if(rowLength == -1) {
->, <Line: -    for (int i = 0; i < (height+1) / 2; i++) {
->, <Line: -    while ((theBits << (31-bit)) == 0) {
->]

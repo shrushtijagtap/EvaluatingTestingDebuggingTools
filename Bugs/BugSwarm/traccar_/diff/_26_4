@@ -1,6 +1,0 @@
-[<Line: +public class BingMapsGeocoder extends JsonGeocoder {
->, <Line: +    public BingMapsGeocoder(String url, String key, int cacheSize) {
->]
-[<Line: -public class BingMapsReverseGeocoder extends JsonReverseGeocoder {
->, <Line: -    public BingMapsReverseGeocoder(String url, String key, int cacheSize) {
->]

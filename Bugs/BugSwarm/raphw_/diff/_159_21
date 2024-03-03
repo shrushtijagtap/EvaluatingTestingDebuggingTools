@@ -1,4 +1,0 @@
-[<Line: +        Callable<String> instance = (Callable<String>) factory.getDeclaredMethod("nonCapturing").invoke(factory.getDeclaredConstructor().newInstance());
->]
-[<Line: -        Callable<String> instance = (Callable<String>) factory.getDeclaredMethod("nonCapturing").invoke(factory.newInstance());
->]

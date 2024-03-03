@@ -1,4 +1,0 @@
-[<Line: +    public final NamespaceBinding[] getDeclaredNamespaces(NamespaceBinding[] namespaceBindings) {
->]
-[<Line: -    public final NamespaceBinding[] getDeclaredNamespaces(NamespaceBinding... namespaceBindings) {
->]

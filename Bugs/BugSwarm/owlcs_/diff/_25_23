@@ -1,6 +1,0 @@
-[<Line: +            result.length() > 7600);
->, <Line: +            result.length() > 25500);
->]
-[<Line: -            result.length() > 8250);
->, <Line: -            result.length() > 26200);
->]

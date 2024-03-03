@@ -1,4 +1,0 @@
-[<Line: +        return Integer.valueOf(reasoner.getUnsatisfiableClasses().getSize());
->]
-[<Line: -        return reasoner.getUnsatisfiableClasses().getSize();
->]

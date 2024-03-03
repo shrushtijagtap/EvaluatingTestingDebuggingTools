@@ -1,9 +1,0 @@
-[<Line: +import org.eclipse.swt.layout.GridData;
->, <Line: +	public static GridData horizontalExpandDefault() {
->, <Line: +		return horizontalExpandDefault(SWT.DEFAULT);
->, <Line: +	}
->, <Line: +	public static GridData horizontalExpandDefault(int hHint) {
->, <Line: +		return gdFillDefaults().grab(true, false).hint(hHint, SWT.DEFAULT).create();
->, <Line: +	}
->]
-[]

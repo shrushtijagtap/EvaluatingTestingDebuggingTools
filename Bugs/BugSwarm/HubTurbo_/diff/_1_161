@@ -1,7 +1,0 @@
-[<Line: +import util.TickingTimer;
->, <Line: +import java.util.concurrent.TimeUnit;
->, <Line: +        return new TickingTimer("test", 10, (i) -> {}, () -> {}, TimeUnit.SECONDS);
->]
-[<Line: -import service.TickingTimer;
->, <Line: -        return new TickingTimer("test", 10, (i) -> {}, () -> {});
->]

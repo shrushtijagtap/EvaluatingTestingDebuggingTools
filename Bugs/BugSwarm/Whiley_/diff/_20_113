@@ -1,6 +1,0 @@
-[<Line: +function f(intlist[] l) -> any:
->, <Line: +    (int|int[])[] x
->]
-[<Line: -function f([intlist] l) -> any:
->, <Line: -    [int|int[]] x
->]

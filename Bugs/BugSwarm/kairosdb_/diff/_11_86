@@ -1,4 +1,0 @@
-[<Line: +		addAggregator(new SaveAsAggregator(null));
->, <Line: +		addAggregator(new TrimAggregator());
->]
-[]

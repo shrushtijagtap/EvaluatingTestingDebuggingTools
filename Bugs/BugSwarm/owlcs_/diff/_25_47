@@ -1,6 +1,0 @@
-[<Line: +            ontology.getOWLOntologyManager().getOntologyConfigurator());
->, <Line: +            if (config.shouldUseLabelsAsBanner()) {
->]
-[<Line: -            ontology.getOWLOntologyManager().getOntologyWriterConfiguration());
->, <Line: -            if (config.isLabelsAsBanner()) {
->]

@@ -1,4 +1,0 @@
-[<Line: +    int timeOutInSeconds() default 10;
->]
-[<Line: -    int timeOutInSeconds() default 1;
->]

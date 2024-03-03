@@ -1,6 +1,0 @@
-[<Line: +    public Signature() {
->, <Line: +        super();
->, <Line: +    }
->]
-[<Line: -    public Signature() {}
->]

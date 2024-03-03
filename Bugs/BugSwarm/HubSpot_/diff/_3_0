@@ -1,6 +1,0 @@
-[<Line: +    <dependency>
->, <Line: +      <groupId>ch.qos.logback</groupId>
->, <Line: +      <artifactId>logback-classic</artifactId>
->, <Line: +    </dependency>
->]
-[]

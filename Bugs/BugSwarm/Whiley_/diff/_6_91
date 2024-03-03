@@ -1,5 +1,0 @@
-[<Line: +../../tests/invalid/DoWhile_Invalid_2.whiley:12: postcondition not satisfied
->, <Line: +    return i
->, <Line: +    ^^^^^^^^
->]
-[]

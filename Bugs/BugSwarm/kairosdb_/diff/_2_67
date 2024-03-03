@@ -1,6 +1,0 @@
-[<Line: +import org.kairosdb.core.KairosFeatureProcessor;
->, <Line: +		parser = new QueryParser(new KairosFeatureProcessor(new TestAggregatorFactory(), new TestGroupByFactory()), new TestQueryPluginFactory());
->]
-[<Line: -import org.kairosdb.core.KairosQueryProcessingChain;
->, <Line: -		parser = new QueryParser(new KairosQueryProcessingChain(new TestAggregatorFactory(), new TestGroupByFactory()), new TestQueryPluginFactory());
->]

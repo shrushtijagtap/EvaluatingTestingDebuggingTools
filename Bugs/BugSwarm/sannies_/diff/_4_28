@@ -1,5 +1,0 @@
-[<Line: +import org.mp4parser.tools.Hex;
->, <Line: +            System.err.println(Hex.encodeHex(nal));
->]
-[<Line: -            //System.err.println(Hex.encodeHex(nal));
->]

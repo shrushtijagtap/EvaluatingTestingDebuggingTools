@@ -1,4 +1,0 @@
-[<Line: +    while i < |board| where i >= 0:
->]
-[<Line: -    while i < |board|:
->]

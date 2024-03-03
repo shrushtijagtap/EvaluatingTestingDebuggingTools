@@ -1,7 +1,0 @@
-[<Line: +		<dependency>
->, <Line: +			<groupId>${project.groupId}</groupId>
->, <Line: +			<artifactId>owlapi-tools</artifactId>
->, <Line: +			<version>${project.version}</version>
->, <Line: +		</dependency>
->]
-[]

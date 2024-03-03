@@ -1,6 +1,0 @@
-[<Line: +		<dependency>
->, <Line: +			<groupId>com.google.guava</groupId>
->, <Line: +			<artifactId>guava</artifactId>
->, <Line: +		</dependency>
->]
-[]

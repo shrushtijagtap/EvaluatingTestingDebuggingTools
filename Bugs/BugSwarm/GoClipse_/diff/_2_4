@@ -1,4 +1,0 @@
-[<Line: +		return project.getName() + "//" + targetData.getTargetName();
->]
-[<Line: -		return project.getName() + " >> " + targetData.getTargetName();
->]

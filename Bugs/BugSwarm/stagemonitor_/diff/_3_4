@@ -1,8 +1,0 @@
-[<Line: + * Only allows transformation of classes if the target {@link ClassLoader} is able to load {@link Stagemonitor}.
->, <Line: + * Also, this prevents to transform classes that are loaded by another class loader hierarchy and thus avoids
->, <Line: + * interfering with other applications which are deployed on the same application server.
->]
-[<Line: - * By default, only allows transformation of classes if they are loaded by the same class loader as this class.
->, <Line: - * Also, this prevents to transform classes that are loaded by another class loader, for example when multiple
->, <Line: - * applications are deployed in a single Application Server.
->]

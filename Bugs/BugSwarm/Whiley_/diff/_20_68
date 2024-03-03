@@ -1,4 +1,0 @@
-[<Line: +function f(int[] ls) -> bool
->]
-[<Line: -function f([int] ls) -> bool
->]

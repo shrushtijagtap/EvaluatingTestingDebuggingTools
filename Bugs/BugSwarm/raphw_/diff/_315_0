@@ -1,6 +1,0 @@
-[<Line: +                            } catch (RuntimeException exception) {
->, <Line: +                                throw exception;
->, <Line: +                                return new Simple(virtualMachineType, getPid.invoke(current.invoke(STATIC_MEMBER)).toString());
->]
-[<Line: -                                return new Simple(virtualMachineType, (String) getPid.invoke(current.invoke(STATIC_MEMBER)));
->]

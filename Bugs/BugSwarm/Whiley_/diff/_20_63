@@ -1,6 +1,0 @@
-[<Line: +function List(int tag) -> int[]:
->, <Line: +    int[] r
->]
-[<Line: -function List(int tag) -> [int]:
->, <Line: -    [int] r
->]

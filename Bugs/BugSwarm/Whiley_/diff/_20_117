@@ -1,4 +1,0 @@
-[<Line: +type fun_t is {jvm_t ret, jvm_t[] params}
->]
-[<Line: -type fun_t is {jvm_t ret, [jvm_t] params}
->]

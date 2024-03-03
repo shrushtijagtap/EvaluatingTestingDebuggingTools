@@ -1,4 +1,0 @@
-[<Line: +        SELECT * FROM statistics WHERE captureTime BETWEEN :from AND :to ORDER BY captureTime;
->]
-[<Line: -        SELECT * FROM statistics;
->]

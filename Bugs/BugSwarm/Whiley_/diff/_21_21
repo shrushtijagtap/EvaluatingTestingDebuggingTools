@@ -1,9 +1,0 @@
-[]
-[<Line: -function sum([int] xs) -> (int y)
->, <Line: -ensures y >= 0:
->, <Line: -    //
->, <Line: -    int r = 0
->, <Line: -    for x in xs where r >= 0:
->, <Line: -        r = r + x
->, <Line: -    return r
->]

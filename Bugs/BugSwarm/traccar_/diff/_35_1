@@ -1,4 +1,0 @@
-[<Line: +        buf.writeByte(100 + type);
->]
-[<Line: -        buf.writeByte(type);
->]

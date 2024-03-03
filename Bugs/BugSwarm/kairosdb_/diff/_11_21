@@ -1,5 +1,0 @@
-[<Line: +				"m_timestamp=" + new DateTime(m_timestamp) +
->]
-[<Line: -import java.nio.ByteBuffer;
->, <Line: -                "m_timestamp=" + new DateTime(m_timestamp) +
->]

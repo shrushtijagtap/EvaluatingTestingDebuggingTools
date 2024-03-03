@@ -1,8 +1,0 @@
-[<Line: +        verifyAttributes(decoder, binary(
->]
-[<Line: -        verifyAttributes(decoder, binary(
->, <Line: -                "7979003F940D110315102A202141494F494C2C30322C3030382E3239302C3032392E3630302C3531394A2C303430302C3030382E3433302C302C30302C4142001678EA0D0A"));
->, <Line: -        verifyNothing(decoder, binary(
->, <Line: -                "79790005840016BB1A0D0A"));
->, <Line: -        verifyNothing(decoder, binary(
->]

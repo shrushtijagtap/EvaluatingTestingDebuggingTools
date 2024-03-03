@@ -1,6 +1,0 @@
-[<Line: +import org.traccar.helper.Checksum;
->, <Line: +            response += Checksum.nmeaChecksum(response);
->]
-[<Line: -import org.traccar.helper.Crc;
->, <Line: -            response += Crc.nmeaChecksum(response);
->]

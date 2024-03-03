@@ -1,4 +1,0 @@
-[<Line: +			this(TypeFactory.defaultInstance().constructCollectionLikeType(List.class, vc), vc);
->]
-[<Line: -			this(null, vc);
->]

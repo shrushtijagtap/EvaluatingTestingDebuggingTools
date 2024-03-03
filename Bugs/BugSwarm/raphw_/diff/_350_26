@@ -1,4 +1,0 @@
-[<Line: +                is((AnnotationList) new AnnotationList.ForLoadedAnnotations(Sample.class.getPackage().getDeclaredAnnotations())));
->]
-[<Line: -                is((AnnotationList) new AnnotationList.ForLoadedAnnotation(Sample.class.getPackage().getDeclaredAnnotations())));
->]

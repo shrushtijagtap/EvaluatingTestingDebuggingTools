@@ -1,8 +1,0 @@
-[<Line: +import org.kairosdb.core.processingstage.FeatureProcessingFactory;
->, <Line: +	private FeatureProcessingFactory<Aggregator> aggFactory;
->, <Line: +		metric.addAggregator(aggFactory.createFeatureProcessor("sum"));
->]
-[<Line: -import org.kairosdb.core.processingstage.QueryProcessingStageFactory;
->, <Line: -	private QueryProcessingStageFactory<Aggregator> aggFactory;
->, <Line: -		metric.addAggregator(aggFactory.createQueryProcessor("sum"));
->]

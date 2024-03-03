@@ -1,6 +1,0 @@
-[<Line: +function index(list l, int index) -> any
->, <Line: +requires index >= 0 && index < |l|:
->, <Line: +    //
->]
-[<Line: -function index(list l, int index) -> any:
->]

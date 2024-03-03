@@ -1,6 +1,0 @@
-[<Line: +    - :class:`svm.SVC`` and :class:`svm.NuSVC` now have an ``decision_function_shape``
->, <Line: +      parameter to make their decision function of shape ``(n_samples, n_classes)``
->, <Line: +      by setting ``decision_function_shape='ovr'``. This will be the default behavior
->, <Line: +      starting in 0.19. By `Andreas Müller`_.
->]
-[]

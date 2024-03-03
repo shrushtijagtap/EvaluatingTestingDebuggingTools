@@ -1,9 +1,0 @@
-[<Line: +        SYNC("sync"),
->, <Line: +        SYNC_ACTIONS("sync-actions"),
->, <Line: +        SYNC_ENDPOINT_HOURS("sync-endpoint-hours"),
->, <Line: +        SYNC_ENDPOINT_HOURS_ABOVE_DAILY_CAP("sync-endpoint-hours-above-daily-cap"),
->, <Line: +        WIRELESS_USAGE_MRC_POOLED("wireless-usage-mrc-pooled");
->]
-[<Line: -        WIRELESS_USAGE_MRC_POOLED("wireless-usage-mrc-pooled"),
->, <Line: -        SYNC("sync");
->]

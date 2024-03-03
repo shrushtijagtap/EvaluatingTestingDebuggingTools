@@ -1,4 +1,0 @@
-[<Line: +        public synchronized int read(byte[] buffer, int off, int len) throws IOException {
->]
-[<Line: -        public synchronized int read(byte[] buffer) throws IOException {
->]

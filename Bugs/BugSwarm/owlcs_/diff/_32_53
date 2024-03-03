@@ -1,6 +1,0 @@
-[<Line: +                LOGGER.debug("rioParse: timing={}", Long.valueOf(System.currentTimeMillis() - rioParseStart));
->, <Line: +                    LOG.debug("owlParse: timing={}", Long.valueOf(System.currentTimeMillis() - owlParseStart));
->]
-[<Line: -                LOGGER.debug("rioParse: timing={}", System.currentTimeMillis() - rioParseStart);
->, <Line: -                    LOG.debug("owlParse: timing={}", System.currentTimeMillis() - owlParseStart);
->]

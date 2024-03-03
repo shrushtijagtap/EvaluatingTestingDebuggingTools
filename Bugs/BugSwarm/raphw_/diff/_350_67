@@ -1,4 +1,0 @@
-[<Line: +public class TypePoolDefaultLazyParameterListTest extends AbstractParameterListTest<ParameterDescription.InDefinedShape, ParameterDescription> {
->]
-[<Line: -public class TypePoolLazyParameterListTest extends AbstractParameterListTest<ParameterDescription.InDefinedShape, ParameterDescription> {
->]

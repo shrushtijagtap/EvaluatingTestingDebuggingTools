@@ -1,4 +1,0 @@
-[<Line: +                new AnnotationList.ForLoadedAnnotations(field.getDeclaredAnnotations()));
->]
-[<Line: -                new AnnotationList.ForLoadedAnnotation(field.getDeclaredAnnotations()));
->]

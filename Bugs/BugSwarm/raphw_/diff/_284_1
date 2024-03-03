@@ -1,4 +1,0 @@
-[<Line: +import java.util.List;
->]
-[<Line: -import com.sun.tools.javac.util.List;
->]

@@ -1,6 +1,0 @@
-[<Line: +        @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "The array is not to be modified by contract")
->, <Line: +        @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "The array is not to be modified by contract")
->]
-[<Line: -        @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "The received value is never modified by contract")
->, <Line: -        @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Return value must never be modified")
->]

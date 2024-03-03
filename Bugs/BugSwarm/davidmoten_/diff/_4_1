@@ -1,7 +1,0 @@
-[<Line: +package com.github.davidmoten.rx.jdbc;
->, <Line: +import java.sql.ResultSet;
->, <Line: +import java.sql.SQLException;
->, <Line: +public interface ResultSetMapper<T> {
->, <Line: +    T call(ResultSet rs) throws SQLException;
->, <Line: +}>]
-[]

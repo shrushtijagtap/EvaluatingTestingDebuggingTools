@@ -1,8 +1,0 @@
-[<Line: +	 * Creates an aspect that matches all entities.
->, <Line: +	 *
->, <Line: +	 * @deprecated extend {@link com.artemis.BaseSystem} instead of {@link com.artemis.EntitySystem} for entity-less systems.
->]
-[<Line: -	 * This behavior is now reversed - an empty aspect matches everything. To create an
->, <Line: -	 * aspect matching no entities, simply pass null to the {@link com.artemis.EntitySystem}
->, <Line: -	 * constructor.
->]

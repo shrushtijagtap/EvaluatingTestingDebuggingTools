@@ -1,7 +1,0 @@
-[<Line: +	'./panellinkeditor/module',
->, <Line: +], function () {
->, <Line: +});
->]
-[<Line: -  './panellinkeditor/module',
->, <Line: -], function () {});
->]

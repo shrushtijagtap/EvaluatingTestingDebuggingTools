@@ -1,5 +1,0 @@
-[<Line: +	void handleEvents(List<DataPointEvent> events, EventCompletionCallBack eventCompletionCallBack,
->, <Line: +			boolean fullBatch);
->]
-[<Line: -	void handleEvents(List<DataPointEvent> events, EventCompletionCallBack eventCompletionCallBack);
->]

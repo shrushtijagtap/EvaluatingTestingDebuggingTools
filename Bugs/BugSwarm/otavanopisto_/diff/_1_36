@@ -1,8 +1,0 @@
-[<Line: +	<version>1.1.2</version>
->, <Line: +		<tag>1.1.2</tag>
->, <Line: +				<version>1.1.2</version>
->]
-[<Line: -	<version>1.1.2-SNAPSHOT</version>
->, <Line: -		<tag>HEAD</tag>
->, <Line: -				<version>1.1.2-SNAPSHOT</version>
->]

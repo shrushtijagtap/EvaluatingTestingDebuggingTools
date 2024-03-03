@@ -1,4 +1,0 @@
-[<Line: +        return createFound;
->]
-[<Line: -        return !createFound;
->]

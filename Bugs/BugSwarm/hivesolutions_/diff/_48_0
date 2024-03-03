@@ -1,3 +1,0 @@
-[<Line: +        if base_path and not os.path.exists(base_path): os.makedirs(base_path)
->]
-[]

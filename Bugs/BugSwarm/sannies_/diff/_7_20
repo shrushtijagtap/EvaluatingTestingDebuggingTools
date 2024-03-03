@@ -1,9 +1,0 @@
-[<Line: +import org.mp4parser.ParsableBox;
->, <Line: +import org.mp4parser.boxes.dece.BaseLocationBox;
->, <Line: +        BoxReplacer.replace(Collections.<String, ParsableBox>singletonMap("/bloc", new BaseLocationBox("baselocation", "purchaselocation")), fc);
->]
-[<Line: -import com.coremedia.iso.BoxReplacer;
->, <Line: -import com.coremedia.iso.boxes.Box;
->, <Line: -import com.googlecode.mp4parser.boxes.dece.BaseLocationBox;
->, <Line: -        BoxReplacer.replace(Collections.<String, Box>singletonMap("/bloc", new BaseLocationBox("baselocation", "purchaselocation")), fc);
->]

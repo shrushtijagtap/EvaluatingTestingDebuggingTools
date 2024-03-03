@@ -1,8 +1,0 @@
-[<Line: +function f(int|null x) -> (bool|null r):
->, <Line: +    //
->, <Line: +    if x is int && x >= 0:
->, <Line: +        return false
->, <Line: +    else:
->, <Line: +        return x
->]
-[]

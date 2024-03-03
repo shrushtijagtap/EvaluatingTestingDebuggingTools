@@ -1,8 +1,0 @@
-[<Line: +    private final boolean full;
->, <Line: +    private static final Pattern patternBasic = Pattern.compile(
->, <Line: +    private static final Pattern patternFull = Pattern.compile(
->]
-[<Line: -    private boolean full;
->, <Line: -    static private Pattern patternBasic = Pattern.compile(
->, <Line: -    static private Pattern patternFull = Pattern.compile(
->]

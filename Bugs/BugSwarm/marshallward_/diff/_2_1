@@ -1,9 +1,0 @@
-[<Line: +        # If using (unordered) dict, then resort the keys for reproducibility
->, <Line: +        s_args = list(args)
->, <Line: +        if (args and not isinstance(args[0], OrderedDict) and
->, <Line: +                isinstance(args[0], dict)):
->, <Line: +            s_args[0] = sorted(args[0].items())
->, <Line: +        super(Namelist, self).__init__(*s_args, **kwds)
->]
-[<Line: -        super(Namelist, self).__init__(*args, **kwds)
->]

@@ -1,8 +1,0 @@
-[<Line: +import com.google.common.base.Charsets;
->, <Line: +    return deserialize(getGlobalStateAsBytes(), BARAGON_SERVICE_STATE_COLLECTION);
->, <Line: +  }
->, <Line: +  public byte[] getGlobalStateAsBytes() {
->, <Line: +    return readFromZk(SERVICE_FORMAT).or("[]".getBytes(Charsets.UTF_8));
->]
-[<Line: -    return readFromZk(SERVICES_FORMAT, BARAGON_SERVICE_STATE_COLLECTION).or(Collections.<BaragonServiceState>emptyList());
->]

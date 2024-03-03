@@ -1,4 +1,0 @@
-[<Line: +ensures all { i in 0..|ys| | ys[i] >= 0 }:
->]
-[<Line: -ensures no { i in 0..|ys| | ys[i] < 0 }:
->]

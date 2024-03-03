@@ -1,5 +1,0 @@
-[<Line: +         * @param instrumentation      The instrumentation of this instance.
->, <Line: +         * @param accessControlContext The access control context to use.
->]
-[<Line: -         * @param instrumentation The instrumentation of this instance.
->]

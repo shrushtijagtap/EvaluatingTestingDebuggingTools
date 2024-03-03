@@ -1,5 +1,0 @@
-[<Line: +    private boolean connectionless;
->]
-[<Line: -import org.jboss.netty.channel.socket.DatagramChannel;
->, <Line: -    boolean connectionless;
->]

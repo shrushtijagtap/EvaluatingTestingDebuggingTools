@@ -1,6 +1,0 @@
-[<Line: +../../tests/invalid/ListAccess_Invalid_3.whiley:11: unable to resolve name (no match for f({int data,int mode}|{int[] data,int mode}[])
->, <Line: +	found: ListAccess_Invalid_3:f : function({int data,int mode}[]) -> {int data,int mode}[])
->]
-[<Line: -../../tests/invalid/ListAccess_Invalid_3.whiley:11: unable to resolve name (no match for f([{int data,int mode}|{[int] data,int mode}])
->, <Line: -	found: ListAccess_Invalid_3:f : function([{int data,int mode}]) -> [{int data,int mode}])
->]

@@ -1,7 +1,0 @@
-[<Line: +public class DataPointsRowKeySerializer
->]
-[<Line: -import me.prettyprint.cassandra.serializers.AbstractSerializer;
->, <Line: -public class DataPointsRowKeySerializer extends AbstractSerializer<DataPointsRowKey>
->, <Line: -	@Override
->, <Line: -	@Override
->]

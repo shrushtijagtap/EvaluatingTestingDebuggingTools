@@ -1,5 +1,0 @@
-[<Line: +				f.write((":%s%02x\n" % (toHex(bytes), csum)).encode(encoding='UTF-8'))
->]
-[<Line: -				f.write((":%s%02x\n" % (toHex(bytes), csum)) \
->, <Line: -					.translate('UTF-8').encode())
->]

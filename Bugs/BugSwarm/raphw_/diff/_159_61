@@ -1,6 +1,0 @@
-[<Line: +        T proxiedInstance = targetType.getDeclaredConstructor().newInstance();
->, <Line: +        T proxiedInstance = targetType.getDeclaredConstructor().newInstance();
->]
-[<Line: -        T proxiedInstance = targetType.newInstance();
->, <Line: -        T proxiedInstance = targetType.newInstance();
->]

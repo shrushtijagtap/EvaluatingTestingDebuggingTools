@@ -1,6 +1,0 @@
-[<Line: +        if (job != null && (job.getState().equals("running")
->, <Line: +                || job.getState().equals("queued"))) {
->]
-[<Line: -        if (job != null && (job.getState().equals("running") ||
->, <Line: -                job.getState().equals("queued"))) {
->]

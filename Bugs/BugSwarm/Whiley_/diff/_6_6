@@ -1,7 +1,0 @@
-[<Line: +		if ((lookahead = tryAndMatch(terminated, Some, All)) != null) {
->]
-[<Line: -		if ((lookahead = tryAndMatch(terminated, Some, No, All)) != null) {
->, <Line: -		case No:
->, <Line: -			cop = Expr.QOp.NONE;
->, <Line: -			break;
->]

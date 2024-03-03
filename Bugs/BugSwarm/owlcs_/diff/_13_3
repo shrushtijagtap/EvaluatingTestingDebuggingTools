@@ -1,4 +1,0 @@
-[<Line: +        super(documentIRI, () -> null, format, mime);
->]
-[<Line: -        super(documentIRI, format, mime);
->]

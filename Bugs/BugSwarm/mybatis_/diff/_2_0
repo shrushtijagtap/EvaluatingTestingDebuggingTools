@@ -1,8 +1,0 @@
-[<Line: +import java.util.Random;
->, <Line: +    boolean hasSimpleProperties = false;
->, <Line: +        hasSimpleProperties = true;
->, <Line: +    if (!hasSimpleProperties && cacheKey.getUpdateCount() == 1) {
->, <Line: +      cacheKey.update(new Random()); // issue #39
->, <Line: +    }
->]
-[]

@@ -1,8 +1,0 @@
-[<Line: +	public static String encode(CQIE input, PrefixManager prefixManager) {
->]
-[<Line: -import it.unibz.krdb.obda.model.OBDAQuery;
->, <Line: -	public static String encode(OBDAQuery input, PrefixManager prefixManager) {
->, <Line: -		if (!(input instanceof CQIE)) {
->, <Line: -			return "";
->, <Line: -		}
->]

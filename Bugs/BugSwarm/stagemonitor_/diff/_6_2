@@ -1,4 +1,0 @@
-[<Line: +				} else if (!getRawMatcher().matches(typeDescription, classLoader, null, null)) {
->, <Line: +					logger.warn("excluded by raw matcher");
->]
-[]

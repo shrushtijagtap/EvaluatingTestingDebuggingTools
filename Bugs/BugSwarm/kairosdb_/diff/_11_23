@@ -1,4 +1,0 @@
-[<Line: +			int rowSize = (int) (m_endPostition - m_currentPosition);
->]
-[<Line: -			int rowSize = (int)(m_endPostition - m_currentPosition);
->]

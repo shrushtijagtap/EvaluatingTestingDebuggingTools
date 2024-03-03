@@ -1,4 +1,0 @@
-[<Line: +    protected Pattern allowedActionNames = Pattern.compile("[a-zA-Z0-9._!/\\-]*");
->]
-[<Line: -    protected Pattern allowedActionNames = Pattern.compile("^[a-zA-Z0-9_!/\\-]*((.htm[l]?)|(.action))?$");
->]

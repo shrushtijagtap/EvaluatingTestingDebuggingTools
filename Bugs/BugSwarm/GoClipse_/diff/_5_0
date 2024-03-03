@@ -1,4 +1,0 @@
-[<Line: +		return buildOperation.getConfiguredProcessBuilder2().command();
->]
-[<Line: -		return buildOperation.getConfiguredProcessBuilder().command();
->]

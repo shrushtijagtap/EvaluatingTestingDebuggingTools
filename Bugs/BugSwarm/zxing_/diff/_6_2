@@ -1,4 +1,0 @@
-[<Line: +    public void onReceive(Context context, Intent intent) {
->]
-[<Line: -    public void onReceive(Context context, Intent intent){
->]

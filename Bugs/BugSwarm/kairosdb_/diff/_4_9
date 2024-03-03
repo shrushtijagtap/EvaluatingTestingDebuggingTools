@@ -1,7 +1,0 @@
-[<Line: +import org.kairosdb.core.datastore.KairosDatastore;
->, <Line: +	private final KairosDatastore datastore;
->, <Line: +	public DatastoreQueryHealthCheck(KairosDatastore datastore)
->]
-[<Line: -	private final Datastore datastore;
->, <Line: -	public DatastoreQueryHealthCheck(Datastore datastore)
->]

@@ -1,7 +1,0 @@
-[<Line: +package ui.components;
->, <Line: +public interface StatusUI {
->, <Line: +	public void displayMessage(String text);
->, <Line: +	public void clear();
->, <Line: +}
->]
-[]

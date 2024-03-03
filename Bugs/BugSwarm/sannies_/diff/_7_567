@@ -1,6 +1,0 @@
-[<Line: +package org.mp4parser.muxer.tracks.webvtt;
->, <Line: +import static org.junit.Assert.assertEquals;
->]
-[<Line: -package com.googlecode.mp4parser.authoring.tracks.webvtt;
->, <Line: -import static org.junit.Assert.*;
->]

@@ -1,4 +1,0 @@
-[<Line: +         Class<?> clazz = Class.forName(className, false, classLoader);
->]
-[<Line: -         Class<?> clazz = classLoader.loadClass(className);
->]

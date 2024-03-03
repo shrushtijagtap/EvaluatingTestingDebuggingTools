@@ -1,4 +1,0 @@
-[<Line: +        return (number >> index) & ((1L << length) - 1);
->]
-[<Line: -        return (number >> index) & ((1l << length) - 1);
->]

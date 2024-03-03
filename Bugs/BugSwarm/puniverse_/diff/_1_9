@@ -1,8 +1,0 @@
-[<Line: + * Test to check blocking call detection
->, <Line: +        final HashSet<String> msgs = new HashSet<>();
->, <Line: +            @Override
->, <Line: +            @Override
->]
-[<Line: - * Test to checking blocking call detection
->, <Line: -        final HashSet<String> msgs = new HashSet<String>();
->]

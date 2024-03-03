@@ -1,4 +1,0 @@
-[<Line: +							<enableArtemisPlugin>${artemis.enableArtemisPlugin}</enableArtemisPlugin>
->]
-[<Line: -							<enableArtemisPlugin>${artemis.enabled}</enableArtemisPlugin>
->]

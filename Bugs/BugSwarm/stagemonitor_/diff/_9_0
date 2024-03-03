@@ -1,9 +1,0 @@
-[<Line: +# build and push grafana app
->, <Line: +pushd stagemonitor-grafana-elasticsearch
->, <Line: +popd
->, <Line: +git checkout master
->]
-[<Line: -git checkout master
->, <Line: -# build and push grafana
->, <Line: -cd stagemonitor-grafana-elasticsearch
->]

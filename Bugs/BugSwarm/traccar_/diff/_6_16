@@ -1,6 +1,0 @@
-[<Line: +import org.traccar.helper.Checksum;
->, <Line: +        header.writeShort(Checksum.crc16X25Ccitt(data.toByteBuffer()));
->]
-[<Line: -import org.traccar.helper.Crc;
->, <Line: -        header.writeShort(Crc.crc16X25Ccitt(data.toByteBuffer()));
->]

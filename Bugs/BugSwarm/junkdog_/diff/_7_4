@@ -1,4 +1,0 @@
-[<Line: +		ReferenceTracker tracker = new ReferenceTracker(w);
->]
-[<Line: -		ReferenceTracker tracker = new ReferenceTracker();
->]

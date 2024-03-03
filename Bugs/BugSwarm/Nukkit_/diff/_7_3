@@ -1,5 +1,0 @@
-[<Line: +import cn.nukkit.utils.EventException;
->, <Line: +    public void callEvent(Event event) throws EventException {
->]
-[<Line: -    public void callEvent(Event event) {
->]

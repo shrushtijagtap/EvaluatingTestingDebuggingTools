@@ -1,8 +1,0 @@
-[<Line: +package org.mp4parser.muxer.tracks;
->, <Line: + * Removes NAL Unit emulation_prevention_three_byte.
->, <Line: + */
->]
-[<Line: -package com.googlecode.mp4parser.authoring.tracks;
->, <Line: -* Removes NAL Unit emulation_prevention_three_byte.
->, <Line: -*/
->]

@@ -1,4 +1,0 @@
-[<Line: +ensures some { i in 0..|rs| | rs[i] >= 0 }:
->]
-[<Line: -ensures some { x in rs | x >= 0 }:
->]

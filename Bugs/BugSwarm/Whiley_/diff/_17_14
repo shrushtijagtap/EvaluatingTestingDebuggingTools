@@ -1,4 +1,0 @@
-[<Line: +    <javac memoryMaximumSize="2048m" fork="true" debug="true" debuglevel="vars,lines,source" source="1.7" target="1.7" includeantruntime="true"  classpath="../wycs/src/:../wybs/src/:../../${WYRL_JAR}">
->]
-[<Line: -    <javac memoryMaximumSize="2048m" fork="true" debug="true" debuglevel="vars,lines,source" source="1.7" target="1.7" includeantruntime="true"  classpath="../wycs/src/;../wybs/src/;../wyrl/src">
->]

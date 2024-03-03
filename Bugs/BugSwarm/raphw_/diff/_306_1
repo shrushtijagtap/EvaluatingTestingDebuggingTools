@@ -1,8 +1,0 @@
-[<Line: +import static org.hamcrest.CoreMatchers.*;
->, <Line: +import static org.hamcrest.MatcherAssert.assertThat;
->]
-[<Line: -import static org.hamcrest.CoreMatchers.is;
->, <Line: -import static org.hamcrest.CoreMatchers.not;
->, <Line: -import static org.hamcrest.CoreMatchers.startsWith;
->, <Line: -import static org.junit.Assert.*;
->]

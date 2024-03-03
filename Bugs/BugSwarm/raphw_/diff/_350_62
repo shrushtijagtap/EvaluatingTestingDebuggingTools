@@ -1,4 +1,0 @@
-[<Line: +public class TypePoolDefaultLazyAnnotationListTest extends AbstractAnnotationListTest<Annotation> {
->]
-[<Line: -public class TypePoolLazyAnnotationListTest extends AbstractAnnotationListTest<Annotation> {
->]

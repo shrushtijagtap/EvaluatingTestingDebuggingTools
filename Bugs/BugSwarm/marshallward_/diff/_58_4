@@ -1,9 +1,0 @@
-[<Line: +A Python module and command line tool for parsing Fortran namelist files
->, <Line: +``f90nml`` also includes a command line tool for use in a shell environment.
->, <Line: +See the `cli` for more information.
->, <Line: +.. toctree::
->, <Line: +   :hidden:
->, <Line: +   cli
->]
-[<Line: -A Python module for parsing Fortran namelist files
->]

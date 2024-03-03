@@ -1,8 +1,0 @@
-[<Line: +import com.sun.javafx.scene.control.skin.VirtualFlow;
->, <Line: +import javafx.application.Platform;
->, <Line: +import javafx.scene.control.ListView;
->]
-[<Line: -import javafx.application.Platform;
->, <Line: -import javafx.scene.control.ListView;
->, <Line: -import com.sun.javafx.scene.control.skin.VirtualFlow;
->]

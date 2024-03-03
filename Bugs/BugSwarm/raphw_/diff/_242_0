@@ -1,6 +1,0 @@
-[<Line: +                specialMethodInvocation = implementationTarget.invokeDefault(methodToken, typeDescription);
->, <Line: +                SpecialMethodInvocation other = implementationTarget.invokeDefault(methodToken, typeDescription);
->]
-[<Line: -                specialMethodInvocation = implementationTarget.invokeDefault(typeDescription, methodToken);
->, <Line: -                SpecialMethodInvocation other = implementationTarget.invokeDefault(typeDescription, methodToken);
->]

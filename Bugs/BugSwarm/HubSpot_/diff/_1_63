@@ -1,8 +1,0 @@
-[<Line: +package com.hubspot.baragon.service.managers;
->, <Line: +import org.apache.curator.framework.recipes.leader.LeaderLatch;
->, <Line: +import org.apache.curator.framework.state.ConnectionState;
->]
-[<Line: -package com.hubspot.baragon.managers;
->, <Line: -import org.apache.curator.framework.recipes.leader.LeaderLatch;
->, <Line: -import org.apache.curator.framework.state.ConnectionState;
->]

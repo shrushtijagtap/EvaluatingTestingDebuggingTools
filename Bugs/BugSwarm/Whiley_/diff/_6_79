@@ -1,6 +1,0 @@
-[<Line: +method main(int x) :
->, <Line: +    if x > 0:
->]
-[<Line: -method main() :
->, <Line: -    if |sys.args| > 0:
->]

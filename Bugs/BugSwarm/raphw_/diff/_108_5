@@ -1,4 +1,0 @@
-[<Line: +        public String getActualName() {
->]
-[<Line: -        public String getSourceCodeName() {
->]

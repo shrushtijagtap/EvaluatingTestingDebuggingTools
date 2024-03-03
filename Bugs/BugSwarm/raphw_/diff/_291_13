@@ -1,5 +1,0 @@
-[]
-[<Line: -        ByteBuddyLogHandler byteBuddyLogHandler = ByteBuddyLogHandler.initialize(project);
->, <Line: -        } finally {
->, <Line: -            byteBuddyLogHandler.reset();
->]

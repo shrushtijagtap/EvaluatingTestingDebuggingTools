@@ -1,4 +1,0 @@
-[<Line: +	compile 'p6spy:p6spy:2.3.0'
->]
-[<Line: -	compile 'p6spy:p6spy:2.2.0'
->]

@@ -1,8 +1,0 @@
-[<Line: +                ClassWriter classWriter = new ClassWriter(classReader, classVisitorWrapper.mergeWriter(ASM_MANUAL_FLAG));
->, <Line: +                        classVisitorWrapper.mergeReader(ASM_MANUAL_FLAG));
->, <Line: +                ClassWriter classWriter = new ClassWriter(classVisitorWrapper.mergeWriter(ASM_MANUAL_FLAG));
->]
-[<Line: -                ClassWriter classWriter = new ClassWriter(classReader, classVisitorWrapper.wrapWriter(ASM_MANUAL_FLAG));
->, <Line: -                        classVisitorWrapper.wrapReader(ASM_MANUAL_FLAG));
->, <Line: -                ClassWriter classWriter = new ClassWriter(classVisitorWrapper.wrapWriter(ASM_MANUAL_FLAG));
->]

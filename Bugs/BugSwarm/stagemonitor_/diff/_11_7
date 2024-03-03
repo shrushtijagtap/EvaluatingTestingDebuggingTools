@@ -1,5 +1,0 @@
-[<Line: +	@JsonProperty("request_id")
->, <Line: +	@JsonProperty("request_name")
->, <Line: +	@JsonProperty("execution_time")
->]
-[]

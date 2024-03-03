@@ -1,3 +1,0 @@
-[<Line: +                    @SuppressFBWarnings(value = "GC_UNRELATED_TYPES", justification = "Use of unrelated key is inteded for avoiding unnecessary weak reference")
->]
-[]

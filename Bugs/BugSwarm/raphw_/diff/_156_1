@@ -1,5 +1,0 @@
-[]
-[<Line: -                        if (instrumentedType.isAnonymousClass()) {
->, <Line: -                            modifiers = modifiers | Opcodes.ACC_STATIC;
->, <Line: -                        }
->]

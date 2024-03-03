@@ -1,6 +1,0 @@
-[<Line: +        fc.write((
->, <Line: +        fc.write((
->]
-[<Line: -        fc.write(ByteBuffer.wrap(
->, <Line: -        fc.write(ByteBuffer.wrap(
->]

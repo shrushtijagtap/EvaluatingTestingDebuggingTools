@@ -1,6 +1,0 @@
-[<Line: +public class MapQuestGeocoder extends JsonGeocoder {
->, <Line: +    public MapQuestGeocoder(String url, String key, int cacheSize) {
->]
-[<Line: -public class MapQuestReverseGeocoder extends JsonReverseGeocoder {
->, <Line: -    public MapQuestReverseGeocoder(String url, String key, int cacheSize) {
->]

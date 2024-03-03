@@ -1,9 +1,0 @@
-[<Line: +import java.util.*;
->, <Line: +	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss.SS", Locale.ENGLISH);
->]
-[<Line: -import java.util.ArrayList;
->, <Line: -import java.util.HashMap;
->, <Line: -import java.util.List;
->, <Line: -import java.util.Map;
->, <Line: -	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss.SS",Locale.ENGLISH);
->]

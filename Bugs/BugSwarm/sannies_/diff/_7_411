@@ -1,6 +1,0 @@
-[<Line: +package org.mp4parser.boxes.iso14496.part15;
->, <Line: +import org.mp4parser.tools.Hex;
->]
-[<Line: -package com.mp4parser.iso14496.part15;
->, <Line: -import com.coremedia.iso.Hex;
->]

@@ -1,4 +1,0 @@
-[<Line: +  - mvn install -Dmaven.javadoc.skip=true -V -B
->]
-[<Line: -  - mvn install -Dskip.unit.tests=true -Dmaven.javadoc.skip=true -V -B
->]

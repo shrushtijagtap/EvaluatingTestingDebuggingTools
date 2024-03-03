@@ -1,6 +1,0 @@
-[<Line: +      default:
->, <Line: +        break;
->, <Line: +        if (!agentLock.tryLock(agentLockTimeoutMs, TimeUnit.MILLISECONDS)) {
->]
-[<Line: -        if (agentLock.tryLock(agentLockTimeoutMs, TimeUnit.MILLISECONDS)) {
->]

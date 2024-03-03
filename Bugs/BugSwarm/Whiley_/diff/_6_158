@@ -1,5 +1,0 @@
-[<Line: +method f(int[] x)
->, <Line: +requires |x| > 0:
->]
-[<Line: -method f(int[] x) :
->]

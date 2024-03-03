@@ -1,6 +1,0 @@
-[<Line: +    public IMinecraftService provideMinecraftService(Object profile) {
->, <Line: +        return new HMCLMinecraftService((Profile) profile);
->]
-[<Line: -    public IMinecraftService provideMinecraftService(Profile profile) {
->, <Line: -        return new HMCLMinecraftService(profile);
->]

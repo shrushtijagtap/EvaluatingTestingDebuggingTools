@@ -1,8 +1,0 @@
-[<Line: +package org.mp4parser.muxer;
->, <Line: +import org.junit.Assert;
->, <Line: +        String result = new String(baos.toByteArray());
->]
-[<Line: -package com.googlecode.mp4parser;
->, <Line: -import junit.framework.Assert;
->, <Line: -        String result =  new String(baos.toByteArray());
->]

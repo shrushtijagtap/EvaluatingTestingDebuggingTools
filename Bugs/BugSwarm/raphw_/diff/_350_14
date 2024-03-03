@@ -1,6 +1,0 @@
-[<Line: +        return anyOf(new AnnotationList.ForLoadedAnnotations(value));
->, <Line: +        return noneOf(new AnnotationList.ForLoadedAnnotations(value));
->]
-[<Line: -        return anyOf(new AnnotationList.ForLoadedAnnotation(value));
->, <Line: -        return noneOf(new AnnotationList.ForLoadedAnnotation(value));
->]

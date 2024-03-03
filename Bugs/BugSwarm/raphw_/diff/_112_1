@@ -1,6 +1,0 @@
-[<Line: +     * @param matcher The actual matcher for which the results are cached.
->, <Line: +     * @param matcher      The actual matcher for which the results are cached.
->]
-[<Line: -     * @param matcher The cached matcher.
->, <Line: -     * @param matcher      The cached matcher.
->]

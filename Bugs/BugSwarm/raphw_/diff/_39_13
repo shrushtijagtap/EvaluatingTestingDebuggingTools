@@ -1,6 +1,0 @@
-[<Line: +                return new MethodDescription.ForLoadedMethod(Class.class.getMethod("getDeclaredMethod", String.class, Class[].class));
->, <Line: +                return new MethodDescription.ForLoadedMethod(Class.class.getMethod("getDeclaredConstructor", Class[].class));
->]
-[<Line: -                return new MethodDescription.ForLoadedMethod(Class.class.getDeclaredMethod("getDeclaredMethod", String.class, Class[].class));
->, <Line: -                return new MethodDescription.ForLoadedMethod(Class.class.getDeclaredMethod("getDeclaredConstructor", Class[].class));
->]

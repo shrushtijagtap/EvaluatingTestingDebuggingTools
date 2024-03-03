@@ -1,6 +1,0 @@
-[<Line: +  .buttonBackground(@btnBackground, @btnBackgroundHighlight, @grayDark, 0 1px 1px rgba(255, 255, 255, .75));
->, <Line: +  color: rgba(255, 255, 255, .75);
->]
-[<Line: -  .buttonBackground(@btnBackground, @btnBackgroundHighlight, @grayDark, 0 1px 1px rgba(255,255,255,.75));
->, <Line: -  color: rgba(255,255,255,.75);
->]

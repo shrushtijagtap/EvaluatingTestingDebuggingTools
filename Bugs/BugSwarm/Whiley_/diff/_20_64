@@ -1,4 +1,0 @@
-[<Line: +../../tests/invalid/MethodCall_Invalid_3.whiley:2: record required, got: int[]
->]
-[<Line: -../../tests/invalid/MethodCall_Invalid_3.whiley:2: record required, got: [int]
->]

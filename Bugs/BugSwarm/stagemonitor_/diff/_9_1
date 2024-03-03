@@ -1,9 +1,0 @@
-[<Line: +		thresholdMonitoringReporter = ThresholdMonitoringReporter.forRegistry(initArguments.getMetricRegistry())
->, <Line: +				.alertingPlugin(alertingPlugin)
->, <Line: +				.alertSender(alertSender)
->, <Line: +				.incidentRepository(incidentRepository)
->, <Line: +				.measurementSession(initArguments.getMeasurementSession())
->, <Line: +				.build();
->]
-[<Line: -		thresholdMonitoringReporter = new ThresholdMonitoringReporter(initArguments.getMetricRegistry(), alertingPlugin, alertSender, incidentRepository, initArguments.getMeasurementSession());
->]

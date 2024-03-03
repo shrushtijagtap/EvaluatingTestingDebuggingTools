@@ -1,6 +1,0 @@
-[<Line: +package org.mp4parser.muxer.tracks.h264.parsing;
->, <Line: +    public final static boolean debug = false;
->]
-[<Line: -package com.googlecode.mp4parser.h264;
->, <Line: -    public final static boolean debug = false;
->]

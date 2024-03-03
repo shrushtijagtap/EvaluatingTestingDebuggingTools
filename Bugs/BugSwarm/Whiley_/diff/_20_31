@@ -1,4 +1,0 @@
-[<Line: +function f(int[] xs, real y) -> int:
->]
-[<Line: -function f([int] xs, real y) -> int:
->]

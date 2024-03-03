@@ -1,4 +1,0 @@
-[<Line: +			char revertedCh = TextSourceUtils.getBracePair(ch);
->]
-[<Line: -			char revertedCh = TextUtils.getBracePair(ch);
->]

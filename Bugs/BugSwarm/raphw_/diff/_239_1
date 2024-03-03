@@ -1,5 +1,0 @@
-[<Line: +        return to(delegate, String.format("%s$%d", FIELD_PREFIX, Math.abs(delegate.hashCode() % Integer.MAX_VALUE)), type);
->]
-[<Line: -import net.bytebuddy.utility.RandomString;
->, <Line: -        return to(delegate, String.format("%s$%s", FIELD_PREFIX, RandomString.make()), type);
->]

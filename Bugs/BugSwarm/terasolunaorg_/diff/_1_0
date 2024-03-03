@@ -1,6 +1,0 @@
-[<Line: +        <property name="defaultErrorView" value="common/error/systemError" />
->, <Line: +        <property name="defaultStatusCode" value="500" />
->]
-[<Line: -        <property name="defaultErrorView" value="common/error/systemError" />
->, <Line: -        <property name="defaultStatusCode" value="500" />
->]

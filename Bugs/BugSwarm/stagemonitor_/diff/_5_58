@@ -1,5 +1,0 @@
-[<Line: +import static org.stagemonitor.requestmonitor.RequestMonitor.getRequest;
->, <Line: +			assertEquals("Test Get Request Name", RequestMonitor.get().getRequestTrace().getName());
->]
-[<Line: -			assertEquals("Test Get Request Name", RequestMonitor.getRequest().getName());
->]

@@ -1,6 +1,0 @@
-[<Line: +        /**
->, <Line: +         * The class's serial version UID.
->, <Line: +         */
->, <Line: +        private static final long serialVersionUID = 1L;
->]
-[]

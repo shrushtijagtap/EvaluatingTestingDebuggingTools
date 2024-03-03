@@ -1,7 +1,0 @@
-[]
-[<Line: -import java.security.AccessControlContext;
->, <Line: -import java.security.AccessController;
->, <Line: -import java.security.ProtectionDomain;
->, <Line: -import static org.mockito.Mockito.mock;
->, <Line: -                AccessController.getContext(),
->]

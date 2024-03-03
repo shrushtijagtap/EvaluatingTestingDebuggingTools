@@ -1,8 +1,0 @@
-[<Line: +    if (this.getInformation().getSize() < HEADER_SIZE + GTIN_SIZE) {
->, <Line: +    if (firstThreeDigits / 100 == 0) {
->, <Line: +    if (firstThreeDigits / 10 == 0) {
->]
-[<Line: -    if(this.getInformation().getSize() < HEADER_SIZE + GTIN_SIZE) {
->, <Line: -    if(firstThreeDigits / 100 == 0) {
->, <Line: -    if(firstThreeDigits / 10 == 0) {
->]

@@ -1,4 +1,0 @@
-[<Line: +                is((AnnotationList) new AnnotationList.ForLoadedAnnotations(second.getDeclaredAnnotations())));
->]
-[<Line: -                is((AnnotationList) new AnnotationList.ForLoadedAnnotation(second.getDeclaredAnnotations())));
->]

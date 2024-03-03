@@ -1,9 +1,0 @@
-[<Line: +            // Embrace use of native generic signature by direct delegation.
->, <Line: +        @Override
->, <Line: +        public int getActualModifiers(boolean superFlag) {
->, <Line: +            // Embrace use of native actual modifiers by direct delegation.
->, <Line: +            return typeDescription.getActualModifiers(superFlag);
->, <Line: +        }
->]
-[<Line: -            // Embrace use of cached generic signature by direct delegation.
->]

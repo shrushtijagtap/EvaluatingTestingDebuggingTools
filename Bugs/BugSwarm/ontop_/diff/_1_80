@@ -1,9 +1,0 @@
-[<Line: +import it.unibz.krdb.obda.model.CQIE;
->, <Line: +import it.unibz.krdb.obda.model.OBDASQLQuery;
->, <Line: +		CQIE targetQuery = value.getTargetQuery();
->, <Line: + 		OBDASQLQuery sourceQuery = value.getSourceQuery();
->]
-[<Line: -import it.unibz.krdb.obda.model.OBDAQuery;
->, <Line: -		OBDAQuery targetQuery = value.getTargetQuery();
->, <Line: -		OBDAQuery sourceQuery = value.getSourceQuery();
->]

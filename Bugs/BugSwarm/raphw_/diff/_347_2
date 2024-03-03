@@ -1,4 +1,0 @@
-[<Line: +public class AnonymousClassLoader implements Runnable {
->]
-[<Line: -public class AnonymousClassLoaderTest implements Runnable {
->]

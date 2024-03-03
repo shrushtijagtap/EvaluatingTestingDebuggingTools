@@ -1,8 +1,0 @@
-[<Line: +type IntRealList is int[] | real[]
->, <Line: +function f(int[] xs) -> int[]:
->, <Line: +method main() -> int[]:
->]
-[<Line: -type IntRealList is [int] | [real]
->, <Line: -function f([int] xs) -> [int]:
->, <Line: -method main() -> [int]:
->]

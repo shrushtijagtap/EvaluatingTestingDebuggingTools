@@ -1,5 +1,0 @@
-[<Line: +        filtingHandler.setFilterFuture(5 * 60);
->, <Line: +        filtingHandler.setFilterMaxSpeed(500);
->]
-[<Line: -        filtingHandler.setFilterFuture(5 * 60);
->]

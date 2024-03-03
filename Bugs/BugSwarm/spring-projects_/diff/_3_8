@@ -1,4 +1,0 @@
-[<Line: +	<bean class="org.springframework.hateoas.config.XmlConfigurationIntegrationTest$HypermediaConfiguration" />
->]
-[<Line: -	<bean class="org.springframework.hateoas.config.XmlConfigurationIntegrationTests$HypermediaConfiguration" />
->]

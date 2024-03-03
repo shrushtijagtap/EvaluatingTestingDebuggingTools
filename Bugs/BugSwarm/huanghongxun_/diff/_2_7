@@ -1,6 +1,0 @@
-[<Line: +        String s = NetUtils.get(DownloadType.getSuggestedDownloadType().getProvider().getParsedDownloadURL(C.URL_FORGE_LIST));
->, <Line: +                    String url = DownloadType.getSuggestedDownloadType().getProvider().getParsedDownloadURL(root.webpath + ver + "/" + filename);
->]
-[<Line: -        String s = NetUtils.get(DownloadType.getSuggestedDownloadType().getProvider().getParsedLibraryDownloadURL(C.URL_FORGE_LIST));
->, <Line: -                    String url = DownloadType.getSuggestedDownloadType().getProvider().getParsedLibraryDownloadURL(root.webpath + ver + "/" + filename);
->]

@@ -1,9 +1,0 @@
-[]
-[<Line: -        when(typeLocator.classFileLocator(REDEFINED.getClassLoader())).thenReturn(classFileLocator);
->, <Line: -        ClassFileLocator.Resolution resolution = mock(ClassFileLocator.Resolution.class);
->, <Line: -        when(resolution.isResolved()).thenReturn(true);
->, <Line: -        when(resolution.resolve()).thenReturn(QUX);
->, <Line: -        when(classFileLocator.locate(REDEFINED.getName())).thenReturn(resolution);
->, <Line: -        verify(resolution).resolve();
->, <Line: -        verifyNoMoreInteractions(resolution);
->]

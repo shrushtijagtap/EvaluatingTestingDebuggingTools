@@ -1,6 +1,0 @@
-[<Line: +          if (agentManager.invalidAgentCount(loadBalancerGroup)) {
->, <Line: +            requestManager.setRequestMessage(request.getLoadBalancerRequestId(), String.format("Invalid request due to not enough agents present for group: %s", loadBalancerGroup));
->]
-[<Line: -          if (agentManager.hasNoAgents(loadBalancerGroup)) {
->, <Line: -            requestManager.setRequestMessage(request.getLoadBalancerRequestId(), String.format("Invalid request due to no agents present for group: %s", loadBalancerGroup));
->]

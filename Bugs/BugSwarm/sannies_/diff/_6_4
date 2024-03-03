@@ -1,6 +1,0 @@
-[<Line: +    @Override
->, <Line: +    public String toString() {
->, <Line: +        return getClass().getName() + "[" + getType() + "]@" + Integer.toHexString(hashCode());
->, <Line: +    }
->]
-[]

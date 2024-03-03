@@ -1,6 +1,0 @@
-[<Line: +                    entity.attack((EntityDamageEvent) ev);
->, <Line: +                entity.attack((EntityDamageEvent) ev);
->]
-[<Line: -                    entity.attack(((EntityDamageEvent) ev).getFinalDamage(), (EntityDamageEvent) ev);
->, <Line: -                entity.attack(((EntityDamageEvent) ev).getFinalDamage(), (EntityDamageEvent) ev);
->]

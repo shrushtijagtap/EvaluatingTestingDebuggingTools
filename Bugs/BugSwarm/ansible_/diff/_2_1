@@ -1,7 +1,0 @@
-[<Line: +from six import string_types
->, <Line: +    if isinstance(terms, string_types):
->, <Line: +    if isinstance(terms, string_types) or not isinstance(terms, Iterable):
->]
-[<Line: -    if isinstance(terms, basestring):
->, <Line: -    if isinstance(terms, basestring) or not isinstance(terms, Iterable):
->]

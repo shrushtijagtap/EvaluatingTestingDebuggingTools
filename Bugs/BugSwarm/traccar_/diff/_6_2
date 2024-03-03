@@ -1,4 +1,0 @@
-[<Line: +    public static final String TYPE_SET_TIMEZONE = "setTimezone";
->, <Line: +    public static final String KEY_TIMEZONE = "timezone";
->]
-[]

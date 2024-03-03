@@ -1,3 +1,0 @@
-[<Line: +        @SuppressFBWarnings(value = "REC_CATCH_EXCEPTION", justification = "Exception is supposed to be rethrown")
->]
-[]

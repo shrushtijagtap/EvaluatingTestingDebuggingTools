@@ -1,9 +1,0 @@
-[<Line: +public abstract class AbstractTypeDescriptionTest extends AbstractTypeDescriptionGenericVariableDefiningTest {
->, <Line: +                hasItems(new AnnotationList.ForLoadedAnnotations(type.getDeclaredAnnotations())
->, <Line: +                hasItems(new AnnotationList.ForLoadedAnnotations(type.getAnnotations())
->]
-[<Line: -public abstract class AbstractTypeDescriptionTest extends AbstractTypeDescriptionGenericTest {
->, <Line: -    protected abstract TypeDescription describe(Class<?> type);
->, <Line: -                hasItems(new AnnotationList.ForLoadedAnnotation(type.getDeclaredAnnotations())
->, <Line: -                hasItems(new AnnotationList.ForLoadedAnnotation(type.getAnnotations())
->]

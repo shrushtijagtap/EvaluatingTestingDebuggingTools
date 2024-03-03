@@ -1,4 +1,0 @@
-[<Line: +        Assert.assertEquals("test - Exception (LogTest:10 < ...)", Log.exceptionStack(new Exception("test")));
->]
-[<Line: -        Assert.assertEquals("test - Exception (LogTest.java:10 < ...)", Log.exceptionStack(new Exception("test")));
->]

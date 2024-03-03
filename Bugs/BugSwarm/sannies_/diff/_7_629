@@ -1,7 +1,0 @@
-[<Line: +package org.mp4parser.streaming.input.h264;
->, <Line: +public class H264NalUnitHeader {
->, <Line: +    public int nal_ref_idc;
->, <Line: +    public int nal_unit_type;
->, <Line: +}
->]
-[]

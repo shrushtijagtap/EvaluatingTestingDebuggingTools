@@ -1,4 +1,0 @@
-[<Line: +import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
->, <Line: +    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Array is guaranteed to be null")
->]
-[]

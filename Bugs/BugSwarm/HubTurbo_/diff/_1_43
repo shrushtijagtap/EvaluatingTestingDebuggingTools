@@ -1,9 +1,0 @@
-[<Line: +package backend.stub;
->, <Line: +import backend.interfaces.TaskRunner;
->, <Line: +public class DownloadRepoTask extends backend.github.DownloadRepoTask {
->, <Line: +	public DownloadRepoTask(TaskRunner taskRunner, DummyRepo repo, String repoId) {
->, <Line: +		super(taskRunner, repo, repoId);
->, <Line: +	}
->, <Line: +}
->]
-[]

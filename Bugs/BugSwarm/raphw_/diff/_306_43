@@ -1,5 +1,0 @@
-[<Line: +        assertThat(mergedLeft, is(mergedRight));
->]
-[<Line: -import static org.hamcrest.CoreMatchers.equalTo;
->, <Line: -        assertThat(mergedLeft, equalTo(mergedRight));
->]

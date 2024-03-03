@@ -1,7 +1,0 @@
-[<Line: +            is_spam, reason = check_if_spam_json(a)
->, <Line: +            if is_spam:
->, <Line: +                threading.Thread(target=handle_spam_json,args=(a,reason)).start()
->]
-[<Line: -            if check_if_spam_json(a):
->, <Line: -                threading.Thread(target=handle_spam_json,args=(a,)).start()
->]

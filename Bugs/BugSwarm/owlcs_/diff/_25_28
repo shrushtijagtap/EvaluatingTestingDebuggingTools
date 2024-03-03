@@ -1,5 +1,0 @@
-[<Line: +            documentSource.acceptParser(p, ontology, translationManager.getOntologyConfigurator());
->]
-[<Line: -            documentSource.acceptParser(p, ontology,
->, <Line: -                translationManager.getOntologyLoaderConfiguration());
->]

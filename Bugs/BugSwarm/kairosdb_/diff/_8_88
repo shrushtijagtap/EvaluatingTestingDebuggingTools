@@ -1,6 +1,0 @@
-[<Line: +import org.kairosdb.core.datapoints.LegacyDataPointFactory;
->, <Line: +import org.kairosdb.core.datapoints.LegacyDoubleDataPoint;
->, <Line: +import org.kairosdb.core.datapoints.LegacyLongDataPoint;
->]
-[<Line: -import org.kairosdb.core.datapoints.*;
->]

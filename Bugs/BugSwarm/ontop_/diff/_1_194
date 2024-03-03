@@ -1,6 +1,0 @@
-[<Line: +//	public static final String  OPTIMIZE_TBOX_SIGMA 	= "org.obda.owlreformulationplatform.optimizeTboxSigma";
->, <Line: +//		keys.add(OPTIMIZE_TBOX_SIGMA);
->]
-[<Line: -	public static final String  OPTIMIZE_TBOX_SIGMA 	= "org.obda.owlreformulationplatform.optimizeTboxSigma";
->, <Line: -		keys.add(OPTIMIZE_TBOX_SIGMA);
->]

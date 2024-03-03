@@ -1,4 +1,0 @@
-[<Line: +            .setDefaultHeaders(headers);
->]
-[<Line: -            .setDefaultHeaders(headers)
->]

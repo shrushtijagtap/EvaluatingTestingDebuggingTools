@@ -1,8 +1,0 @@
-[<Line: +    PRECO_TABELADO("0", "Pre\u00e7o Tabelado"),
->, <Line: +    @Override
->, <Line: +    public String toString() {
->, <Line: +        return codigo + " - " + descricao;
->, <Line: +    }
->]
-[<Line: -    PRECO_TABELADO("0", "Preço Tabelado"),
->]

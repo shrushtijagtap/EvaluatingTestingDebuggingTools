@@ -1,9 +1,0 @@
-[<Line: +import it.unibz.krdb.obda.ontology.ImmutableOntologyVocabulary;
->, <Line: +	private ImmutableOntologyVocabulary voc;
->, <Line: +	public void setTBox(TBoxReasoner reasoner, ImmutableOntologyVocabulary voc, LinearInclusionDependencies sigma) {
->, <Line: +		this.voc = voc;
->, <Line: +		TreeWitnessSet tws = TreeWitnessSet.getTreeWitnesses(cc, reasoner, voc, generators);
->]
-[<Line: -	public void setTBox(TBoxReasoner reasoner, LinearInclusionDependencies sigma) {
->, <Line: -		TreeWitnessSet tws = TreeWitnessSet.getTreeWitnesses(cc, reasoner, generators);
->]

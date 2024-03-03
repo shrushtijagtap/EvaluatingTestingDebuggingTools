@@ -1,5 +1,0 @@
-[<Line: +import net.bytebuddy.matcher.LatentMatcher;
->, <Line: +                    return byteBuddy.redefine(typeDescription, classFileLocator).ignoreAlso(LatentMatcher.ForSelfDeclaredMethod.NOT_DECLARED);
->]
-[<Line: -                    return byteBuddy.redefine(typeDescription, classFileLocator).ignoreAlso(not(isDeclaredBy(typeDescription)));
->]

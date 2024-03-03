@@ -1,4 +1,0 @@
-[<Line: +import com.google.gson.annotations.SerializedName;
->, <Line: +    @SerializedName("artefacts")
->]
-[]

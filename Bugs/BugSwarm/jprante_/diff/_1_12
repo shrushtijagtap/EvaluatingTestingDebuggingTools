@@ -1,5 +1,0 @@
-[]
-[<Line: -import org.elasticsearch.common.settings.Settings;
->, <Line: -import org.xbib.elasticsearch.helper.client.IngestFactory;
->, <Line: -import java.util.Map;
->]

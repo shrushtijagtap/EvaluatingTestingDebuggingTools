@@ -1,4 +1,0 @@
-[<Line: +import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
->, <Line: +    @SuppressFBWarnings(value = "EQ_DOESNT_OVERRIDE_EQUALS", justification = "Caching mechanism is not supposed to decide on equality")
->]
-[]

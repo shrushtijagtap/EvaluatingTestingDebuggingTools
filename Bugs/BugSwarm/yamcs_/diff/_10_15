@@ -1,6 +1,0 @@
-[<Line: +        if(daat==null) {
->, <Line: +            log.error("Dispose called with an invalid rdb (already disposed??): {}", rdb.getPath());
->, <Line: +            return;
->, <Line: +        }
->]
-[]

@@ -1,7 +1,0 @@
-[<Line: +          Made the method EmptyBlockCheck.hasText(DetailAST) as
->]
-[<Line: -          Made the method
->, <Line: -          <a href="apidocs/com/puppycrawl/tools/checkstyle/checks/blocks/EmptyBlockCheck.html#hasText%28com.puppycrawl.tools.checkstyle.api.DetailAST%29">
->, <Line: -            EmptyBlockCheck.hasText(DetailAST)
->, <Line: -         </a>
->]

@@ -1,6 +1,0 @@
-[<Line: +                    return new VersionLocator.ForJava9CapableVm(Runtime.class.getMethod("version"),
->, <Line: +                            Class.forName("java.lang.Runtime$Version").getMethod("major"));
->]
-[<Line: -                    return new VersionLocator.ForJava9CapableVm(Runtime.class.getDeclaredMethod("version"),
->, <Line: -                            Class.forName("java.lang.Runtime$Version").getDeclaredMethod("major"));
->]

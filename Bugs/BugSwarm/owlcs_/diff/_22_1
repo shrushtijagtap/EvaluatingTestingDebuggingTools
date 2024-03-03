@@ -1,9 +1,0 @@
-[<Line: +import org.semanticweb.owlapi.io.XMLUtils;
->, <Line: +        if (XMLUtils.isNCName(value)) {
->, <Line: +            builder.with(IRI.create("urn:swrl#", value));
->, <Line: +        } else {
->, <Line: +            builder.with(getIRIFromAttribute(localName, value));
->, <Line: +        }
->]
-[<Line: -        builder.with(getIRIFromAttribute(localName, value));
->]

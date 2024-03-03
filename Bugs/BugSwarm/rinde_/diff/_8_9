@@ -1,4 +1,0 @@
-[<Line: +public interface Configuration extends Comparable<Configuration> {
->]
-[<Line: -public interface Configuration {
->]

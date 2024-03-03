@@ -1,6 +1,0 @@
-[<Line: +    where all {
->, <Line: +        i in 0 .. |rows|, j in 0 .. |rows| | |rows[i]| == |rows[j]|
->]
-[<Line: -    where no {
->, <Line: -        i in 0 .. |rows|, j in 0 .. |rows| | |rows[i]| != |rows[j]|
->]

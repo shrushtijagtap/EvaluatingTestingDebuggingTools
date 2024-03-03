@@ -1,4 +1,0 @@
-[<Line: +        assertThat(type.getDeclaredConstructor().newInstance(), instanceOf(type));
->]
-[<Line: -        assertThat(type.newInstance(), instanceOf(type));
->]

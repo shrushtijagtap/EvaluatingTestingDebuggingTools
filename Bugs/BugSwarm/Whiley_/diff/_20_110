@@ -1,8 +1,0 @@
-[<Line: +function g(fr5nat[] xs) -> fr5nat[]:
->, <Line: +    fr5nat[] ys = [0; |xs|]
->, <Line: +function f(fr5nat[] x) -> int[]:
->]
-[<Line: -function g([fr5nat] xs) -> [fr5nat]:
->, <Line: -    [fr5nat] ys = [0; |xs|]
->, <Line: -function f([fr5nat] x) -> int[]:
->]

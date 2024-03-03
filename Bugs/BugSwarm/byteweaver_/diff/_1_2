@@ -1,6 +1,0 @@
-[<Line: +            form.errors,
->, <Line: +            {'code': ['This code is not valid for your account.']}
->]
-[<Line: -            str(form.errors.as_data()),
->, <Line: -            "{'code': [ValidationError(['This code is not valid for your account.'])]}"
->]

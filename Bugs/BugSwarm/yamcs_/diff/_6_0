@@ -1,7 +1,0 @@
-[<Line: +Version 3.0.0
->, <Line: +- changed all SWING Yamcs clients to use the REST and WebSocket API instead of HornetQ
->, <Line: +- allow to retrieve via REST internals of open RocksDB databases
->, <Line: +- implement backup support for RocksDB databases
->]
-[<Line: -Version 0.30.0
->]

@@ -1,6 +1,0 @@
-[<Line: +html_static_path = ['_static']
->, <Line: +##texinfo_show_urls = 'footnote'
->]
-[<Line: -#html_static_path = ['_static']
->, <Line: -#texinfo_show_urls = 'footnote'
->]

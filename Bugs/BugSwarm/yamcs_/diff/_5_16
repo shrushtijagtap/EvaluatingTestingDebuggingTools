@@ -1,6 +1,0 @@
-[<Line: +    /**
->, <Line: +     * close histogram db and any open resources
->, <Line: +     */
->, <Line: +    public abstract void close();
->]
-[]

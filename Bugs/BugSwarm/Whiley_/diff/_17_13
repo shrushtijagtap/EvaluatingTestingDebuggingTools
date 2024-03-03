@@ -1,6 +1,0 @@
-[<Line: +		case ARRAY:
->, <Line: +			case ARRAY:
->]
-[<Line: -		case LIST:
->, <Line: -			case LIST:
->]

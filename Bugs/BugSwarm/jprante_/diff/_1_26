@@ -1,6 +1,0 @@
-[<Line: +        logger.info("creating random products: {}", sql2);
->, <Line: +        logger.info("random products created");
->, <Line: +        logger.info("counting random products: {}", sql1);
->, <Line: +        logger.info("random product count: {}", count);
->]
-[]

@@ -1,4 +1,0 @@
-[<Line: +import static org.hamcrest.CoreMatchers.is;
->]
-[<Line: -import static org.hamcrest.core.Is.is;
->]

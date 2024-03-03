@@ -1,4 +1,0 @@
-[<Line: +    is_spam, reason = check_if_spam(title, body, username, user_url, site, post_id, is_answer)
->]
-[<Line: -    is_spam = check_if_spam(title, body, username, user_url, site, post_id, is_answer)
->]

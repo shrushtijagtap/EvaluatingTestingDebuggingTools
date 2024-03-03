@@ -1,4 +1,0 @@
-[<Line: +function f(int x) -> i8[]
->]
-[<Line: -function f(int x) -> [i8]
->]

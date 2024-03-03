@@ -1,5 +1,0 @@
-[<Line: +        //  new FileOutputStream("c:\\dev\\mp4parser\\m2.mp4").write(baos.toByteArray());
->]
-[<Line: -import java.io.FileOutputStream;
->, <Line: -        new FileOutputStream("c:\\dev\\mp4parser\\m2.mp4").write(baos.toByteArray());
->]

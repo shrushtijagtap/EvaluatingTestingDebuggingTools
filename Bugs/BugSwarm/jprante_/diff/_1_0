@@ -1,7 +1,0 @@
-[<Line: +| Feb  5 2016  | 2.2.0.0               | 2.2.0                 |
->, <Line: +JDBC importer 2.2.0.0
->, <Line: +`http://xbib.org/repository/org/xbib/elasticsearch/importer/elasticsearch-jdbc/2.2.0.0/elasticsearch-jdbc-2.2.0.0-dist.zip`
->]
-[<Line: -JDBC importer 2.1.1.2
->, <Line: -`http://xbib.org/repository/org/xbib/elasticsearch/importer/elasticsearch-jdbc/2.1.1.2/elasticsearch-jdbc-2.1.1.2-dist.zip`
->]

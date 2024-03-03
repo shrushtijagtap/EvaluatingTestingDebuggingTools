@@ -1,9 +1,0 @@
-[<Line: +package util.events;
->, <Line: +import com.google.common.eventbus.Subscribe;
->, <Line: +@FunctionalInterface
->, <Line: +public interface RepoOpenedEventHandler extends EventHandler {
->, <Line: +	@Subscribe
->, <Line: +	public void handle(RepoOpenedEvent e);
->, <Line: +}
->]
-[]

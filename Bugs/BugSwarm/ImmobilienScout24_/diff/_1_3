@@ -1,6 +1,0 @@
-[<Line: +        verify(logMock).info("Ignoring 1 class(es) which seem(s) to be unused.");
->, <Line: +        verify(logMock).info("Analyzed 28 class(es).");
->]
-[<Line: -        verify(logMock).info("Analyzed 26 class(es).");
->, <Line: -        verify(logMock).info("Ignoring 1 class(es) which seem(s) to be unused.");
->]

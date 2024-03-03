@@ -1,4 +1,0 @@
-[<Line: +        Collection<OWLClassExpression> components = object.accept(testsubject);
->]
-[<Line: -        Set<OWLClassExpression> components = object.accept(testsubject);
->]

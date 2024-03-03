@@ -1,3 +1,0 @@
-[<Line: +        this.registerPacket(ProtocolInfo.SET_PLAYER_GAMETYPE_PACKET, SetPlayerGameTypePacket.class);
->]
-[]

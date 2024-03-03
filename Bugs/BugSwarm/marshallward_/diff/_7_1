@@ -1,7 +1,0 @@
-[<Line: +&numpy_nml
->, <Line: +    np_integer = 1
->, <Line: +    np_float = 1.0
->, <Line: +    np_complex = (1.0, 2.0)
->, <Line: +/
->]
-[]

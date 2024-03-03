@@ -1,4 +1,0 @@
-[<Line: +	public static WyArray generate(final BigInteger count, final Object element) {
->]
-[<Line: -	public static WyArray generate(final Object element, final BigInteger count) {
->]

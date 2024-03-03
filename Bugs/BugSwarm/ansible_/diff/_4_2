@@ -1,7 +1,0 @@
-[<Line: +                    # never follow the delegate_to value for registered vars and
->, <Line: +                    # the variable goes in the fact_cache
->, <Line: +                    self._variable_manager.set_host_facts(host, {var_name: var_value})
->]
-[<Line: -                    # never follow the delegate_to value for registered vars
->, <Line: -                    self._variable_manager.set_host_variable(host, var_name, var_value)
->]

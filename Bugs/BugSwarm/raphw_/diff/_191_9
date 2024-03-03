@@ -1,4 +1,0 @@
-[<Line: +        InputStream inputStream = Object.class.getResourceAsStream(Object.class.getSimpleName() + ".class");
->]
-[<Line: -        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(Object.class.getName().replace('.', '/') + ".class");
->]

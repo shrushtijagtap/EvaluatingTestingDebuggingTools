@@ -1,4 +1,0 @@
-[<Line: +			mapped = new LinkedList<SubstitutedState>();
->]
-[<Line: -			mapped = new LinkedList<>();
->]

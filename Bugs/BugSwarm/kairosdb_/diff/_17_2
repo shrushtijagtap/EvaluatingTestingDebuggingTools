@@ -1,4 +1,0 @@
-[<Line: +import com.google.common.eventbus.EventBus;
->, <Line: +		bind(EventBus.class).toInstance(m_eventBus);
->]
-[]

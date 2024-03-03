@@ -1,4 +1,0 @@
-[<Line: +../../tests/invalid/While_Invalid_4.whiley:6: expected type int, found int[]
->]
-[<Line: -../../tests/invalid/While_Invalid_4.whiley:6: expected type int, found [int+]
->]

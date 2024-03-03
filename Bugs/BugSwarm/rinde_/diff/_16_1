@@ -1,8 +1,0 @@
-[<Line: +  public void addConnections(Iterable<? extends Connection<E>> connections) {
->, <Line: +  @Override
->, <Line: +  public void addConnections(Collection<? extends Connection<E>> connections) {
->, <Line: +    addConnections((Iterable<? extends Connection<E>>) connections);
->, <Line: +  }
->]
-[<Line: -  public void addConnections(Collection<Connection<E>> connections) {
->]

@@ -1,5 +1,0 @@
-[<Line: +	public static final ImageDescriptor OVR_BUILD_NORMAL_CHECKED = createUnmanaged(LANG_OVERLAYS, "build_normal_enabled.png");
->, <Line: +	public static final ImageDescriptor OVR_BUILD_AUTO_CHECKED = createUnmanaged(LANG_OVERLAYS, "build_auto_enabled.png");
->, <Line: +	public static final ImageDescriptor OVR_BUILD_BOTH_CHECKED = createUnmanaged(LANG_OVERLAYS, "build_both_enabled.png");
->]
-[]

@@ -1,6 +1,0 @@
-[<Line: +from bodyfetcher import *
->, <Line: +b=BodyFetcher()
->, <Line: +            else:
->, <Line: +                threading.Thread(target=b.addToQueue,args=(a,)).start()
->]
-[]

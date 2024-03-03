@@ -1,6 +1,0 @@
-[<Line: +* CLI changes such that one VCF input and one VCF output path can be used only
->, <Line: +* Replacing apache commons-cli with argparse4j for a more modern and usable CLI
->, <Line: +### jannovar-htsjdk
->, <Line: +* Properly annotating Mendelian inheritance for intergenic variants
->]
-[]

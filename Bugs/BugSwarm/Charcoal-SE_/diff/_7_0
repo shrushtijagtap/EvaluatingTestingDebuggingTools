@@ -1,4 +1,0 @@
-[<Line: +                               "other function names.") % (filename[len(smokedetector_root):], current_line))
->]
-[<Line: -                               "other function names") % (filename[len(smokedetector_root):], current_line))
->]

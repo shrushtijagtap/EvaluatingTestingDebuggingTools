@@ -1,6 +1,0 @@
-[<Line: +		VerificationConditionGenerator vcg = new VerificationConditionGenerator(this);
->, <Line: +			WyalFile contents = vcg.translate(sf.read());
->]
-[<Line: -		VcGenerator vcg = new VcGenerator(this);
->, <Line: -			WyalFile contents = vcg.transform(sf.read());
->]

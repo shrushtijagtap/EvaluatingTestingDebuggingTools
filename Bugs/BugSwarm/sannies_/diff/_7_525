@@ -1,8 +1,0 @@
-[<Line: +package org.mp4parser.muxer.tracks.h264.parsing.model;
->, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.read.CAVLCReader;
->, <Line: +import org.mp4parser.muxer.tracks.h264.parsing.write.CAVLCWriter;
->]
-[<Line: -package com.googlecode.mp4parser.h264.model;
->, <Line: -import com.googlecode.mp4parser.h264.read.CAVLCReader;
->, <Line: -import com.googlecode.mp4parser.h264.write.CAVLCWriter;
->]

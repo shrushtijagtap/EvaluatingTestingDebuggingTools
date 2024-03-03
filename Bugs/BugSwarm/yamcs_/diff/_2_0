@@ -1,4 +1,0 @@
-[<Line: +#    minimumTcPacketLength (by default -1 which means no minimum length)
->]
-[<Line: -#    minimumTcPacketLength (by default 48)
->]

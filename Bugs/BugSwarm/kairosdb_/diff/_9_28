@@ -1,5 +1,0 @@
-[<Line: +		bind(CassandraClientImpl.class).in(Scopes.SINGLETON);
->]
-[<Line: -		bind(HectorConfiguration.class).in(Scopes.SINGLETON);
->, <Line: -		bind(AstyanaxClient.class).in(Scopes.SINGLETON);
->]

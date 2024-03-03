@@ -1,4 +1,0 @@
-[<Line: +* No longer creates empty subarchive pages, and no longer create broken
->, <Line: +  archive navigation links on day level (Issue #2734)
->]
-[]

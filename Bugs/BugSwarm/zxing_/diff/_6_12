@@ -1,8 +1,0 @@
-[<Line: +                  if (result.length() == 0) {
->, <Line: +                  if (result.length() == 0) {
->, <Line: +                  if (result.length() == 0) {
->]
-[<Line: -                  if (result.length() == 0){
->, <Line: -                  if (result.length() == 0){
->, <Line: -                  if (result.length() == 0){
->]

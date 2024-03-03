@@ -1,6 +1,0 @@
-[<Line: +        assertThat(MethodInvocation.IllegalInvocation.INSTANCE.onHandle(null),
->, <Line: +                is((StackManipulation) StackManipulation.Illegal.INSTANCE));
->, <Line: +        ObjectPropertyAssertion.of(MethodInvocation.HandleInvocation.class).apply();
->, <Line: +        ObjectPropertyAssertion.of(MethodInvocation.HandleType.class).apply();
->]
-[]

@@ -1,5 +1,0 @@
-[<Line: +                            attachFile.deleteOnExit();
->]
-[<Line: -import java.util.logging.Logger;
->, <Line: -                            Logger.getLogger("net.bytebuddy").warning("Could not delete attach file: " + attachFile);
->]

@@ -1,6 +1,0 @@
-[<Line: +        inside screen 50px right, 0px top, 49px left
->, <Line: +        inside header 20px top, 10px bottom
->]
-[<Line: -        inside screen 50px right, 0px top, 49px left, >= 0px bottom
->, <Line: -        inside header 20px top, 10px bottom, >= 0px right
->]

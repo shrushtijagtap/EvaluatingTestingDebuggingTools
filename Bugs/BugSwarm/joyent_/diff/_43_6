@@ -1,6 +1,0 @@
-[<Line: +    /**
->, <Line: +     * @return Number of HTTP retries to perform on failure.
->, <Line: +     */
->, <Line: +    Integer getRetries();
->]
-[]

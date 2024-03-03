@@ -1,6 +1,0 @@
-[<Line: +Responses = require '../collections/Responses'
->, <Line: +        @collections.responses = new Responses [], {@serviceId}
->, <Line: +            collection: @collections.responses
->, <Line: +        @collections.responses.fetch()
->]
-[]

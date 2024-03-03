@@ -1,5 +1,0 @@
-[<Line: +              blockSize: 32 #KB
->, <Line: +              noBlockCache: true
->]
-[<Line: -              blockSize: 512 #KB
->]

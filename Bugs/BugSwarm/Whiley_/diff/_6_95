@@ -1,5 +1,0 @@
-[<Line: +../../tests/invalid/DoWhile_Invalid_4.whiley:9: loop invariant not restored
->, <Line: +    while i < n where i >= 0 && i <= n
->, <Line: +                      ^^^^^^^^^^^^^^^^
->]
-[]

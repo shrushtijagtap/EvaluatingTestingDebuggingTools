@@ -1,6 +1,0 @@
-[<Line: +                                new E("groupingType", StepwiseTemporalLayerEntry.TYPE),
->, <Line: +                                new E("groupingType", SyncSampleEntry.TYPE),
->, <Line: +                                new E("groupingType", TemporalLayerSampleGroup.TYPE),
->, <Line: +                                new E("groupingType", TemporalSubLayerSampleGroup.TYPE),
->]
-[]

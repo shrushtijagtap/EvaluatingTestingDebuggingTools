@@ -1,6 +1,0 @@
-[]
-[<Line: -import java.util.Collection;
->, <Line: -  public Collection<BaragonServiceState> getAllServices() {
->, <Line: -    return stateDatastore.getGlobalState();
->, <Line: -  }
->]

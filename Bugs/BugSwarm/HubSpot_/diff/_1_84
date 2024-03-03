@@ -1,7 +1,0 @@
-[<Line: +            allowEdit: (localStorage.getItem("baragonAuthKey") !== null || !{{authEnabled}}),
->, <Line: +            authEnabled: {{authEnabled}},
->]
-[<Line: -            authKey: localStorage.getItem("authKeyOverride"),
->, <Line: -            authEnabled: {{{authEnabled}}},
->, <Line: -            allowEdit: {{{allowEdit}}},
->]

@@ -1,4 +1,0 @@
-[<Line: +		else if ("forEntity".equals(name) && desc.startsWith("(I)"))
->]
-[<Line: -		else if ("forEntity".equals(name) && desc.startsWith("(Lcom/artemis/Entity;)"))
->]

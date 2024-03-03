@@ -1,9 +1,0 @@
-[<Line: +import org.semanticweb.owlapi.model.OntologyConfigurator;
->, <Line: +        Map<OWLParser, OWLParserException> exceptions, OntologyConfigurator config) {
->, <Line: +        includeStackTraceInMessage = config.shouldReportStackTraces();
->]
-[<Line: -import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
->, <Line: -        Map<OWLParser, OWLParserException> exceptions,
->, <Line: -        OWLOntologyLoaderConfiguration config) {
->, <Line: -        includeStackTraceInMessage = config.isReportStackTrace();
->]

@@ -1,4 +1,0 @@
-[<Line: +public interface SimTask extends Callable<SimResult> {
->]
-[<Line: -public interface ExperimentRunner extends Callable<SimulationResult> {
->]

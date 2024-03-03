@@ -1,6 +1,0 @@
-[<Line: +../../tests/invalid/Tuple_Invalid_6.whiley:7: expected type int, found bool
->, <Line: +    x,y = g()
->]
-[<Line: -../../tests/invalid/Tuple_Invalid_6.whiley:3: expected type int, found real
->, <Line: -    x,y = r
->]

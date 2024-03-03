@@ -1,9 +1,0 @@
-[<Line: +CREATE CACHED TABLE service_index (
->, <Line: +  "service" VARCHAR  NOT NULL,
->, <Line: +  "service_key" VARCHAR  NOT NULL,
->, <Line: +  "key" VARCHAR  NOT NULL,
->, <Line: +  "value" VARCHAR  NULL,
->, <Line: +  PRIMARY KEY ("service", "service_key", "key")
->, <Line: +  );
->]
-[]

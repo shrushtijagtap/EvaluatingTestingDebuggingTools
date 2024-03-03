@@ -1,6 +1,0 @@
-[<Line: +                            callback.onFailure(new GeolocationException("Coordinates are missing"));
->, <Line: +            callback.onFailure(new GeolocationException("No network information"));
->]
-[<Line: -                            callback.onFailure(new IllegalArgumentException("Coordinates are missing"));
->, <Line: -            callback.onFailure(new IllegalArgumentException("No network information"));
->]

@@ -1,6 +1,0 @@
-[<Line: +import com.artemis.weaver.optimizer.EsBytecodeInjector;
->, <Line: +		cr = new EsBytecodeInjector(cr, meta).transform();
->]
-[<Line: -import com.artemis.weaver.optimizer.ProcessSystemInjector;
->, <Line: -		cr = new ProcessSystemInjector(cr, meta).transform();
->]

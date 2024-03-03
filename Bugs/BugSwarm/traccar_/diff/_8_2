@@ -1,6 +1,0 @@
-[<Line: +    private void initProtocolDetector() {
->, <Line: +    private void initProtocolServer(final Protocol protocol) {
->]
-[<Line: -    private void initProtocolDetector() throws SQLException {
->, <Line: -    private void initProtocolServer(final Protocol protocol) throws SQLException {
->]

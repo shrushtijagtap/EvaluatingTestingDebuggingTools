@@ -1,6 +1,0 @@
-[<Line: +import static com.google.common.base.Preconditions.checkNotNull;
->, <Line: +    public int compareTo(@Nullable SimulationResult o) {
->, <Line: +      checkNotNull(o);
->]
-[<Line: -    public int compareTo(SimulationResult o) {
->]

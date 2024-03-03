@@ -1,4 +1,0 @@
-[<Line: +        return Integer.valueOf(getObjects().size());
->]
-[<Line: -        return getObjects().size();
->]

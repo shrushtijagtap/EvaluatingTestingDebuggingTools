@@ -1,8 +1,0 @@
-[<Line: +sp_cleanup.convert_functional_interfaces=false
->, <Line: +sp_cleanup.insert_inferred_type_arguments=false
->, <Line: +sp_cleanup.remove_redundant_type_arguments=false
->, <Line: +sp_cleanup.use_anonymous_class_creation=false
->, <Line: +sp_cleanup.use_lambda=false
->, <Line: +sp_cleanup.use_type_arguments=false
->]
-[]

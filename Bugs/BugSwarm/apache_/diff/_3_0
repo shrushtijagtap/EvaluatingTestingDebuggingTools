@@ -1,4 +1,0 @@
-[<Line: +struts.messages.error.file.too.large=The file is too large to be uploaded: {0} "{1}" "{2}" {3}
->]
-[<Line: -struts.messages.error.file.too.large=The file is to large to be uploaded: {0} "{1}" "{2}" {3}
->]

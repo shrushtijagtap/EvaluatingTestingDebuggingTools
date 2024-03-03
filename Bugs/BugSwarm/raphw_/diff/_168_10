@@ -1,6 +1,0 @@
-[]
-[<Line: -import java.security.AccessController;
->, <Line: -                AccessController.getContext(),
->, <Line: -                AccessController.getContext(),
->, <Line: -                AccessController.getContext(),
->]

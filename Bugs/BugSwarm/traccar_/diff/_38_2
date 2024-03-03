@@ -1,8 +1,0 @@
-[<Line: +    private double distance;
->, <Line: +    private double averageSpeed;
->, <Line: +    private double maxSpeed;
->]
-[<Line: -    private double distance; // meters
->, <Line: -    private double averageSpeed; // knots
->, <Line: -    private double maxSpeed; // knots
->]

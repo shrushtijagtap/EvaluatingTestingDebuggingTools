@@ -1,4 +1,0 @@
-[<Line: +						new EquivalentTriplePredicateIterator(new OWLAPI3ABoxIterator(ontos, st.questInstance.getVocabulary()), 
->]
-[<Line: -						new EquivalentTriplePredicateIterator(new OWLAPI3ABoxIterator(ontos), 
->]

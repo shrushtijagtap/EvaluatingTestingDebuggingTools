@@ -1,4 +1,0 @@
-[<Line: +	//adds a 0xFF after the timestamp to make sure we get all data for that timestamp.
->]
-[<Line: -		//adds a 0xFF after the timestamp to make sure we get all data for that timestamp.
->]

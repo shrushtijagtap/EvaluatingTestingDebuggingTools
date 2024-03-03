@@ -1,4 +1,0 @@
-[<Line: +import org.junit.Assert;
->]
-[<Line: -import junit.framework.Assert;
->]

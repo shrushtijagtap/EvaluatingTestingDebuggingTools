@@ -1,9 +1,0 @@
-[<Line: +        ProxyFactory proxyFactory = new ProxyFactory() {
->, <Line: +            protected ClassLoader getClassLoader() {
->, <Line: +        proxyFactory.setUseCache(false);
->]
-[<Line: -        ProxyFactory proxyFactory = new ProxyFactory();
->, <Line: -        proxyFactory.setUseCache(false);
->, <Line: -        ProxyFactory.classLoaderProvider = new ProxyFactory.ClassLoaderProvider() {
->, <Line: -            public ClassLoader get(ProxyFactory proxyFactory) {
->]

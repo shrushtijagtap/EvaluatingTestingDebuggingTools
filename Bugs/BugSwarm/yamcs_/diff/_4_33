@@ -1,9 +1,0 @@
-[<Line: +    public void getMissionDatabase(RestRequest req) throws HttpException {
->, <Line: +            sendOK(req, MediaType.JAVA_SERIALIZED_OBJECT, buf);
->, <Line: +            sendOK(req, converted, SchemaYamcsManagement.MissionDatabase.WRITE);
->]
-[<Line: -import io.netty.channel.ChannelFuture;
->, <Line: -    public ChannelFuture getMissionDatabase(RestRequest req) throws HttpException {
->, <Line: -            return sendOK(req, MediaType.JAVA_SERIALIZED_OBJECT, buf);
->, <Line: -            return sendOK(req, converted, SchemaYamcsManagement.MissionDatabase.WRITE);
->]

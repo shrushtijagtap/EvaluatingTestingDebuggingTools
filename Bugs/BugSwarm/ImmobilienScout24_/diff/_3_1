@@ -1,6 +1,0 @@
-[<Line: +@SuppressWarnings("unused")
->, <Line: +public class ClassWithInnerClass {
->, <Line: +	public static class InnerClass { }
->, <Line: +}
->]
-[]

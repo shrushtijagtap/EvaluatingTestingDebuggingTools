@@ -1,4 +1,0 @@
-[<Line: +import org.mp4parser.boxes.iso23001.part7.TrackEncryptionBox;
->]
-[<Line: -import com.mp4parser.iso23001.part7.TrackEncryptionBox;
->]

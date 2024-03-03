@@ -1,4 +1,0 @@
-[<Line: +        assertThat(dynamicType.getDeclaredMethod(FOO).invoke(dynamicType.getDeclaredConstructor().newInstance()), nullValue(Object.class));
->]
-[<Line: -        assertThat(dynamicType.getDeclaredMethod(FOO).invoke(dynamicType.newInstance()), nullValue(Object.class));
->]

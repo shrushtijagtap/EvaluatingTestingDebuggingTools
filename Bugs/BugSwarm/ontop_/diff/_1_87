@@ -1,6 +1,0 @@
-[<Line: +            obdaModel.getOntologyVocabulary().merge(inputOntology.getVocabulary());
->, <Line: +                obdaModel.getOntologyVocabulary().merge(onto.getVocabulary());
->]
-[<Line: -            obdaModel.declareAll(inputOntology.getVocabulary());
->, <Line: -                obdaModel.declareAll(onto.getVocabulary());
->]

@@ -1,5 +1,0 @@
-[<Line: +                new TestData(getClassLoaderResource("/svg/blue-square.svg"), new Dimension(100, 100)),
->, <Line: +                new TestData(getClassLoaderResource("/svg/Android_robot.svg"), new Dimension(400, 400))
->]
-[<Line: -                new TestData(getClassLoaderResource("/svg/blue-square.svg"), new Dimension(100, 100))
->]

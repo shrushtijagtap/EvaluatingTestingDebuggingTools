@@ -1,6 +1,0 @@
-[<Line: +	public Datastore getDatastore()
->, <Line: +	{
->, <Line: +		return m_datastore;
->, <Line: +	}
->]
-[]

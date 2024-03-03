@@ -1,6 +1,0 @@
-[<Line: +    <dependency>
->, <Line: +      <groupId>com.google.code.findbugs</groupId>
->, <Line: +      <artifactId>annotations</artifactId>
->, <Line: +    </dependency>
->]
-[]

@@ -1,8 +1,0 @@
-[<Line: +    protected final ConcurrentMap<StorageKey, ConcurrentMap<T, Reference<Class<?>>>> cache;
->, <Line: +        cache = new ConcurrentHashMap<StorageKey, ConcurrentMap<T, Reference<Class<?>>>>();
->, <Line: +    @SuppressFBWarnings(value = "GC_UNRELATED_TYPES", justification = "Cross-comparison is intended")
->, <Line: +    @SuppressFBWarnings(value = "GC_UNRELATED_TYPES", justification = "Cross-comparison is intended")
->]
-[<Line: -    protected final ConcurrentMap<Object, ConcurrentMap<T, Reference<Class<?>>>> cache;
->, <Line: -        cache = new ConcurrentHashMap<Object, ConcurrentMap<T, Reference<Class<?>>>>();
->]

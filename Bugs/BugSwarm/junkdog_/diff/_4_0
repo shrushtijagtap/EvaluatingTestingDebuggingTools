@@ -1,4 +1,0 @@
-[<Line: +		Component old = components.safeGet(owner.id);
->]
-[<Line: -		Component old = components.get(owner.id);
->]

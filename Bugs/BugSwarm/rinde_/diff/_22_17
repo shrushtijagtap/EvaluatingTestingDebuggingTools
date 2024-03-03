@@ -1,8 +1,0 @@
-[<Line: +	<classpathentry kind="src" path="target/generated-sources/annotations">
->, <Line: +		<attributes>
->, <Line: +			<attribute name="optional" value="true"/>
->, <Line: +			<attribute name="maven.pomderived" value="true"/>
->, <Line: +		</attributes>
->, <Line: +	</classpathentry>
->]
-[]

@@ -1,4 +1,0 @@
-[<Line: +type IntList is {int op, real[] rest} | {int[] op, int mode}
->]
-[<Line: -type IntList is {int op, [real] rest} | {[int] op, int mode}
->]

@@ -1,6 +1,0 @@
-[<Line: +        if (bb.get(0) == 0x54 && bb.get(1) == 0x41 && bb.get(2) == 0x47) {
->, <Line: +            // encounter id3 tag. That's the end of the file.
->, <Line: +            return null;
->, <Line: +        }
->]
-[]

@@ -1,4 +1,0 @@
-[<Line: +                    return implementationTarget.invokeDefault(instrumentedMethod.asSignatureToken(), proxiedType);
->]
-[<Line: -                    return implementationTarget.invokeDefault(proxiedType, instrumentedMethod.asSignatureToken());
->]

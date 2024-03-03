@@ -1,6 +1,0 @@
-[<Line: +        super(IRI.create(file),
->, <Line: +            () -> new FileInputStream(checkNotNull(file, "file cannot be null")), format, mime);
->]
-[<Line: -        super(IRI.create(file), format, mime);
->, <Line: -        inputStream = () -> new FileInputStream(checkNotNull(file, "file cannot be null"));
->]

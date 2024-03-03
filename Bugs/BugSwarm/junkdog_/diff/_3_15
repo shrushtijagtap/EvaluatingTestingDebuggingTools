@@ -1,9 +1,0 @@
-[]
-[<Line: -	<dependencies>
->, <Line: -		<dependency>
->, <Line: -			<groupId>com.badlogicgames.gdx</groupId>
->, <Line: -			<artifactId>gdx</artifactId>
->, <Line: -			<version>1.6.4</version>
->, <Line: -		</dependency>
->, <Line: -	</dependencies>
->]

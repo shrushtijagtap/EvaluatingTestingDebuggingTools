@@ -1,7 +1,0 @@
-[<Line: +        return dict(object)
->, <Line: +    def _to_results(self, results, kwargs, build = True):
->, <Line: +        if build: results = [dict(result) for result in results]
->]
-[<Line: -        return object
->, <Line: -    def _to_results(self, results, kwargs):
->]

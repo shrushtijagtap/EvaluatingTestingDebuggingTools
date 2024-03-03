@@ -1,7 +1,0 @@
-[]
-[<Line: -public export method test() -> void:
->, <Line: -    [int] left = [1, 2]
->, <Line: -    [int] right = [3, 4]
->, <Line: -    [int] r = left ++ right
->, <Line: -    assert r == [1,2,3,4]
->]

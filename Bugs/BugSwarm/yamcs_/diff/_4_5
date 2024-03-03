@@ -1,4 +1,0 @@
-[<Line: +        //of workers to 2*number of CPU cores
->]
-[<Line: -        //of workers to 2*number of CPU
->]

@@ -1,9 +1,0 @@
-[<Line: + * Copyright (c) 2013-2015, Parallel Universe Software Co. All rights reserved.
->, <Line: +import co.paralleluniverse.common.util.SystemProperties;
->, <Line: +import static org.junit.Assume.*;
->, <Line: +    private final List<String> results = new ArrayList<>();
->, <Line: +        assumeFalse(SystemProperties.isEmptyOrTrue("co.paralleluniverse.fibers.verifyInstrumentation"));
->]
-[<Line: - * Copyright (c) 2013-2014, Parallel Universe Software Co. All rights reserved.
->, <Line: -    private List<String> results = new ArrayList<String>();
->]

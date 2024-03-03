@@ -1,9 +1,0 @@
-[<Line: +package com.hubspot.baragon.service;
->, <Line: +import com.hubspot.baragon.models.BaragonAgentMetadata;
->, <Line: +import org.apache.curator.framework.CuratorFramework;
->]
-[<Line: -package com.hubspot.baragon;
->, <Line: -import com.hubspot.baragon.models.BaragonAgentMetadata;
->, <Line: -import com.hubspot.baragon.utils.ZkParallelFetcher;
->, <Line: -import org.apache.curator.framework.CuratorFramework;
->]

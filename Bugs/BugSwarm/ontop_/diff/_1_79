@@ -1,7 +1,0 @@
-[<Line: +		OBDASQLQuery sourceQuery = mapping.getSourceQuery();
->, <Line: +		CQIE targetQuery = mapping.getTargetQuery();
->]
-[<Line: -import it.unibz.krdb.obda.model.OBDAQuery;
->, <Line: -		OBDAQuery sourceQuery = mapping.getSourceQuery();
->, <Line: -		OBDAQuery targetQuery = mapping.getTargetQuery();
->]

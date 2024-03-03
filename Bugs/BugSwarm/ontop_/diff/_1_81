@@ -1,6 +1,0 @@
-[<Line: +		TargetQueryVocabularyValidator validator = new TargetQueryValidator(obdaModel.getOntologyVocabulary());
->, <Line: +		TargetQueryVocabularyValidator validator = new TargetQueryValidator(obdaModel.getOntologyVocabulary());
->]
-[<Line: -		TargetQueryVocabularyValidator validator = new TargetQueryValidator(obdaModel);
->, <Line: -		TargetQueryVocabularyValidator validator = new TargetQueryValidator(obdaModel);
->]

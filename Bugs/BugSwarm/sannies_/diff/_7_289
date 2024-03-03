@@ -1,6 +1,0 @@
-[<Line: +package org.mp4parser.boxes.iso23001.part7;
->]
-[<Line: -package com.googlecode.mp4parser.boxes.dece;
->, <Line: -import com.googlecode.mp4parser.annotations.DoNotParseDetail;
->, <Line: -import com.googlecode.mp4parser.boxes.AbstractSampleEncryptionBox;
->]

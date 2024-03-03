@@ -1,6 +1,0 @@
-[<Line: +        all { i in 0..|m.data| | |m.data[i]| == m.width }
->, <Line: +requires (|data| == height) && all { i in 0..|data| | |data[i]| == width }
->]
-[<Line: -        no { i in 0..|m.data| | |m.data[i]| != m.width }
->, <Line: -requires (|data| == height) && no { i in 0..|data| | |data[i]| != width }
->]

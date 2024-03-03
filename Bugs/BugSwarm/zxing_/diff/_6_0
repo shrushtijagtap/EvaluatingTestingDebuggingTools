@@ -1,4 +1,0 @@
-[<Line: +    if (formats != null && formats.size() == 1 && formats.get(0) != null) {
->]
-[<Line: -    if (formats != null && formats.size() == 1 && formats.get(0) != null){
->]

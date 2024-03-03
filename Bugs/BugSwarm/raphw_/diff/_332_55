@@ -1,4 +1,0 @@
-[<Line: +        when(target.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotations(annotations));
->]
-[<Line: -        when(target.getDeclaredAnnotations()).thenReturn(new AnnotationList.ForLoadedAnnotation(annotations));
->]

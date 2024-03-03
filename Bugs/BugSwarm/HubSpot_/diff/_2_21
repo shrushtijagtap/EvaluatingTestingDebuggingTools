@@ -1,4 +1,0 @@
-[<Line: +import com.amazonaws.util.EC2MetadataUtils;
->]
-[<Line: -import com.amazonaws.util.EC2MetadataUtils;
->]

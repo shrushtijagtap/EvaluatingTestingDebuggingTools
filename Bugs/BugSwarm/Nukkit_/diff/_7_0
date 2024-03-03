@@ -1,5 +1,0 @@
-[<Line: +import cn.nukkit.utils.EventException;
->, <Line: +    void execute(Listener listener, Event event) throws EventException;
->]
-[<Line: -    void execute(Listener listener, Event event);
->]

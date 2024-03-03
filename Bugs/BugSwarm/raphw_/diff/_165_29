@@ -1,6 +1,0 @@
-[<Line: +        SampleSetter sampleSetter = loaded.getLoaded().getDeclaredConstructor().newInstance();
->, <Line: +        SampleGetter sampleGetter = loaded.getLoaded().getDeclaredConstructor().newInstance();
->]
-[<Line: -        SampleSetter sampleSetter = loaded.getLoaded().newInstance();
->, <Line: -        SampleGetter sampleGetter = loaded.getLoaded().newInstance();
->]

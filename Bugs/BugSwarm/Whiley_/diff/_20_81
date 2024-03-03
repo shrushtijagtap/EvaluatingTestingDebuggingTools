@@ -1,6 +1,0 @@
-[<Line: +type expr is int[] | int
->, <Line: +    if e is int[]:
->]
-[<Line: -type expr is [int] | int
->, <Line: -    if e is [int]:
->]

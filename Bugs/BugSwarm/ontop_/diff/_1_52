@@ -1,6 +1,0 @@
-[<Line: +			CQIE targetQuery = mapping.getTargetQuery();
->, <Line: +			OBDASQLQuery sourceQuery = mapping.getSourceQuery();
->]
-[<Line: -			CQIE targetQuery = (CQIE) mapping.getTargetQuery();
->, <Line: -			OBDASQLQuery sourceQuery = (OBDASQLQuery) mapping.getSourceQuery();
->]

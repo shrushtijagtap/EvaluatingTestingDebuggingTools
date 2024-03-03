@@ -1,6 +1,0 @@
-[<Line: +// We then clear it for fixed navbars in the #gridSystem mixin
->, <Line: +// Required here as we clear the width earlier on and the grid mixins don't override early enough
->]
-[<Line: -// We then reset it for fixed navbars in the #gridSystem mixin
->, <Line: -// Required here as we reset the width earlier on and the grid mixins don't override early enough
->]

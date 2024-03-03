@@ -1,4 +1,0 @@
-[<Line: +    private final boolean sendResponse;
->]
-[<Line: -    boolean sendResponse;
->]

@@ -1,5 +1,0 @@
-[<Line: +        replayFailed(failure);
->, <Line: +    public void replayFailed(Throwable t){};
->]
-[<Line: -        replayFinished();
->]

@@ -1,4 +1,0 @@
-[<Line: +      int two = Character.digit(contents.charAt(i + 1), 10);
->]
-[<Line: -      int two = Character.digit(contents.charAt(i+1), 10);
->]

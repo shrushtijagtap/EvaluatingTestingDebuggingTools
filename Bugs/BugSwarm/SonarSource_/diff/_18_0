@@ -1,4 +1,0 @@
-[<Line: +import org.sonar.api.config.internal.MapSettings;
->, <Line: +    context.setSettings(new MapSettings().setProperty("sonar.java.failOnException", true));
->]
-[]

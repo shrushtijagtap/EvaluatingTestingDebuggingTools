@@ -1,4 +1,0 @@
-[<Line: +			elasticsearchClient.sendClassPathRessourceBulkAsync("kibana/EhCache.bulk");
->]
-[<Line: -			elasticsearchClient.sendBulkAsync("kibana/EhCache.bulk");
->]

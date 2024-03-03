@@ -1,6 +1,0 @@
-[<Line: +      decodeRowResult.append((char) charOffset);
->, <Line: +        if (i == 1 || counters[i - 1] >= patternSize / 2) {
->]
-[<Line: -      decodeRowResult.append((char)charOffset);
->, <Line: -        if (i == 1 || counters[i-1] >= patternSize / 2) {
->]
