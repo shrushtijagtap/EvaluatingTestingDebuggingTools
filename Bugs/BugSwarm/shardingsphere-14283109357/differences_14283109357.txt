@@ -1,24 +1,42 @@
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/logs/HEAD
-index aa0fe4dc..ddc9c4e8 100644
+index 95af67a4..01df796a 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/logs/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/logs/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 1562a7f97ca330cd6cf013ee7f9a4680493f9409 Saahil Hiranandani <suc2@illinois.edu> 1709542527 -0600	clone: from https://github.com/apache/shardingsphere.git
-+0000000000000000000000000000000000000000 1562a7f97ca330cd6cf013ee7f9a4680493f9409 Saahil Hiranandani <suc2@illinois.edu> 1709542593 -0600	clone: from https://github.com/apache/shardingsphere.git
+-0000000000000000000000000000000000000000 0652b0ae78f34665887b449b3cbfa3db020f976d Saahil Hiranandani <suc2@illinois.edu> 1709590634 -0600	clone: from https://github.com/apache/shardingsphere.git
++0000000000000000000000000000000000000000 0652b0ae78f34665887b449b3cbfa3db020f976d Saahil Hiranandani <suc2@illinois.edu> 1709590719 -0600	clone: from https://github.com/apache/shardingsphere.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/logs/refs/heads/master b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/logs/refs/heads/master
-index aa0fe4dc..ddc9c4e8 100644
+index 95af67a4..01df796a 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/logs/refs/heads/master
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/logs/refs/heads/master
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 1562a7f97ca330cd6cf013ee7f9a4680493f9409 Saahil Hiranandani <suc2@illinois.edu> 1709542527 -0600	clone: from https://github.com/apache/shardingsphere.git
-+0000000000000000000000000000000000000000 1562a7f97ca330cd6cf013ee7f9a4680493f9409 Saahil Hiranandani <suc2@illinois.edu> 1709542593 -0600	clone: from https://github.com/apache/shardingsphere.git
+-0000000000000000000000000000000000000000 0652b0ae78f34665887b449b3cbfa3db020f976d Saahil Hiranandani <suc2@illinois.edu> 1709590634 -0600	clone: from https://github.com/apache/shardingsphere.git
++0000000000000000000000000000000000000000 0652b0ae78f34665887b449b3cbfa3db020f976d Saahil Hiranandani <suc2@illinois.edu> 1709590719 -0600	clone: from https://github.com/apache/shardingsphere.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index aa0fe4dc..ddc9c4e8 100644
+index 95af67a4..01df796a 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/logs/refs/remotes/origin/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/logs/refs/remotes/origin/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 1562a7f97ca330cd6cf013ee7f9a4680493f9409 Saahil Hiranandani <suc2@illinois.edu> 1709542527 -0600	clone: from https://github.com/apache/shardingsphere.git
-+0000000000000000000000000000000000000000 1562a7f97ca330cd6cf013ee7f9a4680493f9409 Saahil Hiranandani <suc2@illinois.edu> 1709542593 -0600	clone: from https://github.com/apache/shardingsphere.git
+-0000000000000000000000000000000000000000 0652b0ae78f34665887b449b3cbfa3db020f976d Saahil Hiranandani <suc2@illinois.edu> 1709590634 -0600	clone: from https://github.com/apache/shardingsphere.git
++0000000000000000000000000000000000000000 0652b0ae78f34665887b449b3cbfa3db020f976d Saahil Hiranandani <suc2@illinois.edu> 1709590719 -0600	clone: from https://github.com/apache/shardingsphere.git
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/objects/pack/pack-6f21b93aa84a064ce4f73561dfa3447775cba024.idx b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/objects/pack/pack-22c8b31dd8799ac095e1f76d14b347b7494c9293.idx
+similarity index 89%
+rename from C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/objects/pack/pack-6f21b93aa84a064ce4f73561dfa3447775cba024.idx
+rename to C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/objects/pack/pack-22c8b31dd8799ac095e1f76d14b347b7494c9293.idx
+index 819235d0..842e8125 100644
+Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/objects/pack/pack-6f21b93aa84a064ce4f73561dfa3447775cba024.idx and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/objects/pack/pack-22c8b31dd8799ac095e1f76d14b347b7494c9293.idx differ
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/objects/pack/pack-6f21b93aa84a064ce4f73561dfa3447775cba024.pack b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/objects/pack/pack-22c8b31dd8799ac095e1f76d14b347b7494c9293.pack
+similarity index 99%
+rename from C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/objects/pack/pack-6f21b93aa84a064ce4f73561dfa3447775cba024.pack
+rename to C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/objects/pack/pack-22c8b31dd8799ac095e1f76d14b347b7494c9293.pack
+index d0913dff..4b7f6398 100644
+Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/objects/pack/pack-6f21b93aa84a064ce4f73561dfa3447775cba024.pack and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/objects/pack/pack-22c8b31dd8799ac095e1f76d14b347b7494c9293.pack differ
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/objects/pack/pack-6f21b93aa84a064ce4f73561dfa3447775cba024.rev b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/objects/pack/pack-22c8b31dd8799ac095e1f76d14b347b7494c9293.rev
+similarity index 99%
+rename from C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/objects/pack/pack-6f21b93aa84a064ce4f73561dfa3447775cba024.rev
+rename to C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/objects/pack/pack-22c8b31dd8799ac095e1f76d14b347b7494c9293.rev
+index 16c71b9b..347a4f42 100644
+Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/.git/objects/pack/pack-6f21b93aa84a064ce4f73561dfa3447775cba024.rev and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Patched-Version/.git/objects/pack/pack-22c8b31dd8799ac095e1f76d14b347b7494c9293.rev differ
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/agent/plugins/metrics/type/prometheus/src/test/java/org/apache/shardingsphere/agent/plugin/metrics/prometheus/exoprter/PrometheusMetricsExporterTest.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shardingsphere-14283109357/Buggy-version/agent/plugins/metrics/type/prometheus/src/test/java/org/apache/shardingsphere/agent/plugin/metrics/prometheus/exoprter/PrometheusMetricsExporterTest.java
 deleted file mode 100644
 index 0e2c4d30..00000000

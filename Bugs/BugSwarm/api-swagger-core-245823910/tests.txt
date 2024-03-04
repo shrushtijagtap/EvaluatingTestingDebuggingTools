@@ -1,0 +1,1 @@
+createModelWithSecurityRequirements(io.swagger.SecurityDefinitionTest)#testIssue1765(io.swagger.parameter.ParameterSerializationTest)

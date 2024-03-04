@@ -1,0 +1,1 @@
+test_for_issue(com.alibaba.fastjson2.v1issues.issue_1500.Issue1529)

@@ -1,0 +1,1 @@
+should_return_description_of_FieldByFieldComparator_with_field_comparators(org.assertj.core.internal.FieldByFieldComparator_toString_Test)

@@ -6,31 +6,31 @@ index e60a8c98..00b99a34 100644
 -a5e2b18af288d261b21f2731a2183464fecc4ff9
 +ffc0cc3c1ff1aeebe588983e0e4468de5d0360bc
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/index
-index 9b13007f..166b233d 100644
+index 05be0564..f86016a8 100644
 Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/index differ
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/HEAD
-index 1addcbb7..ebd8e3b0 100644
+index 92ccb856..93c7ad4a 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/HEAD
 @@ -1,2 +1,2 @@
--0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709540870 -0600	clone: from https://github.com/spesmilo/electrum.git
--f6312366e6fdc447d789e4ea69217a9873c04b0c a5e2b18af288d261b21f2731a2183464fecc4ff9 Saahil Hiranandani <suc2@illinois.edu> 1709540871 -0600	checkout: moving from master to a5e2b18af288d261b21f2731a2183464fecc4ff9
-+0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709540878 -0600	clone: from https://github.com/spesmilo/electrum.git
-+f6312366e6fdc447d789e4ea69217a9873c04b0c ffc0cc3c1ff1aeebe588983e0e4468de5d0360bc Saahil Hiranandani <suc2@illinois.edu> 1709540879 -0600	checkout: moving from master to ffc0cc3c1ff1aeebe588983e0e4468de5d0360bc
+-0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709588732 -0600	clone: from https://github.com/spesmilo/electrum.git
+-f6312366e6fdc447d789e4ea69217a9873c04b0c a5e2b18af288d261b21f2731a2183464fecc4ff9 Saahil Hiranandani <suc2@illinois.edu> 1709588732 -0600	checkout: moving from master to a5e2b18af288d261b21f2731a2183464fecc4ff9
++0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709588739 -0600	clone: from https://github.com/spesmilo/electrum.git
++f6312366e6fdc447d789e4ea69217a9873c04b0c ffc0cc3c1ff1aeebe588983e0e4468de5d0360bc Saahil Hiranandani <suc2@illinois.edu> 1709588740 -0600	checkout: moving from master to ffc0cc3c1ff1aeebe588983e0e4468de5d0360bc
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/refs/heads/master b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/refs/heads/master
-index 06cd3594..65385181 100644
+index f59b7990..2fac379f 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/refs/heads/master
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/refs/heads/master
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709540870 -0600	clone: from https://github.com/spesmilo/electrum.git
-+0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709540878 -0600	clone: from https://github.com/spesmilo/electrum.git
+-0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709588732 -0600	clone: from https://github.com/spesmilo/electrum.git
++0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709588739 -0600	clone: from https://github.com/spesmilo/electrum.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index 06cd3594..65385181 100644
+index f59b7990..2fac379f 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/refs/remotes/origin/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/refs/remotes/origin/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709540870 -0600	clone: from https://github.com/spesmilo/electrum.git
-+0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709540878 -0600	clone: from https://github.com/spesmilo/electrum.git
+-0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709588732 -0600	clone: from https://github.com/spesmilo/electrum.git
++0000000000000000000000000000000000000000 f6312366e6fdc447d789e4ea69217a9873c04b0c Saahil Hiranandani <suc2@illinois.edu> 1709588739 -0600	clone: from https://github.com/spesmilo/electrum.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/lib/transaction.py b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/lib/transaction.py
 index afba2bba..ed411957 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/lib/transaction.py

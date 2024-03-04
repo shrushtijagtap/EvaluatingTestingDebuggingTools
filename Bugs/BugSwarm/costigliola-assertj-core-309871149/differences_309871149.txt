@@ -1,24 +1,24 @@
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/HEAD
-index cde895e9..b4b6881c 100644
+index f7d284fa..fe491056 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <suc2@illinois.edu> 1709540886 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
-+0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <suc2@illinois.edu> 1709540892 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
+-0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588747 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
++0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588756 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/refs/heads/main b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/refs/heads/main
-index cde895e9..b4b6881c 100644
+index f7d284fa..fe491056 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/refs/heads/main
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/refs/heads/main
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <suc2@illinois.edu> 1709540886 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
-+0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <suc2@illinois.edu> 1709540892 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
+-0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588747 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
++0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588756 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index cde895e9..b4b6881c 100644
+index f7d284fa..fe491056 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/refs/remotes/origin/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/refs/remotes/origin/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <suc2@illinois.edu> 1709540886 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
-+0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <suc2@illinois.edu> 1709540892 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
+-0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588747 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
++0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588756 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-core/src/test/java/org/assertj/core/api/atomic/referencearray/AtomicReferenceArrayAssert_satisfiesExactly_with_ThrowingConsumer_Test.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-core/src/test/java/org/assertj/core/api/atomic/referencearray/AtomicReferenceArrayAssert_satisfiesExactly_with_ThrowingConsumer_Test.java
 deleted file mode 100644
 index e0250a6f..00000000

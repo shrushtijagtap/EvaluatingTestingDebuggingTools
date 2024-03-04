@@ -6,31 +6,31 @@ index 276cec53..f32f06ff 100644
 -9c03a0505f46a92f645dc927dba2da6458facfb1
 +fdd52edc7811ae973c93ae825cc1bd1d9e9fe33f
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/.git/index
-index 61a1b0b7..a6234652 100644
+index 69d9d8f0..4435e29c 100644
 Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/.git/index differ
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/.git/logs/HEAD
-index 3f56a567..fa6c576f 100644
+index bd8a1433..7913e8ed 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/.git/logs/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/.git/logs/HEAD
 @@ -1,2 +1,2 @@
--0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709542039 -0600	clone: from https://github.com/traccar/traccar.git
--75b404db5c790bf37c05fabf1cbbd2027ad1db25 9c03a0505f46a92f645dc927dba2da6458facfb1 Saahil Hiranandani <suc2@illinois.edu> 1709542039 -0600	checkout: moving from master to 9c03a0505f46a92f645dc927dba2da6458facfb1
-+0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709542042 -0600	clone: from https://github.com/traccar/traccar.git
-+75b404db5c790bf37c05fabf1cbbd2027ad1db25 fdd52edc7811ae973c93ae825cc1bd1d9e9fe33f Saahil Hiranandani <suc2@illinois.edu> 1709542043 -0600	checkout: moving from master to fdd52edc7811ae973c93ae825cc1bd1d9e9fe33f
+-0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709590072 -0600	clone: from https://github.com/traccar/traccar.git
+-75b404db5c790bf37c05fabf1cbbd2027ad1db25 9c03a0505f46a92f645dc927dba2da6458facfb1 Saahil Hiranandani <suc2@illinois.edu> 1709590073 -0600	checkout: moving from master to 9c03a0505f46a92f645dc927dba2da6458facfb1
++0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709590076 -0600	clone: from https://github.com/traccar/traccar.git
++75b404db5c790bf37c05fabf1cbbd2027ad1db25 fdd52edc7811ae973c93ae825cc1bd1d9e9fe33f Saahil Hiranandani <suc2@illinois.edu> 1709590077 -0600	checkout: moving from master to fdd52edc7811ae973c93ae825cc1bd1d9e9fe33f
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/.git/logs/refs/heads/master b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/.git/logs/refs/heads/master
-index 1e216049..4f226b7e 100644
+index c606a230..d6b6e545 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/.git/logs/refs/heads/master
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/.git/logs/refs/heads/master
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709542039 -0600	clone: from https://github.com/traccar/traccar.git
-+0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709542042 -0600	clone: from https://github.com/traccar/traccar.git
+-0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709590072 -0600	clone: from https://github.com/traccar/traccar.git
++0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709590076 -0600	clone: from https://github.com/traccar/traccar.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index 1e216049..4f226b7e 100644
+index c606a230..d6b6e545 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/.git/logs/refs/remotes/origin/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/.git/logs/refs/remotes/origin/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709542039 -0600	clone: from https://github.com/traccar/traccar.git
-+0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709542042 -0600	clone: from https://github.com/traccar/traccar.git
+-0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709590072 -0600	clone: from https://github.com/traccar/traccar.git
++0000000000000000000000000000000000000000 75b404db5c790bf37c05fabf1cbbd2027ad1db25 Saahil Hiranandani <suc2@illinois.edu> 1709590076 -0600	clone: from https://github.com/traccar/traccar.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java
 index 8e5269ec..736f5871 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java

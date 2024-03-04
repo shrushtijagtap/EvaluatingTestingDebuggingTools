@@ -6,31 +6,31 @@ index 7247734e..26536e76 100644
 -4ffc64cce1fca6c257ea6f9325c13156f1d6c939
 +f0cc8d540d1a08d312e18afff3baa9761dbf6e59
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Patched-Version/.git/index
-index f3a99714..c90ec765 100644
+index c8672d67..c6a89d8f 100644
 Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Patched-Version/.git/index differ
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Patched-Version/.git/logs/HEAD
-index e0d6782d..3f0a5118 100644
+index 4fa310d0..7eec95f0 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Buggy-version/.git/logs/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Patched-Version/.git/logs/HEAD
 @@ -1,2 +1,2 @@
--0000000000000000000000000000000000000000 d8014efd6e2036ad56a0e1980804068d1112a0f1 Saahil Hiranandani <suc2@illinois.edu> 1709542635 -0600	clone: from https://github.com/apache/shiro.git
--d8014efd6e2036ad56a0e1980804068d1112a0f1 4ffc64cce1fca6c257ea6f9325c13156f1d6c939 Saahil Hiranandani <suc2@illinois.edu> 1709542636 -0600	checkout: moving from main to 4ffc64cce1fca6c257ea6f9325c13156f1d6c939
-+0000000000000000000000000000000000000000 d8014efd6e2036ad56a0e1980804068d1112a0f1 Saahil Hiranandani <suc2@illinois.edu> 1709542639 -0600	clone: from https://github.com/apache/shiro.git
-+d8014efd6e2036ad56a0e1980804068d1112a0f1 f0cc8d540d1a08d312e18afff3baa9761dbf6e59 Saahil Hiranandani <suc2@illinois.edu> 1709542640 -0600	checkout: moving from main to f0cc8d540d1a08d312e18afff3baa9761dbf6e59
+-0000000000000000000000000000000000000000 9a6d6c9b2e737b1ac552bc5436b8ff3803268b2d Saahil Hiranandani <suc2@illinois.edu> 1709590786 -0600	clone: from https://github.com/apache/shiro.git
+-9a6d6c9b2e737b1ac552bc5436b8ff3803268b2d 4ffc64cce1fca6c257ea6f9325c13156f1d6c939 Saahil Hiranandani <suc2@illinois.edu> 1709590787 -0600	checkout: moving from main to 4ffc64cce1fca6c257ea6f9325c13156f1d6c939
++0000000000000000000000000000000000000000 9a6d6c9b2e737b1ac552bc5436b8ff3803268b2d Saahil Hiranandani <suc2@illinois.edu> 1709590791 -0600	clone: from https://github.com/apache/shiro.git
++9a6d6c9b2e737b1ac552bc5436b8ff3803268b2d f0cc8d540d1a08d312e18afff3baa9761dbf6e59 Saahil Hiranandani <suc2@illinois.edu> 1709590791 -0600	checkout: moving from main to f0cc8d540d1a08d312e18afff3baa9761dbf6e59
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Buggy-version/.git/logs/refs/heads/main b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Patched-Version/.git/logs/refs/heads/main
-index a6cf4c2f..094aad8f 100644
+index f1da64e5..b075468f 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Buggy-version/.git/logs/refs/heads/main
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Patched-Version/.git/logs/refs/heads/main
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 d8014efd6e2036ad56a0e1980804068d1112a0f1 Saahil Hiranandani <suc2@illinois.edu> 1709542635 -0600	clone: from https://github.com/apache/shiro.git
-+0000000000000000000000000000000000000000 d8014efd6e2036ad56a0e1980804068d1112a0f1 Saahil Hiranandani <suc2@illinois.edu> 1709542639 -0600	clone: from https://github.com/apache/shiro.git
+-0000000000000000000000000000000000000000 9a6d6c9b2e737b1ac552bc5436b8ff3803268b2d Saahil Hiranandani <suc2@illinois.edu> 1709590786 -0600	clone: from https://github.com/apache/shiro.git
++0000000000000000000000000000000000000000 9a6d6c9b2e737b1ac552bc5436b8ff3803268b2d Saahil Hiranandani <suc2@illinois.edu> 1709590791 -0600	clone: from https://github.com/apache/shiro.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index a6cf4c2f..094aad8f 100644
+index f1da64e5..b075468f 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Buggy-version/.git/logs/refs/remotes/origin/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Patched-Version/.git/logs/refs/remotes/origin/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 d8014efd6e2036ad56a0e1980804068d1112a0f1 Saahil Hiranandani <suc2@illinois.edu> 1709542635 -0600	clone: from https://github.com/apache/shiro.git
-+0000000000000000000000000000000000000000 d8014efd6e2036ad56a0e1980804068d1112a0f1 Saahil Hiranandani <suc2@illinois.edu> 1709542639 -0600	clone: from https://github.com/apache/shiro.git
+-0000000000000000000000000000000000000000 9a6d6c9b2e737b1ac552bc5436b8ff3803268b2d Saahil Hiranandani <suc2@illinois.edu> 1709590786 -0600	clone: from https://github.com/apache/shiro.git
++0000000000000000000000000000000000000000 9a6d6c9b2e737b1ac552bc5436b8ff3803268b2d Saahil Hiranandani <suc2@illinois.edu> 1709590791 -0600	clone: from https://github.com/apache/shiro.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/mgt/CookieRememberMeManager.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Patched-Version/web/src/main/java/org/apache/shiro/web/mgt/CookieRememberMeManager.java
 index 7e6b4987..798bf401 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/shiro-16456433682/Buggy-version/web/src/main/java/org/apache/shiro/web/mgt/CookieRememberMeManager.java

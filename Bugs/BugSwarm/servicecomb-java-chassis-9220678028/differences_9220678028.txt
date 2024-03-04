@@ -1,24 +1,24 @@
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/HEAD
-index 0f36011b..18ab7129 100644
+index c6c21a42..7e489767 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709542271 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
-+0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709542274 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
+-0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709590336 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
++0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709590339 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/refs/heads/master b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/refs/heads/master
-index 0f36011b..18ab7129 100644
+index c6c21a42..7e489767 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/refs/heads/master
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/refs/heads/master
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709542271 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
-+0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709542274 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
+-0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709590336 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
++0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709590339 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index 0f36011b..18ab7129 100644
+index c6c21a42..7e489767 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/refs/remotes/origin/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/refs/remotes/origin/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709542271 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
-+0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709542274 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
+-0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709590336 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
++0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709590339 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/common/common-access-log/src/main/java/org/apache/servicecomb/common/accessLog/core/parser/impl/DefaultCompositeVertxRestAccessLogItemMeta.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/common/common-access-log/src/main/java/org/apache/servicecomb/common/accessLog/core/parser/impl/DefaultCompositeVertxRestAccessLogItemMeta.java
 deleted file mode 100644
 index a900c370..00000000

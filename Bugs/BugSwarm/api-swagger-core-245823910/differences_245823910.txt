@@ -6,31 +6,31 @@ index c8a829e1..1694ab14 100644
 -2016ab0d3b62436498d82d9d47b7101237e16183
 +e3858038c91d723691e233192f8f565e632e8614
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/index
-index bd0a3e73..fa373f62 100644
+index 29323291..15f086a8 100644
 Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/index differ
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/HEAD
-index bb6eb1c4..0d4c508b 100644
+index 364b6b76..9f9f014b 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/HEAD
 @@ -1,2 +1,2 @@
--0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709540926 -0600	clone: from https://github.com/swagger-api/swagger-core.git
--3fcc473c33c56f306902853a451020926ad691ea 2016ab0d3b62436498d82d9d47b7101237e16183 Saahil Hiranandani <suc2@illinois.edu> 1709540927 -0600	checkout: moving from master to 2016ab0d3b62436498d82d9d47b7101237e16183
-+0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709540929 -0600	clone: from https://github.com/swagger-api/swagger-core.git
-+3fcc473c33c56f306902853a451020926ad691ea e3858038c91d723691e233192f8f565e632e8614 Saahil Hiranandani <suc2@illinois.edu> 1709540929 -0600	checkout: moving from master to e3858038c91d723691e233192f8f565e632e8614
+-0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709588790 -0600	clone: from https://github.com/swagger-api/swagger-core.git
+-3fcc473c33c56f306902853a451020926ad691ea 2016ab0d3b62436498d82d9d47b7101237e16183 Saahil Hiranandani <suc2@illinois.edu> 1709588790 -0600	checkout: moving from master to 2016ab0d3b62436498d82d9d47b7101237e16183
++0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709588793 -0600	clone: from https://github.com/swagger-api/swagger-core.git
++3fcc473c33c56f306902853a451020926ad691ea e3858038c91d723691e233192f8f565e632e8614 Saahil Hiranandani <suc2@illinois.edu> 1709588793 -0600	checkout: moving from master to e3858038c91d723691e233192f8f565e632e8614
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/refs/heads/master b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/refs/heads/master
-index e814c808..9d95faf3 100644
+index 366e7b5e..17f0b105 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/refs/heads/master
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/refs/heads/master
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709540926 -0600	clone: from https://github.com/swagger-api/swagger-core.git
-+0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709540929 -0600	clone: from https://github.com/swagger-api/swagger-core.git
+-0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709588790 -0600	clone: from https://github.com/swagger-api/swagger-core.git
++0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709588793 -0600	clone: from https://github.com/swagger-api/swagger-core.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index e814c808..9d95faf3 100644
+index 366e7b5e..17f0b105 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/refs/remotes/origin/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/refs/remotes/origin/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709540926 -0600	clone: from https://github.com/swagger-api/swagger-core.git
-+0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709540929 -0600	clone: from https://github.com/swagger-api/swagger-core.git
+-0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709588790 -0600	clone: from https://github.com/swagger-api/swagger-core.git
++0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709588793 -0600	clone: from https://github.com/swagger-api/swagger-core.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java
 index bccd8c9a..51e9088a 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java

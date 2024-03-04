@@ -6,31 +6,31 @@ index 1f260f13..e5c1475a 100644
 -347f948bcfc5db180a49c7d06c1b67f24b75ad21
 +aeb28073e95557122d7325f7addac9eca7b07e7f
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/.git/index
-index cc2989e8..20d94aac 100644
+index 71886bc4..846da66b 100644
 Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/.git/index differ
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/.git/logs/HEAD
-index c22f0e86..ab97d575 100644
+index c4daf0e1..7d50904b 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/.git/logs/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/.git/logs/HEAD
 @@ -1,2 +1,2 @@
--0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709540922 -0600	clone: from https://github.com/paramiko/paramiko.git
--51eb55debf2ebfe56f38378005439a029a48225f 347f948bcfc5db180a49c7d06c1b67f24b75ad21 Saahil Hiranandani <suc2@illinois.edu> 1709540922 -0600	checkout: moving from main to 347f948bcfc5db180a49c7d06c1b67f24b75ad21
-+0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709540923 -0600	clone: from https://github.com/paramiko/paramiko.git
-+51eb55debf2ebfe56f38378005439a029a48225f aeb28073e95557122d7325f7addac9eca7b07e7f Saahil Hiranandani <suc2@illinois.edu> 1709540923 -0600	checkout: moving from main to aeb28073e95557122d7325f7addac9eca7b07e7f
+-0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709588785 -0600	clone: from https://github.com/paramiko/paramiko.git
+-51eb55debf2ebfe56f38378005439a029a48225f 347f948bcfc5db180a49c7d06c1b67f24b75ad21 Saahil Hiranandani <suc2@illinois.edu> 1709588785 -0600	checkout: moving from main to 347f948bcfc5db180a49c7d06c1b67f24b75ad21
++0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709588787 -0600	clone: from https://github.com/paramiko/paramiko.git
++51eb55debf2ebfe56f38378005439a029a48225f aeb28073e95557122d7325f7addac9eca7b07e7f Saahil Hiranandani <suc2@illinois.edu> 1709588787 -0600	checkout: moving from main to aeb28073e95557122d7325f7addac9eca7b07e7f
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/.git/logs/refs/heads/main b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/.git/logs/refs/heads/main
-index ec982b67..8196c334 100644
+index 40c68d2e..06c92f64 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/.git/logs/refs/heads/main
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/.git/logs/refs/heads/main
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709540922 -0600	clone: from https://github.com/paramiko/paramiko.git
-+0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709540923 -0600	clone: from https://github.com/paramiko/paramiko.git
+-0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709588785 -0600	clone: from https://github.com/paramiko/paramiko.git
++0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709588787 -0600	clone: from https://github.com/paramiko/paramiko.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index ec982b67..8196c334 100644
+index 40c68d2e..06c92f64 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/.git/logs/refs/remotes/origin/HEAD
 +++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/.git/logs/refs/remotes/origin/HEAD
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709540922 -0600	clone: from https://github.com/paramiko/paramiko.git
-+0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709540923 -0600	clone: from https://github.com/paramiko/paramiko.git
+-0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709588785 -0600	clone: from https://github.com/paramiko/paramiko.git
++0000000000000000000000000000000000000000 51eb55debf2ebfe56f38378005439a029a48225f Saahil Hiranandani <suc2@illinois.edu> 1709588787 -0600	clone: from https://github.com/paramiko/paramiko.git
 diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/paramiko/transport.py b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/paramiko/transport.py
 index d2fccf07..98b810ee 100644
 --- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/paramiko/transport.py

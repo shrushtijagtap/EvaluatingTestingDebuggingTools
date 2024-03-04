@@ -1,0 +1,1 @@
+testBuildHttpClientOptions_ssl_withFactory(org.apache.servicecomb.foundation.vertx.TestVertxTLSBuilder)
