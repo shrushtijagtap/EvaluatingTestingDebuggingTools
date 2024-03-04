@@ -172,8 +172,6 @@ if __name__ == "__main__":
     benchmark_results = {}
 
     for bud_id in selected_bug_ids:
-        if bud_id == "Bears-143":
-            print("Skipping ", bud_id)
         path = os.path.join(parent_dir, bud_id)
         print("For bug ", count, " : ", path)
         count += 1
