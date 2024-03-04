@@ -1,5 +1,6 @@
 from codebleu import calc_codebleu
 from Levenshtein import distance
+import lizard
 
 buggy_path = "/Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/KTH/Buggy-Version/KTH.java"
 patched_path = "/Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/KTH/Patched-Version/KTH.java"
@@ -39,3 +40,11 @@ def find_levenshtein(buggy_path, patched_path):
         print("Levenshtein distance: ", result)
 
 find_levenshtein(buggy_path, patched_path)
+
+
+def find_cyclomatic_complexity(path):
+    file_res_lizard = lizard.analyze_file(path)
+    return file_res_lizard.function_list[0].__dict__['cyclomatic_complexity']
+
+cyclomatic_complexity = find_cyclomatic_complexity(buggy_path)
+print(cyclomatic_complexity)

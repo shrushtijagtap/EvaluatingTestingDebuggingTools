@@ -1,5 +1,7 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/KTH//Buggy-Version/kth.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/KTH//Patched-Version/kth.java	2024-02-27 11:51:45
+diff --git a/kth/Buggy-Version/kth.java b/kth/Patched-Version/kth.java
+index 9bef9780..83beeb57 100644
+--- a/kth/Buggy-Version/kth.java
++++ b/kth/Patched-Version/kth.java
 @@ -1,7 +1,14 @@
 -package java_programs;
 +package correct_java_programs;
@@ -16,7 +18,7 @@
   */
  public class KTH {
      public static Integer kth(ArrayList<Integer> arr, int k) {
-@@ -22,7 +29,7 @@
+@@ -22,7 +29,7 @@ public class KTH {
          if (k < num_less) {
              return kth(below, k);
          } else if (k >= num_lessoreq) {

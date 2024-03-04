@@ -1,5 +1,7 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/IS_VALID_PARENTHESIZATION//Buggy-Version/is_valid_parenthesization.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/IS_VALID_PARENTHESIZATION//Patched-Version/is_valid_parenthesization.java	2024-02-27 11:51:45
+diff --git a/is_valid_parenthesization/Buggy-Version/is_valid_parenthesization.java b/is_valid_parenthesization/Patched-Version/is_valid_parenthesization.java
+index aa43e74a..6f9b60b2 100644
+--- a/is_valid_parenthesization/Buggy-Version/is_valid_parenthesization.java
++++ b/is_valid_parenthesization/Patched-Version/is_valid_parenthesization.java
 @@ -1,5 +1,6 @@
 -package java_programs;
 +package correct_java_programs;
@@ -8,7 +10,7 @@
  /*
   * To change this template, choose Tools | Templates
   * and open the template in the editor.
-@@ -21,6 +22,6 @@
+@@ -21,6 +22,6 @@ public class IS_VALID_PARENTHESIZATION {
                  if (depth < 0) { return false; }
              }
          }

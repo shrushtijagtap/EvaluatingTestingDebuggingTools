@@ -9,7 +9,8 @@ generate_diff() {
     local fixed_file="$2"
     local diff_file="$3"
     
-    diff --color -ur "$buggy_file" "$fixed_file" > "$diff_file"
+    # diff --color -ur "$buggy_file" "$fixed_file" > "$diff_file"
+    git diff --no-index "$buggy_file" "$fixed_file" --output "$diff_file"
 }
 
 # Loop through each program directory in QuixBugs directory
@@ -17,8 +18,8 @@ for program_dir in "$quixbugs_dir"/*/; do
     if [ -d "$program_dir" ]; then
         program_name_upper=$(basename "$program_dir")
         program_name=$(echo "$program_name_upper" | tr '[:upper:]' '[:lower:]')
-        buggy_file="$program_dir/Buggy-Version/$program_name.java"
-        fixed_file="$program_dir/Patched-Version/$program_name.java"
+        buggy_file="$program_name/Buggy-Version/$program_name.java"
+        fixed_file="$program_name/Patched-Version/$program_name.java"
         
         # Check if both buggy and fixed files exist
         if [ -f "$buggy_file" ] && [ -f "$fixed_file" ]; then

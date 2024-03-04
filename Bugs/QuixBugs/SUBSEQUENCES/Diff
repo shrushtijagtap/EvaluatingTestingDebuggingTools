@@ -1,12 +1,14 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/SUBSEQUENCES//Buggy-Version/subsequences.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/SUBSEQUENCES//Patched-Version/subsequences.java	2024-02-27 11:51:45
+diff --git a/subsequences/Buggy-Version/subsequences.java b/subsequences/Patched-Version/subsequences.java
+index 134e0a67..4faaee93 100644
+--- a/subsequences/Buggy-Version/subsequences.java
++++ b/subsequences/Patched-Version/subsequences.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;
  import java.util.*;
  
  /*
-@@ -13,7 +13,9 @@
+@@ -13,7 +13,9 @@ import java.util.*;
  public class SUBSEQUENCES {
      public static ArrayList<ArrayList> subsequences(int a, int b, int k) {
          if (k == 0) {

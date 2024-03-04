@@ -1,12 +1,14 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/NEXT_PERMUTATION//Buggy-Version/next_permutation.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/NEXT_PERMUTATION//Patched-Version/next_permutation.java	2024-02-27 11:51:45
+diff --git a/next_permutation/Buggy-Version/next_permutation.java b/next_permutation/Patched-Version/next_permutation.java
+index a831505e..43a1e655 100644
+--- a/next_permutation/Buggy-Version/next_permutation.java
++++ b/next_permutation/Patched-Version/next_permutation.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;
  import java.util.*;
  //import com.google.guava.Lists;
  
-@@ -16,7 +16,7 @@
+@@ -16,7 +16,7 @@ public class NEXT_PERMUTATION {
          for (int i=perm.size()-2; i!=-1; i--) {
              if (perm.get(i) < perm.get(i+1)) {
                  for (int j=perm.size()-1; j!=i; j--) {

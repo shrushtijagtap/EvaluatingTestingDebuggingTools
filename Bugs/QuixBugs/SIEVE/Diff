@@ -1,12 +1,14 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/SIEVE//Buggy-Version/sieve.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/SIEVE//Patched-Version/sieve.java	2024-02-27 11:51:45
+diff --git a/sieve/Buggy-Version/sieve.java b/sieve/Patched-Version/sieve.java
+index 5d02bd58..673b6acf 100644
+--- a/sieve/Buggy-Version/sieve.java
++++ b/sieve/Patched-Version/sieve.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;
  import java.util.*;
  
  /*
-@@ -38,7 +38,7 @@
+@@ -38,7 +38,7 @@ public class SIEVE {
      public static ArrayList<Integer> sieve(Integer max) {
          ArrayList<Integer> primes = new ArrayList<Integer>();
          for (int n=2; n<max+1; n++) {

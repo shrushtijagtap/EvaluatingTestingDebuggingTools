@@ -1,12 +1,14 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/TO_BASE//Buggy-Version/to_base.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/TO_BASE//Patched-Version/to_base.java	2024-02-27 11:51:45
+diff --git a/to_base/Buggy-Version/to_base.java b/to_base/Patched-Version/to_base.java
+index dfba6643..151ebed6 100644
+--- a/to_base/Buggy-Version/to_base.java
++++ b/to_base/Patched-Version/to_base.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;
  import java.util.*;
  
  /*
-@@ -18,7 +18,7 @@
+@@ -18,7 +18,7 @@ public class TO_BASE {
          while (num > 0) {
              i = num % b;
              num = num / b; // floor division?

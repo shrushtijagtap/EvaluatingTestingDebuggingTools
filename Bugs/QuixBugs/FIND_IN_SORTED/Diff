@@ -1,5 +1,7 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/FIND_IN_SORTED//Buggy-Version/find_in_sorted.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/FIND_IN_SORTED//Patched-Version/find_in_sorted.java	2024-02-27 11:51:45
+diff --git a/find_in_sorted/Buggy-Version/find_in_sorted.java b/find_in_sorted/Patched-Version/find_in_sorted.java
+index 33961545..ef8788a4 100644
+--- a/find_in_sorted/Buggy-Version/find_in_sorted.java
++++ b/find_in_sorted/Patched-Version/find_in_sorted.java
 @@ -1,4 +1,5 @@
 -package java_programs;
 +package correct_java_programs;
@@ -7,7 +9,7 @@
  /*
   * To change this template, choose Tools | Templates
   * and open the template in the editor.
-@@ -17,7 +18,7 @@
+@@ -17,7 +18,7 @@ public class FIND_IN_SORTED {
          if (x < arr[mid]) {
              return binsearch(arr, x, start, mid);
          } else if (x > arr[mid]) {

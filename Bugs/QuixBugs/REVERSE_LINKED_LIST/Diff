@@ -1,5 +1,7 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/REVERSE_LINKED_LIST//Buggy-Version/reverse_linked_list.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/REVERSE_LINKED_LIST//Patched-Version/reverse_linked_list.java	2024-02-27 11:51:45
+diff --git a/reverse_linked_list/Buggy-Version/reverse_linked_list.java b/reverse_linked_list/Patched-Version/reverse_linked_list.java
+index 920bc161..61956c2c 100644
+--- a/reverse_linked_list/Buggy-Version/reverse_linked_list.java
++++ b/reverse_linked_list/Patched-Version/reverse_linked_list.java
 @@ -1,6 +1,8 @@
 -package java_programs;
 +package correct_java_programs;
@@ -10,7 +12,7 @@
  /*
   * To change this template, choose Tools | Templates
   * and open the template in the editor.
-@@ -17,6 +19,7 @@
+@@ -17,6 +19,7 @@ public class REVERSE_LINKED_LIST {
          while (node != null) {
              nextnode = node.getSuccessor();
              node.setSuccessor(prevnode);

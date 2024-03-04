@@ -1,12 +1,14 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/GET_FACTORS//Buggy-Version/get_factors.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/GET_FACTORS//Patched-Version/get_factors.java	2024-02-27 11:51:45
+diff --git a/get_factors/Buggy-Version/get_factors.java b/get_factors/Patched-Version/get_factors.java
+index 528ec62a..4948a6c4 100644
+--- a/get_factors/Buggy-Version/get_factors.java
++++ b/get_factors/Patched-Version/get_factors.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;
  import java.util.*;
  
  /*
-@@ -24,6 +24,7 @@
+@@ -24,6 +24,7 @@ public class GET_FACTORS {
                  return prepend;
              }
          }

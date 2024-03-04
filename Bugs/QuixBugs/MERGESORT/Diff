@@ -1,12 +1,14 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/MERGESORT//Buggy-Version/mergesort.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/MERGESORT//Patched-Version/mergesort.java	2024-02-27 11:51:45
+diff --git a/mergesort/Buggy-Version/mergesort.java b/mergesort/Patched-Version/mergesort.java
+index 60e54a45..f20a9577 100644
+--- a/mergesort/Buggy-Version/mergesort.java
++++ b/mergesort/Patched-Version/mergesort.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;
  import java.util.*;
  
  /*
-@@ -35,7 +35,7 @@
+@@ -35,7 +35,7 @@ public class MERGESORT {
      }
  
      public static ArrayList<Integer> mergesort(ArrayList<Integer> arr) {

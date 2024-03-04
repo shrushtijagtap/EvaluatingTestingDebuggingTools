@@ -1,5 +1,7 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/SHUNTING_YARD//Buggy-Version/shunting_yard.java	2024-02-27 11:51:45
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/SHUNTING_YARD//Patched-Version/shunting_yard.java	2024-02-27 11:51:45
+diff --git a/shunting_yard/Buggy-Version/shunting_yard.java b/shunting_yard/Patched-Version/shunting_yard.java
+index 87c2c91e..0fbe5777 100644
+--- a/shunting_yard/Buggy-Version/shunting_yard.java
++++ b/shunting_yard/Patched-Version/shunting_yard.java
 @@ -1,4 +1,5 @@
 -package java_programs;
 +package correct_java_programs;
@@ -7,7 +9,7 @@
  import java.util.*;
  
  /*
-@@ -13,24 +14,26 @@
+@@ -13,24 +14,26 @@ import java.util.*;
  public class SHUNTING_YARD {
      public static List shunting_yard(ArrayList tokens) {
          Map<String, Integer> precedence = new HashMap<String, Integer>();
@@ -40,7 +42,7 @@
          }
  
          while (!opstack.isEmpty()) {
-@@ -39,5 +42,5 @@
+@@ -39,5 +42,5 @@ public class SHUNTING_YARD {
  
          return rpntokens;
      }

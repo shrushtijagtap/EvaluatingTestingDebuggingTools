@@ -1,5 +1,7 @@
---- /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/BREADTH_FIRST_SEARCH//Buggy-Version/breadth_first_search.java	2024-02-27 11:51:44
-+++ /Users/sejalpekam/MCS/Spring 24/CS 527 Topics in SE/Milestone 2/CS527-Project/Bugs/QuixBugs/BREADTH_FIRST_SEARCH//Patched-Version/breadth_first_search.java	2024-02-27 11:51:45
+diff --git a/breadth_first_search/Buggy-Version/breadth_first_search.java b/breadth_first_search/Patched-Version/breadth_first_search.java
+index 68fea377..ad0b60e4 100644
+--- a/breadth_first_search/Buggy-Version/breadth_first_search.java
++++ b/breadth_first_search/Patched-Version/breadth_first_search.java
 @@ -1,7 +1,9 @@
 -package java_programs;
 +package correct_java_programs;
@@ -11,8 +13,7 @@
  /*
   * To change this template, choose Tools | Templates
   * and open the template in the editor.
-\ No newline at end of file
-@@ -21,7 +23,7 @@
+@@ -21,7 +23,7 @@ public class BREADTH_FIRST_SEARCH {
  
          nodesvisited.add(startnode);
  
@@ -21,8 +22,7 @@
              Node node = queue.removeFirst();
  
              if (node == goalnode) {
-\ No newline at end of file
-@@ -39,7 +41,7 @@
+@@ -39,7 +41,7 @@ public class BREADTH_FIRST_SEARCH {
           * The buggy program always drops into while(true) loop and will not return false
           * Removed below line to fix compilation error
           */
