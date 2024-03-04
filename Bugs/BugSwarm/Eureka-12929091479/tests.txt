@@ -1,0 +1,1 @@
+(tests.test_MIRI)#(tests.test_NIRCam)#(tests.test_NIRSpec)#(tests.test_Photometry_NIRCam)#(tests.test_WFC3)#(tests.test_lightcurve_fitting)
