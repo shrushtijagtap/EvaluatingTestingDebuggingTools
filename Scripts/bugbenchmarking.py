@@ -19,8 +19,8 @@ def codebleu(buggy_path, patched_path):
             patched_code+= line.strip() + "\n"
             
     result = calc_codebleu([buggy_code], [patched_code], lang="java", weights=(0.25, 0.25, 0.25, 0.25), tokenizer=None)
-    print(result)
-    print("Codebleu value: " , result['codebleu'])
+    return result['codebleu']
+    #print("Codebleu value: " , result['codebleu'])
 
 
 #buggy_code and patched_code are list[str]
@@ -35,7 +35,8 @@ def find_levenshtein(buggy_path, patched_path):
         for line in file:
             patched_code.append(line.strip())
         result = distance(buggy_code, patched_code)
-        print("Levenshtein distance: ", result)
+        return result
+        #print("Levenshtein distance: ", result)
 
 
 def calculateNoOfLinesChanged(lines):
@@ -52,7 +53,7 @@ def calculateNoOfClassesChanged(lines):
     noOfClassesChanged = 0
     pattern = re.compile(r'\b(public|private|protected|final)\s+class\b')
     pattern1 = re.compile(r'\bclass\s+\w+\s+extends\s+\w+\b')
-    pattern2 = re.compile(r'^(?!//).*\bclass\b')
+    pattern2 = re.compile(r'^(?!//).*\b\sclass\s\b')
 
     for line in lines:
         match = re.search(pattern, line)
@@ -60,6 +61,10 @@ def calculateNoOfClassesChanged(lines):
         match2 = re.search(pattern2, line)
         if match or match1 or match2:
             noOfClassesChanged+=1
+
+    if noOfClassesChanged <= 0:
+        return 1
+
     return noOfClassesChanged
 
 
@@ -72,12 +77,15 @@ def calculateNoOfMethodsChanged(lines):
         if match:
             noOfMethodsChanged+=1
 
+    if noOfMethodsChanged <= 0:
+        return 1
+
     return noOfMethodsChanged
 
 
 def find_cyclomatic_complexity(path):
     file_res_lizard = lizard.analyze_file(path)
-    return file_res_lizard.function_list[0]._dict_['cyclomatic_complexity']
+    return file_res_lizard.function_list[0].__dict__['cyclomatic_complexity']
 
 
 def get_subdirectories(folder_path):
@@ -86,7 +94,7 @@ def get_subdirectories(folder_path):
     return subdirectories
 
 
-#next 2 methods dont work
+#next 3 methods dont work, we can make any one of out it work
 def find_file_by_partial_path(folder_path, partial_file_path):
     for root, dirs, files in os.walk(folder_path):
         for file in files:
@@ -95,12 +103,12 @@ def find_file_by_partial_path(folder_path, partial_file_path):
                 return full_path
     return None
 
+
 def find_full_path(parent_dir, partial_path):
     # Check if the partial path exists in the current directory
-    if partial_path in os.listdir(parent_dir):
+    if os.path.isdir(os.path.join(parent_dir, partial_path)):
         return os.path.join(parent_dir, partial_path)
 
-    # Recursively search through subdirectories
     for entry in os.listdir(parent_dir):
         full_entry_path = os.path.join(parent_dir, entry)
         if os.path.isdir(full_entry_path):
@@ -108,17 +116,43 @@ def find_full_path(parent_dir, partial_path):
             if full_path:
                 return full_path
 
-    # If partial path is not found in the parent directory or its subdirectories
     return None
 
 
+def find_full_path_regex(parent_dir, partial_path):
+    parent_dir_patterns = [
+        re.compile(r'^(source|src)$', re.IGNORECASE)
+    ]
+    partial_path_patterns = [
+        re.compile(fr'^main/java/.*{re.escape(partial_path)}'),
+        re.compile(fr'^java/.*{re.escape(partial_path)}'),
+        re.compile(fr'^.*{re.escape(partial_path)}')
+    ]
+
+    for root, dirs, files in os.walk(parent_dir):
+        for dir_name in dirs:
+            full_path = os.path.join(root, dir_name)
+
+            for parent_pattern in parent_dir_patterns:
+                if parent_pattern.match(dir_name):
+                    for pattern in partial_path_patterns:
+                        if pattern.match(full_path):
+                            return full_path
+
+    return None
+
 
 #Actual Code
-parent_dir = "/Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defects4J_Projects/"
+#this is your local path of our cloned project repo
+parent_dir = "/Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Bugs/Defects4J/"
 dir_paths = get_subdirectories(parent_dir)
 count = 1
 
+
 for dir in dir_paths:
+    if dir == "scripts":
+        continue
+
     path = os.path.join(parent_dir, dir)
     print("For bug ", count,  " : " , path)
     count += 1
@@ -156,8 +190,8 @@ for dir in dir_paths:
         #file_loc_buggy = find_file_by_partial_path(path+"Buggy-Version", mc)
         #file_loc_fixed = find_file_by_partial_path(path+"Patched-Version", mc)
 
-        file_loc_buggy = find_full_path(path+"/Buggy-Version", mc)
-        file_loc_fixed = find_full_path(path+"/Patched-Version", mc)
+        file_loc_buggy = find_full_path_regex(path+"/Buggy-Version/", mc)
+        file_loc_fixed = find_full_path_regex(path+"/Patched-Version/", mc)
 
         print(file_loc_buggy, " ", file_loc_fixed)
 
@@ -173,6 +207,8 @@ for dir in dir_paths:
             print("buggy_cyclomatic_complexity :", buggy_cyclomatic_complexity)
             print("fixed_cyclomatic_complexity :", fixed_cyclomatic_complexity)
             print("diff_cyclomatic_complexity :", diff_cyclomatic_complexity)
+            print("\n")
             
         else:
             print("Couldn't fetch modified file")
+            print("\n")
