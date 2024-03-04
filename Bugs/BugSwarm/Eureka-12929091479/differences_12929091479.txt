@@ -1,0 +1,46 @@
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/HEAD
+index f11633e8..4921deec 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/HEAD
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/HEAD
+@@ -1 +1 @@
+-9aad140c8d760c0b6c4fdc063d270bba07e8bafe
++2dc24957444e6f372b051dfdec7c9be666c5178b
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/index
+index af3f6aa0..4debe856 100644
+Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/index differ
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/HEAD
+index 422dcf6a..51fa6935 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/HEAD
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/HEAD
+@@ -1,2 +1,2 @@
+-0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709542081 -0600	clone: from https://github.com/kevin218/Eureka.git
+-0de238b9f04a1af7c90dd6a65ff1e8975e0757cf 9aad140c8d760c0b6c4fdc063d270bba07e8bafe Saahil Hiranandani <suc2@illinois.edu> 1709542083 -0600	checkout: moving from main to 9aad140c8d760c0b6c4fdc063d270bba07e8bafe
++0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709542116 -0600	clone: from https://github.com/kevin218/Eureka.git
++0de238b9f04a1af7c90dd6a65ff1e8975e0757cf 2dc24957444e6f372b051dfdec7c9be666c5178b Saahil Hiranandani <suc2@illinois.edu> 1709542118 -0600	checkout: moving from main to 2dc24957444e6f372b051dfdec7c9be666c5178b
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/refs/heads/main b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/refs/heads/main
+index 48c0808b..0fe2aabb 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/refs/heads/main
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/refs/heads/main
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709542081 -0600	clone: from https://github.com/kevin218/Eureka.git
++0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709542116 -0600	clone: from https://github.com/kevin218/Eureka.git
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index 48c0808b..0fe2aabb 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709542081 -0600	clone: from https://github.com/kevin218/Eureka.git
++0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709542116 -0600	clone: from https://github.com/kevin218/Eureka.git
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/src/eureka/S3_data_reduction/s3_reduce.py b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/src/eureka/S3_data_reduction/s3_reduce.py
+index 76c571c4..d8a320e3 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/src/eureka/S3_data_reduction/s3_reduce.py
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/src/eureka/S3_data_reduction/s3_reduce.py
+@@ -546,7 +546,7 @@ def reduce(eventlabel, ecf_path=None, s2_meta=None, input_meta=None):
+                     meta.save_fluxdata = True
+ 
+                 # plot tilt events
+-                if meta.isplots_S3 >= 5 and meta.inst == 'nircam' and
++                if meta.isplots_S3 >= 5 and meta.inst == 'nircam' and \
+                    meta.photometry:
+                     refrence_tilt_frame = \
+                         plots_s3.tilt_events(meta, data, log, m,

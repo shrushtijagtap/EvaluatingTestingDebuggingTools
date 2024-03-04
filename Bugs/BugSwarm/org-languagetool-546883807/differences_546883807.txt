@@ -1,0 +1,21 @@
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/HEAD
+index 60c66fa0..4d2f84ad 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/HEAD
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 8040d3fcbb70add6acda40419fca339ff6f64805 Saahil Hiranandani <suc2@illinois.edu> 1709541432 -0600	clone: from https://github.com/languagetool-org/languagetool.git
++0000000000000000000000000000000000000000 8040d3fcbb70add6acda40419fca339ff6f64805 Saahil Hiranandani <suc2@illinois.edu> 1709541969 -0600	clone: from https://github.com/languagetool-org/languagetool.git
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/refs/heads/master b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/refs/heads/master
+index 60c66fa0..4d2f84ad 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/refs/heads/master
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/refs/heads/master
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 8040d3fcbb70add6acda40419fca339ff6f64805 Saahil Hiranandani <suc2@illinois.edu> 1709541432 -0600	clone: from https://github.com/languagetool-org/languagetool.git
++0000000000000000000000000000000000000000 8040d3fcbb70add6acda40419fca339ff6f64805 Saahil Hiranandani <suc2@illinois.edu> 1709541969 -0600	clone: from https://github.com/languagetool-org/languagetool.git
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index 60c66fa0..4d2f84ad 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 8040d3fcbb70add6acda40419fca339ff6f64805 Saahil Hiranandani <suc2@illinois.edu> 1709541432 -0600	clone: from https://github.com/languagetool-org/languagetool.git
++0000000000000000000000000000000000000000 8040d3fcbb70add6acda40419fca339ff6f64805 Saahil Hiranandani <suc2@illinois.edu> 1709541969 -0600	clone: from https://github.com/languagetool-org/languagetool.git

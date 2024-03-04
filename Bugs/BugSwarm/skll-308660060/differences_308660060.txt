@@ -1,0 +1,46 @@
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/.git/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/.git/HEAD
+index 73c4eb4c..a33f54d5 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/.git/HEAD
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/.git/HEAD
+@@ -1 +1 @@
+-714e6a2cb9066fd4420f084390f04abc21c40852
++cae169f3e446bb11dcefae4b956a17b140822353
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/.git/index
+index 8f42caab..6dbb1640 100644
+Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/.git/index differ
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/.git/logs/HEAD
+index 520e097b..dcc13be1 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/.git/logs/HEAD
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/.git/logs/HEAD
+@@ -1,2 +1,2 @@
+-0000000000000000000000000000000000000000 affb97a658e9f9e679ada0fe530f9dccb84f9b5a Saahil Hiranandani <suc2@illinois.edu> 1709542018 -0600	clone: from https://github.com/EducationalTestingService/skll.git
+-affb97a658e9f9e679ada0fe530f9dccb84f9b5a 714e6a2cb9066fd4420f084390f04abc21c40852 Saahil Hiranandani <suc2@illinois.edu> 1709542018 -0600	checkout: moving from main to 714e6a2cb9066fd4420f084390f04abc21c40852
++0000000000000000000000000000000000000000 affb97a658e9f9e679ada0fe530f9dccb84f9b5a Saahil Hiranandani <suc2@illinois.edu> 1709542021 -0600	clone: from https://github.com/EducationalTestingService/skll.git
++affb97a658e9f9e679ada0fe530f9dccb84f9b5a cae169f3e446bb11dcefae4b956a17b140822353 Saahil Hiranandani <suc2@illinois.edu> 1709542021 -0600	checkout: moving from main to cae169f3e446bb11dcefae4b956a17b140822353
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/.git/logs/refs/heads/main b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/.git/logs/refs/heads/main
+index 47816bb8..1ebb263e 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/.git/logs/refs/heads/main
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/.git/logs/refs/heads/main
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 affb97a658e9f9e679ada0fe530f9dccb84f9b5a Saahil Hiranandani <suc2@illinois.edu> 1709542018 -0600	clone: from https://github.com/EducationalTestingService/skll.git
++0000000000000000000000000000000000000000 affb97a658e9f9e679ada0fe530f9dccb84f9b5a Saahil Hiranandani <suc2@illinois.edu> 1709542021 -0600	clone: from https://github.com/EducationalTestingService/skll.git
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index 47816bb8..1ebb263e 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 affb97a658e9f9e679ada0fe530f9dccb84f9b5a Saahil Hiranandani <suc2@illinois.edu> 1709542018 -0600	clone: from https://github.com/EducationalTestingService/skll.git
++0000000000000000000000000000000000000000 affb97a658e9f9e679ada0fe530f9dccb84f9b5a Saahil Hiranandani <suc2@illinois.edu> 1709542021 -0600	clone: from https://github.com/EducationalTestingService/skll.git
+diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/skll/config.py b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/skll/config.py
+index 3c67e157..f7fd8fbc 100644
+--- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Buggy-version/skll/config.py
++++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/skll-308660060/Patched-Version/skll/config.py
+@@ -358,7 +358,7 @@ def _parse_config_file(config_path, log_level=logging.INFO):
+         When generating result summary files, this name helps prevent
+         overwriting previous summaries.
+     task : str
+-        The types of experiment we’re trying to run (e.g. 'cross_validate').
++        The types of experiment we're trying to run (e.g. 'cross_validate').
+     sampler : str
+         The name of a sampler to perform non-linear transformations of the input.
+     fixed_sampler_parameters : dict
