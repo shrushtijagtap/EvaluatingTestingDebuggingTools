@@ -4,7 +4,7 @@ import re
 import os
 
 import sys
-from andres_bug_benchmark_edit import process_bug
+from andres_bug_benchmark_edit import process_bug as bears_process_bug
 
 if __name__ == "__main__":
 
@@ -32,3 +32,12 @@ if __name__ == "__main__":
     if metric == None or metric not in METRICS:
         print("Invalid argument - Metric")
     
+    bugPath = os.path.join(os.path.dirname(__file__), 'Bugs', bugDataset, bugName)
+    
+    # Assuming all the bug benchmarking files are similar to Bears benchamraking file
+
+    options = {
+        'Bears': bears_process_bug
+    }
+
+    print(options[bugDataset](bugPath, metric))
