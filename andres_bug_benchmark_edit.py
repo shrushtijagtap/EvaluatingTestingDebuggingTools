@@ -40,12 +40,12 @@ def get_levenshtein_distance(path, bug_file_list):
         buggy_full_path = os.path.join(path, "Buggy-Version", filename)
         fixed_full_path = os.path.join(path, "Fixed-Version", filename)
 
+        print(bug_file_list)
+
         # Read the files
-        buggy_code = ""
         with open(buggy_full_path, 'r') as file:
             buggy_code = file.read()
 
-        fixed_code = ""
         with open(fixed_full_path, 'r') as file:
             fixed_code = file.read()
 
@@ -72,12 +72,13 @@ def get_subdirectories(folder_path):
 
 
 def get_class_change_count(diff):
-    class_pattern = re.compile(r'.*\s+class\s+')
+    class_pattern = re.compile(r'^(?!\s*//).*\s+\bclass\b\s+')
     class_names = set()
 
     for line in diff:
         match = re.match(class_pattern, line)
         if match:
+            print(line)
             # TODO: the public/protected word might not be used in all class definitions
             name_pattern = re.compile(r'\b(?:public|protected)?\s*class\s+(\w+)')
             class_name = name_pattern.search(line)
@@ -103,7 +104,7 @@ def get_line_change_count(diff):
 def get_files_changed(diff):
     files_changed = []
     for line in diff:
-        if line.startswith('+++'):
+        if line.startswith('+++') and line.strip().endswith('.java'):
             split_line = line.strip().split('/')
             parsed_line = '/'.join(split_line[4:])
             files_changed.append(parsed_line)
@@ -127,24 +128,25 @@ def process_bug(bug_dir):
     # Get the number of lines changed
     lines_change_count = get_line_change_count(diff)
 
-    #print("CChange :", classes_change_count)
-    #print("MChange :", method_change_count)
-    #print("LChange :", lines_change_count)
+    # print("CChange :", classes_change_count)
+    # print("MChange :", method_change_count)
+    # print("LChange :", lines_change_count)
 
     files_changed = get_files_changed(diff)
+    print("Files changed: ", files_changed)
 
     levenshtein_distances = get_levenshtein_distance(bug_dir, files_changed)
-    #print("LD: ", levenshtein_distances)
+    # print("LD: ", levenshtein_distances)
 
     buggy_complexity = find_cyclomatic_complexity(os.path.join(bug_dir, "Buggy-Version"), files_changed)
     fixed_complexity = find_cyclomatic_complexity(os.path.join(bug_dir, "Fixed-Version"), files_changed)
 
-    #print("CB: ", buggy_complexity)
-    #print("CP: ", fixed_complexity)
-    #print("CC: ", abs(buggy_complexity - fixed_complexity))
+    # print("CB: ", buggy_complexity)
+    # print("CP: ", fixed_complexity)
+    # print("CC: ", abs(buggy_complexity - fixed_complexity))
 
     codebleu_scores = codebleu(bug_dir, files_changed)
-    #print("CodeBLEU: ", codebleu_scores)
+    # print("CodeBLEU: ", codebleu_scores)
 
     # Dict entry with all the data
     bug_results = {
@@ -175,8 +177,7 @@ if __name__ == "__main__":
         count += 1
 
         benchmark_results[bud_id] = process_bug(path)
-        print(json.dumps(benchmark_results, indent = 4) )
-        break
+        print(json.dumps(benchmark_results, indent=4))
 
     with open(os.path.join(parent_dir, "benchmark_results.json"), "w") as file:
         json.dump(benchmark_results, file)
