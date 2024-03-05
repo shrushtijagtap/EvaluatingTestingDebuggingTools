@@ -1,1 +1,0 @@
-lib.tests.test_transaction::TestTransaction::test_txid_segwit_coinbase_to_p2pk#lib.tests.test_transaction::TestTransaction::test_txid_segwit_coinbase_to_p2pkh

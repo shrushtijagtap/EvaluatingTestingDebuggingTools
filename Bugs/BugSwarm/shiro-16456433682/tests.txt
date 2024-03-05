@@ -1,1 +1,0 @@
-shouldIgnoreInvalidCookieValues(org.apache.shiro.web.mgt.CookieRememberMeManagerTest)

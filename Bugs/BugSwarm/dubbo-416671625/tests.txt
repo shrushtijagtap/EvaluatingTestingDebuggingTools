@@ -1,1 +1,0 @@
-testHttpClient(org.apache.dubbo.rpc.protocol.hessian.HessianProtocolTest)
