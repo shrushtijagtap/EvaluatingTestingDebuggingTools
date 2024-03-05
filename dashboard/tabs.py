@@ -77,15 +77,24 @@ def preprocess_special_metric(df, metric):
 
 
 def make_tab(tab_name: str):
-    # Load json data
-    data = load_json_data(f'{repo_data_path}/{tab_name}')
+    # If tab name == Combined, combine data for all tabs
+    if tab_name == 'Combined':
+        # Load data for all tabs
+        data = [load_json_data(f'{repo_data_path}/{tab}') for tab in ['Bears', 'BugSwarm', 'Defects4J', 'QuixBugs']]
 
-    # If no data is available, return empty tab
-    if not data:
-        return dbc.Tab(label=tab_name, children=[html.H1("No data available")])
+        df_metrics = pd.concat([pd.DataFrame(tab_data) for tab_data in data])
 
-    # Create pandas dataframe
-    df_metrics = pd.DataFrame(data)
+    else:
+
+        # Load json data
+        data = load_json_data(f'{repo_data_path}/{tab_name}')
+
+        # If no data is available, return empty tab
+        if not data:
+            return dbc.Tab(label=tab_name, children=[html.H1("No data available")])
+
+        # Create pandas dataframe
+        df_metrics = pd.DataFrame(data)
 
     metrics = ['CChange', 'MChange', 'LChange', 'LD', 'CB', 'CP', 'CC', 'CodeBLEU']
 
@@ -102,7 +111,6 @@ def make_tab(tab_name: str):
         id='metrics-table' + tab_name,
         columns=[{"name": col, "id": col} for col in df_metrics.columns],
         data=df_metrics.to_dict('records'),
-        style_table={'overflowX': 'auto'},
         sort_action="native",
     )
 

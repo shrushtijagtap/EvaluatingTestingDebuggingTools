@@ -4,10 +4,11 @@ import dash_bootstrap_components as dbc
 from dashboard.tabs import make_tab
 
 tab_names = [
+    "Combined",
     "Bears",
     "BugSwarm",
     "Defects4J",
-    "QuixBugs"
+    "QuixBugs",
 ]
 
 header = dbc.Row([
