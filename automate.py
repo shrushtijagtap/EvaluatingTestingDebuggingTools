@@ -5,6 +5,8 @@ import os
 
 import sys
 from andres_bug_benchmark_edit import process_bug as bears_process_bug
+from Bugs.QuixBugs.benchmarking_Quixbugs import process_bug as quixbugs_process_bug
+from Bugs.Defects4J.defects4j_benchmarking import process_bug as defects4j_process_bug
 
 if __name__ == "__main__":
 
@@ -37,7 +39,10 @@ if __name__ == "__main__":
     # Assuming all the bug benchmarking files are similar to Bears benchamraking file
 
     options = {
-        'Bears': bears_process_bug
+        'Bears': bears_process_bug,
+        'Defects4J': defects4j_process_bug,
+        'QuixBugs': quixbugs_process_bug,
+
     }
 
     print(options[bugDataset](bugPath, metric))
