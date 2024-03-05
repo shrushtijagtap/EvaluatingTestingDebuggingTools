@@ -118,7 +118,7 @@ def get_files_changed(diff):
     for line in diff:
         if line.startswith('+++') and line.strip().endswith('.java'):
             split_line = line.strip().split('/')
-            parsed_line = '/'.join(split_line[9:])
+            parsed_line = '/'.join(split_line[11:])
             files_changed.append(parsed_line)
 
     return files_changed
