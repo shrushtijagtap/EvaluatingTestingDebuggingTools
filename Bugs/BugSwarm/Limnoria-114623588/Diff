@@ -1,0 +1,13 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Limnoria-114623588/Buggy-version/plugins/Time/plugin.py b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Limnoria-114623588/Patched-Version/plugins/Time/plugin.py
+index befe6943d..2696aaeab 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Limnoria-114623588/Buggy-version/plugins/Time/plugin.py
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Limnoria-114623588/Patched-Version/plugins/Time/plugin.py
+@@ -114,7 +114,7 @@ class Time(callbacks.Plugin):
+         and see if it will work.
+         If the <time string> is not given, defaults to now.
+         """
+-        if not s:
++        if not s or s == 'now':
+             irc.reply(str(int(time.time())))
+             return
+         if not parse:
