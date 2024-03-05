@@ -1,40 +1,40 @@
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/HEAD
-index f11633e8..4921deec 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/HEAD
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/.git/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/.git/HEAD"
+index f11633e..4921dee 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/.git/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/.git/HEAD"
 @@ -1 +1 @@
 -9aad140c8d760c0b6c4fdc063d270bba07e8bafe
 +2dc24957444e6f372b051dfdec7c9be666c5178b
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/index
-index 149cd525..94b8674e 100644
-Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/index differ
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/HEAD
-index a423c24b..635ac9de 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/HEAD
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/.git/index" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/.git/index"
+index 44d88ce..6bb81ed 100644
+Binary files "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/.git/index" and "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/.git/index" differ
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/.git/logs/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/.git/logs/HEAD"
+index ba62b0d..5891725 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/.git/logs/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/.git/logs/HEAD"
 @@ -1,2 +1,2 @@
--0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709590121 -0600	clone: from https://github.com/kevin218/Eureka.git
--0de238b9f04a1af7c90dd6a65ff1e8975e0757cf 9aad140c8d760c0b6c4fdc063d270bba07e8bafe Saahil Hiranandani <suc2@illinois.edu> 1709590123 -0600	checkout: moving from main to 9aad140c8d760c0b6c4fdc063d270bba07e8bafe
-+0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709590157 -0600	clone: from https://github.com/kevin218/Eureka.git
-+0de238b9f04a1af7c90dd6a65ff1e8975e0757cf 2dc24957444e6f372b051dfdec7c9be666c5178b Saahil Hiranandani <suc2@illinois.edu> 1709590160 -0600	checkout: moving from main to 2dc24957444e6f372b051dfdec7c9be666c5178b
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/refs/heads/main b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/refs/heads/main
-index 1d551327..6db735df 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/refs/heads/main
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/refs/heads/main
+-0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536746 -0600	clone: from https://github.com/kevin218/Eureka.git
+-0de238b9f04a1af7c90dd6a65ff1e8975e0757cf 9aad140c8d760c0b6c4fdc063d270bba07e8bafe Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536748 -0600	checkout: moving from main to 9aad140c8d760c0b6c4fdc063d270bba07e8bafe
++0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536781 -0600	clone: from https://github.com/kevin218/Eureka.git
++0de238b9f04a1af7c90dd6a65ff1e8975e0757cf 2dc24957444e6f372b051dfdec7c9be666c5178b Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536783 -0600	checkout: moving from main to 2dc24957444e6f372b051dfdec7c9be666c5178b
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/.git/logs/refs/heads/main" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/.git/logs/refs/heads/main"
+index 7d1adbb..12fc29b 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/.git/logs/refs/heads/main"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/.git/logs/refs/heads/main"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709590121 -0600	clone: from https://github.com/kevin218/Eureka.git
-+0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709590157 -0600	clone: from https://github.com/kevin218/Eureka.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index 1d551327..6db735df 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/.git/logs/refs/remotes/origin/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+-0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536746 -0600	clone: from https://github.com/kevin218/Eureka.git
++0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536781 -0600	clone: from https://github.com/kevin218/Eureka.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/.git/logs/refs/remotes/origin/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
+index 7d1adbb..12fc29b 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/.git/logs/refs/remotes/origin/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709590121 -0600	clone: from https://github.com/kevin218/Eureka.git
-+0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709590157 -0600	clone: from https://github.com/kevin218/Eureka.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/src/eureka/S3_data_reduction/s3_reduce.py b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/src/eureka/S3_data_reduction/s3_reduce.py
-index 76c571c4..d8a320e3 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/src/eureka/S3_data_reduction/s3_reduce.py
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/src/eureka/S3_data_reduction/s3_reduce.py
+-0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536746 -0600	clone: from https://github.com/kevin218/Eureka.git
++0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536781 -0600	clone: from https://github.com/kevin218/Eureka.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/src/eureka/S3_data_reduction/s3_reduce.py" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/src/eureka/S3_data_reduction/s3_reduce.py"
+index 76c571c..d8a320e 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Buggy-version/src/eureka/S3_data_reduction/s3_reduce.py"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\Eureka-12929091479\\Patched-Version/src/eureka/S3_data_reduction/s3_reduce.py"
 @@ -546,7 +546,7 @@ def reduce(eventlabel, ecf_path=None, s2_meta=None, input_meta=None):
                      meta.save_fluxdata = True
  

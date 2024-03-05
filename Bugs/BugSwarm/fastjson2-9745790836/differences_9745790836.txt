@@ -1,40 +1,40 @@
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/.git/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/.git/HEAD
-index 18060085..ab07b4c6 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/.git/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/.git/HEAD
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/.git/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/.git/HEAD"
+index 1806008..ab07b4c 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/.git/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/.git/HEAD"
 @@ -1 +1 @@
 -2fb2c98a5b820e3151da6165baa52af60a008542
 +ac8d25f4cce1def0c560f5e2192fe946f053af4c
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/.git/index
-index e3c4c435..d57c871d 100644
-Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/.git/index differ
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/.git/logs/HEAD
-index fea3d6de..51e38f94 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/.git/logs/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/.git/logs/HEAD
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/.git/index" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/.git/index"
+index 32fcc95..7ae01cd 100644
+Binary files "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/.git/index" and "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/.git/index" differ
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/.git/logs/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/.git/logs/HEAD"
+index 1e28ce1..8800fcc 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/.git/logs/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/.git/logs/HEAD"
 @@ -1,2 +1,2 @@
--0000000000000000000000000000000000000000 ec1cfb6eec2b010cd5f5f20fca779a8da1aa8eab Saahil Hiranandani <suc2@illinois.edu> 1709590236 -0600	clone: from https://github.com/alibaba/fastjson2.git
--ec1cfb6eec2b010cd5f5f20fca779a8da1aa8eab 2fb2c98a5b820e3151da6165baa52af60a008542 Saahil Hiranandani <suc2@illinois.edu> 1709590240 -0600	checkout: moving from main to 2fb2c98a5b820e3151da6165baa52af60a008542
-+0000000000000000000000000000000000000000 ec1cfb6eec2b010cd5f5f20fca779a8da1aa8eab Saahil Hiranandani <suc2@illinois.edu> 1709590254 -0600	clone: from https://github.com/alibaba/fastjson2.git
-+ec1cfb6eec2b010cd5f5f20fca779a8da1aa8eab ac8d25f4cce1def0c560f5e2192fe946f053af4c Saahil Hiranandani <suc2@illinois.edu> 1709590258 -0600	checkout: moving from main to ac8d25f4cce1def0c560f5e2192fe946f053af4c
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/.git/logs/refs/heads/main b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/.git/logs/refs/heads/main
-index a1fb4d8e..a5e49bdd 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/.git/logs/refs/heads/main
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/.git/logs/refs/heads/main
+-0000000000000000000000000000000000000000 27ca2b45c33cd362fa35613416f5d62ff9567921 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536859 -0600	clone: from https://github.com/alibaba/fastjson2.git
+-27ca2b45c33cd362fa35613416f5d62ff9567921 2fb2c98a5b820e3151da6165baa52af60a008542 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536862 -0600	checkout: moving from main to 2fb2c98a5b820e3151da6165baa52af60a008542
++0000000000000000000000000000000000000000 27ca2b45c33cd362fa35613416f5d62ff9567921 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536876 -0600	clone: from https://github.com/alibaba/fastjson2.git
++27ca2b45c33cd362fa35613416f5d62ff9567921 ac8d25f4cce1def0c560f5e2192fe946f053af4c Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536879 -0600	checkout: moving from main to ac8d25f4cce1def0c560f5e2192fe946f053af4c
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/.git/logs/refs/heads/main" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/.git/logs/refs/heads/main"
+index 95c5016..4c0c670 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/.git/logs/refs/heads/main"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/.git/logs/refs/heads/main"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 ec1cfb6eec2b010cd5f5f20fca779a8da1aa8eab Saahil Hiranandani <suc2@illinois.edu> 1709590236 -0600	clone: from https://github.com/alibaba/fastjson2.git
-+0000000000000000000000000000000000000000 ec1cfb6eec2b010cd5f5f20fca779a8da1aa8eab Saahil Hiranandani <suc2@illinois.edu> 1709590254 -0600	clone: from https://github.com/alibaba/fastjson2.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index a1fb4d8e..a5e49bdd 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/.git/logs/refs/remotes/origin/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+-0000000000000000000000000000000000000000 27ca2b45c33cd362fa35613416f5d62ff9567921 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536859 -0600	clone: from https://github.com/alibaba/fastjson2.git
++0000000000000000000000000000000000000000 27ca2b45c33cd362fa35613416f5d62ff9567921 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536876 -0600	clone: from https://github.com/alibaba/fastjson2.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/.git/logs/refs/remotes/origin/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
+index 95c5016..4c0c670 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/.git/logs/refs/remotes/origin/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 ec1cfb6eec2b010cd5f5f20fca779a8da1aa8eab Saahil Hiranandani <suc2@illinois.edu> 1709590236 -0600	clone: from https://github.com/alibaba/fastjson2.git
-+0000000000000000000000000000000000000000 ec1cfb6eec2b010cd5f5f20fca779a8da1aa8eab Saahil Hiranandani <suc2@illinois.edu> 1709590254 -0600	clone: from https://github.com/alibaba/fastjson2.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java
-index df9e4854..2458a0c9 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/fastjson2-9745790836/Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java
+-0000000000000000000000000000000000000000 27ca2b45c33cd362fa35613416f5d62ff9567921 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536859 -0600	clone: from https://github.com/alibaba/fastjson2.git
++0000000000000000000000000000000000000000 27ca2b45c33cd362fa35613416f5d62ff9567921 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536876 -0600	clone: from https://github.com/alibaba/fastjson2.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java"
+index df9e485..2458a0c 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\fastjson2-9745790836\\Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java"
 @@ -87,7 +87,7 @@ public abstract class ObjectReaderBean<T>
                  String fieldName1 = fieldName.substring(2);
                  long hashCode64LCase = Fnv.hashCode64LCase(fieldName1);

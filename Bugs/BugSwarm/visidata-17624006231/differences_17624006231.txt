@@ -1,40 +1,40 @@
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/.git/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/.git/HEAD
-index 43374765..6f28437a 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/.git/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/.git/HEAD
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/.git/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/.git/HEAD"
+index 4337476..6f28437 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/.git/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/.git/HEAD"
 @@ -1 +1 @@
 -970d3d67c567faeb9ccf4b45e6cd1d67548c2085
 +f7a8dd96991e20eee5c6889437e1b7ad0cb0946d
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/.git/index
-index 5687c388..e6558109 100644
-Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/.git/index differ
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/.git/logs/HEAD
-index 654aab44..2eff8912 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/.git/logs/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/.git/logs/HEAD
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/.git/index" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/.git/index"
+index cf21ae0..da226a7 100644
+Binary files "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/.git/index" and "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/.git/index" differ
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/.git/logs/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/.git/logs/HEAD"
+index e9ba8bb..20cedfc 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/.git/logs/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/.git/logs/HEAD"
 @@ -1,2 +1,2 @@
--0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <suc2@illinois.edu> 1709590802 -0600	clone: from https://github.com/saulpw/visidata.git
--aab3cda093274fbf23c9ff0310c81ddd86de5b6e 970d3d67c567faeb9ccf4b45e6cd1d67548c2085 Saahil Hiranandani <suc2@illinois.edu> 1709590803 -0600	checkout: moving from develop to 970d3d67c567faeb9ccf4b45e6cd1d67548c2085
-+0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <suc2@illinois.edu> 1709590807 -0600	clone: from https://github.com/saulpw/visidata.git
-+aab3cda093274fbf23c9ff0310c81ddd86de5b6e f7a8dd96991e20eee5c6889437e1b7ad0cb0946d Saahil Hiranandani <suc2@illinois.edu> 1709590808 -0600	checkout: moving from develop to f7a8dd96991e20eee5c6889437e1b7ad0cb0946d
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/.git/logs/refs/heads/develop b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/.git/logs/refs/heads/develop
-index fbbfcfca..db90888a 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/.git/logs/refs/heads/develop
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/.git/logs/refs/heads/develop
+-0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709537518 -0600	clone: from https://github.com/saulpw/visidata.git
+-aab3cda093274fbf23c9ff0310c81ddd86de5b6e 970d3d67c567faeb9ccf4b45e6cd1d67548c2085 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709537518 -0600	checkout: moving from develop to 970d3d67c567faeb9ccf4b45e6cd1d67548c2085
++0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709537524 -0600	clone: from https://github.com/saulpw/visidata.git
++aab3cda093274fbf23c9ff0310c81ddd86de5b6e f7a8dd96991e20eee5c6889437e1b7ad0cb0946d Saahil Hiranandani <hiran@Batcomputer.(none)> 1709537524 -0600	checkout: moving from develop to f7a8dd96991e20eee5c6889437e1b7ad0cb0946d
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/.git/logs/refs/heads/develop" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/.git/logs/refs/heads/develop"
+index d25de22..40ed30c 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/.git/logs/refs/heads/develop"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/.git/logs/refs/heads/develop"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <suc2@illinois.edu> 1709590802 -0600	clone: from https://github.com/saulpw/visidata.git
-+0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <suc2@illinois.edu> 1709590807 -0600	clone: from https://github.com/saulpw/visidata.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index fbbfcfca..db90888a 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/.git/logs/refs/remotes/origin/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+-0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709537518 -0600	clone: from https://github.com/saulpw/visidata.git
++0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709537524 -0600	clone: from https://github.com/saulpw/visidata.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/.git/logs/refs/remotes/origin/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
+index d25de22..40ed30c 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/.git/logs/refs/remotes/origin/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <suc2@illinois.edu> 1709590802 -0600	clone: from https://github.com/saulpw/visidata.git
-+0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <suc2@illinois.edu> 1709590807 -0600	clone: from https://github.com/saulpw/visidata.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/visidata/save.py b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/visidata/save.py
-index b2cda646..8c70b253 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Buggy-version/visidata/save.py
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/visidata-17624006231/Patched-Version/visidata/save.py
+-0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709537518 -0600	clone: from https://github.com/saulpw/visidata.git
++0000000000000000000000000000000000000000 aab3cda093274fbf23c9ff0310c81ddd86de5b6e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709537524 -0600	clone: from https://github.com/saulpw/visidata.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/visidata/save.py" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/visidata/save.py"
+index b2cda64..8c70b25 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Buggy-version/visidata/save.py"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\visidata-17624006231\\Patched-Version/visidata/save.py"
 @@ -85,7 +85,7 @@ def getDefaultSaveName(sheet):
              return str(src.with_suffix('')) + '.' + sheet.options.save_filetype
          return str(src)

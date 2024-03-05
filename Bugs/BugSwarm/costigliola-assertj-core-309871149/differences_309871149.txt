@@ -1,99 +1,30 @@
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/HEAD
-index f7d284fa..fe491056 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/HEAD
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Buggy-version/.git/logs/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Patched-Version/.git/logs/HEAD"
+index c56a6b0..d48c6c0 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Buggy-version/.git/logs/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Patched-Version/.git/logs/HEAD"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588747 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
-+0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588756 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/refs/heads/main b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/refs/heads/main
-index f7d284fa..fe491056 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/refs/heads/main
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/refs/heads/main
+-0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709535362 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
++0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709535369 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Buggy-version/.git/logs/refs/heads/main" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Patched-Version/.git/logs/refs/heads/main"
+index c56a6b0..d48c6c0 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Buggy-version/.git/logs/refs/heads/main"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Patched-Version/.git/logs/refs/heads/main"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588747 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
-+0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588756 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index f7d284fa..fe491056 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/.git/logs/refs/remotes/origin/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+-0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709535362 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
++0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709535369 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Buggy-version/.git/logs/refs/remotes/origin/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
+index c56a6b0..d48c6c0 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Buggy-version/.git/logs/refs/remotes/origin/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588747 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
-+0000000000000000000000000000000000000000 6543a5c1383d2d4fb25e03fd2efbfe639e308f3a Saahil Hiranandani <suc2@illinois.edu> 1709588756 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-core/src/test/java/org/assertj/core/api/atomic/referencearray/AtomicReferenceArrayAssert_satisfiesExactly_with_ThrowingConsumer_Test.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-core/src/test/java/org/assertj/core/api/atomic/referencearray/AtomicReferenceArrayAssert_satisfiesExactly_with_ThrowingConsumer_Test.java
+-0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709535362 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
++0000000000000000000000000000000000000000 f2c0cedbd0650a068f91f454a0f63c91aa43302e Saahil Hiranandani <hiran@Batcomputer.(none)> 1709535369 -0600	clone: from https://github.com/joel-costigliola/assertj-core.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Buggy-version/assertj-core/src/test/java/org/assertj/core/api/objectarray/ObjectArrayAssert_usingRecursiveFieldByFieldElementComparator_with_RecursiveComparisonConfiguration_Test.java" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Buggy-version/assertj-core/src/test/java/org/assertj/core/api/objectarray/ObjectArrayAssert_usingRecursiveFieldByFieldElementComparator_with_RecursiveComparisonConfiguration_Test.java"
 deleted file mode 100644
-index e0250a6f..00000000
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-core/src/test/java/org/assertj/core/api/atomic/referencearray/AtomicReferenceArrayAssert_satisfiesExactly_with_ThrowingConsumer_Test.java
+index bcbaf30..0000000
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\costigliola-assertj-core-309871149\\Buggy-version/assertj-core/src/test/java/org/assertj/core/api/objectarray/ObjectArrayAssert_usingRecursiveFieldByFieldElementComparator_with_RecursiveComparisonConfiguration_Test.java"
 +++ /dev/null
-@@ -1,63 +0,0 @@
--/*
-- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
-- * the License. You may obtain a copy of the License at
-- *
-- * http://www.apache.org/licenses/LICENSE-2.0
-- *
-- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
-- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
-- * specific language governing permissions and limitations under the License.
-- *
-- * Copyright 2012-2024 the original author or authors.
-- */
--package org.assertj.core.api.atomic.referencearray;
--
--import static org.assertj.core.api.Assertions.assertThat;
--import static org.assertj.core.api.Assertions.catchThrowable;
--import static org.assertj.core.api.BDDAssertions.then;
--import static org.assertj.core.util.Arrays.array;
--import static org.assertj.core.util.Lists.list;
--import static org.assertj.core.util.ThrowingConsumerFactory.throwingConsumer;
--import static org.mockito.Mockito.verify;
--
--import org.assertj.core.api.AtomicReferenceArrayAssert;
--import org.assertj.core.api.AtomicReferenceArrayAssertBaseTest;
--import org.assertj.core.api.ThrowingConsumer;
--import org.junit.jupiter.api.Test;
--
--class AtomicReferenceArrayAssert_satisfiesExactly_with_ThrowingConsumer_Test extends AtomicReferenceArrayAssertBaseTest {
--
--  private ThrowingConsumer<Object>[] requirements = array(element -> assertThat(element).isNotNull());
--
--  @Override
--  protected AtomicReferenceArrayAssert<Object> invoke_api_method() {
--    return assertions.satisfiesExactly(requirements);
--  }
--
--  @Override
--  protected void verify_internal_effects() {
--    verify(iterables).assertSatisfiesExactly(getInfo(assertions), list(internalArray()), requirements);
--  }
--
--  @Test
--  void should_rethrow_throwables_as_runtime_exceptions() {
--    // GIVEN
--    Throwable exception = new Throwable("boom!");
--    // WHEN
--    Throwable throwable = catchThrowable(() -> assertThat(atomicArrayOf("foo")).satisfiesExactly(throwingConsumer(exception)));
--    // THEN
--    then(throwable).isInstanceOf(RuntimeException.class)
--                   .hasCauseReference(exception);
--  }
--
--  @Test
--  void should_propagate_RuntimeException_as_is() {
--    // GIVEN
--    RuntimeException runtimeException = new RuntimeException("boom!");
--    // WHEN
--    Throwable throwable = catchThrowable(() -> assertThat(atomicArrayOf("foo")).satisfiesExactly(throwingConsumer(runtimeException)));
--    // THEN
--    then(throwable).isSameAs(runtimeException);
--  }
--
--}
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-core/src/test/java/org/assertj/core/api/objectarray/ObjectArrayAssert_usingRecursiveFieldByFieldElementComparatorIgnoringFields_Test.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-core/src/test/java/org/assertj/core/api/objectarray/ObjectArrayAssert_usingRecursiveFieldByFieldElementComparatorIgnoringFields_Test.java
-deleted file mode 100644
-index 66dc7df8..00000000
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-core/src/test/java/org/assertj/core/api/objectarray/ObjectArrayAssert_usingRecursiveFieldByFieldElementComparatorIgnoringFields_Test.java
-+++ /dev/null
-@@ -1,69 +0,0 @@
+@@ -1,93 +0,0 @@
 -/*
 - * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
 - * the License. You may obtain a copy of the License at
@@ -109,7 +40,7 @@ index 66dc7df8..00000000
 -package org.assertj.core.api.objectarray;
 -
 -import static org.assertj.core.api.BDDAssertions.then;
--import static org.assertj.core.util.Lists.list;
+-import static org.assertj.core.util.Arrays.array;
 -
 -import org.assertj.core.api.ObjectArrayAssert;
 -import org.assertj.core.api.ObjectArrayAssertBaseTest;
@@ -118,14 +49,14 @@ index 66dc7df8..00000000
 -import org.assertj.core.internal.ConfigurableRecursiveFieldByFieldComparator;
 -import org.assertj.core.internal.ObjectArrayElementComparisonStrategy;
 -import org.assertj.core.internal.ObjectArrays;
--import org.assertj.core.test.Name;
--import org.assertj.core.test.Player;
 -import org.junit.jupiter.api.BeforeEach;
 -import org.junit.jupiter.api.Test;
 -
--class ObjectArrayAssert_usingRecursiveFieldByFieldElementComparatorIgnoringFields_Test extends ObjectArrayAssertBaseTest {
+-class ObjectArrayAssert_usingRecursiveFieldByFieldElementComparator_with_RecursiveComparisonConfiguration_Test
+-    extends ObjectArrayAssertBaseTest {
 -
 -  private ObjectArrays arraysBefore;
+-  private RecursiveComparisonConfiguration recursiveComparisonConfiguration = new RecursiveComparisonConfiguration();
 -
 -  @BeforeEach
 -  void before() {
@@ -134,7 +65,7 @@ index 66dc7df8..00000000
 -
 -  @Override
 -  protected ObjectArrayAssert<Object> invoke_api_method() {
--    return assertions.usingRecursiveFieldByFieldElementComparatorIgnoringFields("field");
+-    return assertions.usingRecursiveFieldByFieldElementComparator(recursiveComparisonConfiguration);
 -  }
 -
 -  @Override
@@ -142,105 +73,48 @@ index 66dc7df8..00000000
 -    then(arraysBefore).isNotSameAs(getArrays(assertions));
 -    then(getArrays(assertions).getComparisonStrategy()).isInstanceOf(ComparatorBasedComparisonStrategy.class);
 -    then(getObjects(assertions).getComparisonStrategy()).isInstanceOf(ObjectArrayElementComparisonStrategy.class);
--    RecursiveComparisonConfiguration recursiveComparisonConfiguration = RecursiveComparisonConfiguration.builder()
--                                                                                                        .withIgnoredFields("field")
--                                                                                                        .build();
 -    ConfigurableRecursiveFieldByFieldComparator expectedComparator = new ConfigurableRecursiveFieldByFieldComparator(recursiveComparisonConfiguration);
 -    then(getArrays(assertions).getComparator()).isEqualTo(expectedComparator);
 -    then(getObjects(assertions).getComparisonStrategy()).extracting("elementComparator").isEqualTo(expectedComparator);
 -  }
 -
 -  @Test
--  void should_ignore_given_fields_recursively() {
+-  void should_be_able_to_use_specific_RecursiveComparisonConfiguration_when_using_recursive_field_by_field_element_comparator() {
 -    // GIVEN
--    Player rose = new Player(new Name("Derrick", "Rose"), "Chicago Bulls");
--    rose.nickname = new Name("Crazy", "Dunks");
--    Player jalen = new Player(new Name("Jalen", "Rose"), "Chicago Bulls");
--    jalen.nickname = new Name("Crazy", "Defense");
+-    Foo actual = new Foo("1", new Bar(1));
+-    Foo other = new Foo("2", new Bar(1));
+-    RecursiveComparisonConfiguration configuration = new RecursiveComparisonConfiguration();
+-    configuration.ignoreFields("id");
 -    // WHEN/THEN
--    then(list(rose)).usingRecursiveFieldByFieldElementComparatorIgnoringFields("name.first", "nickname.last")
--                    .contains(jalen);
+-    then(array(actual)).usingRecursiveFieldByFieldElementComparator(configuration)
+-                       .contains(other);
 -  }
 -
--}
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-tests/assertj-integration-tests/assertj-core-junit4-with-opentest4j/src/test/java/org/assertj/core/tests/JUnit4_with_opentest4j_Test.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-tests/assertj-integration-tests/assertj-core-junit4-with-opentest4j/src/test/java/org/assertj/core/tests/JUnit4_with_opentest4j_Test.java
-deleted file mode 100644
-index 573ff2d6..00000000
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/costigliola-assertj-core-309871149/Buggy-version/assertj-tests/assertj-integration-tests/assertj-core-junit4-with-opentest4j/src/test/java/org/assertj/core/tests/JUnit4_with_opentest4j_Test.java
-+++ /dev/null
-@@ -1,75 +0,0 @@
--/*
-- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
-- * the License. You may obtain a copy of the License at
-- *
-- * http://www.apache.org/licenses/LICENSE-2.0
-- *
-- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
-- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
-- * specific language governing permissions and limitations under the License.
-- *
-- * Copyright 2012-2024 the original author or authors.
-- */
--package org.assertj.core.tests;
+-  public static class Foo {
+-    public String id;
+-    public Bar bar;
 -
--import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
--import static org.assertj.core.api.Assertions.assertThatNoException;
--import static org.assertj.core.api.Assertions.catchThrowable;
--import static org.assertj.core.api.AssumptionExceptionFactory.getPreferredAssumptionException;
--import static org.assertj.core.api.Assumptions.assumeThat;
--import static org.assertj.core.api.Assumptions.setPreferredAssumptionException;
--import static org.assertj.core.api.BDDAssertions.then;
+-    public Foo(String id, Bar bar) {
+-      this.id = id;
+-      this.bar = bar;
+-    }
 -
--import org.assertj.core.configuration.PreferredAssumptionException;
--import org.junit.After;
--import org.junit.AssumptionViolatedException;
--import org.junit.Test;
--import org.opentest4j.TestAbortedException;
--
--public class JUnit4_with_opentest4j_Test {
--
--  private static final PreferredAssumptionException DEFAULT_PREFERRED_ASSUMPTION_EXCEPTION = getPreferredAssumptionException();
--
--  @After
--  public void afterEachTest() {
--    // reset to the default value to avoid side effects on the other tests
--    setPreferredAssumptionException(DEFAULT_PREFERRED_ASSUMPTION_EXCEPTION);
+-    @Override
+-    public String toString() {
+-      return "Foo(id=" + id + ", bar=" + bar + ")";
+-    }
 -  }
 -
--  @Test
--  public void should_not_have_TestNG_in_the_classpath() {
--    // WHEN/THEN
--    assertThatExceptionOfType(ClassNotFoundException.class).isThrownBy(() -> Class.forName("org.testng.SkipException"));
--  }
+-  public static class Bar {
+-    public int id;
 -
--  @Test
--  public void should_have_JUnit_4_in_the_classpath() {
--    // WHEN/THEN
--    assertThatNoException().isThrownBy(() -> Class.forName("org.junit.AssumptionViolatedException"));
--  }
+-    public Bar(int id) {
+-      this.id = id;
+-    }
 -
--  @Test
--  public void should_have_opentest4j_in_the_classpath() {
--    // WHEN/THEN
--    assertThatNoException().isThrownBy(() -> Class.forName("org.opentest4j.TestAbortedException"));
+-    @Override
+-    public String toString() {
+-      return "Bar(id=" + id + ")";
+-    }
 -  }
--
--  @Test
--  public void should_throw_AssumptionViolatedException_when_assumption_fails() {
--    // WHEN
--    Throwable thrown = catchThrowable(() -> assumeThat(true).isFalse());
--    // THEN
--    then(thrown).isInstanceOf(AssumptionViolatedException.class);
--  }
--
--  @Test
--  public void should_throw_TestAbortedException_when_assumption_fails_if_preferredAssumptionException_is_set_to_opentest4j() {
--    // GIVEN
--    setPreferredAssumptionException(PreferredAssumptionException.JUNIT5);
--    // WHEN
--    Throwable thrown = catchThrowable(() -> assumeThat(true).isFalse());
--    // THEN
--    then(thrown).isInstanceOf(TestAbortedException.class);
--  }
--
 -}

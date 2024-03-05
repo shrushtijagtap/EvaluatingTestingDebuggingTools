@@ -1,58 +1,30 @@
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/logs/HEAD
-index 41bd91a9..ff7932e7 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/logs/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/logs/HEAD
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/.git/logs/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Patched-Version/.git/logs/HEAD"
+index 570ad0e..f9861d5 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/.git/logs/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Patched-Version/.git/logs/HEAD"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 8a1296f892a8acebf346914cd233becddd6418b1 Saahil Hiranandani <suc2@illinois.edu> 1709590008 -0600	clone: from https://github.com/apache/dubbo.git
-+0000000000000000000000000000000000000000 8a1296f892a8acebf346914cd233becddd6418b1 Saahil Hiranandani <suc2@illinois.edu> 1709590015 -0600	clone: from https://github.com/apache/dubbo.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/logs/refs/heads/3.2 b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/logs/refs/heads/3.2
-index 41bd91a9..ff7932e7 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/logs/refs/heads/3.2
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/logs/refs/heads/3.2
+-0000000000000000000000000000000000000000 860ad02e1ed2cbe5842a611adfc7f1138c4862e0 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536638 -0600	clone: from https://github.com/apache/dubbo.git
++0000000000000000000000000000000000000000 860ad02e1ed2cbe5842a611adfc7f1138c4862e0 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536646 -0600	clone: from https://github.com/apache/dubbo.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/.git/logs/refs/heads/3.2" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Patched-Version/.git/logs/refs/heads/3.2"
+index 570ad0e..f9861d5 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/.git/logs/refs/heads/3.2"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Patched-Version/.git/logs/refs/heads/3.2"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 8a1296f892a8acebf346914cd233becddd6418b1 Saahil Hiranandani <suc2@illinois.edu> 1709590008 -0600	clone: from https://github.com/apache/dubbo.git
-+0000000000000000000000000000000000000000 8a1296f892a8acebf346914cd233becddd6418b1 Saahil Hiranandani <suc2@illinois.edu> 1709590015 -0600	clone: from https://github.com/apache/dubbo.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index 41bd91a9..ff7932e7 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/logs/refs/remotes/origin/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+-0000000000000000000000000000000000000000 860ad02e1ed2cbe5842a611adfc7f1138c4862e0 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536638 -0600	clone: from https://github.com/apache/dubbo.git
++0000000000000000000000000000000000000000 860ad02e1ed2cbe5842a611adfc7f1138c4862e0 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536646 -0600	clone: from https://github.com/apache/dubbo.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/.git/logs/refs/remotes/origin/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
+index 570ad0e..f9861d5 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/.git/logs/refs/remotes/origin/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 8a1296f892a8acebf346914cd233becddd6418b1 Saahil Hiranandani <suc2@illinois.edu> 1709590008 -0600	clone: from https://github.com/apache/dubbo.git
-+0000000000000000000000000000000000000000 8a1296f892a8acebf346914cd233becddd6418b1 Saahil Hiranandani <suc2@illinois.edu> 1709590015 -0600	clone: from https://github.com/apache/dubbo.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/objects/pack/pack-302b947e92ad8718929296fcf4daf60f2d1de802.idx b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/objects/pack/pack-7c0586a86ef8549f87abc0c927819ddae0761700.idx
-similarity index 78%
-rename from C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/objects/pack/pack-302b947e92ad8718929296fcf4daf60f2d1de802.idx
-rename to C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/objects/pack/pack-7c0586a86ef8549f87abc0c927819ddae0761700.idx
-index 5bed1f2e..0e71576e 100644
-Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/objects/pack/pack-302b947e92ad8718929296fcf4daf60f2d1de802.idx and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/objects/pack/pack-7c0586a86ef8549f87abc0c927819ddae0761700.idx differ
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/objects/pack/pack-302b947e92ad8718929296fcf4daf60f2d1de802.pack b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/objects/pack/pack-7c0586a86ef8549f87abc0c927819ddae0761700.pack
-similarity index 94%
-rename from C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/objects/pack/pack-302b947e92ad8718929296fcf4daf60f2d1de802.pack
-rename to C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/objects/pack/pack-7c0586a86ef8549f87abc0c927819ddae0761700.pack
-index 5b393d5a..7ebf6f5e 100644
-Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/objects/pack/pack-302b947e92ad8718929296fcf4daf60f2d1de802.pack and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/objects/pack/pack-7c0586a86ef8549f87abc0c927819ddae0761700.pack differ
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/objects/pack/pack-302b947e92ad8718929296fcf4daf60f2d1de802.rev b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/objects/pack/pack-7c0586a86ef8549f87abc0c927819ddae0761700.rev
-similarity index 68%
-rename from C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/objects/pack/pack-302b947e92ad8718929296fcf4daf60f2d1de802.rev
-rename to C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/objects/pack/pack-7c0586a86ef8549f87abc0c927819ddae0761700.rev
-index 780b1353..a15fabe0 100644
-Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/.git/objects/pack/pack-302b947e92ad8718929296fcf4daf60f2d1de802.rev and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Patched-Version/.git/objects/pack/pack-7c0586a86ef8549f87abc0c927819ddae0761700.rev differ
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-metadata/dubbo-metadata-processor/src/main/resources/META-INF/dubbo/internal/org.apache.dubbo.metadata.annotation.processing.rest.ServiceRestMetadataResolver b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-metadata/dubbo-metadata-processor/src/main/resources/META-INF/dubbo/internal/org.apache.dubbo.metadata.annotation.processing.rest.ServiceRestMetadataResolver
+-0000000000000000000000000000000000000000 860ad02e1ed2cbe5842a611adfc7f1138c4862e0 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536638 -0600	clone: from https://github.com/apache/dubbo.git
++0000000000000000000000000000000000000000 860ad02e1ed2cbe5842a611adfc7f1138c4862e0 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536646 -0600	clone: from https://github.com/apache/dubbo.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/dubbo-config/dubbo-config-api/src/test/java/org/apache/dubbo/config/integration/multiple/servicediscoveryregistry/MultipleRegistryCenterServiceDiscoveryRegistryRegistryServiceListener.java" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/dubbo-config/dubbo-config-api/src/test/java/org/apache/dubbo/config/integration/multiple/servicediscoveryregistry/MultipleRegistryCenterServiceDiscoveryRegistryRegistryServiceListener.java"
 deleted file mode 100644
-index 9737e7d6..00000000
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-metadata/dubbo-metadata-processor/src/main/resources/META-INF/dubbo/internal/org.apache.dubbo.metadata.annotation.processing.rest.ServiceRestMetadataResolver
+index 2cd8e64..0000000
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/dubbo-config/dubbo-config-api/src/test/java/org/apache/dubbo/config/integration/multiple/servicediscoveryregistry/MultipleRegistryCenterServiceDiscoveryRegistryRegistryServiceListener.java"
 +++ /dev/null
-@@ -1,3 +0,0 @@
--default = org.apache.dubbo.metadata.annotation.processing.rest.DefaultServiceRestMetadataResolver
--jax-rs = org.apache.dubbo.metadata.annotation.processing.rest.jaxrs.JAXRSServiceRestMetadataResolver
--spring-webmvc = org.apache.dubbo.metadata.annotation.processing.rest.springmvc.SpringMvcServiceRestMetadataResolver
-\ No newline at end of file
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/actuator/src/main/java/org/apache/dubbo/spring/boot/actuate/autoconfigure/DubboEndpointMetadataAutoConfiguration.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/actuator/src/main/java/org/apache/dubbo/spring/boot/actuate/autoconfigure/DubboEndpointMetadataAutoConfiguration.java
-deleted file mode 100644
-index a4b2a101..00000000
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/actuator/src/main/java/org/apache/dubbo/spring/boot/actuate/autoconfigure/DubboEndpointMetadataAutoConfiguration.java
-+++ /dev/null
-@@ -1,43 +0,0 @@
+@@ -1,104 +0,0 @@
 -/*
 - * Licensed to the Apache Software Foundation (ASF) under one or more
 - * contributor license agreements.  See the NOTICE file distributed with
@@ -69,95 +41,191 @@ index a4b2a101..00000000
 - * See the License for the specific language governing permissions and
 - * limitations under the License.
 - */
--package org.apache.dubbo.spring.boot.actuate.autoconfigure;
+-package org.apache.dubbo.config.integration.multiple.servicediscoveryregistry;
 -
--import org.apache.dubbo.spring.boot.actuate.endpoint.metadata.AbstractDubboMetadata;
+-import org.apache.dubbo.common.URL;
+-import org.apache.dubbo.common.extension.Activate;
+-import org.apache.dubbo.registry.Registry;
+-import org.apache.dubbo.registry.RegistryServiceListener;
+-import org.apache.dubbo.registry.client.ServiceDiscoveryRegistry;
+-
+-import static org.apache.dubbo.config.integration.Constants.MULTIPLE_CONFIG_CENTER_SERVICE_DISCOVERY_REGISTRY;
+-
+-@Activate(value = MULTIPLE_CONFIG_CENTER_SERVICE_DISCOVERY_REGISTRY)
+-public class MultipleRegistryCenterServiceDiscoveryRegistryRegistryServiceListener implements RegistryServiceListener {
+-
+-    private ServiceDiscoveryRegistryStorage storage = new ServiceDiscoveryRegistryStorage();
+-
+-    /**
+-     * Create an {@link ServiceDiscoveryRegistryInfoWrapper} instance.
+-     */
+-    private ServiceDiscoveryRegistryInfoWrapper createServiceDiscoveryRegistryInfoWrapper(
+-            ServiceDiscoveryRegistry serviceDiscoveryRegistry) {
+-        URL url = serviceDiscoveryRegistry.getUrl();
+-        String host = url.getHost();
+-        int port = url.getPort();
+-        ServiceDiscoveryRegistryInfoWrapper serviceDiscoveryRegistryInfoWrapper =
+-                new ServiceDiscoveryRegistryInfoWrapper();
+-        serviceDiscoveryRegistryInfoWrapper.setHost(host);
+-        serviceDiscoveryRegistryInfoWrapper.setPort(port);
+-        serviceDiscoveryRegistryInfoWrapper.setServiceDiscoveryRegistry(serviceDiscoveryRegistry);
+-        serviceDiscoveryRegistryInfoWrapper.setRegistered(true);
+-        return serviceDiscoveryRegistryInfoWrapper;
+-    }
+-
+-    /**
+-     * Checks if the registry is checked application
+-     */
+-    private boolean isCheckedApplication(Registry registry) {
+-        return registry.getUrl()
+-                .getApplication()
+-                .equals(MultipleRegistryCenterServiceDiscoveryRegistryIntegrationTest.PROVIDER_APPLICATION_NAME);
+-    }
+-
+-    public void onRegister(URL url, Registry registry) {
+-        if (registry instanceof ServiceDiscoveryRegistry && isCheckedApplication(registry)) {
+-            ServiceDiscoveryRegistry serviceDiscoveryRegistry = (ServiceDiscoveryRegistry) registry;
+-            String host = serviceDiscoveryRegistry.getUrl().getHost();
+-            int port = serviceDiscoveryRegistry.getUrl().getPort();
+-            if (!storage.contains(host, port)) {
+-                storage.put(host, port, createServiceDiscoveryRegistryInfoWrapper(serviceDiscoveryRegistry));
+-            }
+-            storage.get(host, port).setRegistered(true);
+-        }
+-    }
+-
+-    public void onUnregister(URL url, Registry registry) {
+-        if (registry instanceof ServiceDiscoveryRegistry && isCheckedApplication(registry)) {
+-            String host = registry.getUrl().getHost();
+-            int port = registry.getUrl().getPort();
+-            storage.get(host, port).setRegistered(false);
+-        }
+-    }
+-
+-    public void onSubscribe(URL url, Registry registry) {
+-        if (registry instanceof ServiceDiscoveryRegistry && isCheckedApplication(registry)) {
+-            ServiceDiscoveryRegistry serviceDiscoveryRegistry = (ServiceDiscoveryRegistry) registry;
+-            String host = serviceDiscoveryRegistry.getUrl().getHost();
+-            int port = serviceDiscoveryRegistry.getUrl().getPort();
+-            if (!storage.contains(host, port)) {
+-                storage.put(host, port, createServiceDiscoveryRegistryInfoWrapper(serviceDiscoveryRegistry));
+-            }
+-            storage.get(host, port).setSubscribed(true);
+-        }
+-    }
+-
+-    public void onUnsubscribe(URL url, Registry registry) {
+-        if (registry instanceof ServiceDiscoveryRegistry && isCheckedApplication(registry)) {
+-            String host = registry.getUrl().getHost();
+-            int port = registry.getUrl().getPort();
+-            storage.get(host, port).setSubscribed(false);
+-        }
+-    }
+-
+-    /**
+-     * Return the stored {@link ServiceDiscoveryRegistryInfoWrapper} instances.
+-     */
+-    public ServiceDiscoveryRegistryStorage getStorage() {
+-        return storage;
+-    }
+-}
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/dubbo-spring-boot/dubbo-spring-boot-starters/observability/autoconfigure/src/main/java/org/apache/dubbo/spring/boot/observability/autoconfigure/DubboMicrometerTracingAutoConfiguration.java" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/dubbo-spring-boot/dubbo-spring-boot-starters/observability/autoconfigure/src/main/java/org/apache/dubbo/spring/boot/observability/autoconfigure/DubboMicrometerTracingAutoConfiguration.java"
+deleted file mode 100644
+index 691dea9..0000000
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/dubbo-spring-boot/dubbo-spring-boot-starters/observability/autoconfigure/src/main/java/org/apache/dubbo/spring/boot/observability/autoconfigure/DubboMicrometerTracingAutoConfiguration.java"
++++ /dev/null
+@@ -1,85 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package org.apache.dubbo.spring.boot.observability.autoconfigure;
+-
+-import org.apache.dubbo.spring.boot.observability.autoconfigure.annotation.ConditionalOnDubboTracingEnable;
 -
 -import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 -import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 -import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
--import org.springframework.context.annotation.ComponentScan;
--import org.springframework.context.annotation.Configuration;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.core.annotation.Order;
 -
 -import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_PREFIX;
 -
 -/**
-- * Dubbo Endpoints Metadata Auto-{@link Configuration}
+- * copy from {@link org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration}
+- * this class is available starting from Boot 3.0. It's not available if you're using Boot < 3.0
 - */
 -@ConditionalOnProperty(prefix = DUBBO_PREFIX, name = "enabled", matchIfMissing = true)
+-@ConditionalOnDubboTracingEnable
 -@ConditionalOnClass(
--        name = {"org.springframework.boot.actuate.health.Health" // If spring-boot-actuator is present
--        })
--@Configuration
--@AutoConfigureAfter(
 -        name = {
--            "org.apache.dubbo.spring.boot.autoconfigure.DubboAutoConfiguration",
--            "org.apache.dubbo.spring.boot.autoconfigure.DubboRelaxedBindingAutoConfiguration"
+-            "io.micrometer.observation.Observation",
+-            "io.micrometer.tracing.Tracer",
+-            "io.micrometer.tracing.propagation.Propagator"
 -        })
--@ComponentScan(basePackageClasses = AbstractDubboMetadata.class)
--public class DubboEndpointMetadataAutoConfiguration {}
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/actuator/src/main/java/org/apache/dubbo/spring/boot/actuate/autoconfigure/DubboHealthIndicatorAutoConfiguration.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/actuator/src/main/java/org/apache/dubbo/spring/boot/actuate/autoconfigure/DubboHealthIndicatorAutoConfiguration.java
-deleted file mode 100644
-index 50d31bc0..00000000
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/actuator/src/main/java/org/apache/dubbo/spring/boot/actuate/autoconfigure/DubboHealthIndicatorAutoConfiguration.java
-+++ /dev/null
-@@ -1,50 +0,0 @@
--/*
-- * Licensed to the Apache Software Foundation (ASF) under one or more
-- * contributor license agreements.  See the NOTICE file distributed with
-- * this work for additional information regarding copyright ownership.
-- * The ASF licenses this file to You under the Apache License, Version 2.0
-- * (the "License"); you may not use this file except in compliance with
-- * the License.  You may obtain a copy of the License at
-- *
-- *     http://www.apache.org/licenses/LICENSE-2.0
-- *
-- * Unless required by applicable law or agreed to in writing, software
-- * distributed under the License is distributed on an "AS IS" BASIS,
-- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-- * See the License for the specific language governing permissions and
-- * limitations under the License.
-- */
--package org.apache.dubbo.spring.boot.actuate.autoconfigure;
+-@AutoConfigureAfter(name = "org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration")
+-public class DubboMicrometerTracingAutoConfiguration {
 -
--import org.apache.dubbo.spring.boot.actuate.health.DubboHealthIndicator;
--import org.apache.dubbo.spring.boot.actuate.health.DubboHealthIndicatorProperties;
+-    /**
+-     * {@code @Order} value of
+-     * {@link #propagatingReceiverTracingObservationHandler(io.micrometer.tracing.Tracer, io.micrometer.tracing.propagation.Propagator)}.
+-     */
+-    public static final int RECEIVER_TRACING_OBSERVATION_HANDLER_ORDER = 1000;
 -
--import org.springframework.boot.actuate.health.HealthIndicator;
--import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
--import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
--import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
--import org.springframework.boot.context.properties.EnableConfigurationProperties;
--import org.springframework.context.annotation.Bean;
--import org.springframework.context.annotation.Configuration;
--
--/**
-- * Dubbo {@link DubboHealthIndicator} Auto Configuration
-- *
-- * @see HealthIndicator
-- * @since 2.7.0
-- */
--@Configuration
--@ConditionalOnClass(name = {"org.springframework.boot.actuate.health.Health"})
--@ConditionalOnProperty(
--        name = {"management.health.dubbo.enabled", "dubbo.enabled"},
--        matchIfMissing = true,
--        havingValue = "true")
--@EnableConfigurationProperties(DubboHealthIndicatorProperties.class)
--public class DubboHealthIndicatorAutoConfiguration {
+-    /**
+-     * {@code @Order} value of
+-     * {@link #propagatingSenderTracingObservationHandler(io.micrometer.tracing.Tracer, io.micrometer.tracing.propagation.Propagator)}.
+-     */
+-    public static final int SENDER_TRACING_OBSERVATION_HANDLER_ORDER = 2000;
 -
 -    @Bean
 -    @ConditionalOnMissingBean
--    public DubboHealthIndicator dubboHealthIndicator() {
--        return new DubboHealthIndicator();
+-    @ConditionalOnBean(io.micrometer.tracing.Tracer.class)
+-    public io.micrometer.tracing.handler.DefaultTracingObservationHandler defaultTracingObservationHandler(
+-            io.micrometer.tracing.Tracer tracer) {
+-        return new io.micrometer.tracing.handler.DefaultTracingObservationHandler(tracer);
+-    }
+-
+-    @Bean
+-    @ConditionalOnMissingBean
+-    @ConditionalOnBean({io.micrometer.tracing.Tracer.class, io.micrometer.tracing.propagation.Propagator.class})
+-    @Order(SENDER_TRACING_OBSERVATION_HANDLER_ORDER)
+-    public io.micrometer.tracing.handler.PropagatingSenderTracingObservationHandler<?>
+-            propagatingSenderTracingObservationHandler(
+-                    io.micrometer.tracing.Tracer tracer, io.micrometer.tracing.propagation.Propagator propagator) {
+-        return new io.micrometer.tracing.handler.PropagatingSenderTracingObservationHandler<>(tracer, propagator);
+-    }
+-
+-    @Bean
+-    @ConditionalOnMissingBean
+-    @ConditionalOnBean({io.micrometer.tracing.Tracer.class, io.micrometer.tracing.propagation.Propagator.class})
+-    @Order(RECEIVER_TRACING_OBSERVATION_HANDLER_ORDER)
+-    public io.micrometer.tracing.handler.PropagatingReceiverTracingObservationHandler<?>
+-            propagatingReceiverTracingObservationHandler(
+-                    io.micrometer.tracing.Tracer tracer, io.micrometer.tracing.propagation.Propagator propagator) {
+-        return new io.micrometer.tracing.handler.PropagatingReceiverTracingObservationHandler<>(tracer, propagator);
 -    }
 -}
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/autoconfigure/src/test/java/org/apache/dubbo/spring/boot/autoconfigure/DubboAutoConfigurationOnSingleConfigTest.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/autoconfigure/src/test/java/org/apache/dubbo/spring/boot/autoconfigure/DubboAutoConfigurationOnSingleConfigTest.java
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/dubbo-spring-boot/dubbo-spring-boot-starters/observability/autoconfigure/src/main/java/org/apache/dubbo/spring/boot/observability/autoconfigure/exporter/zipkin/ZipkinAutoConfiguration.java" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/dubbo-spring-boot/dubbo-spring-boot-starters/observability/autoconfigure/src/main/java/org/apache/dubbo/spring/boot/observability/autoconfigure/exporter/zipkin/ZipkinAutoConfiguration.java"
 deleted file mode 100644
-index 214b0cec..00000000
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/autoconfigure/src/test/java/org/apache/dubbo/spring/boot/autoconfigure/DubboAutoConfigurationOnSingleConfigTest.java
+index d4dfdf5..0000000
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\dubbo-416671625\\Buggy-version/dubbo-spring-boot/dubbo-spring-boot-starters/observability/autoconfigure/src/main/java/org/apache/dubbo/spring/boot/observability/autoconfigure/exporter/zipkin/ZipkinAutoConfiguration.java"
 +++ /dev/null
-@@ -1,111 +0,0 @@
+@@ -1,70 +0,0 @@
 -/*
 - * Licensed to the Apache Software Foundation (ASF) under one or more
 - * contributor license agreements.  See the NOTICE file distributed with
@@ -174,201 +242,57 @@ index 214b0cec..00000000
 - * See the License for the specific language governing permissions and
 - * limitations under the License.
 - */
--package org.apache.dubbo.spring.boot.autoconfigure;
+-package org.apache.dubbo.spring.boot.observability.autoconfigure.exporter.zipkin;
 -
--import org.apache.dubbo.config.ApplicationConfig;
--import org.apache.dubbo.config.ConsumerConfig;
--import org.apache.dubbo.config.ModuleConfig;
--import org.apache.dubbo.config.MonitorConfig;
--import org.apache.dubbo.config.ProtocolConfig;
--import org.apache.dubbo.config.ProviderConfig;
--import org.apache.dubbo.config.RegistryConfig;
--import org.apache.dubbo.config.bootstrap.DubboBootstrap;
+-import org.apache.dubbo.spring.boot.observability.autoconfigure.annotation.ConditionalOnDubboTracingEnable;
+-import org.apache.dubbo.spring.boot.observability.autoconfigure.exporter.zipkin.ZipkinConfigurations.BraveConfiguration;
+-import org.apache.dubbo.spring.boot.observability.autoconfigure.exporter.zipkin.ZipkinConfigurations.OpenTelemetryConfiguration;
+-import org.apache.dubbo.spring.boot.observability.autoconfigure.exporter.zipkin.ZipkinConfigurations.ReporterConfiguration;
+-import org.apache.dubbo.spring.boot.observability.autoconfigure.exporter.zipkin.ZipkinConfigurations.SenderConfiguration;
 -
--import org.junit.After;
--import org.junit.Assert;
--import org.junit.Before;
--import org.junit.Test;
--import org.junit.runner.RunWith;
--import org.springframework.beans.factory.annotation.Autowired;
+-import org.springframework.boot.autoconfigure.AutoConfiguration;
 -import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
--import org.springframework.boot.test.context.SpringBootTest;
--import org.springframework.context.annotation.ComponentScan;
--import org.springframework.test.context.TestPropertySource;
--import org.springframework.test.context.junit4.SpringRunner;
+-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+-import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
+-import org.springframework.context.annotation.Bean;
+-import org.springframework.context.annotation.Import;
+-import zipkin2.Span;
+-import zipkin2.codec.BytesEncoder;
+-import zipkin2.codec.SpanBytesEncoder;
+-import zipkin2.reporter.Sender;
+-
+-import static org.apache.dubbo.spring.boot.observability.autoconfigure.ObservabilityUtils.DUBBO_TRACING_ZIPKIN_CONFIG_PREFIX;
+-import static org.apache.dubbo.spring.boot.util.DubboUtils.DUBBO_PREFIX;
 -
 -/**
-- * {@link DubboAutoConfiguration} Test On single Dubbo Configuration
+- * {@link EnableAutoConfiguration Auto-configuration} for Zipkin.
+- * <p>
+- * It uses imports on {@link ZipkinConfigurations} to guarantee the correct configuration ordering.
+- * Create Zipkin sender and exporter when you are using Boot < 3.0 or you are not using spring-boot-starter-actuator.
+- * When you use SpringBoot 3.*, priority should be given to loading S3 related configurations. Dubbo related zipkin configurations are invalid.
 - *
-- * @since 2.7.0
+- * @since 3.2.1
 - */
--@RunWith(SpringRunner.class)
--@TestPropertySource(
--        properties = {
--            "dubbo.application.name = dubbo-demo-single-application",
--            "dubbo.module.name = dubbo-demo-module",
--            "dubbo.registry.address = test://192.168.99.100:32770",
--            "dubbo.protocol.name=dubbo",
--            "dubbo.protocol.port=20880",
--            "dubbo.monitor.address=test://127.0.0.1:32770",
--            "dubbo.provider.host=127.0.0.1",
--            "dubbo.consumer.client=netty"
--        })
--@SpringBootTest(classes = {DubboAutoConfigurationOnSingleConfigTest.class})
--@EnableAutoConfiguration
--@ComponentScan
--public class DubboAutoConfigurationOnSingleConfigTest {
+-@ConditionalOnProperty(prefix = DUBBO_PREFIX, name = "enabled", matchIfMissing = true)
+-@AutoConfiguration(
+-        after = RestTemplateAutoConfiguration.class,
+-        afterName = "org.springframework.boot.actuate.autoconfigure.tracing.zipkin")
+-@ConditionalOnClass(Sender.class)
+-@Import({
+-    SenderConfiguration.class,
+-    ReporterConfiguration.class,
+-    BraveConfiguration.class,
+-    OpenTelemetryConfiguration.class
+-})
+-@ConditionalOnDubboTracingEnable
+-public class ZipkinAutoConfiguration {
 -
--    @Autowired
--    private ApplicationConfig applicationConfig;
--
--    @Autowired
--    private ModuleConfig moduleConfig;
--
--    @Autowired
--    private RegistryConfig registryConfig;
--
--    @Autowired
--    private MonitorConfig monitorConfig;
--
--    @Autowired
--    private ProviderConfig providerConfig;
--
--    @Autowired
--    private ConsumerConfig consumerConfig;
--
--    @Autowired
--    private ProtocolConfig protocolConfig;
--
--    @Before
--    public void init() {
--        DubboBootstrap.reset();
--    }
--
--    @After
--    public void destroy() {
--        DubboBootstrap.reset();
--    }
--
--    @Test
--    public void testSingleConfig() {
--        // application
--        Assert.assertEquals("dubbo-demo-single-application", applicationConfig.getName());
--        // module
--        Assert.assertEquals("dubbo-demo-module", moduleConfig.getName());
--        // registry
--        Assert.assertEquals("test://192.168.99.100:32770", registryConfig.getAddress());
--        // monitor
--        Assert.assertEquals("test://127.0.0.1:32770", monitorConfig.getAddress());
--        // protocol
--        Assert.assertEquals("dubbo", protocolConfig.getName());
--        Assert.assertEquals(Integer.valueOf(20880), protocolConfig.getPort());
--        // consumer
--        Assert.assertEquals("netty", consumerConfig.getClient());
--        // provider
--        Assert.assertEquals("127.0.0.1", providerConfig.getHost());
--    }
--}
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/autoconfigure/src/test/java/org/apache/dubbo/spring/boot/env/DubboDefaultPropertiesEnvironmentPostProcessorTest.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/autoconfigure/src/test/java/org/apache/dubbo/spring/boot/env/DubboDefaultPropertiesEnvironmentPostProcessorTest.java
-deleted file mode 100644
-index b17c1af6..00000000
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/dubbo-416671625/Buggy-version/dubbo-spring-boot/dubbo-spring-boot-compatible/autoconfigure/src/test/java/org/apache/dubbo/spring/boot/env/DubboDefaultPropertiesEnvironmentPostProcessorTest.java
-+++ /dev/null
-@@ -1,97 +0,0 @@
--/*
-- * Licensed to the Apache Software Foundation (ASF) under one or more
-- * contributor license agreements.  See the NOTICE file distributed with
-- * this work for additional information regarding copyright ownership.
-- * The ASF licenses this file to You under the Apache License, Version 2.0
-- * (the "License"); you may not use this file except in compliance with
-- * the License.  You may obtain a copy of the License at
-- *
-- *     http://www.apache.org/licenses/LICENSE-2.0
-- *
-- * Unless required by applicable law or agreed to in writing, software
-- * distributed under the License is distributed on an "AS IS" BASIS,
-- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-- * See the License for the specific language governing permissions and
-- * limitations under the License.
-- */
--package org.apache.dubbo.spring.boot.env;
--
--import java.util.HashMap;
--
--import org.junit.Assert;
--import org.junit.Test;
--import org.springframework.boot.SpringApplication;
--import org.springframework.core.Ordered;
--import org.springframework.core.env.MapPropertySource;
--import org.springframework.core.env.MutablePropertySources;
--import org.springframework.core.env.PropertySource;
--import org.springframework.mock.env.MockEnvironment;
--
--/**
-- * {@link DubboDefaultPropertiesEnvironmentPostProcessor} Test
-- */
--public class DubboDefaultPropertiesEnvironmentPostProcessorTest {
--
--    private DubboDefaultPropertiesEnvironmentPostProcessor instance =
--            new DubboDefaultPropertiesEnvironmentPostProcessor();
--
--    private SpringApplication springApplication = new SpringApplication();
--
--    @Test
--    public void testOrder() {
--        Assert.assertEquals(Ordered.LOWEST_PRECEDENCE, instance.getOrder());
--    }
--
--    @Test
--    public void testPostProcessEnvironment() {
--        MockEnvironment environment = new MockEnvironment();
--        // Case 1 : Not Any property
--        instance.postProcessEnvironment(environment, springApplication);
--        // Get PropertySources
--        MutablePropertySources propertySources = environment.getPropertySources();
--        // Nothing to change
--        PropertySource defaultPropertySource = propertySources.get("defaultProperties");
--        Assert.assertNotNull(defaultPropertySource);
--        Assert.assertEquals("true", defaultPropertySource.getProperty("dubbo.config.multiple"));
--        // Assert.assertEquals("true", defaultPropertySource.getProperty("dubbo.application.qos-enable"));
--
--        // Case 2 :  Only set property "spring.application.name"
--        environment.setProperty("spring.application.name", "demo-dubbo-application");
--        instance.postProcessEnvironment(environment, springApplication);
--        defaultPropertySource = propertySources.get("defaultProperties");
--        Object dubboApplicationName = defaultPropertySource.getProperty("dubbo.application.name");
--        Assert.assertEquals("demo-dubbo-application", dubboApplicationName);
--
--        // Case 3 : Only set property "dubbo.application.name"
--        // Reset environment
--        environment = new MockEnvironment();
--        propertySources = environment.getPropertySources();
--        environment.setProperty("dubbo.application.name", "demo-dubbo-application");
--        instance.postProcessEnvironment(environment, springApplication);
--        defaultPropertySource = propertySources.get("defaultProperties");
--        Assert.assertNotNull(defaultPropertySource);
--        dubboApplicationName = environment.getProperty("dubbo.application.name");
--        Assert.assertEquals("demo-dubbo-application", dubboApplicationName);
--
--        // Case 4 : If "defaultProperties" PropertySource is present in PropertySources
--        // Reset environment
--        environment = new MockEnvironment();
--        propertySources = environment.getPropertySources();
--        propertySources.addLast(new MapPropertySource("defaultProperties", new HashMap<String, Object>()));
--        environment.setProperty("spring.application.name", "demo-dubbo-application");
--        instance.postProcessEnvironment(environment, springApplication);
--        defaultPropertySource = propertySources.get("defaultProperties");
--        dubboApplicationName = defaultPropertySource.getProperty("dubbo.application.name");
--        Assert.assertEquals("demo-dubbo-application", dubboApplicationName);
--
--        // Case 5 : Reset dubbo.config.multiple and dubbo.application.qos-enable
--        environment = new MockEnvironment();
--        propertySources = environment.getPropertySources();
--        propertySources.addLast(new MapPropertySource("defaultProperties", new HashMap<String, Object>()));
--        environment.setProperty("dubbo.config.multiple", "false");
--        environment.setProperty("dubbo.application.qos-enable", "false");
--        instance.postProcessEnvironment(environment, springApplication);
--        Assert.assertEquals("false", environment.getProperty("dubbo.config.multiple"));
--        Assert.assertEquals("false", environment.getProperty("dubbo.application.qos-enable"));
+-    @Bean
+-    @ConditionalOnProperty(prefix = DUBBO_TRACING_ZIPKIN_CONFIG_PREFIX, name = "endpoint")
+-    @ConditionalOnMissingBean
+-    public BytesEncoder<Span> spanBytesEncoder() {
+-        return SpanBytesEncoder.JSON_V2;
 -    }
 -}

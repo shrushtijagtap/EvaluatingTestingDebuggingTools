@@ -1,40 +1,40 @@
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/.git/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/.git/HEAD
-index 6c7e6cf9..b1898e50 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/.git/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/.git/HEAD
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/.git/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/.git/HEAD"
+index 6c7e6cf..b1898e5 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/.git/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/.git/HEAD"
 @@ -1 +1 @@
 -9119545c430ed7119ad0b4e48cefacbeef41814c
 +af77c7c97f54fba8ccc68b088a6f4566ce0c3db0
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/.git/index b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/.git/index
-index 3f00fc6d..c0e733b0 100644
-Binary files a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/.git/index and b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/.git/index differ
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/.git/logs/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/.git/logs/HEAD
-index c442a68c..5e883b77 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/.git/logs/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/.git/logs/HEAD
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/.git/index" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/.git/index"
+index d65a1be..c00790f 100644
+Binary files "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/.git/index" and "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/.git/index" differ
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/.git/logs/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/.git/logs/HEAD"
+index 66aa8c7..efb6f32 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/.git/logs/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/.git/logs/HEAD"
 @@ -1,2 +1,2 @@
--0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <suc2@illinois.edu> 1709590345 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
--d0dffa064300cc9a8c32a60b1077e884e911bb05 9119545c430ed7119ad0b4e48cefacbeef41814c Saahil Hiranandani <suc2@illinois.edu> 1709590345 -0600	checkout: moving from main to 9119545c430ed7119ad0b4e48cefacbeef41814c
-+0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <suc2@illinois.edu> 1709590346 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
-+d0dffa064300cc9a8c32a60b1077e884e911bb05 af77c7c97f54fba8ccc68b088a6f4566ce0c3db0 Saahil Hiranandani <suc2@illinois.edu> 1709590346 -0600	checkout: moving from main to af77c7c97f54fba8ccc68b088a6f4566ce0c3db0
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/.git/logs/refs/heads/main b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/.git/logs/refs/heads/main
-index f55e371d..eb0db9c2 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/.git/logs/refs/heads/main
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/.git/logs/refs/heads/main
+-0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536982 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
+-d0dffa064300cc9a8c32a60b1077e884e911bb05 9119545c430ed7119ad0b4e48cefacbeef41814c Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536982 -0600	checkout: moving from main to 9119545c430ed7119ad0b4e48cefacbeef41814c
++0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536983 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
++d0dffa064300cc9a8c32a60b1077e884e911bb05 af77c7c97f54fba8ccc68b088a6f4566ce0c3db0 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536983 -0600	checkout: moving from main to af77c7c97f54fba8ccc68b088a6f4566ce0c3db0
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/.git/logs/refs/heads/main" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/.git/logs/refs/heads/main"
+index 16d0094..9d7214a 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/.git/logs/refs/heads/main"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/.git/logs/refs/heads/main"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <suc2@illinois.edu> 1709590345 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
-+0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <suc2@illinois.edu> 1709590346 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/.git/logs/refs/remotes/origin/HEAD
-index f55e371d..eb0db9c2 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/.git/logs/refs/remotes/origin/HEAD
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+-0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536982 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
++0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536983 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/.git/logs/refs/remotes/origin/HEAD" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
+index 16d0094..9d7214a 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/.git/logs/refs/remotes/origin/HEAD"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/.git/logs/refs/remotes/origin/HEAD"
 @@ -1 +1 @@
--0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <suc2@illinois.edu> 1709590345 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
-+0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <suc2@illinois.edu> 1709590346 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
-diff --git a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/2-0-data-structures-and-algorithms/2-2-4-linked-list/src/main/java/com/bobocode/cs/LinkedList.java b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/2-0-data-structures-and-algorithms/2-2-4-linked-list/src/main/java/com/bobocode/cs/LinkedList.java
-index 4933e221..908d98ee 100644
---- a/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Buggy-version/2-0-data-structures-and-algorithms/2-2-4-linked-list/src/main/java/com/bobocode/cs/LinkedList.java
-+++ b/C:/Users/hiran/OneDrive/Desktop/bugs/CS527-Project/Bugs/BugSwarm/projects-java-fundamentals-exercises-7068728014/Patched-Version/2-0-data-structures-and-algorithms/2-2-4-linked-list/src/main/java/com/bobocode/cs/LinkedList.java
+-0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536982 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
++0000000000000000000000000000000000000000 d0dffa064300cc9a8c32a60b1077e884e911bb05 Saahil Hiranandani <hiran@Batcomputer.(none)> 1709536983 -0600	clone: from https://github.com/bobocode-projects/java-fundamentals-exercises.git
+diff --git "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/2-0-data-structures-and-algorithms/2-2-4-linked-list/src/main/java/com/bobocode/cs/LinkedList.java" "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/2-0-data-structures-and-algorithms/2-2-4-linked-list/src/main/java/com/bobocode/cs/LinkedList.java"
+index 4933e22..908d98e 100644
+--- "a/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Buggy-version/2-0-data-structures-and-algorithms/2-2-4-linked-list/src/main/java/com/bobocode/cs/LinkedList.java"
++++ "b/C:\\Users\\hiran\\OneDrive\\Desktop\\bugswarm\\projects-java-fundamentals-exercises-7068728014\\Patched-Version/2-0-data-structures-and-algorithms/2-2-4-linked-list/src/main/java/com/bobocode/cs/LinkedList.java"
 @@ -172,7 +172,7 @@ public class LinkedList<T> implements List<T> {
      @Override
      public T remove(int index) {
