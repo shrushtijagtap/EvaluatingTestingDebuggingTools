@@ -1,2 +1,2 @@
-java_testcases.junit.FIND_IN_SORTED_TEST.test_1
-java_testcases.junit.FIND_IN_SORTED_TEST.test_6
+FIND_IN_SORTED_TEST.test_1
+FIND_IN_SORTED_TEST.test_6

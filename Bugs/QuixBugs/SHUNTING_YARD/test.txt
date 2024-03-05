@@ -1,4 +1,4 @@
-java_testcases.junit.SHUNTING_YARD_TEST.test_0
-java_testcases.junit.SHUNTING_YARD_TEST.test_1
-java_testcases.junit.SHUNTING_YARD_TEST.test_2
-java_testcases.junit.SHUNTING_YARD_TEST.test_3
+SHUNTING_YARD_TEST.test_0
+SHUNTING_YARD_TEST.test_1
+SHUNTING_YARD_TEST.test_2
+SHUNTING_YARD_TEST.test_3

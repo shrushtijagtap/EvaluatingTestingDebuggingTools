@@ -1,5 +1,21 @@
 # Quix Dataset
 
+## Milestone 2
+For this milestone, we have randomly selected 20 java programs from the QuixBugs dataset. The QuixBugs folder contains folder for each program which in return has 4 parts: 
+1. Folder Buggy-Version: Contains the Buggy Java code.
+2. Folder Patched-Version: Contains the Patched/Fixed Java code.
+3. Diff: This file contains the diff between the buggy and patched files.
+4. test.txt: This file contains the list of all testcases that fail on the Buggy code.
+
+To run tests, the following command is used.
+Commands to test Java programs:
+```sh
+gradle test --tests testclass.testname #Command to run tests on all buggy Java programs
+```
+
+We then have worked on the benchmarking and calculated metrics such as CChange, MChange, LChange, LD, CB, CP, CC, CodeBLEU. The results for these metrics calculated for each bug is stored in results/benchmark_results.json .
+
+## Milestone 1
 ## Explanation
 QuixBugs is a program-repair tool which tries to work and find bugs with multi-lingual support - Python and Java. QuixBugs conatains 40 programs, each program containing only one line bugs. QuixBug also introduces test case which are common to both the languages. The repository itself contains buggy programs, fixed programs and common testcases for Python and Java. 
 

@@ -1,1 +1,1 @@
-java_testcases.junit.DEPTH_FIRST_SEARCH_TEST.test5
+DEPTH_FIRST_SEARCH_TEST.test5

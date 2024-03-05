@@ -1,1 +1,1 @@
-java_testcases.junit.NEXT_PALINDROME_TEST.test_4
+NEXT_PALINDROME_TEST.test_4

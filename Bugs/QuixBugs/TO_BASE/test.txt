@@ -1,7 +1,7 @@
-java_testcases.junit.TO_BASE_TEST.test_0
-java_testcases.junit.TO_BASE_TEST.test_1
-java_testcases.junit.TO_BASE_TEST.test_2
-java_testcases.junit.TO_BASE_TEST.test_3
-java_testcases.junit.TO_BASE_TEST.test_4
-java_testcases.junit.TO_BASE_TEST.test_5
-java_testcases.junit.TO_BASE_TEST.test_6
+TO_BASE_TEST.test_0
+TO_BASE_TEST.test_1
+TO_BASE_TEST.test_2
+TO_BASE_TEST.test_3
+TO_BASE_TEST.test_4
+TO_BASE_TEST.test_5
+TO_BASE_TEST.test_6

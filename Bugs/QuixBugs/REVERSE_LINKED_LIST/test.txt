@@ -1,2 +1,2 @@
-java_testcases.junit.REVERSE_LINKED_LIST_TEST.test1
-java_testcases.junit.REVERSE_LINKED_LIST_TEST.test2
+REVERSE_LINKED_LIST_TEST.test1
+REVERSE_LINKED_LIST_TEST.test2
