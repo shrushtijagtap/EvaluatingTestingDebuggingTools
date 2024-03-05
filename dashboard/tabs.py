@@ -26,6 +26,7 @@ def load_json_data(file_path) -> list:
 
     # If file does not exist, return empty list
     if not os.path.exists(file_path):
+        print(f"File does not exist: {file_path}")
         return []
 
     with open(file_path, 'r') as file:
