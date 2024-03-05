@@ -170,7 +170,7 @@ def process_bug(bug_dir, option=None):
 
 
 if __name__ == "__main__":
-    parent_dir = "/Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Bugs/Defects4J/"
+    parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__)))
     dir_paths = get_subdirectories(parent_dir)
 
     count = 1
