@@ -1,0 +1,21 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-9362926481/Buggy-version/core/src/test/java/com/alibaba/fastjson2/annotation/JSONType_serializeFilters.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-9362926481/Patched-Version/core/src/test/java/com/alibaba/fastjson2/annotation/JSONType_serializeFilters.java
+index 80925d48f..4cfd5fb5d 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-9362926481/Buggy-version/core/src/test/java/com/alibaba/fastjson2/annotation/JSONType_serializeFilters.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-9362926481/Patched-Version/core/src/test/java/com/alibaba/fastjson2/annotation/JSONType_serializeFilters.java
+@@ -11,14 +11,14 @@ public class JSONType_serializeFilters {
+     public void test_for_jsonField() {
+         Model m = new Model();
+         String json = JSON.toJSONString(m);
+-        assertEquals("{\"id\":0}", json);
++        assertEquals("{\"id\":123}", json);
+     }
+ 
+     public static class MyValueFilter
+             implements ValueFilter {
+         @Override
+         public Object apply(Object object, String name, Object value) {
+-            if (name.equals("id") && value == null) {
++            if (name.equals("id") && ((Number) value).intValue() == 0) {
+                 return 123;
+             }
+ 
