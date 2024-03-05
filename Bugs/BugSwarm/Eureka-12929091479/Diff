@@ -1,0 +1,13 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/src/eureka/S3_data_reduction/s3_reduce.py b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/src/eureka/S3_data_reduction/s3_reduce.py
+index 76c571c4..d8a320e3 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Buggy-version/src/eureka/S3_data_reduction/s3_reduce.py
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Eureka-12929091479/Patched-Version/src/eureka/S3_data_reduction/s3_reduce.py
+@@ -546,7 +546,7 @@ def reduce(eventlabel, ecf_path=None, s2_meta=None, input_meta=None):
+                     meta.save_fluxdata = True
+ 
+                 # plot tilt events
+-                if meta.isplots_S3 >= 5 and meta.inst == 'nircam' and
++                if meta.isplots_S3 >= 5 and meta.inst == 'nircam' and \
+                    meta.photometry:
+                     refrence_tilt_frame = \
+                         plots_s3.tilt_events(meta, data, log, m,

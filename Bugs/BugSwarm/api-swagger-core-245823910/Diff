@@ -1,0 +1,30 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java
+index bccd8c9ab..51e9088a6 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java
+@@ -16,6 +16,7 @@
+ 
+ package io.swagger.oas.models;
+ 
++
+ import io.swagger.oas.models.parameters.Parameter;
+ import io.swagger.oas.models.servers.Server;
+ 
+@@ -238,7 +239,7 @@ public class PathItem {
+     }
+ 
+ 
+-    public List<Operation> getOperations() {
++    public List<Operation> readOperations() {
+         List<Operation> allOperations = new ArrayList<>();
+         if (this.get != null) {
+             allOperations.add(this.get);
+@@ -280,7 +281,7 @@ public class PathItem {
+     }
+ 
+ 
+-    public Map<HttpMethod, Operation> getOperationMap() {
++    public Map<HttpMethod, Operation> readOperationsMap() {
+         Map<HttpMethod, Operation> result = new LinkedHashMap<>();
+ 
+         if (this.get != null) {

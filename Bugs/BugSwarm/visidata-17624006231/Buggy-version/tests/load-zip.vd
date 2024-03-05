@@ -1,0 +1,3 @@
+sheet	col	row	longname	input	keystrokes	comment
+			open-file	sample_data/benchmark.zip	o	
+benchmark		キsample_data/,benchmark.csv	open-row		Enter	open sheet with copies of rows referenced in current row

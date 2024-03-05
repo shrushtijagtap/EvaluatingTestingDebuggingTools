@@ -1,0 +1,13 @@
+sheet	col	row	longname	input	keystrokes	comment
+			open-file	sample_data/benchmark.csv	o	
+benchmark	Date		type-date		@	
+benchmark	Date		addcol-expr	Date+1	addcol-expr	
+benchmark	Date+1		type-date		@	
+benchmark	Date+1		addcol-expr	1+Date	addcol-expr	
+benchmark	1+Date		type-date		@	
+benchmark	1+Date		addcol-expr	Date+15*minutes	addcol-expr	
+benchmark	Date+15*minutes		type-date		@	
+benchmark			columns-sheet		C	
+benchmark_columns	fmtstr	キDate+15*minutes	edit-cell	%Y-%m-%d %H:%M:%S	e	
+benchmark_columns			quit-sheet		q	
+benchmark	Date		type-date		@	

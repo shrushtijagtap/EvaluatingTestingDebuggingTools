@@ -1,102 +1,116 @@
 #!/bin/bash
 
-PYINSTALLER_REPO="https://github.com/pyinstaller/pyinstaller.git"
-PYINSTALLER_COMMIT="413cce49ff28d87fad4472f4953489226ec90c84"
-# ^ tag "v5.11.0"
+# Please update these carefully, some versions won't work under Wine
+NSIS_URL=https://prdownloads.sourceforge.net/nsis/nsis-3.02.1-setup.exe?download
+NSIS_SHA256=736c9062a02e297e335f82252e648a883171c98e0d5120439f538c81d429552e
+PYTHON_VERSION=3.5.4
 
-PYTHON_VERSION=3.10.11
+## These settings probably don't need change
+export WINEPREFIX=/opt/wine64
+#export WINEARCH='win32'
 
-
-# Let's begin!
-set -e
-
-here="$(dirname "$(readlink -e "$0")")"
-
-. "$CONTRIB"/build_tools_util.sh
-
-info "Booting wine."
-wine 'wineboot'
+PYHOME=c:/python$PYTHON_VERSION
+PYTHON="wine $PYHOME/python.exe -OO -B"
 
 
-cd "$CACHEDIR"
-mkdir -p $WINEPREFIX/drive_c/tmp
-
-info "Installing Python."
-# note: you might need "sudo apt-get install dirmngr" for the following
-# keys from https://www.python.org/downloads/#pubkeys
-KEYRING_PYTHON_DEV="keyring-electrum-build-python-dev.gpg"
-gpg --no-default-keyring --keyring $KEYRING_PYTHON_DEV --import "$here"/gpg_keys/7ED10B6531D7C8E1BC296021FC624643487034E5.asc
-if [ "$WIN_ARCH" = "win32" ] ; then
-    PYARCH="win32"
-elif [ "$WIN_ARCH" = "win64" ] ; then
-    PYARCH="amd64"
-else
-    fail "unexpected WIN_ARCH: $WIN_ARCH"
-fi
-PYTHON_DOWNLOADS="$CACHEDIR/python$PYTHON_VERSION"
-mkdir -p "$PYTHON_DOWNLOADS"
-for msifile in core dev exe lib pip tools; do
-    echo "Installing $msifile..."
-    download_if_not_exist "$PYTHON_DOWNLOADS/${msifile}.msi" "https://www.python.org/ftp/python/$PYTHON_VERSION/$PYARCH/${msifile}.msi"
-    download_if_not_exist "$PYTHON_DOWNLOADS/${msifile}.msi.asc" "https://www.python.org/ftp/python/$PYTHON_VERSION/$PYARCH/${msifile}.msi.asc"
-    verify_signature "$PYTHON_DOWNLOADS/${msifile}.msi.asc" $KEYRING_PYTHON_DEV || fail "invalid sig for ${msifile}.msi"
-    wine msiexec /i "$PYTHON_DOWNLOADS/${msifile}.msi" /qb TARGETDIR=$WINE_PYHOME || fail "wine msiexec failed for ${msifile}.msi"
-done
-
-break_legacy_easy_install
-
-info "Installing build dependencies."
-$WINE_PYTHON -m pip install --no-build-isolation --no-dependencies --no-warn-script-location \
-    --cache-dir "$WINE_PIP_CACHE_DIR" -r "$CONTRIB"/deterministic-build/requirements-build-base.txt
-$WINE_PYTHON -m pip install --no-build-isolation --no-dependencies --no-binary :all: --no-warn-script-location \
-    --cache-dir "$WINE_PIP_CACHE_DIR" -r "$CONTRIB"/deterministic-build/requirements-build-wine.txt
-
-
-# copy already built DLLs
-cp "$DLL_TARGET_DIR"/libsecp256k1-*.dll $WINEPREFIX/drive_c/electrum/electrum/ || fail "Could not copy libsecp to its destination"
-cp "$DLL_TARGET_DIR/libzbar-0.dll" $WINEPREFIX/drive_c/electrum/electrum/ || fail "Could not copy libzbar to its destination"
-cp "$DLL_TARGET_DIR/libusb-1.0.dll" $WINEPREFIX/drive_c/electrum/electrum/ || fail "Could not copy libusb to its destination"
-
-
-info "Building PyInstaller."
-# we build our own PyInstaller boot loader as the default one has high
-# anti-virus false positives
-(
-    if [ "$WIN_ARCH" = "win32" ] ; then
-        PYINST_ARCH="32bit"
-    elif [ "$WIN_ARCH" = "win64" ] ; then
-        PYINST_ARCH="64bit"
+# based on https://superuser.com/questions/497940/script-to-verify-a-signature-with-gpg
+verify_signature() {
+    local file=$1 keyring=$2 out=
+    if out=$(gpg --no-default-keyring --keyring "$keyring" --status-fd 1 --verify "$file" 2>/dev/null) &&
+       echo "$out" | grep -qs "^\[GNUPG:\] VALIDSIG "; then
+        return 0
     else
-        fail "unexpected WIN_ARCH: $WIN_ARCH"
-    fi
-    if [ -f "$CACHEDIR/pyinstaller/PyInstaller/bootloader/Windows-$PYINST_ARCH-intel/runw.exe" ]; then
-        info "pyinstaller already built, skipping"
+        echo "$out" >&2
         exit 0
     fi
-    cd "$WINEPREFIX/drive_c/electrum"
-    ELECTRUM_COMMIT_HASH=$(git rev-parse HEAD)
-    cd "$CACHEDIR"
-    rm -rf pyinstaller
-    mkdir pyinstaller
-    cd pyinstaller
-    # Shallow clone
-    git init
-    git remote add origin $PYINSTALLER_REPO
-    git fetch --depth 1 origin $PYINSTALLER_COMMIT
-    git checkout -b pinned "${PYINSTALLER_COMMIT}^{commit}"
-    rm -fv PyInstaller/bootloader/Windows-*/run*.exe || true
-    # add reproducible randomness. this ensures we build a different bootloader for each commit.
-    # if we built the same one for all releases, that might also get anti-virus false positives
-    echo "const char *electrum_tag = \"tagged by Electrum@$ELECTRUM_COMMIT_HASH\";" >> ./bootloader/src/pyi_main.c
-    pushd bootloader
-    # cross-compile to Windows using host python
-    python3 ./waf all CC="${GCC_TRIPLET_HOST}-gcc" \
-                      CFLAGS="-static"
-    popd
-    # sanity check bootloader is there:
-    [[ -e "PyInstaller/bootloader/Windows-$PYINST_ARCH-intel/runw.exe" ]] || fail "Could not find runw.exe in target dir!"
-) || fail "PyInstaller build failed"
-info "Installing PyInstaller."
-$WINE_PYTHON -m pip install --no-build-isolation --no-dependencies --no-warn-script-location ./pyinstaller
+}
 
-info "Wine is configured."
+verify_hash() {
+    local file=$1 expected_hash=$2 out=
+    actual_hash=$(sha256sum $file | awk '{print $1}')
+    if [ "$actual_hash" == "$expected_hash" ]; then
+        return 0
+    else
+        echo "$file $actual_hash (unexpected hash)" >&2
+        exit 0
+    fi
+}
+
+# Let's begin!
+cd `dirname $0`
+set -e
+
+# Clean up Wine environment
+echo "Cleaning $WINEPREFIX"
+rm -rf $WINEPREFIX
+echo "done"
+
+wine 'wineboot'
+
+echo "Cleaning tmp"
+rm -rf tmp
+mkdir -p tmp
+echo "done"
+
+cd tmp
+
+# Install Python
+# note: you might need "sudo apt-get install dirmngr" for the following
+# keys from https://www.python.org/downloads/#pubkeys
+KEYRING_PYTHON_DEV=keyring-electrum-build-python-dev.gpg
+gpg --no-default-keyring --keyring $KEYRING_PYTHON_DEV --recv-keys 531F072D39700991925FED0C0EDDC5F26A45C816 26DEA9D4613391EF3E25C9FF0A5B101836580288 CBC547978A3964D14B9AB36A6AF053F07D9DC8D2 C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF 12EF3DC38047DA382D18A5B999CDEA9DA4135B38 8417157EDBE73D9EAC1E539B126EB563A74B06BF DBBF2EEBF925FAADCF1F3FFFD9866941EA5BBD71 2BA0DB82515BBB9EFFAC71C5C9BE28DEE6DF025C 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D C9B104B3DD3AA72D7CCB1066FB9921286F5E1540 97FC712E4C024BBEA48A61ED3A5CA953F73C700D 7ED10B6531D7C8E1BC296021FC624643487034E5
+for msifile in core dev exe lib pip tools; do
+    echo "Installing $msifile..."
+    wget "https://www.python.org/ftp/python/$PYTHON_VERSION/win32/${msifile}.msi"
+    wget "https://www.python.org/ftp/python/$PYTHON_VERSION/win32/${msifile}.msi.asc"
+    verify_signature "${msifile}.msi.asc" $KEYRING_PYTHON_DEV
+    wine msiexec /i "${msifile}.msi" /qb TARGETDIR=C:/python$PYTHON_VERSION
+done
+
+# upgrade pip
+$PYTHON -m pip install pip --upgrade
+
+# Install PyWin32
+$PYTHON -m pip install pypiwin32
+
+# Install PyQt
+$PYTHON -m pip install PyQt5
+
+# Install pyinstaller
+$PYTHON -m pip install pyinstaller==3.3
+
+# Install ZBar
+#wget -q -O zbar.exe "https://sourceforge.net/projects/zbar/files/zbar/0.10/zbar-0.10-setup.exe/download"
+#wine zbar.exe
+
+# install Cryptodome
+$PYTHON -m pip install pycryptodomex
+
+# install PySocks
+$PYTHON -m pip install win_inet_pton
+
+# install websocket (python2)
+$PYTHON -m pip install websocket-client
+
+
+# Install setuptools
+#wget -O setuptools.exe "$SETUPTOOLS_URL"
+#wine setuptools.exe
+
+# Upgrade setuptools (so Electrum can be installed later)
+$PYTHON -m pip install setuptools --upgrade
+
+# Install NSIS installer
+wget -q -O nsis.exe "$NSIS_URL"
+verify_hash nsis.exe $NSIS_SHA256
+wine nsis.exe /S
+
+# Install UPX
+#wget -O upx.zip "https://downloads.sourceforge.net/project/upx/upx/3.08/upx308w.zip"
+#unzip -o upx.zip
+#cp upx*/upx.exe .
+
+# add dlls needed for pyinstaller:
+cp $WINEPREFIX/drive_c/windows/system32/msvcp90.dll $WINEPREFIX/drive_c/python$PYTHON_VERSION/
+cp $WINEPREFIX/drive_c/windows/system32/msvcm90.dll $WINEPREFIX/drive_c/python$PYTHON_VERSION/
+cp $WINEPREFIX/drive_c/python$PYTHON_VERSION/Lib/site-packages/PyQt5/Qt/bin/* $WINEPREFIX/drive_c/python$PYTHON_VERSION/

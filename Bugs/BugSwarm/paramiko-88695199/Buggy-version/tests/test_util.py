@@ -1,444 +1,486 @@
-from datetime import datetime
-from decimal import Decimal
+# Copyright (C) 2003-2009  Robey Pointer <robeypointer@gmail.com>
+#
+# This file is part of paramiko.
+#
+# Paramiko is free software; you can redistribute it and/or modify it under the
+# terms of the GNU Lesser General Public License as published by the Free
+# Software Foundation; either version 2.1 of the License, or (at your option)
+# any later version.
+#
+# Paramiko is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+# A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
+# details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with Paramiko; if not, write to the Free Software Foundation, Inc.,
+# 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
 
-from electrum import util
-from electrum.util import (format_satoshis, format_fee_satoshis, is_hash256_str, chunks, is_ip_address,
-                           list_enabled_bits, format_satoshis_plain, is_private_netaddress, is_hex_str,
-                           is_integer, is_non_negative_integer, is_int_or_float, is_non_negative_int_or_float)
-from electrum.bip21 import parse_bip21_URI, InvalidBitcoinURI
-from . import ElectrumTestCase, as_testnet
+"""
+Some unit tests for utility functions.
+"""
 
+from binascii import hexlify
+import errno
+import os
+from hashlib import sha1
+import unittest
 
-class TestUtil(ElectrumTestCase):
+import paramiko.util
+from paramiko.util import lookup_ssh_host_config as host_config, safe_string
+from paramiko.py3compat import StringIO, byte_ord, b
 
-    def test_format_satoshis(self):
-        self.assertEqual("0.00001234", format_satoshis(1234))
+test_config_file = """\
+Host *
+    User robey
+    IdentityFile    =~/.ssh/id_rsa
 
-    def test_format_satoshis_negative(self):
-        self.assertEqual("-0.00001234", format_satoshis(-1234))
+# comment
+Host *.example.com
+    \tUser bjork
+Port=3333
+Host *
+"""
 
-    def test_format_satoshis_to_mbtc(self):
-        self.assertEqual("0.01234", format_satoshis(1234, decimal_point=5))
+dont_strip_whitespace_please = "\t  \t Crazy something dumb  "
 
-    def test_format_satoshis_decimal(self):
-        self.assertEqual("0.00001234", format_satoshis(Decimal(1234)))
+test_config_file += dont_strip_whitespace_please
+test_config_file += """
+Host spoo.example.com
+Crazy something else
+"""
 
-    def test_format_satoshis_msat_resolution(self):
-        self.assertEqual("45831276.",    format_satoshis(Decimal("45831276"), decimal_point=0))
-        self.assertEqual("45831276.",    format_satoshis(Decimal("45831275.748"), decimal_point=0))
-        self.assertEqual("45831275.75", format_satoshis(Decimal("45831275.748"), decimal_point=0, precision=2))
-        self.assertEqual("45831275.748", format_satoshis(Decimal("45831275.748"), decimal_point=0, precision=3))
-
-        self.assertEqual("458312.76",    format_satoshis(Decimal("45831276"), decimal_point=2))
-        self.assertEqual("458312.76",    format_satoshis(Decimal("45831275.748"), decimal_point=2))
-        self.assertEqual("458312.7575", format_satoshis(Decimal("45831275.748"), decimal_point=2, precision=2))
-        self.assertEqual("458312.75748", format_satoshis(Decimal("45831275.748"), decimal_point=2, precision=3))
-
-        self.assertEqual("458.31276", format_satoshis(Decimal("45831276"), decimal_point=5))
-        self.assertEqual("458.31276", format_satoshis(Decimal("45831275.748"), decimal_point=5))
-        self.assertEqual("458.3127575", format_satoshis(Decimal("45831275.748"), decimal_point=5, precision=2))
-        self.assertEqual("458.31275748", format_satoshis(Decimal("45831275.748"), decimal_point=5, precision=3))
-
-    def test_format_fee_float(self):
-        self.assertEqual("1.7", format_fee_satoshis(1700/1000))
-
-    def test_format_fee_decimal(self):
-        self.assertEqual("1.7", format_fee_satoshis(Decimal("1.7")))
-
-    def test_format_fee_precision(self):
-        self.assertEqual("1.666",
-                         format_fee_satoshis(1666/1000, precision=6))
-        self.assertEqual("1.7",
-                         format_fee_satoshis(1666/1000, precision=1))
-
-    def test_format_satoshis_whitespaces(self):
-        self.assertEqual("     0.0001234 ", format_satoshis(12340, whitespaces=True))
-        self.assertEqual("     0.00001234", format_satoshis(1234, whitespaces=True))
-        self.assertEqual("     0.45831275", format_satoshis(Decimal("45831275."), whitespaces=True))
-        self.assertEqual("     0.45831275   ", format_satoshis(Decimal("45831275."), whitespaces=True, precision=3))
-        self.assertEqual("     0.458312757  ", format_satoshis(Decimal("45831275.7"), whitespaces=True, precision=3))
-        self.assertEqual("     0.45831275748", format_satoshis(Decimal("45831275.748"), whitespaces=True, precision=3))
-
-    def test_format_satoshis_whitespaces_negative(self):
-        self.assertEqual("    -0.0001234 ", format_satoshis(-12340, whitespaces=True))
-        self.assertEqual("    -0.00001234", format_satoshis(-1234, whitespaces=True))
-
-    def test_format_satoshis_diff_positive(self):
-        self.assertEqual("+0.00001234", format_satoshis(1234, is_diff=True))
-        self.assertEqual("+456789.00001234", format_satoshis(45678900001234, is_diff=True))
-
-    def test_format_satoshis_diff_negative(self):
-        self.assertEqual("-0.00001234", format_satoshis(-1234, is_diff=True))
-        self.assertEqual("-456789.00001234", format_satoshis(-45678900001234, is_diff=True))
-
-    def test_format_satoshis_add_thousands_sep(self):
-        self.assertEqual("178 890 000.", format_satoshis(Decimal(178890000), decimal_point=0, add_thousands_sep=True))
-        self.assertEqual("458 312.757 48", format_satoshis(Decimal("45831275.748"), decimal_point=2, add_thousands_sep=True, precision=5))
-        # is_diff
-        self.assertEqual("+4 583 127.574 8", format_satoshis(Decimal("45831275.748"), decimal_point=1, is_diff=True, add_thousands_sep=True, precision=4))
-        self.assertEqual("+456 789 112.004 56", format_satoshis(Decimal("456789112.00456"), decimal_point=0, is_diff=True, add_thousands_sep=True, precision=5))
-        self.assertEqual("-0.000 012 34", format_satoshis(-1234, is_diff=True, add_thousands_sep=True))
-        self.assertEqual("-456 789.000 012 34", format_satoshis(-45678900001234, is_diff=True, add_thousands_sep=True))
-        # num_zeros
-        self.assertEqual("-456 789.123 400", format_satoshis(-45678912340000, num_zeros=6, add_thousands_sep=True))
-        self.assertEqual("-456 789.123 4", format_satoshis(-45678912340000, num_zeros=2, add_thousands_sep=True))
-        # whitespaces
-        self.assertEqual("      1 432.731 11", format_satoshis(143273111, decimal_point=5, add_thousands_sep=True, whitespaces=True))
-        self.assertEqual("      1 432.731   ", format_satoshis(143273100, decimal_point=5, add_thousands_sep=True, whitespaces=True))
-        self.assertEqual(" 67 891 432.731   ", format_satoshis(6789143273100, decimal_point=5, add_thousands_sep=True, whitespaces=True))
-        self.assertEqual("       143 273 100.", format_satoshis(143273100, decimal_point=0, add_thousands_sep=True, whitespaces=True))
-        self.assertEqual(" 6 789 143 273 100.", format_satoshis(6789143273100, decimal_point=0, add_thousands_sep=True, whitespaces=True))
-        self.assertEqual("56 789 143 273 100.", format_satoshis(56789143273100, decimal_point=0, add_thousands_sep=True, whitespaces=True))
-
-    def test_format_satoshis_plain(self):
-        self.assertEqual("0.00001234", format_satoshis_plain(1234))
-
-    def test_format_satoshis_plain_decimal(self):
-        self.assertEqual("0.00001234", format_satoshis_plain(Decimal(1234)))
-
-    def test_format_satoshis_plain_to_mbtc(self):
-        self.assertEqual("0.01234", format_satoshis_plain(1234, decimal_point=5))
-
-    def _do_test_parse_URI(self, uri, expected):
-        result = parse_bip21_URI(uri)
-        self.assertEqual(expected, result)
-
-    def test_parse_URI_address(self):
-        self._do_test_parse_URI('bitcoin:15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma',
-                                {'address': '15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma'})
-
-    def test_parse_URI_only_address(self):
-        self._do_test_parse_URI('15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma',
-                                {'address': '15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma'})
+test_hosts_file = """\
+secure.example.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEA1PD6U2/TVxET6lkpKhOk5r\
+9q/kAYG6sP9f5zuUYP8i7FOFp/6ncCEbbtg/lB+A3iidyxoSWl+9jtoyyDOOVX4UIDV9G11Ml8om3\
+D+jrpI9cycZHqilK0HmxDeCuxbwyMuaCygU9gS2qoRvNLWZk70OpIKSSpBo0Wl3/XUmz9uhc=
+happy.example.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAIEA8bP1ZA7DCZDB9J0s50l31M\
+BGQ3GQ/Fc7SX6gkpXkwcZryoi4kNFhHu5LvHcZPdxXV1D+uTMfGS1eyd2Yz/DoNWXNAl8TI0cAsW\
+5ymME3bQ4J/k1IKxCtz/bAlAqFgKoc+EolMziDYqWIATtW0rYTJvzGAzTmMj80/QpsFH+Pc2M=
+"""
 
 
-    def test_parse_URI_address_label(self):
-        self._do_test_parse_URI('bitcoin:15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma?label=electrum%20test',
-                                {'address': '15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma', 'label': 'electrum test'})
-
-    def test_parse_URI_address_message(self):
-        self._do_test_parse_URI('bitcoin:15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma?message=electrum%20test',
-                                {'address': '15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma', 'message': 'electrum test', 'memo': 'electrum test'})
-
-    def test_parse_URI_address_amount(self):
-        self._do_test_parse_URI('bitcoin:15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma?amount=0.0003',
-                                {'address': '15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma', 'amount': 30000})
-
-    def test_parse_URI_address_request_url(self):
-        self._do_test_parse_URI('bitcoin:15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma?r=http://domain.tld/page?h%3D2a8628fc2fbe',
-                                {'address': '15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma', 'r': 'http://domain.tld/page?h=2a8628fc2fbe'})
-
-    def test_parse_URI_ignore_args(self):
-        self._do_test_parse_URI('bitcoin:15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma?test=test',
-                                {'address': '15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma', 'test': 'test'})
-
-    def test_parse_URI_multiple_args(self):
-        self._do_test_parse_URI('bitcoin:15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma?amount=0.00004&label=electrum-test&message=electrum%20test&test=none&r=http://domain.tld/page',
-                                {'address': '15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma', 'amount': 4000, 'label': 'electrum-test', 'message': u'electrum test', 'memo': u'electrum test', 'r': 'http://domain.tld/page', 'test': 'none'})
-
-    def test_parse_URI_no_address_request_url(self):
-        self._do_test_parse_URI('bitcoin:?r=http://domain.tld/page?h%3D2a8628fc2fbe',
-                                {'r': 'http://domain.tld/page?h=2a8628fc2fbe'})
-
-    def test_parse_URI_invalid_address(self):
-        self.assertRaises(InvalidBitcoinURI, parse_bip21_URI, 'bitcoin:invalidaddress')
-
-    def test_parse_URI_invalid(self):
-        self.assertRaises(InvalidBitcoinURI, parse_bip21_URI, 'notbitcoin:15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma')
-
-    def test_parse_URI_parameter_pollution(self):
-        self.assertRaises(InvalidBitcoinURI, parse_bip21_URI, 'bitcoin:15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma?amount=0.0003&label=test&amount=30.0')
-
-    @as_testnet
-    def test_parse_URI_unsupported_req_key(self):
-        self._do_test_parse_URI('bitcoin:TB1QXJ6KVTE6URY2MX695METFTFT7LR5HYK4M3VT5F?amount=0.00100000&label=test&somethingyoudontunderstand=50',
-                                {'address': 'TB1QXJ6KVTE6URY2MX695METFTFT7LR5HYK4M3VT5F', 'amount': 100000, 'label': 'test', 'somethingyoudontunderstand': '50'})
-        # now test same URI but with "req-test=1" added
-        self.assertRaises(InvalidBitcoinURI, parse_bip21_URI, 'bitcoin:TB1QXJ6KVTE6URY2MX695METFTFT7LR5HYK4M3VT5F?amount=0.00100000&label=test&req-test=1&somethingyoudontunderstand=50')
-
-    @as_testnet
-    def test_parse_URI_lightning_consistency(self):
-        # bip21 uri that *only* includes a "lightning" key. LN part does not have fallback address
-        self._do_test_parse_URI('bitcoin:?lightning=lntb700u1p3kqy0cpp5azvqy3wez7hcz3ka7tpqqvw5mpsa7fknxl4ca7a7669kswhf0hgqsp5qxhxul9k88w2nsk643elzuu4nepwkq052ek79esmz47yj6lfrhuqdqvw3jhxapjxcmscqzynxq8zals8sq9q7sqqqqqqqqqqqqqqqqqqqqqqqqq9qsqyznyzw55q63yytup920n9qcsnh6qqht48maapzgadll2qy5vheeq26crapt0rcv9aqmpm93ljkapgtc05keud9jhlasns795fylfdjsphud9uh',
-                                {'lightning': 'lntb700u1p3kqy0cpp5azvqy3wez7hcz3ka7tpqqvw5mpsa7fknxl4ca7a7669kswhf0hgqsp5qxhxul9k88w2nsk643elzuu4nepwkq052ek79esmz47yj6lfrhuqdqvw3jhxapjxcmscqzynxq8zals8sq9q7sqqqqqqqqqqqqqqqqqqqqqqqqq9qsqyznyzw55q63yytup920n9qcsnh6qqht48maapzgadll2qy5vheeq26crapt0rcv9aqmpm93ljkapgtc05keud9jhlasns795fylfdjsphud9uh'})
-        # bip21 uri that *only* includes a "lightning" key. LN part has fallback address
-        self._do_test_parse_URI('bitcoin:?lightning=lntb700u1p3kqy26pp5l7rj7w0u5sdsj24umzdlhdhkk8a597sn865rhap4h4jenjefdk7ssp5d9zjr96ezp89gsyenfse5f4jn9ls29p0awvp0zxlt6tpzn2m3j5qdqvw3jhxapjxcmqcqzynxq8zals8sq9q7sqqqqqqqqqqqqqqqqqqqqqqqqq9qsqfppqu5ua3szskclyd48wlfdwfd32j65phxy9vu8dmmk3u20u0e0yqw484xzn4hc3cux6kk2wenhw7zy0mseu9ntpk9l4fws2d46svzszrc6mqy535740ks9j22w67fw0x4dt8w2hhzspcqakql',
-                                {'lightning': 'lntb700u1p3kqy26pp5l7rj7w0u5sdsj24umzdlhdhkk8a597sn865rhap4h4jenjefdk7ssp5d9zjr96ezp89gsyenfse5f4jn9ls29p0awvp0zxlt6tpzn2m3j5qdqvw3jhxapjxcmqcqzynxq8zals8sq9q7sqqqqqqqqqqqqqqqqqqqqqqqqq9qsqfppqu5ua3szskclyd48wlfdwfd32j65phxy9vu8dmmk3u20u0e0yqw484xzn4hc3cux6kk2wenhw7zy0mseu9ntpk9l4fws2d46svzszrc6mqy535740ks9j22w67fw0x4dt8w2hhzspcqakql'})
-        # bip21 uri that includes "lightning" key. LN part does not have fallback address
-        self._do_test_parse_URI('bitcoin:tb1qu5ua3szskclyd48wlfdwfd32j65phxy9yf7ytl?amount=0.0007&message=test266&lightning=lntb700u1p3kqy0cpp5azvqy3wez7hcz3ka7tpqqvw5mpsa7fknxl4ca7a7669kswhf0hgqsp5qxhxul9k88w2nsk643elzuu4nepwkq052ek79esmz47yj6lfrhuqdqvw3jhxapjxcmscqzynxq8zals8sq9q7sqqqqqqqqqqqqqqqqqqqqqqqqq9qsqyznyzw55q63yytup920n9qcsnh6qqht48maapzgadll2qy5vheeq26crapt0rcv9aqmpm93ljkapgtc05keud9jhlasns795fylfdjsphud9uh',
-                                {'address': 'tb1qu5ua3szskclyd48wlfdwfd32j65phxy9yf7ytl',
-                                 'amount': 70000,
-                                 'lightning': 'lntb700u1p3kqy0cpp5azvqy3wez7hcz3ka7tpqqvw5mpsa7fknxl4ca7a7669kswhf0hgqsp5qxhxul9k88w2nsk643elzuu4nepwkq052ek79esmz47yj6lfrhuqdqvw3jhxapjxcmscqzynxq8zals8sq9q7sqqqqqqqqqqqqqqqqqqqqqqqqq9qsqyznyzw55q63yytup920n9qcsnh6qqht48maapzgadll2qy5vheeq26crapt0rcv9aqmpm93ljkapgtc05keud9jhlasns795fylfdjsphud9uh',
-                                 'memo': 'test266',
-                                 'message': 'test266'})
-        # bip21 uri that includes "lightning" key. LN part has fallback address
-        self._do_test_parse_URI('bitcoin:tb1qu5ua3szskclyd48wlfdwfd32j65phxy9yf7ytl?amount=0.0007&message=test266&lightning=lntb700u1p3kqy26pp5l7rj7w0u5sdsj24umzdlhdhkk8a597sn865rhap4h4jenjefdk7ssp5d9zjr96ezp89gsyenfse5f4jn9ls29p0awvp0zxlt6tpzn2m3j5qdqvw3jhxapjxcmqcqzynxq8zals8sq9q7sqqqqqqqqqqqqqqqqqqqqqqqqq9qsqfppqu5ua3szskclyd48wlfdwfd32j65phxy9vu8dmmk3u20u0e0yqw484xzn4hc3cux6kk2wenhw7zy0mseu9ntpk9l4fws2d46svzszrc6mqy535740ks9j22w67fw0x4dt8w2hhzspcqakql',
-                                {'address': 'tb1qu5ua3szskclyd48wlfdwfd32j65phxy9yf7ytl',
-                                 'amount': 70000,
-                                 'lightning': 'lntb700u1p3kqy26pp5l7rj7w0u5sdsj24umzdlhdhkk8a597sn865rhap4h4jenjefdk7ssp5d9zjr96ezp89gsyenfse5f4jn9ls29p0awvp0zxlt6tpzn2m3j5qdqvw3jhxapjxcmqcqzynxq8zals8sq9q7sqqqqqqqqqqqqqqqqqqqqqqqqq9qsqfppqu5ua3szskclyd48wlfdwfd32j65phxy9vu8dmmk3u20u0e0yqw484xzn4hc3cux6kk2wenhw7zy0mseu9ntpk9l4fws2d46svzszrc6mqy535740ks9j22w67fw0x4dt8w2hhzspcqakql',
-                                 'memo': 'test266',
-                                 'message': 'test266'})
-        # bip21 uri that includes "lightning" key. LN part has fallback address BUT it mismatches the top-level address
-        self.assertRaises(InvalidBitcoinURI, parse_bip21_URI, 'bitcoin:tb1qvu0c9xme0ul3gzx4nzqdgxsu25acuk9wvsj2j2?amount=0.0007&message=test266&lightning=lntb700u1p3kqy26pp5l7rj7w0u5sdsj24umzdlhdhkk8a597sn865rhap4h4jenjefdk7ssp5d9zjr96ezp89gsyenfse5f4jn9ls29p0awvp0zxlt6tpzn2m3j5qdqvw3jhxapjxcmqcqzynxq8zals8sq9q7sqqqqqqqqqqqqqqqqqqqqqqqqq9qsqfppqu5ua3szskclyd48wlfdwfd32j65phxy9vu8dmmk3u20u0e0yqw484xzn4hc3cux6kk2wenhw7zy0mseu9ntpk9l4fws2d46svzszrc6mqy535740ks9j22w67fw0x4dt8w2hhzspcqakql')
-        # bip21 uri that includes "lightning" key. top-level amount mismatches LN amount
-        self.assertRaises(InvalidBitcoinURI, parse_bip21_URI, 'bitcoin:tb1qu5ua3szskclyd48wlfdwfd32j65phxy9yf7ytl?amount=0.0008&message=test266&lightning=lntb700u1p3kqy26pp5l7rj7w0u5sdsj24umzdlhdhkk8a597sn865rhap4h4jenjefdk7ssp5d9zjr96ezp89gsyenfse5f4jn9ls29p0awvp0zxlt6tpzn2m3j5qdqvw3jhxapjxcmqcqzynxq8zals8sq9q7sqqqqqqqqqqqqqqqqqqqqqqqqq9qsqfppqu5ua3szskclyd48wlfdwfd32j65phxy9vu8dmmk3u20u0e0yqw484xzn4hc3cux6kk2wenhw7zy0mseu9ntpk9l4fws2d46svzszrc6mqy535740ks9j22w67fw0x4dt8w2hhzspcqakql')
-        # bip21 uri that includes "lightning" key with garbage unparseable value
-        self.assertRaises(InvalidBitcoinURI, parse_bip21_URI, 'bitcoin:tb1qu5ua3szskclyd48wlfdwfd32j65phxy9yf7ytl?amount=0.0008&message=test266&lightning=lntb700u1p3kqy26pp5l7rj7w0u5sdsj24umzdlhdasdasdasdasd')
-
-    def test_is_hash256_str(self):
-        self.assertTrue(is_hash256_str('09a4c03e3bdf83bbe3955f907ee52da4fc12f4813d459bc75228b64ad08617c7'))
-        self.assertTrue(is_hash256_str('2A5C3F4062E4F2FCCE7A1C7B4310CB647B327409F580F4ED72CB8FC0B1804DFA'))
-        self.assertTrue(is_hash256_str('00' * 32))
-
-        self.assertFalse(is_hash256_str('00' * 33))
-        self.assertFalse(is_hash256_str('qweqwe'))
-        self.assertFalse(is_hash256_str(None))
-        self.assertFalse(is_hash256_str(7))
-
-    def test_is_hex_str(self):
-        self.assertTrue(is_hex_str('09a4'))
-        self.assertTrue(is_hex_str('abCD'))
-        self.assertTrue(is_hex_str('2A5C3F4062E4F2FCCE7A1C7B4310CB647B327409F580F4ED72CB8FC0B1804DFA'))
-        self.assertTrue(is_hex_str('00' * 33))
-
-        self.assertFalse(is_hex_str('0x09a4'))
-        self.assertFalse(is_hex_str('2A 5C3F'))
-        self.assertFalse(is_hex_str(' 2A5C3F'))
-        self.assertFalse(is_hex_str('2A5C3F '))
-        self.assertFalse(is_hex_str('000'))
-        self.assertFalse(is_hex_str('123'))
-        self.assertFalse(is_hex_str('0x123'))
-        self.assertFalse(is_hex_str('qweqwe'))
-        self.assertFalse(is_hex_str(b'09a4'))
-        self.assertFalse(is_hex_str(b'\x09\xa4'))
-        self.assertFalse(is_hex_str(None))
-        self.assertFalse(is_hex_str(7))
-        self.assertFalse(is_hex_str(7.2))
-
-    def test_is_integer(self):
-        self.assertTrue(is_integer(7))
-        self.assertTrue(is_integer(0))
-        self.assertTrue(is_integer(-1))
-        self.assertTrue(is_integer(-7))
-
-        self.assertFalse(is_integer(Decimal("2.0")))
-        self.assertFalse(is_integer(Decimal(2.0)))
-        self.assertFalse(is_integer(Decimal(2)))
-        self.assertFalse(is_integer(0.72))
-        self.assertFalse(is_integer(2.0))
-        self.assertFalse(is_integer(-2.0))
-        self.assertFalse(is_integer('09a4'))
-        self.assertFalse(is_integer('2A5C3F4062E4F2FCCE7A1C7B4310CB647B327409F580F4ED72CB8FC0B1804DFA'))
-        self.assertFalse(is_integer('000'))
-        self.assertFalse(is_integer('qweqwe'))
-        self.assertFalse(is_integer(None))
-
-    def test_is_non_negative_integer(self):
-        self.assertTrue(is_non_negative_integer(7))
-        self.assertTrue(is_non_negative_integer(0))
-
-        self.assertFalse(is_non_negative_integer(Decimal("2.0")))
-        self.assertFalse(is_non_negative_integer(Decimal(2.0)))
-        self.assertFalse(is_non_negative_integer(Decimal(2)))
-        self.assertFalse(is_non_negative_integer(0.72))
-        self.assertFalse(is_non_negative_integer(2.0))
-        self.assertFalse(is_non_negative_integer(-2.0))
-        self.assertFalse(is_non_negative_integer(-1))
-        self.assertFalse(is_non_negative_integer(-7))
-        self.assertFalse(is_non_negative_integer('09a4'))
-        self.assertFalse(is_non_negative_integer('2A5C3F4062E4F2FCCE7A1C7B4310CB647B327409F580F4ED72CB8FC0B1804DFA'))
-        self.assertFalse(is_non_negative_integer('000'))
-        self.assertFalse(is_non_negative_integer('qweqwe'))
-        self.assertFalse(is_non_negative_integer(None))
-
-    def test_is_int_or_float(self):
-        self.assertTrue(is_int_or_float(7))
-        self.assertTrue(is_int_or_float(0))
-        self.assertTrue(is_int_or_float(-1))
-        self.assertTrue(is_int_or_float(-7))
-        self.assertTrue(is_int_or_float(0.72))
-        self.assertTrue(is_int_or_float(2.0))
-        self.assertTrue(is_int_or_float(-2.0))
-
-        self.assertFalse(is_int_or_float(Decimal("2.0")))
-        self.assertFalse(is_int_or_float(Decimal(2.0)))
-        self.assertFalse(is_int_or_float(Decimal(2)))
-        self.assertFalse(is_int_or_float('09a4'))
-        self.assertFalse(is_int_or_float('2A5C3F4062E4F2FCCE7A1C7B4310CB647B327409F580F4ED72CB8FC0B1804DFA'))
-        self.assertFalse(is_int_or_float('000'))
-        self.assertFalse(is_int_or_float('qweqwe'))
-        self.assertFalse(is_int_or_float(None))
-
-    def test_is_non_negative_int_or_float(self):
-        self.assertTrue(is_non_negative_int_or_float(7))
-        self.assertTrue(is_non_negative_int_or_float(0))
-        self.assertTrue(is_non_negative_int_or_float(0.0))
-        self.assertTrue(is_non_negative_int_or_float(0.72))
-        self.assertTrue(is_non_negative_int_or_float(2.0))
-
-        self.assertFalse(is_non_negative_int_or_float(-1))
-        self.assertFalse(is_non_negative_int_or_float(-7))
-        self.assertFalse(is_non_negative_int_or_float(-2.0))
-        self.assertFalse(is_non_negative_int_or_float(Decimal("2.0")))
-        self.assertFalse(is_non_negative_int_or_float(Decimal(2.0)))
-        self.assertFalse(is_non_negative_int_or_float(Decimal(2)))
-        self.assertFalse(is_non_negative_int_or_float('09a4'))
-        self.assertFalse(is_non_negative_int_or_float('2A5C3F4062E4F2FCCE7A1C7B4310CB647B327409F580F4ED72CB8FC0B1804DFA'))
-        self.assertFalse(is_non_negative_int_or_float('000'))
-        self.assertFalse(is_non_negative_int_or_float('qweqwe'))
-        self.assertFalse(is_non_negative_int_or_float(None))
-
-    def test_chunks(self):
-        self.assertEqual([[1, 2], [3, 4], [5]],
-                         list(chunks([1, 2, 3, 4, 5], 2)))
-        self.assertEqual([], list(chunks(b'', 64)))
-        self.assertEqual([b'12', b'34', b'56'],
-                         list(chunks(b'123456', 2)))
-        with self.assertRaises(ValueError):
-            list(chunks([1, 2, 3], 0))
-
-    def test_list_enabled_bits(self):
-        self.assertEqual((0, 2, 3, 6), list_enabled_bits(77))
-        self.assertEqual((), list_enabled_bits(0))
-
-    def test_is_ip_address(self):
-        self.assertTrue(is_ip_address("127.0.0.1"))
-        #self.assertTrue(is_ip_address("127.000.000.1"))  # disabled as result differs based on python version
-        self.assertTrue(is_ip_address("255.255.255.255"))
-        self.assertFalse(is_ip_address("255.255.256.255"))
-        self.assertFalse(is_ip_address("123.456.789.000"))
-        self.assertTrue(is_ip_address("2001:0db8:0000:0000:0000:ff00:0042:8329"))
-        self.assertTrue(is_ip_address("2001:db8:0:0:0:ff00:42:8329"))
-        self.assertTrue(is_ip_address("2001:db8::ff00:42:8329"))
-        self.assertFalse(is_ip_address("2001:::db8::ff00:42:8329"))
-        self.assertTrue(is_ip_address("::1"))
-        self.assertFalse(is_ip_address("2001:db8:0:0:g:ff00:42:8329"))
-        self.assertFalse(is_ip_address("lol"))
-        self.assertFalse(is_ip_address(":@ASD:@AS\x77\x22\xff¬!"))
-
-    def test_is_private_netaddress(self):
-        self.assertTrue(is_private_netaddress("127.0.0.1"))
-        self.assertTrue(is_private_netaddress("127.5.6.7"))
-        self.assertTrue(is_private_netaddress("::1"))
-        self.assertTrue(is_private_netaddress("[::1]"))
-        self.assertTrue(is_private_netaddress("localhost"))
-        self.assertTrue(is_private_netaddress("localhost."))
-        self.assertFalse(is_private_netaddress("[::2]"))
-        self.assertFalse(is_private_netaddress("2a00:1450:400e:80d::200e"))
-        self.assertFalse(is_private_netaddress("[2a00:1450:400e:80d::200e]"))
-        self.assertFalse(is_private_netaddress("8.8.8.8"))
-        self.assertFalse(is_private_netaddress("example.com"))
-
-    def test_is_subpath(self):
-        self.assertTrue(util.is_subpath("/a/b/c/d/e", "/"))
-        self.assertTrue(util.is_subpath("/a/b/c/d/e", "/a"))
-        self.assertTrue(util.is_subpath("/a/b/c/d/e", "/a/"))
-        self.assertTrue(util.is_subpath("/a/b/c/d/e", "/a/b/c/"))
-        self.assertTrue(util.is_subpath("/a/b/c/d/e/", "/a/b/c/"))
-        self.assertTrue(util.is_subpath("/a/b/c/d/e/", "/a/b/c"))
-        self.assertTrue(util.is_subpath("/a/b/c/d/e/", "/a/b/c/d/e/"))
-        self.assertTrue(util.is_subpath("/", "/"))
-        self.assertTrue(util.is_subpath("a/b/c", "a"))
-        self.assertTrue(util.is_subpath("a/b/c", "a/"))
-        self.assertTrue(util.is_subpath("a/b/c", "a/b"))
-        self.assertTrue(util.is_subpath("a/b/c", "a/b/c"))
-
-        self.assertFalse(util.is_subpath("/a/b/c/d/e/", "/b"))
-        self.assertFalse(util.is_subpath("/a/b/c/d/e/", "/b/c/"))
-        self.assertFalse(util.is_subpath("/a/b/c", "/a/b/c/d/e/"))
-        self.assertFalse(util.is_subpath("/a/b/c", "a"))
-        self.assertFalse(util.is_subpath("/a/b/c", "c"))
-        self.assertFalse(util.is_subpath("a", "/a/b/c"))
-        self.assertFalse(util.is_subpath("c", "/a/b/c"))
-
-    def test_error_text_bytes_to_safe_str(self):
-        # ascii
-        self.assertEqual("'test'", util.error_text_bytes_to_safe_str(b"test"))
-        self.assertEqual('"test123 \'QWE"', util.error_text_bytes_to_safe_str(b"test123 'QWE"))
-        self.assertEqual("'prefix: \\x08\\x08\\x08\\x08\\x08\\x08\\x08\\x08malicious_stuff'",
-                         util.error_text_bytes_to_safe_str(b"prefix: " + 8 * b"\x08" + b"malicious_stuff"))
-        # unicode
-        self.assertEqual("'here is some unicode: \\\\xe2\\\\x82\\\\xbf \\\\xf0\\\\x9f\\\\x98\\\\x80 \\\\xf0\\\\x9f\\\\x98\\\\x88'",
-                         util.error_text_bytes_to_safe_str(b'here is some unicode: \xe2\x82\xbf \xf0\x9f\x98\x80 \xf0\x9f\x98\x88'))
-        # not even unicode
-        self.assertEqual("""\'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f !"#$%&\\\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\\x7f\\\\x80\\\\x81\\\\x82\\\\x83\\\\x84\\\\x85\\\\x86\\\\x87\\\\x88\\\\x89\\\\x8a\\\\x8b\\\\x8c\\\\x8d\\\\x8e\\\\x8f\\\\x90\\\\x91\\\\x92\\\\x93\\\\x94\\\\x95\\\\x96\\\\x97\\\\x98\\\\x99\\\\x9a\\\\x9b\\\\x9c\\\\x9d\\\\x9e\\\\x9f\\\\xa0\\\\xa1\\\\xa2\\\\xa3\\\\xa4\\\\xa5\\\\xa6\\\\xa7\\\\xa8\\\\xa9\\\\xaa\\\\xab\\\\xac\\\\xad\\\\xae\\\\xaf\\\\xb0\\\\xb1\\\\xb2\\\\xb3\\\\xb4\\\\xb5\\\\xb6\\\\xb7\\\\xb8\\\\xb9\\\\xba\\\\xbb\\\\xbc\\\\xbd\\\\xbe\\\\xbf\\\\xc0\\\\xc1\\\\xc2\\\\xc3\\\\xc4\\\\xc5\\\\xc6\\\\xc7\\\\xc8\\\\xc9\\\\xca\\\\xcb\\\\xcc\\\\xcd\\\\xce\\\\xcf\\\\xd0\\\\xd1\\\\xd2\\\\xd3\\\\xd4\\\\xd5\\\\xd6\\\\xd7\\\\xd8\\\\xd9\\\\xda\\\\xdb\\\\xdc\\\\xdd\\\\xde\\\\xdf\\\\xe0\\\\xe1\\\\xe2\\\\xe3\\\\xe4\\\\xe5\\\\xe6\\\\xe7\\\\xe8\\\\xe9\\\\xea\\\\xeb\\\\xec\\\\xed\\\\xee\\\\xef\\\\xf0\\\\xf1\\\\xf2\\\\xf3\\\\xf4\\\\xf5\\\\xf6\\\\xf7\\\\xf8\\\\xf9\\\\xfa\\\\xfb\\\\xfc\\\\xfd\\\\xfe\\\\xff\'""",
-                         util.error_text_bytes_to_safe_str(bytes(range(256))))
-
-    def test_error_text_str_to_safe_str(self):
-        # ascii
-        self.assertEqual("'test'", util.error_text_str_to_safe_str("test"))
-        self.assertEqual('"test123 \'QWE"', util.error_text_str_to_safe_str("test123 'QWE"))
-        self.assertEqual("'prefix: \\x08\\x08\\x08\\x08\\x08\\x08\\x08\\x08malicious_stuff'",
-                         util.error_text_str_to_safe_str("prefix: " + 8 * "\x08" + "malicious_stuff"))
-        # unicode
-        self.assertEqual("'here is some unicode: \\\\u20bf \\\\U0001f600 \\\\U0001f608'",
-                         util.error_text_str_to_safe_str("here is some unicode: ₿ 😀 😈"))
-
-    def test_age(self):
-        now = datetime(2023, 4, 16, 22, 30, 00)
-        self.assertEqual("Unknown",
-                         util.age(from_date=None, since_date=now))
-        # past
-        self.assertEqual("less than a minute ago",
-                         util.age(from_date=now.timestamp()-1, since_date=now))
-        self.assertEqual("1 seconds ago",
-                         util.age(from_date=now.timestamp()-1, since_date=now, include_seconds=True))
-        self.assertEqual("25 seconds ago",
-                         util.age(from_date=now.timestamp()-25, since_date=now, include_seconds=True))
-        self.assertEqual("about 30 minutes ago",
-                         util.age(from_date=now.timestamp()-1800, since_date=now))
-        self.assertEqual("about 30 minutes ago",
-                         util.age(from_date=now.timestamp()-1800, since_date=now, include_seconds=True))
-        self.assertEqual("about 1 hour ago",
-                         util.age(from_date=now.timestamp()-3300, since_date=now))
-        self.assertEqual("about 2 hours ago",
-                         util.age(from_date=now.timestamp()-8700, since_date=now))
-        self.assertEqual("about 7 hours ago",
-                         util.age(from_date=now.timestamp()-26700, since_date=now))
-        self.assertEqual("about 1 day ago",
-                         util.age(from_date=now.timestamp()-109800, since_date=now))
-        self.assertEqual("about 3 days ago",
-                         util.age(from_date=now.timestamp()-282600, since_date=now))
-        self.assertEqual("about 15 days ago",
-                         util.age(from_date=now.timestamp()-1319400, since_date=now))
-        self.assertEqual("about 1 month ago",
-                         util.age(from_date=now.timestamp()-3220200, since_date=now))
-        self.assertEqual("about 3 months ago",
-                         util.age(from_date=now.timestamp()-8317800, since_date=now))
-        self.assertEqual("about 1 year ago",
-                         util.age(from_date=now.timestamp()-39853800, since_date=now))
-        self.assertEqual("over 3 years ago",
-                         util.age(from_date=now.timestamp()-103012200, since_date=now))
-        # future
-        self.assertEqual("in less than a minute",
-                         util.age(from_date=now.timestamp()+1, since_date=now))
-        self.assertEqual("in 1 seconds",
-                         util.age(from_date=now.timestamp()+1, since_date=now, include_seconds=True))
-        self.assertEqual("in 25 seconds",
-                         util.age(from_date=now.timestamp()+25, since_date=now, include_seconds=True))
-        self.assertEqual("in about 30 minutes",
-                         util.age(from_date=now.timestamp()+1800, since_date=now))
-        self.assertEqual("in about 30 minutes",
-                         util.age(from_date=now.timestamp()+1800, since_date=now, include_seconds=True))
-        self.assertEqual("in about 1 hour",
-                         util.age(from_date=now.timestamp()+3300, since_date=now))
-        self.assertEqual("in about 2 hours",
-                         util.age(from_date=now.timestamp()+8700, since_date=now))
-        self.assertEqual("in about 7 hours",
-                         util.age(from_date=now.timestamp()+26700, since_date=now))
-        self.assertEqual("in about 1 day",
-                         util.age(from_date=now.timestamp()+109800, since_date=now))
-        self.assertEqual("in about 3 days",
-                         util.age(from_date=now.timestamp()+282600, since_date=now))
-        self.assertEqual("in about 15 days",
-                         util.age(from_date=now.timestamp()+1319400, since_date=now))
-        self.assertEqual("in about 1 month",
-                         util.age(from_date=now.timestamp()+3220200, since_date=now))
-        self.assertEqual("in about 3 months",
-                         util.age(from_date=now.timestamp()+8317800, since_date=now))
-        self.assertEqual("in about 1 year",
-                         util.age(from_date=now.timestamp()+39853800, since_date=now))
-        self.assertEqual("in over 3 years",
-                         util.age(from_date=now.timestamp()+103012200, since_date=now))
+# for test 1:
+from paramiko import *
 
 
+class UtilTest(unittest.TestCase):
+    def test_1_import(self):
+        """
+        verify that all the classes can be imported from paramiko.
+        """
+        symbols = list(globals().keys())
+        self.assertTrue('Transport' in symbols)
+        self.assertTrue('SSHClient' in symbols)
+        self.assertTrue('MissingHostKeyPolicy' in symbols)
+        self.assertTrue('AutoAddPolicy' in symbols)
+        self.assertTrue('RejectPolicy' in symbols)
+        self.assertTrue('WarningPolicy' in symbols)
+        self.assertTrue('SecurityOptions' in symbols)
+        self.assertTrue('SubsystemHandler' in symbols)
+        self.assertTrue('Channel' in symbols)
+        self.assertTrue('RSAKey' in symbols)
+        self.assertTrue('DSSKey' in symbols)
+        self.assertTrue('Message' in symbols)
+        self.assertTrue('SSHException' in symbols)
+        self.assertTrue('AuthenticationException' in symbols)
+        self.assertTrue('PasswordRequiredException' in symbols)
+        self.assertTrue('BadAuthenticationType' in symbols)
+        self.assertTrue('ChannelException' in symbols)
+        self.assertTrue('SFTP' in symbols)
+        self.assertTrue('SFTPFile' in symbols)
+        self.assertTrue('SFTPHandle' in symbols)
+        self.assertTrue('SFTPClient' in symbols)
+        self.assertTrue('SFTPServer' in symbols)
+        self.assertTrue('SFTPError' in symbols)
+        self.assertTrue('SFTPAttributes' in symbols)
+        self.assertTrue('SFTPServerInterface' in symbols)
+        self.assertTrue('ServerInterface' in symbols)
+        self.assertTrue('BufferedFile' in symbols)
+        self.assertTrue('Agent' in symbols)
+        self.assertTrue('AgentKey' in symbols)
+        self.assertTrue('HostKeys' in symbols)
+        self.assertTrue('SSHConfig' in symbols)
+        self.assertTrue('util' in symbols)
+
+    def test_2_parse_config(self):
+        global test_config_file
+        f = StringIO(test_config_file)
+        config = paramiko.util.parse_ssh_config(f)
+        self.assertEqual(config._config,
+            [{'host': ['*'], 'config': {}}, {'host': ['*'], 'config': {'identityfile': ['~/.ssh/id_rsa'], 'user': 'robey'}},
+            {'host': ['*.example.com'], 'config': {'user': 'bjork', 'port': '3333'}},
+            {'host': ['*'], 'config': {'crazy': 'something dumb  '}},
+            {'host': ['spoo.example.com'], 'config': {'crazy': 'something else'}}])
+
+    def test_3_host_config(self):
+        global test_config_file
+        f = StringIO(test_config_file)
+        config = paramiko.util.parse_ssh_config(f)
+
+        for host, values in {
+            'irc.danger.com':   {'crazy': 'something dumb  ',
+                                'hostname': 'irc.danger.com',
+                                'user': 'robey'},
+            'irc.example.com':  {'crazy': 'something dumb  ',
+                                'hostname': 'irc.example.com',
+                                'user': 'robey',
+                                'port': '3333'},
+            'spoo.example.com': {'crazy': 'something dumb  ',
+                                'hostname': 'spoo.example.com',
+                                'user': 'robey',
+                                'port': '3333'}
+        }.items():
+            values = dict(values,
+                hostname=host,
+                identityfile=[os.path.expanduser("~/.ssh/id_rsa")]
+            )
+            self.assertEqual(
+                paramiko.util.lookup_ssh_host_config(host, config),
+                values
+            )
+
+    def test_4_generate_key_bytes(self):
+        x = paramiko.util.generate_key_bytes(sha1, b'ABCDEFGH', 'This is my secret passphrase.', 64)
+        hex = ''.join(['%02x' % byte_ord(c) for c in x])
+        self.assertEqual(hex, '9110e2f6793b69363e58173e9436b13a5a4b339005741d5c680e505f57d871347b4239f14fb5c46e857d5e100424873ba849ac699cea98d729e57b3e84378e8b')
+
+    def test_5_host_keys(self):
+        with open('hostfile.temp', 'w') as f:
+            f.write(test_hosts_file)
+        try:
+            hostdict = paramiko.util.load_host_keys('hostfile.temp')
+            self.assertEqual(2, len(hostdict))
+            self.assertEqual(1, len(list(hostdict.values())[0]))
+            self.assertEqual(1, len(list(hostdict.values())[1]))
+            fp = hexlify(hostdict['secure.example.com']['ssh-rsa'].get_fingerprint()).upper()
+            self.assertEqual(b'E6684DB30E109B67B70FF1DC5C7F1363', fp)
+        finally:
+            os.unlink('hostfile.temp')
+
+    def test_7_host_config_expose_issue_33(self):
+        test_config_file = """
+Host www13.*
+    Port 22
+
+Host *.example.com
+    Port 2222
+
+Host *
+    Port 3333
+    """
+        f = StringIO(test_config_file)
+        config = paramiko.util.parse_ssh_config(f)
+        host = 'www13.example.com'
+        self.assertEqual(
+            paramiko.util.lookup_ssh_host_config(host, config),
+            {'hostname': host, 'port': '22'}
+        )
+
+    def test_8_eintr_retry(self):
+        self.assertEqual('foo', paramiko.util.retry_on_signal(lambda: 'foo'))
+
+        # Variables that are set by raises_intr
+        intr_errors_remaining = [3]
+        call_count = [0]
+        def raises_intr():
+            call_count[0] += 1
+            if intr_errors_remaining[0] > 0:
+                intr_errors_remaining[0] -= 1
+                raise IOError(errno.EINTR, 'file', 'interrupted system call')
+        self.assertTrue(paramiko.util.retry_on_signal(raises_intr) is None)
+        self.assertEqual(0, intr_errors_remaining[0])
+        self.assertEqual(4, call_count[0])
+
+        def raises_ioerror_not_eintr():
+            raise IOError(errno.ENOENT, 'file', 'file not found')
+        self.assertRaises(IOError,
+                          lambda: paramiko.util.retry_on_signal(raises_ioerror_not_eintr))
+
+        def raises_other_exception():
+            raise AssertionError('foo')
+        self.assertRaises(AssertionError,
+                          lambda: paramiko.util.retry_on_signal(raises_other_exception))
+
+    def test_9_proxycommand_config_equals_parsing(self):
+        """
+        ProxyCommand should not split on equals signs within the value.
+        """
+        conf = """
+Host space-delimited
+    ProxyCommand foo bar=biz baz
+
+Host equals-delimited
+    ProxyCommand=foo bar=biz baz
+"""
+        f = StringIO(conf)
+        config = paramiko.util.parse_ssh_config(f)
+        for host in ('space-delimited', 'equals-delimited'):
+            self.assertEqual(
+                host_config(host, config)['proxycommand'],
+                'foo bar=biz baz'
+            )
+
+    def test_10_proxycommand_interpolation(self):
+        """
+        ProxyCommand should perform interpolation on the value
+        """
+        config = paramiko.util.parse_ssh_config(StringIO("""
+Host specific
+    Port 37
+    ProxyCommand host %h port %p lol
+
+Host portonly
+    Port 155
+
+Host *
+    Port 25
+    ProxyCommand host %h port %p
+"""))
+        for host, val in (
+            ('foo.com', "host foo.com port 25"),
+            ('specific', "host specific port 37 lol"),
+            ('portonly', "host portonly port 155"),
+        ):
+            self.assertEqual(
+                host_config(host, config)['proxycommand'],
+                val
+            )
+
+    def test_11_host_config_test_negation(self):
+        test_config_file = """
+Host www13.* !*.example.com
+    Port 22
+
+Host *.example.com !www13.*
+    Port 2222
+
+Host www13.*
+    Port 8080
+
+Host *
+    Port 3333
+    """
+        f = StringIO(test_config_file)
+        config = paramiko.util.parse_ssh_config(f)
+        host = 'www13.example.com'
+        self.assertEqual(
+            paramiko.util.lookup_ssh_host_config(host, config),
+            {'hostname': host, 'port': '8080'}
+        )
+
+    def test_12_host_config_test_proxycommand(self):
+        test_config_file = """
+Host proxy-with-equal-divisor-and-space
+ProxyCommand = foo=bar
+
+Host proxy-with-equal-divisor-and-no-space
+ProxyCommand=foo=bar
+
+Host proxy-without-equal-divisor
+ProxyCommand foo=bar:%h-%p
+    """
+        for host, values in {
+            'proxy-with-equal-divisor-and-space'   :{'hostname': 'proxy-with-equal-divisor-and-space',
+                                                     'proxycommand': 'foo=bar'},
+            'proxy-with-equal-divisor-and-no-space':{'hostname': 'proxy-with-equal-divisor-and-no-space',
+                                                     'proxycommand': 'foo=bar'},
+            'proxy-without-equal-divisor'          :{'hostname': 'proxy-without-equal-divisor',
+                                                     'proxycommand':
+                                                     'foo=bar:proxy-without-equal-divisor-22'}
+        }.items():
+
+            f = StringIO(test_config_file)
+            config = paramiko.util.parse_ssh_config(f)
+            self.assertEqual(
+                paramiko.util.lookup_ssh_host_config(host, config),
+                values
+            )
+
+    def test_11_host_config_test_identityfile(self):
+        test_config_file = """
+
+IdentityFile id_dsa0
+
+Host *
+IdentityFile id_dsa1
+
+Host dsa2
+IdentityFile id_dsa2
+
+Host dsa2*
+IdentityFile id_dsa22
+    """
+        for host, values in {
+            'foo'   :{'hostname': 'foo',
+                      'identityfile': ['id_dsa0', 'id_dsa1']},
+            'dsa2'  :{'hostname': 'dsa2',
+                      'identityfile': ['id_dsa0', 'id_dsa1', 'id_dsa2', 'id_dsa22']},
+            'dsa22' :{'hostname': 'dsa22',
+                      'identityfile': ['id_dsa0', 'id_dsa1', 'id_dsa22']}
+        }.items():
+
+            f = StringIO(test_config_file)
+            config = paramiko.util.parse_ssh_config(f)
+            self.assertEqual(
+                paramiko.util.lookup_ssh_host_config(host, config),
+                values
+            )
+
+    def test_12_config_addressfamily_and_lazy_fqdn(self):
+        """
+        Ensure the code path honoring non-'all' AddressFamily doesn't asplode
+        """
+        test_config = """
+AddressFamily inet
+IdentityFile something_%l_using_fqdn
+"""
+        config = paramiko.util.parse_ssh_config(StringIO(test_config))
+        assert config.lookup('meh')  # will die during lookup() if bug regresses
+
+    def test_clamp_value(self):
+        self.assertEqual(32768, paramiko.util.clamp_value(32767, 32768, 32769))
+        self.assertEqual(32767, paramiko.util.clamp_value(32767, 32765, 32769))
+        self.assertEqual(32769, paramiko.util.clamp_value(32767, 32770, 32769))
+
+    def test_13_config_dos_crlf_succeeds(self):
+        config_file = StringIO("host abcqwerty\r\nHostName 127.0.0.1\r\n")
+        config = paramiko.SSHConfig()
+        config.parse(config_file)
+        self.assertEqual(config.lookup("abcqwerty")["hostname"], "127.0.0.1")
+
+    def test_14_get_hostnames(self):
+        f = StringIO(test_config_file)
+        config = paramiko.util.parse_ssh_config(f)
+        self.assertEqual(config.get_hostnames(), set(['*', '*.example.com', 'spoo.example.com']))
+
+    def test_quoted_host_names(self):
+        test_config_file = """\
+Host "param pam" param "pam"
+    Port 1111
+
+Host "param2"
+    Port 2222
+
+Host param3 parara
+    Port 3333
+
+Host param4 "p a r" "p" "par" para
+    Port 4444
+"""
+        res = {
+            'param pam': {'hostname': 'param pam', 'port': '1111'},
+            'param': {'hostname': 'param', 'port': '1111'},
+            'pam': {'hostname': 'pam', 'port': '1111'},
+
+            'param2': {'hostname': 'param2', 'port': '2222'},
+
+            'param3': {'hostname': 'param3', 'port': '3333'},
+            'parara': {'hostname': 'parara', 'port': '3333'},
+
+            'param4': {'hostname': 'param4', 'port': '4444'},
+            'p a r': {'hostname': 'p a r', 'port': '4444'},
+            'p': {'hostname': 'p', 'port': '4444'},
+            'par': {'hostname': 'par', 'port': '4444'},
+            'para': {'hostname': 'para', 'port': '4444'},
+        }
+        f = StringIO(test_config_file)
+        config = paramiko.util.parse_ssh_config(f)
+        for host, values in res.items():
+            self.assertEquals(
+                paramiko.util.lookup_ssh_host_config(host, config),
+                values
+            )
+
+    def test_quoted_params_in_config(self):
+        test_config_file = """\
+Host "param pam" param "pam"
+    IdentityFile id_rsa
+
+Host "param2"
+    IdentityFile "test rsa key"
+
+Host param3 parara
+    IdentityFile id_rsa
+    IdentityFile "test rsa key"
+"""
+        res = {
+            'param pam': {'hostname': 'param pam', 'identityfile': ['id_rsa']},
+            'param': {'hostname': 'param', 'identityfile': ['id_rsa']},
+            'pam': {'hostname': 'pam', 'identityfile': ['id_rsa']},
+
+            'param2': {'hostname': 'param2', 'identityfile': ['test rsa key']},
+
+            'param3': {'hostname': 'param3', 'identityfile': ['id_rsa', 'test rsa key']},
+            'parara': {'hostname': 'parara', 'identityfile': ['id_rsa', 'test rsa key']},
+        }
+        f = StringIO(test_config_file)
+        config = paramiko.util.parse_ssh_config(f)
+        for host, values in res.items():
+            self.assertEquals(
+                paramiko.util.lookup_ssh_host_config(host, config),
+                values
+            )
+
+    def test_quoted_host_in_config(self):
+        conf = SSHConfig()
+        correct_data = {
+            'param': ['param'],
+            '"param"': ['param'],
+
+            'param pam': ['param', 'pam'],
+            '"param" "pam"': ['param', 'pam'],
+            '"param" pam': ['param', 'pam'],
+            'param "pam"': ['param', 'pam'],
+
+            'param "pam" p': ['param', 'pam', 'p'],
+            '"param" pam "p"': ['param', 'pam', 'p'],
+
+            '"pa ram"': ['pa ram'],
+            '"pa ram" pam': ['pa ram', 'pam'],
+            'param "p a m"': ['param', 'p a m'],
+        }
+        incorrect_data = [
+            'param"',
+            '"param',
+            'param "pam',
+            'param "pam" "p a',
+        ]
+        for host, values in correct_data.items():
+            self.assertEquals(
+                conf._get_hosts(host),
+                values
+            )
+        for host in incorrect_data:
+            self.assertRaises(Exception, conf._get_hosts, host)
+
+    def test_safe_string(self):
+        vanilla = b("vanilla")
+        has_bytes = b("has \7\3 bytes")
+        safe_vanilla = safe_string(vanilla)
+        safe_has_bytes = safe_string(has_bytes)
+        expected_bytes = b("has %07%03 bytes")
+        err = "{0!r} != {1!r}"
+        assert safe_vanilla == vanilla, err.format(safe_vanilla, vanilla)
+        assert safe_has_bytes == expected_bytes, \
+            err.format(safe_has_bytes, expected_bytes)
+
+    def test_proxycommand_none_issue_418(self):
+        test_config_file = """
+Host proxycommand-standard-none
+    ProxyCommand None
+
+Host proxycommand-with-equals-none
+    ProxyCommand=None
+    """
+        for host, values in {
+            'proxycommand-standard-none':    {'hostname': 'proxycommand-standard-none'},
+            'proxycommand-with-equals-none': {'hostname': 'proxycommand-with-equals-none'}
+        }.items():
+
+            f = StringIO(test_config_file)
+            config = paramiko.util.parse_ssh_config(f)
+            self.assertEqual(
+                paramiko.util.lookup_ssh_host_config(host, config),
+                values
+            )

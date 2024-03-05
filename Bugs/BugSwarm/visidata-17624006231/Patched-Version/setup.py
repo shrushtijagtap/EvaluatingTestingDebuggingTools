@@ -1,82 +1,53 @@
 #!/usr/bin/env python3
 
-# python setup.py sdist --format=zip,gztar
+from setuptools import setup
+# tox can't actually run python3 setup.py: https://github.com/tox-dev/tox/issues/96
+#from visidata import __version__
+__version__ = '2.12dev'
 
-import os
-import sys
-import platform
-import importlib.util
-import argparse
-import subprocess
+setup(name='visidata',
+      version=__version__,
+      description='terminal interface for exploring and arranging tabular data',
+      long_description=open('README.md').read(),
+      long_description_content_type='text/markdown',
+      author='Saul Pwanson',
+      python_requires='>=3.7',
+      author_email='visidata@saul.pw',
+      url='https://visidata.org',
+      download_url='https://github.com/saulpw/visidata/tarball/' + __version__,
+      scripts=['bin/vd'],
+      entry_points={'console_scripts': [
+          'visidata=visidata.main:vd_cli'
+        ],
+      },
+      py_modules=['visidata'],
+      install_requires=[
+          'python-dateutil',
+          'windows-curses<2.3.1; platform_system == "Windows"',  #1841
+          'importlib-metadata >= 3.6',
+          'importlib_resources; python_version<"3.9"'
+      ],
+      packages=['visidata', 'visidata.loaders', 'visidata.vendor', 'visidata.tests', 'visidata.ddw', 'visidata.man', 'visidata.themes', 'visidata.features', 'visidata.experimental', 'visidata.apps', 'visidata.apps.vgit', 'visidata.apps.vdsql', 'visidata.desktop'],
+      data_files=[('share/man/man1', ['visidata/man/vd.1', 'visidata/man/visidata.1']), ('share/applications/', ['visidata/desktop/visidata.desktop'])],
+      package_data={'visidata.man': ['vd.1', 'vd.txt'], 'visidata.ddw': ['input.ddw'], 'visidata.tests': ['sample.tsv'], 'visidata.desktop': ['visidata.desktop']},
+      license='GPLv3',
+      classifiers=[
+          'Development Status :: 5 - Production/Stable',
+          'Environment :: Console',
+          'Environment :: Console :: Curses',
+          'Intended Audience :: Developers',
+          'Intended Audience :: Science/Research',
+          'Intended Audience :: System Administrators',
+          'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+          'Operating System :: OS Independent',
+          'Programming Language :: Python :: 3',
+          'Topic :: Database :: Front-Ends',
+          'Topic :: Scientific/Engineering',
+          'Topic :: Office/Business :: Financial :: Spreadsheet',
+          'Topic :: Scientific/Engineering :: Visualization',
+          'Topic :: Utilities',
+      ],
+      keywords=('console tabular data spreadsheet terminal viewer textpunk'
+                'curses csv hdf5 h5 xlsx excel tsv'),
+      )
 
-from setuptools import setup, find_packages
-from setuptools.command.install import install
-
-MIN_PYTHON_VERSION = "3.8.0"
-_min_python_version_tuple = tuple(map(int, (MIN_PYTHON_VERSION.split("."))))
-
-
-if sys.version_info[:3] < _min_python_version_tuple:
-    sys.exit("Error: Electrum requires Python version >= %s..." % MIN_PYTHON_VERSION)
-
-with open('contrib/requirements/requirements.txt') as f:
-    requirements = f.read().splitlines()
-
-with open('contrib/requirements/requirements-hw.txt') as f:
-    requirements_hw = f.read().splitlines()
-
-# load version.py; needlessly complicated alternative to "imp.load_source":
-version_spec = importlib.util.spec_from_file_location('version', 'electrum/version.py')
-version_module = version = importlib.util.module_from_spec(version_spec)
-version_spec.loader.exec_module(version_module)
-
-data_files = []
-
-if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
-    # note: we can't use absolute paths here. see #7787
-    data_files += [
-        (os.path.join('share', 'applications'),               ['electrum.desktop']),
-        (os.path.join('share', 'pixmaps'),                    ['electrum/gui/icons/electrum.png']),
-        (os.path.join('share', 'icons/hicolor/128x128/apps'), ['electrum/gui/icons/electrum.png']),
-    ]
-
-extras_require = {
-    'hardware': requirements_hw,
-    'gui': ['pyqt5'],
-    'crypto': ['cryptography>=2.6'],
-    'tests': ['pycryptodomex>=3.7', 'cryptography>=2.6', 'pyaes>=0.1a1'],
-    'qml_gui': ['pyqt6', 'Pillow>=8.4.0']
-}
-# 'full' extra that tries to grab everything an enduser would need (except for libsecp256k1...)
-extras_require['full'] = [pkg for sublist in
-                          (extras_require['hardware'], extras_require['gui'], extras_require['crypto'])
-                          for pkg in sublist]
-# legacy. keep 'fast' extra working
-extras_require['fast'] = extras_require['crypto']
-
-
-setup(
-    name="Electrum",
-    version=version.ELECTRUM_VERSION,
-    python_requires='>={}'.format(MIN_PYTHON_VERSION),
-    install_requires=requirements,
-    extras_require=extras_require,
-    packages=(['electrum',]
-              + [('electrum.'+pkg) for pkg in
-                 find_packages('electrum', exclude=["tests"])]),
-    package_dir={
-        'electrum': 'electrum'
-    },
-    # Note: MANIFEST.in lists what gets included in the tar.gz, and the
-    # package_data kwarg lists what gets put in site-packages when pip installing the tar.gz.
-    # By specifying include_package_data=True, MANIFEST.in becomes responsible for both.
-    include_package_data=True,
-    scripts=['electrum/electrum'],
-    data_files=data_files,
-    description="Lightweight Bitcoin Wallet",
-    author="Thomas Voegtlin",
-    author_email="thomasv@electrum.org",
-    license="MIT Licence",
-    url="https://electrum.org",
-    long_description="""Lightweight Bitcoin Wallet""",
-)

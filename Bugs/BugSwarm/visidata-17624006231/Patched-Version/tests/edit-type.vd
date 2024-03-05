@@ -1,0 +1,9 @@
+sheet	col	row	longname	input	keystrokes	comment
+			open-file	sample_data/benchmark.csv	o	
+benchmark			columns-sheet		C	
+benchmark_columns	type	キQuantity	edit-cell	int	e	
+benchmark_columns		キUnit	select-row		s	
+benchmark_columns		キPaid	select-row		s	
+benchmark_columns	type	キPaid	setcol-input	currency	ge	
+benchmark			describe-sheet		I	
+benchmark_describe	mode		hide-col		-	hide current column

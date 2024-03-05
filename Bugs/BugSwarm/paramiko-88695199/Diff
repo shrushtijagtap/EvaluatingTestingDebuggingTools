@@ -1,0 +1,34 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/paramiko/transport.py b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/paramiko/transport.py
+index d2fccf07..98b810ee 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/paramiko/transport.py
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/paramiko/transport.py
+@@ -1534,7 +1534,9 @@ class Transport (threading.Thread, ClosingContextManager):
+         m.add_bytes(self.H)
+         m.add_byte(b(id))
+         m.add_bytes(self.session_id)
+-        hash_algo = self.kex_engine.hash_algo
++        # Fallback to SHA1 for kex engines that fail to specify a hex
++        # algorithm, or for e.g. transport tests that don't run kexinit.
++        hash_algo = getattr(self.kex_engine, 'hex_algo', sha1)
+         out = sofar = hash_algo(m.asbytes()).digest()
+         while len(out) < nbytes:
+             m = Message()
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/tasks.py b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/tasks.py
+index 7c920daf..05654d3b 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Buggy-version/tasks.py
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/paramiko-88695199/Patched-Version/tasks.py
+@@ -9,11 +9,12 @@ from invocations.packaging import publish
+ 
+ # Until we move to spec-based testing
+ @task
+-def test(ctx, coverage=False):
++def test(ctx, coverage=False, flags=""):
++    if "--verbose" not in flags.split():
++        flags += " --verbose"
+     runner = "python"
+     if coverage:
+         runner = "coverage run --source=paramiko"
+-    flags = "--verbose"
+     ctx.run("{0} test.py {1}".format(runner, flags), pty=True)
+ 
+ 

@@ -1,0 +1,19 @@
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Lambda Functions Map
+Start learning functional programming in Java by writing simple math functions using Lambdas 💪
+
+### Objectives
+
+* implement **abs** (absolute) function using lambda ✅
+* implement **sgn** (signum) function using lambda ✅
+* implement **increment** function using lambda ✅
+* implement **decrement** function using lambda ✅
+* implement **square** function using lambda ✅
+* add all those functions to the function map ✅
+
+---
+
+#### 🆕 First time here? – [See Introduction](https://github.com/bobocode-projects/java-fundamentals-course/tree/main/0-0-intro#introduction)
+#### ➡️ Have any feedback? – [Please fill the form ](https://forms.gle/TPSCpZAMZvNXYCoA6)
+
+##
+<div align="center"><img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/animation/GitHub%20Star_3.gif" height=50/></div>

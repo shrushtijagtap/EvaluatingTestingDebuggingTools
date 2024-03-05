@@ -1,0 +1,13 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java
+index 8e5269ec8..736f5871c 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Buggy-version/src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/traccar-9287925064/Patched-Version/src/main/java/org/traccar/protocol/MeitrackProtocolDecoder.java
+@@ -363,7 +363,7 @@ public class MeitrackProtocolDecoder extends BaseProtocolDecoder {
+             positions.add(position);
+         }
+ 
+-        if (channel == null) {
++        if (channel != null) {
+             StringBuilder command = new StringBuilder("@@");
+             command.append(flag).append(27 + positions.size() / 10).append(",");
+             command.append(imei).append(",CCC,").append(positions.size()).append("*");
