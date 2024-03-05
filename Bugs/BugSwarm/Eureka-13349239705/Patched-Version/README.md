@@ -1,88 +1,143 @@
-
-# fastjson
-
-[![Java CI](https://github.com/alibaba/fastjson/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/alibaba/fastjson/actions/workflows/ci.yaml)
-[![Codecov](https://codecov.io/gh/alibaba/fastjson/branch/master/graph/badge.svg)](https://codecov.io/gh/alibaba/fastjson/branch/master)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.alibaba/fastjson/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.alibaba/fastjson/)
-[![GitHub release](https://img.shields.io/github/release/alibaba/fastjson.svg)](https://github.com/alibaba/fastjson/releases)
-[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/alibaba/fastjson) 
-[![Fuzzing Status](https://oss-fuzz-build-logs.storage.googleapis.com/badges/fastjson2.svg)](https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&can=1&q=proj:fastjson2)
-[![QualityGate](https://quality-gate.com/backend/api/timeline?branchName=master&projectName=alibaba_fastjson)](https://quality-gate.com/dashboard/branches/7816#overview)
-
-Fastjson is a Java library that can be used to convert Java Objects into their JSON representation. It can also be used to convert a JSON string to an equivalent Java object. Fastjson can work with arbitrary Java objects including pre-existing objects that you do not have source-code of.
-
-[FASTJSON 2.0.x](https://github.com/alibaba/fastjson2/releases) has been released, faster and more secure, we recommend you [upgrade](https://github.com/alibaba/fastjson2/wiki/fastjson_1_upgrade_cn) to the latest version.
-
-### Fastjson Goals
- * Provide the best performance on the server-side and android client
- * Provide simple toJSONString() and parseObject() methods to convert Java objects to JSON and vice-versa
- * Allow pre-existing unmodifiable objects to be converted to and from JSON
- * Extensive support of Java Generics
- * Allow custom representations for objects
- * Support arbitrarily complex objects (with deep inheritance hierarchies and extensive use of generic types)
-
-![fastjson](logo.jpg "fastjson")
-
-## Documentation
-
-- [Documentation Home](https://github.com/alibaba/fastjson/wiki)
-- [Contributing Code](https://github.com/nschaffner/fastjson/blob/master/CONTRIBUTING.md)
-- [Frequently Asked Questions](https://github.com/alibaba/fastjson/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
-- FASTJSON 1.x User Upgrade Guid [https://github.com/alibaba/fastjson2/wiki/fastjson_1_upgrade_cn](https://github.com/alibaba/fastjson2/wiki/fastjson_1_upgrade_cn
-)
-
-## Benchmark
-
-* Eishay benchmark https://github.com/eishay/jvm-serializers/wiki
-* fastjson2 benchmark [https://github.com/alibaba/fastjson2/wiki/fastjson_benchmark](https://github.com/alibaba/fastjson2/wiki/fastjson_benchmark)
-
-
-## Download
-
-- [maven][1]
-- [the latest JAR][2]
-
-[1]: https://repo1.maven.org/maven2/com/alibaba/fastjson/
-[2]: https://search.maven.org/remote_content?g=com.alibaba&a=fastjson&v=LATEST
-
-## Maven
-
-```xml
-<dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>fastjson</artifactId>
-    <version>2.0.31</version>
-</dependency>
-```
-
-## Gradle via JCenter
-
-``` groovy
-compile 'com.alibaba:fastjson:2.0.28'
-```
-
-
-Please see this [Wiki Download Page][Wiki] for more repository info.
-
-[Wiki]: https://github.com/alibaba/fastjson/wiki#download
-
-### *License*
-
-Fastjson is released under the [Apache 2.0 license](license.txt).
+# Electrum - Lightweight Bitcoin client
 
 ```
-Copyright 1999-2020 Alibaba Group Holding Ltd.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at the following link.
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Licence: MIT Licence
+Author: Thomas Voegtlin
+Language: Python (>= 3.8)
+Homepage: https://electrum.org/
 ```
+
+[![Build Status](https://api.cirrus-ci.com/github/spesmilo/electrum.svg?branch=master)](https://cirrus-ci.com/github/spesmilo/electrum)
+[![Test coverage statistics](https://coveralls.io/repos/github/spesmilo/electrum/badge.svg?branch=master)](https://coveralls.io/github/spesmilo/electrum?branch=master)
+[![Help translate Electrum online](https://d322cqt584bo4o.cloudfront.net/electrum/localized.svg)](https://crowdin.com/project/electrum)
+
+
+## Getting started
+
+_(If you've come here looking to simply run Electrum,
+[you may download it here](https://electrum.org/#download).)_
+
+Electrum itself is pure Python, and so are most of the required dependencies,
+but not everything. The following sections describe how to run from source, but here
+is a TL;DR:
+
+```
+$ sudo apt-get install libsecp256k1-dev
+$ python3 -m pip install --user ".[gui,crypto]"
+```
+
+### Not pure-python dependencies
+
+If you want to use the Qt interface, install the Qt dependencies:
+```
+$ sudo apt-get install python3-pyqt5
+```
+
+For elliptic curve operations,
+[libsecp256k1](https://github.com/bitcoin-core/secp256k1)
+is a required dependency:
+```
+$ sudo apt-get install libsecp256k1-dev
+```
+
+Alternatively, when running from a cloned repository, a script is provided to build
+libsecp256k1 yourself:
+```
+$ sudo apt-get install automake libtool
+$ ./contrib/make_libsecp256k1.sh
+```
+
+Due to the need for fast symmetric ciphers,
+[cryptography](https://github.com/pyca/cryptography) is required.
+Install from your package manager (or from pip):
+```
+$ sudo apt-get install python3-cryptography
+```
+
+If you would like hardware wallet support,
+[see this](https://github.com/spesmilo/electrum-docs/blob/master/hardware-linux.rst).
+
+
+### Running from tar.gz
+
+If you downloaded the official package (tar.gz), you can run
+Electrum from its root directory without installing it on your
+system; all the pure python dependencies are included in the 'packages'
+directory. To run Electrum from its root directory, just do:
+```
+$ ./run_electrum
+```
+
+You can also install Electrum on your system, by running this command:
+```
+$ sudo apt-get install python3-setuptools python3-pip
+$ python3 -m pip install --user .
+```
+
+This will download and install the Python dependencies used by
+Electrum instead of using the 'packages' directory.
+It will also place an executable named `electrum` in `~/.local/bin`,
+so make sure that is on your `PATH` variable.
+
+
+### Development version (git clone)
+
+_(For OS-specific instructions, see [here for Windows](contrib/build-wine/README_windows.md),
+and [for macOS](contrib/osx/README_macos.md))_
+
+Check out the code from GitHub:
+```
+$ git clone https://github.com/spesmilo/electrum.git
+$ cd electrum
+$ git submodule update --init
+```
+
+Run install (this should install dependencies):
+```
+$ python3 -m pip install --user -e .
+```
+
+Create translations (optional):
+```
+$ sudo apt-get install python3-requests gettext qttools5-dev-tools
+$ ./contrib/pull_locale
+```
+
+Finally, to start Electrum:
+```
+$ ./run_electrum
+```
+
+### Run tests
+
+Run unit tests with `pytest`:
+```
+$ pytest tests -v
+```
+
+To run a single file, specify it directly like this:
+```
+$ pytest tests/test_bitcoin.py -v
+```
+
+## Creating Binaries
+
+- [Linux (tarball)](contrib/build-linux/sdist/README.md)
+- [Linux (AppImage)](contrib/build-linux/appimage/README.md)
+- [macOS](contrib/osx/README.md)
+- [Windows](contrib/build-wine/README.md)
+- [Android](contrib/android/Readme.md)
+
+
+## Contributing
+
+Any help testing the software, reporting or fixing bugs, reviewing pull requests
+and recent changes, writing tests, or helping with outstanding issues is very welcome.
+Implementing new features, or improving/refactoring the codebase, is of course
+also welcome, but to avoid wasted effort, especially for larger changes,
+we encourage discussing these on the issue tracker or IRC first.
+
+Besides [GitHub](https://github.com/spesmilo/electrum),
+most communication about Electrum development happens on IRC, in the
+`#electrum` channel on Libera Chat. The easiest way to participate on IRC is
+with the web client, [web.libera.chat](https://web.libera.chat/#electrum).
