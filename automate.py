@@ -1,10 +1,7 @@
-import json
-
-import re
-import os
+from os import path, listdir
 
 import sys
-from andres_bug_benchmark_edit import process_bug as bears_process_bug
+from scripts.bug_benchmarks import process_bug as bears_process_bug
 from Bugs.QuixBugs.benchmarking_Quixbugs import process_bug as quixbugs_process_bug
 from Bugs.Defects4J.defects4j_benchmarking import process_bug as defects4j_process_bug
 
@@ -26,7 +23,7 @@ if __name__ == "__main__":
     if bugDataset == None or bugDataset not in BUG_DATASET:
         print("Invalid argument - Bug Dataset")
     else:
-        BUG_NAMES = os.listdir(os.path.join(os.path.dirname(__file__), 'Bugs', bugDataset))
+        BUG_NAMES = listdir(path.join(path.dirname(__file__), 'Bugs', bugDataset))
 
     if bugName == None or bugName not in BUG_NAMES:
         print("Invalid argument - Bug Name")
@@ -34,7 +31,7 @@ if __name__ == "__main__":
     if metric == None or metric not in METRICS:
         print("Invalid argument - Metric")
     
-    bugPath = os.path.join(os.path.dirname(__file__), 'Bugs', bugDataset, bugName)
+    bugPath = path.join(path.dirname(__file__), 'Bugs', bugDataset, bugName)
     
     # Assuming all the bug benchmarking files are similar to Bears benchamraking file
 

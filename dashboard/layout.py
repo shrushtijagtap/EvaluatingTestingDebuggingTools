@@ -1,7 +1,7 @@
 from dash import html
 import dash_bootstrap_components as dbc
 
-from tabs import make_tab
+from dashboard.tabs import make_tab
 
 tab_names = [
     "Bears",
@@ -22,7 +22,7 @@ header = dbc.Row([
     align="center",
 )
 
-layout = dbc.Container(
+main_content = dbc.Container(
     [
         header,
         html.Hr(),

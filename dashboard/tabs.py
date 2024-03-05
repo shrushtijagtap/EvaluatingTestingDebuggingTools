@@ -1,4 +1,4 @@
-import os
+from os import path
 from dash import dcc, dash_table
 from dash import html
 import dash_bootstrap_components as dbc
@@ -7,7 +7,7 @@ import plotly.express as px
 
 import json
 
-repo_data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Bugs'))
+repo_data_path = path.abspath(path.join(path.dirname(__file__), '..', 'Bugs'))
 
 y_labels = {
     'CChange': '# Changed Classes',
@@ -25,7 +25,7 @@ def load_json_data(file_path) -> list:
     file_path = f"{file_path}/results/benchmark_results.json"
 
     # If file does not exist, return empty list
-    if not os.path.exists(file_path):
+    if not path.exists(file_path):
         print(f"File does not exist: {file_path}")
         return []
 
@@ -37,8 +37,9 @@ def load_json_data(file_path) -> list:
     for bug_id, metrics in data.items():
         entry = {'Bug ID': bug_id}
         for metric, value in metrics.items():
-            # temp remove LD and CodeBLEU
-            if metric not in ['LD', 'CodeBLEU']:
+            if metric in ['LD', 'CodeBLEU']:
+                entry[metric] = ', '.join([f'{num}' for file, num in value.items()])
+            else:
                 entry[metric] = value
 
         metrics_summary.append(entry)
@@ -47,12 +48,32 @@ def load_json_data(file_path) -> list:
 
 
 def create_box_plot(df, metric):
-    fig = px.box(df, y=metric, title=f'{metric}')
+    if metric in ['LD', 'CodeBLEU']:
+        df_metric = preprocess_special_metric(df, metric)
+        fig = px.box(df_metric, y=metric, title=f'{metric}')
+    else:
+        fig = px.box(df, y=metric, title=f'{metric}')
+
     fig.update_layout(
         title_x=0.5,
-        yaxis_title=y_labels[metric],
+        yaxis_title=y_labels.get(metric, ""),
     )
     return fig
+
+
+def preprocess_special_metric(df, metric):
+    # Expand string to value list
+    df_expanded = df.copy()
+    df_expanded[metric] = df[metric].apply(lambda x: [float(num) for num in x.split(', ')] if pd.notna(x) else [])
+
+    rows = []
+    for _, row in df_expanded.iterrows():
+        bug_id = row['Bug ID']
+        for value in row[metric]:
+            rows.append({'Bug ID': bug_id, metric: value})
+    df_metric = pd.DataFrame(rows)
+
+    return df_metric
 
 
 def make_tab(tab_name: str):
@@ -65,12 +86,8 @@ def make_tab(tab_name: str):
 
     # Create pandas dataframe
     df_metrics = pd.DataFrame(data)
-    print(len(df_metrics.columns))
-    print(df_metrics.columns)
-    print(df_metrics.head())
 
-    metrics = ['CChange', 'MChange', 'LChange', 'CB', 'CP', 'CC']
-    # metrics = ['CChange', 'MChange', 'LChange', 'CB', 'CP', 'CC', 'LD', 'CodeBLEU]
+    metrics = ['CChange', 'MChange', 'LChange', 'LD', 'CB', 'CP', 'CC', 'CodeBLEU']
 
     plots = [dcc.Graph(figure=create_box_plot(df_metrics, metric)) for metric in metrics]
 
@@ -82,7 +99,7 @@ def make_tab(tab_name: str):
     ])
 
     data_display = dash_table.DataTable(
-        id='metrics-table'+tab_name,
+        id='metrics-table' + tab_name,
         columns=[{"name": col, "id": col} for col in df_metrics.columns],
         data=df_metrics.to_dict('records'),
         style_table={'overflowX': 'auto'},
