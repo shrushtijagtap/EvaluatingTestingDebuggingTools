@@ -1,0 +1,13 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Eureka-13448647094/Buggy-version/src/eureka/S1_detector_processing/group_level.py b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Eureka-13448647094/Patched-Version/src/eureka/S1_detector_processing/group_level.py
+index e60de3df..58ed6eae 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Eureka-13448647094/Buggy-version/src/eureka/S1_detector_processing/group_level.py
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/Eureka-13448647094/Patched-Version/src/eureka/S1_detector_processing/group_level.py
+@@ -140,7 +140,7 @@ def mask_trace(input_model, log, meta):
+ 
+     # now create mask based on smooth_coms center.
+     if meta.bg_x1 is not None and meta.bg_x2 is not None:
+-        range_cols = range(meta.bg_x1, meta.bg_x2):
++        range_cols = range(meta.bg_x1, meta.bg_x2)
+     else:
+         range_cols = range(ncol)
+     for nc in range_cols:
