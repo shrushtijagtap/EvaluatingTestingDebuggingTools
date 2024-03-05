@@ -126,7 +126,7 @@ def get_files_changed(diff):
 
 def process_bug(bug_dir, option=None):
     # Get the diff file
-    if not Path(bug_dir).is_dir():
+    if not Path(os.path.join(bug_dir, "Diff")).is_file():
         return
 
     diff = []
