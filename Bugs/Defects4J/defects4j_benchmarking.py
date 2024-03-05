@@ -177,7 +177,7 @@ if __name__ == "__main__":
     benchmark_results = {}
 
     for path in dir_paths:
-        if path == "scripts":
+        if path == "scripts" or path == "results":
             continue
 
         print("For bug ", count, " : ", path)
@@ -188,5 +188,5 @@ if __name__ == "__main__":
     
     print(json.dumps(benchmark_results, indent=4))
 
-    with open(os.path.join(parent_dir, "benchmark_results.json"), "w") as file:
+    with open(os.path.join(parent_dir, "results/benchmark_results.json"), "w") as file:
         json.dump(benchmark_results, file)
