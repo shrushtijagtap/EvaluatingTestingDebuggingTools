@@ -267,7 +267,19 @@ def get_class_change_count(diff):
 
 
 def get_method_change_count(diff):
-    return 0
+    noOfMethodsChanged = 0
+    pattern = re.compile(r'\b(private|protected|public)\s+(?!class\b)\w+')
+
+    for line in diff:
+        match = re.search(pattern, line)
+        if match:
+            noOfMethodsChanged+=1
+
+    if noOfMethodsChanged <= 0:
+        return 1
+
+    return noOfMethodsChanged
+
 
 
 def get_line_change_count(diff):
@@ -352,12 +364,12 @@ if __name__ == "__main__":
     count = 1
     benchmark_results = {}
 
-    for bud_id in selected_bug_ids:
-        path = os.path.join(parent_dir, bud_id)
+    for bug_id in selected_bug_ids:
+        path = os.path.join(parent_dir, bug_id)
         print("For bug ", count, " : ", path)
         count += 1
 
-        benchmark_results[bud_id] = process_bug(path)
+        benchmark_results[bug_id] = process_bug(path)
         print(json.dumps(benchmark_results, indent=4))
 
     with open(os.path.join(parent_dir, "benchmark_results.json"), "w") as file:

@@ -1,7 +1,7 @@
 {
   "FIND_IN_SORTED": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 5,
     "LD": { "find_in_sorted.java": 11 },
     "CB": 5,
@@ -11,7 +11,7 @@
   },
   "LIS": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 4,
     "LD": { "lis.java": 26 },
     "CB": 7,
@@ -21,7 +21,7 @@
   },
   "BREADTH_FIRST_SEARCH": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 8,
     "LD": { "breadth_first_search.java": 52 },
     "CB": 5,
@@ -31,7 +31,7 @@
   },
   "POSSIBLE_CHANGE": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 4,
     "LD": { "possible_change.java": 26 },
     "CB": 3,
@@ -41,7 +41,7 @@
   },
   "LCS_LENGTH": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 8,
     "LD": { "lcs_length.java": 89 },
     "CB": 10,
@@ -51,7 +51,7 @@
   },
   "SHORTEST_PATH_LENGTH": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 6,
     "LD": { "shortest_path_length.java": 59 },
     "CB": 9,
@@ -61,7 +61,7 @@
   },
   "DEPTH_FIRST_SEARCH": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 5,
     "LD": { "depth_first_search.java": 84 },
     "CB": 5,
@@ -71,7 +71,7 @@
   },
   "FLATTEN": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 7,
     "LD": { "flatten.java": 25 },
     "CB": 4,
@@ -81,7 +81,7 @@
   },
   "TO_BASE": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 4,
     "LD": { "to_base.java": 24 },
     "CB": 2,
@@ -91,7 +91,7 @@
   },
   "SIEVE": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 4,
     "LD": { "sieve.java": 10 },
     "CB": 11,
@@ -101,7 +101,7 @@
   },
   "NEXT_PALINDROME": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 4,
     "LD": { "next_palindrome.java": 10 },
     "CB": 5,
@@ -111,7 +111,7 @@
   },
   "IS_VALID_PARENTHESIZATION": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 5,
     "LD": { "is_valid_parenthesization.java": 16 },
     "CB": 4,
@@ -121,7 +121,7 @@
   },
   "SHORTEST_PATHS": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 36,
     "LD": { "shortest_paths.java": 1051 },
     "CB": 8,
@@ -131,7 +131,7 @@
   },
   "SHUNTING_YARD": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 19,
     "LD": { "shunting_yard.java": 58 },
     "CB": 6,
@@ -141,7 +141,7 @@
   },
   "NEXT_PERMUTATION": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 4,
     "LD": { "next_permutation.java": 9 },
     "CB": 7,
@@ -151,7 +151,7 @@
   },
   "KTH": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 11,
     "LD": { "kth.java": 148 },
     "CB": 6,
@@ -161,7 +161,7 @@
   },
   "REVERSE_LINKED_LIST": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 5,
     "LD": { "reverse_linked_list.java": 65 },
     "CB": 2,
@@ -171,7 +171,7 @@
   },
   "GET_FACTORS": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 5,
     "LD": { "get_factors.java": 25 },
     "CB": 4,
@@ -181,7 +181,7 @@
   },
   "SUBSEQUENCES": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 6,
     "LD": { "subsequences.java": 110 },
     "CB": 4,
@@ -191,7 +191,7 @@
   },
   "MERGESORT": {
     "CChange": 1,
-    "MChange": 0,
+    "MChange": 1,
     "LChange": 4,
     "LD": { "mergesort.java": 10 },
     "CB": 7,
