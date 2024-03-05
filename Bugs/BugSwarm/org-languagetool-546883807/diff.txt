@@ -1,0 +1,66 @@
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/HEAD
+index 98f99da0..977f3d67 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/HEAD
+@@ -1 +1 @@
+-52d294407895987579a42e942a4ab8b7261a23e7
++011f67cb0839a94f65b17203681e58c039f0223c
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/index b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/index
+index 6d1cdf5f..49af0767 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/index and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/index differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/HEAD
+index 6dc2b40d..9e90680d 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/HEAD
+@@ -1,2 +1,2 @@
+-0000000000000000000000000000000000000000 c67a9af0231688a81a772c1fe72d027aa885dbd3 Saahil Hiranandani <suc2@illinois.edu> 1709660081 -0600	clone: from https://github.com/languagetool-org/languagetool.git
+-c67a9af0231688a81a772c1fe72d027aa885dbd3 52d294407895987579a42e942a4ab8b7261a23e7 Saahil Hiranandani <suc2@illinois.edu> 1709660085 -0600	checkout: moving from master to 52d294407895987579a42e942a4ab8b7261a23e7
++0000000000000000000000000000000000000000 c67a9af0231688a81a772c1fe72d027aa885dbd3 Saahil Hiranandani <suc2@illinois.edu> 1709660647 -0600	clone: from https://github.com/languagetool-org/languagetool.git
++c67a9af0231688a81a772c1fe72d027aa885dbd3 011f67cb0839a94f65b17203681e58c039f0223c Saahil Hiranandani <suc2@illinois.edu> 1709660652 -0600	checkout: moving from master to 011f67cb0839a94f65b17203681e58c039f0223c
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/refs/heads/master b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/refs/heads/master
+index e9f4626f..aae64e5f 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/refs/heads/master
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/refs/heads/master
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 c67a9af0231688a81a772c1fe72d027aa885dbd3 Saahil Hiranandani <suc2@illinois.edu> 1709660081 -0600	clone: from https://github.com/languagetool-org/languagetool.git
++0000000000000000000000000000000000000000 c67a9af0231688a81a772c1fe72d027aa885dbd3 Saahil Hiranandani <suc2@illinois.edu> 1709660647 -0600	clone: from https://github.com/languagetool-org/languagetool.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index e9f4626f..aae64e5f 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 c67a9af0231688a81a772c1fe72d027aa885dbd3 Saahil Hiranandani <suc2@illinois.edu> 1709660081 -0600	clone: from https://github.com/languagetool-org/languagetool.git
++0000000000000000000000000000000000000000 c67a9af0231688a81a772c1fe72d027aa885dbd3 Saahil Hiranandani <suc2@illinois.edu> 1709660647 -0600	clone: from https://github.com/languagetool-org/languagetool.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/objects/pack/pack-2a7eb0f33ae12bcbf91c04f9a0ff38f3312c9e52.idx b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/objects/pack/pack-52e8bb63adbaa440523103eb024cfae5db921a86.idx
+similarity index 85%
+rename from D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/objects/pack/pack-2a7eb0f33ae12bcbf91c04f9a0ff38f3312c9e52.idx
+rename to D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/objects/pack/pack-52e8bb63adbaa440523103eb024cfae5db921a86.idx
+index 33269d96..662927d3 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/objects/pack/pack-2a7eb0f33ae12bcbf91c04f9a0ff38f3312c9e52.idx and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/objects/pack/pack-52e8bb63adbaa440523103eb024cfae5db921a86.idx differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/objects/pack/pack-2a7eb0f33ae12bcbf91c04f9a0ff38f3312c9e52.pack b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/objects/pack/pack-52e8bb63adbaa440523103eb024cfae5db921a86.pack
+similarity index 94%
+rename from D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/objects/pack/pack-2a7eb0f33ae12bcbf91c04f9a0ff38f3312c9e52.pack
+rename to D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/objects/pack/pack-52e8bb63adbaa440523103eb024cfae5db921a86.pack
+index 6ccf1834..da5fa569 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/objects/pack/pack-2a7eb0f33ae12bcbf91c04f9a0ff38f3312c9e52.pack and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/objects/pack/pack-52e8bb63adbaa440523103eb024cfae5db921a86.pack differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/objects/pack/pack-2a7eb0f33ae12bcbf91c04f9a0ff38f3312c9e52.rev b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/objects/pack/pack-52e8bb63adbaa440523103eb024cfae5db921a86.rev
+similarity index 93%
+rename from D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/objects/pack/pack-2a7eb0f33ae12bcbf91c04f9a0ff38f3312c9e52.rev
+rename to D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/objects/pack/pack-52e8bb63adbaa440523103eb024cfae5db921a86.rev
+index 688a8dd4..d588e163 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/.git/objects/pack/pack-2a7eb0f33ae12bcbf91c04f9a0ff38f3312c9e52.rev and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/.git/objects/pack/pack-52e8bb63adbaa440523103eb024cfae5db921a86.rev differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/languagetool-office-extension/src/main/java/org/languagetool/openoffice/SingleDocument.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/languagetool-office-extension/src/main/java/org/languagetool/openoffice/SingleDocument.java
+index 3518ffd1..2f11454e 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Buggy-version/languagetool-office-extension/src/main/java/org/languagetool/openoffice/SingleDocument.java
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/org-languagetool-546883807/Patched-Version/languagetool-office-extension/src/main/java/org/languagetool/openoffice/SingleDocument.java
+@@ -108,7 +108,9 @@ class SingleDocument {
+     this.sentencesCache = new ResultCache();
+     this.paragraphsCache = new ResultCache();
+     this.singleParaCache = new ResultCache();
+-    setConfigValues(config);
++    if (config != null) {
++      setConfigValues(config);
++    }
+   }
+   
+   /**  get the result for a check of a single document 

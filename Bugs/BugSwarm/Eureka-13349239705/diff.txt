@@ -1,0 +1,63 @@
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/HEAD
+index 0be60b6c..e030995b 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/HEAD
+@@ -1 +1 @@
+-3e9d0fdf885c5b2327af41f1eaf803cbd53b7103
++9650fdd0d92ff38365d2cf99f62d5b6b1694d337
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/index b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/index
+index d4697e1b..65f0381b 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/index and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/index differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/logs/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/logs/HEAD
+index 6aec241d..c314cd70 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/logs/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/logs/HEAD
+@@ -1,2 +1,2 @@
+-0000000000000000000000000000000000000000 413299ee1da11ad67a7a9b9114c1edd93a9aa4cf Saahil Hiranandani <suc2@illinois.edu> 1709660918 -0600	clone: from https://github.com/kevin218/Eureka.git
+-413299ee1da11ad67a7a9b9114c1edd93a9aa4cf 3e9d0fdf885c5b2327af41f1eaf803cbd53b7103 Saahil Hiranandani <suc2@illinois.edu> 1709660920 -0600	checkout: moving from main to 3e9d0fdf885c5b2327af41f1eaf803cbd53b7103
++0000000000000000000000000000000000000000 413299ee1da11ad67a7a9b9114c1edd93a9aa4cf Saahil Hiranandani <suc2@illinois.edu> 1709660948 -0600	clone: from https://github.com/kevin218/Eureka.git
++413299ee1da11ad67a7a9b9114c1edd93a9aa4cf 9650fdd0d92ff38365d2cf99f62d5b6b1694d337 Saahil Hiranandani <suc2@illinois.edu> 1709660950 -0600	checkout: moving from main to 9650fdd0d92ff38365d2cf99f62d5b6b1694d337
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/logs/refs/heads/main b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/logs/refs/heads/main
+index 4ea31db3..bf50e6c5 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/logs/refs/heads/main
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/logs/refs/heads/main
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 413299ee1da11ad67a7a9b9114c1edd93a9aa4cf Saahil Hiranandani <suc2@illinois.edu> 1709660918 -0600	clone: from https://github.com/kevin218/Eureka.git
++0000000000000000000000000000000000000000 413299ee1da11ad67a7a9b9114c1edd93a9aa4cf Saahil Hiranandani <suc2@illinois.edu> 1709660948 -0600	clone: from https://github.com/kevin218/Eureka.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index 4ea31db3..bf50e6c5 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 413299ee1da11ad67a7a9b9114c1edd93a9aa4cf Saahil Hiranandani <suc2@illinois.edu> 1709660918 -0600	clone: from https://github.com/kevin218/Eureka.git
++0000000000000000000000000000000000000000 413299ee1da11ad67a7a9b9114c1edd93a9aa4cf Saahil Hiranandani <suc2@illinois.edu> 1709660948 -0600	clone: from https://github.com/kevin218/Eureka.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/objects/pack/pack-8258e2661e7efed7ffe07bd99b30e45509019f13.idx b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/objects/pack/pack-e8b91ce960395422cf71d157ba2bcba18e945af9.idx
+similarity index 72%
+rename from D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/objects/pack/pack-8258e2661e7efed7ffe07bd99b30e45509019f13.idx
+rename to D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/objects/pack/pack-e8b91ce960395422cf71d157ba2bcba18e945af9.idx
+index 544b4e07..084cc545 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/objects/pack/pack-8258e2661e7efed7ffe07bd99b30e45509019f13.idx and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/objects/pack/pack-e8b91ce960395422cf71d157ba2bcba18e945af9.idx differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/objects/pack/pack-8258e2661e7efed7ffe07bd99b30e45509019f13.pack b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/objects/pack/pack-e8b91ce960395422cf71d157ba2bcba18e945af9.pack
+similarity index 99%
+rename from D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/objects/pack/pack-8258e2661e7efed7ffe07bd99b30e45509019f13.pack
+rename to D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/objects/pack/pack-e8b91ce960395422cf71d157ba2bcba18e945af9.pack
+index e93b482e..7e475731 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/objects/pack/pack-8258e2661e7efed7ffe07bd99b30e45509019f13.pack and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/objects/pack/pack-e8b91ce960395422cf71d157ba2bcba18e945af9.pack differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/objects/pack/pack-8258e2661e7efed7ffe07bd99b30e45509019f13.rev b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/objects/pack/pack-e8b91ce960395422cf71d157ba2bcba18e945af9.rev
+similarity index 64%
+rename from D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/objects/pack/pack-8258e2661e7efed7ffe07bd99b30e45509019f13.rev
+rename to D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/objects/pack/pack-e8b91ce960395422cf71d157ba2bcba18e945af9.rev
+index 011249f0..63474e0b 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/.git/objects/pack/pack-8258e2661e7efed7ffe07bd99b30e45509019f13.rev and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/.git/objects/pack/pack-e8b91ce960395422cf71d157ba2bcba18e945af9.rev differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/src/eureka/S3_data_reduction/s3_reduce.py b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/src/eureka/S3_data_reduction/s3_reduce.py
+index 82d5d452..e6c62f5c 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Buggy-version/src/eureka/S3_data_reduction/s3_reduce.py
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/Eureka-13349239705/Patched-Version/src/eureka/S3_data_reduction/s3_reduce.py
+@@ -209,6 +209,7 @@ def reduce(eventlabel, ecf_path=None, s2_meta=None, input_meta=None):
+                                  'unsupported!')
+             elif meta.inst == 'wfc3':
+                 from . import wfc3 as inst
++                meta.bg_dir = 'CxC'
+                 meta, log = inst.preparation_step(meta, log)
+             else:
+                 raise ValueError('Unknown instrument {}'.format(meta.inst))

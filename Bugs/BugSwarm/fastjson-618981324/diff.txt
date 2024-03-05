@@ -1,0 +1,113 @@
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/.git/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/.git/HEAD
+index a6baa474..100b1e07 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/.git/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/.git/HEAD
+@@ -1 +1 @@
+-28186d6e9e455514bb98ec1d57b5c667159ab91d
++2c560bbc2f2fcccb7e902f1f69b637066122ab9f
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/.git/index b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/.git/index
+index 52121f18..83dac941 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/.git/index and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/.git/index differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/.git/logs/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/.git/logs/HEAD
+index d1c7015d..27ef78a2 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/.git/logs/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/.git/logs/HEAD
+@@ -1,2 +1,2 @@
+-0000000000000000000000000000000000000000 c942c83443117b73af5ad278cc780270998ba3e1 Saahil Hiranandani <suc2@illinois.edu> 1709660740 -0600	clone: from https://github.com/alibaba/fastjson.git
+-c942c83443117b73af5ad278cc780270998ba3e1 28186d6e9e455514bb98ec1d57b5c667159ab91d Saahil Hiranandani <suc2@illinois.edu> 1709660741 -0600	checkout: moving from master to 28186d6e9e455514bb98ec1d57b5c667159ab91d
++0000000000000000000000000000000000000000 c942c83443117b73af5ad278cc780270998ba3e1 Saahil Hiranandani <suc2@illinois.edu> 1709660743 -0600	clone: from https://github.com/alibaba/fastjson.git
++c942c83443117b73af5ad278cc780270998ba3e1 2c560bbc2f2fcccb7e902f1f69b637066122ab9f Saahil Hiranandani <suc2@illinois.edu> 1709660744 -0600	checkout: moving from master to 2c560bbc2f2fcccb7e902f1f69b637066122ab9f
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/.git/logs/refs/heads/master b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/.git/logs/refs/heads/master
+index 51cf7ef0..34fd3283 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/.git/logs/refs/heads/master
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/.git/logs/refs/heads/master
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 c942c83443117b73af5ad278cc780270998ba3e1 Saahil Hiranandani <suc2@illinois.edu> 1709660740 -0600	clone: from https://github.com/alibaba/fastjson.git
++0000000000000000000000000000000000000000 c942c83443117b73af5ad278cc780270998ba3e1 Saahil Hiranandani <suc2@illinois.edu> 1709660743 -0600	clone: from https://github.com/alibaba/fastjson.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index 51cf7ef0..34fd3283 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 c942c83443117b73af5ad278cc780270998ba3e1 Saahil Hiranandani <suc2@illinois.edu> 1709660740 -0600	clone: from https://github.com/alibaba/fastjson.git
++0000000000000000000000000000000000000000 c942c83443117b73af5ad278cc780270998ba3e1 Saahil Hiranandani <suc2@illinois.edu> 1709660743 -0600	clone: from https://github.com/alibaba/fastjson.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/src/main/java/com/alibaba/fastjson/parser/deserializer/Jdk8DateCodec.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/src/main/java/com/alibaba/fastjson/parser/deserializer/Jdk8DateCodec.java
+index 15094297..b1d5b521 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/src/main/java/com/alibaba/fastjson/parser/deserializer/Jdk8DateCodec.java
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/src/main/java/com/alibaba/fastjson/parser/deserializer/Jdk8DateCodec.java
+@@ -120,7 +120,7 @@ public class Jdk8DateCodec extends ContextObjectDeserializer implements ObjectSe
+                         }
+                     }
+ 
+-                    if (digit && text.length() < 19) {
++                    if (digit && text.length() > 8 && text.length() < 19) {
+                         long epochMillis = Long.parseLong(text);
+                         localTime = LocalDateTime
+                                 .ofInstant(
+@@ -183,7 +183,7 @@ public class Jdk8DateCodec extends ContextObjectDeserializer implements ObjectSe
+                         break;
+                     }
+                 }
+-                if (digit && text.length() < 19) {
++                if (digit && text.length() > 8 && text.length() < 19) {
+                     long epochMillis = Long.parseLong(text);
+                     return (T) Instant.ofEpochMilli(epochMillis);
+                 }
+@@ -332,7 +332,7 @@ public class Jdk8DateCodec extends ContextObjectDeserializer implements ObjectSe
+                     break;
+                 }
+             }
+-            if (digit && text.length() < 19) {
++            if (digit && text.length() > 8 && text.length() < 19) {
+                 long epochMillis = Long.parseLong(text);
+                 return LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), JSON.defaultTimeZone.toZoneId());
+             }
+@@ -402,7 +402,7 @@ public class Jdk8DateCodec extends ContextObjectDeserializer implements ObjectSe
+                     break;
+                 }
+             }
+-            if (digit && text.length() < 19) {
++            if (digit && text.length() > 8 && text.length() < 19) {
+                 long epochMillis = Long.parseLong(text);
+                 return LocalDateTime
+                         .ofInstant(
+@@ -487,7 +487,7 @@ public class Jdk8DateCodec extends ContextObjectDeserializer implements ObjectSe
+                     break;
+                 }
+             }
+-            if (digit && text.length() < 19) {
++            if (digit && text.length() > 8 && text.length() < 19) {
+                 long epochMillis = Long.parseLong(text);
+                 return ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), JSON.defaultTimeZone.toZoneId());
+             }
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/src/main/java/com/alibaba/fastjson/serializer/JodaCodec.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/src/main/java/com/alibaba/fastjson/serializer/JodaCodec.java
+index 01a7a58e..d2c66b03 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Buggy-version/src/main/java/com/alibaba/fastjson/serializer/JodaCodec.java
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson-618981324/Patched-Version/src/main/java/com/alibaba/fastjson/serializer/JodaCodec.java
+@@ -132,7 +132,7 @@ public class JodaCodec implements ObjectSerializer, ContextObjectSerializer, Obj
+                         break;
+                     }
+                 }
+-                if (digit && text.length() < 19) {
++                if (digit && text.length() > 8 && text.length() < 19) {
+                     long epochMillis = Long.parseLong(text);
+                     return (T) new Instant(epochMillis);
+                 }
+@@ -269,7 +269,7 @@ public class JodaCodec implements ObjectSerializer, ContextObjectSerializer, Obj
+                     break;
+                 }
+             }
+-            if (digit && text.length() < 19) {
++            if (digit && text.length() > 8 && text.length() < 19) {
+                 long epochMillis = Long.parseLong(text);
+                 return new LocalDateTime(epochMillis, DateTimeZone.forTimeZone(JSON.defaultTimeZone));
+             }
+@@ -339,7 +339,7 @@ public class JodaCodec implements ObjectSerializer, ContextObjectSerializer, Obj
+                     break;
+                 }
+             }
+-            if (digit && text.length() < 19) {
++            if (digit && text.length() > 8 && text.length() < 19) {
+                 long epochMillis = Long.parseLong(text);
+                 return new LocalDateTime(epochMillis, DateTimeZone.forTimeZone(JSON.defaultTimeZone))
+                         .toLocalDate();

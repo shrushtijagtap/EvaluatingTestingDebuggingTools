@@ -1,0 +1,1067 @@
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/HEAD
+index c5791854..54e3d694 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709661155 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
++0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709661158 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/refs/heads/master b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/refs/heads/master
+index c5791854..54e3d694 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/refs/heads/master
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/refs/heads/master
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709661155 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
++0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709661158 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index c5791854..54e3d694 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709661155 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
++0000000000000000000000000000000000000000 da7531fa82aaf2fd1586684b12dfc429a2fadd68 Saahil Hiranandani <suc2@illinois.edu> 1709661158 -0600	clone: from https://github.com/apache/servicecomb-java-chassis.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/objects/pack/pack-597c1aaf0590d6c69af4aa79e3099b574ddf7fb2.idx b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/objects/pack/pack-4abf54045182fc686e644405c19a76422ef9f8df.idx
+similarity index 77%
+rename from D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/objects/pack/pack-597c1aaf0590d6c69af4aa79e3099b574ddf7fb2.idx
+rename to D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/objects/pack/pack-4abf54045182fc686e644405c19a76422ef9f8df.idx
+index 479a7226..13cdf08e 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/objects/pack/pack-597c1aaf0590d6c69af4aa79e3099b574ddf7fb2.idx and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/objects/pack/pack-4abf54045182fc686e644405c19a76422ef9f8df.idx differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/objects/pack/pack-597c1aaf0590d6c69af4aa79e3099b574ddf7fb2.pack b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/objects/pack/pack-4abf54045182fc686e644405c19a76422ef9f8df.pack
+similarity index 92%
+rename from D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/objects/pack/pack-597c1aaf0590d6c69af4aa79e3099b574ddf7fb2.pack
+rename to D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/objects/pack/pack-4abf54045182fc686e644405c19a76422ef9f8df.pack
+index 46e0e610..cc990e7e 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/objects/pack/pack-597c1aaf0590d6c69af4aa79e3099b574ddf7fb2.pack and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/objects/pack/pack-4abf54045182fc686e644405c19a76422ef9f8df.pack differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/objects/pack/pack-597c1aaf0590d6c69af4aa79e3099b574ddf7fb2.rev b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/objects/pack/pack-4abf54045182fc686e644405c19a76422ef9f8df.rev
+similarity index 76%
+rename from D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/objects/pack/pack-597c1aaf0590d6c69af4aa79e3099b574ddf7fb2.rev
+rename to D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/objects/pack/pack-4abf54045182fc686e644405c19a76422ef9f8df.rev
+index deee862c..bc253493 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/.git/objects/pack/pack-597c1aaf0590d6c69af4aa79e3099b574ddf7fb2.rev and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Patched-Version/.git/objects/pack/pack-4abf54045182fc686e644405c19a76422ef9f8df.rev differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/foundations/foundation-protobuf/src/main/java/org/apache/servicecomb/foundation/protobuf/internal/schema/deserializer/repeated/impl/BytesRepeatedReadSchemas.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/foundations/foundation-protobuf/src/main/java/org/apache/servicecomb/foundation/protobuf/internal/schema/deserializer/repeated/impl/BytesRepeatedReadSchemas.java
+deleted file mode 100644
+index c1534c99..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/foundations/foundation-protobuf/src/main/java/org/apache/servicecomb/foundation/protobuf/internal/schema/deserializer/repeated/impl/BytesRepeatedReadSchemas.java
++++ /dev/null
+@@ -1,47 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package org.apache.servicecomb.foundation.protobuf.internal.schema.deserializer.repeated.impl;
+-
+-import org.apache.servicecomb.foundation.protobuf.internal.bean.PropertyDescriptor;
+-import org.apache.servicecomb.foundation.protobuf.internal.schema.deserializer.repeated.AbstractReaders;
+-import org.apache.servicecomb.foundation.protobuf.internal.schema.deserializer.repeated.RepeatedReadSchemas;
+-
+-import io.protostuff.compiler.model.Field;
+-import io.protostuff.runtime.FieldSchema;
+-
+-public class BytesRepeatedReadSchemas {
+-  private static class BytesReaders extends AbstractReaders<byte[]> {
+-    public BytesReaders(Field protoField) {
+-      super(protoField);
+-
+-      collectionReader = (input, collection) -> {
+-        while (true) {
+-          collection.add(input.readByteArray());
+-
+-          int fieldNumber = input.readFieldNumber();
+-          if (fieldNumber != this.fieldNumber) {
+-            return fieldNumber;
+-          }
+-        }
+-      };
+-    }
+-  }
+-
+-  public static <T> FieldSchema<T> create(Field protoField, PropertyDescriptor propertyDescriptor) {
+-    return RepeatedReadSchemas.create(protoField, propertyDescriptor, new BytesReaders(protoField));
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/foundations/foundation-protobuf/src/main/java/org/apache/servicecomb/foundation/protobuf/internal/schema/deserializer/repeated/impl/StringRepeatedReadSchemas.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/foundations/foundation-protobuf/src/main/java/org/apache/servicecomb/foundation/protobuf/internal/schema/deserializer/repeated/impl/StringRepeatedReadSchemas.java
+deleted file mode 100644
+index 2f64516f..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/foundations/foundation-protobuf/src/main/java/org/apache/servicecomb/foundation/protobuf/internal/schema/deserializer/repeated/impl/StringRepeatedReadSchemas.java
++++ /dev/null
+@@ -1,47 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package org.apache.servicecomb.foundation.protobuf.internal.schema.deserializer.repeated.impl;
+-
+-import org.apache.servicecomb.foundation.protobuf.internal.bean.PropertyDescriptor;
+-import org.apache.servicecomb.foundation.protobuf.internal.schema.deserializer.repeated.AbstractReaders;
+-import org.apache.servicecomb.foundation.protobuf.internal.schema.deserializer.repeated.RepeatedReadSchemas;
+-
+-import io.protostuff.compiler.model.Field;
+-import io.protostuff.runtime.FieldSchema;
+-
+-public class StringRepeatedReadSchemas {
+-  private static class StringReaders extends AbstractReaders<String> {
+-    public StringReaders(Field protoField) {
+-      super(protoField);
+-
+-      collectionReader = (input, collection) -> {
+-        while (true) {
+-          collection.add(input.readString());
+-
+-          int fieldNumber = input.readFieldNumber();
+-          if (fieldNumber != this.fieldNumber) {
+-            return fieldNumber;
+-          }
+-        }
+-      };
+-    }
+-  }
+-
+-  public static <T> FieldSchema<T> create(Field protoField, PropertyDescriptor propertyDescriptor) {
+-    return RepeatedReadSchemas.create(protoField, propertyDescriptor, new StringReaders(protoField));
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/foundations/foundation-protobuf/src/main/java/org/apache/servicecomb/foundation/protobuf/internal/schema/serializer/repeated/impl/StringsRepeatedWriteSchemas.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/foundations/foundation-protobuf/src/main/java/org/apache/servicecomb/foundation/protobuf/internal/schema/serializer/repeated/impl/StringsRepeatedWriteSchemas.java
+deleted file mode 100644
+index 16e71edc..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/foundations/foundation-protobuf/src/main/java/org/apache/servicecomb/foundation/protobuf/internal/schema/serializer/repeated/impl/StringsRepeatedWriteSchemas.java
++++ /dev/null
+@@ -1,60 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package org.apache.servicecomb.foundation.protobuf.internal.schema.serializer.repeated.impl;
+-
+-import org.apache.servicecomb.foundation.protobuf.internal.ProtoUtils;
+-import org.apache.servicecomb.foundation.protobuf.internal.bean.PropertyDescriptor;
+-import org.apache.servicecomb.foundation.protobuf.internal.schema.serializer.repeated.AbstractWriters;
+-import org.apache.servicecomb.foundation.protobuf.internal.schema.serializer.repeated.RepeatedWriteSchemas;
+-
+-import io.protostuff.compiler.model.Field;
+-import io.protostuff.runtime.FieldSchema;
+-
+-public class StringsRepeatedWriteSchemas {
+-  private static class StringWriters extends AbstractWriters<String> {
+-    public StringWriters(Field protoField) {
+-      super(protoField);
+-
+-      arrayWriter = (output, array) -> {
+-        for (String element : array) {
+-          if (element != null) {
+-            output.writeString(tag, tagSize, element);
+-            continue;
+-          }
+-
+-          ProtoUtils.throwNotSupportNullElement(protoField);
+-        }
+-      };
+-
+-      collectionWriter = (output, collection) -> {
+-        for (String element : collection) {
+-          if (element != null) {
+-            output.writeString(tag, tagSize, element);
+-            continue;
+-          }
+-
+-          ProtoUtils.throwNotSupportNullElement(protoField);
+-        }
+-      };
+-    }
+-  }
+-
+-  @SuppressWarnings("unchecked")
+-  public static <T> FieldSchema<T> create(Field protoField, PropertyDescriptor propertyDescriptor) {
+-    return RepeatedWriteSchemas.create(protoField, propertyDescriptor, new StringWriters(protoField));
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-core/src/main/java/org/apache/servicecomb/swagger/generator/core/processor/annotation/OperationMethodAnnotationProcessor.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-core/src/main/java/org/apache/servicecomb/swagger/generator/core/processor/annotation/OperationMethodAnnotationProcessor.java
+deleted file mode 100644
+index 86986a90..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-core/src/main/java/org/apache/servicecomb/swagger/generator/core/processor/annotation/OperationMethodAnnotationProcessor.java
++++ /dev/null
+@@ -1,111 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package org.apache.servicecomb.swagger.generator.core.processor.annotation;
+-
+-import java.lang.reflect.Type;
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-import org.apache.commons.lang3.StringUtils;
+-import org.apache.servicecomb.swagger.SwaggerUtils;
+-import org.apache.servicecomb.swagger.generator.MethodAnnotationProcessor;
+-import org.apache.servicecomb.swagger.generator.OperationGenerator;
+-import org.apache.servicecomb.swagger.generator.SwaggerGenerator;
+-import org.springframework.util.CollectionUtils;
+-
+-import io.swagger.v3.oas.annotations.Operation;
+-import io.swagger.v3.oas.annotations.headers.Header;
+-import io.swagger.v3.oas.annotations.media.Content;
+-import io.swagger.v3.oas.annotations.responses.ApiResponse;
+-
+-public class OperationMethodAnnotationProcessor implements MethodAnnotationProcessor<Operation> {
+-  public Type getProcessType() {
+-    return Operation.class;
+-  }
+-
+-  @Override
+-  public void process(SwaggerGenerator swaggerGenerator,
+-      OperationGenerator operationGenerator, Operation apiOperationAnnotation) {
+-    io.swagger.v3.oas.models.Operation operation = operationGenerator.getOperation();
+-
+-    if (!StringUtils.isEmpty(apiOperationAnnotation.method())) {
+-      operationGenerator.setHttpMethod(apiOperationAnnotation.method());
+-    }
+-
+-    if (apiOperationAnnotation.responses() != null) {
+-      // This is a bit different from swagger annotation intention.
+-      // Here we assume @Content defines all supported media type and only one implementation class for one status code.
+-      List<String> produces = new ArrayList<>();
+-      for (ApiResponse apiResponse : apiOperationAnnotation.responses()) {
+-        if (StringUtils.isEmpty(apiResponse.responseCode()) || "default".equals(apiResponse.responseCode())) {
+-          throw new IllegalArgumentException("@ApiResponse status code must be defined.");
+-        }
+-        Class<?> type = null;
+-        for (Content content : apiResponse.content()) {
+-          if (StringUtils.isNotEmpty(content.mediaType())) {
+-            produces.add(content.mediaType());
+-          }
+-          if (content.schema() != null && content.schema().implementation() != Void.class) {
+-            type = content.schema().implementation();
+-          }
+-        }
+-        operationGenerator.getOperationGeneratorContext().updateResponse(apiResponse.responseCode(),
+-            type == null ? null : SwaggerUtils.resolveTypeSchemas(swaggerGenerator.getOpenAPI(), type));
+-        if (StringUtils.isNotEmpty(apiResponse.description())) {
+-          operationGenerator.getOperationGeneratorContext().updateResponseDescription(apiResponse.responseCode(),
+-              apiResponse.description());
+-        }
+-        for (Header header : apiResponse.headers()) {
+-          if (header.schema() == null || header.schema().implementation() == Void.class) {
+-            throw new IllegalArgumentException("@ApiResponse header schema implementation must be defined.");
+-          }
+-          if (StringUtils.isEmpty(header.name())) {
+-            throw new IllegalArgumentException("@ApiResponse header name must be defined.");
+-          }
+-          operationGenerator.getOperationGeneratorContext().updateResponseHeader(apiResponse.responseCode(),
+-              header.name(), AnnotationUtils.schemaModel(swaggerGenerator.getOpenAPI(), header.schema()));
+-        }
+-      }
+-      if (!CollectionUtils.isEmpty(produces)) {
+-        operationGenerator.getOperationGeneratorContext().updateProduces(produces);
+-      }
+-    }
+-
+-    io.swagger.v3.oas.models.Operation specificOperation =
+-        AnnotationUtils.operationModel(swaggerGenerator.getOpenAPI(), apiOperationAnnotation);
+-    if (!StringUtils.isEmpty(specificOperation.getSummary())) {
+-      operation.setSummary(specificOperation.getSummary());
+-    }
+-
+-    if (!StringUtils.isEmpty(specificOperation.getDescription())) {
+-      operation.setDescription(specificOperation.getDescription());
+-    }
+-
+-    if (!StringUtils.isEmpty(specificOperation.getOperationId())) {
+-      operation.setOperationId(specificOperation.getOperationId());
+-    }
+-
+-    if (!CollectionUtils.isEmpty(specificOperation.getExtensions())) {
+-      operation.setExtensions(specificOperation.getExtensions());
+-    }
+-
+-    if (!CollectionUtils.isEmpty(specificOperation.getTags())) {
+-      operation.setTags(specificOperation.getTags());
+-    }
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ConsumesClassAnnotationProcessor.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ConsumesClassAnnotationProcessor.java
+deleted file mode 100644
+index 72ae4d20..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ConsumesClassAnnotationProcessor.java
++++ /dev/null
+@@ -1,38 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package org.apache.servicecomb.swagger.generator.jaxrs.processor.annotation;
+-
+-import java.lang.reflect.Type;
+-import java.util.Arrays;
+-
+-import org.apache.servicecomb.swagger.generator.SwaggerGenerator;
+-
+-import jakarta.ws.rs.Consumes;
+-
+-public class ConsumesClassAnnotationProcessor extends JaxrsClassAnnotationProcessor<Consumes> {
+-  @Override
+-  public Type getProcessType() {
+-    return Consumes.class;
+-  }
+-
+-  @Override
+-  public void process(SwaggerGenerator swaggerGenerator, Consumes consumes) {
+-    if (consumes.value() != null && consumes.value().length > 0) {
+-      swaggerGenerator.getSwaggerGeneratorContext().updateConsumes(Arrays.asList(consumes.value()));
+-    }
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ConsumesMethodAnnotationProcessor.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ConsumesMethodAnnotationProcessor.java
+deleted file mode 100644
+index 2cfdb26d..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ConsumesMethodAnnotationProcessor.java
++++ /dev/null
+@@ -1,40 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package org.apache.servicecomb.swagger.generator.jaxrs.processor.annotation;
+-
+-import java.lang.reflect.Type;
+-import java.util.Arrays;
+-
+-import org.apache.servicecomb.swagger.generator.OperationGenerator;
+-import org.apache.servicecomb.swagger.generator.SwaggerGenerator;
+-
+-import jakarta.ws.rs.Consumes;
+-
+-public class ConsumesMethodAnnotationProcessor extends JaxrsMethodAnnotationProcessor<Consumes> {
+-  @Override
+-  public Type getProcessType() {
+-    return Consumes.class;
+-  }
+-
+-  @Override
+-  public void process(SwaggerGenerator swaggerGenerator, OperationGenerator operationGenerator, Consumes consumes) {
+-    if (consumes.value() != null && consumes.value().length > 0) {
+-      operationGenerator.getOperationGeneratorContext().updateConsumes(Arrays.asList(consumes.value()));
+-    }
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/JaxrsParameterAnnotationProcessor.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/JaxrsParameterAnnotationProcessor.java
+deleted file mode 100644
+index 126f48b3..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/JaxrsParameterAnnotationProcessor.java
++++ /dev/null
+@@ -1,27 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package org.apache.servicecomb.swagger.generator.jaxrs.processor.annotation;
+-
+-import org.apache.servicecomb.swagger.generator.ParameterAnnotationProcessor;
+-
+-/**
+- * A generic class to help classify implementations.
+- */
+-public abstract class JaxrsParameterAnnotationProcessor<ANNOTATION> implements
+-    ParameterAnnotationProcessor<ANNOTATION> {
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ProducesClassAnnotationProcessor.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ProducesClassAnnotationProcessor.java
+deleted file mode 100644
+index 9450504c..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ProducesClassAnnotationProcessor.java
++++ /dev/null
+@@ -1,38 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package org.apache.servicecomb.swagger.generator.jaxrs.processor.annotation;
+-
+-import java.lang.reflect.Type;
+-import java.util.Arrays;
+-
+-import org.apache.servicecomb.swagger.generator.SwaggerGenerator;
+-
+-import jakarta.ws.rs.Produces;
+-
+-public class ProducesClassAnnotationProcessor extends JaxrsClassAnnotationProcessor<Produces> {
+-  @Override
+-  public Type getProcessType() {
+-    return Produces.class;
+-  }
+-
+-  @Override
+-  public void process(SwaggerGenerator swaggerGenerator, Produces produces) {
+-    if (produces.value() != null && produces.value().length > 0) {
+-      swaggerGenerator.getSwaggerGeneratorContext().updateProduces(Arrays.asList(produces.value()));
+-    }
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ProducesMethodAnnotationProcessor.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ProducesMethodAnnotationProcessor.java
+deleted file mode 100644
+index a148413e..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-jaxrs/src/main/java/org/apache/servicecomb/swagger/generator/jaxrs/processor/annotation/ProducesMethodAnnotationProcessor.java
++++ /dev/null
+@@ -1,40 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package org.apache.servicecomb.swagger.generator.jaxrs.processor.annotation;
+-
+-import java.lang.reflect.Type;
+-import java.util.Arrays;
+-
+-import org.apache.servicecomb.swagger.generator.OperationGenerator;
+-import org.apache.servicecomb.swagger.generator.SwaggerGenerator;
+-
+-import jakarta.ws.rs.Produces;
+-
+-public class ProducesMethodAnnotationProcessor extends JaxrsMethodAnnotationProcessor<Produces> {
+-  @Override
+-  public Type getProcessType() {
+-    return Produces.class;
+-  }
+-
+-  @Override
+-  public void process(SwaggerGenerator swaggerGenerator, OperationGenerator operationGenerator, Produces produces) {
+-    if (produces.value() != null && produces.value().length > 0) {
+-      operationGenerator.getOperationGeneratorContext().updateProduces(Arrays.asList(produces.value()));
+-    }
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-springmvc/src/main/java/org/apache/servicecomb/swagger/generator/springmvc/processor/parameter/MultipartFileListProcessor.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-springmvc/src/main/java/org/apache/servicecomb/swagger/generator/springmvc/processor/parameter/MultipartFileListProcessor.java
+deleted file mode 100644
+index 10e9f98d..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-springmvc/src/main/java/org/apache/servicecomb/swagger/generator/springmvc/processor/parameter/MultipartFileListProcessor.java
++++ /dev/null
+@@ -1,34 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package org.apache.servicecomb.swagger.generator.springmvc.processor.parameter;
+-
+-import java.util.List;
+-
+-import org.apache.servicecomb.swagger.generator.core.processor.parameter.PartArrayParameterTypeProcessor;
+-import org.springframework.web.multipart.MultipartFile;
+-
+-import com.fasterxml.jackson.databind.JavaType;
+-import com.fasterxml.jackson.databind.type.TypeFactory;
+-import com.google.inject.util.Types;
+-
+-public class MultipartFileListProcessor extends PartArrayParameterTypeProcessor {
+-  @Override
+-  public JavaType getProcessType() {
+-    return TypeFactory.defaultInstance().constructType(Types.newParameterizedType(List.class, MultipartFile.class));
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-springmvc/src/main/java/org/apache/servicecomb/swagger/generator/springmvc/processor/parameter/MultipartFileTypeProcessor.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-springmvc/src/main/java/org/apache/servicecomb/swagger/generator/springmvc/processor/parameter/MultipartFileTypeProcessor.java
+deleted file mode 100644
+index 3781c2b1..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-springmvc/src/main/java/org/apache/servicecomb/swagger/generator/springmvc/processor/parameter/MultipartFileTypeProcessor.java
++++ /dev/null
+@@ -1,31 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package org.apache.servicecomb.swagger.generator.springmvc.processor.parameter;
+-
+-import org.apache.servicecomb.swagger.generator.core.processor.parameter.PartParameterTypeProcessor;
+-import org.springframework.web.multipart.MultipartFile;
+-
+-import com.fasterxml.jackson.databind.JavaType;
+-import com.fasterxml.jackson.databind.type.TypeFactory;
+-
+-public class MultipartFileTypeProcessor extends PartParameterTypeProcessor {
+-  @Override
+-  public JavaType getProcessType() {
+-    return TypeFactory.defaultInstance().constructType(MultipartFile.class);
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-springmvc/src/main/java/org/apache/servicecomb/swagger/generator/springmvc/property/creator/MultipartFilePropertyCreator.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-springmvc/src/main/java/org/apache/servicecomb/swagger/generator/springmvc/property/creator/MultipartFilePropertyCreator.java
+deleted file mode 100644
+index 6666f781..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-generator/generator-springmvc/src/main/java/org/apache/servicecomb/swagger/generator/springmvc/property/creator/MultipartFilePropertyCreator.java
++++ /dev/null
+@@ -1,38 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package org.apache.servicecomb.swagger.generator.springmvc.property.creator;
+-
+-import org.apache.servicecomb.swagger.extend.property.creator.PropertyCreator;
+-import org.springframework.web.multipart.MultipartFile;
+-
+-import io.swagger.v3.oas.models.media.FileSchema;
+-import io.swagger.v3.oas.models.media.Schema;
+-
+-public class MultipartFilePropertyCreator implements PropertyCreator {
+-  private final Class<?>[] classes = {MultipartFile.class};
+-
+-  @Override
+-  public Schema<?> createProperty() {
+-    return new FileSchema();
+-  }
+-
+-  @Override
+-  public Class<?>[] classes() {
+-    return classes;
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/arguments/consumer/ConsumerInvocationContextMapperFactory.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/arguments/consumer/ConsumerInvocationContextMapperFactory.java
+deleted file mode 100644
+index 0de0f2e9..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/arguments/consumer/ConsumerInvocationContextMapperFactory.java
++++ /dev/null
+@@ -1,33 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package org.apache.servicecomb.swagger.invocation.arguments.consumer;
+-
+-import org.apache.servicecomb.swagger.invocation.arguments.ArgumentMapper;
+-import org.apache.servicecomb.swagger.invocation.context.InvocationContext;
+-
+-public class ConsumerInvocationContextMapperFactory implements ConsumerContextArgumentMapperFactory {
+-  @Override
+-  public Class<?> getContextClass() {
+-    return InvocationContext.class;
+-  }
+-
+-  @Override
+-  public ArgumentMapper create(String invocationArgumentName, String swaggerArgumentName) {
+-    return new ConsumerInvocationContextMapper(invocationArgumentName);
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/arguments/producer/ProducerInvocationContextMapperFactory.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/arguments/producer/ProducerInvocationContextMapperFactory.java
+deleted file mode 100644
+index 1e99e896..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/arguments/producer/ProducerInvocationContextMapperFactory.java
++++ /dev/null
+@@ -1,33 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-
+-package org.apache.servicecomb.swagger.invocation.arguments.producer;
+-
+-import org.apache.servicecomb.swagger.invocation.arguments.ArgumentMapper;
+-import org.apache.servicecomb.swagger.invocation.context.InvocationContext;
+-
+-public class ProducerInvocationContextMapperFactory implements ProducerContextArgumentMapperFactory {
+-  @Override
+-  public Class<?> getContextClass() {
+-    return InvocationContext.class;
+-  }
+-
+-  @Override
+-  public ArgumentMapper create(String invocationArgumentName, String swaggerArgumentName) {
+-    return new ProducerInvocationContextMapper(invocationArgumentName, swaggerArgumentName);
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/response/consumer/CseResponseConsumerResponseMapperFactory.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/response/consumer/CseResponseConsumerResponseMapperFactory.java
+deleted file mode 100644
+index 34fcafd5..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/response/consumer/CseResponseConsumerResponseMapperFactory.java
++++ /dev/null
+@@ -1,37 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package org.apache.servicecomb.swagger.invocation.response.consumer;
+-
+-import java.lang.reflect.Type;
+-
+-import org.apache.servicecomb.swagger.invocation.Response;
+-import org.apache.servicecomb.swagger.invocation.response.ResponseMapperFactorys;
+-
+-public class CseResponseConsumerResponseMapperFactory implements ConsumerResponseMapperFactory {
+-  private static final ConsumerResponseMapper SAME = response -> response;
+-
+-  @Override
+-  public boolean isMatch(Type consumerType) {
+-    return Response.class.equals(consumerType);
+-  }
+-
+-  @Override
+-  public ConsumerResponseMapper createResponseMapper(ResponseMapperFactorys<ConsumerResponseMapper> factorys,
+-      Type consumerType) {
+-    return SAME;
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/response/producer/CseResponseProducerResponseMapperFactory.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/response/producer/CseResponseProducerResponseMapperFactory.java
+deleted file mode 100644
+index 44348729..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/main/java/org/apache/servicecomb/swagger/invocation/response/producer/CseResponseProducerResponseMapperFactory.java
++++ /dev/null
+@@ -1,37 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package org.apache.servicecomb.swagger.invocation.response.producer;
+-
+-import java.lang.reflect.Type;
+-
+-import org.apache.servicecomb.swagger.invocation.Response;
+-import org.apache.servicecomb.swagger.invocation.response.ResponseMapperFactorys;
+-
+-public class CseResponseProducerResponseMapperFactory implements ProducerResponseMapperFactory {
+-  private static final ProducerResponseMapper SAME = (status, response) -> (Response) response;
+-
+-  @Override
+-  public boolean isMatch(Type producerType) {
+-    return producerType.equals(Response.class);
+-  }
+-
+-  @Override
+-  public ProducerResponseMapper createResponseMapper(ResponseMapperFactorys<ProducerResponseMapper> factorys,
+-      Type producerType) {
+-    return SAME;
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/test/java/org/apache/servicecomb/swagger/invocation/exception/TestDefaultExceptionToProducerResponseConverter.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/test/java/org/apache/servicecomb/swagger/invocation/exception/TestDefaultExceptionToProducerResponseConverter.java
+deleted file mode 100644
+index 38fba02c..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/test/java/org/apache/servicecomb/swagger/invocation/exception/TestDefaultExceptionToProducerResponseConverter.java
++++ /dev/null
+@@ -1,40 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package org.apache.servicecomb.swagger.invocation.exception;
+-
+-import org.apache.servicecomb.swagger.invocation.Response;
+-import org.apache.servicecomb.swagger.invocation.SwaggerInvocation;
+-
+-import mockit.Mocked;
+-import org.junit.Test;
+-import org.junit.jupiter.api.Assertions;
+-
+-public class TestDefaultExceptionToProducerResponseConverter {
+-  DefaultExceptionToProducerResponseConverter converter = new DefaultExceptionToProducerResponseConverter();
+-
+-  @Test
+-  public void getExceptionClass() {
+-    Assertions.assertNull(converter.getExceptionClass());
+-  }
+-
+-  @Test
+-  public void convert(@Mocked SwaggerInvocation swaggerInvocation) {
+-    IllegalStateException stateException = new IllegalStateException("test");
+-    Response response = converter.convert(swaggerInvocation, stateException);
+-    Assertions.assertSame(stateException, ((InvocationException) response.getResult()).getCause());
+-  }
+-}
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/test/java/org/apache/servicecomb/swagger/invocation/exception/TestDefaultExceptionToProducerResponseConverters.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/test/java/org/apache/servicecomb/swagger/invocation/exception/TestDefaultExceptionToProducerResponseConverters.java
+deleted file mode 100644
+index 2bd614eb..00000000
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/servicecomb-java-chassis-9220678028/Buggy-version/swagger/swagger-invocation/invocation-core/src/test/java/org/apache/servicecomb/swagger/invocation/exception/TestDefaultExceptionToProducerResponseConverters.java
++++ /dev/null
+@@ -1,189 +0,0 @@
+-/*
+- * Licensed to the Apache Software Foundation (ASF) under one or more
+- * contributor license agreements.  See the NOTICE file distributed with
+- * this work for additional information regarding copyright ownership.
+- * The ASF licenses this file to You under the Apache License, Version 2.0
+- * (the "License"); you may not use this file except in compliance with
+- * the License.  You may obtain a copy of the License at
+- *
+- *     http://www.apache.org/licenses/LICENSE-2.0
+- *
+- * Unless required by applicable law or agreed to in writing, software
+- * distributed under the License is distributed on an "AS IS" BASIS,
+- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+- * See the License for the specific language governing permissions and
+- * limitations under the License.
+- */
+-package org.apache.servicecomb.swagger.invocation.exception;
+-
+-import java.io.IOException;
+-import java.util.Arrays;
+-
+-import jakarta.ws.rs.core.Response.Status;
+-
+-import org.apache.servicecomb.foundation.common.utils.SPIServiceUtils;
+-import org.apache.servicecomb.swagger.invocation.Response;
+-import org.apache.servicecomb.swagger.invocation.SwaggerInvocation;
+-import org.junit.Test;
+-
+-import mockit.Expectations;
+-import mockit.Mocked;
+-import org.junit.jupiter.api.Assertions;
+-
+-public class TestDefaultExceptionToProducerResponseConverters {
+-  @Test
+-  public void convertExceptionToResponse(
+-      @Mocked ExceptionToProducerResponseConverter<Throwable> c1,
+-      @Mocked Response r1,
+-      @Mocked ExceptionToProducerResponseConverter<Throwable> c2,
+-      @Mocked Response r2,
+-      @Mocked ExceptionToProducerResponseConverter<Throwable> cDef) {
+-    new Expectations(SPIServiceUtils.class) {
+-      {
+-        SPIServiceUtils.getSortedService(ExceptionToProducerResponseConverter.class);
+-        result = Arrays.asList(c1, c2, cDef);
+-
+-        c1.getExceptionClass();
+-        result = Throwable.class;
+-        c1.convert((SwaggerInvocation) any, (Throwable) any);
+-        result = r1;
+-
+-        c2.getExceptionClass();
+-        result = Exception.class;
+-        c2.convert((SwaggerInvocation) any, (Throwable) any);
+-        result = r2;
+-
+-        cDef.getExceptionClass();
+-        result = null;
+-      }
+-    };
+-
+-    DefaultExceptionToProducerResponseConverters exceptionToProducerResponseConverters = new DefaultExceptionToProducerResponseConverters();
+-
+-    Assertions.assertSame(r1,
+-        exceptionToProducerResponseConverters.convertExceptionToResponse(null, new Throwable()));
+-    Assertions.assertSame(r2,
+-        exceptionToProducerResponseConverters.convertExceptionToResponse(null, new Exception()));
+-    Assertions.assertSame(r2,
+-        exceptionToProducerResponseConverters.convertExceptionToResponse(null,
+-            new IllegalStateException()));
+-  }
+-
+-  @Test
+-  public void convertExceptionToResponse_checkDefaultConverterPriority(
+-      @Mocked ExceptionToProducerResponseConverter<Throwable> c1,
+-      @Mocked Response r1,
+-      @Mocked ExceptionToProducerResponseConverter<Throwable> c2,
+-      @Mocked Response r2,
+-      @Mocked ExceptionToProducerResponseConverter<Throwable> cDef,
+-      @Mocked Response rDef,
+-      @Mocked ExceptionToProducerResponseConverter<Throwable> cDef2) {
+-    new Expectations(SPIServiceUtils.class) {
+-      {
+-        SPIServiceUtils.getSortedService(ExceptionToProducerResponseConverter.class);
+-        result = Arrays.asList(c1, c2, cDef, cDef2);
+-
+-        c1.getExceptionClass();
+-        result = RuntimeException.class;
+-        c1.convert((SwaggerInvocation) any, (Throwable) any);
+-        result = r1;
+-
+-        c2.getExceptionClass();
+-        result = InvocationException.class;
+-        c2.convert((SwaggerInvocation) any, (Throwable) any);
+-        result = r2;
+-
+-        cDef.getExceptionClass();
+-        result = null;
+-        cDef.convert((SwaggerInvocation) any, (Throwable) any);
+-        result = rDef;
+-
+-        cDef2.getExceptionClass();
+-        result = null;
+-      }
+-    };
+-
+-    DefaultExceptionToProducerResponseConverters exceptionToProducerResponseConverters = new DefaultExceptionToProducerResponseConverters();
+-
+-    Assertions.assertSame(r2,
+-        exceptionToProducerResponseConverters
+-            .convertExceptionToResponse(null, new InvocationException(Status.UNAUTHORIZED, "")));
+-    Assertions.assertSame(r1,
+-        exceptionToProducerResponseConverters.convertExceptionToResponse(null, new RuntimeException()));
+-    Assertions.assertSame(rDef,
+-        exceptionToProducerResponseConverters.convertExceptionToResponse(null,
+-            new IOException()));
+-  }
+-
+-  @Test
+-  public void convertExceptionToResponse_CheckCommonConvertPriority(
+-      @Mocked ExceptionToProducerResponseConverter<RuntimeException0> cR0,
+-      @Mocked ExceptionToProducerResponseConverter<RuntimeException0> cR0_LowPriority,
+-      @Mocked ExceptionToProducerResponseConverter<RuntimeException1> cR1,
+-      @Mocked ExceptionToProducerResponseConverter<RuntimeException> cR,
+-      @Mocked ExceptionToProducerResponseConverter<Throwable> cT,
+-      @Mocked ExceptionToProducerResponseConverter<?> cDef,
+-      @Mocked Response rR0,
+-      @Mocked Response rR1,
+-      @Mocked Response rR,
+-      @Mocked Response rT) {
+-    new Expectations(SPIServiceUtils.class) {
+-      {
+-        SPIServiceUtils.getSortedService(ExceptionToProducerResponseConverter.class);
+-        result = Arrays.asList(cR, cR0, cR0_LowPriority, cR1, cDef, cT);
+-
+-        cR0.getExceptionClass();
+-        result = RuntimeException0.class;
+-        cR0.convert((SwaggerInvocation) any, (RuntimeException0) any);
+-        result = rR0;
+-
+-        cR0_LowPriority.getExceptionClass();
+-        result = RuntimeException0.class;
+-
+-        cR1.getExceptionClass();
+-        result = RuntimeException1.class;
+-        cR1.convert((SwaggerInvocation) any, (RuntimeException1) any);
+-        result = rR1;
+-
+-        cR.getExceptionClass();
+-        result = RuntimeException.class;
+-        cR.convert((SwaggerInvocation) any, (RuntimeException) any);
+-        result = rR;
+-
+-        cT.getExceptionClass();
+-        result = Throwable.class;
+-        cT.convert((SwaggerInvocation) any, (Throwable) any);
+-        result = rT;
+-
+-        cDef.getExceptionClass();
+-        result = null;
+-      }
+-    };
+-
+-    DefaultExceptionToProducerResponseConverters exceptionToProducerResponseConverters = new DefaultExceptionToProducerResponseConverters();
+-
+-    Assertions.assertSame(rR0,
+-        exceptionToProducerResponseConverters.convertExceptionToResponse(null, new RuntimeException0_0()));
+-    Assertions.assertSame(rR0,
+-        exceptionToProducerResponseConverters.convertExceptionToResponse(null, new RuntimeException0()));
+-    Assertions.assertSame(rR1,
+-        exceptionToProducerResponseConverters.convertExceptionToResponse(null, new RuntimeException1()));
+-    Assertions.assertSame(rR,
+-        exceptionToProducerResponseConverters.convertExceptionToResponse(null, new RuntimeException()));
+-    // Actually, a Throwable exception converter will act like a default converter, as our implementation expects.
+-    Assertions.assertSame(rT,
+-        exceptionToProducerResponseConverters.convertExceptionToResponse(null, new IOException()));
+-  }
+-
+-  static class RuntimeException0 extends RuntimeException {
+-    private static final long serialVersionUID = -5151948381107463505L;
+-  }
+-
+-  static class RuntimeException1 extends RuntimeException {
+-    private static final long serialVersionUID = 1752513688353075486L;
+-  }
+-
+-  static class RuntimeException0_0 extends RuntimeException0 {
+-    private static final long serialVersionUID = -6645187961518504765L;
+-  }
+-}

@@ -1,0 +1,63 @@
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/HEAD
+index c8a829e1..1694ab14 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/HEAD
+@@ -1 +1 @@
+-2016ab0d3b62436498d82d9d47b7101237e16183
++e3858038c91d723691e233192f8f565e632e8614
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/index b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/index
+index 4c16bec4..a36161e5 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/index and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/index differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/HEAD
+index 7fe0de3b..7f041361 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/HEAD
+@@ -1,2 +1,2 @@
+-0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709659516 -0600	clone: from https://github.com/swagger-api/swagger-core.git
+-3fcc473c33c56f306902853a451020926ad691ea 2016ab0d3b62436498d82d9d47b7101237e16183 Saahil Hiranandani <suc2@illinois.edu> 1709659516 -0600	checkout: moving from master to 2016ab0d3b62436498d82d9d47b7101237e16183
++0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709659519 -0600	clone: from https://github.com/swagger-api/swagger-core.git
++3fcc473c33c56f306902853a451020926ad691ea e3858038c91d723691e233192f8f565e632e8614 Saahil Hiranandani <suc2@illinois.edu> 1709659519 -0600	checkout: moving from master to e3858038c91d723691e233192f8f565e632e8614
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/refs/heads/master b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/refs/heads/master
+index 5e38c510..4f4ddb48 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/refs/heads/master
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/refs/heads/master
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709659516 -0600	clone: from https://github.com/swagger-api/swagger-core.git
++0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709659519 -0600	clone: from https://github.com/swagger-api/swagger-core.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index 5e38c510..4f4ddb48 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709659516 -0600	clone: from https://github.com/swagger-api/swagger-core.git
++0000000000000000000000000000000000000000 3fcc473c33c56f306902853a451020926ad691ea Saahil Hiranandani <suc2@illinois.edu> 1709659519 -0600	clone: from https://github.com/swagger-api/swagger-core.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java
+index bccd8c9a..51e9088a 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Buggy-version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/api-swagger-core-245823910/Patched-Version/modules/swagger-models/src/main/java/io/swagger/oas/models/PathItem.java
+@@ -16,6 +16,7 @@
+ 
+ package io.swagger.oas.models;
+ 
++
+ import io.swagger.oas.models.parameters.Parameter;
+ import io.swagger.oas.models.servers.Server;
+ 
+@@ -238,7 +239,7 @@ public class PathItem {
+     }
+ 
+ 
+-    public List<Operation> getOperations() {
++    public List<Operation> readOperations() {
+         List<Operation> allOperations = new ArrayList<>();
+         if (this.get != null) {
+             allOperations.add(this.get);
+@@ -280,7 +281,7 @@ public class PathItem {
+     }
+ 
+ 
+-    public Map<HttpMethod, Operation> getOperationMap() {
++    public Map<HttpMethod, Operation> readOperationsMap() {
+         Map<HttpMethod, Operation> result = new LinkedHashMap<>();
+ 
+         if (this.get != null) {

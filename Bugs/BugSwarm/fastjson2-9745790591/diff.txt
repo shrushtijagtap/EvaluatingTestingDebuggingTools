@@ -1,0 +1,46 @@
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/.git/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/.git/HEAD
+index 18060085..ab07b4c6 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/.git/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/.git/HEAD
+@@ -1 +1 @@
+-2fb2c98a5b820e3151da6165baa52af60a008542
++ac8d25f4cce1def0c560f5e2192fe946f053af4c
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/.git/index b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/.git/index
+index aa9a3745..1fd5436c 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/.git/index and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/.git/index differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/.git/logs/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/.git/logs/HEAD
+index b49cf350..5008c7d3 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/.git/logs/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/.git/logs/HEAD
+@@ -1,2 +1,2 @@
+-0000000000000000000000000000000000000000 31bd3323c18b21dd1e71020b6e75f1cd3f71b8b1 Saahil Hiranandani <suc2@illinois.edu> 1709661051 -0600	clone: from https://github.com/alibaba/fastjson2.git
+-31bd3323c18b21dd1e71020b6e75f1cd3f71b8b1 2fb2c98a5b820e3151da6165baa52af60a008542 Saahil Hiranandani <suc2@illinois.edu> 1709661053 -0600	checkout: moving from main to 2fb2c98a5b820e3151da6165baa52af60a008542
++0000000000000000000000000000000000000000 31bd3323c18b21dd1e71020b6e75f1cd3f71b8b1 Saahil Hiranandani <suc2@illinois.edu> 1709661066 -0600	clone: from https://github.com/alibaba/fastjson2.git
++31bd3323c18b21dd1e71020b6e75f1cd3f71b8b1 ac8d25f4cce1def0c560f5e2192fe946f053af4c Saahil Hiranandani <suc2@illinois.edu> 1709661068 -0600	checkout: moving from main to ac8d25f4cce1def0c560f5e2192fe946f053af4c
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/.git/logs/refs/heads/main b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/.git/logs/refs/heads/main
+index 28f06c06..c4a6378a 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/.git/logs/refs/heads/main
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/.git/logs/refs/heads/main
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 31bd3323c18b21dd1e71020b6e75f1cd3f71b8b1 Saahil Hiranandani <suc2@illinois.edu> 1709661051 -0600	clone: from https://github.com/alibaba/fastjson2.git
++0000000000000000000000000000000000000000 31bd3323c18b21dd1e71020b6e75f1cd3f71b8b1 Saahil Hiranandani <suc2@illinois.edu> 1709661066 -0600	clone: from https://github.com/alibaba/fastjson2.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index 28f06c06..c4a6378a 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 31bd3323c18b21dd1e71020b6e75f1cd3f71b8b1 Saahil Hiranandani <suc2@illinois.edu> 1709661051 -0600	clone: from https://github.com/alibaba/fastjson2.git
++0000000000000000000000000000000000000000 31bd3323c18b21dd1e71020b6e75f1cd3f71b8b1 Saahil Hiranandani <suc2@illinois.edu> 1709661066 -0600	clone: from https://github.com/alibaba/fastjson2.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java
+index df9e4854..2458a0c9 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/fastjson2-9745790591/Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderBean.java
+@@ -87,7 +87,7 @@ public abstract class ObjectReaderBean<T>
+                 String fieldName1 = fieldName.substring(2);
+                 long hashCode64LCase = Fnv.hashCode64LCase(fieldName1);
+                 FieldReader fieldReader = getFieldReaderLCase(hashCode64LCase);
+-                if (fieldReader != null) {
++                if (fieldReader != null && fieldReader.fieldClass == Boolean.class) {
+                     fieldReader.readFieldValue(jsonReader, object);
+                     return;
+                 }

@@ -1,0 +1,48 @@
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/HEAD
+index e60a8c98..00b99a34 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/HEAD
+@@ -1 +1 @@
+-a5e2b18af288d261b21f2731a2183464fecc4ff9
++ffc0cc3c1ff1aeebe588983e0e4468de5d0360bc
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/index b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/index
+index dd9c7800..60d4221b 100644
+Binary files a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/index and b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/index differ
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/HEAD
+index 8662557e..88a6e527 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/HEAD
+@@ -1,2 +1,2 @@
+-0000000000000000000000000000000000000000 8b2a5961942777435990fc709038f19e93cbbe43 Saahil Hiranandani <suc2@illinois.edu> 1709659487 -0600	clone: from https://github.com/spesmilo/electrum.git
+-8b2a5961942777435990fc709038f19e93cbbe43 a5e2b18af288d261b21f2731a2183464fecc4ff9 Saahil Hiranandani <suc2@illinois.edu> 1709659487 -0600	checkout: moving from master to a5e2b18af288d261b21f2731a2183464fecc4ff9
++0000000000000000000000000000000000000000 8b2a5961942777435990fc709038f19e93cbbe43 Saahil Hiranandani <suc2@illinois.edu> 1709659494 -0600	clone: from https://github.com/spesmilo/electrum.git
++8b2a5961942777435990fc709038f19e93cbbe43 ffc0cc3c1ff1aeebe588983e0e4468de5d0360bc Saahil Hiranandani <suc2@illinois.edu> 1709659494 -0600	checkout: moving from master to ffc0cc3c1ff1aeebe588983e0e4468de5d0360bc
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/refs/heads/master b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/refs/heads/master
+index e26cbc39..aa59094b 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/refs/heads/master
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/refs/heads/master
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 8b2a5961942777435990fc709038f19e93cbbe43 Saahil Hiranandani <suc2@illinois.edu> 1709659487 -0600	clone: from https://github.com/spesmilo/electrum.git
++0000000000000000000000000000000000000000 8b2a5961942777435990fc709038f19e93cbbe43 Saahil Hiranandani <suc2@illinois.edu> 1709659494 -0600	clone: from https://github.com/spesmilo/electrum.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index e26cbc39..aa59094b 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 8b2a5961942777435990fc709038f19e93cbbe43 Saahil Hiranandani <suc2@illinois.edu> 1709659487 -0600	clone: from https://github.com/spesmilo/electrum.git
++0000000000000000000000000000000000000000 8b2a5961942777435990fc709038f19e93cbbe43 Saahil Hiranandani <suc2@illinois.edu> 1709659494 -0600	clone: from https://github.com/spesmilo/electrum.git
+diff --git a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/lib/transaction.py b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/lib/transaction.py
+index afba2bba..ed411957 100644
+--- a/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Buggy-version/lib/transaction.py
++++ b/D:/Projects/Shreya/CS527-Project/Bugs/BugSwarm/electrum-293054995/Patched-Version/lib/transaction.py
+@@ -434,7 +434,9 @@ def parse_witness(vds, txin):
+         txin['value'] = vds.read_uint64()
+         n = vds.read_compact_size()
+     w = list(bh2u(vds.read_bytes(vds.read_compact_size())) for i in range(n))
+-    if n > 2:
++    if txin['type'] == 'coinbase':
++        pass
++    elif n > 2:
+         txin['num_sig'] = n - 2
+         txin['signatures'] = parse_sig(w[1:-1])
+         m, n, x_pubkeys, pubkeys, witnessScript = parse_redeemScript(bfh(w[-1]))
