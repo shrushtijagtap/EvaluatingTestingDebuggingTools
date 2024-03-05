@@ -7,7 +7,7 @@ tab_names = [
     "Bears",
     "BugSwarm",
     "Defects4J",
-    "QuickBugs"
+    "QuixBugs"
 ]
 
 header = dbc.Row([
