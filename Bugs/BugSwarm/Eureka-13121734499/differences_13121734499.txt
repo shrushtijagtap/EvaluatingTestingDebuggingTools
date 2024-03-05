@@ -1,0 +1,75 @@
+diff --git a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/HEAD b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/HEAD
+index ebe92ec0..9e1ef47d 100644
+--- a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/HEAD
++++ b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/HEAD
+@@ -1 +1 @@
+-9954f420e7dfc2581828484ea7d33464b02e97d8
++192eea82686e9d8c00b7b795ddc1be8b2b4515a4
+diff --git a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/index b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/index
+index b5cedfa7..a91947ae 100644
+Binary files a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/index and b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/index differ
+diff --git a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/logs/HEAD b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/logs/HEAD
+index 16f19eb7..9dc450ad 100644
+--- a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/logs/HEAD
++++ b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/logs/HEAD
+@@ -1,2 +1,2 @@
+-0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709614026 -0600	clone: from https://github.com/kevin218/Eureka.git
+-0de238b9f04a1af7c90dd6a65ff1e8975e0757cf 9954f420e7dfc2581828484ea7d33464b02e97d8 Saahil Hiranandani <suc2@illinois.edu> 1709614027 -0600	checkout: moving from main to 9954f420e7dfc2581828484ea7d33464b02e97d8
++0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709614060 -0600	clone: from https://github.com/kevin218/Eureka.git
++0de238b9f04a1af7c90dd6a65ff1e8975e0757cf 192eea82686e9d8c00b7b795ddc1be8b2b4515a4 Saahil Hiranandani <suc2@illinois.edu> 1709614061 -0600	checkout: moving from main to 192eea82686e9d8c00b7b795ddc1be8b2b4515a4
+diff --git a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/logs/refs/heads/main b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/logs/refs/heads/main
+index 1dfb588a..5ea454b9 100644
+--- a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/logs/refs/heads/main
++++ b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/logs/refs/heads/main
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709614026 -0600	clone: from https://github.com/kevin218/Eureka.git
++0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709614060 -0600	clone: from https://github.com/kevin218/Eureka.git
+diff --git a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/logs/refs/remotes/origin/HEAD b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+index 1dfb588a..5ea454b9 100644
+--- a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/logs/refs/remotes/origin/HEAD
++++ b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/logs/refs/remotes/origin/HEAD
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709614026 -0600	clone: from https://github.com/kevin218/Eureka.git
++0000000000000000000000000000000000000000 0de238b9f04a1af7c90dd6a65ff1e8975e0757cf Saahil Hiranandani <suc2@illinois.edu> 1709614060 -0600	clone: from https://github.com/kevin218/Eureka.git
+diff --git a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/objects/pack/pack-14bb8ab79683d5574dca5eb38492882438dae942.idx b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/objects/pack/pack-ab88a2a2b759f2826a1857117adabd6df3115fce.idx
+similarity index 73%
+rename from D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/objects/pack/pack-14bb8ab79683d5574dca5eb38492882438dae942.idx
+rename to D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/objects/pack/pack-ab88a2a2b759f2826a1857117adabd6df3115fce.idx
+index c1703537..07fba012 100644
+Binary files a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/objects/pack/pack-14bb8ab79683d5574dca5eb38492882438dae942.idx and b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/objects/pack/pack-ab88a2a2b759f2826a1857117adabd6df3115fce.idx differ
+diff --git a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/objects/pack/pack-14bb8ab79683d5574dca5eb38492882438dae942.pack b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/objects/pack/pack-ab88a2a2b759f2826a1857117adabd6df3115fce.pack
+similarity index 99%
+rename from D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/objects/pack/pack-14bb8ab79683d5574dca5eb38492882438dae942.pack
+rename to D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/objects/pack/pack-ab88a2a2b759f2826a1857117adabd6df3115fce.pack
+index 643daf58..97dbde69 100644
+Binary files a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/objects/pack/pack-14bb8ab79683d5574dca5eb38492882438dae942.pack and b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/objects/pack/pack-ab88a2a2b759f2826a1857117adabd6df3115fce.pack differ
+diff --git a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/objects/pack/pack-14bb8ab79683d5574dca5eb38492882438dae942.rev b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/objects/pack/pack-ab88a2a2b759f2826a1857117adabd6df3115fce.rev
+similarity index 77%
+rename from D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/objects/pack/pack-14bb8ab79683d5574dca5eb38492882438dae942.rev
+rename to D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/objects/pack/pack-ab88a2a2b759f2826a1857117adabd6df3115fce.rev
+index 49694ad5..daef87f7 100644
+Binary files a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/.git/objects/pack/pack-14bb8ab79683d5574dca5eb38492882438dae942.rev and b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/.git/objects/pack/pack-ab88a2a2b759f2826a1857117adabd6df3115fce.rev differ
+diff --git a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/src/eureka/S2_calibrations/s2_calibrate.py b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/src/eureka/S2_calibrations/s2_calibrate.py
+index 8f654a68..24f043ba 100644
+--- a/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Buggy-version/src/eureka/S2_calibrations/s2_calibrate.py
++++ b/D:/Projects/ShreyaAssignment/CS527-Project/Bugs/BugSwarm/Eureka-13121734499/Patched-Version/src/eureka/S2_calibrations/s2_calibrate.py
+@@ -233,15 +233,16 @@ class EurekaSpec2Pipeline(Spec2Pipeline):
+             analysis.
+         '''
+ 
+-        if meta.slit_y_low is not None:
++        if hasattr(meta, 'slit_y_low') and meta.slit_y_low is not None:
+             # Controls the cross-dispersion extraction
+             self.assign_wcs.slit_y_low = meta.slit_y_low
+ 
+-        if meta.slit_y_high is not None:
++        if hasattr(meta, 'slit_y_high') and meta.slit_y_high is not None:
+             # Controls the cross-dispersion extraction
+             self.assign_wcs.slit_y_high = meta.slit_y_high
+ 
+-        if meta.tsgrism_extract_height is not None:
++        if hasattr(meta, 'tsgrism_extract_height') and \
++           meta.tsgrism_extract_height is not None:
+             # NIRCam grism subarray height in cross-dispersion direction
+             self.extract_2d.tsgrism_extract_height = \
+                 meta.tsgrism_extract_height
