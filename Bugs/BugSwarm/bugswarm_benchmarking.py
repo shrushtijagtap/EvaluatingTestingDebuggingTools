@@ -128,7 +128,7 @@ def process_bug(bug_dir, option=None):
     # Get the diff file
     if not Path(os.path.join(bug_dir, "Diff")).is_file():
         return
-
+    
     diff = []
     with open(os.path.join(bug_dir, "Diff")) as diff_file:
         for line in diff_file:
