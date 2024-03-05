@@ -5,6 +5,7 @@ from Levenshtein import distance
 import re
 import os
 import lizard
+from pathlib import Path
 
 
 ## NEW VERSION
@@ -125,8 +126,11 @@ def get_files_changed(diff):
 
 def process_bug(bug_dir, option=None):
     # Get the diff file
+    if not Path(bug_dir).is_dir():
+        return
+
     diff = []
-    with open(os.path.join(bug_dir, "diff.txt")) as diff_file:
+    with open(os.path.join(bug_dir, "Diff")) as diff_file:
         for line in diff_file:
             diff.append(line)
 
@@ -174,7 +178,6 @@ if __name__ == "__main__":
     for path in dir_paths:
         if path == "scripts" or path == "results":
             continue
-
 
         print("For bug ", count, " : ", path)
         count += 1
