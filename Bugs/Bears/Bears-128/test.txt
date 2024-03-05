@@ -1,1 +1,1 @@
-org.traccar.protocol.H02ProtocolDecoderTest
+org.traccar.protocol.H02ProtocolDecoderTest.testDecode

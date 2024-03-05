@@ -1,1 +1,1 @@
-com.fasterxml.jackson.databind.ser.DateSerializationTest
+com.fasterxml.jackson.databind.ser.DateSerializationTest.testFormatWithoutPattern
