@@ -88,7 +88,18 @@ def get_class_change_count(diff):
 
 
 def get_method_change_count(diff):
-    return 0
+    noOfMethodsChanged = 0
+    pattern = re.compile(r'\b(private|protected|public)\s+(?!class\b)\w+')
+
+    for line in lines:
+        match = re.search(pattern, line)
+        if match:
+            noOfMethodsChanged+=1
+
+    if noOfMethodsChanged <= 0:
+        return 1
+
+    return noOfMethodsChanged
 
 
 def get_line_change_count(diff):
