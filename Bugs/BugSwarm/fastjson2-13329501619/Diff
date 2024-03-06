@@ -1,0 +1,537 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSON.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSON.java
+index aca37d1f3..0bfe922a8 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSON.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSON.java
+@@ -1494,6 +1494,66 @@ public interface JSON {
+         }
+     }
+ 
++    /**
++     * Parses the json byte array as {@link T}. Returns
++     * {@code null} if received byte array is {@code null} or empty.
++     *
++     * @param chars the specified chars
++     * @param objectClass the specified actual type of {@link T}
++     * @param features the specified features is applied to parsing
++     * @return {@link T} or {@code null}
++     * @throws JSONException If a parsing error occurs
++     */
++    @SuppressWarnings("unchecked")
++    static <T> T parseObject(char[] chars, Class<T> objectClass, JSONReader.Feature... features) {
++        if (chars == null || chars.length == 0) {
++            return null;
++        }
++
++        try (JSONReader reader = JSONReader.of(chars)) {
++            reader.context.config(features);
++            ObjectReader<T> objectReader = reader.getObjectReader(objectClass);
++            T object = objectReader.readObject(reader, objectClass, null, 0);
++            if (reader.resolveTasks != null) {
++                reader.handleResolveTasks(object);
++            }
++            if (reader.ch != EOI && (reader.context.features & IgnoreCheckClose.mask) == 0) {
++                throw new JSONException(reader.info("input not end"));
++            }
++            return object;
++        }
++    }
++
++    /**
++     * Parses the json byte array as {@link T}. Returns
++     * {@code null} if received byte array is {@code null} or empty.
++     *
++     * @param chars the specified chars
++     * @param type the specified actual type of {@link T}
++     * @param features the specified features is applied to parsing
++     * @return {@link T} or {@code null}
++     * @throws JSONException If a parsing error occurs
++     */
++    @SuppressWarnings("unchecked")
++    static <T> T parseObject(char[] chars, Type type, JSONReader.Feature... features) {
++        if (chars == null || chars.length == 0) {
++            return null;
++        }
++
++        try (JSONReader reader = JSONReader.of(chars)) {
++            reader.context.config(features);
++            ObjectReader<T> objectReader = reader.getObjectReader(type);
++            T object = objectReader.readObject(reader, type, null, 0);
++            if (reader.resolveTasks != null) {
++                reader.handleResolveTasks(object);
++            }
++            if (reader.ch != EOI && (reader.context.features & IgnoreCheckClose.mask) == 0) {
++                throw new JSONException(reader.info("input not end"));
++            }
++            return object;
++        }
++    }
++
+     /**
+      * Parses the json byte array as {@link T}. Returns
+      * {@code null} if received byte array is {@code null} or empty.
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONReader.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
+index 52ebda040..7a972ddd4 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReader.java
+@@ -285,7 +285,7 @@ public abstract class JSONReader
+         return null;
+     }
+ 
+-    static char char1(int c) {
++    final char char1(int c) {
+         switch (c) {
+             case '0':
+                 return '\0';
+@@ -328,9 +328,10 @@ public abstract class JSONReader
+             case '@':
+             case '(':
+             case ')':
++            case '_':
+                 return (char) c;
+             default:
+-                throw new JSONException("unclosed.str.lit " + (char) c);
++                throw new JSONException(info("unclosed.str '\\" + (char) c));
+         }
+     }
+ 
+@@ -1667,7 +1668,11 @@ public abstract class JSONReader
+ 
+             Object name;
+             if (match || typeRedirect) {
+-                name = readFieldName();
++                if (ch >= '1' && ch <= '9') {
++                    name = null;
++                } else {
++                    name = readFieldName();
++                }
+             } else {
+                 name = getFieldName();
+                 match = true;
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONReaderASCII.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReaderASCII.java
+index d4bee4f28..a93a51d42 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONReaderASCII.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReaderASCII.java
+@@ -859,6 +859,10 @@ class JSONReaderASCII
+     @Override
+     public final String readFieldName() {
+         if (ch != '"' && ch != '\'') {
++            if ((context.features & Feature.AllowUnQuotedFieldNames.mask) != 0 && isFirstIdentifier(ch)) {
++                return readFieldNameUnquote();
++            }
++
+             return null;
+         }
+ 
+@@ -1495,7 +1499,7 @@ class JSONReaderASCII
+                 return null;
+             }
+             default:
+-                throw new JSONException("TODO : " + ch);
++                throw new JSONException(info("illegal input : " + ch));
+         }
+     }
+ }
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONReaderUTF16.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReaderUTF16.java
+index bfe137200..5cad570ba 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONReaderUTF16.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReaderUTF16.java
+@@ -378,13 +378,8 @@ class JSONReaderUTF16
+             next();
+         }
+ 
+-        while (ch == '/') {
+-            next();
+-            if (ch == '/') {
+-                skipLineComment();
+-            } else {
+-                throw new JSONException("input not support " + ch + ", offset " + offset);
+-            }
++        while (ch == '/' && this.offset < this.chars.length && this.chars[this.offset] == '/') {
++            skipLineComment();
+         }
+     }
+ 
+@@ -1731,6 +1726,10 @@ class JSONReaderUTF16
+         }
+ 
+         if (ch != '"' && ch != '\'') {
++            if ((context.features & Feature.AllowUnQuotedFieldNames.mask) != 0 && isFirstIdentifier(ch)) {
++                return readFieldNameUnquote();
++            }
++
+             return null;
+         }
+ 
+@@ -3828,7 +3827,7 @@ class JSONReaderUTF16
+                 return null;
+             }
+             default:
+-                throw new JSONException("TODO : " + ch);
++                throw new JSONException(info("illegal input : " + ch));
+         }
+     }
+ 
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONReaderUTF8.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReaderUTF8.java
+index df5fa4f69..61f28403d 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONReaderUTF8.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONReaderUTF8.java
+@@ -68,13 +68,8 @@ class JSONReaderUTF8
+         this.end = length;
+         next();
+ 
+-        while (ch == '/') {
+-            next();
+-            if (ch == '/') {
+-                skipLineComment();
+-            } else {
+-                throw new JSONException("input not support " + ch + ", offset " + offset);
+-            }
++        while (ch == '/' && this.offset < this.bytes.length && this.bytes[this.offset] == '/') {
++            skipLineComment();
+         }
+     }
+ 
+@@ -98,13 +93,8 @@ class JSONReaderUTF8
+         this.end = length;
+         next();
+ 
+-        while (ch == '/') {
+-            next();
+-            if (ch == '/') {
+-                skipLineComment();
+-            } else {
+-                throw new JSONException("input not support " + ch + ", offset " + offset);
+-            }
++        while (ch == '/' && this.offset < this.bytes.length && this.bytes[this.offset] == '/') {
++            skipLineComment();
+         }
+     }
+ 
+@@ -120,13 +110,8 @@ class JSONReaderUTF8
+         this.cacheItem = null;
+         next();
+ 
+-        while (ch == '/') {
+-            next();
+-            if (ch == '/') {
+-                skipLineComment();
+-            } else {
+-                throw new JSONException("input not support " + ch + ", offset " + offset);
+-            }
++        while (ch == '/' && this.offset < this.bytes.length && this.bytes[this.offset] == '/') {
++            skipLineComment();
+         }
+     }
+ 
+@@ -1448,6 +1433,10 @@ class JSONReaderUTF8
+     @Override
+     public String readFieldName() {
+         if (ch != '"' && ch != '\'') {
++            if ((context.features & Feature.AllowUnQuotedFieldNames.mask) != 0 && isFirstIdentifier(ch)) {
++                return readFieldNameUnquote();
++            }
++
+             return null;
+         }
+ 
+@@ -4029,7 +4018,7 @@ class JSONReaderUTF8
+                 return null;
+             }
+             default:
+-                throw new JSONException("TODO : " + ch);
++                throw new JSONException(info("illegal input : " + ch));
+         }
+     }
+ 
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/test/java/com/alibaba/fastjson2/read/ObjectKeyTest.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/test/java/com/alibaba/fastjson2/read/ObjectKeyTest.java
+new file mode 100644
+index 000000000..37240cc48
+--- /dev/null
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/test/java/com/alibaba/fastjson2/read/ObjectKeyTest.java
+@@ -0,0 +1,41 @@
++package com.alibaba.fastjson2.read;
++
++import com.alibaba.fastjson2.JSON;
++import com.alibaba.fastjson2.JSONReader;
++import org.junit.jupiter.api.Test;
++
++import java.lang.reflect.Type;
++import java.nio.charset.StandardCharsets;
++import java.util.Map;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++
++public class ObjectKeyTest {
++    @Test
++    public void test() {
++        assertEquals(1, JSON.parseObject("{\"items\":{{}:{\"id\":123}}}", Bean.class).items.size());
++        assertEquals(1, JSON.parseObject("{\"items\":{1:{\"id\":123}}}", Bean.class).items.size());
++        assertEquals(1, JSON.parseObject("{\"items\":{true:{\"id\":123}}}", Bean.class).items.size());
++        assertEquals(1, JSON.parseObject("{\"items\":{false:{\"id\":123}}}", Bean.class).items.size());
++        assertEquals(1, JSON.parseObject("{\"items\":{null:{\"id\":123}}}", Bean.class).items.size());
++    }
++
++    @Test
++    public void test1() {
++        String s = "{items:{k1:{id:123}}}";
++        assertEquals(1, JSON.parseObject(s, Bean.class, JSONReader.Feature.AllowUnQuotedFieldNames).items.size());
++        byte[] bytes = s.getBytes();
++        assertEquals(1, JSON.parseObject(bytes, 0, bytes.length, StandardCharsets.UTF_8, Bean.class, JSONReader.Feature.AllowUnQuotedFieldNames).items.size());
++        assertEquals(1, JSON.parseObject(bytes, Bean.class, JSONReader.Feature.AllowUnQuotedFieldNames).items.size());
++        assertEquals(1, JSON.parseObject(s.toCharArray(), Bean.class, JSONReader.Feature.AllowUnQuotedFieldNames).items.size());
++        assertEquals(1, ((Bean) JSON.parseObject(s.toCharArray(), (Type) Bean.class, JSONReader.Feature.AllowUnQuotedFieldNames)).items.size());
++    }
++
++    public static class Bean {
++        public Map<String, Item> items;
++    }
++
++    public static class Item {
++        public int id;
++    }
++}
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/test/java/com/alibaba/fastjson2/v1issues/issue_3600/Issue3689.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/test/java/com/alibaba/fastjson2/v1issues/issue_3600/Issue3689.java
+index dc8fb75a9..316258d87 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/core/src/test/java/com/alibaba/fastjson2/v1issues/issue_3600/Issue3689.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/core/src/test/java/com/alibaba/fastjson2/v1issues/issue_3600/Issue3689.java
+@@ -19,6 +19,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("/dfdfdf");
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("/dfdfdf".getBytes());
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("/dfdfdf".toCharArray());
++        });
+     }
+ 
+     @Test
+@@ -26,6 +32,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("//dfdfdf");
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("//dfdfdf".getBytes());
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("//dfdfdf".toCharArray());
++        });
+     }
+ 
+     @Test
+@@ -33,6 +45,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("///dfdfdf");
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("///dfdfdf".getBytes());
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("///dfdfdf".toCharArray());
++        });
+     }
+ 
+     @Test
+@@ -40,6 +58,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("////dfdfdf");
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("////dfdfdf".getBytes());
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("////dfdfdf".toCharArray());
++        });
+     }
+ 
+     @Test
+@@ -47,6 +71,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("/////dfdfdf");
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("/////dfdfdf".getBytes());
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("/////dfdfdf".toCharArray());
++        });
+     }
+ 
+     @Test
+@@ -54,6 +84,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("//////dfdfdf");
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("//////dfdfdf".getBytes());
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("//////dfdfdf".toCharArray());
++        });
+     }
+ 
+     @Test
+@@ -61,6 +97,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("dfdfdf", String.class);
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("dfdfdf".getBytes(), String.class);
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("dfdfdf".toCharArray(), String.class);
++        });
+     }
+ 
+     @Test
+@@ -68,6 +110,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("/dfdfdf", String.class);
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("/dfdfdf".getBytes(), String.class);
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("/dfdfdf".toCharArray(), String.class);
++        });
+     }
+ 
+     @Test
+@@ -75,6 +123,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("//dfdfdf", String.class);
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("//dfdfdf".getBytes(), String.class);
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("//dfdfdf".toCharArray(), String.class);
++        });
+     }
+ 
+     @Test
+@@ -82,6 +136,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("///dfdfdf", String.class);
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("///dfdfdf".getBytes(), String.class);
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("///dfdfdf".toCharArray(), String.class);
++        });
+     }
+ 
+     @Test
+@@ -89,6 +149,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("////dfdfdf", String.class);
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("////dfdfdf".getBytes(), String.class);
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("////dfdfdf".toCharArray(), String.class);
++        });
+     }
+ 
+     @Test
+@@ -96,6 +162,12 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("/////dfdfdf", String.class);
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("/////dfdfdf".getBytes(), String.class);
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("/////dfdfdf".toCharArray(), String.class);
++        });
+     }
+ 
+     @Test
+@@ -103,11 +175,21 @@ public class Issue3689 {
+         assertThrows(JSONException.class, () -> {
+             JSON.parseArray("//////dfdfdf", String.class);
+         });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("//////dfdfdf".getBytes(), String.class);
++        });
++        assertThrows(JSONException.class, () -> {
++            JSON.parseArray("//////dfdfdf".toCharArray(), String.class);
++        });
+     }
+ 
+     @Test
+     public void test_for_issue() {
+         JSON.parseArray("[\"////dfdfdf\"]"); //不会抛异常
++        JSON.parseArray("[\"////dfdfdf\"]".getBytes()); //不会抛异常
++        JSON.parseArray("[\"////dfdfdf\"]".toCharArray()); //不会抛异常
+         JSON.parse("[\"dfdfdf\"]"); //不会抛异常
++        JSON.parse("[\"dfdfdf\"]".getBytes()); //不会抛异常
++        JSON.parse("[\"dfdfdf\"]".toCharArray()); //不会抛异常
+     }
+ }
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/fastjson1-compatible/src/test/java/com/alibaba/fastjson/issue_3600/Issue3689.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/fastjson1-compatible/src/test/java/com/alibaba/fastjson/issue_3600/Issue3689.java
+index ef38e4959..a14cc2346 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/fastjson1-compatible/src/test/java/com/alibaba/fastjson/issue_3600/Issue3689.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/fastjson1-compatible/src/test/java/com/alibaba/fastjson/issue_3600/Issue3689.java
+@@ -16,7 +16,7 @@ public class Issue3689 {
+ 
+     @Test
+     public void test_without_type_1_meaningles_char() {
+-        assertThrows(com.alibaba.fastjson2.JSONException.class, () -> {
++        assertThrows(com.alibaba.fastjson.JSONException.class, () -> {
+             JSONArray.parseArray("/dfdfdf");
+         });
+     }
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/fastjson1-compatible/src/test/java/com/alibaba/fastjson/parser/UnquoteStringKeyTest.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/fastjson1-compatible/src/test/java/com/alibaba/fastjson/parser/UnquoteStringKeyTest.java
+new file mode 100644
+index 000000000..0a1cc0224
+--- /dev/null
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/fastjson1-compatible/src/test/java/com/alibaba/fastjson/parser/UnquoteStringKeyTest.java
+@@ -0,0 +1,31 @@
++package com.alibaba.fastjson.parser;
++
++import com.alibaba.fastjson.JSON;
++import com.alibaba.fastjson.JSONObject;
++import org.junit.jupiter.api.Test;
++
++import java.util.Map;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++
++public class UnquoteStringKeyTest {
++    @Test
++    public void test() {
++        String str = "{name: \"xx\",displayName: \"xxx\",description: \"x\",algorithmType: 0,usingType: 0,adminClass: \"x\",workingClass: \"x\",generationMeta:{keyLength: {displayName: \"x\",description: \"x\",allowInput: \"false\",valueType: \"int\",validValues: [\"128\",\"192\",\"256\"],defaultValue: \"256\"}},workingMeta:{workMode: {displayName: \"x\",description: \"x\",allowInput: \"false\",valueType: \"string\",validValues: [\"ECB\", \"CBC\", \"CFB\", \"OFB\", \"GCM\"],defaultValue: \"x\"},padding: {displayName: \"x\",description: \"x\",allowInput: \"false\",valueType: \"string\",validValues: [\"x\", \"x\", \"x\"],defaultValue: \"x\"},initVector: {displayName: \"初\",description: \"x\",allowInput: \"false\",valueType: \"string\",validValues: [\"x\", \"x\", \"x\"],defaultValue: \"x\"}}}";
++        JSONObject object = JSON.parseObject(str);
++        assertEquals("xx", object.get("name"));
++    }
++
++    @Test
++    public void test1() {
++        assertEquals(1, JSON.parseObject("{items:{k1:{id:123}}}", Bean.class).items.size());
++    }
++
++    public static class Bean {
++        public Map<String, Item> items;
++    }
++
++    public static class Item {
++        public int id;
++    }
++}
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/incubator-vector/src/main/java/com/alibaba/fastjson2/JSONReaderUTF16Vector.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/incubator-vector/src/main/java/com/alibaba/fastjson2/JSONReaderUTF16Vector.java
+index 53b57a9bb..0271ccf98 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Buggy-version/incubator-vector/src/main/java/com/alibaba/fastjson2/JSONReaderUTF16Vector.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13329501619/Patched-Version/incubator-vector/src/main/java/com/alibaba/fastjson2/JSONReaderUTF16Vector.java
+@@ -217,7 +217,7 @@ final class JSONReaderUTF16Vector
+                 return null;
+             }
+             default:
+-                throw new JSONException("TODO : " + ch);
++                throw new JSONException(info("illegal input : " + ch));
+         }
+     }
+ 
