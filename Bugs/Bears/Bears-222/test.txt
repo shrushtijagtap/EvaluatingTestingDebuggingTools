@@ -1,1 +1,0 @@
-org.jgrapht.generate.WattsStrogatzGraphGeneratorTest.testNonIntegerVertices

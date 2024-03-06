@@ -1,2 +1,0 @@
-org/joda/time/field/UnsupportedDurationField.java
-org/joda/time/Partial.java

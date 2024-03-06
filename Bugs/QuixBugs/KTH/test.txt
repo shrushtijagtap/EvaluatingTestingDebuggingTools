@@ -1,4 +1,0 @@
-KTH_TEST.test_0
-KTH_TEST.test_1
-KTH_TEST.test_5
-KTH_TEST.test_6
