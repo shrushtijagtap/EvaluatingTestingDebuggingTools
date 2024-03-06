@@ -1,7 +1,7 @@
 from os import path, listdir
 
 import sys
-from scripts.bug_benchmarks import process_bug as bears_process_bug
+from Bugs.Bears.scripts.bug_benchmarks import process_bug as bears_process_bug
 from Bugs.QuixBugs.benchmarking_Quixbugs import process_bug as quixbugs_process_bug
 from Bugs.Defects4J.defects4j_benchmarking import process_bug as defects4j_process_bug
 
