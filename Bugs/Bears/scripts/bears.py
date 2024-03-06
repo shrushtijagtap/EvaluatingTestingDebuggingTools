@@ -5,7 +5,9 @@ import os
 import shutil
 
 # Target repository is in the parent directory/bears-benchmark
-repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'bears-benchmark'))
+repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'bears-benchmark'))
+bears_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
 bug_entry = {}
 
 selected_bug_ids = ['Bears-106', 'Bears-108', 'Bears-115', 'Bears-118', 'Bears-123', 'Bears-127', 'Bears-128',
@@ -46,8 +48,8 @@ def process_bug(bug_id, data):
     bug_entry[bug_id]['failed_tests'] = get_failed_test_list(bug_id, data)
 
     # Create a directory for the bug id
-    buggy_dir = os.path.join("bears_new", bug_id, 'Buggy-Version')
-    fixed_dir = os.path.join("bears_new", bug_id, 'Fixed-Version')
+    buggy_dir = os.path.join(bears_path, bug_id, 'Buggy-Version')
+    fixed_dir = os.path.join(bears_path, bug_id, 'Fixed-Version')
 
     # Checkout the bug branch
     branch_name = get_branch_name(bug_id, data)
@@ -64,19 +66,19 @@ def process_bug(bug_id, data):
     shutil.copytree(repo_path, fixed_dir)
 
     # Remove all .log files
-    command = f'find /Users/strider/Dev/extractor/bears_new/{bug_id}/. -type f -name "*.log" -exec rm -rf {{}} +'
+    command = f'find {bears_path}/{bug_id}/. -type f -name "*.log" -exec rm -rf {{}} +'
     subprocess.run(command, shell=True)
 
     # Remove all .git files
-    command = f'find /Users/strider/Dev/extractor/bears_new/{bug_id}/. -type d -name ".git" -exec rm -rf {{}} +'
+    command = f'find {bears_path}/{bug_id}/. -type d -name ".git" -exec rm -rf {{}} +'
     subprocess.run(command, shell=True)
 
     # Remove all .info files
-    command = f'find /Users/strider/Dev/extractor/bears_new/{bug_id}/. -type f -name "*.info" -exec rm -rf {{}} +'
+    command = f'find {bears_path}/{bug_id}/. -type f -name "*.info" -exec rm -rf {{}} +'
     subprocess.run(command, shell=True)
 
     # Generate the diff file
-    diff_file = os.path.join("bears_new", bug_id, 'Diff')
+    diff_file = os.path.join(bears_path, bug_id, 'Diff')
     with open(diff_file, 'w') as diff:
         subprocess.run(['git', 'diff', '--no-index', buggy_dir, fixed_dir], stdout=diff)
 
@@ -88,7 +90,7 @@ if __name__ == '__main__':
     for bug_id in selected_bug_ids:
         process_bug(bug_id, data)
         # Add a file with the failed test list
-        with open(f'bears_new/{bug_id}/test.txt', 'w') as file:
+        with open(f'{bears_path}/{bug_id}/test.txt', 'w') as file:
             file.write('\n'.join(bug_entry[bug_id]['failed_tests']))
 
         # Remove the repo
