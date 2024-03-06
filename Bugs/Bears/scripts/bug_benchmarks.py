@@ -123,7 +123,7 @@ def get_files_changed(diff):
     return files_changed
 
 
-def process_bug(bug_dir):
+def process_bug(bug_dir, option=None):
     # Get the diff file
     diff = []
     with open(os.path.join(bug_dir, "Diff")) as diff_file:
@@ -170,7 +170,8 @@ def process_bug(bug_dir):
         "CC": abs(buggy_complexity - fixed_complexity),
         "CodeBLEU": codebleu_scores
     }
-
+    if option != None:
+        return bug_results[option]
     return bug_results
 
 
