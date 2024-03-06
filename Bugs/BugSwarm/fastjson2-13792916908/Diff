@@ -1,0 +1,63 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13792916908/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16JDK9UF.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13792916908/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16JDK9UF.java
+index 2fb8be0a2..099a2ac51 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13792916908/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16JDK9UF.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13792916908/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16JDK9UF.java
+@@ -38,14 +38,12 @@ final class JSONWriterUTF16JDK9UF
+         final char[] chars = this.chars;
+         chars[off++] = quote;
+ 
+-        for (int i = 0; i < strlen; ) {
++        for (int i = 0; i < strlen; ++i) {
+             int c;
+             if (coder == 0) {
+                 c = value[i];
+-                i++;
+             } else {
+-                c = UNSAFE.getChar(str, (long) Unsafe.ARRAY_CHAR_BASE_OFFSET + i);
+-                i += 2;
++                c = UNSAFE.getChar(str, (long) Unsafe.ARRAY_CHAR_BASE_OFFSET + i * 2);
+             }
+             if (c == '\\'
+                     || c == quote
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13792916908/Buggy-version/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13792916908/Patched-Version/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java
+index 2688c6c30..99bafc247 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13792916908/Buggy-version/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13792916908/Patched-Version/core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java
+@@ -2039,7 +2039,10 @@ public class JSONReaderTest1 {
+             Object v1 = object.get(s1);
+             assertEquals(s1, v1, Integer.toString(i));
+         }
++    }
+ 
++    @Test
++    public void testUTF16_2() {
+         for (char i = 0; i < 512; i++) {
+             for (char j = 0; j < 512; j++) {
+                 String s2 = new String(new char[]{i, j});
+@@ -2049,7 +2052,25 @@ public class JSONReaderTest1 {
+                 JSONReaderUTF16 jsonReader = new JSONReaderUTF16(ctx, json, chars, 0, chars.length);
+                 JSONObject object = (JSONObject) jsonReader.readObject();
+                 Object v1 = object.get(s2);
+-                assertEquals(s2, v1);
++                assertEquals(s2, v1, Arrays.toString(new int[]{i, j}));
++            }
++        }
++    }
++
++    @Test
++    public void testUTF16_3() {
++        for (char i = 0; i < 512; i += 3) {
++            for (char j = 0; j < 512; j += 3) {
++                for (char k = 0; k < 512; k += 3) {
++                    String s2 = new String(new char[]{i, j, k});
++                    String json = JSON.toJSONString(JSONObject.of(s2, s2));
++                    char[] chars = json.toCharArray();
++                    JSONReader.Context ctx = JSONFactory.createReadContext();
++                    JSONReaderUTF16 jsonReader = new JSONReaderUTF16(ctx, json, chars, 0, chars.length);
++                    JSONObject object = (JSONObject) jsonReader.readObject();
++                    Object v1 = object.get(s2);
++                    assertEquals(s2, v1, Arrays.toString(new int[]{i, j, k}));
++                }
+             }
+         }
+     }
