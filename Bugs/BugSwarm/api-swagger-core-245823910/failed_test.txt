@@ -1,0 +1,2 @@
+io.swagger.SecurityDefinitionTest.createModelWithSecurityRequirements
+io.swagger.parameter.ParameterSerializationTest.testIssue1765

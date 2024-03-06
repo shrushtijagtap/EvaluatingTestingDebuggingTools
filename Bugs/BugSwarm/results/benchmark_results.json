@@ -58,7 +58,7 @@
     "CC": 1,
     "CodeBLEU": {
       "openrouteservice/src/main/java/org/heigit/ors/mapmatching/GhMapMatcher.java": 0.9437148766610317,
-      "openrouteservice/src/main/java/org/heigit/ors/routing/configuration/RoutingManagerConfiguration.java": 0.8480036266608757
+      "openrouteservice/src/main/java/org/heigit/ors/routing/configuration/RoutingManagerConfiguration.java": 0.8463642823985806
     }
   },
   "fastjson2-13792916908": {
@@ -74,7 +74,7 @@
     "CC": 5,
     "CodeBLEU": {
       "core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16JDK9UF.java": 0.9485983719811834,
-      "core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java": 0.9888337662371239
+      "core/src/test/java/com/alibaba/fastjson2/JSONReaderTest1.java": 0.9887869672854205
     }
   },
   "projects-java-fundamentals-exercises-7068728014": {
@@ -182,10 +182,10 @@
       "core/src/main/java/com/alibaba/fastjson2/JSONWriter.java": 0.999646333812706,
       "core/src/main/java/com/alibaba/fastjson2/JSONWriterJSONB.java": 0.8087217792434063,
       "core/src/main/java/com/alibaba/fastjson2/JSONWriterPretty.java": 0.8651231625416387,
-      "core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java": 0.7901203970519985,
-      "core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF8.java": 0.7895823032654609,
+      "core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java": 0.7908194721219061,
+      "core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF8.java": 0.7899114362351807,
       "core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOffsetDateTime.java": 0.9561681329606236,
-      "core/src/main/java/com/alibaba/fastjson2/util/DateUtils.java": 0.831958286907549,
+      "core/src/main/java/com/alibaba/fastjson2/util/DateUtils.java": 0.8333075037036528,
       "core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplOffsetDateTime.java": 0.8448340274468702,
       "core/src/test/java/com/alibaba/fastjson2/date/OffsetDateTimeTest.java": 0.819934801710902,
       "core/src/test/java/com/alibaba/fastjson2/time/DateTest.java": 0.9699490536085835
@@ -314,10 +314,10 @@
       "core/src/main/java/com/alibaba/fastjson2/JSONWriter.java": 0.999646333812706,
       "core/src/main/java/com/alibaba/fastjson2/JSONWriterJSONB.java": 0.8087217792434063,
       "core/src/main/java/com/alibaba/fastjson2/JSONWriterPretty.java": 0.8651231625416387,
-      "core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java": 0.7901203970519985,
-      "core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF8.java": 0.7895823032654609,
+      "core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java": 0.7908194721219061,
+      "core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF8.java": 0.7899114362351807,
       "core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOffsetDateTime.java": 0.9561681329606236,
-      "core/src/main/java/com/alibaba/fastjson2/util/DateUtils.java": 0.831958286907549,
+      "core/src/main/java/com/alibaba/fastjson2/util/DateUtils.java": 0.8333075037036528,
       "core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplOffsetDateTime.java": 0.8448340274468702,
       "core/src/test/java/com/alibaba/fastjson2/date/OffsetDateTimeTest.java": 0.819934801710902,
       "core/src/test/java/com/alibaba/fastjson2/time/DateTest.java": 0.9699490536085835

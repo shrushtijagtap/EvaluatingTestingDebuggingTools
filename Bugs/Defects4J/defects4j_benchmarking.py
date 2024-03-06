@@ -177,7 +177,7 @@ if __name__ == "__main__":
     benchmark_results = {}
 
     for path in dir_paths:
-        if path == "scripts" or path == "results":
+        if path == "scripts" or path == "results" or path =="__pycache__":
             continue
 
         print("For bug ", count, " : ", path)
