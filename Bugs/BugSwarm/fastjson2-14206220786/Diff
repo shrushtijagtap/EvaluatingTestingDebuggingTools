@@ -1,0 +1,44 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14206220786/Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplEnum.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14206220786/Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplEnum.java
+index ca1408838..516f89211 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14206220786/Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplEnum.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14206220786/Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplEnum.java
+@@ -194,7 +194,7 @@ public final class ObjectReaderImplEnum
+             if (fieldType instanceof ParameterizedType) {
+                 Type rawType = ((ParameterizedType) fieldType).getRawType();
+                 if (List.class.isAssignableFrom((Class<?>) rawType)) {
+-                    throw new JSONException(this.getClass().getSimpleName() + "s parses error, JSONReader not forward when field type belongs to collection to avoid OOM");
++                    throw new JSONException(this.getClass().getSimpleName() + " parses error, JSONReader not forward when field type belongs to collection to avoid OOM");
+                 }
+             }
+         }
+@@ -266,7 +266,7 @@ public final class ObjectReaderImplEnum
+             if (fieldType instanceof ParameterizedType) {
+                 Type rawType = ((ParameterizedType) fieldType).getRawType();
+                 if (List.class.isAssignableFrom((Class<?>) rawType)) {
+-                    throw new JSONException(this.getClass().getSimpleName() + "s parses error, JSONReader not forward when field type belongs to collection to avoid OOM");
++                    throw new JSONException(this.getClass().getSimpleName() + " parses error, JSONReader not forward when field type belongs to collection to avoid OOM");
+                 }
+             }
+         }
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14206220786/Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplEnum2X4.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14206220786/Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplEnum2X4.java
+index 5c2e60359..e73af0395 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14206220786/Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplEnum2X4.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14206220786/Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplEnum2X4.java
+@@ -133,7 +133,7 @@ public final class ObjectReaderImplEnum2X4
+             if (fieldType instanceof ParameterizedType) {
+                 Type rawType = ((ParameterizedType) fieldType).getRawType();
+                 if (List.class.isAssignableFrom((Class<?>) rawType)) {
+-                    throw new JSONException(this.getClass().getSimpleName() + "s parses error, JSONReader not forward when field type belongs to collection to avoid OOM");
++                    throw new JSONException(this.getClass().getSimpleName() + " parses error, JSONReader not forward when field type belongs to collection to avoid OOM");
+                 }
+             }
+         }
+@@ -178,7 +178,7 @@ public final class ObjectReaderImplEnum2X4
+             if (fieldType instanceof ParameterizedType) {
+                 Type rawType = ((ParameterizedType) fieldType).getRawType();
+                 if (List.class.isAssignableFrom((Class<?>) rawType)) {
+-                    throw new JSONException(this.getClass().getSimpleName() + "s parses error, JSONReader not forward when field type belongs to collection to avoid OOM");
++                    throw new JSONException(this.getClass().getSimpleName() + " parses error, JSONReader not forward when field type belongs to collection to avoid OOM");
+                 }
+             }
+         }
