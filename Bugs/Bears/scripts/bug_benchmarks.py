@@ -91,7 +91,7 @@ def get_method_change_count(diff):
     noOfMethodsChanged = 0
     pattern = re.compile(r'\b(private|protected|public)\s+(?!class\b)\w+')
 
-    for line in lines:
+    for line in diff:
         match = re.search(pattern, line)
         if match:
             noOfMethodsChanged+=1
@@ -123,7 +123,7 @@ def get_files_changed(diff):
     return files_changed
 
 
-def process_bug(bug_dir, option=None):
+def process_bug(bug_dir):
     # Get the diff file
     diff = []
     with open(os.path.join(bug_dir, "Diff")) as diff_file:
@@ -170,13 +170,12 @@ def process_bug(bug_dir, option=None):
         "CC": abs(buggy_complexity - fixed_complexity),
         "CodeBLEU": codebleu_scores
     }
-    if option != None:
-        return bug_results[option]
+
     return bug_results
 
 
 if __name__ == "__main__":
-    parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'bears_new'))
+    parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     selected_bug_ids = ['Bears-106', 'Bears-108', 'Bears-115', 'Bears-118', 'Bears-123', 'Bears-127', 'Bears-128',
                         'Bears-129', 'Bears-130', 'Bears-137', 'Bears-141', 'Bears-143', 'Bears-197', 'Bears-198',
                         'Bears-21', 'Bears-222', 'Bears-226', 'Bears-245', 'Bears-246', 'Bears-99']
@@ -191,6 +190,7 @@ if __name__ == "__main__":
 
         benchmark_results[bud_id] = process_bug(path)
         print(json.dumps(benchmark_results, indent=4))
+
 
     with open(os.path.join(parent_dir, "benchmark_results.json"), "w") as file:
         json.dump(benchmark_results, file)
