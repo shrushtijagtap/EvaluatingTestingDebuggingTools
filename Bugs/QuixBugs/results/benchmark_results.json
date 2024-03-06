@@ -1,0 +1,202 @@
+{
+  "FIND_IN_SORTED": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 5,
+    "LD": { "find_in_sorted.java": 11 },
+    "CB": 5,
+    "CP": 5,
+    "CC": 0,
+    "CodeBLEU": { "find_in_sorted.java": 0.9544902590436757 }
+  },
+  "LIS": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 4,
+    "LD": { "lis.java": 26 },
+    "CB": 7,
+    "CP": 7,
+    "CC": 0,
+    "CodeBLEU": { "lis.java": 0.9373720524431334 }
+  },
+  "BREADTH_FIRST_SEARCH": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 8,
+    "LD": { "breadth_first_search.java": 52 },
+    "CB": 5,
+    "CP": 5,
+    "CC": 0,
+    "CodeBLEU": { "breadth_first_search.java": 0.8389595771110946 }
+  },
+  "POSSIBLE_CHANGE": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 4,
+    "LD": { "possible_change.java": 26 },
+    "CB": 3,
+    "CP": 4,
+    "CC": 1,
+    "CodeBLEU": { "possible_change.java": 0.8968727524115443 }
+  },
+  "LCS_LENGTH": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 8,
+    "LD": { "lcs_length.java": 89 },
+    "CB": 10,
+    "CP": 11,
+    "CC": 1,
+    "CodeBLEU": { "lcs_length.java": 0.9521023318753019 }
+  },
+  "SHORTEST_PATH_LENGTH": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 6,
+    "LD": { "shortest_path_length.java": 59 },
+    "CB": 9,
+    "CP": 9,
+    "CC": 0,
+    "CodeBLEU": { "shortest_path_length.java": 0.8174716549240276 }
+  },
+  "DEPTH_FIRST_SEARCH": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 5,
+    "LD": { "depth_first_search.java": 84 },
+    "CB": 5,
+    "CP": 5,
+    "CC": 0,
+    "CodeBLEU": { "depth_first_search.java": 0.8479334542911878 }
+  },
+  "FLATTEN": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 7,
+    "LD": { "flatten.java": 25 },
+    "CB": 4,
+    "CP": 4,
+    "CC": 0,
+    "CodeBLEU": { "flatten.java": 0.8521880563254461 }
+  },
+  "TO_BASE": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 4,
+    "LD": { "to_base.java": 24 },
+    "CB": 2,
+    "CP": 2,
+    "CC": 0,
+    "CodeBLEU": { "to_base.java": 0.902412985092937 }
+  },
+  "SIEVE": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 4,
+    "LD": { "sieve.java": 10 },
+    "CB": 11,
+    "CP": 11,
+    "CC": 0,
+    "CodeBLEU": { "sieve.java": 0.9520234547753504 }
+  },
+  "NEXT_PALINDROME": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 4,
+    "LD": { "next_palindrome.java": 10 },
+    "CB": 5,
+    "CP": 5,
+    "CC": 0,
+    "CodeBLEU": { "next_palindrome.java": 0.9591525312635745 }
+  },
+  "IS_VALID_PARENTHESIZATION": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 5,
+    "LD": { "is_valid_parenthesization.java": 16 },
+    "CB": 4,
+    "CP": 4,
+    "CC": 0,
+    "CodeBLEU": { "is_valid_parenthesization.java": 0.94131722217796 }
+  },
+  "SHORTEST_PATHS": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 36,
+    "LD": { "shortest_paths.java": 1051 },
+    "CB": 8,
+    "CP": 4,
+    "CC": 4,
+    "CodeBLEU": { "shortest_paths.java": 0.5547431332319065 }
+  },
+  "SHUNTING_YARD": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 19,
+    "LD": { "shunting_yard.java": 58 },
+    "CB": 6,
+    "CP": 6,
+    "CC": 0,
+    "CodeBLEU": { "shunting_yard.java": 0.9097347786498164 }
+  },
+  "NEXT_PERMUTATION": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 4,
+    "LD": { "next_permutation.java": 9 },
+    "CB": 7,
+    "CP": 7,
+    "CC": 0,
+    "CodeBLEU": { "next_permutation.java": 0.9819185721702677 }
+  },
+  "KTH": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 11,
+    "LD": { "kth.java": 148 },
+    "CB": 6,
+    "CP": 6,
+    "CC": 0,
+    "CodeBLEU": { "kth.java": 0.9004397733828441 }
+  },
+  "REVERSE_LINKED_LIST": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 5,
+    "LD": { "reverse_linked_list.java": 65 },
+    "CB": 2,
+    "CP": 2,
+    "CC": 0,
+    "CodeBLEU": { "reverse_linked_list.java": 0.7921510100208168 }
+  },
+  "GET_FACTORS": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 5,
+    "LD": { "get_factors.java": 25 },
+    "CB": 4,
+    "CP": 4,
+    "CC": 0,
+    "CodeBLEU": { "get_factors.java": 0.9589587238448071 }
+  },
+  "SUBSEQUENCES": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 6,
+    "LD": { "subsequences.java": 110 },
+    "CB": 4,
+    "CP": 4,
+    "CC": 0,
+    "CodeBLEU": { "subsequences.java": 0.8139367386786395 }
+  },
+  "MERGESORT": {
+    "CChange": 1,
+    "MChange": 1,
+    "LChange": 4,
+    "LD": { "mergesort.java": 10 },
+    "CB": 7,
+    "CP": 7,
+    "CC": 0,
+    "CodeBLEU": { "mergesort.java": 0.9821301354956287 }
+  }
+}

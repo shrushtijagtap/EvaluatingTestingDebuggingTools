@@ -1,0 +1,19 @@
+diff --git a/lis/Buggy-Version/lis.java b/lis/Patched-Version/lis.java
+index 96a0e132..282647d4 100644
+--- a/lis/Buggy-Version/lis.java
++++ b/lis/Patched-Version/lis.java
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ /*
+  * To change this template, choose Tools | Templates
+@@ -28,7 +28,7 @@ public class LIS {
+ 
+             if (length == longest || val < arr[ends.get(length+1)]) {
+                 ends.put(length+1, i);
+-                longest = length + 1;
++                longest = Math.max(longest,length + 1);
+             }
+ 
+             i++;

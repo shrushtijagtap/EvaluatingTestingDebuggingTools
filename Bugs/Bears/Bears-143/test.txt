@@ -1,0 +1,1 @@
+edu.harvard.h2ms.controllers.PasswordControllerTests.test_register_passwordController_registerUserByEmail

@@ -1,0 +1,26 @@
+diff --git a/depth_first_search/Buggy-Version/depth_first_search.java b/depth_first_search/Patched-Version/depth_first_search.java
+index b2dca5ee..6a037fef 100644
+--- a/depth_first_search/Buggy-Version/depth_first_search.java
++++ b/depth_first_search/Patched-Version/depth_first_search.java
+@@ -1,10 +1,12 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+  */
+ 
++import java_programs.Node;
++
+ /**
+  *
+  * @author derricklin
+@@ -19,6 +21,7 @@ public class DEPTH_FIRST_SEARCH {
+                 } else if (node == goalnode) {
+                     return true;
+                 } else {
++                        nodesvisited.add(node);
+                     for (Node successornodes : node.getSuccessors()) {
+                         if (search(successornodes)) { return true; }
+                     }

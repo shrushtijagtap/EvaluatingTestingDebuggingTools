@@ -1,1 +1,0 @@
-com.bobocode.cs.LinkedListTest.removeByZeroIndexWhenListIsEmpty
