@@ -1,8 +1,0 @@
-include README.md
-include LICENSE.gpl3
-include visidata/man/vd.1
-include visidata/man/vd.txt
-include visidata/man/visidata.1
-include visidata/ddw/input.ddw
-include visidata/tests/sample.tsv
-include visidata/desktop/visidata.desktop

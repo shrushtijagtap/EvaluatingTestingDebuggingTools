@@ -1,3 +1,0 @@
-sheet	col	row	longname	input	keystrokes	comment
-			open-file	sample_data/sample.tsv	o	open input in VisiData
-			macro		1	

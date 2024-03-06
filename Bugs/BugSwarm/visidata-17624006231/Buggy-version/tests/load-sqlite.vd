@@ -1,3 +1,0 @@
-sheet	col	row	longname	input	keystrokes	comment
-			open-file	sample_data/employees.sqlite	o	open file
-employees		0	dive-row		^J	load the entire table into memory

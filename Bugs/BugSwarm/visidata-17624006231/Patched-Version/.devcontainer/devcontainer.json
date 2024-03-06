@@ -1,8 +1,0 @@
-{
-    "name": "VisiData",
-    "dockerFile": "Dockerfile",
-    "extensions": [
-        "ms-python.python"
-    ],
-    "postCreateCommand": ".devcontainer/post-create.sh"
-}

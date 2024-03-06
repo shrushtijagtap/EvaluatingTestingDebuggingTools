@@ -1,9 +1,0 @@
-sheet	col	row	longname	input	keystrokes	comment
-			open-file	sample_data/benchmark.csv	o	
-benchmark	Customer		select-col-regex	Robert	|	
-benchmark	Quantity		setcol-expr	None	g=	
-benchmark	Quantity		type-int		#	
-benchmark			describe-sheet		I	
-benchmark_describe	nulls	キQuantity	dive-cell		z^J	
-benchmark_Quantity_nulls	Unit		type-currency		$	
-benchmark_Quantity_nulls	Paid		type-currency		$	
