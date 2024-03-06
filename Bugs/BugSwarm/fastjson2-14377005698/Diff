@@ -1,0 +1,13 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14377005698/Buggy-version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/DateTypeTest.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14377005698/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/DateTypeTest.java
+index 167dab238..ae961135a 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14377005698/Buggy-version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/DateTypeTest.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-14377005698/Patched-Version/codegen-test/src/test/java/com/alibaba/fastjson2/internal/processor/primitives/DateTypeTest.java
+@@ -27,7 +27,7 @@ public class DateTypeTest {
+         Bean bean1 = JSON.parseObject(str, Bean.class);
+         assertEquals(bean.v01, bean1.v01);
+         assertEquals(bean.v02, bean1.v02);
+-        assertEquals(bean.v03.getTime(), bean1.v03.getTime());
++        assertEquals(bean.v03.getYear(), bean1.v03.getYear());
+         assertEquals(bean.v04.getTime(), bean1.v04.getTime());
+         assertEquals(bean.v05, bean1.v05);
+         assertEquals(bean.v06, bean1.v06);
