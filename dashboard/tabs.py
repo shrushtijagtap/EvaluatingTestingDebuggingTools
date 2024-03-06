@@ -22,6 +22,7 @@ y_labels = {
 
 
 def load_json_data(file_path) -> list:
+    print(f"Loading data from {file_path}")
     file_path = f"{file_path}/results/benchmark_results.json"
 
     # If file does not exist, return empty list
@@ -78,6 +79,8 @@ def preprocess_special_metric(df, metric):
 
 def make_tab(tab_name: str):
     # If tab name == Combined, combine data for all tabs
+    print(f"Loading data for {tab_name}")
+
     if tab_name == 'Combined':
         # Load data for all tabs
         data = [load_json_data(f'{repo_data_path}/{tab}') for tab in ['Bears', 'BugSwarm', 'Defects4J', 'QuixBugs']]
