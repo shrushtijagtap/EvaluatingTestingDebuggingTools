@@ -1,3 +1,0 @@
-org.traccar.reports.ReportUtilsTest.testDetectTripAndStopByGap
-org.traccar.reports.ReportUtilsTest.testDetectTripsWithFluctuation
-org.traccar.reports.ReportUtilsTest.testDetectTripsSimpleWithIgnition

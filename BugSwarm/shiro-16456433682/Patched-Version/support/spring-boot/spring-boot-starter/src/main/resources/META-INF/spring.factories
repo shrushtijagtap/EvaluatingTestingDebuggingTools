@@ -1,0 +1,13 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration = \
+  org.apache.shiro.spring.config.web.autoconfigure.ShiroWebAutoConfiguration,\
+  org.apache.shiro.spring.config.web.autoconfigure.ShiroWebFilterConfiguration,\
+  org.apache.shiro.spring.config.web.autoconfigure.ShiroWebMvcAutoConfiguration,\
+  org.apache.shiro.spring.boot.autoconfigure.ShiroBeanAutoConfiguration,\
+  org.apache.shiro.spring.boot.autoconfigure.ShiroAutoConfiguration,\
+  org.apache.shiro.spring.boot.autoconfigure.ShiroAnnotationProcessorAutoConfiguration
+
+org.springframework.boot.diagnostics.FailureAnalyzer = \
+  org.apache.shiro.spring.boot.autoconfigure.ShiroNoRealmConfiguredFailureAnalyzer
+
+org.springframework.boot.env.EnvironmentPostProcessor=\
+  org.apache.shiro.spring.config.web.autoconfigure.ShiroEnvironmentPostProcessor

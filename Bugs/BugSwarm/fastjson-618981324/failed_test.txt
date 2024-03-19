@@ -1,3 +1,0 @@
-com.alibaba.json.bvt.jdk8.LocalDateTest4.test_for_issue
-com.alibaba.json.bvt.joda.JodaTest_2_LocalDateTimeTest3_private.test_for_issue
-com.alibaba.json.bvt.joda.JodaTest_0.test_for_issue_2

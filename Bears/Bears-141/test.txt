@@ -1,0 +1,2 @@
+edu.harvard.h2ms.domain.core.UserTest.testEmailIsLowerCase
+edu.harvard.h2ms.service.UserDetailsServiceTest.testLoadUserByUsernameIsCaseInsensitive

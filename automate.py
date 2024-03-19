@@ -2,9 +2,9 @@ from os import path, listdir
 
 import sys
 from scripts.bears.bug_benchmarks import process_bug as bears_process_bug
-from Bugs.QuixBugs.benchmarking_Quixbugs import process_bug as quixbugs_process_bug
-from Bugs.Defects4J.defects4j_benchmarking import process_bug as defects4j_process_bug
-from Bugs.BugSwarm.bugswarm_benchmarking import process_bug as bugswarm_process_bug
+from QuixBugs.benchmarking_Quixbugs import process_bug as quixbugs_process_bug
+from Defects4J.defects4j_benchmarking import process_bug as defects4j_process_bug
+from BugSwarm.bugswarm_benchmarking import process_bug as bugswarm_process_bug
 
 if __name__ == "__main__":
 
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     if bugDataset == None or bugDataset not in BUG_DATASET:
         print("Invalid argument - Bug Dataset")
     else:
-        BUG_NAMES = listdir(path.join(path.dirname(__file__), 'Bugs', bugDataset))
+        BUG_NAMES = listdir(path.join(path.dirname(__file__), bugDataset))
 
     if bugName == None or bugName not in BUG_NAMES:
         print("Invalid argument - Bug Name")
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     if metric == None or metric not in METRICS:
         print("Invalid argument - Metric")
     
-    bugPath = path.join(path.dirname(__file__), 'Bugs', bugDataset, bugName)
+    bugPath = path.join(path.dirname(__file__), bugDataset, bugName)
     
     # Assuming all the bug benchmarking files are similar to Bears benchamraking file
 

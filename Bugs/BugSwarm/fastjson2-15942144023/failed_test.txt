@@ -1,3 +1,0 @@
-com.alibaba.fastjson2.JSONReaderTest1.testUTF16
-com.alibaba.fastjson2.JSONReaderTest1.testUTF8
-com.alibaba.fastjson2.primitves.Enum_0.test_str_value

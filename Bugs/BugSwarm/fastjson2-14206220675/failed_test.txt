@@ -1,1 +1,0 @@
-com.alibaba.fastjson2.issues_1500.Issue1545.testString

@@ -1,0 +1,46 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/openrouteservice-14216647107/Buggy-version/openrouteservice/src/main/java/org/heigit/ors/mapmatching/GhMapMatcher.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/openrouteservice-14216647107/Patched-Version/openrouteservice/src/main/java/org/heigit/ors/mapmatching/GhMapMatcher.java
+index e7b0eec6a..837572675 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/openrouteservice-14216647107/Buggy-version/openrouteservice/src/main/java/org/heigit/ors/mapmatching/GhMapMatcher.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/openrouteservice-14216647107/Patched-Version/openrouteservice/src/main/java/org/heigit/ors/mapmatching/GhMapMatcher.java
+@@ -20,16 +20,16 @@ import java.util.List;
+  * AbstractMapMatcher using Graphhopper's MapMatching internally.
+  */
+ public class GhMapMatcher extends AbstractMapMatcher {
+-    MapMatching mapMatching;
++    PMap hints;
+     public GhMapMatcher(GraphHopper graphHopper, String profile) {
+         setGraphHopper(graphHopper);
+-        PMap hints = new PMap()
++        hints = new PMap()
+             .putObject("profile", profile)
+             .putObject(Parameters.Landmark.DISABLE, true);
+-        mapMatching = new MapMatching(graphHopper, hints);
+     }
+     @Override
+     public RouteSegmentInfo[] match(Coordinate[] locations, boolean bothDirections) {
++        MapMatching mapMatching = new MapMatching(graphHopper, hints);
+         List<Observation> inputGPXEntries = getObservationsFromLocations(locations);
+         MatchResult mr = mapMatching.match(inputGPXEntries);
+         return getRouteSegmentInfoFromMatchResult(mr);
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/openrouteservice-14216647107/Buggy-version/openrouteservice/src/main/java/org/heigit/ors/routing/configuration/RoutingManagerConfiguration.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/openrouteservice-14216647107/Patched-Version/openrouteservice/src/main/java/org/heigit/ors/routing/configuration/RoutingManagerConfiguration.java
+index 7562ee0fe..30e6760d1 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/openrouteservice-14216647107/Buggy-version/openrouteservice/src/main/java/org/heigit/ors/routing/configuration/RoutingManagerConfiguration.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/openrouteservice-14216647107/Patched-Version/openrouteservice/src/main/java/org/heigit/ors/routing/configuration/RoutingManagerConfiguration.java
+@@ -15,6 +15,7 @@ package org.heigit.ors.routing.configuration;
+ 
+ import com.graphhopper.util.Helper;
+ import com.typesafe.config.ConfigFactory;
++import org.heigit.ors.routing.RoutingProfile;
+ import org.heigit.ors.routing.RoutingProfileType;
+ import org.locationtech.jts.geom.Envelope;
+ import org.heigit.ors.config.IsochronesServiceSettings;
+@@ -173,8 +174,7 @@ public class RoutingManagerConfiguration  {
+ 								storageParams.put(entry.getKey(), StringUtility.trimQuotes(entry.getValue().toString()));
+ 							}
+ 
+-							storageParams.put("gh_profile", RoutingProfileType.getEncoderName(RoutingProfileType.getFromString(profile.getProfiles()))+"_fastest" + (RouteProfileConfiguration.hasTurnCosts(profile.getEncoderOptions()) ? "_with_turn_costs" : ""));
+-
++							storageParams.put("gh_profile", RoutingProfile.makeProfileName(RoutingProfileType.getEncoderName(RoutingProfileType.getFromString(profile.getProfiles())), "fastest", RouteProfileConfiguration.hasTurnCosts(profile.getEncoderOptions())));
+ 
+ 							profile.getExtStorages().put(storageEntry.getKey(), storageParams);
+ 						}

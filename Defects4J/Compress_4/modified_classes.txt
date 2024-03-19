@@ -1,0 +1,4 @@
+org/apache/commons/compress/archivers/cpio/CpioArchiveOutputStream.java
+org/apache/commons/compress/archivers/tar/TarArchiveOutputStream.java
+org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.java
+org/apache/commons/compress/changes/ChangeSetPerformer.java

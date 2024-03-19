@@ -1,0 +1,19 @@
+diff --git a/next_palindrome/Buggy-Version/next_palindrome.java b/next_palindrome/Patched-Version/next_palindrome.java
+index 2a0bd1ee..9a13dc09 100644
+--- a/next_palindrome/Buggy-Version/next_palindrome.java
++++ b/next_palindrome/Patched-Version/next_palindrome.java
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ import java.lang.Math.*;
+ /*
+@@ -32,7 +32,7 @@ public class NEXT_PALINDROME {
+ 
+         ArrayList<Integer> otherwise = new ArrayList<Integer>();
+         otherwise.add(1);
+-        otherwise.addAll(Collections.nCopies(digit_list.length, 0));
++        otherwise.addAll(Collections.nCopies(digit_list.length-1, 0));
+         otherwise.add(1);
+ 
+         return String.valueOf(otherwise);

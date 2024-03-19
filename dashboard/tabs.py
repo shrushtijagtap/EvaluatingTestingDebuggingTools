@@ -7,7 +7,7 @@ import plotly.express as px
 
 import json
 
-repo_data_path = path.abspath(path.join(path.dirname(__file__), '..', 'Bugs'))
+repo_data_path = path.abspath(path.join(path.dirname(__file__), '..'))
 
 y_labels = {
     'CChange': '# Changed Classes',

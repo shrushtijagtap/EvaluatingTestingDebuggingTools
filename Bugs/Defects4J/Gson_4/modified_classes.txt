@@ -1,2 +1,0 @@
-com/google/gson/stream/JsonReader.java
-com/google/gson/stream/JsonWriter.java

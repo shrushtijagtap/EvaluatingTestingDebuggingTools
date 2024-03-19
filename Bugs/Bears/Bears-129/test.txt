@@ -1,1 +1,0 @@
-org.traccar.protocol.Gl200TextProtocolDecoderTest.testDecode

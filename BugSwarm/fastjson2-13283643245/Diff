@@ -1,0 +1,433 @@
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriter.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriter.java
+index e0f24ebf3..e09170ca1 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriter.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriter.java
+@@ -1241,6 +1241,8 @@ public abstract class JSONWriter
+ 
+     public abstract void writeZonedDateTime(ZonedDateTime dateTime);
+ 
++    public abstract void writeOffsetDateTime(OffsetDateTime dateTime);
++
+     public void writeInstant(Instant instant) {
+         if (instant == null) {
+             writeNull();
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriterJSONB.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterJSONB.java
+index f3316b112..8dc0f1d0a 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriterJSONB.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterJSONB.java
+@@ -20,6 +20,7 @@ import java.util.*;
+ import static com.alibaba.fastjson2.JSONB.Constants.*;
+ import static com.alibaba.fastjson2.JSONFactory.*;
+ import static com.alibaba.fastjson2.JSONWriter.Feature.WriteNameAsSymbol;
++import static com.alibaba.fastjson2.util.DateUtils.OFFSET_8_ZONE_ID_NAME;
+ import static com.alibaba.fastjson2.util.DateUtils.SHANGHAI_ZONE_ID_NAME;
+ import static com.alibaba.fastjson2.util.JDKUtils.*;
+ import static com.alibaba.fastjson2.util.TypeUtils.*;
+@@ -28,6 +29,7 @@ final class JSONWriterJSONB
+         extends JSONWriter {
+     // optimize for write ZonedDateTime
+     static final byte[] SHANGHAI_ZONE_ID_NAME_BYTES = JSONB.toBytes(SHANGHAI_ZONE_ID_NAME);
++    static final byte[] OFFSET_8_ZONE_ID_NAME_BYTES = JSONB.toBytes(OFFSET_8_ZONE_ID_NAME);
+ 
+     private final CacheItem cacheItem;
+     private byte[] bytes;
+@@ -1515,6 +1517,40 @@ final class JSONWriterJSONB
+         }
+     }
+ 
++    @Override
++    public void writeOffsetDateTime(OffsetDateTime dateTime) {
++        if (dateTime == null) {
++            writeNull();
++            return;
++        }
++
++        ensureCapacity(off + 8);
++
++        bytes[off++] = BC_TIMESTAMP_WITH_TIMEZONE;
++        int year = dateTime.getYear();
++        bytes[off++] = (byte) (year >>> 8);
++        bytes[off++] = (byte) year;
++        bytes[off++] = (byte) dateTime.getMonthValue();
++        bytes[off++] = (byte) dateTime.getDayOfMonth();
++        bytes[off++] = (byte) dateTime.getHour();
++        bytes[off++] = (byte) dateTime.getMinute();
++        bytes[off++] = (byte) dateTime.getSecond();
++
++        int nano = dateTime.getNano();
++        writeInt32(nano);
++
++        ZoneId zoneId = dateTime.getOffset();
++        String zoneIdStr = zoneId.getId();
++        switch (zoneIdStr) {
++            case OFFSET_8_ZONE_ID_NAME:
++                writeRaw(OFFSET_8_ZONE_ID_NAME_BYTES);
++                break;
++            default:
++                writeString(zoneIdStr);
++                break;
++        }
++    }
++
+     @Override
+     public void writeInstant(Instant instant) {
+         if (instant == null) {
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriterPretty.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterPretty.java
+index c97572fda..661c06949 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriterPretty.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterPretty.java
+@@ -7,10 +7,7 @@ import java.math.BigDecimal;
+ import java.math.BigInteger;
+ import java.nio.charset.Charset;
+ import java.text.DecimalFormat;
+-import java.time.LocalDate;
+-import java.time.LocalDateTime;
+-import java.time.LocalTime;
+-import java.time.ZonedDateTime;
++import java.time.*;
+ import java.util.UUID;
+ 
+ final class JSONWriterPretty
+@@ -148,6 +145,11 @@ final class JSONWriterPretty
+         jsonWriter.writeZonedDateTime(dateTime);
+     }
+ 
++    @Override
++    public void writeOffsetDateTime(OffsetDateTime dateTime) {
++        jsonWriter.writeOffsetDateTime(dateTime);
++    }
++
+     @Override
+     public void writeReference(String path) {
+         jsonWriter.writeReference(path);
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java
+index 8ee364a4c..acd4a5e47 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF16.java
+@@ -10,10 +10,7 @@ import java.math.BigInteger;
+ import java.nio.charset.Charset;
+ import java.nio.charset.StandardCharsets;
+ import java.text.DecimalFormat;
+-import java.time.LocalDate;
+-import java.time.LocalDateTime;
+-import java.time.LocalTime;
+-import java.time.ZonedDateTime;
++import java.time.*;
+ import java.util.*;
+ 
+ import static com.alibaba.fastjson2.JSONFactory.*;
+@@ -1991,7 +1988,102 @@ class JSONWriterUTF16
+ 
+         char firstZoneChar = '\0';
+         int zoneSize;
+-        if ("UTC".equals(zoneId)) {
++        if ("UTC".equals(zoneId) || "Z".equals(zoneId)) {
++            zoneId = "Z";
++            zoneSize = 1;
++        } else if (zoneId.length() != 0 && ((firstZoneChar = zoneId.charAt(0)) == '+' || firstZoneChar == '-')) {
++            zoneSize = zoneId.length();
++        } else {
++            zoneSize = 2 + zoneId.length();
++        }
++        len += zoneSize;
++
++        int yearSize = IOUtils.stringSize(year);
++        len += yearSize;
++        int small;
++        if (nano % 1000_000_000 == 0) {
++            small = 0;
++        } else if (nano % 1000_000_00 == 0) {
++            len += 2;
++            small = nano / 1000_000_00;
++        } else if (nano % 1000_000_0 == 0) {
++            len += 3;
++            small = nano / 1000_000_0;
++        } else if (nano % 1000_000 == 0) {
++            len += 4;
++            small = nano / 1000_000;
++        } else if (nano % 1000_00 == 0) {
++            len += 5;
++            small = nano / 1000_00;
++        } else if (nano % 1000_0 == 0) {
++            len += 6;
++            small = nano / 1000_0;
++        } else if (nano % 1000 == 0) {
++            len += 7;
++            small = nano / 1000;
++        } else if (nano % 100 == 0) {
++            len += 8;
++            small = nano / 100;
++        } else if (nano % 10 == 0) {
++            len += 9;
++            small = nano / 10;
++        } else {
++            len += 10;
++            small = nano;
++        }
++
++        ensureCapacity(off + len);
++        chars[off] = quote;
++        Arrays.fill(chars, off + 1, off + len - 1, '0');
++        IOUtils.getChars(year, off + yearSize + 1, chars);
++        chars[off + yearSize + 1] = '-';
++        IOUtils.getChars(month, off + yearSize + 4, chars);
++        chars[off + yearSize + 4] = '-';
++        IOUtils.getChars(dayOfMonth, off + yearSize + 7, chars);
++        chars[off + yearSize + 7] = 'T';
++        IOUtils.getChars(hour, off + yearSize + 10, chars);
++        chars[off + yearSize + 10] = ':';
++        IOUtils.getChars(minute, off + yearSize + 13, chars);
++        chars[off + yearSize + 13] = ':';
++        IOUtils.getChars(second, off + yearSize + 16, chars);
++        if (small != 0) {
++            chars[off + yearSize + 16] = '.';
++            IOUtils.getChars(small, off + len - 1 - zoneSize, chars);
++        }
++        if (zoneSize == 1) {
++            chars[off + len - 2] = 'Z';
++        } else if (firstZoneChar == '+' || firstZoneChar == '-') {
++            zoneId.getChars(0, zoneId.length(), chars, off + len - zoneSize - 1);
++        } else {
++            chars[off + len - zoneSize - 1] = '[';
++            zoneId.getChars(0, zoneId.length(), chars, off + len - zoneSize);
++            chars[off + len - 2] = ']';
++        }
++        chars[off + len - 1] = quote;
++        off += len;
++    }
++
++    @Override
++    public final void writeOffsetDateTime(OffsetDateTime dateTime) {
++        if (dateTime == null) {
++            writeNull();
++            return;
++        }
++
++        int year = dateTime.getYear();
++        int month = dateTime.getMonthValue();
++        int dayOfMonth = dateTime.getDayOfMonth();
++        int hour = dateTime.getHour();
++        int minute = dateTime.getMinute();
++        int second = dateTime.getSecond();
++        int nano = dateTime.getNano();
++        String zoneId = dateTime.getOffset().getId();
++
++        int len = 17;
++
++        char firstZoneChar = '\0';
++        int zoneSize;
++        if ("UTC".equals(zoneId) || "Z".equals(zoneId)) {
+             zoneId = "Z";
+             zoneSize = 1;
+         } else if (zoneId.length() != 0 && ((firstZoneChar = zoneId.charAt(0)) == '+' || firstZoneChar == '-')) {
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF8.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF8.java
+index d79268215..1fd4782e1 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF8.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/JSONWriterUTF8.java
+@@ -10,10 +10,7 @@ import java.math.BigInteger;
+ import java.nio.charset.Charset;
+ import java.nio.charset.StandardCharsets;
+ import java.text.DecimalFormat;
+-import java.time.LocalDate;
+-import java.time.LocalDateTime;
+-import java.time.LocalTime;
+-import java.time.ZonedDateTime;
++import java.time.*;
+ import java.util.*;
+ 
+ import static com.alibaba.fastjson2.JSONFactory.*;
+@@ -2095,7 +2092,102 @@ class JSONWriterUTF8
+ 
+         char firstZoneChar = '\0';
+         int zoneSize;
+-        if ("UTC".equals(zoneId)) {
++        if ("UTC".equals(zoneId) || "Z".equals(zoneId)) {
++            zoneId = "Z";
++            zoneSize = 1;
++        } else if (zoneId.length() != 0 && ((firstZoneChar = zoneId.charAt(0)) == '+' || firstZoneChar == '-')) {
++            zoneSize = zoneId.length();
++        } else {
++            zoneSize = 2 + zoneId.length();
++        }
++        len += zoneSize;
++
++        int yearSize = IOUtils.stringSize(year);
++        len += yearSize;
++        int small;
++        if (nano % 1000_000_000 == 0) {
++            small = 0;
++        } else if (nano % 1000_000_00 == 0) {
++            len += 2;
++            small = nano / 1000_000_00;
++        } else if (nano % 1000_000_0 == 0) {
++            len += 3;
++            small = nano / 1000_000_0;
++        } else if (nano % 1000_000 == 0) {
++            len += 4;
++            small = nano / 1000_000;
++        } else if (nano % 1000_00 == 0) {
++            len += 5;
++            small = nano / 1000_00;
++        } else if (nano % 1000_0 == 0) {
++            len += 6;
++            small = nano / 1000_0;
++        } else if (nano % 1000 == 0) {
++            len += 7;
++            small = nano / 1000;
++        } else if (nano % 100 == 0) {
++            len += 8;
++            small = nano / 100;
++        } else if (nano % 10 == 0) {
++            len += 9;
++            small = nano / 10;
++        } else {
++            len += 10;
++            small = nano;
++        }
++
++        ensureCapacity(off + len);
++        bytes[off] = (byte) quote;
++        Arrays.fill(bytes, off + 1, off + len - 1, (byte) '0');
++        IOUtils.getChars(year, off + yearSize + 1, bytes);
++        bytes[off + yearSize + 1] = '-';
++        IOUtils.getChars(month, off + yearSize + 4, bytes);
++        bytes[off + yearSize + 4] = '-';
++        IOUtils.getChars(dayOfMonth, off + yearSize + 7, bytes);
++        bytes[off + yearSize + 7] = 'T';
++        IOUtils.getChars(hour, off + yearSize + 10, bytes);
++        bytes[off + yearSize + 10] = ':';
++        IOUtils.getChars(minute, off + yearSize + 13, bytes);
++        bytes[off + yearSize + 13] = ':';
++        IOUtils.getChars(second, off + yearSize + 16, bytes);
++        if (small != 0) {
++            bytes[off + yearSize + 16] = '.';
++            IOUtils.getChars(small, off + len - 1 - zoneSize, bytes);
++        }
++        if (zoneSize == 1) {
++            bytes[off + len - 2] = 'Z';
++        } else if (firstZoneChar == '+' || firstZoneChar == '-') {
++            zoneId.getBytes(0, zoneId.length(), bytes, off + len - zoneSize - 1);
++        } else {
++            bytes[off + len - zoneSize - 1] = '[';
++            zoneId.getBytes(0, zoneId.length(), bytes, off + len - zoneSize);
++            bytes[off + len - 2] = ']';
++        }
++        bytes[off + len - 1] = (byte) quote;
++        off += len;
++    }
++
++    @Override
++    public final void writeOffsetDateTime(OffsetDateTime dateTime) {
++        if (dateTime == null) {
++            writeNull();
++            return;
++        }
++
++        int year = dateTime.getYear();
++        int month = dateTime.getMonthValue();
++        int dayOfMonth = dateTime.getDayOfMonth();
++        int hour = dateTime.getHour();
++        int minute = dateTime.getMinute();
++        int second = dateTime.getSecond();
++        int nano = dateTime.getNano();
++        String zoneId = dateTime.getOffset().getId();
++
++        int len = 17;
++
++        char firstZoneChar = '\0';
++        int zoneSize;
++        if ("UTC".equals(zoneId) || "Z".equals(zoneId)) {
+             zoneId = "Z";
+             zoneSize = 1;
+         } else if (zoneId.length() != 0 && ((firstZoneChar = zoneId.charAt(0)) == '+' || firstZoneChar == '-')) {
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOffsetDateTime.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOffsetDateTime.java
+index 8701948e1..cf957c9d1 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOffsetDateTime.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/reader/ObjectReaderImplOffsetDateTime.java
+@@ -31,7 +31,7 @@ final class ObjectReaderImplOffsetDateTime
+ 
+     @Override
+     public Object readJSONBObject(JSONReader jsonReader, Type fieldType, Object fieldName, long features) {
+-        return jsonReader.readZonedDateTime();
++        return readObject(jsonReader, fieldType, fieldName, features);
+     }
+ 
+     @Override
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/util/DateUtils.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/util/DateUtils.java
+index ee3768a3d..3bf4aebe0 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/util/DateUtils.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/util/DateUtils.java
+@@ -20,6 +20,7 @@ import static java.time.ZoneOffset.UTC;
+ public class DateUtils {
+     public static final ZoneId DEFAULT_ZONE_ID = ZoneId.systemDefault();
+     public static final String SHANGHAI_ZONE_ID_NAME = "Asia/Shanghai";
++    public static final String OFFSET_8_ZONE_ID_NAME = "+08:00";
+     public static final ZoneId SHANGHAI_ZONE_ID
+             = SHANGHAI_ZONE_ID_NAME.equals(DEFAULT_ZONE_ID.getId())
+             ? DEFAULT_ZONE_ID
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplOffsetDateTime.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplOffsetDateTime.java
+index 8964d71fc..a5151ed7f 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplOffsetDateTime.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/main/java/com/alibaba/fastjson2/writer/ObjectWriterImplOffsetDateTime.java
+@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.codec.DateTimeCodec;
+ 
+ import java.lang.reflect.Type;
+ import java.time.OffsetDateTime;
+-import java.time.ZonedDateTime;
+ import java.time.format.DateTimeFormatter;
+ import java.util.Locale;
+ 
+@@ -92,8 +91,7 @@ final class ObjectWriterImplOffsetDateTime
+         }
+ 
+         if (formatter == null) {
+-            ZonedDateTime zdt = odt.toZonedDateTime();
+-            jsonWriter.writeZonedDateTime(zdt);
++            jsonWriter.writeOffsetDateTime(odt);
+             return;
+         }
+ 
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/test/java/com/alibaba/fastjson2/date/OffsetDateTimeTest.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/test/java/com/alibaba/fastjson2/date/OffsetDateTimeTest.java
+index 5c43a1d30..3572a140d 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/test/java/com/alibaba/fastjson2/date/OffsetDateTimeTest.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/test/java/com/alibaba/fastjson2/date/OffsetDateTimeTest.java
+@@ -1,6 +1,7 @@
+ package com.alibaba.fastjson2.date;
+ 
+ import com.alibaba.fastjson2.JSON;
++import com.alibaba.fastjson2.JSONB;
+ import org.junit.jupiter.api.Test;
+ 
+ import java.time.OffsetDateTime;
+@@ -14,5 +15,8 @@ public class OffsetDateTimeTest {
+         String str = JSON.toJSONString(odt);
+         OffsetDateTime odt1 = JSON.parseObject(str, OffsetDateTime.class);
+         assertEquals(odt, odt1);
++
++        OffsetDateTime odt2 = JSONB.parseObject(JSONB.toBytes(odt), OffsetDateTime.class);
++        assertEquals(odt, odt2);
+     }
+ }
+diff --git a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/test/java/com/alibaba/fastjson2/time/DateTest.java b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/test/java/com/alibaba/fastjson2/time/DateTest.java
+index 540b7fcf4..8d22badcc 100644
+--- a/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Buggy-version/core/src/test/java/com/alibaba/fastjson2/time/DateTest.java
++++ b/home/ashwin/UIUC/CS527/Project/CS527-Project/Bugs/BugSwarm/fastjson2-13283643245/Patched-Version/core/src/test/java/com/alibaba/fastjson2/time/DateTest.java
+@@ -72,7 +72,17 @@ public class DateTest {
+ 
+         jw.writeAny(
+                 OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.ofHours(0)));
+-        assertEquals("\"1970-01-01T00:00Z\"", jw.toString());
++        assertEquals("\"1970-01-01T00:00:00Z\"", jw.toString());
++    }
++
++    @Test
++    public void testOffsetDateTimeUTF8() throws Exception {
++        JSONWriter jw = JSONWriter.ofUTF8();
++        jw.getContext().setZoneId(ZoneId.of("UTC+0"));
++
++        jw.writeAny(
++                OffsetDateTime.of(1970, 1, 1, 0, 0, 0, 0, ZoneOffset.ofHours(0)));
++        assertEquals("\"1970-01-01T00:00:00Z\"", jw.toString());
+     }
+ 
+     @Test

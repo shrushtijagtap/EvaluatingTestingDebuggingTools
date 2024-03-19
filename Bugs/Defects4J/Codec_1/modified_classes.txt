@@ -1,3 +1,0 @@
-org/apache/commons/codec/language/Caverphone.java
-org/apache/commons/codec/language/Metaphone.java
-org/apache/commons/codec/language/SoundexUtils.java

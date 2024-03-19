@@ -1,0 +1,27 @@
+diff --git a/flatten/Buggy-Version/flatten.java b/flatten/Patched-Version/flatten.java
+index e29ac1ce..8d5a33fc 100644
+--- a/flatten/Buggy-Version/flatten.java
++++ b/flatten/Patched-Version/flatten.java
+@@ -1,5 +1,6 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
++
+ /*
+  * To change this template, choose Tools | Templates
+  * and open the template in the editor.
+@@ -18,12 +19,12 @@ public class FLATTEN {
+                 if (x instanceof ArrayList) {
+                     result.addAll((ArrayList) flatten(x));
+                 } else {
+-                    result.add(flatten(x));
++                    result.add((x));
+                 }
+             }
+             return result;
+         } else {
+-            return flatten(arr);
++            return arr;
+         }
+     }
+ }

@@ -1,0 +1,2 @@
+org.heigit.ors.apitests.routing.ResultTest.testTrafficSpeedMultipleMatches
+org.heigit.ors.apitests.routing.ResultTest.testTrafficSpeed
