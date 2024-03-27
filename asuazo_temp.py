@@ -93,6 +93,8 @@ if __name__ == '__main__':
     # 4. Rename the generated tests to be prefixed with "Randoop"
 
     for dataset in Dataset:
+
+        # NOTE: Temporarily only testing the BEARS dataset
         if dataset is not Dataset.BEARS:
             continue
 
@@ -154,7 +156,9 @@ if __name__ == '__main__':
                     logger.info(f"Generating tests for {testclass} in {version}...")
                     generate_randoop_test(classpath, testclass, version, str(output_dir))
                     logger.info(f"Test generation completed for {dataset.value}-{bug.name}-{version}")
-                    exit(0)
+
+                    # NOTE: I use this to test just a single project at a time
+                    # exit(0)
 
     # Save the failed project data to a JSON file
     with open('failed_projects.json', 'w') as file:
