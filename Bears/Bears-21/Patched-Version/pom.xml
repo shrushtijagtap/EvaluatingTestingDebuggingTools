@@ -29,8 +29,8 @@
          and new language features (diamond pattern) may be used.
          Whether JDK dependencies are directly used is an open question as of Feb-2016
       -->
-    <javac.src.version>1.7</javac.src.version>
-    <javac.target.version>1.7</javac.target.version>
+    <javac.src.version>1.8</javac.src.version>
+    <javac.target.version>1.8</javac.target.version>
 
     <!-- Can not use default, since group id != Java package name here -->
     <osgi.export>com.fasterxml.jackson.databind.*;version=${project.version}</osgi.export>
