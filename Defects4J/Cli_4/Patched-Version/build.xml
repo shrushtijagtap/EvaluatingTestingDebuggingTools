@@ -148,7 +148,7 @@
 
     <setproxy>
     </setproxy>
-    <get dest="${libdir}/junit-3.8.1.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/Cli/lib/junit/junit/3.8.1/junit-3.8.1.jar">
+    <get dest="${libdir}/junit-3.8.1.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Cli/lib/junit/junit/3.8.1/junit-3.8.1.jar">
     </get>
   </target>
   <target name="install-maven">

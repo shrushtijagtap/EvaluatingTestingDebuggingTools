@@ -7,7 +7,6 @@ from distutils.dir_util import copy_tree
 
 
 project_bugs = {}
-failingTests = []
 field_list = [
     'bug.id',
     'project.id',
@@ -36,7 +35,7 @@ field_list_string = ','.join(field_list)
 csv_file_path = '/Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/output.csv'
 count = 0
 
-def checkout_and_copy(bug_id, project_id, modified_classes, work_dir, repo_path):
+def checkout_and_copy(bug_id, project_id, modified_classes, work_dir, repo_path, failingTests):
     # Create a folder for both buggy and fixed versions
     buggy_dir = os.path.join(f'{project_id}_{bug_id}', 'Buggy-Version')
     fixed_dir = os.path.join(f'{project_id}_{bug_id}', 'Patched-Version')
@@ -70,7 +69,7 @@ def checkout_and_copy(bug_id, project_id, modified_classes, work_dir, repo_path)
     #     os.makedirs(os.path.dirname(dest_file_path), exist_ok=True)
     #     shutil.copy(src_file_path, dest_file_path)
 
-    patch_file = os.path.join(f'{project_id}_{bug_id}', 'src.patch')
+    patch_file = os.path.join(f'{project_id}_{bug_id}', 'Diff')
     with open(patch_file, 'w') as patch_out:
         subprocess.run(['git', 'diff', '--no-index', f'{buggy_dir}', f'{fixed_dir}'],
                        stdout=patch_out)
@@ -98,10 +97,15 @@ def get_buffy_and_fixed_versions(repo_path, count):
             project_id = row['project.id']
             modified_classes = row['classes.modified']
 
+            failingTests = []
+            for t in row['tests.trigger'].split(';'):
+                failingTests.append(t.replace("::", "."))
+            print(failingTests)
+
             # This is where the repo will be cloned
             work_dir = os.path.join('/tmp/temp_storage', f"{project_id}_{bug_id}")
             # print(work_dir)
-            checkout_and_copy(bug_id, project_id, modified_classes, work_dir, repo_path)
+            checkout_and_copy(bug_id, project_id, modified_classes, work_dir, repo_path, failingTests)
             #row['revision.id.buggy'], row['revision.id.fixed']
 
 
@@ -112,8 +116,10 @@ def fill_project_bug_dict():
             test = len(row['tests.relevant'].split(';'))
             test_failed = len(row['tests.trigger'].split(';'))
 
-            for t in row['tests.trigger'].split(';'):
-                failingTests.append(t)
+            # failingTests = []
+            # for t in row['tests.trigger'].split(';'):
+            #     failingTests.append(t)
+            # print(failingTests)
 
             if project_bugs.get(row['project.id']) is None:
                 project_bugs[row['project.id']] = {"passed": test - test_failed, "failed": test_failed}

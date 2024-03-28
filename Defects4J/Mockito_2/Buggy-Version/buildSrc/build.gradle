@@ -1,7 +1,7 @@
 apply plugin: 'idea'
 apply plugin: 'groovy'
 
-repositories { maven { url "/Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/lib/build_systems/gradle/deps" }
+repositories { maven { url "/Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/lib/build_systems/gradle/deps" }
  maven { url "https://jcenter.bintray.com/" }
  }
 

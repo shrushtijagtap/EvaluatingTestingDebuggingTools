@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        maven { url "/Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/lib/build_systems/gradle/deps" }
+        maven { url "/Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/lib/build_systems/gradle/deps" }
  maven { url "https://jcenter.bintray.com/" }
 
     }
@@ -23,7 +23,7 @@ apply from: 'gradle/coverage.gradle'
 
 allprojects {
     repositories {
-        maven { url "/Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/lib/build_systems/gradle/deps" }
+        maven { url "/Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/lib/build_systems/gradle/deps" }
  maven { url "https://jcenter.bintray.com/" }
 
     }

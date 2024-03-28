@@ -151,29 +151,29 @@
     </javadoc>
   </target>
   <target name="get-deps" unless="noget" depends="init">
-    <get dest="${libdir}/xerces-1.2.3.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/xerces/xerces/1.2.3/xerces-1.2.3.jar">
+    <get dest="${libdir}/xerces-1.2.3.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/xerces/xerces/1.2.3/xerces-1.2.3.jar">
     </get>
-    <get dest="${libdir}/servletapi-2.2.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/servletapi/servletapi/2.2/servletapi-2.2.jar">
+    <get dest="${libdir}/servletapi-2.2.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/servletapi/servletapi/2.2/servletapi-2.2.jar">
     </get>
-    <get dest="${libdir}/junit-3.8.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/junit/junit/3.8/junit-3.8.jar">
+    <get dest="${libdir}/junit-3.8.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/junit/junit/3.8/junit-3.8.jar">
     </get>
-    <get dest="${libdir}/ant-optional-1.5.1.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/ant/ant-optional/1.5.1/ant-optional-1.5.1.jar">
+    <get dest="${libdir}/ant-optional-1.5.1.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/ant/ant-optional/1.5.1/ant-optional-1.5.1.jar">
     </get>
-    <get dest="${libdir}/xml-apis-2.0.2.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/xml-apis/xml-apis/2.0.2/xml-apis-2.0.2.jar">
+    <get dest="${libdir}/xml-apis-2.0.2.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/xml-apis/xml-apis/2.0.2/xml-apis-2.0.2.jar">
     </get>
-    <get dest="${libdir}/jdom-1.0.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/jdom/jdom/1.0/jdom-1.0.jar">
+    <get dest="${libdir}/jdom-1.0.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/jdom/jdom/1.0/jdom-1.0.jar">
     </get>
-    <get dest="${libdir}/commons-beanutils-1.4.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/commons-beanutils/commons-beanutils/1.4/commons-beanutils-1.4.jar">
+    <get dest="${libdir}/commons-beanutils-1.4.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/commons-beanutils/commons-beanutils/1.4/commons-beanutils-1.4.jar">
     </get>
-    <get dest="${libdir}/commons-logging-1.0.4.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar">
+    <get dest="${libdir}/commons-logging-1.0.4.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar">
     </get>
-    <get dest="${libdir}/commons-collections-2.0.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/commons-collections/commons-collections/2.0/commons-collections-2.0.jar">
+    <get dest="${libdir}/commons-collections-2.0.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/commons-collections/commons-collections/2.0/commons-collections-2.0.jar">
     </get>
-    <get dest="${libdir}/junit-3.8.1.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/junit/junit/3.8.1/junit-3.8.1.jar">
+    <get dest="${libdir}/junit-3.8.1.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/junit/junit/3.8.1/junit-3.8.1.jar">
     </get>
-    <get dest="${libdir}/ant-1.5.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/ant/ant/1.5/ant-1.5.jar">
+    <get dest="${libdir}/ant-1.5.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/ant/ant/1.5/ant-1.5.jar">
     </get>
-    <get dest="${libdir}/ant-optional-1.5.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/defects4j/framework/projects/JxPath/lib/ant/ant-optional/1.5/ant-optional-1.5.jar">
+    <get dest="${libdir}/ant-optional-1.5.jar" usetimestamp="true" ignoreerrors="true" src="file:///Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JxPath/lib/ant/ant-optional/1.5/ant-optional-1.5.jar">
     </get>
   </target>
   <target name="install-maven">
