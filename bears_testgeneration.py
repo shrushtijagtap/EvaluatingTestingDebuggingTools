@@ -13,10 +13,8 @@ logger = logging.getLogger(__name__)
 
 # repo path = current directory
 REPO_PATH: Path = Path.cwd()
-# Set the Randoop JAR path to the downloads directory
-EVOSUITE_JAR = "/Users/sejalpekam/evosuite-1.2.0.jar"
-RANDOOP_JAR = os.path.join(os.path.expanduser("~"), "Downloads", "randoop-4.3.2", "randoop-all-4.3.2.jar")
-
+EVOSUITE_JAR = "/Users/shrushtijagtap/uiuc/Spring2024/CS527/evosuite-1.2.0.jar"
+#RANDOOP_JAR = os.path.join(os.path.expanduser("~"), "Downloads", "randoop-4.3.2", "randoop-all-4.3.2.jar")
 FAILED_PROJECTS = []
 
 
@@ -97,11 +95,13 @@ def generate_evosuite_test(classpath: str, testclass: str):
     """
     Generate tests for a single test class using EvoSuite
     """
-    # TODO: Use the version to determine what test to generate and where to place it
-
      # $(echo $EVOSUITE) -class className -projectCP pathToClassFiles
+    
+    temp = testclass.split(".")[-1]
+    print(temp, " *** ", classpath)
+    
     command = [
-       'java', '-jar', EVOSUITE_JAR, '-class', testclass, '-projectCP', classpath, '-base_dir', classpath
+       'java', '-jar', EVOSUITE_JAR, '-class', temp, '-projectCP', classpath, '-base_dir', classpath
     ]
     subprocess.run(command, check=True)
     print("generated evosuite_test for", testclass)
@@ -117,10 +117,8 @@ if __name__ == '__main__':
     # 4. Rename the generated tests to be prefixed with "Randoop"
 
     # NOTE: You can remove this is your JAVA_HOME is already set or modify it to point to the correct path
-    initialize_jenv()
-
+    # initialize_jenv()
     for dataset in Dataset:
-
         # NOTE: Temporarily only testing the BEARS dataset
         if dataset is not Dataset.BEARS:
             continue
@@ -130,6 +128,7 @@ if __name__ == '__main__':
 
         # Iterate over each bug in the dataset
         for bug in dataset_path.iterdir():
+            print("*******************", bug.name,"***********************")
 
             # Just look at project directories
             if not bug.is_dir() or bug.name == "results":
@@ -159,7 +158,6 @@ if __name__ == '__main__':
                 else:
                     logger.info(f"Project already compiled: {dataset.value}-{bug.name}-{version}")
 
-                continue
 
                 # ----  Project is compiled, generate tests ----
                 # Get the list of failed tests for the bug to check the class we need to generate tests for
@@ -185,12 +183,10 @@ if __name__ == '__main__':
                 # Randoop
                 for testclass in class_names:
                     logger.info(f"Generating tests for {testclass} in {version}...")
-                    generate_randoop_test(classpath, testclass, version, str(output_dir))
+                    #generate_randoop_test(classpath, testclass, version, str(output_dir))
                     generate_evosuite_test(classpath, testclass)
                     logger.info(f"Test generation completed for {dataset.value}-{bug.name}-{version}")
-
-                    # NOTE: I use this to test just a single project at a time
-                    # exit(0)
+    
 
     # Save the failed project data to a JSON file
     with open('failed_projects.json', 'w') as file:
