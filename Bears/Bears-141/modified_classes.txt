@@ -1,0 +1,2 @@
+src/main/java/edu/harvard/h2ms/domain/core/User.java
+src/main/java/edu/harvard/h2ms/service/UserDetailsServiceImpl.java

@@ -1,0 +1,1 @@
+src/org/traccar/protocol/TelicProtocolDecoder.java
