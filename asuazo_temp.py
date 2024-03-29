@@ -6,7 +6,7 @@ from enum import Enum
 from pathlib import Path
 
 # ----  Set up logging ----
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # ---- Configuration variables ----
@@ -24,6 +24,15 @@ class Dataset(Enum):
     QUIXBUGS = "QuixBugs"
     BEARS = "Bears"
     BUGSWARM = "BugSwarm"
+
+
+def initialize_jenv():
+    """
+    Using this at the moment to ensure that my Java environment is set up correctly
+    """
+    subprocess.check_output(['jenv', 'init', '-'], universal_newlines=True)
+    # Set the JAVA_HOME environment variable to /Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home
+    os.environ['JAVA_HOME'] = '/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home'
 
 
 def extract_class_name(test_name):
@@ -92,6 +101,9 @@ if __name__ == '__main__':
     # 3. Store generated tests under the projects test folder
     # 4. Rename the generated tests to be prefixed with "Randoop"
 
+    # NOTE: You can remove this is your JAVA_HOME is already set or modify it to point to the correct path
+    initialize_jenv()
+
     for dataset in Dataset:
 
         # NOTE: Temporarily only testing the BEARS dataset
@@ -115,6 +127,7 @@ if __name__ == '__main__':
                 logger.debug(f"Path: {version_path}")
 
                 # Compile the project if it has not been compiled yet
+                # NOTE: Remove this check if you want to recompile the project every time
                 if not (version_path / 'target').exists():
                     success, error_message = compile_project(version_path)
                     # If project was not compiled successfully, add it to the list of failed projects
@@ -126,9 +139,12 @@ if __name__ == '__main__':
                             "version": version,
                             "error": error_message
                         })
-                        logger.error(f"Failed to compile {dataset.value}-{bug.name}-{version}")
-                        logger.error(error_message)
+                        logger.error(f" **** Failed to compile {dataset.value}-{bug.name}-{version} **** ")
                         continue
+                else:
+                    logger.info(f"Project already compiled: {dataset.value}-{bug.name}-{version}")
+
+                continue
 
                 # ----  Project is compiled, generate tests ----
                 # Get the list of failed tests for the bug to check the class we need to generate tests for

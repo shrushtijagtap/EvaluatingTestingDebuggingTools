@@ -5,13 +5,13 @@ import os
 import shutil
 
 # Target repository is in the parent directory/bears-benchmark
-repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'bears-benchmark'))
-bears_path = os.path.abspath(os.path.join(repo_path, 'Bugs', 'Bears'))
+repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'bears-benchmark'))
+bears_path = os.path.abspath(os.path.join(repo_path, '..', 'CS527-Project', 'Bears'))
 
 bug_entry = {}
 
 selected_bug_ids = ['Bears-106', 'Bears-108', 'Bears-115', 'Bears-118', 'Bears-123', 'Bears-127', 'Bears-128',
-                    'Bears-129', 'Bears-130', 'Bears-137', 'Bears-141', 'Bears-143', 'Bears-197', 'Bears-198',
+                    'Bears-129', 'Bears-130', 'Bears-137', 'Bears-141', 'Bears-143', 'Bears-131', 'Bears-198',
                     'Bears-21', 'Bears-222', 'Bears-226', 'Bears-245', 'Bears-246', 'Bears-99']
 
 
@@ -49,7 +49,7 @@ def process_bug(bug_id, data):
 
     # Create a directory for the bug id
     buggy_dir = os.path.join(bears_path, bug_id, 'Buggy-Version')
-    fixed_dir = os.path.join(bears_path, bug_id, 'Fixed-Version')
+    fixed_dir = os.path.join(bears_path, bug_id, 'Patched-Version')
 
     # Checkout the bug branch
     branch_name = get_branch_name(bug_id, data)
@@ -62,6 +62,7 @@ def process_bug(bug_id, data):
 
     # Checkout the fix commit
     subprocess.run(['git', 'checkout', 'HEAD^1'], cwd=repo_path)
+
     ## Copy the entire directory to the target directory
     shutil.copytree(repo_path, fixed_dir)
 
@@ -87,7 +88,7 @@ if __name__ == '__main__':
     data = load_json_data(f'{repo_path}/docs/data/bears-bugs.json')
 
     # For each selected bug, run the function to extract buggy/fixed versions and generate the diff file
-    for bug_id in selected_bug_ids:
+    for bug_id in ['Bears-131']:
         process_bug(bug_id, data)
         # Add a file with the failed test list
         with open(f'{bears_path}/{bug_id}/test.txt', 'w') as file:
