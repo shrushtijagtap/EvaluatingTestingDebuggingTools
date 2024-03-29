@@ -10,7 +10,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # ---- Configuration variables ----
-
 # repo path = current directory
 REPO_PATH: Path = Path.cwd()
 EVOSUITE_JAR = "/Users/shrushtijagtap/uiuc/Spring2024/CS527/evosuite-1.2.0.jar"
@@ -25,6 +24,23 @@ class Dataset(Enum):
     BUGSWARM = "BugSwarm"
 
 
+def validPath(pathpassed, filename, bugorfixVersion = ""):
+    path = str(pathpassed)
+    full_path = os.path.join(path, bugorfixVersion, filename)
+    
+    if not Path(full_path).is_file() and "Gson" in path:
+        full_path = os.path.join(path, bugorfixVersion, "gson", filename)
+        return full_path
+
+    if not Path(full_path).is_file():
+        full_path = os.path.join(path, bugorfixVersion, "src", filename)
+        if not Path(full_path).is_file():
+            full_path = os.path.join(path, bugorfixVersion, "source", filename)
+
+    print("valid path: ", full_path)
+    return full_path
+
+
 def initialize_jenv():
     """
     Using this at the moment to ensure that my Java environment is set up correctly
@@ -34,30 +50,12 @@ def initialize_jenv():
     os.environ['JAVA_HOME'] = '/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home'
 
 
-def extract_class_name(test_name):
-    """
-    Get the qualified class name from the test name (from the test.txt file)
-    """
-    class_name = test_name.rsplit('.', 1)[0]
-    class_name = class_name.split('.')[-1]
-    class_name = class_name.replace('Tests', '')
-
-    # Check the project structure and create a qualified class name
-    for root, dirs, files in os.walk(version_path):
-        for inner_file in files:
-            if inner_file == class_name + '.class':
-                logger.debug(f"Found class: {inner_file}")
-                package_path = os.path.relpath(root, version_path).replace(os.path.sep, '.')
-                # Remove initial target.classes. from the package path
-                package_path = package_path.split('.', 2)[-1]
-                return f"{package_path}.{class_name}"
-
-
-def compile_project(project_dir):
+def compile_project_maven(project_dir):
     """
     Compile a single project using Maven. If compilation fails, continue with the next project and
     add the project to the list of failed projects to check manually later.
     """
+    # if mvn: 
     command = ['mvn', 'clean', 'compile']
     try:
         subprocess.run(command, check=True, cwd=project_dir, capture_output=True)
@@ -65,21 +63,38 @@ def compile_project(project_dir):
     except subprocess.CalledProcessError as e:
         logger.error(f"Failed to compile {e.output}")
         return False, e.stderr.decode()
+    
 
+def compile_project_javac(bug, class_names, version):
+    """
+    Compile a single project using Maven. If compilation fails, continue with the next project and
+    add the project to the list of failed projects to check manually later.
+    """
+    #     javac
+    for class_name in class_names:
+        classpath = validPath(bug, class_name, version)
+        command = ['javac', classpath]
+        # command = ['javac', '-cp', classpath, classpath]
+        try:
+            subprocess.run(command, check=True, capture_output=True)
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Failed to compile {e.output}")
+            return False, e.stderr.decode()
+    
 
-def get_maven_classpath(project_dir):
+def run_maven_classpath(project_dir):
+    print("running maven classpath")
     command = ['mvn', 'dependency:build-classpath', '-Dmdep.outputFile=cp.txt']
     subprocess.run(command, check=True, cwd=project_dir)
-    classpath_file = os.path.join(project_dir, 'cp.txt')
-    with open(classpath_file, 'r') as file:
-        return file.read().strip()
+    # classpath_file = os.path.join(project_dir, 'cp.txt')
+    # with open(classpath_file, 'r') as file:
+    #     return file.read().strip()
 
 
 def generate_randoop_test(classpath: str, testclass: str, version: str, output_dir: str):
     """
     Generate tests for a single test class using Randoop
     """
-
     # TODO: Use the version to determine what test to generate and where to place it
 
     # java -classpath ${RANDOOP_JAR} randoop.main.Main gentests --classlist=myclasses.txt --time-limit=60
@@ -96,11 +111,13 @@ def generate_evosuite_test(classpath: str, testclass: str):
     Generate tests for a single test class using EvoSuite
     """
      # $(echo $EVOSUITE) -class className -projectCP pathToClassFiles
-    # temp = testclass.split(".")[-1]
-    # print(temp, " *** ", classpath)
-    
+    testclass = testclass.replace(".java", "")
+
+    index = classpath.find(testclass)
+    classpath = classpath[:index]
+
     command = [
-       'java', '-jar', EVOSUITE_JAR, '-class', testclass, '-projectCP', classpath, '-base_dir', classpath
+       'java', '-jar', EVOSUITE_JAR, '-class', testclass, '-projectCP', classpath[:-1], '-base_dir', classpath[:-1]
     ]
     subprocess.run(command, check=True)
     print("generated evosuite_test for", testclass)
@@ -119,7 +136,7 @@ if __name__ == '__main__':
     # initialize_jenv()
     for dataset in Dataset:
         # NOTE: Temporarily only testing the BEARS dataset
-        if dataset is not Dataset.BEARS:
+        if dataset is not Dataset.DEFECTS4J:
             continue
 
         # Root path for the dataset
@@ -139,10 +156,27 @@ if __name__ == '__main__':
                 logger.info(f"Processing {dataset.value}-{bug.name}-{version}")
                 logger.debug(f"Path: {version_path}")
 
+
+                # Get the list of failed tests for the bug to check the class we need to generate tests for
+                failed_test_file = version_path.parent / 'modified_classes.txt'
+                class_names = set()
+                with open(failed_test_file, 'r') as file:
+                    failed_tests = file.read().splitlines()
+                    for test in failed_tests:
+                        class_names.add(test)
+
+                logger.debug(f"Failed class: {class_names}")
+
+
+                pom_file = os.path.join(version_path, 'pom.xml')
                 # Compile the project if it has not been compiled yet
                 # NOTE: Remove this check if you want to recompile the project every time
                 if not (version_path / 'target').exists():
-                    success, error_message = compile_project(version_path)
+                    if os.path.exists(pom_file):
+                        success, error_message = compile_project_maven(version_path)
+                    else:
+                        success, error_message = compile_project_javac(bug, class_names, version)
+                    
                     # If project was not compiled successfully, add it to the list of failed projects
                     # and continue with the next project.
                     if not success:
@@ -157,30 +191,12 @@ if __name__ == '__main__':
                 else:
                     logger.info(f"Project already compiled: {dataset.value}-{bug.name}-{version}")
 
+                if os.path.exists(pom_file):
+                    run_maven_classpath(version_path)
 
-                # ----  Project is compiled, generate tests ----
-                # Get the list of failed tests for the bug to check the class we need to generate tests for
-                failed_test_file = version_path.parent / 'test.txt'
-                class_names = set()
-                with open(failed_test_file, 'r') as file:
-                    failed_tests = file.read().splitlines()
-                    for test in failed_tests:
-                        qualified_class_name = extract_class_name(test)
-                        if qualified_class_name:
-                            class_names.add(qualified_class_name)
 
-                logger.debug(f"Failed class: {class_names}")
-
-                # Get the classpath for the project
-                classpath = get_maven_classpath(version_path)
-                classpath = f"{str(version_path / 'target' / 'classes')}{os.pathsep}{classpath}"
-                logger.debug(f"Classpath: {classpath}")
-
-                # Output directory for the generated tests should be in the existing test folder
-                output_dir = version_path / 'src' / 'test' / 'java'
-
-                # Randoop
                 for testclass in class_names:
+                    classpath = validPath(bug, testclass, version)
                     logger.info(f"Generating tests for {testclass} in {version}...")
                     #generate_randoop_test(classpath, testclass, version, str(output_dir))
                     generate_evosuite_test(classpath, testclass)
