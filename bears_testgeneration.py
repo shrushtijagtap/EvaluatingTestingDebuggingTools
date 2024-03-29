@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 # repo path = current directory
 REPO_PATH: Path = Path.cwd()
 # Set the Randoop JAR path to the downloads directory
+EVOSUITE_JAR = "/Users/sejalpekam/evosuite-1.2.0.jar"
 RANDOOP_JAR = os.path.join(os.path.expanduser("~"), "Downloads", "randoop-4.3.2", "randoop-all-4.3.2.jar")
 
 FAILED_PROJECTS = []
@@ -90,6 +91,20 @@ def generate_randoop_test(classpath: str, testclass: str, version: str, output_d
     ]
 
     subprocess.run(command, check=True)
+
+
+def generate_evosuite_test(classpath: str, testclass: str):
+    """
+    Generate tests for a single test class using EvoSuite
+    """
+    # TODO: Use the version to determine what test to generate and where to place it
+
+     # $(echo $EVOSUITE) -class className -projectCP pathToClassFiles
+    command = [
+       'java', '-jar', EVOSUITE_JAR, '-class', testclass, '-projectCP', classpath, '-base_dir', classpath
+    ]
+    subprocess.run(command, check=True)
+    print("generated evosuite_test for", testclass)
 
 
 if __name__ == '__main__':
@@ -171,6 +186,7 @@ if __name__ == '__main__':
                 for testclass in class_names:
                     logger.info(f"Generating tests for {testclass} in {version}...")
                     generate_randoop_test(classpath, testclass, version, str(output_dir))
+                    generate_evosuite_test(classpath, testclass)
                     logger.info(f"Test generation completed for {dataset.value}-{bug.name}-{version}")
 
                     # NOTE: I use this to test just a single project at a time

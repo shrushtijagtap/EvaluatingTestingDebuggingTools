@@ -10,10 +10,12 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 # ---- Configuration variables ----
-
 # repo path = current directory
 REPO_PATH: Path = Path.cwd()
+
+# comment the once you dont need
 EVOSUITE_JAR = "/Users/sejalpekam/evosuite-1.2.0.jar"
+RANDOOP_JAR = os.path.join(os.path.expanduser("~"), "Downloads", "randoop-4.3.2", "randoop-all-4.3.2.jar")
 FAILED_PROJECTS = []
 
 
@@ -51,6 +53,22 @@ def comment_package(version_path, name, version):
                     line = f'// {line.strip()}\n'
                 file.write(line)
             print(name, " editted")
+
+
+def generate_randoop_test(classpath: str, testclass: str, version: str):
+    """
+    Generate tests for a single test class using Randoop
+    """
+
+    # TODO: Use the version to determine what test to generate and where to place it
+
+    # java -classpath ${RANDOOP_JAR} randoop.main.Main gentests --classlist=myclasses.txt --time-limit=60
+    command = [
+        'java', '-classpath', f"{classpath}:{RANDOOP_JAR}", 'randoop.main.Main', 'gentests',
+        '--testclass=' + testclass, '--time-limit=60'
+    ]
+
+    subprocess.run(command, check=True)
 
 
 def generate_evosuite_test(classpath: str, testclass: str):
@@ -117,10 +135,16 @@ if __name__ == '__main__':
                         logger.error(error_message)
                         continue
 
+                # For Randoop
+                # modify the parameters according to your need
+                logger.info(f"Randoop: Generating tests for {bug.name} in {version}... {version_path}")
+                generate_randoop_test(version_path, bug.name, version)
+                logger.info(f"Randoop: Test generation completed for {dataset.value}-{bug.name}-{version}")
 
-                logger.info(f"Generating tests for {bug.name} in {version}... {version_path}")
+                # For Evosuite - working
+                logger.info(f"Evosuite: Generating tests for {bug.name} in {version}... {version_path}")
                 generate_evosuite_test(version_path, bug.name)
-                logger.info(f"Test generation completed for {dataset.value}-{bug.name}-{version}")
+                logger.info(f"Evosuite: Test generation completed for {dataset.value}-{bug.name}-{version}")
 
 
     # Save the failed project data to a JSON file
