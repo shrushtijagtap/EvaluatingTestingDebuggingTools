@@ -14,8 +14,9 @@ logger = logging.getLogger(__name__)
 REPO_PATH: Path = Path.cwd()
 EVOSUITE_JAR = "/Users/shrushtijagtap/uiuc/Spring2024/CS527/evosuite-1.2.0.jar"
 #RANDOOP_JAR = os.path.join(os.path.expanduser("~"), "Downloads", "randoop-4.3.2", "randoop-all-4.3.2.jar")
-FAILED_PROJECTS = []
-
+FAILED_PROJECTS_compile = []
+failed_evosuite_project = []
+passed_evosuite_project = []
 
 class Dataset(Enum):
     DEFECTS4J = "Defects4J"
@@ -37,9 +38,33 @@ def validPath(pathpassed, filename, bugorfixVersion = ""):
         if not Path(full_path).is_file():
             full_path = os.path.join(path, bugorfixVersion, "source", filename)
 
-    print("valid path: ", full_path)
+    #print("valid path: ", full_path)
     return full_path
 
+
+def extract_class_name(test_name, version_path):
+    res_line = ""
+    diffPath = version_path.parent / "Diff"
+    with open(diffPath, "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            if test_name in line:
+                res_line = line.strip()
+                break
+    # a/Math_3/Buggy-Version/src/main/java/org/apache/commons/math3/util/MathArrays.java
+    
+    if "Buggy-Version" in res_line:
+        buggy_version_index = res_line.find("Buggy-Version")
+    else:
+        buggy_version_index = res_line.find("Patched-Version")
+
+    # print(res_line)
+    testclass_index = res_line.find(testclass)
+    resultt = res_line[buggy_version_index+len("Buggy-Version"):testclass_index]
+
+    # print("resultt: ", resultt)
+    return str(resultt).strip()
+            
 
 def initialize_jenv():
     """
@@ -106,21 +131,30 @@ def generate_randoop_test(classpath: str, testclass: str, version: str, output_d
     subprocess.run(command, check=True)
 
 
-def generate_evosuite_test(classpath: str, testclass: str):
+def generate_evosuite_test(classpath: str, testclass: str, version_path: str, isMaven: bool):
     """
     Generate tests for a single test class using EvoSuite
     """
      # $(echo $EVOSUITE) -class className -projectCP pathToClassFiles
     testclass = testclass.replace(".java", "")
-
-    index = classpath.find(testclass)
-    classpath = classpath[:index]
+    testclass = testclass.replace("/", ".")
+    if isMaven:
+        classpath = str(version_path) + "/target/classes" + extract_class_name(testclass, version_path)
+    else:
+        classpath = str(version_path) + extract_class_name(testclass, version_path)
+    # [:-1] to remove the last character which is a newline
+    print("classpath: ", classpath, " *** testclass:", testclass)
 
     command = [
-       'java', '-jar', EVOSUITE_JAR, '-class', testclass, '-projectCP', classpath[:-1], '-base_dir', classpath[:-1]
+       'java', '-jar', EVOSUITE_JAR, '-class', testclass, '-projectCP', classpath, '-base_dir', version_path
     ]
-    subprocess.run(command, check=True)
-    print("generated evosuite_test for", testclass)
+    try:
+        subprocess.run(command, check=True)
+        print("generated evosuite_test for", testclass)
+        passed_evosuite_project.append([testclass, classpath])
+    except subprocess.CalledProcessError as e:
+        failed_evosuite_project.append([testclass, classpath])
+        print("generated evosuite_test failed for", testclass)
 
 
 if __name__ == '__main__':
@@ -180,7 +214,7 @@ if __name__ == '__main__':
                     # If project was not compiled successfully, add it to the list of failed projects
                     # and continue with the next project.
                     if not success:
-                        FAILED_PROJECTS.append({
+                        FAILED_PROJECTS_compile.append({
                             "dataset": dataset.value,
                             "bug": bug.name,
                             "version": version,
@@ -194,15 +228,21 @@ if __name__ == '__main__':
                 if os.path.exists(pom_file):
                     run_maven_classpath(version_path)
 
-
                 for testclass in class_names:
                     classpath = validPath(bug, testclass, version)
                     logger.info(f"Generating tests for {testclass} in {version}...")
                     #generate_randoop_test(classpath, testclass, version, str(output_dir))
-                    generate_evosuite_test(classpath, testclass)
+                    generate_evosuite_test(classpath, testclass, version_path, os.path.exists(pom_file))
                     logger.info(f"Test generation completed for {dataset.value}-{bug.name}-{version}")
     
 
     # Save the failed project data to a JSON file
-    with open('failed_projects.json', 'w') as file:
-        json.dump(FAILED_PROJECTS, file, indent=4)
+    with open('failed_projects_compile.json', 'w') as file:
+        json.dump(FAILED_PROJECTS_compile, file, indent=4)
+
+    with open('failed_projects_evosuite.json', 'w') as file:
+        json.dump(failed_evosuite_project, file, indent=4)
+
+    with open('passed_projects_evosuite.json', 'w') as file:
+        json.dump(passed_evosuite_project, file, indent=4)
+
