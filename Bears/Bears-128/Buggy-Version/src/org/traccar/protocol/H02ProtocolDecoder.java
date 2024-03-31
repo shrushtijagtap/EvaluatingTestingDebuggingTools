@@ -152,6 +152,7 @@ public class H02ProtocolDecoder extends BaseProtocolDecoder {
             .number("(d+),")                     // imei
             .groupBegin()
             .text("VP1,")
+            .expression("[ABV],")
             .or()
             .groupBegin()
             .text("V1,")
@@ -163,7 +164,7 @@ public class H02ProtocolDecoder extends BaseProtocolDecoder {
             .groupEnd()
             .number("(?:(dd)(dd)(dd))?,")        // time (hhmmss)
             .groupEnd()
-            .expression("([ABV])?,")             // validity
+            .expression("([AV])?,")              // validity
             .groupBegin()
             .number("-(d+)-(d+.d+),")            // latitude
             .or()

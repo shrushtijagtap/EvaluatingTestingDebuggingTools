@@ -94,7 +94,7 @@ public class User implements UserDetails {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        setEmail(email);
+        this.email = email;
         this.type = type;
         setPassword(password);
     }
@@ -147,8 +147,7 @@ public class User implements UserDetails {
     }
 
     public void setEmail(String email) {
-    	if(email != null)
-    		this.email = email.toLowerCase();
+        this.email = email;
     }
 
     public String getNotificationFrequency() {

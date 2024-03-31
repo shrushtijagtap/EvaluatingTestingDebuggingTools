@@ -53,6 +53,8 @@ public class TelicProtocolDecoder extends BaseProtocolDecoder {
             .number("(d+)?,")                    // satellites
             .expression("(?:[^,]*,){7}")
             .number("(d+),")                     // battery
+            .expression("[^,]*,")
+            .number("(d+)?")                     // external
             .any()
             .compile();
 
@@ -128,6 +130,10 @@ public class TelicProtocolDecoder extends BaseProtocolDecoder {
         }
 
         position.set(Position.KEY_BATTERY, parser.nextInt());
+
+        if (parser.hasNext()) {
+            position.set(Position.KEY_POWER, parser.nextInt());
+        }
 
         return position;
     }
