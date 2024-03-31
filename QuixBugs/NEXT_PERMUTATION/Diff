@@ -1,7 +1,7 @@
-diff --git a/next_permutation/Buggy-Version/next_permutation.java b/next_permutation/Patched-Version/next_permutation.java
-index a831505e..43a1e655 100644
---- a/next_permutation/Buggy-Version/next_permutation.java
-+++ b/next_permutation/Patched-Version/next_permutation.java
+diff --git a/next_permutation/Buggy-Version/java_programs/next_permutation.java b/next_permutation/Patched-Version/correct_java_programs/next_permutation.java
+index a831505..43a1e65 100644
+--- a/next_permutation/Buggy-Version/java_programs/next_permutation.java
++++ b/next_permutation/Patched-Version/correct_java_programs/next_permutation.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;

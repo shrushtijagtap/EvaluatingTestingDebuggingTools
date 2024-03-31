@@ -15,8 +15,8 @@ def codebleu(path, bug_file_list):
 
     for filename in bug_file_list:
         # Get the buggy and fixed versions
-        buggy_full_path = os.path.join(path, "Buggy-Version", filename)
-        fixed_full_path = os.path.join(path, "Patched-Version", filename)
+        buggy_full_path = os.path.join(path, "Buggy-Version", "java_programs", filename)
+        fixed_full_path = os.path.join(path, "Patched-Version", "correct_java_programs", filename)
 
         # Read the files
         with open(buggy_full_path, 'r') as file:
@@ -37,8 +37,8 @@ def get_levenshtein_distance(path, bug_file_list):
 
     for filename in bug_file_list:
         # Get the buggy and fixed versions
-        buggy_full_path = os.path.join(path, "Buggy-Version", filename)
-        fixed_full_path = os.path.join(path, "Patched-Version", filename)
+        buggy_full_path = os.path.join(path, "Buggy-Version", "java_programs", filename)
+        fixed_full_path = os.path.join(path, "Patched-Version", "correct_java_programs", filename)
 
         print(bug_file_list)
 
@@ -118,7 +118,7 @@ def get_files_changed(diff):
     for line in diff:
         if line.startswith('+++') and line.strip().endswith('.java'):
             split_line = line.strip().split('/')
-            parsed_line = '/'.join(split_line[3:])
+            parsed_line = '/'.join(split_line[4:])
             files_changed.append(parsed_line)
 
     return files_changed
@@ -150,8 +150,8 @@ def process_bug(bug_dir, option=None):
     levenshtein_distances = get_levenshtein_distance(bug_dir, files_changed)
     # print("LD: ", levenshtein_distances)
 
-    buggy_complexity = find_cyclomatic_complexity(os.path.join(bug_dir, "Buggy-Version"), files_changed)
-    fixed_complexity = find_cyclomatic_complexity(os.path.join(bug_dir, "Patched-Version"), files_changed)
+    buggy_complexity = find_cyclomatic_complexity(os.path.join(bug_dir, "Buggy-Version", "java_programs"), files_changed)
+    fixed_complexity = find_cyclomatic_complexity(os.path.join(bug_dir, "Patched-Version", "correct_java_programs"), files_changed)
 
     # print("CB: ", buggy_complexity)
     # print("CP: ", fixed_complexity)
@@ -181,7 +181,7 @@ if __name__ == "__main__":
     # dir_paths = get_subdirectories(parent_dir)
     # print(dir_paths)
     parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__)))
-    selected_bug_ids = ['FIND_IN_SORTED', 'LIS', 'BREADTH_FIRST_SEARCH', 'POSSIBLE_CHANGE', 'LCS_LENGTH', 'SHORTEST_PATH_LENGTH', 'DEPTH_FIRST_SEARCH', 'FLATTEN', 'TO_BASE', 'SIEVE', 'NEXT_PALINDROME', 'IS_VALID_PARENTHESIZATION', 'SHORTEST_PATHS', 'SHUNTING_YARD', 'NEXT_PERMUTATION', 'KTH', 'REVERSE_LINKED_LIST', 'GET_FACTORS', 'SUBSEQUENCES', 'MERGESORT']
+    selected_bug_ids = ['GCD', 'BUCKETSORT', 'KNAPSACK', 'LEVENSHTEIN', 'QUICKSORT', 'FIND_IN_SORTED', 'LIS', 'BREADTH_FIRST_SEARCH', 'POSSIBLE_CHANGE', 'LCS_LENGTH', 'SHORTEST_PATH_LENGTH', 'DEPTH_FIRST_SEARCH', 'FLATTEN', 'TO_BASE', 'SIEVE', 'NEXT_PALINDROME', 'IS_VALID_PARENTHESIZATION', 'SHORTEST_PATHS', 'SHUNTING_YARD', 'NEXT_PERMUTATION', 'KTH', 'REVERSE_LINKED_LIST', 'GET_FACTORS', 'SUBSEQUENCES', 'MERGESORT']
     count = 1
     benchmark_results = {}
 

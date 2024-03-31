@@ -1,7 +1,7 @@
-diff --git a/to_base/Buggy-Version/to_base.java b/to_base/Patched-Version/to_base.java
-index dfba6643..151ebed6 100644
---- a/to_base/Buggy-Version/to_base.java
-+++ b/to_base/Patched-Version/to_base.java
+diff --git a/to_base/Buggy-Version/java_programs/to_base.java b/to_base/Patched-Version/correct_java_programs/to_base.java
+index dfba664..151ebed 100644
+--- a/to_base/Buggy-Version/java_programs/to_base.java
++++ b/to_base/Patched-Version/correct_java_programs/to_base.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;

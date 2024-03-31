@@ -1,7 +1,7 @@
-diff --git a/sieve/Buggy-Version/sieve.java b/sieve/Patched-Version/sieve.java
-index 5d02bd58..673b6acf 100644
---- a/sieve/Buggy-Version/sieve.java
-+++ b/sieve/Patched-Version/sieve.java
+diff --git a/sieve/Buggy-Version/java_programs/sieve.java b/sieve/Patched-Version/correct_java_programs/sieve.java
+index 5d02bd5..673b6ac 100644
+--- a/sieve/Buggy-Version/java_programs/sieve.java
++++ b/sieve/Patched-Version/correct_java_programs/sieve.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;

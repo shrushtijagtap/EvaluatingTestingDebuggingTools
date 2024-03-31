@@ -1,0 +1,19 @@
+diff --git a/quicksort/Buggy-Version/java_programs/quicksort.java b/quicksort/Patched-Version/correct_java_programs/quicksort.java
+index 82304b0..81204bc 100644
+--- a/quicksort/Buggy-Version/java_programs/quicksort.java
++++ b/quicksort/Patched-Version/correct_java_programs/quicksort.java
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -23,7 +23,7 @@ public class QUICKSORT {
+         for (Integer x : arr.subList(1, arr.size())) {
+             if (x < pivot) {
+                 lesser.add(x);
+-            } else if (x > pivot) {
++            } else if (x >= pivot) {
+                 greater.add(x);
+             }
+         }

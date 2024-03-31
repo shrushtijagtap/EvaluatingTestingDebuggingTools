@@ -42,7 +42,11 @@ def compile_project(project_dir, java_filename):
 
 
 def comment_package(version_path, name, version):
-    strToCommentFile = str(version_path) +"/"+ name+".java"
+    strToCommentFile = ""
+    if version == "Buggy-Version":
+        strToCommentFile = str(version_path) +"/java_programs/"+ name+".java"
+    else:
+        strToCommentFile = str(version_path) +"/correct_java_programs/"+ name+".java"
 
     with open(strToCommentFile , 'r') as file:
         lines = file.readlines()
@@ -75,7 +79,7 @@ def generate_evosuite_test(classpath: str, testclass: str):
     """
     Generate tests for a single test class using EvoSuite
     """
-    print("in nkjdjkd Generating tests for", classpath," ",testclass)
+    print("Generating tests for", classpath," ",testclass)
     # TODO: Use the version to determine what test to generate and where to place it
 
      # $(echo $EVOSUITE) -class className -projectCP pathToClassFiles
@@ -141,10 +145,9 @@ if __name__ == '__main__':
                 generate_randoop_test(version_path, bug.name, version)
                 logger.info(f"Randoop: Test generation completed for {dataset.value}-{bug.name}-{version}")
 
-                # For Evosuite - working
-                logger.info(f"Evosuite: Generating tests for {bug.name} in {version}... {version_path}")
-                generate_evosuite_test(version_path, bug.name)
-                logger.info(f"Evosuite: Test generation completed for {dataset.value}-{bug.name}-{version}")
+                # logger.info(f"Generating tests for {bug.name} in {version}... {version_path}")
+                # generate_evosuite_test(version_path, bug.name)
+                # logger.info(f"Test generation completed for {dataset.value}-{bug.name}-{version}")
 
 
     # Save the failed project data to a JSON file

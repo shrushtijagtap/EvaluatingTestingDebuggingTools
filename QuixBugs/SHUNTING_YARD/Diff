@@ -1,7 +1,7 @@
-diff --git a/shunting_yard/Buggy-Version/shunting_yard.java b/shunting_yard/Patched-Version/shunting_yard.java
-index 87c2c91e..0fbe5777 100644
---- a/shunting_yard/Buggy-Version/shunting_yard.java
-+++ b/shunting_yard/Patched-Version/shunting_yard.java
+diff --git a/shunting_yard/Buggy-Version/java_programs/shunting_yard.java b/shunting_yard/Patched-Version/correct_java_programs/shunting_yard.java
+index 87c2c91..0fbe577 100644
+--- a/shunting_yard/Buggy-Version/java_programs/shunting_yard.java
++++ b/shunting_yard/Patched-Version/correct_java_programs/shunting_yard.java
 @@ -1,4 +1,5 @@
 -package java_programs;
 +package correct_java_programs;

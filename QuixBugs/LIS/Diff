@@ -1,7 +1,7 @@
-diff --git a/lis/Buggy-Version/lis.java b/lis/Patched-Version/lis.java
-index 96a0e132..282647d4 100644
---- a/lis/Buggy-Version/lis.java
-+++ b/lis/Patched-Version/lis.java
+diff --git a/lis/Buggy-Version/java_programs/lis.java b/lis/Patched-Version/correct_java_programs/lis.java
+index 96a0e13..282647d 100644
+--- a/lis/Buggy-Version/java_programs/lis.java
++++ b/lis/Patched-Version/correct_java_programs/lis.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;

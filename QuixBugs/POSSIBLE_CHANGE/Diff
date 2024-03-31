@@ -1,7 +1,7 @@
-diff --git a/possible_change/Buggy-Version/possible_change.java b/possible_change/Patched-Version/possible_change.java
-index c65cfd30..7f9a086d 100644
---- a/possible_change/Buggy-Version/possible_change.java
-+++ b/possible_change/Patched-Version/possible_change.java
+diff --git a/possible_change/Buggy-Version/java_programs/possible_change.java b/possible_change/Patched-Version/correct_java_programs/possible_change.java
+index c65cfd3..7f9a086 100644
+--- a/possible_change/Buggy-Version/java_programs/possible_change.java
++++ b/possible_change/Patched-Version/correct_java_programs/possible_change.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;

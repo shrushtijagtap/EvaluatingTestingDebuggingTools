@@ -1,7 +1,7 @@
-diff --git a/mergesort/Buggy-Version/mergesort.java b/mergesort/Patched-Version/mergesort.java
-index 60e54a45..f20a9577 100644
---- a/mergesort/Buggy-Version/mergesort.java
-+++ b/mergesort/Patched-Version/mergesort.java
+diff --git a/mergesort/Buggy-Version/java_programs/mergesort.java b/mergesort/Patched-Version/correct_java_programs/mergesort.java
+index 60e54a4..f20a957 100644
+--- a/mergesort/Buggy-Version/java_programs/mergesort.java
++++ b/mergesort/Patched-Version/correct_java_programs/mergesort.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;

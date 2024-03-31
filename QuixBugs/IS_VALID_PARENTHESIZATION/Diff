@@ -1,7 +1,7 @@
-diff --git a/is_valid_parenthesization/Buggy-Version/is_valid_parenthesization.java b/is_valid_parenthesization/Patched-Version/is_valid_parenthesization.java
-index aa43e74a..6f9b60b2 100644
---- a/is_valid_parenthesization/Buggy-Version/is_valid_parenthesization.java
-+++ b/is_valid_parenthesization/Patched-Version/is_valid_parenthesization.java
+diff --git a/is_valid_parenthesization/Buggy-Version/java_programs/is_valid_parenthesization.java b/is_valid_parenthesization/Patched-Version/correct_java_programs/is_valid_parenthesization.java
+index aa43e74..6f9b60b 100644
+--- a/is_valid_parenthesization/Buggy-Version/java_programs/is_valid_parenthesization.java
++++ b/is_valid_parenthesization/Patched-Version/correct_java_programs/is_valid_parenthesization.java
 @@ -1,5 +1,6 @@
 -package java_programs;
 +package correct_java_programs;

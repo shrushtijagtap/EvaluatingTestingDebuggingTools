@@ -1,7 +1,7 @@
-diff --git a/subsequences/Buggy-Version/subsequences.java b/subsequences/Patched-Version/subsequences.java
-index 134e0a67..4faaee93 100644
---- a/subsequences/Buggy-Version/subsequences.java
-+++ b/subsequences/Patched-Version/subsequences.java
+diff --git a/subsequences/Buggy-Version/java_programs/subsequences.java b/subsequences/Patched-Version/correct_java_programs/subsequences.java
+index 134e0a6..4faaee9 100644
+--- a/subsequences/Buggy-Version/java_programs/subsequences.java
++++ b/subsequences/Patched-Version/correct_java_programs/subsequences.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;

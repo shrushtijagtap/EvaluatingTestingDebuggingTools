@@ -1,7 +1,7 @@
-diff --git a/find_in_sorted/Buggy-Version/find_in_sorted.java b/find_in_sorted/Patched-Version/find_in_sorted.java
-index 33961545..ef8788a4 100644
---- a/find_in_sorted/Buggy-Version/find_in_sorted.java
-+++ b/find_in_sorted/Patched-Version/find_in_sorted.java
+diff --git a/find_in_sorted/Buggy-Version/java_programs/find_in_sorted.java b/find_in_sorted/Patched-Version/correct_java_programs/find_in_sorted.java
+index 3396154..ef8788a 100644
+--- a/find_in_sorted/Buggy-Version/java_programs/find_in_sorted.java
++++ b/find_in_sorted/Patched-Version/correct_java_programs/find_in_sorted.java
 @@ -1,4 +1,5 @@
 -package java_programs;
 +package correct_java_programs;

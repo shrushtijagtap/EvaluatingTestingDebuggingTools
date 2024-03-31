@@ -1,7 +1,7 @@
-diff --git a/flatten/Buggy-Version/flatten.java b/flatten/Patched-Version/flatten.java
-index e29ac1ce..8d5a33fc 100644
---- a/flatten/Buggy-Version/flatten.java
-+++ b/flatten/Patched-Version/flatten.java
+diff --git a/flatten/Buggy-Version/java_programs/flatten.java b/flatten/Patched-Version/correct_java_programs/flatten.java
+index e29ac1c..8d5a33f 100644
+--- a/flatten/Buggy-Version/java_programs/flatten.java
++++ b/flatten/Patched-Version/correct_java_programs/flatten.java
 @@ -1,5 +1,6 @@
 -package java_programs;
 +package correct_java_programs;

@@ -1,0 +1,19 @@
+diff --git a/bucketsort/Buggy-Version/java_programs/bucketsort.java b/bucketsort/Patched-Version/correct_java_programs/bucketsort.java
+index 6cf538e..02d4b43 100644
+--- a/bucketsort/Buggy-Version/java_programs/bucketsort.java
++++ b/bucketsort/Patched-Version/correct_java_programs/bucketsort.java
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -19,7 +19,7 @@ public class BUCKETSORT {
+ 
+         ArrayList<Integer> sorted_arr = new ArrayList<Integer>(100);
+         int i = 0;
+-        for (Integer count : arr) { // arr is counts in fixed version
++        for (Integer count : counts) {
+             sorted_arr.addAll(Collections.nCopies(count, i));
+             i++;
+         }

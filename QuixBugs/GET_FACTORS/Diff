@@ -1,7 +1,7 @@
-diff --git a/get_factors/Buggy-Version/get_factors.java b/get_factors/Patched-Version/get_factors.java
-index 528ec62a..4948a6c4 100644
---- a/get_factors/Buggy-Version/get_factors.java
-+++ b/get_factors/Patched-Version/get_factors.java
+diff --git a/get_factors/Buggy-Version/java_programs/get_factors.java b/get_factors/Patched-Version/correct_java_programs/get_factors.java
+index 528ec62..4948a6c 100644
+--- a/get_factors/Buggy-Version/java_programs/get_factors.java
++++ b/get_factors/Patched-Version/correct_java_programs/get_factors.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;

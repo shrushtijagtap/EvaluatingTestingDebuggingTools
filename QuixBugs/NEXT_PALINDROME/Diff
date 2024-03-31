@@ -1,7 +1,7 @@
-diff --git a/next_palindrome/Buggy-Version/next_palindrome.java b/next_palindrome/Patched-Version/next_palindrome.java
-index 2a0bd1ee..9a13dc09 100644
---- a/next_palindrome/Buggy-Version/next_palindrome.java
-+++ b/next_palindrome/Patched-Version/next_palindrome.java
+diff --git a/next_palindrome/Buggy-Version/java_programs/next_palindrome.java b/next_palindrome/Patched-Version/correct_java_programs/next_palindrome.java
+index 2a0bd1e..9a13dc0 100644
+--- a/next_palindrome/Buggy-Version/java_programs/next_palindrome.java
++++ b/next_palindrome/Patched-Version/correct_java_programs/next_palindrome.java
 @@ -1,4 +1,4 @@
 -package java_programs;
 +package correct_java_programs;

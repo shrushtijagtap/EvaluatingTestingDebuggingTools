@@ -1,7 +1,7 @@
-diff --git a/lcs_length/Buggy-Version/lcs_length.java b/lcs_length/Patched-Version/lcs_length.java
-index 97462e20..ce941fff 100644
---- a/lcs_length/Buggy-Version/lcs_length.java
-+++ b/lcs_length/Patched-Version/lcs_length.java
+diff --git a/lcs_length/Buggy-Version/java_programs/lcs_length.java b/lcs_length/Patched-Version/correct_java_programs/lcs_length.java
+index 97462e2..ce941ff 100644
+--- a/lcs_length/Buggy-Version/java_programs/lcs_length.java
++++ b/lcs_length/Patched-Version/correct_java_programs/lcs_length.java
 @@ -1,5 +1,6 @@
 -package java_programs;
 +package correct_java_programs;

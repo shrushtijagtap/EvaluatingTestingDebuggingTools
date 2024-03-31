@@ -1,7 +1,7 @@
-diff --git a/kth/Buggy-Version/kth.java b/kth/Patched-Version/kth.java
-index 9bef9780..83beeb57 100644
---- a/kth/Buggy-Version/kth.java
-+++ b/kth/Patched-Version/kth.java
+diff --git a/kth/Buggy-Version/java_programs/kth.java b/kth/Patched-Version/correct_java_programs/kth.java
+index 9bef978..83beeb5 100644
+--- a/kth/Buggy-Version/java_programs/kth.java
++++ b/kth/Patched-Version/correct_java_programs/kth.java
 @@ -1,7 +1,14 @@
 -package java_programs;
 +package correct_java_programs;

@@ -1,0 +1,19 @@
+diff --git a/gcd/Buggy-Version/java_programs/gcd.java b/gcd/Patched-Version/correct_java_programs/gcd.java
+index ea0fa24..6ee4e04 100644
+--- a/gcd/Buggy-Version/java_programs/gcd.java
++++ b/gcd/Patched-Version/correct_java_programs/gcd.java
+@@ -1,4 +1,4 @@
+-package java_programs;
++package correct_java_programs;
+ import java.util.*;
+ 
+ /*
+@@ -16,7 +16,7 @@ public class GCD {
+         if (b == 0) {
+             return a;
+         } else {
+-            return gcd(a % b, b);
++            return gcd(b, a%b);
+         }
+     }
+ }
