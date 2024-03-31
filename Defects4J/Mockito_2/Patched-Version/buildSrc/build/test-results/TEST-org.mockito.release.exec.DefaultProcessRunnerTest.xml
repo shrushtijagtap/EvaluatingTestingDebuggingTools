@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.mockito.release.exec.DefaultProcessRunnerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-30T06:55:49" hostname="Shrushtis-MacBook-Air.local" time="0.022">
+  <properties/>
+  <testcase name="runs processes" classname="org.mockito.release.exec.DefaultProcessRunnerTest" time="0.022"/>
+  <system-out><![CDATA[23:55:49.046 [Test worker] INFO  o.m.r.exec.DefaultProcessRunner - Executing command: [ls]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

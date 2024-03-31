@@ -1,0 +1,13 @@
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-30 17:12:00  ######
+Mode: regression
+Parameters:
+ -g evosuite
+ -p Closure
+ -v 2f
+ -n 1
+ -b 1000
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Closure/modified_classes/2.src
+ -s 1002
+Created test suite archive: Closure-2f-evosuite.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J-Pending/Closure_2/Patched-Version/Closure/evosuite/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-30 17:21:10  ######

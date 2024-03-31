@@ -1,0 +1,2 @@
+TARGET_CLASS,criterion,Coverage,Total_Goals,Covered_Goals
+org.mockito.exceptions.Reporter,BRANCH,0.8571428571428571,91,78

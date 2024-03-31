@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.mockito.release.comparison.ZipCompareTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-03-30T06:58:13" hostname="Shrushtis-MacBook-Air.local" time="0.065">
+  <properties/>
+  <testcase name="compares zips" classname="org.mockito.release.comparison.ZipCompareTest" time="0.059"/>
+  <testcase name="fails early when any of the zips cannot be opened" classname="org.mockito.release.comparison.ZipCompareTest" time="0.004"/>
+  <system-out><![CDATA[23:58:13.229 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-2.zip
+23:58:13.230 [Test worker] INFO  o.m.release.comparison.ZipCompare - 4 entries matched
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-2.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-1.zip
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - 4 entries matched
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-3.zip
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - x/y/4.txt does not match
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - 3 entries matched
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - 1 entries did not match
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-4.zip
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - x/y/4.txt not found in /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-4.zip
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - 3 entries matched
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - 1 entries did not match
+23:58:13.231 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-5.zip
+23:58:13.232 [Test worker] INFO  o.m.release.comparison.ZipCompare - x.txt not found in /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit6867447302663583626/junit5873839983133277876/zip-1.zip
+23:58:13.232 [Test worker] INFO  o.m.release.comparison.ZipCompare - 4 entries matched
+23:58:13.232 [Test worker] INFO  o.m.release.comparison.ZipCompare - 1 entries did not match
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

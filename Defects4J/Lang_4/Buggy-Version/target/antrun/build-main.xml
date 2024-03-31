@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy todir="/Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Defects4J/Lang_4/Buggy-Version/target/apidocs/META-INF">
+    <fileset dir="/Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Defects4J/Lang_4/Buggy-Version">
+      <include name="LICENSE.txt"/>
+      <include name="NOTICE.txt"/>
+    </fileset>
+  </copy>
+</target>
+</project>
