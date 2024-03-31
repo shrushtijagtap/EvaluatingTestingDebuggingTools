@@ -17,6 +17,7 @@ EVOSUITE_JAR = "/Users/shrushtijagtap/uiuc/Spring2024/CS527/evosuite-1.2.0.jar"
 FAILED_PROJECTS_compile = []
 failed_evosuite_project = []
 passed_evosuite_project = []
+nonmvnprojects = []
 
 class Dataset(Enum):
     DEFECTS4J = "Defects4J"
@@ -90,21 +91,28 @@ def compile_project_maven(project_dir):
         return False, e.stderr.decode()
     
 
-def compile_project_javac(bug, class_names, version):
+def compile_project_javac(bug, class_names, version, version_path):
     """
     Compile a single project using Maven. If compilation fails, continue with the next project and
     add the project to the list of failed projects to check manually later.
     """
     #     javac
-    for class_name in class_names:
-        classpath = validPath(bug, class_name, version)
-        command = ['javac', classpath]
-        # command = ['javac', '-cp', classpath, classpath]
-        try:
-            subprocess.run(command, check=True, capture_output=True)
-        except subprocess.CalledProcessError as e:
-            logger.error(f"Failed to compile {e.output}")
-            return False, e.stderr.decode()
+    command = ['defects4j', 'compile', '-w', version_path]
+    try:
+        subprocess.run(command, check=True, cwd=version_path, capture_output=True)
+        return True, ""
+    except subprocess.CalledProcessError as e:
+        logger.error(f"Failed to compile {e.output}")
+        return False, e.stderr.decode()
+    # for class_name in class_names:
+    #     classpath = validPath(bug, class_name, version)
+    #     command = ['javac', classpath]
+    #     # command = ['javac', '-cp', classpath, classpath]
+    #     try:
+    #         subprocess.run(command, check=True, capture_output=True)
+    #     except subprocess.CalledProcessError as e:
+    #         logger.error(f"Failed to compile {e.output}")
+    #         return False, e.stderr.decode()
     
 
 def run_maven_classpath(project_dir):
@@ -138,16 +146,26 @@ def generate_evosuite_test(classpath: str, testclass: str, version_path: str, is
      # $(echo $EVOSUITE) -class className -projectCP pathToClassFiles
     testclass = testclass.replace(".java", "")
     testclass = testclass.replace("/", ".")
-    if isMaven:
-        classpath = str(version_path) + "/target/classes" + extract_class_name(testclass, version_path)
-    else:
-        classpath = str(version_path) + extract_class_name(testclass, version_path)
+    # classpath = str(version_path) + "/build"
+    # if isMaven:
+    #     classpath = str(version_path) + "/target/classes" + extract_class_name(testclass, version_path)
+    # else:
+    #     classpath = str(version_path) + extract_class_name(testclass, version_path)
     # [:-1] to remove the last character which is a newline
+    # if "Closure" in str(version_path):
+    #     classpath += "/classes"
+    # elif "Mockito" in str(version_path):
+    #     classpath += "/classes/main"
+    # elif "Mockito" in str(version_path):
+    #     classpath = classpath.replace("/build", "")
+    classpath += "/target/classes"
+        
     print("classpath: ", classpath, " *** testclass:", testclass)
 
     command = [
        'java', '-jar', EVOSUITE_JAR, '-class', testclass, '-projectCP', classpath, '-base_dir', version_path
     ]
+
     try:
         subprocess.run(command, check=True)
         print("generated evosuite_test for", testclass)
@@ -168,6 +186,7 @@ if __name__ == '__main__':
 
     # NOTE: You can remove this is your JAVA_HOME is already set or modify it to point to the correct path
     # initialize_jenv()
+    breakornot = False
     for dataset in Dataset:
         # NOTE: Temporarily only testing the BEARS dataset
         if dataset is not Dataset.DEFECTS4J:
@@ -201,15 +220,23 @@ if __name__ == '__main__':
 
                 logger.debug(f"Failed class: {class_names}")
 
-
                 pom_file = os.path.join(version_path, 'pom.xml')
+                # if os.path.exists(pom_file):
+                #     breakornot = True
+                #     continue
+                # else:
+                #     nonmvnprojects.append([dataset.value, bug.name, version])
+                #     breakornot = False
+
                 # Compile the project if it has not been compiled yet
                 # NOTE: Remove this check if you want to recompile the project every time
-                if not (version_path / 'target').exists():
-                    if os.path.exists(pom_file):
-                        success, error_message = compile_project_maven(version_path)
-                    else:
-                        success, error_message = compile_project_javac(bug, class_names, version)
+                if True:
+                # not (version_path / 'target').exists():
+                    # if os.path.exists(pom_file):
+                    #     success, error_message = compile_project_maven(version_path)
+                    # else:
+                    print("hii")
+                    success, error_message = compile_project_javac(bug, class_names, version, version_path)
                     
                     # If project was not compiled successfully, add it to the list of failed projects
                     # and continue with the next project.
@@ -225,8 +252,12 @@ if __name__ == '__main__':
                 else:
                     logger.info(f"Project already compiled: {dataset.value}-{bug.name}-{version}")
 
-                if os.path.exists(pom_file):
-                    run_maven_classpath(version_path)
+                # if os.path.exists(pom_file):
+                #     # breakornot = False
+                #     run_maven_classpath(version_path)
+                # else:
+                #     breakornot = True
+                #     continue
 
                 for testclass in class_names:
                     classpath = validPath(bug, testclass, version)
@@ -234,8 +265,11 @@ if __name__ == '__main__':
                     #generate_randoop_test(classpath, testclass, version, str(output_dir))
                     generate_evosuite_test(classpath, testclass, version_path, os.path.exists(pom_file))
                     logger.info(f"Test generation completed for {dataset.value}-{bug.name}-{version}")
-    
 
+        # if breakornot:
+        #     continue
+
+    
     # Save the failed project data to a JSON file
     with open('failed_projects_compile.json', 'w') as file:
         json.dump(FAILED_PROJECTS_compile, file, indent=4)
@@ -243,6 +277,6 @@ if __name__ == '__main__':
     with open('failed_projects_evosuite.json', 'w') as file:
         json.dump(failed_evosuite_project, file, indent=4)
 
-    with open('passed_projects_evosuite.json', 'w') as file:
-        json.dump(passed_evosuite_project, file, indent=4)
+    with open('non-mvnprojects.json', 'w') as file:
+        json.dump(nonmvnprojects, file, indent=4)
 
