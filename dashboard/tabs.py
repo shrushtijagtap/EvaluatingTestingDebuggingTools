@@ -10,14 +10,10 @@ import json
 repo_data_path = path.abspath(path.join(path.dirname(__file__), '..'))
 
 y_labels = {
-    'CChange': '# Changed Classes',
-    'MChange': '# Changed Methods',
-    'LChange': '# Changed Lines',
-    'CB': 'Cyclomatic complexity Bug',
-    'CP': 'Cyclomatic complexity Fix',
-    'CC': 'Complexity Change',
-    'LD': 'Levenshtein Distance',
-    'CodeBLEU': 'CodeBLEU'
+    'LD R': 'Levenshtein Distance for Randoop',
+    'LD E': 'Levenshtein Distance for Evosuite',
+    'CodeBLEU R': 'CodeBLEU for Randoop',
+    'CodeBLEU E': 'CodeBLEU for Evosuite'
 }
 
 
@@ -38,10 +34,7 @@ def load_json_data(file_path) -> list:
     for bug_id, metrics in data.items():
         entry = {'Bug ID': bug_id}
         for metric, value in metrics.items():
-            if metric in ['LD', 'CodeBLEU']:
-                entry[metric] = ', '.join([f'{num}' for file, num in value.items()])
-            else:
-                entry[metric] = value
+            entry[metric] = ', '.join([f'{num}' for file, num in value.items()])
 
         metrics_summary.append(entry)
 
@@ -99,7 +92,7 @@ def make_tab(tab_name: str):
         # Create pandas dataframe
         df_metrics = pd.DataFrame(data)
 
-    metrics = ['CChange', 'MChange', 'LChange', 'LD', 'CB', 'CP', 'CC', 'CodeBLEU']
+    metrics = ['LD R', 'LD E', 'CodeBLEU R', 'CodeBLEU E']
 
     plots = [dcc.Graph(figure=create_box_plot(df_metrics, metric)) for metric in metrics]
 
