@@ -1,0 +1,26 @@
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 12:12:44  ######
+Mode: regression
+Parameters:
+ -g randoop
+ -p JacksonCore
+ -v 2b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JacksonCore/modified_classes/2.src
+ -s 1002
+Created test suite archive: JacksonCore-2b-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J_FinalProjectWithTests/JacksonCore_2/Buggy-Version/JacksonCore/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 12:17:06  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 00:08:51  ######
+Mode: error-revealing
+Parameters:
+ -g randoop
+ -p JacksonCore
+ -v 2b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/JacksonCore/modified_classes/2.src
+ -s 1002
+Created test suite archive: JacksonCore-2b-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Defects4J/JacksonCore_2/Buggy-Version/JacksonCore/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 00:12:57  ######

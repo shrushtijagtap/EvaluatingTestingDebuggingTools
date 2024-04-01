@@ -1,0 +1,13 @@
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 19:36:21  ######
+Mode: regression
+Parameters:
+ -g randoop
+ -p Chart
+ -v 3f
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Chart/modified_classes/3.src
+ -s 1003
+Created test suite archive: Chart-3f-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J_FinalProjectWithTests/Chart_3/Patched-Version/Chart/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 19:40:45  ######

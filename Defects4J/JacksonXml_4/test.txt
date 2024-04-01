@@ -1,1 +1,4 @@
 com.fasterxml.jackson.dataformat.xml.misc.RootNameTest.testDynamicRootName
+com.fasterxml.jackson.dataformat.xml.ser.RandoopRegressionTest1.test597
+com.fasterxml.jackson.dataformat.xml.ser.RandoopRegressionTest1.test509
+com.fasterxml.jackson.dataformat.xml.ser.RandoopRegressionTest1.test586

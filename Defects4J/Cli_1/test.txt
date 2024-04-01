@@ -1,1 +1,2 @@
 org.apache.commons.cli.bug.BugCLI13Test.testCLI13
+org.apache.commons.cli.RandoopRegressionTest0.test284

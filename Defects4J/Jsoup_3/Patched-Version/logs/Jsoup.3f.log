@@ -11,3 +11,16 @@ Parameters:
 Created test suite archive: Jsoup-3f-evosuite.1.tar.bz2
 Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J-Pending/Jsoup_3/Patched-Version/Jsoup/evosuite/1
 ######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-30 19:01:33  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 17:55:30  ######
+Mode: regression
+Parameters:
+ -g randoop
+ -p Jsoup
+ -v 3f
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Jsoup/modified_classes/3.src
+ -s 1003
+Created test suite archive: Jsoup-3f-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J_FinalProjectWithTests/Jsoup_3/Patched-Version/Jsoup/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 18:02:22  ######

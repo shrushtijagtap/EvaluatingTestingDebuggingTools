@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.mockito.release.comparison.PomComparatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-03-30T06:58:13" hostname="Shrushtis-MacBook-Air.local" time="0.018">
+<testsuite name="org.mockito.release.comparison.PomComparatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-04-01T21:10:46" hostname="Shrushtis-MacBook-Air.local" time="0.023">
   <properties/>
-  <testcase name="compares poms" classname="org.mockito.release.comparison.PomComparatorTest" time="0.016"/>
+  <testcase name="compares poms" classname="org.mockito.release.comparison.PomComparatorTest" time="0.021"/>
   <testcase name="does not allow null content" classname="org.mockito.release.comparison.PomComparatorTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -1,0 +1,25 @@
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 12:47:16  ######
+Mode: error-revealing
+Parameters:
+ -g randoop
+ -p Gson
+ -v 1b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Gson/modified_classes/1.src
+ -s 1001
+Test generator (randoop) did not generate any tests!
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 12:51:23  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 12:51:27  ######
+Mode: regression
+Parameters:
+ -g randoop
+ -p Gson
+ -v 1b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Gson/modified_classes/1.src
+ -s 1001
+Created test suite archive: Gson-1b-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Defects4J/Gson_1/Buggy-Version/Gson/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 12:55:35  ######

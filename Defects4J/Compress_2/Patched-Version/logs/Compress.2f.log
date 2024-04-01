@@ -1,0 +1,13 @@
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 10:32:02  ######
+Mode: regression
+Parameters:
+ -g randoop
+ -p Compress
+ -v 2f
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Compress/modified_classes/2.src
+ -s 1002
+Created test suite archive: Compress-2f-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J_FinalProjectWithTests/Compress_2/Patched-Version/Compress/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 10:36:19  ######

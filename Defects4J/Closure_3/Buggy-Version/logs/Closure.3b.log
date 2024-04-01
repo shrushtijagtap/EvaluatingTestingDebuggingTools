@@ -11,3 +11,41 @@ Parameters:
 Created test suite archive: Closure-3b-evosuite.1.tar.bz2
 Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J-Pending/Closure_3/Buggy-Version/Closure/evosuite/1
 ######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-30 17:30:55  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 15:02:06  ######
+Mode: regression
+Parameters:
+ -g randoop
+ -p Closure
+ -v 3b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Closure/modified_classes/3.src
+ -s 1003
+Created test suite archive: Closure-3b-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/Defects4J_FinalProjectWithTests/Closure_3/Buggy-Version/Closure/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-03-31 15:06:20  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 02:26:54  ######
+Mode: error-revealing
+Parameters:
+ -g randoop
+ -p Closure
+ -v 3b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Closure/modified_classes/3.src
+ -s 1003
+Test generator (randoop) did not generate any tests!
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 02:31:04  ######
+######  Start test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 02:31:21  ######
+Mode: regression
+Parameters:
+ -g randoop
+ -p Closure
+ -v 3b
+ -n 1
+ -b 240
+ -c /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/projects/Closure/modified_classes/3.src
+ -s 1003
+Created test suite archive: Closure-3b-randoop.1.tar.bz2
+Moved test suite archive to output directory: /Users/shrushtijagtap/uiuc/Spring2024/CS527/CS527-Project/Defects4J/Closure_3/Buggy-Version/Closure/randoop/1
+######  End test generation  /Users/shrushtijagtap/uiuc/Spring2024/CS527/Project/Defrepo/defects4j/framework/bin/gen_tests.pl: 2024-04-01 02:35:34  ######

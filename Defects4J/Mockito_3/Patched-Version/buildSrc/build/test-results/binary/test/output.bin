@@ -1,23 +1,23 @@
-h00:00:35.945 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Fetching v1.10.10 from the repo
-v00:00:35.947 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Loading all commits between v1.10.10 and HEAD
-h00:00:35.976 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Fetching v1.10.10 from the repo
-v00:00:35.976 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Loading all commits between v1.10.10 and HEAD
-h00:00:35.978 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Fetching v1.10.10 from the repo
-v00:00:35.978 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Loading all commits between v1.10.10 and HEAD
-+*[00:00:36.223 [Test worker] INFO  o.m.r.exec.DefaultProcessRunner - Executing command: [ls]
--,®00:00:36.300 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-2.zip
--,W00:00:36.302 [Test worker] INFO  o.m.release.comparison.ZipCompare - 4 entries matched
--,®00:00:36.302 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-2.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-1.zip
--,W00:00:36.302 [Test worker] INFO  o.m.release.comparison.ZipCompare - 4 entries matched
--,®00:00:36.302 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-3.zip
--,^00:00:36.302 [Test worker] INFO  o.m.release.comparison.ZipCompare - x/y/4.txt does not match
--,W00:00:36.302 [Test worker] INFO  o.m.release.comparison.ZipCompare - 3 entries matched
--,]00:00:36.302 [Test worker] INFO  o.m.release.comparison.ZipCompare - 1 entries did not match
--,®00:00:36.302 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-4.zip
--,É00:00:36.303 [Test worker] INFO  o.m.release.comparison.ZipCompare - x/y/4.txt not found in /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-4.zip
--,W00:00:36.303 [Test worker] INFO  o.m.release.comparison.ZipCompare - 3 entries matched
--,]00:00:36.303 [Test worker] INFO  o.m.release.comparison.ZipCompare - 1 entries did not match
--,®00:00:36.303 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-5.zip
--,Å00:00:36.303 [Test worker] INFO  o.m.release.comparison.ZipCompare - x.txt not found in /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit7676259081271535680/junit6100274293430342499/zip-1.zip
--,W00:00:36.303 [Test worker] INFO  o.m.release.comparison.ZipCompare - 4 entries matched
--,]00:00:36.303 [Test worker] INFO  o.m.release.comparison.ZipCompare - 1 entries did not match
+h14:14:24.637 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Fetching v1.10.10 from the repo
+v14:14:24.639 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Loading all commits between v1.10.10 and HEAD
+h14:14:24.680 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Fetching v1.10.10 from the repo
+v14:14:24.680 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Loading all commits between v1.10.10 and HEAD
+h14:14:24.683 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Fetching v1.10.10 from the repo
+v14:14:24.683 [Test worker] INFO  o.m.r.n.vcs.GitContributionsProvider - Loading all commits between v1.10.10 and HEAD
++*[14:14:24.916 [Test worker] INFO  o.m.r.exec.DefaultProcessRunner - Executing command: [ls]
+-,®14:14:25.001 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-2.zip
+-,W14:14:25.002 [Test worker] INFO  o.m.release.comparison.ZipCompare - 4 entries matched
+-,®14:14:25.002 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-2.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-1.zip
+-,W14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - 4 entries matched
+-,®14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-3.zip
+-,^14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - x/y/4.txt does not match
+-,W14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - 3 entries matched
+-,]14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - 1 entries did not match
+-,®14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-4.zip
+-,É14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - x/y/4.txt not found in /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-4.zip
+-,W14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - 3 entries matched
+-,]14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - 1 entries did not match
+-,®14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - Comparing /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-1.zip with /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-5.zip
+-,Å14:14:25.003 [Test worker] INFO  o.m.release.comparison.ZipCompare - x.txt not found in /var/folders/fp/r3q888xd0pq7wl45t_l61g100000gn/T/junit1061039282243375112/junit3095161306679481161/zip-1.zip
+-,W14:14:25.004 [Test worker] INFO  o.m.release.comparison.ZipCompare - 4 entries matched
+-,]14:14:25.004 [Test worker] INFO  o.m.release.comparison.ZipCompare - 1 entries did not match

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="testutil.OfflineCheckerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-03-30T06:54:37" hostname="Shrushtis-MacBook-Air.local" time="0.037">
+<testsuite name="testutil.OfflineCheckerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-01T21:05:50" hostname="Shrushtis-MacBook-Air.local" time="0.133">
   <properties/>
-  <testcase name="knows when is offline" classname="testutil.OfflineCheckerTest" time="0.037"/>
+  <testcase name="knows when is offline" classname="testutil.OfflineCheckerTest" time="0.133"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

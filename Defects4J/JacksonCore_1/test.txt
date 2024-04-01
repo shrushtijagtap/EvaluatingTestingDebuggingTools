@@ -1,1 +1,7 @@
 com.fasterxml.jackson.core.json.TestParserNonStandard.testAllowNaN
+com.fasterxml.jackson.core.util.RandoopRegressionTest0.test022
+com.fasterxml.jackson.core.util.RandoopRegressionTest0.test253
+com.fasterxml.jackson.core.util.RandoopRegressionTest0.test320
+com.fasterxml.jackson.core.util.RandoopRegressionTest0.test022 
+com.fasterxml.jackson.core.util.RandoopRegressionTest0.test253
+com.fasterxml.jackson.core.util.RandoopRegressionTest0.test320

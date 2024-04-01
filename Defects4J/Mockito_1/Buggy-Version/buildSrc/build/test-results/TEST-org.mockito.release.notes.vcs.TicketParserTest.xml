@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.mockito.release.notes.vcs.TicketParserTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-03-30T06:45:50" hostname="Shrushtis-MacBook-Air.local" time="0.018">
+<testsuite name="org.mockito.release.notes.vcs.TicketParserTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-04-01T20:52:55" hostname="Shrushtis-MacBook-Air.local" time="0.057">
   <properties/>
-  <testcase name="no referenced tickets" classname="org.mockito.release.notes.vcs.TicketParserTest" time="0.011"/>
-  <testcase name="knows referenced tickets" classname="org.mockito.release.notes.vcs.TicketParserTest" time="0.006"/>
+  <testcase name="no referenced tickets" classname="org.mockito.release.notes.vcs.TicketParserTest" time="0.026"/>
+  <testcase name="knows referenced tickets" classname="org.mockito.release.notes.vcs.TicketParserTest" time="0.03"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
