@@ -5,14 +5,14 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class RegressionTest0 {
+public class RandoopRegressionTest0 {
 
     public static boolean debug = false;
 
     @Test
     public void test001() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test001");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test001");
         // The following exception was thrown during execution in test generation
         try {
             long long1 = com.fasterxml.jackson.core.io.NumberInput.parseLong("");
@@ -25,7 +25,7 @@ public class RegressionTest0 {
     @Test
     public void test002() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test002");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test002");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = com.fasterxml.jackson.core.io.NumberInput.parseBigDecimal("hi!");
@@ -38,7 +38,7 @@ public class RegressionTest0 {
     @Test
     public void test003() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test003");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test003");
         char[] charArray0 = null;
         // The following exception was thrown during execution in test generation
         try {
@@ -52,7 +52,7 @@ public class RegressionTest0 {
     @Test
     public void test004() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test004");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test004");
         // The following exception was thrown during execution in test generation
         try {
             double double1 = com.fasterxml.jackson.core.io.NumberInput.parseDouble("hi!");
@@ -65,7 +65,7 @@ public class RegressionTest0 {
     @Test
     public void test005() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test005");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test005");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -87,7 +87,7 @@ public class RegressionTest0 {
     @Test
     public void test006() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test006");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test006");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         // The following exception was thrown during execution in test generation
@@ -102,7 +102,7 @@ public class RegressionTest0 {
     @Test
     public void test007() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test007");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test007");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = com.fasterxml.jackson.core.io.NumberInput.parseBigDecimal("\n");
@@ -115,7 +115,7 @@ public class RegressionTest0 {
     @Test
     public void test008() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test008");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test008");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -133,7 +133,7 @@ public class RegressionTest0 {
     @Test
     public void test009() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test009");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test009");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -153,7 +153,7 @@ public class RegressionTest0 {
     @Test
     public void test010() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test010");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test010");
         // The following exception was thrown during execution in test generation
         try {
             double double1 = com.fasterxml.jackson.core.io.NumberInput.parseDouble("JSON");
@@ -166,7 +166,7 @@ public class RegressionTest0 {
     @Test
     public void test011() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test011");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test011");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -191,7 +191,7 @@ public class RegressionTest0 {
     @Test
     public void test012() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test012");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test012");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = com.fasterxml.jackson.core.util.TextBuffer.NO_CHARS;
@@ -212,7 +212,7 @@ public class RegressionTest0 {
     @Test
     public void test013() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test013");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test013");
         char[] charArray0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.SPACES;
         // The following exception was thrown during execution in test generation
         try {
@@ -230,7 +230,7 @@ public class RegressionTest0 {
     @Test
     public void test014() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test014");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test014");
         long long2 = com.fasterxml.jackson.core.io.NumberInput.parseAsLong("", (long) 4);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 4L + "'", long2 == 4L);
     }
@@ -238,7 +238,7 @@ public class RegressionTest0 {
     @Test
     public void test015() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test015");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test015");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -260,7 +260,7 @@ public class RegressionTest0 {
     @Test
     public void test016() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test016");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test016");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -279,7 +279,7 @@ public class RegressionTest0 {
     @Test
     public void test017() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test017");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test017");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -298,7 +298,7 @@ public class RegressionTest0 {
     @Test
     public void test018() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test018");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test018");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -322,7 +322,7 @@ public class RegressionTest0 {
     @Test
     public void test019() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test019");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test019");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -362,7 +362,7 @@ public class RegressionTest0 {
     @Test
     public void test020() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test020");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test020");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -384,7 +384,7 @@ public class RegressionTest0 {
     @Test
     public void test021() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test021");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test021");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -422,7 +422,7 @@ public class RegressionTest0 {
     @Test
     public void test022() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test022");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test022");
         com.fasterxml.jackson.core.JsonToken jsonToken0 = com.fasterxml.jackson.core.JsonToken.START_OBJECT;
         char[] charArray1 = jsonToken0.asCharArray();
         // The following exception was thrown during execution in test generation
@@ -442,7 +442,7 @@ public class RegressionTest0 {
     @Test
     public void test023() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test023");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test023");
         int int2 = com.fasterxml.jackson.core.io.NumberInput.parseAsInt("\n", 0);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 0 + "'", int2 == 0);
     }
@@ -450,7 +450,7 @@ public class RegressionTest0 {
     @Test
     public void test024() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test024");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test024");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -495,7 +495,7 @@ public class RegressionTest0 {
     @Test
     public void test025() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test025");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test025");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -541,7 +541,7 @@ public class RegressionTest0 {
     @Test
     public void test026() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test026");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test026");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -558,7 +558,7 @@ public class RegressionTest0 {
     @Test
     public void test027() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test027");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test027");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -609,7 +609,7 @@ public class RegressionTest0 {
     @Test
     public void test028() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test028");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test028");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -628,7 +628,7 @@ public class RegressionTest0 {
     @Test
     public void test029() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test029");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test029");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = com.fasterxml.jackson.core.util.TextBuffer.NO_CHARS;
@@ -649,7 +649,7 @@ public class RegressionTest0 {
     @Test
     public void test030() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test030");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test030");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory(objectCodec1);
@@ -692,7 +692,7 @@ public class RegressionTest0 {
     @Test
     public void test031() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test031");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test031");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -712,7 +712,7 @@ public class RegressionTest0 {
     @Test
     public void test032() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test032");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test032");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -735,7 +735,7 @@ public class RegressionTest0 {
     @Test
     public void test033() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test033");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test033");
         int int2 = com.fasterxml.jackson.core.io.NumberInput.parseAsInt("\n", 3);
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + 3 + "'", int2 == 3);
     }
@@ -743,7 +743,7 @@ public class RegressionTest0 {
     @Test
     public void test034() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test034");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test034");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -761,7 +761,7 @@ public class RegressionTest0 {
     @Test
     public void test035() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test035");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test035");
         boolean boolean2 = com.fasterxml.jackson.core.io.NumberInput.inLongRange("", true);
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + true + "'", boolean2 == true);
     }
@@ -769,7 +769,7 @@ public class RegressionTest0 {
     @Test
     public void test036() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test036");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test036");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -786,7 +786,7 @@ public class RegressionTest0 {
     @Test
     public void test037() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test037");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test037");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -834,7 +834,7 @@ public class RegressionTest0 {
     @Test
     public void test038() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test038");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test038");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -920,7 +920,7 @@ public class RegressionTest0 {
     @Test
     public void test039() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test039");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test039");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -950,7 +950,7 @@ public class RegressionTest0 {
     @Test
     public void test040() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test040");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test040");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -972,7 +972,7 @@ public class RegressionTest0 {
     @Test
     public void test041() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test041");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test041");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -1003,7 +1003,7 @@ public class RegressionTest0 {
     @Test
     public void test042() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test042");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test042");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory(objectCodec1);
@@ -1040,7 +1040,7 @@ public class RegressionTest0 {
     @Test
     public void test043() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test043");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test043");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -1171,7 +1171,7 @@ public class RegressionTest0 {
     @Test
     public void test044() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test044");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test044");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = com.fasterxml.jackson.core.util.TextBuffer.NO_CHARS;
@@ -1193,7 +1193,7 @@ public class RegressionTest0 {
     @Test
     public void test045() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test045");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test045");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -1258,7 +1258,7 @@ public class RegressionTest0 {
     @Test
     public void test046() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test046");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test046");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = defaultPrettyPrinter1._rootSeparator;
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler3 = null;
@@ -1284,7 +1284,7 @@ public class RegressionTest0 {
     @Test
     public void test047() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test047");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test047");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -1305,7 +1305,7 @@ public class RegressionTest0 {
     @Test
     public void test048() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test048");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test048");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -1343,7 +1343,7 @@ public class RegressionTest0 {
     @Test
     public void test049() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test049");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test049");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = com.fasterxml.jackson.core.util.TextBuffer.NO_CHARS;
@@ -1366,7 +1366,7 @@ public class RegressionTest0 {
     @Test
     public void test050() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test050");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test050");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -1443,7 +1443,7 @@ public class RegressionTest0 {
     @Test
     public void test051() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test051");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test051");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -1518,7 +1518,7 @@ public class RegressionTest0 {
     @Test
     public void test052() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test052");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test052");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -1632,7 +1632,7 @@ public class RegressionTest0 {
     @Test
     public void test053() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test053");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test053");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -1656,7 +1656,7 @@ public class RegressionTest0 {
     @Test
     public void test054() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test054");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test054");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -1786,7 +1786,7 @@ public class RegressionTest0 {
     @Test
     public void test055() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test055");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test055");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory(objectCodec1);
@@ -1827,7 +1827,7 @@ public class RegressionTest0 {
     @Test
     public void test056() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test056");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test056");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -1882,7 +1882,7 @@ public class RegressionTest0 {
     @Test
     public void test057() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test057");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test057");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -1893,7 +1893,7 @@ public class RegressionTest0 {
     @Test
     public void test058() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test058");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test058");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -1965,7 +1965,7 @@ public class RegressionTest0 {
     @Test
     public void test059() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test059");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test059");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -2053,7 +2053,7 @@ public class RegressionTest0 {
     @Test
     public void test060() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test060");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test060");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -2072,7 +2072,7 @@ public class RegressionTest0 {
     @Test
     public void test061() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test061");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test061");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -2089,7 +2089,7 @@ public class RegressionTest0 {
     @Test
     public void test062() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test062");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test062");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -2116,7 +2116,7 @@ public class RegressionTest0 {
     @Test
     public void test063() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test063");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test063");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -2165,7 +2165,7 @@ public class RegressionTest0 {
     @Test
     public void test064() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test064");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test064");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -2212,7 +2212,7 @@ public class RegressionTest0 {
     @Test
     public void test065() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test065");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test065");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -2253,7 +2253,7 @@ public class RegressionTest0 {
     @Test
     public void test066() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test066");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test066");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -2273,7 +2273,7 @@ public class RegressionTest0 {
     @Test
     public void test067() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test067");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test067");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -2335,7 +2335,7 @@ public class RegressionTest0 {
     @Test
     public void test068() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test068");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test068");
         boolean boolean2 = com.fasterxml.jackson.core.io.NumberInput.inLongRange("", false);
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + true + "'", boolean2 == true);
     }
@@ -2343,7 +2343,7 @@ public class RegressionTest0 {
     @Test
     public void test069() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test069");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test069");
         double double1 = com.fasterxml.jackson.core.io.NumberInput.parseDouble("2.2250738585072012e-308");
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 4.9E-324d + "'", double1 == 4.9E-324d);
     }
@@ -2351,7 +2351,7 @@ public class RegressionTest0 {
     @Test
     public void test070() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test070");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test070");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -2466,7 +2466,7 @@ public class RegressionTest0 {
     @Test
     public void test071() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test071");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test071");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -2486,7 +2486,7 @@ public class RegressionTest0 {
     @Test
     public void test072() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test072");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test072");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -2578,7 +2578,7 @@ public class RegressionTest0 {
     @Test
     public void test073() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test073");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test073");
         // The following exception was thrown during execution in test generation
         try {
             java.math.BigDecimal bigDecimal1 = com.fasterxml.jackson.core.io.NumberInput.parseBigDecimal("");
@@ -2591,7 +2591,7 @@ public class RegressionTest0 {
     @Test
     public void test074() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test074");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test074");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -2610,7 +2610,7 @@ public class RegressionTest0 {
     @Test
     public void test075() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test075");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test075");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -2655,7 +2655,7 @@ public class RegressionTest0 {
     @Test
     public void test076() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test076");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test076");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -2694,7 +2694,7 @@ public class RegressionTest0 {
     @Test
     public void test077() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test077");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test077");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -2706,7 +2706,7 @@ public class RegressionTest0 {
     @Test
     public void test078() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test078");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test078");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -2739,7 +2739,7 @@ public class RegressionTest0 {
     @Test
     public void test079() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test079");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test079");
         boolean boolean2 = com.fasterxml.jackson.core.io.NumberInput.inLongRange("com.fasterxml.jackson.core.JsonParseException: \n at [Source: CANONICALIZE_FIELD_NAMES; line: 10, column: 100]", true);
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
     }
@@ -2747,7 +2747,7 @@ public class RegressionTest0 {
     @Test
     public void test080() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test080");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test080");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -2866,7 +2866,7 @@ public class RegressionTest0 {
     @Test
     public void test081() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test081");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test081");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -2896,7 +2896,7 @@ public class RegressionTest0 {
     @Test
     public void test082() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test082");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test082");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -2913,7 +2913,7 @@ public class RegressionTest0 {
     @Test
     public void test083() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test083");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test083");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -2934,7 +2934,7 @@ public class RegressionTest0 {
     @Test
     public void test084() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test084");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test084");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -3006,7 +3006,7 @@ public class RegressionTest0 {
     @Test
     public void test085() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test085");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test085");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -3077,7 +3077,7 @@ public class RegressionTest0 {
     @Test
     public void test086() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test086");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test086");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -3102,7 +3102,7 @@ public class RegressionTest0 {
     @Test
     public void test087() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test087");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test087");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -3223,7 +3223,7 @@ public class RegressionTest0 {
     @Test
     public void test088() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test088");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test088");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -3267,7 +3267,7 @@ public class RegressionTest0 {
     @Test
     public void test089() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test089");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test089");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -3314,7 +3314,7 @@ public class RegressionTest0 {
     @Test
     public void test090() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test090");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test090");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -3333,7 +3333,7 @@ public class RegressionTest0 {
     @Test
     public void test091() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test091");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test091");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -3438,7 +3438,7 @@ public class RegressionTest0 {
     @Test
     public void test092() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test092");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test092");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -3541,7 +3541,7 @@ public class RegressionTest0 {
     @Test
     public void test093() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test093");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test093");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -3568,7 +3568,7 @@ public class RegressionTest0 {
     @Test
     public void test094() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test094");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test094");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -3670,7 +3670,7 @@ public class RegressionTest0 {
     @Test
     public void test095() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test095");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test095");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -3757,7 +3757,7 @@ public class RegressionTest0 {
     @Test
     public void test096() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test096");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test096");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -3852,7 +3852,7 @@ public class RegressionTest0 {
     @Test
     public void test097() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test097");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test097");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -3911,7 +3911,7 @@ public class RegressionTest0 {
     @Test
     public void test098() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test098");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test098");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -3995,7 +3995,7 @@ public class RegressionTest0 {
     @Test
     public void test099() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test099");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test099");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -4085,7 +4085,7 @@ public class RegressionTest0 {
     @Test
     public void test100() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test100");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test100");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -4174,7 +4174,7 @@ public class RegressionTest0 {
     @Test
     public void test101() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test101");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test101");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -4284,7 +4284,7 @@ public class RegressionTest0 {
     @Test
     public void test102() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test102");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test102");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -4337,7 +4337,7 @@ public class RegressionTest0 {
     @Test
     public void test103() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test103");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test103");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -4430,7 +4430,7 @@ public class RegressionTest0 {
     @Test
     public void test104() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test104");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test104");
         // The following exception was thrown during execution in test generation
         try {
             double double1 = com.fasterxml.jackson.core.io.NumberInput.parseDouble("com.fasterxml.jackson.core.JsonParseException: \n\n at [Source: CANONICALIZE_FIELD_NAMES; line: 10, column: 100]");
@@ -4443,7 +4443,7 @@ public class RegressionTest0 {
     @Test
     public void test105() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test105");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test105");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -4556,7 +4556,7 @@ public class RegressionTest0 {
     @Test
     public void test106() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test106");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test106");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -4587,7 +4587,7 @@ public class RegressionTest0 {
     @Test
     public void test107() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test107");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test107");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -4604,7 +4604,7 @@ public class RegressionTest0 {
     @Test
     public void test108() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test108");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test108");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -4630,7 +4630,7 @@ public class RegressionTest0 {
     @Test
     public void test109() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test109");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test109");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -4690,7 +4690,7 @@ public class RegressionTest0 {
     @Test
     public void test110() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test110");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test110");
         // The following exception was thrown during execution in test generation
         try {
             int int1 = com.fasterxml.jackson.core.io.NumberInput.parseInt("com.fasterxml.jackson.core.JsonParseException: \n\n at [Source: CANONICALIZE_FIELD_NAMES; line: 10, column: 100]");
@@ -4703,7 +4703,7 @@ public class RegressionTest0 {
     @Test
     public void test111() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test111");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test111");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -4744,7 +4744,7 @@ public class RegressionTest0 {
     @Test
     public void test112() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test112");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test112");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -4789,7 +4789,7 @@ public class RegressionTest0 {
     @Test
     public void test113() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test113");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test113");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -4823,7 +4823,7 @@ public class RegressionTest0 {
     @Test
     public void test114() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test114");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test114");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -4912,7 +4912,7 @@ public class RegressionTest0 {
     @Test
     public void test115() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test115");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test115");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.InputStream inputStream4 = null;
@@ -4987,7 +4987,7 @@ public class RegressionTest0 {
     @Test
     public void test116() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test116");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test116");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -5081,7 +5081,7 @@ public class RegressionTest0 {
     @Test
     public void test117() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test117");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test117");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -5144,7 +5144,7 @@ public class RegressionTest0 {
     @Test
     public void test118() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test118");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test118");
         // The following exception was thrown during execution in test generation
         try {
             int int1 = com.fasterxml.jackson.core.io.NumberInput.parseInt(" ");
@@ -5157,7 +5157,7 @@ public class RegressionTest0 {
     @Test
     public void test119() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test119");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test119");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -5199,7 +5199,7 @@ public class RegressionTest0 {
     @Test
     public void test120() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test120");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test120");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -5228,7 +5228,7 @@ public class RegressionTest0 {
     @Test
     public void test121() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test121");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test121");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -5243,7 +5243,7 @@ public class RegressionTest0 {
     @Test
     public void test122() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test122");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test122");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -5333,7 +5333,7 @@ public class RegressionTest0 {
     @Test
     public void test123() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test123");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test123");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         byte[] byteArray2 = serializedString1.asQuotedUTF8();
         java.lang.String str3 = serializedString1.toString();
@@ -5436,7 +5436,7 @@ public class RegressionTest0 {
     @Test
     public void test124() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test124");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test124");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -5507,7 +5507,7 @@ public class RegressionTest0 {
     @Test
     public void test125() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test125");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test125");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -5538,7 +5538,7 @@ public class RegressionTest0 {
     @Test
     public void test126() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test126");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test126");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = com.fasterxml.jackson.core.util.TextBuffer.NO_CHARS;
@@ -5559,7 +5559,7 @@ public class RegressionTest0 {
     @Test
     public void test127() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test127");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test127");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -5650,7 +5650,7 @@ public class RegressionTest0 {
     @Test
     public void test128() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test128");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test128");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -5759,7 +5759,7 @@ public class RegressionTest0 {
     @Test
     public void test129() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test129");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test129");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -5835,7 +5835,7 @@ public class RegressionTest0 {
     @Test
     public void test130() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test130");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test130");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -5921,7 +5921,7 @@ public class RegressionTest0 {
     @Test
     public void test131() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test131");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test131");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -5980,7 +5980,7 @@ public class RegressionTest0 {
     @Test
     public void test132() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test132");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test132");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -6002,7 +6002,7 @@ public class RegressionTest0 {
     @Test
     public void test133() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test133");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test133");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -6094,7 +6094,7 @@ public class RegressionTest0 {
     @Test
     public void test134() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test134");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test134");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -6189,7 +6189,7 @@ public class RegressionTest0 {
     @Test
     public void test135() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test135");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test135");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -6213,7 +6213,7 @@ public class RegressionTest0 {
     @Test
     public void test136() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test136");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test136");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -6239,7 +6239,7 @@ public class RegressionTest0 {
     @Test
     public void test137() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test137");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test137");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -6303,7 +6303,7 @@ public class RegressionTest0 {
     @Test
     public void test138() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test138");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test138");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -6322,7 +6322,7 @@ public class RegressionTest0 {
     @Test
     public void test139() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test139");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test139");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter0 = null;
         com.fasterxml.jackson.core.io.SerializedString serializedString2 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str3 = serializedString2.toString();
@@ -6371,7 +6371,7 @@ public class RegressionTest0 {
     @Test
     public void test140() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test140");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test140");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -6415,7 +6415,7 @@ public class RegressionTest0 {
     @Test
     public void test141() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test141");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test141");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -6475,7 +6475,7 @@ public class RegressionTest0 {
     @Test
     public void test142() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test142");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test142");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -6559,7 +6559,7 @@ public class RegressionTest0 {
     @Test
     public void test143() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test143");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test143");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -6656,7 +6656,7 @@ public class RegressionTest0 {
     @Test
     public void test144() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test144");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test144");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -6762,7 +6762,7 @@ public class RegressionTest0 {
     @Test
     public void test145() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test145");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test145");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -6902,7 +6902,7 @@ public class RegressionTest0 {
     @Test
     public void test146() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test146");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test146");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -6962,7 +6962,7 @@ public class RegressionTest0 {
     @Test
     public void test147() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test147");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test147");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -7059,7 +7059,7 @@ public class RegressionTest0 {
     @Test
     public void test148() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test148");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test148");
         int int2 = com.fasterxml.jackson.core.io.NumberInput.parseAsInt("hi!", (-1764724707));
         org.junit.Assert.assertTrue("'" + int2 + "' != '" + (-1764724707) + "'", int2 == (-1764724707));
     }
@@ -7067,7 +7067,7 @@ public class RegressionTest0 {
     @Test
     public void test149() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test149");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test149");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -7165,7 +7165,7 @@ public class RegressionTest0 {
     @Test
     public void test150() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test150");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test150");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -7208,7 +7208,7 @@ public class RegressionTest0 {
     @Test
     public void test151() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test151");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test151");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -7290,7 +7290,7 @@ public class RegressionTest0 {
     @Test
     public void test152() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test152");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test152");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -7402,7 +7402,7 @@ public class RegressionTest0 {
     @Test
     public void test153() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test153");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test153");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -7496,7 +7496,7 @@ public class RegressionTest0 {
     @Test
     public void test154() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test154");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test154");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -7532,7 +7532,7 @@ public class RegressionTest0 {
     @Test
     public void test155() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test155");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test155");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -7628,7 +7628,7 @@ public class RegressionTest0 {
     @Test
     public void test156() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test156");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test156");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -7719,7 +7719,7 @@ public class RegressionTest0 {
     @Test
     public void test157() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test157");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test157");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -7748,7 +7748,7 @@ public class RegressionTest0 {
     @Test
     public void test158() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test158");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test158");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -7847,7 +7847,7 @@ public class RegressionTest0 {
     @Test
     public void test159() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test159");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test159");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -7874,7 +7874,7 @@ public class RegressionTest0 {
     @Test
     public void test160() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test160");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test160");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -7969,7 +7969,7 @@ public class RegressionTest0 {
     @Test
     public void test161() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test161");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test161");
         boolean boolean2 = com.fasterxml.jackson.core.io.NumberInput.inLongRange("[Source: ; line: 0, column: 35]", true);
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
     }
@@ -7977,7 +7977,7 @@ public class RegressionTest0 {
     @Test
     public void test162() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test162");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test162");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter2 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString3 = defaultPrettyPrinter2._rootSeparator;
@@ -8010,7 +8010,7 @@ public class RegressionTest0 {
     @Test
     public void test163() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test163");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test163");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -8102,7 +8102,7 @@ public class RegressionTest0 {
     @Test
     public void test164() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test164");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test164");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -8220,7 +8220,7 @@ public class RegressionTest0 {
     @Test
     public void test165() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test165");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test165");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -8265,7 +8265,7 @@ public class RegressionTest0 {
     @Test
     public void test166() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test166");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test166");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -8332,7 +8332,7 @@ public class RegressionTest0 {
     @Test
     public void test167() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test167");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test167");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -8381,7 +8381,7 @@ public class RegressionTest0 {
     @Test
     public void test168() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test168");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test168");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -8471,7 +8471,7 @@ public class RegressionTest0 {
     @Test
     public void test169() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test169");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test169");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -8511,7 +8511,7 @@ public class RegressionTest0 {
     @Test
     public void test170() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test170");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test170");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -8606,7 +8606,7 @@ public class RegressionTest0 {
     @Test
     public void test171() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test171");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test171");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -8656,7 +8656,7 @@ public class RegressionTest0 {
     @Test
     public void test172() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test172");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test172");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -8689,7 +8689,7 @@ public class RegressionTest0 {
     @Test
     public void test173() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test173");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test173");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -8784,7 +8784,7 @@ public class RegressionTest0 {
     @Test
     public void test174() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test174");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test174");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -8819,7 +8819,7 @@ public class RegressionTest0 {
     @Test
     public void test175() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test175");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test175");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -8850,14 +8850,14 @@ public class RegressionTest0 {
     @Test
     public void test176() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test176");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test176");
         com.fasterxml.jackson.core.io.NumberInput numberInput0 = new com.fasterxml.jackson.core.io.NumberInput();
     }
 
     @Test
     public void test177() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test177");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test177");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -8899,7 +8899,7 @@ public class RegressionTest0 {
     @Test
     public void test178() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test178");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test178");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -9049,7 +9049,7 @@ public class RegressionTest0 {
     @Test
     public void test179() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test179");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test179");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -9072,7 +9072,7 @@ public class RegressionTest0 {
     @Test
     public void test180() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test180");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test180");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = com.fasterxml.jackson.core.util.TextBuffer.NO_CHARS;
@@ -9088,7 +9088,7 @@ public class RegressionTest0 {
     @Test
     public void test181() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test181");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test181");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -9122,7 +9122,7 @@ public class RegressionTest0 {
     @Test
     public void test182() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test182");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test182");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.InputStream inputStream4 = null;
@@ -9213,7 +9213,7 @@ public class RegressionTest0 {
     @Test
     public void test183() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test183");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test183");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -9270,7 +9270,7 @@ public class RegressionTest0 {
     @Test
     public void test184() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test184");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test184");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         java.lang.String str3 = serializedString1.toString();
@@ -9309,7 +9309,7 @@ public class RegressionTest0 {
     @Test
     public void test185() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test185");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test185");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -9328,7 +9328,7 @@ public class RegressionTest0 {
     @Test
     public void test186() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test186");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test186");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -9358,7 +9358,7 @@ public class RegressionTest0 {
     @Test
     public void test187() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test187");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test187");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -9376,7 +9376,7 @@ public class RegressionTest0 {
     @Test
     public void test188() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test188");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test188");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -9473,7 +9473,7 @@ public class RegressionTest0 {
     @Test
     public void test189() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test189");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test189");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -9624,7 +9624,7 @@ public class RegressionTest0 {
     @Test
     public void test190() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test190");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test190");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -9716,7 +9716,7 @@ public class RegressionTest0 {
     @Test
     public void test191() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test191");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test191");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.InputStream inputStream4 = null;
@@ -9791,7 +9791,7 @@ public class RegressionTest0 {
     @Test
     public void test192() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test192");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test192");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -9849,7 +9849,7 @@ public class RegressionTest0 {
     @Test
     public void test193() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test193");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test193");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -9933,7 +9933,7 @@ public class RegressionTest0 {
     @Test
     public void test194() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test194");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test194");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -10022,7 +10022,7 @@ public class RegressionTest0 {
     @Test
     public void test195() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test195");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test195");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -10114,7 +10114,7 @@ public class RegressionTest0 {
     @Test
     public void test196() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test196");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test196");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -10173,7 +10173,7 @@ public class RegressionTest0 {
     @Test
     public void test197() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test197");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test197");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -10237,7 +10237,7 @@ public class RegressionTest0 {
     @Test
     public void test198() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test198");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test198");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -10289,7 +10289,7 @@ public class RegressionTest0 {
     @Test
     public void test199() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test199");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test199");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -10381,7 +10381,7 @@ public class RegressionTest0 {
     @Test
     public void test200() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test200");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test200");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -10478,7 +10478,7 @@ public class RegressionTest0 {
     @Test
     public void test201() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test201");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test201");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -10528,7 +10528,7 @@ public class RegressionTest0 {
     @Test
     public void test202() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test202");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test202");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -10614,7 +10614,7 @@ public class RegressionTest0 {
     @Test
     public void test203() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test203");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test203");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -10718,7 +10718,7 @@ public class RegressionTest0 {
     @Test
     public void test204() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test204");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test204");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -10838,7 +10838,7 @@ public class RegressionTest0 {
     @Test
     public void test205() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test205");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test205");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.InputStream inputStream4 = null;
@@ -10922,7 +10922,7 @@ public class RegressionTest0 {
     @Test
     public void test206() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test206");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test206");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -11019,7 +11019,7 @@ public class RegressionTest0 {
     @Test
     public void test207() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test207");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test207");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -11061,7 +11061,7 @@ public class RegressionTest0 {
     @Test
     public void test208() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test208");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test208");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -11177,7 +11177,7 @@ public class RegressionTest0 {
     @Test
     public void test209() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test209");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test209");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -11281,7 +11281,7 @@ public class RegressionTest0 {
     @Test
     public void test210() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test210");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test210");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -11321,7 +11321,7 @@ public class RegressionTest0 {
     @Test
     public void test211() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test211");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test211");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -11425,7 +11425,7 @@ public class RegressionTest0 {
     @Test
     public void test212() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test212");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test212");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -11522,7 +11522,7 @@ public class RegressionTest0 {
     @Test
     public void test213() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test213");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test213");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -11622,7 +11622,7 @@ public class RegressionTest0 {
     @Test
     public void test214() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test214");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test214");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -11717,7 +11717,7 @@ public class RegressionTest0 {
     @Test
     public void test215() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test215");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test215");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -11735,7 +11735,7 @@ public class RegressionTest0 {
     @Test
     public void test216() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test216");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test216");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -11821,7 +11821,7 @@ public class RegressionTest0 {
     @Test
     public void test217() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test217");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test217");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -11885,7 +11885,7 @@ public class RegressionTest0 {
     @Test
     public void test218() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test218");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test218");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.InputStream inputStream4 = null;
@@ -11982,7 +11982,7 @@ public class RegressionTest0 {
     @Test
     public void test219() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test219");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test219");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -12096,7 +12096,7 @@ public class RegressionTest0 {
     @Test
     public void test220() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test220");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test220");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -12191,7 +12191,7 @@ public class RegressionTest0 {
     @Test
     public void test221() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test221");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test221");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -12297,7 +12297,7 @@ public class RegressionTest0 {
     @Test
     public void test222() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test222");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test222");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -12390,7 +12390,7 @@ public class RegressionTest0 {
     @Test
     public void test223() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test223");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test223");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -12484,7 +12484,7 @@ public class RegressionTest0 {
     @Test
     public void test224() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test224");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test224");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -12588,7 +12588,7 @@ public class RegressionTest0 {
     @Test
     public void test225() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test225");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test225");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -12637,7 +12637,7 @@ public class RegressionTest0 {
     @Test
     public void test226() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test226");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test226");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -12710,7 +12710,7 @@ public class RegressionTest0 {
     @Test
     public void test227() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test227");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test227");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         java.lang.String str3 = serializedString1.toString();
@@ -12746,7 +12746,7 @@ public class RegressionTest0 {
     @Test
     public void test228() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test228");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test228");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -12815,7 +12815,7 @@ public class RegressionTest0 {
     @Test
     public void test229() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test229");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test229");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -12910,7 +12910,7 @@ public class RegressionTest0 {
     @Test
     public void test230() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test230");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test230");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -12956,7 +12956,7 @@ public class RegressionTest0 {
     @Test
     public void test231() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test231");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test231");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory(objectCodec1);
@@ -13003,7 +13003,7 @@ public class RegressionTest0 {
     @Test
     public void test232() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test232");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test232");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -13102,7 +13102,7 @@ public class RegressionTest0 {
     @Test
     public void test233() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test233");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test233");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         int int3 = serializedString1.charLength();
@@ -13151,7 +13151,7 @@ public class RegressionTest0 {
     @Test
     public void test234() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test234");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test234");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -13248,7 +13248,7 @@ public class RegressionTest0 {
     @Test
     public void test235() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test235");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test235");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -13288,7 +13288,7 @@ public class RegressionTest0 {
     @Test
     public void test236() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test236");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test236");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -13383,7 +13383,7 @@ public class RegressionTest0 {
     @Test
     public void test237() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test237");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test237");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -13473,7 +13473,7 @@ public class RegressionTest0 {
     @Test
     public void test238() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test238");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test238");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -13499,7 +13499,7 @@ public class RegressionTest0 {
     @Test
     public void test239() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test239");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test239");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -13599,7 +13599,7 @@ public class RegressionTest0 {
     @Test
     public void test240() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test240");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test240");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -13668,7 +13668,7 @@ public class RegressionTest0 {
     @Test
     public void test241() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test241");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test241");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -13718,7 +13718,7 @@ public class RegressionTest0 {
     @Test
     public void test242() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test242");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test242");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -13807,7 +13807,7 @@ public class RegressionTest0 {
     @Test
     public void test243() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test243");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test243");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonParser.Feature feature1 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.disable(feature1);
@@ -13829,7 +13829,7 @@ public class RegressionTest0 {
     @Test
     public void test244() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test244");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test244");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.InputStream inputStream4 = null;
@@ -13903,7 +13903,7 @@ public class RegressionTest0 {
     @Test
     public void test245() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test245");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test245");
         long long2 = com.fasterxml.jackson.core.io.NumberInput.parseAsLong("[Source: INTERN_FIELD_NAMES; line: 10, column: -1]", (long) (-1764647525));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-1764647525L) + "'", long2 == (-1764647525L));
     }
@@ -13911,7 +13911,7 @@ public class RegressionTest0 {
     @Test
     public void test246() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test246");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test246");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -13946,7 +13946,7 @@ public class RegressionTest0 {
     @Test
     public void test247() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test247");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test247");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -14039,7 +14039,7 @@ public class RegressionTest0 {
     @Test
     public void test248() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test248");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test248");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -14081,7 +14081,7 @@ public class RegressionTest0 {
     @Test
     public void test249() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test249");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test249");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = com.fasterxml.jackson.core.util.TextBuffer.NO_CHARS;
@@ -14102,7 +14102,7 @@ public class RegressionTest0 {
     @Test
     public void test250() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test250");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test250");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -14197,7 +14197,7 @@ public class RegressionTest0 {
     @Test
     public void test251() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test251");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test251");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -14243,7 +14243,7 @@ public class RegressionTest0 {
     @Test
     public void test252() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test252");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test252");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -14342,7 +14342,7 @@ public class RegressionTest0 {
     @Test
     public void test253() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test253");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test253");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.toString();
@@ -14360,7 +14360,7 @@ public class RegressionTest0 {
     @Test
     public void test254() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test254");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test254");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -14392,7 +14392,7 @@ public class RegressionTest0 {
     @Test
     public void test255() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test255");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test255");
         com.fasterxml.jackson.core.JsonFactory jsonFactory0 = new com.fasterxml.jackson.core.JsonFactory();
         com.fasterxml.jackson.core.JsonParser.Feature feature1 = com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_NON_NUMERIC_NUMBERS;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = jsonFactory0.disable(feature1);
@@ -14409,7 +14409,7 @@ public class RegressionTest0 {
     @Test
     public void test256() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test256");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test256");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -14444,7 +14444,7 @@ public class RegressionTest0 {
     @Test
     public void test257() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test257");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test257");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -14534,7 +14534,7 @@ public class RegressionTest0 {
     @Test
     public void test258() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test258");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test258");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -14651,7 +14651,7 @@ public class RegressionTest0 {
     @Test
     public void test259() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test259");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test259");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -14676,7 +14676,7 @@ public class RegressionTest0 {
     @Test
     public void test260() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test260");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test260");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -14690,7 +14690,7 @@ public class RegressionTest0 {
     @Test
     public void test261() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test261");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test261");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -14778,7 +14778,7 @@ public class RegressionTest0 {
     @Test
     public void test262() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test262");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test262");
         com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer charsToNameCanonicalizer0 = com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer.createRoot();
         int int1 = charsToNameCanonicalizer0.collisionCount();
         com.fasterxml.jackson.core.ObjectCodec objectCodec2 = null;
@@ -14822,7 +14822,7 @@ public class RegressionTest0 {
     @Test
     public void test263() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test263");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test263");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -14850,7 +14850,7 @@ public class RegressionTest0 {
     @Test
     public void test264() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test264");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test264");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -14951,7 +14951,7 @@ public class RegressionTest0 {
     @Test
     public void test265() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test265");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test265");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -14982,7 +14982,7 @@ public class RegressionTest0 {
     @Test
     public void test266() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test266");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test266");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         char[] charArray3 = new char[] {};
@@ -15021,7 +15021,7 @@ public class RegressionTest0 {
     @Test
     public void test267() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test267");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test267");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -15046,7 +15046,7 @@ public class RegressionTest0 {
     @Test
     public void test268() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test268");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test268");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -15065,7 +15065,7 @@ public class RegressionTest0 {
     @Test
     public void test269() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test269");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test269");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = com.fasterxml.jackson.core.util.TextBuffer.NO_CHARS;
@@ -15087,7 +15087,7 @@ public class RegressionTest0 {
     @Test
     public void test270() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test270");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test270");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -15179,7 +15179,7 @@ public class RegressionTest0 {
     @Test
     public void test271() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test271");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test271");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler1 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext4 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler1, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream5 = null;
@@ -15270,7 +15270,7 @@ public class RegressionTest0 {
     @Test
     public void test272() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test272");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test272");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -15342,7 +15342,7 @@ public class RegressionTest0 {
     @Test
     public void test273() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test273");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test273");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         byte[] byteArray4 = iOContext3.allocBase64Buffer();
@@ -15442,7 +15442,7 @@ public class RegressionTest0 {
     @Test
     public void test274() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test274");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test274");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -15552,7 +15552,7 @@ public class RegressionTest0 {
     @Test
     public void test275() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test275");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test275");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -15645,7 +15645,7 @@ public class RegressionTest0 {
     @Test
     public void test276() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test276");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test276");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -15679,7 +15679,7 @@ public class RegressionTest0 {
     @Test
     public void test277() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test277");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test277");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.InputStream inputStream4 = null;
@@ -15746,7 +15746,7 @@ public class RegressionTest0 {
     @Test
     public void test278() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test278");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test278");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -15834,7 +15834,7 @@ public class RegressionTest0 {
     @Test
     public void test279() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test279");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test279");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -15850,7 +15850,7 @@ public class RegressionTest0 {
     @Test
     public void test280() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test280");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test280");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.toString();
@@ -15868,7 +15868,7 @@ public class RegressionTest0 {
     @Test
     public void test281() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test281");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test281");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -15926,7 +15926,7 @@ public class RegressionTest0 {
     @Test
     public void test282() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test282");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test282");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.InputStream inputStream4 = null;
@@ -15995,7 +15995,7 @@ public class RegressionTest0 {
     @Test
     public void test283() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test283");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test283");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -16050,7 +16050,7 @@ public class RegressionTest0 {
     @Test
     public void test284() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test284");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test284");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -16093,7 +16093,7 @@ public class RegressionTest0 {
     @Test
     public void test285() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test285");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test285");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -16120,7 +16120,7 @@ public class RegressionTest0 {
     @Test
     public void test286() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test286");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test286");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -16168,7 +16168,7 @@ public class RegressionTest0 {
     @Test
     public void test287() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test287");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test287");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -16234,7 +16234,7 @@ public class RegressionTest0 {
     @Test
     public void test288() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test288");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test288");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -16334,7 +16334,7 @@ public class RegressionTest0 {
     @Test
     public void test289() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test289");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test289");
         com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer charsToNameCanonicalizer0 = com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer.createRoot();
         com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer charsToNameCanonicalizer3 = charsToNameCanonicalizer0.makeChild(false, true);
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler4 = new com.fasterxml.jackson.core.util.BufferRecycler();
@@ -16416,7 +16416,7 @@ public class RegressionTest0 {
     @Test
     public void test290() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test290");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test290");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -16500,7 +16500,7 @@ public class RegressionTest0 {
     @Test
     public void test291() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test291");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test291");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -16573,7 +16573,7 @@ public class RegressionTest0 {
     @Test
     public void test292() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test292");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test292");
         char[] charArray0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.Lf2SpacesIndenter.SPACES;
         boolean boolean4 = com.fasterxml.jackson.core.io.NumberInput.inLongRange(charArray0, (-1764632815), (int) (short) 10, true);
         org.junit.Assert.assertNotNull(charArray0);
@@ -16586,7 +16586,7 @@ public class RegressionTest0 {
     @Test
     public void test293() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test293");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test293");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         int int3 = serializedString1.charLength();
@@ -16657,7 +16657,7 @@ public class RegressionTest0 {
     @Test
     public void test294() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test294");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test294");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -16764,7 +16764,7 @@ public class RegressionTest0 {
     @Test
     public void test295() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test295");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test295");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("hi!");
         char[] charArray2 = serializedString1.asQuotedChars();
         org.junit.Assert.assertNotNull(charArray2);
@@ -16776,7 +16776,7 @@ public class RegressionTest0 {
     @Test
     public void test296() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test296");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test296");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -16866,7 +16866,7 @@ public class RegressionTest0 {
     @Test
     public void test297() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test297");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test297");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -16959,7 +16959,7 @@ public class RegressionTest0 {
     @Test
     public void test298() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test298");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test298");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         com.fasterxml.jackson.core.ObjectCodec objectCodec4 = null;
@@ -17107,7 +17107,7 @@ public class RegressionTest0 {
     @Test
     public void test299() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test299");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test299");
         double double2 = com.fasterxml.jackson.core.io.NumberInput.parseAsDouble("\n", (double) 2000);
         org.junit.Assert.assertTrue("'" + double2 + "' != '" + 2000.0d + "'", double2 == 2000.0d);
     }
@@ -17115,7 +17115,7 @@ public class RegressionTest0 {
     @Test
     public void test300() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test300");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test300");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -17183,7 +17183,7 @@ public class RegressionTest0 {
     @Test
     public void test301() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test301");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test301");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -17267,7 +17267,7 @@ public class RegressionTest0 {
     @Test
     public void test302() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test302");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test302");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -17284,7 +17284,7 @@ public class RegressionTest0 {
     @Test
     public void test303() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test303");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test303");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -17342,7 +17342,7 @@ public class RegressionTest0 {
     @Test
     public void test304() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test304");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test304");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -17355,7 +17355,7 @@ public class RegressionTest0 {
     @Test
     public void test305() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test305");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test305");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -17480,7 +17480,7 @@ public class RegressionTest0 {
     @Test
     public void test306() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test306");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test306");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -17581,7 +17581,7 @@ public class RegressionTest0 {
     @Test
     public void test307() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test307");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test307");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -17626,7 +17626,7 @@ public class RegressionTest0 {
     @Test
     public void test308() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test308");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test308");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -17666,7 +17666,7 @@ public class RegressionTest0 {
     @Test
     public void test309() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test309");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test309");
         com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext0 = null;
         com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext4 = new com.fasterxml.jackson.core.json.JsonReadContext(jsonReadContext0, 0, 1000, (int) (short) 10);
         com.fasterxml.jackson.core.json.JsonReadContext jsonReadContext7 = jsonReadContext4.createChildObjectContext(0, (int) 'a');
@@ -17766,7 +17766,7 @@ public class RegressionTest0 {
     @Test
     public void test310() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test310");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test310");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -17874,7 +17874,7 @@ public class RegressionTest0 {
     @Test
     public void test311() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test311");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test311");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -17980,7 +17980,7 @@ public class RegressionTest0 {
     @Test
     public void test312() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test312");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test312");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -18045,7 +18045,7 @@ public class RegressionTest0 {
     @Test
     public void test313() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test313");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test313");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -18141,7 +18141,7 @@ public class RegressionTest0 {
     @Test
     public void test314() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test314");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test314");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -18186,7 +18186,7 @@ public class RegressionTest0 {
     @Test
     public void test315() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test315");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test315");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -18203,7 +18203,7 @@ public class RegressionTest0 {
     @Test
     public void test316() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test316");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test316");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -18260,7 +18260,7 @@ public class RegressionTest0 {
     @Test
     public void test317() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test317");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test317");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -18284,7 +18284,7 @@ public class RegressionTest0 {
     @Test
     public void test318() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test318");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test318");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -18342,7 +18342,7 @@ public class RegressionTest0 {
     @Test
     public void test319() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test319");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test319");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -18436,7 +18436,7 @@ public class RegressionTest0 {
     @Test
     public void test320() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test320");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test320");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -18555,7 +18555,7 @@ public class RegressionTest0 {
     @Test
     public void test321() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test321");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test321");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -18615,7 +18615,7 @@ public class RegressionTest0 {
     @Test
     public void test322() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test322");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test322");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -18708,7 +18708,7 @@ public class RegressionTest0 {
     @Test
     public void test323() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test323");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test323");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         char[] charArray3 = new char[] {};
@@ -18735,7 +18735,7 @@ public class RegressionTest0 {
     @Test
     public void test324() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test324");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test324");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -18836,7 +18836,7 @@ public class RegressionTest0 {
     @Test
     public void test325() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test325");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test325");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -18892,7 +18892,7 @@ public class RegressionTest0 {
     @Test
     public void test326() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test326");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test326");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -18990,7 +18990,7 @@ public class RegressionTest0 {
     @Test
     public void test327() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test327");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test327");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -19091,7 +19091,7 @@ public class RegressionTest0 {
     @Test
     public void test328() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test328");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test328");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -19128,7 +19128,7 @@ public class RegressionTest0 {
     @Test
     public void test329() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test329");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test329");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -19218,7 +19218,7 @@ public class RegressionTest0 {
     @Test
     public void test330() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test330");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test330");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -19325,7 +19325,7 @@ public class RegressionTest0 {
     @Test
     public void test331() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test331");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test331");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -19391,7 +19391,7 @@ public class RegressionTest0 {
     @Test
     public void test332() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test332");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test332");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -19435,7 +19435,7 @@ public class RegressionTest0 {
     @Test
     public void test333() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test333");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test333");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -19502,7 +19502,7 @@ public class RegressionTest0 {
     @Test
     public void test334() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test334");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test334");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -19598,7 +19598,7 @@ public class RegressionTest0 {
     @Test
     public void test335() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test335");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test335");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -19626,7 +19626,7 @@ public class RegressionTest0 {
     @Test
     public void test336() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test336");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test336");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -19734,7 +19734,7 @@ public class RegressionTest0 {
     @Test
     public void test337() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test337");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test337");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -19776,7 +19776,7 @@ public class RegressionTest0 {
     @Test
     public void test338() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test338");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test338");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -19820,7 +19820,7 @@ public class RegressionTest0 {
     @Test
     public void test339() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test339");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test339");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -19931,7 +19931,7 @@ public class RegressionTest0 {
     @Test
     public void test340() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test340");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test340");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -20037,7 +20037,7 @@ public class RegressionTest0 {
     @Test
     public void test341() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test341");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test341");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -20075,7 +20075,7 @@ public class RegressionTest0 {
     @Test
     public void test342() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test342");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test342");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -20176,7 +20176,7 @@ public class RegressionTest0 {
     @Test
     public void test343() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test343");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test343");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -20280,7 +20280,7 @@ public class RegressionTest0 {
     @Test
     public void test344() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test344");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test344");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -20319,7 +20319,7 @@ public class RegressionTest0 {
     @Test
     public void test345() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test345");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test345");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -20401,7 +20401,7 @@ public class RegressionTest0 {
     @Test
     public void test346() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test346");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test346");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -20437,7 +20437,7 @@ public class RegressionTest0 {
     @Test
     public void test347() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test347");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test347");
         com.fasterxml.jackson.core.io.IOContext iOContext0 = null;
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory(objectCodec1);
@@ -20474,7 +20474,7 @@ public class RegressionTest0 {
     @Test
     public void test348() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test348");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test348");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -20576,7 +20576,7 @@ public class RegressionTest0 {
     @Test
     public void test349() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test349");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test349");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -20670,7 +20670,7 @@ public class RegressionTest0 {
     @Test
     public void test350() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test350");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test350");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -20776,7 +20776,7 @@ public class RegressionTest0 {
     @Test
     public void test351() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test351");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test351");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -20819,7 +20819,7 @@ public class RegressionTest0 {
     @Test
     public void test352() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test352");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test352");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -20914,7 +20914,7 @@ public class RegressionTest0 {
     @Test
     public void test353() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test353");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test353");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -21027,7 +21027,7 @@ public class RegressionTest0 {
     @Test
     public void test354() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test354");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test354");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -21048,7 +21048,7 @@ public class RegressionTest0 {
     @Test
     public void test355() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test355");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test355");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -21087,7 +21087,7 @@ public class RegressionTest0 {
     @Test
     public void test356() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test356");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test356");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -21165,7 +21165,7 @@ public class RegressionTest0 {
     @Test
     public void test357() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test357");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test357");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -21223,7 +21223,7 @@ public class RegressionTest0 {
     @Test
     public void test358() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test358");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test358");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -21279,7 +21279,7 @@ public class RegressionTest0 {
     @Test
     public void test359() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test359");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test359");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         byte[] byteArray2 = serializedString1.asQuotedUTF8();
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler3 = new com.fasterxml.jackson.core.util.BufferRecycler();
@@ -21371,7 +21371,7 @@ public class RegressionTest0 {
     @Test
     public void test360() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test360");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test360");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -21458,7 +21458,7 @@ public class RegressionTest0 {
     @Test
     public void test361() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test361");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test361");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -21555,7 +21555,7 @@ public class RegressionTest0 {
     @Test
     public void test362() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test362");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test362");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -21659,7 +21659,7 @@ public class RegressionTest0 {
     @Test
     public void test363() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test363");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test363");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -21670,7 +21670,7 @@ public class RegressionTest0 {
     @Test
     public void test364() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test364");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test364");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -21767,7 +21767,7 @@ public class RegressionTest0 {
     @Test
     public void test365() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test365");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test365");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -21811,7 +21811,7 @@ public class RegressionTest0 {
     @Test
     public void test366() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test366");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test366");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -21888,7 +21888,7 @@ public class RegressionTest0 {
     @Test
     public void test367() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test367");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test367");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -21914,7 +21914,7 @@ public class RegressionTest0 {
     @Test
     public void test368() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test368");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test368");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -21931,7 +21931,7 @@ public class RegressionTest0 {
     @Test
     public void test369() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test369");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test369");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -21954,7 +21954,7 @@ public class RegressionTest0 {
     @Test
     public void test370() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test370");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test370");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -21998,7 +21998,7 @@ public class RegressionTest0 {
     @Test
     public void test371() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test371");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test371");
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory(objectCodec1);
         java.io.Reader reader3 = null;
@@ -22024,7 +22024,7 @@ public class RegressionTest0 {
     @Test
     public void test372() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test372");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test372");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -22120,7 +22120,7 @@ public class RegressionTest0 {
     @Test
     public void test373() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test373");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test373");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -22158,7 +22158,7 @@ public class RegressionTest0 {
     @Test
     public void test374() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test374");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test374");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -22202,7 +22202,7 @@ public class RegressionTest0 {
     @Test
     public void test375() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test375");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test375");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -22304,7 +22304,7 @@ public class RegressionTest0 {
     @Test
     public void test376() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test376");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test376");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -22376,7 +22376,7 @@ public class RegressionTest0 {
     @Test
     public void test377() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test377");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test377");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -22497,7 +22497,7 @@ public class RegressionTest0 {
     @Test
     public void test378() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test378");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test378");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -22612,7 +22612,7 @@ public class RegressionTest0 {
     @Test
     public void test379() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test379");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test379");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -22686,7 +22686,7 @@ public class RegressionTest0 {
     @Test
     public void test380() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test380");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test380");
         boolean boolean2 = com.fasterxml.jackson.core.io.NumberInput.inLongRange("[Source: CANONICALIZE_FIELD_NAMES; line: 10, column: 100]", false);
         org.junit.Assert.assertTrue("'" + boolean2 + "' != '" + false + "'", boolean2 == false);
     }
@@ -22694,7 +22694,7 @@ public class RegressionTest0 {
     @Test
     public void test381() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test381");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test381");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -22795,7 +22795,7 @@ public class RegressionTest0 {
     @Test
     public void test382() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test382");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test382");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -22842,7 +22842,7 @@ public class RegressionTest0 {
     @Test
     public void test383() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test383");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test383");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -22939,7 +22939,7 @@ public class RegressionTest0 {
     @Test
     public void test384() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test384");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test384");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -23004,7 +23004,7 @@ public class RegressionTest0 {
     @Test
     public void test385() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test385");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test385");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.toString();
@@ -23017,7 +23017,7 @@ public class RegressionTest0 {
     @Test
     public void test386() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test386");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test386");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -23119,7 +23119,7 @@ public class RegressionTest0 {
     @Test
     public void test387() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test387");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test387");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         char[] charArray3 = new char[] {};
@@ -23149,7 +23149,7 @@ public class RegressionTest0 {
     @Test
     public void test388() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test388");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test388");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -23245,7 +23245,7 @@ public class RegressionTest0 {
     @Test
     public void test389() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test389");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test389");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -23305,7 +23305,7 @@ public class RegressionTest0 {
     @Test
     public void test390() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test390");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test390");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.InputStream inputStream4 = null;
@@ -23380,7 +23380,7 @@ public class RegressionTest0 {
     @Test
     public void test391() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test391");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test391");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -23399,7 +23399,7 @@ public class RegressionTest0 {
     @Test
     public void test392() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test392");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test392");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -23512,7 +23512,7 @@ public class RegressionTest0 {
     @Test
     public void test393() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test393");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test393");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -23608,7 +23608,7 @@ public class RegressionTest0 {
     @Test
     public void test394() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test394");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test394");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -23707,7 +23707,7 @@ public class RegressionTest0 {
     @Test
     public void test395() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test395");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test395");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -23806,7 +23806,7 @@ public class RegressionTest0 {
     @Test
     public void test396() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test396");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test396");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -23844,7 +23844,7 @@ public class RegressionTest0 {
     @Test
     public void test397() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test397");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test397");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -23880,7 +23880,7 @@ public class RegressionTest0 {
     @Test
     public void test398() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test398");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test398");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         char[] charArray2 = com.fasterxml.jackson.core.util.TextBuffer.NO_CHARS;
@@ -23901,7 +23901,7 @@ public class RegressionTest0 {
     @Test
     public void test399() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test399");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test399");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -24017,7 +24017,7 @@ public class RegressionTest0 {
     @Test
     public void test400() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test400");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test400");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -24038,7 +24038,7 @@ public class RegressionTest0 {
     @Test
     public void test401() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test401");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test401");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -24116,7 +24116,7 @@ public class RegressionTest0 {
     @Test
     public void test402() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test402");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test402");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -24135,7 +24135,7 @@ public class RegressionTest0 {
     @Test
     public void test403() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test403");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test403");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -24240,7 +24240,7 @@ public class RegressionTest0 {
     @Test
     public void test404() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test404");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test404");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -24347,7 +24347,7 @@ public class RegressionTest0 {
     @Test
     public void test405() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test405");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test405");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -24451,7 +24451,7 @@ public class RegressionTest0 {
     @Test
     public void test406() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test406");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test406");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -24546,7 +24546,7 @@ public class RegressionTest0 {
     @Test
     public void test407() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test407");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test407");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -24571,7 +24571,7 @@ public class RegressionTest0 {
     @Test
     public void test408() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test408");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test408");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -24657,7 +24657,7 @@ public class RegressionTest0 {
     @Test
     public void test409() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test409");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test409");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -24755,7 +24755,7 @@ public class RegressionTest0 {
     @Test
     public void test410() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test410");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test410");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -24812,7 +24812,7 @@ public class RegressionTest0 {
     @Test
     public void test411() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test411");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test411");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
@@ -24835,7 +24835,7 @@ public class RegressionTest0 {
     @Test
     public void test412() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test412");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test412");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -24883,7 +24883,7 @@ public class RegressionTest0 {
     @Test
     public void test413() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test413");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test413");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -24930,7 +24930,7 @@ public class RegressionTest0 {
     @Test
     public void test414() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test414");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test414");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -25026,7 +25026,7 @@ public class RegressionTest0 {
     @Test
     public void test415() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test415");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test415");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -25119,7 +25119,7 @@ public class RegressionTest0 {
     @Test
     public void test416() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test416");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test416");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -25216,7 +25216,7 @@ public class RegressionTest0 {
     @Test
     public void test417() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test417");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test417");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -25255,7 +25255,7 @@ public class RegressionTest0 {
     @Test
     public void test418() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test418");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test418");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -25312,7 +25312,7 @@ public class RegressionTest0 {
     @Test
     public void test419() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test419");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test419");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -25351,7 +25351,7 @@ public class RegressionTest0 {
     @Test
     public void test420() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test420");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test420");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -25439,7 +25439,7 @@ public class RegressionTest0 {
     @Test
     public void test421() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test421");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test421");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -25538,7 +25538,7 @@ public class RegressionTest0 {
     @Test
     public void test422() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test422");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test422");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -25595,7 +25595,7 @@ public class RegressionTest0 {
     @Test
     public void test423() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test423");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test423");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -25639,7 +25639,7 @@ public class RegressionTest0 {
     @Test
     public void test424() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test424");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test424");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -25712,7 +25712,7 @@ public class RegressionTest0 {
     @Test
     public void test425() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test425");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test425");
         com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer charsToNameCanonicalizer0 = com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer.createRoot();
         int int1 = charsToNameCanonicalizer0.collisionCount();
         com.fasterxml.jackson.core.io.SerializedString serializedString3 = new com.fasterxml.jackson.core.io.SerializedString("\n");
@@ -25738,7 +25738,7 @@ public class RegressionTest0 {
     @Test
     public void test426() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test426");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test426");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -25831,7 +25831,7 @@ public class RegressionTest0 {
     @Test
     public void test427() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test427");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test427");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -25929,7 +25929,7 @@ public class RegressionTest0 {
     @Test
     public void test428() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test428");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test428");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -25994,7 +25994,7 @@ public class RegressionTest0 {
     @Test
     public void test429() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test429");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test429");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -26101,7 +26101,7 @@ public class RegressionTest0 {
     @Test
     public void test430() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test430");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test430");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -26207,7 +26207,7 @@ public class RegressionTest0 {
     @Test
     public void test431() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test431");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test431");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -26271,7 +26271,7 @@ public class RegressionTest0 {
     @Test
     public void test432() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test432");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test432");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -26365,7 +26365,7 @@ public class RegressionTest0 {
     @Test
     public void test433() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test433");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test433");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         char[] charArray3 = new char[] {};
@@ -26397,7 +26397,7 @@ public class RegressionTest0 {
     @Test
     public void test434() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test434");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test434");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -26494,7 +26494,7 @@ public class RegressionTest0 {
     @Test
     public void test435() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test435");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test435");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -26598,7 +26598,7 @@ public class RegressionTest0 {
     @Test
     public void test436() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test436");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test436");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -26658,7 +26658,7 @@ public class RegressionTest0 {
     @Test
     public void test437() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test437");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test437");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -26764,7 +26764,7 @@ public class RegressionTest0 {
     @Test
     public void test438() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test438");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test438");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -26850,7 +26850,7 @@ public class RegressionTest0 {
     @Test
     public void test439() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test439");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test439");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -26880,7 +26880,7 @@ public class RegressionTest0 {
     @Test
     public void test440() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test440");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test440");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -26983,7 +26983,7 @@ public class RegressionTest0 {
     @Test
     public void test441() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test441");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test441");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -27087,7 +27087,7 @@ public class RegressionTest0 {
     @Test
     public void test442() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test442");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test442");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -27173,7 +27173,7 @@ public class RegressionTest0 {
     @Test
     public void test443() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test443");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test443");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -27223,7 +27223,7 @@ public class RegressionTest0 {
     @Test
     public void test444() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test444");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test444");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -27257,7 +27257,7 @@ public class RegressionTest0 {
     @Test
     public void test445() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test445");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test445");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -27360,7 +27360,7 @@ public class RegressionTest0 {
     @Test
     public void test446() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test446");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test446");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -27466,7 +27466,7 @@ public class RegressionTest0 {
     @Test
     public void test447() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test447");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test447");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -27512,7 +27512,7 @@ public class RegressionTest0 {
     @Test
     public void test448() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test448");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test448");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -27605,7 +27605,7 @@ public class RegressionTest0 {
     @Test
     public void test449() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test449");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test449");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -27684,7 +27684,7 @@ public class RegressionTest0 {
     @Test
     public void test450() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test450");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test450");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -27715,7 +27715,7 @@ public class RegressionTest0 {
     @Test
     public void test451() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test451");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test451");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -27737,7 +27737,7 @@ public class RegressionTest0 {
     @Test
     public void test452() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test452");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test452");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -27836,7 +27836,7 @@ public class RegressionTest0 {
     @Test
     public void test453() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test453");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test453");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -27942,7 +27942,7 @@ public class RegressionTest0 {
     @Test
     public void test454() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test454");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test454");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -27987,7 +27987,7 @@ public class RegressionTest0 {
     @Test
     public void test455() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test455");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test455");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -28030,7 +28030,7 @@ public class RegressionTest0 {
     @Test
     public void test456() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test456");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test456");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -28057,7 +28057,7 @@ public class RegressionTest0 {
     @Test
     public void test457() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test457");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test457");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -28155,7 +28155,7 @@ public class RegressionTest0 {
     @Test
     public void test458() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test458");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test458");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -28250,7 +28250,7 @@ public class RegressionTest0 {
     @Test
     public void test459() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test459");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test459");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -28341,7 +28341,7 @@ public class RegressionTest0 {
     @Test
     public void test460() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test460");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test460");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -28435,7 +28435,7 @@ public class RegressionTest0 {
     @Test
     public void test461() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test461");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test461");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         textBuffer1.append(' ');
@@ -28447,7 +28447,7 @@ public class RegressionTest0 {
     @Test
     public void test462() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test462");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test462");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -28545,7 +28545,7 @@ public class RegressionTest0 {
     @Test
     public void test463() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test463");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test463");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -28645,7 +28645,7 @@ public class RegressionTest0 {
     @Test
     public void test464() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test464");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test464");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -28743,7 +28743,7 @@ public class RegressionTest0 {
     @Test
     public void test465() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test465");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test465");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -28838,7 +28838,7 @@ public class RegressionTest0 {
     @Test
     public void test466() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test466");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test466");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -28864,7 +28864,7 @@ public class RegressionTest0 {
     @Test
     public void test467() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test467");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test467");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -28889,7 +28889,7 @@ public class RegressionTest0 {
     @Test
     public void test468() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test468");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test468");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -29030,7 +29030,7 @@ public class RegressionTest0 {
     @Test
     public void test469() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test469");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test469");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -29094,7 +29094,7 @@ public class RegressionTest0 {
     @Test
     public void test470() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test470");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test470");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -29199,7 +29199,7 @@ public class RegressionTest0 {
     @Test
     public void test471() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test471");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test471");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -29258,7 +29258,7 @@ public class RegressionTest0 {
     @Test
     public void test472() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test472");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test472");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -29320,7 +29320,7 @@ public class RegressionTest0 {
     @Test
     public void test473() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test473");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test473");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -29382,7 +29382,7 @@ public class RegressionTest0 {
     @Test
     public void test474() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test474");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test474");
         com.fasterxml.jackson.core.ObjectCodec objectCodec1 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory2 = new com.fasterxml.jackson.core.JsonFactory(objectCodec1);
         java.io.Reader reader3 = null;
@@ -29414,7 +29414,7 @@ public class RegressionTest0 {
     @Test
     public void test475() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test475");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test475");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -29509,7 +29509,7 @@ public class RegressionTest0 {
     @Test
     public void test476() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test476");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test476");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -29597,7 +29597,7 @@ public class RegressionTest0 {
     @Test
     public void test477() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test477");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test477");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -29702,7 +29702,7 @@ public class RegressionTest0 {
     @Test
     public void test478() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test478");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test478");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -29803,7 +29803,7 @@ public class RegressionTest0 {
     @Test
     public void test479() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test479");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test479");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -29901,7 +29901,7 @@ public class RegressionTest0 {
     @Test
     public void test480() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test480");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test480");
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter1 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter("hi!");
         com.fasterxml.jackson.core.SerializableString serializableString2 = null;
         com.fasterxml.jackson.core.util.DefaultPrettyPrinter defaultPrettyPrinter3 = new com.fasterxml.jackson.core.util.DefaultPrettyPrinter(defaultPrettyPrinter1, serializableString2);
@@ -29958,7 +29958,7 @@ public class RegressionTest0 {
     @Test
     public void test481() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test481");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test481");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -29978,7 +29978,7 @@ public class RegressionTest0 {
     @Test
     public void test482() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test482");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test482");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -30022,7 +30022,7 @@ public class RegressionTest0 {
     @Test
     public void test483() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test483");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test483");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         int int3 = serializedString1.charLength();
@@ -30060,7 +30060,7 @@ public class RegressionTest0 {
     @Test
     public void test484() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test484");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test484");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -30132,7 +30132,7 @@ public class RegressionTest0 {
     @Test
     public void test485() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test485");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test485");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -30233,7 +30233,7 @@ public class RegressionTest0 {
     @Test
     public void test486() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test486");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test486");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = null;
         com.fasterxml.jackson.core.util.TextBuffer textBuffer1 = new com.fasterxml.jackson.core.util.TextBuffer(bufferRecycler0);
         java.lang.String str2 = textBuffer1.toString();
@@ -30326,7 +30326,7 @@ public class RegressionTest0 {
     @Test
     public void test487() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test487");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test487");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -30383,7 +30383,7 @@ public class RegressionTest0 {
     @Test
     public void test488() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test488");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test488");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -30431,7 +30431,7 @@ public class RegressionTest0 {
     @Test
     public void test489() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test489");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test489");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -30519,7 +30519,7 @@ public class RegressionTest0 {
     @Test
     public void test490() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test490");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test490");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -30610,7 +30610,7 @@ public class RegressionTest0 {
     @Test
     public void test491() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test491");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test491");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -30716,7 +30716,7 @@ public class RegressionTest0 {
     @Test
     public void test492() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test492");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test492");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.Reader reader2 = null;
@@ -30752,7 +30752,7 @@ public class RegressionTest0 {
     @Test
     public void test493() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test493");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test493");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         char[] charArray3 = new char[] {};
@@ -30801,7 +30801,7 @@ public class RegressionTest0 {
     @Test
     public void test494() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test494");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test494");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         java.lang.String str2 = serializedString1.toString();
         int int3 = serializedString1.charLength();
@@ -30844,7 +30844,7 @@ public class RegressionTest0 {
     @Test
     public void test495() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test495");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test495");
         com.fasterxml.jackson.core.util.BufferRecycler bufferRecycler0 = new com.fasterxml.jackson.core.util.BufferRecycler();
         com.fasterxml.jackson.core.io.IOContext iOContext3 = new com.fasterxml.jackson.core.io.IOContext(bufferRecycler0, (java.lang.Object) (byte) -1, true);
         java.io.OutputStream outputStream4 = null;
@@ -30873,7 +30873,7 @@ public class RegressionTest0 {
     @Test
     public void test496() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test496");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test496");
         com.fasterxml.jackson.core.io.SerializedString serializedString1 = new com.fasterxml.jackson.core.io.SerializedString("\n");
         byte[] byteArray2 = serializedString1.asUnquotedUTF8();
         int int3 = serializedString1.charLength();
@@ -30900,7 +30900,7 @@ public class RegressionTest0 {
     @Test
     public void test497() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test497");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test497");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -30945,7 +30945,7 @@ public class RegressionTest0 {
     @Test
     public void test498() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test498");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test498");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         com.fasterxml.jackson.core.JsonFactory.Feature feature2 = com.fasterxml.jackson.core.JsonFactory.Feature.INTERN_FIELD_NAMES;
@@ -30991,7 +30991,7 @@ public class RegressionTest0 {
     @Test
     public void test499() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test499");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test499");
         com.fasterxml.jackson.core.io.SerializedString serializedString0 = com.fasterxml.jackson.core.util.DefaultPrettyPrinter.DEFAULT_ROOT_VALUE_SEPARATOR;
         int int1 = serializedString0.charLength();
         com.fasterxml.jackson.core.io.SerializedString serializedString3 = new com.fasterxml.jackson.core.io.SerializedString("\n");
@@ -31021,7 +31021,7 @@ public class RegressionTest0 {
     @Test
     public void test500() throws Throwable {
         if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test500");
+            System.out.format("%n%s%n", "RandoopRegressionTest0.test500");
         com.fasterxml.jackson.core.ObjectCodec objectCodec0 = null;
         com.fasterxml.jackson.core.JsonFactory jsonFactory1 = new com.fasterxml.jackson.core.JsonFactory(objectCodec0);
         java.io.InputStream inputStream2 = null;
