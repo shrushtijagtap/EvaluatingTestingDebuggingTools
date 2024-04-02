@@ -4,6 +4,9 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven{
+        url "https://mvnrepository.com/artifact/org.evosuite/evosuite-master"
+    }
 }
 
 dependencies {
@@ -14,13 +17,13 @@ dependencies {
     implementation group: 'fr.inria.gforge.spoon', name: 'spoon-core', version: '6.0.0'
     implementation group: 'commons-io', name: 'commons-io', version: '2.5'
     implementation group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.32'
-}
+    implementation group: 'org.evosuite', name: 'evosuite-standalone-runtime', version: '1.0.6'}
 
 sourceSets {
     main {
         java {
             srcDirs = ['.']
-            // exclude 'evosuite-reports', 'evosuite-tests'
+            exclude 'evosuite-reports', 'evosuite-tests' , 'randoop-tests'
         }
     }
 
@@ -34,7 +37,8 @@ sourceSets {
 
     crtTest {
         java {
-            srcDirs = ['java_testcases/junit/crt_program']
+            srcDirs = ['java_testcases/junit']
+            // srcDirs = ['QuixBugs/BUCKETSORT/Patched-Version/java_testcases/junit/crt_program']
         }
         compileClasspath += sourceSets.main.output
         runtimeClasspath += sourceSets.main.output

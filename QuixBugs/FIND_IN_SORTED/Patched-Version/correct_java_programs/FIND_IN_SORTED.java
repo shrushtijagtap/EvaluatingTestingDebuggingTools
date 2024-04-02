@@ -1,4 +1,4 @@
-// package correct_java_programs;
+package correct_java_programs;
 
 /*
  * To change this template, choose Tools | Templates
